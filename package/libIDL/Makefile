@@ -16,6 +16,8 @@ PKG_SITES:=		http://ftp.gnome.org/pub/GNOME/sources/libIDL/0.8/
 PKG_LIBNAME:=		libidl
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

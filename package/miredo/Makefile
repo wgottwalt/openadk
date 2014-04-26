@@ -15,8 +15,6 @@ PKG_SITES:=		http://www.remlab.net/files/miredo/
 
 PKG_SUBPKGS:=		MIREDO MIREDO_SERVER
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MIREDO,miredo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

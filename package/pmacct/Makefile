@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://www.pmacct.net/
 PKG_SITES:=		http://www.pmacct.net/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		NFACCTD PMACCTD SFACCTD PMACCT_CLIENT
 
 include $(TOPDIR)/mk/package.mk

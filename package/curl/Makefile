@@ -16,8 +16,10 @@ PKG_SITES:=		http://curl.haxx.se/download/
 PKG_LIBNAME:=		libcurl
 PKG_OPTS:=		dev
 
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		CURL LIBCURL
-PKGSD_LIBCURL:=		a client-side URL transfer library
+PKGSD_LIBCURL:=		client-side URL transfer library
 PKGSC_LIBCURL:=		libs
 PKGSS_LIBCURL:=		zlib
 

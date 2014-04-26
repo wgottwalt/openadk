@@ -14,8 +14,6 @@ PKG_DEPENDS:=		libnl
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Iproute2
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/net/iproute2/
 
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
-
 PKG_SUBPKGS:=		IP TC TC_ATM TC_IPT IFSTAT LNSTAT ROUTEL RTMON SS
 PKGSD_TC:=		iproute2 traffic control utility
 PKGSS_TC:=		kmod-sched

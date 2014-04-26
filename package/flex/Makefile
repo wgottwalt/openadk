@@ -14,6 +14,8 @@ PKG_URL:=		http://flex.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
 PKG_OPTS:=		dev
 
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

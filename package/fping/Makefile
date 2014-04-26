@@ -12,6 +12,8 @@ PKG_SECTION:=		net
 PKG_URL:=		http://fping.org
 PKG_SITES:=		http://fping.org/dist/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FPING,fping,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

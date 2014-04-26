@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		openssl libpcap
 PKG_URL:=		http://sourceforge.net/projects/raddump
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=raddump/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RADDUMP,raddump,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

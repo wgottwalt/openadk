@@ -12,6 +12,8 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.cmake.org/
 PKG_SITES:=		http://www.cmake.org/files/v2.8/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_CFLINE_CMAKE:=	depends on ADK_HOST_ONLY
 
 include $(TOPDIR)/mk/host.mk

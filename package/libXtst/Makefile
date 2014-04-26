@@ -17,6 +17,8 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libxtst
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

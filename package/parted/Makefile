@@ -14,8 +14,6 @@ PKG_BUILDDEP:=		util-linux readline
 PKG_URL:=		http://www.gnu.org/software/parted/index.shtml
 PKG_SITES:=		${MASTER_SITE_GNU:=parted/}
 
-DISTFILES:=		${PKG_NAME}-$(PKG_VERSION).tar.xz
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PARTED,parted,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

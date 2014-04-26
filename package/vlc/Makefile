@@ -17,8 +17,6 @@ PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/$(PKG_VERSION)/
 PKG_ARCH_DEPENDS:=	!m68k
 PKG_LIBC_DEPENDS:=	glibc musl
 
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,VLC,vlc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

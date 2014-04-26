@@ -14,6 +14,8 @@ PKG_DEPENDS:=		libstdc++
 PKG_URL:=		http://www.gnu.org/software/gperf/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

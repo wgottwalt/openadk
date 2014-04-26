@@ -14,8 +14,6 @@ PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.24/
 PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

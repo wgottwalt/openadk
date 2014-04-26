@@ -12,6 +12,8 @@ PKG_MD5SUM:=		5afeb3a7de8a14b417239a14ea724268
 PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PRINTPROTO,printproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

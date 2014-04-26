@@ -13,6 +13,8 @@ PKG_MD5SUM:=		9c650b7947fe59b3f144518400e8d029
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

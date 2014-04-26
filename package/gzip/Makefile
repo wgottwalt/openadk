@@ -7,10 +7,12 @@ PKG_NAME:=		gzip
 PKG_VERSION:=		1.2.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		618b61219aa2d812893281bf6c66f158
-PKG_DESCR:=		a compression utility
+PKG_DESCR:=		compression utility
 PKG_SECTION:=		archive
 PKG_URL:=		http://www.gzip.org/
 PKG_SITES:=		${MASTER_SITE_GNU:=gzip/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

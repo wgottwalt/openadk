@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		yasm-host
 PKG_URL:=		http://www.tortall.net/projects/yasm/
 PKG_SITES:=		http://www.tortall.net/projects/yasm/releases/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

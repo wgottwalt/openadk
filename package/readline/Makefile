@@ -15,6 +15,8 @@ PKG_SITES:=		${MASTER_SITE_GNU:=readline/}
 PKG_LIBNAME:=		libreadline
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

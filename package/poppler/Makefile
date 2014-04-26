@@ -15,8 +15,6 @@ PKG_URL:=		http://poppler.freedesktop.org/
 PKG_SITES:=		http://poppler.freedesktop.org/
 PKG_OPTS:=		dev
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,POPPLER,poppler,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

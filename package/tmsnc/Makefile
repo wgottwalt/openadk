@@ -7,10 +7,12 @@ PKG_NAME:=		tmsnc
 PKG_VERSION:=		0.3.2
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		337dae91d4775e03b6681f61db56d2a7
-PKG_DESCR:=		a textbased MSN client
+PKG_DESCR:=		textbased MSN client
 PKG_SECTION:=		chat
 PKG_URL:=		http://tmsnc.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tmsnc/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

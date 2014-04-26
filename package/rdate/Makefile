@@ -11,6 +11,7 @@ PKG_DESCR:=		small rdate and NTP client
 PKG_SECTION:=		ntp
 PKG_SITES:=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/rdate/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk

@@ -7,10 +7,12 @@ PKG_NAME:=		xinetd
 PKG_VERSION:=		2.3.15
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		77358478fd58efa6366accae99b8b04c
-PKG_DESCR:=		a powerful and secure superserver
+PKG_DESCR:=		powerful and secure superserver
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://www.xinetd.org/
 PKG_SITES:=		ftp://mirror.ovh.net/gentoo-distfiles/distfiles/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

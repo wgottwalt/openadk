@@ -7,10 +7,12 @@ PKG_NAME:=		pm-utils
 PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1742a556089c36c3a89eb1b957da5a60
-PKG_DESCR:=		Power Management Utilities
+PKG_DESCR:=		power management utilities
 PKG_SECTION:=		utils
 PKG_URL:=		http://pm-utils.freedesktop.org/
 PKG_SITES:=		http://pm-utils.freedesktop.org/releases/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_CFLINE_PM_UTILS:=	select BUSYBOX_FLOCK
 

@@ -7,12 +7,14 @@ PKG_NAME:=		l2tpns
 PKG_VERSION:=		2.1.21
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		385c58055723ebc6c38062acd2db9c2c
-PKG_DESCR:=		A layer 2 tunneling protocol network server (LNS)
+PKG_DESCR:=		layer 2 tunneling protocol network server (LNS)
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libcli
 PKG_BUILDDEP:=		libcli
 PKG_URL:=		http://l2tpns.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=l2tpns/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

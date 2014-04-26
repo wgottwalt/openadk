@@ -14,6 +14,7 @@ PKG_SITES:=		http://www.openadk.org/distfiles/
 PKG_NEED_CXX:=		1
 PKG_CXX:=		MRD6
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKBUILD=		${WRKSRC}/src
 
 include ${TOPDIR}/mk/package.mk

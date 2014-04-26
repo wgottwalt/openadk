@@ -15,6 +15,8 @@ PKG_URL:=		http://www.lua.org/
 PKG_SITES:=		http://www.lua.org/ftp/
 PKG_MULTI:=		1
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		LUA LUAC LUA_EXAMPLES
 PKGSD_LUAC:=		LUA bytecode compiler
 PKGSD_LUAEXAMPLES:=	LUA script examples

@@ -12,6 +12,8 @@ PKG_SECTION:=		admin
 PKG_URL:=		http://www.alobbs.com/macchanger
 PKG_SITES:=		${MASTER_SITE_GNU:=macchanger/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MACCHANGER,macchanger,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

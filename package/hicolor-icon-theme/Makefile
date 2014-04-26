@@ -7,10 +7,12 @@ PKG_NAME:=		hicolor-icon-theme
 PKG_VERSION:=		0.12
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		55cafbcef8bcf7107f6d502149eb4d87
-PKG_DESCR:=		Hicolor Icon Theme
+PKG_DESCR:=		hicolor icon theme
 PKG_SECTION:=		x11/misc
 PKG_URL:=		http://icon-theme.freedesktop.org/
 PKG_SITES:=		http://icon-theme.freedesktop.org/releases/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

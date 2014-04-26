@@ -15,6 +15,8 @@ PKG_SITES:=		http://rpm5.org/files/popt/
 PKG_LIBNAME:=		libpopt
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

@@ -13,6 +13,8 @@ PKG_URL:=		http://www.gnupg.org/
 PKG_SITES:=		http://ftp.gnu.org/gnu/libtasn1/
 PKG_OPTS:=		dev
 
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTASN1,libtasn1,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

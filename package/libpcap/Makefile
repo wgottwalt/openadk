@@ -14,6 +14,8 @@ PKG_URL:=		http://www.tcpdump.org/
 PKG_SITES:=		http://www.tcpdump.org/release/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_FLAVOURS_LIBPCAP:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 

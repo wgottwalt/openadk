@@ -7,12 +7,14 @@ PKG_NAME:=		libXxf86vm
 PKG_VERSION:=		1.1.2
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		84d26e26c07f8cbcb5f447590df5b5c3
-PKG_DESCR:=		an interface to the XFree86-VidModeExtension extension
+PKG_DESCR:=		interface to the XFree86-VidModeExtension extension
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xf86vidmodeproto libXext
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libxxf86vm
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

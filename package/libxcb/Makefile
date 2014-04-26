@@ -15,6 +15,8 @@ PKG_BUILDDEP+=		python2 libpthread-stubs libxslt libXau xcb-proto
 PKG_SITES:=		http://xcb.freedesktop.org/dist/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

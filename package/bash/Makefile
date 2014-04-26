@@ -12,6 +12,8 @@ PKG_SECTION:=		shells
 PKG_URL:=		http://www.gnu.org/software/bash/
 PKG_SITES:=		http://ftp.gnu.org/gnu/bash/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_CHOICES_BASH:=	WITH_CURSES WITH_TERMCAP
 PKGCD_WITH_CURSES:=	use curses library instead of termcap
 PKGCS_WITH_CURSES:=	libncurses

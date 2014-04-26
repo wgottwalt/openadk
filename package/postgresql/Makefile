@@ -15,6 +15,8 @@ PKG_SITES:=		http://ftp.postgresql.org/pub/source/v9.3.4/
 PKG_LIBNAME:=		libpq
 PKG_OPTS:=		dev
 
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPQ,libpq,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

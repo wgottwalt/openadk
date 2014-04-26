@@ -5,9 +5,9 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pulseaudio
 PKG_VERSION:=		4.0
-PKG_RELEASE:=		5
+PKG_RELEASE:=		1
 PKG_MD5SUM:=		591f211db2790a7e4d222f2dc6858db3
-PKG_DESCR:=		a sound system for POSIX OSes
+PKG_DESCR:=		sound system for POSIX OSes
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libltdl json-c libsndfile libspeex libncurses
 PKG_DEPENDS+=		libflac libvorbis libogg libuuid libsndfile
@@ -19,8 +19,6 @@ PKG_SITES:=		http://freedesktop.org/software/pulseaudio/releases/
 PKG_OPTS:=		dev
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
-
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include $(TOPDIR)/mk/package.mk
 

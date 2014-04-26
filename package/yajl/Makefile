@@ -7,12 +7,14 @@ PKG_NAME:=		yajl
 PKG_VERSION:=		2.0.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c953a53344c0e20a892fc042bbe69744
-PKG_DESCR:=		a small event-driven JSON parser written in ANSI C
+PKG_DESCR:=		small event-driven JSON parser written in ANSI C
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		cmake-host ruby-host
 PKG_URL:=		http://lloyd.github.com/yajl/
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_NOPARALLEL:=	1
 

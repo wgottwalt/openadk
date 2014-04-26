@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ulogd
-PKG_VERSION:=		2.0.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		660516de4b5b1e110c12dae414619e0f
-PKG_DESCR:=		Netfilter userspace logging daemon
+PKG_VERSION:=		2.0.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		7c71ec460dfea5287eba27472c521ebc
+PKG_DESCR:=		netfilter userspace logging daemon
 PKG_SECTION:=		firewall
 PKG_DEPENDS:=		iptables libnetfilter-conntrack libnetfilter-log libnetfilter-acct libmnl
 PKG_BUILDDEP:=		iptables libnetfilter_conntrack libnetfilter_log libnetfilter_acct libmnl

@@ -15,6 +15,8 @@ HOST_BUILDDEP:=		autotool
 PKG_URL:=		http://www.gnu.org/software/findutils/
 PKG_SITES:=		http://ftp.gnu.org/pub/gnu/findutils/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		FIND XARGS LOCATE
 PKGSD_LOCATE:=		locate utility
 PKGSD_XARGS:=		xargs utility

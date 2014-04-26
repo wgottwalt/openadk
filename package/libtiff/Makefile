@@ -7,13 +7,15 @@ PKG_NAME:=		tiff
 PKG_VERSION:=		3.9.4
 PKG_RELEASE:=		4
 PKG_MD5SUM:=		2006c1bdd12644dbf02956955175afd6
-PKG_DESCR:=		A library for reading/writing TIFF images
+PKG_DESCR:=		library for reading/writing TIFF images
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.libtiff.org/
 PKG_SITES:=		ftp://ftp.remotesensing.org/pub/libtiff/
 PKG_NEED_CXX:=		1
 PKG_LIBNAME:=		libtiff
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly

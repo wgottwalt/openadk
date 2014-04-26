@@ -13,6 +13,8 @@ PKG_URL:=		http://www.hboehm.info/gc/
 PKG_SITES:=		http://www.hboehm.info/gc/gc_source/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

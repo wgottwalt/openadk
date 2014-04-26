@@ -15,6 +15,8 @@ PKG_BUILDDEP:=		libjpeg-turbo sdl
 PKG_URL:=		http://www.lavrsen.dk/twiki/bin/view/Motion/WebHome
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=motion/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_ARCH_DEPENDS:=      !m68k
 
 include ${TOPDIR}/mk/package.mk

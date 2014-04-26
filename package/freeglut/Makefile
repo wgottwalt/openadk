@@ -16,6 +16,8 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freeglut/}
 PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_HOST_DEPENDS:=	!cygwin
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 

@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		scons-host ncurses
 PKG_URL:=		http://catb.org/gpsd/
 PKG_SITES:=		http://download-mirror.savannah.gnu.org/releases/gpsd/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		GPSD GPSD_CLIENTS
 PKGSD_GPSD_CLIENTS:=	GPS client utilities
 

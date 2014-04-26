@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		nasm
 PKG_VERSION:=		2.11.02
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7d5408bf18aa1699ad6c17e5017f12c3
-PKG_DESCR:=		the netwide assembler
+PKG_MD5SUM:=		ec43582b8febae24e5b440ae816120c8
+PKG_DESCR:=		assembler application
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		nasm-host
 PKG_URL:=		http://sourceforge.net/projects/nasm/

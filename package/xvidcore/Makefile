@@ -14,6 +14,8 @@ PKG_SITES:=		http://downloads.xvid.org/downloads/
 PKG_LIBNAME:=		libxvid
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 WRKDIST=		$(WRKDIR)/$(PKG_NAME)/build/generic
 
 include $(TOPDIR)/mk/package.mk

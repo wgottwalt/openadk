@@ -13,6 +13,8 @@ PKG_URL:=		http://www.citi.umich.edu/projects/nfsv4/linux/
 PKG_SITES:=		http://www.citi.umich.edu/projects/nfsv4/linux/libnfsidmap/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBNFSIDMAP,libnfsidmap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

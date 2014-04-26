@@ -13,8 +13,6 @@ PKG_BUILDDEP:=		libiconv-tiny
 PKG_URL:=		http://www.daniel-baumann.ch/software/dosfstools/
 PKG_SITES:=		http://daniel-baumann.ch/files/software/dosfstools/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DOSFSTOOLS,dosfstools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

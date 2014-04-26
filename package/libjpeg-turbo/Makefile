@@ -4,14 +4,16 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libjpeg-turbo
-PKG_VERSION:=		1.3.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		e1e65cc711a1ade1322c06ad4a647741
-PKG_DESCR:=		a JPEG library
+PKG_VERSION:=		1.3.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		2c3a68129dac443a72815ff5bb374b05
+PKG_DESCR:=		JPEG library
 PKG_SECTION:=		libs
 PKG_URL:=		http://libjpeg-turbo.virtualgl.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libjpeg-turbo/}
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

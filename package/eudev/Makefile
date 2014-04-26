@@ -16,6 +16,8 @@ PKG_SITES:=		http://dev.gentoo.org/~blueness/eudev/
 PKG_LIBNAME:=		libudev
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		UDEV LIBUDEV
 PKGSD_UDEV:=		Dynamic device management manager
 PKGSC_LIBUDEV:=		libs

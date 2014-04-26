@@ -15,6 +15,7 @@ PKG_NEED_CXX:=		1
 PKG_LIBNAME:=		libdb
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKBUILD=		${WRKSRC}/build_unix
 
 include ${TOPDIR}/mk/package.mk

@@ -7,12 +7,14 @@ PKG_NAME:=		cgilib
 PKG_VERSION:=		0.7
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		2c7053f58dfb06f7a80a112797ed7e86
-PKG_DESCR:=		Simple CGI Library
+PKG_DESCR:=		simple CGI library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.infodrom.org/projects/cgilib/
 PKG_SITES:=		http://www.infodrom.org/projects/cgilib/download/
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

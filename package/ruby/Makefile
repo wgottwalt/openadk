@@ -16,6 +16,8 @@ PKG_URL:=		http://www.ruby-lang.org/
 PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.1/
 PKG_NOPARALLEL:=	1
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_HOST_DEPENDS:=	!freebsd !cygwin
 
 include ${TOPDIR}/mk/host.mk
@@ -26,6 +28,7 @@ $(eval $(call PKG_template,RUBY,ruby,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 
 # uClibc setpgrp does not take arguments
 CONFIGURE_ENV+=         ac_cv_func_setpgrp_void=yes \
+			stack_protector=no \
 			rb_cv_binary_elf=yes
 CONFIGURE_ARGS+=	--disable-install-doc \
 			--with-baseruby=${STAGING_HOST_DIR}/usr/bin/ruby

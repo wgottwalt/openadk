@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		tar
 PKG_VERSION:=		1.26
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		00d1e769c6af702c542cca54b728920d
+PKG_MD5SUM:=		0ced6f20b9fa1bea588005b5ad4b52c1
 PKG_DESCR:=		GNU archiving application
 PKG_SECTION:=		archive
 PKG_DEPENDS:=		libgcc

@@ -21,6 +21,7 @@ PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!cygwin
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKSRC=			${WRKDIST}/nss
 
 include $(TOPDIR)/mk/package.mk

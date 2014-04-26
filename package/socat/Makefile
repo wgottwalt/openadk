@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.dest-unreach.org/socat/
 PKG_SITES:=		http://www.dest-unreach.org/socat/download/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_FLAVOURS_SOCAT:=	WITH_SSL
 PKGFD_WITH_SSL:=	enable SSL support
 PKGFS_WITH_SSL:=	libopenssl

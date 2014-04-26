@@ -14,8 +14,6 @@ PKG_BUILDDEP:=		libmpdclient
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpc/0/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MPC,mpc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

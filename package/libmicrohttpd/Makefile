@@ -7,13 +7,15 @@ PKG_NAME:=		libmicrohttpd
 PKG_VERSION:=		0.9.26
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		bdac9b62fa3080890f9ab44cf29749fc
-PKG_DESCR:=		a C library make it easy to run an HTTP server
+PKG_DESCR:=		C library make it easy to run an HTTP server
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libgcrypt
 PKG_BUILDDEP:=		libgcrypt
 PKG_URL:=		http://www.gnu.org/software/libmicrohttpd/
 PKG_SITES:=		${MASTER_SITE_GNU:=libmicrohttpd/}
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

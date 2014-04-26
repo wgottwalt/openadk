@@ -66,6 +66,7 @@ CONFIGURE_ARGS+=	--host=$(GNU_TARGET_NAME) \
 			--disable-libstdcxx-pch \
 			--disable-libsanitizer \
 			--disable-libitm \
+			--enable-install-libiberty \
 			--enable-cxx-flags="${TARGET_LDFLAGS}"
 
 # disable honour cflags stuff

@@ -14,6 +14,8 @@ PKG_SITES:=		http://www.oberhumer.com/opensource/lzo/download/
 PKG_LIBNAME:=		liblzo
 PKG_OPTS:=		dev
 
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

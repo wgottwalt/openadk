@@ -7,7 +7,7 @@ PKG_NAME:=		fakeidentd
 PKG_VERSION:=		2.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ebf398bd1843a1fd8c71f5fcf4a6e4f7
-PKG_DESCR:=		A static, secure identd
+PKG_DESCR:=		secure identd
 PKG_SECTION:=		net/misc
 PKG_SITES:=		http://distfiles.gentoo.org/distfiles/
 

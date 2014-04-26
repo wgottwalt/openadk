@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.hazard.maks.net/parprouted/
 PKG_SITES:=		http://www.hazard.maks.net/parprouted/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PARPROUTED,parprouted,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

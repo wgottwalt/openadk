@@ -13,6 +13,8 @@ HOST_BUILDDEP:=		python2-host
 PKG_URL:=		http://www.scons.org
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=scons/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_CFLINE_SCONS:=	depends on ADK_HOST_ONLY
 
 include $(TOPDIR)/mk/host.mk

@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		autoconf
 PKG_VERSION:=		2.69
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		82d05e03b93e45f5a39b828dc9c6c29b
+PKG_MD5SUM:=		50f97f4159805e374639a73e2636f22e
 PKG_DESCR:=		GNU autoconf
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		m4-host autoconf-host

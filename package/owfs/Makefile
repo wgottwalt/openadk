@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		fuse
 PKG_URL:=		http://owfs.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=owfs/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OWFS,owfs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

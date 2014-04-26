@@ -13,6 +13,8 @@ PKG_DEPENDS:=		iptables
 PKG_URL:=		http://reaim.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=reaim/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,REAIM,reaim,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

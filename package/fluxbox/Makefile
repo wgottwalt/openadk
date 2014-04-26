@@ -7,12 +7,14 @@ PKG_NAME:=		fluxbox
 PKG_VERSION:=		1.3.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		52e76de0ae96d8c5e87374661d0c7112
-PKG_DESCR:=		Fluxbox is an X11 window manager featuring tabs and an iconbar
+PKG_DESCR:=		X11 window manager featuring tabs and an iconbar
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libXpm libXft
 PKG_URL:=		http://www.fluxbox.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fluxbox/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_FLAVOURS_FLUXBOX:=	WITH_IMLIB2
 PKGFD_WITH_IMLIB2:=	enable imlib2 support

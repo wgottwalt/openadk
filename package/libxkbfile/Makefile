@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		kbproto libX11
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXKBFILE,libxkbfile,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

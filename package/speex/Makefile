@@ -7,7 +7,7 @@ PKG_NAME:=		speex
 PKG_VERSION:=		1.2rc1
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		c4438b22c08e5811ff10e2b06ee9b9ae
-PKG_DESCR:=		an open source patent-free speech compression codec
+PKG_DESCR:=		open source patent-free speech compression codec
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://speex.org/
@@ -15,12 +15,13 @@ PKG_SITES:=		http://downloads.us.xiph.org/releases/speex/
 PKG_LIBNAME:=		libspeex
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBSPEEX,libspeex,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--without-ogg --disable-oggtest --enable-fixed-point
 XAKE_FLAGS+=		bin_PROGRAMS=""
 

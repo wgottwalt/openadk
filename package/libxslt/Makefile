@@ -10,11 +10,14 @@ PKG_MD5SUM:=		9667bf6f9310b957254fdcf6596600b7
 PKG_DESCR:=		XSLT Library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxml2
-PKG_BUILDDEP:=		autotool bzip2-host python2-host libxml2-host libxslt-host libxml2
+PKG_BUILDDEP:=		autotool libxml2
+HOST_BUILDDEP:=		libxml2-host
 PKG_URL:=		http://xmlsoft.org/XSLT
 PKG_SITES:=		http://xmlsoft.org/sources/
 PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		LIBXSLT XSLTPROC
 PKGSD_XSLTPROC:=	XSLT processor utility

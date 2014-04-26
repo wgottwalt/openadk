@@ -14,6 +14,8 @@ PKG_BUILDEP:=		zlib
 PKG_URL:=		http://kernel.org/pub/linux/utils/kernel/kexec/
 PKG_SITES:=		http://openadk.org/distfiles/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_ARCH_DEPENDS:=	!mips !m68k
 PKG_CFLINE_KEXEC_TOOLS:=	select ADK_KERNEL_KEXEC
 

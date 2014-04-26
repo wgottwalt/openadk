@@ -14,6 +14,8 @@ PKG_DEPENDS:=		python2
 PKG_URL:=		http://bazaar.canonical.com/en/
 PKG_SITES:=		https://launchpad.net/bzr/2.6/2.6.0/+download/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_HOST_DEPENDS:=	!darwin
 
 include $(TOPDIR)/mk/package.mk

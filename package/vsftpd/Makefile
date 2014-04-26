@@ -7,12 +7,14 @@ PKG_NAME:=		vsftpd
 PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		8b00c749719089401315bd3c44dddbb2
-PKG_DESCR:=		a fast and secure FTP server
+PKG_DESCR:=		fast and secure FTP server
 PKG_SECTION:=		www
 PKG_DEPENDS:=		libcap
 PKG_BUILDDEP:=		libcap
 PKG_URL:=		http://vsftpd.beasts.org/
 PKG_SITES:=		https://security.appspot.com/downloads/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

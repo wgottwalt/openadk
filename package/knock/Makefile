@@ -7,14 +7,16 @@ PKG_NAME:=		knock
 PKG_VERSION:=		0.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e6e486be75b0d6433bac22a7de0e11f5
-PKG_DESCR:=		A port-knocking client
+PKG_DESCR:=		port-knocking client
 PKG_SECTION:=		firewall
 PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://www.zeroflux.org/projects/knock
 PKG_SITES:=		http://www.zeroflux.org/proj/knock/files/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		KNOCK KNOCKD
-PKGSD_KNOCKD:=		A port-knocking server
+PKGSD_KNOCKD:=		port-knocking server
 PKGSS_KNOCKD:=		libpcap
 
 include ${TOPDIR}/mk/package.mk

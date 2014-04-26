@@ -7,11 +7,13 @@ PKG_NAME:=		libmodplug
 PKG_VERSION:=		0.8.8.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		5f30241db109d647781b784e62ddfaa1
-PKG_DESCR:=		a MOD player library
+PKG_DESCR:=		MOD player library
 PKG_SECTION:=		libs
 PKG_URL:=		http://modplug-xmms.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=modplug-xmms/libmodplug/0.8.8.5/}
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

@@ -7,7 +7,7 @@ PKG_NAME:=		esound
 PKG_VERSION:=		0.2.41
 PKG_RELEASE:=		8
 PKG_MD5SUM:=		3d8973ed87053d7acc1f4d44af2c4688
-PKG_DESCR:=		Enlightened Sound Daemon
+PKG_DESCR:=		enlightened sound daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libaudiofile libesd
 PKG_BUILDDEP:=		libaudiofile autotool
@@ -15,6 +15,8 @@ PKG_URL:=		http://www.tux.org/~ricdude/EsounD.html
 PKG_SITES:=		ftp://ftp.gnome.org/pub/gnome/sources/esound/0.2/
 PKG_LIBNAME:=		libesd
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		ESOUND LIBESD
 PKGSC_LIBESD:=		libs

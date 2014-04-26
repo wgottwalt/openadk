@@ -7,11 +7,13 @@ PKG_NAME:=		libdaemon
 PKG_VERSION:=		0.14
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		509dc27107c21bcd9fbf2f95f5669563
-PKG_DESCR:=		A lightweight C library that eases the writing of UNIX daemons
+PKG_DESCR:=		library that eases the writing of UNIX daemons
 PKG_SECTION:=		libs
 PKG_URL:=		http://0pointer.de/lennart/projects/libdaemon/
 PKG_SITES:=		http://0pointer.de/lennart/projects/libdaemon/
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

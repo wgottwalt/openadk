@@ -12,6 +12,8 @@ PKG_SECTION:=		serial
 PKG_URL:=		http://www.ohse.de/uwe/software/lrzsz.html
 PKG_SITES:=		http://www.ohse.de/uwe/releases/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LRZSZ,lrzsz,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

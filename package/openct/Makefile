@@ -16,6 +16,8 @@ PKG_SITES:=		http://www.opensc-project.org/files/openct/
 PKG_LIBNAME:=		libopenct
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		OPENCT LIBOPENCT
 PKGSD_LIBOPENCT:=	crypto token library 
 PKGSC_LIBOPENCT:=	libs

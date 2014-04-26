@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libnl
 PKG_URL:=		http://hostap.epitest.fi/wpa_supplicant/
 PKG_SITES:=		http://hostap.epitest.fi/releases/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_DFLT_WPA_SUPPLICANT:=	y if ADK_TARGET_SYSTEM_IBM_X40
 
 WRKSRC=			${WRKDIST}/${PKG_NAME}

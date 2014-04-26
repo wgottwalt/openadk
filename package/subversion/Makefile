@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		apr-util expat apr zlib libiconv-tiny sqlite neon
 PKG_URL:=		http://subversion.apache.org/
 PKG_SITES:=		http://artfiles.org/apache.org/subversion/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SUBVERSION,subversion,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

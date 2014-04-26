@@ -7,9 +7,11 @@ PKG_NAME:=		wccpd
 PKG_VERSION:=		0.2
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		5f15c274de61dfb88e0dbfc1ccbe6b67
-PKG_DESCR:=		A WCCP (Web Cache Coordination Protocol) server daemon
+PKG_DESCR:=		WCCP (Web Cache Coordination Protocol) server daemon
 PKG_SECTION:=		net/misc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=wccpd/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

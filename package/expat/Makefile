@@ -14,6 +14,8 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=expat/}
 PKG_LIBNAME:=		libexpat
 PKG_OPTS:=		dev
 
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

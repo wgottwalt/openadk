@@ -14,6 +14,8 @@ PKG_URL:=		http://www.videolan.org/developers/x264.html
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_BUILDDEP_IBM_X40:=	yasm-host
 
 include $(TOPDIR)/mk/package.mk

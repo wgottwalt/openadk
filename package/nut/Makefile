@@ -12,6 +12,8 @@ PKG_SECTION:=		net/misc
 PKG_URL:=		http://www.networkupstools.org/
 PKG_SITES:=		http://www.networkupstools.org/source/2.4/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_FLAVOURS_NUT:=	WITH_SSL WITH_SNMP WITH_USB
 PKGFD_WITH_SNMP:=	enable SNMP support
 PKGFS_WITH_SNMP:=	libnetsnmp

@@ -13,6 +13,8 @@ PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/WikiStart
 PKG_SITES:=		${MASTER_SITE_KERNEL:=bluetooth/}
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

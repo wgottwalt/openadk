@@ -14,8 +14,6 @@ PKG_BUILDDEP:=		autotool libpcap ncurses
 PKG_URL:=		http://www.kismetwireless.net/
 PKG_SITES:=		http://www.kismetwireless.net/code/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 PKG_SUBPKGS:=		KISMET KISMET_CLIENT KISMET_DRONE KISMET_SERVER
 PKGSD_KISMET_CLIENT:=	Kismet client
 PKGSD_KISMET_SERVER:=	Kismet server

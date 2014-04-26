@@ -15,6 +15,8 @@ PKG_URL:=		http://www.freedesktop.org/wiki/Software/DBusBindings
 PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus-glib/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DBUS_GLIB,dbus-glib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

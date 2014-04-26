@@ -15,8 +15,6 @@ PKG_URL:=		http://www.midnight-commander.org/
 PKG_SITES:=		http://ftp.midnight-commander.org/
 PKG_NOPARALLEL:=	1
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MC,mc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

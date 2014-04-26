@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		libxkbfile libX11
 PKG_DEPENDS:=		libxkbfile libx11
 PKG_SITES:=		http://xorg.freedesktop.org/releases/X11R7.4/src/everything/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XKBCOMP,xkbcomp,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

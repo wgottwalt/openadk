@@ -9,10 +9,13 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		29a813b3850d499a3524a8d5d5ecb099
 PKG_DESCR:=		Xinerama library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		xineramaproto-host xineramaproto libXext-host libXinerama-host
+PKG_BUILDDEP:=		xineramaproto libXinerama-host
+HOST_BUILDDEP:=		xineramaproto-host libXext-host
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libxinerama
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk

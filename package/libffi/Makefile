@@ -15,6 +15,8 @@ PKG_URL:=		http://sourceware.org/libffi/
 PKG_SITES:=		ftp://sourceware.org/pub/libffi/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

@@ -7,12 +7,14 @@ PKG_NAME:=		ptunnel
 PKG_VERSION:=		0.61
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		b45f73875f2af48f101816672f83a5fe
-PKG_DESCR:=		Tunnel TCP connections over ICMP packets
+PKG_DESCR:=		tunnel TCP connections over ICMP packets
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libpcap libpthread
 PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://www.cti.ecp.fr/~beauxir5/ptunnel/
 PKG_SITES:=		http://www.cti.ecp.fr/~beauxir5/ptunnel/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

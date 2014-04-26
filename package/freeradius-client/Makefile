@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://www.freeradius.org/
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		FREERADIUS_CLIENT LIBFREERADIUS_CLIENT
 PKGSS_LIBFREERADIUS_CLIENT:=	libs
 

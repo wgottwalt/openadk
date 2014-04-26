@@ -16,6 +16,8 @@ PKG_SITES:=		http://www.digitemp.com/software/linux/
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DIGITEMP,digitemp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

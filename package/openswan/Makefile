@@ -20,6 +20,8 @@ PKG_URL:=		http://www.openswan.org/
 PKG_SITES:=		http://www.openswan.org/download/
 PKG_NOPARALLEL:=	1
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 # GLOB_BRACE usage
 PKG_LIBC_DEPENDS:=	uclibc glibc
 

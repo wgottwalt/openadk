@@ -12,6 +12,8 @@ PKG_SECTION:=		utils
 PKG_BUILDDEP:=		base-files
 PKG_SITES:=		http://openadk.org/distfiles/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_DFLT_BKEYMAPS:=	y if ADK_TARGET_WITH_INPUT
 
 include $(TOPDIR)/mk/package.mk

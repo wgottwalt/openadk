@@ -13,6 +13,8 @@ PKG_URL:=		ftp://ftp.melware.net/capi-utils/
 PKG_SITES:=		ftp://ftp.melware.net/capi-utils/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

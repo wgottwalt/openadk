@@ -7,7 +7,7 @@ PKG_NAME:=		gsm
 PKG_VERSION:=		1.0.10
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		4b148480f82e96d274248e13880ec873
-PKG_DESCR:=		A GSM 06.10 full-rate speech transcoding implementation (library)
+PKG_DESCR:=		GSM 06.10 full-rate speech transcoding library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www-rn.informatik.uni-bremen.de/software/gsm/
 PKG_SITES:=		http://www-rn.informatik.uni-bremen.de/software/gsm/
@@ -15,8 +15,10 @@ PKG_NOPARALLEL:=	1
 PKG_LIBNAME:=		libgsm
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		LIBGSM GSM_UTILS
-PKGSD_GSM_UTILS:=	A GSM 06.10 full-rate speech transcoding implementation (utilities)
+PKGSD_GSM_UTILS:=	GSM 06.10 full-rate speech transcoding utilities
 PKGSS_GSM_UTILS:=	libgsm
 PKGSC_GSM_UTILS:=	misc
 

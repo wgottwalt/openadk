@@ -1,0 +1,11 @@
+--- ulogd-2.0.4.orig/output/mysql/ulogd_output_MYSQL.c	2013-06-18 22:52:50.000000000 +0200
++++ ulogd-2.0.4/output/mysql/ulogd_output_MYSQL.c	2014-04-16 06:49:04.000000000 +0200
+@@ -42,7 +42,7 @@
+ #include <errno.h>
+ #include <time.h>
+ #include <arpa/inet.h>
+-#include <mysql/mysql.h>
++#include <mysql.h>
+ #include <ulogd/ulogd.h>
+ #include <ulogd/conffile.h>
+ #include <ulogd/db.h>

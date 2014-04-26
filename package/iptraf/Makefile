@@ -7,12 +7,14 @@ PKG_NAME:=		iptraf
 PKG_VERSION:=		3.0.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		004c2c005a1b78739e22bc49d33e244d
-PKG_DESCR:=		A console-based network monitoring program.
+PKG_DESCR:=		console-based network monitoring program.
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://iptraf.seul.org/
 PKG_SITES:=		ftp://iptraf.seul.org/pub/iptraf/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
@@ -23,7 +25,6 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_LDFLAGS+=	-ltinfo
 
 do-build:

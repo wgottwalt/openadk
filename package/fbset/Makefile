@@ -12,6 +12,8 @@ PKG_DEPENDS:=		bison-host flex-host
 PKG_SECTION:=		utils
 PKG_SITES:=		http://users.telenet.be/geertu/Linux/fbdev/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include ${TOPDIR}/mk/package.mk

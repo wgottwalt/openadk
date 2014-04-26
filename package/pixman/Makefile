@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		libpng
 PKG_SITES:=		http://www.cairographics.org/releases/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

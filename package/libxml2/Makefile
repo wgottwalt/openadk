@@ -16,6 +16,8 @@ PKG_URL:=		http://www.xmlsoft.org/
 PKG_SITES:=		http://xmlsoft.org/sources/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		LIBXML2 LIBXML2_PYTHON
 PKGSD_LIBXML2_PYTHON:=	XML python bindings
 PKGSC_LIBXML2_PYTHON:=	libs

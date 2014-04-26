@@ -7,10 +7,12 @@ PKG_NAME:=		netstat-nat
 PKG_VERSION:=		1.4.9
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		45e8d0f47623f619c22a6b894cd03cbc
-PKG_DESCR:=		a netstat variant for NAT connections
+PKG_DESCR:=		netstat variant for NAT connections
 PKG_SECTION:=		firewall
 PKG_URL:=		http://www.tweegy.nl/projects/netstat-nat/index.html
 PKG_SITES:=		http://www.tweegy.nl/download/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

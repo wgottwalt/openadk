@@ -4,15 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libdrm
-PKG_VERSION:=		2.4.52
+PKG_VERSION:=		2.4.53
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cb3547ccb435be6d80df68840da6b2ee
+PKG_MD5SUM:=		12e30247fb3caafc835e5f3f768c426a
 PKG_DESCR:=		DRM library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		libpthread-stubs cairo libpciaccess
 PKG_URL:=		http://dri.freedesktop.org/wiki/
 PKG_SITES:=		http://dri.freedesktop.org/libdrm/
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_ARCH_DEPENDS:=	!m68k
 

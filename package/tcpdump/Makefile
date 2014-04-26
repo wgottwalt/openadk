@@ -7,12 +7,14 @@ PKG_NAME:=		tcpdump
 PKG_VERSION:=		4.5.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		973a2513d0076e34aa9da7e15ed98e1b
-PKG_DESCR:=		A tool for network monitoring and data acquisition
+PKG_DESCR:=		tool for network monitoring and data acquisition
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libpcap
 PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://www.tcpdump.org/
 PKG_SITES:=		http://www.tcpdump.org/release/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_FLAVOURS_TCPDUMP:=	WITH_IPV6 WITH_CHROOT
 PKGFD_WITH_IPV6:=	enable IPv6 support

@@ -13,6 +13,8 @@ PKG_DEPENDS:=		mesalib
 PKG_BUILDDEP:=		MesaLib libglew
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/demos/${PKG_VERSION}/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_ARCH_DEPENDS:=      x86 x86_64 mips mipsel mips64 mips64el arm
 
 PKG_SUBPKGS:=		GLXINFO

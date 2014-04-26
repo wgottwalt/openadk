@@ -15,6 +15,8 @@ PKG_URL:=		http://www.linuxvirtualserver.org/
 PKG_SITES:=		http://www.linuxvirtualserver.org/software/kernel-2.6/
 PKG_NOPARALLEL:=	1
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 TARGET_CFLAGS+=		-I$(STAGING_TARGET_DIR)/usr/include/libnl3 -fPIC -DHAVE_NL=0

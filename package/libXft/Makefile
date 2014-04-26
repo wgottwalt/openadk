@@ -14,11 +14,11 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libxft
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXFT,libxft,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 
 libxft-install:
 	${INSTALL_DIR} ${IDIR_LIBXFT}/usr/lib

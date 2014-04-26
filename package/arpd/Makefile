@@ -7,13 +7,14 @@ PKG_NAME:=		arpd
 PKG_VERSION:=		0.2
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		e2911fa9de1b92ef50deda1489ae944d
-PKG_DESCR:=		Generates ARP responses for IP address ranges
+PKG_DESCR:=		generates ARP responses for IP address ranges
 PKG_SECTION:=		route
 PKG_DEPENDS:=		libpcap libdnet libevent
 PKG_BUILDDEP:=		libpcap libdnet libevent
 PKG_URL:=		http://niels.xtdnet.nl/honeyd/
 PKG_SITES:=		http://niels.xtdnet.nl/honeyd/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${TOPDIR}/mk/package.mk

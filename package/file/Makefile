@@ -17,6 +17,8 @@ PKG_SITES:=		ftp://ftp.fu-berlin.de/unix/tools/file/ \
 PKG_LIBNAME:=		libmagic
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		FILE LIBMAGIC
 PKGSD_LIBMAGIC:=	file type guesser library
 PKGSC_LIBMAGIC:=	libs

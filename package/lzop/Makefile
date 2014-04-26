@@ -15,6 +15,8 @@ HOST_BUILDDEP:=		liblzo-host
 PKG_URL:=		http://www.lzop.org/
 PKG_SITES:=		http://www.lzop.org/download/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

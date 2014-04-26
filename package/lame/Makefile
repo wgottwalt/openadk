@@ -7,7 +7,7 @@ PKG_NAME:=		lame
 PKG_VERSION:=		3.99
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		7abacd1d0a65a63733335786015626db
-PKG_DESCR:=		LAME MP3 encoder
+PKG_DESCR:=		MP3 encoder
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
@@ -16,8 +16,10 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=lame/}
 PKG_LIBNAME:=		libmp3lame
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		LAME LIBMP3LAME
-PKGSD_LIBMP3LAME:=	LAME MP3 encoding library
+PKGSD_LIBMP3LAME:=	MP3 encoding library
 PKGSC_LIBMP3LAME:=	libs
 
 ifeq ($(ADK_STATIC),y)
@@ -29,7 +31,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LAME,lame,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBMP3LAME,libmp3lame,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBMP3LAME},${PKGSC_LIBMP3LAME},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_LDFLAGS+=	-ltinfo
 
 lame-install:

@@ -7,12 +7,14 @@ PKG_NAME:=		libmad
 PKG_VERSION:=		0.15.1b
 PKG_RELEASE:=		6
 PKG_MD5SUM:=		1be543bc30c56fb6bea1d7bf6a64e66c
-PKG_DESCR:=		An high-quality MPEG audio decoding library
+PKG_DESCR:=		high-quality MPEG audio decoding library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://sourceforge.net/projects/mad
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mad/}
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

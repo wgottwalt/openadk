@@ -11,7 +11,7 @@ PKG_DEPENDS:=		libbfd
 PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		BINUTILS LIBBFD
-PKGSD_LIBBFD:=		Binary File Descriptor library
+PKGSD_LIBBFD:=		binary file descriptor library
 PKGSC_LIBBFD:=		libs
 
 PKG_HOST_DEPENDS:=      !cygwin
@@ -31,16 +31,12 @@ else
 CONFIGURE_ARGS+=	--enable-multilib
 endif
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--disable-werror \
 			--host=$(GNU_TARGET_NAME) \
 			--target=$(GNU_TARGET_NAME)
 # disable honour cflags stuff
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
-
-pre-build:
-	@-rm $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
 
 libbfd-install:
 	${INSTALL_DIR} ${IDIR_LIBBFD}/usr/lib

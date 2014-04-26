@@ -7,10 +7,12 @@ PKG_NAME:=		haserl
 PKG_VERSION:=		0.9.27
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1f692db8939858338a44e25d0190aa9e
-PKG_DESCR:=		a CGI wrapper to embed shell scripts in HTML documents
+PKG_DESCR:=		CGI wrapper to embed shell scripts in HTML documents
 PKG_SECTION:=		lang
 PKG_URL:=		http://haserl.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=haserl/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

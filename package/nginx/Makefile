@@ -14,6 +14,8 @@ PKG_DEPENDS:=		libopenssl libpcre libpthread zlib
 PKG_URL:=		http://nginx.org/
 PKG_SITES:=		http://nginx.org/download/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,NGINX,nginx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

@@ -13,6 +13,8 @@ PKG_DEPENDS:=		zlib libopenssl liblzo kmod-tun
 PKG_BUILDDEP:=		zlib openssl liblzo
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vtun/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_HOST_DEPENDS:=	!freebsd
 
 include ${TOPDIR}/mk/package.mk

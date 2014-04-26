@@ -14,6 +14,8 @@ PKG_URL:=		https://github.com/sahlberg/libnfs
 PKG_SITES:=		https://sites.google.com/site/libnfstarballs/li/
 PKG_OPTS:=		dev
 
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBNFS,libnfs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

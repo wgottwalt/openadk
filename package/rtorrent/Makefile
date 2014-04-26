@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		autotool ncurses libtorrent curl
 PKG_URL:=		http://libtorrent.rakshasa.no/
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 AUTOTOOL_STYLE:=	autoreconf

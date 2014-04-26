@@ -15,6 +15,8 @@ PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
 PKG_NEED_CXX:=		1
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_ARCH_DEPENDS:=	!m68k
 
 include $(TOPDIR)/mk/package.mk

@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libpcap libpthread ncurses
 PKG_URL:=		http://www.ex-parrot.com/~pdw/iftop/
 PKG_SITES:=		http://www.ex-parrot.com/~pdw/iftop/download/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IFTOP,iftop,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

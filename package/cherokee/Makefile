@@ -12,6 +12,8 @@ PKG_SECTION:=		www
 PKG_URL:=		http://www.cherokee-project.com
 PKG_SITES:=		http://www.cherokee-project.de/mirrors/cherokee/1.2/${PKG_VERSION}/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CHEROKEE,cherokee,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

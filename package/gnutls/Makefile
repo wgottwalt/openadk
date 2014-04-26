@@ -10,7 +10,7 @@ PKG_MD5SUM:=		300e5f413054e2f4719c1c3b5179a611
 PKG_DESCR:=		GNU TLS library
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib libnettle libgmp
-PKG_BUILDDEP:=		libgcrypt liblzo libtasn1 zlib ncurses libnettle
+PKG_BUILDDEP:=		libiconv-tiny libgcrypt liblzo libtasn1 zlib ncurses libnettle
 PKG_URL:=		http://www.gnu.org/software/gnutls/
 PKG_SITES:=		ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2/
 PKG_LIBNAME:=		libgnutls
@@ -27,8 +27,6 @@ PKGSC_LIBGNUTLS_OPENSSL:=	libs
 PKG_FLAVOURS_LIBGNUTLS:=	WITH_CRYPTODEV
 PKGFD_WITH_CRYPTODEV:=		enable support for cryptodev-linux
 PKGFB_WITH_CRYPTODEV:=		cryptodev-linux
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

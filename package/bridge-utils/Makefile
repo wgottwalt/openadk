@@ -7,12 +7,14 @@ PKG_NAME:=		bridge-utils
 PKG_VERSION:=		1.5
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		ec7b381160b340648dede58c31bb2238
-PKG_DESCR:=		Ethernet bridging tools
+PKG_DESCR:=		ethernet bridging tools
 PKG_SECTION:=		bridge
 PKG_BUILDDEP:=		autotool
 PKG_DEPENDS:=		kmod-bridge kmod-ipv6
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Bridge
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bridge/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

@@ -14,6 +14,8 @@ HOST_BUILDDEP:=		m4-host flex-host
 PKG_URL:=		http://www.gnu.org/software/bc/
 PKG_SITES:=		http://ftp.gnu.org/pub/gnu/bc/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		BC DC
 
 include ${TOPDIR}/mk/host.mk

@@ -7,12 +7,14 @@ PKG_NAME:=		siproxd
 PKG_VERSION:=		0.8.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1a6f9d13aeb2d650375c9a346ac6cbaf
-PKG_DESCR:=		a SIP (Session Initiation Protocol) proxy
+PKG_DESCR:=		SIP (Session Initiation Protocol) proxy
 PKG_SECTION:=		proxy
 PKG_DEPENDS:=		libosip2 libpthread
 PKG_BUILDDEP:=		autotool libosip2
 PKG_URL:=		http://siproxd.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=siproxd/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

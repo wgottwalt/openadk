@@ -7,12 +7,14 @@ PKG_NAME:=		libosip2
 PKG_VERSION:=		3.3.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		81493bb4d4ae6d55b71a0d4369339125
-PKG_DESCR:=		a SIP (Session Initiation Protocol) implementation
+PKG_DESCR:=		SIP (Session Initiation Protocol) implementation
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.gnu.org/software/osip
 PKG_SITES:=		${MASTER_SITE_GNU:=osip/}
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libgc-host libgc ncurses
 PKG_URL:=		http://w3m.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=w3m/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,W3M,w3m,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

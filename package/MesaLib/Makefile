@@ -24,6 +24,7 @@ PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el arm
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
 include $(TOPDIR)/mk/package.mk

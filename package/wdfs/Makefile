@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libopenssl fuse-utils kmod-fuse-fs neon glib
 PKG_BUILDDEP:=		openssl fuse neon glib
 PKG_SITES:=		http://noedler.de/projekte/wdfs/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,WDFS,wdfs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

@@ -13,6 +13,8 @@ PKG_DEPENDS:=		openssl-util
 PKG_URL:=		https://github.com/OpenVPN/easy-rsa
 PKG_SITES:=		http://openadk.org/distfiles/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,EASY_RSA,easy-rsa,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

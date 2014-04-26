@@ -7,10 +7,12 @@ PKG_NAME:=		miau
 PKG_VERSION:=		0.6.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		76f794889d47ad277c25e9c5bbddefa4
-PKG_DESCR:=		miau is an IRC-bouncer/proxy
+PKG_DESCR:=		IRC-bouncer/proxy
 PKG_SECTION:=		chat
 PKG_URL:=		http://miau.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=miau/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

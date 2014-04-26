@@ -12,6 +12,8 @@ PKG_SECTION:=		dns
 PKG_URL:=		http://www.dillema.net/software/totd.html
 PKG_SITES:=		http://www.dillema.net/software/totd/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TOTD,totd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

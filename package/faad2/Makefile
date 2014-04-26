@@ -7,13 +7,15 @@ PKG_NAME:=		faad2
 PKG_VERSION:=		2.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ee1b4d67ea2d76ee52c5621bc6dbf61e
-PKG_DESCR:=		A MP4 decoding library
+PKG_DESCR:=		MP4 decoding library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://sourceforge.net/projects/faac/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=faac/}
 PKG_LIBNAME:=		libfaad2
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

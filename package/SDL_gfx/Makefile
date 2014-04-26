@@ -16,6 +16,8 @@ PKG_SITES:=		http://www.ferzkopp.net/Software/SDL_gfx-2.0/
 PKG_LIBNAME:=		libsdl-gfx
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBSDL_GFX,libsdl-gfx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

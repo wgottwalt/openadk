@@ -7,12 +7,14 @@ PKG_NAME:=		arpwatch
 PKG_VERSION:=		2.1a15
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		cebfeb99c4a7c2a6cee2564770415fe7
-PKG_DESCR:=		Ethernet monitor program
+PKG_DESCR:=		ethernet monitor program
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libpcap
 PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://www-nrg.ee.lbl.gov/
 PKG_SITES:=		ftp://ftp.ee.lbl.gov/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

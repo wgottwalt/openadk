@@ -14,6 +14,8 @@ PKG_DEPENDS:=		kmod-crypto-manager2
 PKG_URL:=		http://home.gna.org/cryptodev-linux/
 PKG_SITES:=		http://download.gna.org/cryptodev-linux/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 include ${TOPDIR}/mk/kernel-vars.mk
 

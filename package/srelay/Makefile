@@ -7,9 +7,11 @@ PKG_NAME:=		srelay
 PKG_VERSION:=		0.4.7p3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		214ca8bc476c5e0eab54adb01972be6a
-PKG_DESCR:=		A socks 4/5 proxy server
+PKG_DESCR:=		socks 4/5 proxy server
 PKG_SECTION:=		proxy
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=socks-relay/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

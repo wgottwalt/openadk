@@ -15,8 +15,6 @@ PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.36/}
 PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

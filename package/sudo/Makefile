@@ -12,6 +12,8 @@ PKG_SECTION:=		admin
 PKG_URL:=		http://www.courtesan.com/sudo/
 PKG_SITES:=		http://www.courtesan.com/sudo/dist/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SUDO,sudo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

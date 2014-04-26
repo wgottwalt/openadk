@@ -22,8 +22,6 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

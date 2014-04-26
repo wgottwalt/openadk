@@ -12,6 +12,8 @@ PKG_SECTION:=		net/misc
 PKG_URL:=		http://netcat.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=netcat/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,NETCAT,netcat,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

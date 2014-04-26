@@ -7,13 +7,14 @@ PKG_NAME:=		portsentry
 PKG_VERSION:=		1.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		3ebd3618ba9abfea2525e236bd44cebd
-PKG_DESCR:=		Software for protection against port scans
+PKG_DESCR:=		software for protection against port scans
 PKG_SECTION:=		net/security
 PKG_URL:=		http://sourceforge.net/projects/sentrytools
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sentrytools/}
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_beta
 
 include ${TOPDIR}/mk/package.mk

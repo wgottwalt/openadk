@@ -3,7 +3,7 @@
 
 ifneq ($(strip ${PKG_SITES}),)
 ifeq ($(strip ${DISTFILES}),)
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
 endif
 

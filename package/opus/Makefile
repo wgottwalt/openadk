@@ -4,15 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		opus
-PKG_VERSION:=		1.0.3
+PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		86eedbd3c5a0171d2437850435e6edff
+PKG_MD5SUM:=		c5a8cf7c0b066759542bc4ca46817ac6
 PKG_DESCR:=		open, royalty-free, highly versatile audio codec
 PKG_SECTION:=		libs
 PKG_URL:=		http://opus-codec.org/
 PKG_SITES:=		http://downloads.xiph.org/releases/opus/
 PKG_LIBNAME:=		libopus
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

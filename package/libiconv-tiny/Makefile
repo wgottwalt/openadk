@@ -14,6 +14,8 @@ PKG_URL:=		http://www.openwrt.org/
 PKG_SITES:=		http://www.openadk.org/distfiles/
 PKG_OPTS:=		dev devonly
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

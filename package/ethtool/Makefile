@@ -11,8 +11,6 @@ PKG_DESCR:=		display or change ethernet card settings
 PKG_SECTION:=		net
 PKG_SITES:=		https://www.kernel.org/pub/software/network/ethtool/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ETHTOOL,ethtool,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

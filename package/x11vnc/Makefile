@@ -4,14 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		x11vnc
-PKG_VERSION:=		0.9.12
+PKG_VERSION:=		0.9.13
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1498a68d02aa7b6c97bf746c073c8d00
+PKG_MD5SUM:=		a372ec4fe8211221547b1c108cf56e4c
 PKG_DESCR:=		VNC server for X11 displays
 PKG_SECTION:=		x11/apps
 PKG_BUILDDEP:=		libX11 libXtst libjpeg-turbo
 PKG_URL:=		http://www.karlrunge.com/x11vnc/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://sourceforge.net/projects/libvncserver/files/x11vnc/0.9.13/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 
 include $(TOPDIR)/mk/package.mk
 

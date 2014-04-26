@@ -12,6 +12,8 @@ PKG_SECTION:=		multimedia
 PKG_URL:=		http://www.openadk.org/cgi-bin/gitweb.cgi?p=mpdbox.git;a=summary
 PKG_SITES:=		http://www.openadk.org/distfiles/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MPDBOX,mpdbox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

@@ -7,12 +7,14 @@ PKG_NAME:=		less
 PKG_VERSION:=		436
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		817bf051953ad2dea825a1cdf460caa4
-PKG_DESCR:=		A text mode pager
+PKG_DESCR:=		text mode pager
 PKG_SECTION:=		pager
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.greenwoodsoftware.com/less/
 PKG_SITES:=		http://www.greenwoodsoftware.com/less/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

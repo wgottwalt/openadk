@@ -16,6 +16,8 @@ PKG_SITES:=		http://www.bzip.org/${PKG_VERSION}/
 PKG_LIBNAME:=		libbz2
 PKG_OPTS:=		dev
 
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		BZIP2 LIBBZ2
 PKGSD_LIBBZ2:=		bzip2 compression library
 PKGSC_LIBBZ2:=		libs

@@ -15,8 +15,6 @@ PKG_URL:=		http://www.libssh.org/
 PKG_SITES:=		https://red.libssh.org/attachments/download/87/
 PKG_OPTS:=		dev
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBSSH,libssh,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

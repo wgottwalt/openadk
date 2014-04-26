@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
-PKG_VERSION:=		1.15.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		faf04f1213f9a476997a774254b3abce
+PKG_VERSION:=		1.15.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d6e5444fc33ad737b551cc49061ae704
 PKG_DESCR:=		Xorg server
 PKG_SECTION:=		x11/server
 PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile
@@ -23,6 +23,8 @@ PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA
 PKG_ARCH_DEPENDS:=	!m68k

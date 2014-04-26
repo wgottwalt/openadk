@@ -13,8 +13,6 @@ PKG_SECTION:=		boot
 PKG_URL:=		https://github.com/raspberrypi/firmware
 PKG_SITES:=		http://openadk.org/distfiles/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 
 include ${TOPDIR}/mk/package.mk

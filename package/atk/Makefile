@@ -15,8 +15,6 @@ PKG_SITES:=		${MASTER_SITE_GNOME:=/atk/2.11/}
 PKG_LIBNAME:=		libatk
 PKG_OPTS:=		dev
 
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

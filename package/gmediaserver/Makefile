@@ -7,13 +7,15 @@ PKG_NAME:=		gmediaserver
 PKG_VERSION:=		0.13.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		c422de386331e2a1a859d45f6fa270a3
-PKG_DESCR:=		An UPnP music media server
+PKG_DESCR:=		UPnP music media server
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		id3lib libupnp libmagic
 PKG_BUILDDEP:=		id3lib libupnp file libiconv-tiny
 PKG_URL:=		http://www.gnu.org/software/gmediaserver
 PKG_SITES:=		http://savannah.nongnu.org/download/gmediaserver/
 PKG_CXX:=		GMEDIASERVER
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
 

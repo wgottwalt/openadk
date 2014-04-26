@@ -4,23 +4,27 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		syslog-ng
-PKG_VERSION:=		1.6.12
+PKG_VERSION:=		3.5.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a3cbfdb6e1e5beea181a7349749719f3
-PKG_DESCR:=		A powerful syslog daemon
+PKG_MD5SUM:=		ff3bf223ebafbaa92b69a2d5b729f368
+PKG_DESCR:=		powerful syslog daemon
 PKG_SECTION:=		admin
-PKG_DEPENDS:=		libol libwrap
-PKG_BUILDDEP:=		libol tcp_wrappers
+PKG_BUILDDEP:=		eventlog
+PKG_DEPENDS:=		eventlog
 PKG_URL:=		http://www.balabit.com/
-PKG_SITES:=		http://www.balabit.com/downloads/files/syslog-ng/sources/1.6/src/
+PKG_SITES:=		http://www.balabit.com/downloads/files/syslog-ng/open-source-edition/${PKG_VERSION}/source/
+
+PKG_LIBC_DEPENDS:=	glibc musl
+
+DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SYSLOG_NG,syslog-ng,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--enable-full-dynamic \
-			--enable-tcp-wrapper
-CONFIGURE_ENV+=		ac_cv_path_libol_config=${STAGING_TARGET_DIR}/usr/bin
+			--disable-tcp-wrapper
+#CONFIGURE_ENV+=		ac_cv_path_libol_config=${STAGING_TARGET_DIR}/usr/bin
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 
 syslog-ng-install:

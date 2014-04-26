@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libiconv-tiny openssl libsamplerate alsa-lib libao
 PKG_URL:=		http://www.rdesktop.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rdesktop/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RDESKTOP,rdesktop,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

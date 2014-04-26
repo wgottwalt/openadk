@@ -7,13 +7,15 @@ PKG_NAME:=		snort
 PKG_VERSION:=		2.9.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		f5fc0e176afca5989d47509478758fc7
-PKG_DESCR:=		a flexible Network Intrusion Detection System (NIDS)
+PKG_DESCR:=		flexible Network Intrusion Detection System (NIDS)
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libnet libpcap libpcre libtirpc daq
 PKG_BUILDDEP:=		libnet libpcap pcre libtirpc daq
 PKG_URL:=		http://www.snort.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_NOPARALLEL:=	1
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
 

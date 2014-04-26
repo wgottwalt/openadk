@@ -7,12 +7,14 @@ PKG_NAME:=		evilwm
 PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		5f14cc3019320860c85bb07c60a76bd7
-PKG_DESCR:=		A minimalist window manager for the X Window System
+PKG_DESCR:=		minimalist window manager for the X Window System
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libx11 libxext
 PKG_BUILDDEP:=		libX11 libXext
 PKG_URL:=		http://www.6809.org.uk/evilwm/
 PKG_SITES:=		http://www.6809.org.uk/evilwm/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

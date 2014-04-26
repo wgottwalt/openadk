@@ -16,6 +16,8 @@ PKG_SITES:=		http://www.openssl.org/source/
 PKG_LIBNAME:=		libopenssl
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		LIBOPENSSL OPENSSL_UTIL
 PKGSD_OPENSSL_UTIL:=	OpenSSL command line tool
 PKGSC_OPENSSL_UTIL:=	crypto

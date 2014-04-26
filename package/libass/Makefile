@@ -15,8 +15,6 @@ PKG_URL:=		http://code.google.com/p/libass/
 PKG_SITES:=		http://libass.googlecode.com/files/
 PKG_OPTS:=		dev
 
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBASS,libass,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

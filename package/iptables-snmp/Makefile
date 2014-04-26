@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		net-snmp
 PKG_URL:=		http://www.nobiscuit.com/iptables-snmp/
 PKG_SITES:=		http://www.nobiscuit.com/iptables-snmp/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
 include $(TOPDIR)/mk/package.mk

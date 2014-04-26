@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libogg
 PKG_VERSION:=		1.3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ba526cd8f4403a5d351a9efaa8608fbc
+PKG_MD5SUM:=		ca25d8da0ddfc8c6cbbf78d847a209fe
 PKG_DESCR:=		Ogg bitstream handling library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.xiph.org/ogg

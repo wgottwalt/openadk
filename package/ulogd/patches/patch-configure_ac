@@ -1,6 +1,6 @@
---- ulogd-2.0.2.orig/configure.ac	2013-03-01 16:45:23.000000000 +0100
-+++ ulogd-2.0.2/configure.ac	2013-11-11 21:27:31.000000000 +0100
-@@ -32,7 +32,7 @@ fi
+--- ulogd-2.0.4.orig/configure.ac	2014-03-23 16:30:50.000000000 +0100
++++ ulogd-2.0.4/configure.ac	2014-04-16 06:48:35.000000000 +0200
+@@ -24,7 +24,7 @@ AC_SUBST([libdl_LIBS])
  dnl Checks for header files.
  AC_HEADER_DIRENT
  AC_HEADER_STDC

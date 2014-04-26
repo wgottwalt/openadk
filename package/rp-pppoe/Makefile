@@ -13,6 +13,8 @@ PKG_DEPENDS:=		ppp
 PKG_URL:=		http://www.roaringpenguin.com/
 PKG_SITES:=		http://www.roaringpenguin.com/files/download/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_LIBC_DEPENDS:=	uclibc glibc
 PKG_SUBPKGS:=		PPPOE_CLIENT PPPOE_RELAY PPPOE_SERVER PPPOE_SNIFF
 

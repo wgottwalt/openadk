@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libgcrypt libgpg-error
 PKG_URL:=		http://www.unix-ag.uni-kl.de/~massar/vpnc/
 PKG_SITES:=		http://www.unix-ag.uni-kl.de/~massar/vpnc/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,VPNC,vpnc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

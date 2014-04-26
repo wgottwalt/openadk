@@ -14,6 +14,8 @@ PKG_DEPENDS:=		libopenssl libcurl libexpat libpthread libgcc
 PKG_URL:=		http://git-scm.com/
 PKG_SITES:=		http://git-core.googlecode.com/files/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GIT,git,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

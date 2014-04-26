@@ -6,11 +6,13 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		resourceproto
 PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
-PKG_DESCR:=		Resource extension headers
+PKG_DESCR:=		resource extension headers
 PKG_SECTION:=		devel
 PKG_MD5SUM:=		33091d5358ec32dd7562a1aa225a70aa
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

@@ -12,6 +12,8 @@ PKG_SECTION:=		net/security
 PKG_URL:=		http://www.nocrew.org/software/httptunnel/
 PKG_SITES:=		http://www.nocrew.org/software/httptunnel/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,HTTPTUNNEL,httptunnel,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

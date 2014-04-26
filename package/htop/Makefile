@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://sourceforge.net/projects/htop
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=htop/${PKG_VERSION}/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,HTOP,htop,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

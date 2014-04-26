@@ -11,6 +11,8 @@ PKG_DESCR:=		configuration utility for serial ports
 PKG_SECTION:=		serial
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=setserial/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SETSERIAL,setserial,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

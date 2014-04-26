@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		autotool bzip2-host python2-host xcb-proto-host
 PKG_SITES:=		http://xcb.freedesktop.org/dist/
 PKG_OPTS:=		dev devonly
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		XCB_PROTO XCB_PYTHON
 PKGSC_XCB_PYTHON:=	x11/misc
 

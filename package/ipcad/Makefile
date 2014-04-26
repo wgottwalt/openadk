@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://lionet.info/ipcad
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ipcad/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPCAD,ipcad,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

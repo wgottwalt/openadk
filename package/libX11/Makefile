@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libX11
-PKG_VERSION:=		1.5.0
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		395455e4d3a51459374fe5ca8420aae8
+PKG_VERSION:=		1.6.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		7e17129e1678355d8268883ee31a6edf
 PKG_DESCR:=		X11 client-side library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto-host xextproto-host libXau-host libpthread-stubs-host
@@ -18,6 +18,8 @@ PKG_DEPENDS:=		libxdmcp libxcb libxau
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libx11
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly

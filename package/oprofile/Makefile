@@ -10,9 +10,11 @@ PKG_MD5SUM:=		00aec1287da2dfffda17a9b1c0a01868
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		libpopt kmod-oprofile libbfd libstdcxx libgcc
-PKG_BUILDDEP:=		popt binutils
+PKG_BUILDDEP:=		popt binutils gcc
 PKG_URL:=		http://oprofile.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_ARCH_DEPENDS:=	!m68k
 PKG_LIBC_DEPENDS:=	uclibc glibc

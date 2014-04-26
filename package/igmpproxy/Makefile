@@ -7,10 +7,12 @@ PKG_NAME:=		igmpproxy
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		c56f41ec195bc1fe016369bf74efc5a1
-PKG_DESCR:=		a simple dynamic Multicast Routing Daemon
+PKG_DESCR:=		simple dynamic multicast routing daemon
 PKG_SECTION:=		proxy
 PKG_URL:=		http://sourceforge.net/projects/igmpproxy/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=igmpproxy/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_CFLINE_IGMPPROXY:=	select ADK_KERNEL_IP_MULTICAST@
 PKG_CFLINE_IGMPPROXY+=	select ADK_KERNEL_IP_MROUTE

@@ -16,6 +16,8 @@ PKG_SITES:=		http://www.opensc-project.org/files/opensc/
 PKG_LIBNAME:=		libopensc
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		OPENSC LIBOPENSC
 PKGSD_LIBOPENSC:=	opensc library
 PKGSC_LIBOPENSC:=	libs

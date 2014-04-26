@@ -7,12 +7,14 @@ PKG_NAME:=		screen
 PKG_VERSION:=		4.0.3
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		8506fd205028a96c741e4037de6e3c42
-PKG_DESCR:=		A window manager for the terminal session
+PKG_DESCR:=		window manager for the terminal session
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libncurses libelf
 PKG_BUILDDEP:=		ncurses libelf
 PKG_URL:=		http://www.gnu.org/software/screen/
 PKG_SITES:=		${MASTER_SITE_GNU:=screen/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

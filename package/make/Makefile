@@ -12,6 +12,8 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/make
 PKG_SITES:=		${MASTER_SITE_GNU:=make/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MAKE,make,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

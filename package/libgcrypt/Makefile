@@ -15,6 +15,8 @@ PKG_URL:=		http://directory.fsf.org/project/libgcrypt
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/libgcrypt/
 PKG_OPTS:=		dev
 
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGCRYPT,libgcrypt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

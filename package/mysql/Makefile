@@ -17,6 +17,8 @@ PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.6/}
 PKG_LIBNAME:=		libmysqlclient
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

@@ -4,16 +4,14 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		kmod
-PKG_VERSION:=		15
+PKG_VERSION:=		17
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d03372179ed2cfa0c52b6672cf438901
+PKG_MD5SUM:=		bc36d28b12dcb2b664a35411560c5610
 PKG_DESCR:=		kernel module loading library
 PKG_SECTION:=		libs
 PKG_URL:=		http://profusion.mobi/index.php
 PKG_SITES:=		https://www.kernel.org/pub/linux/utils/kernel/kmod/
 PKG_OPTS:=		dev
-
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include $(TOPDIR)/mk/package.mk
 

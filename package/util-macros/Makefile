@@ -14,6 +14,8 @@ PKG_URL:=		http://cgit.freedesktop.org/xorg/util/macros
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/util/
 PKG_OPTS:=		dev devonly
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

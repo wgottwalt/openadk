@@ -7,13 +7,15 @@ PKG_NAME:=		gnupg
 PKG_VERSION:=		1.4.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		991faf66d3352ac1452acc393c430b23
-PKG_DESCR:=		Gnu Privacy Guard
+PKG_DESCR:=		gnu privacy guard
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libreadline
 PKG_BUILDDEP:=		readline libiconv-tiny
 PKG_URL:=		http://www.gnupg.org/
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/gnupg/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+ 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GNUPG,gnupg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

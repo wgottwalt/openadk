@@ -7,11 +7,13 @@ PKG_NAME:=		ssltunnel
 PKG_VERSION:=		1.16
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		4039b50566a33a4077883ea974e476d5
-PKG_DESCR:=		A PPP over SSL vpn tool
+PKG_DESCR:=		PPP over SSL vpn tool
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libopenssl ppp
 PKG_BUILDDEP:=		openssl ppp
 PKG_SITES:=		http://www.hsc.fr/ressources/outils/ssltunnel/download/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
 

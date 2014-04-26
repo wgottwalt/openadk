@@ -13,6 +13,8 @@ PKG_SECTION:=		proxy
 PKG_URL:=		https://www.banu.com/tinyproxy/
 PKG_SITES:=		https://www.banu.com/pub/tinyproxy/1.8/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TINYPROXY,tinyproxy,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

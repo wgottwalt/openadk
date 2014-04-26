@@ -7,12 +7,10 @@ PKG_NAME:=		strace
 PKG_VERSION:=		4.8
 PKG_RELEASE:=		8
 PKG_MD5SUM:=		c575ef43829586801f514fd91bfe7575
-PKG_DESCR:=		System call trace program
+PKG_DESCR:=		system call trace program
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		libgcc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include ${TOPDIR}/mk/package.mk
 

@@ -16,6 +16,8 @@ PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus/
 PKG_LIBNAME:=		libdbus
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		DBUS LIBDBUS
 PKGSD_LIBDBUS:=		DBUS library
 PKGSC_LIBDBUS:=		libs

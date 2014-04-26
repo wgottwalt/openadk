@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		m4
 PKG_VERSION:=		1.4.17
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a5e9954b1dae036762f7b13673a2cf76
+PKG_MD5SUM:=		12a3c829301a4fd6586a57d3fcf196dc
 PKG_DESCR:=		macro processor
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		m4-host

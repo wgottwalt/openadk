@@ -4,16 +4,18 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libnl
-PKG_VERSION:=		3.2.22
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		2e1c889494d274aca24ce5f6a748e66e
-PKG_DESCR:=		Netlink library
+PKG_VERSION:=		3.2.24
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		6e0e7bad0674749d930dd9f285343d55
+PKG_DESCR:=		netlink library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		m4-host flex-host
 PKG_URL:=		http://www.infradead.org/~tgr/libnl/
 PKG_SITES:=		http://www.infradead.org/~tgr/libnl/files/
 PKG_NOPARALLEL:=	1
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

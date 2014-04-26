@@ -16,6 +16,8 @@ PKG_SITES:=		http://download.savannah.gnu.org/releases/davfs2/
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DAVFS2,davfs2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

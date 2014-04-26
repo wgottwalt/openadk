@@ -16,6 +16,8 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freetype/}
 PKG_LIBNAME:=		libfreetype
 PKG_OPTS:=		dev
 
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif

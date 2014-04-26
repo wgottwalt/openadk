@@ -12,6 +12,8 @@ PKG_SECTION:=		misc
 PKG_URL:=		http://www.nongnu.org/dmidecode/
 PKG_SITES:=		http://download.savannah.gnu.org/releases/dmidecode/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DMIDECODE,dmidecode,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

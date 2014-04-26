@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		php
 PKG_VERSION:=		5.5.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9156fcd4b254cbfa9a7535f931da29d5
+PKG_MD5SUM:=		1559ef6444d5020670ec52ea752501ee
 PKG_DESCR:=		PHP language interpreter
 PKG_SECTION:=		lang
 PKG_DEPENDS:=		libpthread librt libgcc

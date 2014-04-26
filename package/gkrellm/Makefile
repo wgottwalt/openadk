@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		glib
 PKG_URL:=		http://members.dslextreme.com/users/billw/gkrellm/gkrellm.html
 PKG_SITES:=		http://members.dslextreme.com/users/billw/gkrellm/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 WRKSRC=			${WRKDIR}/gkrellm-${PKG_VERSION}/server
 
 include ${TOPDIR}/mk/package.mk

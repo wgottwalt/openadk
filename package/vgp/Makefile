@@ -7,10 +7,12 @@ PKG_NAME:=		vgp
 PKG_VERSION:=		0.2.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b8c25b5dfcb944f78bbc584be9c230c7
-PKG_DESCR:=		vgp is a daemon working like Cisco HSRP
+PKG_DESCR:=		daemon working like Cisco HSRP
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://vgpd.freaknet.org/
 PKG_SITES:=		http://vgpd.freaknet.org/files/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

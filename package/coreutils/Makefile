@@ -13,8 +13,6 @@ PKG_BUILDDEP:=		gmp autotool
 PKG_URL:=		http://www.gnu.org/software/coreutils/
 PKG_SITES:=		http://ftp.gnu.org/gnu/coreutils/
 
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
-
 PKG_SUBPKGS:=		TSORT SHA256SUM TOUCH
 PKGSD_TSORT:=		topological sort utility
 PKGSC_TSORT:=		misc

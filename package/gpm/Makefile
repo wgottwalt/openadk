@@ -15,6 +15,8 @@ PKG_SITES:=		http://www.nico.schottelius.org/software/gpm/archives/
 PKG_NOPARALLEL:=	1
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix
 endif

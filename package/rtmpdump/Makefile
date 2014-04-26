@@ -16,6 +16,8 @@ PKG_SITES:=		http://www.openadk.org/distfiles
 PKG_LIBNAME:=		librtmp
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_SUBPKGS:=		RTMPDUMP LIBRTMP
 PKGSD_LIBRTMP:=		library for RTMP streams
 PKGSC_LIBRTMP:=		libs

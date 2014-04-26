@@ -14,6 +14,8 @@ PKG_DEPENDS:=		kmod-ipv6
 PKG_URL:=		http://toxygen.net/6tunnel/
 PKG_SITES:=		http://toxygen.net/6tunnel/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,6TUNNEL,6tunnel,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

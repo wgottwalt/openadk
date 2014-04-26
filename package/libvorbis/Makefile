@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		libvorbis
 PKG_VERSION:=		1.3.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6b1a36f0d72332fae5130688e65efe1f
+PKG_MD5SUM:=		71b649d3e08e63ece16649df906ce8b9
 PKG_DESCR:=		Vorbis General Audio Compression Codec library
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		libogg

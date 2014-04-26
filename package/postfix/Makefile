@@ -13,6 +13,8 @@ PKG_BUILDDEP:=		tinycdb
 PKG_URL:=		http://www.postfix.org/
 PKG_SITES:=		http://de.postfix.org/ftpmirror/official/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_HOST_DEPENDS:=	!darwin
 
 include $(TOPDIR)/mk/package.mk

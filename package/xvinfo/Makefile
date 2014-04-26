@@ -7,11 +7,13 @@ PKG_NAME:=		xvinfo
 PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		49f5a19ddff9393aaea4ecaacaedddb3
-PKG_DESCR:=		Print out X-Video extension adaptor information
+PKG_DESCR:=		print out X-Video extension adaptor information
 PKG_SECTION:=		x11/apps
 PKG_BUILDDEP:=		libXv
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

@@ -12,6 +12,8 @@ PKG_SECTION:=		lang
 PKG_URL:=		https://github.com/pkgconf/pkgconf
 PKG_SITES:=		http://rabbit.dereferenced.org/~nenolod/distfiles/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

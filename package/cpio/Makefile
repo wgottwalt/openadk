@@ -12,6 +12,8 @@ PKG_SECTION:=		archive
 PKG_URL:=		http://www.gnu.org/software/cpio/
 PKG_SITES:=		${MASTER_SITE_GNU:=cpio/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CPIO,cpio,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

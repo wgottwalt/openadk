@@ -12,6 +12,8 @@ PKG_SECTION:=		serial
 PKG_URL:=		http://code.google.com/p/picocom
 PKG_SITES:=		http://picocom.googlecode.com/files/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PICOCOM,picocom,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

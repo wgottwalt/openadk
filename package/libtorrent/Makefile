@@ -7,13 +7,15 @@ PKG_NAME:=		libtorrent
 PKG_VERSION:=		0.13.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		96c0b81501357df402ab592f59ecaeab
-PKG_DESCR:=		A bittorrent library
+PKG_DESCR:=		bittorrent library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libopenssl libsigc++
 PKG_BUILDDEP:=		openssl libsigc++
 PKG_URL:=		http://libtorrent.rakshasa.no/
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
