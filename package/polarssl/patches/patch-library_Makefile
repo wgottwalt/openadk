@@ -1,5 +1,5 @@
---- polarssl-1.2.8.orig/library/Makefile	2013-06-21 15:11:10.000000000 +0200
-+++ polarssl-1.2.8/library/Makefile	2013-08-20 18:32:08.885495858 +0200
+--- polarssl-1.3.6.orig/library/Makefile	2014-04-11 15:33:59.000000000 +0200
++++ polarssl-1.3.6/library/Makefile	2014-04-25 07:42:34.000000000 +0200
 @@ -18,9 +18,7 @@ endif
  # CFLAGS += -D_BSD_EXTENSION
  
@@ -8,14 +8,12 @@
  CFLAGS += -fPIC
 -endif
  
- SONAME=libpolarssl.so.0
+ SONAME=libpolarssl.so.6
  
-@@ -51,27 +49,19 @@ OBJS=	aes.o		arc4.o		asn1parse.o		\
- 		ssl_tls.o	timing.o	version.o		\
- 		x509parse.o	x509write.o	xtea.o
+@@ -65,28 +63,20 @@ OBJS=	aes.o		aesni.o		arc4.o			\
  
--.SILENT:
--
+ .SILENT:
+ 
 -ifndef SHARED
 -all: static
 -else
@@ -25,7 +23,7 @@
  
  static: libpolarssl.a
  
- shared: libpolarssl.$(DLEXT)
+ shared: libpolarssl.$(DLEXT) libpolarssl.so
  
  libpolarssl.a: $(OBJS)
 -	echo "  AR    $@"
@@ -33,15 +31,17 @@
 -	echo "  RL    $@"
  	$(AR) s $@
  
- libpolarssl.so: libpolarssl.a
+ libpolarssl.${DLEXT}: libpolarssl.a
 -	echo "  LD    $@"
  	$(CC) ${LDFLAGS} -shared -Wl,-soname,$(SONAME) -o $@ $(OBJS)
-+	ln -sf $@ $(SONAME)
+ 
+ libpolarssl.so: libpolarssl.${DLEXT}
+-	echo "  LN    $@ -> libpolarssl.${DLEXT}"
+ 	ln -sf libpolarssl.${DLEXT} $@
  
  libpolarssl.dylib: libpolarssl.a
- 	echo "  LD    $@"
-@@ -82,7 +72,6 @@ libpolarssl.dll: libpolarssl.a
- 	$(CC) -shared -Wl,-soname,$@ -o $@ $(OBJS) -lws2_32 -lwinmm -lgdi32 
+@@ -98,7 +88,6 @@ libpolarssl.dll: libpolarssl.a
+ 	$(CC) -shared -Wl,-soname,$@ -o $@ $(OBJS) -lws2_32 -lwinmm -lgdi32
  
  .c.o:
 -	echo "  CC    $<"
