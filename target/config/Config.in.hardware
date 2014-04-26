@@ -1,0 +1,76 @@
+# hardware features, do not use for qemu
+config ADK_TARGET_WITH_USB
+	boolean
+
+config ADK_TARGET_WITH_I2C
+	boolean
+
+config ADK_TARGET_WITH_PCI
+	boolean
+
+config ADK_TARGET_WITH_SSB
+	boolean
+
+config ADK_TARGET_WITH_SDIO
+	boolean
+
+config ADK_TARGET_WITH_AHB
+	boolean
+
+config ADK_TARGET_WITH_MINIPCI
+	boolean
+
+config ADK_TARGET_WITH_ACPI
+	boolean
+
+config ADK_TARGET_WITH_VGA
+	boolean
+
+config ADK_TARGET_WITH_NAND
+	boolean
+
+config ADK_TARGET_WITH_MTD
+	boolean
+
+config ADK_TARGET_WITH_GEODE_CRYPTO
+	boolean
+
+config ADK_TARGET_WITH_HDD
+	boolean
+
+config ADK_TARGET_WITH_SATA
+	boolean
+
+config ADK_TARGET_WITH_INPUT
+	boolean
+
+config ADK_TARGET_WITH_SOUND
+	boolean
+
+config ADK_TARGET_WITH_TOUCHSCREEN
+	boolean
+
+config ADK_TARGET_WITH_LEDS
+	boolean
+
+config ADK_TARGET_WITH_PP
+	boolean
+
+config ADK_TARGET_WITH_CARDBUS
+	boolean
+
+config ADK_TARGET_WITH_PCMCIA
+	boolean
+
+config ADK_TARGET_WITH_RTC
+	boolean
+
+config ADK_TARGET_WITH_WATCHDOG
+	boolean
+
+config ADK_TARGET_WITH_DSL
+	boolean
+
+config ADK_TARGET_WITH_USB_BOOT
+	boolean
+
