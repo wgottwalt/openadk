@@ -1,8 +1,8 @@
-menu "Bluetooth"
-depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_MINIPCI
+menu "Bluetooth support and drivers"
+depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_SDIO
 
 config ADK_KPACKAGE_KMOD_BT
-	prompt "kmod-bt.................... Bluetooth drivers and network stack"
+	prompt "Bluetooth network stack"
 	tristate
 	default n
 	help
@@ -23,10 +23,10 @@ config ADK_KPACKAGE_KMOD_BT
 	     HIDP Module (Human Interface Device Protocol)
 
 config ADK_KERNEL_BT_L2CAP
-	prompt "........................... L2CAP protocol support"
+	prompt "L2CAP protocol support"
 	boolean
+	select ADK_KPACKAGE_KMOD_BT
 	default n
-	depends on ADK_KPACKAGE_KMOD_BT
 	help
 	  L2CAP (Logical Link Control and Adaptation Protocol) provides
 	  connection oriented and connection-less data transport.  L2CAP
@@ -34,65 +34,77 @@ config ADK_KERNEL_BT_L2CAP
 
 
 config ADK_KERNEL_BT_SCO
-	prompt "........................... SCO links support"
+	prompt "SCO link support"
 	boolean
+	select ADK_KPACKAGE_KMOD_BT
 	default n
-	depends on ADK_KPACKAGE_KMOD_BT
 	help
 	  SCO link provides voice transport over Bluetooth.  SCO support is
 	  required for voice applications like Headset and Audio.
 
 config ADK_KPACKAGE_KMOD_BT_RFCOMM
-	prompt "kmod-bt-rfcomm............. RFCOMM protocol support"
+	prompt "RFCOMM protocol support"
 	tristate
-	default n
-	depends on ADK_KPACKAGE_KMOD_BT
+	select ADK_KPACKAGE_KMOD_BT
 	depends on ADK_KPACKAGE_KMOD_BT_L2CAP
+	default n
 	help
 	  RFCOMM provides connection oriented stream transport.  RFCOMM
 	  support is required for Dialup Networking, OBEX and other Bluetooth
 	  applications.
 
 config ADK_KPACKAGE_KMOD_BT_BNEP
-	prompt "kmod-bt-bnep............... BNEP protocol support"
+	prompt "BNEP protocol support"
 	tristate
-	default n
-	depends on ADK_KPACKAGE_KMOD_BT
+	select ADK_KPACKAGE_KMOD_BT
 	depends on ADK_KPACKAGE_KMOD_BT_L2CAP
+	default n
 	help
 	  BNEP (Bluetooth Network Encapsulation Protocol) is Ethernet
 	  emulation layer on top of Bluetooth.  BNEP is required for
 	  Bluetooth PAN (Personal Area Network).
 
 config ADK_KPACKAGE_KMOD_BT_HIDP
-	prompt "kmod-bt-hidp............... HIDP protocol support"
+	prompt "HIDP protocol support"
 	tristate
-	default n
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_HID
-	depends on ADK_KPACKAGE_KMOD_BT
+	select ADK_KPACKAGE_KMOD_BT
 	depends on ADK_KPACKAGE_KMOD_BT_L2CAP
+	default n
 	help
 	  HIDP (Human Interface Device Protocol) is a transport layer
 	  for HID reports.  HIDP is required for the Bluetooth Human
 	  Interface Device Profile.
 
-config ADK_KPACKAGE_KMOD_BT_HCIBTUSB
-	prompt "kmod-bt-hcibtusb.......... HCI USB driver"
+config ADK_KPACKAGE_KMOD_BT_HCIBTSDIO
+	prompt "HCI SDIO driver"
 	tristate
+	select ADK_KPACKAGE_KMOD_BT
+	depends on ADK_TARGET_WITH_SDIO
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
-	depends on ADK_KPACKAGE_KMOD_BT
+	help
+	  Bluetooth HCI SDIO driver.
+	  This driver is required if you want to use Bluetooth devices with
+	  SDIO interface.
+
+config ADK_KPACKAGE_KMOD_BT_HCIBTUSB
+	prompt "HCI USB driver"
+	tristate
+	select ADK_KPACKAGE_KMOD_BT
 	depends on ADK_TARGET_WITH_USB
+	default n
 	help
 	  Bluetooth HCI USB driver.
 	  This driver is required if you want to use Bluetooth devices with
 	  USB interface.
 
 config ADK_KPACKAGE_KMOD_BT_HCIUART
-	prompt "kmod-bt-hciuart........... HCI UART driver"
+	prompt "HCI UART driver"
 	tristate
+	select ADK_KPACKAGE_KMOD_BT
 	default n
-	depends on ADK_KPACKAGE_KMOD_BT
 	help
 	  Bluetooth HCI UART driver.
 	  This driver is required if you want to use Bluetooth devices with
@@ -100,24 +112,45 @@ config ADK_KPACKAGE_KMOD_BT_HCIUART
 	  UART based Bluetooth PCMCIA and CF devices like Xircom Credit Card 
 	  adapter and BrainBoxes Bluetooth PC Card.
 
-config ADK_KPACKAGE_KMOD_BT_HCIBCM203X
-	prompt "kmod-bt-hcibcm203x........ HCI BCM203x USB driver"
+config ADK_KPACKAGE_KMOD_BT_MRVL
+	prompt "Marvell driver"
 	tristate
+	select ADK_KPACKAGE_KMOD_BT
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
+	help
+	  Bluetooth Marvell driver.
+
+config ADK_KPACKAGE_KMOD_BT_MRVL_SDIO
+	prompt "Marvell SDIO driver"
+	tristate
+	depends on ADK_KPACKAGE_KMOD_BT_MRVL
+	depends on ADK_KPACKAGE_KMOD_BT_HCIBTSDIO
+	depends on ADK_TARGET_WITH_SDIO
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default n
+	help
+	  Bluetooth Marvell driver.
+
+config ADK_KPACKAGE_KMOD_BT_HCIBCM203X
+	prompt "HCI BCM203x USB driver"
+	tristate
 	select ADK_KPACKAGE_KMOD_FW_LOADER
 	select ADK_KPACKAGE_KMOD_BT_HCIBTUSB
-	depends on ADK_KPACKAGE_KMOD_BT
+	select ADK_KPACKAGE_KMOD_BT
 	depends on ADK_TARGET_WITH_USB
+	default n
 	help
 	  Bluetooth HCI BCM203x USB driver.
 	  This driver provides the firmware loading mechanism for the Broadcom
 	  Blutonium based devices.
 
 config ADK_KPACKAGE_KMOD_BT_HCIBPA10X
-	prompt "kmod-bt-hci-bpa10x......... HCI BPA10x USB driver"
+	prompt "HCI BPA10x USB driver"
 	tristate
+	select ADK_KPACKAGE_KMOD_BT
+	select ADK_KPACKAGE_KMOD_BT_HCIBTUSB
 	default n
-	depends on ADK_KPACKAGE_KMOD_BT
 	help
 	  Bluetooth HCI BPA10x USB driver.
 	  This driver provides support for the Digianswer BPA 100/105 Bluetooth

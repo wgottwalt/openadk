@@ -6,9 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		bluez
 PKG_VERSION:=		5.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		981b34c2ae7e2ed2e25a167d8a902a25
+PKG_MD5SUM:=		5d37e581107b3d6f91b81194a5006407
 PKG_DESCR:=		bluetooth applications
-PKG_SECTION:=		misc	
+PKG_SECTION:=		wifi
 PKG_DEPENDS:=		kmod-bt glib dbus libreadline
 PKG_BUILDDEP:=		autotool glib dbus readline
 PKG_URL:=		http://www.bluez.org/

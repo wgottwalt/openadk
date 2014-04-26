@@ -35,11 +35,13 @@ config BUSYBOX_FEATURE_NAMEIF_EXTENDED
 	    new_interface_name  phy_address=2 00:80:C8:38:91:B5
 	    new_interface_name  mac=00:80:C8:38:91:B5
 	    new_interface_name  00:80:C8:38:91:B5
+
 config BUSYBOX_NBDCLIENT
 	bool "nbd-client"
 	default n
 	help
 	  Network block device client
+
 config BUSYBOX_NC
 	bool "nc"
 	default y
@@ -72,6 +74,7 @@ config BUSYBOX_NC_110_COMPAT
 	  The code is about 2.5k bigger. It enables
 	  -s ADDR, -n, -u, -v, -o FILE, -z options, but loses
 	  busybox-specific extensions: -f FILE and -ll.
+
 config BUSYBOX_PING
 	bool "ping"
 	default y
@@ -94,6 +97,7 @@ config BUSYBOX_FEATURE_FANCY_PING
 	help
 	  Make the output from the ping applet include statistics, and at the
 	  same time provide full support for ICMP packets.
+
 config BUSYBOX_WHOIS
 	bool "whois"
 	default y

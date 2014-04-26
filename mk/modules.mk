@@ -70,10 +70,18 @@ $(eval $(call KMOD_template,RFKILL,rfkill,\
 	$(MODULES_DIR)/kernel/net/rfkill/rfkill \
 ,10))
 
-$(eval $(call KMOD_template,MAC80211,mac80211,\
+$(eval $(call KMOD_template,CFG80211,cfg80211,\
 	$(MODULES_DIR)/kernel/net/wireless/cfg80211 \
+,14))
+
+$(eval $(call KMOD_template,MAC80211,mac80211,\
 	$(MODULES_DIR)/kernel/net/mac80211/mac80211 \
-,15, kmod-crypto-arc4 kmod-crypto-ecb))
+,15, kmod-cfg80211 kmod-crypto-arc4 kmod-crypto-ecb))
+
+$(eval $(call KMOD_template,BRCMFMAC,brcmfmac,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/brcm80211/brcmutil/brcmutil \
+	$(MODULES_DIR)/kernel/drivers/net/wireless/brcm80211/brcmfmac/brcmfmac \
+,20))
 
 $(eval $(call KMOD_template,ATH6KL,ath6kl,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath6kl/ath6kl_core \
@@ -1416,6 +1424,18 @@ $(eval $(call KMOD_template,BT_HCIBCM203X,bt-hcibcm203x,\
 $(eval $(call KMOD_template,BT_HCIBTUSB,bt-hcibtusb,\
 	$(MODULES_DIR)/kernel/drivers/bluetooth/btusb \
 ,76))
+
+$(eval $(call KMOD_template,BT_HCIBTSDIO,bt-hcibtsdio,\
+	$(MODULES_DIR)/kernel/drivers/bluetooth/btsdio \
+,76))
+
+$(eval $(call KMOD_template,BT_MRVL,bt-mrvl,\
+	$(MODULES_DIR)/kernel/drivers/bluetooth/btmrvl \
+,77))
+
+$(eval $(call KMOD_template,BT_MRVL_SDIO,bt-mrvl-sdio,\
+	$(MODULES_DIR)/kernel/drivers/bluetooth/btmrvl_sdio \
+,78))
 
 $(eval $(call KMOD_template,BT_HCIUART,bt-hciuart,\
 	$(MODULES_DIR)/kernel/drivers/bluetooth/hci_uart \

@@ -652,7 +652,8 @@ config BUSYBOX_READAHEAD
 
 config BUSYBOX_RFKILL
 	bool "rfkill"
-	default y  # doesn't build on Ubuntu 9.04
+	depends on !BUSYBOX_DISABLE_RFKILL
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Enable/disable wireless devices.
