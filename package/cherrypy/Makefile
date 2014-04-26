@@ -4,15 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		CherryPy
-PKG_VERSION:=		3.2.0rc1
+PKG_VERSION:=		3.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ee17494e8d4cb9089069f33c28161493
-PKG_DESCR:=		A Python Web Framework
+PKG_MD5SUM:=		4ac4af5ac21a893f07221cbd7ec4be11
+PKG_DESCR:=		python web framework
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		python2
 PKG_BUILDDEP:=		python2
 PKG_URL:=		http://www.cherrypy.org/
-PKG_SITES:=		http://download.cherrypy.org/cherrypy/3.2.0rc1/
+PKG_SITES:=		https://pypi.python.org/packages/source/C/CherryPy/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		12a3c829301a4fd6586a57d3fcf196dc
 PKG_DESCR:=		macro processor
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		m4-host
+PKG_BUILDDEP:=		xz-host m4-host
 PKG_URL:=		http://www.gnu.org/software/m4/
 PKG_SITES:=		${MASTER_SITE_GNU:=m4/}
 

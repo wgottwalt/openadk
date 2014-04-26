@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.tcsh.org/Welcome
 PKG_SITES:=		ftp://ftp.astron.com/pub/tcsh/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TCSH,tcsh,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
