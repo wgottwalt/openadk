@@ -7,3 +7,14 @@ config ADK_KERNEL_IMX_SDMA
 	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	depends on ADK_TARGET_SYSTEM_CUBOX_I
 	default n
+
+config ADK_KERNEL_CMA
+	boolean
+
+config ADK_KERNEL_CMA_SIZE_MBYTES
+	int
+	default 256
+
+config ADK_KERNEL_DMA_CMA
+	select ADK_KERNEL_CMA
+	boolean

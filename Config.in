@@ -113,23 +113,28 @@ config ADK_KERNEL_VERSION_3_14_1
 
 config ADK_KERNEL_VERSION_3_13_11
 	prompt "3.13.11"
+	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
 
 config ADK_KERNEL_VERSION_3_12_18
 	prompt "3.12.18"
+	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
 
 config ADK_KERNEL_VERSION_3_11_10
 	prompt "3.11.10"
+	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
 
 config ADK_KERNEL_VERSION_3_10_37
 	prompt "3.10.37"
+	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
 
 config ADK_KERNEL_VERSION_3_4_87
 	prompt "3.4.87"
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
 
 endchoice

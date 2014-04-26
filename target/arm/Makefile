@@ -33,12 +33,8 @@ endif
 
 dtb-install:
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
-		-j${ADK_MAKE_JOBS} imx6q-cubox-i.dtb $(MAKE_TRACE)
-	$(CP) $(LINUX_DIR)/arch/arm/boot/dts/imx6q-cubox-i.dtb \
-		$(FW_DIR)
-	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
-		-j${ADK_MAKE_JOBS} imx6dl-cubox-i.dtb $(MAKE_TRACE)
-	$(CP) $(LINUX_DIR)/arch/arm/boot/dts/imx6dl-cubox-i.dtb \
+		-j${ADK_MAKE_JOBS} imx6q-cubox-i.dtb imx6dl-cubox-i.dtb $(MAKE_TRACE)
+	$(CP) $(LINUX_DIR)/arch/arm/boot/dts/imx6*-cubox-i.dtb \
 		$(FW_DIR)
 
 kernel-install:
