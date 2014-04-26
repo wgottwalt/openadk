@@ -75,6 +75,11 @@ $(eval $(call KMOD_template,MAC80211,mac80211,\
 	$(MODULES_DIR)/kernel/net/mac80211/mac80211 \
 ,15, kmod-crypto-arc4 kmod-crypto-ecb))
 
+$(eval $(call KMOD_template,ATH6KL,ath6kl,\
+	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath6kl/ath6kl_core \
+	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath6kl/ath6kl_sdio \
+,20))
+
 $(eval $(call KMOD_template,ATH5K,ath5k,\
 	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath \
 	$(MODULES_DIR)/kernel/drivers/net/wireless/ath/ath5k/ath5k \

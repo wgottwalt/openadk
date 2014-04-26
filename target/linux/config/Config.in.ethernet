@@ -4,6 +4,7 @@ comment "network driver for target system is included into kernel"
 config ADK_KERNEL_NET_ETHERNET
 	boolean
 
+# vendor stuff
 config ADK_KERNEL_NET_VENDOR_NATSEMI
 	boolean
 
@@ -32,9 +33,6 @@ config ADK_KERNEL_NETDEV_1000
 	boolean
 
 config ADK_KERNEL_VIA_RHINE_MMIO
-	boolean
-
-config ADK_KERNEL_ATH_CARDS
 	boolean
 
 config ADK_KERNEL_USB_NET_SMSC95XX

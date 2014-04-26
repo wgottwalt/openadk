@@ -29,6 +29,13 @@ config ADK_KPACKAGE_KMOD_RT2X00_LIB_USB
 config ADK_KPACKAGE_KMOD_RT2X00_LIB_PCI
 	tristate
 
+# vendor stuff
+config ADK_KERNEL_NET_VENDOR_ATHEROS
+	boolean
+
+config ADK_KERNEL_ATH_CARDS
+	boolean
+
 config ADK_KERNEL_RTL_CARDS
 	boolean
 
@@ -96,8 +103,23 @@ config ADK_DEBUG_MAC80211
 menu "Wireless network card support"
 depends on ADK_TARGET_WITH_CARDBUS || ADK_TARGET_WITH_PCMCIA || ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_AHB || ADK_TARGET_WITH_SDIO
 
+config ADK_KERNEL_ATH6KL_SDIO
+	boolean
+
+config ADK_KPACKAGE_KMOD_ATH6KL
+	prompt "Atheros 6kl wireless driver"
+	tristate
+	select ADK_KERNEL_NET_VENDOR_ATHEROS
+	select ADK_KERNEL_ATH_CARDS
+	select ADK_KERNEL_ATH6KL_SDIO
+	select ADK_KPACKAGE_KMOD_MAC80211
+	depends on ADK_TARGET_WITH_SDIO
+	default n
+	help
+	  Driver for Atheros wireless 6KL.
+
 config ADK_KPACKAGE_KMOD_ATH5K
-	prompt "kmod-ath5k................... Atheros 5xxx wireless cards"
+	prompt "Atheros 5xxx wireless driver"
 	tristate
 	select ADK_KERNEL_MAC80211_LEDS
 	select ADK_KERNEL_ATH_CARDS
@@ -129,7 +151,7 @@ config ADK_KERNEL_ATH5K_DEBUG
 	   insmod ath5k.ko debug=0x00000400
 
 config ADK_KPACKAGE_KMOD_B43
-	prompt "kmod-b43..................... Broadcom B43xx wireless cards"
+	prompt "Broadcom B43xx wireless driver"
 	tristate
 	select ADK_PACKAGE_B43_FIRMWARE
 	select ADK_KPACKAGE_KMOD_FW_LOADER
@@ -140,7 +162,7 @@ config ADK_KPACKAGE_KMOD_B43
 	  Driver for Broadcom B43xx wireless chips.
 
 config ADK_KPACKAGE_KMOD_B43LEGACY
-	prompt "kmod-b43legacy............... Broadcom B43xx (legacy) wireless cards"
+	prompt "Broadcom B43xx (legacy) wireless driver" 
 	tristate
 	select ADK_PACKAGE_B43_FIRMWARE
 	select ADK_KPACKAGE_KMOD_FW_LOADER
@@ -151,7 +173,7 @@ config ADK_KPACKAGE_KMOD_B43LEGACY
 	  Driver for Broadcom B43xx wireless chips.
 
 config ADK_KPACKAGE_KMOD_HOSTAP
-	prompt "kmod-hostap.................. HostAP driver"
+	prompt "HostAP driver"
 	tristate
 	select ADK_KPACKAGE_KMOD_MAC80211
 	default n
@@ -160,7 +182,7 @@ config ADK_KPACKAGE_KMOD_HOSTAP
 	  HostAP Driver for wireless chips.
 
 config ADK_KPACKAGE_KMOD_HOSTAP_CS
-	prompt "kmod-hostap-cs................ HostAP driver for PC Cards"
+	prompt "HostAP driver for PC Cards"
 	tristate
 	select ADK_KPACKAGE_KMOD_HOSTAP
 	depends on ADK_TARGET_WITH_PCMCIA
@@ -170,7 +192,7 @@ config ADK_KPACKAGE_KMOD_HOSTAP_CS
 	  HostAP CS Driver for wireless chips.
 
 config ADK_KPACKAGE_KMOD_RTL8187
-	prompt "kmod-rtl8187................. Realtek RTL8187/RTL8187B wireless cards"
+	prompt "Realtek RTL8187/RTL8187B wireless driver"
 	tristate
 	depends on ADK_TARGET_WITH_USB
 	select ADK_KPACKAGE_KMOD_MAC80211
@@ -180,7 +202,7 @@ config ADK_KPACKAGE_KMOD_RTL8187
 	  Driver for Realtek RTL8187/RTL8187B wireless chips.
 
 config ADK_KPACKAGE_KMOD_P54_USB
-	prompt "kmod-p54-usb................. Prism54 USB support"
+	prompt "Prism54 USB support"
 	tristate
 	select ADK_KPACKAGE_KMOD_P54_COMMON
 	select ADK_KPACKAGE_KMOD_FW_LOADER
@@ -194,7 +216,7 @@ config ADK_KPACKAGE_KMOD_P54_USB
 	  Driver for Prism54 USB adaptors.
 
 config ADK_KPACKAGE_KMOD_RT2800USB
-	prompt "kmod-rt2800-usb.............. Ralink rt2800 USB"
+	prompt "Ralink rt2800 USB driver"
 	tristate
 	select ADK_KERNEL_RT2X00
 	select ADK_KERNEL_RT2800USB_RT3573
@@ -210,7 +232,7 @@ config ADK_KPACKAGE_KMOD_RT2800USB
 	  Driver for Ralink RT2800 USB.
 
 config ADK_KPACKAGE_KMOD_RTL8192CU
-	prompt "kmod-rtl8192cu............... Realtek RTL8192CU USB"
+	prompt "Realtek RTL8192CU USB driver"
 	tristate
 	select ADK_KERNEL_RTL_CARDS
 	select ADK_KPACKAGE_KMOD_MAC80211
@@ -222,7 +244,7 @@ config ADK_KPACKAGE_KMOD_RTL8192CU
 	  Driver for Realtek RTL8192CU USB
 
 config ADK_KPACKAGE_KMOD_RT2400PCI
-	prompt "kmod-rt2400pci............... Ralink rt2400"
+	prompt "Ralink rt2400 PCI driver"
 	tristate
 	select ADK_KERNEL_RT2X00
 	select ADK_KPACKAGE_KMOD_RT2X00_LIB_PCI
@@ -235,7 +257,7 @@ config ADK_KPACKAGE_KMOD_RT2400PCI
 	  Supported chips: RT2460.
 
 config ADK_KPACKAGE_KMOD_RT2500PCI
-	prompt "kmod-rt2500pci............... Ralink rt2500"
+	prompt "Ralink rt2500 PCI driver"
 	tristate
 	select ADK_KERNEL_RT2X00
 	select ADK_KPACKAGE_KMOD_RT2X00_LIB_PCI
@@ -248,7 +270,7 @@ config ADK_KPACKAGE_KMOD_RT2500PCI
 	  Supported chips: RT2560.
 
 config ADK_KPACKAGE_KMOD_RT61PCI
-	prompt "kmod-rt61pci................. Ralink rt2501/rt61"
+	prompt "Ralink rt2501/rt61 PCI driver"
 	tristate
 	select ADK_KERNEL_RT2X00
 	select ADK_KPACKAGE_KMOD_RT2X00_LIB_PCI
