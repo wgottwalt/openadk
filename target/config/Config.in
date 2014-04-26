@@ -365,21 +365,6 @@ endchoice
 
 endmenu
 
-choice
-prompt "Use ARM thumb mode"
-depends on ADK_CPU_CORTEX_A9
-
-config ADK_LINUX_ARM_WITHOUT_THUMB
-	boolean "disabled"
-	select ADK_mode_arm
-
-config ADK_LINUX_ARM_WITH_THUMB
-	boolean "enabled"
-	select ADK_mode_thumb
-	select ADK_KERNEL_THUMB2_KERNEL
-
-endchoice
-
 # hardware features, do not use for qemu
 config ADK_TARGET_WITH_USB
 	boolean
