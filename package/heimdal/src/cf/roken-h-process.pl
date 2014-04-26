@@ -145,6 +145,9 @@ sub parse_if
     if (m/^\s*$/) {
 	print "end $_\n" if ($debug);
 	return 1;
+    } elsif (m/^\(([^&]+)\&\&(.*)$/) {
+        print "$1 and $2\n" if ($debug);
+        return parse_if($1) and parse_if($2);
     } elsif (m/^([^&]+)\&\&(.*)$/) {
 	print "$1 and $2\n" if ($debug);
 	return parse_if($1) and parse_if($2);

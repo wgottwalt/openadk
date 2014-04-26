@@ -4,23 +4,24 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		heimdal
-PKG_VERSION:=		1.5.2
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		bb23d9dbdafd395d816f7abc598481a1
-PKG_DESCR:=		Kerberos 5 server
+PKG_VERSION:=		1.5.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		30b379e3de12f332fbd201131f02ffca
+PKG_DESCR:=		kerberos 5 server
 PKG_SECTION:=		crypto
-PKG_BUILDDEP:=		openssl ncurses e2fsprogs readline bison-host
+PKG_BUILDDEP:=		autotool openssl ncurses e2fsprogs readline heimdal-host
 PKG_DEPENDS:=		libheimdal libncurses libcom-err libreadline libopenssl
+HOST_BUILDDEP:=		bison-host
 PKG_URL:=		http://www.h5l.org/
 PKG_SITES:=		http://www.h5l.org/dist/src/
 PKG_NOPARALLEL:=	1
 PKG_LIBNAME:=		libheimdal
 PKG_OPTS:=		dev
 
-PKG_HOST_DEPENDS:=	!darwin
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		HEIMDAL_SERVER LIBHEIMDAL
-PKGSD_LIBHEIMDAL:=	Kerberos 5 libraries
+PKGSD_LIBHEIMDAL:=	kerberos 5 libraries
 PKGSC_LIBHEIMDAL:=	libs
 
 PKG_FLAVOURS_HEIMDAL_SERVER:=	WITH_PKINIT
@@ -38,12 +39,14 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix
 endif
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,HEIMDAL,heimdal,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBHEIMDAL,libheimdal,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBHEIMDAL},${PKGSC_LIBHEIMDAL},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+AUTOTOOL_STYLE:=	autoreconf
 TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_OPTS:=	--with-hdbdir=/etc/heimdal \
 			--disable-otp \
@@ -82,34 +85,18 @@ endif
 
 TARGET_CFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/et -pthread
 
-CONFIGURE_ARGS+=	${CONFIGURE_OPTS} --with-cross-tools=${STAGING_HOST_DIR}/bin
+CONFIGURE_ARGS+=	${CONFIGURE_OPTS} --with-cross-tools=${STAGING_HOST_DIR}/usr/bin
 CONFIGURE_ENV+=		ac_cv_func_getaddrinfo_numserv=yes
 
-post-extract:
-	(cd $(WRKBUILD);patch -p1 < $(TOPDIR)/package/heimdal/files/patch-lib_asn1_Makefile.in)
-	(cd ${WRKBUILD}; rm -rf config.{cache,status} ; \
-		./configure --prefix=$(STAGING_HOST_DIR) \
-			--disable-pk-init \
+HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--disable-pk-init \
 			--without-openldap \
+			--disable-kcm \
+			--disable-kx509 \
+			--disable-ndbm-db \
+			--without-berkeley-db \
 			--disable-sqlite-cache \
-			--disable-otp \
-	);
-	${MAKE} -C ${WRKBUILD}/include
-	${MAKE} -C ${WRKBUILD}/lib/roken
-	${MAKE} -C ${WRKBUILD}/lib/vers
-	${MAKE} -C ${WRKBUILD}/lib/libedit
-	${MAKE} -C ${WRKBUILD}/lib/com_err compile_et$(EXEEXT) LDFLAGS="-all-static"
-	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT) LDFLAGS="-all-static"
-	${MAKE} -C ${WRKBUILD}/lib/sl slc$(EXEEXT) LDFLAGS="-all-static"
-	${MAKE} -C ${WRKBUILD}/lib/roken install LDFLAGS="-all-static"
-	${MAKE} -C ${WRKBUILD}/lib/asn1 install LDFLAGS="-all-static"
-	${MAKE} -C ${WRKBUILD}/lib/sl install LDFLAGS="-all-static"
-	$(CP) $(STAGING_HOST_DIR)/libexec/heimdal/{slc,asn1_compile} \
-		$(STAGING_HOST_DIR)/bin
-	${MAKE} -C ${WRKBUILD}/lib/sl clean
-	${MAKE} -C ${WRKBUILD}/lib/asn1 clean
-	${MAKE} -C ${WRKBUILD}/lib/roken clean
-	${MAKE} -C ${WRKBUILD} clean
+			--disable-otp
 
 heimdal-server-install:
 ifeq (${ADK_COMPILE_HEIMDAL_WITH_DB_LDAP},y)
@@ -171,4 +158,5 @@ endif
 	${CP} ${WRKINST}/usr/lib/heimdal/libkadm5clnt.so* \
 		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
