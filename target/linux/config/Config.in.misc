@@ -1,17 +1,14 @@
 # for DMA driver required
 config ADK_KERNEL_FW_LOADER
 	boolean
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 
 config ADK_KERNEL_FIRMWARE_IN_KERNEL
 	boolean 
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 
 config ADK_KERNEL_FW_LOADER_USER_HELPER
 	boolean
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 
 config ADK_KPACKAGE_KMOD_DMA_BCM2708
