@@ -13,6 +13,8 @@ PKG_DEPENDS:=		mkfontscale
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		noscripts
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MKFONTDIR,mkfontdir,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

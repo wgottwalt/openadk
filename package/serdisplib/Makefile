@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libgd libusb-compat
 PKG_URL:=		http://serdisplib.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=serdisplib/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SERDISPLIB,serdisplib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

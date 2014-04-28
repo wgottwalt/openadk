@@ -14,6 +14,8 @@ PKG_URL:=		http://www.maradns.org
 PKG_SITES:=		http://www.maradns.org/download/1.4/${PKG_VERSION}/
 PKG_NOPARALLEL:=	1
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MARADNS,maradns,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

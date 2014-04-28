@@ -7,9 +7,11 @@ PKG_NAME:=		shat
 PKG_VERSION:=		0.9.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		da06846f35838b14d1513523dad84d24
-PKG_DESCR:=		a tool for nomadic routing
+PKG_DESCR:=		tool for nomadic routing
 PKG_SECTION:=		net/misc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=shat/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
 

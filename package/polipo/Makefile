@@ -12,6 +12,8 @@ PKG_SECTION:=		proxy
 PKG_URL:=		http://www.pps.univ-paris-diderot.fr/~jch/software/polipo/
 PKG_SITES:=		http://freehaven.net/~chrisd/polipo/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,POLIPO,polipo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

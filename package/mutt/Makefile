@@ -15,6 +15,8 @@ PKG_URL:=		http://www.mutt.org/
 PKG_SITES:=		ftp://ftp.mutt.org/mutt/devel/ \
 			http://ftp.hi.is/pub/mutt/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MUTT,mutt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

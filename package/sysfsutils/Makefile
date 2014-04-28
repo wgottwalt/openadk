@@ -13,6 +13,8 @@ PKG_URL:=		http://linux-diag.sourceforge.net/Sysfsutils.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-diag/sysfsutils/2.1.0/}
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SYSFSUTILS,sysfsutils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

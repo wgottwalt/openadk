@@ -7,10 +7,12 @@ PKG_NAME:=		htpdate
 PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		40f193e3d7220265f6e6f8d4d7f887da
-PKG_DESCR:=		an HTP (Hypertext Time Protocol) implementation
+PKG_DESCR:=		HTP (Hypertext Time Protocol) implementation
 PKG_SECTION:=		ntp
 PKG_URL:=		http://www.vervest.org/htp/
 PKG_SITES:=		http://www.vervest.org/htp/archive/c/
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 

@@ -7,7 +7,7 @@ PKG_NAME:=		SDL_ttf
 PKG_VERSION:=		2.0.10
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		814e6e17e8879254208d23b3b7e0354b
-PKG_DESCR:=		TrueType fonts in your SDL applications
+PKG_DESCR:=		truetype fonts for SDL applications
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libsdl libfreetype
 PKG_BUILDDEP:=		sdl freetype gettext-tiny
@@ -15,6 +15,8 @@ PKG_URL:=		http://www.libsdl.org/projects/SDL_ttf/
 PKG_SITES:=		http://www.libsdl.org/projects/SDL_ttf/release/
 PKG_LIBNAME:=		libsdl-ttf
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

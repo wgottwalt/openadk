@@ -12,6 +12,8 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/diffutils/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DIFFUTILS,diffutils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		readline ncurses
 PKG_URL:=		http://freshmeat.net/projects/atftp/
 PKG_SITES:=		ftp://ftp.mamalinux.com/pub/atftp/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_SUBPKGS:=		ATFTP ATFTPD

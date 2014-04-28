@@ -7,13 +7,15 @@ PKG_NAME:=		taglib
 PKG_VERSION:=		1.9.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		0d35df96822bbd564c5504cb3c2e4d86
-PKG_DESCR:=		Audio Meta-Data library
+PKG_DESCR:=		audio meta-data library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		cmake-host zlib
 PKG_URL:=		http://taglib.github.com/
 PKG_SITES:=		http://taglib.github.io/releases/
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 
@@ -26,9 +28,6 @@ do-configure:
 		cmake -DZLIB_ROOT=$(STAGING_TARGET_DIR)/usr \
 			-DCMAKE_INSTALL_PREFIX:PATH=/usr \
 			-DCMAKE_SYSTEM_NAME=Linux .)
-
-pre-install:
-	$(INSTALL_DATA) ./files/taglib.pc $(WRKBUILD)/
 
 taglib-install:
 	$(INSTALL_DIR) $(IDIR_TAGLIB)/usr/lib

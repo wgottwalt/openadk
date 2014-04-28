@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libstdcxx
 PKG_URL:=		http://github.com/downloads/tias/xinput_calibrator/
 PKG_SITES:=		http://openadk.org/distfiles/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XINPUT_CALIBRATOR,xinput-calibrator,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

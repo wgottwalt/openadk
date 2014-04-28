@@ -23,7 +23,6 @@ AUTOTOOL_STYLE:=	autoreconf
 ifeq ($(ADK_STATIC),y)
 XAKE_FLAGS+=		CCLD="$(TARGET_CC) -all-static -pthread"
 endif
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_LDFLAGS+=	-lncurses
 CONFIGURE_ENV+=		ac_cv_prog_cc_pie=no
 CONFIGURE_ARGS+=	--enable-tools \
