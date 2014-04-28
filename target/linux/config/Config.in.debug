@@ -48,14 +48,14 @@ config ADK_KERNEL_PRINTK_TIME
 	  bootup performance.
 
 config ADK_KERNEL_BUG
-	prompt "Enable BUGS() in the kernel"
+	prompt "Enable BUGS()"
 	boolean
 	default n
 	help
 	  Enable if you need BUGS() in the kernel.
 
 config ADK_KERNEL_NETCONSOLE
-	prompt "Netconsole"
+	prompt "Netconsole support"
 	boolean
 	default n
 	help
@@ -116,7 +116,7 @@ config ADK_KERNEL_DEBUG_WITH_KGDB
 	default n
 
 config ADK_KPACKAGE_KMOD_OPROFILE
-	prompt "kernel support for oprofile"
+	prompt "Oprofile support"
 	tristate
 	select ADK_KERNEL_PROFILING
 	depends on !ADK_LINUX_M68K
@@ -125,7 +125,7 @@ config ADK_KPACKAGE_KMOD_OPROFILE
 	 use oprofile package to make use of the kernel support.
 
 config ADK_KERNEL_KALLSYMS
-	prompt "kernel support for symbol names in oops"
+	prompt "Support for symbol names in OOPS"
 	boolean
 	default n
 	help

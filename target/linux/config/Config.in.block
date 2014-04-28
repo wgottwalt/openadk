@@ -280,7 +280,7 @@ config ADK_KERNEL_SATA_AHCI
 menu "Block devices support"
 
 config ADK_KPACKAGE_KMOD_SATA_AHCI
-	prompt "kmod-sata-ahci.................... AHCI SATA driver"
+	prompt "AHCI SATA driver"
 	tristate
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV_SD
@@ -291,7 +291,7 @@ config ADK_KPACKAGE_KMOD_SATA_AHCI
 	  Enables support for AHCI Serial ATA.
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_LOOP
-	prompt "kmod-blk-dev-loop................. Loop mount support"
+	prompt "Loop mount support"
 	tristate
 	select ADK_KERNEL_BLK_DEV
 	default n
@@ -332,7 +332,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_LOOP
 	  device used for network connections from the machine to itself.
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_NBD
-	prompt "kmod-blk-dev-nbd.................. Network Block Device"
+	prompt "Network Block Device support"
 	tristate
 	default n
 	help
@@ -355,7 +355,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_NBD
 	  or Coda; you can say N here even if you intend to use NFS or Coda.
 
 config ADK_KPACKAGE_KMOD_SCSI
-	prompt "kmod-scsi......................... SCSI support"
+	prompt "SCSI support"
 	select ADK_KERNEL_LBD
 	select ADK_KERNEL_LSF
 	select ADK_KERNEL_IOSCHED_AS
@@ -374,7 +374,7 @@ config ADK_KPACKAGE_KMOD_SCSI
 	  Channel, FireWire storage and the IDE-SCSI emulation driver.
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_SD
-	prompt "kmod-scsi-disk.................... SCSI disk support"
+	prompt "SCSI disk support"
 	select ADK_KPACKAGE_KMOD_SCSI if !ADK_KERNEL_SCSI
 	depends on !ADK_KERNEL_BLK_DEV_SD
 	tristate
@@ -387,7 +387,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_SD
 	  CD-ROMs.
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_SR
-	prompt "kmod-scsi-cdrom................... SCSI CDROM support"
+	prompt "SCSI CDROM support"
 	depends on !ADK_KERNEL_SCSI
 	depends on !ADK_KERNEL_BLK_DEV_SR
 	depends on ADK_KPACKAGE_KMOD_SCSI
@@ -399,51 +399,48 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_SR
 	  Y or M to "ISO 9660 CD-ROM file system support" later.
 
 config ADK_KERNEL_BLK_DEV_MD
-	prompt "md support........................ RAID support (kernel)"
-	tristate
+	boolean
 	select ADK_KERNEL_MD
 	default n
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_MD
-	prompt "kmod-blk-dev-md................... RAID support (module)"
+	prompt "RAID support"
 	tristate
 	depends on !ADK_KERNEL_BLK_DEV_MD
 	select ADK_KERNEL_MD
 	help
 
 config ADK_KERNEL_MD_RAID0
-	prompt "raid0 support....................  RAID0 support (kernel)"
-	tristate
+	boolean
 	depends on ADK_KERNEL_BLK_DEV_MD
 	help
 
 config ADK_KPACKAGE_KMOD_MD_RAID0
-	prompt "kmod-md-raid0..................... RAID0 support (module)"
+	prompt "RAID0 support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	depends on !ADK_KERNEL_MD_RAID0
 	help
 
 config ADK_KERNEL_MD_RAID1
-	prompt "raid1 support....................  RAID1 support (kernel)"
-	tristate
+	boolean
 	depends on ADK_KERNEL_BLK_DEV_MD
 	help
 
 config ADK_KPACKAGE_KMOD_MD_RAID1
-	prompt "kmod-md-raid1..................... RAID1 support (module)"
+	prompt "RAID1 support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	help
 
 config ADK_KPACKAGE_KMOD_MD_RAID456
-	prompt "kmod-md-raid456................... RAID456 support"
+	prompt "RAID456 support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_BLK_DEV_MD
 	help
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_DM
-	prompt "kmod-blk-dev-dm................... Device Mapper support"
+	prompt "Device Mapper support"
 	select ADK_KERNEL_MD
 	depends on !ADK_KERNEL_BLK_DEV_DM
 	tristate
@@ -456,7 +453,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	  Higher level volume managers such as LVM2 use this driver.
 
 config ADK_KPACKAGE_KMOD_DM_CRYPT
-	prompt "kmod-dm-crypt..................... Crypt target support"
+	prompt "Crypt target support"
 	depends on !ADK_KERNEL_DM_CRYPT
 	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	select ADK_KERNEL_MD
@@ -474,14 +471,14 @@ config ADK_KPACKAGE_KMOD_DM_CRYPT
 	  <http://www.saout.de/misc/dm-crypt/>
 
 config ADK_KPACKAGE_KMOD_DM_SNAPSHOT
-	prompt "kmod-dm-snapshot.................. Snapshot target"
+	prompt "Devicemapper Snapshot target"
 	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	tristate
 	help
          Allow volume managers to take writable snapshots of a device.
 
 config ADK_KPACKAGE_KMOD_DM_MIRROR
-	prompt "kmod-dm-mirror.................... Mirror target"
+	prompt "Devicemapper Mirror target"
 	depends on ADK_KPACKAGE_KMOD_BLK_DEV_DM
 	tristate
 	help
@@ -489,7 +486,7 @@ config ADK_KPACKAGE_KMOD_DM_MIRROR
          needed for live data migration tools such as 'pvmove'.
 
 config ADK_KPACKAGE_KMOD_BLK_DEV_DRBD
-	prompt "kmod-blk-dev-drbd................. DRBD support (Network RAID 1)"
+	prompt "DRBD support (Network RAID 1)"
 	tristate
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_CONNECTOR
@@ -497,7 +494,7 @@ config ADK_KPACKAGE_KMOD_BLK_DEV_DRBD
           DRBD - http://www.drbd.org
           
 config ADK_KERNEL_SWAP
-	prompt "swap.............................. SWAP support"
+	prompt "SWAP support"
 	boolean
 	help
 	  Kernel swap support.

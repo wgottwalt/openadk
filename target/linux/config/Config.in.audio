@@ -46,7 +46,7 @@ config ADK_KPACKAGE_KMOD_SND
 	default n
 
 config ADK_KPACKAGE_KMOD_SND_INTEL8X0
-	prompt "kmod-snd-intel8x0............. Intel AC97 driver"
+	prompt "Intel AC97 driver"
 	tristate
 	select ADK_KERNEL_SND_PCI
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
@@ -58,7 +58,7 @@ config ADK_KPACKAGE_KMOD_SND_INTEL8X0
 	  Driver for intel chipsets.	
 
 config ADK_KPACKAGE_KMOD_SND_VIA82XX
-	prompt "kmod-snd-via82xx.............. ALSA VIA82XX driver"
+	prompt "VIA82XX driver"
 	tristate
 	select ADK_KPACKAGE_KMOD_SND
 	default n
@@ -67,7 +67,7 @@ config ADK_KPACKAGE_KMOD_SND_VIA82XX
 	 ALSA VIA82XX driver
 
 config ADK_KPACKAGE_KMOD_SND_ENS1370
-	prompt "kmod-snd-ens1370.............. ALSA Ensoniq 1370 driver"
+	prompt "Ensoniq 1370 driver"
 	tristate
 	select ADK_KPACKAGE_KMOD_SND
 	default n
@@ -76,7 +76,7 @@ config ADK_KPACKAGE_KMOD_SND_ENS1370
 	 ALSA Ensonique 1370 driver
 
 config ADK_KPACKAGE_KMOD_SND_CS5535AUDIO
-	prompt "kmod-snd-cs5535audio.......... ALSA AMD CS5535 driver"
+	prompt "AMD CS5535 driver"
 	tristate
 	select ADK_KERNEL_SND_PCI
 	select ADK_KPACKAGE_KMOD_SND_AC97_CODEC
@@ -97,7 +97,7 @@ config ADK_KERNEL_SND_PXA2XX_SOC
 	default n
 
 config ADK_KPACKAGE_KMOD_SND_PXA2XX_SOC_SPITZ
-	prompt "kmod-snd-pxa2xx-soc-spitz..... ALSA SOC Sharp Zaurus"
+	prompt "Sharp Zaurus SoC"
 	tristate
 	select ADK_KERNEL_SND_ARM
 	select ADK_KERNEL_SND_PXA2XX_AC97
@@ -110,7 +110,7 @@ config ADK_KPACKAGE_KMOD_SND_PXA2XX_SOC_SPITZ
 	default n
 
 config ADK_KPACKAGE_KMOD_SND_BCM2835
-	prompt "kmod-snd-bcm2835............... ALSA SOC Raspberry PI"
+	prompt "Raspberry PI SoC"
 	tristate
 	select ADK_KPACKAGE_KMOD_SND
 	select ADK_KERNEL_SND_ARM
@@ -119,7 +119,7 @@ config ADK_KPACKAGE_KMOD_SND_BCM2835
 	default n
 
 config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_I2S
-	prompt "kmod-snd-bcm2708-soc-i2s...... ALSA SOC I2S Raspberry PI"
+	prompt "Raspberry PI I2S driver"
 	tristate
 	select ADK_KPACKAGE_KMOD_SND
 	select ADK_KERNEL_SND_ARM
@@ -130,7 +130,7 @@ config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_I2S
 	default n
 
 config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_HIFIBERRY_DAC
-	prompt "kmod-snd-bcm2708-hifiberry-dac.... ALSA for Raspberry PI with hifiberry DAC"
+	prompt "Raspberry PI hifiberry DAC"
 	tristate
 	select ADK_KPACKAGE_KMOD_DMA_BCM2708
 	select ADK_KPACKAGE_KMOD_REGMAP_MMIO
@@ -139,7 +139,7 @@ config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_HIFIBERRY_DAC
 	default n
 
 config ADK_KPACKAGE_KMOD_SND_BCM2708_SOC_HIFIBERRY_DIGI
-	prompt "kmod-snd-bcm2708-hifiberry-digi... ALSA for Raspberry PI with hifiberry DIGI"
+	prompt "Raspberry PI hifiberry DIGI"
 	tristate
 	select ADK_KPACKAGE_KMOD_DMA_BCM2708
 	select ADK_KPACKAGE_KMOD_REGMAP_MMIO
