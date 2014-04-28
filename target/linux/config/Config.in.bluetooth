@@ -116,6 +116,7 @@ config ADK_KPACKAGE_KMOD_BT_MRVL
 	prompt "Marvell driver"
 	tristate
 	select ADK_KPACKAGE_KMOD_BT
+	select ADK_PACKAGE_BRCM_BLUETOOTH
 	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 	help
