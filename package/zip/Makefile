@@ -23,16 +23,14 @@ $(eval $(call HOST_template,ZIP,zip,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,ZIP,zip,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		manual
-CONFIG_STYLE:=		minimal
+CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+TARGET_CPPFLAGS+=	-DNO_BZIP2_SUPPORT
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_PROG:=	unix/configure
 MAKE_FILE:=		unix/Makefile
 ALL_TARGET:=		generic_gcc
-
-host-configure:
-	(cd $(WRKBUILD) && $(BASH) $(CONFIGURE_PROG))
 
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
