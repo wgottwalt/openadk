@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		i2c-tools
-PKG_VERSION:=		3.0.2
+PKG_VERSION:=		3.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b546345ac19db56719dea6b8199f11e0
-PKG_DESCR:=		I2C tools for Linux
+PKG_MD5SUM:=		0fdbff53ebd0b8d9249256d6c56480b1
+PKG_DESCR:=		I2C tools
 PKG_SECTION:=		misc
 PKG_URL:=		http://www.lm-sensors.org/wiki/I2CTools
 PKG_SITES:=		http://dl.lm-sensors.org/i2c-tools/releases/

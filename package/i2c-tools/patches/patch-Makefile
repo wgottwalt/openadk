@@ -1,24 +1,11 @@
---- i2c-tools-3.0.2.orig/Makefile	2007-11-01 18:54:57.000000000 +0100
-+++ i2c-tools-3.0.2/Makefile	2010-07-13 21:44:41.807074577 +0200
-@@ -4,8 +4,8 @@
- #
- # Licensed under the GNU General Public License.
+--- i2c-tools-3.1.1.orig/Makefile	2014-02-19 15:02:21.606454000 +0100
++++ i2c-tools-3.1.1/Makefile	2014-04-28 15:01:09.301182922 +0200
+@@ -8,7 +8,7 @@
+ # (at your option) any later version.
  
--DESTDIR	=
+ DESTDIR	=
 -prefix	= /usr/local
-+DESTDIR	?=
 +prefix	= /usr
  bindir	= $(prefix)/bin
  sbindir	= $(prefix)/sbin
  mandir	= $(prefix)/share/man
-@@ -18,8 +18,8 @@ INSTALL_DIR	:= $(INSTALL) -m 755 -d
- INSTALL_PROGRAM	:= $(INSTALL) -m 755
- RM		:= rm -f
- 
--CC	:= gcc
--CFLAGS	:= -Wall
-+CC	?= gcc
-+CFLAGS	?= -Wall
- 
- CFLAGS	+= -O2
- # When debugging, use the following instead
