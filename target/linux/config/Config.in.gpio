@@ -8,8 +8,8 @@ config ADK_KERNEL_GPIO_GENERIC
 	boolean
 
 config ADK_KERNEL_GPIO_MXC
+	boolean
 	select ADK_KERNEL_GPIOLIB
 	select ADK_KERNEL_GPIO_SYSFS
 	select ADK_KERNEL_GPIO_GENERIC
 	default y if ADK_TARGET_SYSTEM_CUBOX_I
-	boolean

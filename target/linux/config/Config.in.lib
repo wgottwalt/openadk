@@ -1,4 +1,4 @@
-menu "Library Routines"
+menu "Kernel Library Routines"
 
 config ADK_KERNEL_CRC16
 	bool
@@ -9,7 +9,7 @@ config ADK_KERNEL_CRC32
 	default y
 
 config ADK_KPACKAGE_KMOD_CRC_ITU_T
-	prompt "kmod-crc-itu-t...................... CRC ITU-T V.41 functions"
+	prompt "CRC ITU-T V.41 functions"
 	tristate
 	default n
 	help
@@ -19,14 +19,14 @@ config ADK_KPACKAGE_KMOD_CRC_ITU_T
 	  functions require M here.
 
 config ADK_KPACKAGE_KMOD_CRC16
-	prompt "kmod-crc16.......................... provide CRC16 library functions"
+	prompt "CRC16 library functions"
 	tristate
         depends on ! ADK_KERNEL_CRC16
 	default n
 	help
 
 config ADK_KPACKAGE_KMOD_LIBCRC32C
-	prompt "kmod-libcrc32c...................... CRC32c Cyclic Redundancy-Check"
+	prompt "CRC32c Cyclic Redundancy-Check"
 	tristate
 	default n
 	help
@@ -36,11 +36,11 @@ config ADK_KPACKAGE_KMOD_LIBCRC32C
 	  require M here.  See Castagnoli93.
 
 config ADK_KPACKAGE_KMOD_CRC_CCITT
-	prompt "kmod-crc-ccitt...................... provide CRC-CCITT library functions"
+	prompt "CRC-CCITT library functions"
 	tristate
 	default n
 	help
-	  This module provides CRC-CCITT library functions for kernel modules built
-	  outside the kernel.
+	  This module provides CRC-CCITT library functions for kernel 
+	  modules built outside the kernel.
 
 endmenu

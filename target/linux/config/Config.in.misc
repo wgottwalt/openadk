@@ -24,14 +24,24 @@ config ADK_KERNEL_KEYS
 
 menu "Miscellaneous devices support"
 
+source "target/linux/config/Config.in.rtc"
+source "target/linux/config/Config.in.leds"
+source "target/linux/config/Config.in.watchdog"
+source "target/linux/config/Config.in.i2c"
+source "target/linux/config/Config.in.spi"
+source "target/linux/config/Config.in.regulator"
+source "target/linux/config/Config.in.gpio"
+source "target/linux/config/Config.in.dma"
+source "target/linux/config/Config.in.lib"
+
 config ADK_KERNEL_KEXEC
-	prompt ".................................. Add KEXEC syscall"
+	prompt "Add KEXEC syscall"
 	boolean
 	help
 	  You need also kexec-tools to benefit from it.	
 
 config ADK_KPACKAGE_KMOD_PARPORT
-	prompt "kmod-parport...................... generic parallel port support"
+	prompt "Generic parallel port support"
 	tristate
 	default n
 	depends on ADK_TARGET_WITH_PP
@@ -39,7 +49,7 @@ config ADK_KPACKAGE_KMOD_PARPORT
 	  Kernel module for generic parallel port support.
 
 config ADK_KPACKAGE_KMOD_PARPORT_PC
-	prompt "kmod-parport-pc................. PC style parallel port support"
+	prompt "PC style parallel port support"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_PARPORT
@@ -47,7 +57,7 @@ config ADK_KPACKAGE_KMOD_PARPORT_PC
 	  Kernel module for PC style parallel port support.
 
 config ADK_KPACKAGE_KMOD_PLIP
-	prompt "kmod-plip....................... PLIP (internet over parallel port)"
+	prompt "PLIP (internet over parallel port)"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_PARPORT
@@ -60,7 +70,7 @@ config ADK_KPACKAGE_KMOD_PLIP
 	  This will enlarge your kernel by about 8 KiB.
 
 config ADK_KPACKAGE_KMOD_PRINTER
-	prompt "kmod-lp......................... line printer support"
+	prompt "Line printer support"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_PARPORT
@@ -69,7 +79,7 @@ config ADK_KPACKAGE_KMOD_PRINTER
 	  Kernel module for line printer support
 
 config ADK_KPACKAGE_KMOD_PPDEV
-	prompt "kmod-ppdev...................... userland parallel port driver"
+	prompt "Userland parallel port driver"
 	tristate
 	default n
 	depends on ADK_KPACKAGE_KMOD_PARPORT
@@ -78,7 +88,7 @@ config ADK_KPACKAGE_KMOD_PPDEV
 	  Kernel module for userland parallel port access
 
 config ADK_KPACKAGE_KMOD_FW_LOADER
-	prompt "kmod-fw-loader.................... userspace firmware loading support"
+	prompt "Userspace firmware loading support"
 	tristate
 	depends on !ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default n
@@ -87,7 +97,7 @@ config ADK_KPACKAGE_KMOD_FW_LOADER
 	  loading of external firmware files.
 
 config ADK_KPACKAGE_KMOD_EEPROM_93CX6
-	prompt "kmod-eeprom-93cx6................. 93cx6 eeprom support"
+	prompt "93cx6 eeprom support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_MAC80211
 	select ADK_KERNEL_MISC_DEVICES

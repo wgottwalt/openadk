@@ -113,7 +113,7 @@ config ADK_KERNEL_FB_CON_DECOR
 	default n
 
 config ADK_KERNEL_FB_VESA
-	prompt "................................ Framebuffer support for VirtualBox Emulator (VESA)"
+	prompt "Framebuffer support for VirtualBox Emulator (VESA)"
 	boolean
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
@@ -124,8 +124,8 @@ config ADK_KERNEL_FB_VESA
 	 Framebuffer support for VirtualBox Emulator.
 
 config ADK_KERNEL_DRM_IMX
-	prompt "................................ Framebuffer support for Cubox-i"
-	tristate
+	prompt "Framebuffer support for Cubox-i (IMX)"
+	boolean
 	select ADK_KERNEL_DRM
 	select ADK_KERNEL_DMA_CMA
 	select ADK_KERNEL_RESET_CONTROLLER
@@ -147,8 +147,8 @@ config ADK_KERNEL_DRM_IMX
 	 Framebuffer support for Cubox-i.
 
 config ADK_KERNEL_FB_PXA
-	prompt "................................ Framebuffer support for Sharp Zaurus"
-	tristate
+	prompt "Framebuffer support for Sharp Zaurus (PXA)"
+	boolean
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
@@ -158,8 +158,8 @@ config ADK_KERNEL_FB_PXA
 	 Framebuffer support for Sharp Zaurus CL Series.
 
 config ADK_KERNEL_FB_GEODE_LX
-	prompt "................................ Framebuffer support for ALIX boards with VGA"
-	tristate
+	prompt "Framebuffer support for ALIX boards (GEODE)"
+	boolean
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FB_GEODE
@@ -170,8 +170,8 @@ config ADK_KERNEL_FB_GEODE_LX
 	 Framebuffer support for ALIX boards with VGA.
 
 config ADK_KERNEL_FB_SM7XX
-	prompt "................................ Framebuffer support for Lemote Yeelong"
-	tristate
+	prompt "Framebuffer support for Lemote Yeelong (SM7XX)"
+	boolean
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FONT_8x16
@@ -183,7 +183,7 @@ config ADK_KERNEL_FB_SM7XX
 	 Framebuffer support for Lemote Yeelong.
 
 config ADK_KERNEL_FB_BCM2708
-	prompt "................................ Framebuffer support for Raspberry PI"
+	prompt "Framebuffer support for Raspberry PI"
 	boolean
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
@@ -195,7 +195,7 @@ config ADK_KERNEL_FB_BCM2708
 	 Framebuffer support for Raspberry PI.
 
 config ADK_HARDWARE_GRAPHICS_INTEL_I915
-	prompt "............................ Support for Intel graphic cards (AGP/DRM/KMS/NM10)"
+	prompt "Support for Intel graphic cards (AGP/DRM/KMS/NM10)"
 	boolean
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_DRM

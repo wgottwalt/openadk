@@ -49,7 +49,7 @@ config ADK_KERNEL_NET_SCHED
 comment "Queueing/Scheduling"
 
 config ADK_KPACKAGE_KMOD_NET_SCH_CBQ
-	prompt "kmod-sched-cbq.................... Class Based Queueing (CBQ)"
+	prompt "Class Based Queueing (CBQ)"
 	tristate
 	select ADK_KERNEL_NET_SCHED
 	default n
@@ -66,7 +66,7 @@ config ADK_KPACKAGE_KMOD_NET_SCH_CBQ
 	  want to use as leaf disciplines.
 
 config ADK_KPACKAGE_KMOD_NET_SCH_HTB
-	prompt "kmod-sched-htb.................... Hierarchical Token Bucket (HTB)"
+	prompt "Hierarchical Token Bucket (HTB)"
 	tristate
 	select ADK_KERNEL_NET_SCHED
 	default n
@@ -80,7 +80,7 @@ config ADK_KPACKAGE_KMOD_NET_SCH_HTB
 	  different properties and different algorithm.
 
 config ADK_KPACKAGE_KMOD_NET_SCH_HFSC
-	prompt "kmod-sched-hfsc................... Hierarchical Fair Service Curve (HFSC)"
+	prompt "Hierarchical Fair Service Curve (HFSC)"
 	tristate
 	select ADK_KERNEL_NET_SCHED
 	default n
@@ -89,7 +89,7 @@ config ADK_KPACKAGE_KMOD_NET_SCH_HFSC
 	  (HFSC) packet scheduling algorithm.
 
 config ADK_KPACKAGE_KMOD_NET_SCH_ATM
-	prompt "kmod-sched-atm.................... ATM Virtual Circuits (ATM)"
+	prompt "ATM Virtual Circuits (ATM)"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_ATM
 	select ADK_KERNEL_NET_SCHED
@@ -103,7 +103,7 @@ config ADK_KPACKAGE_KMOD_NET_SCH_ATM
 	  See the top of <file:net/sched/sch_atm.c>) for more details.
 
 config ADK_KPACKAGE_KMOD_NET_SCH_PRIO
-	prompt "kmod-sched-prio................... Multi Band Priority Queueing (PRIO)"
+	prompt "Multi Band Priority Queueing (PRIO)"
 	tristate
 	select ADK_KERNEL_NET_SCHED
 	default n
@@ -112,7 +112,7 @@ config ADK_KPACKAGE_KMOD_NET_SCH_PRIO
 	  scheduler.
 
 config ADK_KPACKAGE_KMOD_NET_SCH_RED
-	prompt "kmod-sched-red.................... Random Early Detection (RED)"
+	prompt "Random Early Detection (RED)"
 	tristate
 	select ADK_KERNEL_NET_SCHED
 	default n
@@ -123,7 +123,7 @@ config ADK_KPACKAGE_KMOD_NET_SCH_RED
 	  See the top of <file:net/sched/sch_red.c> for more details.
 
 config ADK_KPACKAGE_KMOD_NET_SCH_SFQ
-	prompt "kmod-sched-sfq.................... Stochastic Fairness Queueing (SFQ)"
+	prompt "Stochastic Fairness Queueing (SFQ)"
 	tristate
 	select ADK_KERNEL_NET_SCHED
 	default n
@@ -133,20 +133,8 @@ config ADK_KPACKAGE_KMOD_NET_SCH_SFQ
 
 	  See the top of <file:net/sched/sch_sfq.c> for more details.
 
-#config ADK_KPACKAGE_KMOD_NET_SCH_TEQL
-#	prompt "kmod-sched-teql................... True Link Equalizer (TEQL)"
-#	tristate
-#	select ADK_KERNEL_NET_SCHED
-#	default n
-#	help
-#	  Say Y here if you want to use the True Link Equalizer (TLE) packet
-#	  scheduling algorithm. This queueing discipline allows the combination
-#	  of several physical devices into one virtual device.
-#
-#	  See the top of <file:net/sched/sch_teql.c> for more details.
-
 config ADK_KPACKAGE_KMOD_NET_SCH_TBF
-	prompt "kmod-sched-tbf.................... Token Bucket Filter (TBF)"
+	prompt "Token Bucket Filter (TBF)"
 	tristate
 	select ADK_KERNEL_NET_SCHED
 	default n
@@ -157,7 +145,7 @@ config ADK_KPACKAGE_KMOD_NET_SCH_TBF
 	  See the top of <file:net/sched/sch_tbf.c> for more details.
 
 config ADK_KPACKAGE_KMOD_NET_SCH_GRED
-	prompt "kmod-sched-gred................... Generic Random Early Detection (GRED)"
+	prompt "Generic Random Early Detection (GRED)"
 	tristate
 	select ADK_KERNEL_NET_SCHED
 	default n
@@ -168,7 +156,7 @@ config ADK_KPACKAGE_KMOD_NET_SCH_GRED
 	  references about the algorithm).
 
 config ADK_KPACKAGE_KMOD_NET_SCH_DSMARK
-	prompt "kmod-sched-dsmark................. Differentiated Services marker (DSMARK)"
+	prompt "Differentiated Services marker (DSMARK)"
 	tristate
 	select ADK_KERNEL_NET_SCHED
 	default n
@@ -179,7 +167,7 @@ config ADK_KPACKAGE_KMOD_NET_SCH_DSMARK
 	  RFCs, is available at <http://www.gta.ufrj.br/diffserv/>.
 
 config ADK_KPACKAGE_KMOD_NET_SCH_INGRESS
-	prompt "kmod-sched-ingress................ Ingress Qdisc"
+	prompt "Ingress Qdisc"
 	tristate
 	select ADK_KERNEL_NET_SCHED
 	select ADK_KERNEL_NETFILTER
@@ -197,7 +185,7 @@ config ADK_KERNEL_NET_CLS
 	default n
 
 config ADK_KPACKAGE_KMOD_NET_CLS_BASIC
-	prompt "kmod-cls-basic.................... Elementary classification (BASIC)"
+	prompt "Elementary classification (BASIC)"
 	tristate
 	select ADK_KERNEL_NET_CLS
 	default n
@@ -206,7 +194,7 @@ config ADK_KPACKAGE_KMOD_NET_CLS_BASIC
 	  only extended matches and actions.
 
 config ADK_KPACKAGE_KMOD_NET_CLS_TCINDEX
-	prompt "kmod-cls-tcindex.................. Traffic-Control Index (TCINDEX)"
+	prompt "Traffic-Control Index (TCINDEX)"
 	tristate
 	select ADK_KERNEL_NET_CLS
 	default n
@@ -216,7 +204,7 @@ config ADK_KPACKAGE_KMOD_NET_CLS_TCINDEX
 	  to implement Differentiated Services together with DSMARK.
 
 config ADK_KPACKAGE_KMOD_NET_CLS_ROUTE4
-	prompt "kmod-cls-route4................... Routing decision (ROUTE)"
+	prompt "Routing decision (ROUTE)"
 	tristate
 	select ADK_KERNEL_NET_CLS
 	default n
@@ -225,7 +213,7 @@ config ADK_KPACKAGE_KMOD_NET_CLS_ROUTE4
 	  according to the route table entry they matched.
 
 config ADK_KPACKAGE_KMOD_NET_CLS_FW
-	prompt "kmod-cls-fw....................... Netfilter mark (FW)"
+	prompt "Netfilter mark (FW)"
 	tristate
 	select ADK_KERNEL_NET_CLS
 	default n
@@ -234,7 +222,7 @@ config ADK_KPACKAGE_KMOD_NET_CLS_FW
 	  according to netfilter/firewall marks.
 
 config ADK_KPACKAGE_KMOD_NET_CLS_U32
-	prompt "kmod-cls-u32...................... Universal 32bit comparisons w/ hashing (U32)"
+	prompt "Universal 32bit comparisons w/ hashing (U32)"
 	tristate
 	select ADK_KERNEL_NET_CLS
 	default n
@@ -243,7 +231,7 @@ config ADK_KPACKAGE_KMOD_NET_CLS_U32
 	  32bit pieces based comparison scheme.
 
 config ADK_KPACKAGE_KMOD_NET_CLS_U32_PERF
-	prompt ".................................. Performance counters support"
+	prompt "Performance counters support"
 	bool
 	select ADK_KERNEL_NET_CLS
 	depends on ADK_KPACKAGE_KMOD_NET_CLS_U32
@@ -253,7 +241,7 @@ config ADK_KPACKAGE_KMOD_NET_CLS_U32_PERF
 	  fine tuning u32 classifiers.
 
 config ADK_KPACKAGE_KMOD_NET_CLS_U32_MARK
-	prompt ".................................. Netfilter marks support"
+	prompt "Netfilter marks support"
 	bool
 	select ADK_KERNEL_NET_CLS
 	depends on ADK_KPACKAGE_KMOD_NET_CLS_U32
@@ -271,7 +259,7 @@ config ADK_KERNEL_NET_CLS_ACT
 	default n
 
 config ADK_KPACKAGE_KMOD_NET_ACT_POLICE
-	prompt "kmod-act-police................... Traffic Policing"
+	prompt "Traffic Policing"
 	tristate
 	select ADK_KERNEL_NET_CLS_ACT
 	default n
@@ -281,7 +269,7 @@ config ADK_KPACKAGE_KMOD_NET_ACT_POLICE
 	  module.
 
 config ADK_KPACKAGE_KMOD_NET_ACT_GACT
-	prompt "kmod-act-gact..................... Generic actions"
+	prompt "Generic actions"
 	tristate
 	select ADK_KERNEL_NET_CLS_ACT
 	default n
@@ -290,7 +278,7 @@ config ADK_KPACKAGE_KMOD_NET_ACT_GACT
 	  accepting packets.
 
 config ADK_KPACKAGE_KMOD_NET_ACT_MIRRED
-	prompt "kmod-act-mirred................... Redirecting and Mirroring"
+	prompt "Redirecting and Mirroring"
 	tristate
 	select ADK_KERNEL_NET_CLS_ACT
 	default n
@@ -299,7 +287,7 @@ config ADK_KPACKAGE_KMOD_NET_ACT_MIRRED
 	  other devices.
 
 config ADK_KPACKAGE_KMOD_NET_ACT_IPT
-	prompt "kmod-act-ipt...................... IPtables targets"
+	prompt "IPtables targets"
 	tristate
 	select ADK_KERNEL_NET_CLS_ACT
 	select ADK_KPACKAGE_KMOD_IP_NF_IPTABLES
@@ -309,7 +297,7 @@ config ADK_KPACKAGE_KMOD_NET_ACT_IPT
 	  classification.
 
 config ADK_KPACKAGE_KMOD_NET_ACT_PEDIT
-	prompt "kmod-act-pedit.................... Packet Editing"
+	prompt "Packet Editing"
 	tristate
 	select ADK_KERNEL_NET_CLS_ACT
 	default n

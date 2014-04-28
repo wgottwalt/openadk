@@ -13,42 +13,43 @@ config ADK_KERNEL_CS5535_MFGPT
 config ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
 	boolean
 
-menu "Watchdog support"
+menu "Watchdog driver support"
 
 config ADK_KERNEL_SCx200_WDT
-	prompt ".................................. Natsemi Hardware Watchdog" 
+	prompt "Natsemi Hardware Watchdog" 
 	boolean
+	depends on ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	select ADK_KERNEL_WATCHDOG
 	select ADK_KERNEL_SCx200
 	default y if ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default n
-	depends on ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	help
 	  Natsemi Watchdog (scx200)
 
 config ADK_KERNEL_AT91SAM9X_WATCHDOG
-	prompt ".................................. AT91SAM9X Hardware Watchdog" 
+	prompt "AT91SAM9X Hardware Watchdog" 
 	boolean
+	depends on ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	select ADK_KERNEL_WATCHDOG
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default n
-	depends on ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	help
 	  AT91SAM9X Watchdog.
 
 config ADK_KERNEL_AR7_WDT
-	prompt ".................................. AR7 Hardware Watchdog" 
+	prompt "AR7 Hardware Watchdog" 
 	boolean
+	depends on ADK_TARGET_SYSTEM_LINKSYS_AG241
 	select ADK_KERNEL_WATCHDOG
 	default y if ADK_TARGET_SYSTEM_LINKSYS_AG241
 	default n
-	depends on ADK_TARGET_SYSTEM_LINKSYS_AG241
 	help
 	  AR7 Watchdog.
 
 config ADK_KERNEL_GEODE_WDT
-	prompt ".................................. Geode Hardware Watchdog"
+	prompt "Geode Hardware Watchdog"
 	boolean
+	depends on ADK_CPU_GEODE
 	select ADK_KERNEL_WATCHDOG
 	select ADK_KERNEL_MISC_DEVICES
 	select ADK_KERNEL_CS5535_MFGPT
@@ -57,23 +58,22 @@ config ADK_KERNEL_GEODE_WDT
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default n
-	depends on ADK_CPU_GEODE
 	help
 	 Geode watchdog.
 
 config ADK_KERNEL_RC32434_WDT
-	prompt ".................................. IDT RC32434 Hardware Watchdog"
+	prompt "IDT RC32434 Hardware Watchdog"
 	boolean
+	depends on ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	select ADK_KERNEL_WATCHDOG
 	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	default n
-	depends on ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	help
 	 Support for the hardware watchdog inside
 	 Routerboard 532's SoC, the IDT RC32434.
 
 config ADK_KPACKAGE_KMOD_SOFT_WATCHDOG
-	prompt "kmod-soft-watchdog...................... Software watchdog"
+	prompt "Software watchdog"
 	tristate
 	default n
 	select ADK_KERNEL_WATCHDOG

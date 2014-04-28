@@ -55,7 +55,7 @@ config ADK_KERNEL_USB_OHCI_HCD
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 
 config ADK_KPACKAGE_KMOD_USB
-	prompt "kmod-usb......................... USB support"
+	prompt "USB support"
 	tristate
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_USB_SUPPORT
@@ -97,88 +97,10 @@ config ADK_KPACKAGE_KMOD_USB
 	  in <file:Documentation/usb/> and especially the links given in
 	  <file:Documentation/usb/usb-help.txt>.
 
-config ADK_KPACKAGE_KMOD_USB_UHCI_HCD
-	prompt   "kmod-usb-uhci................... Support for UHCI controllers"
-	tristate
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	depends on ADK_KPACKAGE_KMOD_USB
-	depends on !ADK_KERNEL_USB_UHCI_HCD
-	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-	default n
-	help
-	  The Universal Host Controller Interface is a standard by Intel for
-	  accessing the USB hardware in the PC (which is also called the USB
-	  host controller). If your USB host controller conforms to this
-	  standard, you may want to say Y, but see below. All recent boards
-	  with Intel PCI chipsets (like intel 430TX, 440FX, 440LX, 440BX,
-	  i810, i820) conform to this standard. Also all VIA PCI chipsets
-	  (like VIA VP2, VP3, MVP3, Apollo Pro, Apollo Pro II or Apollo Pro
-	  133). If unsure, say Y.
-
-config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
-	prompt   "kmod-usb-ohci................... Support for OHCI controllers"
-	tristate
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	depends on ADK_KPACKAGE_KMOD_USB
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
-	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-	default n
-	help
-	  The Open Host Controller Interface (OHCI) is a standard for accessing
-	  USB 1.1 host controller hardware.  It does more in hardware than Intel's
-	  UHCI specification.  If your USB host controller follows the OHCI spec,
-	  say Y.  On most non-x86 systems, and on x86 hardware that's not using a
-	  USB controller from Intel or VIA, this is appropriate.  If your host
-	  controller doesn't use PCI, this is probably appropriate.  For a PCI
-	  based system where you're not sure, the "lspci -v" entry will list the
-	  right "prog-if" for your USB controller(s):  EHCI, OHCI, or UHCI.
-
-config ADK_KPACKAGE_KMOD_USB_ISP116X_HCD
-	prompt   "kmod-usb-isp116x................ ISP116X HCD support"
-	tristate
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	depends on ADK_KPACKAGE_KMOD_USB
-	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default n
-	help
-	  The ISP1160 and ISP1161 chips are USB host controllers. Enable this
-	  option if your board has this chip. If unsure, say N.
-
-	  This driver does not support isochronous transfers.
-
-config ADK_KPACKAGE_KMOD_USB_SL811_HCD
-	prompt   "kmod-usb-sl811.................. SL811HS HCD support"
-	tristate
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	depends on ADK_KPACKAGE_KMOD_USB
-	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default n
-	help
-	  The SL811HS is a single-port USB controller that supports either
-	  host side or peripheral side roles.  Enable this option if your
-	  board has this chip, and you want to use it as a host controller. 
-	  If unsure, say N.
-
-config ADK_KERNEL_USB_DWCOTG
-	boolean
-	select ADK_KERNEL_USB
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y
-	help
-	  The Synopsis DWC controller is a dual-role
-          host/peripheral/OTG ("On The Go") USB controllers.
+menu "USB controller support"
 
 config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
-	prompt   "kmod-usb-ehci..................... Support for USB 2.0 controllers"
+	prompt "Support for USB EHCI 2.0 controllers"
 	tristate
 	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	select ADK_KERNEL_USB_EHCI_ROOT_HUB_TT
@@ -214,6 +136,60 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 
 	  You may want to read <file:Documentation/usb/ehci.txt>.
 
+
+config ADK_KPACKAGE_KMOD_USB_UHCI_HCD
+	prompt "Support for UHCI controllers"
+	tristate
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	depends on ADK_KPACKAGE_KMOD_USB
+	depends on !ADK_KERNEL_USB_UHCI_HCD
+	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default n
+	help
+	  The Universal Host Controller Interface is a standard by Intel for
+	  accessing the USB hardware in the PC (which is also called the USB
+	  host controller). If your USB host controller conforms to this
+	  standard, you may want to say Y, but see below. All recent boards
+	  with Intel PCI chipsets (like intel 430TX, 440FX, 440LX, 440BX,
+	  i810, i820) conform to this standard. Also all VIA PCI chipsets
+	  (like VIA VP2, VP3, MVP3, Apollo Pro, Apollo Pro II or Apollo Pro
+	  133). If unsure, say Y.
+
+config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
+	prompt "Support for OHCI controllers"
+	tristate
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	depends on ADK_KPACKAGE_KMOD_USB
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default n
+	help
+	  The Open Host Controller Interface (OHCI) is a standard for accessing
+	  USB 1.1 host controller hardware.  It does more in hardware than Intel's
+	  UHCI specification.  If your USB host controller follows the OHCI spec,
+	  say Y.  On most non-x86 systems, and on x86 hardware that's not using a
+	  USB controller from Intel or VIA, this is appropriate.  If your host
+	  controller doesn't use PCI, this is probably appropriate.  For a PCI
+	  based system where you're not sure, the "lspci -v" entry will list the
+	  right "prog-if" for your USB controller(s):  EHCI, OHCI, or UHCI.
+
+config ADK_KERNEL_USB_DWCOTG
+	prompt "Support for DWCOTG controller"
+	boolean
+	select ADK_KERNEL_USB
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y
+	help
+	  The Synopsis DWC controller is a dual-role
+          host/peripheral/OTG ("On The Go") USB controllers.
+
 config ADK_KERNEL_USB_CHIPIDEA_UDC
 	boolean
 
@@ -221,7 +197,7 @@ config ADK_KERNEL_USB_CHIPIDEA_HOST
 	boolean
 
 config ADK_KPACKAGE_KMOD_USB_CHIPIDEA
-	prompt "kmod-ci-hdrc...................... Support ChipIdea controller"
+	prompt "Support for ChipIdea controller"
 	tristate
 	select ADK_KERNEL_USB_CHIPIDEA_UDC
 	select ADK_KERNEL_USB_CHIPIDEA_HOST
@@ -229,26 +205,64 @@ config ADK_KPACKAGE_KMOD_USB_CHIPIDEA
 	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 
+config ADK_KPACKAGE_KMOD_USB_ISP116X_HCD
+	prompt "Support for ISP116X"
+	tristate
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	depends on ADK_KPACKAGE_KMOD_USB
+	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
+	help
+	  The ISP1160 and ISP1161 chips are USB host controllers. Enable this
+	  option if your board has this chip. If unsure, say N.
+
+	  This driver does not support isochronous transfers.
+
+config ADK_KPACKAGE_KMOD_USB_SL811_HCD
+	prompt "Support for SL811HS"
+	tristate
+	select ADK_PACKAGE_KMOD_USB_CONTROLLER
+	depends on ADK_KPACKAGE_KMOD_USB
+	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
+	help
+	  The SL811HS is a single-port USB controller that supports either
+	  host side or peripheral side roles.  Enable this option if your
+	  board has this chip, and you want to use it as a host controller. 
+	  If unsure, say N.
+
 config ADK_PACKAGE_KMOD_USB_CONTROLLER
 	tristate
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
-config ADK_KPACKAGE_KMOD_USB_ACM
-	prompt "kmod-usb-acm...................... Support for USB modems/isdn controllers"
+endmenu
+
+menu "USB devices support"
+
+config ADK_KPACKAGE_KMOD_USB_STORAGE
+	prompt "Support for USB storage devices"
 	tristate
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	depends on !ADK_KERNEL_USB_STORAGE
+	select ADK_KPACKAGE_KMOD_SCSI if !ADK_KERNEL_SCSI
+	select ADK_KPACKAGE_KMOD_BLK_DEV_SD if !ADK_KERNEL_SCSI
 	default n
 
-config ADK_KPACKAGE_KMOD_USB_PEGASUS
-	prompt "kmod-usb-pegasus.................. Support for USB Pegasus"
+config ADK_KPACKAGE_KMOD_SND_USB_AUDIO
+	prompt "Support for USB sound adapter"
 	tristate
+	select ADK_KERNEL_SND_USB
+	select ADK_KPACKAGE_KMOD_SND
+	select ADK_KPACKAGE_KMOD_SND_RAWMIDI
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 
 config ADK_KPACKAGE_KMOD_USB_HSO
-	prompt "kmod-usb-hso...................... Support for USB HSO devices"
+	prompt "Support for USB HSO devices"
 	tristate
 	select ADK_KPACKAGE_KMOD_RFKILL
 	select ADK_KPACKAGE_KMOD_USB_STORAGE
@@ -256,13 +270,25 @@ config ADK_KPACKAGE_KMOD_USB_HSO
 	default n
 
 config ADK_KPACKAGE_KMOD_USB_PRINTER
-	prompt "kmod-usb-printer.................. Support for USB printers"
+	prompt "Support for USB printers"
+	tristate
+	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
+
+config ADK_KPACKAGE_KMOD_USB_ACM
+	prompt "Support for USB modems/isdn controllers"
+	tristate
+	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	default n
+
+config ADK_KPACKAGE_KMOD_USB_PEGASUS
+	prompt "Support for USB Pegasus network cards"
 	tristate
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 
 config ADK_KPACKAGE_KMOD_USB_SERIAL
-	prompt "kmod-usb-serial................... Support for USB-to-serial converters"
+	prompt "Support for USB-to-serial converters"
 	tristate
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
@@ -276,7 +302,7 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL
 	  supported, and on how to use them.
 
 config ADK_KPACKAGE_KMOD_USB_SERIAL_BELKIN
-	prompt   "kmod-usb-serial-belkin.......... Support for Belkin USB-to-serial converters"
+	prompt "Support for Belkin USB-to-serial converters"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
 	default n
@@ -286,7 +312,7 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_BELKIN
 	  port USB to serial adapter.
 
 config ADK_KPACKAGE_KMOD_USB_SERIAL_FTDI_SIO
-	prompt   "kmod-usb-serial-ftdi............ Support for FTDI USB-to-serial converter"
+	prompt "Support for FTDI USB-to-serial converter"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
 	default n
@@ -299,7 +325,7 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_FTDI_SIO
 	  information on this driver and the device.
 
 config ADK_KPACKAGE_KMOD_USB_SERIAL_MCT_U232
-	prompt   "kmod-usb-serial-mct-u232........ Support for Magic Control Technology USB-to-Serial converters"
+	prompt "Support for Magic Control Technology USB-to-Serial converters"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
 	default n
@@ -311,7 +337,7 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_MCT_U232
 	  BAY, Belkin F5U109, and Belkin F5U409 devices.
 
 config ADK_KPACKAGE_KMOD_USB_SERIAL_PL2303
-	prompt   "kmod-usb-serial-pl2303.......... Support for Prolific PL2303 USB-to-Serial converters"
+	prompt "Support for Prolific PL2303 USB-to-Serial converters"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
 	default n
@@ -320,7 +346,7 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_PL2303
 	  adapter from Prolific.
 
 config ADK_KPACKAGE_KMOD_USB_SERIAL_VISOR
-	prompt   "kmod-usb-serial-visor........... Support for Handspring Visor / Palm m50x / Sony Clie Driver"
+	prompt "Support for Handspring Visor / Palm m50x / Sony Clie Driver"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
 	default n
@@ -330,46 +356,29 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_VISOR
 	  <http://usbvisor.sourceforge.net/> for more information on using this
 	  driver.
 
-config ADK_KPACKAGE_KMOD_USB_STORAGE
-	prompt "kmod-usb-storage.................. Support for USB storage devices"
-	tristate
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
-	depends on !ADK_KERNEL_USB_STORAGE
-	select ADK_KPACKAGE_KMOD_SCSI if !ADK_KERNEL_SCSI
-	select ADK_KPACKAGE_KMOD_BLK_DEV_SD if !ADK_KERNEL_SCSI
-	default n
-
 config ADK_KPACKAGE_KMOD_USB_ATM
-        prompt "kmod-usb-atm...................... Support for USB ATM devices"
+        prompt "Support for USB ATM devices"
 	tristate
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 
 config ADK_KPACKAGE_KMOD_USB_ATM_SPEEDTOUCH
-        prompt   "kmod-usb-atm-speedtouch......... Support for USB Speedtouch ADSL modem"
+        prompt "Support for USB Speedtouch ADSL modem"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB_ATM
 	default n
 
 config ADK_KPACKAGE_KMOD_USB_USBNET
-        prompt "kmod-usb-usbnet................... Multi-purpose USB Networking Framework"
+        prompt "Multi-purpose USB Networking Framework"
 	tristate
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
-	default n
-
-config ADK_KPACKAGE_KMOD_SND_USB_AUDIO
-	prompt "kmod-snd-usb-audio................ USB sound adapter"
-	tristate
-	select ADK_KERNEL_SND_USB
-	select ADK_KPACKAGE_KMOD_SND
-	select ADK_KPACKAGE_KMOD_SND_RAWMIDI
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 
 config ADK_KPACKAGE_KMOD_USB_SISUSBVGA
-        prompt "kmod-usb-svga..................... USB 2.0 SVGA dongle support (Net2280/SiS315)"
+        prompt "USB 2.0 SVGA dongle support (Net2280/SiS315)"
 	tristate
 	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 	
+endmenu
 endmenu

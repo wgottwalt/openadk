@@ -1,7 +1,7 @@
 menu "IPVS support"
 
 config ADK_KPACKAGE_KMOD_IP_VS
-	prompt "kmod-ip-vs............................ IPVS support"
+	prompt "IPVS support"
 	tristate
 	select ADK_KERNEL_NETFILTER
 	select ADK_KPACKAGE_KMOD_NF_CONNTRACK
@@ -54,52 +54,52 @@ menu "IPVS Scheduler"
 	depends on ADK_KPACKAGE_KMOD_IP_VS
 
 config ADK_KPACKAGE_KMOD_IP_VS_RR
-	prompt "kmod-ip-vs-rr......................... round-robin"
+	prompt "round-robin"
 	tristate
 	default n
 
 config ADK_KPACKAGE_KMOD_IP_VS_WRR
-	prompt "kmod-ip-vs-wrr........................ weighted round-robin"
+	prompt "weighted round-robin"
 	tristate
 	default n
 
 config ADK_KPACKAGE_KMOD_IP_VS_LC
-	prompt "kmod-ip-vs-lc......................... least-connection"
+	prompt "least-connection"
 	tristate
 	default n
 
 config ADK_KPACKAGE_KMOD_IP_VS_WLC
-	prompt "kmod-ip-vs-wlc........................ weighted least-connection"
+	prompt "weighted least-connection"
 	tristate
 	default n
 
 config ADK_KPACKAGE_KMOD_IP_VS_LBLC
-	prompt "kmod-ip-vs-lblc....................... locality-based least-connection"
+	prompt "locality-based least-connection"
 	tristate
 	default n
 
 config ADK_KPACKAGE_KMOD_IP_VS_LBLCR
-	prompt "kmod-ip-vs-lblcr...................... locality-based least-connection with replication"
+	prompt "locality-based least-connection with replication"
 	tristate
 	default n
 
 config ADK_KPACKAGE_KMOD_IP_VS_DH
-	prompt "kmod-ip-vs-dh......................... destination hashing"
+	prompt "destination hashing"
 	tristate
 	default n
 
 config ADK_KPACKAGE_KMOD_IP_VS_SH
-	prompt "kmod-ip-vs-sh......................... source hashing"
+	prompt "source hashing"
 	tristate
 	default n
 
 config ADK_KPACKAGE_KMOD_IP_VS_SED
-	prompt "kmod-ip-vs-sed........................ shortest expected delay"
+	prompt "shortest expected delay"
 	tristate
 	default n
 
 config ADK_KPACKAGE_KMOD_IP_VS_NQ
-	prompt "kmod-ip-vs-nq......................... never queue"
+	prompt "never queue"
 	tristate
 	default n
 
@@ -109,11 +109,10 @@ menu "IPVS application helper"
 	depends on ADK_KPACKAGE_KMOD_IP_VS
 
 config ADK_KPACKAGE_KMOD_IP_VS_FTP
-	prompt "kmod-ip-vs-ftp........................ FTP protocol"
+	prompt "FTP protocol"
 	tristate
 	default n
 	select ADK_KERNEL_IP_VS_PROTO_TCP
 
 endmenu
-
 endmenu

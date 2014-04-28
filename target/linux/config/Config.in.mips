@@ -2,11 +2,11 @@ menu "MIPS devices support"
 depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 
 config ADK_KERNEL_LEMOTE_YEELOONG2F_PDEV
-	prompt ".................................. Lemote Yeelong platform drivers (f.e. battery support)"
+	prompt "Yeelong platform drivers (f.e. battery support)"
 	boolean
+	depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
  	default n
-	depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
  	help
 	  Lemote Yeelong platform drivers.
 	

@@ -11,14 +11,14 @@ config ADK_KERNEL_MEDIA_USB_SUPPORT
 config ADK_KERNEL_MEDIA_CAMERA_SUPPORT
 	boolean
 
-menu "Video devices support"
+menu "Webcam support"
 config ADK_KPACKAGE_KMOD_MEDIA_SUPPORT
 	tristate
 	default n
 	help
 
 config ADK_KPACKAGE_KMOD_USB_VIDEO_CLASS
-	prompt "kmod-usb-video-class............ Kernel driver for USB video webcams"
+	prompt "Kernel driver for USB video webcams"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	select ADK_KPACKAGE_KMOD_MEDIA_SUPPORT
@@ -26,36 +26,36 @@ config ADK_KPACKAGE_KMOD_USB_VIDEO_CLASS
 	help
 
 config ADK_KPACKAGE_KMOD_USB_GSPCA
-	prompt "kmod-usb-gspca................... GSPCA webcam framework"
+	prompt "GSPCA webcam framework"
+	tristate
 	depends on ADK_TARGET_WITH_USB
 	select ADK_KERNEL_VIDEO_V4L2
 	select ADK_KPACKAGE_KMOD_MEDIA_SUPPORT
 	select ADK_KERNEL_MEDIA_USB_SUPPORT
 	select ADK_KERNEL_MEDIA_CAMERA_SUPPORT
-	tristate
 	help
 	 GSPCA webcam framework
 
 config ADK_KPACKAGE_KMOD_USB_GSPCA_PAC207
-	prompt "kmod-usb-gpsca-pac207............ Pixart PAC207 USB Camera Driver"
+	prompt "Pixart PAC207 USB Camera Driver"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB_GSPCA
 	help
 
 config ADK_KPACKAGE_KMOD_USB_GSPCA_PAC7311
-	prompt "kmod-usb-gpsca-pac7311........... Pixart PAC7311 USB Camera Driver"
+	prompt "Pixart PAC7311 USB Camera Driver"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB_GSPCA
 	help
 
 config ADK_KPACKAGE_KMOD_USB_GSPCA_SPCA561
-	prompt "kmod-usb-gpsca-spca561........... SPCA561 USB Camera Driver"
+	prompt "SPCA561 USB Camera Driver"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_USB_GSPCA
 	help
 
 config ADK_KPACKAGE_KMOD_USB_PWC
-	prompt "kmod-usb-pwc..................... Kernel driver for USB Philips Cameras"
+	prompt "USB Philips Camera driver"
 	tristate
 	depends on ADK_TARGET_WITH_USB
 	default n

@@ -41,17 +41,17 @@ config ADK_KERNEL_LLC
 	default n
 
 config ADK_KERNEL_IP_MULTICAST
-	prompt ".................................. Enable IP Multicasting"
+	prompt "Enable IP Multicasting"
 	boolean
 	default n
 
 config ADK_KERNEL_IP_MROUTE
-	prompt ".................................. Enable IP Multicasting Routing"
+	prompt "Enable IP Multicasting Routing"
 	boolean
 	default n
 
 config ADK_KPACKAGE_KMOD_ATM
-	prompt "kmod-atm.......................... Asynchronous Transfer Mode (ATM)"
+	prompt "Asynchronous Transfer Mode (ATM)"
 	tristate
 	default n
 	help
@@ -69,14 +69,14 @@ config ADK_KPACKAGE_KMOD_ATM
 	 further details.
 
 config ADK_KPACKAGE_KMOD_ATM_BR2684
-	prompt "kmod-atm-br2684................... BR2684 ATM module"
+	prompt "BR2684 ATM module"
 	tristate
 	select ADK_KPACKAGE_KMOD_ATM
 	default n
 	help
 
 config ADK_KPACKAGE_KMOD_BRIDGE
-	prompt "kmod-bridge....................... 802.1d Ethernet Bridging"
+	prompt "802.1d Ethernet Bridging"
 	tristate
 	select ADK_KERNEL_LLC
 	default n
@@ -102,7 +102,7 @@ config ADK_KPACKAGE_KMOD_BRIDGE
 	  bridged ARP traffic in the arptables FORWARD chain.
 
 config ADK_KPACKAGE_KMOD_VLAN_8021Q
-	prompt "kmod-vlan......................... 802.1q VLAN support"
+	prompt "802.1q VLAN support"
 	tristate
 	default n
 	help
@@ -120,7 +120,7 @@ config ADK_KPACKAGE_KMOD_INET_TUNNEL
 	help
 
 config ADK_KPACKAGE_KMOD_NET_IPIP
-	prompt "kmod-net-ipip..................... IP in IP encapsulation support"
+	prompt "IP in IP encapsulation support"
 	tristate
 	select ADK_KPACKAGE_KMOD_INET_TUNNEL
 	default n
@@ -135,7 +135,7 @@ config ADK_KPACKAGE_KMOD_NET_IPIP
 	  networks without changing their IP addresses).
 
 config ADK_KPACKAGE_KMOD_NET_IPGRE
-	prompt "kmod-net-ipgre.................... GRE tunnels over IP"
+	prompt "GRE tunnels over IP"
 	tristate
 	select ADK_KERNEL_NET_IPGRE_BROADCAST
 	select ADK_KERNEL_NET_IPGRE_DEMUX
@@ -152,7 +152,7 @@ config ADK_KPACKAGE_KMOD_NET_IPGRE
 	  through the tunnel.
 
 config ADK_KPACKAGE_KMOD_IPV6
-	prompt "kmod-ipv6......................... IPv6 support"
+	prompt "IPv6 support"
 	tristate
 	default m if !ADK_LINUX_M68K
 	help
@@ -166,7 +166,7 @@ config ADK_KPACKAGE_KMOD_IPV6
 	  <http://www.bieringer.de/linux/IPv6/>.
 
 config ADK_KPACKAGE_KMOD_IPV6_SIT
-	prompt "kmod-ipv6-sit..................... IPv6-in-IPv4 tunnel (SIT driver)"
+	prompt "IPv6-in-IPv4 tunnel (SIT driver)"
 	tristate
 	select ADK_KPACKAGE_KMOD_INET_TUNNEL
 	default n
@@ -178,7 +178,7 @@ config ADK_KPACKAGE_KMOD_IPV6_SIT
 	  networks over an IPv4-only path.
 
 config ADK_KPACKAGE_KMOD_PPP
-	prompt "kmod-ppp.......................... PPP support"
+	prompt "PPP support"
 	tristate
 	select ADK_KERNEL_PPP_ASYNC
 	select ADK_KERNEL_SLHC
@@ -207,7 +207,7 @@ config ADK_KPACKAGE_KMOD_PPP
 	  synchronous PPP", below.
 
 config ADK_KPACKAGE_KMOD_PPP_MPPE
-	prompt   "kmod-ppp-mppe................... PPP MPPE/MPPC module"
+	prompt "PPP MPPE/MPPC module"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_PPP
 	select ADK_KERNEL_CRYPTO
@@ -223,7 +223,7 @@ config ADK_KPACKAGE_KMOD_PPP_MPPE
 	 configuring PPTP clients and servers to utilize this method.
 
 config ADK_KPACKAGE_KMOD_PPPOATM
-	prompt   "kmod-pppoatm.................... PPPoA (PPP over ATM) kernel support"
+	prompt "PPPoA (PPP over ATM) kernel support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_PPP
 	select ADK_KPACKAGE_KMOD_ATM
@@ -232,7 +232,7 @@ config ADK_KPACKAGE_KMOD_PPPOATM
 	  Support for PPP over ATM
 
 config ADK_KPACKAGE_KMOD_PPPOE
-	prompt   "kmod-pppoe...................... PPPoE (PPP over Ethernet) kernel support"
+	prompt "PPPoE (PPP over Ethernet) kernel support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_PPP
 	default n
@@ -240,14 +240,14 @@ config ADK_KPACKAGE_KMOD_PPPOE
 	  Support for PPP over Ethernet
 
 config ADK_KPACKAGE_KMOD_TUN
-	prompt "kmod-tun.......................... Universal TUN/TAP driver"
+	prompt "Universal TUN/TAP driver"
 	tristate
 	default n
 	help
 	  Kernel support for the TUN/TAP tunneling device
 
 config ADK_KPACKAGE_KMOD_BONDING
-	prompt "kmod-bonding...................... Bonding driver support"
+	prompt "Bonding driver support"
 	tristate
 	select BUSYBOX_IFENSLAVE
 	default n
@@ -267,4 +267,3 @@ source target/linux/config/Config.in.ipsec
 source target/linux/config/Config.in.ipvs
 
 endmenu
-

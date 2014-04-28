@@ -32,13 +32,13 @@ config ADK_KERNEL_SERIAL_8250_SHARE_IRQ
 	select ADK_KERNEL_SERIAL_8250_EXTENDED
 
 config ADK_KPACKAGE_KMOD_PCCARD
-	prompt "kmod-pccard....................... PCCARD support"
+	prompt "PCCARD support"
 	tristate
 	depends on !ADK_KERNEL_PCCARD
 	default n
 
 config ADK_KPACKAGE_KMOD_PCMCIA
-	prompt "kmod-pcmcia....................... 16-bit PCMCIA support"
+	prompt "16-bit PCMCIA support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_PCCARD
 	depends on !ADK_KERNEL_PCMCIA
@@ -48,7 +48,7 @@ config ADK_KPACKAGE_KMOD_PCMCIA
 	default n
 
 config ADK_KPACKAGE_KMOD_YENTA
-	prompt "kmod-cardbus...................... 32-bit CardBus support"
+	prompt "32-bit CardBus support"
 	tristate
 	depends on ADK_KPACKAGE_KMOD_PCCARD
 	depends on ADK_TARGET_WITH_CARDBUS
@@ -56,7 +56,7 @@ config ADK_KPACKAGE_KMOD_YENTA
 	default n
 
 config ADK_KPACKAGE_KMOD_SERIAL_8250_CS
-	prompt   "kmod-pcmcia-serial.............. PCMCIA/CardBus serial device support"
+	prompt "PCMCIA/CardBus serial device support"
 	tristate
 	default n
 	select ADK_KERNEL_SERIAL_8250_SHARE_IRQ

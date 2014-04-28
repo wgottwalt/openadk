@@ -4,22 +4,21 @@ config ADK_KERNEL_HWMON
 	boolean
 
 config ADK_KPACKAGE_KMOD_CORETEMP
-	prompt "kmod-coretemp..................... Coretemp"
+	prompt "Coretemp"
 	boolean
+	select ADK_KERNEL_EXPERIMENTAL
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_I2C_CHARDEV
 	select ADK_KERNEL_HWMON
-	select ADK_KERNEL_EXPERIMENTAL
 	default n
 	help
 	  Coretemp module
 
 config ADK_KPACKAGE_KMOD_IT87
-	prompt "kmod-it87......................... it87"
+	prompt "IT87"
 	boolean
 	default n
 	help
 	  Module for IT87 smbus chipsets
-
 endmenu
 
