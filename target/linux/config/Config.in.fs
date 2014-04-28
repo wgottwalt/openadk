@@ -57,14 +57,14 @@ config ADK_KERNEL_JFFS2_ZLIB
 	default n
 
 config ADK_KERNEL_JFFS2_FS
-	prompt "jffs2............................. JFFS2 filesystem"
+	prompt "JFFS2 filesystem"
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
 	select ADK_KERNEL_JFFS2_ZLIB
 	boolean
 
 config ADK_KERNEL_SQUASHFS
-	prompt "squashfs.......................... SquashFS filesystem"
+	prompt "SquashFS filesystem"
 	boolean
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_SQUASHFS_XZ
@@ -76,7 +76,7 @@ config ADK_KERNEL_EXT2_FS
 	default n
 
 config ADK_KPACKAGE_KMOD_EXT2_FS
-	prompt "kmod-fs-ext2...................... EXT2 filesystem support"
+	prompt "EXT2 filesystem support"
 	tristate
 	default n
 	depends on !ADK_KERNEL_EXT2_FS
@@ -93,7 +93,7 @@ config ADK_KERNEL_EXT3_FS
 	default n
 
 config ADK_KPACKAGE_KMOD_EXT3_FS
-	prompt "kmod-fs-ext3...................... EXT3 filesystem support"
+	prompt "EXT3 filesystem support"
 	tristate
 	select ADK_KPACKAGE_KMOD_FS_MBCACHE if !ADK_KERNEL_EXT4_FS
 	depends on !ADK_KERNEL_EXT3_FS
@@ -123,13 +123,12 @@ config ADK_KPACKAGE_KMOD_EXT3_FS
 	  (available at <http://sourceforge.net/projects/e2fsprogs/>).
 
 config ADK_KERNEL_EXT4_FS
-	prompt "ext4.............................. EXT4 filesystem support (kernel)"
 	boolean
 	select ADK_KERNEL_CRC16
 	default n
 
 config ADK_KPACKAGE_KMOD_EXT4_FS
-	prompt "kmod-fs-ext4...................... EXT4 filesystem support"
+	prompt "EXT4 filesystem support"
 	tristate
 	select ADK_KPACKAGE_KMOD_FS_MBCACHE
 	select ADK_KPACKAGE_KMOD_CRC16
@@ -139,7 +138,7 @@ config ADK_KPACKAGE_KMOD_EXT4_FS
 	  Ext4 filesystem.
 
 config ADK_KPACKAGE_KMOD_HFSPLUS_FS
-	prompt "kmod-fs-hfsplus................... HFS+ filesystem support"
+	prompt "HFS+ filesystem support"
 	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KPACKAGE_KMOD_NLS_UTF8
@@ -155,9 +154,10 @@ config ADK_KPACKAGE_KMOD_HFSPLUS_FS
 	  style features such as file ownership and permissions.
 
 config ADK_KPACKAGE_KMOD_NTFS_FS
-	prompt "kmod-fs-ntfs...................... NTFS file system support"
+	prompt "NTFS file system support"
 	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
+	depends on !ADK_PACKAGE_NTFS_3G
 	default n
 	help
 	  NTFS is the file system of Microsoft Windows NT, 2000, XP and 2003.
@@ -183,7 +183,7 @@ config ADK_KPACKAGE_KMOD_NTFS_FS
 	  Kernel modules for NTFS support
 
 config ADK_KPACKAGE_KMOD_VFAT_FS
-	prompt "kmod-vfat-fs...................... VFAT filesystem support"
+	prompt "VFAT filesystem support"
 	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
@@ -201,13 +201,12 @@ config ADK_KPACKAGE_KMOD_VFAT_FS
 
 
 config ADK_KERNEL_XFS_FS
-	prompt "xfs............................... XFS filesystem support (kernel)"
 	boolean
 	select ADK_KERNEL_EXPORTFS
 	default n
 
 config ADK_KPACKAGE_KMOD_XFS_FS
-	prompt "kmod-fs-xfs....................... XFS filesystem support (module)"
+	prompt "XFS filesystem support"
 	tristate
 	select ADK_KERNEL_EXPORTFS
 	select ADK_KPACKAGE_KMOD_CRYPTO_CRC32C
@@ -226,7 +225,7 @@ config ADK_KPACKAGE_KMOD_XFS_FS
 	  with the IRIX version of XFS.
 
 config ADK_KPACKAGE_KMOD_FUSE_FS
-	prompt   "kmod-fuse-fs...................... Filesystem in Userspace support"
+	prompt "Filesystem in Userspace support"
 	tristate
 	default n
 	help
@@ -246,7 +245,7 @@ config ADK_KERNEL_ISO9660_FS
 	default n
 
 config ADK_KPACKAGE_KMOD_ISO9660_FS
-	prompt "kmod-fs-iso9660................... ISO 9660 CDROM file system support"
+	prompt "ISO 9660 / JOLIET CDROM file system support"
 	tristate
 	select ADK_KERNEL_JOLIET
 	default n
@@ -262,7 +261,7 @@ config ADK_KPACKAGE_KMOD_ISO9660_FS
 	  enlarging your kernel by about 27 KB; otherwise say N.
 
 config ADK_KPACKAGE_KMOD_UDF_FS
-	prompt "kmod-fs-udf....................... UDF file system support"
+	prompt "UDF file system support"
 	tristate
 	select ADK_KPACKAGE_KMOD_CRC_ITU_T
 	default n
@@ -273,7 +272,7 @@ config ADK_KPACKAGE_KMOD_UDF_FS
 	  Please read <file:Documentation/filesystems/udf.txt>.
 
 config ADK_KERNEL_INOTIFY
-	prompt "inotify........................... Inotify file change notification support"
+	prompt "Inotify file change notification support"
 	boolean
 	default n
 	help
@@ -284,7 +283,7 @@ config ADK_KERNEL_INOTIFY
 	  notification.
 
 config ADK_KERNEL_INOTIFY_USER
-	prompt "inotify-user...................... Inotify support for userspace"
+	prompt "Inotify support for userspace"
 	boolean
 	depends on ADK_KERNEL_INOTIFY
 	default n

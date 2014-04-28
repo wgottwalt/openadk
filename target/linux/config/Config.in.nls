@@ -5,7 +5,7 @@ config ADK_KERNEL_NLS_DEFAULT
 	default "utf-8"
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_437
-	prompt   "kmod-nls-codepage-437........... Codepage 437 (United States, Canada)"
+	prompt "Codepage 437 (United States, Canada)"
 	tristate
 	default n
 	help
@@ -19,7 +19,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_437
 	  the United States and parts of Canada. This is recommended.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_737
-	prompt   "kmod-nls-codepage-737........... Codepage 737 (Greek)"
+	prompt "Codepage 737 (Greek)"
 	tristate
 	default n
 	help
@@ -33,7 +33,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_737
 	  Greek. If unsure, say N.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_775
-	prompt   "kmod-nls-codepage-775........... Codepage 775 (Baltic Rim)"
+	prompt "Codepage 775 (Baltic Rim)"
 	tristate
 	default n
 	help
@@ -48,7 +48,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_775
 	  say N.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
-	prompt   "kmod-nls-codepage-850........... Codepage 850 (Western European Languages)"
+	prompt "Codepage 850 (Western European Languages)"
 	tristate
 	default n
 	help
@@ -64,7 +64,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
 	  languages that are not part of the US codepage 437.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_852
-        prompt   "kmod-nls-codepage-852........... Codepage 852 (Eastern European Languages)"
+        prompt "Codepage 852 (Eastern European Languages)"
         tristate
         default n
         help
@@ -81,7 +81,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_852
 	  transcription), Slovak, Slovenian, and Sorbian.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_855
-        prompt   "kmod-nls-codepage-855........... Codepage 855 (Cyrillic)"
+        prompt "Codepage 855 (Cyrillic)"
         tristate
         default n
         help
@@ -94,7 +94,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_855
 	  say Y here if you want to include the DOS codepage for Cyrillic.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_857
-        prompt   "kmod-nls-codepage-857........... Codepage 857 (Turkish)"
+        prompt "Codepage 857 (Turkish)"
         tristate
         default n
         help
@@ -107,7 +107,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_857
 	  say Y here if you want to include the DOS codepage for Turkish.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_860
-        prompt   "kmod-nls-codepage-860........... Codepage 860 (Portuguese)"
+        prompt "Codepage 860 (Portuguese)"
         tristate
         default n
         help
@@ -120,7 +120,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_860
 	  say Y here if you want to include the DOS codepage for Portuguese.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_861
-        prompt   "kmod-nls-codepage-861........... Codepage 861 (Icelandic)"
+        prompt "Codepage 861 (Icelandic)"
         tristate
         default n
         help
@@ -133,7 +133,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_861
 	  say Y here if you want to include the DOS codepage for Icelandic.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_862
-        prompt   "kmod-nls-codepage-862........... Codepage 862 (Hebrew)"
+        prompt "Codepage 862 (Hebrew)"
         tristate
         default n
         help
@@ -146,7 +146,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_862
 	  say Y here if you want to include the DOS codepage for Hebrew.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_863
-        prompt   "kmod-nls-codepage-863........... Codepage 863 (French Canadian)"
+        prompt "Codepage 863 (French Canadian)"
         tristate
         default n
         help
@@ -160,7 +160,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_863
 	  French.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_864
-        prompt   "kmod-nls-codepage-864........... Codepage 864 (Arabic)"
+        prompt "Codepage 864 (Arabic)"
         tristate
         default n
         help
@@ -173,7 +173,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_864
 	  say Y here if you want to include the DOS codepage for Arabic.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_865
-        prompt   "kmod-nls-codepage-865........... Codepage 865 (Norwegian, Danish)"
+        prompt "Codepage 865 (Norwegian, Danish)"
         tristate
         default n
         help
@@ -187,7 +187,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_865
 	  European countries.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_866
-        prompt   "kmod-nls-codepage-866........... Codepage 866 (Cyrillic/Russian)"
+        prompt "Codepage 866 (Cyrillic/Russian)"
         tristate
         default n
         help
@@ -201,7 +201,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_866
 	  Cyrillic/Russian.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_869
-        prompt   "kmod-nls-codepage-869........... Codepage 869 (Greek)"
+        prompt "Codepage 869 (Greek)"
         tristate
         default n
         help
@@ -214,7 +214,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_869
 	  say Y here if you want to include the DOS codepage for Greek.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_874
-        prompt   "kmod-nls-codepage-874........... Codepage 874 (Thai)"
+        prompt "Codepage 874 (Thai)"
         tristate
         default n
         help
@@ -227,7 +227,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_874
 	  say Y here if you want to include the DOS codepage for Thai.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_932
-        prompt   "kmod-nls-codepage-932........... Codepage 932 (Japanese)"
+        prompt "Codepage 932 (Japanese)"
         tristate
         default n
         help
@@ -242,7 +242,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_932
 	  NLS Default value during kernel configuration, instead of 'cp932'.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_936
-        prompt   "kmod-nls-codepage-936........... Codepage 936 (Simplified Chinese)"
+        prompt "Codepage 936 (Simplified Chinese)"
         tristate
         default n
         help
@@ -256,7 +256,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_936
 	  Chinese(GBK).
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_949
-        prompt   "kmod-nls-codepage-949........... Codepage 949 (Korean)"
+        prompt "Codepage 949 (Korean)"
         tristate
         default n
         help
@@ -269,7 +269,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_949
 	  say Y here if you want to include the DOS codepage for UHC.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_950
-        prompt   "kmod-nls-codepage-950........... Codepage 950 (Traditional Chinese)"
+        prompt "Codepage 950 (Traditional Chinese)"
         tristate
         default n
         help
@@ -283,7 +283,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_950
 	  Chinese(Big5).
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_1250
-        prompt   "kmod-nls-codepage-1250.......... Codepage 1250 (Slavic/Central European)"
+        prompt "Codepage 1250 (Slavic/Central European)"
         tristate
         default n
         help
@@ -296,7 +296,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_1250
 	  Slovak, Slovene.
 
 config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_1251
-        prompt   "kmod-nls-codepage-1251.......... Codepage 1251 (Bulgarian, Belarusian)"
+        prompt "Codepage 1251 (Bulgarian, Belarusian)"
         tristate
         default n
         help
@@ -310,7 +310,7 @@ config ADK_KPACKAGE_KMOD_NLS_CODEPAGE_1251
 	  Bulgarian and Belarusian.
 
 config ADK_KPACKAGE_KMOD_NLS_ASCII
-	prompt   "kmod-nls-ascii.................. ASCII (United States)"
+	prompt "ASCII (United States)"
 	tristate
 	default n
 	help
@@ -319,7 +319,7 @@ config ADK_KPACKAGE_KMOD_NLS_ASCII
 	  non-ASCII characters to be translated.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_1
-	prompt   "kmod-nls-iso8859-1.............. NLS ISO 8859-1 (Latin-1; Western European Languages)"
+	prompt "NLS ISO 8859-1 (Latin-1; Western European Languages)"
 	tristate
 	default y
 	help
@@ -333,7 +333,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_1
 	  and Swedish. It is also the default for the US. If unsure, say Y.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_2
-        prompt   "kmod-nls-iso8859-2.............. NLS ISO 8859-2 (Latin-2; Central European Languages)"
+        prompt "NLS ISO 8859-2 (Latin-2; Central European Languages)"
         tristate
         default n
         help
@@ -346,7 +346,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_2
 	  Slovak, Slovene.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_3
-        prompt   "kmod-nls-iso8859-3.............. NLS ISO 8859-3 (Latin-3; Esperanto, Galician, Maltese, Turkish)"
+        prompt "NLS ISO 8859-3 (Latin-3; Esperanto, Galician, Maltese, Turkish)"
         tristate
         default n
         help
@@ -358,7 +358,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_3
 	  and Turkish.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_4
-        prompt   "kmod-nls-iso8859-4.............. NLS ISO 8859-4 (Latin-4; old Baltic charset)"
+        prompt "NLS ISO 8859-4 (Latin-4; old Baltic charset)"
         tristate
         default n
         help
@@ -370,7 +370,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_4
 	  Lithuanian. It is an incomplete predecessor of Latin 7.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_5
-        prompt   "kmod-nls-iso8859-5.............. NLS ISO 8859-5 (Cyrillic)"
+        prompt "NLS ISO 8859-5 (Cyrillic)"
         tristate
         default n
         help
@@ -383,7 +383,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_5
 	  KOI8-R is preferred in Russia.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_6
-        prompt   "kmod-nls-iso8859-6.............. NLS ISO 8859-6 (Arabic)"
+        prompt "NLS ISO 8859-6 (Arabic)"
         tristate
         default n
         help
@@ -394,7 +394,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_6
 	  character set.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_7
-        prompt   "kmod-nls-iso8859-7.............. NLS ISO 8859-7 (Greek)"
+        prompt "NLS ISO 8859-7 (Greek)"
         tristate
         default n
         help
@@ -405,7 +405,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_7
 	  Greek character set.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_8
-        prompt   "kmod-nls-iso8859-8.............. NLS ISO 8859-8 (Hebrew)"
+        prompt "NLS ISO 8859-8 (Hebrew)"
         tristate
         default n
         help
@@ -416,7 +416,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_8
 	  character set.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_9
-        prompt   "kmod-nls-iso8859-9.............. NLS ISO 8859-9 (Latin-5; Turkish)"
+        prompt "NLS ISO 8859-9 (Latin-5; Turkish)"
         tristate
         default n
         help
@@ -428,7 +428,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_9
 	  with the Turkish ones. Useful in Turkey.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_13
-        prompt   "kmod-nls-iso8859-13............. NLS ISO 8859-13 (Latin-7; Baltic Rim)"
+        prompt "NLS ISO 8859-13 (Latin-7; Baltic Rim)"
         tristate
         default n
         help
@@ -440,7 +440,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_13
 	  and Lithuanian.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_14
-        prompt   "kmod-nls-iso8859-14............. NLS ISO 8859-14 (Latin-8; Celtic)"
+        prompt "NLS ISO 8859-14 (Latin-8; Celtic)"
         tristate
         default n
         help
@@ -453,7 +453,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_14
 	  <http://linux.speech.cymru.org/> has further information.
 
 config ADK_KPACKAGE_KMOD_NLS_ISO8859_15
-	prompt   "kmod-nls-iso8859-15............. NLS ISO 8859-15 (Latin-9; Western European Languages with Euro)"
+	prompt "NLS ISO 8859-15 (Latin-9; Western European Languages with Euro)"
 	tristate
 	default n
 	help
@@ -471,7 +471,7 @@ config ADK_KPACKAGE_KMOD_NLS_ISO8859_15
 	  If unsure, say Y.
 
 config ADK_KPACKAGE_KMOD_NLS_KOI8_R
-	prompt   "kmod-nls-koi8-r................. NLS KOI8-R (Cryllic for Russian and Bulgarian"
+	prompt "NLS KOI8-R (Cryllic for Russian and Bulgarian)"
 	tristate
 	default n
 	help
@@ -482,7 +482,7 @@ config ADK_KPACKAGE_KMOD_NLS_KOI8_R
 	  character set.
 
 config ADK_KPACKAGE_KMOD_NLS_KOI8_U
-	prompt   "kmod-nls-koi8-u................. NLS KOI8-U (Cyrillic for Russian, Bulgarian and Ukrainian"
+	prompt "NLS KOI8-U (Cyrillic for Russian, Bulgarian and Ukrainian)"
 	tristate
 	default n
 	help
@@ -493,7 +493,7 @@ config ADK_KPACKAGE_KMOD_NLS_KOI8_U
 	  (koi8-u) and Belarusian (koi8-ru) character sets.
 
 config ADK_KPACKAGE_KMOD_NLS_UTF8
-	prompt   "kmod-nls-utf8................... NLS UTF8"
+	prompt "NLS UTF8"
 	tristate
 	default y
 	help

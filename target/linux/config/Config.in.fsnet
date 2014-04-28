@@ -6,7 +6,7 @@ config ADK_KERNEL_FS_POSIX_ACL
 	default y
 
 config ADK_KPACKAGE_KMOD_CIFS
-	prompt "kmod-cifs......................... CIFS support"
+	prompt "CIFS support"
 	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
@@ -42,7 +42,7 @@ config ADK_KPACKAGE_KMOD_CIFS
 	  to mount to Samba or Windows from this machine, say Y.
 
 config ADK_KPACKAGE_KMOD_CODA_FS
-	prompt "kmod-fs-coda...................... support for coda client"
+	prompt "Support for CODA filesystem"
 	tristate
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	default n
@@ -60,7 +60,7 @@ config ADK_KERNEL_RPCSEC_GSS_KRB5
 	default n
 
 config ADK_KPACKAGE_KMOD_NFS_FS
-	prompt "kmod-fs-nfs....................... NFS client support (includes V3 support)"
+	prompt "NFS client support (includes V3 support)"
 	tristate
 	default n
 	select ADK_KERNEL_NFS_V3
@@ -114,7 +114,7 @@ config ADK_KERNEL_NFSD_V4
 	default n
 
 config ADK_KPACKAGE_KMOD_NFSD
-	prompt "kmod-nfsd......................... NFS server support"
+	prompt "NFS server support"
 	tristate
 	default n
 	select ADK_KERNEL_EXPORTFS
