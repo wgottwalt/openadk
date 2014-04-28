@@ -1,6 +1,25 @@
 --- coreutils-8.22.orig/Makefile.am	2013-12-04 15:48:30.000000000 +0100
-+++ coreutils-8.22/Makefile.am	2014-02-21 16:15:49.000000000 +0100
-@@ -187,5 +187,4 @@ AM_CPPFLAGS = -Ilib -I$(top_srcdir)/lib
++++ coreutils-8.22/Makefile.am	2014-04-28 07:54:33.112599463 +0200
+@@ -17,7 +17,7 @@
+ 
+ ALL_RECURSIVE_TARGETS =
+ 
+-SUBDIRS = po . gnulib-tests
++SUBDIRS = . gnulib-tests
+ 
+ changelog_etc =				\
+   ChangeLog-2005			\
+@@ -35,8 +35,7 @@ changelog_etc =				\
+   old/sh-utils/ChangeLog.0		\
+   old/sh-utils/NEWS			\
+   old/textutils/ChangeLog		\
+-  old/textutils/NEWS			\
+-  po/ChangeLog-2007
++  old/textutils/NEWS			
+ 
+ EXTRA_DIST =				\
+   $(changelog_etc)			\
+@@ -187,5 +186,4 @@ AM_CPPFLAGS = -Ilib -I$(top_srcdir)/lib
  include $(top_srcdir)/lib/local.mk
  include $(top_srcdir)/src/local.mk
  include $(top_srcdir)/doc/local.mk
