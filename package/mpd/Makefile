@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.18.9
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		0e5156a831d4302d2032998bcfd5c36f
-PKG_DESCR:=		A music player daemon
+PKG_VERSION:=		0.18.10
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		046f23f63ad9aa4af38159754f813fc7
+PKG_DESCR:=		music player daemon
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		glib libstdcxx libgcc libiconv-tiny libmpdclient
 PKG_FDEPENDS:=		glib libstdcxx libgcc libiconv-tiny libmpdclient
