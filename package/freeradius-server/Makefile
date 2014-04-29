@@ -10,7 +10,7 @@ PKG_MD5SUM:=		3532b6439270f9da0ebfc03d3623f962
 PKG_DESCR:=		flexible RADIUS server
 PKG_SECTION:=		ppp
 PKG_DEPENDS:=		libltdl libopenssl libpthread
-PKG_BUILDDEP:=		autotool libtool openssl
+PKG_BUILDDEP:=		autotool libtool openssl samba
 PKG_URL:=		http://www.freeradius.org/
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/
 PKG_MULTI:=		1
@@ -121,7 +121,7 @@ $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_MYSQL,rlm_sql_mysql,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_PGSQL,rlm_sql_postgresql,))
 
 AUTOTOOL_STYLE:=	autoreconf
-CONFIGURE_ENV+=		LIBTOOL=
+XAKE_FLAGS+=            GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTS} \
 			--with-openssl-includes=${STAGING_TARGET_DIR}/usr/include \
 			--with-openssl-libraries=${STAGING_TARGET_DIR}/usr/lib \
