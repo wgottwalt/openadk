@@ -502,7 +502,7 @@ test-framework:
 	for libc in $$libc;do \
 		( \
 			mkdir -p $(TOPDIR)/firmware/; \
-			for arch in $$(grep -v m68k target/tarch.lst|xargs);do \
+			for arch in $$(grep -v "\(m68k\|aarch64\)" toolchain/$$libc/tarch.lst|xargs);do \
 				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#" -e "s#hf##" -e "s#x86_64.*#x86_64#"); \
 				arch=$$(echo $$arch|sed -e 's#x86$$#i686#'); \
 				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
