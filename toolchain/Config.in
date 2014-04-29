@@ -44,18 +44,11 @@ config ADK_TOOLCHAIN_USE_GOLD
 	depends on ADK_TOOLCHAIN_GOLD
 	default n
 
-choice
-prompt "Use ARM thumb mode"
-depends on ADK_CPU_CORTEX_A9
-
-config ADK_LINUX_ARM_WITHOUT_THUMB
-	boolean "disabled"
-	select ADK_mode_arm
-
 config ADK_LINUX_ARM_WITH_THUMB
-	boolean "enabled"
-	select ADK_mode_thumb
+	prompt "Use THUMB2 ARM mode"
+	boolean
+	depends on ADK_CPU_CORTEX_A9 && ADK_TARGET_LIB_GLIBC
 	select ADK_KERNEL_THUMB2_KERNEL
+	default n
 
-endchoice
 endmenu

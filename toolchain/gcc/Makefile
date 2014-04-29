@@ -89,7 +89,6 @@ endif
 
 ifeq ($(ARCH),arm)
 GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
-GCC_CONFOPTS+=		--with-mode=$(ADK_TARGET_ARM_MODE)
 ifneq ($(ADK_TARGET_FPU),)
 GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
 endif

@@ -50,12 +50,6 @@ config ADK_fpu_neon
 config ADK_fpu_vfp
 	boolean
 
-config ADK_mode_arm
-	boolean
-
-config ADK_mode_thumb
-	boolean
-
 config ADK_TARGET_FLOAT
 	string
 	default "hard" if ADK_hard_float
@@ -65,13 +59,6 @@ config ADK_TARGET_FPU
 	string
 	default "vfp" if ADK_fpu_vfp
 	default "neon" if ADK_fpu_neon
-
-config ADK_TARGET_ARM_MODE
-	depends on ADK_LINUX_ARM
-	string
-	default "arm" if ADK_mode_arm
-	default "thumb" if ADK_mode_thumb
-	default "arm"
 
 config ADK_TARGET_ENDIAN
 	string
