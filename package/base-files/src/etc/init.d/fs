@@ -8,7 +8,7 @@
 # activate any logical volumes
 [ -x /usr/sbin/lvm ] && { lvm vgscan; lvm vgchange -ay; }
 
-fstypes="ext2 ext3 ext4 xfs"
+fstypes="ext2 ext3 ext4 xfs vfat"
 
 # filesystem checks
 for fs in $fstypes; do
