@@ -106,12 +106,6 @@ config ADK_KERNEL_CPU_MIPS64_R1
 config ADK_KERNEL_CPU_MIPS64_R2
 	boolean
 
-config ADK_KERNEL_PREEMPT
-	boolean
-
-config ADK_KERNEL_THUMB2_KERNEL
-	boolean
-
 # page size
 config ADK_KERNEL_PAGE_SIZE_4KB
 	boolean
@@ -119,8 +113,11 @@ config ADK_KERNEL_PAGE_SIZE_4KB
 config ADK_KERNEL_PAGE_SIZE_16KB
 	boolean
 
-# ABI
+# ARM specific
 config ADK_KERNEL_AEABI
+	boolean
+
+config ADK_KERNEL_THUMB2_KERNEL
 	boolean
 
 # endianess
@@ -131,3 +128,25 @@ config ADK_KERNEL_CPU_BIG_ENDIAN
 config ADK_KERNEL_CPU_LITTLE_ENDIAN
 	default y if ADK_little
 	boolean
+
+menu "Kernel options"
+
+config ADK_KERNEL_SMP
+	prompt "Enable symmetric multi processing"
+	boolean
+	default y if ADK_TARGET_CUBOX_I4PRO
+	default y if ADK_TARGET_CUBOX_I2ULTRA
+	default n
+
+config ADK_KERNEL_HIGHMEM
+	prompt "Enable high memory"
+	boolean
+	default y if ADK_TARGET_CUBOX_I4PRO
+	default n
+
+config ADK_KERNEL_PREEMPT
+	prompt "Enable preemptive kernel"
+	boolean
+	default n
+
+endmenu

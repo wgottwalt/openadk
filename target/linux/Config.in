@@ -1,3 +1,4 @@
+source target/linux/config/Config.in.kernel
 source target/linux/config/Config.in.cpu
 source target/linux/config/Config.in.block
 source target/linux/config/Config.in.flash
