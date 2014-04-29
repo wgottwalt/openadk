@@ -1,6 +1,0 @@
-#!/bin/sh
-. $IPKG_INSTROOT/etc/functions.sh
-add_service swat 901/tcp
-grep -qe '^swat	' -e '^#swat	' $IPKG_INSTROOT/etc/inetd.conf 2>&- || \
-    echo '#swat	stream	tcp	nowait.400	root	/usr/bin/swat	swat' \
-    >>$IPKG_INSTROOT/etc/inetd.conf
