@@ -1482,15 +1482,15 @@ $(eval $(call KMOD_template,LEDS_ALIX2,leds-alix2,\
 ,10))
 
 $(eval $(call KMOD_template,LEDS_TRIGGER_TIMER,leds-trigger-timer,\
-	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-timer \
+	$(MODULES_DIR)/kernel/drivers/leds/trigger/ledtrig-timer \
 ,20))
 
 $(eval $(call KMOD_template,LEDS_TRIGGER_HEARTBEAT,leds-trigger-heartbeat,\
-	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-heartbeat \
+	$(MODULES_DIR)/kernel/drivers/leds/trigger/ledtrig-heartbeat \
 ,20))
 
 $(eval $(call KMOD_template,LEDS_TRIGGER_DEFAULT_ON,leds-trigger-default-on,\
-	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-default-on \
+	$(MODULES_DIR)/kernel/drivers/leds/trigger/ledtrig-default-on \
 ,20))
 
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_LED,netfilter-xt-target-led,\
