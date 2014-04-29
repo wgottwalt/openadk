@@ -24,11 +24,7 @@ else
 CONFOPTS+=		--disable-gold
 endif
 
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-CONFOPTS+=          	--with-arch=armv6
-endif
-
-ifneq ($(ADK_LINUX_64),)
+ifneq ($(ADK_LINUX_64)$(ADK_TARGET_KERNEL_64),)
 CONFOPTS+=		--enable-64-bit-bfd
 endif
 

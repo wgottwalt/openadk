@@ -11,6 +11,8 @@ PKG_DESCR:=		genext2fs utility
 PKG_SECTION:=		fs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=genext2fs/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_CFLINE_GENEXT2FS:=	depends on ADK_HOST_ONLY
 
 include $(TOPDIR)/mk/host.mk

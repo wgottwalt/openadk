@@ -35,7 +35,7 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-nls
 
 GCC_FINAL_CONFOPTS:=
-ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
+ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64)$(ADK_LINUX_X86),)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 
@@ -48,12 +48,17 @@ endif
 GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=m4,m4-nofpu
 endif
 
+ifeq ($(ADK_LINUX_X86),y)
+ifeq ($(ADK_TARGET_KERNEL_64),y)
+GCC_FINAL_CONFOPTS+=	--enable-biarch --enable-targets=all --disable-multilib
+else
+GCC_FINAL_CONFOPTS+=    --disable-biarch --disable-multilib
+endif
+endif
+
 ifeq ($(ADK_LINUX_X86_64),y)
 ifeq ($(ADK_x32),y)
 GCC_FINAL_CONFOPTS+=	--with-abi=x32
-endif
-ifeq ($(ADK_32),y)
-GCC_FINAL_CONFOPTS+=	--with-abi=32
 endif
 ifeq ($(ADK_64),y)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
