@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		samba
 PKG_VERSION:=		3.6.23
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		2f7aee1dc5d31aefcb364600915b31dc
 PKG_DESCR:=		NetBIOS/SMB file and print server
 PKG_SECTION:=		net/fs
@@ -53,7 +53,7 @@ CONFIGURE_ARGS+=	--with-ldap=no
 endif
 
 CONFIGURE_ENV+=		samba_cv_CC_NEGATIVE_ENUM_VALUES=no \
-			samba_cv_USE_SETRESUID=no \
+			samba_cv_USE_SETRESUID=yes \
 			samba_cv_HAVE_WRFILE_KEYTAB=yes \
 			ac_cv_func_ext_krb5_enctype_to_string=yes \
 			smb_krb5_cv_enctype_to_string_takes_krb5_context_arg=yes \
