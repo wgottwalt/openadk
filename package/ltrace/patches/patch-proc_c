@@ -1,0 +1,32 @@
+--- ltrace-0.7.3.orig/proc.c	2013-02-05 12:05:39.000000000 +0100
++++ ltrace-0.7.3/proc.c	2013-10-16 11:37:49.000000000 +0200
+@@ -329,6 +329,7 @@ clone_single_bp(void *key, void *value,
+ int
+ process_clone(struct Process *retp, struct Process *proc, pid_t pid)
+ {
++	__attribute__((unused))int rc;
+ 	if (process_bare_init(retp, proc->filename, pid, 0) < 0) {
+ 	fail1:
+ 		fprintf(stderr, "failed to clone process %d->%d : %s\n",
+@@ -432,7 +433,7 @@ process_clone(struct Process *retp, stru
+ 		 * library.  */
+ 		if (!elem->is_syscall && elem->c_un.libfunc != NULL) {
+ 			struct library_symbol *libfunc = elem->c_un.libfunc;
+-			int rc = proc_find_symbol(retp, libfunc,
++			rc = proc_find_symbol(retp, libfunc,
+ 						  NULL, &elem->c_un.libfunc);
+ 			assert(rc == 0);
+ 		}
+@@ -937,10 +938,11 @@ proc_add_breakpoint(struct Process *proc
+ void
+ proc_remove_breakpoint(struct Process *proc, struct breakpoint *bp)
+ {
++	__attribute__((unused))struct breakpoint *removed;
+ 	debug(DEBUG_FUNCTION, "proc_remove_breakpoint(pid=%d, %s@%p)",
+ 	      proc->pid, breakpoint_name(bp), bp->addr);
+ 	check_leader(proc);
+-	struct breakpoint *removed = dict_remove(proc->breakpoints, bp->addr);
++	removed = dict_remove(proc->breakpoints, bp->addr);
+ 	assert(removed == bp);
+ }
+ 
