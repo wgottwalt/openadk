@@ -13,6 +13,8 @@ PKG_URL:=		https://developers.google.com/speed/webp/
 PKG_SITES:=		https://webp.googlecode.com/files/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBWEBP,libwebp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

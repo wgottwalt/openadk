@@ -13,10 +13,9 @@ PKG_DEPENDS:=		libnotify webkitgtk
 PKG_BUILDDEP:=		autotool cmake-host vala-host libnotify webkitgtk
 PKG_BUILDDEP+=		librsvg-host librsvg
 PKG_URL:=		http://www.midori-browser.org
-PKG_SITES:=		http://www.midori-browser.org/downloads/
+PKG_SITES:=		http://www.openadk.org/distfiles/
 
 WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include $(TOPDIR)/mk/package.mk
 
