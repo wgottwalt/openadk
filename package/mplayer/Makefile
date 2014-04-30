@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
 PKG_VERSION:=		1.1.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		39dd55f30eb5403f219a606e79a6648a
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		multimedia
@@ -18,6 +18,8 @@ PKG_BUILDDEP+=		libX11 libXv libpng libXext libjpeg-turbo libtheora
 PKG_BUILDDEP+=		xvidcore libvpx gettext-tiny
 PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://www.mplayerhq.hu/MPlayer/releases/
+
+PKG_BUILDDEP_IBM_X40:=	yasm-host
 
 DISTFILES:=		MPlayer-$(PKG_VERSION).tar.xz
 WRKDIST=		${WRKDIR}/MPlayer-${PKG_VERSION}
@@ -89,6 +91,12 @@ else
 CONFIGURE_DIRECTFB=	--disable-directfb
 endif
 
+ifeq ($(ADK_TARGET_SYSTEM_IBM_X40),y)
+			--yasm=${STAGING_HOST_DIR}/usr/bin/yasm
+else
+			--yasm=''
+endif
+
 CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-x11 \
 			--confdir=/etc \
@@ -96,8 +104,6 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--target=${ARCH}-linux \
 			--cc='$(TARGET_CC)' \
 			--host-cc=$(CC_FOR_BUILD) \
-			--yasm='' \
-			--disable-mencoder \
 			--enable-fbdev \
 			--enable-alsa \
 			--enable-tv \
@@ -109,7 +115,11 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-faac \
 			--enable-theora \
 			--enable-xvid \
+			--enable-x264 \
+			--enable-x264-lavc \
+			--disable-mencoder \
 			--disable-ossaudio \
+			--disable-caca \
 			--disable-vm \
 			--disable-iconv \
 			--disable-lirc \
@@ -141,6 +151,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--disable-xinerama \
 			--disable-vidix \
 			--disable-gl \
+			--disable-ssse3 \
 			--extra-cflags="${EXTRA_CFLAGS}" \
 			${CONFIGURE_CPU_OPTS} \
 			${CONFIGURE_DEBUG} \

@@ -18,15 +18,15 @@ include $(TOPDIR)/rules.mk
 TARGETS:=binutils gmp mpfr mpc libelf gcc
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 TARGETS+=glibc
-LIBC:=glibc
+CLIB:=glibc
 endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 TARGETS+=uclibc
-LIBC:=uclibc
+CLIB:=uclibc
 endif
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGETS+=musl
-LIBC:=musl
+CLIB:=musl
 endif
 ifeq ($(ADK_TOOLCHAIN_GDB),y)
 TARGETS+=gdb
@@ -34,7 +34,7 @@ endif
 
 DOWNLOAD:=kernel-headers-download $(patsubst %,%-download,$(TARGETS))
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
-FIXUP:=$(patsubst %,%-fixup,$(LIBC))
+FIXUP:=$(patsubst %,%-fixup,$(CLIB))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
 
 install: $(TARGETS_INSTALL)
@@ -43,14 +43,14 @@ download: $(DOWNLOAD)
 fixup: $(FIXUP)
 
 gcc-prepare: binutils-install gmp-install mpfr-install mpc-install libelf-install
-$(LIBC)-prepare: gcc-prepare kernel-headers-prepare
-gcc-configure: $(LIBC)-prepare
-$(LIBC)-compile: gcc-configure
-gcc-compile: $(LIBC)-install
+$(CLIB)-prepare: gcc-prepare kernel-headers-prepare
+gcc-configure: $(CLIB)-prepare
+$(CLIB)-compile: gcc-configure
+gcc-compile: $(CLIB)-install
 ifeq ($(ADK_TOOLCHAIN_GDB),y)
-$(LIBC)-fixup: gcc-install gdb-install
+$(CLIB)-fixup: gcc-install gdb-install
 else
-$(LIBC)-fixup: gcc-install
+$(CLIB)-fixup: gcc-install
 endif
 
 %-download:
@@ -59,7 +59,7 @@ endif
 
 %-prepare:
 	$(TRACE) toolchain/$(patsubst %-prepare,%,$@)/prepare
-	@if test x"$(patsubst %-prepare,%,$@)" = x"$(LIBC)"; then \
+	@if test x"$(patsubst %-prepare,%,$@)" = x"$(CLIB)"; then \
 		$(MAKE) -C $(patsubst %-prepare,%,$@) prepare \
 		    $(MAKE_TRACE); \
 	else \
@@ -70,7 +70,7 @@ endif
 
 %-configure: %-prepare
 	$(TRACE) toolchain/$(patsubst %-configure,%,$@)/configure
-	@if test x"$(patsubst %-configure,%,$@)" = x"$(LIBC)"; then \
+	@if test x"$(patsubst %-configure,%,$@)" = x"$(CLIB)"; then \
 		$(MAKE) -C $(patsubst %-configure,%,$@) configure \
 		    $(MAKE_TRACE); \
 	else \
@@ -81,7 +81,7 @@ endif
 
 %-compile: %-configure
 	$(TRACE) toolchain/$(patsubst %-compile,%,$@)/compile
-	@if test x"$(patsubst %-compile,%,$@)" = x"$(LIBC)"; then \
+	@if test x"$(patsubst %-compile,%,$@)" = x"$(CLIB)"; then \
 		$(MAKE) -C $(patsubst %-compile,%,$@) compile \
 		    $(MAKE_TRACE); \
 	else \
@@ -92,7 +92,7 @@ endif
 
 %-install: %-compile
 	$(TRACE) toolchain/$(patsubst %-install,%,$@)/install
-	@if test x"$(patsubst %-install,%,$@)" = x"$(LIBC)"; then \
+	@if test x"$(patsubst %-install,%,$@)" = x"$(CLIB)"; then \
 		$(MAKE) -C $(patsubst %-install,%,$@) install \
 		    $(MAKE_TRACE); \
 	else \
