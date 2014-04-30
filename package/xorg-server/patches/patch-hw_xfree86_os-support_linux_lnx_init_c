@@ -1,0 +1,13 @@
+--- xorg-server-1.15.0.orig/hw/xfree86/os-support/linux/lnx_init.c	2013-12-27 18:38:52.000000000 +0100
++++ xorg-server-1.15.0/hw/xfree86/os-support/linux/lnx_init.c	2014-03-21 12:56:02.898707432 +0100
+@@ -83,8 +83,8 @@ xf86OpenConsole(void)
+     struct vt_mode VT;
+     struct vt_stat vts;
+     MessageType from = X_PROBED;
+-    char *tty0[] = { "/dev/tty0", "/dev/vc/0", NULL };
+-    char *vcs[] = { "/dev/vc/%d", "/dev/tty%d", NULL };
++    char *tty0[] = { "/dev/tty0", NULL };
++    char *vcs[] = { "/dev/tty%d", NULL };
+ 
+     if (serverGeneration == 1) {
+ 

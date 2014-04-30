@@ -31,7 +31,7 @@ PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_FLAVOURS_XORG_SERVER:=	WITH_DRI WITH_KDRIVE
 PKGFS_WITH_DRI:=		mesalib
-PKGFD_WITH_DRI:=		enable DRI/DRI2 support
+PKGFD_WITH_DRI:=		enable DRI support
 PKGFB_WITH_DRI:=		xf86driproto glproto MesaLib
 PKGFD_WITH_KDRIVE:=		Build Kdrive Xfbdev server
 
@@ -78,6 +78,8 @@ CONFIGURE_ARGS+=	--enable-dga \
 			--disable-xcsecurity \
 			--disable-xvfb \
 			--disable-xvmc \
+			--disable-selective-werror \
+			--disable-strict-compilation \
 			--with-xkb-output=/tmp \
 			--with-os-vendor=OpenADK \
 			--with-vendor-web="http://openadk.org"
@@ -109,8 +111,10 @@ xorg-server-install:
 	${CP} ${WRKINST}/usr/bin/* $(IDIR_XORG_SERVER)/usr/bin
 	${CP} ${WRKINST}/usr/lib/xorg/modules/*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules
+ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
 	${CP} ${WRKINST}/usr/lib/xorg/modules/extensions/*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
+endif
 	${CP} ${WRKINST}/usr/lib/xorg/modules/multimedia/*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/multimedia
 ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)

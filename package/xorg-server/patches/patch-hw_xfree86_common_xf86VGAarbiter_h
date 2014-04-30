@@ -1,0 +1,18 @@
+--- xorg-server-1.15.0.orig/hw/xfree86/common/xf86VGAarbiter.h	2013-12-15 08:48:09.000000000 +0100
++++ xorg-server-1.15.0/hw/xfree86/common/xf86VGAarbiter.h	2014-03-21 17:00:39.953676328 +0100
+@@ -30,6 +30,7 @@
+ #include "misc.h"
+ #include "xf86.h"
+ 
++#ifdef XSERVER_LIBPCIACCESS
+ /* Functions */
+ extern void xf86VGAarbiterInit(void);
+ extern void xf86VGAarbiterFini(void);
+@@ -41,6 +42,7 @@ extern void xf86VGAarbiterUnlock(ScrnInf
+ /* allow a driver to remove itself from arbiter - really should be
+  * done in the kernel though */
+ extern _X_EXPORT void xf86VGAarbiterDeviceDecodes(ScrnInfoPtr pScrn, int rsrc);
++#endif
+ 
+ /* DRI and arbiter are really not possible together,
+  * you really want to remove the card from arbitration if you can */

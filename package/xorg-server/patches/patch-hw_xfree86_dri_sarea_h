@@ -1,0 +1,11 @@
+--- xorg-server-1.15.0.orig/hw/xfree86/dri/sarea.h	2013-12-15 08:48:09.000000000 +0100
++++ xorg-server-1.15.0/hw/xfree86/dri/sarea.h	2014-03-21 12:54:54.486559308 +0100
+@@ -43,6 +43,8 @@
+ #define SAREA_MAX 			0x2000
+ #elif defined(__ia64__)
+ #define SAREA_MAX			0x10000 /* 64kB */
++#elif defined(__mips__)
++#define SAREA_MAX			0x4000
+ #else
+ /* Intel 830M driver needs at least 8k SAREA */
+ #define SAREA_MAX			0x2000
