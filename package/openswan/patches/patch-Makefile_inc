@@ -1,5 +1,5 @@
---- openswan-2.6.37.orig/Makefile.inc	2011-10-28 23:11:53.000000000 +0200
-+++ openswan-2.6.37/Makefile.inc	2011-12-01 17:30:31.000000000 +0100
+--- openswan-2.6.41.orig/Makefile.inc	2014-02-21 21:46:57.000000000 +0100
++++ openswan-2.6.41/Makefile.inc	2014-03-12 18:39:50.906115397 +0100
 @@ -169,7 +169,7 @@ INSTALL=install
  # how backup names are composed.
  # Note that the install procedures will never overwrite an existing config
@@ -9,7 +9,20 @@
  INSTSUIDFLAGS=--mode=u+rxs,g+rx,o+rx --group=root -b --suffix=.old
  INSTMANFLAGS=
  INSTCONFFLAGS=
-@@ -279,12 +279,12 @@ RH_KERNELSRC?=/lib/modules/2.6.9-1.681_F
+@@ -191,10 +191,10 @@ BISONOSFLAGS=
+ #Example for a cross compile:
+ #USERCOMPILE?=-g ${PORTDEFINE} -I/usr/local/arm_tools/arm-elf/inc -L/usr/local/arm_tools/lib/gcc-lib
+ GCC_LINT ?= -DGCC_LINT
+-USERCOMPILE?=-g -O3 -fPIE -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security -Werror=format-security -D_FORTIFY_SOURCE=2 ${WERROR} $(GCC_LINT)
++USERCOMPILE?=-g -O3 -fPIE -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security -D_FORTIFY_SOURCE=2 ${WERROR} $(GCC_LINT)
+ # on fedora/rhel
+ #USERCOMPILE?=-g -O2 -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4  -m64 -mtune=generic -fPIE -pie -DSUPPORT_BROKEN_ANDROID_ICS
+-KLIPSCOMPILE=-O2 -fPIE -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security -Werror=format-security -D_FORTIFY_SOURCE=2 -DCONFIG_KLIPS_ALG -DDISABLE_UDP_CHECKSUM
++KLIPSCOMPILE=-O2 -fPIE -fstack-protector --param=ssp-buffer-size=4 -Wformat -Wformat-security -D_FORTIFY_SOURCE=2 -DCONFIG_KLIPS_ALG -DDISABLE_UDP_CHECKSUM
+ # Additional debugging for developers (warning: can crash openswan!)
+ #USERCOMPILE?=-g -DLEAK_DETECTIVE -lefence
+ # You can also run this before starting openswan on glibc systems:
+@@ -283,12 +283,12 @@ RH_KERNELSRC?=/lib/modules/2.6.9-1.681_F
  # Note you need a locally running bind9 nameserver with lwres{} enabled
  # to use this, or have the "lwres" package installed and running.
  # This only affects conns that use DNS for keys in lookups.
@@ -23,4 +36,4 @@
 +USE_DYNAMICDNS?=false
  
  # Do we want all the configuration files like ipsec.conf and ipsec.secrets
- # and any certificates to be in a single directory defined by 
+ # and any certificates to be in a single directory defined by
