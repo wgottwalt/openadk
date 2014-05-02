@@ -4,26 +4,27 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
-PKG_VERSION:=		2.4.5
+PKG_VERSION:=		2.4.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6dcc544657ade213d01017354a6f9858
+PKG_MD5SUM:=		f6b28633b9978fadc724247cfc264ff0
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
 PKG_BUILDDEP:=		gettext-tiny-host glib-host flex-host bison-host qemu-host
 PKG_BUILDDEP+=		fastjar-host libICE-host libSM-host libX11-host util-macros-host libXt-host 
 PKG_BUILDDEP+=		xineramaproto-host libXinerama-host recordproto-host libXi-host libXtst-host freetype-host
 PKG_BUILDDEP+=		renderproto-host libXrender-host alsa-lib-host libffi-host gcj-host ecj-host jikes-host 
-PKG_BUILDDEP+=		classpath-host jamvm-host ant-host cups-host openjdk7-host nss
+PKG_BUILDDEP+=		classpath-host jamvm-host openjdk7-host nss
 PKG_BUILDDEP+=		alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv-tiny
 PKG_BUILDDEP+=		libpng giflib gtk+ glib fontconfig
+HOST_BUILDDEP:=		ant-host cups-host
 PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi libgcc cups
 PKG_DEPENDS+=		libfreetype libxrender libx11 libxext libpthread nss libjpeg-turbo
 PKG_DEPENDS+=		libpng giflib libgtk glib fontconfig
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://icedtea.classpath.org/download/source/
 
-DISTFILES:=		icedtea-$(PKG_VERSION).tar.gz
+DISTFILES:=		icedtea-$(PKG_VERSION).tar.xz
 WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
 GCJ_VER:=		4.8.2
@@ -88,7 +89,7 @@ CONFIGURE_ARGS+=	$(CONFIGURE_COMMON)
 CONFIGURE_ARGS+=	--disable-bootstrap
 
 CONFIGURE_ENV+=		LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib
-MAKE_ENV+=		ALT_COMPILER_PATH=$(STAGING_HOST_DIR)/$(GNU_TARGET_NAME)/bin \
+MAKE_ENV+=		ALT_COMPILER_PATH=$(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin \
 			ALT_OPENWIN_HOME=$(STAGING_TARGET_DIR)/usr/ \
 			ALT_CUPS_HEADERS_PATH=$(STAGING_TARGET_DIR)/usr/include/ \
 			ALT_FREETYPE_HEADERS_PATH=$(STAGING_TARGET_DIR)/usr/include/ \
@@ -122,7 +123,7 @@ HOST_CONFIGURE_ARGS+=\
 		--with-jdk-home=$(STAGING_HOST_DIR)/usr/lib/jvm \
 		--with-java=$(STAGING_HOST_DIR)/usr/bin/java \
 		--with-javac=$(STAGING_HOST_DIR)/usr/bin/ecj \
-		--with-ecj-jar=${STAGING_HOST_DIR}/usr/share/java/ecj.jar \
+		--with-ecj-jar=${DL_DIR}/ecj.jar \
 		--without-hotspot-build \
                 --disable-system-zlib \
                 --disable-system-jpeg \
