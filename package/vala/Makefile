@@ -14,8 +14,6 @@ HOST_BUILDDEP:=		glib-host
 PKG_URL:=		https://wiki.gnome.org/Vala
 PKG_SITES:=		http://download.gnome.org/sources/vala/0.24/
 
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
