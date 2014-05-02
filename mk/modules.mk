@@ -1238,6 +1238,12 @@ $(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-spitz \
 ,55, kmod-snd-soc))
 
+$(eval $(call KMOD_template,SND_IMX_SOC,snd-imx-soc,\
+	$(MODULES_DIR)/kernel/sound/soc/fsl/imx-pcm-dma \
+	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-fsl-spdif \
+	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-imx-spdif \
+,55, kmod-snd-soc))
+
 $(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
 	$(MODULES_DIR)/kernel/sound/arm/snd-bcm2835 \
 ,55))
