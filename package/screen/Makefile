@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		screen
-PKG_VERSION:=		4.0.3
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		8506fd205028a96c741e4037de6e3c42
+PKG_VERSION:=		4.2.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		419a0594e2b25039239af8b90eda7d92
 PKG_DESCR:=		window manager for the terminal session
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		libncurses libelf
