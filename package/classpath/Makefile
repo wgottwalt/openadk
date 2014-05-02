@@ -14,6 +14,8 @@ PKG_DEPENDS:=		libgtk gdk-pixbuf orbit2 gconf
 PKG_URL:=		http://www.gnu.org/software/classpath/home.html
 PKG_SITES:=		${MASTER_SITE_GNU:=classpath/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	!arm
 
