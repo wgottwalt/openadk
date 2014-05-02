@@ -1,5 +1,6 @@
-base	Base System
 boot	Boot Loaders
+base	Base System and Libraries
+core	Basic System commands
 browser	Browser / Editor / Pager
 editor	Browser / Editor / Pager
 pager	Browser / Editor / Pager

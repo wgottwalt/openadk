@@ -7,26 +7,24 @@ PKG_NAME:=		coreutils
 PKG_VERSION:=		8.22
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		8fb0ae2267aa6e728958adc38f8163a2
-PKG_DESCR:=		basic file, shell and text manipulation utilities
-PKG_SECTION:=		base
+PKG_DESCR:=		basic file, shell and text manipulation utilities (also provided by busybox)
+PKG_SECTION:=		core
 PKG_BUILDDEP:=		gmp autotool
 PKG_URL:=		http://www.gnu.org/software/coreutils/
 PKG_SITES:=		http://ftp.gnu.org/gnu/coreutils/
+PKG_MULTI:=		1
 
-PKG_SUBPKGS:=		TSORT SHA256SUM TOUCH
+PKG_SUBPKGS:=		COREUTILS TSORT SHA256SUM TOUCH
 PKGSD_TSORT:=		topological sort utility
-PKGSC_TSORT:=		misc
 PKGSD_SHA256SUM:=	SHA1 256 bit checksum utility
-PKGSC_SHA256SUM:=	misc
 PKGSD_TOUCH:=		touch utility
-PKGSC_TOUCH:=		misc
 
 include $(TOPDIR)/mk/package.mk
 
-#$(eval $(call PKG_template,COREUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,TSORT,tsort,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_TSORT},${PKGSC_TSORT}))
-$(eval $(call PKG_template,TOUCH,touch,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_TOUCH},${PKGSC_TOUCH}))
-$(eval $(call PKG_template,SHA256SUM,sha256sum,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SHA256SUM},${PKGSC_SHA256SUM}))
+$(eval $(call PKG_template,COREUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TSORT,tsort,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_TSORT},${PKG_SECTION}))
+$(eval $(call PKG_template,TOUCH,touch,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_TOUCH},${PKG_SECTION}))
+$(eval $(call PKG_template,SHA256SUM,sha256sum,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SHA256SUM},${PKG_SECTION}))
 
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-rpath

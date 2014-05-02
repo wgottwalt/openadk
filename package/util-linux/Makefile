@@ -4,47 +4,54 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux
-PKG_VERSION:=		2.23.2
-PKG_RELEASE:=		6
-PKG_MD5SUM:=		b39fde897334a4858bb2098edcce5b3f
-PKG_DESCR:=		Linux utilities (meta-package)
-PKG_SECTION:=		utils
-PKG_DEPENDS:=		mount fdisk sfdisk swap-utils losetup mount mcookie
+PKG_VERSION:=		2.24.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		3f191727a0d28f7204b755cf1b6ea0aa
+PKG_DESCR:=		basic Linux utilities (also provided by busybox)
+PKG_SECTION:=		core
 PKG_BUILDDEP:=		ncurses
-PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.23/
+PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.24/
 PKG_NOPARALLEL:=	1
 PKG_OPTS:=		dev
+PKG_MULTI:=		1
 
 PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_SUBPKGS:=		UTIL_LINUX FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
-PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBMOUNT
-PKGSD_LIBUUID:=		UUID library
+PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBMOUNT SU CFDISK
+PKGSD_LIBUUID:=		uuid library
 PKGSC_LIBUUID:=		libs
-PKGSD_LIBBLKID:=	BLKID library
+PKGSD_LIBBLKID:=	blkid library
 PKGSC_LIBBLKID:=	libs
-PKGSD_LIBMOUNT:=	Mount library
+PKGSD_LIBMOUNT:=	mount library
 PKGSC_LIBMOUNT:=	libs
-PKGSD_FDISK:=		Partition table manipulation utility
-PKGSC_FDISK:=		fs
-PKGSD_SFDISK:=		Scriptable Partition table manipulation utility
+PKGSD_FDISK:=		partition table manipulation utility
+PKGSC_FDISK:=		core
+PKGSD_SFDISK:=		scriptable partition table manipulation utility
 PKGSC_SFDISK:=		fs
-PKGSD_SWAP_UTILS:=	Swap space management utilities
+PKGSD_CFDISK:=		partition table manipulation utility
+PKGSC_CFDISK:=		fs
+PKGSD_SU:=		switch user utility
+PKGSB_SU:=		pam
+PKGSC_SU:=		core
+PKGSD_SWAP_UTILS:=	swap space management utilities
 PKGSS_SWAP_UTILS:=	libblkid
-PKGSC_SWAP_UTILS:=	fs
-PKGSD_LOSETUP:=		Loop devices management utilities
+PKGSC_SWAP_UTILS:=	core
+PKGSD_LOSETUP:=		loop devices management utilities
 PKGSS_LOSETUP:=		kmod-blk-dev-loop
 PKGSD_MOUNT:=		mount/umount utilities
 PKGSS_MOUNT:=		libblkid libmount libuuid
-PKGSC_MOUNT:=		fs
-PKGSD_MCOOKIE:=		Generate magic cookies for xauth
+PKGSC_MOUNT:=		core
+PKGSD_MCOOKIE:=		generate magic cookies for xauth
 PKGSC_MCOOKIE:=		x11/apps
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,UTIL_LINUX,util-linux,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,FDISK,fdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FDISK},${PKGSC_FDISK}))
+$(eval $(call PKG_template,CFDISK,cfdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_CFDISK},${PKGSC_CFDISK}))
 $(eval $(call PKG_template,SFDISK,sfdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SFDISK},${PKGSC_SFDISK}))
+$(eval $(call PKG_template,SU,su,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_SU},${PKGSD_SU},${PKGSC_SU}))
 $(eval $(call PKG_template,SWAP_UTILS,swap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_SWAP_UTILS},${PKGSD_SWAP_UTILS},${PKGSC_SWAP_UTILS}))
 $(eval $(call PKG_template,LOSETUP,losetup,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LOSETUP},${PKGSD_LOSETUP},${PKG_SECTION}))
 $(eval $(call PKG_template,MOUNT,mount,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MOUNT},${PKGSD_MOUNT},${PKGSC_MOUNT}))
@@ -59,7 +66,7 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-schedutils \
 			--disable-cramfs \
 			--disable-login \
-			--disable-su \
+			--enable-su \
 			--enable-libuuid \
 			--enable-libblkid \
 			--enable-libmount \
@@ -69,11 +76,13 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
 TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK -ltinfo
 
-util-linux-install:
-
 fdisk-install:
 	${INSTALL_DIR} ${IDIR_FDISK}/usr/sbin
 	${CP} ${WRKINST}/sbin/fdisk ${IDIR_FDISK}/usr/sbin
+
+cfdisk-install:
+	${INSTALL_DIR} ${IDIR_CFDISK}/usr/sbin
+	${CP} ${WRKINST}/sbin/cfdisk ${IDIR_FDISK}/usr/sbin
 
 sfdisk-install:
 	${INSTALL_DIR} ${IDIR_SFDISK}/usr/sbin
