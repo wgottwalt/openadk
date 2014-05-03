@@ -1,15 +1,15 @@
---- xbmc-12.2.orig/xbmc/Application.cpp	2013-05-03 07:57:41.000000000 +0200
-+++ xbmc-12.2/xbmc/Application.cpp	2013-10-10 18:43:17.000000000 +0200
-@@ -615,7 +615,7 @@ bool CApplication::Create()
+--- xbmc-20140401.orig/xbmc/Application.cpp	2014-03-24 15:52:54.000000000 +0100
++++ xbmc-20140401/xbmc/Application.cpp	2014-04-01 21:05:39.113975490 +0200
+@@ -682,7 +682,7 @@ bool CApplication::Create()
  
-   if (!CLog::Init(CSpecialProtocol::TranslatePath(g_settings.m_logFolder).c_str()))
+   if (!CLog::Init(CSpecialProtocol::TranslatePath(g_advancedSettings.m_logFolder).c_str()))
    {
 -    fprintf(stderr,"Could not init logging classes. Permission errors on ~/.xbmc (%s)\n",
 +    fprintf(stderr,"Could not init logging classes. Permission errors on %s\n",
-       CSpecialProtocol::TranslatePath(g_settings.m_logFolder).c_str());
+       CSpecialProtocol::TranslatePath(g_advancedSettings.m_logFolder).c_str());
      return false;
    }
-@@ -966,10 +966,13 @@ bool CApplication::InitDirectoriesLinux(
+@@ -1085,10 +1085,13 @@ bool CApplication::InitDirectoriesLinux(
      userName = "root";
  
    CStdString userHome;
@@ -23,7 +23,7 @@
  
    CStdString xbmcBinPath, xbmcPath;
    CUtil::GetHomePath(xbmcBinPath, "XBMC_BIN_HOME");
-@@ -1001,11 +1004,11 @@ bool CApplication::InitDirectoriesLinux(
+@@ -1120,11 +1123,11 @@ bool CApplication::InitDirectoriesLinux(
      // map our special drives
      CSpecialProtocol::SetXBMCBinPath(xbmcBinPath);
      CSpecialProtocol::SetXBMCPath(xbmcPath);

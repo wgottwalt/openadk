@@ -1,33 +1,11 @@
---- xbmc-12.3-Frodo.orig/m4/ax_python_devel.m4	2013-12-12 22:47:49.000000000 +0100
-+++ xbmc-12.3-Frodo/m4/ax_python_devel.m4	2014-01-27 18:51:28.000000000 +0100
-@@ -151,10 +151,9 @@ $ac_distutils_result])
- 	#
- 	AC_MSG_CHECKING([for Python include path])
- 	if test -z "$PYTHON_CPPFLAGS"; then
--		python_path=`$PYTHON -c "import distutils.sysconfig; \
--			print (distutils.sysconfig.get_python_inc ());"`
-+		python_path=`python2-config --includes`
- 		if test -n "${python_path}"; then
--			python_path="-I$python_path"
-+			python_path="$python_path"
- 		fi
- 		PYTHON_CPPFLAGS=$python_path
- 	fi
-@@ -267,17 +266,6 @@ EOD`
- 	AC_MSG_RESULT([$PYTHON_SITE_PKG])
- 	AC_SUBST([PYTHON_SITE_PKG])
- 
--	#
--	# libraries which must be linked in when embedding
--	#
--	AC_MSG_CHECKING(python extra libraries)
--	if test -z "$PYTHON_EXTRA_LIBS"; then
--	   PYTHON_EXTRA_LIBS=`$PYTHON -c "import distutils.sysconfig; \
--                conf = distutils.sysconfig.get_config_var; \
--                print (conf('LOCALMODLIBS') + ' ' + conf('LIBS'))"`
--	fi
--	AC_MSG_RESULT([$PYTHON_EXTRA_LIBS])
--	AC_SUBST(PYTHON_EXTRA_LIBS)
- 
- 	#
- 	# linking flags needed when embedding
+--- xbmc-13.0rc1.orig/m4/ax_python_devel.m4	2014-04-30 15:43:58.000000000 +0200
++++ xbmc-13.0rc1/m4/ax_python_devel.m4	2014-05-02 08:03:10.000000000 +0200
+@@ -298,7 +298,7 @@ EOD`
+ 	# save current global flags
+ 	ac_save_LIBS="$LIBS"
+ 	ac_save_CPPFLAGS="$CPPFLAGS"
+-	LIBS="$ac_save_LIBS $PYTHON_LDFLAGS $PYTHON_EXTRA_LDFLAGS $PYTHON_EXTRA_LIBS"
++	LIBS="$ac_save_LIBS $PYTHON_LDFLAGS"
+ 	CPPFLAGS="$ac_save_CPPFLAGS $PYTHON_CPPFLAGS"
+ 	AC_LANG_PUSH([C])
+ 	AC_LINK_IFELSE([

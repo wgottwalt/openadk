@@ -1,6 +1,64 @@
---- xbmc-12.2.orig/configure.in	2013-05-03 07:57:40.000000000 +0200
-+++ xbmc-12.2/configure.in	2013-12-04 11:36:43.000000000 +0100
-@@ -876,7 +876,7 @@ if test "$use_gles" = "yes"; then
+--- xbmc-13.0rc1.orig/configure.in	2014-04-30 15:45:07.000000000 +0200
++++ xbmc-13.0rc1/configure.in	2014-05-03 11:22:45.000000000 +0200
+@@ -600,7 +600,12 @@ PKG_PROG_PKG_CONFIG
+ MAKE="${MAKE:-make}"
+ OBJDUMP="${OBJDUMP:-objdump}"
+ 
+-use_external_ffmpeg=no
++if test "x$use_external_libraries" != no;then
++  use_external_ffmpeg=yes
++else
++  use_external_ffmpeg=no
++fi
++
+ use_static_ffmpeg=no
+ 
+ # ffmpeg needs the output of uname -s (e.x. linux, darwin) for the target_os
+@@ -626,21 +631,21 @@ case $host in
+      use_x11=no
+      build_shared_lib=yes    
+      ;;
+-  i*86*-linux-gnu*|i*86*-*-linux-uclibc*)
++  i*86*-linux-*)
+      ARCH="i486-linux"
+      if test "$use_cpu" = "no" -a "$cross_compiling" = "yes";  then
+         use_arch="x86"
+         use_cpu="i686"
+      fi
+-     use_static_ffmpeg=yes
++     use_static_ffmpeg=no
+      ;;
+-  x86_64-*-linux-gnu*|x86_64-*-linux-uclibc*)
++  x86_64-*-linux-*)
+      ARCH="x86_64-linux"
+      if test "$use_cpu" = "no" -a "$cross_compiling" = "yes";  then
+         use_arch="x86_64"
+         use_cpu="x86_64"
+      fi
+-     use_static_ffmpeg=yes
++     use_static_ffmpeg=no
+      ;;
+   i386-*-freebsd*)
+      ARCH="x86-freebsd"
+@@ -686,7 +691,7 @@ case $host in
+   powerpc64-*-linux-gnu*|powerpc64-*-linux-uclibc*)
+      ARCH="powerpc64-linux"
+      ;;
+-  arm*-*-linux-gnu*|arm*-*-linux-uclibc*)
++  arm*-*-linux-*)
+      ARCH="arm"
+      use_arch="arm"
+      ffmpeg_target_os=linux
+@@ -696,7 +701,7 @@ case $host in
+      use_sdl=no
+      use_x11=no
+      use_wayland=no
+-     use_static_ffmpeg=yes
++     use_static_ffmpeg=no
+      ;;
+   arm*-*linux-android*)
+      target_platform=target_android
+@@ -1047,7 +1052,7 @@ if test "$use_gles" = "yes"; then
        AC_DEFINE([HAVE_LIBEGL],[1],["Define to 1 if you have the `EGL' library (-lEGL)."])
        AC_DEFINE([HAVE_LIBGLESV2],[1],["Define to 1 if you have the `GLESv2' library (-lGLESv2)."])
        AC_MSG_RESULT(== WARNING: OpenGLES support is assumed.)

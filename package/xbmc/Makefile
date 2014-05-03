@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
-PKG_VERSION:=		12.3
-PKG_RELEASE:=		5
-PKG_MD5SUM:=		7ae385ebf8e5cfcb917393235e6efbdb
+PKG_VERSION:=		13.0rc1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		fabaf9485900647a557d33d0022674c2
 PKG_DESCR:=		software media player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		boost libffmpeg python2 libstdcxx
@@ -18,13 +18,14 @@ PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
 PKG_DEPENDS+=		libbluray libgpg-error libudev python2-mod-sqlite
 PKG_DEPENDS+=		libssh libcec libnfs librtmp samba-lib libncurses
+PKG_DEPENDS+=		libxslt libvorbisenc
 PKG_BUILDDEP:=		autotool boost ffmpeg python2 MesaLib libglew libass
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis libmodplug
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		libssh libcec libnfs samba rtmpdump eudev
-PKG_BUILDDEP+=		libgpg-error libbluray dbus
+PKG_BUILDDEP+=		libgpg-error libbluray dbus libxslt libvorbis
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
 PKG_URL:=		http://xbmc.org/
 PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
@@ -35,8 +36,6 @@ PKG_BUILDDEP_IBM_X40:=	nasm-host
 PKG_SYSTEM_DEPENDS:=	raspberry-pi ibm-x40
 PKG_LIBC_DEPENDS:=	glibc
 
-WRKDIST=		$(WRKDIR)/$(PKG_NAME)-$(PKG_VERSION)-Frodo
-
 DIFF_IGNOREFILES:=	configure missing depcomp install-sh INSTALL \
 			aclocal.m4 config.h.in */Makefile.in
 
@@ -44,10 +43,11 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XBMC,xbmc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CXXFLAGS_FOR_BUILD+=	$(CPPFLAGS_FOR_BUILD)
 XAKE_FLAGS+=		V=1 TIXML_USE_STL=1
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/boost-1_55 \
-			-DTIXML_USE_STL=1 -DHAS_SIMPLEPM=1
+			-DTIXML_USE_STL=1 -DHAS_SIMPLEPM=1 -DUSE_EXTERNAL_FFMPEG=1
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
@@ -62,6 +62,8 @@ CONFIGURE_ENV+=		DESTDIR='${WRKINST}' \
 CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-mysql \
 			--disable-avahi \
+			--disable-rsxs \
+			--enable-alsa \
 			--enable-mid \
 			--enable-libmp3lame \
 			--enable-libvorbisenc \
