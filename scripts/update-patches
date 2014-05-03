@@ -116,7 +116,7 @@ for file in $(cd ${WRKDIST}; find . -type f | sed 's#^\./##'); do
 			    $(grep -c "^+++ $D_CMP" "$i") -gt 1 ]]; then
 				print -ru2 -- "Cannot process, $i contains patches"
 				print -ru2 -- "to multiple files! Aborting."
-				echo FAIL
+				print -n 'FAIL\0'
 				[[ -n $SUBDIST ]] && mv \
 				    "${WRKDIR1}/${SUBDIST}.orig" \
 				    "${WRKDIR1}.orig/${SUBDIST}"
@@ -137,7 +137,7 @@ for file in $(cd ${WRKDIST}; find . -type f | sed 's#^\./##'); do
 				print -ru2 -- "Cannot process, file $file"
 				print -ru2 -- "is contained in multiple patches:"
 				print -ru2 -- "$pflst"
-				echo FAIL
+				print -n 'FAIL\0'
 				[[ -n $SUBDIST ]] && mv \
 				    "${WRKDIR1}/${SUBDIST}.orig" \
 				    "${WRKDIR1}.orig/${SUBDIST}"
@@ -150,7 +150,7 @@ for file in $(cd ${WRKDIST}; find . -type f | sed 's#^\./##'); do
 			( sed -e "/^--- /,\$d" <"$i"; \
 			  cd "$D_BASE" && do_diff "$file" "$D_SUB.orig" "$D_SUB" \
 			) >"$i.new"
-			# did it change ? mark it as changed
+			# did it change? mark it as changed
 			tfile=$(print -r -- "$file" | $TRANSFORM)
 			if eval diff "$(print -r -- "${DIFF_FLAGS}" | sed \
 			    "s#@@#${tfile}#g")" "$i" "$i.new" 1>&2; then
@@ -188,6 +188,9 @@ for i in *; do
 	(( found )) || print -ru2 -- "*** Patch $i not accounted for"
 done
 
-print -r -- "${edit[@]}"
+for i in "${edit[@]}"; do
+	print -nr -- "$i"
+	print -n '\0'
+done
 [[ -n $SUBDIST ]] && mv "${WRKDIR1}/${SUBDIST}.orig" "${WRKDIR1}.orig/${SUBDIST}"
 exit 0

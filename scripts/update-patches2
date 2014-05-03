@@ -25,7 +25,7 @@ export CURDIR PATCH_LIST
 mksh "${TOPDIR}"/scripts/update-patches |&
 first=1
 set -A toedit
-while IFS= read -p -r; do
+while IFS= read -p -d '' -r; do
 	if (( first )); then
 		if [[ $REPLY = FAIL ]]; then
 			rm -rf "${WRKDIR1}.orig"
