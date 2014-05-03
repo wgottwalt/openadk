@@ -105,14 +105,7 @@ endif
 			mv $$i.bak $$i; \
 		fi;\
 	done
-	@toedit=$$(WRKDIST='${WRKDIST}' CURDIR=$$(pwd) \
-	    PATCH_LIST='patch-* *.patch' WRKDIR1='${WRKDIR}' \
-	    PATH='${HOST_PATH}' mksh ${TOPDIR}/scripts/update-patches); \
-	    if [[ -n $$toedit && $$toedit != FAIL ]]; then \
-		echo -n 'edit patches: '; read i; \
-		cd patches && $${VISUAL:-$${EDITOR:-vi}} $$toedit; \
-	    fi; \
-	    rm -rf ${WRKDIR}.orig; \
-	    [[ $$toedit != FAIL ]]
+	@WRKDIST='${WRKDIST}' WRKDIR1='${WRKDIR}' \
+	    PATH='${HOST_PATH}' mksh ${TOPDIR}/scripts/update-patches2
 
 .PHONY: update-patches host-update-patches

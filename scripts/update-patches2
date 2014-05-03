@@ -1,0 +1,46 @@
+#!/usr/bin/env mksh
+#-
+# Copyright © 2014
+#	Thorsten Glaser <tg@mirbsd.org>
+#
+# Provided that these terms and disclaimer and all copyright notices
+# are retained or reproduced in an accompanying document, permission
+# is granted to deal in this work without restriction, including un‐
+# limited rights to use, publicly perform, distribute, sell, modify,
+# merge, give away, or sublicence.
+#
+# This work is provided “AS IS” and WITHOUT WARRANTY of any kind, to
+# the utmost extent permitted by applicable law, neither express nor
+# implied; without malicious intent or gross negligence. In no event
+# may a licensor, author or contributor be held liable for indirect,
+# direct, other damage, loss, or other issues arising in any way out
+# of dealing in the work, even if advised of the possibility of such
+# damage or existence of a defect, except proven that it results out
+# of said person’s immediate fault when using the work as intended.
+
+PATCH_LIST='patch-* *.patch'
+CURDIR=$PWD
+export CURDIR PATCH_LIST
+
+mksh "${TOPDIR}"/scripts/update-patches |&
+first=1
+set -A toedit
+while IFS= read -p -r; do
+	if (( first )); then
+		if [[ $REPLY = FAIL ]]; then
+			rm -rf "${WRKDIR1}.orig"
+			exit 1
+		fi
+		first=0
+	fi
+	toedit+=("$REPLY")
+done
+if (( !first )); then
+	print -n 'edit patches: '
+	read
+	cd patches
+	${VISUAL:-${EDITOR:-vi}} "${toedit[@]}"
+	cd ..
+fi
+rm -rf "${WRKDIR1}.orig"
+exit 0
