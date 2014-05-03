@@ -111,6 +111,7 @@ endif
 	@WRKDIST=$(call shellescape,${WRKDIST}) \
 	    WRKDIR1=$(call shellescape,${WRKDIR}) \
 	    PATH=$(call shellescape,${HOST_PATH}) \
+	    $(call shellexport,DIFF_IGNOREFILES) \
 	    mksh ${TOPDIR}/scripts/update-patches2
 
 .PHONY: update-patches host-update-patches

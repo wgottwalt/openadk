@@ -37,6 +37,9 @@ PKG_LIBC_DEPENDS:=	glibc
 
 WRKDIST=		$(WRKDIR)/$(PKG_NAME)-$(PKG_VERSION)-Frodo
 
+DIFF_IGNOREFILES:=	configure missing depcomp install-sh INSTALL \
+			aclocal.m4 config.h.in */Makefile.in
+
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XBMC,xbmc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
