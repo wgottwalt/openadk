@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		libcec
 PKG_VERSION:=		2.1.4
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		d65e52ab3295e9e4b73bf4580f3bd4f7
+PKG_MD5SUM:=		faa58944f87e9beda165f615d4b46766
 PKG_DESCR:=		control your device with your TV remote control
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		autotool
