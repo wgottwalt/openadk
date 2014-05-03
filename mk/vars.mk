@@ -86,15 +86,6 @@ TARGET_CC+=		$(ADK_TARGET_ABI_CFLAGS)
 TARGET_CXX+=		$(ADK_TARGET_ABI_CFLAGS)
 endif
 
-MODE_FLAGS:=
-ifeq ($(ADK_LINUX_ARM),y)
-ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
-MODE_FLAGS:=		-mthumb
-else
-MODE_FLAGS:=		-marm
-endif
-endif
-
 TARGET_CPPFLAGS:=	
 TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
 TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident
@@ -149,9 +140,14 @@ TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 TARGET_CFLAGS+=		-g3
 endif
 
-ifneq ($(MODE_FLAGS),)
-TARGET_CFLAGS+=		$(MODE_CFLAGS)
-TARGET_CXXFLAGS+=	$(MODE_CFLAGS)
+ifeq ($(ADK_LINUX_ARM),y)
+ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
+TARGET_CFLAGS+=		-mthumb
+TARGET_CXXFLAGS+=	-mthumb
+else
+TARGET_CFLAGS+=		-marm
+TARGET_CXXFLAGS+=	-marm
+endif
 endif
 
 # A nifty macro to make testing gcc features easier (from uClibc project)

@@ -7,7 +7,7 @@ PKG_NAME:=		uvd
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		2
 PKG_DESCR:=		udp server for version information
-PKG_SECTION:=		base
+PKG_SECTION:=		misc
 PKG_URL:=		http://openadk.org/
 
 NO_DISTFILES:=		1

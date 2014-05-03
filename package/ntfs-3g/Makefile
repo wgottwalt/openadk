@@ -5,9 +5,9 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ntfs-3g
 PKG_VERSION:=		2014.2.15
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f11d563816249d730a00498983485f3a
-PKG_DESCR:=		ntfs filesystem driver
+PKG_DESCR:=		ntfs filesystem driver using fuse
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		kmod-fuse-fs
 PKG_URL:=		http://tuxera.com
@@ -26,6 +26,6 @@ CONFIGURE_ARGS+=	--disable-ldconfig \
 ntfs-3g-install:
 	${INSTALL_DIR} ${IDIR_NTFS_3G}/bin
 	${INSTALL_BIN} ${WRKINST}/bin/ntfs-3g ${IDIR_NTFS_3G}/bin
-	cd ${WRKINST}/bin && ln -sf ntfs-3g mount.ntfs-3g
+	cd ${IDIR_NTFS_3G}/bin && ln -sf ntfs-3g mount.ntfs-3g
 
 include ${TOPDIR}/mk/pkg-bottom.mk

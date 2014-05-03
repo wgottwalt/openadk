@@ -758,7 +758,7 @@ int main() {
 				fprintf(cfg, "\ttristate\n");
 				if (pkg_multi != NULL)
 					if (strncmp(pkg_multi, "1", 1) == 0)
-						if (strncmp(toupperstr(token), toupperstr(pkgdirp->d_name), strlen(token)) != 0)
+						if (strncmp(toupperstr(token), toupperstr(pkgdirp->d_name), strlen(pkgdirp->d_name)) != 0)
 							fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", toupperstr(pkgdirp->d_name));
 
 				free(pseudo_name);

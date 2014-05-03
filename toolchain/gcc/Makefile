@@ -35,7 +35,7 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-nls
 
 GCC_FINAL_CONFOPTS:=
-ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
+ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64)$(ADK_LINUX_X86),)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 
@@ -48,12 +48,17 @@ endif
 GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=m4,m4-nofpu
 endif
 
+ifeq ($(ADK_LINUX_X86),y)
+ifeq ($(ADK_TARGET_KERNEL_64),y)
+GCC_FINAL_CONFOPTS+=	--enable-biarch --enable-targets=all --disable-multilib
+else
+GCC_FINAL_CONFOPTS+=    --disable-biarch --disable-multilib
+endif
+endif
+
 ifeq ($(ADK_LINUX_X86_64),y)
 ifeq ($(ADK_x32),y)
 GCC_FINAL_CONFOPTS+=	--with-abi=x32
-endif
-ifeq ($(ADK_32),y)
-GCC_FINAL_CONFOPTS+=	--with-abi=32
 endif
 ifeq ($(ADK_64),y)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
@@ -80,30 +85,6 @@ GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-64 --enable-securep
 endif
 else
 GCC_CONFOPTS+=		--enable-target-optspace
-endif
-
-ifeq ($(ARCH),arm)
-GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
-GCC_CONFOPTS+=		--with-mode=$(ADK_TARGET_ARM_MODE)
-ifneq ($(ADK_TARGET_FPU),)
-GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
-endif
-endif
-
-ifeq ($(ADK_CPU_ARM926EJ_S),y)
-GCC_CONFOPTS+=          --with-arch=armv5te --with-tune=arm1176jzf-s
-endif
-
-ifeq ($(ADK_CPU_ARM1176JZF_S),y)
-GCC_CONFOPTS+=          --with-arch=armv6 --with-tune=arm1176jzf-s
-endif
-
-ifeq ($(ADK_CPU_CORTEX_A9),y)
-GCC_CONFOPTS+=          --with-arch=armv7-a --with-tune=cortex-a9
-endif
-
-ifeq ($(ADK_CPU_SPARC_V9),y)
-GCC_CONFOPTS+=          --with-cpu=ultrasparc
 endif
 
 ifneq ($(ADK_TARGET_MIPS_ABI),)

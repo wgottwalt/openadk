@@ -1,8 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-source "target/config/Config.in.hardware"
-source "target/config/Config.in.qemu"
 
 config ADK_TARGET_KERNEL_VMLINUZ
 	boolean
@@ -50,12 +48,6 @@ config ADK_fpu_neon
 config ADK_fpu_vfp
 	boolean
 
-config ADK_mode_arm
-	boolean
-
-config ADK_mode_thumb
-	boolean
-
 config ADK_TARGET_FLOAT
 	string
 	default "hard" if ADK_hard_float
@@ -65,13 +57,6 @@ config ADK_TARGET_FPU
 	string
 	default "vfp" if ADK_fpu_vfp
 	default "neon" if ADK_fpu_neon
-
-config ADK_TARGET_ARM_MODE
-	depends on ADK_LINUX_ARM
-	string
-	default "arm" if ADK_mode_arm
-	default "thumb" if ADK_mode_thumb
-	default "arm"
 
 config ADK_TARGET_ENDIAN
 	string
@@ -88,6 +73,8 @@ config ADK_TOOLCHAIN
 
 source "target/config/Config.in.arch"
 source "target/config/Config.in.system"
+source "target/config/Config.in.hardware"
+source "target/config/Config.in.qemu"
 
 config ADK_LINUX_MIPS64
 	boolean
@@ -214,10 +201,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-x86_64" if ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86_64_32 || ADK_TARGET_SYSTEM_QEMU_X86_64_X32
 	default "aranym-m68k" if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default "ibm-x40" if ADK_TARGET_SYSTEM_IBM_X40
-	default "cubox-i4pro" if ADK_TARGET_CUBOX_I4PRO
-	default "cubox-i2ultra" if ADK_TARGET_CUBOX_I2ULTRA
-	default "cubox-i2" if ADK_TARGET_CUBOX_I2
-	default "cubox-i1" if ADK_TARGET_CUBOX_I1
+	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default "lemote-yeelong" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
@@ -242,7 +226,7 @@ config ADK_TARGET_CUBOX_I1
 endchoice
 
 # global symbols
-config ADK_TARGET_KERNEL_MAY_64BIT
+config ADK_TARGET_KERNEL_64
 	boolean
 
 config ADK_TOOLCHAIN_ONLY
@@ -483,8 +467,6 @@ config ADK_TARGET_LIBC
 	default "glibc"  if ADK_glibc
 	default "musl"  if ADK_musl
 
-source "target/linux/config/Config.in.kernel"
-
 choice 
 prompt "Target C library"
 depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
@@ -606,8 +588,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \
 		ADK_LINUX_X86 || \
-		ADK_LINUX_X86_64 || \
-		ADK_LINUX_NATIVE
+		ADK_LINUX_X86_64
 	depends on !ADK_HARDWARE_VBOX
 	select ADK_KERNEL_EXT2_FS
 	help

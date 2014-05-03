@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mysql
 PKG_VERSION:=		5.6.17
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		82114fa7c13fa3ca897b34666577d9f4
 PKG_DESCR:=		MySQL client library
 PKG_SECTION:=		db
@@ -35,6 +35,9 @@ host-configure:
 host-build:
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
+
+pre-configure:
+	$(SED) "s#@@STAGING_DIR@@#${STAGING_TARGET_DIR}#" ${WRKBUILD}/scripts/mysql_config.sh
 
 mysql-hostinstall:
 	$(INSTALL_BIN) ${WRKBUILD}/extra/comp_err \

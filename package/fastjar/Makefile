@@ -11,6 +11,8 @@ PKG_DESCR:=		fastjar utility
 PKG_SECTION:=		lang
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fastjar/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_CFLINE_FASTJAR:=	depends on ADK_HOST_ONLY
 
 include $(TOPDIR)/mk/host.mk

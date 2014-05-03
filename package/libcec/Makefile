@@ -14,6 +14,8 @@ PKG_URL:=		http://libcec.pulse-eight.com/
 PKG_SITES:=		http://packages.pulse-eight.net/pulse/sources/libcec/
 PKG_OPTS:=		dev
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
 PKG_SYSTEM_DEPENDS:=    raspberry-pi ibm-x40

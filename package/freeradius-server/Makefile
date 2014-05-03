@@ -5,12 +5,12 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		freeradius-server
 PKG_VERSION:=		3.0.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		3532b6439270f9da0ebfc03d3623f962
 PKG_DESCR:=		flexible RADIUS server
 PKG_SECTION:=		ppp
-PKG_DEPENDS:=		libltdl libopenssl libpthread
-PKG_BUILDDEP:=		autotool libtool openssl samba
+PKG_DEPENDS:=		libltdl libopenssl libpthread libpcre
+PKG_BUILDDEP:=		autotool libtool openssl samba pcre
 PKG_URL:=		http://www.freeradius.org/
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/
 PKG_MULTI:=		1

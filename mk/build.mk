@@ -22,7 +22,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_BASE_FILES=y \
 			ADK_PACKAGE_E2FSCK_STATIC=n \
 			ADK_PACKAGE_KEXECINIT=n \
-			ADK_PACKAGE_INSTALLER=n \
 			ADK_PACKAGE_LM_SENSORS_DETECT=n \
 			ADK_PACKAGE_PACEMAKER=n \
 			ADK_PACKAGE_PACEMAKER_MGMTD=n \
@@ -31,12 +30,10 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_GRUB=n \
 			ADK_PACKAGE_U_BOOT=n \
 			ADK_PACKAGE_CRYPTINIT=n \
-			ADK_PACKAGE_PAM=n \
 			ADK_PACKAGE_VIRTINST=n \
 			ADK_PACKAGE_URLGRABBER=n \
 			ADK_PACKAGE_LIBSSP=n \
 			ADK_PACKAGE_OPENAFS=n \
-			ADK_PACKAGE_OPENJDK7=n \
 			ADK_PKG_XORG=n \
 			ADK_PKG_CONSOLE=n \
 			ADK_PKG_TEST=n \
@@ -361,9 +358,9 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(LIBC)" ];then \
+	@if [ ! -z "$(CLIB)" ];then \
 		grep "^config" target/config/Config.in \
-			|grep -i "$(LIBC)" \
+			|grep -i "$(CLIB)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
@@ -419,9 +416,9 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
 	fi
-	@if [ ! -z "$(LIBC)" ];then \
+	@if [ ! -z "$(CLIB)" ];then \
 		grep "^config" target/config/Config.in \
-			|grep -i "$(LIBC)" \
+			|grep -i "$(CLIB)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
 	fi
@@ -466,10 +463,10 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 # build all target architecture and libc combinations (toolchain only)
 bulktoolchain:
-	@if [ -z "$(LIBC)" ];then \
+	@if [ -z "$(CLIB)" ];then \
 		libc="glibc uclibc musl"; \
 	else \
-		libc="$(LIBC)"; \
+		libc="$(CLIB)"; \
 	fi; \
 	for libc in $$libc;do \
 		while read arch; do \
@@ -478,7 +475,7 @@ bulktoolchain:
 			tarch=$$(echo $$arch|sed -e "s#sh4.*#sh#" -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##" -e "s#x86_64.*#x86_64#" ); \
 			carch=$$(echo $$arch|sed -e "s#hf##" -e "s#mips64n.*#mips64#" -e "s#mips64el.*#mips64el#" -e 's#x86$$#i686#' -e "s#x86_64.*#x86_64#" ); \
 			echo === building $$tarch $$libc toolchain-$$arch on $$(date); \
-				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch LIBC=$$libc defconfig; \
+				$(GMAKE) ARCH=$$tarch SYSTEM=toolchain-$$arch CLIB=$$libc defconfig; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
 				if [ $$arch = "armhf" ];then arch=arm; else arch=$$arch;fi; \
 				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
@@ -494,19 +491,19 @@ bulktoolchain:
 	done
 
 test-framework:
-	@if [ -z "$(LIBC)" ];then \
+	@if [ -z "$(CLIB)" ];then \
 		libc="glibc uclibc musl"; \
 	else \
-		libc="$(LIBC)"; \
+		libc="$(CLIB)"; \
 	fi; \
 	for libc in $$libc;do \
 		( \
 			mkdir -p $(TOPDIR)/firmware/; \
-			for arch in $$(grep -v m68k target/tarch.lst|xargs);do \
+			for arch in $$(grep -v "\(m68k\|aarch64\)" toolchain/$$libc/tarch.lst|xargs);do \
 				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#" -e "s#hf##" -e "s#x86_64.*#x86_64#"); \
 				arch=$$(echo $$arch|sed -e 's#x86$$#i686#'); \
 				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
-				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch LIBC=$$libc FS=initramfsarchive COLLECTION=test defconfig; \
+				$(GMAKE) ARCH=$$tarch SYSTEM=qemu-$$arch CLIB=$$libc FS=initramfsarchive COLLECTION=test defconfig; \
 				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
 				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
@@ -529,7 +526,7 @@ release:
 		( \
 			echo === building $$libc on $$(date); \
 			$(GMAKE) prereq && \
-			$(GMAKE) ARCH=$(ARCH) SYSTEM=$(SYSTEM) LIBC=$$libc FS=archive allmodconfig; \
+			$(GMAKE) ARCH=$(ARCH) SYSTEM=$(SYSTEM) CLIB=$$libc FS=archive allmodconfig; \
 			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 			rm .config; \
 		) 2>&1 | tee $(TOPDIR)/firmware/release-build.log; \
@@ -547,7 +544,7 @@ bulk:
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
-		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive defconfig; \
+		$(GMAKE) ARCH=$$arch SYSTEM=$$system CLIB=$$libc FS=archive defconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/firmware/bulkbuild.log; \
@@ -567,7 +564,7 @@ bulkall:
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
-		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allconfig; \
+		$(GMAKE) ARCH=$$arch SYSTEM=$$system CLIB=$$libc FS=archive allconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
 		rm .config; \
             ) 2>&1 | tee $(TOPDIR)/firmware/bulkallbuild.log; \
@@ -587,7 +584,7 @@ bulkallmod:
 	    ( \
 		echo === building $$arch $$system $$libc on $$(date); \
 		$(GMAKE) prereq && \
-		$(GMAKE) ARCH=$$arch SYSTEM=$$system LIBC=$$libc FS=archive allmodconfig; \
+		$(GMAKE) ARCH=$$arch SYSTEM=$$system CLIB=$$libc FS=archive allmodconfig; \
 		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
 		$(GMAKE) clean; \
 		rm .config; \

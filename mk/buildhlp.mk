@@ -1,6 +1,9 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+shellescape='$(subst ','\'',$(1))'
+shellexport=$(1)=$(call shellescape,${$(1)})
+
 ifneq ($(strip ${PKG_SITES}),)
 ifeq ($(strip ${DISTFILES}),)
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
@@ -105,14 +108,10 @@ endif
 			mv $$i.bak $$i; \
 		fi;\
 	done
-	@toedit=$$(WRKDIST='${WRKDIST}' CURDIR=$$(pwd) \
-	    PATCH_LIST='patch-* *.patch' WRKDIR1='${WRKDIR}' \
-	    ${BASH} ${TOPDIR}/scripts/update-patches); \
-	    if [[ -n $$toedit && $$toedit != FAIL ]]; then \
-		echo -n 'edit patches: '; read i; \
-		cd patches && $${VISUAL:-$${EDITOR:-vi}} $$toedit; \
-	    fi; \
-	    rm -rf ${WRKDIR}.orig; \
-	    [[ $$toedit != FAIL ]]
+	@WRKDIST=$(call shellescape,${WRKDIST}) \
+	    WRKDIR1=$(call shellescape,${WRKDIR}) \
+	    PATH=$(call shellescape,${HOST_PATH}) \
+	    $(call shellexport,DIFF_IGNOREFILES) \
+	    mksh ${TOPDIR}/scripts/update-patches2
 
 .PHONY: update-patches host-update-patches

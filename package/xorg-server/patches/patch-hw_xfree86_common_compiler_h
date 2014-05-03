@@ -1,7 +1,63 @@
 from alpinelinux
 
 --- xorg-server-1.15.0.orig/hw/xfree86/common/compiler.h	2013-12-15 08:48:09.000000000 +0100
-+++ xorg-server-1.15.0/hw/xfree86/common/compiler.h	2014-03-14 23:25:52.000000000 +0100
++++ xorg-server-1.15.0/hw/xfree86/common/compiler.h	2014-03-21 12:53:48.834417415 +0100
+@@ -727,26 +727,26 @@ xf86WriteMmio32LeNB(__volatile__ void *b
+ #define PORT_SIZE short
+ #endif
+ 
+-_X_EXPORT unsigned int IOPortBase;      /* Memory mapped I/O port area */
++_X_EXPORT volatile unsigned char *ioBase;  /* Memory mapped I/O port area */
+ 
+ static __inline__ void
+ outb(unsigned PORT_SIZE port, unsigned char val)
+ {
+-    *(volatile unsigned char *) (((unsigned PORT_SIZE) (port)) + IOPortBase) =
++    *(volatile unsigned char *) (((unsigned PORT_SIZE) (port)) + ioBase) =
+         val;
+ }
+ 
+ static __inline__ void
+ outw(unsigned PORT_SIZE port, unsigned short val)
+ {
+-    *(volatile unsigned short *) (((unsigned PORT_SIZE) (port)) + IOPortBase) =
++    *(volatile unsigned short *) (((unsigned PORT_SIZE) (port)) + ioBase) =
+         val;
+ }
+ 
+ static __inline__ void
+ outl(unsigned PORT_SIZE port, unsigned int val)
+ {
+-    *(volatile unsigned int *) (((unsigned PORT_SIZE) (port)) + IOPortBase) =
++    *(volatile unsigned int *) (((unsigned PORT_SIZE) (port)) + ioBase) =
+         val;
+ }
+ 
+@@ -754,21 +754,21 @@ static __inline__ unsigned int
+ inb(unsigned PORT_SIZE port)
+ {
+     return *(volatile unsigned char *) (((unsigned PORT_SIZE) (port)) +
+-                                        IOPortBase);
++                                        ioBase);
+ }
+ 
+ static __inline__ unsigned int
+ inw(unsigned PORT_SIZE port)
+ {
+     return *(volatile unsigned short *) (((unsigned PORT_SIZE) (port)) +
+-                                         IOPortBase);
++                                         ioBase);
+ }
+ 
+ static __inline__ unsigned int
+ inl(unsigned PORT_SIZE port)
+ {
+     return *(volatile unsigned int *) (((unsigned PORT_SIZE) (port)) +
+-                                       IOPortBase);
++                                       ioBase);
+ }
+ 
+ #if defined(__mips__)
 @@ -995,7 +995,7 @@ inl(unsigned short port)
      return xf86ReadMmio32Le((void *) ioBase, port);
  }

@@ -7,27 +7,29 @@ PKG_NAME:=		findutils
 PKG_VERSION:=		4.4.2
 PKG_RELEASE:=		5
 PKG_MD5SUM:=		351cc4adb07d54877fa15f75fb77d39f
-PKG_DESCR:=		utilities for finding files
-PKG_SECTION:=		utils
+PKG_DESCR:=		utilities for finding files (also provided by busybox)
+PKG_SECTION:=		core
 PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		autotool
 HOST_BUILDDEP:=		autotool
 PKG_URL:=		http://www.gnu.org/software/findutils/
 PKG_SITES:=		http://ftp.gnu.org/pub/gnu/findutils/
+PKG_MULTI:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_SUBPKGS:=		FIND XARGS LOCATE
+PKG_SUBPKGS:=		FINDUTILS XARGS LOCATE FIND
 PKGSD_LOCATE:=		locate utility
 PKGSD_XARGS:=		xargs utility
+PKGSD_FIND:=		find utility
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,FINDUTILS,findutils,$(PKG_VERSION)-${PKG_RELEASE}))
-$(eval $(call PKG_template,FIND,find,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,XARGS,xargs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_XARGS},${PKG_SECTION}))
+$(eval $(call PKG_template,FIND,find,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FIND},${PKG_SECTION}))
 $(eval $(call PKG_template,LOCATE,locate,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LOCATE},${PKG_SECTION}))
+$(eval $(call PKG_template,XARGS,xargs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_XARGS},${PKG_SECTION}))
 
 HOST_STYLE:=		auto
 AUTOTOOL_STYLE:=	autoreconf

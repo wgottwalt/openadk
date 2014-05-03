@@ -1,0 +1,18 @@
+--- xorg-server-1.15.0.orig/hw/xfree86/dri/dri.c	2013-12-27 18:38:52.000000000 +0100
++++ xorg-server-1.15.0/hw/xfree86/dri/dri.c	2014-03-21 16:18:51.934149666 +0100
+@@ -37,6 +37,7 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ #include <xorg-config.h>
+ #endif
+ 
++#include "xf86VGAarbiter.h"
+ #include "xf86.h"
+ #include <sys/time.h>
+ #include <unistd.h>
+@@ -68,7 +69,6 @@ SOFTWARE OR THE USE OR OTHER DEALINGS IN
+ #include "mipointer.h"
+ #include "xf86_OSproc.h"
+ #include "inputstr.h"
+-#include "xf86VGAarbiter.h"
+ #include "xf86Extensions.h"
+ 
+ static int DRIEntPrivIndex = -1;

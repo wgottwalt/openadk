@@ -1,4 +1,7 @@
-#!/usr/bin/env bash
+#!/usr/bin/env mksh
+#-
+# Copyright (c) 2014
+#	Thorsten Glaser <tg@mirbsd.org>
 # Copyright (c) 2006
 #	Thorsten Glaser <tg@freewrt.org>
 #
@@ -24,15 +27,12 @@
 # damage or existence of a defect, except proven that it results out
 # of said person's immediate fault when using the work as intended.
 
-[[ -n $BASH_VERSION ]] && shopt -s extglob
-
-do_diff()
-{
+do_diff() {
 	local f1=$2/$1
 	local f2=$3/$1
 
 	if [[ ! -e $f1 ]]; then
-		[[ -d ${f1%/*}/. ]] || mkdir -p ${f1%/*}
+		[[ -d ${f1%/*}/. ]] || mkdir -p "${f1%/*}"
 		if [[ ! -s $f2 ]]; then
 			cat <<EOF
 --- $f1	(non-existant)
@@ -47,15 +47,18 @@ EOF
 	return $?
 }
 
+set -A accounted
+set -A edit
+
 TRANSFORM='sed s/[.+]/\\\\&/g'
 PATCHDIR=$CURDIR/patches
 EXTRADIR=$CURDIR/extra
 
-mkdir -p $PATCHDIR
+mkdir -p "$PATCHDIR"
 
 SUBDIST=${WRKDIST##${WRKDIR1}?(/)}
 if [[ -n $SUBDIST ]]; then
-	mv ${WRKDIR1}.orig/${SUBDIST} ${WRKDIR1}/${SUBDIST}.orig
+	mv "${WRKDIR1}.orig/${SUBDIST}" "${WRKDIR1}/${SUBDIST}.orig"
 	D_BASE=${WRKDIR1}
 	D_SUB=${SUBDIST}
 #	D_SUBP=$D_SUB
@@ -63,45 +66,39 @@ if [[ -n $SUBDIST ]]; then
 	D_CMP=$D_SUBP
 else
 	# WRKSRC == WRKDIR
-	D_BASE=$(dirname ${WRKDIR1})
-	D_SUB=$(basename ${WRKDIR1})
+	D_BASE=$(dirname "${WRKDIR1}")
+	D_SUB=$(basename "${WRKDIR1}")
 	D_SUBP=$D_SUB
 	D_CMP=
 fi
 ORGDIST=${D_BASE}/${D_SUB}.orig
 
 if [[ -e $WRKDIST/.patched-newfiles ]]; then
-	touch $ORGDIST/.patched-newfiles
+	touch "$ORGDIST/.patched-newfiles"
 	patch_newfiles=1
 else
 	patch_newfiles=0
 fi
 
 if [[ -e $WRKDIST/../.autoreconf_done ]]; then
-	touch $ORGDIST/.autoreconf_done
-	ignore_autoconf=1
-else
-	ignore_autoconf=0
+	touch "$ORGDIST/.autoreconf_done"
 fi
 
-DIFF_FLAGS="-adu -I \"^--- $(echo $D_SUBP.orig/ | $TRANSFORM)@@	.*\""
-DIFF_FLAGS="$DIFF_FLAGS -I \"^\+\+\+ $(echo $D_SUBP/ | $TRANSFORM)@@	.*\""
+DIFF_FLAGS="-adu -I \"^--- $(print -r -- "$D_SUBP.orig/" | $TRANSFORM)@@	.*\""
+DIFF_FLAGS="$DIFF_FLAGS -I \"^\+\+\+ $(print -r -- "$D_SUBP/" | $TRANSFORM)@@	.*\""
 
-for file in $(cd ${WRKDIST}; find . -type f | sed 's#^\./##'); do
-	echo "DEBUG: $file" >> /tmp/debug
+(cd "${WRKDIST}"; find . -type f -print0) |&
+while IFS= read -p -d '' -r file; do
+	file=${file#./}
+	#print -r -- "DEBUG: <$file>" >>/tmp/debug
 	[[ ! -e $ORGDIST/$file && $patch_newfiles = 0 ]] && continue
-	[[ $file = configure && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = missing && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = depcomp && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = install-sh && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = aclocal.m4 && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = INSTALL && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = config.h.in && $ignore_autoconf = 1 ]] && continue	
-	[[ $(basename $file) = Makefile.in && $ignore_autoconf = 1 ]] && continue	
+	for i in $DIFF_IGNOREFILES; do
+		[[ $file = $i ]] && continue
+	done
 	cmp -s "$ORGDIST/$file" "$WRKDIST/$file" && continue
-	echo "Processing ${file}..." >&2
+	print -ru2 -- "Processing ${file}..."
 	# look in patchdir for an existing patchfile matching this
-	cd $PATCHDIR
+	cd "$PATCHDIR"
 	for i in $PATCH_LIST; do
 		# Ignore non-files, or old backup
 		[[ ! -f $i || $i = *@(.orig|.rej|~) ]] && continue
@@ -109,14 +106,14 @@ for file in $(cd ${WRKDIST}; find . -type f | sed 's#^\./##'); do
 		# Patch found. Is this the one?
 		if grep "^[+-][+-][+-] $D_CMP[^/]*/$file	" "$i" >/dev/null; then
 			# Multiple files in the diff?
-			if [ $(grep -c "^--- $D_CMP" "$i") -gt 1 -o \
-			    $(grep -c "^+++ $D_CMP" "$i") -gt 1 ]; then
-				echo "Cannot process, $i contains patches" >&2
-				echo "to multiple files! Aborting." >&2
-				echo FAIL
+			if [[ $(grep -c "^--- $D_CMP" "$i") -gt 1 || \
+			    $(grep -c "^+++ $D_CMP" "$i") -gt 1 ]]; then
+				print -ru2 -- "Cannot process, $i contains patches"
+				print -ru2 -- "to multiple files! Aborting."
+				print -n 'FAIL\0'
 				[[ -n $SUBDIST ]] && mv \
-				    ${WRKDIR1}/${SUBDIST}.orig \
-				    ${WRKDIR1}.orig/${SUBDIST}
+				    "${WRKDIR1}/${SUBDIST}.orig" \
+				    "${WRKDIR1}.orig/${SUBDIST}"
 				exit 0
 			fi
 			# Multiple diffs with this file?
@@ -131,56 +128,63 @@ for file in $(cd ${WRKDIST}; find . -type f | sed 's#^\./##'); do
 				pflst="$pflst '$j'"
 			done
 			if (( n != 1 )); then
-				echo "Cannot process, file $file" >&2
-				echo "is contained in multiple patches:" >&2
-				echo "$pflst" >&2
-				echo FAIL
+				print -ru2 -- "Cannot process, file $file"
+				print -ru2 -- "is contained in multiple patches:"
+				print -ru2 -- "$pflst"
+				print -n 'FAIL\0'
 				[[ -n $SUBDIST ]] && mv \
-				    ${WRKDIR1}/${SUBDIST}.orig \
-				    ${WRKDIR1}.orig/${SUBDIST}
+				    "${WRKDIR1}/${SUBDIST}.orig" \
+				    "${WRKDIR1}.orig/${SUBDIST}"
 				exit 0
 			fi
 			# No, process this patch
 
-			accounted="$accounted $i"
+			accounted+=("$i")
 			# found it, copy preamble before comparision
-			( sed -e "/^--- /,\$d" <$i; \
-			  cd $D_BASE && do_diff "$file" "$D_SUB.orig" "$D_SUB" \
+			( sed -e "/^--- /,\$d" <"$i"; \
+			  cd "$D_BASE" && do_diff "$file" "$D_SUB.orig" "$D_SUB" \
 			) >"$i.new"
-			# did it change ? mark it as changed
-			tfile="$(echo "$file" | $TRANSFORM)"
-			if eval diff "$(echo "${DIFF_FLAGS}" \
-			    | sed "s#@@#${tfile}#g")" \
-			    "$i" "$i.new" 1>&2; then
+			# did it change? mark it as changed
+			tfile=$(print -r -- "$file" | $TRANSFORM)
+			if eval diff "$(print -r -- "${DIFF_FLAGS}" | sed \
+			    "s#@@#${tfile}#g")" '"$i" "$i.new"' 1>&2; then
 				rm "$i.new"
 			else
-				echo "Patch $i for $file updated" >&2
+				print -ru2 -- "Patch $i for $file updated"
 				mv "$i" "$i.orig"
 				mv "$i.new" "$i"
-				edit="$edit $i"
+				edit+=("$i")
 			fi
 			continue 2
 		fi
 	done
 
 	# Build a sensible name for the new patch file
-	patchname=patch-$(echo "$file" | sed -e 's#[/. ]#_#g')
-	echo "No patch-* found for $file, creating $patchname" >&2
-	( cd $D_BASE && do_diff "$file" "$D_SUB.orig" "$D_SUB" ) >$patchname
-	edit="$edit $patchname"
-	accounted="$accounted $patchname"
+	patchname=patch-${file//[\/.- ]/_}
+	print -ru2 -- "No patch-* found for $file, creating $patchname"
+	( cd "$D_BASE" && do_diff "$file" "$D_SUB.orig" "$D_SUB" ) >"$patchname"
+	edit+=("$patchname")
+	accounted+=("$patchname")
 done
 
 # Verify all patches accounted for
-cd $PATCHDIR
+cd "$PATCHDIR"
 for i in *; do
 	[[ ! -f $i || $i = *@(.orig|.rej|~) ]] && continue
-	grep '^\\ No newline at end of file' $i >/dev/null \
-	    && echo "*** Patch $i needs manual intervention" >&2
-	[[ $accounted != *@($i)* ]] \
-	    && echo "*** Patch $i not accounted for" >&2
+	grep '^\\ No newline at end of file' "$i" >/dev/null && \
+	    print -ru2 -- "*** Patch $i needs manual intervention"
+	found=0
+	for j in "${accounted[@]}"; do
+		[[ $i = "$j" ]] || continue
+		found=1
+		break
+	done
+	(( found )) || print -ru2 -- "*** Patch $i not accounted for"
 done
 
-echo $edit
-[[ -n $SUBDIST ]] && mv ${WRKDIR1}/${SUBDIST}.orig ${WRKDIR1}.orig/${SUBDIST}
+for i in "${edit[@]}"; do
+	print -nr -- "$i"
+	print -n '\0'
+done
+[[ -n $SUBDIST ]] && mv "${WRKDIR1}/${SUBDIST}.orig" "${WRKDIR1}.orig/${SUBDIST}"
 exit 0

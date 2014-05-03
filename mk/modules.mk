@@ -1238,6 +1238,12 @@ $(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-spitz \
 ,55, kmod-snd-soc))
 
+$(eval $(call KMOD_template,SND_IMX_SOC,snd-imx-soc,\
+	$(MODULES_DIR)/kernel/sound/soc/fsl/imx-pcm-dma \
+	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-fsl-spdif \
+	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-imx-spdif \
+,55, kmod-snd-soc))
+
 $(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
 	$(MODULES_DIR)/kernel/sound/arm/snd-bcm2835 \
 ,55))
@@ -1482,15 +1488,15 @@ $(eval $(call KMOD_template,LEDS_ALIX2,leds-alix2,\
 ,10))
 
 $(eval $(call KMOD_template,LEDS_TRIGGER_TIMER,leds-trigger-timer,\
-	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-timer \
+	$(MODULES_DIR)/kernel/drivers/leds/trigger/ledtrig-timer \
 ,20))
 
 $(eval $(call KMOD_template,LEDS_TRIGGER_HEARTBEAT,leds-trigger-heartbeat,\
-	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-heartbeat \
+	$(MODULES_DIR)/kernel/drivers/leds/trigger/ledtrig-heartbeat \
 ,20))
 
 $(eval $(call KMOD_template,LEDS_TRIGGER_DEFAULT_ON,leds-trigger-default-on,\
-	$(MODULES_DIR)/kernel/drivers/leds/ledtrig-default-on \
+	$(MODULES_DIR)/kernel/drivers/leds/trigger/ledtrig-default-on \
 ,20))
 
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_LED,netfilter-xt-target-led,\
