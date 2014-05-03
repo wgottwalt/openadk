@@ -6,7 +6,7 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		grub
 PKG_VERSION:=		2.00
 PKG_RELEASE:=		5
-PKG_MD5SUM:=		e927540b6eda8b024fb0391eeaa4091c
+PKG_MD5SUM:=		a1043102fbc7bcedbf53e7ee3d17ab91
 PKG_DESCR:=		GRUB2 bootloader
 PKG_SECTION:=		boot
 PKG_BUILDDEP:=		bison-host
