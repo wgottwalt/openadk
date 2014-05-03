@@ -90,7 +90,9 @@ fi
 DIFF_FLAGS="-adu -I \"^--- $(print -r -- "$D_SUBP.orig/" | $TRANSFORM)@@	.*\""
 DIFF_FLAGS="$DIFF_FLAGS -I \"^\+\+\+ $(print -r -- "$D_SUBP/" | $TRANSFORM)@@	.*\""
 
-for file in $(cd ${WRKDIST}; find . -type f | sed 's#^\./##'); do
+(cd "${WRKDIST}"; find . -type f -print0) |&
+while IFS= read -p -d '' -r file; do
+	file=${file#./}
 	#print -r -- "DEBUG: <$file>" >>/tmp/debug
 	[[ ! -e $ORGDIST/$file && $patch_newfiles = 0 ]] && continue
 	[[ $file = configure && $ignore_autoconf = 1 ]] && continue	
