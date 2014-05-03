@@ -22,6 +22,7 @@ PATCH_LIST='patch-* *.patch'
 CURDIR=$PWD
 export CURDIR PATCH_LIST
 
+rm -f patches/*.new
 mksh "${TOPDIR}"/scripts/update-patches |&
 first=1
 set -A toedit
