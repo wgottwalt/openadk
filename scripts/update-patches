@@ -95,14 +95,16 @@ while IFS= read -p -d '' -r file; do
 	file=${file#./}
 	#print -r -- "DEBUG: <$file>" >>/tmp/debug
 	[[ ! -e $ORGDIST/$file && $patch_newfiles = 0 ]] && continue
-	[[ $file = configure && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = missing && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = depcomp && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = install-sh && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = aclocal.m4 && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = INSTALL && $ignore_autoconf = 1 ]] && continue	
-	[[ $file = config.h.in && $ignore_autoconf = 1 ]] && continue	
-	[[ $(basename $file) = Makefile.in && $ignore_autoconf = 1 ]] && continue	
+	if (( ignore_autoconf )); then
+		[[ $file = configure ]] && continue
+		[[ $file = missing ]] && continue
+		[[ $file = depcomp ]] && continue
+		[[ $file = install-sh ]] && continue
+		[[ $file = aclocal.m4 ]] && continue
+		[[ $file = INSTALL ]] && continue
+		[[ $file = config.h.in ]] && continue
+		[[ ${file##*/} = Makefile.in ]] && continue
+	fi
 	cmp -s "$ORGDIST/$file" "$WRKDIST/$file" && continue
 	print -ru2 -- "Processing ${file}..."
 	# look in patchdir for an existing patchfile matching this
@@ -168,7 +170,7 @@ while IFS= read -p -d '' -r file; do
 	done
 
 	# Build a sensible name for the new patch file
-	patchname=patch-$(print -r -- "$file" | sed -e 's#[/.- ]#_#g')
+	patchname=patch-${file//[\/.- ]/_}
 	print -ru2 -- "No patch-* found for $file, creating $patchname"
 	( cd "$D_BASE" && do_diff "$file" "$D_SUB.orig" "$D_SUB" ) >"$patchname"
 	edit+=("$patchname")
@@ -179,7 +181,7 @@ done
 cd "$PATCHDIR"
 for i in *; do
 	[[ ! -f $i || $i = *@(.orig|.rej|~) ]] && continue
-	grep '^\\ No newline at end of file' $i >/dev/null && \
+	grep '^\\ No newline at end of file' "$i" >/dev/null && \
 	    print -ru2 -- "*** Patch $i needs manual intervention"
 	found=0
 	for j in "${accounted[@]}"; do
