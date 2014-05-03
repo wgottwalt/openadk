@@ -107,7 +107,7 @@ endif
 	done
 	@toedit=$$(WRKDIST='${WRKDIST}' CURDIR=$$(pwd) \
 	    PATCH_LIST='patch-* *.patch' WRKDIR1='${WRKDIR}' \
-	    ${BASH} ${TOPDIR}/scripts/update-patches); \
+	    PATH='${HOST_PATH}' mksh ${TOPDIR}/scripts/update-patches); \
 	    if [[ -n $$toedit && $$toedit != FAIL ]]; then \
 		echo -n 'edit patches: '; read i; \
 		cd patches && $${VISUAL:-$${EDITOR:-vi}} $$toedit; \

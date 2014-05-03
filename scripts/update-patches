@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/env mksh
 # Copyright (c) 2006
 #	Thorsten Glaser <tg@freewrt.org>
 #
