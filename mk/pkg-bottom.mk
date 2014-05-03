@@ -267,3 +267,8 @@ ifeq (,$(filter noremove,${PKG_OPTS}))
 	fi
 endif
 	@rm -f '${STAGING_PKG_DIR}/${PKG_NAME}'
+
+ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
+DIFF_IGNOREFILES?=	configure missing depcomp install-sh INSTALL \
+			aclocal.m4 config.h.in Makefile.in */Makefile.in
+endif

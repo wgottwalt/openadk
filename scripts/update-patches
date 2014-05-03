@@ -82,9 +82,6 @@ fi
 
 if [[ -e $WRKDIST/../.autoreconf_done ]]; then
 	touch "$ORGDIST/.autoreconf_done"
-	ignore_autoconf=1
-else
-	ignore_autoconf=0
 fi
 
 DIFF_FLAGS="-adu -I \"^--- $(print -r -- "$D_SUBP.orig/" | $TRANSFORM)@@	.*\""
@@ -95,16 +92,9 @@ while IFS= read -p -d '' -r file; do
 	file=${file#./}
 	#print -r -- "DEBUG: <$file>" >>/tmp/debug
 	[[ ! -e $ORGDIST/$file && $patch_newfiles = 0 ]] && continue
-	if (( ignore_autoconf )); then
-		[[ $file = configure ]] && continue
-		[[ $file = missing ]] && continue
-		[[ $file = depcomp ]] && continue
-		[[ $file = install-sh ]] && continue
-		[[ $file = aclocal.m4 ]] && continue
-		[[ $file = INSTALL ]] && continue
-		[[ $file = config.h.in ]] && continue
-		[[ ${file##*/} = Makefile.in ]] && continue
-	fi
+	for i in $DIFF_IGNOREFILES; do
+		[[ $file = $i ]] && continue
+	done
 	cmp -s "$ORGDIST/$file" "$WRKDIST/$file" && continue
 	print -ru2 -- "Processing ${file}..."
 	# look in patchdir for an existing patchfile matching this
