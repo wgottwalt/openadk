@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ntfs-3g
 PKG_VERSION:=		2014.2.15
-PKG_RELEASE:=		2
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		f11d563816249d730a00498983485f3a
 PKG_DESCR:=		ntfs filesystem driver using fuse
 PKG_SECTION:=		fs

@@ -1,0 +1,13 @@
+#!/bin/sh
+#INIT 20
+[[ $1 = autostart ]] || exit 0
+
+# mount ntfs-3g filesystems
+grep fuse /proc/filesystems >/dev/null 2>&1
+if [ $? -eq 0 ];then
+	grep -v "^#" /etc/fstab |grep ntfs-3g >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		mount -a -t ntfs-3g
+	fi
+fi
+exit 0
