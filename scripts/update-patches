@@ -157,7 +157,7 @@ while IFS= read -p -d '' -r file; do
 			# did it change? mark it as changed
 			tfile=$(print -r -- "$file" | $TRANSFORM)
 			if eval diff "$(print -r -- "${DIFF_FLAGS}" | sed \
-			    "s#@@#${tfile}#g")" "$i" "$i.new" 1>&2; then
+			    "s#@@#${tfile}#g")" '"$i" "$i.new"' 1>&2; then
 				rm "$i.new"
 			else
 				print -ru2 -- "Patch $i for $file updated"
