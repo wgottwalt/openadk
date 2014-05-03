@@ -88,8 +88,9 @@ The /etc/init.d/rcS script will execute all shell scripts in /etc/init.d in
 order with the parameter +autostart+. The order is identified by the +#INIT+
 comment in the script. All scripts are sourcing the +/etc/rc.conf+ file to
 determine if a service should be started on boot and which flags if any are
-used for the service. By default all services except syslog and ssh are
-disabled.  Most scripts provided by OpenADK via
+used for the service. By default all services are disabled. If the variable
+for a service is set to "DAEMON" and mksh is installed, the service starts
+asynchronously in the background. Most scripts provided by OpenADK via
 +package/<pkgname>/files/<pkgname>.init+ are like:
 
 ---------------------
@@ -103,6 +104,7 @@ case $1 in
 autostop) ;;
 autostart)
         test x"${foo:-NO}" = x"NO" && exit 0
+	test x"$foo" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
         exec sh $0 start
         ;;
 start)

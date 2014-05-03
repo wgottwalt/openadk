@@ -6,7 +6,8 @@
 case $1 in
 autostop) ;;
 autostart)
-	test x"$shorewall" != x"YES" && exit 0
+	test x"${shorewall:-NO}" != x"YES" && exit 0
+	test x"$shorewall" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
 	exec sh $0 start
 	;;
 start)

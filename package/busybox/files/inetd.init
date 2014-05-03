@@ -4,8 +4,9 @@
 . /etc/rc.conf
 case $1 in
 autostart)
-	test x"$inetd" = x"NO" && exit 0
+	test x"${inetd:-NO}" = x"NO" && exit 0
 	test -e /etc/inetd.conf || exit 0
+	test x"$inetd" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
 	exec sh $0 start
 	;;
 start)

@@ -12,6 +12,7 @@ autostart)
 		echo openssh not starting: set to AUTO and dropbear is enabled
 		exit 0
 	fi
+	test x"$openssh" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
 	exec sh $0 start
 	;;
 start)

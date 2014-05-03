@@ -8,6 +8,7 @@ case $1 in
 autostop) ;;
 autostart)
 	test x"${alix_switch:-NO}" = x"NO" && exit 0
+	test x"$alix_switch" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
 	exec sh $0 start
 	;;
 start)

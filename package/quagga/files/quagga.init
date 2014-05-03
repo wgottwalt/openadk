@@ -111,6 +111,7 @@ esac
 case ${COMMAND} in
 autostart)
 	test x"${quagga:-NO}" = x"NO" && exit 0
+	test x"$quagga" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
 	exec sh $0 start
 	;;
 start|restart|watchrestart)
