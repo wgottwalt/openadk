@@ -1,9 +1,20 @@
 #!/bin/sh
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+: ${rcquiet=0}
 {
 	grep '^#INIT ' /etc/init.d/* | \
 	    sort -rnk2 | \
 	    while read line; do
+		test x"$rcquiet" = x"0" && echo -n "Stopping ${line%%:*}... "
 		sh ${line%%:*} autostop
+		rc=$?
+		case $rcquiet:$rc in
+		(0:0)
+			echo done.
+			;;
+		(0:*)
+			echo "failed ($rc)."
+			;;
+		esac
 	done
 } | logger -s -p 6 -t ''

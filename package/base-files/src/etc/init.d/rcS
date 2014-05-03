@@ -6,10 +6,21 @@ fi
 ln -s /proc/self/fd/2 /dev/stderr
 echo "System initialization ..."
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+: ${rcquiet=0}
 {
 	grep '^#INIT ' /etc/init.d/* | \
 	    sort -nk2 | \
 	    while read line; do
+		test x"$rcquiet" = x"0" && echo -n "Starting ${line%%:*}... "
 		sh ${line%%:*} autostart
+		rc=$?
+		case $rcquiet:$rc in
+		(0:0)
+			echo done.
+			;;
+		(0:*)
+			echo "failed ($rc)."
+			;;
+		esac
 	    done
 } |tee /dev/stderr |logger -p 6 -t ''
