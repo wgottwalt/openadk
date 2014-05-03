@@ -12,6 +12,8 @@ PKG_SECTION:=		lang
 PKG_URL:=		http://www.swig.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=swig/}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
 PKG_ARCH_DEPENDS:=	native
 
 include $(TOPDIR)/mk/host.mk
