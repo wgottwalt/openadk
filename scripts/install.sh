@@ -202,7 +202,7 @@ if ! T=$(mktemp -d /tmp/openadk.XXXXXXXXXX); then
 	print -u2 Error creating temporary directory.
 	exit 1
 fi
-tar -xOzf "$src" usr/share/grub-bin/core.img >"$T/core.img"
+tar -xOzf "$src" boot/grub/core.img >"$T/core.img"
 integer coreimgsz=$($statcmd "$T/core.img")
 if (( coreimgsz < 1024 )); then
 	print -u2 core.img is probably too small: $coreimgsz
@@ -360,12 +360,6 @@ mkdir -p boot/grub
 	print "\tlinux /boot/kernel $linuxargs"
 	print '}'
 ) >boot/grub/grub.cfg
-set -A grubfiles
-ngrubfiles=0
-for a in usr/lib/grub/*-pc/{*.mod,efiemu??.o,command.lst,moddep.lst,fs.lst,handler.lst,parttool.lst}; do
-	[[ -e $a ]] && grubfiles[ngrubfiles++]=$a
-done
-cp "${grubfiles[@]}" boot/grub/
 (( quiet )) || print Finishing up...
 cd "$TOPDIR"
 umount "$T"
