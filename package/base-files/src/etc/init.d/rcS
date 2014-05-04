@@ -7,18 +7,32 @@ ln -s /proc/self/fd/2 /dev/stderr
 echo "System initialization ..."
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 : ${rcquiet=0}
+if test x"$rcquiet" = x"0" && sh -n /etc/rc.conf >/dev/null 2>&1; then
+	. /etc/rc.conf
+	unset rcquiet
+	rcquiet=0
+else
+	unset rcquiet
+	rcquiet=1
+fi
 {
 	grep '^#INIT ' /etc/init.d/* | \
 	    sort -nk2 | \
 	    while read line; do
-		test x"$rcquiet" = x"0" && echo -n "Starting ${line%%:*}... "
+		rcenabled=NO
+		rcname=${line%%:*}
+		rcname=${rcname##*/}
+		test x"$rcquiet" = x"0" && eval 'rcenabled=${'"${rcname}"':-NO}'
+		test x"$rcenabled" = x"NO" || echo -n "Starting ${rcname}... "
 		sh ${line%%:*} autostart
 		rc=$?
-		case $rcquiet:$rc in
-		(0:0)
+		case $rcenabled:$rc in
+		(NO:*)
+			;;
+		(*:0)
 			echo done.
 			;;
-		(0:*)
+		(*:*)
 			echo "failed ($rc)."
 			;;
 		esac
