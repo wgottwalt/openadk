@@ -87,6 +87,30 @@ else
 GCC_CONFOPTS+=		--enable-target-optspace
 endif
 
+ifeq ($(ARCH),arm)
+GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
+ifneq ($(ADK_TARGET_FPU),)
+GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
+endif
+endif
+
+ifeq ($(ADK_CPU_ARM926EJ_S),y)
+GCC_CONFOPTS+=		--with-arch=armv5te --with-tune=arm1176jzf-s
+endif
+
+ifeq ($(ADK_CPU_ARM1176JZF_S),y)
+GCC_CONFOPTS+=		--with-arch=armv6 --with-tune=arm1176jzf-s
+endif
+
+ifeq ($(ADK_CPU_CORTEX_A9),y)
+GCC_CONFOPTS+=		--with-arch=armv7-a --with-tune=cortex-a9
+endif
+
+ifeq ($(ADK_CPU_SPARC_V9),y)
+GCC_CONFOPTS+=		--with-cpu=ultrasparc
+endif
+
+
 ifneq ($(ADK_TARGET_MIPS_ABI),)
 GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_MIPS_ABI}
 endif
