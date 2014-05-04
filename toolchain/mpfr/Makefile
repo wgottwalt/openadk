@@ -3,7 +3,6 @@
 
 include $(TOPDIR)/rules.mk
 include ../rules.mk
-include $(TOPDIR)/toolchain/gmp/Makefile.inc
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
@@ -16,7 +15,6 @@ $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_HOST_DIR)/usr \
-		--with-gmp-build=$(GMP_BUILD_DIR) \
 		--disable-shared \
 		--enable-static \
 	);
