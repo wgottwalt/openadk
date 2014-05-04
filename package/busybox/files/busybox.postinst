@@ -1,12 +1,13 @@
 #!/bin/sh
 if [ -z $IPKG_INSTROOT ];then chmod u+s /bin/busybox;fi
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf network YES
-add_rcconf crond NO
-add_rcconf watchdog NO
+. $IPKG_INSTROOT/etc/.bb_defaults
+add_rcconf network ${BBDEF_NETWORK}
+add_rcconf crond ${BBDEF_CROND}
+add_rcconf watchdog ${BBDEF_WATCHDOG}
 add_rcconf watchdog_flags '-t 10 -T 20'
-add_rcconf syslogd NO
+add_rcconf syslogd ${BBDEF_SYSLOGD}
 add_rcconf syslogd_flags '-C32'
-add_rcconf inetd NO
-add_rcconf ntpd NO
+add_rcconf inetd ${BBDEF_INETD}
+add_rcconf ntpd ${BBDEF_NTPD}
 add_rcconf ntpd_flags '-p time.fu-berlin.de'

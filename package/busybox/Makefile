@@ -57,9 +57,20 @@ do-configure:
 do-build:
 	$(MAKE) ${BB_MAKE_FLAGS} busybox
 
+BBDEFS:=(
+define BBDEF
+ifeq ($(ADK_RUNTIME_START_BUSYBOX_$(1)),y)
+BBDEFS+=echo BBDEF_$(1)=YES;
+else
+BBDEFS+=echo BBDEF_$(1)=NO;
+endif
+endef
+$(foreach OPTION,NETWORK CROND WATCHDOG SYSLOGD INETD NTPD,$(call BBDEF,$(OPTION)))
+
 do-install:
 	$(MAKE) ${BB_MAKE_FLAGS} install $(MAKE_TRACE)
 	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
+	${BBDEFS} :) >$(IDIR_BUSYBOX)/etc/.bb_defaults
 ifeq ($(BUSYBOX_IFUPDOWN),y)
 	$(INSTALL_DIR) $(IDIR_BUSYBOX)/etc/init.d
 	$(INSTALL_BIN) ./files/network $(IDIR_BUSYBOX)/etc/init.d
