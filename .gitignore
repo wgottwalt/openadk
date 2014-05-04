@@ -14,6 +14,9 @@
 /adk/config/zconf.output
 /adk/config/zconf.tab.c
 /adk/config/zconf.tab.h
+/adk/tools/pkgmaker.exe
+/adk/tools/depmaker.exe
+/adk/tools/pkgrebuild.exe
 /adk/tools/pkgmaker
 /adk/tools/depmaker
 /adk/tools/pkgrebuild
