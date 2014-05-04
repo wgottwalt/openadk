@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf reaim reaim NO
-add_rcconf reaim_flags reaim_flags "eth0"
+add_rcconf reaim NO
+add_rcconf reaim_flags "eth0"

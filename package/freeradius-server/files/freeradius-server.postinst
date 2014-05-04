@@ -1,6 +1,6 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf radiusd radiusd NO
+add_rcconf radiusd NO
 gid=$(get_next_gid)
 add_group radius $gid
 add_user radius $(get_next_uid) $gid /usr/lib/radius

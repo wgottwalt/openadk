@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf kbd_map kbd_map "zaurus"
-add_rcconf kbd kbd NO
+add_rcconf kbd_map "zaurus"
+add_rcconf kbd NO

@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf frickin frickin NO
-add_rcconf frickin_flags frickin_flags ""
+add_rcconf frickin NO
+add_rcconf frickin_flags ""

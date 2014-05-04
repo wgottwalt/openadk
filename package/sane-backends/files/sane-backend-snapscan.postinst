@@ -1,2 +1,2 @@
-#/bin/sh
+#!/bin/sh
 echo snapscan >> $IPKG_INSTROOT/etc/sane.d/dll.conf

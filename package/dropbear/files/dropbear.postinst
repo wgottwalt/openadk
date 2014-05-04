@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf dropbear_flags dropbear_flags " "
-add_rcconf dropbear dropbear NO
+add_rcconf dropbear_flags " "
+add_rcconf dropbear NO

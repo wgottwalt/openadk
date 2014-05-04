@@ -5,4 +5,4 @@ add_group netdev $gid
 gid2=$(get_next_gid)
 add_group avahi $gid2
 add_user avahi $(get_next_uid) $gid2 /tmp
-add_rcconf avahi avahi NO
+add_rcconf avahi NO

@@ -3,4 +3,4 @@
 gid=$(get_next_gid)
 add_user tinyproxy $(get_next_uid) $gid /etc/tinyproxy
 add_group tinyproxy $gid
-add_rcconf tinyproxy tinyproxy NO
+add_rcconf tinyproxy NO

@@ -4,5 +4,5 @@ gid=$(get_next_gid)
 add_group ntp $gid
 add_user ntp $(get_next_uid) $gid /tmp/.ntp
 add_service ntp 123/udp
-add_rcconf ntpd_flags ntpd_flags "-s"
-add_rcconf ntpd ntpd NO
+add_rcconf ntpd_flags "-s"
+add_rcconf ntpd NO

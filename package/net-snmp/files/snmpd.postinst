@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf snmpd
-add_rcconf 'use "-Ls 1" to log to syslog' snmpd_flags '-Ls 1'
+add_rcconf snmpd NO
+add_rcconf snmpd_flags '-Ls 1'

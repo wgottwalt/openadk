@@ -1,2 +1,2 @@
-#/bin/sh
+#!/bin/sh
 echo mustek_usb2 >> $IPKG_INSTROOT/etc/sane.d/dll.conf

@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf svnserve
-add_rcconf svnserve svnserve_path /svn
+add_rcconf svnserve NO
+add_rcconf svnserve_path /svn

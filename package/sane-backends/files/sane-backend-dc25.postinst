@@ -1,2 +1,2 @@
-#/bin/sh
+#!/bin/sh
 echo dc25 >> $IPKG_INSTROOT/etc/sane.d/dll.conf

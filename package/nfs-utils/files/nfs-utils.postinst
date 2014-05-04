@@ -1,8 +1,8 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf "kernel nfs server" nfs_server NO
-add_rcconf "kernel nfs client (v4)" nfs_client NO
-add_rcconf "kernel nfs server version" nfs_server_version 3
+add_rcconf nfs_server NO
+add_rcconf nfs_client NO
+add_rcconf nfs_server_version 3
 add_service nfs 2049/tcp
 add_service nfs 2049/udp
 gid=$(get_next_gid)

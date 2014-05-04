@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf 'e.g. "eth0.1 eth1"' dhcpd_flags
-add_rcconf dhcpd dhcpd NO
+add_rcconf dhcpd_flags 'eth0'
+add_rcconf dhcpd NO

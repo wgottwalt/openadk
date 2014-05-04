@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf fakeidentd fakeidentd NO
-add_rcconf fakeidentd_flags fakeidentd_flags "username"
+add_rcconf fakeidentd NO
+add_rcconf fakeidentd_flags "username"

@@ -3,5 +3,5 @@
 gid=$(get_next_gid)
 add_group daapd $gid
 add_user daapd $(get_next_uid) $gid
-add_rcconf forked_daapd forked_daapd NO
+add_rcconf forked_daapd NO
 

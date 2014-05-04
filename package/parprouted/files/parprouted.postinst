@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf parprouted parprouted NO
-add_rcconf parprouted_flags parprouted_flags "eth0"
+add_rcconf parprouted NO
+add_rcconf parprouted_flags "eth0"

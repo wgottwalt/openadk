@@ -1,6 +1,6 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf cherokee cherokee NO
+add_rcconf cherokee NO
 gid=$(get_next_gid)
 add_group cherokee $gid
 add_user cherokee $(get_next_uid) $gid /etc/cherokee

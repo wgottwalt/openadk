@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf rarpd rarpd NO
-add_rcconf rarpd_flags rarpd_flags "-i eth0"
+add_rcconf rarpd NO
+add_rcconf rarpd_flags "-i eth0"

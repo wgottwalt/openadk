@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf pmacctd pmacctd NO
-add_rcconf pmacctd_flags pmacctd_flags "-f /etc/pmacctd.conf"
+add_rcconf pmacctd NO
+add_rcconf pmacctd_flags "-f /etc/pmacctd.conf"

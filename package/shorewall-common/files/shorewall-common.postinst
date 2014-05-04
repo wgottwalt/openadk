@@ -1,6 +1,5 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf shorewall
-
+add_rcconf shorewall NO
 mkdir -p $IPKG_INSTROOT/usr/share/shorewall/runtime
 chmod 0700 $IPKG_INSTROOT/usr/share/shorewall/runtime

@@ -1,5 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf monit monit NO
-add_rcconf monit_flags monit_flags NO
-
+add_rcconf monit NO
+add_rcconf monit_flags " "

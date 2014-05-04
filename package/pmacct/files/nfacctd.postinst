@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf nfacctd nfacctd NO
-add_rcconf nfacctd_flags nfacctd_flags "-f /etc/nfacctd.conf"
+add_rcconf nfacctd NO
+add_rcconf nfacctd_flags "-f /etc/nfacctd.conf"

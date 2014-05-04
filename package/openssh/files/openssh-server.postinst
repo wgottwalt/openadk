@@ -2,4 +2,4 @@
 . $IPKG_INSTROOT/etc/functions.sh
 add_user sshd $(get_next_uid) $(get_next_gid) /var/run/sshd
 add_group sshd $(get_next_gid)
-add_rcconf 'use "NO" to disable always, "AUTO" if dropbear is on' openssh AUTO
+add_rcconf openssh NO

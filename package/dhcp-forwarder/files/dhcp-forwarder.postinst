@@ -3,4 +3,4 @@
 gid=$(get_next_gid)
 add_group dhcp-fwd $gid
 add_user dhcp-fwd $(get_next_uid) $gid /tmp
-add_rcconf dhcp_fwd dhcp_fwd NO
+add_rcconf dhcp_fwd NO

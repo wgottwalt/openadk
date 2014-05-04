@@ -1,5 +1,5 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf rpcbind
+add_rcconf rpcbind NO
 add_service rpcbind 111/tcp
 add_service rpcbind 111/udp

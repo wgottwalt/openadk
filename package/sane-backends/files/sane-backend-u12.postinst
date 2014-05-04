@@ -1,2 +1,2 @@
-#/bin/sh
+#!/bin/sh
 echo u12 >> $IPKG_INSTROOT/etc/sane.d/dll.conf

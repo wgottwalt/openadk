@@ -1,5 +1,5 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf amixer
-add_rcconf amixer_volume amixer_volume "80%"
-add_rcconf amixer_mixer amixer_mixer "Master PCM"
+add_rcconf amixer NO
+add_rcconf amixer_volume "80%"
+add_rcconf amixer_mixer "Master PCM"

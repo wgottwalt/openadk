@@ -1,3 +1,3 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf pppoe_client pppoe_client NO
+add_rcconf pppoe_client NO

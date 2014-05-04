@@ -1,5 +1,5 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf pppoe_relay pppoe_relay NO
-add_rcconf pppoe_relay_flags pppoe_relay_flags "-C eth2 -S vlan1"
+add_rcconf pppoe_relay NO
+add_rcconf pppoe_relay_flags "-C eth2 -S vlan1"
 

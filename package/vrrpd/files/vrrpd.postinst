@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf vrrpd vrrpd NO
-add_rcconf vrrpd_flags vrrpd_flags "-i vlan1 -v 1 192.168.1.1"
+add_rcconf vrrpd NO
+add_rcconf vrrpd_flags "-i vlan1 -v 1 192.168.1.1"

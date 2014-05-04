@@ -3,7 +3,7 @@
 gid=$(get_next_gid)
 add_group messagebus $gid
 add_user messagebus $(get_next_uid) $gid /var/run/dbus
-add_rcconf dbus dbus NO
+add_rcconf dbus NO
 echo Generating UUID
 if [ -z $IPKG_INSTROOT ];then 
 	mkdir /lib/dbus /var/lib 

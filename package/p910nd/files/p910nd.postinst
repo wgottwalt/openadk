@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf p910nd p910nd NO
-add_rcconf p910nd_flags p910nd_flags "0 -b -f /dev/usb/lp0"
+add_rcconf p910nd NO
+add_rcconf p910nd_flags "0 -b -f /dev/usb/lp0"

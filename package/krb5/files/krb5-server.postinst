@@ -1,6 +1,6 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf "MIT kdc" kdc NO
+add_rcconf kdc NO
 add_service kerberos 88/tcp
 add_service kerberos 88/udp
 add_service kerberos-adm 749/tcp

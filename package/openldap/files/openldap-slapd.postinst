@@ -2,4 +2,4 @@
 . $IPKG_INSTROOT/etc/functions.sh
 add_user slapd $(get_next_uid) $(get_next_gid) /var/run/slapd
 add_group slapd $(get_next_gid)
-add_rcconf 'use "YES" to enable' slapd NO
+add_rcconf slapd NO

@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf 'options passed to gpm' gpm_flags "-m /dev/psaux -t ps2"
-add_rcconf gpm gpm NO
+add_rcconf gpm_flags "-m /dev/psaux -t ps2"
+add_rcconf gpm NO

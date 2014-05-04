@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf php php NO
-add_rcconf php_flags php_flags "-b 2000"
+add_rcconf php NO
+add_rcconf php_flags "-b 2000"

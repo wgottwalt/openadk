@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf htpdate htpdate NO
-add_rcconf htpdate_flags htpdate_flags "www.google.com www.yahoo.com www.linux.org www.freebsd.org"
+add_rcconf htpdate NO
+add_rcconf htpdate_flags "www.google.com www.yahoo.com www.linux.org www.freebsd.org"

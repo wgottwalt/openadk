@@ -1,2 +1,2 @@
-#/bin/sh
+#!/bin/sh
 echo gt68xx >> $IPKG_INSTROOT/etc/sane.d/dll.conf

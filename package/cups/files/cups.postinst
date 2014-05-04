@@ -3,4 +3,4 @@
 gid=$(get_next_gid)
 add_user cups $(get_next_uid) $gid /tmp
 add_group cups $gid
-add_rcconf cups cups NO
+add_rcconf cups NO

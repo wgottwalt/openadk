@@ -1,6 +1,5 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-
 gid=$(get_next_gid)
 gid2=$(get_next_gid)
 add_user hacluster $(get_next_uid) $gid /tmp

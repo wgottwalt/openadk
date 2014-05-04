@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf 'additional flags for totd' totd_flags "-q"
-add_rcconf totd totd NO
+add_rcconf totd_flags "-q"
+add_rcconf totd NO

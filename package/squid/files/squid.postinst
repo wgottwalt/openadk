@@ -3,4 +3,4 @@
 gid=$(get_next_gid)
 add_user squid $(get_next_uid) $gid /var/squid/cache
 add_group squid $gid
-add_rcconf squid squid NO
+add_rcconf squid NO

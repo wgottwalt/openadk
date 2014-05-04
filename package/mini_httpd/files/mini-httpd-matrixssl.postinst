@@ -1,3 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf '"NO" to disable, "-C /etc/mini_httpd.conf" otherwise' mini_httpd_flags
+add_rcconf mini_httpd NO
+add_rcconf mini_httpd_flags ' '

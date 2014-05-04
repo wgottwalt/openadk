@@ -3,4 +3,4 @@
 gid=$(get_next_gid)
 add_user dansguardian $(get_next_uid) $gid /etc/dansguardian
 add_group dansguardian $gid
-add_rcconf dansguardian dansguardian NO
+add_rcconf dansguardian NO
