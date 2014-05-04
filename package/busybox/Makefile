@@ -65,11 +65,12 @@ else
 BBDEFS+=echo BBDEF_$(1)=NO;
 endif
 endef
-$(foreach OPTION,NETWORK CROND WATCHDOG SYSLOGD INETD NTPD,$(call BBDEF,$(OPTION)))
+$(foreach OPTION,NETWORK CROND WATCHDOG SYSLOGD INETD NTPD,$(eval $(call BBDEF,$(OPTION))))
 
 do-install:
 	$(MAKE) ${BB_MAKE_FLAGS} install $(MAKE_TRACE)
 	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
+	$(INSTALL_DIR) $(IDIR_BUSYBOX)/etc
 	${BBDEFS} :) >$(IDIR_BUSYBOX)/etc/.bb_defaults
 ifeq ($(BUSYBOX_IFUPDOWN),y)
 	$(INSTALL_DIR) $(IDIR_BUSYBOX)/etc/init.d
