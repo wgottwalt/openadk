@@ -6,13 +6,8 @@ PKG_VERSION:=		2.19
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e26b8cc666b162f999404b03970f14e4
 PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
-ifeq ($(ADK_32),y)
-GLIBC_TARGET_NAME:=	i686-openadk-linux-gnu
-else
-GLIBC_TARGET_NAME:=	$(GNU_TARGET_NAME)
-endif
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
-			--host=$(GLIBC_TARGET_NAME) \
+			--host=$(GNU_TARGET_NAME) \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
 			--disable-sanity-checks \
 			--disable-nls \
