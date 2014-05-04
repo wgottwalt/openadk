@@ -12,16 +12,12 @@ toolchain stuff:
 - static toolchain support
 
 base system:
-- automount ntfs/ntfs-3g
-- add daemon() function to functions.sh
 - add fb full screen logo
-- add printing of OK/FAIL (optional verbose bootup)
 - try Preset Loops per Jiffy for faster bootup via lpj=
 - restart network (kill wpa_supplicant)
 - essid with spaces
 
 new or update packages:
-- xbmc gotham
 - add rsyslog
 - add btrfs-utils
 - add stunnel
@@ -35,5 +31,4 @@ new or update packages:
 system target specific:
 - fix ibm x40 bootup
 - reenable rb532
-- qemu superh more ram
 - microblaze: add cfgfs partition to dts, add partition to spartan dts

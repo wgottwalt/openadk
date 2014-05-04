@@ -1,2 +1,4 @@
+- uclibc sparc toolchain building fails
+- uclibc mips64 n32 runtime issues
 - qemu-sparc64: ide driver not working, only virtio (but unstable)
 - qemu-microblaze: ml605 early printk and network card emulation fails, little endian works
