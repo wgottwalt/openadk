@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		83
+PKG_RELEASE:=		84
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -62,7 +62,9 @@ endif
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
 	test -z $(ADK_RUNTIME_SHELL) || \
-	    cat ./files/inittab.shell >> $(IDIR_BASE_FILES)/etc/inittab
+	    cat ./files/inittab.shell >> $(IDIR_BASE_FILES)/etc/inittab && \
+		test -z $(ADK_TARGET_WITH_VGA) || \
+		cat ./files/inittab.shellvga >> $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_GETTY_VGA) || \
 	    cat ./files/inittab.vga >> $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_GETTY_SERIAL) || \

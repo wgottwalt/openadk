@@ -1,1 +1,1 @@
-::askfirst:-/bin/sh
+@DEVICE@::askfirst:-/bin/sh
