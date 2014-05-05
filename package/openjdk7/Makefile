@@ -9,15 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		f6b28633b9978fadc724247cfc264ff0
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		gettext-tiny-host glib-host flex-host bison-host qemu-host
-PKG_BUILDDEP+=		fastjar-host libICE-host libSM-host libX11-host util-macros-host libXt-host 
-PKG_BUILDDEP+=		xineramaproto-host libXinerama-host recordproto-host libXi-host libXtst-host freetype-host
-PKG_BUILDDEP+=		renderproto-host libXrender-host alsa-lib-host libffi-host gcj-host ecj-host jikes-host 
-PKG_BUILDDEP+=		classpath-host jamvm-host openjdk7-host nss
-PKG_BUILDDEP+=		alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
+PKG_BUILDDEP:=		openjdk7-host alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv-tiny
-PKG_BUILDDEP+=		libpng giflib gtk+ glib fontconfig
-HOST_BUILDDEP:=		ant-host cups-host
+PKG_BUILDDEP+=		libpng giflib gtk+ glib fontconfig nss
+HOST_BUILDDEP:=		fastjar-host gcj-host ecj-host classpath-host jamvm-host jikes-host ant-host
+HOST_BUILDDEP+=		cups-host libXt-host qemu-host alsa-lib-host
 PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi libgcc cups
 PKG_DEPENDS+=		libfreetype libxrender libx11 libxext libpthread nss libjpeg-turbo
 PKG_DEPENDS+=		libpng giflib libgtk glib fontconfig
@@ -55,9 +51,6 @@ JDKARCH:=		i386
 endif
 ifeq ($(CPU_ARCH),x86_64)
 JDKARCH:=		amd64
-endif
-ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
-JDKARCH:=		mipsel
 endif
 
 CONFIGURE_BACKEND:=	--enable-zero
