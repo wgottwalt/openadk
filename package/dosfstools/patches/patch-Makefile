@@ -1,5 +1,5 @@
 --- dosfstools-3.0.26.orig/Makefile	2014-01-17 07:09:28.000000000 +0100
-+++ dosfstools-3.0.26/Makefile	2014-03-13 08:58:52.000000000 +0100
++++ dosfstools-3.0.26/Makefile	2014-05-05 13:38:09.000000000 +0200
 @@ -32,7 +32,9 @@ OPTFLAGS = -O2 -fomit-frame-pointer -D_G
  #WARNFLAGS = -Wall -pedantic -std=c99
  WARNFLAGS = -Wall -Wextra -Wno-sign-compare -Wno-missing-field-initializers -Wmissing-prototypes -Wstrict-prototypes
@@ -11,3 +11,21 @@
  
  VPATH = src
  
+@@ -48,7 +50,7 @@ mkfs.fat: mkfs.fat.o
+ 
+ rebuild: distclean build
+ 
+-install: install-bin install-doc install-man install-symlinks
++install: install-bin install-symlinks
+ 
+ install-bin: build
+ 	install -d -m 0755 $(DESTDIR)/$(SBINDIR)
+@@ -73,7 +75,7 @@ install-man:
+ 			install -D -m 0644 $${MANPAGE} $(DESTDIR)/$(MANDIR)/$${LANGUAGE}/man$${SECTION}/$$(basename $${MANPAGE} .$${LANGUAGE}.$${SECTION}).$${SECTION}; \
+ 		done; \
+ 	done
+-install-symlinks: install-bin install-man
++install-symlinks: install-bin
+ 	if [ -e $(DESTDIR)/$(SBINDIR)/fatlabel ]; \
+ 	then \
+ 		ln -sf fatlabel $(DESTDIR)/$(SBINDIR)/dosfslabel; \

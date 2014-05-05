@@ -1,5 +1,5 @@
 --- dosfstools-3.0.26.orig/src/io.c	2014-01-17 07:07:14.000000000 +0100
-+++ dosfstools-3.0.26/src/io.c	2014-03-26 13:27:02.000000000 +0100
++++ dosfstools-3.0.26/src/io.c	2014-05-05 13:34:45.000000000 +0200
 @@ -48,7 +48,7 @@
  
  typedef struct _change {
@@ -39,7 +39,7 @@
  {
      CHANGE *walk;
      int got;
-@@ -145,7 +145,7 @@ void fs_read(loff_t pos, int size, void
+@@ -145,7 +145,7 @@ void fs_read(loff_t pos, int size, void 
      }
  }
  

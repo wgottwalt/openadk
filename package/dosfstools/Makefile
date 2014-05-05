@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dosfstools
 PKG_VERSION:=		3.0.26
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		45012f5f56f2aae3afcd62120b9e5a08
 PKG_DESCR:=		utilities to create and check FAT filesystems
 PKG_SECTION:=		fs
