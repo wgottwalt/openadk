@@ -52,10 +52,10 @@ do-configure:
 		cp ${WRKBUILD}/.config.tmp ${WRKBUILD}/.config; \
 	done
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
-	yes '' | $(MAKE) ${BB_MAKE_FLAGS} oldconfig $(MAKE_TRACE)
+	yes '' | PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} oldconfig $(MAKE_TRACE)
 
 do-build:
-	$(MAKE) ${BB_MAKE_FLAGS} busybox
+	PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} busybox
 
 BBDEFS:=(
 define BBDEF
@@ -68,7 +68,7 @@ endef
 $(foreach OPTION,CROND WATCHDOG SYSLOGD INETD NTPD,$(eval $(call BBDEF,$(OPTION))))
 
 do-install:
-	$(MAKE) ${BB_MAKE_FLAGS} install $(MAKE_TRACE)
+	PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} install $(MAKE_TRACE)
 	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
 	$(INSTALL_DIR) $(IDIR_BUSYBOX)/etc
 	${BBDEFS} :) >$(IDIR_BUSYBOX)/etc/.bb_defaults

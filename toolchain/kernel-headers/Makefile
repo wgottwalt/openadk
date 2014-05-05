@@ -8,8 +8,8 @@ include ${TOPDIR}/mk/kernel-vars.mk
 include ${TOPDIR}/mk/buildhlp.mk
 
 $(WRKBUILD)/.headers:
-	$(MAKE) -C $(WRKBUILD) ${KERNEL_MAKE_OPTS} headers_check
-	$(MAKE) -C $(WRKBUILD) ${KERNEL_MAKE_OPTS} \
+	${KERNEL_MAKE_ENV} $(MAKE) -C $(WRKBUILD) ${KERNEL_MAKE_OPTS} headers_check
+	${KERNEL_MAKE_ENV} $(MAKE) -C $(WRKBUILD) ${KERNEL_MAKE_OPTS} \
 		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR)/usr \
 		headers_install
 	@-find $(STAGING_TARGET_DIR)/usr/include -name .install -delete
