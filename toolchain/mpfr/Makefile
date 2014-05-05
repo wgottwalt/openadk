@@ -15,6 +15,7 @@ $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_HOST_DIR)/usr \
+		--with-gmp=$(STAGING_HOST_DIR)/usr \
 		--disable-shared \
 		--enable-static \
 	);
