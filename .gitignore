@@ -64,3 +64,4 @@
 /target/config/Config.in.arch
 /target/config/Config.in.prereq
 /target/m68k/aranym.cfg
+/scripts/toolchain.cmake
