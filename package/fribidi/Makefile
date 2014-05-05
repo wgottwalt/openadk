@@ -4,10 +4,10 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		fribidi
-PKG_VERSION:=		0.19.5
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		925bafb97afee8a2fc2d0470c072a155
-PKG_DESCR:=		Unicode Bidirectional Algorithm
+PKG_VERSION:=		0.19.6
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		ce93d862344991173dabb609bf93ca1d
+PKG_DESCR:=		unicode bidirectional algorithm
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.fribidi.org/
 PKG_SITES:=		http://fribidi.org/download/
