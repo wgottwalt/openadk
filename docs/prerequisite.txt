@@ -26,9 +26,7 @@ package names may vary between host systems.
 ** +C compiler (gcc or clang)+ 
 ** `C++ compiler (g++ or clang++)`
 ** +GNU sed+
-** +GNU awk+
 ** +GNU make+
-** +patch+
 ** +gzip+
 ** +perl+
 ** +tar+

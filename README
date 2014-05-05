@@ -9,7 +9,6 @@ Before you can start you need to install some tools:
 - g++ or clang++
 - binutils 
 - GNU make
-- GNU awk
 - GNU sed
 - tar
 - gzip

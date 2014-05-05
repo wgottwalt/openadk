@@ -158,12 +158,6 @@ if [[ ! -s /usr/include/ncurses.h ]]; then
 	fi
 fi
 
-if ! which gawk >/dev/null 2>&1; then
-	echo You must install GNU awk to continue.
-	echo
-	out=1
-fi
-
 if ! which sed >/dev/null 2>&1; then
 	echo You must install GNU sed to continue.
 	echo
@@ -270,6 +264,12 @@ if ! which gfind >/dev/null 2>&1; then
 	fi
 fi
 
+host_build_gawk=0
+if ! which gawk >/dev/null 2>&1; then
+	echo "No gawk found, will build one."
+	host_build_gawk=1
+fi
+
 host_build_xz=0
 if ! which xz >/dev/null 2>&1; then
 	echo "No xz found, will build one."
@@ -322,6 +322,7 @@ if [ $host_build_bison -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_BISON
 if [ $host_build_bzip2 -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_BZIP2" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_file -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FILE" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_flex -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FLEX" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_gawk -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_GAWK" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_m4 -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_M4" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_mksh -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_MKSH" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_patch -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_PATCH" >> $topdir/target/config/Config.in.prereq ;fi

@@ -52,7 +52,7 @@ PKG_SITES:=		add download url without package name
 #PKGCS_WITH_OPENSSL:=	libopenssl
 #PKGCS_WITH_GNUTLS:=	libgnutls
 
-# if downloaded package is not ending with .tar.gz use following
+# if downloaded package is not ending with .tar.xz use following
 #DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
