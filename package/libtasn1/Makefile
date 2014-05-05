@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtasn1
-PKG_VERSION:=		3.3
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		2bdd687f487c50a0382b99553866a6e0
-PKG_DESCR:=		an ASN.1 and DER structures manipulation library
+PKG_VERSION:=		3.5
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		62c76352d0e17df1c082fe1c38bad5cf
+PKG_DESCR:=		ASN.1 and DER structures manipulation library
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.gnupg.org/
 PKG_SITES:=		http://ftp.gnu.org/gnu/libtasn1/
