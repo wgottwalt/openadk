@@ -2,7 +2,7 @@
 if [ -z $IPKG_INSTROOT ];then chmod u+s /bin/busybox;fi
 . $IPKG_INSTROOT/etc/functions.sh
 . $IPKG_INSTROOT/etc/.bb_defaults
-add_rcconf network ${BBDEF_NETWORK}
+add_rcconf network YES
 add_rcconf crond ${BBDEF_CROND}
 add_rcconf watchdog ${BBDEF_WATCHDOG}
 add_rcconf watchdog_flags '-t 10 -T 20'

@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.21.1
-PKG_RELEASE:=		6
+PKG_RELEASE:=		7
 PKG_MD5SUM:=		795394f83903b5eec6567d51eebb417e
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		core
@@ -65,7 +65,7 @@ else
 BBDEFS+=echo BBDEF_$(1)=NO;
 endif
 endef
-$(foreach OPTION,NETWORK CROND WATCHDOG SYSLOGD INETD NTPD,$(eval $(call BBDEF,$(OPTION))))
+$(foreach OPTION,CROND WATCHDOG SYSLOGD INETD NTPD,$(eval $(call BBDEF,$(OPTION))))
 
 do-install:
 	$(MAKE) ${BB_MAKE_FLAGS} install $(MAKE_TRACE)
