@@ -1,5 +1,5 @@
---- cifs-utils-6.1.orig/Makefile.am	2013-07-02 21:13:33.000000000 +0200
-+++ cifs-utils-6.1/Makefile.am	2013-10-28 07:33:27.000000000 +0100
+--- cifs-utils-6.3.orig/Makefile.am	2014-01-09 17:19:53.000000000 +0100
++++ cifs-utils-6.3/Makefile.am	2014-05-06 13:53:28.814703381 +0200
 @@ -4,7 +4,7 @@ ACLOCAL_AMFLAGS = -I aclocal
  root_sbindir = $(ROOTSBINDIR)
  root_sbin_PROGRAMS = mount.cifs
@@ -9,38 +9,3 @@
  
  man_MANS = mount.cifs.8
  include_HEADERS = cifsidmap.h
-@@ -16,7 +16,7 @@ clean-local: clean-local-upcall clean-lo
- if CONFIG_CIFSUPCALL
- sbin_PROGRAMS += cifs.upcall
- cifs_upcall_SOURCES = cifs.upcall.c data_blob.c asn1.c spnego.c
--cifs_upcall_LDADD = -ltalloc -lkeyutils $(KRB5_LDADD)
-+cifs_upcall_LDADD = -ltalloc -lkeyutils $(KRB5_LDADD) $(LIBOBJS)
- man_MANS += cifs.upcall.8
- 
- #
-@@ -35,14 +35,14 @@ endif
- if CONFIG_CIFSCREDS
- bin_PROGRAMS += cifscreds
- cifscreds_SOURCES = cifscreds.c resolve_host.c util.c
--cifscreds_LDADD = -lkeyutils
-+cifscreds_LDADD = -lkeyutils $(LIBOBJS)
- man_MANS += cifscreds.1
- endif
- 
- if CONFIG_CIFSIDMAP
- sbin_PROGRAMS += cifs.idmap
- cifs_idmap_SOURCES = cifs.idmap.c idmap_plugin.c
--cifs_idmap_LDADD = -lkeyutils -ldl
-+cifs_idmap_LDADD = -lkeyutils -ldl $(LIBOBJS)
- man_MANS += cifs.idmap.8
- 
- cifs.idmap.8: cifs.idmap.8.in
-@@ -57,7 +57,7 @@ endif
- if CONFIG_CIFSACL
- bin_PROGRAMS += getcifsacl
- getcifsacl_SOURCES = getcifsacl.c idmap_plugin.c
--getcifsacl_LDADD = -ldl
-+getcifsacl_LDADD = -ldl $(LIBOBJS)
- man_MANS += getcifsacl.1
- 
- getcifsacl.1: getcifsacl.1.in

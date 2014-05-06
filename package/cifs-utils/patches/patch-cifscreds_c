@@ -1,5 +1,5 @@
---- cifs-utils-6.1.orig/cifscreds.c	2013-07-02 21:13:33.000000000 +0200
-+++ cifs-utils-6.1/cifscreds.c	2013-10-28 07:33:27.000000000 +0100
+--- cifs-utils-6.3.orig/cifscreds.c	2014-01-09 17:19:53.000000000 +0100
++++ cifs-utils-6.3/cifscreds.c	2014-05-06 13:52:11.778306692 +0200
 @@ -27,7 +27,13 @@
  #include <string.h>
  #include <ctype.h>
@@ -12,5 +12,5 @@
 +#define option gnu_option
 +#endif
  #include <errno.h>
+ #include "cifskey.h"
  #include "mount.h"
- #include "resolve_host.h"
