@@ -8,26 +8,4 @@
 # activate any logical volumes
 [ -x /usr/sbin/lvm ] && { lvm vgscan; lvm vgchange -ay; }
 
-fstypes="ext2 ext3 ext4 xfs vfat"
-
-# filesystem checks
-for fs in $fstypes; do
-	[ -x /usr/sbin/fsck.$fs ] && {
-		for i in $(grep -v "^#" /etc/fstab|grep $fs|awk '{ print $1}');do 
-			echo "Checking filesystem on $i with $fs"
-			fsck -p -t $fs $i
-		done
-	}
-done
-
-# mount local filesystems
-for fs in $fstypes; do
-	grep $fs /proc/filesystems >/dev/null 2>&1
-	if [ $? -eq 0 ];then
-		grep -v "^#" /etc/fstab |grep $fs >/dev/null 2>&1
-		if [ $? -eq 0 ];then
-			mount -a -t $fs
-		fi
-	fi
-done
 exit 0

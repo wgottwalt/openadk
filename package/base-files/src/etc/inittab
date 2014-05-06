@@ -6,5 +6,5 @@ null::sysinit:/bin/mount -a -t devpts
 null::sysinit:/bin/mount -a -t tmpfs
 ::sysinit:/etc/init.d/rcS
 ::shutdown:/etc/init.d/rcK
-null::shutdown:/bin/umount -a -t ext4
+null::shutdown:/bin/umount -a
 null::shutdown:/sbin/swapoff -a

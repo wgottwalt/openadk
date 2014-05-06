@@ -1,0 +1,46 @@
+#!/bin/sh
+fs=$(grep -v "^#" /etc/fstab | grep "^/dev/${MDEV}[[:blank:]]"|awk '{ print $3}')
+mnt=$(grep -v "^#" /etc/fstab | grep "^/dev/${MDEV}[[:blank:]]"|awk '{ print $2}')
+procfs=$fs
+if [ $fs = "ntfs-3g" ];then
+	procfs=fuse
+fi
+
+# fstab check
+adk_check() {
+	grep -v "^#" /etc/fstab | grep -q "^/dev/${1}[[:blank:]]"
+	if [ $? -ne 0 ];then
+		logger -t fs -s "Disk ${1} not registered in /etc/fstab"
+		exit 1
+	fi
+}
+
+# filesystem check
+adk_fsck() {
+	[ -x /usr/sbin/fsck.$2 ] && {
+		logger -t fs -s "Checking filesystem on ${1} with ${2}"
+			fsck -p -t ${2} ${1}
+	}
+}
+
+# mount filesystem
+adk_mount() {
+	mkdir -p $3 >/dev/null 2>&1
+	grep $2 /proc/filesystems >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		logger -t fs -s "Mounting /dev/${1} to $mnt"
+		mount $mnt
+	else
+		logger -t fs -s "Required filesystem $2 not available"
+	fi
+}
+
+case "${ACTION}" in
+add)
+	logger -t fs -s "Device ${MDEV} added to the system"
+	adk_check ${MDEV}
+	adk_fsck ${MDEV} $fs
+	adk_mount ${MDEV} $procfs $mnt
+	;;
+esac
+exit 0

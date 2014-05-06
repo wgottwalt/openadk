@@ -1,10 +1,10 @@
 # /etc/fstab: static file system information.
-#
-# <file system> <mount pt>     <type>   <options>         <dump> <pass>
-proc            /proc          proc     defaults          0      0
-devpts          /dev/pts       devpts   defaults,gid=5,mode=620   0      0
-tmpfs           /dev/shm       tmpfs    mode=0777         0      0
-tmpfs           /tmp           tmpfs    mode=1777         0      0
-sysfs           /sys           sysfs    defaults          0      0
+#<fs> <mount point> <type> <options> <dump> <pass>
+proc	/proc		proc	defaults	0	0
+devpts	/dev/pts	devpts	defaults,gid=5,mode=620	0	0
+tmpfs	/dev/shm	tmpfs	mode=0777	0	0
+tmpfs	/tmp		tmpfs	mode=1777	0	0
+sysfs	/sys		sysfs	defaults	0	0
+tmpfs	/media		tmpfs	defaults	0	0
 # example for cifs
-#//192.168.1.1/music     /music/test        cifs    ro,password=linux123,username=adk,iocharset=utf8,sec=ntlm     0       0
+#//192.168.1.1/music	/music/test	cifs	ro,password=linux123,username=adk,iocharset=utf8,sec=ntlm	0	0
