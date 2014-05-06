@@ -8,26 +8,25 @@
 # activate any logical volumes
 [ -x /usr/sbin/lvm ] && { lvm vgscan; lvm vgchange -ay; }
 
-fstypes="ext2 ext3 ext4 xfs vfat ntfs"
+rootdisk=$(readlink /dev/root)
+# strip partitions (f.e. mmcblk0p2, sda2, ..)
+rootdisk=${rootdisk%p*}
+rootdisk=${rootdisk%[1-9]}
+rootparts=$(grep "^/dev/${rootdisk}" /etc/fstab|awk '{ print $1 }')
 
-# filesystem checks
-for fs in $fstypes; do
-       [ -x /usr/sbin/fsck.$fs ] && {
-               for i in $(grep -v "^#" /etc/fstab|grep $fs|awk '{ print $1}');do 
-                       echo "Checking filesystem on $i with $fs"
-                       fsck -p -t $fs $i
-               done
-       }
-done
-
-# mount local filesystems
-for fs in $fstypes; do
-       grep $fs /proc/filesystems >/dev/null 2>&1
-       if [ $? -eq 0 ];then
-               grep -v "^#" /etc/fstab |grep $fs >/dev/null 2>&1
-               if [ $? -eq 0 ];then
-                       mount -a -t $fs
-               fi
-       fi
+for part in $rootparts; do
+	fstype=$(grep "^$part" /etc/fstab|awk '{ print $3 }')
+	mnt=$(grep "^$part" /etc/fstab|awk '{ print $2 }')
+	[ -x /usr/sbin/fsck.$fstype ] && {
+		logger -t fs -s "Checking $fstype filesystem on $part"
+		fsck -p -t $fstype $part
+	}
+	grep $fstype /proc/filesystems >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		mount $mnt
+	else
+		logger -t fs -s "Filesystem $fstype not in kernel"
+		exit 1
+	fi
 done
 exit 0

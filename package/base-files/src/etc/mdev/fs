@@ -18,7 +18,7 @@ adk_check() {
 # filesystem check
 adk_fsck() {
 	[ -x /usr/sbin/fsck.$fs ] && {
-		logger -t fs -s "Checking filesystem on ${MDEV} with $fs"
+		logger -t fs -s "Checking $fs filesystem on ${MDEV}"
 			fsck -p -t $fs ${MDEV}
 	}
 }
