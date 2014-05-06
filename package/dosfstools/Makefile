@@ -21,10 +21,10 @@ CONFIG_STYLE:=		manual
 XAKE_FLAGS+=		PREFIX=""
 
 dosfstools-install:
-	${INSTALL_DIR} ${IDIR_DOSFSTOOLS}/sbin
-	${CP} ${WRKINST}/sbin/dosfsck ${IDIR_DOSFSTOOLS}/sbin/
-	${CP} ${WRKINST}/sbin/fsck.{msdos,vfat,fat} ${IDIR_DOSFSTOOLS}/sbin/
-	${CP} ${WRKINST}/sbin/mkdosfs ${IDIR_DOSFSTOOLS}/sbin/
-	${CP} ${WRKINST}/sbin/mkfs.{msdos,vfat,fat} ${IDIR_DOSFSTOOLS}/sbin/
+	${INSTALL_DIR} ${IDIR_DOSFSTOOLS}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/sbin/dosfsck ${IDIR_DOSFSTOOLS}/usr/sbin
+	${CP} ${WRKINST}/sbin/fsck.{msdos,vfat,fat} ${IDIR_DOSFSTOOLS}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/sbin/mkdosfs ${IDIR_DOSFSTOOLS}/usr/sbin
+	${CP} ${WRKINST}/sbin/mkfs.{msdos,vfat,fat} ${IDIR_DOSFSTOOLS}/usr/sbin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
