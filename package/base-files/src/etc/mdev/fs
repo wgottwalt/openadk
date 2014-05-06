@@ -8,39 +8,39 @@ fi
 
 # fstab check
 adk_check() {
-	grep -v "^#" /etc/fstab | grep -q "^/dev/${1}[[:blank:]]"
+	grep -v "^#" /etc/fstab | grep -q "^/dev/${MDEV}[[:blank:]]"
 	if [ $? -ne 0 ];then
-		logger -t fs -s "Disk ${1} not registered in /etc/fstab"
+		logger -t fs -s "Disk ${MDEV} not registered in /etc/fstab"
 		exit 1
 	fi
 }
 
 # filesystem check
 adk_fsck() {
-	[ -x /usr/sbin/fsck.$2 ] && {
-		logger -t fs -s "Checking filesystem on ${1} with ${2}"
-			fsck -p -t ${2} ${1}
+	[ -x /usr/sbin/fsck.$fs ] && {
+		logger -t fs -s "Checking filesystem on ${MDEV} with $fs"
+			fsck -p -t $fs ${MDEV}
 	}
 }
 
 # mount filesystem
 adk_mount() {
-	mkdir -p $3 >/dev/null 2>&1
-	grep $2 /proc/filesystems >/dev/null 2>&1
+	mkdir -p $mnt >/dev/null 2>&1
+	grep $procfs /proc/filesystems >/dev/null 2>&1
 	if [ $? -eq 0 ];then
-		logger -t fs -s "Mounting /dev/${1} to $mnt"
+		logger -t fs -s "Mounting /dev/${MDEV} to $mnt"
 		mount $mnt
 	else
-		logger -t fs -s "Required filesystem $2 not available"
+		logger -t fs -s "Required filesystem $procfs not available"
 	fi
 }
 
 case "${ACTION}" in
 add)
 	logger -t fs -s "Device ${MDEV} added to the system"
-	adk_check ${MDEV}
-	adk_fsck ${MDEV} $fs
-	adk_mount ${MDEV} $procfs $mnt
+	adk_check
+	adk_fsck
+	adk_mount
 	;;
 esac
 exit 0
