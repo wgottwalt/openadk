@@ -1,24 +1,28 @@
 #!/bin/sh
-fs=$(grep -v "^#" /etc/fstab | grep "^/dev/${MDEV}[[:blank:]]"|awk '{ print $3}')
-mnt=$(grep -v "^#" /etc/fstab | grep "^/dev/${MDEV}[[:blank:]]"|awk '{ print $2}')
+uuid=$(blkid /dev/${MDEV} | sed -n '/^.*UUID="\([^"]*\)".*$/s//\1/p')
+if [ -z $uuid ];then
+	fs=$(grep "^/dev/${MDEV}[[:blank:]]" /etc/fstab | awk '{ print $3 }')
+	mnt=$(grep "^/dev/${MDEV}[[:blank:]]" /etc/fstab | awk '{ print $2 }')
+	disk="${MDEV}"
+else
+	fs=$(grep "^/dev/${MDEV}[[:blank:]]\|^UUID=$uuid" /etc/fstab | awk '{ print $3 }')
+	mnt=$(grep "^/dev/${MDEV}[[:blank:]]\|^UUID=$uuid" /etc/fstab | awk '{ print $2 }')
+	disk="${MDEV} (${uuid})"
+fi
+if [ -z $fs ];then
+	logger -t fs -s "Disk $disk not registered in /etc/fstab"
+	exit 0
+fi
+
 procfs=$fs
 if [ $fs = "ntfs-3g" ];then
 	procfs=fuse
 fi
 
-# fstab check
-adk_check() {
-	grep -v "^#" /etc/fstab | grep -q "^/dev/${MDEV}[[:blank:]]"
-	if [ $? -ne 0 ];then
-		logger -t fs -s "Disk ${MDEV} not registered in /etc/fstab"
-		exit 1
-	fi
-}
-
 # filesystem check
 adk_fsck() {
 	[ -x /usr/sbin/fsck.$fs ] && {
-		logger -t fs -s "Checking $fs filesystem on ${MDEV}"
+		logger -t fs -s "Checking $fs filesystem on $disk"
 			fsck -p -t $fs ${MDEV}
 	}
 }
@@ -28,8 +32,11 @@ adk_mount() {
 	mkdir -p $mnt >/dev/null 2>&1
 	grep $procfs /proc/filesystems >/dev/null 2>&1
 	if [ $? -eq 0 ];then
-		logger -t fs -s "Mounting /dev/${MDEV} to $mnt"
+		logger -t fs -s "Mounting $disk to $mnt"
 		mount $mnt
+		if [ $? -ne 0 ];then
+			logger -t fs -s "Mounting $disk failed"
+		fi
 	else
 		logger -t fs -s "Required filesystem $procfs not available"
 	fi
@@ -38,7 +45,6 @@ adk_mount() {
 case "${ACTION}" in
 add)
 	logger -t fs -s "Device ${MDEV} added to the system"
-	adk_check
 	adk_fsck
 	adk_mount
 	;;
