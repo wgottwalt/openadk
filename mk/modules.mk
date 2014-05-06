@@ -1242,7 +1242,7 @@ $(eval $(call KMOD_template,SND_IMX_SOC,snd-imx-soc,\
 	$(MODULES_DIR)/kernel/sound/soc/fsl/imx-pcm-dma \
 	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-fsl-spdif \
 	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-imx-spdif \
-,55, kmod-snd-soc))
+,55, kmod-snd-soc kmod-snd-compress))
 
 $(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
 	$(MODULES_DIR)/kernel/sound/arm/snd-bcm2835 \
