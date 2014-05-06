@@ -13,6 +13,7 @@ PKG_URL:=		http://www.denx.de/wiki/U-Boot
 PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_SYSTEM_DEPENDS:=	!cubox-i
 
 include $(TOPDIR)/mk/package.mk
 
