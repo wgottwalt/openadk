@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		samba
 PKG_VERSION:=		3.6.23
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		2f7aee1dc5d31aefcb364600915b31dc
 PKG_DESCR:=		NetBIOS/SMB file and print server
 PKG_SECTION:=		net/fs
@@ -76,6 +76,7 @@ CONFIGURE_ARGS+=	--libdir=/usr/lib \
 			--disable-swat \
 			--disable-avahi \
 			--with-utmp=no \
+			--with-pam=no \
 			--without-cluster-support \
 			--without-sendfile-support
 
