@@ -1431,7 +1431,6 @@ $(eval $(call KMOD_template,SND_USB_AUDIO,snd-usb-audio,\
 #
 
 $(eval $(call KMOD_template,BT,bt,\
-	$(MODULES_DIR)/kernel/net/ieee802154/6lowpan_iphc \
 	$(MODULES_DIR)/kernel/net/bluetooth/bluetooth \
 ,70))
 

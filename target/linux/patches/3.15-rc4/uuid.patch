@@ -1,0 +1,263 @@
+diff -Nur linux-3.14.1.orig/block/genhd.c linux-3.14.1/block/genhd.c
+--- linux-3.14.1.orig/block/genhd.c	2014-04-14 15:50:10.000000000 +0200
++++ linux-3.14.1/block/genhd.c	2014-04-24 09:50:05.281309701 +0200
+@@ -34,7 +34,7 @@
+ static DEFINE_MUTEX(ext_devt_mutex);
+ static DEFINE_IDR(ext_devt_idr);
+ 
+-static struct device_type disk_type;
++struct device_type disk_type;
+ 
+ static void disk_check_events(struct disk_events *ev,
+ 			      unsigned int *clearing_ptr);
+@@ -1121,7 +1121,7 @@
+ 	return NULL;
+ }
+ 
+-static struct device_type disk_type = {
++struct device_type disk_type = {
+ 	.name		= "disk",
+ 	.groups		= disk_attr_groups,
+ 	.release	= disk_release,
+diff -Nur linux-3.14.1.orig/init/do_mounts.c linux-3.14.1/init/do_mounts.c
+--- linux-3.14.1.orig/init/do_mounts.c	2014-04-14 15:50:10.000000000 +0200
++++ linux-3.14.1/init/do_mounts.c	2014-04-24 10:17:54.043200973 +0200
+@@ -33,6 +33,7 @@
+ #include <linux/nfs_fs_sb.h>
+ #include <linux/nfs_mount.h>
+ 
++#include "../fs/ext2/ext2.h"
+ #include "do_mounts.h"
+ 
+ int __initdata rd_doload;	/* 1 = load RAM disk, 0 = don't load */
+@@ -44,6 +45,132 @@
+ 
+ dev_t ROOT_DEV;
+ 
++#ifdef CONFIG_EXT2_FS
++/* support for root=UUID=ce40d6b2-18eb-4a75-aefe-7ddb0995ce63 bootargs */
++
++#include <linux/ext2_fs.h>
++
++__u8 root_dev_uuid[16];
++int root_dev_type;	/* 0 = normal (/dev/hda1, 0301); 1 = UUID; 3 = bad */
++
++/* imported from block/genhd.c after removing its static qualifier */
++extern struct device_type disk_type;
++
++/* helper function */
++static __u8 __init fromhex(char c)
++{
++	if (c >= '0' && c <= '9')
++		return (c - '0');
++	c &= ~32;
++	if (c >= 'A' && c <= 'F')
++		return (c - 'A' + 10);
++	return (0xFF);
++}
++
++static void __init parse_uuid(const char *s)
++{
++	int i;
++	__u8 j, k;
++
++	if (strlen(s) != 36 || s[8] != '-' || s[13] != '-' ||
++	    s[18] != '-' || s[23] != '-')
++		goto bad_uuid;
++	for (i = 0; i < 16; i++) {
++		if (*s == '-')
++			++s;
++		j = fromhex(*s++);
++		k = fromhex(*s++);
++		if (j == 0xFF || k == 0xFF)
++			goto bad_uuid;
++		root_dev_uuid[i] = (j << 4) | k;
++	}
++	return;
++ bad_uuid:
++	/* we cannot panic here, defer */
++	root_dev_type = 3;
++}
++
++/* from drivers/md/md.c */
++static void __init initcode_bi_complete(struct bio *bio, int error)
++{
++	complete((struct completion*)bio->bi_private);
++}
++
++static int __init initcode_sync_page_read(struct block_device *bdev,
++    sector_t sector, int size, struct page *page)
++{
++	struct bio *bio = bio_alloc(GFP_NOIO, 1);
++	struct completion event;
++	int ret, rw = READ;
++
++	rw |= REQ_SYNC;
++
++	bio->bi_bdev = bdev;
++	bio->bi_iter.bi_sector = sector;
++	bio_add_page(bio, page, size, 0);
++	init_completion(&event);
++	bio->bi_private = &event;
++	bio->bi_end_io = initcode_bi_complete;
++	submit_bio(rw, bio);
++	wait_for_completion(&event);
++
++	ret = test_bit(BIO_UPTODATE, &bio->bi_flags);
++	bio_put(bio);
++	/* 0 = failure */
++	return ret;
++}
++
++/* most of this taken from fs/ext2/super.c */
++static int __init check_dev(struct gendisk *thedisk, dev_t devt,
++    int blocksize, struct page *page)
++{
++	struct ext2_super_block * es;
++	struct block_device *bdev;
++	unsigned long sb_block = 1;
++	unsigned long logic_sb_block;
++	unsigned long offset = 0;
++	int rv = /* not found */ 0;
++	char bff[22];
++
++	bdev = bdget(devt);
++	if (blkdev_get(bdev, FMODE_READ, NULL)) {
++		printk(KERN_ERR "VFS: opening block device %s failed!\n",
++		    format_dev_t(bff, devt));
++		return (0);
++	}
++
++	if (blocksize != BLOCK_SIZE) {
++		logic_sb_block = (sb_block*BLOCK_SIZE) / blocksize;
++		offset = (sb_block*BLOCK_SIZE) % blocksize;
++	} else {
++		logic_sb_block = sb_block;
++	}
++
++//	printk(KERN_ERR "D: attempting to read %d @%lu from "
++//	    "bdev %p devt %08X %s\n", blocksize, logic_sb_block,
++//	    bdev, devt, format_dev_t(bff, devt));
++	if (!initcode_sync_page_read(bdev, logic_sb_block, blocksize, page)) {
++//		printk(KERN_ERR "D: failed!\n");
++		goto out;
++	}
++	es = (struct ext2_super_block *)(((char *)page_address(page)) + offset);
++	if (le16_to_cpu(es->s_magic) == EXT2_SUPER_MAGIC) {
++//		printk(KERN_ERR "D: has uuid "
++//		    "%02X%02X%02X%02X-%02X%02X-%02X%02X-%02X%02X-%02X%02X%02X%02X%02X%02X\n",
++//		    es->s_uuid[0], es->s_uuid[1], es->s_uuid[2], es->s_uuid[3],
++//		    es->s_uuid[4], es->s_uuid[5], es->s_uuid[6], es->s_uuid[7],
++//		    es->s_uuid[8], es->s_uuid[9], es->s_uuid[10], es->s_uuid[11],
++//		    es->s_uuid[12], es->s_uuid[13], es->s_uuid[14], es->s_uuid[15]);
++		if (!memcmp(es->s_uuid, root_dev_uuid, 16))
++			rv = /* found */ 1;
++	}
++//	  else printk(KERN_ERR "D: bad ext2fs magic\n");
++ out:
++	blkdev_put(bdev, FMODE_READ);
++	return (rv);
++}
++#endif /* CONFIG_EXT2_FS for UUID support */
++
+ static int __init load_ramdisk(char *str)
+ {
+ 	rd_doload = simple_strtol(str,NULL,0) & 3;
+@@ -289,6 +416,13 @@
+ static int __init root_dev_setup(char *line)
+ {
+ 	strlcpy(saved_root_name, line, sizeof(saved_root_name));
++#ifdef CONFIG_EXT2_FS
++	root_dev_type = 0;
++	if (!strncmp(line, "UUID=", 5)) {
++		root_dev_type = 1;
++		parse_uuid(line + 5);
++	}
++#endif /* CONFIG_EXT2_FS for UUID support */
+ 	return 1;
+ }
+ 
+@@ -505,6 +639,83 @@
+ 
+ void __init mount_root(void)
+ {
++#ifdef CONFIG_EXT2_FS
++	/* UUID support */
++//	printk_all_partitions();
++	if (root_dev_type == 1) {
++		int blocksize;
++
++		/* from block/genhd.c printk_all_partitions */
++		struct class_dev_iter iter;
++		struct device *dev;
++
++		/* from drivers/md/md.c */
++		struct page *sb_page;
++
++		if (!(sb_page = alloc_page(GFP_KERNEL))) {
++			printk(KERN_ERR "VFS: no memory for bio page\n");
++			goto nomemforbio;
++		}
++
++//		printk(KERN_ERR "D: root is: "
++//		    "%02X%02X%02X%02X-%02X%02X-%02X%02X-%02X%02X-%02X%02X%02X%02X%02X%02X\n",
++//		    root_dev_uuid[0], root_dev_uuid[1], root_dev_uuid[2], root_dev_uuid[3],
++//		    root_dev_uuid[4], root_dev_uuid[5], root_dev_uuid[6], root_dev_uuid[7],
++//		    root_dev_uuid[8], root_dev_uuid[9], root_dev_uuid[10], root_dev_uuid[11],
++//		    root_dev_uuid[12], root_dev_uuid[13], root_dev_uuid[14], root_dev_uuid[15]);
++		/* from block/genhd.c printk_all_partitions */
++//		printk(KERN_ERR "D: begin iter\n");
++		class_dev_iter_init(&iter, &block_class, NULL, &disk_type);
++		while (root_dev_type && (dev = class_dev_iter_next(&iter))) {
++//			char bff[22];
++			struct gendisk *disk = dev_to_disk(dev);
++			struct disk_part_iter piter;
++			struct hd_struct *part;
++			if (get_capacity(disk) == 0 ||
++			    (disk->flags & GENHD_FL_SUPPRESS_PARTITION_INFO)) {
++//				printk(KERN_ERR "D: ignoring\n");
++				continue;
++			}
++			blocksize = queue_logical_block_size(disk->queue);
++//			printk(KERN_ERR "D: gendisk, blocksize %d "
++//			    "name '%s' devt %08X %s #part %d\n", blocksize,
++//			    disk->disk_name, dev->devt,
++//			    format_dev_t(bff, dev->devt),
++//			    disk_max_parts(disk));
++			disk_part_iter_init(&piter, disk, DISK_PITER_INCL_PART0);
++			while (root_dev_type && (part = disk_part_iter_next(&piter))) {
++				/* avoid empty or too small partitions */
++//				printk(KERN_ERR "D: part #%d start %llu "
++//				    "nr %llu\n", part->partno,
++//				    (__u64)part->start_sect,
++//				    (__u64)part->nr_sects);
++				if (part->nr_sects < 8)
++					continue;
++				if (check_dev(disk, MKDEV(MAJOR(dev->devt),
++				    MINOR(dev->devt) + part->partno),
++				    blocksize, sb_page)) {
++					ROOT_DEV = part_devt(part);
++//					printk(KERN_ERR "D: got match!\n");
++					// comment out below for debugging
++					root_dev_type = 0;
++				}
++			}
++			disk_part_iter_exit(&piter);
++		}
++//		printk(KERN_ERR "D: end iter\n");
++		class_dev_iter_exit(&iter);
++		put_page(sb_page);
++	}
++ nomemforbio:
++	if (root_dev_type == 1)
++		printk(KERN_ERR "VFS: Unable to find root by UUID %s.\n",
++		    saved_root_name + 5);
++	else if (root_dev_type == 3)
++		/* execute deferred panic from parse_uuid */
++		panic("Badly formatted UUID %s was supplied as kernel "
++		    "parameter root", saved_root_name + 5);
++#endif /* CONFIG_EXT2_FS for UUID support */
++
+ #ifdef CONFIG_ROOT_NFS
+ 	if (ROOT_DEV == Root_NFS) {
+ 		if (mount_nfs_root())

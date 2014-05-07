@@ -4,6 +4,9 @@ config ADK_KERNEL_SPI
 config ADK_KERNEL_SPI_MASTER
 	boolean
 
+config ADK_KERNEL_SPI_BITBANG
+	boolean
+
 menu "SPI driver support"
 depends on ADK_TARGET_WITH_SPI
 
@@ -29,12 +32,12 @@ config ADK_KPACKAGE_KMOD_SPI_PXA2XX
 	tristate
 	select ADK_KERNEL_SPI
 
-config ADK_KPACKAGE_KMOD_SPI_IMX
+config ADK_KERNEL_SPI_IMX
 	prompt "SPI driver for Solidrun Cubox-i"
 	tristate
 	select ADK_KERNEL_SPI
 	select ADK_KERNEL_SPI_MASTER
-	select ADK_KPACKAGE_KMOD_SPI_BITBANG
+	select ADK_KERNEL_SPI_BITBANG
 	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 
