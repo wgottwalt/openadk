@@ -13,7 +13,6 @@ debug	Debugging / Analyzing
 dns	DNS / DHCP
 dhcp	DNS / DHCP
 firewall	Firewall / Routing / Bridging
-kernel	External Kernel Modules
 route	Firewall / Routing / Bridging
 bridge	Firewall / Routing / Bridging
 fs	Filesystem / Blockdevice utilities

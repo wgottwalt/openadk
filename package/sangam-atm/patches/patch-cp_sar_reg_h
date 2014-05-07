@@ -1,8 +1,0 @@
---- sangam-atm-1.0.orig/cp_sar_reg.h	2004-04-20 08:23:30.000000000 +0200
-+++ sangam-atm-1.0/cp_sar_reg.h	2009-12-17 19:25:17.702739456 +0100
-@@ -214,4 +214,4 @@
- 
- /* END OF FILE */
- 
--#endif _INC_SAR_REG
-+#endif
