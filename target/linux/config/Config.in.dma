@@ -1,6 +1,10 @@
 config ADK_KERNEL_DMADEVICES
 	boolean
 
+config ADK_KPACKAGE_KMOD_DMA_BCM2708
+        tristate
+        select ADK_KERNEL_DMADEVICES
+
 config ADK_KERNEL_IMX_SDMA
 	boolean
 	depends on ADK_TARGET_SYSTEM_CUBOX_I

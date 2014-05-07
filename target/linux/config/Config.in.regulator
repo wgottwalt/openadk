@@ -2,50 +2,61 @@ config ADK_KERNEL_REGULATOR
 	boolean
 	default n
 
-config ADK_KERNEL_REGULATOR_FIXED_VOLTAGE
+config ADK_KPACKAGE_KMOD_REGULATOR_FIXED_VOLTAGE
 	boolean
+	select ADK_KERNEL_REGULATOR
 	default n
 
-config ADK_KERNEL_REGULATOR_ANATOP
+config ADK_KPACKAGE_KMOD_REGULATOR_ANATOP
 	boolean
+	select ADK_KERNEL_REGULATOR
 	default n
 
-config ADK_KERNEL_REGULATOR_MC13XXX_CORE
+config ADK_KPACKAGE_KMOD_REGULATOR_MC13XXX_CORE
 	boolean
+	select ADK_KERNEL_REGULATOR
 	default n
 
-config ADK_KERNEL_REGULATOR_DA9052
+config ADK_KPACKAGE_KMOD_REGULATOR_DA9052
 	boolean
+	select ADK_KERNEL_REGULATOR
 	default n
 
-config ADK_KERNEL_REGULATOR_MC13783
+config ADK_KPACKAGE_KMOD_REGULATOR_MC13783
 	boolean
+	select ADK_KERNEL_REGULATOR
 	default n
 
-config ADK_KERNEL_REGULATOR_MC13892
+config ADK_KPACKAGE_KMOD_REGULATOR_MC13892
 	boolean
+	select ADK_KERNEL_REGULATOR
 	default n
 	
-config ADK_KERNEL_REGULATOR_PFUZE100
+config ADK_KPACKAGE_KMOD_REGULATOR_PFUZE100
 	boolean
+	select ADK_KERNEL_REGULATOR
 	default n
 
 config ADK_KERNEL_REGMAP
 	boolean
 	default n
 
-config ADK_KERNEL_REGMAP_I2C
-	boolean
+config ADK_KPACKAGE_KMOD_REGMAP_I2C
+	tristate
+	select ADK_KERNEL_REGMAP
 	default n
 
-config ADK_KERNEL_REGMAP_SPI
-	boolean
+config ADK_KPACKAGE_KMOD_REGMAP_SPI
+	tristate
+	select ADK_KERNEL_REGMAP
 	default n
 
 config ADK_KERNEL_REGMAP_MMIO
-	boolean
+	tristate
+	select ADK_KERNEL_REGMAP
 	default n
 
-config ADK_KERNEL_REGMAP_IRQ
-	boolean
+config ADK_KPACKAGE_KMOD_REGMAP_IRQ
+	tristate
+	select ADK_KERNEL_REGMAP
 	default n

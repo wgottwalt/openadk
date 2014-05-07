@@ -812,6 +812,17 @@ $(eval $(call KMOD_template,MD_RAID456,md-raid456,\
 ,35))
 
 #
+# Regmap
+# 
+$(eval $(call KMOD_template,REGMAP_I2C,regmap-i2c,\
+    $(MODULES_DIR)/kernel/drivers/base/regmap/regmap-i2c \
+,30))
+
+$(eval $(call KMOD_template,REGMAP_SPI,regmap-spi,\
+    $(MODULES_DIR)/kernel/drivers/base/regmap/regmap-spi \
+,30))
+
+#
 # Device Mapper
 #
 
@@ -1420,6 +1431,7 @@ $(eval $(call KMOD_template,SND_USB_AUDIO,snd-usb-audio,\
 #
 
 $(eval $(call KMOD_template,BT,bt,\
+	$(MODULES_DIR)/kernel/net/ieee802154/6lowpan_iphc \
 	$(MODULES_DIR)/kernel/net/bluetooth/bluetooth \
 ,70))
 
@@ -1791,14 +1803,28 @@ $(eval $(call KMOD_template,OPROFILE,oprofile,\
 ,10))
 
 #
+# SPI
+#
+$(eval $(call KMOD_template,SPI_BITBANG,spi-bitbang,\
+	$(MODULES_DIR)/kernel/drivers/spi/spi-bitbang \
+,20))
+
+$(eval $(call KMOD_template,SPI_IMX,spi-imx,\
+	$(MODULES_DIR)/kernel/drivers/spi/spi-imx \
+,25))
+
+#
 # I2C
 #
-$(eval $(call KMOD_template,I2C,i2c,\
-	$(MODULES_DIR)/kernel/drivers/i2c/i2c-core \
+$(eval $(call KMOD_template,I2C_DEV,i2c-dev,\
 	$(MODULES_DIR)/kernel/drivers/i2c/i2c-dev \
 ,20))
 
-$(eval $(call KMOD_template,SCx200_ACB,scx200-acb,\
+$(eval $(call KMOD_template,I2C_IMX,i2c-imx,\
+	$(MODULES_DIR)/kernel/drivers/i2c/busses/i2c-imx \
+,25))
+
+$(eval $(call KMOD_template,SCX200_ACB,scx200-acb,\
 	$(MODULES_DIR)/kernel/drivers/i2c/busses/scx200_acb \
 ,25))
 

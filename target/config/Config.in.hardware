@@ -5,6 +5,9 @@ config ADK_TARGET_WITH_USB
 config ADK_TARGET_WITH_I2C
 	boolean
 
+config ADK_TARGET_WITH_SPI
+	boolean
+
 config ADK_TARGET_WITH_PCI
 	boolean
 
