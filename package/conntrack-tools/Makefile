@@ -15,8 +15,8 @@ PKG_URL:=		http://conntrack-tools.netfilter.org/
 PKG_SITES:=		http://www.netfilter.org/projects/conntrack-tools/files/
 
 PKG_SUBPKGS:=		CONNTRACK CONNTRACKD
-PKGSD_CONNTRACK:=	client utility
-PKGSD_CONNTRACKD:=	daemon
+PKGSD_CONNTRACK:=	connection tracking client utility
+PKGSD_CONNTRACKD:=	connection tracking daemon
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
