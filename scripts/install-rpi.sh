@@ -93,13 +93,13 @@ parted -s $1 unit cyl mkpart primary fat32 -- 0 16
 if [ $datadir -eq 0 ];then
 	parted -s $1 unit cyl mkpart primary ext2 -- 16 $rootsize
 	parted -s $1 unit cyl mkpart primary fat32 $rootsize $maxsize
-	sfdisk --change-id $1 3 88
+	sfdisk --change-id $1 3 88 >/dev/null 2>&1
 else
 	parted -s $1 unit cyl mkpart primary ext2 -- 16 $rootsize
 	parted -s $1 unit cyl mkpart primary ext2 $rootsize $datasize
 	parted -s $1 unit cyl mkpart primary fat32 $datasize $maxsize
 	parted -s $1 set 1 boot on
-	sfdisk --change-id $1 4 88
+	sfdisk --change-id $1 4 88 >/dev/null 2>&1
 fi
 sleep 2
 mkfs.vfat ${1}1 >/dev/null

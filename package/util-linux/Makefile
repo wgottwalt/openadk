@@ -13,7 +13,6 @@ PKG_BUILDDEP:=		ncurses pam
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.24/
 PKG_NOPARALLEL:=	1
 PKG_OPTS:=		dev
-PKG_MULTI:=		1
 
 PKG_ARCH_DEPENDS:=	!m68k
 
