@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
-PKG_VERSION:=		13.0rc1
+PKG_VERSION:=		13.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fabaf9485900647a557d33d0022674c2
+PKG_MD5SUM:=		be3e05d8b45328ae4950c456455936ab
 PKG_DESCR:=		software media player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		boost libffmpeg python2 libstdcxx
@@ -28,7 +28,8 @@ PKG_BUILDDEP+=		libssh libcec libnfs samba rtmpdump eudev
 PKG_BUILDDEP+=		libgpg-error libbluray dbus libxslt libvorbis
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
 PKG_URL:=		http://xbmc.org/
-PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
+#PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
+PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc omxplayer
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc omxplayer
