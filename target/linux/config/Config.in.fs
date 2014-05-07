@@ -157,7 +157,6 @@ config ADK_KPACKAGE_KMOD_NTFS_FS
 	prompt "NTFS file system support"
 	tristate
 	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
-	depends on !ADK_PACKAGE_NTFS_3G
 	default n
 	help
 	  NTFS is the file system of Microsoft Windows NT, 2000, XP and 2003.
