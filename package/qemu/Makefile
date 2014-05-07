@@ -29,6 +29,12 @@ $(eval $(call PKG_template,QEMU,qemu,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CFLAGS+=		-DF_EXLCK=4 -DF_SHLCK=8 -D__SIGRTMIN=32 -D__SIGRTMAX=\(NSIG-1\)
 endif
+
+ifeq ($(ADK_STATIC),y)
+TARGET_CFLAGS+=		-static
+TARGET_LDFLAGS+=	-static
+endif
+
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 			--cross-prefix=$(GNU_TARGET_NAME)- \
