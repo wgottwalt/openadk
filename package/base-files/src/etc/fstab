@@ -7,4 +7,6 @@ tmpfs	/tmp		tmpfs	mode=1777	0	0
 sysfs	/sys		sysfs	defaults	0	0
 tmpfs	/media		tmpfs	defaults	0	0
 # example for cifs
-#//192.168.1.1/music	/music/test	cifs	ro,password=linux123,username=adk,iocharset=utf8,sec=ntlm	0	0
+#//192.168.1.1/music	/media/music	cifs	ro,password=linux123,username=adk,iocharset=utf8,sec=ntlm	0	0
+# example for read-only ntfs with UUID
+UUID=E4BC628CBC6258D6	/media/usb	ntfs	ro,fmask=022,dmask=022	0	0
