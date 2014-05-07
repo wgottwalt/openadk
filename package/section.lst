@@ -16,7 +16,6 @@ firewall	Firewall / Routing / Bridging
 route	Firewall / Routing / Bridging
 bridge	Firewall / Routing / Bridging
 fs	Filesystem / Blockdevice utilities
-ha	Linux High Availability
 ipv6	IPv6
 lang	Programming / Languages
 libs	Libraries
