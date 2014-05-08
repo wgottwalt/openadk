@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gdb/Makefile.inc
 
 PKG_NAME:=		gdb
-PKG_DESCR:=		GNU debugger (small server)
+PKG_DESCR:=		remote programm debugger utility
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		libthread-db
 

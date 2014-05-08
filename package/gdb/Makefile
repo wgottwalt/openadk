@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gdb/Makefile.inc
 
 PKG_NAME:=		gdb
-PKG_DESCR:=		GNU debugger
+PKG_DESCR:=		programm debugger
 PKG_SECTION:=		debug
 PKG_DEPENDS:=		libthread-db libncurses libexpat libgcc zlib
 PKG_BUILDDEP:=		ncurses readline libiconv-tiny expat zlib
