@@ -7,7 +7,7 @@ PKG_NAME:=		cpio
 PKG_VERSION:=		2.11
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1112bb6c45863468b5496ba128792f6c
-PKG_DESCR:=		manages cpio archives
+PKG_DESCR:=		cpio archive utility
 PKG_SECTION:=		archive
 PKG_URL:=		http://www.gnu.org/software/cpio/
 PKG_SITES:=		${MASTER_SITE_GNU:=cpio/}
@@ -18,7 +18,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CPIO,cpio,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-post-install:
+cpio-install:
 	${INSTALL_DIR} ${IDIR_CPIO}/usr/bin
 	${CP} ${WRKINST}/usr/bin/cpio ${IDIR_CPIO}/usr/bin
 
