@@ -4,17 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		opensips
-PKG_VERSION:=		1.6.1
+PKG_VERSION:=		1.11.1
 PKG_RELEASE:=		1
-PKG_VARIANT:=		tls
-PKG_MD5SUM:=		e7e59910183ca8a213c76a7a80789ea1
-PKG_DESCR:=		a high-performance, configurable, free SIP server
+PKG_MD5SUM:=		34d30e9ce870988970dff5f8a9abd239
+PKG_DESCR:=		high-performance, configurable, free SIP server
 PKG_SECTION:=		phone
 PKG_DEPENDS:=		libopenssl
 PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://opensips.org/
 PKG_SITES:=		http://opensips.org/pub/opensips/$(PKG_VERSION)/src/
-PKG_MULTI:=		1
 
 PKG_SUBPKGS:=		OPENSIPS OPENSIPS_MOD_ACCOUNTING OPENSIPS_MOD_AUTH
 PKG_SUBPKGS+=		OPENSIPS_MOD_AUTH_DB OPENSIPS_MOD_AVPOPS OPENSIPS_MOD_DISPATCHER
@@ -23,10 +21,50 @@ PKG_SUBPKGS+=		OPENSIPS_MOD_GROUP OPENSIPS_MOD_MEDIAPROXY OPENSIPS_MOD_MSILO
 PKG_SUBPKGS+=		OPENSIPS_MOD_NATHELPER OPENSIPS_MOD_OPTIONS OPENSIPS_MOD_PDT
 PKG_SUBPKGS+=		OPENSIPS_MOD_PERMISSIONS OPENSIPS_MOD_PIKE OPENSIPS_MOD_SMS
 PKG_SUBPKGS+=		OPENSIPS_MOD_UAC OPENSIPS_MOD_UAC_REDIRECT OPENSIPS_MOD_URI
-PKG_SUBPKGS+=		OPENSIPS_MOD_XLOG
 
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-$(PKG_VARIANT)_src.tar.gz
-WRKDIST=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-$(PKG_VARIANT)
+PKGSD_OPENSIPS_MOD_ACCOUNTING:=		accounting support
+PKGSN_OPENSIPS_MOD_ACCOUNTING:=		opensips
+PKGSD_OPENSIPS_MOD_AUTH:=		authentication support
+PKGSN_OPENSIPS_MOD_AUTH:=		opensips
+PKGSD_OPENSIPS_MOD_AUTH_DB:=		authentication database support
+PKGSN_OPENSIPS_MOD_AUTH_DB:=		opensips
+PKGSD_OPENSIPS_MOD_AVPOPS:=		avpops support
+PKGSN_OPENSIPS_MOD_AVPOPS:=		opensips
+PKGSD_OPENSIPS_MOD_DISPATCHER:=		dispatcher support
+PKGSN_OPENSIPS_MOD_DISPATCHER:=		opensips
+PKGSD_OPENSIPS_MOD_DIVERSION:=		diversion support
+PKGSN_OPENSIPS_MOD_DIVERSION:=		opensips
+PKGSD_OPENSIPS_MOD_FLATSTORE:=		flatstore support
+PKGSN_OPENSIPS_MOD_FLATSTORE:=		opensips
+PKGSD_OPENSIPS_MOD_GFLAGS:=		gflags support
+PKGSN_OPENSIPS_MOD_GFLAGS:=		opensips
+PKGSD_OPENSIPS_MOD_GROUP:=		group support
+PKGSN_OPENSIPS_MOD_GROUP:=		opensips
+PKGSD_OPENSIPS_MOD_MEDIAPROXY:=		mediaproxy support
+PKGSN_OPENSIPS_MOD_MEDIAPROXY:=		opensips
+PKGSD_OPENSIPS_MOD_MSILO:=		msilo support
+PKGSN_OPENSIPS_MOD_MSILO:=		opensips
+PKGSD_OPENSIPS_MOD_NATHELPER:=		nathelper support
+PKGSN_OPENSIPS_MOD_NATHELPER:=		opensips
+PKGSD_OPENSIPS_MOD_OPTIONS:=		options support
+PKGSN_OPENSIPS_MOD_OPTIONS:=		opensips
+PKGSD_OPENSIPS_MOD_PDT:=		pdt support
+PKGSN_OPENSIPS_MOD_PDT:=		opensips
+PKGSD_OPENSIPS_MOD_PERMISSIONS:=	permissions support
+PKGSN_OPENSIPS_MOD_PERMISSIONS:=	opensips
+PKGSD_OPENSIPS_MOD_PIKE:=		pike support
+PKGSN_OPENSIPS_MOD_PIKE:=		opensips
+PKGSD_OPENSIPS_MOD_SMS:=		sms support
+PKGSN_OPENSIPS_MOD_SMS:=		opensips
+PKGSD_OPENSIPS_MOD_UAC:=		uac support
+PKGSN_OPENSIPS_MOD_UAC:=		opensips
+PKGSD_OPENSIPS_MOD_UAC_REDIRECT:=	uac redirect support
+PKGSN_OPENSIPS_MOD_UAC_REDIRECT:=	opensips
+PKGSD_OPENSIPS_MOD_URI:=		uri support
+PKGSN_OPENSIPS_MOD_URI:=		opensips
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)_src.tar.gz
+WRKDIST=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-tls
 
 include $(TOPDIR)/mk/package.mk
 
@@ -62,7 +100,6 @@ $(eval $(call PKG_template,OPENSIPS_MOD_SMS,opensips-mod-sms,$(PKG_VERSION)-${PK
 $(eval $(call PKG_template,OPENSIPS_MOD_UAC,opensips-mod-uac,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSIPS_MOD_UAC_REDIRECT,opensips-mod-uac-redirect,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSIPS_MOD_URI,opensips-mod-uri,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSIPS_MOD_XLOG,opensips-mod-xlog,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_ACCOUNTING,acc))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_AUTH,auth))
@@ -85,7 +122,6 @@ $(eval $(call PKG_mod_template,OPENSIPS_MOD_SPEEDIAL,speeddial))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_UAC,uac))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_UAC_REDIRECT,uac_redirect))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_URI,uri))
-$(eval $(call PKG_mod_template,OPENSIPS_MOD_XLOG,xlog))
 
 # Select here the modules for the main package
 OPENSIPS_MODULES:=	sl tm rr maxfwd usrloc registrar db_text textops exec mi_fifo signaling

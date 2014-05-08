@@ -13,7 +13,6 @@ PKG_DEPENDS:=		libnl
 PKG_BUILDDEP:=		libnl
 PKG_URL:=		http://hostap.epitest.fi/
 PKG_SITES:=		http://hostap.epitest.fi/releases/
-PKG_MULTI:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -25,6 +24,7 @@ PKGCB_WITH_OPENSSL:=	openssl
 PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls
 PKGCB_WITH_GNUTLS:=	gnutls
+PKGSN_HOSTAPD_UTILS:=	hostapd
 
 WRKSRC=			${WRKDIST}/${PKG_NAME}
 

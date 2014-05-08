@@ -12,16 +12,21 @@ PKG_SECTION:=		route
 PKG_BUILDDEP:=		readline ncurses
 PKG_URL:=		http://www.quagga.net/
 PKG_SITES:=		http://download.savannah.gnu.org/releases/quagga/
-PKG_MULTI:=		1
 
 PKG_SUBPKGS:=		QUAGGA QUAGGA_BGPD QUAGGA_OSPFD QUAGGA_OSPF6D
 PKG_SUBPKGS+=		QUAGGA_RIPNGD QUAGGA_RIPD QUAGGA_VTYSH
 PKGSD_QUAGGA_BGPD:=	BGP daemon
+PKGSN_QUAGGA_BGPD:=	quagga
 PKGSD_QUAGGA_OSPFD:=	OSPF daemon
+PKGSN_QUAGGA_OSPFD:=	quagga
 PKGSD_QUAGGA_OSPF6D:=	OSPF IPv6 daemon
+PKGSN_QUAGGA_OSPF6D:=	quagga
 PKGSD_QUAGGA_RIPNGD:=	RIPng daemon
+PKGSN_QUAGGA_RIPNGD:=	quagga
 PKGSD_QUAGGA_RIPD:=	RIP daemon
+PKGSN_QUAGGA_RIPD:=	quagga
 PKGSD_QUAGGA_VTYSH:=	vtysh utility
+PKGSN_QUAGGA_VTYSH:=	quagga
 
 PKG_FLAVOURS_QUAGGA:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
@@ -43,6 +48,9 @@ CONFIGURE_ARGS+=	--localstatedir=/var/run/quagga \
 			--enable-user=quagga \
 			--enable-group=quagga \
 			--disable-pie \
+			--disable-babeld \
+			--disable-doc \
+			--disable-tests \
 			--enable-multipath=8
 
 ifneq (${ADK_PACKAGE_QUAGGA_WITH_IPV6},)

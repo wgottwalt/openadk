@@ -7,22 +7,30 @@ PKG_NAME:=		updatedd
 PKG_VERSION:=		2.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		95655596eb6e0e381d60a458f6a45fee
-PKG_DESCR:=		A tool to update dynamic dns services.
+PKG_DESCR:=		update dynamic dns services
 PKG_SECTION:=		dns
 PKG_SITES:=		http://savannah.nongnu.org/download/updatedd/
-PKG_MULTI:=		1
 
 PKG_SUBPKGS:=		UPDATEDD UPDATEDD_MOD_CHANGEIP UPDATEDD_MOD_DYNDNS UPDATEDD_MOD_EURODYNDNS
 PKG_SUBPKGS+=		UPDATEDD_MOD_HN UPDATEDD_MOD_NOIP UPDATEDD_MOD_ODS UPDATEDD_MOD_OVH
 PKG_SUBPKGS+=		UPDATEDD_MOD_REGFISH UPDATEDD_MOD_TZO
+PKGSN_UPDATEDD_MOD_CHANGEIP:=	updatedd
+PKGSN_UPDATEDD_MOD_DYNDNS:=	updatedd
+PKGSN_UPDATEDD_MOD_EURODYNDNS:=	updatedd
+PKGSN_UPDATEDD_MOD_HN:=		updatedd
+PKGSN_UPDATEDD_MOD_NOIP:=	updatedd
+PKGSN_UPDATEDD_MOD_ODS:=	updatedd
+PKGSN_UPDATEDD_MOD_OVH:=	updatedd
+PKGSN_UPDATEDD_MOD_REGFISH:=	updatedd
+PKGSN_UPDATEDD_MOD_TZO:=	updatedd
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
 define PKG_libinstall
-${INSTALL_DIR} ${IDIR_${1}}/usr/lib/updatedd
-${INSTALL_BIN} ${WRKINST}/usr/lib/updatedd/lib${2}.so ${IDIR_${1}}/usr/lib/updatedd/
+	${INSTALL_DIR} ${IDIR_${1}}/usr/lib/updatedd
+	${INSTALL_BIN} ${WRKINST}/usr/lib/updatedd/lib${2}.so ${IDIR_${1}}/usr/lib/updatedd/
 endef
 
 $(eval $(call PKG_template,UPDATEDD,updatedd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

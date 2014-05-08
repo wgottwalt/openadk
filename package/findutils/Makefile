@@ -14,14 +14,16 @@ PKG_BUILDDEP:=		autotool
 HOST_BUILDDEP:=		autotool
 PKG_URL:=		http://www.gnu.org/software/findutils/
 PKG_SITES:=		http://ftp.gnu.org/pub/gnu/findutils/
-PKG_MULTI:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		FINDUTILS XARGS LOCATE FIND
 PKGSD_LOCATE:=		locate utility
+PKGSN_LOCATE:=		findutils
 PKGSD_XARGS:=		xargs utility
+PKGSN_XARGS:=		findutils
 PKGSD_FIND:=		find utility
+PKGSN_FIND:=		findutils
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk

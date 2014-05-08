@@ -321,7 +321,7 @@ int main() {
 	char variable[2*MAXVAR];
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
 	char *pkg_name, *pkg_depends, *pkg_depends_system, *pkg_section, *pkg_descr, *pkg_url;
-	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt, *pkg_multi;
+	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt;
 	char *pkg_need_cxx, *pkg_need_java, *pkgname, *sysname, *pkg_debug;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs, *pkg_opts, *pkg_libname;
@@ -349,7 +349,6 @@ int main() {
 	pkg_cxx = NULL;
 	pkg_dflt = NULL;
 	pkg_cfline = NULL;
-	pkg_multi = NULL;
 	pkg_need_cxx = NULL;
 	pkg_need_java = NULL;
 	pkgname = NULL;
@@ -560,8 +559,6 @@ int main() {
 						continue;
 					if ((parse_var(buf, "PKG_NEED_JAVA", NULL, &pkg_need_java)) == 0)
 						continue;
-					if ((parse_var(buf, "PKG_MULTI", NULL, &pkg_multi)) == 0)
-						continue;
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
 						continue;
 					if ((parse_var_with_system(buf, "PKG_DEPENDS_", pkg_depends_system, &pkg_depends_system, &sysname, 12)) == 0)
@@ -595,6 +592,8 @@ int main() {
 					if ((parse_var_hash(buf, "PKGSS_", pkgmap)) == 0)
 						continue;
 					if ((parse_var_hash(buf, "PKGSC_", pkgmap)) == 0)
+						continue;
+					if ((parse_var_hash(buf, "PKGSN_", pkgmap)) == 0)
 						continue;
 				}
 			}
@@ -634,8 +633,6 @@ int main() {
 				fprintf(stderr, "Package homepage is %s\n", pkg_url);
 			if (pkg_cfline != NULL)
 				fprintf(stderr, "Package cfline is %s\n", pkg_cfline);
-			if (pkg_multi != NULL)
-				fprintf(stderr, "Package multi is %s\n", pkg_multi);
 			if (pkg_opts != NULL)
 				fprintf(stderr, "Package options are %s\n", pkg_opts);
 
@@ -661,9 +658,6 @@ int main() {
 			if (nobinpkgs == 0) {
 				fprintf(cfg, "\tdepends on ");
 				if (pkgs != NULL) {
-					if (pkg_multi != NULL)
-						if (strncmp(pkg_multi, "1", 1) == 0)
-							fprintf(cfg, "ADK_HAVE_DOT_CONFIG || ");
 					token = strtok(pkgs, " ");
 					fprintf(cfg, "ADK_PACKAGE_%s", token);
 					token = strtok(NULL, " ");
@@ -756,11 +750,6 @@ int main() {
 				}	
 				
 				fprintf(cfg, "\ttristate\n");
-				if (pkg_multi != NULL)
-					if (strncmp(pkg_multi, "1", 1) == 0)
-						if (strncmp(toupperstr(token), toupperstr(pkgdirp->d_name), strlen(pkgdirp->d_name)) != 0)
-							fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", toupperstr(pkgdirp->d_name));
-
 				free(pseudo_name);
 
 				/* print custom cf line */
@@ -775,6 +764,20 @@ int main() {
 				}
 
 				/* add sub package dependencies */
+				strncat(hkey, "PKGSN_", 6);
+				strncat(hkey, toupperstr(token), strlen(token));
+				memset(hvalue, 0, MAXVALUE);
+				result = strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
+				if (result == 1) {
+					val = strtok_r(hvalue, " ", &saveptr);
+					while (val != NULL) { 
+						fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", toupperstr(val));
+						val = strtok_r(NULL, " ", &saveptr);
+					}
+				}
+				memset(hkey, 0, MAXVAR);
+
+				/* add sub package auto selections */
 				strncat(hkey, "PKGSS_", 6);
 				strncat(hkey, toupperstr(token), strlen(token));
 				memset(hvalue, 0, MAXVALUE);
@@ -1192,7 +1195,6 @@ int main() {
 			free(pkg_cxx);
 			free(pkg_dflt);
 			free(pkg_cfline);
-			free(pkg_multi);
 			pkg_name = NULL;
 			pkg_libname = NULL;
 			pkg_descr = NULL;
@@ -1210,7 +1212,6 @@ int main() {
 			pkg_cxx = NULL;
 			pkg_dflt = NULL;
 			pkg_cfline = NULL;
-			pkg_multi = NULL;
 
 			strmap_delete(pkgmap);
 			nobinpkgs = 0;

@@ -7,13 +7,12 @@ PKG_NAME:=		asterisk
 PKG_VERSION:=		1.8.20.1
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		99204257de80a42c4e287fc93dfe714a
-PKG_DESCR:=		Open Source PBX
+PKG_DESCR:=		open source PBX
 PKG_SECTION:=		phone
 PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl
 PKG_BUILDDEP:=		ncurses openssl zlib curl popt gtk+
 PKG_URL:=		http://www.asterisk.org/
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
-PKG_MULTI:=		1
 PKG_NOPARALLEL:=	1
 PKG_NEED_CXX:=		1
 
@@ -24,28 +23,43 @@ PKG_LIBC_DEPENDS:=	uclibc glibc
 PKG_SUBPKGS:=		ASTERISK ASTERISK_PGSQL ASTERISK_VOICEMAIL ASTERISK_SOUNDS
 PKG_SUBPKGS+=		ASTERISK_CHAN_SKINNY ASTERISK_CHAN_IAX2 ASTERISK_CODEC_SPEEX ASTERISK_CODEC_GSM
 PKG_SUBPKGS+=		ASTERISK_PBX_DUNDI ASTERISK_RES_AGI
-PKGSB_ASTERISK_CODEC_SPEEX:=	speex
+PKGSD_ASTERISK_VOICEMAIL:=	voicemail support
+PKGSN_ASTERISK_VOICEMAIL:=	asterisk
+PKGSD_ASTERISK_CODEC_GSM:=	GSM codec support
+PKGSN_ASTERISK_CODEC_GSM:=	asterisk
+PKGSD_ASTERISK_PBX_DUNDI:=	PBX dundi support
+PKGSN_ASTERISK_PBX_DUNDI:=	asterisk
+PKGSD_ASTERISK_RES_AGI:=	res agi support
+PKGSN_ASTERISK_RES_AGI:=	asterisk
+PKGSD_ASTERISK_PGSQL:=		postgresql support
 PKGSB_ASTERISK_PGSQL:=		postgresql
+PKGSN_ASTERISK_PGSQL:=		asterisk
 PKGSD_ASTERISK_CHAN_MGCP:=	Media Gateway Control Protocol implementation
-PKGSD_ASTERISK_CHAN_SKINNY:=	Skinny Client Control Protocol implementation
-PKGSD_ASTERISK_CHAN_IAX2:=	Support for the Inter Asterisk Protocol
-PKGSD_ASTERISK_CODEC_SPEEX:=	Speex/PCM16 Codec Translator
-PKGSD_ASTERISK_SOUNDS:=		Various soundfiles in GSM format
+PKGSN_ASTERISK_CHAN_MGCP:=	asterisk
+PKGSD_ASTERISK_CHAN_SKINNY:=	skinny client control protocol implementation
+PKGSN_ASTERISK_CHAN_SKINNY:=	asterisk
+PKGSD_ASTERISK_CHAN_IAX2:=	support for the Inter Asterisk Protocol
+PKGSN_ASTERISK_CHAN_IAX2:=	asterisk
+PKGSD_ASTERISK_CODEC_SPEEX:=	speex/PCM16 Codec translator
+PKGSB_ASTERISK_CODEC_SPEEX:=	speex
+PKGSN_ASTERISK_CODEC_SPEEX:=	asterisk
+PKGSD_ASTERISK_SOUNDS:=		various soundfiles in GSM format
+PKGSN_ASTERISK_SOUNDS:=		asterisk
 PKGSS_ASTERISK_SOUNDS:=		asterisk-codec-gsm
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ASTERISK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_PGSQL,asterisk-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_VOICEMAIL,asterisk-voicemail,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_PGSQL,asterisk-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_PGSQL},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_VOICEMAIL,asterisk-voicemail,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_VOICEMAIL},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_SOUNDS,asterisk-sounds,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_ASTERISK_SOUNDS},${PKGSD_ASTERISK_SOUNDS},${PKG_SECTION}))
 #$(eval $(call PKG_template,ASTERISK_CHAN_MGCP,asterisk-chan-mgcp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_CHAN_MGCP},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_CHAN_SKINNY,asterisk-chan-skinny,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_CHAN_SKINNY},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_CHAN_IAX2,asterisk-chan-iax2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_CHAN_IAX2},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_CODEC_SPEEX,asterisk-codec-speex,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_CODEC_SPEEX},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_CODEC_GSM,asterisk-codec-gsm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_PBX_DUNDI,asterisk-pbx-dundi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_RES_AGI,asterisk-res-agi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_CODEC_GSM,asterisk-codec-gsm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_CODEC_GSM},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_PBX_DUNDI,asterisk-pbx-dundi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_PBX_DUNDI},${PKG_SECTION}))
+$(eval $(call PKG_template,ASTERISK_RES_AGI,asterisk-res-agi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_RES_AGI},${PKG_SECTION}))
 
 CONFIGURE_ARGS=		--with-z=${STAGING_TARGET_DIR}/usr \
 			--with-ncurses=${STAGING_TARGET_DIR}/usr \

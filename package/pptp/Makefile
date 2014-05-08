@@ -7,7 +7,7 @@ PKG_NAME:=		pptp
 PKG_VERSION:=		1.8.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		4efce9f263e2c3f38d79d9df222476de
-PKG_DESCR:=		a Point-to-Point Tunneling Protocol (PPTP) client
+PKG_DESCR:=		Point-to-Point Tunneling Protocol (PPTP) client
 PKG_SECTION:=		ppp
 PKG_DEPENDS:=		ppp kmod-net-ipgre
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pptpclient/}

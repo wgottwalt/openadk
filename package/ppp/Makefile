@@ -13,25 +13,39 @@ PKG_DEPENDS:=		kmod-ppp
 PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://ppp.samba.org/
 PKG_SITES:=		ftp://ftp.samba.org/pub/ppp/
-PKG_MULTI:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		PPP PPP_MOD_PPPOA PPP_MOD_PPPOE PPP_MOD_RADIUS
 PKG_SUBPKGS+=		PPP_MOD_CHAT PPP_MOD_PPPDUMP PPP_MOD_PPPSTATS PPP_MOD_PPPUMTS
+PKGSD_PPP_MOD_PPPOE:=	PPP over Ethernet support
 PKGSS_PPP_MOD_PPPOE:=	kmod-pppoe
+PKGSN_PPP_MOD_PPPOE:=	ppp
+PKGSD_PPP_MOD_PPPUMTS:=	PPP UMTS support
 PKGSS_PPP_MOD_PPPUMTS:=	comgt
+PKGSN_PPP_MOD_PPPUMTS:=	ppp
+PKGSD_PPP_MOD_PPPOA:=	PPP over ATM support
+PKGSN_PPP_MOD_PPPOA:=	ppp
+PKGSD_PPP_MOD_RADIUS:=	RADIUS support
+PKGSN_PPP_MOD_RADIUS:=	ppp
+PKGSD_PPP_MOD_CHAT:=	PPP chat application
+PKGSN_PPP_MOD_CHAT:=	ppp
+PKGSD_PPP_MOD_PPPDUMP:=	PPP dump utility
+PKGSN_PPP_MOD_PPPDUMP:=	ppp
+PKGSD_PPP_MOD_PPPSTATS:=PPP statistic utility
+PKGSN_PPP_MOD_PPPSTATS:=ppp
+
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PPP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PPP_MOD_PPPOA,ppp-mod-pppoa,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PPP_MOD_PPPOE,ppp-mod-pppoe,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PPP_MOD_PPPOE},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PPP_MOD_RADIUS,ppp-mod-radius,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PPP_MOD_CHAT,ppp-mod-chat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PPP_MOD_PPPDUMP,ppp-mod-pppdump,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PPP_MOD_PPPSTATS,ppp-mod-pppstats,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PPP_MOD_PPPUMTS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,PPP_MOD_PPPOA,ppp-mod-pppoa,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PPP_MOD_PPPOA},${PKG_SECTION}))
+$(eval $(call PKG_template,PPP_MOD_PPPOE,ppp-mod-pppoe,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PPP_MOD_PPPOE},${PKGSD_PPP_MOD_PPPOE},${PKG_SECTION}))
+$(eval $(call PKG_template,PPP_MOD_RADIUS,ppp-mod-radius,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PPP_MOD_RADIUS},${PKG_SECTION}))
+$(eval $(call PKG_template,PPP_MOD_CHAT,ppp-mod-chat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PPP_MOD_CHAT},${PKG_SECTION}))
+$(eval $(call PKG_template,PPP_MOD_PPPDUMP,ppp-mod-pppdump,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PPP_MOD_PPPDUMP},${PKG_SECTION}))
+$(eval $(call PKG_template,PPP_MOD_PPPSTATS,ppp-mod-pppstats,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PPP_MOD_PPPSTATS},${PKG_SECTION}))
+$(eval $(call PKG_template,PPP_MOD_PPPUMTS,ppp-mod-pppumts,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_PPP_MOD_PPPUMTS},${PKGSD_PPP_MOD_PPPUMTS},${PKG_SECTION}))
 
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--system=Linux --prefix="/usr"

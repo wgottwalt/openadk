@@ -7,17 +7,25 @@ PKG_NAME:=		olsrd
 PKG_VERSION:=		0.6.6.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		65181a5280391d69411908c186fd0c1f
-PKG_DESCR:=		Optimized Link State Routing protocol
+PKG_DESCR:=		optimized link state routing protocol
 PKG_SECTION:=		wifi
 PKG_URL:=		http://www.olsr.org/
 PKG_SITES:=		http://www.olsr.org/releases/0.6/
-PKG_MULTI:=		1
 PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		OLSRD OLSRD_MOD_DYN_GW OLSRD_MOD_HTTPINFO
 PKG_SUBPKGS+=		OLSRD_MOD_NAMESERVICE OLSRD_MOD_TAS
+
+PKGSD_OLSRD_MOD_DYN_GW:=	support for dynamic gateway
+PKGSN_OLSRD_MOD_DYN_GW:=	olsrd
+PKGSD_OLSRD_MOD_HTTPINFO:=	support for httpinfo
+PKGSN_OLSRD_MOD_HTTPINFO:=	olsrd
+PKGSD_OLSRD_MOD_NAMESERVICE:=	nameservice support
+PKGSN_OLSRD_MOD_NAMESERVICE:=	olsrd
+PKGSD_OLSRD_MOD_TAS:=		tas support
+PKGSN_OLSRD_MOD_TAS:=		olsrd
 
 include ${TOPDIR}/mk/package.mk
 

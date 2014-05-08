@@ -7,24 +7,28 @@ PKG_NAME:=		openssh
 PKG_VERSION:=		6.6p1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		3e9800e6bca1fbac0eea4d41baa7f239
-PKG_DESCR:=		OpenSSH
+PKG_DESCR:=		secure shell implementation
 PKG_SECTION:=		net/security
 PKG_BUILDDEP:=		zlib openssl
 PKG_DEPENDS:=		zlib libopenssl libpthread libgcc
 PKG_URL:=		http://www.openssh.com/
 PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/
-PKG_MULTI:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		OPENSSH OPENSSH_SERVER OPENSSH_CLIENT OPENSSH_CLIENT_UTILS
 PKG_SUBPKGS+=		OPENSSH_SFTP_CLIENT OPENSSH_SFTP_SERVER
 
-PKGSD_OPENSSH_SERVER:=		OpenSSH server
-PKGSD_OPENSSH_CLIENT:=		OpenSSH client
-PKGSD_OPENSSH_CLIENT_UTILS:=	OpenSSH client utilities
-PKGSD_OPENSSH_SFTP_CLIENT:=	OpenSSH sftp client
-PKGSD_OPENSSH_SFTP_SERVER:=	OpenSSH sftp server
+PKGSD_OPENSSH_SERVER:=		secure shell server
+PKGSN_OPENSSH_SERVER:=		openssh
+PKGSD_OPENSSH_CLIENT:=		secure shell client
+PKGSN_OPENSSH_CLIENT:=		openssh
+PKGSD_OPENSSH_CLIENT_UTILS:=	client utilities
+PKGSN_OPENSSH_CLIENT_UTILS:=	openssh
+PKGSD_OPENSSH_SFTP_CLIENT:=	sftp client
+PKGSN_OPENSSH_SFTP_CLIENT:=	openssh
+PKGSD_OPENSSH_SFTP_SERVER:=	sftp server
+PKGSN_OPENSSH_SFTP_SERVER:=	openssh
 
 PKG_CHOICES_OPENSSH:=	NOKRB WITH_KRB5 WITH_HEIMDAL
 PKGCD_NOKRB:=		no Kerberos support

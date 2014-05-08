@@ -14,22 +14,25 @@ PKG_BUILDDEP:=		iptables libnetfilter_conntrack libnetfilter_log libnetfilter_ac
 PKG_BUILDDEP+=		autotool
 PKG_URL:=		http://www.netfilter.org/projects/ulogd/
 PKG_SITES:=		http://www.netfilter.org/projects/ulogd/files/
-PKG_MULTI:=		1
 PKG_NOPARALLEL:=	1
 
 PKG_SUBPKGS:=		ULOGD ULOGD_MOD_MYSQL ULOGD_MOD_PCAP ULOGD_MOD_PGSQL ULOGD_MOD_SQLITE
 PKGSD_ULOGD_MOD_MYSQL:=		MySQL plugin for ulogd
 PKGSB_ULOGD_MOD_MYSQL:=		mysql
 PKGSS_ULOGD_MOD_MYSQL:=		zlib libmysqlclient
+PKGSN_ULOGD_MOD_MYSQL:=		ulogd
 PKGSD_ULOGD_MOD_PGSQL:=		PostgreSQL plugin for ulogd
 PKGSB_ULOGD_MOD_PGSQL:=		postgresql
 PKGSS_ULOGD_MOD_PGSQL:=		libpq
+PKGSN_ULOGD_MOD_PGSQL:=		ulogd
 PKGSD_ULOGD_MOD_SQLITE:=	sqlite plugin for ulogd
 PKGSB_ULOGD_MOD_SQLITE:=	sqlite
 PKGSS_ULOGD_MOD_SQLITE:=	libsqlite
+PKGSN_ULOGD_MOD_SQLITE:=	ulogd
 PKGSD_ULOGD_MOD_PCAP:=		libpcap plugin for ulogd
 PKGSB_ULOGD_MOD_PCAP:=		libpcap
 PKGSS_ULOGD_MOD_PCAP:=		libpcap
+PKGSN_ULOGD_MOD_PCAP:=		ulogd
 
 PKG_HOST_DEPENDS:=	!cygwin
 

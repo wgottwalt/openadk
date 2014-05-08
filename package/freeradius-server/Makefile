@@ -13,7 +13,6 @@ PKG_DEPENDS:=		libltdl libopenssl libpthread libpcre
 PKG_BUILDDEP:=		autotool libtool openssl samba pcre
 PKG_URL:=		http://www.freeradius.org/
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/
-PKG_MULTI:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -30,20 +29,34 @@ PKGSS_FREERADIUS_MOD_LDAP:=		libopenldap
 PKGSS_FREERADIUS_MOD_SQL_MYSQL:=	libmysqlclient
 PKGSS_FREERADIUS_MOD_SQL_PGSQL:=	libpq
 
-PKGSD_FREERADIUS_DEMOCERTS:=	Demo certificates to test the server
-PKGSD_FREERADIUS_MOD_CHAP:=	CHAP authentication module
-PKGSD_FREERADIUS_MOD_DETAIL:=	Detailed accounting module
-PKGSD_FREERADIUS_MOD_DIGEST:=	Digest authentication module
-PKGSD_FREERADIUS_MOD_FILES:=	Module using local files for authorization
-PKGSD_FREERADIUS_MOD_LDAP:=	LDAP module
-PKGSD_FREERADIUS_MOD_MSCHAP:=	MS-CHAP and MS-CHAPv2 module
+PKGSD_FREERADIUS_DEMOCERTS:= 		Demo certificates to test the server
+PKGSN_FREERADIUS_DEMOCERTS:=		freeradius-server
+PKGSD_FREERADIUS_MOD_CHAP:=		CHAP authentication module
+PKGSN_FREERADIUS_MOD_CHAP:=		freeradius-server
+PKGSD_FREERADIUS_MOD_DETAIL:=		Detailed accounting module
+PKGSN_FREERADIUS_MOD_DETAIL:=		freeradius-server
+PKGSD_FREERADIUS_MOD_DIGEST:=		Digest authentication module
+PKGSN_FREERADIUS_MOD_DIGEST:=		freeradius-server
+PKGSD_FREERADIUS_MOD_FILES:=		Module using local files for authorization
+PKGSN_FREERADIUS_MOD_FILES:=		freeradius-server
+PKGSD_FREERADIUS_MOD_LDAP:=		LDAP module
+PKGSN_FREERADIUS_MOD_LDAP:=		freeradius-server
+PKGSD_FREERADIUS_MOD_MSCHAP:=		MS-CHAP and MS-CHAPv2 module
+PKGSN_FREERADIUS_MOD_MSCHAP:=		freeradius-server
 PKGSD_FREERADIUS_MOD_PAP:=		PAP authentication module
+PKGSN_FREERADIUS_MOD_PAP:=		freeradius-server
 PKGSD_FREERADIUS_MOD_PREPROCESS:=	Request pre-processing module
-PKGSD_FREERADIUS_MOD_REALM:=	Realms handling module
+PKGSN_FREERADIUS_MOD_PREPROCESS:=	freeradius-server
+PKGSD_FREERADIUS_MOD_REALM:=		Realms handling module
+PKGSN_FREERADIUS_MOD_REALM:=		freeradius-server
 PKGSD_FREERADIUS_MOD_SQL:=		Base SQL module
+PKGSN_FREERADIUS_MOD_SQL:=		freeradius-server
 PKGSD_FREERADIUS_MOD_SQL_MYSQL:=	MySQL module
+PKGSN_FREERADIUS_MOD_SQL_MYSQL:=	freeradius-server
 PKGSD_FREERADIUS_MOD_SQL_PGSQL:=	PostgreSQL module
-PKGSD_FREERADIUS_UTILS:=	Misc. client utilities
+PKGSN_FREERADIUS_MOD_SQL_PGSQL:=	freeradius-server
+PKGSD_FREERADIUS_UTILS:=		Misc. client utilities
+PKGSN_FREERADIUS_UTILS:=		freeradius-server
 
 PKG_CONFIGURE_OPTS:=
 
