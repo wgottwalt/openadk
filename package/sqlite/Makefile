@@ -7,8 +7,8 @@ PKG_NAME:=		sqlite
 PKG_VERSION:=		3.8.0.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6d6cc639a4da04fbbdda7b1a1a01b386
-PKG_DESCR:=		embeddable SQL database (cli)
-PKG_SECTION:=		db
+PKG_DESCR:=		embeddable SQL database cli
+PKG_SECTION:=		misc
 PKG_BUILDDEP:=		ncurses readline
 PKG_URL:=		http://www.sqlite.org/
 PKG_SITES:=		http://www.sqlite.org/2013/
@@ -31,7 +31,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBSQLITE,libsqlite,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBSQLITE},${PKGSC_LIBSQLITE},${PKG_OPTS}))
 $(eval $(call PKG_template,SQLITE_CLI,sqlite-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ENV+=		config_BUILD_CC="${CC_FOR_BUILD}" \
 			config_BUILD_CFLAGS="${CFLAGS_FOR_BUILD}" \
 			config_TARGET_CC="${TARGET_CC}" \

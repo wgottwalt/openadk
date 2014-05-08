@@ -8,7 +8,7 @@ PKG_VERSION:=		5.3.21
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		3fda0b004acdaa6fa350bfc41a3b95ca
 PKG_DESCR:=		disk file format database which stores key/data-pairs in single files
-PKG_SECTION:=		db
+PKG_SECTION:=		libs
 PKG_URL:=		http://www.oracle.com/technology/software/products/berkeley-db
 PKG_SITES:=		http://www.openadk.org/distfiles/
 PKG_NEED_CXX:=		1
@@ -22,7 +22,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBDB,libdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_PROG:=	dist/configure
 CONFIGURE_ARGS+=	--enable-smallbuild \
 			--disable-debug_rop \
