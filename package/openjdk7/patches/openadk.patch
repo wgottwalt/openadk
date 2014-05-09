@@ -12,8 +12,8 @@ diff -Nur icedtea-2.4.7.orig/Makefile.in icedtea-2.4.7/Makefile.in
  	patches/boot/demos.patch patches/boot/fphexconstants.patch \
 diff -Nur icedtea-2.4.7.orig/patches/openadk.patch icedtea-2.4.7/patches/openadk.patch
 --- icedtea-2.4.7.orig/patches/openadk.patch	1970-01-01 01:00:00.000000000 +0100
-+++ icedtea-2.4.7/patches/openadk.patch	2014-05-01 20:04:14.470603940 +0200
-@@ -0,0 +1,687 @@
++++ icedtea-2.4.7/patches/openadk.patch	2014-05-08 21:02:03.459173373 +0200
+@@ -0,0 +1,733 @@
 +diff -Nur openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp openjdk/hotspot/src/os/linux/vm/os_linux.cpp
 +--- openjdk.orig/hotspot/src/os/linux/vm/os_linux.cpp	2014-01-28 18:58:08.000000000 +0100
 ++++ openjdk/hotspot/src/os/linux/vm/os_linux.cpp	2014-02-10 11:31:48.000000000 +0100
@@ -578,6 +578,52 @@ diff -Nur icedtea-2.4.7.orig/patches/openadk.patch icedtea-2.4.7/patches/openadk
 + 
 + ifndef JDK_TOPDIR
 +   JDK_TOPDIR=$(TOPDIR)/jdk
++diff -Nur openjdk-boot.orig/hotspot/agent/src/os/linux/Makefile openjdk-boot/hotspot/agent/src/os/linux/Makefile
++--- openjdk-boot.orig/hotspot/agent/src/os/linux/Makefile	2014-02-20 19:51:45.000000000 +0100
+++++ openjdk-boot/hotspot/agent/src/os/linux/Makefile	2014-05-08 20:54:09.069009970 +0200
++@@ -22,7 +22,7 @@
++ #  
++ #
++ 
++-ARCH := $(shell if ([ `uname -m` = "ia64" ])  ; then echo ia64 ; elif ([ `uname -m` = "x86_64" ]) ; then echo amd64; elif ([ `uname -m` = "sparc64" ]) ; then echo sparc; else echo i386 ; fi )
+++JDKARCH := $(shell if ([ `uname -m` = "ia64" ])  ; then echo ia64 ; elif ([ `uname -m` = "x86_64" ]) ; then echo amd64; elif ([ `uname -m` = "sparc64" ]) ; then echo sparc; else echo i386 ; fi )
++ 
++ ifndef BUILD_GCC
++ BUILD_GCC = gcc
++@@ -45,9 +45,9 @@
++ 
++ LIBS     = -lthread_db
++ 
++-CFLAGS   = -c -fPIC -g -D_GNU_SOURCE -D_$(ARCH)_ $(if $(filter $(ARCH),alpha),,-D$(ARCH)) $(INCLUDES) -D_FILE_OFFSET_BITS=64
+++CFLAGS   = -c -fPIC -g -D_GNU_SOURCE -D_$(JDKARCH)_ $(if $(filter $(JDKARCH),alpha),,-D$(JDKARCH)) $(INCLUDES) -D_FILE_OFFSET_BITS=64
++ 
++-LIBSA = $(ARCH)/libsaproc.so
+++LIBSA = $(JDKARCH)/libsaproc.so
++ 
++ all: $(LIBSA)
++ 
++@@ -74,17 +74,17 @@
++ LFLAGS_LIBSA += $(LDFLAGS_HASH_STYLE)
++ 
++ $(LIBSA): $(OBJS) mapfile
++-	if [ ! -d $(ARCH) ] ; then mkdir $(ARCH) ; fi
+++	if [ ! -d $(JDKARCH) ] ; then mkdir $(JDKARCH) ; fi
++ 	$(GCC) -shared $(LFLAGS_LIBSA) -o $(LIBSA) $(OBJS) $(LIBS)
++ 
++ test.o: test.c
++-	$(GCC) -c -o test.o -g -D_GNU_SOURCE -D_$(ARCH)_ $(if $(filter $(ARCH),alpha),,-D$(ARCH)) $(INCLUDES) test.c
+++	$(GCC) -c -o test.o -g -D_GNU_SOURCE -D_$(JDKARCH)_ $(if $(filter $(JDKARCH),alpha),,-D$(JDKARCH)) $(INCLUDES) test.c
++ 
++ test: test.o
++-	$(GCC) -o test test.o -L$(ARCH) -lsaproc $(LIBS)
+++	$(GCC) -o test test.o -L$(JDKARCH) -lsaproc $(LIBS)
++ 
++ clean:
++ 	rm -rf $(LIBSA)
++ 	rm -rf $(OBJS)
++-	rmdir $(ARCH)
+++	rmdir $(JDKARCH)
++ 
 +diff -Nur openjdk-boot.orig/hotspot/make/linux/makefiles/vm.make openjdk-boot/hotspot/make/linux/makefiles/vm.make
 +--- openjdk-boot.orig/hotspot/make/linux/makefiles/vm.make	2014-02-20 19:51:45.000000000 +0100
 ++++ openjdk-boot/hotspot/make/linux/makefiles/vm.make	2014-05-01 20:03:03.677930438 +0200

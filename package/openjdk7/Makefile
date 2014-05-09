@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
 PKG_VERSION:=		2.4.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f6b28633b9978fadc724247cfc264ff0
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
