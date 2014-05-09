@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nmap
-PKG_VERSION:=		6.40
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		c0e2f3370e1fb97fb53185b15aa22aff
+PKG_VERSION:=		6.46
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		5a36ad3a63d5b7ea5514f745a397436a
 PKG_DESCR:=		utility for network exploration or security auditing
 PKG_SECTION:=		net
 PKG_DEPENDS:=		libdnet libpcap libpcre libstdcxx
