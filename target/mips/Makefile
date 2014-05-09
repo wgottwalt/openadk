@@ -111,6 +111,11 @@ ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 	@echo "PMON> g root=/dev/sda1"
 	@echo "The root parameter have to be changed."
 endif
+ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@echo "Use following command to install it on CF card:"
+	@echo "sudo ./scripts/install-rb532.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL) $(FW_DIR)/$(TARGET_KERNEL)"
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfsarchive)
 imageinstall: $(FW_DIR)/$(ROOTFSUSERTARBALL)
