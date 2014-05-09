@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		fping
-PKG_VERSION:=		3.9
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		7ad0313646681c33e975f7b946d8d283	
+PKG_VERSION:=		3.10
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		6a0ddecb671df1d580d20c0dd1095773
 PKG_DESCR:=		program to ping hosts in parallel
 PKG_SECTION:=		net
 PKG_URL:=		http://fping.org
