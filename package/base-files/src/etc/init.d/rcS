@@ -20,7 +20,10 @@ mdev -s
 cat /etc/.rnd >/dev/urandom 2>&1
 
 # setup cfgfs
-[ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;} || mount -o remount,rw /
+[ -x /sbin/cfgfs ] && {
+	cfgfs setup
+	mount -o remount,ro /
+}
 
 # remount /tmp with smaller size
 size=$(cat /etc/tmpfs 2>/dev/null)
