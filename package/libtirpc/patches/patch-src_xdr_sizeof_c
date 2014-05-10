@@ -1,10 +1,10 @@
---- libtirpc-0.2.3.orig/src/xdr_sizeof.c	2013-02-13 16:13:59.000000000 +0100
-+++ libtirpc-0.2.3/src/xdr_sizeof.c	2014-03-22 13:20:53.000000000 +0100
+--- libtirpc-0.2.4.orig/src/xdr_sizeof.c	2013-12-09 21:59:51.000000000 +0100
++++ libtirpc-0.2.4/src/xdr_sizeof.c	2014-05-10 17:56:08.694483175 +0200
 @@ -34,7 +34,6 @@
   * when serialized using XDR.
   */
  
 -#include <sys/cdefs.h>
  
- #include "namespace.h"
  #include <rpc/types.h>
+ #include <rpc/xdr.h>

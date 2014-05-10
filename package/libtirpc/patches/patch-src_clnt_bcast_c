@@ -1,5 +1,5 @@
---- libtirpc-0.2.3.orig/src/clnt_bcast.c	2013-02-13 16:13:59.000000000 +0100
-+++ libtirpc-0.2.3/src/clnt_bcast.c	2014-03-22 14:19:29.000000000 +0100
+--- libtirpc-0.2.4.orig/src/clnt_bcast.c	2013-12-09 21:59:51.000000000 +0100
++++ libtirpc-0.2.4/src/clnt_bcast.c	2014-05-10 21:05:18.273730610 +0200
 @@ -28,7 +28,6 @@
  /*
   * Copyright (c) 1986-1991 by Sun Microsystems Inc. 
@@ -8,14 +8,11 @@
  
  /*
   * clnt_bcast.c
-@@ -41,10 +40,8 @@
+@@ -41,7 +40,7 @@
   */
  #include <sys/socket.h>
  #include <sys/types.h>
 -#include <sys/queue.h>
- 
--/* new queue functions */
--#include <misc/queue.h>
 +#include "queue.h"
  
  #include <net/if.h>

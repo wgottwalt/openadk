@@ -1,5 +1,5 @@
---- libtirpc-0.2.3.orig/tirpc/rpc/auth.h	2013-02-13 16:13:59.000000000 +0100
-+++ libtirpc-0.2.3/tirpc/rpc/auth.h	2014-03-22 13:20:52.000000000 +0100
+--- libtirpc-0.2.4.orig/tirpc/rpc/auth.h	2013-12-09 21:59:51.000000000 +0100
++++ libtirpc-0.2.4/tirpc/rpc/auth.h	2014-05-10 17:56:08.722483212 +0200
 @@ -48,7 +48,6 @@
  
  #include <rpc/xdr.h>
@@ -7,8 +7,8 @@
 -#include <sys/cdefs.h>
  #include <sys/socket.h>
  #include <sys/types.h>
- #include <stdio.h>
-@@ -165,9 +164,13 @@ union des_block {
+ 
+@@ -164,9 +163,13 @@ union des_block {
  	char c[8];
  };
  typedef union des_block des_block;
@@ -24,7 +24,7 @@
  
  /*
   * Authentication info.  Opaque to client.
-@@ -288,9 +291,13 @@ auth_put(AUTH *auth)
+@@ -277,9 +280,13 @@ auth_put(AUTH *auth)
  		xfunc, xwhere))
  
  
@@ -40,7 +40,7 @@
  
  /*
   * Any style authentication.  These routines can be used by any
-@@ -311,11 +318,15 @@ int authany_wrap(void), authany_unwrap(v
+@@ -300,11 +307,15 @@ int authany_wrap(void), authany_unwrap(v
   *	int len;
   *	int *aup_gids;
   */
@@ -58,7 +58,7 @@
  /*
   * DES style authentication
   * AUTH *authsecdes_create(servername, window, timehost, ckey)
-@@ -324,15 +335,23 @@ __END_DECLS
+@@ -313,15 +324,23 @@ __END_DECLS
   * 	const char *timehost;			- optional hostname to sync with
   * 	des_block *ckey;		- optional conversation key to use
   */
@@ -86,7 +86,7 @@
  
  #define authsys_create(c,i1,i2,i3,ip) authunix_create((c),(i1),(i2),(i3),(ip))
  #define authsys_create_default() authunix_create_default()
-@@ -340,36 +359,48 @@ __END_DECLS
+@@ -329,36 +348,48 @@ __END_DECLS
  /*
   * Netname manipulation routines.
   */
@@ -141,7 +141,7 @@
  
  #ifdef KERBEROS
  /*
-@@ -382,10 +413,14 @@ __END_DECLS
+@@ -371,10 +402,14 @@ __END_DECLS
   *	const char *timehost;			- optional hostname to sync with
   *	int *status;				- kerberos status returned
   */
@@ -158,7 +158,7 @@
  
  /*
   * Map a kerberos credential into a unix cred.
-@@ -398,19 +433,27 @@ __END_DECLS
+@@ -387,19 +422,27 @@ __END_DECLS
   *	int *groups;
   *
   */
