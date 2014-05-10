@@ -19,6 +19,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBJPEG_TURBO,libjpeg-turbo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+ifeq ($(ADK_x32),y)
+CONFIGURE_ARGS+=	--without-simd
+endif
+
 libjpeg-turbo-install:
 	$(INSTALL_DIR) $(IDIR_LIBJPEG_TURBO)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/lib{turbo,}jpeg*.so* \
