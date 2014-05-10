@@ -1,5 +1,5 @@
---- xbmc-13.0rc1.orig/configure.in	2014-04-30 15:45:07.000000000 +0200
-+++ xbmc-13.0rc1/configure.in	2014-05-03 11:22:45.000000000 +0200
+--- xbmc-13.0.orig/configure.in	2014-05-07 15:29:25.000000000 +0200
++++ xbmc-13.0/configure.in	2014-05-08 20:43:08.000000000 +0200
 @@ -600,7 +600,12 @@ PKG_PROG_PKG_CONFIG
  MAKE="${MAKE:-make}"
  OBJDUMP="${OBJDUMP:-objdump}"
@@ -58,7 +58,7 @@
       ;;
    arm*-*linux-android*)
       target_platform=target_android
-@@ -1047,7 +1052,7 @@ if test "$use_gles" = "yes"; then
+@@ -1048,7 +1053,7 @@ if test "$use_gles" = "yes"; then
        AC_DEFINE([HAVE_LIBEGL],[1],["Define to 1 if you have the `EGL' library (-lEGL)."])
        AC_DEFINE([HAVE_LIBGLESV2],[1],["Define to 1 if you have the `GLESv2' library (-lGLESv2)."])
        AC_MSG_RESULT(== WARNING: OpenGLES support is assumed.)

@@ -7,7 +7,7 @@ PKG_NAME:=		sdl-image
 PKG_VERSION:=		1.2.10
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		6c06584b31559e2b59f2b982d0d1f628
-PKG_DESCR:=		Simple DirectMedia Layer
+PKG_DESCR:=		simple directMedia layer image library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libpng libtiff libjpeg-turbo libsdl
 PKG_BUILDDEP:=		sdl-image-host libpng libtiff libjpeg-turbo sdl
@@ -31,6 +31,7 @@ LDFLAGS_FOR_BUILD+=	-framework Cocoa
 endif
 
 HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--disable-png-shared
 CONFIGURE_ARGS+=	--enable-png \
 			--enable-jpg \
 			--enable-bmp \
