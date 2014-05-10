@@ -1,0 +1,40 @@
+#!/bin/sh
+#PKG nfs-utils-client
+#INIT 60
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${rpcbind:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	grep nfs /proc/filesystems >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		grep -v "^#" /etc/fstab| grep nfs >/dev/null 2>&1
+		if [ $? -eq 0 ];then
+			mkdir -p /var/lib/nfs/rpc_pipefs
+			mount -t rpc_pipefs rpc_pipefs /var/lib/nfs/rpc_pipefs
+			mount -a -t nfs
+		fi
+	else
+		logger -t nfs -s "No nfs support in kernel"
+	fi
+	;;
+stop)
+	grep -v "^#" /etc/fstab| grep nfs >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		umount -a -t nfs
+		umount /var/lib/nfs/rpc_pipefs
+	fi
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?
