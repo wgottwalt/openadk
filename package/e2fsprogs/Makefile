@@ -36,7 +36,7 @@ PKGSC_E2FSCK:=		fs
 PKGSS_E2FSCK:=		libe2fs libcom-err libblkid libuuid
 PKGSD_MKE2FS:=		ext2/3/4 filesystem creation utility
 PKGSC_MKE2FS:=		fs
-PKGSS_MKE2FS:=		libe2fs libcom-err libblkid libuuid
+PKGSS_MKE2FS:=		libe2fs libcom-err libblkid libuuid libncurses
 
 include ${TOPDIR}/mk/package.mk
 
