@@ -10,12 +10,9 @@ PKG_MD5SUM:=		3ac3726eda563946d1f44ac3e5b61d56
 PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		keyutils libtirpc rpcbind libdevmapper libpthread
-PKG_FDEPENDS:=		$(PKG_DEPENDS)
 PKG_BUILDDEP:=		keyutils libtirpc lvm
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
-
-PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_SUBPKGS:=		NFS_UTILS NFS_UTILS_CLIENT NFS_UTILS_SERVER
 PKGSS_NFS_UTILS_CLIENT:=kmod-nfs-fs kmod-sunrpc
@@ -25,16 +22,13 @@ PKGSS_NFS_UTILS_SERVER:=kmod-nfsd kmod-sunrpc
 PKGSD_NFS_UTILS_SERVER:=server daemons and utilities
 PKGSN_NFS_UTILS_SERVER:=nfs-utils
 
-PKG_FLAVOURS_NFS_UTILS:=WITH_KERBEROS
-PKGFD_WITH_KERBEROS:=	enable Kerberos support (MIT)
-PKGFS_WITH_KERBEROS:=	libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue kmod-rpcsec-gss-krb5 kmod-sunrpc-gss
-PKGFB_WITH_KERBEROS:=	libnfsidmap krb5 libevent libgssglue librpcsecgss
+PKG_CHOICES_NFS_UTILS:=	V3 V4
+PKGCD_V3:=		NFS version 3
+PKGCD_V4:=		NFS version 4
+PKGCB_V4:=		libevent libnfsidmap krb5 libgssglue librpcsecgss
+PKGCS_V4:=		libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue kmod-rpcsec-gss-krb5 kmod-sunrpc-gss
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-
-ifeq ($(ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS),y)
-PKG_FDEPENDS+=		$(PKGFS_WITH_KERBEROS)
-endif
 
 include ${TOPDIR}/mk/package.mk
 
@@ -42,14 +36,12 @@ $(eval $(call PKG_template,NFS_UTILS,nfs-utils,${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,NFS_UTILS_CLIENT,nfs-utils-client,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_CLIENT},${PKGSD_NFS_UTILS_CLIENT},${PKG_SECTION}))
 $(eval $(call PKG_template,NFS_UTILS_SERVER,nfs-utils-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_SERVER},${PKGSD_NFS_UTILS_SERVER},${PKG_SECTION}))
 
-KRB5INC:=		${STAGING_TARGET_DIR}/usr
-TIRPCINC:=		${STAGING_TARGET_DIR}/usr/include/tirpc
-
-ifeq ($(ADK_PACKAGE_NFS_UTILS_WITH_KERBEROS),y)
+ifeq ($(ADK_PACKAGE_NFS_UTILS_SERVER_V4),y)
 CONFIGURE_ARGS+=	--enable-nfsv4 \
-			--with-krb5=$(KRB5INC) \
+			--disable-nfsv41 \
+			--with-krb5=${STAGING_TARGET_DIR}/usr \
 			--enable-gss
-CONFIGURE_ENV+=		LIBS="-lrpcsecgss"
+#CONFIGURE_ENV+=		LIBS="-lrpcsecgss"
 else
 CONFIGURE_ARGS+=	--disable-nfsv4 \
 			--disable-nfsv41 \
@@ -61,8 +53,9 @@ CONFIGURE_ENV+=		knfsd_cv_bsd_signals=no \
 CONFIGURE_ARGS+=	--without-tcp-wrappers \
 			--disable-nfsdcltrack \
 			--with-rpcgen=internal \
+			--disable-caps \
 			--enable-tirpc \
-			--with-tirpcinclude=${TIRPCINC} \
+			--with-tirpcinclude=${STAGING_TARGET_DIR}/usr/include/tirpc \
 			--disable-uuid
 
 nfs-utils-client-install:

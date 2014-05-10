@@ -1,6 +1,5 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf nfs NO
 add_service nfs 2049/tcp
 add_service nfs 2049/udp
 gid=$(get_next_gid)

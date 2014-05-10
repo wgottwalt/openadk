@@ -18,8 +18,9 @@ start)
 	touch /var/lib/nfs/xtab
 	touch /var/lib/nfs/sm
 	chown nfs:nfs /var/lib/nfs/sm
-	/usr/sbin/nfsd
+	/usr/sbin/nfsd 4
 	/usr/sbin/mountd
+	exportfs -a
 	if [ ${nfs_server_version} -eq 4 ];then
 		mkdir -p /var/lib/nfs/rpc_pipefs
 		mount -t rpc_pipefs rpc_pipefs /var/lib/nfs/rpc_pipefs

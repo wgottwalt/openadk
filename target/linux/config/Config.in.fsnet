@@ -51,8 +51,8 @@ config ADK_KPACKAGE_KMOD_CODA_FS
 
 config ADK_KERNEL_NFS_V4
 	boolean
-	depends on !ADK_TARGET_ROOTFS_NFSROOT
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
+	default y if ADK_PACKAGE_NFS_UTILS_V4
 	default n
 
 config ADK_KERNEL_RPCSEC_GSS_KRB5
@@ -60,11 +60,10 @@ config ADK_KERNEL_RPCSEC_GSS_KRB5
 	default n
 
 config ADK_KPACKAGE_KMOD_NFS_FS
-	prompt "NFS client support (includes V3 support)"
+	prompt "NFS client support"
 	tristate
 	default n
 	select ADK_KERNEL_NFS_V3
-	select ADK_KERNEL_NFS_V4
 	select ADK_KERNEL_FILE_LOCKING
 	select ADK_KERNEL_DNOTIFY
 	select ADK_KPACKAGE_KMOD_SUNRPC
@@ -111,6 +110,8 @@ config ADK_KERNEL_NFSD_V3
 
 config ADK_KERNEL_NFSD_V4
 	boolean
+	select ADK_KPACKAGE_KMOD_SUNRPC_GSS
+	default y if ADK_PACKAGE_NFS_UTILS_V4
 	default n
 
 config ADK_KPACKAGE_KMOD_NFSD
@@ -119,11 +120,9 @@ config ADK_KPACKAGE_KMOD_NFSD
 	default n
 	select ADK_KERNEL_EXPORTFS
 	select ADK_KERNEL_NFSD_V3
-	select ADK_KERNEL_NFSD_V4
 	select ADK_KERNEL_DNOTIFY
 	select ADK_KERNEL_FILE_LOCKING
 	select ADK_KPACKAGE_KMOD_SUNRPC
-	select ADK_KPACKAGE_KMOD_SUNRPC_GSS
 	select ADK_KPACKAGE_KMOD_LOCKD
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	depends on !ADK_TARGET_ROOTFS_NFSROOT
