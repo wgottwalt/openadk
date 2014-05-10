@@ -61,11 +61,6 @@ MAKE_FLAGS+=		BUILD_CC="${CC_FOR_BUILD}" \
 			BUILD_LDFLAGS="${LDFLAGS_FOR_BUILD}" \
 			BUILD_CPPFLAGS="${CPPFLAGS_FOR_BUILD}"
 
-post-build:
-	mkdir -p ${IDIR_E2FSPROGS_DEV}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/compile_et \
-		${IDIR_E2FSPROGS_DEV}/usr/bin
-
 libe2fs-install:
 	${INSTALL_DIR} ${IDIR_LIBE2FS}/etc
 	${INSTALL_DATA} ${WRKBUILD}/misc/mke2fs.conf ${IDIR_LIBE2FS}/etc
