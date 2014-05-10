@@ -1,0 +1,8 @@
+--- libtirpc-0.2.4.orig/Makefile.am	2013-12-09 21:59:51.000000000 +0100
++++ libtirpc-0.2.4/Makefile.am	2014-05-10 17:56:58.282550787 +0200
+@@ -1,4 +1,4 @@
+-SUBDIRS = src man doc
++SUBDIRS = src
+ ACLOCAL_AMFLAGS = -I m4
+ 
+ noinst_HEADERS	       = tirpc/reentrant.h \
