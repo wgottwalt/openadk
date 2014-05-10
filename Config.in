@@ -108,8 +108,8 @@ choice
 prompt "Kernel Version"
 default ADK_KERNEL_VERSION_3_13_11
 
-config ADK_KERNEL_VERSION_3_15_RC4
-	prompt "3.15-rc4"
+config ADK_KERNEL_VERSION_3_15_RC5
+	prompt "3.15-rc5"
 	boolean
 
 config ADK_KERNEL_VERSION_3_14_3
