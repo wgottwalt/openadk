@@ -1,11 +1,46 @@
 #!/bin/sh
+export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 # disable kernel messages
 if [ -f /proc/sys/kernel/printk ];then
 	echo 0 > /proc/sys/kernel/printk
 fi
 ln -s /proc/self/fd/2 /dev/stderr
 echo "System initialization ..."
-export PATH=/bin:/sbin:/usr/bin:/usr/sbin
+
+# remount /dev with smaller size
+mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
+
+# start mdev dynamic device node management
+echo >/dev/mdev.seq
+echo "/sbin/mdev" >/proc/sys/kernel/hotplug
+# creates f.e. /dev/root
+mdev -s
+
+# seed some random
+cat /etc/.rnd >/dev/urandom 2>&1
+
+# setup cfgfs
+[ -x /sbin/cfgfs ] && { cfgfs setup; mount -o remount,ro /;} || mount -o remount,rw /
+
+# remount /tmp with smaller size
+size=$(cat /etc/tmpfs 2>/dev/null)
+[ -z $size ] && size=2048
+mount -o remount,nosuid,nodev,mode=1777,size=${size}k -t tmpfs tmpfs /tmp
+
+# create some useful directories in tmpfs
+mkdir -p /var/log
+mkdir -p /var/run
+mkdir -p /var/tmp
+touch /var/log/lastlog
+touch /var/log/wtmp
+
+HOSTNAME=
+[[ -s /etc/hostname ]] && HOSTNAME=$(cat /etc/hostname)
+HOSTNAME=${HOSTNAME%%.*}
+echo ${HOSTNAME:=openadk} >/proc/sys/kernel/hostname
+
+chown 0:0 /tmp; chmod 1777 /tmp
+
 : ${rcquiet=0}
 if test x"$rcquiet" = x"0" && sh -n /etc/rc.conf >/dev/null 2>&1; then
 	. /etc/rc.conf
