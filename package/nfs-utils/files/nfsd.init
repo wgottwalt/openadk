@@ -1,5 +1,5 @@
 #!/bin/sh
-#PKG nfs-utils
+#PKG nfs-utils-server
 #INIT 70
 . /etc/rc.conf
 
@@ -7,16 +7,16 @@ case $1 in
 autostop) ;;
 autostart)
 	test x"${rpcbind:-NO}" = x"NO" && exit 0
-	test x"${nfs_server:-NO}" = x"NO" && exit 0
-	test x"$nfs_server" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
+	test x"${nfsd:-NO}" = x"NO" && exit 0
+	test x"$nfsd" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
 	exec sh $0 start
 	;;
 start)
-	/bin/mkdir -p /var/lib/nfs/v4recovery
-	/bin/touch /var/lib/nfs/rmtab
-	/bin/touch /var/lib/nfs/etab
-	/bin/touch /var/lib/nfs/xtab
-	/bin/touch /var/lib/nfs/sm
+	mkdir -p /var/lib/nfs/v4recovery
+	touch /var/lib/nfs/rmtab
+	touch /var/lib/nfs/etab
+	touch /var/lib/nfs/xtab
+	touch /var/lib/nfs/sm
 	chown nfs:nfs /var/lib/nfs/sm
 	/usr/sbin/nfsd
 	/usr/sbin/mountd

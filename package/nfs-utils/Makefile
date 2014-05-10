@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
 PKG_VERSION:=		1.3.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		3ac3726eda563946d1f44ac3e5b61d56
 PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
