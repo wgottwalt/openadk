@@ -53,8 +53,10 @@ config-prepare: $(TOPDIR)/.config
 	    while IFS='=' read symbol value; do \
 		sed -i -e "/^# $$symbol/d" ${BUILD_DIR}/.kernelconfig.board; \
 	done;)
+ifeq ($(ADK_TARGET_ROOTFS_NFSROOT),)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ro"#' \
 		${BUILD_DIR}/.kernelconfig.board
+endif
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${FS_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
 ifneq ($(ADK_TARGET_CMDLINE),)

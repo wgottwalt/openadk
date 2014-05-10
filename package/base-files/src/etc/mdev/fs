@@ -1,7 +1,7 @@
 #!/bin/sh
 # skip root disk here, will be handled in /etc/init.d/fs
 rootdisk=$(readlink /dev/root)
-if [ ${rootdisk} = ${MDEV} ];then
+if [ "x${rootdisk}" = "x${MDEV}" ];then
 	exit 0
 fi
 uuid=$(blkid /dev/${MDEV} | sed -n '/^.*UUID="\([^"]*\)".*$/s//\1/p')
@@ -15,7 +15,7 @@ else
 	disk="${MDEV} (${uuid})"
 fi
 if [ -z $fs ];then
-	logger -s "Disk $disk not registered in /etc/fstab"
+	logger "Disk $disk not registered in /etc/fstab"
 	exit 0
 fi
 
@@ -49,7 +49,7 @@ adk_mount() {
 
 case "${ACTION}" in
 add)
-	logger -s "Device ${MDEV} added to the system"
+	logger "Device ${MDEV} added to the system"
 	adk_fsck
 	adk_mount
 	;;
