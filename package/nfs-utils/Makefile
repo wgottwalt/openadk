@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
-PKG_VERSION:=		1.2.9
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		18869d16db3f49c053f8c68eba3fe2e0
-PKG_DESCR:=		Utilities for NFS kernel server implementation
+PKG_VERSION:=		1.3.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		3ac3726eda563946d1f44ac3e5b61d56
+PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		keyutils libtirpc rpcbind libdevmapper libpthread
 PKG_FDEPENDS:=		$(PKG_DEPENDS)
@@ -19,9 +19,11 @@ PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_SUBPKGS:=		NFS_UTILS NFS_UTILS_CLIENT NFS_UTILS_SERVER
 PKGSS_NFS_UTILS_CLIENT:=kmod-nfs-fs kmod-sunrpc
-PKGSD_NFS_UTILS_CLIENT:=NFS client utilities (mount)
+PKGSD_NFS_UTILS_CLIENT:=client utilities
+PKGSN_NFS_UTILS_CLIENT:=nfs-utils
 PKGSS_NFS_UTILS_SERVER:=kmod-nfsd kmod-sunrpc
-PKGSD_NFS_UTILS_SERVER:=NFS server daemons and utilities
+PKGSD_NFS_UTILS_SERVER:=server daemons and utilities
+PKGSN_NFS_UTILS_SERVER:=nfs-utils
 
 PKG_FLAVOURS_NFS_UTILS:=WITH_KERBEROS
 PKGFD_WITH_KERBEROS:=	enable Kerberos support (MIT)
