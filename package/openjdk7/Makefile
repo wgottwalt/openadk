@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
 PKG_VERSION:=		2.4.7
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		f6b28633b9978fadc724247cfc264ff0
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
@@ -96,22 +96,21 @@ MAKE_ENV+=		ALT_COMPILER_PATH=$(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin \
 ALL_TARGET:=		icedtea
 
 # host stuff
-OPENJDK_NATIVE_ENV+=	JAVACFLAGS="-cp ${STAGING_HOST_DIR}/usr/share/java/libgcj-$(GCJ_VER).jar"
-OPENJDK_NATIVE_ENV+=	LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64
-OPENJDK_NATIVE_ENV+=	ADK_ECJ=$(STAGING_HOST_DIR)/usr/bin/ecj
-OPENJDK_NATIVE_ENV+=	BOOTCLASSPATH="$(STAGING_HOST_DIR)/usr/share/jamvm/classes.zip:$(STAGING_HOST_DIR)/usr/share/classpath/glibj.zip"
-OPENJDK_NATIVE_ENV+=	FFI_LDFLAGS="$(LDFLAGS_FOR_BUILD)" \
+OPENJDK_NATIVE_ENV:=	JAVACFLAGS="-cp ${STAGING_HOST_DIR}/usr/share/java/libgcj-$(GCJ_VER).jar" \
+			LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64 \
+			ADK_ECJ=$(STAGING_HOST_DIR)/usr/bin/ecj \
+			BOOTCLASSPATH="$(STAGING_HOST_DIR)/usr/share/jamvm/classes.zip:$(STAGING_HOST_DIR)/usr/share/classpath/glibj.zip" \
+			FFI_LDFLAGS="$(LDFLAGS_FOR_BUILD)" \
 			OTHER_LDFLAGS='$(LDFLAGS_FOR_BUILD)' \
 			ALT_CUPS_HEADERS_PATH="$(STAGING_HOST_DIR)/usr/include" \
 			ALT_FREETYPE_HEADERS_PATH="$(STAGING_HOST_DIR)/usr/include" \
-			ALT_FREETYPE_LIB_PATH="$(STAGING_HOST_DIR)/usr/lib"
+			ALT_FREETYPE_LIB_PATH="$(STAGING_HOST_DIR)/usr/lib" \
+			ARCH=$(ARCH_FOR_BUILD)
 			
-
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ENV+=	$(OPENJDK_NATIVE_ENV)
 HOST_MAKE_ENV+=		$(OPENJDK_NATIVE_ENV)
 HOST_ALL_TARGET:=	icedtea-boot
-
 HOST_CONFIGURE_ARGS+=\
 		--enable-bootstrap \
 		--enable-zero \
