@@ -395,21 +395,21 @@ int main() {
 		fatal_error("Config.in.dev can not be opened");
 	fprintf(cfg, "config ADK_PACKAGE_GLIBC_DEV\n");
 	fprintf(cfg, "\tprompt \"glibc-dev............ development files for glibc\"\n");
-	fprintf(cfg, "\ttristate\n");
+	fprintf(cfg, "\tboolean\n");
 	fprintf(cfg, "\tdefault n\n");
 	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_GLIBC\n");
 	fprintf(cfg, "\thelp\n");
 	fprintf(cfg, "\t  GNU C library header files.\n\n");
 	fprintf(cfg, "config ADK_PACKAGE_UCLIBC_DEV\n");
 	fprintf(cfg, "\tprompt \"uclibc-dev........... development files for uclibc\"\n");
-	fprintf(cfg, "\ttristate\n");
+	fprintf(cfg, "\tboolean\n");
 	fprintf(cfg, "\tdefault n\n");
 	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_UCLIBC\n");
 	fprintf(cfg, "\thelp\n");
 	fprintf(cfg, "\t  C library header files.\n\n");
 	fprintf(cfg, "config ADK_PACKAGE_MUSL_DEV\n");
 	fprintf(cfg, "\tprompt \"musl-dev............. development files for musl\"\n");
-	fprintf(cfg, "\ttristate\n");
+	fprintf(cfg, "\tboolean\n");
 	fprintf(cfg, "\tdefault n\n");
 	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_MUSL\n");
 	fprintf(cfg, "\thelp\n");
@@ -654,7 +654,7 @@ int main() {
 				pkgs = strdup(pkg_subpkgs);
 
 			fprintf(cfg, "config ADK_COMPILE_%s\n", toupperstr(pkgdirp->d_name));
-			fprintf(cfg, "\ttristate\n");
+			fprintf(cfg, "\tboolean\n");
 			if (nobinpkgs == 0) {
 				fprintf(cfg, "\tdepends on ");
 				if (pkgs != NULL) {
@@ -749,7 +749,7 @@ int main() {
 					fprintf(cfg, "\tprompt \"%s. %s\"\n", pseudo_name, pkg_descr);
 				}	
 				
-				fprintf(cfg, "\ttristate\n");
+				fprintf(cfg, "\tboolean\n");
 				free(pseudo_name);
 
 				/* print custom cf line */
@@ -943,7 +943,7 @@ int main() {
 				/* handle debug subpackages */
 				fprintf(cfg, "\nconfig ADK_PACKAGE_%s_DBG\n", toupperstr(pkg_debug));
 				fprintf(cfg, "\tprompt \"add debug symbols package\"\n");
-				fprintf(cfg, "\ttristate\n");
+				fprintf(cfg, "\tboolean\n");
 				fprintf(cfg, "\tdepends on ADK_PACKAGE_GDB\n");
 				fprintf(cfg, "\tdepends on !ADK_DEBUG\n");
 				fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", toupperstr(pkg_debug));
@@ -1134,7 +1134,7 @@ int main() {
 							strncat(pseudo_name, ".", 1);
 
 						fprintf(cfg, "\tprompt \"%s. development files for %s\"\n", pseudo_name, pkg_libname);
-						fprintf(cfg, "\ttristate\n");
+						fprintf(cfg, "\tboolean\n");
 
 						/* create package target architecture dependency information */
 						if (pkg_arch_depends != NULL) {
