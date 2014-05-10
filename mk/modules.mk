@@ -197,30 +197,14 @@ $(eval $(call KMOD_template,IPV6_SIT,ipv6-sit,\
 	$(MODULES_DIR)/kernel/net/ipv6/sit \
 ,25))
 
-ifeq ($(KERNEL_BASE),3)
-SLHC:=drivers/net/slip/slhc
-PPP:=drivers/net/ppp/ppp_generic
-PPP_ASYNC:=drivers/net/ppp/ppp_async
-MPPE:=drivers/net/ppp/ppp_mppe
-PPPOE:=drivers/net/ppp/pppoe
-PPPOX:=drivers/net/ppp/pppox
-else
-SLHC:=drivers/net/slhc
-PPP:=drivers/net/ppp_generic
-PPP_ASYNC:=drivers/net/ppp_async
-MPPE:=drivers/net/ppp_mppe
-PPPOE:=drivers/net/pppoe
-PPPOX:=drivers/net/pppox
-endif
-
 $(eval $(call KMOD_template,PPP,ppp,\
-	$(MODULES_DIR)/kernel/$(SLHC) \
-	$(MODULES_DIR)/kernel/$(PPP) \
-	$(MODULES_DIR)/kernel/$(PPP_ASYNC) \
+	$(MODULES_DIR)/kernel/drivers/net/slip/slhc \
+	$(MODULES_DIR)/kernel/drivers/net/ppp/ppp_generic \
+	$(MODULES_DIR)/kernel/drivers/net/ppp/ppp_async \
 ,50))
 
 $(eval $(call KMOD_template,PPP_MPPE,ppp-mppe,\
-	$(MODULES_DIR)/kernel/$(MPPE) \
+	$(MODULES_DIR)/kernel/drivers/net/ppp/ppp_mppe \
 ,55))
 
 $(eval $(call KMOD_template,PPPOATM,pppoatm,\
@@ -228,8 +212,8 @@ $(eval $(call KMOD_template,PPPOATM,pppoatm,\
 ,60))
 
 $(eval $(call KMOD_template,PPPOE,pppoe,\
-	$(MODULES_DIR)/kernel/$(PPPOX) \
-	$(MODULES_DIR)/kernel/$(PPPOE) \
+	$(MODULES_DIR)/kernel/drivers/net/ppp/pppoe \
+	$(MODULES_DIR)/kernel/drivers/net/ppp/pppox \
 ,60))
 
 $(eval $(call KMOD_template,TUN,tun,\
