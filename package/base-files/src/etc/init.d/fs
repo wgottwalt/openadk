@@ -18,14 +18,14 @@ for part in $rootparts; do
 	fstype=$(grep "^$part" /etc/fstab|awk '{ print $3 }')
 	mnt=$(grep "^$part" /etc/fstab|awk '{ print $2 }')
 	[ -x /usr/sbin/fsck.$fstype ] && {
-		logger -t fs -s "Checking $fstype filesystem on $part"
+		logger -s "Checking $fstype filesystem on $part"
 		fsck -p -t $fstype $part
 	}
 	grep $fstype /proc/filesystems >/dev/null 2>&1
 	if [ $? -eq 0 ];then
 		mount $mnt
 	else
-		logger -t fs -s "Filesystem $fstype not in kernel"
+		logger -s "Filesystem $fstype not in kernel"
 		exit 1
 	fi
 done
