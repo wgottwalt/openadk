@@ -4,16 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
-PKG_VERSION:=		1.2.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		f8de058e6ba14555144583a2d031fe19
+PKG_VERSION:=		1.3.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		14783a148872f2d08629ff7c694eb31f
 PKG_DESCR:=		VP8/VP9 codec library
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		yasm-host
 PKG_URL:=		http://www.webmproject.org/about/
-PKG_SITES:=		http://webm.googlecode.com/files/
+PKG_SITES:=		https://webm.googlecode.com/files/
 PKG_OPTS:=		dev
 
+PKG_BUILDDEP_IBM_X40:=	yasm-host
+PKG_BUILDDEP_QEMU_I686:=yasm-host
 PKG_ARCH_DEPENDS:=	!m68k
 
 DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}.tar.bz2
@@ -26,6 +27,9 @@ $(eval $(call PKG_template,LIBVPX,libvpx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 CONFIG_STYLE:=		minimal
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
+endif
+ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
+CONFIGURE_ARGS+=	--target=armv7-linux-gcc
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIGURE_ARGS+=	--target=armv6-linux-gcc
