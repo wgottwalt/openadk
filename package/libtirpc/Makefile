@@ -9,8 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		847995e8d002cbf1387bda05947be086
 PKG_DESCR:=		transport independent RPC library
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libgssglue
-PKG_BUILDDEP:=		autotool libgssglue
+PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://sourceforge.net/projects/libtirpc/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libtirpc/}
 PKG_OPTS:=		dev
@@ -18,6 +17,8 @@ PKG_OPTS:=		dev
 PKG_FLAVOURS_LIBTIRPC:=	WITH_IPV6 WITH_GSS
 PKGFD_WITH_IPV6:=	enable IPv6 support
 PKGFD_WITH_GSS:=	enable GSS support
+PKGFB_WITH_GSS:=	libgssglue krb5
+PKGFS_WITH_GSS:=	libgssglue
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
