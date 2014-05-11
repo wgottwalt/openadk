@@ -4,12 +4,12 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libowfat
-PKG_VERSION:=		0.28
+PKG_VERSION:=		0.29
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6bbee9a86506419657d87123b7a6f2c1
+PKG_MD5SUM:=		1187c6acf11429e7adb9ebe180f644bb
+PKG_SECTION:=		libs
 PKG_URL:=		http://www.fefe.de/libowfat
 PKG_SITES:=		http://dl.fefe.de/
-PKG_SUBPKGS:=
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
