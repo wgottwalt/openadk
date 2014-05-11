@@ -19,6 +19,9 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,CHEROKEE,cherokee,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--enable-static-module=all \
+			--without-mysql \
+			--without-ldap \
+			--disable-pam \
 			--without-ffmpeg
 
 cherokee-install:
