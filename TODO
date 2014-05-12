@@ -30,5 +30,4 @@ new or update packages:
 
 system target specific:
 - fix ibm x40 bootup
-- reenable rb532
 - microblaze: add cfgfs partition to dts, add partition to spartan dts
