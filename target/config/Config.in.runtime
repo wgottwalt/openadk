@@ -7,17 +7,10 @@ config ADK_RUNTIME_HOSTNAME
 	help
 	  Set your target hostname.
 
-config ADK_RUNTIME_START_SERVICES
-	prompt "start some services by default"
-	boolean
-	default n
-	help
-
-source "target/config/Config.in.scripts"
-
 config ADK_RUNTIME_SSH_PUBKEY
 	string "SSH public key (root user only)"
 	default ""
+	depends on ADK_PACKAGE_OPENSSH_SERVER || ADK_PACKAGE_DROPBEAR
 	help
 	  Paste your generated SSH public key here and it will be embedded into
 	  the built image, so you can use it to login instantly.
@@ -27,6 +20,14 @@ config ADK_RUNTIME_PASSWORD
 	default "linux123"
 	help
 	  Predefine the root password enabled in the built image.
+
+config ADK_RUNTIME_START_SERVICES
+	prompt "start some services by default"
+	boolean
+	default n
+	help
+
+source "target/config/Config.in.scripts"
 
 config ADK_RUNTIME_TMPFS_SIZE
 	string "size of /tmp in memory (kB)"
@@ -262,6 +263,7 @@ menu "wlan0 Configuration"
 depends on ADK_SIMPLE_NETWORK_CONFIG && \
 	ADK_TARGET_SYSTEM_LEMOTE_YEELONG || \
 	ADK_TARGET_SYSTEM_RASPBERRY_PI || \
+	ADK_TARGET_SYSTEM_CUBOX_I || \
 	ADK_TARGET_SYSTEM_IBM_X40
 
 choice
@@ -281,6 +283,7 @@ menu "eth1 Configuration"
 depends on ADK_SIMPLE_NETWORK_CONFIG && \
 	!ADK_TARGET_SYSTEM_LEMOTE_YEELONG && \
 	!ADK_TARGET_SYSTEM_RASPBERRY_PI && \
+	!ADK_TARGET_SYSTEM_CUBOX_I && \
 	!ADK_TARGET_SYSTEM_IBM_X40
 
 choice
@@ -330,7 +333,6 @@ config SIMPLE_NETWORK_CONFIG_ETH1_BC
 
 endmenu
 
-
 menu "Resolver Configuration"
 depends on ADK_SIMPLE_NETWORK_CONFIG
 
@@ -339,4 +341,3 @@ config SIMPLE_NETWORK_CONFIG_RESOLV
 	default "10.0.2.3"
 
 endmenu
-
