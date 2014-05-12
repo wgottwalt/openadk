@@ -9,6 +9,7 @@ config ADK_TARGET_SYSTEM_KEYASIC_KA2000
 	select ADK_TOOLCHAIN
 	select ADK_STATIC if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_MUSL
 	select BUSYBOX_STATIC if ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_MUSL
+	depends on ADK_BROKEN
 	help
 	  KeyASIC KA2000 aka Transcend WifiSD.
 	  Build a toolchain only and make all binaries static.
