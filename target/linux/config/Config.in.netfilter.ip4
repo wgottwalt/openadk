@@ -18,7 +18,6 @@ config ADK_KERNEL_IP_NF_CT_ACCT
 	  Those counters can be used for flow-based accounting or the
 	  `connbytes' match.
 
-
 config ADK_KERNEL_IP_NF_IPTABLES
 	tristate 'IP tables support (required for filtering/masq/NAT)'
 	select ADK_KERNEL_NETFILTER_XTABLES
