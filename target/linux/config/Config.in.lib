@@ -1,14 +1,6 @@
 menu "Kernel Library Routines"
 
-config ADK_KERNEL_CRC16
-	bool
-	default n
-
-config ADK_KERNEL_CRC32
-	bool
-	default y
-
-config ADK_KPACKAGE_KMOD_CRC_ITU_T
+config ADK_KERNEL_CRC_ITU_T
 	prompt "CRC ITU-T V.41 functions"
 	tristate
 	default n
@@ -18,14 +10,13 @@ config ADK_KPACKAGE_KMOD_CRC_ITU_T
 	  the kernel tree does. Such modules that use library CRC ITU-T V.41
 	  functions require M here.
 
-config ADK_KPACKAGE_KMOD_CRC16
+config ADK_KERNEL_CRC16
 	prompt "CRC16 library functions"
 	tristate
-        depends on ! ADK_KERNEL_CRC16
 	default n
 	help
 
-config ADK_KPACKAGE_KMOD_LIBCRC32C
+config ADK_KERNEL_LIBCRC32C
 	prompt "CRC32c Cyclic Redundancy-Check"
 	tristate
 	default n
@@ -35,7 +26,7 @@ config ADK_KPACKAGE_KMOD_LIBCRC32C
 	  kernel tree does. Such modules that use library CRC32c functions
 	  require M here.  See Castagnoli93.
 
-config ADK_KPACKAGE_KMOD_CRC_CCITT
+config ADK_KERNEL_CRC_CCITT
 	prompt "CRC-CCITT library functions"
 	tristate
 	default n

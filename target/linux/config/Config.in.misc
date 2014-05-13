@@ -1,8 +1,3 @@
-# for DMA driver required
-config ADK_KERNEL_FW_LOADER
-	boolean
-	default n
-
 config ADK_KERNEL_FIRMWARE_IN_KERNEL
 	boolean 
 	default n
@@ -32,7 +27,7 @@ config ADK_KERNEL_KEXEC
 	help
 	  You need also kexec-tools to benefit from it.	
 
-config ADK_KPACKAGE_KMOD_PARPORT
+config ADK_KERNEL_PARPORT
 	prompt "Generic parallel port support"
 	tristate
 	default n
@@ -40,20 +35,20 @@ config ADK_KPACKAGE_KMOD_PARPORT
 	help
 	  Kernel module for generic parallel port support.
 
-config ADK_KPACKAGE_KMOD_PARPORT_PC
+config ADK_KERNEL_PARPORT_PC
 	prompt "PC style parallel port support"
 	tristate
 	default n
-	depends on ADK_KPACKAGE_KMOD_PARPORT
+	depends on ADK_KERNEL_PARPORT
 	help
 	  Kernel module for PC style parallel port support.
 
-config ADK_KPACKAGE_KMOD_PLIP
+config ADK_KERNEL_PLIP
 	prompt "PLIP (internet over parallel port)"
 	tristate
 	default n
-	depends on ADK_KPACKAGE_KMOD_PARPORT
-	select ADK_KPACKAGE_KMOD_PARPORT_PC
+	depends on ADK_KERNEL_PARPORT
+	select ADK_KERNEL_PARPORT_PC
 	help
 	  PLIP: IPv4 over parallel port, using a Turbo Laplink
 	  (crossed null-printer) cable. Drivers exist for DOS
@@ -61,25 +56,25 @@ config ADK_KPACKAGE_KMOD_PLIP
 	  longer compatible with Linux 1.x), FreeBSD and MirBSD.
 	  This will enlarge your kernel by about 8 KiB.
 
-config ADK_KPACKAGE_KMOD_PRINTER
+config ADK_KERNEL_PRINTER
 	prompt "Line printer support"
 	tristate
 	default n
-	depends on ADK_KPACKAGE_KMOD_PARPORT
-	select ADK_KPACKAGE_KMOD_PARPORT_PC
+	depends on ADK_KERNEL_PARPORT
+	select ADK_KERNEL_PARPORT_PC
 	help
 	  Kernel module for line printer support
 
-config ADK_KPACKAGE_KMOD_PPDEV
+config ADK_KERNEL_PPDEV
 	prompt "Userland parallel port driver"
 	tristate
 	default n
-	depends on ADK_KPACKAGE_KMOD_PARPORT
-	select ADK_KPACKAGE_KMOD_PARPORT_PC
+	depends on ADK_KERNEL_PARPORT
+	select ADK_KERNEL_PARPORT_PC
 	help
 	  Kernel module for userland parallel port access
 
-config ADK_KPACKAGE_KMOD_FW_LOADER
+config ADK_KERNEL_FW_LOADER
 	prompt "Userspace firmware loading support"
 	tristate
 	depends on !ADK_TARGET_SYSTEM_SHARP_ZAURUS
@@ -88,10 +83,10 @@ config ADK_KPACKAGE_KMOD_FW_LOADER
 	  This may be necessary when using drivers which require
 	  loading of external firmware files.
 
-config ADK_KPACKAGE_KMOD_EEPROM_93CX6
+config ADK_KERNEL_EEPROM_93CX6
 	prompt "93cx6 eeprom support"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_MAC80211
+	depends on ADK_KERNEL_MAC80211
 	select ADK_KERNEL_MISC_DEVICES
  	default n
  	help

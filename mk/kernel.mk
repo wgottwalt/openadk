@@ -17,7 +17,7 @@ TARGETS:=
 # Adds a target for creating a package containing
 # the specified (kernel-provided) modules.
 # Parameters:
-# 1: the config symbol name (without leading 'ADK_[K,]PACKAGE_KMOD_')
+# 1: the config symbol name (without leading 'ADK_KERNEL_')
 #    this _must_ be equal to the kernel config symbol name
 # 2: the name for the package, should be unique
 # 3: actual modules to add; absolute path inside $(MODULES_DIR)
@@ -34,10 +34,7 @@ PKG_$(1) := $(PACKAGE_DIR)/kmod-$(2)_$(KERNEL_VERSION)-$(KERNEL_RELEASE)_$(CPU_A
 I_$(1) := $(KMOD_BUILD_DIR)/ipkg/$(2)
 
 ifeq ($${ADK_TARGET_KERNEL_CUSTOMISING},y)
-ifeq ($$(ADK_KPACKAGE_KMOD_$(1)),m)
-TARGETS+=$$(PKG_$(1))
-endif
-ifeq ($$(ADK_KPACKAGE_KMOD_$(1)),y)
+ifeq ($$(ADK_KERNEL_$(1)),m)
 TARGETS+=$$(PKG_$(1))
 INSTALL_TARGETS+=$$(PKG_$(1))
 endif

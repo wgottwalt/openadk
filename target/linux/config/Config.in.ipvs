@@ -1,20 +1,21 @@
 menu "IPVS support"
 
-config ADK_KPACKAGE_KMOD_IP_VS
+config ADK_KERNEL_IP_VS
 	prompt "IPVS support"
 	tristate
 	select ADK_KERNEL_NETFILTER
-	select ADK_KPACKAGE_KMOD_NF_CONNTRACK
+	select ADK_KERNEL_NF_CONNTRACK
+	default m if ADK_PACKAGE_IPVSADM
 	default n
 
 config ADK_KERNEL_IP_VS_DEBUG
 	prompt "enable debugging support"
 	boolean
 	default n
-	depends on ADK_KPACKAGE_KMOD_IP_VS
+	depends on ADK_KERNEL_IP_VS
 
 menu "IPVS transport protocol load balancing support"
-	depends on ADK_KPACKAGE_KMOD_IP_VS
+	depends on ADK_KERNEL_IP_VS
 
 config ADK_KERNEL_IP_VS_PROTO_TCP
 	prompt "TCP load balancing support"
@@ -51,54 +52,54 @@ config ADK_KERNEL_IP_VS_PROTO_AH
 endmenu
 
 menu "IPVS Scheduler"
-	depends on ADK_KPACKAGE_KMOD_IP_VS
+	depends on ADK_KERNEL_IP_VS
 
-config ADK_KPACKAGE_KMOD_IP_VS_RR
+config ADK_KERNEL_IP_VS_RR
 	prompt "round-robin"
 	tristate
 	default n
 
-config ADK_KPACKAGE_KMOD_IP_VS_WRR
+config ADK_KERNEL_IP_VS_WRR
 	prompt "weighted round-robin"
 	tristate
 	default n
 
-config ADK_KPACKAGE_KMOD_IP_VS_LC
+config ADK_KERNEL_IP_VS_LC
 	prompt "least-connection"
 	tristate
 	default n
 
-config ADK_KPACKAGE_KMOD_IP_VS_WLC
+config ADK_KERNEL_IP_VS_WLC
 	prompt "weighted least-connection"
 	tristate
 	default n
 
-config ADK_KPACKAGE_KMOD_IP_VS_LBLC
+config ADK_KERNEL_IP_VS_LBLC
 	prompt "locality-based least-connection"
 	tristate
 	default n
 
-config ADK_KPACKAGE_KMOD_IP_VS_LBLCR
+config ADK_KERNEL_IP_VS_LBLCR
 	prompt "locality-based least-connection with replication"
 	tristate
 	default n
 
-config ADK_KPACKAGE_KMOD_IP_VS_DH
+config ADK_KERNEL_IP_VS_DH
 	prompt "destination hashing"
 	tristate
 	default n
 
-config ADK_KPACKAGE_KMOD_IP_VS_SH
+config ADK_KERNEL_IP_VS_SH
 	prompt "source hashing"
 	tristate
 	default n
 
-config ADK_KPACKAGE_KMOD_IP_VS_SED
+config ADK_KERNEL_IP_VS_SED
 	prompt "shortest expected delay"
 	tristate
 	default n
 
-config ADK_KPACKAGE_KMOD_IP_VS_NQ
+config ADK_KERNEL_IP_VS_NQ
 	prompt "never queue"
 	tristate
 	default n
@@ -106,9 +107,9 @@ config ADK_KPACKAGE_KMOD_IP_VS_NQ
 endmenu
 
 menu "IPVS application helper"
-	depends on ADK_KPACKAGE_KMOD_IP_VS
+	depends on ADK_KERNEL_IP_VS
 
-config ADK_KPACKAGE_KMOD_IP_VS_FTP
+config ADK_KERNEL_IP_VS_FTP
 	prompt "FTP protocol"
 	tristate
 	default n

@@ -1749,10 +1749,6 @@ $(eval $(call KMOD_template,CRC32,crc32, \
 	$(MODULES_DIR)/kernel/lib/crc32 \
 ,01))
 
-#$(eval $(call KMOD_template,LIBCRC32C,libcrc32c, \
-#	$(MODULES_DIR)/kernel/lib/libcrc32c \
-#,10))
-
 #
 # parallel port support
 #
@@ -1788,6 +1784,7 @@ $(eval $(call KMOD_template,OPROFILE,oprofile,\
 #
 # SPI
 #
+
 $(eval $(call KMOD_template,SPI_BITBANG,spi-bitbang,\
 	$(MODULES_DIR)/kernel/drivers/spi/spi-bitbang \
 ,20))
@@ -1799,6 +1796,7 @@ $(eval $(call KMOD_template,SPI_IMX,spi-imx,\
 #
 # I2C
 #
+
 $(eval $(call KMOD_template,I2C_DEV,i2c-dev,\
 	$(MODULES_DIR)/kernel/drivers/i2c/i2c-dev \
 ,20))
@@ -1814,6 +1812,7 @@ $(eval $(call KMOD_template,SCX200_ACB,scx200-acb,\
 #
 # VirtIO
 #
+
 $(eval $(call KMOD_template,VIRTIO_BLK,virtio-block,\
 	$(MODULES_DIR)/kernel/drivers/net/virtio_blk \
 ,20))

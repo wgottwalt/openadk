@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		4efce9f263e2c3f38d79d9df222476de
 PKG_DESCR:=		Point-to-Point Tunneling Protocol (PPTP) client
 PKG_SECTION:=		ppp
-PKG_DEPENDS:=		ppp kmod-net-ipgre
+PKG_DEPENDS:=		ppp
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pptpclient/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

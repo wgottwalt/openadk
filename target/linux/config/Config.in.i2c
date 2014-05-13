@@ -1,18 +1,15 @@
+menu "I2C driver support"
+depends on ADK_TARGET_WITH_I2C
+
 config ADK_KERNEL_I2C
  	boolean
 
 config ADK_KERNEL_I2C_CHARDEV
-	boolean
- 
-config ADK_KPACKAGE_KMOD_I2C_CHARDEV
  	tristate
-
-menu "I2C driver support"
-depends on ADK_TARGET_WITH_I2C
 
 config ADK_KERNEL_I2C_IMX
 	prompt "I2C driver for Cubox-i"
-	boolean
+	tristate
 	depends on ADK_TARGET_SYSTEM_CUBOX_I
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_I2C_CHARDEV
@@ -21,12 +18,12 @@ config ADK_KERNEL_I2C_IMX
 	help
 	  I2C driver for Cubox-i.
 	
-config ADK_KPACKAGE_KMOD_SCX200_ACB
+config ADK_KERNEL_SCX200_ACB
 	prompt "I2C driver for Geode"
 	tristate
 	depends on ADK_CPU_GEODE
 	select ADK_KERNEL_I2C
-	select ADK_KPACKAGE_KMOD_I2C_CHARDEV
+	select ADK_KERNEL_I2C_CHARDEV
 	default y if ADK_CPU_GEODE
 	default n
 	help

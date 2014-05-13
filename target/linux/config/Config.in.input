@@ -1,3 +1,6 @@
+menu "Input devices"
+depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_INPUT || ADK_TARGET_WITH_TOUCHSCREEN
+
 config ADK_KERNEL_INPUT
 	boolean
 	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
@@ -47,12 +50,6 @@ config ADK_KERNEL_TOUCHSCREEN_ADS7846
 	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default n
 
-config ADK_KERNEL_INPUT_EVDEV
-	boolean
-	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default n
-
 config ADK_KERNEL_INPUT_KEYBOARD
 	boolean
 	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
@@ -64,27 +61,9 @@ config ADK_KERNEL_INPUT_KEYBOARD
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
-config ADK_KERNEL_KEYBOARD_ATKBD
-	boolean
-	default y if ADK_TARGET_SYSTEM_VBOX_I686
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-	default n
-
 config ADK_KERNEL_INPUT_MOUSE
 	boolean
 	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
-	default y if ADK_TARGET_SYSTEM_VBOX_I686
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default n
-
-config ADK_KERNEL_INPUT_MOUSEDEV
-	boolean
 	default y if ADK_TARGET_SYSTEM_VBOX_I686
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default y if ADK_TARGET_SYSTEM_IBM_X40
@@ -107,22 +86,17 @@ config ADK_KERNEL_HID_GENERIC
 	select ADK_KERNEL_HID_SUPPORT
 	default n
 	
-menu "Input devices"
-depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_INPUT || ADK_TARGET_WITH_TOUCHSCREEN
-
-config ADK_KPACKAGE_KMOD_USB_HID
+config ADK_KERNEL_USB_HID
 	prompt "USB keyboard/mouse support"
 	tristate
-	depends on !ADK_KERNEL_USB_HID
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_HID
 	select ADK_KERNEL_HID_GENERIC
 	select ADK_KERNEL_INPUT_KEYBOARD
 	select ADK_KERNEL_INPUT_MOUSEDEV
 	select ADK_KERNEL_INPUT_MOUSE
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	depends on ADK_TARGET_WITH_USB
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default m if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
 config ADK_KERNEL_LOGITECH_DINOVO
@@ -134,27 +108,26 @@ config ADK_KERNEL_LOGITECH_DINOVO
 	help
 	  Support for Logitech DiNovo keyboard/mouse combination.
 
-config ADK_KPACKAGE_KMOD_KEYBOARD_ATKBD
+config ADK_KERNEL_KEYBOARD_ATKBD
 	prompt "Keyboard support (AT)"
 	tristate
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_INPUT_KEYBOARD
-	depends on !ADK_KERNEL_KEYBOARD_ATKBD
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
-config ADK_KPACKAGE_KMOD_INPUT_MOUSEDEV
+config ADK_KERNEL_INPUT_MOUSEDEV
 	prompt "Mouse support"
 	tristate
 	select ADK_KERNEL_INPUT
-	depends on !ADK_KERNEL_INPUT_MOUSEDEV
 	default n
 
-config ADK_KPACKAGE_KMOD_INPUT_EVDEV
+config ADK_KERNEL_INPUT_EVDEV
 	prompt "Event device support"
 	tristate
 	select ADK_KERNEL_INPUT
-	depends on !ADK_KERNEL_INPUT_EVDEV
+	default m if ADK_PACKAGE_XF86_INPUT_EVDEV
+	default m if ADK_PACKAGE_XF86_INPUT_EVTOUCH
 	default n
 
 endmenu

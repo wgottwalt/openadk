@@ -10,7 +10,6 @@ PKG_MD5SUM:=		ec7b381160b340648dede58c31bb2238
 PKG_DESCR:=		ethernet bridging tools
 PKG_SECTION:=		bridge
 PKG_BUILDDEP:=		autotool
-PKG_DEPENDS:=		kmod-bridge kmod-ipv6
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Bridge
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bridge/}
 

@@ -9,7 +9,7 @@ PKG_RELEASE:=		11
 PKG_MD5SUM:=		c9bcc83644ed788e22a7c3f3d4021350
 PKG_DESCR:=		SixXS Automatic IPv6 Connectivity Client Utility
 PKG_SECTION:=		ipv6
-PKG_DEPENDS:=		kmod-ipv6 kmod-tun libpthread
+PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://www.sixxs.net/
 PKG_SITES:=		http://www.sixxs.net/archive/sixxs/aiccu/unix/
 

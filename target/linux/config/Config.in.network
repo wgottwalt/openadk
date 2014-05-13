@@ -50,7 +50,7 @@ config ADK_KERNEL_IP_MROUTE
 	boolean
 	default n
 
-config ADK_KPACKAGE_KMOD_ATM
+config ADK_KERNEL_ATM
 	prompt "Asynchronous Transfer Mode (ATM)"
 	tristate
 	default n
@@ -68,17 +68,18 @@ config ADK_KPACKAGE_KMOD_ATM
 	 of ATM.  See the file <file:Documentation/networking/atm.txt> for
 	 further details.
 
-config ADK_KPACKAGE_KMOD_ATM_BR2684
+config ADK_KERNEL_ATM_BR2684
 	prompt "BR2684 ATM module"
 	tristate
-	select ADK_KPACKAGE_KMOD_ATM
+	select ADK_KERNEL_ATM
 	default n
 	help
 
-config ADK_KPACKAGE_KMOD_BRIDGE
+config ADK_KERNEL_BRIDGE
 	prompt "802.1d Ethernet Bridging"
 	tristate
 	select ADK_KERNEL_LLC
+	default m if ADK_PACKAGE_BRIDGE_UTILS
 	default n
 	help
 	  If you say Y here, then your Linux box will be able to act as an
@@ -101,7 +102,7 @@ config ADK_KPACKAGE_KMOD_BRIDGE
 	  Enabling arptables support when bridging will let arptables see
 	  bridged ARP traffic in the arptables FORWARD chain.
 
-config ADK_KPACKAGE_KMOD_VLAN_8021Q
+config ADK_KERNEL_VLAN_8021Q
 	prompt "802.1q VLAN support"
 	tristate
 	default n
@@ -114,15 +115,15 @@ config ADK_KPACKAGE_KMOD_VLAN_8021Q
           use VLANs.  See the VLAN web page for more information:
           <http://www.candelatech.com/~greear/vlan.html>
 
-config ADK_KPACKAGE_KMOD_INET_TUNNEL
+config ADK_KERNEL_INET_TUNNEL
 	tristate
 	default n
 	help
 
-config ADK_KPACKAGE_KMOD_NET_IPIP
+config ADK_KERNEL_NET_IPIP
 	prompt "IP in IP encapsulation support"
 	tristate
-	select ADK_KPACKAGE_KMOD_INET_TUNNEL
+	select ADK_KERNEL_INET_TUNNEL
 	default n
 	help
 	  Tunneling means encapsulating data of one protocol type within
@@ -134,11 +135,13 @@ config ADK_KPACKAGE_KMOD_NET_IPIP
 	  mobile-IP facilities (allowing laptops to seamlessly move between
 	  networks without changing their IP addresses).
 
-config ADK_KPACKAGE_KMOD_NET_IPGRE
+config ADK_KERNEL_NET_IPGRE
 	prompt "GRE tunnels over IP"
 	tristate
 	select ADK_KERNEL_NET_IPGRE_BROADCAST
 	select ADK_KERNEL_NET_IPGRE_DEMUX
+	default m if ADK_PACKAGE_PPTP
+	default m if ADK_PACKAGE_PPTPD
 	default n
 	help
 	  Tunneling means encapsulating data of one protocol type within
@@ -151,10 +154,10 @@ config ADK_KPACKAGE_KMOD_NET_IPGRE
 	  tunneling" above). In addition, GRE allows multicast redistribution
 	  through the tunnel.
 
-config ADK_KPACKAGE_KMOD_IPV6
+config ADK_KERNEL_IPV6
 	prompt "IPv6 support"
 	tristate
-	default m if !ADK_LINUX_M68K
+	default m
 	help
 	  This is complemental support for the IP version 6.
 	  You will still be able to do traditional IPv4 networking as well.
@@ -165,10 +168,10 @@ config ADK_KPACKAGE_KMOD_IPV6
 	  For specific information about IPv6 under Linux, read the HOWTO at
 	  <http://www.bieringer.de/linux/IPv6/>.
 
-config ADK_KPACKAGE_KMOD_IPV6_SIT
+config ADK_KERNEL_IPV6_SIT
 	prompt "IPv6-in-IPv4 tunnel (SIT driver)"
 	tristate
-	select ADK_KPACKAGE_KMOD_INET_TUNNEL
+	select ADK_KERNEL_INET_TUNNEL
 	default n
 	help
 	  Tunneling means encapsulating data of one protocol type within
@@ -177,12 +180,15 @@ config ADK_KPACKAGE_KMOD_IPV6_SIT
 	  into IPv4 packets. This is useful if you want to connect two IPv6
 	  networks over an IPv4-only path.
 
-config ADK_KPACKAGE_KMOD_PPP
+config ADK_KERNEL_PPP
 	prompt "PPP support"
 	tristate
 	select ADK_KERNEL_PPP_ASYNC
 	select ADK_KERNEL_SLHC
-	select ADK_KPACKAGE_KMOD_CRC_CCITT
+	select ADK_KERNEL_CRC_CCITT
+	default m if ADK_PACKAGE_PPTP
+	default m if ADK_PACKAGE_PPTPD
+	default m if ADK_PACKAGE_PPP
 	default n
 	help
 	  PPP (Point to Point Protocol) is a newer and better SLIP.  It serves
@@ -206,14 +212,15 @@ config ADK_KPACKAGE_KMOD_PPP
 	  synchronous lines, you should say Y (or M) here and to "Support
 	  synchronous PPP", below.
 
-config ADK_KPACKAGE_KMOD_PPP_MPPE
+config ADK_KERNEL_PPP_MPPE
 	prompt "PPP MPPE/MPPC module"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_PPP
+	depends on ADK_KERNEL_PPP
 	select ADK_KERNEL_CRYPTO
-	select ADK_KPACKAGE_KMOD_CRYPTO_ARC4
-	select ADK_KPACKAGE_KMOD_CRYPTO_SHA1
-	select ADK_KPACKAGE_KMOD_CRYPTO_ECB
+	select ADK_KERNEL_CRYPTO_ARC4
+	select ADK_KERNEL_CRYPTO_SHA1
+	select ADK_KERNEL_CRYPTO_ECB
+	default m if ADK_PACKAGE_PPTPD
 	default n
 	help
          Support for the MPPE Encryption protocol, as employed by the
@@ -222,31 +229,38 @@ config ADK_KPACKAGE_KMOD_PPP_MPPE
 	 See http://pptpclient.sourceforge.net/ for information on
 	 configuring PPTP clients and servers to utilize this method.
 
-config ADK_KPACKAGE_KMOD_PPPOATM
+config ADK_KERNEL_PPPOATM
 	prompt "PPPoA (PPP over ATM) kernel support"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_PPP
-	select ADK_KPACKAGE_KMOD_ATM
+	depends on ADK_KERNEL_PPP
+	select ADK_KERNEL_ATM
 	default n
 	help
 	  Support for PPP over ATM
 
-config ADK_KPACKAGE_KMOD_PPPOE
+config ADK_KERNEL_PPPOE
 	prompt "PPPoE (PPP over Ethernet) kernel support"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_PPP
+	depends on ADK_KERNEL_PPP
+	default m if ADK_PACKAGE_PPP_MOD_PPPOE
 	default n
 	help
 	  Support for PPP over Ethernet
 
-config ADK_KPACKAGE_KMOD_TUN
+config ADK_KERNEL_TUN
 	prompt "Universal TUN/TAP driver"
 	tristate
+	default m if ADK_PACKAGE_CHILLISPOT
+	default m if ADK_PACKAGE_AICCU
+	default m if ADK_PACKAGE_TINC
+	default m if ADK_PACKAGE_VTUN
+	default m if ADK_PACKAGE_VPNC
+	default m if ADK_PACKAGE_OPENVPN
 	default n
 	help
 	  Kernel support for the TUN/TAP tunneling device
 
-config ADK_KPACKAGE_KMOD_BONDING
+config ADK_KERNEL_BONDING
 	prompt "Bonding driver support"
 	tristate
 	select BUSYBOX_IFENSLAVE

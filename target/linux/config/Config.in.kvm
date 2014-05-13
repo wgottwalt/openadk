@@ -6,13 +6,8 @@ config ADK_KERNEL_VIRTUALIZATION
 	default n
 
 config ADK_KERNEL_KVM
-	bool
-	default n
-
-config ADK_KPACKAGE_KMOD_KVM
-	prompt "kmod-kvm.......................... Kernel-based Virtual Machine (KVM) support"
+	prompt "Kernel-based Virtual Machine (KVM) support"
 	tristate
-        depends on !ADK_KERNEL_KVM 
 	select ADK_KERNEL_VIRTUALIZATION
 	default n
 	help
@@ -23,20 +18,18 @@ config ADK_KPACKAGE_KMOD_KVM
 	  This module provides access to the hardware capabilities through
 	  a character device node named /dev/kvm.
 
-config ADK_KPACKAGE_KMOD_KVM_AMD
-	prompt "kmod-kvm-amd...................... KVM for AMD processors support"
+config ADK_KERNEL_KVM_AMD
+	prompt "KVM for AMD processors support"
 	tristate
-        depends on !ADK_KERNEL_KVM
 	select ADK_KERNEL_VIRTUALIZATION
 	default n
 	help
 	  Provides support for KVM on AMD processors equipped with the AMD-V
 	  (SVM) extensions.
 
-config ADK_KPACKAGE_KMOD_KVM_INTEL
-	prompt "kmod-kvm-intel.................... KVM for Intel processors support"
+config ADK_KERNEL_KVM_INTEL
+	prompt "KVM for Intel processors support"
 	tristate
-        depends on !ADK_KERNEL_KVM
 	select ADK_KERNEL_VIRTUALIZATION
 	default n
 	help

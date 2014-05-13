@@ -10,7 +10,7 @@ PKG_MD5SUM:=		547a024ac81acf458edeb19f32cf1088
 PKG_DESCR:=		VPN solution using SSL/TLS
 PKG_SECTION:=		net/security
 PKG_BUILDDEP:=		autotool
-PKG_DEPENDS:=		kmod-tun ip
+PKG_DEPENDS:=		ip
 PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
 

@@ -7,10 +7,9 @@ PKG_NAME:=		chillispot
 PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		9d2597756af3fa14d7331b4a3651fc9b
-PKG_DESCR:=		Wireless LAN Access Point Controller
+PKG_DESCR:=		wireless LAN access point controller
 PKG_SECTION:=		wifi
 PKG_BUILDDEP:=		autotool
-PKG_DEPENDS:=		kmod-tun
 PKG_URL:=		http://www.chillispot.info/
 PKG_SITES=		http://www.chillispot.info/download/
 

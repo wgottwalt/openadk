@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		02cc1160a9db9c49a40491f890083044
 PKG_DESCR:=		transparent HTTP proxy
 PKG_SECTION:=		proxy
-PKG_DEPENDS:=		iptables kmod-ip-nf-target-redirect
+PKG_DEPENDS:=		iptables
 PKG_URL:=		http://sourceforge.net/projects/transproxy/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=transproxy/1.6/}
 

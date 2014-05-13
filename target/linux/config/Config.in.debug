@@ -114,11 +114,12 @@ config ADK_KERNEL_DEBUG_WITH_KGDB
 		ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	default n
 
-config ADK_KPACKAGE_KMOD_OPROFILE
+config ADK_KERNEL_OPROFILE
 	prompt "Oprofile support"
 	tristate
 	select ADK_KERNEL_PROFILING
 	depends on !ADK_LINUX_M68K
+	default m if ADK_PACKAGE_OPROFILE
 	default n
 	help
 	 use oprofile package to make use of the kernel support.

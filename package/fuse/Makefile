@@ -9,7 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		33cae22ca50311446400daf8a6255c6a
 PKG_DESCR:=		filesystem in userspace utility
 PKG_SECTION:=		fs
-PKG_DEPENDS:=		kmod-fuse-fs libfuse
+PKG_DEPENDS:=		libfuse
 PKG_BUILDDEP:=		libiconv-tiny
 PKG_URL:=		http://fuse.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}

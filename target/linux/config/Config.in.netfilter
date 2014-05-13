@@ -109,19 +109,19 @@ config ADK_KERNEL_IP_NF_MATCH_HELPER
 # cannot be ADK_KERNEL_IP_NF_MATCH_STATE because
 # netfilter is built as a module -> this'll always be
 # a module, too
-config ADK_KPACKAGE_KMOD_IP_NF_MATCH_STATE
+config ADK_KERNEL_IP_NF_MATCH_STATE
 	tristate
-	select ADK_KPACKAGE_KMOD_NETFILTER_XT_MATCH_STATE
+	select ADK_KERNEL_NETFILTER_XT_MATCH_STATE
 	default n
 
-config ADK_KPACKAGE_KMOD_NETFILTER_XT_MATCH_STATE
+config ADK_KERNEL_NETFILTER_XT_MATCH_STATE
 	tristate
 	default n
 
 # cannot be ADK_KERNEL_IP_NF_MATCH_CONNTRACK because
 # netfilter is built as a module -> this'll always be
 # a module, too
-config ADK_KPACKAGE_KMOD_IP_NF_MATCH_CONNTRACK
+config ADK_KERNEL_IP_NF_MATCH_CONNTRACK
 	tristate
 	default n
 

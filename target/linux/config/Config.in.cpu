@@ -9,11 +9,6 @@ config ADK_KERNEL_PM_SLEEP_SMP
 	default y if ADK_TARGET_CPU_WITH_HT
 	default n
 
-config ADK_KERNEL_SMP
-	boolean
-	default y if ADK_TARGET_CPU_WITH_HT
-	default n
-
 config ADK_KERNEL_X86_HT
 	boolean
 	default y if ADK_TARGET_CPU_WITH_HT
@@ -57,15 +52,17 @@ config ADK_KERNEL_ARM_IMX6_CPUFREQ
 	select ADK_KERNEL_REGULATOR
 	select ADK_KERNEL_REGULATOR_FIXED_VOLTAGE
 	select ADK_KERNEL_REGULATOR_ANATOP
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	depends on ADK_TARGET_SYSTEM_CUBOX_I
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default n
 
 config ADK_KERNEL_ARM_BCM2835_CPUFREQ
 	prompt "CPU frequency support for raspberry-pi"
 	boolean
 	select ADK_KERNEL_CPU_FREQ
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
 
 choice
 prompt "Governor"

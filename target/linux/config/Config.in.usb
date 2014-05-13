@@ -4,11 +4,6 @@ depends on ADK_TARGET_WITH_USB || ADK_HARDWARE_QEMU
 config ADK_KERNEL_USB_SUPPORT
 	boolean
 
-config ADK_KERNEL_USB
-	boolean
-	select ADK_KERNEL_USB_SUPPORT
-	default n
-
 config ADK_KERNEL_USB_EHCI_ROOT_HUB_TT
 	boolean
 
@@ -18,16 +13,6 @@ config ADK_KERNEL_USB_EHCI_TT_NEWSCHED
 config ADK_KERNEL_USB_MXS_PHY
 	boolean
 
-config ADK_KERNEL_USB_HID
-	boolean
-	select ADK_KERNEL_USB
-	select ADK_KERNEL_HID
-	select ADK_KERNEL_HID_GENERIC
-
-config ADK_KERNEL_USB_OHCI_HCD
-	boolean
-	default n
-
 config ADK_KERNEL_USB_OHCI_HCD_PLATFORM
 	boolean
 	select ADK_KERNEL_USB_OHCI_HCD
@@ -36,37 +21,18 @@ config ADK_KERNEL_USB_OHCI_HCD_PLATFORM
 config ADK_KERNEL_USB_LIBUSUAL
 	tristate
 
-config ADK_KERNEL_USB_SERIAL
-	boolean
-
-config ADK_KERNEL_USB_STORAGE
-	boolean
-
-config ADK_KERNEL_USB_EHCI_HCD
-	boolean
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-
-config ADK_KERNEL_USB_UHCI_HCD
-	boolean
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-
-config ADK_KERNEL_USB_OHCI_HCD
-	boolean
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-
-config ADK_KPACKAGE_KMOD_USB
+config ADK_KERNEL_USB
 	prompt "USB support"
 	tristate
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_USB_SUPPORT
-	depends on !ADK_KERNEL_USB
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default m if ADK_TARGET_SYSTEM_IBM_X40
+	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default m if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	default m if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 	help
 	  Universal Serial Bus (USB) is a specification for a serial bus
@@ -99,23 +65,21 @@ config ADK_KPACKAGE_KMOD_USB
 
 menu "USB controller support"
 
-config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
+config ADK_KERNEL_USB_EHCI_HCD
 	prompt "Support for USB EHCI 2.0 controllers"
 	tristate
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
 	select ADK_KERNEL_USB_EHCI_ROOT_HUB_TT
 	select ADK_KERNEL_USB_EHCI_TT_NEWSCHED
-	select ADK_KERNEL_USB_MXS_PHY
-	depends on !ADK_KERNEL_USB_EHCI_HCD
+	select ADK_KERNEL_USB_MXS_PHY if ADK_TARGET_SYSTEM_CUBOX_I
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
-	depends on ADK_KPACKAGE_KMOD_USB
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_KERNEL_USB
+	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default m if ADK_TARGET_SYSTEM_IBM_X40
+	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default m if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 	help
 	  The Enhanced Host Controller Interface (EHCI) is standard for USB 2.0
@@ -137,16 +101,14 @@ config ADK_KPACKAGE_KMOD_USB_EHCI_HCD
 	  You may want to read <file:Documentation/usb/ehci.txt>.
 
 
-config ADK_KPACKAGE_KMOD_USB_UHCI_HCD
+config ADK_KERNEL_USB_UHCI_HCD
 	prompt "Support for UHCI controllers"
 	tristate
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	depends on ADK_KPACKAGE_KMOD_USB
-	depends on !ADK_KERNEL_USB_UHCI_HCD
+	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default m if ADK_TARGET_SYSTEM_IBM_X40
+	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
 	help
 	  The Universal Host Controller Interface is a standard by Intel for
@@ -158,17 +120,16 @@ config ADK_KPACKAGE_KMOD_USB_UHCI_HCD
 	  (like VIA VP2, VP3, MVP3, Apollo Pro, Apollo Pro II or Apollo Pro
 	  133). If unsure, say Y.
 
-config ADK_KPACKAGE_KMOD_USB_OHCI_HCD
+config ADK_KERNEL_USB_OHCI_HCD
 	prompt "Support for OHCI controllers"
 	tristate
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	depends on ADK_KPACKAGE_KMOD_USB
+	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
-	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
-	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default m if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
+	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
 	help
 	  The Open Host Controller Interface (OHCI) is a standard for accessing
@@ -196,20 +157,19 @@ config ADK_KERNEL_USB_CHIPIDEA_UDC
 config ADK_KERNEL_USB_CHIPIDEA_HOST
 	boolean
 
-config ADK_KPACKAGE_KMOD_USB_CHIPIDEA
+config ADK_KERNEL_USB_CHIPIDEA
 	prompt "Support for ChipIdea controller"
 	tristate
 	select ADK_KERNEL_USB_CHIPIDEA_UDC
 	select ADK_KERNEL_USB_CHIPIDEA_HOST
-	depends on ADK_KPACKAGE_KMOD_USB_EHCI_HCD
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_KERNEL_USB_EHCI_HCD
+	default m if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 
-config ADK_KPACKAGE_KMOD_USB_ISP116X_HCD
+config ADK_KERNEL_USB_ISP116X_HCD
 	prompt "Support for ISP116X"
 	tristate
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	depends on ADK_KPACKAGE_KMOD_USB
+	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
@@ -219,11 +179,10 @@ config ADK_KPACKAGE_KMOD_USB_ISP116X_HCD
 
 	  This driver does not support isochronous transfers.
 
-config ADK_KPACKAGE_KMOD_USB_SL811_HCD
+config ADK_KERNEL_USB_SL811_HCD
 	prompt "Support for SL811HS"
 	tristate
-	select ADK_PACKAGE_KMOD_USB_CONTROLLER
-	depends on ADK_KPACKAGE_KMOD_USB
+	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
@@ -233,64 +192,50 @@ config ADK_KPACKAGE_KMOD_USB_SL811_HCD
 	  board has this chip, and you want to use it as a host controller. 
 	  If unsure, say N.
 
-config ADK_PACKAGE_KMOD_USB_CONTROLLER
-	tristate
-	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default n
-
 endmenu
 
 menu "USB devices support"
 
-config ADK_KPACKAGE_KMOD_USB_STORAGE
+config ADK_KERNEL_USB_STORAGE
 	prompt "Support for USB storage devices"
 	tristate
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
-	depends on !ADK_KERNEL_USB_STORAGE
-	select ADK_KPACKAGE_KMOD_SCSI if !ADK_KERNEL_SCSI
-	select ADK_KPACKAGE_KMOD_BLK_DEV_SD if !ADK_KERNEL_SCSI
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_BLK_DEV_SD
 	default n
 
-config ADK_KPACKAGE_KMOD_SND_USB_AUDIO
+config ADK_KERNEL_SND_USB_AUDIO
 	prompt "Support for USB sound adapter"
 	tristate
 	select ADK_KERNEL_SND_USB
-	select ADK_KPACKAGE_KMOD_SND
-	select ADK_KPACKAGE_KMOD_SND_RAWMIDI
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_KERNEL_SND
+	select ADK_KERNEL_SND_RAWMIDI
 	default n
 
-config ADK_KPACKAGE_KMOD_USB_HSO
+config ADK_KERNEL_USB_HSO
 	prompt "Support for USB HSO devices"
 	tristate
-	select ADK_KPACKAGE_KMOD_RFKILL
-	select ADK_KPACKAGE_KMOD_USB_STORAGE
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_KERNEL_RFKILL
+	select ADK_KERNEL_USB_STORAGE
 	default n
 
-config ADK_KPACKAGE_KMOD_USB_PRINTER
+config ADK_KERNEL_USB_PRINTER
 	prompt "Support for USB printers"
 	tristate
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 
-config ADK_KPACKAGE_KMOD_USB_ACM
+config ADK_KERNEL_USB_ACM
 	prompt "Support for USB modems/isdn controllers"
 	tristate
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 
-config ADK_KPACKAGE_KMOD_USB_PEGASUS
+config ADK_KERNEL_USB_PEGASUS
 	prompt "Support for USB Pegasus network cards"
 	tristate
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 
-config ADK_KPACKAGE_KMOD_USB_SERIAL
+config ADK_KERNEL_USB_SERIAL
 	prompt "Support for USB-to-serial converters"
 	tristate
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 	help
 	  Say Y here if you have a USB device that provides normal serial
@@ -301,20 +246,20 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL
 	  information on the specifics of the different devices that are
 	  supported, and on how to use them.
 
-config ADK_KPACKAGE_KMOD_USB_SERIAL_BELKIN
+config ADK_KERNEL_USB_SERIAL_BELKIN
 	prompt "Support for Belkin USB-to-serial converters"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
+	depends on ADK_KERNEL_USB_SERIAL
 	default n
 	help
 	  Say Y here if you want to use a Belkin USB Serial single port
 	  adaptor (F5U103 is one of the model numbers) or the Peracom single
 	  port USB to serial adapter.
 
-config ADK_KPACKAGE_KMOD_USB_SERIAL_FTDI_SIO
+config ADK_KERNEL_USB_SERIAL_FTDI_SIO
 	prompt "Support for FTDI USB-to-serial converter"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
+	depends on ADK_KERNEL_USB_SERIAL
 	default n
 	help
 	  Say Y here if you want to use a FTDI SIO single port USB to serial
@@ -324,10 +269,10 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_FTDI_SIO
 	  See <http://ftdi-usb-sio.sourceforge.net/> for more
 	  information on this driver and the device.
 
-config ADK_KPACKAGE_KMOD_USB_SERIAL_MCT_U232
+config ADK_KERNEL_USB_SERIAL_MCT_U232
 	prompt "Support for Magic Control Technology USB-to-Serial converters"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
+	depends on ADK_KERNEL_USB_SERIAL
 	default n
 	help
 	  Say Y here if you want to use a USB Serial single port adapter from
@@ -336,19 +281,19 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_MCT_U232
 	  This driver also works with Sitecom U232-P25 and D-Link DU-H3SP USB
 	  BAY, Belkin F5U109, and Belkin F5U409 devices.
 
-config ADK_KPACKAGE_KMOD_USB_SERIAL_PL2303
+config ADK_KERNEL_USB_SERIAL_PL2303
 	prompt "Support for Prolific PL2303 USB-to-Serial converters"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
+	depends on ADK_KERNEL_USB_SERIAL
 	default n
 	help
 	  Say Y here if you want to use the PL2303 USB Serial single port
 	  adapter from Prolific.
 
-config ADK_KPACKAGE_KMOD_USB_SERIAL_VISOR
+config ADK_KERNEL_USB_SERIAL_VISOR
 	prompt "Support for Handspring Visor / Palm m50x / Sony Clie Driver"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_USB_SERIAL
+	depends on ADK_KERNEL_USB_SERIAL
 	default n
 	help
 	  Say Y here if you want to connect to your HandSpring Visor, Palm
@@ -356,28 +301,25 @@ config ADK_KPACKAGE_KMOD_USB_SERIAL_VISOR
 	  <http://usbvisor.sourceforge.net/> for more information on using this
 	  driver.
 
-config ADK_KPACKAGE_KMOD_USB_ATM
+config ADK_KERNEL_USB_ATM
         prompt "Support for USB ATM devices"
 	tristate
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 
-config ADK_KPACKAGE_KMOD_USB_ATM_SPEEDTOUCH
+config ADK_KERNEL_USB_ATM_SPEEDTOUCH
         prompt "Support for USB Speedtouch ADSL modem"
 	tristate
-	depends on ADK_KPACKAGE_KMOD_USB_ATM
+	depends on ADK_KERNEL_USB_ATM
 	default n
 
-config ADK_KPACKAGE_KMOD_USB_USBNET
+config ADK_KERNEL_USB_USBNET
         prompt "Multi-purpose USB Networking Framework"
 	tristate
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 
-config ADK_KPACKAGE_KMOD_USB_SISUSBVGA
+config ADK_KERNEL_USB_SISUSBVGA
         prompt "USB 2.0 SVGA dongle support (Net2280/SiS315)"
 	tristate
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
 	default n
 	
 endmenu

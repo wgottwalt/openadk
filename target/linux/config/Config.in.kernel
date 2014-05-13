@@ -75,22 +75,10 @@ config ADK_KERNEL_IP_PNP
 config ADK_KERNEL_IP_PNP_DHCP
 	boolean
 
-config ADK_KERNEL_NFS_FS
-	boolean
-
-config ADK_KERNEL_NFS_V3
-	boolean
-
 config ADK_KERNEL_ROOT_NFS
 	boolean
 
-config ADK_KERNEL_LOCKD
-	boolean
-
 config ADK_KERNEL_NFS_COMMON
-	boolean
-
-config ADK_KERNEL_SUNRPC
 	boolean
 
 config ADK_KERNEL_64BIT

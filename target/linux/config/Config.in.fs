@@ -57,46 +57,35 @@ config ADK_KERNEL_JFFS2_ZLIB
 	default n
 
 config ADK_KERNEL_JFFS2_FS
+	tristate
 	prompt "JFFS2 filesystem"
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
 	select ADK_KERNEL_JFFS2_ZLIB
-	boolean
 
 config ADK_KERNEL_SQUASHFS
 	prompt "SquashFS filesystem"
-	boolean
+	tristate
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_SQUASHFS_XZ
 	default n
 
 config ADK_KERNEL_EXT2_FS
-	boolean
-	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-	default n
-
-config ADK_KPACKAGE_KMOD_EXT2_FS
 	prompt "EXT2 filesystem support"
 	tristate
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
-	depends on !ADK_KERNEL_EXT2_FS
 	help
 	  Ext2 is a standard Linux file system for hard disks.
 
-config ADK_KPACKAGE_KMOD_FS_MBCACHE
+config ADK_KERNEL_FS_MBCACHE
 	tristate
-	depends on !ADK_KERNEL_EXT4_FS
 	default n
 
 config ADK_KERNEL_EXT3_FS
-	boolean
-	default n
-
-config ADK_KPACKAGE_KMOD_EXT3_FS
 	prompt "EXT3 filesystem support"
 	tristate
-	select ADK_KPACKAGE_KMOD_FS_MBCACHE if !ADK_KERNEL_EXT4_FS
-	depends on !ADK_KERNEL_EXT3_FS
+	select ADK_KERNEL_FS_MBCACHE
 	default n
 	help
 	  This is the journalling version of the Second extended file system
@@ -123,25 +112,18 @@ config ADK_KPACKAGE_KMOD_EXT3_FS
 	  (available at <http://sourceforge.net/projects/e2fsprogs/>).
 
 config ADK_KERNEL_EXT4_FS
-	boolean
-	select ADK_KERNEL_CRC16
-	default n
-
-config ADK_KPACKAGE_KMOD_EXT4_FS
 	prompt "EXT4 filesystem support"
 	tristate
-	select ADK_KPACKAGE_KMOD_FS_MBCACHE
-	select ADK_KPACKAGE_KMOD_CRC16
-	depends on !ADK_KERNEL_EXT4_FS 
+	select ADK_KERNEL_FS_MBCACHE
+	select ADK_KERNEL_CRC16
 	default n
 	help
 	  Ext4 filesystem.
 
-config ADK_KPACKAGE_KMOD_HFSPLUS_FS
+config ADK_KERNEL_HFSPLUS_FS
 	prompt "HFS+ filesystem support"
 	tristate
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
-	select ADK_KPACKAGE_KMOD_NLS_UTF8
+	select ADK_KERNEL_NLS_UTF8
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	default n
 	help
@@ -153,10 +135,9 @@ config ADK_KPACKAGE_KMOD_HFSPLUS_FS
 	  data forks and creator codes, but it also has several UNIX
 	  style features such as file ownership and permissions.
 
-config ADK_KPACKAGE_KMOD_NTFS_FS
+config ADK_KERNEL_NTFS_FS
 	prompt "NTFS file system support"
 	tristate
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
 	default n
 	help
 	  NTFS is the file system of Microsoft Windows NT, 2000, XP and 2003.
@@ -181,12 +162,11 @@ config ADK_KPACKAGE_KMOD_NTFS_FS
 	  Linux on your computer it is safe to say N.
 	  Kernel modules for NTFS support
 
-config ADK_KPACKAGE_KMOD_VFAT_FS
+config ADK_KERNEL_VFAT_FS
 	prompt "VFAT filesystem support"
 	tristate
-	select ADK_KPACKAGE_KMOD_NLS if !ADK_KERNEL_NLS
-	select ADK_KPACKAGE_KMOD_NLS_CODEPAGE_850
-	select ADK_KPACKAGE_KMOD_NLS_ISO8859_1
+	select ADK_KERNEL_NLS_CODEPAGE_850
+	select ADK_KERNEL_NLS_ISO8859_1
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 	help
@@ -200,16 +180,10 @@ config ADK_KPACKAGE_KMOD_VFAT_FS
 
 
 config ADK_KERNEL_XFS_FS
-	boolean
-	select ADK_KERNEL_EXPORTFS
-	default n
-
-config ADK_KPACKAGE_KMOD_XFS_FS
 	prompt "XFS filesystem support"
 	tristate
 	select ADK_KERNEL_EXPORTFS
-	select ADK_KPACKAGE_KMOD_CRYPTO_CRC32C
-	depends on !ADK_KERNEL_XFS_FS
+	select ADK_KERNEL_CRYPTO_CRC32C
 	default n
 	help
 	  XFS is a high performance journaling filesystem which originated
@@ -223,9 +197,13 @@ config ADK_KPACKAGE_KMOD_XFS_FS
 	  for complete details.  This implementation is on-disk compatible
 	  with the IRIX version of XFS.
 
-config ADK_KPACKAGE_KMOD_FUSE_FS
+config ADK_KERNEL_FUSE_FS
 	prompt "Filesystem in Userspace support"
 	tristate
+	default m if ADK_PACKAGE_DAVFS2
+	default m if ADK_PACKAGE_FUSE
+	default m if ADK_PACKAGE_NTFS_3G
+	default m if ADK_PACKAGE_WDFS
 	default n
 	help
 	  With FUSE it is possible to implement a fully functional
@@ -240,10 +218,6 @@ config ADK_KERNEL_JOLIET
 	default n
 
 config ADK_KERNEL_ISO9660_FS
-	boolean
-	default n
-
-config ADK_KPACKAGE_KMOD_ISO9660_FS
 	prompt "ISO 9660 / JOLIET CDROM file system support"
 	tristate
 	select ADK_KERNEL_JOLIET
@@ -259,10 +233,10 @@ config ADK_KPACKAGE_KMOD_ISO9660_FS
 	  available from <http://www.tldp.org/docs.html#howto>), thereby
 	  enlarging your kernel by about 27 KB; otherwise say N.
 
-config ADK_KPACKAGE_KMOD_UDF_FS
+config ADK_KERNEL_UDF_FS
 	prompt "UDF file system support"
 	tristate
-	select ADK_KPACKAGE_KMOD_CRC_ITU_T
+	select ADK_KERNEL_CRC_ITU_T
 	default n
 	help
 	  This is the new file system used on some CD-ROMs and DVDs. Say Y if

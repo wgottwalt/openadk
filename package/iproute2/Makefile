@@ -16,7 +16,6 @@ PKG_SITES:=		http://www.kernel.org/pub/linux/utils/net/iproute2/
 
 PKG_SUBPKGS:=		IP TC TC_ATM TC_IPT IFSTAT LNSTAT ROUTEL RTMON SS
 PKGSD_TC:=		iproute2 traffic control utility
-PKGSS_TC:=		kmod-sched
 PKGSB_TC:=		iptables
 PKGSD_TC_ATM:=		iproute2 traffic control ATM support library
 PKGSS_TC_ATM:=		tc libatm

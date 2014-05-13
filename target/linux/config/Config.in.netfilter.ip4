@@ -1,14 +1,16 @@
-config ADK_KPACKAGE_KMOD_NF_CONNTRACK_IPV4
+config ADK_KERNEL_NF_CONNTRACK_IPV4
 	bool 'IPv4 connection tracking support (required for NAT)'
-	select ADK_KPACKAGE_KMOD_NF_CONNTRACK
+	select ADK_KERNEL_NF_CONNTRACK
+	default m if ADK_PACKAGE_IPTABLES
+	default n
 	help
 	  Connection tracking keeps a record of what packets have passed
 	  through your machine, in order to figure out how they are related
 	  into connections.
 
-config ADK_KPACKAGE_KMOD_IP_NF_CT_ACCT
+config ADK_KERNEL_IP_NF_CT_ACCT
 	bool 'Connection tracking flow accounting'
-	depends on ADK_KPACKAGE_KMOD_NF_CONNTRACK
+	depends on ADK_KERNEL_NF_CONNTRACK
 	help
 	  If this option is enabled, the connection tracking code will
 	  keep per-flow packet and byte counters.
@@ -17,59 +19,71 @@ config ADK_KPACKAGE_KMOD_IP_NF_CT_ACCT
 	  `connbytes' match.
 
 
-config ADK_KPACKAGE_KMOD_IP_NF_IPTABLES
+config ADK_KERNEL_IP_NF_IPTABLES
 	tristate 'IP tables support (required for filtering/masq/NAT)'
 	select ADK_KERNEL_NETFILTER_XTABLES
+	default m if ADK_PACKAGE_IPTABLES
+	default n
 	help
 	  iptables is a general, extensible packet identification framework.
 	  The packet filtering and full NAT (masquerading, port forwarding,
 	  etc) subsystems now use this: say `Y' or `M' here if you want to use
 	  either of those.
 
-config ADK_KPACKAGE_KMOD_IP_NF_FILTER
+config ADK_KERNEL_IP_NF_FILTER
 	tristate 'Packet Filtering'
-	depends on ADK_KPACKAGE_KMOD_IP_NF_IPTABLES
+	depends on ADK_KERNEL_IP_NF_IPTABLES
+	default m if ADK_PACKAGE_IPTABLES
+	default n
 	help
 	  Packet filtering defines a table `filter', which has a series of
 	  rules for simple packet filtering at local input, forwarding and
 	  local output.  See the man page for iptables(8).
 
-config ADK_KPACKAGE_KMOD_FULL_NAT
+config ADK_KERNEL_FULL_NAT
 	tristate "Meta package for Full NAT"
-	select ADK_KPACKAGE_KMOD_NF_NAT if ADK_KERNEL_VERSION_3_4_87
-	select ADK_KPACKAGE_KMOD_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_10_37
-	select ADK_KPACKAGE_KMOD_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_11_10
-	select ADK_KPACKAGE_KMOD_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_12_18
-	select ADK_KPACKAGE_KMOD_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_13_11
-	select ADK_KPACKAGE_KMOD_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_14_3
-	select ADK_KPACKAGE_KMOD_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_15_RC5
+	select ADK_KERNEL_NF_NAT if ADK_KERNEL_VERSION_3_4_87
+	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_10_37
+	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_11_10
+	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_12_18
+	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_13_11
+	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_14_3
+	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_15_RC5
+	default m if ADK_PACKAGE_IPTABLES
+	default n
 
-config ADK_KPACKAGE_KMOD_NF_NAT
+config ADK_KERNEL_NF_NAT
 	tristate 'Full NAT'
-	depends on ADK_KPACKAGE_KMOD_IP_NF_IPTABLES
+	depends on ADK_KERNEL_IP_NF_IPTABLES
 	depends on ADK_KERNEL_VERSION_3_4_87
+	default m if ADK_PACKAGE_IPTABLES
+	default n
 	help
 	  The Full NAT option allows masquerading, port forwarding and other
 	  forms of full Network Address Port Translation.  It is controlled by
 	  the `nat' table in iptables: see the man page for iptables(8).
 
-config ADK_KPACKAGE_KMOD_NF_NAT_IPV4
+config ADK_KERNEL_NF_NAT_IPV4
 	tristate 'Full NAT'
-	depends on ADK_KPACKAGE_KMOD_IP_NF_IPTABLES
+	depends on ADK_KERNEL_IP_NF_IPTABLES
 	depends on ADK_KERNEL_VERSION_3_10_37 \
 		|| ADK_KERNEL_VERSION_3_11_10 \
 		|| ADK_KERNEL_VERSION_3_12_18 \
 		|| ADK_KERNEL_VERSION_3_13_11 \
 		|| ADK_KERNEL_VERSION_3_14_3 \
 		|| ADK_KERNEL_VERSION_3_15_RC5
+	default m if ADK_PACKAGE_IPTABLES
+	default n
 	help
 	  The Full NAT option allows masquerading, port forwarding and other
 	  forms of full Network Address Port Translation.  It is controlled by
 	  the `nat' table in iptables: see the man page for iptables(8).
 
-config ADK_KPACKAGE_KMOD_IP_NF_TARGET_MASQUERADE
+config ADK_KERNEL_IP_NF_TARGET_MASQUERADE
 	tristate 'MASQUERADE target support'
-	depends on ADK_KPACKAGE_KMOD_FULL_NAT
+	depends on ADK_KERNEL_FULL_NAT
+	default m if ADK_PACKAGE_IPTABLES
+	default n
 	help
 	  Masquerading is a special case of NAT: all outgoing connections are
 	  changed to seem to come from a particular interface's address, and
@@ -77,17 +91,19 @@ config ADK_KPACKAGE_KMOD_IP_NF_TARGET_MASQUERADE
 	  only useful for dialup accounts with dynamic IP address (ie. your IP
 	  address will be different on next dialup).
 
-config ADK_KPACKAGE_KMOD_IP_NF_TARGET_REJECT
+config ADK_KERNEL_IP_NF_TARGET_REJECT
 	tristate 'REJECT target support'
-	depends on ADK_KPACKAGE_KMOD_IP_NF_FILTER
+	depends on ADK_KERNEL_IP_NF_FILTER
+	default m if ADK_PACKAGE_IPTABLES
+	default n
 	help
 	  The REJECT target allows a filtering rule to specify that an ICMP
 	  error should be issued in response to an incoming packet, rather
 	  than silently being dropped.
 
-config ADK_KPACKAGE_KMOD_IP_NF_TARGET_ULOG
+config ADK_KERNEL_IP_NF_TARGET_ULOG
 	tristate 'ULOG target support (ipv4 only)'
-	depends on ADK_KPACKAGE_KMOD_IP_NF_FILTER
+	depends on ADK_KERNEL_IP_NF_FILTER
 	help
 	  This option enables the old IPv4-only "ipt_ULOG" implementation
 	  which has been obsoleted by the new "nfnetlink_log" code (see
@@ -101,35 +117,35 @@ config ADK_KPACKAGE_KMOD_IP_NF_TARGET_ULOG
 	  The appropriate userspace logging daemon (ulogd) may be obtained from
 	  <http://www.gnumonks.org/projects/ulogd/>
 
-config ADK_KPACKAGE_KMOD_IP_NF_TARGET_REDIRECT
+config ADK_KERNEL_IP_NF_TARGET_REDIRECT
 	tristate 'REDIRECT target support'
-	depends on ADK_KPACKAGE_KMOD_FULL_NAT
+	depends on ADK_KERNEL_FULL_NAT
 	help
 	  REDIRECT is a special case of NAT: all incoming connections are
 	  mapped onto the incoming interface's address, causing the packets to
 	  come to the local machine instead of passing through.  This is
 	  useful for transparent proxies.
 
-config ADK_KPACKAGE_KMOD_IP_NF_TARGET_NETMAP
+config ADK_KERNEL_IP_NF_TARGET_NETMAP
 	tristate 'NETMAP target support'
-	depends on ADK_KPACKAGE_KMOD_FULL_NAT
+	depends on ADK_KERNEL_FULL_NAT
 	help
 	  NETMAP is an implementation of static 1:1 NAT mapping of network
 	  addresses. It maps the network address part, while keeping the host
 	  address part intact. It is similar to Fast NAT, except that
 	  Netfilter's connection tracking doesn't work well with Fast NAT.
 
-config ADK_KPACKAGE_KMOD_IP_NF_MANGLE
+config ADK_KERNEL_IP_NF_MANGLE
 	tristate 'Packet mangling'
-	depends on ADK_KPACKAGE_KMOD_FULL_NAT
+	depends on ADK_KERNEL_FULL_NAT
 	help
 	  This option adds a `mangle' table to iptables: see the man page for
 	  iptables(8).  This table is used for various packet alterations
 	  which can effect how the packet is routed.
 
-config ADK_KPACKAGE_KMOD_IP_NF_TARGET_ECN
+config ADK_KERNEL_IP_NF_TARGET_ECN
 	tristate 'ECN target support'
-	depends on ADK_KPACKAGE_KMOD_IP_NF_MANGLE
+	depends on ADK_KERNEL_IP_NF_MANGLE
 	help
 	  This option adds a `ECN' target, which can be used in the iptables mangle
 	  table.  

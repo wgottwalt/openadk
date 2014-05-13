@@ -1,14 +1,19 @@
-config ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
-	tristate 'Ethernet Bridge tables (ebtables) support'
+config ADK_KERNEL_BRIDGE_NF_EBTABLES
+	prompt 'Ethernet Bridge tables support'
+	tristate
 	select ADK_KERNEL_BRIDGE_NETFILTER
+	default m if ADK_PACKAGE_EBTABLES
+	default n
 	help
 	  ebtables is a general, extensible frame/packet identification
 	  framework. Say 'Y' or 'M' here if you want to do Ethernet
 	  filtering/NAT/brouting on the Ethernet bridge.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_BROUTE
-	tristate "ebt: broute table support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_BROUTE
+	prompt "broute table support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  The ebtables broute table is used to define rules that decide between
 	  bridging and routing frames, giving Linux the functionality of a
@@ -17,9 +22,11 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_BROUTE
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_T_FILTER
-	tristate "ebt: filter table support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_T_FILTER
+	prompt "filter table support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  The ebtables filter table is used to define frame filtering rules at
 	  local input, forwarding and local output. See the man page for
@@ -27,9 +34,11 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_T_FILTER
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_T_NAT
-	tristate "ebt: nat table support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_T_NAT
+	prompt "nat table support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  The ebtables nat table is used to define rules that alter the MAC
 	  source address (MAC SNAT) or the MAC destination address (MAC DNAT).
@@ -39,17 +48,21 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_T_NAT
 #
 # matches
 #
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_802_3
-	tristate "ebt: 802.3 filter support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_802_3
+	prompt "802.3 filter support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds matching support for 802.3 Ethernet frames.
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_AMONG
-	tristate "ebt: among filter support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_AMONG
+	prompt "among filter support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the among match, which allows matching the MAC source
 	  and/or destination address on a list of addresses. Optionally,
@@ -57,36 +70,44 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_AMONG
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_ARP
-	tristate "ebt: ARP filter support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_ARP
+	prompt "ARP filter support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the ARP match, which allows ARP and RARP header field
 	  filtering.
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_IP
-	tristate "ebt: IP filter support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_IP
+	prompt "IP filter support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the IP match, which allows basic IP header field
 	  filtering.
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_IP6
-	tristate "ebt: IP6 filter support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES && ADK_KPACKAGE_KMOD_IPV6
+config ADK_KERNEL_BRIDGE_EBT_IP6
+	prompt "IP6 filter support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES && ADK_KERNEL_IPV6
+	default n
 	help
 	  This option adds the IP6 match, which allows basic IPV6 header field
 	  filtering.
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_LIMIT
-	tristate "ebt: limit match support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_LIMIT
+	prompt "limit match support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the limit match, which allows you to control
 	  the rate at which a rule can be matched. This match is the
@@ -95,9 +116,11 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_LIMIT
 	  If you want to compile it as a module, say M here and read
 	  <file:Documentation/kbuild/modules.txt>.  If unsure, say `N'.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_MARK
-	tristate "ebt: mark filter support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_MARK
+	prompt "mark filter support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the mark match, which allows matching frames based on
 	  the 'nfmark' value in the frame. This can be set by the mark target.
@@ -106,9 +129,11 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_MARK
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_PKTTYPE
-	tristate "ebt: packet type filter support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_PKTTYPE
+	prompt "packet type filter support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the packet type match, which allows matching on the
 	  type of packet based on its Ethernet "class" (as determined by
@@ -117,18 +142,22 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_PKTTYPE
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_STP
-	tristate "ebt: STP filter support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_STP
+	prompt "STP filter support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the Spanning Tree Protocol match, which
 	  allows STP header field filtering.
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_VLAN
-	tristate "ebt: 802.1Q VLAN filter support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_VLAN
+	prompt "802.1Q VLAN filter support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the 802.1Q vlan match, which allows the filtering of
 	  802.1Q vlan fields.
@@ -137,27 +166,33 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_VLAN
 #
 # targets
 #
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_ARPREPLY
-	tristate "ebt: arp reply target support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_ARPREPLY
+	prompt "arp reply target support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the arp reply target, which allows
 	  automatically sending arp replies to arp requests.
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_DNAT
-	tristate "ebt: dnat target support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_DNAT
+	prompt "dnat target support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the MAC DNAT target, which allows altering the MAC
 	  destination address of frames.
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_MARK_T
-	tristate "ebt: mark target support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_MARK_T
+	prompt "mark target support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the mark target, which allows marking frames by
 	  setting the 'nfmark' value in the frame.
@@ -166,18 +201,22 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_MARK_T
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_REDIRECT
-	tristate "ebt: redirect target support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_REDIRECT
+	prompt "redirect target support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the MAC redirect target, which allows altering the MAC
 	  destination address of a frame to that of the device it arrived on.
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_SNAT
-	tristate "ebt: snat target support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_SNAT
+	prompt "snat target support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the MAC SNAT target, which allows altering the MAC
 	  source address of frames.
@@ -186,9 +225,11 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_SNAT
 #
 # watchers
 #
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_LOG
-	tristate "ebt: log support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_LOG
+	prompt "log support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option adds the log watcher, that you can use in any rule
 	  in any ebtables table. It records info about the frame header
@@ -196,9 +237,11 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_LOG
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_ULOG
-	tristate "ebt: ulog support (OBSOLETE)"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_ULOG
+	prompt "ulog support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option enables the old bridge-specific "ebt_ulog" implementation
 	  which has been obsoleted by the new "nfnetlink_log" code (see
@@ -213,9 +256,11 @@ config ADK_KPACKAGE_KMOD_BRIDGE_EBT_ULOG
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KPACKAGE_KMOD_BRIDGE_EBT_NFLOG
-	tristate "ebt: nflog support"
-	depends on ADK_KPACKAGE_KMOD_BRIDGE_NF_EBTABLES
+config ADK_KERNEL_BRIDGE_EBT_NFLOG
+	prompt "nflog support"
+	tristate
+	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	default n
 	help
 	  This option enables the nflog watcher, which allows to LOG
 	  messages through the netfilter logging API, which can use

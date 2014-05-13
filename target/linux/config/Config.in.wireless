@@ -8,25 +8,25 @@ config ADK_KERNEL_WIRELESS
 config ADK_KERNEL_WIRELESS_EXT
 	boolean
 
-config ADK_KPACKAGE_KMOD_RFKILL
+config ADK_KERNEL_RFKILL
 	tristate
 	
 config ADK_KERNEL_MAC80211_LEDS
 	boolean
-	select ADK_KPACKAGE_KMOD_LEDS_CLASS
+	select ADK_KERNEL_LEDS_CLASS
 	select ADK_KERNEL_NEW_LEDS
 	select ADK_KERNEL_LEDS_TRIGGERS
 
 config ADK_KERNEL_WLAN_80211
 	boolean
 
-config ADK_KPACKAGE_KMOD_RT2X00
+config ADK_KERNEL_RT2X00
 	tristate
 
-config ADK_KPACKAGE_KMOD_RT2X00_LIB_USB
+config ADK_KERNEL_RT2X00_LIB_USB
 	tristate
 
-config ADK_KPACKAGE_KMOD_RT2X00_LIB_PCI
+config ADK_KERNEL_RT2X00_LIB_PCI
 	tristate
 
 # vendor stuff
@@ -42,12 +42,6 @@ config ADK_KERNEL_RTL_CARDS
 config ADK_KERNEL_BCMA_POSSIBLE
 	boolean
 
-config ADK_KERNEL_RT2X00
-	boolean
-	select ADK_KPACKAGE_KMOD_RT2X00
-	select ADK_KPACKAGE_KMOD_FW_LOADER
-	select ADK_KPACKAGE_KMOD_EEPROM_93CX6
-
 config ADK_KERNEL_RT2800USB_RT3573
 	boolean
 
@@ -60,8 +54,8 @@ config ADK_KERNEL_RT2800USB_RT55XX
 config ADK_KERNEL_RT2800USB_UNKNOWN
 	boolean
 
-config ADK_KERNEL_MOD_LIB80211
-	select ADK_KPACKAGE_KMOD_CRYPTO_MICHAEL_MIC
+config ADK_KERNEL_LIB80211
+	select ADK_KERNEL_CRYPTO_MICHAEL_MIC
 	tristate
 
 config ADK_KERNEL_CFG80211_WEXT
@@ -70,7 +64,7 @@ config ADK_KERNEL_CFG80211_WEXT
 config ADK_KERNEL_ATH_COMMON
 	tristate
 
-config ADK_KPACKAGE_KMOD_P54_COMMON
+config ADK_KERNEL_P54_COMMON
 	tristate
 
 config ADK_KERNEL_MAC80211_DEBUG_MENU
@@ -83,22 +77,22 @@ config ADK_KERNEL_MAC80211_VERBOSE_DEBUG
 config ADK_KERNEL_MAC80211_DEBUGFS
 	boolean
 
-config ADK_KPACKAGE_KMOD_CFG80211
+config ADK_KERNEL_CFG80211
 	tristate
 	select ADK_KERNEL_WIRELESS
 	select ADK_KERNEL_WLAN_80211
-	select ADK_KPACKAGE_KMOD_RFKILL
+	select ADK_KERNEL_RFKILL
 
-config ADK_KPACKAGE_KMOD_MAC80211
+config ADK_KERNEL_MAC80211
 	tristate
 	select ADK_KERNEL_WIRELESS
 	select ADK_KERNEL_WLAN_80211
 	select ADK_KERNEL_MOD_LIB80211
-	select ADK_KPACKAGE_KMOD_CFG80211
-	select ADK_KPACKAGE_KMOD_CRYPTO_AES
-	select ADK_KPACKAGE_KMOD_CRYPTO_ECB
-	select ADK_KPACKAGE_KMOD_CRYPTO_ARC4
-	select ADK_KPACKAGE_KMOD_RFKILL
+	select ADK_KERNEL_CFG80211
+	select ADK_KERNEL_CRYPTO_AES
+	select ADK_KERNEL_CRYPTO_ECB
+	select ADK_KERNEL_CRYPTO_ARC4
+	select ADK_KERNEL_RFKILL
 
 config ADK_DEBUG_MAC80211
 	boolean
@@ -112,55 +106,55 @@ depends on ADK_TARGET_WITH_CARDBUS || ADK_TARGET_WITH_PCMCIA || ADK_TARGET_WITH_
 config ADK_KERNEL_BRCMFMAC_SDIO
 	boolean
 
-config ADK_KPACKAGE_KMOD_BRCMFMAC
+config ADK_KERNEL_BRCMFMAC
 	prompt "Broadcom brcmfmac wireless driver"
 	tristate
 	select ADK_KERNEL_WIRELESS
 	select ADK_KERNEL_WLAN_80211
-	select ADK_KPACKAGE_KMOD_CFG80211
-	select ADK_PACKAGE_BRCMFMAC_FIRMWARE
+	select ADK_KERNEL_CFG80211
 	select ADK_KERNEL_BCMA_POSSIBLE
 	select ADK_KERNEL_BRCMFMAC_SDIO
+	select ADK_PACKAGE_BRCMFMAC_FIRMWARE
 	depends on ADK_TARGET_WITH_SDIO
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default m if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 	help
-	  Driver for Broadcom wireless.
+	  Driver for Broadcom FullMac wireless cards
 
 config ADK_KERNEL_ATH6KL_SDIO
 	boolean
 
-config ADK_KPACKAGE_KMOD_ATH6KL
+config ADK_KERNEL_ATH6KL
 	prompt "Atheros 6kl wireless driver"
 	tristate
 	select ADK_KERNEL_NET_VENDOR_ATHEROS
 	select ADK_KERNEL_ATH_CARDS
 	select ADK_KERNEL_ATH6KL_SDIO
-	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KERNEL_MAC80211
 	depends on ADK_TARGET_WITH_SDIO
 	default n
 	help
-	  Driver for Atheros wireless 6KL.
+	  Driver for Atheros wireless 6KL
 
-config ADK_KPACKAGE_KMOD_ATH5K
+config ADK_KERNEL_ATH5K
 	prompt "Atheros 5xxx wireless driver"
 	tristate
 	select ADK_KERNEL_MAC80211_LEDS
 	select ADK_KERNEL_ATH_CARDS
 	select ADK_KERNEL_ATH_COMMON
-	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KERNEL_MAC80211
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_AHB
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_FON_FON2100
+	default m if ADK_TARGET_SYSTEM_IBM_X40
+	default m if ADK_TARGET_SYSTEM_FON_FON2100
 	default n
 	help
-	  Driver for Atheros 5xxx/24xx cards.
+	  Driver for Atheros 5xxx/24xx cards
 
 config ADK_KERNEL_ATH5K_DEBUG
 	prompt "enable debugging info via debugfs"
 	boolean
 	select ADK_DEBUG_MAC80211
-	depends on ADK_KPACKAGE_KMOD_ATH5K
+	depends on ADK_KERNEL_ATH5K
 	default n
 	help
    	  Atheros 5xxx debugging messages.
@@ -174,72 +168,72 @@ config ADK_KERNEL_ATH5K_DEBUG
 	  parameter. For example:
 	   insmod ath5k.ko debug=0x00000400
 
-config ADK_KPACKAGE_KMOD_B43
+config ADK_KERNEL_B43
 	prompt "Broadcom B43xx wireless driver"
 	tristate
+	select ADK_KERNEL_FW_LOADER
+	select ADK_KERNEL_MAC80211
 	select ADK_PACKAGE_B43_FIRMWARE
-	select ADK_KPACKAGE_KMOD_FW_LOADER
-	select ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_MINIPCI
 	default n
 	help
-	  Driver for Broadcom B43xx wireless chips.
+	  Driver for Broadcom B43xx wireless chips
 
-config ADK_KPACKAGE_KMOD_B43LEGACY
+config ADK_KERNEL_B43LEGACY
 	prompt "Broadcom B43xx (legacy) wireless driver" 
 	tristate
+	select ADK_KERNEL_FW_LOADER
+	select ADK_KERNEL_MAC80211
 	select ADK_PACKAGE_B43_FIRMWARE
-	select ADK_KPACKAGE_KMOD_FW_LOADER
-	select ADK_KPACKAGE_KMOD_MAC80211
 	depends on ADK_TARGET_WITH_SSB || ADK_TARGET_WITH_MINIPCI
 	default n
 	help
-	  Driver for Broadcom B43xx wireless chips.
+	  Driver for Broadcom B43xx wireless chips
 
-config ADK_KPACKAGE_KMOD_HOSTAP
+config ADK_KERNEL_HOSTAP
 	prompt "HostAP driver"
 	tristate
-	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KERNEL_MAC80211
 	default n
 	depends on ADK_TARGET_WITH_PCMCIA
 	help
-	  HostAP Driver for wireless chips.
+	  HostAP Driver for wireless chips
 
-config ADK_KPACKAGE_KMOD_HOSTAP_CS
+config ADK_KERNEL_HOSTAP_CS
 	prompt "HostAP driver for PC Cards"
 	tristate
-	select ADK_KPACKAGE_KMOD_HOSTAP
+	select ADK_KERNEL_HOSTAP
 	depends on ADK_TARGET_WITH_PCMCIA
-	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default m if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default n
 	help
-	  HostAP CS Driver for wireless chips.
+	  HostAP CS Driver for wireless chips
 
-config ADK_KPACKAGE_KMOD_RTL8187
+config ADK_KERNEL_RTL8187
 	prompt "Realtek RTL8187/RTL8187B wireless driver"
 	tristate
+	select ADK_KERNEL_MAC80211
+	select ADK_KERNEL_EEPROM_93CX6
 	depends on ADK_TARGET_WITH_USB
-	select ADK_KPACKAGE_KMOD_MAC80211
-	select ADK_KPACKAGE_KMOD_EEPROM_93CX6
 	default n
 	help
-	  Driver for Realtek RTL8187/RTL8187B wireless chips.
+	  Driver for Realtek RTL8187/RTL8187B wireless chips
 
-config ADK_KPACKAGE_KMOD_P54_USB
+config ADK_KERNEL_P54_USB
 	prompt "Prism54 USB support"
 	tristate
-	select ADK_KPACKAGE_KMOD_P54_COMMON
-	select ADK_KPACKAGE_KMOD_FW_LOADER
-	select ADK_PACKAGE_P54_FIRMWARE
 	select ADK_KERNEL_EXPERIMENTAL
-	select ADK_KPACKAGE_KMOD_MAC80211
-	select ADK_KPACKAGE_KMOD_CRC_CCITT
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_KERNEL_P54_COMMON
+	select ADK_KERNEL_FW_LOADER
+	select ADK_KERNEL_MAC80211
+	select ADK_KERNEL_CRC_CCITT
+	select ADK_PACKAGE_P54_FIRMWARE
+	depends on ADK_TARGET_WITH_USB
 	default n
 	help
-	  Driver for Prism54 USB adaptors.
+	  Driver for Prism54 USB adaptors
 
-config ADK_KPACKAGE_KMOD_RT2800USB
+config ADK_KERNEL_RT2800USB
 	prompt "Ralink rt2800 USB driver"
 	tristate
 	select ADK_KERNEL_RT2X00
@@ -247,32 +241,32 @@ config ADK_KPACKAGE_KMOD_RT2800USB
 	select ADK_KERNEL_RT2800USB_RT53XX
 	select ADK_KERNEL_RT2800USB_RT55XX
 	select ADK_KERNEL_RT2800USB_UNKNOWN
-	select ADK_KPACKAGE_KMOD_RT2X00_LIB_USB
-	select ADK_KPACKAGE_KMOD_MAC80211
-	select ADK_KPACKAGE_KMOD_CRC_CCITT
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	select ADK_KERNEL_RT2X00_LIB_USB
+	select ADK_KERNEL_MAC80211
+	select ADK_KERNEL_CRC_CCITT
+	depends on ADK_TARGET_WITH_USB
 	default n
 	help
-	  Driver for Ralink RT2800 USB.
+	  Driver for Ralink RT2800 USB
 
-config ADK_KPACKAGE_KMOD_RTL8192CU
+config ADK_KERNEL_RTL8192CU
 	prompt "Realtek RTL8192CU USB driver"
 	tristate
 	select ADK_KERNEL_RTL_CARDS
-	select ADK_KPACKAGE_KMOD_MAC80211
-	select ADK_KPACKAGE_KMOD_FW_LOADER
+	select ADK_KERNEL_MAC80211
+	select ADK_KERNEL_FW_LOADER
 	select ADK_PACKAGE_REALTEK_FIRMWARE
-	depends on ADK_PACKAGE_KMOD_USB_CONTROLLER
+	depends on ADK_TARGET_WITH_USB
 	default n
 	help
 	  Driver for Realtek RTL8192CU USB
 
-config ADK_KPACKAGE_KMOD_RT2400PCI
+config ADK_KERNEL_RT2400PCI
 	prompt "Ralink rt2400 PCI driver"
 	tristate
 	select ADK_KERNEL_RT2X00
-	select ADK_KPACKAGE_KMOD_RT2X00_LIB_PCI
-	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KERNEL_RT2X00_LIB_PCI
+	select ADK_KERNEL_MAC80211
 	select ADK_KERNEL_MAC80211_LEDS
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	default n
@@ -280,12 +274,12 @@ config ADK_KPACKAGE_KMOD_RT2400PCI
 	  This adds support for rt2400 wireless chipset family.
 	  Supported chips: RT2460.
 
-config ADK_KPACKAGE_KMOD_RT2500PCI
+config ADK_KERNEL_RT2500PCI
 	prompt "Ralink rt2500 PCI driver"
 	tristate
 	select ADK_KERNEL_RT2X00
-	select ADK_KPACKAGE_KMOD_RT2X00_LIB_PCI
-	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KERNEL_RT2X00_LIB_PCI
+	select ADK_KERNEL_MAC80211
 	select ADK_KERNEL_MAC80211_LEDS
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	default n
@@ -293,14 +287,14 @@ config ADK_KPACKAGE_KMOD_RT2500PCI
 	  This adds support for rt2500 wireless chipset family.
 	  Supported chips: RT2560.
 
-config ADK_KPACKAGE_KMOD_RT61PCI
+config ADK_KERNEL_RT61PCI
 	prompt "Ralink rt2501/rt61 PCI driver"
 	tristate
 	select ADK_KERNEL_RT2X00
-	select ADK_KPACKAGE_KMOD_RT2X00_LIB_PCI
-	select ADK_KPACKAGE_KMOD_MAC80211
+	select ADK_KERNEL_RT2X00_LIB_PCI
+	select ADK_KERNEL_MAC80211
 	select ADK_KERNEL_MAC80211_LEDS
-	select ADK_KPACKAGE_KMOD_CRC_ITU_T
+	select ADK_KERNEL_CRC_ITU_T
 	select ADK_PACKAGE_RT61_FIRMWARE
 	depends on ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_PCI
 	default n
@@ -312,9 +306,9 @@ config ADK_KERNEL_RT2X00_DEBUG
 	prompt "enable debugging info"
 	boolean
 	select ADK_DEBUG_MAC80211
-	depends on ADK_KPACKAGE_KMOD_RT61PCI || \
-		ADK_KPACKAGE_KMOD_RT2500PCI || \
-		ADK_KPACKAGE_KMOD_RT2400PCI	
+	depends on ADK_KERNEL_RT61PCI || \
+		ADK_KERNEL_RT2500PCI || \
+		ADK_KERNEL_RT2400PCI	
 	default n
 	help
 

@@ -36,7 +36,6 @@ PKGSD_SWAP_UTILS:=	swap space management utilities
 PKGSS_SWAP_UTILS:=	libblkid
 PKGSC_SWAP_UTILS:=	fs
 PKGSD_LOSETUP:=		loop devices management utilities
-PKGSS_LOSETUP:=		kmod-blk-dev-loop
 PKGSC_LOSETUP:=		fs
 PKGSD_MOUNT:=		mount/umount utilities
 PKGSS_MOUNT:=		libblkid libmount libuuid libncurses

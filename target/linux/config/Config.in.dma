@@ -1,7 +1,7 @@
 config ADK_KERNEL_DMADEVICES
 	boolean
 
-config ADK_KPACKAGE_KMOD_DMA_BCM2708
+config ADK_KERNEL_DMA_BCM2708
         tristate
         select ADK_KERNEL_DMADEVICES
 

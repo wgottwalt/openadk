@@ -10,25 +10,16 @@ all: install
 # The following target combines all kernel-related variables and
 # config files into a single one to be used as the final kernel
 # configuration when building. This is how it's done:
-# 1) fetch all ADK_KPACKAGE_KMOD_* vars into
-#    .kernelconfig.modules and set them to "m",
-#    fetch all ADK_KERNEL_MOD_* vars into 
-#    .kernelconfig.modules and set them to "m"
-# 2) fetch all enabled ADK_KERNEL_* vars into
-#    .kernelconfig.kernel (no conversion, as they are booleans)
-# 3) get the global and device-specific static kernel config and place it into
+# 1) fetch all enabled ADK_KERNEL_* vars into
+#    .kernelconfig.kernel
+# 2) get the global and device-specific static kernel config and place it into
 #    .kernelconfig.board
-# 4) prepare for merging:
-#    * if a variable is disabled in .kernelconfig.board and
-#      enabled in either of .kernelconfig.{modules,kernel},
-#      remove it from .kernelconfig.board
-#    * append ${FS_CMDLINE} to the kernel commandline inside
-#      .kernelconfig.board
-# 5) merge (cat) it all together into .kernelconfig.tmp
-# 6) check if .kernelconfig.tmp differs from the current one
+# 3) append ${FS_CMDLINE} to the kernel commandline inside .kernelconfig.board
+# 4) merge both together into .kernelconfig.tmp
+# 5) check if .kernelconfig.tmp differs from the current one
 #    (.kernelconfig) at all, overwriting the current one
 #    only if it does (so the timestamp stays intact)
-# 7) remove the temporary .kernelconfig.tmp
+# 6) remove the temporary .kernelconfig.tmp
 ###
 ADK_PACKAGE_CRYPTINIT_ROOT:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_ROOT)))
 ADK_PACKAGE_CRYPTINIT_SWAP:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_SWAP)))
@@ -36,10 +27,6 @@ ADK_PACKAGE_CMDLINE:=root=$(ADK_PACKAGE_CRYPTINIT_ROOT) swap=$(ADK_PACKAGE_CRYPT
 
 ifeq (${ADK_TARGET_KERNEL_CUSTOMISING},y)
 config-prepare: $(TOPDIR)/.config
-	@sed -n '/^ADK_KPACKAGE_KMOD/s//CONFIG/p' ${TOPDIR}/.config | \
-	    sed 's/=y/=m/' >${BUILD_DIR}/.kernelconfig.modules
-	@sed -n '/^ADK_KERNEL_MOD/s//CONFIG/p' ${TOPDIR}/.config | \
-	    sed 's/=y/=m/' >>${BUILD_DIR}/.kernelconfig.modules
 	@sed -n '/^ADK_KERNEL/s//CONFIG/p' ${TOPDIR}/.config \
 	    >${BUILD_DIR}/.kernelconfig.kernel
 	@if [ -f ${ADK_TARGET_ARCH}/kernel/${ADK_TARGET_KERNEL_MINICONFIG} ];then \
@@ -49,10 +36,6 @@ config-prepare: $(TOPDIR)/.config
 		echo "no miniconfig found for target system"; \
 		exit 1; \
 	fi
-	@(cat ${BUILD_DIR}/.kernelconfig.{modules,kernel} | \
-	    while IFS='=' read symbol value; do \
-		sed -i -e "/^# $$symbol/d" ${BUILD_DIR}/.kernelconfig.board; \
-	done;)
 ifeq ($(ADK_TARGET_ROOTFS_NFSROOT),)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ro"#' \
 		${BUILD_DIR}/.kernelconfig.board
@@ -83,8 +66,7 @@ ifeq ($(ADK_KERNEL_NETCONSOLE),y)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 netconsole=@$(ADK_PARAMETER_NETCONSOLE_SRC_IP)/,@$(ADK_PARAMETER_NETCONSOLE_DST_IP)/"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
-	@cd ${BUILD_DIR} && cat .kernelconfig.board \
-	    .kernelconfig.kernel .kernelconfig.modules \
+	@cd ${BUILD_DIR} && cat .kernelconfig.board .kernelconfig.kernel \
 	    >.kernelconfig.tmp
 	@cd ${BUILD_DIR} && cmp -s .kernelconfig.tmp .kernelconfig || \
 	    cp .kernelconfig.tmp .kernelconfig

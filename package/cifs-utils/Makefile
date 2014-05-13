@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		93697dbc043cb4d5c66e15e281f872e5
 PKG_DESCR:=		CIFS network filesystem utilities
 PKG_SECTION:=		net/fs
-PKG_DEPENDS:=		kmod-cifs kmod-nls-utf8
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		https://wiki.samba.org/index.php/LinuxCIFS_utils
 PKG_SITES:=		ftp://ftp.samba.org/pub/linux-cifs/cifs-utils/

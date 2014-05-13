@@ -7,9 +7,9 @@ PKG_NAME:=		vtun
 PKG_VERSION:=		3.0.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c342ffe77055d4248a38f0b380f28c1b
-PKG_DESCR:=		A VPN tunnel daemon
+PKG_DESCR:=		VPN tunnel daemon
 PKG_SECTION:=		net/misc
-PKG_DEPENDS:=		zlib libopenssl liblzo kmod-tun
+PKG_DEPENDS:=		zlib libopenssl liblzo
 PKG_BUILDDEP:=		zlib openssl liblzo
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vtun/}
 

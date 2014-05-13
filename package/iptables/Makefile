@@ -9,11 +9,6 @@ PKG_RELEASE:=		5
 PKG_MD5SUM:=		536d048c8e8eeebcd9757d0863ebb0c0
 PKG_DESCR:=		netfilter firewalling software
 PKG_SECTION:=		firewall
-PKG_DEPENDS:=		kmod-ip-nf-iptables kmod-nf-conntrack
-PKG_DEPENDS+=		kmod-nf-conntrack-ipv4 kmod-full-nat
-PKG_DEPENDS+=		kmod-ip-nf-target-masquerade kmod-ip-nf-target-reject
-PKG_DEPENDS+=		kmod-ip-nf-filter kmod-ip-nf-match-state
-PKG_DEPENDS+=		kmod-netfilter-xt-target-tcpmss
 PKG_BUILDDEP:=		autotool libnetfilter_conntrack
 PKG_URL:=		http://www.netfilter.org/
 PKG_SITES:=		http://www.netfilter.org/projects/iptables/files/
@@ -24,7 +19,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 PKG_SUBPKGS:=		IPTABLES IP6TABLES
 PKGSD_IPTABLES:=	iptables for IPv4
 PKGSD_IP6TABLES:=	iptables for IPv6
-PKGSS_IP6TABLES:=	iptables kmod-ip6-nf-iptables kmod-nf-conntrack-ipv6 kmod-ip6-nf-filter kmod-ip6-nf-target-reject
+PKGSS_IP6TABLES:=	iptables
 
 include ${TOPDIR}/mk/package.mk
 

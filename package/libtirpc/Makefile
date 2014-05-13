@@ -29,9 +29,9 @@ $(eval $(call PKG_template,LIBTIRPC,libtirpc,${PKG_VERSION}-${PKG_RELEASE},${PKG
 AUTOTOOL_STYLE:=	autoreconf
 
 ifeq (${ADK_PACKAGE_LIBTIRPC_WITH_GSS},y)
-CONFIGURE_ARGS+=	--enable-gss
+CONFIGURE_ARGS+=	--enable-gssapi
 else
-CONFIGURE_ARGS+=	--disable-gss
+CONFIGURE_ARGS+=	--disable-gssapi
 endif
 
 ifeq (${ADK_PACKAGE_LIBTIRPC_WITH_IPV6},y)

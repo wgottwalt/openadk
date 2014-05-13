@@ -10,7 +10,6 @@ PKG_MD5SUM:=		eade38998313c25fd7934719cdf8a2ea
 PKG_DESCR:=		cryptodev-linux kernel module
 PKG_SECTION:=		crypto
 PKG_BUILDDEP:=		openssl
-PKG_DEPENDS:=		kmod-crypto-manager2
 PKG_URL:=		http://home.gna.org/cryptodev-linux/
 PKG_SITES:=		http://download.gna.org/cryptodev-linux/
 

@@ -785,10 +785,7 @@ int main() {
 				if (result == 1) {
 					val = strtok_r(hvalue, " ", &saveptr);
 					while (val != NULL) { 
-						if (strncmp(val, "kmod", 4) == 0)
-							fprintf(cfg, "\tselect ADK_KPACKAGE_%s\n", toupperstr(val));
-						else
-							fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
+						fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
 						val = strtok_r(NULL, " ", &saveptr);
 					}
 				}
@@ -880,10 +877,7 @@ int main() {
 				if (pkg_depends != NULL) {
 					token = strtok(pkg_depends, " ");
 					while (token != NULL) {
-						if (strncmp(token, "kmod", 4) == 0)
-							fprintf(cfg, "\tselect ADK_KPACKAGE_%s\n", toupperstr(token));
-						else
-							fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(token));
+						fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(token));
 						token = strtok(NULL, " ");
 					}
 					free(pkg_depends);
@@ -996,10 +990,7 @@ int main() {
 						if (result == 1) {
 							val = strtok_r(hvalue, " ", &saveptr);
 							while (val != NULL) { 
-								if (strncmp(val, "kmod", 4) == 0)
-									fprintf(cfg, "\tselect ADK_KPACKAGE_%s\n", toupperstr(val));
-								else
-									fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
+								fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
 								val = strtok_r(NULL, " ", &saveptr);
 							}
 						}
@@ -1055,10 +1046,7 @@ int main() {
 						if (result == 1) {
 							val = strtok_r(hvalue, " ", &saveptr);
 							while (val != NULL) { 
-								if (strncmp(val, "kmod", 4) == 0)
-									fprintf(cfg, "\tselect ADK_KPACKAGE_%s\n", toupperstr(val));
-								else
-									fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
+								fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
 								val = strtok_r(NULL, " ", &saveptr);
 							}
 						}
@@ -1095,10 +1083,7 @@ int main() {
 						if (result == 1) {
 							val = strtok_r(hvalue, " ", &saveptr);
 							while (val != NULL) { 
-								if (strncmp(val, "kmod", 4) == 0)
-									fprintf(cfg, "\tselect ADK_KPACKAGE_%s\n", toupperstr(val));
-								else
-									fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
+								fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
 								val = strtok_r(NULL, " ", &saveptr);
 							}
 						}

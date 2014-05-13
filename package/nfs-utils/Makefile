@@ -15,10 +15,8 @@ PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
 PKG_SUBPKGS:=		NFS_UTILS NFS_UTILS_CLIENT NFS_UTILS_SERVER
-PKGSS_NFS_UTILS_CLIENT:=kmod-nfs-fs kmod-sunrpc
 PKGSD_NFS_UTILS_CLIENT:=client utilities
 PKGSN_NFS_UTILS_CLIENT:=nfs-utils
-PKGSS_NFS_UTILS_SERVER:=kmod-nfsd kmod-sunrpc
 PKGSD_NFS_UTILS_SERVER:=server daemons and utilities
 PKGSN_NFS_UTILS_SERVER:=nfs-utils
 
@@ -26,7 +24,7 @@ PKG_CHOICES_NFS_UTILS:=	V3 V4
 PKGCD_V3:=		NFS version 3
 PKGCD_V4:=		NFS version 4
 PKGCB_V4:=		libevent libnfsidmap krb5 libgssglue librpcsecgss
-PKGCS_V4:=		libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue kmod-rpcsec-gss-krb5 kmod-sunrpc-gss
+PKGCS_V4:=		libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
