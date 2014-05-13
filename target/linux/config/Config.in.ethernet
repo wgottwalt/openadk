@@ -58,6 +58,7 @@ config ADK_KERNEL_FEC
 	tristate
 	select ADK_KERNEL_NET_VENDOR_FREESCALE
 	select ADK_KERNEL_AT803X_PHY
+	depends on ADK_TARGET_SYSTEM_CUBOX_I
 	default y if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 	help
@@ -66,6 +67,7 @@ config ADK_KERNEL_FEC
 config ADK_KERNEL_KORINA
 	prompt "Korina ethernet driver"
 	tristate
+	depends on ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	default n
 	help
@@ -75,7 +77,7 @@ config ADK_KERNEL_USB_NET_SMSC95XX
 	prompt "SMSC95XX USB ethernet driver"
 	tristate
 	select ADK_KERNEL_USB_USBNET
-	depends on ADK_TARGET_WITH_USB
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 	help
@@ -85,6 +87,7 @@ config ADK_KERNEL_SMC91X
 	prompt "SMC91X ethernet driver"
 	tristate
 	select ADK_KERNEL_NET_VENDOR_SMSC
+	depends on ADK_TARGET_SYSTEM_ARM_FM || ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB || ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	default y if ADK_TARGET_SYSTEM_ARM_FM
 	default y if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	default y if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
@@ -97,6 +100,7 @@ config ADK_KERNEL_VIA_RHINE
 	tristate
 	select ADK_KERNEL_NET_VENDOR_VIA
 	select ADK_KERNEL_VIA_RHINE_MMIO
+	depends on ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	default n
 	help
@@ -106,6 +110,7 @@ config ADK_KERNEL_XILINX_AXI_EMAC
 	prompt "Xilinx AXI ethernet driver"
 	tristate
 	select ADK_KERNEL_NET_VENDOR_XILINX
+	depends on ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
 	default y if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
 	default n
 	help
@@ -115,6 +120,7 @@ config ADK_KERNEL_XILINX_EMACLITE
 	prompt "Xilinx Emaclite ethernet driver"
 	tristate
 	select ADK_KERNEL_NET_VENDOR_XILINX
+	depends on ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 	default y if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 	default n
 	help

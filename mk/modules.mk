@@ -63,6 +63,18 @@ $(eval $(call KMOD_template,R8169,r8169,\
 	$(MODULES_DIR)/kernel/drivers/net/ethernet/realtek/r8169 \
 ,20))
 
+$(eval $(call KMOD_template,FEC,fec,\
+	$(MODULES_DIR)/kernel/drivers/net/ethernet/freescale/fec \
+,20))
+
+$(eval $(call KMOD_template,SMC91X,smc91x,\
+	$(MODULES_DIR)/kernel/drivers/net/ethernet/smsc/smc91x \
+,20))
+
+$(eval $(call KMOD_template,VIA_RHINE,via-rhine,\
+	$(MODULES_DIR)/kernel/drivers/net/ethernet/via/via-rhine \
+,20))
+
 # 
 # Wireless network devices
 #
