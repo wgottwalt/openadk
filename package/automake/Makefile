@@ -4,15 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		automake
-PKG_VERSION:=		1.12.2
+PKG_VERSION:=		1.14.1
 PKG_RELEASE:=		1
-PKG_EXTRAVER:=		1.12
-PKG_MD5SUM:=		56c3ab38a5ed8f2b825341b4e007372a
-PKG_DESCR:=		GNU automake
+PKG_EXTRAVER:=		1.14
+PKG_MD5SUM:=		7fc29854c520f56b07aa232a0f880292
+PKG_DESCR:=		tool for automatically generating Makefile.in
 PKG_SECTION:=		lang
-PKG_BUILDDEP:=		autoconf-host automake-host
+PKG_BUILDDEP:=		m4-host autoconf-host autoconf
+HOST_BUILDDEP:=		autoconf-host
 PKG_URL:=		http://www.gnu.org/software/automake/
-PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
+PKG_SITES:=		${MASTER_SITE_GNU:=automake/}
 PKG_OPTS:=		noscripts
 
 include ${TOPDIR}/mk/host.mk
