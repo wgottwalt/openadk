@@ -21,7 +21,7 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--enable-kernel="2.6.32" \
 			--enable-add-ons
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
-			SHELL='${SHELL}' \
+			CONFIG_SHELL='$(strip ${SHELL})' \
                         BUILD_CC=${CC_FOR_BUILD} \
                         CFLAGS="$(TARGET_CFLAGS)" \
                         CC="${TARGET_CC}" \
