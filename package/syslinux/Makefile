@@ -6,22 +6,27 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		syslinux
 PKG_VERSION:=		6.02
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1df6ff6e4a82b9d7d71a9e7cb5851a5f
+PKG_MD5SUM:=		6f275813a1b08cf852e55c0a3f8fbc78
 PKG_DESCR:=		lightweight bootloaders
 PKG_SECTION:=		boot
 HOST_BUILDDEP:=		nasm-host
 PKG_URL:=		http://syslinux.zytor.com/wiki/index.php/The_Syslinux_Project
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/boot/syslinux/
 
-PKG_CFLINE_SYSLINUX:=	depends on ADK_HOST_ONLY
+PKG_SUBPKGS:=		PXELINUX
+PKGSD_PXELINUX:=	pxelinux
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,SYSLINUX,syslinux,$(PKG_VERSION)-${PKG_RELEASE}))
+$(eval $(call PKG_template,PXELINUX,pxelinux,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		manual
 HOST_ALL_TARGET:=	bios installer
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
 
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
@@ -34,6 +39,14 @@ syslinux-hostinstall:
 		$(STAGING_HOST_DIR)/usr/share/syslinux
 	$(CP) $(WRKBUILD)/bios/com32/elflink/ldlinux/ldlinux.c32 \
 		$(STAGING_HOST_DIR)/usr/share/syslinux
+
+pxelinux-install:
+	$(INSTALL_DIR) ${IDIR_PXELINUX}/tftpboot/pxelinux.cfg
+	$(CP) $(WRKBUILD)/bios/core/pxelinux.0 \
+		${IDIR_PXELINUX}/tftpboot
+	$(CP) $(WRKBUILD)/bios/com32/elflink/ldlinux/ldlinux.c32 \
+		${IDIR_PXELINUX}/tftpboot
+	$(CP) ./files/default ${IDIR_PXELINUX}/tftpboot/pxelinux.cfg
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

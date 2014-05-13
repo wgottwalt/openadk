@@ -5,12 +5,17 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dnsmasq
 PKG_VERSION:=		2.69
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		c5a1152e646eb54db4f33f8e0deee180
 PKG_DESCR:=		lightweight DNS and DHCP server
 PKG_SECTION:=		dns
 PKG_URL:=		http://thekelleys.org.uk/dnsmasq/
 PKG_SITES:=		http://thekelleys.org.uk/dnsmasq/
+
+PKG_FLAVOURS_DNSMASQ:=	PXE
+PKGFD_PXE:=		enable PXE network boot
+PKGFS_PXE:=		pxelinux
+PKGFB_PXE:=		syslinux
 
 include ${TOPDIR}/mk/package.mk
 

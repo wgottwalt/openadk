@@ -1,0 +1,4 @@
+DEFAULT x86
+PROMPT 0
+LABEL x86
+  KERNEL kernel
