@@ -27,5 +27,4 @@ new or update packages:
 - lms perl 
 
 system target specific:
-- fix ibm x40 bootup
 - microblaze: add cfgfs partition to dts, add partition to spartan dts

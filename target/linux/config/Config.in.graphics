@@ -16,6 +16,7 @@ config ADK_KERNEL_VT_CONSOLE
 config ADK_KERNEL_VGA_CONSOLE
 	boolean
 	default y if ADK_HARDWARE_VBOX
+	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
 
 config ADK_KERNEL_FONTS
@@ -196,7 +197,7 @@ config ADK_KERNEL_FB_BCM2708
 	 Framebuffer support for Raspberry PI.
 
 config ADK_HARDWARE_GRAPHICS_INTEL_I915
-	prompt "Support for Intel graphic cards (AGP/DRM/KMS/NM10)"
+	prompt "Support for Intel graphic cards (AGP/DRM/KMS)"
 	boolean
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_DRM

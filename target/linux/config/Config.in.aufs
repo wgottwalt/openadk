@@ -1,3 +1,5 @@
+menu "Overlay filesystems"
+
 config ADK_KERNEL_AUFS_FS
 	prompt "Aufs (Advanced multi layered unification filesystem) support"
 	tristate
@@ -89,3 +91,4 @@ config ADK_KERNEL_AUFS_DEBUG
 	  It will have a negative impact to the performance.
 
 endif
+endmenu

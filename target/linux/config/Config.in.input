@@ -104,6 +104,7 @@ config ADK_KERNEL_LOGITECH_DINOVO
 	boolean
 	select ADK_KERNEL_HID_LOGITECH
 	select ADK_KERNEL_HID_LOGITECH_DJ
+	depends on ADK_KERNEL_USB_HID
 	default n
 	help
 	  Support for Logitech DiNovo keyboard/mouse combination.

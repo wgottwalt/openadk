@@ -11,9 +11,6 @@ config ADK_KERNEL_EXPORTFS
 	boolean
 	default y
 
-config ADK_KERNEL_YAFFS_FS
-	tristate
-
 config ADK_KERNEL_YAFFS_YAFFS1
 	boolean
 
@@ -56,19 +53,8 @@ config ADK_KERNEL_JFFS2_ZLIB
 	boolean
 	default n
 
-config ADK_KERNEL_JFFS2_FS
-	tristate
-	prompt "JFFS2 filesystem"
-	select ADK_KERNEL_MISC_FILESYSTEMS
-	select ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
-	select ADK_KERNEL_JFFS2_ZLIB
+menu "Filesystems"
 
-config ADK_KERNEL_SQUASHFS
-	prompt "SquashFS filesystem"
-	tristate
-	select ADK_KERNEL_MISC_FILESYSTEMS
-	select ADK_KERNEL_SQUASHFS_XZ
-	default n
 
 config ADK_KERNEL_EXT2_FS
 	prompt "EXT2 filesystem support"
@@ -244,6 +230,33 @@ config ADK_KERNEL_UDF_FS
 	  if written to by other UDF utilities, such as DirectCD.
 	  Please read <file:Documentation/filesystems/udf.txt>.
 
+config ADK_KERNEL_JFFS2_FS
+	tristate
+	prompt "JFFS2 filesystem"
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
+	select ADK_KERNEL_JFFS2_ZLIB
+
+config ADK_KERNEL_SQUASHFS
+	prompt "SquashFS filesystem"
+	tristate
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_SQUASHFS_XZ
+	default n
+
+config ADK_KERNEL_YAFFS_FS
+	prompt "YAFFS2 filesystem"
+	select ADK_KERNEL_YAFFS_YAFFS1
+	select ADK_KERNEL_YAFFS_YAFFS2
+	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
+	select ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
+	tristate
+	help
+	  YAFFS2 filesystem for NAND devices
+
+endmenu
+
+menu "Filesystem features"
 config ADK_KERNEL_INOTIFY
 	prompt "Inotify file change notification support"
 	boolean
@@ -266,6 +279,7 @@ config ADK_KERNEL_INOTIFY_USER
 	  directories via a single open fd.  Events are read from the file
 	  descriptor, which is also select()- and poll()-able.
 
+endmenu
 source target/linux/config/Config.in.fsnet
 source target/linux/config/Config.in.nls
 source target/linux/config/Config.in.aufs

@@ -1,3 +1,5 @@
+menu "Network filesystems"
+
 config ADK_KERNEL_FS_POSIX_ACL
 	boolean
 	default y
@@ -172,3 +174,4 @@ config ADK_KERNEL_RPCSEC_GSS_KRB5
 	default n
 	help
 
+endmenu
