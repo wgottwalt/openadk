@@ -29,7 +29,6 @@ ifeq ($(ADK_STATIC),y)
 TARGET_LDFLAGS+=	-static
 endif
 
-TARGET_LDFLAGS+=	-static-libgcc
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 CONFIGURE_ARGS+=	--disable-pam \

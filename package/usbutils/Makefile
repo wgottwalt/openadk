@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		c9aa14ee3d6c991fda183f42cf72a8a8
 PKG_DESCR:=		program to list USB devices
 PKG_SECTION:=		utils
-PKG_DEPENDS:=		libusb libusb-compat libpthread zlib librt libgcc
+PKG_DEPENDS:=		libusb libusb-compat libpthread zlib librt
 PKG_BUILDDEP:=		libusb libusb-compat zlib
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/usb/usbutils/
 

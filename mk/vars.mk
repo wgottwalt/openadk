@@ -93,6 +93,11 @@ TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
+# use -static-libgcc by default
+TARGET_CFLAGS+=		-static-libgcc
+TARGET_CXXFLAGS+=	-static-libgcc
+TARGET_LDFLAGS+=	-static-libgcc
+
 # security optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
 TARGET_LDFLAGS+=	-Wl,-z,relro,-z,now
 # needed for musl ppc 

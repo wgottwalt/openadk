@@ -10,7 +10,7 @@ PKG_MD5SUM:=		3e9800e6bca1fbac0eea4d41baa7f239
 PKG_DESCR:=		secure shell implementation
 PKG_SECTION:=		net/security
 PKG_BUILDDEP:=		zlib openssl
-PKG_DEPENDS:=		zlib libopenssl libpthread libgcc
+PKG_DEPENDS:=		zlib libopenssl libpthread
 PKG_URL:=		http://www.openssh.com/
 PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/
 

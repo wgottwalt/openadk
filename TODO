@@ -7,8 +7,6 @@ toolchain stuff:
 - check for gcc and SSP
 - config.site/config.cache usage for speedup?
   http://lists.gnu.org/archive/html/autoconf/2014-03/msg00031.html
-- fixup rework libgcc --export-symbols
-- libgcc static?
 - static toolchain support
 
 base system:

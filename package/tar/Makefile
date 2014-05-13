@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		0ced6f20b9fa1bea588005b5ad4b52c1
 PKG_DESCR:=		archiving application
 PKG_SECTION:=		archive
-PKG_DEPENDS:=		libgcc
 PKG_URL:=		http://mirrors.kernel.org/gnu/tar/
 PKG_SITES:=		http://mirrors.kernel.org/gnu/tar/
 

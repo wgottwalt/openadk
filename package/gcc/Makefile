@@ -8,7 +8,7 @@ PKG_NAME:=		gcc
 PKG_DESCR:=		GNU C compiler
 PKG_SECTION:=		lang
 PKG_OPTS:=		noremove
-PKG_DEPENDS:=		libmpc libgmp mpfr libgcc
+PKG_DEPENDS:=		libmpc libgmp mpfr
 PKG_BUILDDEP:=		libmpc gmp mpfr
 
 PKG_SUBPKGS:=		GCC GXX

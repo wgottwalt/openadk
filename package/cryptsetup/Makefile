@@ -11,7 +11,7 @@ PKG_DESCR:=		LUKS cryptsetup tools
 PKG_SECTION:=		crypto
 PKG_DEPENDS:=		libgcrypt device-mapper libuuid libpopt
 PKG_DEPENDS+=		kmod-dm-crypt kmod-crypto-aes kmod-crypto-cbc
-PKG_DEPENDS+=		kmod-crypto-sha256 kmod-blk-dev-dm libgcc
+PKG_DEPENDS+=		kmod-crypto-sha256 kmod-blk-dev-dm
 PKG_BUILDDEP:=		libgcrypt popt e2fsprogs lvm
 PKG_URL:=		http://cryptsetup.googlecode.com/
 PKG_SITES:=		http://cryptsetup.googlecode.com/files/
@@ -23,7 +23,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CRYPTSETUP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-selinux
 
 cryptsetup-install:

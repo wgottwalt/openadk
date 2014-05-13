@@ -10,7 +10,7 @@ PKG_MD5SUM:=		6f63d103465b86ca0ebe4189ea54731c
 PKG_DESCR:=		fast version control system
 PKG_SECTION:=		scm
 PKG_BUILDDEP:=		openssl curl expat autotool
-PKG_DEPENDS:=		libopenssl libcurl libexpat libpthread libgcc
+PKG_DEPENDS:=		libopenssl libcurl libexpat libpthread
 PKG_URL:=		http://git-scm.com/
 PKG_SITES:=		http://git-core.googlecode.com/files/
 

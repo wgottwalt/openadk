@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		3fb091987063135fd86b3b5ba5010479
 PKG_DESCR:=		PHP language interpreter
 PKG_SECTION:=		lang
-PKG_DEPENDS:=		libpthread librt libgcc
+PKG_DEPENDS:=		libpthread librt
 PHP_URL:=		http://www.php.net/
 PKG_SITES:=		http://de.php.net/distributions/
 

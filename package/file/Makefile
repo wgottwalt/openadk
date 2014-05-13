@@ -7,10 +7,10 @@ PKG_NAME:=		file
 PKG_VERSION:=		5.17
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e19c47e069ced7b01ccb4db402cc01d3
-PKG_DESCR:=		a file type guesser
+PKG_DESCR:=		file type guesser
 PKG_SECTION:=		utils
 PKG_BUILDDEP:=		file-host
-PKG_DEPENDS:=		libmagic libgcc
+PKG_DEPENDS:=		libmagic
 PKG_URL:=		http://www.darwinsys.com/file
 PKG_SITES:=		ftp://ftp.fu-berlin.de/unix/tools/file/ \
 			ftp://ftp.astron.com/pub/file/

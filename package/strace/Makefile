@@ -9,7 +9,6 @@ PKG_RELEASE:=		8
 PKG_MD5SUM:=		c575ef43829586801f514fd91bfe7575
 PKG_DESCR:=		system call trace program
 PKG_SECTION:=		debug
-PKG_DEPENDS:=		libgcc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
 
 include ${TOPDIR}/mk/package.mk
