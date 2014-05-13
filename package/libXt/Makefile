@@ -10,9 +10,9 @@ PKG_MD5SUM:=		7a80ed7aba06668b12ebd0910318a1f1
 PKG_DESCR:=		X Toolkit Intrinsics libraries
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libsm libice libuuid libx11 libxau libxdmcp libxcb
-PKG_BUILDDEP:=		autotool util-macros-host libICE-host libSM-host
-PKG_BUILDDEP+=		libXt-host
+PKG_BUILDDEP:=		autotool
 PKG_BUILDDEP+=		libSM libX11 kbproto util-macros
+HOST_BUILDDEP:=		util-macros-host libICE-host libSM-host
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libxt
 PKG_OPTS:=		dev
@@ -27,7 +27,6 @@ $(eval $(call PKG_template,LIBXT,libxt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 
 HOST_STYLE:=		auto
 AUTOTOOL_STYLE:=	autoreconf
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ENV+=		CFLAGS_FOR_BUILD="$(CPPFLAGS_FOR_BUILD) $(CFLAGS_FOR_BUILD)"
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 

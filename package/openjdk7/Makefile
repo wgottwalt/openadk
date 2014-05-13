@@ -102,6 +102,7 @@ OPENJDK_NATIVE_ENV:=	JAVACFLAGS="-cp ${STAGING_HOST_DIR}/usr/share/java/libgcj-$
 			BOOTCLASSPATH="$(STAGING_HOST_DIR)/usr/share/jamvm/classes.zip:$(STAGING_HOST_DIR)/usr/share/classpath/glibj.zip" \
 			FFI_LDFLAGS="$(LDFLAGS_FOR_BUILD)" \
 			OTHER_LDFLAGS='$(LDFLAGS_FOR_BUILD)' \
+			ALT_OPENWIN_HOME=$(STAGING_HOST_DIR)/usr/ \
 			ALT_CUPS_HEADERS_PATH="$(STAGING_HOST_DIR)/usr/include" \
 			ALT_FREETYPE_HEADERS_PATH="$(STAGING_HOST_DIR)/usr/include" \
 			ALT_FREETYPE_LIB_PATH="$(STAGING_HOST_DIR)/usr/lib" \
