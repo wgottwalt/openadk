@@ -20,13 +20,6 @@ config ADK_KERNEL_YAFFS_YAFFS2
 config ADK_KERNEL_YAFFS_AUTO_YAFFS2
 	boolean
 
-config ADK_KERNEL_YAFFS_CHECKPOINT_RESERVED_BLOCKS
-	int
-	default 0
-
-config ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
-	boolean
-
 config ADK_KERNEL_DNOTIFY
 	boolean
 
@@ -54,7 +47,6 @@ config ADK_KERNEL_JFFS2_ZLIB
 	default n
 
 menu "Filesystems"
-
 
 config ADK_KERNEL_EXT2_FS
 	prompt "EXT2 filesystem support"
@@ -246,11 +238,14 @@ config ADK_KERNEL_SQUASHFS
 
 config ADK_KERNEL_YAFFS_FS
 	prompt "YAFFS2 filesystem"
+	tristate
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_MTD
+	select ADK_KERNEL_MTD_BLOCK
 	select ADK_KERNEL_YAFFS_YAFFS1
 	select ADK_KERNEL_YAFFS_YAFFS2
 	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
-	select ADK_KERNEL_YAFFS_SHORT_NAMES_IN_RAM
-	tristate
+	depends on ADK_KERNEL_VERSION_3_14_4
 	help
 	  YAFFS2 filesystem for NAND devices
 
