@@ -44,10 +44,10 @@ kernel-install:
 		-n foxg20 $(KERNEL) $(MAKE_TRACE)
 
 ifeq ($(ADK_TARGET_FS),nfsroot)
-imageinstall: kernel-install ${FW_DIR}/${ROOTFSUSERTARBALL}
+imageinstall: ${FW_DIR}/${ROOTFSUSERTARBALL}
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
-	@echo 'Type dhcp via u-boot prompt to load kernel'
-	@echo 'After that type bootm to load the kernel'
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The nfs root tarball is: ${FW_DIR}/${ROOTFSUSERTARBALL}'
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
