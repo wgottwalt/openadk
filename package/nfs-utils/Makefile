@@ -10,7 +10,7 @@ PKG_MD5SUM:=		3ac3726eda563946d1f44ac3e5b61d56
 PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		keyutils libtirpc rpcbind libdevmapper libpthread
-PKG_BUILDDEP:=		keyutils libtirpc lvm
+PKG_BUILDDEP:=		autotool keyutils libtirpc lvm
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
@@ -34,6 +34,7 @@ $(eval $(call PKG_template,NFS_UTILS,nfs-utils,${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,NFS_UTILS_CLIENT,nfs-utils-client,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_CLIENT},${PKGSD_NFS_UTILS_CLIENT},${PKG_SECTION}))
 $(eval $(call PKG_template,NFS_UTILS_SERVER,nfs-utils-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_SERVER},${PKGSD_NFS_UTILS_SERVER},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoreconf
 ifeq ($(ADK_PACKAGE_NFS_UTILS_SERVER_V4),y)
 CONFIGURE_ARGS+=	--enable-nfsv4 \
 			--disable-nfsv41 \
