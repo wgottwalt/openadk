@@ -1,5 +1,5 @@
---- rpcbind-0.2.0.orig/src/security.c	2009-05-29 15:38:22.000000000 +0200
-+++ rpcbind-0.2.0/src/security.c	2010-02-27 19:57:02.000000000 +0100
+--- rpcbind-0.2.1.orig/src/security.c	2013-08-19 16:49:34.000000000 +0200
++++ rpcbind-0.2.1/src/security.c	2014-05-14 18:57:44.779341743 +0200
 @@ -20,12 +20,28 @@
  /*
   * XXX for special case checks in check_callit.
@@ -10,7 +10,6 @@
 -#include <rpcsvc/yp.h>
 -#include <rpcsvc/ypclnt.h>
 -#include <rpcsvc/yppasswd.h>
-+
 +#define MOUNTPROC_MNT 1
 +#define MOUNTPROC_UMNT 3
 +
@@ -32,6 +31,7 @@
 +#define YPPROC_ALL     8
 +
 +#define YPBINDPROC_SETDOM      2
++
  
  #include "rpcbind.h"
  
