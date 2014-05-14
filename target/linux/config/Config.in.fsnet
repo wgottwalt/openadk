@@ -48,6 +48,10 @@ config ADK_KERNEL_CODA_FS
 	help
 	  This is the kernel part of the client for the CODA filesystem.
 
+config ADK_KERNEL_NFS_V3
+	boolean
+	default n
+
 config ADK_KERNEL_NFS_V4
 	boolean
 	select ADK_KERNEL_NETWORK_FILESYSTEMS

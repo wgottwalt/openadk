@@ -560,7 +560,7 @@ depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH && !ADK_TOOLCHAI
 default ADK_TARGET_ROOTFS_ARCHIVE
 
 config ADK_TARGET_ROOTFS_INITRAMFS
-	bool "initramfs filesystem"
+	boolean "initramfs filesystem"
 	depends on \
 		ADK_HARDWARE_QEMU || \
 		ADK_LINUX_M68K || \
@@ -579,7 +579,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 	  create an read-only initramfs system.
 
 config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
-	bool "initramfs filesystem included into kernel image"
+	boolean "initramfs filesystem included into kernel image"
 	select ADK_LINUX_INITRAMFS_BUILTIN
 	depends on \
 		ADK_HARDWARE_QEMU || \
@@ -598,7 +598,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	  create an read-only initramfs system.
 
 config ADK_TARGET_ROOTFS_SQUASHFS
-	bool "Compressed read-only root filesystem (squashfs)"
+	boolean "Compressed read-only root filesystem (squashfs)"
 	select ADK_KERNEL_SQUASHFS
 	select ADK_HOST_NEED_SQUASHFS
 	select ADK_HOST_NEED_QEMU if ADK_HARDWARE_QEMU
@@ -608,7 +608,7 @@ config ADK_TARGET_ROOTFS_SQUASHFS
 	  highly compressed read-only filesystem for MTD flash systems.
 
 config ADK_TARGET_ROOTFS_JFFS2
-	bool "Compressed read-write root filesystem (jffs2)"
+	boolean "Compressed read-write root filesystem (jffs2)"
 	select ADK_KERNEL_JFFS2_FS
 	select ADK_HOST_NEED_MTD_UTILS
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_HARDWARE_QEMU
@@ -617,7 +617,7 @@ config ADK_TARGET_ROOTFS_JFFS2
 	  compressed read-write filesystem for MTD flash systems.
 
 config ADK_TARGET_ROOTFS_YAFFS
-	bool "YAFFS2 root filesystem (NAND)"
+	boolean "YAFFS2 root filesystem (NAND)"
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_YAFFS_FS
 	select ADK_KERNEL_YAFFS_YAFFS2
@@ -627,7 +627,7 @@ config ADK_TARGET_ROOTFS_YAFFS
 	  Root filesystem on NAND flash with YAFFS2.
 
 config ADK_TARGET_ROOTFS_NFSROOT
-	bool "NFS root"
+	boolean "NFS root"
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	select ADK_KERNEL_SUNRPC
 	select ADK_KERNEL_NFS_FS
@@ -643,7 +643,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	  Root filesystem mounted via NFS. (DHCP)
 
 config ADK_TARGET_ROOTFS_USB
-	bool "Boot from USB stick"
+	boolean "Boot from USB stick"
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_BLK_DEV_SD
@@ -658,7 +658,7 @@ config ADK_TARGET_ROOTFS_USB
 	  Boot system from USB stick.
 
 config ADK_TARGET_ROOTFS_ISO
-	bool "ISO image"
+	boolean "ISO image"
 	select ADK_KERNEL_ISO9660_FS
 	select ADK_KERNEL_JOLIET
 	select ADK_KERNEL_SCSI
@@ -672,13 +672,13 @@ config ADK_TARGET_ROOTFS_ISO
 	  Use this option to create a bootable ISO image.
 
 config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
-	bool "Archive usable for initramfs creation"
+	boolean "Archive usable for initramfs creation"
 	help
 	  Use this option if your planning to create a initramfs,
 	  useful for adk-test-framework.
 
 config ADK_TARGET_ROOTFS_ARCHIVE
-	bool "Archive usable for different filesystems"
+	boolean "Archive usable for different filesystems"
 	select ADK_HOST_NEED_GENEXT2FS if ADK_HARDWARE_QEMU
 	select ADK_KERNEL_EXT2_FS if ADK_HARDWARE_QEMU
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_HARDWARE_QEMU
