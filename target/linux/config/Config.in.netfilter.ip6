@@ -1,8 +1,11 @@
 config ADK_KERNEL_NF_CONNTRACK_IPV6
-	tristate "IPv6 connection tracking support"
+	prompt "IPv6 connection tracking support"
+	tristate
 	select ADK_KERNEL_NF_CONNTRACK
 	select ADK_KERNEL_IPV6
-	---help---
+	default y if ADK_TARGET_IPTABLES
+	default n
+	help
 	  Connection tracking keeps a record of what packets have passed
 	  through your machine, in order to figure out how they are related
 	  into connections.
@@ -17,6 +20,8 @@ config ADK_KERNEL_IP6_NF_IPTABLES
 	tristate "IP6 tables support (required for filtering)"
 	select ADK_KERNEL_NETFILTER_XTABLES
 	select ADK_KERNEL_IPV6
+	default y if ADK_TARGET_IPTABLES
+	default n
 	help
 	  ip6tables is a general, extensible packet identification framework.
 	  Currently only the packet filtering and packet mangling subsystem
@@ -86,7 +91,10 @@ config ADK_KERNEL_IP6_NF_MATCH_RT
 # The targets
 
 config ADK_KERNEL_IP6_NF_FILTER
-	tristate "Packet filtering"
+	prompt "Packet filtering"
+	tristate
+	default y if ADK_TARGET_IPTABLES
+	default n
 	help
 	  Packet filtering defines a table `filter', which has a series of
 	  rules for simple packet filtering at local input, forwarding and

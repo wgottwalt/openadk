@@ -1,29 +1,33 @@
 menu "Netfilter (Firewall/Filtering)"
 
 config ADK_KERNEL_NETFILTER
-	bool
+	boolean
+	default y if ADK_PACKAGE_IPTABLES
 	default n
 
 config ADK_KERNEL_NETFILTER_ADVANCED
-	bool
+	boolean
+	default y if ADK_PACKAGE_IPTABLES
 	default n
 
 config ADK_KERNEL_BRIDGE_NETFILTER
-	bool
+	boolean
+	default y if ADK_PACKAGE_EBTABLES
 	default n
 
 config ADK_KERNEL_NETFILTER_XTABLES
-	bool
+	boolean
 	select ADK_KERNEL_NETFILTER
 	select ADK_KERNEL_NETFILTER_ADVANCED
+	default y if ADK_PACKAGE_IPTABLES
 	default n
 
 config ADK_KERNEL_NETFILTER_DEBUG
-	bool
+	boolean
 	default n
 
 config ADK_KERNEL_IP_NF_MATCH_LAYER7_DEBUG
-	bool
+	boolean
 	default n
 
 config ADK_KERNEL_IP_NF_TARGET_MIRROR
@@ -75,7 +79,7 @@ config ADK_KERNEL_IP6_NF_IPTABLES
 	default n
 
 config ADK_KERNEL_IP_ROUTE_FWMARK
-	bool
+	boolean
 	default n
 
 config ADK_KERNEL_IP_NF_QUEUE

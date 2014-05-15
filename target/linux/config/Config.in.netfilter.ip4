@@ -1,5 +1,6 @@
 config ADK_KERNEL_NF_CONNTRACK_IPV4
-	bool 'IPv4 connection tracking support (required for NAT)'
+	prompt 'IPv4 connection tracking support (required for NAT)'
+	tristate
 	select ADK_KERNEL_NF_CONNTRACK
 	default m if ADK_PACKAGE_IPTABLES
 	default n
@@ -39,23 +40,8 @@ config ADK_KERNEL_IP_NF_FILTER
 	  rules for simple packet filtering at local input, forwarding and
 	  local output.  See the man page for iptables(8).
 
-config ADK_KERNEL_FULL_NAT
-	tristate "Meta package for Full NAT"
-	select ADK_KERNEL_NF_NAT if ADK_KERNEL_VERSION_3_4_87
-	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_10_37
-	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_11_10
-	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_12_18
-	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_13_11
-	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_14_4
-	select ADK_KERNEL_NF_NAT_IPV4 if ADK_KERNEL_VERSION_3_15_RC5
-	default m if ADK_PACKAGE_IPTABLES
-	default n
-
 config ADK_KERNEL_NF_NAT
-	tristate 'Full NAT'
-	depends on ADK_KERNEL_IP_NF_IPTABLES
-	depends on ADK_KERNEL_VERSION_3_4_87
-	default m if ADK_PACKAGE_IPTABLES
+	tristate
 	default n
 	help
 	  The Full NAT option allows masquerading, port forwarding and other
@@ -64,13 +50,8 @@ config ADK_KERNEL_NF_NAT
 
 config ADK_KERNEL_NF_NAT_IPV4
 	tristate 'Full NAT'
+	select ADK_KERNEL_NF_NAT
 	depends on ADK_KERNEL_IP_NF_IPTABLES
-	depends on ADK_KERNEL_VERSION_3_10_37 \
-		|| ADK_KERNEL_VERSION_3_11_10 \
-		|| ADK_KERNEL_VERSION_3_12_18 \
-		|| ADK_KERNEL_VERSION_3_13_11 \
-		|| ADK_KERNEL_VERSION_3_14_4 \
-		|| ADK_KERNEL_VERSION_3_15_RC5
 	default m if ADK_PACKAGE_IPTABLES
 	default n
 	help

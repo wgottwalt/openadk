@@ -5,8 +5,11 @@ config ADK_KERNEL_NETFILTER_NETLINK_LOG
 	  for logging packets via NFNETLINK.
 
 config ADK_KERNEL_NF_CONNTRACK
-	tristate 'Netfilter connection tracking support'
+	prompt 'Netfilter connection tracking support'
+	tristate
 	select ADK_KERNEL_NETFILTER_XTABLES
+	default m if ADK_PACKAGE_IPTABLES
+	default n
 	help
 	  Connection tracking keeps a record of what packets have passed
 	  through your machine, in order to figure out how they are related
