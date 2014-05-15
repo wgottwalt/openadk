@@ -6,9 +6,6 @@ PWD:=		${TOPDIR}
 
 include Makefile.inc
 
-ADKVERSION=	0.1.0
-export ADKVERSION
-
 ifneq (${package},)
 subdir:=	package/${package}
 _subdir_dep:=	${TOPDIR}/.config
