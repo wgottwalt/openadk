@@ -12,8 +12,8 @@ diff -Nur icedtea-2.4.7.orig/Makefile.in icedtea-2.4.7/Makefile.in
  	patches/boot/demos.patch patches/boot/fphexconstants.patch \
 diff -Nur icedtea-2.4.7.orig/patches/openadk.patch icedtea-2.4.7/patches/openadk.patch
 --- icedtea-2.4.7.orig/patches/openadk.patch	1970-01-01 01:00:00.000000000 +0100
-+++ icedtea-2.4.7/patches/openadk.patch	2014-05-13 16:57:07.173804037 +0200
-@@ -0,0 +1,7009 @@
++++ icedtea-2.4.7/patches/openadk.patch	2014-05-15 15:52:54.503242117 +0200
+@@ -0,0 +1,7020 @@
 +diff -Nur openjdk.orig/hotspot/make/linux/makefiles/zeroshark.make openjdk/hotspot/make/linux/makefiles/zeroshark.make
 +--- openjdk.orig/hotspot/make/linux/makefiles/zeroshark.make	2014-02-20 19:51:45.000000000 +0100
 ++++ openjdk/hotspot/make/linux/makefiles/zeroshark.make	2014-05-13 16:56:38.917714592 +0200
@@ -6993,6 +6993,17 @@ diff -Nur icedtea-2.4.7.orig/patches/openadk.patch icedtea-2.4.7/patches/openadk
 + # If a sanity file doesn't exist, just make sure it's dir exists
 + $(SANITY_FILES):
 + 	-@$(prep-target)
++diff -Nur openjdk-boot.orig/jdk/make/javax/sound/jsoundalsa/Makefile openjdk-boot/jdk/make/javax/sound/jsoundalsa/Makefile
++--- openjdk-boot.orig/jdk/make/javax/sound/jsoundalsa/Makefile	2014-04-12 01:23:06.000000000 +0200
+++++ openjdk-boot/jdk/make/javax/sound/jsoundalsa/Makefile	2014-05-15 15:49:03.886269427 +0200
++@@ -72,6 +72,7 @@
++ 	-DUSE_PORTS=TRUE  \
++ 	-DUSE_PLATFORM_MIDI_OUT=TRUE \
++ 	-DUSE_PLATFORM_MIDI_IN=TRUE \
+++	$(ALSA_CPPFLAGS) \
++ 	-I$(SHARE_SRC)/native/com/sun/media/sound
++ 
++ #
 +diff -Nur openjdk-boot.orig/jdk/make/sun/awt/mawt.gmk openjdk-boot/jdk/make/sun/awt/mawt.gmk
 +--- openjdk-boot.orig/jdk/make/sun/awt/mawt.gmk	2014-04-12 01:23:06.000000000 +0200
 ++++ openjdk-boot/jdk/make/sun/awt/mawt.gmk	2014-05-01 20:03:03.681930476 +0200

@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		jamvm
 PKG_VERSION:=		1.5.4
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		7654e9657691f5f09c4f481ed4686176
 PKG_DESCR:=		Java Virtual Machine (JVM) implementation
 PKG_SECTION:=		lang
@@ -26,6 +26,7 @@ $(eval $(call PKG_template,JAMVM,jamvm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--libdir=$(STAGING_HOST_DIR)/usr/lib/jamvm \
+			--includedir=$(STAGING_HOST_DIR)/usr/include/jamvm \
 			--with-classpath-install-dir=$(STAGING_HOST_DIR)/usr
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
