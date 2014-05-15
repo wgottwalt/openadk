@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		rpcbind
 PKG_VERSION:=		0.2.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		0a5f9c2142af814c55d957aaab3bcc68
 PKG_DESCR:=		converts RPC program numbers into universal addresses
 PKG_SECTION:=		net/misc
@@ -23,7 +23,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,RPCBIND,rpcbind,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/tirpc
-CONFIGURE_ARGS+=	--disable-libwrap
+CONFIGURE_ARGS+=	--disable-libwrap \
+			--with-rpcuser=root
 
 rpcbind-install:
 	$(INSTALL_DIR) $(IDIR_RPCBIND)/usr/bin
