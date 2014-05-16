@@ -1,38 +1,47 @@
 menu "Audio devices support"
 depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SOUND
 
-config ADK_KERNEL_SND_ARM
-	boolean
-
 config ADK_KERNEL_SND_PCI
 	boolean
 
 config ADK_KERNEL_SND_USB
 	boolean
 
-config ADK_KERNEL_SND_SOC_GENERIC_DMAENGINE_PCM
+config ADK_KERNEL_SND_SOC
+	tristate
+
+config ADK_KERNEL_SND_ARM
 	boolean
+
+config ADK_KERNEL_SND_SOC_GENERIC_DMAENGINE_PCM
+	tristate
+
+config ADK_KERNEL_SND_SOC_FSL_SPDIF
+	tristate
 
 config ADK_KERNEL_SND_SOC_IMX_PCM_DMA
-	boolean
+	tristate
 
 config ADK_KERNEL_SND_SOC_IMX_HDMI_DMA
-	boolean
+	tristate
 
 config ADK_KERNEL_SND_SOC_IMX_SPDIF
-	boolean
+	tristate
 
 config ADK_KERNEL_SND_SOC_IMX_HDMI
-	boolean
+	tristate
 
 config ADK_KERNEL_SND_PXA2XX_AC97
-	boolean
+	tristate
+
+config ADK_KERNEL_SND_PXA2XX_SOC
+	tristate
 
 config ADK_KERNEL_SND_TIMER
-	boolean
+	tristate
 
 config ADK_KERNEL_SND_PCM
-	boolean
+	tristate
 
 config ADK_KERNEL_SND_HWDEP
 	tristate
@@ -103,14 +112,6 @@ config ADK_KERNEL_SND_CS5535AUDIO
 	help
 	 ALSA AMD CS5535 driver
 
-config ADK_KERNEL_SND_SOC
-	tristate
-	default n
-
-config ADK_KERNEL_SND_PXA2XX_SOC
-	tristate
-	default n
-
 config ADK_KERNEL_SND_PXA2XX_SOC_SPITZ
 	prompt "Sharp Zaurus SoC"
 	tristate
@@ -170,6 +171,7 @@ config ADK_KERNEL_SND_IMX_SOC
 	select ADK_KERNEL_SND_COMPRESS
 	select ADK_KERNEL_SND_PCM_DMAENGINE if !ADK_KERNEL_VERSION_3_10_37 && !ADK_KERNEL_VERSION_3_10_30
 	select ADK_KERNEL_SND_SOC_GENERIC_DMAENGINE_PCM if ADK_KERNEL_VERSION_3_10_30
+	select ADK_KERNEL_SND_SOC_FSL_SPDIF if ADK_KERNEL_VERSION_3_10_30
 	select ADK_KERNEL_SND_SOC_IMX_PCM_DMA
 	select ADK_KERNEL_SND_SOC_IMX_HDMI_DMA
 	select ADK_KERNEL_SND_SOC_IMX_HDMI
