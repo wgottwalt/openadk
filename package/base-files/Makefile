@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		90
+PKG_RELEASE:=		91
 PKG_SECTION:=		base
 PKG_DESCR:=		basic files and scripts
 
@@ -81,16 +81,7 @@ endif
 	test -z $(ADK_RUNTIME_PASSWORD) || \
 	    $(SED) 's,\*NP\*,'"$$($(STAGING_HOST_DIR)/usr/bin/mkcrypt \
 	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
-	test -z $(GIT) || \
-	     $(GIT) log -1|head -1|sed -e 's#commit ##' \
-		> $(IDIR_BASE_FILES)/etc/adkversion
-	test -z $(ADK_TARGET_SYSTEM) || \
-	    echo $(ADK_TARGET_SYSTEM) > $(IDIR_BASE_FILES)/etc/adktarget
 	echo $(ADK_RUNTIME_TMPFS_SIZE) > $(IDIR_BASE_FILES)/etc/tmpfs
-ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
-	gzip -9c ${TOPDIR}/.config >$(IDIR_BASE_FILES)/etc/adkconfig.gz
-	chmod 600 $(IDIR_BASE_FILES)/etc/adkconfig.gz
-endif
 ifeq ($(ADK_TARGET_WITH_ROOT_RW),y)
 	echo 'export IPKGTMPDIR=/root/.ipkg' >> $(IDIR_BASE_FILES)/etc/profile
 else
@@ -162,7 +153,7 @@ ifeq (${SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE_IP},y)
 	echo -e "  bridge-ports ${SIMPLE_NETWORK_CONFIG_ETH1_BRIDGE}" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 endif
 	# newline at the end of interfaces file
-	echo -en "\n" >>  ${IDIR_BASE_FILES}/etc/network/interfaces
+	printf "\n" >>  ${IDIR_BASE_FILES}/etc/network/interfaces
 	# resolver config
 	rm ${IDIR_BASE_FILES}/etc/resolv.conf
 	echo -e "nameserver ${SIMPLE_NETWORK_CONFIG_RESOLV}" > ${IDIR_BASE_FILES}/etc/resolv.conf

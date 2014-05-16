@@ -53,6 +53,13 @@ image-prepare-post:
 	$(SED) '/^root:/s!:/bin/sh$$!:${ROOTSH}!' ${TARGET_DIR}/etc/passwd
 	-rm -f ${TARGET_DIR}/bin/sh
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
+	test -z $(GIT) || \
+	     $(GIT) log -1|head -1|sed -e 's#commit ##' \
+		> $(TARGET_DIR)/etc/.adkversion
+ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
+	gzip -9c ${TOPDIR}/.config > $(TARGET_DIR)/etc/adkconfig.gz
+	chmod 600 $(TARGET_DIR)/etc/adkconfig.gz
+endif
 ifeq ($(ADK_LINUX_X86_64),y)
 ifeq ($(ADK_TARGET_ABI_32),)
 	# fixup lib dirs
