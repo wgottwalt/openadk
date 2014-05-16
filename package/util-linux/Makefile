@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.24.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		3f191727a0d28f7204b755cf1b6ea0aa
 PKG_DESCR:=		basic Linux utilities
 PKG_SECTION:=		core
@@ -63,6 +63,7 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-schedutils \
 			--disable-cramfs \
 			--disable-login \
+			--disable-eject \
 			--enable-su \
 			--enable-libuuid \
 			--enable-libblkid \
