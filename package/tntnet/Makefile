@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		tntnet
-PKG_VERSION:=		2.1
+PKG_VERSION:=		2.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a9c85aa6d624f7f88c48374f28730242
+PKG_MD5SUM:=		febe799675c1b8b2f7259bad30cf6f23
 PKG_DESCR:=		small C++ application server
 PKG_SECTION:=		www
 PKG_DEPENDS:=		cxxtools zlib libpthread
@@ -16,8 +16,10 @@ PKG_SITES:=		http://www.tntnet.org/download/
 PKG_NEED_CXX:=		1
 
 PKG_ARCH_DEPENDS:=	!arm !m68k
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_CHOICES_TNTNET:=	WITH_GNUTLS WITH_OPENSSL WITHOUT_SSL
+PKG_CHOICES_TNTNET:=	WITH_OPENSSL WITHOUT_SSL
+#PKG_CHOICES_TNTNET:=	WITH_GNUTLS WITH_OPENSSL WITHOUT_SSL
 PKGCD_WITHOUT_SSL:=	use no SSL
 PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl
@@ -43,6 +45,8 @@ endif
 CONFIGURE_ARGS+=	--without-epoll \
 			--without-sdk \
 			--without-cgi \
+			--disable-unittest \
+			--disable-locale \
 			--without-sendfile
 CONFIGURE_ENV+= 	CXXFLAGS='${TARGET_CXXFLAGS}' \
 			ac_cv_path_cxxtools_config=${STAGING_TARGET_DIR}/usr/bin
@@ -61,7 +65,6 @@ post-configure:
 		${SED} 's#postdeps="-lstdc.*#postdeps="-lm"#' \
 			${WRKBUILD}/libtool
 endif
-
 
 tntnet-install:
 	${INSTALL_DIR} ${IDIR_TNTNET}/www

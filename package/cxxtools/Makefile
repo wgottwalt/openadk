@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		cxxtools
-PKG_VERSION:=		2.1.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		2026a2bb23b966f13893167b4dbc5d70
-PKG_DESCR:=		a collection of general-purpose C++ classes (libraries)
+PKG_VERSION:=		2.2.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		aab00068ae5237435b37ac86f2ac7576
+PKG_DESCR:=		collection of general-purpose C++ classes
 PKG_SECTION:=		libs
 PKG_BUILDDEP:=		libiconv-tiny
 PKG_URL:=		http://www.tntnet.org/
@@ -17,12 +17,12 @@ PKG_CXX:=		CXXTOOLS
 PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	!arm !m68k
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CXXTOOLS,cxxtools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 ifeq (${ADK_COMPILE_CXXTOOLS_WITH_UCLIBCXX},y)
 TARGET_CXXFLAGS+=	-fno-builtin -nostdinc++ \
 			-I${STAGING_TARGET_DIR}/usr/include/uClibc++ -Wl,-E
