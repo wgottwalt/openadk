@@ -12,9 +12,7 @@ PKG_SECTION:=		lang
 PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
 
 PKG_CFLINE_GCJ:=	depends on ADK_HOST_ONLY
-
 DISTFILES:=		gcc-$(PKG_VERSION).tar.bz2
-
 WRKDIST=		${WRKDIR}/gcc-${PKG_VERSION}
 
 include $(TOPDIR)/mk/host.mk
@@ -41,10 +39,6 @@ HOST_CONFIGURE_ARGS:=	--enable-dependency-tracking \
 			--disable-decimal-float \
 			--disable-multilib \
 			--disable-bootstrap
-
-post-extract:
-	(cd $(DL_DIR); wget -O ecj.jar ftp://sourceware.org/pub/java/ecj-4.9.jar)
-	(cd $(WRKBUILD); $(CP) $(DL_DIR)/ecj.jar .)
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

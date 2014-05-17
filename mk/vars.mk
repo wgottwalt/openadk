@@ -245,8 +245,8 @@ EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
 				cat $$file | cpio -ivd -H zip ;; \
-			*.arm) \
-				cp $$file ${WRKDIR} ;; \
+			*.arm|*.jar) \
+				mkdir ${WRKBUILD}; cp $$file ${WRKBUILD} ;; \
 			*) \
 				echo "Cannot extract '$$file'" >&2; \
 				false ;; \

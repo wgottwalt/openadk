@@ -6,13 +6,13 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		ecj
 PKG_VERSION:=		4.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c474fa9d0c35a24037c23b6e476862c1
+PKG_MD5SUM:=		7339f199ba11c941890031fd9981d7be
 PKG_DESCR:=		ecj java compiler
 PKG_SECTION:=		lang
+PKG_SITES:=		ftp://sourceware.org/pub/java/
 
 PKG_CFLINE_ECJ:=	depends on ADK_HOST_ONLY
-
-NO_DISTFILES:=		1
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.jar
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
