@@ -118,18 +118,13 @@ config ADK_KERNEL_VERSION_3_13_11
 	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
 
-config ADK_KERNEL_VERSION_3_12_18
-	prompt "3.12.18"
+config ADK_KERNEL_VERSION_3_12_20
+	prompt "3.12.20"
 	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
 
-config ADK_KERNEL_VERSION_3_11_10
-	prompt "3.11.10"
-	depends on !ADK_TARGET_SYSTEM_CUBOX_I
-	boolean
-
-config ADK_KERNEL_VERSION_3_10_37
-	prompt "3.10.37"
+config ADK_KERNEL_VERSION_3_10_40
+	prompt "3.10.40"
 	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
 
@@ -138,8 +133,8 @@ config ADK_KERNEL_VERSION_3_10_30
 	depends on ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
 
-config ADK_KERNEL_VERSION_3_4_87
-	prompt "3.4.87"
+config ADK_KERNEL_VERSION_3_4_90
+	prompt "3.4.90"
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
@@ -151,11 +146,11 @@ config ADK_KERNEL_VERSION
 	default "3.15-rc4" if ADK_KERNEL_VERSION_3_15_RC4
 	default "3.14.4" if ADK_KERNEL_VERSION_3_14_4
 	default "3.13.11" if ADK_KERNEL_VERSION_3_13_11
-	default "3.12.18" if ADK_KERNEL_VERSION_3_12_18
+	default "3.12.20" if ADK_KERNEL_VERSION_3_12_20
 	default "3.11.10" if ADK_KERNEL_VERSION_3_11_10
-	default "3.10.37" if ADK_KERNEL_VERSION_3_10_37
+	default "3.10.40" if ADK_KERNEL_VERSION_3_10_40
 	default "3.10.30" if ADK_KERNEL_VERSION_3_10_30
-	default "3.4.87" if ADK_KERNEL_VERSION_3_4_87
+	default "3.4.90" if ADK_KERNEL_VERSION_3_4_90
 	help
 
 config ADK_KERNEL_COMP_GZIP_RASPBERRY_PI

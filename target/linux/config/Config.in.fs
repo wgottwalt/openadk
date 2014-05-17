@@ -223,11 +223,17 @@ config ADK_KERNEL_UDF_FS
 	  Please read <file:Documentation/filesystems/udf.txt>.
 
 config ADK_KERNEL_JFFS2_FS
-	tristate
 	prompt "JFFS2 filesystem"
+	tristate
 	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_MTD
+	select ADK_KERNEL_MTD_BLOCK
 	select ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
 	select ADK_KERNEL_JFFS2_ZLIB
+	depends on ADK_TARGET_WITH_MTD
+	default n
+	help
+	  JFFS2 flash filesystem
 
 config ADK_KERNEL_SQUASHFS
 	prompt "SquashFS filesystem"
@@ -235,6 +241,8 @@ config ADK_KERNEL_SQUASHFS
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_SQUASHFS_XZ
 	default n
+	help
+	  Squashfs compressed read-only filesystem
 
 config ADK_KERNEL_YAFFS_FS
 	prompt "YAFFS2 filesystem"
@@ -245,6 +253,8 @@ config ADK_KERNEL_YAFFS_FS
 	select ADK_KERNEL_YAFFS_YAFFS1
 	select ADK_KERNEL_YAFFS_YAFFS2
 	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
+	depends on ADK_TARGET_WITH_NAND
+	default n
 	help
 	  YAFFS2 filesystem for NAND devices
 
