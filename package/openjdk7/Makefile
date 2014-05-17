@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
 PKG_VERSION:=		2.4.7
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		f6b28633b9978fadc724247cfc264ff0
 PKG_DESCR:=		OpenJDK 7 Java VM
 PKG_SECTION:=		lang
@@ -43,7 +43,6 @@ TARGET_CFLAGS+=		-D__STDC_LIMIT_MACROS
 # segfaults with march=pentium-m/atom
 TARGET_CFLAGS:=		$(subst march=pentium-m,march=i686,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=		$(subst march=atom,march=i686,$(TARGET_CFLAGS))
-TARGET_CFLAGS:=         $(filter-out -fhonour-copts,$(TARGET_CFLAGS))
 BOOTSTRAPJDK:=		${STAGING_HOST_DIR}/bootstrap-jdk
 
 JDKARCH:=		$(CPU_ARCH)
@@ -63,7 +62,7 @@ CONFIGURE_COMMON:=	--disable-docs \
 			--with-jar=$(BOOTSTRAPJDK)/bin/jar \
 			--with-rmic=$(BOOTSTRAPJDK)/bin/rmic \
 			--with-native2ascii=$(BOOTSTRAPJDK)/bin/native2ascii \
-			--with-gcj=$(STAGING_HOST_DIR)/usr/bin/gcj \
+			--without-gcj \
 			--without-hotspot-build \
 			--enable-nss \
 			--enable-system-zlib \
