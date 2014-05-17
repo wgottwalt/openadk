@@ -21,10 +21,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPERF,iperf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
-TARGET_LDFLAGS+=	-lssp
-endif
-
 ifeq ($(ADK_COMPILE_IPERF_WITH_UCLIBCXX),y)
 TARGET_CXXFLAGS+=	-fno-builtin -fno-rtti -nostdinc++
 TARGET_LDFLAGS+=	-nodefaultlibs
