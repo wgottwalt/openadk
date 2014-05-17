@@ -50,6 +50,7 @@ config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	select ADK_soft_float
 	select ADK_eabi
 	select ADK_CPU_XSCALE
+	select ADK_TARGET_QEMU_WITH_GRAPHIC
 	depends on ADK_TARGET_SYSTEM_QEMU_ARM
 
 endchoice
@@ -79,6 +80,7 @@ endchoice
 choice
 prompt "Qemu Emulation with graphical output"
 depends on ADK_HARDWARE_QEMU
+default ADK_TARGET_QEMU_WITH_GRAPHIC if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 
 config ADK_TARGET_QEMU_WITHOUT_GRAPHIC
 	boolean "disabled"
