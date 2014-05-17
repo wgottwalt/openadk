@@ -41,63 +41,63 @@ comment "Software cryptography support"
 
 menu "Crypto core / Block and Hash modes"
 
-config ADK_KERNEL_MOD_CRYPTO_PCOMP
+config ADK_KERNEL_CRYPTO_PCOMP
 	tristate
 
 config ADK_KERNEL_CRYPTO_PCOMP2
 	tristate
 	select ADK_KERNEL_CRYPTO
-	select ADK_KERNEL_MOD_CRYPTO_PCOMP
+	select ADK_KERNEL_CRYPTO_PCOMP
 	select ADK_KERNEL_CRYPTO_ALGAPI2
 	default n
 	help
 
-config ADK_KERNEL_MOD_CRYPTO_ALGAPI
+config ADK_KERNEL_CRYPTO_ALGAPI
 	tristate
 	
 config ADK_KERNEL_CRYPTO_ALGAPI2
 	tristate
 	select ADK_KERNEL_CRYPTO
-	select ADK_KERNEL_MOD_CRYPTO_ALGAPI
+	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
 
-config ADK_KERNEL_MOD_CRYPTO_AEAD
+config ADK_KERNEL_CRYPTO_AEAD
 	tristate
 
 config ADK_KERNEL_CRYPTO_AEAD2
 	tristate
 	select ADK_KERNEL_CRYPTO
 	select ADK_KERNEL_CRYPTO_ALGAPI2
-	select ADK_KERNEL_MOD_CRYPTO_AEAD
+	select ADK_KERNEL_CRYPTO_AEAD
 	default n
 	help
 
-config ADK_KERNEL_MOD_CRYPTO_HASH
+config ADK_KERNEL_CRYPTO_HASH
 	tristate
 
 config ADK_KERNEL_CRYPTO_HASH2
 	tristate
 	select ADK_KERNEL_CRYPTO_ALGAPI2
-	select ADK_KERNEL_MOD_CRYPTO_HASH
+	select ADK_KERNEL_CRYPTO_HASH
 	default n
 	help
 
-config ADK_KERNEL_MOD_CRYPTO_BLKCIPHER
+config ADK_KERNEL_CRYPTO_BLKCIPHER
 	tristate
 
 config ADK_KERNEL_CRYPTO_BLKCIPHER2
 	tristate
 	#select ADK_KERNEL_CRYPTO_RNG2
 	select ADK_KERNEL_CRYPTO_ALGAPI2
-	select ADK_KERNEL_MOD_CRYPTO_BLKCIPHER
+	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	default n
 	help
 
-config ADK_KERNEL_MOD_CRYPTO_WORKQUEUE
+config ADK_KERNEL_CRYPTO_WORKQUEUE
 	tristate
 
-config ADK_KERNEL_MOD_CRYPTO_MANAGER
+config ADK_KERNEL_CRYPTO_MANAGER
 	tristate
 
 config ADK_KERNEL_CRYPTO_AUTHENC
@@ -195,7 +195,7 @@ config ADK_KERNEL_CRYPTO_XCBC
 	help
           XCBC: Keyed-Hashing with encryption algorithm
 
-config ADK_KERNEL_MOD_CRYPTO_RNG
+config ADK_KERNEL_CRYPTO_RNG
 	tristate
 
 endmenu
