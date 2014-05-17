@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-geode
-PKG_VERSION:=		2.11.13
+PKG_VERSION:=		2.11.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		df78ec2c76598b9b3a3f00c7b9215414
+PKG_MD5SUM:=		a38a23055fcabed87dbd5e7c9e32bc05
 PKG_DESCR:=		X11 driver for AMD Geode VGA chip
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
@@ -16,10 +16,13 @@ PKG_NEED_CXX:=		1
 
 PKG_ARCH_DEPENDS:=	x86
 PKG_CFLINE_XF86_VIDEO_GEODE:=	depends on ADK_TARGET_WITH_VGA
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_VIDEO_GEODE,xf86-video-geode,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--with-pic
 
 xf86-video-geode-install:
 	${INSTALL_DIR} ${IDIR_XF86_VIDEO_GEODE}/usr/lib/xorg/modules/drivers
