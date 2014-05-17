@@ -9,6 +9,7 @@ endif
 HOST_CONFIGURE_ENV+=	AUTOM4TE=${STAGING_HOST_DIR}/usr/bin/autom4te \
 			CONFIG_SHELL='$(strip ${SHELL})' \
 			PKG_CONFIG_LIBDIR='${STAGING_HOST_DIR}/usr/lib/pkgconfig' \
+			PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 \
 			PATH='${HOST_PATH}' \
 			CC='$(strip ${CC_FOR_BUILD})' \
 			CFLAGS='$(strip ${CFLAGS_FOR_BUILD})' \
@@ -29,6 +30,7 @@ HOST_INSTALL_TARGET?=	install
 
 HOST_MAKE_ENV+=		PATH='${HOST_PATH}' \
 			PKG_CONFIG_LIBDIR='${STAGING_HOST_DIR}/usr/lib/pkgconfig' \
+			PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 \
 			CC='$(strip ${CC_FOR_BUILD})' \
 			CFLAGS='$(strip ${CFLAGS_FOR_BUILD})' \
 			CXXFLAGS='$(strip ${CXXFLAGS_FOR_BUILD})' \
