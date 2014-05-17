@@ -245,7 +245,6 @@ config ADK_KERNEL_YAFFS_FS
 	select ADK_KERNEL_YAFFS_YAFFS1
 	select ADK_KERNEL_YAFFS_YAFFS2
 	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
-	depends on ADK_KERNEL_VERSION_3_14_4
 	help
 	  YAFFS2 filesystem for NAND devices
 
