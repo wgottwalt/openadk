@@ -1,5 +1,4 @@
 #!/bin/sh
-#PKG cifs-utils
 #INIT 60
 
 case $1 in

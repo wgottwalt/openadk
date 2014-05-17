@@ -1,5 +1,4 @@
 #!/bin/sh
-#PKG nfs-utils-client
 #INIT 60
 . /etc/rc.conf
 
