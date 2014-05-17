@@ -20,6 +20,7 @@ config ADK_KERNEL_USE_GENERIC_SMP_HELPERS
 	default n
 
 menu "CPU frequency support"
+depends on ADK_TARGET_WITH_CPU_FREQ
 
 config ADK_KERNEL_CPU_FREQ
 	boolean

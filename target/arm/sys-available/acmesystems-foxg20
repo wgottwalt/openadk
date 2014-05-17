@@ -6,6 +6,7 @@ config ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	select ADK_eabi
 	select ADK_acmesystems_foxg20
 	select ADK_KERNEL_AEABI
+	select ADK_TARGET_WITH_SD
 	select ADK_TARGET_WITH_WATCHDOG
 	select ADK_TARGET_WITH_RTC
 	select ADK_TARGET_WITH_USB

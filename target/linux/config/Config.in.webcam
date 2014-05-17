@@ -1,3 +1,6 @@
+menu "Webcam support"
+depends on ADK_TARGET_WITH_USB
+
 config ADK_KERNEL_VIDEO_DEV
 	boolean
 
@@ -11,7 +14,6 @@ config ADK_KERNEL_MEDIA_USB_SUPPORT
 config ADK_KERNEL_MEDIA_CAMERA_SUPPORT
 	boolean
 
-menu "Webcam support"
 config ADK_KERNEL_MEDIA_SUPPORT
 	tristate
 	default n

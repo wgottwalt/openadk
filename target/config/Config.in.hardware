@@ -32,16 +32,22 @@ config ADK_TARGET_WITH_VGA
 config ADK_TARGET_WITH_NAND
 	boolean
 
+config ADK_TARGET_WITH_SD
+	boolean
+
 config ADK_TARGET_WITH_MTD
 	boolean
 
 config ADK_TARGET_WITH_GEODE_CRYPTO
 	boolean
 
-config ADK_TARGET_WITH_HDD
+config ADK_TARGET_WITH_PATA
 	boolean
 
 config ADK_TARGET_WITH_SATA
+	boolean
+
+config ADK_TARGET_WITH_SCSI
 	boolean
 
 config ADK_TARGET_WITH_INPUT
@@ -77,3 +83,5 @@ config ADK_TARGET_WITH_DSL
 config ADK_TARGET_WITH_USB_BOOT
 	boolean
 
+config ADK_TARGET_WITH_SMP
+	boolean
