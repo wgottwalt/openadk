@@ -23,7 +23,6 @@
 #define _GNU_SOURCE
 #include <ctype.h>
 #include <errno.h>
-#include <error.h>
 #include <err.h>
 #include <fcntl.h>
 #include <limits.h>
