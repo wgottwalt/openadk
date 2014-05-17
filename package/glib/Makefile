@@ -16,7 +16,7 @@ HOST_BUILDDEP:=		libffi-host gettext-tiny-host libiconv-tiny-host python2-host
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_EXTRAVER}/
 PKG_NOPARALLEL:=	1
-PKG_OPTS:=		dev
+PKG_OPTS:=		dev noscripts
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
