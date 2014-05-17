@@ -748,6 +748,7 @@ config BUSYBOX_WALL
 
 config BUSYBOX_WATCHDOG
 	bool "watchdog"
+	default y if ADK_TARGET_WITH_WATCHDOG
 	default n
 	depends on !BUSYBOX_DISABLE_WATCHDOG
 	select BUSYBOX_PLATFORM_LINUX

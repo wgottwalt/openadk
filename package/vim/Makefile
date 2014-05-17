@@ -7,7 +7,7 @@ PKG_NAME:=		vim
 PKG_VERSION:=		7.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		607e135c559be642f210094ad023dc65
-PKG_DESCR:=		The text editor
+PKG_DESCR:=		very popular text editor
 PKG_SECTION:=		editor
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
@@ -22,7 +22,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,VIM,vim,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS+=		-lgcc
 TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ENV+=		vim_cv_toupper_broken=no \
 			vim_cv_getcwd_broken=no \

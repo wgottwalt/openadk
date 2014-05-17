@@ -27,11 +27,10 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBFLTK,libfltk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 ifeq ($(ADK_COMPILE_LIBFLTK_WITH_UCLIBCXX),y)
-LIBRARIES:=-nodefaultlibs -luClibc++ -lgcc -lgcc_s -lm -lc
-endif
-
+LIBRARIES:=-nodefaultlibs -luClibc++ -lm -lc
 ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
 LIBRARIES+=-lssp -lssp_nonshared
+endif
 endif
 
 CONFIGURE_ARGS+=	--disable-xinerama

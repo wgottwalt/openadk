@@ -27,7 +27,7 @@ TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--enable-cxx-warnings=no
 
 ifeq ($(ADK_COMPILE_ID3LIB_WITH_UCLIBCXX),y)
-LIBRARIES:=-nodefaultlibs -luClibc++ -lz -lm -lc -lgcc
+LIBRARIES:=-nodefaultlibs -luClibc++ -lz -lm -lc
 endif
 
 ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)

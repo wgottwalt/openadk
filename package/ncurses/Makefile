@@ -26,7 +26,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_CFLAGS+=		-lgcc
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
 CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
