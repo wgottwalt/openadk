@@ -31,8 +31,8 @@ PKG_URL:=		http://xbmc.org/
 #PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc omxplayer
-PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc omxplayer
+PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
+PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_IBM_X40:=	nasm-host
 PKG_SYSTEM_DEPENDS:=	raspberry-pi ibm-x40
 PKG_LIBC_DEPENDS:=	glibc
