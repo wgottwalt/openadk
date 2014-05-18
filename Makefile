@@ -109,6 +109,9 @@ distclean cleandist:
 image: .prereq_done
 	@${GMAKE_INV} image
 
+targethelp: .prereq_done
+	@${GMAKE_INV} targethelp
+
 switch: .prereq_done
 	@${GMAKE_INV} switch
 

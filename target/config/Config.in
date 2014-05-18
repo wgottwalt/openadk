@@ -574,6 +574,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 		ADK_LINUX_NATIVE
 	depends on !ADK_HARDWARE_VBOX
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	select ADK_KERNEL_BLK_DEV_INITRD
 	help
 	  create an read-only initramfs system.
@@ -593,7 +594,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64
 	depends on !ADK_HARDWARE_VBOX
-	select ADK_KERNEL_EXT2_FS
+	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	help
 	  create an read-only initramfs system.
 
@@ -674,6 +675,7 @@ config ADK_TARGET_ROOTFS_ISO
 
 config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
 	boolean "Archive usable for initramfs creation"
+	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	help
 	  Use this option if your planning to create a initramfs,
 	  useful for adk-test-framework.

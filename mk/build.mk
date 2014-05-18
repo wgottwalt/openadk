@@ -190,6 +190,9 @@ toolchain/%: ${STAGING_TARGET_DIR}
 image:
 	$(MAKE) -C target image
 
+targethelp:
+	$(MAKE) -C target targethelp 
+
 switch:
 	if [ -f .config ];then \
 		echo "Saving configuration for target system: ${ADK_TARGET_SYSTEM} with arch: ${ADK_TARGET_ARCH}";\

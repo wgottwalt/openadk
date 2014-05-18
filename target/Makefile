@@ -85,6 +85,7 @@ endif
 prepare: $(ADK_TARGET_ARCH)-prepare
 compile: $(ADK_TARGET_ARCH)-compile
 image: $(ADK_TARGET_ARCH)-imageclean $(ADK_TARGET_ARCH)-imageinstall
+targethelp: $(ADK_TARGET_ARCH)-targethelp
 install: $(ADK_TARGET_ARCH)-imageclean $(ADK_TARGET_ARCH)-install $(ADK_TARGET_ARCH)-imageinstall
 clean: $(ADK_TARGET_ARCH)-clean $(ADK_TARGET_ARCH)-imageclean
 
@@ -106,6 +107,8 @@ clean: $(ADK_TARGET_ARCH)-clean $(ADK_TARGET_ARCH)-imageclean
 %-install: %-compile
 	$(TRACE) target/$(patsubst %-install,%,$@)-install
 	$(MAKE) -C $(patsubst %-install,%,$@) install
+%-targethelp:
+	$(MAKE) -C $(patsubst %-targethelp,%,$@) targethelp
 %-imageinstall: %-imageprepare
 	$(TRACE) target/$(patsubst %-imageinstall,%,$@)-imageinstall
 	$(MAKE) -C $(patsubst %-imageinstall,%,$@) imageinstall
