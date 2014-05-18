@@ -163,7 +163,8 @@ config ADK_KERNEL_COMP_GZIP_RASPBERRY_PI
 
 choice
 prompt "Kernel Compression"
-depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI && !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+
 config ADK_KERNEL_COMP_XZ
 	prompt "use XZ compression"
 	boolean
