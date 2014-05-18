@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		autotool keyutils libtirpc lvm
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 
+PKG_CFLINE_NFS_UTILS:=	select ADK_PACKAGE_LIBTIRPC_WITH_GSS if ADK_PACKAGE_NFS_UTILS_V4
+
 PKG_SUBPKGS:=		NFS_UTILS NFS_UTILS_CLIENT NFS_UTILS_SERVER
 PKGSD_NFS_UTILS_CLIENT:=client utilities
 PKGSN_NFS_UTILS_CLIENT:=nfs-utils
@@ -35,12 +37,12 @@ $(eval $(call PKG_template,NFS_UTILS_CLIENT,nfs-utils-client,${PKG_VERSION}-${PK
 $(eval $(call PKG_template,NFS_UTILS_SERVER,nfs-utils-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_SERVER},${PKGSD_NFS_UTILS_SERVER},${PKG_SECTION}))
 
 AUTOTOOL_STYLE:=	autoreconf
-ifeq ($(ADK_PACKAGE_NFS_UTILS_SERVER_V4),y)
+ifeq ($(ADK_PACKAGE_NFS_UTILS_V4),y)
 CONFIGURE_ARGS+=	--enable-nfsv4 \
 			--disable-nfsv41 \
 			--with-krb5=${STAGING_TARGET_DIR}/usr \
 			--enable-gss
-#CONFIGURE_ENV+=		LIBS="-lrpcsecgss"
+CONFIGURE_ENV+=		LIBS="-lrpcsecgss"
 else
 CONFIGURE_ARGS+=	--disable-nfsv4 \
 			--disable-nfsv41 \
