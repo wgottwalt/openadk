@@ -1,0 +1,11 @@
+--- nfs-utils-1.3.0.orig/utils/mountd/v4root.c	2014-03-25 16:12:07.000000000 +0100
++++ nfs-utils-1.3.0/utils/mountd/v4root.c	2014-05-17 21:59:01.129569213 +0200
+@@ -13,7 +13,7 @@
+ 
+ #include <sys/types.h>
+ #include <sys/stat.h>
+-#include <sys/queue.h>
++#include "queue.h"
+ #include <stdio.h>
+ #include <stdlib.h>
+ #include <ctype.h>

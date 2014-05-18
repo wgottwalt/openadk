@@ -1,0 +1,11 @@
+--- nfs-utils-1.3.0.orig/utils/nfsstat/nfsstat.c	2014-03-25 16:12:07.000000000 +0100
++++ nfs-utils-1.3.0/utils/nfsstat/nfsstat.c	2014-05-17 21:57:15.697571551 +0200
+@@ -336,7 +336,7 @@ main(int argc, char **argv)
+ 
+ 	struct sigaction act = {
+ 		.sa_handler = unpause,
+-		.sa_flags = SA_ONESHOT,
++		.sa_flags = SA_RESETHAND,
+ 	};
+ 
+ 	if ((progname = strrchr(argv[0], '/')))

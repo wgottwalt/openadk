@@ -1,0 +1,10 @@
+--- nfs-utils-1.3.0.orig/support/include/sockaddr.h	2014-03-25 16:12:07.000000000 +0100
++++ nfs-utils-1.3.0/support/include/sockaddr.h	2014-05-17 21:40:15.148504458 +0200
+@@ -27,6 +27,7 @@
+ #ifdef HAVE_LIBIO_H
+ #include <libio.h>
+ #endif
++#include <stdlib.h>
+ #include <stdbool.h>
+ #include <sys/socket.h>
+ #include <netinet/in.h>

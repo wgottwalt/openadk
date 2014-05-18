@@ -1,0 +1,11 @@
+--- nfs-utils-1.3.0.orig/support/nfs/svc_create.c	2014-03-25 16:12:07.000000000 +0100
++++ nfs-utils-1.3.0/support/nfs/svc_create.c	2014-05-17 21:47:07.089632108 +0200
+@@ -113,7 +113,7 @@ svc_create_find_xprt(const struct sockad
+  *
+  * Otherwise NULL is returned if an error occurs.
+  */
+-__attribute_malloc__
++__attribute__((__malloc__))
+ static struct addrinfo *
+ svc_create_bindaddr(struct netconfig *nconf, const uint16_t port)
+ {

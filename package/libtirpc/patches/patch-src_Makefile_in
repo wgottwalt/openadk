@@ -1,6 +1,6 @@
---- libtirpc-0.2.4.orig/src/Makefile.in	2014-05-10 21:05:39.825812663 +0200
-+++ libtirpc-0.2.4/src/Makefile.in	2014-05-10 20:41:09.916621417 +0200
-@@ -106,9 +106,9 @@ am__libtirpc_la_SOURCES_DIST = auth_none
+--- libtirpc-0.2.4.orig/src/Makefile.in	2014-05-18 08:04:24.954954664 +0200
++++ libtirpc-0.2.4/src/Makefile.in	2014-05-17 22:53:56.967637091 +0200
+@@ -134,9 +134,9 @@ am__libtirpc_la_SOURCES_DIST = auth_none
  	rpcb_clnt.c rpcb_prot.c rpcb_st_xdr.c svc.c svc_auth.c \
  	svc_dg.c svc_auth_unix.c svc_auth_none.c svc_generic.c \
  	svc_raw.c svc_run.c svc_simple.c svc_vc.c getpeereid.c \
@@ -13,7 +13,7 @@
  @GSS_TRUE@am__objects_1 = libtirpc_la-auth_gss.lo \
  @GSS_TRUE@	libtirpc_la-authgss_prot.lo \
  @GSS_TRUE@	libtirpc_la-svc_auth_gss.lo
-@@ -133,8 +133,7 @@ am_libtirpc_la_OBJECTS = libtirpc_la-aut
+@@ -161,8 +161,7 @@ am_libtirpc_la_OBJECTS = libtirpc_la-aut
  	libtirpc_la-svc_auth_none.lo libtirpc_la-svc_generic.lo \
  	libtirpc_la-svc_raw.lo libtirpc_la-svc_run.lo \
  	libtirpc_la-svc_simple.lo libtirpc_la-svc_vc.lo \
@@ -23,7 +23,7 @@
  	libtirpc_la-xdr.lo libtirpc_la-xdr_rec.lo \
  	libtirpc_la-xdr_array.lo libtirpc_la-xdr_float.lo \
  	libtirpc_la-xdr_mem.lo libtirpc_la-xdr_reference.lo \
-@@ -355,9 +354,8 @@ libtirpc_la_SOURCES = auth_none.c auth_u
+@@ -400,9 +399,8 @@ libtirpc_la_SOURCES = auth_none.c auth_u
  	rpcb_clnt.c rpcb_prot.c rpcb_st_xdr.c svc.c svc_auth.c \
  	svc_dg.c svc_auth_unix.c svc_auth_none.c svc_generic.c \
  	svc_raw.c svc_run.c svc_simple.c svc_vc.c getpeereid.c \
@@ -35,7 +35,7 @@
  @GSS_TRUE@libtirpc_la_CFLAGS = -DHAVE_RPCSEC_GSS $(GSSAPI_CFLAGS)
  CLEANFILES = cscope.* *~
  DISTCLEANFILES = Makefile.in
-@@ -438,10 +436,8 @@ mostlyclean-compile:
+@@ -485,10 +483,8 @@ mostlyclean-compile:
  distclean-compile:
  	-rm -f *.tab.c
  
@@ -46,7 +46,7 @@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtirpc_la-auth_unix.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtirpc_la-authdes_prot.Plo@am__quote@
  @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/libtirpc_la-authgss_prot.Plo@am__quote@
-@@ -809,20 +805,6 @@ libtirpc_la-getpeereid.lo: getpeereid.c
+@@ -856,20 +852,6 @@ libtirpc_la-getpeereid.lo: getpeereid.c
  @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
  @am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=compile $(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(libtirpc_la_CFLAGS) $(CFLAGS) -c -o libtirpc_la-getpeereid.lo `test -f 'getpeereid.c' || echo '$(srcdir)/'`getpeereid.c
  

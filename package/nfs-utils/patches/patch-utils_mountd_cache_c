@@ -1,0 +1,22 @@
+--- nfs-utils-1.3.0.orig/utils/mountd/cache.c	2014-03-25 16:12:07.000000000 +0100
++++ nfs-utils-1.3.0/utils/mountd/cache.c	2014-05-17 21:57:07.653571824 +0200
+@@ -11,6 +11,10 @@
+ #include <config.h>
+ #endif
+ 
++#ifndef _GNU_SOURCE
++#define _GNU_SOURCE
++#endif
++
+ #include <sys/types.h>
+ #include <sys/select.h>
+ #include <sys/stat.h>
+@@ -1339,7 +1343,7 @@ static int cache_export_ent(char *domain
+ 		 */
+ 		struct stat stb;
+ 		size_t l = strlen(exp->e_path);
+-		__dev_t dev;
++		dev_t dev;
+ 
+ 		if (strlen(path) <= l || path[l] != '/' ||
+ 		    strncmp(exp->e_path, path, l) != 0)
