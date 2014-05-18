@@ -56,6 +56,7 @@ image-prepare-post:
 	test -z $(GIT) || \
 	     $(GIT) log -1|head -1|sed -e 's#commit ##' \
 		> $(TARGET_DIR)/etc/.adkversion
+	echo $(ADK_TARGET_SYSTEM) > $(TARGET_DIR)/etc/.adktarget
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${TOPDIR}/.config > $(TARGET_DIR)/etc/adkconfig.gz
 	chmod 600 $(TARGET_DIR)/etc/adkconfig.gz
