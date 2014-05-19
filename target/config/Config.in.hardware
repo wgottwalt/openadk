@@ -1,4 +1,7 @@
 # hardware features, do not use for qemu
+config ADK_TARGET_WITH_CPU_FREQ
+	boolean
+
 config ADK_TARGET_WITH_USB
 	boolean
 
