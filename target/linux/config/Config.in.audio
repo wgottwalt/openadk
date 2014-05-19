@@ -14,7 +14,7 @@ config ADK_KERNEL_SND_ARM
 	boolean
 
 config ADK_KERNEL_SND_SOC_GENERIC_DMAENGINE_PCM
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_SOC_FSL_SPDIF
 	tristate

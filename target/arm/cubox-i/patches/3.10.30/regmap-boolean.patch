@@ -1,0 +1,20 @@
+diff -Nur linux-3.10.30.orig/drivers/base/regmap/Kconfig linux-3.10.30/drivers/base/regmap/Kconfig
+--- linux-3.10.30.orig/drivers/base/regmap/Kconfig	2014-02-13 22:48:15.000000000 +0100
++++ linux-3.10.30/drivers/base/regmap/Kconfig	2014-05-19 18:38:14.558461284 +0200
+@@ -10,13 +10,13 @@
+ 	bool
+ 
+ config REGMAP_I2C
+-	tristate
++	boolean
+ 
+ config REGMAP_SPI
+-	tristate
++	boolean
+ 
+ config REGMAP_MMIO
+-	tristate
++	boolean
+ 
+ config REGMAP_IRQ
+ 	bool

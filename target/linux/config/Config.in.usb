@@ -10,8 +10,17 @@ config ADK_KERNEL_USB_EHCI_ROOT_HUB_TT
 config ADK_KERNEL_USB_EHCI_TT_NEWSCHED
 	boolean
 
-config ADK_KERNEL_USB_MXS_PHY
+config ADK_KERNEL_USB_GADGET
+	tristate
+
+config ADK_KERNEL_USB_PHY
 	boolean
+
+config ADK_KERNEL_USB_MXS_PHY
+	tristate
+	select ADK_KERNEL_USB_PHY
+	default m if ADK_TARGET_SYSTEM_CUBOX_I
+	default n
 
 config ADK_KERNEL_USB_OHCI_HCD_PLATFORM
 	boolean
@@ -162,6 +171,7 @@ config ADK_KERNEL_USB_CHIPIDEA
 	tristate
 	select ADK_KERNEL_USB_CHIPIDEA_UDC
 	select ADK_KERNEL_USB_CHIPIDEA_HOST
+	select ADK_KERNEL_USB_GADGET
 	depends on ADK_KERNEL_USB_EHCI_HCD
 	default m if ADK_TARGET_SYSTEM_CUBOX_I
 	default n

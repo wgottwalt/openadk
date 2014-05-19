@@ -506,17 +506,6 @@ $(eval $(call KMOD_template,NF_CONNTRACK_TFTP,nf-conntrack-tftp,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_nat_tftp \
 ,55))
 
-#$(eval $(call KMOD_template,NF_CONNTRACK_RTSP,nf-conntrack-rtsp,\
-#	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_rtsp \
-#	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_rtsp \
-#,55))
-
-# broken
-#$(eval $(call KMOD_template,NF_CONNTRACK_AMANDA,nf-conntrack-amanda,\
-#	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_amanda \
-#	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_amanda \
-#,55))
-
 $(eval $(call KMOD_template,NF_CONNTRACK_PPTP,nf-conntrack-pptp,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_proto_gre \
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_pptp \
@@ -1133,10 +1122,6 @@ $(eval $(call KMOD_template,NFS_FS,nfs-fs,\
 ,30, kmod-sunrpc))
 endif
 
-#$(eval $(call KMOD_template,EXPORTFS,exportfs,\
-#	$(MODULES_DIR)/kernel/fs/exportfs/exportfs \
-#,20))
-
 $(eval $(call KMOD_template,NFSD,nfsd,\
         $(MODULES_DIR)/kernel/fs/nfsd/nfsd \
 ,30, kmod-sunrpc kmod-lockd))
@@ -1193,16 +1178,29 @@ $(eval $(call KMOD_template,SOUND,sound,\
 $(eval $(call KMOD_template,SND,snd,\
 	$(MODULES_DIR)/kernel/sound/core/snd \
 	$(MODULES_DIR)/kernel/sound/core/snd-timer \
-	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
 ,40))
+
+
+ifeq ($(KERNEL_BASE),3)
+ifeq ($(KERNEL_MAJ),10)
+$(eval $(call KMOD_template,SND_PCM,snd-pcm,\
+	$(MODULES_DIR)/kernel/sound/core/snd-page-alloc \
+	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
+,41))
+else
+$(eval $(call KMOD_template,SND_PCM,snd-pcm,\
+	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
+,41))
+endif
+endif
 
 $(eval $(call KMOD_template,SND_PCM_DMAENGINE,snd-pcm-dmaengine,\
 	$(MODULES_DIR)/kernel/sound/core/snd-pcm-dmaengine \
-,41))
+,42))
 
 $(eval $(call KMOD_template,SND_COMPRESS,snd-compress,\
 	$(MODULES_DIR)/kernel/sound/core/snd-compress \
-,41))
+,42))
 
 $(eval $(call KMOD_template,SND_RAWMIDI,snd-rawmidi,\
 	$(MODULES_DIR)/kernel/sound/core/snd-hwdep \
@@ -1354,11 +1352,19 @@ $(eval $(call KMOD_template,USB_EHCI_HCD,usb-ehci-hcd,\
 	$(MODULES_DIR)/kernel/drivers/usb/host/ehci-hcd \
 ,55))
 
+$(eval $(call KMOD_template,USB_MXS_PHY,usb-mxs-phy,\
+	$(MODULES_DIR)/kernel/drivers/usb/phy/phy-mxs-usb \
+,56))
+
+$(eval $(call KMOD_template,USB_GADGET,usb-gadget,\
+	$(MODULES_DIR)/kernel/drivers/usb/gadget/udc-core \
+,57))
+
 $(eval $(call KMOD_template,USB_CHIPIDEA,ci-hdrc,\
 	$(MODULES_DIR)/kernel/drivers/usb/chipidea/ci_hdrc \
 	$(MODULES_DIR)/kernel/drivers/usb/chipidea/usbmisc_imx \
 	$(MODULES_DIR)/kernel/drivers/usb/chipidea/ci_hdrc_imx \
-,56))
+,58, kmod-usb-gadget kmod-usb-mxs-phy))
 
 $(eval $(call KMOD_template,USB_OHCI_HCD,usb-ohci-hcd,\
 	$(MODULES_DIR)/kernel/drivers/usb/host/ohci-hcd \
