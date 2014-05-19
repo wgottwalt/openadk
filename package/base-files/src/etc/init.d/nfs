@@ -18,7 +18,7 @@ start)
 			mount -a -t nfs
 		fi
 	else
-		logger -s "No nfs support in kernel"
+		logger -t nfs "No nfs support in kernel"
 	fi
 	;;
 stop)

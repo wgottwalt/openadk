@@ -14,7 +14,7 @@ start)
 			mount -a -t cifs
 		fi
 	else
-		logger -t cifs -s "No cifs support in kernel"
+		logger -t cifs "No cifs support in kernel"
 	fi
 	;;
 stop)
