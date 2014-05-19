@@ -14,8 +14,7 @@ PKG_BUILDDEP:=		xorg-server autotool util-macros
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	!arm !m68k
-PKG_CFLINE_XF86_VIDEO_CIRRUS:=depends on ADK_TARGET_WITH_VGA
+PKG_SYSTEM_DEPENDS:=	qemu-x86 qemu-x86_64
 
 include $(TOPDIR)/mk/package.mk
 

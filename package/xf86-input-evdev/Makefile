@@ -13,6 +13,7 @@ PKG_DEPENDS:=		xorg-server libudev
 PKG_BUILDDEP:=		xorg-server eudev
 PKG_SITES:=		${MASTER_SITE_XORG}
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_LIBC_DEPENDS:=	glibc
 PKG_ARCH_DEPENDS:=	!m68k
 

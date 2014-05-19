@@ -14,8 +14,7 @@ PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	x86
-PKG_CFLINE_XF86_VIDEO_GEODE:=	depends on ADK_TARGET_WITH_VGA
+PKG_SYSTEM_DEPENDS:=	pcengines-alix1c
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
