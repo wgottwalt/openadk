@@ -1,0 +1,11 @@
+--- xawtv-3.103.orig/configure.ac	2013-04-02 15:19:10.000000000 +0200
++++ xawtv-3.103/configure.ac	2014-05-19 16:15:31.000000000 +0200
+@@ -119,7 +119,7 @@ fi
+ AC_CHECK_LIB(ossaudio,main,LIBOSS="-lossaudio")
+ AC_CHECK_LIB(ncursesw,initscr,LIBCURSES="-lncursesw")
+ if test "$LIBCURSES" = ""; then
+-  AC_CHECK_LIB(ncurses,initscr,LIBCURSES="-lncurses")
++  AC_CHECK_LIB(ncurses,initscr,LIBCURSES="-lncurses -ltinfo")
+ fi
+ if test "$LIBCURSES" = ""; then
+   AC_CHECK_LIB(curses,initscr,LIBCURSES="-lcurses")
