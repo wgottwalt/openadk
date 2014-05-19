@@ -4,18 +4,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-intel
-PKG_VERSION:=		2.19.0
+PKG_VERSION:=		2.99.911
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a5e655904e8da22acb0d9be1badf9815
-PKG_DESCR:=		X11 driver for Intel VGA chip
+PKG_MD5SUM:=		de51db2408a222ef1c52725f5aa2f185
+PKG_DESCR:=		X11 driver for Intel VGA chips
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm mesalib
 PKG_BUILDDEP:=		xorg-server libdrm xf86driproto MesaLib
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_NEED_CXX:=		1
 
-PKG_ARCH_DEPENDS:=	!arm !m68k
-PKG_CFLINE_XF86_VIDEO_INTEL:=depends on ADK_TARGET_WITH_VGA
+PKG_SYSTEM_DEPENDS:=	ibm-x40
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 
