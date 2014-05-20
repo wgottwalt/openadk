@@ -42,7 +42,7 @@ CONFIGURE_ARGS+=	--enable-nfsv4 \
 			--disable-nfsv41 \
 			--with-krb5=${STAGING_TARGET_DIR}/usr \
 			--enable-gss
-CONFIGURE_ENV+=		LIBS="-lrpcsecgss"
+#CONFIGURE_ENV+=		LIBS="-lrpcsecgss"
 else
 CONFIGURE_ARGS+=	--disable-nfsv4 \
 			--disable-nfsv41 \

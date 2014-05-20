@@ -1,0 +1,11 @@
+--- librpcsecgss-0.19.orig/src/svc.c	2009-07-29 18:24:50.000000000 +0200
++++ librpcsecgss-0.19/src/svc.c	2014-05-19 15:40:07.794315889 +0200
+@@ -409,7 +409,7 @@ svc_getreq(rdfds)
+ 	svc_getreqset(&readfds);
+ }
+ 
+-void	svc_getreqset2 __P((fd_set *, int));
++void	svc_getreqset2 (fd_set *, int);
+ 
+ void
+ svc_getreqset(readfds)

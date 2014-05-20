@@ -1,16 +1,34 @@
 --- librpcsecgss-0.19.orig/include/rpcsecgss/rpc/rpc.h	2009-07-29 18:24:50.000000000 +0200
-+++ librpcsecgss-0.19/include/rpcsecgss/rpc/rpc.h	2013-11-11 21:11:41.000000000 +0100
-@@ -71,13 +71,6 @@
- 
- __BEGIN_DECLS
++++ librpcsecgss-0.19/include/rpcsecgss/rpc/rpc.h	2014-05-19 15:45:28.866420803 +0200
+@@ -67,17 +67,12 @@
+  * defined by <rpc/netdb.h> included in <netdb.h>.
+  */
+ /* routines for parsing /etc/rpc */
+-#include <rpc/netdb.h>		/* structures and routines to parse /etc/rpc */
+-
+-__BEGIN_DECLS
++//#include <rpc/netdb.h>		/* structures and routines to parse /etc/rpc */
  
 -/* Global variables, protected for multi-threaded applications.  */
 -extern fd_set *__rpc_thread_svc_fdset (void) __attribute__ ((__const__));
 -#define svc_fdset (*__rpc_thread_svc_fdset ())
--
++#ifdef __cplusplus
++extern "C" {
++#endif
+ 
 -extern struct rpc_createerr *__rpc_thread_createerr (void)
 -     __attribute__ ((__const__));
 -#define get_rpc_createerr() (*__rpc_thread_createerr ())
  /* The people who "engineered" RPC should bee punished for naming the
     data structure and the variable the same.  We cannot always define the
     macro 'rpc_createerr' because this would prevent people from defining
+@@ -94,6 +89,8 @@ extern struct pollfd **__rpc_thread_svc_
+ extern int *__rpc_thread_svc_max_pollfd (void) __attribute__ ((__const__));
+ #define svc_max_pollfd (*__rpc_thread_svc_max_pollfd ())
+ 
+-__END_DECLS
++#ifdef __cplusplus
++}
++#endif
+ 
+ #endif /* rpc/rpc.h */

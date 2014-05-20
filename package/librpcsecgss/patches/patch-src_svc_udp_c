@@ -1,0 +1,13 @@
+--- librpcsecgss-0.19.orig/src/svc_udp.c	2009-07-29 18:24:50.000000000 +0200
++++ librpcsecgss-0.19/src/svc_udp.c	2014-05-19 15:39:54.706312812 +0200
+@@ -58,8 +58,8 @@ static enum xprt_stat	svcudp_stat();
+ static bool_t		svcudp_getargs();
+ static bool_t		svcudp_freeargs();
+ static void		svcudp_destroy();
+-static void		cache_set __P((SVCXPRT *, u_long));
+-static int		cache_get __P((SVCXPRT *, struct rpc_msg *, char **, u_long *));
++static void		cache_set (SVCXPRT *, u_long);
++static int		cache_get (SVCXPRT *, struct rpc_msg *, char **, u_long *);
+ 
+ static struct xp_ops svcudp_op = {
+ 	svcudp_recv,

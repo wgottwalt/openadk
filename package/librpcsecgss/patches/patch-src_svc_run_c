@@ -1,0 +1,11 @@
+--- librpcsecgss-0.19.orig/src/svc_run.c	2009-07-29 18:24:50.000000000 +0200
++++ librpcsecgss-0.19/src/svc_run.c	2014-05-19 15:40:24.146319867 +0200
+@@ -45,7 +45,7 @@ static char *rcsid = "$OpenBSD: svc_run.
+ extern int __svc_fdsetsize;
+ extern fd_set *__svc_fdset;
+ 
+-void svc_getreqset2 __P((fd_set *, int));
++void svc_getreqset2 (fd_set *, int);
+ 
+ void
+ svc_run()

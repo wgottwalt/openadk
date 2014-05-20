@@ -208,8 +208,6 @@ config ADK_SIMPLE_NETWORK_CONFIG
 	help
 	  Manually change network config
 	  
-	  WWW: http://www.openadk.org
-
 menu "eth0 Configuration"
 depends on ADK_SIMPLE_NETWORK_CONFIG
 
@@ -255,7 +253,7 @@ config SIMPLE_NETWORK_CONFIG_ETH0_BRIDGE
 
 config SIMPLE_NETWORK_CONFIG_ETH0_BC
 	depends on SIMPLE_NETWORK_CONFIG_ETH0_TYPE_NIC_MANUAL || SIMPLE_NETWORK_CONFIG_ETH0_TYPE_BRIDGE_IP
-	string "eth0 Broadcast"
+	string
 	default "+"
 
 endmenu
@@ -322,7 +320,9 @@ config SIMPLE_NETWORK_CONFIG_ETH1_NM
 
 config SIMPLE_NETWORK_CONFIG_ETH1_GW
 	depends on SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC_MANUAL
+	depends on !SIMPLE_NETWORK_CONFIG_ETH0_GW
 	string "eth1 Gateway"
+	default "" if !SIMPLE_NETWORK_CONFIG_ETH0_GW
 	default "192.168.1.1"
 
 config SIMPLE_NETWORK_CONFIG_ETH1_BRIDGE
@@ -332,7 +332,7 @@ config SIMPLE_NETWORK_CONFIG_ETH1_BRIDGE
 
 config SIMPLE_NETWORK_CONFIG_ETH1_BC
 	depends on SIMPLE_NETWORK_CONFIG_ETH1_TYPE_NIC_MANUAL || SIMPLE_NETWORK_CONFIG_ETH1_TYPE_BRIDGE_IP
-	string "eth1 Broadcast"
+	string
 	default "+"
 
 endmenu

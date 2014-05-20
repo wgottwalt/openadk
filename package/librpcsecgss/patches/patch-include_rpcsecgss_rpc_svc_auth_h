@@ -1,0 +1,28 @@
+--- librpcsecgss-0.19.orig/include/rpcsecgss/rpc/svc_auth.h	2009-07-29 18:24:50.000000000 +0200
++++ librpcsecgss-0.19/include/rpcsecgss/rpc/svc_auth.h	2014-05-19 15:34:43.714268869 +0200
+@@ -71,7 +71,7 @@ typedef struct svc_authentication_data {
+ /*
+  * Approved way of getting principal of caller
+  */
+-char *svcauth_gss_get_principal	__P((SVCAUTH *auth));
++char *svcauth_gss_get_principal	(SVCAUTH *auth);
+ 
+ /*
+  * Approved way of setting server principal
+@@ -83,10 +83,14 @@ svcauth_gss_set_svc_name(char *principal
+ /*
+  * Server side authenticator
+  */
+-__BEGIN_DECLS
++#ifdef __cplusplus
++extern "C" {
++#endif
+ extern enum auth_stat _authenticate(struct svc_req *__rqst,
+ 				    struct rpc_msg *__msg,
+ 				    bool_t *no_dispatch);
+-__END_DECLS
++#ifdef __cplusplus
++}
++#endif
+ 
+ #endif /* !_RPC_SVCAUTH_H */
