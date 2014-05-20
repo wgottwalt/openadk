@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dansguardian
 PKG_VERSION:=		2.12.0.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		2a88d0392cd28eaec02b7ee727b2e253
 PKG_DESCR:=		web content filter proxy
 PKG_SECTION:=		proxy
@@ -23,9 +23,9 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DANSGUARDIAN,dansguardian,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq ($(ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX),y)
-LIBRARIES:=-nodefaultlibs -luClibc++ -lm -lc
+LIBRARIES:=		-nodefaultlibs -luClibc++ -lm -lc -lgcc
 ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
-LIBRARIES+=-lssp
+LIBRARIES+=		-lssp
 endif
 endif
 
