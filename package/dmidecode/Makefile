@@ -20,10 +20,6 @@ $(eval $(call PKG_template,DMIDECODE,dmidecode,$(PKG_VERSION)-${PKG_RELEASE},${P
 
 CONFIG_STYLE:=		manual
 
-ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
-TARGET_LDFLAGS+=        -lssp
-endif
-
 dmidecode-install:
 	$(INSTALL_DIR) $(IDIR_DMIDECODE)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/dmidecode \

@@ -1,5 +1,5 @@
 --- valgrind-3.9.0.orig/configure.ac	2013-11-01 00:28:16.000000000 +0100
-+++ valgrind-3.9.0/configure.ac	2014-03-17 14:18:45.000000000 +0100
++++ valgrind-3.9.0/configure.ac	2014-05-19 19:33:23.000000000 +0200
 @@ -155,6 +155,7 @@ esac
  # configure-time, and distinguishes them from the VGA_*/VGO_*/VGP_*
  # variables used when compiling C files.
@@ -61,7 +61,21 @@
  
  AC_MSG_CHECKING([the GLIBC_VERSION version])
  
-@@ -928,10 +950,13 @@ case "${GLIBC_VERSION}" in
+@@ -918,6 +940,13 @@ case "${GLIBC_VERSION}" in
+ 	DEFAULT_SUPP="glibc-2.34567-NPTL-helgrind.supp ${DEFAULT_SUPP}"
+ 	DEFAULT_SUPP="glibc-2.X-drd.supp ${DEFAULT_SUPP}"
+ 	;;
++     2.19)
++	AC_MSG_RESULT(2.19 family)
++	AC_DEFINE([GLIBC_2_19], 1, [Define to 1 if you're using glibc 2.19.x])
++	DEFAULT_SUPP="glibc-2.X.supp ${DEFAULT_SUPP}"
++	DEFAULT_SUPP="glibc-2.34567-NPTL-helgrind.supp ${DEFAULT_SUPP}"
++	DEFAULT_SUPP="glibc-2.X-drd.supp ${DEFAULT_SUPP}"
++	;;
+      darwin)
+ 	AC_MSG_RESULT(Darwin)
+ 	AC_DEFINE([DARWIN_LIBC], 1, [Define to 1 if you're using Darwin])
+@@ -928,10 +957,13 @@ case "${GLIBC_VERSION}" in
  	AC_DEFINE([BIONIC_LIBC], 1, [Define to 1 if you're using Bionic])
  	DEFAULT_SUPP="bionic.supp ${DEFAULT_SUPP}"
  	;;

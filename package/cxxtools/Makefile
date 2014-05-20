@@ -16,7 +16,6 @@ PKG_NEED_CXX:=		1
 PKG_CXX:=		CXXTOOLS
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!arm !m68k
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk

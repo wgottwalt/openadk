@@ -14,6 +14,8 @@ PKG_URL:=		http://pcc.ludd.ltu.se/
 PKG_SITES:=		http://pcc.ludd.ltu.se/ftp/pub/pcc-releases/
 PKG_NOPARALLEL:=	1
 
+PKG_CFLINE_PCC:=	depends on ADK_BROKEN
+
 PKG_ARCH_DEPENDS:=	!arm !m68k !mips !ppc
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
