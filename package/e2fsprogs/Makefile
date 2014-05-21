@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
 PKG_VERSION:=		1.42.9
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		3f8e41e63b432ba114b33f58674563f7
 PKG_DESCR:=		Ext2/3/4 filesystem utilities
 PKG_SECTION:=		fs
@@ -78,6 +78,9 @@ e2fsck-install:
 mke2fs-install:
 	${INSTALL_DIR} ${IDIR_MKE2FS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/mke2fs ${IDIR_MKE2FS}/usr/sbin
+	cd $(IDIR_MKE2FS)/usr/sbin && ln -sf mke2fs mkfs.ext2
+	cd $(IDIR_MKE2FS)/usr/sbin && ln -sf mke2fs mkfs.ext3
+	cd $(IDIR_MKE2FS)/usr/sbin && ln -sf mke2fs mkfs.ext4
 
 tune2fs-install:
 	${INSTALL_DIR} ${IDIR_TUNE2FS}/usr/sbin
