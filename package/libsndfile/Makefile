@@ -19,6 +19,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBSNDFILE,libsndfile,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CONFIGURE_ARGS+=	--disable-sqlite
+
 libsndfile-install:
 	$(INSTALL_DIR) $(IDIR_LIBSNDFILE)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libsndfile*.so* \
