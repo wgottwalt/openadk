@@ -9,16 +9,16 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	grep nfs /proc/filesystems >/dev/null 2>&1
+	grep -v "^#" /etc/fstab| grep nfs >/dev/null 2>&1
 	if [ $? -eq 0 ];then
-		grep -v "^#" /etc/fstab| grep nfs >/dev/null 2>&1
+		grep nfs /proc/filesystems >/dev/null 2>&1
 		if [ $? -eq 0 ];then
 			mkdir -p /var/lib/nfs/rpc_pipefs
 			mount -t rpc_pipefs rpc_pipefs /var/lib/nfs/rpc_pipefs
 			mount -a -t nfs
+		else
+			logger -t nfs "No nfs support in kernel"
 		fi
-	else
-		logger -t nfs "No nfs support in kernel"
 	fi
 	;;
 stop)

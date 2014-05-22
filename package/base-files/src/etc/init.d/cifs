@@ -7,14 +7,14 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	grep cifs /proc/filesystems >/dev/null 2>&1
+	grep -v "^#" /etc/fstab| grep cifs >/dev/null 2>&1
 	if [ $? -eq 0 ];then
-		grep -v "^#" /etc/fstab| grep cifs >/dev/null 2>&1
+		grep cifs /proc/filesystems >/dev/null 2>&1
 		if [ $? -eq 0 ];then
 			mount -a -t cifs
+		else
+			logger -t cifs "No cifs support in kernel"
 		fi
-	else
-		logger -t cifs "No cifs support in kernel"
 	fi
 	;;
 stop)

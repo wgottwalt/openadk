@@ -15,7 +15,7 @@ else
 	disk="${MDEV} (${uuid})"
 fi
 if [ -z $fs ];then
-	logger "Disk $disk not registered in /etc/fstab"
+	logger -t mdev "Disk $disk not registered in /etc/fstab"
 	exit 0
 fi
 
@@ -24,11 +24,20 @@ if [ $fs = "ntfs-3g" ];then
 	procfs=fuse
 fi
 
+# check if already mounted via /etc/init.d/fs
+adk_check() {
+	mount | grep "${MDEV} "
+	if [ $? -eq 0 ];then
+		logger -t mdev "Filesystem on ${MDEV} already mounted"
+		exit 0
+	fi
+}
+
 # filesystem check
 adk_fsck() {
 	[ -x /usr/sbin/fsck.$fs ] && {
-		logger -s "Checking $fs filesystem on $disk"
-			fsck -p -t $fs ${MDEV}
+		logger -t mdev "Checking $fs filesystem on ${MDEV}"
+		fsck ${MDEV}
 	}
 }
 
@@ -37,19 +46,20 @@ adk_mount() {
 	mkdir -p $mnt >/dev/null 2>&1
 	grep $procfs /proc/filesystems >/dev/null 2>&1
 	if [ $? -eq 0 ];then
-		logger -s "Mounting $disk to $mnt"
+		logger -t mdev "Mounting local filesystems"
 		mount $mnt
 		if [ $? -ne 0 ];then
-			logger -s "Mounting $disk failed"
+			logger -s -t '' "Mounting $disk failed"
 		fi
 	else
-		logger -s "Required filesystem $procfs not available"
+		logger -t mdev "Required filesystem $procfs not available"
 	fi
 }
 
 case "${ACTION}" in
 add)
-	logger "Device ${MDEV} added to the system"
+	logger -t mdev "Device ${MDEV} added to the system"
+	add_check
 	adk_fsck
 	adk_mount
 	;;

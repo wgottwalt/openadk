@@ -3,10 +3,20 @@
 [[ $1 = autostart ]] || exit 0
 
 # activate swap
-[ -x /sbin/swapon ] && { swapon -a; }
+[ -x /sbin/swapon ] && {
+	grep swap /etc/fstab >/dev/null 2>&1
+	if [ $? -eq 0 ];then
+		logger -s -t '' "Activating swap"
+		swapon -a
+	fi
+}
 
 # activate any logical volumes
-[ -x /usr/sbin/lvm ] && { lvm vgscan; lvm vgchange -ay; }
+[ -x /usr/sbin/lvm ] && {
+	logger -s -t '' "Activating LVM volumes"
+	lvm vgscan
+	lvm vgchange -ay
+}
 
 rootdisk=$(readlink /dev/root)
 # strip partitions (f.e. mmcblk0p2, sda2, ..)
@@ -15,11 +25,11 @@ rootdisk=${rootdisk%[1-9]}
 rootparts=$(grep "^/dev/${rootdisk}" /etc/fstab|awk '{ print $1 }')
 
 for part in $rootparts; do
-	fstype=$(grep "^$part" /etc/fstab|awk '{ print $3 }')
-	mnt=$(grep "^$part" /etc/fstab|awk '{ print $2 }')
+	fstype=$(grep "^$part " /etc/fstab|awk '{ print $3 }')
+	mnt=$(grep "^$part " /etc/fstab|awk '{ print $2 }')
 	[ -x /usr/sbin/fsck.$fstype ] && {
-		logger -s "Checking $fstype filesystem on $part"
-		fsck -p -t $fstype $part
+		logger -s -t '' "Checking $fstype filesystem on $part"
+		fsck $part
 	}
 	grep $fstype /proc/filesystems >/dev/null 2>&1
 	if [ $? -eq 0 ];then
@@ -28,5 +38,25 @@ for part in $rootparts; do
 		logger -s "Filesystem $fstype not in kernel"
 		exit 1
 	fi
+done
+
+# mount local filesystems not rootdisk
+fstypes="ext2 ext3 ext4 xfs vfat ntfs"
+for fs in $fstypes; do
+	disks=$(grep -v "^#" /etc/fstab| grep -v $rootdisk |grep $fs|awk '{ print $1 }' >/dev/null 2>&1)
+	for disk in $disks; do
+		logger -t '' "Found $disk with filesystem $fs"
+		grep $fs /proc/filesystems >/dev/null 2>&1
+		if [ $? -eq 0 ];then
+			[ -x /usr/sbin/fsck.$fs ] && {
+				logger -s -t '' "Checking $fs filesystem on $disk"
+				fsck $disk
+			}
+			logger -s -t '' "Mounting local filesystems"
+			mount $disk
+		else
+			logger -s -t '' "No $fs filesystem in kernel"
+		fi
+	done
 done
 exit 0
