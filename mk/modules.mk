@@ -837,16 +837,6 @@ $(eval $(call KMOD_template,CRYPTO_DEV_GEODE,crypto-dev-geode,\
     $(MODULES_DIR)/kernel/drivers/crypto/geode-aes \
 ,20))
 
-#$(eval $(call KMOD_template,CRYPTO_DEV_HIFN_795X,crypto-dev-hifn-795x,\
-#    $(MODULES_DIR)/kernel/drivers/crypto/hifn_795x \
-#,20, crypto-manager2))
-
-ifeq ($(KERNEL_BASE),3)
-ifeq ($(KERNEL_MAJ),4)
-$(eval $(call KMOD_template,CRYPTO_ALGAPI2,crypto-algapi2,\
-    $(MODULES_DIR)/kernel/crypto/crypto_algapi \
-,02))
-
 $(eval $(call KMOD_template,CRYPTO_PCOMP2,crypto-pcomp2,\
     $(MODULES_DIR)/kernel/crypto/pcompress \
 ,03))
@@ -874,8 +864,6 @@ $(eval $(call KMOD_template,CRYPTO_MANAGER2,crypto-manager2,\
     $(MODULES_DIR)/kernel/crypto/eseqiv \
     $(MODULES_DIR)/kernel/crypto/chainiv \
 ,07))
-endif
-endif
 
 $(eval $(call KMOD_template,CRYPTO_AUTHENC,crypto-authenc,\
     $(MODULES_DIR)/kernel/crypto/authenc \
@@ -1086,8 +1074,11 @@ $(eval $(call KMOD_template,EXT3_FS,ext3-fs,\
 	$(MODULES_DIR)/kernel/fs/ext3/ext3 \
 ,30))
 
-$(eval $(call KMOD_template,EXT4_FS,ext4-fs,\
+$(eval $(call KMOD_template,JBD2,jbd2,\
 	$(MODULES_DIR)/kernel/fs/jbd2/jbd2 \
+,29, kmod-crypto-hash2))
+
+$(eval $(call KMOD_template,EXT4_FS,ext4-fs,\
 	$(MODULES_DIR)/kernel/fs/ext4/ext4 \
 ,30))
 
