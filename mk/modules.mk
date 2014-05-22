@@ -797,17 +797,6 @@ $(eval $(call KMOD_template,MD_RAID456,md-raid456,\
 ,35))
 
 #
-# Regmap
-# 
-$(eval $(call KMOD_template,REGMAP_I2C,regmap-i2c,\
-    $(MODULES_DIR)/kernel/drivers/base/regmap/regmap-i2c \
-,30))
-
-$(eval $(call KMOD_template,REGMAP_SPI,regmap-spi,\
-    $(MODULES_DIR)/kernel/drivers/base/regmap/regmap-spi \
-,30))
-
-#
 # Device Mapper
 #
 
@@ -836,29 +825,6 @@ $(eval $(call KMOD_template,DM_SNAPSHOT,dm-snapshot,\
 $(eval $(call KMOD_template,CRYPTO_DEV_GEODE,crypto-dev-geode,\
     $(MODULES_DIR)/kernel/drivers/crypto/geode-aes \
 ,20))
-
-$(eval $(call KMOD_template,CRYPTO_PCOMP2,crypto-pcomp2,\
-    $(MODULES_DIR)/kernel/crypto/pcompress \
-,03))
-
-$(eval $(call KMOD_template,CRYPTO_AEAD2,crypto-aead2,\
-    $(MODULES_DIR)/kernel/crypto/aead \
-,03))
-
-$(eval $(call KMOD_template,CRYPTO_HASH2,crypto-hash2,\
-    $(MODULES_DIR)/kernel/crypto/crypto_hash \
-,04))
-
-$(eval $(call KMOD_template,CRYPTO_RNG2,crypto-rng2,\
-    $(MODULES_DIR)/kernel/crypto/rng \
-    $(MODULES_DIR)/kernel/crypto/krng \
-,06))
-
-$(eval $(call KMOD_template,CRYPTO_MANAGER2,crypto-manager2,\
-    $(MODULES_DIR)/kernel/crypto/cryptomgr \
-    $(MODULES_DIR)/kernel/crypto/eseqiv \
-    $(MODULES_DIR)/kernel/crypto/chainiv \
-,07))
 
 $(eval $(call KMOD_template,CRYPTO_AUTHENC,crypto-authenc,\
     $(MODULES_DIR)/kernel/crypto/authenc \
@@ -954,13 +920,9 @@ $(eval $(call KMOD_template,CRYPTO_SERPENT,crypto-serpent,\
     $(MODULES_DIR)/kernel/crypto/serpent_generic \
 ,11))
 
-ifeq ($(KERNEL_BASE),3)
-ifeq ($(KERNEL_MAJ),4)
 $(eval $(call KMOD_template,CRYPTO_AES,crypto-aes,\
     $(MODULES_DIR)/kernel/crypto/aes_generic \
 ,10))
-endif
-endif
 
 $(eval $(call KMOD_template,CRYPTO_AES_586,crypto-aes-586,\
     $(MODULES_DIR)/kernel/arch/x86/crypto/aes-i586 \
@@ -998,10 +960,8 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
     $(MODULES_DIR)/kernel/crypto/fcrypt \
 ,11))
 
-ZLIB:=lib/zlib_deflate/zlib_deflate
-
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
-    $(foreach mod, $(ZLIB),$(MODULES_DIR)/kernel/$(mod)) \
+    $(MODULES_DIR)/kernel/lib/zlib_deflate/zlib_deflate \
     $(MODULES_DIR)/kernel/crypto/deflate \
 ,10))
 
@@ -1012,11 +972,6 @@ $(eval $(call KMOD_template,CRYPTO_LZO,crypto-lzo,\
 $(eval $(call KMOD_template,CRYPTO_MICHAEL_MIC,crypto-michael-mic,\
     $(MODULES_DIR)/kernel/crypto/michael_mic \
 ,11))
-
-#$(eval $(call KMOD_template,CRYPTO_CRC32C,crypto-crc32c,\
-#    $(MODULES_DIR)/kernel/lib/libcrc32c \
-#    $(MODULES_DIR)/kernel/crypto/crc32c \
-#,11))
 
 $(eval $(call KMOD_template,OCF_CRYPTOSOFT,ocf-cryptosoft,\
     ${MODULES_DIR}/kernel/crypto/ocf/cryptosoft \
@@ -1054,11 +1009,9 @@ $(eval $(call KMOD_template,CODA_FS,coda-fs,\
 	$(MODULES_DIR)/kernel/fs/coda/coda \
 ,30))
 
-ifneq ($(ADK_KERNEL_EXT2_FS),y)
 $(eval $(call KMOD_template,EXT2_FS,ext2-fs,\
 	$(MODULES_DIR)/kernel/fs/ext2/ext2 \
 ,30))
-endif
 
 $(eval $(call KMOD_template,FS_MBCACHE,fs-mbcache,\
 	$(MODULES_DIR)/kernel/fs/mbcache \
@@ -1071,7 +1024,7 @@ $(eval $(call KMOD_template,EXT3_FS,ext3-fs,\
 
 $(eval $(call KMOD_template,JBD2,jbd2,\
 	$(MODULES_DIR)/kernel/fs/jbd2/jbd2 \
-,29, kmod-crypto-hash2))
+,29))
 
 $(eval $(call KMOD_template,EXT4_FS,ext4-fs,\
 	$(MODULES_DIR)/kernel/fs/ext4/ext4 \
