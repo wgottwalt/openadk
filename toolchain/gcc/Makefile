@@ -200,15 +200,20 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 			--enable-languages=$(LANGUAGES) \
 			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
-			--enable-shared
+			--enable-shared='libstdc++' \
+			--enable-cxx-flags='$(TARGET_CXXFLAGS)'
 	touch $@
 
 $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
-	PATH='$(TARGET_PATH)' $(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_FINAL) all
+	cd $(GCC_BUILD_DIR_FINAL); \
+		PATH='$(TARGET_PATH)' \
+		$(MAKE) ${GCC_MAKEOPTS} all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
-	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_FINAL) install
+	cd $(GCC_BUILD_DIR_FINAL); \
+		PATH='$(TARGET_PATH)' \
+		$(MAKE) install
 	# remove duplicate tools, convert hardlinks to symlinks
 	set -e; \
 	cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin; \
