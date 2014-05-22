@@ -84,18 +84,17 @@ config ADK_KERNEL_CRYPTO_HASH2
 	help
 
 config ADK_KERNEL_CRYPTO_BLKCIPHER
-	tristate
+	boolean
 
 config ADK_KERNEL_CRYPTO_BLKCIPHER2
-	tristate
-	#select ADK_KERNEL_CRYPTO_RNG2
+	boolean
 	select ADK_KERNEL_CRYPTO_ALGAPI2
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	default n
 	help
 
 config ADK_KERNEL_CRYPTO_WORKQUEUE
-	tristate
+	boolean
 
 config ADK_KERNEL_CRYPTO_MANAGER
 	tristate

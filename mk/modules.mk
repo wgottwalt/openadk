@@ -849,11 +849,6 @@ $(eval $(call KMOD_template,CRYPTO_HASH2,crypto-hash2,\
     $(MODULES_DIR)/kernel/crypto/crypto_hash \
 ,04))
 
-$(eval $(call KMOD_template,CRYPTO_BLKCIPHER2,crypto-blkcipher2,\
-    $(MODULES_DIR)/kernel/crypto/crypto_wq \
-    $(MODULES_DIR)/kernel/crypto/crypto_blkcipher \
-,05))
-
 $(eval $(call KMOD_template,CRYPTO_RNG2,crypto-rng2,\
     $(MODULES_DIR)/kernel/crypto/rng \
     $(MODULES_DIR)/kernel/crypto/krng \
