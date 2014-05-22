@@ -1159,10 +1159,6 @@ $(eval $(call KMOD_template,SND,snd,\
 	$(MODULES_DIR)/kernel/sound/core/snd-timer \
 ,40))
 
-$(eval $(call KMOD_template,SND_PCM_DMAENGINE,snd-pcm-dmaengine,\
-	$(MODULES_DIR)/kernel/sound/core/snd-pcm-dmaengine \
-,42))
-
 $(eval $(call KMOD_template,SND_COMPRESS,snd-compress,\
 	$(MODULES_DIR)/kernel/sound/core/snd-compress \
 ,42))
@@ -1211,9 +1207,13 @@ $(eval $(call KMOD_template,SND_PCM,snd-pcm,\
 endif
 endif
 
+$(eval $(call KMOD_template,SND_PCM_DMAENGINE,snd-pcm-dmaengine,\
+	$(MODULES_DIR)/kernel/sound/core/snd-pcm-dmaengine \
+,54))
+
 $(eval $(call KMOD_template,SND_SOC,snd-soc,\
 	$(MODULES_DIR)/kernel/sound/soc/snd-soc-core \
-,54))
+,55))
 
 $(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
 	$(MODULES_DIR)/kernel/sound/arm/snd-pxa2xx-lib \
