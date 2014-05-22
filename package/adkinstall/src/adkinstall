@@ -101,7 +101,7 @@ function get_max_size {
 
 # create partition, with fstype start and end in sectors
 function create_partition {
-	print creating partition on $1 for filesystem $2
+	print creating partition on $1
 	parted -s $1 unit s mkpart primary $2 $3 $4 > /dev/null 2>&1
 	sync
 }
