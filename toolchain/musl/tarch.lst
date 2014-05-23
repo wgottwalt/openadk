@@ -1,12 +1,7 @@
 arm
-armhf
 microblaze
-microblazeel
 mips
-mipsel
 ppc
 sh4
-sh4eb
 x86
 x86_64
-x86_64_x32

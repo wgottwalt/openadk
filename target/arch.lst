@@ -3,6 +3,7 @@ arm
 m68k
 microblaze
 mips
+mips64
 ppc
 ppc64
 sparc

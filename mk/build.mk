@@ -309,25 +309,25 @@ endif
 	@for symbol in ${DEFCONFIG}; do \
 		echo $$symbol >> $(TOPDIR)/.defconfig; \
 	done
-	if [ ! -z "$(ADK_TARGET_FS)" ];then \
+	@if [ ! -z "$(ADK_TARGET_FS)" ];then \
 		grep "^config" target/config/Config.in.target \
 			|grep -i "$(ADK_TARGET_FS)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
-	if [ ! -z "$(ADK_TARGET_COLLECTION)" ];then \
+	@if [ ! -z "$(ADK_TARGET_COLLECTION)" ];then \
 		grep -h "^config" target/packages/pkg-available/* \
 			|grep -i "$(ADK_TARGET_COLLECTION)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
-	if [ ! -z "$(ADK_TARGET_LIBC)" ];then \
+	@if [ ! -z "$(ADK_TARGET_LIBC)" ];then \
 		grep "^config" target/config/Config.in.libc.choice \
 			|grep -i "$(ADK_TARGET_LIBC)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
-	if [ ! -z "$(ADK_TARGET_SYSTEM)" ];then \
+	@if [ ! -z "$(ADK_TARGET_SYSTEM)" ];then \
 		system=$$(echo "$(ADK_TARGET_SYSTEM)" |sed -e "s/-/_/g"); \
 		grep -h "^config" target/*/Config.in.systems \
 			|grep -i "$$system$$" \
