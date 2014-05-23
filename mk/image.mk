@@ -128,7 +128,7 @@ kernel-package: kernel-strip
 	$(TRACE) target/$(ADK_TARGET_ARCH)-install-kernel-package
 	$(PKG_INSTALL) $(KERNEL_PKG) $(MAKE_TRACE)
 
-ifeq ($(ADK_HARDWARE_QEMU),y)
+ifeq ($(ADK_TARGET_QEMU),y)
 TARGET_KERNEL=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_FS}-kernel
 INITRAMFS=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}
 ROOTFSSQUASHFS=		${ADK_TARGET_SYSTEM}-$(CPU_ARCH)-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.img
@@ -150,7 +150,7 @@ ${FW_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}/.adk kernel-package
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | gzip -n9 >$@
-ifeq ($(ADK_HARDWARE_QEMU),y)
+ifeq ($(ADK_TARGET_QEMU),y)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 endif
 

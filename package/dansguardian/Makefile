@@ -24,7 +24,7 @@ $(eval $(call PKG_template,DANSGUARDIAN,dansguardian,${PKG_VERSION}-${PKG_RELEAS
 
 ifeq ($(ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX),y)
 LIBRARIES:=		-nodefaultlibs -luClibc++ -lm -lc -lgcc
-ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
+ifeq ($(ADK_TARGET_USE_SSP),y)
 LIBRARIES+=		-lssp
 endif
 endif

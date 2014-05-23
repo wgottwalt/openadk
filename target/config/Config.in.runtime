@@ -31,7 +31,7 @@ source "target/config/Config.in.scripts"
 
 config ADK_RUNTIME_TMPFS_SIZE
 	string "size of /tmp in memory (kB)"
-	default "16384" if ADK_HARDWARE_QEMU
+	default "16384" if ADK_TARGET_QEMU
 	default "16384" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default "32768" if ADK_TARGET_SYSTEM_IBM_X40
 	default "32768" if ADK_TARGET_SYSTEM_RASPBERRY_PI

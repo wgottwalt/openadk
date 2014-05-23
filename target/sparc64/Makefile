@@ -22,7 +22,7 @@ endif
 ifeq ($(ADK_TARGET_FS),archive)
 targethelp:
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
-ifeq ($(ADK_HARDWARE_QEMU),y)
+ifeq ($(ADK_TARGET_QEMU),y)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
@@ -34,7 +34,7 @@ ifeq ($(ADK_TARGET_FS),initramfs)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
-ifeq ($(ADK_HARDWARE_QEMU),y)
+ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-${CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
 endif
@@ -47,7 +47,7 @@ endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
-ifeq ($(ADK_HARDWARE_QEMU),y)
+ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-${CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif

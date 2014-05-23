@@ -8,7 +8,7 @@ FS_CMDLINE:=$(3)
 endif
 endef
 
-ifeq ($(ADK_HARDWARE_QEMU),y)
+ifeq ($(ADK_TARGET_QEMU),y)
 MTDDEV:=	root=/dev/mtdblock0
 ifeq ($(ADK_TARGET_ROOTFS_ARCHIVE),y)
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)

@@ -222,7 +222,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		done;
 	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-gcc-${PKG_VERSION})
-ifeq ($(ADK_TOOLCHAIN_USE_GOLD),y)
+ifeq ($(ADK_TARGET_USE_GOLD),y)
 	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf $(GNU_TARGET_NAME)-ld.gold $(GNU_TARGET_NAME)-ld)
 else

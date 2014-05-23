@@ -64,7 +64,7 @@ CONFIGURE_ARGS+=	--enable-glib \
 			--with-avahi-user=avahi \
 			--with-avahi-group=avahi
 
-ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
+ifeq ($(ADK_TARGET_USE_SSP),y)
 CONFIGURE_ARGS+=	--enable-stack-protector
 else
 CONFIGURE_ARGS+=	--disable-stack-protector

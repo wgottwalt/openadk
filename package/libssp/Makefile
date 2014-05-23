@@ -9,6 +9,9 @@ endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 include ${TOPDIR}/toolchain/uclibc/Makefile.inc
 endif
+ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
+include ${TOPDIR}/toolchain/musl/Makefile.inc
+endif
 
 PKG_NAME:=		libssp
 PKG_DESCR:=		stack smashing protection library

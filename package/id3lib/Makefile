@@ -30,7 +30,7 @@ ifeq ($(ADK_COMPILE_ID3LIB_WITH_UCLIBCXX),y)
 LIBRARIES:=-nodefaultlibs -luClibc++ -lz -lm -lc
 endif
 
-ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
+ifeq ($(ADK_TARGET_USE_SSP),y)
 LIBRARIES+=-lssp -fstack-protector
 endif
 

@@ -23,7 +23,7 @@ CONFIGURE_ARGS+=	--without-pam \
 			--without-sendmail \
 			--with-env-editor
 
-ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
+ifeq ($(ADK_TARGET_USE_SSP),y)
 CONFIGURE_ARGS+=	--enable-hardening
 else
 CONFIGURE_ARGS+=	--disable-hardening

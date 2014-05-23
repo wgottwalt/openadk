@@ -60,7 +60,7 @@ config ADK_TARGET_IP
 config ADK_TARGET_PORT
 	prompt "Set target port for make check"
 	string
-	default "2222" if ADK_HARDWARE_QEMU
+	default "2222" if ADK_TARGET_QEMU
 	default "22"
 	help
 

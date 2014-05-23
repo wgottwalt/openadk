@@ -56,7 +56,7 @@ CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
 TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/usr/lib/heimdal -Wl,-rpath -Wl,/usr/lib/heimdal
 endif
 
-ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
+ifeq ($(ADK_TARGET_USE_SSP),y)
 CONFIGURE_ARGS+=	--with-stackprotect
 else
 CONFIGURE_ARGS+=	--without-stackprotect
@@ -84,10 +84,6 @@ CONFIGURE_ARGS+=	--disable-strip \
 			--with-privsep-path=/var/run/sshd \
 			--with-ssl-dir="${STAGING_TARGET_DIR}/usr"
 
-ifeq ($(ADK_STATIC),y)
-TARGET_CFLAGS+=		-static
-TARGET_LDFLAGS+=	-static
-endif
 
 openssh-install:
 	${INSTALL_DIR} ${IDIR_OPENSSH}/etc/ssh

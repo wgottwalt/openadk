@@ -71,7 +71,7 @@ $(WRKBUILD)/.fixup:
 	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -delete
 	rm -rf $(STAGING_TARGET_DIR)/usr/share/locale $(STAGING_TARGET_DIR)/usr/share/i18n
 	rm -rf $(STAGING_TARGET_DIR)/usr/lib/gconv
-ifeq ($(ADK_TOOLCHAIN),y)
+ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 	# strip target libs and host tools for toolchain builds
 	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh \
 		$(STAGING_TARGET_DIR) $(TOOLCHAIN_DIR)/usr/lib/gcc/$(GNU_TARGET_NAME)

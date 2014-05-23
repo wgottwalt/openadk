@@ -88,7 +88,7 @@ config ADK_KERNEL_MMC_SDHCI_BCM2708_DMA
 	boolean
 
 menu "SATA/PATA devices support"
-depends on ADK_TARGET_WITH_PATA || ADK_TARGET_WITH_SATA || ADK_HARDWARE_QEMU
+depends on ADK_TARGET_WITH_PATA || ADK_TARGET_WITH_SATA || ADK_TARGET_QEMU
 
 config ADK_KERNEL_PATA_RB532
 	prompt "CF disk driver for Mikrotik RB532"
@@ -232,7 +232,7 @@ config ADK_KERNEL_PATA_PXA
 endmenu
 
 menu "SCSI driver support"
-depends on ADK_TARGET_WITH_SCSI || ADK_HARDWARE_QEMU
+depends on ADK_TARGET_WITH_SCSI || ADK_TARGET_QEMU
 
 config ADK_KERNEL_SCSI_SYM53C8XX_2
 	prompt "Symbios Logic 53C8XX2 support"

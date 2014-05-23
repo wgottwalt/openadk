@@ -28,7 +28,7 @@ $(eval $(call PKG_template,LIBFLTK,libfltk,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 ifeq ($(ADK_COMPILE_LIBFLTK_WITH_UCLIBCXX),y)
 LIBRARIES:=		-nodefaultlibs -luClibc++ -lm -lc -lgcc
-ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
+ifeq ($(ADK_TARGET_USE_SSP),y)
 LIBRARIES+=		-lssp -lssp_nonshared
 endif
 endif

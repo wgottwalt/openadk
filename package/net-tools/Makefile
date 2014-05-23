@@ -23,9 +23,6 @@ $(eval $(call PKG_template,ARP,arp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},
 
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
-ifeq ($(ADK_TOOLCHAIN_USE_SSP),y)
-TARGET_LDFLAGS+=	-lssp
-endif
 
 do-configure:
 	$(CP) ./files/config.* $(WRKBUILD)/
