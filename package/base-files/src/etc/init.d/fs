@@ -18,32 +18,10 @@
 	lvm vgchange -ay
 }
 
-rootdisk=$(readlink /dev/root)
-# strip partitions (f.e. mmcblk0p2, sda2, ..)
-rootdisk=${rootdisk%p*}
-rootdisk=${rootdisk%[1-9]}
-rootparts=$(grep "^/dev/${rootdisk}" /etc/fstab|awk '{ print $1 }')
-
-for part in $rootparts; do
-	fstype=$(grep "^$part " /etc/fstab|awk '{ print $3 }')
-	mnt=$(grep "^$part " /etc/fstab|awk '{ print $2 }')
-	[ -x /usr/sbin/fsck.$fstype ] && {
-		logger -s -t '' "Checking $fstype filesystem on $part"
-		fsck $part
-	}
-	grep $fstype /proc/filesystems >/dev/null 2>&1
-	if [ $? -eq 0 ];then
-		mount $mnt
-	else
-		logger -s "Filesystem $fstype not in kernel"
-		exit 1
-	fi
-done
-
-# mount local filesystems not rootdisk
+# mount local filesystems
 fstypes="ext2 ext3 ext4 xfs vfat ntfs"
 for fs in $fstypes; do
-	disks=$(grep -v "^#" /etc/fstab| grep -v $rootdisk |grep $fs|awk '{ print $1 }' >/dev/null 2>&1)
+	disks=$(grep -v "^#" /etc/fstab|grep $fs|awk '{ print $1 }' >/dev/null 2>&1)
 	for disk in $disks; do
 		logger -t '' "Found $disk with filesystem $fs"
 		grep $fs /proc/filesystems >/dev/null 2>&1
