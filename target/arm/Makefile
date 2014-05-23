@@ -74,9 +74,10 @@ endif
 endif
 
 kernel-strip:
+	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
-kernel-install:
-	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+kernel-install: kernel-strip
+	@cp $(BUILD_DIR) $(FW_DIR)/$(TARGET_KERNEL)
 
 dtb-install:
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
