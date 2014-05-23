@@ -45,7 +45,6 @@ HOST_CONFIGURE_ARGS+=	--with-python \
 HOST_MAKE_FLAGS+=	LDFLAGS=-lpthread
 
 AUTOTOOL_STYLE:=	autoreconf
-TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_LDFLAGS+=	-lpthread
 ifneq ($(ADK_PACKAGE_LIBXML2_PYTHON),)
 CONFIGURE_ARGS+=	--with-python

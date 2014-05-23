@@ -10,6 +10,7 @@ PKG_MD5SUM:=		eba449138b972fbf4547a8c152fea162
 PKG_DESCR:=		pixel manipulation library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libpng
+HOST_BUILDDEP:=		libpng-host
 PKG_SITES:=		http://www.cairographics.org/releases/
 PKG_OPTS:=		dev
 
@@ -19,11 +20,13 @@ ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly
 endif
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,PIXMAN,pixman,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,PIXMAN,pixman,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
+HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--disable-gtk \
 			--disable-arm-iwmmxt
 
@@ -31,4 +34,5 @@ pixman-install:
 	${INSTALL_DIR} ${IDIR_PIXMAN}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libpixman-1.so* ${IDIR_PIXMAN}/usr/lib
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

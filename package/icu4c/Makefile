@@ -24,12 +24,14 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,ICU4C,icu4c,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,ICU4C,icu4c,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CFLAGS_FOR_BUILD+=	-fPIC
+CXXFLAGS_FOR_BUILD+=	-fPIC
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--enable-extras=no \
 			--enable-samples=no \
 			--enable-tests=no \
-			--enable-shared=no \
 			--enable-dyload=no \
+			--enable-shared=no \
 			--enable-static
 CONFIGURE_ARGS+=	--with-cross-build=${HOST_BUILD_DIR}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}-host/icu/source \
 			--enable-extras=no \

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		acdecdb9f08f3bf662a68bf7dafb8b82
 PKG_DESCR:=		SVG library
 PKG_BUILDDEP:=		libcroco
-HOST_BUILDDEP:=		libcroco-host
+HOST_BUILDDEP:=		libcroco-host gdk-pixbuf-host pango-host
 PKG_SECTION:=		libs
 PKG_URL:=		https://wiki.gnome.org/action/show/Projects/LibRsvg?action=show&redirect=LibRsvg
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/librsvg/2.40/
@@ -23,6 +23,7 @@ $(eval $(call HOST_template,LIBRSVG,librsvg,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBRSVG,librsvg,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--enable-introspection=no
 CONFIGURE_ARGS+=	--enable-introspection=no
 
 librsvg-install:
