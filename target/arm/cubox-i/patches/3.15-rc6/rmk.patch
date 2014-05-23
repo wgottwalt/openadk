@@ -1,6 +1,6 @@
-diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6dl-hummingboard.dts linux-3.15-rc4/arch/arm/boot/dts/imx6dl-hummingboard.dts
---- linux-3.15-rc4.orig/arch/arm/boot/dts/imx6dl-hummingboard.dts	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/boot/dts/imx6dl-hummingboard.dts	2014-05-07 17:05:41.464107257 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/boot/dts/imx6dl-hummingboard.dts linux-3.15-rc6/arch/arm/boot/dts/imx6dl-hummingboard.dts
+--- linux-3.15-rc6.orig/arch/arm/boot/dts/imx6dl-hummingboard.dts	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/boot/dts/imx6dl-hummingboard.dts	2014-05-23 11:26:48.244939835 +0200
 @@ -67,6 +67,14 @@
  	status = "okay";
  };
@@ -57,9 +57,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6dl-hummingboard.dts linux-3.
  		pinctrl_hummingboard_spdif: hummingboard-spdif {
  			fsl,pins = <MX6QDL_PAD_GPIO_17__SPDIF_OUT 0x13091>;
  		};
-diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6q-cubox-i.dts linux-3.15-rc4/arch/arm/boot/dts/imx6q-cubox-i.dts
---- linux-3.15-rc4.orig/arch/arm/boot/dts/imx6q-cubox-i.dts	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/boot/dts/imx6q-cubox-i.dts	2014-05-07 17:05:41.464107257 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/boot/dts/imx6q-cubox-i.dts linux-3.15-rc6/arch/arm/boot/dts/imx6q-cubox-i.dts
+--- linux-3.15-rc6.orig/arch/arm/boot/dts/imx6q-cubox-i.dts	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/boot/dts/imx6q-cubox-i.dts	2014-05-23 11:26:48.244939835 +0200
 @@ -13,4 +13,8 @@
  
  &sata {
@@ -69,9 +69,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6q-cubox-i.dts linux-3.15-rc4
 +	fsl,transmit-atten-16ths = <9>;
 +	fsl,no-spread-spectrum;
  };
-diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6qdl-cubox-i.dtsi linux-3.15-rc4/arch/arm/boot/dts/imx6qdl-cubox-i.dtsi
---- linux-3.15-rc4.orig/arch/arm/boot/dts/imx6qdl-cubox-i.dtsi	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/boot/dts/imx6qdl-cubox-i.dtsi	2014-05-07 17:05:41.464107257 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/boot/dts/imx6qdl-cubox-i.dtsi linux-3.15-rc6/arch/arm/boot/dts/imx6qdl-cubox-i.dtsi
+--- linux-3.15-rc6.orig/arch/arm/boot/dts/imx6qdl-cubox-i.dtsi	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/boot/dts/imx6qdl-cubox-i.dtsi	2014-05-23 11:26:48.244939835 +0200
 @@ -12,6 +12,19 @@
  		pinctrl-0 = <&pinctrl_cubox_i_ir>;
  	};
@@ -195,9 +195,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6qdl-cubox-i.dtsi linux-3.15-
  	vmmc-supply = <&reg_3p3v>;
  	cd-gpios = <&gpio1 4 0>;
  	status = "okay";
-diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6qdl.dtsi linux-3.15-rc4/arch/arm/boot/dts/imx6qdl.dtsi
---- linux-3.15-rc4.orig/arch/arm/boot/dts/imx6qdl.dtsi	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/boot/dts/imx6qdl.dtsi	2014-05-07 17:05:41.464107257 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/boot/dts/imx6qdl.dtsi linux-3.15-rc6/arch/arm/boot/dts/imx6qdl.dtsi
+--- linux-3.15-rc6.orig/arch/arm/boot/dts/imx6qdl.dtsi	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/boot/dts/imx6qdl.dtsi	2014-05-23 11:26:48.244939835 +0200
 @@ -128,6 +128,8 @@
  			cache-level = <2>;
  			arm,tag-latency = <4 2 3>;
@@ -207,9 +207,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6qdl.dtsi linux-3.15-rc4/arch
  		};
  
  		pcie: pcie@0x01000000 {
-diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6qdl-microsom.dtsi linux-3.15-rc4/arch/arm/boot/dts/imx6qdl-microsom.dtsi
---- linux-3.15-rc4.orig/arch/arm/boot/dts/imx6qdl-microsom.dtsi	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/boot/dts/imx6qdl-microsom.dtsi	2014-05-07 17:05:49.488157029 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/boot/dts/imx6qdl-microsom.dtsi linux-3.15-rc6/arch/arm/boot/dts/imx6qdl-microsom.dtsi
+--- linux-3.15-rc6.orig/arch/arm/boot/dts/imx6qdl-microsom.dtsi	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/boot/dts/imx6qdl-microsom.dtsi	2014-05-23 11:26:48.244939835 +0200
 @@ -1,9 +1,69 @@
  /*
   * Copyright (C) 2013,2014 Russell King
@@ -340,9 +340,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6qdl-microsom.dtsi linux-3.15
 +	pinctrl-0 = <&pinctrl_microsom_brcm_wifi &pinctrl_microsom_usdhc1>;
 +	vmmc-supply = <&reg_brcm>;
 +};
-diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6sl.dtsi linux-3.15-rc4/arch/arm/boot/dts/imx6sl.dtsi
---- linux-3.15-rc4.orig/arch/arm/boot/dts/imx6sl.dtsi	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/boot/dts/imx6sl.dtsi	2014-05-07 17:05:49.488157029 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/boot/dts/imx6sl.dtsi linux-3.15-rc6/arch/arm/boot/dts/imx6sl.dtsi
+--- linux-3.15-rc6.orig/arch/arm/boot/dts/imx6sl.dtsi	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/boot/dts/imx6sl.dtsi	2014-05-23 11:26:48.244939835 +0200
 @@ -111,6 +111,8 @@
  			cache-level = <2>;
  			arm,tag-latency = <4 2 3>;
@@ -352,9 +352,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/imx6sl.dtsi linux-3.15-rc4/arch/
  		};
  
  		pmu {
-diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/marco.dtsi linux-3.15-rc4/arch/arm/boot/dts/marco.dtsi
---- linux-3.15-rc4.orig/arch/arm/boot/dts/marco.dtsi	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/boot/dts/marco.dtsi	2014-05-07 17:05:49.488157029 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/boot/dts/marco.dtsi linux-3.15-rc6/arch/arm/boot/dts/marco.dtsi
+--- linux-3.15-rc6.orig/arch/arm/boot/dts/marco.dtsi	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/boot/dts/marco.dtsi	2014-05-23 11:26:48.244939835 +0200
 @@ -36,7 +36,7 @@
  		ranges = <0x40000000 0x40000000 0xa0000000>;
  
@@ -364,9 +364,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/marco.dtsi linux-3.15-rc4/arch/a
  			reg = <0xc0030000 0x1000>;
  			interrupts = <0 59 0>;
  			arm,tag-latency = <1 1 1>;
-diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/prima2.dtsi linux-3.15-rc4/arch/arm/boot/dts/prima2.dtsi
---- linux-3.15-rc4.orig/arch/arm/boot/dts/prima2.dtsi	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/boot/dts/prima2.dtsi	2014-05-07 17:05:49.488157029 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/boot/dts/prima2.dtsi linux-3.15-rc6/arch/arm/boot/dts/prima2.dtsi
+--- linux-3.15-rc6.orig/arch/arm/boot/dts/prima2.dtsi	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/boot/dts/prima2.dtsi	2014-05-23 11:26:48.244939835 +0200
 @@ -48,7 +48,7 @@
  		ranges = <0x40000000 0x40000000 0x80000000>;
  
@@ -376,9 +376,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/boot/dts/prima2.dtsi linux-3.15-rc4/arch/
  			reg = <0x80040000 0x1000>;
  			interrupts = <59>;
  			arm,tag-latency = <1 1 1>;
-diff -Nur linux-3.15-rc4.orig/arch/arm/configs/imx_v6_v7_defconfig linux-3.15-rc4/arch/arm/configs/imx_v6_v7_defconfig
---- linux-3.15-rc4.orig/arch/arm/configs/imx_v6_v7_defconfig	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/configs/imx_v6_v7_defconfig	2014-05-07 17:05:49.488157029 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/configs/imx_v6_v7_defconfig linux-3.15-rc6/arch/arm/configs/imx_v6_v7_defconfig
+--- linux-3.15-rc6.orig/arch/arm/configs/imx_v6_v7_defconfig	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/configs/imx_v6_v7_defconfig	2014-05-23 11:26:48.248939848 +0200
 @@ -245,6 +245,7 @@
  CONFIG_DRM_IMX_LDB=y
  CONFIG_DRM_IMX_IPUV3_CORE=y
@@ -387,9 +387,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/configs/imx_v6_v7_defconfig linux-3.15-rc
  CONFIG_COMMON_CLK_DEBUG=y
  # CONFIG_IOMMU_SUPPORT is not set
  CONFIG_PWM=y
-diff -Nur linux-3.15-rc4.orig/arch/arm/include/asm/hardware/cache-l2x0.h linux-3.15-rc4/arch/arm/include/asm/hardware/cache-l2x0.h
---- linux-3.15-rc4.orig/arch/arm/include/asm/hardware/cache-l2x0.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/include/asm/hardware/cache-l2x0.h	2014-05-07 17:05:49.488157029 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/include/asm/hardware/cache-l2x0.h linux-3.15-rc6/arch/arm/include/asm/hardware/cache-l2x0.h
+--- linux-3.15-rc6.orig/arch/arm/include/asm/hardware/cache-l2x0.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/include/asm/hardware/cache-l2x0.h	2014-05-23 11:26:48.248939848 +0200
 @@ -26,8 +26,8 @@
  #define L2X0_CACHE_TYPE			0x004
  #define L2X0_CTRL			0x100
@@ -528,9 +528,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/include/asm/hardware/cache-l2x0.h linux-3
  
  #define L2X0_CTRL_EN			1
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/include/asm/outercache.h linux-3.15-rc4/arch/arm/include/asm/outercache.h
---- linux-3.15-rc4.orig/arch/arm/include/asm/outercache.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/include/asm/outercache.h	2014-05-07 17:05:49.488157029 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/include/asm/outercache.h linux-3.15-rc6/arch/arm/include/asm/outercache.h
+--- linux-3.15-rc6.orig/arch/arm/include/asm/outercache.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/include/asm/outercache.h	2014-05-23 11:26:48.248939848 +0200
 @@ -21,6 +21,7 @@
  #ifndef __ASM_OUTERCACHE_H
  #define __ASM_OUTERCACHE_H
@@ -659,9 +659,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/include/asm/outercache.h linux-3.15-rc4/a
  static inline void outer_sync(void)
  {
  	if (outer_cache.sync)
-diff -Nur linux-3.15-rc4.orig/arch/arm/Kconfig linux-3.15-rc4/arch/arm/Kconfig
---- linux-3.15-rc4.orig/arch/arm/Kconfig	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/Kconfig	2014-05-07 17:05:49.488157029 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/Kconfig linux-3.15-rc6/arch/arm/Kconfig
+--- linux-3.15-rc6.orig/arch/arm/Kconfig	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/Kconfig	2014-05-23 11:26:48.248939848 +0200
 @@ -1230,19 +1230,6 @@
  	  register of the Cortex-A9 which reduces the linefill issuing
  	  capabilities of the processor.
@@ -741,9 +741,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/Kconfig linux-3.15-rc4/arch/arm/Kconfig
  config ARM_ERRATA_775420
         bool "ARM errata: A data cache maintenance operation which aborts, might lead to deadlock"
         depends on CPU_V7
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-berlin/berlin.c linux-3.15-rc4/arch/arm/mach-berlin/berlin.c
---- linux-3.15-rc4.orig/arch/arm/mach-berlin/berlin.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-berlin/berlin.c	2014-05-07 17:05:49.492157054 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-berlin/berlin.c linux-3.15-rc6/arch/arm/mach-berlin/berlin.c
+--- linux-3.15-rc6.orig/arch/arm/mach-berlin/berlin.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-berlin/berlin.c	2014-05-23 11:26:48.256939874 +0200
 @@ -24,7 +24,7 @@
  	 * with DT probing for L2CCs, berlin_init_machine can be removed.
  	 * Note: 88DE3005 (Armada 1500-mini) uses pl310 l2cc
@@ -753,9 +753,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-berlin/berlin.c linux-3.15-rc4/arch/
  	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
  }
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-cns3xxx/core.c linux-3.15-rc4/arch/arm/mach-cns3xxx/core.c
---- linux-3.15-rc4.orig/arch/arm/mach-cns3xxx/core.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-cns3xxx/core.c	2014-05-07 17:05:49.492157054 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-cns3xxx/core.c linux-3.15-rc6/arch/arm/mach-cns3xxx/core.c
+--- linux-3.15-rc6.orig/arch/arm/mach-cns3xxx/core.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-cns3xxx/core.c	2014-05-23 11:26:48.256939874 +0200
 @@ -272,9 +272,9 @@
  	 *
  	 * 1 cycle of latency for setup, read and write accesses
@@ -784,9 +784,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-cns3xxx/core.c linux-3.15-rc4/arch/a
  }
  
  #endif /* CONFIG_CACHE_L2X0 */
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-exynos/common.h linux-3.15-rc4/arch/arm/mach-exynos/common.h
---- linux-3.15-rc4.orig/arch/arm/mach-exynos/common.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-exynos/common.h	2014-05-07 17:05:49.492157054 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-exynos/common.h linux-3.15-rc6/arch/arm/mach-exynos/common.h
+--- linux-3.15-rc6.orig/arch/arm/mach-exynos/common.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-exynos/common.h	2014-05-23 11:26:48.256939874 +0200
 @@ -55,7 +55,6 @@
  	NUM_SYS_POWERDOWN,
  };
@@ -795,9 +795,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-exynos/common.h linux-3.15-rc4/arch/
  struct exynos_pmu_conf {
  	void __iomem *reg;
  	unsigned int val[NUM_SYS_POWERDOWN];
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-exynos/exynos.c linux-3.15-rc4/arch/arm/mach-exynos/exynos.c
---- linux-3.15-rc4.orig/arch/arm/mach-exynos/exynos.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-exynos/exynos.c	2014-05-07 17:05:49.492157054 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-exynos/exynos.c linux-3.15-rc6/arch/arm/mach-exynos/exynos.c
+--- linux-3.15-rc6.orig/arch/arm/mach-exynos/exynos.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-exynos/exynos.c	2014-05-23 11:26:48.256939874 +0200
 @@ -32,9 +32,6 @@
  #include "mfc.h"
  #include "regs-pmu.h"
@@ -827,9 +827,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-exynos/exynos.c linux-3.15-rc4/arch/
  }
  early_initcall(exynos4_l2x0_cache_init);
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-exynos/sleep.S linux-3.15-rc4/arch/arm/mach-exynos/sleep.S
---- linux-3.15-rc4.orig/arch/arm/mach-exynos/sleep.S	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-exynos/sleep.S	2014-05-07 17:05:49.492157054 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-exynos/sleep.S linux-3.15-rc6/arch/arm/mach-exynos/sleep.S
+--- linux-3.15-rc6.orig/arch/arm/mach-exynos/sleep.S	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-exynos/sleep.S	2014-05-23 11:26:48.256939874 +0200
 @@ -16,8 +16,6 @@
   */
  
@@ -874,9 +874,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-exynos/sleep.S linux-3.15-rc4/arch/a
 -l2x0_regs_phys:
 -	.long	0
 -#endif
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-highbank/highbank.c linux-3.15-rc4/arch/arm/mach-highbank/highbank.c
---- linux-3.15-rc4.orig/arch/arm/mach-highbank/highbank.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-highbank/highbank.c	2014-05-07 17:05:49.492157054 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-highbank/highbank.c linux-3.15-rc6/arch/arm/mach-highbank/highbank.c
+--- linux-3.15-rc6.orig/arch/arm/mach-highbank/highbank.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-highbank/highbank.c	2014-05-23 11:26:48.256939874 +0200
 @@ -51,11 +51,13 @@
  }
  
@@ -910,9 +910,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-highbank/highbank.c linux-3.15-rc4/a
  	}
  }
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-imx/clk-pllv3.c linux-3.15-rc4/arch/arm/mach-imx/clk-pllv3.c
---- linux-3.15-rc4.orig/arch/arm/mach-imx/clk-pllv3.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-imx/clk-pllv3.c	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-imx/clk-pllv3.c linux-3.15-rc6/arch/arm/mach-imx/clk-pllv3.c
+--- linux-3.15-rc6.orig/arch/arm/mach-imx/clk-pllv3.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-imx/clk-pllv3.c	2014-05-23 11:26:48.256939874 +0200
 @@ -273,9 +273,10 @@
  	struct clk_pllv3 *pll = to_clk_pllv3(hw);
  	unsigned long min_rate = parent_rate * 27;
@@ -958,9 +958,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-imx/clk-pllv3.c linux-3.15-rc4/arch/
  }
  
  static const struct clk_ops clk_pllv3_av_ops = {
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-imx/mach-vf610.c linux-3.15-rc4/arch/arm/mach-imx/mach-vf610.c
---- linux-3.15-rc4.orig/arch/arm/mach-imx/mach-vf610.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-imx/mach-vf610.c	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-imx/mach-vf610.c linux-3.15-rc6/arch/arm/mach-imx/mach-vf610.c
+--- linux-3.15-rc6.orig/arch/arm/mach-imx/mach-vf610.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-imx/mach-vf610.c	2014-05-23 11:26:48.256939874 +0200
 @@ -22,7 +22,7 @@
  
  static void __init vf610_init_irq(void)
@@ -970,9 +970,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-imx/mach-vf610.c linux-3.15-rc4/arch
  	irqchip_init();
  }
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-imx/suspend-imx6.S linux-3.15-rc4/arch/arm/mach-imx/suspend-imx6.S
---- linux-3.15-rc4.orig/arch/arm/mach-imx/suspend-imx6.S	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-imx/suspend-imx6.S	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-imx/suspend-imx6.S linux-3.15-rc6/arch/arm/mach-imx/suspend-imx6.S
+--- linux-3.15-rc6.orig/arch/arm/mach-imx/suspend-imx6.S	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-imx/suspend-imx6.S	2014-05-23 11:26:48.256939874 +0200
 @@ -334,28 +334,10 @@
   * turned into relative ones.
   */
@@ -1005,9 +1005,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-imx/suspend-imx6.S linux-3.15-rc4/ar
 +#endif
  	b	cpu_resume
  ENDPROC(v7_cpu_resume)
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-imx/system.c linux-3.15-rc4/arch/arm/mach-imx/system.c
---- linux-3.15-rc4.orig/arch/arm/mach-imx/system.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-imx/system.c	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-imx/system.c linux-3.15-rc6/arch/arm/mach-imx/system.c
+--- linux-3.15-rc6.orig/arch/arm/mach-imx/system.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-imx/system.c	2014-05-23 11:26:48.260939887 +0200
 @@ -124,7 +124,7 @@
  	}
  
@@ -1034,9 +1034,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-imx/system.c linux-3.15-rc4/arch/arm
 +	l2x0_of_init(0, ~0);
  }
  #endif
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-mvebu/board-v7.c linux-3.15-rc4/arch/arm/mach-mvebu/board-v7.c
---- linux-3.15-rc4.orig/arch/arm/mach-mvebu/board-v7.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-mvebu/board-v7.c	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-mvebu/board-v7.c linux-3.15-rc6/arch/arm/mach-mvebu/board-v7.c
+--- linux-3.15-rc6.orig/arch/arm/mach-mvebu/board-v7.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-mvebu/board-v7.c	2014-05-23 11:26:48.260939887 +0200
 @@ -60,7 +60,7 @@
  	coherency_init();
  	BUG_ON(mvebu_mbus_dt_init());
@@ -1046,9 +1046,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-mvebu/board-v7.c linux-3.15-rc4/arch
  #endif
  
  	if (of_machine_is_compatible("marvell,armada375"))
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-nomadik/cpu-8815.c linux-3.15-rc4/arch/arm/mach-nomadik/cpu-8815.c
---- linux-3.15-rc4.orig/arch/arm/mach-nomadik/cpu-8815.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-nomadik/cpu-8815.c	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-nomadik/cpu-8815.c linux-3.15-rc6/arch/arm/mach-nomadik/cpu-8815.c
+--- linux-3.15-rc6.orig/arch/arm/mach-nomadik/cpu-8815.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-nomadik/cpu-8815.c	2014-05-23 11:26:48.260939887 +0200
 @@ -147,7 +147,7 @@
  {
  #ifdef CONFIG_CACHE_L2X0
@@ -1058,9 +1058,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-nomadik/cpu-8815.c linux-3.15-rc4/ar
  #endif
  	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
  }
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-omap2/common.h linux-3.15-rc4/arch/arm/mach-omap2/common.h
---- linux-3.15-rc4.orig/arch/arm/mach-omap2/common.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-omap2/common.h	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-omap2/common.h linux-3.15-rc6/arch/arm/mach-omap2/common.h
+--- linux-3.15-rc6.orig/arch/arm/mach-omap2/common.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-omap2/common.h	2014-05-23 11:26:48.260939887 +0200
 @@ -91,6 +91,7 @@
  extern void omap3_secure_sync32k_timer_init(void);
  extern void omap3_gptimer_timer_init(void);
@@ -1069,9 +1069,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-omap2/common.h linux-3.15-rc4/arch/a
  extern void omap5_realtime_timer_init(void);
  
  void omap2420_init_early(void);
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-omap2/io.c linux-3.15-rc4/arch/arm/mach-omap2/io.c
---- linux-3.15-rc4.orig/arch/arm/mach-omap2/io.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-omap2/io.c	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-omap2/io.c linux-3.15-rc6/arch/arm/mach-omap2/io.c
+--- linux-3.15-rc6.orig/arch/arm/mach-omap2/io.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-omap2/io.c	2014-05-23 11:26:48.260939887 +0200
 @@ -609,6 +609,7 @@
  	am43xx_clockdomains_init();
  	am43xx_hwmod_init();
@@ -1088,9 +1088,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-omap2/io.c linux-3.15-rc4/arch/arm/m
  	omap_clk_soc_init = omap4xxx_dt_clk_init;
  }
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-omap2/Kconfig linux-3.15-rc4/arch/arm/mach-omap2/Kconfig
---- linux-3.15-rc4.orig/arch/arm/mach-omap2/Kconfig	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-omap2/Kconfig	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-omap2/Kconfig linux-3.15-rc6/arch/arm/mach-omap2/Kconfig
+--- linux-3.15-rc6.orig/arch/arm/mach-omap2/Kconfig	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-omap2/Kconfig	2014-05-23 11:26:48.260939887 +0200
 @@ -65,6 +65,7 @@
  	select ARCH_HAS_OPP
  	select ARM_GIC
@@ -1099,9 +1099,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-omap2/Kconfig linux-3.15-rc4/arch/ar
  
  config SOC_DRA7XX
  	bool "TI DRA7XX"
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-omap2/omap4-common.c linux-3.15-rc4/arch/arm/mach-omap2/omap4-common.c
---- linux-3.15-rc4.orig/arch/arm/mach-omap2/omap4-common.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-omap2/omap4-common.c	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-omap2/omap4-common.c linux-3.15-rc6/arch/arm/mach-omap2/omap4-common.c
+--- linux-3.15-rc6.orig/arch/arm/mach-omap2/omap4-common.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-omap2/omap4-common.c	2014-05-23 11:26:48.260939887 +0200
 @@ -167,75 +167,57 @@
  	return l2cache_base;
  }
@@ -1212,9 +1212,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-omap2/omap4-common.c linux-3.15-rc4/
  #endif
  
  void __iomem *omap4_get_sar_ram_base(void)
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-omap2/omap-mpuss-lowpower.c linux-3.15-rc4/arch/arm/mach-omap2/omap-mpuss-lowpower.c
---- linux-3.15-rc4.orig/arch/arm/mach-omap2/omap-mpuss-lowpower.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-omap2/omap-mpuss-lowpower.c	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-omap2/omap-mpuss-lowpower.c linux-3.15-rc6/arch/arm/mach-omap2/omap-mpuss-lowpower.c
+--- linux-3.15-rc6.orig/arch/arm/mach-omap2/omap-mpuss-lowpower.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-omap2/omap-mpuss-lowpower.c	2014-05-23 11:26:48.268939913 +0200
 @@ -187,19 +187,15 @@
   * in every restore MPUSS OFF path.
   */
@@ -1241,9 +1241,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-omap2/omap-mpuss-lowpower.c linux-3.
  {}
  #endif
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-prima2/l2x0.c linux-3.15-rc4/arch/arm/mach-prima2/l2x0.c
---- linux-3.15-rc4.orig/arch/arm/mach-prima2/l2x0.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-prima2/l2x0.c	2014-05-07 17:05:51.040166651 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-prima2/l2x0.c linux-3.15-rc6/arch/arm/mach-prima2/l2x0.c
+--- linux-3.15-rc6.orig/arch/arm/mach-prima2/l2x0.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-prima2/l2x0.c	2014-05-23 11:26:48.268939913 +0200
 @@ -8,42 +8,10 @@
  
  #include <linux/init.h>
@@ -1288,9 +1288,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-prima2/l2x0.c linux-3.15-rc4/arch/ar
 +	return l2x0_of_init(0, ~0);
  }
  early_initcall(sirfsoc_l2x0_init);
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-prima2/pm.c linux-3.15-rc4/arch/arm/mach-prima2/pm.c
---- linux-3.15-rc4.orig/arch/arm/mach-prima2/pm.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-prima2/pm.c	2014-05-07 17:05:51.044166676 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-prima2/pm.c linux-3.15-rc6/arch/arm/mach-prima2/pm.c
+--- linux-3.15-rc6.orig/arch/arm/mach-prima2/pm.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-prima2/pm.c	2014-05-23 11:26:48.268939913 +0200
 @@ -71,7 +71,6 @@
  	case PM_SUSPEND_MEM:
  		sirfsoc_pre_suspend_power_off();
@@ -1299,9 +1299,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-prima2/pm.c linux-3.15-rc4/arch/arm/
  		outer_disable();
  		/* go zzz */
  		cpu_suspend(0, sirfsoc_finish_suspend);
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-realview/realview_eb.c linux-3.15-rc4/arch/arm/mach-realview/realview_eb.c
---- linux-3.15-rc4.orig/arch/arm/mach-realview/realview_eb.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-realview/realview_eb.c	2014-05-07 17:05:51.044166676 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-realview/realview_eb.c linux-3.15-rc6/arch/arm/mach-realview/realview_eb.c
+--- linux-3.15-rc6.orig/arch/arm/mach-realview/realview_eb.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-realview/realview_eb.c	2014-05-23 11:26:48.268939913 +0200
 @@ -442,8 +442,13 @@
  		realview_eb11mp_fixup();
  
@@ -1318,9 +1318,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-realview/realview_eb.c linux-3.15-rc
  		l2x0_init(__io_address(REALVIEW_EB11MP_L220_BASE), 0x00790000, 0xfe000fff);
  #endif
  		platform_device_register(&pmu_device);
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-realview/realview_pb1176.c linux-3.15-rc4/arch/arm/mach-realview/realview_pb1176.c
---- linux-3.15-rc4.orig/arch/arm/mach-realview/realview_pb1176.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-realview/realview_pb1176.c	2014-05-07 17:05:51.044166676 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-realview/realview_pb1176.c linux-3.15-rc6/arch/arm/mach-realview/realview_pb1176.c
+--- linux-3.15-rc6.orig/arch/arm/mach-realview/realview_pb1176.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-realview/realview_pb1176.c	2014-05-23 11:26:48.268939913 +0200
 @@ -355,7 +355,13 @@
  	int i;
  
@@ -1336,9 +1336,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-realview/realview_pb1176.c linux-3.1
  	l2x0_init(__io_address(REALVIEW_PB1176_L220_BASE), 0x00730000, 0xfe000fff);
  #endif
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-realview/realview_pb11mp.c linux-3.15-rc4/arch/arm/mach-realview/realview_pb11mp.c
---- linux-3.15-rc4.orig/arch/arm/mach-realview/realview_pb11mp.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-realview/realview_pb11mp.c	2014-05-07 17:05:51.044166676 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-realview/realview_pb11mp.c linux-3.15-rc6/arch/arm/mach-realview/realview_pb11mp.c
+--- linux-3.15-rc6.orig/arch/arm/mach-realview/realview_pb11mp.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-realview/realview_pb11mp.c	2014-05-23 11:26:48.268939913 +0200
 @@ -337,8 +337,13 @@
  	int i;
  
@@ -1355,9 +1355,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-realview/realview_pb11mp.c linux-3.1
  	l2x0_init(__io_address(REALVIEW_TC11MP_L220_BASE), 0x00790000, 0xfe000fff);
  #endif
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-realview/realview_pbx.c linux-3.15-rc4/arch/arm/mach-realview/realview_pbx.c
---- linux-3.15-rc4.orig/arch/arm/mach-realview/realview_pbx.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-realview/realview_pbx.c	2014-05-07 17:05:51.044166676 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-realview/realview_pbx.c linux-3.15-rc6/arch/arm/mach-realview/realview_pbx.c
+--- linux-3.15-rc6.orig/arch/arm/mach-realview/realview_pbx.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-realview/realview_pbx.c	2014-05-23 11:26:48.268939913 +0200
 @@ -370,8 +370,8 @@
  			__io_address(REALVIEW_PBX_TILE_L220_BASE);
  
@@ -1369,9 +1369,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-realview/realview_pbx.c linux-3.15-r
  
  		/* 16KB way size, 8-way associativity, parity disabled
  		 * Bits:  .. 0 0 0 0 1 00 1 0 1 001 0 000 0 .... .... .... */
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-rockchip/rockchip.c linux-3.15-rc4/arch/arm/mach-rockchip/rockchip.c
---- linux-3.15-rc4.orig/arch/arm/mach-rockchip/rockchip.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-rockchip/rockchip.c	2014-05-07 17:05:51.044166676 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-rockchip/rockchip.c linux-3.15-rc6/arch/arm/mach-rockchip/rockchip.c
+--- linux-3.15-rc6.orig/arch/arm/mach-rockchip/rockchip.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-rockchip/rockchip.c	2014-05-23 11:26:48.268939913 +0200
 @@ -26,7 +26,7 @@
  
  static void __init rockchip_dt_init(void)
@@ -1381,9 +1381,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-rockchip/rockchip.c linux-3.15-rc4/a
  	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
  }
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-armadillo800eva.c linux-3.15-rc4/arch/arm/mach-shmobile/board-armadillo800eva.c
---- linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-armadillo800eva.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-shmobile/board-armadillo800eva.c	2014-05-07 17:05:51.044166676 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-shmobile/board-armadillo800eva.c linux-3.15-rc6/arch/arm/mach-shmobile/board-armadillo800eva.c
+--- linux-3.15-rc6.orig/arch/arm/mach-shmobile/board-armadillo800eva.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-shmobile/board-armadillo800eva.c	2014-05-23 11:26:48.272939927 +0200
 @@ -1271,8 +1271,8 @@
  
  
@@ -1395,9 +1395,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-armadillo800eva.c lin
  #endif
  
  	i2c_register_board_info(0, i2c0_devices, ARRAY_SIZE(i2c0_devices));
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-armadillo800eva-reference.c linux-3.15-rc4/arch/arm/mach-shmobile/board-armadillo800eva-reference.c
---- linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-armadillo800eva-reference.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-shmobile/board-armadillo800eva-reference.c	2014-05-07 17:05:51.044166676 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-shmobile/board-armadillo800eva-reference.c linux-3.15-rc6/arch/arm/mach-shmobile/board-armadillo800eva-reference.c
+--- linux-3.15-rc6.orig/arch/arm/mach-shmobile/board-armadillo800eva-reference.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-shmobile/board-armadillo800eva-reference.c	2014-05-23 11:26:48.272939927 +0200
 @@ -164,8 +164,8 @@
  	r8a7740_meram_workaround();
  
@@ -1409,9 +1409,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-armadillo800eva-refer
  #endif
  
  	r8a7740_add_standard_devices_dt();
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-kzm9g.c linux-3.15-rc4/arch/arm/mach-shmobile/board-kzm9g.c
---- linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-kzm9g.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-shmobile/board-kzm9g.c	2014-05-07 17:05:51.044166676 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-shmobile/board-kzm9g.c linux-3.15-rc6/arch/arm/mach-shmobile/board-kzm9g.c
+--- linux-3.15-rc6.orig/arch/arm/mach-shmobile/board-kzm9g.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-shmobile/board-kzm9g.c	2014-05-23 11:26:48.272939927 +0200
 @@ -876,8 +876,8 @@
  	gpio_request_one(223, GPIOF_IN, NULL); /* IRQ8 */
  
@@ -1423,9 +1423,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-kzm9g.c linux-3.15-rc
  #endif
  
  	i2c_register_board_info(0, i2c0_devices, ARRAY_SIZE(i2c0_devices));
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-kzm9g-reference.c linux-3.15-rc4/arch/arm/mach-shmobile/board-kzm9g-reference.c
---- linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-kzm9g-reference.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-shmobile/board-kzm9g-reference.c	2014-05-07 17:05:51.044166676 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-shmobile/board-kzm9g-reference.c linux-3.15-rc6/arch/arm/mach-shmobile/board-kzm9g-reference.c
+--- linux-3.15-rc6.orig/arch/arm/mach-shmobile/board-kzm9g-reference.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-shmobile/board-kzm9g-reference.c	2014-05-23 11:26:48.272939927 +0200
 @@ -36,8 +36,8 @@
  	sh73a0_add_standard_devices_dt();
  
@@ -1437,9 +1437,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/board-kzm9g-reference.c lin
  #endif
  }
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/setup-r8a7778.c linux-3.15-rc4/arch/arm/mach-shmobile/setup-r8a7778.c
---- linux-3.15-rc4.orig/arch/arm/mach-shmobile/setup-r8a7778.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-shmobile/setup-r8a7778.c	2014-05-07 17:05:51.044166676 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-shmobile/setup-r8a7778.c linux-3.15-rc6/arch/arm/mach-shmobile/setup-r8a7778.c
+--- linux-3.15-rc6.orig/arch/arm/mach-shmobile/setup-r8a7778.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-shmobile/setup-r8a7778.c	2014-05-23 11:26:48.272939927 +0200
 @@ -298,10 +298,10 @@
  	void __iomem *base = ioremap_nocache(0xf0100000, 0x1000);
  	if (base) {
@@ -1453,9 +1453,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/setup-r8a7778.c linux-3.15-
  	}
  #endif
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/setup-r8a7779.c linux-3.15-rc4/arch/arm/mach-shmobile/setup-r8a7779.c
---- linux-3.15-rc4.orig/arch/arm/mach-shmobile/setup-r8a7779.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-shmobile/setup-r8a7779.c	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-shmobile/setup-r8a7779.c linux-3.15-rc6/arch/arm/mach-shmobile/setup-r8a7779.c
+--- linux-3.15-rc6.orig/arch/arm/mach-shmobile/setup-r8a7779.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-shmobile/setup-r8a7779.c	2014-05-23 11:26:48.272939927 +0200
 @@ -700,8 +700,8 @@
  void __init r8a7779_add_standard_devices(void)
  {
@@ -1467,9 +1467,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-shmobile/setup-r8a7779.c linux-3.15-
  #endif
  	r8a7779_pm_init();
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-socfpga/socfpga.c linux-3.15-rc4/arch/arm/mach-socfpga/socfpga.c
---- linux-3.15-rc4.orig/arch/arm/mach-socfpga/socfpga.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-socfpga/socfpga.c	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-socfpga/socfpga.c linux-3.15-rc6/arch/arm/mach-socfpga/socfpga.c
+--- linux-3.15-rc6.orig/arch/arm/mach-socfpga/socfpga.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-socfpga/socfpga.c	2014-05-23 11:26:48.272939927 +0200
 @@ -100,7 +100,7 @@
  
  static void __init socfpga_cyclone5_init(void)
@@ -1479,9 +1479,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-socfpga/socfpga.c linux-3.15-rc4/arc
  	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
  }
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-spear/platsmp.c linux-3.15-rc4/arch/arm/mach-spear/platsmp.c
---- linux-3.15-rc4.orig/arch/arm/mach-spear/platsmp.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-spear/platsmp.c	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-spear/platsmp.c linux-3.15-rc6/arch/arm/mach-spear/platsmp.c
+--- linux-3.15-rc6.orig/arch/arm/mach-spear/platsmp.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-spear/platsmp.c	2014-05-23 11:26:48.272939927 +0200
 @@ -20,6 +20,18 @@
  #include <mach/spear.h>
  #include "generic.h"
@@ -1522,9 +1522,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-spear/platsmp.c linux-3.15-rc4/arch/
  
  	timeout = jiffies + (1 * HZ);
  	while (time_before(jiffies, timeout)) {
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-spear/spear13xx.c linux-3.15-rc4/arch/arm/mach-spear/spear13xx.c
---- linux-3.15-rc4.orig/arch/arm/mach-spear/spear13xx.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-spear/spear13xx.c	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-spear/spear13xx.c linux-3.15-rc6/arch/arm/mach-spear/spear13xx.c
+--- linux-3.15-rc6.orig/arch/arm/mach-spear/spear13xx.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-spear/spear13xx.c	2014-05-23 11:26:48.272939927 +0200
 @@ -38,15 +38,15 @@
  	if (!IS_ENABLED(CONFIG_CACHE_L2X0))
  		return;
@@ -1545,9 +1545,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-spear/spear13xx.c linux-3.15-rc4/arc
  }
  
  /*
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-sti/board-dt.c linux-3.15-rc4/arch/arm/mach-sti/board-dt.c
---- linux-3.15-rc4.orig/arch/arm/mach-sti/board-dt.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-sti/board-dt.c	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-sti/board-dt.c linux-3.15-rc6/arch/arm/mach-sti/board-dt.c
+--- linux-3.15-rc6.orig/arch/arm/mach-sti/board-dt.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-sti/board-dt.c	2014-05-23 11:26:48.272939927 +0200
 @@ -16,15 +16,9 @@
  
  void __init stih41x_l2x0_init(void)
@@ -1567,9 +1567,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-sti/board-dt.c linux-3.15-rc4/arch/a
  }
  
  static void __init stih41x_machine_init(void)
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-tegra/pm.h linux-3.15-rc4/arch/arm/mach-tegra/pm.h
---- linux-3.15-rc4.orig/arch/arm/mach-tegra/pm.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-tegra/pm.h	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-tegra/pm.h linux-3.15-rc6/arch/arm/mach-tegra/pm.h
+--- linux-3.15-rc6.orig/arch/arm/mach-tegra/pm.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-tegra/pm.h	2014-05-23 11:26:48.272939927 +0200
 @@ -35,8 +35,6 @@
  void tegra30_lp1_iram_hook(void);
  void tegra30_sleep_core_init(void);
@@ -1579,9 +1579,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-tegra/pm.h linux-3.15-rc4/arch/arm/m
  void tegra_clear_cpu_in_lp2(void);
  bool tegra_set_cpu_in_lp2(void);
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-tegra/reset-handler.S linux-3.15-rc4/arch/arm/mach-tegra/reset-handler.S
---- linux-3.15-rc4.orig/arch/arm/mach-tegra/reset-handler.S	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-tegra/reset-handler.S	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-tegra/reset-handler.S linux-3.15-rc6/arch/arm/mach-tegra/reset-handler.S
+--- linux-3.15-rc6.orig/arch/arm/mach-tegra/reset-handler.S	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-tegra/reset-handler.S	2014-05-23 11:26:48.276939940 +0200
 @@ -19,7 +19,6 @@
  
  #include <asm/cache.h>
@@ -1615,9 +1615,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-tegra/reset-handler.S linux-3.15-rc4
  	.align L1_CACHE_SHIFT
  ENTRY(__tegra_cpu_reset_handler_start)
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-tegra/sleep.h linux-3.15-rc4/arch/arm/mach-tegra/sleep.h
---- linux-3.15-rc4.orig/arch/arm/mach-tegra/sleep.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-tegra/sleep.h	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-tegra/sleep.h linux-3.15-rc6/arch/arm/mach-tegra/sleep.h
+--- linux-3.15-rc6.orig/arch/arm/mach-tegra/sleep.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-tegra/sleep.h	2014-05-23 11:26:48.276939940 +0200
 @@ -120,37 +120,6 @@
  	mov	\tmp1, \tmp1, lsr #8
  .endm
@@ -1656,9 +1656,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-tegra/sleep.h linux-3.15-rc4/arch/ar
  #else
  void tegra_pen_lock(void);
  void tegra_pen_unlock(void);
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-tegra/tegra.c linux-3.15-rc4/arch/arm/mach-tegra/tegra.c
---- linux-3.15-rc4.orig/arch/arm/mach-tegra/tegra.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-tegra/tegra.c	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-tegra/tegra.c linux-3.15-rc6/arch/arm/mach-tegra/tegra.c
+--- linux-3.15-rc6.orig/arch/arm/mach-tegra/tegra.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-tegra/tegra.c	2014-05-23 11:26:48.276939940 +0200
 @@ -73,27 +73,7 @@
  static void __init tegra_init_cache(void)
  {
@@ -1688,9 +1688,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-tegra/tegra.c linux-3.15-rc4/arch/ar
  #endif
  }
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-ux500/cache-l2x0.c linux-3.15-rc4/arch/arm/mach-ux500/cache-l2x0.c
---- linux-3.15-rc4.orig/arch/arm/mach-ux500/cache-l2x0.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-ux500/cache-l2x0.c	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-ux500/cache-l2x0.c linux-3.15-rc6/arch/arm/mach-ux500/cache-l2x0.c
+--- linux-3.15-rc6.orig/arch/arm/mach-ux500/cache-l2x0.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-ux500/cache-l2x0.c	2014-05-23 11:26:48.276939940 +0200
 @@ -35,10 +35,16 @@
  	return 0;
  }
@@ -1742,9 +1742,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-ux500/cache-l2x0.c linux-3.15-rc4/ar
  
  	return 0;
  }
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-vexpress/ct-ca9x4.c linux-3.15-rc4/arch/arm/mach-vexpress/ct-ca9x4.c
---- linux-3.15-rc4.orig/arch/arm/mach-vexpress/ct-ca9x4.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-vexpress/ct-ca9x4.c	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-vexpress/ct-ca9x4.c linux-3.15-rc6/arch/arm/mach-vexpress/ct-ca9x4.c
+--- linux-3.15-rc6.orig/arch/arm/mach-vexpress/ct-ca9x4.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-vexpress/ct-ca9x4.c	2014-05-23 11:26:48.276939940 +0200
 @@ -45,6 +45,23 @@
  	iotable_init(ct_ca9x4_io_desc, ARRAY_SIZE(ct_ca9x4_io_desc));
  }
@@ -1794,9 +1794,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-vexpress/ct-ca9x4.c linux-3.15-rc4/a
  	for (i = 0; i < ARRAY_SIZE(ct_ca9x4_amba_devs); i++)
  		amba_device_register(ct_ca9x4_amba_devs[i], &iomem_resource);
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mach-zynq/common.c linux-3.15-rc4/arch/arm/mach-zynq/common.c
---- linux-3.15-rc4.orig/arch/arm/mach-zynq/common.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mach-zynq/common.c	2014-05-07 17:05:51.048166700 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mach-zynq/common.c linux-3.15-rc6/arch/arm/mach-zynq/common.c
+--- linux-3.15-rc6.orig/arch/arm/mach-zynq/common.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mach-zynq/common.c	2014-05-23 11:26:48.276939940 +0200
 @@ -70,7 +70,7 @@
  	/*
  	 * 64KB way size, 8-way associativity, parity disabled
@@ -1806,9 +1806,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mach-zynq/common.c linux-3.15-rc4/arch/ar
  
  	of_platform_populate(NULL, of_default_bus_match_table, NULL, NULL);
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mm/cache-feroceon-l2.c linux-3.15-rc4/arch/arm/mm/cache-feroceon-l2.c
---- linux-3.15-rc4.orig/arch/arm/mm/cache-feroceon-l2.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mm/cache-feroceon-l2.c	2014-05-07 17:05:51.052166726 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mm/cache-feroceon-l2.c linux-3.15-rc6/arch/arm/mm/cache-feroceon-l2.c
+--- linux-3.15-rc6.orig/arch/arm/mm/cache-feroceon-l2.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mm/cache-feroceon-l2.c	2014-05-23 11:26:48.280939953 +0200
 @@ -350,7 +350,6 @@
  	outer_cache.inv_range = feroceon_l2_inv_range;
  	outer_cache.clean_range = feroceon_l2_clean_range;
@@ -1817,9 +1817,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mm/cache-feroceon-l2.c linux-3.15-rc4/arc
  
  	enable_l2();
  
-diff -Nur linux-3.15-rc4.orig/arch/arm/mm/cache-l2x0.c linux-3.15-rc4/arch/arm/mm/cache-l2x0.c
---- linux-3.15-rc4.orig/arch/arm/mm/cache-l2x0.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mm/cache-l2x0.c	2014-05-07 17:05:51.052166726 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mm/cache-l2x0.c linux-3.15-rc6/arch/arm/mm/cache-l2x0.c
+--- linux-3.15-rc6.orig/arch/arm/mm/cache-l2x0.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mm/cache-l2x0.c	2014-05-23 11:26:48.280939953 +0200
 @@ -16,18 +16,33 @@
   * along with this program; if not, write to the Free Software
   * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
@@ -3636,9 +3636,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mm/cache-l2x0.c linux-3.15-rc4/arch/arm/m
  
  	return 0;
  }
-diff -Nur linux-3.15-rc4.orig/arch/arm/mm/Kconfig linux-3.15-rc4/arch/arm/mm/Kconfig
---- linux-3.15-rc4.orig/arch/arm/mm/Kconfig	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mm/Kconfig	2014-05-07 17:05:51.052166726 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mm/Kconfig linux-3.15-rc6/arch/arm/mm/Kconfig
+--- linux-3.15-rc6.orig/arch/arm/mm/Kconfig	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mm/Kconfig	2014-05-23 11:26:48.280939953 +0200
 @@ -897,6 +897,57 @@
  	  This option enables optimisations for the PL310 cache
  	  controller.
@@ -3697,9 +3697,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mm/Kconfig linux-3.15-rc4/arch/arm/mm/Kco
  config CACHE_TAUROS2
  	bool "Enable the Tauros2 L2 cache controller"
  	depends on (ARCH_DOVE || ARCH_MMP || CPU_PJ4)
-diff -Nur linux-3.15-rc4.orig/arch/arm/mm/l2c-common.c linux-3.15-rc4/arch/arm/mm/l2c-common.c
---- linux-3.15-rc4.orig/arch/arm/mm/l2c-common.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/arch/arm/mm/l2c-common.c	2014-05-07 17:05:51.052166726 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mm/l2c-common.c linux-3.15-rc6/arch/arm/mm/l2c-common.c
+--- linux-3.15-rc6.orig/arch/arm/mm/l2c-common.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/arch/arm/mm/l2c-common.c	2014-05-23 11:26:48.284939966 +0200
 @@ -0,0 +1,20 @@
 +/*
 + * Copyright (C) 2010 ARM Ltd.
@@ -3721,9 +3721,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mm/l2c-common.c linux-3.15-rc4/arch/arm/m
 +	if (outer_cache.disable)
 +		outer_cache.disable();
 +}
-diff -Nur linux-3.15-rc4.orig/arch/arm/mm/l2c-l2x0-resume.S linux-3.15-rc4/arch/arm/mm/l2c-l2x0-resume.S
---- linux-3.15-rc4.orig/arch/arm/mm/l2c-l2x0-resume.S	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/arch/arm/mm/l2c-l2x0-resume.S	2014-05-07 17:05:51.052166726 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mm/l2c-l2x0-resume.S linux-3.15-rc6/arch/arm/mm/l2c-l2x0-resume.S
+--- linux-3.15-rc6.orig/arch/arm/mm/l2c-l2x0-resume.S	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/arch/arm/mm/l2c-l2x0-resume.S	2014-05-23 11:26:48.284939966 +0200
 @@ -0,0 +1,58 @@
 +/*
 + * L2C-310 early resume code.  This can be used by platforms to restore
@@ -3783,9 +3783,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mm/l2c-l2x0-resume.S linux-3.15-rc4/arch/
 +
 +	.align
 +1:	.long	l2x0_saved_regs - .
-diff -Nur linux-3.15-rc4.orig/arch/arm/mm/Makefile linux-3.15-rc4/arch/arm/mm/Makefile
---- linux-3.15-rc4.orig/arch/arm/mm/Makefile	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/mm/Makefile	2014-05-07 17:05:51.052166726 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/mm/Makefile linux-3.15-rc6/arch/arm/mm/Makefile
+--- linux-3.15-rc6.orig/arch/arm/mm/Makefile	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/mm/Makefile	2014-05-23 11:26:48.284939966 +0200
 @@ -95,7 +95,8 @@
  AFLAGS_proc-v6.o	:=-Wa,-march=armv6
  AFLAGS_proc-v7.o	:=-Wa,-march=armv7-a
@@ -3796,9 +3796,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/mm/Makefile linux-3.15-rc4/arch/arm/mm/Ma
 +obj-$(CONFIG_CACHE_L2X0)	+= cache-l2x0.o l2c-l2x0-resume.o
  obj-$(CONFIG_CACHE_XSC3L2)	+= cache-xsc3l2.o
  obj-$(CONFIG_CACHE_TAUROS2)	+= cache-tauros2.o
-diff -Nur linux-3.15-rc4.orig/arch/arm/plat-samsung/s5p-sleep.S linux-3.15-rc4/arch/arm/plat-samsung/s5p-sleep.S
---- linux-3.15-rc4.orig/arch/arm/plat-samsung/s5p-sleep.S	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/arch/arm/plat-samsung/s5p-sleep.S	2014-05-07 17:05:51.056166749 +0200
+diff -Nur linux-3.15-rc6.orig/arch/arm/plat-samsung/s5p-sleep.S linux-3.15-rc6/arch/arm/plat-samsung/s5p-sleep.S
+--- linux-3.15-rc6.orig/arch/arm/plat-samsung/s5p-sleep.S	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/arch/arm/plat-samsung/s5p-sleep.S	2014-05-23 11:26:48.284939966 +0200
 @@ -22,7 +22,6 @@
  */
  
@@ -3807,9 +3807,9 @@ diff -Nur linux-3.15-rc4.orig/arch/arm/plat-samsung/s5p-sleep.S linux-3.15-rc4/a
  
  	.data
  	.align
-diff -Nur linux-3.15-rc4.orig/Documentation/devicetree/bindings/leds/leds-pwm.txt linux-3.15-rc4/Documentation/devicetree/bindings/leds/leds-pwm.txt
---- linux-3.15-rc4.orig/Documentation/devicetree/bindings/leds/leds-pwm.txt	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/Documentation/devicetree/bindings/leds/leds-pwm.txt	2014-05-07 17:05:51.088166948 +0200
+diff -Nur linux-3.15-rc6.orig/Documentation/devicetree/bindings/leds/leds-pwm.txt linux-3.15-rc6/Documentation/devicetree/bindings/leds/leds-pwm.txt
+--- linux-3.15-rc6.orig/Documentation/devicetree/bindings/leds/leds-pwm.txt	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/Documentation/devicetree/bindings/leds/leds-pwm.txt	2014-05-23 11:26:48.284939966 +0200
 @@ -13,6 +13,8 @@
    For the pwms and pwm-names property please refer to:
    Documentation/devicetree/bindings/pwm/pwm.txt
@@ -3819,9 +3819,9 @@ diff -Nur linux-3.15-rc4.orig/Documentation/devicetree/bindings/leds/leds-pwm.tx
  - label :  (optional)
    see Documentation/devicetree/bindings/leds/common.txt
  - linux,default-trigger :  (optional)
-diff -Nur linux-3.15-rc4.orig/Documentation/devicetree/bindings/mmc/mmc.txt linux-3.15-rc4/Documentation/devicetree/bindings/mmc/mmc.txt
---- linux-3.15-rc4.orig/Documentation/devicetree/bindings/mmc/mmc.txt	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/Documentation/devicetree/bindings/mmc/mmc.txt	2014-05-07 17:05:51.088166948 +0200
+diff -Nur linux-3.15-rc6.orig/Documentation/devicetree/bindings/mmc/mmc.txt linux-3.15-rc6/Documentation/devicetree/bindings/mmc/mmc.txt
+--- linux-3.15-rc6.orig/Documentation/devicetree/bindings/mmc/mmc.txt	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/Documentation/devicetree/bindings/mmc/mmc.txt	2014-05-23 11:26:48.284939966 +0200
 @@ -5,6 +5,8 @@
  Interpreted by the OF core:
  - reg: Registers location and length.
@@ -3847,9 +3847,9 @@ diff -Nur linux-3.15-rc4.orig/Documentation/devicetree/bindings/mmc/mmc.txt linu
  *NOTE* on CD and WP polarity. To use common for all SD/MMC host controllers line
  polarity properties, we have to fix the meaning of the "normal" and "inverted"
  line levels. We choose to follow the SDHCI standard, which specifies both those
-diff -Nur linux-3.15-rc4.orig/Documentation/devicetree/bindings/staging/imx-drm/fsl-imx-drm.txt linux-3.15-rc4/Documentation/devicetree/bindings/staging/imx-drm/fsl-imx-drm.txt
---- linux-3.15-rc4.orig/Documentation/devicetree/bindings/staging/imx-drm/fsl-imx-drm.txt	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/Documentation/devicetree/bindings/staging/imx-drm/fsl-imx-drm.txt	2014-05-07 17:05:51.088166948 +0200
+diff -Nur linux-3.15-rc6.orig/Documentation/devicetree/bindings/staging/imx-drm/fsl-imx-drm.txt linux-3.15-rc6/Documentation/devicetree/bindings/staging/imx-drm/fsl-imx-drm.txt
+--- linux-3.15-rc6.orig/Documentation/devicetree/bindings/staging/imx-drm/fsl-imx-drm.txt	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/Documentation/devicetree/bindings/staging/imx-drm/fsl-imx-drm.txt	2014-05-23 11:26:48.288939979 +0200
 @@ -60,7 +60,8 @@
  - compatible: Should be "fsl,imx-parallel-display"
  Optional properties:
@@ -3860,9 +3860,9 @@ diff -Nur linux-3.15-rc4.orig/Documentation/devicetree/bindings/staging/imx-drm/
  - edid: verbatim EDID data block describing attached display.
  - ddc: phandle describing the i2c bus handling the display data
    channel
-diff -Nur linux-3.15-rc4.orig/Documentation/DocBook/media/v4l/pixfmt-packed-rgb.xml linux-3.15-rc4/Documentation/DocBook/media/v4l/pixfmt-packed-rgb.xml
---- linux-3.15-rc4.orig/Documentation/DocBook/media/v4l/pixfmt-packed-rgb.xml	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/Documentation/DocBook/media/v4l/pixfmt-packed-rgb.xml	2014-05-07 17:05:51.088166948 +0200
+diff -Nur linux-3.15-rc6.orig/Documentation/DocBook/media/v4l/pixfmt-packed-rgb.xml linux-3.15-rc6/Documentation/DocBook/media/v4l/pixfmt-packed-rgb.xml
+--- linux-3.15-rc6.orig/Documentation/DocBook/media/v4l/pixfmt-packed-rgb.xml	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/Documentation/DocBook/media/v4l/pixfmt-packed-rgb.xml	2014-05-23 11:26:48.288939979 +0200
 @@ -279,6 +279,45 @@
  	    <entry></entry>
  	    <entry></entry>
@@ -3909,10 +3909,10 @@ diff -Nur linux-3.15-rc4.orig/Documentation/DocBook/media/v4l/pixfmt-packed-rgb.
  	  <row id="V4L2-PIX-FMT-BGR24">
  	    <entry><constant>V4L2_PIX_FMT_BGR24</constant></entry>
  	    <entry>'BGR3'</entry>
-diff -Nur linux-3.15-rc4.orig/drivers/ata/ahci_imx.c linux-3.15-rc4/drivers/ata/ahci_imx.c
---- linux-3.15-rc4.orig/drivers/ata/ahci_imx.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/ata/ahci_imx.c	2014-05-07 17:05:51.088166948 +0200
-@@ -46,6 +46,7 @@
+diff -Nur linux-3.15-rc6.orig/drivers/ata/ahci_imx.c linux-3.15-rc6/drivers/ata/ahci_imx.c
+--- linux-3.15-rc6.orig/drivers/ata/ahci_imx.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/ata/ahci_imx.c	2014-05-23 11:26:48.288939979 +0200
+@@ -62,6 +62,7 @@
  	struct regmap *gpr;
  	bool no_device;
  	bool first_time;
@@ -3920,7 +3920,7 @@ diff -Nur linux-3.15-rc4.orig/drivers/ata/ahci_imx.c linux-3.15-rc4/drivers/ata/
  };
  
  static int ahci_imx_hotplug;
-@@ -90,14 +91,7 @@
+@@ -246,14 +247,7 @@
  				   IMX6Q_GPR13_SATA_TX_LVL_MASK |
  				   IMX6Q_GPR13_SATA_MPLL_CLK_EN |
  				   IMX6Q_GPR13_SATA_TX_EDGE_RATE,
@@ -3936,8 +3936,8 @@ diff -Nur linux-3.15-rc4.orig/drivers/ata/ahci_imx.c linux-3.15-rc4/drivers/ata/
  		regmap_update_bits(imxpriv->gpr, IOMUXC_GPR13,
  				   IMX6Q_GPR13_SATA_MPLL_CLK_EN,
  				   IMX6Q_GPR13_SATA_MPLL_CLK_EN);
-@@ -160,6 +154,10 @@
- 	writel(reg_val | PORT_PHY_CTL_PDDQ_LOC, mmio + PORT_PHY_CTL);
+@@ -324,6 +318,10 @@
+ 	writel(reg_val | IMX_P0PHYCR_TEST_PDDQ, mmio + IMX_P0PHYCR);
  	imx_sata_disable(hpriv);
  	imxpriv->no_device = true;
 +
@@ -3947,7 +3947,7 @@ diff -Nur linux-3.15-rc4.orig/drivers/ata/ahci_imx.c linux-3.15-rc4/drivers/ata/
  }
  
  static int ahci_imx_softreset(struct ata_link *link, unsigned int *class,
-@@ -200,6 +198,165 @@
+@@ -364,6 +362,165 @@
  };
  MODULE_DEVICE_TABLE(of, imx_ahci_of_match);
  
@@ -4113,7 +4113,7 @@ diff -Nur linux-3.15-rc4.orig/drivers/ata/ahci_imx.c linux-3.15-rc4/drivers/ata/
  static int imx_ahci_probe(struct platform_device *pdev)
  {
  	struct device *dev = &pdev->dev;
-@@ -227,6 +384,8 @@
+@@ -392,6 +549,8 @@
  	}
  
  	if (imxpriv->type == AHCI_IMX6Q) {
@@ -4122,7 +4122,7 @@ diff -Nur linux-3.15-rc4.orig/drivers/ata/ahci_imx.c linux-3.15-rc4/drivers/ata/
  		imxpriv->gpr = syscon_regmap_lookup_by_compatible(
  							"fsl,imx6q-iomuxc-gpr");
  		if (IS_ERR(imxpriv->gpr)) {
-@@ -234,6 +393,15 @@
+@@ -399,6 +558,15 @@
  				"failed to find fsl,imx6q-iomux-gpr regmap\n");
  			return PTR_ERR(imxpriv->gpr);
  		}
@@ -4138,9 +4138,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/ata/ahci_imx.c linux-3.15-rc4/drivers/ata/
  	}
  
  	hpriv = ahci_platform_get_resources(pdev);
-diff -Nur linux-3.15-rc4.orig/drivers/cec/cec-dev.c linux-3.15-rc4/drivers/cec/cec-dev.c
---- linux-3.15-rc4.orig/drivers/cec/cec-dev.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/drivers/cec/cec-dev.c	2014-05-07 17:05:51.088166948 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/cec/cec-dev.c linux-3.15-rc6/drivers/cec/cec-dev.c
+--- linux-3.15-rc6.orig/drivers/cec/cec-dev.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/drivers/cec/cec-dev.c	2014-05-23 11:26:48.296940005 +0200
 @@ -0,0 +1,384 @@
 +/*
 + * HDMI Consumer Electronics Control
@@ -4526,9 +4526,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/cec/cec-dev.c linux-3.15-rc4/drivers/cec/c
 +MODULE_AUTHOR("Russell King <rmk+kernel@arm.linux.org.uk>");
 +MODULE_DESCRIPTION("Generic HDMI CEC driver");
 +MODULE_LICENSE("GPL");
-diff -Nur linux-3.15-rc4.orig/drivers/cec/Kconfig linux-3.15-rc4/drivers/cec/Kconfig
---- linux-3.15-rc4.orig/drivers/cec/Kconfig	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/drivers/cec/Kconfig	2014-05-07 17:05:51.088166948 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/cec/Kconfig linux-3.15-rc6/drivers/cec/Kconfig
+--- linux-3.15-rc6.orig/drivers/cec/Kconfig	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/drivers/cec/Kconfig	2014-05-23 11:26:48.296940005 +0200
 @@ -0,0 +1,14 @@
 +#
 +# Consumer Electroncs Control support
@@ -4544,14 +4544,14 @@ diff -Nur linux-3.15-rc4.orig/drivers/cec/Kconfig linux-3.15-rc4/drivers/cec/Kco
 +	select CEC
 +
 +endmenu
-diff -Nur linux-3.15-rc4.orig/drivers/cec/Makefile linux-3.15-rc4/drivers/cec/Makefile
---- linux-3.15-rc4.orig/drivers/cec/Makefile	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/drivers/cec/Makefile	2014-05-07 17:05:51.088166948 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/cec/Makefile linux-3.15-rc6/drivers/cec/Makefile
+--- linux-3.15-rc6.orig/drivers/cec/Makefile	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/drivers/cec/Makefile	2014-05-23 11:26:48.296940005 +0200
 @@ -0,0 +1 @@
 +obj-$(CONFIG_HDMI_CEC_CORE) += cec-dev.o
-diff -Nur linux-3.15-rc4.orig/drivers/gpu/drm/drm_crtc_helper.c linux-3.15-rc4/drivers/gpu/drm/drm_crtc_helper.c
---- linux-3.15-rc4.orig/drivers/gpu/drm/drm_crtc_helper.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/gpu/drm/drm_crtc_helper.c	2014-05-07 17:05:51.088166948 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/gpu/drm/drm_crtc_helper.c linux-3.15-rc6/drivers/gpu/drm/drm_crtc_helper.c
+--- linux-3.15-rc6.orig/drivers/gpu/drm/drm_crtc_helper.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/gpu/drm/drm_crtc_helper.c	2014-05-23 11:26:48.296940005 +0200
 @@ -140,16 +140,10 @@
  static void __drm_helper_disable_unused_functions(struct drm_device *dev)
  {
@@ -4569,9 +4569,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/gpu/drm/drm_crtc_helper.c linux-3.15-rc4/d
  	list_for_each_entry(encoder, &dev->mode_config.encoder_list, head) {
  		if (!drm_helper_encoder_in_use(encoder)) {
  			drm_encoder_disable(encoder);
-diff -Nur linux-3.15-rc4.orig/drivers/Kconfig linux-3.15-rc4/drivers/Kconfig
---- linux-3.15-rc4.orig/drivers/Kconfig	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/Kconfig	2014-05-07 17:05:51.088166948 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/Kconfig linux-3.15-rc6/drivers/Kconfig
+--- linux-3.15-rc6.orig/drivers/Kconfig	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/Kconfig	2014-05-23 11:26:48.296940005 +0200
 @@ -174,4 +174,6 @@
  
  source "drivers/mcb/Kconfig"
@@ -4579,9 +4579,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/Kconfig linux-3.15-rc4/drivers/Kconfig
 +source "drivers/cec/Kconfig"
 +
  endmenu
-diff -Nur linux-3.15-rc4.orig/drivers/leds/leds-pwm.c linux-3.15-rc4/drivers/leds/leds-pwm.c
---- linux-3.15-rc4.orig/drivers/leds/leds-pwm.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/leds/leds-pwm.c	2014-05-07 17:05:51.092166973 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/leds/leds-pwm.c linux-3.15-rc6/drivers/leds/leds-pwm.c
+--- linux-3.15-rc6.orig/drivers/leds/leds-pwm.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/leds/leds-pwm.c	2014-05-23 11:26:48.296940005 +0200
 @@ -69,6 +69,10 @@
  
  	duty *= brightness;
@@ -4767,17 +4767,17 @@ diff -Nur linux-3.15-rc4.orig/drivers/leds/leds-pwm.c linux-3.15-rc4/drivers/led
  }
  
  static int led_pwm_remove(struct platform_device *pdev)
-diff -Nur linux-3.15-rc4.orig/drivers/Makefile linux-3.15-rc4/drivers/Makefile
---- linux-3.15-rc4.orig/drivers/Makefile	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/Makefile	2014-05-07 17:05:51.092166973 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/Makefile linux-3.15-rc6/drivers/Makefile
+--- linux-3.15-rc6.orig/drivers/Makefile	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/Makefile	2014-05-23 11:26:48.296940005 +0200
 @@ -157,3 +157,4 @@
  obj-$(CONFIG_FMC)		+= fmc/
  obj-$(CONFIG_POWERCAP)		+= powercap/
  obj-$(CONFIG_MCB)		+= mcb/
 +obj-$(CONFIG_CEC)		+= cec/
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/core/core.c linux-3.15-rc4/drivers/mmc/core/core.c
---- linux-3.15-rc4.orig/drivers/mmc/core/core.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/core/core.c	2014-05-07 17:05:51.092166973 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/core/core.c linux-3.15-rc6/drivers/mmc/core/core.c
+--- linux-3.15-rc6.orig/drivers/mmc/core/core.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/core/core.c	2014-05-23 11:26:48.300940018 +0200
 @@ -13,11 +13,13 @@
  #include <linux/module.h>
  #include <linux/init.h>
@@ -4846,9 +4846,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/core/core.c linux-3.15-rc4/drivers/mmc
  	mmc_host_clk_hold(host);
  
  	host->ios.vdd = fls(ocr) - 1;
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/core/host.c linux-3.15-rc4/drivers/mmc/core/host.c
---- linux-3.15-rc4.orig/drivers/mmc/core/host.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/core/host.c	2014-05-07 17:05:51.092166973 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/core/host.c linux-3.15-rc6/drivers/mmc/core/host.c
+--- linux-3.15-rc6.orig/drivers/mmc/core/host.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/core/host.c	2014-05-23 11:26:48.300940018 +0200
 @@ -12,14 +12,18 @@
   *  MMC host class device management
   */
@@ -4946,9 +4946,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/core/host.c linux-3.15-rc4/drivers/mmc
  	WARN_ON((host->caps & MMC_CAP_SDIO_IRQ) &&
  		!host->ops->enable_sdio_irq);
  
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/core/sdio_irq.c linux-3.15-rc4/drivers/mmc/core/sdio_irq.c
---- linux-3.15-rc4.orig/drivers/mmc/core/sdio_irq.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/core/sdio_irq.c	2014-05-07 17:05:51.092166973 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/core/sdio_irq.c linux-3.15-rc6/drivers/mmc/core/sdio_irq.c
+--- linux-3.15-rc6.orig/drivers/mmc/core/sdio_irq.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/core/sdio_irq.c	2014-05-23 11:26:48.300940018 +0200
 @@ -90,6 +90,15 @@
  	return ret;
  }
@@ -5011,9 +5011,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/core/sdio_irq.c linux-3.15-rc4/drivers
  	}
  
  	return 0;
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/dw_mmc.c linux-3.15-rc4/drivers/mmc/host/dw_mmc.c
---- linux-3.15-rc4.orig/drivers/mmc/host/dw_mmc.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/dw_mmc.c	2014-05-07 17:05:51.092166973 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/dw_mmc.c linux-3.15-rc6/drivers/mmc/host/dw_mmc.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/dw_mmc.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/dw_mmc.c	2014-05-23 11:26:48.300940018 +0200
 @@ -2140,6 +2140,8 @@
  	if (!mmc)
  		return -ENOMEM;
@@ -5023,9 +5023,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/dw_mmc.c linux-3.15-rc4/drivers/m
  	slot = mmc_priv(mmc);
  	slot->id = id;
  	slot->mmc = mmc;
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/Kconfig linux-3.15-rc4/drivers/mmc/host/Kconfig
---- linux-3.15-rc4.orig/drivers/mmc/host/Kconfig	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/Kconfig	2014-05-07 17:05:51.092166973 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/Kconfig linux-3.15-rc6/drivers/mmc/host/Kconfig
+--- linux-3.15-rc6.orig/drivers/mmc/host/Kconfig	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/Kconfig	2014-05-23 11:26:48.300940018 +0200
 @@ -25,8 +25,7 @@
  	  If unsure, say N.
  
@@ -5221,9 +5221,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/Kconfig linux-3.15-rc4/drivers/mm
  	help
  	  This selects the BCM2835 SD/MMC controller. If you have a BCM2835
  	  platform with SD or MMC devices, say Y or M here.
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-acpi.c linux-3.15-rc4/drivers/mmc/host/sdhci-acpi.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-acpi.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-acpi.c	2014-05-07 17:05:51.092166973 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-acpi.c linux-3.15-rc6/drivers/mmc/host/sdhci-acpi.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-acpi.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-acpi.c	2014-05-23 11:26:48.300940018 +0200
 @@ -102,11 +102,19 @@
  }
  
@@ -5244,9 +5244,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-acpi.c linux-3.15-rc4/drive
  	.hw_reset   = sdhci_acpi_int_hw_reset,
  };
  
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-bcm2835.c linux-3.15-rc4/drivers/mmc/host/sdhci-bcm2835.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-bcm2835.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-bcm2835.c	2014-05-07 17:05:51.092166973 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-bcm2835.c linux-3.15-rc6/drivers/mmc/host/sdhci-bcm2835.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-bcm2835.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-bcm2835.c	2014-05-23 11:26:48.300940018 +0200
 @@ -131,8 +131,12 @@
  	.read_l = bcm2835_sdhci_readl,
  	.read_w = bcm2835_sdhci_readw,
@@ -5260,9 +5260,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-bcm2835.c linux-3.15-rc4/dr
  };
  
  static const struct sdhci_pltfm_data bcm2835_sdhci_pdata = {
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-bcm-kona.c linux-3.15-rc4/drivers/mmc/host/sdhci-bcm-kona.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-bcm-kona.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-bcm-kona.c	2014-05-07 17:05:51.092166973 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-bcm-kona.c linux-3.15-rc6/drivers/mmc/host/sdhci-bcm-kona.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-bcm-kona.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-bcm-kona.c	2014-05-23 11:26:48.300940018 +0200
 @@ -206,9 +206,13 @@
  }
  
@@ -5277,9 +5277,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-bcm-kona.c linux-3.15-rc4/d
  	.card_event = sdhci_bcm_kona_card_event,
  };
  
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci.c linux-3.15-rc4/drivers/mmc/host/sdhci.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci.c	2014-05-07 17:05:51.096166998 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci.c linux-3.15-rc6/drivers/mmc/host/sdhci.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci.c	2014-05-23 11:26:48.304940032 +0200
 @@ -44,6 +44,8 @@
  
  #define MAX_TUNING_LOOP 40
@@ -6504,9 +6504,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci.c linux-3.15-rc4/drivers/mm
  	kfree(host->align_buffer);
  
  	host->adma_desc = NULL;
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-cns3xxx.c linux-3.15-rc4/drivers/mmc/host/sdhci-cns3xxx.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-cns3xxx.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-cns3xxx.c	2014-05-07 17:05:51.096166998 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-cns3xxx.c linux-3.15-rc6/drivers/mmc/host/sdhci-cns3xxx.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-cns3xxx.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-cns3xxx.c	2014-05-23 11:26:48.304940032 +0200
 @@ -30,13 +30,12 @@
  	u16 clk;
  	unsigned long timeout;
@@ -6550,9 +6550,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-cns3xxx.c linux-3.15-rc4/dr
  };
  
  static int sdhci_cns3xxx_probe(struct platform_device *pdev)
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-dove.c linux-3.15-rc4/drivers/mmc/host/sdhci-dove.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-dove.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-dove.c	2014-05-07 17:05:51.096166998 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-dove.c linux-3.15-rc6/drivers/mmc/host/sdhci-dove.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-dove.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-dove.c	2014-05-23 11:26:48.304940032 +0200
 @@ -86,6 +86,10 @@
  static const struct sdhci_ops sdhci_dove_ops = {
  	.read_w	= sdhci_dove_readw,
@@ -6564,9 +6564,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-dove.c linux-3.15-rc4/drive
  };
  
  static const struct sdhci_pltfm_data sdhci_dove_pdata = {
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-esdhc.h linux-3.15-rc4/drivers/mmc/host/sdhci-esdhc.h
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-esdhc.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-esdhc.h	2014-05-07 17:05:51.096166998 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-esdhc.h linux-3.15-rc6/drivers/mmc/host/sdhci-esdhc.h
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-esdhc.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-esdhc.h	2014-05-23 11:26:48.304940032 +0200
 @@ -20,10 +20,8 @@
  
  #define ESDHC_DEFAULT_QUIRKS	(SDHCI_QUIRK_FORCE_BLK_SZ_2048 | \
@@ -6579,9 +6579,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-esdhc.h linux-3.15-rc4/driv
  
  #define ESDHC_SYSTEM_CONTROL	0x2c
  #define ESDHC_CLOCK_MASK	0x0000fff0
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-esdhc-imx.c linux-3.15-rc4/drivers/mmc/host/sdhci-esdhc-imx.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-esdhc-imx.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-esdhc-imx.c	2014-05-07 17:05:51.096166998 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-esdhc-imx.c linux-3.15-rc6/drivers/mmc/host/sdhci-esdhc-imx.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-esdhc-imx.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-esdhc-imx.c	2014-05-23 11:26:48.304940032 +0200
 @@ -160,7 +160,6 @@
  		MULTIBLK_IN_PROCESS, /* exact multiblock cmd in process */
  		WAIT_FOR_INT,        /* sent CMD12, waiting for response INT */
@@ -6833,9 +6833,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-esdhc-imx.c linux-3.15-rc4/
  	clk_prepare_enable(imx_data->clk_ahb);
  
  	return sdhci_runtime_resume_host(host);
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci.h linux-3.15-rc4/drivers/mmc/host/sdhci.h
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci.h	2014-05-07 17:05:51.096166998 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci.h linux-3.15-rc6/drivers/mmc/host/sdhci.h
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci.h	2014-05-23 11:26:48.304940032 +0200
 @@ -281,18 +281,14 @@
  	unsigned int	(*get_max_clock)(struct sdhci_host *host);
  	unsigned int	(*get_min_clock)(struct sdhci_host *host);
@@ -6875,9 +6875,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci.h linux-3.15-rc4/drivers/mm
  #ifdef CONFIG_PM
  extern int sdhci_suspend_host(struct sdhci_host *host);
  extern int sdhci_resume_host(struct sdhci_host *host);
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-of-arasan.c linux-3.15-rc4/drivers/mmc/host/sdhci-of-arasan.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-of-arasan.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-of-arasan.c	2014-05-07 17:05:51.096166998 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-of-arasan.c linux-3.15-rc6/drivers/mmc/host/sdhci-of-arasan.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-of-arasan.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-of-arasan.c	2014-05-23 11:26:48.304940032 +0200
 @@ -52,8 +52,12 @@
  }
  
@@ -6891,9 +6891,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-of-arasan.c linux-3.15-rc4/
  };
  
  static struct sdhci_pltfm_data sdhci_arasan_pdata = {
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-of-esdhc.c linux-3.15-rc4/drivers/mmc/host/sdhci-of-esdhc.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-of-esdhc.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-of-esdhc.c	2014-05-07 17:05:51.096166998 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-of-esdhc.c linux-3.15-rc6/drivers/mmc/host/sdhci-of-esdhc.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-of-esdhc.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-of-esdhc.c	2014-05-23 11:26:48.304940032 +0200
 @@ -199,13 +199,14 @@
  
  static void esdhc_of_set_clock(struct sdhci_host *host, unsigned int clock)
@@ -7015,9 +7015,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-of-esdhc.c linux-3.15-rc4/d
  	},
  	.probe = sdhci_esdhc_probe,
  	.remove = sdhci_esdhc_remove,
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-of-hlwd.c linux-3.15-rc4/drivers/mmc/host/sdhci-of-hlwd.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-of-hlwd.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-of-hlwd.c	2014-05-07 17:05:51.100167022 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-of-hlwd.c linux-3.15-rc6/drivers/mmc/host/sdhci-of-hlwd.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-of-hlwd.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-of-hlwd.c	2014-05-23 11:26:48.304940032 +0200
 @@ -58,6 +58,10 @@
  	.write_l = sdhci_hlwd_writel,
  	.write_w = sdhci_hlwd_writew,
@@ -7029,9 +7029,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-of-hlwd.c linux-3.15-rc4/dr
  };
  
  static const struct sdhci_pltfm_data sdhci_hlwd_pdata = {
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pci.c linux-3.15-rc4/drivers/mmc/host/sdhci-pci.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pci.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-pci.c	2014-05-07 17:05:51.100167022 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-pci.c linux-3.15-rc6/drivers/mmc/host/sdhci-pci.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-pci.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-pci.c	2014-05-23 11:26:48.304940032 +0200
 @@ -1031,7 +1031,7 @@
  	return 0;
  }
@@ -7063,9 +7063,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pci.c linux-3.15-rc4/driver
  	.hw_reset		= sdhci_pci_hw_reset,
  };
  
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pltfm.c linux-3.15-rc4/drivers/mmc/host/sdhci-pltfm.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pltfm.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-pltfm.c	2014-05-07 17:05:51.100167022 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-pltfm.c linux-3.15-rc6/drivers/mmc/host/sdhci-pltfm.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-pltfm.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-pltfm.c	2014-05-23 11:26:48.308940045 +0200
 @@ -45,6 +45,10 @@
  EXPORT_SYMBOL_GPL(sdhci_pltfm_clk_get_max_clock);
  
@@ -7077,9 +7077,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pltfm.c linux-3.15-rc4/driv
  };
  
  #ifdef CONFIG_OF
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pxav2.c linux-3.15-rc4/drivers/mmc/host/sdhci-pxav2.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pxav2.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-pxav2.c	2014-05-07 17:05:51.100167022 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-pxav2.c linux-3.15-rc6/drivers/mmc/host/sdhci-pxav2.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-pxav2.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-pxav2.c	2014-05-23 11:26:48.308940045 +0200
 @@ -51,11 +51,13 @@
  #define MMC_CARD		0x1000
  #define MMC_WIDTH		0x0100
@@ -7123,9 +7123,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pxav2.c linux-3.15-rc4/driv
  };
  
  #ifdef CONFIG_OF
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pxav3.c linux-3.15-rc4/drivers/mmc/host/sdhci-pxav3.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pxav3.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-pxav3.c	2014-05-07 17:05:51.100167022 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-pxav3.c linux-3.15-rc6/drivers/mmc/host/sdhci-pxav3.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-pxav3.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-pxav3.c	2014-05-23 11:26:48.308940045 +0200
 @@ -112,11 +112,13 @@
  	return 0;
  }
@@ -7170,9 +7170,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-pxav3.c linux-3.15-rc4/driv
  };
  
  static struct sdhci_pltfm_data sdhci_pxav3_pdata = {
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-s3c.c linux-3.15-rc4/drivers/mmc/host/sdhci-s3c.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-s3c.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-s3c.c	2014-05-07 17:05:51.100167022 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-s3c.c linux-3.15-rc6/drivers/mmc/host/sdhci-s3c.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-s3c.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-s3c.c	2014-05-23 11:26:48.308940045 +0200
 @@ -58,6 +58,8 @@
  	struct clk		*clk_io;
  	struct clk		*clk_bus[MAX_BUS_CLK];
@@ -7311,9 +7311,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-s3c.c linux-3.15-rc4/driver
  };
  #define EXYNOS4_SDHCI_DRV_DATA ((kernel_ulong_t)&exynos4_sdhci_drv_data)
  #else
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-sirf.c linux-3.15-rc4/drivers/mmc/host/sdhci-sirf.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-sirf.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-sirf.c	2014-05-07 17:05:51.100167022 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-sirf.c linux-3.15-rc6/drivers/mmc/host/sdhci-sirf.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-sirf.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-sirf.c	2014-05-23 11:26:48.308940045 +0200
 @@ -28,7 +28,11 @@
  }
  
@@ -7326,9 +7326,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-sirf.c linux-3.15-rc4/drive
  };
  
  static struct sdhci_pltfm_data sdhci_sirf_pdata = {
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-spear.c linux-3.15-rc4/drivers/mmc/host/sdhci-spear.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-spear.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-spear.c	2014-05-07 17:05:51.100167022 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-spear.c linux-3.15-rc6/drivers/mmc/host/sdhci-spear.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-spear.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-spear.c	2014-05-23 11:26:48.308940045 +0200
 @@ -38,7 +38,10 @@
  
  /* sdhci ops */
@@ -7341,9 +7341,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-spear.c linux-3.15-rc4/driv
  };
  
  #ifdef CONFIG_OF
-diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-tegra.c linux-3.15-rc4/drivers/mmc/host/sdhci-tegra.c
---- linux-3.15-rc4.orig/drivers/mmc/host/sdhci-tegra.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/mmc/host/sdhci-tegra.c	2014-05-07 17:05:51.100167022 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/mmc/host/sdhci-tegra.c linux-3.15-rc6/drivers/mmc/host/sdhci-tegra.c
+--- linux-3.15-rc6.orig/drivers/mmc/host/sdhci-tegra.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/mmc/host/sdhci-tegra.c	2014-05-23 11:26:48.308940045 +0200
 @@ -48,19 +48,6 @@
  	int power_gpio;
  };
@@ -7410,9 +7410,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/mmc/host/sdhci-tegra.c linux-3.15-rc4/driv
  };
  
  static const struct sdhci_pltfm_data sdhci_tegra20_pdata = {
-diff -Nur linux-3.15-rc4.orig/drivers/net/ethernet/freescale/fec.h linux-3.15-rc4/drivers/net/ethernet/freescale/fec.h
---- linux-3.15-rc4.orig/drivers/net/ethernet/freescale/fec.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/net/ethernet/freescale/fec.h	2014-05-07 17:05:51.100167022 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/net/ethernet/freescale/fec.h linux-3.15-rc6/drivers/net/ethernet/freescale/fec.h
+--- linux-3.15-rc6.orig/drivers/net/ethernet/freescale/fec.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/net/ethernet/freescale/fec.h	2014-05-23 11:26:48.308940045 +0200
 @@ -14,6 +14,7 @@
  /****************************************************************************/
  
@@ -7561,9 +7561,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/net/ethernet/freescale/fec.h linux-3.15-rc
  };
  
  void fec_ptp_init(struct platform_device *pdev);
-diff -Nur linux-3.15-rc4.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.15-rc4/drivers/net/ethernet/freescale/fec_main.c
---- linux-3.15-rc4.orig/drivers/net/ethernet/freescale/fec_main.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/net/ethernet/freescale/fec_main.c	2014-05-07 17:05:51.104167047 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.15-rc6/drivers/net/ethernet/freescale/fec_main.c
+--- linux-3.15-rc6.orig/drivers/net/ethernet/freescale/fec_main.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/net/ethernet/freescale/fec_main.c	2014-05-23 11:26:48.312940058 +0200
 @@ -33,12 +33,6 @@
  #include <linux/netdevice.h>
  #include <linux/etherdevice.h>
@@ -9979,9 +9979,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.
  
  	return 0;
  
-diff -Nur linux-3.15-rc4.orig/drivers/regulator/anatop-regulator.c linux-3.15-rc4/drivers/regulator/anatop-regulator.c
---- linux-3.15-rc4.orig/drivers/regulator/anatop-regulator.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/regulator/anatop-regulator.c	2014-05-07 17:05:51.104167047 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/regulator/anatop-regulator.c linux-3.15-rc6/drivers/regulator/anatop-regulator.c
+--- linux-3.15-rc6.orig/drivers/regulator/anatop-regulator.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/regulator/anatop-regulator.c	2014-05-23 11:26:48.312940058 +0200
 @@ -267,6 +267,7 @@
  	config.driver_data = sreg;
  	config.of_node = pdev->dev.of_node;
@@ -9990,9 +9990,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/regulator/anatop-regulator.c linux-3.15-rc
  
  	/* Only core regulators have the ramp up delay configuration. */
  	if (sreg->control_reg && sreg->delay_bit_width) {
-diff -Nur linux-3.15-rc4.orig/drivers/regulator/core.c linux-3.15-rc4/drivers/regulator/core.c
---- linux-3.15-rc4.orig/drivers/regulator/core.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/regulator/core.c	2014-05-07 17:05:51.104167047 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/regulator/core.c linux-3.15-rc6/drivers/regulator/core.c
+--- linux-3.15-rc6.orig/drivers/regulator/core.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/regulator/core.c	2014-05-23 11:26:48.312940058 +0200
 @@ -3459,7 +3459,7 @@
  
  	dev_set_drvdata(&rdev->dev, rdev);
@@ -10002,9 +10002,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/regulator/core.c linux-3.15-rc4/drivers/re
  		ret = regulator_ena_gpio_request(rdev, config);
  		if (ret != 0) {
  			rdev_err(rdev, "Failed to request enable GPIO%d: %d\n",
-diff -Nur linux-3.15-rc4.orig/drivers/regulator/dummy.c linux-3.15-rc4/drivers/regulator/dummy.c
---- linux-3.15-rc4.orig/drivers/regulator/dummy.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/regulator/dummy.c	2014-05-07 17:05:51.104167047 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/regulator/dummy.c linux-3.15-rc6/drivers/regulator/dummy.c
+--- linux-3.15-rc6.orig/drivers/regulator/dummy.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/regulator/dummy.c	2014-05-23 11:26:48.312940058 +0200
 @@ -48,6 +48,7 @@
  
  	config.dev = &pdev->dev;
@@ -10013,9 +10013,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/regulator/dummy.c linux-3.15-rc4/drivers/r
  
  	dummy_regulator_rdev = regulator_register(&dummy_desc, &config);
  	if (IS_ERR(dummy_regulator_rdev)) {
-diff -Nur linux-3.15-rc4.orig/drivers/regulator/fixed.c linux-3.15-rc4/drivers/regulator/fixed.c
---- linux-3.15-rc4.orig/drivers/regulator/fixed.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/regulator/fixed.c	2014-05-07 17:05:51.104167047 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/regulator/fixed.c linux-3.15-rc6/drivers/regulator/fixed.c
+--- linux-3.15-rc6.orig/drivers/regulator/fixed.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/regulator/fixed.c	2014-05-23 11:26:48.312940058 +0200
 @@ -161,9 +161,7 @@
  		drvdata->desc.n_voltages = 1;
  
@@ -10027,9 +10027,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/regulator/fixed.c linux-3.15-rc4/drivers/r
  	cfg.ena_gpio_invert = !config->enable_high;
  	if (config->enabled_at_boot) {
  		if (config->enable_high)
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/drm-ddc-connector.c linux-3.15-rc4/drivers/staging/imx-drm/drm-ddc-connector.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/drm-ddc-connector.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/drivers/staging/imx-drm/drm-ddc-connector.c	2014-05-07 17:05:51.104167047 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/drm-ddc-connector.c linux-3.15-rc6/drivers/staging/imx-drm/drm-ddc-connector.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/drm-ddc-connector.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/drivers/staging/imx-drm/drm-ddc-connector.c	2014-05-23 11:26:48.312940058 +0200
 @@ -0,0 +1,92 @@
 +#include <linux/i2c.h>
 +#include <linux/module.h>
@@ -10123,9 +10123,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/drm-ddc-connector.c linux-
 +MODULE_AUTHOR("Russell King <rmk+kernel@arm.linux.org.uk>");
 +MODULE_DESCRIPTION("Generic DRM DDC connector module");
 +MODULE_LICENSE("GPL v2");
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/drm-ddc-connector.h linux-3.15-rc4/drivers/staging/imx-drm/drm-ddc-connector.h
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/drm-ddc-connector.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/drivers/staging/imx-drm/drm-ddc-connector.h	2014-05-07 17:05:51.104167047 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/drm-ddc-connector.h linux-3.15-rc6/drivers/staging/imx-drm/drm-ddc-connector.h
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/drm-ddc-connector.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/drivers/staging/imx-drm/drm-ddc-connector.h	2014-05-23 11:26:48.312940058 +0200
 @@ -0,0 +1,26 @@
 +#ifndef DRM_DDC_CONNECTOR_H
 +#define DRM_DDC_CONNECTOR_H
@@ -10153,9 +10153,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/drm-ddc-connector.h linux-
 +}
 +
 +#endif
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-audio.c linux-3.15-rc4/drivers/staging/imx-drm/dw-hdmi-audio.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-audio.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/drivers/staging/imx-drm/dw-hdmi-audio.c	2014-05-07 17:05:51.108167072 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/dw-hdmi-audio.c linux-3.15-rc6/drivers/staging/imx-drm/dw-hdmi-audio.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/dw-hdmi-audio.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/drivers/staging/imx-drm/dw-hdmi-audio.c	2014-05-23 11:26:48.316940071 +0200
 @@ -0,0 +1,654 @@
 +/*
 + * DesignWare HDMI audio driver
@@ -10811,9 +10811,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-audio.c linux-3.15
 +
 +MODULE_AUTHOR("Russell King <rmk+kernel@arm.linux.org.uk>");
 +MODULE_LICENSE("GPL");
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-audio.h linux-3.15-rc4/drivers/staging/imx-drm/dw-hdmi-audio.h
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-audio.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/drivers/staging/imx-drm/dw-hdmi-audio.h	2014-05-07 17:05:51.108167072 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/dw-hdmi-audio.h linux-3.15-rc6/drivers/staging/imx-drm/dw-hdmi-audio.h
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/dw-hdmi-audio.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/drivers/staging/imx-drm/dw-hdmi-audio.h	2014-05-23 11:26:48.316940071 +0200
 @@ -0,0 +1,15 @@
 +#ifndef DW_HDMI_AUDIO_H
 +#define DW_HDMI_AUDIO_H
@@ -10830,9 +10830,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-audio.h linux-3.15
 +};
 +
 +#endif
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-cec.c linux-3.15-rc4/drivers/staging/imx-drm/dw-hdmi-cec.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-cec.c	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/drivers/staging/imx-drm/dw-hdmi-cec.c	2014-05-07 17:05:51.108167072 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/dw-hdmi-cec.c linux-3.15-rc6/drivers/staging/imx-drm/dw-hdmi-cec.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/dw-hdmi-cec.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/drivers/staging/imx-drm/dw-hdmi-cec.c	2014-05-23 11:26:48.316940071 +0200
 @@ -0,0 +1,205 @@
 +/* http://git.freescale.com/git/cgit.cgi/imx/linux-2.6-imx.git/tree/drivers/mxc/hdmi-cec/mxc_hdmi-cec.c?h=imx_3.0.35_4.1.0 */
 +#include <linux/cec-dev.h>
@@ -11039,9 +11039,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-cec.c linux-3.15-r
 +MODULE_DESCRIPTION("Synopsis Designware HDMI CEC driver for i.MX");
 +MODULE_LICENSE("GPL");
 +MODULE_ALIAS(PLATFORM_MODULE_PREFIX "dw-hdmi-cec");
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-cec.h linux-3.15-rc4/drivers/staging/imx-drm/dw-hdmi-cec.h
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-cec.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/drivers/staging/imx-drm/dw-hdmi-cec.h	2014-05-07 17:05:51.108167072 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/dw-hdmi-cec.h linux-3.15-rc6/drivers/staging/imx-drm/dw-hdmi-cec.h
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/dw-hdmi-cec.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/drivers/staging/imx-drm/dw-hdmi-cec.h	2014-05-23 11:26:48.316940071 +0200
 @@ -0,0 +1,16 @@
 +#ifndef DW_HDMI_CEC_H
 +#define DW_HDMI_CEC_H
@@ -11059,33 +11059,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/dw-hdmi-cec.h linux-3.15-r
 +};
 +
 +#endif
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-drm-core.c linux-3.15-rc4/drivers/staging/imx-drm/imx-drm-core.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-drm-core.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/imx-drm-core.c	2014-05-07 17:05:51.108167072 +0200
-@@ -517,7 +517,7 @@
- 		of_node_put(port);
- 		if (port == imx_crtc->port) {
- 			ret = of_graph_parse_endpoint(ep, &endpoint);
--			return ret ? ret : endpoint.id;
-+			return ret ? ret : endpoint.port;
- 		}
- 	} while (ep);
- 
-@@ -675,6 +675,11 @@
- 			if (!remote || !of_device_is_available(remote)) {
- 				of_node_put(remote);
- 				continue;
-+			} else if (!of_device_is_available(remote->parent)) {
-+				dev_warn(&pdev->dev, "parent device of %s is not available\n",
-+					 remote->full_name);
-+				of_node_put(remote);
-+				continue;
- 			}
- 
- 			ret = imx_drm_add_component(&pdev->dev, remote);
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-hdmi.c linux-3.15-rc4/drivers/staging/imx-drm/imx-hdmi.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-hdmi.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/imx-hdmi.c	2014-05-07 17:05:51.112167097 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/imx-hdmi.c linux-3.15-rc6/drivers/staging/imx-drm/imx-hdmi.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/imx-hdmi.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/imx-hdmi.c	2014-05-23 11:26:48.316940071 +0200
 @@ -28,6 +28,9 @@
  #include <drm/drm_edid.h>
  #include <drm/drm_encoder_slave.h>
@@ -11428,9 +11404,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-hdmi.c linux-3.15-rc4/
  }
  
  static const struct component_ops hdmi_ops = {
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-ldb.c linux-3.15-rc4/drivers/staging/imx-drm/imx-ldb.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-ldb.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/imx-ldb.c	2014-05-07 17:05:51.112167097 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/imx-ldb.c linux-3.15-rc6/drivers/staging/imx-drm/imx-ldb.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/imx-ldb.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/imx-ldb.c	2014-05-23 11:26:48.316940071 +0200
 @@ -24,6 +24,7 @@
  #include <drm/drmP.h>
  #include <drm/drm_fb_helper.h>
@@ -11508,9 +11484,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-ldb.c linux-3.15-rc4/d
  		ret = imx_ldb_register(drm, channel);
  		if (ret)
  			return ret;
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-tve.c linux-3.15-rc4/drivers/staging/imx-drm/imx-tve.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-tve.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/imx-tve.c	2014-05-07 17:05:51.112167097 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/imx-tve.c linux-3.15-rc6/drivers/staging/imx-drm/imx-tve.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/imx-tve.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/imx-tve.c	2014-05-23 11:28:50.689342803 +0200
 @@ -22,7 +22,6 @@
  #include <linux/clk-provider.h>
  #include <linux/component.h>
@@ -11642,7 +11618,7 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-tve.c linux-3.15-rc4/d
  	tve->dev = dev;
  	spin_lock_init(&tve->lock);
  
--	ddc_node = of_parse_phandle(np, "i2c-ddc-bus", 0);
+-	ddc_node = of_parse_phandle(np, "ddc-i2c-bus", 0);
 -	if (ddc_node) {
 -		tve->ddc = of_find_i2c_adapter_by_node(ddc_node);
 -		of_node_put(ddc_node);
@@ -11660,9 +11636,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/imx-tve.c linux-3.15-rc4/d
  	tve->encoder.funcs->destroy(&tve->encoder);
  
  	if (!IS_ERR(tve->dac_reg))
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/imx-ipu-v3.h linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/imx-ipu-v3.h
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/imx-ipu-v3.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/imx-ipu-v3.h	2014-05-07 17:05:51.112167097 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/imx-ipu-v3.h linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/imx-ipu-v3.h
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/imx-ipu-v3.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/imx-ipu-v3.h	2014-05-23 11:26:48.316940071 +0200
 @@ -76,6 +76,7 @@
  	IPU_IRQ_EOS = 192,
  };
@@ -11693,9 +11669,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/imx-ipu-v3.h linux-
  int ipu_dp_setup_channel(struct ipu_dp *dp,
  		enum ipu_color_space in, enum ipu_color_space out);
  int ipu_dp_set_window_pos(struct ipu_dp *, u16 x_pos, u16 y_pos);
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-common.c linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-common.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-common.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-common.c	2014-05-07 17:05:51.128167196 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-common.c linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-common.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-common.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-common.c	2014-05-23 11:26:48.352940189 +0200
 @@ -697,6 +697,12 @@
  }
  EXPORT_SYMBOL_GPL(ipu_idmac_enable_channel);
@@ -11761,9 +11737,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-common.c linux-
  }
  EXPORT_SYMBOL_GPL(ipu_idmac_channel_irq);
  
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-dc.c linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-dc.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-dc.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-dc.c	2014-05-07 17:05:51.136167246 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-dc.c linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-dc.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-dc.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-dc.c	2014-05-23 11:26:48.360940215 +0200
 @@ -18,6 +18,7 @@
  #include <linux/types.h>
  #include <linux/errno.h>
@@ -11941,9 +11917,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-dc.c linux-3.15
  	return 0;
  }
  
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-di.c linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-di.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-di.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-di.c	2014-05-07 17:05:51.144167296 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-di.c linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-di.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-di.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-di.c	2014-05-23 11:26:48.372940255 +0200
 @@ -595,7 +595,7 @@
  		}
  	}
@@ -11953,9 +11929,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-di.c linux-3.15
  		di_gen |= DI_GEN_POLARITY_DISP_CLK;
  
  	ipu_di_write(di, di_gen, DI_GENERAL);
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-dmfc.c linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-dmfc.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-dmfc.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-dmfc.c	2014-05-07 17:05:51.152167344 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-dmfc.c linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-dmfc.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-dmfc.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-dmfc.c	2014-05-23 11:26:48.380940281 +0200
 @@ -28,7 +28,12 @@
  #define DMFC_GENERAL1		0x0014
  #define DMFC_GENERAL2		0x0018
@@ -12003,9 +11979,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-dmfc.c linux-3.
  
  	if (priv->use_count < 0)
  		priv->use_count = 0;
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-dp.c linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-dp.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-dp.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-dp.c	2014-05-07 17:05:51.160167394 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-dp.c linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-dp.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-dp.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-dp.c	2014-05-23 11:26:48.388940307 +0200
 @@ -215,10 +215,9 @@
  }
  EXPORT_SYMBOL_GPL(ipu_dp_setup_channel);
@@ -12117,9 +12093,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-dp.c linux-3.15
  
  struct ipu_dp *ipu_dp_get(struct ipu_soc *ipu, unsigned int flow)
  {
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-prv.h linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-prv.h
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-prv.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/ipu-v3/ipu-prv.h	2014-05-07 17:05:51.172167469 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-prv.h linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-prv.h
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/ipu-v3/ipu-prv.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/ipu-v3/ipu-prv.h	2014-05-23 11:26:48.396940333 +0200
 @@ -185,6 +185,9 @@
  int ipu_module_enable(struct ipu_soc *ipu, u32 mask);
  int ipu_module_disable(struct ipu_soc *ipu, u32 mask);
@@ -12130,9 +12106,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipu-v3/ipu-prv.h linux-3.1
  int ipu_di_init(struct ipu_soc *ipu, struct device *dev, int id,
  		unsigned long base, u32 module, struct clk *ipu_clk);
  void ipu_di_exit(struct ipu_soc *ipu, int id);
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipuv3-crtc.c linux-3.15-rc4/drivers/staging/imx-drm/ipuv3-crtc.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/ipuv3-crtc.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/ipuv3-crtc.c	2014-05-07 17:05:51.172167469 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/ipuv3-crtc.c linux-3.15-rc6/drivers/staging/imx-drm/ipuv3-crtc.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/ipuv3-crtc.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/ipuv3-crtc.c	2014-05-23 11:26:48.396940333 +0200
 @@ -60,24 +60,32 @@
  
  static void ipu_fb_enable(struct ipu_crtc *ipu_crtc)
@@ -12178,9 +12154,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipuv3-crtc.c linux-3.15-rc
  	sig_cfg.width = mode->hdisplay;
  	sig_cfg.height = mode->vdisplay;
  	sig_cfg.pixel_fmt = out_pixel_fmt;
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipuv3-plane.c linux-3.15-rc4/drivers/staging/imx-drm/ipuv3-plane.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/ipuv3-plane.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/ipuv3-plane.c	2014-05-07 17:05:51.176167493 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/ipuv3-plane.c linux-3.15-rc6/drivers/staging/imx-drm/ipuv3-plane.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/ipuv3-plane.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/ipuv3-plane.c	2014-05-23 11:26:48.396940333 +0200
 @@ -239,6 +239,8 @@
  
  void ipu_plane_enable(struct ipu_plane *ipu_plane)
@@ -12199,9 +12175,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/ipuv3-plane.c linux-3.15-r
  }
  
  static void ipu_plane_dpms(struct ipu_plane *ipu_plane, int mode)
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/Kconfig linux-3.15-rc4/drivers/staging/imx-drm/Kconfig
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/Kconfig	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/Kconfig	2014-05-07 17:05:51.176167493 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/Kconfig linux-3.15-rc6/drivers/staging/imx-drm/Kconfig
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/Kconfig	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/Kconfig	2014-05-23 11:26:48.396940333 +0200
 @@ -35,6 +35,7 @@
  config DRM_IMX_LDB
  	tristate "Support for LVDS displays"
@@ -12231,9 +12207,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/Kconfig linux-3.15-rc4/dri
 +	  Support the CEC interface which is part of the Synposis
 +	  Designware HDMI block.  This is used in conjunction with
 +	  the i.MX HDMI driver.
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/Makefile linux-3.15-rc4/drivers/staging/imx-drm/Makefile
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/Makefile	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/Makefile	2014-05-07 17:05:51.180167518 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/Makefile linux-3.15-rc6/drivers/staging/imx-drm/Makefile
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/Makefile	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/Makefile	2014-05-23 11:26:48.396940333 +0200
 @@ -3,6 +3,7 @@
  
  obj-$(CONFIG_DRM_IMX) += imxdrm.o
@@ -12248,9 +12224,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/Makefile linux-3.15-rc4/dr
  obj-$(CONFIG_DRM_IMX_HDMI) += imx-hdmi.o
 +obj-$(CONFIG_DRM_DW_HDMI_AUDIO) += dw-hdmi-audio.o
 +obj-$(CONFIG_DRM_DW_HDMI_CEC) += dw-hdmi-cec.o
-diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/parallel-display.c linux-3.15-rc4/drivers/staging/imx-drm/parallel-display.c
---- linux-3.15-rc4.orig/drivers/staging/imx-drm/parallel-display.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/drivers/staging/imx-drm/parallel-display.c	2014-05-07 17:05:51.180167518 +0200
+diff -Nur linux-3.15-rc6.orig/drivers/staging/imx-drm/parallel-display.c linux-3.15-rc6/drivers/staging/imx-drm/parallel-display.c
+--- linux-3.15-rc6.orig/drivers/staging/imx-drm/parallel-display.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/drivers/staging/imx-drm/parallel-display.c	2014-05-23 11:26:48.396940333 +0200
 @@ -219,6 +219,8 @@
  			imxpd->interface_pix_fmt = V4L2_PIX_FMT_RGB565;
  		else if (!strcmp(fmt, "bgr666"))
@@ -12260,9 +12236,9 @@ diff -Nur linux-3.15-rc4.orig/drivers/staging/imx-drm/parallel-display.c linux-3
  	}
  
  	panel_node = of_parse_phandle(np, "fsl,panel", 0);
-diff -Nur linux-3.15-rc4.orig/include/linux/cec-dev.h linux-3.15-rc4/include/linux/cec-dev.h
---- linux-3.15-rc4.orig/include/linux/cec-dev.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/include/linux/cec-dev.h	2014-05-07 17:05:51.180167518 +0200
+diff -Nur linux-3.15-rc6.orig/include/linux/cec-dev.h linux-3.15-rc6/include/linux/cec-dev.h
+--- linux-3.15-rc6.orig/include/linux/cec-dev.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/include/linux/cec-dev.h	2014-05-23 11:26:48.396940333 +0200
 @@ -0,0 +1,69 @@
 +#ifndef _LINUX_CEC_DEV_H
 +#define _LINUX_CEC_DEV_H
@@ -12333,9 +12309,9 @@ diff -Nur linux-3.15-rc4.orig/include/linux/cec-dev.h linux-3.15-rc4/include/lin
 +void cec_dev_remove(struct cec_dev *cec_dev);
 +
 +#endif
-diff -Nur linux-3.15-rc4.orig/include/linux/mmc/host.h linux-3.15-rc4/include/linux/mmc/host.h
---- linux-3.15-rc4.orig/include/linux/mmc/host.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/include/linux/mmc/host.h	2014-05-07 17:05:51.180167518 +0200
+diff -Nur linux-3.15-rc6.orig/include/linux/mmc/host.h linux-3.15-rc6/include/linux/mmc/host.h
+--- linux-3.15-rc6.orig/include/linux/mmc/host.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/include/linux/mmc/host.h	2014-05-23 11:26:48.400940347 +0200
 @@ -278,6 +278,7 @@
  #define MMC_CAP2_PACKED_CMD	(MMC_CAP2_PACKED_RD | \
  				 MMC_CAP2_PACKED_WR)
@@ -12365,9 +12341,9 @@ diff -Nur linux-3.15-rc4.orig/include/linux/mmc/host.h linux-3.15-rc4/include/li
  #ifdef CONFIG_REGULATOR
  int mmc_regulator_get_ocrmask(struct regulator *supply);
  int mmc_regulator_set_ocr(struct mmc_host *mmc,
-diff -Nur linux-3.15-rc4.orig/include/linux/mmc/sdhci.h linux-3.15-rc4/include/linux/mmc/sdhci.h
---- linux-3.15-rc4.orig/include/linux/mmc/sdhci.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/include/linux/mmc/sdhci.h	2014-05-07 17:05:51.180167518 +0200
+diff -Nur linux-3.15-rc6.orig/include/linux/mmc/sdhci.h linux-3.15-rc6/include/linux/mmc/sdhci.h
+--- linux-3.15-rc6.orig/include/linux/mmc/sdhci.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/include/linux/mmc/sdhci.h	2014-05-23 11:26:48.400940347 +0200
 @@ -57,12 +57,8 @@
  #define SDHCI_QUIRK_BROKEN_CARD_DETECTION		(1<<15)
  /* Controller reports inverted write-protect state */
@@ -12413,9 +12389,9 @@ diff -Nur linux-3.15-rc4.orig/include/linux/mmc/sdhci.h linux-3.15-rc4/include/l
  	wait_queue_head_t	buf_ready_int;	/* Waitqueue for Buffer Read Ready interrupt */
  	unsigned int		tuning_done;	/* Condition flag set when CMD19 succeeds */
  
-diff -Nur linux-3.15-rc4.orig/include/uapi/linux/cec-dev.h linux-3.15-rc4/include/uapi/linux/cec-dev.h
---- linux-3.15-rc4.orig/include/uapi/linux/cec-dev.h	1970-01-01 01:00:00.000000000 +0100
-+++ linux-3.15-rc4/include/uapi/linux/cec-dev.h	2014-05-07 17:05:51.180167518 +0200
+diff -Nur linux-3.15-rc6.orig/include/uapi/linux/cec-dev.h linux-3.15-rc6/include/uapi/linux/cec-dev.h
+--- linux-3.15-rc6.orig/include/uapi/linux/cec-dev.h	1970-01-01 01:00:00.000000000 +0100
++++ linux-3.15-rc6/include/uapi/linux/cec-dev.h	2014-05-23 11:26:48.400940347 +0200
 @@ -0,0 +1,34 @@
 +#ifndef _UAPI_LINUX_CEC_DEV_H
 +#define _UAPI_LINUX_CEC_DEV_H
@@ -12451,9 +12427,9 @@ diff -Nur linux-3.15-rc4.orig/include/uapi/linux/cec-dev.h linux-3.15-rc4/includ
 +};
 +
 +#endif
-diff -Nur linux-3.15-rc4.orig/include/uapi/linux/videodev2.h linux-3.15-rc4/include/uapi/linux/videodev2.h
---- linux-3.15-rc4.orig/include/uapi/linux/videodev2.h	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/include/uapi/linux/videodev2.h	2014-05-07 17:05:51.180167518 +0200
+diff -Nur linux-3.15-rc6.orig/include/uapi/linux/videodev2.h linux-3.15-rc6/include/uapi/linux/videodev2.h
+--- linux-3.15-rc6.orig/include/uapi/linux/videodev2.h	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/include/uapi/linux/videodev2.h	2014-05-23 11:26:48.400940347 +0200
 @@ -299,6 +299,7 @@
  #define V4L2_PIX_FMT_RGB555X v4l2_fourcc('R', 'G', 'B', 'Q') /* 16  RGB-5-5-5 BE  */
  #define V4L2_PIX_FMT_RGB565X v4l2_fourcc('R', 'G', 'B', 'R') /* 16  RGB-5-6-5 BE  */
@@ -12462,9 +12438,9 @@ diff -Nur linux-3.15-rc4.orig/include/uapi/linux/videodev2.h linux-3.15-rc4/incl
  #define V4L2_PIX_FMT_BGR24   v4l2_fourcc('B', 'G', 'R', '3') /* 24  BGR-8-8-8     */
  #define V4L2_PIX_FMT_RGB24   v4l2_fourcc('R', 'G', 'B', '3') /* 24  RGB-8-8-8     */
  #define V4L2_PIX_FMT_BGR32   v4l2_fourcc('B', 'G', 'R', '4') /* 32  BGR-8-8-8-8   */
-diff -Nur linux-3.15-rc4.orig/sound/soc/fsl/imx-pcm-dma.c linux-3.15-rc4/sound/soc/fsl/imx-pcm-dma.c
---- linux-3.15-rc4.orig/sound/soc/fsl/imx-pcm-dma.c	2014-05-05 03:14:42.000000000 +0200
-+++ linux-3.15-rc4/sound/soc/fsl/imx-pcm-dma.c	2014-05-07 17:05:51.180167518 +0200
+diff -Nur linux-3.15-rc6.orig/sound/soc/fsl/imx-pcm-dma.c linux-3.15-rc6/sound/soc/fsl/imx-pcm-dma.c
+--- linux-3.15-rc6.orig/sound/soc/fsl/imx-pcm-dma.c	2014-05-21 23:42:02.000000000 +0200
++++ linux-3.15-rc6/sound/soc/fsl/imx-pcm-dma.c	2014-05-23 11:26:48.400940347 +0200
 @@ -44,7 +44,7 @@
  	.buffer_bytes_max = IMX_SSI_DMABUF_SIZE,
  	.period_bytes_min = 128,

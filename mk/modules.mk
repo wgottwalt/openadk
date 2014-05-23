@@ -1110,21 +1110,43 @@ $(eval $(call KMOD_template,SOUND,sound,\
 $(eval $(call KMOD_template,SND,snd,\
 	$(MODULES_DIR)/kernel/sound/core/snd \
 	$(MODULES_DIR)/kernel/sound/core/snd-timer \
+,35))
+
+ifeq ($(KERNEL_BASE),3)
+ifeq ($(KERNEL_MAJ),10)
+$(eval $(call KMOD_template,SND_PCM,snd-pcm,\
+	$(MODULES_DIR)/kernel/sound/core/snd-page-alloc \
+	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
 ,40))
+else
+$(eval $(call KMOD_template,SND_PCM,snd-pcm,\
+	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
+,40))
+endif
+endif
 
 $(eval $(call KMOD_template,SND_COMPRESS,snd-compress,\
 	$(MODULES_DIR)/kernel/sound/core/snd-compress \
-,42))
+,45))
 
 $(eval $(call KMOD_template,SND_RAWMIDI,snd-rawmidi,\
 	$(MODULES_DIR)/kernel/sound/core/snd-hwdep \
 	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
-,42))
+,45))
 
 $(eval $(call KMOD_template,SND_AC97_CODEC,snd-ac97-codec,\
 	$(MODULES_DIR)/kernel/sound/ac97_bus \
 	$(MODULES_DIR)/kernel/sound/pci/ac97/snd-ac97-codec \
 ,50))
+
+ifeq ($(KERNEL_BASE),3)
+ifeq ($(KERNEL_MAJ),10)
+$(eval $(call KMOD_template,SND_SOC_SPDIF,snd-soc-spdif,\
+	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-spdif-tx \
+	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-spdif-rx \
+,50))
+endif
+endif
 
 $(eval $(call KMOD_template,SND_VIA82XX,snd-via82xx,\
 	$(MODULES_DIR)/kernel/sound/drivers/mpu401/snd-mpu401-uart \
@@ -1143,27 +1165,6 @@ $(eval $(call KMOD_template,SND_CS5535AUDIO,snd-cs5535audio,\
 	$(MODULES_DIR)/kernel/sound/pci/cs5535audio/snd-cs5535audio \
 ,55))
 
-ifeq ($(KERNEL_BASE),3)
-ifeq ($(KERNEL_MAJ),10)
-$(eval $(call KMOD_template,SND_PCM,snd-pcm,\
-	$(MODULES_DIR)/kernel/sound/core/snd-page-alloc \
-	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
-,53))
-$(eval $(call KMOD_template,SND_SOC_SPDIF,snd-soc-spdif,\
-	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-spdif-tx \
-	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-spdif-rx \
-,56))
-else
-$(eval $(call KMOD_template,SND_PCM,snd-pcm,\
-	$(MODULES_DIR)/kernel/sound/core/snd-pcm \
-,53))
-endif
-endif
-
-$(eval $(call KMOD_template,SND_PCM_DMAENGINE,snd-pcm-dmaengine,\
-	$(MODULES_DIR)/kernel/sound/core/snd-pcm-dmaengine \
-,54))
-
 $(eval $(call KMOD_template,SND_SOC,snd-soc,\
 	$(MODULES_DIR)/kernel/sound/soc/snd-soc-core \
 ,55))
@@ -1176,30 +1177,30 @@ $(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-pxa2xx-i2s \
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-pxa2xx \
 	$(MODULES_DIR)/kernel/sound/soc/pxa/snd-soc-spitz \
-,57, kmod-snd-soc))
+,60, kmod-snd-soc))
 
 $(eval $(call KMOD_template,SND_IMX_SOC,snd-imx-soc,\
 	$(MODULES_DIR)/kernel/sound/soc/fsl/imx-pcm-dma \
 	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-fsl-spdif \
 	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-imx-spdif \
-,57, kmod-snd-soc kmod-snd-compress))
+,60, kmod-snd-soc kmod-snd-compress))
 
 $(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
 	$(MODULES_DIR)/kernel/sound/arm/snd-bcm2835 \
-,57))
+,60))
 
 $(eval $(call KMOD_template,SND_BCM2708_SOC_I2S,snd-bcm2709-soc-i2s,\
 	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-pcm5102a \
 	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-bcm2708-i2s \
-,57, kmod-snd-soc))
+,60, kmod-snd-soc))
 
 $(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DAC,snd-bcm2709-soc-hifiberry-dac,\
 	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-hifiberry-dac \
-,57, kmod-snd-bcm2709-soc-i2s))
+,65, kmod-snd-bcm2709-soc-i2s))
 
 $(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DIGI,snd-bcm2709-soc-hifiberry-digi,\
 	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-hifiberry-digi \
-,57, kmod-snd-bcm2709-soc-i2s))
+,65, kmod-snd-bcm2709-soc-i2s))
 
 $(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\
 	$(MODULES_DIR)/kernel/drivers/media/usb/uvc/uvcvideo \
@@ -1348,9 +1349,8 @@ $(eval $(call KMOD_template,USB_HSO,usb-hso,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/hso \
 ,75))
 
-SNDUSB:=snd-usbmidi-lib
 $(eval $(call KMOD_template,SND_USB_AUDIO,snd-usb-audio,\
-	$(MODULES_DIR)/kernel/sound/usb/$(SNDUSB) \
+	$(MODULES_DIR)/kernel/sound/usb/snd-usbmidi-lib \
 	$(MODULES_DIR)/kernel/sound/usb/snd-usb-audio \
 ,75))
 
