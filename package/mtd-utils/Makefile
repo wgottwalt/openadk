@@ -7,11 +7,12 @@ PKG_NAME:=		mtd-utils
 PKG_VERSION:=		1.5.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a4df1ad29684be79b0fa699bdae01faf
-PKG_DESCR:=		mtd-utils filesystem utilities
+PKG_DESCR:=		flash filesystem utilities
 PKG_SECTION:=		fs
 HOST_BUILDDEP:=		liblzo-host
 PKG_SITES:=		http://openadk.org/distfiles/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_CFLINE_MTD_UTILS:=	depends on ADK_HOST_ONLY
 
 include $(TOPDIR)/mk/host.mk

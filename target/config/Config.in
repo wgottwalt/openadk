@@ -595,11 +595,12 @@ config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 		ADK_LINUX_X86_64
 	depends on !ADK_HARDWARE_VBOX
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	depends on !ADK_TARGET_SYSTEM_ARANYM_M68K
 	help
 	  create an read-only initramfs system.
 
 config ADK_TARGET_ROOTFS_SQUASHFS
-	boolean "Compressed read-only root filesystem (squashfs)"
+	boolean "compressed read-only root filesystem for NOR flash"
 	select ADK_KERNEL_SQUASHFS
 	select ADK_HOST_NEED_SQUASHFS
 	select ADK_HOST_NEED_QEMU if ADK_HARDWARE_QEMU
@@ -609,16 +610,16 @@ config ADK_TARGET_ROOTFS_SQUASHFS
 	  highly compressed read-only filesystem for MTD flash systems.
 
 config ADK_TARGET_ROOTFS_JFFS2
-	boolean "Compressed read-write root filesystem (jffs2)"
+	boolean "compressed read-write root filesystem for NOR flash"
 	select ADK_KERNEL_JFFS2_FS
 	select ADK_HOST_NEED_MTD_UTILS
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_HARDWARE_QEMU
 	depends on ADK_TARGET_WITH_MTD
 	help
-	  compressed read-write filesystem for MTD flash systems.
+	  compressed read-write filesystem for MTD NOR flash systems.
 
 config ADK_TARGET_ROOTFS_YAFFS
-	boolean "YAFFS2 root filesystem (NAND)"
+	boolean "YAFFS2 root filesystem for NAND flash"
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_YAFFS_FS
 	select ADK_KERNEL_YAFFS_YAFFS2
@@ -641,10 +642,10 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	depends on !ADK_HARDWARE_QEMU && !ADK_HARDWARE_VBOX && !ADK_TARGET_SYSTEM_ARANYM_M68K
 	depends on !ADK_TARGET_SYSTEM_ARM_FM
 	help
-	  Root filesystem mounted via NFS. (DHCP)
+	  Root filesystem mounted via NFS and DHCP.
 
 config ADK_TARGET_ROOTFS_USB
-	boolean "Boot from USB stick"
+	boolean "boot from USB stick"
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_BLK_DEV_SD
@@ -660,7 +661,7 @@ config ADK_TARGET_ROOTFS_USB
 	  Boot system from USB stick.
 
 config ADK_TARGET_ROOTFS_ISO
-	boolean "ISO image"
+	boolean "create ISO image"
 	select ADK_KERNEL_ISO9660_FS
 	select ADK_KERNEL_JOLIET
 	select ADK_KERNEL_SCSI
@@ -673,18 +674,22 @@ config ADK_TARGET_ROOTFS_ISO
 	help
 	  Use this option to create a bootable ISO image.
 
-config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
-	boolean "Archive usable for initramfs creation"
+config ADK_TARGET_ROOTFS_INITRAMFS_ARCHIVE
+	boolean "archive usable for initramfs creation"
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	depends on !ADK_TARGET_SYSTEM_ARM_FM
+	depends on !ADK_TARGET_SYSTEM_ARANYM_M68K
 	help
 	  Use this option if your planning to create a initramfs,
 	  useful for adk-test-framework.
 
 config ADK_TARGET_ROOTFS_ARCHIVE
-	boolean "Archive usable for different filesystems"
+	boolean "archive usable for different filesystems"
 	select ADK_HOST_NEED_GENEXT2FS if ADK_HARDWARE_QEMU
 	select ADK_KERNEL_EXT2_FS if ADK_HARDWARE_QEMU
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_HARDWARE_QEMU
+	depends on !ADK_TARGET_SYSTEM_ARANYM_M68K
+	depends on !ADK_TARGET_SYSTEM_QEMU_MICROBLAZE
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 

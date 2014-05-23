@@ -9,6 +9,9 @@ config ADK_KERNEL_FW_LOADER_USER_HELPER
 config ADK_KERNEL_KEYS
 	boolean
 
+config ADK_KERNEL_SBUS
+	boolean
+
 menu "Miscellaneous devices support"
 
 source "target/linux/config/Config.in.rtc"

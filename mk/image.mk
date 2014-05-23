@@ -117,11 +117,11 @@ endif
 KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
 KERNEL_PKG:=$(PACKAGE_DIR)/kernel_$(KERNEL_VERSION)_$(CPU_ARCH).$(PKG_SUFFIX)
 
-kernel-package: $(KERNEL)
+kernel-package: kernel-strip
 	$(TRACE) target/$(ADK_TARGET_ARCH)-create-kernel-package
 	rm -rf $(KERNEL_PKGDIR)
 	@mkdir -p $(KERNEL_PKGDIR)/boot
-	cp $(KERNEL) $(KERNEL_PKGDIR)/boot/kernel
+	cp $(BUILD_DIR)/$(TARGET_KERNEL) $(KERNEL_PKGDIR)/boot/kernel
 	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
 	    ../linux/kernel.control ${KERNEL_VERSION} ${CPU_ARCH}
 	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
@@ -150,6 +150,9 @@ ${FW_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}/.adk kernel-package
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
 		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | gzip -n9 >$@
+ifeq ($(ADK_HARDWARE_QEMU),y)
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+endif
 
 ${FW_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}/.adk
 	cd ${TARGET_DIR}; find . | grep -v ./boot/ | sed -n '/^\.\//s///p' | \
@@ -239,6 +242,7 @@ endif
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* 2>/dev/null
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
 		-j${ADK_MAKE_JOBS} $(ADK_TARGET_KERNEL) $(MAKE_TRACE)
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
 ${FW_DIR}/${ROOTFSISO}: ${TARGET_DIR} kernel-package
 	mkdir -p ${TARGET_DIR}/boot/syslinux

@@ -9,7 +9,28 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=${LINUX_DIR}/arch/arm64/boot/Image
 
-kernel-install:
+# target helper text
+ifeq ($(ADK_TARGET_FS),archive)
+targethelp:
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
+ifeq ($(ADK_TARGET_FS),initramfs)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
+endif
+ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
+targethelp:
+	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
+ifeq ($(ADK_TARGET_SYSTEM_ARM_FM),y)
+	@echo 'Start emulator via:'
+	@echo 'Foundation_v8 --image=$(FW_DIR)/${TARGET_KERNEL}'
+endif
+endif
+
+kernel-strip:
+
+kernel-install: kernel-strip
 	cd $(TOPDIR) && \
 		make -f Makefile \
 		-C package/boot-wrapper-aarch64 clean
@@ -19,20 +40,13 @@ kernel-install:
 	${CP} ${LINUX_DIR}/linux-system.axf \
 		$(FW_DIR)/$(TARGET_KERNEL)
 
+# filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
-imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
-	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
 endif
-ifeq ($(ADK_TARGET_FS),initramfsarchive)
-imageinstall: $(FW_DIR)/$(ROOTFSUSERTARBALL)
-	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
-	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
+ifeq ($(ADK_TARGET_FS),initramfs)
+imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
-imageinstall: createinitramfs kernel-install
-	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
-ifeq ($(ADK_TARGET_SYSTEM_ARM_FM),y)
-	@echo 'Start emulator via:'
-	@echo 'Foundation_v8 --image=$(FW_DIR)/${TARGET_KERNEL}'
-endif
+imageinstall: createinitramfs targethelp
 endif

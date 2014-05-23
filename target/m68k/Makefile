@@ -9,21 +9,9 @@ include $(TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux.gz
 
-ifeq ($(ADK_TARGET_FS),archive)
-imageinstall: $(FW_DIR)/$(ROOTFSTARBALL)
-	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
-	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
-endif
-ifeq ($(ADK_TARGET_FS),initramfsarchive)
-imageinstall: $(FW_DIR)/$(ROOTFSUSERTARBALL)
-	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
-	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
-	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
-endif
+# target helper text
 ifeq ($(ADK_TARGET_FS),initramfs)
-imageinstall: $(FW_DIR)/$(INITRAMFS)
-	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_SYSTEM_ARANYM_M68K),y)
@@ -35,8 +23,13 @@ ifeq ($(ADK_TARGET_SYSTEM_ARANYM_M68K),y)
 	@echo 'Ungrab mouse with middle mouse click'
 endif
 endif
-ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
-imageinstall: createinitramfs
-	@cp $(KERNEL) $(FW_DIR)/${TARGET_KERNEL}
-	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
+
+kernel-strip:
+
+kernel-install: kernel-strip
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+
+# filesystem specific targets
+ifeq ($(ADK_TARGET_FS),initramfs)
+imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
 endif

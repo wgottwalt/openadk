@@ -258,6 +258,7 @@ config ADK_KERNEL_SCSI_SUNESP
 	prompt "SUN ESP support"
 	tristate
 	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_SBUS
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on ADK_TARGET_SYSTEM_QEMU_SPARC
