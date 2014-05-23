@@ -4,7 +4,7 @@ config ADK_TARGET_SYSTEM_QEMU_PPC64
 	select ADK_qemu_ppc64
 	select ADK_CPU_PPC64
 	select ADK_LINUX_64
-	select ADK_HARDWARE_QEMU
+	select ADK_TARGET_QEMU
 	help
-	 Support for Qemu Emulator (PPC64).
+	 Support for Qemu Emulator PPC64 architecture.
 

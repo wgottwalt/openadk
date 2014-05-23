@@ -6,19 +6,19 @@ include Makefile.inc
 include ../rules.mk
 include ${TOPDIR}/mk/buildhlp.mk
 
-ifeq ($(ADK_TOOLCHAIN_SSP),y)
+ifeq ($(ADK_TOOLCHAIN_WITH_SSP),y)
 CONFOPTS+=		--enable-libssp
 else
 CONFOPTS+=		--disable-libssp
 endif
 
-ifeq ($(ADK_TOOLCHAIN_LTO),y)
+ifeq ($(ADK_TOOLCHAIN_WITH_LTO),y)
 CONFOPTS+=		--enable-lto
 else
 CONFOPTS+=		--disable-lto
 endif
 
-ifeq ($(ADK_TOOLCHAIN_GOLD),y)
+ifeq ($(ADK_TOOLCHAIN_WITH_GOLD),y)
 CONFOPTS+=		--enable-gold
 else
 CONFOPTS+=		--disable-gold

@@ -1,0 +1,9 @@
+choice
+depends on ADK_LINUX_MIPS64 && !ADK_CHOOSE_TARGET_ARCH
+prompt "Target system"
+
+config ADK_CHOOSE_TARGET_SYSTEM_MIPS64
+        boolean "Choose target system"
+
+source "target/mips64/Config.in.systems"
+endchoice

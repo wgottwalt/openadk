@@ -1,0 +1,15 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+config ADK_KERNEL_VERSION
+	string
+	default "3.15-rc5" if ADK_KERNEL_VERSION_3_15_RC5
+	default "3.14.4" if ADK_KERNEL_VERSION_3_14_4
+	default "3.13.11" if ADK_KERNEL_VERSION_3_13_11
+	default "3.12.20" if ADK_KERNEL_VERSION_3_12_20
+	default "3.11.10" if ADK_KERNEL_VERSION_3_11_10
+	default "3.10.40" if ADK_KERNEL_VERSION_3_10_40
+	default "3.10.30" if ADK_KERNEL_VERSION_3_10_30
+	default "3.4.90" if ADK_KERNEL_VERSION_3_4_90
+	help
+

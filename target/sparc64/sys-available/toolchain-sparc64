@@ -4,8 +4,8 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_SPARC64
 	select ADK_toolchain_sparc64
 	select ADK_CPU_SPARC_V9
 	select ADK_LINUX_64
-	select ADK_TOOLCHAIN
+	select ADK_TARGET_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ
 	help
-	  Build a sparc64 toolchain.
+	  SPARC64 toolchain.
 

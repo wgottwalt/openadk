@@ -1,0 +1,24 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice ADK_TARGET_X86_CPU_MODEL
+prompt "CPU model"
+depends on ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_GENERIC_PC
+
+config ADK_CPU_I486
+        boolean "i486"
+        select ADK_i486
+
+config ADK_CPU_I586
+        boolean "i586"
+        select ADK_i586
+
+config ADK_CPU_I686
+        boolean "i686"
+        select ADK_i686
+
+config ADK_CPU_ATOM
+        boolean "atom"
+        select ADK_atom
+
+endchoice

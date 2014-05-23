@@ -1,0 +1,36 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice
+prompt "Target ABI"
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+depends on ADK_LINUX_MIPS64
+
+config ADK_TARGET_ABI_N32
+	boolean "N32 ABI"
+	select ADK_n32
+
+config ADK_TARGET_ABI_N64
+	boolean "N64 ABI"
+	select ADK_n64
+
+config ADK_TARGET_ABI_O32
+	boolean "O32 ABI"
+	select ADK_o32
+
+endchoice
+
+choice
+prompt "Target ABI"
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+depends on ADK_LINUX_X86_64
+
+config ADK_TARGET_ABI_64
+	boolean "64 Bit ABI"
+	select ADK_64
+
+config ADK_TARGET_ABI_X32
+	boolean "x32 ABI"
+	select ADK_x32
+
+endchoice

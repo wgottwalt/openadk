@@ -1,0 +1,64 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+config ADK_o32
+	boolean
+
+config ADK_n32
+	boolean
+
+config ADK_n64
+	boolean
+
+config ADK_32
+	boolean
+
+config ADK_64
+	boolean
+
+config ADK_x32
+	boolean
+
+config ADK_eabi
+	boolean
+
+config ADK_eabihf
+	boolean
+
+config ADK_TARGET_ABI
+	string
+	default "n32" if ADK_n32
+	default "n64" if ADK_n64
+	default "32" if ADK_32
+	default "x32" if ADK_x32
+	default "eabi" if ADK_eabi
+	default "eabihf" if ADK_eabihf
+
+config ADK_TARGET_MIPS_ABI
+	depends on ADK_LINUX_MIPS64
+	string
+	default "32" if ADK_o32
+	default "n32" if ADK_n32
+	default "64" if ADK_n64
+
+config ADK_TARGET_LIBC_PATH
+	string
+	default "lib" if ADK_32
+	default "lib32" if ADK_n32
+	default "libx32" if ADK_x32
+	default "lib64" if ADK_n64 \
+				|| ADK_64 \
+				|| ADK_LINUX_SPARC64 \
+				|| ADK_LINUX_PPC64 \
+				|| ADK_LINUX_X86_64
+	default "lib"
+
+config ADK_TARGET_ABI_CFLAGS
+	string
+	default "-mabi=32" if ADK_o32
+	default "-mabi=n32" if ADK_n32
+	default "-mabi=64" if ADK_n64
+	default "-m32" if ADK_32
+	default "-mx32" if ADK_x32
+	default "-m64" if ADK_64
+

@@ -65,13 +65,13 @@ GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 endif
 
-ifeq ($(ADK_TOOLCHAIN_GCC_SSP),y)
+ifeq ($(ADK_TOOLCHAIN_WITH_SSP),y)
 GCC_FINAL_CONFOPTS+=	--enable-libssp
 else
 GCC_FINAL_CONFOPTS+=	--disable-libssp
 endif
 
-ifeq ($(ADK_TOOLCHAIN_GCC_LTO),y)
+ifeq ($(ADK_TOOLCHAIN_WITH_LTO),y)
 GCC_FINAL_CONFOPTS+=	--enable-lto
 else
 GCC_FINAL_CONFOPTS+=	--disable-lto

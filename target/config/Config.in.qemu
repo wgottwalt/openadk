@@ -1,38 +1,21 @@
-config ADK_QEMU_ARGS
-	string
-	default "-nographic" if ADK_TARGET_QEMU_WITHOUT_GRAPHIC
-
-menu "Qemu configuration"
-depends on ADK_HARDWARE_QEMU
-
-choice 
-prompt "Use a Bootloader"
-depends on ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_LINUX_X86
-
-config ADK_TARGET_QEMU_WITHOUT_BOOTLOADER
-	boolean "do not use bootloader"
-
-config ADK_TARGET_QEMU_WITH_BOOTLOADER
-	boolean "use bootloader"
-	select ADK_PACKAGE_GRUB if ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_LINUX_X86
-
-endchoice
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
 
 choice
 prompt "Qemu MICROBLAZE Emulation"
-depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE || ADK_TARGET_SYSTEM_QEMU_MICROBLAZEEL
+depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE
 
 config ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 	boolean "Xilinx Spartan S3ADSP1800"
 
 config ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
-	boolean "Xilinx ml605"
+	boolean "Xilinx ML605"
 
 endchoice
 
 choice
 prompt "Qemu ARM Emulation"
-depends on ADK_TARGET_SYSTEM_QEMU_ARM || ADK_TARGET_SYSTEM_QEMU_ARMHF
+depends on ADK_TARGET_SYSTEM_QEMU_ARM
 
 config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	boolean "ARM Ltd. Versatile Express for Cortex-A9"
@@ -43,7 +26,7 @@ config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	select ADK_soft_float
 	select ADK_eabi
 	select ADK_CPU_ARM926EJ_S
-	depends on ADK_TARGET_SYSTEM_QEMU_ARM
+	depends on ADK_TARGET_ARM_SOFT_FLOAT
 
 config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	boolean "Xscale PXA270 Spitz PDA"
@@ -51,77 +34,6 @@ config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	select ADK_eabi
 	select ADK_CPU_XSCALE
 	select ADK_TARGET_QEMU_WITH_GRAPHIC
-	depends on ADK_TARGET_SYSTEM_QEMU_ARM
+	depends on ADK_TARGET_ARM_SOFT_FLOAT
 
 endchoice
-
-choice
-prompt "Qemu Emulation with permanent storage device (disk/flash)"
-depends on ADK_HARDWARE_QEMU
-default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_ARCHIVE
-default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_SQUASHFS
-default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_JFFS2
-
-config ADK_TARGET_QEMU_WITHOUT_BLOCK
-	boolean "disabled"
-
-config ADK_TARGET_QEMU_WITH_BLOCK
-	boolean "enabled"
-	select ADK_KERNEL_SCSI_SYM53C8XX_2 if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
-	select ADK_KERNEL_MTD_M25P80 if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605 || ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
-	select ADK_KERNEL_ATA_PIIX if ADK_LINUX_MIPS || ADK_LINUX_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
-	select ADK_KERNEL_PATA_MACIO if ADK_TARGET_SYSTEM_QEMU_PPC
-	select ADK_KERNEL_SCSI_IBMVSCSI if ADK_TARGET_SYSTEM_QEMU_PPC64
-	select ADK_KERNEL_SCSI_SUNESP if ADK_TARGET_SYSTEM_QEMU_SPARC
-	select ADK_KERNEL_PATA_PLATFORM if ADK_LINUX_SH
-
-endchoice
-
-choice
-prompt "Qemu Emulation with graphical output"
-depends on ADK_HARDWARE_QEMU
-default ADK_TARGET_QEMU_WITH_GRAPHIC if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
-
-config ADK_TARGET_QEMU_WITHOUT_GRAPHIC
-	boolean "disabled"
-
-config ADK_TARGET_QEMU_WITH_GRAPHIC
-	boolean "enabled"
-	select ADK_KERNEL_VT
-	select ADK_KERNEL_VT_CONSOLE
-	select ADK_KERNEL_FONTS
-	select ADK_KERNEL_FONT_8x16
-	select ADK_KERNEL_FB
-	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
-	select ADK_KERNEL_FB_SM501 if ADK_LINUX_SH
-	select ADK_KERNEL_FB_CIRRUS if ADK_LINUX_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
-	select ADK_KERNEL_FB_PXA if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
-	select ADK_KERNEL_INPUT
-	select ADK_KERNEL_INPUT_KEYBOARD
-	select ADK_KERNEL_KEYBOARD_ATKBD if ADK_LINUX_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
-	select ADK_KERNEL_USB_HID if ADK_LINUX_SH
-	select ADK_KERNEL_USB_OHCI_HCD_PLATFORM if ADK_LINUX_SH
-
-endchoice
-
-choice
-prompt "Qemu Emulation using VirtIO drivers"
-depends on ADK_TARGET_SYSTEM_QEMU_SPARC64 || \
-		ADK_TARGET_SYSTEM_QEMU_I686 || \
-		ADK_TARGET_SYSTEM_QEMU_X86_64
-default ADK_TARGET_QEMU_WITH_VIRTIO if ADK_TARGET_SYSTEM_QEMU_SPARC64
-
-config ADK_TARGET_QEMU_WITHOUT_VIRTIO
-	boolean "disabled"
-
-config ADK_TARGET_QEMU_WITH_VIRTIO
-	boolean "enabled"
-	select ADK_KERNEL_BLK_DEV
-	select ADK_KERNEL_VIRTIO
-	select ADK_KERNEL_VIRTIO_PCI
-	select ADK_KERNEL_VIRTIO_NET
-	select ADK_KERNEL_VIRTIO_BLK
-
-endchoice
-
-endmenu

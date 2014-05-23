@@ -1,0 +1,44 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+config ADK_uclibc
+	boolean
+
+config ADK_glibc
+	boolean
+
+config ADK_musl
+	boolean
+
+config ADK_TARGET_LIBC
+	string
+	default "uclibc"  if ADK_uclibc
+	default "glibc"  if ADK_glibc
+	default "musl"  if ADK_musl
+
+config ADK_TARGET_SUFFIX
+	string
+	default "gnueabihf" if ADK_TARGET_LIB_GLIBC && ADK_eabihf
+	default "gnueabi" if ADK_TARGET_LIB_GLIBC && ADK_eabi
+	default "gnuabi64" if ADK_TARGET_LIB_GLIBC && ADK_n64
+	default "gnuabin32" if ADK_TARGET_LIB_GLIBC && ADK_n32
+	default "gnuabi32" if ADK_TARGET_LIB_GLIBC && ADK_o32
+	default "gnu32" if ADK_TARGET_LIB_GLIBC && ADK_32 && ADK_LINUX_64
+	default "gnux32" if ADK_TARGET_LIB_GLIBC && ADK_x32 && ADK_LINUX_64
+	default "gnu" if ADK_TARGET_LIB_GLIBC
+	default "uclibcgnueabihf" if ADK_TARGET_LIB_UCLIBC && ADK_eabihf
+	default "uclibcgnueabi" if ADK_TARGET_LIB_UCLIBC && ADK_eabi
+	default "uclibcabi64" if ADK_TARGET_LIB_UCLIBC && ADK_n64
+	default "uclibcabin32" if ADK_TARGET_LIB_UCLIBC && ADK_n32
+	default "uclibcabi32" if ADK_TARGET_LIB_UCLIBC && ADK_o32
+	default "uclibc32" if ADK_TARGET_LIB_UCLIBC && ADK_32 && ADK_LINUX_64
+	default "uclibcx32" if ADK_TARGET_LIB_UCLIBC && ADK_x32 && ADK_LINUX_64
+	default "uclibc" if ADK_TARGET_LIB_UCLIBC
+	default "muslgnueabihf" if ADK_TARGET_LIB_MUSL && ADK_eabihf
+	default "muslgnueabi" if ADK_TARGET_LIB_MUSL && ADK_eabi
+	default "muslabi64" if ADK_TARGET_LIB_MUSL && ADK_n64
+	default "muslabin32" if ADK_TARGET_LIB_MUSL && ADK_n32
+	default "muslabi32" if ADK_TARGET_LIB_MUSL && ADK_o32
+	default "musl32" if ADK_TARGET_LIB_MUSL && ADK_32 && ADK_LINUX_64
+	default "muslx32" if ADK_TARGET_LIB_MUSL && ADK_x32 && ADK_LINUX_64
+	default "musl" if ADK_TARGET_LIB_MUSL

@@ -1,0 +1,57 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+config ADK_TARGET_KERNEL_VMLINUZ
+	boolean
+
+config ADK_TARGET_KERNEL_ZIMAGE
+	boolean
+
+config ADK_TARGET_KERNEL_LINUXBIN
+	boolean
+
+config ADK_TARGET_KERNEL_IMAGE
+	boolean
+
+config ADK_TARGET_KERNEL_UIMAGE
+	boolean
+
+config ADK_TARGET_KERNEL_BZIMAGE
+	boolean
+
+config ADK_TARGET_KERNEL
+	string
+	default "uImage" if ADK_TARGET_KERNEL_UIMAGE
+	default "zImage" if ADK_TARGET_KERNEL_ZIMAGE
+	default "Image" if ADK_TARGET_KERNEL_IMAGE
+	default "linux.bin" if ADK_TARGET_KERNEL_LINUXBIN
+	default "vmlinuz" if ADK_TARGET_KERNEL_VMLINUZ
+	default "bzImage" if ADK_TARGET_KERNEL_BZIMAGE
+	default "vmlinux"
+
+config ADK_TARGET_KERNEL_MINICONFIG
+	string
+	default "arm-fm" if ADK_TARGET_SYSTEM_ARM_FM
+	default "qemu-microblaze-s3adsp1800" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
+	default "qemu-microblaze-ml605" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
+	default "qemu-arm-versatilepb" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
+	default "qemu-arm-vexpress-a9" if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
+	default "qemu-arm-spitz" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
+	default "qemu-mips" if ADK_TARGET_SYSTEM_QEMU_MIPS
+	default "qemu-mips64" if ADK_TARGET_SYSTEM_QEMU_MIPS64
+	default "qemu-ppc" if ADK_TARGET_SYSTEM_QEMU_PPC
+	default "qemu-ppc64" if ADK_TARGET_SYSTEM_QEMU_PPC64
+	default "qemu-sh" if ADK_TARGET_SYSTEM_QEMU_SH4
+	default "qemu-sparc" if ADK_TARGET_SYSTEM_QEMU_SPARC
+	default "qemu-sparc64" if ADK_TARGET_SYSTEM_QEMU_SPARC64
+	default "qemu-x86" if ADK_TARGET_SYSTEM_QEMU_X86
+	default "qemu-x86_64" if ADK_TARGET_SYSTEM_QEMU_X86_64
+	default "aranym-m68k" if ADK_TARGET_SYSTEM_ARANYM_M68K
+	default "ibm-x40" if ADK_TARGET_SYSTEM_IBM_X40
+	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
+	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default "lemote-yeelong" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default "mikrotik-rb532" if ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	default "generic-pc" if ADK_TARGET_SYSTEM_GENERIC_PC
+

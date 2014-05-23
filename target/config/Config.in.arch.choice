@@ -34,29 +34,35 @@ config ADK_LINUX_MIPS
 	help
 	  Support for MIPS systems.
 
+config ADK_LINUX_MIPS64
+	bool "mips64 system"
+	select ADK_mips64
+	help
+	  Support for MIPS64 systems.
+
 config ADK_LINUX_PPC
 	bool "ppc system"
 	select ADK_ppc
 	help
-	  Support for powerpc systems.
+	  Support for PPC systems.
 
 config ADK_LINUX_PPC64
 	bool "ppc64 system"
 	select ADK_ppc64
 	help
-	  Support for powerpc64 systems.
+	  Support for PPC64 systems.
 
 config ADK_LINUX_SPARC
 	bool "sparc system"
 	select ADK_sparc
 	help
-	  Support for sparc systems.
+	  Support for SPARC systems.
 
 config ADK_LINUX_SPARC64
 	bool "sparc64 system"
 	select ADK_sparc64
 	help
-	  Support for sparc64 systems.
+	  Support for SPARC64 systems.
 
 config ADK_LINUX_SH
 	bool "superh system"

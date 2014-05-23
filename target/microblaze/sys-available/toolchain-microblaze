@@ -1,10 +1,9 @@
 config ADK_TARGET_SYSTEM_TOOLCHAIN_MICROBLAZE
-	bool "Toolchain only (big endian)"
+	bool "Toolchain only"
 	select ADK_microblaze
-	select ADK_big
 	select ADK_toolchain_microblaze
-	select ADK_TOOLCHAIN
+	select ADK_TARGET_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ
 	help
-	  Microblaze toolchain.
+	  MICROBLAZE toolchain.
 

@@ -1,0 +1,272 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+config ADK_TARGET_CFLAGS
+	string
+	default "-m4 -ml" if ADK_CPU_SH4 && ADK_little
+	default "-m4 -mb" if ADK_CPU_SH4 && ADK_big
+	default "-march=geode" if ADK_CPU_GEODE
+	default "-march=i486" if ADK_CPU_I486
+	default "-march=i586" if ADK_CPU_I586
+	default "-march=i686" if ADK_CPU_I686
+	default "-march=pentium-m" if ADK_CPU_PENTIUM_M
+	default "-march=atom" if ADK_CPU_ATOM
+	default "-march=amdfam10" if ADK_CPU_AMDFAM10
+	default "-mcpu=v8" if ADK_CPU_SPARC_V8
+	default "-m64 -mcpu=ultrasparc" if ADK_CPU_SPARC_V9
+	default "-march=loongson2f -Wa,-mfix-loongson2f-nop" if ADK_CPU_LOONGSON2F
+	default "-march=mips32" if ADK_CPU_MIPS32
+	default "-march=mips64" if ADK_CPU_MIPS64
+	default "-march=armv8-a" if ADK_CPU_ARMV8
+	default "-march=armv5te -mtune=iwmmxt" if ADK_CPU_XSCALE
+	default "-march=armv5te -mtune=arm926ej-s -mfloat-abi=soft" if ADK_CPU_ARM926EJ_S && ADK_soft_float
+	default "-march=armv5te -mtune=arm926ej-s -mfloat-abi=hard" if ADK_CPU_ARM926EJ_S && ADK_hard_float
+	default "-march=armv6 -mtune=arm1176jzf-s -mfloat-abi=soft" if ADK_CPU_ARM1176JZF_S && ADK_soft_float
+	default "-march=armv6 -mtune=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard" if ADK_CPU_ARM1176JZF_S && ADK_hard_float
+	default "-march=armv7-a -mtune=cortex-a9 -mfloat-abi=soft" if ADK_CPU_CORTEX_A9 && ADK_soft_float
+	default "-march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard" if ADK_CPU_CORTEX_A9 && ADK_hard_float
+
+config ADK_TARGET_CMDLINE
+	string
+	default "console=tty0" if ADK_TARGET_SYSTEM_ARANYM_M68K
+	default "console=ttyAMA0" if ADK_TARGET_SYSTEM_ARM_FM
+	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
+	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
+	default "console=ttymxc0,115200 console=tty0" if ADK_TARGET_SYSTEM_CUBOX_I && ADK_RUNTIME_VERBOSE_INIT_VGA
+	default "console=tty0 console=ttymxc0,115200" if ADK_TARGET_SYSTEM_CUBOX_I && ADK_RUNTIME_VERBOSE_INIT_SERIAL
+	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_IBM_X40 && ADK_RUNTIME_VERBOSE_INIT_VGA
+	default "console=tty0 console=ttyS0,115200" if ADK_TARGET_SYSTEM_IBM_X40 && ADK_RUNTIME_VERBOSE_INIT_SERIAL
+	default "console=tty0" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default "dwc_otg.fiq_split_enable=1" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default "console=ttyS0,115200 console=tty0 fbcon=rotate:1" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_FON_FON2100
+	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP
+	default "console=ttyS0,115200 console=tty0 geodewdt.nowayout=1" if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_VBOX_I686
+	default "console=ttyS0,115200" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
+	default "console=ttyAMA0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
+	default "console=ttyAMA0" if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
+	default "console=ttyUL0" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
+	default "console=ttyS0,115200" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
+	default "console=hvc0" if ADK_TARGET_SYSTEM_QEMU_PPC64
+	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_QEMU_PPC
+	default "console=ttySC1" if ADK_TARGET_SYSTEM_QEMU_SH4
+	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_QEMU_SPARC64
+	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	default ""
+
+choice
+prompt "Target firmware type"
+depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH && !ADK_TARGET_TOOLCHAIN
+default ADK_TARGET_ROOTFS_ARCHIVE
+
+config ADK_TARGET_ROOTFS_INITRAMFS
+	boolean "initramfs filesystem"
+	depends on \
+		ADK_TARGET_QEMU || \
+		ADK_LINUX_M68K || \
+		ADK_LINUX_ARM || \
+		ADK_LINUX_MICROBLAZE || \
+		ADK_LINUX_MIPS || \
+		ADK_LINUX_PPC || \
+		ADK_LINUX_SPARC || \
+		ADK_LINUX_X86 || \
+		ADK_LINUX_X86_64 || \
+		ADK_LINUX_NATIVE
+	depends on !ADK_HARDWARE_VBOX
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	select ADK_KERNEL_BLK_DEV_INITRD
+	help
+	  create an read-only initramfs system.
+
+config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
+	boolean "initramfs filesystem included into kernel image"
+	select ADK_LINUX_INITRAMFS_BUILTIN
+	depends on \
+		ADK_TARGET_QEMU || \
+		ADK_LINUX_AARCH64 || \
+		ADK_LINUX_ARM || \
+		ADK_LINUX_M68K || \
+		ADK_LINUX_MICROBLAZE || \
+		ADK_LINUX_MIPS || \
+		ADK_LINUX_PPC || \
+		ADK_LINUX_SPARC || \
+		ADK_LINUX_X86 || \
+		ADK_LINUX_X86_64
+	depends on !ADK_HARDWARE_VBOX
+	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	help
+	  create an read-only initramfs system.
+
+config ADK_TARGET_ROOTFS_SQUASHFS
+	boolean "Compressed read-only root filesystem (squashfs)"
+	select ADK_KERNEL_SQUASHFS
+	select ADK_HOST_NEED_SQUASHFS
+	select ADK_HOST_NEED_QEMU if ADK_TARGET_QEMU
+	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
+	depends on ADK_TARGET_WITH_MTD
+	help
+	  highly compressed read-only filesystem for MTD flash systems.
+
+config ADK_TARGET_ROOTFS_JFFS2
+	boolean "Compressed read-write root filesystem (jffs2)"
+	select ADK_KERNEL_JFFS2_FS
+	select ADK_HOST_NEED_MTD_UTILS
+	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
+	depends on ADK_TARGET_WITH_MTD
+	help
+	  compressed read-write filesystem for MTD flash systems.
+
+config ADK_TARGET_ROOTFS_YAFFS
+	boolean "YAFFS2 root filesystem (NAND)"
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_YAFFS_FS
+	select ADK_KERNEL_YAFFS_YAFFS2
+	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
+	depends on ADK_TARGET_WITH_NAND
+	help
+	  Root filesystem on NAND flash with YAFFS2.
+
+config ADK_TARGET_ROOTFS_NFSROOT
+	boolean "NFS root"
+	select ADK_KERNEL_NETWORK_FILESYSTEMS
+	select ADK_KERNEL_SUNRPC
+	select ADK_KERNEL_NFS_FS
+	select ADK_KERNEL_NFS_V3
+	select ADK_KERNEL_ROOT_NFS
+	select ADK_KERNEL_NFS_COMMON
+	select ADK_KERNEL_IP_PNP
+	select ADK_KERNEL_IP_PNP_DHCP
+	select ADK_PACKAGE_ADKINSTALL
+	depends on !ADK_TARGET_QEMU && !ADK_HARDWARE_VBOX && !ADK_TARGET_SYSTEM_ARANYM_M68K
+	depends on !ADK_TARGET_SYSTEM_ARM_FM
+	help
+	  Root filesystem mounted via NFS. (DHCP)
+
+config ADK_TARGET_ROOTFS_USB
+	boolean "Boot from USB stick"
+	select ADK_KERNEL_NLS
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_USB
+	select ADK_KERNEL_USB_EHCI_HCD
+	select ADK_KERNEL_USB_OHCI_HCD
+	select ADK_KERNEL_USB_UHCI_HCD
+	select ADK_KERNEL_USB_STORAGE
+	select ADK_KERNEL_EXT2_FS
+	select ADK_PACKAGE_ADKINSTALL
+	depends on ADK_TARGET_WITH_USB_BOOT
+	help
+	  Boot system from USB stick.
+
+config ADK_TARGET_ROOTFS_ISO
+	boolean "ISO image"
+	select ADK_KERNEL_ISO9660_FS
+	select ADK_KERNEL_JOLIET
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_BLK_DEV_SR
+	select ADK_HOST_NEED_CDRTOOLS
+	select ADK_HOST_NEED_SYSLINUX
+	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
+	depends on ADK_HOST_LINUX
+	depends on ADK_LINUX_X86
+	help
+	  Use this option to create a bootable ISO image.
+
+config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
+	boolean "Archive usable for initramfs creation"
+	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	help
+	  Use this option if your planning to create a initramfs,
+	  useful for adk-test-framework.
+
+config ADK_TARGET_ROOTFS_ARCHIVE
+	boolean "Archive usable for different filesystems"
+	select ADK_HOST_NEED_GENEXT2FS if ADK_TARGET_QEMU
+	select ADK_KERNEL_EXT2_FS if ADK_TARGET_QEMU
+	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
+	help
+	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
+
+endchoice
+
+config ADK_TARGET_ROOT_EXT4_RASPBERRY_PI
+        boolean
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI && ADK_TARGET_ROOTFS_ARCHIVE
+        select ADK_KERNEL_EXT4_FS
+	default y
+        help
+          Compile EXT4 filesystem into kernel and use it as root filesystem.
+
+choice
+prompt "Root filesystem type"
+depends on ADK_TARGET_ROOTFS_ARCHIVE && !ADK_TARGET_SYSTEM_RASPBERRY_PI && !ADK_TARGET_QEMU
+default ADK_TARGET_ROOT_EXT4
+
+config ADK_TARGET_ROOT_EXT4
+	boolean
+	prompt "EXT4 filesystem"
+	select ADK_KERNEL_EXT4_FS
+	help
+	  Compile EXT4 filesystem into kernel and use it as root filesystem.
+
+config ADK_TARGET_ROOT_XFS
+	boolean
+	prompt "XFS filesystem"
+	select ADK_KERNEL_XFS_FS
+	help
+	  Compile XFS filesystem into kernel and use it as root filesystem.
+
+config ADK_TARGET_ROOT_EXT2
+	boolean
+	prompt "EXT2 filesystem"
+	select ADK_KERNEL_EXT2_FS
+	help
+	  Compile EXT2 filesystem into kernel and use it as root filesystem.
+
+config ADK_TARGET_ROOT_EXT3
+	boolean
+	prompt "EXT3 filesystem"
+	select ADK_KERNEL_EXT3_FS
+	help
+	  Compile EXT3 filesystem into kernel and use it as root filesystem.
+
+endchoice
+
+config ADK_TARGET_ROOTFS
+	string
+	default "xfs" if ADK_TARGET_ROOT_XFS
+	default "ext2" if ADK_TARGET_ROOT_EXT2
+	default "ext3" if ADK_TARGET_ROOT_EXT3
+	default "ext4" if ADK_TARGET_ROOT_EXT4
+	help
+
+config ADK_PACKAGE_SUFFIX
+	string
+	default "ipk" if ADK_TARGET_PACKAGE_IPKG
+	default "tar.xz" if ADK_TARGET_PACKAGE_TXZ
+	help
+
+choice
+prompt "Target package format"
+default ADK_TARGET_PACKAGE_TXZ if ADK_PKG_TEST
+default ADK_TARGET_PACKAGE_IPKG
+depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
+
+config ADK_TARGET_PACKAGE_IPKG
+	boolean
+	prompt "ipkg"
+	select BUSYBOX_IPKG
+	help
+	  Create ipkg packages and use ipkg package management on the target.
+
+config ADK_TARGET_PACKAGE_TXZ
+	boolean
+	prompt "xz compressed tar archive"
+	help
+	  Create compressed tar archives of packages.
+	  Pre- and post install scripts will be executed in the target
+	  directory. There will be no package manager installed onto the target.
+	  
+endchoice

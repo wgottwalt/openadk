@@ -1,0 +1,104 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "Toolchain specific settings"
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+
+config ADK_VENDOR
+	string "Vendor name"
+	default "openadk"
+	help
+	  Vendor string is used for toolchain.
+
+config ADK_TARGET_CFLAGS_OPT
+	string
+	default "-Os -pipe" if ADK_TARGET_CFLAGS_OPT_OS
+	default "-O2 -pipe" if ADK_TARGET_CFLAGS_OPT_O2
+	default "-O3 -pipe" if ADK_TARGET_CFLAGS_OPT_O3
+	default "-O0 -pipe" if ADK_TARGET_CFLAGS_OPT_O0
+
+choice
+prompt "Optimization level"
+boolean
+
+config ADK_TARGET_CFLAGS_OPT_OS
+	prompt "optimize for size (-Os)"
+
+config ADK_TARGET_CFLAGS_OPT_O2
+	prompt "optimize for performance (-O2)"
+
+config ADK_TARGET_CFLAGS_OPT_O3
+	prompt "optimize for performance (-O3)"
+
+config ADK_TARGET_CFLAGS_OPT_O0
+	prompt "no optimization (-O0)"
+
+endchoice
+
+config ADK_LINUX_ARM_WITH_THUMB
+	prompt "Use THUMB2 ARM mode"
+	boolean
+	depends on ADK_CPU_CORTEX_A9 && ADK_TARGET_LIB_GLIBC
+	select ADK_KERNEL_THUMB2_KERNEL
+	default n
+
+config ADK_TOOLCHAIN_WITH_SSP
+	boolean
+	default n
+
+config ADK_TARGET_USE_SSP
+	prompt "Use Stack Smashing Protection for all packages"
+ 	boolean	
+	select ADK_TOOLCHAIN_WITH_SSP
+	default n
+
+config ADK_TOOLCHAIN_WITH_LTO
+	boolean
+	default n
+
+config ADK_TARGET_USE_LTO
+	prompt "Use Link Time Optimization for all packages"
+	boolean
+	select ADK_TOOLCHAIN_WITH_LTO
+	default n
+
+config ADK_TOOLCHAIN_WITH_GOLD
+	boolean
+	default n
+
+config ADK_TARGET_USE_GOLD
+	prompt "Use GOLD as linker for all packages"
+	boolean
+	select ADK_TOOLCHAIN_WITH_GOLD
+	depends on !ADK_LINUX_MIPS
+	default n
+
+config ADK_DEBUG
+	bool "Compile applications with debug support by default"
+	default n
+	help
+	  All packages and libc will be compiled and packaged with debug information.
+	  Mostly useful for NFS root or big USB/CF or hard disk setups.
+
+config ADK_DEBUG_OPTS
+	bool "use optimization cflags"
+	depends on ADK_DEBUG
+	default n
+	help
+	  All packages and C library will be compiled with debug information and optimization flags on.
+
+config ADK_DEBUG_STRIP
+	bool "strip target binaries/libraries for gdbserver usage"
+	depends on ADK_DEBUG
+	default n
+	help
+	  All packages and C library will be compiled with debug information, but stripped for the target.
+
+config ADK_STATIC
+	bool "Link applications statically by default"
+	default n
+	select BUSYBOX_STATIC
+	help
+	  Useful for toolchain only target devices.
+
+endmenu

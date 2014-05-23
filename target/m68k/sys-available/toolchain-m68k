@@ -2,7 +2,7 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_M68K
 	bool "Toolchain only"
 	select ADK_m68k
 	select ADK_toolchain_m68k
-	select ADK_TOOLCHAIN
+	select ADK_TARGET_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ
 	help
 	  Build a m68k toolchain.

@@ -2,11 +2,11 @@ config ADK_TARGET_SYSTEM_CUBOX_I
 	bool "Cubox-i"
 	select ADK_arm
 	select ADK_little
-	select ADK_hard_float
 	select ADK_eabihf
 	select ADK_fpu_neon
 	select ADK_cubox_i
 	select ADK_CPU_CORTEX_A9
+	select ADK_TARGET_CPU_WITH_FPU
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_CPU_FREQ
 	select ADK_TARGET_WITH_USB
@@ -22,5 +22,5 @@ config ADK_TARGET_SYSTEM_CUBOX_I
 	select ADK_TARGET_WITH_ROOT_RW
 	select ADK_PACKAGE_U_BOOT_IMX6
 	help
-	  Cubox-i
+	  Solidrun Cubox-i
 

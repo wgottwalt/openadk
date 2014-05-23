@@ -117,6 +117,55 @@ config ADK_KERNEL_CPU_LITTLE_ENDIAN
 	default y if ADK_little
 	boolean
 
+config ADK_KERNEL_COMP_GZIP_RASPBERRY_PI
+        boolean
+        select ADK_KERNEL_RD_GZIP
+        select ADK_KERNEL_KERNEL_GZIP
+        select ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y
+
+choice
+prompt "Kernel Compression"
+depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI && !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+
+config ADK_KERNEL_COMP_XZ
+	prompt "use XZ compression"
+	boolean
+	select ADK_KERNEL_RD_XZ
+	select ADK_KERNEL_KERNEL_XZ
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
+
+config ADK_KERNEL_COMP_LZMA
+	prompt "use LZMA compression"
+	boolean
+	select ADK_KERNEL_RD_LZMA
+	select ADK_KERNEL_KERNEL_LZMA
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
+
+config ADK_KERNEL_COMP_LZO
+	prompt "use LZO compression"
+	boolean
+	select ADK_KERNEL_RD_LZO
+	select ADK_KERNEL_KERNEL_LZO
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_LZO
+
+config ADK_KERNEL_COMP_GZIP
+	prompt "use GZIP compression"
+	boolean
+	select ADK_KERNEL_RD_GZIP
+	select ADK_KERNEL_KERNEL_GZIP
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
+
+config ADK_KERNEL_COMP_BZIP2
+	prompt "use BZIP2 compression"
+	boolean
+	select ADK_KERNEL_RD_BZIP2
+	select ADK_KERNEL_KERNEL_BZIP2
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_BZIP2
+
+endchoice
+
 menu "Kernel options"
 
 config ADK_KERNEL_SMP

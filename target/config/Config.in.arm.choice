@@ -1,0 +1,34 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice
+prompt "Cubox-i model"
+depends on ADK_TARGET_SYSTEM_CUBOX_I
+
+config ADK_TARGET_CUBOX_I4PRO
+	boolean "Solidrun Cubox-i4Pro"
+
+config ADK_TARGET_CUBOX_I2ULTRA
+	boolean "Solidrun Cubox-i2Ultra"
+
+config ADK_TARGET_CUBOX_I2
+	boolean "Solidrun Cubox-i2"
+
+config ADK_TARGET_CUBOX_I1
+	boolean "Solidrun Cubox-i1"
+
+endchoice
+
+choice ADK_TARGET_ARM_FLOAT
+prompt "Target float type"
+depends on ADK_TARGET_CPU_WITH_FPU || ADK_TARGET_SYSTEM_QEMU_ARM
+
+config ADK_TARGET_ARM_HARD_FLOAT
+        boolean "Use hard-float for system with FPU"
+        select ADK_hard_float
+
+config ADK_TARGET_ARM_SOFT_FLOAT
+        boolean "Use soft-float for system without FPU"
+        select ADK_soft_float
+
+endchoice

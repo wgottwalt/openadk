@@ -1,62 +1,16 @@
 #!/usr/bin/env bash
-#set -x
-# 1. create Config.in.systems with all available target systems for each architecture
-# 2. if ADK configuration exist, create Config.in.arch/Config.in.system with fixed values
-# 3. exit when native system build is detected
+# create Config.in.systems with all available target systems for each architecture
 
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
 
-defaults() {
-	echo 'source "target/config/Config.in.arch.default"' > $topdir/target/config/Config.in.arch
-	echo 'source "target/config/Config.in.arch.choice"' >> $topdir/target/config/Config.in.arch
-	echo 'source "target/config/Config.in.system.default"' > $topdir/target/config/Config.in.system
-	echo 'source "target/config/Config.in.system.choice"' >> $topdir/target/config/Config.in.system
-	exit 0
-}
+echo 'source "target/config/Config.in.arch.default"' > $topdir/target/config/Config.in.arch
+echo 'source "target/config/Config.in.arch.choice"' >> $topdir/target/config/Config.in.arch
+echo 'source "target/config/Config.in.system.default"' > $topdir/target/config/Config.in.system
+echo 'source "target/config/Config.in.system.choice"' >> $topdir/target/config/Config.in.system
 
 for i in $(ls $topdir/target/);do
 	if [ -d "$topdir/target/$i/sys-enabled" ];then
 		cat $topdir/target/$i/sys-enabled/* > $topdir/target/$i/Config.in.systems 2>/dev/null
 	fi
 done
-if [ -f $topdir/.config ];then
-
-arch=$(grep ^ADK_TARGET_ARCH $topdir/.config|cut -f 2 -d = | sed -e 's#"##g')
-cpuarch=$(grep ^ADK_TARGET_CPU_ARCH $topdir/.config|cut -f 2 -d = | sed -e 's#"##g')
-systemsym=$(grep ^ADK_TARGET_SYSTEM_ $topdir/.config|cut -f 1 -d =) 
-system=$(grep ^ADK_TARGET_SYSTEM= $topdir/.config|cut -f 2 -d = | sed -e 's#"##g')
-systems=$(grep ^ADK_TARGET_SYSTEM= $topdir/.config|cut -f 2 -d = | sed -e 's#"##g'|sed -e 's#-#_#g')
-archsym=$(echo ADK_LINUX_$arch|tr '[:lower:]' '[:upper:]')
-
-if [ -z "$arch" -o -z "$system" ];then
-	defaults
-fi
-
-cat > $topdir/target/config/Config.in.arch << EOF 	
-source "target/config/Config.in.arch.default"
-config $archsym
-	boolean
-EOF
-
-if [ "${system}" = "toolchain" -o "${system}" = "qemu" -o "${system}" = "vbox" -o "${system}" = "aranym" ];then
-	sys=${system}-$cpuarch
-else
-	sys=$system
-fi
-
-cat > $topdir/target/config/Config.in.system << EOF 	
-source "target/config/Config.in.system.default"
-comment "Architecture: $arch"
-comment "CPU Architecture: $cpuarch"
-comment "System: $sys"
-
-config $systemsym
-	boolean
-	select $archsym
-$(grep select $topdir/target/$arch/sys-available/$sys)
-	default y
-EOF
-else
-	defaults
-fi
 exit 0

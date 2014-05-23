@@ -35,10 +35,9 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PKG_TEST=n \
 			ADK_PKG_MPDBOX=n \
 			ADK_PKG_DEVELOPMENT=n \
-			ADK_TOOLCHAIN_USE_SSP=n \
-			ADK_TOOLCHAIN_USE_LTO=n \
-			ADK_TOOLCHAIN_GOLD=n \
-			ADK_TOOLCHAIN_USE_GOLD=n \
+			ADK_TOOLCHAIN_WITH_SSP=n \
+			ADK_TOOLCHAIN_WITH_LTO=n \
+			ADK_TOOLCHAIN_WITH_GOLD=n \
 			ADK_LINUX_ARM_WITH_THUMB=n \
 			BUSYBOX_IFPLUGD=n \
 			BUSYBOX_EXTRA_COMPAT=n \
@@ -113,12 +112,6 @@ POSTCONFIG=		-@\
 		if [ "$$(grep ^ADK_RUNTIME_KBD_LAYOUT .config|md5sum)" != "$$(grep ^ADK_RUNTIME_KBD_LAYOUT .config.old|md5sum)" ];then \
 			touch .rebuild.bkeymaps;\
 			rebuild=1;\
-		fi; \
-		if [ "$$(grep ^ADK_KERNEL_VERSION_ .config|md5sum)" != "$$(grep ^ADK_KERNEL_VERSION_ .config.old|md5sum)" ];then \
-			make kernelclean;\
-		fi; \
-		if [ "$$(grep ^ADK_LINUX_ARM_WITH_THUMB .config|md5sum)" != "$$(grep ^ADK_LINUX_ARM_WITH_THUMB .config.old|md5sum)" ];then \
-			echo "You should make cleandir, after changing thumb mode";\
 		fi; \
 		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old;\

@@ -1,0 +1,111 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+include $(TOPDIR)/mk/kernel.mk
+include $(TOPDIR)/mk/modules.mk
+include $(TOPDIR)/mk/kernel-build.mk
+include $(TOPDIR)/mk/image.mk
+
+KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
+OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
+
+# target helper text
+ifeq ($(ADK_TARGET_FS),nfsroot)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The nfs root tarball is: ${FW_DIR}/${ROOTFSUSERTARBALL}'
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+	@echo 'Boot your Lemote Yeelong and type following commands in PMON:'
+	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
+	@echo 'PMON> load tftp://<ip-address-server>/${TARGET_KERNEL}'
+	@echo 'PMON> g'
+endif
+endif
+ifeq ($(ADK_TARGET_FS),yaffs)
+targethelp:
+	@echo 'The root tarball is: ${FW_DIR}/${ROOTFSTARBALL}'
+	@echo 'Format your NAND with Routerboot, boot via NFS and'
+	@echo 'then install kernel and filesystem via:'
+	@echo 'adkinstall ${ROOTFSTARBALL}'
+endif
+ifeq ($(ADK_TARGET_FS),usb)
+targethelp:
+	@echo 'The root tarball is: ${FW_DIR}/${ROOTFSTARBALL}'
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+	@echo "Startup the netbook and type del to enter PMON:"
+	@echo "PMON> load /dev/fs/ext2@usb0/boot/kernel"
+	@echo "PMON> g"
+endif
+endif
+ifeq ($(ADK_TARGET_FS),archive)
+targethelp:
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+ifeq ($(ADK_HARDWARE_QEMU),y)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "Use following command to create a QEMU Image:"
+	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "Start qemu with following options:"
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0 -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+endif
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+	@echo "Startup the Lemote Yeelong and type del to enter PMON:"
+	@echo "PMON> load /dev/fs/ext2@wd0a/boot/kernel"
+	@echo "PMON> g root=/dev/sda1"
+endif
+endif
+ifeq ($(ADK_TARGET_FS),initramfsarchive)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
+endif
+ifeq ($(ADK_TARGET_FS),initramfs)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
+ifeq ($(ADK_HARDWARE_QEMU),y)
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0 -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
+endif
+endif
+ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
+targethelp:
+	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
+ifeq ($(ADK_HARDWARE_QEMU),y)
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0 -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+endif
+endif
+
+# image creation and kernel install
+ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+kernel-install:
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
+endif
+ifeq ($(ADK_HARDWARE_QEMU),y)
+kernel-install:
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
+endif
+
+# filesystem specific targets
+ifeq ($(ADK_TARGET_FS),nfsroot)
+imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
+endif
+ifeq ($(ADK_TARGET_FS),archive)
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
+endif
+ifeq ($(ADK_TARGET_FS),initramfsarchive)
+imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
+endif
+ifeq ($(ADK_TARGET_FS),initramfs)
+imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
+endif
+ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
+imageinstall: createinitramfs targethelp
+	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+endif
+ifeq ($(ADK_TARGET_FS),usb)
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
+endif

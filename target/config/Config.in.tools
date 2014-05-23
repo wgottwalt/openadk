@@ -161,3 +161,13 @@ config ADK_HOST_BUILD_PCRE
 	default n
 
 source "target/config/Config.in.prereq"
+
+config ADK_COMPRESSION_TOOL
+	string
+	default "gzip -n9" if ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
+	default "bzip2" if ADK_KERNEL_INITRAMFS_COMPRESSION_BZIP2
+	default "xz --check=crc32" if ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
+	default "lzma -9" if ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
+	default "lzop" if ADK_KERNEL_INITRAMFS_COMPRESSION_LZO
+	default "gzip -n9"
+	help

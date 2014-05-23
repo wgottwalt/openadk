@@ -1,10 +1,7 @@
-menu "Global settings"
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
 
-config ADK_VENDOR
-	string "vendor name"
-	default "openadk"
-	help
-	  Vendor string is used for toolchain.
+menu "Global ADK settings"
 
 config ADK_HOST
 	string "webserver for packages and distfiles"
@@ -18,41 +15,6 @@ config ADK_DL_DIR
 	help
 	  Configure the download directory for all source packages.
 	  Use an absolute path.
-
-config ADK_TARGET_CFLAGS_OPT
-	string "optimization flags for compiler"
-	default "-Os -pipe"
-	help
-	  Compilation is only verfied with optimization for code size (Os).
-	  Other stuff (O2) might break. Will not be used when ADK_DEBUG is on.
-
-config ADK_DEBUG
-	bool "Compile applications with debug support by default"
-	default n
-	help
-	  All packages and libc will be compiled and packaged with debug information.
-	  Mostly useful for NFS root or big USB/CF or hard disk setups.
-
-config ADK_DEBUG_OPTS
-	bool "use optimization cflags"
-	depends on ADK_DEBUG
-	default n
-	help
-	  All packages and libc will be compiled with debug information and optimization flags on.
-
-config ADK_DEBUG_STRIP
-	bool "strip target binaries/libraries for gdbserver usage"
-	depends on ADK_DEBUG
-	default n
-	help
-	  All packages and libc will be compiled with debug information, but stripped for the target.
-
-config ADK_STATIC
-	bool "Link applications statically by default"
-	default n
-	select BUSYBOX_STATIC
-	help
-	  Useful for toolchain only target devices.
 
 config ADK_DISABLE_HONOUR_CFLAGS
 	bool "Disable honour CFLAGS checks globally"
@@ -133,5 +95,4 @@ config ADK_HOST_CYGWIN
 	boolean
 
 endchoice
-
 endmenu

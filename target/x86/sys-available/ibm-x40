@@ -26,3 +26,4 @@ config ADK_TARGET_SYSTEM_IBM_X40
 	select ADK_PACKAGE_GRUB
 	help
          System profile for IBM X40 laptop.
+

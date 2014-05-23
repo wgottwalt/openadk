@@ -1,3 +1,6 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
 # target architectures
 config ADK_aarch64
 	bool
@@ -12,6 +15,9 @@ config ADK_microblaze
 	bool
 
 config ADK_mips
+	bool
+
+config ADK_mips64
 	bool
 
 config ADK_ppc
@@ -42,6 +48,7 @@ config ADK_TARGET_ARCH
 	default "m68k"  if ADK_m68k
 	default "microblaze"  if ADK_microblaze
 	default "mips"  if ADK_mips
+	default "mips64"  if ADK_mips64
 	default "ppc"  if ADK_ppc
 	default "ppc64"  if ADK_ppc64
 	default "sparc"  if ADK_sparc

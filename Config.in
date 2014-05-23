@@ -1,10 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config MODULES
-	bool
-	default y
-
 config ADK_HAVE_DOT_CONFIG
 	bool
 	default y
@@ -18,6 +14,7 @@ config ADK_CHOOSE_TARGET_SYSTEM
 	default y if ADK_CHOOSE_TARGET_SYSTEM_M68K
 	default y if ADK_CHOOSE_TARGET_SYSTEM_MICROBLAZE
 	default y if ADK_CHOOSE_TARGET_SYSTEM_MIPS
+	default y if ADK_CHOOSE_TARGET_SYSTEM_MIPS64
 	default y if ADK_CHOOSE_TARGET_SYSTEM_PPC
 	default y if ADK_CHOOSE_TARGET_SYSTEM_PPC64
 	default y if ADK_CHOOSE_TARGET_SYSTEM_SPARC
@@ -27,6 +24,20 @@ config ADK_CHOOSE_TARGET_SYSTEM
 	default y if ADK_CHOOSE_TARGET_SYSTEM_X86_64
 	default n
 
+source "target/config/Config.in.cpu"
+source "target/config/Config.in.hardware"
+source "target/config/Config.in.kernel"
+source "target/config/Config.in.arch"
+source "target/config/Config.in.system"
+source "target/config/Config.in.endian"
+source "target/config/Config.in.abi"
+source "target/config/Config.in.arm"
+source "target/config/Config.in.x86"
+source "target/config/Config.in.qemu"
+source "target/config/Config.in.kernelversion"
+source "target/config/Config.in.libc"
+source "target/config/Config.in.toolchain"
+source "target/config/Config.in.qemuopts"
 source "target/config/Config.in"
 
 menu "Package collection"
@@ -86,134 +97,10 @@ depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 source "target/config/Config.in.runtime"
 endmenu
 
-choice
-prompt "Kernel Version"
-depends on ADK_TOOLCHAIN_ONLY
-
-config ADK_KERNEL_VERSION_TOOLCHAIN
-	prompt "3.14.4"
-	boolean
-	depends on ADK_TOOLCHAIN_ONLY
-
-endchoice
-
 menu "Kernel configuration"
-depends on !ADK_TOOLCHAIN_ONLY && !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM && ADK_TARGET_KERNEL_CUSTOMISING
-
-choice
-prompt "Kernel Version"
-default ADK_KERNEL_VERSION_3_14_4
-
-config ADK_KERNEL_VERSION_3_15_RC6
-	prompt "3.15-rc6"
-	boolean
-
-config ADK_KERNEL_VERSION_3_14_4
-	prompt "3.14.4"
-	depends on !ADK_TARGET_SYSTEM_CUBOX_I
-	boolean
-
-config ADK_KERNEL_VERSION_3_13_11
-	prompt "3.13.11"
-	depends on !ADK_TARGET_SYSTEM_CUBOX_I
-	boolean
-
-config ADK_KERNEL_VERSION_3_12_20
-	prompt "3.12.20"
-	depends on !ADK_TARGET_SYSTEM_CUBOX_I
-	boolean
-
-config ADK_KERNEL_VERSION_3_10_40
-	prompt "3.10.40"
-	depends on !ADK_TARGET_SYSTEM_CUBOX_I
-	boolean
-
-config ADK_KERNEL_VERSION_3_10_30
-	prompt "3.10.30"
-	depends on ADK_TARGET_SYSTEM_CUBOX_I
-	boolean
-
-config ADK_KERNEL_VERSION_3_4_90
-	prompt "3.4.90"
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
-	depends on !ADK_TARGET_SYSTEM_CUBOX_I
-	boolean
-
-endchoice
-
-config ADK_KERNEL_VERSION
-	string
-	default "3.15-rc6" if ADK_KERNEL_VERSION_3_15_RC6
-	default "3.14.4" if ADK_KERNEL_VERSION_3_14_4
-	default "3.13.11" if ADK_KERNEL_VERSION_3_13_11
-	default "3.12.20" if ADK_KERNEL_VERSION_3_12_20
-	default "3.11.10" if ADK_KERNEL_VERSION_3_11_10
-	default "3.10.40" if ADK_KERNEL_VERSION_3_10_40
-	default "3.10.30" if ADK_KERNEL_VERSION_3_10_30
-	default "3.4.90" if ADK_KERNEL_VERSION_3_4_90
-	help
-
-config ADK_KERNEL_COMP_GZIP_RASPBERRY_PI
-        boolean
-        select ADK_KERNEL_RD_GZIP
-        select ADK_KERNEL_KERNEL_GZIP
-        select ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y
-
-choice
-prompt "Kernel Compression"
-depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI && !ADK_TARGET_SYSTEM_MIKROTIK_RB532
-
-config ADK_KERNEL_COMP_XZ
-	prompt "use XZ compression"
-	boolean
-	select ADK_KERNEL_RD_XZ
-	select ADK_KERNEL_KERNEL_XZ
-	select ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
-
-config ADK_KERNEL_COMP_LZMA
-	prompt "use LZMA compression"
-	boolean
-	select ADK_KERNEL_RD_LZMA
-	select ADK_KERNEL_KERNEL_LZMA
-	select ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
-
-config ADK_KERNEL_COMP_LZO
-	prompt "use LZO compression"
-	boolean
-	select ADK_KERNEL_RD_LZO
-	select ADK_KERNEL_KERNEL_LZO
-	select ADK_KERNEL_INITRAMFS_COMPRESSION_LZO
-
-config ADK_KERNEL_COMP_GZIP
-	prompt "use GZIP compression"
-	boolean
-	select ADK_KERNEL_RD_GZIP
-	select ADK_KERNEL_KERNEL_GZIP
-	select ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
-
-config ADK_KERNEL_COMP_BZIP2
-	prompt "use BZIP2 compression"
-	boolean
-	select ADK_KERNEL_RD_BZIP2
-	select ADK_KERNEL_KERNEL_BZIP2
-	select ADK_KERNEL_INITRAMFS_COMPRESSION_BZIP2
-
-endchoice
-
-config ADK_COMPRESSION_TOOL
-	string
-	default "gzip -n9" if ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
-	default "bzip2" if ADK_KERNEL_INITRAMFS_COMPRESSION_BZIP2
-	default "xz --check=crc32" if ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
-	default "lzma -9" if ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
-	default "lzop" if ADK_KERNEL_INITRAMFS_COMPRESSION_LZO
-	default "gzip -n9"
-	help
-
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 source "target/linux/Config.in"
 endmenu
 
+source "target/config/Config.in.target"
 source "target/config/Config.in.adk"
-source "toolchain/Config.in"

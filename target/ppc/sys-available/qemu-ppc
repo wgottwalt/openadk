@@ -3,7 +3,7 @@ config ADK_TARGET_SYSTEM_QEMU_PPC
 	select ADK_ppc
 	select ADK_qemu_ppc
 	select ADK_CPU_PPC
-	select ADK_HARDWARE_QEMU
+	select ADK_TARGET_QEMU
 	help
-	 Support for Qemu Emulator (PPC).
+	 Support for Qemu Emulator PPC architecture.
 

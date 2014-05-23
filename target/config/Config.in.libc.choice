@@ -1,0 +1,44 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice
+prompt "Target C library"
+depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
+config ADK_TARGET_LIB_UCLIBC
+	prompt "uClibc embedded C library"
+	boolean
+	select ADK_uclibc
+	depends on \
+		   !ADK_LINUX_AARCH64 && \
+		   !ADK_LINUX_M68K && \
+		   !ADK_LINUX_MICROBLAZE && \
+		   !ADK_LINUX_SPARC64 && \
+		   !ADK_LINUX_PPC64 && \
+		   !ADK_x32
+	help
+ 	 http://uclibc.org
+
+config ADK_TARGET_LIB_GLIBC
+	prompt "GNU C library"
+	boolean
+	select ADK_glibc
+	help
+	 http://www.gnu.org/libc
+
+config ADK_TARGET_LIB_MUSL
+	prompt "musl C library"
+	boolean
+	select ADK_musl
+	depends on !ADK_LINUX_MIPS64
+	depends on \
+		ADK_LINUX_ARM || \
+		ADK_LINUX_MICROBLAZE || \
+		ADK_LINUX_MIPS || \
+		ADK_LINUX_PPC || \
+		ADK_LINUX_SH || \
+		ADK_LINUX_X86 || \
+		ADK_LINUX_X86_64
+	help
+ 	 http://musl-libc.org
+
+endchoice

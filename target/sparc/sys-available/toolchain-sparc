@@ -3,8 +3,8 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_SPARC
 	select ADK_sparc
 	select ADK_toolchain_sparc
 	select ADK_CPU_SPARC_V8
-	select ADK_TOOLCHAIN
+	select ADK_TARGET_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ
 	help
-	  Build a sparc toolchain.
+	  SPARC toolchain.
 

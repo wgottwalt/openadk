@@ -1,0 +1,17 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice ADK_TARGET_ENDIAN_MODE
+prompt "Target Endianess"
+depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+depends on ADK_LINUX_SH || ADK_LINUX_MIPS || ADK_LINUX_MICROBLAZE || ADK_LINUX_MIPS64
+
+config ADK_TARGET_LITTLE_ENDIAN
+	boolean "Little endian"
+	select ADK_little
+
+config ADK_TARGET_BIG_ENDIAN
+	boolean "Big endian"
+	select ADK_big
+
+endchoice

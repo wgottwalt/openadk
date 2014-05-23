@@ -25,11 +25,6 @@ ifeq ($(ADK_HARDWARE_QEMU),y)
 	@echo "Start qemu with following options:"
 	@echo 'qemu-system-${CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
-ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
-	@echo "Startup the Lemote Yeelong and type del to enter PMON:"
-	@echo "PMON> load /dev/fs/ext2@wd0a/boot/kernel"
-	@echo "PMON> g root=/dev/sda1"
-endif
 ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
 	@echo "Use following command to install it on CF card:"
 	@echo "sudo ./scripts/install-rb532.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
@@ -93,14 +88,7 @@ kernel-strip:
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
 endif
-ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
-kernel-strip:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
-
-kernel-install: kernel-strip
-	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
-endif
-ifeq ($(ADK_HARDWARE_QEMU),y)
+ifeq ($(ADK_TARGET_QEMU),y)
 kernel-strip:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
@@ -123,9 +111,6 @@ imageinstall: createinitramfs targethelp
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
-endif
-ifeq ($(ADK_TARGET_FS),usb)
-imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),yaffs)
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp

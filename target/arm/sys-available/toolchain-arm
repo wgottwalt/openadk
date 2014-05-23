@@ -1,12 +1,10 @@
 config ADK_TARGET_SYSTEM_TOOLCHAIN_ARM
-	bool "Toolchain only (soft float)"
+	bool "Toolchain only"
 	select ADK_arm
 	select ADK_toolchain_arm
 	select ADK_little
-	select ADK_soft_float
 	select ADK_eabi
-	select ADK_TOOLCHAIN
+	select ADK_TARGET_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ
-	select ADK_CPU_CORTEX_A9
 	help
-	  ARM toolchain (soft float) for Cortex A9.
+	  ARM toolchain.

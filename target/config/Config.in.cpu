@@ -1,0 +1,129 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+config ADK_TARGET_CPU_WITH_FPU
+	boolean
+
+config ADK_TARGET_CPU_WITH_VT
+	boolean
+
+config ADK_TARGET_CPU_WITH_MTRR
+	boolean
+
+config ADK_TARGET_CPU_WITH_MMX
+	boolean
+
+config ADK_TARGET_CPU_WITH_MMXEXT
+	boolean
+
+config ADK_TARGET_CPU_WITH_SSE
+	boolean
+
+config ADK_TARGET_CPU_WITH_SSE2
+	boolean
+
+config ADK_TARGET_CPU_WITH_SSE3
+	boolean
+
+config ADK_TARGET_CPU_WITH_SSSE3
+	boolean
+
+config ADK_TARGET_CPU_WITH_IWMMXT
+	boolean
+
+config ADK_TARGET_CPU_WITH_HT
+	boolean
+
+config ADK_TARGET_CPU_WITH_3DNOW
+	boolean
+
+config ADK_TARGET_CPU_WITH_3DNOWEXT
+	boolean
+
+config ADK_CPU_SH4
+	boolean
+
+config ADK_CPU_SPARC_V8
+	boolean
+
+config ADK_CPU_SPARC_V9
+	boolean
+
+config ADK_CPU_X86
+	boolean
+
+config ADK_CPU_X86_64
+	boolean
+
+config ADK_CPU_GEODE
+	boolean
+
+config ADK_CPU_PPC
+	boolean
+
+config ADK_CPU_PPC64
+	boolean
+
+config ADK_CPU_PENTIUM_M
+	boolean
+
+config ADK_CPU_AMDFAM10
+	select ADK_TARGET_CPU_WITH_VT
+	boolean
+
+config ADK_CPU_LOONGSON2F
+	boolean
+
+config ADK_CPU_XSCALE
+	boolean
+
+config ADK_CPU_M68K
+	boolean
+
+config ADK_CPU_MIPS32
+	boolean
+
+config ADK_CPU_MIPS64
+	boolean
+
+config ADK_CPU_MICROBLAZE
+	boolean
+
+config ADK_CPU_ARM926EJ_S
+	boolean
+
+config ADK_CPU_ARM1176JZF_S
+	boolean
+
+config ADK_CPU_CORTEX_A9
+	boolean
+
+config ADK_CPU_ARMV8
+	boolean
+
+config ADK_TARGET_CPU_ARCH
+	string
+	default "x86_64" if ADK_CPU_X86_64
+	default "x86_64" if ADK_CPU_AMDFAM10
+	default "i486" if ADK_CPU_I486
+	default "i586" if ADK_CPU_I586
+	default "i686" if ADK_CPU_I686
+	default "i586" if ADK_CPU_GEODE
+	default "i686" if ADK_CPU_PENTIUM_M
+	default "i686" if ADK_CPU_ATOM
+	default "m68k" if ADK_LINUX_M68K
+	default "microblaze" if ADK_LINUX_MICROBLAZE && ADK_big
+	default "microblazeel" if ADK_LINUX_MICROBLAZE && ADK_little
+	default "mips64" if ADK_LINUX_MIPS64 && ADK_big
+	default "mips64el" if ADK_LINUX_MIPS64 && ADK_little
+	default "mips" if ADK_LINUX_MIPS && ADK_big
+	default "mipsel" if ADK_LINUX_MIPS && ADK_little
+	default "aarch64" if ADK_LINUX_AARCH64 && ADK_little
+	default "arm" if ADK_LINUX_ARM && ADK_little
+	default "sparc" if ADK_LINUX_SPARC
+	default "sparc64" if ADK_LINUX_SPARC64
+	default "sh4" if ADK_LINUX_SH && ADK_little
+	default "sh4eb" if ADK_LINUX_SH && ADK_big
+	default "ppc" if ADK_CPU_PPC
+	default "ppc64" if ADK_CPU_PPC64
+
