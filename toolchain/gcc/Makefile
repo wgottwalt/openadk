@@ -119,10 +119,7 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 GCC_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
 
-LANGUAGES:=c
-ifeq ($(ADK_TOOLCHAIN_GCC_CXX),y)
-LANGUAGES:=${LANGUAGES},c++
-endif
+LANGUAGES:=c,c++
 
 include ${TOPDIR}/mk/buildhlp.mk
 
@@ -180,7 +177,6 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 			--disable-threads \
 			--with-sysroot=$(STAGING_TARGET_DIR)
 	touch $@
-
 
 $(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
 	PATH='$(TARGET_PATH)' $(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc all-target-libgcc

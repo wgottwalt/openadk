@@ -322,7 +322,7 @@ int main() {
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
 	char *pkg_name, *pkg_depends, *pkg_depends_system, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt;
-	char *pkg_need_cxx, *pkg_need_java, *pkgname, *sysname, *pkg_debug;
+	char *pkg_need_cxx, *pkgname, *sysname, *pkg_debug;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs, *pkg_opts, *pkg_libname;
 	char *saveptr, *p_ptr, *s_ptr, *pkg_helper, *sname, *sname2;
@@ -350,7 +350,6 @@ int main() {
 	pkg_dflt = NULL;
 	pkg_cfline = NULL;
 	pkg_need_cxx = NULL;
-	pkg_need_java = NULL;
 	pkgname = NULL;
 	sysname = NULL;
 	pkg_helper = NULL;
@@ -557,8 +556,6 @@ int main() {
 						continue;
 					if ((parse_var(buf, "PKG_NEED_CXX", NULL, &pkg_need_cxx)) == 0)
 						continue;
-					if ((parse_var(buf, "PKG_NEED_JAVA", NULL, &pkg_need_java)) == 0)
-						continue;
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
 						continue;
 					if ((parse_var_with_system(buf, "PKG_DEPENDS_", pkg_depends_system, &pkg_depends_system, &sysname, 12)) == 0)
@@ -730,11 +727,6 @@ int main() {
 				if (cfg == NULL)
 					perror("Can not open Config.in file");
 
-				if (pkg_need_cxx != NULL) {
-					fprintf(cfg, "comment \"%s... %s (disabled, c++ missing)\"\n", token, pkg_descr);
-					fprintf(cfg, "depends on !ADK_TOOLCHAIN_GCC_CXX\n\n");
-				}
-
 				/* save token in pkg_debug */
 				pkg_debug = strdup(token);
 				fprintf(cfg, "config ADK_PACKAGE_%s\n", toupperstr(token));
@@ -892,14 +884,6 @@ int main() {
 					}
 					free(pkg_depends_system);
 					pkg_depends_system = NULL;
-				}
-
-				if (pkg_need_cxx != NULL) {
-					fprintf(cfg, "\tdepends on ADK_TOOLCHAIN_GCC_CXX\n");
-				}
-				if (pkg_need_java != NULL) {
-					fprintf(cfg, "\tdepends on ADK_TOOLCHAIN_GCC_JAVA\n");
-					pkg_need_java = NULL;
 				}
 
 				fprintf(cfg, "\tselect ADK_COMPILE_%s\n", toupperstr(pkgdirp->d_name));
@@ -1161,7 +1145,6 @@ int main() {
 			packages = NULL;
 
 			pkg_need_cxx = NULL;
-			pkg_need_java = NULL;
 			/* reset flags, free memory */
 			free(pkg_name);
 			free(pkg_libname);

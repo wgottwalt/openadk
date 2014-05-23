@@ -30,6 +30,7 @@ PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
 PKG_URL:=		http://xbmc.org/
 #PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
 PKG_SITES:=		http://openadk.org/distfiles/
+PKG_NEED_CXX:=		1
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
