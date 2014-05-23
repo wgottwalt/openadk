@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-# create package collection Config.in file
-
-topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
-if [ -d "$topdir/target/packages/pkg-enabled" ];then
-	cat $topdir/target/packages/pkg-enabled/* > $topdir/target/packages/Config.in 2>/dev/null
-fi
-exit 0

@@ -1,21 +1,8 @@
 #!/usr/bin/env bash
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
-systems=$(grep -h config target/*/sys-available/*|cut -d " " -f 2)
-
-while read arch; do
-	count=0
-	rm -rf $topdir/target/$arch/sys-enabled &&
-	mkdir -p $topdir/target/$arch/sys-enabled &&
-	cd $topdir/target/$arch/sys-enabled &&
-	for i in $(ls $topdir/target/$arch/sys-available/);do
-		cd $topdir/target/$arch/sys-enabled/ &&
-		ln -sf ../sys-available/$i $count-$i
-		count=$((count+1))
-	done
-done <${topdir}/target/arch.lst
+systems=$(grep -h config target/*/systems/*|cut -d " " -f 2)
 
 echo '' > $topdir/target/config/Config.in.system.default
-
 for j in $systems;do
 	system=${j#ADK_TARGET_SYSTEM_}
 	systemu=$(echo $system|tr '[:upper:]' '[:lower:]')
@@ -36,6 +23,12 @@ for i in $systems;do
 		printf "\tdefault \"${system%-*}\" if ADK_$systemu\n" >> $topdir/target/config/Config.in.system.default
 	else
 		printf "\tdefault \"${system}\" if ADK_$systemu\n" >> $topdir/target/config/Config.in.system.default
+	fi
+done
+
+for i in $(ls $topdir/target/);do
+	if [ -d "$topdir/target/$i/systems" ];then
+		cat $topdir/target/$i/systems/* > $topdir/target/$i/Config.in.systems 2>/dev/null
 	fi
 done
 exit 0

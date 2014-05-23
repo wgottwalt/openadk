@@ -1,5 +1,5 @@
 config ADK_TARGET_SYSTEM_TOOLCHAIN_AARCH64
-	bool "Toolchain only (little endian)"
+	bool "Toolchain only"
 	select ADK_aarch64
 	select ADK_toolchain_aarch64
 	select ADK_little

@@ -138,8 +138,6 @@ world:
 	mkdir -p $(DL_DIR) $(HOST_BUILD_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
 		$(STAGING_HOST_DIR) $(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
-	${BASH} ${TOPDIR}/scripts/update-sys
-	${BASH} ${TOPDIR}/scripts/update-pkg
 ifeq ($(ADK_TOOLCHAIN),y)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 	$(MAKE) -f mk/build.mk package/hostcompile toolchain/fixup package/compile
@@ -273,8 +271,6 @@ $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
 
 defconfig: .menu $(CONFIG)/conf
-	@${BASH} ${TOPDIR}/scripts/update-sys
-	@${BASH} ${TOPDIR}/scripts/update-pkg
 ifeq (${OStype},Linux)
 	@echo ADK_HOST_LINUX=y > $(TOPDIR)/.defconfig
 endif
@@ -394,8 +390,6 @@ endif
 	fi
 
 menuconfig: $(CONFIG)/mconf defconfig .menu package/Config.in.auto
-	@${BASH} ${TOPDIR}/scripts/update-sys
-	@${BASH} ${TOPDIR}/scripts/update-pkg
 	@if [ ! -f .config ];then \
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
 	fi

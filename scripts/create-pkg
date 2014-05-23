@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
-
-mkdir -p $topdir/target/packages/pkg-enabled
-rm $topdir/target/packages/pkg-enabled/* 2>/dev/null
-count=1
-for i in $(ls $topdir/target/packages/pkg-available/);do
-	cd $topdir/target/packages/pkg-enabled &&
-	ln -sf ../pkg-available/$i $count-$i
-	count=$((count+1))
-done
+if [ -d "$topdir/target/collections" ];then
+	cat $topdir/target/collections/* > $topdir/package/Config.in.collections 2>/dev/null
+fi
+exit 0

@@ -133,8 +133,6 @@ allconfig: .prereq_done
 	@${GMAKE_INV} _mconfig W=-y RCONFIG=Config.in
 
 allmodconfig: .prereq_done
-	@${BASH} ${TOPDIR}/scripts/update-sys
-	@${BASH} ${TOPDIR}/scripts/update-pkg
 	@${GMAKE_INV} _mconfig W=-o RCONFIG=Config.in
 
 package_index: .prereq_done
