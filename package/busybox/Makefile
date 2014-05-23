@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
-PKG_VERSION:=		1.21.1
-PKG_RELEASE:=		7
-PKG_MD5SUM:=		795394f83903b5eec6567d51eebb417e
+PKG_VERSION:=		1.22.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		337d1a15ab1cb1d4ed423168b1eb7d7e
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		core
 PKG_BUILDDEP:=		bzip2-host
@@ -15,33 +15,20 @@ PKG_SITES:=		http://www.busybox.net/downloads/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_SUBPKGS:=		BUSYBOX UDHCPD
-PKGSD_UDHCPD:=		uDHCPD meta package
-PKGSC_UDHCPD:=		net
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BUSYBOX,busybox,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,UDHCPD,udhcpd,${PKG_VERSION}-${PKG_RELEASE},busybox,${PKGSD_UDHCPD},${PKGSC_UDHCPD}))
-
-# This is how to extract the Config.in files from a _built_ busybox source tree:
-#|for c in $(find build_viprinux_arm_glibc/w-busybox-1.18.1-4/busybox-1.18.1/ -name Config.in); do
-#|	c=$(sed s,build_viprinux_arm_glibc/w-busybox-1.18.1-4/busybox-1.18.1/,, <<< $c)
-#|	mkdir -p package/busybox/config_new/$(dirname $c)
-#|	cp build_viprinux_arm_glibc/w-busybox-1.18.1-4/busybox-1.18.1/$c package/busybox/config_new/$c
-#|done
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-BB_MAKE_FLAGS:=		V=1 IPKG_ARCH="${CPU_ARCH}" \
+BB_MAKE_FLAGS:=		V=1 \
 			ARCH="${ARCH}" \
-			GCC_HONOUR_COPTS=s \
+			IPKG_ARCH="${CPU_ARCH}" \
 			HOSTCC="${CC_FOR_BUILD}" \
 			HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
-			CROSS_COMPILE="$(TARGET_CROSS)" \
-			-C ${WRKBUILD} 
+			CROSS_COMPILE="$(TARGET_CROSS)"
 
 do-configure:
 	# get all symbols from top level config
@@ -55,10 +42,10 @@ do-configure:
 		cp ${WRKBUILD}/.config.tmp ${WRKBUILD}/.config; \
 	done
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
-	yes '' | PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} oldconfig $(MAKE_TRACE)
+	yes '' | PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} -C ${WRKBUILD} oldconfig $(MAKE_TRACE)
 
 do-build:
-	PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} busybox
+	PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} -C ${WRKBUILD} busybox
 
 BBDEFS:=(
 define BBDEF
@@ -71,7 +58,7 @@ endef
 $(foreach OPTION,CROND WATCHDOG SYSLOGD INETD NTPD,$(eval $(call BBDEF,$(OPTION))))
 
 do-install:
-	PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} install $(MAKE_TRACE)
+	PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} -C ${WRKBUILD} install $(MAKE_TRACE)
 	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
 	$(INSTALL_DIR) $(IDIR_BUSYBOX)/etc
 	${BBDEFS} :) >$(IDIR_BUSYBOX)/etc/.bb_defaults
@@ -86,9 +73,5 @@ endif
 ifneq ($(strip ${ADK_PACKAGE_CFGFS}),)
 	cd ${IDIR_BUSYBOX}/sbin && rm -f halt poweroff reboot
 endif
-
-udhcpd-install:
-	${INSTALL_DIR} ${IDIR_UDHCPD}/etc/
-	${INSTALL_DATA} ./files/udhcpd.conf ${IDIR_UDHCPD}/etc/
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -1,0 +1,22 @@
+diff -Nur busybox-1.22.1.orig/Makefile.flags busybox-1.22.1/Makefile.flags
+--- busybox-1.22.1.orig/Makefile.flags	2014-01-09 19:15:44.000000000 +0100
++++ busybox-1.22.1/Makefile.flags	2014-05-23 21:31:04.000000000 +0200
+@@ -61,18 +61,6 @@
+ # be fixed..
+ #CFLAGS += $(call cc-option,-Wconversion,)
+ 
+-ifneq ($(CONFIG_DEBUG),y)
+-CFLAGS += $(call cc-option,-Os,$(call cc-option,-O2,))
+-else
+-CFLAGS += $(call cc-option,-g,)
+-#CFLAGS += "-D_FORTIFY_SOURCE=2"
+-ifeq ($(CONFIG_DEBUG_PESSIMIZE),y)
+-CFLAGS += $(call cc-option,-O0,)
+-else
+-CFLAGS += $(call cc-option,-Os,$(call cc-option,-O2,))
+-endif
+-endif
+-
+ # If arch/$(ARCH)/Makefile did not override it (with, say, -fPIC)...
+ ARCH_FPIC ?= -fpic
+ ARCH_FPIE ?= -fpie
