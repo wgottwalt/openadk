@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
-PKG_VERSION:=		2.02.80
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		816f4cee75674e3a21fd40f1961279f2
+PKG_VERSION:=		2.02.106
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		77f84279fb649b3dc4edad1c6d1a1b0e
 PKG_DESCR:=		logical volume management
 PKG_SECTION:=		fs
 PKG_DEPENDS:=		libdevmapper libncurses
@@ -36,6 +36,7 @@ $(eval $(call PKG_template,LIBDEVMAPPER,libdevmapper,${PKG_VERSION}-${PKG_RELEAS
 
 CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \
+			--disable-testing \
 			--with-lvm1=none
 
 lvm-install:

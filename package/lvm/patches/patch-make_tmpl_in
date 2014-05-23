@@ -1,37 +1,11 @@
---- LVM2.2.02.80.orig/make.tmpl.in	2011-01-10 14:00:53.000000000 +0100
-+++ LVM2.2.02.80/make.tmpl.in	2011-01-11 11:39:53.000000000 +0100
-@@ -33,7 +33,7 @@ LIBS = @LIBS@
- # Extra libraries always linked with static binaries
- STATIC_LIBS = $(SELINUX_LIBS) $(UDEV_LIBS)
+--- LVM2.2.02.106.orig/make.tmpl.in	2014-04-10 17:38:46.000000000 +0200
++++ LVM2.2.02.106/make.tmpl.in	2014-05-23 08:48:28.000000000 +0200
+@@ -46,7 +46,7 @@ LIBS = @LIBS@
+ STATIC_LIBS = $(SELINUX_LIBS) $(UDEV_LIBS) $(BLKID_LIBS)
  DEFS += @DEFS@
+ # FIXME set this only where it's needed, not globally?
 -CFLAGS += @CFLAGS@
-+CFLAGS = @CFLAGS@
++CFLAGS ?= @CFLAGS@
  CLDFLAGS += @CLDFLAGS@
+ ELDFLAGS += @ELDFLAGS@
  LDDEPS += @LDDEPS@
- LDFLAGS += @LDFLAGS@
-@@ -322,7 +322,8 @@ $(LIB_SHARED): $(LIB_SHARED).$(LIB_VERSI
- 	$(LN_S) -f $(<F) $@
- 
- install_lib_shared: $(LIB_SHARED)
--	$(INSTALL_PROGRAM) -D $< $(libdir)/$(<F).$(LIB_VERSION)
-+	$(INSTALL_DIR) $(libdir)
-+	$(INSTALL_PROGRAM) $< $(libdir)/$(<F).$(LIB_VERSION)
- 	$(INSTALL_DIR) $(usrlibdir)
- 	$(LN_S) -f $(USRLIB_RELPATH)$(<F).$(LIB_VERSION) $(usrlibdir)/$(<F)
- 
-@@ -330,11 +331,13 @@ install_lib_shared: $(LIB_SHARED)
- #        and for compatibility links in libdir are created
- #        when the code is fixed links could be removed.
- install_dm_plugin: $(LIB_SHARED)
--	$(INSTALL_PROGRAM) -D $< $(libdir)/device-mapper/$(<F)
-+	$(INSTALL_DIR) $(libdir)
-+	$(INSTALL_PROGRAM) $< $(libdir)/device-mapper/$(<F)
- 	$(LN_S) -f device-mapper/$(<F) $(libdir)/$(<F)
- 
- install_lvm2_plugin: $(LIB_SHARED)
--	$(INSTALL_PROGRAM) -D $< $(libdir)/lvm2/$(<F)
-+	$(INSTALL_DIR) $(libdir)
-+	$(INSTALL_PROGRAM) $< $(libdir)/lvm2/$(<F)
- 	$(LN_S) -f lvm2/$(<F) $(libdir)/$(<F)
- 	$(LN_S) -f $(<F) $(libdir)/$(<F).$(LIB_VERSION)
- endif
