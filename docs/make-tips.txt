@@ -68,25 +68,11 @@ If you just want to clean all packages and wants to rebuild the firmware,
 
 .Resetting OpenADK for a new target:
 
-You can either delete the configuration and start from scratch:
+Delete the configuration and start from scratch:
 
 --------------------
  $ rm .config*
  $ make menuconfig
---------------------
-
-Or you can save your existing configuration and switch to a new
-one with:
-
---------------------
- $ make switch
---------------------
-
-Afterwards you can switch back to your old configuration, you just
-need to remember, which architecture and system you had configured:
-
---------------------
- $ make switch ARCH=<arch> SYSTEM=<system>
 --------------------
 
 OpenADK is designed to have multiple architectures and embedded system
