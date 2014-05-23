@@ -40,6 +40,7 @@ INSTALL_TARGET:=	install-nodoc
 
 HOST_CONFIGURE_ARGS+=	--disable-install-doc \
 			--disable-shared \
+			--with-out-ext=curses,openssl,readline \
 			--prefix=$(HOST_WRKINST)/usr \
 			--bindir=$(HOST_WRKINST)/usr/bin \
 			--mandir=$(HOST_WRKINST)/usr/share/man \
