@@ -125,6 +125,11 @@ TARGET_CXXFLAGS+=	-flto
 TARGET_LDFLAGS+=	-flto
 endif
 
+# performance optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
+ifneq ($(ADK_TARGET_USE_GNU_HASHSTYLE),)
+TARGET_LDFLAGS+=	-Wl,--hash-style=gnu
+endif
+
 ifeq ($(ADK_LINUX_MICROBLAZE),y)
 TARGET_CFLAGS+=		-mxl-barrel-shift
 TARGET_CXX_FLAGS+=	-mxl-barrel-shift

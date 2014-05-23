@@ -73,6 +73,15 @@ config ADK_TARGET_USE_GOLD
 	depends on !ADK_LINUX_MIPS
 	default n
 
+config ADK_TARGET_USE_GNU_HASHSTYLE
+	prompt "Use GNU hashstyle for all packages"
+	boolean
+	depends on !ADK_LINUX_MIPS
+	default n
+	help
+	  Performance optimization for applications with lot of shared library
+	  dependencies. See http://www.akkadia.org/drepper/dsohowto.pdf
+
 config ADK_DEBUG
 	bool "Compile applications with debug support by default"
 	default n
