@@ -27,9 +27,8 @@ help:
 	@echo '  dev-help     - Print help for developers / package maintainers'
 	@echo ''
 	@echo 'Common targets:'
-	@echo '  switch ARCH=arch SYSTEM=system - Backup current config and copy old saved target config'
 	@echo '  download     - fetches all needed distfiles'
-	@echo '  kernelconfig - Modify the target kernel configuration'
+	@echo '  kernelconfig - view the target kernel configuration'
 	@echo ''
 	@echo 'Cleaning targets:'
 	@echo '  clean        - Remove firmware and build directories'
@@ -99,9 +98,6 @@ cleandir dirclean: .prereq_done
 	-@${GMAKE_INV} cleandir
 	@-rm -f make.log .prereq_done
 
-cleantoolchain toolchainclean: .prereq_done
-	-@${GMAKE_INV} cleantoolchain
-
 distclean cleandist:
 	-@${GMAKE_INV} distclean
 	@-rm -f make.log .prereq_done
@@ -144,23 +140,8 @@ allmodconfig: .prereq_done
 package_index: .prereq_done
 	@${GMAKE_INV} package_index
 
-test-framework: .prereq_done
-	@${GMAKE_INV} test-framework
-
-release: .prereq_done
-	@${GMAKE_INV} release
-
-bulk: .prereq_done
-	@${GMAKE_INV} bulk
-
-bulktoolchain: .prereq_done
-	@${GMAKE_INV} bulktoolchain
-
-bulkall: .prereq_done
-	@${GMAKE_INV} bulkall
-
-bulkallmod: .prereq_done
-	@${GMAKE_INV} bulkallmod
+buildall: .prereq_done
+	@${GMAKE_INV} buildall
 
 check: .prereq_done
 	@${GMAKE_INV} check

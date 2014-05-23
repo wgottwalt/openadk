@@ -82,8 +82,7 @@ noconfig_targets:=	menuconfig \
 			_config \
 			_mconfig \
 			distclean \
-			defconfig \
-			tags
+			defconfig
 
 POSTCONFIG=		-@\
 	if [ -f .adkinit ];then rm .adkinit;\
@@ -186,27 +185,6 @@ image:
 targethelp:
 	$(MAKE) -C target targethelp 
 
-switch:
-	if [ -f .config ];then \
-		echo "Saving configuration for target system: ${ADK_TARGET_SYSTEM} with arch: ${ADK_TARGET_ARCH}";\
-		cp -p .config .config.${ADK_TARGET_ARCH}_${ADK_TARGET_SYSTEM};\
-	fi
-	if [ -f .config.old ];then cp -p .config.old .config.old.${ADK_TARGET_ARCH}_${ADK_TARGET_SYSTEM};fi
-	if [ -f .config.${ADK_TARGET_ARCH}_${ADK_TARGET_SYSTEM} ];then \
-		cp -p .config.${ADK_TARGET_ARCH}_${ADK_TARGET_SYSTEM} .config; \
-		cp -p .config.old.${ADK_TARGET_ARCH}_${ADK_TARGET_SYSTEM} .config.old; \
-		$(MAKE) dep; rm .rebuild.* 2>/dev/null ; \
-		echo "Setting configuration to target system: ${ADK_TARGET_SYSTEM} with arch: ${ADK_TARGET_ARCH}"; \
-	else \
-		echo "No old target config found" ;\
-		mv .config .config.bak ; mv .config.old .config.old.bak; rm .rebuild.* 2>/dev/null ; \
-		if [ ! -z "$(SYSTEM)" ];then \
-			make ADK_TARGET_ARCH=${ADK_TARGET_ARCH} ADK_TARGET_SYSTEM=${ADK_TARGET_SYSTEM} menuconfig; \
-		else \
-			make menuconfig; \
-		fi \
-	fi
-
 kernelconfig:
 	${KERNEL_MAKE_ENV} ${MAKE} \
 		ARCH=$(ADK_TARGET_ARCH) \
@@ -259,14 +237,6 @@ cleandir:
 	rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
-
-cleantoolchain:
-	@$(TRACE) cleantoolchain
-	@rm -rf $(BUILD_DIR_PFX) $(TARGET_DIR_PFX) \
-	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
-	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	@rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk
 
 distclean:
 	@$(TRACE) distclean
@@ -339,25 +309,25 @@ endif
 	@for symbol in ${DEFCONFIG}; do \
 		echo $$symbol >> $(TOPDIR)/.defconfig; \
 	done
-	@if [ ! -z "$(ADK_TARGET_FS)" ];then \
-		grep "^config" target/config/Config.in \
+	if [ ! -z "$(ADK_TARGET_FS)" ];then \
+		grep "^config" target/config/Config.in.target \
 			|grep -i "$(ADK_TARGET_FS)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(ADK_TARGET_COLLECTION)" ];then \
+	if [ ! -z "$(ADK_TARGET_COLLECTION)" ];then \
 		grep -h "^config" target/packages/pkg-available/* \
 			|grep -i "$(ADK_TARGET_COLLECTION)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(ADK_TARGET_LIBC)" ];then \
-		grep "^config" target/config/Config.in \
+	if [ ! -z "$(ADK_TARGET_LIBC)" ];then \
+		grep "^config" target/config/Config.in.libc.choice \
 			|grep -i "$(ADK_TARGET_LIBC)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(ADK_TARGET_SYSTEM)" ];then \
+	if [ ! -z "$(ADK_TARGET_SYSTEM)" ];then \
 		system=$$(echo "$(ADK_TARGET_SYSTEM)" |sed -e "s/-/_/g"); \
 		grep -h "^config" target/*/Config.in.systems \
 			|grep -i "$$system$$" \
@@ -404,13 +374,13 @@ endif
 		echo $$symbol >> $(TOPDIR)/all.config; \
 	done
 	@if [ ! -z "$(ADK_TARGET_FS)" ];then \
-		grep "^config" target/config/Config.in \
+		grep "^config" target/config/Config.in.target \
 			|grep -i "$(ADK_TARGET_FS)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_LIBC)" ];then \
-		grep "^config" target/config/Config.in \
+		grep "^config" target/config/Config.in.libc.choice \
 			|grep -i "$(ADK_TARGET_LIBC)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(TOPDIR)/all.config; \
@@ -454,141 +424,12 @@ distclean:
 
 endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
-# build all target architecture and libc combinations (toolchain only)
-bulktoolchain:
-	@if [ -z "$(ADK_TARGET_LIBC)" ];then \
-		libc="glibc uclibc musl"; \
-	else \
-		libc="$(ADK_TARGET_LIBC)"; \
-	fi; \
-	for libc in $$libc;do \
-		while read arch; do \
-			mkdir -p ${TOPDIR}/firmware; \
-		    ( \
-			tarch=$$(echo $$arch|sed -e "s#sh4.*#sh#" -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#hf##" -e "s#x86_64.*#x86_64#" ); \
-			carch=$$(echo $$arch|sed -e "s#hf##" -e "s#mips64n.*#mips64#" -e "s#mips64el.*#mips64el#" -e 's#x86$$#i686#' -e "s#x86_64.*#x86_64#" ); \
-			echo === building $$tarch $$libc toolchain-$$arch on $$(date); \
-				$(GMAKE) ADK_TARGET_ARCH=$$tarch ADK_TARGET_SYSTEM=toolchain-$$arch ADK_TARGET_LIBC=$$libc defconfig; \
-				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
-				if [ $$arch = "armhf" ];then arch=arm; else arch=$$arch;fi; \
-				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
-				if [ -f ${TOPDIR}/firmware/toolchain_$${carch}_$${libc}$${abi}.tar.xz ];then exit;fi; \
-				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; break;fi; \
-				tar -cvJf ${TOPDIR}/firmware/toolchain_$${carch}_$${libc}$${abi}.tar.xz toolchain_${GNU_HOST_NAME} target_$${carch}_$${libc}$${abi}; \
-				$(GMAKE) cleantoolchain; \
-			rm .config; \
-		    ) 2>&1 | tee -a $(TOPDIR)/firmware/toolchain_build.log; \
-		    if [ -f .exit ];then break;fi \
-		done <${TOPDIR}/toolchain/$$libc/tarch.lst ;\
-		if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
-	done
-
-test-framework:
-	@if [ -z "$(ADK_TARGET_LIBC)" ];then \
-		libc="glibc uclibc musl"; \
-	else \
-		libc="$(ADK_TARGET_LIBC)"; \
-	fi; \
-	for libc in $$libc;do \
-		( \
-			mkdir -p $(TOPDIR)/firmware/; \
-			for arch in $$(grep -v "\(m68k\|aarch64\)" toolchain/$$libc/tarch.lst|xargs);do \
-				tarch=$$(echo $$arch|sed -e "s#el##" -e "s#eb##" -e "s#mips64.*#mips#" -e "s#i686#x86#" -e "s#sh4#sh#" -e "s#hf##" -e "s#x86_64.*#x86_64#"); \
-				arch=$$(echo $$arch|sed -e 's#x86$$#i686#'); \
-				echo === building qemu-$$arch for $$libc with $$tarch on $$(date); \
-				$(GMAKE) ADK_TARGET_ARCH=$$tarch ADK_TARGET_SYSTEM=qemu-$$arch ADK_TARGET_LIBC=$$libc ADK_TARGET_FS=initramfsarchive ADK_TARGET_COLLECTION=test defconfig; \
-				$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
-				tabi=$$(grep ^ADK_TARGET_ABI= .config|cut -d \" -f 2);\
-				if [ -z $$tabi ];then abi="";else abi=_$$tabi;fi; \
-				qarch=$$(echo $$arch|sed -e "s#armhf#arm#" -e 's#mips64n.*$$#mips64#' -e 's#mips64eln.*$$#mips64el#' -e "s#x86_64.*#x86_64#"); \
-				cp -a root_qemu_$${qarch}_$${libc}$${abi} root; \
-				mkdir -p $(TOPDIR)/firmware/qemu/$$arch; \
-				tar cJvf $(TOPDIR)/firmware/qemu/$$arch/root.tar.xz root; \
-				if [ -d root ];then rm -rf root;fi; \
-				cp $(TOPDIR)/firmware/qemu_$${qarch}_$${libc}$${abi}/qemu-$${qarch}-initramfsarchive-kernel \
-					$(TOPDIR)/firmware/qemu/$$arch/kernel; \
-				rm .config; \
-			done; \
-		) 2>&1 | tee $(TOPDIR)/firmware/test-framework-build.log; \
-		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
-	done
-	if [ -f .exit ];then rm .exit;exit 1;fi
-
-release:
-	for libc in uclibc glibc musl;do \
-		( \
-			mkdir -p $(TOPDIR)/firmware/; \
-			echo === building $$libc on $$(date); \
-			$(GMAKE) prereq && \
-			$(GMAKE) ADK_TARGET_ARCH=$(ADK_TARGET_ARCH) ADK_TARGET_SYSTEM=$(ADK_TARGET_SYSTEM) ADK_TARGET_LIBC=$$libc ADK_TARGET_FS=archive allmodconfig; \
-			$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
-			rm .config; \
-		) 2>&1 | tee $(TOPDIR)/firmware/release-build.log; \
-		if [ -f .exit ];then echo "Bulk build failed!"; break;fi \
-	done
-	if [ -f .exit ];then rm .exit;exit 1;fi
-
-# build all target architecture, target systems and libc combinations
-bulk:
-	for libc in uclibc glibc musl;do \
-	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch|grep -v toolchain); \
-	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/firmware; \
-	    ( \
-		echo === building $$arch $$system $$libc on $$(date); \
-		$(GMAKE) prereq && \
-		$(GMAKE) ADK_TARGET_ARCH=$$arch ADK_TARGET_SYSTEM=$$system ADK_TARGET_LIBC=$$libc ADK_TARGET_FS=archive defconfig; \
-		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
-		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/firmware/bulkbuild.log; \
-		if [ -f .exit ]; then break;fi \
-	      done; \
-	    if [ -f .exit ]; then break;fi \
-	  done <${TOPDIR}/toolchain/$$libc/tarch.lst ;\
-	  if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
-	done
-
-bulkall:
-	for libc in uclibc glibc musl;do \
-	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
-	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/firmware; \
-	    ( \
-		echo === building $$arch $$system $$libc on $$(date); \
-		$(GMAKE) prereq && \
-		$(GMAKE) ADK_TARGET_ARCH=$$arch ADK_TARGET_SYSTEM=$$system ADK_TARGET_LIBC=$$libc ADK_TARGET_FS=archive allconfig; \
-		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then touch .exit; exit 1;fi; \
-		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/firmware/bulkallbuild.log; \
-		if [ -f .exit ]; then break;fi \
-	      done; \
-	      if [ -f .exit ]; then break;fi \
-	  done <${TOPDIR}/toolchain/$$libc/tarch.lst ;\
-	    if [ -f .exit ];then echo "Bulk build failed!"; rm .exit; exit 1;fi \
-	done
-
-bulkallmod:
-	for libc in uclibc glibc musl;do \
-	  while read arch; do \
-	      systems=$$(./scripts/getsystems $$arch| grep -v toolchain); \
-	      for system in $$systems;do \
-		mkdir -p $(TOPDIR)/firmware; \
-	    ( \
-		echo === building $$arch $$system $$libc on $$(date); \
-		$(GMAKE) prereq && \
-		$(GMAKE) ADK_TARGET_ARCH=$$arch ADK_TARGET_SYSTEM=$$system ADK_TARGET_LIBC=$$libc ADK_TARGET_FS=archive allmodconfig; \
-		$(GMAKE) VERBOSE=1 all; if [ $$? -ne 0 ]; then echo $$system-$$libc >.exit; exit 1;fi; \
-		$(GMAKE) clean; \
-		rm .config; \
-            ) 2>&1 | tee $(TOPDIR)/firmware/bulkallmodbuild.log; \
-	        if [ -f .exit ]; then break;fi \
-	      done; \
-	     if [ -f .exit ]; then break;fi \
-	  done <${TOPDIR}/toolchain/$$libc/tarch.lst ;\
-	  if [ -f .exit ];then echo "Bulk build failed!"; cat .exit;rm .exit; exit 1;fi \
-	done
+buildall:
+	@mkdir -p firmware
+	@echo "=== building $(ADK_TARGET_SYSTEM) ($(ADK_TARGET_ARCH)) with $(ADK_TARGET_LIBC) ==="
+	$(GMAKE) prereq
+	$(GMAKE) ADK_TARGET_ARCH=$(ADK_TARGET_ARCH) ADK_TARGET_SYSTEM=$(ADK_TARGET_SYSTEM) ADK_TARGET_LIBC=$(ADK_TARGET_LIBC) allmodconfig
+	$(GMAKE) VERBOSE=1 all 2>&1 | tee firmware/buildall.log
 
 $(TOPDIR)/adk/tools/pkgmaker: $(TOPDIR)/adk/tools/pkgmaker.c $(TOPDIR)/adk/tools/sortfile.c $(TOPDIR)/adk/tools/strmap.c
 	@$(CC_FOR_BUILD) -g -o $@ adk/tools/pkgmaker.c adk/tools/sortfile.c adk/tools/strmap.c
