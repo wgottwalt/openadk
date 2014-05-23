@@ -15,7 +15,7 @@
 
 include $(TOPDIR)/rules.mk
 
-TARGETS:=binutils gmp mpfr mpc libelf gcc
+TARGETS:=binutils gmp mpfr mpc libelf gcc gdb
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 TARGETS+=glibc
 CLIB:=glibc
@@ -27,9 +27,6 @@ endif
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGETS+=musl
 CLIB:=musl
-endif
-ifeq ($(ADK_TOOLCHAIN_GDB),y)
-TARGETS+=gdb
 endif
 
 DOWNLOAD:=kernel-headers-download $(patsubst %,%-download,$(TARGETS))
@@ -47,11 +44,7 @@ $(CLIB)-prepare: gcc-prepare kernel-headers-prepare
 gcc-configure: $(CLIB)-prepare
 $(CLIB)-compile: gcc-configure
 gcc-compile: $(CLIB)-install
-ifeq ($(ADK_TOOLCHAIN_GDB),y)
 $(CLIB)-fixup: gcc-install gdb-install
-else
-$(CLIB)-fixup: gcc-install
-endif
 
 %-download:
 	$(TRACE) toolchain/$(patsubst %-download,%,$@)/download
