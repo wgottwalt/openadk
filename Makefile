@@ -202,7 +202,6 @@ NO_ERROR=0
 	@echo 'LC_ALL:=C' >>prereq.mk
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk
 	@echo "OStype:=$$(env uname)" >>prereq.mk
-	@echo "ADKtype:=$$(cat /etc/adktarget 2>/dev/null)" >>prereq.mk
 	@echo "_PATH:=$$PATH" >>prereq.mk
 	@echo "PATH:=\$${TOPDIR}/scripts:/usr/sbin:$$PATH" >>prereq.mk
 	@echo "SHELL:=$$(which bash)" >>prereq.mk

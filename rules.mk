@@ -63,13 +63,6 @@ include $(TOPDIR)/target/$(ADK_TARGET_ARCH)/target.mk
 endif
 endif
 
-ifneq (${DEBUG},)
-ADK_DEBUG:=y
-endif
-ifneq (${STATIC},)
-ADK_STATIC:=y
-endif
-
 include $(TOPDIR)/mk/vars.mk
 
 ifneq (${show},)
