@@ -157,10 +157,10 @@ case $target {
 		umount /mnt
 	fi
 	if (( nand )); then
-		mount_fs /dev/mtdblockp1 1 $fs /mnt
+		mount_fs /dev/mtdblock 1 $fs /mnt
        		rm -rf /mnt/* >/dev/null 2>&1
        		mkdir /mnt/boot
-		mount_fs /dev/mtdblockp1 0 $fs /mnt/boot
+		mount_fs /dev/mtdblock 0 $fs /mnt/boot
 		extract_archive $archive /mnt
 		fix_perm /mnt
 		umount /mnt/boot
