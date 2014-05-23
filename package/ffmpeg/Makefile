@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
-PKG_VERSION:=		2.2.1
+PKG_VERSION:=		2.2.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b8a1ee4964c2638f46fcc803ed453818
+PKG_MD5SUM:=		581affe5d820d89ce21fe3f0316ef2c3
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs
 PKG_FDEPENDS:=		libpthread
@@ -14,8 +14,6 @@ PKG_URL:=		http://www.ffmpeg.org/
 PKG_SITES:=		http://www.ffmpeg.org/releases/
 PKH_LIBNAME:=		libffmpeg
 PKG_OPTS:=		dev
-
-PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_SUBPKGS:=		LIBFFMPEG FFSERVER FFPROBE FFMPEG
 #PKGSD_FFPLAY:=		ffmpeg based video player
