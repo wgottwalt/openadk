@@ -10,9 +10,9 @@ include ${TOPDIR}/mk/buildhlp.mk
 $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched:
 	$(TRACE) kernel-patch
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) \
-		../linux/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
+		$(TOPDIR)/target/linux/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) \
-		../$(ARCH)/$(ADK_TARGET_SYSTEM)/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
+		$(TOPDIR)/target/$(ARCH)/$(ADK_TARGET_SYSTEM)/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
 	touch $@
 
 $(WRKBUILD)/.headers: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched
