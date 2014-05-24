@@ -160,19 +160,11 @@ TARGET_CXXFLAGS+=	-marm
 endif
 endif
 
-# A nifty macro to make testing gcc features easier (from uClibc project)
-check_gcc=$(shell \
-        if $(CC_FOR_BUILD) $(1) -Werror -S -o /dev/null -xc /dev/null > /dev/null 2>&1; \
-        then echo "$(1)"; else echo "$(2)"; fi)
-
-CF_FOR_BUILD=$(call check_gcc,-fhonour-copts,)
-
 # host compiler flags
-CPPFLAGS_FOR_BUILD?=	-I$(STAGING_HOST_DIR)/usr/include
-CFLAGS_FOR_BUILD=	-O2 -Wall $(CF_FOR_BUILD)
-CXXFLAGS_FOR_BUILD?=    -O2 -Wall
-LDFLAGS_FOR_BUILD?= 	-L$(STAGING_HOST_DIR)/usr/lib
-FLAGS_FOR_BUILD=	${CPPFLAGS_FOR_BUILD} ${CFLAGS_FOR_BUILD} ${LDFLAGS_FOR_BUILD}
+CPPFLAGS_FOR_BUILD:=	-I$(STAGING_HOST_DIR)/usr/include
+CFLAGS_FOR_BUILD:=	-O0 -g0
+CXXFLAGS_FOR_BUILD:=    -O0 -g0
+LDFLAGS_FOR_BUILD:= 	-L$(STAGING_HOST_DIR)/usr/lib -Wl,-rpath -Wl,${STAGING_HOST_DIR}/usr/lib
 
 PATCH=			PATH=${HOST_PATH} ${BASH} $(SCRIPT_DIR)/patch.sh
 PATCHP0=		PATH=${HOST_PATH} patch -p0
