@@ -2,10 +2,6 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(TOPDIR)/rules.mk
-
-TARGET_CFLAGS:=		$(filter-out -fstack-protector,$(TARGET_CFLAGS))
-TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
-
 include $(TOPDIR)/toolchain/glibc/Makefile.inc
 
 PKG_NAME:=		glibc
@@ -47,7 +43,6 @@ glibc-static-install:
 	$(CP) $(STAGING_TARGET_DIR)/usr/lib/libc.a $(IDIR_GLIBC_STATIC)/usr/lib
 
 glibc-dev-install:
-	echo $(TARGET_CFLAGS)
 	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH) $(IDIR_GLIBC_DEV)/usr/lib
 	# install linker script
 	cp ./files/libc.so.$(CPU_ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so

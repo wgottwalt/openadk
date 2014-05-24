@@ -20,6 +20,8 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--with-tls \
 			--enable-kernel="2.6.32" \
 			--enable-add-ons
+TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
+TARGET_LDFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
 			CONFIG_SHELL='$(strip ${SHELL})' \
                         BUILD_CC=${CC_FOR_BUILD} \
