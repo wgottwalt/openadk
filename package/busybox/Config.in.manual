@@ -16,7 +16,8 @@ config ADK_PACKAGE_BUSYBOX
 config ADK_PACKAGE_BUSYBOX_HIDE
 	prompt "hide packages provided by busybox applets"
 	boolean
-	default y
+	depends on ADK_PACKAGE_BUSYBOX
+	default n
 	help
 	  Do not show packages which are provided as busybox applets
 
@@ -46,12 +47,6 @@ config BUSYBOX_DISABLE_TAR
 	boolean
 	default y if ADK_PACKAGE_TAR
 	depends on ADK_PACKAGE_TAR
-	default n
-
-config BUSYBOX_DISABLE_RPM
-	boolean
-	default y if ADK_PACKAGE_RPM
-	depends on ADK_PACKAGE_RPM
 	default n
 
 config BUSYBOX_DISABLE_BZIP2
@@ -160,12 +155,6 @@ config BUSYBOX_DISABLE_UNXZ
 	boolean
 	default y if ADK_PACKAGE_XZ
 	depends on ADK_PACKAGE_XZ
-	default n
-
-config BUSYBOX_DISABLE_UNZIP
-	boolean
-	default y if ADK_PACKAGE_UNZIP
-	depends on ADK_PACKAGE_UNZIP
 	default n
 
 config BUSYBOX_DISABLE_FBSET

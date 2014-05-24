@@ -11,6 +11,7 @@ PKG_DESCR:=		GNU patch utility
 PKG_SECTION:=		utils
 PKG_URL:=		http://www.gnu.org/software/patch/
 PKG_SITES:=		${MASTER_SITE_GNU:=patch/}
+PKG_BB:=		1
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk

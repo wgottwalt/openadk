@@ -322,7 +322,7 @@ int main() {
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
 	char *pkg_name, *pkg_depends, *pkg_depends_system, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt;
-	char *pkgname, *sysname, *pkg_debug;
+	char *pkgname, *sysname, *pkg_debug, *pkg_bb;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs, *pkg_opts, *pkg_libname;
 	char *saveptr, *p_ptr, *s_ptr, *pkg_helper, *sname, *sname2;
@@ -353,6 +353,7 @@ int main() {
 	sysname = NULL;
 	pkg_helper = NULL;
 	pkg_debug = NULL;
+	pkg_bb = NULL;
 
 	p_ptr = NULL;
 	s_ptr = NULL;
@@ -553,6 +554,8 @@ int main() {
 						continue;
 					if ((parse_var(buf, "PKG_CXX", NULL, &pkg_cxx)) == 0)
 						continue;
+					if ((parse_var(buf, "PKG_BB", NULL, &pkg_bb)) == 0)
+						continue;
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
 						continue;
 					if ((parse_var_with_system(buf, "PKG_DEPENDS_", pkg_depends_system, &pkg_depends_system, &sysname, 12)) == 0)
@@ -724,6 +727,11 @@ int main() {
 				if (cfg == NULL)
 					perror("Can not open Config.in file");
 
+				if (pkg_bb != NULL) {
+					fprintf(cfg, "comment \"%s... %s (disabled, provided by busybox)\"\n", token, pkg_descr);
+					fprintf(cfg, "depends on ADK_PACKAGE_BUSYBOX_HIDE\n\n");
+				}
+
 				/* save token in pkg_debug */
 				pkg_debug = strdup(token);
 				fprintf(cfg, "config ADK_PACKAGE_%s\n", toupperstr(token));
@@ -883,6 +891,9 @@ int main() {
 					pkg_depends_system = NULL;
 				}
 
+				if (pkg_bb != NULL) {
+					fprintf(cfg, "\tdepends on !ADK_PACKAGE_BUSYBOX_HIDE\n");
+				}
 				fprintf(cfg, "\tselect ADK_COMPILE_%s\n", toupperstr(pkgdirp->d_name));
 
 				if (pkg_dflt != NULL) {
@@ -1159,6 +1170,7 @@ int main() {
 			free(pkg_cxx);
 			free(pkg_dflt);
 			free(pkg_cfline);
+			free(pkg_bb);
 			pkg_name = NULL;
 			pkg_libname = NULL;
 			pkg_descr = NULL;
@@ -1176,6 +1188,7 @@ int main() {
 			pkg_cxx = NULL;
 			pkg_dflt = NULL;
 			pkg_cfline = NULL;
+			pkg_bb = NULL;
 
 			strmap_delete(pkgmap);
 			nobinpkgs = 0;

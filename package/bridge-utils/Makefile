@@ -12,6 +12,7 @@ PKG_SECTION:=		bridge
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Bridge
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bridge/}
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

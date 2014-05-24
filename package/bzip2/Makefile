@@ -7,7 +7,7 @@ PKG_NAME:=		bzip2
 PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		00b516f4704d4a7cb50a1d97e6e8e15b
-PKG_DESCR:=		bzip2 compression utility
+PKG_DESCR:=		compression utility
 PKG_SECTION:=		archive
 PKG_BUILDDEP:=		bzip2-host
 PKG_DEPENDS:=		libbz2
@@ -15,6 +15,7 @@ PKG_URL:=		http://www.bzip.org/
 PKG_SITES:=		http://www.bzip.org/${PKG_VERSION}/
 PKG_LIBNAME:=		libbz2
 PKG_OPTS:=		dev
+PKG_BB:=		1
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 

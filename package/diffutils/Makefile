@@ -11,6 +11,7 @@ PKG_DESCR:=		show differences between two files
 PKG_SECTION:=		lang
 PKG_URL:=		http://www.gnu.org/software/diffutils/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

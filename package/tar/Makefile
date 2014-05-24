@@ -11,6 +11,7 @@ PKG_DESCR:=		archiving application
 PKG_SECTION:=		archive
 PKG_URL:=		http://mirrors.kernel.org/gnu/tar/
 PKG_SITES:=		http://mirrors.kernel.org/gnu/tar/
+PKG_BB:=		1
 
 include ${TOPDIR}/mk/package.mk
 

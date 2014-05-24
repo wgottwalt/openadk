@@ -6,8 +6,9 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ether-wake
 PKG_VERSION:=		1.09
 PKG_RELEASE:=		1
-PKG_DESCR:=		A Wake-On-LAN (WOL) client
+PKG_DESCR:=		Wake-On-LAN (WOL) client
 PKG_SECTION:=		net
+PKG_BB:=		1
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
 

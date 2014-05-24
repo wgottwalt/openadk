@@ -12,6 +12,7 @@ PKG_SECTION:=		www
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.gnu.org/software/wget/
 PKG_SITES:=		${MASTER_SITE_GNU:=wget/}
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

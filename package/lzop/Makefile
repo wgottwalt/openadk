@@ -7,13 +7,14 @@ PKG_NAME:=		lzop
 PKG_VERSION:=		1.03
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		006c5e27fb78cdd14a628fdfa5aa1905
-PKG_DESCR:=		LZO compression utility
+PKG_DESCR:=		compression utility
 PKG_SECTION:=		archive
 PKG_DEPENDS:=		liblzo
 PKG_BUILDDEP:=		liblzo
 HOST_BUILDDEP:=		liblzo-host
 PKG_URL:=		http://www.lzop.org/
 PKG_SITES:=		http://www.lzop.org/download/
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

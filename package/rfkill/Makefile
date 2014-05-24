@@ -11,6 +11,7 @@ PKG_DESCR:=		radio frequency kill utility
 PKG_SECTION:=		wifi
 PKG_URL:=		https://www.kernel.org/pub/software/network/rfkill/
 PKG_SITES:=		https://www.kernel.org/pub/software/network/rfkill/
+PKG_BB:=		1
 
 include $(TOPDIR)/mk/package.mk
 

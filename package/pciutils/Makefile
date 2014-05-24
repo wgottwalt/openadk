@@ -7,12 +7,13 @@ PKG_NAME:=		pciutils
 PKG_VERSION:=		3.1.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		72ebc3624ccb43ae2ddf872b5dfdb3c9
-PKG_DESCR:=		PCI utilities
+PKG_DESCR:=		PCI utilities (lspci/setpci)
 PKG_SECTION:=		utils
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.kernel.org/pub/software/utils/pciutils/
 PKG_SITES:=		http://www.kernel.org/pub/software/utils/pciutils/
+PKG_BB:=		1
 
 include ${TOPDIR}/mk/package.mk
 

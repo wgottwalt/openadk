@@ -11,6 +11,7 @@ PKG_DESCR:=		framebuffer utility
 PKG_DEPENDS:=		bison-host flex-host
 PKG_SECTION:=		utils
 PKG_SITES:=		http://users.telenet.be/geertu/Linux/fbdev/
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

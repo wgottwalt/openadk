@@ -13,6 +13,7 @@ PKG_SECTION:=		misc
 PKG_URL:=		http://www.linux-pam.org/
 PKG_SITES:=		http://www.linux-pam.org/library/
 PKG_OPTS:=		dev
+PKG_BB:=		1
 
 DISTFILES:=		Linux-PAM-$(PKG_VERSION).tar.gz
 WRKDIST=                ${WRKDIR}/Linux-PAM-${PKG_VERSION}

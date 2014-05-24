@@ -11,6 +11,7 @@ PKG_DESCR:=		get/set ATA/SATA drive parameters
 PKG_SECTION:=		fs
 PKG_URL:=		http://sourceforge.net/projects/hdparm
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=hdparm/}
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

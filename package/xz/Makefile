@@ -7,11 +7,12 @@ PKG_NAME:=		xz
 PKG_VERSION:=		5.0.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		19d924e066b6fff0bc9d1981b4e53196
-PKG_DESCR:=		xz compression utility
+PKG_DESCR:=		compression utility
 PKG_SECTION:=		archive
 PKG_URL:=		http://tukaani.org/xz/
 PKG_SITES:=		http://tukaani.org/xz/
 PKG_OPTS:=		dev
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

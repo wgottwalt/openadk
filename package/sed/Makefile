@@ -11,6 +11,7 @@ PKG_DESCR:=		stream editor
 PKG_SECTION:=		editor
 PKG_URL:=		http://www.gnu.org/software/sed/
 PKG_SITES:=		${MASTER_SITE_GNU:=sed/}
+PKG_BB:=		1
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 

@@ -12,8 +12,7 @@ PKG_SECTION:=		utils
 PKG_DEPENDS:=		libusb libusb-compat libpthread zlib librt
 PKG_BUILDDEP:=		libusb libusb-compat zlib
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/usb/usbutils/
-
-PKG_SUBPKGS:=		LSUSB
+PKG_BB:=		1
 
 include ${TOPDIR}/mk/package.mk
 

@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.greenwoodsoftware.com/less/
 PKG_SITES:=		http://www.greenwoodsoftware.com/less/
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

@@ -14,6 +14,7 @@ PKG_BUILDDEP:=		pcre
 PKG_URL:=		http://www.gnu.org/software/grep/
 PKG_SITES:=		ftp://ftp.gnu.org/gnu/grep/
 PKG_NOPARALLEL:=	1
+PKG_BB:=		1
 
 include $(TOPDIR)/mk/package.mk
 
