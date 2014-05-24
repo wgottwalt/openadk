@@ -4,7 +4,7 @@
 _UNLIMIT=	__limit=$$(ulimit -dH 2>/dev/null); \
 		test -n "$$__limit" && ulimit -Sd $$__limit; ulimit -n 1024;
 
-all: checkreloc .prereq_done
+all: .prereq_done checkreloc
 	@${_UNLIMIT} ${GMAKE_INV} all
 
 v: .prereq_done
