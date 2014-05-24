@@ -10,7 +10,7 @@ PKG_MD5SUM:=		4049d98dd4131212e2842b770f1b0fa5
 PKG_DESCR:=		MESA demo apps
 PKG_SECTION:=		misc
 PKG_DEPENDS:=		mesalib
-PKG_BUILDDEP:=		MesaLib libglew
+PKG_BUILDDEP:=		MesaLib libglew glu
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/demos/${PKG_VERSION}/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
