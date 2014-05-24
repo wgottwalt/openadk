@@ -9,10 +9,10 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		472e2c1f808848365572a9b024d9e8f5
 PKG_DESCR:=		notify library
 PKG_SECTION:=		libs
+PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		gtk+ dbus-glib
 PKG_URL:=		http://www.galago-project.org/
 PKG_SITES:=		http://www.galago-project.org/files/releases/source/libnotify/
-PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

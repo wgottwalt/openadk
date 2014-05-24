@@ -7,13 +7,12 @@ PKG_NAME:=		sdl-image
 PKG_VERSION:=		1.2.10
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		6c06584b31559e2b59f2b982d0d1f628
-PKG_DESCR:=		simple directMedia layer image library
+PKG_DESCR:=		simple directmedia layer image library
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libpng libtiff libjpeg-turbo libsdl
-PKG_BUILDDEP:=		sdl-image-host libpng libtiff libjpeg-turbo sdl
+PKG_DEPENDS:=		libpng libtiff libjpeg-turbo libsdl libstdcxx
+PKG_BUILDDEP:=		libpng libtiff libjpeg-turbo sdl
 PKG_URL:=		http://www.libsdl.org/
 PKG_SITES:=		http://www.libsdl.org/projects/SDL_image/release/
-PKG_NEED_CXX:=		1
 PKG_LIBNAME:=		libsdl-image
 PKG_OPTS:=		dev
 

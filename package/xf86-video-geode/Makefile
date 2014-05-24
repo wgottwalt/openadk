@@ -7,12 +7,11 @@ PKG_NAME:=		xf86-video-geode
 PKG_VERSION:=		2.11.15
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a38a23055fcabed87dbd5e7c9e32bc05
-PKG_DESCR:=		X11 driver for AMD Geode VGA chip
+PKG_DESCR:=		x11 driver for AMD Geode VGA chip
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server
+PKG_DEPENDS:=		xorg-server libstdcxx
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_NEED_CXX:=		1
 
 PKG_SYSTEM_DEPENDS:=	pcengines-alix1c
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

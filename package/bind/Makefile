@@ -9,11 +9,10 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		207477c4cf95f2db5be0ded8a22669e0
 PKG_DESCR:=		popular DNS server
 PKG_SECTION:=		dns
-PKG_DEPENDS:=		libopenssl libbind libxml2
+PKG_DEPENDS:=		libopenssl libbind libxml2 libstdcxx
 PKG_BUILDDEP:=		openssl libxml2
 PKG_URL:=		https://www.isc.org/software/bind/
 PKG_SITES:=		ftp://ftp.isc.org/isc/bind9/${PKG_VERSION}/
-PKG_NEED_CXX:=		1
 PKG_LIBNAME:=		libbind
 PKG_OPTS:=		dev
 

@@ -7,12 +7,11 @@ PKG_NAME:=		xf86-video-fbdev
 PKG_VERSION:=		0.4.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2b5e6dd218243cf96c1a4090596a6bba
-PKG_DESCR:=		X11 driver for Linux Framebuffer devices
+PKG_DESCR:=		x11 driver for Linux Framebuffer devices
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server
+PKG_DEPENDS:=		xorg-server libstdcxx
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_NEED_CXX:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

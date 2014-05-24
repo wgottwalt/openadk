@@ -12,6 +12,7 @@ PKG_SECTION:=		core
 PKG_BUILDDEP:=		gmp autotool
 PKG_URL:=		http://www.gnu.org/software/coreutils/
 PKG_SITES:=		http://ftp.gnu.org/gnu/coreutils/
+PKG_BB:=		1
 
 include $(TOPDIR)/mk/package.mk
 

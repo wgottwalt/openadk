@@ -14,7 +14,6 @@ PKG_DEPENDS+=		libstdcxx libpthread libopenssl
 PKG_BUILDDEP:=		fltk libXi libiconv-tiny libjpeg-turbo libpng zlib openssl
 PKG_URL:=		http://www.dillo.org/
 PKG_SITES:=		http://www.dillo.org/download/
-PKG_NEED_CXX:=		1
 
 PKG_HOST_DEPENDS:=	!cygwin
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips arm

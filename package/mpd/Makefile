@@ -14,7 +14,6 @@ PKG_FDEPENDS:=		glib libstdcxx libiconv-tiny libmpdclient librt
 PKG_BUILDDEP:=		glib libmpdclient
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpd/0.18/
-PKG_NEED_CXX:=		1
 
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG

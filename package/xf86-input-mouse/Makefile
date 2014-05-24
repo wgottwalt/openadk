@@ -7,12 +7,11 @@ PKG_NAME:=		xf86-input-mouse
 PKG_VERSION:=		1.9.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		125402066940ef30737721243bb1b77e
-PKG_DESCR:=		X11 driver for mouse
+PKG_DESCR:=		x11 driver for mouse
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server
+PKG_DEPENDS:=		xorg-server libstdcxx
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_NEED_CXX:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

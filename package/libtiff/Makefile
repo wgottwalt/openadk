@@ -8,10 +8,10 @@ PKG_VERSION:=		3.9.4
 PKG_RELEASE:=		4
 PKG_MD5SUM:=		2006c1bdd12644dbf02956955175afd6
 PKG_DESCR:=		library for reading/writing TIFF images
+PKG_DEPENDS:=		libstdcxx
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.libtiff.org/
 PKG_SITES:=		ftp://ftp.remotesensing.org/pub/libtiff/
-PKG_NEED_CXX:=		1
 PKG_LIBNAME:=		libtiff
 PKG_OPTS:=		dev
 
@@ -25,7 +25,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTIFF,libtiff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-cxx \
 			--disable-rpath
 

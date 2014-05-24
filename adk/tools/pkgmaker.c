@@ -322,7 +322,7 @@ int main() {
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
 	char *pkg_name, *pkg_depends, *pkg_depends_system, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt;
-	char *pkg_need_cxx, *pkgname, *sysname, *pkg_debug;
+	char *pkgname, *sysname, *pkg_debug;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs, *pkg_opts, *pkg_libname;
 	char *saveptr, *p_ptr, *s_ptr, *pkg_helper, *sname, *sname2;
@@ -349,7 +349,6 @@ int main() {
 	pkg_cxx = NULL;
 	pkg_dflt = NULL;
 	pkg_cfline = NULL;
-	pkg_need_cxx = NULL;
 	pkgname = NULL;
 	sysname = NULL;
 	pkg_helper = NULL;
@@ -553,8 +552,6 @@ int main() {
 					if ((parse_var(buf, "PKG_URL", NULL, &pkg_url)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_CXX", NULL, &pkg_cxx)) == 0)
-						continue;
-					if ((parse_var(buf, "PKG_NEED_CXX", NULL, &pkg_need_cxx)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
 						continue;
@@ -1144,7 +1141,6 @@ int main() {
 			free(packages);
 			packages = NULL;
 
-			pkg_need_cxx = NULL;
 			/* reset flags, free memory */
 			free(pkg_name);
 			free(pkg_libname);

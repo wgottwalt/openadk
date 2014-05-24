@@ -9,11 +9,11 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		2f22745b8f7368ad5a0a3fddac343f2d
 PKG_DESCR:=		mDNS daemon
 PKG_SECTION:=		dhcp
+PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		autotool libdaemon expat gdbm glib
 PKG_BUILDDEP+=		gettext-tiny gtk+ dbus
 PKG_URL:=		http://avahi.org/
 PKG_SITES:=		http://avahi.org/download/
-PKG_NEED_CXX:=		1
 PKG_LIBNAME:=		libavahi
 PKG_OPTS:=		dev
 

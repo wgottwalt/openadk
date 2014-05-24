@@ -13,7 +13,6 @@ PKG_DEPENDS:=		libdnet libpcap libpcre libstdcxx
 PKG_BUILDDEP:=		libdnet libpcap pcre
 PKG_URL:=		http://nmap.org/
 PKG_SITES:=		http://download.insecure.org/nmap/dist/
-PKG_NEED_CXX:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

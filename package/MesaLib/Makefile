@@ -11,14 +11,13 @@ PKG_MD5SUM:=		08e796ec7122aa299d32d4f67a254315
 PKG_DESCR:=		MESA 3D graphics library
 PKG_SECTION:=		libs
 PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm libexpat
-PKG_DEPENDS+=		libxml2 libxml2-python
+PKG_DEPENDS+=		libxml2 libxml2-python libstdcxx
 PKG_BUILDDEP:=		autotool python2 libxml2 libXdamage libXfixes
 PKG_BUILDDEP+=		libXxf86vm libdrm dri2proto glproto expat libXext
 PKG_BUILDDEP+=		eudev dri3proto presentproto xcb-proto libxcb
 PKG_BUILDDEP+=		libxshmfence
 PKG_URL:=		http://www.mesa3d.org/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/${PKG_SUBVER}/
-PKG_NEED_CXX:=		1
 PKG_LIBNAME:=		mesalib
 PKG_OPTS:=		dev
 

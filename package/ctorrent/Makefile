@@ -9,10 +9,10 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		59b23dd05ff70791cd6449effa7fc3b6
 PKG_DESCR:=		console-based BitTorrent client
 PKG_SECTION:=		p2p
+PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://www.rahul.net/dholmes/ctorrent
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=dtorrent/}
-PKG_NEED_CXX:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

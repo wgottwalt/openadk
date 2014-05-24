@@ -9,12 +9,11 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		99204257de80a42c4e287fc93dfe714a
 PKG_DESCR:=		open source PBX
 PKG_SECTION:=		phone
-PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl
+PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl libstdcxx
 PKG_BUILDDEP:=		ncurses openssl zlib curl popt gtk+
 PKG_URL:=		http://www.asterisk.org/
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 PKG_NOPARALLEL:=	1
-PKG_NEED_CXX:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

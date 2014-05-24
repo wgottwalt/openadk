@@ -12,6 +12,7 @@ PKG_SECTION:=		utils
 PKG_DEPENDS:=		libtirpc
 PKG_BUILDDEP:=		libtirpc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=watchdog/}
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

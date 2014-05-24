@@ -7,12 +7,11 @@ PKG_NAME:=		xf86-input-evtouch
 PKG_VERSION:=		0.8.8
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		4d8e092356d8353002f60a4907046c13
-PKG_DESCR:=		X11 driver for touchscreen
+PKG_DESCR:=		x11 driver for touchscreens
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		http://www.conan.de/touchscreen/
-PKG_NEED_CXX:=		1
 
 PKG_CFLINE_XF86_INPUT_EVTOUCH:=	depends on ADK_BROKEN
 

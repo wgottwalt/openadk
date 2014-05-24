@@ -9,11 +9,10 @@ PKG_RELEASE:=		4
 PKG_MD5SUM:=		55277c40fd4b7183dc3671d39c5c42b7
 PKG_DESCR:=		Common Unix Printing System
 PKG_SECTION:=		net/misc
-PKG_DEPENDS:=		zlib libpthread
+PKG_DEPENDS:=		zlib libpthread libstdcxx
 PKG_BUILDDEP:=		cups-host zlib
 PKG_URL:=		http://www.cups.org/
 PKG_SITES:=		http://www.cups.org/software/${PKG_VERSION}/
-PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 PKG_NOPARALLEL:=	1
 

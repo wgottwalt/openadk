@@ -9,10 +9,10 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		bd7c2a9d23b573db467e39833f12103d
 PKG_DESCR:=		pixbuf library
 PKG_SECTION:=		libs
+PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libjpeg-turbo libtiff
 HOST_BUILDDEP:=		glib-host
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.24/
-PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 
 include $(TOPDIR)/mk/host.mk

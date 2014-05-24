@@ -14,6 +14,7 @@ PKG_BUILDDEP:=		autotool
 HOST_BUILDDEP:=		autotool
 PKG_URL:=		http://www.gnu.org/software/findutils/
 PKG_SITES:=		http://ftp.gnu.org/pub/gnu/findutils/
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

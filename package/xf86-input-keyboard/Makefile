@@ -7,12 +7,11 @@ PKG_NAME:=		xf86-input-keyboard
 PKG_VERSION:=		1.8.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		4f3e135e04939916f37f91a111c6f70b
-PKG_DESCR:=		X11 driver for keyboard
+PKG_DESCR:=		x11 driver for keyboard
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server
+PKG_DEPENDS:=		xorg-server libstdcxx
 PKG_BUILDDEP:=		xorg-server
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_NEED_CXX:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

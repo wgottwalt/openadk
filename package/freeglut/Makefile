@@ -9,11 +9,10 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		918ffbddcffbac83c218bc52355b6d5a
 PKG_DESCR:=		OpenGL Utility Toolkit libraries
 PKG_SECTION:=		libs
-PKG_DEPENDS:=		libglu
+PKG_DEPENDS:=		libglu libstdcxx
 PKG_BUILDDEP:=		glu
 PKG_URL:=		http://freeglut.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freeglut/}
-PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

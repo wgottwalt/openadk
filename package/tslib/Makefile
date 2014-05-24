@@ -10,10 +10,10 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		9563faf5cf9f111538b4f45778e7bb24
 PKG_DESCR:=		touchscreen library
 PKG_SECTION:=		libs
+PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://tslib.berlios.de/
 PKG_SITES:=		http://openadk.org/distfiles/
-PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

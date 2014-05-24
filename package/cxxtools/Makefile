@@ -8,10 +8,10 @@ PKG_VERSION:=		2.2.1
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		aab00068ae5237435b37ac86f2ac7576
 PKG_DESCR:=		collection of general-purpose C++ classes
+PKG_DEPENDS:=		libstdcxx
 PKG_SECTION:=		libs
 PKG_URL:=		http://www.tntnet.org/
 PKG_SITES:=		http://www.tntnet.org/download/
-PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

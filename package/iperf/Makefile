@@ -12,7 +12,6 @@ PKG_SECTION:=		net
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://sourceforge.net/projects/iperf
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=iperf/}
-PKG_NEED_CXX:=		1
 PKG_CXX:=		IPERF
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

@@ -9,9 +9,9 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		3fda0b004acdaa6fa350bfc41a3b95ca
 PKG_DESCR:=		disk file format database which stores key/data-pairs in single files
 PKG_SECTION:=		libs
+PKG_DEPENDS:=		libstdcxx
 PKG_URL:=		http://www.oracle.com/technology/software/products/berkeley-db
 PKG_SITES:=		http://www.openadk.org/distfiles/
-PKG_NEED_CXX:=		1
 PKG_LIBNAME:=		libdb
 PKG_OPTS:=		dev
 

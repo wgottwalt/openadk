@@ -9,11 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		d9532826e95bdb374355deebc42441bb
 PKG_DESCR:=		library for laying out and rendering of text
 PKG_SECTION:=		libs
+PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libXft glib cairo harfbuzz libstdcxx fontconfig
 HOST_BUILDDEP:=		cairo-host harfbuzz-host
 PKG_URL:=		http://www.pango.org/
 PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.36/}
-PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 
 ifeq ($(ADK_STATIC),y)

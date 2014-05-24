@@ -9,9 +9,9 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		8441c014170823f2dff97e33df55af1e
 PKG_DESCR:=		cryptography toolkit library
 PKG_SECTION:=		libs
+PKG_DEPENDS:=		libstdcxx
 PKG_URL:=		http://beecrypt.sourceforge.net/
 PKG_SITES:=		http://sourceforge.net/projects/beecrypt/files/beecrypt/$(PKG_VERSION)/
-PKG_NEED_CXX:=		1
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

@@ -13,7 +13,6 @@ PKG_DEPENDS:=		libpcre zlib
 PKG_BUILDDEP:=		pcre zlib
 PKG_URL:=		http://dansguardian.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=dansguardian/}
-PKG_NEED_CXX:=		1
 PKG_CXX:=		DANSGUARDIAN
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2

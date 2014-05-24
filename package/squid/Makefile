@@ -13,7 +13,6 @@ PKG_DEPENDS:=		libopenssl libpthread libstdcxx libltdl
 PKG_BUILDDEP:=		autotool openssl libtool
 PKG_URL:=		http://www.squid-cache.org/
 PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.4/
-PKG_NEED_CXX:=		1
 
 PKG_SUBPKGS:=		SQUID SQUID_MOD_BASIC_AUTH_GETPWNAM SQUID_MOD_BASIC_AUTH_NCSA
 PKG_SUBPKGS+=		SQUID_MOD_BASIC_AUTH_SMB SQUID_MOD_DIGEST_AUTH_FILE

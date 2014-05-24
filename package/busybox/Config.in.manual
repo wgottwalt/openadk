@@ -13,6 +13,13 @@ config ADK_PACKAGE_BUSYBOX
 	  
 	  WWW: http://www.busybox.net
 
+config ADK_PACKAGE_BUSYBOX_HIDE
+	prompt "hide packages provided by busybox applets"
+	boolean
+	default y
+	help
+	  Do not show packages which are provided as busybox applets
+
 menu "Busybox Configuration"
 depends on ADK_PACKAGE_BUSYBOX
 source "package/busybox/config/Config.in"

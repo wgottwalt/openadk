@@ -7,12 +7,11 @@ PKG_NAME:=		xf86-video-cirrus
 PKG_VERSION:=		1.4.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		439e3f5e29161f503bcfe23229dc7b17
-PKG_DESCR:=		X11 driver for Cirrus VGA chips
+PKG_DESCR:=		x11 driver for Cirrus VGA chips
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server
+PKG_DEPENDS:=		xorg-server libstdcxx
 PKG_BUILDDEP:=		xorg-server autotool util-macros
 PKG_SITES:=		${MASTER_SITE_XORG}
-PKG_NEED_CXX:=		1
 
 PKG_SYSTEM_DEPENDS:=	qemu-x86 qemu-x86_64
 

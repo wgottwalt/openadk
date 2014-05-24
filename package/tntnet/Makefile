@@ -9,11 +9,10 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		febe799675c1b8b2f7259bad30cf6f23
 PKG_DESCR:=		small C++ application server
 PKG_SECTION:=		www
-PKG_DEPENDS:=		cxxtools zlib libpthread
+PKG_DEPENDS:=		cxxtools zlib libpthread libstdcxx
 PKG_BUILDDEP:=		cxxtools zlib
 PKG_URL:=		http://www.tntnet.org/
 PKG_SITES:=		http://www.tntnet.org/download/
-PKG_NEED_CXX:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

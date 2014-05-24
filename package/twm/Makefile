@@ -7,13 +7,12 @@ PKG_NAME:=		twm
 PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		109979bd39d48bd761e7939b30006a48
-PKG_DESCR:=		X.Org twm application
+PKG_DESCR:=		simple window manager
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		xorg-server
+PKG_DEPENDS:=		xorg-server libstdcxx
 PKG_BUILDDEP:=		xorg-server
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
-PKG_NEED_CXX:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_ARCH_DEPENDS:=	!m68k

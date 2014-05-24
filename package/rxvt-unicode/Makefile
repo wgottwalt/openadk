@@ -9,11 +9,10 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		45ad197eb9b5a840c0f65e3a8131921c
 PKG_DESCR:=		x-term with unicode support
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libx11 fontconfig libxft libxml2 gdk-pixbuf
+PKG_DEPENDS:=		libx11 fontconfig libxft libxml2 gdk-pixbuf libstdcxx
 PKG_BUILDDEP:=		libX11 fontconfig libXft libxml2 gdk-pixbuf
 PKG_URL:=		http://software.schmorp.de/pkg/rxvt-unicode.html
 PKG_SITES:=		http://dist.schmorp.de/rxvt-unicode/
-PKG_NEED_CXX:=		1
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
