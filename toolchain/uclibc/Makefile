@@ -104,11 +104,6 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 	touch $@
 
 $(WRKBUILD)/.fixup:
-	# DOSTRIP kills x86 target (ld.so can not map libc.so.0), always use DODEBUG
-	# DODEBUG compile failure linking with libgcc_eh.a on arm hf
-ifneq ($(ADK_LINUX_ARM),y)
-	$(SED) 's,DOSTRIP,DODEBUG,' ${WRKBUILD}/.config
-endif
 	$(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
@@ -116,9 +111,9 @@ endif
 		RUNTIME_PREFIX=/ \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		all install_runtime
+ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 	# cleanup toolchain
 	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -delete
-ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 	# strip target libs and host tools for toolchain builds
 	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh \
 		$(STAGING_TARGET_DIR) $(TOOLCHAIN_DIR)/usr/lib/gcc/$(GNU_TARGET_NAME)

@@ -23,7 +23,7 @@ ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB),y)
 QEMU_ARGS+=-M versatilepb -net user -net nic,model=smc91c111
 endif
 ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
-QEMU_ARGS+=vexpress-a9 -cpu cortex-a9 -net user -net nic,model=lan9118
+QEMU_ARGS+=-M vexpress-a9 -cpu cortex-a9 -net user -net nic,model=lan9118
 endif
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 QEMU_ARGS+=-drive file=qemu-${CPU_ARCH}.img,if=virtio,index=0 -net nic,model=virtio -net user
