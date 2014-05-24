@@ -71,12 +71,14 @@ config ADK_TARGET_USE_GOLD
 	boolean
 	select ADK_TOOLCHAIN_WITH_GOLD
 	depends on !ADK_LINUX_MIPS
+	depends on !ADK_LINUX_MIPS64
 	default n
 
 config ADK_TARGET_USE_GNU_HASHSTYLE
 	prompt "Use GNU hashstyle for all packages"
 	boolean
 	depends on !ADK_LINUX_MIPS
+	depends on !ADK_LINUX_MIPS64
 	default n
 	help
 	  Performance optimization for applications with lot of shared library

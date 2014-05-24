@@ -10,6 +10,10 @@ include $(TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
+QEMU_ARGS:=-M malta
+QEMU_ARGS+=${ADK_QEMU_ARGS}
+QEMU_ARGS+=-device e1000,netdev=adk0 -netdev user,id=adk0
+
 # target helper text
 ifeq ($(ADK_TARGET_FS),nfsroot)
 targethelp:
@@ -46,7 +50,7 @@ ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0 -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-${CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 	@echo "Startup the Lemote Yeelong and type del to enter PMON:"
@@ -65,7 +69,7 @@ targethelp:
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0 -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-${CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
@@ -73,21 +77,16 @@ targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${CPU_ARCH} -nographic -M malta -device e1000,netdev=adk0 -netdev user,id=adk0 -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-${CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif
 
 # image creation and kernel install
-ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
-kernel-install:
+kernel-strip:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+
+kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
-endif
-ifeq ($(ADK_TARGET_QEMU),y)
-kernel-install:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
-	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
-endif
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),nfsroot)
@@ -104,7 +103,6 @@ imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
 imageinstall: createinitramfs targethelp
-	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 endif
 ifeq ($(ADK_TARGET_FS),usb)
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp

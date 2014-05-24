@@ -66,11 +66,6 @@ endif
 ifeq ($(ADK_TARGET_FS),usb)
 targethelp:
 	@echo 'The root tarball is: ${FW_DIR}/${ROOTFSTARBALL}'
-ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
-	@echo "Startup the netbook and type del to enter PMON:"
-	@echo "PMON> load /dev/fs/ext2@usb0/boot/kernel"
-	@echo "PMON> g"
-endif
 endif
 ifeq ($(ADK_TARGET_FS),yaffs)
 targethelp:
@@ -81,20 +76,11 @@ targethelp:
 endif
 
 # image creation and kernel install
-ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
 kernel-strip:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
-endif
-ifeq ($(ADK_TARGET_QEMU),y)
-kernel-strip:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
-
-kernel-install: kernel-strip
-	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
-endif
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
