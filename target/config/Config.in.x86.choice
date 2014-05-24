@@ -4,6 +4,7 @@
 choice ADK_TARGET_X86_CPU_MODEL
 prompt "CPU model"
 depends on ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_GENERIC_PC
+default ADK_CPU_I686
 
 config ADK_CPU_I486
         boolean "i486"
