@@ -205,7 +205,7 @@ fi
 
 host_build_flex=0
 if ! which flex >/dev/null 2>&1; then
-	host_build_m4=1
+	host_build_flex=1
 fi
 
 host_build_m4=0

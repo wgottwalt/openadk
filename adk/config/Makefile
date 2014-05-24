@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 endif
 
 CP=cp -fpR
-CFLAGS_FOR_BUILD:=-DKBUILD_NO_NLS -O2 -w
+CFLAGS_FOR_BUILD:=-DKBUILD_NO_NLS -O0 -g0 -w
 
 all: ncurses conf mconf
 
