@@ -2,12 +2,8 @@ global:
 - projects dir idea
 
 toolchain stuff:
-- hash-style=gnu for non-mips and non-musl
-- check gold for mozilla compile
-- check for gcc and SSP
 - config.site/config.cache usage for speedup?
   http://lists.gnu.org/archive/html/autoconf/2014-03/msg00031.html
-- static toolchain support
 
 base system:
 - add fb full screen logo
@@ -21,7 +17,6 @@ new or update packages:
 - add stunnel
 - port uuterm
 - port opkg with gpg signing
-- add grsec kernel patch
 - port msmtp
 - rutorrent porting
 - lms perl 
