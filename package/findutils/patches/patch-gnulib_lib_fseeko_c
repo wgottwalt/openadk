@@ -1,6 +1,6 @@
---- findutils-4.4.2.orig/gnulib/lib/fseeko.c	2009-05-10 23:25:10.000000000 +0200
-+++ findutils-4.4.2/gnulib/lib/fseeko.c	2014-03-23 16:35:34.000000000 +0100
-@@ -94,8 +94,14 @@ rpl_fseeko (FILE *fp, off_t offset, int
+--- findutils-4.4.2.orig/gnulib/lib/fseeko.c	Sun May 10 23:25:10 2009
++++ findutils-4.4.2/gnulib/lib/fseeko.c	Sat May 24 15:13:05 2014
+@@ -94,8 +94,14 @@ rpl_fseeko (FILE *fp, off_t offset, int whence)
    if ((fp->_Mode & _MWRITE ? fp->_Next == fp->_Buf : fp->_Next == fp->_Rend)
        && fp->_Rback == fp->_Back + sizeof (fp->_Back)
        && fp->_Rsave == NULL)

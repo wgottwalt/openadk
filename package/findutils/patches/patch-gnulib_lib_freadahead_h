@@ -1,6 +1,6 @@
---- findutils-4.4.2.orig/gnulib/lib/freadahead.h	2009-05-10 23:23:57.000000000 +0200
-+++ findutils-4.4.2/gnulib/lib/freadahead.h	2014-03-23 16:27:43.000000000 +0100
-@@ -29,8 +29,21 @@ extern "C" {
+--- findutils-4.4.2.orig/gnulib/lib/freadahead.h	Sun May 10 23:23:57 2009
++++ findutils-4.4.2/gnulib/lib/freadahead.h	Sat May 24 15:13:05 2014
+@@ -29,7 +29,20 @@ extern "C" {
  
     STREAM must not be wide-character oriented.  */
  
@@ -16,9 +16,8 @@
 +#else
 +
  extern size_t freadahead (FILE *stream);
- 
-+#endif
 +
++#endif
+ 
  #ifdef __cplusplus
  }
- #endif

@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		findutils
 PKG_VERSION:=		4.4.2
-PKG_RELEASE:=		5
+PKG_RELEASE:=		6
 PKG_MD5SUM:=		351cc4adb07d54877fa15f75fb77d39f
 PKG_DESCR:=		utilities for finding files (also provided by busybox)
 PKG_SECTION:=		core

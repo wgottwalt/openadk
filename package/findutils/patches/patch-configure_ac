@@ -1,5 +1,5 @@
---- findutils-4.4.2.orig/configure.ac	2009-05-16 17:27:39.000000000 +0200
-+++ findutils-4.4.2/configure.ac	2014-04-23 15:58:08.081495622 +0200
+--- findutils-4.4.2.orig/configure.ac	Sat May 16 17:27:39 2009
++++ findutils-4.4.2/configure.ac	Sat May 24 15:13:05 2014
 @@ -77,8 +77,6 @@ AC_PROG_CPP
  dnl for gnulib
  gl_EARLY
@@ -9,14 +9,14 @@
  AC_PROG_INSTALL
  AC_PROG_RANLIB
  dnl AC_PROG_LIBTOOL
-@@ -204,10 +202,6 @@ AC_CHECK_MEMBER(struct dirent.d_type,,,[
+@@ -203,10 +201,6 @@ AC_CHECK_MEMBER(struct dirent.d_type,,,[
+ #include <dirent.h>])
  
  jy_AC_ATTRIBUTE_NORETURN
- 
+-
 -dnl internationalization macros
 -AM_GNU_GETTEXT([external])
 -AM_GNU_GETTEXT_VERSION(0.14.5)
--
+ 
  dnl regextype.c and regexprops.c are designed to be usable outside findutils,
  dnl but findutils doesn't want to support all the regex types in gnulib,
- dnl and wants to support an additional one (RE_SYNTAX_EMACS|RE_DOT_NEWLINE).
