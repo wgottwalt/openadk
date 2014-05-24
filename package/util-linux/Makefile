@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.24.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		3f191727a0d28f7204b755cf1b6ea0aa
 PKG_DESCR:=		basic Linux utilities
 PKG_SECTION:=		core

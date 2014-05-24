@@ -1,0 +1,24 @@
+--- LVM2.2.02.106.orig/libdm/Makefile.in	2014-04-10 17:38:45.000000000 +0200
++++ LVM2.2.02.106/libdm/Makefile.in	2014-05-24 12:42:42.819190264 +0200
+@@ -39,10 +39,7 @@ INCLUDES += @VALGRIND_CFLAGS@
+ endif
+ CFLAGS += $(UDEV_CFLAGS)
+ 
+-ifeq ("@STATIC_LINK@", "yes")
+ LIB_STATIC = $(interface)/libdevmapper.a
+-endif
+-
+ LIB_SHARED = $(interface)/libdevmapper.$(LIB_SUFFIX)
+ LIB_VERSION = $(LIB_VERSION_DM)
+ TARGETS += libdevmapper.$(LIB_SUFFIX) libdevmapper.$(LIB_SUFFIX).$(LIB_VERSION)
+@@ -71,9 +68,7 @@ libdevmapper.$(LIB_SUFFIX) libdevmapper.
+ 
+ INSTALL_TYPE = install_dynamic
+ 
+-ifeq ("@STATIC_LINK@", "yes")
+-  INSTALL_TYPE += install_static
+-endif
++INSTALL_TYPE += install_static
+ 
+ ifeq ("@PKGCONFIG@", "yes")
+   INSTALL_TYPE += install_pkgconfig

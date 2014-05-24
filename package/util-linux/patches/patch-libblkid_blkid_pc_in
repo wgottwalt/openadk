@@ -1,0 +1,16 @@
+--- util-linux-2.24.2.orig/libblkid/blkid.pc.in	2013-02-27 17:46:29.858020511 +0100
++++ util-linux-2.24.2/libblkid/blkid.pc.in	2014-05-24 12:49:28.928809032 +0200
+@@ -1,11 +1,8 @@
+ prefix=@prefix@
+-exec_prefix=@exec_prefix@
+-libdir=@usrlib_execdir@
+-includedir=@includedir@
+ 
+ Name: blkid
+ Description: Block device id library
+ Version: @LIBBLKID_VERSION@
+ Requires.private: uuid
+-Cflags: -I${includedir}/blkid
+-Libs: -L${libdir} -lblkid
++Cflags: -I${prefix}/include/blkid
++Libs: -L${prefix}/lib -lblkid
