@@ -12,6 +12,7 @@ KERNEL:=$(LINUX_DIR)/arch/sh/boot/zImage
 QEMU_ARGS:=-M r2d
 QEMU_ARGS+=${ADK_QEMU_ARGS}
 QEMU_ARGS+=-monitor null
+QEMU_ARGS+=-net user -net nic,model=rtl8139
 
 ifeq ($(ADK_TARGET_QEMU_WITH_GRAPHIC),)
 QEMU_ARGS+=-serial null -serial stdio
