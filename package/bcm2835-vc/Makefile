@@ -4,11 +4,11 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bcm2835-vc
-# actually a59842a068cbd19e262701f30014499e9070fbf6 from 13.04.2014
-PKG_VERSION:=		0.5
+# actually 4855a45b118cb7b97b83e5160551db9813487c91 from 24.05.2014
+PKG_VERSION:=		0.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ed8c41f58e5657209cca73cb46b846d3
-PKG_DESCR:=		vc tools and libraries for raspberry pi
+PKG_MD5SUM:=		06ef68599607e3f041ded24d431ca460
+PKG_DESCR:=		videocore tools and libraries for raspberry pi
 PKG_SECTION:=		base
 PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		cmake-host
