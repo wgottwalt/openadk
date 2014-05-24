@@ -5,6 +5,8 @@ config ADK_TARGET_CFLAGS
 	string
 	default "-m4 -ml" if ADK_CPU_SH4 && ADK_little
 	default "-m4 -mb" if ADK_CPU_SH4 && ADK_big
+	default "-mcpu=powerpc" if ADK_CPU_PPC
+	default "-mcpu=powerpc64" if ADK_CPU_PPC64
 	default "-march=geode" if ADK_CPU_GEODE
 	default "-march=i486" if ADK_CPU_I486
 	default "-march=i586" if ADK_CPU_I586
