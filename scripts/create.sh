@@ -244,10 +244,7 @@ rnddev=/dev/urandom
 [[ -c /dev/arandom ]] && rnddev=/dev/arandom
 dd if=$rnddev bs=16 count=1 >>etc/.rnd 2>/dev/null
 print Fixing up permissions...
-#chown 0:0 tmp
 chmod 1777 tmp
-chmod 4755 bin/busybox
-[[ -f usr/bin/Xorg ]] && chmod 4755 usr/bin/Xorg
 [[ -f usr/bin/sudo ]] && chmod 4755 usr/bin/sudo
 
 if (( usegrub )); then
