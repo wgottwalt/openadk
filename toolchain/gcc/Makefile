@@ -226,8 +226,8 @@ else
 		ln -sf $(GNU_TARGET_NAME)-ld.bfd $(GNU_TARGET_NAME)-ld)
 endif
 	cd $(STAGING_TARGET_DIR)/lib && \
-		ln -sf libstdc++.so.6.0.18 libstdc++.so && \
-		ln -sf libstdc++.so.6.0.18 libstdc++.so.6
+		ln -sf libstdc++.so.6.0.19 libstdc++.so && \
+		ln -sf libstdc++.so.6.0.19 libstdc++.so.6
 	# cleanup unneeded docs
 	rm -rf $(TOOLCHAIN_DIR)/usr/share
 	touch $@
