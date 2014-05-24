@@ -1,0 +1,17 @@
+menu "Kernel addons"
+
+config ADK_KERNEL_ADDON_GRSEC
+	prompt "Enable Grsecurity addon"
+	boolean
+	depends on ADK_KERNEL_VERSION_3_14
+	help
+	  http://www.grsecurity.net
+
+config ADK_KERNEL_ADDON_MPTCP
+	prompt "Enable Multipath TCP addon"
+	boolean
+	depends on ADK_KERNEL_VERSION_3_14
+	help
+	  http://www.multipath-tcp.org
+
+endmenu
