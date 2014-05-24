@@ -164,7 +164,7 @@ config ADK_KERNEL_ATA_PIIX
 	select ADK_KERNEL_ATA_BMDMA
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
-	depends on ADK_TARGET_SYSTEM_IBM_X40
+	depends on ADK_TARGET_SYSTEM_IBM_X40 || ADK_TARGET_QEMU
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
 	help
@@ -190,7 +190,7 @@ config ADK_KERNEL_PATA_PLATFORM
 	select ADK_KERNEL_ATA_BMDMA
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
-	depends on ADK_TARGET_SYSTEM_QEMU_SH4 || ADK_TARGET_SYSTEM_QEMU_SH4EB
+	depends on ADK_TARGET_SYSTEM_QEMU_SH4
 	default n
 
 config ADK_KERNEL_PATA_PCMCIA
@@ -322,7 +322,6 @@ endmenu
 
 menu "Block driver support"
 
-
 config ADK_KERNEL_SCSI
 	prompt "SCSI support"
 	tristate
@@ -438,6 +437,8 @@ config ADK_KERNEL_BLK_DEV_DRBD
 	tristate
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_CONNECTOR
+	default m if ADK_PACKAGE_DRBD
+	default n
 	help
           DRBD - http://www.drbd.org
 

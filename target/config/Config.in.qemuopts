@@ -1,12 +1,12 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+menu "Qemu configuration"
+depends on ADK_TARGET_QEMU
+
 config ADK_QEMU_ARGS
 	string
 	default "-nographic" if ADK_TARGET_QEMU_WITHOUT_GRAPHIC
-
-menu "Qemu configuration"
-depends on ADK_TARGET_QEMU
 
 choice 
 prompt "Use a Bootloader"
@@ -45,7 +45,7 @@ endchoice
 
 choice
 prompt "Qemu Emulation with graphical output"
-depends on ADK_TARGET_QEMU
+depends on ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_QEMU_ARM_MODEL_SPITZ || ADK_TARGET_SYSTEM_QEMU_SH4
 default ADK_TARGET_QEMU_WITH_GRAPHIC if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 
 config ADK_TARGET_QEMU_WITHOUT_GRAPHIC
