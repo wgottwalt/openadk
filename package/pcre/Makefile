@@ -5,9 +5,9 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		pcre
 PKG_VERSION:=		8.34
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		eb34b2c9c727fd64940d6fd9a00995eb
-PKG_DESCR:=		a Perl Compatible Regular Expression library
+PKG_DESCR:=		Perl Compatible Regular Expression library
 PKG_SECTION:=		libs
 PKG_BUILDDEPS:=		gettext-tiny
 PKG_URL:=		http://www.pcre.org/
@@ -32,7 +32,8 @@ $(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,LIBPCRECPP,libpcrecpp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPCRECPP},${PKG_SECTION}))
 
 HOST_STYLE:=		auto
-CONFIGURE_ARGS+=	--enable-utf
+CONFIGURE_ARGS+=	--enable-utf \
+			--enable-unicode-properties
 XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
 
 libpcre-install:
