@@ -6,6 +6,8 @@ KERNEL_MAKE_OPTS:=	V=1 \
 			CROSS_COMPILE="$(TARGET_CROSS)" \
 			CC="$(TARGET_CC)" \
 			HOSTCC="${CC_FOR_BUILD}" \
+			HOSTCXX="${CXX_FOR_BUILD}" \
+			DISABLE_PAX_PLUGINS=y \
 			CONFIG_SHELL='${SHELL}'
 
 # regex for relocs needs pcre on Darwin

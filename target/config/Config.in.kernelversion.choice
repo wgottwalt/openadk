@@ -9,36 +9,37 @@ default ADK_KERNEL_VERSION_3_14_4
 config ADK_KERNEL_VERSION_3_15_RC6
 	prompt "3.15-rc6"
 	boolean
+	select ADK_KERNEL_VERSION_3_15
 
 config ADK_KERNEL_VERSION_3_14_4
 	prompt "3.14.4"
 	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
-
-config ADK_KERNEL_VERSION_3_13_11
-	prompt "3.13.11"
-	depends on !ADK_TARGET_SYSTEM_CUBOX_I
-	boolean
+	select ADK_KERNEL_VERSION_3_14
 
 config ADK_KERNEL_VERSION_3_12_20
 	prompt "3.12.20"
 	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
+	select ADK_KERNEL_VERSION_3_12
 
 config ADK_KERNEL_VERSION_3_10_40
 	prompt "3.10.40"
 	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
+	select ADK_KERNEL_VERSION_3_10
 
 config ADK_KERNEL_VERSION_3_10_30
 	prompt "3.10.30"
 	depends on ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
+	select ADK_KERNEL_VERSION_3_10
 
 config ADK_KERNEL_VERSION_3_4_90
 	prompt "3.4.90"
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
+	select ADK_KERNEL_VERSION_3_4
 
 endchoice
