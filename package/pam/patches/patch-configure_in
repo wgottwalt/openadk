@@ -1,0 +1,16 @@
+--- Linux-PAM-1.1.8.orig/configure.in	2013-09-18 14:30:13.000000000 +0200
++++ Linux-PAM-1.1.8/configure.in	2014-05-24 11:00:07.000000000 +0200
+@@ -28,12 +28,7 @@ dnl If we use /usr as prefix, use /etc f
+         fi
+ 	if test ${libdir} = '${exec_prefix}/lib'
+ 	then
+-		case "`uname -m`" in
+-		    x86_64|ppc64|s390x|sparc64)
+-			libdir="/lib64" ;;
+-		    *)
+-			libdir="/lib" ;;
+-		esac
++		libdir="/lib"
+ 	fi
+ 	if test ${sbindir} = '${exec_prefix}/sbin'
+         then

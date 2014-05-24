@@ -7,8 +7,8 @@ PKG_NAME:=		pam
 PKG_VERSION:=		1.1.8
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		5107bbf54042400b6200e8367cc7feef
-PKG_DESCR:=		Pluggable Authentication Modules
-PKG_BUILDDEP:=		flex-host flex
+PKG_DESCR:=		pluggable authentication modules
+PKG_BUILDDEP:=		autotool flex
 PKG_SECTION:=		misc
 PKG_URL:=		http://www.linux-pam.org/
 PKG_SITES:=		http://www.linux-pam.org/library/
@@ -21,6 +21,10 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PAM,pam,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+AUTOTOOL_STYLE:=	autoreconf
+ifeq ($(ADK_TARGET_USE_SSP),y)
+TARGET_LDFLAGS+=	-lssp
+endif
 CONFIGURE_ARGS+=	--disable-nis \
 			--disable-regenerate-docu \
 			--enable-db=no

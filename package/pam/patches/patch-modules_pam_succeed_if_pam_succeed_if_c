@@ -1,6 +1,6 @@
 --- Linux-PAM-1.1.8.orig/modules/pam_succeed_if/pam_succeed_if.c	2013-06-18 16:11:21.000000000 +0200
-+++ Linux-PAM-1.1.8/modules/pam_succeed_if/pam_succeed_if.c	2014-02-10 11:36:17.000000000 +0100
-@@ -233,16 +233,20 @@ evaluate_notingroup(pam_handle_t *pamh, 
++++ Linux-PAM-1.1.8/modules/pam_succeed_if/pam_succeed_if.c	2014-05-24 10:49:28.000000000 +0200
+@@ -233,16 +233,20 @@ evaluate_notingroup(pam_handle_t *pamh,
  static int
  evaluate_innetgr(const char *host, const char *user, const char *group)
  {
