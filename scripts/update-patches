@@ -90,10 +90,9 @@ DIFF_FLAGS="$DIFF_FLAGS -I \"^\+\+\+ $(print -r -- "$D_SUBP/" | $TRANSFORM)@@	.*
 (cd "${WRKDIST}"; find . -type f -print0) |&
 while IFS= read -p -d '' -r file; do
 	file=${file#./}
-	#print -r -- "DEBUG: <$file>" >>/tmp/debug
 	[[ ! -e $ORGDIST/$file && $patch_newfiles = 0 ]] && continue
 	for i in $DIFF_IGNOREFILES; do
-		[[ $file = $i ]] && continue
+		[[ $file = $i ]] && continue 2
 	done
 	cmp -s "$ORGDIST/$file" "$WRKDIST/$file" && continue
 	print -ru2 -- "Processing ${file}..."
