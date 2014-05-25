@@ -1,6 +1,6 @@
---- Linux-PAM-1.1.8.orig/modules/Makefile.in	2013-09-19 10:01:33.000000000 +0200
-+++ Linux-PAM-1.1.8/modules/Makefile.in	2013-12-21 18:45:07.000000000 +0100
-@@ -274,7 +274,7 @@ SUBDIRS = pam_access pam_cracklib pam_de
+--- Linux-PAM-1.1.8.orig/modules/Makefile.am	2013-06-18 16:11:21.000000000 +0200
++++ Linux-PAM-1.1.8/modules/Makefile.am	2014-05-25 20:13:15.415984289 +0200
+@@ -7,7 +7,7 @@ SUBDIRS = pam_access pam_cracklib pam_de
  	pam_group pam_issue pam_keyinit pam_lastlog pam_limits \
  	pam_listfile pam_localuser pam_loginuid pam_mail \
  	pam_mkhomedir pam_motd pam_namespace pam_nologin \
