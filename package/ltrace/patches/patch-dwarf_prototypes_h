@@ -1,0 +1,11 @@
+--- ltrace-0.7.4.orig/dwarf_prototypes.h	2014-05-24 21:16:56.000000000 +0200
++++ ltrace-0.7.4/dwarf_prototypes.h	2014-05-25 09:20:51.081105735 +0200
+@@ -1,8 +1,6 @@
+ #pragma once
+ 
+ #include <stdbool.h>
+-#include <elfutils/libdwfl.h>
+-
+ #include "prototype.h"
+ #include "library.h"
+ 
