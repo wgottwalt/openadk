@@ -7,13 +7,14 @@ PKG_NAME:=		scanlogd
 PKG_VERSION:=		2.2.6
 PKG_RELEASE:=		8
 PKG_MD5SUM:=		7b8187ea718ebe47f22805b921b909ab
-PKG_DESCR:=		Portscan logger
+PKG_DESCR:=		portscan logger
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libpcap libnet libnids
 PKG_BUILDDEP:=		libpcap libnids libnet
 PKG_URL:=		http://www.openwall.com/scanlogd/
 PKG_SITES:=		http://www.openwall.com/scanlogd/
 
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_ARCH_DEPENDS:=	!arm
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
