@@ -95,7 +95,7 @@ endif
 	@-test ! -r ${WRKDIR}/.autoreconf_done || \
 		(wrkdist=$(WRKDIST) dir=$${wrkdist#$(WRKDIR)}; \
 		cd ${WRKDIR}.orig$${dir}; \
-		env ${AUTOTOOL_ENV} autoreconf -if; \
+		env ${AUTOTOOL_ENV} autoreconf -if > /dev/null 2>&1; \
 		rm -rf ${WRKDIR}.orig$${dir}/autom4te.cache ) $(MAKE_TRACE)
 	@# restore config.sub/config.guess
 	@for i in $$(find ${WRKDIR} -name config.sub);do \
