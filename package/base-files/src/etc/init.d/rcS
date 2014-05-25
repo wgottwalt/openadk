@@ -78,3 +78,8 @@ fi
 		esac
 	    done
 } |tee /dev/stderr |logger -p 6 -t ''
+
+if [ $rcquiet -ne 1 ];then
+	ipaddr=$(ip addr show $(ip route show|awk '/default/ { print $5 }')|awk '/inet / { print $2 }')
+	echo "Your ip adress is $ipaddr"
+fi
