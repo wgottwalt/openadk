@@ -119,6 +119,11 @@ TARGET_CXXFLAGS+=	-fstack-protector-all
 TARGET_LDFLAGS+=	-fstack-protector-all
 endif
 
+ifneq ($(ADK_TARGET_USE_PIE),)
+TARGET_CFLAGS+=		-fPIE
+TARGET_CXXFLAGS+=	-fPIE
+endif
+
 ifneq ($(ADK_TARGET_USE_LTO),)
 TARGET_CFLAGS+=		-flto
 TARGET_CXXFLAGS+=	-flto
