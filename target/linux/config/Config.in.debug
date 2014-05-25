@@ -18,13 +18,6 @@ config ADK_KERNEL_KGDB_SERIAL_CONSOLE
 config ADK_KERNEL_FRAME_POINTER
 	boolean
 
-config ADK_QUIET_KERNEL
-	prompt "Make bootup quiet without messages from the kernel"
-	boolean
-	default n
-	help
-	  Make bootup quiet without messages from the kernel.
-
 config ADK_KERNEL_EARLY_PRINTK
 	boolean
 	default n

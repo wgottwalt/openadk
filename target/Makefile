@@ -54,8 +54,12 @@ ifneq ($(ADK_PACKAGE_CRYPTINIT_ROOT),)
 	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${ADK_PACKAGE_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
+ifeq ($(ADK_RUNTIME_QUIET_INIT),y)
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 rcquiet=1"#' \
+		${BUILD_DIR}/.kernelconfig.board
+endif
 ifeq ($(ADK_QUIET_KERNEL),y)
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 quiet"#' \
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 quiet loglevel=2"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
 ifeq ($(ADK_KERNEL_DEBUG_WITH_KGDB),y)

@@ -5,7 +5,9 @@ if [ -f /proc/sys/kernel/printk ];then
 	echo 0 > /proc/sys/kernel/printk
 fi
 ln -s /proc/self/fd/2 /dev/stderr
-echo "System initialization ..."
+if [ $rcquiet -ne 1 ];then
+	echo "System initialization ..."
+fi
 
 # remount /dev with smaller size
 mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
