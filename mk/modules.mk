@@ -1134,17 +1134,22 @@ $(eval $(call KMOD_template,SND_RAWMIDI,snd-rawmidi,\
 	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
 ,45))
 
+$(eval $(call KMOD_template,SND_SOC,snd-soc,\
+	$(MODULES_DIR)/kernel/sound/soc/snd-soc-core \
+,50))
+
 $(eval $(call KMOD_template,SND_AC97_CODEC,snd-ac97-codec,\
 	$(MODULES_DIR)/kernel/sound/ac97_bus \
 	$(MODULES_DIR)/kernel/sound/pci/ac97/snd-ac97-codec \
-,50))
+,55))
+
 
 ifeq ($(KERNEL_BASE),3)
 ifeq ($(KERNEL_MAJ),10)
 $(eval $(call KMOD_template,SND_SOC_SPDIF,snd-soc-spdif,\
 	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-spdif-tx \
 	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-spdif-rx \
-,50))
+,55))
 endif
 endif
 
@@ -1163,10 +1168,6 @@ $(eval $(call KMOD_template,SND_ENS1370,snd-ens1370,\
 
 $(eval $(call KMOD_template,SND_CS5535AUDIO,snd-cs5535audio,\
 	$(MODULES_DIR)/kernel/sound/pci/cs5535audio/snd-cs5535audio \
-,55))
-
-$(eval $(call KMOD_template,SND_SOC,snd-soc,\
-	$(MODULES_DIR)/kernel/sound/soc/snd-soc-core \
 ,55))
 
 $(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
