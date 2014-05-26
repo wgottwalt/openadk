@@ -1,8 +1,12 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+config MODULES
+	boolean
+	default y
+
 config ADK_HAVE_DOT_CONFIG
-	bool
+	boolean
 	default y
 
 mainmenu "OpenADK Configuration"
