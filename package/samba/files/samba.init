@@ -3,26 +3,6 @@
 #INIT 80
 . /etc/rc.conf
 
-check_mount() {
-	sed -n -e '/^#/d' -e '/path/s/^.*=//p' \
-	    /etc/samba/smb.conf | while read path; do
-		grep -v '^#' /etc/fstab | fgrep -q "$path" || continue
-		count=0
-		while :; do
-			if fgrep -q "$path" /proc/mounts; then
-				logger -t smb "Device mounted, starting samba"
-				break
-			fi
-			if test $count -eq 9; then
-				logger -s "required filesystem missing"
-				exit 1
-			fi
-			sleep 1
-			count=$(($count+1))
-		done
-	done
-}
-
 case $1 in
 autostop) ;;
 autostart)
@@ -31,7 +11,6 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	check_mount
 	[ -d /var/run/samba ] || mkdir -p /var/run/samba
 	[ -d /var/log/samba ] || mkdir -p /var/log/samba
 	/usr/sbin/nmbd -D 
