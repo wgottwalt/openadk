@@ -28,6 +28,9 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
 	@echo "Use following command to install it on CF card:"
 	@echo "sudo ./scripts/install-rb532.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo 'Or boot your Routerboard via NFS and'
+	@echo 'then install kernel and filesystem via:'
+	@echo 'adkinstall -c -a ${ROOTFSTARBALL}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
@@ -56,12 +59,6 @@ ifeq ($(ADK_TARGET_FS),nfsroot)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo 'The nfs root tarball is: ${FW_DIR}/${ROOTFSUSERTARBALL}'
-ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
-	@echo 'Boot your Lemote Yeelong and type following commands in PMON:'
-	@echo 'PMON> ifaddr rtl0 <ip-address-client>'
-	@echo 'PMON> load tftp://<ip-address-server>/${TARGET_KERNEL}'
-	@echo 'PMON> g'
-endif
 endif
 ifeq ($(ADK_TARGET_FS),usb)
 targethelp:
@@ -72,7 +69,7 @@ targethelp:
 	@echo 'The root tarball is: ${FW_DIR}/${ROOTFSTARBALL}'
 	@echo 'Format your NAND with Routerboot, boot via NFS and'
 	@echo 'then install kernel and filesystem via:'
-	@echo 'adkinstall ${ROOTFSTARBALL}'
+	@echo 'adkinstall -n -a ${ROOTFSTARBALL}'
 endif
 
 # image creation and kernel install
