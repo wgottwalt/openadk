@@ -4,15 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		grep
-PKG_VERSION:=		2.14
+PKG_VERSION:=		2.19
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d4a3f03849d1e17ce56ab76aa5a24cab
+PKG_MD5SUM:=		ac732142227d9fe9567d71301e127979
 PKG_DESCR:=		global search for a regex and print out matched lines
 PKG_SECTION:=		utils
-PKG_DEPENDS:=		libpcre libiconv
+PKG_DEPENDS:=		libpcre
 PKG_BUILDDEP:=		pcre
 PKG_URL:=		http://www.gnu.org/software/grep/
-PKG_SITES:=		ftp://ftp.gnu.org/gnu/grep/
+PKG_SITES:=		${MASTER_SITE_GNU:=grep/}
 PKG_NOPARALLEL:=	1
 PKG_BB:=		1
 
@@ -20,10 +20,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GREP,grep,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_LDFLAGS+=	-liconv
-
 grep-install:
-	$(INSTALL_DIR) $(IDIR_GREP)/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/{e,f,}grep $(IDIR_GREP)/bin
+	$(INSTALL_DIR) $(IDIR_GREP)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/{e,f,}grep $(IDIR_GREP)/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
