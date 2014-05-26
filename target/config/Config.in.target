@@ -129,6 +129,7 @@ config ADK_TARGET_ROOTFS_YAFFS
 	select ADK_KERNEL_YAFFS_YAFFS2
 	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
 	depends on ADK_TARGET_WITH_NAND
+	select ADK_KERNEL_ADDON_YAFFS2
 	help
 	  Root filesystem on NAND flash with YAFFS2.
 
