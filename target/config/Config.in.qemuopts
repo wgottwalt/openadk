@@ -6,7 +6,8 @@ depends on ADK_TARGET_QEMU
 
 config ADK_QEMU_ARGS
 	string
-	default "-nographic" if ADK_TARGET_QEMU_WITHOUT_GRAPHIC
+	default "" if ADK_TARGET_QEMU_WITH_GRAPHIC
+	default "-nographic"
 
 choice 
 prompt "Use a Bootloader"
@@ -22,7 +23,7 @@ config ADK_TARGET_QEMU_WITH_BOOTLOADER
 endchoice
 
 choice
-prompt "Qemu Emulation with permanent storage device (disk/flash)"
+prompt "Qemu Emulation with storage device"
 depends on ADK_TARGET_QEMU
 default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_ARCHIVE
 default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_SQUASHFS
