@@ -22,6 +22,22 @@ config ADK_DISABLE_HONOUR_CFLAGS
 	help
 	  Disable honour CFLAGS checks.
 
+config ADK_DISABLE_KERNEL_PATCHES
+	bool "Disable global kernel patches"
+	default n
+	help
+	  Disable all global kernel patches.
+	  This might prevent the cross-compilation on 
+	  non-Linux targets. Useful for bug reporting on LKML.
+
+config ADK_DISABLE_TARGET_KERNEL_PATCHES
+	bool "Disable target specific kernel patches"
+	default n
+	help
+	  Disable all target specific kernel patches.
+	  This might render a system unusable, when external
+	  kernel patches are required for bootup.
+
 config ADK_WGET_TIMEOUT
 	int "Set wget timeout"
 	default 10
