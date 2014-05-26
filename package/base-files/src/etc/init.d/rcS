@@ -5,6 +5,7 @@ if [ -f /proc/sys/kernel/printk ];then
 	echo 0 > /proc/sys/kernel/printk
 fi
 ln -s /proc/self/fd/2 /dev/stderr
+: ${rcquiet=0}
 if [ $rcquiet -ne 1 ];then
 	echo "System initialization ..."
 fi
@@ -46,7 +47,6 @@ echo ${HOSTNAME:=openadk} >/proc/sys/kernel/hostname
 
 chown 0:0 /tmp; chmod 1777 /tmp
 
-: ${rcquiet=0}
 if test x"$rcquiet" = x"0" && sh -n /etc/rc.conf >/dev/null 2>&1; then
 	. /etc/rc.conf
 	unset rcquiet
