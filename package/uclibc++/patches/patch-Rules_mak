@@ -1,0 +1,12 @@
+--- uClibc++-0.2.4.orig/Rules.mak	2012-05-25 23:15:31.000000000 +0200
++++ uClibc++-0.2.4/Rules.mak	2014-05-26 16:20:39.000000000 +0200
+@@ -79,9 +79,6 @@ check_gcc=$(shell if $(CC) $(1) -S -o /d
+ check_gxx_visibility=$(shell if $(CXX) -fvisibility-inlines-hidden -S -o /dev/null -xc++ /dev/null > /dev/null 2>&1; \
+         then echo "-DGCC_HASCLASSVISIBILITY"; fi)
+ 
+-check_as_needed=$(shell if $(LD) --help | grep -q 'as-needed' ; \
+-	then echo "-Wl,--as-needed -lgcc_s -Wl,--no-as-needed"; else echo "-lgcc_s"; fi)
+-
+ # strip quotes
+ qstrip = $(strip $(subst ",,$(1)))
+ #"))
