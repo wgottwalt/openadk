@@ -4,21 +4,24 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libvirt
-PKG_VERSION:=		1.0.3
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		3d9f85d586c9aa3d819b626622f3fc97
+PKG_VERSION:=		1.2.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		da7a9ca519df45a460659189fe0024e6
 PKG_DESCR:=		virtualization API
 PKG_SECTION:=		libs
-PKG_BUILDDEP:=		libxml2 gnutls python2 libpcap parted eudev
+PKG_BUILDDEP:=		libxml2 gnutls python2 libpcap parted eudev qemu
 PKG_DEPENDS:=		libxml2 libgnutls python2 libpcap libreadline
 PKG_DEPENDS+=		dmidecode dnsmasq qemu libnl libudev
 PKG_URL:=		http://www.libvirt.org/
 PKG_SITES:=		http://libvirt.org/sources/
 PKG_OPTS:=		dev
 
+PKG_CFLINE_LIBVIRT:=	depends on ADK_BROKEN
+
 PKG_HOST_DEPENDS:=	!freebsd !netbsd !openbsd
 PKG_ARCH_DEPENDS:=	x86 x86_64
 PKG_LIBC_DEPENDS:=	glibc
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
@@ -27,7 +30,9 @@ $(eval $(call PKG_template,LIBVIRT,libvirt,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 include ${TOPDIR}/mk/python.mk
 
 TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/tirpc
+ifeq ($(ADK_TARGET_USE_SSP),)
 TARGET_CFLAGS+=		-fno-stack-protector
+endif
 
 CONFIGURE_ENV+=		gl_cv_warn__fstack_protector_all=no \
 			ac_cv_path_IPTABLES_PATH=/usr/sbin/iptables \
@@ -39,10 +44,13 @@ CONFIGURE_ARGS+=	--without-xen \
 			--without-openvz \
 			--without-lxc \
 			--without-vbox \
+			--without-vmware \
 			--without-macvtap \
 			--without-remote \
 			--disable-silent-rules \
-			--without-sasl
+			--without-sasl \
+			--with-qemu \
+			--with-libvirtd
 
 libvirt-install:
 	${INSTALL_DIR} ${IDIR_LIBVIRT}/usr/lib ${IDIR_LIBVIRT}/usr/bin
