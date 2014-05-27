@@ -246,7 +246,7 @@ EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
 				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
-				cat $$file | cpio -ivd -H zip ;; \
+				cat $$file | cpio -id -H zip ;; \
 			*.arm|*.jar) \
 				mkdir ${WRKBUILD}; cp $$file ${WRKBUILD} ;; \
 			*) \
