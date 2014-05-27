@@ -26,7 +26,7 @@ ecj-hostinstall:
 	$(STAGING_HOST_DIR)/usr/bin/gcj -lgcj -O2 -findirect-dispatch \
 		-o ${STAGING_HOST_DIR}/usr/bin/ecj.native \
 		--main=org.eclipse.jdt.internal.compiler.batch.Main \
-		$(DL_DIR)/ecj.jar
+		$(DL_DIR)/${PKG_NAME}-${PKG_VERSION}.jar
 	echo "env LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64 ${STAGING_HOST_DIR}/usr/bin/ecj.native \$$@" > \
 		${STAGING_HOST_DIR}/usr/bin/ecj
 	chmod u+x ${STAGING_HOST_DIR}/usr/bin/ecj

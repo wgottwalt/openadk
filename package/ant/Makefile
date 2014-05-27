@@ -28,7 +28,7 @@ host-build:
 	if [ ! -f $(WRKBUILD)/lib/optional/junit-4.9b2.jar ];then \
 		cd $(WRKBUILD)/lib/optional; wget http://openadk.org/distfiles/junit-4.9b2.jar; \
 	fi
-	cp $(DL_DIR)/ecj.jar $(WRKBUILD)/lib/optional
+	cp $(DL_DIR)/ecj*.jar $(WRKBUILD)/lib/optional/ecj.jar
 	cd ${WRKBUILD}; export BOOTJAVAC_OPTS="-bootclasspath $(STAGING_HOST_DIR)/usr/share/classpath/glibj.zip" \
 		LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64 \
 		JAVA_HOME=$(STAGING_HOST_DIR)/usr/lib/jvm ; \
