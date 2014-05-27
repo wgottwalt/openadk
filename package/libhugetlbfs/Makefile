@@ -15,6 +15,7 @@ PKG_OPTS:=		dev
 
 PKG_LIBC_DEPENDS:=	glibc musl
 PKG_ARCH_DEPENDS:=	x86 x86_64
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

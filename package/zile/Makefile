@@ -15,6 +15,7 @@ PKG_URL:=		http://www.gnu.org/software/zile/
 PKG_SITES:=		${MASTER_SITE_GNU:=zile/}
 
 PKG_LIBC_DEPENDS:=	glibc
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

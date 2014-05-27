@@ -13,6 +13,7 @@ PKG_URL:=		http://traceroute.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=traceroute/}
 
 PKG_LIBC_DEPENDS:=	glibc musl
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 
