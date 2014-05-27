@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		swig
 PKG_VERSION:=		2.0.11
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		291ba57c0acd218da0b0916c280dcbae
 PKG_DESCR:=		swig utility
 PKG_SECTION:=		lang
@@ -23,6 +23,7 @@ $(eval $(call HOST_template,SWIG,swig,$(PKG_VERSION)-${PKG_RELEASE}))
 
 HOST_STYLE:=		auto
 HOST_ALL_TARGET:=	swig
+HOST_CONFIGURE_ARGS+=	--without-pcre
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
