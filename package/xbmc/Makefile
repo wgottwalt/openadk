@@ -27,6 +27,7 @@ PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		libssh libcec libnfs samba rtmpdump eudev
 PKG_BUILDDEP+=		libgpg-error libbluray dbus libxslt libvorbis
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
+PKG_BUILDDEP+=		zip-host unzip-host
 PKG_URL:=		http://xbmc.org/
 #PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
 PKG_SITES:=		http://openadk.org/distfiles/

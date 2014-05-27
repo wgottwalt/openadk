@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		7b74551e63f8ee6aab6fbc86676c0d37
 PKG_DESCR:=		zip compression utility
 PKG_SECTION:=		archive
-PKG_BUILDDEP:=		zip-host
 PKG_URL:=		http://www.info-zip.org/Zip.html
 PKG_SITES:=		ftp://ftp.info-zip.org/pub/infozip/src/
 
@@ -42,7 +41,7 @@ zip-hostinstall:
 
 zip-install:
 	${INSTALL_DIR} ${IDIR_ZIP}/usr/bin
-	${CP} ${WRKBUILD}/zip ${IDIR_ZIP}/usr/bin
+	${INSTALL_BIN} ${WRKBUILD}/zip ${IDIR_ZIP}/usr/bin
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
