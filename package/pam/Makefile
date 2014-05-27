@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pam
 PKG_VERSION:=		1.1.8
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		5107bbf54042400b6200e8367cc7feef
 PKG_DESCR:=		pluggable authentication modules
 PKG_BUILDDEP:=		autotool flex
