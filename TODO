@@ -12,9 +12,7 @@ base system:
 - essid with spaces
 
 new or update packages:
-- add rsyslog
 - add btrfs-utils
-- add stunnel
 - port uuterm
 - port opkg with gpg signing
 - port msmtp
