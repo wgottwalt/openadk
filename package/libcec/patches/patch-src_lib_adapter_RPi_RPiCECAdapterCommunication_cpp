@@ -1,0 +1,12 @@
+--- libcec-2.1.4.orig/src/lib/adapter/RPi/RPiCECAdapterCommunication.cpp	2013-12-16 10:32:51.000000000 +0100
++++ libcec-2.1.4/src/lib/adapter/RPi/RPiCECAdapterCommunication.cpp	2014-05-28 18:25:18.809692104 +0200
+@@ -353,7 +353,8 @@ void CRPiCECAdapterCommunication::Close(
+     else
+       return;
+   }
+-  vc_tv_unregister_callback(rpi_tv_callback);
++  if (m_bInitialised)
++    vc_tv_unregister_callback(rpi_tv_callback);
+ 
+   UnregisterLogicalAddress();
+ 
