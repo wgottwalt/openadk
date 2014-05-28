@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
-PKG_VERSION:=		13.0
+PKG_VERSION:=		13.1rc1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		be3e05d8b45328ae4950c456455936ab
+PKG_MD5SUM:=		1eb727c04cdc8282e9c2cb1f45ceeaae
 PKG_DESCR:=		software media player
 PKG_SECTION:=		multimedia
 PKG_DEPENDS:=		boost libffmpeg python2 libstdcxx
@@ -18,7 +18,7 @@ PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
 PKG_DEPENDS+=		libbluray libgpg-error libudev python2-mod-sqlite
 PKG_DEPENDS+=		libssh libcec libnfs librtmp samba-lib libncurses
-PKG_DEPENDS+=		libxslt libvorbisenc
+PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib
 PKG_BUILDDEP:=		autotool boost ffmpeg python2 MesaLib libglew libass
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis libmodplug
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
@@ -27,7 +27,7 @@ PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		libssh libcec libnfs samba rtmpdump eudev
 PKG_BUILDDEP+=		libgpg-error libbluray dbus libxslt libvorbis
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
-PKG_BUILDDEP+=		zip-host unzip-host
+PKG_BUILDDEP+=		zip-host unzip-host alsa-lib glib
 PKG_URL:=		http://xbmc.org/
 #PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
 PKG_SITES:=		http://openadk.org/distfiles/
@@ -39,7 +39,7 @@ PKG_SYSTEM_DEPENDS:=	raspberry-pi ibm-x40
 PKG_LIBC_DEPENDS:=	glibc
 
 DIFF_IGNOREFILES:=	configure missing depcomp install-sh INSTALL \
-			aclocal.m4 config.h.in */Makefile.in
+			aclocal.m4 config.h.in
 
 include $(TOPDIR)/mk/package.mk
 

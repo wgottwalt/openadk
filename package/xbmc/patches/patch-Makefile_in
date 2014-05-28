@@ -1,6 +1,6 @@
---- xbmc-13.0rc1.orig/Makefile.in	2014-04-30 15:45:06.000000000 +0200
-+++ xbmc-13.0rc1/Makefile.in	2014-05-03 15:31:00.000000000 +0200
-@@ -586,25 +586,6 @@ install-arch:
+--- xbmc-13.1rc1.orig/Makefile.in	2014-05-28 15:30:25.000000000 +0200
++++ xbmc-13.1rc1/Makefile.in	2014-05-28 16:05:22.772629085 +0200
+@@ -586,25 +586,7 @@ install-arch:
  ifeq (@USE_PVR_ADDONS@,1)
  	$(MAKE) -C pvr-addons install
  endif
@@ -20,13 +20,13 @@
 -		-exec install "{}" $(DESTDIR)$(libdir)/xbmc/"{}" \; \
 -		-exec printf " -- %-75.75s\r" "{}" \;
 -else
--	@find system addons -regextype posix-extended -type f -not -iregex ".*svn.*" -iregex ".*\.so|.*\.vis|.*\.xbs|.*\.pvr" -exec install -D "{}" $(DESTDIR)$(libdir)/xbmc/"{}" \; -printf " -- %-75.75f\r"
+ 	@find system addons -regextype posix-extended -type f -not -iregex ".*svn.*" -iregex ".*\.so|.*\.vis|.*\.xbs|.*\.pvr" -exec install -D "{}" $(DESTDIR)$(libdir)/xbmc/"{}" \; -printf " -- %-75.75f\r"
 -endif
 -endif
  
  install-scripts:
  	@install -d $(DESTDIR)$(bindir)
-@@ -624,26 +605,7 @@ install-datas: install-scripts
+@@ -624,26 +606,7 @@ install-datas: install-scripts
  	@echo "Done!"
  	@echo "Copying system files to $(DESTDIR)$(datarootdir)/xbmc"
  	@install -d $(DESTDIR)$(datarootdir)/xbmc
