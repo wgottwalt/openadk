@@ -1,0 +1,35 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+PKG_NAME:=		rsyslog
+PKG_VERSION:=		8.2.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		be8c0117e29b6a0313a3b8148f562e07
+PKG_DESCR:=		syslog daemon
+PKG_SECTION:=		misc
+PKG_BUILDDEP:=		libestr liblogging json-c util-linux zlib
+PKG_BUILDDEP+=		ncurses
+PKG_DEPENDS:=		libestr liblogging json-c libuuid zlib
+PKG_DEPENDS+=		libpthread librt libncurses
+PKG_URL:=		http://www.rsyslog.com/
+PKG_SITES:=		http://www.rsyslog.com/files/download/rsyslog/
+
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,RSYSLOG,rsyslog,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+rsyslog-install:
+	$(INSTALL_DIR) $(IDIR_RSYSLOG)/etc
+	$(CP) ./files/rsyslog.conf $(IDIR_RSYSLOG)/etc
+	$(INSTALL_DIR) $(IDIR_RSYSLOG)/usr/lib/rsyslog
+	$(CP) $(WRKINST)/usr/lib/rsyslog/*.so \
+		$(IDIR_RSYSLOG)/usr/lib/rsyslog
+	$(INSTALL_DIR) $(IDIR_RSYSLOG)/usr/sbin
+	$(INSTALL_BIN) $(WRKINST)/usr/sbin/rsyslogd \
+		$(IDIR_RSYSLOG)/usr/sbin
+
+include ${TOPDIR}/mk/pkg-bottom.mk

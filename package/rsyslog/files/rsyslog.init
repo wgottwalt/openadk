@@ -1,0 +1,28 @@
+#!/bin/sh
+#PKG rsyslog
+#INIT 05
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${rsyslog:-NO}" = x"NO" && exit 0
+	test x"$rsyslog" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
+	exec sh $0 start
+	;;
+start)
+	[ -d /var/spool/rsyslog ] || mkdir -p /var/spool/rsyslog
+	/usr/sbin/rsyslogd
+  	;;
+stop)
+	kill $(pgrep -f /usr/sbin/rsyslogd)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 {start | stop | restart}"
+	;;
+esac
+exit $?
