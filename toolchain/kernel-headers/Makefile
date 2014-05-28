@@ -8,12 +8,12 @@ include ${TOPDIR}/mk/kernel-vars.mk
 include ${TOPDIR}/mk/buildhlp.mk
 
 $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched:
-ifeq ($(ADK_DISABLE_KERNEL_PATCHES),)
+ifneq ($(ADK_DISABLE_KERNEL_PATCHES),y)
 	$(TRACE) kernel-patch
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) \
 		$(TOPDIR)/target/linux/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
 endif
-ifeq ($(ADK_DISABLE_TARGET_KERNEL_PATCHES),)
+ifneq ($(ADK_DISABLE_TARGET_KERNEL_PATCHES),y)
 	$(TRACE) kernel-target-patch
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) \
 		$(TOPDIR)/target/$(ARCH)/$(ADK_TARGET_SYSTEM)/patches/$(KERNEL_VERSION) *.patch $(MAKE_TRACE)
