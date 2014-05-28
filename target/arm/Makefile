@@ -43,6 +43,8 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 	@echo "Use following command to install it on SD card:"
 	@echo "sudo ./scripts/install-rpi.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "Use following command to install with a writable data partition"
+	@echo "sudo ./scripts/install-rpi.sh -d /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
 	@echo "Use following command to install it on SD card:"
