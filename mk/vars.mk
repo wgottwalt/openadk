@@ -124,6 +124,12 @@ TARGET_CFLAGS+=		-fPIE
 TARGET_CXXFLAGS+=	-fPIE
 endif
 
+ifneq ($(ADK_TARGET_USE_LD_GC),)
+TARGET_CFLAGS+=		-fdata-sections -ffunction-sections
+TARGET_CXXFLAGS+=	-fdata-sections -ffunction-sections
+TARGET_LDFLAGS+=	-Wl,--gc-sections
+endif
+
 ifneq ($(ADK_TARGET_USE_LTO),)
 TARGET_CFLAGS+=		-flto
 TARGET_CXXFLAGS+=	-flto

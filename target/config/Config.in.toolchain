@@ -67,6 +67,11 @@ config ADK_TARGET_USE_LTO
 	select ADK_TOOLCHAIN_WITH_LTO
 	default n
 
+config ADK_TARGET_USE_LD_GC
+	prompt "Use LD garbage collection for all packages"
+	boolean
+	default n
+
 config ADK_TOOLCHAIN_WITH_GOLD
 	boolean
 	default n
