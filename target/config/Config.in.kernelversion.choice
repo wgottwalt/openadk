@@ -13,6 +13,7 @@ config ADK_KERNEL_VERSION_3_15_RC7
 
 config ADK_KERNEL_VERSION_3_14_4
 	prompt "3.14.4"
+	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
 	select ADK_KERNEL_VERSION_3_14
 
