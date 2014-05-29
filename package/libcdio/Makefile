@@ -7,8 +7,8 @@ PKG_NAME:=		libcdio
 PKG_VERSION:=		0.92
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		86f3f2869c1d34e4c6e52db77992b918
-PKG_DESCR:=		library for CD-ROM and CD image access
-PKG_SECTION:=		libs
+PKG_DESCR:=		library for cd-rom and cd image access
+PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		libiconv-tiny
 PKG_URL:=		http://www.gnu.org/software/libcdio
 PKG_SITES:=		${MASTER_SITE_GNU:=libcdio/}

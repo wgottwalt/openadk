@@ -6,13 +6,13 @@ include ${TOPDIR}/toolchain/binutils/Makefile.inc
 
 PKG_NAME:=		binutils
 PKG_DESCR:=		binary utilities (nm, objdump, as, ..)
-PKG_SECTION:=		lang
+PKG_SECTION:=		dev/tools
 PKG_DEPENDS:=		libbfd
 PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		BINUTILS LIBBFD
 PKGSD_LIBBFD:=		binary file descriptor library
-PKGSC_LIBBFD:=		libs
+PKGSC_LIBBFD:=		libs/misc
 
 PKG_HOST_DEPENDS:=      !cygwin
 

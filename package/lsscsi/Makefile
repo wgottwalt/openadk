@@ -7,8 +7,8 @@ PKG_NAME:=		lsscsi
 PKG_VERSION:=		0.27
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		33ab2927a9e567a47905e6a618c17859
-PKG_DESCR:=		list SCSI devices
-PKG_SECTION:=		utils
+PKG_DESCR:=		list scsi devices
+PKG_SECTION:=		sys/utils
 PKG_URL:=		http://sg.danny.cz/scsi/lsscsi.html
 PKG_SITES:=		http://sg.danny.cz/scsi/
 

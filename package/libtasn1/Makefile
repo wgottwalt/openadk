@@ -7,8 +7,8 @@ PKG_NAME:=		libtasn1
 PKG_VERSION:=		3.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6ed38e161e11013054f2a2bb4c4da449
-PKG_DESCR:=		ASN.1 and DER structures manipulation library
-PKG_SECTION:=		libs
+PKG_DESCR:=		asn.1 and der structures manipulation library
+PKG_SECTION:=		libs/crypto
 PKG_URL:=		http://www.gnupg.org/
 PKG_SITES:=		${MASTER_SITE_GNU:=libtasn1/}
 PKG_OPTS:=		dev

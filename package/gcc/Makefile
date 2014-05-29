@@ -5,14 +5,14 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gcc/Makefile.inc
 
 PKG_NAME:=		gcc
-PKG_DESCR:=		GNU C compiler
-PKG_SECTION:=		lang
+PKG_DESCR:=		c compiler
+PKG_SECTION:=		dev/lang
 PKG_OPTS:=		noremove
 PKG_DEPENDS:=		libmpc libgmp mpfr
 PKG_BUILDDEP:=		libmpc gmp mpfr
 
 PKG_SUBPKGS:=		GCC GXX
-PKGSD_GXX:=		GNU C++ compiler
+PKGSD_GXX:=		c++ compiler
 
 WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
 

@@ -1,0 +1,86 @@
+menu "Base system"
+source package/Config.in.auto.base.boot
+source package/Config.in.auto.base.libs
+source package/Config.in.auto.base.apps
+source package/Config.in.auto.base.shells
+source package/Config.in.auto.base.misc
+endmenu
+
+menu "System"
+source package/Config.in.auto.sys.fs
+source package/Config.in.auto.sys.serial
+source package/Config.in.auto.sys.utils
+source package/Config.in.auto.sys.firmware
+source package/Config.in.auto.sys.misc
+endmenu
+
+menu "Applications"
+source package/Config.in.auto.app.archive
+source package/Config.in.auto.app.browser
+source package/Config.in.auto.app.chat
+source package/Config.in.auto.app.crypto
+source package/Config.in.auto.app.debug
+source package/Config.in.auto.app.editor
+source package/Config.in.auto.app.p2p
+endmenu
+
+menu "Networking"
+source package/Config.in.auto.net.acct
+source package/Config.in.auto.net.dns
+source package/Config.in.auto.net.debug
+source package/Config.in.auto.net.firewall
+source package/Config.in.auto.net.fs
+source package/Config.in.auto.net.http
+source package/Config.in.auto.net.ipv6
+source package/Config.in.auto.net.mail
+source package/Config.in.auto.net.misc
+source package/Config.in.auto.net.ntp
+source package/Config.in.auto.net.perf
+source package/Config.in.auto.net.ppp
+source package/Config.in.auto.net.proxy
+source package/Config.in.auto.net.radius
+source package/Config.in.auto.net.route
+source package/Config.in.auto.net.security
+source package/Config.in.auto.net.voip
+source package/Config.in.auto.net.wifi
+endmenu
+
+menu "Multimedia"
+source package/Config.in.auto.mm.audio
+source package/Config.in.auto.mm.image
+source package/Config.in.auto.mm.video
+endmenu
+
+menu "Xorg"
+source package/Config.in.auto.x11.apps
+source package/Config.in.auto.x11.utils
+source package/Config.in.auto.x11.drivers
+source package/Config.in.auto.x11.misc
+source package/Config.in.auto.x11.fonts
+source package/Config.in.auto.x11.libs
+endmenu
+
+menu "Libraries"
+source package/Config.in.auto.libs.audio
+source package/Config.in.auto.libs.crypto
+source package/Config.in.auto.libs.data
+source package/Config.in.auto.libs.db
+source package/Config.in.auto.libs.fonts
+source package/Config.in.auto.libs.image
+source package/Config.in.auto.libs.misc
+source package/Config.in.auto.libs.net
+source package/Config.in.auto.libs.video
+endmenu
+
+menu "Programming"
+source package/Config.in.auto.dev.lang
+source package/Config.in.auto.dev.python
+source package/Config.in.auto.dev.perl
+source package/Config.in.auto.dev.scm
+source package/Config.in.auto.dev.tools
+endmenu
+
+menu "Headers"
+depends on ADK_PACKAGE_GCC
+source package/Config.in.auto.dev.header
+endmenu

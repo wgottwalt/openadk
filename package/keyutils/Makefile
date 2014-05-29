@@ -8,7 +8,7 @@ PKG_VERSION:=		1.5.9
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		7f8ac985c45086b5fbcd12cecd23cf07
 PKG_DESCR:=		utilities for managing the key retention facility
-PKG_SECTION:=		libs
+PKG_SECTION:=		libs/misc
 PKG_SITES:=		http://people.redhat.com/dhowells/keyutils/
 PKG_OPTS:=		dev
 

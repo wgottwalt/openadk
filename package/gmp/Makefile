@@ -5,8 +5,8 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/gmp/Makefile.inc
 
 PKG_NAME:=		gmp
-PKG_DESCR:=		GNU multiprecision arithmetic library
-PKG_SECTION:=		libs
+PKG_DESCR:=		multiprecision arithmetic library
+PKG_SECTION:=		libs/misc
 PKG_URL:=		http://gmplib.org/
 PKG_BUILDDEP:=		m4-host flex-host bison-host
 PKG_LIBNAME:=		libgmp

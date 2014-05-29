@@ -6,8 +6,8 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		mtd
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		2
-PKG_DESCR:=		MTD utility
-PKG_SECTION:=		fs
+PKG_DESCR:=		flash utility
+PKG_SECTION:=		sys/fs
 
 PKG_DFLT_MTD:=		y if ADK_TARGET_WITH_MTD
 PKG_CFLINE_MTD:=	depends on ADK_TARGET_WITH_MTD
@@ -21,8 +21,6 @@ $(eval $(call PKG_template,MTD,mtd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
-TARGET_CFLAGS+=		-Wall
 
 do-build:
 	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \

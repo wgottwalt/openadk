@@ -8,7 +8,7 @@ PKG_VERSION:=		0.94
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		14d4bdfac236e347d806c6743dba48c6
 PKG_DESCR:=		fastjar utility
-PKG_SECTION:=		lang
+PKG_SECTION:=		dev/tools
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fastjar/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

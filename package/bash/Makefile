@@ -7,8 +7,8 @@ PKG_NAME:=		bash
 PKG_VERSION:=		4.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		81348932d5da294953e15d4814c74dd1
-PKG_DESCR:=		Bourne-Again SHell
-PKG_SECTION:=		shells
+PKG_DESCR:=		bourne-again shell
+PKG_SECTION:=		base/shells
 PKG_URL:=		http://www.gnu.org/software/bash/
 PKG_SITES:=		http://ftp.gnu.org/gnu/bash/
 

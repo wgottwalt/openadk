@@ -7,8 +7,8 @@ PKG_NAME:=		lm_sensors
 PKG_VERSION:=		3.3.1
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		8c0eebda8524fc87da1393b4564d279b
-PKG_DESCR:=		linux hw sensor toolset
-PKG_SECTION:=		misc
+PKG_DESCR:=		hardware sensor toolset
+PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		sysfsutils
 PKG_URL:=		http://www.lm-sensors.org
 PKG_SITES:=		http://dl.lm-sensors.org/lm-sensors/releases/
@@ -19,7 +19,7 @@ PKG_ARCH_DEPENDS:=	x86 x86_64
 
 PKG_SUBPKGS:=		LM_SENSORS LM_SENSORS_DETECT
 PKGSD_LM_SENSORS_DETECT:=	lm_sensors perl scripts (e.g. sensors-detect)
-PKGSC_LM_SENSORS_DETECT:=	misc
+PKGSC_LM_SENSORS_DETECT:=	sys/misc
 PKGSS_LM_SENSORS_DETECT:=	perl
 PKGSB_LM_SENSORS_DETECT:=	perl
 

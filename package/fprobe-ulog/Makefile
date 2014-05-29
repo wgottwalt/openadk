@@ -7,8 +7,8 @@ PKG_NAME:=		fprobe-ulog
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		cdb2e4edc47e8a3d5479eeabfb979ebc
-PKG_DESCR:=		NetFlow probe
-PKG_SECTION:=		net
+PKG_DESCR:=		netflow probe
+PKG_SECTION:=		net/acct
 PKG_DEPENDS:=		libpcap libpthread
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fprobe/}
 

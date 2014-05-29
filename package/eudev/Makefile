@@ -8,7 +8,7 @@ PKG_VERSION:=		1.5.3
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		51380938b489385cc394f4ebabc048f0
 PKG_DESCR:=		device manager (udev clone)
-PKG_SECTION:=		utils
+PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		gperf-host glib
 PKG_DEPENDS:=		glib
 PKG_URL:=		http://www.gentoo.org/proj/en/eudev/
@@ -19,9 +19,9 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		UDEV LIBUDEV
-PKGSD_UDEV:=		Dynamic device management manager
-PKGSC_LIBUDEV:=		libs
-PKGSD_LIBUDEV:=		Dynamic device management library
+PKGSD_UDEV:=		dynamic device management manager
+PKGSC_LIBUDEV:=		libs/misc
+PKGSD_LIBUDEV:=		dynamic device management library
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

@@ -8,7 +8,7 @@ PKG_VERSION:=		2.69
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		50f97f4159805e374639a73e2636f22e
 PKG_DESCR:=		automatically configure software source code packages
-PKG_SECTION:=		lang
+PKG_SECTION:=		dev/tools
 HOST_BUILDDEP:=		m4-host
 PKG_URL:=		http://www.gnu.org/software/autoconf/
 PKG_SITES:=		${MASTER_SITE_GNU:=autoconf/}

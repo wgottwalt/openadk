@@ -7,8 +7,8 @@ PKG_NAME:=		mdadm
 PKG_VERSION:=		3.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		abb19b309281b93cf79d29fb2dfb2e85
-PKG_DESCR:=		tool for managing Linux Software RAID arrays
-PKG_SECTION:=		fs
+PKG_DESCR:=		tool for managing software RAID arrays
+PKG_SECTION:=		sys/fs
 PKG_URL:=		http://neil.brown.name/blog/mdadm
 PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/raid/mdadm/}
 

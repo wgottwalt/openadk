@@ -23,8 +23,8 @@ PKGSD_NFS_UTILS_SERVER:=server daemons and utilities
 PKGSN_NFS_UTILS_SERVER:=nfs-utils
 
 PKG_CHOICES_NFS_UTILS:=	V3 V4
-PKGCD_V3:=		NFS version 3
-PKGCD_V4:=		NFS version 4
+PKGCD_V3:=		nfs version 3
+PKGCD_V4:=		nfs version 4
 PKGCB_V4:=		libevent libnfsidmap krb5 libgssglue librpcsecgss
 PKGCS_V4:=		libkrb5 libevent libnfsidmap librpcsecgss libcom-err libgssglue
 

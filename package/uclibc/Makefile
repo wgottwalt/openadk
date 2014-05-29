@@ -5,8 +5,8 @@ include $(TOPDIR)/rules.mk
 include $(TOPDIR)/toolchain/uclibc/Makefile.inc
 
 PKG_NAME:=		uClibc
-PKG_DESCR:=		embedded C library
-PKG_SECTION:=		base
+PKG_DESCR:=		embedded c library
+PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove
 
 PKG_SUBPKGS:=		UCLIBC UCLIBC_DEV

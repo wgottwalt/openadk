@@ -7,8 +7,8 @@ PKG_NAME:=		libjson
 PKG_VERSION:=		7.6.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		82f3fcbf9f8cf3c4e25e1bdd77d65164
-PKG_DESCR:=		JSON library
-PKG_SECTION:=		libs
+PKG_DESCR:=		json library
+PKG_SECTION:=		libs/data
 PKG_URL:=		http://sourceforge.net/projects/libjson/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libjson/}
 PKG_OPTS:=		dev

@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		scrnsaverproto
 PKG_VERSION:=		1.2.2
 PKG_RELEASE:=		1
-PKG_DESCR:=		X11 screensaver headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		screensaver headers
+PKG_SECTION:=		dev/header
 PKG_MD5SUM:=		21704f1bad472d94abd22fea5704bb48
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly

@@ -8,7 +8,7 @@ PKG_VERSION:=		2.1.0
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		14e7dcd0436d2f49aa403f67e1ef7ddc
 PKG_DESCR:=		utilites built upon sysfs
-PKG_SECTION:=		utils
+PKG_SECTION:=		sys/utils
 PKG_URL:=		http://linux-diag.sourceforge.net/Sysfsutils.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-diag/sysfsutils/2.1.0/}
 PKG_OPTS:=		dev

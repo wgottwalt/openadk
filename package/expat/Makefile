@@ -7,8 +7,8 @@ PKG_NAME:=		expat
 PKG_VERSION:=		2.0.1
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		ee8b492592568805593f81f8cdf2a04c
-PKG_DESCR:=		XML parsing library
-PKG_SECTION:=		libs
+PKG_DESCR:=		xml parsing library
+PKG_SECTION:=		libs/data
 PKG_URL:=		http://expat.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=expat/}
 PKG_LIBNAME:=		libexpat

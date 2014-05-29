@@ -7,7 +7,7 @@ PKG_NAME:=		kexecinit
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		init for kexec rootfilesystem
-PKG_SECTION:=		base
+PKG_SECTION:=		base/misc
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 NO_DISTFILES:=		1

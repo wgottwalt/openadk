@@ -7,8 +7,8 @@ PKG_NAME:=		setpwc
 PKG_VERSION:=		1.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		79d5ee468c0076feb3cac473bef661d2
-PKG_DESCR:=		Philips (and compatibles) WebCams (PWC) control utility
-PKG_SECTION:=		multimedia
+PKG_DESCR:=		philips webcam control utility
+PKG_SECTION:=		sys/misc
 PKG_URL:=		http://www.vanheusden.com/setpwc/
 PKG_SITES:=		http://www.vanheusden.com/setpwc/
 
@@ -23,7 +23,6 @@ BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
 TARGET_CPPFLAGS+=	-DVERSION=\"${PKG_VERSION}\"
-TARGET_CFLAGS+=		-Wall
 
 do-build:
 	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \

@@ -8,8 +8,8 @@ PKG_VERSION:=		2.24.22
 PKG_EXTRAVER:=		2.24
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		5fbbfb7637bbd571a572a2dae0e736d2
-PKG_DESCR:=		GTK+ library
-PKG_SECTION:=		libs
+PKG_DESCR:=		multi-platform toolkit for creating graphical user interfaces
+PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib libstdcxx
 PKG_BUILDDEP:=		cairo atk pango libXext renderproto libXrender
 PKG_BUILDDEP+=		gdk-pixbuf libXcomposite libXdamage
@@ -17,8 +17,6 @@ PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/$(PKG_EXTRAVER)/
 PKG_LIBNAME:=		libgtk
 PKG_OPTS:=		dev
-
-PKG_ARCH_DEPENDS:=	!m68k
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libonly

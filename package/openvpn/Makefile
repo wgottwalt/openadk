@@ -7,7 +7,7 @@ PKG_NAME:=		openvpn
 PKG_VERSION:=		2.3.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		9b70be9fb45e407117c3c9b118e4ba22
-PKG_DESCR:=		VPN solution using SSL/TLS
+PKG_DESCR:=		vpn solution using ssl/tls
 PKG_SECTION:=		net/security
 PKG_BUILDDEP:=		autotool
 PKG_DEPENDS:=		ip
@@ -15,7 +15,7 @@ PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
 
 PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS
-PKGFD_WITH_LZO:=	enable LZO compression support
+PKGFD_WITH_LZO:=	enable lzo compression support
 PKGFS_WITH_LZO:=	liblzo
 PKGFB_WITH_LZO:=	liblzo
 PKGFD_WITH_MANAGEMENT:=	enable management server support

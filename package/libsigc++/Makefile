@@ -7,8 +7,8 @@ PKG_NAME:=		libsigc++
 PKG_VERSION:=		2.2.10
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		6d350ae0bc17b8915a06ce6b7e4240e8
-PKG_DESCR:=		Callback framework for C++
-PKG_SECTION:=		libs
+PKG_DESCR:=		callback framework for c++
+PKG_SECTION:=		libs/misc
 PKG_URL:=		http://libsigc.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_GNOME:=libsigc++/2.2/}
 PKG_OPTS:=		dev

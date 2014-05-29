@@ -6,7 +6,7 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		pipacs
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		2
-PKG_DESCR:=		an UNIX socket accounting/viewer program
+PKG_DESCR:=		unix socket accounting/viewer program
 PKG_SECTION:=		net/misc
 
 NO_DISTFILES:=		1

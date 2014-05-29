@@ -7,8 +7,8 @@ PKG_NAME:=		openssl
 PKG_VERSION:=		1.0.1g
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		de62b43dfcd858e66a74bee1c834e959
-PKG_DESCR:=		Secure Socket Layer libraries
-PKG_SECTION:=		libs
+PKG_DESCR:=		secure socket layer libraries
+PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.openssl.org/
@@ -19,8 +19,8 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		LIBOPENSSL OPENSSL_UTIL
-PKGSD_OPENSSL_UTIL:=	OpenSSL command line tool
-PKGSC_OPENSSL_UTIL:=	crypto
+PKGSD_OPENSSL_UTIL:=	openssl command line tool
+PKGSC_OPENSSL_UTIL:=	app/crypto
 PKGSS_OPENSSL_UTIL:=	libopenssl
 
 PKG_FLAVOURS_LIBOPENSSL:=	WITH_CRYPTODEV

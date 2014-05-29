@@ -8,7 +8,7 @@ PKG_VERSION:=		2.11
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		9fddbbc3e330bee5950b8b5d424a57cb
 PKG_DESCR:=		reports information about your system's hardware
-PKG_SECTION:=		misc
+PKG_SECTION:=		sys/misc
 PKG_URL:=		http://www.nongnu.org/dmidecode/
 PKG_SITES:=		http://download.savannah.gnu.org/releases/dmidecode/
 

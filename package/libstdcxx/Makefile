@@ -14,8 +14,8 @@ include ${TOPDIR}/toolchain/uclibc/Makefile.inc
 endif
 
 PKG_NAME:=		libstdcxx
-PKG_DESCR:=		C++ support library
-PKG_SECTION:=		libs
+PKG_DESCR:=		c++ support library
+PKG_SECTION:=		libs/misc
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk

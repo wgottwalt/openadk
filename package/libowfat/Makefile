@@ -7,7 +7,7 @@ PKG_NAME:=		libowfat
 PKG_VERSION:=		0.29
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1187c6acf11429e7adb9ebe180f644bb
-PKG_SECTION:=		libs
+PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.fefe.de/libowfat
 PKG_SITES:=		http://dl.fefe.de/
 

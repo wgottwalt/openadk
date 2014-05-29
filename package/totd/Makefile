@@ -7,8 +7,8 @@ PKG_NAME:=		totd
 PKG_VERSION:=		1.5.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		7edaedae9f6aca5912dd6c123582cf08
-PKG_DESCR:=		Trick or Treat Daemon (a simple DNS-ALG for NAT-PT)
-PKG_SECTION:=		dns
+PKG_DESCR:=		trick or treat daemon
+PKG_SECTION:=		net/dns
 PKG_URL:=		http://www.dillema.net/software/totd.html
 PKG_SITES:=		http://www.dillema.net/software/totd/
 

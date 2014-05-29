@@ -7,22 +7,25 @@ PKG_NAME:=		ndisc6
 PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		50cb4c19606cf6ff2b7388e71832f579
-PKG_DESCR:=		ICMPv6 Neighbour Discovery tools
-PKG_SECTION:=		ipv6
+PKG_DESCR:=		icmpv6 neighbour discovery tools
+PKG_SECTION:=		net/ipv6
 PKG_URL:=		http://www.remlab.net/
 PKG_SITES:=		http://www.remlab.net/files/ndisc6/
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_SUBPKGS:=		NDISC6 RDISC6 TCPTRACEROUTE6
+PKGSD_NDISC6:=		icmpv6 neighbour discovery tool
+PKGSD_RDISC6:=		icmpv6 router discovery tool
+PKGSD_TCPTRACEROUTE6:=	lightweight ipv6 tcptraceroute
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,NDISC6,ndisc6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,RDISC6,rdisc6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,TCPTRACEROUTE6,tcptraceroute6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NDISC6,ndisc6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_NDISC6},${PKG_SECTION}))
+$(eval $(call PKG_template,RDISC6,rdisc6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_RDISC6},${PKG_SECTION}))
+$(eval $(call PKG_template,TCPTRACEROUTE6,tcptraceroute6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_TCPTRACEROUTE6},${PKG_SECTION}))
 
 MAKE_FLAGS+=		CC="${TARGET_CC}"
 

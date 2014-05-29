@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		bigreqsproto
 PKG_VERSION:=		1.1.2
 PKG_RELEASE:=		2
-PKG_DESCR:=		Big Requests Extension headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		big requests extension headers
+PKG_SECTION:=		dev/header
 PKG_MD5SUM:=		9b83369ac7a5eb2bf54c8f34db043a0e
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly

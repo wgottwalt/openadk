@@ -8,11 +8,12 @@ PKG_VERSION:=		3.2.8
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		9532714b6846013ca9898984ba4cd7e0
 PKG_DESCR:=		/proc file system utilities
-PKG_SECTION:=		utils
+PKG_SECTION:=		base/apps
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://procps.sourceforge.net/
 PKG_SITES:=		http://procps.sourceforge.net/
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

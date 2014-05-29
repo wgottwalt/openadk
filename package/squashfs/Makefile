@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1b7a781fb4cf8938842279bd3e8ee852
 PKG_DESCR:=		squashfs filesystem utilities
 HOST_BUILDDEP:=		xz-host
-PKG_SECTION:=		fs
+PKG_SECTION:=		sys/fs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=squashfs/}
 
 DISTFILES:=		${PKG_NAME}${PKG_VERSION}.tar.gz

@@ -7,7 +7,7 @@ PKG_NAME:=		cifs-utils
 PKG_VERSION:=		6.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		93697dbc043cb4d5c66e15e281f872e5
-PKG_DESCR:=		CIFS network filesystem utilities
+PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		https://wiki.samba.org/index.php/LinuxCIFS_utils
@@ -18,10 +18,6 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CIFS_UTILS,cifs-utils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-ifeq ($(ADK_STATIC),y)
-TARGET_LDFLAGS+=        -static
-endif
 
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-cifsupcall \

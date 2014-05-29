@@ -8,7 +8,7 @@ PKG_VERSION:=		4.0.14.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ab61c2f3db82382351f432f783980fa7
 PKG_DESCR:=		shell compiler for shorewall
-PKG_SECTION:=		firewall
+PKG_SECTION:=		net/firewall
 PKG_URL:=		http://www.shorewall.net
 PKG_SITES:=		http://www1.shorewall.net/pub/shorewall/4.0/shorewall-4.0.14/
 

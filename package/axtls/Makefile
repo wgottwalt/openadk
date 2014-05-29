@@ -7,8 +7,8 @@ PKG_NAME:=		axtls
 PKG_VERSION:=		1.4.9
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		6d519bc3b5f20faa6ef8d423f5062241
-PKG_DESCR:=		small embedded webserver with TLS
-PKG_SECTION:=		www
+PKG_DESCR:=		small embedded webserver with tls
+PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libaxtls
 PKG_URL:=		http://axtls.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=axtls/}
@@ -17,7 +17,7 @@ PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		AXHTTPD LIBAXTLS
 PKGSD_LIBAXTLS:=	small tls library
-PKGSC_LIBAXTLS:=	libs
+PKGSC_LIBAXTLS:=	libs/crypto
 
 DISTFILES:=		axTLS-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/axTLS

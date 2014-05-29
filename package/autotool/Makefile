@@ -8,7 +8,7 @@ PKG_NAME:=		autotool
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		2
 PKG_DESCR:=		autotool infrastructure for host
-PKG_SECTION:=		devel
+PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		m4-host pkgconf-host autoconf-host automake-host
 PKG_BUILDDEP+=		libtool-host
 

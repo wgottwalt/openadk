@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		37c8d2c029a7e5b82f4433a6fa1e2ee5
 PKG_DESCR:=		firmware for b43 wireless cards
-PKG_SECTION:=		wifi
+PKG_SECTION:=		sys/firmware
 PKG_SITES:=		http://openadk.org/distfiles/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

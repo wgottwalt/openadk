@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xcmiscproto
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
-PKG_DESCR:=		XC-MISC Extension headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		xc-misc extension headers
+PKG_SECTION:=		dev/header
 PKG_MD5SUM:=		9a8da85301db41e8435099ffefb4ac74
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly

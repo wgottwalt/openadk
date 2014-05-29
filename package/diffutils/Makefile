@@ -8,7 +8,7 @@ PKG_VERSION:=		2.8.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		71f9c5ae19b60608f6c7f162da86a428
 PKG_DESCR:=		show differences between two files
-PKG_SECTION:=		lang
+PKG_SECTION:=		sys/utils
 PKG_URL:=		http://www.gnu.org/software/diffutils/
 PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 PKG_BB:=		1

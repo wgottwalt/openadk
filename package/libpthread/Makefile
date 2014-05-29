@@ -14,8 +14,8 @@ include ${TOPDIR}/toolchain/uclibc/Makefile.inc
 endif
 
 PKG_NAME:=		libpthread
-PKG_DESCR:=		POSIX threading library
-PKG_SECTION:=		libs
+PKG_DESCR:=		posix threading library
+PKG_SECTION:=		libs/misc
 PKG_OPTS:=		noremove
 
 NO_DISTFILES:=		1

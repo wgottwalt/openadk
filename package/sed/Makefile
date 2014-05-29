@@ -8,7 +8,7 @@ PKG_VERSION:=		4.2.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		4111de4faa3b9848a0686b2f260c5056
 PKG_DESCR:=		stream editor
-PKG_SECTION:=		editor
+PKG_SECTION:=		app/editor
 PKG_URL:=		http://www.gnu.org/software/sed/
 PKG_SITES:=		${MASTER_SITE_GNU:=sed/}
 PKG_BB:=		1

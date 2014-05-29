@@ -7,7 +7,7 @@ PKG_NAME:=		alix-temperature
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		read alix boards i2c thermal sensor
-PKG_SECTION:=		utils
+PKG_SECTION:=		sys/utils
 PKG_DEPENDS:=		i2c-tools
 
 PKG_SYSTEM_DEPENDS:=	pcengines-alix2d2 pcengines-alix2d13

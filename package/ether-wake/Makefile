@@ -6,12 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ether-wake
 PKG_VERSION:=		1.09
 PKG_RELEASE:=		1
-PKG_DESCR:=		Wake-On-LAN (WOL) client
-PKG_SECTION:=		net
+PKG_DESCR:=		wake-on-lan client
+PKG_SECTION:=		net/misc
 PKG_BB:=		1
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
-
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
@@ -21,8 +20,6 @@ $(eval $(call PKG_template,ETHER_WAKE,ether-wake,${PKG_VERSION}-${PKG_RELEASE},$
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
-TARGET_CFLAGS+=		-Wall
 
 do-build:
 	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \

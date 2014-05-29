@@ -7,8 +7,8 @@ PKG_NAME:=		tcl
 PKG_VERSION:=		8.6.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		aae4b701ee527c6e4e1a6f9c7399882e
-PKG_DESCR:=		TCL scripting language
-PKG_SECTION:=		lang
+PKG_DESCR:=		tcl scripting language
+PKG_SECTION:=		dev/lang
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tcl/}
 
 DISTFILES:=		tcl${PKG_VERSION}-src.tar.gz

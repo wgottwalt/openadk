@@ -8,7 +8,7 @@ PKG_VERSION:=		0.2.4.21
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		bde981d10e8faf1e171ef1ebbb7b398a
 PKG_DESCR:=		anonymous internet communication system
-PKG_SECTION:=		proxy
+PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libevent libopenssl zlib libpthread
 PKG_BUILDDEP:=		libevent openssl zlib
 PKG_URL:=		https://www.torproject.org/
@@ -31,7 +31,11 @@ CONFIGURE_ENV+=		ac_cv_libevent_normal=yes \
 			tor_cv_null_is_zero=yes \
 			tor_cv_unaligned_ok=yes
 
+ifeq ($(ADK_TARGET_USE_SSP),y)
+CONFIGURE_ARGS+=	--enable-gcc-hardening
+else
 CONFIGURE_ARGS+=	--disable-gcc-hardening
+endif
 
 tor-install:
 	${INSTALL_DIR} ${IDIR_TOR}/usr/bin ${IDIR_TOR}/etc/tor

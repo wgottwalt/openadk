@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		00b516f4704d4a7cb50a1d97e6e8e15b
 PKG_DESCR:=		compression utility
-PKG_SECTION:=		archive
+PKG_SECTION:=		app/archive
 PKG_BUILDDEP:=		bzip2-host
 PKG_DEPENDS:=		libbz2
 PKG_URL:=		http://www.bzip.org/
@@ -21,7 +21,7 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		BZIP2 LIBBZ2
 PKGSD_LIBBZ2:=		bzip2 compression library
-PKGSC_LIBBZ2:=		libs
+PKGSC_LIBBZ2:=		libs/misc
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

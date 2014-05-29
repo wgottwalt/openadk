@@ -7,8 +7,8 @@ PKG_NAME:=		rrdtool
 PKG_VERSION:=		1.4.8
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		dbe59386db97fd2f2216729facd74ca8
-PKG_DESCR:=		Round Robin Database (RRD) management library
-PKG_SECTION:=		libs
+PKG_DESCR:=		round robin database management library
+PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libart libfreetype libpng zlib
 PKG_DEPENDS+=		glib cairo pango
 PKG_BUILDDEP:=		libxml2 cgilib freetype libart libpng
@@ -23,9 +23,9 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_SUBPKGS:=		LIBRRD RRDCGI RRDTOOL
-PKGSC_RRDCGI:=		misc
+PKGSC_RRDCGI:=		sys/misc
 PKGSD_RRDCGI:=		RRD CGI
-PKGSC_RRDTOOL:=		misc
+PKGSC_RRDTOOL:=		sys/misc
 PKGSD_RRDTOOL:=		RRD tool
 
 ifeq ($(ADK_STATIC),y)

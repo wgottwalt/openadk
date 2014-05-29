@@ -7,8 +7,8 @@ PKG_NAME:=		cutter
 PKG_VERSION:=		1.03
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		50093db9b64277643969ee75b83ebbd1
-PKG_DESCR:=		Abort TCP/IP connections routed over a firewall
-PKG_SECTION:=		firewall
+PKG_DESCR:=		abort tcp/ip connections routed over a firewall
+PKG_SECTION:=		net/firewall
 PKG_URL:=		http://www.lowth.com/cutter/software/
 PKG_SITES:=		http://openadk.org/distfiles/
 
@@ -21,8 +21,6 @@ $(eval $(call PKG_template,CUTTER,cutter,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
-TARGET_CFLAGS+=		-Wall
 
 do-build:
 	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \

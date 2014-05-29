@@ -7,8 +7,8 @@ PKG_NAME:=		libantlr3c
 PKG_VERSION:=		3.2
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		674646e1d1bf5c6015435480cead725a
-PKG_DESCR:=		ANother Tool for Language Recognition
-PKG_SECTION:=		libs
+PKG_DESCR:=		another tool for language recognition
+PKG_SECTION:=		libs/misc
 PKG_SITES:=		http://www.antlr.org/download/C/
 PKG_OPTS:=		dev
 

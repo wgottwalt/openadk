@@ -8,7 +8,7 @@ PKG_VERSION:=		2.17
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		c4867d72c41564318e0107745eb7a0f2
 PKG_DESCR:=		configuration utility for serial ports
-PKG_SECTION:=		serial
+PKG_SECTION:=		sys/serial
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=setserial/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

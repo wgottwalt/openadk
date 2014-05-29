@@ -7,8 +7,8 @@ PKG_NAME:=		faad2
 PKG_VERSION:=		2.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ee1b4d67ea2d76ee52c5621bc6dbf61e
-PKG_DESCR:=		MP4 decoding library
-PKG_SECTION:=		libs
+PKG_DESCR:=		mp4 decoding library
+PKG_SECTION:=		libs/video
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://sourceforge.net/projects/faac/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=faac/}
@@ -22,7 +22,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBFAAD2,libfaad2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 # check for lrintf fails on Darwin, don't know why
 CONFIGURE_ENV+=		ac_cv_c99_lrintf=yes
 CONFIGURE_ARGS+=	--without-mpeg4ip \

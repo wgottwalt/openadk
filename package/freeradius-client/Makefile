@@ -7,8 +7,8 @@ PKG_NAME:=		freeradius-client
 PKG_VERSION:=		1.1.6
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		edd4d904e802ff66d35532be1475cfa7
-PKG_DESCR:=		RADIUS client
-PKG_SECTION:=		ppp
+PKG_DESCR:=		radius client
+PKG_SECTION:=		net/radius
 PKG_DEPENDS:=		libopenssl libfreeradius-client
 PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://www.freeradius.org/
@@ -17,7 +17,7 @@ PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		FREERADIUS_CLIENT LIBFREERADIUS_CLIENT
-PKGSC_LIBFREERADIUS_CLIENT:=	libs
+PKGSC_LIBFREERADIUS_CLIENT:=	libs/net
 
 include ${TOPDIR}/mk/package.mk
 

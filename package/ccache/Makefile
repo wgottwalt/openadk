@@ -7,8 +7,8 @@ PKG_NAME:=		ccache
 PKG_VERSION:=		3.1.9
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		367916e4ecba4968f77f59a378e61458
-PKG_DESCR:=		ccache utility
-PKG_SECTION:=		misc
+PKG_DESCR:=		compiler cache utility
+PKG_SECTION:=		dev/tools
 PKG_SITES:=		http://samba.org/ftp/ccache/
 
 PKG_CFLINE_CCACHE:=	depends on ADK_HOST_ONLY

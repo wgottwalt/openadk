@@ -8,7 +8,7 @@ PKG_VERSION:=		1.11
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		04c394ed8e1e7fc455456e79e908916d
 PKG_DESCR:=		low-level networking library
-PKG_SECTION:=		libs
+PKG_SECTION:=		libs/net
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://libdnet.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=$(PKG_NAME)/}
@@ -21,7 +21,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBDNET,libdnet,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ENV+=		ac_cv_dnet_bsd_bpf=no
 CONFIGURE_ARGS+=	--without-check
 

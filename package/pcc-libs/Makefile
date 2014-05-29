@@ -7,8 +7,8 @@ PKG_NAME:=		pcc-libs
 PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a8dfcd6d3be512bc3f16f96c9abf132e
-PKG_DESCR:=		runtime for the Portable C Compiler
-PKG_SECTION:=		lang
+PKG_DESCR:=		runtime for the portable c compiler
+PKG_SECTION:=		dev/lang
 PKG_URL:=		http://pcc.ludd.ltu.se/
 PKG_SITES:=		http://pcc.ludd.ltu.se/ftp/pub/pcc-releases/
 

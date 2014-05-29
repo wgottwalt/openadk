@@ -7,8 +7,8 @@ PKG_NAME:=		lame
 PKG_VERSION:=		3.99
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		7abacd1d0a65a63733335786015626db
-PKG_DESCR:=		MP3 encoder
-PKG_SECTION:=		multimedia
+PKG_DESCR:=		mp3 encoder
+PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://lame.sourceforge.net/
@@ -19,8 +19,8 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		LAME LIBMP3LAME
-PKGSD_LIBMP3LAME:=	MP3 encoding library
-PKGSC_LIBMP3LAME:=	libs
+PKGSD_LIBMP3LAME:=	mp3 encoding library
+PKGSC_LIBMP3LAME:=	libs/audio
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

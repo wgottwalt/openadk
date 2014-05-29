@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xf86vidmodeproto
 PKG_VERSION:=		2.3.1
 PKG_RELEASE:=		1
-PKG_DESCR:=		XFree86-VidModeExtension extension headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		xfree86-vidmodeextension extension headers
+PKG_SECTION:=		dev/header
 PKG_MD5SUM:=		99016d0fe355bae0bb23ce00fb4d4a2c
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly

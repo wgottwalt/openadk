@@ -7,8 +7,8 @@ PKG_NAME:=		curl
 PKG_VERSION:=		7.37.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c35d0b20a7ef38951da81b6cae7e5c36
-PKG_DESCR:=		client-side URL transfer tool
-PKG_SECTION:=		www
+PKG_DESCR:=		client-side url transfer tool
+PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libcurl
 PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://curl.haxx.se/
@@ -19,19 +19,19 @@ PKG_OPTS:=		dev
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		CURL LIBCURL
-PKGSD_LIBCURL:=		client-side URL transfer library
-PKGSC_LIBCURL:=		libs
+PKGSD_LIBCURL:=		client-side url transfer library
+PKGSC_LIBCURL:=		libs/net
 PKGSS_LIBCURL:=		zlib
 
 PKG_FLAVOURS_CURL:=	WITH_IPV6
-PKGFD_WITH_IPV6:=	enable IPv6 support
+PKGFD_WITH_IPV6:=	enable ipv6 support
 
 PKG_CHOICES_LIBCURL:=	WITH_GNUTLS WITH_OPENSSL WITHOUT_SSL
-PKGCD_WITHOUT_SSL:=	use no SSL
-PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
+PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates libgmp
 PKGCB_WITH_OPENSSL:=	openssl
-PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
+PKGCD_WITH_GNUTLS:=	use gnutls for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates libgmp
 PKGCB_WITH_GNUTLS:=	gnutls
 

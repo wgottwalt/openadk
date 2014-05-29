@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xproto
 PKG_VERSION:=		7.0.23
 PKG_RELEASE:=		1
-PKG_DESCR:=		X Window System Core Protocol headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		x window system core protocol headers
+PKG_SECTION:=		dev/header
 PKG_MD5SUM:=		7ab1239930563a352cb3552fd2db4140
 PKG_BUILDDEP:=		xproto-host
 PKG_SITES:=		${MASTER_SITE_XORG}

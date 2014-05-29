@@ -7,7 +7,7 @@ PKG_NAME:=		alix-switch
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		4
 PKG_DESCR:=		daemon listening on button events
-PKG_SECTION:=		base
+PKG_SECTION:=		base/misc
 PKG_URL:=		http://openadk.org/
 
 PKG_SYSTEM_DEPENDS:=	pcengines-alix2d2 pcengines-alix2d13
@@ -21,8 +21,6 @@ $(eval $(call PKG_template,ALIX_SWITCH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE}
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
-TARGET_CFLAGS+=		-Wall
 
 do-build:
 	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \

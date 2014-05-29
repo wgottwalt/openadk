@@ -8,16 +8,13 @@ PKG_VERSION:=		4.8
 PKG_RELEASE:=		8
 PKG_MD5SUM:=		c575ef43829586801f514fd91bfe7575
 PKG_DESCR:=		system call trace program
-PKG_SECTION:=		debug
+PKG_SECTION:=		app/debug
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
 
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,STRACE,strace,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_STATIC),y)
-TARGET_CFLAGS+=		-static
-endif
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CPPFLAGS+=	-DMSG_EXCEPT=020000 -D_LARGEFILE64_SOURCE=1
 ifeq ($(ADK_LINUX_PPC),y)

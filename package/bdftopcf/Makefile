@@ -7,9 +7,9 @@ PKG_NAME:=		bdftopcf
 PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		f2d5c8a7813c3f9902e163c620a83dd4
-PKG_DESCR:=		bdftopcf font utility
+PKG_DESCR:=		font converter utility
 PKG_BUILDDEP:=		libXfont
-PKG_SECTION:=		x11/apps
+PKG_SECTION:=		x11/fonts
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

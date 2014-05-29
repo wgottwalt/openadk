@@ -7,8 +7,8 @@ PKG_NAME:=		damageproto
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		bf8c47b7f48625230cff155180f8ddce
-PKG_DESCR:=		X DAMAGE Extension headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		x damage extension headers
+PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=              dev devonly
 

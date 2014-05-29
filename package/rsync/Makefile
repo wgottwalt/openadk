@@ -20,11 +20,6 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RSYNC,rsync,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_STATIC),y)
-TARGET_CFLAGS+=		-static
-TARGET_LDFLAGS+=	-static
-endif
-
 rsync-install:
 	${INSTALL_DIR} ${IDIR_RSYNC}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/rsync ${IDIR_RSYNC}/usr/bin

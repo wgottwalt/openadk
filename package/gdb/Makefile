@@ -6,7 +6,7 @@ include ${TOPDIR}/toolchain/gdb/Makefile.inc
 
 PKG_NAME:=		gdb
 PKG_DESCR:=		programm debugger
-PKG_SECTION:=		debug
+PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libthread-db libncurses libexpat zlib
 PKG_BUILDDEP:=		ncurses readline libiconv-tiny expat zlib
 PKG_NOPARALLEL:=	1
@@ -14,11 +14,6 @@ PKG_NOPARALLEL:=	1
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-ifeq ($(ADK_STATIC),y)
-TARGET_CFLAGS+=         -static
-CONFIGURE_ARGS+=	--enable-static
-endif
 
 TARGET_CFLAGS+=		${TARGET_CPPFLAGS} -fPIC
 CONFIGURE_ARGS+=	--without-uiout \

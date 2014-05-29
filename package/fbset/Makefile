@@ -9,7 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		e547cfcbb8c1a4f2a6b8ba4acb8b7164
 PKG_DESCR:=		framebuffer utility
 PKG_DEPENDS:=		bison-host flex-host
-PKG_SECTION:=		utils
+PKG_SECTION:=		sys/utils
 PKG_SITES:=		http://users.telenet.be/geertu/Linux/fbdev/
 PKG_BB:=		1
 

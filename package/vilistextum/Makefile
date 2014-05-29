@@ -8,7 +8,7 @@ PKG_VERSION:=		2.6.9
 PKG_RELEASE:=		1
 PKG_MD5SUM:=            5ba56ffdc56758da716bb46c3e0f517e
 PKG_DESCR:=		html to ascii converter
-PKG_SECTION:=		mail
+PKG_SECTION:=		net/mail
 PKG_BUILDDEP:=		libiconv-tiny
 PKG_SITES:=		http://bhaak.dyndns.org/${PKG_NAME}/
 

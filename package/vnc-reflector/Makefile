@@ -7,8 +7,8 @@ PKG_NAME:=		vnc-reflector
 PKG_VERSION:=		1.2.4
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		c3f88bc62f228b335c25c07f9744ab0c
-PKG_DESCR:=		specialized VNC server which acts as a proxy
-PKG_SECTION:=		proxy
+PKG_DESCR:=		specialized vnc server which acts as a proxy
+PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libjpeg-turbo zlib
 PKG_BUILDDEP:=		libjpeg-turbo zlib
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vnc-reflector/}

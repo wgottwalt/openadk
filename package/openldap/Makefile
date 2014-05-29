@@ -7,8 +7,8 @@ PKG_NAME:=		openldap
 PKG_VERSION:=		2.4.39
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b0d5ee4b252c841dec6b332d679cf943
-PKG_DESCR:=		LDAP client libraries
-PKG_SECTION:=		libs
+PKG_DESCR:=		ldap client libraries
+PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libopenssl libsasl2 libdb libpthread libuuid libstdcxx
 PKG_BUILDDEP:=		cyrus-sasl openssl db util-linux
 PKG_URL:=		http://www.openldap.org/
@@ -17,10 +17,10 @@ PKG_LIBNAME:=		libopenldap
 PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		LIBOPENLDAP OPENLDAP_UTILS OPENLDAP_SLAPD
-PKGSD_OPENLDAP_UTILS:=	OpenLDAP utilities
+PKGSD_OPENLDAP_UTILS:=	ldap utilities
 PKGSS_OPENLDAP_UTILS:=	libopenldap
 PKGSC_OPENLDAP_UTILS:=	net/misc
-PKGSD_OPENLDAP_SLAPD:=	OpenLDAP server daemon
+PKGSD_OPENLDAP_SLAPD:=	ldap server daemon
 PKGSS_OPENLDAP_SLAPD:=	libopenldap
 PKGSC_OPENLDAP_SLAPD:=	net/misc
 

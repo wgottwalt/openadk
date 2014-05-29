@@ -7,8 +7,8 @@ PKG_NAME:=		mpdbox
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		ac0dc1cc7141c1eca66d8ddd98574e0b
-PKG_DESCR:=		MPD web interface
-PKG_SECTION:=		multimedia
+PKG_DESCR:=		mpd web interface
+PKG_SECTION:=		mm/audio
 PKG_URL:=		http://www.openadk.org/cgi-bin/gitweb.cgi?p=mpdbox.git;a=summary
 PKG_SITES:=		http://www.openadk.org/distfiles/
 

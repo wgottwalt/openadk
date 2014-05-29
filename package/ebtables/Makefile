@@ -8,7 +8,7 @@ PKG_VERSION:=		2.0.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		506742a3d44b9925955425a659c1a8d0
 PKG_DESCR:=		ethernet bridging firewall tool
-PKG_SECTION:=		firewall
+PKG_SECTION:=		net/route
 PKG_URL:=		http://ebtables.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ebtables/}
 

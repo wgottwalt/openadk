@@ -8,15 +8,15 @@ PKG_VERSION:=		3.7
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		66de1b073e869ba12abbfcde3885c577
 PKG_DESCR:=		small editor
-PKG_SECTION:=		editor
+PKG_SECTION:=		app/editor
 PKG_URL:=		http://joe-editor.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=joe-editor/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_FLAVOURS_JOE:=	LANGUAGE SYNTAX
-PKGFD_LANGUAGE:=	Install translation files
-PKGFD_SYNTAX:=		Install syntax highlighting files
+PKGFD_LANGUAGE:=	install translation files
+PKGFD_SYNTAX:=		install syntax highlighting files
 
 include ${TOPDIR}/mk/package.mk
 

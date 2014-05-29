@@ -8,7 +8,7 @@ PKG_VERSION:=		5.13
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		153455f008f1cf8f65f6ad9586a21ff1
 PKG_DESCR:=		watchdog daemon
-PKG_SECTION:=		utils
+PKG_SECTION:=		sys/utils
 PKG_DEPENDS:=		libtirpc
 PKG_BUILDDEP:=		libtirpc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=watchdog/}

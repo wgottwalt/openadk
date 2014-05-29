@@ -8,7 +8,7 @@ PKG_VERSION:=		0.50.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		23fbd879118253cb99aeac067da5f591
 PKG_DESCR:=		internationalization utility to create po files
-PKG_SECTION:=		misc
+PKG_SECTION:=		dev/tools
 PKG_URL:=		http://freedesktop.org/wiki/Software/intltool/
 PKG_SITES:=		https://launchpad.net/intltool/trunk/0.50.2/+download/
 

@@ -7,8 +7,8 @@ PKG_NAME:=		obexftp
 PKG_VERSION:=		0.23
 PKG_RELEASE:=		4
 PKG_MD5SUM:=		f20762061b68bc921e80be4aebc349eb
-PKG_DESCR:=		OBEX ftp application
-PKG_SECTION:=		misc
+PKG_DESCR:=		bluetooth ftp application
+PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		openobex libobexftp
 PKG_BUILDDEP:=		openobex libiconv-tiny
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/ObexFtp
@@ -17,7 +17,7 @@ PKG_LIBNAME:=		libobexftp
 PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		OBEXFTP LIBOBEXFTP
-PKGSC_LIBOBEXFTP:=	libs
+PKGSC_LIBOBEXFTP:=	libs/net
 PKGSD_LIBOBEXFTP:=	obex ftp library
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2

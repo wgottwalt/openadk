@@ -7,9 +7,9 @@ PKG_NAME:=		jikes
 PKG_VERSION:=		1.22
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		cda958c7fef6b43b803e1d1ef9afcb85
-PKG_DESCR:=		jikes java compiler
+PKG_DESCR:=		java compiler
 PKG_BUILDDEP:=		jikes-host
-PKG_SECTION:=		lang
+PKG_SECTION:=		dev/lang
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jikes/Jikes/1.22/}
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2

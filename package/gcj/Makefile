@@ -7,8 +7,8 @@ PKG_NAME:=		gcj
 PKG_VERSION:=		4.8.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a3d7d63b9cb6b6ea049469a0c4a43c9d
-PKG_DESCR:=		GNU java compiler
-PKG_SECTION:=		lang
+PKG_DESCR:=		java compiler
+PKG_SECTION:=		dev/lang
 PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
 
 PKG_CFLINE_GCJ:=	depends on ADK_HOST_ONLY

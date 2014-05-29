@@ -7,8 +7,8 @@ PKG_NAME:=		wget
 PKG_VERSION:=		1.15
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		506df41295afc6486662cc47470b4618
-PKG_DESCR:=		retrieving files using HTTP(S) and FTP
-PKG_SECTION:=		www
+PKG_DESCR:=		retrieving files using http(s) and ftp
+PKG_SECTION:=		net/http
 PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.gnu.org/software/wget/
 PKG_SITES:=		${MASTER_SITE_GNU:=wget/}

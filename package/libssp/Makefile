@@ -15,7 +15,7 @@ endif
 
 PKG_NAME:=		libssp
 PKG_DESCR:=		stack smashing protection library
-PKG_SECTION:=		libs
+PKG_SECTION:=		libs/misc
 PKG_OPTS:=		noremove
 
 NO_DISTFILES:=		1

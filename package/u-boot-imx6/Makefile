@@ -8,7 +8,7 @@ PKG_VERSION:=		20140416
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		f2a5f697670c340eef8074f6a5f26476
 PKG_DESCR:=		bootloader for imx6 (cubox-i)
-PKG_SECTION:=		boot
+PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/SolidRun/u-boot-imx6.git
 PKG_SITES:=		http://openadk.org/distfiles/
 

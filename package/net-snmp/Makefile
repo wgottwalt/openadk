@@ -7,7 +7,7 @@ PKG_NAME:=		net-snmp
 PKG_VERSION:=		5.7.2.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		7db683faba037249837b226f64d566d4
-PKG_DESCR:=		SNMP Agent
+PKG_DESCR:=		snmp agent
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libnetsnmp libelf libnl
 PKG_BUILDDEP:=		libelf libnl
@@ -20,14 +20,14 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		SNMPD SNMP_UTILS LIBNETSNMP
-PKGSD_SNMP_UTILS:=	SNMP utilities
+PKGSD_SNMP_UTILS:=	snmp utilities
 PKGSS_SNMP_UTILS:=	libnetsnmp libelf
-PKGSD_LIBNETSNMP:=	SNMP library
+PKGSD_LIBNETSNMP:=	snmp library
 PKGSS_LIBNETSNMP:=	libelf
-PKGSC_LIBNETSNMP:=	libs
+PKGSC_LIBNETSNMP:=	libs/net
 
 PKG_FLAVOURS_SNMPD:=	WITH_IPV6
-PKGFD_WITH_IPV6:=	enable IPv6 support
+PKGFD_WITH_IPV6:=	enable ipv6 support
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

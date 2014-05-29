@@ -6,8 +6,8 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		ttcp
 PKG_VERSION:=		3.8
 PKG_RELEASE:=		1
-PKG_DESCR:=		A small utility to test TCP connection performance
-PKG_SECTION:=		net
+PKG_DESCR:=		small utility to test tcp connection performance
+PKG_SECTION:=		net/perf
 
 NO_DISTFILES:=		1
 
@@ -18,8 +18,6 @@ $(eval $(call PKG_template,TTCP,ttcp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
-
-TARGET_CFLAGS+=		-Wall
 
 do-build:
 	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \

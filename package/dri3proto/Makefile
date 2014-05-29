@@ -7,8 +7,8 @@ PKG_NAME:=		dri3proto
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		25e84a49a076862277ee12aebd49ff5f
-PKG_DESCR:=		DRI protocol headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		dri3 protocol headers
+PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=              dev devonly
 

@@ -7,8 +7,8 @@ PKG_NAME:=		tinyxml
 PKG_VERSION:=		2.6.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2a0aaf609c9e670ec9748cd01ed52dae
-PKG_DESCR:=		a simple, small, minimal, C++ XML parser
-PKG_SECTION:=		libs
+PKG_DESCR:=		simple, small, minimal, c++ xml parser
+PKG_SECTION:=		libs/data
 PKG_URL:=		http://sourceforge.net/projects/tinyxml/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tinyxml/}
 PKG_OPTS:=		dev

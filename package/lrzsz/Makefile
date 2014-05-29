@@ -7,8 +7,8 @@ PKG_NAME:=		lrzsz
 PKG_VERSION:=		0.12.20
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b5ce6a74abc9b9eb2af94dffdfd372a4
-PKG_DESCR:=		X-Modem, Y-modem, Z-modem protocol handlers
-PKG_SECTION:=		serial
+PKG_DESCR:=		x-Modem, y-modem, z-modem protocol handlers
+PKG_SECTION:=		sys/serial
 PKG_URL:=		http://www.ohse.de/uwe/software/lrzsz.html
 PKG_SITES:=		http://www.ohse.de/uwe/releases/
 

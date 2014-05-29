@@ -8,7 +8,7 @@ PKG_VERSION:=		4.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d104007fdf5ea64fef774c22b1c0a97b
 PKG_DESCR:=		ip sets administration utility
-PKG_SECTION:=		firewall
+PKG_SECTION:=		net/firewall
 PKG_URL:=		http://ipset.netfilter.org/
 PKG_SITES:=		http://ipset.netfilter.org/
 

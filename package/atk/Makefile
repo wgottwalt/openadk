@@ -7,8 +7,8 @@ PKG_NAME:=		atk
 PKG_VERSION:=		2.11.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2b4316e69cbe0a1998ba39cdc8c89692
-PKG_DESCR:=		atk library
-PKG_SECTION:=		libs
+PKG_DESCR:=		accessibility toolkit library
+PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		glib
 PKG_URL:=		http://www.gnome.org/
 PKG_SITES:=		${MASTER_SITE_GNOME:=/atk/2.11/}

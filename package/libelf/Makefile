@@ -6,7 +6,7 @@ include ${TOPDIR}/toolchain/libelf/Makefile.inc
 
 PKG_NAME:=		libelf
 PKG_DESCR:=		elf library
-PKG_SECTION:=		libs
+PKG_SECTION:=		libs/misc
 PKG_SITES:=		http://www.mr511.de/software/
 PKG_OPTS:=		dev
 

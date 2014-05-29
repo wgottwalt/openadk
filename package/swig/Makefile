@@ -8,7 +8,7 @@ PKG_VERSION:=		2.0.11
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		291ba57c0acd218da0b0916c280dcbae
 PKG_DESCR:=		swig utility
-PKG_SECTION:=		lang
+PKG_SECTION:=		dev/tools
 PKG_URL:=		http://www.swig.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=swig/}
 

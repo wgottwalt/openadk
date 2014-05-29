@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		57eaf4bb58e86476ec89cfb42d675961
 PKG_DESCR:=		present protocol headers
-PKG_SECTION:=		devel
+PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=              dev devonly
 

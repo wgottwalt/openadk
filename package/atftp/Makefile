@@ -7,8 +7,8 @@ PKG_NAME:=		atftp
 PKG_VERSION:=		0.7
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		3b27365772d918050b2251d98a9c7c82
-PKG_DESCR:=		TFTP client
-PKG_SECTION:=		dhcp
+PKG_DESCR:=		tftp client
+PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libreadline libncurses
 PKG_BUILDDEP:=		readline ncurses
 PKG_URL:=		http://freshmeat.net/projects/atftp/
@@ -19,7 +19,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_SUBPKGS:=		ATFTP ATFTPD
-PKGSD_ATFTPD:=		TFTP server
+PKGSD_ATFTPD:=		tftp server
 PKGSS_ATFTPD:=		libreadline libncurses
 
 include $(TOPDIR)/mk/package.mk

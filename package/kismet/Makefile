@@ -7,17 +7,17 @@ PKG_NAME:=		kismet
 PKG_VERSION:=		2013-03-R1b
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		596acdd2940887dd05a498ea27475eea
-PKG_DESCR:=		Kismet
-PKG_SECTION:=		wifi
+PKG_DESCR:=		wireless network detector, sniffer, and intrusion detection system
+PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		libpcap libncurses libpthread
 PKG_BUILDDEP:=		autotool libpcap ncurses
 PKG_URL:=		http://www.kismetwireless.net/
 PKG_SITES:=		http://www.kismetwireless.net/code/
 
 PKG_SUBPKGS:=		KISMET KISMET_CLIENT KISMET_DRONE KISMET_SERVER
-PKGSD_KISMET_CLIENT:=	Kismet client
-PKGSD_KISMET_SERVER:=	Kismet server
-PKGSD_KISMET_DRONE:=	Kismet drone
+PKGSD_KISMET_CLIENT:=	kismet client
+PKGSD_KISMET_SERVER:=	kismet server
+PKGSD_KISMET_DRONE:=	kismet drone
 
 include ${TOPDIR}/mk/package.mk
 

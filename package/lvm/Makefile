@@ -8,7 +8,7 @@ PKG_VERSION:=		2.02.106
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		77f84279fb649b3dc4edad1c6d1a1b0e
 PKG_DESCR:=		logical volume management
-PKG_SECTION:=		fs
+PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libdevmapper libncurses
 PKG_BUILDDEP:=		ncurses util-linux
 PKG_URL:=		http://sourceware.org/lvm2/
@@ -20,7 +20,7 @@ PKG_SUBPKGS:=		LVM DEVICE_MAPPER LIBDEVMAPPER
 PKGSD_DEVICE_MAPPER:=	device-mapper utility
 PKGSS_DEVICE_MAPPER:=	libdevmapper
 PKGSD_LIBDEVMAPPER:=	device-mapper library
-PKGSC_LIBDEVMAPPER:=	libs
+PKGSC_LIBDEVMAPPER:=	libs/misc
 
 DISTFILES:=		LVM2.${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/LVM2.${PKG_VERSION}

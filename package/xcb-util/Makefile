@@ -7,8 +7,8 @@ PKG_NAME:=		xcb-util
 PKG_VERSION:=		0.3.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a8f8f710a202079d1ead532abd061672
-PKG_DESCR:=		XCB utils
-PKG_SECTION:=		x11/apps
+PKG_DESCR:=		libraries which sit on top of libxcb
+PKG_SECTION:=		x11/libs
 PKG_SITES:=		http://xcb.freedesktop.org/dist/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

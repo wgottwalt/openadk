@@ -6,12 +6,12 @@ include $(TOPDIR)/toolchain/musl/Makefile.inc
 
 PKG_NAME:=		musl
 PKG_DESCR:=		embedded C library
-PKG_SECTION:=		base
+PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove
 
 PKG_SUBPKGS:=		MUSL MUSL_DEV
 PKGSD_MUSL_DEV:=	development files for musl
-PKGSC_MUSL_DEV:=	devel
+PKGSC_MUSL_DEV:=	dev/header
 
 NO_DISTFILES:=		1
 

@@ -8,13 +8,13 @@ PKG_VERSION:=		1.4.35
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c7ae774eab4cb7ac85e41b712f4ee9ba
 PKG_DESCR:=		lightweight web server
-PKG_SECTION:=		www
+PKG_SECTION:=		net/http
 PKG_URL:=		http://www.lighttpd.net/
 PKG_SITES:=		http://download.lighttpd.net/lighttpd/releases-1.4.x/
 
 PKG_FLAVOURS_LIGHTTPD:=	WITH_IPV6 WITH_SSL
-PKGFD_WITH_IPV6:=	enable IPv6 support
-PKGFD_WITH_SSL:=	enable SSL support
+PKGFD_WITH_IPV6:=	enable ipv6 support
+PKGFD_WITH_SSL:=	enable ssl support
 PKGFB_WITH_SSL:=	openssl
 PKGFS_WITH_SSL:=	libopenssl
 

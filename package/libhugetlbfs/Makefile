@@ -8,7 +8,7 @@ PKG_VERSION:=		2.11
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		35e68f16b704f2e339622a8ca07fdee0
 PKG_DESCR:=		easy hugepage access
-PKG_SECTION:=		libs
+PKG_SECTION:=		libs/misc
 PKG_URL:=		http://libhugetlbfs.ozlabs.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libhugetlbfs/}
 PKG_OPTS:=		dev

@@ -402,14 +402,14 @@ endif
 			>> $(TOPDIR)/all.config; \
 	fi
 
-menuconfig: $(CONFIG)/mconf defconfig .menu package/Config.in.auto
+menuconfig: $(CONFIG)/mconf defconfig .menu package/Config.in.auto.global
 	@if [ ! -f .config ];then \
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
 	fi
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
-_config: $(CONFIG)/conf .menu package/Config.in.auto
+_config: $(CONFIG)/conf .menu package/Config.in.auto.global
 	-@touch .config
 	@$(CONFIG)/conf ${W} $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
@@ -444,7 +444,7 @@ $(TOPDIR)/adk/tools/pkgmaker: $(TOPDIR)/adk/tools/pkgmaker.c $(TOPDIR)/adk/tools
 $(TOPDIR)/adk/tools/pkgrebuild: $(TOPDIR)/adk/tools/pkgrebuild.c $(TOPDIR)/adk/tools/strmap.c
 	@$(CC_FOR_BUILD) -g -o $@ adk/tools/pkgrebuild.c adk/tools/strmap.c
 
-package/Config.in.auto menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) $(TOPDIR)/adk/tools/pkgmaker $(TOPDIR)/adk/tools/pkgrebuild
+package/Config.in.auto.global menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) $(TOPDIR)/adk/tools/pkgmaker $(TOPDIR)/adk/tools/pkgrebuild
 	@echo "Generating menu structure ..."
 	@$(TOPDIR)/adk/tools/pkgmaker
 	@:>.menu

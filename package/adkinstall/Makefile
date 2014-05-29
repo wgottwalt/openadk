@@ -6,8 +6,8 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		adkinstall
 PKG_VERSION:=		2.0
 PKG_RELEASE:=		1
-PKG_DESCR:=		ADK disk/flash installer
-PKG_SECTION:=		base
+PKG_DESCR:=		adk disk/flash installer
+PKG_SECTION:=		base/misc
 PKG_DEPENDS:=		mke2fs parted sfdisk dosfstools mksh
 
 PKG_SYSTEM_DEPENDS:=	mikrotik-rb532 lemote-yeelong

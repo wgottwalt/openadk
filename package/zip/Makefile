@@ -8,7 +8,7 @@ PKG_VERSION:=		3.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		7b74551e63f8ee6aab6fbc86676c0d37
 PKG_DESCR:=		zip compression utility
-PKG_SECTION:=		archive
+PKG_SECTION:=		app/archive
 PKG_URL:=		http://www.info-zip.org/Zip.html
 PKG_SITES:=		ftp://ftp.info-zip.org/pub/infozip/src/
 

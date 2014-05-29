@@ -8,7 +8,7 @@ PKG_VERSION:=		3.1.7
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		46f941bdab738a2a11ecc2a5f757ec77
 PKG_DESCR:=		internet bandwidth tester
-PKG_SECTION:=		net
+PKG_SECTION:=		net/perf
 PKG_URL:=		http://tptest.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tptest/}
 

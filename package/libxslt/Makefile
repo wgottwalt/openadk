@@ -7,8 +7,8 @@ PKG_NAME:=		libxslt
 PKG_VERSION:=		1.1.28
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		9667bf6f9310b957254fdcf6596600b7
-PKG_DESCR:=		XSLT Library
-PKG_SECTION:=		libs
+PKG_DESCR:=		xslt Library
+PKG_SECTION:=		libs/data
 PKG_DEPENDS:=		libxml2 libstdcxx
 PKG_BUILDDEP:=		autotool libxml2
 HOST_BUILDDEP:=		libxml2-host
@@ -20,7 +20,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		LIBXSLT XSLTPROC
 PKGSD_XSLTPROC:=	XSLT processor utility
-PKGSC_XSLTPROC:=	misc
+PKGSC_XSLTPROC:=	sys/misc
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

@@ -7,7 +7,7 @@ PKG_NAME:=		dropbear
 PKG_VERSION:=		2014.63
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		7066bb9a2da708f3ed06314fdc9c47fd
-PKG_DESCR:=		SSH 2 server/client designed for embedded systems
+PKG_DESCR:=		ssh server/client designed for embedded systems
 PKG_SECTION:=		net/security
 PKG_URL:=		http://matt.ucc.asn.au/dropbear/
 PKG_SITES:=		http://matt.ucc.asn.au/dropbear/releases/
@@ -24,10 +24,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DROPBEAR,dropbear,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBCONVERT},${PKG_SECTION}))
-
-ifeq ($(ADK_STATIC),y)
-TARGET_LDFLAGS+=	-static
-endif
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual

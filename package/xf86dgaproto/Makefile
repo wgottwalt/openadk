@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xf86dgaproto
 PKG_VERSION:=		2.1
 PKG_RELEASE:=		1
-PKG_DESCR:=		XFree86-DGA headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		xfree86-dga headers
+PKG_SECTION:=		dev/header
 PKG_MD5SUM:=		1fe79dc07857ad3e1fb8b8f2bdd70d1b
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly

@@ -7,7 +7,7 @@ PKG_NAME:=		huawei
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
 PKG_DESCR:=		huawei modem control
-PKG_SECTION:=		utils
+PKG_SECTION:=		sys/utils
 PKG_DEPENDS:=		libusb libusb-compat
 PKG_BUILDDEP:=		libusb libusb-compat
 
@@ -20,8 +20,6 @@ $(eval $(call PKG_template,HUAWEI,huawei,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
-TARGET_CFLAGS+=		-Wall
 
 do-build:
 	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \

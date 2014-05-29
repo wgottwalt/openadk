@@ -7,8 +7,8 @@ PKG_NAME:=		dhcp-forwarder
 PKG_VERSION:=		0.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		3b96dd27f6d05502d4048acab453808d
-PKG_DESCR:=		DHCP relay agent
-PKG_SECTION:=		dhcp
+PKG_DESCR:=		dhcp relay agent
+PKG_SECTION:=		net/dns
 PKG_URL:=		http://www.nongnu.org/dhcp-fwd/
 PKG_SITES:=		http://savannah.nongnu.org/download/dhcp-fwd/
 

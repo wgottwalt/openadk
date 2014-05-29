@@ -8,7 +8,7 @@ PKG_VERSION:=		8.4.4
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		b51815343c1a9151e2936b3b97520388
 PKG_DESCR:=		admin tools for drbd
-PKG_SECTION:=		fs
+PKG_SECTION:=		sys/fs
 PKG_URL:=		http://www.drbd.org/
 PKG_SITES:=		http://oss.linbit.com/drbd/8.4/
 

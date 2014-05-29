@@ -8,7 +8,7 @@ PKG_VERSION:=		2.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		5f83a3e8aec18331cb61069dccdfba47
 PKG_DESCR:=		allowing network connections to serial ports
-PKG_SECTION:=		net
+PKG_SECTION:=		net/misc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ser2net/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

@@ -7,8 +7,8 @@ PKG_NAME:=		genext2fs
 PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		b7b6361bcce2cedff1ae437fadafe53b
-PKG_DESCR:=		genext2fs utility
-PKG_SECTION:=		fs
+PKG_DESCR:=		generate ext2 filesystem utility
+PKG_SECTION:=		sys/fs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=genext2fs/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

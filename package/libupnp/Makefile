@@ -7,8 +7,8 @@ PKG_NAME:=		libupnp
 PKG_VERSION:=		1.6.19
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ee16e5d33a3ea7506f38d71facc057dd
-PKG_DESCR:=		The Universal Plug and Play (UPnP) SDK library
-PKG_SECTION:=		libs
+PKG_DESCR:=		universal plug and play sdk library
+PKG_SECTION:=		libs/net
 PKG_BUILDDEP:=		autotool
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://pupnp.sourceforge.net/
@@ -22,7 +22,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBUPNP,libupnp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--disable-samples
 

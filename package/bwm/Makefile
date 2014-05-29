@@ -7,8 +7,8 @@ PKG_NAME:=		bwm
 PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		51021a036acb92d2bda0c0c0483f9552
-PKG_DESCR:=		A very tiny bandwidth monitor
-PKG_SECTION:=		net
+PKG_DESCR:=		very tiny bandwidth monitor
+PKG_SECTION:=		net/perf
 PKG_SITES:=		http://ftp.debian.org/debian/pool/main/b/bwm/
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz

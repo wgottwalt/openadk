@@ -7,8 +7,8 @@ PKG_NAME:=		keychain
 PKG_VERSION:=		2.7.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		07c622833192189f483cbaec287f9704
-PKG_DESCR:=		manage ssh and GPG keys in a secure manner
-PKG_SECTION:=		crypto
+PKG_DESCR:=		manage ssh and gpg keys in a secure manner
+PKG_SECTION:=		app/crypto
 PKG_URL:=		http://www.funtoo.org/en/security/keychain/intro/
 PKG_SITES:=		http://www.funtoo.org/archive/keychain/
 

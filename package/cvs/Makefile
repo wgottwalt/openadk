@@ -8,7 +8,7 @@ PKG_VERSION:=		1.11.23
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		bf185eb51b5918330a04671c3f3cccde
 PKG_DESCR:=		concurrent version system
-PKG_SECTION:=		scm
+PKG_SECTION:=		dev/scm
 PKG_URL:=		http://www.nongnu.org/cvs/
 PKG_SITES:=		http://ftp.gnu.org/non-gnu/cvs/source/stable/${PKG_VERSION}/
 

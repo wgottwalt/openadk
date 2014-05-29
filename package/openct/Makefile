@@ -8,7 +8,7 @@ PKG_VERSION:=		0.6.20
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		a1da3358ab798f1cb9232f1dbababc21
 PKG_DESCR:=		drivers for smart card readers
-PKG_SECTION:=		crypto
+PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libopenct
 PKG_BUILDDEP:=		libtool
 PKG_URL:=		http://www.opensc-project.org/openct/
@@ -20,7 +20,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		OPENCT LIBOPENCT
 PKGSD_LIBOPENCT:=	crypto token library 
-PKGSC_LIBOPENCT:=	libs
+PKGSC_LIBOPENCT:=	libs/crypto
 PKGSS_LIBOPENCT:=	libltdl libusb
 PKGSB_LIBOPENCT:=	libtool libusb
 

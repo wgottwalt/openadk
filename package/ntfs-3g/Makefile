@@ -8,7 +8,7 @@ PKG_VERSION:=		2014.2.15
 PKG_RELEASE:=		4
 PKG_MD5SUM:=		f11d563816249d730a00498983485f3a
 PKG_DESCR:=		ntfs filesystem driver using fuse
-PKG_SECTION:=		fs
+PKG_SECTION:=		sys/fs
 PKG_URL:=		http://tuxera.com
 PKG_SITES:=		http://tuxera.com/opensource/
 

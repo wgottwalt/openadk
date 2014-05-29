@@ -8,7 +8,7 @@ PKG_VERSION:=		1.1a
 PKG_RELEASE:=		7
 PKG_MD5SUM:=		bbc5a3a4485ab286e337ce8550e7b990
 PKG_DESCR:=		tc based traffic shaping tool
-PKG_SECTION:=		firewall
+PKG_SECTION:=		net/firewall
 PKG_URL:=		http://lartc.org/wondershaper/
 PKG_SITES:=		http://lartc.org/wondershaper/
 

@@ -7,8 +7,8 @@ PKG_NAME:=		cdrtools
 PKG_VERSION:=		3.01
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		afd4563e335a614a11e042c7b6734d66
-PKG_DESCR:=		cdrtools
-PKG_SECTION:=		fs
+PKG_DESCR:=		cd writing tools
+PKG_SECTION:=		sys/fs
 PKG_URL:=		http://cdrecord.berlios.de/private/cdrecord.html
 PKG_SITES:=		ftp://ftp.berlios.de/pub/cdrecord/
 

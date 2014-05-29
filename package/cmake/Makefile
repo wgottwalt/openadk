@@ -8,7 +8,7 @@ PKG_VERSION:=		2.8.12
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		105bc6d21cc2e9b6aff901e43c53afea
 PKG_DESCR:=		cmake utility
-PKG_SECTION:=		lang
+PKG_SECTION:=		dev/tools
 PKG_URL:=		http://www.cmake.org/
 PKG_SITES:=		http://www.cmake.org/files/v2.8/
 

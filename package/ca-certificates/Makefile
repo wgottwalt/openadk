@@ -7,8 +7,8 @@ PKG_NAME:=		ca-certificates
 PKG_VERSION:=		20090814
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		307052c985bec7f9a00eb84293eef779
-PKG_DESCR:=		Collection of common CA certificates
-PKG_SECTION:=		net/security
+PKG_DESCR:=		collection of common ca certificates
+PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		openssl-util libopenssl
 PKG_URL:=		http://packages.debian.org/sid/ca-certificates
 PKG_SITES:=		http://ftp.debian.org/debian/pool/main/c/ca-certificates/
@@ -16,7 +16,7 @@ PKG_SITES:=		http://ftp.debian.org/debian/pool/main/c/ca-certificates/
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 
 PKG_FLAVOURS_CA_CERTS:=	SMALL
-PKGFD_SMALL:=		Minimal set of CA certificates
+PKGFD_SMALL:=		minimal set of CA certificates
 
 include $(TOPDIR)/mk/package.mk
 

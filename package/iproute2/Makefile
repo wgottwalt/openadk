@@ -7,27 +7,27 @@ PKG_NAME:=		iproute2
 PKG_VERSION:=		3.12.0
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		f87386aaaecafab95607fd10e8152c68
-PKG_DESCR:=		iproute2 routing control utility
-PKG_SECTION:=		route
+PKG_DESCR:=		routing control utility
+PKG_SECTION:=		net/route
 PKG_BUILDDEP:=		iptables libnl linux-atm
 PKG_DEPENDS:=		libnl
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Iproute2
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/net/iproute2/
 
 PKG_SUBPKGS:=		IP TC TC_ATM TC_IPT IFSTAT LNSTAT ROUTEL RTMON SS
-PKGSD_TC:=		iproute2 traffic control utility
+PKGSD_TC:=		traffic control utility
 PKGSB_TC:=		iptables
-PKGSD_TC_ATM:=		iproute2 traffic control ATM support library
+PKGSD_TC_ATM:=		traffic control atm support library
 PKGSS_TC_ATM:=		tc libatm
 PKGSB_TC_ATM:=		linux-atm
-PKGSD_TC_IPT:=		iproute2 traffic control IPTables support library
+PKGSD_TC_IPT:=		traffic control iptables support library
 PKGSS_TC_IPT:=		tc iptables
 PKGSB_TC_IPT:=		iptables
-PKGSD_IFSTAT:=		iproute2 interface statistics utility
-PKGSD_LNSTAT:=		iproute2 network statistics utilities
-PKGSD_ROUTEL:=		iproute2 route list and flush utilities
-PKGSD_RTMON:=		iproute2 RTnetlink monitor
-PKGSD_SS:=		iproute2 socket statistics utility
+PKGSD_IFSTAT:=		interface statistics utility
+PKGSD_LNSTAT:=		network statistics utilities
+PKGSD_ROUTEL:=		route list and flush utilities
+PKGSD_RTMON:=		rtnetlink monitor
+PKGSD_SS:=		socket statistics utility
 
 include ${TOPDIR}/mk/package.mk
 

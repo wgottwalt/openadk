@@ -7,8 +7,8 @@ PKG_NAME:=		libavl
 PKG_VERSION:=		0.3.5
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		882c68ea7f71876ca110f3b84d7ab12d
-PKG_DESCR:=		AVL library
-PKG_SECTION:=		libs
+PKG_DESCR:=		avl library
+PKG_SECTION:=		libs/misc
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
 

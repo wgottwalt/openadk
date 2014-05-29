@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xineramaproto
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
-PKG_DESCR:=		Xinerama Extension headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		xinerama extension headers
+PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		xineramaproto-host
 PKG_MD5SUM:=		e0e148b11739e144a546b8a051b17dde
 PKG_SITES:=		${MASTER_SITE_XORG}

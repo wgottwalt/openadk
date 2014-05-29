@@ -8,7 +8,7 @@ PKG_VERSION:=		2.9p1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		56ba145be208002e58775a7203369851
 PKG_DESCR:=		software to access 1-wire devices
-PKG_SECTION:=		misc
+PKG_SECTION:=		sys/misc
 PKG_BUILDDEP:=		fuse
 PKG_URL:=		http://owfs.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=owfs/}

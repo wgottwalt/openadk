@@ -8,7 +8,7 @@ PKG_VERSION:=		3.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6a0ddecb671df1d580d20c0dd1095773
 PKG_DESCR:=		program to ping hosts in parallel
-PKG_SECTION:=		net
+PKG_SECTION:=		net/debug
 PKG_URL:=		http://fping.org
 PKG_SITES:=		http://fping.org/dist/
 

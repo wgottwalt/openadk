@@ -7,8 +7,8 @@ PKG_NAME:=		i2c-tools
 PKG_VERSION:=		3.1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		0fdbff53ebd0b8d9249256d6c56480b1
-PKG_DESCR:=		I2C tools
-PKG_SECTION:=		misc
+PKG_DESCR:=		i2c tools
+PKG_SECTION:=		sys/misc
 PKG_URL:=		http://www.lm-sensors.org/wiki/I2CTools
 PKG_SITES:=		http://dl.lm-sensors.org/i2c-tools/releases/
 

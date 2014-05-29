@@ -7,8 +7,8 @@ PKG_NAME:=		polipo
 PKG_VERSION:=		1.0.4.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		bfc5c85289519658280e093a270d6703
-PKG_DESCR:=		HTTP 1.1 proxy with Socks5 support
-PKG_SECTION:=		proxy
+PKG_DESCR:=		web proxy with socks5 support
+PKG_SECTION:=		net/proxy
 PKG_URL:=		http://www.pps.univ-paris-diderot.fr/~jch/software/polipo/
 PKG_SITES:=		http://freehaven.net/~chrisd/polipo/
 

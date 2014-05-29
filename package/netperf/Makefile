@@ -8,7 +8,7 @@ PKG_VERSION:=		2.4.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		391a0d98954c72a6ad7f08b8a115e1ce
 PKG_DESCR:=		network performance measurement tools
-PKG_SECTION:=		net
+PKG_SECTION:=		net/perf
 PKG_URL:=		http://www.netperf.org/netperf/
 PKG_SITES:=		ftp://ftp.netperf.org/netperf/archive/
 

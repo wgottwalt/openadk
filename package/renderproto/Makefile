@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		renderproto
 PKG_VERSION:=		0.11.1
 PKG_RELEASE:=		1
-PKG_DESCR:=		X Rendering Extension headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		x rendering extension headers
+PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		renderproto-host
 PKG_MD5SUM:=		9b103359123e375bb7760f7dbae3dece
 PKG_SITES:=		${MASTER_SITE_XORG}

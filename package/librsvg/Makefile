@@ -7,10 +7,10 @@ PKG_NAME:=		librsvg
 PKG_VERSION:=		2.40.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		acdecdb9f08f3bf662a68bf7dafb8b82
-PKG_DESCR:=		SVG library
+PKG_DESCR:=		svg library
 PKG_BUILDDEP:=		libcroco
 HOST_BUILDDEP:=		libcroco-host gdk-pixbuf-host pango-host
-PKG_SECTION:=		libs
+PKG_SECTION:=		libs/image
 PKG_URL:=		https://wiki.gnome.org/action/show/Projects/LibRsvg?action=show&redirect=LibRsvg
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/librsvg/2.40/
 

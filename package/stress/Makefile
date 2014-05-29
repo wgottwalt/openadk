@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d693ff044ac7d34f8aaea202cd96f679
 PKG_DESCR:=		simple tool that imposes certain types of compute stress
-PKG_SECTION:=		utils
+PKG_SECTION:=		sys/utils
 PKG_SITES:=		http://weather.ou.edu/~apw/projects/stress/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

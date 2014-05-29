@@ -7,8 +7,8 @@ PKG_NAME:=		ez-ipupdate
 PKG_VERSION:=		3.0.11b8
 PKG_RELEASE:=		11
 PKG_MD5SUM:=		000211add4c4845ffa4211841bff4fb0
-PKG_DESCR:=		client for dynamic DNS services
-PKG_SECTION:=		dns
+PKG_DESCR:=		client for dynamic dns services
+PKG_SECTION:=		net/dns
 PKG_URL:=		http://ez-ipupdate.com/
 PKG_SITES:=		http://ftp.debian.org/debian/pool/main/e/ez-ipupdate/
 

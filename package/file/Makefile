@@ -8,7 +8,7 @@ PKG_VERSION:=		5.17
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e19c47e069ced7b01ccb4db402cc01d3
 PKG_DESCR:=		file type guesser
-PKG_SECTION:=		utils
+PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		file-host
 PKG_DEPENDS:=		libmagic
 PKG_URL:=		http://www.darwinsys.com/file
@@ -21,7 +21,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		FILE LIBMAGIC
 PKGSD_LIBMAGIC:=	file type guesser library
-PKGSC_LIBMAGIC:=	libs
+PKGSC_LIBMAGIC:=	libs/misc
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

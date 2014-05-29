@@ -7,8 +7,8 @@ PKG_NAME:=		zsh
 PKG_VERSION:=		5.0.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6fb0e3e52a0f8de5ca63138391b81ce0
-PKG_DESCR:=		Z Shell
-PKG_SECTION:=		shells
+PKG_DESCR:=		z shell
+PKG_SECTION:=		base/shells
 PKG_URL:=		http://www.zsh.org/
 PKG_SITES:=		ftp://ftp.fu-berlin.de/pub/unix/shells/zsh/
 

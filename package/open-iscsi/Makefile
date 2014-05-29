@@ -8,8 +8,8 @@ PKG_VERSION:=		2.0
 PKG_EXTRAVER:=		871
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		0c403e8c9ad41607571ba0e6e8ff196e
-PKG_DESCR:=		iSCSI utilities
-PKG_SECTION:=		fs
+PKG_DESCR:=		iscsi utilities
+PKG_SECTION:=		sys/fs
 PKG_URL:=		http://www.open-iscsi.org/
 PKG_SITES:=		http://www.open-iscsi.org/bits/
 

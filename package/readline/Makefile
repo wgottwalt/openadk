@@ -8,7 +8,7 @@ PKG_VERSION:=		6.1
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		fc2f7e714fe792db1ce6ddc4c9fb4ef3
 PKG_DESCR:=		command line editing library
-PKG_SECTION:=		libs
+PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		${MASTER_SITE_GNU:=readline/}

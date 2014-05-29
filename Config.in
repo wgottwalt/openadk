@@ -61,6 +61,10 @@ endmenu
 menu "Package selection"
 depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 
+source "package/Config.in.auto.global"
+source "package/Config.in"
+
+menu "Package options"
 config ADK_LEAVE_ETC_ALONE
 	boolean "do not install anything into /etc"
 	default n
@@ -101,8 +105,7 @@ config ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS
 	  Note that without further customisation, turning this option
 	  off will almost certainly render the resulting system unusable.
 
-source "package/Config.in.auto.global"
-source "package/Config.in.auto"
+endmenu
 endmenu
 
 menu "Runtime configuration"

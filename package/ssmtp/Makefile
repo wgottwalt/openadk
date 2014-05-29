@@ -8,7 +8,7 @@ PKG_VERSION:=		2.61
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		957e6fff08625fe34f4fc33d0925bbc9
 PKG_DESCR:=		minimal and secure mail sender
-PKG_SECTION:=		mail
+PKG_SECTION:=		net/mail
 PKG_SITES:=		http://ftp.debian.org/debian/pool/main/s/ssmtp/
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz

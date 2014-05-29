@@ -8,7 +8,7 @@ PKG_VERSION:=		1.13
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		a68058ab4a81cf9a8dcbaaa7a5df5b11
 PKG_DESCR:=		binary keymaps for busybox loadkmap
-PKG_SECTION:=		utils
+PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		base-files
 PKG_SITES:=		http://openadk.org/distfiles/
 

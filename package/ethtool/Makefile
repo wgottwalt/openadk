@@ -8,7 +8,7 @@ PKG_VERSION:=		3.13
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		dcb8f345d44ee79108282e7d0bdf5013
 PKG_DESCR:=		display or change ethernet card settings
-PKG_SECTION:=		net
+PKG_SECTION:=		net/misc
 PKG_SITES:=		https://www.kernel.org/pub/software/network/ethtool/
 
 include ${TOPDIR}/mk/package.mk

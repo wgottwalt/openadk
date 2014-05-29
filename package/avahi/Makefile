@@ -7,8 +7,8 @@ PKG_NAME:=		avahi
 PKG_VERSION:=		0.6.31
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		2f22745b8f7368ad5a0a3fddac343f2d
-PKG_DESCR:=		mDNS daemon
-PKG_SECTION:=		dhcp
+PKG_DESCR:=		multicast dns daemon
+PKG_SECTION:=		net/dns
 PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		autotool libdaemon expat gdbm glib
 PKG_BUILDDEP+=		gettext-tiny gtk+ dbus
@@ -24,7 +24,7 @@ PKGSS_AVAHI_DAEMON:=	libavahi libdaemon libexpat libintl libgtk dbus
 PKGSS_AVAHI_DNSCONFD:=	libavahi libdaemon avahi-daemon
 PKGSD_AVAHI_DNSCONFD:=	DNS server from mDNS configuration daemon
 PKGSD_LIBAVAHI:=	DNS-SD over mDNS library
-PKGSC_LIBAVAHI:=	libs
+PKGSC_LIBAVAHI:=	libs/misc
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

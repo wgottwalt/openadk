@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xcb-proto
 PKG_VERSION:=		1.10
 PKG_RELEASE:=		1
-PKG_DESCR:=		XML-XCB protocol descriptions
-PKG_SECTION:=		devel
+PKG_DESCR:=		xml-xcb protocol descriptions
+PKG_SECTION:=		dev/header
 PKG_MD5SUM:=		2b9dc6442156aba2bfb4133cb9d7cf46
 PKG_BUILDDEP:=		autotool bzip2-host python2-host xcb-proto-host
 PKG_SITES:=		http://xcb.freedesktop.org/dist/

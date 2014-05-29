@@ -9,7 +9,7 @@ PKG_VERSION:=		0.8
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		08beaa7d66e7dd6b0ab58483d0f4ce40
 PKG_DESCR:=		bootloader for raspberry pi (bcm2835)
-PKG_SECTION:=		boot
+PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/raspberrypi/firmware
 PKG_SITES:=		http://openadk.org/distfiles/
 

@@ -7,8 +7,8 @@ PKG_NAME:=		rrdcollect
 PKG_VERSION:=		0.2.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		138e21fc9f2de0b8b6c89f1506394ef8
-PKG_DESCR:=		Round-Robin Database (RRD) collecting daemon
-PKG_SECTION:=		admin
+PKG_DESCR:=		round-robin database collecting daemon
+PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		librrd
 PKG_BUILDDEP:=		rrdtool
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rrdcollect/}

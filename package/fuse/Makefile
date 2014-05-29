@@ -8,7 +8,7 @@ PKG_VERSION:=		2.9.3
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		33cae22ca50311446400daf8a6255c6a
 PKG_DESCR:=		filesystem in userspace utility
-PKG_SECTION:=		fs
+PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libfuse
 PKG_BUILDDEP:=		libiconv-tiny
 PKG_URL:=		http://fuse.sourceforge.net/
@@ -20,7 +20,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		FUSE_UTILS LIBFUSE
 PKGSD_LIBFUSE:=		filesystem in userspace library
-PKGSC_LIBFUSE:=		libs
+PKGSC_LIBFUSE:=		libs/misc
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

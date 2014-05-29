@@ -6,8 +6,8 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		nand
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		3
-PKG_DESCR:=		NAND utility
-PKG_SECTION:=		fs
+PKG_DESCR:=		nand flash utility
+PKG_SECTION:=		sys/fs
 
 PKG_DFLT_NAND:=		y if ADK_TARGET_WITH_NAND
 PKG_CFLINE_NAND:=	depends on ADK_TARGET_WITH_NAND
@@ -21,8 +21,6 @@ $(eval $(call PKG_template,NAND,nand,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
-TARGET_CFLAGS+=		-Wall
 
 do-build:
 	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \

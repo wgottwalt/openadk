@@ -8,7 +8,7 @@ PKG_VERSION:=		2.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		95655596eb6e0e381d60a458f6a45fee
 PKG_DESCR:=		update dynamic dns services
-PKG_SECTION:=		dns
+PKG_SECTION:=		net/dns
 PKG_SITES:=		http://savannah.nongnu.org/download/updatedd/
 
 PKG_SUBPKGS:=		UPDATEDD UPDATEDD_MOD_CHANGEIP UPDATEDD_MOD_DYNDNS UPDATEDD_MOD_EURODYNDNS

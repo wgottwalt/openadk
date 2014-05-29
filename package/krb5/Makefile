@@ -7,8 +7,8 @@ PKG_NAME:=		krb5
 PKG_VERSION:=		1.12.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		524b1067b619cb5bf780759b6884c3f5
-PKG_DESCR:=		MIT kerberos server
-PKG_SECTION:=		crypto
+PKG_DESCR:=		kerberos server
+PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libkrb5 libncurses libss libcom-err keyutils
 PKG_DEPENDS+=		libpthread
 PKG_BUILDDEP:=		ncurses e2fsprogs gettext-tiny bison-host
@@ -18,15 +18,12 @@ PKG_NOPARALLEL:=	1
 PKG_LIBNAME:=		libkrb5
 PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT KRB5_UTIL LIBKRB5
-PKGSD_LIBKRB5:=		MIT kerberos libraries
-PKGSC_LIBKRB5:=		libs
-PKGSD_KRB5_CLIENT:=	MIT kerberos client tools
-PKGSC_KRB5_CLIENT:=	crypto
+PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT LIBKRB5
+PKGSD_LIBKRB5:=		kerberos libraries
+PKGSC_LIBKRB5:=		libs/crypto
+PKGSD_KRB5_CLIENT:=	kerberos client tools
+PKGSC_KRB5_CLIENT:=	app/crypto
 PKGSS_KRB5_CLIENT:=	libkrb5 libncurses libss libcom-err
-PKGSD_KRB5_UTIL:=	MIT kerberos utility (ktutil)
-PKGSC_KRB5_UTIL:=	crypto
-PKGSS_KRB5_UTIL:=	libkrb5 libncurses libss libcom-err
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-signed.tar
 WRKSRC=			${WRKDIST}/src
@@ -35,7 +32,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KRB5_CLIENT,krb5-client,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_KRB5_CLIENT},${PKGSD_KRB5_CLIENT},${PKGSC_KRB5_CLIENT}))
-$(eval $(call PKG_template,KRB5_UTIL,krb5-util,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_KRB5_UTIL},${PKGSD_KRB5_UTIL},${PKGSC_KRB5_UTIL}))
 $(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBKRB5},${PKGSC_LIBKRB5},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--disable-static \
@@ -57,11 +53,6 @@ pre-build:
 	# fix nm call in script, we need the GNU version of nm
 	$(SED) "s#@@NM@@#${NM}#" ${WRKSRC}/util/export-check.pl
 
-krb5-util-install:
-	${INSTALL_DIR} ${IDIR_KRB5_UTIL}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/ktutil \
-		${IDIR_KRB5_UTIL}/usr/bin
-
 krb5-server-install:
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/etc/krb5kdc
 	${INSTALL_DIR} ${IDIR_KRB5_SERVER}/usr/sbin
@@ -77,7 +68,7 @@ krb5-server-install:
 
 krb5-client-install:
 	${INSTALL_DIR} ${IDIR_KRB5_CLIENT}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/{kinit,kpasswd,klist,kdestroy} \
+	${INSTALL_BIN} ${WRKINST}/usr/bin/{kinit,kpasswd,klist,kdestroy,ktutil} \
 		${IDIR_KRB5_CLIENT}/usr/bin
 
 libkrb5-install:

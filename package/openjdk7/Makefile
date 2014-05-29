@@ -7,8 +7,8 @@ PKG_NAME:=		openjdk7
 PKG_VERSION:=		2.4.7
 PKG_RELEASE:=		4
 PKG_MD5SUM:=		f6b28633b9978fadc724247cfc264ff0
-PKG_DESCR:=		OpenJDK 7 Java VM
-PKG_SECTION:=		lang
+PKG_DESCR:=		java virtual machine
+PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		openjdk7-host alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst libiconv-tiny
 PKG_BUILDDEP+=		libpng giflib gtk+ glib fontconfig nss
@@ -29,7 +29,6 @@ GCJ_VER:=		4.8.2
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
 PKG_LIBC_DEPENDS:=	uclibc glibc
-PKG_SYSTEM_DEPENDS:=	!lemote-yeelong
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk

@@ -7,8 +7,8 @@ PKG_NAME:=		sqlite
 PKG_VERSION:=		3.8.0.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6d6cc639a4da04fbbdda7b1a1a01b386
-PKG_DESCR:=		embeddable SQL database cli
-PKG_SECTION:=		misc
+PKG_DESCR:=		embeddable sql database cli
+PKG_SECTION:=		sys/misc
 PKG_BUILDDEP:=		ncurses readline
 PKG_URL:=		http://www.sqlite.org/
 PKG_SITES:=		http://www.sqlite.org/2013/
@@ -19,8 +19,8 @@ DISTFILES:=		sqlite-autoconf-3080002.tar.gz
 WRKDIST=		${WRKDIR}/sqlite-autoconf-3080002
 
 PKG_SUBPKGS:=		SQLITE_CLI LIBSQLITE
-PKGSD_LIBSQLITE:=	sqlite library
-PKGSC_LIBSQLITE:=	libs
+PKGSD_LIBSQLITE:=	emeddable sql library
+PKGSC_LIBSQLITE:=	libs/db
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

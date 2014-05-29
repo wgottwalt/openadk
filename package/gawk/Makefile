@@ -7,8 +7,8 @@ PKG_NAME:=		gawk
 PKG_VERSION:=		4.1.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a2a26543ce410eb74bc4a508349ed09a
-PKG_DESCR:=		AWK programming language interpreter
-PKG_SECTION:=		lang
+PKG_DESCR:=		awk programming language interpreter
+PKG_SECTION:=		dev/lang
 PKG_URL:=		http://www.gnu.org/software/gawk/
 PKG_SITES:=		${MASTER_SITE_GNU:=gawk/}
 PKG_BB:=		1

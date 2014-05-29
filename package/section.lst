@@ -1,46 +1,59 @@
-boot	Boot Loaders
-base	Base System and Libraries
-core	Basic System commands
-browser	Browser / Editor / Pager
-editor	Browser / Editor / Pager
-pager	Browser / Editor / Pager
-chat	IRC / ICQ / JABBER
-comp	Computing
-archive	Compression and Archivers
-crypto	Cryptography
-debug	Debugging / Analyzing
-dns	DNS / DHCP
-dhcp	DNS / DHCP
-firewall	Firewall / Routing / Bridging
-route	Firewall / Routing / Bridging
-bridge	Firewall / Routing / Bridging
-fs	Filesystem / Blockdevice utilities
-ipv6	IPv6
-lang	Programming / Languages
-libs	Libraries
-mail	Mail
-misc	Misc
-multimedia	Multimedia / Audio / Video
-net	Networking
-net/fs	Network Filesystems
+base/boot	Boot Loaders
+base/libs	Base Libraries
+base/apps	Base System 
+base/misc	Base Misc
+base/shells	Shells
+sys/fs		Filesystem / Blockdevice Utilities
+sys/misc	System Misc
+sys/serial	Serial communications & terminal emulation
+sys/utils	System Utilities
+sys/firmware	Firmware for Network Devices
+app/archive	Compression and Archivers
+app/browser	Browser
+app/chat	Chat
+app/crypto	Cryptography
+app/debug	Debugging and Analyzing
+app/editor	Editor and Pager
+app/p2p		P2P
+net/acct	IP Accounting
+net/dns		DNS and DHCP
+net/debug	Network Analyzing
+net/firewall	Firewall
+net/fs		Network Filesystems
+net/http	HTTP and FTP
+net/ipv6	IPv6 
+net/mail	Mail
 net/misc	Networking Misc
+net/ntp		NTP
+net/perf	Networking Performance
+net/ppp		PPP / PPPoE / PPTP
+net/proxy	Proxy
+net/radius	Radius
+net/route	Routing and Bridging
 net/security	Network Security
-ntp	NTP
-p2p	P2P
-phone	Telephony
-ppp	PPP / PPTP / RADIUS
-proxy	Proxy
-scm	SCM
-serial	Serial communications & terminal emulation
-shells	Shells
-admin	System Administration
-utils	Utilities
-www	HTTP / FTP
-wifi	Wireless
-x11/apps	X applications
-x11/drivers	X drivers
-x11/server	X server 
-x11/libs	X libraries
-x11/misc	X misc
-x11/fonts	X fonts
-devel	Development (see GCC package)
+net/voip	Voice-over-IP
+net/wifi	Wireless
+mm/audio	Audio
+mm/image	Image
+mm/video	Video
+x11/apps	Xorg applications
+x11/utils	Xorg utilities
+x11/drivers	Xorg server and drivers
+x11/misc	Xorg misc
+x11/fonts	Xorg fonts
+x11/libs	Xorg libraries
+libs/audio	Audio Libraries
+libs/crypto	Crypto Libraries
+libs/data	XML and JSON Libraries
+libs/db		Database Libraries
+libs/fonts	Font Libraries
+libs/image	Image Libraries
+libs/misc	Misc Libraries
+libs/net	Networking Libraries
+libs/video	Video Libraries
+dev/lang	Programming Languages
+dev/perl	Perl modules
+dev/python	Python modules
+dev/scm		Souce Code Management 
+dev/tools	Programming Tools
+dev/header	Header files

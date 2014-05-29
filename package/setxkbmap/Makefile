@@ -8,7 +8,7 @@ PKG_VERSION:=		1.3.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		57380d069021c6b7d873bfab803e3105
 PKG_DESCR:=		set keyboard utility
-PKG_SECTION:=		x11/apps
+PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libxkbfile
 PKG_SITES:=		${MASTER_SITE_XORG}
 

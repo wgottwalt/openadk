@@ -7,8 +7,8 @@ PKG_NAME:=		patch
 PKG_VERSION:=		2.7.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e9ae5393426d3ad783a300a338c09b72
-PKG_DESCR:=		GNU patch utility
-PKG_SECTION:=		utils
+PKG_DESCR:=		patch utility
+PKG_SECTION:=		sys/utils
 PKG_URL:=		http://www.gnu.org/software/patch/
 PKG_SITES:=		${MASTER_SITE_GNU:=patch/}
 PKG_BB:=		1

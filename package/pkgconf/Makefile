@@ -8,7 +8,7 @@ PKG_VERSION:=		0.9.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		babb4e02f0fb8f4044ee95ad2241a676
 PKG_DESCR:=		smart pkg-config replacement
-PKG_SECTION:=		lang
+PKG_SECTION:=		dev/tools
 PKG_URL:=		https://github.com/pkgconf/pkgconf
 PKG_SITES:=		http://rabbit.dereferenced.org/~nenolod/distfiles/
 

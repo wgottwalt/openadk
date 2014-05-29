@@ -6,7 +6,7 @@ include ${TOPDIR}/toolchain/mpfr/Makefile.inc
 
 PKG_NAME:=		mpfr
 PKG_DESCR:=		multi precision library
-PKG_SECTION:=		libs
+PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		gmp
 PKG_URL:=		http://www.mpfr.org/
 PKG_OPTS:=		dev
@@ -14,8 +14,6 @@ PKG_OPTS:=		dev
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MPFR,mpfr,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 
 mpfr-install:
 	${INSTALL_DIR} ${IDIR_MPFR}/usr/lib

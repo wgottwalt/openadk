@@ -8,7 +8,7 @@ PKG_VERSION:=		1.5.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a4df1ad29684be79b0fa699bdae01faf
 PKG_DESCR:=		flash filesystem utilities
-PKG_SECTION:=		fs
+PKG_SECTION:=		sys/fs
 HOST_BUILDDEP:=		liblzo-host
 PKG_SITES:=		http://openadk.org/distfiles/
 

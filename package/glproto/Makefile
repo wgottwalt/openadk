@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		glproto
 PKG_VERSION:=		1.4.17
 PKG_RELEASE:=		1
-PKG_DESCR:=		OpenGL headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		opengl headers
+PKG_SECTION:=		dev/header
 PKG_MD5SUM:=		d69554c1b51a83f2c6976a640819911b
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly

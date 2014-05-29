@@ -8,7 +8,7 @@ PKG_VERSION:=		4.9
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		7339f199ba11c941890031fd9981d7be
 PKG_DESCR:=		ecj java compiler
-PKG_SECTION:=		lang
+PKG_SECTION:=		dev/lang
 PKG_SITES:=		ftp://sourceware.org/pub/java/
 
 PKG_CFLINE_ECJ:=	depends on ADK_HOST_ONLY

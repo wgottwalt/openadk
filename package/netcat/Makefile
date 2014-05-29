@@ -7,7 +7,7 @@ PKG_NAME:=		netcat
 PKG_VERSION:=		0.7.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		088def25efe04dcdd1f8369d8926ab34
-PKG_DESCR:=		the GNU network swiss army knife
+PKG_DESCR:=		network swiss army knife
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://netcat.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=netcat/}

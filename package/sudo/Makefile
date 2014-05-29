@@ -8,7 +8,7 @@ PKG_VERSION:=		1.8.10
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		954d64906c3f6e2436f33445a049c58b
 PKG_DESCR:=		su do
-PKG_SECTION:=		admin
+PKG_SECTION:=		sys/misc
 PKG_URL:=		http://www.courtesan.com/sudo/
 PKG_SITES:=		http://www.courtesan.com/sudo/dist/
 

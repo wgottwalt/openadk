@@ -8,7 +8,7 @@ PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1b7a781fb4cf8938842279bd3e8ee852
 PKG_DESCR:=		stripped down mkimage utility
-PKG_SECTION:=		misc
+PKG_SECTION:=		sys/misc
 
 NO_DISTFILES:=		1
 

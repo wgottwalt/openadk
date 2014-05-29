@@ -7,8 +7,8 @@ PKG_NAME:=		mksh
 PKG_VERSION:=		49
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e8c205cac72c3dc8540bbc3897421422
-PKG_DESCR:=		MirBSD Korn Shell
-PKG_SECTION:=		shells
+PKG_DESCR:=		mirbsd korn shell
+PKG_SECTION:=		base/shells
 PKG_URL:=		http://www.mirbsd.org/
 PKG_SITES:=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/}
 

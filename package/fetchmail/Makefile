@@ -7,8 +7,8 @@ PKG_NAME:=		fetchmail
 PKG_VERSION:=		6.3.26
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		d9ae3d939205a3c06a21ea79b8f14793
-PKG_DESCR:=		fetch mail from a POP or IMAP server
-PKG_SECTION:=		mail
+PKG_DESCR:=		fetch mail from a pop3 or imap server
+PKG_SECTION:=		net/mail
 PKG_URL:=		http://fetchmail.berlios.de/
 PKG_SITES:=		http://download.berlios.de/fetchmail/
 

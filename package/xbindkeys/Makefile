@@ -7,9 +7,9 @@ PKG_NAME:=		xbindkeys
 PKG_VERSION:=		1.8.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		393dd74f85850a4ba0803b5a78bc598b
-PKG_DESCR:=		keybindings for X11
+PKG_DESCR:=		keybindings for x11
 PKG_BUILDDEP:=		libX11
-PKG_SECTION:=		x11/apps
+PKG_SECTION:=		x11/utils
 PKG_SITES:=		http://www.nongnu.org/xbindkeys/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

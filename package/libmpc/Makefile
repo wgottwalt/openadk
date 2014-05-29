@@ -5,8 +5,8 @@ include ${TOPDIR}/rules.mk
 include ${TOPDIR}/toolchain/mpc/Makefile.inc
 
 PKG_NAME:=		mpc
-PKG_DESCR:=		GNU multiprecision arithmetic library
-PKG_SECTION:=		libs
+PKG_DESCR:=		multiprecision arithmetic library
+PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		gmp mpfr
 PKG_URL:=		http://www.multiprecision.org/
 PKG_LIBNAME:=		libmpc

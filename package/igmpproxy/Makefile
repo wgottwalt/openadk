@@ -8,7 +8,7 @@ PKG_VERSION:=		0.1
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		c56f41ec195bc1fe016369bf74efc5a1
 PKG_DESCR:=		simple dynamic multicast routing daemon
-PKG_SECTION:=		proxy
+PKG_SECTION:=		net/route
 PKG_URL:=		http://sourceforge.net/projects/igmpproxy/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=igmpproxy/}
 

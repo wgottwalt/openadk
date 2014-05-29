@@ -7,8 +7,8 @@ PKG_NAME:=		compositeproto
 PKG_VERSION:=		0.4.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2dea7c339432b3363faf2d29c208e7b5
-PKG_DESCR:=		X11 composite headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		composite headers
+PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		printproto
 PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
-PKG_DESCR:=		X Print Extension headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		x print extension headers
+PKG_SECTION:=		dev/header
 PKG_MD5SUM:=		5afeb3a7de8a14b417239a14ea724268
 PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly

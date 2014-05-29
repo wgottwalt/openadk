@@ -7,8 +7,8 @@ PKG_NAME:=		ant
 PKG_VERSION:=		1.8.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c474fa9d0c35a24037c23b6e476862c1
-PKG_DESCR:=		ant utility
-PKG_SECTION:=		lang
+PKG_DESCR:=		java code build utility
+PKG_SECTION:=		dev/tools
 HOST_BUILDDEP:=		gcj-host
 PKG_SITES:=		http://archive.apache.org/dist/ant/source/
 

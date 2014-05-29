@@ -7,8 +7,8 @@ PKG_NAME:=		libart
 PKG_VERSION:=		2.3.17
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		f1f6b3e5490f382535dccb288f5d8b14
-PKG_DESCR:=		An high-performance 2D graphics library
-PKG_SECTION:=		libs
+PKG_DESCR:=		high-performance 2d graphics library
+PKG_SECTION:=		libs/image
 PKG_SITES:=		${MASTER_SITE_GNOME:=libart_lgpl/2.3/}
 PKG_OPTS:=		dev
 

@@ -7,8 +7,8 @@ PKG_NAME:=		xlsfonts
 PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		7a6bee1512ccdef52fc519a86684891e
-PKG_DESCR:=		list X11 fonts
-PKG_SECTION:=		x11/apps
+PKG_DESCR:=		list x11 fonts
+PKG_SECTION:=		x11/utils
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/app/
 

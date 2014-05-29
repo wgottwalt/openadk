@@ -7,8 +7,8 @@ PKG_NAME:=		linux-atm
 PKG_VERSION:=		2.5.1
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		9560b0e1f410a05b849dfdab465dd758
-PKG_DESCR:=		ATM library for Linux
-PKG_SECTION:=		libs
+PKG_DESCR:=		atm library
+PKG_SECTION:=		libs/net
 PKG_BUILDDEP:=		flex-host
 PKG_URL:=		http://linux-atm.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-atm/}
@@ -21,7 +21,7 @@ PKG_HOST_DEPENDS:=	!freebsd
 PKG_SUBPKGS:=		LIBATM BR2684CTL
 PKGSD_BR2684CTL:=	br2684ctl ATM utility
 PKGSS_BR2684CTL:=	libatm
-PKGSC_BR2684CTL:=	route
+PKGSC_BR2684CTL:=	net/route
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 

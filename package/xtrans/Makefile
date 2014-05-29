@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		xtrans
 PKG_VERSION:=		1.3.3
 PKG_RELEASE:=		1
-PKG_DESCR:=		X11 network protocol transport library
-PKG_SECTION:=		devel
+PKG_DESCR:=		network protocol transport library
+PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		xtrans-host
 PKG_MD5SUM:=		c83d04cd878f1e51a44d132aa1d5b932
 PKG_SITES:=		${MASTER_SITE_XORG}

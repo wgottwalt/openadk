@@ -7,8 +7,8 @@ PKG_NAME:=		net-tools
 PKG_VERSION:=		1.60
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		888774accab40217dde927e21979c165
-PKG_DESCR:=		Linux net-tools
-PKG_SECTION:=		net
+PKG_DESCR:=		arp networking tool
+PKG_SECTION:=		net/misc
 PKG_URL:=		http://net-tools.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=net-tools/}
 PKG_NOPARALLEL:=	1

@@ -7,8 +7,8 @@ PKG_NAME:=		dbus
 PKG_VERSION:=		1.6.18
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		b02e9c95027a416987b81f9893831061
-PKG_DESCR:=		DBUS daemon
-PKG_SECTION:=		misc
+PKG_DESCR:=		desktop bus daemon
+PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libdbus libexpat
 PKG_BUILDDEP:=		expat util-linux
 PKG_URL:=		http://dbus.freedesktop.org/
@@ -20,7 +20,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		DBUS LIBDBUS
 PKGSD_LIBDBUS:=		DBUS library
-PKGSC_LIBDBUS:=		libs
+PKGSC_LIBDBUS:=		libs/misc
 PKGSS_LIBDBUS:=		libexpat libuuid
 
 ifeq ($(ADK_STATIC),y)
@@ -33,7 +33,6 @@ $(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LIBDBUS,libdbus,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBDBUS},${PKGSD_LIBDBUS},${PKGSC_LIBDBUS},${PKG_OPTS}))
 
 TARGET_LDFLAGS+=	-luuid
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-tests \
 			--disable-abstract-sockets \
 			--enable-checks \

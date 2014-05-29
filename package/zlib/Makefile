@@ -8,7 +8,7 @@ PKG_VERSION:=		1.2.7
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		2ab442d169156f34c379c968f3f482dd
 PKG_DESCR:=		implementation of the deflate compression method
-PKG_SECTION:=		libs
+PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.zlib.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libpng/zlib/}
 PKG_OPTS:=		dev

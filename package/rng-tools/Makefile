@@ -7,8 +7,8 @@ PKG_NAME:=		rng-tools
 PKG_VERSION:=		4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ae89dbfcf08bdfbea19066cfbf599127
-PKG_DESCR:=		daemon to use hardware random number generators.
-PKG_SECTION:=		crypto
+PKG_DESCR:=		daemon to use hardware random number generators
+PKG_SECTION:=		app/crypto
 PKG_URL:=		http://gkernel.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=gkernel/}
 

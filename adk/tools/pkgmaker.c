@@ -225,17 +225,24 @@ static int hash_str(char *string) {
 
 static void iter(const char *key, const char *value, const void *obj) {
 
-	FILE *config, *section;
+	FILE *config, *section, *global;
 	int hash;
-	char *valuestr, *pkg, *subpkg;
+	char *valuestr, *pkg, *subpkg, *subsect, *sect, *keystr;
 	char buf[MAXPATH];
 	char infile[MAXPATH];
 	char outfile[MAXPATH];
+	char configsect[MAXPATH];
+
+	keystr = strdup(key);
+	sect = strtok(keystr, "/");
+	subsect = strtok(NULL, "/");
+
+	snprintf(configsect, MAXPATH, "package/Config.in.auto.%s.%s", sect, subsect);
 
 	valuestr = strdup(value);
-	config = fopen("package/Config.in.auto", "a");
+	config = fopen(configsect, "a");
 	if (config == NULL)
-		fatal_error("Can not open file package/Config.in.auto");
+		fatal_error("Can not open file Config.in.auto.<section>.<subsection>");
 
 	hash = hash_str(valuestr);
 	snprintf(infile, MAXPATH, "package/pkglist.d/sectionlst.%d", hash);
@@ -358,7 +365,7 @@ int main() {
 	p_ptr = NULL;
 	s_ptr = NULL;
 
-	unlink("package/Config.in.auto");
+	system("rm package/Config.in.auto.*");
 	unlink(runtime);
 	/* open global sectionfile */
 	menuglobal = fopen("package/Config.in.auto.global", "w");
@@ -498,8 +505,8 @@ int main() {
 						fclose(section);
 					}
 				} else
-					fatal_error("Can not find section description for package %s.",
-							pkgdirp->d_name);
+					fatal_error("Can not find section description %s for package %s.",
+							pkg_section, pkgdirp->d_name);
 				
 				fclose(pkg);
 				continue;
@@ -702,7 +709,7 @@ int main() {
 				pseudo_name = malloc(MAXLINE);
 				memset(pseudo_name, 0, MAXLINE);
 				strncat(pseudo_name, token, strlen(token));
-				while (strlen(pseudo_name) < 20)
+				while (strlen(pseudo_name) < 23)
 					strncat(pseudo_name, ".", 1);
 
 				if (snprintf(path, MAXPATH, "package/pkgconfigs.d/%s/Config.in.%s", pkgdirp->d_name, token) < 0)

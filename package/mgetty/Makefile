@@ -9,7 +9,7 @@ PKG_XVERSION:=		Jun15
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		0320e98c6b86bcca48fc5f355b94ead4
 PKG_DESCR:=		mgetty + sendfax
-PKG_SECTION:=		misc
+PKG_SECTION:=		sys/misc
 PKG_SITES:=		ftp://alpha.greenie.net/pub/mgetty/source/1.1/
 
 DISTFILES:=		${PKG_NAME}${PKG_VERSION}-${PKG_XVERSION}.tar.gz

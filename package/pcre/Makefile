@@ -7,8 +7,8 @@ PKG_NAME:=		pcre
 PKG_VERSION:=		8.34
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		eb34b2c9c727fd64940d6fd9a00995eb
-PKG_DESCR:=		Perl Compatible Regular Expression library
-PKG_SECTION:=		libs
+PKG_DESCR:=		perl compatible regular expression library
+PKG_SECTION:=		libs/misc
 PKG_BUILDDEPS:=		gettext-tiny
 PKG_URL:=		http://www.pcre.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pcre/}

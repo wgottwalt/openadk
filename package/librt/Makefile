@@ -11,8 +11,8 @@ include ${TOPDIR}/toolchain/uclibc/Makefile.inc
 endif
 
 PKG_NAME:=		librt
-PKG_DESCR:=		Realtime library
-PKG_SECTION:=		libs
+PKG_DESCR:=		realtime library
+PKG_SECTION:=		libs/misc
 PKG_OPTS:=		noremove
 
 NO_DISTFILES:=		1

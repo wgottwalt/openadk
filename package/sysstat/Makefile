@@ -8,7 +8,7 @@ PKG_VERSION:=		7.0.3
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		732904b006a0224b0a9ce4d312946277
 PKG_DESCR:=		utilities for system monitoring and performance analysis
-PKG_SECTION:=		utils
+PKG_SECTION:=		sys/utils
 PKG_SITES:=		http://perso.orange.fr/sebastien.godard/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

@@ -7,8 +7,8 @@ PKG_NAME:=		v4l-utils
 PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		2127f2d06be9162b0d346f7037a9e852
-PKG_DESCR:=		Video4Linux2 utilities
-PKG_SECTION:=		multimedia
+PKG_DESCR:=		video4linux utilities
+PKG_SECTION:=		mm/video
 PKG_BUILDDEP:=		libjpeg-turbo
 PKG_SITES:=		http://linuxtv.org/downloads/v4l-utils/
 PKG_LIBNAME:=		libv4l
@@ -18,7 +18,7 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_LIBC_DEPENDS:=	glibc
 PKG_SUBPKGS:=		V4L_UTILS LIBV4L
-PKGSC_LIBV4L:=		libs
+PKGSC_LIBV4L:=		libs/video
 PKGSD_LIBV4L:=		Video4Linux2 libraries
 
 ifeq ($(ADK_STATIC),y)

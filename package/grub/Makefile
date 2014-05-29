@@ -7,8 +7,8 @@ PKG_NAME:=		grub
 PKG_VERSION:=		2.00
 PKG_RELEASE:=		5
 PKG_MD5SUM:=		a1043102fbc7bcedbf53e7ee3d17ab91
-PKG_DESCR:=		GRUB2 bootloader
-PKG_SECTION:=		boot
+PKG_DESCR:=		multiboot boot loader
+PKG_SECTION:=		base/boot
 PKG_BUILDDEP:=		bison-host
 PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		ftp://ftp.gnu.org/gnu/grub/
@@ -18,7 +18,7 @@ PKG_SYSTEM_DEPENDS:=	!mikrotik-rb532
 PKG_NOPARALLEL:=	1
 
 PKG_SUBPKGS:=		GRUB GRUB_TOOLS
-PKGSD_GRUB_TOOLS:=	GRUB2 tools
+PKGSD_GRUB_TOOLS:=	grub2 tools
 
 PKG_CHOICES_GRUB:=	PC EFI
 PKGCD_PC:=		build for PC BIOS

@@ -6,8 +6,8 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		recordproto
 PKG_VERSION:=		1.14.2
 PKG_RELEASE:=		1
-PKG_DESCR:=		RECORD extension headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		record extension headers
+PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		recordproto-host
 PKG_MD5SUM:=		868235e1e150e68916d5a316ebc4ccc4
 PKG_SITES:=		${MASTER_SITE_XORG}

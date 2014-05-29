@@ -7,8 +7,8 @@ PKG_NAME:=		reaim
 PKG_VERSION:=		0.8
 PKG_RELEASE:=		9
 PKG_MD5SUM:=		647d2ab72ec454f89294accfb3182c09
-PKG_DESCR:=		A transparent AIM / MSN proxy
-PKG_SECTION:=		chat
+PKG_DESCR:=		transparent aim / msn proxy
+PKG_SECTION:=		app/chat
 PKG_DEPENDS:=		iptables
 PKG_URL:=		http://reaim.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=reaim/}

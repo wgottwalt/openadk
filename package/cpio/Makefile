@@ -8,7 +8,7 @@ PKG_VERSION:=		2.11
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1112bb6c45863468b5496ba128792f6c
 PKG_DESCR:=		archive utility
-PKG_SECTION:=		archive
+PKG_SECTION:=		app/archive
 PKG_URL:=		http://www.gnu.org/software/cpio/
 PKG_SITES:=		${MASTER_SITE_GNU:=cpio/}
 PKG_BB:=		1

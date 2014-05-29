@@ -7,8 +7,8 @@ PKG_NAME:=		dbus-glib
 PKG_VERSION:=		0.100.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ad0920c7e3aad669163bb59171cf138e
-PKG_DESCR:=		DBUS glib bindings
-PKG_SECTION:=		libs
+PKG_DESCR:=		glib bindings for dbus
+PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libdbus glib
 PKG_BUILDDEP:=		dbus glib
 PKG_URL:=		http://www.freedesktop.org/wiki/Software/DBusBindings
@@ -21,7 +21,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DBUS_GLIB,dbus-glib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--disable-checks
 CONFIGURE_ENV+=		ac_cv_have_abstract_sockets=no
 

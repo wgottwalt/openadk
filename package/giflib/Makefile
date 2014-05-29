@@ -7,8 +7,8 @@ PKG_NAME:=		giflib
 PKG_VERSION:=		4.1.6
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		4ff2ecec336b9724c5190f06e8a40f9e
-PKG_DESCR:=		GIF graphics library
-PKG_SECTION:=		libs
+PKG_DESCR:=		gif graphics library
+PKG_SECTION:=		libs/image
 PKG_URL:=		http://sourceforge.net/projects/giflib/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=giflib/giflib%204.x/$(PKG_NAME)-$(PKG_VERSION)/}
 PKG_OPTS:=		dev

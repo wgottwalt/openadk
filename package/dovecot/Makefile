@@ -10,7 +10,7 @@ PKG_MD5SUM:=		25395269fa2e0525e2d144d71d0450eb
 PKG_DESCR:=		minimal and secure imap server
 PKG_BUILDDEP:=		openssl
 PKG_DEPENDS:=		libopenssl
-PKG_SECTION:=		mail
+PKG_SECTION:=		net/mail
 PKG_URL:=		http://www.dovecot.org/
 PKG_SITES:=		http://www.dovecot.org/releases/2.2/
 

@@ -7,8 +7,8 @@ PKG_NAME:=		dbus-python
 PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		b09cd2d1a057cc432ce944de3fc06bf7
-PKG_DESCR:=		DBUS python bindings
-PKG_SECTION:=		libs
+PKG_DESCR:=		python bindings for dbus
+PKG_SECTION:=		dev/python
 PKG_DEPENDS:=		dbus dbus-glib
 PKG_BUILDDEP:=		dbus dbus-glib
 PKG_URL:=		http://dbus.freedesktop.org/doc/dbus-python/
@@ -30,7 +30,5 @@ dbus-python-install:
 	$(INSTALL_DIR) $(IDIR_DBUS_PYTHON)/usr/lib/python2.7/site-packages/dbus/mainloop
 	$(CP) $(WRKINST)/usr/lib/python2.7/site-packages/dbus/mainloop/*.py \
 		$(IDIR_DBUS_PYTHON)/usr/lib/python2.7/site-packages/dbus/mainloop
-	
-	
 
 include ${TOPDIR}/mk/pkg-bottom.mk

@@ -8,7 +8,7 @@ PKG_VERSION:=		0.11.13
 PKG_RELEASE:=		5
 PKG_MD5SUM:=		98fa151e947941f9c3f27420fdf47c11
 PKG_DESCR:=		utilities to access smart cards
-PKG_SECTION:=		crypto
+PKG_SECTION:=		app/crypto
 PKG_BUILDDEP:=		openct pcsc-lite openssl readline
 PKG_DEPENDS:=		libopensc libopenct pcsc-lite libopenssl libreadline
 PKG_URL:=		http://www.opensc-project.org/opensc/
@@ -20,7 +20,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		OPENSC LIBOPENSC
 PKGSD_LIBOPENSC:=	opensc library
-PKGSC_LIBOPENSC:=	libs
+PKGSC_LIBOPENSC:=	libs/crypto
 PKGSS_LIBOPENSC:=	libltdl
 PKGSB_LIBOPENSC:=	libtool
 

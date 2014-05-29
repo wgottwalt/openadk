@@ -7,7 +7,7 @@ PKG_NAME:=		samba
 PKG_VERSION:=		3.6.23
 PKG_RELEASE:=		6
 PKG_MD5SUM:=		2f7aee1dc5d31aefcb364600915b31dc
-PKG_DESCR:=		NetBIOS/SMB file and print server
+PKG_DESCR:=		smb file and print server
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		gettext-tiny util-linux popt
 PKG_DEPENDS:=		samba-lib libuuid libpopt
@@ -19,16 +19,17 @@ PKG_CFLINE_SAMBA:=	select ADK_KERNEL_INOTIFY_USER
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		SAMBA SAMBA_CLIENT SAMBA_PASSWD SAMBA_LIB
-PKGSD_SAMBA_CLIENT:=	NetBIOS/SMB client
+PKGSD_SAMBA_CLIENT:=	smb client
 PKGSS_SAMBA_CLIENT:=	libreadline samba-lib
-PKGSD_SAMBA_PASSWD:=	SMB password utility
-PKGSD_SAMBA_LIB:=	SMB libraries
+PKGSD_SAMBA_PASSWD:=	smb password utility
+PKGSD_SAMBA_LIB:=	smb libraries
+PKGSC_SAMBA_LIB:=	libs/net
 
 PKG_FLAVOURS_SAMBA:=	WITH_WINBIND WITH_LDAP
 PKGFD_WITH_WINBIND:=	enable winbind support
 PKGFS_WITH_WINBIND:=	libkrb5
 PKGFB_WITH_WINBIND:=	krb5
-PKGFD_WITH_LDAP:=	enable LDAP support
+PKGFD_WITH_LDAP:=	enable ldap support
 PKGFS_WITH_LDAP:=	libopenldap
 PKGFB_WITH_LDAP:=	openldap
 
@@ -39,7 +40,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,SAMBA,samba,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_CLIENT},${PKG_SECTION}))
 $(eval $(call PKG_template,SAMBA_PASSWD,samba-passwd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_PASSWD},${PKG_SECTION}))
-$(eval $(call PKG_template,SAMBA_LIB,samba-lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_LIB},${PKG_SECTION}))
+$(eval $(call PKG_template,SAMBA_LIB,samba-lib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_LIB},${PKGSC_SAMBA_LIB}))
 
 ifneq ($(ADK_PACKAGE_SAMBA_WITH_WINBIND),)
 CONFIGURE_ARGS+=	--with-winbind \

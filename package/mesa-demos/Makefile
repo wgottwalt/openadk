@@ -7,8 +7,8 @@ PKG_NAME:=		mesa-demos
 PKG_VERSION:=		8.1.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		4049d98dd4131212e2842b770f1b0fa5
-PKG_DESCR:=		MESA demo apps
-PKG_SECTION:=		misc
+PKG_DESCR:=		opengl demo apps
+PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		mesalib
 PKG_BUILDDEP:=		MesaLib libglew glu
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/demos/${PKG_VERSION}/
@@ -18,7 +18,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_ARCH_DEPENDS:=      x86 x86_64 mips mipsel mips64 mips64el arm
 
 PKG_SUBPKGS:=		GLXINFO
-PKGSD_GLXINFO:=		glxinfo
+PKGSD_GLXINFO:=		command-line tool for diagnosing problems with your 3D acceleration card
 PKGSS_GLXINFO:=		libxt libxau libxdmcp libxcb libx11 libxext libglew
 
 include $(TOPDIR)/mk/package.mk

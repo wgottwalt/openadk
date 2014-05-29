@@ -7,8 +7,8 @@ PKG_NAME:=		faac
 PKG_VERSION:=		1.28
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		80763728d392c7d789cde25614c878f6
-PKG_DESCR:=		AAC encoder
-PKG_SECTION:=		libs
+PKG_DESCR:=		aac encoder library
+PKG_SECTION:=		libs/audio
 PKG_URL:=		http://www.audiocoding.com/faac.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=faac/}
 PKG_LIBNAME:=		libfaac

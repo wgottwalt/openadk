@@ -7,8 +7,8 @@ PKG_NAME:=		randrproto
 PKG_VERSION:=		1.4.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		af44f250b89783eb4967f1dc5b32ef68
-PKG_DESCR:=		Xrandr protcol headers
-PKG_SECTION:=		devel
+PKG_DESCR:=		xrandr protcol headers
+PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

@@ -7,8 +7,8 @@ PKG_NAME:=		heimdal
 PKG_VERSION:=		1.5.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		30b379e3de12f332fbd201131f02ffca
-PKG_DESCR:=		kerberos 5 server
-PKG_SECTION:=		crypto
+PKG_DESCR:=		kerberos server
+PKG_SECTION:=		app/crypto
 PKG_BUILDDEP:=		autotool openssl ncurses e2fsprogs readline heimdal-host
 PKG_DEPENDS:=		libheimdal libncurses libcom-err libreadline libopenssl
 HOST_BUILDDEP:=		bison-host
@@ -21,8 +21,8 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		HEIMDAL_SERVER LIBHEIMDAL
-PKGSD_LIBHEIMDAL:=	kerberos 5 libraries
-PKGSC_LIBHEIMDAL:=	libs
+PKGSD_LIBHEIMDAL:=	kerberos libraries
+PKGSC_LIBHEIMDAL:=	libs/crypto
 
 PKG_FLAVOURS_HEIMDAL_SERVER:=	WITH_PKINIT
 PKGFD_WITH_PKINIT:		Enable PK-INIT

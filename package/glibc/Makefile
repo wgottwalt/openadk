@@ -5,10 +5,10 @@ include $(TOPDIR)/rules.mk
 include $(TOPDIR)/toolchain/glibc/Makefile.inc
 
 PKG_NAME:=		glibc
-PKG_DESCR:=		GNU C library
-PKG_SECTION:=		base
+PKG_DESCR:=		gnu c library
+PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove
-PKG_SUBPKGS:=		GLIBC GLIBC_DEV GLIBC_STATIC
+PKG_SUBPKGS:=		GLIBC GLIBC_DEV
 
 NO_DISTFILES:=		1
 
@@ -16,7 +16,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,GLIBC_STATIC,$(PKG_NAME)-static,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 

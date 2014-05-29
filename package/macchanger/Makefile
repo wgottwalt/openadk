@@ -7,8 +7,8 @@ PKG_NAME:=		macchanger
 PKG_VERSION:=		1.5.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		79b7cdaeca3d8ebafa764c4b0dd03ab7
-PKG_DESCR:=		utility for viewing/manipulating the MAC address
-PKG_SECTION:=		admin
+PKG_DESCR:=		utility for viewing/manipulating the mac address
+PKG_SECTION:=		sys/utils
 PKG_URL:=		http://www.alobbs.com/macchanger
 PKG_SITES:=		${MASTER_SITE_GNU:=macchanger/}
 

@@ -8,7 +8,7 @@ PKG_VERSION:=		1.2.101
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ef47003355a2e368e4d9596cd070ef23
 PKG_DESCR:=		small and fast webserver
-PKG_SECTION:=		www
+PKG_SECTION:=		net/http
 PKG_URL:=		http://www.cherokee-project.com
 PKG_SITES:=		http://www.cherokee-project.de/mirrors/cherokee/1.2/${PKG_VERSION}/
 

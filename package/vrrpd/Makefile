@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		9
 PKG_MD5SUM:=		6d5066ea1a6ced817376ca0f54765447
 PKG_DESCR:=		virtual router redundancy protocol daemon
-PKG_SECTION:=		route
+PKG_SECTION:=		net/route
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vrrpd/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

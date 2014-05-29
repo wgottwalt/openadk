@@ -8,7 +8,7 @@ PKG_VERSION:=		2014.01
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e531307578f6d32a7ccb1d04f1e08cbc
 PKG_DESCR:=		bootloader
-PKG_SECTION:=		boot
+PKG_SECTION:=		base/boot
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
 PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 

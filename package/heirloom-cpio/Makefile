@@ -7,7 +7,7 @@ PKG_NAME:=		heirloom-cpio
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		patched version of heirloom cpio
-PKG_SECTION:=		archive
+PKG_SECTION:=		app/archive
 
 PKG_CFLINE_HEIRLOOM_CPIO:=	depends on ADK_HOST_ONLY
 

@@ -7,8 +7,8 @@ PKG_NAME:=		libusbx
 PKG_VERSION:=		1.0.16
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		7f5715d624cd6c26b30a317eb6c2fe5e
-PKG_DESCR:=		a library for accessing Linux USB devices
-PKG_SECTION:=		libs
+PKG_DESCR:=		library for accessing usb devices
+PKG_SECTION:=		libs/misc
 PKG_URL:=		http://libusb.wiki.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusbx/}
 PKG_LIBNAME:=		libusb

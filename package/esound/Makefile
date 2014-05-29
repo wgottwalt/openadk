@@ -8,7 +8,7 @@ PKG_VERSION:=		0.2.41
 PKG_RELEASE:=		8
 PKG_MD5SUM:=		3d8973ed87053d7acc1f4d44af2c4688
 PKG_DESCR:=		enlightened sound daemon
-PKG_SECTION:=		multimedia
+PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libaudiofile libesd
 PKG_BUILDDEP:=		libaudiofile autotool
 PKG_URL:=		http://www.tux.org/~ricdude/EsounD.html
@@ -19,8 +19,8 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		ESOUND LIBESD
-PKGSC_LIBESD:=		libs
-PKGSD_LIBESD:=		Esound library
+PKGSC_LIBESD:=		libs/audio
+PKGSD_LIBESD:=		esound library
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

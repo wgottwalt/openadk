@@ -7,8 +7,8 @@ PKG_NAME:=		lzma
 PKG_VERSION:=		4.32.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		79c31b18a76254c1cb078c1d40a47c44
-PKG_DESCR:=		LZMA compression utility
-PKG_SECTION:=		archive
+PKG_DESCR:=		compression utility
+PKG_SECTION:=		app/archive
 PKG_URL:=		http://tukaani.org/lzma/
 PKG_SITES:=		http://tukaani.org/lzma/
 

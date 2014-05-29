@@ -7,7 +7,7 @@ PKG_NAME:=		libxcb
 PKG_VERSION:=		1.10
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		a484793fbfb974b09d54fa1ebf44b2e4
-PKG_DESCR:=		X11 keyboard library
+PKG_DESCR:=		interface to the x window system protocol
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXau-host libpthread-stubs-host xcb-proto-host
 PKG_BUILDDEP+=		libxcb-host
@@ -26,7 +26,6 @@ $(eval $(call PKG_template,LIBXCB,libxcb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 include $(TOPDIR)/mk/python.mk
 
 HOST_STYLE:=		auto
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ENV+=		PYTHON=$(PYTHON)
 
 libxcb-install:

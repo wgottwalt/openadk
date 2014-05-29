@@ -8,7 +8,7 @@ PKG_VERSION:=		2.4.2
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		2ec8997e0c07249eb4cbd072417d70fe
 PKG_DESCR:=		generic dynamic object loading library
-PKG_SECTION:=		lang
+PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		m4-host libtool-host
 PKG_URL:=		http://www.gnu.org/software/libtool/
 PKG_SITES:=		${MASTER_SITE_GNU:=libtool/}
@@ -16,7 +16,7 @@ PKG_LIBNAME:=		libltdl
 PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		LIBTOOL LIBLTDL
-PKGSC_LIBLTDL:=		libs
+PKGSC_LIBLTDL:=		libs/misc
 
 ifeq ($(ADK_STATIC),y)
 PKG_OPTS+=		libmix

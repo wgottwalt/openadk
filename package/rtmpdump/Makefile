@@ -7,10 +7,10 @@ PKG_NAME:=		rtmpdump
 PKG_VERSION:=		2.4
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		61509a2ae8987691f1fa28175461be96
-PKG_DESCR:=		toolkit for RTMP streams
+PKG_DESCR:=		toolkit for rtmp streams
 PKG_DEPENDS:=		librtmp zlib libopenssl
 PKG_BUILDDEP:=		openssl zlib
-PKG_SECTION:=		multimedia
+PKG_SECTION:=		mm/video
 PKG_URL:=		http://rtmpdump.mplayerhq.hu/
 PKG_SITES:=		http://www.openadk.org/distfiles
 PKG_LIBNAME:=		librtmp
@@ -19,8 +19,8 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		RTMPDUMP LIBRTMP
-PKGSD_LIBRTMP:=		library for RTMP streams
-PKGSC_LIBRTMP:=		libs
+PKGSD_LIBRTMP:=		library for rtmp streams
+PKGSC_LIBRTMP:=		libs/video
 
 include $(TOPDIR)/mk/package.mk
 

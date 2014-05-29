@@ -7,8 +7,8 @@ PKG_NAME:=		scons
 PKG_VERSION:=		2.3.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		083ce5624d6adcbdaf2526623f456ca9
-PKG_DESCR:=		a software construction tool
-PKG_SECTION:=		lang
+PKG_DESCR:=		software construction tool
+PKG_SECTION:=		dev/tools
 HOST_BUILDDEP:=		python2-host
 PKG_URL:=		http://www.scons.org
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=scons/}

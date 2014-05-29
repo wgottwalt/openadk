@@ -8,7 +8,7 @@ PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		1742a556089c36c3a89eb1b957da5a60
 PKG_DESCR:=		power management utilities
-PKG_SECTION:=		utils
+PKG_SECTION:=		sys/utils
 PKG_URL:=		http://pm-utils.freedesktop.org/
 PKG_SITES:=		http://pm-utils.freedesktop.org/releases/
 

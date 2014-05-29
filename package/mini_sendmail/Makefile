@@ -8,7 +8,7 @@ PKG_VERSION:=		1.3.6
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		fb1585d2ad81c519a26d83bfd783dee8
 PKG_DESCR:=		small sendmail-compatible mail forwarder
-PKG_SECTION:=		mail
+PKG_SECTION:=		net/mail
 PKG_URL:=		http://www.acme.com/software/mini_sendmail/
 PKG_SITES:=		http://www.acme.com/software/mini_sendmail/
 

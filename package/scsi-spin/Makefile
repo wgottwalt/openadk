@@ -7,8 +7,8 @@ PKG_NAME:=		scsi-spin
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		d0c32bfc500e94cc1905d9457a99cdbb
-PKG_DESCR:=		Utility to spin down scsi disks
-PKG_SECTION:=		misc
+PKG_DESCR:=		utility to spin down scsi disks
+PKG_SECTION:=		sys/fs
 
 NO_DISTFILES:=		1
 
@@ -19,8 +19,6 @@ $(eval $(call PKG_template,SCSI_SPIN,scsi-spin,${PKG_VERSION}-${PKG_RELEASE},${P
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
-TARGET_CFLAGS+=		-Wall
 
 do-build:
 	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \
