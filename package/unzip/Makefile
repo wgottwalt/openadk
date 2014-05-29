@@ -8,7 +8,7 @@ PKG_VERSION:=		6.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		62b490407489521db863b523a7f86375
 PKG_DESCR:=		zip extraction utility
-PKG_SECTION:=		archive
+PKG_SECTION:=		app/archive
 PKG_URL:=		http://www.info-zip.org/UnZip.html
 PKG_SITES:=		http://downloads.sourceforge.net/infozip/
 
