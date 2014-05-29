@@ -50,6 +50,7 @@ config ADK_TARGET_USE_SSP
 	prompt "Use Stack Smashing Protection for all packages"
  	boolean	
 	select ADK_TOOLCHAIN_WITH_SSP
+	select ADK_PACKAGE_LIBSSP
 	default n
 
 config ADK_TARGET_USE_PIE
