@@ -19,11 +19,7 @@ for i in $systems;do
 	systemu=$(echo $system|tr '[:upper:]' '[:lower:]')
 	system=$(echo $system|tr '[:upper:]_' '[:lower:]-')
 	system=$(echo $system|sed 's#x86-64#x86_64#')
-	if [ "${system%-*}" = "toolchain" -o "${system%-*}" = "qemu" -o "${system%-*}" = "vbox" -o "${system%-*}" = "aranym" ];then
-		printf "\tdefault \"${system%-*}\" if ADK_$systemu\n" >> $topdir/target/config/Config.in.system.default
-	else
-		printf "\tdefault \"${system}\" if ADK_$systemu\n" >> $topdir/target/config/Config.in.system.default
-	fi
+	printf "\tdefault \"${system}\" if ADK_$systemu\n" >> $topdir/target/config/Config.in.system.default
 done
 
 for i in $(ls $topdir/target/);do
