@@ -282,7 +282,7 @@ config ADK_KERNEL_MMC_AT91
 
 config ADK_KERNEL_MMC_SDHCI_BCM2708
 	prompt "SD card support for Raspberry PI"
-	tristate
+	boolean
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_MMC
 	select ADK_KERNEL_MMC_BLOCK
@@ -298,7 +298,7 @@ config ADK_KERNEL_MMC_SDHCI_BCM2708
 
 config ADK_KERNEL_MMC_SDHCI_ESDHC_IMX
 	prompt "SD card support for Cubox-i"
-	tristate
+	boolean
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_DMA
 	select ADK_KERNEL_SCSI_MULTI_LUN
