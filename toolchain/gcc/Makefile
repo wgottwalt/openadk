@@ -4,7 +4,7 @@
 include $(TOPDIR)/rules.mk
 include ../rules.mk
 
-TARGET_CFLAGS:=		$(filter-out -fstack-protector,$(TARGET_CFLAGS))
+SHARED_LIBS:=           'libstdc++'
 
 include Makefile.inc
 
@@ -67,6 +67,7 @@ endif
 
 ifeq ($(ADK_TOOLCHAIN_WITH_SSP),y)
 GCC_FINAL_CONFOPTS+=	--enable-libssp
+SHARED_LIBS:=		'libstdc++,libssp'
 else
 GCC_FINAL_CONFOPTS+=	--disable-libssp
 endif
@@ -196,7 +197,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 			--enable-languages=$(LANGUAGES) \
 			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
-			--enable-shared='libstdc++' \
+			--enable-shared='${SHARED_LIBS}' \
 			--enable-cxx-flags='$(TARGET_CXXFLAGS)'
 	touch $@
 
