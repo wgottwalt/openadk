@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
 PKG_VERSION:=		2.02.106
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		77f84279fb649b3dc4edad1c6d1a1b0e
 PKG_DESCR:=		logical volume management
 PKG_SECTION:=		fs
@@ -39,6 +39,7 @@ CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \
 			--disable-testing \
 			--with-lvm1=none
+CONFIGURE_ENV+=		ac_cv_flag_HAVE_PIE=no
 
 lvm-install:
 	${INSTALL_DIR} ${IDIR_LVM}/usr/sbin
