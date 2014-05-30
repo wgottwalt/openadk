@@ -6,7 +6,7 @@ include $(TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		96
+PKG_RELEASE:=		97
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -27,14 +27,10 @@ ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
 	@echo "#" > $(IDIR_BASE_FILES)/etc/network/interfaces
 endif
 ifeq (${ADK_TARGET_PACKAGE_IPKG},y)
+	$(CP) ./files/ipkg.conf $(IDIR_BASE_FILES)/etc/
 	$(SED) 's,@ARCH@,$(ADK_TARGET_CPU_ARCH),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@SYSTEM@,$(ADK_TARGET_SYSTEM),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@LIBC@,$(ADK_TARGET_LIBC),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
-ifneq ($(ADK_TARGET_ABI),)
-	$(SED) 's,@ABI@,_$(ADK_TARGET_ABI),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
-else
-	$(SED) 's,@ABI@,,g' $(IDIR_BASE_FILES)/etc/ipkg.conf
-endif
 	$(SED) 's,@HOST@,$(ADK_HOST),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@VENDOR@,$(ADK_VENDOR),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	mkdir -p $(IDIR_BASE_FILES)/usr/lib/ipkg/lists
