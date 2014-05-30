@@ -321,7 +321,7 @@ config ADK_KERNEL_NLS_ASCII
 config ADK_KERNEL_NLS_ISO8859_1
 	prompt "NLS ISO 8859-1 (Latin-1; Western European Languages)"
 	tristate
-	default m
+	default n
 	help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs
@@ -495,7 +495,7 @@ config ADK_KERNEL_NLS_KOI8_U
 config ADK_KERNEL_NLS_UTF8
 	prompt "NLS UTF8"
 	tristate
-	default m
+	default n
 	help
 	  If you want to display filenames with native language characters
 	  from the Microsoft FAT file system family or from JOLIET CD-ROMs

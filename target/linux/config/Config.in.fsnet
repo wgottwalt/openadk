@@ -15,6 +15,7 @@ config ADK_KERNEL_CIFS
         select ADK_KERNEL_CRYPTO_ECB
         select ADK_KERNEL_CRYPTO_DES
         select ADK_KERNEL_CRYPTO_SHA256
+	select ADK_KERNEL_NLS_UTF8
 	default m if ADK_PACKAGE_CIFS_UTILS
 	default n
 	help
