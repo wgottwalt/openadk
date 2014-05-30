@@ -4,17 +4,15 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		git
-PKG_VERSION:=		1.8.4.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		6f63d103465b86ca0ebe4189ea54731c
+PKG_VERSION:=		2.0.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		0646202ae979e4339f3e47f2375b5773
 PKG_DESCR:=		fast version control system
 PKG_SECTION:=		dev/scm
 PKG_BUILDDEP:=		openssl curl expat autotool
 PKG_DEPENDS:=		libopenssl libcurl libexpat libpthread
 PKG_URL:=		http://git-scm.com/
-PKG_SITES:=		http://git-core.googlecode.com/files/
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+PKG_SITES:=		https://www.kernel.org/pub/software/scm/git/
 
 include $(TOPDIR)/mk/package.mk
 
