@@ -157,7 +157,7 @@ config ADK_KERNEL_NET_IPGRE
 config ADK_KERNEL_IPV6
 	prompt "IPv6 support"
 	tristate
-	default m
+	default n
 	help
 	  This is complemental support for the IP version 6.
 	  You will still be able to do traditional IPv4 networking as well.
