@@ -34,9 +34,9 @@ ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
 ifeq ($(ADK_TARGET_QEMU_WITH_BOOTLOADER),y)
-	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} -net user -net nic,model=e1000 qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} qemu-${CPU_ARCH}.img'
 else
-	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} -net user -net nic,model=e1000 -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
 endif
 endif
 ifeq ($(ADK_HARDWARE_VBOX),y)
