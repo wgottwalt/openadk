@@ -209,7 +209,7 @@ ifeq (,$(filter noscripts,${PKG_OPTS}))
 	done
 endif
 	-@test -e '${STAGING_PKG_DIR}/${PKG_NAME}.scripts' && \
-	cat '${STAGING_PKG_DIR}/${PKG_NAME}.scripts' >> '${STAGING_PKG_DIR}/${PKG_NAME}'
+	cat '${STAGING_PKG_DIR}/${PKG_NAME}.scripts' >> '${STAGING_PKG_DIR}/${PKG_NAME}' || :
 	touch $@
 
 ${_IPKGS_COOKIE}:
