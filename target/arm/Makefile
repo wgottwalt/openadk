@@ -36,7 +36,7 @@ endif
 ifeq ($(ADK_TARGET_FS),archive)
 targethelp:
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB),y)
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB)$(ADK_TARGET_QEMU_ARM_MODEL_TERRIER)$(ADK_TARGET_QEMU_ARM_MODEL_SPITZ),y)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"

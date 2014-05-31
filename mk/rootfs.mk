@@ -14,7 +14,7 @@ ifeq ($(ADK_TARGET_ROOTFS_ARCHIVE),y)
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 ROOTFS:=	root=/dev/vda1
 else
-ROOTFS:=	root=/dev/sda1
+ROOTFS:=	root=/dev/sda1 rootwait
 endif
 endif
 endif
