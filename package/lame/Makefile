@@ -22,10 +22,6 @@ PKG_SUBPKGS:=		LAME LIBMP3LAME
 PKGSD_LIBMP3LAME:=	mp3 encoding library
 PKGSC_LIBMP3LAME:=	libs/audio
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LAME,lame,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

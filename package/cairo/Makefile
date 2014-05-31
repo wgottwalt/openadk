@@ -18,10 +18,6 @@ PKG_URL:=		http://cairographics.org/
 PKG_SITES:=		http://cairographics.org/releases/
 PKG_OPTS:=		dev
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libonly
-endif
-
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

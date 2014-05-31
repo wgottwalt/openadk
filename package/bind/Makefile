@@ -43,10 +43,6 @@ PKGSC_LIBBIND:=		libs/net
 PKG_FLAVOURS_BIND_SERVER:=	WITH_IPV6
 PKGFD_WITH_IPV6:=		enable IPv6 support
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BIND_SERVER,bind-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

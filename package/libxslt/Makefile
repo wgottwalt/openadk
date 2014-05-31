@@ -22,10 +22,6 @@ PKG_SUBPKGS:=		LIBXSLT XSLTPROC
 PKGSD_XSLTPROC:=	XSLT processor utility
 PKGSC_XSLTPROC:=	sys/misc
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

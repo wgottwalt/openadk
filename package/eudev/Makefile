@@ -23,10 +23,6 @@ PKGSD_UDEV:=		dynamic device management manager
 PKGSC_LIBUDEV:=		libs/misc
 PKGSD_LIBUDEV:=		dynamic device management library
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,UDEV,udev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

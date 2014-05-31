@@ -16,10 +16,6 @@ PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libonly
-endif
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXCOMPOSITE,libxcomposite,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

@@ -24,10 +24,6 @@ PKGSC_LIBXML2_PYTHON:=	libs/misc
 PKGSB_LIBXML2_PYTHON:=	python2
 PKGSS_LIBXML2_PYTHON:=	python2
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

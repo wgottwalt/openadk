@@ -116,11 +116,11 @@ config ADK_DEBUG_STRIP
 	help
 	  All packages and C library will be compiled with debug information, but stripped for the target.
 
-config ADK_STATIC
+config ADK_TARGET_USE_STATIC_LIBS
 	bool "Link applications statically by default"
 	default n
 	select BUSYBOX_STATIC
 	help
-	  Useful for toolchain only target devices.
+	  Useful for debugging of dynamic linker problems.
 
 endmenu

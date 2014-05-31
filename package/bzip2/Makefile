@@ -23,10 +23,6 @@ PKG_SUBPKGS:=		BZIP2 LIBBZ2
 PKGSD_LIBBZ2:=		bzip2 compression library
 PKGSC_LIBBZ2:=		libs/misc
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

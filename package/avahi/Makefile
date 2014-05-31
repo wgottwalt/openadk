@@ -26,10 +26,6 @@ PKGSD_AVAHI_DNSCONFD:=	DNS server from mDNS configuration daemon
 PKGSD_LIBAVAHI:=	DNS-SD over mDNS library
 PKGSC_LIBAVAHI:=	libs/misc
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,AVAHI_DAEMON,avahi-daemon,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_AVAHI_DAEMON},${PKG_DESCR},${PKG_SECTION}))

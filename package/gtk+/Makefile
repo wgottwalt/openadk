@@ -18,10 +18,6 @@ PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/$(PKG_EXTRAVER)/
 PKG_LIBNAME:=		libgtk
 PKG_OPTS:=		dev
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libonly
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGTK,libgtk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

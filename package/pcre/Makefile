@@ -20,10 +20,6 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_SUBPKGS:=		LIBPCRE LIBPCRECPP
 PKGSD_LIBPCRECPP:=	PCRE c++ library
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

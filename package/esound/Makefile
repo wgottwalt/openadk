@@ -22,10 +22,6 @@ PKG_SUBPKGS:=		ESOUND LIBESD
 PKGSC_LIBESD:=		libs/audio
 PKGSD_LIBESD:=		esound library
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ESOUND,esound,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

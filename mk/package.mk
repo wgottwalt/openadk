@@ -123,10 +123,19 @@ IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)
 IDIR_$(1)_DEV=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)-dev
 IDIR_$(1)_DBG=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)-dbg
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
+ifneq (,$(filter dev,$(7)))
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 ALL_IPKGS+=	$$(IPKG_$(1))
 ALL_IDIRS+=	$${IDIR_$(1)}
 ALL_POSTINST+=	$(2)-install
 $(2)-install:
+endif
+else
+ALL_IPKGS+=	$$(IPKG_$(1))
+ALL_IDIRS+=	$${IDIR_$(1)}
+ALL_POSTINST+=	$(2)-install
+$(2)-install:
+endif
 endif
 INFO_$(1)=	$(PKG_STATE_DIR)/info/$(2).list
 INFO_$(1)_DEV=	$(PKG_STATE_DIR)/info/$(2)-dev.list
@@ -264,13 +273,12 @@ ifeq (,$(filter noscripts,$(7)))
 		    >>'$${STAGING_PKG_DIR}/$(1)'; \
 	done
 endif
-ifeq (,$(filter libmix,$(7)))
+
 ifeq (,$(filter libonly,$(7)))
 ifeq (,$(filter devonly,$(7)))
 	$${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
 ifneq ($(ADK_DEBUG),y)
 	$${PKG_BUILD} $${IDIR_$(1)_DBG} $${PACKAGE_DIR} $(MAKE_TRACE)
-endif
 endif
 endif
 endif

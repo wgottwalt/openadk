@@ -61,6 +61,7 @@ endif
 
 # do nothing, musl is already build in toolchain directory
 do-install:
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 	${INSTALL_DIR} $(IDIR_MUSL)/bin
 	${INSTALL_DIR} $(IDIR_MUSL)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/usr/lib/libc.so $(IDIR_MUSL)/$(ADK_TARGET_LIBC_PATH)
@@ -68,6 +69,7 @@ do-install:
 		ln -sf libc.so ld-musl-$(MARCH).so.1)
 	(cd $(IDIR_MUSL)/bin && \
 		ln -sf ../lib/ld-musl-$(MARCH).so.1 ldd)
+endif
 	
 
 musl-dev-install:

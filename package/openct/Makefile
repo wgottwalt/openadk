@@ -24,10 +24,6 @@ PKGSC_LIBOPENCT:=	libs/crypto
 PKGSS_LIBOPENCT:=	libltdl libusb
 PKGSB_LIBOPENCT:=	libtool libusb
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENCT,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

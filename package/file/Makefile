@@ -10,7 +10,7 @@ PKG_MD5SUM:=		e19c47e069ced7b01ccb4db402cc01d3
 PKG_DESCR:=		file type guesser
 PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		file-host
-PKG_DEPENDS:=		libmagic
+PKG_DEPENDS:=		libmagic magic
 PKG_URL:=		http://www.darwinsys.com/file
 PKG_SITES:=		ftp://ftp.fu-berlin.de/unix/tools/file/ \
 			ftp://ftp.astron.com/pub/file/
@@ -19,13 +19,11 @@ PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_SUBPKGS:=		FILE LIBMAGIC
+PKG_SUBPKGS:=		FILE LIBMAGIC MAGIC
 PKGSD_LIBMAGIC:=	file type guesser library
 PKGSC_LIBMAGIC:=	libs/misc
-
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
+PKGSD_MAGIC:=		magic file
+PKGSC_MAGIC:=		sys/misc
 
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
@@ -33,6 +31,11 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,FILE,file,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,FILE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBMAGIC,libmagic,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBMAGIC},${PKGSD_LIBMAGIC},${PKGSC_LIBMAGIC},${PKG_OPTS}))
+$(eval $(call PKG_template,MAGIC,magic,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MAGIC},${PKGSD_MAGIC},${PKGSC_MAGIC}))
+
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+MAKE_FLAGS+=		LDFLAGS="$(TARGET_LDFLAGS) -all-static"
+endif
 
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--enable-static \
@@ -43,10 +46,12 @@ file-install:
 	${INSTALL_DIR} ${IDIR_FILE}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/file ${IDIR_FILE}/usr/bin
 
-libmagic-install:
+magic-install:
 	${INSTALL_DIR} ${IDIR_LIBMAGIC}/usr/share/misc
 	${INSTALL_DATA} ${WRKINST}/usr/share/misc/magic.mgc \
 		${IDIR_LIBMAGIC}/usr/share/misc
+
+libmagic-install:
 	${INSTALL_DIR} ${IDIR_LIBMAGIC}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libmagic.so* ${IDIR_LIBMAGIC}/usr/lib
 

@@ -15,10 +15,6 @@ PKG_URL:=		http://www.libpng.org/pub/png/libpng.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libpng/}
 PKG_OPTS:=		dev
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libonly
-endif
-
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

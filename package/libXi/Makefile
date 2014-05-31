@@ -17,10 +17,6 @@ PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libonly
-endif
-
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

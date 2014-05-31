@@ -25,21 +25,19 @@ INSTALL_STYLE:=		manual
 
 # compile nothing, glibc is already build in toolchain directory
 do-install:
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 	${INSTALL_DIR} ${IDIR_GLIBC}/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH)
 	for file in libc libcrypt libdl libm libnsl libresolv libutil libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
+endif
 	${INSTALL_DIR} $(IDIR_GLIBC)/usr/bin
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_GLIBC)/usr/bin
 	${INSTALL_DIR} ${IDIR_GLIBC}/etc
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_GLIBC}/etc
 	${INSTALL_DATA} ./files/nsswitch.conf ${IDIR_GLIBC}/etc
-
-glibc-static-install:
-	${INSTALL_DIR} $(IDIR_GLIBC_STATIC)/usr/lib
-	$(CP) $(STAGING_TARGET_DIR)/usr/lib/libc.a $(IDIR_GLIBC_STATIC)/usr/lib
 
 glibc-dev-install:
 	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH) $(IDIR_GLIBC_DEV)/usr/lib

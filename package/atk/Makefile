@@ -15,10 +15,6 @@ PKG_SITES:=		${MASTER_SITE_GNOME:=/atk/2.11/}
 PKG_LIBNAME:=		libatk
 PKG_OPTS:=		dev
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libonly
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBATK,libatk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

@@ -16,10 +16,6 @@ PKG_URL:=		http://www.pango.org/
 PKG_SITES:=		${MASTER_SITE_GNOME:=pango/1.36/}
 PKG_OPTS:=		dev
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libonly
-endif
-
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

@@ -21,10 +21,6 @@ PKG_SUBPKGS:=		V4L_UTILS LIBV4L
 PKGSC_LIBV4L:=		libs/video
 PKGSD_LIBV4L:=		Video4Linux2 libraries
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,V4L_UTILS,v4l-utils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

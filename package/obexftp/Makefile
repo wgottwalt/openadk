@@ -22,16 +22,12 @@ PKGSD_LIBOBEXFTP:=	obex ftp library
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OBEXFTP,obexftp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBOBEXFTP,libobexftp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBOBEXFTP},${PKGSC_LIBOBEXFTP},${PKG_OPTS}))
 
-ifeq ($(ADK_STATIC),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 XAKE_FLAGS+=		STATIC_CFLAGS=-all-static
 endif
 

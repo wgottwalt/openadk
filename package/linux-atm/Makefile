@@ -25,10 +25,6 @@ PKGSC_BR2684CTL:=	net/route
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBATM,libatm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

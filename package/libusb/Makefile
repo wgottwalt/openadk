@@ -14,10 +14,6 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusbx/}
 PKG_LIBNAME:=		libusb
 PKG_OPTS:=		dev
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libonly
-endif
-
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk

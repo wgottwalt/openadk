@@ -20,7 +20,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,BLUEZ,bluez,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 AUTOTOOL_STYLE:=	autoreconf
-ifeq ($(ADK_STATIC),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 XAKE_FLAGS+=		CCLD="$(TARGET_CC) -all-static -pthread"
 endif
 TARGET_LDFLAGS+=	-lncurses

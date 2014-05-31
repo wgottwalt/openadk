@@ -86,10 +86,6 @@ endif
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBFFMPEG,libffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKGSD_LIBFFMPEG},${PKGSC_LIBFFMPEG},${PKG_OPTS}))

@@ -22,10 +22,6 @@ PKG_SUBPKGS:=		FUSE_UTILS LIBFUSE
 PKGSD_LIBFUSE:=		filesystem in userspace library
 PKGSC_LIBFUSE:=		libs/misc
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FUSE_UTILS,fuse-utils,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

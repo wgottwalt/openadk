@@ -28,10 +28,6 @@ PKGSD_RRDCGI:=		RRD CGI
 PKGSC_RRDTOOL:=		sys/misc
 PKGSD_RRDTOOL:=		RRD tool
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBRRD,librrd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

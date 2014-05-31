@@ -24,10 +24,6 @@ PKGSC_GSM_UTILS:=	sys/misc
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-1.0-pl10
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGSM,libgsm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

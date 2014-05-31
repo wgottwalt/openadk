@@ -35,10 +35,6 @@ PKGCD_WITH_BDB:=		use Berkeley DB as database backend
 PKGCS_WITH_BDB:=		libdb
 PKGCB_WITH_BDB:=		db
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 

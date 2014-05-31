@@ -13,6 +13,8 @@ PKG_URL:=		http://www.iana.org/time-zones/
 PKG_SITES:=		http://www.iana.org/time-zones/repository/releases/
 PKG_NOPARALLEL:=	1
 
+PKG_LIBC_DEPENDS:=	glibc musl
+
 DISTFILES:=             ${PKG_NAME}${PKG_VERSION}.tar.gz tzcode${PKG_VERSION}.tar.gz
 # both archives do not extract into subdirectories
 WRKDIST=		${WRKDIR}

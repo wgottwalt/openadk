@@ -18,10 +18,6 @@ PKG_OPTS:=		dev
 PKG_SUBPKGS:=		LIBTOOL LIBLTDL
 PKGSC_LIBLTDL:=		libs/misc
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk
 

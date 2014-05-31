@@ -22,10 +22,6 @@ PKGSC_LIBAXTLS:=	libs/crypto
 DISTFILES:=		axTLS-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/axTLS
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=              libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,AXHTTPD,axhttpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

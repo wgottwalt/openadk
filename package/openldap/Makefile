@@ -29,10 +29,6 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 PKG_FLAVOURS_OPENLDAP_SLAPD:=	WITH_IPV6
 PKGFD_WITH_IPV6:=		enable IPv6 support
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENLDAP,libopenldap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

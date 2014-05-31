@@ -31,6 +31,7 @@ do-install:
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC)/etc/TZ
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(GIT_VERSION).so \
 		$(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
@@ -42,6 +43,7 @@ do-install:
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(GIT_VERSION).so \
 			$(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
+endif
 
 uclibc-dev-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_DEV}/usr/lib ${IDIR_UCLIBC_DEV}/$(ADK_TARGET_LIBC_PATH)

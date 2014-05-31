@@ -23,10 +23,6 @@ PKGSD_LIBDBUS:=		DBUS library
 PKGSC_LIBDBUS:=		libs/misc
 PKGSS_LIBDBUS:=		libexpat libuuid
 
-ifeq ($(ADK_STATIC),y)
-PKG_OPTS+=		libmix
-endif
-
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
