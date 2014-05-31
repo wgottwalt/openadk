@@ -3,6 +3,7 @@
 
 config ADK_TARGET_CFLAGS
 	string
+	default "-mcpu=v7.10.d" if ADK_CPU_MICROBLAZE
 	default "-m4 -ml" if ADK_CPU_SH4 && ADK_little
 	default "-m4 -mb" if ADK_CPU_SH4 && ADK_big
 	default "-mcpu=powerpc" if ADK_CPU_PPC
