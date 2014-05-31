@@ -33,6 +33,7 @@ endif
 
 TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--disable-werror \
+			--disable-install-libiberty \
 			--host=$(GNU_TARGET_NAME) \
 			--target=$(GNU_TARGET_NAME)
 # disable honour cflags stuff

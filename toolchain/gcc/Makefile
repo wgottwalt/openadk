@@ -21,6 +21,7 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-gnu-as \
 			--enable-tls \
 			--disable-libsanitizer \
+			--disable-install-libiberty \
 			--disable-libitm \
 			--disable-libmudflap \
 			--disable-libgomp \

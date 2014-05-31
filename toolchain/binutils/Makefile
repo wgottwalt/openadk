@@ -49,6 +49,7 @@ $(WRKBUILD)/.configured:
 		--disable-libtool-lock \
 		--disable-nls \
 		--disable-werror \
+		--disable-install-libiberty \
 		${CONFOPTS} \
 	);
 	touch $@
