@@ -1,7 +1,7 @@
 menu "Crypto support"
 
 config ADK_KERNEL_CRYPTO
-	boolean
+	tristate
 
 config ADK_KERNEL_CRYPTO_HW
 	tristate
@@ -43,55 +43,56 @@ comment "Software cryptography support"
 menu "Crypto core / Block and Hash modes"
 
 config ADK_KERNEL_CRYPTO_PCOMP
-	boolean
+	tristate
 	select ADK_KERNEL_CRYPTO_PCOMP2
 	select ADK_KERNEL_CRYPTO_ALGAPI
 
 config ADK_KERNEL_CRYPTO_PCOMP2
-	boolean
+	tristate
 
 config ADK_KERNEL_CRYPTO_ALGAPI
-	boolean
+	tristate
+	select ADK_KERNEL_CRYPTO
 	select ADK_KERNEL_CRYPTO_ALGAPI2
 	
 config ADK_KERNEL_CRYPTO_ALGAPI2
-	boolean
+	tristate
 
 config ADK_KERNEL_CRYPTO_AEAD
-	boolean
+	tristate
 	select ADK_KERNEL_CRYPTO_AEAD2
 	select ADK_KERNEL_CRYPTO_ALGAPI
 
 config ADK_KERNEL_CRYPTO_AEAD2
-	boolean
+	tristate
 
 config ADK_KERNEL_CRYPTO_HASH
-	boolean
+	tristate
 	select ADK_KERNEL_CRYPTO_HASH2
 	select ADK_KERNEL_CRYPTO_ALGAPI
 
 config ADK_KERNEL_CRYPTO_HASH2
-	boolean
+	tristate
 
 config ADK_KERNEL_CRYPTO_BLKCIPHER
-	boolean
+	tristate
 	select ADK_KERNEL_CRYPTO_BLKCIPHER2
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	select ADK_KERNEL_CRYPTO_RNG
 	select ADK_KERNEL_CRYPTO_WORKQUEUE
 
 config ADK_KERNEL_CRYPTO_BLKCIPHER2
-	boolean
+	tristate
 
 config ADK_KERNEL_CRYPTO_WORKQUEUE
-	boolean
+	tristate
 
 config ADK_KERNEL_CRYPTO_MANAGER
-	boolean
+	tristate
 	select ADK_KERNEL_CRYPTO_MANAGER2
 
 config ADK_KERNEL_CRYPTO_MANAGER2
-	boolean
+	tristate
 	select ADK_KERNEL_CRYPTO_AEAD2
 	select ADK_KERNEL_CRYPTO_HASH2
 	select ADK_KERNEL_CRYPTO_BLKCIPHER2
@@ -105,7 +106,6 @@ config ADK_KERNEL_CRYPTO_AUTHENC
 	select ADK_KERNEL_CRYPTO_MANAGER
 	select ADK_KERNEL_CRYPTO_HASH
 	default n
-	help
 
 config ADK_KERNEL_CRYPTO_SEQIV
 	prompt "Sequence Number IV Generator"
@@ -113,6 +113,7 @@ config ADK_KERNEL_CRYPTO_SEQIV
 	select ADK_KERNEL_CRYPTO_AEAD
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	select ADK_KERNEL_CRYPTO_RNG
+	default n
 	help
 	  This IV generator generates an IV based on a sequence number by
 	  xoring it with a salt.  This algorithm is mainly useful for CTR
@@ -208,11 +209,11 @@ config ADK_KERNEL_CRYPTO_XCBC
           XCBC: Keyed-Hashing with encryption algorithm
 
 config ADK_KERNEL_CRYPTO_RNG
-	boolean
+	tristate
 	select ADK_KERNEL_CRYPTO_RNG2
 
 config ADK_KERNEL_CRYPTO_RNG2
-	boolean
+	tristate
 
 endmenu
 
@@ -306,9 +307,9 @@ menu "Cipher algoritms"
 
 config ADK_KERNEL_CRYPTO_AES
 	prompt "AES cipher algorithms"
-	boolean
+	tristate
 	select ADK_KERNEL_CRYPTO_ALGAPI
-	default y
+	default n
 	help
 	  AES cipher algorithms (FIPS-197). AES uses the Rijndael 
 	  algorithm.

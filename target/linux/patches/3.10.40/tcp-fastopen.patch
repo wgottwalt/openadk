@@ -1,0 +1,254 @@
+https://lkml.org/lkml/2014/5/5/674
+Andi Kleen <ak@linux.intel.com>
+
+diff -Nur linux-3.10.40.orig/include/linux/tcp.h linux-3.10.40/include/linux/tcp.h
+--- linux-3.10.40.orig/include/linux/tcp.h	2014-05-13 14:00:04.000000000 +0200
++++ linux-3.10.40/include/linux/tcp.h	2014-05-30 15:41:44.000000000 +0200
+@@ -357,6 +357,9 @@
+ 	return (struct tcp_timewait_sock *)sk;
+ }
+ 
++extern void tcp_sock_destruct(struct sock *sk);
++
++#ifdef CONFIG_TCP_FASTOPEN
+ static inline bool tcp_passive_fastopen(const struct sock *sk)
+ {
+ 	return (sk->sk_state == TCP_SYN_RECV &&
+@@ -368,8 +371,6 @@
+ 	return foc->len != -1;
+ }
+ 
+-extern void tcp_sock_destruct(struct sock *sk);
+-
+ static inline int fastopen_init_queue(struct sock *sk, int backlog)
+ {
+ 	struct request_sock_queue *queue =
+@@ -389,4 +390,13 @@
+ 	return 0;
+ }
+ 
++#else
++static inline bool tcp_passive_fastopen(const struct sock *sk)
++{ return false; }
++static inline bool fastopen_cookie_present(struct tcp_fastopen_cookie *foc)
++{ return false; }
++static inline int fastopen_init_queue(struct sock *sk, int backlog)
++{ return 0; }
++#endif
++
+ #endif	/* _LINUX_TCP_H */
+diff -Nur linux-3.10.40.orig/include/net/request_sock.h linux-3.10.40/include/net/request_sock.h
+--- linux-3.10.40.orig/include/net/request_sock.h	2014-05-13 14:00:04.000000000 +0200
++++ linux-3.10.40/include/net/request_sock.h	2014-05-30 15:41:44.000000000 +0200
+@@ -167,8 +167,14 @@
+ 
+ extern void __reqsk_queue_destroy(struct request_sock_queue *queue);
+ extern void reqsk_queue_destroy(struct request_sock_queue *queue);
++#ifdef CONFIG_TCP_FASTOPEN
+ extern void reqsk_fastopen_remove(struct sock *sk,
+ 				  struct request_sock *req, bool reset);
++#else
++static inline void reqsk_fastopen_remove(struct sock *sk, struct request_sock *req,
++ 			   bool reset) {}
++#endif
++
+ 
+ static inline struct request_sock *
+ 	reqsk_queue_yank_acceptq(struct request_sock_queue *queue)
+diff -Nur linux-3.10.40.orig/include/net/tcp.h linux-3.10.40/include/net/tcp.h
+--- linux-3.10.40.orig/include/net/tcp.h	2014-05-13 14:00:04.000000000 +0200
++++ linux-3.10.40/include/net/tcp.h	2014-05-30 15:41:44.000000000 +0200
+@@ -257,7 +257,11 @@
+ extern int sysctl_tcp_retries2;
+ extern int sysctl_tcp_orphan_retries;
+ extern int sysctl_tcp_syncookies;
++#ifdef CONFIG_TCP_FASTOPEN
+ extern int sysctl_tcp_fastopen;
++#else
++#define sysctl_tcp_fastopen 0
++#endif
+ extern int sysctl_tcp_retrans_collapse;
+ extern int sysctl_tcp_stdurg;
+ extern int sysctl_tcp_rfc1337;
+@@ -1311,7 +1315,12 @@
+ 	size_t				size;
+ 	int				copied;	/* queued in tcp_connect() */
+ };
++
++#ifdef CONFIG_TCP_FASTOPEN
+ void tcp_free_fastopen_req(struct tcp_sock *tp);
++#else
++static inline void tcp_free_fastopen_req(struct tcp_sock *tp) {}
++#endif
+ 
+ extern struct tcp_fastopen_context __rcu *tcp_fastopen_ctx;
+ int tcp_fastopen_reset_cipher(void *key, unsigned int len);
+diff -Nur linux-3.10.40.orig/net/Kconfig linux-3.10.40/net/Kconfig
+--- linux-3.10.40.orig/net/Kconfig	2014-05-13 14:00:04.000000000 +0200
++++ linux-3.10.40/net/Kconfig	2014-05-30 15:41:44.000000000 +0200
+@@ -52,8 +52,8 @@
+ 
+ config INET
+ 	bool "TCP/IP networking"
+-	select CRYPTO
+-	select CRYPTO_AES
++	select CRYPTO if TCP_FASTOPEN
++	select CRYPTO_AES if TCP_FASTOPEN
+ 	---help---
+ 	  These are the protocols used on the Internet and on most local
+ 	  Ethernets. It is highly recommended to say Y here (this will enlarge
+diff -Nur linux-3.10.40.orig/net/core/request_sock.c linux-3.10.40/net/core/request_sock.c
+--- linux-3.10.40.orig/net/core/request_sock.c	2014-05-13 14:00:04.000000000 +0200
++++ linux-3.10.40/net/core/request_sock.c	2014-05-30 15:41:44.000000000 +0200
+@@ -131,6 +131,7 @@
+ 		kfree(lopt);
+ }
+ 
++#ifdef CONFIG_TCP_FASTOPEN
+ /*
+  * This function is called to set a Fast Open socket's "fastopen_rsk" field
+  * to NULL when a TFO socket no longer needs to access the request_sock.
+@@ -223,3 +224,4 @@
+ 	sock_put(lsk);
+ 	return;
+ }
++#endif
+diff -Nur linux-3.10.40.orig/net/ipv4/Kconfig linux-3.10.40/net/ipv4/Kconfig
+--- linux-3.10.40.orig/net/ipv4/Kconfig	2014-05-13 14:00:04.000000000 +0200
++++ linux-3.10.40/net/ipv4/Kconfig	2014-05-30 15:41:44.000000000 +0200
+@@ -328,6 +328,10 @@
+ 	  the notion of a secure tunnel for IPSEC and then use routing protocol
+ 	  on top.
+ 
++config TCP_FASTOPEN
++	bool "Enable TCP fastopen"
++	default n
++
+ config INET_AH
+ 	tristate "IP: AH transformation"
+ 	select XFRM_ALGO
+diff -Nur linux-3.10.40.orig/net/ipv4/Makefile linux-3.10.40/net/ipv4/Makefile
+--- linux-3.10.40.orig/net/ipv4/Makefile	2014-05-13 14:00:04.000000000 +0200
++++ linux-3.10.40/net/ipv4/Makefile	2014-05-30 16:58:49.000000000 +0200
+@@ -7,7 +7,7 @@
+ 	     ip_output.o ip_sockglue.o inet_hashtables.o \
+ 	     inet_timewait_sock.o inet_connection_sock.o \
+ 	     tcp.o tcp_input.o tcp_output.o tcp_timer.o tcp_ipv4.o \
+-	     tcp_minisocks.o tcp_cong.o tcp_metrics.o tcp_fastopen.o \
++	     tcp_minisocks.o tcp_cong.o tcp_metrics.o \
+ 	     datagram.o raw.o udp.o udplite.o \
+ 	     arp.o icmp.o devinet.o af_inet.o  igmp.o \
+ 	     fib_frontend.o fib_semantics.o fib_trie.o \
+@@ -50,6 +50,7 @@
+ obj-$(CONFIG_TCP_CONG_LP) += tcp_lp.o
+ obj-$(CONFIG_TCP_CONG_YEAH) += tcp_yeah.o
+ obj-$(CONFIG_TCP_CONG_ILLINOIS) += tcp_illinois.o
++obj-$(CONFIG_TCP_FASTOPEN) += tcp_fastopen.o
+ obj-$(CONFIG_MEMCG_KMEM) += tcp_memcontrol.o
+ obj-$(CONFIG_NETLABEL) += cipso_ipv4.o
+ 
+diff -Nur linux-3.10.40.orig/net/ipv4/sysctl_net_ipv4.c linux-3.10.40/net/ipv4/sysctl_net_ipv4.c
+--- linux-3.10.40.orig/net/ipv4/sysctl_net_ipv4.c	2014-05-13 14:00:04.000000000 +0200
++++ linux-3.10.40/net/ipv4/sysctl_net_ipv4.c	2014-05-30 17:00:16.000000000 +0200
+@@ -236,6 +236,7 @@
+ 	return 0;
+ }
+ 
++#ifdef CONFIG_TCP_FASTOPEN
+ static int proc_tcp_fastopen_key(ctl_table *ctl, int write, void __user *buffer,
+ 				 size_t *lenp, loff_t *ppos)
+ {
+@@ -276,6 +277,7 @@
+ 	kfree(tbl.data);
+ 	return ret;
+ }
++#endif
+ 
+ static struct ctl_table ipv4_table[] = {
+ 	{
+@@ -425,6 +427,7 @@
+ 		.proc_handler	= proc_dointvec
+ 	},
+ #endif
++#ifdef CONFIG_TCP_FASTOPEN
+ 	{
+ 		.procname	= "tcp_fastopen",
+ 		.data		= &sysctl_tcp_fastopen,
+@@ -438,6 +441,7 @@
+ 		.maxlen		= ((TCP_FASTOPEN_KEY_LENGTH * 2) + 10),
+ 		.proc_handler	= proc_tcp_fastopen_key,
+ 	},
++#endif
+ 	{
+ 		.procname	= "tcp_tw_recycle",
+ 		.data		= &tcp_death_row.sysctl_tw_recycle,
+diff -Nur linux-3.10.40.orig/net/ipv4/tcp.c linux-3.10.40/net/ipv4/tcp.c
+--- linux-3.10.40.orig/net/ipv4/tcp.c	2014-05-13 14:00:04.000000000 +0200
++++ linux-3.10.40/net/ipv4/tcp.c	2014-05-30 15:41:44.000000000 +0200
+@@ -993,6 +993,7 @@
+ 	return tmp;
+ }
+ 
++#ifdef CONFIG_TCP_FASTOPEN
+ void tcp_free_fastopen_req(struct tcp_sock *tp)
+ {
+ 	if (tp->fastopen_req != NULL) {
+@@ -1026,6 +1027,7 @@
+ 	tcp_free_fastopen_req(tp);
+ 	return err;
+ }
++#endif
+ 
+ int tcp_sendmsg(struct kiocb *iocb, struct sock *sk, struct msghdr *msg,
+ 		size_t size)
+@@ -1041,6 +1043,7 @@
+ 	lock_sock(sk);
+ 
+ 	flags = msg->msg_flags;
++#ifdef CONFIG_TCP_FASTOPEN
+ 	if (flags & MSG_FASTOPEN) {
+ 		err = tcp_sendmsg_fastopen(sk, msg, &copied_syn, size);
+ 		if (err == -EINPROGRESS && copied_syn > 0)
+@@ -1049,6 +1052,7 @@
+ 			goto out_err;
+ 		offset = copied_syn;
+ 	}
++#endif
+ 
+ 	timeo = sock_sndtimeo(sk, flags & MSG_DONTWAIT);
+ 
+diff -Nur linux-3.10.40.orig/net/ipv4/tcp_ipv4.c linux-3.10.40/net/ipv4/tcp_ipv4.c
+--- linux-3.10.40.orig/net/ipv4/tcp_ipv4.c	2014-05-13 14:00:04.000000000 +0200
++++ linux-3.10.40/net/ipv4/tcp_ipv4.c	2014-05-30 15:41:44.000000000 +0200
+@@ -1285,6 +1285,7 @@
+ };
+ #endif
+ 
++#ifdef CONFIG_TCP_FASTOPEN
+ static bool tcp_fastopen_check(struct sock *sk, struct sk_buff *skb,
+ 			       struct request_sock *req,
+ 			       struct tcp_fastopen_cookie *foc,
+@@ -1461,6 +1462,23 @@
+ 	WARN_ON(req->sk == NULL);
+ 	return 0;
+ }
++#else
++static bool tcp_fastopen_check(struct sock *sk, struct sk_buff *skb,
++			       struct request_sock *req,
++			       struct tcp_fastopen_cookie *foc,
++			       struct tcp_fastopen_cookie *valid_foc)
++{
++	return false;
++}
++
++static int tcp_v4_conn_req_fastopen(struct sock *sk,
++				    struct sk_buff *skb,
++				    struct sk_buff *skb_synack,
++				    struct request_sock *req)
++{
++	return 0;
++}
++#endif
+ 
+ int tcp_v4_conn_request(struct sock *sk, struct sk_buff *skb)
+ {

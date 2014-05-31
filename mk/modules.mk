@@ -78,6 +78,7 @@ $(eval $(call KMOD_template,VIA_RHINE,via-rhine,\
 # 
 # Wireless network devices
 #
+
 $(eval $(call KMOD_template,RFKILL,rfkill,\
 	$(MODULES_DIR)/kernel/net/rfkill/rfkill \
 ,10))
@@ -821,6 +822,37 @@ $(eval $(call KMOD_template,DM_SNAPSHOT,dm-snapshot,\
 #
 # Crypto
 #
+
+$(eval $(call KMOD_template,CRYPTO,crypto,\
+    $(MODULES_DIR)/kernel/crypto/crypto \
+,01))
+
+$(eval $(call KMOD_template,CRYPTO_ALGAPI,crypto-algapi,\
+    $(MODULES_DIR)/kernel/crypto/crypto_algapi \
+,02))
+
+$(eval $(call KMOD_template,CRYPTO_PCOMP,crypto-pcomp,\
+    $(MODULES_DIR)/kernel/crypto/pcompress \
+,03))
+
+$(eval $(call KMOD_template,CRYPTO_AEAD,crypto-aead,\
+    $(MODULES_DIR)/kernel/crypto/aead \
+,03))
+
+$(eval $(call KMOD_template,CRYPTO_HASH,crypto-hash,\
+    $(MODULES_DIR)/kernel/crypto/crypto_hash \
+,04))
+
+$(eval $(call KMOD_template,CRYPTO_RNG,crypto-rng,\
+    $(MODULES_DIR)/kernel/crypto/rng \
+    $(MODULES_DIR)/kernel/crypto/krng \
+,06))
+
+$(eval $(call KMOD_template,CRYPTO_MANAGER,crypto-manager,\
+    $(MODULES_DIR)/kernel/crypto/cryptomgr \
+    $(MODULES_DIR)/kernel/crypto/eseqiv \
+    $(MODULES_DIR)/kernel/crypto/chainiv \
+,07))
 
 $(eval $(call KMOD_template,CRYPTO_DEV_GEODE,crypto-dev-geode,\
     $(MODULES_DIR)/kernel/drivers/crypto/geode-aes \
