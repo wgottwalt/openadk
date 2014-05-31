@@ -12,6 +12,7 @@ endif
 
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
+	$(SED) 's/install_to_$(INSTALL_DEST) //' ${WRKBUILD}/libiberty/Makefile.in
 	(cd $(WRKBUILD); \
 		gdb_cv_func_sigsetjmp=yes \
 		./configure \
@@ -31,6 +32,7 @@ $(WRKBUILD)/.configured:
 		--disable-sim \
 		--disable-tui \
 		--disable-werror \
+		--disable-install-libiberty \
 		--without-x \
 	);
 	touch $@
@@ -40,7 +42,7 @@ $(WRKBUILD)/.compiled:
 	touch $@
 
 $(WRKBUILD)/.installed:
-	install -c $(WRKBUILD)/gdb/gdb $(TARGET_CROSS)gdb
+	$(INSTALL_BIN) $(WRKBUILD)/gdb/gdb $(TARGET_CROSS)gdb
 	touch $@
 
 include ${TOPDIR}/mk/toolchain.mk
