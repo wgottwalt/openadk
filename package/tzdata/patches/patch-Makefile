@@ -1,6 +1,46 @@
---- w-tzdata-2013d-1.orig/Makefile	2013-07-05 16:38:01.000000000 +0200
-+++ w-tzdata-2013d-1/Makefile	2013-10-04 11:29:22.000000000 +0200
-@@ -231,7 +231,7 @@ GCC_DEBUG_FLAGS = -Dlint -g3 -O3 -fno-co
+--- w-tzdata-2014d-1.orig/Makefile	2014-05-28 06:35:46.000000000 +0200
++++ w-tzdata-2014d-1/Makefile	2014-05-30 09:15:54.792171067 +0200
+@@ -45,33 +45,33 @@ POSIXRULES=	America/New_York
+ 
+ # Everything gets put in subdirectories of. . .
+ 
+-TOPDIR=		/usr/local
++TZTOPDIR=	/usr
+ 
+ # "Compiled" time zone information is placed in the "TZDIR" directory
+ # (and subdirectories).
+ # Use an absolute path name for TZDIR unless you're just testing the software.
+ 
+ TZDIR_BASENAME=	zoneinfo
+-TZDIR=		$(TOPDIR)/etc/$(TZDIR_BASENAME)
++TZDIR=		$(TZTOPDIR)/etc/$(TZDIR_BASENAME)
+ 
+ # Types to try, as an alternative to time_t.  int64_t should be first.
+ TIME_T_ALTERNATIVES= int64_t int32_t uint32_t uint64_t
+ 
+ # The "tzselect", "zic", and "zdump" commands get installed in. . .
+ 
+-ETCDIR=		$(TOPDIR)/etc
++ETCDIR=		$(TZTOPDIR)/etc
+ 
+ # If you "make INSTALL", the "date" command gets installed in. . .
+ 
+-BINDIR=		$(TOPDIR)/bin
++BINDIR=		$(TZTOPDIR)/bin
+ 
+ # Manual pages go in subdirectories of. . .
+ 
+-MANDIR=		$(TOPDIR)/man
++MANDIR=		$(TZTOPDIR)/man
+ 
+ # Library functions are put in an archive in LIBDIR.
+ 
+-LIBDIR=		$(TOPDIR)/lib
++LIBDIR=		$(TZTOPDIR)/lib
+ 
+ # If you always want time values interpreted as "seconds since the epoch
+ # (not counting leap seconds)", use
+@@ -224,7 +224,7 @@ GCC_DEBUG_FLAGS = -Dlint -g3 -O3 -fno-co
  # before the first Monday in January when a "%V" format is used and January 1
  # falls on a Friday, Saturday, or Sunday.
  
@@ -9,27 +49,27 @@
  
  # Linker flags.  Default to $(LFLAGS) for backwards compatibility
  # to tzcode2012h and earlier.
-@@ -239,7 +239,7 @@ CFLAGS=
+@@ -232,7 +232,7 @@ CFLAGS=
  LDFLAGS=	$(LFLAGS)
  
  zic=		./zic
 -ZIC=		$(zic) $(ZFLAGS)
 +ZIC=		./zic_for_build $(ZFLAGS)
  
- # The name of a Posix-compliant `awk' on your system.
- AWK=		awk
-@@ -330,7 +330,7 @@ ENCHILADA=	$(COMMON) $(DOCS) $(SOURCES) 
+ ZFLAGS=
  
- SHELL=		/bin/sh
+@@ -338,7 +338,7 @@ SHELL=		/bin/sh
  
--all:		tzselect zic zdump $(LIBOBJS)
-+all:		zic_for_build tzselect zic zdump $(LIBOBJS)
+ all:		tzselect zic zdump libtz.a $(TABDATA)
  
- ALL:		all date
+-ALL:		all date
++ALL:		zic_for_build date
  
-@@ -365,6 +365,14 @@ version.h:
- 		 echo 'static char const TZVERSION[]="$(VERSION)";' && \
- 		 echo 'static char const REPORT_BUGS_TO[]="$(BUGEMAIL)";') >$@
+ install:	all $(DATA) $(REDO) $(MANS)
+ 		mkdir -p $(DESTDIR)$(ETCDIR) $(DESTDIR)$(TZDIR) \
+@@ -371,6 +371,14 @@ zdump:		$(TZDOBJS)
+ zic:		$(TZCOBJS) yearistype
+ 		$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(TZCOBJS) $(LDLIBS)
  
 +zic_for_build: version.h
 +		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) zic.c -o zic_build.o
@@ -39,28 +79,29 @@
 +		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) ialloc.c -o ialloc_build.o
 +		$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -o $@ zic_build.o localtime_build.o asctime_build.o scheck_build.o ialloc_build.o 
 +
- zdump:		$(TZDOBJS)
- 		$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(TZDOBJS) $(LDLIBS)
- 
-@@ -375,10 +383,10 @@ yearistype:	yearistype.sh
+ yearistype:	yearistype.sh
  		cp yearistype.sh yearistype
  		chmod +x yearistype
+@@ -378,11 +386,11 @@ yearistype:	yearistype.sh
+ leapseconds:	$(LEAP_DEPS)
+ 		$(AWK) -f leapseconds.awk leap-seconds.list >$@
  
 -posix_only:	zic $(TDATA)
 +posix_only:	zic_for_build $(TDATA)
- 		$(ZIC) -y $(YEARISTYPE) -d $(TZDIR) -L /dev/null $(TDATA)
+ 		$(ZIC) -y $(YEARISTYPE) -d $(DESTDIR)$(TZDIR) \
+ 			-L /dev/null $(TDATA)
  
 -right_only:	zic leapseconds $(TDATA)
 +right_only:	zic_for_build leapseconds $(TDATA)
- 		$(ZIC) -y $(YEARISTYPE) -d $(TZDIR) -L leapseconds $(TDATA)
+ 		$(ZIC) -y $(YEARISTYPE) -d $(DESTDIR)$(TZDIR) \
+ 			-L leapseconds $(TDATA)
  
- # In earlier versions of this makefile, the other two directories were
-@@ -390,7 +398,7 @@ right_only:	zic leapseconds $(TDATA)
- # Therefore, the other two directories are now siblings of $(TZDIR).
- # You must replace all of $(TZDIR) to switch from not using leap seconds
- # to using them, or vice versa.
--other_two:	zic leapseconds $(TDATA)
-+other_two:	zic_for_build leapseconds $(TDATA)
- 		$(ZIC) -y $(YEARISTYPE) -d $(TZDIR)-posix -L /dev/null $(TDATA)
- 		$(ZIC) -y $(YEARISTYPE) \
- 			-d $(TZDIR)-leaps -L leapseconds $(TDATA)
+@@ -520,7 +528,7 @@ check_time_t_alternatives:
+ 		for type in $(TIME_T_ALTERNATIVES); do \
+ 		  mkdir -p tzpublic/$$type && \
+ 		  make clean_misc && \
+-		  make TOPDIR=`pwd`/tzpublic/$$type \
++		  make TZTOPDIR=`pwd`/tzpublic/$$type \
+ 		    CFLAGS='$(CFLAGS) -Dtime_tz='"'$$type'" \
+ 		    install && \
+ 		  diff -qr tzpublic/int64_t/etc/zoneinfo tzpublic/$$type/etc/zoneinfo && \

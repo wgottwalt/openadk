@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		tzdata
-PKG_VERSION:=		2013d
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		65b6818162230fc02f86f293376c73df 4616a9560270f180eeb9a08540636890
+PKG_VERSION:=		2014d
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		299b86c0368ecfb321f15d5c408a1d9b 4a0f5f259ba8a2b826fffb1fa26d0134
 PKG_DESCR:=		timezone data (/usr/share/zoneinfo)
 PKG_SECTION:=		base/apps
 PKG_URL:=		http://www.iana.org/time-zones/
@@ -29,7 +29,7 @@ $(eval $(call PKG_template,DATE,date,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 CONFIG_STYLE:=		manual
 CFLAGS_FOR_BUILD+=	-DSTD_INSPIRED=1
 TARGET_CFLAGS+=		-DHAVE_INTTYPES_H=1
-XAKE_FLAGS+=		TOPDIR="${WRKINST}" TZDIR="${WRKINST}/usr/share/zoneinfo" cc="${TARGET_CC}"
+XAKE_FLAGS+=		TZDIR="/usr/share/zoneinfo" cc="${TARGET_CC}"
 # the uppercase targets enable building and installation of the date utility
 ALL_TARGET:=		ALL
 INSTALL_TARGET:=	INSTALL
@@ -55,6 +55,6 @@ tzdata-install:
 
 date-install:
 	${INSTALL_DIR} ${IDIR_DATE}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/bin/date ${IDIR_DATE}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/date ${IDIR_DATE}/usr/bin/
 
 include ${TOPDIR}/mk/pkg-bottom.mk
