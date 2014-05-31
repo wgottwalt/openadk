@@ -22,7 +22,7 @@ config ADK_KERNEL_IOSCHED_CFQ
 	boolean
 
 config ADK_KERNEL_SCSI_DMA
-	boolean
+	tristate
 
 config ADK_KERNEL_SCSI_MULTI_LUN
 	boolean
@@ -131,16 +131,6 @@ config ADK_KERNEL_PATA_SC1200
 	default y if ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default n
 
-config ADK_KERNEL_PATA_JMICRON
-	tristate
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_ATA
-	select ADK_KERNEL_ATA_SFF
-	select ADK_KERNEL_ATA_BMDMA
-	select ADK_KERNEL_BLK_DEV
-	select ADK_KERNEL_BLK_DEV_SD
-	default n
-
 config ADK_KERNEL_SATA_AHCI
 	prompt "AHCI SATA driver"
 	tristate
@@ -164,7 +154,11 @@ config ADK_KERNEL_ATA_PIIX
 	select ADK_KERNEL_ATA_BMDMA
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
-	depends on ADK_TARGET_SYSTEM_IBM_X40 || ADK_TARGET_QEMU
+	depends on ADK_TARGET_SYSTEM_IBM_X40 || \
+		ADK_TARGET_SYSTEM_QEMU_MIPS || \
+		ADK_TARGET_SYSTEM_QEMU_MIPS64 || \
+		ADK_TARGET_SYSTEM_QEMU_X86 || \
+		ADK_TARGET_SYSTEM_QEMU_X86_64
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
 	help
@@ -232,7 +226,10 @@ config ADK_KERNEL_PATA_PXA
 endmenu
 
 menu "SCSI driver support"
-depends on ADK_TARGET_WITH_SCSI || ADK_TARGET_QEMU
+depends on ADK_TARGET_WITH_SCSI || \
+	ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB || \
+	ADK_TARGET_SYSTEM_QEMU_PPC64 || \
+	ADK_TARGET_SYSTEM_QEMU_SPARC
 
 config ADK_KERNEL_SCSI_SYM53C8XX_2
 	prompt "Symbios Logic 53C8XX2 support"

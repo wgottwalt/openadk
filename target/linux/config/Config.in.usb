@@ -173,6 +173,7 @@ config ADK_KERNEL_USB_CHIPIDEA
 	select ADK_KERNEL_USB_CHIPIDEA_HOST
 	select ADK_KERNEL_USB_GADGET
 	depends on ADK_KERNEL_USB_EHCI_HCD
+	depends on ADK_TARGET_SYSTEM_CUBOX_I
 	default m if ADK_TARGET_SYSTEM_CUBOX_I
 	default n
 
@@ -216,8 +217,8 @@ config ADK_KERNEL_USB_STORAGE
 config ADK_KERNEL_SND_USB_AUDIO
 	prompt "Support for USB sound adapter"
 	tristate
-	select ADK_KERNEL_SND_USB
 	select ADK_KERNEL_SND
+	select ADK_KERNEL_SND_USB
 	select ADK_KERNEL_SND_RAWMIDI
 	default n
 

@@ -20,18 +20,6 @@ diff -Nur linux-3.0.4.orig/fs/notify/Kconfig linux-3.0.4/fs/notify/Kconfig
  
  source "fs/notify/dnotify/Kconfig"
  source "fs/notify/inotify/Kconfig"
-diff -Nur linux-3.11.10.orig/drivers/scsi/Kconfig linux-3.11.10/drivers/scsi/Kconfig
---- linux-3.11.10.orig/drivers/scsi/Kconfig	2013-11-29 19:42:37.000000000 +0100
-+++ linux-3.11.10/drivers/scsi/Kconfig	2013-12-27 19:13:21.000000000 +0100
-@@ -2,7 +2,7 @@
- 
- config SCSI_MOD
-        tristate
--       default y if SCSI=n || SCSI=y
-+       default y if SCSI=y
-        default m if SCSI=m
- 
- config RAID_ATTRS
 diff -Nur linux-3.11.10.orig/usr/Kconfig linux-3.11.10/usr/Kconfig
 --- linux-3.11.10.orig/usr/Kconfig	2013-11-29 19:42:37.000000000 +0100
 +++ linux-3.11.10/usr/Kconfig	2013-12-27 19:15:16.000000000 +0100
