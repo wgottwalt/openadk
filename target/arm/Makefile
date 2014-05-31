@@ -19,6 +19,9 @@ QEMU_ARGS:=${ADK_QEMU_ARGS}
 ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_SPITZ),y)
 QEMU_ARGS+=-M spitz
 endif
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_TERRIER),y)
+QEMU_ARGS+=-M terrier
+endif
 ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB),y)
 QEMU_ARGS+=-M versatilepb -net user -net nic,model=smc91c111
 endif
@@ -33,7 +36,7 @@ endif
 ifeq ($(ADK_TARGET_FS),archive)
 targethelp:
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
-ifeq ($(ADK_TARGET_QEMU),y)
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB),y)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"

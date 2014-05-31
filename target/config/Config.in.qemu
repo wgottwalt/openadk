@@ -28,12 +28,20 @@ config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	select ADK_CPU_ARM926EJ_S
 	depends on ADK_TARGET_ARM_SOFT_FLOAT
 
+config ADK_TARGET_QEMU_ARM_MODEL_TERRIER
+	boolean "Xscale PXA270 Terrier PDA"
+	select ADK_soft_float
+	select ADK_eabi
+	select ADK_CPU_XSCALE
+	select ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
+	depends on ADK_TARGET_ARM_SOFT_FLOAT
+
 config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	boolean "Xscale PXA270 Spitz PDA"
 	select ADK_soft_float
 	select ADK_eabi
 	select ADK_CPU_XSCALE
-	select ADK_TARGET_QEMU_WITH_GRAPHIC
+	select ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
 	depends on ADK_TARGET_ARM_SOFT_FLOAT
 
 endchoice

@@ -37,6 +37,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-arm-versatilepb" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	default "qemu-arm-vexpress-a9" if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	default "qemu-arm-spitz" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
+	default "qemu-arm-terrier" if ADK_TARGET_QEMU_ARM_MODEL_TERRIER
 	default "qemu-mips" if ADK_TARGET_SYSTEM_QEMU_MIPS
 	default "qemu-mips64" if ADK_TARGET_SYSTEM_QEMU_MIPS64
 	default "qemu-ppc" if ADK_TARGET_SYSTEM_QEMU_PPC
