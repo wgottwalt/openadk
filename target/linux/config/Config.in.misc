@@ -12,6 +12,12 @@ config ADK_KERNEL_KEYS
 config ADK_KERNEL_SBUS
 	boolean
 
+config ADK_KERNEL_IMX_WEIM
+	boolean
+	depends on ADK_TARGET_SYSTEM_CUBOX_I
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default n
+
 menu "Miscellaneous devices support"
 
 source "target/linux/config/Config.in.rtc"

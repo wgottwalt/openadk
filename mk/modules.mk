@@ -1135,6 +1135,10 @@ $(eval $(call KMOD_template,DMA_BCM2708,dma-bcm2708,\
 	$(MODULES_DIR)/kernel/drivers/dma/bcm2708-dmaengine \
 ,25))
 
+$(eval $(call KMOD_template,SND_DMAENGINE_PCM,snd-dmaengine-pcm,\
+	$(MODULES_DIR)/kernel/sound/core/snd-pcm-dmaengine \
+,25))
+
 $(eval $(call KMOD_template,SOUND,sound,\
 	$(MODULES_DIR)/kernel/sound/soundcore \
 ,30))

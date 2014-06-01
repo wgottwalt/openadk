@@ -15,6 +15,16 @@ config ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
 
 menu "Watchdog driver support"
 
+config ADK_KERNEL_IMX2_WDT
+	prompt "Cubox-i Hardware Watchdog"
+	boolean
+	select ADK_KERNEL_WATCHDOG
+	depends on ADK_TARGET_SYSTEM_CUBOX_I
+	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default n
+	help
+	  Watchdog driver for Cubox-i
+
 config ADK_KERNEL_SCx200_WDT
 	prompt "Natsemi Hardware Watchdog" 
 	boolean
