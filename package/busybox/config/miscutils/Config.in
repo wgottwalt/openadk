@@ -92,6 +92,7 @@ config BUSYBOX_FEATURE_LESS_LINENUMS
 	depends on BUSYBOX_FEATURE_LESS_DASHCMD
 	help
 	  Enables "-N" command.
+
 config BUSYBOX_NANDWRITE
 	bool "nandwrite"
 	default n
@@ -105,12 +106,14 @@ config BUSYBOX_NANDDUMP
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Dump the content of raw NAND chip
+
 config BUSYBOX_SETSERIAL
 	bool "setserial"
 	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Retrieve or set Linux serial port.
+
 config BUSYBOX_UBIATTACH
 	bool "ubiattach"
 	default n
@@ -315,7 +318,7 @@ config BUSYBOX_FEATURE_CROND_DIR
 
 config BUSYBOX_CRONTAB
 	bool "crontab"
-	default y
+	default n
 	help
 	  Crontab manipulates the crontab for a particular user. Only
 	  the superuser may specify a different user and/or crontab directory.
@@ -396,7 +399,7 @@ config BUSYBOX_FEATURE_DEVFS
 
 config BUSYBOX_DEVMEM
 	bool "devmem"
-	default n
+	default y
 	help
 	  devmem is a small program that reads and writes from physical
 	  memory using /dev/mem.
