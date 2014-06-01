@@ -1791,7 +1791,7 @@ $(eval $(call KMOD_template,SCX200_ACB,scx200-acb,\
 #
 
 $(eval $(call KMOD_template,VIRTIO_BLK,virtio-block,\
-	$(MODULES_DIR)/kernel/drivers/net/virtio_blk \
+	$(MODULES_DIR)/kernel/drivers/block/virtio_blk \
 ,20))
 
 $(eval $(call KMOD_template,VIRTIO_NET,virtio-net,\
