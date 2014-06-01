@@ -1,0 +1,16 @@
+--- lirc-0.9.1-pre2.orig/Makefile.am	2014-05-05 22:29:53.000000000 +0200
++++ lirc-0.9.1-pre2/Makefile.am	2014-06-01 09:22:05.384955110 +0200
+@@ -9,12 +9,7 @@ AUTOMAKE_OPTIONS = 1.5 check-news dist-b
+ EXTRA_DIST =  setup.sh setup-driver.sh setup-functions.sh setup.data data2setup.sh ANNOUNCE TODO
+ EXTRA_DIST += autogen.sh
+ 
+-## daemons/ and tools/ should appear before doc/ for help2man to work.
+-if SYSTEMD_INSTALL
+-    SYSTEMD_DIR = systemd
+-endif
+-
+-SUBDIRS = drivers daemons tools doc $(SYSTEMD_DIR)
++SUBDIRS = drivers daemons tools
+ 
+ if SANDBOXED
+ else
