@@ -32,7 +32,13 @@ $(eval $(call PKG_template,LIBBZ2,libbz2,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_
 
 HOST_STYLE:=		manual
 HOST_MAKE_FILE:=	Makefile
+
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 MAKE_FILE:=		Makefile-libbz2_so
+BIN_FILE:=		bzip2-shared
+else
+BIN_FILE:=		bzip2
+endif
 CONFIG_STYLE:=		manual
 TARGET_CFLAGS+=		-fPIC 
 XAKE_FLAGS+=		PREFIX=${WRKINST}/usr CROSS_COMPILE=1
@@ -59,7 +65,7 @@ libbz2-install:
 
 bzip2-install:
 	${INSTALL_DIR} ${IDIR_BZIP2}/usr/bin
-	${INSTALL_BIN} ${WRKBUILD}/bzip2-shared ${IDIR_BZIP2}/usr/bin/bzip2
+	${INSTALL_BIN} ${WRKBUILD}/$(BIN_FILE) ${IDIR_BZIP2}/usr/bin/bzip2
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
