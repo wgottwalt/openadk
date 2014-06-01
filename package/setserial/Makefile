@@ -10,6 +10,7 @@ PKG_MD5SUM:=		c4867d72c41564318e0107745eb7a0f2
 PKG_DESCR:=		configuration utility for serial ports
 PKG_SECTION:=		sys/serial
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=setserial/}
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
