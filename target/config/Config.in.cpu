@@ -108,7 +108,7 @@ config ADK_TARGET_CPU_ARCH
 	string
 	default "x86_64" if ADK_CPU_X86_64
 	default "x86_64" if ADK_CPU_AMDFAM10
-	default "x86_64" if ADK_CPU_ATHLON
+	default "i686" if ADK_CPU_ATHLON
 	default "i486" if ADK_CPU_I486
 	default "i586" if ADK_CPU_I586
 	default "i686" if ADK_CPU_I686

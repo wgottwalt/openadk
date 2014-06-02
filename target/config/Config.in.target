@@ -12,7 +12,7 @@ config ADK_TARGET_CFLAGS
 	default "-march=i486" if ADK_CPU_I486
 	default "-march=i586" if ADK_CPU_I586
 	default "-march=i686" if ADK_CPU_I686
-	default "-mtune=generic" if ADK_CPU_X86_64
+	default "-march=x86-64" if ADK_CPU_X86_64
 	default "-march=athlon" if ADK_CPU_ATHLON
 	default "-march=pentium-m" if ADK_CPU_PENTIUM_M
 	default "-march=atom" if ADK_CPU_ATOM
