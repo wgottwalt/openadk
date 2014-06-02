@@ -4,24 +4,24 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		nut
-PKG_VERSION:=		2.4.1
+PKG_VERSION:=		2.7.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		609ebaf2123fc7171d25a6c742dd7d66
+PKG_MD5SUM:=		c3568b42e058cfc385b46d25140dced4
 PKG_DESCR:=		network ups tools
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://www.networkupstools.org/
-PKG_SITES:=		http://www.networkupstools.org/source/2.4/
+PKG_SITES:=		http://www.networkupstools.org/source/2.7/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_FLAVOURS_NUT:=	WITH_SSL WITH_SNMP WITH_USB
-PKGFD_WITH_SNMP:=	enable SNMP support
+PKGFD_WITH_SNMP:=	enable snmp support
 PKGFS_WITH_SNMP:=	libnetsnmp
 PKGFB_WITH_SNMP:=	net-snmp
-PKGFD_WITH_USB:=	enable USB support
-PKGFS_WITH_USB:=	libusb
-PKGFB_WITH_USB:=	libusb
-PKGFD_WITH_SSL:=	enable SSL support
+PKGFD_WITH_USB:=	enable usb support
+PKGFS_WITH_USB:=	libusb libusb-compat
+PKGFB_WITH_USB:=	libusb libusb-compat
+PKGFD_WITH_SSL:=	enable ssl support
 PKGFS_WITH_SSL:=	libopenssl
 PKGFB_WITH_SSL:=	openssl
 
@@ -96,12 +96,12 @@ endif
 nut-install:
 	${INSTALL_DIR} ${IDIR_NUT}/usr/{s,}bin ${IDIR_NUT}/etc
 	${INSTALL_DIR} ${IDIR_NUT}/usr/lib
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/ups{d,mon,sched} \
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/ups{d,mon,sched,drvctl} \
 		${IDIR_NUT}/usr/sbin/
-	${CP} ${WRKINST}/usr/lib/lib*.so* ${IDIR_NUT}/usr/lib
+	${CP} ${WRKINST}/usr/lib/lib{nut,ups}client.so* ${IDIR_NUT}/usr/lib
 	${INSTALL_BIN} ${WRKINST}/usr/bin/{${INSTALL_DRIVERS}} \
 		${IDIR_NUT}/usr/bin/
-	${INSTALL_BIN} ${WRKINST}/usr/bin/ups{c,cmd,drvctl,log,rw} \
+	${INSTALL_BIN} ${WRKINST}/usr/bin/ups{c,cmd,log,rw} \
 		${IDIR_NUT}/usr/bin/
 	${INSTALL_DATA} ./files/ups{d,}.conf ${IDIR_NUT}/etc/
 
