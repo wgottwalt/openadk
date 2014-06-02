@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
 PKG_VERSION:=		13.1rc1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		1eb727c04cdc8282e9c2cb1f45ceeaae
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
@@ -18,7 +18,7 @@ PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
 PKG_DEPENDS+=		libbluray libgpg-error libudev python2-mod-sqlite
 PKG_DEPENDS+=		libssh libcec libnfs librtmp samba-lib libncurses
-PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib
+PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib libglu librt
 PKG_BUILDDEP:=		autotool boost ffmpeg python2 MesaLib libglew libass
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis libmodplug
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
@@ -27,15 +27,18 @@ PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		libssh libcec libnfs samba rtmpdump eudev
 PKG_BUILDDEP+=		libgpg-error libbluray dbus libxslt libvorbis
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
-PKG_BUILDDEP+=		zip-host unzip-host alsa-lib glib
+PKG_BUILDDEP+=		zip-host unzip-host alsa-lib glib glu
 PKG_URL:=		http://xbmc.org/
 #PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
 PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
-PKG_BUILDDEP_IBM_X40:=	nasm-host
-PKG_SYSTEM_DEPENDS:=	raspberry-pi ibm-x40
+PKG_DEPENDS_IBM_X40:=	libsdl libsdl-image libxshmfence libx11 libxext libxt libsm libice
+PKG_DEPENDS_QEMU_X86:=	libsdl libsdl-image libxshmfence libx11 libxext libxt libsm libice
+PKG_BUILDDEP_IBM_X40:=	nasm-host sdl sdl-image
+PKG_BUILDDEP_QEMU_X86:=	nasm-host sdl sdl-image
+PKG_SYSTEM_DEPENDS:=	raspberry-pi ibm-x40 qemu-x86
 PKG_LIBC_DEPENDS:=	glibc
 
 DIFF_IGNOREFILES:=	configure missing depcomp install-sh INSTALL \
@@ -65,6 +68,7 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-mysql \
 			--disable-avahi \
 			--disable-rsxs \
+			--disable-projectm \
 			--enable-alsa \
 			--enable-mid \
 			--enable-libmp3lame \
@@ -79,7 +83,6 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--enable-libcec \
 			--disable-libusb \
 			--disable-libcap \
-			--disable-sdl \
 			--disable-joystick \
 			--disable-dvdcss \
 			--disable-debug
@@ -88,9 +91,11 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIGURE_ARGS+=	--with-platform=raspberry-pi \
 			--enable-player=omxplayer \
 			--enable-gles \
+			--disable-sdl \
 			--disable-x11
 else
-CONFIGURE_ARGS+=	--enable-x11
+CONFIGURE_ARGS+=	--enable-x11 \
+			--enable-sdl
 endif
 
 pre-configure:
