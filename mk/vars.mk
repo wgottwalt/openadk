@@ -53,7 +53,7 @@ else
 GCC_CHECK:=
 endif
 
-GNU_TARGET_NAME:=	$(CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)
+GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_VENDOR)-linux-$(ADK_TARGET_SUFFIX)
 TARGET_CROSS:=		$(TOOLCHAIN_DIR)/usr/bin/$(GNU_TARGET_NAME)-
 TARGET_COMPILER_PREFIX?=${TARGET_CROSS}
 CONFIGURE_TRIPLE:=	--build=${GNU_HOST_NAME} \
@@ -77,8 +77,8 @@ TARGET_CXX+=		$(ADK_TARGET_ABI_CFLAGS)
 endif
 
 TARGET_CPPFLAGS:=	
-TARGET_CFLAGS:=		$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident -fhonour-copts
-TARGET_CXXFLAGS:=	$(TARGET_CFLAGS_ARCH) -fwrapv -fno-ident
+TARGET_CFLAGS:=		$(ADK_TARGET_CFLAGS) -fwrapv -fno-ident -fhonour-copts
+TARGET_CXXFLAGS:=	$(ADK_TARGET_CFLAGS) -fwrapv -fno-ident
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib

@@ -23,13 +23,13 @@ $(eval $(call PKG_template,LIBNET,libnet,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 
 AUTOTOOL_STYLE:=	autoreconf
 ENDIAN:=lil
-ifeq (${CPU_ARCH},mips)
+ifeq (${ADK_TARGET_CPU_ARCH},mips)
 ENDIAN:=big
 endif
-ifeq (${CPU_ARCH},mips64)
+ifeq (${ADK_TARGET_CPU_ARCH},mips64)
 ENDIAN:=big
 endif
-ifeq (${CPU_ARCH},ppc)
+ifeq (${ADK_TARGET_CPU_ARCH},ppc)
 ENDIAN:=big
 endif
 

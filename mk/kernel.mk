@@ -30,7 +30,7 @@ define KMOD_template
 
 IDEPENDK_$(1):=kernel ($(KERNEL_VERSION)) $(foreach pkg,$(5),", $(pkg)")
 
-PKG_$(1) := $(PACKAGE_DIR)/kmod-$(2)_$(KERNEL_VERSION)-$(KERNEL_RELEASE)_$(CPU_ARCH).$(PKG_SUFFIX)
+PKG_$(1) := $(PACKAGE_DIR)/kmod-$(2)_$(KERNEL_VERSION)-$(KERNEL_RELEASE)_$(ADK_TARGET_CPU_ARCH).$(PKG_SUFFIX)
 I_$(1) := $(KMOD_BUILD_DIR)/ipkg/$(2)
 
 ifeq ($${ADK_TARGET_KERNEL_CUSTOMISING},y)
@@ -49,7 +49,7 @@ $$(PKG_$(1)):
 	echo "Description: kernel module $(2)" >> $(LINUX_BUILD_DIR)/kmod-control/kmod-$(2).control
 	${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $$(I_$(1)) \
 	    $(LINUX_BUILD_DIR)/kmod-control/kmod-$(2).control \
-	    $(KERNEL_VERSION)-$(KERNEL_RELEASE) $(CPU_ARCH)
+	    $(KERNEL_VERSION)-$(KERNEL_RELEASE) $(ADK_TARGET_CPU_ARCH)
 	echo "Depends: $$(IDEPENDK_$(1))" >> $$(I_$(1))/CONTROL/control
 ifneq ($(strip $(3)),)
 	mkdir -p $$(I_$(1))/lib/modules/$(KERNEL_MOD_VERSION)

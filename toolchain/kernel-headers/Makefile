@@ -3,6 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 include ../rules.mk
+include ${TOPDIR}/mk/kernel-ver.mk
 include $(TOPDIR)/mk/linux.mk
 include ${TOPDIR}/mk/kernel-vars.mk
 include ${TOPDIR}/mk/buildhlp.mk

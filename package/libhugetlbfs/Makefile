@@ -22,7 +22,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBHUGETLBFS,libhugetlbfs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
-XAKE_FLAGS+=		PREFIX=/usr DESTDIR=${WRKINST} ADK_ARCH=${CPU_ARCH}
+XAKE_FLAGS+=		PREFIX=/usr DESTDIR=${WRKINST} ADK_ARCH=${ADK_TARGET_CPU_ARCH}
 ALL_TARGET:=		libs tools
 
 libhugetlbfs-install:

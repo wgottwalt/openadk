@@ -116,12 +116,12 @@ PKGNAME_$(1)=	$(2)
 PKGDEPS_$(1)=	$(4)
 PKGDESC_$(1)=	$(5)
 PKGSECT_$(1)=	$(6)
-IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
-IPKG_$(1)_DEV=	$(PACKAGE_DIR)/$(2)-dev_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
-IPKG_$(1)_DBG=	$(PACKAGE_DIR)/$(2)-dbg_$(3)_${CPU_ARCH}.${PKG_SUFFIX}
-IDIR_$(1)=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)
-IDIR_$(1)_DEV=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)-dev
-IDIR_$(1)_DBG=	$(WRKDIR)/fake-${CPU_ARCH}/pkg-$(2)-dbg
+IPKG_$(1)=	$(PACKAGE_DIR)/$(2)_$(3)_${ADK_TARGET_CPU_ARCH}.${PKG_SUFFIX}
+IPKG_$(1)_DEV=	$(PACKAGE_DIR)/$(2)-dev_$(3)_${ADK_TARGET_CPU_ARCH}.${PKG_SUFFIX}
+IPKG_$(1)_DBG=	$(PACKAGE_DIR)/$(2)-dbg_$(3)_${ADK_TARGET_CPU_ARCH}.${PKG_SUFFIX}
+IDIR_$(1)=	$(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(2)
+IDIR_$(1)_DEV=	$(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(2)-dev
+IDIR_$(1)_DBG=	$(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(2)-dbg
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
 ifneq (,$(filter dev,$(7)))
 ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
@@ -168,7 +168,7 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@echo "Package: $$(shell echo $(2) | tr '_' '-')" > $(WRKDIR)/.$(2).control
 	@echo "Section: $(6)" >> $(WRKDIR)/.$(2).control
 	@echo "Description: $(5)" >> $(WRKDIR)/.$(2).control
-	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${CPU_ARCH}
+	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)} $${ICONTROL_$(1)} $(3) ${ADK_TARGET_CPU_ARCH}
 	@adeps='$$(strip $${IDEPEND_$(1)})'; if [[ -n $$$$adeps ]]; then \
 		comma=; \
 		deps=; \
@@ -194,14 +194,14 @@ ifneq ($(ADK_DEBUG),y)
 	@echo "Package: $$(shell echo $(2) | tr '_' '-')-dbg" > $(WRKDIR)/.$(2)-dbg.control
 	@echo "Section: debug" >> $(WRKDIR)/.$(2)-dbg.control
 	@echo "Description: debugging symbols for $(2)" >> $(WRKDIR)/.$(2)-dbg.control
-	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)_DBG} $${ICONTROL_$(1)_DBG} $(3) ${CPU_ARCH}
+	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)_DBG} $${ICONTROL_$(1)_DBG} $(3) ${ADK_TARGET_CPU_ARCH}
 	@echo "Depends: $$(shell echo $(2) | tr '_' '-')" >> $${IDIR_$(1)_DBG}/CONTROL/control
 endif
 ifneq (,$(filter dev,$(7)))
 	@echo "Package: $$(shell echo $(2) | tr '_' '-')-dev" > $(WRKDIR)/.$(2)-dev.control
 	@echo "Section: devel" >> $(WRKDIR)/.$(2)-dev.control
 	@echo "Description: development files for $(2)" >> $(WRKDIR)/.$(2)-dev.control
-	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)_DEV} $${ICONTROL_$(1)_DEV} $(3) ${CPU_ARCH}
+	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh $${IDIR_$(1)_DEV} $${ICONTROL_$(1)_DEV} $(3) ${ADK_TARGET_CPU_ARCH}
 	@echo "Depends: $$(shell echo $(2) | tr '_' '-')" >> $${IDIR_$(1)_DEV}/CONTROL/control
 endif
 

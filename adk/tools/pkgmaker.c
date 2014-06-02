@@ -365,7 +365,7 @@ int main() {
 	p_ptr = NULL;
 	s_ptr = NULL;
 
-	system("rm package/Config.in.auto.*");
+	system("rm package/Config.in.auto.* 2>/dev/null");
 	unlink(runtime);
 	/* open global sectionfile */
 	menuglobal = fopen("package/Config.in.auto.global", "w");

@@ -21,31 +21,31 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBMAD,libmad,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 FPM:=default
-ifeq (${CPU_ARCH},i486)
+ifeq (${ADK_TARGET_CPU_ARCH},i486)
 FPM:=intel
 endif
-ifeq (${CPU_ARCH},i586)
+ifeq (${ADK_TARGET_CPU_ARCH},i586)
 FPM:=intel
 endif
-ifeq (${CPU_ARCH},i686)
+ifeq (${ADK_TARGET_CPU_ARCH},i686)
 FPM:=intel
 endif
-ifeq (${CPU_ARCH},arm)
+ifeq (${ADK_TARGET_CPU_ARCH},arm)
 FPM:=arm
 endif
-ifeq (${CPU_ARCH},mipsel)
+ifeq (${ADK_TARGET_CPU_ARCH},mipsel)
 FPM:=mips
 endif
-ifeq (${CPU_ARCH},mips)
+ifeq (${ADK_TARGET_CPU_ARCH},mips)
 FPM:=mips
 endif
-ifeq (${CPU_ARCH},ppc)
+ifeq (${ADK_TARGET_CPU_ARCH},ppc)
 FPM:=ppc
 endif
-ifeq (${CPU_ARCH},sparc)
+ifeq (${ADK_TARGET_CPU_ARCH},sparc)
 FPM:=sparc
 endif
-ifeq (${CPU_ARCH},x86_64)
+ifeq (${ADK_TARGET_CPU_ARCH},x86_64)
 FPM:=64bit
 endif
 

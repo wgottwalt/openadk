@@ -24,32 +24,32 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
-MARCH:=			$(CPU_ARCH)
-ifeq ($(CPU_ARCH),i686)
+MARCH:=			$(ADK_TARGET_CPU_ARCH)
+ifeq ($(ADK_TARGET_CPU_ARCH),i686)
 MARCH:=			i386
 endif
-ifeq ($(CPU_ARCH),i586)
+ifeq ($(ADK_TARGET_CPU_ARCH),i586)
 MARCH:=			i386
 endif
-ifeq ($(CPU_ARCH),i486)
+ifeq ($(ADK_TARGET_CPU_ARCH),i486)
 MARCH:=			i386
 endif
-ifeq ($(CPU_ARCH),mipsel)
+ifeq ($(ADK_TARGET_CPU_ARCH),mipsel)
 MARCH:=			mips
 endif
-ifeq ($(CPU_ARCH),mips64el)
+ifeq ($(ADK_TARGET_CPU_ARCH),mips64el)
 MARCH:=			mips
 endif
-ifeq ($(CPU_ARCH),mips64)
+ifeq ($(ADK_TARGET_CPU_ARCH),mips64)
 MARCH:=			mips
 endif
-ifeq ($(CPU_ARCH),ppc)
+ifeq ($(ADK_TARGET_CPU_ARCH),ppc)
 MARCH:=			powerpc
 endif
-ifeq ($(CPU_ARCH),sh4)
+ifeq ($(ADK_TARGET_CPU_ARCH),sh4)
 MARCH:=			sh
 endif
-ifeq ($(CPU_ARCH),sh4eb)
+ifeq ($(ADK_TARGET_CPU_ARCH),sh4eb)
 MARCH:=			sheb
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)

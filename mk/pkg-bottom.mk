@@ -168,19 +168,19 @@ ifeq (,$(filter noremove,${PKG_OPTS}))
 endif
 	@rm -f '${STAGING_PKG_DIR}/${PKG_NAME}'
 ifneq (,$(filter dev,${PKG_OPTS}))
-	@mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
+	@mkdir -p  $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
 	@test -d ${WRKINST}/usr/include && cd ${WRKINST}/usr/include; \
 	    find . -name \*.h | \
- 	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
-	@mkdir -p  $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
+ 	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
+	@mkdir -p  $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
 	@test -d ${WRKINST}/usr/lib/pkgconfig && cd ${WRKINST}/usr/lib/pkgconfig; \
 	    find . -name \*.pc | \
- 	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
+ 	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
 	@for a in ${WRKINST}/usr/bin/*-config*; do \
 		[[ -e $$a ]] || continue; \
-		mkdir -p $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
-		cp $$a $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
-		chmod 755 $(WRKDIR)/fake-${CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin/$$(basename $$a); \
+		mkdir -p $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
+		cp $$a $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
+		chmod 755 $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin/$$(basename $$a); \
 	done
 endif
 	@-cd ${WRKINST}; \
@@ -217,9 +217,9 @@ ${_IPKGS_COOKIE}:
 
 package: ${ALL_IPKGS}
 ifneq ($(DEVELOPER),)
-	@cd ${WRKDIR}/fake-${CPU_ARCH} || exit 1; \
+	@cd ${WRKDIR}/fake-${ADK_TARGET_CPU_ARCH} || exit 1; \
 	y=; sp=; for x in ${ALL_IDIRS}; do \
-		y="$$y$$sp$${x#$(WRKDIR)/fake-${CPU_ARCH}/}"; \
+		y="$$y$$sp$${x#$(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/}"; \
 		sp=' '; \
 	done; ls=; ln=; x=1; [[ -z $$y ]] || \
 	    md5sum $$(find $$y -type f) | sed -e "s/*//" | \

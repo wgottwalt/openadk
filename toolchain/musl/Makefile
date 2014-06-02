@@ -6,7 +6,7 @@ include ../rules.mk
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 
-ifeq ($(CPU_ARCH),ppc)
+ifeq ($(ADK_TARGET_CPU_ARCH),ppc)
 GNU_TARGET_NAME:= $(subst ppc,powerpc,$(GNU_TARGET_NAME))
 endif
 

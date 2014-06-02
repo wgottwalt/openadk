@@ -58,7 +58,7 @@ do-configure:
 		-e 's!%%CPPFLAGS%%!$(TARGET_CPPFLAGS)!g' \
 		-e 's!%%LIBDIRS%%!$(STAGING_TARGET_DIR)/lib $(STAGING_TARGET_DIR)/usr/lib!g' \
 		-e 's!%%INCDIRS%%!$(STAGING_TARGET_DIR)/include $(STAGING_TARGET_DIR)/usr/include!g' \
-		./files/config.sh.$(CPU_ARCH).$(ADK_TARGET_LIBC) > ${WRKBUILD}/config.sh
+		./files/config.sh.$(ADK_TARGET_CPU_ARCH).$(ADK_TARGET_LIBC) > ${WRKBUILD}/config.sh
 	$(SED) "s#@@STAGING_HOST_DIR@@#${STAGING_HOST_DIR}/usr/bin#" ${WRKBUILD}/Makefile.SH 
 	$(SED) "s#@@LIB@@##" ${WRKBUILD}/Makefile.SH 
 	(cd ${WRKBUILD}; ./Configure -S)

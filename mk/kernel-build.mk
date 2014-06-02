@@ -2,6 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(TOPDIR)/rules.mk
+include ${TOPDIR}/mk/kernel-ver.mk
 include $(TOPDIR)/mk/linux.mk
 include ${TOPDIR}/mk/kernel-vars.mk
 

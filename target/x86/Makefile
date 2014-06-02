@@ -31,18 +31,18 @@ targethelp:
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
-	@echo "./scripts/create.sh qemu-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "./scripts/create.sh qemu-${ADK_TARGET_CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
 ifeq ($(ADK_TARGET_QEMU_WITH_BOOTLOADER),y)
-	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} qemu-${ADK_TARGET_CPU_ARCH}.img'
 else
-	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${CPU_ARCH}.img'
+	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${ADK_TARGET_CPU_ARCH}.img'
 endif
 endif
 ifeq ($(ADK_HARDWARE_VBOX),y)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 	@echo "Use following command to create a VirtualBox Image:"
-	@echo "./scripts/create.sh -T vdi vbox-${CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "./scripts/create.sh -T vdi vbox-${ADK_TARGET_CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)

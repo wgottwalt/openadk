@@ -44,11 +44,11 @@ TARGET_CFLAGS:=		$(subst march=pentium-m,march=i686,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=		$(subst march=atom,march=i686,$(TARGET_CFLAGS))
 BOOTSTRAPJDK:=		${STAGING_HOST_DIR}/bootstrap-jdk
 
-JDKARCH:=		$(CPU_ARCH)
-ifeq ($(ARCH),x86)
+JDKARCH:=		$(ADK_TARGET_CPU_ARCH)
+ifeq ($(ADK_TARGET_ARCH),x86)
 JDKARCH:=		i386
 endif
-ifeq ($(CPU_ARCH),x86_64)
+ifeq ($(ADK_TARGET_CPU_ARCH),x86_64)
 JDKARCH:=		amd64
 endif
 

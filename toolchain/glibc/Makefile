@@ -10,9 +10,6 @@ ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=		-O2
 endif
 
-# ssp unsupported
-TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
-
 include Makefile.inc
 include ${TOPDIR}/mk/buildhlp.mk
 

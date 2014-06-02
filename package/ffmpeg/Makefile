@@ -123,7 +123,7 @@ endif
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS:=	--prefix=/usr \
 			--target-os=linux \
-			--arch=${CPU_ARCH} \
+			--arch=${ADK_TARGET_CPU_ARCH} \
 			--enable-cross-compile \
 			--sysroot=${STAGING_TARGET_DIR} \
 			--cross-prefix=${TARGET_CROSS} \

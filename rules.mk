@@ -25,16 +25,16 @@ SET_DASHX:=		:
 endif
 
 # Strip off the annoying quoting
-ADK_TARGET_KERNEL:=			$(strip $(subst ",, $(ADK_TARGET_KERNEL)))
 ADK_TARGET_ARCH:=			$(strip $(subst ",, $(ADK_TARGET_ARCH)))
 ADK_TARGET_SYSTEM:=			$(strip $(subst ",, $(ADK_TARGET_SYSTEM)))
+ADK_TARGET_CPU_ARCH:=			$(strip $(subst ",, $(ADK_TARGET_CPU_ARCH)))
+ADK_TARGET_KERNEL:=			$(strip $(subst ",, $(ADK_TARGET_KERNEL)))
 ADK_TARGET_LIBC:=			$(strip $(subst ",, $(ADK_TARGET_LIBC)))
 ADK_TARGET_LIBC_PATH:=			$(strip $(subst ",, $(ADK_TARGET_LIBC_PATH)))
 ADK_TARGET_ENDIAN:=			$(strip $(subst ",, $(ADK_TARGET_ENDIAN)))
 ADK_TARGET_FLOAT:=			$(strip $(subst ",, $(ADK_TARGET_FLOAT)))
 ADK_TARGET_FPU:=			$(strip $(subst ",, $(ADK_TARGET_FPU)))
 ADK_TARGET_ARM_MODE:=			$(strip $(subst ",, $(ADK_TARGET_ARM_MODE)))
-ADK_TARGET_CPU_ARCH:=			$(strip $(subst ",, $(ADK_TARGET_CPU_ARCH)))
 ADK_TARGET_CFLAGS:=			$(strip $(subst ",, $(ADK_TARGET_CFLAGS)))
 ADK_TARGET_CFLAGS_OPT:=			$(strip $(subst ",, $(ADK_TARGET_CFLAGS_OPT)))
 ADK_TARGET_ABI_CFLAGS:=			$(strip $(subst ",, $(ADK_TARGET_ABI_CFLAGS)))
@@ -56,12 +56,6 @@ ADK_PARAMETER_NETCONSOLE_SRC_IP:=	$(strip $(subst ",, $(ADK_PARAMETER_NETCONSOLE
 ADK_PARAMETER_NETCONSOLE_DST_IP:=	$(strip $(subst ",, $(ADK_PARAMETER_NETCONSOLE_DST_IP)))
 ADK_JFFS2_OPTS:=			$(strip $(subst ",, $(ADK_JFFS2_OPTS)))
 ADK_WGET_TIMEOUT:=			$(strip $(subst ",, $(ADK_WGET_TIMEOUT)))
-
-ifeq ($(strip ${ADK_HAVE_DOT_CONFIG}),y)
-ifneq ($(strip $(wildcard $(TOPDIR)/target/$(ADK_TARGET_ARCH)/target.mk)),)
-include $(TOPDIR)/target/$(ADK_TARGET_ARCH)/target.mk
-endif
-endif
 
 include $(TOPDIR)/mk/vars.mk
 
