@@ -1,9 +1,0 @@
-choice
-depends on ADK_LINUX_SH && !ADK_CHOOSE_TARGET_ARCH
-prompt "Target system"
-
-config ADK_CHOOSE_TARGET_SYSTEM_SH
-        boolean "Choose target system"
-
-source "target/sh/Config.in.systems"
-endchoice

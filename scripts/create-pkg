@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
-if [ -d "$topdir/target/collections" ];then
-	cat $topdir/target/collections/* > $topdir/package/Config.in.collections 2>/dev/null
-fi
-exit 0

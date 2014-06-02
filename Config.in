@@ -11,23 +11,7 @@ config ADK_HAVE_DOT_CONFIG
 
 mainmenu "OpenADK Configuration"
 
-config ADK_CHOOSE_TARGET_SYSTEM
-	boolean
-	default y if ADK_CHOOSE_TARGET_SYSTEM_AARCH64
-	default y if ADK_CHOOSE_TARGET_SYSTEM_ARM
-	default y if ADK_CHOOSE_TARGET_SYSTEM_M68K
-	default y if ADK_CHOOSE_TARGET_SYSTEM_MICROBLAZE
-	default y if ADK_CHOOSE_TARGET_SYSTEM_MIPS
-	default y if ADK_CHOOSE_TARGET_SYSTEM_MIPS64
-	default y if ADK_CHOOSE_TARGET_SYSTEM_PPC
-	default y if ADK_CHOOSE_TARGET_SYSTEM_PPC64
-	default y if ADK_CHOOSE_TARGET_SYSTEM_SPARC
-	default y if ADK_CHOOSE_TARGET_SYSTEM_SPARC64
-	default y if ADK_CHOOSE_TARGET_SYSTEM_SH
-	default y if ADK_CHOOSE_TARGET_SYSTEM_X86
-	default y if ADK_CHOOSE_TARGET_SYSTEM_X86_64
-	default n
-
+source "target/config/Config.in.system.choose"
 source "target/config/Config.in.cpu"
 source "target/config/Config.in.hardware"
 source "target/config/Config.in.kernel"

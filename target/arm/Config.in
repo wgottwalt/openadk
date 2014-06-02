@@ -1,9 +1,0 @@
-choice
-depends on ADK_LINUX_ARM && !ADK_CHOOSE_TARGET_ARCH
-prompt "Target system"
-
-config ADK_CHOOSE_TARGET_SYSTEM_ARM
-	boolean "Choose target system"
-
-source "target/arm/Config.in.systems"
-endchoice

@@ -143,13 +143,14 @@ include $(TOPDIR)/rules.mk
 all: world
 
 ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile) $(TOPDIR)/adk/tools/depmaker
+	@echo "Generating dependencies ..."
 	$(TOPDIR)/adk/tools/depmaker > ${TOPDIR}/package/Depends.mk
 
 .NOTPARALLEL:
 .PHONY: all world clean cleandir cleantoolchain distclean image_clean
 
 world:
-	mkdir -p $(DL_DIR) $(HOST_BUILD_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
+	@mkdir -p $(DL_DIR) $(HOST_BUILD_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
 		$(STAGING_HOST_DIR) $(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
 	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
@@ -169,9 +170,9 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 endif
 
 ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
-	mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
+	@mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
 		${STAGING_HOST_DIR}/{usr/bin,usr/lib,usr/include}
-	for i in lib64 lib32 libx32;do \
+	@for i in lib64 lib32 libx32;do \
 		cd ${STAGING_TARGET_DIR}/; ln -sf lib $$i; \
 		cd ${STAGING_TARGET_DIR}/usr; ln -sf lib $$i; \
 	done
@@ -239,16 +240,16 @@ clean:
 
 cleankernel:
 	@$(TRACE) cleankernel
-	rm -rf $(TOOLCHAIN_BUILD_DIR)/w-linux* $(BUILD_DIR)/linux
+	@rm -rf $(TOOLCHAIN_BUILD_DIR)/w-linux* $(BUILD_DIR)/linux
 
 cleandir:
 	@$(TRACE) cleandir
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
-	rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) \
+	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) \
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
-	rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
-	rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
+	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
+	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
+	@rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
 
 distclean:
 	@$(TRACE) distclean
@@ -258,7 +259,8 @@ distclean:
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
-	    .menu ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
+	    .menu ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.* \
+	    ${TOPDIR}/target/*/Config.in.{arch*,system*} ${TOPDIR}/package/Config.in.auto*
 
 else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
@@ -306,10 +308,6 @@ endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
 endif
-	@echo 'source "target/config/Config.in.arch.default"' > target/config/Config.in.arch
-	@echo 'source "target/config/Config.in.arch.choice"' >> target/config/Config.in.arch
-	@echo 'source "target/config/Config.in.system.default"' > target/config/Config.in.system
-	@echo 'source "target/config/Config.in.system.choice"' >> target/config/Config.in.system
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \
 			|grep -i "$(ADK_TARGET_ARCH)"\$$ \
@@ -370,10 +368,6 @@ endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/all.config
 endif
-	@echo 'source "target/config/Config.in.arch.default"' > target/config/Config.in.arch
-	@echo 'source "target/config/Config.in.arch.choice"' >> target/config/Config.in.arch
-	@echo 'source "target/config/Config.in.system.default"' > target/config/Config.in.system
-	@echo 'source "target/config/Config.in.system.choice"' >> target/config/Config.in.system
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \
 			|grep -i "$(ADK_TARGET_ARCH)"\$$ \
@@ -403,14 +397,14 @@ endif
 			>> $(TOPDIR)/all.config; \
 	fi
 
-menuconfig: $(CONFIG)/mconf defconfig .menu package/Config.in.auto.global
+menuconfig: $(CONFIG)/mconf defconfig .menu
 	@if [ ! -f .config ];then \
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
 	fi
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
-_config: $(CONFIG)/conf .menu package/Config.in.auto.global
+_config: $(CONFIG)/conf .menu
 	-@touch .config
 	@$(CONFIG)/conf ${W} $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
@@ -427,15 +421,14 @@ distclean:
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_TARGET_DIR_PFX)
 	@rm -rf $(STAGING_HOST_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
-	    .menu .rebuild.* ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG
-
+	    .menu .rebuild.* ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG \
+	    ${TOPDIR}/target/*/Config.in.{arch*,system*} ${TOPDIR}/package/Config.in.auto*
 
 endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 buildall:
 	@mkdir -p firmware
 	@echo "=== building $(ADK_TARGET_SYSTEM) ($(ADK_TARGET_ARCH)) with $(ADK_TARGET_LIBC) ==="
-	$(GMAKE) prereq
 	$(GMAKE) ADK_TARGET_ARCH=$(ADK_TARGET_ARCH) ADK_TARGET_SYSTEM=$(ADK_TARGET_SYSTEM) ADK_TARGET_LIBC=$(ADK_TARGET_LIBC) allmodconfig
 	$(GMAKE) VERBOSE=1 all 2>&1 | tee firmware/buildall.log
 
@@ -445,13 +438,14 @@ $(TOPDIR)/adk/tools/pkgmaker: $(TOPDIR)/adk/tools/pkgmaker.c $(TOPDIR)/adk/tools
 $(TOPDIR)/adk/tools/pkgrebuild: $(TOPDIR)/adk/tools/pkgrebuild.c $(TOPDIR)/adk/tools/strmap.c
 	@$(CC_FOR_BUILD) -g -o $@ adk/tools/pkgrebuild.c adk/tools/strmap.c
 
-package/Config.in.auto.global menu .menu: $(wildcard ${TOPDIR}/package/*/Makefile) $(TOPDIR)/adk/tools/pkgmaker $(TOPDIR)/adk/tools/pkgrebuild
-	@echo "Generating menu structure ..."
-	@$(TOPDIR)/adk/tools/pkgmaker
-	@:>.menu
-
 $(TOPDIR)/adk/tools/depmaker: $(TOPDIR)/adk/tools/depmaker.c
 	$(CC_FOR_BUILD) -g -o $@ $(TOPDIR)/adk/tools/depmaker.c
+
+menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(TOPDIR)/adk/tools/pkgmaker $(TOPDIR)/adk/tools/pkgrebuild
+	@echo "Generating menu structure ..."
+	@$(BASH) $(TOPDIR)/scripts/create-menu
+	@$(TOPDIR)/adk/tools/pkgmaker
+	@:>.menu
 
 dep: $(TOPDIR)/adk/tools/depmaker
 	@echo "Generating dependencies ..."

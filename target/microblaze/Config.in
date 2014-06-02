@@ -1,9 +1,0 @@
-choice
-depends on ADK_LINUX_MICROBLAZE && !ADK_CHOOSE_TARGET_ARCH
-prompt "Target system"
-
-config ADK_CHOOSE_TARGET_SYSTEM_MICROBLAZE
-        boolean "Choose target system"
-
-source "target/microblaze/Config.in.systems"
-endchoice

@@ -1,2 +1,0 @@
-source "target/config/Config.in.arch.default"
-source "target/config/Config.in.arch.choice"

@@ -36,6 +36,7 @@
 /.rebuild.*
 /.defconfig
 /.adkinit
+/.menu
 /all.config
 /target_*/
 /host_*/
@@ -49,10 +50,10 @@
 /package/Config.in.collections
 /package/pkgconfigs.d/
 /extra/
-/.menu
-/.adkinit
+/target/*/Config.in.arch
 /target/*/Config.in.systems
-/target/config/Config.in.system.default
+/target/config/Config.in.system*
+/target/config/Config.in.arch*
 /target/config/Config.in.scripts
 /target/config/Config.in.prereq
 /target/m68k/aranym.cfg
