@@ -774,6 +774,10 @@ $(eval $(call KMOD_template,BLK_DEV_SR,blk-dev-sr,\
 # RAID
 #
 
+$(eval $(call KMOD_template,RAID6_PQ,raid-pq,\
+    $(MODULES_DIR)/kernel/lib/raid6/raid6_pq \
+,20))
+
 $(eval $(call KMOD_template,BLK_DEV_MD,blk-dev-md,\
     $(MODULES_DIR)/kernel/drivers/md/md-mod \
 ,30))
@@ -787,15 +791,13 @@ $(eval $(call KMOD_template,MD_RAID1,md-raid1,\
 ,35))
 
 $(eval $(call KMOD_template,MD_RAID456,md-raid456,\
-    $(MODULES_DIR)/kernel/lib/raid6/raid6_pq \
-    $(MODULES_DIR)/kernel/crypto/xor \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_tx \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_xor \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_memcpy \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_raid6_recov \
     $(MODULES_DIR)/kernel/crypto/async_tx/async_pq \
     $(MODULES_DIR)/kernel/drivers/md/raid456 \
-,35))
+,35, kmod-raid-pq kmod-xor-blocks))
 
 #
 # Device Mapper
@@ -852,11 +854,15 @@ $(eval $(call KMOD_template,CRYPTO_MANAGER2,crypto-manager,\
     $(MODULES_DIR)/kernel/crypto/cryptomgr \
     $(MODULES_DIR)/kernel/crypto/eseqiv \
     $(MODULES_DIR)/kernel/crypto/chainiv \
-,07))
+,08))
 
 $(eval $(call KMOD_template,CRYPTO_DEV_GEODE,crypto-dev-geode,\
     $(MODULES_DIR)/kernel/drivers/crypto/geode-aes \
 ,20))
+
+$(eval $(call KMOD_template,XOR_BLOCKS,xor-blocks,\
+    $(MODULES_DIR)/kernel/crypto/xor \
+,10))
 
 $(eval $(call KMOD_template,CRYPTO_AUTHENC,crypto-authenc,\
     $(MODULES_DIR)/kernel/crypto/authenc \
@@ -993,9 +999,8 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 ,11))
 
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
-    $(MODULES_DIR)/kernel/lib/zlib_deflate/zlib_deflate \
     $(MODULES_DIR)/kernel/crypto/deflate \
-,10))
+,10, kmod-zlib-deflate))
 
 $(eval $(call KMOD_template,CRYPTO_LZO,crypto-lzo,\
     $(MODULES_DIR)/kernel/crypto/lzo \
@@ -1109,6 +1114,10 @@ $(eval $(call KMOD_template,VFAT_FS,vfat-fs,\
 $(eval $(call KMOD_template,XFS_FS,xfs-fs,\
 	$(MODULES_DIR)/kernel/fs/xfs/xfs \
 ,30))
+
+$(eval $(call KMOD_template,BTRFS_FS,btrfs-fs,\
+	$(MODULES_DIR)/kernel/fs/btrfs/btrfs \
+,30, kmod-raid6-pq kmod-xor-blocks))
 
 $(eval $(call KMOD_template,YAFFS_FS,yaffs-fs,\
 	$(MODULES_DIR)/kernel/fs/yaffs2/yaffs \
@@ -1802,4 +1811,20 @@ $(eval $(call KMOD_template,VIRTIO_BLK,virtio-block,\
 $(eval $(call KMOD_template,VIRTIO_NET,virtio-net,\
 	$(MODULES_DIR)/kernel/drivers/net/virtio_net \
 ,40))
+
+#
+# Lib
+#
+
+$(eval $(call KMOD_template,ZLIB_DEFLATE,zlib-deflate,\
+	$(MODULES_DIR)/kernel/lib/zlib_deflate/zlib_deflate \
+,01))
+
+$(eval $(call KMOD_template,LZO_COMPRESS,lzo-compress,\
+	$(MODULES_DIR)/kernel/lib/lzo/lzo_compress \
+,01))
+
+$(eval $(call KMOD_template,LZO_DECOMPRESS,lzo-decompress,\
+	$(MODULES_DIR)/kernel/lib/lzo/lzo_decompress \
+,01))
 

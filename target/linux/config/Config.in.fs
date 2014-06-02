@@ -181,6 +181,23 @@ config ADK_KERNEL_XFS_FS
 	  for complete details.  This implementation is on-disk compatible
 	  with the IRIX version of XFS.
 
+config ADK_KERNEL_BTRFS_FS
+	prompt "Btrfs filesystem support"
+	tristate
+	select ADK_KERNEL_CRYPTO_CRC32C
+	select ADK_KERNEL_RAID6_PQ
+	select ADK_KERNEL_XOR_BLOCKS
+	select ADK_KERNEL_ZLIB_DEFLATE
+	select ADK_KERNEL_LZO_COMPRESS
+	select ADK_KERNEL_LZO_DECOMPRESS
+	default n
+	help
+	  Btrfs is a general purpose copy-on-write filesystem with extents,
+	  writable snapshotting, support for multiple devices and many more
+	  features focused on fault tolerance, repair and easy administration.
+	  For more information, please see the web pages at
+	  http://btrfs.wiki.kernel.org
+
 config ADK_KERNEL_FUSE_FS
 	prompt "Filesystem in Userspace support"
 	tristate

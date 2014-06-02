@@ -40,4 +40,16 @@ config ADK_KERNEL_CRC_CCITT
 	  This module provides CRC-CCITT library functions for kernel 
 	  modules built outside the kernel.
 
+config ADK_KERNEL_ZLIB_DEFLATE
+	tristate
+	default n
+
+config ADK_KERNEL_LZO_COMPRESS
+	tristate
+	default n
+
+config ADK_KERNEL_LZO_DECOMPRESS
+	tristate
+	default n
+
 endmenu

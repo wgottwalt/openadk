@@ -3,6 +3,9 @@ menu "Block devices support"
 config ADK_KERNEL_MD
 	boolean
 
+config ADK_KERNEL_RAID6_PQ
+	tristate
+
 config ADK_KERNEL_LBD
 	boolean
 
