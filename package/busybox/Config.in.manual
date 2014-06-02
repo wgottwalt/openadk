@@ -192,3 +192,10 @@ config BUSYBOX_DISABLE_RFKILL
 	default y if ADK_PACKAGE_RFKILL
 	depends on ADK_PACKAGE_RFKILL
 	default n
+
+config BUSYBOX_DISABLE_KMOD
+	boolean
+	default y if ADK_PACKAGE_KMOD
+	depends on ADK_PACKAGE_KMOD
+	default n
+

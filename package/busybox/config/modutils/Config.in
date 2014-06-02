@@ -9,6 +9,7 @@ menu "Linux Module Utilities"
 config BUSYBOX_MODINFO
 	bool "modinfo"
 	default y
+	depends on !BUSYBOX_DISABLE_KMOD
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Show information about a Linux Kernel module
@@ -16,6 +17,7 @@ config BUSYBOX_MODINFO
 config BUSYBOX_MODPROBE_SMALL
 	bool "Simplified modutils"
 	default n
+	depends on !BUSYBOX_DISABLE_KMOD
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Simplified modutils.
@@ -66,6 +68,7 @@ config BUSYBOX_INSMOD
 	bool "insmod"
 	default y
 	depends on !BUSYBOX_MODPROBE_SMALL
+	depends on !BUSYBOX_DISABLE_KMOD
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  insmod is used to load specified modules in the running kernel.
@@ -74,6 +77,7 @@ config BUSYBOX_RMMOD
 	bool "rmmod"
 	default y
 	depends on !BUSYBOX_MODPROBE_SMALL
+	depends on !BUSYBOX_DISABLE_KMOD
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  rmmod is used to unload specified modules from the kernel.
@@ -82,6 +86,7 @@ config BUSYBOX_LSMOD
 	bool "lsmod"
 	default y
 	depends on !BUSYBOX_MODPROBE_SMALL
+	depends on !BUSYBOX_DISABLE_KMOD
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  lsmod is used to display a list of loaded modules.
@@ -99,6 +104,7 @@ config BUSYBOX_FEATURE_LSMOD_PRETTY_2_6_OUTPUT
 config BUSYBOX_MODPROBE
 	bool "modprobe"
 	default n
+	depends on !BUSYBOX_DISABLE_KMOD
 	depends on !BUSYBOX_MODPROBE_SMALL
 	select BUSYBOX_PLATFORM_LINUX
 	help
@@ -120,6 +126,7 @@ config BUSYBOX_FEATURE_MODPROBE_BLACKLIST
 config BUSYBOX_DEPMOD
 	bool "depmod"
 	default n
+	depends on !BUSYBOX_DISABLE_KMOD
 	depends on !BUSYBOX_MODPROBE_SMALL
 	select BUSYBOX_PLATFORM_LINUX
 	help
