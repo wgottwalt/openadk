@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		mpg123
-PKG_VERSION:=		1.19.0
+PKG_VERSION:=		1.20.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		87731f1437cfd8c50537a606d81130e4
+PKG_MD5SUM:=		f48152446eb1e8b78234d4a42c5fa263
 PKG_DESCR:=		mp3 console player
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libpthread alsa-lib
@@ -19,6 +19,16 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MPG123,mpg123,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+ifeq ($(ADK_CPU_I486),y)
+CONFIGURE_ARGS+=	--with-cpu=i486
+endif
+ifeq ($(ADK_CPU_I586),y)
+CONFIGURE_ARGS+=	--with-cpu=i586
+endif
+ifeq ($(ADK_CPU_CORTEX_A9),y)
+CONFIGURE_ARGS+=	--with-cpu=neon
+endif
 
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 CONFIGURE_ARGS+=	--disable-shared \
