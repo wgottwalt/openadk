@@ -14,6 +14,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=gkernel/}
 
 # argp.h required
 PKG_LIBC_DEPENDS:=	glibc
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(TOPDIR)/mk/package.mk
 

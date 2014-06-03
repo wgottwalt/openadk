@@ -1,5 +1,6 @@
 global:
 - projects dir idea
+- lowercase package conversion
 
 toolchain stuff:
 - config.site/config.cache usage for speedup?
@@ -13,6 +14,7 @@ base system:
 
 new or update packages:
 - port weston / wayland
+- port lftp
 - add btrfs-utils
 - port uuterm
 - port opkg with gpg signing
