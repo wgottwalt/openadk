@@ -114,9 +114,9 @@ HOST_CONFIGURE_ARGS+=\
 		--enable-bootstrap \
 		--enable-zero \
 		--with-jdk-home=$(STAGING_HOST_DIR)/usr/lib/jvm \
-		--with-java=$(STAGING_HOST_DIR)/usr/bin/java \
+		--with-java=$(STAGING_HOST_DIR)/usr/bin/hostjava \
 		--with-javac=$(STAGING_HOST_DIR)/usr/bin/ecj \
-		--with-ecj-jar=${DL_DIR}/ecj.jar \
+		--with-ecj-jar=${DL_DIR}/ecj-4.9.jar \
 		--without-hotspot-build \
                 --disable-system-zlib \
                 --disable-system-jpeg \

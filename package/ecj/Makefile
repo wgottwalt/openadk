@@ -33,8 +33,8 @@ ecj-hostinstall:
 	# put a wrapper for java here
 	mv ${STAGING_HOST_DIR}/usr/bin/gij ${STAGING_HOST_DIR}/usr/bin/gij.native
 	echo "env LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64 ${STAGING_HOST_DIR}/usr/bin/gij.native \"\$$@\"" > \
-		${STAGING_HOST_DIR}/usr/bin/java
-	chmod u+x ${STAGING_HOST_DIR}/usr/bin/java
+		${STAGING_HOST_DIR}/usr/bin/hostjava
+	chmod u+x ${STAGING_HOST_DIR}/usr/bin/hostjava
 	echo "env LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64 ${STAGING_HOST_DIR}/usr/bin/gij.native \"\$$@\"" > \
 		${STAGING_HOST_DIR}/usr/bin/gij
 	chmod u+x ${STAGING_HOST_DIR}/usr/bin/gij
