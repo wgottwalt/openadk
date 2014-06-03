@@ -1824,3 +1824,15 @@ $(eval $(call KMOD_template,LZO_DECOMPRESS,lzo-decompress,\
 	$(MODULES_DIR)/kernel/lib/lzo/lzo_decompress \
 ,01))
 
+#
+# DRM
+# 
+
+$(eval $(call KMOD_template,DRM_DW_HDMI_AUDIO,drm-dw-hdmi-audio,\
+	$(MODULES_DIR)/kernel/drivers/staging/imx-drm/dw-hdmi-audio \
+,75))
+
+$(eval $(call KMOD_template,DRM_DW_HDMI_CEC,drm-dw-hdmi-cec,\
+	$(MODULES_DIR)/kernel/drivers/cec/cec-dev \
+	$(MODULES_DIR)/kernel/drivers/staging/imx-drm/dw-hdmi-cec \
+,75))
