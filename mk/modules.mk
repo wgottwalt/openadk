@@ -827,28 +827,28 @@ $(eval $(call KMOD_template,CRYPTO,crypto,\
     $(MODULES_DIR)/kernel/crypto/crypto \
 ,01))
 
-$(eval $(call KMOD_template,CRYPTO_ALGAPI,crypto-algapi,\
+$(eval $(call KMOD_template,CRYPTO_ALGAPI2,crypto-algapi,\
     $(MODULES_DIR)/kernel/crypto/crypto_algapi \
 ,02))
 
-$(eval $(call KMOD_template,CRYPTO_PCOMP,crypto-pcomp,\
+$(eval $(call KMOD_template,CRYPTO_PCOMP2,crypto-pcomp,\
     $(MODULES_DIR)/kernel/crypto/pcompress \
 ,03))
 
-$(eval $(call KMOD_template,CRYPTO_AEAD,crypto-aead,\
+$(eval $(call KMOD_template,CRYPTO_AEAD2,crypto-aead,\
     $(MODULES_DIR)/kernel/crypto/aead \
 ,03))
 
-$(eval $(call KMOD_template,CRYPTO_HASH,crypto-hash,\
+$(eval $(call KMOD_template,CRYPTO_HASH2,crypto-hash,\
     $(MODULES_DIR)/kernel/crypto/crypto_hash \
 ,04))
 
-$(eval $(call KMOD_template,CRYPTO_RNG,crypto-rng,\
+$(eval $(call KMOD_template,CRYPTO_RNG2,crypto-rng,\
     $(MODULES_DIR)/kernel/crypto/rng \
     $(MODULES_DIR)/kernel/crypto/krng \
 ,06))
 
-$(eval $(call KMOD_template,CRYPTO_MANAGER,crypto-manager,\
+$(eval $(call KMOD_template,CRYPTO_MANAGER2,crypto-manager,\
     $(MODULES_DIR)/kernel/crypto/cryptomgr \
     $(MODULES_DIR)/kernel/crypto/eseqiv \
     $(MODULES_DIR)/kernel/crypto/chainiv \
