@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dillo
-PKG_VERSION:=		3.0.3
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		726cd0b7a18c5e25f4d80ebeffe7607e
+PKG_VERSION:=		3.0.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		c85aab6b840527e1dd71b220a1dcfbab
 PKG_DESCR:=		small graphical web browser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libfltk libxi libpng zlib libjpeg-turbo
