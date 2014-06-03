@@ -11,10 +11,10 @@ MASTER_SITE_MIRBSD?=	\
 	http://pub.allbsd.org/MirOS/distfiles/ \
 
 MASTER_SITE_KERNEL?=	\
-	ftp://www.kernel.org/pub/linux/kernel/v3.0/ \
-	http://www.kernel.org/pub/linux/kernel/v3.0/ \
-	ftp://www.kernel.org/pub/linux/kernel/v3.0/testing/ \
-	http://www.kernel.org/pub/linux/kernel/v3.0/testing/ \
+	ftp://www.kernel.org/pub/linux/ \
+	http://www.kernel.org/pub/linux/ \
+	ftp://www.kernel.org/pub/linux/ \
+	http://www.kernel.org/pub/linux/ \
 
 MASTER_SITE_XORG?=	\
 	http://www.x.org/releases/individual/xserver/ \
