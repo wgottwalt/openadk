@@ -16,6 +16,12 @@ config ADK_KERNEL_CRC16
 	default n
 	help
 
+config ADK_KERNEL_CRC32
+	prompt "CRC32 library functions"
+	tristate
+	default n
+	help
+
 config ADK_KERNEL_LIBCRC32C
 	prompt "CRC32c Cyclic Redundancy-Check"
 	tristate

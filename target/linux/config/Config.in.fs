@@ -12,7 +12,9 @@ config ADK_KERNEL_EXPORTFS
 	default y
 
 config ADK_KERNEL_JBD2
-	select ADK_KERNEL_CRYPTO_HASH2
+	select ADK_KERNEL_CRC32
+	select ADK_KERNEL_CRYPTO
+	select ADK_KERNEL_CRYPTO_CRC32C
 	tristate
 
 config ADK_KERNEL_YAFFS_YAFFS1
@@ -97,7 +99,6 @@ config ADK_KERNEL_EXT4_FS
 	prompt "EXT4 filesystem support"
 	tristate
 	select ADK_KERNEL_FS_MBCACHE
-	select ADK_KERNEL_CRC16
 	select ADK_KERNEL_JBD2
 	default n
 	help
