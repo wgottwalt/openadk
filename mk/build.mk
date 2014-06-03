@@ -123,6 +123,10 @@ POSTCONFIG=		-@\
 			touch .rebuild.bkeymaps;\
 			rebuild=1;\
 		fi; \
+		if [ "$$(grep ^ADK_TARGET_GPU_MEM .config|md5sum)" != "$$(grep ^ADK_TARGET_GPU_MEM .config.old|md5sum)" ];then \
+			touch .rebuild.bcm2835-bootloader;\
+			rebuild=1;\
+		fi; \
 		if [ "$$(grep ^ADK_KERNEL_ADDON .config|md5sum)" != "$$(grep ^ADK_KERNEL_ADDON .config.old|md5sum)" ];then \
 			make cleankernel;\
 		fi; \

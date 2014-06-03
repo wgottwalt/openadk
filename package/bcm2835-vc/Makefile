@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bcm2835-vc
-# actually 4855a45b118cb7b97b83e5160551db9813487c91 from 24.05.2014
-PKG_VERSION:=		0.6
+# actually git checkout from 03.06.2014
+PKG_VERSION:=		0.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		06ef68599607e3f041ded24d431ca460
+PKG_MD5SUM:=		f91457e3894ac339deee765e69cdb5ab
 PKG_DESCR:=		videocore tools and libraries for raspberry pi
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libpthread

@@ -275,3 +275,11 @@ config ADK_TARGET_PACKAGE_IPKG
 	  Create ipkg packages and use ipkg package management on the target.
 	  
 endchoice
+
+config ADK_TARGET_GPU_MEM
+	prompt "Target GPU Memory"
+	int
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default 16
+	help
+	  use 128 or 256 when you use XBMC
