@@ -54,6 +54,12 @@ config ADK_KERNEL_FB_MXC_SYNC_PANEL
 config ADK_KERNEL_FB_MXC_HDMI
  	boolean
 
+config ADK_KERNEL_DRM_DW_HDMI_AUDIO
+	tristate
+
+config ADK_KERNEL_DRM_DW_HDMI_CEC
+	tristate
+
 config ADK_KERNEL_MFD_SM501
 	boolean
 
@@ -89,9 +95,6 @@ config ADK_KERNEL_DRM_VIVANTE
 	boolean
 
 config ADK_KERNEL_DRM_IMX_FB_HELPER
-	boolean
-
-config ADK_KERNEL_DRM_IMX_HDMI
 	boolean
 
 config ADK_KERNEL_DRM_IMX_PARALLEL_DISPLAY
@@ -144,6 +147,16 @@ config ADK_KERNEL_FB_VESA
  	help
 	 Framebuffer support for VirtualBox Emulator.
 
+config ADK_KERNEL_DRM_IMX_HDMI
+	tristate
+	select ADK_KERNEL_DRM_DW_HDMI_AUDIO
+	select ADK_KERNEL_DRM_DW_HDMI_CEC
+	depends on ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_KERNEL_VERSION_3_15
+	default m if ADK_TARGET_SYSTEM_CUBOX_I
+ 	default n
+ 	help
+	
 config ADK_KERNEL_DRM_IMX
 	prompt "Framebuffer support for Cubox-i"
 	boolean
@@ -151,7 +164,6 @@ config ADK_KERNEL_DRM_IMX
 	select ADK_KERNEL_DMA_CMA
 	select ADK_KERNEL_RESET_CONTROLLER
 	select ADK_KERNEL_DRM_IMX_FB_HELPER
-	select ADK_KERNEL_DRM_IMX_HDMI
 	select ADK_KERNEL_DRM_IMX_LDB
 	select ADK_KERNEL_DRM_IMX_TVE
 	select ADK_KERNEL_DRM_IMX_PARALLEL_DISPLAY
