@@ -19,6 +19,7 @@ config ADK_TARGET_SYSTEM_IBM_X40
 	select ADK_TARGET_WITH_HDD
 	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_WITH_ACPI
+	select ADK_TARGET_WITH_WIFI
 	# with docking station 
 	select ADK_TARGET_WITH_PP
 	select ADK_TARGET_WITH_ROOT_RW

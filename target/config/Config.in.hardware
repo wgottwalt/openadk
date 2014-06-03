@@ -83,6 +83,9 @@ config ADK_TARGET_WITH_RTC
 config ADK_TARGET_WITH_WATCHDOG
 	boolean
 
+config ADK_TARGET_WITH_WIFI
+	boolean
+
 config ADK_TARGET_WITH_DSL
 	boolean
 
