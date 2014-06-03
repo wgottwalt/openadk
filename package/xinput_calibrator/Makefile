@@ -10,8 +10,8 @@ PKG_MD5SUM:=		20da0a2055a5a75962add8c6b44f60fa
 PKG_DESCR:=		input calibration utility
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libstdcxx
-PKG_URL:=		http://github.com/downloads/tias/xinput_calibrator/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_URL:=		http://www.freedesktop.org/wiki/Software/xinput_calibrator/
+PKG_SITES:=		http://github.com/downloads/tias/xinput_calibrator/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
