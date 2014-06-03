@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
 PKG_VERSION:=		1.55.0
-PKG_RELEASE:=		5
+PKG_RELEASE:=		6
 PKG_MD5SUM:=		93780777cfbf999a600f62883bd54b17
 PKG_DESCR:=		boost c++ library
 PKG_SECTION:=		libs/misc
@@ -22,7 +22,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}_1_55_0
 PKG_FLAVOURS_BOOST:=	DATE_TIME GRAPH GRAPH_PARALLEL IOSTREAMS MATH PROGRAM_OPTIONS PYTHON REGEX SERIALIZATION SIGNALS SYSTEM TEST THREAD WAVE
 
 PKGFD_DATE_TIME:=	with date-time
-PKGFD_PYTHON:=		with Python
+PKGFD_PYTHON:=		with python
 PKGFB_PYTHON:=		python2
 PKGFS_PYTHON:=		python2
 PKGFD_IOSTREAMS:=	with iostreams
@@ -98,10 +98,10 @@ ifeq (${ADK_PACKAGE_BOOST_WAVE},)
 	CONFIGURE_ARGS+=--without-wave
 endif
 
-ifeq ($(ARCH),x86_64)
+ifeq ($(ADK_TARGET_ARCH),x86_64)
 BOOST_ARCH:=	x86
 else
-BOOST_ARCH:=	$(ARCH)
+BOOST_ARCH:=	$(ADK_TARGET_ARCH)
 endif
 
 # some variables for build
