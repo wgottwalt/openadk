@@ -26,7 +26,7 @@ CONFIGURE_ARGS:=        --prefix=/srv/nginx \
 			--sbin-path=/usr/sbin \
 			--user=nginx \
 			--group=nginx \
-			--crossbuild=Linux::$(ARCH) \
+			--crossbuild=Linux::$(ADK_TARGET_ARCH) \
 			--with-cc="$(TARGET_CC)" \
                         --with-cc-opt="$(TARGET_CPPFLAGS) $(TARGET_CFLAGS)" \
                         --with-ld-opt="$(TARGET_LDFLAGS)" \

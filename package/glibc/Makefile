@@ -71,7 +71,7 @@ endif
 	done
 	# header package
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
-		HOSTCC=$(CC_FOR_BUILD) ARCH=$(ARCH) V=1 \
+		HOSTCC=$(CC_FOR_BUILD) ARCH=$(ADK_TARGET_ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_GLIBC_DEV)/usr \
 		headers_install
 	(cd $(WRKBUILD); \

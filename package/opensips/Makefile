@@ -141,7 +141,7 @@ do-build:
 		NO_EPOLL=1 \
 		CC="$(TARGET_CC)" \
 		OS="linux" \
-		ARCH="$(ARCH)"  \
+		ARCH="$(ADK_TARGET_ARCH)"  \
 		CFLAGS="$(TARGET_CFLAGS) -fPIC" \
 		LOCALBASE="$(STAGING_TARGET_DIR)/usr" \
 		SYSBASE="$(STAGING_TARGET_DIR)/usr" \

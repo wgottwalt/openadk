@@ -101,7 +101,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-x11 \
 			--confdir=/etc \
 			--enable-cross-compile \
-			--target=${ARCH}-linux \
+			--target=${ADK_TARGET_ARCH}-linux \
 			--cc='$(TARGET_CC)' \
 			--host-cc=$(CC_FOR_BUILD) \
 			--enable-fbdev \

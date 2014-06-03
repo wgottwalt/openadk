@@ -21,7 +21,7 @@ $(eval $(call PKG_template,LIBPRI,libpri,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 
 CONFIG_STYLE:=		manual
 
-MAKE_FLAGS+=		CC='${TARGET_CC}' LDCONFIG='' ARCH=$(ARCH)
+MAKE_FLAGS+=		CC='${TARGET_CC}' LDCONFIG='' ARCH=$(ADK_TARGET_ARCH)
 FAKE_FLAGS+=		INSTALL_BASE=/usr
 
 libpri-install:

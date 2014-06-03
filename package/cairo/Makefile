@@ -35,7 +35,7 @@ HOST_CONFIGURE_ARGS+=	--enable-ft=yes \
 			--disable-test-surfaces \
 			--disable-full-testing
 
-ifeq (,$(filter arm,$(TARGET_ARCH)))
+ifeq (,$(filter arm,$(ADK_TARGET_ARCH)))
 TARGET_CFLAGS:=         $(filter-out -Os,$(TARGET_CFLAGS))
 endif
 CONFIGURE_ARGS+=	--enable-ft=yes \

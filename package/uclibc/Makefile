@@ -53,7 +53,7 @@ uclibc-dev-install:
 	for file in libcrypt libdl libm libresolv libutil; do \
 		cd $(IDIR_UCLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(GIT_VERSION).so $$file.so; \
 	done
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) ARCH=$(ARCH) V=1 \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) ARCH=$(ADK_TARGET_ARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_DEV)/usr \
 		headers_install
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION} \

@@ -26,7 +26,7 @@ $(eval $(call PKG_template,FONTCONFIG,fontconfig,${PKG_VERSION}-${PKG_RELEASE},$
 
 HOST_STYLE:=		auto
 TARGET_LDFLAGS+=	-liconv
-CONFIGURE_ARGS+=	--with-arch=${ARCH} \
+CONFIGURE_ARGS+=	--with-arch=${ADK_TARGET_ARCH} \
 			--enable-libxml2 \
 			--disable-docs
 

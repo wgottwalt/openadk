@@ -23,7 +23,7 @@ $(eval $(call PKG_template,OPENAFS,openafs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ENV+=		ac_cv_path_PATH_CPP=$(TARGET_CROSS)cpp
-CONFIGURE_ARGS:=	--with-afs-sysname=$(ARCH)_linux26 \
+CONFIGURE_ARGS:=	--with-afs-sysname=$(ADK_TARGET_ARCH)_linux26 \
 			--with-linux-kernel-headers=${LINUX_DIR} \
 			--disable-strip-binaries \
 			--disable-linux-syscall-probing

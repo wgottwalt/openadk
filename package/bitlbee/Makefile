@@ -29,7 +29,7 @@ CONFIGURE_ARGS:=	--target=${GNU_TARGET_NAME} \
 			--datadir=/usr/share/bitlbee \
 			--config=/var/lib/bitlbee \
 			--arch=Linux \
-			--cpu="${ARCH}" \
+			--cpu="${ADK_TARGET_ARCH}" \
 			--debug=0 \
 			--strip=0 \
 			--ipv6=1 \
