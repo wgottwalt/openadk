@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		strongswan
-PKG_VERSION:=		5.1.1
+PKG_VERSION:=		5.1.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f624ab041c306af0f5f57c927e9ea2e4
+PKG_MD5SUM:=		82d387d885c1c05635d099164f3520a1
 PKG_DESCR:=		ipsec software
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		ip libpthread
@@ -18,13 +18,13 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_CHOICES_STRONGSWAN:=WITH_GNUTLS WITH_OPENSSL WITH_GMP
-PKGCD_WITH_GMP:=	use GMP for crypto
+PKGCD_WITH_GMP:=	use gmp for crypto
 PKGCS_WITH_GMP:=	libgmp
 PKGCB_WITH_GMP:=	gmp
-PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl
 PKGCB_WITH_OPENSSL:=	openssl
-PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
+PKGCD_WITH_GNUTLS:=	use gnutls for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls
 PKGCB_WITH_GNUTLS:=	gnutls
 
