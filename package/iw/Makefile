@@ -4,18 +4,17 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iw
-PKG_VERSION:=		3.5
+PKG_VERSION:=		3.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		17704d7c41bcb85cb32cb33b07a1c4cc
-PKG_DESCR:=		tools for setting up wiFi cards via netlink
+PKG_MD5SUM:=		3b77ad7ec44a865a3bb2ab6c1c463bba
+PKG_DESCR:=		tools for setting up wifi cards via netlink
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		libnl
 PKG_BUILDDEP:=		libnl
 PKG_URL:=		http://wireless.kernel.org/en/users/Documentation/iw
-PKG_SITES:=		http://wireless.kernel.org/download/iw/
+PKG_SITES:=		https://www.kernel.org/pub/software/network/iw/
 
-PKG_DFLT_IW:=		y if ADK_TARGET_SYSTEM_IBM_X40
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_DFLT_IW:=		y if ADK_TARGET_WITH_WIFI
 
 include ${TOPDIR}/mk/package.mk
 
