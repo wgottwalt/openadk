@@ -14,10 +14,13 @@ PKG_BUILDDEP:=		libnids openssl gdbm libpcap libnet
 PKG_URL:=		http://www.monkey.org/~dugsong/dsniff/
 PKG_SITES:=		http://www.monkey.org/~dugsong/dsniff/beta/
 
+# rpc problem
+PKG_CFLINE_DSNIFF:=	depends on ADK_BROKEN
 PKG_ARCH_DEPENDS:=	!arm
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2.4
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk
 
