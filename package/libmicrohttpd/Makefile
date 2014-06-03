@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libmicrohttpd
-PKG_VERSION:=		0.9.36
+PKG_VERSION:=		0.9.37
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d4ebabaef27a2126efb7af0d085b1895
+PKG_MD5SUM:=		fdf1e0534d83bbf2663f80fa7873be77
 PKG_DESCR:=		library make it easy to run an webserver
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libgcrypt
