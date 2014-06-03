@@ -24,7 +24,6 @@ $(eval $(call PKG_template,SYSLOG_NG,syslog-ng,${PKG_VERSION}-${PKG_RELEASE},${P
 
 CONFIGURE_ARGS+=	--enable-full-dynamic \
 			--disable-tcp-wrapper
-#CONFIGURE_ENV+=		ac_cv_path_libol_config=${STAGING_TARGET_DIR}/usr/bin
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 
 syslog-ng-install:
