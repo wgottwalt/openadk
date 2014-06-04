@@ -89,7 +89,13 @@ TARGET_CXXFLAGS+=	-static-libgcc
 TARGET_LDFLAGS+=	-static-libgcc
 
 # security optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
-TARGET_LDFLAGS+=	-Wl,-z,relro,-z,now
+ifneq ($(ADK_TARGET_USE_LD_RELRO),)
+TARGET_LDFLAGS+=	-Wl,-z,relro
+endif
+ifneq ($(ADK_TARGET_USE_LD_BIND_NOW),)
+TARGET_LDFLAGS+=	-Wl,-z,now
+endif
+
 # needed for musl ppc 
 ifeq ($(ADK_LINUX_PPC),y)
 ifeq ($(ADK_TARGET_LIB_MUSL),y)

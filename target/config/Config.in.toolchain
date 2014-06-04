@@ -68,6 +68,16 @@ config ADK_TARGET_USE_LTO
 	select ADK_TOOLCHAIN_WITH_LTO
 	default n
 
+config ADK_TARGET_USE_LD_RELRO
+	prompt "Use LD read-only (-z relro) relocations for all packages"
+	boolean
+	default n
+
+config ADK_TARGET_USE_LD_BIND_NOW
+	prompt "Use LD bind now (-z now) for all packages"
+	boolean
+	default n
+
 config ADK_TARGET_USE_LD_GC
 	prompt "Use LD garbage collection for all packages"
 	boolean
