@@ -1,6 +1,8 @@
 global:
 - projects dir idea
 - lowercase package conversion
+- AUTOTOOL_STYLE automatic adds autotool
+- HOST_STYLE auto default
 
 toolchain stuff:
 - config.site/config.cache usage for speedup?
