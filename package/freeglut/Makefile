@@ -22,7 +22,7 @@ PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
 
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,FREEGLUT,freeglut,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}${PKG_OPTS}))
+$(eval $(call PKG_template,FREEGLUT,freeglut,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 freeglut-install:
 	$(INSTALL_DIR) $(IDIR_FREEGLUT)/usr/lib
