@@ -18,7 +18,7 @@ config ADK_KERNEL_CRC16
 
 config ADK_KERNEL_CRC32
 	prompt "CRC32 library functions"
-	tristate
+	boolean
 	default n
 	help
 

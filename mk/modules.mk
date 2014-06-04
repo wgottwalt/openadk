@@ -1736,10 +1736,6 @@ $(eval $(call KMOD_template,CRC16,crc16, \
 	$(MODULES_DIR)/kernel/lib/crc16 \
 ,01))
 
-$(eval $(call KMOD_template,CRC32,crc32, \
-	$(MODULES_DIR)/kernel/lib/crc32 \
-,01))
-
 #
 # parallel port support
 #
