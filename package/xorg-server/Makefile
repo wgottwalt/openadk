@@ -13,7 +13,7 @@ PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile
 PKG_DEPENDS+=		libfontenc xkeyboard-config xkbcomp libxau libxaw
 PKG_DEPENDS+=		libxmu libxpm libxrender libxt libxxf86dga libxext
 PKG_DEPENDS+=		libxdmcp libxv libsm libice libx11 libxcb librt
-PKG_DEPENDS+=		libxshmfence libfreetype libfontenc libstdcxx
+PKG_DEPENDS+=		libxshmfence libfreetype libfontenc libstdcxx libpciaccess
 PKG_BUILDDEP:=		libX11 randrproto renderproto fixesproto damageproto
 PKG_BUILDDEP+=		scrnsaverproto resourceproto fontsproto videoproto
 PKG_BUILDDEP+=		compositeproto evieext libxkbfile libXfont pixman
@@ -25,7 +25,7 @@ PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA
+PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU_WITH_GRAPHIC
 PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_FLAVOURS_XORG_SERVER:=	WITH_DRI WITH_KDRIVE
