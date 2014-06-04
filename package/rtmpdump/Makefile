@@ -25,7 +25,7 @@ PKGSC_LIBRTMP:=		libs/video
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RTMPDUMP,rtmpdump,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBRTMP,librtmp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBRTMP},${PKGSC_LIBRTMP}))
+$(eval $(call PKG_template,LIBRTMP,librtmp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBRTMP},${PKGSC_LIBRTMP},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 
