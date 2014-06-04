@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		grep
-PKG_VERSION:=		2.19
+PKG_VERSION:=		2.20
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ac732142227d9fe9567d71301e127979
+PKG_MD5SUM:=		2cbea44a4f1548aee20b9ff2d3076908
 PKG_DESCR:=		global search for a regex and print out matched lines
 PKG_SECTION:=		base/apps
 PKG_DEPENDS:=		libpcre
