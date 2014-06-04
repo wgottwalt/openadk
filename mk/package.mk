@@ -142,6 +142,8 @@ INFO_$(1)_DEV=	$(PKG_STATE_DIR)/info/$(2)-dev.list
 INFO_$(1)_DBG=	$(PKG_STATE_DIR)/info/$(2)-dbg.list
 
 ifeq ($(ADK_PACKAGE_$(1)),y)
+
+ifeq (,$(filter devonly,$(7)))
 ifeq ($(ADK_PACKAGE_$(1)_DBG),y)
 install-targets: $$(INFO_$(1)) $$(INFO_$(1)_DBG)
 ifeq ($(ADK_PACKAGE_$(1)_DEV),y)
@@ -156,6 +158,10 @@ else
 install-targets: $$(INFO_$(1))
 endif
 endif
+else
+install-targets: $$(INFO_$(1))
+endif
+
 endif
 
 IDEPEND_$(1):=	$$(strip $(4))
