@@ -1,5 +1,5 @@
---- bluez-5.12.orig/plugins/wiimote.c	2013-12-10 07:59:06.000000000 +0100
-+++ bluez-5.12/plugins/wiimote.c	2013-12-21 19:29:22.000000000 +0100
+--- bluez-5.19.orig/plugins/wiimote.c	2014-02-22 02:42:18.000000000 +0100
++++ bluez-5.19/plugins/wiimote.c	2014-06-04 16:53:28.000000000 +0200
 @@ -28,6 +28,7 @@
  #include <stdbool.h>
  
@@ -7,4 +7,4 @@
 +#include <fcntl.h>
  #include <glib.h>
  
- #include "plugin.h"
+ #include "src/plugin.h"
