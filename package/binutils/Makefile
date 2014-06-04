@@ -8,6 +8,7 @@ PKG_NAME:=		binutils
 PKG_DESCR:=		binary utilities (nm, objdump, as, ..)
 PKG_SECTION:=		dev/tools
 PKG_DEPENDS:=		libbfd
+PKG_LIBNAME:=		libbfd
 PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		BINUTILS LIBBFD
@@ -19,7 +20,7 @@ PKG_HOST_DEPENDS:=      !cygwin
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BINUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBBFD,libbfd,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBFD},${PKGSC_LIBBFD},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBBFD,libbfd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBBFD},${PKGSD_LIBBFD},${PKGSC_LIBBFD},${PKG_OPTS}))
 
 ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
 CONFIGURE_ARGS+=	--disable-multilib
