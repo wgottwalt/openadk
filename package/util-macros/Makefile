@@ -20,7 +20,7 @@ include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,UTIL_MACROS,util-macros,$(PKG_VERSION)-${PKG_RELEASE}))
-$(eval $(call PKG_template,UTIL_MACROS,util-macros,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,UTIL_MACROS,util-macros,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 HOST_STYLE:=		auto
 AUTOTOOL_STYLE:=	autoreconf
