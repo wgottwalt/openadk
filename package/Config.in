@@ -79,8 +79,3 @@ source package/Config.in.auto.dev.perl
 source package/Config.in.auto.dev.scm
 source package/Config.in.auto.dev.tools
 endmenu
-
-menu "Headers"
-depends on ADK_PACKAGE_GCC
-source package/Config.in.auto.dev.header
-endmenu
