@@ -265,5 +265,14 @@ config ADK_HARDWARE_GRAPHICS_INTEL_I915
 	depends on ADK_TARGET_SYSTEM_IBM_X40
 	help
           AGP/DRM/KMS support for Intel chipset i915.
+
+config ADK_KERNEL_DRM_CIRRUS_QEMU
+	prompt "Support for QEMU cirrus VGA emulation (DRM/KMS)"
+	boolean
+	select ADK_KERNEL_DRM
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	depends on ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	help
+	  DRM/KMS support for Qemu cirrus VGA emulation.
 	
 endmenu
