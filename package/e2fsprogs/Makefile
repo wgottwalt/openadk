@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.42.9
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		3f8e41e63b432ba114b33f58674563f7
+PKG_VERSION:=		1.42.10
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		62bfe2fe0a194c5c37165789ac2825a8
 PKG_DESCR:=		ext2/3/4 filesystem utilities
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libpthread
@@ -53,13 +53,12 @@ CONFIGURE_ARGS+=	--enable-elf-shlibs \
 			--disable-libuuid \
 			--disable-libblkid \
 			--disable-defrag
-INSTALL_TARGET+=	install-libs
-TARGET_LDFLAGS+=	-lpthread
-TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_TARGET_DIR)/usr/include
+#INSTALL_TARGET+=	install-libs
+#TARGET_LDFLAGS+=	-lpthread
+#TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_TARGET_DIR)/usr/include
 MAKE_FLAGS+=		BUILD_CC="${CC_FOR_BUILD}" \
-			BUILD_CFLAGS="${CFLAGS_FOR_BUILD}" \
-			BUILD_LDFLAGS="${LDFLAGS_FOR_BUILD}" \
-			BUILD_CPPFLAGS="${CPPFLAGS_FOR_BUILD}"
+			BUILD_CFLAGS="${CFLAGS_FOR_BUILD} ${CPPFLAGS_FOR_BUILD} -I${WRKSRC}/lib -I." \
+			BUILD_LDFLAGS="${LDFLAGS_FOR_BUILD}"
 
 libe2fs-install:
 	${INSTALL_DIR} ${IDIR_LIBE2FS}/etc
@@ -94,12 +93,10 @@ libcom-err-install:
 	${INSTALL_DIR} ${IDIR_LIBCOM_ERR}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcom_err.so* \
 		${IDIR_LIBCOM_ERR}/usr/lib
-	${INSTALL_BIN} ${WRKINST}/usr/bin/compile_et ${STAGING_HOST_DIR}/usr/bin
 
 libss-install:
 	${INSTALL_DIR} ${IDIR_LIBSS}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libss.so* \
 		${IDIR_LIBSS}/usr/lib
-	${INSTALL_BIN} ${WRKINST}/usr/bin/mk_cmds ${STAGING_HOST_DIR}/usr/bin
 
 include ${TOPDIR}/mk/pkg-bottom.mk
