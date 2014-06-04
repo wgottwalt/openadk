@@ -4,7 +4,7 @@ config ADK_KERNEL_CRYPTO
 	tristate
 
 config ADK_KERNEL_CRYPTO_HW
-	tristate
+	boolean
 
 config ADK_KERNEL_XOR_BLOCKS
 	tristate
