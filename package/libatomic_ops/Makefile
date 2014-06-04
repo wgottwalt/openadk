@@ -11,6 +11,7 @@ PKG_DESCR:=		atomic operations library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.hboehm.info/gc/
 PKG_SITES:=		http://www.hboehm.info/gc/gc_source/
+PKG_LIBNAME:=		libatomic-ops
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
@@ -18,12 +19,12 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
-$(eval $(call HOST_template,LIBATOMIC_OPS,libatomic_ops,$(PKG_VERSION)-${PKG_RELEASE}))
-$(eval $(call PKG_template,LIBATOMIC_OPS,libatomic_ops,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call HOST_template,LIBATOMIC_OPS,libatomic-ops,$(PKG_VERSION)-${PKG_RELEASE}))
+$(eval $(call PKG_template,LIBATOMIC_OPS,libatomic-ops,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 HOST_STYLE:=		auto
 
-libatomic_ops-install:
+libatomic-ops-install:
 	$(INSTALL_DIR) $(IDIR_LIBATOMIC_OPS)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libatomic_ops*.so* \
 		$(IDIR_LIBATOMIC_OPS)/usr/lib
