@@ -12,7 +12,7 @@ PKG_SECTION:=		libs/video
 PKG_FDEPENDS:=		libpthread
 PKG_URL:=		http://www.ffmpeg.org/
 PKG_SITES:=		http://www.ffmpeg.org/releases/
-PKH_LIBNAME:=		libffmpeg
+PKG_LIBNAME:=		libffmpeg
 PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		LIBFFMPEG FFSERVER FFPROBE FFMPEG
