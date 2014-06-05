@@ -23,9 +23,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,PAM,pam,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
-ifeq ($(ADK_TARGET_USE_SSP),y)
-TARGET_LDFLAGS+=	-lssp
-endif
 CONFIGURE_ARGS+=	--disable-nis \
 			--disable-regenerate-docu \
 			--enable-db=no

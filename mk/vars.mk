@@ -110,8 +110,8 @@ TARGET_LDFLAGS+=	-static
 endif
 
 ifneq ($(ADK_TARGET_USE_SSP),)
-TARGET_CFLAGS+=		-fstack-protector-all
-TARGET_CXXFLAGS+=	-fstack-protector-all
+TARGET_CFLAGS+=		-fstack-protector-all --param=ssp-buffer-size=4
+TARGET_CXXFLAGS+=	-fstack-protector-all --param=ssp-buffer-size=4
 TARGET_LDFLAGS+=	-fstack-protector-all
 endif
 
