@@ -44,6 +44,6 @@ config ADK_KERNEL_SERIAL_8250_CS
 	tristate
 	default n
 	select ADK_KERNEL_SERIAL_8250_SHARE_IRQ
-	depends on ADK_KERNEL_PCMCIA
+	depends on ADK_KERNEL_PCMCIA || !ADK_TARGET_QEMU
 
 endmenu
