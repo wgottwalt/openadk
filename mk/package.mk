@@ -106,9 +106,11 @@ build-all-pkgs: ${_IPKGS_COOKIE}
 # 7.) special package options $(PKG_OPTS)
 #     noscripts -> do not install scripts to $(STAGING_TARGET_DIR)/scripts
 #		  (needed for example for autoconf/automake)
-#     noremove -> do not remove files from $(STAGING_TARGET_DIR)/target while
+#     noremove -> do not remove files from $(STAGING_TARGET_DIR) while
 #                 cleaning (needed for toolchain packages like glibc)
+#     nostaging -> do not install files to $(STAGING_TARGET_DIR)
 #     dev -> create a development subpackage with headers and pkg-config files
+#     devonly -> create a development package only
 # should be package format independent and modular in the future
 define PKG_template
 ALL_PKGOPTS+=	$(1)
@@ -249,16 +251,13 @@ ifeq (,$(filter noremove,$(7)))
 	fi
 endif
 	@rm -f '$${STAGING_PKG_DIR}/$(1)'
+ifeq (,$(filter nostaging,$(7)))
 	-@cd $${IDIR_$(1)}; \
 	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
 		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
 		    'ramdisk location:' >&2; \
 		echo "$$$$x" | sed 's/^/- /' >&2; \
 	    fi; \
-	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" -a "${PKG_NAME}" != "musl" ];then \
-	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
-	    	-exec echo 'WARNING: $${IPKG_$(1)} installs files in /lib -' \
-		' fix this!' >&2 \; -quit 2>/dev/null; fi; \
 	    find usr ! -type d 2>/dev/null | \
 	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/doc' -e '^usr/src' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config' | \
 	    tee '$${STAGING_PKG_DIR}/$(1)' | \
@@ -268,6 +267,7 @@ endif
 		chmod u+w $$$$fn; \
 		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_TARGET_DIR)/usr/lib,g" $$$$fn; \
 	done
+endif
 ifeq (,$(filter noscripts,$(7)))
 	@cd '$${STAGING_TARGET_DIR}'; grep 'usr/s*bin/' \
 	    '$${STAGING_PKG_DIR}/$(1)' | \
@@ -280,12 +280,10 @@ ifeq (,$(filter noscripts,$(7)))
 	done
 endif
 
-ifeq (,$(filter libonly,$(7)))
 ifeq (,$(filter devonly,$(7)))
 	$${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
 ifneq ($(ADK_DEBUG),y)
 	$${PKG_BUILD} $${IDIR_$(1)_DBG} $${PACKAGE_DIR} $(MAKE_TRACE)
-endif
 endif
 endif
 ifneq (,$(filter dev,$(7)))

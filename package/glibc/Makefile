@@ -2,12 +2,13 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(TOPDIR)/rules.mk
+include $(TOPDIR)/mk/kernel-ver.mk
 include $(TOPDIR)/toolchain/glibc/Makefile.inc
 
 PKG_NAME:=		glibc
 PKG_DESCR:=		gnu c library
 PKG_SECTION:=		base/libs
-PKG_OPTS:=		noremove
+PKG_OPTS:=		noremove nostaging
 PKG_SUBPKGS:=		GLIBC GLIBC_DEV
 
 NO_DISTFILES:=		1

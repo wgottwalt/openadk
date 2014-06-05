@@ -16,11 +16,12 @@ endif
 PKG_NAME:=		libstdcxx
 PKG_DESCR:=		c++ support library
 PKG_SECTION:=		libs/misc
+PKG_OPTS:=		nostaging
 NO_DISTFILES:=		1
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBSTDCXX,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBSTDCXX,libstdcxx,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

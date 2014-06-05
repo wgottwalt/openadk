@@ -134,9 +134,7 @@ ifneq ($(filter manual,${INSTALL_STYLE}),)
 else ifeq ($(strip ${INSTALL_STYLE}),)
 	cd ${WRKBUILD} && env ${MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    DESTDIR='${WRKINST}' ${FAKE_FLAGS} ${INSTALL_TARGET} $(MAKE_TRACE)
-ifeq (,$(filter libonly,${PKG_OPTS}))
 	env ${MAKE_ENV} ${MAKE} post-install $(MAKE_TRACE)
-endif
 else
 	@echo "Invalid INSTALL_STYLE '${INSTALL_STYLE}'" >&2
 	@exit 1
@@ -183,11 +181,8 @@ ifneq (,$(filter dev,${PKG_OPTS}))
 		chmod 755 $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin/$$(basename $$a); \
 	done
 endif
+ifeq (,$(filter nostaging,${PKG_OPTS}))
 	@-cd ${WRKINST}; \
-	    if [ "${PKG_NAME}" != "uClibc" -a "${PKG_NAME}" != "glibc" -a "${PKG_NAME}" != "libpthread" -a "${PKG_NAME}" != "libstdcxx" -a "${PKG_NAME}" != "libthread-db" -a "${PKG_NAME}" != "musl" -a "${PKG_NAME}" != "pam" -a "${PKG_NAME}" != "tzdata" ];then \
-	    find lib \( -name lib\*.so\* -o -name lib\*.a \) \
-	    	-exec echo 'WARNING: ${PKG_NAME} installs files in /lib -' \
-		' fix this!' >&2 \; -quit 2>/dev/null; fi;\
 	    find usr ! -type d 2>/dev/null | \
 	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/src' -e '^usr/doc' -e '^usr/local' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config*' -e '^/usr/lib/libpthread_nonshared.a' | \
 	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
@@ -197,6 +192,7 @@ endif
 		chmod u+w $$fn; \
 		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_TARGET_DIR)/usr/lib,g" $$fn; \
 	done
+endif
 ifeq (,$(filter noscripts,${PKG_OPTS}))
 	@cd '${STAGING_TARGET_DIR}'; grep 'usr/s*bin/' \
 	    '${STAGING_PKG_DIR}/${PKG_NAME}' | \

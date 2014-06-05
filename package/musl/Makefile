@@ -2,12 +2,13 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(TOPDIR)/rules.mk
+include $(TOPDIR)/mk/kernel-ver.mk
 include $(TOPDIR)/toolchain/musl/Makefile.inc
 
 PKG_NAME:=		musl
 PKG_DESCR:=		embedded C library
 PKG_SECTION:=		base/libs
-PKG_OPTS:=		noremove
+PKG_OPTS:=		noremove nostaging
 
 PKG_SUBPKGS:=		MUSL MUSL_DEV
 PKGSD_MUSL_DEV:=	development files for musl

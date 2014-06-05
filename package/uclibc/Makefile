@@ -2,12 +2,13 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(TOPDIR)/rules.mk
+include $(TOPDIR)/mk/kernel-ver.mk
 include $(TOPDIR)/toolchain/uclibc/Makefile.inc
 
 PKG_NAME:=		uClibc
 PKG_DESCR:=		embedded c library
 PKG_SECTION:=		base/libs
-PKG_OPTS:=		noremove
+PKG_OPTS:=		noremove nostaging
 
 PKG_SUBPKGS:=		UCLIBC UCLIBC_DEV
 PKGSD_UCLIBC_DEV:=	development files for uclibc
