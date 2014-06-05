@@ -4,16 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		3.2.15
+PKG_VERSION:=		3.3.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ec3b06f80e312137386c5d322183ca5a
+PKG_MD5SUM:=		908dc1e98e28cb1c2c255a71785a4af2
 PKG_DESCR:=		transport layer security library
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib libnettle libgmp
 PKG_BUILDDEP:=		libiconv-tiny libgcrypt liblzo libtasn1 
 PKG_BUILDDEP+=		zlib ncurses libnettle
 PKG_URL:=		http://www.gnutls.org/
-PKG_SITES:=		ftp://ftp.gnutls.org/gcrypt/gnutls/v3.2/
+PKG_SITES:=		ftp://ftp.gnutls.org/gcrypt/gnutls/v3.3/
 PKG_LIBNAME:=		libgnutls
 PKG_OPTS:=		dev
 
