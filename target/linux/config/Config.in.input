@@ -27,6 +27,10 @@ config ADK_KERNEL_KEYBOARD_ATARI
 	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default n
 
+config ADK_KERNEL_MOUSE_PS2
+	boolean
+	default n
+
 config ADK_KERNEL_MOUSE_ATARI
 	boolean
 	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
