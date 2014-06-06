@@ -35,9 +35,6 @@ endif
 ifeq ($(ADK_TARGET_CPU_ARCH),i486)
 MARCH:=			i386
 endif
-ifeq ($(ADK_TARGET_CPU_ARCH),mipsel)
-MARCH:=			mips
-endif
 ifeq ($(ADK_TARGET_CPU_ARCH),mips64el)
 MARCH:=			mips
 endif
