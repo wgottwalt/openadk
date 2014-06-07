@@ -6,14 +6,14 @@
 [ -x /sbin/swapon ] && {
 	grep swap /etc/fstab >/dev/null 2>&1
 	if [ $? -eq 0 ];then
-		logger -s -t '' "Activating swap"
+		logger -t '' "Activating swap"
 		swapon -a
 	fi
 }
 
 # activate any logical volumes
 [ -x /usr/sbin/lvm ] && {
-	logger -s -t '' "Activating LVM volumes"
+	logger -t '' "Activating LVM volumes"
 	lvm vgscan
 	lvm vgchange -ay
 }
@@ -30,7 +30,7 @@ for fs in $fstypes; do
 				logger -s -t '' "Checking $fs filesystem on $disk"
 				fsck $disk
 			}
-			logger -s -t '' "Mounting local filesystems"
+			logger -t '' "Mounting local filesystems"
 			mount $disk
 		else
 			logger -s -t '' "No $fs filesystem in kernel"
