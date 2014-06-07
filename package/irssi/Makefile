@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		irssi
-PKG_VERSION:=		0.8.15
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		870db8e319f640c2bf446c30d0c24ef6
+PKG_VERSION:=		0.8.16
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		5a8ee7144b63fa01747d6f400c40ef34
 PKG_DESCR:=		irc text client
 PKG_SECTION:=		app/chat
 PKG_DEPENDS:=		glib libncurses
@@ -17,10 +17,10 @@ PKG_SITES:=		http://www.irssi.org/files/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_FLAVOURS_IRSSI:=	WITH_SSL WITH_IPV6
-PKGFD_WITH_SSL:=	enable SSL/TLS support
+PKGFD_WITH_SSL:=	enable ssl/tls support
 PKGFS_WITH_SSL:=	libopenssl
 PKGFB_WITH_SSL:=	openssl
-PKGFD_WITH_IPV6:=	enable IPv6 support
+PKGFD_WITH_IPV6:=	enable ipv6 support
 
 include ${TOPDIR}/mk/package.mk
 
