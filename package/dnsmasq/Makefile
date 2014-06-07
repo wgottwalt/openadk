@@ -4,16 +4,16 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dnsmasq
-PKG_VERSION:=		2.70
+PKG_VERSION:=		2.71
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1d654e80888ab5dbba015548fd284d46
+PKG_MD5SUM:=		9e2e4d59c75e71ee3ca817ff0f9be69e
 PKG_DESCR:=		lightweight dns, dhcp and tftp server
 PKG_SECTION:=		net/dns
 PKG_URL:=		http://thekelleys.org.uk/dnsmasq/
 PKG_SITES:=		http://thekelleys.org.uk/dnsmasq/
 
 PKG_FLAVOURS_DNSMASQ:=	PXE
-PKGFD_PXE:=		enable PXE network boot
+PKGFD_PXE:=		enable pxe network boot
 PKGFS_PXE:=		pxelinux
 PKGFB_PXE:=		syslinux
 
