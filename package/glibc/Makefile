@@ -8,7 +8,7 @@ include $(TOPDIR)/toolchain/glibc/Makefile.inc
 PKG_NAME:=		glibc
 PKG_DESCR:=		gnu c library
 PKG_SECTION:=		base/libs
-PKG_OPTS:=		noremove nostaging
+PKG_OPTS:=		noremove nostaging noscripts
 PKG_SUBPKGS:=		GLIBC GLIBC_DEV
 
 NO_DISTFILES:=		1

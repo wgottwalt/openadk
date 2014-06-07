@@ -8,7 +8,7 @@ include $(TOPDIR)/toolchain/musl/Makefile.inc
 PKG_NAME:=		musl
 PKG_DESCR:=		embedded C library
 PKG_SECTION:=		base/libs
-PKG_OPTS:=		noremove nostaging
+PKG_OPTS:=		noremove nostaging noscripts
 
 PKG_SUBPKGS:=		MUSL MUSL_DEV
 PKGSD_MUSL_DEV:=	development files for musl

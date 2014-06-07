@@ -8,7 +8,7 @@ include $(TOPDIR)/toolchain/uclibc/Makefile.inc
 PKG_NAME:=		uClibc
 PKG_DESCR:=		embedded c library
 PKG_SECTION:=		base/libs
-PKG_OPTS:=		noremove nostaging
+PKG_OPTS:=		noremove nostaging noscripts
 
 PKG_SUBPKGS:=		UCLIBC UCLIBC_DEV
 PKGSD_UCLIBC_DEV:=	development files for uclibc
