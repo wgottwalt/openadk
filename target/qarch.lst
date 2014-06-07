@@ -1,0 +1,11 @@
+arm
+microblaze
+mips
+mips64
+ppc
+ppc64
+sparc
+sparc64
+sh
+x86
+x86_64
