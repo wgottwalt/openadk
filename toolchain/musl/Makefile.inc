@@ -2,8 +2,8 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		musl
-PKG_VERSION:=		1.1.1
+PKG_VERSION:=		1.1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		dbc08d311148e095016d9bbf6c7ffda6
+PKG_MD5SUM:=		a81309e54efdf9c68baf679790fc5678
 PKG_SITES:=		http://www.musl-libc.org/releases/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
