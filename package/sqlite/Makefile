@@ -4,19 +4,20 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		sqlite
-PKG_VERSION:=		3.8.0.2
+PKG_VERSION:=		3.8.5
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6d6cc639a4da04fbbdda7b1a1a01b386
 PKG_DESCR:=		embeddable sql database cli
 PKG_SECTION:=		sys/misc
 PKG_BUILDDEP:=		ncurses readline
+PKG_DEPENDS:=		libsqlite
 PKG_URL:=		http://www.sqlite.org/
-PKG_SITES:=		http://www.sqlite.org/2013/
+PKG_SITES:=		http://www.sqlite.org/2014/
 PKG_LIBNAME:=		libsqlite
 PKG_OPTS:=		dev
 
-DISTFILES:=		sqlite-autoconf-3080002.tar.gz
-WRKDIST=		${WRKDIR}/sqlite-autoconf-3080002
+DISTFILES:=		sqlite-autoconf-3080500.tar.gz
+WRKDIST=		${WRKDIR}/sqlite-autoconf-3080500
 
 PKG_SUBPKGS:=		SQLITE_CLI LIBSQLITE
 PKGSD_LIBSQLITE:=	emeddable sql library
@@ -24,7 +25,7 @@ PKGSC_LIBSQLITE:=	libs/db
 
 include ${TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBSQLITE,libsqlite,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBSQLITE},${PKGSC_LIBSQLITE},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBSQLITE,libsqlite,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBSQLITE},${PKGSD_LIBSQLITE},${PKGSC_LIBSQLITE},${PKG_OPTS}))
 $(eval $(call PKG_template,SQLITE_CLI,sqlite-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		config_BUILD_CC="${CC_FOR_BUILD}" \
