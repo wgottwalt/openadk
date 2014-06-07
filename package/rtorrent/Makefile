@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		rtorrent
-PKG_VERSION:=		0.9.2
+PKG_VERSION:=		0.9.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		72c3e9ab859bda7cc8aa96c0b508b09f
+PKG_MD5SUM:=		fd9490a2ac67d0fa2a567c6267845876
 PKG_DESCR:=		console torrent application
 PKG_SECTION:=		app/p2p
 PKG_DEPENDS:=		libncurses libtorrent libcurl libstdcxx

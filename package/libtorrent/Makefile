@@ -4,13 +4,13 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtorrent
-PKG_VERSION:=		0.13.2
+PKG_VERSION:=		0.13.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		96c0b81501357df402ab592f59ecaeab
+PKG_MD5SUM:=		e82f380a9d4b55b379e0e73339c73895
 PKG_DESCR:=		bittorrent library
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libopenssl libsigc++
-PKG_BUILDDEP:=		openssl libsigc++ gettext-tiny
+PKG_BUILDDEP:=		autotool openssl libsigc++ gettext-tiny
 PKG_URL:=		http://libtorrent.rakshasa.no/
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
 PKG_OPTS:=		dev
@@ -21,6 +21,7 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTORRENT,libtorrent,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--enable-aligned \
 			--without-kqueue
 
