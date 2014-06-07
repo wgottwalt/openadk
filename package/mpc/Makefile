@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		mpc
-PKG_VERSION:=		0.25
+PKG_VERSION:=		0.26
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		76aec8e973e3c6c131e9e9f2ad8f34c3
+PKG_MD5SUM:=		d4f37e7e6b32c804a870192d1eb86199
 PKG_DESCR:=		music player client
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libmpdclient
