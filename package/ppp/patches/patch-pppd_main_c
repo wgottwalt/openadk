@@ -1,5 +1,5 @@
---- ppp-2.4.5.orig/pppd/main.c	2009-11-16 23:26:07.000000000 +0100
-+++ ppp-2.4.5/pppd/main.c	2014-03-17 16:13:13.000000000 +0100
+--- ppp-2.4.6.orig/pppd/main.c	2014-01-02 05:42:08.000000000 +0100
++++ ppp-2.4.6/pppd/main.c	2014-06-05 20:42:29.000000000 +0200
 @@ -90,6 +90,7 @@
  #include <sys/socket.h>
  #include <netinet/in.h>
@@ -186,7 +186,7 @@
  
      gettimeofday(&timenow, NULL);
      tvp->tv_sec = callout->c_time.tv_sec - timenow.tv_sec;
-@@ -1692,7 +1729,7 @@ run_program(prog, args, must_exist, done
+@@ -1777,7 +1814,7 @@ run_program(prog, args, must_exist, done
      char *prog;
      char **args;
      int must_exist;
@@ -195,7 +195,7 @@
      void *arg;
      int wait;
  {
-@@ -1767,7 +1804,7 @@ void
+@@ -1853,7 +1890,7 @@ void
  record_child(pid, prog, done, arg, killable)
      int pid;
      char *prog;

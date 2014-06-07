@@ -1,5 +1,5 @@
---- ppp-2.4.5.orig/pppd/ipcp.c	2009-11-16 23:26:07.000000000 +0100
-+++ ppp-2.4.5/pppd/ipcp.c	2014-03-17 16:13:13.000000000 +0100
+--- ppp-2.4.6.orig/pppd/ipcp.c	2014-01-02 05:42:08.000000000 +0100
++++ ppp-2.4.6/pppd/ipcp.c	2014-06-05 20:42:29.000000000 +0200
 @@ -75,13 +75,13 @@ bool	disable_defaultip = 0;	/* Don't use
  bool	noremoteip = 0;		/* Let him have no IP address */
  
@@ -118,7 +118,7 @@
      void *arg;
  {
  	ipcp_options *wo = &ipcp_wantoptions[0];
-@@ -2126,7 +2126,7 @@ static int
+@@ -2145,7 +2145,7 @@ static int
  ipcp_printpkt(p, plen, printer, arg)
      u_char *p;
      int plen;

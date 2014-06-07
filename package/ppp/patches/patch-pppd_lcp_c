@@ -1,6 +1,14 @@
---- ppp-2.4.5.orig/pppd/lcp.c	2009-11-16 23:26:07.000000000 +0100
-+++ ppp-2.4.5/pppd/lcp.c	2014-03-17 16:13:13.000000000 +0100
-@@ -66,7 +66,7 @@ static const char rcsid[] = RCSID;
+--- ppp-2.4.6.orig/pppd/lcp.c	2014-01-02 05:42:08.000000000 +0100
++++ ppp-2.4.6/pppd/lcp.c	2014-06-05 21:05:49.000000000 +0200
+@@ -52,6 +52,7 @@
+ 
+ #include "pppd.h"
+ #include "fsm.h"
++#include "eap.h"
+ #include "lcp.h"
+ #include "chap-new.h"
+ #include "magic.h"
+@@ -66,7 +67,7 @@ static const char rcsid[] = RCSID;
  /* steal a bit in fsm flags word */
  #define DELAYED_UP	0x100
  
@@ -9,7 +17,7 @@
  
  /*
   * LCP-related command-line options.
-@@ -76,12 +76,12 @@ int	lcp_echo_fails = 0;	/* Tolerance to
+@@ -76,12 +77,12 @@ int	lcp_echo_fails = 0;	/* Tolerance to
  bool	lax_recv = 0;		/* accept control chars in asyncmap */
  bool	noendpoint = 0;		/* don't send/accept endpoint discriminator */
  
@@ -26,7 +34,7 @@
  #endif /* HAVE_MULTILINK */
  
  static option_t lcp_option_list[] = {
-@@ -202,31 +202,31 @@ static u_char nak_buffer[PPP_MRU];	/* wh
+@@ -202,31 +203,31 @@ static u_char nak_buffer[PPP_MRU];	/* wh
  /*
   * Callbacks for fsm code.  (CI = Configuration Information)
   */
@@ -78,7 +86,7 @@
  
  static fsm_callbacks lcp_callbacks = {	/* LCP callback routines */
      lcp_resetci,		/* Reset our Configuration Information */
-@@ -251,11 +251,11 @@ static fsm_callbacks lcp_callbacks = {	/
+@@ -251,11 +252,11 @@ static fsm_callbacks lcp_callbacks = {	/
   * Some of these are called directly.
   */
  
@@ -95,7 +103,7 @@
  
  struct protent lcp_protent = {
      PPP_LCP,
-@@ -322,7 +322,7 @@ setendpoint(argv)
+@@ -322,7 +323,7 @@ setendpoint(argv)
  static void
  printendpoint(opt, printer, arg)
      option_t *opt;
@@ -104,7 +112,7 @@
      void *arg;
  {
  	printer(arg, "%s", epdisc_to_str(&lcp_wantoptions[0].endpoint));
-@@ -1985,7 +1985,7 @@ static int
+@@ -1995,7 +1996,7 @@ static int
  lcp_printpkt(p, plen, printer, arg)
      u_char *p;
      int plen;

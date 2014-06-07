@@ -1,5 +1,5 @@
---- ppp-2.4.5.orig/pppd/plugins/rp-pppoe/plugin.c	2009-11-16 23:26:07.000000000 +0100
-+++ ppp-2.4.5/pppd/plugins/rp-pppoe/plugin.c	2014-03-17 16:32:55.000000000 +0100
+--- ppp-2.4.6.orig/pppd/plugins/rp-pppoe/plugin.c	2014-01-02 05:42:08.000000000 +0100
++++ ppp-2.4.6/pppd/plugins/rp-pppoe/plugin.c	2014-06-05 20:42:29.000000000 +0200
 @@ -46,7 +46,6 @@ static char const RCSID[] =
  #include <unistd.h>
  #include <fcntl.h>
@@ -7,4 +7,4 @@
 -#include <net/ethernet.h>
  #include <net/if_arp.h>
  #include <linux/ppp_defs.h>
- #include <linux/if_ppp.h>
+ #include <linux/if_pppox.h>

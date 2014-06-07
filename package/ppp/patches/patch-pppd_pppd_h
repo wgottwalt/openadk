@@ -1,15 +1,17 @@
---- ppp-2.4.5.orig/pppd/pppd.h	2009-11-16 23:26:07.000000000 +0100
-+++ ppp-2.4.5/pppd/pppd.h	2014-03-17 16:13:14.000000000 +0100
-@@ -198,7 +198,7 @@ struct epdisc {
+--- ppp-2.4.6.orig/pppd/pppd.h	2014-01-02 05:42:08.000000000 +0100
++++ ppp-2.4.6/pppd/pppd.h	2014-06-06 08:12:44.000000000 +0200
+@@ -198,8 +198,8 @@ struct epdisc {
  #define EPD_MAGIC	4
  #define EPD_PHONENUM	5
  
 -typedef void (*notify_func) __P((void *, int));
+-typedef void (*printer_func) __P((void *, char *, ...));
 +typedef void (*notify_func) (void *, int);
++typedef void (*printer_func) (void *, char *, ...);
  
  struct notifier {
      struct notifier *next;
-@@ -392,35 +392,35 @@ extern int  option_priority;	/* priority
+@@ -396,34 +396,34 @@ extern int  option_priority;	/* priority
  struct protent {
      u_short protocol;		/* PPP protocol number */
      /* Initialization procedure */
@@ -34,10 +36,9 @@
 -    void (*close) __P((int unit, char *reason));
 +    void (*close) (int unit, char *reason);
      /* Print a packet in readable form */
--    int  (*printpkt) __P((u_char *pkt, int len,
-+    int  (*printpkt) (u_char *pkt, int len,
- 			  void (*printer) __P((void *, char *, ...)),
+-    int  (*printpkt) __P((u_char *pkt, int len, printer_func printer,
 -			  void *arg));
++    int  (*printpkt) (u_char *pkt, int len, printer_func printer,
 +			  void *arg);
      /* Process a received data packet */
 -    void (*datainput) __P((int unit, u_char *pkt, int len));
@@ -58,7 +59,7 @@
  };
  
  /* Table of pointers to supported protocols */
-@@ -437,25 +437,25 @@ struct channel {
+@@ -440,25 +440,25 @@ struct channel {
  	/* set of options for this channel */
  	option_t *options;
  	/* find and process a per-channel options file */
@@ -94,7 +95,7 @@
  };
  
  extern struct channel *the_channel;
-@@ -465,117 +465,117 @@ extern struct channel *the_channel;
+@@ -483,117 +483,117 @@ extern struct userenv *userenv_list;
   */
  
  /* Procedures exported from main.c. */
@@ -167,8 +168,9 @@
 -void log_packet __P((u_char *, int, char *, int));
 +void log_packet (u_char *, int, char *, int);
  				/* Format a packet and log it with syslog */
--void print_string __P((char *, int,  void (*) (void *, char *, ...),
--		void *));	/* Format a string for output */
+-void print_string __P((char *, int,  printer_func, void *));
++void print_string (char *, int,  printer_func, void *);
+ 				/* Format a string for output */
 -int slprintf __P((char *, int, char *, ...));		/* sprintf++ */
 -int vslprintf __P((char *, int, char *, va_list));	/* vsprintf++ */
 -size_t strlcpy __P((char *, const char *, size_t));	/* safe strcpy */
@@ -183,8 +185,6 @@
 -void pr_log __P((void *, char *, ...));	/* printer fn, output to syslog */
 -void end_pr_log __P((void));	/* finish up after using pr_log */
 -void dump_packet __P((const char *, u_char *, int));
-+void print_string (char *, int,  void (*) (void *, char *, ...),
-+		void *);	/* Format a string for output */
 +int slprintf (char *, int, char *, ...);		/* sprintf++ */
 +int vslprintf (char *, int, char *, va_list);	/* vsprintf++ */
 +size_t strlcpy (char *, const char *, size_t);	/* safe strcpy */
@@ -296,7 +296,7 @@
  #else
  #define mp_bundle_terminated()	/* nothing */
  #define mp_exit_bundle()	/* nothing */
-@@ -584,142 +584,142 @@ int  str_to_epdisc __P((struct epdisc *,
+@@ -602,145 +602,145 @@ int  str_to_epdisc __P((struct epdisc *,
  #endif
  
  /* Procedures exported from sys-*.c */
@@ -395,6 +395,7 @@
 +int  cifaddr (int, u_int32_t, u_int32_t);
  				/* Reset i/f IP addresses */
  #ifdef INET6
+ int  ether_to_eui64(eui64_t *p_eui64);	/* convert eth0 hw address to EUI64 */
 -int  sif6addr __P((int, eui64_t, eui64_t));
 +int  sif6addr (int, eui64_t, eui64_t);
  				/* Configure IPv6 addresses for i/f */
@@ -479,8 +480,8 @@
 +void check_options (void);	/* check values after all options parsed */
 +int  override_value (const char *, int, const char *);
  				/* override value if permitted by priority */
--void print_options __P((void (*) __P((void *, char *, ...)), void *));
-+void print_options (void (*) __P((void *, char *, ...)), void *);
+-void print_options __P((printer_func, void *));
++void print_options (printer_func, void *);
  				/* print out values of all options */
  
 -int parse_dotted_ip __P((char *, u_int32_t *));
@@ -507,6 +508,8 @@
 -extern void (*ip_up_hook) __P((void));
 -extern void (*ip_down_hook) __P((void));
 -extern void (*ip_choose_hook) __P((u_int32_t *));
+-extern void (*ipv6_up_hook) __P((void));
+-extern void (*ipv6_down_hook) __P((void));
 +				 struct wordlist **popts);
 +extern void (*pap_logout_hook) (void);
 +extern int (*pap_passwd_hook) (char *user, char *passwd);
@@ -514,6 +517,8 @@
 +extern void (*ip_up_hook) (void);
 +extern void (*ip_down_hook) (void);
 +extern void (*ip_choose_hook) (u_int32_t *);
++extern void (*ipv6_up_hook) (void);
++extern void (*ipv6_down_hook) (void);
  
 -extern int (*chap_check_hook) __P((void));
 -extern int (*chap_passwd_hook) __P((char *user, char *passwd));

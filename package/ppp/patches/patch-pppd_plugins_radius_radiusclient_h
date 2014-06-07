@@ -1,6 +1,6 @@
---- ppp-2.4.5.orig/pppd/plugins/radius/radiusclient.h	2009-11-16 23:26:07.000000000 +0100
-+++ ppp-2.4.5/pppd/plugins/radius/radiusclient.h	2014-03-17 16:13:11.000000000 +0100
-@@ -382,74 +382,74 @@ typedef struct env
+--- ppp-2.4.6.orig/pppd/plugins/radius/radiusclient.h	2014-01-02 05:42:08.000000000 +0100
++++ ppp-2.4.6/pppd/plugins/radius/radiusclient.h	2014-06-05 20:42:29.000000000 +0200
+@@ -386,74 +386,74 @@ typedef struct env
  
  /*	avpair.c		*/
  
