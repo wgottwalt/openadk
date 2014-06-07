@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		wpa_supplicant
-PKG_VERSION:=		2.0
+PKG_VERSION:=		2.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3be2ebfdcced52e00eda0afe2889839d
+PKG_MD5SUM:=		238e8e888bbd558e1a57e3eb28d1dd07
 PKG_DESCR:=		wpa supplicant
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		libnl
@@ -16,7 +16,7 @@ PKG_SITES:=		http://hostap.epitest.fi/releases/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_DFLT_WPA_SUPPLICANT:=	y if ADK_TARGET_SYSTEM_IBM_X40
+PKG_DFLT_WPA_SUPPLICANT:=	y if ADK_TARGET_WITH_WIFI
 
 WRKSRC=			${WRKDIST}/${PKG_NAME}
 
