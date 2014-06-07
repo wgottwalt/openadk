@@ -3,7 +3,6 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_ARM
 	select ADK_arm
 	select ADK_toolchain_arm
 	select ADK_little
-	select ADK_eabi
 	select ADK_TARGET_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ
 	help
