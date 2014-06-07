@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		hostapd
-PKG_VERSION:=		2.0
+PKG_VERSION:=		2.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ba22e639bc57aa4035d2ea8ffa9bbbee
+PKG_MD5SUM:=		23c1f78a693c3288802d516adb7fd289
 PKG_DESCR:=		wireless authenticator
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		libnl
