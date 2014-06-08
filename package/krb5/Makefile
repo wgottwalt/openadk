@@ -9,21 +9,20 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		524b1067b619cb5bf780759b6884c3f5
 PKG_DESCR:=		kerberos server
 PKG_SECTION:=		app/crypto
-PKG_DEPENDS:=		libkrb5 libncurses libss libcom-err keyutils
-PKG_DEPENDS+=		libpthread
-PKG_BUILDDEP:=		ncurses e2fsprogs gettext-tiny bison-host
+PKG_DEPENDS:=		libkrb5 libncurses keyutils libpthread
+PKG_BUILDDEP:=		ncurses gettext-tiny bison-host
 PKG_URL:=		http://web.mit.edu/kerberos/
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.12/
-PKG_NOPARALLEL:=	1
 PKG_LIBNAME:=		libkrb5
 PKG_OPTS:=		dev
+PKG_NOPARALLEL:=	1
 
 PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT LIBKRB5
 PKGSD_LIBKRB5:=		kerberos libraries
 PKGSC_LIBKRB5:=		libs/crypto
 PKGSD_KRB5_CLIENT:=	kerberos client tools
 PKGSC_KRB5_CLIENT:=	app/crypto
-PKGSS_KRB5_CLIENT:=	libkrb5 libncurses libss libcom-err
+PKGSS_KRB5_CLIENT:=	libkrb5 libncurses
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-signed.tar
 WRKSRC=			${WRKDIST}/src
@@ -36,8 +35,8 @@ $(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGS
 
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
-			--with-system-ss \
-			--with-system-et \
+			--without-system-ss \
+			--without-system-et \
 			--without-system-verto \
 			--without-tcl
 CONFIGURE_ENV+=		krb5_cv_attr_constructor_destructor=yes,yes \
