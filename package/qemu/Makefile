@@ -30,6 +30,12 @@ ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CFLAGS+=		-DF_EXLCK=4 -DF_SHLCK=8 -D__SIGRTMIN=32 -D__SIGRTMAX=\(NSIG-1\)
 endif
 
+ifeq ($(ADK_TARGET_USE_SSP),y)
+CONFIGURE_ARGS+=	--enable-stack-protector
+else
+CONFIGURE_ARGS+=	--disable-stack-protector
+endif
+
 ifeq ($(ADK_TARGET_USE_PIE),y)
 CONFIGURE_ARGS+=	--enable-pie
 else
@@ -42,8 +48,15 @@ CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 			--prefix=/usr \
 			--sysconfdir=/etc \
 			--enable-kvm \
+			--audio-drv-list=alsa \
+			--disable-libssh2 \
+			--disable-gtk \
+			--disable-vnc \
+			--disable-spice \
+			--disable-libnfs \
 			--disable-docs \
 			--disable-sdl \
+			--disable-strip \
 			--bindir=/usr/bin
 
 CFLAGS_FOR_BUILD+=	-DNATIVE
