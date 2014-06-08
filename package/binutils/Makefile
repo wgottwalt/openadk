@@ -39,6 +39,10 @@ XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 libbfd-install:
 	${INSTALL_DIR} ${IDIR_LIBBFD}/usr/lib
 	$(CP) ${WRKINST}/usr/lib/*.so* ${IDIR_LIBBFD}/usr/lib
+	# for oprofile
+	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/lib/binutils
+	$(CP) ${WRKBUILD}/libiberty/libiberty.a \
+		${STAGING_TARGET_DIR}/usr/lib/binutils
 
 binutils-install:
 	${INSTALL_DIR} ${IDIR_BINUTILS}/usr/bin

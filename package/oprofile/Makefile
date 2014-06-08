@@ -26,6 +26,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,OPROFILE,oprofile,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_LDFLAGS+=	-lpthread
+CONFIGURE_ARGS+=	--with-binutils-libname=binutils \
+			--with-binutils=${STAGING_TARGET_DIR}/usr/lib
 
 oprofile-install:
 	$(INSTALL_DIR) $(IDIR_OPROFILE)/usr/{bin,share}
