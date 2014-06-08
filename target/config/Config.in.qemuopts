@@ -96,4 +96,16 @@ config ADK_TARGET_QEMU_WITH_VIRTIO
 	select ADK_KERNEL_VIRTIO_BLK
 
 endchoice
+
+choice
+prompt "Qemu Emulation with audio support"
+depends on ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86
+
+config ADK_TARGET_QEMU_WITHOUT_AUDIO
+	boolean "disabled"
+
+config ADK_TARGET_QEMU_WITH_AUDIO
+	boolean "enabled"
+
+endchoice
 endmenu

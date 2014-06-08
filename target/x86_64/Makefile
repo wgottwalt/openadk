@@ -14,6 +14,10 @@ QEMU_ARGS:=-M pc
 QEMU_ARGS+=${ADK_QEMU_ARGS}
 QEMU_ARGS+=-net user -net nic,model=e1000
 
+ifeq ($(ADK_TARGET_QEMU_WITH_AUDIO),y)
+QEMU_ARGS+=-soundhw ac97
+endif
+
 ifeq ($(ADK_TARGET_QEMU_WITH_BOOTLOADER),y)
 ifeq ($(ADK_TARGET_QEMU_WITHOUT_GRAPHIC),y)
 CREATE:=./scripts/create.sh -g -t
