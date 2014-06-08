@@ -35,12 +35,6 @@ endif
 ifeq ($(ADK_TARGET_CPU_ARCH),i486)
 MARCH:=			i386
 endif
-ifeq ($(ADK_TARGET_CPU_ARCH),mips64el)
-MARCH:=			mips
-endif
-ifeq ($(ADK_TARGET_CPU_ARCH),mips64)
-MARCH:=			mips
-endif
 ifeq ($(ADK_TARGET_CPU_ARCH),ppc)
 MARCH:=			powerpc
 endif
@@ -50,8 +44,10 @@ endif
 ifeq ($(ADK_TARGET_CPU_ARCH),sh4eb)
 MARCH:=			sheb
 endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+ifeq ($(ADK_LINUX_ARM),y)
+ifeq ($(ADK_TARGET_ABI),eabihf)
 MARCH:=			armhf
+endif
 endif
 ifeq ($(ADK_TARGET_ABI_X32),y)
 MARCH:=			x32
@@ -73,7 +69,7 @@ endif
 musl-dev-install:
 	${INSTALL_DIR} ${IDIR_MUSL_DEV}/usr/lib 
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_MUSL_DEV}/usr/lib
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) ARCH=$(ADK_TARGET_ARCH) V=1 \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) ARCH=$(ADK_TARGET_KARCH) V=1 \
 		INSTALL_HDR_PATH=$(IDIR_MUSL_DEV)/usr \
 		headers_install
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION} \

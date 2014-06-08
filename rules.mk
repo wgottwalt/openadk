@@ -57,6 +57,13 @@ ADK_PARAMETER_NETCONSOLE_DST_IP:=	$(strip $(subst ",, $(ADK_PARAMETER_NETCONSOLE
 ADK_JFFS2_OPTS:=			$(strip $(subst ",, $(ADK_JFFS2_OPTS)))
 ADK_WGET_TIMEOUT:=			$(strip $(subst ",, $(ADK_WGET_TIMEOUT)))
 
+ADK_TARGET_KARCH:=$(ADK_TARGET_ARCH)
+
+# translate toolchain arch to kernel arch
+ifeq ($(ADK_TARGET_ARCH),ppc)
+ADK_TARGET_KARCH:=powerpc
+endif
+
 include $(TOPDIR)/mk/vars.mk
 
 ifneq (${show},)

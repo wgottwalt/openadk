@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 KERNEL_MAKE_OPTS:=	V=1 \
-			ARCH="$(ADK_TARGET_ARCH)" \
+			ARCH="$(ADK_TARGET_KARCH)" \
 			CROSS_COMPILE="$(TARGET_CROSS)" \
 			CC="$(TARGET_CC)" \
 			HOSTCC="${CC_FOR_BUILD}" \
