@@ -19,7 +19,7 @@ targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 endif
-ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
+ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_SYSTEM_ARM_FM),y)
@@ -47,6 +47,6 @@ endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
 endif
-ifeq ($(ADK_TARGET_FS),initramfs-piggyback)
+ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 imageinstall: createinitramfs targethelp
 endif

@@ -85,7 +85,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 	help
 	  create an read-only initramfs system.
 
-config ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
+config ADK_TARGET_ROOTFS_INITRAMFSPIGGYBACK
 	boolean "initramfs filesystem included into kernel image"
 	select ADK_LINUX_INITRAMFS_BUILTIN
 	depends on \
