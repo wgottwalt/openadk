@@ -3,6 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 include $(TOPDIR)/mk/kernel-ver.mk
+include $(TOPDIR)/mk/kernel-vars.mk
 include $(TOPDIR)/toolchain/glibc/Makefile.inc
 
 PKG_NAME:=		glibc
@@ -71,8 +72,9 @@ endif
 		cd $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	# header package
+	${KERNEL_MAKE_ENV} \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
-		HOSTCC=$(CC_FOR_BUILD) ARCH=$(ADK_TARGET_KARCH) V=1 \
+		$(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(IDIR_GLIBC_DEV)/usr \
 		headers_install
 	(cd $(WRKBUILD); \

@@ -3,6 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 include $(TOPDIR)/mk/kernel-ver.mk
+include $(TOPDIR)/mk/kernel-vars.mk
 include $(TOPDIR)/toolchain/musl/Makefile.inc
 
 PKG_NAME:=		musl
@@ -69,7 +70,9 @@ endif
 musl-dev-install:
 	${INSTALL_DIR} ${IDIR_MUSL_DEV}/usr/lib 
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_MUSL_DEV}/usr/lib
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) ARCH=$(ADK_TARGET_KARCH) V=1 \
+	${KERNEL_MAKE_ENV} \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
+		$(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(IDIR_MUSL_DEV)/usr \
 		headers_install
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION} \

@@ -3,6 +3,7 @@
 
 include $(TOPDIR)/rules.mk
 include $(TOPDIR)/mk/kernel-ver.mk
+include $(TOPDIR)/mk/kernel-vars.mk
 include $(TOPDIR)/toolchain/uclibc/Makefile.inc
 
 PKG_NAME:=		uClibc
@@ -52,7 +53,9 @@ uclibc-dev-install:
 	for file in libcrypt libdl libm libresolv libutil; do \
 		cd $(IDIR_UCLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(GIT_VERSION).so $$file.so; \
 	done
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) ARCH=$(ADK_TARGET_KARCH) V=1 \
+	${KERNEL_MAKE_ENV} \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
+		$(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_DEV)/usr \
 		headers_install
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION} \
