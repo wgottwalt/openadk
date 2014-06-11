@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bind
-PKG_VERSION:=		9.7.3
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		207477c4cf95f2db5be0ded8a22669e0
+PKG_VERSION:=		9.9.5
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		e676c65cad5234617ee22f48e328c24e
 PKG_DESCR:=		dns server
 PKG_SECTION:=		net/dns
 PKG_DEPENDS:=		libopenssl libbind libxml2 libstdcxx
@@ -54,9 +54,9 @@ $(eval $(call PKG_template,BIND_HOST,bind-host,${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_DIG},${PKGSD_BIND_DIG},${PKGSC_BIND_DIG}))
 $(eval $(call PKG_template,LIBBIND,libbind,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBIND},${PKGSC_LIBBIND},${PKG_OPTS}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--with-randomdev=/dev/urandom \
-			--disable-threads \
+			--with-ecdsa=no \
+			--with-gost=no \
 			--with-openssl=${STAGING_TARGET_DIR}/usr \
 			--with-libxml2=${STAGING_TARGET_DIR}/usr \
 			--enable-epoll \
