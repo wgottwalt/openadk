@@ -17,8 +17,8 @@ pre-configure:
 do-configure:
 post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
-ifneq (,$(filter ,${AUTOTOOL_STYLE}))
-	cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) bootstrap $(MAKE_TRACE)
+ifneq (,$(filter bootstrap,${AUTOTOOL_STYLE}))
+	cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) bootstrap.sh $(MAKE_TRACE)
 endif
 ifneq (,$(filter autogen,${AUTOTOOL_STYLE}))
 	cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) autogen.sh $(MAKE_TRACE)
