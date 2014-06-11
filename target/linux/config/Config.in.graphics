@@ -1,22 +1,22 @@
 menu "Graphic devices support"
-depends on ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU
+depends on ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU || ADK_TARGET_VBOX
 
 config ADK_KERNEL_VT
 	boolean
-	default y if ADK_HARDWARE_VBOX
 	default y if ADK_TARGET_WITH_VGA
+	default y if ADK_TARGET_VBOX
 	default n
 
 config ADK_KERNEL_VT_CONSOLE
 	boolean
-	default y if ADK_HARDWARE_VBOX
 	default y if ADK_TARGET_WITH_VGA
+	default y if ADK_TARGET_VBOX
 	default n
 
 config ADK_KERNEL_VGA_CONSOLE
 	boolean
-	default y if ADK_HARDWARE_VBOX
 	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_VBOX
 	default n
 
 config ADK_KERNEL_FONTS
@@ -144,9 +144,9 @@ config ADK_KERNEL_FB_VESA
 	boolean
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
-	default y if ADK_TARGET_SYSTEM_VBOX_I686
+	default y if ADK_TARGET_VBOX
  	default n
-	depends on ADK_TARGET_SYSTEM_VBOX_I686
+	depends on ADK_TARGET_VBOX
  	help
 	 Framebuffer support for VirtualBox Emulator.
 

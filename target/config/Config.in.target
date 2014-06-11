@@ -47,7 +47,7 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default "console=ttyS0,115200 console=tty0 geodewdt.nowayout=1" if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
-	default "console=ttyS0,115200 console=tty0" if ADK_TARGET_SYSTEM_VBOX_I686
+	default "console=tty0" if ADK_TARGET_VBOX
 	default "console=tty0" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ || ADK_TARGET_QEMU_ARM_MODEL_TERRIER
 	default "console=ttyAMA0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	default "console=ttyAMA0" if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
@@ -78,7 +78,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64 || \
 		ADK_LINUX_NATIVE
-	depends on !ADK_HARDWARE_VBOX
+	depends on !ADK_TARGET_VBOX
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	select ADK_KERNEL_BLK_DEV_INITRD
@@ -99,7 +99,7 @@ config ADK_TARGET_ROOTFS_INITRAMFSPIGGYBACK
 		ADK_LINUX_SPARC || \
 		ADK_LINUX_X86 || \
 		ADK_LINUX_X86_64
-	depends on !ADK_HARDWARE_VBOX
+	depends on !ADK_TARGET_VBOX
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	help
 	  create an read-only initramfs system.
@@ -145,7 +145,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	select ADK_KERNEL_IP_PNP
 	select ADK_KERNEL_IP_PNP_DHCP
 	select ADK_PACKAGE_ADKINSTALL
-	depends on !ADK_TARGET_QEMU && !ADK_HARDWARE_VBOX && !ADK_TARGET_SYSTEM_ARANYM_M68K
+	depends on !ADK_TARGET_QEMU && !ADK_TARGET_VBOX && !ADK_TARGET_SYSTEM_ARANYM_M68K
 	depends on !ADK_TARGET_SYSTEM_ARM_FM
 	help
 	  Root filesystem mounted via NFS. (DHCP)
@@ -189,8 +189,8 @@ config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	boolean "Archive usable for different filesystems"
-	select ADK_HOST_NEED_GENEXT2FS if ADK_TARGET_QEMU
-	select ADK_KERNEL_EXT2_FS if ADK_TARGET_QEMU
+	select ADK_HOST_NEED_GENEXT2FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
+	select ADK_KERNEL_EXT2_FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.

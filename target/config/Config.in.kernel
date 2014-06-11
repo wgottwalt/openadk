@@ -48,6 +48,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-x86" if ADK_TARGET_SYSTEM_QEMU_X86
 	default "qemu-x86_64" if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default "aranym-m68k" if ADK_TARGET_SYSTEM_ARANYM_M68K
+	default "vbox-x86" if ADK_TARGET_SYSTEM_VBOX_X86
 	default "ibm-x40" if ADK_TARGET_SYSTEM_IBM_X40
 	default "cubox-i" if ADK_TARGET_SYSTEM_CUBOX_I
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI

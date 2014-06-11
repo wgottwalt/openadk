@@ -91,7 +91,7 @@ config ADK_KERNEL_MMC_SDHCI_BCM2708_DMA
 	boolean
 
 menu "SATA/PATA devices support"
-depends on ADK_TARGET_WITH_PATA || ADK_TARGET_WITH_SATA || ADK_TARGET_QEMU
+depends on ADK_TARGET_WITH_PATA || ADK_TARGET_WITH_SATA || ADK_TARGET_QEMU || ADK_TARGET_VBOX
 
 config ADK_KERNEL_PATA_RB532
 	prompt "CF disk driver for Mikrotik RB532"
@@ -141,8 +141,8 @@ config ADK_KERNEL_SATA_AHCI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
-	depends on ADK_TARGET_SYSTEM_VBOX_I686
-	default y if ADK_TARGET_SYSTEM_VBOX_I686
+	depends on ADK_TARGET_VBOX
+	default y if ADK_TARGET_VBOX
 	default n
 	help
 	  Enables support for AHCI Serial ATA.
