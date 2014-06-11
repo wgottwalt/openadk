@@ -153,7 +153,7 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 	$(TOPDIR)/adk/tools/depmaker > ${TOPDIR}/package/Depends.mk
 
 .NOTPARALLEL:
-.PHONY: all world clean cleandir cleantoolchain distclean image_clean
+.PHONY: all world clean cleandir cleansystem distclean image_clean
 
 world:
 	@mkdir -p $(DL_DIR) $(HOST_BUILD_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
@@ -255,6 +255,14 @@ cleandir:
 	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
+	@rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
+
+cleansystem:
+	@$(TRACE) cleansystem
+	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
+	@rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR) \
+	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
+	@rm -rf $(TOOLCHAIN_DIR) $(STAGING_TARGET_DIR) $(STAGING_PKG_DIR) $(TOOLCHAIN_BUILD_DIR)
 	@rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
 
 distclean:

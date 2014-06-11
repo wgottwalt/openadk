@@ -33,6 +33,7 @@ help:
 	@echo 'Cleaning targets:'
 	@echo '  clean        - Remove firmware and build directories'
 	@echo '  cleandir     - Same as "clean", but also remove all built toolchains'
+	@echo '  cleansystem  - Same as "cleandir", but only remove active system'
 	@echo '  cleankernel  - Remove kernel dir, useful if you changed any kernel patches'
 	@echo '  distclean    - Same as "cleandir", but also remove downloaded'
 	@echo '                 distfiles and .config'
@@ -96,6 +97,10 @@ cleankernel kernelclean: .prereq_done
 
 cleandir dirclean: .prereq_done
 	-@${GMAKE_INV} cleandir
+	@-rm -f make.log .prereq_done
+
+cleansystem: .prereq_done
+	-@${GMAKE_INV} cleansystem
 	@-rm -f make.log .prereq_done
 
 distclean cleandist:

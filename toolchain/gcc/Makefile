@@ -5,6 +5,11 @@ include $(TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
 
+# disable SSP for libstdc++
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+TARGET_CXXFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_CXXFLAGS))
+endif
+
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-bugurl="http://www.openadk.org/" \
 			--build=$(GNU_HOST_NAME) \

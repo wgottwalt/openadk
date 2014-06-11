@@ -9,6 +9,9 @@ include ${TOPDIR}/mk/buildhlp.mk
 ifeq ($(ADK_TARGET_CPU_ARCH),ppc)
 GNU_TARGET_NAME:= $(subst ppc,powerpc,$(GNU_TARGET_NAME))
 endif
+# not yet possible
+TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
+TARGET_LDFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
 
 $(WRKBUILD)/.headers:
 	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \
