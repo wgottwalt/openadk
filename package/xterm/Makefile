@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		xterm
-PKG_VERSION:=		303
+PKG_VERSION:=		306
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		48f6d49b2b6b6933d501d767cbed9254
+PKG_MD5SUM:=		4ec3183d153087aee9cc20f90acdf2f6
 PKG_DESCR:=		terminal emulator
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libxaw libxt libncurses libxft fontconfig
