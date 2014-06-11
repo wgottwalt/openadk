@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		kexec-tools
-PKG_VERSION:=		2.0.6
+PKG_VERSION:=		2.0.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9192e5b9fab094b90f481226d1ad5e74
+PKG_MD5SUM:=		457f49ad1708eea1f6b332484855fe25
 PKG_DESCR:=		kernel exec tools
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		zlib
