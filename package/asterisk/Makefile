@@ -4,20 +4,19 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		asterisk
-PKG_VERSION:=		1.8.20.1
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		99204257de80a42c4e287fc93dfe714a
+PKG_VERSION:=		12.3.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		4a5bdeb8e4ab6633a5e1a3c0efbf158c
 PKG_DESCR:=		open source pbx
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl libstdcxx
-PKG_BUILDDEP:=		ncurses openssl zlib curl popt gtk+
+PKG_DEPENDS+=		libsqlite
+PKG_BUILDDEP:=		autotool ncurses openssl zlib curl popt gtk+ libjansson
+PKG_BUILDDEP+=		sqlite
 PKG_URL:=		http://www.asterisk.org/
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
-PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_SUBPKGS:=		ASTERISK ASTERISK_PGSQL ASTERISK_VOICEMAIL ASTERISK_SOUNDS
 PKG_SUBPKGS+=		ASTERISK_CHAN_SKINNY ASTERISK_CHAN_IAX2 ASTERISK_CODEC_SPEEX ASTERISK_CODEC_GSM
@@ -60,6 +59,7 @@ $(eval $(call PKG_template,ASTERISK_CODEC_GSM,asterisk-codec-gsm,$(PKG_VERSION)-
 $(eval $(call PKG_template,ASTERISK_PBX_DUNDI,asterisk-pbx-dundi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_PBX_DUNDI},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_RES_AGI,asterisk-res-agi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_RES_AGI},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	bootstrap
 CONFIGURE_ARGS=		--with-z=${STAGING_TARGET_DIR}/usr \
 			--with-ncurses=${STAGING_TARGET_DIR}/usr \
 			--with-ssl=${STAGING_TARGET_DIR}/usr \
@@ -67,7 +67,6 @@ CONFIGURE_ARGS=		--with-z=${STAGING_TARGET_DIR}/usr \
 			--without-tonezone \
 			--without-asound \
 			--without-curses \
-			--without-gtk \
 			--without-gtk2 \
 			--without-h323 \
 			--without-iksemel \
@@ -75,7 +74,6 @@ CONFIGURE_ARGS=		--with-z=${STAGING_TARGET_DIR}/usr \
 			--without-nbs \
 			--without-netsnmp \
 			--without-newt \
-			--without-openais \
 			--without-osptk \
 			--without-oss \
 			--without-popt \
@@ -83,7 +81,6 @@ CONFIGURE_ARGS=		--with-z=${STAGING_TARGET_DIR}/usr \
 			--without-pwlib \
 			--without-tds \
 			--without-termcap \
-			--without-tinfo \
 			--without-vpb \
 			--without-misdn \
 			--without-isdnnet \
@@ -114,77 +111,14 @@ else
 CONFIGURE_ARGS+=	--without-postgres
 endif
 
-INSTALL_STYLE:=		manual
-
-TARGET_LDFLAGS+=	-lm -ltinfo -ldl -lpthread
-MAKE_ENV=		ASTCFLAGS="${TARGET_CPPFLAGS} -DHAVE_STRTOQ" \
-			ASTLDFLAGS="${TARGET_LDFLAGS}"
-MAKE_FLAGS+=		DESTDIR="$(WRKINST)" \
-			OPTIMIZE="${TARGET_CFLAGS}" \
-			NOISY_BUILD=1
-ALL_TARGET:=		all install samples
-
-pre-configure:
-	cd "$(WRKBUILD)/menuselect"; ./configure
-
-pre-build:
-	$(MAKE) -C $(WRKBUILD)/menuselect
+MAKE_FLAGS+=		NOISY_BUILD=1
 
 post-build:
 	cd ${WRKBUILD}/sounds ; \
-	tar xzf asterisk-core-sounds-en-gsm-1.4.22.tar.gz ; \
-	rm asterisk-core-sounds-en-gsm-1.4.22.tar.gz
-
-do-install:
-	$(CP) $(WRKINST)/* $(IDIR_ASTERISK)
-	rm -rf $(IDIR_ASTERISK)/usr/sbin/astgenkey
-	rm -rf $(IDIR_ASTERISK)/usr/bin
-	rm -rf $(IDIR_ASTERISK)/usr/share
-	rm -rf $(IDIR_ASTERISK)/usr/include
-	rm -rf $(IDIR_ASTERISK)/var
-	(cd $(IDIR_ASTERISK)/usr/lib/asterisk; \
-		rm -rf agi-bin; \
-		rm -rf images; \
-		rm -rf keys/*; \
-		rm -rf mohmp3/*.mp3; \
-		rm -rf sounds/*; \
-		cd modules; \
-		rm -rf	*adsi* *festival* *modem* *meetme* *oss* \
-			*phone* *intercom* *mp3* *nbscat* *mysql* \
-			*postgres* *pgsql* *voicemail* *speex* \
-			*zapateller* *jpeg*; \
-		rm -f chan_bluetooth.so ; \
-		rm -f chan_h323.so ; \
-		rm -f chan_iax2.so ; \
-		rm -f chan_mgcp.so ; \
-		rm -f chan_skinny.so ; \
-		rm -f {codec,format}_ilbc.so ; \
-		rm -f codec_gsm.so ; \
-		rm -f codec_lpc10.so ; \
-		rm -f pbx_dundi.so ; \
-		rm -f res_agi.so ; \
-	)
-	(cd $(IDIR_ASTERISK)/etc/asterisk; \
-		rm -f 	*iax* *odbc* *mysql* *postgres* *pgsql* \
-			*voicemail* *adsi* *oss* *alsa* \
-			*festival* *modem* *meetme* *phone* *tds* \
-			*vofr* *rpt* *vpb* \
-			*zapata*; \
-		rm -f bluetooth.conf ; \
-		rm -f mgcp.conf ; \
-		rm -f gtalk.conf ; \
-		rm -f skinny.conf ; \
-		rm -f dundi.conf ; \
-		$(SED) '#^astdatadir = /var/#/usr/#' asterisk.conf ; \
-	)
-	${INSTALL_DATA} ./files/modules.conf $(IDIR_ASTERISK)/etc/asterisk/
-	$(SED) 's|/var/lib/asterisk|/usr/lib/asterisk|g' \
-		$(WRKINST)/etc/asterisk/musiconhold.conf
+	tar xzf asterisk-core-sounds-en-gsm-1.4.25.tar.gz; \
+	rm asterisk-core-sounds-en-gsm-1.4.25.tar.gz
 
 asterisk-pgsql-install:
-	${INSTALL_DIR} $(IDIR_ASTERISK_PGSQL)/etc/asterisk
-	${INSTALL_DATA} $(WRKINST)/etc/asterisk/cdr_pgsql.conf \
-		$(IDIR_ASTERISK_PGSQL)/etc/asterisk/
 	${INSTALL_DIR} $(IDIR_ASTERISK_PGSQL)/usr/lib/asterisk/modules
 	${INSTALL_BIN} $(WRKINST)/usr/lib/asterisk/modules/cdr_pgsql.so \
 		$(IDIR_ASTERISK_PGSQL)/usr/lib/asterisk/modules/
