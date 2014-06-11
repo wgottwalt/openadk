@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nginx
-PKG_VERSION:=		1.5.12
+PKG_VERSION:=		1.7.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c21589daaec0743d6d4cdf41503ffd53
+PKG_MD5SUM:=		9659cbb26f226f6390b18ef991a79233
 PKG_DESCR:=		powerful http reverse proxy and webserver
 PKG_SECTION:=		net/http
 PKG_BUILDDEP:=		openssl pcre zlib
@@ -15,6 +15,8 @@ PKG_URL:=		http://nginx.org/
 PKG_SITES:=		http://nginx.org/download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
+# flavours for speedy and ssl
 
 include $(TOPDIR)/mk/package.mk
 
