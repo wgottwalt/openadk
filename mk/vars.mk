@@ -115,11 +115,6 @@ TARGET_CXXFLAGS+=	-fstack-protector-all --param=ssp-buffer-size=4
 TARGET_LDFLAGS+=	-fstack-protector-all
 endif
 
-ifneq ($(ADK_TARGET_USE_PIE),)
-TARGET_CFLAGS+=		-fPIE
-TARGET_CXXFLAGS+=	-fPIE
-endif
-
 ifneq ($(ADK_TARGET_USE_LD_GC),)
 TARGET_CFLAGS+=		-fdata-sections -ffunction-sections
 TARGET_CXXFLAGS+=	-fdata-sections -ffunction-sections
@@ -177,12 +172,14 @@ PATCH=			PATH=${HOST_PATH} ${BASH} $(SCRIPT_DIR)/patch.sh
 PATCHP0=		PATH=${HOST_PATH} patch -p0
 SED:=			PATH=${HOST_PATH} sed -i -e
 LINUX_DIR:=		$(BUILD_DIR)/linux
-KERNEL_MODULE_FLAGS:=	ARCH=${ARCH} \
+KERNEL_MODULE_FLAGS:=	ARCH=${ADK_TARGET_ARCH} \
+			PREFIX=/usr \
 			KERNEL_PATH=${LINUX_DIR} \
 			KERNELDIR=${LINUX_DIR} \
 			KERNEL_DIR=${LINUX_DIR} \
-			PREFIX=/usr CROSS_COMPILE="${TARGET_CROSS}" \
-			CFLAGS_MODULE="-fhonour-copts" V=1
+			CROSS_COMPILE="${TARGET_CROSS}" \
+			CFLAGS_MODULE="-fhonour-copts" \
+			V=1
 
 TARGET_CONFIGURE_OPTS=	PATH='${TARGET_PATH}' \
 			AR='$(TARGET_CROSS)ar' \

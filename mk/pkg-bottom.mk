@@ -33,43 +33,28 @@ ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
 endif
 	mkdir -p ${WRKBUILD}
 	@${MAKE} pre-configure $(MAKE_TRACE)
-
-ifneq ($(filter manual,${CONFIG_STYLE}),)
-	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)
-else ifneq ($(filter minimal,${CONFIG_STYLE}),)
-	@$(CMD_TRACE) "configuring... "
 	@cd ${WRKSRC}; \
 	    for i in $$(find . -name config.sub);do \
 		if [ -f $$i ]; then \
-			${CP} $$i $$i.bak; \
 			${CP} ${SCRIPT_DIR}/config.sub $$i; \
 		fi; \
 	    done; \
 	    for i in $$(find . -name config.guess);do \
 		if [ -f $$i ]; then \
-			${CP} $$i $$i.bak; \
 			${CP} ${SCRIPT_DIR}/config.guess $$i; \
 		fi; \
 	    done;
+
+ifneq ($(filter manual,${CONFIG_STYLE}),)
+	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)
+else ifneq ($(filter minimal,${CONFIG_STYLE}),)
+	@$(CMD_TRACE) "configuring... "
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
 	    env ${CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
 	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
 else ifeq ($(strip ${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring... "
-	@cd ${WRKSRC}; \
-	    for i in $$(find . -name config.sub);do \
-		if [ -f $$i ]; then \
-			${CP} $$i $$i.bak; \
-			${CP} ${SCRIPT_DIR}/config.sub $$i; \
-		fi; \
-	    done; \
-	    for i in $$(find . -name config.guess);do \
-		if [ -f $$i ]; then \
-			${CP} $$i $$i.bak; \
-			${CP} ${SCRIPT_DIR}/config.guess $$i; \
-		fi; \
-	    done;
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
 	    env ${CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} ${CONFIGURE_TRIPLE} \
@@ -266,5 +251,8 @@ endif
 
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
 DIFF_IGNOREFILES?=	configure missing depcomp install-sh INSTALL \
-			aclocal.m4 config.h.in Makefile.in */Makefile.in
+			aclocal.m4 config.h.in Makefile.in */Makefile.in \
+			config.sub config.guess */config.sub */config.guess
+else
+DIFF_IGNOREFILES?=	config.sub config.guess */config.sub */config.guess
 endif

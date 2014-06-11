@@ -757,9 +757,9 @@ $(eval $(call KMOD_template,BLK_DEV_NBD,blk-dev-nbd,\
     $(MODULES_DIR)/kernel/drivers/block/nbd \
 ,20))
 
-$(eval $(call KMOD_template,SCSI,scsi,\
-    $(MODULES_DIR)/kernel/drivers/scsi/scsi_mod \
-,20))
+#$(eval $(call KMOD_template,SCSI,scsi,\
+#    $(MODULES_DIR)/kernel/drivers/scsi/scsi_mod \
+#,20))
 
 $(eval $(call KMOD_template,BLK_DEV_SD,blk-dev-sd,\
     $(MODULES_DIR)/kernel/drivers/scsi/sd_mod \
@@ -1765,7 +1765,7 @@ $(eval $(call KMOD_template,PLIP,plip,\
 #
 
 $(eval $(call KMOD_template,OPROFILE,oprofile,\
-	$(MODULES_DIR)/kernel/arch/$(ARCH)/oprofile/oprofile \
+	$(MODULES_DIR)/kernel/arch/$(ADK_TARGET_ARCH)/oprofile/oprofile \
 ,10))
 
 #

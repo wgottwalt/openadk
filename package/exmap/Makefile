@@ -20,6 +20,7 @@ DISTFILES:=		${PKG_NAME}-console-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-console-${PKG_VERSION}
 
 include ${TOPDIR}/mk/package.mk
+include ${TOPDIR}/mk/kernel-ver.mk
 
 $(eval $(call PKG_template,EXMAP,exmap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 

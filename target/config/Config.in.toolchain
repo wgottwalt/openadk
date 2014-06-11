@@ -53,7 +53,7 @@ config ADK_TARGET_USE_SSP
 	default n
 
 config ADK_TARGET_USE_PIE
-	prompt "Use Position Independent Executable mode for all packages"
+	prompt "Use Position Independent Executable for packages with have support for it"
 	boolean
 	default n
 

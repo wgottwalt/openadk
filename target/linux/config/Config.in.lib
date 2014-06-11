@@ -12,7 +12,7 @@ config ADK_KERNEL_CRC_ITU_T
 
 config ADK_KERNEL_CRC16
 	prompt "CRC16 library functions"
-	tristate
+	boolean
 	default n
 	help
 

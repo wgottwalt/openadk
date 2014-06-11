@@ -98,16 +98,6 @@ endif
 		env ${AUTOTOOL_ENV} autoreconf -if > /dev/null 2>&1; \
 		rm -rf ${WRKDIR}.orig$${dir}/autom4te.cache ) $(MAKE_TRACE)
 	@# restore config.sub/config.guess
-	@for i in $$(find ${WRKDIR} -name config.sub);do \
-		if [ -f $$i.bak ];then \
-			mv $$i.bak $$i; \
-		fi;\
-	done
-	@for i in $$(find ${WRKDIR} -name config.guess);do \
-		if [ -f $$i.bak ];then \
-			mv $$i.bak $$i; \
-		fi;\
-	done
 	@WRKDIST=$(call shellescape,${WRKDIST}) \
 	    WRKDIR1=$(call shellescape,${WRKDIR}) \
 	    PATH=$(call shellescape,${HOST_PATH}) \

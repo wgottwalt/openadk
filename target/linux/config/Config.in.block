@@ -25,7 +25,7 @@ config ADK_KERNEL_IOSCHED_CFQ
 	boolean
 
 config ADK_KERNEL_SCSI_DMA
-	tristate
+	boolean
 
 config ADK_KERNEL_SCSI_MULTI_LUN
 	boolean
