@@ -30,6 +30,7 @@ HOST_CONFIGURE_ARGS+=	--with-zlib \
 			--without-bzip2
 CONFIGURE_ARGS+=	--with-zlib \
 			--without-png \
+			--with-harfbuzz=no \
 			--without-bzip2
 
 libfreetype-install:
