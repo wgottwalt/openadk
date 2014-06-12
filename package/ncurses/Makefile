@@ -34,7 +34,9 @@ CONFIGURE_ARGS+=	--without-cxx \
 			--disable-termcap \
 			--enable-symlinks \
 			--without-ada \
+			--without-normal \
 			--with-shared \
+			--enable-pc-files \
 			--with-termlib \
 			--without-debug \
 			--without-profile \
@@ -46,6 +48,7 @@ CONFIGURE_ARGS+=	--without-cxx \
 			--with-default-terminfo-dir=/usr/share/terminfo \
 			--disable-big-core \
 			--disable-home-terminfo \
+			--disable-assertions \
 			--without-rcs-ids \
 			--enable-const
 ALL_TARGET:=		libs
