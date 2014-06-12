@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		pkgconf
-PKG_VERSION:=		0.9.5
+PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		babb4e02f0fb8f4044ee95ad2241a676
+PKG_MD5SUM:=		f89a502825ac184ad25a9e4aa977f9b1
 PKG_DESCR:=		smart pkg-config replacement
 PKG_SECTION:=		dev/tools
 PKG_URL:=		https://github.com/pkgconf/pkgconf
