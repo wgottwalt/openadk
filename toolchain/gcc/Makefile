@@ -75,9 +75,9 @@ GCC_FINAL_CONFOPTS+=	--disable-libssp
 endif
 
 ifeq ($(ADK_TOOLCHAIN_WITH_LTO),y)
-GCC_FINAL_CONFOPTS+=	--enable-lto
+GCC_CONFOPTS+=		--enable-lto
 else
-GCC_FINAL_CONFOPTS+=	--disable-lto
+GCC_CONFOPTS+=		--disable-lto
 endif
 
 ifeq ($(ADK_LINUX_PPC),y)
@@ -152,7 +152,6 @@ endif
 			${GCC_CONFOPTS} \
 			--enable-languages=c \
 			--disable-multilib \
-			--disable-lto \
 			--disable-libssp \
 			--disable-shared \
 			--without-headers
