@@ -10,7 +10,7 @@ PKG_MD5SUM:=		6bb71cff9ad9c5c7b258b2b6c56fdc95
 PKG_DESCR:=		x11 driver for ati vga chip
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm mesalib libudev libstdcxx
-PKG_BUILDDEP:=		xorg-server libdrm xf86driproto MesaLib eudev
+PKG_BUILDDEP:=		xorg-server libdrm xf86driproto mesalib eudev
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_ARCH_DEPENDS:=      !arm !m68k

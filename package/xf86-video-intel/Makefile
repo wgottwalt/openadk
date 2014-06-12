@@ -10,7 +10,7 @@ PKG_MD5SUM:=		de51db2408a222ef1c52725f5aa2f185
 PKG_DESCR:=		x11 driver for intel vga chips
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm mesalib libstdcxx
-PKG_BUILDDEP:=		xorg-server libdrm xf86driproto MesaLib
+PKG_BUILDDEP:=		xorg-server libdrm xf86driproto mesalib
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SYSTEM_DEPENDS:=	ibm-x40

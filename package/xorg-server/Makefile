@@ -18,7 +18,7 @@ PKG_BUILDDEP:=		libX11 randrproto renderproto fixesproto damageproto
 PKG_BUILDDEP+=		scrnsaverproto resourceproto fontsproto videoproto
 PKG_BUILDDEP+=		compositeproto evieext libxkbfile libXfont pixman
 PKG_BUILDDEP+=		libpciaccess openssl xf86dgaproto recordproto
-PKG_BUILDDEP+=		xineramaproto
+PKG_BUILDDEP+=		xineramaproto presentproto
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev
@@ -31,7 +31,7 @@ PKG_ARCH_DEPENDS:=	!m68k
 PKG_FLAVOURS_XORG_SERVER:=	WITH_DRI WITH_KDRIVE
 PKGFS_WITH_DRI:=		mesalib
 PKGFD_WITH_DRI:=		enable DRI support
-PKGFB_WITH_DRI:=		xf86driproto glproto MesaLib
+PKGFB_WITH_DRI:=		xf86driproto glproto mesalib
 PKGFD_WITH_KDRIVE:=		Build Kdrive Xfbdev server
 
 PKG_CHOICES_XORG_SERVER:=	WITH_GCRYPT WITH_CRYPTO

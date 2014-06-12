@@ -3,11 +3,10 @@
 
 include $(TOPDIR)/rules.mk
 
-PKG_NAME:=		MesaLib
-PKG_VERSION:=		10.1.0
-PKG_SUBVER:=		10.1
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		08e796ec7122aa299d32d4f67a254315
+PKG_NAME:=		mesalib
+PKG_VERSION:=		10.2.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		96f892dae2d0bb14ac9c2113f586c909
 PKG_DESCR:=		3d graphics library
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm libexpat
@@ -17,13 +16,13 @@ PKG_BUILDDEP+=		libXxf86vm libdrm dri2proto glproto expat libXext
 PKG_BUILDDEP+=		eudev dri3proto presentproto xcb-proto libxcb
 PKG_BUILDDEP+=		libxshmfence
 PKG_URL:=		http://www.mesa3d.org/
-PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/${PKG_SUBVER}/
+PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/${PKG_VERSION}/
 PKG_LIBNAME:=		mesalib
 PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el arm
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		MesaLib-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
 include $(TOPDIR)/mk/package.mk
