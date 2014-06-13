@@ -63,6 +63,12 @@ ADK_TARGET_KARCH:=$(ADK_TARGET_ARCH)
 ifeq ($(ADK_TARGET_ARCH),ppc)
 ADK_TARGET_KARCH:=powerpc
 endif
+ifeq ($(ADK_TARGET_ARCH),ppc64)
+ADK_TARGET_KARCH:=powerpc
+endif
+ifeq ($(ADK_TARGET_ARCH),mips64)
+ADK_TARGET_KARCH:=mips
+endif
 
 include $(TOPDIR)/mk/vars.mk
 
