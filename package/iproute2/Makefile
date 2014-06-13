@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
-PKG_VERSION:=		3.12.0
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		f87386aaaecafab95607fd10e8152c68
+PKG_VERSION:=		3.15.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		5b1711c9d16071959052e369a2682d77
 PKG_DESCR:=		routing control utility
 PKG_SECTION:=		net/route
 PKG_BUILDDEP:=		iptables libnl linux-atm
