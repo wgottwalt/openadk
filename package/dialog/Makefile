@@ -4,16 +4,17 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		dialog
-PKG_VERSION:=		1.2-20130928
+PKG_VERSION:=		1.2-20140219
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2cf55cd9d4603ffdb4b24cd6843d740c
+PKG_MD5SUM:=		4ed9b2f1162eb7706857338d11e70f8e
 PKG_DESCR:=		text gui interface
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
-PKG_SITES:=		ftp://ftp.us.debian.org/debian/pool/main/d/dialog/
+PKG_URL:=		http://invisible-island.net/dialog/dialog.html
+PKG_SITES:=		ftp://invisible-island.net/dialog/
 
-DISTFILES:=             ${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 include $(TOPDIR)/mk/package.mk
 
