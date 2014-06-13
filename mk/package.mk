@@ -86,11 +86,6 @@ patch: ${_PATCH_COOKIE}
 configure: ${_CONFIGURE_COOKIE}
 build: ${_BUILD_COOKIE}
 fake: ${_FAKE_COOKIE}
-rebuild:
-	@if [ -f ${TOPDIR}/.rebuild.${PKG_NAME} ];then \
-		$(MAKE) clean; \
-		rm -f ${TOPDIR}/.rebuild.${PKG_NAME}; \
-	fi
 
 # our recursive build entry point
 build-all-pkgs: ${_IPKGS_COOKIE}
@@ -335,4 +330,4 @@ distclean: clean
 	rm -f ${FULLDISTFILES}
 
 .PHONY:	all refetch extract patch configure \
-	build rebuild fake package install clean build-all-pkgs
+	build fake package install clean build-all-pkgs

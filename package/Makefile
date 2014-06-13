@@ -25,21 +25,19 @@ package-$(ADK_PACKAGE_LIBPTHREAD) += libpthread
 
 include $(TOPDIR)/package/Depends.mk
 
-DOWNLOAD:=$(patsubst %,%-download,$(package-y) $(package-m))
-REBUILD_PACKAGES:=$(patsubst %,%-rebuild,$(package-y) $(package-m))
-COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y) $(package-m))
+COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y))
 HOST_COMPILE_PACKAGES:=$(patsubst %,%-host-compile,$(hostpackage-y))
 INSTALL_PACKAGES:=$(patsubst %,%-install,$(package-y))
 
 all: compile
-download: $(DOWNLOAD)
-clean: $(patsubst %,%-clean,$(package-) $(package-y) $(package-m) base-files)
+download: $(patsubst %,%-download,$(package-y))
+clean: $(patsubst %,%-clean,$(package-) $(package-y) base-files)
 hostcompile: $(HOST_COMPILE_PACKAGES)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
-compile: $(REBUILD_PACKAGES) $(COMPILE_PACKAGES)
+compile: $(COMPILE_PACKAGES)
 install: $(INSTALL_PACKAGES)
 else
-compile: $(REBUILD_PACKAGES) base-files-compile $(COMPILE_PACKAGES)
+compile: base-files-compile $(COMPILE_PACKAGES)
 install: base-files-install $(INSTALL_PACKAGES)
 endif
 
@@ -57,13 +55,11 @@ endif
 
 %-compile:
 	$(START_TRACE) "package/$(patsubst %-compile,%,$@)-compile: "
+	if test -f $(TOPDIR)/.rebuild.$(patsubst %-compile,%,$@); then \
+		$(MAKE) -C $(patsubst %-compile,%,$@) clean ; \
+		rm $(TOPDIR)/.rebuild.$(patsubst %-compile,%,$@) ; \
+	fi
 	$(MAKE) -C $(patsubst %-compile,%,$@) fake build-all-pkgs
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
-
-%-rebuild:
-	$(START_TRACE) "package/$(patsubst %-rebuild,%,$@)-rebuild: "
-	$(MAKE) -C $(patsubst %-rebuild,%,$@) rebuild
 	$(CMD_TRACE) " done"
 	$(END_TRACE)
 
