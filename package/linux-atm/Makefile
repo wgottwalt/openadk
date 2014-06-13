@@ -9,7 +9,7 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		9560b0e1f410a05b849dfdab465dd758
 PKG_DESCR:=		atm library
 PKG_SECTION:=		libs/net
-PKG_BUILDDEP:=		flex-host
+PKG_BUILDDEP:=		flex-host bison-host
 PKG_URL:=		http://linux-atm.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=linux-atm/}
 PKG_NOPARALLEL:=	1
