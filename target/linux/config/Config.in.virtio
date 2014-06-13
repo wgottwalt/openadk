@@ -1,5 +1,6 @@
 menu "Virtio driver support"
 depends on !ADK_TARGET_QEMU_WITH_VIRTIO && ADK_TARGET_QEMU
+depends on !ADK_TARGET_SYSTEM_QEMU_ARM
 
 config ADK_KERNEL_VIRTIO
 	boolean
