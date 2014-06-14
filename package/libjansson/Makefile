@@ -20,6 +20,8 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBJANSSON,libjansson,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+TARGET_LDFLAGS+=	-lm
+
 libjansson-install:
 	$(INSTALL_DIR) $(IDIR_LIBJANSSON)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libjansson*.so* \
