@@ -57,6 +57,7 @@ $(eval $(call PKG_template,LIBBIND,libbind,${PKG_VERSION}-${PKG_RELEASE},,${PKGS
 CONFIGURE_ARGS+=	--with-randomdev=/dev/urandom \
 			--with-ecdsa=no \
 			--with-gost=no \
+			--with-gssapi=no \
 			--with-openssl=${STAGING_TARGET_DIR}/usr \
 			--with-libxml2=${STAGING_TARGET_DIR}/usr \
 			--enable-epoll \
