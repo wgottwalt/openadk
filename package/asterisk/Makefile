@@ -16,6 +16,8 @@ PKG_BUILDDEP+=		sqlite
 PKG_URL:=		http://www.asterisk.org/
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 
+PKG_LIBC_DEPENDS:=	glibc
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		ASTERISK ASTERISK_PGSQL ASTERISK_VOICEMAIL ASTERISK_SOUNDS
