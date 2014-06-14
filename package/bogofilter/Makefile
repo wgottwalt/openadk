@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		bogofilter
-PKG_VERSION:=		1.2.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		39d27c13eae8a5064d68e20d585e60de
+PKG_VERSION:=		1.2.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		94aee3ced558c2a354547083735f2ba7
 PKG_DESCR:=		mail filter software
 PKG_SECTION:=		net/mail
 PKG_BUILDDEP:=		libiconv-tiny db
@@ -24,15 +24,13 @@ CONFIGURE_ENV+=		LIBS="-liconv" \
 			ac_cv_func_memcmp_working=yes
 CONFIGURE_ARGS+=	--without-libsqlite3-prefix \
 			--without-libqdbm-prefix \
+			--without-libiconv-prefix \
 			--with-included-gsl \
 			--disable-static \
 			--with-libdb-prefix=${STAGING_TARGET_DIR}/usr \
 			--disable-transactions
 
-pre-build:
-	touch $(WRKBUILD)/src/lexer_v3.l $(WRKBUILD)/src/Makefile.in $(WRKBUILD)/src/lexer_v3.c
-
-post-install:
+bogofilter-install:
 	${INSTALL_DIR} ${IDIR_BOGOFILTER}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/bogofilter \
 		 ${IDIR_BOGOFILTER}/usr/bin/
