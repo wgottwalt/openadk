@@ -20,6 +20,9 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CXXTOOLS,cxxtools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+ifeq ($(ADK_LINUX_XTENSA),y)
+CONFIGURE_ARGS+=	--with-atomictype=generic
+endif
 CONFIGURE_ARGS+=	--disable-demos \
 			--disable-unittest
 
