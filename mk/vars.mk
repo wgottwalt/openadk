@@ -78,7 +78,7 @@ endif
 
 TARGET_CPPFLAGS:=	
 TARGET_CFLAGS:=		$(ADK_TARGET_CFLAGS) -fwrapv -fno-ident -fhonour-copts
-TARGET_CXXFLAGS:=	$(ADK_TARGET_CFLAGS) -fwrapv -fno-ident
+TARGET_CXXFLAGS:=	$(ADK_TARGET_CFLAGS) -fwrapv -fno-ident -fhonour-copts
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
@@ -144,16 +144,21 @@ endif
 ifneq ($(ADK_DEBUG),)
 ifeq ($(ADK_DEBUG_OPTS),y)
 TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
+TARGET_CXXFLAGS+=	-g3 -fno-omit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
 else
 TARGET_CFLAGS+=		-O0 -g3 -fno-omit-frame-pointer
+TARGET_CXXFLAGS+=	-O0 -g3 -fno-omit-frame-pointer
 endif
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
 TARGET_CFLAGS+=		-fomit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
+TARGET_CXXFLAGS+=	-fomit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
 # stop generating eh_frame stuff
 TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
+TARGET_CXXFLAGS+=	-fno-unwind-tables -fno-asynchronous-unwind-tables
 # always add debug information
 TARGET_CFLAGS+=		-g3
+TARGET_CXXFLAGS+=	-g3
 endif
 
 ifeq ($(ADK_LINUX_ARM),y)
