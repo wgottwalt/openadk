@@ -37,7 +37,6 @@ ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 MAKE_FLAGS+=		LDFLAGS="$(TARGET_LDFLAGS) -all-static"
 endif
 
-HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--enable-static \
 			--disable-shared \
 			--disable-warnings

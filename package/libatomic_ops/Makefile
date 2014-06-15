@@ -22,8 +22,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBATOMIC_OPS,libatomic-ops,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBATOMIC_OPS,libatomic-ops,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-HOST_STYLE:=		auto
-
 libatomic-ops-install:
 	$(INSTALL_DIR) $(IDIR_LIBATOMIC_OPS)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libatomic_ops*.so* \

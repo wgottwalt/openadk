@@ -11,8 +11,8 @@ PKG_DESCR:=		sip stress and diagnostics utility
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libopenssl
 PKG_BUILDDEP:=		openssl
-PKG_URL:=		http://sipsak.org/
-PKG_SITES:=		http://download.berlios.de/sipsak/
+PKG_URL:=		http://sourceforge.net/projects/sipsak.berlios/
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sipsak/}
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-1.tar.gz
 

@@ -24,7 +24,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,JAMVM,jamvm,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,JAMVM,jamvm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--libdir=$(STAGING_HOST_DIR)/usr/lib/jamvm \
 			--includedir=$(STAGING_HOST_DIR)/usr/include/jamvm \
 			--with-classpath-install-dir=$(STAGING_HOST_DIR)/usr

@@ -21,8 +21,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,YASM,yasm,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,YASM,yasm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
-
 yasm-install:
 	$(INSTALL_DIR) $(IDIR_YASM)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/yasm $(IDIR_YASM)/usr/bin

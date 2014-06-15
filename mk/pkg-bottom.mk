@@ -135,12 +135,6 @@ endif
 		echo "scripts/$$(basename $$a)" \
 		    >>'${STAGING_PKG_DIR}/${PKG_NAME}.scripts'; \
 	done
-	@for a in ${WRKINST}/usr/lib/pkgconfig/*.pc; do \
-		[[ -e $$a ]] || continue; \
-		sed -e "s,^prefix=.*,prefix=${STAGING_TARGET_DIR}/usr," \
-		    -e "s,^prefix = .*,prefix = ${STAGING_TARGET_DIR}/usr," $$a > \
-		${STAGING_TARGET_DIR}/usr/lib/pkgconfig/$$(basename $$a); \
-	done
 ifeq (,$(filter noremove,${PKG_OPTS}))
 	@if test -s '${STAGING_PKG_DIR}/${PKG_NAME}'; then \
 		cd '${STAGING_TARGET_DIR}'; \
@@ -169,7 +163,7 @@ endif
 ifeq (,$(filter nostaging,${PKG_OPTS}))
 	@-cd ${WRKINST}; \
 	    find usr ! -type d 2>/dev/null | \
-	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/src' -e '^usr/doc' -e '^usr/local' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config*' -e '^/usr/lib/libpthread_nonshared.a' | \
+	    grep -E -v -e '^usr/share' -e '^usr/src' -e '^usr/doc' -e '^usr/local' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config*' -e '^/usr/lib/libpthread_nonshared.a' | \
 	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
 	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu '${STAGING_TARGET_DIR}'
 	@cd '${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$' \

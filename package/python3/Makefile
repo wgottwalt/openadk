@@ -95,7 +95,6 @@ CONFIGURE_ENV+=		ac_cv_have_long_long_format=yes \
 			ac_cv_file__dev_ptmx=yes \
 			ac_cv_file__dev_ptc=no
 
-HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--without-cxx-main \
 			--with-threads
 

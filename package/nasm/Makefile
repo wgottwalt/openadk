@@ -20,7 +20,6 @@ $(eval $(call HOST_template,NASM,nasm,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,NASM,nasm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 FAKE_FLAGS+=		INSTALLROOT=${WRKINST}
-HOST_STYLE:=		auto
 
 nasm-install:
 	$(INSTALL_DIR) $(IDIR_NASM)/usr/bin

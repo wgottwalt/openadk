@@ -9,7 +9,8 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		3ab7a4d1aac1b7f8ccc6b9755a19f252
 PKG_DESCR:=		x11 authorisation library
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		xproto libXau-host
+PKG_BUILDDEP:=		xproto
+HOST_BUILDDEP:=		xproto-host
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libxau
 PKG_OPTS:=		dev
@@ -21,8 +22,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,LIBXAU,libxau,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBXAU,libxau,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-HOST_STYLE:=		auto
 
 libxau-install:
 	${INSTALL_DIR} ${IDIR_LIBXAU}/usr/lib

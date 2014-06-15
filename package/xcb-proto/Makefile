@@ -27,7 +27,6 @@ $(eval $(call PKG_template,XCB_PYTHON,xcb-python,$(PKG_VERSION)-${PKG_RELEASE},$
 
 include $(TOPDIR)/mk/python.mk
 
-HOST_STYLE:=		auto
 CONFIGURE_ENV+=		PYTHON=$(PYTHON)
 CONFIGURE_ARGS+=	--datadir=${STAGING_TARGET_DIR}/usr/share
 

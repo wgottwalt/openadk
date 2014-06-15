@@ -18,13 +18,14 @@ PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
+include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ORBIT2,orbit2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CFLAGS_FOR_BUILD+=	$(shell PATH=$(HOST_PATH) libIDL-config-2 --cflags)
+CFLAGS_FOR_BUILD+=	$(shell env $(HOST_CONFIGURE_ENV) libIDL-config-2 --cflags)
 LDFLAGS_FOR_BUILD+=	-static
-LIBS_FOR_BUILD:=	$(shell PATH=$(HOST_PATH) libIDL-config-2 --libs)
+LIBS_FOR_BUILD:=	$(shell env $(HOST_CONFIGURE_ENV) libIDL-config-2 --libs)
 LIBS_FOR_BUILD+=	-lgmodule-2.0 -ldl -lpthread -lrt -lglib-2.0
 XAKE_FLAGS+=		LIBS_FOR_BUILD="${LIBS_FOR_BUILD}"
 CONFIGURE_ENV+=		ac_cv_alignof_CORBA_octet=1 \
@@ -49,4 +50,5 @@ orbit2-install:
 	$(CP) $(WRKINST)/usr/bin/orbit-idl-2 \
 		$(STAGING_TARGET_DIR)/usr/bin
 
+include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

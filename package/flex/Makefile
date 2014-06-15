@@ -22,8 +22,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,FLEX,flex,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,FLEX,flex,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-HOST_STYLE:=		auto
-
 flex-install:
 	${INSTALL_DIR} ${IDIR_FLEX}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/flex ${IDIR_FLEX}/usr/bin

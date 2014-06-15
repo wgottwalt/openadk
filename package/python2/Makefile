@@ -96,7 +96,6 @@ CONFIGURE_ARGS:=	--with-threads \
 			--with-system-ffi \
 			--without-cxx-main
 
-HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--with-threads \
 			--disable-ipv6 \
 			--disable-shared \

@@ -21,8 +21,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,SED,sed,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,SED,sed,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
-
 sed-install:
 	$(INSTALL_DIR) $(IDIR_SED)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/sed \

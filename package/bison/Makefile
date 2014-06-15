@@ -20,7 +20,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,BISON,bison,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,BISON,bison,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
 TARGET_LDFLAGS+=	-lrt
 XAKE_FLAGS+=		M4=m4
 

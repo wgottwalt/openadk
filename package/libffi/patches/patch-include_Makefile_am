@@ -1,5 +1,5 @@
---- libffi-3.0.13.orig/include/Makefile.am	2013-03-16 12:19:39.000000000 +0100
-+++ libffi-3.0.13/include/Makefile.am	2013-12-05 16:33:48.000000000 +0100
+--- libffi-3.1.orig/include/Makefile.am	2014-04-25 19:45:13.000000000 +0200
++++ libffi-3.1/include/Makefile.am	2014-06-12 15:22:08.000000000 +0200
 @@ -5,5 +5,5 @@ AUTOMAKE_OPTIONS=foreign
  DISTCLEANFILES=ffitarget.h
  EXTRA_DIST=ffi.h.in ffi_common.h

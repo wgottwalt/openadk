@@ -23,7 +23,6 @@ $(eval $(call HOST_template,AUTOMAKE,automake,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,AUTOMAKE,automake,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 XAKE_FLAGS+=		PERL="/usr/bin/perl"
-HOST_STYLE:=		auto
 
 automake-install:
 	${INSTALL_DIR} ${IDIR_AUTOMAKE}/usr/bin

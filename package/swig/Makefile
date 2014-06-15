@@ -21,7 +21,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,SWIG,swig,$(PKG_VERSION)-${PKG_RELEASE}))
 
-HOST_STYLE:=		auto
 HOST_ALL_TARGET:=	swig
 HOST_CONFIGURE_ARGS+=	--without-pcre
 

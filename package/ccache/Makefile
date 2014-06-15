@@ -18,7 +18,5 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,CCACHE,ccache,$(PKG_VERSION)-${PKG_RELEASE}))
 
-HOST_STYLE:=		auto
-
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

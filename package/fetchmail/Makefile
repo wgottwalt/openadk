@@ -6,13 +6,11 @@ include ${TOPDIR}/rules.mk
 PKG_NAME:=		fetchmail
 PKG_VERSION:=		6.3.26
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d9ae3d939205a3c06a21ea79b8f14793
+PKG_MD5SUM:=		61b66faad044afa26e142bb1791aa2b3
 PKG_DESCR:=		fetch mail from a pop3 or imap server
 PKG_SECTION:=		net/mail
-PKG_URL:=		http://fetchmail.berlios.de/
-PKG_SITES:=		http://download.berlios.de/fetchmail/
-
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_URL:=		http://www.fetchmail.info
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fetchmail/}
 
 PKG_FLAVOURS_FETCHMAIL:=WITH_SSL
 PKGFD_WITH_SSL:=	enable SSL support

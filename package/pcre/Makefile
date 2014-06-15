@@ -27,7 +27,6 @@ $(eval $(call HOST_template,PCRE,pcre,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBPCRE,libpcre,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBPCRECPP,libpcrecpp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBPCRECPP},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--enable-utf \
 			--enable-unicode-properties
 XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}

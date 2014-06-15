@@ -29,7 +29,7 @@ $(eval $(call PKG_template,UDEV,udev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LIBUDEV,libudev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--disable-manpages \
-			--datadir=${STAGING_TARGET_PREFIX}/usr/lib \
+			--disable-gudev \
 			--disable-gtk-doc
 
 udev-install:

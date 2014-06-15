@@ -34,7 +34,6 @@ $(eval $(call PKG_template,FIND,find,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LOCATE,locate,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LOCATE},${PKG_SECTION}))
 $(eval $(call PKG_template,XARGS,xargs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_XARGS},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ENV+=		gl_cv_func_wcwidth_works=yes \
 			ac_cv_func_working_mktime=yes

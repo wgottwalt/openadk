@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		gpsd
 PKG_VERSION:=		3.10
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		fc5b03aae38b9b5b6880b31924d0ace3
 PKG_DESCR:=		interface daemon for gps receivers
 PKG_SECTION:=		sys/misc
@@ -29,8 +29,8 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-install:
-	(cd $(WRKBUILD); env PATH='$(TARGET_PATH)' CCFLAGS='' \
-		scons install prefix=$(WRKINST)/usr platform=linux python=no chrpath=no bluez=no usb=no libgpsmm=no)
+	(cd $(WRKBUILD); env PATH='$(TARGET_PATH)' CCFLAGS='' DESTDIR='$(WRKINST)' \
+		scons install prefix=/usr platform=linux python=no chrpath=no bluez=no usb=no libgpsmm=no)
 
 gpsd-install:
 	${INSTALL_DIR} ${IDIR_GPSD}/usr/lib ${IDIR_GPSD}/usr/sbin

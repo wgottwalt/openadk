@@ -21,7 +21,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-glibtest \
 			--without-libtiff
 CONFIGURE_ENV+=		gio_can_sniff=no

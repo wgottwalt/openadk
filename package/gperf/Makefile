@@ -22,8 +22,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,GPERF,gperf,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,GPERF,gperf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
-
 gperf-install:
 	${INSTALL_DIR} ${IDIR_GPERF}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gperf ${IDIR_GPERF}/usr/bin

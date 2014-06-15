@@ -10,22 +10,23 @@ CONFIGURE_ARGS+=	--enable-debug
 endif
 endif
 
-AUTOTOOL_ENV+=		AUTOM4TE='${STAGING_HOST_DIR}/usr/bin/autom4te' \
+AUTOTOOL_ENV+=		PATH='${AUTOTOOL_PATH}' \
+			AUTOM4TE='${STAGING_HOST_DIR}/usr/bin/autom4te' \
 			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
-			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q' \
-			PATH='${AUTOTOOL_PATH}'
+			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q'
 
-CONFIGURE_ENV+=		GCC_HONOUR_COPTS=s \
+CONFIGURE_ENV+=		PATH='${TARGET_PATH}' \
+			GCC_HONOUR_COPTS=s \
 			AUTOM4TE=${STAGING_HOST_DIR}/usr/bin/autom4te \
 			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
 			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q' \
-			PATH='${TARGET_PATH}' \
 			CONFIG_SHELL='$(strip ${SHELL})' \
 			CFLAGS='$(strip ${TARGET_CFLAGS})' \
 			CXXFLAGS='$(strip ${TARGET_CXXFLAGS})' \
 			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
 			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
-			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig' \
+			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig:${STAGING_TARGET_DIR}/usr/share/pkgconfig' \
+			PKG_CONFIG_SYSROOT_DIR='${STAGING_TARGET_DIR}' \
 			ac_cv_func_realloc_0_nonnull=yes \
 			ac_cv_func_malloc_0_nonnull=yes \
 			cross_compiling=yes \
@@ -55,8 +56,9 @@ MAKE_ENV+=		$(GCC_CHECK) \
 			CXXFLAGS='$(strip ${TARGET_CXXFLAGS})' \
 			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
 			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
+			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig:${STAGING_TARGET_DIR}/usr/share/pkgconfig' \
+			PKG_CONFIG_SYSROOT_DIR='${STAGING_TARGET_DIR}' \
 			${HOST_CONFIGURE_OPTS} \
-			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig' \
 			${TARGET_CONFIGURE_OPTS}
 
 MAKE_FLAGS+=		${XAKE_FLAGS} V=1
@@ -247,7 +249,7 @@ ifeq (,$(filter noremove,$(7)))
 endif
 	@rm -f '$${STAGING_PKG_DIR}/$(1)'
 ifeq (,$(filter nostaging,$(7)))
-	-@cd $${IDIR_$(1)}; \
+	@-cd $${IDIR_$(1)}; \
 	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
 		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
 		    'ramdisk location:' >&2; \

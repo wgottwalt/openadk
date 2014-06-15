@@ -23,8 +23,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBICE,libice,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBICE,libice,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-HOST_STYLE:=		auto
-
 libice-install:
 	${INSTALL_DIR} ${IDIR_LIBICE}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libICE.so* ${IDIR_LIBICE}/usr/lib

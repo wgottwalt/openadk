@@ -39,7 +39,8 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-fam \
 			--enable-static \
-			--disable-compile-warnings
+			--disable-compile-warnings \
+			--datadir=${STAGING_HOST_DIR}/usr/share
 
 glib-install:
 	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib

@@ -84,7 +84,6 @@ TARGET_CFLAGS+=		-I${STAGING_TARGET_DIR}/usr/include/et -pthread
 CONFIGURE_ARGS+=	${CONFIGURE_OPTS} --with-cross-tools=${STAGING_HOST_DIR}/usr/libexec/heimdal
 CONFIGURE_ENV+=		ac_cv_func_getaddrinfo_numserv=yes
 
-HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-pk-init \
 			--without-openldap \
 			--disable-kcm \

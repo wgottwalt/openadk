@@ -26,7 +26,6 @@ ifneq ($(ADK_HOST_LINUX),y)
 HOST_LINUX_ONLY:=	1
 endif
 
-HOST_STYLE:=		auto
 TARGET_CPPFLAGS+=	-D_POSIX_C_SOURCE=1
 CONFIGURE_ARGS+=	--disable-python
 

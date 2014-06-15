@@ -25,7 +25,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,CLASSPATH,classpath,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,CLASSPATH,classpath,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-plugin \
 			--disable-tools \
 			--disable-examples \

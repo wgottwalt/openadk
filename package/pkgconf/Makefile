@@ -20,8 +20,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,PKGCONF,pkgconf,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,PKGCONF,pkgconf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
-
 hostpost-install:
 	(cd $(STAGING_HOST_DIR)/usr/bin && ln -sf pkgconf pkg-config)
 	(cd $(STAGING_HOST_DIR)/usr/bin && ln -sf pkgconf $(GNU_TARGET_NAME)-pkg-config)

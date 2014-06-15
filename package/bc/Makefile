@@ -25,8 +25,6 @@ $(eval $(call HOST_template,BC,bc,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,BC,bc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DC,dc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
-
 bc-install:
 	${INSTALL_DIR} ${IDIR_BC}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/bc/bc ${IDIR_BC}/usr/bin/bc

@@ -20,8 +20,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,JIKES,jikes,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,JIKES,jikes,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
-
 hostpost-install:
 	$(INSTALL_DIR) ${STAGING_HOST_DIR}/usr/lib/jvm/bin/
 	$(INSTALL_DIR) ${STAGING_HOST_DIR}/usr/lib/jvm/jre/bin/

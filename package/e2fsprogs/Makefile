@@ -14,6 +14,7 @@ PKG_BUILDDEP:=		util-linux
 PKG_URL:=		http://e2fsprogs.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=e2fsprogs/}
 PKG_OPTS:=		dev
+PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -53,9 +54,7 @@ CONFIGURE_ARGS+=	--enable-elf-shlibs \
 			--disable-libuuid \
 			--disable-libblkid \
 			--disable-defrag
-#INSTALL_TARGET+=	install-libs
-#TARGET_LDFLAGS+=	-lpthread
-#TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_TARGET_DIR)/usr/include
+TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_TARGET_DIR)/usr/include
 MAKE_FLAGS+=		BUILD_CC="${CC_FOR_BUILD}" \
 			BUILD_CFLAGS="${CFLAGS_FOR_BUILD} ${CPPFLAGS_FOR_BUILD} -I${WRKSRC}/lib -I." \
 			BUILD_LDFLAGS="${LDFLAGS_FOR_BUILD}"

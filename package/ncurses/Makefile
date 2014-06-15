@@ -54,7 +54,6 @@ CONFIGURE_ARGS+=	--without-cxx \
 ALL_TARGET:=		libs
 INSTALL_TARGET:=	install.libs install.data
 
-HOST_STYLE:=		auto
 # use sth which does not exist
 HOST_ALL_TARGET:=	progs
 HOST_INSTALL_TARGET:=	install.includes install.progs

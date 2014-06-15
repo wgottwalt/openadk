@@ -26,7 +26,6 @@ $(eval $(call PKG_template,ICU4C,icu4c,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 
 CFLAGS_FOR_BUILD+=	-fPIC
 CXXFLAGS_FOR_BUILD+=	-fPIC
-HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--enable-extras=no \
 			--enable-samples=no \
 			--enable-tests=no \

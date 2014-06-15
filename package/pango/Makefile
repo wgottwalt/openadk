@@ -22,7 +22,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,PANGO,pango,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,PANGO,pango,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-HOST_STYLE:=		auto
 CONFIGURE_ENV+=		ac_cv_path_EGREP="grep -E"
 
 pango-install:

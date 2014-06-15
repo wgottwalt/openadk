@@ -21,8 +21,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,LIBPNG,libpng,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBPNG,libpng,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-HOST_STYLE:=		auto
-
 libpng-install:
 	${INSTALL_DIR} ${IDIR_LIBPNG}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libpng*.so* ${IDIR_LIBPNG}/usr/lib

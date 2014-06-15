@@ -10,7 +10,8 @@ PKG_MD5SUM:=		531fbc1b40b80dd1d6f3b5e76b99067c
 PKG_DESCR:=		libraries for interface definition language files
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib
-PKG_BUILDDEP:=		glib-host glib m4-host flex-host bison-host libIDL-host
+PKG_BUILDDEP:=		glib
+HOST_BUILDDEP:=		glib-host
 PKG_URL:=		http://www.gnome.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/GNOME/sources/libIDL/0.8/
 PKG_LIBNAME:=		libidl
@@ -21,12 +22,11 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
-CONFIGURE_ENV+=		libIDL_cv_long_long_format=ll
-
 $(eval $(call HOST_template,LIBIDL,libidl,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBIDL,libidl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-HOST_STYLE:=		auto
+CONFIGURE_ENV+=		libIDL_cv_long_long_format=ll
+#HOST_STYLE:=		auto
 
 libidl-install:
 	$(INSTALL_DIR) $(IDIR_LIBIDL)/usr/lib

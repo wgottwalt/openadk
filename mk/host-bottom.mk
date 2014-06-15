@@ -16,37 +16,17 @@ endif
 	@cd ${WRKBUILD}; \
 	    for i in $$(find . -name config.sub);do \
 		if [ -f $$i ]; then \
-			${CP} $$i $$i.bak; \
 			${CP} ${SCRIPT_DIR}/config.sub $$i; \
 		fi; \
 	    done; \
 	    for i in $$(find . -name config.guess);do \
 		if [ -f $$i ]; then \
-			${CP} $$i $$i.bak; \
 			${CP} ${SCRIPT_DIR}/config.guess $$i; \
 	        fi; \
 	    done;
 	@${MAKE} hostpre-configure $(MAKE_TRACE)
-ifneq (${HOST_STYLE},manual)
-ifeq ($(strip ${HOST_STYLE}),)
-	cd ${WRKBUILD}; rm -f config.{cache,status}; \
-	    env ${HOST_CONFIGURE_ENV} \
-	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
-	    --program-prefix= \
-	    --program-suffix= \
-	    --prefix=/usr \
-	    --bindir=/usr/bin \
-	    --datadir=/usr/share \
-	    --mandir=/usr/share/man \
-	    --libexecdir=/usr/libexec \
-	    --localstatedir=/var \
-	    --sysconfdir=/etc \
-	    --disable-dependency-tracking \
-	    --disable-libtool-lock \
-	    --disable-nls \
-	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
-else
-	cd ${WRKBUILD}; rm -f config.{cache,status}; \
+ifeq (${HOST_STYLE},)
+	cd ${WRKBUILD}; \
 	    env ${HOST_CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
 	    --program-prefix= \
@@ -62,8 +42,27 @@ else
 	    --disable-nls \
 	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 endif
+ifeq (${HOST_STYLE},auto)
+	cd ${WRKBUILD}; \
+	    env ${HOST_CONFIGURE_ENV} \
+	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
+	    --program-prefix= \
+	    --program-suffix= \
+	    --prefix=/usr \
+	    --bindir=/usr/bin \
+	    --datadir=/usr/share \
+	    --mandir=/usr/share/man \
+	    --libexecdir=/usr/libexec \
+	    --localstatedir=/var \
+	    --sysconfdir=/etc \
+	    --disable-dependency-tracking \
+	    --disable-libtool-lock \
+	    --disable-nls \
+	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 endif
+ifeq (${HOST_STYLE},manual)
 	${MAKE} host-configure $(MAKE_TRACE)
+endif
 	touch $@
 
 host-build:
@@ -81,16 +80,15 @@ host-install: ${ALL_HOSTINST}
 ${_HOST_FAKE_COOKIE}: ${_HOST_BUILD_COOKIE}
 	@$(CMD_TRACE) "host installing... "
 	@mkdir -p ${HOST_WRKINST}
-ifneq (${HOST_STYLE},manual)
-ifeq ($(strip ${HOST_STYLE}),)
-	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-	    DESTDIR='${HOST_WRKINST}' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
-	env ${HOST_MAKE_ENV} ${MAKE} host-install $(MAKE_TRACE)
-else
+ifeq (${HOST_STYLE},)
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    DESTDIR='' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
 endif
-else
+ifeq (${HOST_STYLE},auto)
+	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+	    DESTDIR='${STAGING_HOST_DIR}' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
+endif
+ifeq (${HOST_STYLE},manual)
 	env ${HOST_MAKE_ENV} ${MAKE} host-install $(MAKE_TRACE)
 endif
 	env ${HOST_MAKE_ENV} ${MAKE} hostpost-install $(MAKE_TRACE)

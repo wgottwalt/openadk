@@ -20,7 +20,6 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,GCJ,gcj,$(PKG_VERSION)-${PKG_RELEASE}))
 
-HOST_STYLE:=		auto
 HOST_MAKE_ENV+=		"JAR=no LDFLAGS=-liconv"
 # http://gcc.gnu.org/bugzilla/attachment.cgi?id=30880&action=diff
 HOST_CONFIGURE_ARGS:=	--enable-dependency-tracking \

@@ -20,7 +20,6 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,AUTOCONF,autoconf,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,AUTOCONF,autoconf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-HOST_STYLE:=		auto
 XAKE_FLAGS+=		PERL="/usr/bin/perl"
 
 autoconf-install:

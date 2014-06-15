@@ -18,8 +18,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LZMA,lzma,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LZMA,lzma,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
-
 lzma-install:
 	$(INSTALL_DIR) $(IDIR_LZMA)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/lzma $(IDIR_LZMA)/usr/bin

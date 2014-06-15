@@ -29,7 +29,6 @@ $(eval $(call HOST_template,LIBXSLT,libxslt,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBXSLT,libxslt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,XSLTPROC,xsltproc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_XSLTPROC},${PKGSC_XSLTPROC}))
 
-HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--without-python \
 			--without-crypto \
 			--with-libxml-prefix="${STAGING_HOST_DIR}/usr" \

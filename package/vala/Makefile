@@ -20,8 +20,6 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,VALA,vala,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,VALA,vala,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-HOST_STYLE:=		auto
-
 vala-install:
 	$(INSTALL_DIR) $(IDIR_VALA)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/valac \

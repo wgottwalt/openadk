@@ -29,7 +29,6 @@ ifeq (${ADK_HOST_OPENBSD},y)
 XAKE_FLAGS+=		AUTOCONF_VERSION=2.62
 endif
 
-HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--enable-ltdl-install
 XAKE_FLAGS+=		HELP2MAN=/bin/echo
 HOST_XAKE_FLAGS+=	HELP2MAN=/bin/echo
