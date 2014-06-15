@@ -26,17 +26,17 @@ PKGFD_PYTHON:=		with python
 PKGFB_PYTHON:=		python2
 PKGFS_PYTHON:=		python2
 PKGFD_IOSTREAMS:=	with iostreams
-PKGFD_GRAPH:=	with graph
+PKGFD_GRAPH:=		with graph
 PKGFD_GRAPH_PARALLEL:=	with graph_parallel
-PKGFD_MATH:=	with math
+PKGFD_MATH:=		with math
 PKGFD_PROGRAM_OPTIONS:=	with program_options
-PKGFD_REGEX:=	with regex
+PKGFD_REGEX:=		with regex
 PKGFD_SERIALIZATION:=	with serialization
-PKGFD_SIGNALS:=	with signals
-PKGFD_SYSTEM:=	with system
-PKGFD_TEST:=	with test
-PKGFD_THREAD:=	with thread
-PKGFD_WAVE:=	with wave
+PKGFD_SIGNALS:=		with signals
+PKGFD_SYSTEM:=		with system
+PKGFD_TEST:=		with test
+PKGFD_THREAD:=		with thread
+PKGFD_WAVE:=		with wave
 
 include ${TOPDIR}/mk/package.mk
 
@@ -48,54 +48,52 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-CONFIGURE_ARGS += \
-	--target=$(GNU_TARGET_NAME) \
-	--host=$(GNU_TARGET_NAME) \
-	--build=$(GNU_HOST_NAME) \
-	--prefix=${WRKINST}/usr \
-
-CONFIGURE_ARGS+=--without-locale
+CONFIGURE_ARGS+=	--target=$(GNU_TARGET_NAME) \
+			--host=$(GNU_TARGET_NAME) \
+			--build=$(GNU_HOST_NAME) \
+			--prefix=${WRKINST}/usr \
+			--without-locale
 
 ifneq (${ADK_PACKAGE_BOOST_IOSTREAMS},)
-	CONFIGURE_ARGS += -sNO_BZIP2=1 -sZLIB_INCLUDE=${STAGING_TARGET_DIR}/usr/include -sZLIB_LIBPATH=${STAGING_TARGET_DIR}/usr/lib
+CONFIGURE_ARGS+=	-sNO_BZIP2=1 -sZLIB_INCLUDE=${STAGING_TARGET_DIR}/usr/include -sZLIB_LIBPATH=${STAGING_TARGET_DIR}/usr/lib
 else
-	CONFIGURE_ARGS += --without-iostreams
+CONFIGURE_ARGS+=	--without-iostreams
 endif
 ifeq (${ADK_PACKAGE_BOOST_DATE_TIME},)
-	CONFIGURE_ARGS+=--without-date_time
+CONFIGURE_ARGS+=	--without-date_time
 endif
 ifeq (${ADK_PACKAGE_BOOST_PYTHON},)
-	CONFIGURE_ARGS+=--without-python
+CONFIGURE_ARGS+=	--without-python
 endif
 ifeq (${ADK_PACKAGE_BOOST_GRAPH},)
-	CONFIGURE_ARGS+=--without-graph
+CONFIGURE_ARGS+=	--without-graph
 endif
 ifeq (${ADK_PACKAGE_BOOST_MATH},)
-	CONFIGURE_ARGS+=--without-math
+CONFIGURE_ARGS+=	--without-math
 endif
 ifeq (${ADK_PACKAGE_BOOST_PROGRAM_OPTIONS},)
-	CONFIGURE_ARGS+=--without-program_options
+CONFIGURE_ARGS+=	--without-program_options
 endif
 ifeq (${ADK_PACKAGE_BOOST_REGEX},)
-	CONFIGURE_ARGS+=--without-regex
+CONFIGURE_ARGS+=	--without-regex
 endif
 ifeq (${ADK_PACKAGE_BOOST_SERIALIZATION},)
-	CONFIGURE_ARGS+=--without-serialization
+CONFIGURE_ARGS+=	--without-serialization
 endif
 ifeq (${ADK_PACKAGE_BOOST_SIGNALS},)
-	CONFIGURE_ARGS+=--without-signals
+CONFIGURE_ARGS+=	--without-signals
 endif
 ifeq (${ADK_PACKAGE_BOOST_SYSTEM},)
-	CONFIGURE_ARGS+=--without-system
+CONFIGURE_ARGS+=	--without-system
 endif
 ifeq (${ADK_PACKAGE_BOOST_TEST},)
-	CONFIGURE_ARGS+=--without-test
+CONFIGURE_ARGS+=	--without-test
 endif
 ifeq (${ADK_PACKAGE_BOOST_THREAD},)
-	CONFIGURE_ARGS+=--without-thread
+CONFIGURE_ARGS+=	--without-thread
 endif
 ifeq (${ADK_PACKAGE_BOOST_WAVE},)
-	CONFIGURE_ARGS+=--without-wave
+CONFIGURE_ARGS+=	--without-wave
 endif
 
 ifeq ($(ADK_TARGET_ARCH),x86_64)
@@ -122,7 +120,7 @@ do-build:
 # remove exisiting using gcc line from user.jam
 	${SED} "/^using gcc/d" ${USER_JAM}
 # add using gcc line with determined options to user.jam
-	echo "using gcc : ${GPP_VERSION} : ${GPP_PATH} ;" >> ${USER_JAM};
+	echo "using gcc : ${GPP_VERSION} : ${GPP_PATH} : <compileflags>\"${TARGET_CFLAGS}\" ;" >> ${USER_JAM};
 # remove exisiting using python line from user.jam
 	${SED} "/^using python/d" ${USER_JAM}
 ifneq (${ADK_PACKAGE_BOOST_PYTHON},)
