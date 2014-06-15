@@ -58,6 +58,7 @@ config ADK_TARGET_CMDLINE
 	default "console=ttySC1" if ADK_TARGET_SYSTEM_QEMU_SH
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	default "console=ttyS0,38400" if ADK_TARGET_SYSTEM_QEMU_XTENSA
 	default ""
 
 choice
@@ -76,9 +77,9 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 		ADK_LINUX_PPC || \
 		ADK_LINUX_SPARC || \
 		ADK_LINUX_X86 || \
-		ADK_LINUX_X86_64 || \
-		ADK_LINUX_NATIVE
+		ADK_LINUX_X86_64
 	depends on !ADK_TARGET_VBOX
+	depends on !ADK_TARGET_SYSTEM_QEMU_XTENSA
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	select ADK_KERNEL_BLK_DEV_INITRD
@@ -183,6 +184,7 @@ config ADK_TARGET_ROOTFS_ISO
 config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
 	boolean "Archive usable for initramfs creation"
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	depends on !ADK_TARGET_SYSTEM_QEMU_XTENSA
 	help
 	  Use this option if your planning to create a initramfs,
 	  useful for adk-test-framework.

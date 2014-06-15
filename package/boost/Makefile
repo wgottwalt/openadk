@@ -14,7 +14,7 @@ PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!m68k
+PKG_ARCH_DEPENDS:=	!m68k !xtensa
 
 DISTFILES:=		boost_1_55_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_1_55_0

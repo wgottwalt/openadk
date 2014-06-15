@@ -10,6 +10,10 @@ ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CXXFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_CXXFLAGS))
 endif
 
+ifneq ($(ADK_LINUX_XTENSA),y)
+GCC_FINAL_CONFOPTS+=	--enable-cxx-flags='$(TARGET_CXXFLAGS)'
+endif
+
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-bugurl="http://www.openadk.org/" \
 			--build=$(GNU_HOST_NAME) \
@@ -131,6 +135,10 @@ GCC_BUILD_DIR_INITIAL:=	$(WRKBUILD)-initial
 GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 
 $(GCC_BUILD_DIR_MINIMAL)/.configured:
+ifeq ($(ADK_LINUX_XTENSA),y)
+	tar xf $(TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
+		--strip-components=1 -C $(WRKSRC) gcc
+endif
 	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
 	# these symlinks are very important, do not remove
 	rm -rf $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/sys-include
@@ -198,8 +206,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 			--enable-languages=$(LANGUAGES) \
 			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
-			--enable-shared='libstdc++' \
-			--enable-cxx-flags='$(TARGET_CXXFLAGS)'
+			--enable-shared='libstdc++'
 	touch $@
 
 $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured

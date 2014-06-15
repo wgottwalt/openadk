@@ -1,6 +1,6 @@
-diff -Nur gcc-4.8.2.orig/gcc/config/m68k/linux.h gcc-4.8.2/gcc/config/m68k/linux.h
---- gcc-4.8.2.orig/gcc/config/m68k/linux.h	2013-01-10 21:38:27.000000000 +0100
-+++ gcc-4.8.2/gcc/config/m68k/linux.h	2014-02-24 10:19:00.214399704 +0100
+diff -Nur gcc-4.8.3.orig/gcc/config/m68k/linux.h gcc-4.8.3/gcc/config/m68k/linux.h
+--- gcc-4.8.3.orig/gcc/config/m68k/linux.h	2013-01-10 21:38:27.000000000 +0100
++++ gcc-4.8.3/gcc/config/m68k/linux.h	2014-06-01 08:57:42.139913658 +0200
 @@ -72,6 +72,7 @@
     done.  */
  
@@ -9,9 +9,9 @@ diff -Nur gcc-4.8.2.orig/gcc/config/m68k/linux.h gcc-4.8.2/gcc/config/m68k/linux
  
  #undef LINK_SPEC
  #define LINK_SPEC "-m m68kelf %{shared} \
-diff -Nur gcc-4.8.2.orig/gcc/config/mips/linux64.h gcc-4.8.2/gcc/config/mips/linux64.h
---- gcc-4.8.2.orig/gcc/config/mips/linux64.h	2013-01-10 21:38:27.000000000 +0100
-+++ gcc-4.8.2/gcc/config/mips/linux64.h	2014-02-24 10:19:47.238583895 +0100
+diff -Nur gcc-4.8.3.orig/gcc/config/mips/linux64.h gcc-4.8.3/gcc/config/mips/linux64.h
+--- gcc-4.8.3.orig/gcc/config/mips/linux64.h	2013-01-10 21:38:27.000000000 +0100
++++ gcc-4.8.3/gcc/config/mips/linux64.h	2014-06-01 08:57:42.139913658 +0200
 @@ -27,6 +27,9 @@
  #define GLIBC_DYNAMIC_LINKERN32 "/lib32/ld.so.1"
  #define UCLIBC_DYNAMIC_LINKERN32 "/lib32/ld-uClibc.so.0"
@@ -23,9 +23,9 @@ diff -Nur gcc-4.8.2.orig/gcc/config/mips/linux64.h gcc-4.8.2/gcc/config/mips/lin
    CHOOSE_DYNAMIC_LINKER (GLIBC_DYNAMIC_LINKERN32, UCLIBC_DYNAMIC_LINKERN32, \
 -			 BIONIC_DYNAMIC_LINKERN32)
 +			 BIONIC_DYNAMIC_LINKERN32, MUSL_DYNAMIC_LINKERN32)
-diff -Nur gcc-4.8.2.orig/gcc/config/sparc/linux64.h gcc-4.8.2/gcc/config/sparc/linux64.h
---- gcc-4.8.2.orig/gcc/config/sparc/linux64.h	2013-01-10 21:38:27.000000000 +0100
-+++ gcc-4.8.2/gcc/config/sparc/linux64.h	2014-02-24 10:20:49.414827006 +0100
+diff -Nur gcc-4.8.3.orig/gcc/config/sparc/linux64.h gcc-4.8.3/gcc/config/sparc/linux64.h
+--- gcc-4.8.3.orig/gcc/config/sparc/linux64.h	2013-01-10 21:38:27.000000000 +0100
++++ gcc-4.8.3/gcc/config/sparc/linux64.h	2014-06-01 08:57:42.139913658 +0200
 @@ -94,6 +94,9 @@
  
  #define GLIBC_DYNAMIC_LINKER32 "/lib/ld-linux.so.2"
@@ -36,9 +36,9 @@ diff -Nur gcc-4.8.2.orig/gcc/config/sparc/linux64.h gcc-4.8.2/gcc/config/sparc/l
  
  #ifdef SPARC_BI_ARCH
  
-diff -Nur gcc-4.8.2.orig/gcc/config/sparc/linux.h gcc-4.8.2/gcc/config/sparc/linux.h
---- gcc-4.8.2.orig/gcc/config/sparc/linux.h	2013-01-10 21:38:27.000000000 +0100
-+++ gcc-4.8.2/gcc/config/sparc/linux.h	2014-02-24 10:21:14.342924339 +0100
+diff -Nur gcc-4.8.3.orig/gcc/config/sparc/linux.h gcc-4.8.3/gcc/config/sparc/linux.h
+--- gcc-4.8.3.orig/gcc/config/sparc/linux.h	2013-01-10 21:38:27.000000000 +0100
++++ gcc-4.8.3/gcc/config/sparc/linux.h	2014-06-01 08:57:42.139913658 +0200
 @@ -84,6 +84,7 @@
     done.  */
  
@@ -47,3 +47,14 @@ diff -Nur gcc-4.8.2.orig/gcc/config/sparc/linux.h gcc-4.8.2/gcc/config/sparc/lin
  
  #undef  LINK_SPEC
  #define LINK_SPEC "-m elf32_sparc %{shared:-shared} \
+diff -Nur gcc-4.8.3.orig/gcc/config/xtensa/linux.h gcc-4.8.3/gcc/config/xtensa/linux.h
+--- gcc-4.8.3.orig/gcc/config/xtensa/linux.h	2013-01-10 21:38:27.000000000 +0100
++++ gcc-4.8.3/gcc/config/xtensa/linux.h	2014-06-01 08:58:39.740070402 +0200
+@@ -45,6 +45,7 @@
+   %{mno-longcalls:--no-longcalls}"
+ 
+ #define GLIBC_DYNAMIC_LINKER "/lib/ld.so.1"
++#define MUSL_DYNAMIC_LINKER "/lib/ld-musl-xtensa.so.1"
+ 
+ #undef LINK_SPEC
+ #define LINK_SPEC \

@@ -130,4 +130,4 @@ config ADK_TARGET_CPU_ARCH
 	default "sh4eb" if ADK_LINUX_SH && ADK_big
 	default "ppc" if ADK_CPU_PPC
 	default "ppc64" if ADK_CPU_PPC64
-
+	default "xtensa" if ADK_LINUX_XTENSA

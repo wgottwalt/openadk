@@ -9,6 +9,7 @@ config ADK_TARGET_LIB_GLIBC
 	prompt "GNU C library"
 	boolean
 	select ADK_glibc
+	depends on !ADK_LINUX_XTENSA
 	help
 	 http://www.gnu.org/libc
 

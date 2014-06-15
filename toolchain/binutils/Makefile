@@ -40,6 +40,10 @@ endif
 
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
+ifeq ($(ADK_LINUX_XTENSA),y)
+	tar xf $(TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
+		--strip-components=1 -C $(WRKSRC) binutils
+endif
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(TOOLCHAIN_DIR)/usr \
