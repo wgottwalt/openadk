@@ -29,7 +29,7 @@ CONFIGURE_ARGS+=	--disable-doc
 CONFIGURE_ENV+=		LIBS="-lncurses"
 
 pre-build:
-	$(MAKE) -C ${WRKBUILD}/kernel $(KERNEL_MODULE_FLAGS)
+	LDFLAGS="" $(MAKE) -C ${WRKBUILD}/kernel $(KERNEL_MODULE_FLAGS)
 
 exmap-install:
 	${INSTALL_DIR} ${IDIR_EXMAP}/etc/modules.d/
