@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
 PKG_VERSION:=		1.3.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		14783a148872f2d08629ff7c694eb31f
 PKG_DESCR:=		vp8/vp9 codec library
 PKG_SECTION:=		libs/video
@@ -14,7 +14,7 @@ PKG_SITES:=		https://webm.googlecode.com/files/
 PKG_OPTS:=		dev
 
 PKG_BUILDDEP_IBM_X40:=	yasm-host
-PKG_BUILDDEP_QEMU_I686:=yasm-host
+PKG_BUILDDEP_QEMU_X86:=	yasm-host
 PKG_ARCH_DEPENDS:=	!m68k
 
 DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}.tar.bz2
@@ -25,6 +25,9 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBVPX,libvpx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		minimal
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_XTENSA),y)
+CONFIGURE_ARGS+=	--target=generic-gnu
+endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
 endif
@@ -46,7 +49,7 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_INTEL_ATOM),y)
 CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
 endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_I686),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_X86),y)
 CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
 endif
 ifeq ($(ADK_TARGET_SYSTEM_PCENGINES_WRAP),y)
