@@ -3,14 +3,14 @@
 
 include ${TOPDIR}/rules.mk
 
-PKG_NAME:=		libusbx
-PKG_VERSION:=		1.0.16
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		7f5715d624cd6c26b30a317eb6c2fe5e
+PKG_NAME:=		libusb
+PKG_VERSION:=		1.0.19
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		f9e2bb5879968467e5ca756cb4e1fa7e
 PKG_DESCR:=		library for accessing usb devices
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://libusb.wiki.sourceforge.net/
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusbx/}
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libusb/}
 PKG_LIBNAME:=		libusb
 PKG_OPTS:=		dev
 
