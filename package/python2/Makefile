@@ -85,6 +85,8 @@ $(eval $(call PKG_mod_template,PYTHON2_MOD_NCURSES,_curses))
 $(eval $(call PKG_mod_template,PYTHON2_MOD_SSL,_ssl))
 $(eval $(call PKG_mod_template,PYTHON2_MOD_READLINE,readline))
 
+HOST_CFLAGS+=		-fPIC
+
 AUTOTOOL_STYLE:=	autoreconf
 MAKE_ENV+=		HOSTPGEN=$(STAGING_HOST_DIR)/usr/bin/pgen
 CONFIGURE_ENV+=         ac_cv_have_long_long_format=yes \
@@ -101,7 +103,6 @@ HOST_CONFIGURE_ARGS+=	--with-threads \
 			--disable-shared \
 			--disable-toolbox-glue \
 			--without-cxx-main
-CFLAGS_FOR_BUILD+=	-fPIC
 
 hostpre-configure:
 	$(CP) $(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py $(WRKBUILD)

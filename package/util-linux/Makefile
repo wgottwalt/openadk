@@ -57,6 +57,8 @@ $(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,LIBBLKID,libblkid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBBLKID},${PKGSC_LIBBLKID}))
 $(eval $(call PKG_template,LIBMOUNT,libmount,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBMOUNT},${PKGSC_LIBMOUNT}))
 
+TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ENV+=		have_scanf_alloc_modifier=yes \
 			scanf_cv_alloc_modifier=ms
 CONFIGURE_ARGS+=	--disable-use-tty-group \
@@ -72,7 +74,6 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--with-ncurses=$(STAGING_TARGET_DIR)/usr/include \
 			--libdir=/usr/lib
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
-TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK -ltinfo
 
 fdisk-install:
 	${INSTALL_DIR} ${IDIR_FDISK}/usr/sbin

@@ -57,8 +57,7 @@ $(CLIB)-fixup: gcc-install gdb-install
 		    $(MAKE_TRACE); \
 	else \
 		$(MAKE) -C $(patsubst %-prepare,%,$@) prepare \
-		    CC='$(CC_FOR_BUILD)' CFLAGS='$(CFLAGS_FOR_BUILD)' \
-		    $(MAKE_TRACE); \
+		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' $(MAKE_TRACE); \
 	fi
 
 %-configure: %-prepare
@@ -68,8 +67,7 @@ $(CLIB)-fixup: gcc-install gdb-install
 		    $(MAKE_TRACE); \
 	else \
 		$(MAKE) -C $(patsubst %-configure,%,$@) configure \
-		    CC='$(CC_FOR_BUILD)' CFLAGS='$(CFLAGS_FOR_BUILD)' \
-		    $(MAKE_TRACE); \
+		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' $(MAKE_TRACE); \
 	fi
 
 %-compile: %-configure
@@ -79,8 +77,7 @@ $(CLIB)-fixup: gcc-install gdb-install
 		    $(MAKE_TRACE); \
 	else \
 		$(MAKE) -C $(patsubst %-compile,%,$@) compile \
-		    CC='$(CC_FOR_BUILD)' CFLAGS='$(CFLAGS_FOR_BUILD)' \
-		    $(MAKE_TRACE); \
+		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' $(MAKE_TRACE); \
 	fi
 
 %-install: %-compile
@@ -90,8 +87,7 @@ $(CLIB)-fixup: gcc-install gdb-install
 		    $(MAKE_TRACE); \
 	else \
 		$(MAKE) -C $(patsubst %-install,%,$@) install \
-		    CC='$(CC_FOR_BUILD)' CFLAGS='$(CFLAGS_FOR_BUILD)' \
-		    $(MAKE_TRACE); \
+		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' $(MAKE_TRACE); \
 	fi
 
 %-fixup: %-install

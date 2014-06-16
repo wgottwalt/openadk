@@ -10,28 +10,18 @@ CONFIGURE_ARGS+=	--enable-debug
 endif
 endif
 
-AUTOTOOL_ENV+=		PATH='${AUTOTOOL_PATH}' \
-			AUTOM4TE='${STAGING_HOST_DIR}/usr/bin/autom4te' \
-			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
-			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q'
+AUTOTOOL_ENV+=		PATH='${HOST_PATH}' \
+			${COMMON_ENV}
 
 CONFIGURE_ENV+=		PATH='${TARGET_PATH}' \
-			GCC_HONOUR_COPTS=s \
-			AUTOM4TE=${STAGING_HOST_DIR}/usr/bin/autom4te \
-			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
-			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q' \
-			CONFIG_SHELL='$(strip ${SHELL})' \
-			CFLAGS='$(strip ${TARGET_CFLAGS})' \
-			CXXFLAGS='$(strip ${TARGET_CXXFLAGS})' \
-			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
-			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
+			${COMMON_ENV} \
+			${TARGET_ENV} \
 			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig:${STAGING_TARGET_DIR}/usr/share/pkgconfig' \
 			PKG_CONFIG_SYSROOT_DIR='${STAGING_TARGET_DIR}' \
+			GCC_HONOUR_COPTS=s \
 			ac_cv_func_realloc_0_nonnull=yes \
 			ac_cv_func_malloc_0_nonnull=yes \
-			cross_compiling=yes \
-			${HOST_CONFIGURE_OPTS} \
-			${TARGET_CONFIGURE_OPTS}
+			cross_compiling=yes
 
 CONFIGURE_PROG?=	configure
 MAKE_FILE?=		Makefile
@@ -46,20 +36,12 @@ FAKE_FLAGS?=
 ALL_TARGET?=		all
 INSTALL_TARGET?=	install
 
-MAKE_ENV+=		$(GCC_CHECK) \
-			PATH='${TARGET_PATH}' \
-			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q' \
-			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
+MAKE_ENV+=		PATH='${TARGET_PATH}' \
+			${COMMON_ENV} \
+			${TARGET_ENV} \
+			$(GCC_CHECK) \
 			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
-			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}' \
-			CFLAGS='$(strip ${TARGET_CFLAGS})' \
-			CXXFLAGS='$(strip ${TARGET_CXXFLAGS})' \
-			CPPFLAGS='$(strip ${TARGET_CPPFLAGS})' \
-			LDFLAGS='$(strip ${TARGET_LDFLAGS})' \
-			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig:${STAGING_TARGET_DIR}/usr/share/pkgconfig' \
-			PKG_CONFIG_SYSROOT_DIR='${STAGING_TARGET_DIR}' \
-			${HOST_CONFIGURE_OPTS} \
-			${TARGET_CONFIGURE_OPTS}
+			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}'
 
 MAKE_FLAGS+=		${XAKE_FLAGS} V=1
 FAKE_FLAGS+=		${XAKE_FLAGS}

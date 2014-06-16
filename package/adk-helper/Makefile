@@ -21,8 +21,8 @@ $(eval $(call HOST_template,ADK_HELPER,adk-helper,${PKG_VERSION}-${PKG_RELEASE})
 HOST_STYLE:=		manual
 
 host-build:
-	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -o ${WRKBUILD}/mkcrypt ${WRKBUILD}/mkcrypt.c
-	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -o ${WRKBUILD}/dkgetsz ${WRKBUILD}/dkgetsz.c
+	$(HOST_CC) $(HOST_CFLAGS) -o ${WRKBUILD}/mkcrypt ${WRKBUILD}/mkcrypt.c
+	$(HOST_CC) $(HOST_CFLAGS) -o ${WRKBUILD}/dkgetsz ${WRKBUILD}/dkgetsz.c
 
 adk-helper-hostinstall:
 	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/bin

@@ -82,7 +82,7 @@ include ${TOPDIR}/prereq.mk
 all: run-test
 
 test: test.c
-	${CC_FOR_BUILD} ${CFLAGS_FOR_BUILD} -o $@ $^ ${LDADD}
+	${HOST_CC} -o $@ $^ ${LDADD}
 
 run-test: test
 	./test

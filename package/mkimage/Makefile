@@ -22,7 +22,7 @@ $(eval $(call HOST_template,MKIMAGE,mkimage,$(PKG_VERSION)-${PKG_RELEASE}))
 HOST_STYLE:=		manual
 
 host-build:
-	$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -o ${WRKBUILD}/mkimage \
+	$(HOST_CC) $(HOST_CFLAGS) -o ${WRKBUILD}/mkimage \
 		${WRKBUILD}/mkimage.c ${WRKBUILD}/crc32.c
 
 mkimage-hostinstall:

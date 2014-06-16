@@ -201,8 +201,8 @@ NO_ERROR=0
 	    -e 's/mipsel-.*/mipsel/' \
 	    -e 's/i[3-9]86/x86/' \
 	    )" >>prereq.mk
-	@echo 'CC_FOR_BUILD:=${CC}' >>prereq.mk
-	@echo 'CXX_FOR_BUILD:=${CXX}' >>prereq.mk
+	@echo 'HOST_CC:=${CC}' >>prereq.mk
+	@echo 'HOST_CXX:=${CXX}' >>prereq.mk
 	@echo 'LANGUAGE:=C' >>prereq.mk
 	@echo 'LC_ALL:=C' >>prereq.mk
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk

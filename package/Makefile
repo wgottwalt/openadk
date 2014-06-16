@@ -55,7 +55,7 @@ endif
 
 %-compile:
 	$(START_TRACE) "package/$(patsubst %-compile,%,$@)-compile: "
-	if test -f $(TOPDIR)/.rebuild.$(patsubst %-compile,%,$@); then \
+	@if test -f $(TOPDIR)/.rebuild.$(patsubst %-compile,%,$@); then \
 		$(MAKE) -C $(patsubst %-compile,%,$@) clean ; \
 		rm $(TOPDIR)/.rebuild.$(patsubst %-compile,%,$@) ; \
 	fi

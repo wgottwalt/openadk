@@ -6,17 +6,13 @@ ifneq (,$(findstring host,$(MAKECMDGOALS)))
 WRKDIR?=		${HOST_BUILD_DIR}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}-host
 endif
 
-HOST_CONFIGURE_ENV+=	PATH='${HOST_PATH}' \
-			AUTOM4TE=${STAGING_HOST_DIR}/usr/bin/autom4te \
-			CONFIG_SHELL='$(strip ${SHELL})' \
+# this is environment for 'configure'
+HOST_CONFIGURE_ENV?=	PATH='${HOST_PATH}' \
+			${COMMON_ENV} \
+			${HOST_ENV} \
 			PKG_CONFIG_LIBDIR='${STAGING_HOST_DIR}/usr/lib/pkgconfig:${STAGING_HOST_DIR}/usr/share/pkgconfig' \
 			PKG_CONFIG_SYSROOT_DIR='${STAGING_HOST_DIR}' \
-			PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 \
-			CC='$(strip ${CC_FOR_BUILD})' \
-			CFLAGS='$(strip ${CFLAGS_FOR_BUILD})' \
-			CXXFLAGS='$(strip ${CXXFLAGS_FOR_BUILD})' \
-			CPPFLAGS='$(strip ${CPPFLAGS_FOR_BUILD})' \
-			LDFLAGS='$(strip ${LDFLAGS_FOR_BUILD})'
+			PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1
 
 # this is environment for 'make all' and 'make install'
 HOST_MAKE_ENV?=
@@ -30,14 +26,8 @@ HOST_ALL_TARGET?=	all
 HOST_INSTALL_TARGET?=	install
 
 HOST_MAKE_ENV+=		PATH='${HOST_PATH}' \
-			PKG_CONFIG_LIBDIR='${STAGING_HOST_DIR}/usr/lib/pkgconfig:${STAGING_HOST_DIR}/usr/share/pkgconfig' \
-			PKG_CONFIG_SYSROOT_DIR='${STAGING_HOST_DIR}' \
-			PKG_CONFIG_ALLOW_SYSTEM_CFLAGS=1 \
-			CC='$(strip ${CC_FOR_BUILD})' \
-			CFLAGS='$(strip ${CFLAGS_FOR_BUILD})' \
-			CXXFLAGS='$(strip ${CXXFLAGS_FOR_BUILD})' \
-			CPPFLAGS='$(strip ${CPPFLAGS_FOR_BUILD})' \
-			LDFLAGS='$(strip ${LDFLAGS_FOR_BUILD})'
+			${COMMON_ENV} \
+			${HOST_ENV}
 HOST_MAKE_FLAGS+=	${HOST_XAKE_FLAGS} V=1
 HOST_FAKE_FLAGS+=	${HOST_XAKE_FLAGS}
 
