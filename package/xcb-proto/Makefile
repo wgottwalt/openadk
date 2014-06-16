@@ -34,7 +34,6 @@ CONFIGURE_ENV+=		PYTHON=$(PYTHON)
 # pkg-config variables are not fixed up with sysroot
 hostpost-install:
 	$(SED) 's|^\(xcbincludedir=\)|\1$(STAGING_HOST_DIR)|' \
-		-e 's|^\(pythondir=\)|\1$(STAGING_HOST_DIR)|' \
 		$(STAGING_HOST_DIR)/usr/lib/pkgconfig/xcb-proto.pc
 
 post-build:
