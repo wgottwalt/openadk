@@ -29,7 +29,7 @@ $(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},$
 CONFIGURE_ENV+=		ac_cv_linux_vers=2
 CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
-			--with-build-cc=${CC_FOR_BUILD} \
+			--with-build-cc=${HOST_CC} \
 			--without-progs \
 			--disable-termcap \
 			--enable-symlinks \
@@ -58,7 +58,7 @@ INSTALL_TARGET:=	install.libs install.data
 HOST_ALL_TARGET:=	progs
 HOST_INSTALL_TARGET:=	install.includes install.progs
 HOST_CONFIGURE_ARGS+=	--without-shared \
-			--with-build-cc=${CC_FOR_BUILD} \
+			--with-build-cc=${HOST_CC} \
 			--with-progs \
 			--with-ticlib \
 			--disable-tic-depends \
