@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		util-macros
-PKG_VERSION:=		1.18.0
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		fd0ba21b3179703c071bbb4c3e5fb0f4
+PKG_VERSION:=		1.19.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		40e1caa49a71a26e0aa68ddd00203717
 PKG_DESCR:=		xorg macros
 PKG_SECTION:=		x11/misc
 PKG_URL:=		http://cgit.freedesktop.org/xorg/util/macros
