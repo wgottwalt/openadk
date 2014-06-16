@@ -1,7 +1,8 @@
 global:
 - projects dir idea
 - lowercase package conversion
-- AUTOTOOL_STYLE automatic adds autotool
+- autotool as default for host
+- usefulness of *.la files ( can be removed?)
 
 toolchain stuff:
 - config.site/config.cache usage for speedup?
