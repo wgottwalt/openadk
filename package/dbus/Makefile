@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
-PKG_VERSION:=		1.6.18
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		b02e9c95027a416987b81f9893831061
+PKG_VERSION:=		1.8.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		4717cb8ab5b80978fcadf2b4f2f72e1b
 PKG_DESCR:=		desktop bus daemon
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libdbus libexpat
@@ -33,9 +33,7 @@ CONFIGURE_ARGS+=	--disable-tests \
 			--disable-abstract-sockets \
 			--enable-checks \
 			--disable-verbose-mode \
-			--with-xml=expat \
 			--with-session-socket-dir=/var/tmp \
-			--disable-dnotify \
 			--disable-kqueue \
 			--disable-systemd \
 			--disable-xml-docs \
