@@ -26,6 +26,7 @@ $(eval $(call HOST_template,LIBXT,libxt,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBXT,libxt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
+HOST_STYLE:=		auto
 CONFIGURE_ENV+=		CFLAGS_FOR_BUILD="$(CPPFLAGS_FOR_BUILD) $(CFLAGS_FOR_BUILD)"
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 

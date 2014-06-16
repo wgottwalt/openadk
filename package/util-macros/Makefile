@@ -5,11 +5,10 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		util-macros
 PKG_VERSION:=		1.18.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		fd0ba21b3179703c071bbb4c3e5fb0f4
 PKG_DESCR:=		xorg macros
 PKG_SECTION:=		x11/misc
-PKG_BUILDDEP:=		autotool util-macros-host
 PKG_URL:=		http://cgit.freedesktop.org/xorg/util/macros
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/util/
 PKG_OPTS:=		dev devonly
@@ -22,7 +21,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,UTIL_MACROS,util-macros,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,UTIL_MACROS,util-macros,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-AUTOTOOL_STYLE:=	autoreconf
+HOST_STYLE:=		auto
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk

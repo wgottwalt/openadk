@@ -31,7 +31,11 @@ CONFIGURE_ARGS+=	--enable-xlocale \
 			--disable-specs \
 			--disable-xf86bigfont \
 			--disable-malloc0returnsnull
-HOST_CONFIGURE_ARGS+=	$(CONFIGURE_ARGS)
+HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--enable-xlocale \
+			--disable-specs \
+			--disable-xf86bigfont \
+			--disable-malloc0returnsnull
 
 libx11-install:
 	${INSTALL_DIR} ${IDIR_LIBX11}/usr/lib ${IDIR_LIBX11}/usr/share/X11

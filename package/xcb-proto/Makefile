@@ -27,12 +27,21 @@ $(eval $(call PKG_template,XCB_PYTHON,xcb-python,$(PKG_VERSION)-${PKG_RELEASE},$
 
 include $(TOPDIR)/mk/python.mk
 
+HOST_STYLE:=		auto
 CONFIGURE_ENV+=		PYTHON=$(PYTHON)
-CONFIGURE_ARGS+=	--datadir=${STAGING_TARGET_DIR}/usr/share
+
+# pkg-config variables are not fixed up with sysroot
+hostpost-install:
+	$(SED) 's|^\(xcbincludedir=\)|\1$(STAGING_HOST_DIR)|' \
+		-e 's|^\(pythondir=\)|\1$(STAGING_HOST_DIR)|' \
+		$(STAGING_HOST_DIR)/usr/lib/pkgconfig/xcb-proto.pc
 
 post-build:
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/share/xcb
 	${CP} ${WRKBUILD}/src/*.xml ${STAGING_TARGET_DIR}/usr/share/xcb
+	$(SED) 's|^\(xcbincludedir=\)|\1$(STAGING_TARGET_DIR)|' \
+		-e 's|^\(pythondir=\)|\1$(STAGING_TARGET_DIR)|' \
+		$(WRKBUILD)/xcb-proto.pc
 
 xcb-python-install:
 	$(INSTALL_DIR) ${STAGING_TARGET_DIR}/usr/lib/python${PYTHON_VERSION}/site-packages/xcbgen

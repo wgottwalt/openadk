@@ -23,6 +23,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBXI,libxi,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBXI,libxi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},$(PKG_OPTS)))
 
+HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
 libxi-install:

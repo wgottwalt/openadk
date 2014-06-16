@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
 PKG_VERSION:=		2.4.7
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_MD5SUM:=		f6b28633b9978fadc724247cfc264ff0
 PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
@@ -14,7 +14,7 @@ PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst
 PKG_BUILDDEP+=		libpng giflib gtk+ glib fontconfig nss
 HOST_BUILDDEP:=		fastjar-host gcj-host ecj-host classpath-host jamvm-host
 HOST_BUILDDEP+=		jikes-host ant-host libXtst-host libXt-host libXinerama-host
-HOST_BUILDDEP+=		cups-host qemu-host alsa-lib-host
+HOST_BUILDDEP+=		cups-host qemu-host alsa-lib-host freetype-host
 PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi cups
 PKG_DEPENDS+=		libfreetype libxrender libx11 libxext libpthread nss libjpeg-turbo
 PKG_DEPENDS+=		libpng giflib libgtk glib fontconfig
@@ -28,7 +28,7 @@ GCJ_VER:=		4.8.2
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc glibc musl
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
@@ -109,26 +109,25 @@ OPENJDK_NATIVE_ENV:=	JAVACFLAGS="-cp ${STAGING_HOST_DIR}/usr/share/java/libgcj-$
 HOST_CONFIGURE_ENV+=	$(OPENJDK_NATIVE_ENV)
 HOST_MAKE_ENV+=		$(OPENJDK_NATIVE_ENV)
 HOST_ALL_TARGET:=	icedtea-boot
-HOST_CONFIGURE_ARGS+=\
-		--enable-bootstrap \
-		--enable-zero \
-		--with-jdk-home=$(STAGING_HOST_DIR)/usr/lib/jvm \
-		--with-java=$(STAGING_HOST_DIR)/usr/bin/hostjava \
-		--with-javac=$(STAGING_HOST_DIR)/usr/bin/ecj \
-		--with-ecj-jar=${DL_DIR}/ecj-4.9.jar \
-		--without-hotspot-build \
-                --disable-system-zlib \
-                --disable-system-jpeg \
-                --disable-system-lcms \
-                --disable-system-png \
-                --disable-system-gif \
-                --disable-system-gtk \
-                --disable-system-gio \
-                --disable-system-kerberos \
-                --disable-system-fontconfig \
-                --disable-compile-against-syscalls \
-		--without-rhino \
-		--disable-docs
+HOST_CONFIGURE_ARGS+=	--enable-bootstrap \
+			--enable-zero \
+			--with-jdk-home=$(STAGING_HOST_DIR)/usr/lib/jvm \
+			--with-java=$(STAGING_HOST_DIR)/usr/bin/hostjava \
+			--with-javac=$(STAGING_HOST_DIR)/usr/bin/ecj \
+			--with-ecj-jar=${DL_DIR}/ecj-4.9.jar \
+			--without-hotspot-build \
+                	--disable-system-zlib \
+                	--disable-system-jpeg \
+                	--disable-system-lcms \
+                	--disable-system-png \
+                	--disable-system-gif \
+                	--disable-system-gtk \
+                	--disable-system-gio \
+                	--disable-system-kerberos \
+                	--disable-system-fontconfig \
+                	--disable-compile-against-syscalls \
+			--without-rhino \
+			--disable-docs
 
 hostpost-install:
 	-rm -rf $(STAGING_HOST_DIR)/bootstrap-jdk

@@ -10,7 +10,7 @@ PKG_MD5SUM:=		cafe9f210e45360279c730d27bf071e9
 PKG_DESCR:=		free, high-quality and portable font engine
 PKG_SECTION:=		libs/fonts
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP:=		zlib freetype-host
+PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://www.freetype.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freetype/}
 PKG_LIBNAME:=		libfreetype
@@ -24,6 +24,7 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,LIBFREETYPE,libfreetype,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBFREETYPE,libfreetype,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--with-zlib \
 			--without-png \
 			--without-bzip2

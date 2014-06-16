@@ -27,6 +27,7 @@ HOST_LINUX_ONLY:=	1
 endif
 
 TARGET_CPPFLAGS+=	-D_POSIX_C_SOURCE=1
+HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--disable-python
 
 alsa-lib-install:

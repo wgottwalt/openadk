@@ -23,6 +23,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBXAU,libxau,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBXAU,libxau,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+HOST_STYLE:=		auto
+
 libxau-install:
 	${INSTALL_DIR} ${IDIR_LIBXAU}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libXau.so* ${IDIR_LIBXAU}/usr/lib/

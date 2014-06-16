@@ -25,6 +25,7 @@ $(eval $(call PKG_template,LIBXCB,libxcb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 
 include $(TOPDIR)/mk/python.mk
 
+HOST_STYLE:=		auto
 CONFIGURE_ENV+=		PYTHON=$(PYTHON)
 
 libxcb-install:

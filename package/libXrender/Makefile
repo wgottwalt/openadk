@@ -24,6 +24,7 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBXRENDER,libxrender,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBXRENDER,libxrender,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+HOST_STYLE:=		auto
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
 libxrender-install:
