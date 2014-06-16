@@ -1,6 +1,43 @@
---- xbmc-13.1rc1.orig/Makefile.in	2014-05-28 15:30:25.000000000 +0200
-+++ xbmc-13.1rc1/Makefile.in	2014-05-28 16:05:22.772629085 +0200
-@@ -586,25 +586,7 @@ install-arch:
+--- xbmc-13.1.orig/Makefile.in	2014-06-08 08:40:24.000000000 +0200
++++ xbmc-13.1/Makefile.in	2014-06-09 11:14:17.917685925 +0200
+@@ -191,13 +191,7 @@ ifeq (@USE_LIBAV_HACKS@,1)
+ DIRECTORY_ARCHIVES += lib/xbmc-libav-hacks/dll-libavhacks.a
+ endif
+ 
+-PAPCODECS_DIRS= \
+-	lib/nosefart \
+-	lib/timidity \
+-	lib/libsidplay2 \
+-	lib/stsound/StSoundLibrary \
+-	lib/snesapu/SNES/SNESAPU \
+-	lib/vgmstream
++PAPCODECS_DIRS=
+ 
+ ifeq (@USE_ASAP_CODEC@,1)
+ PAPCODECS_DIRS+= \
+@@ -419,21 +413,11 @@ libhdhomerun: dllloader
+ 	$(MAKE) -C lib/libhdhomerun
+ papcodecs: dllloader dvdpcodecs
+ 	test -d system/players/paplayer || mkdir system/players/paplayer
+-	$(MAKE) -C lib/vgmstream
+-	$(MAKE) -C lib/timidity
+-	$(MAKE) -C lib/nosefart
+-ifneq ($(findstring arm-osx,@ARCH@), arm-osx)
+-	$(MAKE) -C lib/libsidplay2
+-endif
+ ifeq (@USE_ASAP_CODEC@,1)
+   ifneq ($(findstring osx,@ARCH@), osx)
+ 	$(MAKE) -C lib/asap asap-xbmc
+   endif
+ endif
+-	$(MAKE) -C lib/stsound/StSoundLibrary
+-ifeq ($(or $(findstring powerpc,@ARCH@),$(findstring x86_64-linux,@ARCH@),$(findstring arm, @ARCH@),$(findstring freebsd,@ARCH@)),)
+-	$(MAKE) -C lib/snesapu/SNES/SNESAPU
+-endif
+ imagelib: dllloader
+ 	$(MAKE) -C lib/cximage-6.0
+ 
+@@ -586,25 +570,7 @@ install-arch:
  ifeq (@USE_PVR_ADDONS@,1)
  	$(MAKE) -C pvr-addons install
  endif
@@ -26,7 +63,7 @@
  
  install-scripts:
  	@install -d $(DESTDIR)$(bindir)
-@@ -624,26 +606,7 @@ install-datas: install-scripts
+@@ -624,26 +590,7 @@ install-datas: install-scripts
  	@echo "Done!"
  	@echo "Copying system files to $(DESTDIR)$(datarootdir)/xbmc"
  	@install -d $(DESTDIR)$(datarootdir)/xbmc
@@ -52,4 +89,4 @@
 -endif
  	@# Icons and links
  	@install -d $(DESTDIR)$(datarootdir)/applications
- 	@install tools/Linux/xbmc.desktop $(DESTDIR)$(datarootdir)/applications/xbmc.desktop
+ 	@install -m 0644 tools/Linux/xbmc.desktop $(DESTDIR)$(datarootdir)/applications/xbmc.desktop

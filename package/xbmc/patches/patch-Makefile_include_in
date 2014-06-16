@@ -1,5 +1,5 @@
---- xbmc-24032014.orig/Makefile.include.in	2014-03-24 15:52:26.000000000 +0100
-+++ xbmc-24032014/Makefile.include.in	2014-03-25 10:05:01.625705714 +0100
+--- xbmc-13.1.orig/Makefile.include.in	2014-06-08 08:40:24.000000000 +0200
++++ xbmc-13.1/Makefile.include.in	2014-06-11 13:17:49.354722974 +0200
 @@ -37,6 +37,7 @@ CFLAGS+=@CFLAGS@
  CFLAGS_FOR_BUILD+=@CFLAGS_FOR_BUILD@
  LDFLAGS+=@LDFLAGS@
