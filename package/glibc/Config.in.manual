@@ -7,3 +7,12 @@ config ADK_PACKAGE_GLIBC
 	select ADK_PACKAGE_TZDATA
 	help
 	  GNU C library.
+
+config ADK_PACKAGE_GLIBC_GCONV
+	prompt "glibc-gconv.............. gconv libraries"
+	bool
+	default y if ADK_TARGET_LIB_GLIBC && !ADK_TOOLCHAIN_ONLY
+	default n
+	depends on ADK_TARGET_LIB_GLIBC
+	help
+	  gconv libraries, required for iconv_open.

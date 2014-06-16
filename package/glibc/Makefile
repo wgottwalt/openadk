@@ -10,7 +10,10 @@ PKG_NAME:=		glibc
 PKG_DESCR:=		gnu c library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
-PKG_SUBPKGS:=		GLIBC GLIBC_DEV
+PKG_SUBPKGS:=		GLIBC GLIBC_DEV GLIBC_GCONV
+
+PKGSD_GLIBC_GCONV:=	gconv libraries used at runtime
+PKGSS_GLIBC_GCONV:=	glibc
 
 NO_DISTFILES:=		1
 
@@ -18,6 +21,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,GLIBC_GCONV,glibc-gconv,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_GLIBC_GCONV},${PKGSD_GLIBC_GCONV},${PKG_SECTION}))
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
@@ -40,6 +44,11 @@ endif
 	${INSTALL_DIR} ${IDIR_GLIBC}/etc
 	${INSTALL_DATA} ${STAGING_TARGET_DIR}/etc/gai.conf ${IDIR_GLIBC}/etc
 	${INSTALL_DATA} ./files/nsswitch.conf ${IDIR_GLIBC}/etc
+
+glibc-gconv-install:
+	${INSTALL_DIR} $(IDIR_GLIBC_GCONV)/usr/lib/gconv
+	$(CP) ${STAGING_TARGET_DIR}/usr/lib/gconv/*.so \
+		$(IDIR_GLIBC_GCONV)/usr/lib/gconv
 
 glibc-dev-install:
 	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH) $(IDIR_GLIBC_DEV)/usr/lib
