@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		libtorrent
 PKG_VERSION:=		0.13.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		e82f380a9d4b55b379e0e73339c73895
 PKG_DESCR:=		bittorrent library
 PKG_SECTION:=		libs/net
@@ -23,7 +23,8 @@ $(eval $(call PKG_template,LIBTORRENT,libtorrent,${PKG_VERSION}-${PKG_RELEASE},$
 
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--enable-aligned \
-			--without-kqueue
+			--without-kqueue \
+			--disable-instrumentation
 
 libtorrent-install:
 	${INSTALL_DIR} ${IDIR_LIBTORRENT}/usr/lib
