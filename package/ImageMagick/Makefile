@@ -11,7 +11,7 @@ PKG_MD5SUM:=		8134257e3fbb43cc06fb32a6d725d3d0
 PKG_DESCR:=		image processing and converting utility
 PKG_SECTION:=		mm/image
 PKG_DEPENDS:=		libstdcxx
-PKG_BUILDDEP:=		libpng libjpeg-turbo libtiff fontconfig libiconv-tiny
+PKG_BUILDDEP:=		libpng libjpeg-turbo libtiff fontconfig
 PKG_BUILDDEP+=		pango libtool e2fsprogs
 PKG_URL:=		http://www.imagemagick.org/
 PKG_SITES:=		http://image_magick.veidrodis.com/image_magick/
@@ -19,6 +19,7 @@ PKG_LIBNAME:=		libimagemagick
 PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	!m68k
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 PKG_SUBPKGS:=		CONVERT DISPLAY LIBIMAGEMAGICK
 PKGSD_LIBIMAGEMAGICK:=	imagemagick library

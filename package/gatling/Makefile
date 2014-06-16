@@ -9,10 +9,11 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a0fb49ccb6b910bdbd7e76a9960394e3
 PKG_DESCR:=		small non-forking webserver
 PKG_SECTION:=		net/http
-PKG_BUILDDEP:=		libowfat libiconv-tiny
+PKG_BUILDDEP:=		libowfat
 PKG_URL:=		http://www.fefe.de/gatling/
 PKG_SITES:=		http://dl.fefe.de/
 
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 DISTFILES=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${TOPDIR}/mk/package.mk

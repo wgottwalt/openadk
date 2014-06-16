@@ -10,7 +10,7 @@ PKG_MD5SUM:=		17fe81c30fe0f785b2100ebadb3dc580
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		dev/scm
 PKG_DEPENDS:=		zlib apr apr-util libexpat libsqlite neon
-PKG_BUILDDEP:=		apr-util expat apr zlib libiconv-tiny sqlite neon
+PKG_BUILDDEP:=		apr-util expat apr zlib sqlite neon
 PKG_URL:=		http://subversion.apache.org/
 PKG_SITES:=		http://artfiles.org/apache.org/subversion/
 

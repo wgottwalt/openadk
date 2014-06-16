@@ -10,10 +10,11 @@ PKG_MD5SUM:=		4d00c6e09859b653f955b16b988db0ac
 PKG_DESCR:=		irc gateway to im chat networks
 PKG_SECTION:=		app/chat
 PKG_DEPENDS:=		glib libopenssl
-PKG_BUILDDEP:=		glib libiconv-tiny openssl
+PKG_BUILDDEP:=		glib openssl
 PKG_URL:=		http://www.bitlbee.org/
 PKG_SITES:=		http://get.bitlbee.org/src/
 
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk

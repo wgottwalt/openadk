@@ -9,9 +9,10 @@ PKG_RELEASE:=		5
 PKG_MD5SUM:=		45012f5f56f2aae3afcd62120b9e5a08
 PKG_DESCR:=		utilities to create and check FAT filesystems
 PKG_SECTION:=		sys/fs
-PKG_BUILDDEP:=		libiconv-tiny
 PKG_URL:=		http://www.daniel-baumann.ch/software/dosfstools/
 PKG_SITES:=		http://daniel-baumann.ch/files/software/dosfstools/
+
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 include ${TOPDIR}/mk/package.mk
 

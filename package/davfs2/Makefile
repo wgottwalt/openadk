@@ -10,11 +10,12 @@ PKG_MD5SUM:=		c75f9d7d260e7364362b89beba2b3186
 PKG_DESCR:=		webdav filesystem
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		fuse-utils neon
-PKG_BUILDDEP:=		libiconv-tiny neon fuse
+PKG_BUILDDEP:=		neon fuse
 PKG_URL:=		http://savannah.nongnu.org/projects/davfs2/
 PKG_SITES:=		http://download.savannah.gnu.org/releases/davfs2/
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

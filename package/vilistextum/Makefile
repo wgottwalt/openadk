@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=            5ba56ffdc56758da716bb46c3e0f517e
 PKG_DESCR:=		html to ascii converter
 PKG_SECTION:=		net/mail
-PKG_BUILDDEP:=		libiconv-tiny
 PKG_SITES:=		http://bhaak.dyndns.org/${PKG_NAME}/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

@@ -9,11 +9,12 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		94aee3ced558c2a354547083735f2ba7
 PKG_DESCR:=		mail filter software
 PKG_SECTION:=		net/mail
-PKG_BUILDDEP:=		libiconv-tiny db
+PKG_BUILDDEP:=		db
 PKG_DEPENDS:=		libdb libstdcxx
 PKG_URL:=		http://bogofilter.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bogofilter/}
 
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${TOPDIR}/mk/package.mk

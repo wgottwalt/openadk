@@ -10,7 +10,7 @@ PKG_MD5SUM:=		19f27ddd2dda4b2d26a559a4f0f402a7
 PKG_DESCR:=		id3 tagging library
 PKG_SECTION:=		libs/audio
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP:=		zlib libiconv-tiny
+PKG_BUILDDEP:=		zlib
 PKG_URL:=		http://id3lib.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=id3lib/}
 PKG_CXX:=		ID3LIB

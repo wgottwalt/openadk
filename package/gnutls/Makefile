@@ -10,12 +10,14 @@ PKG_MD5SUM:=		908dc1e98e28cb1c2c255a71785a4af2
 PKG_DESCR:=		transport layer security library
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib libnettle libgmp
-PKG_BUILDDEP:=		libiconv-tiny libgcrypt liblzo libtasn1 
+PKG_BUILDDEP:=		libgcrypt liblzo libtasn1 
 PKG_BUILDDEP+=		zlib ncurses libnettle
 PKG_URL:=		http://www.gnutls.org/
 PKG_SITES:=		ftp://ftp.gnutls.org/gcrypt/gnutls/v3.3/
 PKG_LIBNAME:=		libgnutls
 PKG_OPTS:=		dev
+
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 PKG_SUBPKGS:=		LIBGNUTLS GNUTLS_UTILS LIBGNUTLS_EXTRA LIBGNUTLS_OPENSSL
 PKGSD_GNUTLS_UTILS:=	transport layer security utilities

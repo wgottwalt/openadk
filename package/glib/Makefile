@@ -11,12 +11,14 @@ PKG_MD5SUM:=		26d1d08e478fc48c181ca8be44f5b69f
 PKG_DESCR:=		low-level core library that forms the basis of gtk+
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpthread
-PKG_BUILDDEP:=		glib-host libffi gettext-tiny libiconv-tiny zlib libelf dbus
-HOST_BUILDDEP:=		libffi-host gettext-tiny-host libiconv-tiny-host python2-host
+PKG_BUILDDEP:=		glib-host libffi gettext-tiny zlib libelf dbus
+HOST_BUILDDEP:=		libffi-host gettext-tiny-host python2-host
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_EXTRAVER}/
 PKG_NOPARALLEL:=	1
 PKG_OPTS:=		dev noscripts
+
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 include ${TOPDIR}/mk/host.mk
 include ${TOPDIR}/mk/package.mk

@@ -10,13 +10,13 @@ PKG_MD5SUM:=		33cae22ca50311446400daf8a6255c6a
 PKG_DESCR:=		filesystem in userspace utility
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libfuse
-PKG_BUILDDEP:=		libiconv-tiny
 PKG_URL:=		http://fuse.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
 PKG_LIBNAME:=		libfuse
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 PKG_SUBPKGS:=		FUSE_UTILS LIBFUSE
 PKGSD_LIBFUSE:=		filesystem in userspace library

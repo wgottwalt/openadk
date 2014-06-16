@@ -11,12 +11,13 @@ PKG_DESCR:=		small graphical web browser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libfltk libxi libpng zlib libjpeg-turbo
 PKG_DEPENDS+=		libstdcxx libpthread libopenssl
-PKG_BUILDDEP:=		fltk libXi libiconv-tiny libjpeg-turbo libpng zlib openssl
+PKG_BUILDDEP:=		fltk libXi libjpeg-turbo libpng zlib openssl
 PKG_URL:=		http://www.dillo.org/
 PKG_SITES:=		http://www.dillo.org/download/
 
 PKG_HOST_DEPENDS:=	!cygwin
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips arm
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

@@ -10,7 +10,7 @@ PKG_MD5SUM:=		c422de386331e2a1a859d45f6fa270a3
 PKG_DESCR:=		media server
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		id3lib libupnp libmagic
-PKG_BUILDDEP:=		id3lib libupnp file libiconv-tiny
+PKG_BUILDDEP:=		id3lib libupnp file
 PKG_URL:=		http://www.gnu.org/software/gmediaserver
 PKG_SITES:=		http://savannah.nongnu.org/download/gmediaserver/
 PKG_CXX:=		GMEDIASERVER
@@ -18,6 +18,7 @@ PKG_CXX:=		GMEDIASERVER
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 include ${TOPDIR}/mk/package.mk
 

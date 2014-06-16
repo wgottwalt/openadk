@@ -8,8 +8,10 @@ PKG_NAME:=		gdb
 PKG_DESCR:=		programm debugger
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libthread-db libncurses libexpat zlib
-PKG_BUILDDEP:=		ncurses readline libiconv-tiny expat zlib
+PKG_BUILDDEP:=		ncurses readline expat zlib
 PKG_NOPARALLEL:=	1
+
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 include ${TOPDIR}/mk/package.mk
 

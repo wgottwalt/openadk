@@ -9,7 +9,6 @@ PKG_RELEASE:=		4
 PKG_MD5SUM:=		3743beefa3dd6247a73f8f7a32c14c33
 PKG_DESCR:=		command line option parsing library
 PKG_SECTION:=		libs/misc
-PKG_BUILDDEP:=		libiconv-tiny
 PKG_URL:=		http://rpm5.org/
 PKG_SITES:=		http://rpm5.org/files/popt/
 PKG_LIBNAME:=		libpopt
@@ -20,8 +19,6 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBPOPT,libpopt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-TARGET_LDFLAGS+=	-liconv
 
 libpopt-install:
 	${INSTALL_DIR} ${IDIR_LIBPOPT}/usr/lib

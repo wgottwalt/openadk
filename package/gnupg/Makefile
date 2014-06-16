@@ -10,10 +10,11 @@ PKG_MD5SUM:=		3d46439c5ba304dd2cfc9070a5ce1338
 PKG_DESCR:=		gnu privacy guard
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libreadline
-PKG_BUILDDEP:=		readline libiconv-tiny
+PKG_BUILDDEP:=		readline
 PKG_URL:=		http://www.gnupg.org/
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/gnupg/
 
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
  
 include ${TOPDIR}/mk/package.mk
