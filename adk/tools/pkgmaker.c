@@ -327,7 +327,7 @@ int main() {
 	char dir[MAXPATH];
 	char variable[2*MAXVAR];
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
-	char *pkg_name, *pkg_depends, *pkg_depends_system, *pkg_section, *pkg_descr, *pkg_url;
+	char *pkg_name, *pkg_depends, *pkg_depends_system, *pkg_depends_libc, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt;
 	char *pkgname, *sysname, *pkg_debug, *pkg_bb;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
@@ -343,6 +343,7 @@ int main() {
 	pkg_url = NULL;
 	pkg_depends = NULL;
 	pkg_depends_system = NULL;
+	pkg_depends_libc = NULL;
 	pkg_opts = NULL;
 	pkg_libname = NULL;
 	pkg_flavours = NULL;
@@ -566,6 +567,8 @@ int main() {
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
 						continue;
 					if ((parse_var_with_system(buf, "PKG_DEPENDS_", pkg_depends_system, &pkg_depends_system, &sysname, 12)) == 0)
+						continue;
+					if ((parse_var_with_system(buf, "PKG_DEPENDS_", pkg_depends_libc, &pkg_depends_libc, &sysname, 12)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_LIBNAME", pkg_libname, &pkg_libname)) == 0) 
 						continue;
@@ -896,6 +899,16 @@ int main() {
 					}
 					free(pkg_depends_system);
 					pkg_depends_system = NULL;
+				}
+				/* create libc specific package dependency information */
+				if (pkg_depends_libc != NULL) {
+					token = strtok(pkg_depends_libc, " ");
+					while (token != NULL) {
+						fprintf(cfg, "\tselect ADK_PACKAGE_%s if ADK_TARGET_LIB_%s\n", toupperstr(token), sysname);
+						token = strtok(NULL, " ");
+					}
+					free(pkg_depends_libc);
+					pkg_depends_libc = NULL;
 				}
 
 				if (pkg_bb != NULL) {

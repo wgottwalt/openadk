@@ -84,20 +84,26 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 			perror("Can not allocate memory.");
 			exit(EXIT_FAILURE);
 		}
-		if (system == 0) {
-			if (pprefix == 0) {
-				if (snprintf(key_sym, MAXLINE, "ADK_PACKAGE_%s_", pkgvar) < 0)
+		switch(system) {
+			case 0:
+				if (pprefix == 0) {
+					if (snprintf(key_sym, MAXLINE, "ADK_PACKAGE_%s_", pkgvar) < 0)
+						perror("Can not create string variable.");
+				} else {
+					if (snprintf(key_sym, MAXLINE, "ADK_PACKAGE_") < 0)
+						perror("Can not create string variable.");
+				}
+				strncat(key_sym, key+6, strlen(key)-6);
+				break;
+			case 1:
+				if (snprintf(key_sym, MAXLINE, "ADK_TARGET_SYSTEM_%s", pkgvar) < 0)
 					perror("Can not create string variable.");
-			} else {
-				if (snprintf(key_sym, MAXLINE, "ADK_PACKAGE_") < 0)
+				break;
+			case 2:
+				if (snprintf(key_sym, MAXLINE, "ADK_TARGET_LIB_%s", pkgvar) < 0)
 					perror("Can not create string variable.");
-			}
-			strncat(key_sym, key+6, strlen(key)-6);
-		} else {
-			if (snprintf(key_sym, MAXLINE, "ADK_TARGET_SYSTEM_%s", pkgvar) < 0)
-					perror("Can not create string variable.");
+				break;
 		}
-			
 		if (check_symbol(key_sym) != 0) {
 			free(key_sym);
 			return(NULL);
@@ -213,7 +219,7 @@ int main() {
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
 
-					// We need to find the system name here
+					// We need to find the system or libc name here
 					string = strstr(buf, "PKG_BUILDDEP_");
 					if (string != NULL) {
 						check = strstr(buf, ":=");
@@ -222,7 +228,11 @@ int main() {
 							string[strlen(string)-1] = '\0';
 							key = strtok(string, ":=");
 							dpkg = strdup(key+13);
-							tmp = parse_line(pkgdirp->d_name, dpkg, stringtmp, 1, 0, 1, &prefix);
+							if (strncmp("UCLIBC", dpkg, 6) == 0) {
+								tmp = parse_line(pkgdirp->d_name, dpkg, stringtmp, 1, 0, 2, &prefix);
+							} else {
+								tmp = parse_line(pkgdirp->d_name, dpkg, stringtmp, 1, 0, 1, &prefix);
+							}
 							if (tmp != NULL)
 								strncat(pkgdeps, tmp, strlen(tmp));
 						}
