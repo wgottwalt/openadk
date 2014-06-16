@@ -53,6 +53,13 @@ else ifneq ($(filter minimal,${CONFIG_STYLE}),)
 	    env ${CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
 	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
+else ifneq ($(filter perl,${CONFIG_STYLE}),)
+	@$(CMD_TRACE) "configuring perl module... "
+	cd ${WRKBUILD}; \
+		PATH='${HOST_PATH}' \
+		PERL_MM_USE_DEFAULT=1 \
+		PERL_AUTOINSTALL=--skipdeps \
+		perl Makefile.PL $(PERL_ENV)
 else ifeq ($(strip ${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring... "
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
