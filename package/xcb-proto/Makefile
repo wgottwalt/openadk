@@ -9,7 +9,8 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		xml-xcb protocol descriptions
 PKG_SECTION:=		dev/header
 PKG_MD5SUM:=		2b9dc6442156aba2bfb4133cb9d7cf46
-PKG_BUILDDEP:=		autotool bzip2-host python2-host xcb-proto-host
+PKG_BUILDDEP:=		autotool
+HOST_BUILDDEP:=		python2-host
 PKG_SITES:=		http://xcb.freedesktop.org/dist/
 PKG_OPTS:=		dev devonly
 
@@ -40,7 +41,6 @@ post-build:
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/share/xcb
 	${CP} ${WRKBUILD}/src/*.xml ${STAGING_TARGET_DIR}/usr/share/xcb
 	$(SED) 's|^\(xcbincludedir=\)|\1$(STAGING_TARGET_DIR)|' \
-		-e 's|^\(pythondir=\)|\1$(STAGING_TARGET_DIR)|' \
 		$(WRKBUILD)/xcb-proto.pc
 
 xcb-python-install:

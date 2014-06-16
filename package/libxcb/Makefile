@@ -9,9 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a484793fbfb974b09d54fa1ebf44b2e4
 PKG_DESCR:=		interface to the x window system protocol
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		libXau-host libpthread-stubs-host xcb-proto-host
-PKG_BUILDDEP+=		libxcb-host
 PKG_BUILDDEP+=		python2 libpthread-stubs libxslt libXau xcb-proto
+HOST_BUILDDEP:=		libXau-host libpthread-stubs-host xcb-proto-host
 PKG_SITES:=		http://xcb.freedesktop.org/dist/
 PKG_OPTS:=		dev
 
