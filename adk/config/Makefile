@@ -6,31 +6,31 @@ include ${TOPDIR}/rules.mk
 endif
 
 CP=cp -fpR
-CFLAGS_FOR_BUILD:=-DKBUILD_NO_NLS -O0 -g0 -w
+HOST_CFLAGS:=-DKBUILD_NO_NLS -O0 -g0 -w
 
 all: ncurses conf mconf
 
 LIBS=		-lncurses
 ifeq (/usr/include/ncurses/ncurses.h, $(wildcard /usr/include/ncurses/ncurses.h))
-CFLAGS_FOR_BUILD+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
+HOST_CFLAGS+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
 else
 ifeq (/usr/include/ncurses/curses.h, $(wildcard /usr/include/ncurses/curses.h))
-CFLAGS_FOR_BUILD+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
+HOST_CFLAGS+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
 else
 ifeq (/usr/local/include/ncurses/ncurses.h, $(wildcard /usr/local/include/ncurses/ncurses.h))
-CFLAGS_FOR_BUILD+=	-I/usr/local/include/ncurses -DCURSES_LOC="<ncurses.h>"
+HOST_CFLAGS+=	-I/usr/local/include/ncurses -DCURSES_LOC="<ncurses.h>"
 else
 ifeq (/usr/local/include/ncurses/curses.h, $(wildcard /usr/local/include/ncurses/curses.h))
-CFLAGS_FOR_BUILD+=	-I/usr/local/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
+HOST_CFLAGS+=	-I/usr/local/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
 else
 ifeq (/usr/pkg/include/ncurses.h, $(wildcard /usr/pkg/include/ncurses.h))
-CFLAGS_FOR_BUILD+=	-I/usr/pkg/include -DCURSES_LOC="<ncurses.h>"
+HOST_CFLAGS+=	-I/usr/pkg/include -DCURSES_LOC="<ncurses.h>"
 LIBS+=		-L/usr/pkg/lib -Wl,-rpath -Wl,/usr/pkg/lib
 else
 ifeq (/usr/include/ncurses.h, $(wildcard /usr/include/ncurses.h))
-CFLAGS_FOR_BUILD+=	-DCURSES_LOC="<ncurses.h>"
+HOST_CFLAGS+=	-DCURSES_LOC="<ncurses.h>"
 else
-CFLAGS_FOR_BUILD+=	-DCURSES_LOC="<curses.h>"
+HOST_CFLAGS+=	-DCURSES_LOC="<curses.h>"
 LIBS=		-lcurses
 endif
 endif
@@ -48,19 +48,19 @@ MCONF_OBJS=$(patsubst %.c,%.o, $(MCONF_SRC))
 SHARED_OBJS=$(patsubst %.c,%.o, $(SHARED_SRC))
 
 conf: $(CONF_OBJS) $(SHARED_OBJS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $^ -o $@
+	@$(HOST_CC) $(HOST_CFLAGS) $^ -o $@
 
 mconf: $(MCONF_OBJS) $(SHARED_OBJS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) $^ -o $@ $(LIBS)
+	@$(HOST_CC) $(HOST_CFLAGS) $^ -o $@ $(LIBS)
 
 $(CONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
+	@$(HOST_CC) $(HOST_CFLAGS) -I. -c $< -o $@
 
 $(MCONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
+	@$(HOST_CC) $(HOST_CFLAGS) -I. -c $< -o $@
 
 glob.o: glob.c $(SHARED_DEPS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c glob.c -o $@
+	@$(HOST_CC) $(HOST_CFLAGS) -I. -c glob.c -o $@
 
 lkc_defs.h: lkc_proto.h
 	@sed < $< > $@ 's/P(\([^,]*\),.*/#define \1 (\*\1_p)/'
@@ -83,15 +83,15 @@ lex.%.c: %.l
 	flex -P$(notdir $*) -o$@ $<
 
 lex.zconf.o: lex.zconf.c $(SHARED_DEPS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
+	@$(HOST_CC) $(HOST_CFLAGS) -I. -c $< -o $@
 
 zconf.tab.o: zconf.tab.c zconf.hash.c lex.zconf.c confdata.c expr.c symbol.c menu.c $(SHARED_DEPS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
+	@$(HOST_CC) $(HOST_CFLAGS) -I. -c $< -o $@
 
 else
 
 lex.zconf.o: lex.zconf.c $(SHARED_DEPS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
+	@$(HOST_CC) $(HOST_CFLAGS) -I. -c $< -o $@
 
 lex.zconf.c: lex.zconf.c_shipped
 	@$(CP) lex.zconf.c_shipped lex.zconf.c
@@ -100,7 +100,7 @@ zconf.hash.c: zconf.hash.c_shipped
 	@$(CP) zconf.hash.c_shipped zconf.hash.c
 
 zconf.tab.o: zconf.tab.c zconf.hash.c lex.zconf.c confdata.c expr.c symbol.c menu.c $(SHARED_DEPS)
-	@$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -I. -c $< -o $@
+	@$(HOST_CC) $(HOST_CFLAGS) -I. -c $< -o $@
 
 zconf.tab.c: zconf.tab.c_shipped
 	@$(CP) zconf.tab.c_shipped zconf.tab.c
@@ -113,7 +113,7 @@ endif
 
 ncurses:
 	@echo "int main(void) { return -1; }" > lxtemp.c
-	@if $(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) lxtemp.c $(LIBS) ; then \
+	@if $(HOST_CC) $(HOST_CFLAGS) lxtemp.c $(LIBS) ; then \
 		rm -f lxtemp.c a.out; \
 	else \
 		rm -f lxtemp.c; \

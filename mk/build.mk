@@ -282,7 +282,7 @@ ifeq ($(filter-out distclean,${MAKECMDGOALS}),)
 include ${TOPDIR}/mk/vars.mk
 else
 include $(TOPDIR)/prereq.mk
-export BASH MAKE LANGUAGE LC_ALL OStype PATH QEMU SHELL
+export HOST_CC BASH MAKE LANGUAGE LC_ALL OStype PATH QEMU SHELL
 endif
 
 all: menuconfig
@@ -447,13 +447,13 @@ buildall:
 	$(GMAKE) VERBOSE=1 all 2>&1 | tee firmware/buildall.log
 
 $(TOPDIR)/adk/tools/pkgmaker: $(TOPDIR)/adk/tools/pkgmaker.c $(TOPDIR)/adk/tools/sortfile.c $(TOPDIR)/adk/tools/strmap.c
-	@$(CC_FOR_BUILD) -g -o $@ adk/tools/pkgmaker.c adk/tools/sortfile.c adk/tools/strmap.c
+	@$(HOST_CC) $(HOST_CFLAGS) -o $@ adk/tools/pkgmaker.c adk/tools/sortfile.c adk/tools/strmap.c
 
 $(TOPDIR)/adk/tools/pkgrebuild: $(TOPDIR)/adk/tools/pkgrebuild.c $(TOPDIR)/adk/tools/strmap.c
-	@$(CC_FOR_BUILD) -g -o $@ adk/tools/pkgrebuild.c adk/tools/strmap.c
+	@$(HOST_CC) $(HOST_CFLAGS) -o $@ adk/tools/pkgrebuild.c adk/tools/strmap.c
 
 $(TOPDIR)/adk/tools/depmaker: $(TOPDIR)/adk/tools/depmaker.c
-	$(CC_FOR_BUILD) -g -o $@ $(TOPDIR)/adk/tools/depmaker.c
+	@$(HOST_CC) $(HOST_CFLAGS) -o $@ $(TOPDIR)/adk/tools/depmaker.c
 
 menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(TOPDIR)/adk/tools/pkgmaker $(TOPDIR)/adk/tools/pkgrebuild
 	@echo "Generating menu structure ..."
