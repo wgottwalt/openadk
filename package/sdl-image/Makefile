@@ -29,6 +29,7 @@ ifeq ($(ADK_HOST_DARWIN),y)
 LDFLAGS_FOR_BUILD+=	-framework Cocoa
 endif
 
+HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-png-shared
 CONFIGURE_ARGS+=	--enable-png \
 			--enable-jpg \
