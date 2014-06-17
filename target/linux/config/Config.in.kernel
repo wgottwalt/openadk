@@ -192,6 +192,8 @@ config ADK_KERNEL_PREEMPT
 config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
 	prompt "Optimize for size"
 	boolean
+	# does not boot in qemu
+	depends on !ADK_LINUX_MICROBLAZE
 	default y
 
 endmenu
