@@ -16,7 +16,7 @@ endif
 PKG_NAME:=		libpthread
 PKG_DESCR:=		posix threading library
 PKG_SECTION:=		libs/misc
-PKG_OPTS:=		noremove nostaging
+PKG_OPTS:=		noremove nostaging noscripts
 
 NO_DISTFILES:=		1
 
