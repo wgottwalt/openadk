@@ -25,7 +25,7 @@ MTDDEV:=	root=/dev/mtdblock1
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB4XX),y)
-MTDDEV:=	root=/dev/mtdblock2
+MTDDEV:=	root=/dev/mtdblock7
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20),y)
