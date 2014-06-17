@@ -424,6 +424,11 @@ $(eval $(call KMOD_template,BRIDGE_EBT_REDIRECT,bridge-ebt-redirect,\
 # Netfilter Core
 #
 
+$(eval $(call KMOD_template,NETFILTER_XTABLES,netfilter-xtables,\
+	$(MODULES_DIR)/kernel/net/netfilter/x_tables \
+	$(MODULES_DIR)/kernel/net/netfilter/xt_tcpudp \
+,41))
+
 $(eval $(call KMOD_template,NETFILTER_XT_TARGET_CLASSIFY,netfiler-xt-target-classify,\
 	$(MODULES_DIR)/kernel/net/netfilter/xt_CLASSIFY \
 ,50))

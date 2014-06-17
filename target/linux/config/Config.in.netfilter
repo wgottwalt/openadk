@@ -16,7 +16,7 @@ config ADK_KERNEL_BRIDGE_NETFILTER
 	default n
 
 config ADK_KERNEL_NETFILTER_XTABLES
-	boolean
+	tristate "Netfilter Xtables support (required for ip_tables)"
 	select ADK_KERNEL_NETFILTER
 	select ADK_KERNEL_NETFILTER_ADVANCED
 	default y if ADK_PACKAGE_IPTABLES
