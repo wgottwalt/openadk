@@ -1,0 +1,29 @@
+From 531989d989855f673af76ef85300769a8a167405 Mon Sep 17 00:00:00 2001
+From: Phil Sutter <phil@nwl.cc>
+Date: Tue, 13 May 2014 00:25:59 +0200
+Subject: [PATCH] mtd: m25p80: set SPI transfer type
+
+---
+ drivers/mtd/devices/m25p80.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/drivers/mtd/devices/m25p80.c b/drivers/mtd/devices/m25p80.c
+index ad19139..cdabcc0 100644
+--- a/drivers/mtd/devices/m25p80.c
++++ b/drivers/mtd/devices/m25p80.c
+@@ -524,10 +524,12 @@ static int m25p80_read(struct mtd_info *mtd, loff_t from, size_t len,
+ 		return -EINVAL;
+ 	}
+ 
++	t[0].type = SPI_TRANSFER_FLASH_READ_CMD;
+ 	t[0].tx_buf = flash->command;
+ 	t[0].len = m25p_cmdsz(flash) + dummy;
+ 	spi_message_add_tail(&t[0], &m);
+ 
++	t[1].type = SPI_TRANSFER_FLASH_READ_DATA;
+ 	t[1].rx_buf = buf;
+ 	t[1].rx_nbits = m25p80_rx_nbits(flash);
+ 	t[1].len = len;
+-- 
+1.8.5.3
+

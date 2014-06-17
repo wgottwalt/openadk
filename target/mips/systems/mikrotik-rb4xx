@@ -1,0 +1,13 @@
+config ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
+	bool "Mikrotik Routerboard 4xx"
+	select ADK_mips
+	select ADK_big
+	select ADK_mikrotik_rb4xx
+	select ADK_CPU_MIPS32
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_TARGET_WITH_NAND
+	select ADK_TARGET_WITH_LEDS
+	help
+	  Support for Mikrotik RB411/RB433/RB493g.
+
