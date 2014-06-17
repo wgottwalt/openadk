@@ -93,7 +93,7 @@ parted -a optimal -s $1 unit s mkpart primary fat32 $rootsizeend $maxsize >/dev/
 sfdisk --change-id $1 2 88 >/dev/null 2>&1
 
 echo "Creating filesystem"
-mkfs.ext4 -q -O ^huge_file ${1}1
+mkfs.ext4 -F -q -O ^huge_file ${1}1
 sync
 
 tmp=$(mktemp -d)

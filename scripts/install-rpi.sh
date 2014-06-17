@@ -103,10 +103,10 @@ else
 fi
 sleep 2
 mkfs.vfat ${1}1 >/dev/null
-mkfs.ext4 -q -O ^huge_file ${1}2
+mkfs.ext4 -F -q -O ^huge_file ${1}2
 if [ $datadir -eq 1 ];then
 	if [ $keep -eq 0 ];then
-		mkfs.ext4 -q -O ^huge_file ${1}3
+		mkfs.ext4 -F -q -O ^huge_file ${1}3
 	fi
 fi
 sync
