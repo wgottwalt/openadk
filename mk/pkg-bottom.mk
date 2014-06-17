@@ -18,16 +18,20 @@ do-configure:
 post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
 ifneq (,$(filter bootstrap,${AUTOTOOL_STYLE}))
-	cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) bootstrap.sh $(MAKE_TRACE)
+	@$(CMD_TRACE) "autotool configuring... "
+	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) bootstrap.sh $(MAKE_TRACE)
 endif
 ifneq (,$(filter autogen,${AUTOTOOL_STYLE}))
-	cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) autogen.sh $(MAKE_TRACE)
+	@$(CMD_TRACE) "autotool configuring... "
+	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) autogen.sh $(MAKE_TRACE)
 endif
 ifneq (,$(filter autoconf,${AUTOTOOL_STYLE}))
-	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoconf $(MAKE_TRACE)
+	@$(CMD_TRACE) "autotool configuring... "
+	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoconf $(MAKE_TRACE)
 endif
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
-	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -if $(MAKE_TRACE)
+	@$(CMD_TRACE) "autotool configuring... "
+	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -vif 2>/dev/null
 	@rm -rf ${WRKSRC}/autom4te.cache
 	@touch ${WRKDIR}/.autoreconf_done
 endif
