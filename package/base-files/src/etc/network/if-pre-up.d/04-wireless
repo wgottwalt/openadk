@@ -7,7 +7,7 @@ set -e
 [ "$IF_WIRELESS_HWMODE" ] || IF_WIRELESS_HWMODE=g
 [ "$IF_WIRELESS_EXTENSION" ] || IF_WIRELESS_EXTENSION=0
 
-rfkill unblock wlan 2>/dev/null
+[ -x /usr/sbin/rfkill ] && rfkill unblock wlan 2>/dev/null
 
 wpa=0
 wpa1=0
