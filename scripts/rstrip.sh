@@ -64,7 +64,6 @@ find $TARGETS -type f -a -exec file {} \; | \
 	echo "-> $T $F"
 	eval "chmod u+w $F"
 	if [[ $debug -ne 0 ]];then
-		echo "mkdir for $D" >> /tmp/debug
 		eval "mkdir -p $D/usr/lib/debug/$Q"
 		eval "$O --only-keep-debug $F $D/usr/lib/debug/$P.debug"
 	fi
