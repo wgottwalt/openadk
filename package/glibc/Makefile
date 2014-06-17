@@ -21,7 +21,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,GLIBC_GCONV,glibc-gconv,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_GLIBC_GCONV},${PKGSD_GLIBC_GCONV},${PKG_SECTION}))
+$(eval $(call PKG_template,GLIBC_GCONV,glibc-gconv,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_GLIBC_GCONV},${PKGSD_GLIBC_GCONV},${PKG_SECTION},${PKG_OPTS}))
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
@@ -47,6 +47,8 @@ endif
 
 glibc-gconv-install:
 	${INSTALL_DIR} $(IDIR_GLIBC_GCONV)/usr/lib/gconv
+	${INSTALL_DATA} ${STAGING_TARGET_DIR}/usr/lib/gconv/gconv-modules \
+		$(IDIR_GLIBC_GCONV)/usr/lib/gconv
 	$(CP) ${STAGING_TARGET_DIR}/usr/lib/gconv/*.so \
 		$(IDIR_GLIBC_GCONV)/usr/lib/gconv
 
