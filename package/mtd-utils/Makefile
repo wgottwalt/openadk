@@ -6,19 +6,47 @@ include $(TOPDIR)/rules.mk
 PKG_NAME:=		mtd-utils
 PKG_VERSION:=		1.5.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a4df1ad29684be79b0fa699bdae01faf
+PKG_MD5SUM:=		fd929de593acadd658d45feb07f993aa
 PKG_DESCR:=		flash filesystem utilities
 PKG_SECTION:=		sys/fs
+PKG_DEPENDS:=		liblzo
+PKG_BUILDDEP:=		liblzo
 HOST_BUILDDEP:=		liblzo-host
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_URL:=		http://www.linux-mtd.infradead.org
+PKG_SITES:=		http://git.infradead.org/mtd-utils.git/snapshot/
+DISTFILES:=             ca39eb1d98e736109c64ff9c1aa2a6ecca222d8f.tar.gz
+WRKDIST=		${WRKDIR}/mtd-utils-ca39eb1
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-PKG_CFLINE_MTD_UTILS:=	depends on ADK_HOST_ONLY
+PKG_SUBPKGS:=		MTD_UTILS NANDWRITE NANDDUMP NANDTEST FLASH_ERASE FLASH_OTP_INFO FLASH_OTP_DUMP FLASH_LOCK
+PKGSD_NANDWRITE:=	mtd-utils nandwrite utility
+PKGSD_NANDDUMP:=	mtd-utils nanddump utility
+PKGSD_NANDTEST:=	mtd-utils nandtest utility
+PKGSD_FLASH_ERASE:=	mtd-utils flash_erase utility
+PKGSD_FLASH_OTP_INFO:=	mtd-utils flash_otp_info utility
+PKGSD_FLASH_OTP_DUMP:=	mtd-utils flash_otp_dump utility
+PKGSD_FLASH_LOCK:=	mtd-utils flash_lock/flash_unlock utilities
+
+PKG_CFLINE_MTD_UTILS:= depends on ADK_HOST_ONLY
+
+PKG_FLAVOURS_MTD_UTILS:= WITH_XATTR WITH_LZO WITH_UBIFS
+PKGFD_WITH_XATTR:=	enable support for extended attributes
+PKGFD_WITH_LZO:=	enable LZO support
+PKGFD_WITH_UBIFS:=	enable ubifs support
+PKGFS_WITH_UBIFS:=	liblzo
+PKGFB_WITH_UBIFS:=	liblzo
 
 include $(TOPDIR)/mk/host.mk
 include $(TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,MTD_UTILS,mtd-utils,$(PKG_VERSION)-${PKG_RELEASE}))
+$(eval $(call PKG_template,MTD_UTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NANDWRITE,nandwrite,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_NANDWRITE},${PKG_SECTION}))
+$(eval $(call PKG_template,NANDDUMP,nanddump,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_NANDDUMP},${PKG_SECTION}))
+$(eval $(call PKG_template,NANDTEST,nandtest,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_NANDTEST},${PKG_SECTION}))
+$(eval $(call PKG_template,FLASH_ERASE,flash-erase,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FLASH_ERASE},${PKG_SECTION}))
+$(eval $(call PKG_template,FLASH_OTP_INFO,flash-otp-info,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FLASH_OTP_INFO},${PKG_SECTION}))
+$(eval $(call PKG_template,FLASH_OTP_DUMP,flash-otp-dump,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FLASH_OTP_DUMP},${PKG_SECTION}))
+$(eval $(call PKG_template,FLASH_LOCK,flash-lock,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FLASH_LOCK},${PKG_SECTION}))
 
 HOST_STYLE:=		manual
 CPPFLAGS_FOR_BUILD+=	-DWITHOUT_XATTR=1 -I./include
@@ -31,6 +59,45 @@ mtd-utils-hostinstall:
 	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/mkfs.jffs2 \
 		${STAGING_HOST_DIR}/usr/bin
+
+CONFIG_STYLE:=		manual
+ifneq (${ADK_PACKAGE_MTD_UTILS_WITH_XATTR},y)
+XAKE_FLAGS+=		WITHOUT_XATTR=1
+endif
+ifneq (${ADK_PACKAGE_MTD_UTILS_WITH_LZO},y)
+XAKE_FLAGS+=		WITHOUT_LZO=1
+endif
+ifneq (${ADK_PACKAGE_MTD_UTILS_WITH_UBIFS},y)
+XAKE_FLAGS+=		WITHOUT_UBI=1
+endif
+XAKE_FLAGS+=		BUILDDIR="${WRKDIST}"
+
+post-install:
+	$(INSTALL_DIR) $(IDIR_MTD_UTILS)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/sbin/{doc,flash_otp_,ftl_,nftl,rfd}* \
+		${WRKINST}/usr/sbin/{flashcp,jffs2dump,mkfs.jffs2,mtd_debug,recv_image,serve_image,sumtool} \
+		$(IDIR_MTD_UTILS)/usr/bin
+	$(INSTALL_DIR) $(IDIR_NANDWRITE)/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/nandwrite \
+		${IDIR_NANDWRITE}/usr/sbin
+	$(INSTALL_DIR) $(IDIR_NANDDUMP)/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/nanddump \
+		${IDIR_NANDDUMP}/usr/sbin
+	$(INSTALL_DIR) $(IDIR_NANDTEST)/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/nandtest \
+		${IDIR_NANDTEST}/usr/sbin
+	$(INSTALL_DIR) $(IDIR_FLASH_ERASE)/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/flash_erase \
+		${IDIR_FLASH_ERASE}/usr/sbin
+	$(INSTALL_DIR) $(IDIR_FLASH_OTP_INFO)/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/flash_otp_info \
+		${IDIR_FLASH_OTP_INFO}/usr/sbin
+	$(INSTALL_DIR) $(IDIR_FLASH_OTP_DUMP)/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/flash_otp_dump \
+		${IDIR_FLASH_OTP_DUMP}/usr/sbin
+	$(INSTALL_DIR) $(IDIR_FLASH_LOCK)/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/flash_{lock,unlock} \
+		${IDIR_FLASH_LOCK}/usr/sbin
 
 include ${TOPDIR}/mk/host-bottom.mk
 include ${TOPDIR}/mk/pkg-bottom.mk
