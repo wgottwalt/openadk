@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		mpg123
-PKG_VERSION:=		1.20.0
+PKG_VERSION:=		1.20.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f48152446eb1e8b78234d4a42c5fa263
+PKG_MD5SUM:=		1b3e8765aa608e306ede1ec507b67b23
 PKG_DESCR:=		mp3 console player
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libpthread alsa-lib
