@@ -5,7 +5,7 @@ config ADK_KERNEL_IP_FIB_HASH
 	default y
 
 config ADK_KERNEL_SYN_COOKIES
-	boolean
+	boolean "IP: TCP syncookie support"
 	default n
 
 config ADK_KERNEL_IP_PNP_BOOTP
