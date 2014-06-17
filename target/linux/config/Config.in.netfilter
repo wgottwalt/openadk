@@ -125,11 +125,11 @@ config ADK_KERNEL_NETFILTER_XT_MATCH_STATE
 # cannot be ADK_KERNEL_IP_NF_MATCH_CONNTRACK because
 # netfilter is built as a module -> this'll always be
 # a module, too
-config ADK_KERNEL_IP_NF_MATCH_CONNTRACK
+config ADK_KERNEL_NETFILTER_XT_MATCH_CONNTRACK
 	tristate
 	default n
 
-config ADK_KERNEL_IP_NF_MATCH_CONNMARK
+config ADK_KERNEL_NETFILTER_XT_MATCH_CONNMARK
 	tristate
 	default n
 

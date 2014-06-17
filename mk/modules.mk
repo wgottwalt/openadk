@@ -470,6 +470,12 @@ $(eval $(call KMOD_template,NETFILTER_XT_TARGET_LOG,netfilter-xt-target-log,\
 
 $(eval $(call KMOD_template,NF_CONNTRACK,nf-conntrack,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack \
+	$(MODULES_DIR)/kernel/net/netfilter/xt_conntrack \
+,41))
+
+$(eval $(call KMOD_template,NF_NAT,nf-nat,\
+	$(MODULES_DIR)/kernel/net/netfilter/nf_nat \
+	$(MODULES_DIR)/kernel/net/netfilter/xt_nat \
 ,45))
 
 $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
@@ -477,20 +483,10 @@ $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_conntrack_ipv4 \
 ,46))
 
-ifeq ($(KERNEL_BASE),3)
-ifeq ($(KERNEL_MAJ),4)
-$(eval $(call KMOD_template,FULL_NAT,full-nat,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat \
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_nat \
-,50))
-else
-$(eval $(call KMOD_template,FULL_NAT,full-nat,\
-	$(MODULES_DIR)/kernel/net/netfilter/nf_nat \
+$(eval $(call KMOD_template,NF_NAT_IPV4,nf-nat-ipv4,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_ipv4 \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_nat \
 ,50))
-endif
-endif
 
 $(eval $(call KMOD_template,NF_CONNTRACK_FTP,nf-conntrack-ftp,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_ftp \

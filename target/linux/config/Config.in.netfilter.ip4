@@ -2,6 +2,7 @@ config ADK_KERNEL_NF_CONNTRACK_IPV4
 	prompt 'IPv4 connection tracking support (required for NAT)'
 	tristate
 	select ADK_KERNEL_NF_CONNTRACK
+	select ADK_KERNEL_NETFILTER_XT_MATCH_CONNTRACK
 	default m if ADK_PACKAGE_IPTABLES
 	default n
 	help
@@ -61,7 +62,7 @@ config ADK_KERNEL_NF_NAT_IPV4
 
 config ADK_KERNEL_IP_NF_TARGET_MASQUERADE
 	tristate 'MASQUERADE target support'
-	depends on ADK_KERNEL_FULL_NAT
+	depends on ADK_KERNEL_NF_NAT
 	default m if ADK_PACKAGE_IPTABLES
 	default n
 	help
@@ -99,7 +100,7 @@ config ADK_KERNEL_IP_NF_TARGET_ULOG
 
 config ADK_KERNEL_IP_NF_TARGET_REDIRECT
 	tristate 'REDIRECT target support'
-	depends on ADK_KERNEL_FULL_NAT
+	depends on ADK_KERNEL_NF_NAT
 	help
 	  REDIRECT is a special case of NAT: all incoming connections are
 	  mapped onto the incoming interface's address, causing the packets to
@@ -108,7 +109,7 @@ config ADK_KERNEL_IP_NF_TARGET_REDIRECT
 
 config ADK_KERNEL_IP_NF_TARGET_NETMAP
 	tristate 'NETMAP target support'
-	depends on ADK_KERNEL_FULL_NAT
+	depends on ADK_KERNEL_NF_NAT
 	help
 	  NETMAP is an implementation of static 1:1 NAT mapping of network
 	  addresses. It maps the network address part, while keeping the host
@@ -117,7 +118,6 @@ config ADK_KERNEL_IP_NF_TARGET_NETMAP
 
 config ADK_KERNEL_IP_NF_MANGLE
 	tristate 'Packet mangling'
-	depends on ADK_KERNEL_FULL_NAT
 	help
 	  This option adds a `mangle' table to iptables: see the man page for
 	  iptables(8).  This table is used for various packet alterations
