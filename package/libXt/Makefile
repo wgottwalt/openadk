@@ -5,13 +5,13 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXt
 PKG_VERSION:=		1.1.3
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		7a80ed7aba06668b12ebd0910318a1f1
 PKG_DESCR:=		x toolkit intrinsics libraries
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libsm libice libuuid libx11 libxau libxdmcp libxcb
 PKG_BUILDDEP:=		autotool
-PKG_BUILDDEP+=		libSM libX11 kbproto util-macros-host
+PKG_BUILDDEP+=		libSM libX11 kbproto util-macros-host xproto-host
 HOST_BUILDDEP:=		util-macros-host libICE-host libSM-host
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libxt
