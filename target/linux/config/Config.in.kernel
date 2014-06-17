@@ -189,4 +189,9 @@ config ADK_KERNEL_PREEMPT
 	boolean
 	default n
 
+config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
+	prompt "Optimize for size"
+	boolean
+	default y
+
 endmenu
