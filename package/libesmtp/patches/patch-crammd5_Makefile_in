@@ -1,0 +1,12 @@
+	prevent doubly passing our CFLAGS
+--- libesmtp-1.0.6.orig/crammd5/Makefile.in	2010-08-09 22:25:56.000000000 +0200
++++ libesmtp-1.0.6/crammd5/Makefile.in	2014-06-05 22:27:13.400815451 +0200
+@@ -225,7 +225,7 @@ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+ INCLUDES = -I@srcdir@
+-AM_CFLAGS = @CFLAGS@ @EXTRA_CFLAGS@
++AM_CFLAGS = @EXTRA_CFLAGS@
+ lib_LTLIBRARIES = sasl-cram-md5.la
+ sasl_cram_md5_la_SOURCES = client-crammd5.c hmacmd5.c hmacmd5.h
+ sasl_cram_md5_la_LDFLAGS = -module -avoid-version @CRAMMD5_LIBS@

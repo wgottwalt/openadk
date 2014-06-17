@@ -1,0 +1,36 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(TOPDIR)/rules.mk
+
+# always use tab spaces as separator, no spaces
+PKG_NAME:=		libesmtp
+PKG_VERSION:=		1.0.6
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		bf3915e627fd8f35524a8fdfeed979c8
+PKG_DESCR:=		lib that implements the client side of the SMTP protocol
+PKG_SECTION:=		libs/net
+PKG_URL:=		http://www.stafford.uklinux.net/libesmtp/
+PKG_SITES:=		http://www.stafford.uklinux.net/libesmtp/
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
+
+PKG_FLAVOURS_PKGNAME:=	WITH_SSL
+PKGFD_WITH_SSL:=	enable SSL support
+PKGFS_WITH_SSL:=	libopenssl
+PKGFB_WITH_SSL:=	openssl
+
+include $(TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,LIBESMTP,libesmtp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+ifneq (${ADK_PACKAGE_LIBESMTP_WITH_SSL},)
+CONFIGURE_ARGS+=	--with-openssl
+endif
+
+libesmtp-install:
+	$(INSTALL_DIR) $(IDIR_LIBESMTP)/usr/lib/esmtp-plugins
+	$(CP) $(WRKINST)/usr/lib/libesmtp.so* $(IDIR_LIBESMTP)/usr/lib/
+	$(CP) $(WRKINST)/usr/lib/esmtp-plugins/*.so \
+		$(IDIR_LIBESMTP)/usr/lib/esmtp-plugins/
+
+include ${TOPDIR}/mk/pkg-bottom.mk
