@@ -26,6 +26,8 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,QEMU,qemu,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,QEMU,qemu,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+HOST_CFLAGS+=		-DNATIVE
+
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CFLAGS+=		-DF_EXLCK=4 -DF_SHLCK=8 -D__SIGRTMIN=32 -D__SIGRTMAX=\(NSIG-1\)
 endif
@@ -43,7 +45,7 @@ CONFIGURE_ARGS+=	--disable-pie
 endif
 
 CONFIG_STYLE:=		minimal
-CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
+CONFIGURE_ARGS+=	--host-cc=$(HOST_CC) \
 			--cross-prefix=$(GNU_TARGET_NAME)- \
 			--prefix=/usr \
 			--sysconfdir=/etc \
@@ -59,10 +61,11 @@ CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
 			--disable-strip \
 			--bindir=/usr/bin
 
-CFLAGS_FOR_BUILD+=	-DNATIVE
 HOST_STYLE:=		manual
-HOST_CONFIGURE_ARGS+=	--host-cc=$(CC_FOR_BUILD) \
+HOST_CONFIGURE_ARGS+=	--host-cc=$(HOST_CC) \
 			--prefix=${STAGING_HOST_DIR}/usr \
+			--disable-stack-protector \
+			--disable-pie \
 			--disable-docs \
 			--disable-werror \
 			--disable-system \
