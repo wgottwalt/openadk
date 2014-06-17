@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
 PKG_VERSION:=		1.42.10
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		62bfe2fe0a194c5c37165789ac2825a8
 PKG_DESCR:=		ext2/3/4 filesystem utilities
 PKG_SECTION:=		sys/fs
@@ -55,9 +55,9 @@ CONFIGURE_ARGS+=	--enable-elf-shlibs \
 			--disable-libblkid \
 			--disable-defrag
 TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_TARGET_DIR)/usr/include
-MAKE_FLAGS+=		BUILD_CC="${CC_FOR_BUILD}" \
-			BUILD_CFLAGS="${CFLAGS_FOR_BUILD} ${CPPFLAGS_FOR_BUILD} -I${WRKSRC}/lib -I." \
-			BUILD_LDFLAGS="${LDFLAGS_FOR_BUILD}"
+MAKE_FLAGS+=		BUILD_CC="${HOST_CC}" \
+			BUILD_CFLAGS="${HOST_CFLAGS} ${HOST_CPPFLAGS} -I${WRKSRC}/lib -I." \
+			BUILD_LDFLAGS="${HOST_LDFLAGS}"
 
 libe2fs-install:
 	${INSTALL_DIR} ${IDIR_LIBE2FS}/etc
