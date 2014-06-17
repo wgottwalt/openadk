@@ -846,10 +846,18 @@ $(eval $(call KMOD_template,CRYPTO_HASH2,crypto-hash,\
     $(MODULES_DIR)/kernel/crypto/crypto_hash \
 ,04))
 
+$(eval $(call KMOD_template,CRYPTO_BLKCIPHER2,crypto-blkcipher,\
+    $(MODULES_DIR)/kernel/crypto/crypto_blkcipher \
+,05))
+
 $(eval $(call KMOD_template,CRYPTO_RNG2,crypto-rng,\
     $(MODULES_DIR)/kernel/crypto/rng \
     $(MODULES_DIR)/kernel/crypto/krng \
 ,06))
+
+$(eval $(call KMOD_template,CRYPTO_WORKQUEUE,crypto-wq,\
+    $(MODULES_DIR)/kernel/crypto/crypto_wq \
+,07))
 
 $(eval $(call KMOD_template,CRYPTO_MANAGER2,crypto-manager,\
     $(MODULES_DIR)/kernel/crypto/cryptomgr \
