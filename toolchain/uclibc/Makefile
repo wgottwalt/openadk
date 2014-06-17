@@ -68,14 +68,14 @@ endif
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
-		HOSTCC="$(CC_FOR_BUILD)" \
+		HOSTCC="$(HOST_CC)" \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		oldconfig
 	$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
-		HOSTCC="$(CC_FOR_BUILD)" \
+		HOSTCC="$(HOST_CC)" \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		install_headers
 	touch $(WRKBUILD)/.configured
@@ -86,7 +86,7 @@ $(WRKBUILD)/.compiled:
 		PREFIX= \
 		DEVEL_PREFIX=/ \
 		RUNTIME_PREFIX=/ \
-		HOSTCC="$(CC_FOR_BUILD)" \
+		HOSTCC="$(HOST_CC)" \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		all
 	touch $@
