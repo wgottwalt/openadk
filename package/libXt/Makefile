@@ -4,9 +4,9 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		libXt
-PKG_VERSION:=		1.1.3
-PKG_RELEASE:=		5
-PKG_MD5SUM:=		7a80ed7aba06668b12ebd0910318a1f1
+PKG_VERSION:=		1.1.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		8b2639042ae28df4022b548d8154fdfb
 PKG_DESCR:=		x toolkit intrinsics libraries
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libsm libice libuuid libx11 libxau libxdmcp libxcb
@@ -27,7 +27,7 @@ $(eval $(call PKG_template,LIBXT,libxt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 
 AUTOTOOL_STYLE:=	autoreconf
 HOST_STYLE:=		auto
-CONFIGURE_ENV+=		HOST_CFLAGS="$(HOST_CPPFLAGS) $(HOST_CFLAGS)"
+CONFIGURE_ENV+=		CFLAGS_FOR_BUILD="$(HOST_CPPFLAGS) $(HOST_CFLAGS)"
 CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
 libxt-install:
