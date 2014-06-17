@@ -62,14 +62,9 @@ config ADK_KERNEL_EXT2_FS
 	help
 	  Ext2 is a standard Linux file system for hard disks.
 
-config ADK_KERNEL_FS_MBCACHE
-	tristate
-	default n
-
 config ADK_KERNEL_EXT3_FS
 	prompt "EXT3 filesystem support"
 	tristate
-	select ADK_KERNEL_FS_MBCACHE
 	default n
 	help
 	  This is the journalling version of the Second extended file system
@@ -98,7 +93,6 @@ config ADK_KERNEL_EXT3_FS
 config ADK_KERNEL_EXT4_FS
 	prompt "EXT4 filesystem support"
 	tristate
-	select ADK_KERNEL_FS_MBCACHE
 	select ADK_KERNEL_JBD2
 	default n
 	help
