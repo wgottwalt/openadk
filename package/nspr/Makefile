@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nspr
 PKG_VERSION:=		4.10.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		c903557c620b4b84457f57ddc80934c4
 PKG_DESCR:=		netscape portable runtime library
 PKG_SECTION:=		libs/misc
@@ -20,7 +20,9 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,NSPR,nspr,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_ENV+=		OS_TARGET="Linux" HOST_CC="${CC_FOR_BUILD}" HOST_CFLAGS="${CFLAGS_FOR_BUILD}"
+CONFIGURE_ENV+=		OS_TARGET="Linux" \
+			HOST_CC="${HOST_CC}" \
+			HOST_CFLAGS="${HOST_CFLAGS}"
 
 ifeq (${ADK_LINUX_64},y)
 CONFIGURE_ARGS+=	--enable-64bit
