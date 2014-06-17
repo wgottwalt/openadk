@@ -3,17 +3,17 @@
 
 include $(TOPDIR)/rules.mk
 
-# always use tab spaces as separator, no spaces
 PKG_NAME:=		esmtp
 PKG_VERSION:=		1.2
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		79a9c1f9023d53f35bb82bf446150a72
-PKG_DESCR:=		relay-only Mail Transfer Agent (MTA)
+PKG_DESCR:=		relay-only mail transfer agent
 PKG_SECTION:=		net/mail
-PKG_DEPENDS:=		libesmtp openssl flex
-PKG_BUILDDEP:=		libesmtp openssl flex
+PKG_DEPENDS:=		libesmtp flex
+PKG_BUILDDEP:=		libesmtp flex
 PKG_URL:=		http://esmtp.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=esmtp/}
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(TOPDIR)/mk/package.mk
