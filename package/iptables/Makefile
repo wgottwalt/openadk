@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		iptables
 PKG_VERSION:=		1.4.21
-PKG_RELEASE:=		6
+PKG_RELEASE:=		7
 PKG_MD5SUM:=		536d048c8e8eeebcd9757d0863ebb0c0
 PKG_DESCR:=		netfilter firewalling software
 PKG_SECTION:=		net/firewall
@@ -30,8 +30,9 @@ TARGET_LDFLAGS+=	-fPIC
 CONFIGURE_ARGS+=	--enable-devel
 
 iptables-install:
-	${INSTALL_DIR} ${IDIR_IPTABLES}/{usr/lib,etc,usr/sbin}
+	${INSTALL_DIR} ${IDIR_IPTABLES}/{usr/lib,etc/xtables,usr/sbin}
 	${INSTALL_DATA} ./files/firewall.conf ${IDIR_IPTABLES}/etc
+	${INSTALL_DATA} ./files/connlabel.conf ${IDIR_IPTABLES}/etc/xtables
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/iptables ${IDIR_IPTABLES}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ip6tables ${IDIR_IPTABLES}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/iptables-{save,restore} \
