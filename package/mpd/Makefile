@@ -5,15 +5,17 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.18.11
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		be23120f342250e8352f6499cb960fd2
 PKG_DESCR:=		music player daemon
 PKG_SECTION:=		mm/audio
-PKG_DEPENDS:=		glib libstdcxx libiconv-tiny libmpdclient librt
-PKG_FDEPENDS:=		glib libstdcxx libiconv-tiny libmpdclient librt
+PKG_DEPENDS:=		glib libstdcxx libmpdclient librt
+PKG_FDEPENDS:=		glib libstdcxx libmpdclient librt
 PKG_BUILDDEP:=		glib libmpdclient
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpd/0.18/
+
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG

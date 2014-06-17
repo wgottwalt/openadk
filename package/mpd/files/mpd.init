@@ -12,6 +12,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
+	if [ ! -d /data/mpd ];then
+		mkdir -p /data/mpd
+		chown mpd:mpd /data/mpd
+	fi
 	mpd
 	;;
 stop)
