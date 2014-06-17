@@ -20,8 +20,8 @@ include ${TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IW,iw,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIG_STYLE:=		manual
 TARGET_CFLAGS+=		$(TARGET_CPPFLAGS)
+CONFIG_STYLE:=		manual
 
 iw-install:
 	${INSTALL_DIR} ${IDIR_IW}/usr/sbin
