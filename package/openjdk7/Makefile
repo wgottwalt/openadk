@@ -38,6 +38,10 @@ include $(TOPDIR)/mk/qemu.mk
 $(eval $(call HOST_template,OPENJDK7,openjdk7,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,OPENJDK7,openjdk7,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+# uclibc needs -liconv
+ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
+TARGET_LIBS:=		-liconv
+endif
 # for UINTPTR_MAX in stdint.h
 TARGET_CFLAGS+=		-D__STDC_LIMIT_MACROS
 # segfaults with march=pentium-m/atom
@@ -89,6 +93,7 @@ MAKE_ENV+=		ALT_COMPILER_PATH=$(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin \
 			OTHER_CFLAGS='$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS)' \
 			OTHER_CXXFLAGS='$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS)' \
 			OTHER_LDFLAGS='$(TARGET_LDFLAGS)' \
+			OTHER_LDLIBS='$(TARGET_LIBS)' \
 			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(JDKARCH) QEMU=$(QEMU) \
 			LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib
 
