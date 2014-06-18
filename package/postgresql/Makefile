@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		postgresql
 PKG_VERSION:=		9.3.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		d9be740a612f8a0b9ea61dd524abfa4c
 PKG_DESCR:=		postgresql database library
 PKG_SECTION:=		libs/db
@@ -43,7 +43,7 @@ pre-configure:
 		${PKG_CONFIGURE_ARGS} \
 	);
 	${MAKE} -C "${WRKBUILD}/src/bin/pg_config" \
-		CC="${CC_FOR_BUILD}" \
+		CC="${HOST_CC}" \
 		DESTDIR="${WRKINST}" \
 		all install
 
