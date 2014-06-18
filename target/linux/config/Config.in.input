@@ -11,7 +11,6 @@ config ADK_KERNEL_INPUT
 	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default y if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	default y if ADK_TARGET_QEMU_ARM_MODEL_TERRIER
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
 config ADK_KERNEL_HID_LOGITECH
@@ -25,11 +24,6 @@ config ADK_KERNEL_HID_LOGITECH_DJ
 config ADK_KERNEL_KEYBOARD_ATARI
 	boolean
 	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
-	default n
-
-config ADK_KERNEL_MOUSE_PS2
-	boolean
-	default y if ADK_TARGET_VBOX
 	default n
 
 config ADK_KERNEL_MOUSE_ATARI
@@ -71,7 +65,6 @@ config ADK_KERNEL_INPUT_KEYBOARD
 	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default y if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	default y if ADK_TARGET_QEMU_ARM_MODEL_TERRIER
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
 config ADK_KERNEL_INPUT_MOUSE
@@ -84,7 +77,6 @@ config ADK_KERNEL_INPUT_MOUSE
 	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default y if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
 	default y if ADK_TARGET_QEMU_ARM_MODEL_TERRIER
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
 config ADK_KERNEL_HID_SUPPORT
@@ -102,17 +94,26 @@ config ADK_KERNEL_HID_GENERIC
 	default n
 	
 config ADK_KERNEL_USB_HID
-	prompt "USB keyboard/mouse support"
+	prompt "USB HID support"
 	tristate
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_HID
 	select ADK_KERNEL_HID_GENERIC
+	depends on ADK_TARGET_WITH_USB
+	default n
+
+config ADK_TARGET_USB_KEYBOARD
+	prompt "enable keyboard support"
+	boolean
+	depends on ADK_KERNEL_USB_HID
 	select ADK_KERNEL_INPUT_KEYBOARD
+
+config ADK_TARGET_USB_MOUSE
+	prompt "enable mouse support"
+	boolean
+	depends on ADK_KERNEL_USB_HID
 	select ADK_KERNEL_INPUT_MOUSEDEV
 	select ADK_KERNEL_INPUT_MOUSE
-	depends on ADK_TARGET_WITH_USB
-	default m if ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default n
 
 config ADK_KERNEL_LOGITECH_DINOVO
 	prompt "Support for Logitech DiNovo keyboard/mouse"
@@ -133,10 +134,13 @@ config ADK_KERNEL_KEYBOARD_ATKBD
 	default y if ADK_TARGET_VBOX
 	default n
 
-config ADK_KERNEL_INPUT_MOUSEDEV
-	prompt "Mouse support"
+config ADK_KERNEL_MOUSE_PS2
+	prompt "Mouse support (PS/2)"
 	tristate
 	select ADK_KERNEL_INPUT
+	select ADK_KERNEL_INPUT_MOUSEDEV
+	select ADK_KERNEL_INPUT_MOUSE
+	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_VBOX
 	default n
 
