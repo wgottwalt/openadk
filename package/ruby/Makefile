@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
 PKG_VERSION:=		2.1.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		e57fdbb8ed56e70c43f39c79da1654b2
 PKG_DESCR:=		ruby scripting language
 PKG_SECTION:=		dev/lang
@@ -41,19 +41,10 @@ INSTALL_TARGET:=	install-nodoc
 HOST_CONFIGURE_ARGS+=	--disable-install-doc \
 			--disable-shared \
 			--with-out-ext=curses,openssl,readline \
-			--prefix=$(HOST_WRKINST)/usr \
-			--bindir=$(HOST_WRKINST)/usr/bin \
-			--mandir=$(HOST_WRKINST)/usr/share/man \
 			--disable-rubygems
 HOST_ALL_TARGET:=	main
 HOST_INSTALL_TARGET:=	install-nodoc
 HOST_XAKE_FLAGS:=	V=1 DESTDIR=""
-
-ruby-hostinstall:
-	$(INSTALL_BIN) $(HOST_WRKINST)/usr/bin/ruby \
-		$(STAGING_HOST_DIR)/usr/bin
-	$(CP) $(HOST_WRKINST)/usr/lib/ruby \
-		$(STAGING_HOST_DIR)/usr/lib
 
 ruby-install:
 	${INSTALL_DIR} ${IDIR_RUBY}/usr/lib/ruby
