@@ -2,6 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 config ADK_KERNEL_ADDON_YAFFS2
+	default y if ADK_TARGET_WITH_NAND
 	boolean
 
 config ADK_KERNEL_ADDON_GRSEC
