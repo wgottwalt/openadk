@@ -4,19 +4,18 @@
 include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		nss
-PKG_VERSION:=		3.15.3.1
-PKG_RELEASE:=		2
+PKG_VERSION:=		3.16.1
+PKG_RELEASE:=		1
 PKG_MAJ_VERSION:=	3
-PKG_MIN_VERSION:=	15
-PKG_PATCH_VERSION:=	3
-PKG_PATCH2_VERSION:=	1
-PKG_MD5SUM:=		1d444fffdb1f890a000003b50295b5aa
+PKG_MIN_VERSION:=	16
+PKG_PATCH_VERSION:=	1
+PKG_MD5SUM:=		97ccaa5d27aa59faf07c8b968dbaea1d
 PKG_DESCR:=		network security services library
-PKG_SECTION:=		libs/misc
+PKG_SECTION:=		libs/crypto
 PKG_BUILDDEP:=		nspr zlib sqlite
 PKG_DEPENDS:=		nspr zlib libsqlite
 PKG_URL:=		http://www.mozilla.org/projects/security/pki/nss/
-PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${PKG_MAJ_VERSION}_${PKG_MIN_VERSION}_${PKG_PATCH_VERSION}_${PKG_PATCH2_VERSION}_RTM/src/
+PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_${PKG_MAJ_VERSION}_${PKG_MIN_VERSION}_${PKG_PATCH_VERSION}_RTM/src/
 PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!cygwin
@@ -57,7 +56,7 @@ do-install:
 	${INSTALL_DIR} ${STAGING_TARGET_DIR}/usr/include/nss
 	${INSTALL_DATA} ${WRKDIST}/dist/public/nss/* \
 		${STAGING_TARGET_DIR}/usr/include/nss
-	# needed for firefox and corosync
+	# needed for firefox
 	${INSTALL_DIR} ${WRKINST}/usr/bin
 	${INSTALL_BIN} ${WRKDIST}/dist/bin/nss-config \
 		${WRKINST}/usr/bin

@@ -1,0 +1,10 @@
+--- nss-3.16.1.orig/nss/cmd/manifest.mn	2014-05-02 05:27:18.000000000 +0200
++++ nss-3.16.1/nss/cmd/manifest.mn	2014-06-19 14:32:39.000000000 +0200
+@@ -22,7 +22,6 @@ DIRS = lib  \
+  dbtest \
+  derdump  \
+  digest  \
+- httpserv  \
+  $(FIPSTEST_SRCDIR)  \
+  $(LOWHASHTEST_SRCDIR)  \
+  listsuites \
