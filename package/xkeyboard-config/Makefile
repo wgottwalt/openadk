@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		e3defd29cc464cc1a1dfa0eebaca53b1
 PKG_DESCR:=		keyboard config
 PKG_SECTION:=		x11/misc
-PKG_BUILDDEP:=		autotool util-macros xkbcomp
+PKG_BUILDDEP:=		util-macros xkbcomp
 PKG_SITES:=		http://www.x.org/releases/individual/data/xkeyboard-config/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2

@@ -10,7 +10,7 @@ PKG_MD5SUM:=		3ac3726eda563946d1f44ac3e5b61d56
 PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		keyutils libtirpc rpcbind libdevmapper libpthread
-PKG_BUILDDEP:=		autotool keyutils libtirpc lvm
+PKG_BUILDDEP:=		keyutils libtirpc lvm
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 

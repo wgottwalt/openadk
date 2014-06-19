@@ -9,7 +9,6 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		9d2597756af3fa14d7331b4a3651fc9b
 PKG_DESCR:=		wireless lan access point controller
 PKG_SECTION:=		net/wifi
-PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.chillispot.info/
 PKG_SITES=		http://www.chillispot.info/download/
 

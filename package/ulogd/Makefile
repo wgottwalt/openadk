@@ -11,7 +11,6 @@ PKG_DESCR:=		netfilter userspace logging daemon
 PKG_SECTION:=		net/firewall
 PKG_DEPENDS:=		iptables libnetfilter-conntrack libnetfilter-log libnetfilter-acct libmnl
 PKG_BUILDDEP:=		iptables libnetfilter_conntrack libnetfilter_log libnetfilter_acct libmnl
-PKG_BUILDDEP+=		autotool
 PKG_URL:=		http://www.netfilter.org/projects/ulogd/
 PKG_SITES:=		http://www.netfilter.org/projects/ulogd/files/
 PKG_NOPARALLEL:=	1

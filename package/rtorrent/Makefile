@@ -10,7 +10,7 @@ PKG_MD5SUM:=		fd9490a2ac67d0fa2a567c6267845876
 PKG_DESCR:=		console torrent application
 PKG_SECTION:=		app/p2p
 PKG_DEPENDS:=		libncurses libtorrent libcurl libstdcxx
-PKG_BUILDDEP:=		autotool ncurses libtorrent curl
+PKG_BUILDDEP:=		ncurses libtorrent curl
 PKG_URL:=		http://libtorrent.rakshasa.no/
 PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
 

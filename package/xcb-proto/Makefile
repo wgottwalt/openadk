@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		xml-xcb protocol descriptions
 PKG_SECTION:=		dev/header
 PKG_MD5SUM:=		2b9dc6442156aba2bfb4133cb9d7cf46
-PKG_BUILDDEP:=		autotool
 HOST_BUILDDEP:=		python2-host
 PKG_SITES:=		http://xcb.freedesktop.org/dist/
 PKG_OPTS:=		dev devonly

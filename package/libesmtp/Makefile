@@ -9,7 +9,6 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		bf3915e627fd8f35524a8fdfeed979c8
 PKG_DESCR:=		implements the client side of the smtp protocol
 PKG_SECTION:=		libs/net
-PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.stafford.uklinux.net/libesmtp/
 PKG_SITES:=		http://www.stafford.uklinux.net/libesmtp/
 PKG_OPTS:=		dev

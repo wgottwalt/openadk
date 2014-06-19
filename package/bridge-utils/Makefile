@@ -9,7 +9,6 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		ec7b381160b340648dede58c31bb2238
 PKG_DESCR:=		ethernet bridging tools
 PKG_SECTION:=		net/route
-PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Bridge
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bridge/}
 PKG_BB:=		1

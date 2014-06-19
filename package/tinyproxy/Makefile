@@ -8,7 +8,6 @@ PKG_VERSION:=		1.8.3
 PKG_RELEASE:=		2
 PKG_MD5SUM:=		eca927f7f6a9ce8394b2b256361978a7
 PKG_DESCR:=		lightweight http and https proxy
-PKG_BUILDDEP:=		autotool
 PKG_SECTION:=		net/proxy
 PKG_URL:=		https://www.banu.com/tinyproxy/
 PKG_SITES:=		https://www.banu.com/pub/tinyproxy/1.8/

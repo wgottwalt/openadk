@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		847995e8d002cbf1387bda05947be086
 PKG_DESCR:=		transport independent rpc library
 PKG_SECTION:=		libs/net
-PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://sourceforge.net/projects/libtirpc/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libtirpc/}
 PKG_OPTS:=		dev

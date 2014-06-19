@@ -9,7 +9,6 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		e9a4ba2711753c89b37950aada7aed4a
 PKG_DESCR:=		console mouse support
 PKG_SECTION:=		sys/misc
-PKG_BUILDDEP:=		autotool bison-host
 PKG_URL:=		http://launchpad.net/gpm
 PKG_SITES:=		http://www.nico.schottelius.org/software/gpm/archives/
 PKG_NOPARALLEL:=	1

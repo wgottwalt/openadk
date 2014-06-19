@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		234ea7d786a83e6f4f7a507a5719d62b
 PKG_DESCR:=		decode and send infra-red signals
 PKG_SECTION:=		sys/misc
-PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.lirc.org/
 PKG_SITES:=		http://www.lirc.org/software/snapshots/
 

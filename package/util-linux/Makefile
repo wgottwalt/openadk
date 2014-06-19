@@ -9,7 +9,7 @@ PKG_RELEASE:=		4
 PKG_MD5SUM:=		3f191727a0d28f7204b755cf1b6ea0aa
 PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
-PKG_BUILDDEP:=		autotool ncurses pam
+PKG_BUILDDEP:=		ncurses pam
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.24/
 PKG_OPTS:=		dev
 

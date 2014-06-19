@@ -9,7 +9,6 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		5bcdbaced54f40b6cb1e9c9a8dbac411
 PKG_DESCR:=		teredo application
 PKG_SECTION:=		net/ipv6
-PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.remlab.net/
 PKG_SITES:=		http://www.remlab.net/files/miredo/
 

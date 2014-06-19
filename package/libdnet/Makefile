@@ -9,7 +9,6 @@ PKG_RELEASE:=		3
 PKG_MD5SUM:=		04c394ed8e1e7fc455456e79e908916d
 PKG_DESCR:=		low-level networking library
 PKG_SECTION:=		libs/net
-PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://libdnet.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=$(PKG_NAME)/}
 PKG_OPTS:=		dev

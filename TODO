@@ -1,7 +1,6 @@
 global:
 - projects dir idea
 - lowercase package conversion
-- autotool as default for host
 - usefulness of *.la files ( can be removed?)
 
 toolchain stuff:

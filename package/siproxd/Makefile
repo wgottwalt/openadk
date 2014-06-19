@@ -10,7 +10,7 @@ PKG_MD5SUM:=		1a6f9d13aeb2d650375c9a346ac6cbaf
 PKG_DESCR:=		session initiation protocol proxy
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libosip2 libpthread
-PKG_BUILDDEP:=		autotool libosip2
+PKG_BUILDDEP:=		libosip2
 PKG_URL:=		http://siproxd.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=siproxd/}
 

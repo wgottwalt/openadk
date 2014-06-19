@@ -9,7 +9,6 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		506df41295afc6486662cc47470b4618
 PKG_DESCR:=		retrieving files using http(s) and ftp
 PKG_SECTION:=		net/http
-PKG_BUILDDEP:=		autotool
 PKG_URL:=		http://www.gnu.org/software/wget/
 PKG_SITES:=		${MASTER_SITE_GNU:=wget/}
 PKG_BB:=		1

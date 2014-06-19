@@ -10,7 +10,7 @@ PKG_MD5SUM:=		3532b6439270f9da0ebfc03d3623f962
 PKG_DESCR:=		flexible radius server
 PKG_SECTION:=		net/radius
 PKG_DEPENDS:=		libltdl libopenssl libpthread libpcre
-PKG_BUILDDEP:=		autotool libtool openssl samba pcre
+PKG_BUILDDEP:=		libtool openssl samba pcre
 PKG_URL:=		http://www.freeradius.org/
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/
 

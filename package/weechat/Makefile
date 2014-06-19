@@ -9,9 +9,8 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		fd584c258aace2aa898f40e1fcf06084
 PKG_DESCR:=		lightweight irc client
 PKG_SECTION:=		app/chat
-PKG_DEPENDS:=		libncurses libgcrypt libz libcurl
-PKG_BUILDDEP:=		ncurses autotool libgcrypt
-PKG_BUILDDEP+=		zlib curl
+PKG_DEPENDS:=		libncurses libgcrypt zlib libcurl
+PKG_BUILDDEP:=		ncurses zlib libgcrypt curl
 PKG_URL:=		http://www.weechat.org/
 PKG_SITES:=		http://www.weechat.org/files/src/
 

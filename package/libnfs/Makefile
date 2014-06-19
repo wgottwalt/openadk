@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a07656eeca58ad8d4870da546745628a
 PKG_DESCR:=		nfs client library
 PKG_SECTION:=		libs/net
-PKG_BUILDDEP:=		autotool
 PKG_URL:=		https://github.com/sahlberg/libnfs
 PKG_SITES:=		https://sites.google.com/site/libnfstarballs/li/
 PKG_OPTS:=		dev

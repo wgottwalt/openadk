@@ -9,7 +9,7 @@ PKG_RELEASE:=		6
 PKG_MD5SUM:=		93780777cfbf999a600f62883bd54b17
 PKG_DESCR:=		boost c++ library
 PKG_SECTION:=		libs/misc
-PKG_BUILDDEP:=		autotool bzip2-host python2-host
+PKG_BUILDDEP:=		python2-host
 PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
 PKG_OPTS:=		dev

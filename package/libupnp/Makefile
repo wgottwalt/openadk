@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		ee16e5d33a3ea7506f38d71facc057dd
 PKG_DESCR:=		universal plug and play sdk library
 PKG_SECTION:=		libs/net
-PKG_BUILDDEP:=		autotool
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://pupnp.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pupnp/}

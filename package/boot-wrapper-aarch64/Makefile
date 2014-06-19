@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		2ffdbf8c05854e3b855314d9ac21bbc4
 PKG_DESCR:=		boot-wrapper for aarch64
 PKG_SECTION:=		base/boot
-PKG_BUILDDEP:=		autotool
 PKG_SITES:=		http://www.openadk.org/distfiles/
 
 PKG_SYSTEM_DEPENDS:=	arm-fm

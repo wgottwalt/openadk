@@ -10,7 +10,7 @@ PKG_MD5SUM:=		bb48b1c18cfc0a42708ef996b1a26926
 PKG_DESCR:=		encryption wrapper
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libopenssl
-PKG_BUILDDEP:=		autotool openssl
+PKG_BUILDDEP:=		openssl
 PKG_URL:=		https://www.stunnel.org
 PKG_SITES:=		https://www.stunnel.org/downloads/
 

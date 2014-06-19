@@ -10,7 +10,7 @@ PKG_MD5SUM:=		baddc38a5f26ca46a9ce7e778b59c1ae
 PKG_DESCR:=		routing advertisement daemon for ipv6
 PKG_SECTION:=		net/ipv6
 PKG_DEPENDS:=		libdaemon
-PKG_BUILDDEP:=		autotool libdaemon
+PKG_BUILDDEP:=		libdaemon
 PKG_URL:=		http://www.litech.org/radvd/
 PKG_SITES:=		http://v6web.litech.org/radvd/dist/
 

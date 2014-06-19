@@ -7,6 +7,30 @@ config ADK_HOST_BUILD_ADK_HELPER
 	boolean
 	default y
 
+config ADK_HOST_BUILD_AUTOCONF
+	boolean
+	default y
+
+config ADK_HOST_BUILD_AUTOMAKE
+	boolean
+	default y
+
+config ADK_HOST_BUILD_BISON
+	boolean
+	default y
+
+config ADK_HOST_BUILD_FLEX
+	boolean
+	default y
+
+config ADK_HOST_BUILD_M4
+	boolean
+	default y
+
+config ADK_HOST_BUILD_LIBTOOL
+	boolean
+	default y
+
 # always required, but can be provided by host
 config ADK_HOST_BUILD_BASH
 	boolean
@@ -15,10 +39,6 @@ config ADK_HOST_BUILD_BASH
 config ADK_HOST_BUILD_BC
 	boolean
 	select ADK_HOST_BUILD_FLEX
-	default n
-
-config ADK_HOST_BUILD_BISON
-	boolean
 	default n
 
 config ADK_HOST_BUILD_BZIP2
@@ -33,15 +53,7 @@ config ADK_HOST_BUILD_FINDUTILS
 	boolean
 	default n
 
-config ADK_HOST_BUILD_FLEX
-	boolean
-	default n
-
 config ADK_HOST_BUILD_GAWK
-	boolean
-	default n
-
-config ADK_HOST_BUILD_M4
 	boolean
 	default n
 

@@ -10,7 +10,7 @@ PKG_MD5SUM:=		a831efb36cfbaa419f8dc7a43cba72c9
 PKG_DESCR:=		web and cache proxy
 PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libopenssl libpthread libstdcxx libltdl
-PKG_BUILDDEP:=		autotool openssl libtool
+PKG_BUILDDEP:=		openssl libtool
 PKG_URL:=		http://www.squid-cache.org/
 PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.4/
 

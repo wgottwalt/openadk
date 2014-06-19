@@ -10,7 +10,7 @@ PKG_MD5SUM:=		2b5d1b40778922e5f6431b7758c359ad
 PKG_DESCR:=		streaming media server
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libcurl libvorbis libpthread libxml2 libxslt
-PKG_BUILDDEP:=		curl libvorbis libxml2 libxslt autotool
+PKG_BUILDDEP:=		curl libvorbis libxml2 libxslt
 PKG_URL:=		http://www.icecast.org/
 PKG_SITES:=		http://downloads.us.xiph.org/releases/icecast/
 

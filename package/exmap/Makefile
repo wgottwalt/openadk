@@ -10,7 +10,7 @@ PKG_MD5SUM:=		55aec784e214037e61400287a55b5426
 PKG_DESCR:=		memory analysing tools
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libreadline glib
-PKG_BUILDDEP:=		glib readline autotool
+PKG_BUILDDEP:=		glib readline
 PKG_SITES:=		http://labs.o-hand.com/sources/exmap-console/
 
 PKG_ARCH_DEPENDS:=	!m68k

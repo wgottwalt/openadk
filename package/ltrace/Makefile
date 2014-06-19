@@ -11,7 +11,7 @@ PKG_MD5SUM:=		266580175adba8cbb02b6b792d9f05f5
 PKG_DESCR:=		intercepts and records dynamic library calls 
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libelf
-PKG_BUILDDEP:=		autotool libelf
+PKG_BUILDDEP:=		libelf
 PKG_URL:=		http://ltrace.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 

@@ -10,7 +10,7 @@ PKG_MD5SUM:=		596acdd2940887dd05a498ea27475eea
 PKG_DESCR:=		wireless network detector, sniffer, and intrusion detection system
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		libpcap libncurses libpthread
-PKG_BUILDDEP:=		autotool libpcap ncurses
+PKG_BUILDDEP:=		libpcap ncurses
 PKG_URL:=		http://www.kismetwireless.net/
 PKG_SITES:=		http://www.kismetwireless.net/code/
 

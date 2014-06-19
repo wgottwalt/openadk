@@ -10,7 +10,7 @@ PKG_MD5SUM:=		7a460ccec64e3bec2835697b2eae533c
 PKG_DESCR:=		tiny emacs clone
 PKG_SECTION:=		app/editor
 PKG_DEPENDS:=		libgc
-PKG_BUILDDEP:=		autotool libgc
+PKG_BUILDDEP:=		libgc
 PKG_URL:=		http://www.gnu.org/software/zile/
 PKG_SITES:=		${MASTER_SITE_GNU:=zile/}
 
