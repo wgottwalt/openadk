@@ -4,10 +4,10 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		2.38.2
-PKG_RELEASE:=		4
-PKG_EXTRAVER:=		2.38
-PKG_MD5SUM:=		26d1d08e478fc48c181ca8be44f5b69f
+PKG_VERSION:=		2.40.0
+PKG_RELEASE:=		1
+PKG_EXTRAVER:=		2.40
+PKG_MD5SUM:=		05fb7cb17eacbc718e90366a1eae60d9
 PKG_DESCR:=		low-level core library that forms the basis of gtk+
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpthread
@@ -51,6 +51,8 @@ glib-install:
 	${CP} ${WRKINST}/usr/lib/libgobject*.so* ${IDIR_GLIB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgmodule*.so* ${IDIR_GLIB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgthread*.so* ${IDIR_GLIB}/usr/lib
+	${CP} ${WRKINST}/usr/share/aclocal/* \
+		${STAGING_HOST_DIR}/usr/share/aclocal
 	# workaround for dev subpackage
 	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/include
 	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/lib/glib-2.0/include
