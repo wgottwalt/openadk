@@ -31,14 +31,6 @@ if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
 	NEED_XKBCOMP="$NEED_XKBCOMP xkeyboard-config"
 fi
 
-if [[ -n $ADK_COMPILE_COROSYNC ]]; then
-	NEED_GROFF="$NEED_GROFF corosync"
-fi
-
-if [[ -n $ADK_PACKAGE_LIBXFONT ]]; then
-	NEED_XMLTO="$NEED_XMLTO libXfont"
-fi
-
 if [[ -n $ADK_PACKAGE_FONT_BITSTREAM_100DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-100dpi"
 fi
@@ -53,13 +45,6 @@ fi
 
 if [[ -n $ADK_PACKAGE_FONT_ADOBE_75DPI ]]; then
 	NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-75dpi"
-fi
-
-if [[ -n $NEED_GROFF ]]; then
-	if ! which groff >/dev/null 2>&1; then
-		echo >&2 You need groff to build $NEED_GROFF
-		out=1
-	fi
 fi
 
 if [[ -n $NEED_MKFONTDIR ]]; then
