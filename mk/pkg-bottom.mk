@@ -31,7 +31,7 @@ ifneq (,$(filter autoconf,${AUTOTOOL_STYLE}))
 endif
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
 	@$(CMD_TRACE) "autotool configuring... "
-	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -vif 2>/dev/null
+	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -vif $(MAKE_TRACE)
 	@rm -rf ${WRKSRC}/autom4te.cache
 	@touch ${WRKDIR}/.autoreconf_done
 endif
