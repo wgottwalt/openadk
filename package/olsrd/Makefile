@@ -4,9 +4,9 @@
 include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		olsrd
-PKG_VERSION:=		0.6.6.1
+PKG_VERSION:=		0.6.6.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		65181a5280391d69411908c186fd0c1f
+PKG_MD5SUM:=		e6beff67f1e01fea070fc0dc7dd55906
 PKG_DESCR:=		optimized link state routing protocol
 PKG_SECTION:=		net/wifi
 PKG_URL:=		http://www.olsr.org/
