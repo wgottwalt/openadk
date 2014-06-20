@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf gpm_flags "-m /dev/psaux -t ps2"
+add_rcconf gpm_flags "-m /dev/input/mouse0 -t ps2"
 add_rcconf gpm NO
