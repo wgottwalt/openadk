@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
 PKG_VERSION:=		2.40.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_EXTRAVER:=		2.40
 PKG_MD5SUM:=		05fb7cb17eacbc718e90366a1eae60d9
 PKG_DESCR:=		low-level core library that forms the basis of gtk+
