@@ -5,7 +5,7 @@ include $(TOPDIR)/rules.mk
 
 PKG_NAME:=		sudo
 PKG_VERSION:=		1.8.10
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		954d64906c3f6e2436f33445a049c58b
 PKG_DESCR:=		su do
 PKG_SECTION:=		sys/misc
@@ -18,7 +18,7 @@ include $(TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SUDO,sudo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CPPFLAGS_FOR_BUILD+=	-I../ -I../include
+HOST_CPPFLAGS+=		-I../ -I../include
 CONFIGURE_ARGS+=	--without-pam \
 			--without-sendmail \
 			--with-env-editor
