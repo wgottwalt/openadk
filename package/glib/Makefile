@@ -5,7 +5,7 @@ include ${TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
 PKG_VERSION:=		2.40.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_EXTRAVER:=		2.40
 PKG_MD5SUM:=		05fb7cb17eacbc718e90366a1eae60d9
 PKG_DESCR:=		low-level core library that forms the basis of gtk+
@@ -41,8 +41,7 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-fam \
 			--enable-static \
-			--disable-compile-warnings \
-			--datadir=${STAGING_HOST_DIR}/usr/share
+			--disable-compile-warnings
 
 glib-install:
 	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib
@@ -51,8 +50,6 @@ glib-install:
 	${CP} ${WRKINST}/usr/lib/libgobject*.so* ${IDIR_GLIB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgmodule*.so* ${IDIR_GLIB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libgthread*.so* ${IDIR_GLIB}/usr/lib
-	${CP} ${WRKINST}/usr/share/aclocal/* \
-		${STAGING_HOST_DIR}/usr/share/aclocal
 	# workaround for dev subpackage
 	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/include
 	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/lib/glib-2.0/include
