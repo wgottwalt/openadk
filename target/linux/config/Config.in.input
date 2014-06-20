@@ -79,6 +79,9 @@ config ADK_KERNEL_INPUT_MOUSE
 	default y if ADK_TARGET_QEMU_ARM_MODEL_TERRIER
 	default n
 
+config ADK_KERNEL_INPUT_MOUSEDEV
+	boolean
+
 config ADK_KERNEL_HID_SUPPORT
 	boolean
 	default n
