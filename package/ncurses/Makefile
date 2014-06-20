@@ -26,7 +26,14 @@ include ${TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_ENV+=		ac_cv_linux_vers=2
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+CONFIGURE_ARGS+=	--with-static
+else
+CONFIGURE_ARGS+=	--with-shared
+endif
+
+CONFIGURE_ENV+=		ac_cv_linux_vers=2 \
+			PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig
 CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
 			--with-build-cc=${HOST_CC} \
@@ -35,7 +42,6 @@ CONFIGURE_ARGS+=	--without-cxx \
 			--enable-symlinks \
 			--without-ada \
 			--without-normal \
-			--with-shared \
 			--enable-pc-files \
 			--with-termlib \
 			--without-debug \

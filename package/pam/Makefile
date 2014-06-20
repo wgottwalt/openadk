@@ -28,8 +28,10 @@ CONFIGURE_ARGS+=	--disable-nis \
 			--enable-db=no
 
 post-install:
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),)
 	# /lib is not automatically installed to staging area
 	$(CP) $(WRKINST)/lib/libpam*.so* $(STAGING_TARGET_DIR)/usr/lib
+endif
 
 pam-install:
 	$(INSTALL_DIR) $(IDIR_PAM)/etc/security

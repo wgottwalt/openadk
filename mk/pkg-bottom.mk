@@ -13,6 +13,12 @@
 
 PKG_LIBNAME?=	$(PKG_NAME)
 
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+CONFIGURE_LIB:=--enable-static --disable-shared
+else
+CONFIGURE_LIB:=--enable-static --enable-shared
+endif
+
 pre-configure:
 do-configure:
 post-configure:
@@ -78,11 +84,10 @@ else ifeq ($(strip ${CONFIG_STYLE}),)
 	    --libexecdir=/usr/libexec \
 	    --localstatedir=/var \
 	    --sysconfdir=/etc \
-	    --enable-shared \
-	    --enable-static \
 	    --disable-dependency-tracking \
 	    --disable-libtool-lock \
 	    --disable-nls \
+	    ${CONFIGURE_LIB} \
 	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
 else
 	@echo "Invalid CONFIG_STYLE '${CONFIG_STYLE}'" >&2

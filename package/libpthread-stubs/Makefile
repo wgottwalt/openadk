@@ -22,6 +22,10 @@ include $(TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBPTHREAD_STUBS,libpthread-stubs,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBPTHREAD_STUBS,libpthread-stubs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+TARGET_LDFLAGS+=	-pthread
+endif
+
 HOST_STYLE:=		auto
 
 include ${TOPDIR}/mk/host-bottom.mk

@@ -22,11 +22,14 @@ $(eval $(call PKG_template,ZLIB,zlib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 CONFIG_STYLE:=		manual
 CONFIGURE_ENV+=		uname=Linux
 
-ifeq ($(ADK_STATIC),)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),)
 CONFIGURE_OPTS:=	--shared
 endif
 
-ALL_TARGET:=		libz.a libz.so.$(PKG_VERSION)
+ALL_TARGET:=		libz.a 
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),)
+ALL_TARGET+=		libz.so.$(PKG_VERSION)
+endif
 
 do-configure:
 	(cd $(WRKBUILD); \
