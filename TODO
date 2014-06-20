@@ -15,7 +15,6 @@ base system:
 
 new or update packages:
 - port weston / wayland
-- port lftp
 - add btrfs-utils
 - port uuterm
 - port opkg with gpg signing
