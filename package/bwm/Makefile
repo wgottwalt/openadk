@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bwm
 PKG_VERSION:=		1.1.0
@@ -14,7 +14,7 @@ PKG_SITES:=		http://ftp.debian.org/debian/pool/main/b/bwm/
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}.orig
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BWM,bwm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -29,4 +29,4 @@ do-install:
 	${INSTALL_DIR} ${IDIR_BWM}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/bwm ${IDIR_BWM}/usr/bin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

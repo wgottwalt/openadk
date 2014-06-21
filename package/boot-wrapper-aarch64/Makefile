@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		boot-wrapper-aarch64
 PKG_VERSION:=		0.1
@@ -15,7 +15,7 @@ PKG_SYSTEM_DEPENDS:=	arm-fm
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BOOT_WRAPPER_AARCH64,boot-wrapper-aarch64,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -25,4 +25,4 @@ CONFIGURE_ARGS+=	--with-kernel-dir=${LINUX_DIR}
 boot-wrapper-aarch64-install:
 	${CP} ${WRKBUILD}/linux-system.axf ${LINUX_DIR}
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

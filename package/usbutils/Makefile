@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		usbutils
 PKG_VERSION:=		006
@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libusb libusb-compat zlib
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/usb/usbutils/
 PKG_BB:=		1
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LSUSB,lsusb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -25,4 +25,4 @@ lsusb-install:
 	${INSTALL_DIR} ${IDIR_LSUSB}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/lsusb ${IDIR_LSUSB}/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

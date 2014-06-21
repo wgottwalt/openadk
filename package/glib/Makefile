@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		glib
 PKG_VERSION:=		2.40.0
@@ -20,8 +20,8 @@ PKG_OPTS:=		dev noscripts
 
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
-include ${TOPDIR}/mk/host.mk
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/host.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call HOST_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
@@ -59,5 +59,5 @@ glib-install:
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/glib-genmarshal \
 		${IDIR_GLIB_DEV}/usr/bin
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

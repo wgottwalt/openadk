@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
 PKG_VERSION:=		2.3.4
@@ -29,7 +29,7 @@ PKGCD_WITH_POLARSSL:=		use PolarSSL for crypto
 PKGCS_WITH_POLARSSL:=		libpolarssl
 PKGCB_WITH_POLARSSL:=		polarssl
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENVPN,openvpn,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -77,4 +77,4 @@ openvpn-install:
 	$(CP) ./files/server.conf $(IDIR_OPENVPN)/etc/openvpn/server.conf.example
 	$(CP) ./files/client.conf $(IDIR_OPENVPN)/etc/openvpn/client.conf.example
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

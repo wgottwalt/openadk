@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
 PKG_VERSION:=		1.0.1h
@@ -26,7 +26,7 @@ PKGSS_OPENSSL_UTIL:=	libopenssl
 PKG_FLAVOURS_LIBOPENSSL:=	WITH_CRYPTODEV
 PKGFD_WITH_CRYPTODEV:=		enable support for cryptodev-linux
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},$(PKG_OPTS)))
 $(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSL_UTIL},${PKGSD_OPENSSL_UTIL},${PKGSC_OPENSSL_UTIL}))
@@ -94,4 +94,4 @@ openssl-util-install:
 	${CP} ${WRKSRC}/apps/openssl.cnf ${IDIR_OPENSSL_UTIL}/etc/ssl/
 	chmod 0700 ${IDIR_OPENSSL_UTIL}/etc/ssl/private
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

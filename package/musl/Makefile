@@ -1,10 +1,10 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
-include $(TOPDIR)/mk/kernel-ver.mk
-include $(TOPDIR)/mk/kernel-vars.mk
-include $(TOPDIR)/toolchain/musl/Makefile.inc
+include $(ADK_TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/mk/kernel-ver.mk
+include $(ADK_TOPDIR)/mk/kernel-vars.mk
+include $(ADK_TOPDIR)/toolchain/musl/Makefile.inc
 
 PKG_NAME:=		musl
 PKG_DESCR:=		embedded C library
@@ -17,7 +17,7 @@ PKGSC_MUSL_DEV:=	dev/header
 
 NO_DISTFILES:=		1
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MUSL,musl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,MUSL_DEV,musl-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_MUSL_DEV},${PKGSC_MUSL_DEV},${PKG_OPTS}))
@@ -81,4 +81,4 @@ musl-dev-install:
 	@find $(IDIR_MUSL_DEV) -name .install -exec rm {} \;
 	@find $(IDIR_MUSL_DEV) -name ..install.cmd -exec rm {} \;
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

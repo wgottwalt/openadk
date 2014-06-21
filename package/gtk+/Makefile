@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gtk+
 PKG_VERSION:=		2.24.22
@@ -18,7 +18,7 @@ PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/$(PKG_EXTRAVER)/
 PKG_LIBNAME:=		libgtk
 PKG_OPTS:=		dev
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGTK,libgtk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -43,4 +43,4 @@ libgtk-install:
 	${CP} ${WRKINST}/usr/lib/gtk-2.0/include/* \
 		${IDIR_LIBGTK_DEV}/usr/lib/gtk-2.0/include
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

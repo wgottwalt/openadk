@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		strongswan
 PKG_VERSION:=		5.1.3
@@ -32,7 +32,7 @@ ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_OPENSSL},y)
 PKG_CFLINE_STRONGSWAN:=	select ADK_PACKAGE_LIBOPENSSL_WITH_EC
 endif
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,STRONGSWAN,strongswan,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -89,4 +89,4 @@ strongswan-install:
 	$(CP) $(WRKINST)/usr/lib/ipsec/libstrongswan*.so* \
 		$(IDIR_STRONGSWAN)/usr/lib/ipsec/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

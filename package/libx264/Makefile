@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libx264
 # actually is git checkout from 18.05.2014
@@ -16,7 +16,7 @@ PKG_OPTS:=		dev
 
 PKG_BUILDDEP_IBM_X40:=	yasm-host
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBX264,libx264,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -38,4 +38,4 @@ libx264-install:
 	$(CP) $(WRKINST)/usr/lib/libx264*.so* \
 		$(IDIR_LIBX264)/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

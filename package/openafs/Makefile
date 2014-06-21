@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openafs
 PKG_VERSION:=		1.6.5.1
@@ -17,7 +17,7 @@ PKG_CFLINE_OPENAFS+=	select ADK_KERNEL_KEYS
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-src.tar.bz2
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENAFS,openafs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -47,4 +47,4 @@ openafs-install:
 	$(CP) $(WRKINST)/usr/lib/openafs/libafs-${KERNEL_VERSION}.ko \
 		$(IDIR_OPENAFS)/lib/modules/${KERNEL_VERSION}/libafs.ko
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		coreutils
 PKG_VERSION:=		8.22
@@ -14,7 +14,7 @@ PKG_URL:=		http://www.gnu.org/software/coreutils/
 PKG_SITES:=		http://ftp.gnu.org/gnu/coreutils/
 PKG_BB:=		1
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,COREUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -29,4 +29,4 @@ coreutils-install:
 	$(CP) $(WRKINST)/usr/libexec/* \
 		$(IDIR_COREUTILS)/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

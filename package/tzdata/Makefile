@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		tzdata
 PKG_VERSION:=		2014d
@@ -23,7 +23,7 @@ WRKDIST=		${WRKDIR}
 PKG_SUBPKGS:=		TZDATA DATE
 PKGSD_DATE:=		famous date utility
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TZDATA,tzdata,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DATE,date,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DATE},${PKG_SECTION}))
@@ -59,4 +59,4 @@ date-install:
 	${INSTALL_DIR} ${IDIR_DATE}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/date ${IDIR_DATE}/usr/bin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

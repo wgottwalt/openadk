@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		siproxd
 PKG_VERSION:=		0.8.1
@@ -16,7 +16,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=siproxd/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SIPROXD,siproxd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -29,4 +29,4 @@ siproxd-install:
 	${INSTALL_DATA} ${WRKINST}/etc/siproxd_passwd.cfg ${IDIR_SIPROXD}/etc/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/siproxd ${IDIR_SIPROXD}/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

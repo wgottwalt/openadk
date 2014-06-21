@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		autossh
 PKG_VERSION:=		1.4b
@@ -15,7 +15,7 @@ PKG_SITES:=		http://www.harding.motd.ca/autossh/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tgz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,AUTOSSH,autossh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -23,4 +23,4 @@ autossh-install:
 	$(INSTALL_DIR) $(IDIR_AUTOSSH)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/autossh $(IDIR_AUTOSSH)/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

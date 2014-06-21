@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		heimdal
 PKG_VERSION:=		1.5.3
@@ -34,8 +34,8 @@ PKGCD_WITH_BDB:=		use Berkeley DB as database backend
 PKGCS_WITH_BDB:=		libdb
 PKGCB_WITH_BDB:=		db
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,HEIMDAL,heimdal,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,HEIMDAL_SERVER,heimdal-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -152,5 +152,5 @@ endif
 	${CP} ${WRKINST}/usr/lib/heimdal/libkadm5clnt.so* \
 		${IDIR_LIBHEIMDAL}/usr/lib/heimdal
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

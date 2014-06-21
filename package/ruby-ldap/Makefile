@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ruby-ldap
 PKG_VERSION:=		0.9.8
@@ -18,7 +18,7 @@ PKG_CFLINE_RUBY_LDAP:=	depends on ADK_BROKEN
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RUBY_LDAP,ruby-ldap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -41,4 +41,4 @@ ruby-ldap-install:
 	$(CP) $(STAGING_TARGET_DIR)//usr/lib/ruby/site_ruby/2.0.0/ldap/*.rb \
 		$(IDIR_RUBY_LDAP)/usr/lib/ruby/site_ruby/2.0.0/ldap
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

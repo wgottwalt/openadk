@@ -1,10 +1,10 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 include Makefile.inc
 include ../rules.mk
-include ${TOPDIR}/mk/buildhlp.mk
+include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 ifeq ($(ADK_TOOLCHAIN_WITH_SSP),y)
 CONFOPTS+=		--enable-libssp
@@ -41,7 +41,7 @@ endif
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 ifeq ($(ADK_LINUX_XTENSA),y)
-	tar xf $(TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
+	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
 		--strip-components=1 -C $(WRKSRC) binutils
 endif
 	(cd $(WRKBUILD); \
@@ -66,4 +66,4 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(WRKBUILD) install
 	touch $@
 
-include ${TOPDIR}/mk/toolchain.mk
+include ${ADK_TOPDIR}/mk/toolchain.mk

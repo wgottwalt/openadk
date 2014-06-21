@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 ifneq ($(filter-out clean,${MAKECMDGOALS}),)
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 endif
 
 CP=cp -fpR

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gperf
 PKG_VERSION:=		3.0.4
@@ -16,8 +16,8 @@ PKG_SITES:=		${MASTER_SITE_GNU:=${PKG_NAME}/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/host.mk
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/host.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call HOST_template,GPERF,gperf,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,GPERF,gperf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -26,5 +26,5 @@ gperf-install:
 	${INSTALL_DIR} ${IDIR_GPERF}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gperf ${IDIR_GPERF}/usr/bin
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

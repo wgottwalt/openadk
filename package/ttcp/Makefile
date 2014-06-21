@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ttcp
 PKG_VERSION:=		3.8
@@ -11,7 +11,7 @@ PKG_SECTION:=		net/perf
 
 NO_DISTFILES:=		1
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TTCP,ttcp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -27,4 +27,4 @@ do-install:
 	${INSTALL_DIR} ${IDIR_TTCP}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/ttcp ${IDIR_TTCP}/usr/bin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		portsentry
 PKG_VERSION:=		1.2
@@ -17,7 +17,7 @@ PKG_LIBC_DEPENDS:=	uclibc glibc
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_beta
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PORTSENTRY,portsentry,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -32,4 +32,4 @@ do-install:
 	${INSTALL_DATA} ${WRKBUILD}/${PKG_NAME}.conf ${IDIR_PORTSENTRY}/etc/
 	${INSTALL_BIN} ${WRKBUILD}/${PKG_NAME} ${IDIR_PORTSENTRY}/usr/bin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

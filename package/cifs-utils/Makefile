@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		cifs-utils
 PKG_VERSION:=		6.3
@@ -14,7 +14,7 @@ PKG_SITES:=		ftp://ftp.samba.org/pub/linux-cifs/cifs-utils/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CIFS_UTILS,cifs-utils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -31,4 +31,4 @@ cifs-utils-install:
 	$(INSTALL_BIN) $(WRKINST)/sbin/mount.cifs \
 		$(IDIR_CIFS_UTILS)/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

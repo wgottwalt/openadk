@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		digitemp
 PKG_VERSION:=		3.6.0
@@ -18,7 +18,7 @@ PKG_LIBC_DEPENDS:=	uclibc glibc
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DIGITEMP,digitemp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -33,4 +33,4 @@ do-install:
 	${INSTALL_BIN} ${WRKBUILD}/digitemp_DS2490 \
 		${IDIR_DIGITEMP}/usr/sbin/digitemp_DS2490
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

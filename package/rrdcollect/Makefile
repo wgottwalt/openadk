@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		rrdcollect
 PKG_VERSION:=		0.2.10
@@ -19,7 +19,7 @@ ifneq (${ADK_PACKAGE_LIBRRD},)
 RRDTOOL_LIBS:=		-lart_lgpl_2 -lfreetype -lpng
 endif
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RRDCOLLECT,rrdcollect,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -39,4 +39,4 @@ rrdcollect-install:
 	${INSTALL_DATA} ./files/rrdcollect.conf \
 		${IDIR_RRDCOLLECT}/etc/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gpsd
 PKG_VERSION:=		3.10
@@ -19,7 +19,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_SUBPKGS:=		GPSD GPSD_CLIENTS
 PKGSD_GPSD_CLIENTS:=	GPS client utilities
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GPSD,gpsd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,GPSD_CLIENTS,gpsd-clients,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_GPSD_CLIENTS},${PKG_SECTION}))
@@ -43,4 +43,4 @@ gpsd-clients-install:
 	${CP} ${WRKINST}/usr/bin/{cgps,gpxlogger} \
 		${IDIR_GPSD_CLIENTS}/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,4 +1,4 @@
-lappend boards_dir @TOPDIR@/tests
+lappend boards_dir @ADK_TOPDIR@/tests
 lappend boards_dir /usr/share/dejagnu
 set myboard adk
 set target_list adk

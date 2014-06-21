@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		pdnsd
 PKG_VERSION:=		1.2.7
@@ -20,7 +20,7 @@ PKG_HOST_DEPENDS:=	!netbsd
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-par.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PDNSD,pdnsd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -38,4 +38,4 @@ pdnsd-install:
 	$(INSTALL_DIR) $(IDIR_PDNSD)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/pdnsd{,-ctl} $(IDIR_PDNSD)/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

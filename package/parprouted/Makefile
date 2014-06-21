@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		parprouted
 PKG_VERSION:=		0.7
@@ -15,7 +15,7 @@ PKG_SITES:=		http://www.hazard.maks.net/parprouted/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PARPROUTED,parprouted,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -30,4 +30,4 @@ do-install:
 	${INSTALL_DIR} ${IDIR_PARPROUTED}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/parprouted ${IDIR_PARPROUTED}/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

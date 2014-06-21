@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		easy-rsa
 PKG_VERSION:=		2.0.2
@@ -15,7 +15,7 @@ PKG_SITES:=		http://openadk.org/distfiles/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,EASY_RSA,easy-rsa,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -35,4 +35,4 @@ easy-rsa-install:
 	${INSTALL_DATA} $(WRKBUILD)/easy-rsa/2.0/vars \
 		$(IDIR_EASY_RSA)/etc/easy-rsa/vars
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

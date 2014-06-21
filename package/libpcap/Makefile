@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libpcap
 PKG_VERSION:=		1.5.2
@@ -19,7 +19,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_FLAVOURS_LIBPCAP:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBPCAP,libpcap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -45,4 +45,4 @@ libpcap-install:
 	${INSTALL_DIR} ${IDIR_LIBPCAP}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libpcap.so* ${IDIR_LIBPCAP}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		omxplayer
 # actually 46616c55c2fad3dac47d17e8a6b41a16a4d6f15e from 13.04.2014
@@ -21,7 +21,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 PKG_LIBC_DEPENDS:=      glibc musl
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OMXPLAYER,omxplayer,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -43,4 +43,4 @@ omxplayer-install:
 	$(INSTALL_DATA) $(WRKSRC)/fonts/* \
 		$(IDIR_OMXPLAYER)/usr/share/fonts/truetype/freefont/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

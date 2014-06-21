@@ -1,11 +1,11 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
-include $(TOPDIR)/mk/kernel.mk
-include $(TOPDIR)/mk/modules.mk
-include $(TOPDIR)/mk/kernel-build.mk
-include $(TOPDIR)/mk/image.mk
+include $(ADK_TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/mk/kernel.mk
+include $(ADK_TOPDIR)/mk/modules.mk
+include $(ADK_TOPDIR)/mk/kernel-build.mk
+include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux.gz
 
@@ -17,8 +17,8 @@ targethelp:
 ifeq ($(ADK_TARGET_SYSTEM_ARANYM_M68K),y)
 	@sed -e "s#@@KERNEL@@#$(FW_DIR)/$(TARGET_KERNEL)#" \
 	    -e "s#@@INITRAMFS@@#${FW_DIR}/${INITRAMFS}#" \
-		$(TOPDIR)/target/m68k/aranym.cfg.in \
-		> $(TOPDIR)/target/m68k/aranym.cfg
+		$(ADK_TOPDIR)/target/m68k/aranym.cfg.in \
+		> $(ADK_TOPDIR)/target/m68k/aranym.cfg
 	@echo 'Start aranym with: aranym-mmu -l -c target/m68k/aranym.cfg'
 	@echo 'Ungrab mouse with middle mouse click'
 endif

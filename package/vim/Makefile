@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		vim
 PKG_VERSION:=		7.4
@@ -18,7 +18,7 @@ DISTFILES=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 WRKDIST=		${WRKDIR}/vim74
 WRKSRC=			${WRKDIST}/src
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,VIM,vim,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -64,4 +64,4 @@ vim-install:
 	${CP} ${WRKINST}/usr/share/vim/vim74/vimrc_example.vim \
 		${IDIR_VIM}/usr/share/vim/vimrc
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

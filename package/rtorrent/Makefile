@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		rtorrent
 PKG_VERSION:=		0.9.4
@@ -16,7 +16,7 @@ PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 AUTOTOOL_STYLE:=	autoreconf
 TARGET_LDFLAGS+=	-lpthread -ltinfo
@@ -27,4 +27,4 @@ rtorrent-install:
 	${INSTALL_DIR} ${IDIR_RTORRENT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/rtorrent ${IDIR_RTORRENT}/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

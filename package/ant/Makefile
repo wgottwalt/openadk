@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ant
 PKG_VERSION:=		1.8.4
@@ -17,8 +17,8 @@ PKG_CFLINE_ANT:=	depends on ADK_HOST_ONLY
 DISTFILES:=             apache-$(PKG_NAME)-$(PKG_VERSION)-src.tar.bz2
 WRKDIST=                $(WRKDIR)/apache-$(PKG_NAME)-$(PKG_VERSION)
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,ANT,ant,$(PKG_VERSION)-${PKG_RELEASE}))
 
@@ -39,5 +39,5 @@ ant-hostinstall:
 	$(CP) bin/* $(STAGING_HOST_DIR)/usr/bin ; \
 	$(CP) lib/* $(STAGING_HOST_DIR)/usr/lib
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

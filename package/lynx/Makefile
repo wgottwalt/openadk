@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lynx
 PKG_VERSION:=		2.8.8
@@ -19,7 +19,7 @@ PKG_NOPARALLEL:=	1
 DISTFILES=		${PKG_NAME}${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/lynx2-8-8
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LYNX,lynx,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -87,4 +87,4 @@ lynx-install:
 	${CP} ${WRKINST}/etc/lynx.{cfg,lss} ${IDIR_LYNX}/etc
 	${CP} ${WRKINST}/usr/bin/lynx ${IDIR_LYNX}/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

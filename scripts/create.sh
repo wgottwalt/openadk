@@ -27,13 +27,13 @@
 # Create a hard disc image, bootable using GNU GRUB2, with an ext2fs
 # root partition and an OpenADK cfgfs partition.
 
-TOPDIR=$(pwd)
+ADK_TOPDIR=$(pwd)
 HOST=$(gcc -dumpmachine)
 me=$0
 
 case :$PATH: in
-(*:$TOPDIR/host_$HOST/usr/bin:*) ;;
-(*) export PATH=$PATH:$TOPDIR/host_$HOST/usr/bin ;;
+(*:$ADK_TOPDIR/host_$HOST/usr/bin:*) ;;
+(*) export PATH=$PATH:$ADK_TOPDIR/host_$HOST/usr/bin ;;
 esac
 
 test -n "$KSH_VERSION" || exec mksh "$me" "$@"
@@ -46,7 +46,7 @@ fi
 
 me=${me##*/}
 
-TOPDIR=$(realpath .)
+ADK_TOPDIR=$(realpath .)
 ostype=$(uname -s)
 
 function usage {
@@ -182,7 +182,7 @@ else
 	print Preparing partition table...
 fi
 dd if=/dev/zero of="$T/firsttrack" count=$partofs 2>/dev/null
-echo $corestartsec $coreendsec | mksh "$TOPDIR/scripts/bootgrub.mksh" \
+echo $corestartsec $coreendsec | mksh "$ADK_TOPDIR/scripts/bootgrub.mksh" \
     -A -g $((cyls - cfgfs)):$heads:$secs -M 1:0x83 -O $partofs | \
     dd of="$T/firsttrack" conv=notrunc 2>/dev/null
 if (( usegrub )); then
@@ -325,6 +325,6 @@ case $tgttype {
 }
 
 print Finishing up...
-cd "$TOPDIR"
+cd "$ADK_TOPDIR"
 rm -rf "$T"
 exit 0

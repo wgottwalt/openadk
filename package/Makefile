@@ -3,7 +3,7 @@
 
 # Main makefile for the packages
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 ifeq (${ADK_TARGET_LIB_GLIBC},y)
 package-$(ADK_PACKAGE_GLIBC) += glibc
@@ -23,7 +23,7 @@ endif
 
 package-$(ADK_PACKAGE_LIBPTHREAD) += libpthread
 
-include $(TOPDIR)/package/Depends.mk
+include $(ADK_TOPDIR)/package/Depends.mk
 
 COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y))
 HOST_COMPILE_PACKAGES:=$(patsubst %,%-host-compile,$(hostpackage-y))
@@ -55,9 +55,9 @@ endif
 
 %-compile:
 	$(START_TRACE) "package/$(patsubst %-compile,%,$@)-compile: "
-	@if test -f $(TOPDIR)/.rebuild.$(patsubst %-compile,%,$@); then \
+	@if test -f $(ADK_TOPDIR)/.rebuild.$(patsubst %-compile,%,$@); then \
 		$(MAKE) -C $(patsubst %-compile,%,$@) clean ; \
-		rm $(TOPDIR)/.rebuild.$(patsubst %-compile,%,$@) ; \
+		rm $(ADK_TOPDIR)/.rebuild.$(patsubst %-compile,%,$@) ; \
 	fi
 	$(MAKE) -C $(patsubst %-compile,%,$@) fake build-all-pkgs
 	$(CMD_TRACE) " done"

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xsetroot
 PKG_VERSION:=		1.1.0
@@ -15,7 +15,7 @@ PKG_SITES:=		${MASTER_SITE_XORG}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XSETROOT,xsetroot,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -24,4 +24,4 @@ xsetroot-install:
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/xsetroot \
 		$(IDIR_XSETROOT)/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -31,13 +31,13 @@ endif
 
 imageprepare: image-prepare-post extra-install
 
-# if an extra directory exist in TOPDIR, copy all content over the 
+# if an extra directory exist in ADK_TOPDIR, copy all content over the 
 # root directory, do the same if make extra=/dir/to/extra is used
 extra-install:
-	@-if [ -h ${TARGET_DIR}/etc/resolv.conf -a -f $(TOPDIR)/extra/etc/resolv.conf ];then \
+	@-if [ -h ${TARGET_DIR}/etc/resolv.conf -a -f $(ADK_TOPDIR)/extra/etc/resolv.conf ];then \
 		rm ${TARGET_DIR}/etc/resolv.conf;\
 	fi
-	@if [ -d $(TOPDIR)/extra ];then $(CP) $(TOPDIR)/extra/* ${TARGET_DIR};fi
+	@if [ -d $(ADK_TOPDIR)/extra ];then $(CP) $(ADK_TOPDIR)/extra/* ${TARGET_DIR};fi
 	@if [ ! -z $(extra) ];then $(CP) $(extra)/* ${TARGET_DIR};fi
 
 image-prepare-post:
@@ -57,7 +57,7 @@ image-prepare-post:
 		> $(TARGET_DIR)/etc/.adkversion
 	echo $(ADK_TARGET_SYSTEM) > $(TARGET_DIR)/etc/.adktarget
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
-	gzip -9c ${TOPDIR}/.config > $(TARGET_DIR)/etc/adkconfig.gz
+	gzip -9c ${ADK_TOPDIR}/.config > $(TARGET_DIR)/etc/adkconfig.gz
 	chmod 600 $(TARGET_DIR)/etc/adkconfig.gz
 endif
 ifneq ($(ADK_LINUX_X86_64)$(ADK_LINUX_PPC64)$(ADK_LINUX_SPARC64)$(ADK_TARGET_ABI_N32)$(ADK_TARGET_ABI_N64),)

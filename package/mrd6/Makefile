@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mrd6
 PKG_VERSION:=		0.9.6
@@ -15,7 +15,7 @@ PKG_CXX:=		MRD6
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKBUILD=		${WRKSRC}/src
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MRD6,mrd6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -46,4 +46,4 @@ mrd6-install:
 	${INSTALL_BIN} ${WRKINST}/usr/local/lib/mrd6/bgp.so \
 		 ${IDIR_MRD6}/usr/lib/mrd6/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

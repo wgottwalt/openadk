@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		pcc-libs
 PKG_VERSION:=		1.0.0
@@ -17,7 +17,7 @@ PKG_CFLINE_PCC_LIBS:=	depends on ADK_BROKEN
 PKG_ARCH_DEPENDS:=	!arm !m68k !mips !ppc
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PCC_LIBS,pcc-libs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -30,4 +30,4 @@ pcc-libs-install:
 	$(INSTALL_DIR) $(IDIR_PCC_LIBS)/usr/bin
 	cd ${WRKINST} && cp -r * ${IDIR_PCC_LIBS}/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

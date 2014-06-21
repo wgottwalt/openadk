@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		jack2
 PKG_VERSION:=		1.9.10
@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		python2-host alsa-lib libsndfile
 PKG_URL:=		http://jackaudio.org
 PKG_SITES:=		http://openadk.org/distfiles/
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,JACK2,jack2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -39,4 +39,4 @@ jack2-install:
 	$(CP) $(WRKINST)/usr/lib/libjack{,server,net}.so* \
 		$(IDIR_JACK2)/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

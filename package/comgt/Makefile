@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		comgt
 PKG_VERSION:=		0.32
@@ -15,7 +15,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=comgt/}
 DISTFILES:=		${PKG_NAME}.${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}.${PKG_VERSION}
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,COMGT,comgt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -28,4 +28,4 @@ do-install:
 	${INSTALL_BIN} ${WRKBUILD}/comgt ${IDIR_COMGT}/usr/bin/comgt
 	${INSTALL_DATA} ./files/*.comgt ${IDIR_COMGT}/etc/comgt/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

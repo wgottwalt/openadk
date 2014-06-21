@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		cdrtools
 PKG_VERSION:=		3.01
@@ -14,8 +14,8 @@ PKG_SITES:=		ftp://ftp.berlios.de/pub/cdrecord/
 
 PKG_CFLINE_CDRTOOLS:=	depends on ADK_HOST_ONLY
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,CDRTOOLS,cdrtools,$(PKG_VERSION)-${PKG_RELEASE}))
 
@@ -30,5 +30,5 @@ cdrtools-hostinstall:
 	$(INSTALL_BIN) $(WRKBUILD)/mkisofs/OBJ/*/mkisofs \
 		$(STAGING_HOST_DIR)/usr/bin
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

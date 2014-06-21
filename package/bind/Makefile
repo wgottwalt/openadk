@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bind
 PKG_VERSION:=		9.9.5
@@ -43,7 +43,7 @@ PKGSC_LIBBIND:=		libs/net
 PKG_FLAVOURS_BIND_SERVER:=	WITH_IPV6
 PKGFD_WITH_IPV6:=		enable IPv6 support
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BIND_SERVER,bind-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,BIND_NSUPDATE,bind-nsupdate,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_NSUPDATE},${PKGSD_BIND_NSUPDATE},${PKGSC_BIND_NSUPDATE}))
@@ -117,4 +117,4 @@ libbind-install:
 	${CP} ${WRKINST}/usr/lib/libisc.so.* ${IDIR_LIBBIND}/usr/lib
 	${CP} ${WRKINST}/usr/lib/liblwres.so.* ${IDIR_LIBBIND}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

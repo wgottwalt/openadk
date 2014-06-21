@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		CherryPy
 PKG_VERSION:=		3.3.0
@@ -16,7 +16,7 @@ PKG_SITES:=		https://pypi.python.org/packages/source/C/CherryPy/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CHERRYPY,cherrypy,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -24,7 +24,7 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-include $(TOPDIR)/mk/python.mk
+include $(ADK_TOPDIR)/mk/python.mk
 
 do-build:
 	cd $(WRKBUILD); env PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py build
@@ -36,4 +36,4 @@ do-install:
 	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/* $(IDIR_CHERRYPY)/usr/lib/python$(PYTHON_VERSION)
 	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/site-packages/cherrypy/cherryd $(IDIR_CHERRYPY)/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

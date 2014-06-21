@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot-imx6
 PKG_VERSION:=		20140416
@@ -16,7 +16,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 PKG_SYSTEM_DEPENDS:=	cubox-i
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,U_BOOT_IMX6,u-boot-imx6,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -34,4 +34,4 @@ u-boot-imx6-install:
 	$(CP) ${WRKBUILD}/SPL ${FW_DIR}
 	$(CP) ${WRKBUILD}/u-boot.img ${FW_DIR}
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

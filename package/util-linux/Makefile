@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.24.2
@@ -42,7 +42,7 @@ PKGSC_MOUNT:=		sys/fs
 PKGSD_MCOOKIE:=		generate magic cookies for xauth
 PKGSC_MCOOKIE:=		x11/utils
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FDISK,fdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FDISK},${PKGSC_FDISK}))
 $(eval $(call PKG_template,CFDISK,cfdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_CFDISK},${PKGSC_CFDISK}))
@@ -121,4 +121,4 @@ libmount-install:
 	${INSTALL_DIR} ${IDIR_LIBMOUNT}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libmount.so* ${IDIR_LIBMOUNT}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

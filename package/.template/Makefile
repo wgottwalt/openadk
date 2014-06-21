@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 # always use tab spaces as separator, no spaces
 PKG_NAME:=		@PKG@
@@ -55,7 +55,7 @@ PKG_SITES:=		add download url without package name
 # if downloaded package is not ending with .tar.xz use following
 #DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,@UPKG@,@PKG@,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -74,4 +74,4 @@ $(eval $(call PKG_template,@UPKG@,@PKG@,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPE
 		$(IDIR_@UPKG@)/usr/bin
 
 # please remove ALL above comments, before commiting
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

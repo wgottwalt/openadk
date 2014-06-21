@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		joe
 PKG_VERSION:=		3.7
@@ -18,7 +18,7 @@ PKG_FLAVOURS_JOE:=	LANGUAGE SYNTAX
 PKGFD_LANGUAGE:=	install translation files
 PKGFD_SYNTAX:=		install syntax highlighting files
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,JOE,joe,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -38,4 +38,4 @@ ifeq (${ADK_PACKAGE_JOE_SYNTAX},y)
 	${CP} ${WRKINST}/usr/share/joe/charmaps/* ${IDIR_JOE}/usr/share/joe/charmaps
 endif
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

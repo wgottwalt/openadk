@@ -78,7 +78,7 @@ else
 fi
 
 cat >Makefile <<'EOF'
-include ${TOPDIR}/prereq.mk
+include ${ADK_TOPDIR}/prereq.mk
 all: run-test
 
 test: test.c
@@ -96,7 +96,7 @@ cat >test.c <<-'EOF'
 		return (0);
 	}
 EOF
-X=$($makecmd TOPDIR=$topdir 2>&1)
+X=$($makecmd ADK_TOPDIR=$topdir 2>&1)
 if [[ $X != *@(Native compiler works)* ]]; then
 	echo "$X" | sed 's/^/| /'
 	echo Cannot compile a simple test programme.
@@ -144,7 +144,7 @@ cat >test.c <<-'EOF'
 	}
 EOF
 X=$(echo 'Yay! Native compiler works.' | gzip | \
-    $makecmd TOPDIR=$topdir LDADD=-lz 2>&1)
+    $makecmd ADK_TOPDIR=$topdir LDADD=-lz 2>&1)
 if [[ $X != *@(Native compiler works)* ]]; then
 	echo "$X" | sed 's/^/| /'
 	echo Cannot compile a libz test programm.

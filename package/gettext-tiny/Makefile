@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gettext-tiny
 PKG_VERSION:=		0.0.4
@@ -16,8 +16,8 @@ PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,GETTEXT_TINY,gettext-tiny,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,GETTEXT_TINY,gettext-tiny,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
@@ -34,5 +34,5 @@ gettext-tiny-hostinstall:
 	${CP} ${WRKBUILD}/libintl.a ${STAGING_HOST_DIR}/usr/lib
 	${CP} ${WRKBUILD}/{msgfmt,xgettext,msgmerge} ${STAGING_HOST_DIR}/usr/bin
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

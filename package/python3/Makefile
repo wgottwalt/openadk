@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		python3
 PKG_VERSION:=		3.4.0
@@ -48,8 +48,8 @@ PKGFS_MOD_SSL:=		libopenssl
 DISTFILES=		Python-${PKG_VERSION}.tar.xz
 WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}
 
-include ${TOPDIR}/mk/host.mk
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/host.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 define PKG_mod_template
 
@@ -115,5 +115,5 @@ python3-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 		rm ${IDIR_PYTHON3}/usr/lib/python3.4/lib-dynload/$${i}*so; \
 	done
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,4 +1,4 @@
-TOPDIR=$(pwd)
+ADK_TOPDIR=$(pwd)
 
 all:	pdf text html
 

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		updatedd
 PKG_VERSION:=		2.6
@@ -26,7 +26,7 @@ PKGSN_UPDATEDD_MOD_TZO:=	updatedd
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 define PKG_libinstall
 	${INSTALL_DIR} ${IDIR_${1}}/usr/lib/updatedd
@@ -60,4 +60,4 @@ post-install:
 	$(call PKG_libinstall,UPDATEDD_MOD_REGFISH,regfish)
 	$(call PKG_libinstall,UPDATEDD_MOD_TZO,tzo)
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

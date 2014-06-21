@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ca-certificates
 PKG_VERSION:=		20090814
@@ -18,7 +18,7 @@ DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 PKG_FLAVOURS_CA_CERTS:=	SMALL
 PKGFD_SMALL:=		minimal set of CA certificates
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CA_CERTIFICATES,ca-certificates,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},force_etc))
 
@@ -38,4 +38,4 @@ else
 	-DESTDIR=${IDIR_CA_CERTIFICATES} ${BASH} ./extra/update-ca-certificates
 endif
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

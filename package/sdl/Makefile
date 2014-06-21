@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sdl
 PKG_VERSION:=		1.2.14
@@ -24,8 +24,8 @@ PKGFB_WITH_TSLIB:=	tslib
 DISTFILES:=             SDL-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/SDL-${PKG_VERSION}
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBSDL,libsdl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
@@ -60,5 +60,5 @@ libsdl-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL)/usr/lib
 	$(CP) ${WRKINST}/usr/lib/libSDL*.so* $(IDIR_LIBSDL)/usr/lib
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

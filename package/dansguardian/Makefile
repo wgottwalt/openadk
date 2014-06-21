@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		dansguardian
 PKG_VERSION:=		2.12.0.3
@@ -17,7 +17,7 @@ PKG_CXX:=		DANSGUARDIAN
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DANSGUARDIAN,dansguardian,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -51,4 +51,4 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dansguardian \
 		${IDIR_DANSGUARDIAN}/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		llvm
 PKG_VERSION:=		3.4
@@ -19,7 +19,7 @@ PKG_ARCH_DEPENDS:=	mips x86 x86_64 arm
 PKG_CFLINE_LLVM:=	depends on ADK_BROKEN
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.src.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 TARGET_CFLAGS:=         $(filter-out -fhonour-copts,$(TARGET_CFLAGS))
 # disable honour cflags stuff
@@ -45,4 +45,4 @@ do-install:
 	cp ${WRKBUILD}/BuildTools/BuildTools/Release+Asserts/bin/llvm-config \
 		$(STAGING_TARGET_DIR)/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

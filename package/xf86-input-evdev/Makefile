@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-input-evdev
 PKG_VERSION:=		2.7.0
@@ -19,7 +19,7 @@ PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_CFLINE_XF86_INPUT_EVDEV:= depends on ADK_TARGET_WITH_INPUT
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_INPUT_EVDEV,xf86-input-evdev,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -28,4 +28,4 @@ xf86-input-evdev-install:
 	${CP} ${WRKINST}/usr/lib/xorg/modules/input/evdev_drv.so \
 		${IDIR_XF86_INPUT_EVDEV}/usr/lib/xorg/modules/input/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

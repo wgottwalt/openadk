@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 include ../rules.mk
 
 # glibc does not compile with Os
@@ -11,7 +11,7 @@ TARGET_CFLAGS+=		-O2
 endif
 
 include Makefile.inc
-include ${TOPDIR}/mk/buildhlp.mk
+include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 GLIBC_MAKEOPTS+=	cross-compiling=yes
 ifeq (${ADK_MAKE_PARALLEL},y)
@@ -75,4 +75,4 @@ ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 endif
 	touch $@
 
-include ${TOPDIR}/mk/toolchain.mk
+include ${ADK_TOPDIR}/mk/toolchain.mk

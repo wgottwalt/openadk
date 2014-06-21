@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssh
 PKG_VERSION:=		6.6p1
@@ -39,7 +39,7 @@ PKGCD_WITH_HEIMDAL:=	with Heimdal Kerberos
 PKGCS_WITH_HEIMDAL:=	libheimdal libcom-err
 PKGCB_WITH_HEIMDAL:=	heimdal
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENSSH,openssh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSSH_SERVER,openssh-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSH_SERVER},${PKGSD_OPENSSH_SERVER},${PKG_SECTION}))
@@ -128,4 +128,4 @@ openssh-sftp-server-install:
 	${INSTALL_BIN} ${WRKINST}/usr/libexec/sftp-server \
 		${IDIR_OPENSSH_SFTP_SERVER}/usr/libexec
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

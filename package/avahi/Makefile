@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		avahi
 PKG_VERSION:=		0.6.31
@@ -26,7 +26,7 @@ PKGSD_AVAHI_DNSCONFD:=	DNS server from mDNS configuration daemon
 PKGSD_LIBAVAHI:=	DNS-SD over mDNS library
 PKGSC_LIBAVAHI:=	libs/misc
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,AVAHI_DAEMON,avahi-daemon,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_AVAHI_DAEMON},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,AVAHI_DNSCONFD,avahi-dnsconfd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_AVAHI_DNSCONFD},${PKGSD_AVAHI_DNSCONFD},${PKG_SECTION}))
@@ -101,4 +101,4 @@ libavahi-install:
 	${CP} ${WRKINST}/usr/lib/libavahi-glib.so* \
 		${IDIR_LIBAVAHI}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		syslinux
 PKG_VERSION:=		6.02
@@ -16,8 +16,8 @@ PKG_SITES:=		http://www.kernel.org/pub/linux/utils/boot/syslinux/
 PKG_SUBPKGS:=		PXELINUX
 PKGSD_PXELINUX:=	pxelinux
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,SYSLINUX,syslinux,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,PXELINUX,pxelinux,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -48,5 +48,5 @@ pxelinux-install:
 		${IDIR_PXELINUX}/tftpboot
 	$(CP) ./files/default ${IDIR_PXELINUX}/tftpboot/pxelinux.cfg
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

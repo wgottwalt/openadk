@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		v4l-utils
 PKG_VERSION:=		1.0.0
@@ -21,7 +21,7 @@ PKG_SUBPKGS:=		V4L_UTILS LIBV4L
 PKGSC_LIBV4L:=		libs/video
 PKGSD_LIBV4L:=		Video4Linux2 libraries
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,V4L_UTILS,v4l-utils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBV4L,libv4l,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBV4L},${PKGSC_LIBV4L},${PKG_OPTS}))
@@ -41,4 +41,4 @@ libv4l-install:
 	$(CP) $(WRKINST)/usr/lib/libv4l/v4l{1compat,2convert}.so \
 		$(IDIR_LIBV4L)/usr/lib/libv4l
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		adkinstall
 PKG_VERSION:=		2.0
@@ -13,7 +13,7 @@ PKG_DEPENDS:=		mke2fs parted sfdisk dosfstools mksh
 PKG_SYSTEM_DEPENDS:=	mikrotik-rb532 lemote-yeelong
 NO_DISTFILES:=		1
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ADKINSTALL,adkinstall,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -25,4 +25,4 @@ do-install:
 	$(INSTALL_DIR) $(IDIR_ADKINSTALL)/sbin
 	$(INSTALL_BIN) ./src/adkinstall $(IDIR_ADKINSTALL)/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

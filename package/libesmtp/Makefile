@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libesmtp
 PKG_VERSION:=		1.0.6
@@ -20,7 +20,7 @@ PKGFD_WITH_SSL:=	enable ssl support
 PKGFS_WITH_SSL:=	libopenssl
 PKGFB_WITH_SSL:=	openssl
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBESMTP,libesmtp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -38,4 +38,4 @@ libesmtp-install:
 	$(CP) $(WRKINST)/usr/lib/esmtp-plugins/*.so \
 		$(IDIR_LIBESMTP)/usr/lib/esmtp-plugins/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

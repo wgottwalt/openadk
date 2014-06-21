@@ -1,10 +1,10 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
-include ${TOPDIR}/mk/buildhlp.mk
+include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 ifeq ($(ADK_TARGET_CPU_ARCH),ppc)
 GNU_TARGET_NAME:= $(subst ppc,powerpc,$(GNU_TARGET_NAME))
@@ -61,4 +61,4 @@ ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 endif
 	touch $@
 
-include ${TOPDIR}/mk/toolchain.mk
+include ${ADK_TOPDIR}/mk/toolchain.mk

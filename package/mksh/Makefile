@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mksh
 PKG_VERSION:=		49
@@ -17,8 +17,8 @@ PKG_DFLT_MKSH:=		y if !ADK_TOOLCHAIN_ONLY
 DISTFILES=		${PKG_NAME}-R${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}
 
-include ${TOPDIR}/mk/host.mk
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/host.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call HOST_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,MKSH,mksh,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
@@ -50,5 +50,5 @@ mksh-install:
 	${INSTALL_BIN} ${WRKBUILD}/mksh ${IDIR_MKSH}/bin/
 	${CP} ${WRKSRC}/dot.mkshrc ${IDIR_MKSH}/root/.mkshrc
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

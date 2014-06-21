@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		midori
 PKG_VERSION:=		0.5.8
@@ -17,7 +17,7 @@ PKG_SITES:=		http://www.openadk.org/distfiles/
 
 WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MIDORI,midori,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -36,4 +36,4 @@ midori-install:
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/midori \
 		$(IDIR_MIDORI)/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bcm2835-vc
 # actually git checkout from 03.06.2014
@@ -17,7 +17,7 @@ PKG_SITES:=		http://openadk.org/distfiles/
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BCM2835_VC,bcm2835-vc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -37,4 +37,4 @@ bcm2835-vc-install:
 	${CP} ${WRKINST}/opt/vc/lib ${STAGING_TARGET_DIR}/opt/vc
 	${CP} ${WRKINST}/opt/vc/include ${STAGING_TARGET_DIR}/opt/vc
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

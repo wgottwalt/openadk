@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		vpnc
 PKG_VERSION:=		0.5.3
@@ -16,7 +16,7 @@ PKG_SITES:=		http://www.unix-ag.uni-kl.de/~massar/vpnc/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,VPNC,vpnc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -33,4 +33,4 @@ vpnc-install:
 	${CP} files/vpnc-script ${IDIR_VPNC}/etc/vpnc/
 	${CP} files/vpnc.conf ${IDIR_VPNC}/etc/vpnc/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

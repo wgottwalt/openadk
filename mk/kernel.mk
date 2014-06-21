@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/mk/kernel-ver.mk
+include $(ADK_TOPDIR)/mk/kernel-ver.mk
 
 LINUX_KMOD_SUFFIX=ko
 MODULES_SUBDIR := lib/modules/$(KERNEL_MOD_VERSION)

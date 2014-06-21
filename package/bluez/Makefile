@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bluez
 PKG_VERSION:=		5.19
@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		glib dbus readline
 PKG_URL:=		http://www.bluez.org/
 PKG_SITES:=		http://mirror.anl.gov/pub/linux/bluetooth/
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BLUEZ,bluez,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -48,4 +48,4 @@ bluez-install:
 	$(INSTALL_DATA) ./files/bluetooth.conf \
 		$(IDIR_BLUEZ)/etc/dbus-1/system.d
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

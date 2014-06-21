@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gcj
 PKG_VERSION:=		4.8.2
@@ -15,8 +15,8 @@ PKG_CFLINE_GCJ:=	depends on ADK_HOST_ONLY
 DISTFILES:=		gcc-$(PKG_VERSION).tar.bz2
 WRKDIST=		${WRKDIR}/gcc-${PKG_VERSION}
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,GCJ,gcj,$(PKG_VERSION)-${PKG_RELEASE}))
 
@@ -39,5 +39,5 @@ HOST_CONFIGURE_ARGS:=	--enable-dependency-tracking \
 			--disable-multilib \
 			--disable-bootstrap
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
 PKG_VERSION:=		2.2.3
@@ -86,7 +86,7 @@ endif
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBFFMPEG,libffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKGSD_LIBFFMPEG},${PKGSC_LIBFFMPEG},${PKG_OPTS}))
 $(eval $(call PKG_template,FFMPEG,ffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFMPEG},${PKGSC_FFMPEG}))
@@ -194,4 +194,4 @@ ffprobe-install:
 	${INSTALL_DIR} ${IDIR_FFPROBE}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/ffprobe ${IDIR_FFPROBE}/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

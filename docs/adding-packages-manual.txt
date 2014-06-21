@@ -15,7 +15,7 @@ scripts.
 01: # This file is part of the OpenADK project. OpenADK is copyrighted
 02: # material, please see the LICENCE file in the top-level directory.
 03:
-04: include $(TOPDIR)/rules.mk
+04: include $(ADK_TOPDIR)/rules.mk
 05:
 06: PKG_NAME:=		libfoo
 07: PKG_VERSION:=	1.0
@@ -28,7 +28,7 @@ scripts.
 14: PKG_URL:=		http://www.libfoo.org/
 15: PKG_SITES:=		http://download.libfoo.org/
 16:
-17: include $(TOPDIR)/mk/package.mk
+17: include $(ADK_TOPDIR)/mk/package.mk
 18:
 19: $(eval $(call PKG_template,LIBFOO,libfoo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 20:
@@ -46,7 +46,7 @@ scripts.
 32:	${INSTALL_DIR} ${IDIR_LIBFOO}/usr/lib
 33:	${CP} ${WRKBUILD}/libfoo.so* ${IDIR_LIBFOO}/usr/lib
 34:
-35: include ${TOPDIR}/mk/pkg-bottom.mk
+35: include ${ADK_TOPDIR}/mk/pkg-bottom.mk
 --------------------------------
 
 The Makefile begins with line 4 with the inclusion of the top level rules.mk

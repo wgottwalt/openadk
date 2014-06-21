@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		asterisk
 PKG_VERSION:=		12.3.0
@@ -46,7 +46,7 @@ PKGSD_ASTERISK_SOUNDS:=		various soundfiles in GSM format
 PKGSN_ASTERISK_SOUNDS:=		asterisk
 PKGSS_ASTERISK_SOUNDS:=		asterisk-codec-gsm
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ASTERISK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_PGSQL,asterisk-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_PGSQL},${PKG_SECTION}))
@@ -205,4 +205,4 @@ asterisk-meetme-install:
 	${INSTALL_BIN} ${WRKBUILD}/apps/app_meetme.so \
 		${IDIR_ASTERISK_MEETME}/usr/lib/asterisk/modules
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

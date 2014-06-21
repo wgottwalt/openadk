@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ssmtp
 PKG_VERSION:=		2.61
@@ -13,7 +13,7 @@ PKG_SITES:=		http://ftp.debian.org/debian/pool/main/s/ssmtp/
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SSMTP,ssmtp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -29,4 +29,4 @@ do-install:
 	${INSTALL_BIN} ${WRKBUILD}/ssmtp ${IDIR_SSMTP}/usr/sbin/
 	ln -sf ssmtp ${IDIR_SSMTP}/usr/sbin/sendmail
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

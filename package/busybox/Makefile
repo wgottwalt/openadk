@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.22.1
@@ -15,7 +15,7 @@ PKG_SITES:=		http://www.busybox.net/downloads/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BUSYBOX,busybox,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -32,10 +32,10 @@ BB_MAKE_FLAGS:=		V=1 \
 
 do-configure:
 	# get all symbols from top level config
-	grep BUSYBOX_ $(TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
+	grep BUSYBOX_ $(ADK_TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
 		${WRKBUILD}/.config
 	# remove all disabled symbols
-	for i in $$(grep "BUSYBOX_DISABLE" $(TOPDIR)/.config);do \
+	for i in $$(grep "BUSYBOX_DISABLE" $(ADK_TOPDIR)/.config);do \
 		test -s "$$i" || continue; \
 		grep -v $${i#BUSYBOX_DISABLE} ${WRKBUILD}/.config > \
 		${WRKBUILD}/.config.tmp; \
@@ -74,4 +74,4 @@ ifneq ($(strip ${ADK_PACKAGE_CFGFS}),)
 	cd ${IDIR_BUSYBOX}/sbin && rm -f halt poweroff reboot
 endif
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ntpclient
 PKG_VERSION:=		2010_365
@@ -24,7 +24,7 @@ PKGFD_HOST:=	Fetch time from this NTP host
 PKGFX_HOST:=	pool.ntp.org
 PKGFC_HOST:=	depends on ADK_PACKAGE_NTPCLIENT_STARTUP
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NTPCLIENT,ntpclient,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -44,4 +44,4 @@ ifeq (${ADK_PACKAGE_NTPCLIENT_STARTUP},y)
 	echo -e "#!/bin/sh\n#INIT 91\nntpclient -h ${ADK_PACKAGE_NTPCLIENT_HOST} -s\nexit 0" > ${IDIR_NTPCLIENT}/etc/init.d/ntpclient
 endif
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

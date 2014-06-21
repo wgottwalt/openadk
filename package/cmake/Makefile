@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		cmake
 PKG_VERSION:=		2.8.12
@@ -16,8 +16,8 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_CFLINE_CMAKE:=	depends on ADK_HOST_ONLY
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,CMAKE,cmake,$(PKG_VERSION)-${PKG_RELEASE}))
 
@@ -36,5 +36,5 @@ cmake-hostinstall:
 	$(INSTALL_BIN) $(WRKBUILD)/bin/cmake \
 		$(STAGING_HOST_DIR)/usr/bin
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

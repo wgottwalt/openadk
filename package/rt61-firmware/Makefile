@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		rt61-firmware
 PKG_VERSION:=		1
@@ -14,7 +14,7 @@ PKG_SITES:=		http://www.openadk.org/distfiles/
 DISTFILES:=		RT61_Firmware_V1.2.zip
 WRKDIST=		${WRKDIR}/RT61_Firmware_V1.2
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RT61_FIRMWARE,rt61-firmware,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -27,4 +27,4 @@ do-install:
 	${CP} ${WRKBUILD}/rt2*.bin \
 		${IDIR_RT61_FIRMWARE}/lib/firmware
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

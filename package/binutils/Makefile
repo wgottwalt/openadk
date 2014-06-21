@@ -1,8 +1,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
-include ${TOPDIR}/toolchain/binutils/Makefile.inc
+include ${ADK_TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/toolchain/binutils/Makefile.inc
 
 PKG_NAME:=		binutils
 PKG_DESCR:=		binary utilities (nm, objdump, as, ..)
@@ -17,7 +17,7 @@ PKGSC_LIBBFD:=		libs/misc
 
 PKG_HOST_DEPENDS:=      !cygwin
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BINUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBBFD,libbfd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBBFD},${PKGSD_LIBBFD},${PKGSC_LIBBFD},${PKG_OPTS}))
@@ -51,4 +51,4 @@ binutils-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/{objcopy,ranlib,readelf,objdump} \
 		 ${IDIR_BINUTILS}/usr/bin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

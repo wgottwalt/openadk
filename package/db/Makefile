@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		db
 PKG_VERSION:=		5.3.21
@@ -18,7 +18,7 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKBUILD=		${WRKSRC}/build_unix
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBDB,libdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -42,4 +42,4 @@ libdb-install:
 	${INSTALL_DIR} ${IDIR_LIBDB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libdb*.so* ${IDIR_LIBDB}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

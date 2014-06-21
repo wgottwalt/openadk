@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kbd
 PKG_VERSION:=		2.0.1
@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		flex-host bison-host check
 PKG_URL:=		http://kbd-project.org/
 PKG_SITES:=		http://kbd-project.org/download/
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,KBD,kbd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -29,4 +29,4 @@ ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
 	$(CP) ./files/zaurus.map $(IDIR_KBD)/etc
 endif
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

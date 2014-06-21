@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		p54-firmware
 PKG_VERSION:=		1
@@ -14,7 +14,7 @@ PKG_SITES:=		http://daemonizer.de/prism54/prism54-fw/fw-usb/
 DISTFILES:=		2.13.24.0.lm87.arm
 WRKDIST=		${WRKDIR}
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,P54_FIRMWARE,p54-firmware,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -27,4 +27,4 @@ do-install:
 	${CP} ${WRKBUILD}/*.arm \
 		${IDIR_P54_FIRMWARE}/lib/firmware/isl3887usb
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

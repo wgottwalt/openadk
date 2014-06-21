@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		poppler
 PKG_VERSION:=		0.24.5
@@ -15,7 +15,7 @@ PKG_URL:=		http://poppler.freedesktop.org/
 PKG_SITES:=		http://poppler.freedesktop.org/
 PKG_OPTS:=		dev
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,POPPLER,poppler,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -24,4 +24,4 @@ poppler-install:
 	$(CP) $(WRKINST)/usr/lib/libpoppler*.so* \
 		$(IDIR_POPPLER)/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

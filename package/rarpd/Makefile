@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		rarpd
 PKG_VERSION:=		1.1
@@ -15,7 +15,7 @@ PKG_SITES:=		ftp://ftp.dementia.org/pub/net-tools/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RARPD,rarpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -27,4 +27,4 @@ rarpd-install:
 	${INSTALL_DIR} ${IDIR_RARPD}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/sbin/rarpd ${IDIR_RARPD}/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

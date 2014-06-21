@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		dsniff
 PKG_VERSION:=		2.4b1
@@ -22,7 +22,7 @@ PKG_LIBC_DEPENDS:=	uclibc glibc
 WRKDIST=		${WRKDIR}/${PKG_NAME}-2.4
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DSNIFF,dsniff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -40,4 +40,4 @@ dsniff-install:
 	${CP} ${WRKINST}/usr/sbin/* ${IDIR_DSNIFF}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/* ${IDIR_DSNIFF}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

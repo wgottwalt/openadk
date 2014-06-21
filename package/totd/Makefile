@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		totd
 PKG_VERSION:=		1.5.1
@@ -14,7 +14,7 @@ PKG_SITES:=		http://www.dillema.net/software/totd/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TOTD,totd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -23,4 +23,4 @@ totd-install:
 	${INSTALL_DATA} ./files/totd.conf ${IDIR_TOTD}/etc
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/totd $(IDIR_TOTD)/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

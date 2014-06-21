@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		findutils
 PKG_VERSION:=		4.4.2
@@ -24,8 +24,8 @@ PKGSN_XARGS:=		findutils
 PKGSD_FIND:=		find utility
 PKGSN_FIND:=		findutils
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,FINDUTILS,findutils,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,FIND,find,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FIND},${PKG_SECTION}))
@@ -52,5 +52,5 @@ locate-install:
 	$(INSTALL_BIN) $(WRKINST)/usr/libexec/{bigram,code,frcode} \
 		$(IDIR_LOCATE)/usr/libexec
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		conntrack-tools
 PKG_VERSION:=		1.4.2
@@ -20,7 +20,7 @@ PKGSD_CONNTRACKD:=	connection tracking daemon
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/tirpc -D_GNU_SOURCE
 
@@ -35,4 +35,4 @@ conntrackd-install:
 	$(INSTALL_DIR) $(IDIR_CONNTRACKD)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/conntrackd $(IDIR_CONNTRACKD)/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

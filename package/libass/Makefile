@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libass
 PKG_VERSION:=		0.10.1
@@ -15,7 +15,7 @@ PKG_URL:=		http://code.google.com/p/libass/
 PKG_SITES:=		http://libass.googlecode.com/files/
 PKG_OPTS:=		dev
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBASS,libass,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -24,4 +24,4 @@ libass-install:
 	$(CP) $(WRKINST)/usr/lib/libass*.so* \
 		$(IDIR_LIBASS)/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gmediaserver
 PKG_VERSION:=		0.13.0
@@ -20,7 +20,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_LIBC_DEPENDS:=	uclibc glibc
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GMEDIASERVER,gmediaserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -38,4 +38,4 @@ gmediaserver-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gmediaserver \
 		${IDIR_GMEDIASERVER}/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

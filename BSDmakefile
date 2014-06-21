@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-TOPDIR=		${.CURDIR}
+ADK_TOPDIR=		${.CURDIR}
 PWD=		${.CURDIR}
 
 .include "${.CURDIR}/Makefile.inc"
@@ -9,7 +9,7 @@ PWD=		${.CURDIR}
 .if defined(package) && !empty(package)
 subdir:=	package/${package}
 .  if !make(clean)
-_subdir_dep:=	${TOPDIR}/.config
+_subdir_dep:=	${ADK_TOPDIR}/.config
 .  endif
 .endif
 
@@ -22,7 +22,7 @@ _subdir: ${_subdir_dep}
 		echo >&2 Error: you must build with “umask 022”, sorry.; \
 		exit 1; \
 	fi
-	cd ${.CURDIR}/${subdir} && TOPDIR=${.CURDIR} DEVELOPER=1 \
+	cd ${.CURDIR}/${subdir} && ADK_TOPDIR=${.CURDIR} DEVELOPER=1 \
 	    ${GMAKE} VERBOSE=1 ${.MFLAGS} ${_subdir}
 
 .  include "${.CURDIR}/prereq.mk"

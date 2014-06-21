@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		rdesktop
 PKG_VERSION:=		1.8.1
@@ -16,7 +16,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rdesktop/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RDESKTOP,rdesktop,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -33,4 +33,4 @@ rdesktop-install:
 	${INSTALL_DATA} ${WRKINST}/usr/share/rdesktop/keymaps/* \
 		$(IDIR_RDESKTOP)/usr/share/rdesktop/keymaps
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

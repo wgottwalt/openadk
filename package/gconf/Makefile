@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		GConf
 PKG_VERSION:=		3.2.6
@@ -17,7 +17,7 @@ PKG_SITES:=		ftp://ftp.gnome.org/pub/GNOME/sources/GConf/${PKG_EXTRAVER}/
 PKG_LIBNAME:=		gconf
 PKG_OPTS:=		dev
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GCONF,gconf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -40,4 +40,4 @@ gconf-install:
 	$(CP) $(WRKINST)/usr/share/dbus-1/services/* \
 		$(IDIR_GCONF)/usr/share/dbus-1/services
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

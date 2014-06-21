@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		alix-switch
 PKG_VERSION:=		1.0
@@ -14,7 +14,7 @@ PKG_SYSTEM_DEPENDS:=	pcengines-alix2d2 pcengines-alix2d13
 
 NO_DISTFILES:=		1
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ALIX_SWITCH,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -31,4 +31,4 @@ do-install:
 	${INSTALL_BIN} ${WRKBUILD}/alix-switchd ${IDIR_ALIX_SWITCH}/usr/sbin
 	${INSTALL_BIN} ./files/alix-switch ${IDIR_ALIX_SWITCH}/etc
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

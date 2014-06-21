@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ltrace
 PKG_VERSION:=		0.7.4
@@ -15,7 +15,7 @@ PKG_BUILDDEP:=		libelf
 PKG_URL:=		http://ltrace.org/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LTRACE,ltrace,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -27,4 +27,4 @@ ltrace-install:
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/ltrace \
 		$(IDIR_LTRACE)/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

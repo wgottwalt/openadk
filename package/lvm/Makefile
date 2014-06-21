@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
 PKG_VERSION:=		2.02.106
@@ -25,7 +25,7 @@ PKGSC_LIBDEVMAPPER:=	libs/misc
 DISTFILES:=		LVM2.${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/LVM2.${PKG_VERSION}
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_DEVICE_MAPPER},${PKG_SECTION}))
@@ -51,4 +51,4 @@ device-mapper-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dmsetup \
 		${IDIR_DEVICE_MAPPER}/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

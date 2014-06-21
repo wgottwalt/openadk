@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		rrdtool
 PKG_VERSION:=		1.4.8
@@ -28,7 +28,7 @@ PKGSD_RRDCGI:=		RRD CGI
 PKGSC_RRDTOOL:=		sys/misc
 PKGSD_RRDTOOL:=		RRD tool
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBRRD,librrd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,RRDCGI,rrdcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_RRDCGI}))
@@ -59,4 +59,4 @@ librrd-install:
 	${INSTALL_DIR} ${IDIR_LIBRRD}/usr/lib
 	${CP} ${WRKINST}/usr/lib/librrd*.so* ${IDIR_LIBRRD}/usr/lib/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ppp
 PKG_VERSION:=		2.4.6
@@ -34,7 +34,7 @@ PKGSD_PPP_MOD_PPPSTATS:=ppp statistic utility
 PKGSN_PPP_MOD_PPPSTATS:=ppp
 
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PPP,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PPP_MOD_PPPOA,ppp-mod-pppoa,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PPP_MOD_PPPOA},${PKG_SECTION}))
@@ -123,4 +123,4 @@ ppp-mod-pppumts-install:
 	$(INSTALL_BIN) ./files/hso.if-down \
 		${IDIR_PPP_MOD_PPPUMTS}/etc/network/if-post-down.d/06-hso
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

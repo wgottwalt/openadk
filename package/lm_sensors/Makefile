@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lm_sensors
 PKG_VERSION:=		3.3.1
@@ -23,7 +23,7 @@ PKGSC_LM_SENSORS_DETECT:=	sys/misc
 PKGSS_LM_SENSORS_DETECT:=	perl
 PKGSB_LM_SENSORS_DETECT:=	perl
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LM_SENSORS,lm-sensors,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LM_SENSORS_DETECT,lm-sensors-detect,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LM_SENSORS_DETECT},${PKGSC_LM_SENSORS_DETECT}))
@@ -48,4 +48,4 @@ lm-sensors-detect-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/pwmconfig ${IDIR_LM_SENSORS_DETECT}/usr/sbin/pwmconfig
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/sensors-detect ${IDIR_LM_SENSORS_DETECT}/usr/sbin/sensors-detect
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

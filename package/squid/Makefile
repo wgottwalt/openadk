@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
 PKG_VERSION:=		3.4.5
@@ -78,7 +78,7 @@ else
 NTLM_AUTH_HELPERS+=	none
 endif
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 define PKG_mod_template
 
@@ -190,4 +190,4 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_BIN} ${WRKINST}/usr/lib/squid/unlinkd \
 		${IDIR_SQUID}/usr/lib/squid
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

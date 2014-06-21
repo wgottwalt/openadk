@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libvirt
 PKG_VERSION:=		1.2.4
@@ -23,11 +23,11 @@ PKG_ARCH_DEPENDS:=	x86 x86_64
 PKG_LIBC_DEPENDS:=	glibc
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBVIRT,libvirt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-include ${TOPDIR}/mk/python.mk
+include ${ADK_TOPDIR}/mk/python.mk
 
 TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/tirpc
 ifeq ($(ADK_TARGET_USE_SSP),)
@@ -66,4 +66,4 @@ libvirt-install:
 	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/site-packages/* \
 		${IDIR_LIBVIRT}/usr/lib/python$(PYTHON_VERSION)/site-packages
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

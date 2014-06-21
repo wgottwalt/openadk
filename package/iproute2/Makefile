@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
 PKG_VERSION:=		3.15.0
@@ -29,7 +29,7 @@ PKGSD_ROUTEL:=		route list and flush utilities
 PKGSD_RTMON:=		rtnetlink monitor
 PKGSD_SS:=		socket statistics utility
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IP,ip,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,TC,tc,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_TC},${PKGSD_TC},${PKG_SECTION}))
@@ -89,4 +89,4 @@ ss-install:
 	${INSTALL_DIR} ${IDIR_SS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/sbin/ss ${IDIR_SS}/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

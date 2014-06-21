@@ -13,7 +13,7 @@
 # 9) rebuild and install full libc (in case of musl/uclibc)
 # 10) build and install gdb debugger
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 TARGETS:=binutils gmp mpfr mpc libelf gcc gdb
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)

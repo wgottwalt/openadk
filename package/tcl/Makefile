@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		tcl
 PKG_VERSION:=		8.6.1
@@ -15,7 +15,7 @@ DISTFILES:=		tcl${PKG_VERSION}-src.tar.gz
 WRKDIST=		${WRKDIR}/tcl${PKG_VERSION}
 WRKSRC=			${WRKDIST}/unix
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TCL,tcl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -37,4 +37,4 @@ tcl-install:
 	${CP} ${WRKINST}/usr/lib/tcl8 ${IDIR_TCL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/tcl8.6 ${IDIR_TCL}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libhugetlbfs
 PKG_VERSION:=		2.11
@@ -17,7 +17,7 @@ PKG_LIBC_DEPENDS:=	glibc musl
 PKG_ARCH_DEPENDS:=	x86 x86_64
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBHUGETLBFS,libhugetlbfs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -38,4 +38,4 @@ libhugetlbfs-install:
 	${CP} ${WRKINST}/usr/share/libhugetlbfs/ld \
 		${IDIR_LIBHUGETLBFS}/usr/share/libhugetlbfs
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

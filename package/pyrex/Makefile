@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		Pyrex
 PKG_VERSION:=		0.9.9
@@ -15,7 +15,7 @@ PKG_SITES:=		http://www.cosc.canterbury.ac.nz/greg.ewing/python/Pyrex/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PYREX,pyrex,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -23,7 +23,7 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-include $(TOPDIR)/mk/python.mk
+include $(ADK_TOPDIR)/mk/python.mk
 
 do-build:
 	cd $(WRKBUILD); env PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py build
@@ -35,4 +35,4 @@ do-install:
 	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/* \
 		$(IDIR_PYREX)/usr/lib/python$(PYTHON_VERSION)
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

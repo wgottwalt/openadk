@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		opensc
 PKG_VERSION:=		0.11.13
@@ -24,7 +24,7 @@ PKGSC_LIBOPENSC:=	libs/crypto
 PKGSS_LIBOPENSC:=	libltdl
 PKGSB_LIBOPENSC:=	libtool
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENSC,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBOPENSC,libopensc,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBOPENSC},${PKGSD_LIBOPENSC},${PKGSC_LIBOPENSC},${PKG_OPTS}))
@@ -62,4 +62,4 @@ libopensc-install:
 	${CP} ${WRKINST}/usr/lib/opensc-pkcs11.so \
 		${IDIR_LIBOPENSC}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

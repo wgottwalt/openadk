@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		kismet
 PKG_VERSION:=		2013-03-R1b
@@ -19,7 +19,7 @@ PKGSD_KISMET_CLIENT:=	kismet client
 PKGSD_KISMET_SERVER:=	kismet server
 PKGSD_KISMET_DRONE:=	kismet drone
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,KISMET,kismet,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KISMET_CLIENT,kismet-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_KISMET_CLIENT},${PKG_SECTION}))
@@ -55,4 +55,4 @@ kismet-server-install:
 	${INSTALL_DATA} ${WRKINST}/etc/kismet/kismet.conf \
 		${IDIR_KISMET_SERVER}/etc/kismet
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

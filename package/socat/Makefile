@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		socat
 PKG_VERSION:=		1.7.2.4
@@ -20,7 +20,7 @@ PKGFD_WITH_SSL:=	enable SSL support
 PKGFS_WITH_SSL:=	libopenssl
 PKGFB_WITH_SSL:=	openssl
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SOCAT,socat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -41,4 +41,4 @@ socat-install:
 	${INSTALL_DIR} ${IDIR_SOCAT}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/socat ${IDIR_SOCAT}/usr/bin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
 PKG_VERSION:=		2014.01
@@ -16,7 +16,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 PKG_CFLINE_U_BOOT:=	depends on ADK_BROKEN
 PKG_SYSTEM_DEPENDS:=	!cubox-i
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,U_BOOT,u-boot,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -27,4 +27,4 @@ do-configure:
 
 u-boot-install:
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

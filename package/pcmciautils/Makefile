@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		pcmciautils
 PKG_VERSION:=		018
@@ -16,7 +16,7 @@ PKG_SITES:=		http://www.kernel.org/pub/linux/utils/kernel/pcmcia/
 PKG_CFLINE_PCMCIAUTILS:=depends on ADK_TARGET_WITH_CARDBUS
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PCMCIAUTILS,pcmciautils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -32,4 +32,4 @@ pcmciautils-install:
 	$(INSTALL_BIN) $(WRKINST)/lib/udev/pcmcia-socket-startup \
 		$(IDIR_PCMCIAUTILS)/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -12,7 +12,7 @@ BUILD_GROUP=		$(shell id -gn)
 ADK_SUFFIX:=		_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}
 
 # some global dirs
-BASE_DIR:=		$(TOPDIR)
+BASE_DIR:=		$(ADK_TOPDIR)
 ifeq ($(ADK_DL_DIR),)
 DL_DIR?=		$(BASE_DIR)/dl
 else
@@ -287,4 +287,4 @@ ifeq ($(ADK_HOST_CYGWIN),y)
 EXEEXT:=		.exe
 endif
 
-include $(TOPDIR)/mk/mirrors.mk
+include $(ADK_TOPDIR)/mk/mirrors.mk

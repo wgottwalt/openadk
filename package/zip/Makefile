@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		zip
 PKG_VERSION:=		3.0
@@ -15,8 +15,8 @@ PKG_SITES:=		ftp://ftp.info-zip.org/pub/infozip/src/
 WRKDIST=		$(WRKDIR)/$(PKG_NAME)30
 DISTFILES:=		$(PKG_NAME)30.tgz
 
-include ${TOPDIR}/mk/host.mk
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/host.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call HOST_template,ZIP,zip,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,ZIP,zip,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -43,5 +43,5 @@ zip-install:
 	${INSTALL_DIR} ${IDIR_ZIP}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/zip ${IDIR_ZIP}/usr/bin
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		rp-pppoe
 PKG_VERSION:=		3.10
@@ -28,7 +28,7 @@ PKGSN_RP_PPPOE_SNIFF:=	rp-pppoe
 
 WRKSRC=			${WRKDIST}/src
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RP_PPPOE_CLIENT,rp-pppoe-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_RP_PPPOE_CLIENT},${PKG_SECTION}))
 $(eval $(call PKG_template,RP_PPPOE_RELAY,rp-pppoe-relay,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_RP_PPPOE_RELAY},${PKG_SECTION}))
@@ -72,4 +72,4 @@ rp-pppoe-sniff-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/pppoe-sniff \
 		${IDIR_RP_PPPOE_SNIFF}/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

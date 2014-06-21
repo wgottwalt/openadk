@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ebtables
 PKG_VERSION:=		2.0.10
@@ -15,7 +15,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ebtables/}
 DISTFILES:=		${PKG_NAME}-v${PKG_VERSION}-4.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-v${PKG_VERSION}-4
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,EBTABLES,ebtables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -28,4 +28,4 @@ ebtables-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ebtables ${IDIR_EBTABLES}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/*.so ${IDIR_EBTABLES}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

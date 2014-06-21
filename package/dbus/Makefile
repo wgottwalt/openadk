@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
 PKG_VERSION:=		1.8.4
@@ -23,7 +23,7 @@ PKGSD_LIBDBUS:=		DBUS library
 PKGSC_LIBDBUS:=		libs/misc
 PKGSS_LIBDBUS:=		libexpat libuuid
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBDBUS,libdbus,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBDBUS},${PKGSD_LIBDBUS},${PKGSC_LIBDBUS},${PKG_OPTS}))
@@ -66,4 +66,4 @@ dbus-install:
 	$(CP) $(WRKBUILD)/dbus/dbus-arch-deps.h \
 		$(IDIR_DBUS_DEV)/usr/include/dbus-1.0/dbus
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

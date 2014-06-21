@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		opensips
 PKG_VERSION:=		1.11.1
@@ -66,7 +66,7 @@ PKGSN_OPENSIPS_MOD_URI:=		opensips
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)_src.tar.gz
 WRKDIST=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-tls
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 define PKG_mod_template
 
@@ -158,4 +158,4 @@ do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	)
 	$(CP) ./files/opensips.cfg $(IDIR_OPENSIPS)/etc/opensips/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

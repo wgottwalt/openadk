@@ -1,11 +1,11 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
-include $(TOPDIR)/mk/kernel.mk
-include $(TOPDIR)/mk/modules.mk
-include $(TOPDIR)/mk/kernel-build.mk
-include $(TOPDIR)/mk/image.mk
+include $(ADK_TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/mk/kernel.mk
+include $(ADK_TOPDIR)/mk/modules.mk
+include $(ADK_TOPDIR)/mk/kernel-build.mk
+include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=${LINUX_DIR}/arch/arm64/boot/Image
 
@@ -31,10 +31,10 @@ endif
 kernel-strip:
 
 kernel-install: kernel-strip
-	cd $(TOPDIR) && \
+	cd $(ADK_TOPDIR) && \
 		make -f Makefile \
 		-C package/boot-wrapper-aarch64 clean
-	cd $(TOPDIR) && \
+	cd $(ADK_TOPDIR) && \
 		make -f Makefile \
 		-C package/boot-wrapper-aarch64 package
 	${CP} ${LINUX_DIR}/linux-system.axf \

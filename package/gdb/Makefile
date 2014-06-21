@@ -1,8 +1,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
-include ${TOPDIR}/toolchain/gdb/Makefile.inc
+include ${ADK_TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/toolchain/gdb/Makefile.inc
 
 PKG_NAME:=		gdb
 PKG_DESCR:=		programm debugger
@@ -13,7 +13,7 @@ PKG_NOPARALLEL:=	1
 
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -41,4 +41,4 @@ gdb-install:
 	${INSTALL_DIR} ${IDIR_GDB}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gdb ${IDIR_GDB}/usr/bin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		syslog-ng
 PKG_VERSION:=		3.5.4.1
@@ -18,7 +18,7 @@ PKG_LIBC_DEPENDS:=	glibc musl
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SYSLOG_NG,syslog-ng,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -34,4 +34,4 @@ syslog-ng-install:
 	${INSTALL_DATA} ./files/syslog-ng.conf \
 		${IDIR_SYSLOG_NG}/etc/syslog-ng/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

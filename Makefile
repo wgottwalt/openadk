@@ -183,7 +183,7 @@ NO_ERROR=0
 		echo >&2 Error: you must build with umask 022, sorry.; \
 		exit 1; \
 	fi
-	@echo "TOPDIR:=$$(readlink -nf . 2>/dev/null || pwd -P)" >prereq.mk
+	@echo "ADK_TOPDIR:=$$(readlink -nf . 2>/dev/null || pwd -P)" >prereq.mk
 	@echo "BASH:=$$(which bash)" >>prereq.mk
 	@if [ -z "$$(which gmake 2>/dev/null )" ]; then \
 		echo "GMAKE:=$$(which make)" >>prereq.mk ;\
@@ -208,7 +208,7 @@ NO_ERROR=0
 	@echo 'MAKE:=$${GMAKE}' >>prereq.mk
 	@echo "OStype:=$$(env uname)" >>prereq.mk
 	@echo "_PATH:=$$PATH" >>prereq.mk
-	@echo "PATH:=\$${TOPDIR}/scripts:/usr/sbin:$$PATH" >>prereq.mk
+	@echo "PATH:=\$${ADK_TOPDIR}/scripts:/usr/sbin:$$PATH" >>prereq.mk
 	@echo "SHELL:=$$(which bash)" >>prereq.mk
 	@echo "GIT:=$$(which git 2>/dev/null)" >>prereq.mk
 	@env NO_ERROR=${NO_ERROR} BASH="$$(which bash)" \

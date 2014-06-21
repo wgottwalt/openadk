@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		pycurl
 PKG_VERSION:=		7.19.0.2
@@ -16,7 +16,7 @@ PKG_SITES:=		http://pycurl.sourceforge.net/download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PYCURL,pycurl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -29,7 +29,7 @@ TARGET_CFLAGS+=		-fPIC
 MAKE_ENV+=		LDSHARED="$(TARGET_CC) -shared"
 CURL_CONFIG:=		$(STAGING_TARGET_DIR)/usr/bin/curl-config
 
-include $(TOPDIR)/mk/python.mk
+include $(ADK_TOPDIR)/mk/python.mk
 
 do-build:
 	(cd $(WRKBUILD); env GCC_HONOUR_COPTS=s PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py --curl-config=$(CURL_CONFIG) build)
@@ -40,4 +40,4 @@ do-install:
 	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/site-packages/* \
 		$(IDIR_PYCURL)/usr/lib/python$(PYTHON_VERSION)/site-packages
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

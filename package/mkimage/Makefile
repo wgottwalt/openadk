@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mkimage
 PKG_VERSION:=		0.1
@@ -14,8 +14,8 @@ NO_DISTFILES:=		1
 
 PKG_CFLINE_MKIMAGE:=	depends on ADK_HOST_ONLY
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,MKIMAGE,mkimage,$(PKG_VERSION)-${PKG_RELEASE}))
 
@@ -30,5 +30,5 @@ mkimage-hostinstall:
 	${INSTALL_BIN} ${WRKBUILD}/mkimage \
 		${STAGING_HOST_DIR}/usr/bin
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

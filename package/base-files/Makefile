@@ -1,8 +1,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
-include $(TOPDIR)/mk/rootfs.mk
+include $(ADK_TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.0
@@ -13,7 +13,7 @@ PKG_DESCR:=		basic files and scripts
 WRKDIST=		${WRKDIR}/base-files
 NO_DISTFILES:=		1
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BASE_FILES,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},force_etc))
 
@@ -136,4 +136,4 @@ endif
 	printf "nameserver ${ADK_SIMPLE_NETWORK_CONFIG_NS}\n" > ${IDIR_BASE_FILES}/etc/resolv.conf
 endif
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

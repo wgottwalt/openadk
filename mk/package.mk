@@ -62,7 +62,7 @@ _FAKE_COOKIE=		${WRKINST}/.fake_done
 _IPKGS_COOKIE=		${STAGING_PKG_DIR}/stamps/${PKG_NAME}${PKG_VERSION}-${PKG_RELEASE}
 
 _IN_PACKAGE:=		1
-include ${TOPDIR}/mk/buildhlp.mk
+include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 # defined in buildhlp.mk ('extract' can fail, use 'patch' then)
 extract: ${_EXTRACT_COOKIE}

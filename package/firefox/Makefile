@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
 PKG_VERSION:=		26.0
@@ -28,8 +28,8 @@ PKG_SYSTEM_DEPENDS:=	tarox-pc ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 qemu-
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
 WRKDIST=		${WRKDIR}/mozilla-release
 
-include $(TOPDIR)/mk/package.mk
-include $(TOPDIR)/mk/python.mk
+include $(ADK_TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/python.mk
 
 $(eval $(call PKG_template,FIREFOX,firefox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -122,4 +122,4 @@ firefox-install:
 	$(CP) ./files/firefox \
 		$(IDIR_FIREFOX)/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

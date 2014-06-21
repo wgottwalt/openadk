@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
 
@@ -128,7 +128,7 @@ endif
 
 LANGUAGES:=c,c++
 
-include ${TOPDIR}/mk/buildhlp.mk
+include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 GCC_BUILD_DIR_MINIMAL:=	$(WRKBUILD)-minimal
 GCC_BUILD_DIR_INITIAL:=	$(WRKBUILD)-initial
@@ -136,7 +136,7 @@ GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 
 $(GCC_BUILD_DIR_MINIMAL)/.configured:
 ifeq ($(ADK_LINUX_XTENSA),y)
-	tar xf $(TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
+	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
 		--strip-components=1 -C $(WRKSRC) gcc
 endif
 	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
@@ -241,4 +241,4 @@ endif
 	rm -rf $(TOOLCHAIN_DIR)/usr/share
 	touch $@
 
-include ${TOPDIR}/mk/toolchain.mk
+include ${ADK_TOPDIR}/mk/toolchain.mk

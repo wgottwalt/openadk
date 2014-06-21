@@ -40,7 +40,7 @@ fetch refetch checksum do-extract:
 
 __use_generic_patch_target:=42
 else ifneq ($(strip ${DISTFILES}),)
-include ${TOPDIR}/mk/fetch.mk
+include ${ADK_TOPDIR}/mk/fetch.mk
 
 ${WRKDIST}/.extract_done: ${_CHECKSUM_COOKIE}
 ifeq (${_CHECKSUM_COOKIE},)
@@ -56,7 +56,7 @@ endif
 
 __use_generic_patch_target:=42
 else
-include ${TOPDIR}/mk/fetch.mk
+include ${ADK_TOPDIR}/mk/fetch.mk
 ${WRKDIST}/.extract_done: ${_CHECKSUM_COOKIE}
 	$(MAKE) fetch
 ifeq (${_CHECKSUM_COOKIE},)
@@ -102,6 +102,6 @@ endif
 	    WRKDIR1=$(call shellescape,${WRKDIR}) \
 	    PATH=$(call shellescape,${HOST_PATH}) \
 	    $(call shellexport,DIFF_IGNOREFILES) \
-	    mksh ${TOPDIR}/scripts/update-patches2
+	    mksh ${ADK_TOPDIR}/scripts/update-patches2
 
 .PHONY: update-patches host-update-patches

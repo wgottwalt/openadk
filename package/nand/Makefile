@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		nand
 PKG_VERSION:=		1.0
@@ -14,7 +14,7 @@ PKG_CFLINE_NAND:=	depends on ADK_TARGET_WITH_NAND
 
 NO_DISTFILES:=		1
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NAND,nand,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -30,4 +30,4 @@ do-install:
 	${INSTALL_DIR} ${IDIR_NAND}/sbin
 	${INSTALL_BIN} ${WRKBUILD}/nand ${IDIR_NAND}/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

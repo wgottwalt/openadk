@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		hicolor-icon-theme
 PKG_VERSION:=		0.12
@@ -14,7 +14,7 @@ PKG_SITES:=		http://icon-theme.freedesktop.org/releases/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,HICOLOR_ICON_THEME,hicolor-icon-theme,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -23,4 +23,4 @@ hicolor-icon-theme-install:
 	$(CP) $(WRKINST)/usr/share/icons/* \
 		$(IDIR_HICOLOR_ICON_THEME)/usr/share/icons
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

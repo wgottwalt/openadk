@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		samba
 PKG_VERSION:=		3.6.23
@@ -35,7 +35,7 @@ PKGFB_WITH_LDAP:=	openldap
 
 WRKSRC=			${WRKDIST}/source3
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SAMBA,samba,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,SAMBA_CLIENT,samba-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_SAMBA_CLIENT},${PKG_SECTION}))
@@ -108,4 +108,4 @@ samba-lib-install:
 	$(CP) ${WRKINST}/usr/lib/{libtalloc,libtdb,libtevent}.* \
 		${IDIR_SAMBA_LIB}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

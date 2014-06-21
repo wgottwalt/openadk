@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		esound
 PKG_VERSION:=		0.2.41
@@ -22,7 +22,7 @@ PKG_SUBPKGS:=		ESOUND LIBESD
 PKGSC_LIBESD:=		libs/audio
 PKGSD_LIBESD:=		esound library
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,ESOUND,esound,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBESD,libesd,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBESD},${PKGSC_LIBESD},${PKG_OPTS}))
@@ -40,4 +40,4 @@ libesd-install:
 	${INSTALL_DIR} ${IDIR_LIBESD}/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libesd.so* $(IDIR_LIBESD)/usr/lib/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		scanlogd
 PKG_VERSION:=		2.2.6
@@ -18,7 +18,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_ARCH_DEPENDS:=	!arm
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SCANLOGD,scanlogd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -38,4 +38,4 @@ do-install:
 	${INSTALL_DIR} ${IDIR_SCANLOGD}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/${PKG_NAME} ${IDIR_SCANLOGD}/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

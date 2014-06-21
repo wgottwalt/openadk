@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		lame
 PKG_VERSION:=		3.99
@@ -22,7 +22,7 @@ PKG_SUBPKGS:=		LAME LIBMP3LAME
 PKGSD_LIBMP3LAME:=	mp3 encoding library
 PKGSC_LIBMP3LAME:=	libs/audio
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LAME,lame,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBMP3LAME,libmp3lame,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBMP3LAME},${PKGSC_LIBMP3LAME},${PKG_OPTS}))
@@ -37,4 +37,4 @@ libmp3lame-install:
 	$(INSTALL_DIR) $(IDIR_LIBMP3LAME)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libmp3lame.so* $(IDIR_LIBMP3LAME)/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

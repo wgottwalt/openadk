@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openswan
 PKG_VERSION:=		2.6.41
@@ -20,7 +20,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 # GLOB_BRACE usage
 PKG_LIBC_DEPENDS:=	uclibc glibc
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENSWAN,openswan,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -48,4 +48,4 @@ openswan-install:
 		${IDIR_OPENSWAN}/usr/libexec/ipsec/setup
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/ipsec ${IDIR_OPENSWAN}/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

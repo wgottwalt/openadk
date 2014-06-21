@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		nut
 PKG_VERSION:=		2.7.2
@@ -25,7 +25,7 @@ PKGFD_WITH_SSL:=	enable ssl support
 PKGFS_WITH_SSL:=	libopenssl
 PKGFB_WITH_SSL:=	openssl
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NUT,nut,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -105,4 +105,4 @@ nut-install:
 		${IDIR_NUT}/usr/bin/
 	${INSTALL_DATA} ./files/ups{d,}.conf ${IDIR_NUT}/etc/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		httping
 PKG_VERSION:=		1.4.1
@@ -15,7 +15,7 @@ PKG_SITES:=		http://www.vanheusden.com/httping/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,HTTPING,httping,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -26,4 +26,4 @@ httping-install:
 	${INSTALL_DIR} ${IDIR_HTTPING}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/httping ${IDIR_HTTPING}/usr/bin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

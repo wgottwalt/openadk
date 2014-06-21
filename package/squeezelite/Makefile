@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		squeezelite
 PKG_VERSION:=		1.5
@@ -19,7 +19,7 @@ PKG_SITES:=		http://openadk.org/distfiles/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_LIBC_DEPENDS:=	glibc musl
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SQUEEZELITE,squeezelite,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -32,4 +32,4 @@ squeezelite-install:
 	$(INSTALL_BIN) $(WRKBUILD)/squeezelite \
 		$(IDIR_SQUEEZELITE)/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

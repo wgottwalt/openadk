@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		lighttpd
 PKG_VERSION:=		1.4.35
@@ -60,7 +60,7 @@ PKGSB_LIGHTTPD_MOD_WEBDAV:=	libxml2 sqlite
 PKGSS_LIGHTTPD_MOD_WEBDAV:=	libxml2 libsqlite
 PKGSN_LIGHTTPD_MOD_WEBDAV:=	lighttpd
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 define PKG_mod_template
 
@@ -160,4 +160,4 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} $(IDIR_LIGHTTPD)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/lighttpd $(IDIR_LIGHTTPD)/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

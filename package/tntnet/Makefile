@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		tntnet
 PKG_VERSION:=		2.2.1
@@ -25,7 +25,7 @@ PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls
 PKGCB_WITH_GNUTLS:=	gnutls
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TNTNET,tntnet,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -64,4 +64,4 @@ tntnet-install:
 	${CP} ${WRKINST}/usr/lib/libtntnet.so* \
 		${IDIR_TNTNET}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

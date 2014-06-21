@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		pam
 PKG_VERSION:=		1.1.8
@@ -18,7 +18,7 @@ PKG_BB:=		1
 DISTFILES:=		Linux-PAM-$(PKG_VERSION).tar.gz
 WRKDIST=                ${WRKDIR}/Linux-PAM-${PKG_VERSION}
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PAM,pam,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -41,4 +41,4 @@ pam-install:
 	$(CP) $(WRKINST)/lib/security/*.so* $(IDIR_PAM)/lib/security
 	$(CP) ./files/pam.conf $(IDIR_PAM)/etc
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

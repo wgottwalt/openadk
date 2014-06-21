@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		postfix
 PKG_VERSION:=		2.11.0
@@ -17,7 +17,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_HOST_DEPENDS:=	!darwin
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,POSTFIX,postfix,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -56,4 +56,4 @@ postfix-install:
 		$(IDIR_POSTFIX)/usr/libexec/postfix/
 	chmod 755 $(IDIR_POSTFIX)/usr/libexec/postfix/*
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

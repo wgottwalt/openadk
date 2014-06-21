@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ecj
 PKG_VERSION:=		4.9
@@ -14,8 +14,8 @@ PKG_SITES:=		ftp://sourceware.org/pub/java/
 PKG_CFLINE_ECJ:=	depends on ADK_HOST_ONLY
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.jar
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,ECJ,ecj,$(PKG_VERSION)-${PKG_RELEASE}))
 
@@ -39,5 +39,5 @@ ecj-hostinstall:
 		${STAGING_HOST_DIR}/usr/bin/gij
 	chmod u+x ${STAGING_HOST_DIR}/usr/bin/gij
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

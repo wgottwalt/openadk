@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		cryptodev-linux
 PKG_VERSION:=		1.6
@@ -15,8 +15,8 @@ PKG_SITES:=		http://download.gna.org/cryptodev-linux/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
-include ${TOPDIR}/mk/kernel-vars.mk
+include $(ADK_TOPDIR)/mk/package.mk
+include ${ADK_TOPDIR}/mk/kernel-vars.mk
 
 $(eval $(call PKG_template,CRYPTODEV_LINUX,cryptodev-linux,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -49,4 +49,4 @@ do-install:
 	$(INSTALL_DATA)	$(WRKBUILD)/cryptodev.ko \
 		$(IDIR_CRYPTODEV_LINUX)/lib/modules/${KERNEL_VERSION}/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

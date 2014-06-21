@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ndisc6
 PKG_VERSION:=		1.0.2
@@ -21,7 +21,7 @@ PKGSD_TCPTRACEROUTE6:=	lightweight ipv6 tcptraceroute
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,NDISC6,ndisc6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_NDISC6},${PKG_SECTION}))
 $(eval $(call PKG_template,RDISC6,rdisc6,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_RDISC6},${PKG_SECTION}))
@@ -42,4 +42,4 @@ tcptraceroute6-install:
 	${INSTALL_BIN} ${WRKINST}/usr/bin/tcptraceroute6 \
 		${IDIR_TCPTRACEROUTE6}/usr/bin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

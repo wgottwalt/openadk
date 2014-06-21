@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		irssi
 PKG_VERSION:=		0.8.16
@@ -22,7 +22,7 @@ PKGFS_WITH_SSL:=	libopenssl
 PKGFB_WITH_SSL:=	openssl
 PKGFD_WITH_IPV6:=	enable ipv6 support
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IRSSI,irssi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -50,4 +50,4 @@ irssi-install:
 	${INSTALL_DIR} ${IDIR_IRSSI}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/irssi ${IDIR_IRSSI}/usr/bin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -23,7 +23,7 @@ CURDIR=$PWD
 export CURDIR PATCH_LIST
 
 rm -f patches/*.new
-mksh "${TOPDIR}"/scripts/update-patches |&
+mksh "${ADK_TOPDIR}"/scripts/update-patches |&
 first=1
 set -A toedit
 while IFS= read -p -d '' -r; do

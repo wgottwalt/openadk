@@ -1,8 +1,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-TOPDIR=$(shell pwd)
-export TOPDIR
+ADK_TOPDIR=$(shell pwd)
+export ADK_TOPDIR
 
 ifneq ($(shell umask 2>/dev/null | sed 's/0*022/OK/'),OK)
 $(error your umask is not 022)
@@ -101,7 +101,7 @@ POSTCONFIG=		-@\
 	if [ -f .adkinit ];then rm .adkinit;\
 	else \
 	if [ -f .config.old ];then \
-		$(TOPDIR)/adk/tools/pkgrebuild;\
+		$(ADK_TOPDIR)/adk/tools/pkgrebuild;\
 		rebuild=0; \
 		if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
 			touch .rebuild.busybox;\
@@ -140,17 +140,17 @@ POSTCONFIG=		-@\
 
 # Pull in the user's configuration file
 ifeq ($(filter $(noconfig_targets),$(MAKECMDGOALS)),)
--include $(TOPDIR)/.config
+-include $(ADK_TOPDIR)/.config
 endif
 
 ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 all: world
 
-${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/Makefile) $(TOPDIR)/adk/tools/depmaker
+${ADK_TOPDIR}/package/Depends.mk: ${ADK_TOPDIR}/.config $(wildcard ${ADK_TOPDIR}/package/*/Makefile) $(ADK_TOPDIR)/adk/tools/depmaker
 	@echo "Generating dependencies ..."
-	$(TOPDIR)/adk/tools/depmaker > ${TOPDIR}/package/Depends.mk
+	$(ADK_TOPDIR)/adk/tools/depmaker > ${ADK_TOPDIR}/package/Depends.mk
 
 .NOTPARALLEL:
 .PHONY: all world clean cleandir cleansystem distclean image_clean
@@ -158,7 +158,7 @@ ${TOPDIR}/package/Depends.mk: ${TOPDIR}/.config $(wildcard ${TOPDIR}/package/*/M
 world:
 	@mkdir -p $(DL_DIR) $(HOST_BUILD_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
 		$(STAGING_HOST_DIR) $(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
-	${BASH} ${TOPDIR}/scripts/scan-pkgs.sh
+	${BASH} ${ADK_TOPDIR}/scripts/scan-pkgs.sh
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 	$(MAKE) -f mk/build.mk package/hostcompile toolchain/fixup package/compile
@@ -172,7 +172,7 @@ endif
 package_index:
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	-cd ${PACKAGE_DIR} && \
-	    ${BASH} ${TOPDIR}/scripts/ipkg-make-index.sh . >Packages
+	    ${BASH} ${ADK_TOPDIR}/scripts/ipkg-make-index.sh . >Packages
 endif
 
 ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
@@ -189,7 +189,7 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_TARGET_DIR)/etc/ipkg.conf
 endif
 
-package/%: ${STAGING_TARGET_DIR}/etc/ipkg.conf ${TOPDIR}/package/Depends.mk
+package/%: ${STAGING_TARGET_DIR}/etc/ipkg.conf ${ADK_TOPDIR}/package/Depends.mk
 	$(MAKE) -C package $(patsubst package/%,%,$@)
 
 target/%:
@@ -213,11 +213,11 @@ kernelconfig:
 # create a new package from package/.template
 newpackage:
 	@echo "Creating new package $(PKG)"
-	$(CP) $(TOPDIR)/package/.template$(TYPE) $(TOPDIR)/package/$(PKG)
+	$(CP) $(ADK_TOPDIR)/package/.template$(TYPE) $(ADK_TOPDIR)/package/$(PKG)
 	pkg=$$(echo $(PKG)|tr '[:lower:]-' '[:upper:]_'); \
-		$(SED) "s#@UPKG@#$$pkg#" $(TOPDIR)/package/$(PKG)/Makefile
-	$(SED) 's#@PKG@#$(PKG)#' $(TOPDIR)/package/$(PKG)/Makefile
-	$(SED) 's#@VER@#$(VER)#' $(TOPDIR)/package/$(PKG)/Makefile
+		$(SED) "s#@UPKG@#$$pkg#" $(ADK_TOPDIR)/package/$(PKG)/Makefile
+	$(SED) 's#@PKG@#$(PKG)#' $(ADK_TOPDIR)/package/$(PKG)/Makefile
+	$(SED) 's#@VER@#$(VER)#' $(ADK_TOPDIR)/package/$(PKG)/Makefile
 	@echo "Edit package/$(PKG)/Makefile to complete"
 
 root_clean:
@@ -241,8 +241,8 @@ clean:
 		rm ${STAGING_PKG_DIR}/$$f ; \
 	done
 	rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR) \
-	    	${TOPDIR}/package/pkglist.d
-	rm -f ${TOPDIR}/package/Depends.mk
+	    	${ADK_TOPDIR}/package/pkglist.d
+	rm -f ${ADK_TOPDIR}/package/Depends.mk
 
 cleankernel:
 	@$(TRACE) cleankernel
@@ -252,36 +252,36 @@ cleandir:
 	@$(TRACE) cleandir
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
 	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) \
-	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
+	    ${ADK_TOPDIR}/package/pkglist.d ${ADK_TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	@rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
+	@rm -f .menu .tmpconfig.h .rebuild* ${ADK_TOPDIR}/package/Depends.mk ${ADK_TOPDIR}/prereq.mk
 
 cleansystem:
 	@$(TRACE) cleansystem
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
 	@rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR) \
-	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
+	    ${ADK_TOPDIR}/package/pkglist.d ${ADK_TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_DIR) $(STAGING_TARGET_DIR) $(STAGING_PKG_DIR) $(TOOLCHAIN_BUILD_DIR)
-	@rm -f .menu .tmpconfig.h .rebuild* ${TOPDIR}/package/Depends.mk ${TOPDIR}/prereq.mk
+	@rm -f .menu .tmpconfig.h .rebuild* ${ADK_TOPDIR}/package/Depends.mk ${ADK_TOPDIR}/prereq.mk
 
 distclean:
 	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR) \
-	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
+	    ${ADK_TOPDIR}/package/pkglist.d ${ADK_TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
-	    .menu ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.* \
-	    ${TOPDIR}/target/*/Config.in.{arch*,system*} ${TOPDIR}/package/Config.in.auto*
+	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${ADK_TOPDIR}/prereq.mk \
+	    .menu ${ADK_TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.* \
+	    ${ADK_TOPDIR}/target/*/Config.in.{arch*,system*} ${ADK_TOPDIR}/package/Config.in.auto*
 
 else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
 ifeq ($(filter-out distclean,${MAKECMDGOALS}),)
-include ${TOPDIR}/mk/vars.mk
+include ${ADK_TOPDIR}/mk/vars.mk
 else
-include $(TOPDIR)/prereq.mk
+include $(ADK_TOPDIR)/prereq.mk
 export HOST_CC BASH MAKE LANGUAGE LC_ALL OStype PATH QEMU SHELL
 endif
 
@@ -302,59 +302,59 @@ $(CONFIG)/mconf:
 
 defconfig: .menu $(CONFIG)/conf
 ifeq (${OStype},Linux)
-	@echo ADK_HOST_LINUX=y > $(TOPDIR)/.defconfig
+	@echo ADK_HOST_LINUX=y > $(ADK_TOPDIR)/.defconfig
 endif
 ifeq (${OStype},FreeBSD)
-	@echo ADK_HOST_FREEBSD=y > $(TOPDIR)/.defconfig
+	@echo ADK_HOST_FREEBSD=y > $(ADK_TOPDIR)/.defconfig
 endif
 ifeq (${OStype},MirBSD)
-	@echo ADK_HOST_MIRBSD=y > $(TOPDIR)/.defconfig
+	@echo ADK_HOST_MIRBSD=y > $(ADK_TOPDIR)/.defconfig
 endif
 ifeq (${OStype},OpenBSD)
-	@echo ADK_HOST_OPENBSD=y > $(TOPDIR)/.defconfig
+	@echo ADK_HOST_OPENBSD=y > $(ADK_TOPDIR)/.defconfig
 endif
 ifeq (${OStype},NetBSD)
-	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/.defconfig
+	@echo ADK_HOST_NETBSD=y > $(ADK_TOPDIR)/.defconfig
 endif
 ifeq (${OStype},Darwin)
-	@echo ADK_HOST_DARWIN=y > $(TOPDIR)/.defconfig
+	@echo ADK_HOST_DARWIN=y > $(ADK_TOPDIR)/.defconfig
 endif
 ifneq (,$(filter CYGWIN%,${OStype}))
-	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/.defconfig
+	@echo ADK_HOST_CYGWIN=y > $(ADK_TOPDIR)/.defconfig
 endif
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \
 			|grep -i "$(ADK_TARGET_ARCH)"\$$ \
 			|sed -e "s#^config \(.*\)#\1=y#" \
-			 >> $(TOPDIR)/.defconfig; \
+			 >> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@for symbol in ${DEFCONFIG}; do \
-		echo $$symbol >> $(TOPDIR)/.defconfig; \
+		echo $$symbol >> $(ADK_TOPDIR)/.defconfig; \
 	done
 	@if [ ! -z "$(ADK_TARGET_FS)" ];then \
 		grep "^config" target/config/Config.in.target \
 			|grep -i "$(ADK_TARGET_FS)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/.defconfig; \
+			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_COLLECTION)" ];then \
 		grep -h "^config" target/packages/pkg-available/* \
 			|grep -i "$(ADK_TARGET_COLLECTION)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/.defconfig; \
+			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_LIBC)" ];then \
 		grep "^config" target/config/Config.in.libc.choice \
 			|grep -i "$(ADK_TARGET_LIBC)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/.defconfig; \
+			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_SYSTEM)" ];then \
 		system=$$(echo "$(ADK_TARGET_SYSTEM)" |sed -e "s/-/_/g"); \
 		grep -h "^config" target/*/Config.in.systems \
 			|grep -i "$$system$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/.defconfig; \
+			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_SYSTEM)" ];then \
 		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
@@ -362,53 +362,53 @@ endif
 
 modconfig:
 ifeq (${OStype},Linux)
-	@echo ADK_HOST_LINUX=y > $(TOPDIR)/all.config
+	@echo ADK_HOST_LINUX=y > $(ADK_TOPDIR)/all.config
 endif
 ifeq (${OStype},FreeBSD)
-	@echo ADK_HOST_FREEBSD=y > $(TOPDIR)/all.config
+	@echo ADK_HOST_FREEBSD=y > $(ADK_TOPDIR)/all.config
 endif
 ifeq (${OStype},MirBSD)
-	@echo ADK_HOST_MIRBSD=y > $(TOPDIR)/all.config
+	@echo ADK_HOST_MIRBSD=y > $(ADK_TOPDIR)/all.config
 endif
 ifeq (${OStype},OpenBSD)
-	@echo ADK_HOST_OPENBSD=y > $(TOPDIR)/all.config
+	@echo ADK_HOST_OPENBSD=y > $(ADK_TOPDIR)/all.config
 endif
 ifeq (${OStype},NetBSD)
-	@echo ADK_HOST_NETBSD=y > $(TOPDIR)/all.config
+	@echo ADK_HOST_NETBSD=y > $(ADK_TOPDIR)/all.config
 endif
 ifeq (${OStype},Darwin)
-	@echo ADK_HOST_DARWIN=y > $(TOPDIR)/all.config
+	@echo ADK_HOST_DARWIN=y > $(ADK_TOPDIR)/all.config
 endif
 ifneq (,$(filter CYGWIN%,${OStype}))
-	@echo ADK_HOST_CYGWIN=y > $(TOPDIR)/all.config
+	@echo ADK_HOST_CYGWIN=y > $(ADK_TOPDIR)/all.config
 endif
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \
 			|grep -i "$(ADK_TARGET_ARCH)"\$$ \
 			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/all.config; \
+			>> $(ADK_TOPDIR)/all.config; \
 	fi
 	@for symbol in ${DEFCONFIG}; do \
-		echo $$symbol >> $(TOPDIR)/all.config; \
+		echo $$symbol >> $(ADK_TOPDIR)/all.config; \
 	done
 	@if [ ! -z "$(ADK_TARGET_FS)" ];then \
 		grep "^config" target/config/Config.in.target \
 			|grep -i "$(ADK_TARGET_FS)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/all.config; \
+			>> $(ADK_TOPDIR)/all.config; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_LIBC)" ];then \
 		grep "^config" target/config/Config.in.libc.choice \
 			|grep -i "$(ADK_TARGET_LIBC)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/all.config; \
+			>> $(ADK_TOPDIR)/all.config; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_SYSTEM)" ];then \
 		system=$$(echo "$(ADK_TARGET_SYSTEM)" |sed -e "s/-/_/g"); \
 		grep -h "^config" target/*/Config.in.systems \
 			|grep -i "$$system" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(TOPDIR)/all.config; \
+			>> $(ADK_TOPDIR)/all.config; \
 	fi
 
 menuconfig: $(CONFIG)/mconf defconfig .menu
@@ -431,12 +431,12 @@ _mconfig2: ${CONFIG}/conf modconfig .menu
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
 	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR) \
-	    ${TOPDIR}/package/pkglist.d ${TOPDIR}/package/pkgconfigs.d
+	    ${ADK_TOPDIR}/package/pkglist.d ${ADK_TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_TARGET_DIR_PFX)
 	@rm -rf $(STAGING_HOST_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${TOPDIR}/prereq.mk \
-	    .menu .rebuild.* ${TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG \
-	    ${TOPDIR}/target/*/Config.in.{arch*,system*} ${TOPDIR}/package/Config.in.auto*
+	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${ADK_TOPDIR}/prereq.mk \
+	    .menu .rebuild.* ${ADK_TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG \
+	    ${ADK_TOPDIR}/target/*/Config.in.{arch*,system*} ${ADK_TOPDIR}/package/Config.in.auto*
 
 endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
@@ -446,43 +446,43 @@ buildall:
 	$(GMAKE) ADK_TARGET_ARCH=$(ADK_TARGET_ARCH) ADK_TARGET_SYSTEM=$(ADK_TARGET_SYSTEM) ADK_TARGET_LIBC=$(ADK_TARGET_LIBC) allmodconfig
 	$(GMAKE) VERBOSE=1 all 2>&1 | tee firmware/buildall.log
 
-$(TOPDIR)/adk/tools/pkgmaker: $(TOPDIR)/adk/tools/pkgmaker.c $(TOPDIR)/adk/tools/sortfile.c $(TOPDIR)/adk/tools/strmap.c
+$(ADK_TOPDIR)/adk/tools/pkgmaker: $(ADK_TOPDIR)/adk/tools/pkgmaker.c $(ADK_TOPDIR)/adk/tools/sortfile.c $(ADK_TOPDIR)/adk/tools/strmap.c
 	@$(HOST_CC) $(HOST_CFLAGS) -o $@ adk/tools/pkgmaker.c adk/tools/sortfile.c adk/tools/strmap.c
 
-$(TOPDIR)/adk/tools/pkgrebuild: $(TOPDIR)/adk/tools/pkgrebuild.c $(TOPDIR)/adk/tools/strmap.c
+$(ADK_TOPDIR)/adk/tools/pkgrebuild: $(ADK_TOPDIR)/adk/tools/pkgrebuild.c $(ADK_TOPDIR)/adk/tools/strmap.c
 	@$(HOST_CC) $(HOST_CFLAGS) -o $@ adk/tools/pkgrebuild.c adk/tools/strmap.c
 
-$(TOPDIR)/adk/tools/depmaker: $(TOPDIR)/adk/tools/depmaker.c
-	@$(HOST_CC) $(HOST_CFLAGS) -o $@ $(TOPDIR)/adk/tools/depmaker.c
+$(ADK_TOPDIR)/adk/tools/depmaker: $(ADK_TOPDIR)/adk/tools/depmaker.c
+	@$(HOST_CC) $(HOST_CFLAGS) -o $@ $(ADK_TOPDIR)/adk/tools/depmaker.c
 
-menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(TOPDIR)/adk/tools/pkgmaker $(TOPDIR)/adk/tools/pkgrebuild
+menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(ADK_TOPDIR)/adk/tools/pkgmaker $(ADK_TOPDIR)/adk/tools/pkgrebuild
 	@echo "Generating menu structure ..."
-	@$(BASH) $(TOPDIR)/scripts/create-menu
-	@$(TOPDIR)/adk/tools/pkgmaker
+	@$(BASH) $(ADK_TOPDIR)/scripts/create-menu
+	@$(ADK_TOPDIR)/adk/tools/pkgmaker
 	@:>.menu
 
-dep: $(TOPDIR)/adk/tools/depmaker
+dep: $(ADK_TOPDIR)/adk/tools/depmaker
 	@echo "Generating dependencies ..."
-	@$(TOPDIR)/adk/tools/depmaker > ${TOPDIR}/package/Depends.mk
+	@$(ADK_TOPDIR)/adk/tools/depmaker > ${ADK_TOPDIR}/package/Depends.mk
 
 .PHONY: menu dep
 
-include $(TOPDIR)/toolchain/gcc/Makefile.inc
+include $(ADK_TOPDIR)/toolchain/gcc/Makefile.inc
 
 check-dejagnu:
 	@-rm adk/tests/adk.exp adk/tests/master.exp >/dev/null 2>&1
 	@sed -e "s#@ADK_TARGET_IP@#$(ADK_TARGET_IP)#" \
 		-e "s#@ADK_TARGET_PORT@#$(ADK_TARGET_PORT)#" \
 		adk/tests/adk.exp.in > adk/tests/adk.exp
-	@sed -e "s#@TOPDIR@#$(TOPDIR)#" adk/tests/master.exp.in > \
+	@sed -e "s#@ADK_TOPDIR@#$(ADK_TOPDIR)#" adk/tests/master.exp.in > \
 		adk/tests/master.exp
 
 check-gcc: check-dejagnu
-	env DEJAGNU=$(TOPDIR)/adk/tests/master.exp \
+	env DEJAGNU=$(ADK_TOPDIR)/adk/tests/master.exp \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc check-gcc
 
 check-g++: check-dejagnu
-	env DEJAGNU=$(TOPDIR)/adk/tests/master.exp \
+	env DEJAGNU=$(ADK_TOPDIR)/adk/tests/master.exp \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc check-g++
 
 check: check-gcc check-g++

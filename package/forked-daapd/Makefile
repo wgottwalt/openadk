@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		forked-daapd
 PKG_VERSION:=		0.19
@@ -22,7 +22,7 @@ PKG_ARCH_DEPENDS:=	!ppc
 # gperf problem
 PKG_HOST_DEPENDS:=	!freebsd
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FORKED_DAAPD,forked-daapd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -39,4 +39,4 @@ forked-daapd-install:
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/forked-daapd \
 		$(IDIR_FORKED_DAAPD)/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

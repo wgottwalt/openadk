@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		sane-backends
 PKG_VERSION:=		1.0.22
@@ -92,7 +92,7 @@ PKGSN_SANE_BACKEND_UMAX1220U:=	sane-backend
 PKGSN_SANE_BACKEND_UMAX_PP:=	sane-backend
 PKGSN_SANE_BACKEND_UMAX:=	sane-backend
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 define PKG_mod_template
 
@@ -240,4 +240,4 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${CP} ${WRKINST}/usr/sbin/saned ${IDIR_SANE_BACKEND}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/libsane*.so* ${IDIR_SANE_BACKEND}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

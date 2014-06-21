@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		jikes
 PKG_VERSION:=		1.22
@@ -14,8 +14,8 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jikes/Jikes/1.22/}
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-include $(TOPDIR)/mk/host.mk
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,JIKES,jikes,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,JIKES,jikes,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -28,5 +28,5 @@ hostpost-install:
 
 jikes-install:
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

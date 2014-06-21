@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		freeradius-server
 PKG_VERSION:=		3.0.2
@@ -85,7 +85,7 @@ else
 PKG_CONFIGURE_OPTS+=	--without-rlm_sql_postgresql
 endif
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 define PKG_mod_template
 
@@ -216,4 +216,4 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_BIN} ${WRKINST}/usr/bin/radclient \
 		${IDIR_FREERADIUS_UTILS}/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

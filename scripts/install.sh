@@ -31,13 +31,13 @@
 #   just built there
 # • create a cfgfs partition
 
-TOPDIR=$(pwd)
+ADK_TOPDIR=$(pwd)
 HOST=$(gcc -dumpmachine)
 me=$0
 
 case :$PATH: in
-(*:$TOPDIR/host_$HOST/usr/bin:*) ;;
-(*) export PATH=$PATH:$TOPDIR/host_$HOST/usr/bin ;;
+(*:$ADK_TOPDIR/host_$HOST/usr/bin:*) ;;
+(*) export PATH=$PATH:$ADK_TOPDIR/host_$HOST/usr/bin ;;
 esac
 
 test -n "$KSH_VERSION" || exec mksh "$me" "$@"
@@ -55,7 +55,7 @@ if (( USER_ID )); then
 	exit 1
 fi
 
-TOPDIR=$(realpath .)
+ADK_TOPDIR=$(realpath .)
 ostype=$(uname -s)
 
 cfgfs=1
@@ -229,7 +229,7 @@ fi
 
 (( quiet )) || print Preparing MBR and GRUB2...
 dd if=/dev/zero of="$T/firsttrack" count=$partofs 2>/dev/null
-echo $corestartsec $coreendsec | mksh "$TOPDIR/scripts/bootgrub.mksh" \
+echo $corestartsec $coreendsec | mksh "$ADK_TOPDIR/scripts/bootgrub.mksh" \
     -A -g $((cyls-cfgfs)):$heads:$secs -M 1:0x83 -O $partofs | \
     dd of="$T/firsttrack" conv=notrunc 2>/dev/null
 dd if="$T/core.img" of="$T/firsttrack" conv=notrunc seek=$corestartsec \
@@ -361,7 +361,7 @@ mkdir -p boot/grub
 	print '}'
 ) >boot/grub/grub.cfg
 (( quiet )) || print Finishing up...
-cd "$TOPDIR"
+cd "$ADK_TOPDIR"
 umount "$T"
 
 (( quiet )) || print "\nNote: the rootfs UUID is: $partuuid"

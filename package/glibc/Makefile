@@ -1,10 +1,10 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
-include $(TOPDIR)/mk/kernel-ver.mk
-include $(TOPDIR)/mk/kernel-vars.mk
-include $(TOPDIR)/toolchain/glibc/Makefile.inc
+include $(ADK_TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/mk/kernel-ver.mk
+include $(ADK_TOPDIR)/mk/kernel-vars.mk
+include $(ADK_TOPDIR)/toolchain/glibc/Makefile.inc
 
 PKG_NAME:=		glibc
 PKG_DESCR:=		gnu c library
@@ -17,7 +17,7 @@ PKGSS_GLIBC_GCONV:=	glibc
 
 NO_DISTFILES:=		1
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
@@ -105,4 +105,4 @@ endif
 		$(IDIR_GLIBC_DEV)/usr/include/bits
 	@find $(IDIR_GLIBC_DEV) -name .install -exec rm {} \;
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

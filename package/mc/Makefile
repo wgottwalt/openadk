@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mc
 PKG_VERSION:=		4.8.12
@@ -15,7 +15,7 @@ PKG_URL:=		http://www.midnight-commander.org/
 PKG_SITES:=		http://ftp.midnight-commander.org/
 PKG_NOPARALLEL:=	1
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MC,mc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -51,4 +51,4 @@ mc-install:
 	cd ${WRKINST}/etc/mc && ${CP} mcedit.menu mc.ext sfs.ini \
 	    mc.menu ${IDIR_MC}/etc/mc/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

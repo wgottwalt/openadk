@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xinetd
 PKG_VERSION:=		2.3.15
@@ -14,7 +14,7 @@ PKG_SITES:=		ftp://mirror.ovh.net/gentoo-distfiles/distfiles/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XINETD,xinetd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -30,4 +30,4 @@ xinetd-install:
 	${INSTALL_DATA} ./files/xinetd.conf ${IDIR_XINETD}/etc/xinetd.conf
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/xinetd ${IDIR_XINETD}/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

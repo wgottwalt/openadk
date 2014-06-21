@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mesalib
 PKG_VERSION:=		10.2.1
@@ -25,11 +25,11 @@ PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el arm
 DISTFILES:=		MesaLib-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/Mesa-${PKG_VERSION}
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-include $(TOPDIR)/mk/python.mk
+include $(ADK_TOPDIR)/mk/python.mk
 
 ifeq ($(ADK_HOST_DARWIN),y)
 PYTHON:=/opt/local/bin/python2.7
@@ -69,4 +69,4 @@ ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 		${IDIR_MESALIB}/usr/lib/dri/
 endif
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

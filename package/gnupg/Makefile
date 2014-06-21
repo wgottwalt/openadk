@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gnupg
 PKG_VERSION:=		1.4.16
@@ -17,7 +17,7 @@ PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/gnupg/
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
  
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GNUPG,gnupg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -45,4 +45,4 @@ gnupg-install:
 # we need root privileges for secure memory (locked pages)
 	chmod u+s ${IDIR_GNUPG}/usr/bin/gpg
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

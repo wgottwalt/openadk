@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gnutls
 PKG_VERSION:=		3.3.4
@@ -31,7 +31,7 @@ PKG_FLAVOURS_LIBGNUTLS:=	WITH_CRYPTODEV
 PKGFD_WITH_CRYPTODEV:=		enable support for cryptodev-linux
 PKGFB_WITH_CRYPTODEV:=		cryptodev-linux
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGNUTLS,libgnutls,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBGNUTLS},${PKG_OPTS}))
 $(eval $(call PKG_template,GNUTLS_UTILS,gnutls-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_GNUTLS_UTILS},${PKGSD_GNUTLS_UTILS},${PKGSC_GNUTLS_UTILS}))
@@ -67,4 +67,4 @@ gnutls-utils-install:
 	${CP} ${WRKINST}/usr/bin/{{cert,srp,psk}tool,gnutls-{cli,serv}} \
 	    ${IDIR_GNUTLS_UTILS}/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

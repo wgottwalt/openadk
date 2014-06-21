@@ -3,10 +3,10 @@
 
 _IN_CVTC=		1
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
-include ${TOPDIR}/mk/buildhlp.mk
+include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 TARGET_CFLAGS:=$(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=$(filter-out -mtext-section-literals,$(TARGET_CFLAGS))
@@ -18,7 +18,7 @@ endif
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS_COMPILE=.*,CROSS_COMPILE=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
 	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${STAGING_TARGET_DIR}/usr/include\"' \
-	    $(TOPDIR)/target/$(ADK_TARGET_ARCH)/uclibc.config >${WRKBUILD}/.config
+	    $(ADK_TOPDIR)/target/$(ADK_TARGET_ARCH)/uclibc.config >${WRKBUILD}/.config
 ifeq ($(ADK_TARGET_ENDIAN),little)
 	$(SED) 's/.*\(ARCH_LITTLE_ENDIAN\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(ARCH_WANTS_LITTLE_ENDIAN\).*/\1=y/' ${WRKBUILD}/.config
@@ -122,4 +122,4 @@ ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 endif
 	touch $@
 
-include ${TOPDIR}/mk/toolchain.mk
+include ${ADK_TOPDIR}/mk/toolchain.mk

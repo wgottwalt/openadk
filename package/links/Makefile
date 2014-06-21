@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		links
 PKG_VERSION:=		2.7
@@ -21,7 +21,7 @@ PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
 PKGFS_WITH_DIRECTFB:=	directfb
 PKGFB_WITH_DIRECTFB:=	DirectFB
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LINKS,links,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -44,4 +44,4 @@ links-install:
 	${INSTALL_DIR} ${IDIR_LINKS}/usr/bin
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_LINKS}/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,8 +1,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/prereq.mk
--include $(TOPDIR)/.config
+include $(ADK_TOPDIR)/prereq.mk
+-include $(ADK_TOPDIR)/.config
 
 ifeq ($(VERBOSE),1)
 START_TRACE:=		:
@@ -70,7 +70,7 @@ ifeq ($(ADK_TARGET_ARCH),mips64)
 ADK_TARGET_KARCH:=mips
 endif
 
-include $(TOPDIR)/mk/vars.mk
+include $(ADK_TOPDIR)/mk/vars.mk
 
 ifneq (${show},)
 .DEFAULT_GOAL:=		show

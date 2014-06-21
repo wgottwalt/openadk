@@ -1,18 +1,18 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		atftp
-PKG_VERSION:=		0.7
-PKG_RELEASE:=		2
+PKG_VERSION:=		0.7.1
+PKG_RELEASE:=		1
 PKG_MD5SUM:=		3b27365772d918050b2251d98a9c7c82
 PKG_DESCR:=		tftp client
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libreadline libncurses
 PKG_BUILDDEP:=		readline ncurses
-PKG_URL:=		http://freshmeat.net/projects/atftp/
-PKG_SITES:=		ftp://ftp.mamalinux.com/pub/atftp/
+PKG_URL:=		http://sourceforge.net/projects/atftp/
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=atftp/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -22,7 +22,7 @@ PKG_SUBPKGS:=		ATFTP ATFTPD
 PKGSD_ATFTPD:=		tftp server
 PKGSS_ATFTPD:=		libreadline libncurses
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ATFTP,atftp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,ATFTPD,atftpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ATFTPD},${PKG_SECTION}))
@@ -38,4 +38,4 @@ atftpd-install:
 	$(INSTALL_DIR) $(IDIR_ATFTPD)/usr/sbin
 	$(INSTALL_BIN) $(WRKBUILD)/atftpd $(IDIR_ATFTPD)/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

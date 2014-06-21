@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mini-httpd
 PKG_VERSION:=		1.19
@@ -17,7 +17,7 @@ PKG_SITES:=		http://www.acme.com/software/mini_httpd/
 DISTFILES:=		mini_httpd-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/mini_httpd-${PKG_VERSION}
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MINI_HTTPD,mini-httpd,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
 
@@ -42,4 +42,4 @@ do-install:
 	${INSTALL_BIN} ${WRKBUILD}/mini_httpd \
 		${IDIR_MINI_HTTPD}/usr/sbin/mini_httpd
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

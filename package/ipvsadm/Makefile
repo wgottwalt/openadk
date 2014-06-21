@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ipvsadm
 PKG_VERSION:=		1.26
@@ -17,7 +17,7 @@ PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 TARGET_CFLAGS+=		-I$(STAGING_TARGET_DIR)/usr/include/libnl3 -fPIC -DHAVE_NL=0
 CONFIG_STYLE:=		manual
@@ -33,4 +33,4 @@ ipvsadm-install:
 	$(INSTALL_BIN) $(WRKINST)/sbin/ipvsadm \
 		$(IDIR_IPVSADM)/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

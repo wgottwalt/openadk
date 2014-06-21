@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		dhcp-forwarder
 PKG_VERSION:=		0.10
@@ -12,7 +12,7 @@ PKG_SECTION:=		net/dns
 PKG_URL:=		http://www.nongnu.org/dhcp-fwd/
 PKG_SITES:=		http://savannah.nongnu.org/download/dhcp-fwd/
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DHCP_FORWARDER,dhcp-forwarder,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -27,4 +27,4 @@ post-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/dhcp-fwd \
 		${IDIR_DHCP_FORWARDER}/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

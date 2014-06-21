@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libjasper
 PKG_VERSION:=		1.900
@@ -16,7 +16,7 @@ PKG_OPTS:=		dev
 DISTFILES:=             jasper-${PKG_VERSION}.1.zip
 WRKDIST=		${WRKDIR}/jasper-$(PKG_VERSION).1
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBJASPER,libjasper,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -27,4 +27,4 @@ libjasper-install:
 	$(CP) $(WRKINST)/usr/lib/libjasper*.so* \
 		$(IDIR_LIBJASPER)/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

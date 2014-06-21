@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		dropbear
 PKG_VERSION:=		2014.63
@@ -20,7 +20,7 @@ PKGSD_DBCONVERT:=	Utility for converting SSH private keys
 PKG_FLAVOURS_DROPBEAR:=	WITH_UTMP
 PKGFD_WITH_UTMP:=	support writing /var/run/utmp
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DROPBEAR,dropbear,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBCONVERT},${PKG_SECTION}))
@@ -76,4 +76,4 @@ do-install:
 		>$(IDIR_DROPBEAR)/etc/dropbear/authorized_keys; \
         )
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

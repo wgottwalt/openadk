@@ -1,10 +1,10 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
-include ${TOPDIR}/mk/kernel-ver.mk
-include $(TOPDIR)/mk/linux.mk
-include ${TOPDIR}/mk/kernel-vars.mk
+include $(ADK_TOPDIR)/rules.mk
+include ${ADK_TOPDIR}/mk/kernel-ver.mk
+include $(ADK_TOPDIR)/mk/linux.mk
+include ${ADK_TOPDIR}/mk/kernel-vars.mk
 
 KERNEL_FILE:=$(ADK_TARGET_KERNEL)
 KERNEL_TARGET:=$(ADK_TARGET_KERNEL)
@@ -31,7 +31,7 @@ $(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PK
 	mkdir -p $(LINUX_BUILD_DIR)/kmod-control
 	touch $@
 
-$(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig $(TOPDIR)/mk/modules.mk
+$(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig $(ADK_TOPDIR)/mk/modules.mk
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-configure
 	-for f in $(TARGETS);do if [ -f $$f ];then rm $$f;fi;done
 	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/mini.config

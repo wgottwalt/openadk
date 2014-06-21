@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ez-ipupdate
 PKG_VERSION:=		3.0.11b8
@@ -14,7 +14,7 @@ PKG_SITES:=		http://ftp.debian.org/debian/pool/main/e/ez-ipupdate/
 
 DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.orig.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,EZ_IPUPDATE,ez-ipupdate,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -25,4 +25,4 @@ do-install:
 	install -m0600 ./files/ez-ipupdate.conf ${IDIR_EZ_IPUPDATE}/etc/
 	${INSTALL_BIN} ${WRKBUILD}/ez-ipupdate ${IDIR_EZ_IPUPDATE}/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

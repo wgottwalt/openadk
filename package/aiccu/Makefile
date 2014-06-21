@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		aiccu
 PKG_VERSION:=		20070115
@@ -18,7 +18,7 @@ PKG_LIBC_DEPENDS:=	uclibc glibc
 DISTFILES:=		$(PKG_NAME)_$(PKG_VERSION).tar.gz
 WRKDIST=		${WRKDIR}/$(PKG_NAME)
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,AICCU,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -35,4 +35,4 @@ do-install:
 	$(INSTALL_BIN) $(WRKBUILD)/unix-console/aiccu $(IDIR_AICCU)/usr/sbin/
 	$(INSTALL_DATA) $(WRKBUILD)/doc/aiccu.conf $(IDIR_AICCU)/etc/aiccu.conf
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

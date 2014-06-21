@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		miredo
 PKG_VERSION:=		1.2.6
@@ -16,7 +16,7 @@ PKG_SUBPKGS:=		MIREDO_CLIENT MIREDO_SERVER
 PKGSD_MIREDO_CLIENT:=	teredo client
 PKGSD_MIREDO_SERVER:=	teredo relay daemon
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MIREDO_CLIENT,miredo-client,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_MIREDO_CLIENT},${PKG_SECTION}))
 $(eval $(call PKG_template,MIREDO_SERVER,miredo-server,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_MIREDO_SERVER},${PKG_SECTION}))
@@ -45,4 +45,4 @@ miredo-server-install:
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/miredo-server \
 		${IDIR_MIREDO_SERVER}/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

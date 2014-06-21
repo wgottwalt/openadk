@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		tinyproxy
 PKG_VERSION:=		1.8.3
@@ -14,7 +14,7 @@ PKG_SITES:=		https://www.banu.com/pub/tinyproxy/1.8/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TINYPROXY,tinyproxy,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -36,4 +36,4 @@ tinyproxy-install:
 	${INSTALL_DATA} ${WRKINST}/usr/share/tinyproxy/stats.html \
 		${IDIR_TINYPROXY}/usr/share/tinyproxy/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -13,7 +13,7 @@ grep '^Maintainer' "$CONTROL" 2>&1 >/dev/null || \
 grep '^Priority' "$CONTROL" 2>&1 >/dev/null || \
         echo "Priority: optional" >> "$TARGET/CONTROL/control"
 grep '^Source' "$CONTROL" 2>&1 >/dev/null || {
-        pkgbase=$(echo "$WD" | sed -e "s|^$TOPDIR/||g")
+        pkgbase=$(echo "$WD" | sed -e "s|^$ADK_TOPDIR/||g")
         [ "$pkgbase" = "$WD" ] && src="N/A" || src="$BASE"
         echo "Source: $src" >> "$TARGET/CONTROL/control"
 }

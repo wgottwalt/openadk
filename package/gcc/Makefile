@@ -1,8 +1,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
-include ${TOPDIR}/toolchain/gcc/Makefile.inc
+include ${ADK_TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/toolchain/gcc/Makefile.inc
 
 PKG_NAME:=		gcc
 PKG_DESCR:=		c compiler
@@ -16,7 +16,7 @@ PKGSD_GXX:=		c++ compiler
 
 WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GCC,gcc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,GXX,g++,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -93,4 +93,4 @@ g++-install:
 	cd ${IDIR_GXX}/usr/bin/ && ln -sf g++ c++
 	${CP} ${WRKINST}/usr/include/c++/* ${IDIR_GXX}/usr/include/c++/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

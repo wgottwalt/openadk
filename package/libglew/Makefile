@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libglew
 PKG_VERSION:=		1.10.0
@@ -20,7 +20,7 @@ PKG_ARCH_DEPENDS:=	!m68k
 DISTFILES:=		glew-$(PKG_VERSION).tgz
 WRKDIST=		${WRKDIR}/glew-$(PKG_VERSION)
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBGLEW,libglew,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
@@ -32,4 +32,4 @@ libglew-install:
 	$(CP) $(WRKINST)/usr/lib/libGLEW.so* \
 		$(IDIR_LIBGLEW)/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

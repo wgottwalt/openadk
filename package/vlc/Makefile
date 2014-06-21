@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		vlc
 PKG_VERSION:=		2.1.4
@@ -17,7 +17,7 @@ PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/$(PKG_VERSION)/
 PKG_ARCH_DEPENDS:=	!m68k
 PKG_LIBC_DEPENDS:=	glibc musl
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,VLC,vlc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -54,4 +54,4 @@ vlc-install:
 	-rm $(IDIR_VLC)/usr/lib/vlc/plugins/*/*.la
 	-rm $(IDIR_VLC)/usr/lib/vlc/plugins/*/*.a
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

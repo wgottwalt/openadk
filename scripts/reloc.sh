@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # execute this after relocation of adk directory
 
-olddir=$(grep "^TOPDIR" prereq.mk 2>/dev/null |cut -d '=' -f 2)
+olddir=$(grep "^ADK_TOPDIR" prereq.mk 2>/dev/null |cut -d '=' -f 2)
 newdir=$(pwd)
 
 if [ ! -z "$olddir" ];then

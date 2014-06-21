@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl-pkcs11
 PKG_VERSION:=		0.1.8
@@ -16,7 +16,7 @@ PKG_SITES:=		http://www.opensc-project.org/files/engine_pkcs11/
 DISTFILES:=		engine_pkcs11-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/engine_pkcs11-${PKG_VERSION}
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENSSL_PKCS11,openssl-pkcs11,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -27,4 +27,4 @@ openssl-pkcs11-install:
 	${INSTALL_DATA} ${WRKINST}/usr/lib/engines/engine_pkcs11.so \
 		${IDIR_OPENSSL_PKCS11}/usr/lib/engines
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

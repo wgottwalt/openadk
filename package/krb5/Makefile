@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		krb5
 PKG_VERSION:=		1.12.1
@@ -27,7 +27,7 @@ PKGSS_KRB5_CLIENT:=	libkrb5 libncurses
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-signed.tar
 WRKSRC=			${WRKDIST}/src
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,KRB5_SERVER,krb5-server,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KRB5_CLIENT,krb5-client,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_KRB5_CLIENT},${PKGSD_KRB5_CLIENT},${PKGSC_KRB5_CLIENT}))
@@ -81,4 +81,4 @@ libkrb5-install:
 	echo '/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init' \
 		> ${IDIR_LIBKRB5}/etc/gssapi_mech.conf
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		olsrd
 PKG_VERSION:=		0.6.6.2
@@ -27,7 +27,7 @@ PKGSN_OLSRD_MOD_NAMESERVICE:=	olsrd
 PKGSD_OLSRD_MOD_TAS:=		tas support
 PKGSN_OLSRD_MOD_TAS:=		olsrd
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 define PKG_mod_template
 
@@ -60,4 +60,4 @@ post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DATA} ${WRKINST}/etc/olsrd.conf ${IDIR_OLSRD}/etc/
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/olsrd ${IDIR_OLSRD}/usr/sbin/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

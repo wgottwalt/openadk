@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ipsec-tools
 PKG_VERSION:=		0.8.0
@@ -21,7 +21,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 PKG_FLAVOURS_IPSEC_TOOLS:=	WITH_IPV6
 PKGFD_WITH_IPV6:=		enable IPv6 support
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPSEC_TOOLS,ipsec-tools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -53,4 +53,4 @@ ipsec-tools-install:
 		${IDIR_IPSEC_TOOLS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/setkey ${IDIR_IPSEC_TOOLS}/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

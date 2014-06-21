@@ -1,10 +1,10 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
-include $(TOPDIR)/mk/kernel-ver.mk
-include $(TOPDIR)/mk/kernel-vars.mk
-include $(TOPDIR)/toolchain/uclibc/Makefile.inc
+include $(ADK_TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/mk/kernel-ver.mk
+include $(ADK_TOPDIR)/mk/kernel-vars.mk
+include $(ADK_TOPDIR)/toolchain/uclibc/Makefile.inc
 
 PKG_NAME:=		uClibc
 PKG_DESCR:=		embedded c library
@@ -17,7 +17,7 @@ PKGSC_UCLIBC_DEV:=	devel
 
 NO_DISTFILES:=		1
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,UCLIBC,uclibc,$(GIT_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,UCLIBC_DEV,uclibc-dev,$(GIT_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_UCLIBC_DEV},${PKGSC_UCLIBC_DEV},${PKG_OPTS}))
@@ -68,4 +68,4 @@ uclibc-dev-install:
 	@find $(IDIR_UCLIBC_DEV) -name .install -exec rm {} \;
 	@find $(IDIR_UCLIBC_DEV) -name ..install.cmd -exec rm {} \;
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

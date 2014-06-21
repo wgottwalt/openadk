@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
@@ -49,8 +49,8 @@ PKGFD_MOD_SSL:=		OpenSSL support
 PKGFB_MOD_SSL:=		openssl
 PKGFS_MOD_SSL:=		libopenssl
 
-include ${TOPDIR}/mk/host.mk
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/host.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call HOST_template,PYTHON2,python2,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,PYTHON2,python2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
@@ -105,7 +105,7 @@ HOST_CONFIGURE_ARGS+=	--with-threads \
 			--without-cxx-main
 
 hostpre-configure:
-	$(CP) $(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py $(WRKBUILD)
+	$(CP) $(ADK_TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py $(WRKBUILD)
 	$(SED) "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
 	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
 	(cd $(WRKBUILD) && ${PATCHP0} < patch-Lib_distutils_sysconfig_py)	
@@ -115,14 +115,14 @@ hostpre-configure:
 hostpost-install:
 	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
 		$(STAGING_HOST_DIR)/usr/bin/pgen
-	$(CP) $(TOPDIR)/package/python2/files/python-config.patch $(WRKBUILD)/
+	$(CP) $(ADK_TOPDIR)/package/python2/files/python-config.patch $(WRKBUILD)/
 	$(SED) "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" $(WRKBUILD)/python-config.patch
 	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" $(WRKBUILD)/python-config.patch
 	(cd $(STAGING_HOST_DIR)/usr/bin && \
 		${PATCHP0} < $(WRKBUILD)/python-config.patch)
 
 pre-configure:
-	$(CP) $(TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py $(WRKBUILD)
+	$(CP) $(ADK_TOPDIR)/package/python2/files/patch-Lib_distutils_sysconfig_py $(WRKBUILD)
 	$(SED) "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
 	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" $(WRKBUILD)/patch-Lib_distutils_sysconfig_py
 	(cd $(WRKBUILD) && ${PATCHP0} <$(WRKBUILD)/patch-Lib_distutils_sysconfig_py)	
@@ -142,5 +142,5 @@ python2-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 		rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/$${i}*so; \
 	done
 
-include ${TOPDIR}/mk/host-bottom.mk
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/host-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

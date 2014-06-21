@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted 
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bzr
 PKG_VERSION:=		2.6.0
@@ -18,7 +18,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_HOST_DEPENDS:=	!darwin
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BZR,bzr,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -26,7 +26,7 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-include $(TOPDIR)/mk/python.mk
+include $(ADK_TOPDIR)/mk/python.mk
 
 do-build:
 	cd $(WRKBUILD); env PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py install --prefix=$(WRKINST)/usr build_ext --allow-python-fallback
@@ -38,4 +38,4 @@ do-install:
 	$(INSTALL_DIR) $(IDIR_BZR)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/bzr $(IDIR_BZR)/usr/bin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

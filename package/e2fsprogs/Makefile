@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		e2fsprogs
 PKG_VERSION:=		1.42.10
@@ -39,7 +39,7 @@ PKGSD_MKE2FS:=		ext2/3/4 filesystem creation utility
 PKGSC_MKE2FS:=		sys/fs
 PKGSS_MKE2FS:=		libe2fs libcom-err libblkid libuuid libncurses
 
-include ${TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBE2FS,libe2fs,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBE2FS},${PKGSC_LIBE2FS}))
 $(eval $(call PKG_template,LIBCOM_ERR,libcom-err,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBCOM_ERR},${PKGSC_LIBCOM_ERR}))
@@ -98,4 +98,4 @@ libss-install:
 	${CP} ${WRKINST}/usr/lib/libss.so* \
 		${IDIR_LIBSS}/usr/lib
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

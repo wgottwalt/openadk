@@ -1,8 +1,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
-include $(TOPDIR)/mk/rootfs.mk
+include $(ADK_TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/mk/rootfs.mk
 
 all: install
 
@@ -26,11 +26,11 @@ ADK_PACKAGE_CRYPTINIT_SWAP:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_SWAP)))
 ADK_PACKAGE_CMDLINE:=root=$(ADK_PACKAGE_CRYPTINIT_ROOT) swap=$(ADK_PACKAGE_CRYPTINIT_SWAP) resume=/dev/mapper/swapcrypt
 
 ifeq (${ADK_TARGET_KERNEL_CUSTOMISING},y)
-config-prepare: $(TOPDIR)/.config
-	@sed -n '/^ADK_KERNEL/s//CONFIG/p' ${TOPDIR}/.config \
+config-prepare: $(ADK_TOPDIR)/.config
+	@sed -n '/^ADK_KERNEL/s//CONFIG/p' ${ADK_TOPDIR}/.config \
 	    >${BUILD_DIR}/.kernelconfig.kernel
 	@if [ -f ${ADK_TARGET_ARCH}/kernel/${ADK_TARGET_KERNEL_MINICONFIG} ];then \
-		cat ${TOPDIR}/target/linux/kernel.config \
+		cat ${ADK_TOPDIR}/target/linux/kernel.config \
 		    ${ADK_TARGET_ARCH}/kernel/${ADK_TARGET_KERNEL_MINICONFIG} > ${BUILD_DIR}/.kernelconfig.board; \
 	else \
 		echo "no miniconfig found for target system"; \
@@ -76,9 +76,9 @@ endif
 	    cp .kernelconfig.tmp .kernelconfig
 	@-rm -f ${BUILD_DIR}/.kernelconfig.tmp
 else
-config-prepare: $(TOPDIR)/.config
+config-prepare: $(ADK_TOPDIR)/.config
 	@if [ -f ${ADK_TARGET_ARCH}/kernel/${ADK_TARGET_KERNEL_MINICONFIG} ];then \
-		cat ${TOPDIR}/target/linux/kernel.config \
+		cat ${ADK_TOPDIR}/target/linux/kernel.config \
 		    ${ADK_TARGET_ARCH}/kernel/${ADK_TARGET_KERNEL_MINICONFIG} > ${BUILD_DIR}/.kernelconfig.board; \
 	else \
 		echo "no miniconfig found for target system"; \

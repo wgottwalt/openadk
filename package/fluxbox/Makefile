@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		fluxbox
 PKG_VERSION:=		1.3.2
@@ -21,7 +21,7 @@ PKGFD_WITH_IMLIB2:=	enable imlib2 support
 PKGFS_WITH_IMLIB2:=	imlib2
 PKGFB_WITH_IMLIB2:=	imlib2
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FLUXBOX,fluxbox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -37,4 +37,4 @@ fluxbox-install:
 		$(IDIR_FLUXBOX)/usr/bin
 	${CP} ${WRKINST}/usr/share/fluxbox ${IDIR_FLUXBOX}/usr/share/
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${TOPDIR}/rules.mk
+include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		exmap
 PKG_VERSION:=		0.4.1
@@ -19,8 +19,8 @@ PKG_CFLINE_EXMAP:=	depends on !ADK_TOOLCHAIN_ONLY
 DISTFILES:=		${PKG_NAME}-console-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-console-${PKG_VERSION}
 
-include ${TOPDIR}/mk/package.mk
-include ${TOPDIR}/mk/kernel-ver.mk
+include ${ADK_TOPDIR}/mk/package.mk
+include ${ADK_TOPDIR}/mk/kernel-ver.mk
 
 $(eval $(call PKG_template,EXMAP,exmap,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -40,4 +40,4 @@ exmap-install:
 	${INSTALL_DIR} ${IDIR_EXMAP}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/src/exmap* ${IDIR_EXMAP}/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk
