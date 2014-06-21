@@ -136,10 +136,10 @@ ifeq ($(ADK_LINUX_MICROBLAZE),y)
 TARGET_CFLAGS+=		-mxl-barrel-shift
 TARGET_CXXFLAGS+=	-mxl-barrel-shift
 endif
-ifeq ($(ADK_LINUX_XTENSA),y)
-TARGET_CFLAGS+=		-mlongcalls -mtext-section-literals
-TARGET_CXXFLAGS+=	-mlongcalls -mtext-section-literals
-endif
+#ifeq ($(ADK_LINUX_XTENSA),y)
+#TARGET_CFLAGS+=		-mtext-section-literals
+#TARGET_CXXFLAGS+=	-mtext-section-literals
+#endif
 
 ifneq ($(ADK_DEBUG),)
 ifeq ($(ADK_DEBUG_OPTS),y)
