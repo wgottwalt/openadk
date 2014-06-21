@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		atftp
 PKG_VERSION:=		0.7.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3b27365772d918050b2251d98a9c7c82
+PKG_MD5SUM:=		367bf401965fbed04585b1229c2191a8
 PKG_DESCR:=		tftp client
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libreadline libncurses
