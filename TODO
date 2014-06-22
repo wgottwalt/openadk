@@ -17,7 +17,6 @@ new or update packages:
 - port weston / wayland
 - add btrfs-utils
 - port uuterm
-- port opkg with gpg signing
 - port msmtp
 - rutorrent porting
 - lms perl 
