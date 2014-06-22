@@ -10,7 +10,7 @@ include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched:
 ifeq ($(ADK_LINUX_XTENSA),y)
-	tar xf $(TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
+	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
 		--strip-components=1 -C $(WRKSRC) linux
 endif
 ifneq ($(ADK_DISABLE_KERNEL_PATCHES),y)
