@@ -338,7 +338,7 @@ endif
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_COLLECTION)" ];then \
-		grep -h "^config" target/packages/pkg-available/* \
+		grep -h "^config" target/collections/* \
 			|grep -i "$(ADK_TARGET_COLLECTION)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
