@@ -9,19 +9,69 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		670307f40763490a2bc0d1f322071e7a
 PKG_DESCR:=		swiss army knife of sound processing programs
 PKG_SECTION:=		mm/audio
-PKG_BUILDDEP:=		zlib libmad lame alsa-lib libid3tag ncurses
-PKG_DEPENDS:=		zlib libmad libmp3lame alsa-lib libid3tag
-PKG_DEPENDS+=		librt libpthread libncurses
+PKG_BUILDDEP:=		zlib ncurses
+PKG_DEPENDS:=		zlib libncurses	librt libpthread
 PKG_URL:=		http://sox.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sox/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
+PKG_FLAVOURS_SOX:=	WITH_LAME WITH_VORBIS WITH_FLAC WITH_MAD WITH_ALSA WITH_ID3TAG
+PKGFD_WITH_LAME:=	mp3 lame support
+PKGFB_WITH_LAME:=	lame
+PKGFS_WITH_LAME:=	libmp3lame
+PKGFD_WITH_MAD:=	mp3 mad support
+PKGFB_WITH_MAD:=	libmad
+PKGFS_WITH_MAD:=	libmad
+PKGFD_WITH_VORBIS:=	ogg vorbis support
+PKGFB_WITH_VORBIS:=	libvorbis libogg
+PKGFS_WITH_VORBIS:=	libvorbis libogg libvorbisenc
+PKGFD_WITH_FLAC:=	flac support
+PKGFB_WITH_FLAC:=	flac
+PKGFS_WITH_FLAC:=	libflac
+PKGFD_WITH_ID3TAG:=	id3tag support
+PKGFB_WITH_ID3TAG:=	libid3tag
+PKGFS_WITH_ID3TAG:=	libid3tag
+PKGFD_WITH_ALSA:=	alsa support
+PKGFB_WITH_ALSA:=	alsa-lib
+PKGFS_WITH_ALSA:=	alsa-lib
+
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SOX,sox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+# uses old api
 CONFIGURE_ARGS+=	--without-ffmpeg
+ifeq ($(ADK_PACKAGE_SOX_WITH_ALSA),y)
+CONFIGURE_ARGS+=	--with-alsa
+else
+CONFIGURE_ARGS+=	--without-alsa
+endif
+ifeq ($(ADK_PACKAGE_SOX_WITH_ID3TAG),y)
+CONFIGURE_ARGS+=	--with-id3tag
+else
+CONFIGURE_ARGS+=	--without-id3tag
+endif
+ifeq ($(ADK_PACKAGE_SOX_WITH_FLAC),y)
+CONFIGURE_ARGS+=	--with-flac
+else
+CONFIGURE_ARGS+=	--without-flac
+endif
+ifeq ($(ADK_PACKAGE_SOX_WITH_LAME),y)
+CONFIGURE_ARGS+=	--with-lame
+else
+CONFIGURE_ARGS+=	--without-lame
+endif
+ifeq ($(ADK_PACKAGE_SOX_WITH_MAD),y)
+CONFIGURE_ARGS+=	--with-mad
+else
+CONFIGURE_ARGS+=	--without-mad
+endif
+ifeq ($(ADK_PACKAGE_SOX_WITH_VORBIS),y)
+CONFIGURE_ARGS+=	--with-oggvorbis
+else
+CONFIGURE_ARGS+=	--without-oggvorbis
+endif
 
 sox-install:
 	$(INSTALL_DIR) $(IDIR_SOX)/usr/lib
