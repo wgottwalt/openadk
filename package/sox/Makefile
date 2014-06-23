@@ -9,8 +9,9 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		670307f40763490a2bc0d1f322071e7a
 PKG_DESCR:=		swiss army knife of sound processing programs
 PKG_SECTION:=		mm/audio
-PKG_BUILDDEP:=		zlib libmad lame alsa-lib libid3tag
-PKG_DEPENDS:=		zlib libmad liblame alsa-lib libid3tag
+PKG_BUILDDEP:=		zlib libmad lame alsa-lib libid3tag ncurses
+PKG_DEPENDS:=		zlib libmad libmp3lame alsa-lib libid3tag
+PKG_DEPENDS+=		librt libpthread libncurses
 PKG_URL:=		http://sox.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sox/}
 
