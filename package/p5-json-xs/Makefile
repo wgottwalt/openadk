@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		p5-json-xs
 PKG_VERSION:=		3.01
@@ -16,11 +16,11 @@ PKG_SITES:=		http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/
 DISTFILES:=             JSON-XS-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/JSON-XS-${PKG_VERSION}
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,P5_JSON_XS,p5-json-xs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-include $(TOPDIR)/mk/perl.mk
+include $(ADK_TOPDIR)/mk/perl.mk
 
 CONFIG_STYLE:=		perl
 XAKE_FLAGS+=		$(PERL_ENV)
@@ -30,4 +30,4 @@ p5-json-xs-install:
 	$(CP) $(WRKINST)$(PERL_SITEDIR)/* \
 		$(IDIR_P5_JSON_XS)$(PERL_SITEDIR)
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

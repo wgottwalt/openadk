@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		p5-html-parser
 PKG_VERSION:=		3.71
@@ -16,11 +16,11 @@ PKG_SITES:=		http://cpan.metacpan.org/authors/id/G/GA/GAAS/
 DISTFILES:=             HTML-Parser-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/HTML-Parser-${PKG_VERSION}
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,P5_HTML_PARSER,p5-html-parser,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-include $(TOPDIR)/mk/perl.mk
+include $(ADK_TOPDIR)/mk/perl.mk
 
 CONFIG_STYLE:=		perl
 XAKE_FLAGS+=		$(PERL_ENV)
@@ -30,4 +30,4 @@ p5-html-parser-install:
 	$(CP) $(WRKINST)$(PERL_SITEDIR)/* \
 		$(IDIR_P5_HTML_PARSER)$(PERL_SITEDIR)
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

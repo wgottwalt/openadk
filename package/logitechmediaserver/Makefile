@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		logitechmediaserver
 PKG_VERSION:=		7.8.0
@@ -19,7 +19,7 @@ PKG_SITES:=		http://downloads.slimdevices.com/LogitechMediaServer_v7.8.0/
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-noCPAN.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-noCPAN
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LOGITECHMEDIASERVER,logitechmediaserver,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
@@ -31,4 +31,4 @@ logitechmediaserver-install:
 	$(INSTALL_DIR) $(IDIR_LOGITECHMEDIASERVER)/opt/lms
 	$(CP) $(WRKSRC)/* $(IDIR_LOGITECHMEDIASERVER)/opt/lms
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		p5-xml-parser-expat
 PKG_VERSION:=		2.41
@@ -16,11 +16,11 @@ PKG_SITES:=		http://cpan.metacpan.org/authors/id/T/TO/TODDR/
 DISTFILES:=             XML-Parser-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/XML-Parser-${PKG_VERSION}
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,P5_XML_PARSER_EXPAT,p5-xml-parser-expat,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-include $(TOPDIR)/mk/perl.mk
+include $(ADK_TOPDIR)/mk/perl.mk
 
 PERL_ENV+=		EXPATLIBPATH=${STAGING_TARGET_DIR}/usr/lib \
 			EXPATINCPATH=${STAGING_TARGET_DIR}/usr/include
@@ -32,4 +32,4 @@ p5-xml-parser-expat-install:
 	$(CP) $(WRKINST)$(PERL_SITEDIR)/* \
 		$(IDIR_P5_XML_PARSER_EXPAT)$(PERL_SITEDIR)
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk
