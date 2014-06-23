@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		p5-xml-parser
-PKG_VERSION:=		2.40
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		c66e9adba003d0667cc40115ccd837a5
+PKG_VERSION:=		2.41
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		c320d2ffa459e6cdc6f9f59c1185855e
 PKG_DESCR:=		xml parser
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl libexpat
 PKG_BUILDDEP:=		perl expat
-PKG_SITES:=		http://search.cpan.org/CPAN/authors/id/C/CH/CHORNY/
+PKG_SITES:=		http://cpan.metacpan.org/authors/id/T/TO/TODDR/
 
 DISTFILES:=             XML-Parser-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/XML-Parser-${PKG_VERSION}
@@ -26,6 +26,9 @@ PERL_ENV+=		EXPATLIBPATH=${STAGING_TARGET_DIR}/usr/lib \
 			EXPATINCPATH=${STAGING_TARGET_DIR}/usr/include
 CONFIG_STYLE:=		perl
 XAKE_FLAGS+=		$(PERL_ENV)
+
+post-extract:
+	@touch $(STAGING_TARGET_DIR)/$(PERL_INCDIR)/patchlevel-debian.h
 
 p5-xml-parser-install:
 	$(INSTALL_DIR) $(IDIR_P5_XML_PARSER)$(PERL_SITEDIR)
