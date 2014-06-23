@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libsecret
 PKG_VERSION:=		0.18
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		279d723cd005e80d1d304f74a3488acc
 PKG_DESCR:=		library for storing and retrieving passwords
 PKG_SECTION:=		libs/crypto
@@ -20,6 +20,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBSECRET,libsecret,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--enable-vala=no \
+			--disable-manpages \
 			--enable-gcrypt
 
 libsecret-install:
