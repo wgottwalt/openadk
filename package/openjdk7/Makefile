@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
 PKG_VERSION:=		2.4.7
-PKG_RELEASE:=		6
+PKG_RELEASE:=		7
 PKG_MD5SUM:=		f6b28633b9978fadc724247cfc264ff0
 PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
