@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		flex
 PKG_VERSION:=		2.5.35
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		201d3f38758d95436cbc64903386de0b
 PKG_DESCR:=		fast lexical analyzer
 PKG_SECTION:=		dev/tools
@@ -21,6 +21,9 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call HOST_template,FLEX,flex,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,FLEX,flex,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+hostpost-install:
+	(cd $(STAGING_HOST_DIR)/usr/bin; ln -sf flex lex)
 
 flex-install:
 	${INSTALL_DIR} ${IDIR_FLEX}/usr/bin
