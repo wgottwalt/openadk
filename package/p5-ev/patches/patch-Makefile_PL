@@ -1,14 +1,5 @@
 --- EV-4.17.orig/Makefile.PL	2013-08-01 04:08:54.000000000 +0200
-+++ EV-4.17/Makefile.PL	2014-06-17 22:04:03.000000000 +0200
-@@ -77,7 +77,7 @@ OS, via the next question. I highly reco
- 
- EOF
- 
--if (prompt ("Enable select backend (y/n)?", "y") =~ /[yY]/) {
-+if (prompt ("Enable select backend (y/n)?", "n") =~ /[yY]/) {
-    $DEFINE .= " -DEV_USE_SELECT=1";
- 
-    print <<EOF;
++++ EV-4.17/Makefile.PL	2014-06-23 18:55:22.780438631 +0200
 @@ -112,7 +112,7 @@ the default here unless you run into com
  
  EOF
@@ -50,7 +41,7 @@
  my $can_inotify = -e "/usr/include/sys/inotify.h";
  $can_inotify = $ENV{EV_INOTIFY} if exists $ENV{EV_INOTIFY};
 -$DEFINE .= " -DEV_USE_INOTIFY=" . (0 + (prompt ("Enable inotify support (y/n)?", $can_inotify ? "y" : "n") =~ /[yY]/));
-+$DEFINE .= " -DEV_USE_INOTIFY=" . (0 + (prompt ("Enable inotify support (y/n)?", "y") =~ /[yY]/));
++$DEFINE .= " -DEV_USE_INOTIFY=" . (0 + (prompt ("Enable inotify support (y/n)?", "n") =~ /[yY]/));
  
  print <<EOF;
  
@@ -59,7 +50,7 @@
  my $can_eventfd = -e "/usr/include/sys/eventfd.h";
  $can_eventfd = $ENV{EV_EVENTFD} if exists $ENV{EV_EVENTFD};
 -$DEFINE .= " -DEV_USE_EVENTFD=" . (0 + (prompt ("Enable linux eventfd support (y/n)?", $can_eventfd ? "y" : "n") =~ /[yY]/));
-+$DEFINE .= " -DEV_USE_EVENTFD=" . (0 + (prompt ("Enable linux eventfd support (y/n)?", "y") =~ /[yY]/));
++$DEFINE .= " -DEV_USE_EVENTFD=" . (0 + (prompt ("Enable linux eventfd support (y/n)?", "n") =~ /[yY]/));
  
  print <<EOF;
  
@@ -68,7 +59,7 @@
  my $can_signalfd = -e "/usr/include/sys/signalfd.h";
  $can_signalfd = $ENV{EV_SIGNALFD} if exists $ENV{EV_SIGNALFD};
 -$DEFINE .= " -DEV_USE_SIGNALFD=" . (0 + (prompt ("Enable linux signalfd support (y/n)?", $can_signalfd ? "y" : "n") =~ /[yY]/));
-+$DEFINE .= " -DEV_USE_SIGNALFD=" . (0 + (prompt ("Enable linux signalfd support (y/n)?", "y") =~ /[yY]/));
++$DEFINE .= " -DEV_USE_SIGNALFD=" . (0 + (prompt ("Enable linux signalfd support (y/n)?", "n") =~ /[yY]/));
  
  print <<EOF;
  

@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		ffc39299fab4589bb850b5a46ccd2395
 PKG_DESCR:=		interface to libev, a high performance full-featured event loop
 PKG_SECTION:=		dev/perl
-PKG_DEPENDS:=		perl libevent
-PKG_BUILDDEP:=		perl libevent
+PKG_DEPENDS:=		perl libev
+PKG_BUILDDEP:=		perl libev
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/
 
 DISTFILES:=             EV-${PKG_VERSION}.tar.gz
