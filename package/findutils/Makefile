@@ -10,6 +10,7 @@ PKG_MD5SUM:=		351cc4adb07d54877fa15f75fb77d39f
 PKG_DESCR:=		utilities for finding files
 PKG_SECTION:=		base/apps
 PKG_DEPENDS:=		libpthread
+HOST_BUILDDEP:=		autoconf-host
 PKG_URL:=		http://www.gnu.org/software/findutils/
 PKG_SITES:=		http://ftp.gnu.org/pub/gnu/findutils/
 PKG_BB:=		1
