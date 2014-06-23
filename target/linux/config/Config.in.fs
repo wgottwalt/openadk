@@ -293,6 +293,7 @@ config ADK_KERNEL_INOTIFY_USER
 	prompt "Inotify support for userspace"
 	boolean
 	depends on ADK_KERNEL_INOTIFY
+	default m if ADK_PACKAGE_SAMBA
 	default n
 	help
 	  Say Y here to enable inotify support for userspace, including the

@@ -4,17 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		3.6.23
-PKG_RELEASE:=		6
-PKG_MD5SUM:=		2f7aee1dc5d31aefcb364600915b31dc
+PKG_VERSION:=		3.6.24
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d98425c0c2b73e08f048d31ffc727fb0
 PKG_DESCR:=		smb file and print server
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		gettext-tiny util-linux popt
 PKG_DEPENDS:=		samba-lib libuuid libpopt
 PKG_URL:=		http://www.samba.org/
 PKG_SITES:=		http://samba.org/samba/ftp/stable/
-
-PKG_CFLINE_SAMBA:=	select ADK_KERNEL_INOTIFY_USER
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
