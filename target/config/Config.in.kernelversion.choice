@@ -4,16 +4,16 @@
 choice
 prompt "Kernel Version"
 depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM && ADK_TARGET_KERNEL_CUSTOMISING
-default ADK_KERNEL_VERSION_3_15_0
+default ADK_KERNEL_VERSION_3_15_1
 
-config ADK_KERNEL_VERSION_3_15_0
-	prompt "3.15"
+config ADK_KERNEL_VERSION_3_15_1
+	prompt "3.15.1"
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
 	boolean
 	select ADK_KERNEL_VERSION_3_15
 
-config ADK_KERNEL_VERSION_3_14_7
-	prompt "3.14.7"
+config ADK_KERNEL_VERSION_3_14_8
+	prompt "3.14.8"
 	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	boolean
 	select ADK_KERNEL_VERSION_3_14
@@ -25,8 +25,8 @@ config ADK_KERNEL_VERSION_3_12_22
 	boolean
 	select ADK_KERNEL_VERSION_3_12
 
-config ADK_KERNEL_VERSION_3_10_43
-	prompt "3.10.43"
+config ADK_KERNEL_VERSION_3_10_44
+	prompt "3.10.44"
 	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
 	boolean
@@ -39,8 +39,8 @@ config ADK_KERNEL_VERSION_3_10_30
 	boolean
 	select ADK_KERNEL_VERSION_3_10
 
-config ADK_KERNEL_VERSION_3_4_93
-	prompt "3.4.93"
+config ADK_KERNEL_VERSION_3_4_94
+	prompt "3.4.94"
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	depends on !ADK_TARGET_SYSTEM_CUBOX_I
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
