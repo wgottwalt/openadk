@@ -1,30 +1,30 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include $(TOPDIR)/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gradm
 PKG_VERSION:=		3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		55d5032573a3835ef52f2226305ee89e
+PKG_MD5SUM:=		a03b07fe0de47cac72f3edd4cf42d811
 PKG_DESCR:=		rbac administration utility
 PKG_SECTION:=		sys/misc
-PKG_BUILDDEP:=		bison-host flex-host
 PKG_URL:=		http://grsecurity.net/
 PKG_SITES:=		http://grsecurity.net/stable/
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-201401291757.tar.gz
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-201405281853.tar.gz
 
-include $(TOPDIR)/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GRADM,gradm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
+XAKE_FLAGS+=		BISON=bison FLEX=flex
 
 gradm-install:
-	$(INSTALL_DIR) $(IDIR_GRADM)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/gradm \
-		$(IDIR_GRADM)/usr/bin
+	$(INSTALL_DIR) $(IDIR_GRADM)/usr/sbin
+	$(INSTALL_BIN) $(WRKINST)/sbin/gr* \
+		$(IDIR_GRADM)/usr/sbin
 
-include ${TOPDIR}/mk/pkg-bottom.mk
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk
