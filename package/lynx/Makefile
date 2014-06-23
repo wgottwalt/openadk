@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lynx
 PKG_VERSION:=		2.8.8
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		7caa6773f94e136556c1c30629fe1431
 PKG_DESCR:=		text browser
 PKG_SECTION:=		app/browser
@@ -41,8 +41,7 @@ CONFIGURE_ENV+=		ac_cv_path_TELNET=telnet \
 			ac_cv_path_ZIP=zip \
 			ac_cv_path_NCURSES_CONFIG=${STAGING_TARGET_DIR}/usr/bin/ncurses5-config
 
-CONFIGURE_ARGS+=	\
-			--disable-warnings \
+CONFIGURE_ARGS+=	--disable-warnings \
 			--without-gnutls \
 			--without-socks \
 			--without-socks5 \
@@ -77,8 +76,8 @@ CONFIGURE_ARGS+=	\
 			--with-screen=ncurses \
 			--disable-widec \
 			--disable-locale-charset \
-			--with-build-cc=$(CC_FOR_BUILD) \
-			--with-build-cflags="$(CFLAGS_FOR_BUILD)" \
+			--with-build-cc=$(HOST_CC) \
+			--with-build-cflags="$(HOST_CFLAGS)" \
 			--with-build-cppflags="-I/usr/include/ncurses"
 MAKE_FILE:=		makefile
 
