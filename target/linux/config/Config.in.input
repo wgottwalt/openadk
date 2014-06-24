@@ -139,7 +139,7 @@ config ADK_KERNEL_KEYBOARD_ATKBD
 
 config ADK_KERNEL_MOUSE_PS2
 	prompt "Mouse support (PS/2)"
-	tristate
+	boolean
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_INPUT_MOUSEDEV
 	select ADK_KERNEL_INPUT_MOUSE
