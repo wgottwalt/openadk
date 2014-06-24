@@ -7,7 +7,7 @@ PKG_NAME:=		huawei
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
 PKG_DESCR:=		huawei modem control
-PKG_SECTION:=		sys/utils
+PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libusb libusb-compat
 PKG_BUILDDEP:=		libusb libusb-compat
 

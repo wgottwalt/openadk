@@ -8,7 +8,7 @@ PKG_VERSION:=		008
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		52d3e09e47ffef634833f7fab168eccf
 PKG_DESCR:=		utilities for cpufreq subsystem
-PKG_SECTION:=		sys/utils
+PKG_SECTION:=		sys/hw
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/cpufreq/cpufrequtils.html
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/kernel/cpufreq/
 

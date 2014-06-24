@@ -8,7 +8,7 @@ PKG_VERSION:=		1.3
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		79d5ee468c0076feb3cac473bef661d2
 PKG_DESCR:=		philips webcam control utility
-PKG_SECTION:=		sys/misc
+PKG_SECTION:=		sys/hw
 PKG_URL:=		http://www.vanheusden.com/setpwc/
 PKG_SITES:=		http://www.vanheusden.com/setpwc/
 

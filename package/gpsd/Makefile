@@ -8,7 +8,7 @@ PKG_VERSION:=		3.10
 PKG_RELEASE:=		3
 PKG_MD5SUM:=		fc5b03aae38b9b5b6880b31924d0ace3
 PKG_DESCR:=		interface daemon for gps receivers
-PKG_SECTION:=		sys/misc
+PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		scons-host ncurses
 PKG_URL:=		http://catb.org/gpsd/
@@ -17,7 +17,7 @@ PKG_SITES:=		http://download-mirror.savannah.gnu.org/releases/gpsd/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		GPSD GPSD_CLIENTS
-PKGSD_GPSD_CLIENTS:=	GPS client utilities
+PKGSD_GPSD_CLIENTS:=	gps client utilities
 
 include ${ADK_TOPDIR}/mk/package.mk
 

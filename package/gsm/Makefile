@@ -20,7 +20,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_SUBPKGS:=		LIBGSM GSM_UTILS
 PKGSD_GSM_UTILS:=	gsm full-rate speech transcoding utilities
 PKGSS_GSM_UTILS:=	libgsm
-PKGSC_GSM_UTILS:=	sys/misc
+PKGSC_GSM_UTILS:=	mm/audio
 
 WRKDIST=		${WRKDIR}/${PKG_NAME}-1.0-pl10
 

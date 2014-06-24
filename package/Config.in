@@ -10,6 +10,7 @@ menu "System"
 source package/Config.in.auto.sys.fs
 source package/Config.in.auto.sys.serial
 source package/Config.in.auto.sys.utils
+source package/Config.in.auto.sys.hw
 source package/Config.in.auto.sys.firmware
 source package/Config.in.auto.sys.misc
 endmenu

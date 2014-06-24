@@ -8,6 +8,7 @@ sys/misc	System Misc
 sys/serial	Serial communications & terminal emulation
 sys/utils	System Utilities
 sys/firmware	Firmware for Network Devices
+sys/hw		Hardware related System utilities
 app/archive	Compression and Archivers
 app/browser	Browser
 app/chat	Chat
