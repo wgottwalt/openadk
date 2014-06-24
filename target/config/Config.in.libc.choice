@@ -34,6 +34,7 @@ config ADK_TARGET_LIB_UCLIBC
 	select ADK_uclibc
 	depends on \
 		   !ADK_LINUX_AARCH64 && \
+		   !ADK_LINUX_ALPHA && \
 		   !ADK_LINUX_M68K && \
 		   !ADK_LINUX_MICROBLAZE && \
 		   !ADK_LINUX_SPARC && \

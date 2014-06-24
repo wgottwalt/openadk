@@ -106,6 +106,7 @@ config ADK_CPU_ARMV8
 
 config ADK_TARGET_CPU_ARCH
 	string
+	default "alpha" if ADK_LINUX_ALPHA
 	default "x86_64" if ADK_CPU_X86_64
 	default "x86_64" if ADK_CPU_AMDFAM10
 	default "i686" if ADK_CPU_ATHLON
