@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.18.11
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		be23120f342250e8352f6499cb960fd2
 PKG_DESCR:=		music player daemon
 PKG_SECTION:=		mm/audio
