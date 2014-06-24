@@ -4,17 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		radvd
-PKG_VERSION:=		1.12
+PKG_VERSION:=		1.13
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		baddc38a5f26ca46a9ce7e778b59c1ae
+PKG_MD5SUM:=		bcedd68543c94f330d1b6c8566b4ae64
 PKG_DESCR:=		routing advertisement daemon for ipv6
 PKG_SECTION:=		net/ipv6
 PKG_DEPENDS:=		libdaemon
 PKG_BUILDDEP:=		libdaemon
 PKG_URL:=		http://www.litech.org/radvd/
 PKG_SITES:=		http://v6web.litech.org/radvd/dist/
-
-PKG_HOST_DEPENDS:=	!freebsd
 
 include ${ADK_TOPDIR}/mk/package.mk
 
