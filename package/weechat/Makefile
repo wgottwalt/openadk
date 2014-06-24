@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		weechat
-PKG_VERSION:=		0.4.2
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		fd584c258aace2aa898f40e1fcf06084
+PKG_VERSION:=		0.4.3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		2206cbc7ee66d0c219f25a5499973dd5
 PKG_DESCR:=		lightweight irc client
 PKG_SECTION:=		app/chat
 PKG_DEPENDS:=		libncurses libgcrypt zlib libcurl
@@ -28,8 +28,7 @@ CONFIGURE_ARGS+=	--with-debug=0 \
 			--disable-lua \
 			--disable-tcl \
 			--disable-gnutls \
-			--disable-ruby \
-			--with-libiconv-prefix='${STAGING_TARGET_DIR}/usr'
+			--disable-ruby
 
 weechat-install:
 	${INSTALL_DIR} ${IDIR_WEECHAT}/usr/bin
