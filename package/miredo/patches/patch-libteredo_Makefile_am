@@ -1,0 +1,13 @@
+--- miredo-1.2.6.orig/libteredo/Makefile.am	2013-05-23 17:40:42.000000000 +0200
++++ miredo-1.2.6/libteredo/Makefile.am	2014-06-25 18:19:47.878146465 +0200
+@@ -17,9 +17,8 @@
+ # *  http://www.gnu.org/copyleft/gpl.html                               *
+ # ***********************************************************************
+ 
+-SUBDIRS = . test
++SUBDIRS = .
+ localedir = @datadir@/locale
+-LTLIBINTL = @LTLIBINTL@
+ 
+ AM_CPPFLAGS = -I@top_srcdir@/include -I@top_srcdir@ \
+ 	-D_REENTRANT -DLOCALEDIR=\"$(localedir)\"

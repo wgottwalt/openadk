@@ -1,0 +1,43 @@
+--- miredo-1.2.6.orig/src/Makefile.am	2012-09-12 15:03:59.000000000 +0200
++++ miredo-1.2.6/src/Makefile.am	2014-06-25 18:26:22.564364775 +0200
+@@ -22,8 +22,6 @@ localedir = $(datadir)/locale
+ top_srcdir = @top_srcdir@
+ sysconfdir = @sysconfdir@
+ 
+-LIBINTL = @LIBINTL@
+-LTLIBINTL = @LTLIBINTL@
+ LIBCAP = @LIBCAP@
+ 
+ AM_CPPFLAGS = -I$(top_srcdir)/include -I$(top_srcdir) -D_REENTRANT \
+@@ -41,7 +39,7 @@ TESTS =
+ 
+ libmiredo_la_SOURCES = main.c miredo.c miredo.h \
+ 			conf.c conf.h binreloc.c binreloc.h
+-libmiredo_la_LIBADD = $(LTLIBINTL) $(LIBCAP) $(BINRELOC_LIBS) \
++libmiredo_la_LIBADD = $(LIBCAP) $(BINRELOC_LIBS) \
+ 			../compat/libcompat.la
+ libmiredo_la_LDFLAGS = -no-undefined -static
+ #libmiredo_la_LDFLAGS = -no-undefined -release @VERSION@
+@@ -53,7 +51,7 @@ libmiredo_la_LDFLAGS = -no-undefined -st
+ # miredo
+ miredo_SOURCES = relayd.c
+ miredo_LDADD = ../libtun6/libtun6.la ../libteredo/libteredo.la libmiredo.la \
+-		@LIBRT@ $(LIBINTL)
++		@LIBRT@
+ 
+ # privproc
+ miredo_privproc_SOURCES = privproc.c privproc.h
+@@ -65,11 +63,11 @@ endif
+ 
+ # miredo-server
+ miredo_server_SOURCES = serverd.c
+-miredo_server_LDADD = ../libteredo/libteredo-server.la libmiredo.la $(LIBINTL)
++miredo_server_LDADD = ../libteredo/libteredo-server.la libmiredo.la
+ 
+ # miredo-checkconf
+ miredo_checkconf_SOURCES = checkconf.c
+-miredo_checkconf_LDADD = libmiredo.la $(LIBINTL)
++miredo_checkconf_LDADD = libmiredo.la
+ 
+ install-exec-local:
+ 	$(install_sh) -d "$(DESTDIR)$(localstatedir)/run"

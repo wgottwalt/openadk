@@ -1,6 +1,15 @@
 --- miredo-1.2.6.orig/configure.ac	2013-05-23 17:51:41.000000000 +0200
-+++ miredo-1.2.6/configure.ac	2013-11-08 16:09:54.000000000 +0100
-@@ -149,12 +149,17 @@ LIBS="$LIBS_save"
++++ miredo-1.2.6/configure.ac	2014-06-25 18:17:49.829469301 +0200
+@@ -55,8 +55,6 @@ AM_SILENT_RULES([yes])
+ # Checks for libraries.
+ AS_MESSAGE([checking required libraries...])
+ AM_BINRELOC
+-AM_GNU_GETTEXT_VERSION([0.18.1])
+-AM_GNU_GETTEXT([external])
+ 
+ LIBRT=""
+ AC_CHECK_LIB(rt, clock_gettime, [LIBRT="-lrt"])
+@@ -149,12 +147,17 @@ LIBS="$LIBS_save"
  AS_MESSAGE([checking optional features...])
  
  # POSIX capabilities

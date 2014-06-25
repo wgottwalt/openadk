@@ -1,0 +1,11 @@
+--- miredo-1.2.6.orig/Makefile.am	2012-09-12 15:03:59.000000000 +0200
++++ miredo-1.2.6/Makefile.am	2014-06-25 18:17:31.653364453 +0200
+@@ -26,7 +26,7 @@ AUTOMAKE_OPTIONS = 1.11 \
+ 	no-dist-gzip \
+ 	no-exeext
+ 
+-SUBDIRS = po doc misc compat libteredo libtun6 src
++SUBDIRS = misc compat libteredo libtun6 src
+ DIST_SUBDIRS = m4 $(SUBDIRS)
+ noinst_HEADERS = include/gettext.h
+ EXTRA_DIST = autogen.sh Doxyfile.in

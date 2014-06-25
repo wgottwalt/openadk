@@ -1,11 +1,13 @@
 $Id$
 --- iptraf-3.0.1.orig/src/Makefile	2005-09-13 11:11:17.000000000 +0200
-+++ iptraf-3.0.1/src/Makefile	2013-03-04 11:42:11.000000000 +0100
-@@ -18,7 +18,8 @@ VERSION 	= -DVERSION=\"$(VERNUMBER)\"
++++ iptraf-3.0.1/src/Makefile	2014-06-25 16:51:56.160654472 +0200
+@@ -17,8 +17,9 @@ VERSION 	= -DVERSION=\"$(VERNUMBER)\"
+ #
  BINDIR		= ../../iptraf-$(VERNUMBER).bin.$(ARCH)
  
- CC		= gcc
+-CC		= gcc
 -LIBS		= -L../support -ltextbox -lpanel -lncurses   # in this order!
++CC		?= gcc
 +LIBS		?=
 +LIBS		+= -ltextbox -lpanel -lncurses   # in this order!
  

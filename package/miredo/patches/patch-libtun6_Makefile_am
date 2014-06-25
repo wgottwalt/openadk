@@ -1,0 +1,19 @@
+--- miredo-1.2.6.orig/libtun6/Makefile.am	2008-02-16 15:52:07.000000000 +0100
++++ miredo-1.2.6/libtun6/Makefile.am	2014-06-25 18:22:44.855149653 +0200
+@@ -21,7 +21,6 @@ localedir = @datadir@/locale
+ 
+ AM_CPPFLAGS = -I@top_srcdir@/include -I@top_srcdir@ \
+ 	-D_REENTRANT -DLOCALEDIR=\"$(localedir)\"
+-LIBINTL = @LIBINTL@
+ 
+ lib_LTLIBRARIES = libtun6.la
+ check_PROGRAMS = libtun6-diagnose
+@@ -32,7 +31,7 @@ include_libtun6_HEADERS = tun6.h
+ 
+ # libtun6.a
+ libtun6_la_SOURCES = tun6.c diag.c
+-libtun6_la_LIBADD = @LTLIBINTL@ ../compat/libcompat.la
++libtun6_la_LIBADD = ../compat/libcompat.la
+ libtun6_la_LDFLAGS = -no-undefined -export-symbols-regex tun6_.* \
+ 	-version-info 1:1:1
+ 

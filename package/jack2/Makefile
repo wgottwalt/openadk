@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		9ba759b640f9012d9a5e971a26675c6e
 PKG_DESCR:=		audio connection kit
 PKG_SECTION:=		mm/audio
-PKG_DEPENDS:=		alsa-lib libsndfile
+PKG_DEPENDS:=		alsa-lib libsndfile libsamplerate
 PKG_BUILDDEP:=		python2-host alsa-lib libsndfile
+PKG_BUILDDEP+=		libsamplerate
 PKG_URL:=		http://jackaudio.org
 PKG_SITES:=		http://openadk.org/distfiles/
 
