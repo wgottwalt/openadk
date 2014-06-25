@@ -21,8 +21,13 @@ $(eval $(call HOST_template,PKGCONF,pkgconf,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,PKGCONF,pkgconf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 hostpost-install:
-	(cd $(STAGING_HOST_DIR)/usr/bin && ln -sf pkgconf pkg-config)
-	(cd $(STAGING_HOST_DIR)/usr/bin && ln -sf pkgconf $(GNU_TARGET_NAME)-pkg-config)
+	$(CP) ./files/pkg-config $(STAGING_HOST_DIR)/usr/bin
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+	$(SED) "s#@@OPTS@@#-static#" $(STAGING_HOST_DIR)/usr/bin/pkg-config
+else
+	$(SED) "s#@@OPTS@@##" $(STAGING_HOST_DIR)/usr/bin/pkg-config
+endif
+	(cd $(STAGING_HOST_DIR)/usr/bin && ln -sf pkg-config $(GNU_TARGET_NAME)-pkg-config)
 
 pkgconf-install:
 	$(INSTALL_DIR) $(IDIR_PKGCONF)/usr/bin
