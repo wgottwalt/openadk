@@ -103,7 +103,7 @@ samba-lib-install:
 	${INSTALL_DIR} ${IDIR_SAMBA_LIB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/{libsmbclient,libsmbsharemodes,libnetapi}.so* \
 		${IDIR_SAMBA_LIB}/usr/lib
-	$(CP) ${WRKINST}/usr/lib/{libtalloc,libtdb,libtevent}.* \
+	$(CP) ${WRKINST}/usr/lib/{libtalloc,libtdb,libtevent}.so* \
 		${IDIR_SAMBA_LIB}/usr/lib
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
