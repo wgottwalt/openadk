@@ -366,6 +366,14 @@ endmenu
 
 config ADK_SIMPLE_NETWORK_CONFIG_NS
 	depends on ADK_SIMPLE_NETWORK_CONFIG
+	depends on !ADK_SIMPLE_NETWORK_CONFIG_ETH0_DHCP
+	depends on !ADK_SIMPLE_NETWORK_CONFIG_ETH1_DHCP
+	depends on !ADK_SIMPLE_NETWORK_CONFIG_WLAN0_DHCP
 	string "Nameserver"
 	default "10.0.0.1"
+
+config ADK_SIMPLE_NETWORK_CONFIG_PROXY
+	depends on ADK_SIMPLE_NETWORK_CONFIG
+	string "HTTP-Proxy (f.e. http://10.0.0.2:8080)"
+	default ""
 
