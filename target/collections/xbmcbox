@@ -1,0 +1,17 @@
+config ADK_PKG_XBMCBOX
+	bool "Choose packages for XBMCBox system"
+	default n
+	select BUSYBOX_NTPD
+	select ADK_PACKAGE_XBMC
+	select ADK_PACKAGE_HTOP
+	select ADK_PACKAGE_DROPBEAR
+	select ADK_PACKAGE_DROPBEAR_WITH_UTMP
+	select ADK_PACKAGE_SCREEN
+	select ADK_PACKAGE_VIM
+	select ADK_PACKAGE_E2FSCK
+	select ADK_PACKAGE_DOSFSTOOLS
+	select ADK_PACKAGE_ALSA_UTILS
+	select ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER
+	help
+	  Create a small xbmc box.
+
