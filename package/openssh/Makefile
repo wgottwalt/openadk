@@ -30,14 +30,11 @@ PKGSN_OPENSSH_SFTP_CLIENT:=	openssh
 PKGSD_OPENSSH_SFTP_SERVER:=	sftp server
 PKGSN_OPENSSH_SFTP_SERVER:=	openssh
 
-PKG_CHOICES_OPENSSH:=	NOKRB WITH_KRB5 WITH_HEIMDAL
+PKG_CHOICES_OPENSSH:=	NOKRB WITH_KRB5
 PKGCD_NOKRB:=		no Kerberos support
 PKGCD_WITH_KRB5:=	with MIT Kerberos
 PKGCS_WITH_KRB5:=	libkrb5 libcom-err
 PKGCB_WITH_KRB5:=	krb5
-PKGCD_WITH_HEIMDAL:=	with Heimdal Kerberos
-PKGCS_WITH_HEIMDAL:=	libheimdal libcom-err
-PKGCB_WITH_HEIMDAL:=	heimdal
 
 include ${ADK_TOPDIR}/mk/package.mk
 
@@ -50,10 +47,6 @@ $(eval $(call PKG_template,OPENSSH_SFTP_SERVER,openssh-sftp-server,${PKG_VERSION
 
 ifeq ($(ADK_PACKAGE_OPENSSH_WITH_KRB5),y)
 CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
-endif
-ifeq ($(ADK_PACKAGE_OPENSSH_WITH_HEIMDAL),y)
-CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
-TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/usr/lib/heimdal -Wl,-rpath -Wl,/usr/lib/heimdal
 endif
 
 ifeq ($(ADK_TARGET_USE_SSP),y)
