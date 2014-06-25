@@ -1198,6 +1198,13 @@ $(eval $(call KMOD_template,SND_AC97_CODEC,snd-ac97-codec,\
 	$(MODULES_DIR)/kernel/sound/pci/ac97/snd-ac97-codec \
 ,55))
 
+$(eval $(call KMOD_template,SND_SOC_WM8804,snd-soc-wm8804,\
+	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-wm8804 \
+,55))
+
+$(eval $(call KMOD_template,SND_SOC_PCM5102A,snd-soc-pcm5102a,\
+	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-pcm5102a \
+,55))
 
 ifeq ($(KERNEL_BASE),3)
 ifeq ($(KERNEL_MAJ),10)
@@ -1245,18 +1252,26 @@ $(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
 	$(MODULES_DIR)/kernel/sound/arm/snd-bcm2835 \
 ,60))
 
-$(eval $(call KMOD_template,SND_BCM2708_SOC_I2S,snd-bcm2709-soc-i2s,\
-	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-pcm5102a \
+$(eval $(call KMOD_template,SND_BCM2708_SOC_I2S,snd-bcm2708-soc-i2s,\
 	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-bcm2708-i2s \
-,60, kmod-snd-soc))
+,60, kmod-snd-soc kmod-snd-soc-pcm5102a))
 
-$(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DAC,snd-bcm2709-soc-hifiberry-dac,\
+$(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DAC,snd-bcm2708-soc-hifiberry-dac,\
 	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-hifiberry-dac \
-,65, kmod-snd-bcm2709-soc-i2s))
+,65, kmod-snd-bcm2708-soc-i2s))
 
-$(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DIGI,snd-bcm2709-soc-hifiberry-digi,\
+$(eval $(call KMOD_template,SND_BCM2708_SOC_HIFIBERRY_DIGI,snd-bcm2708-soc-hifiberry-digi,\
 	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-hifiberry-digi \
-,65, kmod-snd-bcm2709-soc-i2s))
+,65, kmod-snd-bcm2708-soc-i2s))
+
+$(eval $(call KMOD_template,SND_BCM2708_SOC_RPI_DAC,snd-bcm2708-soc-rpi-dac,\
+	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-rpi-dac \
+,65, kmod-snd-bcm2708-soc-i2s))
+
+$(eval $(call KMOD_template,SND_BCM2708_SOC_IQAUDIO_DAC,snd-bcm2708-soc-iqaudio-dac,\
+	$(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-iqaudio-dac \
+,65, kmod-snd-bcm2708-soc-i2s))
+
 
 $(eval $(call KMOD_template,USB_VIDEO_CLASS,usb-video-class,\
 	$(MODULES_DIR)/kernel/drivers/media/usb/uvc/uvcvideo \
