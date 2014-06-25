@@ -57,7 +57,8 @@ else
 CONFIGURE_ARGS+=	--enable-xlib-xrender=no
 endif
 ifneq ($(ADK_PACKAGE_CAIRO_WITH_SVG),)
-CONFIGURE_ARGS+=	--enable-svg=yes
+CONFIGURE_ARGS+=	--enable-svg=yes \
+			--enable-png=yes
 else
 CONFIGURE_ARGS+=	--enable-svg=no
 endif
@@ -71,7 +72,7 @@ CONFIGURE_ARGS+=	--enable-ps=yes
 else
 CONFIGURE_ARGS+=	--enable-ps=no
 endif
-ifneq ($(ADK_PACKAGE_CAIRO_WITH_PNG),)
+ifneq ($(ADK_PACKAGE_CAIRO_WITH_PNG)$(ADK_PACKAGE_CAIRO_WITH_SVG),)
 CONFIGURE_ARGS+=	--enable-png=yes
 else
 CONFIGURE_ARGS+=	--enable-png=no
