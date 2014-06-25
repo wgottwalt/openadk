@@ -104,6 +104,7 @@ config ADK_KERNEL_PAGE_SIZE_16KB
 # ARM specific
 config ADK_KERNEL_AEABI
 	boolean
+	default y if ADK_LINUX_ARM
 
 config ADK_KERNEL_THUMB2_KERNEL
 	boolean
