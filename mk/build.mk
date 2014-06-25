@@ -107,7 +107,7 @@ POSTCONFIG=		-@\
 			touch .rebuild.busybox;\
 			rebuild=1;\
 		fi; \
-		for i in ADK_RUNTIME_PASSWORD ADK_RUNTIME_TMPFS_SIZE ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS ADK_RUNTIME_CONSOLE ADK_RUNTIME_GETTY ADK_RUNTIME_SHELL;do \
+		for i in ADK_SIMPLE_NETWORK_CONFIG ADK_RUNTIME_PASSWORD ADK_RUNTIME_TMPFS_SIZE ADK_RUNTIME_HOSTNAME ADK_TARGET_ROOTFS ADK_RUNTIME_CONSOLE ADK_RUNTIME_GETTY ADK_RUNTIME_SHELL;do \
 			if [ "$$(grep ^$$i .config|md5sum)" != "$$(grep ^$$i .config.old|md5sum)" ];then \
 				touch .rebuild.base-files;\
 				rebuild=1;\
