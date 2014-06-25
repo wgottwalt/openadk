@@ -5,8 +5,8 @@ include $(ADK_TOPDIR)/rules.mk
 include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
-PKG_VERSION:=		1.0
-PKG_RELEASE:=		99
+PKG_VERSION:=		1.1
+PKG_RELEASE:=		1
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -134,6 +134,11 @@ endif
 
 	rm ${IDIR_BASE_FILES}/etc/resolv.conf
 	printf "nameserver ${ADK_SIMPLE_NETWORK_CONFIG_NS}\n" > ${IDIR_BASE_FILES}/etc/resolv.conf
+ifneq (${ADK_SIMPLE_NETWORK_CONFIG_PROXY},)
+	printf "http_proxy=${ADK_SIMPLE_NETWORK_CONFIG_PROXY}\n" >> ${IDIR_BASE_FILES}/etc/profile
+	printf "https_proxy=${ADK_SIMPLE_NETWORK_CONFIG_PROXY}\n" >> ${IDIR_BASE_FILES}/etc/profile
+	printf "ftp_proxy=${ADK_SIMPLE_NETWORK_CONFIG_PROXY}\n" >> ${IDIR_BASE_FILES}/etc/profile
+endif
 endif
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

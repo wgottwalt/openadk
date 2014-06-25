@@ -37,7 +37,7 @@ adk_check() {
 adk_fsck() {
 	[ -x /usr/sbin/fsck.$fs ] && {
 		logger -t mdev "Checking $fs filesystem on ${MDEV}"
-		fsck ${MDEV}
+		fsck -p ${MDEV}
 	}
 }
 
@@ -49,7 +49,7 @@ adk_mount() {
 		logger -t mdev "Mounting local filesystems"
 		mount $mnt
 		if [ $? -ne 0 ];then
-			logger -s -t '' "Mounting $disk failed"
+			logger -s -t 'Filesystem' "Mounting $disk failed"
 		fi
 	else
 		logger -t mdev "Required filesystem $procfs not available"
