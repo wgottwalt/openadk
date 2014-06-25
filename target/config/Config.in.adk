@@ -22,6 +22,12 @@ config ADK_DISABLE_HONOUR_CFLAGS
 	help
 	  Disable honour CFLAGS checks.
 
+config ADK_DISABLE_CHECKSUM
+	bool "Disable checksum check for downloads globally"
+	default n
+	help
+	  Disable checksum checks of downloads.
+
 config ADK_DISABLE_KERNEL_PATCHES
 	bool "Disable global kernel patches"
 	default n

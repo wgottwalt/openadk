@@ -10,17 +10,13 @@ endif
 FULLDISTFILES=		$(patsubst %,${FULLDISTDIR}/%,${DISTFILES})
 
 FETCH_STYLE?=		auto
-#pre-fetch:
 do-fetch:
-#post-fetch:
 fetch:
-#	@${MAKE} pre-fetch
 ifneq ($(filter auto,${FETCH_STYLE}),)
 	${MAKE} ${FULLDISTFILES}
 else
 	${MAKE} do-fetch
 endif
-#	@${MAKE} post-fetch
 
 refetch:
 	-rm -f ${FULLDISTFILES}
@@ -31,6 +27,7 @@ checksum: ${_CHECKSUM_COOKIE}
 ifeq ($(strip ${NO_CHECKSUM}),)
 ${_CHECKSUM_COOKIE}: ${FULLDISTFILES}
 	-rm -rf ${WRKDIR}
+ifneq ($(ADK_DISABLE_CHECKSUM),y)
 	@OK=n; \
 	allsums="$(strip ${PKG_MD5SUM})"; \
 	(md5sum ${FULLDISTFILES}; echo exit) | while read sum name; do \
@@ -50,6 +47,7 @@ ${_CHECKSUM_COOKIE}: ${FULLDISTFILES}
 		echo >&2 ":---> really is '$$sum'"; \
 		OK=0; \
 	done
+endif
 	mkdir -p ${WRKDIR}
 	touch ${_CHECKSUM_COOKIE}
 endif
