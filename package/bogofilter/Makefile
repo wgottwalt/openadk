@@ -21,8 +21,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BOGOFILTER,bogofilter,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ENV+=		LIBS="-liconv" \
-			ac_cv_func_memcmp_working=yes
+CONFIGURE_ENV+=		ac_cv_func_memcmp_working=yes
 CONFIGURE_ARGS+=	--without-libsqlite3-prefix \
 			--without-libqdbm-prefix \
 			--without-libiconv-prefix \

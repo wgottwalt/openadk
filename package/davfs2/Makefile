@@ -24,7 +24,6 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DAVFS2,davfs2,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-neon
-CONFIGURE_ENV+=		LIBS=-liconv
 
 davfs2-install:
 	${INSTALL_DIR} ${IDIR_DAVFS2}/etc/davfs2

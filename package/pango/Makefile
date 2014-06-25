@@ -23,6 +23,7 @@ $(eval $(call HOST_template,PANGO,pango,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,PANGO,pango,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ENV+=		ac_cv_path_EGREP="grep -E"
+CONFIGURE_ARGS+=	--disable-man
 
 pango-install:
 	$(INSTALL_DIR) $(IDIR_PANGO)/etc/pango
