@@ -4,12 +4,11 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-lib
-PKG_VERSION:=		1.0.27.2
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		69129a7c37697f81ac092335e9fa452b
+PKG_VERSION:=		1.0.28
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		c9e21b88a2b3e6e12ea7ba0f3b271fc3
 PKG_DESCR:=		sound library
 PKG_SECTION:=		libs/audio
-PKG_BUILDDEP:=		alsa-lib-host
 PKG_URL:=		http://www.alsa-project.org/
 PKG_SITES:=		ftp://ftp.alsa-project.org/pub/lib/
 PKG_OPTS:=		dev
