@@ -23,11 +23,10 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ORBIT2,orbit2,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CFLAGS_FOR_BUILD+=	$(shell env $(HOST_CONFIGURE_ENV) libIDL-config-2 --cflags)
-LDFLAGS_FOR_BUILD+=	-static
-LIBS_FOR_BUILD:=	$(shell env $(HOST_CONFIGURE_ENV) libIDL-config-2 --libs)
-LIBS_FOR_BUILD+=	-lgmodule-2.0 -ldl -lpthread -lrt -lglib-2.0
-XAKE_FLAGS+=		LIBS_FOR_BUILD="${LIBS_FOR_BUILD}"
+HOST_CFLAGS+=		$(shell env $(HOST_CONFIGURE_ENV) libIDL-config-2 --cflags)
+HOST_LDFLAGSD+=		-static
+HOST_LIBS:=		$(shell env $(HOST_CONFIGURE_ENV) libIDL-config-2 --libs)
+HOST_LIBS+=		-lgmodule-2.0 -ldl -lpthread -lrt -lglib-2.0
 CONFIGURE_ENV+=		ac_cv_alignof_CORBA_octet=1 \
 			ac_cv_alignof_CORBA_boolean=1 \
 			ac_cv_alignof_CORBA_char=1 \

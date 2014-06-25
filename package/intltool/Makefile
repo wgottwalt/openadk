@@ -14,7 +14,7 @@ PKG_SITES:=		https://launchpad.net/intltool/trunk/0.50.2/+download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_ARCH_DEPENDS:=	native
+PKG_CFLINE_INTLTOOL:=	depends on ADK_HOST_ONLY
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
