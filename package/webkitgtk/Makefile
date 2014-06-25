@@ -4,22 +4,24 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		webkitgtk
-PKG_VERSION:=		2.4.2
+PKG_VERSION:=		2.4.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		da2b1b0f0863f3f21bdbc0476001589f
+PKG_MD5SUM:=		c5861552d9ecd6d7854a4d462ff25924
 PKG_DESCR:=		web browser engine
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib icu4c zlib libwebp libgtk libsoup
-PKG_DEPENDS+=		libsecret libxt harfbuzz
+PKG_DEPENDS+=		libsecret libxt harfbuzz cairo
 PKG_DEPENDS+=		gst-plugins-base gstreamer
 PKG_BUILDDEP:=		glib icu4c zlib libwebp gtk+
 PKG_BUILDDEP+=		libsoup libsecret libXt harfbuzz
-PKG_BUILDDEP+=		gst-plugins-base gstreamer
+PKG_BUILDDEP+=		gst-plugins-base gstreamer cairo
 PKG_URL:=		http://www.webkitgtk.org/
 PKG_SITES:=		http://webkitgtk.org/releases/
 PKG_OPTS:=		dev
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+PKG_CFLINE_WEBKITGTK:=	select ADK_PACKAGE_CAIRO_WITH_PDF@
+PKG_CFLINE_WEBKITGTK+=	select ADK_PACKAGE_CAIRO_WITH_PS@
+PKG_CFLINE_WEBKITGTK+=	select ADK_PACKAGE_CAIRO_WITH_SVG@
 
 include $(ADK_TOPDIR)/mk/package.mk
 
