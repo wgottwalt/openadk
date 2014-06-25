@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
 PKG_VERSION:=		13.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		9ce6b6ac89b6aa0b111a1acdf3606e06
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
@@ -64,7 +64,6 @@ AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ENV+=		DESTDIR='${WRKINST}' \
 			TEXTUREPACKER_NATIVE_ROOT='$(STAGING_HOST_DIR)/usr'
 CONFIGURE_ARGS+=	--disable-optical-drive \
-			--disable-optmizations \
 			--disable-mysql \
 			--disable-avahi \
 			--disable-rsxs \
@@ -81,7 +80,6 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-wayland \
 			--disable-pulse \
 			--disable-mid \
-			--with-ffmpeg \
 			--enable-alsa \
 			--enable-libmp3lame \
 			--enable-libvorbisenc \
