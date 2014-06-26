@@ -1,6 +1,6 @@
 diff -Nur icedtea-2.4.7.orig/Makefile.in icedtea-2.4.7/Makefile.in
 --- icedtea-2.4.7.orig/Makefile.in	2014-04-16 06:20:44.689988653 +0200
-+++ icedtea-2.4.7/Makefile.in	2014-06-23 12:10:50.943660624 +0200
++++ icedtea-2.4.7/Makefile.in	2014-06-23 16:45:35.584475680 +0200
 @@ -712,7 +712,7 @@
  	$(am__append_14) $(am__append_15) $(DISTRIBUTION_PATCHES)
  
@@ -10,10 +10,19 @@ diff -Nur icedtea-2.4.7.orig/Makefile.in icedtea-2.4.7/Makefile.in
  	patches/boot/ant-javac.patch patches/boot/corba-idlj.patch \
  	patches/boot/corba-no-gen.patch patches/boot/corba-orb.patch \
  	patches/boot/demos.patch patches/boot/fphexconstants.patch \
+@@ -2720,7 +2720,7 @@
+ stamps/jamvm.stamp: $(OPENJDK_TREE) stamps/rt.stamp
+ @BUILD_JAMVM_TRUE@	cd jamvm/jamvm && \
+ @BUILD_JAMVM_TRUE@	./autogen.sh --with-java-runtime-library=openjdk7 \
+-@BUILD_JAMVM_TRUE@	  --prefix=$(abs_top_builddir)/jamvm/install ; \
++@BUILD_JAMVM_TRUE@	  --prefix=$(abs_top_builddir)/jamvm/install $(CONFIGURE_ARGS); \
+ @BUILD_JAMVM_TRUE@	$(MAKE) ; \
+ @BUILD_JAMVM_TRUE@	$(MAKE) install
+ @BUILD_JAMVM_TRUE@	mkdir -p $(abs_top_builddir)/jamvm/install/hotspot/jre/lib/$(INSTALL_ARCH_DIR)/server
 diff -Nur icedtea-2.4.7.orig/patches/openadk.patch icedtea-2.4.7/patches/openadk.patch
 --- icedtea-2.4.7.orig/patches/openadk.patch	1970-01-01 01:00:00.000000000 +0100
-+++ icedtea-2.4.7/patches/openadk.patch	2014-06-23 14:30:09.703379765 +0200
-@@ -0,0 +1,662 @@
++++ icedtea-2.4.7/patches/openadk.patch	2014-06-24 12:36:26.511108017 +0200
+@@ -0,0 +1,705 @@
 +diff -Nur openjdk.orig/hotspot/make/linux/makefiles/zeroshark.make openjdk/hotspot/make/linux/makefiles/zeroshark.make
 +--- openjdk.orig/hotspot/make/linux/makefiles/zeroshark.make	2014-02-20 19:51:45.000000000 +0100
 ++++ openjdk/hotspot/make/linux/makefiles/zeroshark.make	2014-06-17 17:39:28.697018938 +0200
@@ -556,6 +565,48 @@ diff -Nur icedtea-2.4.7.orig/patches/openadk.patch icedtea-2.4.7/patches/openadk
 +         init0();
 + 
 +         // start the address listener thread
++diff -Nur openjdk.orig/jdk/src/solaris/bin/mipsel/jvm.cfg openjdk/jdk/src/solaris/bin/mipsel/jvm.cfg
++--- openjdk.orig/jdk/src/solaris/bin/mipsel/jvm.cfg	1970-01-01 01:00:00.000000000 +0100
+++++ openjdk/jdk/src/solaris/bin/mipsel/jvm.cfg	2014-04-12 01:23:06.000000000 +0200
++@@ -0,0 +1,38 @@
+++# Copyright (c) 2011, Oracle and/or its affiliates. All rights reserved.
+++# DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS FILE HEADER.
+++#
+++# This code is free software; you can redistribute it and/or modify it
+++# under the terms of the GNU General Public License version 2 only, as
+++# published by the Free Software Foundation.  Oracle designates this
+++# particular file as subject to the "Classpath" exception as provided
+++# by Oracle in the LICENSE file that accompanied this code.
+++#
+++# This code is distributed in the hope that it will be useful, but WITHOUT
+++# ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+++# FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License
+++# version 2 for more details (a copy is included in the LICENSE file that
+++# accompanied this code).
+++#
+++# You should have received a copy of the GNU General Public License version
+++# 2 along with this work; if not, write to the Free Software Foundation,
+++# Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA.
+++#
+++# Please contact Oracle, 500 Oracle Parkway, Redwood Shores, CA 94065 USA
+++# or visit www.oracle.com if you need additional information or have any
+++# questions.
+++#
+++# List of JVMs that can be used as an option to java, javac, etc.
+++# Order is important -- first in this list is the default JVM.
+++# NOTE that this both this file and its format are UNSUPPORTED and
+++# WILL GO AWAY in a future release.
+++#
+++# You may also select a JVM in an arbitrary location with the
+++# "-XXaltjvm=<jvm_dir>" option, but that too is unsupported
+++# and may not be available in a future release.
+++#
+++-client KNOWN
+++-server KNOWN
+++-hotspot ERROR
+++-classic WARN
+++-native ERROR
+++-green ERROR
 +diff -Nur openjdk-boot.orig/hotspot/make/linux/makefiles/vm.make openjdk-boot/hotspot/make/linux/makefiles/vm.make
 +--- openjdk-boot.orig/hotspot/make/linux/makefiles/vm.make	2014-02-20 19:51:45.000000000 +0100
 ++++ openjdk-boot/hotspot/make/linux/makefiles/vm.make	2014-05-01 20:03:03.677930438 +0200
@@ -676,3 +727,4 @@ diff -Nur icedtea-2.4.7.orig/patches/openadk.patch icedtea-2.4.7/patches/openadk
 + ifeq ($(PLATFORM), macosx))
 +   CPPFLAGS += -I$(OPENWIN_HOME)/include/X11/extensions \
 +               -I$(OPENWIN_HOME)/include 
++

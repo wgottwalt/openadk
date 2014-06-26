@@ -18,6 +18,10 @@ PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/$(PKG_EXTRAVER)/
 PKG_LIBNAME:=		libgtk
 PKG_OPTS:=		dev
 
+PKG_CFLINE_GTKX:=	select ADK_PACKAGE_CAIRO_WITH_PDF@
+PKG_CFLINE_GTKX+=	select ADK_PACKAGE_CAIRO_WITH_PS@
+PKG_CFLINE_GTKX+=	select ADK_PACKAGE_CAIRO_WITH_SVG@
+
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGTK,libgtk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))

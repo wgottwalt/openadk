@@ -4,14 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gcj
-PKG_VERSION:=		4.8.2
+PKG_VERSION:=		4.8.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a3d7d63b9cb6b6ea049469a0c4a43c9d
+PKG_MD5SUM:=		7c60f24fab389f77af203d2516ee110f
 PKG_DESCR:=		java compiler
 PKG_SECTION:=		dev/lang
 PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
 
 PKG_CFLINE_GCJ:=	depends on ADK_HOST_ONLY
+
 DISTFILES:=		gcc-$(PKG_VERSION).tar.bz2
 WRKDIST=		${WRKDIR}/gcc-${PKG_VERSION}
 

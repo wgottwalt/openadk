@@ -76,6 +76,12 @@ else ifneq ($(filter minimal,${CONFIG_STYLE}),)
 	    env ${CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
 	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
+else ifneq ($(filter basic,${CONFIG_STYLE}),)
+	@$(CMD_TRACE) "configuring... "
+	cd ${WRKBUILD}; rm -f config.{cache,status}; \
+	    env ${CONFIGURE_ENV} \
+	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} ${CONFIGURE_TRIPLE} \
+	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
 else ifneq ($(filter perl,${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring perl module... "
 	cd ${WRKBUILD}; \

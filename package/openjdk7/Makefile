@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
 PKG_VERSION:=		2.4.7
-PKG_RELEASE:=		7
+PKG_RELEASE:=		8
 PKG_MD5SUM:=		f6b28633b9978fadc724247cfc264ff0
 PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
@@ -25,11 +25,14 @@ PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 DISTFILES:=		icedtea-$(PKG_VERSION).tar.xz
 WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
-GCJ_VER:=		4.8.2
+GCJ_VER:=		4.8.3
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
-PKG_LIBC_DEPENDS:=	uclibc glibc musl
+
+PKG_CHOICES_OPENJDK7:=	ZERO JAMVM
+PKGCD_ZERO:=		zero-assembly backend
+PKGCD_JAMVM:=		jamvm backend
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -37,6 +40,8 @@ include $(ADK_TOPDIR)/mk/qemu.mk
 
 $(eval $(call HOST_template,OPENJDK7,openjdk7,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,OPENJDK7,openjdk7,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIG_STYLE:=		basic
 
 # uclibc needs -liconv
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
@@ -57,7 +62,14 @@ ifeq ($(ADK_TARGET_CPU_ARCH),x86_64)
 JDKARCH:=		amd64
 endif
 
+ifeq ($(ADK_PACKAGE_OPENJDK7_ZERO),y)
 CONFIGURE_BACKEND:=	--enable-zero
+endif
+
+ifeq ($(ADK_PACKAGE_OPENJDK7_JAMVM),y)
+CONFIGURE_BACKEND:=	--enable-jamvm
+endif
+
 CONFIGURE_COMMON:=	--disable-docs \
 			--with-jdk-home=$(BOOTSTRAPJDK) \
 			--with-java=$(BOOTSTRAPJDK)/bin/java \
