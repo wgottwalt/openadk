@@ -21,10 +21,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,BCM2835_VC,bcm2835-vc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIG_STYLE:=          manual
-
-do-configure:
-	(cd $(WRKBUILD) && PATH='${TARGET_PATH}' cmake -DCMAKE_SYSTEM_NAME=Linux .)
+CONFIG_STYLE:=          cmake
 
 bcm2835-vc-install:
 	$(INSTALL_DIR) ${IDIR_BCM2835_VC}/opt/vc/{bin,lib}

@@ -22,19 +22,17 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,CMAKE,cmake,$(PKG_VERSION)-${PKG_RELEASE}))
 
 HOST_STYLE:=		manual
-CONFIG_STYLE:=		manual
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 host-configure:
-	(cd $(WRKBUILD); ./configure --prefix=/usr)
+	(cd $(WRKBUILD); ./configure --prefix=${STAGING_HOST_DIR}/usr )
 
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET})
+		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET}) $(MAKE_TRACE)
 
 cmake-hostinstall:
-	$(INSTALL_BIN) $(WRKBUILD)/bin/cmake \
-		$(STAGING_HOST_DIR)/usr/bin
+	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

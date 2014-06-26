@@ -57,6 +57,19 @@ endif
 
 ifneq ($(filter manual,${CONFIG_STYLE}),)
 	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)
+else ifneq ($(filter cmake,${CONFIG_STYLE}),)
+	@$(CMD_TRACE) "configuring cmake... "
+	sed -e "s#@@TARGET_CC@@#$(TARGET_CC)#" \
+	 	-e "s#@@TARGET_CXX@@#$(TARGET_CXX)#" \
+		-e "s#@@TARGET_CFLAGS@@#$(TARGET_CFLAGS)#" \
+		-e "s#@@TARGET_CXXFLAGS@@#$(TARGET_CXXFLAGS)#" \
+		-e "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" \
+		-e "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" \
+		$(SCRIPT_DIR)/toolchain.cmake.in > $(SCRIPT_DIR)/toolchain.cmake
+	(cd ${WRKBUILD} && PATH='${HOST_PATH}' \
+		cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+			-DCMAKE_TOOLCHAIN_FILE="$(SCRIPT_DIR)/toolchain.cmake" \
+		.)
 else ifneq ($(filter minimal,${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring... "
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
