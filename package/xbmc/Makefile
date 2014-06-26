@@ -9,7 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		9ce6b6ac89b6aa0b111a1acdf3606e06
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
-PKG_DEPENDS:=		boost libffmpeg python2 libstdcxx glibc-gconv
+PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
 PKG_DEPENDS+=		libglew mesalib libass libmpeg2 libmad libdbus
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libopenssl libbz2 libtiff liblzo
@@ -19,7 +19,7 @@ PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
 PKG_DEPENDS+=		libbluray libgpg-error libudev python2-mod-sqlite
 PKG_DEPENDS+=		libssh libcec libnfs librtmp samba-lib libncurses
 PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib libglu librt
-PKG_BUILDDEP:=		boost ffmpeg python2 mesalib libglew libass
+PKG_BUILDDEP:=		boost python2 mesalib libglew libass
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis libmodplug
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
@@ -51,7 +51,7 @@ $(eval $(call PKG_template,XBMC,xbmc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 HOST_CXXFLAGS+=		$(HOST_CPPFLAGS)
 XAKE_FLAGS+=		V=1 TIXML_USE_STL=1 GCC_HONOUR_COPTS=s
 TARGET_CPPFLAGS+=	-I. -I./utils -I$(STAGING_TARGET_DIR)/usr/include/boost-1_55 \
-			-DTIXML_USE_STL=1 -DHAS_SIMPLEPM=1 -DUSE_EXTERNAL_FFMPEG=1
+			-DTIXML_USE_STL=1 -DHAS_SIMPLEPM=1
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
@@ -64,6 +64,7 @@ AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ENV+=		DESTDIR='${WRKINST}' \
 			TEXTUREPACKER_NATIVE_ROOT='$(STAGING_HOST_DIR)/usr'
 CONFIGURE_ARGS+=	--disable-optical-drive \
+			--disable-optimizations \
 			--disable-mysql \
 			--disable-avahi \
 			--disable-rsxs \
