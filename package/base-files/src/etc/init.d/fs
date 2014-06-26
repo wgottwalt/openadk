@@ -28,7 +28,7 @@ for fs in $fstypes; do
 		if [ $? -eq 0 ];then
 			[ -x /usr/sbin/fsck.$fs ] && {
 				logger -s -t 'Filesystem' "checking $fs filesystem on $disk"
-				fsck -p $disk
+				fsck -p $disk >/dev/null
 			}
 			logger -t '' "Mounting local filesystems"
 			mount $disk
