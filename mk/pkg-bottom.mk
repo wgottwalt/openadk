@@ -69,7 +69,7 @@ else ifneq ($(filter cmake,${CONFIG_STYLE}),)
 	(cd ${WRKBUILD} && PATH='${HOST_PATH}' \
 		cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr \
 			-DCMAKE_TOOLCHAIN_FILE="$(SCRIPT_DIR)/toolchain.cmake" \
-		.)
+			${CMAKE_FLAGS} ${WRKSRC})
 else ifneq ($(filter minimal,${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring... "
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
