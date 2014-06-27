@@ -27,7 +27,7 @@ for fs in $fstypes; do
 		grep $fs /proc/filesystems >/dev/null 2>&1
 		if [ $? -eq 0 ];then
 			[ -x /usr/sbin/fsck.$fs ] && {
-				logger -s -t 'Filesystem' "checking $fs filesystem on $disk"
+				logger -t 'Filesystem' "checking $fs filesystem on $disk"
 				fsck -p $disk >/dev/null
 			}
 			logger -t '' "Mounting local filesystems"

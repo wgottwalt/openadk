@@ -176,9 +176,6 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
-ifeq ($(ADK_RUNTIME_START_$(1)),y)
-	$(SED) "s#NO#YES#" $$(IDIR_$(1))/CONTROL/postinst
-endif
 ifneq ($(ADK_DEBUG),y)
 	@echo "Package: $$(shell echo $(2) | tr '_' '-')-dbg" > $(WRKDIR)/.$(2)-dbg.control
 	@echo "Section: debug" >> $(WRKDIR)/.$(2)-dbg.control

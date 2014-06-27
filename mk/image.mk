@@ -41,6 +41,7 @@ extra-install:
 	@if [ ! -z $(extra) ];then $(CP) $(extra)/* ${TARGET_DIR};fi
 
 image-prepare-post:
+	$(BASH) $(ADK_TOPDIR)/scripts/update-rcconf
 	rng=/dev/arandom; test -e $$rng || rng=/dev/urandom; \
 	    dd if=$$rng bs=512 count=1 >>${TARGET_DIR}/etc/.rnd 2>/dev/null; \
 	    chmod 600 ${TARGET_DIR}/etc/.rnd
