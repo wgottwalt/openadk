@@ -277,10 +277,33 @@ config ADK_TARGET_PACKAGE_IPKG
 	  
 endchoice
 
-config ADK_TARGET_GPU_MEM
-	prompt "Target GPU Memory"
-	int
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default 16
+choice
+prompt "Target GPU Memory"
+depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+default ADK_TARGET_GPU_MEM_128 if ADK_PACKAGE_XBMC
+
+config ADK_TARGET_GPU_MEM_16
+	prompt "16"
+	boolean
 	help
-	  use 128 or 256 when you use XBMC
+	  use minimal 16 MB.
+
+config ADK_TARGET_GPU_MEM_64
+	prompt "64"
+	boolean
+	help
+	  use 64 MB.
+
+config ADK_TARGET_GPU_MEM_128
+	prompt "128"
+	boolean
+	help
+	  use 128 MB, required for XBMC.
+
+config ADK_TARGET_GPU_MEM_256
+	prompt "256"
+	boolean
+	help
+	  use 256 MB.
+
+endchoice
