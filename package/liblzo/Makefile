@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lzo
-PKG_VERSION:=		2.06
+PKG_VERSION:=		2.07
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		95380bd4081f85ef08c5209f4107e9f8
+PKG_MD5SUM:=		4011935e95171e78ad4894f7335c982a
 PKG_DESCR:=		real-time data compression library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.oberhumer.com/opensource/lzo
@@ -22,7 +22,6 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},$(PKG_OPTS)))
 
-CONFIGURE_ARGS+=	--enable-static
 MAKE_FLAGS+=		CFLAGS_O="${TARGET_CFLAGS}"
 
 liblzo-install:
