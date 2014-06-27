@@ -27,6 +27,7 @@ $(eval $(call PKG_template,PULSEAUDIO,pulseaudio,$(PKG_VERSION)-${PKG_RELEASE},$
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 CONFIGURE_ARGS+=	--disable-systemd \
 			--disable-manpages \
+			--disable-tests \
 			--disable-neon-opt \
 			--disable-x11 \
 			--disable-avahi \
@@ -53,7 +54,7 @@ pulseaudio-install:
 	$(CP) ./files/*.{conf,pa} \
 		$(IDIR_PULSEAUDIO)/etc/pulse
 	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/* \
+	$(CP) $(WRKINST)/usr/bin/* \
 		$(IDIR_PULSEAUDIO)/usr/bin
 	$(INSTALL_DIR) $(IDIR_PULSEAUDIO)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libpulse*.so* \
