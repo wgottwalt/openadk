@@ -44,6 +44,7 @@ CONFIGURE_ARGS+=	--disable-systemd \
 			--disable-dbus \
 			--disable-hal-compat \
 			--without-caps \
+			--with-database=simple \
 			--enable-samplerate \
 			--enable-alsa \
 			--with-speex \
