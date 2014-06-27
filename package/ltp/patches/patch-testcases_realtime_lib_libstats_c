@@ -1,0 +1,16 @@
+from buildroot
+
+--- ltp-full-20140422.orig/testcases/realtime/lib/libstats.c	2014-04-23 10:37:00.000000000 +0200
++++ ltp-full-20140422/testcases/realtime/lib/libstats.c	2014-06-27 10:55:59.401744516 +0200
+@@ -46,6 +46,11 @@
+ #include <libstats.h>
+ #include <librttest.h>
+ 
++#ifdef __UCLIBC__
++/* 10^x = 10^(log e^x) = (e^x)^log10 = e^(x * log 10) */
++#define exp10(x) (exp((x) * log(10)))
++#endif /* __UCLIBC__ */
++
+ int save_stats = 0;
+ 
+ /* static helper functions */

@@ -24,6 +24,9 @@ config ADK_KERNEL_IOSCHED_DEADLINE
 config ADK_KERNEL_IOSCHED_CFQ
 	boolean
 
+config ADK_KERNEL_SCSI_LOWLEVEL
+	boolean
+
 config ADK_KERNEL_SCSI_DMA
 	boolean
 
@@ -241,6 +244,7 @@ config ADK_KERNEL_SCSI_SYM53C8XX_2
 	prompt "Symbios Logic 53C8XX2 support"
 	tristate
 	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_SCSI_LOWLEVEL
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
@@ -450,6 +454,7 @@ config ADK_KERNEL_BLK_DEV_LOOP
 	tristate
 	select ADK_KERNEL_BLK_DEV
 	default m if ADK_PACKAGE_LOSETUP
+	default m if ADK_PACKAGE_LTP
 	default n
 	help
 	  Saying Y here will allow you to use a regular file as a block
