@@ -12,7 +12,7 @@ endif
 
 PKG_NAME:=		librt
 PKG_DESCR:=		realtime library
-PKG_SECTION:=		libs/misc
+PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove
 
 NO_DISTFILES:=		1
