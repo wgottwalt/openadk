@@ -67,7 +67,7 @@ else ifneq ($(filter cmake,${CONFIG_STYLE}),)
 		-e "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" \
 		$(SCRIPT_DIR)/toolchain.cmake.in > $(SCRIPT_DIR)/toolchain.cmake
 	(cd ${WRKBUILD} && PATH='${HOST_PATH}' \
-		cmake -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+		cmake -Wno-dev -DCMAKE_INSTALL_PREFIX:PATH=/usr \
 			-DCMAKE_TOOLCHAIN_FILE="$(SCRIPT_DIR)/toolchain.cmake" \
 			${CMAKE_FLAGS} ${WRKSRC})
 else ifneq ($(filter minimal,${CONFIG_STYLE}),)

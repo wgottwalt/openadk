@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		a663c5b3c710043c74f97902a1ed62c0
 PKG_DESCR:=		mysql client library
 PKG_SECTION:=		libs/db
-PKG_DEPENDS:=		libncurses zlib
-PKG_BUILDDEP:=		cmake-host mysql-host ncurses zlib readline
+PKG_DEPENDS:=		libncurses zlib libevent
+PKG_BUILDDEP:=		cmake-host mysql-host ncurses zlib readline libevent
 HOST_BUILDDEP:=		cmake-host
 PKG_URL:=		http://www.mysql.com/
 PKG_SITES=		${MASTER_SITE_MYSQL:=Downloads/MySQL-5.6/}
@@ -30,7 +30,7 @@ CONFIG_STYLE:=		cmake
 CMAKE_FLAGS+=		-DSTACK_DIRECTION=1 \
 			-DWITH_EDITLINE=bundled \
 			-DCURSES_LIBRARY="$(STAGING_TARGET_DIR)/usr/lib" \
-			-DCURSES_INCLUDE_PATH="$(STAGING_TARGET_DIR)/usr/lib"
+			-DCURSES_INCLUDE_PATH="$(STAGING_TARGET_DIR)/usr/include"
 
 host-configure:
 	cd ${WRKBUILD} && PATH='${HOST_PATH}' \
