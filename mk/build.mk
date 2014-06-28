@@ -130,7 +130,7 @@ POSTCONFIG=		-@\
 			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_KERNEL_ADDON .config|md5sum)" != "$$(grep ^ADK_KERNEL_ADDON .config.old|md5sum)" ];then \
-			make cleankernel;\
+			echo "You should rebuild the kernel with 'make cleankernel'";\
 		fi; \
 		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old;\
