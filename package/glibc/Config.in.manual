@@ -11,7 +11,6 @@ config ADK_PACKAGE_GLIBC
 config ADK_PACKAGE_GLIBC_GCONV
 	prompt "glibc-gconv.............. gconv libraries"
 	bool
-	default y if ADK_TARGET_LIB_GLIBC && !ADK_TOOLCHAIN_ONLY
 	default n
 	depends on ADK_TARGET_LIB_GLIBC
 	help
