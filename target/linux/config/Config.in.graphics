@@ -137,6 +137,7 @@ config ADK_KERNEL_FB_CON_DECOR
 	prompt "Enable fullscreen boot logo"
 	boolean
 	select ADK_PACKAGE_FBSPLASH
+	select ADK_KERNEL_ADDON_FBLOGO
 	default n
 
 config ADK_KERNEL_FB_VESA
