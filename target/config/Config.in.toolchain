@@ -130,6 +130,8 @@ config ADK_TARGET_USE_STATIC_LIBS
 	default n
 	select BUSYBOX_STATIC
 	help
-	  Useful for debugging of dynamic linker problems.
+	  Useful for debugging of dynamic linker problems. Be aware of the fact, that uClibc and glibc
+	  still requires libgcc_so.so.1 for pthread_cancel. Glibc also requires libnss_*.so libraries
+	  at runtime. Full static builds are only supported for musl libc.
 
 endmenu

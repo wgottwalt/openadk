@@ -10,10 +10,6 @@ ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CXXFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_CXXFLAGS))
 endif
 
-ifneq ($(ADK_LINUX_XTENSA),y)
-GCC_FINAL_CONFOPTS+=	--enable-cxx-flags='$(TARGET_CXXFLAGS)'
-endif
-
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-bugurl="http://www.openadk.org/" \
 			--build=$(GNU_HOST_NAME) \
@@ -42,6 +38,18 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-nls
 
 GCC_FINAL_CONFOPTS:=
+
+ifneq ($(ADK_LINUX_XTENSA),y)
+GCC_FINAL_CONFOPTS+=	--enable-cxx-flags='$(TARGET_CXXFLAGS)'
+endif
+
+# uClibc/glibc uses libgcc_s.so.1 for pthread_cancel with dlopen
+ifeq (ADK_TARGET_LIB_MUSL),y)
+GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++'
+else
+GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++,libgcc'
+endif
+
 ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64)$(ADK_LINUX_X86),)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
@@ -102,7 +110,7 @@ endif
 endif
 
 ifeq ($(ADK_CPU_ARM926EJ_S),y)
-GCC_CONFOPTS+=		--with-arch=armv5te --with-tune=arm1176jzf-s
+GCC_CONFOPTS+=		--with-arch=armv5te --with-tune=arm926ej-s
 endif
 
 ifeq ($(ADK_CPU_ARM1176JZF_S),y)
@@ -205,8 +213,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 			${GCC_FINAL_CONFOPTS} \
 			--enable-languages=$(LANGUAGES) \
 			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
-			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
-			--enable-shared='libstdc++'
+			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}'
 	touch $@
 
 $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured

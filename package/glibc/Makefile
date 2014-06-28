@@ -38,6 +38,13 @@ ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
+else
+	# libnss_* required at runtime even for static builds
+	${INSTALL_DIR} ${IDIR_GLIBC}/$(ADK_TARGET_LIBC_PATH)
+	for file in libnss_dns libnss_files; do \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
+	done
 endif
 	${INSTALL_DIR} $(IDIR_GLIBC)/usr/bin
 	$(CP) $(STAGING_TARGET_DIR)/usr/bin/getconf $(IDIR_GLIBC)/usr/bin
