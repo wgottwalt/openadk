@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mysql
 PKG_VERSION:=		5.6.19
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		a663c5b3c710043c74f97902a1ed62c0
 PKG_DESCR:=		mysql client library
 PKG_SECTION:=		libs/db
@@ -28,6 +28,7 @@ $(eval $(call PKG_template,LIBMYSQLCLIENT,libmysqlclient,${PKG_VERSION}-${PKG_RE
 HOST_STYLE:=		manual
 CONFIG_STYLE:=		cmake
 CMAKE_FLAGS+=		-DSTACK_DIRECTION=1 \
+			-DHAVE_LLVM_LIBCPP=0 \
 			-DWITH_EDITLINE=bundled \
 			-DCURSES_LIBRARY="$(STAGING_TARGET_DIR)/usr/lib" \
 			-DCURSES_INCLUDE_PATH="$(STAGING_TARGET_DIR)/usr/include"
