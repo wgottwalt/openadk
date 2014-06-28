@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.5.13
+PKG_VERSION:=		5.5.14
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		57d5d9607511a5cb76e9af49dd5874e3
+PKG_MD5SUM:=		c59068a2f9e7d02aa36e2d56fde48713
 PKG_DESCR:=		php language interpreter
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libpthread librt
@@ -14,9 +14,9 @@ PHP_URL:=		http://www.php.net/
 PKG_SITES:=		http://de.php.net/distributions/
 
 PKG_SUBPKGS:=		PHP PHP_CLI PHP_FASTCGI
-PKGSD_PHP_FASTCGI:=	PHP for FastCGI usage
+PKGSD_PHP_FASTCGI:=	php for fastcgi usage
 PKGSN_PHP_FASTCGI:=	php
-PKGSD_PHP_CLI:=		PHP CLI
+PKGSD_PHP_CLI:=		php cli
 PKGSN_PHP_CLI:=		php
 
 PKG_FLAVOURS_PHP:=	MOD_BZ2 MOD_CURL MOD_FTP MOD_GD MOD_GMP MOD_MYSQL
