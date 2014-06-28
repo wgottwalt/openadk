@@ -10,6 +10,7 @@ PKG_MD5SUM:=		2ec8997e0c07249eb4cbd072417d70fe
 PKG_DESCR:=		generic dynamic object loading library
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		m4-host libtool-host
+HOST_BUILDDEP:=		automake-host
 PKG_URL:=		http://www.gnu.org/software/libtool/
 PKG_SITES:=		${MASTER_SITE_GNU:=libtool/}
 PKG_LIBNAME:=		libltdl
