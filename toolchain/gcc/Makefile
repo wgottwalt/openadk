@@ -21,7 +21,6 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-__cxa_atexit \
 			--with-gnu-ld \
 			--with-gnu-as \
-			--enable-tls \
 			--disable-libsanitizer \
 			--disable-install-libiberty \
 			--disable-libitm \
@@ -38,6 +37,12 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-nls
 
 GCC_FINAL_CONFOPTS:=
+
+ifneq ($(ADK_TARGET_WITH_NPTL),)
+GCC_CONFOPTS+=         --enable-tls --enable-threads --enable-libatomic
+else
+GCC_CONFOPTS+=         --disable-tls --disable-threads --disable-libatomic
+endif
 
 ifneq ($(ADK_LINUX_XTENSA),y)
 GCC_FINAL_CONFOPTS+=	--enable-cxx-flags='$(TARGET_CXXFLAGS)'

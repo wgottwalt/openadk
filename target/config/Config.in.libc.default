@@ -16,6 +16,13 @@ config ADK_TARGET_LIBC
 	default "glibc"  if ADK_glibc
 	default "musl"  if ADK_musl
 
+config ADK_TARGET_WITH_NPTL
+	boolean
+	default n if ADK_TARGET_LIB_UCLIBC && ADK_LINUX_ALPHA
+	default n if ADK_TARGET_LIB_UCLIBC && ADK_LINUX_M68K
+	default n if ADK_TARGET_LIB_UCLIBC && ADK_LINUX_MICROBLAZE
+	default y
+
 config ADK_TARGET_SUFFIX
 	string
 	default "gnueabihf" if ADK_TARGET_LIB_GLIBC && ADK_eabihf
