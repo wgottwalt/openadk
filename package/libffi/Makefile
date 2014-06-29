@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libffi
 PKG_VERSION:=		3.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		f5898b29bbfd70502831a212d9249d10
 PKG_DESCR:=		foreign function interface library
 PKG_SECTION:=		libs/misc
@@ -28,7 +28,7 @@ CONFIGURE_ARGS+=	--disable-builddir --with-pic
 
 libffi-install:
 	${INSTALL_DIR} ${IDIR_LIBFFI}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libffi.so* ${IDIR_LIBFFI}/usr/lib
+	${CP} ${WRKINST}/usr/lib*/libffi.so* ${IDIR_LIBFFI}/usr/lib
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
