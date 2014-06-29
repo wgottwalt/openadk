@@ -1,6 +1,6 @@
---- alsa-lib-1.0.27.2.orig/configure	2013-07-08 14:32:46.000000000 +0200
-+++ alsa-lib-1.0.27.2/configure	2013-09-16 17:03:08.000000000 +0200
-@@ -11942,14 +11942,6 @@ $as_echo "major $SND_LIB_MAJOR minor $SN
+--- alsa-lib-1.0.28.orig/configure	2014-06-17 14:34:47.000000000 +0200
++++ alsa-lib-1.0.28/configure	2014-06-28 22:00:55.656322468 +0200
+@@ -11929,14 +11929,6 @@ $as_echo "major $SND_LIB_MAJOR minor $SN
  
  test "x$prefix" = xNONE && prefix=$ac_default_prefix
  
