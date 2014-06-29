@@ -7,12 +7,16 @@ topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd 
 
 rcconf=$topdir/root_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}/etc/rc.conf
 
+if [ ! -f $topdir/root_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}/etc/rc.conf ];then
+	exit 0
+fi
+
 for service in $(grep ^ADK_RUNTIME_START_ $topdir/.config |grep -v ADK_RUNTIME_START_SERVICES);do
 	rcname=$(echo $service|sed -e "s#ADK_RUNTIME_START_##")
 	rcname=$(echo $rcname| sed -e "s#=y##")
 	rcname=$(echo $rcname| sed -e "s#^BUSYBOX_##")
 	rcname=$(echo $rcname| tr '[:upper:]' '[:lower:]')
-	if [ $ADK_PKG_XBMCBOX = "y" ];then
+	if [ "$ADK_PKG_XBMCBOX" = "y" ];then
 		sed -i -e "s#$rcname=\"NO\"#$rcname=\"DAEMON\"#" $rcconf
 	else
 		sed -i -e "s#$rcname=\"NO\"#$rcname=\"YES\"#" $rcconf
