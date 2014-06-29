@@ -83,10 +83,12 @@ TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
-# use -static-libgcc by default
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+# use -static-libgcc by default only for musl
 TARGET_CFLAGS+=		-static-libgcc
 TARGET_CXXFLAGS+=	-static-libgcc
 TARGET_LDFLAGS+=	-static-libgcc
+endif
 
 # security optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
 ifneq ($(ADK_TARGET_USE_LD_RELRO),)
