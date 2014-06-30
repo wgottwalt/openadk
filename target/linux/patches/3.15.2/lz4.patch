@@ -1,0 +1,16 @@
+diff -Nur linux-3.15.2.orig/usr/Kconfig linux-3.15.2/usr/Kconfig
+--- linux-3.15.2.orig/usr/Kconfig	2014-06-26 21:17:52.000000000 +0200
++++ linux-3.15.2/usr/Kconfig	2014-06-30 08:29:00.000000000 +0200
+@@ -174,4 +174,12 @@
+ 	  size is about 10% bigger than gzip; however its speed
+ 	  (both compression and decompression) is the fastest.
+ 
++config INITRAMFS_COMPRESSION_LZ4
++	bool "LZ4"
++	depends on RD_LZ4
++	help
++	  Its compression ratio is the poorest among the choices. The kernel
++	  size is about 10% bigger than gzip; however its speed
++	  (both compression and decompression) is the fastest.
++
+ endchoice

@@ -30,7 +30,16 @@ $(eval $(call HOST_template,LZ4,lz4,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LZ4,lz4,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBLZ4,liblz4,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBLZ4},${PKGSD_LIBLZ4},${PKGSC_LIBLZ4},${PKG_OPTS}))
 
+HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
+
+host-build:
+	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET}) $(MAKE_TRACE)
+
+lz4-hostinstall:
+	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_FAKE_FLAGS} DESTDIR='${STAGING_HOST_DIR}' ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
 
 lz4-install:
 	${INSTALL_DIR} ${IDIR_LZ4}/usr/bin

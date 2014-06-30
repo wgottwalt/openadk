@@ -285,6 +285,11 @@ if ! which lzma >/dev/null 2>&1; then
 	host_build_lzma=1
 fi
 
+host_build_lz4=0
+if ! which lz4c >/dev/null 2>&1; then
+	host_build_lz4=1
+fi
+
 host_build_lzop=0
 if ! which lzop >/dev/null 2>&1; then
 	host_build_lzop=1
@@ -317,6 +322,7 @@ if [ $host_build_ccache -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_CCAC
 if [ $host_build_cdrtools -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_CDRTOOLS if ADK_HOST_NEED_CDRTOOLS" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_genext2fs -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_GENEXT2FS if ADK_HOST_NEED_GENEXT2FS" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_lzma -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_LZMA if ADK_HOST_NEED_LZMA" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_lz4 -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_LZ4 if ADK_HOST_NEED_LZ4" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_lzop -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_LZOP if ADK_HOST_NEED_LZOP" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_qemu -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_QEMU if ADK_HOST_NEED_QEMU" >> $topdir/target/config/Config.in.prereq ;fi
 

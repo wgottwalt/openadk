@@ -17,6 +17,10 @@ config ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
 	select ADK_HOST_NEED_XZ
 	boolean
 
+config ADK_KERNEL_INITRAMFS_COMPRESSION_LZ4
+	select ADK_HOST_NEED_LZ4
+	boolean
+
 config ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
 	select ADK_HOST_NEED_LZMA
 	boolean
@@ -42,6 +46,12 @@ config ADK_KERNEL_RD_BZIP2
 	boolean
 
 config ADK_KERNEL_KERNEL_BZIP2
+	boolean
+
+config ADK_KERNEL_RD_LZ4
+	boolean
+
+config ADK_KERNEL_KERNEL_LZ4
 	boolean
 
 config ADK_KERNEL_RD_LZMA
@@ -136,6 +146,14 @@ config ADK_KERNEL_COMP_XZ
 	select ADK_KERNEL_RD_XZ
 	select ADK_KERNEL_KERNEL_XZ
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
+
+config ADK_KERNEL_COMP_LZ4
+	prompt "use LZ4 compression"
+	boolean
+	select ADK_KERNEL_RD_LZ4
+	select ADK_KERNEL_KERNEL_LZ4
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_LZ4
+	depends on ADK_LINUX_X86 || ADK_LINUX_ARM
 
 config ADK_KERNEL_COMP_LZMA
 	prompt "use LZMA compression"

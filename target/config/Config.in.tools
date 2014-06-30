@@ -98,6 +98,14 @@ config ADK_HOST_BUILD_GENEXT2FS
 	boolean
 	default n
 
+config ADK_HOST_NEED_LZ4
+	boolean
+	default n
+
+config ADK_HOST_BUILD_LZ4
+	boolean
+	default n
+
 config ADK_HOST_NEED_LZMA
 	boolean
 	default n
@@ -179,6 +187,7 @@ config ADK_COMPRESSION_TOOL
 	default "gzip -n9" if ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
 	default "bzip2" if ADK_KERNEL_INITRAMFS_COMPRESSION_BZIP2
 	default "xz -v --check=crc32 --lzma2=dict=1MiB" if ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
+	default "lz4c -l" if ADK_KERNEL_INITRAMFS_COMPRESSION_LZ4
 	default "lzma -9" if ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
 	default "lzop" if ADK_KERNEL_INITRAMFS_COMPRESSION_LZO
 	default "gzip -n9"
