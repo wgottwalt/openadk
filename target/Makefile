@@ -59,7 +59,7 @@ ifeq ($(ADK_RUNTIME_QUIET_INIT),y)
 		${BUILD_DIR}/.kernelconfig.board
 endif
 ifeq ($(ADK_QUIET_KERNEL),y)
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 quiet loglevel=2"#' \
+	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 quiet loglevel=2 vt.global_cursor_default=0"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
 ifeq ($(ADK_KERNEL_DEBUG_WITH_KGDB),y)
