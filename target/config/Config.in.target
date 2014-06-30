@@ -307,3 +307,12 @@ config ADK_TARGET_GPU_MEM_256
 	  use 256 MB.
 
 endchoice
+
+config ADK_TARGET_GPU_MEM
+	int
+	default 16 if ADK_TARGET_GPU_MEM_16
+	default 64 if ADK_TARGET_GPU_MEM_64
+	default 128 if ADK_TARGET_GPU_MEM_128
+	default 256 if ADK_TARGET_GPU_MEM_256
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+
