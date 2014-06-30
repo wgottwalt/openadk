@@ -21,7 +21,7 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		BZIP2 LIBBZ2
 PKGSD_LIBBZ2:=		bzip2 compression library
-PKGSC_LIBBZ2:=		libs/misc
+PKGSC_LIBBZ2:=		libs/comp
 
 include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk

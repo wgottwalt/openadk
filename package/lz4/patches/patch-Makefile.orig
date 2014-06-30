@@ -1,0 +1,26 @@
+--- lz4-r118.orig/Makefile	2014-06-26 11:36:13.000000000 +0200
++++ lz4-r118/Makefile	2014-06-30 07:41:17.000000000 +0200
+@@ -55,19 +55,10 @@ else
+ EXT =
+ endif
+ 
+-# OS X linker doesn't support -soname, and use different extension
+-# see : https://developer.apple.com/library/mac/documentation/DeveloperTools/Conceptual/DynamicLibraries/100-Articles/DynamicLibraryDesignGuidelines.html
+-ifeq ($(shell uname), Darwin)
+-	SONAME_FLAGS =
+-	SHARED_EXT = dylib
+-	SHARED_EXT_MAJOR = $(LIBVER_MAJOR).$(SHARED_EXT)
+-	SHARED_EXT_VER = $(LIBVER).$(SHARED_EXT)
+-else
+-	SONAME_FLAGS = -Wl,-soname=liblz4.$(SHARED_EXT).$(LIBVER_MAJOR)
+-	SHARED_EXT = so
+-	SHARED_EXT_MAJOR = $(SHARED_EXT).$(LIBVER_MAJOR)
+-	SHARED_EXT_VER = $(SHARED_EXT).$(LIBVER)
+-endif
++SONAME_FLAGS = -Wl,-soname=liblz4.$(SHARED_EXT).$(LIBVER_MAJOR)
++SHARED_EXT = so
++SHARED_EXT_MAJOR = $(SHARED_EXT).$(LIBVER_MAJOR)
++SHARED_EXT_VER = $(SHARED_EXT).$(LIBVER)
+ 
+ TEXT = lz4.c lz4.h lz4hc.c lz4hc.h \
+ 	lz4_format_description.txt Makefile NEWS LICENSE README.md \

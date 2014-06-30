@@ -44,6 +44,7 @@ x11/misc	Xorg misc
 x11/fonts	Xorg fonts
 x11/libs	Xorg libraries
 libs/audio	Audio Libraries
+libs/comp	Compression Libraries
 libs/crypto	Crypto Libraries
 libs/data	XML and JSON Libraries
 libs/db		Database Libraries

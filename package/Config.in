@@ -63,6 +63,7 @@ endmenu
 
 menu "Libraries"
 source package/Config.in.auto.libs.audio
+source package/Config.in.auto.libs.comp
 source package/Config.in.auto.libs.crypto
 source package/Config.in.auto.libs.data
 source package/Config.in.auto.libs.db
