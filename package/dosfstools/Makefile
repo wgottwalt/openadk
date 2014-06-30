@@ -18,6 +18,10 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DOSFSTOOLS,dosfstools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
+XAKE_FLAGS+=		LDLIBS=-liconv
+endif
+
 CONFIG_STYLE:=		manual
 XAKE_FLAGS+=		PREFIX=""
 
