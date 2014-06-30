@@ -4,10 +4,11 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bcm2835-bootloader
-# actually git checkout from 03.06.2014
-PKG_VERSION:=		0.9
+# actually git checkout from 30.06.2014
+# affe5cd9d3e1e8dcc29509f12fc3ed5153f3fb67
+PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		791aa3074029f0d2343fc2fc9b5d3d7c
+PKG_MD5SUM:=		f2e8cc4f7093560588f658f472c2eadb
 PKG_DESCR:=		bootloader for raspberry pi
 PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/raspberrypi/firmware
