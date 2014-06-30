@@ -129,6 +129,9 @@ POSTCONFIG=		-@\
 			touch .rebuild.bcm2835-bootloader;\
 			rebuild=1;\
 		fi; \
+		if [ "$$(grep ^ADK_KERNEL_VERSION .config|md5sum)" != "$$(grep ^ADK_KERNEL_VERSION .config.old|md5sum)" ];then \
+			echo "You should rebuild with 'make cleandir'";\
+		fi; \
 		if [ "$$(grep ^ADK_KERNEL_ADDON .config|md5sum)" != "$$(grep ^ADK_KERNEL_ADDON .config.old|md5sum)" ];then \
 			echo "You should rebuild the kernel with 'make cleankernel'";\
 		fi; \
