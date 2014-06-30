@@ -21,6 +21,7 @@ config ADK_PKG_XBMCBOX
 	select ADK_RUNTIME_START_BUSYBOX_NTPD
 	select ADK_RUNTIME_START_BUSYBOX_SYSLOGD
 	select ADK_RUNTIME_START_XBMC
+	select ADK_KERNEL_INPUT_EVDEV
 	help
 	  Create a small xbmc box.
 
