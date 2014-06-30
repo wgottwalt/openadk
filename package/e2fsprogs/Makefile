@@ -53,6 +53,7 @@ CONFIGURE_ARGS+=	--enable-elf-shlibs \
 			--disable-rpath \
 			--disable-libuuid \
 			--disable-libblkid \
+			--disable-debugfs \
 			--disable-defrag
 TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_TARGET_DIR)/usr/include
 MAKE_FLAGS+=		BUILD_CC="${HOST_CC}" \

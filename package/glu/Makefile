@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		be9249132ff49275461cf92039083030
 PKG_DESCR:=		opengl utility library
 PKG_SECTION:=		libs/video
+PKG_BUILDDEP:=		mesalib
 PKG_URL:=		http://cgit.freedesktop.org/mesa/glu/
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/glu/
 PKG_LIBNAME:=		libglu
