@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libtirpc
 PKG_VERSION:=		0.2.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		847995e8d002cbf1387bda05947be086
 PKG_DESCR:=		transport independent rpc library
 PKG_SECTION:=		libs/net
@@ -14,8 +14,8 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libtirpc/}
 PKG_OPTS:=		dev
 
 PKG_FLAVOURS_LIBTIRPC:=	WITH_IPV6 WITH_GSS
-PKGFD_WITH_IPV6:=	enable IPv6 support
-PKGFD_WITH_GSS:=	enable GSS support
+PKGFD_WITH_IPV6:=	enable ipv6 support
+PKGFD_WITH_GSS:=	enable gss support
 PKGFB_WITH_GSS:=	libgssglue krb5
 PKGFS_WITH_GSS:=	libgssglue
 

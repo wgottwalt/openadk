@@ -1,5 +1,5 @@
---- libtirpc-0.2.3.orig/tirpc/rpc/rpcent.h	2013-02-13 16:13:59.000000000 +0100
-+++ libtirpc-0.2.3/tirpc/rpc/rpcent.h	2014-03-22 14:22:44.000000000 +0100
+--- libtirpc-0.2.4.orig/tirpc/rpc/rpcent.h	2013-12-09 21:59:51.000000000 +0100
++++ libtirpc-0.2.4/tirpc/rpc/rpcent.h	2014-06-30 12:14:11.114614896 +0200
 @@ -44,10 +44,12 @@
  /*	#pragma ident "@(#)rpcent.h   1.13    94/04/25 SMI"	*/
  /*      @(#)rpcent.h 1.1 88/12/06 SMI   */
@@ -11,7 +11,7 @@
  
  /* These are defined in /usr/include/rpc/netdb.h */
 -#if 0
-+#if !defined(__GLIBC__)
++#if !defined(__GLIBC__) || defined(__UCLIBC__)
  struct rpcent {
  	char	*r_name;	/* name of server for this rpc program */
  	char	**r_aliases;	/* alias list */
