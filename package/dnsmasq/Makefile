@@ -11,6 +11,7 @@ PKG_DESCR:=		lightweight dns, dhcp and tftp server
 PKG_SECTION:=		net/dns
 PKG_URL:=		http://thekelleys.org.uk/dnsmasq/
 PKG_SITES:=		http://thekelleys.org.uk/dnsmasq/
+PKG_NOPARALLEL:=	1
 
 PKG_FLAVOURS_DNSMASQ:=	PXE
 PKGFD_PXE:=		enable pxe network boot
