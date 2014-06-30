@@ -8,6 +8,10 @@ host-configure:
 ${_HOST_CONFIGURE_COOKIE}: ${_HOST_PATCH_COOKIE}
 	@mkdir -p ${WRKBUILD}
 	@$(CMD_TRACE) "host configuring... "
+ifneq (,$(filter autogen,${AUTOTOOL_STYLE}))
+	@$(CMD_TRACE) "autotool configuring... "
+	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) autogen.sh $(MAKE_TRACE)
+endif
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
 	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -if $(MAKE_TRACE)
 	@rm -rf ${WRKSRC}/autom4te.cache

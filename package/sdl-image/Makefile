@@ -4,13 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sdl-image
-PKG_VERSION:=		1.2.10
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		6c06584b31559e2b59f2b982d0d1f628
+PKG_VERSION:=		1.2.12
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		a0f9098ebe5400f0bdc9b62e60797ecb
 PKG_DESCR:=		simple directmedia layer image library
 PKG_SECTION:=		libs/image
 PKG_DEPENDS:=		libpng libtiff libjpeg-turbo libsdl libstdcxx
 PKG_BUILDDEP:=		libpng libtiff libjpeg-turbo sdl
+HOST_BUILDDEP+=		libpng-host
 PKG_URL:=		http://www.libsdl.org/
 PKG_SITES:=		http://www.libsdl.org/projects/SDL_image/release/
 PKG_LIBNAME:=		libsdl-image
@@ -29,12 +30,20 @@ ifeq ($(ADK_HOST_DARWIN),y)
 LDFLAGS_FOR_BUILD+=	-framework Cocoa
 endif
 
+AUTOTOOL_STYLE:=	autogen
 HOST_STYLE:=		auto
-HOST_CONFIGURE_ARGS+=	--disable-png-shared
-CONFIGURE_ARGS+=	--enable-png \
+HOST_CONFIGURE_ARGS+=	--with-sdl-prefix='${STAGING_HOST_DIR}/usr' \
+			--enable-png \
+			--disable-webp \
+			--disable-jpg \
+			--disable-tif \
+			--disable-bmp
+CONFIGURE_ARGS+=	--with-sdl-prefix='${STAGING_TARGET_DIR}/usr' \
+			--enable-png \
 			--enable-jpg \
 			--enable-bmp \
-			--enable-tif
+			--enable-tif \
+			--disable-webp
 
 libsdl-image-install:
 	$(INSTALL_DIR) $(IDIR_LIBSDL_IMAGE)/usr/lib
