@@ -25,9 +25,6 @@ source "target/config/Config.in.qemu"
 source "target/config/Config.in.kernelversion"
 source "target/config/Config.in.toolchain"
 
-comment "changes made below do not require make cleandir after reconfiguration"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
-
 menu "Target configuration"
 depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 source "target/config/Config.in.qemuopts"

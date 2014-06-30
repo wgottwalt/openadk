@@ -103,6 +103,7 @@ POSTCONFIG=		-@\
 	if [ -f .config.old ];then \
 		$(ADK_TOPDIR)/adk/tools/pkgrebuild;\
 		rebuild=0; \
+		cleandir=0; \
 		if [ "$$(grep ^BUSYBOX .config|md5sum)" != "$$(grep ^BUSYBOX .config.old|md5sum)" ];then \
 			touch .rebuild.busybox;\
 			rebuild=1;\
@@ -130,10 +131,27 @@ POSTCONFIG=		-@\
 			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_KERNEL_VERSION .config|md5sum)" != "$$(grep ^ADK_KERNEL_VERSION .config.old|md5sum)" ];then \
-			echo "You should rebuild with 'make cleandir'";\
+			cleandir=1;\
+			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_KERNEL_ADDON .config|md5sum)" != "$$(grep ^ADK_KERNEL_ADDON .config.old|md5sum)" ];then \
 			echo "You should rebuild the kernel with 'make cleankernel'";\
+			rebuild=1;\
+		fi; \
+		if [ "$$(grep ^ADK_TARGET_USE .config|md5sum)" != "$$(grep ^ADK_TARGET_USE .config.old|md5sum)" ];then \
+			cleandir=1;\
+			rebuild=1;\
+		fi; \
+		if [ "$$(grep ^ADK_TARGET_ARCH .config|md5sum)" != "$$(grep ^ADK_TARGET_ARCH .config.old|md5sum)" ];then \
+			cleandir=1;\
+			rebuild=1;\
+		fi; \
+		if [ "$$(grep ^ADK_TARGET_SYSTEM .config|md5sum)" != "$$(grep ^ADK_TARGET_SYSTEM .config.old|md5sum)" ];then \
+			cleandir=1;\
+			rebuild=1;\
+		fi; \
+		if [ $$cleandir -eq 1 ];then \
+			echo "You should rebuild with 'make cleandir'";\
 		fi; \
 		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old;\
