@@ -4,16 +4,14 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		zlib
-PKG_VERSION:=		1.2.7
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		2ab442d169156f34c379c968f3f482dd
+PKG_VERSION:=		1.2.8
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		28f1205d8dd2001f26fec1e8c2cebe37
 PKG_DESCR:=		implementation of the deflate compression method
 PKG_SECTION:=		libs/comp
 PKG_URL:=		http://www.zlib.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libpng/zlib/}
 PKG_OPTS:=		dev
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${ADK_TOPDIR}/mk/package.mk
 
