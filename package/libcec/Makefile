@@ -20,7 +20,6 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
 PKG_SYSTEM_DEPENDS:=    raspberry-pi ibm-x40
-PKG_LIBC_DEPENDS:=      glibc musl
 
 include $(ADK_TOPDIR)/mk/package.mk
 
