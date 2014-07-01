@@ -22,13 +22,14 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,BINUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBBFD,libbfd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBBFD},${PKGSD_LIBBFD},${PKGSC_LIBBFD},${PKG_OPTS}))
 
+TARGET_CFLAGS+=		-fPIC
+CONFIGURE_ENV+=		ac_cv_prog_MAKEINFO=missing
+
 ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
 CONFIGURE_ARGS+=	--disable-multilib
 else
 CONFIGURE_ARGS+=	--enable-multilib
 endif
-
-TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ARGS+=	--disable-werror \
 			--disable-install-libiberty \
 			--host=$(GNU_TARGET_NAME) \
