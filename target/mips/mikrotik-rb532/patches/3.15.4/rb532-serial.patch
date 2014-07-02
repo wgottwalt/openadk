@@ -1,15 +1,11 @@
-diff -Nur linux-3.15-rc5.orig/drivers/tty/serial/serial_core.c linux-3.15-rc5/drivers/tty/serial/serial_core.c
---- linux-3.15-rc5.orig/drivers/tty/serial/serial_core.c	2014-05-09 22:10:52.000000000 +0200
-+++ linux-3.15-rc5/drivers/tty/serial/serial_core.c	2014-05-20 10:30:52.000000000 +0200
-@@ -2686,9 +2686,10 @@
+diff -Nur linux-3.15.1.orig/arch/mips/rb532/devices.c linux-3.15.1/arch/mips/rb532/devices.c
+--- linux-3.15.1.orig/arch/mips/rb532/devices.c	2014-06-16 22:44:27.000000000 +0200
++++ linux-3.15.1/arch/mips/rb532/devices.c	2014-06-28 10:27:20.418061077 +0200
+@@ -223,6 +223,7 @@
  
- 	/*
- 	 * If the port is used as a console, unregister it
--	 */
-+ 	 * DISABLE: breaks serial console on rb532
- 	if (uart_console(uport))
- 		unregister_console(uport->cons);
-+	 */
- 
- 	/*
- 	 * Free the port IO and memory resources, if any.
+ static struct plat_serial8250_port rb532_uart_res[] = {
+ 	{
++		.type           = PORT_16550A,
+ 		.membase	= (char *)KSEG1ADDR(REGBASE + UART0BASE),
+ 		.irq		= UART0_IRQ,
+ 		.regshift	= 2,
