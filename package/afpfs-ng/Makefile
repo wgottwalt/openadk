@@ -1,0 +1,48 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(ADK_TOPDIR)/rules.mk
+
+PKG_NAME:=		afpfs-ng
+PKG_VERSION:=		0.8.1
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		1bdd9f8a06e6085ea4cc38ce010ef60b
+PKG_DESCR:=		client for apple filing protocol
+PKG_SECTION:=		net/fs
+PKG_DEPENDS:=		libgcrypt
+PKG_BUILDDEP:=		fuse libgcrypt
+PKG_URL:=		https://sites.google.com/site/alexthepuffin/home
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=afpfs-ng/}
+PKG_LIBNAME:=		libafpclient
+PKG_OPTS:=		dev
+
+PKG_SUBPKGS:=		AFPFS_NG LIBAFPCLIENT
+PKGSD_LIBAFPCLIENT:=	afp client library
+PKGSC_LIBAFPCLIENT:=	libs/net
+
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
+
+include $(ADK_TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,AFPFS_NG,afpfs-ng,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBAFPCLIENT,libafpclient,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_LIBAFPCLIENT},${PKGSD_LIBAFPCLIENT},${PKGSC_LIBAFPCLIENT}))
+
+AUTOTOOL_STYLE:=	autoreconf
+CONFIGURE_ARGS+=	--enable-gcrypt
+
+post-build:
+	$(INSTALL_DIR) ${WRKINST}/usr/include/afpfs-ng
+	$(CP) ${WRKBUILD}/include/*.h \
+		${WRKINST}/usr/include/afpfs-ng
+
+afpfs-ng-install:
+	$(INSTALL_DIR) $(IDIR_AFPFS_NG)/usr/bin
+	$(CP) $(WRKINST)/usr/bin/* \
+		$(IDIR_AFPFS_NG)/usr/bin
+
+libafpclient-install:
+	$(INSTALL_DIR) $(IDIR_LIBAFPCLIENT)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libafpclient.so* \
+		$(IDIR_LIBAFPCLIENT)/usr/lib
+
+include ${ADK_TOPDIR}/mk/pkg-bottom.mk
