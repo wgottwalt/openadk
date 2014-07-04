@@ -4,26 +4,30 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		realtek-firmware
-PKG_VERSION:=		1.0
+PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		85a7d1d1386143fad312a5a82c422380
-PKG_DESCR:=		firmware for realtek wireless cards
+PKG_MD5SUM:=		32b82d463f8742e094ed53a4820424c6
+PKG_DESCR:=		firmware for realtek wired and wireless cards
 PKG_SECTION:=		sys/firmware
 PKG_SITES:=		http://www.openadk.org/distfiles/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+PKG_SUBPKGS:=		REALTEK_FIRMWARE_WIRELESS REALTEK_FIRMWARE_WIRED
 
 include ${ADK_TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,REALTEK_FIRMWARE,realtek-firmware,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,REALTEK_FIRMWARE_WIRED,realtek-firmware-wired,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,REALTEK_FIRMWARE_WIRELESS,realtek-firmware-wireless,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
 do-install:
-	${INSTALL_DIR} ${IDIR_REALTEK_FIRMWARE}/lib/firmware/rtlwifi
-	${CP} ${WRKBUILD}/*.bin \
-		${IDIR_REALTEK_FIRMWARE}/lib/firmware/rtlwifi
+	${INSTALL_DIR} ${IDIR_REALTEK_FIRMWARE_WIRELESS}/lib/firmware
+	${CP} ${WRKBUILD}/rtlwifi \
+		${IDIR_REALTEK_FIRMWARE_WIRELESS}/lib/firmware
+	${INSTALL_DIR} ${IDIR_REALTEK_FIRMWARE_WIRED}/lib/firmware
+	${CP} ${WRKBUILD}/rtl_nic \
+		${IDIR_REALTEK_FIRMWARE_WIRED}/lib/firmware
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
