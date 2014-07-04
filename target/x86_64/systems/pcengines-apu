@@ -1,0 +1,16 @@
+config ADK_TARGET_SYSTEM_PCENGINES_APU
+	bool "PC Engines APU"
+	select ADK_x86_64
+	select ADK_pcengines_apu
+	select ADK_CPU_X86_64
+	select ADK_LINUX_64
+	select ADK_TARGET_KERNEL_BZIMAGE
+	select ADK_TARGET_WITH_MINIPCI
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_USB_BOOT
+	select ADK_TARGET_WITH_ACPI
+	select ADK_PACKAGE_GRUB
+	help
+	  Support for PC Engines APU, see
+	  http://www.pcengines.ch/apu.htm
+
