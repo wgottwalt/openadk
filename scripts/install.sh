@@ -27,7 +27,7 @@
 # of OpenADK:
 # • install a Master Boot Record containing a MirBSD PBR loading GRUB
 # • write GRUB2 core.img just past the MBR
-# • create a root partition with ext2fs and extract the OpenADK image
+# • create a root partition and extract the OpenADK image
 #   just built there
 # • create a cfgfs partition
 
@@ -58,6 +58,7 @@ fi
 ADK_TOPDIR=$(realpath .)
 ostype=$(uname -s)
 
+fs=ext4
 cfgfs=1
 noformat=0
 quiet=0
@@ -67,14 +68,14 @@ panicreboot=10
 
 function usage {
 cat >&2 <<EOF
-Syntax: $me [-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
+Syntax: $me [-f filesystem] [-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
     [±t] -n /dev/sdb image
 Defaults: -c 1 -p 10 -s 115200; -t = enable serial console
 EOF
 	exit $1
 }
 
-while getopts "c:hp:qs:nt" ch; do
+while getopts "f:c:hp:qs:nt" ch; do
 	case $ch {
 	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 5 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
@@ -87,6 +88,11 @@ while getopts "c:hp:qs:nt" ch; do
 		fi ;;
 	(q)	quiet=1 ;;
 	(+q)	quiet=0 ;;
+	(f)	if [[ $OPTARG != @(ext2|ext3|ext4|xfs) ]]; then
+			print -u2 "$me: filesystem $OPTARG invalid"
+			exit 1
+		fi
+		fs=$OPTARG ;;
 	(s)	if [[ $OPTARG != @(96|192|384|576|1152)00 ]]; then
 			print -u2 "$me: serial speed $OPTARG invalid"
 			exit 1
@@ -103,14 +109,15 @@ shift $((OPTIND - 1))
 (( $# == 2 )) || usage 1
 
 f=0
-tools='mke2fs tune2fs'
+tools="mkfs.$fs tune2fs"
 case $ostype {
+(Linux)
+	;;
 (DragonFly|*BSD*)
+	print -u2 Sorry, not ported to the OS "'$ostype'" yet.
 	;;
 (Darwin)
-	tools="$tools fuse-ext2"
-	;;
-(Linux)
+	print -u2 Sorry, not ported to the OS "'$ostype'" yet.
 	;;
 (*)
 	print -u2 Sorry, not ported to the OS "'$ostype'" yet.
@@ -147,7 +154,7 @@ case $ostype {
 	tgt=${basedev}c
 	part=${basedev}i
 	match=\'${basedev}\''[a-p]'
-	function mount_ext2fs {
+	function mount_fs {
 		mount -t ext2fs "$1" "$2"
 	}
 	;;
@@ -155,7 +162,7 @@ case $ostype {
 	basedev=$tgt
 	part=${basedev}s1
 	match=\'${basedev}\''?(s+([0-9]))'
-	function mount_ext2fs {
+	function mount_fs {
 		fuse-ext2 "$1" "$2" -o rw+
 		sleep 3
 	}
@@ -164,8 +171,8 @@ case $ostype {
 	basedev=$tgt
 	part=${basedev}1
 	match=\'${basedev}\''+([0-9])'
-	function mount_ext2fs {
-		mount -t ext2 "$1" "$2"
+	function mount_fs {
+		mount -t $fs "$1" "$2"
 	}
 	;;
 }
@@ -318,15 +325,15 @@ EOF
 	disklabel -R ${basedev#/dev/} "$T/bsdlabel"
 fi
 
-(( quiet )) || print "Creating ext2fs on ${part}..."
+(( quiet )) || print "Creating filesystem on ${part}..."
 q=
 (( quiet )) && q=-q
-(( noformat )) || mke2fs $q "$part"
-partuuid=$(tune2fs -l "$part" | sed -n '/^Filesystem UUID:[	 ]*/s///p')
+(( noformat )) || mkfs.$fs -F $q "$part"
+partuuid=$(/sbin/fdisk -l /dev/sdc|awk '/Disk identifier/ { print $3 "-01" }'|sed -e "s#^0x##")
 (( noformat )) || tune2fs -c 0 -i 0 "$part"
 
 (( quiet )) || print Extracting installation archive...
-mount_ext2fs "$part" "$T"
+mount_fs "$part" "$T"
 gzip -dc "$src" | (cd "$T"; tar -xvpf -)
 cd "$T"
 rnddev=/dev/urandom
@@ -335,8 +342,6 @@ dd if=$rnddev bs=16 count=1 >>etc/.rnd 2>/dev/null
 (( quiet )) || print Fixing up permissions...
 chown 0:0 tmp
 chmod 1777 tmp
-chmod 4755 bin/busybox
-[[ -f usr/bin/Xorg ]] && chmod 4755 usr/bin/Xorg
 [[ -f usr/bin/sudo ]] && chmod 4755 usr/bin/sudo
 (( quiet )) || print Configuring GRUB2 bootloader...
 mkdir -p boot/grub
@@ -355,7 +360,7 @@ mkdir -p boot/grub
 	fi
 	print
 	print 'menuentry "GNU/Linux (OpenADK)" {'
-	linuxargs="root=UUID=$partuuid $consargs"
+	linuxargs="root=PARTUUID=$partuuid $consargs"
 	(( panicreboot )) && linuxargs="$linuxargs panic=$panicreboot"
 	print "\tlinux /boot/kernel $linuxargs"
 	print '}'
