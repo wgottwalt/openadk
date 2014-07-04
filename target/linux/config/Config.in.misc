@@ -2,6 +2,11 @@ config ADK_KERNEL_FIRMWARE_IN_KERNEL
 	boolean 
 	default n
 
+config ADK_KERNEL_EXTRA_FIRMWARE
+	string
+	default "rtl_nic/rtl8168e-2.fw" if ADK_KERNEL_R8169 && ADK_KERNEL_ROOT_NFS
+	default ""
+
 config ADK_KERNEL_FW_LOADER_USER_HELPER
 	boolean
 	default n

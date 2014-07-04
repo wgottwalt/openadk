@@ -38,6 +38,7 @@ config ADK_HARDWARE_ACPI
 	select ADK_KERNEL_ACPI_FAN
 	select ADK_KERNEL_ACPI_DOCK
 	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default n
 	help
 	 Enable ACPI support.
