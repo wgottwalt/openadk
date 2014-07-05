@@ -35,7 +35,6 @@ libpthread-install:
 ifeq ($(ADK_TARGET_LIB_MUSL),)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
 	${CP} ${STAGING_TARGET_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
-	(cd ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH); ln -sf libpthread.so.0 libpthread.so)
 endif
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
