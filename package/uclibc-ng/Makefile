@@ -11,6 +11,7 @@ PKG_DESCR:=		embedded c library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
 PKG_VERSION:=		1.0.0
+BETA:=			beta1
 
 PKG_SUBPKGS:=		UCLIBC_NG UCLIBC_NG_DEV
 PKGSD_UCLIBC_NG_DEV:=	development files for uclibc-ng
@@ -54,17 +55,17 @@ endif
 uclibc-ng-dev-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_NG_DEV}/usr/lib ${IDIR_UCLIBC_NG_DEV}/$(ADK_TARGET_LIBC_PATH)
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_UCLIBC_NG_DEV}/usr/lib
-	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc-ng_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	for file in libcrypt libdl libm libresolv libutil; do \
-		cd $(IDIR_UCLIBC_NG_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(GIT_VERSION).so $$file.so; \
+		cd $(IDIR_UCLIBC_NG_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	${KERNEL_MAKE_ENV} \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
 		$(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_NG_DEV)/usr \
 		headers_install
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION} \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)$(BETA)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}$(BETA) \
 		PREFIX=$(IDIR_UCLIBC_NG_DEV)/ \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(IDIR_UCLIBC_NG_DEV)/ \
