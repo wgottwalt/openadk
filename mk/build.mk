@@ -115,7 +115,7 @@ POSTCONFIG=		-@\
 			fi; \
 		done; \
 		if [ "$$(grep ^ADK_RUNTIME_TIMEZONE .config|md5sum)" != "$$(grep ^ADK_RUNTIME_TIMEZONE .config.old|md5sum)" ];then \
-			touch .rebuild.musl .rebuild.uclibc .rebuild.glibc;\
+			touch .rebuild.musl .rebuild.uclibc .rebuild.uclibc-ng .rebuild.glibc;\
 			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config|md5sum)" != "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config.old|md5sum)" ];then \
@@ -371,9 +371,9 @@ endif
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_LIBC)" ];then \
-		libc=$(echo $(ADK_TARGET_LIBC)|sed -e "#-#_#") \
+		libc=$$(echo "$(ADK_TARGET_LIBC)"|sed -e "s/-/_/"); \
 		grep "^config" target/config/Config.in.libc.choice \
-			|grep -i $libc \
+			|grep -i "$$libc$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
