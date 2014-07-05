@@ -2,8 +2,8 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		uClibc-ng
-PKG_VERSION:=		1.0.0beta1
+PKG_VERSION:=		1.0.0beta2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c21e841677bb02ec49f142be131ccb23
+PKG_MD5SUM:=		0015252712bf06aa39fdc150b21a7a40
 PKG_SITES:=		http://downloads.uclibc-ng.org/
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
