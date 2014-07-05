@@ -17,7 +17,7 @@ endif
 
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS_COMPILE=.*,CROSS_COMPILE=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
-	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${STAGING_TARGET_DIR}/usr/include\"' \
+	PATH='$(HOST_PATH)' sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${STAGING_TARGET_DIR}/usr/include\"' \
 	    $(ADK_TOPDIR)/target/$(ADK_TARGET_ARCH)/uclibc.config >${WRKBUILD}/.config
 ifeq ($(ADK_TARGET_ENDIAN),little)
 	$(SED) 's/.*\(ARCH_LITTLE_ENDIAN\).*/\1=y/' ${WRKBUILD}/.config
@@ -64,14 +64,14 @@ ifeq ($(ADK_TARGET_USE_SSP),y)
 	echo "SSP_QUICK_CANARY=n" >> ${WRKBUILD}/.config
 	echo "UCLIBC_BUILD_SSP=y" >> ${WRKBUILD}/.config
 endif
-	echo N|$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
+	echo N|PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
 		HOSTCC="$(HOST_CC)" \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		oldconfig
-	$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
+	PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
@@ -82,7 +82,7 @@ endif
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	$(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
+	PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX= \
 		DEVEL_PREFIX=/ \
 		RUNTIME_PREFIX=/ \
@@ -92,7 +92,7 @@ $(WRKBUILD)/.compiled:
 	touch $@
 
 $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
-	$(MAKE) -C $(WRKBUILD) \
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		DEVEL_PREFIX_LIB=/ \
@@ -105,7 +105,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 	touch $@
 
 $(WRKBUILD)/.fixup:
-	$(MAKE) -C $(WRKBUILD) \
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		DEVEL_PREFIX_LIB=/ \
