@@ -134,4 +134,10 @@ config ADK_TARGET_USE_STATIC_LIBS
 	  still requires libgcc_so.so.1 for pthread_cancel. Glibc also requires libnss_*.so libraries
 	  at runtime. Full static builds are only supported for musl libc.
 
+config ADK_STATIC_TOOLCHAIN
+	boolean "Build the toolchain components statically"
+	default n
+	help
+	  If you want to create more portable toolchains, build them static.
+
 endmenu

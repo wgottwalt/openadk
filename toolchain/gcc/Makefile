@@ -114,6 +114,18 @@ GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
 endif
 endif
 
+ifeq ($(ADK_CPU_ARMV5TE),y)
+GCC_CONFOPTS+=		--with-arch=armv5te
+endif
+
+ifeq ($(ADK_CPU_ARMV6),y)
+GCC_CONFOPTS+=		--with-arch=armv6
+endif
+
+ifeq ($(ADK_CPU_ARMV7A),y)
+GCC_CONFOPTS+=		--with-arch=armv7-a
+endif
+
 ifeq ($(ADK_CPU_ARM926EJ_S),y)
 GCC_CONFOPTS+=		--with-arch=armv5te --with-tune=arm926ej-s
 endif

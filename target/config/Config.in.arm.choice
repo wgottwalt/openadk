@@ -1,6 +1,25 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+choice ADK_TARGET_ARM_CPU_MODEL
+prompt "CPU model"
+depends on ADK_TARGET_TOOLCHAIN && ADK_LINUX_ARM
+default ADK_CPU_ARMV7
+
+config ADK_CPU_ARMV5TE
+        boolean "armv5te"
+        select ADK_armv5te
+
+config ADK_CPU_ARMV6
+        boolean "armv6"
+        select ADK_armv6
+
+config ADK_CPU_ARMV7A
+        boolean "armv7-a"
+        select ADK_armv7a
+
+endchoice
+
 choice
 prompt "Cubox-i model"
 depends on ADK_TARGET_SYSTEM_CUBOX_I
@@ -21,7 +40,7 @@ endchoice
 
 choice ADK_TARGET_ARM_FLOAT
 prompt "Target float type"
-depends on ADK_TARGET_CPU_WITH_FPU || ADK_TARGET_SYSTEM_QEMU_ARM
+depends on ADK_TARGET_CPU_WITH_FPU || ADK_TARGET_SYSTEM_QEMU_ARM || ADK_TARGET_TOOLCHAIN
 
 config ADK_TARGET_ARM_HARD_FLOAT
         boolean "Use hard-float for system with FPU"

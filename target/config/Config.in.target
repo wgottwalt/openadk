@@ -30,6 +30,9 @@ config ADK_TARGET_CFLAGS
 	default "-march=armv6 -mtune=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard" if ADK_CPU_ARM1176JZF_S && ADK_hard_float
 	default "-march=armv7-a -mtune=cortex-a9 -mfloat-abi=soft" if ADK_CPU_CORTEX_A9 && ADK_soft_float
 	default "-march=armv7-a -mtune=cortex-a9 -mfpu=neon -mfloat-abi=hard" if ADK_CPU_CORTEX_A9 && ADK_hard_float
+	default "-march=armv5te" if ADK_CPU_ARMV5TE
+	default "-march=armv6" if ADK_CPU_ARMV6
+	default "-march=armv7-a" if ADK_CPU_ARMV7A
 
 config ADK_TARGET_CMDLINE
 	string
