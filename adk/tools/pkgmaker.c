@@ -407,6 +407,13 @@ int main() {
 	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_GLIBC\n");
 	fprintf(cfg, "\thelp\n");
 	fprintf(cfg, "\t  GNU C library header files.\n\n");
+	fprintf(cfg, "config ADK_PACKAGE_UCLIBC_NG_DEV\n");
+	fprintf(cfg, "\tprompt \"uclibc-ng-dev........ development files for uclibc-ng\"\n");
+	fprintf(cfg, "\tboolean\n");
+	fprintf(cfg, "\tdefault n\n");
+	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_UCLIBC_NG\n");
+	fprintf(cfg, "\thelp\n");
+	fprintf(cfg, "\t  C library header files.\n\n");
 	fprintf(cfg, "config ADK_PACKAGE_UCLIBC_DEV\n");
 	fprintf(cfg, "\tprompt \"uclibc-dev........... development files for uclibc\"\n");
 	fprintf(cfg, "\tboolean\n");

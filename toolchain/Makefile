@@ -24,6 +24,10 @@ ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 TARGETS+=uclibc
 CLIB:=uclibc
 endif
+ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
+TARGETS+=uclibc-ng
+CLIB:=uclibc-ng
+endif
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGETS+=musl
 CLIB:=musl

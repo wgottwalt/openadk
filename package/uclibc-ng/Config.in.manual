@@ -1,0 +1,8 @@
+config ADK_PACKAGE_UCLIBC_NG
+	prompt "uClibc-ng............ embedded C library"
+	bool
+	default y if ADK_TARGET_LIB_UCLIBC_NG && !ADK_TOOLCHAIN_ONLY
+	default n
+	depends on ADK_TARGET_LIB_UCLIBC_NG
+	help
+	  Embedded C library. http://www.uclibc-ng.org

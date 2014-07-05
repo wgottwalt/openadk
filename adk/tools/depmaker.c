@@ -175,6 +175,7 @@ int main() {
 			if (
 				!(strncmp(pkgdirp->d_name, "libpthread", 10) == 0 && strlen(pkgdirp->d_name) == 10) &&
 				!(strncmp(pkgdirp->d_name, "uclibc++", 8) == 0) &&
+				!(strncmp(pkgdirp->d_name, "uclibc-ng", 9) == 0) &&
 				!(strncmp(pkgdirp->d_name, "uclibc", 6) == 0) &&
 				!(strncmp(pkgdirp->d_name, "musl", 4) == 0) &&
 				!(strncmp(pkgdirp->d_name, "glibc", 5) == 0)) {

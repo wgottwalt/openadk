@@ -21,6 +21,12 @@ package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
 gcc-compile: uclibc-compile
 endif
 
+ifeq (${ADK_TARGET_LIB_UCLIBC_NG},y)
+package-$(ADK_PACKAGE_UCLIBC_NG) += uclibc-ng
+package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
+gcc-compile: uclibc-ng-compile
+endif
+
 package-$(ADK_PACKAGE_LIBPTHREAD) += libpthread
 
 include $(ADK_TOPDIR)/package/Depends.mk
