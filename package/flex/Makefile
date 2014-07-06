@@ -5,11 +5,12 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		flex
 PKG_VERSION:=		2.5.35
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		201d3f38758d95436cbc64903386de0b
 PKG_DESCR:=		fast lexical analyzer
 PKG_SECTION:=		dev/tools
-PKG_BUILDDEP:=		m4-host flex-host
+PKG_BUILDDEP:=		m4-host
+HOST_BUILDDEP:=		m4-host
 PKG_URL:=		http://flex.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
 PKG_OPTS:=		dev
