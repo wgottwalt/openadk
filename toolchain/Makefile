@@ -81,7 +81,7 @@ $(CLIB)-fixup: gcc-install gdb-install
 		    $(MAKE_TRACE); \
 	else \
 		$(MAKE) -C $(patsubst %-compile,%,$@) compile \
-		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' $(MAKE_TRACE); \
+		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' CXXFLAGS='$(HOST_STATIC_CXXFLAGS)' $(MAKE_TRACE); \
 	fi
 
 %-install: %-compile
@@ -91,7 +91,7 @@ $(CLIB)-fixup: gcc-install gdb-install
 		    $(MAKE_TRACE); \
 	else \
 		$(MAKE) -C $(patsubst %-install,%,$@) install \
-		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' $(MAKE_TRACE); \
+		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' CXXFLAGS='$(HOST_STATIC_CXXFLAGS)' $(MAKE_TRACE); \
 	fi
 
 %-fixup: %-install

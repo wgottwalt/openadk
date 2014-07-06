@@ -231,6 +231,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 			--enable-languages=$(LANGUAGES) \
 			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}'
+	$(MAKE) -C $(GCC_BUILD_DIR_FINAL) configure-host
 	touch $@
 
 $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured

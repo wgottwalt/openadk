@@ -181,6 +181,14 @@ HOST_LDFLAGS:=		-L$(STAGING_HOST_DIR)/usr/lib -Wl,-rpath -Wl,${STAGING_HOST_DIR}
 
 PATCH=			PATH=${HOST_PATH} ${BASH} $(SCRIPT_DIR)/patch.sh
 PATCHP0=		PATH=${HOST_PATH} patch -p0
+
+ifeq ($(ADK_STATIC_TOOLCHAIN),y)
+HOST_STATIC_CFLAGS:=   -static -Wl,-static
+HOST_STATIC_CXXFLAGS:= -static -Wl,-static
+HOST_STATIC_LDFLAGS:=  -Wl,-static
+HOST_STATIC_LLDFLAGS:= -all-static
+endif
+
 SED:=			PATH=${HOST_PATH} sed -i -e
 LINUX_DIR:=		$(BUILD_DIR)/linux
 KERNEL_MODULE_FLAGS:=	ARCH=${ADK_TARGET_ARCH} \

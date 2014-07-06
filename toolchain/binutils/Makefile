@@ -38,6 +38,10 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 BINUTILS_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
 endif
 
+ifeq (${ADK_STATIC_TOOLCHAIN},y)
+BINUTILS_STATIC_MAKEOPTS+=LDFLAGS='$(HOST_STATIC_LLDFLAGS)'
+endif
+
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 ifeq ($(ADK_LINUX_XTENSA),y)
@@ -56,10 +60,11 @@ endif
 		--disable-install-libiberty \
 		${CONFOPTS} \
 	);
+	$(MAKE) ${BINUTILS_MAKEOPTS} -C $(WRKBUILD) configure-host
 	touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
-	$(MAKE) ${BINUTILS_MAKEOPTS} -C $(WRKBUILD) all
+	$(MAKE) ${BINUTILS_MAKEOPTS} ${BINUTILS_STATIC_MAKEOPTS} -C $(WRKBUILD) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
