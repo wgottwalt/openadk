@@ -21,6 +21,8 @@ PKG_DESCR:=		posix threading library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
 
+PKG_CFLINE_LIBPTHREAD:=	depends on ADK_TARGET_WITH_NPTL
+
 NO_DISTFILES:=		1
 
 include ${ADK_TOPDIR}/mk/package.mk
@@ -33,8 +35,10 @@ INSTALL_STYLE:=		manual
 
 libpthread-install:
 ifeq ($(ADK_TARGET_LIB_MUSL),)
+ifeq ($(ADK_TARGET_WITH_NPTL),y)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
 	${CP} ${STAGING_TARGET_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
+endif
 endif
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
