@@ -358,6 +358,12 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_TARGET_ABI)" ];then \
+		grep "^config" target/config/Config.in.abi.choice \
+			|grep -i "$(ADK_TARGET_ABI)$$" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_TARGET_ENDIAN)" ];then \
 		grep "^config" target/config/Config.in.endian.choice \
 			|grep -i "$(ADK_TARGET_ENDIAN)" \

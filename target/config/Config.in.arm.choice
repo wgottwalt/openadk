@@ -38,18 +38,3 @@ config ADK_TARGET_CUBOX_I1
 
 endchoice
 
-choice ADK_TARGET_ARM_FLOAT
-prompt "Target float type"
-depends on ADK_TARGET_CPU_WITH_FPU || ADK_TARGET_SYSTEM_QEMU_ARM || ADK_TARGET_TOOLCHAIN
-
-config ADK_TARGET_ARM_HARD_FLOAT
-        boolean "Use hard-float for system with FPU"
-        select ADK_hard_float
-	select ADK_eabihf
-
-config ADK_TARGET_ARM_SOFT_FLOAT
-        boolean "Use soft-float for system without FPU"
-        select ADK_soft_float
-	select ADK_eabi
-
-endchoice

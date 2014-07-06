@@ -28,6 +28,16 @@ config ADK_fpu_neon
 config ADK_fpu_vfp
 	boolean
 
+config ADK_TARGET_ARM_HARD_FLOAT
+	boolean
+        select ADK_hard_float
+	default y if ADK_TARGET_ABI_EABIHF
+
+config ADK_TARGET_ARM_SOFT_FLOAT
+	boolean
+        select ADK_soft_float
+	default y if ADK_TARGET_ABI_EABI
+
 config ADK_TARGET_FLOAT
 	string
 	default "hard" if ADK_hard_float
