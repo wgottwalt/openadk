@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lz4
-PKG_VERSION:=		118
+PKG_VERSION:=		119
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7b155d93c6e5d48494f8bfd32f831440
+PKG_MD5SUM:=		3fc4ed20cb98dba909896f485b25d0f1
 PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
 PKG_DEPENDS:=		liblz4
