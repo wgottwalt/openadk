@@ -161,7 +161,7 @@ config ADK_KERNEL_XFS_FS
 	prompt "XFS filesystem support"
 	tristate
 	select ADK_KERNEL_EXPORTFS
-	select ADK_KERNEL_CRYPTO_CRC32C
+	select ADK_KERNEL_LIBCRC32C
 	default n
 	help
 	  XFS is a high performance journaling filesystem which originated
