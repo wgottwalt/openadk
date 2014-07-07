@@ -98,10 +98,10 @@ GCC_CONFOPTS+=		--disable-lto
 endif
 
 ifeq ($(ADK_LINUX_PPC),y)
-ifeq ($(ADK_TARGET_LIBC),uclibc)
-GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-128 --enable-secureplt
-else
+ifeq ($(ADK_TARGET_LIBC),musl)
 GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-64 --enable-secureplt
+else
+GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-128 --enable-secureplt
 endif
 else
 GCC_CONFOPTS+=		--enable-target-optspace
@@ -231,7 +231,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 			--enable-languages=$(LANGUAGES) \
 			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}'
-	$(MAKE) -C $(GCC_BUILD_DIR_FINAL) configure-host
+	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_FINAL) configure-host
 	touch $@
 
 $(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
