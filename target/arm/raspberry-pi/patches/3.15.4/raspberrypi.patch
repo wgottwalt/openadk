@@ -101127,17 +101127,6 @@ diff -Nur linux-3.15.4/lib/lz4/lz4_decompress.c linux-rpi/lib/lz4/lz4_decompress
  }
  
  int lz4_decompress(const unsigned char *src, size_t *src_len,
-diff -Nur linux-3.15.4/Makefile linux-rpi/Makefile
---- linux-3.15.4/Makefile	2014-07-07 03:59:25.000000000 +0200
-+++ linux-rpi/Makefile	2014-07-07 10:44:57.000000000 +0200
-@@ -1,6 +1,6 @@
- VERSION = 3
- PATCHLEVEL = 15
--SUBLEVEL = 4
-+SUBLEVEL = 3
- EXTRAVERSION =
- NAME = Shuffling Zombie Juror
- 
 diff -Nur linux-3.15.4/mm/memcontrol.c linux-rpi/mm/memcontrol.c
 --- linux-3.15.4/mm/memcontrol.c	2014-07-07 03:59:25.000000000 +0200
 +++ linux-rpi/mm/memcontrol.c	2014-07-07 10:45:57.000000000 +0200
