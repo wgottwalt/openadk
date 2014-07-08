@@ -346,6 +346,9 @@ endif
 	@if [ ! -z "$(ADK_NO_CHECKSUM)" ];then \
 		echo "ADK_DISABLE_CHECKSUM=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_LTP)" ];then \
+		echo "ADK_PACKAGE_LTP=y" >> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \
 			|grep -i "$(ADK_TARGET_ARCH)"\$$ \
