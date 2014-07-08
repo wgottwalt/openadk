@@ -344,7 +344,7 @@ ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(ADK_TOPDIR)/.defconfig
 endif
 	@if [ ! -z "$(ADK_NO_CHECKSUM)" ];then \
-		echo "ADK_DISABLE_CHECKSUM=y" >> $(ADK_TOPDIR)/.defconfig
+		echo "ADK_DISABLE_CHECKSUM=y" >> $(ADK_TOPDIR)/.defconfig \
 	fi
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \
