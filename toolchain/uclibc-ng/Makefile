@@ -124,6 +124,13 @@ $(WRKBUILD)/.fixup:
 		RUNTIME_PREFIX=/ \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		all install_runtime
+ifeq ($(ADK_UCLIBC_TEST),y)
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD)/test \
+		UCLIBC_ONLY=1 \
+		TEST_INSTALLED_UCLIBC=1 \
+		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		compile
+endif
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 	# cleanup toolchain
 	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -delete
