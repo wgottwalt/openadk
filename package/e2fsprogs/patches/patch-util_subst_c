@@ -1,0 +1,11 @@
+--- e2fsprogs-1.42.10.orig/util/subst.c	2014-05-15 19:04:08.000000000 +0200
++++ e2fsprogs-1.42.10/util/subst.c	2014-07-08 21:18:41.000000000 +0200
+@@ -358,7 +358,7 @@ int main(int argc, char **argv)
+ 		if (fd > 0) {
+ 			/* save the original atime, if possible */
+ 			if (fstat(fd, &stbuf) == 0) {
+-#if HAVE_STRUCT_STAT_ST_ATIM
++#if defined(HAVE_STRUCT_STAT_ST_ATIM) && !defined(__APPLE__)
+ 				tv[0].tv_sec = stbuf.st_atim.tv_sec;
+ 				tv[0].tv_usec = stbuf.st_atim.tv_nsec / 1000;
+ #else

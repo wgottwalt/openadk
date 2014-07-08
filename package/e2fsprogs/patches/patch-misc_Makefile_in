@@ -1,5 +1,5 @@
---- e2fsprogs-1.42.8.orig/misc/Makefile.in	2013-04-22 01:05:50.000000000 +0200
-+++ e2fsprogs-1.42.8/misc/Makefile.in	2013-08-14 13:10:04.000000000 +0200
+--- e2fsprogs-1.42.10.orig/misc/Makefile.in	2014-05-15 19:04:08.000000000 +0200
++++ e2fsprogs-1.42.10/misc/Makefile.in	2014-07-08 21:15:18.000000000 +0200
 @@ -17,9 +17,6 @@ INSTALL = @INSTALL@
  @IMAGER_CMT@E2IMAGE_PROG= e2image
  @IMAGER_CMT@E2IMAGE_MAN= e2image.8
@@ -12,7 +12,7 @@
  
 @@ -35,8 +32,8 @@ SMANPAGES=	tune2fs.8 mklost+found.8 mke2
  			$(UUIDD_MAN) $(E4DEFRAG_MAN) @FSCK_MAN@
- FMANPAGES=	mke2fs.conf.5
+ FMANPAGES=	mke2fs.conf.5 ext4.5
  
 -UPROGS=		chattr lsattr @UUID_CMT@ uuidgen
 -UMANPAGES=	chattr.1 lsattr.1 @UUID_CMT@ uuidgen.1
@@ -21,8 +21,8 @@
  
  LPROGS=		@E2INITRD_PROG@
  
-@@ -45,8 +42,6 @@ MKLPF_OBJS=	mklost+found.o
- MKE2FS_OBJS=	mke2fs.o util.o profile.o prof_err.o default_profile.o
+@@ -46,8 +43,6 @@ MKE2FS_OBJS=	mke2fs.o util.o profile.o p
+ 			mk_hugefiles.o
  CHATTR_OBJS=	chattr.o
  LSATTR_OBJS=	lsattr.o
 -UUIDGEN_OBJS=	uuidgen.o
@@ -30,7 +30,7 @@
  DUMPE2FS_OBJS=	dumpe2fs.o
  BADBLOCKS_OBJS=	badblocks.o
  E2IMAGE_OBJS=	e2image.o
-@@ -63,8 +58,6 @@ PROFILED_MKE2FS_OBJS=	profiled/mke2fs.o
+@@ -64,8 +59,6 @@ PROFILED_MKE2FS_OBJS=	profiled/mke2fs.o 
  			profiled/prof_err.o profiled/default_profile.o
  PROFILED_CHATTR_OBJS=	profiled/chattr.o
  PROFILED_LSATTR_OBJS=	profiled/lsattr.o
@@ -39,8 +39,8 @@
  PROFILED_DUMPE2FS_OBJS=	profiled/dumpe2fs.o
  PROFILED_BADBLOCKS_OBJS=	profiled/badblocks.o
  PROFILED_E2IMAGE_OBJS=	profiled/e2image.o
-@@ -79,7 +72,7 @@ PROFILED_E4DEFRAG_OBJS=	profiled/e4defra
- SRCS=	$(srcdir)/tune2fs.c $(srcdir)/mklost+found.c $(srcdir)/mke2fs.c \
+@@ -80,7 +73,7 @@ PROFILED_E4DEFRAG_OBJS=	profiled/e4defra
+ SRCS=	$(srcdir)/tune2fs.c $(srcdir)/mklost+found.c $(srcdir)/mke2fs.c $(srcdir)/mk_hugefiles.c \
  		$(srcdir)/chattr.c $(srcdir)/lsattr.c $(srcdir)/dumpe2fs.c \
  		$(srcdir)/badblocks.c $(srcdir)/fsck.c $(srcdir)/util.c \
 -		$(srcdir)/uuidgen.c $(srcdir)/blkid.c $(srcdir)/logsave.c \
