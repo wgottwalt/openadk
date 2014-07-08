@@ -106,16 +106,19 @@ config ADK_CPU_ARMV8
 
 config ADK_TARGET_CPU_ARCH
 	string
+	default "aarch64" if ADK_LINUX_AARCH64 && ADK_little
 	default "alpha" if ADK_LINUX_ALPHA
-	default "x86_64" if ADK_CPU_X86_64
-	default "x86_64" if ADK_CPU_AMDFAM10
-	default "i686" if ADK_CPU_ATHLON
+	default "armv5te" if ADK_LINUX_ARM && ADK_little && ADK_armv5te
+	default "armv6" if ADK_LINUX_ARM && ADK_little && ADK_armv6
+	default "armv7a" if ADK_LINUX_ARM && ADK_little && ADK_armv7a
+	default "arm" if ADK_LINUX_ARM && ADK_little
 	default "i486" if ADK_CPU_I486
 	default "i586" if ADK_CPU_I586
 	default "i686" if ADK_CPU_I686
 	default "i586" if ADK_CPU_GEODE
 	default "i686" if ADK_CPU_PENTIUM_M
 	default "i686" if ADK_CPU_ATOM
+	default "i686" if ADK_CPU_ATHLON
 	default "m68k" if ADK_LINUX_M68K
 	default "microblaze" if ADK_LINUX_MICROBLAZE && ADK_big
 	default "microblazeel" if ADK_LINUX_MICROBLAZE && ADK_little
@@ -123,12 +126,12 @@ config ADK_TARGET_CPU_ARCH
 	default "mips64el" if ADK_LINUX_MIPS64 && ADK_little
 	default "mips" if ADK_LINUX_MIPS && ADK_big
 	default "mipsel" if ADK_LINUX_MIPS && ADK_little
-	default "aarch64" if ADK_LINUX_AARCH64 && ADK_little
-	default "arm" if ADK_LINUX_ARM && ADK_little
-	default "sparc" if ADK_LINUX_SPARC
-	default "sparc64" if ADK_LINUX_SPARC64
-	default "sh4" if ADK_LINUX_SH && ADK_little
-	default "sh4eb" if ADK_LINUX_SH && ADK_big
 	default "ppc" if ADK_CPU_PPC
 	default "ppc64" if ADK_CPU_PPC64
+	default "sh4" if ADK_LINUX_SH && ADK_little
+	default "sh4eb" if ADK_LINUX_SH && ADK_big
+	default "sparc" if ADK_LINUX_SPARC
+	default "sparc64" if ADK_LINUX_SPARC64
+	default "x86_64" if ADK_CPU_X86_64
+	default "x86_64" if ADK_CPU_AMDFAM10
 	default "xtensa" if ADK_LINUX_XTENSA
