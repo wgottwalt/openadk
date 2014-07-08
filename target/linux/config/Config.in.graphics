@@ -155,7 +155,7 @@ config ADK_KERNEL_DRM_DW_HDMI_AUDIO
 	tristate
 	depends on ADK_TARGET_SYSTEM_CUBOX_I
 	depends on ADK_KERNEL_VERSION_3_15
-	default m if ADK_TARGET_SYSTEM_CUBOX_I
+	#default m if ADK_TARGET_SYSTEM_CUBOX_I
  	default n
  	help
 
@@ -163,7 +163,7 @@ config ADK_KERNEL_DRM_DW_HDMI_CEC
 	tristate
 	depends on ADK_TARGET_SYSTEM_CUBOX_I
 	depends on ADK_KERNEL_VERSION_3_15
-	default m if ADK_TARGET_SYSTEM_CUBOX_I
+	#default m if ADK_TARGET_SYSTEM_CUBOX_I
  	default n
  	help
 	
