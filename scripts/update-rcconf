@@ -5,9 +5,13 @@
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
 . $topdir/.config
 
-rcconf=$topdir/root_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}/etc/rc.conf
+if [ -z ${ADK_TARGET_ABI} ];then
+	rcconf=$topdir/root_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}_${ADK_TARGET_CPU_ARCH}/etc/rc.conf
+else
+	rcconf=$topdir/root_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}_${ADK_TARGET_CPU_ARCH}_${ADK_TARGET_ABI}/etc/rc.conf
+fi
 
-if [ ! -f $topdir/root_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}/etc/rc.conf ];then
+if [ ! -f $rcconf ];then
 	exit 0
 fi
 

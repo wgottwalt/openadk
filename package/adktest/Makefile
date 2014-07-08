@@ -3,7 +3,7 @@
 
 include $(ADK_TOPDIR)/rules.mk
 
-PKG_NAME:=		adk-test-tools
+PKG_NAME:=		adktest
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		7
 PKG_DESCR:=		helper tools and scripts for adk-test-framework
@@ -14,15 +14,15 @@ NO_DISTFILES:=		1
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,ADK_TEST_TOOLS,adk-test-tools,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ADKTEST,adktest,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-adk-test-tools-install:
-	$(INSTALL_DIR) $(IDIR_ADK_TEST_TOOLS)/usr/bin
+adktest-install:
+	$(INSTALL_DIR) $(IDIR_ADKTEST)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/{qmp,quit} \
-		$(IDIR_ADK_TEST_TOOLS)/usr/bin
+		$(IDIR_ADKTEST)/usr/bin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

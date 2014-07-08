@@ -1,18 +1,16 @@
 #!/bin/sh
-#PKG adk-test-tools
+#PKG adktest
 #INIT 90
 . /etc/rc.conf
 
 case $1 in
 autostop) ;;
 autostart)
-	test x"${test:-NO}" = x"NO" && exit 0
-	test x"$test" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
+	test x"${adktest:-NO}" = x"NO" && exit 0
+	test x"$adktest" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
 	exec sh $0 start
 	;;
 start)
-	echo "Setting time via network ..."
-	rdate -nv pool.ntp.org
 	grep shell /proc/cmdline > /dev/null 2&>1
 	if [ $? -eq 0 ];then
 		exit 0
