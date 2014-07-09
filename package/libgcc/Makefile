@@ -9,6 +9,9 @@ endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 include ${ADK_TOPDIR}/toolchain/uclibc/Makefile.inc
 endif
+ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
+include ${ADK_TOPDIR}/toolchain/uclibc-ng/Makefile.inc
+endif
 
 PKG_NAME:=		libgcc
 PKG_DESCR:=		gcc library
@@ -16,7 +19,7 @@ PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove
 
 PKG_DFLT_LIBGCC:=	y if !(ADK_TOOLCHAIN_ONLY)
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc uclibc-ng glibc
 
 
 NO_DISTFILES:=		1

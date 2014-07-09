@@ -21,8 +21,8 @@ NO_DISTFILES:=		1
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,UCLIBC_NG,uclibc-ng,$(GIT_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,UCLIBC_NG_DEV,uclibc-ng-dev,$(GIT_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_UCLIBC_NG_DEV},${PKGSC_UCLIBC_NG_DEV},${PKG_OPTS}))
+$(eval $(call PKG_template,UCLIBC_NG,uclibc-ng,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,UCLIBC_NG_DEV,uclibc-ng-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_UCLIBC_NG_DEV},${PKGSC_UCLIBC_NG_DEV},${PKG_OPTS}))
 
 CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
