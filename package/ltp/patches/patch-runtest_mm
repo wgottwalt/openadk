@@ -1,0 +1,8 @@
+--- ltp-full-20140422.orig/runtest/mm	2014-04-23 10:36:54.000000000 +0200
++++ ltp-full-20140422/runtest/mm	2014-07-07 18:30:02.953473699 +0200
+@@ -110,4 +110,4 @@ overcommit_memory06 overcommit_memory -R
+ 
+ max_map_count max_map_count -i 10
+ 
+-min_free_kbytes min_free_kbytes
++#min_free_kbytes min_free_kbytes

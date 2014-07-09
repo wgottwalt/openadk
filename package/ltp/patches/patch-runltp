@@ -1,0 +1,11 @@
+--- ltp-full-20140422.orig/runltp	2014-04-23 10:37:31.000000000 +0200
++++ ltp-full-20140422/runltp	2014-07-07 22:30:06.069956961 +0200
+@@ -77,7 +77,7 @@ setup()
+         exit 1
+     }
+     export LTPROOT=${PWD}
+-    export TMPBASE="/tmp"
++    export TMPBASE="/opt/ltp/tmp"
+     export PATH="${PATH}:${LTPROOT}/testcases/bin"
+ 
+     export LTP_DEV=""

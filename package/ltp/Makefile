@@ -10,7 +10,7 @@ PKG_MD5SUM:=		6a98074e9121595ccb78951ebfeb698f
 PKG_DESCR:=		linux test project
 PKG_BUILDDEP:=		libtirpc
 PKG_DEPENDS:=		bash libtirpc libpthread librt
-PKG_DEPENDS+=		mke2fs
+PKG_DEPENDS+=		mke2fs mkfs
 PKG_SECTION:=		sys/misc
 PKG_URL:=		http://linux-test-project.github.io
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ltp/}
@@ -33,7 +33,7 @@ CONFIGURE_ARGS+=	--with-open-posix-testsuite \
 			--without-expect
 
 ltp-install:
-	$(INSTALL_DIR) $(IDIR_LTP)/opt/ltp
+	$(INSTALL_DIR) $(IDIR_LTP)/opt/ltp/tmp
 	$(CP) $(WRKINST)/usr/* $(IDIR_LTP)/opt/ltp
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

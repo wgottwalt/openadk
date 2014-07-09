@@ -16,7 +16,7 @@ PKG_OPTS:=		dev
 PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
-PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBMOUNT SU CFDISK
+PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBMOUNT SU CFDISK MKFS
 PKGSD_LIBUUID:=		uuid library
 PKGSC_LIBUUID:=		libs/misc
 PKGSD_LIBBLKID:=	blkid library
@@ -36,6 +36,8 @@ PKGSS_SWAP_UTILS:=	libblkid
 PKGSC_SWAP_UTILS:=	sys/fs
 PKGSD_LOSETUP:=		loop devices management utilities
 PKGSC_LOSETUP:=		sys/fs
+PKGSD_MKFS:=		filesystem creation frontend
+PKGSC_MKFS:=		sys/fs
 PKGSD_MOUNT:=		mount/umount utilities
 PKGSS_MOUNT:=		libblkid libmount libuuid libncurses
 PKGSC_MOUNT:=		sys/fs
@@ -50,6 +52,7 @@ $(eval $(call PKG_template,SFDISK,sfdisk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,SU,su,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_SU},${PKGSD_SU},${PKGSC_SU}))
 $(eval $(call PKG_template,SWAP_UTILS,swap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_SWAP_UTILS},${PKGSD_SWAP_UTILS},${PKGSC_SWAP_UTILS}))
 $(eval $(call PKG_template,LOSETUP,losetup,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LOSETUP},${PKGSD_LOSETUP},${PKGSC_LOSETUP}))
+$(eval $(call PKG_template,MKFS,mkfs,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MKFS},${PKGSD_MKFS},${PKGSC_MKFS}))
 $(eval $(call PKG_template,MOUNT,mount,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MOUNT},${PKGSD_MOUNT},${PKGSC_MOUNT}))
 $(eval $(call PKG_template,MCOOKIE,mcookie,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_MCOOKIE},${PKGSC_MCOOKIE}))
 $(eval $(call PKG_template,LIBUUID,libuuid,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIBUUID},${PKGSC_LIBUUID},${PKG_OPTS}))
@@ -100,6 +103,10 @@ swap-utils-install:
 	${INSTALL_DIR} ${IDIR_SWAP_UTILS}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/mkswap ${IDIR_SWAP_UTILS}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/swap{on,off} ${IDIR_SWAP_UTILS}/usr/sbin
+
+mkfs-install:
+	${INSTALL_DIR} ${IDIR_MKFS}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/mkfs ${IDIR_MKFS}/usr/sbin
 
 mount-install:
 	${INSTALL_DIR} ${IDIR_MOUNT}/bin

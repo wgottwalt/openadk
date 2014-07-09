@@ -1,0 +1,11 @@
+--- ltp-full-20140422.orig/runtest/syscalls	2014-04-23 10:36:54.000000000 +0200
++++ ltp-full-20140422/runtest/syscalls	2014-07-07 16:47:09.356685909 +0200
+@@ -283,7 +283,7 @@ fork08 fork08
+ fork09 fork09
+ fork10 fork10
+ fork11 fork11
+-fork13 fork13 -i 1000000
++fork13 fork13 -i 10000
+ fork14 fork14
+ 
+ fpathconf01 fpathconf01
