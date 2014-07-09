@@ -352,6 +352,12 @@ endif
 	@if [ ! -z "$(ADK_UCLIBC_TEST)" ];then \
 		echo "ADK_UCLIBC_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_UCLIBC_NATIVE)" ];then \
+		echo "ADK_PACKAGE_GCC=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_BINUTILS=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_UCLIBC_NG_DEV=y" >> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \
 			|grep -i "$(ADK_TARGET_ARCH)"\$$ \
