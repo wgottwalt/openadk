@@ -11,6 +11,7 @@ endif
 CONFIG_CONFIG_IN = Config.in
 CONFIG = adk/config
 DEFCONFIG=		ADK_DEBUG=n \
+			ADK_PACKAGE_BUSYBOX_HIDE=n \
 			ADK_DISABLE_KERNEL_PATCHES=n \
 			ADK_DISABLE_TARGET_KERNEL_PATCHES=n \
 			ADK_WGET_TIMEOUT=180 \
@@ -28,7 +29,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_CRYPTINIT=n \
 			ADK_PACKAGE_VIRTINST=n \
 			ADK_PACKAGE_URLGRABBER=n \
-			ADK_PACKAGE_LIBSSP=n \
 			ADK_PACKAGE_OPENAFS=n \
 			ADK_KERNEL_ADDON_YAFFS2=n \
 			ADK_KERNEL_ADDON_GRSEC=n \
@@ -38,7 +38,9 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PKG_CONSOLE=n \
 			ADK_PKG_TEST=n \
 			ADK_PKG_MPDBOX=n \
+			ADK_PKG_XBMCBOX=n \
 			ADK_PKG_DEVELOPMENT=n \
+			ADK_STATIC_TOOLCHAIN=n \
 			ADK_TOOLCHAIN_WITH_SSP=n \
 			ADK_TARGET_USE_SSP=n \
 			ADK_TOOLCHAIN_WITH_LTO=n \
@@ -364,9 +366,6 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			 >> $(ADK_TOPDIR)/.defconfig; \
 	fi
-	@for symbol in ${DEFCONFIG}; do \
-		echo $$symbol >> $(ADK_TOPDIR)/.defconfig; \
-	done
 	@if [ ! -z "$(ADK_TARGET_FS)" ];then \
 		grep "^config" target/config/Config.in.target \
 			|grep -i "$(ADK_TARGET_FS)" \
