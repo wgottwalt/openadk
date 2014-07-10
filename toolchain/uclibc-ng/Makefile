@@ -125,11 +125,10 @@ $(WRKBUILD)/.fixup:
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		all install_runtime
 ifeq ($(ADK_UCLIBC_TEST),y)
-	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD)/test \
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		UCLIBC_ONLY=1 \
-		TEST_INSTALLED_UCLIBC=1 \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
-		compile
+		test_compile
 endif
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 	# cleanup toolchain
