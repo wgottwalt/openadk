@@ -46,6 +46,14 @@ config ADK_KERNEL_BUG
 	help
 	  Enable if you need BUGS() in the kernel.
 
+config ADK_KERNEL_COREDUMP
+	prompt "Enable coredumps"
+	boolean
+	default y if ADK_PACKAGE_LTP
+	default n
+	help
+	  Enable if you need coredumps.
+
 config ADK_KERNEL_NETCONSOLE
 	prompt "Netconsole support"
 	boolean
