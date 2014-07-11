@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.18.11
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		be23120f342250e8352f6499cb960fd2
 PKG_DESCR:=		music player daemon
 PKG_SECTION:=		mm/audio
@@ -254,7 +254,8 @@ CONFIGURE_ARGS+=	--disable-opus
 endif
 
 mpd-install:
-	${INSTALL_DIR} ${IDIR_MPD}/usr/bin ${IDIR_MPD}/etc/mpd/playlists
+	${INSTALL_DIR} ${IDIR_MPD}/etc
+	${INSTALL_DIR} ${IDIR_MPD}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/mpd ${IDIR_MPD}/usr/bin
 	${INSTALL_DATA} ./files/mpd.conf ${IDIR_MPD}/etc/mpd.conf
 

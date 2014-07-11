@@ -1,6 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
 add_rcconf mpd NO
-gid=$(get_next_gid)
-add_group mpd $gid
-add_user mpd $(get_next_uid) $gid /music
+add_user mpd $(get_next_uid) 7 /media/music

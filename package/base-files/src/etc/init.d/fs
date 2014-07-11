@@ -28,10 +28,10 @@ for fs in $fstypes; do
 		if [ $? -eq 0 ];then
 			[ -x /usr/sbin/fsck.$fs ] && {
 				logger -t 'Filesystem' "checking $fs filesystem on $disk"
-				fsck -p $disk >/dev/null
+				fsck -p $disk >/dev/null 2>&1
 			}
 			logger -t '' "Mounting local filesystems"
-			mount $disk
+			mount $disk >/dev/null 2>&1
 		else
 			logger -s -t 'Filesystem' "No $fs filesystem in kernel"
 		fi

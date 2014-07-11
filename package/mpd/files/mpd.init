@@ -14,12 +14,13 @@ autostart)
 start)
 	if [ ! -d /var/run/mpd ];then
 		mkdir -p /var/run/mpd
-		chown mpd:mpd /var/run/mpd
+		chown mpd:audio /var/run/mpd
 	fi
 	if [ ! -d /data/mpd ];then
 		mkdir -p /data/mpd
-		chown mpd:mpd /data/mpd
 	fi
+	touch /data/mpd/state
+	chown -R mpd:audio /data/mpd
 	mpd
 	;;
 stop)

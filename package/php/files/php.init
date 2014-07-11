@@ -1,5 +1,5 @@
 #!/bin/sh
-#PKG php-fastcgi
+#PKG php
 #INIT 80
 . /etc/rc.conf
 
