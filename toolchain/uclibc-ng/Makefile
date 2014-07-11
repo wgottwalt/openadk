@@ -114,16 +114,16 @@ $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
-	touch $@
-
-$(WRKBUILD)/.fixup:
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
-		all install_runtime
+		install_runtime
+	touch $@
+
+$(WRKBUILD)/.fixup:
 ifeq ($(ADK_UCLIBC_TEST),y)
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		UCLIBC_ONLY=1 \
