@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
 PKG_VERSION:=		13.1
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		9ce6b6ac89b6aa0b111a1acdf3606e06
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
@@ -103,7 +103,7 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-libcap \
 			--disable-joystick \
 			--disable-dvdcss \
-			--enable-debug \
+			--disable-debug \
 			--disable-gtest \
 			--disable-ccache \
 			--disable-wayland \
