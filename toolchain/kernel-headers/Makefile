@@ -9,9 +9,12 @@ include ${ADK_TOPDIR}/mk/kernel-vars.mk
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched:
+ifeq ($(ADK_TARGET_SYSTEM_PCENGINES_APU),y)
 ifeq ($(ADK_KERNEL_ROOT_NFS),y)
+	cd $(DL_DIR) && wget http://openadk.org/distfiles/realtek-firmware-1.1.tar.xz
 	tar xf $(DL_DIR)/realtek-firmware-1.1.tar.xz \
 		--strip-components=2 -C $(WRKSRC)/firmware realtek-firmware-1.1
+endif
 endif
 ifeq ($(ADK_LINUX_XTENSA),y)
 	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
