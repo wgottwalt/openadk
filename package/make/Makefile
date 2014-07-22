@@ -4,11 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		make
-PKG_VERSION:=		3.81
+PKG_VERSION:=		4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a4e9494ac6dc3f6b0c5ff75c5d52abba
+PKG_MD5SUM:=		b5e558f981326d9ca1bfdb841640721a
 PKG_DESCR:=		c/c++ code buildtool
 PKG_SECTION:=		dev/tools
+PKG_DEPENDS:=		libelf
+PKG_BUILDDEP:=		libelf
 PKG_URL:=		http://www.gnu.org/software/make
 PKG_SITES:=		${MASTER_SITE_GNU:=make/}
 
