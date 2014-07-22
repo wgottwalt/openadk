@@ -40,6 +40,13 @@ ifeq ($(ADK_TARGET_ABI_EABIHF),y)
 	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 endif
+ifeq ($(ADK_LINUX_X86),y)
+	$(SED) 's/.*\(CONFIG_386\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_486\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_586\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_686\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(TARGET_SUBARCH\).*/\1="i686"/' ${WRKBUILD}/.config
+endif
 ifeq ($(ADK_LINUX_64),y)
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS64\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS32\).*/# \1 is not set/' ${WRKBUILD}/.config
