@@ -45,7 +45,7 @@ ROOTFS:=	root=/dev/mmcblk0p1 rootwait
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
-USB:=		rootwait root=/dev/sdc1
+USB:=		rootwait root=/dev/sdb1
 else
 USB:=		rootdelay=2
 endif

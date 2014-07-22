@@ -18,10 +18,10 @@ config ADK_KERNEL_VERSION_3_4
 
 config ADK_KERNEL_VERSION
 	string
-	default "3.15.4" if ADK_KERNEL_VERSION_3_15_4
-	default "3.14.9" if ADK_KERNEL_VERSION_3_14_9
-	default "3.12.23" if ADK_KERNEL_VERSION_3_12_23
-	default "3.10.45" if ADK_KERNEL_VERSION_3_10_45
-	default "3.4.95" if ADK_KERNEL_VERSION_3_4_95
+	default "3.15.6" if ADK_KERNEL_VERSION_3_15_6
+	default "3.14.13" if ADK_KERNEL_VERSION_3_14_13
+	default "3.12.24" if ADK_KERNEL_VERSION_3_12_24
+	default "3.10.49" if ADK_KERNEL_VERSION_3_10_49
+	default "3.4.99" if ADK_KERNEL_VERSION_3_4_99
 	help
 
