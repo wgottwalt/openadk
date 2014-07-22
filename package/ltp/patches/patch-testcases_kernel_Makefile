@@ -1,0 +1,10 @@
+--- ltp-full-20140422.orig/testcases/kernel/Makefile	2014-04-23 10:36:54.000000000 +0200
++++ ltp-full-20140422/testcases/kernel/Makefile	2014-07-22 15:57:17.210496497 +0200
+@@ -50,7 +50,6 @@ SUBDIRS			+= connectors \
+ 			   performance_counters \
+ 			   pty \
+ 			   sched \
+-			   security \
+ 			   timers \
+ 			   tracing \
+ 			   module \
