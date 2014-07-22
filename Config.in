@@ -22,12 +22,11 @@ source "target/config/Config.in.abi"
 source "target/config/Config.in.arm"
 source "target/config/Config.in.x86"
 source "target/config/Config.in.qemu"
+source "target/config/Config.in.qemuopts"
 source "target/config/Config.in.kernelversion"
-source "target/config/Config.in.toolchain"
 
 menu "Target configuration"
 depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
-source "target/config/Config.in.qemuopts"
 source "target/config/Config.in.libc"
 source "target/config/Config.in.target"
 endmenu
@@ -99,4 +98,5 @@ depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 source "target/linux/Config.in"
 endmenu
 
+source "target/config/Config.in.toolchain"
 source "target/config/Config.in.adk"

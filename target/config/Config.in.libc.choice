@@ -5,13 +5,19 @@ choice
 prompt "Target C library"
 depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
 
-config ADK_TARGET_LIB_GLIBC
-	prompt "GNU C library"
+config ADK_TARGET_LIB_UCLIBC_NG
+	prompt "uClibc-ng embedded C library"
 	boolean
-	select ADK_glibc
-	depends on !ADK_LINUX_XTENSA
+	select ADK_uclibc_ng
+	depends on \
+		   !ADK_LINUX_AARCH64 && \
+		   !ADK_LINUX_ALPHA && \
+		   !ADK_LINUX_SPARC && \
+		   !ADK_LINUX_SPARC64 && \
+		   !ADK_LINUX_PPC64 && \
+		   !ADK_x32
 	help
-	  http://www.gnu.org/libc
+	  http://uclibc-ng.org
 
 config ADK_TARGET_LIB_MUSL
 	prompt "musl C library"
@@ -28,22 +34,16 @@ config ADK_TARGET_LIB_MUSL
 	help
  	  http://musl-libc.org
 
-config ADK_TARGET_LIB_UCLIBC_NG
-	prompt "uClibc-ng embedded C library"
+config ADK_TARGET_LIB_GLIBC
+	prompt "GNU C library"
 	boolean
-	select ADK_uclibc_ng
-	depends on \
-		   !ADK_LINUX_AARCH64 && \
-		   !ADK_LINUX_ALPHA && \
-		   !ADK_LINUX_SPARC && \
-		   !ADK_LINUX_SPARC64 && \
-		   !ADK_LINUX_PPC64 && \
-		   !ADK_x32
+	select ADK_glibc
+	depends on !ADK_LINUX_XTENSA
 	help
-	  http://uclibc-ng.org
+	  http://www.gnu.org/libc
 
 config ADK_TARGET_LIB_UCLIBC
-	prompt "uClibc embedded C library"
+	prompt "uClibc embedded C library (deprecated)"
 	boolean
 	select ADK_uclibc
 	depends on \
