@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		eudev
-PKG_VERSION:=		1.5.3
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		51380938b489385cc394f4ebabc048f0
+PKG_VERSION:=		1.9
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		da8083b30b44177445b21e8299af23a1
 PKG_DESCR:=		device manager (udev clone)
 PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		gperf-host glib
