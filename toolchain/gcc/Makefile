@@ -44,7 +44,7 @@ else
 GCC_CONFOPTS+=         --disable-tls --disable-threads --disable-libatomic
 endif
 
-ifneq ($(ADK_LINUX_XTENSA)$(ADK_LINUX_M68K),y)
+ifneq ($(ADK_LINUX_ALPHA)$(ADK_LINUX_XTENSA)$(ADK_LINUX_M68K),y)
 GCC_FINAL_CONFOPTS+=	--enable-cxx-flags='$(TARGET_CXXFLAGS)'
 endif
 
