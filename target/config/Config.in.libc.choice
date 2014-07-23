@@ -11,6 +11,7 @@ config ADK_TARGET_LIB_UCLIBC_NG
 	select ADK_uclibc_ng
 	depends on \
 		   !ADK_LINUX_AARCH64 && \
+		   !ADK_LINUX_ALPHA && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
 		   !ADK_x32
@@ -46,6 +47,7 @@ config ADK_TARGET_LIB_UCLIBC
 	select ADK_uclibc
 	depends on \
 		   !ADK_LINUX_AARCH64 && \
+		   !ADK_LINUX_ALPHA && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
 		   !ADK_x32
