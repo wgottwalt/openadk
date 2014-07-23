@@ -42,6 +42,7 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-fam \
 			--enable-static \
+			--with-libiconv=no \
 			--disable-compile-warnings
 
 glib-install:
