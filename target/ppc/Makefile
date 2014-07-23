@@ -18,6 +18,10 @@ endif
 ifeq ($(ADK_TARGET_QEMU_PPC_VIRTEX_ML507),y)
 QEMU_ARGS+=-M virtex-ml507 -m 256 -dtb $(FW_DIR)/ppc.dtb
 endif
+ifeq ($(ADK_TARGET_QEMU_PPC_BAMBOO),y)
+QEMU_ARGS+=-M bamboo
+QEMU_ARGS+=-device e1000,netdev=adk0 -netdev user,id=adk0
+endif
 
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)

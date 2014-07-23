@@ -41,6 +41,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-mips" if ADK_TARGET_SYSTEM_QEMU_MIPS
 	default "qemu-mips64" if ADK_TARGET_SYSTEM_QEMU_MIPS64
 	default "qemu-ppc-mac99" if ADK_TARGET_QEMU_PPC_MACPPC
+	default "qemu-ppc-bamboo" if ADK_TARGET_QEMU_PPC_BAMBOO
 	default "qemu-virtex-ml507" if ADK_TARGET_QEMU_PPC_VIRTEX_ML507
 	default "qemu-ppc64" if ADK_TARGET_SYSTEM_QEMU_PPC64
 	default "qemu-sh" if ADK_TARGET_SYSTEM_QEMU_SH

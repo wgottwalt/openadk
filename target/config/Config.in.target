@@ -61,6 +61,7 @@ config ADK_TARGET_CMDLINE
 	default "console=hvc0" if ADK_TARGET_SYSTEM_QEMU_PPC64
 	default "console=ttyS0,9600" if ADK_TARGET_QEMU_PPC_MACPPC
 	default "console=ttyS0" if ADK_TARGET_QEMU_PPC_VIRTEX_ML507
+	default "console=ttyS0" if ADK_TARGET_QEMU_PPC_BAMBOO
 	default "console=ttySC1" if ADK_TARGET_SYSTEM_QEMU_SH
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64

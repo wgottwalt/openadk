@@ -5,6 +5,10 @@ choice
 prompt "Qemu PPC Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_PPC
 
+config ADK_TARGET_QEMU_PPC_BAMBOO
+	boolean "Bamboo PPC"
+	select ADK_CPU_PPC_440
+
 config ADK_TARGET_QEMU_PPC_VIRTEX_ML507
 	boolean "Xilinx Virtex ML507"
 	select ADK_CPU_PPC_440
