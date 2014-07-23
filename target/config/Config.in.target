@@ -7,6 +7,7 @@ config ADK_TARGET_CFLAGS
 	default "-m4 -ml" if ADK_CPU_SH4 && ADK_little
 	default "-m4 -mb" if ADK_CPU_SH4 && ADK_big
 	default "-mcpu=powerpc" if ADK_CPU_PPC
+	default "-mcpu=440" if ADK_CPU_PPC_440
 	default "-mcpu=powerpc64" if ADK_CPU_PPC64
 	default "-march=geode" if ADK_CPU_GEODE
 	default "-march=i486" if ADK_CPU_I486
@@ -58,7 +59,8 @@ config ADK_TARGET_CMDLINE
 	default "console=ttyUL0" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 	default "console=ttyS0,115200" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
 	default "console=hvc0" if ADK_TARGET_SYSTEM_QEMU_PPC64
-	default "console=ttyS0,9600" if ADK_TARGET_SYSTEM_QEMU_PPC
+	default "console=ttyS0,9600" if ADK_TARGET_QEMU_PPC_MACPPC
+	default "console=ttyS0" if ADK_TARGET_QEMU_PPC_VIRTEX_ML507
 	default "console=ttySC1" if ADK_TARGET_SYSTEM_QEMU_SH
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_QEMU_SPARC64
 	default "console=ttyS0,115200" if ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64

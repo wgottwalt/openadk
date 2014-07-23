@@ -2,6 +2,20 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
+prompt "Qemu PPC Emulation"
+depends on ADK_TARGET_SYSTEM_QEMU_PPC
+
+config ADK_TARGET_QEMU_PPC_VIRTEX_ML507
+	boolean "Xilinx Virtex ML507"
+	select ADK_CPU_PPC_440
+
+config ADK_TARGET_QEMU_PPC_MACPPC
+	boolean "Mac99 PPC"
+	select ADK_CPU_PPC
+
+endchoice
+
+choice
 prompt "Qemu MICROBLAZE Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE
 

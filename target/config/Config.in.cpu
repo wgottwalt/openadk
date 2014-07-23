@@ -64,6 +64,9 @@ config ADK_CPU_GEODE
 config ADK_CPU_PPC
 	boolean
 
+config ADK_CPU_PPC_440
+	boolean
+
 config ADK_CPU_PPC64
 	boolean
 
@@ -127,6 +130,7 @@ config ADK_TARGET_CPU_ARCH
 	default "mips" if ADK_LINUX_MIPS && ADK_big
 	default "mipsel" if ADK_LINUX_MIPS && ADK_little
 	default "ppc" if ADK_CPU_PPC
+	default "ppc" if ADK_CPU_PPC_440
 	default "ppc64" if ADK_CPU_PPC64
 	default "sh4" if ADK_LINUX_SH && ADK_little
 	default "sh4eb" if ADK_LINUX_SH && ADK_big

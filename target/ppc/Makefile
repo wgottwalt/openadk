@@ -10,9 +10,14 @@ include $(ADK_TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/vmlinux
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
-QEMU_ARGS:=-M mac99
-QEMU_ARGS+=${ADK_QEMU_ARGS}
+QEMU_ARGS:=${ADK_QEMU_ARGS}
+ifeq ($(ADK_TARGET_QEMU_PPC_MACPPC),y)
+QEMU_ARGS+=-M macppc
 QEMU_ARGS+=-device e1000,netdev=adk0 -netdev user,id=adk0
+endif
+ifeq ($(ADK_TARGET_QEMU_PPC_VIRTEX_ML507),y)
+QEMU_ARGS+=-M virtex-ml507 -m 256 -dtb $(FW_DIR)/ppc.dtb
+endif
 
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)
@@ -56,16 +61,34 @@ kernel-strip:
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
 
+dtb-install:
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
+		-j${ADK_MAKE_JOBS} virtex440-ml507.dtb $(MAKE_TRACE)
+	$(CP) $(LINUX_DIR)/arch/powerpc/boot/virtex440-ml507.dtb \
+		$(FW_DIR)/ppc.dtb
+
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
+ifeq ($(ADK_TARGET_QEMU_PPC_VIRTEX_ML507),y)
+imageinstall: dtb-install $(FW_DIR)/$(ROOTFSTARBALL) targethelp
+else
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
 endif
+endif
 ifeq ($(ADK_TARGET_FS),initramfs)
+ifeq ($(ADK_TARGET_QEMU_PPC_VIRTEX_ML507),y)
+imageinstall: dtb-install kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
+else
 imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfsarchive)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
+ifeq ($(ADK_TARGET_QEMU_PPC_VIRTEX_ML507),y)
+imageinstall: dtb-install createinitramfs targethelp
+else
 imageinstall: createinitramfs targethelp
+endif
 endif

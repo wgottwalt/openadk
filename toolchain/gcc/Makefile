@@ -98,13 +98,7 @@ GCC_CONFOPTS+=		--disable-lto
 endif
 
 ifeq ($(ADK_LINUX_PPC),y)
-ifeq ($(ADK_TARGET_LIBC),musl)
-GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-64 --enable-secureplt
-else
-GCC_CONFOPTS+=		--disable-target-optspace --with-long-double-128 --enable-secureplt
-endif
-else
-GCC_CONFOPTS+=		--enable-target-optspace
+GCC_CONFOPTS+=		--with-long-double-64 --enable-secureplt
 endif
 
 ifeq ($(ADK_TARGET_ARCH),arm)
@@ -141,7 +135,6 @@ endif
 ifeq ($(ADK_CPU_SPARC_V9),y)
 GCC_CONFOPTS+=		--with-cpu=ultrasparc
 endif
-
 
 ifneq ($(ADK_TARGET_MIPS_ABI),)
 GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_MIPS_ABI}
