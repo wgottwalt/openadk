@@ -141,10 +141,9 @@ config ADK_STATIC_TOOLCHAIN
 	  If you want to create more portable toolchains, build them static.
 
 config ADK_UCLIBC_TEST
-	prompt "Build and install uClibc testsuite"
+	prompt "Build uClibc testsuite"
 	boolean
-	select ADK_PACKAGE_MAKE
-	depends on ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG
-	default n
+	depends on ADK_TARGET_LIB_UCLIBC_NG
+	default y
 
 endmenu
