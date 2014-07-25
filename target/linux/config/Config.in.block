@@ -144,7 +144,9 @@ config ADK_KERNEL_SATA_AHCI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
-	depends on ADK_TARGET_VBOX
+	depends on ADK_TARGET_SYSTEM_PCENGINES_APU || \
+		   ADK_TARGET_VBOX
+	default y if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default y if ADK_TARGET_VBOX
 	default n
 	help

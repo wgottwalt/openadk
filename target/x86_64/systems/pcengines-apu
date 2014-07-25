@@ -9,6 +9,7 @@ config ADK_TARGET_SYSTEM_PCENGINES_APU
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_USB_BOOT
 	select ADK_TARGET_WITH_ACPI
+	select ADK_TARGET_WITH_SATA
 	select ADK_PACKAGE_GRUB
 	help
 	  Support for PC Engines APU, see
