@@ -96,7 +96,7 @@ ifeq (${HOST_STYLE},manual)
 	env ${HOST_MAKE_ENV} ${MAKE} host-install $(MAKE_TRACE)
 endif
 	env ${HOST_MAKE_ENV} ${MAKE} hostpost-install $(MAKE_TRACE)
-	@find $(STAGING_HOST_DIR) -name \*.la -delete
+	@find $(STAGING_HOST_DIR) -name \*.la -exec rm {} \;
 	@touch $@
 
 ${_HOST_COOKIE}:
