@@ -22,6 +22,7 @@ PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://icedtea.classpath.org/download/source/
 
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
+PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
 DISTFILES:=		icedtea-$(PKG_VERSION).tar.xz
 WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
@@ -44,7 +45,7 @@ $(eval $(call PKG_template,OPENJDK7,openjdk7,$(PKG_VERSION)-${PKG_RELEASE},${PKG
 CONFIG_STYLE:=		basic
 
 # uclibc needs -liconv
-ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
+ifeq ($(ADK_TARGET_LIB_UCLIBC)$(ADK_TARGET_LIB_UCLIBC_NG),y)
 TARGET_LIBS:=		-liconv
 endif
 # for UINTPTR_MAX in stdint.h
