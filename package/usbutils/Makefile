@@ -4,15 +4,17 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		usbutils
-PKG_VERSION:=		006
+PKG_VERSION:=		007
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c9aa14ee3d6c991fda183f42cf72a8a8
+PKG_MD5SUM:=		c9df5107ae9d26b10a1736a261250139
 PKG_DESCR:=		program to list usb devices
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libusb libusb-compat libpthread zlib librt
 PKG_BUILDDEP:=		libusb libusb-compat zlib
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/usb/usbutils/
 PKG_BB:=		1
+
+PKG_SUBPKGS:=		LSUSB
 
 include ${ADK_TOPDIR}/mk/package.mk
 
