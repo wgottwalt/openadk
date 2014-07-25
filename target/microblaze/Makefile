@@ -65,8 +65,8 @@ kernel-strip:
 kernel-install: kernel-strip
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 ifeq ($(ADK_TARGET_FS),squashfs)
-	env PATH=$(HOST_PATH) qemu-img create -f raw $(FW_DIR)/$(ROOTFSSQUASHFS) $(ADK_TARGET_MTD_SIZE) >/dev/null 2>&1
-	dd conv=notrunc if=$(BUILD_DIR)/root.squashfs of=$(FW_DIR)/$(ROOTFSSQUASHFS) >/dev/null 2>&1
+	env PATH=$(HOST_PATH) qemu-img create -f raw $(FW_DIR)/$(ROOTFSSQUASHFS) $(ADK_TARGET_MTD_SIZE)
+	dd conv=notrunc if=$(BUILD_DIR)/root.squashfs of=$(FW_DIR)/$(ROOTFSSQUASHFS)
 endif
 
 # filesystem specific targets
@@ -80,7 +80,7 @@ ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 imageinstall: createinitramfs targethelp
 endif
 ifeq ($(ADK_TARGET_FS),squashfs)
-imageinstall: kernel-install $(BUILD_DIR)/root.squashfs targethelp
+imageinstall: $(BUILD_DIR)/root.squashfs kernel-install targethelp
 endif
 ifeq ($(ADK_TARGET_FS),jffs2)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSJFFS2) targethelp

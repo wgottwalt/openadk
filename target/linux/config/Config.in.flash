@@ -1,5 +1,5 @@
 menu "Flash device support"
-depends on ADK_TARGET_WITH_NAND || ADK_TARGET_WITH_MTD
+depends on ADK_TARGET_WITH_NAND || ADK_TARGET_WITH_MTD || ADK_TARGET_QEMU
 
 config ADK_KERNEL_MTD
 	select ADK_KERNEL_GENERIC_IO
@@ -101,7 +101,6 @@ config ADK_KERNEL_MTD_NAND_PLATFORM
 	help
 	  platform nand driver
 
-
 config ADK_TARGET_MTD_SIZE
 	int
 	depends on ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800 || ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
@@ -110,3 +109,4 @@ config ADK_TARGET_MTD_SIZE
 	default "0"
 
 endmenu
+

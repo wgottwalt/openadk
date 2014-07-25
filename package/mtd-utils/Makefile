@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mtd-utils
 PKG_VERSION:=		1.5.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		fd929de593acadd658d45feb07f993aa
 PKG_DESCR:=		flash filesystem utilities
 PKG_SECTION:=		sys/fs
@@ -47,7 +47,7 @@ $(eval $(call PKG_template,FLASH_OTP_DUMP,flash-otp-dump,$(PKG_VERSION)-${PKG_RE
 $(eval $(call PKG_template,FLASH_LOCK,flash-lock,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FLASH_LOCK},${PKG_SECTION}))
 
 HOST_STYLE:=		manual
-CPPFLAGS_FOR_BUILD+=	-DWITHOUT_XATTR=1 -I./include
+HOST_CPPFLAGS+=		-DWITHOUT_XATTR=1 -I./include
 
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
