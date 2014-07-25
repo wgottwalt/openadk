@@ -187,6 +187,12 @@ config BUSYBOX_DISABLE_FIND
 	depends on ADK_PACKAGE_FINDUTILS
 	default n
 
+config BUSYBOX_DISABLE_RDATE
+	boolean
+	default y if ADK_PACKAGE_RDATE
+	depends on ADK_PACKAGE_RDATE
+	default n
+
 config BUSYBOX_DISABLE_RFKILL
 	boolean
 	default y if ADK_PACKAGE_RFKILL
