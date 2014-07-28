@@ -114,6 +114,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 $(WRKBUILD)/.fixup:
 ifeq ($(ADK_UCLIBC_TEST),y)
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
+		TEST_INSTALLED_UCLIBC=1 \
 		UCLIBC_ONLY=1 \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
 		test_compile
