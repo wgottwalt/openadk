@@ -12,7 +12,7 @@ OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build
 
 QEMU_ARGS:=${ADK_QEMU_ARGS}
 ifeq ($(ADK_TARGET_QEMU_PPC_MACPPC),y)
-QEMU_ARGS+=-M macppc
+QEMU_ARGS+=-M mac99
 QEMU_ARGS+=-device e1000,netdev=adk0 -netdev user,id=adk0
 endif
 ifeq ($(ADK_TARGET_QEMU_PPC_VIRTEX_ML507),y)
