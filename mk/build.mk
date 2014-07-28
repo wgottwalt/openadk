@@ -352,7 +352,8 @@ endif
 		echo "ADK_PACKAGE_LTP=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_UCLIBC_TEST)" ];then \
-		echo "ADK_UCLIBC_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_UCLIBC_NG_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_UCLIBC_NATIVE)" ];then \
 		echo "ADK_PACKAGE_GCC=y" >> $(ADK_TOPDIR)/.defconfig; \
