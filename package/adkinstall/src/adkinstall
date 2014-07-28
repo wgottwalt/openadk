@@ -1,6 +1,6 @@
 #!/bin/mksh
 # This file is part of the OpenADK project.
-# install to ADK to a block/flash device
+# install OpenADK to a block/flash device
 
 if [ $(id -u) -ne 0 ];then
 	print Installation is only possible as root
@@ -26,7 +26,45 @@ EOF
 	exit 1
 }
 
+function pcengines-apu-help {
+	cat >&2 <<EOF
+Syntax: adkinstall -a <archive>
+	-a: archive
+	-f: filesystem (default ext4)
+	-h: help text
+EOF
+	exit 1
+}
+
+
 case $target {
+(pcengines-apu)
+	cfgfssize=32768
+	fs=ext4
+	while getopts "ha:f:" ch; do
+	case $ch in
+		a)
+			archive=$OPTARG
+			;;
+		f)
+			fs=$OPTARG
+			;;
+		h)
+			pcengines-apu-help
+			exit 1
+			;;
+		*)
+			pcengines-apu-help
+			exit 1
+			;;
+	esac
+	done
+	shift $((OPTIND - 1))
+	if [ $OPTIND -eq 1 ];then
+		pcengines-apu-help
+		exit 1
+	fi
+	;;
 (mikrotik-rb532)
 	cfgfssize=32768
 	nand=0
@@ -59,6 +97,10 @@ case $target {
 	esac
 	done
 	shift $((OPTIND - 1))
+	if [ $OPTIND -eq 1 ];then
+		mikrotik-rb532-help
+		exit 1
+	fi
 	;;
 (*)
 	print target $target not supported
@@ -66,16 +108,16 @@ case $target {
 	;;
 }
 
-if [ $cf -eq 0 -a $nand -eq 0 ];then
-        print "You either install on cf (-c) or nand (-n)"
-	mikrotik-rb532-help
-        exit 1
+	
+
+if [ "$target" = "mikrotik-rb532" ];then
+	if [ $cf -eq 0 -a $nand -eq 0 ];then
+		print "You either install on cf (-c) or nand (-n)"
+		mikrotik-rb532-help
+	fi
 fi
 
-tools="parted sfdisk"
-if [ $cf -eq 1 ];then
-	tools="$tools mkfs.$fs"
-fi
+tools="parted sfdisk mkfs.$fs"
 
 f=0
 for tool in $tools;do
@@ -117,7 +159,7 @@ function change_part_type {
 
 function create_filesystem {
 	print creating filesystem $2 on $1 partition $3
-	mkfs.$2 -q ${1}${3}
+	mkfs.$2 -F -q ${1}${3}
 }
 
 function mount_fs {
@@ -130,13 +172,43 @@ function extract_archive {
 	tar -C $2 -xpf $1
 }
 
+function grub_install {
+(
+        print set default=0
+        print set timeout=1
+        print serial --unit=0 --speed=$speed
+        print terminal_output serial
+        print terminal_input serial
+        consargs="console=ttyS0,$speed"
+        print
+        print 'menuentry "GNU/Linux (OpenADK)" {'
+        print "\tlinux /boot/kernel"
+        print '}'
+) >/mnt/boot/grub/grub.cfg
+	grub-install $1 --root-directory /mnt
+}
+
 function fix_perm {
 	print fixing permissions
 	chmod 1777 ${1}/tmp
-	chmod 4755 ${1}/bin/busybox
 }
 
 case $target {
+(pcengines-apu)
+	get_max_size /dev/sda
+	create_label /dev/sda
+	create_partition /dev/sda ext2 16385 $rootsize
+	create_partition /dev/sda ext2 $(($rootsize+1)) $(($maxsize-1))
+	set_boot_flag /dev/sda 1
+	change_part_type /dev/sda 2 88
+	create_filesystem /dev/sda $fs 1
+	mdev -s
+	mount_fs /dev/sda 1 $fs /mnt
+	extract_archive $archive /mnt
+	grub_install /dev/sda
+	fix_perm /mnt
+	umount /mnt
+	;;
 (mikrotik-rb532)
 	if (( cf )); then
 		get_max_size /dev/sda

@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		grub
 PKG_VERSION:=		2.00
-PKG_RELEASE:=		5
+PKG_RELEASE:=		6
 PKG_MD5SUM:=		a1043102fbc7bcedbf53e7ee3d17ab91
 PKG_DESCR:=		multiboot boot loader
 PKG_SECTION:=		base/boot
@@ -59,12 +59,22 @@ grub-install:
 		$(IDIR_GRUB)/boot/grub/core.img
 
 grub-tools-install:
-	${INSTALL_DIR} $(IDIR_GRUB_TOOLS)/usr/{sbin,bin}
+	${INSTALL_DIR} $(IDIR_GRUB_TOOLS)/usr/{sbin,bin,share,lib}
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/grub-install \
+		$(IDIR_GRUB_TOOLS)/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/grub-probe \
 		$(IDIR_GRUB_TOOLS)/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/grub-bios-setup \
 		$(IDIR_GRUB_TOOLS)/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/grub-editenv \
+		$(IDIR_GRUB_TOOLS)/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/grub-mkrelpath \
+		$(IDIR_GRUB_TOOLS)/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/grub-mkimage \
 		$(IDIR_GRUB_TOOLS)/usr/bin
+	${CP} ${WRKINST}/usr/lib/grub \
+		$(IDIR_GRUB_TOOLS)/usr/lib
+	${CP} ${WRKINST}/usr/share/grub \
+		$(IDIR_GRUB_TOOLS)/usr/share
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
