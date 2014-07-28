@@ -6,6 +6,8 @@ ifeq (${ADK_BINSH_ASH},y)
 BINSH:=ash
 else ifeq (${ADK_BINSH_BASH},y)
 BINSH:=bash
+else ifeq (${ADK_BINSH_HUSH},y)
+BINSH:=hush
 else ifeq (${ADK_BINSH_MKSH},y)
 BINSH:=mksh
 else ifeq (${ADK_BINSH_ZSH},y)
@@ -19,6 +21,8 @@ ifeq (${ADK_ROOTSH_ASH},y)
 ROOTSH:=/bin/ash
 else ifeq (${ADK_ROOTSH_BASH},y)
 ROOTSH:=/bin/bash
+else ifeq (${ADK_ROOTSH_HUSH},y)
+ROOTSH:=/bin/hush
 else ifeq (${ADK_ROOTSH_MKSH},y)
 ROOTSH:=/bin/mksh
 else ifeq (${ADK_ROOTSH_TCSH},y)

@@ -107,6 +107,9 @@ config ADK_CPU_CORTEX_A9
 config ADK_CPU_ARMV8
 	boolean
 
+config ADK_CPU_CF_5208
+	boolean
+
 config ADK_TARGET_CPU_ARCH
 	string
 	default "aarch64" if ADK_LINUX_AARCH64 && ADK_little

@@ -34,12 +34,14 @@ INSTALL_STYLE:=		manual
 
 libgcc-install:
 	$(INSTALL_DIR) ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
+ifeq ($(ADK_TARGET_UCLINUX),)
 ifeq ($(ADK_LINUX_SH),y)
 ifeq ($(ADK_TARGET_LIB_GLIBC),)
 	${CP} ${STAGING_TARGET_DIR}/lib/m4-nofpu/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 endif
 else
 	${CP} ${STAGING_TARGET_DIR}/lib/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
+endif
 endif
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

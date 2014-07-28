@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.22.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		337d1a15ab1cb1d4ed423168b1eb7d7e
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		base/apps
@@ -41,6 +41,9 @@ do-configure:
 		${WRKBUILD}/.config.tmp; \
 		cp ${WRKBUILD}/.config.tmp ${WRKBUILD}/.config; \
 	done
+ifeq ($(ADK_TARGET_UCLINUX),y)
+	echo 'BUSYBOX_NOMMU=y' >> ${WRKBUILD}/.config
+endif
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
 	yes '' | PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} -C ${WRKBUILD} oldconfig $(MAKE_TRACE)
 

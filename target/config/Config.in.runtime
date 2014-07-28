@@ -150,6 +150,7 @@ config ADK_RUNTIME_KBD_LAYOUT
 
 choice
 prompt "initial login shell for the root user"
+default ADK_ROOTSH_HUSH if ADK_TARGET_UCLINUX
 default ADK_ROOTSH_MKSH
 
 config ADK_ROOTSH_MKSH
@@ -158,6 +159,12 @@ config ADK_ROOTSH_MKSH
 	help
 	  Use mksh (a Korn Shell variant) as standard login shell
 	  for the superuser.
+
+config ADK_ROOTSH_HUSH
+	select ADK_PACKAGE_HUSH if !ADK_TOOLCHAIN_ONLY
+	bool "hush (Shell compatible with non-MMU systems)"
+	help
+	  hush shell from busybox.
 
 config ADK_ROOTSH_ASH
 	select BUSYBOX_ASH
@@ -190,6 +197,7 @@ endchoice
 
 choice
 prompt "system /bin/sh (POSIX script shell)"
+default ADK_BINSH_HUSH if ADK_TARGET_UCLINUX
 default ADK_BINSH_MKSH
 
 config ADK_BINSH_MKSH
@@ -198,6 +206,12 @@ config ADK_BINSH_MKSH
 	help
 	  Use mksh (a Korn Shell variant) as system shell, which is
 	  both small and powerful, so quite suited for this task.
+
+config ADK_BINSH_HUSH
+	select ADK_PACKAGE_HUSH if !ADK_TOOLCHAIN_ONLY
+	bool "hush (busybox)"
+	help
+	  hush shell.
 
 config ADK_BINSH_ASH
 	select BUSYBOX_ASH

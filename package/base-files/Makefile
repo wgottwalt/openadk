@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -39,6 +39,9 @@ endif
 	echo /bin/mksh >>${IDIR_BASE_FILES}/etc/shells
 ifneq (${ADK_PACKAGE_ASH},)
 	echo /bin/ash >>${IDIR_BASE_FILES}/etc/shells
+endif
+ifneq (${ADK_PACKAGE_HUSH},)
+	echo /bin/hush >>${IDIR_BASE_FILES}/etc/shells
 endif
 ifneq (${ADK_PACKAGE_BASH},)
 	echo /bin/bash >>${IDIR_BASE_FILES}/etc/shells

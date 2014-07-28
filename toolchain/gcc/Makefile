@@ -55,7 +55,7 @@ else
 GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++,libgcc'
 endif
 
-ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64)$(ADK_LINUX_X86),)
+ifeq ($(ADK_LINUX_M68K)$(ADK_LINUX_SH)$(ADK_LINUX_X86_64)$(ADK_LINUX_X86),)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 
@@ -136,6 +136,10 @@ ifeq ($(ADK_CPU_SPARC_V9),y)
 GCC_CONFOPTS+=		--with-cpu=ultrasparc
 endif
 
+ifeq ($(ADK_CPU_CF_5208),y)
+GCC_CONFOPTS+=		--enable-multilib --with-arch=cf --with-cpu=5208
+endif
+
 ifneq ($(ADK_TARGET_MIPS_ABI),)
 GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_MIPS_ABI}
 endif
@@ -144,7 +148,11 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 GCC_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
 
+ifeq ($(ADK_TARGET_UCLINUX),y)
+LANGUAGES:=c
+else
 LANGUAGES:=c,c++
+endif
 
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 
@@ -177,7 +185,6 @@ endif
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=c \
-			--disable-multilib \
 			--disable-libssp \
 			--disable-shared \
 			--without-headers
