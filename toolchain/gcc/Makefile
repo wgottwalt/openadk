@@ -99,6 +99,9 @@ endif
 
 ifeq ($(ADK_LINUX_PPC),y)
 GCC_CONFOPTS+=		--with-long-double-64 --enable-secureplt
+ifneq ($(ADK_TARGET_CPU_WITH_FPU),y)
+GCC_CONFOPTS+=		--with-float=soft
+endif
 endif
 
 ifeq ($(ADK_TARGET_ARCH),arm)
