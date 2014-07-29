@@ -348,21 +348,26 @@ endif
 	@if [ ! -z "$(ADK_NO_CHECKSUM)" ];then \
 		echo "ADK_DISABLE_CHECKSUM=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(ADK_LTP)" ];then \
-		echo "ADK_PACKAGE_LTP=y" >> $(ADK_TOPDIR)/.defconfig; \
-		echo "ADK_KERNEL_IPV6=y" >> $(ADK_TOPDIR)/.defconfig; \
+	@if [ ! -z "$(ADK_TEST_BASE)" ];then \
+		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_FILE=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_BINUTILS=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(ADK_UCLIBC_TEST)" ];then \
+	@if [ ! -z "$(ADK_TEST_LTP)" ];then \
+		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_LTP=y" >> $(ADK_TOPDIR)/.defconfig; \
+	fi
+	@if [ ! -z "$(ADK_TEST_UCLIBC_TESTSUITE)" ];then \
+		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_UCLIBC_NG_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
-		echo "ADK_KERNEL_IPV6=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(ADK_UCLIBC_NATIVE)" ];then \
+	@if [ ! -z "$(ADK_TEST_UCLIBC_NATIVE)" ];then \
+		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_GCC=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_BINUTILS=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_UCLIBC_NG_DEV=y" >> $(ADK_TOPDIR)/.defconfig; \
-		echo "ADK_KERNEL_IPV6=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \

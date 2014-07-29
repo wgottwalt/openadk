@@ -1,2 +1,2 @@
 #!/bin/sh
-socat exec:/usr/bin/qmp tcp:10.0.2.2:4444
+/usr/bin/qmp |nc 10.0.2.2 4444
