@@ -36,6 +36,11 @@ ifeq ($(ADK_TARGET_SYSTEM_ARANYM_M68K),y)
 	@echo 'Ungrab mouse with middle mouse click'
 endif
 endif
+ifeq ($(ADK_TARGET_FS),initramfsarchive)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
+endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
@@ -56,6 +61,9 @@ imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
+endif
+ifeq ($(ADK_TARGET_FS),initramfsarchive)
+imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 imageinstall: createinitramfs targethelp
