@@ -190,6 +190,7 @@ config ADK_TARGET_ROOTFS_ISO
 config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
 	boolean "Archive usable for initramfs creation"
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	select ADK_KERNEL_BLK_DEV_INITRD
 	help
 	  Use this option if your planning to create a initramfs,
 	  useful for adk-test-framework.
