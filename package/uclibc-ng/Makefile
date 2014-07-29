@@ -84,7 +84,6 @@ uclibc-ng-test-install:
 		${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
 	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)$(BETA)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}$(BETA)/{Rules.mak,.config} \
 		${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
-	find ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng -name \*.c -delete 
-	find ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng -name \*.o -delete 
+	@find ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng -name \*.o -exec rm {} \;
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
