@@ -228,6 +228,13 @@ if ! which pkgconf >/dev/null 2>&1; then
 	host_build_pkgconf=1
 fi
 
+host_build_tar=0
+if ! which tar >/dev/null 2>&1; then
+	if ! tar --version 2>/dev/null|grep GNU >/dev/null;then
+		host_build_tar=1
+	fi
+fi
+
 host_build_findutils=0
 if ! which gxargs >/dev/null 2>&1; then
 	if which xargs >/dev/null 2>&1; then
@@ -316,6 +323,7 @@ if [ $host_build_patch -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_PATCH
 if [ $host_build_pkgconf -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_PKGCONF" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_findutils -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FINDUTILS" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_sed -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_SED" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_tar -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_TAR" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_xz -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_XZ" >> $topdir/target/config/Config.in.prereq ;fi
 # optional
 if [ $host_build_ccache -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_CCACHE if ADK_HOST_NEED_CCACHE" >> $topdir/target/config/Config.in.prereq ;fi

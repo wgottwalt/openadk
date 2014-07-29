@@ -69,6 +69,10 @@ config ADK_HOST_BUILD_SED
 	boolean
 	default n
 
+config ADK_HOST_BUILD_TAR
+	boolean
+	default n
+
 config ADK_HOST_BUILD_XZ
 	boolean
 	default n
