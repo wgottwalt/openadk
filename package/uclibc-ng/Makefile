@@ -11,7 +11,7 @@ PKG_DESCR:=		embedded c library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
 PKG_VERSION:=		1.0.0
-BETA:=			beta4
+BETA:=			beta5
 
 PKG_SUBPKGS:=		UCLIBC_NG UCLIBC_NG_DEV UCLIBC_NG_TEST
 PKGSD_UCLIBC_NG_DEV:=	development files for uclibc-ng
