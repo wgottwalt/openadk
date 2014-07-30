@@ -79,6 +79,8 @@ uclibc-ng-dev-install:
 	@find $(IDIR_UCLIBC_NG_DEV) -name ..install.cmd -exec rm {} \;
 
 uclibc-ng-test-install:
+	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/etc
+	echo '08:00:20:00:61:CA  pal' > ${IDIR_UCLIBC_NG_TEST}/etc/ethers
 	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
 	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)$(BETA)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}$(BETA)/test \
 		${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
