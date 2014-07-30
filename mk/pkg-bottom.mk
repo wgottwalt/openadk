@@ -199,14 +199,11 @@ endif
 ifeq (,$(filter nostaging,${PKG_OPTS}))
 	@-cd ${WRKINST}; \
 	    find usr ! -type d 2>/dev/null | \
-	    grep -E -v -e '^usr/share' -e '^usr/src' -e '^usr/doc' -e '^usr/local' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config*' -e '^/usr/lib/libpthread_nonshared.a' | \
+	    grep -E -v -e '^usr/share' -e '^usr/src' -e '^usr/doc' -e '^usr/local' -e '^usr/man' -e '^usr/info' \
+			-e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config*' -e '^usr/lib/.*\.la$$' \
+			-e '^/usr/lib/libpthread_nonshared.a' | \
 	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
 	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu '${STAGING_TARGET_DIR}'
-	@cd '${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$' \
-	    '${STAGING_PKG_DIR}/${PKG_NAME}' | while read fn; do \
-		chmod u+w $$fn; \
-		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_TARGET_DIR)/usr/lib,g" $$fn; \
-	done
 endif
 ifeq (,$(filter noscripts,${PKG_OPTS}))
 	@cd '${STAGING_TARGET_DIR}'; grep 'usr/s*bin/' \

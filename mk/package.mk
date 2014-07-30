@@ -237,14 +237,10 @@ ifeq (,$(filter nostaging,$(7)))
 		echo "$$$$x" | sed 's/^/- /' >&2; \
 	    fi; \
 	    find usr ! -type d 2>/dev/null | \
-	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/doc' -e '^usr/src' -e '^usr/man' -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config' | \
+	    grep -E -v -e '^usr/lib/pkgconfig' -e '^usr/share' -e '^usr/doc' -e '^usr/src' -e '^usr/man' \
+		       -e '^usr/info' -e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config' -e '^usr/lib/.*\.la$$$$' | \
 	    tee '$${STAGING_PKG_DIR}/$(1)' | \
 	    $(STAGING_HOST_DIR)/usr/bin/cpio -padlmu '$${STAGING_TARGET_DIR}'
-	@cd '$${STAGING_TARGET_DIR}'; grep 'usr/lib/.*\.la$$$$' \
-	    '$${STAGING_PKG_DIR}/$(1)' | while read fn; do \
-		chmod u+w $$$$fn; \
-		$(SED) "s,\(^libdir='\| \|-L\|^dependency_libs='\)/usr/lib,\1$(STAGING_TARGET_DIR)/usr/lib,g" $$$$fn; \
-	done
 endif
 ifeq (,$(filter noscripts,$(7)))
 	@cd '$${STAGING_TARGET_DIR}'; grep 'usr/s*bin/' \
