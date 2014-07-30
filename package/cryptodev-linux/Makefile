@@ -16,6 +16,7 @@ PKG_SITES:=		http://download.gna.org/cryptodev-linux/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
+include ${ADK_TOPDIR}/mk/kernel-ver.mk
 include ${ADK_TOPDIR}/mk/kernel-vars.mk
 
 $(eval $(call PKG_template,CRYPTODEV_LINUX,cryptodev-linux,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
