@@ -9,8 +9,11 @@ include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/sparc/boot/zImage
 
-QEMU_ARGS:=-M SS-5
+QEMU_ARGS:=-M SS-10
 QEMU_ARGS+=${ADK_QEMU_ARGS}
+ifeq ($(ADK_TARGET_FS),archive)
+QEMU_ARGS+=-append "root=/dev/sda1"
+endif
 
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)
