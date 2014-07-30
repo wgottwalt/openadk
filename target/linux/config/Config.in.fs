@@ -281,7 +281,7 @@ menu "Filesystem features"
 config ADK_KERNEL_INOTIFY
 	prompt "Inotify file change notification support"
 	boolean
-	default n
+	default y
 	help
 	  Say Y here to enable inotify support.  Inotify is a file change
 	  notification system and a replacement for dnotify.  Inotify fixes
@@ -293,8 +293,7 @@ config ADK_KERNEL_INOTIFY_USER
 	prompt "Inotify support for userspace"
 	boolean
 	depends on ADK_KERNEL_INOTIFY
-	default m if ADK_PACKAGE_SAMBA
-	default n
+	default y
 	help
 	  Say Y here to enable inotify support for userspace, including the
 	  associated system calls.  Inotify allows monitoring of both files and
