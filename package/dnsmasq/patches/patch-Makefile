@@ -1,6 +1,6 @@
---- dnsmasq-2.61.orig/Makefile	2012-04-29 17:01:28.000000000 +0200
-+++ dnsmasq-2.61/Makefile	2012-06-02 20:50:33.000000000 +0200
-@@ -18,13 +18,13 @@
+--- dnsmasq-2.71.orig/Makefile	2014-05-16 21:21:55.000000000 +0200
++++ dnsmasq-2.71/Makefile	2014-06-29 10:49:15.437148455 +0200
+@@ -18,14 +18,14 @@
  
  # Variables you may well want to override.
  
@@ -12,7 +12,9 @@
  BUILDDIR      = $(SRC)
  DESTDIR       = 
 -CFLAGS        = -Wall -W -O2
+-LDFLAGS       = 
 +CFLAGS        ?= -Wall
- LDFLAGS       = 
++LDFLAGS       ?= 
  COPTS         = 
  RPM_OPT_FLAGS = 
+ LIBS          = 
