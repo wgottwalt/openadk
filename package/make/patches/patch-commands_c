@@ -1,0 +1,11 @@
+--- make-4.0.orig/commands.c	2013-10-06 01:12:24.000000000 +0200
++++ make-4.0/commands.c	2014-07-30 15:31:01.450155946 +0200
+@@ -14,8 +14,6 @@ A PARTICULAR PURPOSE.  See the GNU Gener
+ You should have received a copy of the GNU General Public License along with
+ this program.  If not, see <http://www.gnu.org/licenses/>.  */
+ 
+-#include <dlfcn.h>
+-
+ #include "makeint.h"
+ #include "filedef.h"
+ #include "dep.h"
