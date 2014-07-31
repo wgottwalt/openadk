@@ -357,12 +357,17 @@ endif
 		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_LTP=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(ADK_TEST_UCLIBC_TESTSUITE)" ];then \
+	@if [ ! -z "$(ADK_TEST_UCLIBC_NG_TESTSUITE)" ];then \
 		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_UCLIBC_NG_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(ADK_TEST_UCLIBC_NATIVE)" ];then \
+	@if [ ! -z "$(ADK_TEST_UCLIBC_TESTSUITE)" ];then \
+		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_UCLIBC_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
+	fi
+	@if [ ! -z "$(ADK_TEST_UCLIBC_NG_NATIVE)" ];then \
 		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_GCC=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_BINUTILS=y" >> $(ADK_TOPDIR)/.defconfig; \

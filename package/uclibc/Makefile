@@ -11,9 +11,11 @@ PKG_DESCR:=		embedded c library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
 
-PKG_SUBPKGS:=		UCLIBC UCLIBC_DEV
+PKG_SUBPKGS:=		UCLIBC UCLIBC_DEV UCLIBC_TEST
 PKGSD_UCLIBC_DEV:=	development files for uclibc
 PKGSC_UCLIBC_DEV:=	devel
+PKGSD_UCLIBC_TEST:=	test suite for uclibc
+PKGSS_UCLIBC_TEST:=	make
 
 NO_DISTFILES:=		1
 
@@ -21,6 +23,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,UCLIBC,uclibc,$(GIT_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,UCLIBC_DEV,uclibc-dev,$(GIT_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_UCLIBC_DEV},${PKGSC_UCLIBC_DEV},${PKG_OPTS}))
+$(eval $(call PKG_template,UCLIBC_TEST,uclibc-test,$(GIT_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_UCLIBC_TEST},${PKGSC_UCLIBC_TEST},${PKG_OPTS}))
 
 CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
@@ -67,5 +70,15 @@ uclibc-dev-install:
 		install_headers
 	@find $(IDIR_UCLIBC_DEV) -name .install -exec rm {} \;
 	@find $(IDIR_UCLIBC_DEV) -name ..install.cmd -exec rm {} \;
+
+uclibc-test-install:
+	${INSTALL_DIR} ${IDIR_UCLIBC_TEST}/etc
+	echo '00:11:22:33:44:55 teeth' > ${IDIR_UCLIBC_TEST}/etc/ethers
+	${INSTALL_DIR} ${IDIR_UCLIBC_TEST}/opt/uclibc
+	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(GIT_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${GIT_VERSION}/test \
+		${IDIR_UCLIBC_TEST}/opt/uclibc
+	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(GIT_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${GIT_VERSION}/{Rules.mak,.config} \
+		${IDIR_UCLIBC_TEST}/opt/uclibc
+	@find ${IDIR_UCLIBC_TEST}/opt/uclibc -name \*.o -exec rm {} \;
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
