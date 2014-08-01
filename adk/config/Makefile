@@ -6,11 +6,11 @@ include ${ADK_TOPDIR}/rules.mk
 endif
 
 CP=cp -fpR
-HOST_CFLAGS:=-DKBUILD_NO_NLS -O0 -g0 -w
+HOST_CFLAGS:=-DKBUILD_NO_NLS -O0 -g0 -w -static-libgcc
 
 all: ncurses conf mconf
 
-LIBS=		-lncurses
+LIBS=		-lncurses -ltinfo
 ifeq (/usr/include/ncurses/ncurses.h, $(wildcard /usr/include/ncurses/ncurses.h))
 HOST_CFLAGS+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
 else

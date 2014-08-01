@@ -82,7 +82,7 @@ include ${ADK_TOPDIR}/prereq.mk
 all: run-test
 
 test: test.c
-	${HOST_CC} -o $@ $^ ${LDADD}
+	${HOST_CC} -static-libgcc -o $@ $^ ${LDADD}
 
 run-test: test
 	./test

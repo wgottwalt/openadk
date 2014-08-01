@@ -185,8 +185,8 @@ endif
 
 # host compiler and linker flags
 HOST_CPPFLAGS:=		-I$(STAGING_HOST_DIR)/usr/include
-HOST_CFLAGS:=		-O0 -g0
-HOST_CXXFLAGS:=		-O0 -g0
+HOST_CFLAGS:=		-O0 -g0 -static-libgcc
+HOST_CXXFLAGS:=		-O0 -g0 -static-libgcc
 HOST_LDFLAGS:=		-L$(STAGING_HOST_DIR)/usr/lib -Wl,-rpath -Wl,${STAGING_HOST_DIR}/usr/lib
 
 PATCH=			PATH=${HOST_PATH} ${BASH} $(SCRIPT_DIR)/patch.sh
