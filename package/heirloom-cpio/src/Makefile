@@ -25,4 +25,4 @@ SRCS:=		ib_open.c \
 		cpio.c
 
 cpio: ${SRCS}
-	$(CC) $(CFLAGS_FOR_BUILD) -D_GNU_SOURCE -I. -o $@ $^
+	$(CC) $(CFLAGS) -D_GNU_SOURCE -I. -o $@ $^

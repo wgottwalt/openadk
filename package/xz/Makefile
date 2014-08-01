@@ -30,6 +30,8 @@ $(eval $(call HOST_template,XZ,xz,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,XZ,xz,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBXZ,libxz,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBXZ},${PKGSD_LIBXZ},${PKGSC_LIBXZ},${PKG_OPTS}))
 
+HOST_CONFIGURE_ARGS+=	--disable-shared
+
 xz-install:
 	${INSTALL_DIR} ${IDIR_XZ}/usr/bin
 	${CP} ${WRKINST}/usr/bin/* ${IDIR_XZ}/usr/bin

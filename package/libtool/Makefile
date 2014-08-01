@@ -32,6 +32,7 @@ endif
 
 CONFIGURE_ARGS+=	--enable-ltdl-install
 XAKE_FLAGS+=		HELP2MAN=/bin/echo
+HOST_CONFIGURE_ARGS+=	--enable-ltdl-install --disable-shared
 HOST_XAKE_FLAGS+=	HELP2MAN=/bin/echo
 
 libtool-install:
