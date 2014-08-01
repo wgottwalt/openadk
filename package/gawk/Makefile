@@ -19,6 +19,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,GAWK,gawk,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,GAWK,gawk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+HOST_CONFIGURE_ARGS+=	--disable-shared
 CONFIGURE_ARGS+=	--disable-libsigsegv
 
 gawk-install:
