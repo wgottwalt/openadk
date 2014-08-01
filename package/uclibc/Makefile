@@ -21,9 +21,9 @@ NO_DISTFILES:=		1
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,UCLIBC,uclibc,$(GIT_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,UCLIBC_DEV,uclibc-dev,$(GIT_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_UCLIBC_DEV},${PKGSC_UCLIBC_DEV},${PKG_OPTS}))
-$(eval $(call PKG_template,UCLIBC_TEST,uclibc-test,$(GIT_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_UCLIBC_TEST},${PKGSC_UCLIBC_TEST},${PKG_OPTS}))
+$(eval $(call PKG_template,UCLIBC,uclibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,UCLIBC_DEV,uclibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_UCLIBC_DEV},${PKGSC_UCLIBC_DEV},${PKG_OPTS}))
+$(eval $(call PKG_template,UCLIBC_TEST,uclibc-test,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_UCLIBC_TEST},${PKGSC_UCLIBC_TEST},${PKG_OPTS}))
 
 CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
@@ -36,14 +36,14 @@ do-install:
 	    cut -f 2 > $(IDIR_UCLIBC)/etc/TZ
 ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
-	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(GIT_VERSION).so \
+	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(PKG_VERSION).so \
 		$(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
-	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-$(GIT_VERSION).so \
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-$(PKG_VERSION).so \
 		$(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH)
 	-for file in libcrypt libdl libm libresolv libutil; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH); \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(GIT_VERSION).so \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so \
 			$(IDIR_UCLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
 endif
@@ -54,7 +54,7 @@ uclibc-dev-install:
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_UCLIBC_DEV}/usr/lib
 	for file in libcrypt libdl libm libresolv libutil; do \
-		cd $(IDIR_UCLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(GIT_VERSION).so $$file.so; \
+		cd $(IDIR_UCLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	${KERNEL_MAKE_ENV} \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
@@ -75,9 +75,9 @@ uclibc-test-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_TEST}/etc
 	echo '00:11:22:33:44:55 teeth' > ${IDIR_UCLIBC_TEST}/etc/ethers
 	${INSTALL_DIR} ${IDIR_UCLIBC_TEST}/opt/uclibc
-	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(GIT_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${GIT_VERSION}/test \
+	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}/test \
 		${IDIR_UCLIBC_TEST}/opt/uclibc
-	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(GIT_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${GIT_VERSION}/{Rules.mak,.config} \
+	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}/{Rules.mak,.config} \
 		${IDIR_UCLIBC_TEST}/opt/uclibc
 	@find ${IDIR_UCLIBC_TEST}/opt/uclibc -name \*.o -exec rm {} \;
 

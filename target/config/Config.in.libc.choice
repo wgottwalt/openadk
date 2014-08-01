@@ -59,3 +59,53 @@ config ADK_TARGET_LIB_UCLIBC
  	  http://uclibc.org
 
 endchoice
+
+choice
+prompt "Target C library version"
+depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
+
+config ADK_TARGET_LIB_UCLIBC_NG_1_0_0
+	prompt "1.0.0beta5"
+	boolean
+	depends on ADK_TARGET_LIB_UCLIBC_NG
+
+config ADK_TARGET_LIB_UCLIBC_NG_GIT
+	prompt "git"
+	boolean
+	select ADK_DISABLE_CHECKSUM
+	depends on ADK_TARGET_LIB_UCLIBC_NG
+
+config ADK_TARGET_LIB_GLIBC_2_19
+	prompt "2.19"
+	boolean
+	depends on ADK_TARGET_LIB_GLIBC
+
+config ADK_TARGET_LIB_GLIBC_GIT
+	prompt "git"
+	boolean
+	select ADK_DISABLE_CHECKSUM
+	depends on ADK_TARGET_LIB_GLIBC
+
+config ADK_TARGET_LIB_UCLIBC_0_9_33_2
+	prompt "0.9.33.2"
+	boolean
+	depends on ADK_TARGET_LIB_UCLIBC
+
+config ADK_TARGET_LIB_UCLIBC_GIT
+	prompt "git"
+	boolean
+	select ADK_DISABLE_CHECKSUM
+	depends on ADK_TARGET_LIB_UCLIBC
+
+config ADK_TARGET_LIB_MUSL_1_0_3
+	prompt "1.0.3"
+	boolean
+	depends on ADK_TARGET_LIB_MUSL
+
+config ADK_TARGET_LIB_MUSL_GIT
+	prompt "git"
+	boolean
+	select ADK_DISABLE_CHECKSUM
+	depends on ADK_TARGET_LIB_MUSL
+
+endchoice

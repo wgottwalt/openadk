@@ -59,14 +59,24 @@ $(1):
 	filename=$$$${fullname##*/}; \
 	mkdir -p "$$$${fullname%%/$$$$filename}"; \
 	cd "$$$${fullname%%/$$$$filename}"; \
-	for site in $${PKG_SITES} $${MASTER_SITE_BACKUP}; do \
-		: echo "$${FETCH_CMD} $$$$site$$$$filename"; \
-		rm -f "$$$$filename"; \
-		if $${FETCH_CMD} $$$$site$$$$filename; then \
-			: check the size here; \
-			[[ ! -e $$$$filename ]] || exit 0; \
-		fi; \
-	done; \
+	if [ -z $${PKG_REPO} ];then \
+		for site in $${PKG_SITES} $${MASTER_SITE_BACKUP}; do \
+			: echo "$${FETCH_CMD} $$$$site$$$$filename"; \
+			rm -f "$$$$filename"; \
+			if $${FETCH_CMD} $$$$site$$$$filename; then \
+				: check the size here; \
+				[[ ! -e $$$$filename ]] || exit 0; \
+			fi; \
+		done; \
+	else \
+		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
+		git clone $${PKG_REPO} $${PKG_NAME}-$${PKG_VERSION}; \
+		rm -rf $${PKG_NAME}-$${PKG_VERSION}/.git; \
+		tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
+		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
+		: check the size here; \
+		[[ ! -e $$$$filename ]] || exit 0; \
+	fi; \
 	exit 1
 endef
 
