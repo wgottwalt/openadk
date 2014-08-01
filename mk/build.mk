@@ -367,12 +367,43 @@ endif
 		echo "ADK_PACKAGE_UCLIBC_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_TEST_MUSL_TESTSUITE)" ];then \
+		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_LIBC_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
+	fi
+	@if [ ! -z "$(ADK_TEST_GLIBC_TESTSUITE)" ];then \
+		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_LIBC_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_TEST_UCLIBC_NG_NATIVE)" ];then \
 		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_GCC=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_BINUTILS=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_UCLIBC_NG_DEV=y" >> $(ADK_TOPDIR)/.defconfig; \
+	fi
+	@if [ ! -z "$(ADK_TEST_UCLIBC_NATIVE)" ];then \
+		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_GCC=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_BINUTILS=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_UCLIBC_DEV=y" >> $(ADK_TOPDIR)/.defconfig; \
+	fi
+	@if [ ! -z "$(ADK_TEST_MUSL_NATIVE)" ];then \
+		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_GCC=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_BINUTILS=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_MUSL_DEV=y" >> $(ADK_TOPDIR)/.defconfig; \
+	fi
+	@if [ ! -z "$(ADK_TEST_GLIBC_NATIVE)" ];then \
+		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_GCC=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_BINUTILS=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_GLIBC_DEV=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \
