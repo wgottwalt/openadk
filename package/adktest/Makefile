@@ -7,6 +7,7 @@ PKG_NAME:=		adktest
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		7
 PKG_DESCR:=		helper tools and scripts for adk-test-framework
+PKG_DEPENDS:=		rdate
 PKG_SECTION:=		base/misc
 PKG_URL:=		http://openadk.org/
 
