@@ -153,14 +153,18 @@ TARGET_CFLAGS+=		-mlongcalls -mtext-section-literals
 TARGET_CXXFLAGS+=	-mlongcalls -mtext-section-literals
 endif
 
+# add configured cflags for optimization
+TARGET_CFLAGS+=		$(ADK_TARGET_CFLAGS_OPT)
+TARGET_CXXFLAGS+=	$(ADK_TARGET_CFLAGS_OPT)
+# always add debug information
+TARGET_CFLAGS+=		-g3
+TARGET_CXXFLAGS+=	-g3
+
 ifneq ($(ADK_DEBUG),)
-ifeq ($(ADK_DEBUG_OPTS),y)
-TARGET_CFLAGS+=		-g3 -fno-omit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
-TARGET_CXXFLAGS+=	-g3 -fno-omit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
-else
-TARGET_CFLAGS+=		-O0 -g3 -fno-omit-frame-pointer
-TARGET_CXXFLAGS+=	-O0 -g3 -fno-omit-frame-pointer
-endif
+TARGET_CFLAGS+=		-fno-omit-frame-pointer
+TARGET_CXXFLAGS+=	-fno-omit-frame-pointer
+TARGET_CFLAGS+=		-funwind-tables -fasynchronous-unwind-tables
+TARGET_CXXFLAGS+=	-funwind-tables -fasynchronous-unwind-tables
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
 TARGET_CFLAGS+=		-fomit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
@@ -168,9 +172,6 @@ TARGET_CXXFLAGS+=	-fomit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
 # stop generating eh_frame stuff
 TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 TARGET_CXXFLAGS+=	-fno-unwind-tables -fno-asynchronous-unwind-tables
-# always add debug information
-TARGET_CFLAGS+=		-g3
-TARGET_CXXFLAGS+=	-g3
 endif
 
 ifeq ($(ADK_LINUX_ARM),y)

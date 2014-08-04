@@ -90,6 +90,7 @@ build-all-pkgs: ${_IPKGS_COOKIE}
 #     noremove -> do not remove files from $(STAGING_TARGET_DIR) while
 #                 cleaning (needed for toolchain packages like glibc)
 #     nostaging -> do not install files to $(STAGING_TARGET_DIR)
+#     nostrip -> do not strip files
 #     dev -> create a development subpackage with headers and pkg-config files
 #     devonly -> create a development package only
 # should be package format independent and modular in the future
@@ -192,11 +193,13 @@ ifneq (,$(filter dev,$(7)))
 endif
 
 $$(IPKG_$(1)): $$(IDIR_$(1))/CONTROL/control $${_FAKE_COOKIE}
+ifeq (,$(filter nostrip,$(7)))
 ifeq ($(ADK_DEBUG),)
 	@$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
 endif
 ifeq ($(ADK_DEBUG_STRIP),y)
 	@$${RSTRIP} $${IDIR_$(1)} $(MAKE_TRACE)
+endif
 endif
 ifeq (${ADK_LEAVE_ETC_ALONE}$(filter force_etc,$(7)),y)
 	-rm -rf $${IDIR_$(1)}/etc

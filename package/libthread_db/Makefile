@@ -19,6 +19,7 @@ endif
 PKG_NAME:=		libthread-db
 PKG_DESCR:=		posix threads library for gdb/gdbserver
 PKG_SECTION:=		libs/misc
+PKG_OPTS:=		nostrip
 
 PKG_CFLINE_LIBTHREAD_DB:=depends on ADK_PACKAGE_GDB || ADK_PACKAGE_GDBSERVER
 
@@ -26,7 +27,7 @@ NO_DISTFILES:=		1
 
 include ${ADK_TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,LIBTHREAD_DB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBTHREAD_DB,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

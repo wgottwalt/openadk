@@ -105,25 +105,23 @@ config ADK_TARGET_USE_GNU_HASHSTYLE
 	  dependencies. See http://www.akkadia.org/drepper/dsohowto.pdf
 
 config ADK_DEBUG
-	bool "Compile applications with debug support by default"
+	bool "Compile applications with debug support and do not strip"
 	default n
 	help
-	  All packages and libc will be compiled and packaged with debug information.
+	  All software for the target will be compiled with:
+	  -fno-omit-frame-pointer
+	  -funwind-tables
+	  -fasynchronous-unwind-tables  
+	  Software will not be stripped.
 	  Mostly useful for NFS root or big USB/CF or hard disk setups.
-
-config ADK_DEBUG_OPTS
-	bool "use optimization cflags"
-	depends on ADK_DEBUG
-	default n
-	help
-	  All packages and C library will be compiled with debug information and optimization flags on.
 
 config ADK_DEBUG_STRIP
 	bool "strip target binaries/libraries for gdbserver usage"
 	depends on ADK_DEBUG
 	default n
 	help
-	  All packages and C library will be compiled with debug information, but stripped for the target.
+	  All packages and C library will be compiled with debug information, 
+	  but stripped for the target.
 
 config ADK_TARGET_USE_STATIC_LIBS
 	bool "Link applications statically by default"
