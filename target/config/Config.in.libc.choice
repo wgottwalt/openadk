@@ -97,8 +97,8 @@ config ADK_TARGET_LIB_UCLIBC_GIT
 	select ADK_DISABLE_CHECKSUM
 	depends on ADK_TARGET_LIB_UCLIBC
 
-config ADK_TARGET_LIB_MUSL_1_0_3
-	prompt "1.0.3"
+config ADK_TARGET_LIB_MUSL_1_0_4
+	prompt "1.0.4"
 	boolean
 	depends on ADK_TARGET_LIB_MUSL
 

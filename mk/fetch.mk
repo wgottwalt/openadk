@@ -72,7 +72,11 @@ $(1):
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
 		git clone $${PKG_REPO} $${PKG_NAME}-$${PKG_VERSION}; \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}/.git; \
-		tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
+		if [ "$${PKG_NAME}" = "musl" ];then \
+			tar czf $${PKG_NAME}-$${PKG_VERSION}.tar.gz $${PKG_NAME}-$${PKG_VERSION}; \
+		else \
+			tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
+		fi; \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
 		: check the size here; \
 		[[ ! -e $$$$filename ]] || exit 0; \
