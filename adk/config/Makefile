@@ -10,7 +10,11 @@ HOST_CFLAGS:=-DKBUILD_NO_NLS -O0 -g0 -w -static-libgcc
 
 all: ncurses conf mconf
 
-LIBS=		-lncurses -ltinfo
+LIBS=		-lncurses
+ifeq (/usr/lib/libtinfo.so, $(wildcard /usr/lib/libtinfo.so))
+LIBS+=		-ltinfo
+endif
+
 ifeq (/usr/include/ncurses/ncurses.h, $(wildcard /usr/include/ncurses/ncurses.h))
 HOST_CFLAGS+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
 else
