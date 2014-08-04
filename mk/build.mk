@@ -345,6 +345,20 @@ endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(ADK_TOPDIR)/.defconfig
 endif
+	@if [ ! -z "$(ADK_LIBC_GIT)" ];then \
+		if [ "$(ADK_TARGET_LIBC)" = "glibc" ];then \
+			echo "ADK_TARGET_LIB_GLIBC_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
+		fi; \
+		if [ "$(ADK_TARGET_LIBC)" = "uclibc" ];then \
+			echo "ADK_TARGET_LIB_UCLIBC_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
+		fi; \
+		if [ "$(ADK_TARGET_LIBC)" = "uclibc-ng" ];then \
+			echo "ADK_TARGET_LIB_UCLIBC_NG_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
+		fi; \
+		if [ "$(ADK_TARGET_LIBC)" = "musl" ];then \
+			echo "ADK_TARGET_LIB_MUSL_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
+		fi; \
+	fi
 	@if [ ! -z "$(ADK_NO_CHECKSUM)" ];then \
 		echo "ADK_DISABLE_CHECKSUM=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
