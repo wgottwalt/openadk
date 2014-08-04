@@ -113,12 +113,6 @@ if [[ $X != *@(Native compiler works)* ]]; then
 fi
 rm test 2>/dev/null
 
-if ! which tar >/dev/null 2>&1; then
-	echo You must install tar to continue.
-	echo
-	out=1
-fi
-
 if ! which gzip >/dev/null 2>&1; then
 	echo You must install gzip to continue.
 	echo
@@ -235,10 +229,12 @@ if ! which pkgconf >/dev/null 2>&1; then
 fi
 
 host_build_tar=0
-if ! which tar >/dev/null 2>&1; then
+if which tar >/dev/null 2>&1; then
 	if ! tar --version 2>/dev/null|grep GNU >/dev/null;then
 		host_build_tar=1
 	fi
+else
+	host_build_tar=1
 fi
 
 host_build_findutils=0
