@@ -3,7 +3,7 @@
 
 PKG_NAME:=		glibc
 ifeq ($(ADK_LIBC_VERSION),git)
-PKG_VERSION:=		git
+PKG_VERSION:=		2.19.90
 PKG_REPO:=		git://sourceware.org/git/glibc.git
 else
 PKG_VERSION:=		$(ADK_LIBC_VERSION)
@@ -11,6 +11,7 @@ PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
 endif
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		e26b8cc666b162f999404b03970f14e4
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_TARGET_NAME) \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
