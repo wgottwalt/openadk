@@ -27,6 +27,7 @@ $(eval $(call PKG_template,BASH,bash,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 CONFIGURE_ENV+=		bash_cv_getenv_redef=no \
 			bash_cv_job_control_missing=yes
 CONFIGURE_ARGS+=	--disable-rpath \
+			--without-bash-malloc \
 			--cache-file=/dev/null \
 			--enable-job-control \
 			--enable-history
