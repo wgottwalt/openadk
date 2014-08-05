@@ -5,6 +5,7 @@ shopt -s extglob
 topdir=$(pwd)
 opath=$PATH
 out=0
+clang=0
 
 if [[ $NO_ERROR != @(0|1) ]]; then
 	echo Please do not invoke this script directly!
@@ -60,6 +61,7 @@ OpenBSD)
 	fi
 	;;
 Darwin*)
+	clang=1
 	;;
 *)
 	# unsupported
@@ -77,12 +79,16 @@ else
 	makecmd=$(which gmake 2>/dev/null )
 fi
 
+if [ $clang -ne 1 ];then
+HCFLAGS=-static-libgcc
+fi
+
 cat >Makefile <<'EOF'
 include ${ADK_TOPDIR}/prereq.mk
 all: run-test
 
 test: test.c
-	${HOST_CC} -static-libgcc -o $@ $^ ${LDADD}
+	${HOST_CC} $(HCFLAGS) -o $@ $^ ${LDADD}
 
 run-test: test
 	./test

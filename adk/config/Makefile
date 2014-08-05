@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 endif
 
 CP=cp -fpR
-HOST_CFLAGS:=-DKBUILD_NO_NLS -O0 -g0 -w -static-libgcc
+HOST_CFLAGS+=-DKBUILD_NO_NLS -w
 
 all: ncurses conf mconf
 
