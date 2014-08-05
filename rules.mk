@@ -61,6 +61,9 @@ ADK_WGET_TIMEOUT:=			$(strip $(subst ",, $(ADK_WGET_TIMEOUT)))
 ADK_TARGET_KARCH:=$(ADK_TARGET_ARCH)
 
 # translate toolchain arch to kernel arch
+ifeq ($(ADK_TARGET_ARCH),aarch64)
+ADK_TARGET_KARCH:=arm64
+endif
 ifeq ($(ADK_TARGET_ARCH),ppc)
 ADK_TARGET_KARCH:=powerpc
 endif
