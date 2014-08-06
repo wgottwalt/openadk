@@ -48,7 +48,7 @@ ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 		cd $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) && ln -sf ld-uClibc.so.1 ld-uClibc.so.0
 	test ! -f $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)/ld64-uClibc.so.1 || \
 		cd $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) && ln -sf ld64-uClibc.so.1 ld64-uClibc.so.0
-	-for file in libcrypt libdl libm libresolv libutil libuargp; do \
+	-for file in libcrypt libdl libm libresolv libutil libuargp libubacktrace; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so \
 			$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
@@ -60,7 +60,7 @@ uclibc-ng-dev-install:
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_UCLIBC_NG_DEV}/usr/lib
-	for file in libcrypt libdl libm libresolv libutil libuargp; do \
+	for file in libcrypt libdl libm libresolv libutil libuargp libubacktrace; do \
 		cd $(IDIR_UCLIBC_NG_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	${KERNEL_MAKE_ENV} \
