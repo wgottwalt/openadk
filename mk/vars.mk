@@ -167,8 +167,8 @@ TARGET_CFLAGS+=		-funwind-tables -fasynchronous-unwind-tables
 TARGET_CXXFLAGS+=	-funwind-tables -fasynchronous-unwind-tables
 else
 TARGET_CPPFLAGS+=	-DNDEBUG
-TARGET_CFLAGS+=		-fomit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
-TARGET_CXXFLAGS+=	-fomit-frame-pointer $(ADK_TARGET_CFLAGS_OPT)
+TARGET_CFLAGS+=		-fomit-frame-pointer
+TARGET_CXXFLAGS+=	-fomit-frame-pointer
 # stop generating eh_frame stuff
 TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 TARGET_CXXFLAGS+=	-fno-unwind-tables -fno-asynchronous-unwind-tables
