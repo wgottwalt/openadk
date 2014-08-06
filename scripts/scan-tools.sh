@@ -184,7 +184,11 @@ fi
 
 # always required, but can be provided by host
 host_build_bc=0
-if ! which bc >/dev/null 2>&1; then
+if which bc >/dev/null 2>&1; then
+	if ! echo quit|bc -q 2>/dev/null >/dev/null;then
+		host_build_bc=1
+	fi
+else
 	host_build_bc=1
 fi
 
