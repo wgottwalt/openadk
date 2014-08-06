@@ -29,7 +29,7 @@ $(eval $(call PKG_template,TZDATA,tzdata,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 $(eval $(call PKG_template,DATE,date,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DATE},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-HOST_CFLAGS+=		-DSTD_INSPIRED=1
+HOST_CFLAGS+=		-DSTD_INSPIRED=1 -DHAVE_STDINT_H=1
 TARGET_CFLAGS+=		-DHAVE_INTTYPES_H=1
 XAKE_FLAGS+=		TZDIR="/usr/share/zoneinfo" cc="${TARGET_CC}"
 # the uppercase targets enable building and installation of the date utility
