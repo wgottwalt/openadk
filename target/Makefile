@@ -27,7 +27,7 @@ ADK_PACKAGE_CMDLINE:=root=$(ADK_PACKAGE_CRYPTINIT_ROOT) swap=$(ADK_PACKAGE_CRYPT
 
 ifeq (${ADK_TARGET_KERNEL_CUSTOMISING},y)
 config-prepare: $(ADK_TOPDIR)/.config
-	@sed -n '/^ADK_KERNEL/s//CONFIG/p' ${ADK_TOPDIR}/.config \
+	@PATH=$(HOST_PATH) sed -n '/^ADK_KERNEL/s//CONFIG/p' ${ADK_TOPDIR}/.config \
 	    >${BUILD_DIR}/.kernelconfig.kernel
 	@if [ -f ${ADK_TARGET_ARCH}/kernel/${ADK_TARGET_KERNEL_MINICONFIG} ];then \
 		cat ${ADK_TOPDIR}/target/linux/kernel.config \
@@ -37,37 +37,37 @@ config-prepare: $(ADK_TOPDIR)/.config
 		exit 1; \
 	fi
 ifeq ($(ADK_TARGET_ROOTFS_NFSROOT),)
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ro"#' \
+	@PATH=$(HOST_PATH) sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ro"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${FS_CMDLINE}"#' \
+	@PATH=$(HOST_PATH) sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${FS_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
 ifneq ($(ADK_TARGET_CMDLINE),)
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${ADK_TARGET_CMDLINE}"#' \
+	@PATH=$(HOST_PATH) sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${ADK_TARGET_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
 ifeq ($(ADK_TARGET_QEMU_WITH_GRAPHIC),y)
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=tty0"#' \
+	@PATH=$(HOST_PATH) sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=tty0"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
 ifneq ($(ADK_PACKAGE_CRYPTINIT_ROOT),)
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${ADK_PACKAGE_CMDLINE}"#' \
+	@PATH=$(HOST_PATH) sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ${ADK_PACKAGE_CMDLINE}"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
 ifeq ($(ADK_RUNTIME_QUIET_INIT),y)
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 rcquiet=1"#' \
+	@PATH=$(HOST_PATH) sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 rcquiet=1"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
 ifeq ($(ADK_QUIET_KERNEL),y)
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 quiet loglevel=2 vt.global_cursor_default=0"#' \
+	@PATH=$(HOST_PATH) sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 quiet loglevel=2 vt.global_cursor_default=0"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
 ifeq ($(ADK_KERNEL_DEBUG_WITH_KGDB),y)
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 kgdbwait kgdboc=ttyS0,115200"#' \
+	@PATH=$(HOST_PATH) sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 kgdbwait kgdboc=ttyS0,115200"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
 ifeq ($(ADK_KERNEL_NETCONSOLE),y)
-	@sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 netconsole=@$(ADK_PARAMETER_NETCONSOLE_SRC_IP)/,@$(ADK_PARAMETER_NETCONSOLE_DST_IP)/"#' \
+	@PATH=$(HOST_PATH) sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 netconsole=@$(ADK_PARAMETER_NETCONSOLE_SRC_IP)/,@$(ADK_PARAMETER_NETCONSOLE_DST_IP)/"#' \
 		${BUILD_DIR}/.kernelconfig.board
 endif
 	@cd ${BUILD_DIR} && cat .kernelconfig.board .kernelconfig.kernel \
