@@ -1,31 +1,7 @@
-diff -Nur gcc-4.8.2.orig/gcc/c-family/c.opt gcc-4.8.2/gcc/c-family/c.opt
---- gcc-4.8.2.orig/gcc/c-family/c.opt	2013-01-19 06:25:25.000000000 +0100
-+++ gcc-4.8.2/gcc/c-family/c.opt	2014-02-23 20:22:48.000000000 +0100
-@@ -379,6 +379,10 @@
- C ObjC RejectNegative Warning Alias(Werror=, implicit-function-declaration)
- This switch is deprecated; use -Werror=implicit-function-declaration instead
- 
-+Werror-maybe-reset
-+C ObjC C++ ObjC++
-+; Documented in common.opt
-+
- Wfloat-equal
- C ObjC C++ ObjC++ Var(warn_float_equal) Warning
- Warn if testing floating point numbers for equality
-@@ -949,6 +953,9 @@
- fhonor-std
- C++ ObjC++ Ignore Warn(switch %qs is no longer supported)
- 
-+fhonour-copts
-+C ObjC C++ ObjC++ RejectNegative
-+
- fhosted
- C ObjC
- Assume normal C execution environment
-diff -Nur gcc-4.8.2.orig/gcc/c-family/c-opts.c gcc-4.8.2/gcc/c-family/c-opts.c
---- gcc-4.8.2.orig/gcc/c-family/c-opts.c	2013-02-18 20:42:56.000000000 +0100
-+++ gcc-4.8.2/gcc/c-family/c-opts.c	2014-02-23 20:22:48.000000000 +0100
-@@ -104,6 +104,9 @@
+diff -Nur gcc-4.9.1.orig/gcc/c-family/c-opts.c gcc-4.9.1/gcc/c-family/c-opts.c
+--- gcc-4.9.1.orig/gcc/c-family/c-opts.c	2014-05-06 12:48:08.000000000 +0200
++++ gcc-4.9.1/gcc/c-family/c-opts.c	2014-08-05 15:54:02.000000000 +0200
+@@ -105,6 +105,9 @@
  /* Whether any standard preincluded header has been preincluded.  */
  static bool done_preinclude;
  
@@ -35,7 +11,7 @@ diff -Nur gcc-4.8.2.orig/gcc/c-family/c-opts.c gcc-4.8.2/gcc/c-family/c-opts.c
  static void handle_OPT_d (const char *);
  static void set_std_cxx98 (int);
  static void set_std_cxx11 (int);
-@@ -491,6 +494,12 @@
+@@ -492,6 +495,12 @@
        flag_no_builtin = !value;
        break;
  
@@ -48,7 +24,7 @@ diff -Nur gcc-4.8.2.orig/gcc/c-family/c-opts.c gcc-4.8.2/gcc/c-family/c-opts.c
      case OPT_fconstant_string_class_:
        constant_string_class_name = arg;
        break;
-@@ -1027,6 +1036,47 @@
+@@ -1048,6 +1057,47 @@
        return false;
      }
  
@@ -96,10 +72,34 @@ diff -Nur gcc-4.8.2.orig/gcc/c-family/c-opts.c gcc-4.8.2/gcc/c-family/c-opts.c
    return true;
  }
  
-diff -Nur gcc-4.8.2.orig/gcc/common.opt gcc-4.8.2/gcc/common.opt
---- gcc-4.8.2.orig/gcc/common.opt	2013-03-14 10:13:36.000000000 +0100
-+++ gcc-4.8.2/gcc/common.opt	2014-02-23 20:22:48.000000000 +0100
-@@ -541,6 +541,10 @@
+diff -Nur gcc-4.9.1.orig/gcc/c-family/c.opt gcc-4.9.1/gcc/c-family/c.opt
+--- gcc-4.9.1.orig/gcc/c-family/c.opt	2014-04-03 15:41:55.000000000 +0200
++++ gcc-4.9.1/gcc/c-family/c.opt	2014-08-05 15:54:02.000000000 +0200
+@@ -391,6 +391,10 @@
+ C ObjC C++ ObjC++ Var(warn_float_conversion) LangEnabledBy(C ObjC C++ ObjC++,Wconversion)
+ Warn for implicit type conversions that cause loss of floating point precision
+ 
++Werror-maybe-reset
++C ObjC C++ ObjC++
++; Documented in common.opt
++
+ Wfloat-equal
+ C ObjC C++ ObjC++ Var(warn_float_equal) Warning
+ Warn if testing floating point numbers for equality
+@@ -972,6 +976,9 @@
+ fhonor-std
+ C++ ObjC++ Ignore Warn(switch %qs is no longer supported)
+ 
++fhonour-copts
++C ObjC C++ ObjC++ RejectNegative
++
+ fhosted
+ C ObjC
+ Assume normal C execution environment
+diff -Nur gcc-4.9.1.orig/gcc/common.opt gcc-4.9.1/gcc/common.opt
+--- gcc-4.9.1.orig/gcc/common.opt	2014-04-07 15:27:39.000000000 +0200
++++ gcc-4.9.1/gcc/common.opt	2014-08-05 15:54:02.000000000 +0200
+@@ -549,6 +549,10 @@
  Common Joined
  Treat specified warning as error
  
@@ -110,7 +110,7 @@ diff -Nur gcc-4.8.2.orig/gcc/common.opt gcc-4.8.2/gcc/common.opt
  Wextra
  Common Var(extra_warnings) Warning
  Print extra (possibly unwanted) warnings
-@@ -1242,6 +1246,9 @@
+@@ -1287,6 +1291,9 @@
  Common Report Var(flag_guess_branch_prob) Optimization
  Enable guessing of branch probabilities
  
@@ -120,9 +120,9 @@ diff -Nur gcc-4.8.2.orig/gcc/common.opt gcc-4.8.2/gcc/common.opt
  ; Nonzero means ignore `#ident' directives.  0 means handle them.
  ; Generate position-independent code for executables if possible
  ; On SVR4 targets, it also controls whether or not to emit a
-diff -Nur gcc-4.8.2.orig/gcc/doc/cppopts.texi gcc-4.8.2/gcc/doc/cppopts.texi
---- gcc-4.8.2.orig/gcc/doc/cppopts.texi	2013-01-10 21:38:27.000000000 +0100
-+++ gcc-4.8.2/gcc/doc/cppopts.texi	2014-02-23 20:22:48.000000000 +0100
+diff -Nur gcc-4.9.1.orig/gcc/doc/cppopts.texi gcc-4.9.1/gcc/doc/cppopts.texi
+--- gcc-4.9.1.orig/gcc/doc/cppopts.texi	2014-01-02 23:23:26.000000000 +0100
++++ gcc-4.9.1/gcc/doc/cppopts.texi	2014-08-05 15:54:02.000000000 +0200
 @@ -163,6 +163,11 @@
  Make all warnings into hard errors.  Source code which triggers warnings
  will be rejected.
@@ -135,19 +135,19 @@ diff -Nur gcc-4.8.2.orig/gcc/doc/cppopts.texi gcc-4.8.2/gcc/doc/cppopts.texi
  @item -Wsystem-headers
  @opindex Wsystem-headers
  Issue warnings for code in system headers.  These are normally unhelpful
-diff -Nur gcc-4.8.2.orig/gcc/doc/invoke.texi gcc-4.8.2/gcc/doc/invoke.texi
---- gcc-4.8.2.orig/gcc/doc/invoke.texi	2013-06-19 21:55:50.000000000 +0200
-+++ gcc-4.8.2/gcc/doc/invoke.texi	2014-02-23 20:22:48.000000000 +0100
-@@ -240,7 +240,7 @@
- -Wconversion  -Wcoverage-mismatch  -Wno-cpp  -Wno-deprecated  @gol
- -Wno-deprecated-declarations -Wdisabled-optimization  @gol
+diff -Nur gcc-4.9.1.orig/gcc/doc/invoke.texi gcc-4.9.1/gcc/doc/invoke.texi
+--- gcc-4.9.1.orig/gcc/doc/invoke.texi	2014-05-28 13:37:50.000000000 +0200
++++ gcc-4.9.1/gcc/doc/invoke.texi	2014-08-05 15:54:02.000000000 +0200
+@@ -243,7 +243,7 @@
+ -Wconversion -Wcoverage-mismatch -Wdate-time -Wdelete-incomplete -Wno-cpp  @gol
+ -Wno-deprecated -Wno-deprecated-declarations -Wdisabled-optimization  @gol
  -Wno-div-by-zero -Wdouble-promotion -Wempty-body  -Wenum-compare @gol
 --Wno-endif-labels -Werror  -Werror=* @gol
 +-Wno-endif-labels -Werror  -Werror=* -Werror-maybe-reset @gol
  -Wfatal-errors  -Wfloat-equal  -Wformat  -Wformat=2 @gol
  -Wno-format-contains-nul -Wno-format-extra-args -Wformat-nonliteral @gol
  -Wformat-security  -Wformat-y2k @gol
-@@ -4807,6 +4807,22 @@
+@@ -5041,6 +5041,22 @@
  @option{-Wall} and by @option{-Wpedantic}, which can be disabled with
  @option{-Wno-pointer-sign}.
  
@@ -170,7 +170,7 @@ diff -Nur gcc-4.8.2.orig/gcc/doc/invoke.texi gcc-4.8.2/gcc/doc/invoke.texi
  @item -Wstack-protector
  @opindex Wstack-protector
  @opindex Wno-stack-protector
-@@ -6918,7 +6934,7 @@
+@@ -7188,7 +7204,7 @@
  second branch or a point immediately following it, depending on whether
  the condition is known to be true or false.
  
@@ -179,9 +179,9 @@ diff -Nur gcc-4.8.2.orig/gcc/doc/invoke.texi gcc-4.8.2/gcc/doc/invoke.texi
  
  @item -fsplit-wide-types
  @opindex fsplit-wide-types
-diff -Nur gcc-4.8.2.orig/gcc/java/jvspec.c gcc-4.8.2/gcc/java/jvspec.c
---- gcc-4.8.2.orig/gcc/java/jvspec.c	2013-01-10 21:38:27.000000000 +0100
-+++ gcc-4.8.2/gcc/java/jvspec.c	2014-02-23 20:22:48.000000000 +0100
+diff -Nur gcc-4.9.1.orig/gcc/java/jvspec.c gcc-4.9.1/gcc/java/jvspec.c
+--- gcc-4.9.1.orig/gcc/java/jvspec.c	2014-01-02 23:23:26.000000000 +0100
++++ gcc-4.9.1/gcc/java/jvspec.c	2014-08-05 15:54:02.000000000 +0200
 @@ -626,6 +626,7 @@
       class name.  Append dummy `.c' that can be stripped by set_input so %b
       is correct.  */ 
@@ -190,20 +190,11 @@ diff -Nur gcc-4.8.2.orig/gcc/java/jvspec.c gcc-4.8.2/gcc/java/jvspec.c
    err = do_spec (jvgenmain_spec);
    if (err == 0)
      {
-diff -Nur gcc-4.8.2.orig/gcc/opts.c gcc-4.8.2/gcc/opts.c
---- gcc-4.8.2.orig/gcc/opts.c	2013-03-05 07:01:13.000000000 +0100
-+++ gcc-4.8.2/gcc/opts.c	2014-02-23 20:22:48.000000000 +0100
-@@ -468,8 +468,6 @@
-     { OPT_LEVELS_2_PLUS, OPT_fschedule_insns2, NULL, 1 },
- #endif
-     { OPT_LEVELS_2_PLUS, OPT_fregmove, NULL, 1 },
--    { OPT_LEVELS_2_PLUS, OPT_fstrict_aliasing, NULL, 1 },
--    { OPT_LEVELS_2_PLUS, OPT_fstrict_overflow, NULL, 1 },
-     { OPT_LEVELS_2_PLUS, OPT_freorder_blocks, NULL, 1 },
-     { OPT_LEVELS_2_PLUS, OPT_freorder_functions, NULL, 1 },
-     { OPT_LEVELS_2_PLUS, OPT_ftree_vrp, NULL, 1 },
-@@ -488,6 +486,8 @@
-     { OPT_LEVELS_2_PLUS, OPT_fhoist_adjacent_loads, NULL, 1 },
+diff -Nur gcc-4.9.1.orig/gcc/opts.c gcc-4.9.1/gcc/opts.c
+--- gcc-4.9.1.orig/gcc/opts.c	2014-05-18 00:20:43.000000000 +0200
++++ gcc-4.9.1/gcc/opts.c	2014-08-05 15:54:02.000000000 +0200
+@@ -499,6 +499,8 @@
+     { OPT_LEVELS_2_PLUS, OPT_fisolate_erroneous_paths_dereference, NULL, 1 },
  
      /* -O3 optimizations.  */
 +    { OPT_LEVELS_3_PLUS, OPT_fstrict_aliasing, NULL, 1 },
@@ -211,7 +202,7 @@ diff -Nur gcc-4.8.2.orig/gcc/opts.c gcc-4.8.2/gcc/opts.c
      { OPT_LEVELS_3_PLUS, OPT_ftree_loop_distribute_patterns, NULL, 1 },
      { OPT_LEVELS_3_PLUS, OPT_fpredictive_commoning, NULL, 1 },
      /* Inlining of functions reducing size is a good idea with -Os
-@@ -1423,6 +1423,17 @@
+@@ -1536,6 +1538,17 @@
  			       opts, opts_set, loc, dc);
        break;
  
