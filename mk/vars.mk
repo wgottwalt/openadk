@@ -190,12 +190,6 @@ HOST_CFLAGS:=		-O0 -g0
 HOST_CXXFLAGS:=		-O0 -g0
 HOST_LDFLAGS:=		-L$(STAGING_HOST_DIR)/usr/lib -Wl,-rpath -Wl,${STAGING_HOST_DIR}/usr/lib
 
-ifeq ($(ADK_HOST_DARWIN),)
-HOST_CFLAGS+=		-static-libgcc
-HOST_CXXFLAGS+=		-static-libgcc
-HOST_LDFLAGS+=		-static-libgcc
-endif
-
 PATCH=			PATH=${HOST_PATH} ${BASH} $(SCRIPT_DIR)/patch.sh
 PATCHP0=		PATH=${HOST_PATH} patch -p0
 
