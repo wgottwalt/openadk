@@ -121,7 +121,7 @@ ifeq ($(ADK_UCLIBC_TEST),y)
 endif
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 	# cleanup toolchain
-	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -delete
+	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -exec {} \;
 	# strip target libs and host tools for toolchain builds
 	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh \
 		$(STAGING_TARGET_DIR) $(TOOLCHAIN_DIR)/usr/lib/gcc/$(GNU_TARGET_NAME)
