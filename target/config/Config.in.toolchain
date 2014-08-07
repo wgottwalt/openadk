@@ -140,9 +140,9 @@ config ADK_STATIC_TOOLCHAIN
 	  If you want to create more portable toolchains, build them static.
 
 config ADK_UCLIBC_TEST
-	prompt "Build uClibc testsuite"
+	prompt "Build testsuite for C library"
 	boolean
-	depends on ADK_TARGET_LIB_UCLIBC_NG
+	depends on ADK_TARGET_LIB_UCLIBC_NG || ADK_TARGET_LIB_UCLIBC
 	default y
 
 endmenu
