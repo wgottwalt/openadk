@@ -9,6 +9,15 @@ include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=${LINUX_DIR}/arch/arm64/boot/Image
 
+QEMU_ARGS:=${ADK_QEMU_ARGS}
+QEMU_ARGS+=-M virt -cpu cortex-a57 -smp 1
+ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
+QEMU_ARGS+=-net nic,model=virtio -net user
+endif
+ifeq ($(ADK_TARGET_FS),archive)
+QEMU_ARGS+=-drive file=qemu-${ADK_TARGET_CPU_ARCH}.img,if=virtio,index=0
+endif
+
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)
 targethelp:
@@ -18,6 +27,10 @@ ifeq ($(ADK_TARGET_FS),initramfs)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfsarchive)
 targethelp:
@@ -31,11 +44,16 @@ ifeq ($(ADK_TARGET_SYSTEM_ARM_FM),y)
 	@echo 'Start emulator via:'
 	@echo 'Foundation_v8 --image=$(FW_DIR)/${TARGET_KERNEL}'
 endif
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+endif
 endif
 
 kernel-strip:
 
 kernel-install: kernel-strip
+ifeq ($(ADK_TARGET_SYSTEM_ARM_FM),y)
 	cd $(ADK_TOPDIR) && \
 		make -f Makefile \
 		-C package/boot-wrapper-aarch64 clean
@@ -44,6 +62,7 @@ kernel-install: kernel-strip
 		-C package/boot-wrapper-aarch64 package
 	${CP} ${LINUX_DIR}/linux-system.axf \
 		$(FW_DIR)/$(TARGET_KERNEL)
+endif
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)

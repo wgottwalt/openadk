@@ -34,6 +34,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "arm-fm" if ADK_TARGET_SYSTEM_ARM_FM
 	default "qemu-microblaze-s3adsp1800" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 	default "qemu-microblaze-ml605" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
+	default "qemu-aarch64" if ADK_TARGET_SYSTEM_QEMU_AARCH64
 	default "qemu-arm-versatilepb" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	default "qemu-arm-vexpress-a9" if ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	default "qemu-arm-spitz" if ADK_TARGET_QEMU_ARM_MODEL_SPITZ
