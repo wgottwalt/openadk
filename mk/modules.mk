@@ -1339,8 +1339,15 @@ $(eval $(call KMOD_template,INPUT_EVDEV,input-evdev,\
 #
 
 USBMODULES:=
+ifeq ($(KERNEL_BASE),3)
+ifeq ($(KERNEL_MAJ),16)
+USBMODULES+=drivers/usb/common/usb-common
+USBMODULES+=drivers/usb/core/usbcore
+else
 USBMODULES+=drivers/usb/usb-common
 USBMODULES+=drivers/usb/core/usbcore
+endif
+endif
 
 $(eval $(call KMOD_template,USB,usb,\
 	$(foreach mod, $(USBMODULES),$(MODULES_DIR)/kernel/$(mod)) \
