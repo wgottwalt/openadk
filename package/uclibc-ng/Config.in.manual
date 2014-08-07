@@ -5,7 +5,7 @@ config ADK_PACKAGE_UCLIBC_NG
 	default n
 	depends on ADK_TARGET_LIB_UCLIBC_NG
 	help
-	  Embedded C library. http://www.uclibc-ng.org
+	  Embedded C library.
 
 config ADK_PACKAGE_UCLIBC_NG_TEST
 	prompt "uClibc-ng-test.......... embedded C library (testsuite)"
@@ -17,4 +17,5 @@ config ADK_PACKAGE_UCLIBC_NG_TEST
 	select ADK_UCLIBC_TEST
 	depends on ADK_TARGET_LIB_UCLIBC_NG
 	help
-	  Embedded C library testsuite. http://www.uclibc-ng.org
+	  Embedded C library testsuite.
+

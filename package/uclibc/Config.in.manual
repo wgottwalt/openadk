@@ -6,3 +6,16 @@ config ADK_PACKAGE_UCLIBC
 	depends on ADK_TARGET_LIB_UCLIBC
 	help
 	  Embedded C library.
+
+config ADK_PACKAGE_UCLIBC_TEST
+	prompt "uClibc-test............. embedded C library (testsuite)"
+	bool
+	default n
+	select ADK_PACKAGE_MAKE
+	select ADK_PACKAGE_LIBRT
+	select ADK_PACKAGE_LIBPTHREAD
+	select ADK_UCLIBC_TEST
+	depends on ADK_TARGET_LIB_UCLIBC
+	help
+	  Embedded C library testsuite.
+
