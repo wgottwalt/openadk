@@ -65,7 +65,7 @@ ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${ADK_TOPDIR}/.config > $(TARGET_DIR)/etc/adkconfig.gz
 	chmod 600 $(TARGET_DIR)/etc/adkconfig.gz
 endif
-ifneq ($(ADK_LINUX_X86_64)$(ADK_LINUX_PPC64)$(ADK_LINUX_SPARC64)$(ADK_TARGET_ABI_N32)$(ADK_TARGET_ABI_N64),)
+ifneq ($(ADK_LINUX_AARCH64)$(ADK_LINUX_X86_64)$(ADK_LINUX_PPC64)$(ADK_LINUX_SPARC64)$(ADK_TARGET_ABI_N32)$(ADK_TARGET_ABI_N64),)
 	test ! -d ${TARGET_DIR}/lib || mv ${TARGET_DIR}/lib/* ${TARGET_DIR}/${ADK_TARGET_LIBC_PATH}
 	test ! -d ${TARGET_DIR}/lib || rm -rf ${TARGET_DIR}/lib
 	ln -sf /${ADK_TARGET_LIBC_PATH} ${TARGET_DIR}/lib
