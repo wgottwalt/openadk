@@ -5,11 +5,11 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		iw
 PKG_VERSION:=		3.15
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		3b77ad7ec44a865a3bb2ab6c1c463bba
 PKG_DESCR:=		tools for setting up wifi cards via netlink
 PKG_SECTION:=		net/wifi
-PKG_DEPENDS:=		libnl
+PKG_DEPENDS:=		libnl libpthread
 PKG_BUILDDEP:=		libnl
 PKG_URL:=		http://wireless.kernel.org/en/users/Documentation/iw
 PKG_SITES:=		https://www.kernel.org/pub/software/network/iw/
