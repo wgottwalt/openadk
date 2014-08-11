@@ -149,6 +149,7 @@ config ADK_HOST_NEED_MKIMAGE
 
 config ADK_HOST_BUILD_MKIMAGE
 	boolean
+	select ADK_PACKAGE_U_BOOT
 	default y if ADK_HOST_NEED_MKIMAGE
 	default n
 

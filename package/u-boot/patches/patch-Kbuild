@@ -1,0 +1,45 @@
+Sometimes it is required to build only host U-Boot tools without building
+U-Boot itself for either board.
+
+For example:
+ * In "buildroot" "uboot-tools" could be built for host just to have an ability
+   to create uImage.
+ * Linux distributions ship "mkimage" utility as a separate substance.
+
+This patch allows building host U-Boot tools separately from U-Boot itself and
+what is more important user only needs to have host compiler (gcc).
+
+To build host tools just execute:
+=====
+make tools HOST_TOOLS_ONLY=yes
+=====
+
+Without this patch to generate tools user needs:
+ 1. Configure any existing board with "make XXX_config"
+ 2. Execute tools building but still cross-compiler will be invoked and if
+    there's no proper cross-compiler in PATH compilation will fail.
+
+Signed-off-by: Alexey Brodkin <abrodkin at synopsys.com>
+
+Cc: Masahiro Yamada <yamada.m at jp.panasonic.com>
+Cc: Tom Rini <trini at ti.com>
+Cc: Simon Glass <sjg at chromium.org>
+
+--- u-boot-2014.07.orig/Kbuild	2014-07-14 19:16:45.000000000 +0200
++++ u-boot-2014.07/Kbuild	2014-08-11 10:06:13.311946939 +0200
+@@ -4,6 +4,9 @@
+ # 1) Generate generic-asm-offsets.h
+ # 2) Generate asm-offsets.h
+ 
++# Don't execute target below if building host tools only
++ifneq ($(HOST_TOOLS_ONLY),yes)
++
+ #####
+ # 1) Generate generic-asm-offsets.h
+ 
+@@ -85,3 +88,5 @@ arch/$(ARCH)/lib/asm-offsets.s: arch/$(A
+ 
+ $(obj)/$(offsets-file): arch/$(ARCH)/lib/asm-offsets.s Kbuild
+ 	$(call cmd,offsets)
++
++endif

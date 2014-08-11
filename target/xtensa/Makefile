@@ -7,7 +7,7 @@ include $(ADK_TOPDIR)/mk/modules.mk
 include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
-KERNEL:=$(LINUX_DIR)/arch/xtensa/boot/Image.elf
+KERNEL:=$(LINUX_DIR)/arch/xtensa/boot/uImage
 
 QEMU_ARGS:=-M lx60 -cpu dc232b -monitor null
 QEMU_ARGS+=${ADK_QEMU_ARGS}

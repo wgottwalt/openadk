@@ -4,27 +4,34 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
-PKG_VERSION:=		2014.01
+PKG_VERSION:=		2014.07
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e531307578f6d32a7ccb1d04f1e08cbc
+PKG_MD5SUM:=		36d4bad687edcafa396fee607e505d4e
 PKG_DESCR:=		bootloader
 PKG_SECTION:=		base/boot
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
 PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-PKG_CFLINE_U_BOOT:=	depends on ADK_BROKEN
 PKG_SYSTEM_DEPENDS:=	!cubox-i
 
+PKG_CFLINE_U_BOOT:=	depends on ADK_HOST_ONLY
+
+include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,U_BOOT,u-boot,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call HOST_template,U_BOOT,u-boot,$(PKG_VERSION)-${PKG_RELEASE}))
 
-CONFIG_STYLE:=		manual
+HOST_STYLE:=		manual
+HOST_MAKE_FLAGS+=	HOST_TOOLS_ONLY=yes
 
-do-configure:
-	echo "no config for your target available"
+host-build:
+	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} tools $(MAKE_TRACE) )
 
-u-boot-install:
+u-boot-hostinstall:
+	${INSTALL_BIN} ${WRKBUILD}/tools/mkimage \
+		${STAGING_HOST_DIR}/usr/bin
 
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
