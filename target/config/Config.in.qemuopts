@@ -110,4 +110,6 @@ config ADK_TARGET_QEMU_WITH_AUDIO
 	boolean "enabled"
 
 endchoice
+
+
 endmenu

@@ -1,0 +1,5 @@
+config ADK_KERNEL_XTENSA_VARIANT_DC233C
+	boolean
+
+config ADK_KERNEL_XTENSA_VARIANT_DC232B
+	boolean

@@ -45,7 +45,7 @@ endif
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 ifeq ($(ADK_LINUX_XTENSA),y)
-	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
+	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_$(ADK_TARGET_XTENSA).tar \
 		--strip-components=1 -C $(WRKSRC) binutils
 endif
 	(cd $(WRKBUILD); \

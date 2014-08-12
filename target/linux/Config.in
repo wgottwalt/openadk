@@ -16,6 +16,7 @@ source target/linux/config/Config.in.crypto
 source target/linux/config/Config.in.bluetooth
 source target/linux/config/Config.in.misc
 source target/linux/config/Config.in.mips
+source target/linux/config/Config.in.xtensa
 source target/linux/config/Config.in.pm
 source target/linux/config/Config.in.kvm
 source target/linux/config/Config.in.virtio

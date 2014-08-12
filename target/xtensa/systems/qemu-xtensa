@@ -4,7 +4,6 @@ config ADK_TARGET_SYSTEM_QEMU_XTENSA
 	select ADK_qemu_xtensa
 	select ADK_TARGET_QEMU
 	select ADK_TARGET_KERNEL_ZIMAGE
-	select ADK_HOST_NEED_MKIMAGE
 	help
 	 Support for Qemu Emulator XTENSA architecture.
 

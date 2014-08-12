@@ -9,8 +9,14 @@ include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/arch/xtensa/boot/uImage
 
-QEMU_ARGS:=-M lx60 -cpu dc232b -monitor null
+QEMU_ARGS:=-M lx60 -monitor null
 QEMU_ARGS+=${ADK_QEMU_ARGS}
+ifeq ($(ADK_TARGET_QEMU_XTENSA_DC233C),y)
+QEMU_ARGS+=-cpu dc233c
+endif
+ifeq ($(ADK_TARGET_QEMU_XTENSA_DC232B),y)
+QEMU_ARGS+=-cpu dc232b
+endif
 
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)
@@ -47,12 +53,8 @@ ifeq ($(ADK_TARGET_QEMU),y)
 endif
 endif
 
-# image creation and kernel install
-kernel-strip:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
-
-kernel-install: kernel-strip
-	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
+kernel-install:
+	@cp $(KERNEL) $(FW_DIR)/${TARGET_KERNEL}
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)

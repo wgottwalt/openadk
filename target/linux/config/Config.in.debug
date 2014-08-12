@@ -22,6 +22,9 @@ config ADK_KERNEL_EARLY_PRINTK
 	boolean
 	default n
 
+config ADK_KERNEL_KALLSYMS_ALL
+	boolean
+
 config ADK_KERNEL_PRINTK
 	prompt "printk support (disable to save space and quieten bootup)"
 	boolean
@@ -128,6 +131,7 @@ config ADK_KERNEL_OPROFILE
 config ADK_KERNEL_KALLSYMS
 	prompt "Support for symbol names in OOPS"
 	boolean
+	select ADK_KERNEL_KALLSYMS_ALL
 	default n
 	help
 	 Load all symbols to the kernel.
