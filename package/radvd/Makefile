@@ -4,13 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		radvd
-PKG_VERSION:=		1.13
+PKG_VERSION:=		2.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		bcedd68543c94f330d1b6c8566b4ae64
+PKG_MD5SUM:=		8778e5eb669210351fa8db22532098a7
 PKG_DESCR:=		routing advertisement daemon for ipv6
 PKG_SECTION:=		net/ipv6
 PKG_DEPENDS:=		libdaemon
-PKG_BUILDDEP:=		libdaemon
+PKG_BUILDDEP:=		libdaemon check
 PKG_URL:=		http://www.litech.org/radvd/
 PKG_SITES:=		http://v6web.litech.org/radvd/dist/
 

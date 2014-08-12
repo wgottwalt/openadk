@@ -1,6 +1,6 @@
---- radvd-1.9.7.orig/configure.ac	2013-11-17 16:41:26.000000000 +0100
-+++ radvd-1.9.7/configure.ac	2014-01-04 18:30:07.000000000 +0100
-@@ -151,7 +151,6 @@ AC_CHECK_HEADERS( \
+--- radvd-2.5.orig/configure.ac	2014-08-04 02:23:05.000000000 +0200
++++ radvd-2.5/configure.ac	2014-08-12 08:44:04.000000000 +0200
+@@ -157,7 +157,6 @@ AC_CHECK_HEADERS( \
  	net/if_types.h \
  	sys/param.h \
  	sys/sockio.h \
