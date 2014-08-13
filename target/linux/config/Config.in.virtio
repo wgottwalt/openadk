@@ -1,6 +1,4 @@
 menu "Virtio driver support"
-depends on !ADK_TARGET_QEMU_WITH_VIRTIO && ADK_TARGET_QEMU
-depends on !ADK_TARGET_SYSTEM_QEMU_ARM
 
 config ADK_KERNEL_VIRTIO
 	boolean
@@ -8,10 +6,14 @@ config ADK_KERNEL_VIRTIO
 config ADK_KERNEL_VIRTIO_PCI
 	boolean
 
+config ADK_KERNEL_VIRTIO_MMIO
+	boolean
+
 config ADK_KERNEL_VIRTIO_NET
 	prompt "Virtio net driver"
 	tristate
 	select ADK_KERNEL_VIRTIO
+	select ADK_KERNEL_VIRTIO_MMIO
 	select ADK_KERNEL_VIRTIO_PCI
 	default n
 	help
@@ -22,6 +24,7 @@ config ADK_KERNEL_VIRTIO_BLK
 	tristate
 	select ADK_KERNEL_VIRTIO
 	select ADK_KERNEL_VIRTIO_PCI
+	select ADK_KERNEL_VIRTIO_MMIO
 	select ADK_KERNEL_BLK_DEV
 	default n
 	help

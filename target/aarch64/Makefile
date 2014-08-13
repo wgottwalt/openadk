@@ -12,7 +12,7 @@ KERNEL:=${LINUX_DIR}/arch/arm64/boot/Image
 QEMU_ARGS:=${ADK_QEMU_ARGS}
 QEMU_ARGS+=-M virt -cpu cortex-a57 -smp 1
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
-QEMU_ARGS+=-net nic,model=virtio -net user
+QEMU_ARGS+=-netdev user,id=eth0 -device virtio-net-device,netdev=eth0
 endif
 ifeq ($(ADK_TARGET_FS),archive)
 QEMU_ARGS+=-drive file=qemu-${ADK_TARGET_CPU_ARCH}.img,if=virtio,index=0
