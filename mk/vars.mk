@@ -93,6 +93,12 @@ TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
+ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
+TARGET_CFLAGS+=		-Wl,-elf2flt
+TARGET_CXXFLAGS+=	-Wl,-elf2flt
+TARGET_LDFLAGS+=	-elf2flt
+endif
+
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 # use -static-libgcc by default only for musl
 TARGET_CFLAGS+=		-static-libgcc

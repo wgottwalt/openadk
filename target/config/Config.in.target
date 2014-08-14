@@ -283,6 +283,9 @@ config ADK_TARGET_PACKAGE_IPKG
 	  
 endchoice
 
+config ADK_TARGET_BINFMT_FLAT
+	boolean
+
 choice
 prompt "Target GPU Memory"
 depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
