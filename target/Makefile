@@ -36,6 +36,10 @@ config-prepare: $(ADK_TOPDIR)/.config
 		echo "no miniconfig found for target system"; \
 		exit 1; \
 	fi
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_M68K),y)
+	@PATH=$(HOST_PATH) sed -i -e 's#^\(CONFIG_.*BOOTPARAM_STRING="\)\(.*\)"#\1\2 ro ${FS_CMDLINE}"#' \
+		${BUILD_DIR}/.kernelconfig.board
+endif
 ifeq ($(ADK_TARGET_ROOTFS_NFSROOT),)
 	@PATH=$(HOST_PATH) sed -i -e 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ro"#' \
 		${BUILD_DIR}/.kernelconfig.board

@@ -130,8 +130,7 @@ config ADK_KERNEL_CPU_LITTLE_ENDIAN
 
 choice
 prompt "Kernel Compression"
-depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532 && \
-	   !ADK_TARGET_SYSTEM_QEMU_M68K
+depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
 
 config ADK_KERNEL_COMP_XZ
 	prompt "use XZ compression"
