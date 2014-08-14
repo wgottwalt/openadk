@@ -3,7 +3,7 @@
 
 PKG_NAME:=		uClibc-ng
 ifeq ($(ADK_LIBC_VERSION),git)
-PKG_VERSION:=		git
+PKG_VERSION:=		1.0.0
 PKG_REPO:=		http://git.uclibc-ng.org/uClibc-ng.git
 else
 PKG_VERSION:=		$(ADK_LIBC_VERSION)

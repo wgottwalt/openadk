@@ -10,8 +10,12 @@ PKG_NAME:=		uClibc-ng
 PKG_DESCR:=		embedded c library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
+ifneq ($(ADK_LIBC_VERSION),git)
 PKG_VERSION:=		1.0.0
-RC:=			rc1
+PKG_DIR:=		$(ADK_LIBC_VERSION)
+else
+PKG_DIR:=		${PKG_VERSION}
+endif
 
 PKG_SUBPKGS:=		UCLIBC_NG UCLIBC_NG_DEV UCLIBC_NG_TEST
 PKGSD_UCLIBC_NG_DEV:=	development files for uclibc-ng
@@ -68,7 +72,7 @@ uclibc-ng-dev-install:
 		$(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_NG_DEV)/usr \
 		headers_install
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)$(RC)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}$(RC) \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_DIR)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_DIR} \
 		PREFIX=$(IDIR_UCLIBC_NG_DEV)/ \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(IDIR_UCLIBC_NG_DEV)/ \
@@ -82,9 +86,9 @@ uclibc-ng-test-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/etc
 	echo '00:11:22:33:44:55 teeth' > ${IDIR_UCLIBC_NG_TEST}/etc/ethers
 	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
-	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)$(RC)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}$(RC)/test \
+	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_DIR)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_DIR}/test \
 		${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
-	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)$(RC)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}$(RC)/{Rules.mak,.config} \
+	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_DIR)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_DIR}/{Rules.mak,.config} \
 		${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
 	@find ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng -name \*.o -exec rm {} \;
 
