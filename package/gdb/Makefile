@@ -12,6 +12,7 @@ PKG_BUILDDEP:=		ncurses readline expat zlib
 PKG_NOPARALLEL:=	1
 
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
+PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
 
 include ${ADK_TOPDIR}/mk/package.mk
 
