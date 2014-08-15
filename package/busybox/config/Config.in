@@ -480,6 +480,7 @@ config BUSYBOX_PIE
 
 config BUSYBOX_NOMMU
 	bool "Force NOMMU build"
+	default y if ADK_TARGET_UCLINUX
 	default n
 	help
 	  Busybox tries to detect whether architecture it is being
