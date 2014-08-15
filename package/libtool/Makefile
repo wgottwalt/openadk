@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libtool
 PKG_VERSION:=		2.4.2
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		2ec8997e0c07249eb4cbd072417d70fe
 PKG_DESCR:=		generic dynamic object loading library
 PKG_SECTION:=		dev/tools
