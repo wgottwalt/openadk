@@ -49,6 +49,9 @@ endif
 ifeq ($(ADK_LINUX_XTENSA),y)
 TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
 endif
+ifeq ($(ADK_LINUX_PPC),y)
+TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
+endif
 
 ifeq ($(ADK_LINUX_X86_64),y)
 CONFIG:=		linux-embedded-x86_64
