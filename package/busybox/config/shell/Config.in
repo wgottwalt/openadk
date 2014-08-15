@@ -161,6 +161,7 @@ config BUSYBOX_CTTYHACK
 	  # getty 115200 $(cttyhack)
 config BUSYBOX_HUSH
 	bool "hush"
+	default y if ADK_TARGET_UCLINUX
 	default n
 	help
 	  hush is a small shell (25k). It handles the normal flow control
