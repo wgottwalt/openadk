@@ -23,10 +23,10 @@ source "target/config/Config.in.arm"
 source "target/config/Config.in.x86"
 source "target/config/Config.in.qemu"
 source "target/config/Config.in.qemuopts"
-source "target/config/Config.in.kernelversion"
 
 menu "Target configuration"
 depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+source "target/config/Config.in.kernelversion"
 source "target/config/Config.in.libc"
 source "target/config/Config.in.target"
 endmenu
