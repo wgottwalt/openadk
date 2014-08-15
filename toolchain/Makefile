@@ -32,6 +32,9 @@ ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGETS+=musl
 CLIB:=musl
 endif
+ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
+TARGETS+=elf2flt
+endif
 
 DOWNLOAD:=kernel-headers-download $(patsubst %,%-download,$(TARGETS))
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
@@ -48,7 +51,11 @@ $(CLIB)-prepare: gcc-prepare kernel-headers-prepare
 gcc-configure: $(CLIB)-prepare
 $(CLIB)-compile: gcc-configure
 gcc-compile: $(CLIB)-install
+ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
+$(CLIB)-fixup: gcc-install gdb-install elf2flt-install
+else
 $(CLIB)-fixup: gcc-install gdb-install
+endif
 
 %-download:
 	$(TRACE) toolchain/$(patsubst %-download,%,$@)/download
