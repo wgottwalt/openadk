@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xbmc
-PKG_VERSION:=		13.1
-PKG_RELEASE:=		4
-PKG_MD5SUM:=		9ce6b6ac89b6aa0b111a1acdf3606e06
+PKG_VERSION:=		13.2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		d80153b2cc78b88966458ab136e9494f
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
@@ -28,8 +28,10 @@ PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
 PKG_BUILDDEP+=		zip-host unzip-host
 PKG_URL:=		http://xbmc.org/
-#PKG_SITES:=		http://mirrors.xbmc.org/releases/source/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		https://github.com/xbmc/xbmc/archive/
+
+DISTFILES:=		${PKG_VERSION}-Gotham.tar.gz
+WRKDIST=		$(WRKDIR)/$(PKG_NAME)-${PKG_VERSION}-Gotham
 
 PKG_FLAVOURS_XBMC:=	WITH_SMB WITH_NFS WITH_SSH WITH_AVAHI WITH_CEC 
 PKG_FLAVOURS_XBMC+=	WITH_AFP WITH_WEBSERVER WITH_RTMP WITH_BLURAY
