@@ -4,8 +4,8 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
-PKG_VERSION:=		1.55.0
-PKG_RELEASE:=		6
+PKG_VERSION:=		1.56.0
+PKG_RELEASE:=		1
 PKG_MD5SUM:=		93780777cfbf999a600f62883bd54b17
 PKG_DESCR:=		boost c++ library
 PKG_SECTION:=		libs/misc
