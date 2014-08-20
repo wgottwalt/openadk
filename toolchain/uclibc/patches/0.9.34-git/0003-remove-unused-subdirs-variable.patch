@@ -1,7 +1,7 @@
-From 914de2f0b374809d130ca6b967307b9024b828a9 Mon Sep 17 00:00:00 2001
+From adf9777c0859e6a59bdcdb92031b0e9d7fcb70c8 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Wed, 20 Aug 2014 04:31:35 +0200
-Subject: [PATCH 4/5] remove unused subdirs variable
+Subject: [PATCH 3/6] remove unused subdirs variable
 
 For sparc TARGET_SUBARCH is never used. And there is a typo in the
 path.

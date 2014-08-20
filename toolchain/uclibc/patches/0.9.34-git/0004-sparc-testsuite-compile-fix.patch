@@ -1,7 +1,7 @@
-From edda85b5a6c35cc2bc029d0020747167e2867a91 Mon Sep 17 00:00:00 2001
+From a7695a072fbe3a5449f3ecb493f15f9cf10e18ca Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Wed, 20 Aug 2014 04:39:04 +0200
-Subject: [PATCH 5/5] sparc testsuite compile fix
+Subject: [PATCH 4/6] sparc testsuite compile fix
 
 tst-spin1.c compile breaks with:
 test/nptl/tst-spin1.c:34: undefined reference to `pthread_spin_lock'
