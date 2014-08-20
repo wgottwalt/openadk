@@ -1,0 +1,29 @@
+From 914de2f0b374809d130ca6b967307b9024b828a9 Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbx@openadk.org>
+Date: Wed, 20 Aug 2014 04:31:35 +0200
+Subject: [PATCH 4/5] remove unused subdirs variable
+
+For sparc TARGET_SUBARCH is never used. And there is a typo in the
+path.
+
+Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
+---
+ libpthread/nptl/sysdeps/sparc/Makefile.arch | 3 ---
+ 1 file changed, 3 deletions(-)
+
+diff --git a/libpthread/nptl/sysdeps/sparc/Makefile.arch b/libpthread/nptl/sysdeps/sparc/Makefile.arch
+index 52ac6db..f9662c6 100644
+--- a/libpthread/nptl/sysdeps/sparc/Makefile.arch
++++ b/libpthread/nptl/sysdeps/sparc/Makefile.arch
+@@ -4,8 +4,5 @@
+ #
+ # Licensed under the LGPL v2.1, see the file COPYING.LIB in this tarball.
+ #
+-subdirs += libpthread/nptl/sysdeps/$(TARGET_ARCH)/$(TARGET_SUBARCH)/sparv9
+ 
+ CFLAGS-pthread_spin_lock.c += -D_GNU_SOURCE
+-
+-
+-- 
+1.8.5.2 (Apple Git-48)
+

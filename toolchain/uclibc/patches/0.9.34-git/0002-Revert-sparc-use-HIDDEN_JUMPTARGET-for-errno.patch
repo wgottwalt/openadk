@@ -1,0 +1,65 @@
+From 0212a34e5326d2954a013476d2e5b25abe90ed33 Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbx@openadk.org>
+Date: Wed, 20 Aug 2014 03:44:53 +0200
+Subject: [PATCH 2/5] Revert "sparc: use HIDDEN_JUMPTARGET for errno"
+
+This reverts commit f51fb26dbcceee9e48d10facc830bd4a549f6cc2.
+
+This fixes linking error for sparc build.
+While building a sparc system you get following linking error:
+libc/sysdeps/linux/sparc/pipe.S:54: undefined reference to `__GI___errno_location'
+
+Removing the HIDDEN_JUMPTARGET fixes the issue, while using gcc 4.8.3/binutils 2.24.
+
+The definition of __errno_location was changed recently here:
+http://git.uclibc.org/uClibc/commit/?id=8f550715c2b211036fc273add3cb5219397ed312
+
+Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
+---
+ libc/sysdeps/linux/sparc/fork.S  | 2 +-
+ libc/sysdeps/linux/sparc/pipe.S  | 2 +-
+ libc/sysdeps/linux/sparc/vfork.S | 2 +-
+ 3 files changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/libc/sysdeps/linux/sparc/fork.S b/libc/sysdeps/linux/sparc/fork.S
+index 8e4bc22..1715911 100644
+--- a/libc/sysdeps/linux/sparc/fork.S
++++ b/libc/sysdeps/linux/sparc/fork.S
+@@ -35,7 +35,7 @@ fork:
+ 	bcc,a	9000f
+ 	nop
+ 	save    %sp,-96,%sp
+-	call HIDDEN_JUMPTARGET(__errno_location)
++	call __errno_location
+ 	nop
+ 	st	%i0,[%o0]
+ 	jmpl	%i7+8,%g0
+diff --git a/libc/sysdeps/linux/sparc/pipe.S b/libc/sysdeps/linux/sparc/pipe.S
+index b085faf..fa77f4d 100644
+--- a/libc/sysdeps/linux/sparc/pipe.S
++++ b/libc/sysdeps/linux/sparc/pipe.S
+@@ -49,7 +49,7 @@ pipe:
+ 	 restore %g0,%g0,%o0
+ 
+ .Lerror:
+-	call	HIDDEN_JUMPTARGET(__errno_location)
++	call	__errno_location
+ 	 or	%g0,EINVAL,%i0
+ 	st	%i0,[%o0]
+ 	ret
+diff --git a/libc/sysdeps/linux/sparc/vfork.S b/libc/sysdeps/linux/sparc/vfork.S
+index 4b701f7..e5a3c30 100644
+--- a/libc/sysdeps/linux/sparc/vfork.S
++++ b/libc/sysdeps/linux/sparc/vfork.S
+@@ -37,7 +37,7 @@ __vfork:
+ 	bcc,a	9000f
+ 	nop
+ 	save    %sp,-96,%sp
+-	call HIDDEN_JUMPTARGET(__errno_location)
++	call __errno_location
+ 	nop
+ 	st	%i0,[%o0]
+ 	jmpl	%i7+8,%g0
+-- 
+1.8.5.2 (Apple Git-48)
+

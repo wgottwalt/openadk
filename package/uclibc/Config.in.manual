@@ -1,5 +1,5 @@
 config ADK_PACKAGE_UCLIBC
-	prompt "uClibc............... embedded C library"
+	prompt "uClibc.................. embedded C library"
 	bool
 	default y if ADK_TARGET_LIB_UCLIBC && !ADK_TOOLCHAIN_ONLY
 	default n
