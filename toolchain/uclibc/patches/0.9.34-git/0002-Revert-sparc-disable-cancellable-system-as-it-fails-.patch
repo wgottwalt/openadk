@@ -1,17 +1,17 @@
-From f152a782555667b9f763c896064e54168bb4ff1f Mon Sep 17 00:00:00 2001
+From 3422668d945229f9f707aafe24491b5d3e8d7636 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Wed, 20 Aug 2014 04:02:49 +0200
-Subject: [PATCH 2/6] Revert "sparc: disable cancellable system, as it fails in
+Subject: [PATCH 2/9] Revert "sparc: disable cancellable system, as it fails in
  strange ways right now"
 
 This reverts commit 1db4f8f8389f6a935ecd83aff7fcce5d1cf2c0f3.
 
-It is unclear how this is breaking sparc.
-With this changed added you get following linking error:
+It is unclear in which way this is breaking sparc systems.
+With this change added you get following linking error:
 libpthread/nptl/libpthread_so.a(pt-system.oS): In function `__libc_system':
 libc/stdlib/system.c:64: undefined reference to `__wait4_nocancel'
 
-Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
+Signed-off-by: Waldemar Brodkorb <wbx@uclibc-ng.org>
 ---
  libc/stdlib/system.c | 13 +++++++------
  1 file changed, 7 insertions(+), 6 deletions(-)

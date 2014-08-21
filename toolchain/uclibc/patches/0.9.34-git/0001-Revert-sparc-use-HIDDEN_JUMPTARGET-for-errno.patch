@@ -1,7 +1,7 @@
 From 984be720d4ee1fc717d4de5e67a776419003c1c6 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Wed, 20 Aug 2014 03:44:53 +0200
-Subject: [PATCH 1/6] Revert "sparc: use HIDDEN_JUMPTARGET for errno"
+Subject: [PATCH 1/9] Revert "sparc: use HIDDEN_JUMPTARGET for errno"
 
 This reverts commit f51fb26dbcceee9e48d10facc830bd4a549f6cc2.
 
@@ -14,7 +14,7 @@ Removing the HIDDEN_JUMPTARGET fixes the issue, while using gcc 4.8.3/binutils 2
 The definition of __errno_location was changed recently here:
 http://git.uclibc.org/uClibc/commit/?id=8f550715c2b211036fc273add3cb5219397ed312
 
-Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
+Signed-off-by: Waldemar Brodkorb <wbx@uclibc-ng.org>
 ---
  libc/sysdeps/linux/sparc/fork.S  | 2 +-
  libc/sysdeps/linux/sparc/pipe.S  | 2 +-

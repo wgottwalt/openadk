@@ -1,7 +1,7 @@
-From a7695a072fbe3a5449f3ecb493f15f9cf10e18ca Mon Sep 17 00:00:00 2001
+From 939bd5baadb18f56235c3bf9a2fa08e30e8d336a Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Wed, 20 Aug 2014 04:39:04 +0200
-Subject: [PATCH 4/6] sparc testsuite compile fix
+Subject: [PATCH 4/9] sparc testsuite compile fix
 
 tst-spin1.c compile breaks with:
 test/nptl/tst-spin1.c:34: undefined reference to `pthread_spin_lock'
@@ -9,7 +9,7 @@ test/nptl/tst-spin1.c:34: undefined reference to `pthread_spin_lock'
 pthread_spin_lock and pthread_spin_trylock is missing while
 building sparc. add the meta c files here.
 
-Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
+Signed-off-by: Waldemar Brodkorb <wbx@uclibc-ng.org>
 ---
  libpthread/nptl/sysdeps/sparc/pthread_spin_lock.c    | 5 +++++
  libpthread/nptl/sysdeps/sparc/pthread_spin_trylock.c | 5 +++++

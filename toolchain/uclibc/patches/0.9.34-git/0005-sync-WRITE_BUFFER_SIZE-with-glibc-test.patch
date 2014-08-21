@@ -1,7 +1,7 @@
-From 8a70d40078cbfd5263d3e417ad6912783fdd5aa8 Mon Sep 17 00:00:00 2001
+From 642cf06b4c07658b78fb6029648edc14fcd0075a Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Wed, 20 Aug 2014 20:29:08 +0200
-Subject: [PATCH 5/6] sync WRITE_BUFFER_SIZE with glibc test
+Subject: [PATCH 5/9] sync WRITE_BUFFER_SIZE with glibc test
 
 Test on Linux 3.16.1 in Qemu ARM fails with:
  TEST_EXEC nptl/ tst-cancel4
@@ -11,7 +11,7 @@ The output of failed test is:
 minimum write buffer size too large
 ../Test.mak:89: recipe for target 'tst-cancel4.exe' failed
 
-Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
+Signed-off-by: Waldemar Brodkorb <wbx@uclibc-ng.org>
 ---
  test/nptl/tst-cancel4.c | 26 ++++++++++++++++++++++++--
  1 file changed, 24 insertions(+), 2 deletions(-)
