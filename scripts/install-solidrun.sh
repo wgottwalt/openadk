@@ -84,7 +84,7 @@ maxsize=$(($maxsize-1))
 rootsize=$(($maxsize-32768))
 rootsizeend=$(($rootsize+1))
 
-echo "Install bootloader for cubox-i"
+echo "Install bootloader for cubox-i/hummingboard"
 parted -s $1 mklabel msdos >/dev/null 2>&1
 dd if=${3}/SPL of=${1} bs=1K seek=1 >/dev/null 2>&1
 dd if=${3}/u-boot.img of=${1} bs=1K seek=42 >/dev/null 2>&1

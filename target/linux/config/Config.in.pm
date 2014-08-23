@@ -1,6 +1,6 @@
 config ADK_KERNEL_PM_RUNTIME
 	boolean
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 
 config ADK_KERNEL_ACPI
 	boolean

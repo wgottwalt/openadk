@@ -213,8 +213,8 @@ config ADK_KERNEL_PATA_IMX
 	select ADK_KERNEL_AHCI_IMX
 	select ADK_KERNEL_SATA_PMP
 	select ADK_KERNEL_SATA_AHCI_PLATFORM
-	depends on ADK_TARGET_SYSTEM_CUBOX_I
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
 config ADK_KERNEL_PATA_PXA
@@ -308,7 +308,7 @@ config ADK_KERNEL_MMC_SDHCI_BCM2708
 	default n
 
 config ADK_KERNEL_MMC_SDHCI_ESDHC_IMX
-	prompt "SD card support for Cubox-i"
+	prompt "SD card support for Solidrun IMX6"
 	boolean
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_DMA
@@ -325,8 +325,8 @@ config ADK_KERNEL_MMC_SDHCI_ESDHC_IMX
 	select ADK_KERNEL_MMC_SDHCI_IO_ACCESSORS
 	select ADK_KERNEL_MMC_SDHCI_PLTFM
 	select ADK_KERNEL_MMC_UNSAFE_RESUME
-	depends on ADK_TARGET_SYSTEM_CUBOX_I
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
 endmenu

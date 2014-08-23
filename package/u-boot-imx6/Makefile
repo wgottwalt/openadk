@@ -12,7 +12,7 @@ PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/SolidRun/u-boot-imx6.git
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_SYSTEM_DEPENDS:=	cubox-i hummingboard
+PKG_SYSTEM_DEPENDS:=	solidrun-imx6
 
 include $(ADK_TOPDIR)/mk/package.mk
 

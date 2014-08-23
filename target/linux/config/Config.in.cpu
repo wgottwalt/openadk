@@ -47,14 +47,14 @@ config ADK_KERNEL_CPU_FREQ_GOV_CONSERVATIVE
 	default n
 
 config ADK_KERNEL_ARM_IMX6_CPUFREQ
-	prompt "CPU frequency support for cubox-i"
+	prompt "CPU frequency support for Solidrun IMX6"
 	boolean
 	select ADK_KERNEL_CPU_FREQ
 	select ADK_KERNEL_REGULATOR
 	select ADK_KERNEL_REGULATOR_FIXED_VOLTAGE
 	select ADK_KERNEL_REGULATOR_ANATOP
-	depends on ADK_TARGET_SYSTEM_CUBOX_I
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
 config ADK_KERNEL_ARM_BCM2835_CPUFREQ

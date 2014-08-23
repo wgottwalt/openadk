@@ -8,15 +8,15 @@ config ADK_KERNEL_I2C_CHARDEV
  	tristate
 
 config ADK_KERNEL_I2C_IMX
-	prompt "I2C driver for Cubox-i"
+	prompt "I2C driver for IMX6"
 	tristate
-	depends on ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_I2C_CHARDEV
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 	help
-	  I2C driver for Cubox-i.
+	  I2C driver for Solidrun IMX6.
 	
 config ADK_KERNEL_SCX200_ACB
 	prompt "I2C driver for Geode"
