@@ -1,7 +1,7 @@
 From 0b6a99fbbb11287ca5c3ce71ef13689e72d2b79e Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@uclibc-ng.org>
 Date: Thu, 21 Aug 2014 22:08:43 +0200
-Subject: [PATCH 9/9] fix typo
+Subject: [PATCH 09/10] fix typo
 
 otherwise you get compile warnings, when building for m68k.
 

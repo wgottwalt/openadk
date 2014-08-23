@@ -1,7 +1,7 @@
 From 012dfda4b27ad92edb6a9ea14e5ce4c5567d1c91 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@uclibc-ng.org>
 Date: Thu, 21 Aug 2014 22:04:59 +0200
-Subject: [PATCH 8/9] disable test for systems without FPU
+Subject: [PATCH 08/10] disable test for systems without FPU
 
 This test fails for systems without fpu.
 For example m68k build for non-mmu/non-fpu systems fail.

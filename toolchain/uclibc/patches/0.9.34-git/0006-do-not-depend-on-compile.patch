@@ -1,7 +1,7 @@
 From 19d6be8095e87682b04a9fb69ee8f6fd37e16a50 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Wed, 20 Aug 2014 20:32:38 +0200
-Subject: [PATCH 6/9] do not depend on compile
+Subject: [PATCH 06/10] do not depend on compile
 
 When you cross-compile the testsuite and then try to run
 on a system without gcc/binutils it would be nice if no compiling

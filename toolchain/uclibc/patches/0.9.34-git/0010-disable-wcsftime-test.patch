@@ -1,0 +1,28 @@
+From bbab1c16b2fe6013c5951260cf276510bd7983b4 Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbx@uclibc-ng.org>
+Date: Sun, 24 Aug 2014 00:01:46 +0200
+Subject: [PATCH 10/10] disable wcsftime test
+
+Feature is not implemented in uClibc, so no need to do a test.
+
+Signed-off-by: Waldemar Brodkorb <wbx@uclibc-ng.org>
+---
+ test/time/Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/test/time/Makefile.in b/test/time/Makefile.in
+index 05f73a4..4fa9340 100644
+--- a/test/time/Makefile.in
++++ b/test/time/Makefile.in
+@@ -2,7 +2,7 @@
+ # Licensed under the LGPL v2.1, see the file COPYING.LIB in this tarball.
+ 
+ TESTS_DISABLED := bug-asctime bug-asctime_r time tst-mktime2 tst-posixtz \
+-	tst-strftime tst-strptime tst-timezone
++	tst-strftime tst-strptime tst-timezone tst-wcsftime
+ 
+ ifneq ($(UCLIBC_HAS_XLOCALE),y)
+ TESTS_DISABLED += tst-ftime_l
+-- 
+1.8.5.2 (Apple Git-48)
+
