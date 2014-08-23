@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		qemu
-PKG_VERSION:=		2.0.0
+PKG_VERSION:=		2.1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2790f44fd76da5de5024b4aafeb594c2
+PKG_MD5SUM:=		6726977292b448cbc7f89998fac6983b
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		zlib glib

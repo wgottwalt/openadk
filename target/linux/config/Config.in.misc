@@ -20,8 +20,8 @@ config ADK_KERNEL_SBUS
 
 config ADK_KERNEL_IMX_WEIM
 	boolean
-	depends on ADK_TARGET_SYSTEM_CUBOX_I
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
 menu "Miscellaneous devices support"

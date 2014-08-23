@@ -153,22 +153,22 @@ config ADK_KERNEL_FB_VESA
 
 config ADK_KERNEL_DRM_DW_HDMI_AUDIO
 	tristate
-	depends on ADK_TARGET_SYSTEM_CUBOX_I
-	depends on ADK_KERNEL_VERSION_3_15
-	#default m if ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	depends on ADK_KERNEL_VERSION_3_16
+	#default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
  	default n
  	help
 
 config ADK_KERNEL_DRM_DW_HDMI_CEC
 	tristate
-	depends on ADK_TARGET_SYSTEM_CUBOX_I
-	depends on ADK_KERNEL_VERSION_3_15
-	#default m if ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	depends on ADK_KERNEL_VERSION_3_16
+	#default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
  	default n
  	help
 	
 config ADK_KERNEL_DRM_IMX
-	prompt "Framebuffer support for Cubox-i"
+	prompt "Framebuffer support for Cubox-i/Hummingboard"
 	boolean
 	select ADK_KERNEL_DRM
 	select ADK_KERNEL_DMA_CMA
@@ -185,15 +185,15 @@ config ADK_KERNEL_DRM_IMX
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY
 	select ADK_KERNEL_I2C_IMX
-	depends on ADK_TARGET_SYSTEM_CUBOX_I
-	depends on ADK_KERNEL_VERSION_3_15
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	depends on ADK_KERNEL_VERSION_3_16
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
  	default n
  	help
-	 Framebuffer support for Cubox-i
+	 Framebuffer support for Cubox-i/Hummingboard
 
 config ADK_KERNEL_DRM_VIVANTE
-	prompt "Framebuffer support for Cubox-i"
+	prompt "Framebuffer support for Cubox-i/Hummingboard (Vivante)"
 	boolean
 	select ADK_KERNEL_DRM
 	select ADK_KERNEL_FB
@@ -201,12 +201,12 @@ config ADK_KERNEL_DRM_VIVANTE
 	select ADK_KERNEL_FB_MXS
 	select ADK_KERNEL_FB_MXC_SYNC_PANEL
 	select ADK_KERNEL_FB_MXC_HDMI
-	depends on ADK_TARGET_SYSTEM_CUBOX_I
-	depends on ADK_KERNEL_VERSION_3_10
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	depends on ADK_KERNEL_VERSION_3_14
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
  	default n
  	help
-	 Framebuffer support for Cubox-i (Vivante)
+	 Framebuffer support for Cubox-i/Hummingboard (Vivante)
 	
 config ADK_KERNEL_FB_PXA
 	prompt "Framebuffer support for Sharp Zaurus (PXA)"

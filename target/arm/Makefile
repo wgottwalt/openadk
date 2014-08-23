@@ -49,14 +49,9 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 	@echo "Use following command to install with a writable data partition"
 	@echo "sudo ./scripts/install-rpi.sh -d /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
-ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	@echo "Use following command to install it on SD card:"
-	@echo "sudo ./scripts/install-cubox.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL) $(FW_DIR)"
-
-endif
-ifeq ($(ADK_TARGET_SYSTEM_HUMMINGBOARD),y)
-	@echo "Use following command to install it on SD card:"
-	@echo "sudo ./scripts/install-cubox.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL) $(FW_DIR)"
+	@echo "sudo ./scripts/install-solidrun.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL) $(FW_DIR)"
 
 endif
 endif
@@ -90,22 +85,16 @@ kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
 dtb-install:
-ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
-		-j${ADK_MAKE_JOBS} imx6q-cubox-i.dtb imx6dl-cubox-i.dtb $(MAKE_TRACE)
-	$(CP) $(LINUX_DIR)/arch/arm/boot/dts/imx6*-cubox-i.dtb \
-		$(FW_DIR)
-endif
-ifeq ($(ADK_TARGET_SYSTEM_HUMMINGBOARD),y)
-	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
-		-j${ADK_MAKE_JOBS} imx6dl-hummingboard.dtb $(MAKE_TRACE)
-	$(CP) $(LINUX_DIR)/arch/arm/boot/dts/imx6*-hummingboard.dtb \
+		imx6q-cubox-i.dtb imx6dl-cubox-i.dtb imx6dl-hummingboard.dtb $(MAKE_TRACE)
+	$(CP) $(LINUX_DIR)/arch/arm/boot/dts/imx6*.dtb \
 		$(FW_DIR)
 endif
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
-ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I)$(ADK_TARGET_SYSTEM_HUMMINGBOARD),y)
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 imageinstall: dtb-install $(FW_DIR)/$(ROOTFSTARBALL) targethelp
 else
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp

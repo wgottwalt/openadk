@@ -54,7 +54,7 @@ tntnet-install:
 	${INSTALL_DIR} ${IDIR_TNTNET}/etc/tntnet
 	${INSTALL_DIR} ${IDIR_TNTNET}/usr/bin
 	${INSTALL_DIR} ${IDIR_TNTNET}/usr/lib/tntnet
-	${INSTALL_DATA} ./files/tntnet.{conf,properties} \
+	${INSTALL_DATA} ./files/tntnet.{xml,properties} \
 		${IDIR_TNTNET}/etc/tntnet
 	${INSTALL_DATA} ./files/mime.conf \
 		${IDIR_TNTNET}/etc/tntnet

@@ -27,12 +27,12 @@ config ADK_KERNEL_SPI_PXA2XX
 	select ADK_KERNEL_SPI
 
 config ADK_KERNEL_SPI_IMX
-	prompt "SPI driver for Solidrun Cubox-i"
+	prompt "SPI driver for Solidrun Cubox-i/Hummingboard"
 	tristate
 	select ADK_KERNEL_SPI
 	select ADK_KERNEL_SPI_MASTER
 	select ADK_KERNEL_SPI_BITBANG
-	default y if ADK_TARGET_SYSTEM_CUBOX_I
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
 endmenu

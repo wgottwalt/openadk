@@ -128,7 +128,7 @@ config ADK_KERNEL_BRCMFMAC
 	select ADK_KERNEL_BRCMFMAC_SDIO
 	select ADK_PACKAGE_BRCMFMAC_FIRMWARE
 	depends on ADK_TARGET_WITH_SDIO
-	default m if ADK_TARGET_SYSTEM_CUBOX_I
+	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 	help
 	  Driver for Broadcom FullMac wireless cards
