@@ -15,13 +15,20 @@ ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 QEMU_ARGS+=-netdev user,id=eth0 -device virtio-net-device,netdev=eth0
 endif
 ifeq ($(ADK_TARGET_FS),archive)
-QEMU_ARGS+=-drive file=qemu-${ADK_TARGET_CPU_ARCH}.img,if=virtio,index=0
+QEMU_ARGS+=-device virtio-blk-device,drive=vda -drive file=qemu-${ADK_TARGET_CPU_ARCH}.img,if=none,id=vda
 endif
 
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)
 targethelp:
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "Use following command to create a QEMU Image:"
+	@echo "./scripts/create.sh qemu-${ADK_TARGET_CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "Start qemu with following options:"
+	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${ADK_TARGET_CPU_ARCH}.img'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 targethelp:
@@ -51,6 +58,7 @@ endif
 endif
 
 kernel-strip:
+	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
 kernel-install: kernel-strip
 ifeq ($(ADK_TARGET_SYSTEM_ARM_FM),y)
@@ -62,6 +70,8 @@ ifeq ($(ADK_TARGET_SYSTEM_ARM_FM),y)
 		-C package/boot-wrapper-aarch64 package
 	${CP} ${LINUX_DIR}/linux-system.axf \
 		$(FW_DIR)/$(TARGET_KERNEL)
+else
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 endif
 
 # filesystem specific targets
