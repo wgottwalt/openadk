@@ -1,25 +1,17 @@
 global:
 - projects dir idea
 - lowercase package conversion
-- usefulness of *.la files ( can be removed?)
-
-toolchain stuff:
-- config.site/config.cache usage for speedup?
-  http://lists.gnu.org/archive/html/autoconf/2014-03/msg00031.html
 
 base system:
 - add fb full screen logo
-- try Preset Loops per Jiffy for faster bootup via lpj=
 - restart network (kill wpa_supplicant)
 - essid with spaces
 
 new or update packages:
-- port weston / wayland
+- update minilzo in cfgfs
+- lms perl 
 - add btrfs-utils
 - port uuterm
 - port msmtp
 - rutorrent porting
-- lms perl 
-
-system target specific:
-- microblaze: add cfgfs partition to dts, add partition to spartan dts
+- port weston / wayland
