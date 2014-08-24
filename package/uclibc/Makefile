@@ -80,5 +80,7 @@ uclibc-test-install:
 	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}/{Rules.mak,.config} \
 		${IDIR_UCLIBC_TEST}/opt/uclibc
 	@find ${IDIR_UCLIBC_TEST}/opt/uclibc -name \*.o -exec rm {} \;
+	# there is a problem with initramfs generation with the API dir. tests are disabled anyway.
+	rm -rf ${IDIR_UCLIBC_TEST}/opt/uclibc/API
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
