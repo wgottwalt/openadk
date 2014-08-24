@@ -216,6 +216,22 @@ config ADK_KERNEL_PATA_IMX
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
+	help
+	  eSATA driver for cubox-i
+
+config ADK_KERNEL_PATA_CMD64X
+	prompt "CMD64x PATA driver"
+	tristate
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_ATA
+	select ADK_KERNEL_ATA_SFF
+	select ADK_KERNEL_ATA_BMDMA
+	select ADK_KERNEL_BLK_DEV
+	select ADK_KERNEL_BLK_DEV_SD
+	depends on ADK_TARGET_SYSTEM_QEMU_SPARC64
+	default n
+	help
+	  Driver for CMD64x chipsets.
 
 config ADK_KERNEL_PATA_PXA
 	prompt "PATA driver for Sharp Zaurus"
