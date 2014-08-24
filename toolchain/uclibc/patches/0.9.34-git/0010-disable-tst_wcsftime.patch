@@ -1,7 +1,7 @@
 From f3bbc3ce512df52a604c3da80163146245d03c0e Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@uclibc-ng.org>
 Date: Sun, 24 Aug 2014 09:45:54 +0200
-Subject: [PATCH 10/10] disable tst_wcsftime
+Subject: [PATCH 10/11] disable tst_wcsftime
 
 Feature is not implemented in uClibc, so no need to do a test.
 

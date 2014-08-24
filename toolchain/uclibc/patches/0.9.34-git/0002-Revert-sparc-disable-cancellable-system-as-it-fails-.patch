@@ -1,7 +1,7 @@
 From 3422668d945229f9f707aafe24491b5d3e8d7636 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Wed, 20 Aug 2014 04:02:49 +0200
-Subject: [PATCH 02/10] Revert "sparc: disable cancellable system, as it fails
+Subject: [PATCH 02/11] Revert "sparc: disable cancellable system, as it fails
  in strange ways right now"
 
 This reverts commit 1db4f8f8389f6a935ecd83aff7fcce5d1cf2c0f3.

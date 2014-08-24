@@ -1,7 +1,7 @@
 From 984be720d4ee1fc717d4de5e67a776419003c1c6 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Wed, 20 Aug 2014 03:44:53 +0200
-Subject: [PATCH 01/10] Revert "sparc: use HIDDEN_JUMPTARGET for errno"
+Subject: [PATCH 01/11] Revert "sparc: use HIDDEN_JUMPTARGET for errno"
 
 This reverts commit f51fb26dbcceee9e48d10facc830bd4a549f6cc2.
 

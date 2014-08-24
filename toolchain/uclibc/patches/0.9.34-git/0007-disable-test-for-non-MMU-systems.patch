@@ -1,7 +1,7 @@
 From 325f778f3bbb1b13c436e7754dd22097d31c04d2 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@uclibc-ng.org>
 Date: Thu, 21 Aug 2014 22:02:26 +0200
-Subject: [PATCH 07/10] disable test for non-MMU systems
+Subject: [PATCH 07/11] disable test for non-MMU systems
 
 This test fails for non-MMU systems, because it uses fork()
 
