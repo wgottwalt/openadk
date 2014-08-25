@@ -4,16 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gstreamer
-PKG_VERSION:=		1.2.1
+PKG_VERSION:=		1.4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		55d50f48a496799dbb0b195c9c6c6153
+PKG_MD5SUM:=		594c0c06eaace9b9d3bad010de1bdfae
 PKG_DESCR:=		opensource multimedia framework
 PKG_SECTION:=		libs/video
+PKG_BUILDDEP:=		glib
+PKG_DEPENDS:=		glib
 PKG_URL:=		http://gstreamer.freedesktop.org/
 PKG_SITES:=		http://gstreamer.freedesktop.org/src/gstreamer/
 PKG_OPTS:=		dev
-
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
 
 include $(ADK_TOPDIR)/mk/package.mk
 
