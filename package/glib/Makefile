@@ -40,9 +40,12 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getgrgid_r=yes
 
 HOST_STYLE:=		auto
+ifneq ($(OStype),Darwin)
+HOST_CONFIGURE_ARGS+=	--with-libiconv=no
+endif
 HOST_CONFIGURE_ARGS+=	--disable-fam \
 			--enable-static \
-			--with-libiconv=no \
+			--disable-shared \
 			--disable-compile-warnings
 
 glib-install:

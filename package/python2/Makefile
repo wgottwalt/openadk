@@ -98,6 +98,7 @@ CONFIGURE_ARGS:=	--with-threads \
 			--with-system-ffi \
 			--without-cxx-main
 
+HOST_CONFIGURE_ENV+=	MACOSX_DEPLOYMENT_TARGET=10.9
 HOST_CONFIGURE_ARGS+=	--with-threads \
 			--disable-ipv6 \
 			--disable-shared \
