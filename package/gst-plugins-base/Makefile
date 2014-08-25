@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gst-plugins-base
-PKG_VERSION:=		1.2.1
+PKG_VERSION:=		1.4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2e75fb03ed7e4d24d88601fcac4d57aa
+PKG_MD5SUM:=		1ff06280b03b9098a706d1290d8bb3bd
 PKG_DESCR:=		gstreamer base plugins
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		gstreamer
@@ -15,13 +15,12 @@ PKG_URL:=		http://gstreamer.freedesktop.org/
 PKG_SITES:=		http://gstreamer.freedesktop.org/src/gst-plugins-base/
 PKG_OPTS:=		dev
 
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
-
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GST_PLUGINS_BASE,gst-plugins-base,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
+CONFIGURE_ARGS+=	--without-x
 
 gst-plugins-base-install:
 	$(INSTALL_DIR) $(IDIR_GST_PLUGINS_BASE)/usr/lib/gstreamer-1.0/
