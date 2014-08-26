@@ -4,20 +4,21 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		classpath
-PKG_VERSION:=		0.98
+PKG_VERSION:=		0.99
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		90c6571b8b0309e372faa0f9f6255ea9
+PKG_MD5SUM:=		0ae1571249172acd82488724a3b8acb4 acfa69f928a0f1653555bda73091efca
 PKG_DESCR:=		java classpath
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		gtk+ gdk-pixbuf orbit2 gconf
 PKG_DEPENDS:=		libgtk gdk-pixbuf orbit2 gconf
+HOST_BUILDDEP:=		gcj-host ecj-host
 PKG_URL:=		http://www.gnu.org/software/classpath/home.html
-PKG_SITES:=		${MASTER_SITE_GNU:=classpath/}
+PKG_SITES:=		ftp.gnu.org/classpath/ \
+			http://www.antlr3.org/download/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz antlr-3.5.2-complete.jar
 
 PKG_HOST_DEPENDS:=	linux
-PKG_ARCH_DEPENDS:=	!arm
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -26,7 +27,8 @@ $(eval $(call HOST_template,CLASSPATH,classpath,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,CLASSPATH,classpath,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_CONFIGURE_ARGS+=	--disable-plugin \
-			--disable-tools \
+			--enable-tools \
+			--with-antlr-jar=${WRKBUILD}/antlr-3.5.2-complete.jar \
 			--disable-examples \
 			--disable-gtk-peer \
 			--disable-gconf-peer \
