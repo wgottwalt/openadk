@@ -33,6 +33,7 @@ $(WRKBUILD)/.configured:
 		--disable-tui \
 		--disable-werror \
 		--disable-install-libiberty \
+		--without-python \
 		--without-x \
 	);
 	touch $@
