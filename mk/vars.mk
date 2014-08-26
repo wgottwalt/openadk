@@ -74,8 +74,13 @@ ifneq ($(strip ${ADK_USE_CCACHE}),)
 TARGET_COMPILER_PREFIX=$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CROSS}
 endif
 
+# use a gcc wrapper for uClinux
+ifeq ($(ADK_TARGET_UCLINUX),y)
+TARGET_CC:=		adk-uclinux-gcc
+else
 # target tools
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
+endif
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
 TARGET_AR:=		${TARGET_COMPILER_PREFIX}ar
@@ -94,8 +99,8 @@ TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
-TARGET_CFLAGS+=		-Wl,-elf2flt -msep-data
-TARGET_CXXFLAGS+=	-Wl,-elf2flt -msep-data
+TARGET_CFLAGS+=		-msep-data
+TARGET_CXXFLAGS+=	-msep-data
 TARGET_LDFLAGS+=	-elf2flt
 endif
 

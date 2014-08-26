@@ -20,10 +20,14 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-build:
+	PATH="${TOOLCHAIN_DIR}/usr/bin:$$PATH" \
 	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \
 		-o ${WRKBUILD}/simpleinit ${WRKBUILD}/simpleinit.c
 
 do-install:
+	${INSTALL_DIR} ${IDIR_SIMPLEINIT}/etc
+	${CP} ./files/rc ${IDIR_SIMPLEINIT}/etc
+	${CP} ./files/inittab ${IDIR_SIMPLEINIT}/etc
 	${INSTALL_DIR} ${IDIR_SIMPLEINIT}/sbin
 	${INSTALL_BIN} ${WRKBUILD}/simpleinit ${IDIR_SIMPLEINIT}/sbin/init
 
