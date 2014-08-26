@@ -170,7 +170,7 @@ config ADK_KERNEL_ATA_PIIX
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
 	help
-	  ATA PIXX driver
+	  ATA PIIX driver.
 
 config ADK_KERNEL_PATA_MACIO
 	prompt "MAC IO support"
