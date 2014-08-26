@@ -170,8 +170,16 @@ CONFIGURE_ARGS+=	--with-platform=raspberry-pi \
 			--disable-sdl \
 			--disable-x11
 else
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
+CONFIGURE_ARGS+=	--disable-x11 \
+			--disable-sdl \
+			--disable-gles \
+			--enable-neon \
+			--enable-codec=imxvpu
+else
 CONFIGURE_ARGS+=	--enable-x11 \
 			--enable-sdl
+endif
 endif
 
 pre-configure:
