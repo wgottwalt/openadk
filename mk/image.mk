@@ -6,6 +6,8 @@ ifeq (${ADK_BINSH_ASH},y)
 BINSH:=ash
 else ifeq (${ADK_BINSH_BASH},y)
 BINSH:=bash
+else ifeq (${ADK_BINSH_SASH},y)
+BINSH:=sash
 else ifeq (${ADK_BINSH_HUSH},y)
 BINSH:=hush
 else ifeq (${ADK_BINSH_MKSH},y)
@@ -21,6 +23,8 @@ ifeq (${ADK_ROOTSH_ASH},y)
 ROOTSH:=/bin/ash
 else ifeq (${ADK_ROOTSH_BASH},y)
 ROOTSH:=/bin/bash
+else ifeq (${ADK_ROOTSH_SASH},y)
+ROOTSH:=/bin/sash
 else ifeq (${ADK_ROOTSH_HUSH},y)
 ROOTSH:=/bin/hush
 else ifeq (${ADK_ROOTSH_MKSH},y)
@@ -54,9 +58,13 @@ image-prepare-post:
 			mkfontdir ${TARGET_DIR}/usr/share/fonts/X11/$${i}; \
 		done; \
 	fi
+ifeq (${ADK_ROOTSH_SASH},)
 	$(SED) '/^root:/s!:/bin/sh$$!:${ROOTSH}!' ${TARGET_DIR}/etc/passwd
+endif
+ifeq (${ADK_BINSH_SASH},)
 	-rm -f ${TARGET_DIR}/bin/sh
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
+endif
 	test -z $(GIT) || \
 	     $(GIT) log -1|head -1|sed -e 's#commit ##' \
 		> $(TARGET_DIR)/etc/.adkversion

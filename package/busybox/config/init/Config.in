@@ -44,6 +44,7 @@ config BUSYBOX_FEATURE_BOOTCHARTD_CONFIG_FILE
 	help
 	  Enable reading and parsing of $PWD/bootchartd.conf
 	  and /etc/bootchartd.conf files.
+
 config BUSYBOX_HALT
 	bool "poweroff, halt, and reboot"
 	default y
@@ -69,9 +70,11 @@ config BUSYBOX_TELINIT_PATH
 	  When busybox halt and friends have to call external telinit
 	  to facilitate proper shutdown, this path is to be used when
 	  locating telinit executable.
+
 config BUSYBOX_INIT
 	bool "init"
 	default y
+	depends on !ADK_TARGET_UCLINUX
 	select BUSYBOX_FEATURE_SYSLOG
 	help
 	  init is the first program run when the system boots.

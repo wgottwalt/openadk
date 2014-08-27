@@ -40,7 +40,7 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 ROOTFS:=	root=/dev/mmcblk0p2 rootwait
 endif
 
-ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 ROOTFS:=	root=/dev/mmcblk0p1 rootwait
 endif
 

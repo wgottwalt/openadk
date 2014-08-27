@@ -11,7 +11,7 @@ BINUTILS_VERSION:=	2.24
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); ./configure --prefix=$(STAGING_HOST_DIR)/usr \
-			--target=$(ADK_TARGET_ARCH) \
+			--target=$(GNU_TARGET_NAME) \
 			--with-bfd-include-dir=$(TOOLCHAIN_BUILD_DIR)/w-binutils-${BINUTILS_VERSION}-1/binutils-${BINUTILS_VERSION}/bfd \
 			--with-binutils-include-dir=$(TOOLCHAIN_BUILD_DIR)/w-binutils-${BINUTILS_VERSION}-1/binutils-${BINUTILS_VERSION}/include \
 			--with-libbfd=$(TOOLCHAIN_BUILD_DIR)/w-binutils-${BINUTILS_VERSION}-1/binutils-${BINUTILS_VERSION}/bfd/libbfd.a \

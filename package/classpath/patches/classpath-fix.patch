@@ -1,7 +1,7 @@
 diff -Nur classpath-0.98.orig//lib/Makefile.in classpath-0.98/lib/Makefile.in
---- classpath-0.98.orig//lib/Makefile.in	2009-02-06 02:01:32.000000000 +0100
-+++ classpath-0.98/lib/Makefile.in	2011-08-05 22:55:25.965284504 +0200
-@@ -272,7 +272,7 @@
+--- classpath-0.99.orig/lib/Makefile.in	2012-03-09 00:54:14.000000000 +0100
++++ classpath-0.99/lib/Makefile.in	2014-08-24 21:21:19.000000000 +0200
+@@ -305,7 +305,7 @@ top_srcdir = @top_srcdir@
  uudecode = @uudecode@
  vm_classes = @vm_classes@
  JAVA_DEPEND = java.dep

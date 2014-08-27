@@ -1,0 +1,30 @@
+From 012dfda4b27ad92edb6a9ea14e5ce4c5567d1c91 Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbx@uclibc-ng.org>
+Date: Thu, 21 Aug 2014 22:04:59 +0200
+Subject: [PATCH 8/9] disable test for systems without FPU
+
+This test fails for systems without fpu.
+For example m68k build for non-mmu/non-fpu systems fail.
+
+Signed-off-by: Waldemar Brodkorb <wbx@uclibc-ng.org>
+---
+ test/math/Makefile.in | 3 +++
+ 1 file changed, 3 insertions(+)
+
+diff --git a/test/math/Makefile.in b/test/math/Makefile.in
+index d241baa..147d579 100644
+--- a/test/math/Makefile.in
++++ b/test/math/Makefile.in
+@@ -13,6 +13,9 @@ endif
+ ifeq ($(DO_C99_MATH),)
+ TESTS_DISABLED += test-float test-ifloat test-double test-idouble rint signgam ilogb
+ endif
++ifeq ($(UCLIBC_HAS_FPU),)
++TESTS_DISABLED += test-fpucw
++endif
+ 
+ DODIFF_rint     := 1
+ DODIFF_signgam  := 1
+-- 
+1.8.5.2 (Apple Git-48)
+

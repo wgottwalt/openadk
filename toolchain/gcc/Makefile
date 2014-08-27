@@ -48,11 +48,15 @@ ifneq ($(ADK_LINUX_AARCH64)$(ADK_LINUX_ALPHA)$(ADK_LINUX_XTENSA)$(ADK_LINUX_M68K
 GCC_FINAL_CONFOPTS+=	--enable-cxx-flags='$(TARGET_CXXFLAGS)'
 endif
 
+ifeq ($(ADK_TARGET_UCLINUX),y)
+GCC_FINAL_CONFOPTS+=	--disable-shared
+else
 # uClibc/glibc uses libgcc_s.so.1 for pthread_cancel with dlopen
 ifeq (ADK_TARGET_LIB_MUSL),y)
 GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++'
 else
 GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++,libgcc'
+endif
 endif
 
 ifeq ($(ADK_LINUX_M68K)$(ADK_LINUX_SH)$(ADK_LINUX_X86_64)$(ADK_LINUX_X86),)
@@ -267,6 +271,10 @@ endif
 		ln -sf libstdc++.so.6.0.19 libstdc++.so.6
 	# cleanup unneeded docs
 	rm -rf $(TOOLCHAIN_DIR)/usr/share
+	# create gcc wrapper for uClinux/m68k
+	echo "#!/bin/sh" > $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+	echo "exec ${GNU_TARGET_NAME}-gcc \"\$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/m68k-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+	chmod a+x $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk
