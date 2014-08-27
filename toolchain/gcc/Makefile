@@ -273,7 +273,7 @@ endif
 	rm -rf $(TOOLCHAIN_DIR)/usr/share
 	# create gcc wrapper for uClinux/m68k
 	echo "#!/bin/sh" > $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-	echo "exec ${GNU_TARGET_NAME}-gcc \"$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/m68k-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+	echo "exec ${GNU_TARGET_NAME}-gcc \"\$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/m68k-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
 	chmod a+x $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
 	touch $@
 
