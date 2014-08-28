@@ -64,11 +64,12 @@ config ADK_MAKE_JOBS
 config ADK_MAKE_PARALLEL
 	prompt "Enable parallel building of packages"
 	boolean
+	default y
 
 config ADK_MAKE_JOBS
 	prompt "How many jobs to use"
 	int
-	default 2
+	default 4
 	depends on ADK_MAKE_PARALLEL
 	help
 	  The number specified here will be passed to make as N in '-jN'
