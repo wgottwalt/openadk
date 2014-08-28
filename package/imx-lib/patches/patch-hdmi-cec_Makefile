@@ -1,0 +1,26 @@
+--- imx-lib-3.10.17-1.0.0.orig/hdmi-cec/Makefile	2014-01-16 15:27:12.000000000 +0100
++++ imx-lib-3.10.17-1.0.0/hdmi-cec/Makefile	2014-08-27 08:38:14.339600710 +0200
+@@ -21,18 +21,18 @@ endif
+ all: $(LIBNAME).so $(LIBNAME).a
+ 
+ install: install_headers
+-	@mkdir -p $(DEST_DIR)/usr/lib
+-	cp -P $(LIBNAME).* $(DEST_DIR)/usr/lib
++	@mkdir -p $(DESTDIR)/usr/lib
++	cp -P $(LIBNAME).* $(DESTDIR)/usr/lib
+ 
+ install_headers:
+-	@mkdir -p $(DEST_DIR)/usr/include
+-	cp hdmi-cec.h $(DEST_DIR)/usr/include
++	@mkdir -p $(DESTDIR)/usr/include
++	cp hdmi-cec.h $(DESTDIR)/usr/include
+ else
+ all install :
+ endif
+ 
+ %.o: %.c
+-	$(CC) -D$(PLATFORM) -Wall -O2 -fPIC -c $^ -o $@
++	$(CC) -D$(PLATFORM) $(CFLAGS) -fPIC -c $^ -o $@
+ 
+ $(LIBNAME).so.$(SONAMEVERSION): $(OBJ)
+ 	$(CC) -shared -nostartfiles -Wl,-soname,$@ $^ -o $@
