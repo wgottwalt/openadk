@@ -1,0 +1,28 @@
+--- imx-vpu-3.10.17-1.0.0.orig/vpu/Makefile	2014-01-16 15:27:33.000000000 +0100
++++ imx-vpu-3.10.17-1.0.0/vpu/Makefile	2014-08-27 08:43:40.116737574 +0200
+@@ -21,19 +21,19 @@ endif
+ all: $(LIBNAME).so $(LIBNAME).a
+ 
+ install: install_headers
+-	@mkdir -p $(DEST_DIR)/usr/lib
+-	cp -P $(LIBNAME).* $(DEST_DIR)/usr/lib
++	@mkdir -p $(DESTDIR)/usr/lib
++	cp -P $(LIBNAME).* $(DESTDIR)/usr/lib
+ 
+ install_headers:
+-	@mkdir -p $(DEST_DIR)/usr/include
+-	cp vpu_lib.h $(DEST_DIR)/usr/include
+-	cp vpu_io.h $(DEST_DIR)/usr/include
++	@mkdir -p $(DESTDIR)/usr/include
++	cp vpu_lib.h $(DESTDIR)/usr/include
++	cp vpu_io.h $(DESTDIR)/usr/include
+ else
+ all install :
+ endif
+ 
+ %.o: %.c
+-	$(CC) -D$(PLATFORM) -Wall -O2 -fPIC -c $^ -o $@
++	$(CC) -D$(PLATFORM) $(CFLAGS) -fPIC -c $^ -o $@
+ 
+ $(LIBNAME).so.$(SONAMEVERSION): $(OBJ)
+ 	$(CC) -shared -nostartfiles -Wl,-soname,$@ $^ -o $@ -lpthread

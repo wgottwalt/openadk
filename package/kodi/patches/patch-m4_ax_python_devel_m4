@@ -1,0 +1,11 @@
+--- xbmc-13.0rc1.orig/m4/ax_python_devel.m4	2014-04-30 15:43:58.000000000 +0200
++++ xbmc-13.0rc1/m4/ax_python_devel.m4	2014-05-02 08:03:10.000000000 +0200
+@@ -298,7 +298,7 @@ EOD`
+ 	# save current global flags
+ 	ac_save_LIBS="$LIBS"
+ 	ac_save_CPPFLAGS="$CPPFLAGS"
+-	LIBS="$ac_save_LIBS $PYTHON_LDFLAGS $PYTHON_EXTRA_LDFLAGS $PYTHON_EXTRA_LIBS"
++	LIBS="$ac_save_LIBS $PYTHON_LDFLAGS"
+ 	CPPFLAGS="$ac_save_CPPFLAGS $PYTHON_CPPFLAGS"
+ 	AC_LANG_PUSH([C])
+ 	AC_LINK_IFELSE([

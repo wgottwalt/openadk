@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
-PKG_VERSION:=		2.3.2
+PKG_VERSION:=		2.3.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		651e5e82360baba41e4d1e426b4897f6
+PKG_MD5SUM:=		72361d3b8717b6db3ad2b9da8df7af5e
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs/video
 PKG_FDEPENDS:=		libpthread
@@ -128,7 +128,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--sysroot=${STAGING_TARGET_DIR} \
 			--cross-prefix=${TARGET_CROSS} \
 			--cc='$(TARGET_CC)' \
-			--host-cc=$(CC_FOR_BUILD) \
+			--host-cc=$(HOST_CC) \
 			--disable-bzlib \
 			--disable-doc \
 			--disable-debug \
