@@ -1,0 +1,44 @@
+From fd8d6c5d6bebff0b3a106364e26e75399880b34b Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbx@openadk.org>
+Date: Thu, 28 Aug 2014 22:49:10 +0200
+Subject: [PATCH 2/2] test: skip test for non-mmu case
+
+Non-mmu targets have no fork(). In the case of vfork(),
+we can not test communication between parent and child
+in this way.
+
+Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
+---
+ test/librt/shmtest.c | 12 ++++++++++++
+ 1 file changed, 12 insertions(+)
+
+diff --git a/test/librt/shmtest.c b/test/librt/shmtest.c
+index a14302d..2be09cc 100644
+--- a/test/librt/shmtest.c
++++ b/test/librt/shmtest.c
+@@ -14,6 +14,8 @@
+ #include <sys/stat.h>
+ #include <sys/wait.h>
+ 
++#ifdef __ARCH_USE_MMU__
++
+ #define ARRAY_SIZE(arr) (sizeof(arr) / sizeof((arr)[0]))
+ 
+ char shared_name[] = "/sharetest";
+@@ -102,3 +104,13 @@ int main(void) {
+ 	}
+ 	return 0;
+ }
++
++#else
++
++int main(void)
++{
++	printf("Skipping test on non-mmu host!\n");
++	return EXIT_SUCCESS;
++}
++
++#endif
+-- 
+1.8.5.2 (Apple Git-48)
+

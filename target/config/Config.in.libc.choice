@@ -45,7 +45,7 @@ config ADK_TARGET_LIB_GLIBC
 	  http://www.gnu.org/libc
 
 config ADK_TARGET_LIB_UCLIBC
-	prompt "uClibc embedded C library (deprecated)"
+	prompt "uClibc embedded C library"
 	boolean
 	select ADK_uclibc
 	depends on \
@@ -63,11 +63,6 @@ endchoice
 choice
 prompt "Target C library version"
 depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
-
-config ADK_TARGET_LIB_UCLIBC_NG_1_0_0
-	prompt "1.0.0rc1"
-	boolean
-	depends on ADK_TARGET_LIB_UCLIBC_NG
 
 config ADK_TARGET_LIB_UCLIBC_NG_GIT
 	prompt "git"
