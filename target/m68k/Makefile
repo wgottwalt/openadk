@@ -9,7 +9,7 @@ include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux
 QEMU_ARGS:=${ADK_QEMU_ARGS}
-QEMU_ARGS+=-M mcf5208evb -cpu m5208
+QEMU_ARGS+=-nographic -M mcf5208evb -cpu m5208
 
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)

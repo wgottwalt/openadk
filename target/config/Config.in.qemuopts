@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 menu "Qemu configuration"
-depends on ADK_TARGET_QEMU
+depends on ADK_TARGET_QEMU && !ADK_TARGET_SYSTEM_QEMU_M68K
 
 config ADK_QEMU_ARGS
 	string
@@ -29,7 +29,7 @@ endchoice
 
 choice
 prompt "Qemu Emulation with storage device"
-depends on ADK_TARGET_QEMU && !ADK_TARGET_SYSTEM_QEMU_XTENSA && !ADK_TARGET_SYSTEM_QEMU_AARCH64
+depends on ADK_TARGET_QEMU && !ADK_TARGET_SYSTEM_QEMU_XTENSA && !ADK_TARGET_SYSTEM_QEMU_AARCH64 && !ADK_TARGET_SYSTEM_QEMU_M68K
 default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_ARCHIVE
 default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_SQUASHFS
 default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_JFFS2
