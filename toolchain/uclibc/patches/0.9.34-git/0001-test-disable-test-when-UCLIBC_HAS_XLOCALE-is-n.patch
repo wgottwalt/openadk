@@ -1,0 +1,30 @@
+From 78bcf3a7a5db798d301875adba55b7b33397b789 Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbx@openadk.org>
+Date: Thu, 28 Aug 2014 14:09:51 +0200
+Subject: [PATCH] test: disable test when UCLIBC_HAS_XLOCALE is n
+
+wcsftime() is only implemented when locale support in uClibc
+is activated. So test will always fail when locale is deactivated
+by the user.
+
+Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
+---
+ test/time/Makefile.in | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/test/time/Makefile.in b/test/time/Makefile.in
+index 05f73a4..3b063f9 100644
+--- a/test/time/Makefile.in
++++ b/test/time/Makefile.in
+@@ -5,7 +5,7 @@ TESTS_DISABLED := bug-asctime bug-asctime_r time tst-mktime2 tst-posixtz \
+ 	tst-strftime tst-strptime tst-timezone
+ 
+ ifneq ($(UCLIBC_HAS_XLOCALE),y)
+-TESTS_DISABLED += tst-ftime_l
++TESTS_DISABLED += tst-ftime_l tst_wcsftime.c
+ endif
+ 
+ CFLAGS_tst-strptime2 := -std=c99
+-- 
+1.8.5.2 (Apple Git-48)
+
