@@ -64,6 +64,8 @@ PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
+PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
+PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
 PKG_DEPENDS_IBM_X40:=	libsdl libsdl-image libxshmfence libx11 libxext libxt libsm libice
 PKG_DEPENDS_VBOX_X86:=	libsdl libsdl-image libxshmfence libx11 libxext libxt libsm libice
 PKG_BUILDDEP_IBM_X40:=	nasm-host sdl sdl-image
@@ -82,7 +84,7 @@ XAKE_FLAGS+=		V=1 TIXML_USE_STL=1 GCC_HONOUR_COPTS=s
 TARGET_CPPFLAGS+=	-I. -I./utils \
 			-I$(STAGING_TARGET_DIR)/usr/include/boost-1_55 \
 			-I$(STAGING_TARGET_DIR)/usr/include/afpfs-ng \
-			-DTIXML_USE_STL=1 -DHAS_SIMPLEPM=1
+			-DTIXML_USE_STL=1 -DHAS_SIMPLEPM=1 -DLINUX
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \

@@ -303,6 +303,8 @@ EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 				cat $$file | cpio -id -H zip ;; \
 			*.arm|*.jar) \
 				mkdir ${WRKBUILD}; cp $$file ${WRKBUILD} ;; \
+			*.bin) \
+				sh $$file --force --auto-accept ;; \
 			*) \
 				echo "Cannot extract '$$file'" >&2; \
 				false ;; \
