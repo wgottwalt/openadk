@@ -220,6 +220,7 @@ config ADK_KERNEL_DRM_VIVANTE
 	prompt "Framebuffer support for Cubox-i/Hummingboard (Vivante)"
 	boolean
 	select ADK_KERNEL_DRM
+	select ADK_KERNEL_DMA_CMA
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY
