@@ -87,6 +87,7 @@ if [ $datadir -eq 0 ];then
 	rootsizeend=$(($rootsize+1))
 else
 	rootsize=$(($maxsize-32768-131072))
+	rootsizeend=$(($rootsize+1))
 	datasize=$(($maxsize-32768))
 	datasizeend=$(($datasize+1))
 fi
@@ -100,10 +101,10 @@ if [ $datadir -eq 0 ];then
 	parted -a optimal -s $1 unit s mkpart primary fat32 -- $rootsizeend $maxsize
 	sfdisk --change-id $1 2 88 >/dev/null 2>&1
 else
-	parted -a optimal -s $1 unit s mkpart primary ext2 -- 2048 $rootsize >/dev/null 2>&1
-	parted -a optimal -s $1 unit s mkpart primary ext2 -- $rootsize $datasize >/dev/null 2>&1
+	parted -a optimal -s $1 unit s mkpart primary ext2 -- 2048 $rootsize
+	parted -a optimal -s $1 unit s mkpart primary ext2 -- $rootsizeend $datasize
 	parted -a optimal -s $1 unit s mkpart primary fat32 -- $datasizeend $maxsize
-	sfdisk --change-id $1 3 88 >/dev/null 2>&1
+	sfdisk --change-id $1 3 88
 
 fi
 
