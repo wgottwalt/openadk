@@ -1,0 +1,33 @@
+From 23098cc9edbcc5aafb2692d83e7cae0b0f7887e5 Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbx@openadk.org>
+Date: Sat, 30 Aug 2014 17:34:07 +0200
+Subject: [PATCH 3/3] ldso: fix compile error for bfin non-mmu
+
+When compiling for bfin non-mmu, you get following error:
+ldso/ldso/dl-elf.c:731:18: error: '_dl_debug_file' undeclared (first use in this function)
+_dl_debug_file is only available when __SUPPORT_LD_DEBUG__ is
+defined.
+
+Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
+---
+ ldso/ldso/dl-elf.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/ldso/ldso/dl-elf.c b/ldso/ldso/dl-elf.c
+index 1b06bc1..4c42fbc 100644
+--- a/ldso/ldso/dl-elf.c
++++ b/ldso/ldso/dl-elf.c
+@@ -728,8 +728,10 @@ struct elf_resolve *_dl_load_elf_shared_library(unsigned rflags,
+ 				void *new_addr;
+ 				new_addr = map_writeable (infile, ppnt, piclib, flags, libaddr);
+ 				if (!new_addr) {
++#ifdef __SUPPORT_LD_DEBUG__
+ 					_dl_dprintf(_dl_debug_file, "Can't modify %s's text section.",
+ 						    libname);
++#endif
+ 					_dl_exit(1);
+ 				}
+ 				DL_UPDATE_LOADADDR_HDR(lib_loadaddr,
+-- 
+1.8.5.2 (Apple Git-48)
+
