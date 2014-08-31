@@ -110,6 +110,9 @@ config ADK_CPU_ARMV8
 config ADK_CPU_CF_5208
 	boolean
 
+config ADK_CPU_BFIN
+	boolean
+
 config ADK_TARGET_CPU_ARCH
 	string
 	default "aarch64" if ADK_LINUX_AARCH64 && ADK_little
@@ -118,6 +121,7 @@ config ADK_TARGET_CPU_ARCH
 	default "armv6" if ADK_LINUX_ARM && ADK_little && ADK_armv6
 	default "armv7a" if ADK_LINUX_ARM && ADK_little && ADK_armv7a
 	default "arm" if ADK_LINUX_ARM && ADK_little
+	default "bfin" if ADK_CPU_BFIN
 	default "i486" if ADK_CPU_I486
 	default "i586" if ADK_CPU_I586
 	default "i686" if ADK_CPU_I686

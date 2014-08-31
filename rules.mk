@@ -65,6 +65,9 @@ ADK_TARGET_KARCH:=$(ADK_TARGET_ARCH)
 ifeq ($(ADK_TARGET_ARCH),aarch64)
 ADK_TARGET_KARCH:=arm64
 endif
+ifeq ($(ADK_TARGET_ARCH),bfin)
+ADK_TARGET_KARCH:=blackfin
+endif
 ifeq ($(ADK_TARGET_ARCH),ppc)
 ADK_TARGET_KARCH:=powerpc
 endif
