@@ -1,0 +1,3051 @@
+diff -Nur libcec-2.1.4/ChangeLog libcec-imx6/ChangeLog
+--- libcec-2.1.4/ChangeLog	2013-12-16 10:32:51.000000000 +0100
++++ libcec-imx6/ChangeLog	2014-09-01 13:48:53.610430917 +0200
+@@ -1,3 +1,10 @@
++libcec (2.1.4-2) unstable; urgency=low
++
++  * fixed:
++    * OS X build
++
++ -- Pulse-Eight Packaging <packaging@pulse-eight.com>  Wed, 18 Dec 2013 02:14:00 +0100
++
+ libcec (2.1.4-1) unstable; urgency=low
+ 
+   * changed / added:
+diff -Nur libcec-2.1.4/configure.ac libcec-imx6/configure.ac
+--- libcec-2.1.4/configure.ac	2013-12-16 10:32:51.000000000 +0100
++++ libcec-imx6/configure.ac	2014-09-01 13:48:53.610430917 +0200
+@@ -93,6 +93,14 @@
+   esac
+ fi
+ 
++## i.MX6 support
++AC_ARG_ENABLE([imx6],
++  [AS_HELP_STRING([--enable-imx6],
++  [enable support for freescale i.MX6 (default is no)])],
++  [use_imx6=$enableval],
++  [use_imx6=no])
++
++
+ ## add the top dir and include to the include path, so we can include config.h and cec.h
+ CPPFLAGS="$CPPFLAGS -I\$(abs_top_srcdir)/src -I\$(abs_top_srcdir)/include"
+ 
+@@ -130,6 +138,7 @@
+ use_udev="no"
+ use_adapter_detection="yes"
+ use_lockdev="no"
++SUPPRESS_MANGLING_WARNINGS=" -Wno-psabi"
+ case "${host}" in
+   *-*-linux*)
+     ## search for udev if pkg-config was found
+@@ -210,6 +219,7 @@
+     AC_CHECK_HEADER(mach/mach_time.h,,AC_MSG_ERROR($msg_required_header_missing))
+     AC_CHECK_HEADER(CoreVideo/CVHostTime.h,,AC_MSG_ERROR($msg_required_header_missing))
+     AC_DEFINE([TARGET_DARWIN], [1], [Darwin target])
++    SUPPRESS_MANGLING_WARNINGS=""
+     ;;
+ esac
+ 
+@@ -268,6 +278,17 @@
+   features="$features\n  TDA995x support :\t\t\tno"
+ fi
+ 
++## mark i.MX6 support as available
++if test "x$use_imx6" != "xno"; then
++  AC_DEFINE([HAVE_IMX_API],[1],[Define to 1 to include i.MX6 support])
++  AM_CONDITIONAL(USE_IMX_API, true)
++  features="$features\n  i.MX6 support :\t\t\tyes"
++  LIB_INFO="$LIB_INFO 'i.MX6'"
++else
++  AM_CONDITIONAL(USE_IMX_API, false)
++  features="$features\n  i.MX6 support :\t\t\tno"
++fi
++
+ ## check if our build system is complete
+ AC_CHECK_HEADER(algorithm,,AC_MSG_ERROR($msg_required_header_missing))
+ AC_CHECK_HEADER(ctype.h,,AC_MSG_ERROR($msg_required_header_missing))
+@@ -342,7 +363,7 @@
+ LIBS_LIBCEC="$LIBS"
+ LIBS="$libs_client"
+ 
+-CXXFLAGS="$CXXFLAGS -fPIC -Wall -Wextra -Wno-missing-field-initializers -Wno-psabi"
++CXXFLAGS="$CXXFLAGS -fPIC -Wall -Wextra -Wno-missing-field-initializers $SUPPRESS_MANGLING_WARNINGS"
+ 
+ if test "x$use_debug" = "xyes"; then
+   CXXFLAGS="$CXXFLAGS -g"
+diff -Nur libcec-2.1.4/debian/changelog libcec-imx6/debian/changelog
+--- libcec-2.1.4/debian/changelog	2013-12-16 10:32:51.000000000 +0100
++++ libcec-imx6/debian/changelog	2014-09-01 13:48:53.698431426 +0200
+@@ -1,3 +1,10 @@
++libcec (2.1.4-2) unstable; urgency=low
++
++  * fixed:
++    * OS X build
++
++ -- Pulse-Eight Packaging <packaging@pulse-eight.com>  Wed, 18 Dec 2013 02:14:00 +0100
++
+ libcec (2.1.4-1) unstable; urgency=low
+ 
+   * changed / added:
+diff -Nur libcec-2.1.4/driver/p8usb-cec.inf libcec-imx6/driver/p8usb-cec.inf
+--- libcec-2.1.4/driver/p8usb-cec.inf	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/driver/p8usb-cec.inf	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,89 @@
++; Copyright (c) 2012 Pulse-Eight Limited
++
++[Version]
++Signature="$Windows NT$"
++Class=Ports
++ClassGuid={4D36E978-E325-11CE-BFC1-08002BE10318}
++Provider=%MFGNAME%
++LayoutFile=layout.inf
++CatalogFile=%MFGFILENAME%.cat
++DriverVer=08/29/2012,1.1.0.0
++
++[Manufacturer]
++%MFGNAME%=DeviceList, NTamd64
++
++[DestinationDirs]
++FakeModemCopyFileSection=12
++DefaultDestDir=12
++
++
++;------------------------------------------------------------------------------
++;  Windows 2000/XP/Vista-32bit Sections
++;------------------------------------------------------------------------------
++
++[DriverInstall.nt]
++include   = mdmcpq.inf
++CopyFiles = FakeModemCopyFileSection
++AddReg    = DriverInstall.nt.AddReg
++
++[DriverInstall.nt.AddReg]
++HKR,,DevLoader,,*ntkern
++HKR,,NTMPDriver,,%DRIVERFILENAME%.sys
++HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
++HKR,,PortSubClass,1,01
++
++[DriverInstall.nt.Services]
++AddService = usbser, 0x00000002, DriverService.nt
++
++[DriverService.nt]
++DisplayName   = %SERVICE%
++ServiceType   = 1 ; SERVICE_KERNEL_DRIVER
++StartType     = 3 ; SERVICE_DEMAND_START
++ErrorControl  = 1 ; SERVICE_ERROR_NORMAL
++ServiceBinary = %12%\%DRIVERFILENAME%.sys
++LoadOrderGroup = Base
++
++;------------------------------------------------------------------------------
++;  Vista-64bit Sections
++;------------------------------------------------------------------------------
++
++[DriverInstall.NTamd64]
++include   = mdmcpq.inf
++CopyFiles = FakeModemCopyFileSection
++AddReg    = DriverInstall.NTamd64.AddReg
++
++[DriverInstall.NTamd64.AddReg]
++HKR,,DevLoader,,*ntkern
++HKR,,NTMPDriver,,%DRIVERFILENAME%.sys
++HKR,,EnumPropPages32,,"MsPorts.dll,SerialPortPropPageProvider"
++HKR,,PortSubClass,1,01
++
++[DriverInstall.NTamd64.Services]
++AddService = usbser, 0x00000002, DriverService.NTamd64
++
++[DriverService.NTamd64]
++DisplayName    = %SERVICE%
++ServiceType    = 1 ; SERVICE_KERNEL_DRIVER
++StartType      = 3 ; SERVICE_DEMAND_START
++ErrorControl   = 1 ; SERVICE_ERROR_NORMAL
++ServiceBinary  = %12%\%DRIVERFILENAME%.sys
++LoadOrderGroup = Base
++
++[SourceDisksFiles]
++[SourceDisksNames]
++[DeviceList]
++%DESCRIPTION2% = DriverInstall, USB\VID_2548&PID_1002&MI_00
++%DESCRIPTION%  = DriverInstall, USB\VID_2548&PID_1001
++
++[DeviceList.NTamd64]
++%DESCRIPTION2% = DriverInstall, USB\VID_2548&PID_1002&MI_00
++%DESCRIPTION%  = DriverInstall, USB\VID_2548&PID_1001
++
++[Strings]
++MFGFILENAME    = "p8usb-cec"
++DRIVERFILENAME = "usbser"
++MFGNAME        = "Pulse-Eight Limited"
++INSTDISK       = "Pulse-Eight USB-CEC Installation Disc"
++DESCRIPTION    = "Pulse-Eight USB to HDMI CEC Adapter"
++DESCRIPTION2   = "Pulse-Eight USB to HDMI CEC Adapter (rev.2)"
++SERVICE        = "USB to HDMI-CEC"
+diff -Nur libcec-2.1.4/.gitignore libcec-imx6/.gitignore
+--- libcec-2.1.4/.gitignore	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/.gitignore	2014-09-01 13:48:53.610430917 +0200
+@@ -0,0 +1,117 @@
++/build
++/.cproject
++/.project
++/.settings
++*.dll
++*.exe
++*.exp
++*.ilk
++*.lib
++*.manifest
++*.metagen
++*.ncb
++*.opensdf
++*.pdb
++*.suo
++*.user
++*.aps
++
++*~
++
++/support/private
++
++/driver/p8usb-cec.cat
++/bootloader-driver/p8_usb_dfu.cat
++
++aclocal.m4
++autom4te.cache
++config.guess
++config.log
++config.status
++config.sub
++depcomp
++configure
++install-sh
++INSTALL
++libtool
++ltmain.sh
++Makefile
++Makefile.in
++missing
++config.h
++config.h.in
++config.h.in~
++stamp-h1
++
++/debian/*.log
++/debian/*.substvars
++/debian/*.debhelper
++/debian/files
++/debian/cec-utils
++/debian/libcec-dev
++/debian/libcec
++/debian/libcec2
++/debian/tmp
++
++include/boost
++
++project/bin
++project/Debug/
++project/*.exe
++project/Release/
++project/ipch/
++project/libcec.sdf
++project/obj
++project/Properties
++project/_*
++project/x64
++project/LibCecSharp/x64
++project/LibCecSharp/Debug
++project/LibCecSharp/Release
++project/libcec/x64
++project/libcec/Debug
++project/libcec/Release
++project/testclient/x64
++project/testclient/Debug
++project/testclient/Release
++
++project/RPi/toolchain
++project/RPi/firmware
++project/RPi/deps
++
++src/lib/.deps
++src/lib/.libs
++src/lib/*.a
++src/lib/*.la
++src/lib/*.lo
++src/lib/*.o
++src/lib/*.P
++src/lib/libcec.pc
++src/lib/Makefile
++src/lib/Makefile.in
++
++src/lib/util/*.d
++src/lib/util/*.o
++src/lib/util/*.a
++src/lib/util/*.P
++
++src/testclient/.deps
++src/testclient/.libs
++src/testclient/cec-client
++src/testclient/*.o
++
++src/CecSharpTester/bin
++src/CecSharpTester/obj
++
++src/cec-config-gui/obj
++src/cec-config/cec-config
++src/cec-config/*.o
++src/cec-config/.deps
++
++src/libcec-wmc/bin
++src/libcec-wmc/obj
++
++/dpinst-x86.exe
++/dpinst-amd64.exe
++
++/documentation
+diff -Nur libcec-2.1.4/include/cectypes.h libcec-imx6/include/cectypes.h
+--- libcec-2.1.4/include/cectypes.h	2013-12-16 10:32:51.000000000 +0100
++++ libcec-imx6/include/cectypes.h	2014-09-01 13:48:53.702431449 +0200
+@@ -295,6 +295,17 @@
+ #define CEC_TDA995x_VIRTUAL_COM		"CuBox"
+ 
+ /*!
++ * the path to use for the i.MX CEC wire
++ */
++#define CEC_IMX_PATH		"/dev/mxc_hdmi_cec"
++
++/*!
++ * the name of the virtual COM port to use for the i.MX CEC wire
++ */
++#define CEC_IMX_VIRTUAL_COM		"i.MX"
++
++
++/*!
+  * Mimimum client version
+  */
+ #define CEC_MIN_LIB_VERSION          2
+@@ -858,7 +869,8 @@
+   ADAPTERTYPE_P8_EXTERNAL      = 0x1,
+   ADAPTERTYPE_P8_DAUGHTERBOARD = 0x2,
+   ADAPTERTYPE_RPI              = 0x100,
+-  ADAPTERTYPE_TDA995x          = 0x200
++  ADAPTERTYPE_TDA995x          = 0x200,
++  ADAPTERTYPE_IMX	       = 0x300,
+ } cec_adapter_type;
+ 
+ typedef struct cec_menu_language
+Binärdateien libcec-2.1.4/project/favicon.ico und libcec-imx6/project/favicon.ico sind verschieden.
+Binärdateien libcec-2.1.4/project/libcec/libcec.rc und libcec-imx6/project/libcec/libcec.rc sind verschieden.
+diff -Nur libcec-2.1.4/project/libcec/libcec.vcxproj libcec-imx6/project/libcec/libcec.vcxproj
+--- libcec-2.1.4/project/libcec/libcec.vcxproj	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/libcec/libcec.vcxproj	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,281 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup Label="ProjectConfigurations">
++    <ProjectConfiguration Include="Debug|Win32">
++      <Configuration>Debug</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Debug|x64">
++      <Configuration>Debug</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|Win32">
++      <Configuration>Release</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|x64">
++      <Configuration>Release</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\..\include\cec.h" />
++    <ClInclude Include="..\..\include\cecc.h" />
++    <ClInclude Include="..\..\include\cecloader.h" />
++    <ClInclude Include="..\..\include\cectypes.h" />
++    <ClInclude Include="..\..\src\lib\adapter\AdapterCommunication.h" />
++    <ClInclude Include="..\..\src\lib\adapter\AdapterFactory.h" />
++    <ClInclude Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterCommands.h" />
++    <ClInclude Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterCommunication.h" />
++    <ClInclude Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterDetection.h" />
++    <ClInclude Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterMessage.h" />
++    <ClInclude Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterMessageQueue.h" />
++    <ClInclude Include="..\..\src\lib\CECClient.h" />
++    <ClInclude Include="..\..\src\lib\CECInputBuffer.h" />
++    <ClInclude Include="..\..\src\lib\CECProcessor.h" />
++    <ClInclude Include="..\..\src\lib\CECTypeUtils.h" />
++    <ClInclude Include="..\..\src\lib\devices\CECAudioSystem.h" />
++    <ClInclude Include="..\..\src\lib\devices\CECBusDevice.h" />
++    <ClInclude Include="..\..\src\lib\devices\CECDeviceMap.h" />
++    <ClInclude Include="..\..\src\lib\devices\CECPlaybackDevice.h" />
++    <ClInclude Include="..\..\src\lib\devices\CECRecordingDevice.h" />
++    <ClInclude Include="..\..\src\lib\devices\CECTuner.h" />
++    <ClInclude Include="..\..\src\lib\devices\CECTV.h" />
++    <ClInclude Include="..\..\src\lib\implementations\ANCommandHandler.h" />
++    <ClInclude Include="..\..\src\lib\implementations\CECCommandHandler.h" />
++    <ClInclude Include="..\..\src\lib\implementations\PHCommandHandler.h" />
++    <ClInclude Include="..\..\src\lib\implementations\RLCommandHandler.h" />
++    <ClInclude Include="..\..\src\lib\implementations\SLCommandHandler.h" />
++    <ClInclude Include="..\..\src\lib\implementations\VLCommandHandler.h" />
++    <ClInclude Include="..\..\src\lib\implementations\RHCommandHandler.h" />
++    <ClInclude Include="..\..\src\lib\implementations\AQCommandHandler.h" />
++    <ClInclude Include="..\..\src\lib\LibCEC.h" />
++    <ClInclude Include="..\..\src\lib\platform\adl\adl-edid.h" />
++    <ClInclude Include="..\..\src\lib\platform\adl\adl_defines.h" />
++    <ClInclude Include="..\..\src\lib\platform\adl\adl_sdk.h" />
++    <ClInclude Include="..\..\src\lib\platform\adl\adl_structures.h" />
++    <ClInclude Include="..\..\src\lib\platform\nvidia\nv-edid.h" />
++    <ClInclude Include="..\..\src\lib\platform\os.h" />
++    <ClInclude Include="..\..\src\lib\platform\sockets\serialport.h" />
++    <ClInclude Include="..\..\src\lib\platform\sockets\socket.h" />
++    <ClInclude Include="..\..\src\lib\platform\sockets\tcp.h" />
++    <ClInclude Include="..\..\src\lib\platform\threads\mutex.h" />
++    <ClInclude Include="..\..\src\lib\platform\threads\threads.h" />
++    <ClInclude Include="..\..\src\lib\platform\util\baudrate.h" />
++    <ClInclude Include="..\..\src\lib\platform\util\buffer.h" />
++    <ClInclude Include="..\..\src\lib\platform\util\edid.h" />
++    <ClInclude Include="..\..\src\lib\platform\util\StdString.h" />
++    <ClInclude Include="..\..\src\lib\platform\util\timeutils.h" />
++    <ClInclude Include="..\..\src\lib\platform\windows\dlfcn-win32.h" />
++    <ClInclude Include="..\..\src\lib\platform\windows\os-socket.h" />
++    <ClInclude Include="..\..\src\lib\platform\windows\os-threads.h" />
++    <ClInclude Include="..\..\src\lib\platform\windows\os-types.h" />
++    <ClInclude Include="..\..\src\lib\platform\windows\stdint.h" />
++    <ClInclude Include="resource.h" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\..\src\lib\adapter\AdapterFactory.cpp" />
++    <ClCompile Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterCommands.cpp" />
++    <ClCompile Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterCommunication.cpp" />
++    <ClCompile Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterDetection.cpp" />
++    <ClCompile Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterMessage.cpp" />
++    <ClCompile Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterMessageQueue.cpp" />
++    <ClCompile Include="..\..\src\lib\CECClient.cpp" />
++    <ClCompile Include="..\..\src\lib\CECProcessor.cpp" />
++    <ClCompile Include="..\..\src\lib\devices\CECAudioSystem.cpp" />
++    <ClCompile Include="..\..\src\lib\devices\CECBusDevice.cpp" />
++    <ClCompile Include="..\..\src\lib\devices\CECDeviceMap.cpp" />
++    <ClCompile Include="..\..\src\lib\devices\CECPlaybackDevice.cpp" />
++    <ClCompile Include="..\..\src\lib\devices\CECRecordingDevice.cpp" />
++    <ClCompile Include="..\..\src\lib\devices\CECTuner.cpp" />
++    <ClCompile Include="..\..\src\lib\devices\CECTV.cpp" />
++    <ClCompile Include="..\..\src\lib\implementations\ANCommandHandler.cpp" />
++    <ClCompile Include="..\..\src\lib\implementations\CECCommandHandler.cpp" />
++    <ClCompile Include="..\..\src\lib\implementations\PHCommandHandler.cpp" />
++    <ClCompile Include="..\..\src\lib\implementations\RLCommandHandler.cpp" />
++    <ClCompile Include="..\..\src\lib\implementations\SLCommandHandler.cpp" />
++    <ClCompile Include="..\..\src\lib\implementations\VLCommandHandler.cpp" />
++    <ClCompile Include="..\..\src\lib\implementations\RHCommandHandler.cpp" />
++    <ClCompile Include="..\..\src\lib\implementations\AQCommandHandler.cpp" />
++    <ClCompile Include="..\..\src\lib\LibCEC.cpp" />
++    <ClCompile Include="..\..\src\lib\LibCECC.cpp" />
++    <ClCompile Include="..\..\src\lib\LibCECDll.cpp" />
++    <ClCompile Include="..\..\src\lib\platform\adl\adl-edid.cpp" />
++    <ClCompile Include="..\..\src\lib\platform\nvidia\nv-edid.cpp" />
++    <ClCompile Include="..\..\src\lib\platform\windows\dlfcn-win32.cpp" />
++    <ClCompile Include="..\..\src\lib\platform\windows\os-edid.cpp" />
++    <ClCompile Include="..\..\src\lib\platform\windows\os-threads.cpp" />
++    <ClCompile Include="..\..\src\lib\platform\windows\serialport.cpp" />
++  </ItemGroup>
++  <ItemGroup>
++    <ResourceCompile Include="libcec.rc" />
++  </ItemGroup>
++  <PropertyGroup Label="Globals">
++    <ProjectGuid>{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}</ProjectGuid>
++    <RootNamespace>libcec</RootNamespace>
++    <ProjectName>libcec</ProjectName>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
++    <ConfigurationType>DynamicLibrary</ConfigurationType>
++    <UseDebugLibraries>true</UseDebugLibraries>
++    <CharacterSet>MultiByte</CharacterSet>
++    <PlatformToolset>v100</PlatformToolset>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
++    <ConfigurationType>DynamicLibrary</ConfigurationType>
++    <UseDebugLibraries>true</UseDebugLibraries>
++    <CharacterSet>MultiByte</CharacterSet>
++    <PlatformToolset>v100</PlatformToolset>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
++    <ConfigurationType>DynamicLibrary</ConfigurationType>
++    <UseDebugLibraries>false</UseDebugLibraries>
++    <CharacterSet>MultiByte</CharacterSet>
++    <PlatformToolset>v100</PlatformToolset>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
++    <ConfigurationType>DynamicLibrary</ConfigurationType>
++    <UseDebugLibraries>false</UseDebugLibraries>
++    <CharacterSet>MultiByte</CharacterSet>
++    <PlatformToolset>v100</PlatformToolset>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
++  <ImportGroup Label="ExtensionSettings">
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <PropertyGroup Label="UserMacros" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <OutDir>$(SolutionDir)..\build\</OutDir>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <OutDir>$(SolutionDir)..\build\x64\</OutDir>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <TargetName>libcec</TargetName>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <TargetName>$(ProjectName)</TargetName>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <IncludePath>$(SolutionDir)..\include;$(IncludePath)</IncludePath>
++    <LibraryPath>C:\WinDDK\7600.16385.1\lib\win7\i386;$(LibraryPath)</LibraryPath>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <IncludePath>$(SolutionDir)..\include;$(IncludePath)</IncludePath>
++    <LibraryPath>C:\WinDDK\7600.16385.1\lib\win7\amd64;$(LibraryPath)</LibraryPath>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <OutDir>$(SolutionDir)..\build\</OutDir>
++    <TargetName>libcec</TargetName>
++    <IncludePath>$(SolutionDir)..\include;$(IncludePath)</IncludePath>
++    <LibraryPath>C:\WinDDK\7600.16385.1\lib\win7\i386;$(LibraryPath)</LibraryPath>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
++    <OutDir>$(SolutionDir)..\build\x64\</OutDir>
++    <TargetName>$(ProjectName)</TargetName>
++    <IncludePath>$(SolutionDir)..\include;$(IncludePath)</IncludePath>
++    <LibraryPath>C:\WinDDK\7600.16385.1\lib\win7\amd64;$(LibraryPath)</LibraryPath>
++  </PropertyGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <ClCompile>
++      <WarningLevel>Level4</WarningLevel>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>CEC_DEBUGGING;HAVE_P8_USB;_USE_32BIT_TIME_T;_DEBUG;_CRT_SECURE_NO_WARNINGS;_WINSOCKAPI_;__STDC_CONSTANT_MACROS;DLL_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <DisableSpecificWarnings>
++      </DisableSpecificWarnings>
++      <TreatWarningAsError>true</TreatWarningAsError>
++    </ClCompile>
++    <Link>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++      <Version>
++      </Version>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <ClCompile>
++      <WarningLevel>Level4</WarningLevel>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>CEC_DEBUGGING;HAVE_P8_USB;_WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;_WINSOCKAPI_;__STDC_CONSTANT_MACROS;DLL_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <DisableSpecificWarnings>
++      </DisableSpecificWarnings>
++      <TreatWarningAsError>true</TreatWarningAsError>
++    </ClCompile>
++    <Link>
++      <AdditionalDependencies>
++      </AdditionalDependencies>
++      <IgnoreSpecificDefaultLibraries>
++      </IgnoreSpecificDefaultLibraries>
++      <Version>
++      </Version>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <ClCompile>
++      <WarningLevel>Level4</WarningLevel>
++      <Optimization>Full</Optimization>
++      <FunctionLevelLinking>true</FunctionLevelLinking>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <PreprocessorDefinitions>HAVE_P8_USB;_USE_32BIT_TIME_T;_CRT_SECURE_NO_WARNINGS;_WINSOCKAPI_;__STDC_CONSTANT_MACROS;DLL_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <DisableSpecificWarnings>
++      </DisableSpecificWarnings>
++      <TreatWarningAsError>true</TreatWarningAsError>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++    </ClCompile>
++    <Link>
++      <GenerateDebugInformation>false</GenerateDebugInformation>
++      <EnableCOMDATFolding>true</EnableCOMDATFolding>
++      <OptimizeReferences>true</OptimizeReferences>
++      <Version>
++      </Version>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
++    <ClCompile>
++      <WarningLevel>Level4</WarningLevel>
++      <Optimization>Full</Optimization>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <PreprocessorDefinitions>HAVE_P8_USB;_WIN64;_CRT_SECURE_NO_WARNINGS;_WINSOCKAPI_;__STDC_CONSTANT_MACROS;DLL_EXPORT;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <DisableSpecificWarnings>
++      </DisableSpecificWarnings>
++      <TreatWarningAsError>true</TreatWarningAsError>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++    </ClCompile>
++    <Link>
++      <GenerateDebugInformation>false</GenerateDebugInformation>
++      <EnableCOMDATFolding>true</EnableCOMDATFolding>
++      <OptimizeReferences>true</OptimizeReferences>
++      <AdditionalDependencies>
++      </AdditionalDependencies>
++      <IgnoreSpecificDefaultLibraries>
++      </IgnoreSpecificDefaultLibraries>
++      <Version>
++      </Version>
++    </Link>
++    <ProjectReference />
++    <Lib>
++      <TargetMachine>MachineX64</TargetMachine>
++      <TreatLibWarningAsErrors>true</TreatLibWarningAsErrors>
++      <SubSystem>Windows</SubSystem>
++    </Lib>
++  </ItemDefinitionGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
++  <ImportGroup Label="ExtensionTargets">
++  </ImportGroup>
++</Project>
+\ Kein Zeilenumbruch am Dateiende.
+diff -Nur libcec-2.1.4/project/libcec/libcec.vcxproj.filters libcec-imx6/project/libcec/libcec.vcxproj.filters
+--- libcec-2.1.4/project/libcec/libcec.vcxproj.filters	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/libcec/libcec.vcxproj.filters	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,281 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup>
++    <Filter Include="exports">
++      <UniqueIdentifier>{01b9c84a-dcfe-4bdc-b983-69e3e3929b0f}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="implementations">
++      <UniqueIdentifier>{03bd59df-ccac-4664-b61b-3151bb219efa}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="devices">
++      <UniqueIdentifier>{bfc43a58-636d-4c1a-b191-486cb8509c7c}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="adapter">
++      <UniqueIdentifier>{51614b77-8a0e-47a8-8500-5beb0fd12d49}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="platform">
++      <UniqueIdentifier>{7d05b1b5-e728-4f9e-b78f-d63cac4ded8e}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="platform\sockets">
++      <UniqueIdentifier>{6cfe4bad-ed3a-4a16-8c59-4489089f5fe5}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="platform\util">
++      <UniqueIdentifier>{39a56ebf-ba93-4e7b-bf72-2f57b99a1ee1}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="platform\threads">
++      <UniqueIdentifier>{be183456-d61e-4283-b642-fe25ed71e9c5}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="platform\windows">
++      <UniqueIdentifier>{65c4a590-4577-40e4-91ad-339e20b99ebe}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="platform\adl">
++      <UniqueIdentifier>{4fbd02e2-5671-4132-9b37-964c17fb3b0d}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="platform\nvidia">
++      <UniqueIdentifier>{685e2589-204d-4f9a-a637-a7ba1b61c669}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="adapter\Pulse-Eight">
++      <UniqueIdentifier>{a5e91a49-0595-49bd-9bdb-d729d63f024e}</UniqueIdentifier>
++    </Filter>
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\..\src\lib\CECProcessor.h" />
++    <ClInclude Include="..\..\src\lib\LibCEC.h" />
++    <ClInclude Include="..\..\include\cec.h">
++      <Filter>exports</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\include\cecc.h">
++      <Filter>exports</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\include\cecloader.h">
++      <Filter>exports</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\include\cectypes.h">
++      <Filter>exports</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\implementations\ANCommandHandler.h">
++      <Filter>implementations</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\implementations\CECCommandHandler.h">
++      <Filter>implementations</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\implementations\SLCommandHandler.h">
++      <Filter>implementations</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\devices\CECBusDevice.h">
++      <Filter>devices</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\implementations\VLCommandHandler.h">
++      <Filter>implementations</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\implementations\RHCommandHandler.h">
++      <Filter>implementations</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\implementations\ANCommandHandler.h">
++      <Filter>implementations</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\devices\CECAudioSystem.h">
++      <Filter>devices</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\devices\CECPlaybackDevice.h">
++      <Filter>devices</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\devices\CECRecordingDevice.h">
++      <Filter>devices</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\devices\CECTuner.h">
++      <Filter>devices</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\devices\CECTV.h">
++      <Filter>devices</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\os.h">
++      <Filter>platform</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\sockets\serialport.h">
++      <Filter>platform\sockets</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\sockets\socket.h">
++      <Filter>platform\sockets</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\sockets\tcp.h">
++      <Filter>platform\sockets</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\util\baudrate.h">
++      <Filter>platform\util</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\util\buffer.h">
++      <Filter>platform\util</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\util\StdString.h">
++      <Filter>platform\util</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\util\timeutils.h">
++      <Filter>platform\util</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\threads\mutex.h">
++      <Filter>platform\threads</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\threads\threads.h">
++      <Filter>platform\threads</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\windows\os-socket.h">
++      <Filter>platform\windows</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\windows\os-threads.h">
++      <Filter>platform\windows</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\windows\os-types.h">
++      <Filter>platform\windows</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\windows\stdint.h">
++      <Filter>platform\windows</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\implementations\RLCommandHandler.h">
++      <Filter>implementations</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\implementations\PHCommandHandler.h">
++      <Filter>implementations</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\CECClient.h" />
++    <ClInclude Include="..\..\src\lib\CECInputBuffer.h" />
++    <ClInclude Include="..\..\src\lib\devices\CECDeviceMap.h">
++      <Filter>devices</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\CECTypeUtils.h" />
++    <ClInclude Include="..\..\src\lib\platform\util\edid.h">
++      <Filter>platform\util</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\adl\adl_defines.h">
++      <Filter>platform\adl</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\adl\adl_sdk.h">
++      <Filter>platform\adl</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\adl\adl_structures.h">
++      <Filter>platform\adl</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\adl\adl-edid.h">
++      <Filter>platform\adl</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\windows\dlfcn-win32.h">
++      <Filter>platform\windows</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\nvidia\nv-edid.h">
++      <Filter>platform\nvidia</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\adapter\AdapterCommunication.h">
++      <Filter>adapter</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterCommands.h">
++      <Filter>adapter\Pulse-Eight</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterCommunication.h">
++      <Filter>adapter\Pulse-Eight</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterDetection.h">
++      <Filter>adapter\Pulse-Eight</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterMessage.h">
++      <Filter>adapter\Pulse-Eight</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterMessageQueue.h">
++      <Filter>adapter\Pulse-Eight</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\adapter\AdapterFactory.h">
++      <Filter>adapter</Filter>
++    </ClInclude>
++    <ClInclude Include="resource.h" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\..\src\lib\CECProcessor.cpp" />
++    <ClCompile Include="..\..\src\lib\LibCEC.cpp" />
++    <ClCompile Include="..\..\src\lib\LibCECC.cpp" />
++    <ClCompile Include="..\..\src\lib\LibCECDll.cpp" />
++    <ClCompile Include="..\..\src\lib\implementations\ANCommandHandler.cpp">
++      <Filter>implementations</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\implementations\CECCommandHandler.cpp">
++      <Filter>implementations</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\implementations\SLCommandHandler.cpp">
++      <Filter>implementations</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\devices\CECBusDevice.cpp">
++      <Filter>devices</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\implementations\VLCommandHandler.cpp">
++      <Filter>implementations</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\implementations\RHCommandHandler.cpp">
++      <Filter>implementations</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\implementations\AQCommandHandler.cpp">
++      <Filter>implementations</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\devices\CECAudioSystem.cpp">
++      <Filter>devices</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\devices\CECPlaybackDevice.cpp">
++      <Filter>devices</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\devices\CECRecordingDevice.cpp">
++      <Filter>devices</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\devices\CECTuner.cpp">
++      <Filter>devices</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\devices\CECTV.cpp">
++      <Filter>devices</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\platform\windows\os-threads.cpp">
++      <Filter>platform\windows</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\platform\windows\serialport.cpp">
++      <Filter>platform\windows</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\implementations\RLCommandHandler.cpp">
++      <Filter>implementations</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\implementations\PHCommandHandler.cpp">
++      <Filter>implementations</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\CECClient.cpp" />
++    <ClCompile Include="..\..\src\lib\devices\CECDeviceMap.cpp">
++      <Filter>devices</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\platform\windows\os-edid.cpp">
++      <Filter>platform\windows</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\platform\adl\adl-edid.cpp">
++      <Filter>platform\adl</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\platform\windows\dlfcn-win32.cpp">
++      <Filter>platform\windows</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\platform\nvidia\nv-edid.cpp">
++      <Filter>platform\nvidia</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterCommands.cpp">
++      <Filter>adapter\Pulse-Eight</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterCommunication.cpp">
++      <Filter>adapter\Pulse-Eight</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterDetection.cpp">
++      <Filter>adapter\Pulse-Eight</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterMessage.cpp">
++      <Filter>adapter\Pulse-Eight</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\adapter\Pulse-Eight\USBCECAdapterMessageQueue.cpp">
++      <Filter>adapter\Pulse-Eight</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\lib\adapter\AdapterFactory.cpp">
++      <Filter>adapter</Filter>
++    </ClCompile>
++  </ItemGroup>
++  <ItemGroup>
++    <ResourceCompile Include="libcec.rc" />
++  </ItemGroup>
++</Project>
+\ Kein Zeilenumbruch am Dateiende.
+Binärdateien libcec-2.1.4/project/libcec/resource.h und libcec-imx6/project/libcec/resource.h sind verschieden.
+diff -Nur libcec-2.1.4/project/libCEC.nsi libcec-imx6/project/libCEC.nsi
+--- libcec-2.1.4/project/libCEC.nsi	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/libCEC.nsi	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,342 @@
++;libCEC installer
++;Copyright (C) 2011-2013 Pulse-Eight Ltd.
++;http://www.pulse-eight.com/
++
++!include "MUI2.nsh"
++!include "nsDialogs.nsh"
++!include "LogicLib.nsh"
++!include "x64.nsh"
++
++Name "Pulse-Eight libCEC"
++OutFile "..\build\libCEC-installer.exe"
++
++XPStyle on
++InstallDir "$PROGRAMFILES\Pulse-Eight\USB-CEC Adapter"
++InstallDirRegKey HKLM "Software\Pulse-Eight\USB-CEC Adapter software" ""
++RequestExecutionLevel admin
++Var StartMenuFolder
++Var VSRedistSetupError
++Var VSRedistInstalled
++
++!define MUI_FINISHPAGE_LINK "Visit http://libcec.pulse-eight.com/ for more information."
++!define MUI_FINISHPAGE_LINK_LOCATION "http://libcec.pulse-eight.com/"
++!define MUI_ABORTWARNING  
++
++!insertmacro MUI_PAGE_WELCOME
++!insertmacro MUI_PAGE_LICENSE "..\COPYING"
++!insertmacro MUI_PAGE_COMPONENTS
++!insertmacro MUI_PAGE_DIRECTORY
++
++!define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKLM" 
++!define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\Pulse-Eight\USB-CEC Adapter sofware" 
++!define MUI_STARTMENUPAGE_REGISTRY_VALUENAME "Start Menu Folder"
++!insertmacro MUI_PAGE_STARTMENU Application $StartMenuFolder  
++
++!insertmacro MUI_PAGE_INSTFILES
++!insertmacro MUI_PAGE_FINISH
++
++!insertmacro MUI_UNPAGE_WELCOME
++!insertmacro MUI_UNPAGE_CONFIRM
++!insertmacro MUI_UNPAGE_INSTFILES
++!insertmacro MUI_UNPAGE_FINISH
++
++!insertmacro MUI_LANGUAGE "English"
++
++InstType "USB-CEC Driver & libCEC"
++InstType "USB-CEC Driver Only"
++InstType "Full installation"
++
++Section "USB-CEC Driver" SecDriver
++  SetShellVarContext current
++  SectionIn RO
++  SectionIn 1 2 3
++
++  ; Uninstall the old unsigned software if it's found
++  ReadRegStr $1 HKCU "Software\libCEC" ""
++  ${If} $1 != ""
++    MessageBox MB_OK \
++	  "A previous libCEC and USB-CEC Driver was found. This update requires the old version to be uninstalled. Press OK to uninstall the old version."
++    ExecWait '"$1\Uninstall.exe" /S _?=$1'
++	Delete "$1\Uninstall.exe"
++	RMDir "$1"
++  ${EndIf}
++
++  ; Delete libcec.dll and libcec.x64.dll from the system directory
++  ; Let a seperate installer do this, when we need it
++  Delete "$SYSDIR\libcec.dll"
++  ${If} ${RunningX64}
++    Delete "$SYSDIR\libcec.x64.dll"
++  ${EndIf}
++
++  ; Copy to the installation directory
++  SetOutPath "$INSTDIR"
++  File "..\AUTHORS"
++  File "..\COPYING"
++
++  ; Copy the driver installer
++  SetOutPath "$INSTDIR\driver"
++  File "..\build\p8-usbcec-driver-installer.exe"
++
++  ;Store installation folder
++  WriteRegStr HKLM "Software\Pulse-Eight\USB-CEC Adapter software" "" $INSTDIR
++
++  ;Create uninstaller
++  WriteUninstaller "$INSTDIR\Uninstall.exe"
++
++  !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
++  SetOutPath "$INSTDIR"
++
++  CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
++  CreateShortCut "$SMPROGRAMS\$StartMenuFolder\Uninstall Pulse-Eight USB-CEC Adapter software.lnk" "$INSTDIR\Uninstall.exe" \
++    "" "$INSTDIR\Uninstall.exe" 0 SW_SHOWNORMAL \
++    "" "Uninstall Pulse-Eight USB-CEC Adapter software."
++
++  WriteINIStr "$SMPROGRAMS\$StartMenuFolder\Visit Pulse-Eight.url" "InternetShortcut" "URL" "http://www.pulse-eight.com/"
++  !insertmacro MUI_STARTMENU_WRITE_END  
++    
++  ;add entry to add/remove programs
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter sofware" \
++                 "DisplayName" "Pulse-Eight USB-CEC Adapter software"
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter sofware" \
++                 "UninstallString" "$INSTDIR\uninstall.exe"
++  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter sofware" \
++                 "NoModify" 1
++  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter sofware" \
++                 "NoRepair" 1
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter sofware" \
++                 "InstallLocation" "$INSTDIR"
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter sofware" \
++                 "DisplayIcon" "$INSTDIR\cec-client.exe,0"
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter sofware" \
++                 "Publisher" "Pulse-Eight Limited"
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter sofware" \
++                 "HelpLink" "http://www.pulse-eight.com/"
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter sofware" \
++                 "URLInfoAbout" "http://www.pulse-eight.com"
++
++  ;install driver
++  ExecWait '"$INSTDIR\driver\p8-usbcec-driver-installer.exe" /S'
++  Delete "$INSTDIR\driver\p8-usbcec-driver-installer.exe"
++SectionEnd
++
++Section "libCEC" SecLibCec
++  SetShellVarContext current
++  SectionIn 1 3
++
++  ; Copy to the installation directory
++  SetOutPath "$INSTDIR"
++  File "..\ChangeLog"
++  File "..\README"
++  File "..\build\*.dll"
++  File "..\build\*.xml"
++  SetOutPath "$INSTDIR\x64"
++  File /nonfatal "..\build\x64\*.dll"
++  File /nonfatal "..\build\x64\*.xml"
++
++  ; Copy to XBMC\system
++  ReadRegStr $1 HKCU "Software\XBMC" ""
++  ${If} $1 != ""
++    SetOutPath "$1\system"
++	File "..\build\libcec.dll"
++  ${EndIf}
++
++  ; Copy the headers
++  SetOutPath "$INSTDIR\include"
++  File /r /x *.so "..\include\cec*.*"
++SectionEnd
++
++Section "CEC Debug Client" SecCecClient
++  SetShellVarContext current
++  SectionIn 3
++
++  ; Copy to the installation directory
++  SetOutPath "$INSTDIR"
++  File /x p8-usbcec-driver-installer.exe /x cec-tray.exe "..\build\*.exe"
++  SetOutPath "$INSTDIR\x64"
++  File /nonfatal "..\build\x64\*.exe"
++
++  !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
++  SetOutPath "$INSTDIR"
++
++  CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
++  ${If} ${RunningX64}
++    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\CEC Test client (x64).lnk" "$INSTDIR\x64\cec-client.exe" \
++      "" "$INSTDIR\x64\cec-client.exe" 0 SW_SHOWNORMAL \
++      "" "Start the CEC Test client (x64)."
++  ${Else}
++    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\CEC Test client.lnk" "$INSTDIR\cec-client.exe" \
++      "" "$INSTDIR\cec-client.exe" 0 SW_SHOWNORMAL \
++      "" "Start the CEC Test client."
++  ${EndIf}
++  !insertmacro MUI_STARTMENU_WRITE_END  
++    
++SectionEnd
++
++Section "libCEC Tray Application" SecCecTray
++  SetShellVarContext current
++  SectionIn 1 3
++
++  ; Uninstall previous beta builds of the tray application
++  ReadRegStr $1 HKLM "Software\Pulse-Eight\libCECTray" ""
++  ${If} $1 != ""
++    MessageBox MB_OK \
++	  "A previous beta build of the libCEC Tray Application was found. Press OK to uninstall the old version. Do not uninstall the driver when asked to. Thank you for participating in the beta test."
++    ExecWait '"$1\Uninstall.exe" /S _?=$1'
++	Delete "$1\Uninstall.exe"
++  ${EndIf}
++
++  ; Replace cec-config-gui.exe
++  Delete "$INSTDIR\cec-config-gui.exe"
++  ${If} ${RunningX64}
++    Delete "$INSTDIR\x64\cec-config-gui.exe"
++  ${EndIf}
++  Delete "$SMPROGRAMS\$StartMenuFolder\CEC Adapter Configuration.lnk"
++  ${If} ${RunningX64}
++    Delete "$SMPROGRAMS\$StartMenuFolder\CEC Adapter Configuration (x64).lnk"
++  ${EndIf}
++
++  ; Copy to the installation directory
++  SetOutPath "$INSTDIR"
++  File "..\build\cec-tray.exe"
++  SetOutPath "$INSTDIR\x64"
++  File /nonfatal "..\build\x64\cec-tray.exe"
++
++  !insertmacro MUI_STARTMENU_WRITE_BEGIN Application
++  SetOutPath "$INSTDIR"
++
++  CreateDirectory "$SMPROGRAMS\$StartMenuFolder"
++  ${If} ${RunningX64}
++    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\libCEC Tray (x64).lnk" "$INSTDIR\x64\cec-tray.exe" \
++      "" "$INSTDIR\x64\cec-tray.exe" 0 SW_SHOWNORMAL \
++      "" "Start the libCEC Tray (x64)."
++  ${Else}
++    CreateShortCut "$SMPROGRAMS\$StartMenuFolder\libCEC Tray.lnk" "$INSTDIR\cec-tray.exe" \
++      "" "$INSTDIR\cec-tray.exe" 0 SW_SHOWNORMAL \
++      "" "Start the libCEC Tray."
++  ${EndIf}
++  !insertmacro MUI_STARTMENU_WRITE_END  
++    
++SectionEnd
++
++!define REDISTRIBUTABLE_SECTIONNAME "Microsoft Visual C++ 2010 Redistributable Package"
++Section "" SecVCRedist
++  SetShellVarContext current
++  SectionIn 1 3
++
++
++  ${If} $VSRedistInstalled != "Yes"
++    ; Download redistributable
++    SetOutPath "$TEMP\vc20XX"
++    ${If} ${RunningX64}
++      NSISdl::download http://packages.pulse-eight.net/windows/vcredist_x64.exe vcredist_x64.exe
++      ExecWait '"$TEMP\vc20XX\vcredist_x64.exe" /q' $VSRedistSetupError
++    ${Else}
++      NSISdl::download http://packages.pulse-eight.net/windows/vcredist_x86.exe vcredist_x86.exe
++      ExecWait '"$TEMP\vc20XX\vcredist_x86.exe" /q' $VSRedistSetupError
++    ${Endif}
++    RMDIR /r "$TEMP\vc20XX"
++  ${Endif}
++
++SectionEnd
++
++Function .onInit
++
++  ; SP0 x86
++  ReadRegDword $1 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{196BB40D-1578-3D01-B289-BEFC77A11A1E}" "Version"
++  ${If} $1 != ""
++    StrCpy $VSRedistInstalled "Yes"
++  ${Endif}
++
++  ; SP0 x64
++  ReadRegDword $1 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{DA5E371C-6333-3D8A-93A4-6FD5B20BCC6E}" "Version"
++  ${If} $1 != ""
++    StrCpy $VSRedistInstalled "Yes"
++  ${Endif}
++
++  ; SP0 ia64
++  ReadRegDword $1 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{C1A35166-4301-38E9-BA67-02823AD72A1B}" "Version"
++  ${If} $1 != ""
++    StrCpy $VSRedistInstalled "Yes"
++  ${Endif}
++
++  ; SP1 x86
++  ReadRegDword $1 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{F0C3E5D1-1ADE-321E-8167-68EF0DE699A5}" "Version"
++  ${If} $1 != ""
++    StrCpy $VSRedistInstalled "Yes"
++  ${Endif}
++
++  ; SP1 x64
++  ReadRegDword $1 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{1D8E6291-B0D5-35EC-8441-6616F567A0F7}" "Version"
++  ${If} $1 != ""
++    StrCpy $VSRedistInstalled "Yes"
++  ${Endif}
++
++  ; SP1 ia64
++  ReadRegDword $1 HKLM "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\{88C73C1C-2DE5-3B01-AFB8-B46EF4AB41CD}" "Version"
++  ${If} $1 != ""
++    StrCpy $VSRedistInstalled "Yes"
++  ${Endif}
++
++  ${If} $VSRedistInstalled == "Yes"
++    !insertMacro UnSelectSection ${SecVCRedist}
++    SectionSetText ${SecVCRedist} ""
++  ${Else}
++    !insertMacro SelectSection ${SecVCRedist}
++    SectionSetText ${SecVCRedist} "${REDISTRIBUTABLE_SECTIONNAME}"
++  ${Endif}
++
++FunctionEnd
++
++;--------------------------------
++;Uninstaller Section
++
++Section "Uninstall"
++
++  SetShellVarContext current
++
++  Delete "$INSTDIR\AUTHORS"
++  Delete "$INSTDIR\*.exe"
++  Delete "$INSTDIR\ChangeLog"
++  Delete "$INSTDIR\COPYING"
++  Delete "$INSTDIR\*.dll"
++  Delete "$INSTDIR\*.lib"
++  Delete "$INSTDIR\*.xml"
++  Delete "$INSTDIR\x64\*.dll"
++  Delete "$INSTDIR\x64\*.lib"
++  Delete "$INSTDIR\x64\*.exe"
++  Delete "$INSTDIR\x64\*.xml"
++  Delete "$INSTDIR\README"
++  Delete "$SYSDIR\libcec.dll"
++  ${If} ${RunningX64}
++    Delete "$SYSDIR\libcec.x64.dll"
++  ${EndIf}
++
++  ; Uninstall the driver
++  ReadRegStr $1 HKLM "Software\Pulse-Eight\USB-CEC Adapter driver" ""
++  ${If} $1 != ""
++    ExecWait '"$1\Uninstall.exe" /S _?=$1'
++  ${EndIf}
++
++  RMDir /r "$INSTDIR\include"
++  Delete "$INSTDIR\Uninstall.exe"
++  RMDir /r "$INSTDIR"
++  RMDir "$PROGRAMFILES\Pulse-Eight"
++  
++  !insertmacro MUI_STARTMENU_GETFOLDER Application $StartMenuFolder
++  Delete "$SMPROGRAMS\$StartMenuFolder\libCEC Tray.lnk"
++  ${If} ${RunningX64}
++    Delete "$SMPROGRAMS\$StartMenuFolder\libCEC Tray (x64).lnk"
++  ${EndIf}
++  Delete "$SMPROGRAMS\$StartMenuFolder\CEC Test client.lnk"
++  ${If} ${RunningX64}
++    Delete "$SMPROGRAMS\$StartMenuFolder\CEC Test client (x64).lnk"
++  ${EndIf}
++  Delete "$SMPROGRAMS\$StartMenuFolder\Uninstall Pulse-Eight USB-CEC Adapter software.lnk"
++  Delete "$SMPROGRAMS\$StartMenuFolder\Visit Pulse-Eight.url"
++  RMDir "$SMPROGRAMS\$StartMenuFolder"
++
++  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter software"
++  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter driver"
++  DeleteRegKey /ifempty HKLM "Software\Pulse-Eight\USB-CEC Adapter software"
++  DeleteRegKey /ifempty HKLM "Software\Pulse-Eight"
++SectionEnd
+Binärdateien libcec-2.1.4/project/LibCecSharp/LibCecSharp.rc und libcec-imx6/project/LibCecSharp/LibCecSharp.rc sind verschieden.
+diff -Nur libcec-2.1.4/project/LibCecSharp/LibCecSharp.vcxproj libcec-imx6/project/LibCecSharp/LibCecSharp.vcxproj
+--- libcec-2.1.4/project/LibCecSharp/LibCecSharp.vcxproj	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/LibCecSharp/LibCecSharp.vcxproj	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,208 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup Label="ProjectConfigurations">
++    <ProjectConfiguration Include="Debug|Win32">
++      <Configuration>Debug</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Debug|x64">
++      <Configuration>Debug</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|Win32">
++      <Configuration>Release</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|x64">
++      <Configuration>Release</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
++  </ItemGroup>
++  <PropertyGroup Label="Globals">
++    <ProjectGuid>{E54D4581-CD59-4687-BB10-694B8192EABA}</ProjectGuid>
++    <RootNamespace>LibCecSharp</RootNamespace>
++    <Keyword>ManagedCProj</Keyword>
++    <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
++    <ConfigurationType>DynamicLibrary</ConfigurationType>
++    <PlatformToolset>v90</PlatformToolset>
++    <CharacterSet>Unicode</CharacterSet>
++    <CLRSupport>true</CLRSupport>
++    <WholeProgramOptimization>true</WholeProgramOptimization>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
++    <ConfigurationType>DynamicLibrary</ConfigurationType>
++    <PlatformToolset>v90</PlatformToolset>
++    <CharacterSet>Unicode</CharacterSet>
++    <CLRSupport>true</CLRSupport>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
++    <ConfigurationType>DynamicLibrary</ConfigurationType>
++    <PlatformToolset>v90</PlatformToolset>
++    <CharacterSet>Unicode</CharacterSet>
++    <CLRSupport>true</CLRSupport>
++    <WholeProgramOptimization>true</WholeProgramOptimization>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
++    <ConfigurationType>DynamicLibrary</ConfigurationType>
++    <PlatformToolset>v90</PlatformToolset>
++    <CharacterSet>Unicode</CharacterSet>
++    <CLRSupport>true</CLRSupport>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
++  <ImportGroup Label="ExtensionSettings">
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <PropertyGroup Label="UserMacros" />
++  <PropertyGroup>
++    <_ProjectFileVersion>11.0.50727.1</_ProjectFileVersion>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <ReferencePath>$(SolutionDir)..;$(ReferencePath)</ReferencePath>
++    <OutDir>$(SolutionDir)..\build\</OutDir>
++    <IntDir>$(Configuration)\</IntDir>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <ReferencePath>$(SolutionDir)..;$(ReferencePath)</ReferencePath>
++    <OutDir>$(SolutionDir)..\build\x64\</OutDir>
++    <IntDir>$(Platform)\$(Configuration)\</IntDir>
++    <LinkIncremental>true</LinkIncremental>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <ReferencePath>$(SolutionDir)..;$(ReferencePath)</ReferencePath>
++    <OutDir>$(SolutionDir)..\build\</OutDir>
++    <IntDir>$(Configuration)\</IntDir>
++    <LinkIncremental>false</LinkIncremental>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
++    <ReferencePath>$(SolutionDir)..;$(ReferencePath)</ReferencePath>
++    <OutDir>$(SolutionDir)..\build\x64\</OutDir>
++    <IntDir>$(Platform)\$(Configuration)\</IntDir>
++  </PropertyGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <Midl>
++      <TargetEnvironment>X64</TargetEnvironment>
++    </Midl>
++    <ClCompile>
++      <Optimization>Disabled</Optimization>
++      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\lib\platform\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
++      <PrecompiledHeader />
++      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
++      <WarningLevel>Level3</WarningLevel>
++      <TreatWarningAsError>true</TreatWarningAsError>
++      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
++    </ClCompile>
++    <Link>
++      <AdditionalDependencies>$(OutDir)libcec.lib;%(AdditionalDependencies)</AdditionalDependencies>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++      <AssemblyDebug>true</AssemblyDebug>
++      <TargetMachine>MachineX86</TargetMachine>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <Midl>
++      <TargetEnvironment>X64</TargetEnvironment>
++    </Midl>
++    <ClCompile>
++      <Optimization>Disabled</Optimization>
++      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\lib\platform\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <PreprocessorDefinitions>_DEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
++      <PrecompiledHeader />
++      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
++      <WarningLevel>Level3</WarningLevel>
++      <TreatWarningAsError>true</TreatWarningAsError>
++      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
++    </ClCompile>
++    <Link>
++      <AdditionalDependencies>$(OutDir)libcec.lib;%(AdditionalDependencies)</AdditionalDependencies>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++      <AssemblyDebug>true</AssemblyDebug>
++      <TargetMachine>MachineX64</TargetMachine>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <Midl>
++      <TargetEnvironment>X64</TargetEnvironment>
++    </Midl>
++    <ClCompile>
++      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\lib\platform\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
++      <PrecompiledHeader />
++      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
++      <WarningLevel>Level3</WarningLevel>
++      <TreatWarningAsError>true</TreatWarningAsError>
++      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
++    </ClCompile>
++    <Link>
++      <AdditionalDependencies>$(OutDir)libcec.lib;%(AdditionalDependencies)</AdditionalDependencies>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++      <TargetMachine>MachineX86</TargetMachine>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
++    <Midl>
++      <TargetEnvironment>X64</TargetEnvironment>
++    </Midl>
++    <ClCompile>
++      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\src;$(SolutionDir)..\src\lib\platform\windows;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <PreprocessorDefinitions>NDEBUG;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
++      <PrecompiledHeader />
++      <GenerateXMLDocumentationFiles>true</GenerateXMLDocumentationFiles>
++      <WarningLevel>Level3</WarningLevel>
++      <TreatWarningAsError>true</TreatWarningAsError>
++      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
++    </ClCompile>
++    <Link>
++      <AdditionalDependencies>$(OutDir)libcec.lib;%(AdditionalDependencies)</AdditionalDependencies>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemGroup>
++    <Reference Include="System">
++      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
++      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
++    </Reference>
++    <Reference Include="System.Data">
++      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
++      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
++    </Reference>
++    <Reference Include="System.Xml">
++      <CopyLocalSatelliteAssemblies>true</CopyLocalSatelliteAssemblies>
++      <ReferenceOutputAssembly>true</ReferenceOutputAssembly>
++    </Reference>
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\..\src\LibCecSharp\AssemblyInfo.cpp" />
++    <ClCompile Include="..\..\src\LibCecSharp\LibCecSharp.cpp" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\..\include\cec.h" />
++    <ClInclude Include="..\..\src\LibCecSharp\CecSharpTypes.h" />
++    <ClInclude Include="..\..\include\cectypes.h" />
++    <ClInclude Include="..\..\src\lib\platform\windows\stdint.h" />
++    <ClInclude Include="resource.h" />
++  </ItemGroup>
++  <ItemGroup>
++    <ResourceCompile Include="LibCecSharp.rc" />
++  </ItemGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
++  <ImportGroup Label="ExtensionTargets">
++  </ImportGroup>
++</Project>
+\ Kein Zeilenumbruch am Dateiende.
+diff -Nur libcec-2.1.4/project/LibCecSharp/LibCecSharp.vcxproj.filters libcec-imx6/project/LibCecSharp/LibCecSharp.vcxproj.filters
+--- libcec-2.1.4/project/LibCecSharp/LibCecSharp.vcxproj.filters	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/LibCecSharp/LibCecSharp.vcxproj.filters	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,41 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup>
++    <Filter Include="Source Files">
++      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
++      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
++    </Filter>
++    <Filter Include="Header Files">
++      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
++      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
++    </Filter>
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\..\src\LibCecSharp\AssemblyInfo.cpp">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++    <ClCompile Include="..\..\src\LibCecSharp\LibCecSharp.cpp">
++      <Filter>Source Files</Filter>
++    </ClCompile>
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\..\include\cec.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\LibCecSharp\CecSharpTypes.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\include\cectypes.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\src\lib\platform\windows\stdint.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++    <ClInclude Include="resource.h">
++      <Filter>Header Files</Filter>
++    </ClInclude>
++  </ItemGroup>
++  <ItemGroup>
++    <ResourceCompile Include="LibCecSharp.rc" />
++  </ItemGroup>
++</Project>
+\ Kein Zeilenumbruch am Dateiende.
+Binärdateien libcec-2.1.4/project/LibCecSharp/resource.h und libcec-imx6/project/LibCecSharp/resource.h sind verschieden.
+diff -Nur libcec-2.1.4/project/libcec.sln libcec-imx6/project/libcec.sln
+--- libcec-2.1.4/project/libcec.sln	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/libcec.sln	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,74 @@
++﻿
++Microsoft Visual Studio Solution File, Format Version 12.00
++# Visual Studio 2012
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "libcec", "libcec\libcec.vcxproj", "{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}"
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "testclient", "testclient\testclient.vcxproj", "{F01222BF-6B3D-43BD-B254-434031CB9887}"
++	ProjectSection(ProjectDependencies) = postProject
++		{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0} = {C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}
++	EndProjectSection
++EndProject
++Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LibCecSharp", "LibCecSharp\LibCecSharp.vcxproj", "{E54D4581-CD59-4687-BB10-694B8192EABA}"
++	ProjectSection(ProjectDependencies) = postProject
++		{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0} = {C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}
++	EndProjectSection
++EndProject
++Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{B119505D-5CD1-48E4-BED1-9C2BF26153D5}"
++EndProject
++Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CecSharpTester", "..\src\CecSharpTester\CecSharpTester.csproj", "{B6A7F3A9-F47C-41E5-9754-0BFF233B1172}"
++EndProject
++Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibCECTray", "..\src\LibCecTray\LibCECTray.csproj", "{58C106FE-C159-46D3-97E1-73AB83232670}"
++EndProject
++Global
++	GlobalSection(SolutionConfigurationPlatforms) = preSolution
++		Debug|x64 = Debug|x64
++		Debug|x86 = Debug|x86
++		Release|x64 = Release|x64
++		Release|x86 = Release|x86
++	EndGlobalSection
++	GlobalSection(ProjectConfigurationPlatforms) = postSolution
++		{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}.Debug|x64.ActiveCfg = Debug|x64
++		{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}.Debug|x64.Build.0 = Debug|x64
++		{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}.Debug|x86.ActiveCfg = Debug|Win32
++		{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}.Debug|x86.Build.0 = Debug|Win32
++		{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}.Release|x64.ActiveCfg = Release|x64
++		{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}.Release|x64.Build.0 = Release|x64
++		{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}.Release|x86.ActiveCfg = Release|Win32
++		{C04B0FB1-667D-4F1C-BDAE-A07CDFFAAAA0}.Release|x86.Build.0 = Release|Win32
++		{F01222BF-6B3D-43BD-B254-434031CB9887}.Debug|x64.ActiveCfg = Debug|x64
++		{F01222BF-6B3D-43BD-B254-434031CB9887}.Debug|x64.Build.0 = Debug|x64
++		{F01222BF-6B3D-43BD-B254-434031CB9887}.Debug|x86.ActiveCfg = Debug|Win32
++		{F01222BF-6B3D-43BD-B254-434031CB9887}.Debug|x86.Build.0 = Debug|Win32
++		{F01222BF-6B3D-43BD-B254-434031CB9887}.Release|x64.ActiveCfg = Release|x64
++		{F01222BF-6B3D-43BD-B254-434031CB9887}.Release|x64.Build.0 = Release|x64
++		{F01222BF-6B3D-43BD-B254-434031CB9887}.Release|x86.ActiveCfg = Release|Win32
++		{F01222BF-6B3D-43BD-B254-434031CB9887}.Release|x86.Build.0 = Release|Win32
++		{E54D4581-CD59-4687-BB10-694B8192EABA}.Debug|x64.ActiveCfg = Debug|x64
++		{E54D4581-CD59-4687-BB10-694B8192EABA}.Debug|x64.Build.0 = Debug|x64
++		{E54D4581-CD59-4687-BB10-694B8192EABA}.Debug|x86.ActiveCfg = Debug|Win32
++		{E54D4581-CD59-4687-BB10-694B8192EABA}.Debug|x86.Build.0 = Debug|Win32
++		{E54D4581-CD59-4687-BB10-694B8192EABA}.Release|x64.ActiveCfg = Release|x64
++		{E54D4581-CD59-4687-BB10-694B8192EABA}.Release|x64.Build.0 = Release|x64
++		{E54D4581-CD59-4687-BB10-694B8192EABA}.Release|x86.ActiveCfg = Release|Win32
++		{E54D4581-CD59-4687-BB10-694B8192EABA}.Release|x86.Build.0 = Release|Win32
++		{B6A7F3A9-F47C-41E5-9754-0BFF233B1172}.Debug|x64.ActiveCfg = Debug|x64
++		{B6A7F3A9-F47C-41E5-9754-0BFF233B1172}.Debug|x64.Build.0 = Debug|x64
++		{B6A7F3A9-F47C-41E5-9754-0BFF233B1172}.Debug|x86.ActiveCfg = Debug|x86
++		{B6A7F3A9-F47C-41E5-9754-0BFF233B1172}.Debug|x86.Build.0 = Debug|x86
++		{B6A7F3A9-F47C-41E5-9754-0BFF233B1172}.Release|x64.ActiveCfg = Release|x64
++		{B6A7F3A9-F47C-41E5-9754-0BFF233B1172}.Release|x64.Build.0 = Release|x64
++		{B6A7F3A9-F47C-41E5-9754-0BFF233B1172}.Release|x86.ActiveCfg = Release|x86
++		{B6A7F3A9-F47C-41E5-9754-0BFF233B1172}.Release|x86.Build.0 = Release|x86
++		{58C106FE-C159-46D3-97E1-73AB83232670}.Debug|x64.ActiveCfg = Debug|x64
++		{58C106FE-C159-46D3-97E1-73AB83232670}.Debug|x64.Build.0 = Debug|x64
++		{58C106FE-C159-46D3-97E1-73AB83232670}.Debug|x86.ActiveCfg = Debug|x86
++		{58C106FE-C159-46D3-97E1-73AB83232670}.Debug|x86.Build.0 = Debug|x86
++		{58C106FE-C159-46D3-97E1-73AB83232670}.Release|x64.ActiveCfg = Release|x64
++		{58C106FE-C159-46D3-97E1-73AB83232670}.Release|x64.Build.0 = Release|x64
++		{58C106FE-C159-46D3-97E1-73AB83232670}.Release|x86.ActiveCfg = Release|x86
++		{58C106FE-C159-46D3-97E1-73AB83232670}.Release|x86.Build.0 = Release|x86
++	EndGlobalSection
++	GlobalSection(SolutionProperties) = preSolution
++		HideSolutionNode = FALSE
++	EndGlobalSection
++EndGlobal
+diff -Nur libcec-2.1.4/project/p8-usbcec-driver.nsi libcec-imx6/project/p8-usbcec-driver.nsi
+--- libcec-2.1.4/project/p8-usbcec-driver.nsi	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/p8-usbcec-driver.nsi	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,118 @@
++;p8-usbcec-driver installer
++;Copyright (C) 2011-2013 Pulse-Eight Ltd.
++;http://www.pulse-eight.com/
++
++!include "MUI2.nsh"
++!include "nsDialogs.nsh"
++!include "LogicLib.nsh"
++!include "x64.nsh"
++
++Name "Pulse-Eight USB-CEC Adapter"
++OutFile "..\build\p8-usbcec-driver-installer.exe"
++
++XPStyle on
++InstallDir "$PROGRAMFILES\Pulse-Eight\USB-CEC Adapter\driver"
++InstallDirRegKey HKLM "Software\Pulse-Eight\USB-CEC Adapter driver" ""
++RequestExecutionLevel admin
++
++!define MUI_FINISHPAGE_LINK "Visit http://www.pulse-eight.com/ for more information."
++!define MUI_FINISHPAGE_LINK_LOCATION "http://www.pulse-eight.com/"
++!define MUI_ABORTWARNING  
++
++!insertmacro MUI_PAGE_WELCOME
++!insertmacro MUI_PAGE_LICENSE "..\COPYING"
++!insertmacro MUI_PAGE_DIRECTORY
++
++!define MUI_STARTMENUPAGE_REGISTRY_ROOT "HKLM" 
++!define MUI_STARTMENUPAGE_REGISTRY_KEY "Software\Pulse-Eight\USB-CEC Adapter driver" 
++
++!insertmacro MUI_PAGE_INSTFILES
++!insertmacro MUI_PAGE_FINISH
++
++!insertmacro MUI_UNPAGE_WELCOME
++!insertmacro MUI_UNPAGE_CONFIRM
++!insertmacro MUI_UNPAGE_INSTFILES
++!insertmacro MUI_UNPAGE_FINISH
++
++!insertmacro MUI_LANGUAGE "English"
++
++InstType "USB-CEC driver only"
++
++Section "USB-CEC driver" SecDriver
++  SetShellVarContext current
++  SectionIn RO
++  SectionIn 1
++
++  ; Copy to the installation directory
++  SetOutPath "$INSTDIR"
++  File "..\AUTHORS"
++  File "..\COPYING"
++
++  ; Copy the driver installer and .inf file
++  File "..\build\dpinst-amd64.exe"
++  File "..\build\dpinst-x86.exe"
++  File "..\driver\p8usb-cec.inf"
++  File "..\driver\p8usb-cec.cat"
++
++  ;Store installation folder
++  WriteRegStr HKLM "Software\Pulse-Eight\USB-CEC Adapter driver" "" $INSTDIR
++
++  ;Create uninstaller
++  WriteUninstaller "$INSTDIR\Uninstall.exe"
++    
++  ;add entry to add/remove programs
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter driver" \
++                 "DisplayName" "Pulse-Eight USB-CEC Adapter driver"
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter driver" \
++                 "UninstallString" "$INSTDIR\uninstall.exe"
++  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter driver" \
++                 "NoModify" 1
++  WriteRegDWORD HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter driver" \
++                 "NoRepair" 1
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter driver" \
++                 "InstallLocation" "$INSTDIR"
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter driver" \
++                 "Publisher" "Pulse-Eight Limited"
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter driver" \
++                 "HelpLink" "http://www.pulse-eight.com/"
++  WriteRegStr HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter driver" \
++                 "URLInfoAbout" "http://www.pulse-eight.com"
++
++  ;install driver
++  ${If} ${RunningX64}
++	ExecWait '"$INSTDIR\dpinst-amd64.exe" /lm /sa /sw /PATH "$INSTDIR"'
++  ${Else}
++	ExecWait '"$INSTDIR\dpinst-x86.exe" /lm /sa /sw /PATH "$INSTDIR"'
++  ${EndIf}
++SectionEnd
++
++;--------------------------------
++;Uninstaller Section
++
++Section "Uninstall"
++
++  SetShellVarContext current
++
++  ${If} ${RunningX64}
++	ExecWait '"$INSTDIR\dpinst-amd64.exe" /u "$INSTDIR\p8usb-cec.inf"'
++  ${Else}
++	ExecWait '"$INSTDIR\dpinst-x64.exe" /u "$INSTDIR\p8usb-cec.inf"'
++  ${EndIf}
++  Delete "$INSTDIR\AUTHORS"
++  Delete "$INSTDIR\COPYING"
++  Delete "$INSTDIR\p8usb-cec.inf"
++  Delete "$INSTDIR\p8usb-cec.cat"
++  Delete "$INSTDIR\dpinst-amd64.exe"
++  Delete "$INSTDIR\dpinst-x86.exe"
++
++  RMDir /r "$INSTDIR\include"
++  Delete "$INSTDIR\Uninstall.exe"
++  RMDir /r "$INSTDIR"
++  RMDir "$PROGRAMFILES\Pulse-Eight\USB-CEC Adapter"
++  RMDir "$PROGRAMFILES\Pulse-Eight"
++  
++  DeleteRegKey HKLM "Software\Microsoft\Windows\CurrentVersion\Uninstall\Pulse-Eight USB-CEC Adapter driver"
++  DeleteRegKey /ifempty HKLM "Software\Pulse-Eight\USB-CEC Adapter driver"
++  DeleteRegKey /ifempty HKLM "Software\Pulse-Eight"
++
++SectionEnd
+diff -Nur libcec-2.1.4/project/RPi/bootstrap.sh libcec-imx6/project/RPi/bootstrap.sh
+--- libcec-2.1.4/project/RPi/bootstrap.sh	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/RPi/bootstrap.sh	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,32 @@
++#!/bin/bash
++
++_usage()
++{
++  echo "Usage: $0 /path/to/toolchain /source/path"
++  exit 1
++}
++
++if [[ -z "$2" || ! -d "$1" || ! -d "$2" ]]; then
++  echo "1 = '$1'"
++  echo "2 = '$2'"
++  _usage
++fi
++
++SCRIPT_PATH=`dirname $0`
++cd $SCRIPT_PATH
++SCRIPT_PATH=`pwd`
++cd -
++
++source $SCRIPT_PATH/config
++mkdir -p $SCRIPT_PATH/deps
++
++cd "$2"
++
++if [ -f "configure.ac" ]; then
++  _set_toolchain_path "$1"
++  autoreconf -vif
++  exit $?
++fi
++
++exit 0
++
+diff -Nur libcec-2.1.4/project/RPi/build-deps.sh libcec-imx6/project/RPi/build-deps.sh
+--- libcec-2.1.4/project/RPi/build-deps.sh	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/RPi/build-deps.sh	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,36 @@
++#!/bin/bash
++
++SCRIPT_PATH=`dirname $0`
++cd $SCRIPT_PATH
++SCRIPT_PATH=`pwd`
++cd -
++
++source $SCRIPT_PATH/config
++
++mkdir -p $SCRIPT_PATH/deps/build
++cd $SCRIPT_PATH/deps/build
++
++if [ ! -d lockdev ]; then
++  wget ${TARBALL_LOCATION}${LOCKDEV_TARBALL}
++  tar -Jxf $LOCKDEV_TARBALL
++
++  mv `echo $LOCKDEV_TARBALL | sed 's/.tar.xz//'` lockdev
++  rm $LOCKDEV_TARBALL
++
++  cd $SCRIPT_PATH/deps/build/lockdev && \
++  $SCRIPT_PATH/bootstrap.sh $SCRIPT_PATH/toolchain .
++
++  if [ $? -eq 0 ]; then
++    _set_toolchain_path "$SCRIPT_PATH/toolchain"
++    ./configure --host=$TARGET_HOST --build=`cc -dumpmachine` --prefix=$SCRIPT_PATH/deps && \
++    make && \
++    make install
++
++    exit $?
++  else
++    exit 1
++  fi
++fi
++
++exit 0
++
+diff -Nur libcec-2.1.4/project/RPi/build.sh libcec-imx6/project/RPi/build.sh
+--- libcec-2.1.4/project/RPi/build.sh	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/RPi/build.sh	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,37 @@
++#!/bin/bash
++
++SCRIPT_PATH=`dirname $0`
++cd $SCRIPT_PATH
++SCRIPT_PATH=`pwd`
++cd -
++
++if [ -z "$1" ]; then
++  DEST_DIR="/opt/libcec-rpi"
++else
++  DEST_DIR="$1"
++fi
++
++source $SCRIPT_PATH/config
++
++$SCRIPT_PATH/get-toolchain.sh && \
++$SCRIPT_PATH/build-deps.sh && \
++$SCRIPT_PATH/bootstrap.sh $SCRIPT_PATH/toolchain .
++
++if [ $? -eq 0 ]; then
++  _set_toolchain_path "$SCRIPT_PATH/toolchain"
++  # configure with --enable-rpi-cec-api so we bug out if we can't find Pi support or can't build it
++  ./configure --host=$TARGET_HOST \
++              --build=`cc -dumpmachine` \
++              --prefix=$DEST_DIR \
++              --enable-debug \
++              --enable-rpi \
++              --with-rpi-include-path="${SCRIPT_PATH}/firmware/hardfp/opt/vc/include" \
++              --with-rpi-lib-path="${SCRIPT_PATH}/firmware/hardfp/opt/vc/lib" && \
++  make clean && \
++  make V=0
++
++  exit $?
++else
++  exit 1
++fi
++
+diff -Nur libcec-2.1.4/project/RPi/config libcec-imx6/project/RPi/config
+--- libcec-2.1.4/project/RPi/config	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/RPi/config	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,37 @@
++TOOLCHAIN_GIT="git://github.com/raspberrypi/tools.git"
++FIRMWARE_GIT="git://github.com/raspberrypi/firmware.git"
++TARBALL_LOCATION="http://sources.openelec.tv/devel/"
++LOCKDEV_TARBALL="lockdev-16b8996.tar.xz"
++
++_set_toolchain_path()
++{
++  echo "Setting toolchain path to: '$1'"
++
++  export TARGET_TOOLCHAIN_PATH="$1/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/bin"
++  export TARGET_TOOLCHAIN_LIB_PATH="$1/arm-bcm2708/arm-bcm2708hardfp-linux-gnueabi/lib"
++  export TARGET_HOST="arm-bcm2708hardfp-linux-gnueabi"
++
++  export CC=${TARGET_TOOLCHAIN_PATH}/${TARGET_HOST}-gcc
++  export CXX=${TARGET_TOOLCHAIN_PATH}/${TARGET_HOST}-g++
++  export LD=${TARGET_TOOLCHAIN_PATH}/${TARGET_HOST}-ld
++  export AS=${TARGET_TOOLCHAIN_PATH}/${TARGET_HOST}-as
++  export AR=${TARGET_TOOLCHAIN_PATH}/${TARGET_HOST}-ar
++  export NM=${TARGET_TOOLCHAIN_PATH}/${TARGET_HOST}-nm
++  export RANLIB=${TARGET_TOOLCHAIN_PATH}/${TARGET_HOST}-ranlib
++  export OBJCOPY=${TARGET_TOOLCHAIN_PATH}/${TARGET_HOST}-objcopy
++  export OBJDUMP=${TARGET_TOOLCHAIN_PATH}/${TARGET_HOST}-objdump
++  export STRIP=${TARGET_TOOLCHAIN_PATH}/${TARGET_HOST}-strip
++
++  export CPPFLAGS="-I${SCRIPT_PATH}/deps/include"
++  export CFLAGS="-march=armv6 -mfpu=vfp -mfloat-abi=hard -Wno-psabi -Wa,-mno-warn-deprecated -O3 -fexcess-precision=fast -ffast-math -I${SCRIPT_PATH}/deps/include"
++  export CXXFLAGS="$CFLAGS"
++  export LDFLAGS="-march=armv6 -mtune=arm1176jzf-s -L${SCRIPT_PATH}/deps/lib"
++
++  #export PKG_CONFIG_PATH="$TARGET_PKG_CONFIG_PATH"
++  export PKG_CONFIG_LIBDIR="${SCRIPT_PATH}/deps/lib/pkgconfig:${SCRIPT_PATH}/deps/lib/share/pkgconfig"
++  export PKG_CONFIG_SYSROOT_DIR="${SCRIPT_PATH}/deps"
++
++  export PATH="$TARGET_TOOLCHAIN_PATH:$PATH"
++  export LD_LIBRARY_PATH="$TARGET_TOOLCHAIN_LIB_PATH:$LD_LIBRARY_PATH"
++}
++
+diff -Nur libcec-2.1.4/project/RPi/get-toolchain.sh libcec-imx6/project/RPi/get-toolchain.sh
+--- libcec-2.1.4/project/RPi/get-toolchain.sh	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/RPi/get-toolchain.sh	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,29 @@
++#!/bin/bash
++
++SCRIPT_PATH=`dirname $0`
++cd $SCRIPT_PATH
++SCRIPT_PATH=`pwd`
++cd -
++
++source $SCRIPT_PATH/config
++
++if [ ! -d $SCRIPT_PATH/toolchain ]; then
++  git clone $TOOLCHAIN_GIT $SCRIPT_PATH/toolchain
++else
++  cd $SCRIPT_PATH/toolchain
++#  git pull
++fi
++
++if [ ! -d $SCRIPT_PATH/firmware ]; then
++  git clone $FIRMWARE_GIT $SCRIPT_PATH/firmware
++else
++  cd $SCRIPT_PATH/firmware
++#  git pull
++fi
++
++if [[ -d $SCRIPT_PATH/toolchain && -d $SCRIPT_PATH/firmware ]]; then
++  exit 0
++else
++  exit 1
++fi
++
+Binärdateien libcec-2.1.4/project/testclient/resource.h und libcec-imx6/project/testclient/resource.h sind verschieden.
+Binärdateien libcec-2.1.4/project/testclient/testclient.rc und libcec-imx6/project/testclient/testclient.rc sind verschieden.
+diff -Nur libcec-2.1.4/project/testclient/testclient.vcxproj libcec-imx6/project/testclient/testclient.vcxproj
+--- libcec-2.1.4/project/testclient/testclient.vcxproj	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/testclient/testclient.vcxproj	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,187 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup Label="ProjectConfigurations">
++    <ProjectConfiguration Include="Debug|Win32">
++      <Configuration>Debug</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Debug|x64">
++      <Configuration>Debug</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|Win32">
++      <Configuration>Release</Configuration>
++      <Platform>Win32</Platform>
++    </ProjectConfiguration>
++    <ProjectConfiguration Include="Release|x64">
++      <Configuration>Release</Configuration>
++      <Platform>x64</Platform>
++    </ProjectConfiguration>
++  </ItemGroup>
++  <PropertyGroup Label="Globals">
++    <ProjectGuid>{F01222BF-6B3D-43BD-B254-434031CB9887}</ProjectGuid>
++    <Keyword>Win32Proj</Keyword>
++    <RootNamespace>testclient</RootNamespace>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <UseDebugLibraries>true</UseDebugLibraries>
++    <CharacterSet>MultiByte</CharacterSet>
++    <PlatformToolset>v100</PlatformToolset>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <UseDebugLibraries>true</UseDebugLibraries>
++    <CharacterSet>MultiByte</CharacterSet>
++    <PlatformToolset>v100</PlatformToolset>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <UseDebugLibraries>false</UseDebugLibraries>
++    <CharacterSet>MultiByte</CharacterSet>
++    <PlatformToolset>v100</PlatformToolset>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
++    <ConfigurationType>Application</ConfigurationType>
++    <UseDebugLibraries>false</UseDebugLibraries>
++    <CharacterSet>MultiByte</CharacterSet>
++    <PlatformToolset>v100</PlatformToolset>
++  </PropertyGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
++  <ImportGroup Label="ExtensionSettings">
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
++    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
++  </ImportGroup>
++  <PropertyGroup Label="UserMacros" />
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <OutDir>$(SolutionDir)..\build\</OutDir>
++    <TargetName>cec-client</TargetName>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <OutDir>$(SolutionDir)..\build\x64\</OutDir>
++    <TargetName>cec-client</TargetName>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <OutDir>$(SolutionDir)..\build\</OutDir>
++    <TargetName>cec-client</TargetName>
++  </PropertyGroup>
++  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
++    <OutDir>$(SolutionDir)..\build\x64\</OutDir>
++    <TargetName>cec-client</TargetName>
++  </PropertyGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
++    <ClCompile>
++      <PrecompiledHeader>
++      </PrecompiledHeader>
++      <WarningLevel>Level4</WarningLevel>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>_USE_32BIT_TIME_T;_DEBUG;_CRT_SECURE_NO_WARNINGS;_WINSOCKAPI_;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <TreatWarningAsError>true</TreatWarningAsError>
++      <DisableSpecificWarnings>
++      </DisableSpecificWarnings>
++      <AdditionalIncludeDirectories>$(SolutiontDir)..\..\include;$(SolutionDir)..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++    </ClCompile>
++    <Link>
++      <SubSystem>Console</SubSystem>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++      <Version>
++      </Version>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
++    <ClCompile>
++      <PrecompiledHeader>
++      </PrecompiledHeader>
++      <WarningLevel>Level4</WarningLevel>
++      <Optimization>Disabled</Optimization>
++      <PreprocessorDefinitions>_WIN64;_DEBUG;_CRT_SECURE_NO_WARNINGS;_WINSOCKAPI_;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <TreatWarningAsError>true</TreatWarningAsError>
++      <DisableSpecificWarnings>
++      </DisableSpecificWarnings>
++      <AdditionalIncludeDirectories>$(SolutiontDir)..\..\include;$(SolutionDir)..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++    </ClCompile>
++    <Link>
++      <SubSystem>Console</SubSystem>
++      <GenerateDebugInformation>true</GenerateDebugInformation>
++      <AdditionalDependencies>
++      </AdditionalDependencies>
++      <Version>
++      </Version>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
++    <ClCompile>
++      <WarningLevel>Level4</WarningLevel>
++      <PrecompiledHeader>
++      </PrecompiledHeader>
++      <Optimization>Full</Optimization>
++      <FunctionLevelLinking>false</FunctionLevelLinking>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <PreprocessorDefinitions>_USE_32BIT_TIME_T;_CRT_SECURE_NO_WARNINGS;_WINSOCKAPI_;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <TreatWarningAsError>true</TreatWarningAsError>
++      <DisableSpecificWarnings>
++      </DisableSpecificWarnings>
++      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++    </ClCompile>
++    <Link>
++      <SubSystem>Console</SubSystem>
++      <GenerateDebugInformation>false</GenerateDebugInformation>
++      <EnableCOMDATFolding>true</EnableCOMDATFolding>
++      <OptimizeReferences>true</OptimizeReferences>
++      <Version>
++      </Version>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
++    <ClCompile>
++      <WarningLevel>Level4</WarningLevel>
++      <PrecompiledHeader>
++      </PrecompiledHeader>
++      <Optimization>Full</Optimization>
++      <IntrinsicFunctions>true</IntrinsicFunctions>
++      <PreprocessorDefinitions>_WIN64;_CRT_SECURE_NO_WARNINGS;_WINSOCKAPI_;__STDC_CONSTANT_MACROS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
++      <TreatWarningAsError>true</TreatWarningAsError>
++      <DisableSpecificWarnings>
++      </DisableSpecificWarnings>
++      <AdditionalIncludeDirectories>$(SolutionDir)..\include;$(SolutionDir)..\src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++    </ClCompile>
++    <Link>
++      <SubSystem>Console</SubSystem>
++      <GenerateDebugInformation>false</GenerateDebugInformation>
++      <EnableCOMDATFolding>true</EnableCOMDATFolding>
++      <OptimizeReferences>true</OptimizeReferences>
++      <AdditionalDependencies>
++      </AdditionalDependencies>
++      <Version>
++      </Version>
++    </Link>
++  </ItemDefinitionGroup>
++  <ItemGroup>
++    <ClInclude Include="..\..\include\cec.h" />
++    <ClInclude Include="..\..\include\cecloader.h" />
++    <ClInclude Include="resource.h" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\..\src\lib\platform\windows\os-threads.cpp" />
++    <ClCompile Include="..\..\src\testclient\main.cpp" />
++  </ItemGroup>
++  <ItemGroup>
++    <ResourceCompile Include="testclient.rc" />
++  </ItemGroup>
++  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
++  <ImportGroup Label="ExtensionTargets">
++  </ImportGroup>
++</Project>
+\ Kein Zeilenumbruch am Dateiende.
+diff -Nur libcec-2.1.4/project/testclient/testclient.vcxproj.filters libcec-imx6/project/testclient/testclient.vcxproj.filters
+--- libcec-2.1.4/project/testclient/testclient.vcxproj.filters	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/project/testclient/testclient.vcxproj.filters	2014-09-01 13:48:53.702431449 +0200
+@@ -0,0 +1,29 @@
++﻿<?xml version="1.0" encoding="utf-8"?>
++<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
++  <ItemGroup>
++    <Filter Include="exports">
++      <UniqueIdentifier>{cc0a01c1-e1e7-4af8-9656-fa9463140613}</UniqueIdentifier>
++    </Filter>
++    <Filter Include="platform">
++      <UniqueIdentifier>{f08c0a80-22d9-4bdd-90de-b9cf5fa88f99}</UniqueIdentifier>
++    </Filter>
++  </ItemGroup>
++  <ItemGroup>
++    <ClInclude Include="..\..\include\cec.h">
++      <Filter>exports</Filter>
++    </ClInclude>
++    <ClInclude Include="..\..\include\cecloader.h">
++      <Filter>exports</Filter>
++    </ClInclude>
++    <ClInclude Include="resource.h" />
++  </ItemGroup>
++  <ItemGroup>
++    <ClCompile Include="..\..\src\testclient\main.cpp" />
++    <ClCompile Include="..\..\src\lib\platform\windows\os-threads.cpp">
++      <Filter>platform</Filter>
++    </ClCompile>
++  </ItemGroup>
++  <ItemGroup>
++    <ResourceCompile Include="testclient.rc" />
++  </ItemGroup>
++</Project>
+\ Kein Zeilenumbruch am Dateiende.
+diff -Nur libcec-2.1.4/src/lib/adapter/AdapterFactory.cpp libcec-imx6/src/lib/adapter/AdapterFactory.cpp
+--- libcec-2.1.4/src/lib/adapter/AdapterFactory.cpp	2013-12-16 10:32:51.000000000 +0100
++++ libcec-imx6/src/lib/adapter/AdapterFactory.cpp	2014-09-01 13:48:54.718437326 +0200
+@@ -52,6 +52,11 @@
+ #include "TDA995x/TDA995xCECAdapterCommunication.h"
+ #endif
+ 
++#if defined(HAVE_IMX_API)
++#include "IMX/IMXCECAdapterDetection.h"
++#include "IMX/IMXCECAdapterCommunication.h"
++#endif
++
+ using namespace std;
+ using namespace CEC;
+ 
+@@ -109,7 +114,22 @@
+   }
+ #endif
+ 
+-#if !defined(HAVE_RPI_API) && !defined(HAVE_P8_USB) && !defined(HAVE_TDA995X_API)
++
++#if defined(HAVE_IMX_API)
++  if (iAdaptersFound < iBufSize && CIMXCECAdapterDetection::FindAdapter() &&
++      (!strDevicePath || !strcmp(strDevicePath, CEC_IMX_VIRTUAL_COM)))
++  {
++    snprintf(deviceList[iAdaptersFound].strComPath, sizeof(deviceList[iAdaptersFound].strComPath), CEC_IMX_PATH);
++    snprintf(deviceList[iAdaptersFound].strComName, sizeof(deviceList[iAdaptersFound].strComName), CEC_IMX_VIRTUAL_COM);
++    deviceList[iAdaptersFound].iVendorId = IMX_ADAPTER_VID;
++    deviceList[iAdaptersFound].iProductId = IMX_ADAPTER_PID;
++    deviceList[iAdaptersFound].adapterType = ADAPTERTYPE_IMX;
++    iAdaptersFound++;
++  }
++#endif
++
++
++#if !defined(HAVE_RPI_API) && !defined(HAVE_P8_USB) && !defined(HAVE_TDA995X_API) && !defined(HAVE_IMX_API)
+ #error "libCEC doesn't have support for any type of adapter. please check your build system or configuration"
+ #endif
+ 
+@@ -128,11 +148,16 @@
+     return new CRPiCECAdapterCommunication(m_lib->m_cec);
+ #endif
+ 
++#if defined(HAVE_IMX_API)
++  if (!strcmp(strPort, CEC_IMX_VIRTUAL_COM))
++    return new CIMXCECAdapterCommunication(m_lib->m_cec);
++#endif
++
+ #if defined(HAVE_P8_USB)
+   return new CUSBCECAdapterCommunication(m_lib->m_cec, strPort, iBaudRate);
+ #endif
+ 
+-#if !defined(HAVE_RPI_API) && !defined(HAVE_P8_USB) && !defined(HAVE_TDA995X_API)
++#if !defined(HAVE_RPI_API) && !defined(HAVE_P8_USB) && !defined(HAVE_TDA995X_API) && !defined(HAVE_IMX_API)
+   return NULL;
+ #endif
+ }
+diff -Nur libcec-2.1.4/src/lib/adapter/IMX/AdapterMessageQueue.h libcec-imx6/src/lib/adapter/IMX/AdapterMessageQueue.h
+--- libcec-2.1.4/src/lib/adapter/IMX/AdapterMessageQueue.h	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/src/lib/adapter/IMX/AdapterMessageQueue.h	2014-09-01 13:48:54.718437326 +0200
+@@ -0,0 +1,134 @@
++#pragma once
++/*
++ * This file is part of the libCEC(R) library.
++ *
++ * libCEC(R) is Copyright (C) 2011-2013 Pulse-Eight Limited.  All rights reserved.
++ * libCEC(R) is an original work, containing original code.
++ *
++ * libCEC(R) is a trademark of Pulse-Eight Limited.
++ *
++ * This program is dual-licensed; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ *
++ *
++ * Alternatively, you can license this library under a commercial license,
++ * please contact Pulse-Eight Licensing for more information.
++ *
++ * For more information contact:
++ * Pulse-Eight Licensing       <license@pulse-eight.com>
++ *     http://www.pulse-eight.com/
++ *     http://www.pulse-eight.net/
++ */
++
++#include "lib/platform/threads/mutex.h"
++
++namespace CEC
++{
++  using namespace PLATFORM;
++  
++  class CAdapterMessageQueueEntry
++  {
++  public:
++    CAdapterMessageQueueEntry(const cec_command &command)
++       : m_bWaiting(true), m_retval((uint32_t)-1), m_bSucceeded(false)
++    {
++      m_hash = hashValue(
++    	uint32_t(command.opcode_set ? command.opcode : CEC_OPCODE_NONE),
++        command.initiator, command.destination);
++    }
++    
++    virtual ~CAdapterMessageQueueEntry(void) {}
++
++    /*!
++     * @brief Query result from worker thread
++     */
++    uint32_t Result() const
++    {
++      return m_retval;
++    }
++    
++    /*!
++     * @brief Signal waiting threads
++     */
++    void Broadcast(void)
++    {
++      CLockObject lock(m_mutex);
++      m_condition.Broadcast();
++    }
++
++    /*!
++     * @brief Signal waiting thread(s) when message matches this entry
++     */
++    bool CheckMatch(uint32_t opcode, cec_logical_address initiator, 
++                    cec_logical_address destination, uint32_t response)
++    {
++      uint32_t hash = hashValue(opcode, initiator, destination);
++      
++      if (hash == m_hash)
++      {
++        CLockObject lock(m_mutex);
++
++        m_retval = response;
++        m_bSucceeded = true;
++        m_condition.Signal();
++        return true;
++      }
++      
++      return false;
++    }
++
++    /*!
++     * @brief Wait for a response to this command.
++     * @param iTimeout The timeout to use while waiting.
++     * @return True when a response was received before the timeout passed, false otherwise.
++     */
++    bool Wait(uint32_t iTimeout)
++    {
++      CLockObject lock(m_mutex);
++      
++      bool bReturn = m_bSucceeded ? true : m_condition.Wait(m_mutex, m_bSucceeded, iTimeout);
++      m_bWaiting = false;
++      return bReturn;
++    }
++
++    /*!
++     * @return True while a thread is waiting for a signal or isn't waiting yet, false otherwise.
++     */
++    bool IsWaiting(void)
++    {
++      CLockObject lock(m_mutex);
++      return m_bWaiting;
++    }
++
++    /*!
++     * @return Hash value for given cec_command
++     */
++    static uint32_t hashValue(uint32_t opcode, 
++                              cec_logical_address initiator,  
++                              cec_logical_address destination)
++    {
++      return 1 | ((uint32_t)initiator << 8) | 
++             ((uint32_t)destination << 16) | ((uint32_t)opcode << 16);
++    }
++    
++  private:    
++    bool                         m_bWaiting;     /**< true while a thread is waiting or when it hasn't started waiting yet */
++    PLATFORM::CCondition<bool>   m_condition;    /**< the condition to wait on */
++    PLATFORM::CMutex             m_mutex;        /**< mutex for changes to this class */
++    uint32_t                  	 m_hash;
++    uint32_t                     m_retval;
++    bool                         m_bSucceeded;
++  };
++ 
++};
+diff -Nur libcec-2.1.4/src/lib/adapter/IMX/IMXCECAdapterCommunication.cpp libcec-imx6/src/lib/adapter/IMX/IMXCECAdapterCommunication.cpp
+--- libcec-2.1.4/src/lib/adapter/IMX/IMXCECAdapterCommunication.cpp	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/src/lib/adapter/IMX/IMXCECAdapterCommunication.cpp	2014-09-01 13:48:54.718437326 +0200
+@@ -0,0 +1,279 @@
++/*
++ * This file is part of the libCEC(R) library.
++ *
++ * libCEC(R) is Copyright (C) 2011-2013 Pulse-Eight Limited.  All rights reserved.
++ * libCEC(R) is an original work, containing original code.
++ *
++ * libCEC(R) is a trademark of Pulse-Eight Limited.
++ * 
++ * IMX adpater port is Copyright (C) 2013 by Stephan Rafin
++ * 
++ * You can redistribute this file and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ *
++ *
++ */
++
++#include "env.h"
++
++#if defined(HAVE_IMX_API)
++#include "IMXCECAdapterCommunication.h"
++
++#include "lib/CECTypeUtils.h"
++#include "lib/LibCEC.h"
++#include "lib/platform/sockets/cdevsocket.h"
++#include "lib/platform/util/StdString.h"
++#include "lib/platform/util/buffer.h"
++
++/*
++ * Ioctl definitions from kernel header
++ */
++#define HDMICEC_IOC_MAGIC  'H'
++#define HDMICEC_IOC_SETLOGICALADDRESS _IOW(HDMICEC_IOC_MAGIC,  1, unsigned char)
++#define HDMICEC_IOC_STARTDEVICE _IO(HDMICEC_IOC_MAGIC,  2)
++#define HDMICEC_IOC_STOPDEVICE  _IO(HDMICEC_IOC_MAGIC,  3)
++#define HDMICEC_IOC_GETPHYADDRESS _IOR(HDMICEC_IOC_MAGIC,  4, unsigned char[4])
++
++#define MAX_CEC_MESSAGE_LEN 17
++
++#define MESSAGE_TYPE_RECEIVE_SUCCESS 1
++#define MESSAGE_TYPE_NOACK 2
++#define MESSAGE_TYPE_DISCONNECTED 3
++#define MESSAGE_TYPE_CONNECTED 4
++#define MESSAGE_TYPE_SEND_SUCCESS 5
++
++typedef struct hdmi_cec_event{
++  int event_type;
++  int msg_len;
++  unsigned char msg[MAX_CEC_MESSAGE_LEN];
++}hdmi_cec_event;
++
++
++using namespace std;
++using namespace CEC;
++using namespace PLATFORM;
++
++#include "AdapterMessageQueue.h"
++
++#define LIB_CEC m_callback->GetLib()
++
++// these are defined in nxp private header file
++#define CEC_MSG_SUCCESS                 0x00	/*Message transmisson Succeed*/
++#define CEC_CSP_OFF_STATE               0x80	/*CSP in Off State*/
++#define CEC_BAD_REQ_SERVICE             0x81	/*Bad .req service*/
++#define CEC_MSG_FAIL_UNABLE_TO_ACCESS	0x82	/*Message transmisson failed: Unable to access CEC line*/
++#define CEC_MSG_FAIL_ARBITRATION_ERROR	0x83	/*Message transmisson failed: Arbitration error*/
++#define CEC_MSG_FAIL_BIT_TIMMING_ERROR	0x84	/*Message transmisson failed: Bit timming error*/
++#define CEC_MSG_FAIL_DEST_NOT_ACK       0x85	/*Message transmisson failed: Destination Address not aknowledged*/
++#define CEC_MSG_FAIL_DATA_NOT_ACK       0x86	/*Message transmisson failed: Databyte not acknowledged*/
++
++
++CIMXCECAdapterCommunication::CIMXCECAdapterCommunication(IAdapterCommunicationCallback *callback) :
++    IAdapterCommunication(callback)/*,
++    m_bLogicalAddressChanged(false)*/
++{ 
++  CLockObject lock(m_mutex);
++
++  m_iNextMessage = 0;
++  //m_logicalAddresses.Clear();
++  m_logicalAddress = CECDEVICE_UNKNOWN;
++  m_dev = new CCDevSocket(CEC_IMX_PATH);
++}
++
++CIMXCECAdapterCommunication::~CIMXCECAdapterCommunication(void)
++{
++  Close();
++
++  CLockObject lock(m_mutex);
++  delete m_dev;
++  m_dev = 0;
++}
++
++bool CIMXCECAdapterCommunication::IsOpen(void)
++{
++  return IsInitialised() && m_dev->IsOpen();
++}
++
++bool CIMXCECAdapterCommunication::Open(uint32_t iTimeoutMs, bool UNUSED(bSkipChecks), bool bStartListening)
++{
++  if (m_dev->Open(iTimeoutMs))
++  {
++    if (!bStartListening || CreateThread()) {
++      if (m_dev->Ioctl(HDMICEC_IOC_STARTDEVICE, NULL) != 0) {
++        LIB_CEC->AddLog(CEC_LOG_ERROR, "%s: Unable to start device\n", __func__);
++      }
++      return true;
++    }
++    m_dev->Close();
++  }
++
++  return false;
++}
++
++
++void CIMXCECAdapterCommunication::Close(void)
++{
++  StopThread(0);
++  if (m_dev->Ioctl(HDMICEC_IOC_STOPDEVICE, NULL) != 0) {
++    LIB_CEC->AddLog(CEC_LOG_ERROR, "%s: Unable to stop device\n", __func__);
++  }
++  m_dev->Close();
++}
++
++
++std::string CIMXCECAdapterCommunication::GetError(void) const
++{
++  std::string strError(m_strError);
++  return strError;
++}
++
++
++cec_adapter_message_state CIMXCECAdapterCommunication::Write(
++  const cec_command &data, bool &UNUSED(bRetry), uint8_t UNUSED(iLineTimeout), bool UNUSED(bIsReply))
++{
++  //cec_frame frame;
++  unsigned char message[MAX_CEC_MESSAGE_LEN];
++  int msg_len = 1;
++  cec_adapter_message_state rc = ADAPTER_MESSAGE_STATE_ERROR;
++
++  if ((size_t)data.parameters.size + data.opcode_set + 1 > sizeof(message))
++  {
++    LIB_CEC->AddLog(CEC_LOG_ERROR, "%s: data size too large !", __func__);
++    return ADAPTER_MESSAGE_STATE_ERROR;
++  }
++
++  message[0] = (data.initiator << 4) | (data.destination & 0x0f);
++  if (data.opcode_set)
++  {
++    message[1] = data.opcode;
++    msg_len++;
++    memcpy(&message[2], data.parameters.data, data.parameters.size);
++    msg_len+=data.parameters.size;
++  }
++
++  if (m_dev->Write(message, msg_len) == msg_len)
++  {
++    rc = ADAPTER_MESSAGE_STATE_SENT_ACKED;
++  }
++    else
++      LIB_CEC->AddLog(CEC_LOG_ERROR, "%s: sent command error !", __func__);
++
++  return rc;
++}
++
++
++uint16_t CIMXCECAdapterCommunication::GetFirmwareVersion(void)
++{
++  /* FIXME add ioctl ? */
++  return 0;
++}
++
++
++cec_vendor_id CIMXCECAdapterCommunication::GetVendorId(void)
++{
++  return CEC_VENDOR_UNKNOWN;
++}
++
++
++uint16_t CIMXCECAdapterCommunication::GetPhysicalAddress(void)
++{
++  uint32_t info;
++
++  if (m_dev->Ioctl(HDMICEC_IOC_GETPHYADDRESS, &info) != 0)
++  {
++    LIB_CEC->AddLog(CEC_LOG_ERROR, "%s: HDMICEC_IOC_GETPHYADDRESS failed !", __func__);
++    return CEC_INVALID_PHYSICAL_ADDRESS; 
++  }
++
++  return info;
++}
++
++
++cec_logical_addresses CIMXCECAdapterCommunication::GetLogicalAddresses(void)
++{
++  cec_logical_addresses addresses;
++  addresses.Clear();
++
++  CLockObject lock(m_mutex);
++  if ( m_logicalAddress != CECDEVICE_UNKNOWN)
++    addresses.Set(m_logicalAddress);
++
++  return addresses;
++}
++
++
++bool CIMXCECAdapterCommunication::SetLogicalAddresses(const cec_logical_addresses &addresses)
++{
++  int log_addr = addresses.primary;
++
++  CLockObject lock(m_mutex);
++  if (m_logicalAddress == log_addr)
++      return true;
++
++  if (m_dev->Ioctl(HDMICEC_IOC_SETLOGICALADDRESS, (void *)log_addr) != 0)
++  {
++    LIB_CEC->AddLog(CEC_LOG_ERROR, "%s: HDMICEC_IOC_SETLOGICALADDRESS failed !", __func__);
++    return false;
++  }
++
++  m_logicalAddress = (cec_logical_address)log_addr;
++  return true;
++}
++
++
++void *CIMXCECAdapterCommunication::Process(void)
++{
++  bool bHandled;
++  hdmi_cec_event event;
++  int ret;
++
++  uint32_t opcode, status;
++  cec_logical_address initiator, destination;
++
++  while (!IsStopped())
++  {
++    ret = m_dev->Read((char *)&event, sizeof(event), 5000);
++    if (ret > 0)
++    {
++
++      initiator = cec_logical_address(event.msg[0] >> 4);
++      destination = cec_logical_address(event.msg[0] & 0x0f);
++
++      //LIB_CEC->AddLog(CEC_LOG_DEBUG, "%s: Read data : type : %d initiator %d dest %d", __func__, event.event_type, initiator, destination);
++      if (event.event_type == MESSAGE_TYPE_RECEIVE_SUCCESS)
++      /* Message received */
++      {
++        cec_command cmd;
++
++        cec_command::Format(
++          cmd, initiator, destination,
++          ( event.msg_len > 1 ) ? cec_opcode(event.msg[1]) : CEC_OPCODE_NONE);
++
++        for( uint8_t i = 2; i < event.msg_len; i++ )
++          cmd.parameters.PushBack(event.msg[i]);
++
++        if (!IsStopped())
++          m_callback->OnCommandReceived(cmd);
++      }
++      /* We are not interested in other events */
++    } /*else {
++      LIB_CEC->AddLog(CEC_LOG_DEBUG, "%s: Read returned %d", __func__, ret);
++    }*/
++
++  }
++
++  return 0;
++}
++
++#endif	// HAVE_IMX_API
+diff -Nur libcec-2.1.4/src/lib/adapter/IMX/IMXCECAdapterCommunication.h libcec-imx6/src/lib/adapter/IMX/IMXCECAdapterCommunication.h
+--- libcec-2.1.4/src/lib/adapter/IMX/IMXCECAdapterCommunication.h	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/src/lib/adapter/IMX/IMXCECAdapterCommunication.h	2014-09-01 13:48:54.722437350 +0200
+@@ -0,0 +1,114 @@
++#pragma once
++/*
++ * This file is part of the libCEC(R) library.
++ *
++ * libCEC(R) is Copyright (C) 2011-2013 Pulse-Eight Limited.  All rights reserved.
++ * libCEC(R) is an original work, containing original code.
++ *
++ * libCEC(R) is a trademark of Pulse-Eight Limited.
++ *
++ * IMX adpater port is Copyright (C) 2013 by Stephan Rafin
++ * 
++ * You can redistribute this file and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ *
++ *
++ */
++
++#if defined(HAVE_IMX_API)
++
++#include "lib/platform/threads/mutex.h"
++#include "lib/platform/threads/threads.h"
++#include "lib/platform/sockets/socket.h"
++#include "lib/adapter/AdapterCommunication.h"
++#include <map>
++
++#define IMX_ADAPTER_VID 0x0471 /*FIXME TBD*/
++#define IMX_ADAPTER_PID 0x1001
++
++
++
++namespace PLATFORM
++{
++  class CCDevSocket;
++};
++
++
++namespace CEC
++{
++  class CAdapterMessageQueueEntry;
++
++  class CIMXCECAdapterCommunication : public IAdapterCommunication, public PLATFORM::CThread
++  {
++  public:
++    /*!
++     * @brief Create a new USB-CEC communication handler.
++     * @param callback The callback to use for incoming CEC commands.
++     */
++    CIMXCECAdapterCommunication(IAdapterCommunicationCallback *callback);
++    virtual ~CIMXCECAdapterCommunication(void);
++
++    /** @name IAdapterCommunication implementation */
++    ///{
++    bool Open(uint32_t iTimeoutMs = CEC_DEFAULT_CONNECT_TIMEOUT, bool bSkipChecks = false, bool bStartListening = true);
++    void Close(void);
++    bool IsOpen(void);
++    std::string GetError(void) const;
++    cec_adapter_message_state Write(const cec_command &data, bool &bRetry, uint8_t iLineTimeout, bool bIsReply);
++
++    bool SetLineTimeout(uint8_t UNUSED(iTimeout)) { return true; }
++    bool StartBootloader(void) { return false; }
++    bool SetLogicalAddresses(const cec_logical_addresses &addresses);
++    cec_logical_addresses GetLogicalAddresses(void);
++    bool PingAdapter(void) { return IsInitialised(); }
++    uint16_t GetFirmwareVersion(void);
++    uint32_t GetFirmwareBuildDate(void) { return 0; }
++    bool IsRunningLatestFirmware(void) { return true; }
++    bool PersistConfiguration(const libcec_configuration & UNUSED(configuration)) { return false; }
++    bool GetConfiguration(libcec_configuration & UNUSED(configuration)) { return false; }
++    std::string GetPortName(void) { return std::string("IMX"); }
++    uint16_t GetPhysicalAddress(void);
++    bool SetControlledMode(bool UNUSED(controlled)) { return true; }
++    cec_vendor_id GetVendorId(void);
++    bool SupportsSourceLogicalAddress(const cec_logical_address address) { return address > CECDEVICE_TV && address <= CECDEVICE_BROADCAST; }
++    cec_adapter_type GetAdapterType(void) { return ADAPTERTYPE_IMX; }
++    uint16_t GetAdapterVendorId(void) const { return IMX_ADAPTER_VID; }
++    uint16_t GetAdapterProductId(void) const { return IMX_ADAPTER_PID; }
++    void SetActiveSource(bool UNUSED(bSetTo), bool UNUSED(bClientUnregistered)) {}
++    ///}
++
++    /** @name PLATFORM::CThread implementation */
++    ///{
++    void *Process(void);
++    ///}
++
++  private:
++    bool IsInitialised(void) const { return m_dev != 0; };
++
++    std::string                 m_strError; /**< current error message */
++
++    //cec_logical_addresses       m_logicalAddresses;
++    cec_logical_address         m_logicalAddress;
++
++    PLATFORM::CMutex            m_mutex;
++    PLATFORM::CCDevSocket       *m_dev;	/**< the device connection */
++    
++    PLATFORM::CMutex            m_messageMutex;
++    uint32_t                    m_iNextMessage;
++    std::map<uint32_t, CAdapterMessageQueueEntry *> m_messages;
++  };
++  
++};
++
++#endif
+diff -Nur libcec-2.1.4/src/lib/adapter/IMX/IMXCECAdapterDetection.cpp libcec-imx6/src/lib/adapter/IMX/IMXCECAdapterDetection.cpp
+--- libcec-2.1.4/src/lib/adapter/IMX/IMXCECAdapterDetection.cpp	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/src/lib/adapter/IMX/IMXCECAdapterDetection.cpp	2014-09-01 13:48:54.722437350 +0200
+@@ -0,0 +1,42 @@
++/*
++ * This file is part of the libCEC(R) library.
++ *
++ * libCEC(R) is Copyright (C) 2011-2013 Pulse-Eight Limited.  All rights reserved.
++ * libCEC(R) is an original work, containing original code.
++ *
++ * libCEC(R) is a trademark of Pulse-Eight Limited.
++ * 
++ * IMX adpater port is Copyright (C) 2013 by Stephan Rafin
++ * 
++ * You can redistribute this file and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ *
++ *
++ */
++
++#include "env.h"
++#include <stdio.h>
++
++#if defined(HAVE_IMX_API)
++#include "IMXCECAdapterDetection.h"
++
++
++using namespace CEC;
++
++bool CIMXCECAdapterDetection::FindAdapter(void)
++{
++  return access(CEC_IMX_PATH, 0) == 0;
++}
++
++#endif
+diff -Nur libcec-2.1.4/src/lib/adapter/IMX/IMXCECAdapterDetection.h libcec-imx6/src/lib/adapter/IMX/IMXCECAdapterDetection.h
+--- libcec-2.1.4/src/lib/adapter/IMX/IMXCECAdapterDetection.h	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/src/lib/adapter/IMX/IMXCECAdapterDetection.h	2014-09-01 13:48:54.722437350 +0200
+@@ -0,0 +1,36 @@
++#pragma once
++/*
++ * This file is part of the libCEC(R) library.
++ *
++ * libCEC(R) is Copyright (C) 2011-2013 Pulse-Eight Limited.  All rights reserved.
++ * libCEC(R) is an original work, containing original code.
++ *
++ * libCEC(R) is a trademark of Pulse-Eight Limited.
++ * 
++ * IMX adpater port is Copyright (C) 2013 by Stephan Rafin
++ * 
++ * You can redistribute this file and/or modify
++ * it under the terms of the GNU General Public License as published by
++ * the Free Software Foundation; either version 2 of the License, or
++ * (at your option) any later version.
++ *
++ * This program is distributed in the hope that it will be useful,
++ * but WITHOUT ANY WARRANTY; without even the implied warranty of
++ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
++ * GNU General Public License for more details.
++ *
++ * You should have received a copy of the GNU General Public License
++ * along with this program; if not, write to the Free Software
++ * Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
++ *
++ *
++ */
++
++namespace CEC
++{
++  class CIMXCECAdapterDetection
++  {
++  public:
++    static bool FindAdapter(void);
++  };
++}
+diff -Nur libcec-2.1.4/src/lib/CECTypeUtils.h libcec-imx6/src/lib/CECTypeUtils.h
+--- libcec-2.1.4/src/lib/CECTypeUtils.h	2013-12-16 10:32:51.000000000 +0100
++++ libcec-imx6/src/lib/CECTypeUtils.h	2014-09-01 13:48:54.698437211 +0200
+@@ -858,6 +858,8 @@
+         return "Raspberry Pi";
+       case ADAPTERTYPE_TDA995x:
+         return "TDA995x";
++      case ADAPTERTYPE_IMX:
++        return "i.MX";
+       default:
+         return "unknown";
+       }
+diff -Nur libcec-2.1.4/src/lib/Makefile.am libcec-imx6/src/lib/Makefile.am
+--- libcec-2.1.4/src/lib/Makefile.am	2013-12-16 10:32:51.000000000 +0100
++++ libcec-imx6/src/lib/Makefile.am	2014-09-01 13:48:54.718437326 +0200
+@@ -59,5 +59,10 @@
+                      adapter/TDA995x/TDA995xCECAdapterCommunication.cpp
+ endif
+ 
++## i.MX6 support
++if USE_IMX_API
++libcec_la_SOURCES += adapter/IMX/IMXCECAdapterDetection.cpp \
++                     adapter/IMX/IMXCECAdapterCommunication.cpp
++endif
+ 
+ libcec_la_LDFLAGS = @LIBS_LIBCEC@ -version-info @VERSION@
+diff -Nur libcec-2.1.4/support/create-driver-installer.cmd libcec-imx6/support/create-driver-installer.cmd
+--- libcec-2.1.4/support/create-driver-installer.cmd	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/support/create-driver-installer.cmd	2014-09-01 13:48:54.758437558 +0200
+@@ -0,0 +1,58 @@
++@echo off
++
++rem Check for NSIS
++IF EXIST "%ProgramFiles%\NSIS\makensis.exe" (
++  set NSIS="%ProgramFiles%\NSIS\makensis.exe"
++) ELSE IF EXIST "%ProgramFiles(x86)%\NSIS\makensis.exe" (
++  set NSIS="%ProgramFiles(x86)%\NSIS\makensis.exe"
++) ELSE GOTO NONSIS
++
++rem Check for the Windows DDK
++IF NOT EXIST "C:\WinDDK\7600.16385.1" GOTO NODDK
++set DDK="C:\WinDDK\7600.16385.1"
++
++mkdir ..\build
++
++echo. Copying driver installer
++copy "%DDK%\redist\DIFx\dpinst\MultiLin\amd64\dpinst.exe" ..\build\dpinst-amd64.exe
++copy "%DDK%\redist\DIFx\dpinst\MultiLin\x86\dpinst.exe" ..\build\dpinst-x86.exe
++
++:CREATECAT
++cd ..\driver
++IF EXIST "..\support\private\create-cat.cmd" (
++  echo. Updating the catalogue
++  CALL ..\support\private\create-cat.cmd p8usb-cec.cat
++)
++
++:CREATEINSTALLER
++echo. Creating the installer
++cd ..\project
++%NSIS% /V1 /X"SetCompressor /FINAL lzma" "p8-usbcec-driver.nsi"
++
++IF NOT EXIST "..\build\p8-usbcec-driver-installer.exe" GOTO :ERRORCREATINGINSTALLER
++
++rem Sign the installer if sign-binary.cmd exists
++IF EXIST "..\support\private\sign-binary.cmd" (
++  echo. Signing the installer binaries
++  CALL ..\support\private\sign-binary.cmd ..\build\p8-usbcec-driver-installer.exe
++)
++
++echo. The installer can be found here: ..\build\p8-usbcec-driver-installer.exe
++
++GOTO EXIT
++
++:NOSIS
++echo. NSIS could not be found on your system.
++GOTO EXIT
++
++:NODDK
++echo. Windows DDK could not be found on your system
++GOTO EXIT
++
++:ERRORCREATINGINSTALLER
++echo. The installer could not be created.
++
++:EXIT
++del /q /f ..\build\dpinst-amd64.exe
++del /q /f ..\build\dpinst-x86.exe
++cd ..\support
+\ Kein Zeilenumbruch am Dateiende.
+diff -Nur libcec-2.1.4/support/create-installer.bat libcec-imx6/support/create-installer.bat
+--- libcec-2.1.4/support/create-installer.bat	1970-01-01 01:00:00.000000000 +0100
++++ libcec-imx6/support/create-installer.bat	2014-09-01 13:48:54.758437558 +0200
+@@ -0,0 +1,140 @@
++@echo off
++
++set EXITCODE=1
++
++rem Check for NSIS
++IF EXIST "%ProgramFiles%\NSIS\makensis.exe" (
++  set NSIS="%ProgramFiles%\NSIS\makensis.exe"
++) ELSE IF EXIST "%ProgramFiles(x86)%\NSIS\makensis.exe" (
++  set NSIS="%ProgramFiles(x86)%\NSIS\makensis.exe"
++) ELSE GOTO NONSIS
++
++rem Check for VC11
++IF "%VS110COMNTOOLS%"=="" (
++  set COMPILER11="%ProgramFiles%\Microsoft Visual Studio 11.0\Common7\IDE\VCExpress.exe"
++) ELSE IF EXIST "%VS110COMNTOOLS%\..\IDE\VCExpress.exe" (
++  set COMPILER11="%VS110COMNTOOLS%\..\IDE\VCExpress.exe"
++) ELSE IF EXIST "%VS110COMNTOOLS%\..\IDE\devenv.exe" (
++  set COMPILER11="%VS110COMNTOOLS%\..\IDE\devenv.exe"
++) ELSE GOTO NOSDK11
++
++del /s /f /q ..\build
++mkdir ..\build
++
++IF EXIST "..\support\p8-usbcec-driver-installer.exe" (
++  copy "..\support\p8-usbcec-driver-installer.exe" "..\build\."
++) ELSE (
++  rem Check for the Windows DDK
++  IF NOT EXIST "C:\WinDDK\7600.16385.1" GOTO NODDK
++  set DDK="C:\WinDDK\7600.16385.1"
++
++  call create-driver-installer.cmd
++)
++
++mkdir ..\build\x64
++
++cd ..\project
++
++rem Skip to libCEC/x86 when we're running on win32
++if "%PROCESSOR_ARCHITECTURE%"=="x86" if "%PROCESSOR_ARCHITEW6432%"=="" goto libcecx86
++
++rem Compile libCEC and cec-client x64
++echo. Cleaning libCEC (x64)
++%COMPILER11% libcec.sln /clean "Release|x64"
++echo. Compiling libCEC (x64)
++%COMPILER11% libcec.sln /build "Release|x64"
++
++:libcecx86
++rem Compile libCEC and cec-client Win32
++echo. Cleaning libCEC (x86)
++%COMPILER11% libcec.sln /clean "Release|x86"
++echo. Compiling libCEC (x86)
++%COMPILER11% libcec.sln /build "Release|x86"
++
++rem Clean things up before creating the installer
++del /q /f ..\build\LibCecSharp.pdb
++del /q /f ..\build\CecSharpTester.pdb
++del /q /f ..\build\cec-tray.pdb
++del /q /f ..\build\cec-tray.vshost.exe.manifest
++del /q /f ..\build\cec-.vshost.exe
++del /q /f ..\build\x64\LibCecSharp.pdb
++del /q /f ..\build\x64\CecSharpTester.pdb
++del /q /f ..\build\x64\cec-tray.pdb
++del /q /f ..\build\x64\cec-tray.vshost.exe.manifest
++del /q /f ..\build\x64\cec-.vshost.exe
++
++rem Check for sign-binary.cmd, only present on the Pulse-Eight production build system
++rem Calls signtool.exe and signs the DLLs with Pulse-Eight's code signing key
++IF NOT EXIST "..\support\private\sign-binary.cmd" GOTO CREATEINSTALLER
++echo. Signing all binaries
++CALL ..\support\private\sign-binary.cmd ..\build\cec-client.exe
++CALL ..\support\private\sign-binary.cmd ..\build\CecSharpTester.exe
++CALL ..\support\private\sign-binary.cmd ..\build\libcec.dll
++CALL ..\support\private\sign-binary.cmd ..\build\LibCecSharp.dll
++CALL ..\support\private\sign-binary.cmd ..\build\cec-tray.exe
++CALL ..\support\private\sign-binary.cmd ..\build\x64\cec-client.exe
++CALL ..\support\private\sign-binary.cmd ..\build\x64\CecSharpTester.exe
++CALL ..\support\private\sign-binary.cmd ..\build\x64\libcec.dll
++CALL ..\support\private\sign-binary.cmd ..\build\x64\LibCecSharp.dll
++CALL ..\support\private\sign-binary.cmd ..\build\x64\cec-tray.exe
++
++:CREATEINSTALLER
++echo. Creating the installer
++cd ..\build\x64
++copy libcec.dll libcec.x64.dll
++copy cec-client.exe cec-client.x64.exe
++cd ..\..\project
++%NSIS% /V1 /X"SetCompressor /FINAL lzma" "libCEC.nsi"
++
++IF NOT EXIST "..\build\libCEC-installer.exe" GOTO :ERRORCREATINGINSTALLER
++
++rem Sign the installer if sign-binary.cmd exists
++IF EXIST "..\support\private\sign-binary.cmd" (
++  echo. Signing the installer binaries
++  CALL ..\support\private\sign-binary.cmd ..\build\libCEC-installer.exe
++)
++
++IF "%1%"=="" (
++  echo. The installer can be found here: ..\build\libCEC-installer.exe
++) ELSE (
++  move ..\build\libCEC-installer.exe ..\build\libCEC-%1%-installer.exe
++  echo. The installer can be found here: ..\build\libCEC-%1%-installer.exe
++)
++
++set EXITCODE=0
++GOTO EXIT
++
++:NOSDK11
++echo. Visual Studio 2012 was not found on your system.
++GOTO EXIT
++
++:NOSIS
++echo. NSIS could not be found on your system.
++GOTO EXIT
++
++:NODDK
++echo. Windows DDK could not be found on your system
++GOTO EXIT
++
++:ERRORCREATINGINSTALLER
++echo. The installer could not be created. The most likely cause is that something went wrong while compiling.
++
++:EXIT
++del /q /f ..\build\cec-client.exe
++del /q /f ..\build\CecSharpTester.exe
++del /q /f ..\build\cec-tray.exe
++del /q /f ..\build\*.dll
++del /q /f ..\build\*.lib
++del /q /f ..\build\*.exp
++del /q /f ..\build\*.xml
++del /q /f ..\build\*.metagen
++del /s /f /q ..\build\x64
++rmdir ..\build\x64
++cd ..\support
++
++IF "%1%"=="" (
++  echo. exitcode = %EXITCODE%
++) ELSE (
++  exit %EXITCODE%
++)
++
+Binärdateien libcec-2.1.4/support/p8-usbcec-driver-installer.exe und libcec-imx6/support/p8-usbcec-driver-installer.exe sind verschieden.

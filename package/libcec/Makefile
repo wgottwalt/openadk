@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libcec
 PKG_VERSION:=		2.1.4
-PKG_RELEASE:=		5
+PKG_RELEASE:=		6
 PKG_MD5SUM:=		faa58944f87e9beda165f615d4b46766
 PKG_DESCR:=		control your device with your tv remote control
 PKG_SECTION:=		libs/video
@@ -26,6 +26,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBCEC,libcec,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
+CONFIGURE_ARGS+=	--enable-imx6
+endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIGURE_ARGS+=	--enable-rpi \
 			--with-rpi-include-path=$(STAGING_TARGET_DIR)/opt/vc/include \
