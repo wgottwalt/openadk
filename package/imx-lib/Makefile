@@ -26,7 +26,7 @@ CONFIG_STYLE:=		manual
 
 imx-lib-install:
 	$(INSTALL_DIR) $(IDIR_IMX_LIB)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/lib{cec,ipu,pxp}.so* \
+	$(CP) $(WRKINST)/usr/lib/lib{ipu,pxp}.so* \
 		$(IDIR_IMX_LIB)/usr/lib
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
