@@ -4,12 +4,11 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ltp
-PKG_VERSION:=		20140422
+PKG_VERSION:=		20140828
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6a98074e9121595ccb78951ebfeb698f
 PKG_DESCR:=		linux test project
-PKG_BUILDDEP:=		libtirpc
-PKG_DEPENDS:=		bash libtirpc libpthread librt
+PKG_DEPENDS:=		bash libpthread librt
 PKG_DEPENDS+=		mke2fs mkfs
 PKG_SECTION:=		sys/misc
 PKG_URL:=		http://linux-test-project.github.io
@@ -23,14 +22,21 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LTP,ltp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/tirpc
-TARGET_LDFLAGS+=	-ltirpc
+TARGET_CFLAGS+=		-fno-builtin
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--with-open-posix-testsuite \
 			--with-realtime-testsuite \
 			--without-power-management-testsuite \
 			--without-python \
 			--without-perl \
 			--without-expect
+
+# bessel float version not implemented in uClibc
+pre-build:
+	-rm ${WRKBUILD}/testcases/misc/math/float/float_bessel.c
+	-rm -rf ${WRKBUILD}/testcases/misc/math/float/bessel
+	-rm -rf ${WRKBUILD}/testcases/network/{rpc,nfs*} 
+	-rm -rf ${WRKBUILD}/testcases/kernel/syscalls/profil
 
 ltp-install:
 	$(INSTALL_DIR) $(IDIR_LTP)/opt/ltp/tmp

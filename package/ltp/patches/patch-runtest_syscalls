@@ -1,6 +1,6 @@
---- ltp-full-20140422.orig/runtest/syscalls	2014-04-23 10:36:54.000000000 +0200
-+++ ltp-full-20140422/runtest/syscalls	2014-07-07 16:47:09.356685909 +0200
-@@ -283,7 +283,7 @@ fork08 fork08
+--- ltp-full-20140828.orig/runtest/syscalls	2014-08-28 12:11:45.000000000 +0200
++++ ltp-full-20140828/runtest/syscalls	2014-09-01 13:55:06.556554900 +0200
+@@ -281,7 +281,7 @@ fork08 fork08
  fork09 fork09
  fork10 fork10
  fork11 fork11

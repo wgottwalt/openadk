@@ -1,7 +1,7 @@
---- ltp-full-20140422.orig/testcases/kernel/Makefile	2014-04-23 10:36:54.000000000 +0200
-+++ ltp-full-20140422/testcases/kernel/Makefile	2014-07-22 15:57:17.210496497 +0200
-@@ -50,7 +50,6 @@ SUBDIRS			+= connectors \
- 			   performance_counters \
+--- ltp-full-20140828.orig/testcases/kernel/Makefile	2014-08-28 12:11:45.000000000 +0200
++++ ltp-full-20140828/testcases/kernel/Makefile	2014-09-01 13:55:06.564554944 +0200
+@@ -49,7 +49,6 @@ SUBDIRS			+= connectors \
+ 			   numa \
  			   pty \
  			   sched \
 -			   security \
