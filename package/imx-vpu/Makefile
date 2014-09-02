@@ -8,6 +8,7 @@ PKG_VERSION:=		3.10.17-1.0.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		71ea1b803864101ebf88a1bab45514d2
 PKG_DESCR:=		IMX VPU library (Freescale)
+PKG_DEPENDS:=		firmware-imx
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.freescale.com/
 PKG_SITES:=		http://www.freescale.com/lgfiles/NMG/MAD/YOCTO/
