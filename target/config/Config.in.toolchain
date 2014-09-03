@@ -153,11 +153,13 @@ config ADK_TOOLCHAIN_GCC_4_5_4
 	prompt "4.5.4"
 	boolean
 	depends on ADK_LINUX_BFIN
+	depends on !ADK_LINUX_AARCH64
 
 config ADK_TOOLCHAIN_GCC_4_8_3
 	prompt "4.8.3"
 	boolean
 	depends on !ADK_LINUX_BFIN
+	depends on !ADK_LINUX_AARCH64
 
 config ADK_TOOLCHAIN_GCC_4_9_1
 	prompt "4.9.1"
