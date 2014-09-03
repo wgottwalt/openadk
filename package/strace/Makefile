@@ -4,8 +4,8 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		strace
-PKG_VERSION:=		4.8
-PKG_RELEASE:=		8
+PKG_VERSION:=		4.9
+PKG_RELEASE:=		1
 PKG_MD5SUM:=		c575ef43829586801f514fd91bfe7575
 PKG_DESCR:=		system call trace program
 PKG_SECTION:=		app/debug
