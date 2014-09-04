@@ -36,7 +36,9 @@ INSTALL_STYLE:=		manual
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBTHREAD_DB}/lib
 ifeq ($(ADK_TARGET_LIB_MUSL),)
+ifeq (${ADK_TARGET_UCLINUX},)
 	${CP} ${STAGING_TARGET_DIR}/lib/libthread_db*.so* ${IDIR_LIBTHREAD_DB}/lib
+endif
 endif
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
