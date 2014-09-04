@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ltp
 PKG_VERSION:=		20140828
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		6a98074e9121595ccb78951ebfeb698f
 PKG_DESCR:=		linux test project
 PKG_DEPENDS:=		bash libpthread librt
@@ -22,7 +22,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LTP,ltp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS+=		-fno-builtin
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--with-open-posix-testsuite \
 			--with-realtime-testsuite \
@@ -30,6 +29,10 @@ CONFIGURE_ARGS+=	--with-open-posix-testsuite \
 			--without-python \
 			--without-perl \
 			--without-expect
+
+pre-configure:
+	$(MAKE) -C $(WRKBUILD) distclean
+	$(MAKE) -C $(WRKBUILD) autotools
 
 # bessel float version not implemented in uClibc
 pre-build:
