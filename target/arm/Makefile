@@ -52,6 +52,8 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	@echo "Use following command to install it on SD card:"
 	@echo "sudo ./scripts/install-solidrun.sh /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL) $(FW_DIR)"
+	@echo "Use following command to install with a writable data partition"
+	@echo "sudo ./scripts/install-solidrun.sh -d /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL) $(FW_DIR)"
 
 endif
 endif
