@@ -1,0 +1,11 @@
+--- xbmc-imx6-13.2.orig/xbmc/cores/dvdplayer/DVDStreamInfo.h	2014-09-02 13:26:21.000000000 +0200
++++ xbmc-imx6-13.2/xbmc/cores/dvdplayer/DVDStreamInfo.h	2014-09-04 15:11:27.778012372 +0200
+@@ -55,7 +55,7 @@ public:
+   void Assign(const CDVDStreamInfo &right, bool withextradata);
+   void Assign(const CDemuxStream &right, bool withextradata);
+ 
+-  CodecID codec;
++  AVCodecID codec;
+   StreamType type;
+   bool software;  //force software decoding
+ 

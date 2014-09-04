@@ -1,0 +1,11 @@
+--- xbmc-imx6-13.2.orig/configure.in	2014-09-02 13:26:12.000000000 +0200
++++ xbmc-imx6-13.2/configure.in	2014-09-04 16:22:35.671588472 +0200
+@@ -553,7 +553,7 @@ OBJDUMP="${OBJDUMP:-objdump}"
+ # so we have to use our own var here
+ # defaults to the build side target_os
+ # and should be overridden for cross below (see android)
+-ffmpeg_target_os=$(tolower $(uname -s))
++ffmpeg_target_os=linux
+ 
+ # host detection and setup
+ case $host in

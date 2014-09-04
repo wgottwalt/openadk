@@ -1,0 +1,41 @@
+--- xbmc-imx6-13.2.orig/xbmc/Application.cpp	2014-09-02 13:26:21.000000000 +0200
++++ xbmc-imx6-13.2/xbmc/Application.cpp	2014-09-02 20:38:02.102270928 +0200
+@@ -656,7 +656,7 @@ bool CApplication::Create()
+ 
+   if (!CLog::Init(CSpecialProtocol::TranslatePath(g_advancedSettings.m_logFolder).c_str()))
+   {
+-    fprintf(stderr,"Could not init logging classes. Permission errors on ~/.xbmc (%s)\n",
++    fprintf(stderr,"Could not init logging classes. Permission errors on %s\n",
+       CSpecialProtocol::TranslatePath(g_advancedSettings.m_logFolder).c_str());
+     return false;
+   }
+@@ -1023,10 +1023,13 @@ bool CApplication::InitDirectoriesLinux(
+     userName = "root";
+ 
+   CStdString userHome;
++  userHome = "/data/xbmc";
++/*
+   if (getenv("HOME"))
+     userHome = getenv("HOME");
+   else
+     userHome = "/root";
++*/
+ 
+   CStdString xbmcBinPath, xbmcPath;
+   CUtil::GetHomePath(xbmcBinPath, "XBMC_BIN_HOME");
+@@ -1058,11 +1061,11 @@ bool CApplication::InitDirectoriesLinux(
+     // map our special drives
+     CSpecialProtocol::SetXBMCBinPath(xbmcBinPath);
+     CSpecialProtocol::SetXBMCPath(xbmcPath);
+-    CSpecialProtocol::SetHomePath(userHome + "/.xbmc");
+-    CSpecialProtocol::SetMasterProfilePath(userHome + "/.xbmc/userdata");
++    CSpecialProtocol::SetHomePath(userHome);
++    CSpecialProtocol::SetMasterProfilePath(userHome + "/userdata");
+ 
+-    CStdString strTempPath = userHome;
+-    strTempPath = URIUtils::AddFileToFolder(strTempPath, ".xbmc/temp");
++    CStdString strTempPath = "/tmp";
++    strTempPath = URIUtils::AddFileToFolder(strTempPath, "/xbmc");
+     if (getenv("XBMC_TEMP"))
+       strTempPath = getenv("XBMC_TEMP");
+     CSpecialProtocol::SetTempPath(strTempPath);
