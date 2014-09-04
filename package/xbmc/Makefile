@@ -62,15 +62,13 @@ PKGFB_WITH_BLURAY:=	libbluray
 PKGFS_WITH_BLURAY:=	libbluray
 PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 
-PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
-PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
-PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
-PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
 PKG_DEPENDS_IBM_X40:=	libsdl libsdl-image libxshmfence libx11 libxext libxt libsm libice
 PKG_DEPENDS_VBOX_X86:=	libsdl libsdl-image libxshmfence libx11 libxext libxt libsm libice
 PKG_BUILDDEP_IBM_X40:=	nasm-host sdl sdl-image
 PKG_BUILDDEP_VBOX_X86:=	nasm-host sdl sdl-image
-PKG_SYSTEM_DEPENDS:=	raspberry-pi ibm-x40 vbox-x86 solidrun-imx6
+PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
+PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
+PKG_SYSTEM_DEPENDS:=	raspberry-pi ibm-x40 vbox-x86
 
 DIFF_IGNOREFILES:=	configure missing depcomp install-sh INSTALL \
 			aclocal.m4 config.h.in
@@ -82,7 +80,6 @@ $(eval $(call PKG_template,XBMC,xbmc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 HOST_CXXFLAGS+=		$(HOST_CPPFLAGS)
 XAKE_FLAGS+=		V=1 TIXML_USE_STL=1 GCC_HONOUR_COPTS=s
 TARGET_CPPFLAGS+=	-I. -I./utils \
-			-I$(STAGING_TARGET_DIR)/usr/include/boost-1_55 \
 			-I$(STAGING_TARGET_DIR)/usr/include/afpfs-ng \
 			-DTIXML_USE_STL=1 -DHAS_SIMPLEPM=1 -DLINUX
 
