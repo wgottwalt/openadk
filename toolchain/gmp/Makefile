@@ -10,6 +10,10 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 GMP_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
 
+ifeq (${ARCH_FOR_BUILD},x32)
+GMP_CONFOPTS+=		ABI=x32
+endif
+
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 ifneq ($(OStype),Darwin)
@@ -17,7 +21,7 @@ ifneq ($(OStype),Darwin)
 endif
 	(cd $(WRKBUILD); \
 		PATH="$(STAGING_HOST_DIR)/usr/bin:$$PATH" \
-		./configure \
+		./configure ${GMP_CONFOPTS} \
 		--prefix=$(STAGING_HOST_DIR)/usr \
 		--with-pic \
 		--disable-shared \

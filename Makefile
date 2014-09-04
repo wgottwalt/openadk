@@ -191,7 +191,9 @@ NO_ERROR=0
 		echo "GMAKE:=$$(which gmake)" >>prereq.mk ;\
 	fi
 	@echo "GNU_HOST_NAME:=$$(${CC} -dumpmachine)" >>prereq.mk
-	@echo "ARCH_FOR_BUILD:=$$(${CC} -dumpmachine | sed -e s'/-.*//' \
+	@echo "ARCH_FOR_BUILD:=$$(${CC} -dumpmachine | sed \
+	    -e 's/x86_64-linux-gnux32/x32/' \
+	    -e s'/-.*//' \
 	    -e 's/sparc.*/sparc/' \
 	    -e 's/armeb.*/armeb/g' \
 	    -e 's/arm.*/arm/g' \
