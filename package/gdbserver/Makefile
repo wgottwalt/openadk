@@ -9,8 +9,7 @@ PKG_DESCR:=		remote programm debugger utility
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libthread-db
 
-PKG_ARCH_DEPENDS:=	!m68k
-PKG_LIBC_DEPENDS:=	uclibc glibc uclibc-ng
+PKG_LIBC_DEPENDS:=	!musl
 PKG_SUBPKGS:=		GDBSERVER
 
 WRKSRC=                 ${WRKDIST}/gdb/gdbserver

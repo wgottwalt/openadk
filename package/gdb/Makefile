@@ -18,6 +18,12 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+CONFIGURE_ARGS+=	--disable-gdbserver
+else
+CONFIGURE_ARGS+=	--enable-gdbserver
+endif
+
 TARGET_CFLAGS+=		${TARGET_CPPFLAGS} -fPIC
 CONFIGURE_ARGS+=	--without-uiout \
 			--disable-tui \
@@ -25,7 +31,6 @@ CONFIGURE_ARGS+=	--without-uiout \
 			--without-x \
 			--disable-sim \
 			--disable-werror \
-			--disable-gdbserver \
 			--without-python \
 			--without-included-gettext \
 			--without-auto-load-safe-path \
