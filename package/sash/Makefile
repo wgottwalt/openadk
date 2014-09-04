@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		standalone shell
 PKG_SECTION:=		base/shells
 
+PKG_NOPARALLEL:=	1
 NO_DISTFILES:=		1
 
 include ${ADK_TOPDIR}/mk/package.mk
