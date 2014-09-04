@@ -1,7 +1,7 @@
-From b33ede9109b25a249bd2ba4b9c1d20eee90efdf7 Mon Sep 17 00:00:00 2001
+From 539fe3a7cc5439d01499765008751f8d17ca5ede Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
-Date: Sun, 31 Aug 2014 11:03:20 +0200
-Subject: [PATCH 5/5] nptl: remove duplicate vfork() in libpthread
+Date: Thu, 4 Sep 2014 15:23:36 +0200
+Subject: [PATCH 2/2] nptl: remove duplicate vfork() in libpthread
 
 Automatic patching via two oneliners by Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>:
 sed -i -e 's/[[:space:]]pt-vfork\.[csS]//' $(git grep -l pt-vfork libpthread/nptl/sysdeps)
