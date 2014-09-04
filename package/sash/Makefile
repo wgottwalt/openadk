@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		sash
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		standalone shell
 PKG_SECTION:=		base/shells
 
@@ -21,6 +21,6 @@ INSTALL_STYLE:=		manual
 
 do-install:
 	${INSTALL_DIR} ${IDIR_SASH}/bin
-	${INSTALL_BIN} ${WRKBUILD}/sh ${IDIR_SASH}/bin/sh
+	${INSTALL_BIN} ${WRKBUILD}/sh ${IDIR_SASH}/bin/sash
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

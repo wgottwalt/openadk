@@ -58,13 +58,9 @@ image-prepare-post:
 			mkfontdir ${TARGET_DIR}/usr/share/fonts/X11/$${i}; \
 		done; \
 	fi
-ifeq (${ADK_ROOTSH_SASH},)
 	$(SED) '/^root:/s!:/bin/sh$$!:${ROOTSH}!' ${TARGET_DIR}/etc/passwd
-endif
-ifeq (${ADK_BINSH_SASH},)
 	-rm -f ${TARGET_DIR}/bin/sh
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
-endif
 	test -z $(GIT) || \
 	     $(GIT) log -1|head -1|sed -e 's#commit ##' \
 		> $(TARGET_DIR)/etc/.adkversion
