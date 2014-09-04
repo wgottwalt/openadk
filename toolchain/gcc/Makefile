@@ -258,7 +258,9 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 			ln -sf ../../bin/$(GNU_TARGET_NAME)-$${app} $${app}; \
 		done;
 	(cd $(TOOLCHAIN_DIR)/usr/bin && \
-		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-gcc-${PKG_VERSION})
+		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-gcc-${PKG_VERSION} && \
+		ln -sf $(GNU_TARGET_NAME)-g++ $(GNU_TARGET_NAME)-g++-${PKG_VERSION} \
+	)
 ifeq ($(ADK_TARGET_USE_GOLD),y)
 	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf $(GNU_TARGET_NAME)-ld.gold $(GNU_TARGET_NAME)-ld)
@@ -267,8 +269,8 @@ else
 		ln -sf $(GNU_TARGET_NAME)-ld.bfd $(GNU_TARGET_NAME)-ld)
 endif
 	cd $(STAGING_TARGET_DIR)/lib && \
-		ln -sf libstdc++.so.6.0.19 libstdc++.so && \
-		ln -sf libstdc++.so.6.0.19 libstdc++.so.6
+		ln -sf libstdc++.so.6.0.$(LIBSTDCXXVER) libstdc++.so && \
+		ln -sf libstdc++.so.6.0.$(LIBSTDCXXVER) libstdc++.so.6
 	# cleanup unneeded docs
 	rm -rf $(TOOLCHAIN_DIR)/usr/share
 	# create gcc wrapper for uClinux/m68k
