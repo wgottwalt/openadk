@@ -1,4 +1,9 @@
 global:
+- avr32
+- cris
+- metag
+- or1k
+
 - projects dir idea
 - lowercase package conversion
 

@@ -143,6 +143,10 @@ ifeq ($(ADK_CPU_SPARC_V9),y)
 GCC_CONFOPTS+=		--with-cpu=ultrasparc
 endif
 
+ifeq ($(ADK_CPU_ARC),y)
+GCC_CONFOPTS+=		--with-cpu=arc700
+endif
+
 ifeq ($(ADK_CPU_CF_5208),y)
 GCC_CONFOPTS+=		--enable-multilib --with-arch=cf --with-cpu=5208
 endif

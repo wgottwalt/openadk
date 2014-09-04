@@ -43,6 +43,9 @@ config ADK_TARGET_CPU_WITH_3DNOWEXT
 config ADK_CPU_ATHLON
 	boolean
 
+config ADK_CPU_ARC
+	boolean
+
 config ADK_CPU_SH4
 	boolean
 
@@ -121,6 +124,7 @@ config ADK_TARGET_CPU_ARCH
 	default "armv6" if ADK_LINUX_ARM && ADK_little && ADK_armv6
 	default "armv7a" if ADK_LINUX_ARM && ADK_little && ADK_armv7a
 	default "arm" if ADK_LINUX_ARM && ADK_little
+	default "arc" if ADK_CPU_ARC
 	default "bfin" if ADK_CPU_BFIN
 	default "i486" if ADK_CPU_I486
 	default "i586" if ADK_CPU_I586

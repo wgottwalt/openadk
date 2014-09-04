@@ -155,22 +155,35 @@ config ADK_TOOLCHAIN_GCC_4_5_4
 	depends on ADK_LINUX_BFIN
 	depends on !ADK_LINUX_AARCH64
 
+config ADK_TOOLCHAIN_GCC_4_8_3_ARC
+	prompt "4.8.3-arc"
+	boolean
+	depends on ADK_LINUX_ARC
+
+config ADK_TOOLCHAIN_GCC_4_8_3_ARC
+	prompt "4.8.3-arc"
+	boolean
+	depends on ADK_LINUX_ARC
+
 config ADK_TOOLCHAIN_GCC_4_8_3
 	prompt "4.8.3"
 	boolean
 	depends on !ADK_LINUX_BFIN
 	depends on !ADK_LINUX_AARCH64
+	depends on !ADK_LINUX_ARC
 
 config ADK_TOOLCHAIN_GCC_4_9_1
 	prompt "4.9.1"
 	boolean
 	depends on !ADK_LINUX_BFIN
+	depends on !ADK_LINUX_ARC
 
 config ADK_TOOLCHAIN_GCC_GIT
 	prompt "git"
 	boolean
 	select ADK_DISABLE_CHECKSUM
 	depends on !ADK_LINUX_BFIN
+	depends on !ADK_LINUX_ARC
 
 endchoice
 
@@ -183,16 +196,23 @@ config ADK_TOOLCHAIN_BINUTILS_2_22
 	boolean
 	depends on ADK_LINUX_BFIN
 
+config ADK_TOOLCHAIN_BINUTILS_2_23_ARC
+	prompt "2.23-arc"
+	boolean
+	depends on ADK_LINUX_ARC
+
 config ADK_TOOLCHAIN_BINUTILS_2_24
 	prompt "2.24"
 	boolean
 	depends on !ADK_LINUX_BFIN
+	depends on !ADK_LINUX_ARC
 
 config ADK_TOOLCHAIN_BINUTILS_GIT
 	prompt "git"
 	boolean
 	select ADK_DISABLE_CHECKSUM
 	depends on !ADK_LINUX_BFIN
+	depends on !ADK_LINUX_ARC
 
 endchoice
 
