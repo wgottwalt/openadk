@@ -5,8 +5,9 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
 PKG_VERSION:=		1.56.0
+PKG_EXTRAVER:=		1_56
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		93780777cfbf999a600f62883bd54b17
+PKG_MD5SUM:=		8c54705c424513fa2be0042696a3a162
 PKG_DESCR:=		boost c++ library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		python2-host
@@ -16,8 +17,8 @@ PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	!m68k !xtensa
 
-DISTFILES:=		boost_1_55_0.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}_1_55_0
+DISTFILES:=		boost_$(PKG_EXTRAVER)_0.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}_$(PKG_EXTRAVER)_0
 
 PKG_FLAVOURS_BOOST:=	DATE_TIME GRAPH GRAPH_PARALLEL IOSTREAMS MATH PROGRAM_OPTIONS PYTHON REGEX SERIALIZATION SIGNALS SYSTEM TEST THREAD WAVE
 
@@ -101,6 +102,9 @@ BOOST_ARCH:=	x86
 else
 BOOST_ARCH:=	$(ADK_TARGET_ARCH)
 endif
+ifeq ($(ADK_TARGET_ARCH),arm)
+BOOST_ABI:=	abi=aapcs
+endif
 
 # some variables for build
 GPP_PATH:=	${TOOLCHAIN_DIR}/usr/bin/${GNU_TARGET_NAME}-g++
@@ -109,38 +113,34 @@ BJAM_PATH:=	"`find ${WRKBUILD} -type f -name "bjam$(EXEEXT)"`"
 PYTHON_PATH:=	${STAGING_HOST_DIR}/usr/bin/python
 PYTHON_INCLUDE:="`find ${STAGING_TARGET_DIR}/usr/include/ -maxdepth 1 -type d -name "python*" | head -1`"
 PYTHON_LIB:=	"`find ${STAGING_TARGET_DIR}/usr/lib/ -maxdepth 1 -type d -name "python*" | head -1`"
-USER_JAM:=	${WRKBUILD}/tools/build/v2/user-config.jam
+USER_JAM:=	${WRKBUILD}/tools/build/user-config.jam
 
 pre-build:
 	@echo "build bjam..."
-	cd $(WRKBUILD)/tools/build/v2/engine; ./build.sh gcc
+	cd $(WRKBUILD)/tools/build/src/engine; ./build.sh gcc
 
 do-build:
 	@echo "build boost library..."
-# remove exisiting using gcc line from user.jam
-	${SED} "/^using gcc/d" ${USER_JAM}
-# add using gcc line with determined options to user.jam
-	echo "using gcc : ${GPP_VERSION} : ${GPP_PATH} : <compileflags>\"${TARGET_CFLAGS}\" ;" >> ${USER_JAM};
-# remove exisiting using python line from user.jam
-	${SED} "/^using python/d" ${USER_JAM}
+	echo "using gcc : ${GPP_VERSION} : ${GPP_PATH} : <compileflags>\"${TARGET_CFLAGS}\" ;" > ${USER_JAM};
 ifneq (${ADK_PACKAGE_BOOST_PYTHON},)
-# add using python line with determined options to user.jam
 	echo "using python : ${PYTHON_VERSION} : ${PYTHON_PATH} : ${PYTHON_INCLUDE} : ${PYTHON_LIB} ;" >> ${USER_JAM};
 endif
-# run bjam to build boost
-	( cd ${WRKBUILD}; \
+	(cd ${WRKBUILD}; \
 		${BJAM_PATH} \
-			-sBUILD=release \
 			-d 2 \
 			target-os=linux \
+			variant=release \
+			link=shared \
+			runtime-link=shared \
 			architecture=$(BOOST_ARCH) \
+			$(BOOST_ABI) \
 			binary-format=elf \
 			toolset=gcc-${GPP_VERSION} \
+			--user-config=${USER_JAM} \
 			--build-type=minimal \
 			--layout=versioned \
 			--disable-long-double \
 			--without-mpi \
-			--debug-configuration \
 			${CONFIGURE_ARGS} \
 			install \
 	)
@@ -148,5 +148,9 @@ endif
 boost-install:
 	${INSTALL_DIR} ${IDIR_BOOST}/usr/lib
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_BOOST}/usr/lib
+	# make symlink for simpler access to include files
+	(cd $(STAGING_TARGET_DIR)/usr/include/ ; \
+		ln -sf boost-$(PKG_EXTRAVER)/boost .)
+		
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
