@@ -83,15 +83,15 @@ config ADK_TARGET_LIB_GLIBC_GIT
 	select ADK_DISABLE_CHECKSUM
 	depends on ADK_TARGET_LIB_GLIBC
 
-config ADK_TARGET_LIB_UCLIBC_0_9_33_2
-	prompt "0.9.33.2"
-	boolean
-	depends on ADK_TARGET_LIB_UCLIBC
-
 config ADK_TARGET_LIB_UCLIBC_GIT
 	prompt "git"
 	boolean
 	select ADK_DISABLE_CHECKSUM
+	depends on ADK_TARGET_LIB_UCLIBC
+
+config ADK_TARGET_LIB_UCLIBC_0_9_33_2
+	prompt "0.9.33.2"
+	boolean
 	depends on ADK_TARGET_LIB_UCLIBC
 
 config ADK_TARGET_LIB_MUSL_1_1_4
