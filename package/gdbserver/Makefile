@@ -4,14 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 include ${ADK_TOPDIR}/toolchain/gdb/Makefile.inc
 
-PKG_NAME:=		gdb
+PKG_NAME:=		gdbserver
 PKG_DESCR:=		remote programm debugger utility
 PKG_SECTION:=		app/debug
-PKG_DEPENDS:=		libthread-db
-
 PKG_LIBC_DEPENDS:=	!musl
-PKG_SUBPKGS:=		GDBSERVER
 
+DISTFILES:=		gdb-${PKG_VERSION}.tar.xz
+WRKDIST=		${WRKDIR}/gdb-${PKG_VERSION}
 WRKSRC=                 ${WRKDIST}/gdb/gdbserver
 
 include ${ADK_TOPDIR}/mk/package.mk

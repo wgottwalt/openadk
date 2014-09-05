@@ -1,0 +1,22 @@
+--- gdb-7.8.orig/gdb/gdbserver/linux-low.c	2014-07-29 14:37:42.000000000 +0200
++++ gdb-7.8/gdb/gdbserver/linux-low.c	2014-09-05 00:47:25.427321525 +0200
+@@ -4933,15 +4933,15 @@ static int
+ linux_read_offsets (CORE_ADDR *text_p, CORE_ADDR *data_p)
+ {
+   unsigned long text, text_end, data;
+-  int pid = lwpid_of (get_thread_lwp (current_inferior));
++  int pid = lwpid_of (current_inferior);
+ 
+   errno = 0;
+ 
+-  text = ptrace (PTRACE_PEEKUSER, pid, (PTRACE_TYPE_ARG3) PT_TEXT_ADDR,
++  text = ptrace (PTRACE_PEEKUSER, pid, (PTRACE_TYPE_ARG3) (PT_TEXT_ADDR),
+ 		 (PTRACE_TYPE_ARG4) 0);
+-  text_end = ptrace (PTRACE_PEEKUSER, pid, (PTRACE_TYPE_ARG3) PT_TEXT_END_ADDR,
++  text_end = ptrace (PTRACE_PEEKUSER, pid, (PTRACE_TYPE_ARG3) (PT_TEXT_END_ADDR),
+ 		     (PTRACE_TYPE_ARG4) 0);
+-  data = ptrace (PTRACE_PEEKUSER, pid, (PTRACE_TYPE_ARG3) PT_DATA_ADDR,
++  data = ptrace (PTRACE_PEEKUSER, pid, (PTRACE_TYPE_ARG3) (PT_DATA_ADDR),
+ 		 (PTRACE_TYPE_ARG4) 0);
+ 
+   if (errno == 0)

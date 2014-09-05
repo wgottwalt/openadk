@@ -11,6 +11,8 @@ PKG_DEPENDS:=		libthread-db libncurses libexpat zlib
 PKG_BUILDDEP:=		ncurses readline expat zlib
 PKG_NOPARALLEL:=	1
 
+PKG_ARCH_DEPENDS:=	!m68k
+
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
 
@@ -18,16 +20,11 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_TARGET_LIB_MUSL),y)
-CONFIGURE_ARGS+=	--disable-gdbserver
-else
-CONFIGURE_ARGS+=	--enable-gdbserver
-endif
-
 TARGET_CFLAGS+=		${TARGET_CPPFLAGS} -fPIC
 CONFIGURE_ARGS+=	--without-uiout \
 			--disable-tui \
 			--disable-gdbtk \
+			--disable-gdbserver \
 			--without-x \
 			--disable-sim \
 			--disable-werror \
