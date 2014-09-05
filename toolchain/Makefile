@@ -1,6 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
-#
+
 # Steps to build toolchains
 # 1) build and install binutils
 # 2) build and install mpfr, mpc, libelf and gmp
@@ -15,7 +15,8 @@
 
 include $(ADK_TOPDIR)/rules.mk
 
-TARGETS:=binutils gmp mpfr mpc libelf gcc gdb
+TARGETS:=binutils gmp mpfr mpc libelf gcc
+
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 TARGETS+=glibc
 CLIB:=glibc
@@ -32,8 +33,16 @@ ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGETS+=musl
 CLIB:=musl
 endif
+
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
 TARGETS+=elf2flt
+ELF2FLT:=elf2flt-install
+endif
+
+# disable gdb for arc
+ifneq ($(ADK_LINUX_ARC),y)
+TARGETS+=gdb
+GDB:=gdb-install
 endif
 
 DOWNLOAD:=kernel-headers-download $(patsubst %,%-download,$(TARGETS))
@@ -51,11 +60,7 @@ $(CLIB)-prepare: gcc-prepare kernel-headers-prepare
 gcc-configure: $(CLIB)-prepare
 $(CLIB)-compile: gcc-configure
 gcc-compile: $(CLIB)-install
-ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
-$(CLIB)-fixup: gcc-install gdb-install elf2flt-install
-else
-$(CLIB)-fixup: gcc-install gdb-install
-endif
+$(CLIB)-fixup: gcc-install $(GDB) $(ELF2FLT)
 
 %-download:
 	$(TRACE) toolchain/$(patsubst %-download,%,$@)/download
