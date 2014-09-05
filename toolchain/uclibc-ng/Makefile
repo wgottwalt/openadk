@@ -95,7 +95,7 @@ endif
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
 		HOSTCC="$(HOST_CC)" \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		V=1 \
 		oldconfig
 	PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
@@ -103,7 +103,7 @@ endif
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
 		HOSTCC="$(HOST_CC)" \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		V=1 \
 		install_headers
 	touch $(WRKBUILD)/.configured
@@ -115,7 +115,7 @@ $(WRKBUILD)/.compiled:
 		DEVEL_PREFIX=/ \
 		RUNTIME_PREFIX=/ \
 		HOSTCC="$(HOST_CC)" \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		all
 	touch $@
 
@@ -125,7 +125,7 @@ $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 		DEVEL_PREFIX=/usr/ \
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		install_dev
 	touch $@
 
@@ -135,7 +135,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 		DEVEL_PREFIX=/usr/ \
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		install_runtime
 	touch $@
 
@@ -144,7 +144,7 @@ ifeq ($(ADK_UCLIBC_TEST),y)
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		TEST_INSTALLED_UCLIBC=1 \
 		UCLIBC_ONLY=1 \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		test_compile
 endif
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)

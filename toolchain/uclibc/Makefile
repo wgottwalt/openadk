@@ -35,13 +35,35 @@ else
 	$(SED) 's/.*\(ARCH_LITTLE_ENDIAN\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(ARCH_WANTS_LITTLE_ENDIAN\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_LINUX_64),y)
+ifeq ($(ADK_LINUX_ARM),y)
+ifeq ($(ADK_TARGET_ABI_EABI),y)
+	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/#\1=y/' ${WRKBUILD}/.config
+
+endif
+ifeq ($(ADK_TARGET_ABI_EABIHF),y)
+	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
+endif
+ifeq ($(ADK_LINUX_PPC),y)
+ifeq ($(ADK_TARGET_CPU_WITH_FPU),y)
+	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
+else
+	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/#\1=y/' ${WRKBUILD}/.config
+endif
+endif
+ifeq ($(ADK_LINUX_MIPS64),y)
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS64\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS32\).*/# \1 is not set/' ${WRKBUILD}/.config
-else
+endif
+ifeq ($(ADK_LINUX_MIPS),y)
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS32\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS64\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
+ifeq ($(ADK_LINUX_MIPS64),y)
 ifeq ($(ADK_n64),y)
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_O32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
@@ -56,6 +78,7 @@ ifeq ($(ADK_o32),y)
 	$(SED) 's/.*\(CONFIG_MIPS_O32_ABI\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_N32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
 endif
 ifneq ($(ADK_PACKAGE_GDB),)
 	$(SED) "s/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/" ${WRKBUILD}/.config
@@ -74,14 +97,14 @@ endif
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
 		HOSTCC="$(HOST_CC)" \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		oldconfig
 	PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
 		HOSTCC="$(HOST_CC)" \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		install_headers
 	touch $(WRKBUILD)/.configured
 	touch $@
@@ -92,7 +115,7 @@ $(WRKBUILD)/.compiled:
 		DEVEL_PREFIX=/ \
 		RUNTIME_PREFIX=/ \
 		HOSTCC="$(HOST_CC)" \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		all
 	touch $@
 
@@ -102,7 +125,7 @@ $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 		DEVEL_PREFIX=/usr/ \
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		install_dev
 	touch $@
 
@@ -112,7 +135,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 		DEVEL_PREFIX=/usr/ \
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		install_runtime
 	touch $@
 
@@ -121,7 +144,7 @@ ifeq ($(ADK_UCLIBC_TEST),y)
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		TEST_INSTALLED_UCLIBC=1 \
 		UCLIBC_ONLY=1 \
-		CPU_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		test_compile
 endif
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
