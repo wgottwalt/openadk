@@ -12,7 +12,6 @@ config ADK_VENDOR
 
 choice
 prompt "GCC version"
-depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
 
 config ADK_TOOLCHAIN_GCC_4_5_4
 	prompt "4.5.4"
@@ -215,6 +214,5 @@ config ADK_UCLIBC_TEST
 	boolean
 	depends on ADK_TARGET_LIB_UCLIBC_NG || ADK_TARGET_LIB_UCLIBC
 	default y
-
 
 endmenu
