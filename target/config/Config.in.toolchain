@@ -23,8 +23,8 @@ config ADK_TOOLCHAIN_GCC_4_5_4
 	boolean
 	depends on ADK_LINUX_BFIN
 
-config ADK_TOOLCHAIN_GCC_4_8_3_ARC
-	prompt "4.8.3-arc"
+config ADK_TOOLCHAIN_GCC_4_8_0_ARC
+	prompt "4.8.0-arc"
 	boolean
 	depends on ADK_LINUX_ARC
 
