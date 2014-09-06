@@ -10,6 +10,77 @@ config ADK_VENDOR
 	help
 	  Vendor string is used for toolchain.
 
+choice
+prompt "GCC version"
+depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
+
+config ADK_TOOLCHAIN_GCC_4_5_4
+	prompt "4.5.4"
+	boolean
+	depends on ADK_LINUX_BFIN
+	depends on !ADK_LINUX_AARCH64
+
+config ADK_TOOLCHAIN_GCC_4_8_3_ARC
+	prompt "4.8.3-arc"
+	boolean
+	depends on ADK_LINUX_ARC
+
+config ADK_TOOLCHAIN_GCC_4_8_3_ARC
+	prompt "4.8.3-arc"
+	boolean
+	depends on ADK_LINUX_ARC
+
+config ADK_TOOLCHAIN_GCC_4_8_3
+	prompt "4.8.3"
+	boolean
+	depends on !ADK_LINUX_BFIN
+	depends on !ADK_LINUX_AARCH64
+	depends on !ADK_LINUX_ARC
+
+config ADK_TOOLCHAIN_GCC_4_9_1
+	prompt "4.9.1"
+	boolean
+	depends on !ADK_LINUX_BFIN
+	depends on !ADK_LINUX_ARC
+
+config ADK_TOOLCHAIN_GCC_GIT
+	prompt "git"
+	boolean
+	select ADK_DISABLE_CHECKSUM
+	depends on !ADK_LINUX_BFIN
+	depends on !ADK_LINUX_ARC
+
+endchoice
+
+choice
+prompt "Binutils version"
+depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
+
+config ADK_TOOLCHAIN_BINUTILS_2_22
+	prompt "2.22"
+	boolean
+	depends on ADK_LINUX_BFIN
+
+config ADK_TOOLCHAIN_BINUTILS_2_23_ARC
+	prompt "2.23-arc"
+	boolean
+	depends on ADK_LINUX_ARC
+
+config ADK_TOOLCHAIN_BINUTILS_2_24
+	prompt "2.24"
+	boolean
+	depends on !ADK_LINUX_BFIN
+	depends on !ADK_LINUX_ARC
+
+config ADK_TOOLCHAIN_BINUTILS_GIT
+	prompt "git"
+	boolean
+	select ADK_DISABLE_CHECKSUM
+	depends on !ADK_LINUX_BFIN
+	depends on !ADK_LINUX_ARC
+
+endchoice
+
 config ADK_TARGET_CFLAGS_OPT
 	string
 	default "-Os -pipe" if ADK_TARGET_CFLAGS_OPT_OS
@@ -145,75 +216,5 @@ config ADK_UCLIBC_TEST
 	depends on ADK_TARGET_LIB_UCLIBC_NG || ADK_TARGET_LIB_UCLIBC
 	default y
 
-choice
-prompt "GCC version"
-depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
-
-config ADK_TOOLCHAIN_GCC_4_5_4
-	prompt "4.5.4"
-	boolean
-	depends on ADK_LINUX_BFIN
-	depends on !ADK_LINUX_AARCH64
-
-config ADK_TOOLCHAIN_GCC_4_8_3_ARC
-	prompt "4.8.3-arc"
-	boolean
-	depends on ADK_LINUX_ARC
-
-config ADK_TOOLCHAIN_GCC_4_8_3_ARC
-	prompt "4.8.3-arc"
-	boolean
-	depends on ADK_LINUX_ARC
-
-config ADK_TOOLCHAIN_GCC_4_8_3
-	prompt "4.8.3"
-	boolean
-	depends on !ADK_LINUX_BFIN
-	depends on !ADK_LINUX_AARCH64
-	depends on !ADK_LINUX_ARC
-
-config ADK_TOOLCHAIN_GCC_4_9_1
-	prompt "4.9.1"
-	boolean
-	depends on !ADK_LINUX_BFIN
-	depends on !ADK_LINUX_ARC
-
-config ADK_TOOLCHAIN_GCC_GIT
-	prompt "git"
-	boolean
-	select ADK_DISABLE_CHECKSUM
-	depends on !ADK_LINUX_BFIN
-	depends on !ADK_LINUX_ARC
-
-endchoice
-
-choice
-prompt "Binutils version"
-depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
-
-config ADK_TOOLCHAIN_BINUTILS_2_22
-	prompt "2.22"
-	boolean
-	depends on ADK_LINUX_BFIN
-
-config ADK_TOOLCHAIN_BINUTILS_2_23_ARC
-	prompt "2.23-arc"
-	boolean
-	depends on ADK_LINUX_ARC
-
-config ADK_TOOLCHAIN_BINUTILS_2_24
-	prompt "2.24"
-	boolean
-	depends on !ADK_LINUX_BFIN
-	depends on !ADK_LINUX_ARC
-
-config ADK_TOOLCHAIN_BINUTILS_GIT
-	prompt "git"
-	boolean
-	select ADK_DISABLE_CHECKSUM
-	depends on !ADK_LINUX_BFIN
-	depends on !ADK_LINUX_ARC
-
-endchoice
 
 endmenu
