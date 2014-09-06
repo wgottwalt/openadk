@@ -48,7 +48,7 @@ ifneq ($(ADK_LINUX_AARCH64)$(ADK_LINUX_ALPHA)$(ADK_LINUX_ARC)$(ADK_LINUX_BFIN)$(
 GCC_FINAL_CONFOPTS+=	--enable-cxx-flags='$(TARGET_CXXFLAGS)'
 endif
 
-ifeq ($(ADK_TARGET_UCLINUX),y)
+ifeq ($(ADK_TARGET_UCLINUX)$(ADK_TARGET_USE_STATIC_LIBS),y)
 GCC_FINAL_CONFOPTS+=	--disable-shared
 else
 # uClibc/glibc uses libgcc_s.so.1 for pthread_cancel with dlopen
