@@ -31,7 +31,9 @@ INSTALL_STYLE:=		manual
 librt-install:
 	${INSTALL_DIR} ${IDIR_LIBRT}/$(ADK_TARGET_LIBC_PATH)
 ifeq ($(ADK_TARGET_LIB_MUSL),)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),)
 	${CP} ${STAGING_TARGET_DIR}/lib/librt*.so* ${IDIR_LIBRT}/$(ADK_TARGET_LIBC_PATH)
+endif
 endif
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

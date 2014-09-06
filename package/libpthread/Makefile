@@ -35,9 +35,11 @@ INSTALL_STYLE:=		manual
 
 libpthread-install:
 ifeq ($(ADK_TARGET_LIB_MUSL),)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),)
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
 	${CP} ${STAGING_TARGET_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
+endif
 endif
 endif
 
