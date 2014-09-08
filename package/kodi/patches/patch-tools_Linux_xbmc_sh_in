@@ -1,5 +1,5 @@
 --- kodi-14.0alpha4.orig/tools/Linux/xbmc.sh.in	2014-09-05 14:09:59.000000000 +0200
-+++ kodi-14.0alpha4/tools/Linux/xbmc.sh.in	2014-09-05 18:56:32.792578871 +0200
++++ kodi-14.0alpha4/tools/Linux/xbmc.sh.in	2014-09-08 13:26:02.745294460 +0200
 @@ -58,7 +58,7 @@ single_stacktrace()
  
  print_crash_report()
@@ -9,7 +9,23 @@
    echo "############## XBMC CRASH LOG ###############" >> $FILE
    echo >> $FILE
    echo "################ SYSTEM INFO ################" >> $FILE
-@@ -100,31 +100,8 @@ print_crash_report()
+@@ -70,15 +70,6 @@ print_crash_report()
+   echo -n " Kernel: " >> $FILE
+   uname -rvs >> $FILE
+   echo -n " Release: " >> $FILE
+-  if [ -f /etc/os-release ]; then
+-	  . /etc/os-release
+-	  echo $NAME $VERSION >> $FILE
+-  elif command_exists lsb_release; then
+-    echo >> $FILE
+-    lsb_release -a 2> /dev/null | sed -e 's/^/    /' >> $FILE
+-  else
+-    echo "lsb_release not available" >> $FILE
+-  fi
+   echo "############## END SYSTEM INFO ##############" >> $FILE
+   echo >> $FILE
+   echo "############### STACK TRACE #################" >> $FILE
+@@ -100,31 +91,8 @@ print_crash_report()
      echo "gdb not installed, can't get stack trace." >> $FILE
    fi
    echo "############# END STACK TRACE ###############" >> $FILE

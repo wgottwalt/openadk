@@ -1,5 +1,5 @@
 #!/bin/sh
-#PKG xbmc 
+#PKG kodi 
 #INIT 95
 
 . /etc/rc.conf
@@ -7,8 +7,8 @@
 case $1 in
 autostop) ;;
 autostart)
-	test x"${xbmc:-NO}" = x"NO" && exit 0
-	test x"$xbmc" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
+	test x"${kodi:-NO}" = x"NO" && exit 0
+	test x"$kodi" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
 	exec sh $0 start
 	;;
 start)
