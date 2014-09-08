@@ -10,12 +10,7 @@ PKG_NAME:=		uClibc-ng
 PKG_DESCR:=		embedded c library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
-ifneq ($(ADK_LIBC_VERSION),git)
-PKG_VERSION:=		1.0.0
-PKG_DIR:=		$(ADK_LIBC_VERSION)
-else
-PKG_DIR:=		${PKG_VERSION}
-endif
+PKG_VERSION:=		1.0.0-git
 
 PKG_SUBPKGS:=		UCLIBC_NG UCLIBC_NG_DEV UCLIBC_NG_TEST
 PKGSD_UCLIBC_NG_DEV:=	development files for uclibc-ng
@@ -52,7 +47,7 @@ ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 		cd $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) && ln -sf ld-uClibc.so.1 ld-uClibc.so.0
 	test ! -f $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)/ld64-uClibc.so.1 || \
 		cd $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) && ln -sf ld64-uClibc.so.1 ld64-uClibc.so.0
-	-for file in libcrypt libdl libm libresolv libutil libuargp libubacktrace; do \
+	-for file in libcrypt libdl libm libresolv libutil; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so \
 			$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
@@ -64,7 +59,7 @@ uclibc-ng-dev-install:
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_UCLIBC_NG_DEV}/usr/lib
-	for file in libcrypt libdl libm libresolv libutil libuargp libubacktrace; do \
+	for file in libcrypt libdl libm libresolv libutil; do \
 		cd $(IDIR_UCLIBC_NG_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	${KERNEL_MAKE_ENV} \
@@ -72,7 +67,7 @@ uclibc-ng-dev-install:
 		$(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(IDIR_UCLIBC_NG_DEV)/usr \
 		headers_install
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_DIR)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_DIR} \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_DIR)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION} \
 		PREFIX=$(IDIR_UCLIBC_NG_DEV)/ \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(IDIR_UCLIBC_NG_DEV)/ \
@@ -86,9 +81,9 @@ uclibc-ng-test-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/etc
 	echo '00:11:22:33:44:55 teeth' > ${IDIR_UCLIBC_NG_TEST}/etc/ethers
 	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
-	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_DIR)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_DIR}/test \
+	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}/test \
 		${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
-	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_DIR)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_DIR}/{Rules.mak,.config} \
+	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}/{Rules.mak,.config} \
 		${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
 	@find ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng -name \*.o -exec rm {} \;
 
