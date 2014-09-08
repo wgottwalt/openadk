@@ -4,7 +4,7 @@
 PKG_NAME:=		uClibc-ng
 ifeq ($(ADK_LIBC_VERSION),git)
 PKG_VERSION:=		1.0.0
-PKG_REPO:=		http://git.uclibc-ng.org/uClibc-ng.git
+PKG_REPO:=		http://git.uclibc-ng.org/uclibc-ng.git
 else
 PKG_VERSION:=		$(ADK_LIBC_VERSION)
 PKG_SITES:=		http://downloads.uclibc-ng.org/
