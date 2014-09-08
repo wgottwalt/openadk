@@ -208,6 +208,8 @@ config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
 choice
 prompt "Page size"
 depends on ADK_LINUX_MIPS64
+default ADK_KERNEL_PAGE_SIZE_16KB if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+default ADK_KERNEL_PAGE_SIZE_4KB
 
 config ADK_KERNEL_PAGE_SIZE_4KB
 	prompt "4kB"
@@ -222,5 +224,4 @@ config ADK_KERNEL_PAGE_SIZE_64KB
 	boolean
 
 endchoice
-
 endmenu
