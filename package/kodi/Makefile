@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		14.0alpha3
+PKG_VERSION:=		14.0alpha4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		76951db1b343b118e6b2a4e7411fabd9
+PKG_MD5SUM:=		5bd39942150249d9eccf792d77b92554
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
@@ -63,11 +63,7 @@ PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
 PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
 PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
-PKG_DEPENDS_IBM_X40:=	libsdl libsdl-image libxshmfence libx11 libxext libxt libsm libice
-PKG_DEPENDS_VBOX_X86:=	libsdl libsdl-image libxshmfence libx11 libxext libxt libsm libice
-PKG_BUILDDEP_IBM_X40:=	nasm-host sdl sdl-image
-PKG_BUILDDEP_VBOX_X86:=	nasm-host sdl sdl-image
-PKG_SYSTEM_DEPENDS:=	raspberry-pi ibm-x40 vbox-x86 solidrun-imx6
+PKG_SYSTEM_DEPENDS:=	raspberry-pi solidrun-imx6
 
 DIFF_IGNOREFILES:=	configure missing depcomp install-sh INSTALL \
 			aclocal.m4 config.h.in
@@ -97,7 +93,6 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-mysql \
 			--disable-rsxs \
 			--disable-projectm \
-			--disable-crystalhd \
 			--disable-mdnsembedded \
 			--disable-libusb \
 			--disable-libcap \
@@ -110,11 +105,8 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-pulse \
 			--disable-mid \
 			--enable-alsa \
-			--enable-libmp3lame \
 			--enable-libvorbisenc \
-			--enable-udev \
-			--with-ffmpeg \
-			--enable-external-libraries
+			--enable-udev
 
 ifneq ($(ADK_PACKAGE_XBMC_WITH_BLURAY),)
 CONFIGURE_ARGS+=	--enable-libbluray
@@ -183,6 +175,11 @@ endif
 
 pre-configure:
 	(cd $(WRKBUILD)/lib/cpluff && env PATH=$(AUTOTOOL_PATH) ./autogen.sh)
+
+pre-build:
+	make CXX="${HOST_CXX}" CC="${HOST_CC}" CFLAGS="${HOST_CFLAGS}" \
+		CXXFLAGS="${HOST_CXXFLAGS}" LDFLAGS="${HOST_LDFLAGS}" \
+		 -C $(WRKBUILD)/tools/depends/native/JsonSchemaBuilder
 
 kodi-install:
 	$(INSTALL_DIR) $(IDIR_KODI)/usr/lib/xbmc/addons
