@@ -16,8 +16,8 @@ endif
 
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS_COMPILE=.*,CROSS_COMPILE=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
-	sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${STAGING_TARGET_DIR}/usr/include\"' \
-	    $(ADK_TOPDIR)/target/$(ADK_TARGET_ARCH)/uclibc-ng.config >${WRKBUILD}/.config
+	PATH='$(HOST_PATH)' sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${STAGING_TARGET_DIR}/usr/include\"' \
+	    $(ADK_TOPDIR)/target/$(ADK_TARGET_ARCH)/uclibc.config >${WRKBUILD}/.config
 ifeq ($(ADK_TARGET_ENDIAN),little)
 	$(SED) 's/.*\(ARCH_LITTLE_ENDIAN\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(ARCH_WANTS_LITTLE_ENDIAN\).*/\1=y/' ${WRKBUILD}/.config
@@ -29,6 +29,31 @@ else
 	$(SED) 's/.*\(ARCH_LITTLE_ENDIAN\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(ARCH_WANTS_LITTLE_ENDIAN\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),)
+	$(SED) 's/.*\(HAVE_SHARED\).*/\1=y/' ${WRKBUILD}/.config
+else
+	$(SED) 's/.*\(HAVE_SHARED\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_USE_GNU_HASHSTYLE),y)
+	$(SED) 's/.*\(LDSO_GNU_HASH_SUPPORT\).*/#\1=y/' ${WRKBUILD}/.config
+else
+	$(SED) 's/.*\(LDSO_GNU_HASH_SUPPORT\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
+ifneq ($(ADK_PACKAGE_GDB),)
+	$(SED) "s/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/" ${WRKBUILD}/.config
+endif
+ifneq ($(ADK_PACKAGE_GDBSERVER),)
+	$(SED) "s/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/" ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_USE_SSP),y)
+	$(SED) 's,.*UCLIBC_HAS_SSP,UCLIBC_HAS_SSP=y,' ${WRKBUILD}/.config
+	echo "UCLIBC_HAS_SSP_COMPAT=n" >> ${WRKBUILD}/.config
+	echo "SSP_QUICK_CANARY=n" >> ${WRKBUILD}/.config
+	echo "UCLIBC_BUILD_SSP=y" >> ${WRKBUILD}/.config
+endif
+
+# architecture specific options
+# arm
 ifeq ($(ADK_LINUX_ARM),y)
 ifeq ($(ADK_TARGET_ABI_EABI),y)
 	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
@@ -39,30 +64,20 @@ ifeq ($(ADK_TARGET_ABI_EABIHF),y)
 	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-endif
-ifeq ($(ADK_LINUX_PPC),y)
-ifeq ($(ADK_TARGET_CPU_WITH_FPU),y)
-	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/\1=y/' ${WRKBUILD}/.config
-	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
-else
-	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
-	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/#\1=y/' ${WRKBUILD}/.config
+ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
+	$(SED) 's/.*\(COMPILE_IN_THUMB_MODE\).*/\1=y/' ${WRKBUILD}/.config
 endif
 endif
-ifeq ($(ADK_LINUX_X86),y)
-	$(SED) 's/.*\(CONFIG_386\).*/# \1 is not set/' ${WRKBUILD}/.config
-	$(SED) 's/.*\(CONFIG_486\).*/# \1 is not set/' ${WRKBUILD}/.config
-	$(SED) 's/.*\(CONFIG_586\).*/# \1 is not set/' ${WRKBUILD}/.config
-	$(SED) 's/.*\(CONFIG_686\).*/\1=y/' ${WRKBUILD}/.config
-	$(SED) 's/.*\(TARGET_SUBARCH\).*/\1="i686"/' ${WRKBUILD}/.config
-endif
-ifeq ($(ADK_LINUX_64),y)
+# mips/mips64
+ifeq ($(ADK_LINUX_MIPS64),y)
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS64\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS32\).*/# \1 is not set/' ${WRKBUILD}/.config
-else
+endif
+ifeq ($(ADK_LINUX_MIPS),y)
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS32\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS64\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
+ifeq ($(ADK_LINUX_MIPS64),y)
 ifeq ($(ADK_n64),y)
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_O32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
@@ -78,25 +93,23 @@ ifeq ($(ADK_o32),y)
 	$(SED) 's/.*\(CONFIG_MIPS_N32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifneq ($(ADK_PACKAGE_GDB),)
-	$(SED) "s/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/" ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
-	$(SED) 's/.*\(COMPILE_IN_THUMB_MODE\).*/\1=y/' ${WRKBUILD}/.config
+# powerpc
+ifeq ($(ADK_LINUX_PPC),y)
+ifeq ($(ADK_TARGET_CPU_WITH_FPU),y)
+	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
+else
+	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/#\1=y/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_TARGET_USE_SSP),y)
-	$(SED) 's,.*UCLIBC_HAS_SSP,UCLIBC_HAS_SSP=y,' ${WRKBUILD}/.config
-	echo "UCLIBC_HAS_SSP_COMPAT=n" >> ${WRKBUILD}/.config
-	echo "SSP_QUICK_CANARY=n" >> ${WRKBUILD}/.config
-	echo "UCLIBC_BUILD_SSP=y" >> ${WRKBUILD}/.config
 endif
-	echo N| PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
+	echo N|PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
 		HOSTCC="$(HOST_CC)" \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
-		V=1 \
 		oldconfig
 	PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
@@ -104,7 +117,6 @@ endif
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
 		HOSTCC="$(HOST_CC)" \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
-		V=1 \
 		install_headers
 	touch $(WRKBUILD)/.configured
 	touch $@
