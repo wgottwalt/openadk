@@ -40,6 +40,7 @@ config ADK_TARGET_LIB_GLIBC
 	boolean
 	select ADK_glibc
 	depends on !ADK_LINUX_ARC
+	depends on !ADK_LINUX_AVR32
 	depends on !ADK_LINUX_BFIN
 	depends on !ADK_LINUX_XTENSA
 	depends on !ADK_TARGET_UCLINUX
