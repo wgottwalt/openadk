@@ -104,13 +104,6 @@ config ADK_KERNEL_CPU_MIPS64_R1
 config ADK_KERNEL_CPU_MIPS64_R2
 	boolean
 
-# page size
-config ADK_KERNEL_PAGE_SIZE_4KB
-	boolean
-
-config ADK_KERNEL_PAGE_SIZE_16KB
-	boolean
-
 # ARM specific
 config ADK_KERNEL_AEABI
 	boolean
@@ -212,4 +205,23 @@ config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
 	depends on !ADK_LINUX_MICROBLAZE
 	default y
 
+choice
+prompt "Page size"
+depends on ADK_LINUX_MIPS64
+default ADK_KERNEL_PAGE_SIZE_16KB if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+default ADK_KERNEL_PAGE_SIZE_4KB
+
+config ADK_KERNEL_PAGE_SIZE_4KB
+	prompt "4kB"
+	boolean
+
+config ADK_KERNEL_PAGE_SIZE_16KB
+	prompt "16kB"
+	boolean
+
+config ADK_KERNEL_PAGE_SIZE_64KB
+	prompt "64kB"
+	boolean
+
+endchoice
 endmenu
