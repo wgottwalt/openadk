@@ -177,6 +177,7 @@ pre-configure:
 	(cd $(WRKBUILD)/lib/cpluff && env PATH=$(AUTOTOOL_PATH) ./autogen.sh)
 
 pre-build:
+	PATH=$(HOST_PATH) \
 	make CXX="${HOST_CXX}" CC="${HOST_CC}" CFLAGS="${HOST_CFLAGS}" \
 		CXXFLAGS="${HOST_CXXFLAGS}" LDFLAGS="${HOST_LDFLAGS}" \
 		 -C $(WRKBUILD)/tools/depends/native/JsonSchemaBuilder
