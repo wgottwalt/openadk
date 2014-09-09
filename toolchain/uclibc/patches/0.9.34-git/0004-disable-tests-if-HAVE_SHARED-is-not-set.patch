@@ -1,4 +1,4 @@
-From c6f378032f50fe7c531368111743a94015c6949d Mon Sep 17 00:00:00 2001
+From 743a46b7b12f07065465d9e49729043cf6f00394 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Sun, 7 Sep 2014 16:38:14 +0200
 Subject: [PATCH 4/6] disable tests if HAVE_SHARED is not set

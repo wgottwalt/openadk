@@ -1,4 +1,4 @@
-From 54cef0956a1e85add7c6998f95abffa9362be85e Mon Sep 17 00:00:00 2001
+From 943ef39519a3a4aa514f1fe9431565bf691f01f2 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Mon, 1 Sep 2014 21:02:19 +0200
 Subject: [PATCH 1/6] test: disable posix_fallocate64 for small embedded
@@ -10,10 +10,10 @@ Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
  1 file changed, 2 insertions(+)
 
 diff --git a/test/unistd/Makefile.in b/test/unistd/Makefile.in
-index cfef22e..911c8e8 100644
+index ed33d9a..c884a39 100644
 --- a/test/unistd/Makefile.in
 +++ b/test/unistd/Makefile.in
-@@ -15,6 +15,8 @@ else
+@@ -25,6 +25,8 @@ else
  # reordering is not supported, behaves as if POSIXLY_CORRECT would be set
  OPTS_tstgetopt   := -a -b -cfoobar --required foobar --optional=bazbug --none --colou --color --colour random
  endif

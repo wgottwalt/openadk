@@ -1,4 +1,4 @@
-From d4ebeb637a050717642a0f270b3b0dd61f046705 Mon Sep 17 00:00:00 2001
+From c0cdfbcfd4ca6f86eae5f189290cbc1be891a398 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Thu, 4 Sep 2014 15:23:36 +0200
 Subject: [PATCH 2/6] nptl: remove duplicate vfork() in libpthread

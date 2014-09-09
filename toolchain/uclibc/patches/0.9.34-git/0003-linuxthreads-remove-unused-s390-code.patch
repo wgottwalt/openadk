@@ -1,4 +1,4 @@
-From d72e888957d32984c56e19e43a3c3b41263c7bb4 Mon Sep 17 00:00:00 2001
+From 0072d1730591edbbcee79f93d54b66ffbd57a02b Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Sat, 6 Sep 2014 14:45:42 +0200
 Subject: [PATCH 3/6] linuxthreads: remove unused s390 code

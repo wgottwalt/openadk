@@ -1,4 +1,4 @@
-From b516d8b113e479254d114c17cb51f2687098149c Mon Sep 17 00:00:00 2001
+From 60f9eaa155d0f7ff935da37ecdf253c5c744a3ce Mon Sep 17 00:00:00 2001
 From: Wang Yufen <wangyufen@huawei.com>
 Date: Fri, 5 Sep 2014 15:19:21 +0800
 Subject: [PATCH 6/6] arm: add RESET_PID in the clone impl
