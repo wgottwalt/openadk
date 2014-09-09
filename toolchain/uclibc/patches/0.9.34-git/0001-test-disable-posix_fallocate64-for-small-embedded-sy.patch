@@ -1,7 +1,7 @@
-From d167545f3578d560e0c3818ac9657a34fead9812 Mon Sep 17 00:00:00 2001
+From 54cef0956a1e85add7c6998f95abffa9362be85e Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Mon, 1 Sep 2014 21:02:19 +0200
-Subject: [PATCH 1/2] test: disable posix_fallocate64 for small embedded
+Subject: [PATCH 1/6] test: disable posix_fallocate64 for small embedded
  systems
 
 Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>

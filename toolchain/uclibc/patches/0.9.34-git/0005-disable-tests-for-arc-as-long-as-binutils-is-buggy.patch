@@ -1,0 +1,28 @@
+From 01ba5566cd878ae5e2183e1a89729922bfa80fa0 Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbx@openadk.org>
+Date: Tue, 9 Sep 2014 18:40:22 +0200
+Subject: [PATCH 5/6] disable tests for arc as long as binutils is buggy
+
+Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
+---
+ test/nptl/Makefile.in | 4 ++++
+ 1 file changed, 4 insertions(+)
+
+diff --git a/test/nptl/Makefile.in b/test/nptl/Makefile.in
+index d20d2c1..12119e2 100644
+--- a/test/nptl/Makefile.in
++++ b/test/nptl/Makefile.in
+@@ -53,6 +53,10 @@ TESTS += tst-clock tst-clock_nanosleep tst-cpuclock1 tst-cpuclock2	\
+ 	tst-mqueue7 tst-mqueue8 tst-mqueue9 tst-timer2 tst-timer3	\
+ 	tst-timer4 tst-timer5
+ 
++ifeq ($(TARGET_ARCH),arc)
++TESTS_DISABLED += tst-tls12 tst-tls-at-ctor
++endif
++
+ ifeq ($(UCLIBC_HAS_OBSOLETE_BSD_SIGNAL),)
+ TESTS_DISABLED += tst-exec2 tst-exec3 tst-exec4
+ endif
+-- 
+1.8.5.2 (Apple Git-48)
+

@@ -1,7 +1,7 @@
-From 539fe3a7cc5439d01499765008751f8d17ca5ede Mon Sep 17 00:00:00 2001
+From d4ebeb637a050717642a0f270b3b0dd61f046705 Mon Sep 17 00:00:00 2001
 From: Waldemar Brodkorb <wbx@openadk.org>
 Date: Thu, 4 Sep 2014 15:23:36 +0200
-Subject: [PATCH 2/2] nptl: remove duplicate vfork() in libpthread
+Subject: [PATCH 2/6] nptl: remove duplicate vfork() in libpthread
 
 Automatic patching via two oneliners by Bernhard Reutner-Fischer <rep.dot.nop@gmail.com>:
 sed -i -e 's/[[:space:]]pt-vfork\.[csS]//' $(git grep -l pt-vfork libpthread/nptl/sysdeps)
@@ -11,27 +11,27 @@ Reported-By: Thomas Petazzoni <thomas.petazzoni@free-electrons.com>
 Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
 ---
  .../nptl/sysdeps/unix/sysv/linux/alpha/pt-vfork.S  | 42 --------------
- .../nptl/sysdeps/unix/sysv/linux/arc/Makefile.arch |  2 +-
+ .../nptl/sysdeps/unix/sysv/linux/arc/Makefile.arch |  3 +-
  .../nptl/sysdeps/unix/sysv/linux/arc/pt-vfork.S    |  7 ---
- .../nptl/sysdeps/unix/sysv/linux/arm/Makefile.arch |  2 +-
+ .../nptl/sysdeps/unix/sysv/linux/arm/Makefile.arch |  3 +-
  .../nptl/sysdeps/unix/sysv/linux/arm/pt-vfork.S    | 37 ------------
- .../sysdeps/unix/sysv/linux/i386/Makefile.arch     |  2 +-
+ .../sysdeps/unix/sysv/linux/i386/Makefile.arch     |  3 +-
  .../nptl/sysdeps/unix/sysv/linux/i386/pt-vfork.S   | 67 ----------------------
- .../sysdeps/unix/sysv/linux/metag/Makefile.arch    |  2 +-
+ .../sysdeps/unix/sysv/linux/metag/Makefile.arch    |  3 +-
  .../nptl/sysdeps/unix/sysv/linux/metag/pt-vfork.S  | 51 ----------------
- .../sysdeps/unix/sysv/linux/mips/Makefile.arch     |  2 +-
+ .../sysdeps/unix/sysv/linux/mips/Makefile.arch     |  3 +-
  .../nptl/sysdeps/unix/sysv/linux/mips/pt-vfork.S   | 37 ------------
- .../sysdeps/unix/sysv/linux/powerpc/Makefile.arch  |  2 +-
+ .../sysdeps/unix/sysv/linux/powerpc/Makefile.arch  |  3 +-
  .../unix/sysv/linux/powerpc/powerpc32/pt-vfork.S   | 48 ----------------
  .../unix/sysv/linux/powerpc/powerpc64/pt-vfork.S   | 48 ----------------
  .../sysdeps/unix/sysv/linux/powerpc/pt-vfork.S     |  5 --
- .../nptl/sysdeps/unix/sysv/linux/sh/Makefile.arch  |  2 +-
+ .../nptl/sysdeps/unix/sysv/linux/sh/Makefile.arch  |  3 +-
  .../nptl/sysdeps/unix/sysv/linux/sh/pt-vfork.S     | 64 ---------------------
- .../sysdeps/unix/sysv/linux/sparc/Makefile.arch    |  2 +-
+ .../sysdeps/unix/sysv/linux/sparc/Makefile.arch    |  3 +-
  .../nptl/sysdeps/unix/sysv/linux/sparc/pt-vfork.S  | 44 --------------
- .../sysdeps/unix/sysv/linux/x86_64/Makefile.arch   |  2 +-
+ .../sysdeps/unix/sysv/linux/x86_64/Makefile.arch   |  3 +-
  .../nptl/sysdeps/unix/sysv/linux/x86_64/pt-vfork.S | 32 -----------
- 21 files changed, 9 insertions(+), 491 deletions(-)
+ 21 files changed, 9 insertions(+), 500 deletions(-)
  delete mode 100644 libpthread/nptl/sysdeps/unix/sysv/linux/alpha/pt-vfork.S
  delete mode 100644 libpthread/nptl/sysdeps/unix/sysv/linux/arc/pt-vfork.S
  delete mode 100644 libpthread/nptl/sysdeps/unix/sysv/linux/arm/pt-vfork.S
@@ -94,7 +94,7 @@ index a6005c1..0000000
 -
 -weak_alias (__vfork, vfork)
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/arc/Makefile.arch b/libpthread/nptl/sysdeps/unix/sysv/linux/arc/Makefile.arch
-index 25e6fad..3c82f0a 100644
+index 25e6fad..658aa6c 100644
 --- a/libpthread/nptl/sysdeps/unix/sysv/linux/arc/Makefile.arch
 +++ b/libpthread/nptl/sysdeps/unix/sysv/linux/arc/Makefile.arch
 @@ -5,7 +5,7 @@
@@ -106,6 +106,14 @@ index 25e6fad..3c82f0a 100644
  libpthread_linux_arch_CSRC = pthread_once.c lowlevellock.c \
  	pt-__syscall_rt_sigaction.c pt-__syscall_error.c
  
+@@ -17,7 +17,6 @@ CFLAGS-pthread_once.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-pt-__syscall_rt_sigaction.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-lowlevellock.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-pt-__syscall_error.c =  -DNOT_IN_libc -DIS_IN_libpthread
+-ASFLAGS-pt-vfork.S = -DNOT_IN_libc -DIS_IN_libpthread
+ 
+ ASFLAGS-vfork.S = -DIS_IN_libc -DNOT_IN_libpthread
+ ASFLAGS-clone.S = -DIS_IN_libc -DNOT_IN_libpthread
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/arc/pt-vfork.S b/libpthread/nptl/sysdeps/unix/sysv/linux/arc/pt-vfork.S
 deleted file mode 100644
 index f222dca..0000000
@@ -120,7 +128,7 @@ index f222dca..0000000
 -
 -#include "vfork.S"
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/arm/Makefile.arch b/libpthread/nptl/sysdeps/unix/sysv/linux/arm/Makefile.arch
-index 329d8a9..1b0282d 100644
+index 329d8a9..6f05b7d 100644
 --- a/libpthread/nptl/sysdeps/unix/sysv/linux/arm/Makefile.arch
 +++ b/libpthread/nptl/sysdeps/unix/sysv/linux/arm/Makefile.arch
 @@ -5,7 +5,7 @@
@@ -132,6 +140,14 @@ index 329d8a9..1b0282d 100644
  libpthread_linux_arch_CSRC = pthread_once.c \
  	pt-__syscall_rt_sigaction.c pt-__syscall_error.c \
  	lowlevellock.c
+@@ -19,7 +19,6 @@ CFLAGS-pthread_once.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-pt-__syscall_rt_sigaction.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-lowlevellock.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-pt-__syscall_error.c =  -DNOT_IN_libc -DIS_IN_libpthread
+-ASFLAGS-pt-vfork.S = -DNOT_IN_libc -DIS_IN_libpthread -marm
+ 
+ ifeq ($(UCLIBC_HAS_STDIO_FUTEXES),y)
+ CFLAGS-fork.c = -D__USE_STDIO_FUTEXES__
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/arm/pt-vfork.S b/libpthread/nptl/sysdeps/unix/sysv/linux/arm/pt-vfork.S
 deleted file mode 100644
 index df18f03..0000000
@@ -176,7 +192,7 @@ index df18f03..0000000
 -
 -#include "../../../../../../../libc/sysdeps/linux/arm/vfork.S"
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/i386/Makefile.arch b/libpthread/nptl/sysdeps/unix/sysv/linux/i386/Makefile.arch
-index 9a34595..98e2ae7 100644
+index 9a34595..94fc03a 100644
 --- a/libpthread/nptl/sysdeps/unix/sysv/linux/i386/Makefile.arch
 +++ b/libpthread/nptl/sysdeps/unix/sysv/linux/i386/Makefile.arch
 @@ -5,7 +5,7 @@
@@ -188,6 +204,14 @@ index 9a34595..98e2ae7 100644
  libpthread_linux_arch_CSRC = pthread_spin_init.c pt-__syscall_error.c
  
  libc_linux_arch_CSRC = fork.c
+@@ -14,7 +14,6 @@ libc_linux_arch_SSRC = clone.S vfork.S
+ ASFLAGS += -DUSE___THREAD
+ 
+ CFLAGS-pt-__syscall_error.c =  -DNOT_IN_libc -DIS_IN_libpthread
+-ASFLAGS-pt-vfork.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
+ ASFLAGS-lowlevellock.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
+ ASFLAGS-lowlevelrobustlock.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
+ ASFLAGS-pthread_once.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/i386/pt-vfork.S b/libpthread/nptl/sysdeps/unix/sysv/linux/i386/pt-vfork.S
 deleted file mode 100644
 index 5bba782..0000000
@@ -262,7 +286,7 @@ index 5bba782..0000000
 -
 -weak_alias (__vfork, vfork)
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/metag/Makefile.arch b/libpthread/nptl/sysdeps/unix/sysv/linux/metag/Makefile.arch
-index df98875..a4dc4ab 100644
+index df98875..99dec6b 100644
 --- a/libpthread/nptl/sysdeps/unix/sysv/linux/metag/Makefile.arch
 +++ b/libpthread/nptl/sysdeps/unix/sysv/linux/metag/Makefile.arch
 @@ -5,7 +5,7 @@
@@ -274,6 +298,14 @@ index df98875..a4dc4ab 100644
  libpthread_linux_arch_CSRC = pthread_once.c \
  	pt-__syscall_rt_sigaction.c pt-__syscall_error.c \
  	lowlevellock.c
+@@ -22,7 +22,6 @@ CFLAGS-lowlevellock.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-pt-__syscall_error.c =  -DNOT_IN_libc -DIS_IN_libpthread
+ ASFLAGS-vfork.S = -DIS_IN_libc -DNOT_IN_libpthread
+ ASFLAGS-clone.S = -DIS_IN_libc -DNOT_IN_libpthread
+-ASFLAGS-pt-vfork.S = -DNOT_IN_libc -DIS_IN_libpthread
+ 
+ ifeq ($(UCLIBC_HAS_STDIO_FUTEXES),y)
+ CFLAGS-fork.c = -D__USE_STDIO_FUTEXES__
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/metag/pt-vfork.S b/libpthread/nptl/sysdeps/unix/sysv/linux/metag/pt-vfork.S
 deleted file mode 100644
 index 489c749..0000000
@@ -332,7 +364,7 @@ index 489c749..0000000
 -
 -#include <../../../../../../../libc/sysdeps/linux/metag/vfork.S>
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/mips/Makefile.arch b/libpthread/nptl/sysdeps/unix/sysv/linux/mips/Makefile.arch
-index fc26a8e..cfe2861 100644
+index fc26a8e..a453b6b 100644
 --- a/libpthread/nptl/sysdeps/unix/sysv/linux/mips/Makefile.arch
 +++ b/libpthread/nptl/sysdeps/unix/sysv/linux/mips/Makefile.arch
 @@ -5,7 +5,7 @@
@@ -344,6 +376,14 @@ index fc26a8e..cfe2861 100644
  libpthread_linux_arch_CSRC = pthread_once.c pt-__syscall_rt_sigaction.c
  
  libc_linux_arch_CSRC = fork.c
+@@ -21,7 +21,6 @@ CFLAGS-fork.c = -D__USE_STDIO_FUTEXES__
+ endif
+ CFLAGS-pthread_once.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-pt-__syscall_rt_sigaction.c = -DNOT_IN_libc -DIS_IN_libpthread
+-ASFLAGS-pt-vfork.S = -DNOT_IN_libc -DIS_IN_libpthread
+ 
+ ASFLAGS-clone.S = -D_LIBC_REENTRANT
+ ASFLAGS-vfork.S = -D_LIBC_REENTRANT
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/mips/pt-vfork.S b/libpthread/nptl/sysdeps/unix/sysv/linux/mips/pt-vfork.S
 deleted file mode 100644
 index 52fbde3..0000000
@@ -388,7 +428,7 @@ index 52fbde3..0000000
 -
 -#include <../../../../../../../libc/sysdeps/linux/mips/vfork.S>
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/powerpc/Makefile.arch b/libpthread/nptl/sysdeps/unix/sysv/linux/powerpc/Makefile.arch
-index 8581aea..0aa285e 100644
+index 8581aea..215c2aa 100644
 --- a/libpthread/nptl/sysdeps/unix/sysv/linux/powerpc/Makefile.arch
 +++ b/libpthread/nptl/sysdeps/unix/sysv/linux/powerpc/Makefile.arch
 @@ -5,7 +5,7 @@
@@ -400,6 +440,14 @@ index 8581aea..0aa285e 100644
  libpthread_linux_arch_CSRC = pthread_once.c pt-__syscall_error.c
  
  libc_linux_arch_CSRC = fork.c
+@@ -19,7 +19,6 @@ ASFLAGS += -DUSE___THREAD
+ CFLAGS-pthread_once.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-lowlevellock.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-pt-__syscall_error.c =  -DNOT_IN_libc -DIS_IN_libpthread
+-ASFLAGS-pt-vfork.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
+ #ASFLAGS-lowlevellock.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
+ 
+ #ASFLAGS-libc-lowlevellock.S = -D_LIBC_REENTRANT
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/powerpc/powerpc32/pt-vfork.S b/libpthread/nptl/sysdeps/unix/sysv/linux/powerpc/powerpc32/pt-vfork.S
 deleted file mode 100644
 index 2f82504..0000000
@@ -520,7 +568,7 @@ index 0225219..0000000
 -# include "powerpc32/pt-vfork.S"
 -#endif
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/sh/Makefile.arch b/libpthread/nptl/sysdeps/unix/sysv/linux/sh/Makefile.arch
-index a8249e0..a0c008b 100644
+index a8249e0..9ebbda5 100644
 --- a/libpthread/nptl/sysdeps/unix/sysv/linux/sh/Makefile.arch
 +++ b/libpthread/nptl/sysdeps/unix/sysv/linux/sh/Makefile.arch
 @@ -5,7 +5,7 @@
@@ -532,6 +580,14 @@ index a8249e0..a0c008b 100644
  			pthread_rwlock_rdlock.S pthread_rwlock_unlock.S \
  			lowlevellock.S lowlevelrobustlock.S pthread_barrier_wait.S \
  			pthread_cond_broadcast.S pthread_cond_signal.S \
+@@ -17,7 +17,6 @@ libc_linux_arch_SSRC = libc-lowlevellock.S clone.S vfork.S
+ 
+ ASFLAGS += -DUSE___THREAD
+ 
+-ASFLAGS-pt-vfork.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
+ ASFLAGS-pthread_once.S = -D_LIBC_REENTRANT
+ ASFLAGS-pthread_rwlock_wrlock.S = -D_LIBC_REENTRANT
+ ASFLAGS-pthread_rwlock_rdlock.S = -D_LIBC_REENTRANT
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/sh/pt-vfork.S b/libpthread/nptl/sysdeps/unix/sysv/linux/sh/pt-vfork.S
 deleted file mode 100644
 index 56aa6d0..0000000
@@ -603,7 +659,7 @@ index 56aa6d0..0000000
 -
 -weak_alias (__vfork, vfork)
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/sparc/Makefile.arch b/libpthread/nptl/sysdeps/unix/sysv/linux/sparc/Makefile.arch
-index 102c0da..8329885 100644
+index 102c0da..aedad2c 100644
 --- a/libpthread/nptl/sysdeps/unix/sysv/linux/sparc/Makefile.arch
 +++ b/libpthread/nptl/sysdeps/unix/sysv/linux/sparc/Makefile.arch
 @@ -5,7 +5,7 @@
@@ -615,6 +671,14 @@ index 102c0da..8329885 100644
  libpthread_linux_arch_CSRC = pthread_once.c lowlevellock.c \
  	pthread_barrier_init.c pthread_barrier_wait.c pthread_barrier_destroy.c \
  	pt-__syscall_error.c
+@@ -17,7 +17,6 @@ librt_linux_arch_CSRC = pt-__syscall_error.c
+ 
+ ASFLAGS += -DUSE___THREAD
+ 
+-ASFLAGS-pt-vfork.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
+ CFLAGS-pthread_once.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-lowlevellock.c = -DNOT_IN_libc -DIS_IN_libpthread
+ CFLAGS-pt-__syscall_error.c =  -DNOT_IN_libc -DIS_IN_libpthread
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/sparc/pt-vfork.S b/libpthread/nptl/sysdeps/unix/sysv/linux/sparc/pt-vfork.S
 deleted file mode 100644
 index 37231a8..0000000
@@ -666,7 +730,7 @@ index 37231a8..0000000
 -
 -weak_alias (__vfork, vfork)
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/x86_64/Makefile.arch b/libpthread/nptl/sysdeps/unix/sysv/linux/x86_64/Makefile.arch
-index 71df986..10fa3cf 100644
+index 71df986..7c2505f 100644
 --- a/libpthread/nptl/sysdeps/unix/sysv/linux/x86_64/Makefile.arch
 +++ b/libpthread/nptl/sysdeps/unix/sysv/linux/x86_64/Makefile.arch
 @@ -5,7 +5,7 @@
@@ -678,6 +742,14 @@ index 71df986..10fa3cf 100644
  	lowlevellock.S pthread_barrier_wait.S pthread_cond_signal.S pthread_cond_broadcast.S \
  	sem_post.S sem_timedwait.S lowlevelrobustlock.S \
  	sem_trywait.S sem_wait.S pthread_rwlock_rdlock.S pthread_rwlock_wrlock.S \
+@@ -21,7 +21,6 @@ librt_linux_arch_SSRC = librt-cancellation.S
+ ASFLAGS += -DUSE___THREAD
+ 
+ CFLAGS-pt-__syscall_error.c =  -DNOT_IN_libc -DIS_IN_libpthread
+-ASFLAGS-pt-vfork.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
+ ASFLAGS-lowlevellock.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
+ ASFLAGS-pthread_once.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
+ ASFLAGS-cancellation.S = -DNOT_IN_libc -DIS_IN_libpthread -D_LIBC_REENTRANT
 diff --git a/libpthread/nptl/sysdeps/unix/sysv/linux/x86_64/pt-vfork.S b/libpthread/nptl/sysdeps/unix/sysv/linux/x86_64/pt-vfork.S
 deleted file mode 100644
 index 08a085c..0000000
