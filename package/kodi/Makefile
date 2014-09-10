@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
 PKG_VERSION:=		14.0alpha4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		5bd39942150249d9eccf792d77b92554
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
@@ -76,7 +76,7 @@ HOST_CXXFLAGS+=		$(HOST_CPPFLAGS)
 XAKE_FLAGS+=		V=1 TIXML_USE_STL=1 GCC_HONOUR_COPTS=s
 TARGET_CPPFLAGS+=	-I. -I./utils \
 			-I$(STAGING_TARGET_DIR)/usr/include/afpfs-ng \
-			-DTIXML_USE_STL=1 -DHAS_SIMPLEPM=1 -DLINUX
+			-DTIXML_USE_STL=1 -DLINUX
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
@@ -98,7 +98,6 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-libcap \
 			--disable-joystick \
 			--disable-dvdcss \
-			--disable-debug \
 			--disable-gtest \
 			--disable-ccache \
 			--disable-wayland \
@@ -106,6 +105,7 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-mid \
 			--enable-alsa \
 			--enable-libvorbisenc \
+			--enable-debug \
 			--enable-udev
 
 ifneq ($(ADK_PACKAGE_XBMC_WITH_BLURAY),)
@@ -164,7 +164,7 @@ else
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 CONFIGURE_ARGS+=	--disable-x11 \
 			--disable-sdl \
-			--disable-gles \
+			--enable-gles \
 			--enable-neon \
 			--enable-codec=imxvpu
 else
