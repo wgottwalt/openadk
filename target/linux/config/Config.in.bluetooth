@@ -116,8 +116,6 @@ config ADK_KERNEL_BT_MRVL
 	prompt "Marvell driver"
 	tristate
 	select ADK_KERNEL_BT
-	select ADK_PACKAGE_BRCM_BLUETOOTH
-	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 	help
 	  Bluetooth Marvell driver.
@@ -125,8 +123,9 @@ config ADK_KERNEL_BT_MRVL
 config ADK_KERNEL_BT_MRVL_SDIO
 	prompt "Marvell SDIO driver"
 	tristate
-	depends on ADK_KERNEL_BT_MRVL
-	depends on ADK_KERNEL_BT_HCIBTSDIO
+	select ADK_PACKAGE_BRCM_BLUETOOTH
+	select ADK_KERNEL_BT_MRVL
+	select ADK_KERNEL_BT_HCIBTSDIO
 	depends on ADK_TARGET_WITH_SDIO
 	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
