@@ -1,9 +1,7 @@
 config ADK_PKG_KODIBOX
 	bool "Choose packages for KODIBox system"
 	default n
-	depends on ADK_TARGET_LIB_GLIBC
 	select BUSYBOX_NTPD
-	select ADK_TARGET_LIB_GLIBC
 	select ADK_PACKAGE_GLIBC
 	select ADK_PACKAGE_GLIBC_GCONV
 	select ADK_PACKAGE_KODI

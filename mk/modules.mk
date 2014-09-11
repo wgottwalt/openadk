@@ -1243,9 +1243,17 @@ $(eval $(call KMOD_template,SND_PXA2XX_SOC_SPITZ,snd-pxa2xx-soc-spitz,\
 ,60, kmod-snd-soc))
 
 $(eval $(call KMOD_template,SND_IMX_SOC,snd-imx-soc,\
+	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-hdmi-codec \
+	$(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-sgtl5000 \
 	$(MODULES_DIR)/kernel/sound/soc/fsl/imx-pcm-dma \
+	$(MODULES_DIR)/kernel/sound/soc/fsl/imx-hdmi-dma \
 	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-fsl-spdif \
+	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-fsl-hdmi \
+	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-fsl-ssi \
+	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-imx-audmux \
+	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-imx-hdmi \
 	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-imx-spdif \
+	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-imx-sgtl5000 \
 ,60, kmod-snd-soc kmod-snd-compress))
 
 $(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
