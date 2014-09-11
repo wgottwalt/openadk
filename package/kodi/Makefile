@@ -59,6 +59,8 @@ PKGFB_WITH_BLURAY:=	libbluray
 PKGFS_WITH_BLURAY:=	libbluray
 PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 
+PKG_LIBC_DEPENDS:=	glibc
+
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
 PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
@@ -108,47 +110,47 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--enable-debug \
 			--enable-udev
 
-ifneq ($(ADK_PACKAGE_XBMC_WITH_BLURAY),)
+ifneq ($(ADK_PACKAGE_KODI_WITH_BLURAY),)
 CONFIGURE_ARGS+=	--enable-libbluray
 else
 CONFIGURE_ARGS+=	--disable-libbluray
 endif
-ifneq ($(ADK_PACKAGE_XBMC_WITH_AFP),)
+ifneq ($(ADK_PACKAGE_KODI_WITH_AFP),)
 CONFIGURE_ARGS+=	--enable-afpclient
 else
 CONFIGURE_ARGS+=	--disable-afpclient
 endif
-ifneq ($(ADK_PACKAGE_XBMC_WITH_SMB),)
+ifneq ($(ADK_PACKAGE_KODI_WITH_SMB),)
 CONFIGURE_ARGS+=	--enable-samba
 else
 CONFIGURE_ARGS+=	--disable-samba
 endif
-ifneq ($(ADK_PACKAGE_XBMC_WITH_SSH),)
+ifneq ($(ADK_PACKAGE_KODI_WITH_SSH),)
 CONFIGURE_ARGS+=	--enable-ssh
 else
 CONFIGURE_ARGS+=	--disable-ssh
 endif
-ifneq ($(ADK_PACKAGE_XBMC_WITH_NFS),)
+ifneq ($(ADK_PACKAGE_KODI_WITH_NFS),)
 CONFIGURE_ARGS+=	--enable-nfs
 else
 CONFIGURE_ARGS+=	--disable-nfs
 endif
-ifneq ($(ADK_PACKAGE_XBMC_WITH_CEC),)
+ifneq ($(ADK_PACKAGE_KODI_WITH_CEC),)
 CONFIGURE_ARGS+=	--enable-libcec
 else
 CONFIGURE_ARGS+=	--disable-libcec
 endif
-ifneq ($(ADK_PACKAGE_XBMC_WITH_RTMP),)
+ifneq ($(ADK_PACKAGE_KODI_WITH_RTMP),)
 CONFIGURE_ARGS+=	--enable-rtmp
 else
 CONFIGURE_ARGS+=	--disable-rtmp
 endif
-ifneq ($(ADK_PACKAGE_XBMC_WITH_AVAHI),)
+ifneq ($(ADK_PACKAGE_KODI_WITH_AVAHI),)
 CONFIGURE_ARGS+=	--enable-avahi
 else
 CONFIGURE_ARGS+=	--disable-avahi
 endif
-ifneq ($(ADK_PACKAGE_XBMC_WITH_WEBSERVER),)
+ifneq ($(ADK_PACKAGE_KODI_WITH_WEBSERVER),)
 CONFIGURE_ARGS+=	--enable-webserver
 else
 CONFIGURE_ARGS+=	--disable-webserver
@@ -160,17 +162,13 @@ CONFIGURE_ARGS+=	--with-platform=raspberry-pi \
 			--enable-gles \
 			--disable-sdl \
 			--disable-x11
-else
+endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 CONFIGURE_ARGS+=	--disable-x11 \
 			--disable-sdl \
 			--enable-gles \
 			--enable-neon \
 			--enable-codec=imxvpu
-else
-CONFIGURE_ARGS+=	--enable-x11 \
-			--enable-sdl
-endif
 endif
 
 pre-configure:
