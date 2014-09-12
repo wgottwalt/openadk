@@ -30,7 +30,7 @@ config ADK_PKG_KODIBOX
 	select ADK_RUNTIME_START_BUSYBOX_SYSLOGD
 	select ADK_RUNTIME_START_KODI
 	select ADK_KERNEL_USB_HID
-	select ADK_KERNEL_EVDEV
+	select ADK_KERNEL_INPUT_EVDEV
 	help
 	  Create a small kodi multimedia box.
 
