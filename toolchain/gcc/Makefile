@@ -30,6 +30,7 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-libstdcxx-pch \
 			--disable-ppl-version-check \
 			--disable-cloog-version-check \
+			--disable-target-optspace \
 			--with-system-zlib \
 			--without-ppl \
 			--without-cloog \
@@ -42,10 +43,6 @@ ifneq ($(ADK_TARGET_WITH_NPTL),)
 GCC_CONFOPTS+=         --enable-tls --enable-threads --enable-libatomic
 else
 GCC_CONFOPTS+=         --disable-tls --disable-threads --disable-libatomic
-endif
-
-ifneq ($(ADK_LINUX_AARCH64)$(ADK_LINUX_ALPHA)$(ADK_LINUX_ARC)$(ADK_LINUX_AVR32)$(ADK_LINUX_BFIN)$(ADK_LINUX_XTENSA)$(ADK_LINUX_M68K),y)
-GCC_FINAL_CONFOPTS+=	--enable-cxx-flags='$(TARGET_CXXFLAGS)'
 endif
 
 ifeq ($(ADK_TARGET_UCLINUX)$(ADK_TARGET_USE_STATIC_LIBS),y)
@@ -236,6 +233,8 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_FINAL)
 	cd $(GCC_BUILD_DIR_FINAL); \
 		PATH='$(TARGET_PATH)' \
+		CFLAGS_FOR_TARGET='$(TARGET_CFLAGS)' \
+		CXXFLAGS_FOR_TARGET='$(TARGET_CXXFLAGS)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			${GCC_FINAL_CONFOPTS} \
