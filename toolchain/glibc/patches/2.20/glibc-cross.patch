@@ -1,0 +1,86 @@
+diff -Nur glibc-2.19.orig/sunrpc/rpc/types.h glibc-2.19/sunrpc/rpc/types.h
+--- glibc-2.19.orig/sunrpc/rpc/types.h	2014-02-07 10:04:38.000000000 +0100
++++ glibc-2.19/sunrpc/rpc/types.h	2014-03-03 13:42:42.000000000 +0100
+@@ -74,19 +74,24 @@
+ # define __daddr_t_defined
+ #endif
+ 
+-#ifndef __u_char_defined
+-typedef __u_char u_char;
+-typedef __u_short u_short;
+-typedef __u_int u_int;
+-typedef __u_long u_long;
+-typedef __quad_t quad_t;
+-typedef __u_quad_t u_quad_t;
+-typedef __fsid_t fsid_t;
+-# define __u_char_defined
++typedef unsigned char u_char;
++typedef unsigned short u_short;
++typedef unsigned int u_int;
++typedef unsigned long u_long;
++#if __WORDSIZE == 64 
++#ifndef __APPLE__
++typedef long int quad_t;
++typedef unsigned long int u_quad_t;
++#endif
++#elif defined __GLIBC_HAVE_LONG_LONG
++typedef long long int quad_t;
++typedef unsigned long long int u_quad_t;
+ #endif
+-#ifndef __daddr_t_defined
+-typedef __daddr_t daddr_t;
+-typedef __caddr_t caddr_t;
++
++# define __u_char_defined
++#if !defined(__daddr_t_defined) && defined(linux)
++typedef long int daddr_t;
++typedef char *caddr_t;
+ # define __daddr_t_defined
+ #endif
+ 
+diff -Nur glibc-2.19.orig/sunrpc/rpc_main.c glibc-2.19/sunrpc/rpc_main.c
+--- glibc-2.19.orig/sunrpc/rpc_main.c	2014-02-07 10:04:38.000000000 +0100
++++ glibc-2.19/sunrpc/rpc_main.c	2014-03-04 07:12:00.000000000 +0100
+@@ -38,7 +38,11 @@
+ #include <stdio.h>
+ #include <string.h>
+ #include <unistd.h>
++#ifdef __APPLE__
++#define gettext(X) (X)
++#else
+ #include <libintl.h>
++#endif
+ #include <locale.h>
+ #include <ctype.h>
+ #include <sys/types.h>
+@@ -958,10 +962,12 @@
+ 	abort ();
+       temp = rindex (cmd->infile, '.');
+       cp = stpcpy (mkfilename, "Makefile.");
+-      if (temp != NULL)
+-	*((char *) stpncpy (cp, cmd->infile, temp - cmd->infile)) = '\0';
+-      else
++      if (temp != NULL) {
++	strncpy (cp, cmd->infile, temp - cmd->infile);
++	cp[temp - cmd->infile - 1] = '\0';
++      } else {
+ 	stpcpy (cp, cmd->infile);
++      }
+ 
+     }
+   else
+diff -Nur glibc-2.19.orig/sunrpc/rpc_scan.c glibc-2.19/sunrpc/rpc_scan.c
+--- glibc-2.19.orig/sunrpc/rpc_scan.c	2014-02-07 10:04:38.000000000 +0100
++++ glibc-2.19/sunrpc/rpc_scan.c	2014-03-04 07:11:29.000000000 +0100
+@@ -37,7 +37,11 @@
+ #include <stdio.h>
+ #include <ctype.h>
+ #include <string.h>
++#ifdef __APPLE__
++#define gettext(X) (X)
++#else
+ #include <libintl.h>
++#endif
+ #include "rpc_scan.h"
+ #include "rpc_parse.h"
+ #include "rpc_util.h"

@@ -1,0 +1,23 @@
+	Fix for compiling glibc with -march=i686 specified.
+	The patch below found at: http://permalink.gmane.org/gmane.linux.lfs.devel/9758,
+	a nice discussion (with a comment of the glibc maintainer) can be found here:
+	http://old.nabble.com/-RFC-PATCH--glibc-doesn%27t-build-with-%22gcc--march%3Di686%22-td17442608.html
+	
+	To me, this simply shows once more how fucked up things can be. E.g. the (related) bug report here:
+	http://bugs.gentoo.org/show_bug.cgi?id=201815. There are lots of duplicates to it, many people are
+	affected, one can find really elaborate reports. And the responsible gentoo developers are too
+	elite to even point to the actual patch fixing the issue.
+diff -Nur glibc-2.16.0.orig/sysdeps/unix/sysv/linux/i386/sysdep.h glibc-2.16.0/sysdeps/unix/sysv/linux/i386/sysdep.h
+--- glibc-2.16.0.orig/sysdeps/unix/sysv/linux/i386/sysdep.h	2012-06-30 21:12:34.000000000 +0200
++++ glibc-2.16.0/sysdeps/unix/sysv/linux/i386/sysdep.h	2012-08-01 17:56:05.000000000 +0200
+@@ -28,6 +28,10 @@
+ #include <dl-sysdep.h>
+ #include <tls.h>
+ 
++#if defined __i686 && defined __ASSEMBLER__
++#undef __i686
++#define __i686 __i686
++#endif
+ 
+ /* For Linux we can use the system call table in the header file
+ 	/usr/include/asm/unistd.h

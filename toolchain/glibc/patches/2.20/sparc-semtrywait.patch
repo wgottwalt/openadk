@@ -1,0 +1,11 @@
+diff -Nur glibc-2.20.orig/sysdeps/sparc/sparc32/sem_trywait.c glibc-2.20/sysdeps/sparc/sparc32/sem_trywait.c
+--- glibc-2.20.orig/sysdeps/sparc/sparc32/sem_trywait.c	2014-09-07 10:09:09.000000000 +0200
++++ glibc-2.20/sysdeps/sparc/sparc32/sem_trywait.c	2014-09-13 10:21:44.000000000 +0200
+@@ -22,6 +22,7 @@
+ #include <lowlevellock.h>
+ #include <internaltypes.h>
+ #include <semaphore.h>
++#include <sparc-nptl.h>
+ 
+ #include <shlib-compat.h>
+ 
