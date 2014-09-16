@@ -36,7 +36,7 @@ do-install:
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC_NG)/etc/TZ
-ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_UCLINUX),y)
 	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(PKG_VERSION).so \
 		$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
