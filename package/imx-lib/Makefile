@@ -12,6 +12,8 @@ PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.freescale.com/
 PKG_SITES:=		http://www.freescale.com/lgfiles/NMG/MAD/YOCTO/
 
+PKG_SYSTEM_DEPENDS:=	solidrun-imx6
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
