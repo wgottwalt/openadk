@@ -10,6 +10,14 @@ ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CXXFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_CXXFLAGS))
 endif
 
+# for multilib m68k uClinux, we need to filter out some flags
+ifeq ($(ADK_TARGET_UCLINUX),y)
+TARGET_CFLAGS:=		$(filter-out -mcpu=5208,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=		$(filter-out -msep-data,$(TARGET_CFLAGS))
+TARGET_CXXFLAGS:=	$(filter-out -mcpu=5208,$(TARGET_CXXFLAGS))
+TARGET_CXXFLAGS:=	$(filter-out -msep-data,$(TARGET_CXXFLAGS))
+endif
+
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-bugurl="http://www.openadk.org/" \
 			--build=$(GNU_HOST_NAME) \
