@@ -40,6 +40,7 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getgrgid_r=yes
 
 HOST_STYLE:=		auto
+HOST_CFLAGS+=		-fPIC
 ifneq ($(OStype),Darwin)
 HOST_CONFIGURE_ARGS+=	--with-libiconv=no
 endif
