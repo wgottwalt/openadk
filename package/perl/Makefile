@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		perl
 PKG_VERSION:=		5.18.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		304cb5bd18e48c44edd6053337d3386d
 PKG_DESCR:=		perl interpreter
 PKG_SECTION:=		dev/lang
@@ -79,6 +79,7 @@ perl-install:
 	${CP} ${WRKINST}/usr/lib/perl5/${PKG_VERSION}/* \
 		${IDIR_PERL}/usr/lib/perl5/${PKG_VERSION}
 	${INSTALL_BIN} ${WRKINST}/usr/bin/perl ${IDIR_PERL}/usr/bin/
+	touch $(STAGING_TARGET_DIR)/usr/lib/perl5/$(PKG_VERSION)/$(ADK_TARGET_CPU_ARCH)-linux/CORE/patchlevel-debian.h
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
