@@ -7,7 +7,13 @@ include Makefile.inc
 
 # disable SSP for libstdc++
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
+TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_CXXFLAGS))
+endif
+
+ifeq ($(ADK_LINUX_XTENSA),y)
+TARGET_CFLAGS:=		$(filter-out -mtext-section-literals,$(TARGET_CFLAGS))
+TARGET_CXXFLAGS:=	$(filter-out -mtext-section-literals,$(TARGET_CXXFLAGS))
 endif
 
 # for multilib m68k uClinux, we need to filter out some flags
