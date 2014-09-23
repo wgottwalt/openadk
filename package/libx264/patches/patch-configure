@@ -1,11 +1,20 @@
---- libx264-1.0.2.orig/configure	2014-05-17 22:45:03.000000000 +0200
-+++ libx264-1.0.2/configure	2014-05-18 08:20:20.000000000 +0200
-@@ -660,7 +660,7 @@ case $host_cpu in
+--- libx264-1.0.3.orig/configure	2014-09-22 16:31:01.000000000 +0200
++++ libx264-1.0.3/configure	2014-09-22 17:11:32.000000000 +0200
+@@ -692,7 +692,7 @@ case $host_cpu in
                  LDFLAGS="$LDFLAGS -arch armv7"
              fi
          else
--            AS="${AS-${cross_prefix}gcc}"
-+	    AS="${cross_prefix}gcc"
+-            AS="${AS-${CC}}"
++            AS="${CC}"
+         fi
+         ;;
+     aarch64)
+@@ -701,7 +701,7 @@ case $host_cpu in
+             AS="${AS-extras/gas-preprocessor.pl $CC}"
+             ASFLAGS="$ASFLAGS -DPREFIX"
+         else
+-            AS="${AS-${CC}}"
++            AS="${CC}"
          fi
          ;;
      s390|s390x)

@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libx264
-# actually is git checkout from 18.05.2014
-PKG_VERSION:=		1.0.2
+# actually is git checkout from 22.09.2014
+PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		43946c39a27327f25751cddc1db0ed77
+PKG_MD5SUM:=		1bb600d270be1f71ddf578dde3f944ef
 PKG_DESCR:=		h264 encoding library
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.videolan.org/developers/x264.html
