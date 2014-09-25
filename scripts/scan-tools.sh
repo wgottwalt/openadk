@@ -250,6 +250,12 @@ if ! which gxargs >/dev/null 2>&1; then
 	fi
 fi
 
+if which grep >/dev/null 2>&1; then
+	if ! grep --version 2>/dev/null|grep GNU >/dev/null;then
+		host_build_grep=1
+	fi
+fi
+
 if ! which gfind >/dev/null 2>&1; then
 	if which find >/dev/null 2>&1; then
 		if ! find --version 2>/dev/null|grep GNU >/dev/null;then
@@ -323,6 +329,7 @@ if [ $host_build_bzip2 -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_BZIP2
 if [ $host_build_file -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FILE" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_flex -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_FLEX" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_gawk -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_GAWK" >> $topdir/target/config/Config.in.prereq ;fi
+if [ $host_build_grep -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_GREP" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_m4 -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_M4" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_mksh -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_MKSH" >> $topdir/target/config/Config.in.prereq ;fi
 if [ $host_build_patch -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_PATCH" >> $topdir/target/config/Config.in.prereq ;fi

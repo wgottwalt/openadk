@@ -62,6 +62,10 @@ config ADK_HOST_BUILD_GAWK
 	boolean
 	default n
 
+config ADK_HOST_BUILD_GREP
+	boolean
+	default n
+
 config ADK_HOST_BUILD_PATCH
 	boolean
 	default n
