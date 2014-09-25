@@ -16,12 +16,15 @@ PKG_SITES:=		${MASTER_SITE_GNU:=grep/}
 PKG_NOPARALLEL:=	1
 PKG_BB:=		1
 
+include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,GREP,grep,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,GREP,grep,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 grep-install:
 	$(INSTALL_DIR) $(IDIR_GREP)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/{e,f,}grep $(IDIR_GREP)/usr/bin
 
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
