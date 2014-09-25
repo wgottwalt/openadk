@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-ati
-PKG_VERSION:=		6.14.4
+PKG_VERSION:=		7.4.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		6bb71cff9ad9c5c7b258b2b6c56fdc95
 PKG_DESCR:=		x11 driver for ati vga chip
@@ -12,6 +12,8 @@ PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm mesalib libudev libstdcxx
 PKG_BUILDDEP:=		xorg-server libdrm xf86driproto mesalib eudev
 PKG_SITES:=		${MASTER_SITE_XORG}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_ARCH_DEPENDS:=      !arm !m68k
 PKG_CFLINE_XF86_VIDEO_ATI:=depends on ADK_TARGET_WITH_VGA
