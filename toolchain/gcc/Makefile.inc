@@ -27,6 +27,14 @@ PKG_SITES:=		http://www.openadk.org/distfiles/
 PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-arc.tar.xz
 endif
+ifeq ($(ADK_TOOLCHAIN_GCC_4_7_4),y)
+PKG_VERSION:=		4.7.4
+PKG_MD5SUM:=		e2c60f5ef918be2db08df96c7d97d0c4
+PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
+PKG_RELEASE:=		1
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+LIBSTDCXXVER:=		17
+endif
 ifeq ($(ADK_TOOLCHAIN_GCC_4_5_4),y)
 PKG_VERSION:=		4.5.4
 PKG_MD5SUM:=		e2c60f5ef918be2db08df96c7d97d0c4

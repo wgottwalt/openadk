@@ -46,6 +46,12 @@ config ADK_CPU_ATHLON
 config ADK_CPU_ARC
 	boolean
 
+config ADK_CPU_CRIS_V10
+	boolean
+
+config ADK_CPU_CRIS_V32
+	boolean
+
 config ADK_CPU_SH4
 	boolean
 
@@ -131,6 +137,8 @@ config ADK_TARGET_CPU_ARCH
 	default "arceb" if ADK_CPU_ARC && ADK_big
 	default "avr32" if ADK_CPU_AVR32
 	default "bfin" if ADK_CPU_BFIN
+	default "cris" if ADK_CPU_CRIS_V10
+	default "crisv32" if ADK_CPU_CRIS_V32
 	default "i486" if ADK_CPU_I486
 	default "i586" if ADK_CPU_I586
 	default "i686" if ADK_CPU_I686

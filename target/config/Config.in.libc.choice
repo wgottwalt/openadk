@@ -42,6 +42,7 @@ config ADK_TARGET_LIB_GLIBC
 	depends on !ADK_LINUX_ARC
 	depends on !ADK_LINUX_AVR32
 	depends on !ADK_LINUX_BFIN
+	depends on !ADK_LINUX_CRIS
 	depends on !ADK_LINUX_XTENSA
 	depends on !ADK_TARGET_UCLINUX
 	help
@@ -54,6 +55,7 @@ config ADK_TARGET_LIB_UCLIBC
 	depends on \
 		   !ADK_LINUX_AARCH64 && \
 		   !ADK_LINUX_ALPHA && \
+		   !ADK_LINUX_CRIS && \
 		   !ADK_LINUX_MICROBLAZE && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \

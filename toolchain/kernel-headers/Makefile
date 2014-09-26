@@ -57,6 +57,13 @@ $(WRKBUILD)/.headers: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_
 	${KERNEL_MAKE_ENV} $(MAKE) -C $(WRKBUILD) ${KERNEL_MAKE_OPTS} \
 		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR)/usr \
 		headers_install
+ifeq ($(ADK_TARGET_ARCH),cris)
+ifeq ($(ADK_TARGET_CPU_ARCH),crisv32)
+	cd $(STAGING_TARGET_DIR)/usr/include && ln -sf arch-v32/arch arch
+else
+	cd $(STAGING_TARGET_DIR)/usr/include && ln -sf arch-v10/arch arch
+endif
+endif
 	@-find $(STAGING_TARGET_DIR)/usr/include -name .install -delete
 	@-find $(STAGING_TARGET_DIR)/usr/include -name ..install.cmd -delete
 	touch $@
