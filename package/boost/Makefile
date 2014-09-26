@@ -20,7 +20,7 @@ PKG_ARCH_DEPENDS:=	!m68k !xtensa
 DISTFILES:=		boost_$(PKG_EXTRAVER)_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_$(PKG_EXTRAVER)_0
 
-PKG_FLAVOURS_BOOST:=	DATE_TIME GRAPH GRAPH_PARALLEL IOSTREAMS MATH PROGRAM_OPTIONS PYTHON REGEX SERIALIZATION SIGNALS SYSTEM TEST THREAD WAVE
+PKG_FLAVOURS_BOOST:=	DATE_TIME GRAPH GRAPH_PARALLEL IOSTREAMS MATH PROGRAM_OPTIONS PYTHON REGEX SERIALIZATION SIGNALS TEST WAVE
 
 PKGFD_DATE_TIME:=	with date-time
 PKGFD_PYTHON:=		with python
@@ -34,9 +34,7 @@ PKGFD_PROGRAM_OPTIONS:=	with program_options
 PKGFD_REGEX:=		with regex
 PKGFD_SERIALIZATION:=	with serialization
 PKGFD_SIGNALS:=		with signals
-PKGFD_SYSTEM:=		with system
 PKGFD_TEST:=		with test
-PKGFD_THREAD:=		with thread
 PKGFD_WAVE:=		with wave
 
 include ${ADK_TOPDIR}/mk/package.mk
@@ -53,6 +51,7 @@ CONFIGURE_ARGS+=	--target=$(GNU_TARGET_NAME) \
 			--host=$(GNU_TARGET_NAME) \
 			--build=$(GNU_HOST_NAME) \
 			--prefix=${WRKINST}/usr \
+			--ignore-site-config \
 			--without-locale
 
 ifneq (${ADK_PACKAGE_BOOST_IOSTREAMS},)
@@ -84,14 +83,8 @@ endif
 ifeq (${ADK_PACKAGE_BOOST_SIGNALS},)
 CONFIGURE_ARGS+=	--without-signals
 endif
-ifeq (${ADK_PACKAGE_BOOST_SYSTEM},)
-CONFIGURE_ARGS+=	--without-system
-endif
 ifeq (${ADK_PACKAGE_BOOST_TEST},)
 CONFIGURE_ARGS+=	--without-test
-endif
-ifeq (${ADK_PACKAGE_BOOST_THREAD},)
-CONFIGURE_ARGS+=	--without-thread
 endif
 ifeq (${ADK_PACKAGE_BOOST_WAVE},)
 CONFIGURE_ARGS+=	--without-wave
@@ -137,10 +130,8 @@ endif
 			binary-format=elf \
 			toolset=gcc-${GPP_VERSION} \
 			--user-config=${USER_JAM} \
-			--build-type=minimal \
-			--layout=versioned \
+			--layout=system \
 			--disable-long-double \
-			--without-mpi \
 			${CONFIGURE_ARGS} \
 			install \
 	)
@@ -148,9 +139,5 @@ endif
 boost-install:
 	${INSTALL_DIR} ${IDIR_BOOST}/usr/lib
 	${CP} ${WRKINST}/usr/lib/*.so* ${IDIR_BOOST}/usr/lib
-	# make symlink for simpler access to include files
-	(cd $(STAGING_TARGET_DIR)/usr/include/ ; \
-		ln -sf boost-$(PKG_EXTRAVER)/boost .)
-		
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

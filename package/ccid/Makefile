@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ccid
-PKG_VERSION:=		1.4.4
+PKG_VERSION:=		1.4.17
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		79ef91103bcdd99a3b31cb5c5721a829
 PKG_DESCR:=		generic usb ccid and iccd driver
@@ -19,7 +19,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CCID,ccid,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS:=         $(filter-out -flto,$(TARGET_CFLAGS))
 CONFIGURE_ARGS+=	--enable-twinserial
 
 ccid-install:

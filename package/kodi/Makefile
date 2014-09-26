@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		kodi
 PKG_VERSION:=		14.0alpha4
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		3329b7503846ea3ced64d71bdbd1f442
+PKG_MD5SUM:=		5bd39942150249d9eccf792d77b92554
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
@@ -84,7 +84,7 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
 			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vcos/pthreads \
 			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vmcs_host/linux
-TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/opt/vc/lib -lkhrn_static
+TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/opt/vc/lib
 endif
 
 AUTOTOOL_STYLE:=	autoreconf
@@ -108,7 +108,8 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--enable-alsa \
 			--enable-libvorbisenc \
 			--enable-debug \
-			--enable-udev
+			--enable-udev \
+			--with-ffmpeg=shared
 
 ifneq ($(ADK_PACKAGE_KODI_WITH_BLURAY),)
 CONFIGURE_ARGS+=	--enable-libbluray

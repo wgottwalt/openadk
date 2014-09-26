@@ -1,0 +1,11 @@
+--- kodi-14.0alpha4.orig/configure.in	2014-09-05 14:09:58.000000000 +0200
++++ kodi-14.0alpha4/configure.in	2014-09-21 10:23:38.000000000 +0200
+@@ -1004,7 +1004,7 @@ if test "$use_gles" = "yes"; then
+       AC_DEFINE([HAVE_LIBEGL],[1],["Define to 1 if you have the `EGL' library (-lEGL)."])
+       AC_DEFINE([HAVE_LIBGLESV2],[1],["Define to 1 if you have the `GLESv2' library (-lGLESv2)."])
+       AC_MSG_RESULT(== WARNING: OpenGLES support is assumed.)
+-      LIBS="$LIBS -lEGL -lGLESv2 -lbcm_host -lvcos -lvchiq_arm"
++      LIBS="$LIBS -lEGL -lGLESv2 -lbcm_host -lvcos -lvchiq_arm -lkhrn_static -lpthread -lm"
+     else
+       AC_CHECK_LIB([EGL],   [main],, AC_MSG_ERROR($missing_library))
+       AC_CHECK_LIB([GLESv2],[main],, AC_MSG_ERROR($missing_library))
