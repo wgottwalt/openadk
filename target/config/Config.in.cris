@@ -1,0 +1,5 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+source target/config/Config.in.cris.choice
+source target/config/Config.in.cris.default

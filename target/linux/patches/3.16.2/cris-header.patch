@@ -1,12 +1,18 @@
+diff -Nur linux-3.16.2.orig/arch/cris/include/arch-v10/arch/Kbuild linux-3.16.2/arch/cris/include/arch-v10/arch/Kbuild
+--- linux-3.16.2.orig/arch/cris/include/arch-v10/arch/Kbuild	2014-09-06 01:37:11.000000000 +0200
++++ linux-3.16.2/arch/cris/include/arch-v10/arch/Kbuild	2014-09-26 19:24:50.000000000 +0200
+@@ -1 +1,2 @@
+ # CRISv10 arch
++header-y += ptrace.h
 diff -Nur linux-3.16.2.orig/arch/cris/include/arch-v32/arch/Kbuild linux-3.16.2/arch/cris/include/arch-v32/arch/Kbuild
 --- linux-3.16.2.orig/arch/cris/include/arch-v32/arch/Kbuild	2014-09-06 01:37:11.000000000 +0200
-+++ linux-3.16.2/arch/cris/include/arch-v32/arch/Kbuild	2014-09-26 10:30:42.000000000 +0200
++++ linux-3.16.2/arch/cris/include/arch-v32/arch/Kbuild	2014-09-26 19:24:31.000000000 +0200
 @@ -1 +1,2 @@
  # CRISv32 arch
 +header-y += ptrace.h
 diff -Nur linux-3.16.2.orig/arch/cris/include/asm/Kbuild linux-3.16.2/arch/cris/include/asm/Kbuild
 --- linux-3.16.2.orig/arch/cris/include/asm/Kbuild	2014-09-06 01:37:11.000000000 +0200
-+++ linux-3.16.2/arch/cris/include/asm/Kbuild	2014-09-26 10:29:56.000000000 +0200
++++ linux-3.16.2/arch/cris/include/asm/Kbuild	2014-09-26 19:24:31.000000000 +0200
 @@ -1,8 +1,3 @@
 -
 -header-y += arch-v10/
@@ -18,7 +24,7 @@ diff -Nur linux-3.16.2.orig/arch/cris/include/asm/Kbuild linux-3.16.2/arch/cris/
  generic-y += cputime.h
 diff -Nur linux-3.16.2.orig/arch/cris/include/uapi/asm/Kbuild linux-3.16.2/arch/cris/include/uapi/asm/Kbuild
 --- linux-3.16.2.orig/arch/cris/include/uapi/asm/Kbuild	2014-09-06 01:37:11.000000000 +0200
-+++ linux-3.16.2/arch/cris/include/uapi/asm/Kbuild	2014-09-26 10:29:56.000000000 +0200
++++ linux-3.16.2/arch/cris/include/uapi/asm/Kbuild	2014-09-26 19:24:31.000000000 +0200
 @@ -1,8 +1,8 @@
  # UAPI Header export list
  include include/uapi/asm-generic/Kbuild.asm
@@ -32,7 +38,7 @@ diff -Nur linux-3.16.2.orig/arch/cris/include/uapi/asm/Kbuild linux-3.16.2/arch/
  header-y += byteorder.h
 diff -Nur linux-3.16.2.orig/scripts/headers.sh linux-3.16.2/scripts/headers.sh
 --- linux-3.16.2.orig/scripts/headers.sh	2014-09-06 01:37:11.000000000 +0200
-+++ linux-3.16.2/scripts/headers.sh	2014-09-26 10:29:56.000000000 +0200
++++ linux-3.16.2/scripts/headers.sh	2014-09-26 19:24:31.000000000 +0200
 @@ -19,8 +19,6 @@
  	case ${arch} in
  	um)        # no userspace export
