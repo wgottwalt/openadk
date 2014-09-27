@@ -453,6 +453,14 @@ if [[ $target = raspberry-pi ]]; then
 	    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1BE)) 2>/dev/null
 fi
 
+# disk signature
+rnddev=/dev/urandom
+[[ -c /dev/arandom ]] && rnddev=/dev/arandom
+dd if=$rnddev bs=4 count=1 2>/dev/null | \
+    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1B8)) 2>/dev/null
+print -n '\0\0' | \
+    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1BC)) 2>/dev/null
+
 (( quiet )) || print Cleaning out partitions...
 (( datafssz )) && dd if=/dev/zero bs=1048576 count=1 \
     seek=$((cyls - cfgfs - datafssz)) 2>/dev/null
@@ -507,8 +515,6 @@ case $target {
 }
 
 cd "$R"
-rnddev=/dev/urandom
-[[ -c /dev/arandom ]] && rnddev=/dev/arandom
 dd if=$rnddev bs=16 count=1 >>etc/.rnd 2>/dev/null
 (( quiet )) || print Fixing up permissions...
 chown 0:0 tmp
