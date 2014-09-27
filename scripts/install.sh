@@ -155,9 +155,9 @@ fi
 
 case $ostype {
 (Darwin)
-	R=/Volumes/ADKROOT
-	B=/Volumes/ADKBOOT
-	D=/Volumes/ADKDATA
+	R=/Volumes/ADKROOT; diskutil unmount $R
+	B=/Volumes/ADKBOOT; diskutil unmount $B
+	D=/Volumes/ADKDATA; diskutil unmount $D
 	basedev=$tgt
 	rootpart=${basedev}s1
 	datapart=${basedev}s2
