@@ -24,12 +24,7 @@
 # ware Foundation.
 #-
 # Prepare a USB stick or CF/SD/MMC card or hard disc for installation
-# of OpenADK:
-# • install a Master Boot Record containing a MirBSD PBR loading GRUB
-# • write GRUB2 core.img just past the MBR
-# • create a root partition and extract the OpenADK image
-#   just built there
-# • create a cfgfs partition
+# of OpenADK
 
 ADK_TOPDIR=$(pwd)
 HOST=$(gcc -dumpmachine)
@@ -60,6 +55,7 @@ ostype=$(uname -s)
 
 fs=ext4
 cfgfs=1
+datafssz=0
 noformat=0
 quiet=0
 serial=0
@@ -68,19 +64,29 @@ panicreboot=10
 
 function usage {
 cat >&2 <<EOF
-Syntax: $me [-f filesystem] [-c cfgfssize] [-p panictime] [±q] [-s serialspeed]
-    [±t] -n /dev/sdb image
+Syntax: $me [-f filesystem] [-c cfgfssize] [-d datafssize] [-n]
+    [-p panictime] [±q] [-s serialspeed] [±t] <target> <device> <archive>
+Partition sizes are in MiB. Filesystem type is currently ignored (ext4).
 Defaults: -c 1 -p 10 -s 115200; -t = enable serial console
 EOF
 	exit $1
 }
 
-while getopts "f:c:hp:qs:nt" ch; do
+while getopts "c:d:f:hnp:qs:t" ch; do
 	case $ch {
-	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 5 )); then
+	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 16 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
 			exit 1
 		fi ;;
+	(d)	if (( (datafssz = OPTARG) < 0 )); then
+			print -u2 "$me: -d $OPTARG out of bounds"
+			exit 1
+		fi ;;
+	(f)	if [[ $OPTARG != @(ext2|ext3|ext4|xfs) ]]; then
+			print -u2 "$me: filesystem $OPTARG invalid"
+			exit 1
+		fi
+		fs=$OPTARG ;;
 	(h)	usage 0 ;;
 	(p)	if (( (panicreboot = OPTARG) < 0 || panicreboot > 300 )); then
 			print -u2 "$me: -p $OPTARG out of bounds"
@@ -88,11 +94,6 @@ while getopts "f:c:hp:qs:nt" ch; do
 		fi ;;
 	(q)	quiet=1 ;;
 	(+q)	quiet=0 ;;
-	(f)	if [[ $OPTARG != @(ext2|ext3|ext4|xfs) ]]; then
-			print -u2 "$me: filesystem $OPTARG invalid"
-			exit 1
-		fi
-		fs=$OPTARG ;;
 	(s)	if [[ $OPTARG != @(96|192|384|576|1152)00 ]]; then
 			print -u2 "$me: serial speed $OPTARG invalid"
 			exit 1
@@ -106,18 +107,15 @@ while getopts "f:c:hp:qs:nt" ch; do
 done
 shift $((OPTIND - 1))
 
-(( $# == 2 )) || usage 1
+(( $# == 3 )) || usage 1
 
 f=0
-tools="mkfs.$fs tune2fs"
 case $ostype {
 (Linux)
-	;;
-(DragonFly|*BSD*)
-	print -u2 Sorry, not ported to the OS "'$ostype'" yet.
+	tools="bc mkfs.$fs tune2fs"
 	;;
 (Darwin)
-	print -u2 Sorry, not ported to the OS "'$ostype'" yet.
+	tools="bc diskutil"
 	;;
 (*)
 	print -u2 Sorry, not ported to the OS "'$ostype'" yet.
@@ -135,9 +133,16 @@ for tool in $tools; do
 done
 (( f )) && exit 1
 
-tgt=$1
-src=$2
+target=$1
+tgt=$2
+src=$3
 
+case $target {
+(raspberry-pi|solidrun-imx6|default) ;;
+(*)
+	print -u2 "Unknown target '$target', exiting"
+	exit 1 ;;
+}
 if [[ ! -b $tgt ]]; then
 	print -u2 "'$tgt' is not a block device, exiting"
 	exit 1
@@ -149,30 +154,48 @@ fi
 (( quiet )) || print "Installing $src on $tgt."
 
 case $ostype {
-(DragonFly|*BSD*)
-	basedev=${tgt%c}
-	tgt=${basedev}c
-	part=${basedev}i
-	match=\'${basedev}\''[a-p]'
-	function mount_fs {
-		mount -t ext2fs "$1" "$2"
-	}
-	;;
 (Darwin)
+	R=/Volumes/ADKROOT
+	B=/Volumes/ADKBOOT
+	D=/Volumes/ADKDATA
 	basedev=$tgt
-	part=${basedev}s1
+	rootpart=${basedev}s1
+	datapart=${basedev}s2
+	if [[ $target = raspberry-pi ]]; then
+		bootpart=${basedev}s1
+		rootpart=${basedev}s2
+		datapart=${basedev}s3
+	fi
 	match=\'${basedev}\''?(s+([0-9]))'
 	function mount_fs {
-		fuse-ext2 "$1" "$2" -o rw+
-		sleep 3
+	}
+	function create_fs {
+		if [[ $3 = ext4 ]]; then
+			fstype=UFSD_EXTFS4
+		fi
+		if [[ $3 = vfat ]]; then
+			fstype=fat32
+		fi
+		diskutil eraseVolume $fstype "$2" "$1"
 	}
 	;;
 (Linux)
 	basedev=$tgt
-	part=${basedev}1
+	rootpart=${basedev}1
+	datapart=${basedev}2
+	if [[ $target = raspberry-pi ]]; then
+		bootpart=${basedev}1
+		rootpart=${basedev}2
+		datapart=${basedev}3
+	fi
+
 	match=\'${basedev}\''+([0-9])'
 	function mount_fs {
-		mount -t $fs "$1" "$2"
+		mount -t "$3" "$1" "$2"
+	}
+	function create_fs {
+		mkfs.$3 "$1"
+		tune2fs -c 0 -i 0 "$1"
 	}
 	;;
 }
@@ -190,12 +213,48 @@ if (( !quiet )); then
 	[[ $x = Yes ]] || exit 0
 fi
 
+if ! T=$(mktemp -d /tmp/openadk.XXXXXXXXXX); then
+	print -u2 Error creating temporary directory.
+	exit 1
+fi
+if [[ $ostype != Darwin ]]; then
+	R=$T/rootmnt
+	B=$T/bootmnt
+	D=$T/datamnt
+	mkdir -p "$R" "$B" "$D"
+fi
+
+# get disk size
 dksz=$(dkgetsz "$tgt")
+
+# partition layouts:
+# n̲a̲m̲e̲		p̲a̲r̲t̲#̲0̲		p̲̲a̲r̲t̲#̲1̲		p̲̲a̲r̲t̲#̲2̲		p̲̲a̲r̲t̲#̲3̲
+# default:	0x83(system)	0x83(?data)	-(unused)	0x88(cfgfs)
+# raspberry:	0x0B(boot)	0x83(system)	0x83(?data)	0x88(cfgfs)
+
+# sizes:
+# boot(raspberry) - fixed (100 MiB)
+# cfgfs - fixed (parameter, max. 16 MiB)
+# data - flexible (parameter)
+# system - everything else
+
+if [[ $target = raspberry-pi ]]; then
+	bootfssz=100
+	if (( grub )); then
+		print -u2 "Cannot combine GRUB with $target"
+		rm -rf "$T"
+		exit 1
+	fi
+else
+	bootfssz=0
+fi
+
 heads=64
 secs=32
 (( cyls = dksz / heads / secs ))
-if (( cyls < (cfgfs + 2) )); then
+if (( cyls < (bootfssz + cfgfs + datafssz + 2) )); then
 	print -u2 "Size of $tgt is $dksz, this looks fishy?"
+	rm -rf "$T"
 	exit 1
 fi
 
@@ -205,12 +264,12 @@ else
 	statcmd='stat -c %s'	# GNU stat
 fi
 
-if ! T=$(mktemp -d /tmp/openadk.XXXXXXXXXX); then
-	print -u2 Error creating temporary directory.
-	exit 1
+if (( grub )); then
+	tar -xOzf "$src" boot/grub/core.img >"$T/core.img"
+	integer coreimgsz=$($statcmd "$T/core.img")
+else
+	coreimgsz=65024
 fi
-tar -xOzf "$src" boot/grub/core.img >"$T/core.img"
-integer coreimgsz=$($statcmd "$T/core.img")
 if (( coreimgsz < 1024 )); then
 	print -u2 core.img is probably too small: $coreimgsz
 	rm -rf "$T"
@@ -232,17 +291,30 @@ else
 	corepatchofs=$((0x414))
 fi
 # partition offset: at least coreendsec+1 but aligned on a multiple of secs
-(( partofs = ((coreendsec / secs) + 1) * secs ))
+#(( partofs = ((coreendsec / secs) + 1) * secs ))
+# we just use 2048 all the time, since some loaders are longer
+partofs=2048
+if [[ $target = raspberry-pi ]]; then
+	(( spartofs = partofs + (100 * 2048) ))
+else
+	spartofs=$partofs
+fi
 
-(( quiet )) || print Preparing MBR and GRUB2...
+(( quiet )) || if (( grub )); then
+	print Preparing MBR and GRUB2...
+else
+	print Preparing MBR...
+fi
 dd if=/dev/zero of="$T/firsttrack" count=$partofs 2>/dev/null
+# add another MiB to clear the first partition
+dd if=/dev/zero bs=1048576 count=1 >>"$T/firsttrack" 2>/dev/null
 echo $corestartsec $coreendsec | mksh "$ADK_TOPDIR/scripts/bootgrub.mksh" \
-    -A -g $((cyls-cfgfs)):$heads:$secs -M 1:0x83 -O $partofs | \
-    dd of="$T/firsttrack" conv=notrunc 2>/dev/null
-dd if="$T/core.img" of="$T/firsttrack" conv=notrunc seek=$corestartsec \
-    2>/dev/null
+    -A -g $((cyls - bootfssz - cfgfs - datafssz)):$heads:$secs -M 1:0x83 \
+    -O $spartofs | dd of="$T/firsttrack" conv=notrunc 2>/dev/null
+(( grub )) && dd if="$T/core.img" of="$T/firsttrack" conv=notrunc \
+    seek=$corestartsec 2>/dev/null
 # set partition where it can find /boot/grub
-print -n '\0\0\0\0' | \
+(( grub )) && print -n '\0\0\0\0' | \
     dd of="$T/firsttrack" conv=notrunc bs=1 seek=$corepatchofs 2>/dev/null
 
 # create cfgfs partition (mostly taken from bootgrub.mksh)
@@ -286,56 +358,155 @@ while (( curptr < 16 )); do
 	ostr=$ostr\\0${thecode[curptr++]#8#}
 done
 print -n "$ostr" | \
-    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1CE)) 2>/dev/null
+    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1EE)) 2>/dev/null
 
-(( quiet )) || print Writing MBR and GRUB2 to target device...
-dd if="$T/firsttrack" of="$tgt"
-
-if [[ $basedev = /dev/svnd+([0-9]) ]]; then
-	(( quiet )) || print "Creating BSD disklabel on target device..."
-	# c: whole device (must be so)
-	# i: ext2fs (matching first partition)
-	# j: cfgfs (matching second partition)
-	# p: MBR and GRUB2 area (by tradition)
-	cat >"$T/bsdlabel" <<-EOF
-		type: vnd
-		disk: vnd device
-		label: OpenADK
-		flags:
-		bytes/sector: 512
-		sectors/track: $secs
-		tracks/cylinder: $heads
-		sectors/cylinder: $((heads * secs))
-		cylinders: $cyls
-		total sectors: $((cyls * heads * secs))
-		rpm: 3600
-		interleave: 1
-		trackskew: 0
-		cylinderskew: 0
-		headswitch: 0
-		track-to-track seek: 0
-		drivedata: 0
-
-		16 partitions:
-		c: $((cyls * heads * secs)) 0 unused
-		i: $(((cyls - cfgfs) * heads * secs - partofs)) $partofs ext2fs
-		j: $((cfgfs * heads * secs)) $(((cyls - cfgfs) * heads * secs)) unknown
-		p: $partofs 0 unknown
-EOF
-	disklabel -R ${basedev#/dev/} "$T/bsdlabel"
+if (( datafssz )); then
+	# create data partition (copy of the above :)
+	set -A thecode
+	typeset -Uui8 thecode
+	mbrpno=0
+	set -A g_code $cyls $heads $secs
+	(( psz = (cyls - cfgfs) * g_code[1] * g_code[2] ))
+	(( pofs = (cyls - cfgfs - datafssz) * g_code[1] * g_code[2] ))
+	set -A o_code	# g_code equivalent for partition offset
+	(( o_code[2] = pofs % g_code[2] + 1 ))
+	(( o_code[1] = pofs / g_code[2] ))
+	(( o_code[0] = o_code[1] / g_code[1] + 1 ))
+	(( o_code[1] = o_code[1] % g_code[1] + 1 ))
+	# boot flag; C/H/S offset
+	thecode[mbrpno++]=0x00
+	(( thecode[mbrpno++] = o_code[1] - 1 ))
+	(( cylno = o_code[0] > 1024 ? 1023 : o_code[0] - 1 ))
+	(( thecode[mbrpno++] = o_code[2] | ((cylno & 0x0300) >> 2) ))
+	(( thecode[mbrpno++] = cylno & 0x00FF ))
+	# partition type; C/H/S end
+	(( thecode[mbrpno++] = 0x83 ))
+	(( thecode[mbrpno++] = g_code[1] - 1 ))
+	(( cylno = (g_code[0] - cfgfs) > 1024 ? 1023 : g_code[0] - cfgfs - 1 ))
+	(( thecode[mbrpno++] = g_code[2] | ((cylno & 0x0300) >> 2) ))
+	(( thecode[mbrpno++] = cylno & 0x00FF ))
+	# partition offset, size (LBA)
+	(( thecode[mbrpno++] = pofs & 0xFF ))
+	(( thecode[mbrpno++] = (pofs >> 8) & 0xFF ))
+	(( thecode[mbrpno++] = (pofs >> 16) & 0xFF ))
+	(( thecode[mbrpno++] = (pofs >> 24) & 0xFF ))
+	(( pssz = psz - pofs ))
+	(( thecode[mbrpno++] = pssz & 0xFF ))
+	(( thecode[mbrpno++] = (pssz >> 8) & 0xFF ))
+	(( thecode[mbrpno++] = (pssz >> 16) & 0xFF ))
+	(( thecode[mbrpno++] = (pssz >> 24) & 0xFF ))
+	# write partition table entry
+	ostr=
+	curptr=0
+	while (( curptr < 16 )); do
+		ostr=$ostr\\0${thecode[curptr++]#8#}
+	done
+	print -n "$ostr" | \
+	    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1CE)) 2>/dev/null
 fi
 
-(( quiet )) || print "Creating filesystem on ${part}..."
-q=
-(( quiet )) && q=-q
-(( noformat )) || mkfs.$fs -F $q "$part"
-partuuid=$(/sbin/fdisk -l /dev/sdc|awk '/Disk identifier/ { print $3 "-01" }'|sed -e "s#^0x##")
-(( noformat )) || tune2fs -c 0 -i 0 "$part"
+if [[ $target = raspberry-pi ]]; then
+	# move system and data partition from #0/#1 to #1/#2
+	dd if="$T/firsttrack" bs=1 skip=$((0x1BE)) count=32 of="$T/x" 2>/dev/null
+	dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1CE)) if="$T/x" 2>/dev/null
+	# create boot partition (copy of the above :)
+	set -A thecode
+	typeset -Uui8 thecode
+	mbrpno=0
+	set -A g_code $cyls $heads $secs
+	psz=$spartofs
+	pofs=$partofs
+	set -A o_code	# g_code equivalent for partition offset
+	(( o_code[2] = pofs % g_code[2] + 1 ))
+	(( o_code[1] = pofs / g_code[2] ))
+	(( o_code[0] = o_code[1] / g_code[1] + 1 ))
+	(( o_code[1] = o_code[1] % g_code[1] + 1 ))
+	# boot flag; C/H/S offset
+	thecode[mbrpno++]=0x00
+	(( thecode[mbrpno++] = o_code[1] - 1 ))
+	(( cylno = o_code[0] > 1024 ? 1023 : o_code[0] - 1 ))
+	(( thecode[mbrpno++] = o_code[2] | ((cylno & 0x0300) >> 2) ))
+	(( thecode[mbrpno++] = cylno & 0x00FF ))
+	# partition type; C/H/S end
+	(( thecode[mbrpno++] = 0x0B ))
+	(( thecode[mbrpno++] = g_code[1] - 1 ))
+	(( cylno = (spartofs / 2048) > 1024 ? 1023 : (spartofs / 2048) - 1 ))
+	(( thecode[mbrpno++] = g_code[2] | ((cylno & 0x0300) >> 2) ))
+	(( thecode[mbrpno++] = cylno & 0x00FF ))
+	# partition offset, size (LBA)
+	(( thecode[mbrpno++] = pofs & 0xFF ))
+	(( thecode[mbrpno++] = (pofs >> 8) & 0xFF ))
+	(( thecode[mbrpno++] = (pofs >> 16) & 0xFF ))
+	(( thecode[mbrpno++] = (pofs >> 24) & 0xFF ))
+	(( pssz = psz - pofs ))
+	(( thecode[mbrpno++] = pssz & 0xFF ))
+	(( thecode[mbrpno++] = (pssz >> 8) & 0xFF ))
+	(( thecode[mbrpno++] = (pssz >> 16) & 0xFF ))
+	(( thecode[mbrpno++] = (pssz >> 24) & 0xFF ))
+	# write partition table entry
+	ostr=
+	curptr=0
+	while (( curptr < 16 )); do
+		ostr=$ostr\\0${thecode[curptr++]#8#}
+	done
+	print -n "$ostr" | \
+	    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1BE)) 2>/dev/null
+fi
+
+(( quiet )) || print Cleaning out partitions...
+(( datafssz )) && dd if=/dev/zero bs=1048576 count=1 \
+    seek=$((cyls - cfgfs - datafssz)) 2>/dev/null
+dd if=/dev/zero bs=1048576 count=1 seek=$((spartofs / 2048)) 2>/dev/null
+
+(( quiet )) || if (( grub )); then
+	print Writing MBR and GRUB2 to target device...
+else
+	print Writing MBR to target device...
+fi
+dd if="$T/firsttrack" of="$tgt"
+
+case $target {
+(solidrun-imx6)
+	fwdir=$(dirname "$src")
+	dd if="$fwdir/SPL" of="$tgt" bs=1024 seek=1
+	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=42
+	;;
+(raspberry-pi)
+	(( quiet )) || print "Creating filesystem on ${bootpart}..."
+	(( noformat )) || create_fs "$bootpart" ADKBOOT vfat
+	;;
+}
+
+(( quiet )) || print "Creating filesystem on ${rootpart}..."
+(( noformat )) || create_fs "$rootpart" ADKROOT ext4
+#partuuid=$(/sbin/fdisk -l /dev/$tgt | awk '/Disk identifier/ { print $3 "-01" }'|sed -e "s#^0x##")
 
 (( quiet )) || print Extracting installation archive...
-mount_fs "$part" "$T"
-gzip -dc "$src" | (cd "$T"; tar -xvpf -)
-cd "$T"
+mount_fs "$rootpart" "$R" ext4
+gzip -dc "$src" | (cd "$R"; tar -xpf -)
+
+case $target {
+(raspberry-pi)
+	mount_fs "$bootpart" "$B" vfat
+	for x in "$R"/boot/.*; do
+		[[ -e "$x" ]] && mv -f "$R"/boot/.* "$B/"
+		break
+	done
+	for x in "$R"/boot/*; do
+		[[ -e "$x" ]] && mv -f "$R"/boot/* "$B/"
+		break
+	done
+	umount "$B"
+	;;
+(solidrun-imx6)
+	for x in "$fwdir"/*.dtb; do
+		[[ -e "$x" ]] && cp "$fwdir"/*.dtb "$R/boot/"
+		break
+	done
+	;;
+}
+
+cd "$R"
 rnddev=/dev/urandom
 [[ -c /dev/arandom ]] && rnddev=/dev/arandom
 dd if=$rnddev bs=16 count=1 >>etc/.rnd 2>/dev/null
@@ -343,33 +514,37 @@ dd if=$rnddev bs=16 count=1 >>etc/.rnd 2>/dev/null
 chown 0:0 tmp
 chmod 1777 tmp
 [[ -f usr/bin/sudo ]] && chmod 4755 usr/bin/sudo
-(( quiet )) || print Configuring GRUB2 bootloader...
-mkdir -p boot/grub
-(
-	print set default=0
-	print set timeout=1
-	if (( serial )); then
-		print serial --unit=0 --speed=$speed
-		print terminal_output serial
-		print terminal_input serial
-		consargs="console=ttyS0,$speed console=tty0"
-	else
-		print terminal_output console
-		print terminal_input console
-		consargs="console=tty0"
-	fi
-	print
-	print 'menuentry "GNU/Linux (OpenADK)" {'
-	linuxargs="root=PARTUUID=$partuuid $consargs"
-	(( panicreboot )) && linuxargs="$linuxargs panic=$panicreboot"
-	print "\tlinux /boot/kernel $linuxargs"
-	print '}'
-) >boot/grub/grub.cfg
+
+if (( grub )); then
+	(( quiet )) || print Configuring GRUB2 bootloader...
+	mkdir -p boot/grub
+	(
+		print set default=0
+		print set timeout=1
+		if (( serial )); then
+			print serial --unit=0 --speed=$speed
+			print terminal_output serial
+			print terminal_input serial
+			consargs="console=ttyS0,$speed console=tty0"
+		else
+			print terminal_output console
+			print terminal_input console
+			consargs="console=tty0"
+		fi
+		print
+		print 'menuentry "GNU/Linux (OpenADK)" {'
+		linuxargs="root=PARTUUID=$partuuid $consargs"
+		(( panicreboot )) && linuxargs="$linuxargs panic=$panicreboot"
+		print "\tlinux /boot/kernel $linuxargs"
+		print '}'
+	) >boot/grub/grub.cfg
+fi
+
 (( quiet )) || print Finishing up...
 cd "$ADK_TOPDIR"
-umount "$T"
-
-(( quiet )) || print "\nNote: the rootfs UUID is: $partuuid"
+sync
+umount "$R"
+sync
 
 rm -rf "$T"
 exit 0
