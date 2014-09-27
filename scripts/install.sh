@@ -493,6 +493,14 @@ case $target {
 (( quiet )) || print "Creating filesystem on ${rootpart}..."
 (( noformat )) || create_fs "$rootpart" ADKROOT ext4
 
+if (( datafssz )); then
+	(( quiet )) || print "Creating filesystem on ${datapart}..."
+	(( noformat )) || create_fs "$datapart" ADKDATA ext4
+	mount_fs "$datapart" "$D" ext4
+	mkdir -m0755 "$D/mpd" "$D/xbmc"
+	umount "$D"
+fi
+
 (( quiet )) || print Extracting installation archive...
 mount_fs "$rootpart" "$R" ext4
 gzip -dc "$src" | (cd "$R"; tar -xpf -)
