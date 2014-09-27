@@ -232,6 +232,8 @@ dksz=$(dkgetsz "$tgt")
 # default:	0x83(system)	0x83(?data)	-(unused)	0x88(cfgfs)
 # raspberry:	0x0B(boot)	0x83(system)	0x83(?data)	0x88(cfgfs)
 
+syspartno=0
+
 # sizes:
 # boot(raspberry) - fixed (100 MiB)
 # cfgfs - fixed (parameter, max. 16 MiB)
@@ -239,6 +241,7 @@ dksz=$(dkgetsz "$tgt")
 # system - everything else
 
 if [[ $target = raspberry-pi ]]; then
+	syspartno=1
 	bootfssz=100
 	if (( grub )); then
 		print -u2 "Cannot combine GRUB with $target"
@@ -460,6 +463,8 @@ dd if=$rnddev bs=4 count=1 2>/dev/null | \
     dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1B8)) 2>/dev/null
 print -n '\0\0' | \
     dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1BC)) 2>/dev/null
+partuuid=$(dd if="$T/firsttrack" bs=1 count=4 skip=$((0x1B8)) 2>/dev/null | \
+    hexdump -e '1/4 "%08x"')-0$((syspartno+1))
 
 (( quiet )) || print Cleaning out partitions...
 (( datafssz )) && dd if=/dev/zero bs=1048576 count=1 \
@@ -467,9 +472,9 @@ print -n '\0\0' | \
 dd if=/dev/zero bs=1048576 count=1 seek=$((spartofs / 2048)) 2>/dev/null
 
 (( quiet )) || if (( grub )); then
-	print Writing MBR and GRUB2 to target device...
+	print Writing MBR and GRUB2 to target device... system PARTUUID=$partuuid
 else
-	print Writing MBR to target device...
+	print Writing MBR to target device... system PARTUUID=$partuuid
 fi
 dd if="$T/firsttrack" of="$tgt"
 
@@ -487,7 +492,6 @@ case $target {
 
 (( quiet )) || print "Creating filesystem on ${rootpart}..."
 (( noformat )) || create_fs "$rootpart" ADKROOT ext4
-#partuuid=$(/sbin/fdisk -l /dev/$tgt | awk '/Disk identifier/ { print $3 "-01" }'|sed -e "s#^0x##")
 
 (( quiet )) || print Extracting installation archive...
 mount_fs "$rootpart" "$R" ext4
