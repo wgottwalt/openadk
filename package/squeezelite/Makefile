@@ -4,8 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		squeezelite
-PKG_VERSION:=		1.5
-PKG_RELEASE:=		3
+PKG_VERSION:=		1.6.4
+PKG_RELEASE:=		1
 PKG_MD5SUM:=		7605af4d64291495645f88575a564475
 PKG_DESCR:=		headless squeezebox emulator
 PKG_SECTION:=		mm/audio
@@ -16,14 +16,12 @@ PKG_BUILDDEP+=		faad2
 PKG_URL:=		http://code.google.com/p/squeezelite/
 PKG_SITES:=		http://openadk.org/distfiles/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-PKG_LIBC_DEPENDS:=	glibc musl
-
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SQUEEZELITE,squeezelite,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CPPFLAGS+=       -D_GNU_SOURCE -D_POSIX_SOURCE
+TARGET_LDFLAGS+=	-ldl
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
