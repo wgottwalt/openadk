@@ -169,6 +169,9 @@ case $ostype {
 	match=\'${basedev}\''?(s+([0-9]))'
 	function mount_fs {
 	}
+	function umount_fs {
+		diskutil unmount "$1"
+	}
 	function create_fs {
 		if [[ $3 = ext4 ]]; then
 			fstype=UFSD_EXTFS4
@@ -192,6 +195,9 @@ case $ostype {
 	match=\'${basedev}\''+([0-9])'
 	function mount_fs {
 		mount -t "$3" "$1" "$2"
+	}
+	function umount_fs {
+		umount "$1"
 	}
 	function create_fs {
 		mkfs.$3 "$1"
@@ -498,7 +504,7 @@ if (( datafssz )); then
 	(( noformat )) || create_fs "$datapart" ADKDATA ext4
 	mount_fs "$datapart" "$D" ext4
 	mkdir -m0755 "$D/mpd" "$D/xbmc"
-	umount "$D"
+	umount_fs "$D"
 fi
 
 (( quiet )) || print Extracting installation archive...
@@ -516,7 +522,7 @@ case $target {
 		[[ -e "$x" ]] && mv -f "$R"/boot/* "$B/"
 		break
 	done
-	umount "$B"
+	umount_fs "$B"
 	;;
 (solidrun-imx6)
 	for x in "$fwdir"/*.dtb; do
@@ -561,7 +567,7 @@ fi
 (( quiet )) || print Finishing up...
 cd "$ADK_TOPDIR"
 sync
-umount "$R"
+umount_fs "$R"
 sync
 
 rm -rf "$T"
