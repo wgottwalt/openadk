@@ -250,17 +250,18 @@ if ! which gxargs >/dev/null 2>&1; then
 	fi
 fi
 
-if which grep >/dev/null 2>&1; then
-	if ! grep --version 2>/dev/null|grep GNU >/dev/null;then
-		host_build_grep=1
-	fi
-fi
-
 if ! which gfind >/dev/null 2>&1; then
 	if which find >/dev/null 2>&1; then
 		if ! find --version 2>/dev/null|grep GNU >/dev/null;then
 			host_build_findutils=1
 		fi
+	fi
+fi
+
+host_build_grep=0
+if which grep >/dev/null 2>&1; then
+	if ! grep --version 2>/dev/null|grep GNU >/dev/null;then
+		host_build_grep=1
 	fi
 fi
 

@@ -3,6 +3,8 @@
 
 config ADK_TARGET_CFLAGS
 	string
+	default "-march=v32" if ADK_CPU_CRIS_V32
+	default "-march=v10" if ADK_CPU_CRIS_V10
 	default "-mcpu=5208" if ADK_CPU_CF_5208
 	default "-mcpu=v7.10.d" if ADK_CPU_MICROBLAZE
 	default "-m4 -ml" if ADK_CPU_SH4 && ADK_little

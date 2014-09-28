@@ -12,6 +12,9 @@ endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
 include ${ADK_TOPDIR}/toolchain/uclibc/Makefile.inc
 endif
+ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
+include ${ADK_TOPDIR}/toolchain/uclibc-ng/Makefile.inc
+endif
 
 PKG_NAME:=		libstdcxx
 PKG_DESCR:=		c++ support library
