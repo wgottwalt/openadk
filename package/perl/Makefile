@@ -34,8 +34,9 @@ host-configure:
 	$(SED) "s#@@STAGING_HOST_DIR@@/perl-host#./perl#" ${WRKBUILD}/Makefile.SH 
 	$(SED) "s#@@LIB@@#-Ilib#" ${WRKBUILD}/Makefile.SH 
 	# darwin workaround
+	$(CP) ${WRKBUILD}/hints/darwin.sh ${WRKBUILD}/hints/darwin.sh.bak
 	$(SED) "s#^usedl.*##" ${WRKBUILD}/hints/darwin.sh
-	(cd ${WRKBUILD}; ${BASH} ./Configure -des -Duseperlio -Uusedl -Uusethreads -Uuseshrplib -Dprefix=${STAGING_HOST_DIR}/usr)
+	(cd ${WRKBUILD}; ${BASH} ./Configure -des -Uusedl -Uusethreads -Duseperlio -Uuseshrplib -Dprefix=${STAGING_HOST_DIR}/usr)
 
 host-build:
 	cd ${WRKBUILD} && env CC_FOR_BUILD="gcc" ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
@@ -44,8 +45,16 @@ host-build:
 perl-hostinstall:
 	cd ${WRKBUILD} && env CC_FOR_BUILD="gcc" ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 		${HOST_MAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
-	mv ${STAGING_HOST_DIR}/usr/bin/perl ${STAGING_HOST_DIR}/usr/bin/perl-host
+	mv ${STAGING_HOST_DIR}/usr/bin/perl ${STAGING_HOST_DIR}/usr/bin/perl-static
 	cp ${WRKBUILD}/miniperl ${STAGING_HOST_DIR}/usr/bin
+	# now build perl a second time for perl modules (dynamic)
+	$(CP) ${WRKBUILD}/hints/darwin.sh.bak ${WRKBUILD}/hints/darwin.sh
+	(cd ${WRKBUILD}; rm config.sh; ${BASH} ./Configure -des -Uuseshrplib -Dprefix=${STAGING_HOST_DIR}/usr)
+	cd ${WRKBUILD} && env CC_FOR_BUILD="gcc" ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
+	cd ${WRKBUILD} && env CC_FOR_BUILD="gcc" ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
+	mv ${STAGING_HOST_DIR}/usr/bin/perl ${STAGING_HOST_DIR}/usr/bin/perl-host
 
 do-configure:
 	sed \
@@ -71,7 +80,7 @@ do-build:
 	(cd ${WRKBUILD}; $(MAKE))
 
 do-install:
-	(cd ${WRKBUILD}; $(STAGING_HOST_DIR)/usr/bin/perl-host installperl --destdir=${WRKINST})
+	(cd ${WRKBUILD}; $(STAGING_HOST_DIR)/usr/bin/perl-static installperl --destdir=${WRKINST})
 
 perl-install:
 	${INSTALL_DIR} ${IDIR_PERL}/usr/bin
@@ -79,7 +88,7 @@ perl-install:
 	${CP} ${WRKINST}/usr/lib/perl5/${PKG_VERSION}/* \
 		${IDIR_PERL}/usr/lib/perl5/${PKG_VERSION}
 	${INSTALL_BIN} ${WRKINST}/usr/bin/perl ${IDIR_PERL}/usr/bin/
-	touch $(STAGING_TARGET_DIR)/usr/lib/perl5/$(PKG_VERSION)/$(ADK_TARGET_CPU_ARCH)-linux/CORE/patchlevel-debian.h
+	touch $(IDIR_PERL)/usr/lib/perl5/$(PKG_VERSION)/$(ADK_TARGET_CPU_ARCH)-linux/CORE/patchlevel-debian.h
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

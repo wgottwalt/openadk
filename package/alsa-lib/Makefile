@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-lib
 PKG_VERSION:=		1.0.28
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_MD5SUM:=		c9e21b88a2b3e6e12ea7ba0f3b271fc3
 PKG_DESCR:=		sound library
 PKG_SECTION:=		libs/audio
@@ -34,7 +34,7 @@ CONFIGURE_ARGS+=	--disable-python
 alsa-lib-install:
 	${INSTALL_DIR} ${IDIR_ALSA_LIB}/usr/lib ${IDIR_ALSA_LIB}/usr/share/alsa
 	${CP} ${WRKINST}/usr/lib/libasound.so* ${IDIR_ALSA_LIB}/usr/lib
-	${CP} ${WRKINST}/usr/share/alsa/* ${IDIR_ALSA_LIB}/usr/share/alsa
+	${CP} ${WRKINST}/usr/share/alsa/alsa.conf ${IDIR_ALSA_LIB}/usr/share/alsa
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

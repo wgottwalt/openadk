@@ -20,6 +20,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,P5_AUDIO_SCAN,p5-audio-scan,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CFLAGS+=		-fPIC
+
 include $(ADK_TOPDIR)/mk/perl.mk
 
 CONFIG_STYLE:=		perl

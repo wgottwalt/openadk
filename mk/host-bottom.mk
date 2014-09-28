@@ -67,6 +67,15 @@ endif
 ifeq (${HOST_STYLE},manual)
 	${MAKE} host-configure $(MAKE_TRACE)
 endif
+ifeq (${HOST_STYLE},perl)
+	@$(CMD_TRACE) "configuring perl module... "
+	cd ${WRKBUILD}; \
+		PATH='${HOST_PATH}' \
+		PERL_MM_USE_DEFAULT=1 \
+		PERL_AUTOINSTALL=--skipdeps \
+		$(HOST_PERL_ENV) \
+		perl-host Makefile.PL ${HOST_CONFIGURE_ARGS}
+endif
 	touch $@
 
 host-build:

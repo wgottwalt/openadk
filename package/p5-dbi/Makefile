@@ -16,18 +16,27 @@ PKG_SITES:=		http://cpan.metacpan.org/authors/id/T/TI/TIMB/
 DISTFILES:=             DBI-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/DBI-${PKG_VERSION}
 
+include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,P5_DBI,p5-dbi,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,P5_DBI,p5-dbi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+TARGET_CFLAGS+=		-fPIC
 
 include $(ADK_TOPDIR)/mk/perl.mk
 
+HOST_STYLE:=		perl
 CONFIG_STYLE:=		perl
 XAKE_FLAGS+=		$(PERL_ENV)
+
+hostpost-install:
+	(cd $(WRKBUILD) && PATH='$(HOST_PATH)' $(HOST_PERL_ENV) make install) 
 
 p5-dbi-install:
 	$(INSTALL_DIR) $(IDIR_P5_DBI)$(PERL_SITEDIR)
 	$(CP) $(WRKINST)$(PERL_SITEDIR)/* \
 		$(IDIR_P5_DBI)$(PERL_SITEDIR)
 
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

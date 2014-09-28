@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		86cfaf477cb9ddc39508f74f4268fc79
 PKG_DESCR:=		self-contained rdbms in a dbi driver
 PKG_SECTION:=		dev/perl
-PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_DEPENDS:=		perl p5-dbi
+PKG_BUILDDEP:=		perl p5-dbi-host
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/I/IS/ISHIGAKI/
 
 DISTFILES:=             DBD-SQLite-${PKG_VERSION}.tar.gz
