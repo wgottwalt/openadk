@@ -64,10 +64,10 @@ else ifneq ($(filter cmake,${CONFIG_STYLE}),)
 		-e "s#@@TARGET_CFLAGS@@#$(TARGET_CFLAGS)#" \
 		-e "s#@@TARGET_CXXFLAGS@@#$(TARGET_CXXFLAGS)#" \
 		-e "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" \
-		-e "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" \
+		-e "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#g" \
 		$(SCRIPT_DIR)/toolchain.cmake.in > $(SCRIPT_DIR)/toolchain.cmake
 	(cd ${WRKBUILD} && PATH='${HOST_PATH}' \
-		cmake -Wno-dev -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+		cmake VERBOSE=1 -Wno-dev -DCMAKE_INSTALL_PREFIX:PATH=/usr \
 			-DCMAKE_TOOLCHAIN_FILE="$(SCRIPT_DIR)/toolchain.cmake" \
 			${CMAKE_FLAGS} ${WRKSRC})
 else ifneq ($(filter minimal,${CONFIG_STYLE}),)
