@@ -1,0 +1,11 @@
+--- lzo-2.08.orig/Makefile.am	2014-06-29 11:38:49.000000000 +0200
++++ lzo-2.08/Makefile.am	2014-09-28 16:32:15.000000000 +0200
+@@ -182,8 +182,6 @@ tests_sizes_LDADD     =
+ ##// SUBDIR minilzo
+ ##************************************************************************/
+ 
+-noinst_PROGRAMS += minilzo/testmini
+-
+ minilzo_testmini_SOURCES   = minilzo/testmini.c minilzo/minilzo.c
+ minilzo_testmini_SHORTNAME = t
+ minilzo_testmini_CPPFLAGS  = $(AM_CPPFLAGS)

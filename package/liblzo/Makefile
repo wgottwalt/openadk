@@ -22,6 +22,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},$(PKG_OPTS)))
 
+AUTOTOOL_STYLE:=	autoreconf
 MAKE_FLAGS+=		CFLAGS_O="${TARGET_CFLAGS}"
 
 liblzo-install:
