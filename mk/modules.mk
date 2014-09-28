@@ -1179,11 +1179,6 @@ $(eval $(call KMOD_template,SND_DMAENGINE_PCM,snd-dmaengine-pcm,\
 	$(MODULES_DIR)/kernel/sound/core/snd-pcm-dmaengine \
 ,45))
 
-
-$(eval $(call KMOD_template,SND_COMPRESS,snd-compress,\
-	$(MODULES_DIR)/kernel/sound/core/snd-compress \
-,45))
-
 $(eval $(call KMOD_template,SND_RAWMIDI,snd-rawmidi,\
 	$(MODULES_DIR)/kernel/sound/core/snd-hwdep \
 	$(MODULES_DIR)/kernel/sound/core/snd-rawmidi \
@@ -1254,7 +1249,7 @@ $(eval $(call KMOD_template,SND_IMX_SOC,snd-imx-soc,\
 	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-imx-hdmi \
 	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-imx-spdif \
 	$(MODULES_DIR)/kernel/sound/soc/fsl/snd-soc-imx-sgtl5000 \
-,60, kmod-snd-soc kmod-snd-compress))
+,60, kmod-snd-soc))
 
 $(eval $(call KMOD_template,SND_BCM2835,snd-bcm2835,\
 	$(MODULES_DIR)/kernel/sound/arm/snd-bcm2835 \
