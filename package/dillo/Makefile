@@ -27,8 +27,9 @@ $(eval $(call PKG_template,DILLO,dillo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 
 CONFIGURE_ENV+=		PNG_CONFIG=$(STAGING_TARGET_DIR)/scripts/libpng-config
 CONFIGURE_ARGS+=	--enable-ssl
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
-post-install:
+dillo-install:
 	$(INSTALL_DIR) $(IDIR_DILLO)/etc/dillo
 	$(INSTALL_DATA) $(WRKINST)/etc/dillo/* $(IDIR_DILLO)/etc/dillo
 	$(INSTALL_DIR) $(IDIR_DILLO)/usr/bin $(IDIR_DILLO)/usr/lib/dillo
