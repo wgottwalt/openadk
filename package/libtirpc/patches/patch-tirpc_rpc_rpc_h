@@ -1,5 +1,5 @@
---- libtirpc-0.2.3.orig/tirpc/rpc/rpc.h	2013-02-13 16:13:59.000000000 +0100
-+++ libtirpc-0.2.3/tirpc/rpc/rpc.h	2014-03-22 13:20:52.000000000 +0100
+--- libtirpc-0.2.4.orig/tirpc/rpc/rpc.h	2013-12-09 21:59:51.000000000 +0100
++++ libtirpc-0.2.4/tirpc/rpc/rpc.h	2014-09-28 17:10:36.000000000 +0200
 @@ -79,9 +79,11 @@
  #define UDPMSGSIZE 8800
  #endif
@@ -14,7 +14,7 @@
  extern int registerrpc(int, int, int, char *(*)(char [UDPMSGSIZE]),
      xdrproc_t, xdrproc_t);
  extern int callrpc(const char *, int, int, int, xdrproc_t, void *,
-@@ -93,18 +95,24 @@ struct netbuf *uaddr2taddr(const struct
+@@ -93,18 +95,24 @@ struct netbuf *uaddr2taddr(const struct 
  
  struct sockaddr;
  extern int bindresvport_sa(int, struct sockaddr *);

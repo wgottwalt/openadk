@@ -1,5 +1,5 @@
---- libtirpc-0.2.3.orig/tirpc/rpc/rpc_msg.h	2013-02-13 16:13:59.000000000 +0100
-+++ libtirpc-0.2.3/tirpc/rpc/rpc_msg.h	2014-03-22 13:20:52.000000000 +0100
+--- libtirpc-0.2.4.orig/tirpc/rpc/rpc_msg.h	2013-12-09 21:59:51.000000000 +0100
++++ libtirpc-0.2.4/tirpc/rpc/rpc_msg.h	2014-09-28 17:10:36.000000000 +0200
 @@ -161,7 +161,9 @@ struct rpc_msg {
  #define	acpted_rply	ru.RM_rmb.ru.RP_ar
  #define	rjcted_rply	ru.RM_rmb.ru.RP_dr
@@ -11,7 +11,7 @@
  /*
   * XDR routine to handle a rpc message.
   * xdr_callmsg(xdrs, cmsg)
-@@ -210,6 +212,8 @@ extern bool_t	xdr_rejected_reply(XDR *,
+@@ -210,6 +212,8 @@ extern bool_t	xdr_rejected_reply(XDR *, 
   * 	struct rpc_err *error;
   */
  extern void	_seterr_reply(struct rpc_msg *, struct rpc_err *);
