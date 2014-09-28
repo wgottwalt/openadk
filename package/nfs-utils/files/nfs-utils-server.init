@@ -7,8 +7,8 @@ case $1 in
 autostop) ;;
 autostart)
 	test x"${rpcbind:-NO}" = x"NO" && exit 0
-	test x"${nfsd:-NO}" = x"NO" && exit 0
-	test x"$nfsd" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
+	test x"${nfs_utils_server:-NO}" = x"NO" && exit 0
+	test x"$nfs_utils_server" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
 	exec sh $0 start
 	;;
 start)
