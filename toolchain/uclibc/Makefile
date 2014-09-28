@@ -40,12 +40,6 @@ ifeq ($(ADK_TARGET_USE_GNU_HASHSTYLE),y)
 else
 	$(SED) 's/.*\(LDSO_GNU_HASH_SUPPORT\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifneq ($(ADK_PACKAGE_GDB),)
-	$(SED) "s/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/" ${WRKBUILD}/.config
-endif
-ifneq ($(ADK_PACKAGE_GDBSERVER),)
-	$(SED) "s/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/" ${WRKBUILD}/.config
-endif
 ifeq ($(ADK_TARGET_USE_SSP),y)
 	$(SED) 's,.*UCLIBC_HAS_SSP,UCLIBC_HAS_SSP=y,' ${WRKBUILD}/.config
 	echo "UCLIBC_HAS_SSP_COMPAT=n" >> ${WRKBUILD}/.config
