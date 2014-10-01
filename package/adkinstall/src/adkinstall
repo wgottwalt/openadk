@@ -26,6 +26,16 @@ EOF
 	exit 1
 }
 
+function ibm-x40-help {
+	cat >&2 <<EOF
+Syntax: adkinstall -a <archive>
+	-a: archive
+	-f: filesystem (default ext4)
+	-h: help text
+EOF
+	exit 1
+}
+
 function pcengines-apu-help {
 	cat >&2 <<EOF
 Syntax: adkinstall -a <archive>
@@ -38,6 +48,33 @@ EOF
 
 
 case $target {
+(ibm-x40)
+	cfgfssize=32768
+	fs=ext4
+	while getopts "ha:f:" ch; do
+	case $ch in
+		a)
+			archive=$OPTARG
+			;;
+		f)
+			fs=$OPTARG
+			;;
+		h)
+			ibm-x40-help
+			exit 1
+			;;
+		*)
+			ibm-x40-help
+			exit 1
+			;;
+	esac
+	done
+	shift $((OPTIND - 1))
+	if [ $OPTIND -eq 1 ];then
+		ibm-x40-help
+		exit 1
+	fi
+	;;
 (pcengines-apu)
 	cfgfssize=32768
 	fs=ext4
@@ -107,8 +144,6 @@ case $target {
 	exit 1
 	;;
 }
-
-	
 
 if [ "$target" = "mikrotik-rb532" ];then
 	if [ $cf -eq 0 -a $nand -eq 0 ];then
@@ -194,6 +229,21 @@ function fix_perm {
 }
 
 case $target {
+(ibm-x40)
+	get_max_size /dev/sda
+	create_label /dev/sda
+	create_partition /dev/sda ext2 16385 $rootsize
+	create_partition /dev/sda ext2 $(($rootsize+1)) $(($maxsize-1))
+	set_boot_flag /dev/sda 1
+	change_part_type /dev/sda 2 88
+	create_filesystem /dev/sda $fs 1
+	mdev -s
+	mount_fs /dev/sda 1 $fs /mnt
+	extract_archive $archive /mnt
+	grub_install /dev/sda
+	fix_perm /mnt
+	umount /mnt
+	;;
 (pcengines-apu)
 	get_max_size /dev/sda
 	create_label /dev/sda
