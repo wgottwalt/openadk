@@ -30,6 +30,10 @@ else
 	$(SED) 's/.*\(ARCH_LITTLE_ENDIAN\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(ARCH_WANTS_LITTLE_ENDIAN\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
+ifeq ($(ADK_TARGET_UCLINUX),y)
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SEP_DATA\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(ARCH_USE_MMU\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),)
 	$(SED) 's/.*\(HAVE_SHARED\).*/\1=y/' ${WRKBUILD}/.config
 else
@@ -39,12 +43,6 @@ ifeq ($(ADK_TARGET_USE_GNU_HASHSTYLE),y)
 	$(SED) 's/.*\(LDSO_GNU_HASH_SUPPORT\).*/#\1=y/' ${WRKBUILD}/.config
 else
 	$(SED) 's/.*\(LDSO_GNU_HASH_SUPPORT\).*/# \1 is not set/' ${WRKBUILD}/.config
-endif
-ifneq ($(ADK_PACKAGE_GDB),)
-	$(SED) "s/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/" ${WRKBUILD}/.config
-endif
-ifneq ($(ADK_PACKAGE_GDBSERVER),)
-	$(SED) "s/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/" ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_USE_SSP),y)
 	$(SED) 's,.*UCLIBC_HAS_SSP,UCLIBC_HAS_SSP=y,' ${WRKBUILD}/.config
@@ -154,7 +152,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 
 $(WRKBUILD)/.fixup:
 ifeq ($(ADK_UCLIBC_TEST),y)
-	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
+	PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		TEST_INSTALLED_UCLIBC=1 \
 		UCLIBC_ONLY=1 \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \

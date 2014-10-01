@@ -10,7 +10,7 @@ PKG_MD5SUM:=		f40d9a47c90d60791eeecb484f8df5ee
 PKG_DESCR:=		garbage collector library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		libatomic_ops
-HOST_BUILDDEP:=		libatomic_ops-host
+HOST_BUILDDEP:=		libatomic_ops-host libgc-host
 PKG_URL:=		http://www.hboehm.info/gc/
 PKG_SITES:=		http://www.hboehm.info/gc/gc_source/
 PKG_OPTS:=		dev
@@ -23,6 +23,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,LIBGC,libgc,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBGC,libgc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+TARGET_CPPFLAGS+=	-DNO_GETCONTEXT
 
 libgc-install:
 	$(INSTALL_DIR) $(IDIR_LIBGC)/usr/lib

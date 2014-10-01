@@ -10,7 +10,7 @@ PKG_MD5SUM:=		1b845a983a50b8dec0169ac48479eacc
 PKG_DESCR:=		console web browser
 PKG_SECTION:=		app/browser
 PKG_DEPENDS:=		libgc libncurses
-PKG_BUILDDEP:=		libgc-host libgc ncurses
+PKG_BUILDDEP:=		libgc ncurses
 PKG_URL:=		http://w3m.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=w3m/}
 
@@ -23,6 +23,7 @@ $(eval $(call PKG_template,W3M,w3m,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},
 TARGET_LDFLAGS+=	-lncurses -ltinfo
 CONFIGURE_ENV+=		ac_cv_func_setpgrp_void=yes
 CONFIGURE_ARGS+=	--with-termlib=ncurses \
+			--with-gc=${STAGING_TARGET_DIR}/usr \
 			--enable-image=no
 
 w3m-install:
