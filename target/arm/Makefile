@@ -47,13 +47,13 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 	@echo "Use following command to install it on SD card:"
 	@echo "sudo ./scripts/install.sh raspberry-pi /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Use following command to install with a writable data partition"
-	@echo "sudo ./scripts/install.sh -d raspberry-pi /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "sudo ./scripts/install.sh -d 256 raspberry-pi /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	@echo "Use following command to install it on SD card:"
 	@echo "sudo ./scripts/install.sh solidrun-imx6 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Use following command to install with a writable data partition"
-	@echo "sudo ./scripts/install.sh -d solidrun-imx6 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "sudo ./scripts/install.sh -d 256 solidrun-imx6 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
