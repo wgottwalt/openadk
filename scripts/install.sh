@@ -473,9 +473,9 @@ partuuid=$(dd if="$T/firsttrack" bs=1 count=4 skip=$((0x1B8)) 2>/dev/null | \
     hexdump -e '1/4 "%08x"')-0$((syspartno+1))
 
 (( quiet )) || print Cleaning out partitions...
-(( datafssz )) && dd if=/dev/zero bs=1048576 count=1 \
-    seek=$((cyls - cfgfs - datafssz)) 2>/dev/null
-dd if=/dev/zero bs=1048576 count=1 seek=$((spartofs / 2048)) 2>/dev/null
+(( datafssz )) && dd if=/dev/zero of="$tgt" bs=1048576 count=1 \
+    seek=$((cyls - cfgfs - datafssz)) 
+dd if=/dev/zero bs=1048576 of="$tgt" count=1 seek=$((spartofs / 2048))
 
 (( quiet )) || if (( grub )); then
 	print Writing MBR and GRUB2 to target device... system PARTUUID=$partuuid
