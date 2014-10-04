@@ -8,84 +8,84 @@ config ADK_KERNEL_SND_USB
 	boolean
 
 config ADK_KERNEL_SND_SOC
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_ARM
 	boolean
 
 config ADK_KERNEL_SND_SOC_GENERIC_DMAENGINE_PCM
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_DMAENGINE_PCM
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_SOC_SPDIF
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_SOC_FSL_ASRC
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_SOC_FSL_SPDIF
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_SOC_IMX_SGTL5000
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_SOC_IMX_PCM_DMA
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_SOC_IMX_HDMI_DMA
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_SOC_IMX_SPDIF
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_SOC_IMX_HDMI
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_PXA2XX_AC97
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_PXA2XX_SOC
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_TIMER
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_PCM
 	select ADK_KERNEL_SND_TIMER
 	select ADK_KERNEL_SND_DMAENGINE_PCM
 	select ADK_KERNEL_SND_PCM_DMAENGINE
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_HWDEP
-	tristate
+	boolean
 
 config ADK_KERNEL_SOUND
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_RAWMIDI
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_AC97_CODEC
-	tristate
+	boolean
 
 config ADK_KERNEL_SND_SOC_I2C_AND_SPI
 	boolean
 
 config ADK_KERNEL_SND_SOC_WM8804
-	tristate
+	boolean
 	select ADK_KERNEL_SND_SOC_I2C_AND_SPI
 
 config ADK_KERNEL_SND_SOC_PCM5102A
-	tristate
+	boolean
 	select ADK_KERNEL_SND_SOC_I2C_AND_SPI
 
 config ADK_KERNEL_SND_PCM_DMAENGINE
-	tristate
+	boolean
 
 config ADK_KERNEL_SND
-	tristate
+	boolean
 	select ADK_KERNEL_SOUND
 	select ADK_KERNEL_SND_PCM
 	select ADK_KERNEL_SND_HWDEP
@@ -93,12 +93,12 @@ config ADK_KERNEL_SND
 
 config ADK_KERNEL_SND_INTEL8X0
 	prompt "Intel AC97 driver"
-	tristate
+	boolean
 	select ADK_KERNEL_SND
 	select ADK_KERNEL_SND_PCI
 	select ADK_KERNEL_SND_AC97_CODEC
-	default m if ADK_TARGET_SYSTEM_IBM_X40
-	default m if ADK_TARGET_QEMU_WITH_AUDIO
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_QEMU_WITH_AUDIO
 	default n
 	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_QEMU_SYSTEM_X86 || ADK_TARGET_QEMU_SYSTEM_X86_64
 	help
@@ -106,7 +106,7 @@ config ADK_KERNEL_SND_INTEL8X0
 
 config ADK_KERNEL_SND_VIA82XX
 	prompt "VIA82XX driver"
-	tristate
+	boolean
 	select ADK_KERNEL_SND
 	default n
 	depends on ADK_TARGET_WITH_PCI
@@ -115,7 +115,7 @@ config ADK_KERNEL_SND_VIA82XX
 
 config ADK_KERNEL_SND_ENS1370
 	prompt "Ensoniq 1370 driver"
-	tristate
+	boolean
 	select ADK_KERNEL_SND
 	default n
 	depends on ADK_TARGET_WITH_PCI
@@ -124,12 +124,12 @@ config ADK_KERNEL_SND_ENS1370
 
 config ADK_KERNEL_SND_CS5535AUDIO
 	prompt "AMD CS5535 driver"
-	tristate
+	boolean
 	select ADK_KERNEL_SND_PCI
 	select ADK_KERNEL_SND_AC97_CODEC
 	select ADK_KERNEL_SND
-	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default n
 	depends on ADK_TARGET_WITH_PCI
 	help
@@ -137,7 +137,7 @@ config ADK_KERNEL_SND_CS5535AUDIO
 
 config ADK_KERNEL_SND_PXA2XX_SOC_SPITZ
 	prompt "Sharp Zaurus SoC"
-	tristate
+	boolean
 	select ADK_KERNEL_SND
 	select ADK_KERNEL_SND_ARM
 	select ADK_KERNEL_SND_PXA2XX_AC97
@@ -145,21 +145,20 @@ config ADK_KERNEL_SND_PXA2XX_SOC_SPITZ
 	select ADK_KERNEL_SND_SOC
 	select ADK_KERNEL_SND_PXA2XX_SOC
 	depends on ADK_TARGET_SYSTEM_SHARP_ZAURUS
-	default m if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default y if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default n
 
 config ADK_KERNEL_SND_BCM2835
-	prompt "Raspberry PI SoC"
-	tristate
+	prompt "Raspberry PI onboard soundcard"
+	boolean
 	select ADK_KERNEL_SND
 	select ADK_KERNEL_SND_ARM
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default m if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
 config ADK_KERNEL_SND_BCM2708_SOC_I2S
-	prompt "Raspberry PI I2S driver"
-	tristate
+	boolean
 	select ADK_KERNEL_SND
 	select ADK_KERNEL_SND_ARM
 	select ADK_KERNEL_SND_SOC
@@ -172,19 +171,17 @@ config ADK_KERNEL_SND_BCM2708_SOC_I2S
 
 config ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_DAC
 	prompt "Raspberry PI hifiberry DAC"
-	tristate
+	boolean
 	select ADK_KERNEL_DMA_BCM2708
-	select ADK_KERNEL_REGMAP_MMIO
 	select ADK_KERNEL_SND_BCM2708_SOC_I2S
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default m if ADK_PKG_MPDBOX
+	default y if ADK_PKG_MPDBOX
 	default n
 
 config ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_DIGI
 	prompt "Raspberry PI hifiberry DIGI"
-	tristate
+	boolean
 	select ADK_KERNEL_DMA_BCM2708
-	select ADK_KERNEL_REGMAP_MMIO
 	select ADK_KERNEL_SND_BCM2708_SOC_I2S
 	select ADK_KERNEL_SND_SOC_WM8804
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
@@ -192,27 +189,25 @@ config ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_DIGI
 
 config ADK_KERNEL_SND_BCM2708_SOC_RPI_DAC
 	prompt "Raspberry PI RPI-DAC"
-	tristate
+	boolean
 	select ADK_KERNEL_DMA_BCM2708
-	select ADK_KERNEL_REGMAP_MMIO
 	select ADK_KERNEL_SND_BCM2708_SOC_I2S
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default m if ADK_PKG_MPDBOX
+	default y if ADK_PKG_MPDBOX
 	default n
 
 config ADK_KERNEL_SND_BCM2708_SOC_IQAUDIO_DAC
 	prompt "Raspberry PI IQAudio-DAC"
-	tristate
+	boolean
 	select ADK_KERNEL_DMA_BCM2708
-	select ADK_KERNEL_REGMAP_MMIO
 	select ADK_KERNEL_SND_BCM2708_SOC_I2S
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default m if ADK_PKG_MPDBOX
+	default y if ADK_PKG_MPDBOX
 	default n
 
 config ADK_KERNEL_SND_IMX_SOC
 	prompt "Solidrun SoC sound chip"
-	tristate
+	boolean
 	select ADK_KERNEL_SND
 	select ADK_KERNEL_SND_SOC
 	select ADK_KERNEL_SND_SOC_GENERIC_DMAENGINE_PCM
@@ -229,7 +224,7 @@ config ADK_KERNEL_SND_IMX_SOC
 	select ADK_KERNEL_SND_PCM_DMAENGINE
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	depends on ADK_KERNEL_VERSION_3_14
-	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
 endmenu
