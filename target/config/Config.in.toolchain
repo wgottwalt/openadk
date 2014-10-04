@@ -41,6 +41,7 @@ config ADK_TOOLCHAIN_GCC_4_8_3
 	depends on !ADK_LINUX_ARC
 	depends on !ADK_LINUX_AVR32
 	depends on !ADK_LINUX_CRIS
+	depends on !ADK_LINUX_TILE
 
 config ADK_TOOLCHAIN_GCC_4_9_1
 	prompt "4.9.1"

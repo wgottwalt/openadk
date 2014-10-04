@@ -46,6 +46,9 @@ config ADK_CPU_ATHLON
 config ADK_CPU_ARC
 	boolean
 
+config ADK_CPU_TILE
+	boolean
+
 config ADK_CPU_CRIS_V10
 	boolean
 
@@ -160,6 +163,7 @@ config ADK_TARGET_CPU_ARCH
 	default "sh4eb" if ADK_LINUX_SH && ADK_big
 	default "sparc" if ADK_LINUX_SPARC
 	default "sparc64" if ADK_LINUX_SPARC64
+	default "tilegx" if ADK_CPU_TILE
 	default "x86_64" if ADK_CPU_X86_64
 	default "x86_64" if ADK_CPU_AMDFAM10
 	default "xtensa" if ADK_LINUX_XTENSA

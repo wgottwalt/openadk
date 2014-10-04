@@ -10,7 +10,7 @@ PKG_MD5SUM:=		1b845a983a50b8dec0169ac48479eacc
 PKG_DESCR:=		console web browser
 PKG_SECTION:=		app/browser
 PKG_DEPENDS:=		libgc libncurses
-PKG_BUILDDEP:=		libgc ncurses
+PKG_BUILDDEP:=		libgc-host libgc ncurses
 PKG_URL:=		http://w3m.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=w3m/}
 

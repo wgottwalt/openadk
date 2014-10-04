@@ -1,0 +1,11 @@
+--- gdb-7.8.orig/gdb/common/linux-ptrace.h	2014-07-29 14:37:42.000000000 +0200
++++ gdb-7.8/gdb/common/linux-ptrace.h	2014-10-04 08:25:08.000000000 +0200
+@@ -23,7 +23,7 @@ struct buffer;
+ #include <sys/ptrace.h>
+ 
+ #ifdef __UCLIBC__
+-#if !(defined(__UCLIBC_HAS_MMU__) || defined(__ARCH_HAS_MMU__))
++#if !defined(__UCLIBC_HAS_MMU__)
+ /* PTRACE_TEXT_ADDR and friends.  */
+ #include <asm/ptrace.h>
+ #define HAS_NOMMU
