@@ -1,0 +1,106 @@
+From 45064565100b67ff2f960e93d580449b720a66c9 Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbx@openadk.org>
+Date: Sat, 6 Sep 2014 01:52:10 +0200
+Subject: [PATCH] fix linuxthreads for coldfire nommu
+
+Signed-off-by: Waldemar Brodkorb <wbx@openadk.org>
+---
+ libpthread/linuxthreads/sysdeps/m68k/pspinlock.c     | 20 +++++++++++++++-----
+ libpthread/linuxthreads/sysdeps/m68k/pt-machine.h    | 11 +++++++++--
+ libpthread/linuxthreads/sysdeps/pthread/herrno-loc.c |  2 ++
+ 3 files changed, 26 insertions(+), 7 deletions(-)
+
+diff --git a/libpthread/linuxthreads/sysdeps/m68k/pspinlock.c b/libpthread/linuxthreads/sysdeps/m68k/pspinlock.c
+index c26a278..af77c2a 100644
+--- a/libpthread/linuxthreads/sysdeps/m68k/pspinlock.c
++++ b/libpthread/linuxthreads/sysdeps/m68k/pspinlock.c
+@@ -27,10 +27,15 @@ __pthread_spin_lock (pthread_spinlock_t *lock)
+   unsigned int val;
+ 
+   do
+-    __asm__ __volatile__ ("tas %1; sne %0"
+-		  : "=dm" (val), "=m" (*lock)
+-		  : "m" (*lock)
+-		  : "cc");
++    __asm__ __volatile__ (
++#if !defined(__mcoldfire__) && !defined(__mcf5200__) && !defined(__m68000)
++		"tas %1; sne %0"
++#else
++		"bset #7,%1; sne %0"
++#endif
++		: "=dm" (val), "=m" (*lock)
++		: "m" (*lock)
++		: "cc");
+   while (val);
+ 
+   return 0;
+@@ -43,7 +48,12 @@ __pthread_spin_trylock (pthread_spinlock_t *lock)
+ {
+   unsigned int val;
+ 
+-  __asm__ __volatile__ ("tas %1; sne %0"
++  __asm__ __volatile__ (
++#if !defined(__mcoldfire__) && !defined(__mcf5200__) && !defined(__m68000)
++		"tas %1; sne %0"
++#else
++		"bset #7,%1; sne %0"
++#endif
+ 		: "=dm" (val), "=m" (*lock)
+ 		: "m" (*lock)
+ 		: "cc");
+diff --git a/libpthread/linuxthreads/sysdeps/m68k/pt-machine.h b/libpthread/linuxthreads/sysdeps/m68k/pt-machine.h
+index e2d7bdc..1eb9fd5 100644
+--- a/libpthread/linuxthreads/sysdeps/m68k/pt-machine.h
++++ b/libpthread/linuxthreads/sysdeps/m68k/pt-machine.h
+@@ -28,12 +28,18 @@
+ #endif
+ 
+ /* Spinlock implementation; required.  */
++PT_EI long int testandset (int *spinlock);
+ PT_EI long int
+ testandset (int *spinlock)
+ {
+   char ret;
+ 
+-  __asm__ __volatile__("tas %1; sne %0"
++  __asm__ __volatile__(
++#if !defined(__mcoldfire__) && !defined(__mcf5200__) && !defined(__m68000)
++	"tas %1; sne %0"
++#else
++	"bset #7,%1; sne %0"
++#endif
+        : "=dm"(ret), "=m"(*spinlock)
+        : "m"(*spinlock)
+        : "cc");
+@@ -50,6 +56,7 @@ register char * stack_pointer __asm__ ("%sp");
+ 
+ /* Compare-and-swap for semaphores. */
+ 
++#if !defined(__mcoldfire__) && !defined(__mcf5200__) && !defined(__mc68000)
+ #define HAS_COMPARE_AND_SWAP
+ PT_EI int
+ __compare_and_swap (long int *p, long int oldval, long int newval)
+@@ -63,5 +70,5 @@ __compare_and_swap (long int *p, long int oldval, long int newval)
+ 
+   return ret;
+ }
+-
++#endif
+ #endif /* pt-machine.h */
+diff --git a/libpthread/linuxthreads/sysdeps/pthread/herrno-loc.c b/libpthread/linuxthreads/sysdeps/pthread/herrno-loc.c
+index 706faef..634c752 100644
+--- a/libpthread/linuxthreads/sysdeps/pthread/herrno-loc.c
++++ b/libpthread/linuxthreads/sysdeps/pthread/herrno-loc.c
+@@ -16,7 +16,9 @@
+    <http://www.gnu.org/licenses/>.  */
+ 
+ #include <netdb.h>
++#ifdef __UCLIBC_HAS_TLS__
+ #include <tls.h>
++#endif
+ #include <linuxthreads/internals.h>
+ #include <sysdep-cancel.h>
+ 
+-- 
+2.0.1
+
