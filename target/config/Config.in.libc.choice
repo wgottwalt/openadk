@@ -15,6 +15,7 @@ config ADK_TARGET_LIB_UCLIBC_NG
 		   !ADK_LINUX_MICROBLAZE && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
+		   !ADK_LINUX_TILE && \
 		   !ADK_x32
 	help
 	  http://uclibc-ng.org
@@ -59,6 +60,7 @@ config ADK_TARGET_LIB_UCLIBC
 		   !ADK_LINUX_MICROBLAZE && \
 		   !ADK_LINUX_SPARC64 && \
 		   !ADK_LINUX_PPC64 && \
+		   !ADK_LINUX_TILE && \
 		   !ADK_x32
 	help
  	  http://uclibc.org
