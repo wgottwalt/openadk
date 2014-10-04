@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		cmake
 PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		21a1c85e1a3b803c4b48e7ff915a863e
+PKG_MD5SUM:=		db4c687a31444a929d2fdc36c4dfb95f
 PKG_DESCR:=		cmake utility
 PKG_SECTION:=		dev/tools
 PKG_URL:=		http://www.cmake.org/
