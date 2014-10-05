@@ -282,8 +282,10 @@ ifeq ($(ADK_TARGET_USE_GOLD),y)
 	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf $(GNU_TARGET_NAME)-ld.gold $(GNU_TARGET_NAME)-ld)
 else
+ifeq (ADK_TOOLCHAIN_BINUTILS_2_20_1),)
 	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf $(GNU_TARGET_NAME)-ld.bfd $(GNU_TARGET_NAME)-ld)
+endif
 endif
 	cd $(STAGING_TARGET_DIR)/lib && \
 		ln -sf libstdc++.so.6.0.$(LIBSTDCXXVER) libstdc++.so && \
