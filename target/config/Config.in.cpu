@@ -136,6 +136,7 @@ config ADK_TARGET_CPU_ARCH
 	default "armv6" if ADK_LINUX_ARM && ADK_little && ADK_armv6
 	default "armv7a" if ADK_LINUX_ARM && ADK_little && ADK_armv7a
 	default "arm" if ADK_LINUX_ARM && ADK_little
+	default "armeb" if ADK_LINUX_ARM && ADK_big
 	default "arc" if ADK_CPU_ARC && ADK_little
 	default "arceb" if ADK_CPU_ARC && ADK_big
 	default "avr32" if ADK_CPU_AVR32

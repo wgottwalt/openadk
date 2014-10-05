@@ -4,7 +4,7 @@
 choice ADK_TARGET_ARM_CPU_ARCH
 prompt "CPU architecture"
 depends on ADK_TARGET_TOOLCHAIN && ADK_LINUX_ARM
-default ADK_CPU_ARMV7
+default ADK_CPU_ARMV7A
 
 config ADK_CPU_ARMV5TE
         boolean "armv5te"
