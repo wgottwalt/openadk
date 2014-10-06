@@ -7,13 +7,25 @@ config ADK_KERNEL_I2C
 config ADK_KERNEL_I2C_CHARDEV
  	tristate
 
-config ADK_KERNEL_I2C_IMX
-	prompt "I2C driver for IMX6"
+config ADK_KERNEL_I2C_BCM2835
+	prompt "I2C driver for Raspberry PI"
 	tristate
-	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_REGMAP_I2C
 	select ADK_KERNEL_I2C_CHARDEV
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
+	help
+	  I2C driver for Raspberry PI.
+
+config ADK_KERNEL_I2C_IMX
+	prompt "I2C driver for Solidrun IMX6"
+	tristate
+	select ADK_KERNEL_I2C
+	select ADK_KERNEL_REGMAP_I2C
+	select ADK_KERNEL_I2C_CHARDEV
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 	help
