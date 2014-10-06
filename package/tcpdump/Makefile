@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		tcpdump
 PKG_VERSION:=		4.6.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		dab267ec30216a069747d10314079ec7
 PKG_DESCR:=		tool for network monitoring and data acquisition
 PKG_SECTION:=		net/debug
@@ -43,9 +43,6 @@ XAKE_FLAGS+=           GCC_HONOUR_COPTS=s
 
 tcpdump-install:
 	${INSTALL_DIR} ${IDIR_TCPDUMP}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/tcpdump ${IDIR_TCPDUMP}/usr/sbin/
-ifneq (${ADK_PACKAGE_TCPDUMP_WITH_CHROOT},)
-	${INSTALL_DIR} ${IDIR_TCPDUMP}/var/lib/tcpdump
-endif
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/tcpdump ${IDIR_TCPDUMP}/usr/sbin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
