@@ -57,8 +57,7 @@ configuration is done (it is mainly a wrapper for +mk/build.mk+):
 * Call the +scan-pkgs.sh+ script to find any needed optional host software, needed to compile
   software the user has configured 
 
-* Call the +update-sys+ and +update-pkg+ scripts to generate some meta-data for 
-  available systems and package collections
+* Call the +create-menu+ script to generate meta-data for available systems and package collections
 
 * Generate the host tools required for different tasks (encrypting passwords,
   compressing data, extracting archives, creating images, ..)
@@ -71,3 +70,4 @@ configuration is done (it is mainly a wrapper for +mk/build.mk+):
 
 * Generate the firmware images or archives
 
+* Output a target specific help text
