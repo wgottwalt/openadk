@@ -200,7 +200,7 @@ case $ostype {
 		umount "$1"
 	}
 	function create_fs {
-		mkfs.$3 -q "$1"
+		mkfs.$3 "$1"
 		tune2fs -c 0 -i 0 "$1"
 	}
 	;;
