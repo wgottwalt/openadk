@@ -25,8 +25,11 @@ include $(ADK_TOPDIR)/mk/perl.mk
 CONFIG_STYLE:=		perl
 XAKE_FLAGS+=		$(PERL_ENV)
 CONFIGURE_ARGS+=	--with-jpeg-includes=${STAGING_TARGET_DIR}/usr/include \
+			--with-jpeg-libs=${STAGING_TARGET_DIR}/usr/lib \
 			--with-png-includes=${STAGING_TARGET_DIR}/usr/include \
-			--with-gif-includes=${STAGING_TARGET_DIR}/usr/include
+			--with-png-libs=${STAGING_TARGET_DIR}/usr/lib \
+			--with-gif-includes=${STAGING_TARGET_DIR}/usr/include \
+			--with-gif-libs=${STAGING_TARGET_DIR}/usr/lib \
 
 p5-image-scale-install:
 	$(INSTALL_DIR) $(IDIR_P5_IMAGE_SCALE)$(PERL_SITEDIR)

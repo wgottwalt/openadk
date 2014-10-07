@@ -26,12 +26,23 @@ config ADK_KERNEL_SPI_PXA2XX
 	tristate
 	select ADK_KERNEL_SPI
 
-config ADK_KERNEL_SPI_IMX
-	prompt "SPI driver for Solidrun Cubox-i/Hummingboard"
+config ADK_KERNEL_SPI_BCM2835
+	prompt "SPI driver for Raspberry PI"
 	tristate
 	select ADK_KERNEL_SPI
 	select ADK_KERNEL_SPI_MASTER
 	select ADK_KERNEL_SPI_BITBANG
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
+
+config ADK_KERNEL_SPI_IMX
+	prompt "SPI driver for Solidrun IMX6"
+	tristate
+	select ADK_KERNEL_SPI
+	select ADK_KERNEL_SPI_MASTER
+	select ADK_KERNEL_SPI_BITBANG
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 

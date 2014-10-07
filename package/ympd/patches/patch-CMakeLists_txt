@@ -1,5 +1,5 @@
 --- ympd-1.2.2.orig/CMakeLists.txt	2014-09-28 13:39:27.000000000 +0200
-+++ ympd-1.2.2/CMakeLists.txt	2014-09-28 16:12:53.000000000 +0200
++++ ympd-1.2.2/CMakeLists.txt	2014-10-05 00:46:09.000000000 +0200
 @@ -16,9 +16,6 @@ include_directories(${PROJECT_BINARY_DIR
  
  include(CheckCSourceCompiles)
@@ -10,7 +10,7 @@
  file(GLOB RESOURCES 
  	RELATIVE ${PROJECT_SOURCE_DIR}
  	htdocs/js/*
-@@ -28,11 +25,11 @@ file(GLOB RESOURCES
+@@ -28,11 +25,11 @@ file(GLOB RESOURCES 
  	htdocs/index.html
  )
  

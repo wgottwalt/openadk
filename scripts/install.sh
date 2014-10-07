@@ -474,21 +474,21 @@ partuuid=$(dd if="$T/firsttrack" bs=1 count=4 skip=$((0x1B8)) 2>/dev/null | \
 
 (( quiet )) || print Cleaning out partitions...
 (( datafssz )) && dd if=/dev/zero of="$tgt" bs=1048576 count=1 \
-    seek=$((cyls - cfgfs - datafssz)) 
-dd if=/dev/zero bs=1048576 of="$tgt" count=1 seek=$((spartofs / 2048))
+    seek=$((cyls - cfgfs - datafssz)) > /dev/null 2>&1
+dd if=/dev/zero bs=1048576 of="$tgt" count=1 seek=$((spartofs / 2048)) > /dev/null 2>&1
 
 (( quiet )) || if (( grub )); then
 	print Writing MBR and GRUB2 to target device... system PARTUUID=$partuuid
 else
 	print Writing MBR to target device... system PARTUUID=$partuuid
 fi
-dd if="$T/firsttrack" of="$tgt"
+dd if="$T/firsttrack" of="$tgt" > /dev/null 2>&1
 
 case $target {
 (solidrun-imx6)
 	fwdir=$(dirname "$src")
-	dd if="$fwdir/SPL" of="$tgt" bs=1024 seek=1
-	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=42
+	dd if="$fwdir/SPL" of="$tgt" bs=1024 seek=1 > /dev/null 2>&1
+	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=42 > /dev/null 2>&1
 	;;
 (raspberry-pi)
 	(( quiet )) || print "Creating filesystem on ${bootpart}..."

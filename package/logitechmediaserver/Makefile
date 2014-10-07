@@ -32,5 +32,10 @@ INSTALL_STYLE:=		manual
 logitechmediaserver-install:
 	$(INSTALL_DIR) $(IDIR_LOGITECHMEDIASERVER)/opt/lms
 	$(CP) $(WRKSRC)/* $(IDIR_LOGITECHMEDIASERVER)/opt/lms
+	@find $(IDIR_LOGITECHMEDIASERVER)/opt/lms -type f -exec chmod 644 {} \;
+	@find $(IDIR_LOGITECHMEDIASERVER)/opt/lms -type d -exec chmod 755 {} \;
+	$(INSTALL_DIR) $(IDIR_LOGITECHMEDIASERVER)/opt/lms/prefs/plugin
+	$(INSTALL_DIR) $(IDIR_LOGITECHMEDIASERVER)/opt/lms/Logs
+	$(INSTALL_DIR) $(IDIR_LOGITECHMEDIASERVER)/opt/lms/Cache
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

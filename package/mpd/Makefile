@@ -16,11 +16,12 @@ PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpd/0.18/
 
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
+PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
 
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG
 PKG_FLAVOURS_MPD+=	WITH_SHOUT WITH_CURL WITH_SAMPLERATE WITH_HTTPD
-PKG_FLAVOURS_MPD+=	WITH_OPUS WITH_PULSE WITH_AVAHI
+PKG_FLAVOURS_MPD+=	WITH_SNDFILE WITH_OPUS WITH_PULSE WITH_AVAHI
 
 PKGFD_WITH_ALSA:=	enable ALSA output
 PKGFS_WITH_ALSA:=	alsa-lib
@@ -109,21 +110,28 @@ ifeq ($(ADK_PACKAGE_MPD_WITH_OPUS),y)
 PKG_FDEPENDS+=		libopus
 endif
 
-PKGFD_WITH_PULSE:=	enable PULSE support
+PKGFD_WITH_SNDFILE:=	enable sndfile support
+PKGFS_WITH_SNDFILE:=	libsndfile
+PKGFB_WITH_SNDFILE:=	libsndfile
+ifeq ($(ADK_PACKAGE_MPD_WITH_SNDFILE),y)
+PKG_FDEPENDS+=		libsndfile
+endif
+
+PKGFD_WITH_PULSE:=	enable pulse support
 PKGFS_WITH_PULSE:=	pulseaudio
 PKGFB_WITH_PULSE:=	pulseaudio
 ifeq ($(ADK_PACKAGE_MPD_WITH_PULSE),y)
 PKG_FDEPENDS+=		pulseaudio
 endif
 
-PKGFD_WITH_AVAHI:=	enable AVAHI/zeroconf support
+PKGFD_WITH_AVAHI:=	enable avahi/zeroconf support
 PKGFS_WITH_AVAHI:=	libavahi libdbus
 PKGFB_WITH_AVAHI:=	avahi
 ifeq ($(ADK_PACKAGE_MPD_WITH_AVAHI),y)
 PKG_FDEPENDS+=		libavahi
 endif
 
-PKGFD_WITH_HTTPD:=	enable HTTP output
+PKGFD_WITH_HTTPD:=	enable http output
 
 include ${ADK_TOPDIR}/mk/package.mk
 
@@ -144,6 +152,12 @@ CONFIGURE_ARGS+=	--disable-jack \
 			--disable-mpg123 \
 			--disable-soundcloud \
 			--enable-inotify
+
+ifneq (${ADK_PACKAGE_MPD_WITH_SNDFILE},)
+CONFIGURE_ARGS+=	--enable-sndfile
+else
+CONFIGURE_ARGS+=	--disable-sndfile
+endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_HTTPD},)
 CONFIGURE_ARGS+=	--enable-httpd-output

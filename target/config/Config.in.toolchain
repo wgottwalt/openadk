@@ -74,7 +74,9 @@ config ADK_TOOLCHAIN_BINUTILS_2_20_1
 config ADK_TOOLCHAIN_BINUTILS_2_22
 	prompt "2.22"
 	boolean
-	depends on ADK_LINUX_BFIN || ADK_LINUX_CRIS
+	depends on ADK_LINUX_BFIN \
+		|| ADK_LINUX_CRIS \
+		|| ADK_LINUX_M68K
 
 config ADK_TOOLCHAIN_BINUTILS_2_23_ARC
 	prompt "2.23-arc"
@@ -88,6 +90,7 @@ config ADK_TOOLCHAIN_BINUTILS_2_24
 	depends on !ADK_LINUX_ARC
 	depends on !ADK_LINUX_AVR32
 	depends on !ADK_LINUX_CRIS
+	depends on !ADK_LINUX_M68K
 
 config ADK_TOOLCHAIN_BINUTILS_GIT
 	prompt "git"
@@ -97,6 +100,7 @@ config ADK_TOOLCHAIN_BINUTILS_GIT
 	depends on !ADK_LINUX_ARC
 	depends on !ADK_LINUX_AVR32
 	depends on !ADK_LINUX_CRIS
+	depends on !ADK_LINUX_M68K
 
 endchoice
 
