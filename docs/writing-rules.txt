@@ -21,16 +21,18 @@ An entry has the following pattern:
 
 ---------------------
 config ADK_TARGET_FOO
-	bool "foo"
-	depends on ADK_PACKAGE_LIBBAZ
+	prompt "foo"
+	boolean
 	select BR2_PACKAGE_LIBBAR
+	depends on ADK_PACKAGE_LIBBAZ
+	default n
 	help
 	  This is a comment that explains what foo is.
 
 	  http://foo.org/foo/
 ---------------------
 
-* The +bool+, +depends on+, +select+ and +help+ lines are indented
+* The +boolean+, +depends on+, +default+, +select+ and +help+ lines are indented
   with one tab.
 
 * The help text itself should be indented with one tab and two
@@ -53,7 +55,7 @@ http://kernel.org/doc/Documentation/kbuild/kconfig-language.txt[].
 # material, please see the LICENCE file in the top-level directory.
 ---------------------
 +
-* Assignment: use +=+ followed by two tabs:
+* Assignment: use +:=+ or ++=+ followed by two tabs:
 +
 ---------------------
 PKG_VERSION:=		1.0

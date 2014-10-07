@@ -39,7 +39,7 @@ though. To re-issue the checks, use +make prereq+.
 
 For some packages there are some optional packages required. OpenADK
 will check for the required tools in advance, when a specific package is
-choosen. For example XBMC needs java installed on the host system.
+choosen. For example Kodi needs Java installed on the host system.
 OpenADK tries to avoid any optional required host tools and will try to
 build them when needed.
 

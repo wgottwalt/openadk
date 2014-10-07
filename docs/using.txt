@@ -45,13 +45,13 @@ tell OpenADK to run each package compilation with +make -jN+.
 
 The `make` command will generally perform the following steps:
 
-* download source files (as required);
-* configure, build and install required host tools;
-* configure, build and install the cross-compiling toolchain;
-* build a kernel image, if selected;
-* build/install selected target packages;
-* build a bootloader, if selected;
-* create a root filesystem in selected format.
+* download source files
+* configure, build and install required host tools
+* configure, build and install the cross-compiling toolchain
+* build a kernel image, if selected
+* build/install selected target packages
+* build a bootloader, if selected
+* create a root filesystem in selected format
 
 OpenADK output is stored in several subdirectories: 
 

@@ -16,5 +16,5 @@ A change in the busybox configuration will rebuild the busybox package. If you
 choose another implementation of f.e. tar, which is provided by default from
 busybox, tar in busybox will be deactivated and the package will be
 automatically rebuilded, so that your resulting firmware images or archives
-will only contain a single tar program. Obviosly just the one you have
+will only contain a single tar program. Obviously just the one you have
 selected.

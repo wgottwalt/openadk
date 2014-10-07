@@ -7,12 +7,9 @@ Cross-compilation toolchain
 ---------------------------
 
 A compilation toolchain is the set of tools that allows you to compile
-code for your system. It consists of a compiler (in our case, +gcc+),
-binary utils like assembler and linker (in our case, +binutils+) and a
-C standard library (either
-http://www.gnu.org/software/libc/libc.html[GNU Libc],
-http://www.uclibc.org/[uClibc] or
-http://www.musl-libc.org/[musl]).
+code for your system. It consists of a compiler,
+binary utils like assembler and linker and a
+C standard library. 
 
 The system installed on your development station certainly already has
 a compilation toolchain that you can use to compile an application
@@ -41,28 +38,24 @@ target system uses ARM, the regular compilation toolchain on your host
 runs on x86 and generates code for x86, while the cross-compilation
 toolchain runs on x86 and generates code for ARM.
 
-OpenADK provides only one solution for the cross-compilation toolchain.
-The versions for binutils, gcc, gdb and libc are fixed. It is a combination
-of mostly the latest versions, which are known to work in this combination
-and are known to produce usable firmware images. You normally do not need to
-know the deep details, it is part of OpenADK policy to keep this part
-simple for the user.
-
-You can only choose between three C libraries:
-http://www.uclibc.org[uClibc], the
+You can choose between four C libraries:
+http://www.uclibc-ng.org[uClibc-ng],
+http://www.uclibc.org[uClibc],
 http://www.gnu.org/software/libc/libc.html[glibc] and
 http://www.musl-libc.org[musl].
 
-There are some minimal configuration options provided in +Toolchain settings+.
+There are some configuration options provided in +Toolchain settings+.
 You can enable or disable the building of following components and toolchain
 options:
 
-* GDB (enabled by default)
+* Optimization level
 
-* GNU C++ compiler (enabled by default, when disabled 
-  will prevent some packages to show up in the menu selection)
+* Stack Smashing Protection (SSP) support
 
-* Stack Smashing Support (SSP) support for GNU C/C++ Compiler (experimental, some packages will fail to build)
+* Position Independent Executable (PIE) support
 
-* Link Time Optimization (LTO) support for GNU C/C++ Compiler (experimental, some packages will fail to build)
+* Link Time Optimization (LTO) support
 
+* GNU Hashstyle support
+
+* GOLD LD support

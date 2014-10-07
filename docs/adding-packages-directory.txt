@@ -39,7 +39,7 @@ are space separated and can be negated with ! as a prefix.
 
 * Target system 
 ** variable used PKG_SYSTEM_DEPENDS
-** for allowed values see the output of ./scripts/getsystems
+** for allowed values see the output of: find target/*/systems -type f |grep -v toolchain
 
 * Target C library
 ** variable used PKG_LIBC_DEPENDS

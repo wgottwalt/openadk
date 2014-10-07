@@ -13,17 +13,16 @@ cross-compilation toolchain, a root filesystem, a Linux kernel image
 and a bootloader for your target. 
 
 OpenADK is useful mainly for people working with embedded systems,
-but can be used by people playing with emulators (like Qemu, Virtualbox 
-or Aranym) or small netbooks (like Lemote Yeelong) needing a fast
-and small Linux system.
+but can be used by people playing with emulators or small netbooks
+needing a fast and small Linux system.
 
 Embedded systems often use processors that are not the regular x86
 processors everyone is used to having in his PC. They can be PowerPC
 processors, MIPS processors, ARM processors, etc.
 
 OpenADK supports numerous processors and their variants; it also comes
-with default configurations for some embedded systems and netbooks.
-(Raspberry PI, Sharp Zaurus, Lemote Yeelong, IBM X40 and more)
+with default configurations for some embedded systems, emulators and netbooks.
+(Raspberry PI, Cubox-i, Qemu, Aranym, PCEngines APU, Lemote Yeelong, IBM X40 and more)
 
 OpenADK is not a Linux distribution and there are no releases or binary
 packages available. If you need something like that, better switch to

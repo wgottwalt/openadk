@@ -48,7 +48,7 @@ network servers, etc.).
 
 OpenADK uses *Busybox* init. Amongst many programs, Busybox has an
 implementation of a basic +init+ program, which is sufficient for most embedded
-systems.  The Busybox +init+ program will read the +/etc/inittab+ file at boot
+systems. The Busybox +init+ program will read the +/etc/inittab+ file at boot
 to know what to do. The syntax of this file can be found in
 http://git.busybox.net/busybox/tree/examples/inittab (note that Busybox
 +inittab+ syntax is special: do not use a random +inittab+ documentation from
@@ -74,10 +74,10 @@ of it. +mdev+ is a program part of Busybox that the kernel will call every time
 a device is added or removed. Thanks to the +/etc/mdev.conf+ configuration
 file, +mdev+ can be configured to for example, set specific permissions or
 ownership on a device file, call a script or application whenever a device
-appears or disappear, etc.  Basically, it allows _userspace_ to react on device
+appears or disappear, etc. Basically, it allows _userspace_ to react on device
 addition and removal events. +mdev+ is also important if you have devices that
 require a firmware, as it will be responsible for pushing the firmware contents
-to the kernel.  +mdev+ is a lightweight implementation (with fewer features) of
+to the kernel. +mdev+ is a lightweight implementation (with fewer features) of
 +udev+. For more details about +mdev+ and the syntax of its configuration file,
 see http://git.busybox.net/busybox/tree/docs/mdev.txt.
 
@@ -136,8 +136,8 @@ process will setup /etc correctly on boot up, when cfgfs application is found.
 After making any changes to /etc, which should survive a reboot of the embedded
 system must be written to the cfgfs partition via “cfgfs commit”. Trying to
 reboot, shutdown or halt an embedded system with unsaved changes will generate
-an error, which can be circumvented. Updates to /etc via the ipkg package
-manager will be reported.
+an error, which can be circumvented. Updates to /etc via a package
+manager (f.e. ipkg) will be reported.
 
 ---------------------
 cfgfs
@@ -164,7 +164,7 @@ See Appendix xref:network-configuration[]
 getting a shell on the system
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-There are two method available to get a shell on your embedded system created with
+There are two methods available to get a shell on your embedded system created with
 OpenADK. You can either login locally via serial console or graphical console or you
 can login remotely via secure shell.
 

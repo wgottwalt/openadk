@@ -13,7 +13,7 @@ because your choosen target system does not have support for it or the
 option is not implemented, yet. OpenADK uses some kind of abstraction
 layer between the real full featured and complicated Linux kernel configuration
 and you. It is not perfect and does include a lot of manual work in
-+target/linux/config+, but it works in a acceptable way.
++target/linux/config+, but it works in an acceptable way.
 
 If you just want to view the Linux configuration, which is actually
 used for your target, you can execute following command:

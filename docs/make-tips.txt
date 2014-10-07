@@ -56,9 +56,6 @@ removed some patch, just do:
  $ make cleankernel
 --------------------
 
-This is automatically triggered if you change the kernel version in 
-your configuration.
-
 If you just want to clean all packages and wants to rebuild the firmware,
 (the toolchain is not deleted) just use:
 

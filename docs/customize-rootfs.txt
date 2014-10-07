@@ -6,7 +6,7 @@ Customizing the generated target filesystem
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Besides changing one or another configuration through +make menuconfig+,
-there are is a way to customize the resulting target filesystem.
+there is a way to customize the resulting target filesystem.
 
 Create a new directory called +extra+ in the top OpenADK directory.
 Put there a tree of directories and files that will be copied directly
