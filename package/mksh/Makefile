@@ -31,13 +31,14 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 host-build:
-	cd ${WRKBUILD} && HAVE_CAN_FSTACKPROTECTORALL=0 \
-	    TARGET_OS=Linux ${BASH} ${WRKSRC}/Build.sh -Q -r -c lto
+	cd ${WRKBUILD} && TARGET_OS=Linux \
+	    HAVE_CAN_FSTACKPROTECTORALL=0 HAVE_CAN_FSTACKPROTECTORSTRONG=0 \
+	    ${BASH} ${WRKSRC}/Build.sh -Q -r -c lto
 
 mksh-hostinstall:
 	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/mksh \
-		${STAGING_HOST_DIR}/usr/bin
+	    ${STAGING_HOST_DIR}/usr/bin/
 
 do-build:
 	cd ${WRKBUILD} && CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS}' \
