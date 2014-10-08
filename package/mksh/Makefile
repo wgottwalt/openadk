@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_MD5SUM:=		1821a40dacc44293d7325c6021952b69
 PKG_DESCR:=		mirbsd korn shell
 PKG_SECTION:=		base/shells
-PKG_URL:=		http://www.mirbsd.org/
+PKG_URL:=		http://www.mirbsd.org/mksh.htm
 PKG_SITES:=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/}
 
 PKG_DFLT_MKSH:=		y if (!ADK_TOOLCHAIN_ONLY && !ADK_TARGET_UCLINUX)
