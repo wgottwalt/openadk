@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mksh
-PKG_VERSION:=		50b
+PKG_VERSION:=		50d
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1821a40dacc44293d7325c6021952b69
+PKG_MD5SUM:=		1c3882c07a760b23df1ad94ad0b4ed2e
 PKG_DESCR:=		mirbsd korn shell
 PKG_SECTION:=		base/shells
 PKG_URL:=		http://www.mirbsd.org/mksh.htm
