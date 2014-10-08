@@ -31,9 +31,7 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 host-build:
-	cd ${WRKBUILD} && \
-	    HAVE_CAN_FSTACKPROTECTORALL=0 HAVE_CAN_FSTACKPROTECTORSTRONG=0 \
-	    ${BASH} ${WRKSRC}/Build.sh -Q -r -c lto
+	cd ${WRKBUILD} && ${BASH} ${WRKSRC}/Build.sh -Q -r -c lto
 
 mksh-hostinstall:
 	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/bin
