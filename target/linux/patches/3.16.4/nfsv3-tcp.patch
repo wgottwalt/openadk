@@ -1,0 +1,12 @@
+diff -Nur linux-3.15-rc5.orig/fs/nfs/nfsroot.c linux-3.15-rc5/fs/nfs/nfsroot.c
+--- linux-3.15-rc5.orig/fs/nfs/nfsroot.c	2014-05-09 22:10:52.000000000 +0200
++++ linux-3.15-rc5/fs/nfs/nfsroot.c	2014-05-16 15:45:38.000000000 +0200
+@@ -87,7 +87,7 @@
+ #define NFS_ROOT		"/tftpboot/%s"
+ 
+ /* Default NFSROOT mount options. */
+-#define NFS_DEF_OPTIONS		"vers=2,udp,rsize=4096,wsize=4096"
++#define NFS_DEF_OPTIONS		"nfsvers=3,proto=tcp,rsize=4096,wsize=4096"
+ 
+ /* Parameters passed from the kernel command line */
+ static char nfs_root_parms[256] __initdata = "";
