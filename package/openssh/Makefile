@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssh
-PKG_VERSION:=		6.6p1
+PKG_VERSION:=		6.7p1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3e9800e6bca1fbac0eea4d41baa7f239
+PKG_MD5SUM:=		3246aa79317b1d23cae783a3bf8275d6
 PKG_DESCR:=		secure shell implementation
 PKG_SECTION:=		net/security
 PKG_BUILDDEP:=		zlib openssl
@@ -45,6 +45,8 @@ $(eval $(call PKG_template,OPENSSH_CLIENT_UTILS,openssh-client-utils,${PKG_VERSI
 $(eval $(call PKG_template,OPENSSH_SFTP_CLIENT,openssh-sftp-client,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSH_SFTP_CLIENT},${PKGSD_OPENSSH_SFTP_CLIENT},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSSH_SFTP_SERVER,openssh-sftp-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSH_SFTP_SERVER},${PKGSD_OPENSSH_SFTP_SERVER},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoreconf
+
 ifeq ($(ADK_PACKAGE_OPENSSH_WITH_KRB5),y)
 CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
 endif
@@ -53,6 +55,12 @@ ifeq ($(ADK_TARGET_USE_SSP),y)
 CONFIGURE_ARGS+=	--with-stackprotect
 else
 CONFIGURE_ARGS+=	--without-stackprotect
+endif
+
+ifeq ($(ADK_TARGET_USE_PIE),y)
+CONFIGURE_ARGS+=	--with-pie
+else
+CONFIGURE_ARGS+=	--without-pie
 endif
 
 CONFIGURE_ENV+=		LD='${TARGET_CC}' \

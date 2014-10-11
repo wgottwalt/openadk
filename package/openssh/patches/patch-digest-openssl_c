@@ -1,6 +1,6 @@
---- openssh-6.6p1.orig/digest-openssl.c	2014-02-04 01:25:45.000000000 +0100
-+++ openssh-6.6p1/digest-openssl.c	2014-03-24 13:42:01.000000000 +0100
-@@ -44,7 +44,9 @@ struct ssh_digest {
+--- openssh-6.7p1.orig/digest-openssl.c	2014-07-17 01:01:26.000000000 +0200
++++ openssh-6.7p1/digest-openssl.c	2014-10-11 21:35:47.000000000 +0200
+@@ -54,7 +54,9 @@ struct ssh_digest {
  /* NB. Indexed directly by algorithm number */
  const struct ssh_digest digests[] = {
  	{ SSH_DIGEST_MD5,	"MD5",	 	16,	EVP_md5 },
@@ -8,5 +8,5 @@
  	{ SSH_DIGEST_RIPEMD160,	"RIPEMD160",	20,	EVP_ripemd160 },
 +#endif
  	{ SSH_DIGEST_SHA1,	"SHA1",	 	20,	EVP_sha1 },
- #ifdef HAVE_EVP_SHA256 /* XXX replace with local if missing */
  	{ SSH_DIGEST_SHA256,	"SHA256", 	32,	EVP_sha256 },
+ 	{ SSH_DIGEST_SHA384,	"SHA384",	48,	EVP_sha384 },
