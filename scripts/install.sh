@@ -499,17 +499,26 @@ case $target {
 (( quiet )) || print "Creating filesystem on ${rootpart}..."
 (( noformat )) || create_fs "$rootpart" ADKROOT ext4
 
+(( quiet )) || print Extracting installation archive...
+mount_fs "$rootpart" "$R" ext4
+gzip -dc "$src" | (cd "$R"; tar -xpf -)
+
 if (( datafssz )); then
 	(( quiet )) || print "Creating filesystem on ${datapart}..."
+	mkdir -m0755 "$R"/data
 	(( noformat )) || create_fs "$datapart" ADKDATA ext4
 	mount_fs "$datapart" "$D" ext4
 	mkdir -m0755 "$D/mpd" "$D/xbmc"
 	umount_fs "$D"
+	case $target {
+	(raspberry-pi)
+		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab 
+	;;
+	(solidrun-imx6)
+		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab
+	;;
+	}
 fi
-
-(( quiet )) || print Extracting installation archive...
-mount_fs "$rootpart" "$R" ext4
-gzip -dc "$src" | (cd "$R"; tar -xpf -)
 
 case $target {
 (raspberry-pi)
