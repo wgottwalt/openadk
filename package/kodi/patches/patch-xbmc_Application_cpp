@@ -1,6 +1,6 @@
---- kodi-14.0alpha4.orig/xbmc/Application.cpp	2014-09-05 14:09:59.000000000 +0200
-+++ kodi-14.0alpha4/xbmc/Application.cpp	2014-09-05 15:48:59.475115902 +0200
-@@ -679,7 +679,7 @@ bool CApplication::Create()
+--- kodi-14.0alpha4.orig/xbmc/Application.cpp	2014-10-06 11:34:37.000000000 -0500
++++ kodi-14.0alpha4/xbmc/Application.cpp	2014-10-08 01:25:47.880436000 -0500
+@@ -642,7 +642,7 @@ bool CApplication::Create()
  
    if (!CLog::Init(CSpecialProtocol::TranslatePath(g_advancedSettings.m_logFolder).c_str()))
    {
@@ -9,7 +9,7 @@
        CSpecialProtocol::TranslatePath(g_advancedSettings.m_logFolder).c_str());
      return false;
    }
-@@ -1090,10 +1090,13 @@ bool CApplication::InitDirectoriesLinux(
+@@ -1064,10 +1064,13 @@ bool CApplication::InitDirectoriesLinux(
      userName = "root";
  
    CStdString userHome;
@@ -23,7 +23,7 @@
  
    CStdString xbmcBinPath, xbmcPath;
    CUtil::GetHomePath(xbmcBinPath, "XBMC_BIN_HOME");
-@@ -1125,11 +1128,11 @@ bool CApplication::InitDirectoriesLinux(
+@@ -1099,11 +1102,11 @@ bool CApplication::InitDirectoriesLinux(
      // map our special drives
      CSpecialProtocol::SetXBMCBinPath(xbmcBinPath);
      CSpecialProtocol::SetXBMCPath(xbmcPath);
