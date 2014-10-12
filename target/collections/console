@@ -1,5 +1,5 @@
 config ADK_PKG_CONSOLE
-	boolean "Choose packages for a desktop system without X"
+	boolean "desktop system without X"
 	default n
 	select ADK_PACKAGE_ALSA_UTILS
 	select ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER

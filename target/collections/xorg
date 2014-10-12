@@ -1,5 +1,5 @@
 config ADK_PKG_XORG
-	bool "Choose packages for graphical desktop system with Xorg"
+	bool "graphical desktop system with Xorg"
 	default n
 	select ADK_PKG_CONSOLE
 	select ADK_PACKAGE_RXVT_UNICODE

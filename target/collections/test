@@ -1,5 +1,5 @@
 config ADK_PKG_TEST
-	bool "Compile a ADK test framework system"
+	bool "test framework system"
 	select ADK_PACKAGE_ADKTEST
 	select ADK_PACKAGE_RDATE
 	select ADK_RUNTIME_START_SERVICES
