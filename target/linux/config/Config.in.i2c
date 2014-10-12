@@ -7,7 +7,7 @@ config ADK_KERNEL_I2C
 config ADK_KERNEL_I2C_CHARDEV
  	tristate
 
-config ADK_KERNEL_I2C_BCM2835
+config ADK_KERNEL_I2C_BCM2708
 	prompt "I2C driver for Raspberry PI"
 	tristate
 	select ADK_KERNEL_I2C

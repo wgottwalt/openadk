@@ -26,7 +26,7 @@ config ADK_KERNEL_SPI_PXA2XX
 	tristate
 	select ADK_KERNEL_SPI
 
-config ADK_KERNEL_SPI_BCM2835
+config ADK_KERNEL_SPI_BCM2708
 	prompt "SPI driver for Raspberry PI"
 	tristate
 	select ADK_KERNEL_SPI
