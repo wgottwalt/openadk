@@ -107,7 +107,7 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-mid \
 			--enable-alsa \
 			--enable-libvorbisenc \
-			--enable-debug \
+			--disable-debug \
 			--enable-udev \
 			--with-ffmpeg=shared
 
