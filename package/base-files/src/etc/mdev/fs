@@ -46,7 +46,7 @@ adk_mount() {
 	mkdir -p $mnt >/dev/null 2>&1
 	grep $procfs /proc/filesystems >/dev/null 2>&1
 	if [ $? -eq 0 ];then
-		logger -t mdev "Mounting local filesystems"
+		logger -t mdev "Mounting $disk to $mnt"
 		mount $mnt
 		if [ $? -ne 0 ];then
 			logger -s -t 'Filesystem' "Mounting $disk failed"
