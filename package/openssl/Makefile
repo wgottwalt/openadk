@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
 PKG_VERSION:=		1.0.1i
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		c8dc151a671b9b92ff3e4c118b174972
 PKG_DESCR:=		secure socket layer libraries
 PKG_SECTION:=		libs/crypto
@@ -37,7 +37,7 @@ BUILD_STYLE:=		manual
 INSTALL_TARGET:=	install_sw
 FAKE_FLAGS+=		INSTALL_PREFIX=${WRKINST}
 
-OPENSSL_OPTIONS:= shared threads no-err no-krb5 zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-ripemd no-cast
+OPENSSL_OPTIONS:= shared threads no-err no-krb5 zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-cast
 
 ifneq ($(ADK_PACKAGE_LIBOPENSSL_WITH_CRYPTODEV),)
 OPENSSL_OPTIONS+= -DHAVE_CRYPTODEV -DUSE_CRYPTODEV_DIGESTS
