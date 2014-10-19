@@ -1,5 +1,5 @@
 config ADK_PKG_MPD
-	bool "Choose packages for MPD system (basic)"
+	bool "MPD system (basic)"
 	default n
 	select BUSYBOX_NTPD
 	select ADK_PACKAGE_CIFS_UTILS

@@ -37,28 +37,3 @@ config ADK_KERNEL_REGULATOR_PFUZE100
 	select ADK_KERNEL_REGULATOR
 	default n
 
-config ADK_KERNEL_REGMAP
-	boolean
-	select ADK_KERNEL_LZO_COMPRESS
-	select ADK_KERNEL_LZO_DECOMPRESS
-	default n
-
-config ADK_KERNEL_REGMAP_I2C
-	boolean
-	select ADK_KERNEL_REGMAP
-	default n
-
-config ADK_KERNEL_REGMAP_SPI
-	boolean
-	select ADK_KERNEL_REGMAP
-	default n
-
-config ADK_KERNEL_REGMAP_MMIO
-	boolean
-	select ADK_KERNEL_REGMAP
-	default n
-
-config ADK_KERNEL_REGMAP_IRQ
-	boolean
-	select ADK_KERNEL_REGMAP
-	default n

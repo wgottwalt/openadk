@@ -61,18 +61,21 @@ quiet=0
 serial=0
 speed=115200
 panicreboot=10
+keep=0
 
 function usage {
 cat >&2 <<EOF
-Syntax: $me [-f filesystem] [-c cfgfssize] [-d datafssize] [-n]
+Syntax: $me [-f filesystem] [-c cfgfssize] [-d datafssize] [-k] [-n]
     [-p panictime] [±q] [-s serialspeed] [±t] <target> <device> <archive>
 Partition sizes are in MiB. Filesystem type is currently ignored (ext4).
+To keep filesystem on data partition use -k.
+Use -n to not format boot/root partition.
 Defaults: -c 1 -p 10 -s 115200; -t = enable serial console
 EOF
 	exit $1
 }
 
-while getopts "c:d:f:hnp:qs:t" ch; do
+while getopts "c:d:f:hknp:qs:t" ch; do
 	case $ch {
 	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 16 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
@@ -88,6 +91,7 @@ while getopts "c:d:f:hnp:qs:t" ch; do
 		fi
 		fs=$OPTARG ;;
 	(h)	usage 0 ;;
+	(k)	keep=1 ;;
 	(p)	if (( (panicreboot = OPTARG) < 0 || panicreboot > 300 )); then
 			print -u2 "$me: -p $OPTARG out of bounds"
 			exit 1
@@ -181,6 +185,8 @@ case $ostype {
 		fi
 		diskutil eraseVolume $fstype "$2" "$1"
 	}
+	function tune_fs {
+	}
 	;;
 (Linux)
 	basedev=$tgt
@@ -200,7 +206,10 @@ case $ostype {
 		umount "$1"
 	}
 	function create_fs {
+		(( quiet )) || print "Creating filesystem on ${1}..."
 		mkfs.$3 "$1"
+	}
+	function tune_fs {
 		tune2fs -c 0 -i 0 "$1"
 	}
 	;;
@@ -472,9 +481,11 @@ print -n '\0\0' | \
 partuuid=$(dd if="$T/firsttrack" bs=1 count=4 skip=$((0x1B8)) 2>/dev/null | \
     hexdump -e '1/4 "%08x"')-0$((syspartno+1))
 
-(( quiet )) || print Cleaning out partitions...
-(( datafssz )) && dd if=/dev/zero of="$tgt" bs=1048576 count=1 \
-    seek=$((cyls - cfgfs - datafssz)) > /dev/null 2>&1
+((keep)) || if (( datafssz )); then
+	(( quiet )) || print Cleaning out data partition...
+	dd if=/dev/zero of="$tgt" bs=1048576 count=1 seek=$((cyls - cfgfs - datafssz)) > /dev/null 2>&1
+fi
+(( quiet )) || print Cleaning out root partition...
 dd if=/dev/zero bs=1048576 of="$tgt" count=1 seek=$((spartofs / 2048)) > /dev/null 2>&1
 
 (( quiet )) || if (( grub )); then
@@ -491,25 +502,33 @@ case $target {
 	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=42 > /dev/null 2>&1
 	;;
 (raspberry-pi)
-	(( quiet )) || print "Creating filesystem on ${bootpart}..."
 	(( noformat )) || create_fs "$bootpart" ADKBOOT vfat
 	;;
 }
 
-(( quiet )) || print "Creating filesystem on ${rootpart}..."
 (( noformat )) || create_fs "$rootpart" ADKROOT ext4
-
-if (( datafssz )); then
-	(( quiet )) || print "Creating filesystem on ${datapart}..."
-	(( noformat )) || create_fs "$datapart" ADKDATA ext4
-	mount_fs "$datapart" "$D" ext4
-	mkdir -m0755 "$D/mpd" "$D/xbmc"
-	umount_fs "$D"
-fi
+(( noformat )) || tune_fs "$rootpart"
 
 (( quiet )) || print Extracting installation archive...
 mount_fs "$rootpart" "$R" ext4
 gzip -dc "$src" | (cd "$R"; tar -xpf -)
+
+if (( datafssz )); then
+	mkdir -m0755 "$R"/data
+	((keep)) || create_fs "$datapart" ADKDATA ext4
+	((keep)) || tune_fs "$datapart"
+	mount_fs "$datapart" "$D" ext4
+	mkdir -m0755 "$D/mpd" "$D/xbmc" 2>/dev/null
+	umount_fs "$D"
+	case $target {
+	(raspberry-pi)
+		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab 
+	;;
+	(solidrun-imx6)
+		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab
+	;;
+	}
+fi
 
 case $target {
 (raspberry-pi)

@@ -26,7 +26,7 @@ fi
 
 # check if already mounted via /etc/init.d/fs
 adk_check() {
-	mount | grep "${MDEV} "
+	mount | grep "${MDEV}[[:blank:]]"
 	if [ $? -eq 0 ];then
 		logger -t mdev "Filesystem on ${MDEV} already mounted"
 		exit 0
@@ -46,8 +46,8 @@ adk_mount() {
 	mkdir -p $mnt >/dev/null 2>&1
 	grep $procfs /proc/filesystems >/dev/null 2>&1
 	if [ $? -eq 0 ];then
-		logger -t mdev "Mounting local filesystems"
-		mount $mnt
+		logger -t mdev "Mounting $disk to $mnt"
+		mount $mnt 2>/dev/null
 		if [ $? -ne 0 ];then
 			logger -s -t 'Filesystem' "Mounting $disk failed"
 		fi

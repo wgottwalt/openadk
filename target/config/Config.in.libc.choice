@@ -104,8 +104,8 @@ config ADK_TARGET_LIB_UCLIBC_0_9_33_2
 	boolean
 	depends on ADK_TARGET_LIB_UCLIBC
 
-config ADK_TARGET_LIB_MUSL_1_1_4
-	prompt "1.1.4"
+config ADK_TARGET_LIB_MUSL_1_1_5
+	prompt "1.1.5"
 	boolean
 	depends on ADK_TARGET_LIB_MUSL
 

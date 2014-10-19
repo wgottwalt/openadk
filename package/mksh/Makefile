@@ -4,12 +4,12 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mksh
-PKG_VERSION:=		50b
+PKG_VERSION:=		50d
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1821a40dacc44293d7325c6021952b69
+PKG_MD5SUM:=		1c3882c07a760b23df1ad94ad0b4ed2e
 PKG_DESCR:=		mirbsd korn shell
 PKG_SECTION:=		base/shells
-PKG_URL:=		http://www.mirbsd.org/
+PKG_URL:=		http://www.mirbsd.org/mksh.htm
 PKG_SITES:=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/}
 
 PKG_DFLT_MKSH:=		y if (!ADK_TOOLCHAIN_ONLY && !ADK_TARGET_UCLINUX)
@@ -31,13 +31,12 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 host-build:
-	cd ${WRKBUILD} && HAVE_CAN_FSTACKPROTECTORALL=0 \
-	    TARGET_OS=Linux ${BASH} ${WRKSRC}/Build.sh -Q -r -c lto
+	cd ${WRKBUILD} && ${BASH} ${WRKSRC}/Build.sh -Q -r -c lto
 
 mksh-hostinstall:
 	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/bin
 	${INSTALL_BIN} ${WRKBUILD}/mksh \
-		${STAGING_HOST_DIR}/usr/bin
+	    ${STAGING_HOST_DIR}/usr/bin/
 
 do-build:
 	cd ${WRKBUILD} && CC='${TARGET_CC}' CFLAGS='${TARGET_CFLAGS}' \

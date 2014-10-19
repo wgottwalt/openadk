@@ -27,8 +27,5 @@ Simply running 'make' will build the firmware for your embedded system.  The
 buildsystem will download all sources, build the toolchain, the kernel and all
 applications.
 
-To switch to another target configuration, simply run "make switch". This will
-backup your existing configuration and will start with an empty one.
-
 Sunshine!
  Waldemar Brodkorb <wbx@openadk.org>

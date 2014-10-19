@@ -1,5 +1,5 @@
 config ADK_PKG_KODIBOX
-	bool "Choose packages for KODIBox system"
+	bool "KODI (formely XBMC) multimedia system"
 	default n
 	select BUSYBOX_NTPD
 	select ADK_PACKAGE_GLIBC

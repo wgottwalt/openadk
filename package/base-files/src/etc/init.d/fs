@@ -24,14 +24,14 @@ for fs in $fstypes; do
 	disks=$(grep -v "^#" /etc/fstab|grep $fs|awk '{ print $1 }')
 	for disk in $disks; do
 		logger -t 'Filesystem' "Found $disk with filesystem $fs"
-		mnt=$(grep -v "^#" /etc/fstab|grep "$disk "|awk '{ print $2 }')
+		mnt=$(grep -v "^#" /etc/fstab|grep "${disk}[[:blank:]]"|awk '{ print $2 }')
 		grep $fs /proc/filesystems >/dev/null 2>&1
 		if [ $? -eq 0 ];then
 			[ -x /usr/sbin/fsck.$fs ] && {
 				logger -t 'Filesystem' "checking $fs filesystem on $disk"
 				fsck -p $disk >/dev/null 2>&1
 			}
-			logger -t 'Filesystem' "Mounting local filesystems"
+			logger -t 'Filesystem' "Mounting $disk to $mnt"
 			mkdir -p $mnt > /dev/null 2>&1
 			mount $disk
 		else
