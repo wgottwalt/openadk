@@ -273,9 +273,9 @@ PKG_INSTALL:=		PATH='${HOST_PATH}' \
 			-force-defaults -force-depends install
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/ipkg
 else
-PKG_BUILD:=		${BASH} ${SCRIPT_DIR}/tarpkg build
-PKG_INSTALL:=		PKG_INSTROOT=$(TARGET_DIR) \
-			${BASH} ${SCRIPT_DIR}/tarpkg install
+PKG_BUILD:=		PATH='${HOST_PATH}' ${BASH} ${SCRIPT_DIR}/tarpkg build
+PKG_INSTALL:=		PKG_INSTROOT='$(TARGET_DIR)' \
+			PATH='${HOST_PATH}' ${BASH} ${SCRIPT_DIR}/tarpkg install
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/pkg
 endif
 
