@@ -135,7 +135,7 @@ GCC_CONFOPTS+=		--with-cpu=arm1176jzf-s
 endif
 
 ifeq ($(ADK_CPU_CORTEX_M3),y)
-GCC_CONFOPTS+=		--with-cpu=cortex-m3
+GCC_CONFOPTS+=		--with-cpu=cortex-m3 --with-mode=thumb
 endif
 
 ifeq ($(ADK_CPU_CORTEX_A9),y)
@@ -194,8 +194,8 @@ endif
 	$(SED) '/k prot/agcc_cv_libc_provides_ssp=yes' $(WRKBUILD)/gcc/configure
 	cd $(GCC_BUILD_DIR_MINIMAL); \
 		PATH='$(TARGET_PATH)' \
-		CFLAGS="-O0 -g0" \
-		CXXFLAGS="-O0 -g0" \
+		CFLAGS="-O0 -g0 -fomit-frame-pointer" \
+		CXXFLAGS="-O0 -g0 -fomit-frame-pointer" \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			--enable-languages=c \
@@ -216,8 +216,8 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_INITIAL)
 	cd $(GCC_BUILD_DIR_INITIAL); \
 		PATH='$(TARGET_PATH)' \
-		CFLAGS="-O0 -g0" \
-		CXXFLAGS="-O0 -g0" \
+		CFLAGS="-O0 -g0 -fomit-frame-pointer" \
+		CXXFLAGS="-O0 -g0 -fomit-frame-pointer" \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			${GCC_FINAL_CONFOPTS} \
