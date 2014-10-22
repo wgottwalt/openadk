@@ -126,28 +126,20 @@ GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
 endif
 endif
 
-ifeq ($(ADK_CPU_ARMV5TE),y)
-GCC_CONFOPTS+=		--with-arch=armv5te
-endif
-
-ifeq ($(ADK_CPU_ARMV6),y)
-GCC_CONFOPTS+=		--with-arch=armv6
-endif
-
-ifeq ($(ADK_CPU_ARMV7A),y)
-GCC_CONFOPTS+=		--with-arch=armv7-a
-endif
-
 ifeq ($(ADK_CPU_ARM926EJ_S),y)
-GCC_CONFOPTS+=		--with-arch=armv5te --with-tune=arm926ej-s
+GCC_CONFOPTS+=		--with-cpu=arm926ej-s
 endif
 
 ifeq ($(ADK_CPU_ARM1176JZF_S),y)
-GCC_CONFOPTS+=		--with-arch=armv6 --with-tune=arm1176jzf-s
+GCC_CONFOPTS+=		--with-cpu=arm1176jzf-s
+endif
+
+ifeq ($(ADK_CPU_CORTEX_M3),y)
+GCC_CONFOPTS+=		--with-cpu=cortex-m3
 endif
 
 ifeq ($(ADK_CPU_CORTEX_A9),y)
-GCC_CONFOPTS+=		--with-arch=armv7-a --with-tune=cortex-a9
+GCC_CONFOPTS+=		--with-cpu=cortex-a9
 endif
 
 ifeq ($(ADK_CPU_SPARC_V9),y)

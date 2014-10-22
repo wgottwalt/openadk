@@ -56,6 +56,14 @@ config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	boolean "ARM Ltd. Versatile Express for Cortex-A9"
 	select ADK_CPU_CORTEX_A9
 
+config ADK_TARGET_QEMU_ARM_MODEL_STELLARIS_M3
+	boolean "Stellaris LM3S6965EVB"
+	select ADK_soft_float
+	select ADK_eabi
+	select ADK_CPU_CORTEX_M3
+	select ADK_LINUX_ARM_WITH_THUMB
+	depends on ADK_TARGET_ARM_SOFT_FLOAT
+
 config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	boolean "ARM Ltd. Versatile/PB"
 	select ADK_soft_float
