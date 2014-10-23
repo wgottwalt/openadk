@@ -1,21 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_armv5te
-	boolean
-
-config ADK_armv6
-	boolean
-
-config ADK_armv7a
-	boolean
-
-config ADK_TARGET_ARM_CPU
-	string
-	default "armv5te" if ADK_armv5te
-	default "armv6" if ADK_armv6
-	default "armv7-a" if ADK_armv7a
-
 config ADK_soft_float
 	boolean
 

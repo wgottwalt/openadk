@@ -1,0 +1,13 @@
+--- openssh-6.7p1.orig/configure.ac	2014-08-26 22:32:01.000000000 +0200
++++ openssh-6.7p1/configure.ac	2014-10-11 21:42:45.000000000 +0200
+@@ -2526,8 +2526,8 @@ AC_CHECK_FUNCS([SHA256_Update EVP_sha256
+ # Search for RIPE-MD support in OpenSSL
+ AC_CHECK_FUNCS([EVP_ripemd160], ,
+     [unsupported_algorithms="$unsupported_algorithms \
+-	hmac-ripemd160
+-	hmac-ripemd160@openssh.com
++	hmac-ripemd160 \
++	hmac-ripemd160@openssh.com \
+ 	hmac-ripemd160-etm@openssh.com"
+      ]
+ )

@@ -1,5 +1,5 @@
 config ADK_PKG_MPDBOX
-	bool "Choose packages for MPD system with WebGUI"
+	bool "MPD system with WebGUI"
 	default n
 	select ADK_PKG_MPD
 	select ADK_PACKAGE_MPDBOX

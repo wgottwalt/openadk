@@ -1,5 +1,5 @@
 config ADK_PKG_YMPD
-	bool "Choose packages for MPD system with Ympd"
+	bool "MPD system with Ympd"
 	default n
 	select ADK_PKG_MPD
 	select ADK_PACKAGE_YMPD

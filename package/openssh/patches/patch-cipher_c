@@ -1,19 +1,9 @@
-diff -Nur openssh-6.2p1.orig/cipher.c openssh-6.2p1/cipher.c
---- openssh-6.5p1.orig/cipher.c	2014-01-25 23:37:26.000000000 +0100
-+++ openssh-6.5p1/cipher.c	2014-02-11 15:26:16.000000000 +0100
-@@ -75,23 +75,33 @@ static const struct Cipher ciphers[] = {
- 	{ "none",	SSH_CIPHER_NONE, 8, 0, 0, 0, 0, 0, EVP_enc_null },
- 	{ "des",	SSH_CIPHER_DES, 8, 8, 0, 0, 0, 1, EVP_des_cbc },
- 	{ "3des",	SSH_CIPHER_3DES, 8, 16, 0, 0, 0, 1, evp_ssh1_3des },
-+#ifndef OPENSSL_NO_BF
- 	{ "blowfish",	SSH_CIPHER_BLOWFISH, 8, 32, 0, 0, 0, 1, evp_ssh1_bf },
-+#endif
- 
+--- openssh-6.7p1.orig/cipher.c	2014-07-20 18:24:59.000000000 +0200
++++ openssh-6.7p1/cipher.c	2014-10-11 21:51:33.000000000 +0200
+@@ -88,8 +88,10 @@ static const struct sshcipher ciphers[]
  	{ "3des-cbc",	SSH_CIPHER_SSH2, 8, 24, 0, 0, 0, 1, EVP_des_ede3_cbc },
-+#ifndef OPENSSL_NO_BF
  	{ "blowfish-cbc",
  			SSH_CIPHER_SSH2, 8, 16, 0, 0, 0, 1, EVP_bf_cbc },
-+#endif
 +#ifndef OPENSSL_NO_CAST
  	{ "cast128-cbc",
  			SSH_CIPHER_SSH2, 8, 16, 0, 0, 0, 1, EVP_cast5_cbc },
@@ -21,17 +11,3 @@ diff -Nur openssh-6.2p1.orig/cipher.c openssh-6.2p1/cipher.c
  	{ "arcfour",	SSH_CIPHER_SSH2, 8, 16, 0, 0, 0, 0, EVP_rc4 },
  	{ "arcfour128",	SSH_CIPHER_SSH2, 8, 16, 0, 0, 1536, 0, EVP_rc4 },
  	{ "arcfour256",	SSH_CIPHER_SSH2, 8, 32, 0, 0, 1536, 0, EVP_rc4 },
- 	{ "aes128-cbc",	SSH_CIPHER_SSH2, 16, 16, 0, 0, 0, 1, EVP_aes_128_cbc },
-+#ifndef OPENSSL_NO_AES192
- 	{ "aes192-cbc",	SSH_CIPHER_SSH2, 16, 24, 0, 0, 0, 1, EVP_aes_192_cbc },
-+#endif
- 	{ "aes256-cbc",	SSH_CIPHER_SSH2, 16, 32, 0, 0, 0, 1, EVP_aes_256_cbc },
- 	{ "rijndael-cbc@lysator.liu.se",
- 			SSH_CIPHER_SSH2, 16, 32, 0, 0, 0, 1, EVP_aes_256_cbc },
- 	{ "aes128-ctr",	SSH_CIPHER_SSH2, 16, 16, 0, 0, 0, 0, EVP_aes_128_ctr },
-+#ifndef OPENSSL_NO_AES192
- 	{ "aes192-ctr",	SSH_CIPHER_SSH2, 16, 24, 0, 0, 0, 0, EVP_aes_192_ctr },
-+#endif
- 	{ "aes256-ctr",	SSH_CIPHER_SSH2, 16, 32, 0, 0, 0, 0, EVP_aes_256_ctr },
- #ifdef OPENSSL_HAVE_EVPGCM
- 	{ "aes128-gcm@openssh.com",

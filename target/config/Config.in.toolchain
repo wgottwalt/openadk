@@ -130,11 +130,12 @@ config ADK_TARGET_CFLAGS_OPT_O0
 endchoice
 
 config ADK_LINUX_ARM_WITH_THUMB
-	prompt "Use THUMB2 ARM mode"
+	prompt "Use THUMB2 only mode"
 	boolean
-	depends on ADK_CPU_CORTEX_A9 && ADK_TARGET_LIB_GLIBC
 	select ADK_KERNEL_THUMB2_KERNEL
 	default n
+	help
+	  Experimental option. Use with care.
 
 config ADK_TOOLCHAIN_WITH_SSP
 	boolean

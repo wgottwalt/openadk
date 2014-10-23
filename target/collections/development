@@ -1,5 +1,5 @@
 config ADK_PKG_DEVELOPMENT
-	bool "Compile a ADK development system"
+	bool "development system"
 	default n
 	select ADK_PACKAGE_BASH
 	select ADK_PACKAGE_BINUTILS

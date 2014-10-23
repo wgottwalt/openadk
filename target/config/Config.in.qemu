@@ -32,14 +32,14 @@ choice
 prompt "Qemu XTENSA Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_XTENSA
 
-config ADK_TARGET_QEMU_XTENSA_DC232B
-	boolean "dc232b"
-	select ADK_KERNEL_XTENSA_VARIANT_DC232B
-
 config ADK_TARGET_QEMU_XTENSA_DC233C
 	boolean "dc233c"
 	select ADK_KERNEL_XTENSA_VARIANT_DC233C
 	select ADK_KERNEL_INITIALIZE_XTENSA_MMU_INSIDE_VMLINUX
+
+config ADK_TARGET_QEMU_XTENSA_DC232B
+	boolean "dc232b"
+	select ADK_KERNEL_XTENSA_VARIANT_DC232B
 
 endchoice
 
@@ -55,6 +55,14 @@ depends on ADK_TARGET_SYSTEM_QEMU_ARM
 config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	boolean "ARM Ltd. Versatile Express for Cortex-A9"
 	select ADK_CPU_CORTEX_A9
+
+config ADK_TARGET_QEMU_ARM_MODEL_STELLARIS_M3
+	boolean "Stellaris LM3S6965EVB"
+	select ADK_soft_float
+	select ADK_eabi
+	select ADK_CPU_CORTEX_M3
+	select ADK_LINUX_ARM_WITH_THUMB
+	depends on ADK_TARGET_ARM_SOFT_FLOAT
 
 config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	boolean "ARM Ltd. Versatile/PB"
