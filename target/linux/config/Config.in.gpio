@@ -1,6 +1,3 @@
-config ADK_KERNEL_RESET_CONTROLLER
-	boolean
-
 config ADK_KERNEL_RESET_GPIO
 	boolean
 

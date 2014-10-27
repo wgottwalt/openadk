@@ -1311,8 +1311,11 @@ $(eval $(call KMOD_template,SND_USB_AUDIO,snd-usb-audio,\
 # Bluetooth
 #
 
-$(eval $(call KMOD_template,BT,bt,\
+$(eval $(call KMOD_template,IEEE802154_6LOWPAN,ieee802154_6lowpan,\
 	$(MODULES_DIR)/kernel/net/ieee802154/6lowpan_iphc \
+,65))
+
+$(eval $(call KMOD_template,BT,bt,\
 	$(MODULES_DIR)/kernel/net/bluetooth/bluetooth \
 ,70))
 

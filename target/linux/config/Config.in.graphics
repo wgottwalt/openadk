@@ -131,16 +131,13 @@ config ADK_KERNEL_DRM_IMX_LDB
 config ADK_KERNEL_DRM_IMX_TVE
 	boolean
 
-config ADK_KERNEL_DRM_IMX_IPUV3_CORE
+config ADK_KERNEL_IMX_IPUV3_CORE
 	boolean
 
 config ADK_KERNEL_DRM_IMX_IPUV3
 	boolean
 
 config ADK_KERNEL_DRM_IMX_HDMI
-	boolean
-
-config ADK_KERNEL_RESET_CONTROLLER
 	boolean
 
 config ADK_KERNEL_AGP
@@ -202,8 +199,8 @@ config ADK_KERNEL_DRM_IMX
 	select ADK_KERNEL_DRM_IMX_LDB
 	select ADK_KERNEL_DRM_IMX_TVE
 	select ADK_KERNEL_DRM_IMX_PARALLEL_DISPLAY
+	select ADK_KERNEL_IMX_IPUV3_CORE
 	select ADK_KERNEL_DRM_IMX_IPUV3
-	select ADK_KERNEL_DRM_IMX_IPUV3_CORE
 	select ADK_KERNEL_DRM_IMX_HDMI
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_STAGING
@@ -215,7 +212,7 @@ config ADK_KERNEL_DRM_IMX
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
  	default n
  	help
-	 Framebuffer support for Cubox-i/Hummingboard
+	  Framebuffer support for Cubox-i/Hummingboard
 
 config ADK_KERNEL_DRM_VIVANTE
 	prompt "Framebuffer support for Cubox-i/Hummingboard (Vivante)"

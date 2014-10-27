@@ -4,6 +4,9 @@ config ADK_KERNEL_STAGING
 config ADK_KERNEL_EXPERIMENTAL
 	boolean
 
+config ADK_KERNEL_RESET_CONTROLLER
+        boolean
+
 config ADK_KERNEL_BLK_DEV_INITRD
 	boolean
 
