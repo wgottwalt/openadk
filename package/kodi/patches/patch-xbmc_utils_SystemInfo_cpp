@@ -1,0 +1,11 @@
+--- kodi-14.0alpha4.orig/xbmc/utils/SystemInfo.cpp	2014-10-10 15:03:29.000000000 -0500
++++ kodi-14.0alpha4/xbmc/utils/SystemInfo.cpp	2014-10-29 20:29:31.614352000 -0500
+@@ -618,7 +618,7 @@ std::string CSysInfo::GetOsName(bool emp
+ #elif defined (TARGET_ANDROID)
+     osName = "Android";
+ #elif defined(TARGET_LINUX)
+-    osName = getValueFromOs_release("NAME");
++    osName = "OpenADK";
+     if (osName.empty())
+       osName = getValueFromLsb_release(lsb_rel_distributor);
+     if (osName.empty())
