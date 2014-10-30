@@ -5,13 +5,14 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openntpd
 PKG_VERSION:=		3.9p1
-PKG_RELEASE:=		18
+PKG_RELEASE:=		19
 PKG_MD5SUM:=		afc34175f38d08867c1403d9008600b3
 PKG_DESCR:=		ntp server daemon
 PKG_SECTION:=		net/ntp
 PKG_DEPENDS:=		libopenssl
 PKG_URL:=		http://www.openntpd.org/
 PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/
+PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
