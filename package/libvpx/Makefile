@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
 PKG_VERSION:=		1.3.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		14783a148872f2d08629ff7c694eb31f
 PKG_DESCR:=		vp8/vp9 codec library
 PKG_SECTION:=		libs/video
@@ -31,7 +31,7 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
 endif
-ifeq ($(ADK_TARGET_SYSTEM_CUBOX_I),y)
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 CONFIGURE_ARGS+=	--target=armv7-linux-gcc
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
