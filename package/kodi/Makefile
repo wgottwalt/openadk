@@ -105,9 +105,10 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-wayland \
 			--disable-pulse \
 			--disable-mid \
+			--disable-debug \
 			--enable-alsa \
 			--enable-libvorbisenc \
-			--disable-debug \
+			--enable-texturepacker \
 			--enable-udev \
 			--with-ffmpeg=shared
 
