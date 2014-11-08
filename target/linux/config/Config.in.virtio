@@ -3,6 +3,9 @@ menu "Virtio driver support"
 config ADK_KERNEL_VIRTIO
 	boolean
 
+config ADK_KERNEL_VIRTIO_CONSOLE
+	boolean
+
 config ADK_KERNEL_VIRTIO_PCI
 	boolean
 
