@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		2.1.1
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		e57fdbb8ed56e70c43f39c79da1654b2
+PKG_VERSION:=		2.1.4
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		89b2f4a197621346f6724a3c35535b19
 PKG_DESCR:=		ruby scripting language
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		librt libpthread
@@ -17,8 +17,6 @@ PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.1/
 PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_HOST_DEPENDS:=	!freebsd !cygwin
 
 include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
