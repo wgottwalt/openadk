@@ -1,23 +1,23 @@
-OpenADK - A GNU/Linux construction kit 
-======================================
+OpenADK - An embedded Linux construction kit
+============================================
 
-This is a menu based buildsystem for your home made embedded Linux system.
+This is a menu based buildsystem for your embedded Linux system.
 
-Before you can start you need to install some tools: 
+Before you can start you need to install some software:
 - bash
 - gcc or clang
 - g++ or clang++
 - binutils 
-- GNU make
+- make
 - tar
 - gzip
 - wget
-- libc headers
-- ncurses5 headers
-- zlib headers
 - perl
+- c library headers
+- ncurses library and header
+- zlib library and header
 
-There is a check for the required versions of these tools in advance, though.
+There is a check for the required versions of these software in advance, though.
 (to re-issue the checks, use "make prereq").
 
 Please use "make menuconfig" to choose your target architecture and
