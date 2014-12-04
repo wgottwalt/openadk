@@ -73,6 +73,10 @@ config ADK_KERNEL_SND_AC97_CODEC
 config ADK_KERNEL_SND_SOC_I2C_AND_SPI
 	boolean
 
+config ADK_KERNEL_SND_SOC_WM8731
+	tristate
+	select ADK_KERNEL_SND_SOC_I2C_AND_SPI
+
 config ADK_KERNEL_SND_SOC_WM8804
 	tristate
 	select ADK_KERNEL_SND_SOC_I2C_AND_SPI
@@ -185,7 +189,7 @@ config ADK_KERNEL_SND_BCM2708_SOC_I2S
 	default n
 
 config ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_DAC
-	prompt "Raspberry PI hifiberry DAC"
+	prompt "Hifiberry DAC"
 	tristate
 	select ADK_KERNEL_SND_BCM2708_SOC_I2S
 	select ADK_KERNEL_SND_SOC_PCM5102A
@@ -193,7 +197,7 @@ config ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_DAC
 	default n
 
 config ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_DIGI
-	prompt "Raspberry PI hifiberry DIGI"
+	prompt "Hifiberry DIGI"
 	tristate
 	select ADK_KERNEL_SND_BCM2708_SOC_I2S
 	select ADK_KERNEL_SND_SOC_WM8804
@@ -201,17 +205,25 @@ config ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_DIGI
 	default n
 
 config ADK_KERNEL_SND_BCM2708_SOC_RPI_DAC
-	prompt "Raspberry PI RPI-DAC"
+	prompt "RPI-DAC"
 	tristate
 	select ADK_KERNEL_SND_BCM2708_SOC_I2S
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 
 config ADK_KERNEL_SND_BCM2708_SOC_IQAUDIO_DAC
-	prompt "Raspberry PI IQAudio-DAC"
+	prompt "IQAudio-DAC"
 	tristate
 	select ADK_KERNEL_SND_BCM2708_SOC_I2S
 	select ADK_KERNEL_SND_SOC_PCM512x_I2C
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
+
+config ADK_KERNEL_SND_BCM2708_SOC_RPI_CODEC_PROTO
+	prompt "Rpi-Codec-Proto"
+	tristate
+	select ADK_KERNEL_SND_BCM2708_SOC_I2S
+	select ADK_KERNEL_SND_SOC_WM8731
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
 

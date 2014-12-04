@@ -1754,6 +1754,11 @@ $(eval $(call KMOD_template,DRM_DW_HDMI_CEC,drm-dw-hdmi-cec,\
 #
 # Sound
 #
+
+$(eval $(call KMOD_template,SND_SOC_WM8731,snd-soc-wm8731,\
+       $(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-wm8731 \
+,55))
+
 $(eval $(call KMOD_template,SND_SOC_WM8804,snd-soc-wm8804,\
        $(MODULES_DIR)/kernel/sound/soc/codecs/snd-soc-wm8804 \
 ,55))
@@ -1794,3 +1799,6 @@ $(eval $(call KMOD_template,SND_BCM2708_SOC_IQAUDIO_DAC,snd-bcm2708-soc-iqaudio-
        $(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-iqaudio-dac \
 ,65, kmod-snd-bcm2708-soc-i2s))
 
+$(eval $(call KMOD_template,SND_BCM2708_SOC_RPI_CODEC_PROTO,snd-bcm2708-soc-rpi-proto,\
+       $(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-rpi-proto \
+,65, kmod-snd-bcm2708-soc-i2s))
