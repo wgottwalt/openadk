@@ -91,7 +91,7 @@ kernel-install: kernel-strip
 dtb-install:
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
-		imx6q-cubox-i.dtb imx6dl-cubox-i.dtb imx6dl-hummingboard.dtb $(MAKE_TRACE)
+		imx6q-cubox-i.dtb imx6dl-cubox-i.dtb imx6dl-hummingboard.dtb imx6q-hummingboard.dtb $(MAKE_TRACE)
 	$(CP) $(LINUX_DIR)/arch/arm/boot/dts/imx6*.dtb \
 		$(FW_DIR)
 endif
