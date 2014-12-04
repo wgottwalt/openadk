@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		5
+PKG_RELEASE:=		6
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -78,8 +78,8 @@ endif
 	    echo "::1		localhost" >> $(IDIR_BASE_FILES)/etc/hosts
 	    echo "127.0.1.1	$(ADK_RUNTIME_HOSTNAME)" >> $(IDIR_BASE_FILES)/etc/hosts
 	test -z $(ADK_RUNTIME_PASSWORD) || \
-	    $(SED) 's,\*NP\*,'"$$($(STAGING_HOST_DIR)/usr/bin/mkcrypt \
-	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
+	    passwd=$$($(STAGING_HOST_DIR)/usr/bin/mkcrypt '${ADK_RUNTIME_PASSWORD}'); \
+	    $(SED) "s,\*NP\*,$$passwd,g" $(IDIR_BASE_FILES)/etc/shadow
 	echo $(ADK_RUNTIME_TMPFS_SIZE) > $(IDIR_BASE_FILES)/etc/tmpfs
 ifeq ($(ADK_TARGET_WITH_ROOT_RW),y)
 	echo 'export IPKGTMPDIR=/root/.ipkg' >> $(IDIR_BASE_FILES)/etc/profile
