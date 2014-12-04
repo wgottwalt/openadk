@@ -18,8 +18,8 @@ config ADK_KERNEL_VERSION_3_14_22
 	boolean
 	select ADK_KERNEL_VERSION_3_14
 
-config ADK_KERNEL_VERSION_3_12_27
-	prompt "3.12.27"
+config ADK_KERNEL_VERSION_3_12_33
+	prompt "3.12.33"
 	depends on !ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
 	boolean
