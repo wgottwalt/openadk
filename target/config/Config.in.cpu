@@ -49,6 +49,9 @@ config ADK_CPU_ARC
 config ADK_CPU_TILE
 	boolean
 
+config ADK_CPU_C6X
+	boolean
+
 config ADK_CPU_CRIS_V10
 	boolean
 
@@ -144,6 +147,7 @@ config ADK_TARGET_CPU_ARCH
 	default "arceb" if ADK_CPU_ARC && ADK_big
 	default "avr32" if ADK_CPU_AVR32
 	default "bfin" if ADK_CPU_BFIN
+	default "c6x" if ADK_CPU_C6X
 	default "cris" if ADK_CPU_CRIS_V10
 	default "crisv32" if ADK_CPU_CRIS_V32
 	default "i486" if ADK_CPU_I486

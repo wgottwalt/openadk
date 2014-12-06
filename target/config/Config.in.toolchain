@@ -26,7 +26,7 @@ config ADK_TOOLCHAIN_GCC_4_5_4
 config ADK_TOOLCHAIN_GCC_4_7_4
 	prompt "4.7.4"
 	boolean
-	depends on ADK_LINUX_CRIS
+	depends on ADK_LINUX_CRIS || ADK_LINUX_C6X
 
 config ADK_TOOLCHAIN_GCC_4_8_0_ARC
 	prompt "4.8.0-arc"
@@ -42,6 +42,7 @@ config ADK_TOOLCHAIN_GCC_4_8_3
 	depends on !ADK_LINUX_AVR32
 	depends on !ADK_LINUX_CRIS
 	depends on !ADK_LINUX_TILE
+	depends on !ADK_LINUX_C6X
 
 config ADK_TOOLCHAIN_GCC_4_9_1
 	prompt "4.9.1"
@@ -50,6 +51,7 @@ config ADK_TOOLCHAIN_GCC_4_9_1
 	depends on !ADK_LINUX_ARC
 	depends on !ADK_LINUX_AVR32
 	depends on !ADK_LINUX_CRIS
+	depends on !ADK_LINUX_C6X
 
 config ADK_TOOLCHAIN_GCC_GIT
 	prompt "git"
