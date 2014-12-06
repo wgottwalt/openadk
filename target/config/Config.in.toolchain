@@ -134,6 +134,7 @@ config ADK_LINUX_ARM_WITH_THUMB
 	boolean
 	select ADK_KERNEL_THUMB2_KERNEL
 	default n
+	depends on ADK_LINUX_ARM
 	help
 	  Experimental option. Use with care.
 
