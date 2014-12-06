@@ -44,8 +44,8 @@ config ADK_TOOLCHAIN_GCC_4_8_3
 	depends on !ADK_LINUX_TILE
 	depends on !ADK_LINUX_C6X
 
-config ADK_TOOLCHAIN_GCC_4_9_1
-	prompt "4.9.1"
+config ADK_TOOLCHAIN_GCC_4_9_2
+	prompt "4.9.2"
 	boolean
 	depends on !ADK_LINUX_BFIN
 	depends on !ADK_LINUX_ARC
