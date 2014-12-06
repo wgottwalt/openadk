@@ -4,22 +4,20 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libcec
-PKG_VERSION:=		2.1.4
-PKG_RELEASE:=		6
-PKG_MD5SUM:=		faa58944f87e9beda165f615d4b46766
+PKG_VERSION:=		2.2.0
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		17d6ec05d2ac9e6779eb8d2986a62688
 PKG_DESCR:=		control your device with your tv remote control
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libudev
 PKG_BUILDDEP:=		eudev
 PKG_URL:=		http://libcec.pulse-eight.com/
-PKG_SITES:=		http://packages.pulse-eight.net/pulse/sources/libcec/
+PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
-PKG_SYSTEM_DEPENDS:=    raspberry-pi ibm-x40 solidrun-imx6
+PKG_SYSTEM_DEPENDS:=    raspberry-pi solidrun-imx6
 
 include $(ADK_TOPDIR)/mk/package.mk
 
