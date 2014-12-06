@@ -4,6 +4,7 @@ arc
 arm
 avr32
 bfin
+c6x
 cris
 m68k
 microblaze

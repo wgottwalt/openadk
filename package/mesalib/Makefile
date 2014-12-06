@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mesalib
-PKG_VERSION:=		10.2.7
+PKG_VERSION:=		10.3.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6927e1ae64818e6b692edaf06c644388
+PKG_MD5SUM:=		e02efdfe0466bc75769e462841ab83f2
 PKG_DESCR:=		3d graphics library
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm libexpat
