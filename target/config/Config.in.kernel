@@ -59,9 +59,11 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "solidrun-imx6" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
+	default "linksys-nslu2" if ADK_TARGET_SYSTEM_LINKSYS_NSLU2
 	default "lemote-yeelong" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default "mikrotik-rb4xx" if ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
 	default "mikrotik-rb532" if ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	default "dragino-ms14s" if ADK_TARGET_SYSTEM_DRAGINO_MS14S
 	default "generic-pc" if ADK_TARGET_SYSTEM_GENERIC_PC
 	default "pcengines-apu" if ADK_TARGET_SYSTEM_PCENGINES_APU
 

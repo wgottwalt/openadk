@@ -2,9 +2,9 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		gcc
-ifeq ($(ADK_TOOLCHAIN_GCC_4_9_1),y)
-PKG_VERSION:=		4.9.1
-PKG_MD5SUM:=		b188a3c9be25ddbf36b4fa6f04aaafaa
+ifeq ($(ADK_TOOLCHAIN_GCC_4_9_2),y)
+PKG_VERSION:=		4.9.2
+PKG_MD5SUM:=		76f464e0511c26c93425a9dcdc9134cf
 PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
 PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
