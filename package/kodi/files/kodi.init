@@ -13,10 +13,15 @@ autostart)
 	;;
 start)
 	export LD_LIBRARY_PATH=/opt/vc/lib
-	xbmc &
+	mkdir -p /data/kodi/temp
+	if [ $? -ne 0 ]; then
+		echo "/data not writable"
+		exit 1
+	fi
+	kodi &
 	;;
 stop)
-	kill $(pgrep -f /usr/lib/xbmc/xbmc.bin)
+	kill $(pgrep -f /usr/lib/kodi/kodi.bin)
 	;;
 restart)
 	sh $0 stop

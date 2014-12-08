@@ -174,23 +174,25 @@ CONFIGURE_ARGS+=	--disable-x11 \
 endif
 
 pre-configure:
-	(cd $(WRKBUILD)/lib/cpluff && env PATH=$(AUTOTOOL_PATH) ./autogen.sh)
+	(cd $(WRKBUILD)/lib/cpluff && env PATH='$(AUTOTOOL_PATH)' ./autogen.sh)
 
 pre-build:
-	PATH=$(HOST_PATH) \
+	PATH='$(HOST_PATH)' \
 	make CXX="${HOST_CXX}" CC="${HOST_CC}" CFLAGS="${HOST_CFLAGS}" \
 		CXXFLAGS="${HOST_CXXFLAGS}" LDFLAGS="${HOST_LDFLAGS}" \
 		 -C $(WRKBUILD)/tools/depends/native/JsonSchemaBuilder
 
 kodi-install:
-	$(INSTALL_DIR) $(IDIR_KODI)/usr/lib/xbmc/addons
-	$(CP) $(WRKINST)/usr/lib/xbmc/* \
-		$(IDIR_KODI)/usr/lib/xbmc
-	$(INSTALL_DIR) $(IDIR_KODI)/usr/share/xbmc
-	$(CP) $(WRKINST)/usr/share/xbmc/* \
-		$(IDIR_KODI)/usr/share/xbmc
+	$(INSTALL_DIR) $(IDIR_KODI)/usr/lib/kodi/addons
+	$(CP) $(WRKINST)/usr/lib/kodi/* \
+		$(IDIR_KODI)/usr/lib/kodi
+	$(INSTALL_DIR) $(IDIR_KODI)/usr/share/kodi
+	$(CP) $(WRKINST)/usr/share/kodi/* \
+		$(IDIR_KODI)/usr/share/kodi
 	$(INSTALL_DIR) $(IDIR_KODI)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/xbmc \
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/kodi-standalone \
+		$(IDIR_KODI)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/kodi \
 		$(IDIR_KODI)/usr/bin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
