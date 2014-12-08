@@ -15,6 +15,16 @@ config ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
 
 menu "Watchdog driver support"
 
+config ADK_KERNEL_BCM2708_WDT
+	prompt "BCM2708 Hardware Watchdog"
+	boolean
+	select ADK_KERNEL_WATCHDOG
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
+	help
+	  Watchdog driver for Raspberry Pi.
+
 config ADK_KERNEL_IMX2_WDT
 	prompt "IMX6 Hardware Watchdog"
 	boolean
