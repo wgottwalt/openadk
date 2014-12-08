@@ -4,10 +4,16 @@ depends on ADK_TARGET_WITH_SPI
 config ADK_KERNEL_SPI
 	boolean
 
+config ADK_KERNEL_SPI_DEBUG
+	boolean
+
 config ADK_KERNEL_SPI_MASTER
 	boolean
 
 config ADK_KERNEL_SPI_BITBANG
+	tristate
+
+config ADK_KERNEL_BCM2708_SPIDEV
 	tristate
 
 config ADK_KERNEL_SPI_AR71XX
@@ -33,6 +39,7 @@ config ADK_KERNEL_SPI_BCM2708
 	select ADK_KERNEL_SPI_MASTER
 	select ADK_KERNEL_SPI_BITBANG
 	select ADK_KERNEL_REGMAP_SPI
+	select ADK_KERNEL_BCM2708_SPIDEV
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default n
@@ -48,4 +55,18 @@ config ADK_KERNEL_SPI_IMX
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
+config ADK_KERNEL_SPI_SPIDEV
+	prompt "SPI userland driver"
+	tristate
+	select ADK_KERNEL_SPI
+	select ADK_KERNEL_SPI_MASTER
+	default n
+
+config ADK_KERNEL_SPI_GPIO
+	prompt "GPIO support"
+	tristate
+	select ADK_KERNEL_SPI
+	select ADK_KERNEL_SPI_MASTER
+	default n
+	
 endmenu
