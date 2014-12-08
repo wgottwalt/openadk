@@ -1,0 +1,27 @@
+From 3c367cc533d07353f60110340c110f6d622094b8 Mon Sep 17 00:00:00 2001
+From: Phil Sutter <phil@nwl.cc>
+Date: Tue, 13 May 2014 00:14:15 +0200
+Subject: [PATCH] drivers: link SPI drivers before MTD drivers
+
+This prevents probe deferral in SPI-driven MTD drivers.
+---
+ drivers/Makefile | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/drivers/Makefile b/drivers/Makefile
+index 8e3b8b0..61bbeb2 100644
+--- a/drivers/Makefile
++++ b/drivers/Makefile
+@@ -64,8 +64,8 @@ obj-$(CONFIG_IDE)		+= ide/
+ obj-$(CONFIG_SCSI)		+= scsi/
+ obj-$(CONFIG_ATA)		+= ata/
+ obj-$(CONFIG_TARGET_CORE)	+= target/
+-obj-$(CONFIG_MTD)		+= mtd/
+ obj-$(CONFIG_SPI)		+= spi/
++obj-$(CONFIG_MTD)		+= mtd/
+ obj-y				+= hsi/
+ obj-y				+= net/
+ obj-$(CONFIG_ATM)		+= atm/
+-- 
+1.8.5.3
+
