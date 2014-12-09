@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		imx-vpu
-PKG_VERSION:=		3.10.17-1.0.0
+PKG_VERSION:=		3.10.31-1.1.0-beta
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		71ea1b803864101ebf88a1bab45514d2
+PKG_MD5SUM:=		ab76e7395b6a178a8538a6d5beb87656
 PKG_DESCR:=		IMX VPU library (Freescale)
 PKG_DEPENDS:=		firmware-imx
 PKG_SECTION:=		libs/video

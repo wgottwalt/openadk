@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		14.0rc2
+PKG_VERSION:=		14.0rc3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f56aeb81db6878fcac6631f6a3e2c702
+PKG_MD5SUM:=		ab161aa0dee4ca77b977d3ca2f4ebdd5
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv

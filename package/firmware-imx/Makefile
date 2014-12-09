@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		firmware-imx
-PKG_VERSION:=		3.10.17-1.0.0
+PKG_VERSION:=		3.10.31-1.1.0-beta
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		29a54f6e5bf889a00cd8ca85080af223
-PKG_DESCR:=		IMX firmware (Freescale)
+PKG_MD5SUM:=		4e102affc4273f424da4cec9f46adae8
+PKG_DESCR:=		IMX VPU firmware (Freescale)
 PKG_SECTION:=		sys/firmware
 PKG_URL:=		http://www.freescale.com/
 PKG_SITES:=		http://www.freescale.com/lgfiles/NMG/MAD/YOCTO/
@@ -25,8 +25,8 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 firmware-imx-install:
-	$(INSTALL_DIR) $(IDIR_FIRMWARE_IMX)/lib/firmware
-	${CP} ${WRKBUILD}/firmware/{sdma,vpu} \
-		$(IDIR_FIRMWARE_IMX)/lib/firmware
+	$(INSTALL_DIR) $(IDIR_FIRMWARE_IMX)/lib/firmware/vpu
+	${CP} ${WRKBUILD}/firmware/vpu/vpu_fw_imx6* \
+		$(IDIR_FIRMWARE_IMX)/lib/firmware/vpu
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

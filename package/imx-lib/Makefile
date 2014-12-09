@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		imx-lib
-PKG_VERSION:=		3.10.17-1.0.0
+PKG_VERSION:=		3.10.31-1.1.0-beta
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8e3346d5f33b5aa5f915a0dd8aa99cc9
+PKG_MD5SUM:=		0485e457eafe5a10274d171b3af79e2f
 PKG_DESCR:=		IMX library (Freescale)
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.freescale.com/
