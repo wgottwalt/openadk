@@ -1,0 +1,44 @@
+From e73f7d9a658c7fc693a9b9c45a1f65c014dd6e40 Mon Sep 17 00:00:00 2001
+From: Phil Sutter <phil@nwl.cc>
+Date: Tue, 13 May 2014 01:17:38 +0200
+Subject: [PATCH] phy: mdio-bitbang: ignore TA value
+
+This is necessary on rb493g to make the kernel detect the second switch.
+---
+ drivers/net/phy/mdio-bitbang.c | 13 ++-----------
+ 1 file changed, 2 insertions(+), 11 deletions(-)
+
+diff --git a/drivers/net/phy/mdio-bitbang.c b/drivers/net/phy/mdio-bitbang.c
+index daec9b0..4fa2be0 100644
+--- a/drivers/net/phy/mdio-bitbang.c
++++ b/drivers/net/phy/mdio-bitbang.c
+@@ -155,7 +155,7 @@ static int mdiobb_cmd_addr(struct mdiobb_ctrl *ctrl, int phy, u32 addr)
+ static int mdiobb_read(struct mii_bus *bus, int phy, int reg)
+ {
+ 	struct mdiobb_ctrl *ctrl = bus->priv;
+-	int ret, i;
++	int ret;
+ 
+ 	if (reg & MII_ADDR_C45) {
+ 		reg = mdiobb_cmd_addr(ctrl, phy, reg);
+@@ -165,16 +165,7 @@ static int mdiobb_read(struct mii_bus *bus, int phy, int reg)
+ 
+ 	ctrl->ops->set_mdio_dir(ctrl, 0);
+ 
+-	/* check the turnaround bit: the PHY should be driving it to zero */
+-	if (mdiobb_get_bit(ctrl) != 0) {
+-		/* PHY didn't drive TA low -- flush any bits it
+-		 * may be trying to send.
+-		 */
+-		for (i = 0; i < 32; i++)
+-			mdiobb_get_bit(ctrl);
+-
+-		return 0xffff;
+-	}
++	mdiobb_get_bit(ctrl);
+ 
+ 	ret = mdiobb_get_num(ctrl, 16);
+ 	mdiobb_get_bit(ctrl);
+-- 
+1.8.5.3
+

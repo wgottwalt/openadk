@@ -1,0 +1,14 @@
+--- kodi-14.0rc2.orig/xbmc/Application.cpp	2014-12-05 19:38:44.000000000 -0600
++++ kodi-14.0rc2/xbmc/Application.cpp	2014-12-07 10:16:27.900418001 -0600
+@@ -1076,10 +1076,7 @@ bool CApplication::InitDirectoriesLinux(
+     userName = "root";
+ 
+   std::string userHome;
+-  if (getenv("HOME"))
+-    userHome = getenv("HOME");
+-  else
+-    userHome = "/root";
++  userHome = "/data/kodi";
+ 
+   std::string appBinPath, appPath;
+   std::string appName = CCompileInfo::GetAppName();

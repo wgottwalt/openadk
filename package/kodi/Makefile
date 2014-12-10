@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		14.0rc2
+PKG_VERSION:=		14.0rc3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f56aeb81db6878fcac6631f6a3e2c702
+PKG_MD5SUM:=		ab161aa0dee4ca77b977d3ca2f4ebdd5
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
@@ -174,23 +174,25 @@ CONFIGURE_ARGS+=	--disable-x11 \
 endif
 
 pre-configure:
-	(cd $(WRKBUILD)/lib/cpluff && env PATH=$(AUTOTOOL_PATH) ./autogen.sh)
+	(cd $(WRKBUILD)/lib/cpluff && env PATH='$(AUTOTOOL_PATH)' ./autogen.sh)
 
 pre-build:
-	PATH=$(HOST_PATH) \
+	PATH='$(HOST_PATH)' \
 	make CXX="${HOST_CXX}" CC="${HOST_CC}" CFLAGS="${HOST_CFLAGS}" \
 		CXXFLAGS="${HOST_CXXFLAGS}" LDFLAGS="${HOST_LDFLAGS}" \
 		 -C $(WRKBUILD)/tools/depends/native/JsonSchemaBuilder
 
 kodi-install:
-	$(INSTALL_DIR) $(IDIR_KODI)/usr/lib/xbmc/addons
-	$(CP) $(WRKINST)/usr/lib/xbmc/* \
-		$(IDIR_KODI)/usr/lib/xbmc
-	$(INSTALL_DIR) $(IDIR_KODI)/usr/share/xbmc
-	$(CP) $(WRKINST)/usr/share/xbmc/* \
-		$(IDIR_KODI)/usr/share/xbmc
+	$(INSTALL_DIR) $(IDIR_KODI)/usr/lib/kodi/addons
+	$(CP) $(WRKINST)/usr/lib/kodi/* \
+		$(IDIR_KODI)/usr/lib/kodi
+	$(INSTALL_DIR) $(IDIR_KODI)/usr/share/kodi
+	$(CP) $(WRKINST)/usr/share/kodi/* \
+		$(IDIR_KODI)/usr/share/kodi
 	$(INSTALL_DIR) $(IDIR_KODI)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/xbmc \
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/kodi-standalone \
+		$(IDIR_KODI)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/kodi \
 		$(IDIR_KODI)/usr/bin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

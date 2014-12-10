@@ -1,6 +1,6 @@
---- kodi-14.0alpha4.orig/xbmc/cores/dvdplayer/DVDDemuxers/DVDDemuxFFmpeg.cpp	2014-09-05 14:09:59.000000000 +0200
-+++ kodi-14.0alpha4/xbmc/cores/dvdplayer/DVDDemuxers/DVDDemuxFFmpeg.cpp	2014-09-05 15:53:47.432904545 +0200
-@@ -490,8 +490,8 @@ void CDVDDemuxFFmpeg::Reset()
+--- kodi-14.0rc2.orig/xbmc/cores/dvdplayer/DVDDemuxers/DVDDemuxFFmpeg.cpp	2014-12-05 19:38:44.000000000 -0600
++++ kodi-14.0rc2/xbmc/cores/dvdplayer/DVDDemuxers/DVDDemuxFFmpeg.cpp	2014-12-07 03:43:25.308418001 -0600
+@@ -520,8 +520,8 @@ void CDVDDemuxFFmpeg::Reset()
  void CDVDDemuxFFmpeg::Flush()
  {
    // naughty usage of an internal ffmpeg function
@@ -9,5 +9,5 @@
 +  //if (m_pFormatContext)
 +   // av_read_frame_flush(m_pFormatContext);
  
-   m_iCurrentPts = DVD_NOPTS_VALUE;
+   m_currentPts = DVD_NOPTS_VALUE;
  
