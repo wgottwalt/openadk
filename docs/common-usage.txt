@@ -43,7 +43,7 @@ applied on the next clean rebuild:
  $ make package=<pkgname> update-patches
 --------------------
 
-The newly created patches will be opened in $EDITOR, so you can some comments to
+The newly created patches will be opened in $EDITOR, so you can add some comments to
 the top of the file, before the diff.
 
 
@@ -69,17 +69,17 @@ Environment variables
 OpenADK also honors some environment variables, when they are passed
 to +make+.
 
-* +ARCH+, the architecture of the target system
-* +SYSTEM+, the target system name
-* +LIBC+, the C library for the target system
-* +COLLECT+, the package collection, which will be used
+* +ADK_TARGET_ARCH+, the architecture of the target system
+* +ADK_TARGET_SYSTEM+, the target system name
+* +ADK_TARGET_LIBC+, the C library for the target system
+* +ADK_TARGET_COLLECTION+, the package collection, which will be used
 * +VERBOSE+, verbose build, when set to 1
 
 An example that creates a configuration file for Raspberry PI with all
 software packages enabled, but not included in the resulting firmware image:
 
 --------------------
- $ make ARCH=arm SYSTEM=raspberry-pi LIBC=musl allmodconfig
+ $ make ADK_TARGET_ARCH=arm ADK_TARGET_SYSTEM=raspberry-pi ADK_TARGET_LIBC=musl allmodconfig
 --------------------
 
 This is often used in the development process of a target system, to verify that
