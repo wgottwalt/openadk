@@ -4,9 +4,11 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		squeezelite
-PKG_VERSION:=		1.6.4
+# git hash f2b5e89c1ea3904498cd8649a146c2aa1a748996
+# from https://code.google.com/p/squeezelite/
+PKG_VERSION:=		1.6.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7605af4d64291495645f88575a564475
+PKG_MD5SUM:=		aaf326f181c7043864ac0b272297e15c
 PKG_DESCR:=		headless squeezebox emulator
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libflac alsa-lib libvorbis libmad
