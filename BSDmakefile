@@ -18,10 +18,6 @@ _subdir:=	${.TARGETS}
 ${.TARGETS}: _subdir
 
 _subdir: ${_subdir_dep}
-	@if test x"$$(umask 2>/dev/null | sed 's/00*22/OK/')" != x"OK"; then \
-		echo >&2 Error: you must build with “umask 022”, sorry.; \
-		exit 1; \
-	fi
 	cd ${.CURDIR}/${subdir} && ADK_TOPDIR=${.CURDIR} DEVELOPER=1 \
 	    ${GMAKE} VERBOSE=1 ${.MFLAGS} ${_subdir}
 

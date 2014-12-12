@@ -4,10 +4,6 @@
 ADK_TOPDIR=$(shell pwd)
 export ADK_TOPDIR
 
-ifneq ($(shell umask 2>/dev/null | sed 's/0*022/OK/'),OK)
-$(error your umask is not 022)
-endif
-
 CONFIG_CONFIG_IN = Config.in
 CONFIG = adk/config
 DEFCONFIG=		ADK_DEBUG=n \
