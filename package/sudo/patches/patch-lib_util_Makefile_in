@@ -1,0 +1,15 @@
+--- sudo-1.8.11p2.orig/lib/util/Makefile.in	2014-10-07 22:26:20.000000000 +0200
++++ sudo-1.8.11p2/lib/util/Makefile.in	2014-12-15 11:39:13.098206188 +0100
+@@ -148,10 +148,10 @@ signame.c: mksigname
+ 	./mksigname > $@
+ 
+ mksiglist: $(srcdir)/mksiglist.c $(srcdir)/mksiglist.h $(incdir)/sudo_compat.h $(top_builddir)/config.h
+-	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEFS) $(srcdir)/mksiglist.c -o $@
++	$(CC_FOR_BUILD) -I$(top_builddir) -I$(srcdir) -I$(top_srcdir) -I$(incdir) $(CPPFLAGS_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(DEFS) $(srcdir)/mksiglist.c -o $@
+ 
+ mksigname: $(srcdir)/mksigname.c $(srcdir)/mksigname.h $(incdir)/sudo_compat.h $(top_builddir)/config.h
+-	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEFS) $(srcdir)/mksigname.c -o $@
++	$(CC_FOR_BUILD) -I$(top_builddir) -I$(srcdir) -I$(top_srcdir) -I$(incdir) $(CPPFLAGS_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(DEFS) $(srcdir)/mksigname.c -o $@
+ 
+ $(srcdir)/mksiglist.h: $(srcdir)/siglist.in
+ 	@if [ -n "$(DEVEL)" ]; then \

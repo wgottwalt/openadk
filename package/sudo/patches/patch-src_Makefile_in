@@ -1,0 +1,23 @@
+--- sudo-1.8.11p2.orig/src/Makefile.in	2014-10-07 22:26:20.000000000 +0200
++++ sudo-1.8.11p2/src/Makefile.in	2014-12-15 13:03:47.830175190 +0100
+@@ -151,17 +151,17 @@ install-rc:
+ 	@if [ -n "$(INIT_SCRIPT)" ]; then \
+ 	    $(SHELL) $(top_srcdir)/mkinstalldirs $(DESTDIR)$(INIT_DIR) \
+ 		`echo $(DESTDIR)$(RC_LINK) | $(SED) 's,/[^/]*$$,,'`; \
+-	    $(INSTALL) $(INSTALL_OWNER) -m 0755 $(top_srcdir)/init.d/$(INIT_SCRIPT) $(DESTDIR)$(INIT_DIR)/sudo; \
++	    $(INSTALL) -m 0755 $(top_srcdir)/init.d/$(INIT_SCRIPT) $(DESTDIR)$(INIT_DIR)/sudo; \
+ 	    rm -f $(DESTDIR)$(RC_LINK); \
+ 	    ln -s $(INIT_DIR)/sudo $(DESTDIR)$(RC_LINK); \
+ 	fi
+ 
+ install-binaries: install-dirs $(PROGS)
+-	INSTALL_BACKUP='~' $(LIBTOOL) --mode=install $(INSTALL) $(INSTALL_OWNER) -m 04755 sudo $(DESTDIR)$(bindir)/sudo
++	INSTALL_BACKUP='~' $(LIBTOOL) --mode=install $(INSTALL) -m 0755 sudo $(DESTDIR)$(bindir)/sudo
+ 	rm -f $(DESTDIR)$(bindir)/sudoedit
+ 	ln -s sudo $(DESTDIR)$(bindir)/sudoedit
+ 	if [ -f sesh ]; then \
+-	    INSTALL_BACKUP='~' $(LIBTOOL) --mode=install $(INSTALL) $(INSTALL_OWNER) -m 0755 sesh $(DESTDIR)$(libexecdir)/sudo/sesh; \
++	    INSTALL_BACKUP='~' $(LIBTOOL) --mode=install $(INSTALL) -m 0755 sesh $(DESTDIR)$(libexecdir)/sudo/sesh; \
+ 	fi
+ 
+ install-doc:
