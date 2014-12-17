@@ -3,10 +3,10 @@
 
 include $(ADK_TOPDIR)/rules.mk
 include ../rules.mk
-include ${ADK_TOPDIR}/mk/kernel-ver.mk
+include $(ADK_TOPDIR)/mk/kernel-ver.mk
 include $(ADK_TOPDIR)/mk/linux.mk
-include ${ADK_TOPDIR}/mk/kernel-vars.mk
-include ${ADK_TOPDIR}/mk/buildhlp.mk
+include $(ADK_TOPDIR)/mk/kernel-vars.mk
+include $(ADK_TOPDIR)/mk/buildhlp.mk
 
 $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched:
 ifeq ($(ADK_TARGET_SYSTEM_PCENGINES_APU),y)
@@ -50,11 +50,16 @@ ifeq ($(ADK_KERNEL_ADDON_MPTCP),y)
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) \
 		$(ADK_TOPDIR)/target/linux/patches/$(KERNEL_VERSION) patch-mptcp $(MAKE_TRACE)
 endif
+ifeq ($(ADK_KERNEL_ADDON_DIETNET),y)
+	$(TRACE) dietnet-kernel-patch
+	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) \
+		$(ADK_TOPDIR)/target/linux/patches/$(KERNEL_VERSION) patch-dietnet $(MAKE_TRACE)
+endif
 	touch $@
 
 $(WRKBUILD)/.headers: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched
-	${KERNEL_MAKE_ENV} $(MAKE) -C $(WRKBUILD) ${KERNEL_MAKE_OPTS} headers_check
-	${KERNEL_MAKE_ENV} $(MAKE) -C $(WRKBUILD) ${KERNEL_MAKE_OPTS} \
+	$(KERNEL_MAKE_ENV) $(MAKE) -C $(WRKBUILD) $(KERNEL_MAKE_OPTS) headers_check
+	$(KERNEL_MAKE_ENV) $(MAKE) -C $(WRKBUILD) $(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR)/usr \
 		headers_install
 ifeq ($(ADK_TARGET_ARCH),cris)
