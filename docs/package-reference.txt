@@ -31,8 +31,8 @@ information is:
   Example: PKG_SITES:=		+${MASTER_SITE_GNU:=foo/}+
 
 * +DISTFILES+ optional, may contain the name of the tarball of
-  the package. If +DISTFILES+ is not specified, it defaults to +PKG_NAME-PKG_VERSION.tar.gz+. 
-  Example: DISTFILES=		+${PKG_NAME}${PKG_VERSION}.tar.xz+
+  the package. If +DISTFILES+ is not specified, it defaults to +PKG_NAME-PKG_VERSION.tar.xz+. 
+  Example: DISTFILES=		+${PKG_NAME}${PKG_VERSION}.tar.gz+
 
 * +NO_DISTFILES+ optional, may be set to 1, to disable fetching of any archives.
   Provide the source code for the package in +package/<pkgname>/src+, which will be
@@ -54,11 +54,11 @@ information is:
 
 * +PKG_OPTS+ optional, may be set to following values: 
      +dev+ create a development package automatically, containing header files and +.pc+ files. 
-            Only useful for library packages, when you want to compile on the target.
+		Only useful for library packages, when you want to compile on the target.
      +devonly+ only creates a development package with header files, normally not needed on
-   	      the target.
+		the target.
      +noscripts+ do not automatically install *-config and other build related scripts into
-     +STAGING_TARGET_DIR/scripts+, required for automake/autoconf package
+     		+STAGING_TARGET_DIR/scripts+, required for automake/autoconf package
      +noremove+ do not automatically remove package files from +STAGING_TARGET_DIR+
 
 * +PKG_NEED_CXX+ optional, package need C++ compiler
@@ -82,7 +82,7 @@ PKG_DEPENDS+=		muh maeh
 The variables that define what should be performed at the
 different steps of the configure, build and install process.
 
-* +CONFIG_STYLE+ either manual, auto or minimal
+* +CONFIG_STYLE+ manual, auto, minimal, basic, perl or cmake
 
 * +CONFIGURE_ARGS+ add --enable-foo/--disable-foo to configure
 
@@ -126,10 +126,11 @@ The variables to add or overwrite preprocessor, compiler and linker flags:
 
 * +TARGET_CXXFLAGS+ flags for the C++ compiler
 
-* +CPPFLAGS_FOR_BUILD+ flags used for host preprocessing
+* +HOST_CPPFLAGS+ flags used for host preprocessing
 
-* +CFLAGS_FOR_BUILD+ flags used for host compiling
+* +HOST_CFLAGS+ flags used for host compiling
 
-* +LDFLAGS_FOR_BUILD+ flags used for host linking
+* +HOST_LDFLAGS+ flags used for host linking
 
+* +HOST_CXXFLAGS+ flags for the C++ host compiler
 
