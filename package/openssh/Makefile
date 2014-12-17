@@ -5,12 +5,12 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssh
 PKG_VERSION:=		6.7p1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_MD5SUM:=		3246aa79317b1d23cae783a3bf8275d6
 PKG_DESCR:=		secure shell implementation
 PKG_SECTION:=		net/security
-PKG_BUILDDEP:=		zlib openssl
-PKG_DEPENDS:=		zlib libopenssl libpthread
+PKG_BUILDDEP:=		zlib
+PKG_DEPENDS:=		zlib libpthread
 PKG_URL:=		http://www.openssh.com/
 PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/
 
@@ -30,11 +30,18 @@ PKGSN_OPENSSH_SFTP_CLIENT:=	openssh
 PKGSD_OPENSSH_SFTP_SERVER:=	sftp server
 PKGSN_OPENSSH_SFTP_SERVER:=	openssh
 
-PKG_CHOICES_OPENSSH:=	NOKRB WITH_KRB5
-PKGCD_NOKRB:=		no Kerberos support
-PKGCD_WITH_KRB5:=	with MIT Kerberos
-PKGCS_WITH_KRB5:=	libkrb5 libcom-err
-PKGCB_WITH_KRB5:=	krb5
+PKG_FLAVOURS_OPENSSH:=	WITH_KRB5
+PKGFD_WITH_KRB5:=	enable kerberos 5 support
+PKGFS_WITH_KRB5:=	libkrb5 libcom-err
+PKGFB_WITH_KRB5:=	krb5
+
+PKG_CHOICES_OPENSSH:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	with libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	with openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCB_WITH_OPENSSL:=	openssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
-PKG_VERSION:=		1.0.1i
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		c8dc151a671b9b92ff3e4c118b174972
+PKG_VERSION:=		1.0.1j
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		f7175c9cd3c39bb1907ac8bba9df8ed3
 PKG_DESCR:=		secure socket layer libraries
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		zlib
@@ -62,7 +62,7 @@ endif
 
 post-extract:
 	-mkdir -p $(STAGING_TARGET_DIR)/usr/include/crypto
-	cp ./files/cryptodev.h $(STAGING_TARGET_DIR)/usr/include/crypto/
+	$(CP) ./files/cryptodev.h $(STAGING_TARGET_DIR)/usr/include/crypto/
 
 do-configure:
 	(cd $(WRKBUILD); \
