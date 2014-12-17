@@ -84,12 +84,19 @@ else ifneq ($(filter basic,${CONFIG_STYLE}),)
 	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
 else ifneq ($(filter perl,${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring perl module... "
-	cd ${WRKBUILD}; \
-		PATH='${HOST_PATH}' \
-		PERL_MM_USE_DEFAULT=1 \
-		PERL_AUTOINSTALL=--skipdeps \
-		$(PERL_ENV) \
-		perl-host Makefile.PL ${CONFIGURE_ARGS}
+	if [ -f ${WRKBUILD}/Makefile.PL ]; then \
+		cd ${WRKBUILD}; \
+			PATH='${HOST_PATH}' \
+			PERL_MM_USE_DEFAULT=1 \
+			PERL_AUTOINSTALL=--skipdeps \
+			$(PERL_ENV) \
+			perl-host Makefile.PL ${CONFIGURE_ARGS}; \
+	else \
+		cd ${WRKBUILD}; \
+			PATH='${HOST_PATH}' \
+			$(PERL_ENV) \
+			perl-host Build.PL; \
+	fi
 else ifeq ($(strip ${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring... "
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
@@ -114,7 +121,7 @@ else
 	@exit 1
 endif
 	@${MAKE} post-configure $(MAKE_TRACE)
-	touch $@
+	@touch $@
 
 # do a parallel build if requested && package doesn't force disable it
 ifeq (${ADK_MAKE_PARALLEL},y)

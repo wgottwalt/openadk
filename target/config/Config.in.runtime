@@ -57,7 +57,7 @@ config ADK_QUIET_KERNEL
 
 choice
 prompt "bootup messages from initscripts"
-default ADK_RUNTIME_QUIET_INIT if ADK_PKG_XBMCBOX
+default ADK_RUNTIME_QUIET_INIT if ADK_PKG_KODIBOX
 default ADK_RUNTIME_VERBOSE_INIT_VGA if ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU_WITH_GRAPHIC || ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY || ADK_TARGET_VBOX
 default ADK_RUNTIME_VERBOSE_INIT_SERIAL
 
@@ -76,7 +76,7 @@ endchoice
 choice
 prompt "start getty or shell after bootup"
 default ADK_RUNTIME_SHELL if ADK_PKG_TEST
-default ADK_RUNTIME_NONE if ADK_PKG_XBMCBOX
+default ADK_RUNTIME_NONE if ADK_PKG_KODIBOX
 default ADK_RUNTIME_GETTY
 
 config ADK_RUNTIME_GETTY
@@ -127,6 +127,7 @@ config ADK_RUNTIME_GETTY_SERIAL
 	  Start getty on serial console.
 
 config ADK_RUNTIME_CONSOLE_SERIAL_DEVICE
+	prompt "serial console device"
 	string
 	default "hvc0" if ADK_TARGET_SYSTEM_QEMU_PPC64
 	default "ttyUL0" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
@@ -137,8 +138,10 @@ config ADK_RUNTIME_CONSOLE_SERIAL_DEVICE
 	default "ttyS0"
 
 config ADK_RUNTIME_CONSOLE_SERIAL_SPEED
+	prompt "serial console speed"
 	string
 	default "9600" if ADK_TARGET_SYSTEM_FON_FON2100
+	default "9600" if ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default "38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP	
 	default "115200"
 

@@ -179,10 +179,6 @@ NO_ERROR=0
 		echo "GNU bash needs to be installed."; \
 		exit 1; \
 	fi
-	@if test x"$$(umask 2>/dev/null | sed 's/00*22/OK/')" != x"OK"; then \
-		echo >&2 Error: you must build with umask 022, sorry.; \
-		exit 1; \
-	fi
 	@echo "ADK_TOPDIR:=$$(readlink -nf . 2>/dev/null || pwd -P)" >prereq.mk
 	@echo "BASH:=$$(which bash)" >>prereq.mk
 	@if [ -z "$$(which gmake 2>/dev/null )" ]; then \

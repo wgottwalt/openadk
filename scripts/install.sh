@@ -518,7 +518,7 @@ if (( datafssz )); then
 	((keep)) || create_fs "$datapart" ADKDATA ext4
 	((keep)) || tune_fs "$datapart"
 	mount_fs "$datapart" "$D" ext4
-	mkdir -m0755 "$D/mpd" "$D/xbmc" 2>/dev/null
+	mkdir -m0755 "$D/mpd" "$D/kodi" 2>/dev/null
 	umount_fs "$D"
 	case $target {
 	(raspberry-pi)

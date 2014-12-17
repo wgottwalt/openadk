@@ -5,9 +5,9 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-utils
 PKG_VERSION:=		1.0.28
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_MD5SUM:=		361552d5b1cacd0a1e7ba09e69990211
-PKG_DESCR:=		mixer/player utility
+PKG_DESCR:=		mixer/player/record utilities
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		alsa-lib libpthread librt
 PKG_BUILDDEP:=		alsa-lib
@@ -35,7 +35,7 @@ endif
 
 alsa-utils-install:
 	${INSTALL_DIR} ${IDIR_ALSA_UTILS}/usr/bin
-	${CP} ${WRKINST}/usr/bin/{aplay,amixer} ${IDIR_ALSA_UTILS}/usr/bin
+	${CP} ${WRKINST}/usr/bin/{aplay,amixer,arecord} ${IDIR_ALSA_UTILS}/usr/bin
 ifeq (${ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER},y)
 	${INSTALL_BIN} ${WRKINST}/usr/bin/alsamixer \
 		${IDIR_ALSA_UTILS}/usr/bin

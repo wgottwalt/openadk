@@ -4,12 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
-PKG_VERSION:=		2.3.4
+PKG_VERSION:=		2.3.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9b70be9fb45e407117c3c9b118e4ba22
+PKG_MD5SUM:=		e1debdea76a2c6f87c7f8a38325f900c
 PKG_DESCR:=		vpn solution using ssl/tls
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		ip
+PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
 
@@ -21,19 +22,9 @@ PKGFD_WITH_MANAGEMENT:=	enable management server support
 PKGFD_WITH_HTTPPROXY:=	enable http proxy support
 PKGFD_WITH_SOCKS:=	enable socks proxy support
 
-PKG_CHOICES_OPENVPN:=		WITH_OPENSSL WITH_POLARSSL
-PKGCD_WITH_OPENSSL:=		use OpenSSL for crypto
-PKGCS_WITH_OPENSSL:=		libopenssl
-PKGCB_WITH_OPENSSL:=		openssl
-PKGCD_WITH_POLARSSL:=		use PolarSSL for crypto
-PKGCS_WITH_POLARSSL:=		libpolarssl
-PKGCB_WITH_POLARSSL:=		polarssl
-
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENVPN,openvpn,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-AUTOTOOL_STYLE:=	autoreconf
 
 ifneq ($(ADK_PACKAGE_OPENVPN_WITH_LZO),)
 CONFIGURE_ARGS+=	--enable-lzo
@@ -59,16 +50,10 @@ else
 CONFIGURE_ARGS+=	--disable-socks
 endif
 
-ifeq (${ADK_PACKAGE_OPENVPN_WITH_OPENSSL},y)
-CONFIGURE_ARGS+=	--with-crypto-library=openssl
-endif
-ifeq (${ADK_PACKAGE_OPENVPN_WITH_POLARSSL},y)
-CONFIGURE_ARGS+=	--with-crypto-library=polarssl
-endif
-
 CONFIGURE_ARGS+=	--disable-plugins \
 			--enable-small \
 			--disable-debug \
+			--with-crypto-library=openssl \
 			--enable-iproute2
 
 openvpn-install:

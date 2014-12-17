@@ -5,10 +5,10 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		uvd
 PKG_VERSION:=		0.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_DESCR:=		udp server for version information
 PKG_SECTION:=		sys/misc
-PKG_URL:=		http://openadk.org/
+PKG_URL:=		http://www.openadk.org/
 
 NO_DISTFILES:=		1
 
@@ -25,7 +25,7 @@ do-build:
 		-o ${WRKBUILD}/uvd ${WRKBUILD}/uvd.c
 
 do-install:
-	${INSTALL_DIR} ${IDIR_UVD}/sbin
-	${INSTALL_BIN} ${WRKBUILD}/uvd ${IDIR_UVD}/sbin
+	${INSTALL_DIR} ${IDIR_UVD}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/uvd ${IDIR_UVD}/usr/sbin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

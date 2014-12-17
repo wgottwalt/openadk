@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sudo
-PKG_VERSION:=		1.8.10
-PKG_RELEASE:=		3
-PKG_MD5SUM:=		954d64906c3f6e2436f33445a049c58b
+PKG_VERSION:=		1.8.11p2
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		84012b4871b6c775c957cd310d5bad87
 PKG_DESCR:=		su do
 PKG_SECTION:=		sys/misc
-PKG_URL:=		http://www.courtesan.com/sudo/
-PKG_SITES:=		http://www.courtesan.com/sudo/dist/
+PKG_URL:=		http://www.sudo.ws/sudo/
+PKG_SITES:=		http://www.sudo.ws/sudo/dist/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -19,8 +19,12 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,SUDO,sudo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_CPPFLAGS+=		-I../ -I../include
+TARGET_LDFLAGS+=	-ldl
 CONFIGURE_ARGS+=	--without-pam \
 			--without-sendmail \
+			--disable-shared \
+			--enable-static-sudoers \
+			--disable-shared-libutil \
 			--with-env-editor
 
 ifeq ($(ADK_TARGET_USE_SSP),y)

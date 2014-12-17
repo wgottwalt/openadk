@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		14.0alpha4
-PKG_RELEASE:=		5
-PKG_MD5SUM:=		88a68db6e653b2029efddbfa0a855e1c
+PKG_VERSION:=		14.0rc3
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		ab161aa0dee4ca77b977d3ca2f4ebdd5
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
-PKG_DEPENDS+=		libglew mesalib libass libmpeg2 libmad libdbus
+PKG_DEPENDS+=		libass libmpeg2 libmad libdbus
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libopenssl libbz2 libtiff liblzo
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng libncurses
@@ -18,7 +18,7 @@ PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
 PKG_DEPENDS+=		libgpg-error libudev python2-mod-sqlite libffmpeg
 PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib libglu librt
-PKG_BUILDDEP:=		boost python2 mesalib libglew libass ffmpeg
+PKG_BUILDDEP:=		boost python2 libass ffmpeg
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis
 PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
@@ -61,8 +61,8 @@ PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 
 PKG_LIBC_DEPENDS:=	glibc
 
-PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
-PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
+PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc libglew mesalib
+PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc libglew mesalib
 PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
 PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
 PKG_SYSTEM_DEPENDS:=	raspberry-pi solidrun-imx6
@@ -105,9 +105,10 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-wayland \
 			--disable-pulse \
 			--disable-mid \
+			--disable-debug \
 			--enable-alsa \
 			--enable-libvorbisenc \
-			--disable-debug \
+			--enable-texturepacker \
 			--enable-udev \
 			--with-ffmpeg=shared
 
@@ -173,23 +174,25 @@ CONFIGURE_ARGS+=	--disable-x11 \
 endif
 
 pre-configure:
-	(cd $(WRKBUILD)/lib/cpluff && env PATH=$(AUTOTOOL_PATH) ./autogen.sh)
+	(cd $(WRKBUILD)/lib/cpluff && env PATH='$(AUTOTOOL_PATH)' ./autogen.sh)
 
 pre-build:
-	PATH=$(HOST_PATH) \
+	PATH='$(HOST_PATH)' \
 	make CXX="${HOST_CXX}" CC="${HOST_CC}" CFLAGS="${HOST_CFLAGS}" \
 		CXXFLAGS="${HOST_CXXFLAGS}" LDFLAGS="${HOST_LDFLAGS}" \
 		 -C $(WRKBUILD)/tools/depends/native/JsonSchemaBuilder
 
 kodi-install:
-	$(INSTALL_DIR) $(IDIR_KODI)/usr/lib/xbmc/addons
-	$(CP) $(WRKINST)/usr/lib/xbmc/* \
-		$(IDIR_KODI)/usr/lib/xbmc
-	$(INSTALL_DIR) $(IDIR_KODI)/usr/share/xbmc
-	$(CP) $(WRKINST)/usr/share/xbmc/* \
-		$(IDIR_KODI)/usr/share/xbmc
+	$(INSTALL_DIR) $(IDIR_KODI)/usr/lib/kodi/addons
+	$(CP) $(WRKINST)/usr/lib/kodi/* \
+		$(IDIR_KODI)/usr/lib/kodi
+	$(INSTALL_DIR) $(IDIR_KODI)/usr/share/kodi
+	$(CP) $(WRKINST)/usr/share/kodi/* \
+		$(IDIR_KODI)/usr/share/kodi
 	$(INSTALL_DIR) $(IDIR_KODI)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/xbmc \
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/kodi-standalone \
+		$(IDIR_KODI)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/kodi \
 		$(IDIR_KODI)/usr/bin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

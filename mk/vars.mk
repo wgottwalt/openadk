@@ -64,6 +64,9 @@ ADK_TARGET_LINUXTYPE:=	linux
 endif
 
 GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_VENDOR)-$(ADK_TARGET_LINUXTYPE)-$(ADK_TARGET_SUFFIX)
+ifeq ($(ADK_LINUX_C6X),y)
+GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_TARGET_LINUXTYPE)
+endif
 TARGET_CROSS:=		$(TOOLCHAIN_DIR)/usr/bin/$(GNU_TARGET_NAME)-
 TARGET_COMPILER_PREFIX?=${TARGET_CROSS}
 CONFIGURE_TRIPLE:=	--build=${GNU_HOST_NAME} \
@@ -201,8 +204,8 @@ HOST_CFLAGS:=		-O0 -g0
 HOST_CXXFLAGS:=		-O0 -g0
 HOST_LDFLAGS:=		-L$(STAGING_HOST_DIR)/usr/lib -Wl,-rpath -Wl,${STAGING_HOST_DIR}/usr/lib
 
-PATCH=			PATH=${HOST_PATH} ${BASH} $(SCRIPT_DIR)/patch.sh
-PATCHP0=		PATH=${HOST_PATH} patch -p0
+PATCH=			PATH='${HOST_PATH}' ${BASH} $(SCRIPT_DIR)/patch.sh
+PATCHP0=		PATH='${HOST_PATH}' patch -p0
 
 ifeq ($(ADK_STATIC_TOOLCHAIN),y)
 HOST_STATIC_CFLAGS:=   -static -Wl,-static
@@ -211,7 +214,7 @@ HOST_STATIC_LDFLAGS:=  -Wl,-static
 HOST_STATIC_LLDFLAGS:= -all-static
 endif
 
-SED:=			PATH=${HOST_PATH} sed -i -e
+SED:=			PATH='${HOST_PATH}' sed -i -e
 LINUX_DIR:=		$(BUILD_DIR)/linux
 KERNEL_MODULE_FLAGS:=	ARCH=${ADK_TARGET_ARCH} \
 			PREFIX=/usr \
@@ -273,9 +276,9 @@ PKG_INSTALL:=		PATH='${HOST_PATH}' \
 			-force-defaults -force-depends install
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/ipkg
 else
-PKG_BUILD:=		${BASH} ${SCRIPT_DIR}/tarpkg build
-PKG_INSTALL:=		PKG_INSTROOT=$(TARGET_DIR) \
-			${BASH} ${SCRIPT_DIR}/tarpkg install
+PKG_BUILD:=		PATH='${HOST_PATH}' ${BASH} ${SCRIPT_DIR}/tarpkg build
+PKG_INSTALL:=		PKG_INSTROOT='$(TARGET_DIR)' \
+			PATH='${HOST_PATH}' ${BASH} ${SCRIPT_DIR}/tarpkg install
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/pkg
 endif
 

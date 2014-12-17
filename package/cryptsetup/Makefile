@@ -4,19 +4,17 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		cryptsetup
-PKG_VERSION:=		1.6.3
+PKG_VERSION:=		1.6.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a7aeb549a543eeac433eadfb6bc67837
+PKG_MD5SUM:=		179c0781de59838a4e39f61b2df5ea48
 PKG_DESCR:=		utility used to conveniently setup disk encryption 
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libgcrypt device-mapper libuuid libpopt
 PKG_DEPENDS:=		libgcrypt device-mapper libuuid libpopt
 PKG_BUILDDEP:=		libgcrypt popt e2fsprogs lvm
 PKG_URL:=		http://cryptsetup.googlecode.com/
-PKG_SITES:=		http://cryptsetup.googlecode.com/files/
+PKG_SITES:=		https://www.kernel.org/pub/linux/utils/cryptsetup/v1.6/
 PKG_OPTS:=		dev
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${ADK_TOPDIR}/mk/package.mk
 

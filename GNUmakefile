@@ -15,10 +15,6 @@ ifneq (${subdir},)
 ${MAKECMDGOALS}: _subdir
 
 _subdir: ${_subdir_dep}
-	@if test x"$$(umask 2>/dev/null | sed 's/00*22/OK/')" != x"OK"; then \
-		echo >&2 Error: you must build with “umask 022”, sorry.; \
-		exit 1; \
-	fi
 	cd ${subdir} && ADK_TOPDIR=${ADK_TOPDIR} DEVELOPER=1 \
 	    make VERBOSE=1 ${MAKEFLAGS} ${MAKECMDGOALS}
 

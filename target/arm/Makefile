@@ -28,6 +28,9 @@ endif
 ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
 QEMU_ARGS+=-M vexpress-a9 -cpu cortex-a9 -net user -net nic,model=lan9118
 endif
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_STELLARIS_M3),y)
+QEMU_ARGS+=-M lm3s6965evb -cpu cortex-m3
+endif
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 QEMU_ARGS+=-drive file=qemu-${ADK_TARGET_CPU_ARCH}.img,if=virtio,index=0 -net nic,model=virtio -net user
 endif
@@ -88,7 +91,7 @@ kernel-install: kernel-strip
 dtb-install:
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
-		imx6q-cubox-i.dtb imx6dl-cubox-i.dtb imx6dl-hummingboard.dtb $(MAKE_TRACE)
+		imx6q-cubox-i.dtb imx6dl-cubox-i.dtb imx6dl-hummingboard.dtb imx6q-hummingboard.dtb $(MAKE_TRACE)
 	$(CP) $(LINUX_DIR)/arch/arm/boot/dts/imx6*.dtb \
 		$(FW_DIR)
 endif

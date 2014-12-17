@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libpng
-PKG_VERSION:=		1.6.12
+PKG_VERSION:=		1.6.14
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ee752da8aa75076500e4cf31318e636e
+PKG_MD5SUM:=		aefd9fda2178acab908707737174a0cd
 PKG_DESCR:=		library for reading/writing png images
 PKG_SECTION:=		libs/image
 PKG_DEPENDS:=		zlib

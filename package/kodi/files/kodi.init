@@ -12,11 +12,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	export LD_LIBRARY_PATH=/opt/vc/lib
-	xbmc &
+	kodi &
 	;;
 stop)
-	kill $(pgrep -f /usr/lib/xbmc/xbmc.bin)
+	kill $(pgrep -f /usr/lib/kodi/kodi.bin)
 	;;
 restart)
 	sh $0 stop

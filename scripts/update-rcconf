@@ -20,9 +20,12 @@ for service in $(grep ^ADK_RUNTIME_START_ $topdir/.config |grep -v ADK_RUNTIME_S
 	rcname=$(echo $rcname| sed -e "s#=y##")
 	rcname=$(echo $rcname| sed -e "s#^BUSYBOX_##")
 	rcname=$(echo $rcname| tr '[:upper:]' '[:lower:]')
-	# workarounds
-	if [ $rcname = iptables ];then
+	# workarounds where package name not equal to service name
+	if [ $rcname = "iptables" ];then
 		rcname=firewall
+	fi
+	if [ $rcname = "openssh_server" ];then
+		rcname=openssh
 	fi
 	if [ "$ADK_PKG_KODIBOX" = "y" -o "$ADK_PKG_MPDBOX" = "y" ];then
 		sed -i -e "s#$rcname=\"NO\"#$rcname=\"DAEMON\"#" $rcconf

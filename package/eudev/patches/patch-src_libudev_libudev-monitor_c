@@ -1,0 +1,15 @@
+--- eudev-2.1.1.orig/src/libudev/libudev-monitor.c	2014-09-18 17:47:23.000000000 -0500
++++ eudev-2.1.1/src/libudev/libudev-monitor.c	2014-10-29 20:46:45.742352002 -0500
+@@ -119,11 +119,8 @@ static bool udev_has_devtmpfs(struct ude
+         int r;
+ 
+         r = name_to_handle_at(AT_FDCWD, "/dev", &h.handle, &mount_id, 0);
+-        if (r < 0) {
+-                if (errno != EOPNOTSUPP)
+-                        udev_err(udev, "name_to_handle_at on /dev: %m\n");
++        if (r < 0)
+                 return false;
+-        }
+ 
+         f = fopen("/proc/self/mountinfo", "re");
+         if (!f)

@@ -12,6 +12,17 @@ endif
 
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
+	@cd ${WRKBUILD}; \
+	    for i in $$(find . -name config.sub);do \
+		if [ -f $$i ]; then \
+			${CP} ${SCRIPT_DIR}/config.sub $$i; \
+		fi; \
+	    done; \
+	    for i in $$(find . -name config.guess);do \
+		if [ -f $$i ]; then \
+			${CP} ${SCRIPT_DIR}/config.guess $$i; \
+	        fi; \
+	    done;
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_HOST_DIR)/usr \

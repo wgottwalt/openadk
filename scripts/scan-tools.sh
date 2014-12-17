@@ -157,9 +157,11 @@ fi
 if [[ ! -s /usr/include/ncurses.h ]]; then
 	if [[ ! -s /usr/include/curses.h ]]; then
 		if [[ ! -s /usr/include/ncurses/ncurses.h ]]; then
-			echo Install ncurses header files, please.
-			echo
-			out=1
+			if [[ ! -s /usr/local/opt/ncurses/include/ncursesw/ncurses.h ]]; then
+				echo Install ncurses header files, please.
+				echo
+				out=1
+			fi
 		fi
 	fi
 fi

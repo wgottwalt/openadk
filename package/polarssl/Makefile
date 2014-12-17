@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		polarssl
-PKG_VERSION:=		1.3.6
+PKG_VERSION:=		1.3.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1245884d3e73150cfcc196f91de2b5c4
+PKG_MD5SUM:=		48af7d1f0d5de512cbd6dacf5407884c
 PKG_DESCR:=		embedded ssl/tls library
 PKG_SECTION:=		libs/crypto
 PKG_URL:=		https://polarssl.org/

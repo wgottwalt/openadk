@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		wget
-PKG_VERSION:=		1.15
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		506df41295afc6486662cc47470b4618
+PKG_VERSION:=		1.16
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		293a37977c41b5522f781d3a3a078426
 PKG_DESCR:=		retrieving files using http(s) and ftp
 PKG_SECTION:=		net/http
 PKG_URL:=		http://www.gnu.org/software/wget/
@@ -38,8 +38,6 @@ ifeq (${ADK_PACKAGE_WGET_WITH_GNUTLS},y)
 CONFIGURE_ARGS+=	--with-ssl=gnutls \
 			--with-libgnutls-prefix="$(STAGING_TARGET_DIR)/usr"
 endif
-
-AUTOTOOL_STYLE:=	autoreconf
 
 wget-install:
 	${INSTALL_DIR} ${IDIR_WGET}/etc ${IDIR_WGET}/usr/bin

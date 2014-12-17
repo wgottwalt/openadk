@@ -4,18 +4,20 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.5.17
+PKG_VERSION:=		5.5.19
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e5f25dae73004658533ee7701a527bd0
+PKG_MD5SUM:=		c63dcfd8b318d12127ba6d39ecc8a444
 PKG_DESCR:=		php language interpreter
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libpthread librt
 PHP_URL:=		http://www.php.net/
 PKG_SITES:=		http://de.php.net/distributions/
 
-PKG_SUBPKGS:=		PHP PHP_CLI PHP_FASTCGI
+PKG_SUBPKGS:=		PHP PHP_CLI PHP_FASTCGI PHP_FPM
 PKGSD_PHP_FASTCGI:=	php for fastcgi usage
 PKGSN_PHP_FASTCGI:=	php
+PKGSD_PHP_FPM:=		php for fastcgi process manager usage
+PKGSN_PHP_FPM:=		php
 PKGSD_PHP_CLI:=		php cli
 PKGSN_PHP_CLI:=		php
 
@@ -75,6 +77,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,PHP,php,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_CLI,php-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PHP_CLI},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_FASTCGI,php-fastcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PHP_FASTCGI},${PKG_SECTION}))
+$(eval $(call PKG_template,PHP_FPM,php-fpm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PHP_FPM},${PKG_SECTION}))
 
 define PKG_mod_template
 
@@ -91,6 +94,7 @@ PKG_CONFIGURE_OPTS:=	\
 	--with-config-file-path=/etc \
 	--enable-cli \
 	--enable-cgi \
+	--enable-fpm \
 	--enable-opcache=no \
 	--disable-hash \
 	--disable-mbstring \
@@ -259,5 +263,11 @@ do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/usr/bin
 	${INSTALL_BIN} $(WRKBUILD)/sapi/cgi/php-cgi \
 		$(IDIR_PHP_FASTCGI)/usr/bin/php
+	${INSTALL_DIR} $(IDIR_PHP_FPM)/etc
+	$(CP) ./files/php-fpm.conf \
+		$(IDIR_PHP_FPM)/etc
+	${INSTALL_DIR} $(IDIR_PHP_FPM)/usr/bin
+	${INSTALL_BIN} $(WRKBUILD)/sapi/fpm/php-fpm \
+		$(IDIR_PHP_FPM)/usr/bin/php
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

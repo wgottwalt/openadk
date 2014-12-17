@@ -1,0 +1,52 @@
+--- kodi-14.0rc2.orig/xbmc/utils/SystemInfo.cpp	2014-12-05 19:38:44.000000000 -0600
++++ kodi-14.0rc2/xbmc/utils/SystemInfo.cpp	2014-12-07 23:48:19.332418001 -0600
+@@ -615,16 +615,11 @@ std::string CSysInfo::GetOsName(bool emp
+     osName = "iOS";
+ #elif defined(TARGET_DARWIN_OSX)
+     osName = "OS X";
+-#elif defined (TARGET_ANDROID)
++#elif defined(TARGET_ANDROID)
+     osName = "Android";
+ #elif defined(TARGET_LINUX)
+-    osName = getValueFromOs_release("NAME");
+-    if (osName.empty())
+-      osName = getValueFromLsb_release(lsb_rel_distributor);
+-    if (osName.empty())
+-      osName = getValueFromOs_release("ID");
+-#endif // defined(TARGET_LINUX)
+-
++    osName = "OpenADK";
++#endif
+     if (osName.empty())
+       osName = "Unknown OS";
+   }
+@@ -665,7 +660,7 @@ std::string CSysInfo::GetOsVersion(void)
+ #elif defined(TARGET_LINUX)
+   osVersion = getValueFromOs_release("VERSION_ID");
+   if (osVersion.empty())
+-    osVersion = getValueFromLsb_release(lsb_rel_release);
++    osVersion = "1.0";
+ #endif // defined(TARGET_LINUX)
+ 
+   if (osVersion.empty())
+@@ -737,19 +732,7 @@ std::string CSysInfo::GetOsPrettyNameWit
+ #elif defined(TARGET_ANDROID)
+   osNameVer = GetOsName() + " " + GetOsVersion() + " API level " +   StringUtils::Format("%d", CJNIBuild::SDK_INT);
+ #elif defined(TARGET_LINUX)
+-  osNameVer = getValueFromOs_release("PRETTY_NAME");
+-  if (osNameVer.empty())
+-  {
+-    osNameVer = getValueFromLsb_release(lsb_rel_description);
+-    std::string osName(GetOsName(true));
+-    if (!osName.empty() && osNameVer.find(osName) == std::string::npos)
+-      osNameVer = osName + osNameVer;
+-    if (osNameVer.empty())
+-      osNameVer = "Unknown Linux Distribution";
+-  }
+-
+-  if (osNameVer.find(GetOsVersion()) == std::string::npos)
+-    osNameVer += " " + GetOsVersion();
++  osNameVer = GetOsName() + " " + GetOsVersion();
+ #endif // defined(TARGET_LINUX)
+ 
+   if (osNameVer.empty())
