@@ -4,8 +4,15 @@ config ADK_KERNEL_IP_FIB_HASH
 	boolean
 	default y
 
+config ADK_DISABLE_TCP_FASTOPEN
+	prompt "Disable TCP Fastopen"
+	boolean
+	select ADK_KERNEL_ADDON_DIETNET
+	default n
+
 config ADK_KERNEL_SYN_COOKIES
-	boolean "IP: TCP syncookie support"
+	prompt "IP: TCP syncookie support"
+	boolean
 	default n
 
 config ADK_KERNEL_IP_PNP_BOOTP
@@ -40,12 +47,6 @@ config ADK_KERNEL_LLC
 	tristate
 	default n
 
-config ADK_KERNEL_TCP_FASTOPEN
-	prompt "Enable TCP Fastopen"
-	select ADK_KERNEL_CRYPTO
-	select ADK_KERNEL_CRYPTO_AES
-	boolean
-	default n
 
 config ADK_KERNEL_IP_MULTICAST
 	prompt "Enable IP Multicasting"
