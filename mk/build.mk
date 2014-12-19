@@ -436,12 +436,6 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(ADK_TARGET_COLLECTION)" ];then \
-		grep -h "^config" target/collections/* \
-			|grep -i "$(ADK_TARGET_COLLECTION)" \
-			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(ADK_TOPDIR)/.defconfig; \
-	fi
 	@if [ ! -z "$(ADK_TARGET_LIBC)" ];then \
 		libc=$$(echo "$(ADK_TARGET_LIBC)"|sed -e "s/-/_/"); \
 		grep "^config" target/config/Config.in.libc.choice \

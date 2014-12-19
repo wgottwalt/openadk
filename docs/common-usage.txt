@@ -70,9 +70,8 @@ OpenADK also honors some environment variables, when they are passed
 to +make+.
 
 * +ADK_TARGET_ARCH+, the architecture of the target system
-* +ADK_TARGET_SYSTEM+, the target system name
+* +ADK_TARGET_SYSTEM+, the embedded target system name
 * +ADK_TARGET_LIBC+, the C library for the target system
-* +ADK_TARGET_COLLECTION+, the package collection, which will be used
 * +VERBOSE+, verbose build, when set to 1
 
 An example that creates a configuration file for Raspberry PI with all
