@@ -2,6 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 menu "Global ADK settings"
+	visible if !ADK_CHOOSE_APPLIANCE
 
 config ADK_HOST
 	string "webserver for packages and distfiles"

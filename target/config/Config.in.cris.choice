@@ -3,7 +3,7 @@
 
 choice ADK_TARGET_CRIS_CPU_ARCH
 prompt "CPU architecture"
-depends on ADK_TARGET_TOOLCHAIN && ADK_LINUX_CRIS
+depends on ADK_TARGET_TOOLCHAIN && ADK_TARGET_ARCH_CRIS
 
 config ADK_CPU_CRIS_V10
 	boolean "cris v10"

@@ -85,7 +85,7 @@ config: .prereq_done
 	@${GMAKE_INV} _config W=
 
 oldconfig: .prereq_done
-	@${GMAKE_INV} _config W=-o
+	@${GMAKE_INV} _config W=--oldconfig
 
 download: .prereq_done
 	@${GMAKE_INV} toolchain/download
@@ -132,13 +132,13 @@ defconfig: .prereq_done
 	@${GMAKE_INV} defconfig
 
 allnoconfig: .prereq_done
-	@${GMAKE_INV} _config W=-n
+	@${GMAKE_INV} _config W=--allnoconfig
 
 allconfig: .prereq_done
-	@${GMAKE_INV} _mconfig W=-y RCONFIG=Config.in
+	@${GMAKE_INV} _mconfig W=--allyesconfig RCONFIG=Config.in
 
 allmodconfig: .prereq_done
-	@${GMAKE_INV} _mconfig W=-o RCONFIG=Config.in
+	@${GMAKE_INV} _mconfig W=--allmodconfig RCONFIG=Config.in
 
 package_index: .prereq_done
 	@${GMAKE_INV} package_index

@@ -3,7 +3,7 @@
 
 choice ADK_TARGET_ARM_CPU_ARCH
 prompt "CPU architecture and family"
-depends on ADK_TARGET_TOOLCHAIN && ADK_LINUX_ARM
+depends on ADK_TARGET_TOOLCHAIN && ADK_TARGET_ARCH_ARM
 
 config ADK_CPU_ARMV7A_CORTEX_A9
         boolean "cortex-a9 (armv7-a)"

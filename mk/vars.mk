@@ -64,7 +64,7 @@ ADK_TARGET_LINUXTYPE:=	linux
 endif
 
 GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_VENDOR)-$(ADK_TARGET_LINUXTYPE)-$(ADK_TARGET_SUFFIX)
-ifeq ($(ADK_LINUX_C6X),y)
+ifeq ($(ADK_TARGET_ARCH_C6X),y)
 GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_TARGET_LINUXTYPE)
 endif
 TARGET_CROSS:=		$(TOOLCHAIN_DIR)/usr/bin/$(GNU_TARGET_NAME)-
@@ -123,7 +123,7 @@ TARGET_LDFLAGS+=	-Wl,-z,now
 endif
 
 # needed for musl ppc 
-ifeq ($(ADK_LINUX_PPC),y)
+ifeq ($(ADK_TARGET_ARCH_PPC),y)
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_LDFLAGS+=	-Wl,--secure-plt
 endif
@@ -158,11 +158,11 @@ ifneq ($(ADK_TARGET_USE_GNU_HASHSTYLE),)
 TARGET_LDFLAGS+=	-Wl,--hash-style=gnu
 endif
 
-ifeq ($(ADK_LINUX_MICROBLAZE),y)
+ifeq ($(ADK_TARGET_ARCH_MICROBLAZE),y)
 TARGET_CFLAGS+=		-mxl-barrel-shift
 TARGET_CXXFLAGS+=	-mxl-barrel-shift
 endif
-ifeq ($(ADK_LINUX_XTENSA),y)
+ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 TARGET_CFLAGS+=		-mlongcalls -mtext-section-literals
 TARGET_CXXFLAGS+=	-mlongcalls -mtext-section-literals
 endif
@@ -188,7 +188,7 @@ TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 TARGET_CXXFLAGS+=	-fno-unwind-tables -fno-asynchronous-unwind-tables
 endif
 
-ifeq ($(ADK_LINUX_ARM),y)
+ifeq ($(ADK_TARGET_ARCH_ARM),y)
 ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
 TARGET_CFLAGS+=		-mthumb
 TARGET_CXXFLAGS+=	-mthumb

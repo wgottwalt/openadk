@@ -47,11 +47,11 @@
 /make.log
 /dl
 /package/Config.in.auto*
-/package/Config.in.collections
 /package/pkgconfigs.d/
 /extra/
 /target/*/Config.in.arch
 /target/*/Config.in.systems
+/target/config/Config.in.appliances
 /target/config/Config.in.system*
 /target/config/Config.in.arch*
 /target/config/Config.in.scripts

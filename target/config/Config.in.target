@@ -74,22 +74,22 @@ config ADK_TARGET_CMDLINE
 	default ""
 
 choice
-prompt "Target firmware type"
-depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH && !ADK_TARGET_TOOLCHAIN
+prompt "Firmware type"
+depends on !ADK_TARGET_TOOLCHAIN
 default ADK_TARGET_ROOTFS_ARCHIVE
 
 config ADK_TARGET_ROOTFS_INITRAMFS
 	boolean "initramfs filesystem"
 	depends on \
 		ADK_TARGET_QEMU || \
-		ADK_LINUX_M68K || \
-		ADK_LINUX_ARM || \
-		ADK_LINUX_MICROBLAZE || \
-		ADK_LINUX_MIPS || \
-		ADK_LINUX_PPC || \
-		ADK_LINUX_SPARC || \
-		ADK_LINUX_X86 || \
-		ADK_LINUX_X86_64
+		ADK_TARGET_ARCH_M68K || \
+		ADK_TARGET_ARCH_ARM || \
+		ADK_TARGET_ARCH_MICROBLAZE || \
+		ADK_TARGET_ARCH_MIPS || \
+		ADK_TARGET_ARCH_PPC || \
+		ADK_TARGET_ARCH_SPARC || \
+		ADK_TARGET_ARCH_X86 || \
+		ADK_TARGET_ARCH_X86_64
 	depends on !ADK_TARGET_VBOX
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	select ADK_KERNEL_BLK_DEV_INITRD
@@ -98,18 +98,18 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 
 config ADK_TARGET_ROOTFS_INITRAMFSPIGGYBACK
 	boolean "initramfs filesystem included into kernel image"
-	select ADK_LINUX_INITRAMFS_BUILTIN
+	select ADK_TARGET_ARCH_INITRAMFS_BUILTIN
 	depends on \
 		ADK_TARGET_QEMU || \
-		ADK_LINUX_AARCH64 || \
-		ADK_LINUX_ARM || \
-		ADK_LINUX_M68K || \
-		ADK_LINUX_MICROBLAZE || \
-		ADK_LINUX_MIPS || \
-		ADK_LINUX_PPC || \
-		ADK_LINUX_SPARC || \
-		ADK_LINUX_X86 || \
-		ADK_LINUX_X86_64
+		ADK_TARGET_ARCH_AARCH64 || \
+		ADK_TARGET_ARCH_ARM || \
+		ADK_TARGET_ARCH_M68K || \
+		ADK_TARGET_ARCH_MICROBLAZE || \
+		ADK_TARGET_ARCH_MIPS || \
+		ADK_TARGET_ARCH_PPC || \
+		ADK_TARGET_ARCH_SPARC || \
+		ADK_TARGET_ARCH_X86 || \
+		ADK_TARGET_ARCH_X86_64
 	depends on !ADK_TARGET_VBOX
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	help
@@ -186,7 +186,7 @@ config ADK_TARGET_ROOTFS_ISO
 	select ADK_HOST_NEED_SYSLINUX
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
 	depends on ADK_HOST_LINUX
-	depends on ADK_LINUX_X86
+	depends on ADK_TARGET_ARCH_X86
 	help
 	  Use this option to create a bootable ISO image.
 
@@ -266,9 +266,8 @@ config ADK_PACKAGE_SUFFIX
 	help
 
 choice
-prompt "Target package format"
+prompt "Package format"
 default ADK_TARGET_PACKAGE_TXZ
-depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
 
 config ADK_TARGET_PACKAGE_TXZ
 	boolean
@@ -291,9 +290,9 @@ config ADK_TARGET_BINFMT_FLAT
 	boolean
 
 choice
-prompt "Target GPU Memory"
+prompt "GPU memory size"
 depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-default ADK_TARGET_GPU_MEM_128 if ADK_PACKAGE_XBMC
+default ADK_TARGET_GPU_MEM_128 if ADK_PACKAGE_KODI
 
 config ADK_TARGET_GPU_MEM_16
 	prompt "16"

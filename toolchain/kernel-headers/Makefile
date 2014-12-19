@@ -16,7 +16,7 @@ ifeq ($(ADK_KERNEL_ROOT_NFS),y)
 		--strip-components=2 -C $(WRKSRC)/firmware realtek-firmware-1.1
 endif
 endif
-ifeq ($(ADK_LINUX_XTENSA),y)
+ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
 		--strip-components=1 -C $(WRKSRC) linux
 endif
@@ -62,7 +62,7 @@ $(WRKBUILD)/.headers: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_
 	$(KERNEL_MAKE_ENV) $(MAKE) -C $(WRKBUILD) $(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR)/usr \
 		headers_install
-ifeq ($(ADK_TARGET_ARCH),cris)
+ifeq ($(ADK_TARGET_ARCH_CRIS),y)
 ifeq ($(ADK_TARGET_CPU_ARCH),crisv32)
 	cd $(STAGING_TARGET_DIR)/usr/include && ln -sf arch-v32/arch arch
 else

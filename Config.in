@@ -1,6 +1,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+mainmenu "OpenADK Configuration"
+
 config MODULES
 	boolean
 	default y
@@ -9,9 +11,11 @@ config ADK_HAVE_DOT_CONFIG
 	boolean
 	default y
 
-mainmenu "OpenADK Configuration"
+source "target/config/Config.in.appliances"
 
-source "target/config/Config.in.system.choose"
+menu "Target configuration"
+	visible if !ADK_CHOOSE_APPLIANCE
+
 source "target/config/Config.in.cpu"
 source "target/config/Config.in.hardware"
 source "target/config/Config.in.kernel"
@@ -19,33 +23,28 @@ source "target/config/Config.in.arch"
 source "target/config/Config.in.system"
 source "target/config/Config.in.endian"
 source "target/config/Config.in.arm"
-source "target/config/Config.in.abi"
 source "target/config/Config.in.cris"
 source "target/config/Config.in.x86"
 source "target/config/Config.in.qemu"
 source "target/config/Config.in.qemuopts"
-
-menu "Target configuration"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
 source "target/config/Config.in.kernelversion"
 source "target/config/Config.in.libc"
+source "target/config/Config.in.abi"
 source "target/config/Config.in.target"
+
 endmenu
 
 source "target/config/Config.in"
 
-menu "Package collection"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
-source "package/Config.in.collections"
-endmenu
-
 menu "Package selection"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+	visible if !ADK_CHOOSE_APPLIANCE
 
 source "package/Config.in.auto.global"
 source "package/Config.in"
 
 menu "Package options"
+	visible if !ADK_CHOOSE_APPLIANCE
+
 config ADK_LEAVE_ETC_ALONE
 	boolean "do not install anything into /etc"
 	default n
@@ -90,12 +89,12 @@ endmenu
 endmenu
 
 menu "Runtime configuration"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+	visible if !ADK_CHOOSE_APPLIANCE
 source "target/config/Config.in.runtime"
 endmenu
 
 menu "Kernel configuration"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+	visible if !ADK_CHOOSE_APPLIANCE
 source "target/linux/Config.in"
 endmenu
 

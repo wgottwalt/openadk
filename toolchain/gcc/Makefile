@@ -11,7 +11,7 @@ TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_CXXFLAGS))
 endif
 
-ifeq ($(ADK_LINUX_XTENSA),y)
+ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 TARGET_CFLAGS:=		$(filter-out -mtext-section-literals,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -mtext-section-literals,$(TARGET_CXXFLAGS))
 endif
@@ -70,11 +70,11 @@ GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++,libgcc'
 endif
 endif
 
-ifeq ($(ADK_LINUX_M68K)$(ADK_LINUX_SH)$(ADK_LINUX_X86_64)$(ADK_LINUX_X86),)
+ifeq ($(ADK_TARGET_ARCH_M68K)$(ADK_TARGET_ARCH_SH)$(ADK_TARGET_ARCH_X86_64)$(ADK_TARGET_ARCH_X86),)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 
-ifeq ($(ADK_LINUX_SH),y)
+ifeq ($(ADK_TARGET_ARCH_SH),y)
 ifeq ($(ADK_little),y)
 GCC_CONFOPTS+=		--with-endian=little
 else
@@ -83,7 +83,7 @@ endif
 GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=m4,m4-nofpu
 endif
 
-ifeq ($(ADK_LINUX_X86),y)
+ifeq ($(ADK_TARGET_ARCH_X86),y)
 ifeq ($(ADK_TARGET_KERNEL_64),y)
 GCC_FINAL_CONFOPTS+=	--enable-biarch --enable-targets=all --disable-multilib
 else
@@ -91,7 +91,7 @@ GCC_FINAL_CONFOPTS+=    --disable-biarch --disable-multilib
 endif
 endif
 
-ifeq ($(ADK_LINUX_X86_64),y)
+ifeq ($(ADK_TARGET_ARCH_X86_64),y)
 ifeq ($(ADK_x32),y)
 GCC_FINAL_CONFOPTS+=	--with-abi=x32
 endif
@@ -112,14 +112,14 @@ else
 GCC_CONFOPTS+=		--disable-lto
 endif
 
-ifeq ($(ADK_LINUX_PPC),y)
+ifeq ($(ADK_TARGET_ARCH_PPC),y)
 GCC_CONFOPTS+=		--with-long-double-64 --enable-secureplt
 ifneq ($(ADK_TARGET_CPU_WITH_FPU),y)
 GCC_CONFOPTS+=		--with-float=soft
 endif
 endif
 
-ifeq ($(ADK_TARGET_ARCH),arm)
+ifeq ($(ADK_TARGET_ARCH_ARM),y)
 GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
 ifneq ($(ADK_TARGET_FPU),)
 GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
@@ -175,7 +175,7 @@ GCC_BUILD_DIR_INITIAL:=	$(WRKBUILD)-initial
 GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 
 $(GCC_BUILD_DIR_MINIMAL)/.configured:
-ifeq ($(ADK_LINUX_XTENSA),y)
+ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_$(ADK_TARGET_XTENSA).tar \
 		--strip-components=1 -C $(WRKSRC) gcc
 endif
@@ -188,7 +188,7 @@ endif
 	rm -rf ${TOOLCHAIN_DIR}/usr/$(GNU_TARGET_NAME)/lib
 	(cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME); \
 		ln -s ../$(STAGING_HOST2TARGET)/lib lib)
-ifeq ($(ADK_LINUX_SH),y)
+ifeq ($(ADK_TARGET_ARCH_SH),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4 && ln -sf . m4-nofpu)
 endif
 	$(SED) '/k prot/agcc_cv_libc_provides_ssp=yes' $(WRKBUILD)/gcc/configure

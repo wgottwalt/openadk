@@ -30,12 +30,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_KERNEL_ADDON_GRSEC=n \
 			ADK_KERNEL_ADDON_MPTCP=n \
 			ADK_KERNEL_MPTCP=n \
-			ADK_PKG_XORG=n \
-			ADK_PKG_CONSOLE=n \
-			ADK_PKG_TEST=n \
-			ADK_PKG_MPDBOX=n \
-			ADK_PKG_KODIBOX=n \
-			ADK_PKG_DEVELOPMENT=n \
 			ADK_STATIC_TOOLCHAIN=n \
 			ADK_TOOLCHAIN_WITH_SSP=n \
 			ADK_TARGET_USE_SSP=n \
@@ -287,13 +281,16 @@ cleansystem:
 distclean:
 	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
-	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR) \
-	    ${ADK_TOPDIR}/package/pkglist.d ${ADK_TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${ADK_TOPDIR}/prereq.mk \
-	    .menu ${ADK_TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.* \
-	    ${ADK_TOPDIR}/target/*/Config.in.{arch*,system*} ${ADK_TOPDIR}/package/Config.in.auto*
+	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR)
+	@rm -rf package/pkglist.d package/pkgconfigs.d
+	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config prereq.mk
+	@rm -f .menu package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
+	@rm -f target/*/Config.in.arch* target/*/Config.in.system*
+	@rm -f package/Config.in.auto* package/Config.in.collections
+	@rm -f target/config/Config.in.prereq target/config/Config.in.scripts
+	@rm -f adk/tools/pkgmaker adk/tools/depmaker adk/tools/pkgrebuild
 
 else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
@@ -516,7 +513,7 @@ endif
 
 menuconfig: $(CONFIG)/mconf defconfig .menu
 	@if [ ! -f .config ];then \
-		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
+		$(CONFIG)/conf --olddefconfig $(CONFIG_CONFIG_IN); \
 	fi
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
@@ -533,13 +530,17 @@ _mconfig2: ${CONFIG}/conf modconfig .menu
 
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
-	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR) \
-	    ${ADK_TOPDIR}/package/pkglist.d ${ADK_TOPDIR}/package/pkgconfigs.d
+	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR)
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_TARGET_DIR_PFX)
 	@rm -rf $(STAGING_HOST_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config ${ADK_TOPDIR}/prereq.mk \
-	    .menu .rebuild.* ${ADK_TOPDIR}/package/Depends.mk .ADK_HAVE_DOT_CONFIG \
-	    ${ADK_TOPDIR}/target/*/Config.in.{arch*,system*} ${ADK_TOPDIR}/package/Config.in.auto*
+	@rm -rf package/pkglist.d package/pkgconfigs.d
+	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config
+	@rm -f .menu .rebuild.* package/Depends.mk .ADK_HAVE_DOT_CONFIG prereq.mk
+	@rm -f target/*/Config.in.arch*
+	@rm -f target/*/Config.in.system*
+	@rm -f package/Config.in.auto* package/Config.in.collections
+	@rm -f target/config/Config.in.prereq target/config/Config.in.scripts
+	@rm -f adk/tools/pkgmaker adk/tools/depmaker adk/tools/pkgrebuild
 
 endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 

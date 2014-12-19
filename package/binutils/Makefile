@@ -25,7 +25,7 @@ $(eval $(call PKG_template,LIBBFD,libbfd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_L
 TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ENV+=		ac_cv_prog_MAKEINFO=missing
 
-ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
+ifeq ($(ADK_TARGET_ARCH_SH)$(ADK_TARGET_ARCH_X86_64),)
 CONFIGURE_ARGS+=	--disable-multilib
 else
 CONFIGURE_ARGS+=	--enable-multilib
