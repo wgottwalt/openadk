@@ -22,7 +22,7 @@ The result of the search shows the help message of the matching items.
 or
 
 --------------------
- $ make VERBOSE=1 <target>
+ $ make ADK_VERBOSE=1 <target>
 --------------------
 
 .Display all available targets:

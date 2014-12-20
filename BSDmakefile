@@ -19,7 +19,7 @@ ${.TARGETS}: _subdir
 
 _subdir: ${_subdir_dep}
 	cd ${.CURDIR}/${subdir} && ADK_TOPDIR=${.CURDIR} DEVELOPER=1 \
-	    ${GMAKE} VERBOSE=1 ${.MFLAGS} ${_subdir}
+	    ${GMAKE} ADK_VERBOSE=1 ${.MFLAGS} ${_subdir}
 
 .  include "${.CURDIR}/prereq.mk"
 .else

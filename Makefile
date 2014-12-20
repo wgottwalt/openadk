@@ -9,7 +9,7 @@ all: .prereq_done checkreloc
 
 v: .prereq_done
 	@(echo; echo "Build started on $$(LC_ALL=C LANGUAGE=C date)"; \
-	    set -x; ${_UNLIMIT} ${GMAKE_FMK} VERBOSE=1 all) 2>&1 | tee -a make.log
+	    set -x; ${_UNLIMIT} ${GMAKE_FMK} ADK_VERBOSE=1 all) 2>&1 | tee -a make.log
 
 help:
 	@echo 'Configuration targets:'

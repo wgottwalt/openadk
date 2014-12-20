@@ -542,7 +542,7 @@ buildall:
 	@mkdir -p firmware
 	@echo "=== building $(ADK_TARGET_SYSTEM) ($(ADK_TARGET_ARCH)) with $(ADK_TARGET_LIBC) ==="
 	$(GMAKE) ADK_TARGET_ARCH=$(ADK_TARGET_ARCH) ADK_TARGET_SYSTEM=$(ADK_TARGET_SYSTEM) ADK_TARGET_LIBC=$(ADK_TARGET_LIBC) allmodconfig
-	$(GMAKE) VERBOSE=1 all 2>&1 | tee firmware/buildall.log
+	$(GMAKE) ADK_VERBOSE=1 all 2>&1 | tee firmware/buildall.log
 
 $(ADK_TOPDIR)/adk/tools/pkgmaker: $(ADK_TOPDIR)/adk/tools/pkgmaker.c $(ADK_TOPDIR)/adk/tools/sortfile.c $(ADK_TOPDIR)/adk/tools/strmap.c
 	@$(HOST_CC) -O0 -g0 -o $@ adk/tools/pkgmaker.c adk/tools/sortfile.c adk/tools/strmap.c

@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/prereq.mk
 -include $(ADK_TOPDIR)/.config
 
-ifeq ($(VERBOSE),1)
+ifeq ($(ADK_VERBOSE),1)
 START_TRACE:=		:
 END_TRACE:=		:
 TRACE:=			:

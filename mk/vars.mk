@@ -314,7 +314,7 @@ EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 				false ;; \
 			esac; done
 
-ifeq ($(VERBOSE),1)
+ifeq ($(ADK_VERBOSE),1)
 QUIET:=
 else
 QUIET:=			--quiet
