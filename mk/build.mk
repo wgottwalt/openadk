@@ -288,7 +288,7 @@ distclean:
 	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config prereq.mk
 	@rm -f .menu package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
 	@rm -f target/*/Config.in.arch* target/*/Config.in.system*
-	@rm -f package/Config.in.auto* package/Config.in.collections
+	@rm -f package/Config.in.auto* package/Config.in.appliances
 	@rm -f target/config/Config.in.prereq target/config/Config.in.scripts
 	@rm -f adk/tools/pkgmaker adk/tools/depmaker adk/tools/pkgrebuild
 
@@ -532,7 +532,7 @@ distclean:
 	@rm -f .menu .rebuild.* package/Depends.mk .ADK_HAVE_DOT_CONFIG prereq.mk
 	@rm -f target/*/Config.in.arch*
 	@rm -f target/*/Config.in.system*
-	@rm -f package/Config.in.auto* package/Config.in.collections
+	@rm -f package/Config.in.auto* package/Config.in.appliances
 	@rm -f target/config/Config.in.prereq target/config/Config.in.scripts
 	@rm -f adk/tools/pkgmaker adk/tools/depmaker adk/tools/pkgrebuild
 
@@ -553,7 +553,7 @@ $(ADK_TOPDIR)/adk/tools/pkgrebuild: $(ADK_TOPDIR)/adk/tools/pkgrebuild.c $(ADK_T
 $(ADK_TOPDIR)/adk/tools/depmaker: $(ADK_TOPDIR)/adk/tools/depmaker.c
 	@$(HOST_CC) -O0 -g0 -o $@ $(ADK_TOPDIR)/adk/tools/depmaker.c
 
-menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(ADK_TOPDIR)/adk/tools/pkgmaker $(ADK_TOPDIR)/adk/tools/pkgrebuild $(wildcard target/*/collections)
+menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(ADK_TOPDIR)/adk/tools/pkgmaker $(ADK_TOPDIR)/adk/tools/pkgrebuild $(wildcard target/*/appliances/*)
 	@echo "Generating menu structure ..."
 	@$(BASH) $(ADK_TOPDIR)/scripts/create-menu
 	@$(ADK_TOPDIR)/adk/tools/pkgmaker
