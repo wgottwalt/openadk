@@ -10,6 +10,7 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_BUSYBOX_HIDE=n \
 			ADK_DISABLE_KERNEL_PATCHES=n \
 			ADK_DISABLE_TARGET_KERNEL_PATCHES=n \
+			ADK_CHOOSE_APPLIANCE=n \
 			ADK_WGET_TIMEOUT=180 \
 			ADK_MAKE_PARALLEL=y \
 			ADK_MAKE_JOBS=4 \
@@ -29,6 +30,7 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_KERNEL_ADDON_YAFFS2=n \
 			ADK_KERNEL_ADDON_GRSEC=n \
 			ADK_KERNEL_ADDON_MPTCP=n \
+			ADK_KERNEL_ADDON_DIETNET=n \
 			ADK_KERNEL_MPTCP=n \
 			ADK_STATIC_TOOLCHAIN=n \
 			ADK_TOOLCHAIN_WITH_SSP=n \
@@ -412,6 +414,12 @@ endif
 		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_GLIBC_DEV=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
+		grep "^config" target/config/Config.in.appliances \
+			|grep -i "_$(ADK_APPLIANCE)$$" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			 >> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \
 			|grep -i "_$(ADK_TARGET_ARCH)$$" \
@@ -450,11 +458,11 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(ADK_TARGET_SYSTEM)" ];then \
-		$(CONFIG)/conf -D .defconfig $(CONFIG_CONFIG_IN); \
+	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
+		$(CONFIG)/conf --defconfig=.defconfig $(CONFIG_CONFIG_IN); \
 	fi
 
-modconfig:
+allconfig:
 ifeq (${OStype},Linux)
 	@echo ADK_HOST_LINUX=y > $(ADK_TOPDIR)/all.config
 endif
@@ -476,6 +484,12 @@ endif
 ifneq (,$(filter CYGWIN%,${OStype}))
 	@echo ADK_HOST_CYGWIN=y > $(ADK_TOPDIR)/all.config
 endif
+	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
+		grep "^config" target/config/Config.in.appliances \
+			|grep -i "_$(ADK_APPLIANCE)"\$$ \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(ADK_TOPDIR)/all.config; \
+	fi
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \
 			|grep -i "$(ADK_TARGET_ARCH)"\$$ \
@@ -512,15 +526,10 @@ menuconfig: $(CONFIG)/mconf defconfig .menu
 	@$(CONFIG)/mconf $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
 
-_config: $(CONFIG)/conf .menu
+_config: $(CONFIG)/conf allconfig .menu
 	-@touch .config
 	@$(CONFIG)/conf ${W} $(CONFIG_CONFIG_IN)
 	${POSTCONFIG}
-
-.NOTPARALLEL: _mconfig
-_mconfig: ${CONFIG}/conf _mconfig2 _config
-_mconfig2: ${CONFIG}/conf modconfig .menu
-	@${CONFIG}/conf -m ${RCONFIG} >/dev/null
 
 distclean:
 	@$(MAKE) -C $(CONFIG) clean
@@ -541,7 +550,7 @@ endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 buildall:
 	@mkdir -p firmware
 	@echo "=== building $(ADK_TARGET_SYSTEM) ($(ADK_TARGET_ARCH)) with $(ADK_TARGET_LIBC) ==="
-	$(GMAKE) ADK_TARGET_ARCH=$(ADK_TARGET_ARCH) ADK_TARGET_SYSTEM=$(ADK_TARGET_SYSTEM) ADK_TARGET_LIBC=$(ADK_TARGET_LIBC) allmodconfig
+	$(GMAKE) ADK_APPLIANCE=new ADK_TARGET_ARCH=$(ADK_TARGET_ARCH) ADK_TARGET_SYSTEM=$(ADK_TARGET_SYSTEM) ADK_TARGET_LIBC=$(ADK_TARGET_LIBC) allmodconfig
 	$(GMAKE) ADK_VERBOSE=1 all 2>&1 | tee firmware/buildall.log
 
 $(ADK_TOPDIR)/adk/tools/pkgmaker: $(ADK_TOPDIR)/adk/tools/pkgmaker.c $(ADK_TOPDIR)/adk/tools/sortfile.c $(ADK_TOPDIR)/adk/tools/strmap.c

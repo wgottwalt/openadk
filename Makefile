@@ -17,8 +17,9 @@ help:
 	@echo '  menuconfig   - Update current config utilising a menu based program'
 	@echo '                 (default when .config does not exist)'
 	@echo '  oldconfig    - Update current config utilising a provided .configs base'
-	@echo '  allmodconfig - New config selecting all packages as modules when possible'
-	@echo '  allconfig    - New config selecting all packages when possible'
+	@echo '  defconfig    - New config with defaults'
+	@echo '  allmodconfig - New config selecting all symbols with m'
+	@echo '  allyesconfig - New config selecting all symbols with y'
 	@echo '  allnoconfig  - New config where all options are answered with no'
 	@echo ''
 	@echo 'Help targets:'
@@ -132,13 +133,13 @@ defconfig: .prereq_done
 	@${GMAKE_INV} defconfig
 
 allnoconfig: .prereq_done
-	@${GMAKE_INV} _config W=--allnoconfig
+	@${GMAKE_INV} KCONFIG_ALLCONFIG=all.config _config W=--allnoconfig
 
-allconfig: .prereq_done
-	@${GMAKE_INV} _mconfig W=--allyesconfig RCONFIG=Config.in
+allyesconfig: .prereq_done
+	@${GMAKE_INV} KCONFIG_ALLCONFIG=all.config _config W=--allyesconfig
 
 allmodconfig: .prereq_done
-	@${GMAKE_INV} _mconfig W=--allmodconfig RCONFIG=Config.in
+	@${GMAKE_INV} KCONFIG_ALLCONFIG=all.config _config W=--allmodconfig
 
 package_index: .prereq_done
 	@${GMAKE_INV} package_index

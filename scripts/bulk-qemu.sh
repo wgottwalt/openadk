@@ -3,7 +3,7 @@
 if [ ! -z $1 ];then
 	c=$1
 else
-	c="glibc musl uclibc"
+	c="uclibc-ng glibc musl uclibc"
 fi
 
 for libc in $c; do
@@ -11,7 +11,7 @@ for libc in $c; do
 		echo "Cleaning old stuff"
 		make cleandir
 		echo "Building $libc for $arch"
-		DEFAULT="VERBOSE=1 ADK_TARGET_ARCH=$arch ADK_TARGET_SYSTEM=qemu-$arch ADK_TARGET_LIBC=$libc ADK_TARGET_FS=initramfspiggyback"
+		DEFAULT="ADK_VERBOSE=1 ADK_APPLIANCE=new ADK_TARGET_ARCH=$arch ADK_TARGET_SYSTEM=qemu-$arch ADK_TARGET_LIBC=$libc ADK_TARGET_FS=initramfspiggyback"
 		case $arch in
 		mips|microblaze)
 			for endian in little big;do
