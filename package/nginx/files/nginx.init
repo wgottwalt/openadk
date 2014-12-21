@@ -12,7 +12,6 @@ autostart)
 	;;
 start)
 	[ -d /var/lib/nginx ] || mkdir -p /var/lib/nginx
-	[ -d /var/log/nginx ] || mkdir -p /var/log/nginx
 	[ -d /var/lock/nginx ] || mkdir -p /var/lock/nginx
 	/usr/sbin/nginx
   	;;
