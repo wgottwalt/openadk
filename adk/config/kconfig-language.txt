@@ -95,14 +95,15 @@ applicable everywhere (see syntax).
 	bool "foo"
 	default y
 
-- reverse dependencies: "select" <symbol> ["if" <expr>]
+- reverse dependencies: "select" <symbol> [<expr>] ["if" <expr>]
   While normal dependencies reduce the upper limit of a symbol (see
   below), reverse dependencies can be used to force a lower limit of
   another symbol. The value of the current menu symbol is used as the
   minimal value <symbol> can be set to. If <symbol> is selected multiple
   times, the limit is set to the largest selection.
-  Reverse dependencies can only be used with boolean or tristate
-  symbols.
+  Reverse dependencies without the optional <expr> can only be used with
+  boolean or tristate symbols. If the optional <expr> is supplied,
+  the <symbol> will be set to that value if possible.
   Note:
 	select should be used with care. select will force
 	a symbol to a value without visiting the dependencies.

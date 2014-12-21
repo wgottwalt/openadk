@@ -78,7 +78,7 @@ lkc_defs.h: lkc_proto.h
 # The following requires flex/bison
 # By default we use the _shipped versions, uncomment the
 # following line if you are modifying the flex/bison src.
-#LKC_GENPARSER:=	1
+# LKC_GENPARSER:=	1
 
 ifdef LKC_GENPARSER
 
@@ -86,7 +86,7 @@ ifdef LKC_GENPARSER
 	bison -t -d -v -b $* -p $(notdir $*) $<
 
 %.hash.c: %.gperf
-	gperf < $< > $@
+	gperf -t --output-file zconf.hash.c -a -C -E -g -k '1,3,$$' -p -t zconf.gperf
 
 lex.%.c: %.l
 	flex -P$(notdir $*) -o$@ $<

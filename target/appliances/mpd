@@ -56,6 +56,8 @@ config ADK_APPLIANCE_MPD
 	select ADK_KERNEL_INPUT_KEYBOARD
 	select ADK_KERNEL_INPUT_MOUSE
 	select ADK_KERNEL_INPUT_EVDEV
+	select ADK_RUNTIME_HOSTNAME mpdbox
+	select ADK_KERNEL_USB_STORAGE m
 	help
 	  Create a small music player daemon appliance.
 

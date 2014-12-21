@@ -196,6 +196,14 @@ void menu_add_symbol(enum prop_type type, struct symbol *sym, struct expr *dep)
 	menu_add_prop(type, NULL, expr_alloc_symbol(sym), dep);
 }
 
+void menu_add_select(struct symbol *sym, struct expr *value, struct expr *dep)
+{
+	struct property *p;
+
+	p = menu_add_prop(P_SELECT, NULL, expr_alloc_symbol(sym), dep);
+	p->value = value;
+}
+
 void menu_add_option(int token, char *arg)
 {
 	switch (token) {
@@ -257,13 +265,22 @@ static void sym_check_prop(struct symbol *sym)
 				prop_warn(prop,
 				    "config symbol '%s' uses select, but is "
 				    "not boolean or tristate", sym->name);
-			else if (sym2->type != S_UNKNOWN &&
+			else if (prop->value == NULL &&
+			  	 sym2->type != S_UNKNOWN &&
 				 sym2->type != S_BOOLEAN &&
 				 sym2->type != S_TRISTATE)
 				prop_warn(prop,
-				    "'%s' has wrong type. 'select' only "
-				    "accept arguments of boolean and "
-				    "tristate type", sym2->name);
+				    "'%s' has wrong type. 'select' without a "
+				    "value only accepts arguments of boolean "
+				    "and tristate type", sym2->name);
+			else if (prop->value != NULL &&
+				 (sym2->type == S_INT ||
+				  sym2->type == S_HEX ||
+				  sym2->type == S_STRING) &&
+				 prop->value->type != E_SYMBOL)
+				prop_warn(prop,
+				    "select value for config symbol '%s'"
+				    " must be a single symbol", sym2->name);
 			break;
 		case P_RANGE:
 			if (sym->type != S_INT && sym->type != S_HEX)
@@ -276,6 +293,25 @@ static void sym_check_prop(struct symbol *sym)
 		default:
 			;
 		}
+	}
+}
+
+static void finalize_select(struct symbol *sym, struct property *prop,
+		struct expr *dep)
+{
+	struct symbol *es = prop_get_symbol(prop);
+	struct expr_select_value *esv;
+
+	if (prop->value) {
+		esv = malloc(sizeof *esv);
+		esv->expr = expr_alloc_and(expr_alloc_symbol(sym),
+				expr_copy(dep));
+		esv->value = prop->value;
+		esv->next = es->val_dep;
+		es->val_dep = esv;
+	} else {
+		es->rev_dep.expr = expr_alloc_or(es->rev_dep.expr,
+			expr_alloc_and(expr_alloc_symbol(sym), expr_copy(dep)));
 	}
 }
 
@@ -329,11 +365,8 @@ void menu_finalize(struct menu *parent)
 				if (menu->sym && menu->sym->type != S_TRISTATE)
 					dep = expr_trans_bool(dep);
 				prop->visible.expr = dep;
-				if (prop->type == P_SELECT) {
-					struct symbol *es = prop_get_symbol(prop);
-					es->rev_dep.expr = expr_alloc_or(es->rev_dep.expr,
-							expr_alloc_and(expr_alloc_symbol(menu->sym), expr_copy(dep)));
-				}
+				if (prop->type == P_SELECT)
+					finalize_select(menu->sym, prop, dep);
 			}
 		}
 		for (menu = parent->list; menu; menu = menu->next)
@@ -437,7 +470,13 @@ void menu_finalize(struct menu *parent)
 	}
 
 	if (sym && !sym_is_optional(sym) && parent->prompt) {
+		struct expr_select_value *esv;
+
 		sym->rev_dep.expr = expr_alloc_or(sym->rev_dep.expr,
+				expr_alloc_and(parent->prompt->visible.expr,
+					expr_alloc_symbol(&symbol_mod)));
+		for (esv = sym->val_dep; esv; esv = esv->next)
+			esv->expr = expr_alloc_or(esv->expr,
 				expr_alloc_and(parent->prompt->visible.expr,
 					expr_alloc_symbol(&symbol_mod)));
 	}
@@ -620,6 +659,7 @@ void get_symbol_str(struct gstr *r, struct symbol *sym,
 {
 	bool hit;
 	struct property *prop;
+	struct expr_select_value *esv;
 
 	if (sym && sym->name) {
 		str_printf(r, "Symbol: %s [=%s]\n", sym->name,
@@ -656,12 +696,24 @@ void get_symbol_str(struct gstr *r, struct symbol *sym,
 		} else
 			str_printf(r, " && ");
 		expr_gstr_print(prop->expr, r);
+		if (prop->value) {
+			str_printf(r, " (value=");
+			expr_gstr_print(prop->value, r);
+			str_printf(r, ")");
+		}
 	}
 	if (hit)
 		str_append(r, "\n");
 	if (sym->rev_dep.expr) {
 		str_append(r, _("  Selected by: "));
 		expr_gstr_print(sym->rev_dep.expr, r);
+		str_append(r, "\n");
+	}
+	for (esv = sym->val_dep; esv; esv = esv->next) {
+		str_append(r, "  Selected by: ");
+		expr_gstr_print(esv->expr, r);
+		str_append(r, " with value: ");
+		expr_gstr_print(esv->value, r);
 		str_append(r, "\n");
 	}
 	str_append(r, "\n\n");

@@ -207,8 +207,14 @@ config_option: T_DEFAULT expr if_expr T_EOL
 
 config_option: T_SELECT T_WORD if_expr T_EOL
 {
-	menu_add_symbol(P_SELECT, sym_lookup($2, 0), $3);
+	menu_add_select(sym_lookup($2, 0), NULL, $3);
 	printd(DEBUG_PARSE, "%s:%d:select\n", zconf_curname(), zconf_lineno());
+};
+
+config_option: T_SELECT T_WORD expr if_expr T_EOL
+{
+	menu_add_select(sym_lookup($2, 0), $3, $4);
+	printd(DEBUG_PARSE, "%s:%d:select with value\n", zconf_curname(), zconf_lineno());
 };
 
 config_option: T_RANGE symbol symbol if_expr T_EOL
@@ -653,6 +659,15 @@ static void print_symbol(FILE *out, struct menu *menu)
 		case P_SELECT:
 			fputs( "  select ", out);
 			expr_fprint(prop->expr, out);
+			if (prop->value) {
+				fputs(" (value=", out);
+				expr_fprint(prop->value, out);
+				fputc(')', out);
+			}
+			if (!expr_is_yes(prop->visible.expr)) {
+				fputs(" if ", out);
+				expr_fprint(prop->visible.expr, out);
+			}
 			fputc('\n', out);
 			break;
 		case P_RANGE:

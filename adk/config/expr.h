@@ -54,6 +54,13 @@ struct expr_value {
 	tristate tri;
 };
 
+struct expr_select_value {
+	struct expr *expr;
+	tristate tri;
+	struct expr *value;
+	struct expr_select_value *next;
+};
+
 struct symbol_value {
 	void *val;
 	tristate tri;
@@ -83,6 +90,7 @@ struct symbol {
 	struct property *prop;
 	struct expr_value dir_dep;
 	struct expr_value rev_dep;
+	struct expr_select_value *val_dep;
 };
 
 #define for_all_symbols(i, sym) for (i = 0; i < SYMBOL_HASHSIZE; i++) for (sym = symbol_hash[i]; sym; sym = sym->next) if (sym->type != S_OTHER)
@@ -151,6 +159,7 @@ struct property {
 	                            * P_PROMPT, P_DEFAULT, P_MENU, P_COMMENT */
 	struct file *file;         /* what file was this property defined */
 	int lineno;                /* what lineno was this property defined */
+	struct expr *value;	   /* the optional P_SELECT value */
 };
 
 #define for_all_properties(sym, st, tok) \

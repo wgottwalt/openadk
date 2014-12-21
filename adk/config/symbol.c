@@ -190,6 +190,7 @@ static void sym_calc_visibility(struct symbol *sym)
 {
 	struct property *prop;
 	tristate tri;
+	struct expr_select_value *esv;
 
 	/* any prompt visible? */
 	tri = no;
@@ -221,6 +222,15 @@ static void sym_calc_visibility(struct symbol *sym)
 	if (sym->rev_dep.tri != tri) {
 		sym->rev_dep.tri = tri;
 		sym_set_changed(sym);
+	}
+	for (esv = sym->val_dep; esv; esv = esv->next) {
+		tri = expr_calc_value(esv->expr);
+		if (tri == mod && sym_get_type(sym) == S_BOOLEAN)
+			tri = yes;
+		if (esv->tri != tri) {
+			esv->tri = tri;
+			sym_set_changed(sym);
+		}
 	}
 }
 
@@ -307,6 +317,8 @@ void sym_calc_value(struct symbol *sym)
 	struct symbol_value newval, oldval;
 	struct property *prop;
 	struct expr *e;
+	struct expr_select_value *esv;
+	int got_sel_val;
 
 	if (!sym)
 		return;
@@ -368,6 +380,9 @@ void sym_calc_value(struct symbol *sym)
 			}
 			if (sym->rev_dep.tri != no)
 				sym->flags |= SYMBOL_WRITE;
+			for (esv = sym->val_dep; esv; esv = esv->next)
+				if (esv->tri != no)
+					sym->flags |= SYMBOL_WRITE;
 			if (!sym_is_choice(sym)) {
 				prop = sym_get_default_prop(sym);
 				if (prop) {
@@ -377,19 +392,34 @@ void sym_calc_value(struct symbol *sym)
 				}
 			}
 		calc_newval:
-			if (sym->dir_dep.tri == no && sym->rev_dep.tri != no) {
-				struct expr *e;
-				e = expr_simplify_unmet_dep(sym->rev_dep.expr,
-				    sym->dir_dep.expr);
-				fprintf(stderr, "warning: (");
-				expr_fprint(e, stderr);
-				fprintf(stderr, ") selects %s which has unmet direct dependencies (",
-					sym->name);
-				expr_fprint(sym->dir_dep.expr, stderr);
-				fprintf(stderr, ")\n");
-				expr_free(e);
+			if (sym->dir_dep.tri == no) {
+				if (sym->rev_dep.tri != no) {
+					fprintf(stderr, "warning: (");
+					expr_fprint(sym->rev_dep.expr, stderr);
+					fprintf(stderr, ") selects %s which has unmet direct dependencies (",
+						sym->name);
+					expr_fprint(sym->dir_dep.expr, stderr);
+					fprintf(stderr, ")\n");
+				}
+				for (esv = sym->val_dep; esv; esv = esv->next) {
+					if ((esv->tri != no) &&
+					    (expr_calc_value(esv->value) != no)) {
+						fprintf(stderr, "warning: (");
+						expr_fprint(esv->expr, stderr);
+						fprintf(stderr, ") selects %s (with value ",
+							sym->name);
+						expr_fprint(esv->value, stderr);
+						fprintf(stderr, ") which has unmet direct dependencies (");
+						expr_fprint(sym->dir_dep.expr, stderr);
+						fprintf(stderr, ")\n");
+					}
+				}
 			}
-			newval.tri = EXPR_OR(newval.tri, sym->rev_dep.tri);
+ 			newval.tri = EXPR_OR(newval.tri, sym->rev_dep.tri);
+			for (esv = sym->val_dep; esv; esv = esv->next)
+				if (esv->tri != no)
+					newval.tri = EXPR_OR(newval.tri,
+						expr_calc_value(esv->value));
 		}
 		if (newval.tri == mod && sym_get_type(sym) == S_BOOLEAN)
 			newval.tri = yes;
@@ -404,6 +434,23 @@ void sym_calc_value(struct symbol *sym)
 				break;
 			}
 		}
+		got_sel_val = 0;
+		for (esv = sym->val_dep; esv; esv = esv->next) {
+			if (esv->tri != no) {
+				struct symbol *ss = esv->value->left.sym;
+
+				if (got_sel_val) {
+					/* warn of more than one value selected */
+				} else {
+					sym->flags |= SYMBOL_WRITE;
+					sym_calc_value(ss);
+					newval.val = ss->curr.val;
+					got_sel_val = 1;
+				}
+			}
+		}
+		if (got_sel_val)
+			break;
 		prop = sym_get_default_prop(sym);
 		if (prop) {
 			struct symbol *ds = prop_get_symbol(prop);
@@ -486,6 +533,8 @@ void sym_set_all_changed(void)
 bool sym_tristate_within_range(struct symbol *sym, tristate val)
 {
 	int type = sym_get_type(sym);
+	struct expr_select_value *esv;
+	tristate tri;
 
 	if (sym->visible == no)
 		return false;
@@ -495,11 +544,14 @@ bool sym_tristate_within_range(struct symbol *sym, tristate val)
 
 	if (type == S_BOOLEAN && val == mod)
 		return false;
-	if (sym->visible <= sym->rev_dep.tri)
+	tri = sym->rev_dep.tri;
+	for (esv = sym->val_dep; esv; esv = esv->next)
+		tri = EXPR_OR(tri, esv->tri);
+	if (sym->visible <= tri)
 		return false;
 	if (sym_is_choice_value(sym) && sym->visible == yes)
 		return val == yes;
-	return val >= sym->rev_dep.tri && val <= sym->visible;
+	return val >= tri && val <= sym->visible;
 }
 
 bool sym_set_tristate_value(struct symbol *sym, tristate val)
@@ -795,7 +847,13 @@ const char *sym_get_string_value(struct symbol *sym)
 
 bool sym_is_changable(struct symbol *sym)
 {
-	return sym->visible > sym->rev_dep.tri;
+	tristate tri = sym->rev_dep.tri;
+	struct expr_select_value *esv;
+
+	for (esv = sym->val_dep; esv; esv = esv->next)
+		tri = EXPR_OR(tri, esv->tri);
+
+	return sym->visible > tri;
 }
 
 static unsigned strhash(const char *s)
