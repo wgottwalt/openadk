@@ -27,12 +27,13 @@ $(eval $(call HOST_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEA
 $(eval $(call PKG_template,LIBSDL_IMAGE,libsdl-image,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 ifeq ($(ADK_HOST_DARWIN),y)
-LDFLAGS_FOR_BUILD+=	-framework Cocoa
+HOST_LDFLAGS+=		-framework Cocoa
 endif
 
 AUTOTOOL_STYLE:=	autogen
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--with-sdl-prefix='${STAGING_HOST_DIR}/usr' \
+			--disable-sdltest \
 			--enable-png \
 			--disable-webp \
 			--disable-jpg \
