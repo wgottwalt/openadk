@@ -27,7 +27,7 @@ CONFIGURE_ARGS+=	--disable-asm \
 post-install:
 	# provides own automake macros
 	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/share/aclocal
-	${CP} ${WRKINST}//usr/share/aclocal/libgcrypt.m4 \
+	${CP} ${WRKINST}/usr/share/aclocal/libgcrypt.m4 \
 		${STAGING_HOST_DIR}/usr/share/aclocal
 
 libgcrypt-install:
