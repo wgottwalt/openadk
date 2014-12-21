@@ -1,6 +1,6 @@
 --- rtmpdump-2.4.orig/Makefile	2013-12-15 14:24:48.000000000 +0100
-+++ rtmpdump-2.4/Makefile	2013-12-15 15:18:27.000000000 +0100
-@@ -1,9 +1,9 @@
++++ rtmpdump-2.4/Makefile	2014-12-19 20:43:08.000000000 +0100
+@@ -1,28 +1,31 @@
  VERSION=v2.4
  
 -prefix=/usr/local
@@ -13,7 +13,19 @@
  
  SYS=posix
  #SYS=mingw
-@@ -21,8 +21,10 @@ CRYPTO_DEF=$(DEF_$(CRYPTO))
+ 
+-CRYPTO=OPENSSL
++#CRYPTO=OPENSSL
+ #CRYPTO=POLARSSL
+ #CRYPTO=GNUTLS
+ LIBZ=-lz
+ LIB_GNUTLS=-lgnutls -lhogweed -lnettle -lgmp $(LIBZ)
+ LIB_OPENSSL=-lssl -lcrypto $(LIBZ)
+ LIB_POLARSSL=-lpolarssl $(LIBZ)
++LIB_=$(LIBZ)
+ CRYPTO_LIB=$(LIB_$(CRYPTO))
+ DEF_=-DNO_CRYPTO
+ CRYPTO_DEF=$(DEF_$(CRYPTO))
  
  DEF=-DRTMPDUMP_VERSION=\"$(VERSION)\" $(CRYPTO_DEF) $(XDEF)
  OPT=-O2
