@@ -4,13 +4,11 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libmicrohttpd
-PKG_VERSION:=		0.9.37
+PKG_VERSION:=		0.9.38
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fdf1e0534d83bbf2663f80fa7873be77
+PKG_MD5SUM:=		b72efbfe7f290846015d460aea7091fe
 PKG_DESCR:=		library make it easy to run an webserver
 PKG_SECTION:=		libs/net
-PKG_DEPENDS:=		libgcrypt
-PKG_BUILDDEP:=		libgcrypt
 PKG_URL:=		http://www.gnu.org/software/libmicrohttpd/
 PKG_SITES:=		${MASTER_SITE_GNU:=libmicrohttpd/}
 PKG_OPTS:=		dev
@@ -21,8 +19,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBMICROHTTPD,libmicrohttpd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_ARGS+=	--with-libgcrypt-prefix=$(STAGING_TARGET_DIR)/usr \
-			--disable-spdy
+CONFIGURE_ARGS+=	--disable-spdy
 
 libmicrohttpd-install:
 	$(INSTALL_DIR) $(IDIR_LIBMICROHTTPD)/usr/lib
