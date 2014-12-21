@@ -3,8 +3,10 @@
 
 mainmenu "OpenADK Configuration"
 
-config MODULES
-	boolean
+# enable tristate
+config ADK_MODULES
+	bool
+	option modules
 	default y
 
 config ADK_HAVE_DOT_CONFIG
