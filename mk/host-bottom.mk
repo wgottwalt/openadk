@@ -106,6 +106,11 @@ ifeq (${HOST_STYLE},manual)
 endif
 	env ${HOST_MAKE_ENV} ${MAKE} hostpost-install $(MAKE_TRACE)
 	@find $(STAGING_HOST_DIR) -name \*.la -exec rm {} \;
+	@for a in $(STAGING_HOST_DIR)/usr/bin/*-config; do \
+		[[ -e $$a ]] || continue; \
+		$(SED) "s,^prefix=.*,prefix=$(STAGING_HOST_DIR)/usr," $$a; \
+		chmod u+x $(STAGING_HOST_DIR)/usr/bin/$$(basename $$a); \
+	done
 	@touch $@
 
 ${_HOST_COOKIE}:
