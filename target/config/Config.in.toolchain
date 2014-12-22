@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 menu "Toolchain settings"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
+	visible if !ADK_CHOOSE_APPLIANCE
 
 config ADK_VENDOR
 	string "Vendor name"
@@ -16,93 +16,92 @@ prompt "GCC version"
 config ADK_TOOLCHAIN_GCC_4_4_7
 	prompt "4.4.7"
 	boolean
-	depends on ADK_LINUX_AVR32
+	depends on ADK_TARGET_ARCH_AVR32
 
 config ADK_TOOLCHAIN_GCC_4_5_4
 	prompt "4.5.4"
 	boolean
-	depends on ADK_LINUX_BFIN
+	depends on ADK_TARGET_ARCH_BFIN
 
 config ADK_TOOLCHAIN_GCC_4_7_4
 	prompt "4.7.4"
 	boolean
-	depends on ADK_LINUX_CRIS || ADK_LINUX_C6X
+	depends on ADK_TARGET_ARCH_CRIS || ADK_TARGET_ARCH_C6X
 
 config ADK_TOOLCHAIN_GCC_4_8_0_ARC
 	prompt "4.8.0-arc"
 	boolean
-	depends on ADK_LINUX_ARC
+	depends on ADK_TARGET_ARCH_ARC
 
 config ADK_TOOLCHAIN_GCC_4_8_3
 	prompt "4.8.3"
 	boolean
-	depends on !ADK_LINUX_BFIN
-	depends on !ADK_LINUX_AARCH64
-	depends on !ADK_LINUX_ARC
-	depends on !ADK_LINUX_AVR32
-	depends on !ADK_LINUX_CRIS
-	depends on !ADK_LINUX_TILE
-	depends on !ADK_LINUX_C6X
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_AARCH64
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_CRIS
+	depends on !ADK_TARGET_ARCH_TILE
+	depends on !ADK_TARGET_ARCH_C6X
 
 config ADK_TOOLCHAIN_GCC_4_9_2
 	prompt "4.9.2"
 	boolean
-	depends on !ADK_LINUX_BFIN
-	depends on !ADK_LINUX_ARC
-	depends on !ADK_LINUX_AVR32
-	depends on !ADK_LINUX_CRIS
-	depends on !ADK_LINUX_C6X
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_CRIS
+	depends on !ADK_TARGET_ARCH_C6X
 
 config ADK_TOOLCHAIN_GCC_GIT
 	prompt "git"
 	boolean
 	select ADK_DISABLE_CHECKSUM
-	depends on !ADK_LINUX_BFIN
-	depends on !ADK_LINUX_ARC
-	depends on !ADK_LINUX_AVR32
-	depends on !ADK_LINUX_CRIS
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_CRIS
 
 endchoice
 
 choice
 prompt "Binutils version"
-depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
 
 config ADK_TOOLCHAIN_BINUTILS_2_20_1
 	prompt "2.20.1"
 	boolean
-	depends on ADK_LINUX_AVR32
+	depends on ADK_TARGET_ARCH_AVR32
 
 config ADK_TOOLCHAIN_BINUTILS_2_22
 	prompt "2.22"
 	boolean
-	depends on ADK_LINUX_BFIN \
-		|| ADK_LINUX_CRIS \
-		|| ADK_LINUX_M68K
+	depends on ADK_TARGET_ARCH_BFIN \
+		|| ADK_TARGET_ARCH_CRIS \
+		|| ADK_TARGET_ARCH_M68K
 
 config ADK_TOOLCHAIN_BINUTILS_2_23_ARC
 	prompt "2.23-arc"
 	boolean
-	depends on ADK_LINUX_ARC
+	depends on ADK_TARGET_ARCH_ARC
 
 config ADK_TOOLCHAIN_BINUTILS_2_24
 	prompt "2.24"
 	boolean
-	depends on !ADK_LINUX_BFIN
-	depends on !ADK_LINUX_ARC
-	depends on !ADK_LINUX_AVR32
-	depends on !ADK_LINUX_CRIS
-	depends on !ADK_LINUX_M68K
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_CRIS
+	depends on !ADK_TARGET_ARCH_M68K
 
 config ADK_TOOLCHAIN_BINUTILS_GIT
 	prompt "git"
 	boolean
 	select ADK_DISABLE_CHECKSUM
-	depends on !ADK_LINUX_BFIN
-	depends on !ADK_LINUX_ARC
-	depends on !ADK_LINUX_AVR32
-	depends on !ADK_LINUX_CRIS
-	depends on !ADK_LINUX_M68K
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_CRIS
+	depends on !ADK_TARGET_ARCH_M68K
 
 endchoice
 
@@ -131,12 +130,12 @@ config ADK_TARGET_CFLAGS_OPT_O0
 
 endchoice
 
-config ADK_LINUX_ARM_WITH_THUMB
+config ADK_TARGET_ARCH_ARM_WITH_THUMB
 	prompt "Use THUMB2 only mode"
 	boolean
 	select ADK_KERNEL_THUMB2_KERNEL
 	default n
-	depends on ADK_LINUX_ARM
+	depends on ADK_TARGET_ARCH_ARM
 	help
 	  Experimental option. Use with care.
 
@@ -188,15 +187,15 @@ config ADK_TARGET_USE_GOLD
 	prompt "Use GOLD as linker for all packages"
 	boolean
 	select ADK_TOOLCHAIN_WITH_GOLD
-	depends on !ADK_LINUX_MIPS
-	depends on !ADK_LINUX_MIPS64
+	depends on !ADK_TARGET_ARCH_MIPS
+	depends on !ADK_TARGET_ARCH_MIPS64
 	default n
 
 config ADK_TARGET_USE_GNU_HASHSTYLE
 	prompt "Use GNU hashstyle for all packages"
 	boolean
-	depends on !ADK_LINUX_MIPS
-	depends on !ADK_LINUX_MIPS64
+	depends on !ADK_TARGET_ARCH_MIPS
+	depends on !ADK_TARGET_ARCH_MIPS64
 	default n
 	help
 	  Performance optimization for applications with lot of shared library

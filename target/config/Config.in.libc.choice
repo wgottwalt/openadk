@@ -2,20 +2,19 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
-prompt "Target C library"
-depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
+prompt "C library"
 
 config ADK_TARGET_LIB_UCLIBC_NG
 	prompt "uClibc-ng embedded C library"
 	boolean
 	select ADK_uclibc_ng
 	depends on \
-		   !ADK_LINUX_AARCH64 && \
-		   !ADK_LINUX_ALPHA && \
-		   !ADK_LINUX_MICROBLAZE && \
-		   !ADK_LINUX_SPARC64 && \
-		   !ADK_LINUX_PPC64 && \
-		   !ADK_LINUX_TILE && \
+		   !ADK_TARGET_ARCH_AARCH64 && \
+		   !ADK_TARGET_ARCH_ALPHA && \
+		   !ADK_TARGET_ARCH_MICROBLAZE && \
+		   !ADK_TARGET_ARCH_SPARC64 && \
+		   !ADK_TARGET_ARCH_PPC64 && \
+		   !ADK_TARGET_ARCH_TILE && \
 		   !ADK_x32
 	help
 	  http://uclibc-ng.org
@@ -26,13 +25,13 @@ config ADK_TARGET_LIB_MUSL
 	select ADK_musl
 	depends on !ADK_TARGET_UCLINUX
 	depends on \
-		ADK_LINUX_ARM || \
-		ADK_LINUX_MICROBLAZE || \
-		ADK_LINUX_MIPS || \
-		ADK_LINUX_PPC || \
-		ADK_LINUX_SH || \
-		ADK_LINUX_X86 || \
-		ADK_LINUX_X86_64
+		ADK_TARGET_ARCH_ARM || \
+		ADK_TARGET_ARCH_MICROBLAZE || \
+		ADK_TARGET_ARCH_MIPS || \
+		ADK_TARGET_ARCH_PPC || \
+		ADK_TARGET_ARCH_SH || \
+		ADK_TARGET_ARCH_X86 || \
+		ADK_TARGET_ARCH_X86_64
 	help
  	  http://musl-libc.org
 
@@ -40,11 +39,11 @@ config ADK_TARGET_LIB_GLIBC
 	prompt "GNU C library"
 	boolean
 	select ADK_glibc
-	depends on !ADK_LINUX_ARC
-	depends on !ADK_LINUX_AVR32
-	depends on !ADK_LINUX_BFIN
-	depends on !ADK_LINUX_CRIS
-	depends on !ADK_LINUX_XTENSA
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_CRIS
+	depends on !ADK_TARGET_ARCH_XTENSA
 	depends on !ADK_TARGET_UCLINUX
 	help
 	  http://www.gnu.org/libc
@@ -54,13 +53,13 @@ config ADK_TARGET_LIB_UCLIBC
 	boolean
 	select ADK_uclibc
 	depends on \
-		   !ADK_LINUX_AARCH64 && \
-		   !ADK_LINUX_ALPHA && \
-		   !ADK_LINUX_CRIS && \
-		   !ADK_LINUX_MICROBLAZE && \
-		   !ADK_LINUX_SPARC64 && \
-		   !ADK_LINUX_PPC64 && \
-		   !ADK_LINUX_TILE && \
+		   !ADK_TARGET_ARCH_AARCH64 && \
+		   !ADK_TARGET_ARCH_ALPHA && \
+		   !ADK_TARGET_ARCH_CRIS && \
+		   !ADK_TARGET_ARCH_MICROBLAZE && \
+		   !ADK_TARGET_ARCH_SPARC64 && \
+		   !ADK_TARGET_ARCH_PPC64 && \
+		   !ADK_TARGET_ARCH_TILE && \
 		   !ADK_x32
 	help
  	  http://uclibc.org
@@ -68,8 +67,7 @@ config ADK_TARGET_LIB_UCLIBC
 endchoice
 
 choice
-prompt "Target C library version"
-depends on !ADK_CHOOSE_TARGET_SYSTEM && !ADK_CHOOSE_TARGET_ARCH
+prompt "C library version"
 
 config ADK_TARGET_LIB_UCLIBC_NG_GIT
 	prompt "git"

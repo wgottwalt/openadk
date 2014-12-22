@@ -874,10 +874,10 @@ int main() {
 					sp = "";
 					while (token != NULL) {
 						if(strncmp(token, "!", 1) == 0) {
-							fprintf(cfg, "%s!ADK_LINUX%s", sp, toupperstr(token));
+							fprintf(cfg, "%s!ADK_TARGET_ARCH%s", sp, toupperstr(token));
 							sp = " && ";
 						} else {
-							fprintf(cfg, "%sADK_LINUX_%s", sp, toupperstr(token));
+							fprintf(cfg, "%sADK_TARGET_ARCH_%s", sp, toupperstr(token));
 							sp = " || ";
 						}
 						token = strtok(NULL, " ");
@@ -1148,10 +1148,10 @@ int main() {
 							sp = "";
 							while (token != NULL) {
 								if(strncmp(token, "!", 1) == 0) {
-									fprintf(cfg, "%s!ADK_LINUX%s", sp, toupperstr(token));
+									fprintf(cfg, "%s!ADK_TARGET_ARCH%s", sp, toupperstr(token));
 									sp = " && ";
 								} else {
-									fprintf(cfg, "%sADK_LINUX_%s", sp, toupperstr(token));
+									fprintf(cfg, "%sADK_TARGET_ARCH_%s", sp, toupperstr(token));
 									sp = " || ";
 								}
 							token = strtok(NULL, " ");

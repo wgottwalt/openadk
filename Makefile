@@ -9,7 +9,7 @@ all: .prereq_done checkreloc
 
 v: .prereq_done
 	@(echo; echo "Build started on $$(LC_ALL=C LANGUAGE=C date)"; \
-	    set -x; ${_UNLIMIT} ${GMAKE_FMK} VERBOSE=1 all) 2>&1 | tee -a make.log
+	    set -x; ${_UNLIMIT} ${GMAKE_FMK} ADK_VERBOSE=1 all) 2>&1 | tee -a make.log
 
 help:
 	@echo 'Configuration targets:'
@@ -17,8 +17,9 @@ help:
 	@echo '  menuconfig   - Update current config utilising a menu based program'
 	@echo '                 (default when .config does not exist)'
 	@echo '  oldconfig    - Update current config utilising a provided .configs base'
-	@echo '  allmodconfig - New config selecting all packages as modules when possible'
-	@echo '  allconfig    - New config selecting all packages when possible'
+	@echo '  defconfig    - New config with defaults'
+	@echo '  allmodconfig - New config selecting all symbols with m'
+	@echo '  allyesconfig - New config selecting all symbols with y'
 	@echo '  allnoconfig  - New config where all options are answered with no'
 	@echo ''
 	@echo 'Help targets:'
@@ -85,7 +86,7 @@ config: .prereq_done
 	@${GMAKE_INV} _config W=
 
 oldconfig: .prereq_done
-	@${GMAKE_INV} _config W=-o
+	@${GMAKE_INV} _config W=--oldconfig
 
 download: .prereq_done
 	@${GMAKE_INV} toolchain/download
@@ -132,13 +133,13 @@ defconfig: .prereq_done
 	@${GMAKE_INV} defconfig
 
 allnoconfig: .prereq_done
-	@${GMAKE_INV} _config W=-n
+	@${GMAKE_INV} KCONFIG_ALLCONFIG=all.config _config W=--allnoconfig
 
-allconfig: .prereq_done
-	@${GMAKE_INV} _mconfig W=-y RCONFIG=Config.in
+allyesconfig: .prereq_done
+	@${GMAKE_INV} KCONFIG_ALLCONFIG=all.config _config W=--allyesconfig
 
 allmodconfig: .prereq_done
-	@${GMAKE_INV} _mconfig W=-o RCONFIG=Config.in
+	@${GMAKE_INV} KCONFIG_ALLCONFIG=all.config _config W=--allmodconfig
 
 package_index: .prereq_done
 	@${GMAKE_INV} package_index

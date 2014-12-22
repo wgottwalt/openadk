@@ -43,17 +43,17 @@ ifneq ($(ADK_PACKAGE_LIBOPENSSL_WITH_CRYPTODEV),)
 OPENSSL_OPTIONS+= -DHAVE_CRYPTODEV -DUSE_CRYPTODEV_DIGESTS
 endif
 
-ifeq ($(ADK_LINUX_MICROBLAZE),y)
+ifeq ($(ADK_TARGET_ARCH_MICROBLAZE),y)
 TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
 endif
-ifeq ($(ADK_LINUX_XTENSA),y)
+ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
 endif
-ifeq ($(ADK_LINUX_PPC),y)
+ifeq ($(ADK_TARGET_ARCH_PPC),y)
 TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
 endif
 
-ifeq ($(ADK_LINUX_X86_64),y)
+ifeq ($(ADK_TARGET_ARCH_X86_64),y)
 CONFIG:=		linux-embedded-x86_64
 TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
 else

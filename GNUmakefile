@@ -16,7 +16,7 @@ ${MAKECMDGOALS}: _subdir
 
 _subdir: ${_subdir_dep}
 	cd ${subdir} && ADK_TOPDIR=${ADK_TOPDIR} DEVELOPER=1 \
-	    make VERBOSE=1 ${MAKEFLAGS} ${MAKECMDGOALS}
+	    make ADK_VERBOSE=1 ${MAKEFLAGS} ${MAKECMDGOALS}
 
 include prereq.mk
 else

@@ -28,7 +28,7 @@ ifneq ($(ADK_LINUX_64)$(ADK_TARGET_KERNEL_64),)
 CONFOPTS+=		--enable-64-bit-bfd
 endif
 
-ifeq ($(ADK_LINUX_SH)$(ADK_LINUX_X86_64),)
+ifeq ($(ADK_TARGET_ARCH_SH)$(ADK_TARGET_ARCH_X86_64),)
 CONFOPTS+=		--disable-multilib
 else
 CONFOPTS+=		--enable-multilib
@@ -44,7 +44,7 @@ endif
 
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
-ifeq ($(ADK_LINUX_XTENSA),y)
+ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_$(ADK_TARGET_XTENSA).tar \
 		--strip-components=1 -C $(WRKSRC) binutils
 endif

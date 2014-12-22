@@ -136,13 +136,13 @@ config ADK_CPU_AVR32
 
 config ADK_TARGET_CPU_ARCH
 	string
-	default "aarch64" if ADK_LINUX_AARCH64 && ADK_little
-	default "alpha" if ADK_LINUX_ALPHA
-	default "armv5te" if ADK_LINUX_ARM && ADK_little && ADK_armv5te
-	default "armv6" if ADK_LINUX_ARM && ADK_little && ADK_armv6
-	default "armv7a" if ADK_LINUX_ARM && ADK_little && ADK_armv7a
-	default "arm" if ADK_LINUX_ARM && ADK_little
-	default "armeb" if ADK_LINUX_ARM && ADK_big
+	default "aarch64" if ADK_TARGET_ARCH_AARCH64 && ADK_little
+	default "alpha" if ADK_TARGET_ARCH_ALPHA
+	default "armv5te" if ADK_TARGET_ARCH_ARM && ADK_little && ADK_armv5te
+	default "armv6" if ADK_TARGET_ARCH_ARM && ADK_little && ADK_armv6
+	default "armv7a" if ADK_TARGET_ARCH_ARM && ADK_little && ADK_armv7a
+	default "arm" if ADK_TARGET_ARCH_ARM && ADK_little
+	default "armeb" if ADK_TARGET_ARCH_ARM && ADK_big
 	default "arc" if ADK_CPU_ARC && ADK_little
 	default "arceb" if ADK_CPU_ARC && ADK_big
 	default "avr32" if ADK_CPU_AVR32
@@ -157,21 +157,21 @@ config ADK_TARGET_CPU_ARCH
 	default "i686" if ADK_CPU_PENTIUM_M
 	default "i686" if ADK_CPU_ATOM
 	default "i686" if ADK_CPU_ATHLON
-	default "m68k" if ADK_LINUX_M68K
-	default "microblaze" if ADK_LINUX_MICROBLAZE && ADK_big
-	default "microblazeel" if ADK_LINUX_MICROBLAZE && ADK_little
-	default "mips64" if ADK_LINUX_MIPS64 && ADK_big
-	default "mips64el" if ADK_LINUX_MIPS64 && ADK_little
-	default "mips" if ADK_LINUX_MIPS && ADK_big
-	default "mipsel" if ADK_LINUX_MIPS && ADK_little
+	default "m68k" if ADK_TARGET_ARCH_M68K
+	default "microblaze" if ADK_TARGET_ARCH_MICROBLAZE && ADK_big
+	default "microblazeel" if ADK_TARGET_ARCH_MICROBLAZE && ADK_little
+	default "mips64" if ADK_TARGET_ARCH_MIPS64 && ADK_big
+	default "mips64el" if ADK_TARGET_ARCH_MIPS64 && ADK_little
+	default "mips" if ADK_TARGET_ARCH_MIPS && ADK_big
+	default "mipsel" if ADK_TARGET_ARCH_MIPS && ADK_little
 	default "ppc" if ADK_CPU_PPC
 	default "ppc" if ADK_CPU_PPC_440
 	default "ppc64" if ADK_CPU_PPC64
-	default "sh4" if ADK_LINUX_SH && ADK_little
-	default "sh4eb" if ADK_LINUX_SH && ADK_big
-	default "sparc" if ADK_LINUX_SPARC
-	default "sparc64" if ADK_LINUX_SPARC64
+	default "sh4" if ADK_TARGET_ARCH_SH && ADK_little
+	default "sh4eb" if ADK_TARGET_ARCH_SH && ADK_big
+	default "sparc" if ADK_TARGET_ARCH_SPARC
+	default "sparc64" if ADK_TARGET_ARCH_SPARC64
 	default "tilegx" if ADK_CPU_TILE
 	default "x86_64" if ADK_CPU_X86_64
 	default "x86_64" if ADK_CPU_AMDFAM10
-	default "xtensa" if ADK_LINUX_XTENSA
+	default "xtensa" if ADK_TARGET_ARCH_XTENSA

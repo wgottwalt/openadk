@@ -52,7 +52,7 @@ endif
 
 # architecture specific options
 # arm
-ifeq ($(ADK_LINUX_ARM),y)
+ifeq ($(ADK_TARGET_ARCH_ARM),y)
 ifeq ($(ADK_TARGET_ABI_EABI),y)
 	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/#\1=y/' ${WRKBUILD}/.config
@@ -67,15 +67,15 @@ ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
 endif
 endif
 # mips/mips64
-ifeq ($(ADK_LINUX_MIPS64),y)
+ifeq ($(ADK_TARGET_ARCH_MIPS64),y)
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS64\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS32\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_LINUX_MIPS),y)
+ifeq ($(ADK_TARGET_ARCH_MIPS),y)
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS32\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS64\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_LINUX_MIPS64),y)
+ifeq ($(ADK_TARGET_ARCH_MIPS64),y)
 ifeq ($(ADK_n64),y)
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_O32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
@@ -93,7 +93,7 @@ ifeq ($(ADK_o32),y)
 endif
 endif
 # powerpc
-ifeq ($(ADK_LINUX_PPC),y)
+ifeq ($(ADK_TARGET_ARCH_PPC),y)
 ifeq ($(ADK_TARGET_CPU_WITH_FPU),y)
 	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config

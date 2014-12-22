@@ -1,6 +1,5 @@
-#line 2 "lex.zconf.c"
 
-#line 4 "lex.zconf.c"
+#line 3 "scripts/kconfig/zconf.lex.c_shipped"
 
 #define  YY_INT_ALIGNED short int
 
@@ -73,6 +72,7 @@ typedef int flex_int32_t;
 typedef unsigned char flex_uint8_t; 
 typedef unsigned short int flex_uint16_t;
 typedef unsigned int flex_uint32_t;
+#endif /* ! C99 */
 
 /* Limits of integral types. */
 #ifndef INT8_MIN
@@ -102,8 +102,6 @@ typedef unsigned int flex_uint32_t;
 #ifndef UINT32_MAX
 #define UINT32_MAX             (4294967295U)
 #endif
-
-#endif /* ! C99 */
 
 #endif /* ! FLEXINT_H */
 
@@ -161,15 +159,7 @@ typedef unsigned int flex_uint32_t;
 
 /* Size of default input buffer. */
 #ifndef YY_BUF_SIZE
-#ifdef __ia64__
-/* On IA-64, the buffer size is 16k, not 8k.
- * Moreover, YY_BUF_SIZE is 2*YY_READ_BUF_SIZE in the general case.
- * Ditto for the __ia64__ case accordingly.
- */
-#define YY_BUF_SIZE 32768
-#else
 #define YY_BUF_SIZE 16384
-#endif /* __ia64__ */
 #endif
 
 /* The state buf must be large enough to hold one state per character in the main buffer.
@@ -773,10 +763,8 @@ int zconf_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *zconftext;
-#line 1 "zconf.l"
 #define YY_NO_INPUT 1
 
-#line 6 "zconf.l"
 /*
  * Copyright (C) 2002 Roman Zippel <zippel@linux-m68k.org>
  * Released under the terms of the GNU GPL v2.0.
@@ -840,7 +828,6 @@ static void alloc_string(const char *str, int size)
 	memcpy(text, str, size);
 	text[size] = 0;
 }
-#line 844 "lex.zconf.c"
 
 #define INITIAL 0
 #define COMMAND 1
@@ -925,12 +912,7 @@ static int input (void );
 
 /* Amount of stuff to slurp up with each read. */
 #ifndef YY_READ_BUF_SIZE
-#ifdef __ia64__
-/* On IA-64, the buffer size is 16k, not 8k */
-#define YY_READ_BUF_SIZE 16384
-#else
 #define YY_READ_BUF_SIZE 8192
-#endif /* __ia64__ */
 #endif
 
 /* Copy whatever the last rule matched to the standard output. */
@@ -1015,12 +997,8 @@ YY_DECL
 	register char *yy_cp, *yy_bp;
 	register int yy_act;
     
-#line 73 "zconf.l"
-
 	int str = 0;
 	int ts, i;
-
-#line 1024 "lex.zconf.c"
 
 	if ( !(yy_init) )
 		{
@@ -1078,11 +1056,9 @@ do_action:	/* This label is used only to access EOF actions. */
 	{ /* beginning of action switch */
 case 1:
 /* rule 1 can match eol */
-#line 78 "zconf.l"
 case 2:
 /* rule 2 can match eol */
 YY_RULE_SETUP
-#line 78 "zconf.l"
 {
 	current_file->lineno++;
 	return T_EOL;
@@ -1090,19 +1066,16 @@ YY_RULE_SETUP
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 82 "zconf.l"
 
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 85 "zconf.l"
 {
 	BEGIN(COMMAND);
 }
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 89 "zconf.l"
 {
 	unput(zconftext[0]);
 	BEGIN(COMMAND);
@@ -1111,7 +1084,6 @@ YY_RULE_SETUP
 
 case 6:
 YY_RULE_SETUP
-#line 96 "zconf.l"
 {
 		const struct kconf_id *id = kconf_id_lookup(zconftext, zconfleng);
 		BEGIN(PARAM);
@@ -1128,13 +1100,11 @@ YY_RULE_SETUP
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 109 "zconf.l"
 
 	YY_BREAK
 case 8:
 /* rule 8 can match eol */
 YY_RULE_SETUP
-#line 110 "zconf.l"
 {
 		BEGIN(INITIAL);
 		current_file->lineno++;
@@ -1142,45 +1112,36 @@ YY_RULE_SETUP
 	}
 	YY_BREAK
 
-
 case 9:
 YY_RULE_SETUP
-#line 118 "zconf.l"
 return T_AND;
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 119 "zconf.l"
 return T_OR;
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 120 "zconf.l"
 return T_OPEN_PAREN;
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 121 "zconf.l"
 return T_CLOSE_PAREN;
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 122 "zconf.l"
 return T_NOT;
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 123 "zconf.l"
 return T_EQUAL;
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 124 "zconf.l"
 return T_UNEQUAL;
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 125 "zconf.l"
 {
 		str = zconftext[0];
 		new_string();
@@ -1190,17 +1151,14 @@ YY_RULE_SETUP
 case 17:
 /* rule 17 can match eol */
 YY_RULE_SETUP
-#line 130 "zconf.l"
 BEGIN(INITIAL); current_file->lineno++; return T_EOL;
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 131 "zconf.l"
 /* ignore */
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 132 "zconf.l"
 {
 		const struct kconf_id *id = kconf_id_lookup(zconftext, zconfleng);
 		if (id && id->flags & TF_PARAM) {
@@ -1214,27 +1172,22 @@ YY_RULE_SETUP
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 142 "zconf.l"
 /* comment */
 	YY_BREAK
 case 21:
 /* rule 21 can match eol */
 YY_RULE_SETUP
-#line 143 "zconf.l"
 current_file->lineno++;
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 144 "zconf.l"
 
 	YY_BREAK
 case YY_STATE_EOF(PARAM):
-#line 145 "zconf.l"
 {
 		BEGIN(INITIAL);
 	}
 	YY_BREAK
-
 
 case 23:
 /* rule 23 can match eol */
@@ -1242,7 +1195,6 @@ case 23:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up zconftext again */
 YY_RULE_SETUP
-#line 151 "zconf.l"
 {
 		append_string(zconftext, zconfleng);
 		zconflval.string = text;
@@ -1251,7 +1203,6 @@ YY_RULE_SETUP
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 156 "zconf.l"
 {
 		append_string(zconftext, zconfleng);
 	}
@@ -1262,7 +1213,6 @@ case 25:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up zconftext again */
 YY_RULE_SETUP
-#line 159 "zconf.l"
 {
 		append_string(zconftext + 1, zconfleng - 1);
 		zconflval.string = text;
@@ -1271,14 +1221,12 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 164 "zconf.l"
 {
 		append_string(zconftext + 1, zconfleng - 1);
 	}
 	YY_BREAK
 case 27:
 YY_RULE_SETUP
-#line 167 "zconf.l"
 {
 		if (str == zconftext[0]) {
 			BEGIN(PARAM);
@@ -1291,7 +1239,6 @@ YY_RULE_SETUP
 case 28:
 /* rule 28 can match eol */
 YY_RULE_SETUP
-#line 175 "zconf.l"
 {
 		printf("%s:%d:warning: multi-line strings not supported\n", zconf_curname(), zconf_lineno());
 		current_file->lineno++;
@@ -1300,16 +1247,13 @@ YY_RULE_SETUP
 	}
 	YY_BREAK
 case YY_STATE_EOF(STRING):
-#line 181 "zconf.l"
 {
 		BEGIN(INITIAL);
 	}
 	YY_BREAK
 
-
 case 29:
 YY_RULE_SETUP
-#line 187 "zconf.l"
 {
 		ts = 0;
 		for (i = 0; i < zconfleng; i++) {
@@ -1339,7 +1283,6 @@ case 30:
 (yy_c_buf_p) = yy_cp -= 1;
 YY_DO_BEFORE_ACTION; /* set up zconftext again */
 YY_RULE_SETUP
-#line 209 "zconf.l"
 {
 		current_file->lineno++;
 		zconf_endhelp();
@@ -1349,7 +1292,6 @@ YY_RULE_SETUP
 case 31:
 /* rule 31 can match eol */
 YY_RULE_SETUP
-#line 214 "zconf.l"
 {
 		current_file->lineno++;
 		append_string("\n", 1);
@@ -1357,7 +1299,6 @@ YY_RULE_SETUP
 	YY_BREAK
 case 32:
 YY_RULE_SETUP
-#line 218 "zconf.l"
 {
 		while (zconfleng) {
 			if ((zconftext[zconfleng-1] != ' ') && (zconftext[zconfleng-1] != '\t'))
@@ -1370,7 +1311,6 @@ YY_RULE_SETUP
 	}
 	YY_BREAK
 case YY_STATE_EOF(HELP):
-#line 228 "zconf.l"
 {
 		zconf_endhelp();
 		return T_HELPTEXT;
@@ -1379,7 +1319,6 @@ case YY_STATE_EOF(HELP):
 
 case YY_STATE_EOF(INITIAL):
 case YY_STATE_EOF(COMMAND):
-#line 234 "zconf.l"
 {
 	if (current_file) {
 		zconf_endfile();
@@ -1391,10 +1330,8 @@ case YY_STATE_EOF(COMMAND):
 	YY_BREAK
 case 33:
 YY_RULE_SETUP
-#line 243 "zconf.l"
 YY_FATAL_ERROR( "flex scanner jammed" );
 	YY_BREAK
-#line 1398 "lex.zconf.c"
 
 	case YY_END_OF_BUFFER:
 		{
@@ -2121,8 +2058,8 @@ YY_BUFFER_STATE zconf_scan_string (yyconst char * yystr )
 
 /** Setup the input buffer state to scan the given bytes. The next call to zconflex() will
  * scan from a @e copy of @a bytes.
- * @param yybytes the byte buffer to scan
- * @param _yybytes_len the number of bytes in the buffer pointed to by @a bytes.
+ * @param bytes the byte buffer to scan
+ * @param len the number of bytes in the buffer pointed to by @a bytes.
  * 
  * @return the newly allocated buffer state object.
  */
@@ -2361,9 +2298,6 @@ void zconffree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 243 "zconf.l"
-
-
 void zconf_starthelp(void)
 {
 	new_string();
@@ -2376,7 +2310,6 @@ static void zconf_endhelp(void)
 	zconflval.string = text;
 	BEGIN(INITIAL);
 }
-
 
 /*
  * Try to open specified file with following names:

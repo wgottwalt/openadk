@@ -4,18 +4,18 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.5.19
+PKG_VERSION:=		5.6.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c63dcfd8b318d12127ba6d39ecc8a444
+PKG_MD5SUM:=		7635f344145a4edd7dff6ecec795aaea
 PKG_DESCR:=		php language interpreter
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libpthread librt
 PHP_URL:=		http://www.php.net/
 PKG_SITES:=		http://de.php.net/distributions/
 
-PKG_SUBPKGS:=		PHP PHP_CLI PHP_FASTCGI PHP_FPM
-PKGSD_PHP_FASTCGI:=	php for fastcgi usage
-PKGSN_PHP_FASTCGI:=	php
+PKG_SUBPKGS:=		PHP PHP_CLI PHP_CGI PHP_FPM
+PKGSD_PHP_CGI:=		php for fastcgi usage
+PKGSN_PHP_CGI:=		php
 PKGSD_PHP_FPM:=		php for fastcgi process manager usage
 PKGSN_PHP_FPM:=		php
 PKGSD_PHP_CLI:=		php cli
@@ -34,8 +34,8 @@ PKGFB_MOD_CURL:=	curl
 PKGFS_MOD_CURL:=	libcurl
 PKGFD_MOD_FTP:=		ftp support
 PKGFD_MOD_GD:=		gd support
-PKGFB_MOD_GD:=		libgd libpng libjpeg-turbo
-PKGFS_MOD_GD:=		libgd libpng libjpeg-turbo
+PKGFB_MOD_GD:=		libgd libpng libjpeg-turbo libXpm
+PKGFS_MOD_GD:=		libgd libpng libjpeg-turbo libxpm
 PKGFD_MOD_GMP:=		gmp support
 PKGFB_MOD_GMP:=		gmp
 PKGFS_MOD_GMP:=		libgmp
@@ -76,7 +76,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PHP,php,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_CLI,php-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PHP_CLI},${PKG_SECTION}))
-$(eval $(call PKG_template,PHP_FASTCGI,php-fastcgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PHP_FASTCGI},${PKG_SECTION}))
+$(eval $(call PKG_template,PHP_CGI,php-cgi,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PHP_CGI},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_FPM,php-fpm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_PHP_FPM},${PKG_SECTION}))
 
 define PKG_mod_template
@@ -177,7 +177,7 @@ endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_SESSION),)
 PKG_CONFIGURE_OPTS+=	--enable-session=shared
 else
-PKG_CONFIGURE_OPTS+=	--without-session
+PKG_CONFIGURE_OPTS+=	--disable-session
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_SNMP),)
 PKG_CONFIGURE_OPTS+=	--with-snmp=shared,"$(STAGING_TARGET_DIR)/usr"
@@ -259,13 +259,13 @@ do-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} $(IDIR_PHP)/etc
 	${INSTALL_DATA} ./files/php.ini $(IDIR_PHP)/etc
 	${INSTALL_DIR} $(IDIR_PHP_CLI)/usr/bin
-	${INSTALL_BIN} $(WRKBUILD)/sapi/cli/php $(IDIR_PHP_CLI)/usr/bin/php
-	${INSTALL_DIR} $(IDIR_PHP_FASTCGI)/usr/bin
+	${INSTALL_BIN} $(WRKBUILD)/sapi/cli/php \
+		$(IDIR_PHP_CLI)/usr/bin
+	${INSTALL_DIR} $(IDIR_PHP_CGI)/usr/bin
 	${INSTALL_BIN} $(WRKBUILD)/sapi/cgi/php-cgi \
-		$(IDIR_PHP_FASTCGI)/usr/bin/php
+		$(IDIR_PHP_CGI)/usr/bin
 	${INSTALL_DIR} $(IDIR_PHP_FPM)/etc
-	$(CP) ./files/php-fpm.conf \
-		$(IDIR_PHP_FPM)/etc
+	$(CP) ./files/php-fpm.conf $(IDIR_PHP_FPM)/etc
 	${INSTALL_DIR} $(IDIR_PHP_FPM)/usr/bin
 	${INSTALL_BIN} $(WRKBUILD)/sapi/fpm/php-fpm \
 		$(IDIR_PHP_FPM)/usr/bin/php

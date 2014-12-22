@@ -2,9 +2,8 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
-prompt "Target ABI"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
-depends on ADK_LINUX_MIPS64
+prompt "ABI"
+depends on ADK_TARGET_ARCH_MIPS64
 
 config ADK_TARGET_ABI_N32
 	boolean "N32 ABI"
@@ -21,9 +20,8 @@ config ADK_TARGET_ABI_O32
 endchoice
 
 choice
-prompt "Target ABI"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
-depends on ADK_LINUX_X86_64
+prompt "ABI"
+depends on ADK_TARGET_ARCH_X86_64
 
 config ADK_TARGET_ABI_64
 	boolean "64 Bit ABI"
@@ -36,9 +34,8 @@ config ADK_TARGET_ABI_X32
 endchoice
 
 choice
-prompt "Target ABI"
-depends on !ADK_CHOOSE_TARGET_ARCH && !ADK_CHOOSE_TARGET_SYSTEM
-depends on ADK_LINUX_ARM
+prompt "ABI"
+depends on ADK_TARGET_ARCH_ARM
 depends on ADK_TARGET_CPU_WITH_FPU || ADK_TARGET_SYSTEM_QEMU_ARM || ADK_TARGET_TOOLCHAIN
 
 config ADK_TARGET_ABI_EABIHF

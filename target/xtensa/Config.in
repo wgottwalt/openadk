@@ -1,9 +1,0 @@
-choice
-depends on ADK_LINUX_XTENSA && !ADK_CHOOSE_TARGET_ARCH
-prompt "Target system"
-
-config ADK_CHOOSE_TARGET_SYSTEM_XTENSA
-        boolean "Choose target system"
-
-source "target/xtensa/Config.in.systems"
-endchoice

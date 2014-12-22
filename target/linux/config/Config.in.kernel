@@ -110,7 +110,7 @@ config ADK_KERNEL_CPU_MIPS64_R2
 # ARM specific
 config ADK_KERNEL_AEABI
 	boolean
-	default y if ADK_LINUX_ARM
+	default y if ADK_TARGET_ARCH_ARM
 
 config ADK_KERNEL_THUMB2_KERNEL
 	boolean
@@ -142,7 +142,7 @@ config ADK_KERNEL_COMP_LZ4
 	select ADK_KERNEL_RD_LZ4
 	select ADK_KERNEL_KERNEL_LZ4
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_LZ4
-	depends on ADK_LINUX_X86 || ADK_LINUX_ARM
+	depends on ADK_TARGET_ARCH_X86 || ADK_TARGET_ARCH_ARM
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 
 config ADK_KERNEL_COMP_LZMA
@@ -205,12 +205,12 @@ config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
 	prompt "Optimize for size"
 	boolean
 	# does not boot in qemu
-	depends on !ADK_LINUX_MICROBLAZE
+	depends on !ADK_TARGET_ARCH_MICROBLAZE
 	default y
 
 choice
 prompt "Page size"
-depends on ADK_LINUX_MIPS64
+depends on ADK_TARGET_ARCH_MIPS64
 default ADK_KERNEL_PAGE_SIZE_16KB if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 default ADK_KERNEL_PAGE_SIZE_4KB
 

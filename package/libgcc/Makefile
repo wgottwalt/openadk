@@ -36,7 +36,7 @@ libgcc-install:
 	$(INSTALL_DIR) ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 ifeq ($(ADK_TARGET_UCLINUX),)
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS),)
-ifeq ($(ADK_LINUX_SH),y)
+ifeq ($(ADK_TARGET_ARCH_SH),y)
 ifeq ($(ADK_TARGET_LIB_GLIBC),)
 	${CP} ${STAGING_TARGET_DIR}/lib/m4-nofpu/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 endif
