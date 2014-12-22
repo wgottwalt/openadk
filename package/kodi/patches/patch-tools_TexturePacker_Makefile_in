@@ -1,0 +1,13 @@
+--- kodi-14.0rc3.orig/tools/TexturePacker/Makefile.in	2014-12-09 14:19:32.000000000 +0100
++++ kodi-14.0rc3/tools/TexturePacker/Makefile.in	2014-12-20 19:50:10.000000000 +0100
+@@ -33,5 +33,10 @@ $(TARGET): $(SRCS) @abs_top_srcdir@/xbmc
+ # TexturePacker run native on build system, build it with native tools
+ 	make -C @abs_top_srcdir@/lib/libsquish/ libsquish-native.so
+ 	$(CXX_FOR_BUILD) $(CXXFLAGS_FOR_BUILD) $(DEFINES) $(NATIVE_ARCH) $(SRCS) $(LDFLAGS_FOR_BUILD) -o $(TARGET)
++ifeq ($(findstring Darwin,$(shell uname -s)),Darwin)
++	install_name_tool -change /usr/lib/libSDL_image-1.2.0.dylib \
++		@@STAGING_HOST_DIR@@/usr/lib/libSDL_image-1.2.0.dylib \
++		$(TARGET)
++endif
+ 
+ include @abs_top_srcdir@/Makefile.include

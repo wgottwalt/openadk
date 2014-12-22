@@ -12,15 +12,15 @@ PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
 PKG_DEPENDS+=		libass libmpeg2 libmad libdbus
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
-PKG_DEPENDS+=		libflac libopenssl libbz2 libtiff liblzo
+PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libressl
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng libncurses
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
 PKG_DEPENDS+=		libgpg-error libudev python2-mod-sqlite libffmpeg
 PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib libglu librt
-PKG_BUILDDEP:=		boost python2 libass ffmpeg
+PKG_BUILDDEP:=		boost python2 libass ffmpeg libressl
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis
-PKG_BUILDDEP+=		curl flac openssl bzip2 libtiff liblzo yajl
+PKG_BUILDDEP+=		curl flac bzip2 libtiff liblzo yajl
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug
@@ -29,6 +29,14 @@ PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
 PKG_BUILDDEP+=		zip-host unzip-host
 PKG_URL:=		http://xbmc.org/
 PKG_SITES:=		http://www.openadk.org/distfiles/
+
+PKG_CHOICES_KODI:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	with libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	with openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCB_WITH_OPENSSL:=	openssl
 
 PKG_FLAVOURS_KODI:=	WITH_SMB WITH_NFS WITH_SSH WITH_AVAHI WITH_CEC 
 PKG_FLAVOURS_KODI+=	WITH_AFP WITH_WEBSERVER WITH_RTMP WITH_BLURAY
@@ -177,6 +185,8 @@ pre-configure:
 	(cd $(WRKBUILD)/lib/cpluff && env PATH='$(AUTOTOOL_PATH)' ./autogen.sh)
 
 pre-build:
+	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" \
+		$(WRKBUILD)/tools/TexturePacker/Makefile.in
 	PATH='$(HOST_PATH)' \
 	make CXX="${HOST_CXX}" CC="${HOST_CC}" CFLAGS="${HOST_CFLAGS}" \
 		CXXFLAGS="${HOST_CXXFLAGS}" LDFLAGS="${HOST_LDFLAGS}" \
