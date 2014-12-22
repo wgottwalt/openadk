@@ -32,7 +32,7 @@ $(eval $(call PKG_template,MESALIB,mesalib,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 include $(ADK_TOPDIR)/mk/python.mk
 
 ifeq ($(ADK_HOST_DARWIN),y)
-PYTHON:=/opt/local/bin/python2.7
+PYTHON:=/usr/bin/python2.7
 endif
 ifeq ($(ADK_HOST_OPENBSD),y)
 PYTHON:=/usr/local/bin/python2.7
