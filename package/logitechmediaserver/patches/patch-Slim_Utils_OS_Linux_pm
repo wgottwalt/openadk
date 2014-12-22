@@ -1,0 +1,13 @@
+--- logitechmediaserver-7.9.0-1418119409-noCPAN.orig/Slim/Utils/OS/Linux.pm	2014-12-08 22:00:23.000000000 -0600
++++ logitechmediaserver-7.9.0-1418119409-noCPAN/Slim/Utils/OS/Linux.pm	2014-12-13 02:11:35.032418001 -0600
+@@ -27,6 +27,10 @@ sub getFlavor {
+ 
+ 		return 'Netgear RAIDiator';
+ 			
++	} elsif (-f '/etc/.adktarget') {
++	
++		return 'OpenADK';
++	
+ 	} elsif (-f '/etc/squeezeos.version') {
+ 	
+ 		return 'SqueezeOS';
