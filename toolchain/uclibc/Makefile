@@ -11,9 +11,10 @@ include ${ADK_TOPDIR}/mk/buildhlp.mk
 TARGET_CFLAGS:=$(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=$(filter-out -mtext-section-literals,$(TARGET_CFLAGS))
 
-ifeq (${ADK_MAKE_PARALLEL},y)
-UCLIBC_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
-endif
+# parallel building is broken at the moment
+#ifeq (${ADK_MAKE_PARALLEL},y)
+#UCLIBC_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
+#endif
 
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS_COMPILE=.*,CROSS_COMPILE=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
