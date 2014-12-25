@@ -473,9 +473,12 @@ $(eval $(call KMOD_template,NF_CONNTRACK,nf-conntrack,\
 	$(MODULES_DIR)/kernel/net/netfilter/xt_conntrack \
 ,41))
 
+$(eval $(call KMOD_template,NETFILTER_XT_NAT,netfilter-xt-nat,\
+	$(MODULES_DIR)/kernel/net/netfilter/xt_nat \
+,40))
+
 $(eval $(call KMOD_template,NF_NAT,nf-nat,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_nat \
-	$(MODULES_DIR)/kernel/net/netfilter/xt_nat \
 ,45))
 
 $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
@@ -485,8 +488,11 @@ $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
 
 $(eval $(call KMOD_template,NF_NAT_IPV4,nf-nat-ipv4,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_ipv4 \
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_nat \
 ,50))
+
+$(eval $(call KMOD_template,IP_NF_NAT,ip-nf-nat,\
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/iptable_nat \
+,60))
 
 $(eval $(call KMOD_template,NF_CONNTRACK_FTP,nf-conntrack-ftp,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_conntrack_ftp \
@@ -1215,12 +1221,14 @@ $(eval $(call KMOD_template,INPUT_EVDEV,input-evdev,\
 
 USBMODULES:=
 ifeq ($(KERNEL_BASE),3)
-ifeq ($(KERNEL_MAJ),16)
+ifeq ($(KERNEL_MAJ),17)
 USBMODULES+=drivers/usb/common/usb-common
 USBMODULES+=drivers/usb/core/usbcore
+USBUDC:=gadget/udc
 else
 USBMODULES+=drivers/usb/usb-common
 USBMODULES+=drivers/usb/core/usbcore
+USBUDC:=gadget
 endif
 endif
 
@@ -1237,7 +1245,7 @@ $(eval $(call KMOD_template,USB_MXS_PHY,usb-mxs-phy,\
 ,56))
 
 $(eval $(call KMOD_template,USB_GADGET,usb-gadget,\
-	$(MODULES_DIR)/kernel/drivers/usb/gadget/udc-core \
+	$(MODULES_DIR)/kernel/drivers/usb/$(USBUDC)/udc-core \
 ,57))
 
 $(eval $(call KMOD_template,USB_CHIPIDEA,ci-hdrc,\

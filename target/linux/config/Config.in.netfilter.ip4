@@ -1,6 +1,51 @@
-config ADK_KERNEL_NF_CONNTRACK_IPV4
-	prompt 'IPv4 connection tracking support (required for NAT)'
+config ADK_KERNEL_NF_NAT
 	tristate
+
+config ADK_KERNEL_NF_NAT_IPV4
+	tristate
+
+config ADK_KERNEL_IP_NF_IPTABLES
+	tristate 'IP tables support'
+	select ADK_KERNEL_NETFILTER_XTABLES
+	default m if ADK_PACKAGE_IPTABLES
+	default n
+	help
+	  iptables is a general, extensible packet identification framework.
+	  The packet filtering and full NAT (masquerading, port forwarding,
+	  etc) subsystems now use this: say `Y' or `M' here if you want to use
+	  either of those.
+
+config ADK_KERNEL_IP_NF_FILTER
+	tristate 'IP Packet Filtering table support'
+	depends on ADK_KERNEL_IP_NF_IPTABLES
+	default m if ADK_PACKAGE_IPTABLES
+	default n
+	help
+	  Packet filtering defines a table `filter', which has a series of
+	  rules for simple packet filtering at local input, forwarding and
+	  local output.
+
+config ADK_KERNEL_IP_NF_NAT
+	tristate 'IP NAT table support'
+	select ADK_KERNEL_NETFILTER_XT_NAT
+	select ADK_KERNEL_NF_NAT
+	select ADK_KERNEL_NF_NAT_IPV4
+	depends on ADK_KERNEL_IP_NF_IPTABLES
+	default m if ADK_PACKAGE_IPTABLES
+	default n
+	help
+
+config ADK_KERNEL_IP_NF_MANGLE
+	tristate 'IP Packet mangling table support'
+	depends on ADK_KERNEL_IP_NF_IPTABLES
+	default n
+	help
+	  This option adds a `mangle' table to iptables: see the man page for
+	  iptables(8).  This table is used for various packet alterations
+	  which can effect how the packet is routed.
+
+config ADK_KERNEL_NF_CONNTRACK_IPV4
+	tristate 'IP connection tracking support (required for NAT)'
 	select ADK_KERNEL_NF_CONNTRACK
 	select ADK_KERNEL_NETFILTER_XT_MATCH_CONNTRACK
 	default m if ADK_PACKAGE_IPTABLES
@@ -20,45 +65,7 @@ config ADK_KERNEL_IP_NF_CT_ACCT
 	  Those counters can be used for flow-based accounting or the
 	  `connbytes' match.
 
-config ADK_KERNEL_IP_NF_IPTABLES
-	tristate 'IP tables support (required for filtering/masq/NAT)'
-	select ADK_KERNEL_NETFILTER_XTABLES
-	default m if ADK_PACKAGE_IPTABLES
-	default n
-	help
-	  iptables is a general, extensible packet identification framework.
-	  The packet filtering and full NAT (masquerading, port forwarding,
-	  etc) subsystems now use this: say `Y' or `M' here if you want to use
-	  either of those.
-
-config ADK_KERNEL_IP_NF_FILTER
-	tristate 'Packet Filtering'
-	depends on ADK_KERNEL_IP_NF_IPTABLES
-	default m if ADK_PACKAGE_IPTABLES
-	default n
-	help
-	  Packet filtering defines a table `filter', which has a series of
-	  rules for simple packet filtering at local input, forwarding and
-	  local output.  See the man page for iptables(8).
-
-config ADK_KERNEL_NF_NAT
-	tristate
-	default n
-	help
-	  The Full NAT option allows masquerading, port forwarding and other
-	  forms of full Network Address Port Translation.  It is controlled by
-	  the `nat' table in iptables: see the man page for iptables(8).
-
-config ADK_KERNEL_NF_NAT_IPV4
-	tristate 'Full NAT'
-	select ADK_KERNEL_NF_NAT
-	depends on ADK_KERNEL_IP_NF_IPTABLES
-	default m if ADK_PACKAGE_IPTABLES
-	default n
-	help
-	  The Full NAT option allows masquerading, port forwarding and other
-	  forms of full Network Address Port Translation.  It is controlled by
-	  the `nat' table in iptables: see the man page for iptables(8).
+menu "IP target support"
 
 config ADK_KERNEL_IP_NF_TARGET_MASQUERADE
 	tristate 'MASQUERADE target support'
@@ -83,7 +90,7 @@ config ADK_KERNEL_IP_NF_TARGET_REJECT
 	  than silently being dropped.
 
 config ADK_KERNEL_IP_NF_TARGET_ULOG
-	tristate 'ULOG target support (ipv4 only)'
+	tristate 'ULOG target support'
 	depends on ADK_KERNEL_IP_NF_FILTER
 	help
 	  This option enables the old IPv4-only "ipt_ULOG" implementation
@@ -116,13 +123,6 @@ config ADK_KERNEL_IP_NF_TARGET_NETMAP
 	  address part intact. It is similar to Fast NAT, except that
 	  Netfilter's connection tracking doesn't work well with Fast NAT.
 
-config ADK_KERNEL_IP_NF_MANGLE
-	tristate 'Packet mangling'
-	help
-	  This option adds a `mangle' table to iptables: see the man page for
-	  iptables(8).  This table is used for various packet alterations
-	  which can effect how the packet is routed.
-
 config ADK_KERNEL_IP_NF_TARGET_ECN
 	tristate 'ECN target support'
 	depends on ADK_KERNEL_IP_NF_MANGLE
@@ -134,3 +134,5 @@ config ADK_KERNEL_IP_NF_TARGET_ECN
 	  an IP packet.  This is particularly useful, if you need to work around
 	  existing ECN blackholes on the internet, but don't want to disable
 	  ECN support in general.
+
+endmenu

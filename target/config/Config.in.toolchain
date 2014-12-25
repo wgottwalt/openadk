@@ -33,8 +33,8 @@ config ADK_TOOLCHAIN_GCC_4_8_0_ARC
 	boolean
 	depends on ADK_TARGET_ARCH_ARC
 
-config ADK_TOOLCHAIN_GCC_4_8_3
-	prompt "4.8.3"
+config ADK_TOOLCHAIN_GCC_4_8_4
+	prompt "4.8.4"
 	boolean
 	depends on !ADK_TARGET_ARCH_BFIN
 	depends on !ADK_TARGET_ARCH_AARCH64

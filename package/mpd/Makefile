@@ -4,16 +4,16 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.18.14
+PKG_VERSION:=		0.19.7
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		c79e56483e49319f3a1f88dc9d03ee3b
 PKG_DESCR:=		music player daemon
 PKG_SECTION:=		mm/audio
-PKG_DEPENDS:=		glib libstdcxx libmpdclient librt
+PKG_DEPENDS:=		glib libstdcxx libmpdclient librt boost
 PKG_FDEPENDS:=		glib libstdcxx libmpdclient librt
-PKG_BUILDDEP:=		glib libmpdclient
+PKG_BUILDDEP:=		glib libmpdclient boost
 PKG_URL:=		http://www.musicpd.org/
-PKG_SITES:=		http://www.musicpd.org/download/mpd/0.18/
+PKG_SITES:=		http://www.musicpd.org/download/mpd/0.19/
 
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
@@ -143,6 +143,7 @@ CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ARGS+=	--disable-jack \
 			--disable-fifo \
 			--disable-oss \
+			--disable-icu \
 			--disable-bzip2 \
 			--disable-libwrap \
 			--disable-mpc \

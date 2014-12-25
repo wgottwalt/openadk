@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		14.0rc3
+PKG_VERSION:=		14.0
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		ab161aa0dee4ca77b977d3ca2f4ebdd5
 PKG_DESCR:=		software media player
@@ -27,8 +27,11 @@ PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug
 PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
 PKG_BUILDDEP+=		zip-host unzip-host
-PKG_URL:=		http://xbmc.org/
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_URL:=		http://kodi.tv/
+PKG_SITES:=		http://mirrors.kodi.tv/releases/source/
+
+DISTFILES:=		$(PKG_VERSION)-Helix.tar.gz
+WRKDIST=		$(WRKDIR)/xbmc-14.0-Helix
 
 PKG_CHOICES_KODI:=	WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITH_LIBRESSL:=	with libressl
@@ -67,6 +70,7 @@ PKGFB_WITH_BLURAY:=	libbluray
 PKGFS_WITH_BLURAY:=	libbluray
 PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 
+# libiconv missing, freescale GL libraries linked against glibc
 PKG_LIBC_DEPENDS:=	glibc
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc libglew mesalib

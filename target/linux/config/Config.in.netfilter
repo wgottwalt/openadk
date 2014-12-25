@@ -1,4 +1,4 @@
-menu "Netfilter (Firewall/Filtering)"
+menu "Netfilter"
 
 config ADK_KERNEL_NETFILTER
 	boolean
@@ -16,7 +16,7 @@ config ADK_KERNEL_BRIDGE_NETFILTER
 	default n
 
 config ADK_KERNEL_NETFILTER_XTABLES
-	tristate "Netfilter Xtables support (required for ip_tables)"
+	tristate
 	select ADK_KERNEL_NETFILTER
 	select ADK_KERNEL_NETFILTER_ADVANCED
 	default y if ADK_PACKAGE_IPTABLES
@@ -118,6 +118,10 @@ config ADK_KERNEL_IP_NF_MATCH_STATE
 	select ADK_KERNEL_NETFILTER_XT_MATCH_STATE
 	default n
 
+config ADK_KERNEL_NETFILTER_XT_NAT
+	tristate
+	default n
+
 config ADK_KERNEL_NETFILTER_XT_MATCH_STATE
 	tristate
 	default n
@@ -145,7 +149,7 @@ menu "Core Netfilter Configuration"
 source target/linux/config/Config.in.netfilter.core
 endmenu
 
-menu "IP: Netfilter Configuration"
+menu "IPv4: Netfilter Configuration"
 source target/linux/config/Config.in.netfilter.ip4
 endmenu
 

@@ -4,7 +4,7 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
-PKG_VERSION:=		2.4.3
+PKG_VERSION:=		2.5.1
 PKG_RELEASE:=		1
 PKG_MD5SUM:=		8da635baff57d7ab704b1daca5a99b47
 PKG_DESCR:=		record, convert and stream audio & video
@@ -132,6 +132,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--disable-bzlib \
 			--disable-doc \
 			--disable-debug \
+			--disable-iconv \
 			--disable-yasm \
 			--disable-optimizations \
 			--disable-stripping \
