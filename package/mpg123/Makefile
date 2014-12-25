@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mpg123
-PKG_VERSION:=		1.20.1
+PKG_VERSION:=		1.21.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1b3e8765aa608e306ede1ec507b67b23
+PKG_MD5SUM:=		13a9df5d4e7aa110e4ae27cf30128ce9
 PKG_DESCR:=		mp3 console player
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libpthread alsa-lib
 PKG_BUILDDEP:=		alsa-lib
 PKG_URL:=		http://www.mpg123.de/
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=mpg123/}
+PKG_SITES:=		http://www.mpg123.de/download/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
