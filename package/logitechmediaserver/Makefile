@@ -17,9 +17,9 @@ PKG_DEPENDS+=		p5-dbd-sqlite p5-tie-refhash p5-template-toolkit
 PKG_DEPENDS+=		p5-class-xsaccessor p5-io-interface
 PKG_BUILDDEP:=		perl
 PKG_URL:=		http://wiki.slimdevices.com/index.php/Logitech_Media_Server
-PKG_SITES:=		http://downloads.slimdevices.com/nightly/7.9/sc/cbc24c9/
+PKG_SITES:=		http://downloads.slimdevices.com/nightly/7.9/sc/1a3767f/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-1418119409-noCPAN.tgz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-1418894490-noCPAN.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-1418119409-noCPAN
 
 include $(ADK_TOPDIR)/mk/package.mk
