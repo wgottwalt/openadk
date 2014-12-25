@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		nginx
-PKG_VERSION:=		1.7.8
-PKG_RELEASE:=		2
-PKG_MD5SUM:=		fd5ab813fc1853cd8efe580ead577c3e
+PKG_VERSION:=		1.7.9
+PKG_RELEASE:=		1
+PKG_MD5SUM:=		a4debbe0ce0dd12b9c8f520bc3b66355
 PKG_DESCR:=		powerful http reverse proxy and webserver
 PKG_SECTION:=		net/http
 PKG_BUILDDEP:=		pcre zlib
@@ -16,8 +16,11 @@ PKG_SITES:=		http://nginx.org/download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_CHOICES_NGINX:=	WITHOUT_SSL WITH_OPENSSL
+PKG_CHOICES_NGINX:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
 PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCB_WITH_OPENSSL:=	openssl
 PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
@@ -43,9 +46,14 @@ CONFIGURE_ARGS:=        --prefix=/srv/www \
                         --http-log-path=/var/log/nginx-access.log \
                         --http-client-body-temp-path=/var/lib/nginx/body \
                         --http-proxy-temp-path=/var/lib/nginx/proxy \
-                        --http-fastcgi-temp-path=/var/lib/nginx/fastcgi
+                        --http-fastcgi-temp-path=/var/lib/nginx/fastcgi \
+			--http-scgi-temp-path=/var/lib/nginx/uwsgi \
+			--http-uwsgi-temp-path=/var/lib/nginx/uwsgi
 
 ifeq ($(ADK_PACKAGE_NGINX_WITH_OPENSSL),y)
+CONFIGURE_ARGS+=	--with-http_ssl_module
+endif
+ifeq ($(ADK_PACKAGE_NGINX_WITH_LIBRESSL),y)
 CONFIGURE_ARGS+=	--with-http_ssl_module
 endif
 

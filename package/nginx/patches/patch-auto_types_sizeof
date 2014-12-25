@@ -1,26 +1,68 @@
---- nginx-1.2.2.orig/auto/types/sizeof	2012-03-16 08:33:55.000000000 +0100
-+++ nginx-1.2.2/auto/types/sizeof	2012-07-16 09:28:44.000000000 +0200
-@@ -25,8 +25,13 @@ $NGX_INCLUDE_UNISTD_H
+--- nginx-1.7.9.orig/auto/types/sizeof	2014-12-23 09:28:38.000000000 -0600
++++ nginx-1.7.9/auto/types/sizeof	2014-12-25 00:19:43.665499238 -0600
+@@ -14,7 +14,7 @@ END
+ 
+ ngx_size=
+ 
+-cat << END > $NGX_AUTOTEST.c
++cat << _EOF > $NGX_AUTOTEST.c
+ 
+ #include <sys/types.h>
+ #include <sys/time.h>
+@@ -25,29 +25,43 @@ $NGX_INCLUDE_UNISTD_H
  $NGX_INCLUDE_INTTYPES_H
  $NGX_INCLUDE_AUTO_CONFIG_H
  
-+char object_code_block[] = {
-+	'\n', 'e', '4', 'V', 'A',
-+	'0', 'x', ('0' + sizeof($ngx_type)),
-+	'Y', '3', 'p', 'M', '\n'
-+};
-+
- int main() {
+-int main() {
 -    printf("%d", (int) sizeof($ngx_type));
++#if !defined( PASTE)
++#define PASTE2( x, y) x##y
++#define PASTE( x, y)  PASTE2( x, y)
++#endif /* PASTE */
++
++#define SAY_IF_SIZEOF( typename, type, size)   \\
++    static char PASTE( PASTE( PASTE( sizeof_, typename), _is_), size) \\
++    [(sizeof(type) == (size)) ? 1 : -1]
++
++SAY_IF_SIZEOF(TEST_TYPENAME, TEST_TYPE, TEST_SIZE);
++
++int main(void)
++{
      return 0;
  }
  
-@@ -40,7 +45,7 @@ eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&
+-END
+-
++_EOF
  
+-ngx_test="$CC $CC_TEST_FLAGS $CC_AUX_FLAGS \
+-          -o $NGX_AUTOTEST $NGX_AUTOTEST.c $NGX_LD_OPT $ngx_feature_libs"
++_ngx_typename=`echo "$ngx_type" | sed 's/ /_/g;s/\*/p/'`
++ngx_size="-1"
++ngx_size=`for i in 1 2 4 8 16 ; do \
++    $CC $CC_TEST_FLAGS $CC_AUX_FLAGS \
++    -DTEST_TYPENAME="$_ngx_typename" -DTEST_TYPE="$ngx_type" -DTEST_SIZE="$i" \
++    $NGX_AUTOTEST.c -o $NGX_AUTOTEST \
++    $NGX_LD_OPT $ngx_feature_libs >/dev/null 2>&1 || continue ;\
++    echo $i ; break ; done`
  
- if [ -x $NGX_AUTOTEST ]; then
+-eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
++rm -rf $NGX_AUTOTEST*
+ 
++if test -z $ngx_size ; then
++    ngx_size=-1
++fi
+ 
+-if [ -x $NGX_AUTOTEST ]; then
 -    ngx_size=`$NGX_AUTOTEST`
-+    ngx_size=`sed -ne 's/^e4VA0x\(.\)Y3pM$/\1/p' < $NGX_AUTOTEST`
++if [ $ngx_size -gt 0 ]; then
      echo " $ngx_size bytes"
  fi
  
+-
+-rm -rf $NGX_AUTOTEST*
+-
+-
+ case $ngx_size in
+     4)
+         if [ "$ngx_type"="long" ]; then

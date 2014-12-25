@@ -1,5 +1,5 @@
---- nginx-1.5.3.orig/auto/os/linux	2013-07-30 15:27:55.000000000 +0200
-+++ nginx-1.5.3/auto/os/linux	2013-08-20 10:00:37.444429620 +0200
+--- nginx-1.7.9.orig/auto/os/linux	2014-12-23 09:28:38.000000000 -0600
++++ nginx-1.7.9/auto/os/linux	2014-12-25 00:19:14.581499365 -0600
 @@ -48,7 +48,7 @@ fi
  
  ngx_feature="epoll"
@@ -9,7 +9,7 @@
  ngx_feature_incs="#include <sys/epoll.h>"
  ngx_feature_path=
  ngx_feature_libs=
-@@ -73,7 +73,7 @@ fi
+@@ -105,7 +105,7 @@ ngx_feature_test="int fd; struct stat sb
  CC_AUX_FLAGS="$cc_aux_flags -D_GNU_SOURCE"
  ngx_feature="sendfile()"
  ngx_feature_name="NGX_HAVE_SENDFILE"
@@ -18,7 +18,7 @@
  ngx_feature_incs="#include <sys/sendfile.h>
                    #include <errno.h>"
  ngx_feature_path=
-@@ -94,7 +94,7 @@ fi
+@@ -126,7 +126,7 @@ fi
  CC_AUX_FLAGS="$cc_aux_flags -D_GNU_SOURCE -D_FILE_OFFSET_BITS=64"
  ngx_feature="sendfile64()"
  ngx_feature_name="NGX_HAVE_SENDFILE64"
@@ -27,7 +27,7 @@
  ngx_feature_incs="#include <sys/sendfile.h>
                    #include <errno.h>"
  ngx_feature_path=
-@@ -112,7 +112,7 @@ ngx_include="sys/prctl.h"; . auto/includ
+@@ -144,7 +144,7 @@ ngx_include="sys/prctl.h"; . auto/includ
  
  ngx_feature="prctl(PR_SET_DUMPABLE)"
  ngx_feature_name="NGX_HAVE_PR_SET_DUMPABLE"
@@ -36,7 +36,7 @@
  ngx_feature_incs="#include <sys/prctl.h>"
  ngx_feature_path=
  ngx_feature_libs=
-@@ -133,20 +133,6 @@ ngx_feature_test="cpu_set_t mask;
+@@ -165,20 +165,6 @@ ngx_feature_test="cpu_set_t mask;
                    sched_setaffinity(0, sizeof(cpu_set_t), &mask)"
  . auto/feature
  
