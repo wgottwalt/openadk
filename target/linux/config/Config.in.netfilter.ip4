@@ -89,22 +89,6 @@ config ADK_KERNEL_IP_NF_TARGET_REJECT
 	  error should be issued in response to an incoming packet, rather
 	  than silently being dropped.
 
-config ADK_KERNEL_IP_NF_TARGET_ULOG
-	tristate 'ULOG target support'
-	depends on ADK_KERNEL_IP_NF_FILTER
-	help
-	  This option enables the old IPv4-only "ipt_ULOG" implementation
-	  which has been obsoleted by the new "nfnetlink_log" code (see
-	  CONFIG_NETFILTER_NETLINK_LOG).
-
-	  This option adds a `ULOG' target, which allows you to create rules in
-	  any iptables table. The packet is passed to a userspace logging
-	  daemon using netlink multicast sockets; unlike the LOG target
-	  which can only be viewed through syslog.
-
-	  The appropriate userspace logging daemon (ulogd) may be obtained from
-	  <http://www.gnumonks.org/projects/ulogd/>
-
 config ADK_KERNEL_IP_NF_TARGET_REDIRECT
 	tristate 'REDIRECT target support'
 	depends on ADK_KERNEL_NF_NAT

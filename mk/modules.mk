@@ -591,11 +591,6 @@ $(eval $(call KMOD_template,IP_NF_TARGET_REJECT,ip-nf-target-reject,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_REJECT \
 ,60))
 
-
-$(eval $(call KMOD_template,IP_NF_TARGET_ULOG,ip-nf-target-ulog,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_ULOG \
-,60))
-
 $(eval $(call KMOD_template,IP_NF_TARGET_TCPMSS,ip-nf-target-tcpmss,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_TCPMSS \
 ,60))
