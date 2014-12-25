@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		stunnel
-PKG_VERSION:=		5.07
+PKG_VERSION:=		5.08
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c10edd84ecbc676a5a48c7e34ab3d1c5
+PKG_MD5SUM:=		0028462e7e7cade0bd3b5196498d6051
 PKG_DESCR:=		encryption wrapper
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libopenssl
