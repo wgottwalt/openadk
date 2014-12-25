@@ -1224,9 +1224,11 @@ ifeq ($(KERNEL_BASE),3)
 ifeq ($(KERNEL_MAJ),17)
 USBMODULES+=drivers/usb/common/usb-common
 USBMODULES+=drivers/usb/core/usbcore
+USBUDC:=gadget/udc
 else
 USBMODULES+=drivers/usb/usb-common
 USBMODULES+=drivers/usb/core/usbcore
+USBUDC:=gadget
 endif
 endif
 
@@ -1243,7 +1245,7 @@ $(eval $(call KMOD_template,USB_MXS_PHY,usb-mxs-phy,\
 ,56))
 
 $(eval $(call KMOD_template,USB_GADGET,usb-gadget,\
-	$(MODULES_DIR)/kernel/drivers/usb/gadget/udc/udc-core \
+	$(MODULES_DIR)/kernel/drivers/usb/$(USBUDC)/udc-core \
 ,57))
 
 $(eval $(call KMOD_template,USB_CHIPIDEA,ci-hdrc,\
