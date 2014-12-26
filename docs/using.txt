@@ -59,9 +59,11 @@ OpenADK output is stored in several subdirectories:
 
 * +firmware/+ where all the images and packages are stored.
 
-* +build_<system>_<arch>_<libc>/+ where all the components except for the cross-compilation toolchain are built. The directory contains one subdirectory for each of these components.
+* +build_<system>_<libc>_<arch>_<abi>/+ where all the components except for the
+  cross-compilation toolchain are built. The directory contains one
+  subdirectory for each of these components.
 
-* +target_<arch>_<libc>/+ which contains a hierarchy similar to a root filesystem
+* +target_<system>_<libc>_<arch>_<abi>/+ which contains a hierarchy similar to a root filesystem
   hierarchy. This directory contains the installation of the
   cross-compilation toolchain and all the userspace packages selected
   for the target. However, this directory is 'not' intended to be
@@ -71,7 +73,7 @@ OpenADK output is stored in several subdirectories:
   libraries and applications for the target that depend on other
   libraries.
 
-* +root_<system>_<arch>_<libc>/+ which contains the complete root filesystem for
+* +root_<system>_<libc>_<arch>_<abi>/+ which contains the complete root filesystem for
   the target. One exception, it doesn't have the correct
   permissions (e.g. setuid for the busybox binary) for some files. 
   Therefore, this directory *should not be used on your target*.  
@@ -87,14 +89,17 @@ OpenADK output is stored in several subdirectories:
 * +host_<gnu_host_name>/+ contains the installation of tools compiled for the host
   that are needed for the proper execution of OpenADK
 
-* +toolchain_<gnu_host_name>/+ contains just the cross-compilation toolchain.
-  Can be used together with +target_<arch>_<libc>/+ for other projects. Toolchain
+* +host_build_<gnu_host_name>/+ contains the build directories of tools compiled for the host
+  that are needed for the proper execution of OpenADK
+
+* +toolchain_<system>_<libc>_<arch>_<abi>>/+ contains just the cross-compilation toolchain.
+  Can be used together with +target_<system>_<libc>_<arch>_<abi>/+ for other projects. Toolchain
   is relocatable.
 
-* +toolchain_build_<arch>_<libc>/+ contains the build directories for the various
+* +toolchain_build_<system>_<libc>_<arch>_<abi>/+ contains the build directories for the various
   components of the cross-compilation toolchain.
 
-* +pkg_<system>_<arch>_<libc>/+ contains stamp files and file lists for the various components.
+* +pkg_<system>_<libc>_<arch>_<abi>/+ contains stamp files and file lists for the various components.
 
 The command, +make menuconfig+ and +make+, are the
 basic ones that allow to easily and quickly generate images fitting
