@@ -1,6 +1,6 @@
---- kodi-14.0rc3.orig/xbmc/cores/dvdplayer/DVDDemuxers/DVDDemuxFFmpeg.cpp	2014-12-09 14:19:32.000000000 +0100
-+++ kodi-14.0rc3/xbmc/cores/dvdplayer/DVDDemuxers/DVDDemuxFFmpeg.cpp	2014-12-20 04:27:04.000000000 +0100
-@@ -534,8 +534,8 @@ void CDVDDemuxFFmpeg::Reset()
+--- xbmc-14.0-Helix.orig/xbmc/cores/dvdplayer/DVDDemuxers/DVDDemuxFFmpeg.cpp	2014-12-22 17:11:35.000000000 -0600
++++ xbmc-14.0-Helix/xbmc/cores/dvdplayer/DVDDemuxers/DVDDemuxFFmpeg.cpp	2014-12-25 13:38:23.629060371 -0600
+@@ -538,8 +538,8 @@ void CDVDDemuxFFmpeg::Reset()
  void CDVDDemuxFFmpeg::Flush()
  {
    // naughty usage of an internal ffmpeg function

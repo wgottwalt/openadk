@@ -6,11 +6,11 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		kodi
 PKG_VERSION:=		14.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ab161aa0dee4ca77b977d3ca2f4ebdd5
+PKG_MD5SUM:=		9717c539789789b8aeaf1dcfdb9f2c69
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
-PKG_DEPENDS+=		libass libmpeg2 libmad libdbus
+PKG_DEPENDS+=		libass libmpeg2 libmad libdbus libglew mesalib
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libressl
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng libncurses
@@ -18,9 +18,9 @@ PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd
 PKG_DEPENDS+=		libgpg-error libudev python2-mod-sqlite libffmpeg
 PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib libglu librt
-PKG_BUILDDEP:=		boost python2 libass ffmpeg libressl
+PKG_BUILDDEP:=		boost python2 libass ffmpeg libressl libglew
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis
-PKG_BUILDDEP+=		curl flac bzip2 libtiff liblzo yajl
+PKG_BUILDDEP+=		curl flac bzip2 libtiff liblzo yajl mesalib
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug
@@ -73,8 +73,8 @@ PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 # libiconv missing, freescale GL libraries linked against glibc
 PKG_LIBC_DEPENDS:=	glibc
 
-PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc libglew mesalib
-PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc libglew mesalib
+PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
+PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
 PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
 PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
 PKG_SYSTEM_DEPENDS:=	raspberry-pi solidrun-imx6

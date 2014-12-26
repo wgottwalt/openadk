@@ -1,6 +1,6 @@
-diff -Nur glibc-2.19.orig/sunrpc/rpc/types.h glibc-2.19/sunrpc/rpc/types.h
---- glibc-2.19.orig/sunrpc/rpc/types.h	2014-02-07 10:04:38.000000000 +0100
-+++ glibc-2.19/sunrpc/rpc/types.h	2014-03-03 13:42:42.000000000 +0100
+diff -Nur glibc-2.20.orig/sunrpc/rpc/types.h glibc-2.20/sunrpc/rpc/types.h
+--- glibc-2.20.orig/sunrpc/rpc/types.h	2014-09-07 10:09:09.000000000 +0200
++++ glibc-2.20/sunrpc/rpc/types.h	2014-12-26 10:30:51.733297900 +0100
 @@ -74,19 +74,24 @@
  # define __daddr_t_defined
  #endif
@@ -38,14 +38,14 @@ diff -Nur glibc-2.19.orig/sunrpc/rpc/types.h glibc-2.19/sunrpc/rpc/types.h
  # define __daddr_t_defined
  #endif
  
-diff -Nur glibc-2.19.orig/sunrpc/rpc_main.c glibc-2.19/sunrpc/rpc_main.c
---- glibc-2.19.orig/sunrpc/rpc_main.c	2014-02-07 10:04:38.000000000 +0100
-+++ glibc-2.19/sunrpc/rpc_main.c	2014-03-04 07:12:00.000000000 +0100
+diff -Nur glibc-2.20.orig/sunrpc/rpc_main.c glibc-2.20/sunrpc/rpc_main.c
+--- glibc-2.20.orig/sunrpc/rpc_main.c	2014-09-07 10:09:09.000000000 +0200
++++ glibc-2.20/sunrpc/rpc_main.c	2014-12-26 11:23:56.822092200 +0100
 @@ -38,7 +38,11 @@
  #include <stdio.h>
  #include <string.h>
  #include <unistd.h>
-+#ifdef __APPLE__
++#if defined(__APPLE__) || defined(__CYGWIN__)
 +#define gettext(X) (X)
 +#else
  #include <libintl.h>
@@ -53,7 +53,18 @@ diff -Nur glibc-2.19.orig/sunrpc/rpc_main.c glibc-2.19/sunrpc/rpc_main.c
  #include <locale.h>
  #include <ctype.h>
  #include <sys/types.h>
-@@ -958,10 +962,12 @@
+@@ -51,6 +55,10 @@
+ #include "rpc_scan.h"
+ #include "proto.h"
+ 
++#ifdef __CYGWIN__
++#define stat64	stat
++#endif
++
+ #include "../version.h"
+ #define PACKAGE _libc_intl_domainname
+ 
+@@ -958,10 +966,12 @@
  	abort ();
        temp = rindex (cmd->infile, '.');
        cp = stpcpy (mkfilename, "Makefile.");
@@ -69,9 +80,9 @@ diff -Nur glibc-2.19.orig/sunrpc/rpc_main.c glibc-2.19/sunrpc/rpc_main.c
  
      }
    else
-diff -Nur glibc-2.19.orig/sunrpc/rpc_scan.c glibc-2.19/sunrpc/rpc_scan.c
---- glibc-2.19.orig/sunrpc/rpc_scan.c	2014-02-07 10:04:38.000000000 +0100
-+++ glibc-2.19/sunrpc/rpc_scan.c	2014-03-04 07:11:29.000000000 +0100
+diff -Nur glibc-2.20.orig/sunrpc/rpc_scan.c glibc-2.20/sunrpc/rpc_scan.c
+--- glibc-2.20.orig/sunrpc/rpc_scan.c	2014-09-07 10:09:09.000000000 +0200
++++ glibc-2.20/sunrpc/rpc_scan.c	2014-12-26 10:30:51.764498000 +0100
 @@ -37,7 +37,11 @@
  #include <stdio.h>
  #include <ctype.h>

@@ -1,6 +1,46 @@
---- kodi-14.0rc2.orig/configure.in	2014-12-05 19:38:42.000000000 -0600
-+++ kodi-14.0rc2/configure.in	2014-12-07 03:43:25.212418001 -0600
-@@ -1008,7 +1008,7 @@ if test "$use_gles" = "yes"; then
+--- xbmc-14.0-Helix.orig/configure.in	2014-12-22 17:11:35.000000000 -0600
++++ xbmc-14.0-Helix/configure.in	2014-12-25 14:08:39.073043750 -0600
+@@ -55,13 +55,7 @@ AC_DEFUN([XB_ADD_CODEC],
+ # check for library basenames
+ AC_DEFUN([XB_FIND_SONAME],
+ [
+-  if echo "$host" | grep -q freebsd ; then
+-    AC_MSG_CHECKING([for lib$2 soname])
+-    $1_SONAME=[`ldconfig -r | sed -n "s;.* \(/.*lib$2\.so.*\)$;\1;p" | head -n 1`]
+-    if test x$$1_SONAME != x ; then
+-      $1_SONAME=[`basename $$1_SONAME`]
+-    fi
+-  elif [[ "$host_vendor" != "apple" ]]; then
++    set -x
+     AC_MSG_CHECKING([for lib$2 soname])
+     $1_FILENAME=$($CC -nostdlib -o /dev/null $LDFLAGS $4 -l$2 -Wl,-M 2>/dev/null | grep "^LOAD.*$2" | awk '{V=2; print $V}')
+     if [[ -z $$1_FILENAME ]]; then
+@@ -71,24 +65,6 @@ AC_DEFUN([XB_FIND_SONAME],
+     if [[ ! -z $$1_FILENAME ]]; then
+       $1_SONAME=$($OBJDUMP -p $$1_FILENAME | grep "SONAME.*$2" | awk '{V=2; print $V}')
+     fi
+-  else
+-    AC_MSG_CHECKING([for lib$2 dylib])
+-    gcc_lib_path=[`$CC -print-search-dirs 2>/dev/null | fgrep libraries: | sed 's/[^=]*=\(.*\)/\1/' | sed 's/:/ /g'`]
+-    env_lib_path=[`echo $LDFLAGS | sed 's/-L[ ]*//g'`]
+-    if test "$cross_compiling" = yes; then
+-      host_lib_path=""
+-    else
+-      host_lib_path="/usr/lib /usr/local/lib"
+-    fi
+-    for path in $gcc_lib_path $env_lib_path $host_lib_path; do
+-      lib=[`ls -- $path/lib$2.dylib 2>/dev/null`]
+-      if test x$lib != x; then
+-        # we want the path/name that is embedded in the dylib 
+-        $1_FILENAME=[`otool -L $lib | grep -v lib$2.dylib | grep lib$2 | awk '{V=1; print $V}'`]
+-        $1_SONAME=[`basename $$1_FILENAME`]
+-      fi
+-    done
+-  fi
+   if [[ -z "$$1_SONAME" ]]; then
+     AC_MSG_RESULT([no])
+     if test -z "$3" || test "x${$3}" = "xyes"; then
+@@ -1015,7 +991,7 @@ if test "$use_gles" = "yes"; then
        AC_DEFINE([HAVE_LIBEGL],[1],["Define to 1 if you have the `EGL' library (-lEGL)."])
        AC_DEFINE([HAVE_LIBGLESV2],[1],["Define to 1 if you have the `GLESv2' library (-lGLESv2)."])
        AC_MSG_RESULT(== WARNING: OpenGLES support is assumed.)
@@ -9,3 +49,25 @@
      else
        AC_CHECK_LIB([EGL],   [main],, AC_MSG_ERROR($missing_library))
        AC_CHECK_LIB([GLESv2],[main],, AC_MSG_ERROR($missing_library))
+@@ -1066,21 +1042,6 @@ AC_CHECK_HEADER([vorbis/vorbisfile.h],,
+ AC_CHECK_HEADER([libmodplug/modplug.h],, AC_MSG_ERROR($missing_library))
+ 
+ AC_CHECK_HEADER([curl/curl.h],, AC_MSG_ERROR($missing_library))
+-XB_FIND_SONAME([CURL], [curl])
+-AC_MSG_CHECKING([for CRYPTO_set_locking_callback(0) in $CURL_SONAME])
+-if test "$host_vendor" = "apple" ; then
+-  libchecker="$NM"
+-  searchpattern="T [_]?CRYPTO_set_locking_call"
+-else
+-  libchecker="$READELF -s"
+-  searchpattern="CRYPTO_set_locking_call"
+-fi
+-if test $($libchecker $CURL_FILENAME  | grep -Eq "${searchpattern}" ; echo $?) -eq 0 ; then
+-  AC_MSG_RESULT(yes)
+-  AC_DEFINE([HAS_CURL_STATIC], [1], [Whether OpenSSL inside libcurl is static.])
+-else
+-  AC_MSG_RESULT(no)
+-fi
+ 
+ AC_CHECK_HEADER([openssl/crypto.h], AC_DEFINE([HAVE_OPENSSL],[1],[Define if we have openssl]),)
+ AC_CHECK_HEADER([gcrypt.h], gcrypt_headers_available=yes,gcrypt_headers_available=no)
