@@ -13,6 +13,7 @@ PKG_DEPENDS:=		libgcrypt libgpg-error
 PKG_BUILDDEP:=		libgcrypt libgpg-error
 PKG_URL:=		http://www.unix-ag.uni-kl.de/~massar/vpnc/
 PKG_SITES:=		http://www.unix-ag.uni-kl.de/~massar/vpnc/
+PKG_CFLINE_VPNC:=	select ADK_KERNEL_TUN m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

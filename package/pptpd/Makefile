@@ -12,10 +12,13 @@ PKG_SECTION:=		net/ppp
 PKG_DEPENDS:=		ppp
 PKG_URL:=		http://www.poptop.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=poptop/}
+PKG_CFLINE_PPTPD:=	select ADK_KERNEL_NET_IPGRE m@
+PKG_CFLINE_PPTPD+=	select ADK_KERNEL_PPP m@
+PKG_CFLINE_PPTPD+=	select ADK_KERNEL_PPP_MPPE m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng uclibc glibc
 
 include ${ADK_TOPDIR}/mk/package.mk
 

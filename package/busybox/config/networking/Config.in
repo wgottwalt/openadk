@@ -435,6 +435,7 @@ config BUSYBOX_FEATURE_IFCONFIG_BROADCAST_PLUS
 
 config BUSYBOX_IFENSLAVE
 	bool "ifenslave"
+	select ADK_KERNEL_BONDING m
 	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help

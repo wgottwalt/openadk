@@ -18,16 +18,18 @@ assistant:
 For each menu entry in the configuration tool, you can find associated
 help that describes the purpose of the entry.
 
-image::menuconfig.png[]
+image::openadk-appliance.png[]
 
-First of all you need to choose your target architecture, your target
-system, your target C library, your target firmware type and your target
-package format. After that you can select individual packages and kernel
-settings or just use one of the predefined package collections. When you
-are ready exit and save.  You can always redefine the configuration
-using +make menuconfig+.
+First of all you need to choose a new or predefined appliance. 
+This is a collection of different packages and configuration options
+for specific appliance.
 
-image::menuconfig-configured.png[]
+image::openadk-target.png[]
+
+After that you can choose your target architecture, your target system and
+other general stuff.  Then you can select individual packages and kernel
+settings. When you are ready exit and save. You can always redefine the
+configuration using +make menuconfig+.
 
 Once everything is configured, the configuration tool generates a
 +.config+ file that contains the description of your configuration. It

@@ -10,7 +10,8 @@ PKG_MD5SUM:=		9d2597756af3fa14d7331b4a3651fc9b
 PKG_DESCR:=		wireless lan access point controller
 PKG_SECTION:=		net/wifi
 PKG_URL:=		http://www.chillispot.info/
-PKG_SITES=		http://www.chillispot.info/download/
+PKG_SITES:=		http://www.chillispot.info/download/
+PKG_CFLINE_CHILLISPOT:=	select ADK_KERNEL_TUN m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

@@ -1,67 +1,75 @@
 menu "Network support"
 
+config ADK_KERNEL_CONFIG_INET
+	bool "Enable TCP/IP support"
+	select ADK_KERNEL_CRYPTO_AES
+	default y
+
 config ADK_KERNEL_IP_FIB_HASH
-	boolean
+	bool
 	default y
 
 config ADK_DISABLE_TCP_FASTOPEN
-	prompt "Disable TCP Fastopen"
-	boolean
+	bool "Disable TCP Fastopen"
 	select ADK_KERNEL_ADDON_DIETNET
-	default n
+
+config ADK_KERNEL_IPV6
+	tristate "Enable IPv6 support"
+	help
+	  This is complemental support for the IP version 6.
+	  You will still be able to do traditional IPv4 networking as well.
+
+	  For general information about IPv6, see
+	  <http://playground.sun.com/pub/ipng/html/ipng-main.html>.
+	  For Linux IPv6 development information, see <http://www.linux-ipv6.org>.
+	  For specific information about IPv6 under Linux, read the HOWTO at
+	  <http://www.bieringer.de/linux/IPv6/>.
+
+config ADK_KERNEL_IPV6_SIT
+	tristate "IPv6-in-IPv4 tunnel (SIT driver)"
+	select ADK_KERNEL_INET_TUNNEL
+	help
+	  Tunneling means encapsulating data of one protocol type within
+	  another protocol and sending it over a channel that understands the
+	  encapsulating protocol. This driver implements encapsulation of IPv6
+	  into IPv4 packets. This is useful if you want to connect two IPv6
+	  networks over an IPv4-only path.
 
 config ADK_KERNEL_SYN_COOKIES
-	prompt "IP: TCP syncookie support"
-	boolean
-	default n
+	bool "TCP syncookie support"
 
 config ADK_KERNEL_IP_PNP_BOOTP
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_IP_PNP_RARP
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_NET_IPGRE_BROADCAST
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_NET_IPGRE_DEMUX
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_PPP_ASYNC
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_SLHC
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_IMQ
 	tristate
-	default n
 
 config ADK_KERNEL_LLC
 	tristate
-	default n
-
 
 config ADK_KERNEL_IP_MULTICAST
-	prompt "Enable IP Multicasting"
-	boolean
-	default n
+	bool "Enable IP Multicasting"
 
 config ADK_KERNEL_IP_MROUTE
-	prompt "Enable IP Multicasting Routing"
-	boolean
-	default n
+	bool "Enable IP Multicasting Routing"
 
 config ADK_KERNEL_ATM
-	prompt "Asynchronous Transfer Mode (ATM)"
-	tristate
-	default n
+	tristate "Asynchronous Transfer Mode (ATM)"
 	help
 	 ATM is a high-speed networking technology for Local Area Networks
 	 and Wide Area Networks.  It uses a fixed packet size and is
@@ -77,18 +85,12 @@ config ADK_KERNEL_ATM
 	 further details.
 
 config ADK_KERNEL_ATM_BR2684
-	prompt "BR2684 ATM module"
-	tristate
+	tristate "BR2684 ATM module"
 	select ADK_KERNEL_ATM
-	default n
-	help
 
 config ADK_KERNEL_BRIDGE
-	prompt "802.1d Ethernet Bridging"
-	tristate
+	tristate "802.1d Ethernet Bridging"
 	select ADK_KERNEL_LLC
-	default m if ADK_PACKAGE_BRIDGE_UTILS
-	default n
 	help
 	  If you say Y here, then your Linux box will be able to act as an
 	  Ethernet bridge, which means that the different Ethernet segments it
@@ -111,9 +113,7 @@ config ADK_KERNEL_BRIDGE
 	  bridged ARP traffic in the arptables FORWARD chain.
 
 config ADK_KERNEL_VLAN_8021Q
-	prompt "802.1q VLAN support"
-	tristate
-	default n
+	tristate "802.1q VLAN support"
 	help
           Select this and you will be able to create 802.1Q VLAN interfaces
           on your ethernet interfaces.  802.1Q VLAN supports almost
@@ -125,14 +125,10 @@ config ADK_KERNEL_VLAN_8021Q
 
 config ADK_KERNEL_INET_TUNNEL
 	tristate
-	default n
-	help
 
 config ADK_KERNEL_NET_IPIP
-	prompt "IP in IP encapsulation support"
-	tristate
+	tristate "IP in IP encapsulation support"
 	select ADK_KERNEL_INET_TUNNEL
-	default n
 	help
 	  Tunneling means encapsulating data of one protocol type within
 	  another protocol and sending it over a channel that understands the
@@ -144,13 +140,9 @@ config ADK_KERNEL_NET_IPIP
 	  networks without changing their IP addresses).
 
 config ADK_KERNEL_NET_IPGRE
-	prompt "GRE tunnels over IP"
-	tristate
+	tristate "GRE tunnels over IP"
 	select ADK_KERNEL_NET_IPGRE_BROADCAST
 	select ADK_KERNEL_NET_IPGRE_DEMUX
-	default m if ADK_PACKAGE_PPTP
-	default m if ADK_PACKAGE_PPTPD
-	default n
 	help
 	  Tunneling means encapsulating data of one protocol type within
 	  another protocol and sending it over a channel that understands the
@@ -162,42 +154,11 @@ config ADK_KERNEL_NET_IPGRE
 	  tunneling" above). In addition, GRE allows multicast redistribution
 	  through the tunnel.
 
-config ADK_KERNEL_IPV6
-	prompt "IPv6 support"
-	tristate
-	default n
-	help
-	  This is complemental support for the IP version 6.
-	  You will still be able to do traditional IPv4 networking as well.
-
-	  For general information about IPv6, see
-	  <http://playground.sun.com/pub/ipng/html/ipng-main.html>.
-	  For Linux IPv6 development information, see <http://www.linux-ipv6.org>.
-	  For specific information about IPv6 under Linux, read the HOWTO at
-	  <http://www.bieringer.de/linux/IPv6/>.
-
-config ADK_KERNEL_IPV6_SIT
-	prompt "IPv6-in-IPv4 tunnel (SIT driver)"
-	tristate
-	select ADK_KERNEL_INET_TUNNEL
-	default n
-	help
-	  Tunneling means encapsulating data of one protocol type within
-	  another protocol and sending it over a channel that understands the
-	  encapsulating protocol. This driver implements encapsulation of IPv6
-	  into IPv4 packets. This is useful if you want to connect two IPv6
-	  networks over an IPv4-only path.
-
 config ADK_KERNEL_PPP
-	prompt "PPP support"
-	tristate
+	tristate "PPP support"
 	select ADK_KERNEL_PPP_ASYNC
 	select ADK_KERNEL_SLHC
 	select ADK_KERNEL_CRC_CCITT
-	default m if ADK_PACKAGE_PPTP
-	default m if ADK_PACKAGE_PPTPD
-	default m if ADK_PACKAGE_PPP
-	default n
 	help
 	  PPP (Point to Point Protocol) is a newer and better SLIP.  It serves
 	  the same purpose: sending Internet traffic over telephone (and other
@@ -221,15 +182,12 @@ config ADK_KERNEL_PPP
 	  synchronous PPP", below.
 
 config ADK_KERNEL_PPP_MPPE
-	prompt "PPP MPPE/MPPC module"
-	tristate
+	tristate "PPP MPPE/MPPC module"
 	depends on ADK_KERNEL_PPP
 	select ADK_KERNEL_CRYPTO
 	select ADK_KERNEL_CRYPTO_ARC4
 	select ADK_KERNEL_CRYPTO_SHA1
 	select ADK_KERNEL_CRYPTO_ECB
-	default m if ADK_PACKAGE_PPTPD
-	default n
 	help
          Support for the MPPE Encryption protocol, as employed by the
 	 Microsoft Point-to-Point Tunneling Protocol.
@@ -238,41 +196,25 @@ config ADK_KERNEL_PPP_MPPE
 	 configuring PPTP clients and servers to utilize this method.
 
 config ADK_KERNEL_PPPOATM
-	prompt "PPPoA (PPP over ATM) kernel support"
-	tristate
+	tristate "PPPoA (PPP over ATM) kernel support"
 	depends on ADK_KERNEL_PPP
 	select ADK_KERNEL_ATM
-	default n
 	help
 	  Support for PPP over ATM
 
 config ADK_KERNEL_PPPOE
-	prompt "PPPoE (PPP over Ethernet) kernel support"
-	tristate
+	tristate "PPPoE (PPP over Ethernet) kernel support"
 	depends on ADK_KERNEL_PPP
-	default m if ADK_PACKAGE_PPP_MOD_PPPOE
-	default n
 	help
 	  Support for PPP over Ethernet
 
 config ADK_KERNEL_TUN
-	prompt "Universal TUN/TAP driver"
-	tristate
-	default m if ADK_PACKAGE_CHILLISPOT
-	default m if ADK_PACKAGE_AICCU
-	default m if ADK_PACKAGE_TINC
-	default m if ADK_PACKAGE_VTUN
-	default m if ADK_PACKAGE_VPNC
-	default m if ADK_PACKAGE_OPENVPN
-	default n
+	tristate "Universal TUN/TAP driver"
 	help
 	  Kernel support for the TUN/TAP tunneling device
 
 config ADK_KERNEL_BONDING
-	prompt "Bonding driver support"
-	tristate
-	select BUSYBOX_IFENSLAVE
-	default n
+	tristate "Bonding driver support"
 	help
   	  Say 'Y' or 'M' if you wish to be able to 'bond' multiple Ethernet
 	  Channels together. This is called 'Etherchannel' by Cisco,
@@ -285,8 +227,7 @@ config ADK_KERNEL_BONDING
 	  information.
 
 config ADK_KERNEL_MPTCP
-	prompt "Multipath TCP support"
-	boolean
+	bool "Multipath TCP support"
 	select ADK_KERNEL_IPV6
 	select ADK_KERNEL_ADDON_MPTCP
 	help

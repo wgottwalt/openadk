@@ -9,6 +9,7 @@ PKG_RELEASE:=		2
 PKG_MD5SUM:=		fd929de593acadd658d45feb07f993aa
 PKG_DESCR:=		flash filesystem utilities
 PKG_SECTION:=		sys/fs
+PKG_BUILDDEP:=		zlib
 HOST_BUILDDEP:=		liblzo-host
 PKG_URL:=		http://www.linux-mtd.infradead.org
 PKG_SITES:=		http://git.infradead.org/mtd-utils.git/snapshot/

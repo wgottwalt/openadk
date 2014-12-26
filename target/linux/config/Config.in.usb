@@ -2,19 +2,19 @@ menu "USB support"
 depends on ADK_TARGET_WITH_USB || ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86
 
 config ADK_KERNEL_USB_SUPPORT
-	boolean
+	bool
 
 config ADK_KERNEL_USB_EHCI_ROOT_HUB_TT
-	boolean
+	bool
 
 config ADK_KERNEL_USB_EHCI_TT_NEWSCHED
-	boolean
+	bool
 
 config ADK_KERNEL_USB_GADGET
 	tristate
 
 config ADK_KERNEL_USB_PHY
-	boolean
+	bool
 
 config ADK_KERNEL_USB_MXS_PHY
 	tristate
@@ -23,16 +23,14 @@ config ADK_KERNEL_USB_MXS_PHY
 	default n
 
 config ADK_KERNEL_USB_OHCI_HCD_PLATFORM
-	boolean
+	bool
 	select ADK_KERNEL_USB_OHCI_HCD
-	default n
 
 config ADK_KERNEL_USB_LIBUSUAL
 	tristate
 
 config ADK_KERNEL_USB
-	prompt "USB support"
-	tristate
+	tristate "USB support"
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_USB_SUPPORT
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
@@ -75,8 +73,7 @@ config ADK_KERNEL_USB
 menu "USB controller support"
 
 config ADK_KERNEL_USB_EHCI_HCD
-	prompt "Support for USB EHCI 2.0 controllers"
-	tristate
+	tristate "Support for USB EHCI 2.0 controllers"
 	select ADK_KERNEL_USB_EHCI_ROOT_HUB_TT
 	select ADK_KERNEL_USB_EHCI_TT_NEWSCHED
 	select ADK_KERNEL_USB_MXS_PHY if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
@@ -111,8 +108,7 @@ config ADK_KERNEL_USB_EHCI_HCD
 
 
 config ADK_KERNEL_USB_UHCI_HCD
-	prompt "Support for UHCI controllers"
-	tristate
+	tristate "Support for UHCI controllers"
 	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
@@ -130,8 +126,7 @@ config ADK_KERNEL_USB_UHCI_HCD
 	  133). If unsure, say Y.
 
 config ADK_KERNEL_USB_OHCI_HCD
-	prompt "Support for OHCI controllers"
-	tristate
+	tristate "Support for OHCI controllers"
 	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
@@ -151,24 +146,23 @@ config ADK_KERNEL_USB_OHCI_HCD
 	  right "prog-if" for your USB controller(s):  EHCI, OHCI, or UHCI.
 
 config ADK_KERNEL_USB_DWCOTG
-	prompt "Support for DWCOTG controller"
-	boolean
+	bool "Support for DWCOTG controller"
 	select ADK_KERNEL_USB
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default n
 	help
 	  The Synopsis DWC controller is a dual-role
           host/peripheral/OTG ("On The Go") USB controllers.
 
 config ADK_KERNEL_USB_CHIPIDEA_UDC
-	boolean
+	bool
 
 config ADK_KERNEL_USB_CHIPIDEA_HOST
-	boolean
+	bool
 
 config ADK_KERNEL_USB_CHIPIDEA
-	prompt "Support for ChipIdea controller"
-	tristate
+	tristate "Support for ChipIdea controller"
 	select ADK_KERNEL_USB_CHIPIDEA_UDC
 	select ADK_KERNEL_USB_CHIPIDEA_HOST
 	select ADK_KERNEL_USB_GADGET
@@ -178,12 +172,10 @@ config ADK_KERNEL_USB_CHIPIDEA
 	default n
 
 config ADK_KERNEL_USB_ISP116X_HCD
-	prompt "Support for ISP116X"
-	tristate
+	tristate "Support for ISP116X"
 	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default n
 	help
 	  The ISP1160 and ISP1161 chips are USB host controllers. Enable this
 	  option if your board has this chip. If unsure, say N.
@@ -191,8 +183,7 @@ config ADK_KERNEL_USB_ISP116X_HCD
 	  This driver does not support isochronous transfers.
 
 config ADK_KERNEL_USB_SL811_HCD
-	prompt "Support for SL811HS"
-	tristate
+	tristate "Support for SL811HS"
 	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
@@ -207,47 +198,37 @@ endmenu
 
 menu "USB devices support"
 
-config ADK_KERNEL_USB_STORAGE
-	prompt "Support for USB storage devices"
+config ADK_KERNEL_USB_NET_DRIVERS
 	tristate
+
+config ADK_KERNEL_USB_STORAGE
+	tristate "Support for USB storage devices"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_BLK_DEV_SD
-	default n
 
 config ADK_KERNEL_SND_USB_AUDIO
-	prompt "Support for USB sound adapter"
-	tristate
+	tristate "Support for USB sound adapter"
 	select ADK_KERNEL_SND
 	select ADK_KERNEL_SND_USB
 	select ADK_KERNEL_SND_RAWMIDI
-	default n
 
 config ADK_KERNEL_USB_HSO
-	prompt "Support for USB HSO devices"
-	tristate
+	tristate "Support for USB HSO devices"
 	select ADK_KERNEL_RFKILL
 	select ADK_KERNEL_USB_STORAGE
-	default n
 
 config ADK_KERNEL_USB_PRINTER
-	prompt "Support for USB printers"
-	tristate
-	default n
+	tristate "Support for USB printers"
 
 config ADK_KERNEL_USB_ACM
-	prompt "Support for USB modems/isdn controllers"
-	tristate
-	default n
+	tristate "Support for USB modems/isdn controllers"
 
 config ADK_KERNEL_USB_PEGASUS
-	prompt "Support for USB Pegasus network cards"
-	tristate
-	default n
+	tristate "Support for USB Pegasus network cards"
+	select ADK_KERNEL_USB_NET_DRIVERS
 
 config ADK_KERNEL_USB_SERIAL
-	prompt "Support for USB-to-serial converters"
-	tristate
-	default n
+	tristate "Support for USB-to-serial converters"
 	help
 	  Say Y here if you have a USB device that provides normal serial
 	  ports, or acts like a serial device, and you want to connect it to
@@ -258,20 +239,16 @@ config ADK_KERNEL_USB_SERIAL
 	  supported, and on how to use them.
 
 config ADK_KERNEL_USB_SERIAL_BELKIN
-	prompt "Support for Belkin USB-to-serial converters"
-	tristate
+	tristate "Support for Belkin USB-to-serial converters"
 	depends on ADK_KERNEL_USB_SERIAL
-	default n
 	help
 	  Say Y here if you want to use a Belkin USB Serial single port
 	  adaptor (F5U103 is one of the model numbers) or the Peracom single
 	  port USB to serial adapter.
 
 config ADK_KERNEL_USB_SERIAL_FTDI_SIO
-	prompt "Support for FTDI USB-to-serial converter"
-	tristate
+	tristate "Support for FTDI USB-to-serial converter"
 	depends on ADK_KERNEL_USB_SERIAL
-	default n
 	help
 	  Say Y here if you want to use a FTDI SIO single port USB to serial
 	  converter device. The implementation I have is called the USC-1000.
@@ -281,10 +258,8 @@ config ADK_KERNEL_USB_SERIAL_FTDI_SIO
 	  information on this driver and the device.
 
 config ADK_KERNEL_USB_SERIAL_MCT_U232
-	prompt "Support for Magic Control Technology USB-to-Serial converters"
-	tristate
+	tristate "Support for Magic Control Technology USB-to-Serial converters"
 	depends on ADK_KERNEL_USB_SERIAL
-	default n
 	help
 	  Say Y here if you want to use a USB Serial single port adapter from
 	  Magic Control Technology Corp. (U232 is one of the model numbers).
@@ -293,19 +268,15 @@ config ADK_KERNEL_USB_SERIAL_MCT_U232
 	  BAY, Belkin F5U109, and Belkin F5U409 devices.
 
 config ADK_KERNEL_USB_SERIAL_PL2303
-	prompt "Support for Prolific PL2303 USB-to-Serial converters"
-	tristate
+	tristate "Support for Prolific PL2303 USB-to-Serial converters"
 	depends on ADK_KERNEL_USB_SERIAL
-	default n
 	help
 	  Say Y here if you want to use the PL2303 USB Serial single port
 	  adapter from Prolific.
 
 config ADK_KERNEL_USB_SERIAL_VISOR
-	prompt "Support for Handspring Visor / Palm m50x / Sony Clie Driver"
-	tristate
+	tristate "Support for Handspring Visor / Palm m50x / Sony Clie Driver"
 	depends on ADK_KERNEL_USB_SERIAL
-	default n
 	help
 	  Say Y here if you want to connect to your HandSpring Visor, Palm
 	  m500 or m505 through its USB docking station. See
@@ -313,25 +284,17 @@ config ADK_KERNEL_USB_SERIAL_VISOR
 	  driver.
 
 config ADK_KERNEL_USB_ATM
-        prompt "Support for USB ATM devices"
-	tristate
-	default n
+        tristate "Support for USB ATM devices"
 
 config ADK_KERNEL_USB_ATM_SPEEDTOUCH
-        prompt "Support for USB Speedtouch ADSL modem"
-	tristate
+        tristate "Support for USB Speedtouch ADSL modem"
 	depends on ADK_KERNEL_USB_ATM
-	default n
-
-config ADK_KERNEL_USB_USBNET
-        prompt "Multi-purpose USB Networking Framework"
-	tristate
-	default n
 
 config ADK_KERNEL_USB_SISUSBVGA
-        prompt "USB 2.0 SVGA dongle support (Net2280/SiS315)"
-	tristate
-	default n
+        tristate "USB 2.0 SVGA dongle support (Net2280/SiS315)"
+
+config ADK_KERNEL_USB_USBNET
+        tristate
 	
 endmenu
 endmenu

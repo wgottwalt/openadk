@@ -13,6 +13,7 @@ PKG_DEPENDS:=		ip
 PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
+PKG_CFLINE_OPENVPN:=	select ADK_KERNEL_TUN m
 
 PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS
 PKGFD_WITH_LZO:=	enable lzo compression support

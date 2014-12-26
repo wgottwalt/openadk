@@ -12,6 +12,7 @@ PKG_SECTION:=		net/security
 PKG_DEPENDS:=		zlib libopenssl liblzo
 PKG_BUILDDEP:=		zlib openssl liblzo
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vtun/}
+PKG_CFLINE_VTUN:=	select ADK_KERNEL_TUN m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

@@ -12,6 +12,7 @@ PKG_SECTION:=		net/ppp
 PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://ppp.samba.org/
 PKG_SITES:=		ftp://ftp.samba.org/pub/ppp/
+PKG_CFLINE_PPP:=	select ADK_KERNEL_PPP m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
