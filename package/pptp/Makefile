@@ -11,6 +11,8 @@ PKG_DESCR:=		point-to-point tunneling protocol client
 PKG_SECTION:=		net/ppp
 PKG_DEPENDS:=		ppp
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pptpclient/}
+PKG_CFLINE_PPTP:=	select ADK_KERNEL_NET_IPGRE m@
+PKG_CFLINE_PPTP+=	select ADK_KERNEL_PPP m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

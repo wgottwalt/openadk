@@ -13,6 +13,7 @@ PKG_DEPENDS:=		zlib liblzo libopenssl
 PKG_BUILDDEP:=		zlib liblzo openssl
 PKG_URL:=		http://www.tinc-vpn.org/
 PKG_SITES:=		http://www.tinc-vpn.org/packages/
+PKG_CFLINE_TINC:=	select ADK_KERNEL_TUN m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

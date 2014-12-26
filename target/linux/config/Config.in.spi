@@ -2,19 +2,19 @@ menu "SPI driver support"
 depends on ADK_TARGET_WITH_SPI
 
 config ADK_KERNEL_SPI
-	boolean
+	bool
 
 config ADK_KERNEL_SPI_DEBUG
-	boolean
+	bool
 
 config ADK_KERNEL_SPI_MASTER
-	boolean
+	bool
 
 config ADK_KERNEL_SPI_BITBANG
 	tristate
 
 config ADK_KERNEL_BCM2708_SPIDEV
-	tristate
+	bool
 
 config ADK_KERNEL_SPI_AR71XX
 	tristate
@@ -33,8 +33,7 @@ config ADK_KERNEL_SPI_PXA2XX
 	select ADK_KERNEL_SPI
 
 config ADK_KERNEL_SPI_BCM2708
-	prompt "SPI driver for Raspberry PI"
-	tristate
+	tristate "SPI driver for Raspberry PI"
 	select ADK_KERNEL_SPI
 	select ADK_KERNEL_SPI_MASTER
 	select ADK_KERNEL_SPI_BITBANG
@@ -45,8 +44,7 @@ config ADK_KERNEL_SPI_BCM2708
 	default n
 
 config ADK_KERNEL_SPI_IMX
-	prompt "SPI driver for Solidrun IMX6"
-	tristate
+	tristate "SPI driver for Solidrun IMX6"
 	select ADK_KERNEL_SPI
 	select ADK_KERNEL_SPI_MASTER
 	select ADK_KERNEL_SPI_BITBANG
@@ -56,17 +54,13 @@ config ADK_KERNEL_SPI_IMX
 	default n
 
 config ADK_KERNEL_SPI_SPIDEV
-	prompt "SPI userland driver"
-	tristate
+	tristate "SPI userland driver"
 	select ADK_KERNEL_SPI
 	select ADK_KERNEL_SPI_MASTER
-	default n
 
 config ADK_KERNEL_SPI_GPIO
-	prompt "GPIO support"
-	tristate
+	tristate "SPI GPIO support"
 	select ADK_KERNEL_SPI
 	select ADK_KERNEL_SPI_MASTER
-	default n
-	
+
 endmenu
