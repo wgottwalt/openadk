@@ -238,7 +238,7 @@ print -n "$ostr" | \
 
 print Extracting installation archive...
 mkdir "$T/src"
-gzip -dc "$src" | (cd "$T/src"; tar -xpf -)
+xz -dc "$src" | (cd "$T/src"; tar -xpf -)
 cd "$T/src"
 rnddev=/dev/urandom
 [[ -c /dev/arandom ]] && rnddev=/dev/arandom
