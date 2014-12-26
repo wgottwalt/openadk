@@ -85,8 +85,8 @@ TARGET_KERNEL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_FS}-kernel
 INITRAMFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}
 ROOTFSSQUASHFS=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.img
 ROOTFSJFFS2=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-jffs2.img
-ROOTFSTARBALL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}+kernel.tar.gz
-ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.gz
+ROOTFSTARBALL=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}+kernel.tar.xz
+ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.xz
 ROOTFSISO=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}.iso
 
 kernel-package: kernel-strip
@@ -103,7 +103,7 @@ kernel-package: kernel-strip
 ${FW_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}/.adk kernel-package
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | gzip -n9 >$@
+		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | $(XZ) -c >$@
 ifeq ($(ADK_TARGET_QEMU),y)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 endif
@@ -111,7 +111,7 @@ endif
 ${FW_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}/.adk
 	cd ${TARGET_DIR}; find . | grep -v ./boot/ | sed -n '/^\.\//s///p' | \
 		sed "s#\(.*\)#:0:0::::::\1#" | sort | \
-		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | gzip -n9 >$@
+		${STAGING_HOST_DIR}/usr/bin/cpio -o -Hustar -P | $(XZ) -c >$@
 
 ${STAGING_TARGET_DIR}/${INITRAMFS}_list: ${TARGET_DIR}/.adk
 	env PATH='${HOST_PATH}' $(BASH) ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
