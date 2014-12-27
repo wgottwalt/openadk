@@ -4,15 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		wiringPi
-# actually git checkout from 05.12.2014
-# 0a9fdeb29d31609ef834f050bdb8a7a65cd35e2b
-PKG_VERSION:=		0.1
+PKG_VERSION:=		0a9fdeb29d31609ef834f050bdb8a7a65cd35e2b
 PKG_RELEASE:=		1
-PKG_HASH:=		230a059d2106ba9402cb51a10167db9d7d817a4a1df3d55cd8d0ef220c0e8187
-PKG_DESCR:=		GPIO access library for the BCM2835 used in the Raspberry Pi
+PKG_DESCR:=		gpio access library for the raspberry pi
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://wiringpi.com/
-PKG_SITES:=		http://openadk.org/distfiles
+PKG_SITES:=		git://git.drogon.net/wiringPi
 
 PKG_SYSTEM_DEPENDS:=    raspberry-pi
 
@@ -25,6 +22,7 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=         manual
 
 TARGET_CPPFLAGS+=	-I../wiringPi
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 
 do-build:
 	(cd $(WRKBUILD); $(MAKE) -C wiringPi)
