@@ -1,0 +1,8 @@
+--- u-boot-d8bec60c1b0de7770f9b56ad092ab9be801d99af.orig/arch/arm/cpu/arm1176/config.mk	2014-12-27 11:52:56.000000000 -0600
++++ u-boot-d8bec60c1b0de7770f9b56ad092ab9be801d99af/arch/arm/cpu/arm1176/config.mk	2014-12-27 12:27:09.407517499 -0600
+@@ -6,4 +6,4 @@
+ #
+ 
+ # Make ARMv5 to allow more compilers to work, even though its v6.
+-PLATFORM_CPPFLAGS += -march=armv5t
++PLATFORM_CPPFLAGS += -march=armv6

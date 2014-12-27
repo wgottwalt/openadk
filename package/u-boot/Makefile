@@ -4,34 +4,49 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
-PKG_VERSION:=		2014.07
+PKG_VERSION:=		d8bec60c1b0de7770f9b56ad092ab9be801d99af
 PKG_RELEASE:=		1
-PKG_HASH:=		b4f83b8db325c21671a997198ec3a373e2e00dde2fcf17be9b9afd7cfd727f56
-PKG_DESCR:=		bootloader
+PKG_HASH:=		f04993a54863849c123107509ebff5360c17fe04d3ca86242ae08b577653d415
+PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
-PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
+PKG_SITES:=		git://git.denx.de/u-boot.git
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-PKG_SYSTEM_DEPENDS:=	!cubox-i
-
-PKG_CFLINE_U_BOOT:=	depends on ADK_HOST_ONLY
+PKG_SYSTEM_DEPENDS:=	raspberry-pi
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call HOST_template,U_BOOT,u-boot,$(PKG_VERSION)-${PKG_RELEASE}))
+$(eval $(call HOST_template,U_BOOT,u-boot,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,U_BOOT,u-boot,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
+
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+CONFIG:=		rpi_defconfig
+endif
 
 HOST_STYLE:=		manual
-HOST_MAKE_FLAGS+=	HOST_TOOLS_ONLY=yes
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
+INSTALL_STYLE:=		manual
 
 host-build:
-	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-		${HOST_MAKE_FLAGS} tools $(MAKE_TRACE) )
+	(cd $(WRKBUILD) && $(MAKE) $(CONFIG))
+	(cd $(WRKBUILD) && env $(HOST_MAKE_ENV) $(MAKE) -f $(MAKE_FILE) \
+		$(HOST_MAKE_FLAGS) tools $(MAKE_TRACE) )
 
 u-boot-hostinstall:
-	${INSTALL_BIN} ${WRKBUILD}/tools/mkimage \
-		${STAGING_HOST_DIR}/usr/bin
+	$(INSTALL_BIN) $(WRKBUILD)/tools/mkimage \
+		$(STAGING_HOST_DIR)/usr/bin
 
-include ${ADK_TOPDIR}/mk/host-bottom.mk
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+do-configure:
+	(cd $(WRKBUILD) && $(MAKE) $(CONFIG))
+
+do-build:
+	(cd $(WRKBUILD) && env CROSS_COMPILE='$(TARGET_CROSS)' \
+		GCC_HONOUR_COPTS=s $(MAKE))
+
+u-boot-install:
+	$(CP) $(WRKBUILD)/u-boot $(FW_DIR)
+
+include $(ADK_TOPDIR)/mk/host-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
