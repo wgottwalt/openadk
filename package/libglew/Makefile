@@ -5,12 +5,12 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libglew
 PKG_VERSION:=		1.10.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		99c41320b63f6860869b5fb9af9a1854b15582796c64ee3dfd7096dc0c89f307
 PKG_DESCR:=		opengl extension wrangler library
 PKG_SECTION:=		libs/video
-PKG_DEPENDS:=		libx11 libxmu libxi libxext
-PKG_BUILDDEP:=		libX11 libXmu libXi libXext
+PKG_DEPENDS:=		libx11 libxmu libxi libxext mesalib
+PKG_BUILDDEP:=		libX11 libXmu libXi libXext mesalib
 PKG_URL:=		http://glew.sourceforge.net/index.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=glew/}
 PKG_OPTS:=		dev
