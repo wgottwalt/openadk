@@ -3,47 +3,47 @@
 
 # global symbols
 config ADK_LINUX_64
-	boolean
+	bool
 
 config ADK_TARGET_KERNEL_64
-	boolean
+	bool
 
 config ADK_TOOLCHAIN_ONLY
-	boolean
+	bool
 
 config ADK_TARGET_TOOLCHAIN
-	boolean
+	bool
 
 config ADK_TARGET_UCLINUX
+	bool
+	select ADK_TARGET_USE_STATIC_LIBS
 	select ADK_PACKAGE_SASH
 	select ADK_PACKAGE_SIMPLEINIT
-	boolean
 
 config ADK_TARGET_QEMU
-	boolean
+	bool
 
 config ADK_TARGET_VBOX
-	boolean
+	bool
 
 # the inverse of ADK_TARGET_KERNEL_CUSTOMISING,
 # allows for selecting it off (i.e., to disable it)
 config ADK_TARGET_FIXED_KERNEL
 	bool
-	default n
 
 config ADK_TARGET_KERNEL_CUSTOMISING
 	bool
-	default y
 	depends on !ADK_TARGET_FIXED_KERNEL
+	default y
 
 choice
 prompt "Toolchain options"
 depends on ADK_TARGET_TOOLCHAIN
 config ADK_TOOLCHAIN_ONLY
-	boolean "Only build toolchain and selected packages"
+	bool "Only build toolchain and selected packages"
 
 config ADK_TOOLCHAIN_ARCHIVE
-	boolean "Build a complete system usable f.e. via chroot"
+	bool "Build a complete system usable f.e. via chroot"
 
 endchoice
 
