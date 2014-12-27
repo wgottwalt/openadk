@@ -6,14 +6,12 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.25.2
 PKG_RELEASE:=		1
-PKG_HASH:=		cab3d7be354000f629bc601238b629b3
+PKG_HASH:=		e0457f715b73f4a349e1acb08cb410bf0edc9a74a3f75c357070f31f70e33cd6
 PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
 PKG_BUILDDEP:=		ncurses pam
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.25/
 PKG_OPTS:=		dev
-
-PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
 PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBMOUNT SU CFDISK MKFS
