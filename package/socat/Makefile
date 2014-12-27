@@ -24,6 +24,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SOCAT,socat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoconf
 CONFIGURE_ENV+=		sc_cv_termios_ispeed=no \
 			sc_cv_sys_crdly_shift=9 \
 			sc_cv_sys_tabdly_shift=11 \
