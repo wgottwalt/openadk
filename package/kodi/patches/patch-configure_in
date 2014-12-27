@@ -49,25 +49,3 @@
      else
        AC_CHECK_LIB([EGL],   [main],, AC_MSG_ERROR($missing_library))
        AC_CHECK_LIB([GLESv2],[main],, AC_MSG_ERROR($missing_library))
-@@ -1066,21 +1042,6 @@ AC_CHECK_HEADER([vorbis/vorbisfile.h],,
- AC_CHECK_HEADER([libmodplug/modplug.h],, AC_MSG_ERROR($missing_library))
- 
- AC_CHECK_HEADER([curl/curl.h],, AC_MSG_ERROR($missing_library))
--XB_FIND_SONAME([CURL], [curl])
--AC_MSG_CHECKING([for CRYPTO_set_locking_callback(0) in $CURL_SONAME])
--if test "$host_vendor" = "apple" ; then
--  libchecker="$NM"
--  searchpattern="T [_]?CRYPTO_set_locking_call"
--else
--  libchecker="$READELF -s"
--  searchpattern="CRYPTO_set_locking_call"
--fi
--if test $($libchecker $CURL_FILENAME  | grep -Eq "${searchpattern}" ; echo $?) -eq 0 ; then
--  AC_MSG_RESULT(yes)
--  AC_DEFINE([HAS_CURL_STATIC], [1], [Whether OpenSSL inside libcurl is static.])
--else
--  AC_MSG_RESULT(no)
--fi
- 
- AC_CHECK_HEADER([openssl/crypto.h], AC_DEFINE([HAVE_OPENSSL],[1],[Define if we have openssl]),)
- AC_CHECK_HEADER([gcrypt.h], gcrypt_headers_available=yes,gcrypt_headers_available=no)

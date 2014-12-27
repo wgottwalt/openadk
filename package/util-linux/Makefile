@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.25.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		e0457f715b73f4a349e1acb08cb410bf0edc9a74a3f75c357070f31f70e33cd6
 PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
@@ -59,7 +59,7 @@ $(eval $(call PKG_template,LIBMOUNT,libmount,${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
 TARGET_LDFLAGS+=	-ltinfo
-#AUTOTOOL_STYLE:=	autoreconf
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ENV+=		have_scanf_alloc_modifier=yes \
 			scanf_cv_alloc_modifier=ms
 
@@ -77,6 +77,7 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-eject \
 			--without-python \
 			--without-systemd \
+			--without-user \
 			--enable-libuuid \
 			--enable-libblkid \
 			--enable-libmount \
@@ -85,28 +86,28 @@ FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
 
 fdisk-install:
 	${INSTALL_DIR} ${IDIR_FDISK}/usr/sbin
-	${CP} ${WRKINST}/sbin/fdisk ${IDIR_FDISK}/usr/sbin
+	${CP} ${WRKINST}/usr/sbin/fdisk ${IDIR_FDISK}/usr/sbin
 
 cfdisk-install:
 	${INSTALL_DIR} ${IDIR_CFDISK}/usr/sbin
-	${CP} ${WRKINST}/sbin/cfdisk ${IDIR_FDISK}/usr/sbin
+	${CP} ${WRKINST}/usr/sbin/cfdisk ${IDIR_FDISK}/usr/sbin
 
 sfdisk-install:
 	${INSTALL_DIR} ${IDIR_SFDISK}/usr/sbin
-	${CP} ${WRKINST}/sbin/sfdisk ${IDIR_SFDISK}/usr/sbin
+	${CP} ${WRKINST}/usr/sbin/sfdisk ${IDIR_SFDISK}/usr/sbin
 
 losetup-install:
 	${INSTALL_DIR} ${IDIR_LOSETUP}/usr/sbin
-	${CP} ${WRKINST}/sbin/losetup ${IDIR_LOSETUP}/usr/sbin
+	${CP} ${WRKINST}/usr/sbin/losetup ${IDIR_LOSETUP}/usr/sbin
 
 swap-utils-install:
 	${INSTALL_DIR} ${IDIR_SWAP_UTILS}/usr/sbin
-	${CP} ${WRKINST}/sbin/mkswap ${IDIR_SWAP_UTILS}/usr/sbin
-	${CP} ${WRKINST}/sbin/swap{on,off} ${IDIR_SWAP_UTILS}/usr/sbin
+	${CP} ${WRKINST}/usr/sbin/mkswap ${IDIR_SWAP_UTILS}/usr/sbin
+	${CP} ${WRKINST}/usr/sbin/swap{on,off} ${IDIR_SWAP_UTILS}/usr/sbin
 
 mkfs-install:
 	${INSTALL_DIR} ${IDIR_MKFS}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/sbin/mkfs ${IDIR_MKFS}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/mkfs ${IDIR_MKFS}/usr/sbin
 
 mount-install:
 	${INSTALL_DIR} ${IDIR_MOUNT}/bin
