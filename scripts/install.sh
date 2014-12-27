@@ -511,7 +511,7 @@ case $target {
 
 (( quiet )) || print Extracting installation archive...
 mount_fs "$rootpart" "$R" ext4
-xz -d "$src" | (cd "$R"; tar -xpf -)
+xz -dc "$src" | (cd "$R"; tar -xpf -)
 
 if (( datafssz )); then
 	mkdir -m0755 "$R"/data
@@ -525,7 +525,7 @@ if (( datafssz )); then
 		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab 
 	;;
 	(solidrun-imx6)
-		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab
+		echo "/dev/mmcblk0p2	/data	ext4	rw	0	0" >> "$R"/etc/fstab
 	;;
 	}
 fi
