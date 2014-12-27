@@ -59,7 +59,7 @@ adk_mount() {
 case "${ACTION}" in
 add)
 	logger -t mdev "Device ${MDEV} added to the system"
-	add_check
+	adk_check
 	adk_fsck
 	adk_mount
 	;;
