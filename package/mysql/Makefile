@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mysql
-PKG_VERSION:=		5.6.19
-PKG_RELEASE:=		2
-PKG_HASH:=		80ef3aae048866539380e7e330d9f1034f0ee50ddfb9c662570132492678b09f
+PKG_VERSION:=		5.6.22
+PKG_RELEASE:=		1
+PKG_HASH:=		c4d2dfabb20a8e26e8437dff41f366520001eb031ffd77fbfcde70d0073fc9f6
 PKG_DESCR:=		mysql client library
 PKG_SECTION:=		libs/db
 PKG_DEPENDS:=		libncurses zlib libevent
@@ -34,8 +34,7 @@ CMAKE_FLAGS+=		-DSTACK_DIRECTION=1 \
 			-DCURSES_INCLUDE_PATH="$(STAGING_TARGET_DIR)/usr/include"
 
 host-configure:
-	cd ${WRKBUILD} && PATH='${HOST_PATH}' \
-		cmake .
+	cd ${WRKBUILD} && PATH='${HOST_PATH}' cmake .
 
 host-build:
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
