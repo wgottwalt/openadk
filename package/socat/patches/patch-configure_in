@@ -1,0 +1,85 @@
+--- socat-1.7.2.4.orig/configure.in	2014-03-09 09:51:39.000000000 -0500
++++ socat-1.7.2.4/configure.in	2014-12-27 10:03:10.147596595 -0600
+@@ -41,17 +41,7 @@ AC_CHECK_PROG(AR, ar, ar, gar)
+ # fail
+ AC_LANG_COMPILER_REQUIRE()
+ 
+-if test "$CC" = "gcc"; then
+-   CFLAGS="$CFLAGS -D_GNU_SOURCE -Wall -Wno-parentheses"
+-   ERRONWARN="-Werror -O0"
+-elif test "$CC" = "clang"; then
+-   CFLAGS="$CFLAGS -D_GNU_SOURCE -Wall -Wno-parentheses"
+-   ERRONWARN="-Werror -O0"
+-#elif Sun Studio
+-#   ERRONWARN="-errwarn"
+-else
+-   ERRONWARN=
+-fi
++CFLAGS="$CFLAGS -D_GNU_SOURCE -Wall -Wno-parentheses"
+ export CFLAGS
+ 
+ 
+@@ -79,8 +69,7 @@ AC_HEADER_RESOLV()
+ 
+ AC_CHECK_HEADERS(termios.h linux/if_tun.h)
+ AC_CHECK_HEADERS(net/if_dl.h)
+-AC_CHECK_HEADERS(linux/types.h)
+-AC_CHECK_HEADER(linux/errqueue.h, AC_DEFINE(HAVE_LINUX_ERRQUEUE_H), [], [#include <linux/types.h>])
++AC_CHECK_HEADERS(linux/types.h linux/errqueue.h)
+ AC_CHECK_HEADERS(sys/utsname.h sys/select.h sys/file.h)
+ AC_CHECK_HEADERS(util.h bsd/libutil.h libutil.h sys/stropts.h regex.h)
+ AC_CHECK_HEADERS(linux/fs.h linux/ext2_fs.h)
+@@ -106,7 +95,7 @@ dnl arg2: required include files beyond
+ define(AC_CHECK_PROTOTYPE_LIB,[
+ AC_MSG_CHECKING(for $1 prototype)
+ AC_CACHE_VAL(sc_cv_have_prototype_lib_$1,
+-[CFLAGS1="$CFLAGS"; CFLAGS="$ERRONWARN -Wall $CFLAGS1";
++[CFLAGS1="$CFLAGS"; CFLAGS="-Werror -Wall $CFLAGS1";
+  AC_TRY_LINK([#include "sysincludes.h"
+ $2],[return(&$1==(void *)&$1);],
+  [sc_cv_have_prototype_lib_$1=yes],
+@@ -122,7 +111,7 @@ AC_MSG_RESULT($sc_cv_have_prototype_lib_
+ dnl Check for hstrerror prototype
+ AC_MSG_CHECKING(for hstrerror prototype)
+ AC_CACHE_VAL(sc_cv_have_prototype_hstrerror,
+-[CFLAGS1="$CFLAGS"; CFLAGS="$ERRONWARN $(echo "$CFLAGS1" | sed -e 's@-Wall@@g')";
++[CFLAGS1="$CFLAGS"; CFLAGS="-Werror $(echo "$CFLAGS1" | sed -e 's@-Wall@@g')";
+  AC_TRY_COMPILE([#include <netdb.h>],[hstrerror();],
+  [sc_cv_have_prototype_hstrerror=no],
+  [sc_cv_have_prototype_hstrerror=yes]);
+@@ -1432,7 +1421,7 @@ dnl length and signedness of the type.
+ dnl do we have a -Werror option? 
+ dnl Does the test code compile with -Werror when types fit?
+ CHANCE_TO_TYPECHECK=1
+-CFLAGS1="$CFLAGS"; CFLAGS="$ERRONWARN $(echo "$CFLAGS1" | sed -e 's@-Wall@@g')"
++CFLAGS1="$CFLAGS"; CFLAGS="-Werror $(echo "$CFLAGS1" | sed -e 's@-Wall@@g')"
+ AC_TRY_COMPILE([#include <stdlib.h>],[int u; int v; exit(&u==&v);],,CHANCE_TO_TYPECHECK=0)
+ CFLAGS="$CFLAGS1"
+ 
+@@ -1443,7 +1432,7 @@ fi
+ 
+ dnl Does the test code fail to compile with -Werror when types do not fit?
+ if test "$CHANCE_TO_TYPECHECK" -ne 0; then
+- CFLAGS1="$CFLAGS"; CFLAGS="$ERRONWARN $(echo "$CFLAGS1" | sed -e 's@-Wall@@g')"
++ CFLAGS1="$CFLAGS"; CFLAGS="-Werror $(echo "$CFLAGS1" | sed -e 's@-Wall@@g')"
+  AC_TRY_COMPILE([#include <stdlib.h>],[int u; unsigned int v; exit(&u==&v);],CHANCE_TO_TYPECHECK=0,)
+  CFLAGS="$CFLAGS1"
+ fi
+@@ -1458,7 +1447,7 @@ fi
+ dnl see AC_BASIC_TYPE
+ define(AC_BASIC_TYPE_GCC,[
+ AC_CACHE_CHECK(for equivalent simple type of $2, $4,
+-[CFLAGS1="$CFLAGS"; CFLAGS="$ERRONWARN $(echo "$CFLAGS1" | sed -e 's@-Wall@@g')"
++[CFLAGS1="$CFLAGS"; CFLAGS="-Werror $(echo "$CFLAGS1" | sed -e 's@-Wall@@g')"
+  dnl echo "echo: trying short for $2" >&2
+  AC_TRY_COMPILE([$1],[$2 u; short v; return(&u==&v);],
+  [$4="1 /* short */"],
+@@ -1553,7 +1542,7 @@ dnl See AC_TYPEOF_COMPONENT
+ dnl This version is for compilers with -Werror or so: gcc, clang, Sun Studio?
+ define(AC_TYPEOF_COMPONENT_GCC,[
+ AC_CACHE_CHECK(for basic type of $2.$3, $5,
+-[CFLAGS1="$CFLAGS"; CFLAGS="$ERRONWARN $(echo "$CFLAGS1" | sed -e 's@-Wall@@g')"
++[CFLAGS1="$CFLAGS"; CFLAGS="-Werror $(echo "$CFLAGS1" | sed -e 's@-Wall@@g')"
+ AC_TRY_COMPILE([$1],[$2 u;short v; return(&u.$3==&v);],
+ [$5="1 /* short */"],
+ [AC_TRY_COMPILE([$1],[$2 u; unsigned short v; return(&u.$3==&v);],
