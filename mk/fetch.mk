@@ -55,11 +55,12 @@ endif
 # GNU make's poor excuse for loops
 define FETCH_template
 $(1):
-	@fullname='$(1)'; \
+	fullname='$(1)'; \
 	filename=$$$${fullname##*/}; \
 	mkdir -p "$$$${fullname%%/$$$$filename}"; \
 	cd "$$$${fullname%%/$$$$filename}"; \
-	if [ -z $${PKG_REPO} ];then \
+	for url in "${PKG_SITES}"; do case $$$$url in \
+	    http://*|https://*|ftp://*) \
 		for site in $${PKG_SITES} $${MASTER_SITE_BACKUP}; do \
 			: echo "$${FETCH_CMD} $$$$site$$$$filename"; \
 			rm -f "$$$$filename"; \
@@ -68,20 +69,21 @@ $(1):
 				[[ ! -e $$$$filename ]] || exit 0; \
 			fi; \
 		done; \
-	else \
+		;; \
+	   git://*) \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
-		git clone $${PKG_REPO} $${PKG_NAME}-$${PKG_VERSION}; \
+		git clone $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}/.git; \
-		if [ "$${PKG_NAME}" = "musl" ];then \
-			tar czf $${PKG_NAME}-$${PKG_VERSION}.tar.gz $${PKG_NAME}-$${PKG_VERSION}; \
-		else \
-			tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
-		fi; \
+		tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
 		: check the size here; \
 		[[ ! -e $$$$filename ]] || exit 0; \
-	fi; \
-	exit 1
+		;; \
+	   *) \
+		echo url schema not known; \
+		false ;; \
+	esac; \
+	done
 endef
 
 $(foreach distfile,${FULLDISTFILES},$(eval $(call FETCH_template,$(distfile))))
