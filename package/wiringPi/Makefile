@@ -8,6 +8,7 @@ PKG_VERSION:=		0a9fdeb29d31609ef834f050bdb8a7a65cd35e2b
 PKG_RELEASE:=		1
 PKG_DESCR:=		gpio access library for the raspberry pi
 PKG_SECTION:=		libs/misc
+PKG_HASH:=		ddc71b86f71e7e5104a89f88a68bea20122b6ea9f8c535219d180bf89502a69d
 PKG_URL:=		http://wiringpi.com/
 PKG_SITES:=		git://git.drogon.net/wiringPi
 

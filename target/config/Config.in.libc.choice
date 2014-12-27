@@ -5,8 +5,7 @@ choice
 prompt "C library"
 
 config ADK_TARGET_LIB_UCLIBC_NG
-	prompt "uClibc-ng embedded C library"
-	boolean
+	bool "uClibc-ng embedded C library"
 	select ADK_uclibc_ng
 	depends on \
 		   !ADK_TARGET_ARCH_AARCH64 && \
@@ -20,8 +19,7 @@ config ADK_TARGET_LIB_UCLIBC_NG
 	  http://uclibc-ng.org
 
 config ADK_TARGET_LIB_MUSL
-	prompt "musl C library"
-	boolean
+	bool "musl C library"
 	select ADK_musl
 	depends on !ADK_TARGET_UCLINUX
 	depends on \
@@ -36,8 +34,7 @@ config ADK_TARGET_LIB_MUSL
  	  http://musl-libc.org
 
 config ADK_TARGET_LIB_GLIBC
-	prompt "GNU C library"
-	boolean
+	bool "GNU C library"
 	select ADK_glibc
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
@@ -49,8 +46,7 @@ config ADK_TARGET_LIB_GLIBC
 	  http://www.gnu.org/libc
 
 config ADK_TARGET_LIB_UCLIBC
-	prompt "uClibc embedded C library"
-	boolean
+	bool "uClibc embedded C library"
 	select ADK_uclibc
 	depends on \
 		   !ADK_TARGET_ARCH_AARCH64 && \
@@ -70,47 +66,35 @@ choice
 prompt "C library version"
 
 config ADK_TARGET_LIB_UCLIBC_NG_GIT
-	prompt "git"
-	boolean
-	select ADK_DISABLE_CHECKSUM
+	bool "git"
 	depends on ADK_TARGET_LIB_UCLIBC_NG
 
 config ADK_TARGET_LIB_GLIBC_2_20
-	prompt "2.20"
-	boolean
+	bool "2.20"
 	depends on ADK_TARGET_LIB_GLIBC
 
 config ADK_TARGET_LIB_GLIBC_2_19
-	prompt "2.19"
-	boolean
+	bool "2.19"
 	depends on ADK_TARGET_LIB_GLIBC
 
 config ADK_TARGET_LIB_GLIBC_GIT
-	prompt "git"
-	boolean
-	select ADK_DISABLE_CHECKSUM
+	bool "git"
 	depends on ADK_TARGET_LIB_GLIBC
 
 config ADK_TARGET_LIB_UCLIBC_GIT
-	prompt "git"
-	boolean
-	select ADK_DISABLE_CHECKSUM
+	bool "git"
 	depends on ADK_TARGET_LIB_UCLIBC
 
 config ADK_TARGET_LIB_UCLIBC_0_9_33_2
-	prompt "0.9.33.2"
-	boolean
+	bool "0.9.33.2"
 	depends on ADK_TARGET_LIB_UCLIBC
 
 config ADK_TARGET_LIB_MUSL_1_1_5
-	prompt "1.1.5"
-	boolean
+	bool "1.1.5"
 	depends on ADK_TARGET_LIB_MUSL
 
 config ADK_TARGET_LIB_MUSL_GIT
-	prompt "git"
-	boolean
-	select ADK_DISABLE_CHECKSUM
+	bool "git"
 	depends on ADK_TARGET_LIB_MUSL
 
 endchoice

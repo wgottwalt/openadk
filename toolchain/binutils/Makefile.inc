@@ -35,6 +35,6 @@ endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_GIT),y)
 PKG_VERSION:=		git
 PKG_RELEASE:=		1
-PKG_REPO:=		git://sourceware.org/git/binutils-gdb.git
+PKG_SITES:=		git://sourceware.org/git/binutils-gdb.git
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif

@@ -14,28 +14,23 @@ choice
 prompt "GCC version"
 
 config ADK_TOOLCHAIN_GCC_4_4_7
-	prompt "4.4.7"
-	boolean
+	bool "4.4.7"
 	depends on ADK_TARGET_ARCH_AVR32
 
 config ADK_TOOLCHAIN_GCC_4_5_4
-	prompt "4.5.4"
-	boolean
+	bool "4.5.4"
 	depends on ADK_TARGET_ARCH_BFIN
 
 config ADK_TOOLCHAIN_GCC_4_7_4
-	prompt "4.7.4"
-	boolean
+	bool "4.7.4"
 	depends on ADK_TARGET_ARCH_CRIS || ADK_TARGET_ARCH_C6X
 
 config ADK_TOOLCHAIN_GCC_4_8_0_ARC
-	prompt "4.8.0-arc"
-	boolean
+	bool "4.8.0-arc"
 	depends on ADK_TARGET_ARCH_ARC
 
 config ADK_TOOLCHAIN_GCC_4_8_4
-	prompt "4.8.4"
-	boolean
+	bool "4.8.4"
 	depends on !ADK_TARGET_ARCH_BFIN
 	depends on !ADK_TARGET_ARCH_AARCH64
 	depends on !ADK_TARGET_ARCH_ARC
@@ -45,8 +40,7 @@ config ADK_TOOLCHAIN_GCC_4_8_4
 	depends on !ADK_TARGET_ARCH_C6X
 
 config ADK_TOOLCHAIN_GCC_4_9_2
-	prompt "4.9.2"
-	boolean
+	bool "4.9.2"
 	depends on !ADK_TARGET_ARCH_BFIN
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
@@ -54,9 +48,7 @@ config ADK_TOOLCHAIN_GCC_4_9_2
 	depends on !ADK_TARGET_ARCH_C6X
 
 config ADK_TOOLCHAIN_GCC_GIT
-	prompt "git"
-	boolean
-	select ADK_DISABLE_CHECKSUM
+	bool "git"
 	depends on !ADK_TARGET_ARCH_BFIN
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
@@ -68,25 +60,21 @@ choice
 prompt "Binutils version"
 
 config ADK_TOOLCHAIN_BINUTILS_2_20_1
-	prompt "2.20.1"
-	boolean
+	bool "2.20.1"
 	depends on ADK_TARGET_ARCH_AVR32
 
 config ADK_TOOLCHAIN_BINUTILS_2_22
-	prompt "2.22"
-	boolean
+	bool "2.22"
 	depends on ADK_TARGET_ARCH_BFIN \
 		|| ADK_TARGET_ARCH_CRIS \
 		|| ADK_TARGET_ARCH_M68K
 
 config ADK_TOOLCHAIN_BINUTILS_2_23_ARC
-	prompt "2.23-arc"
-	boolean
+	bool "2.23-arc"
 	depends on ADK_TARGET_ARCH_ARC
 
 config ADK_TOOLCHAIN_BINUTILS_2_24
-	prompt "2.24"
-	boolean
+	bool "2.24"
 	depends on !ADK_TARGET_ARCH_BFIN
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
@@ -94,9 +82,7 @@ config ADK_TOOLCHAIN_BINUTILS_2_24
 	depends on !ADK_TARGET_ARCH_M68K
 
 config ADK_TOOLCHAIN_BINUTILS_GIT
-	prompt "git"
-	boolean
-	select ADK_DISABLE_CHECKSUM
+	bool "git"
 	depends on !ADK_TARGET_ARCH_BFIN
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
@@ -114,7 +100,7 @@ config ADK_TARGET_CFLAGS_OPT
 
 choice
 prompt "Optimization level"
-boolean
+bool
 
 config ADK_TARGET_CFLAGS_OPT_OS
 	prompt "optimize for size (-Os)"
@@ -131,79 +117,57 @@ config ADK_TARGET_CFLAGS_OPT_O0
 endchoice
 
 config ADK_TARGET_ARCH_ARM_WITH_THUMB
-	prompt "Use THUMB2 only mode"
-	boolean
+	bool "Use THUMB2 only mode"
 	select ADK_KERNEL_THUMB2_KERNEL
-	default n
 	depends on ADK_TARGET_ARCH_ARM
 	help
 	  Experimental option. Use with care.
 
 config ADK_TOOLCHAIN_WITH_SSP
-	boolean
-	default n
+	bool
 
 config ADK_TARGET_USE_SSP
-	prompt "Use Stack Smashing Protection for all packages"
- 	boolean	
+	bool "Use Stack Smashing Protection for all packages"
 	select ADK_TOOLCHAIN_WITH_SSP
-	default n
 
 config ADK_TARGET_USE_PIE
-	prompt "Use Position Independent Executable for packages with have support for it"
-	boolean
-	default n
+	bool "Use Position Independent Executable for packages with have support for it"
 
 config ADK_TOOLCHAIN_WITH_LTO
-	boolean
-	default n
+	bool
 
 config ADK_TARGET_USE_LTO
-	prompt "Use Link Time Optimization for all packages"
-	boolean
+	bool "Use Link Time Optimization for all packages"
 	select ADK_TOOLCHAIN_WITH_LTO
-	default n
 
 config ADK_TARGET_USE_LD_RELRO
-	prompt "Use LD read-only (-z relro) relocations for all packages"
-	boolean
-	default n
+	bool "Use LD read-only (-z relro) relocations for all packages"
 
 config ADK_TARGET_USE_LD_BIND_NOW
-	prompt "Use LD bind now (-z now) for all packages"
-	boolean
-	default n
+	bool "Use LD bind now (-z now) for all packages"
 
 config ADK_TARGET_USE_LD_GC
-	prompt "Use LD garbage collection for all packages"
-	boolean
-	default n
+	bool "Use LD garbage collection for all packages"
 
 config ADK_TOOLCHAIN_WITH_GOLD
-	boolean
-	default n
+	bool
 
 config ADK_TARGET_USE_GOLD
-	prompt "Use GOLD as linker for all packages"
-	boolean
+	bool "Use GOLD as linker for all packages"
 	select ADK_TOOLCHAIN_WITH_GOLD
 	depends on !ADK_TARGET_ARCH_MIPS
 	depends on !ADK_TARGET_ARCH_MIPS64
-	default n
 
 config ADK_TARGET_USE_GNU_HASHSTYLE
-	prompt "Use GNU hashstyle for all packages"
-	boolean
+	bool "Use GNU hashstyle for all packages"
 	depends on !ADK_TARGET_ARCH_MIPS
 	depends on !ADK_TARGET_ARCH_MIPS64
-	default n
 	help
 	  Performance optimization for applications with lot of shared library
 	  dependencies. See http://www.akkadia.org/drepper/dsohowto.pdf
 
 config ADK_DEBUG
 	bool "Compile applications with debug support and do not strip"
-	default n
 	help
 	  All software for the target will be compiled with:
 	  -fno-omit-frame-pointer
@@ -215,7 +179,6 @@ config ADK_DEBUG
 config ADK_DEBUG_STRIP
 	bool "strip target binaries/libraries for gdbserver usage"
 	depends on ADK_DEBUG
-	default n
 	help
 	  All packages and C library will be compiled with debug information, 
 	  but stripped for the target.
@@ -229,14 +192,12 @@ config ADK_TARGET_USE_STATIC_LIBS
 	  at runtime. Full static builds are only supported for musl libc.
 
 config ADK_STATIC_TOOLCHAIN
-	boolean "Build the toolchain components statically"
-	default n
+	bool "Build the toolchain components statically"
 	help
 	  If you want to create more portable toolchains, build them static.
 
 config ADK_UCLIBC_TEST
-	prompt "Build testsuite for C library"
-	boolean
+	bool "Build testsuite for C library"
 	depends on ADK_TARGET_LIB_UCLIBC_NG || ADK_TARGET_LIB_UCLIBC
 	default y
 

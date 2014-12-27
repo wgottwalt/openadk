@@ -28,7 +28,8 @@ ifeq ($(strip ${NO_CHECKSUM}),)
 ${_CHECKSUM_COOKIE}: ${FULLDISTFILES}
 	-rm -rf ${WRKDIR}
 ifneq ($(ADK_DISABLE_CHECKSUM),y)
-	@OK=n; \
+	@if [ ! -e ${FULLDISTFILES}.nohash ]; then \
+	OK=n; \
 	allsums="$(strip ${PKG_HASH})"; \
 	(shasum -a 256 ${FULLDISTFILES}; echo exit) | while read sum name; do \
 		if [[ $$sum = exit ]]; then \
@@ -46,7 +47,8 @@ ifneq ($(ADK_DISABLE_CHECKSUM),y)
 		echo >&2 ":---> should be '$$cursum'"; \
 		echo >&2 ":---> really is '$$sum'"; \
 		OK=0; \
-	done
+	done; \
+	fi
 endif
 	mkdir -p ${WRKDIR}
 	touch ${_CHECKSUM_COOKIE}
@@ -55,7 +57,7 @@ endif
 # GNU make's poor excuse for loops
 define FETCH_template
 $(1):
-	fullname='$(1)'; \
+	@fullname='$(1)'; \
 	filename=$$$${fullname##*/}; \
 	mkdir -p "$$$${fullname%%/$$$$filename}"; \
 	cd "$$$${fullname%%/$$$$filename}"; \
@@ -73,6 +75,14 @@ $(1):
 	   git://*) \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
 		git clone $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
+		if [ $$$$(echo $${PKG_VERSION}|wc -c) -eq 41 ]; then \
+			(cd $${PKG_NAME}-$${PKG_VERSION}; \
+			echo "Checking out $${PKG_VERSION}"; \
+			git checkout -q $${PKG_VERSION}); \
+		else \
+			echo "Using head, disabling checksum check"; \
+			touch $$$${filename}.nohash; \
+		fi; \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}/.git; \
 		tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \

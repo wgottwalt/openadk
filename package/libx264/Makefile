@@ -4,14 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libx264
-# actually is git checkout from 22.09.2014
-PKG_VERSION:=		1.0.3
+PKG_VERSION:=		40bb56814e56ed342040bdbf30258aab39ee9e89
 PKG_RELEASE:=		1
-PKG_HASH:=		a87c87fd45915557c42e8534831310c3149a0addf4e7b0b337721e57ac4fe7df
+PKG_HASH:=		88f63bd104b9127ebbaa6a88931c9f02d84f0dd4b5b3994ff38852735f60ead3
 PKG_DESCR:=		h264 encoding library
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.videolan.org/developers/x264.html
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		git://git.videolan.org/x264.git
 PKG_OPTS:=		dev
 
 PKG_BUILDDEP_IBM_X40:=	yasm-host
