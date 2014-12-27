@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libnet
 PKG_VERSION:=		1.1.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		710296fe424a49344e5fcc0d09e53317
+PKG_HASH:=		d392bb5825c4b6b672fc93a0268433c86dc964e1500c279dc6d0711ea6ec467a
 PKG_DESCR:=		low-level packet creation library
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libpcap libstdcxx

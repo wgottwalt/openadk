@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXaw
 PKG_VERSION:=		1.0.11
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		c487a810a8a9b0eb5091f382790b4e75
+PKG_HASH:=		ef4dd840b2896401c75d68cf0296a7243b5953f22261f8e8c4a92b53e771fc90
 PKG_DESCR:=		athena widget library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXext libXmu libXpm

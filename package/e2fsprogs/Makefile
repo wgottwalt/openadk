@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		e2fsprogs
 PKG_VERSION:=		1.42.10
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		62bfe2fe0a194c5c37165789ac2825a8
+PKG_HASH:=		7b6e85c666d8fdd6062c75ba953de0e5481673bebef5f40f749a52a46476e29f
 PKG_DESCR:=		ext2/3/4 filesystem utilities
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libpthread

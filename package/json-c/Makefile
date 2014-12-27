@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		json-c
 PKG_VERSION:=		0.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		aa02367d2f7a830bf1e3376f77881e98
+PKG_HASH:=		28dfc65145dc0d4df1dfe7701ac173c4e5f9347176c8983edbfac9149494448c
 PKG_DESCR:=		json library
 PKG_SECTION:=		libs/data
 PKG_URL:=		https://github.com/json-c/json-c/wiki

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libcli
 PKG_VERSION:=		1.9.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1b07b09e2840f910defde66afa28fbe7
+PKG_HASH:=		1160377886d50b979f11e247d172156b16ccf0124b4ce5a212d4cec5eb25ef30
 PKG_DESCR:=		cisco-like command-line interface library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://sites.dparrish.com/libcli

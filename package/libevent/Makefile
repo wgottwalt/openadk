@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libevent
 PKG_VERSION:=		2.0.21
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b2405cc9ebf264aa47ff615d9de527a2
+PKG_HASH:=		22a530a8a5ba1cb9c080cba033206b17dacd21437762155c6d30ee6469f574f5
 PKG_DESCR:=		event notification library for event-driven network servers
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://libevent.org/

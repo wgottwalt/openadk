@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-yaml-xs
 PKG_VERSION:=		0.41
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		951ea0542ed7228ba285196e437c8d89
+PKG_HASH:=		9a654427a3a63de434c6d03b18bba144cc7ba0f0e61a7100c6d08d77a90145ce
 PKG_DESCR:=		yaml serialization using xs and libyaml
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl

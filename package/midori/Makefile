@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		midori
 PKG_VERSION:=		0.5.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5815eac39f4d9511ce2c71a81567647f
+PKG_HASH:=		2fe13e17c310a2277c52e4fad932614963410305d10a48df0f0c5d210ebd51c5
 PKG_DESCR:=		graphical web browser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libnotify webkitgtk

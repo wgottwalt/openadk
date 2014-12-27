@@ -7,7 +7,7 @@ PKG_NAME:=		motion
 # actually a svn version from 25.06.2014 checkout
 PKG_VERSION:=		4.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		aa96ebe076d9f46622b0a157e38acc2b
+PKG_HASH:=		ff2931b0af037da126fed3e496430944132528132e71473aae478ff2e7f78e0d
 PKG_DESCR:=		webcam motion sensing and logging
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		libjpeg-turbo libpthread libsdl

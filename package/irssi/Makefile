@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		irssi
 PKG_VERSION:=		0.8.16
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5a8ee7144b63fa01747d6f400c40ef34
+PKG_HASH:=		688b1761d99662075f1882268c95e843186cb1c2e6e696c1623b02467f2602a5
 PKG_DESCR:=		irc text client
 PKG_SECTION:=		app/chat
 PKG_DEPENDS:=		glib libncurses

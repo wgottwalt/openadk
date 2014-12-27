@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-tie-refhash
 PKG_VERSION:=		1.39
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		179d4d02924bd9716e2ffe585cbd36c8
+PKG_HASH:=		b0b80ef571e7dadb726b8214f7352a932a8fa82af29072895aa1aadc89f48bec
 PKG_DESCR:=		use references as hash keys
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl

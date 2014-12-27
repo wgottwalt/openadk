@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		mini-sendmail
 PKG_VERSION:=		1.3.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fb1585d2ad81c519a26d83bfd783dee8
+PKG_HASH:=		b9f7c20e2d148c8b9369cf8ca65a2b0a72ff29b377f0cdceb5f1d4e184fedd34
 PKG_DESCR:=		small sendmail-compatible mail forwarder
 PKG_SECTION:=		net/mail
 PKG_URL:=		http://www.acme.com/software/mini_sendmail/

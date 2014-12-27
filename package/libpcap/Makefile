@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libpcap
 PKG_VERSION:=		1.6.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5eb05edf6b6c6e63d536d1c9fbfb2f7c
+PKG_HASH:=		116cbb3ac9e96d5dd7b39638a2f894a67fa3dcf06d794e6dae2b9a942ad13476
 PKG_DESCR:=		low-level packet capture library
 PKG_SECTION:=		libs/net
 PKG_BUILDDEP:=		m4-host flex-host bison-host libnl

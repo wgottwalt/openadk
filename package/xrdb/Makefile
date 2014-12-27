@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xrdb
 PKG_VERSION:=		1.0.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		146c009e7abc52b611db4cac4883488e
+PKG_HASH:=		1e55d713ed09dbc021dcf55b45c413d2b61c990ca5f164c01b0e781ef1a6c798
 PKG_DESCR:=		resource database management tools
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libx11 libxmu

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		traceroute
 PKG_VERSION:=		2.0.19
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		dd15d563993020d088ba02e8f987deaf
+PKG_HASH:=		082be58ec3e6fe9717a52160150e2f6d52fa90f8ecb82abf3b363c8150b0607e
 PKG_DESCR:=		utility to trace the route of ip packets
 PKG_SECTION:=		net/debug
 PKG_URL:=		http://traceroute.sourceforge.net/

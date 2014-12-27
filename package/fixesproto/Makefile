@@ -8,7 +8,7 @@ PKG_VERSION:=		5.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		xfixes extension headers
 PKG_SECTION:=		dev/header
-PKG_MD5SUM:=		1b3115574cadd4cbea1f197faa7c1de4
+PKG_HASH:=		67865a0e3cdc7dec1fd676f0927f7011ad4036c18eb320a2b41dbd56282f33b8
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=              dev devonly
 

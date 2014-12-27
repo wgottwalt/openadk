@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		lvm
 PKG_VERSION:=		2.02.111
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		02487ab2a9e02d1ee76fe217183df28a
+PKG_HASH:=		6d8f3e72fe07f614315d8e0c2d9f93c5fc7a4360d14e4f9b805750e21593dd24
 PKG_DESCR:=		logical volume management
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libdevmapper libncurses

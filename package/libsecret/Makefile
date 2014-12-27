@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libsecret
 PKG_VERSION:=		0.18
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		279d723cd005e80d1d304f74a3488acc
+PKG_HASH:=		0c73aa762dbd1e38ba7b03de350e23ce818cb810b0784375e95ef61e004b02e3
 PKG_DESCR:=		library for storing and retrieving passwords
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgcrypt glib

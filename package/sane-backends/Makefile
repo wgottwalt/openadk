@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		sane-backends
 PKG_VERSION:=		1.0.22
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		fadf56a60f4776bfb24491f66b617cf5
+PKG_HASH:=		9f84a16800497f0b79a278531bb1a0f438de6ce8cf509fefc65a252e29f90c54
 PKG_DESCR:=		scanner access now easy
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libpthread

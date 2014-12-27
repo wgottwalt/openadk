@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libmpeg2
 PKG_VERSION:=		0.5.1
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		0f92c7454e58379b4a5a378485bbd8ef
+PKG_HASH:=		dee22e893cb5fc2b2b6ebd60b88478ab8556cb3b93f9a0d7ce8f3b61851871d4
 PKG_DESCR:=		mpeg1 and mpeg2 decoding library
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://libmpeg2.sourceforge.net/

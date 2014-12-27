@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		zile
 PKG_VERSION:=		2.4.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7a460ccec64e3bec2835697b2eae533c
+PKG_HASH:=		1fd27bbddc61491b1fbb29a345d0d344734aa9e80cfa07b02892eedf831fa9cc
 PKG_DESCR:=		tiny emacs clone
 PKG_SECTION:=		app/editor
 PKG_DEPENDS:=		libgc

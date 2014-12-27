@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		mrd6
 PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		93ada53bb414b9d622f80a717bc2694b
+PKG_HASH:=		4bbdb998a735b2f7b995ddd38382eb2c3ba13559742cf7b4abd40a8dbe48ba37
 PKG_DESCR:=		ipv6 multicast routing daemon
 PKG_SECTION:=		net/ipv6
 PKG_SITES:=		http://www.openadk.org/distfiles/

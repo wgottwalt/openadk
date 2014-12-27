@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		gradm
 PKG_VERSION:=		3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a03b07fe0de47cac72f3edd4cf42d811
+PKG_HASH:=		4ee8a4e3a658f14b58c55fb8c5a9d3234e0ec87cf90a886499918553a15c557a
 PKG_DESCR:=		rbac administration utility
 PKG_SECTION:=		sys/misc
 PKG_URL:=		http://grsecurity.net/

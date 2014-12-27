@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libvirt
 PKG_VERSION:=		1.2.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		da7a9ca519df45a460659189fe0024e6
+PKG_HASH:=		e43ac5f6b2baeafcd01777be03a897e636f8d48c0cdfb4c4cbb80d45faa9e875
 PKG_DESCR:=		virtualization api
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		libxml2 gnutls python2 libpcap parted eudev qemu

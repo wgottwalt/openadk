@@ -8,7 +8,7 @@ PKG_NAME:=		squeezelite
 # from https://code.google.com/p/squeezelite/
 PKG_VERSION:=		1.6.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		aaf326f181c7043864ac0b272297e15c
+PKG_HASH:=		26ba3220b5e3c029feffadd15905296551898ff6953098d05bc7e6598e0cf93b
 PKG_DESCR:=		headless squeezebox emulator
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libflac alsa-lib libvorbis libmad

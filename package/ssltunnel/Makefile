@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ssltunnel
 PKG_VERSION:=		1.16
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4039b50566a33a4077883ea974e476d5
+PKG_HASH:=		e801ab170f364ba2997fb276d16eba1f75bffcc0fc5a1e97ff0b247bf63b0570
 PKG_DESCR:=		ppp over ssl vpn tool
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libopenssl ppp

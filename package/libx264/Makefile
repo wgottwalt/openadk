@@ -7,7 +7,7 @@ PKG_NAME:=		libx264
 # actually is git checkout from 22.09.2014
 PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1bb600d270be1f71ddf578dde3f944ef
+PKG_HASH:=		a87c87fd45915557c42e8534831310c3149a0addf4e7b0b337721e57ac4fe7df
 PKG_DESCR:=		h264 encoding library
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.videolan.org/developers/x264.html

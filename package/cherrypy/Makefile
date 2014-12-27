@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		CherryPy
 PKG_VERSION:=		3.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4ac4af5ac21a893f07221cbd7ec4be11
+PKG_HASH:=		f8829bf1b4f613833b690b33b2fd00b1da4ef98df3c70240f78ee91b70f4a5a2
 PKG_DESCR:=		python web framework
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		python2

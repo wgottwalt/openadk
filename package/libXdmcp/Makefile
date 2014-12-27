@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXdmcp
 PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		194f30d2bb67b23dc33351e128db40a9
+PKG_HASH:=		ae6e677911e2696a2976b2f565f116ba9ce99e89cc7e140c4a791270c3aff96f
 PKG_DESCR:=		display manager control protocol library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		net-tools
 PKG_VERSION:=		1.60
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		888774accab40217dde927e21979c165
+PKG_HASH:=		7ae4dd6d44d6715f18e10559ffd270511b6e55a8900ca54fbebafe0ae6cf7d7b
 PKG_DESCR:=		arp networking tool
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://net-tools.sourceforge.net/

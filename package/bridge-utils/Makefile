@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		bridge-utils
 PKG_VERSION:=		1.5
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		ec7b381160b340648dede58c31bb2238
+PKG_HASH:=		42f9e5fb8f6c52e63a98a43b81bd281c227c529f194913e1c51ec48a393b6688
 PKG_DESCR:=		ethernet bridging tools
 PKG_SECTION:=		net/route
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Bridge

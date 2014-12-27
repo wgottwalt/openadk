@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		squashfs
 PKG_VERSION:=		4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1b7a781fb4cf8938842279bd3e8ee852
+PKG_HASH:=		d9e0195aa922dbb665ed322b9aaa96e04a476ee650f39bbeadb0d00b24022e96
 PKG_DESCR:=		squashfs filesystem utilities
 HOST_BUILDDEP:=		xz-host
 PKG_SECTION:=		sys/fs

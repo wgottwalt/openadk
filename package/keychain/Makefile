@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		keychain
 PKG_VERSION:=		2.7.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		07c622833192189f483cbaec287f9704
+PKG_HASH:=		1107fe3f78f6429d4861d64c5666f068f159326d22ab80a8ed0948cb25375191
 PKG_DESCR:=		manage ssh and gpg keys in a secure manner
 PKG_SECTION:=		app/crypto
 PKG_URL:=		http://www.funtoo.org/en/security/keychain/intro/

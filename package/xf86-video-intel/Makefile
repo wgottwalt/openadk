@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xf86-video-intel
 PKG_VERSION:=		2.99.911
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		de51db2408a222ef1c52725f5aa2f185
+PKG_HASH:=		331864088fd2f7650811711fedbbc0e50e2703f8db4dc04f8a28b67c1b63d82f
 PKG_DESCR:=		x11 driver for intel vga chips
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm mesalib libstdcxx

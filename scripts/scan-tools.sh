@@ -113,6 +113,12 @@ if [[ $X != *@(Native compiler works)* ]]; then
 fi
 rm test 2>/dev/null
 
+if ! which shasum >/dev/null 2>&1; then
+	echo You must install shasum to continue.
+	echo
+	out=1
+fi
+
 if ! which gzip >/dev/null 2>&1; then
 	echo You must install gzip to continue.
 	echo

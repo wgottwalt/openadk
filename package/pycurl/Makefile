@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		pycurl
 PKG_VERSION:=		7.19.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		518be33976dbc6838e42495ada64b43f
+PKG_HASH:=		7a9e793b9181654d5eef3f6d22c244c57d2b51d38feb4c1b71d68efda99b0547
 PKG_DESCR:=		python module for fetching of files
 PKG_SECTION:=		dev/python
 PKG_BUILDDEP:=		python2 curl

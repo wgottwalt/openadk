@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libhugetlbfs
 PKG_VERSION:=		2.11
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		35e68f16b704f2e339622a8ca07fdee0
+PKG_HASH:=		e02a612eb64386d16270ad4f8ea0196f941f35eba3f651683564d149195ad0bb
 PKG_DESCR:=		easy hugepage access
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://libhugetlbfs.ozlabs.org/

@@ -8,7 +8,7 @@ PKG_VERSION:=		2.1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		x dri protocol headers
 PKG_SECTION:=		dev/header
-PKG_MD5SUM:=		309d552732666c3333d7dc63e80d042f
+PKG_HASH:=		d23f12deffd03e582e897ed6a7df3ea7f66ee8577f0f61374dcdf2ebffdce1be
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		eventlog
 PKG_VERSION:=		0.2.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a044b1cd097613c3c1d09c4a7de51c43
+PKG_HASH:=		f55695b354e5f16ef0a30cddc64ffe70215aa75fb290b7001b9839f617f0201d
 PKG_DESCR:=		eventlog library for syslog-ng
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.balabit.com

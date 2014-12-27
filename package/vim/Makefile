@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		vim
 PKG_VERSION:=		7.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		607e135c559be642f210094ad023dc65
+PKG_HASH:=		d0f5a6d2c439f02d97fa21bd9121f4c5abb1f6cd8b5a79d3ca82867495734ade
 PKG_DESCR:=		very popular text editor
 PKG_SECTION:=		app/editor
 PKG_DEPENDS:=		libncurses
@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.vim.org/
 PKG_SITES:=		ftp://ftp.vim.org/pub/vim/unix/
 
-DISTFILES=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 WRKDIST=		${WRKDIR}/vim74
 WRKSRC=			${WRKDIST}/src
 

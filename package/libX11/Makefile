@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libX11
 PKG_VERSION:=		1.6.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7e17129e1678355d8268883ee31a6edf
+PKG_HASH:=		b93739bcd517723121f508bcaf0c213c1bae9c5eacffdca571ff0d86c30ead3e
 PKG_DESCR:=		x11 client-side library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto-host xextproto-host libXau-host libpthread-stubs-host

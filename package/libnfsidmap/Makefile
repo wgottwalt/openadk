@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libnfsidmap
 PKG_VERSION:=		0.25
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		2ac4893c92716add1a1447ae01df77ab
+PKG_HASH:=		656d245d84400e1030f8f40a5a27da76370690c4a932baf249110f047fe7efcf
 PKG_DESCR:=		idmap library for nfsv4
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://www.citi.umich.edu/projects/nfsv4/linux/

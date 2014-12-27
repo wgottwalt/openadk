@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		keyboard protocol headers
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		kbproto-host
-PKG_MD5SUM:=		9c650b7947fe59b3f144518400e8d029
+PKG_HASH:=		01fd22286ca9c2a93ca7bb686dbb2f3c108ceb944cd3dfdc9ceeb50f9b7f4505
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

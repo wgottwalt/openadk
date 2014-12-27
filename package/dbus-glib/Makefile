@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		dbus-glib
 PKG_VERSION:=		0.102
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f76b8558fd575d0106c3a556eaa49184
+PKG_HASH:=		6964ed585bb8149a14ab744b5ded5e77cf71ec5446e6dcc5fcf5eebcc52df29c
 PKG_DESCR:=		glib bindings for dbus
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libdbus glib

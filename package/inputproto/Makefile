@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		input extension headers
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		inputproto-host
-PKG_MD5SUM:=		5ea366d32a9a78d6204a47ea35d9dc5c
+PKG_HASH:=		98e8ab87fb71080b28536d749aa942bdad13d860d5eb3e1271084906cda711e9
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

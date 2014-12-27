@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		neon
 PKG_VERSION:=		0.29.5
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		ff369e69ef0f0143beb5626164e87ae2
+PKG_HASH:=		dea3c52b9f3f915651c6279c76758acf7c427727e8b9b0130f8b138f24012290
 PKG_DESCR:=		http and webdav library
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpthread libxml2 libopenssl zlib

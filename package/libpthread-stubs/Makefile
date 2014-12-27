@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libpthread-stubs
 PKG_VERSION:=		0.3
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		a09d928c4af54fe5436002345ef71138
+PKG_HASH:=		3031f466cf0b06de6b3ccbf2019d15c4fcf75229b7d226a711bc1885b3a82cde
 PKG_DESCR:=		pthread stubs
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		libpthread-stubs-host

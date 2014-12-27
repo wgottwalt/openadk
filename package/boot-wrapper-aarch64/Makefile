@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		boot-wrapper-aarch64
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2ffdbf8c05854e3b855314d9ac21bbc4
+PKG_HASH:=		e8de5beb585d46c2aec4b30aa8ba96b21bed5749ca1bcdd0b2fdaf95dab7ab4c
 PKG_DESCR:=		boot-wrapper for aarch64
 PKG_SECTION:=		base/boot
 PKG_SITES:=		http://www.openadk.org/distfiles/

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		dialog
 PKG_VERSION:=		1.2-20140219
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4ed9b2f1162eb7706857338d11e70f8e
+PKG_HASH:=		ccf07eedf147ac901aff1d984ab63ddd6986b615ddf67435f270d5462ea4ca81
 PKG_DESCR:=		text gui interface
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libncurses

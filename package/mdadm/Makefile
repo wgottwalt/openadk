@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		mdadm
 PKG_VERSION:=		3.3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4227d48de62dfb217c92fa0c54171bbe
+PKG_HASH:=		d8c74112cfd77bdc1dbc1291fe8d9243c76d91bfa276fcb95f2a75ca7717ab02
 PKG_DESCR:=		tool for managing software raid arrays
 PKG_SECTION:=		sys/fs
 PKG_URL:=		http://neil.brown.name/blog/mdadm

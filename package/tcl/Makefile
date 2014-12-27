@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		tcl
 PKG_VERSION:=		8.6.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		aae4b701ee527c6e4e1a6f9c7399882e
+PKG_HASH:=		16ee769248e64ba1cae6b4834fcc4e4edd7470d881410e8d58f7dd1434343514
 PKG_DESCR:=		tcl scripting language
 PKG_SECTION:=		dev/lang
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tcl/}

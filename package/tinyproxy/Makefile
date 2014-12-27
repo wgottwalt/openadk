@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		tinyproxy
 PKG_VERSION:=		1.8.3
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		eca927f7f6a9ce8394b2b256361978a7
+PKG_HASH:=		682416c8f0f733a8106c87bb395c631222569751fe4617bc381d0499b0f0c017
 PKG_DESCR:=		lightweight http and https proxy
 PKG_SECTION:=		net/proxy
 PKG_URL:=		https://www.banu.com/tinyproxy/

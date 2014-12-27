@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libIDL
 PKG_VERSION:=		0.8.14
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		531fbc1b40b80dd1d6f3b5e76b99067c
+PKG_HASH:=		bca99570f1ab453e11ae627b209561019cde5aaa98f71f43cc6da048d3bc7e72
 PKG_DESCR:=		libraries for interface definition language files
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib

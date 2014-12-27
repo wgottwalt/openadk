@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		lsscsi
 PKG_VERSION:=		0.27
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		33ab2927a9e567a47905e6a618c17859
+PKG_HASH:=		6b8254f7b241ff0c3690e168b11a216d105962263fdd5a3da6dfb4cba5a0d9b4
 PKG_DESCR:=		list scsi devices
 PKG_SECTION:=		sys/hw
 PKG_URL:=		http://sg.danny.cz/scsi/lsscsi.html

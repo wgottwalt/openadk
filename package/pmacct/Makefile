@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		pmacct
 PKG_VERSION:=		0.12.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3d10f9301a17f034a0f221490a99a5d0
+PKG_HASH:=		5252d7df24e9baefcc5a36ed66e9cac5ae505c9d502c8cffb96e6808acbb2fe8
 PKG_DESCR:=		ip accounting tools
 PKG_SECTION:=		net/acct
 PKG_DEPENDS:=		libpcap

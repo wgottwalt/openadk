@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-audio-scan
 PKG_VERSION:=		0.93
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		afcdbf8641e1a572a387fe097e3897ee
+PKG_HASH:=		5a92f4fce0c5dc3f4f76b2266d484466ff6dfc64340371c392e678324465dc0e
 PKG_DESCR:=		metadata and tag reader for all common audio file formats
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl zlib

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		syslog-ng
 PKG_VERSION:=		3.5.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ff3bf223ebafbaa92b69a2d5b729f368
+PKG_HASH:=		92c6969e4172b4fd32390f80043b4de7b116f29989d8c2e5a8a687ee6dcd6f66
 PKG_DESCR:=		powerful syslog daemon
 PKG_SECTION:=		sys/misc
 PKG_BUILDDEP:=		eventlog

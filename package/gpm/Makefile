@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		gpm
 PKG_VERSION:=		1.20.7
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		e9a4ba2711753c89b37950aada7aed4a
+PKG_HASH:=		c7e4661c24e05ae13547176b649bac8e3a0db2575f7dd57559f9e0b509f90f49
 PKG_DESCR:=		console mouse support
 PKG_SECTION:=		sys/hw
 PKG_URL:=		http://launchpad.net/gpm

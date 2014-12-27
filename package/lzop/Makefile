@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		lzop
 PKG_VERSION:=		1.03
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		006c5e27fb78cdd14a628fdfa5aa1905
+PKG_HASH:=		c1425b8c77d49f5a679d5a126c90ea6ad99585a55e335a613cae59e909dbb2c9
 PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
 PKG_DEPENDS:=		liblzo

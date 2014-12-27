@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libcroco
 PKG_VERSION:=		0.6.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		767e73c4174f75b99695d4530fd9bb80
+PKG_HASH:=		ea6e1b858c55219cefd7109756bff5bc1a774ba7a55f7d3ccd734d6b871b8570
 PKG_DESCR:=		css2 parsing and manipulation library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		https://github.com/GNOME/libcroco

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		flex
 PKG_VERSION:=		2.5.35
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		201d3f38758d95436cbc64903386de0b
+PKG_HASH:=		a6fe3ac80b5f89769d833efde712f95bb0255bcf9089fa324636a9b8a005c717
 PKG_DESCR:=		fast lexical analyzer
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		m4-host

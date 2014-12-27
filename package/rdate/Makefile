@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		rdate
 PKG_VERSION:=		20070817
 PKG_RELEASE:=		4
-PKG_MD5SUM:=		9a6489d7de4311678a3fab001bb503df
+PKG_HASH:=		905fc261c5e15da299895027326a0ea7b45b947f8df7ad82971d778061869e4b
 PKG_DESCR:=		small ntp client
 PKG_SECTION:=		net/ntp
 PKG_SITES:=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/rdate/}

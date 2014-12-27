@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		apr
 PKG_VERSION:=		1.5.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d3538d67e6455f48cc935d8f0a50a1c3
+PKG_HASH:=		94b1c9d9835cc9e902838b95d62ecc9a39b698f23e3e706812ec65a78ba41af7
 PKG_DESCR:=		apache portable runtime library
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpthread

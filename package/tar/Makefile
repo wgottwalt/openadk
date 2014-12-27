@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		tar
 PKG_VERSION:=		1.26
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0ced6f20b9fa1bea588005b5ad4b52c1
+PKG_HASH:=		8e7959b8edfa1eeed75819d887a2da2412a4467ef7312f7242cfc6907854b332
 PKG_DESCR:=		archiving application
 PKG_SECTION:=		app/archive
 PKG_URL:=		http://mirrors.kernel.org/gnu/tar/

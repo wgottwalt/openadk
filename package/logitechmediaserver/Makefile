@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		logitechmediaserver
 PKG_VERSION:=		7.9.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4e1bcfd9fc2e4aaeeb19841e638787b6
+PKG_HASH:=		f2b6dae92e76d9f21742adf74e83447e98e14f2a62ea2883208130a251fe2112
 PKG_DESCR:=		popular media server
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		perl p5-xml-parser p5-dbi p5-ev p5-html-parser

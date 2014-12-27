@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		vsftpd
 PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		8b00c749719089401315bd3c44dddbb2
+PKG_HASH:=		be46f0e2c5528fe021fafc8dab1ecfea0c1f183063a06977f8537fcd0b195e56
 PKG_DESCR:=		fast and secure ftp server
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libcap

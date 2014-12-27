@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		drbd
 PKG_VERSION:=		8.4.4
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		b51815343c1a9151e2936b3b97520388
+PKG_HASH:=		a056219c5c23b079c3354179f7a1b9f55d47e573a4cd3178f2ef4c15604288f0
 PKG_DESCR:=		admin tools for drbd
 PKG_SECTION:=		sys/fs
 PKG_URL:=		http://www.drbd.org/

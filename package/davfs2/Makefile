@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		davfs2
 PKG_VERSION:=		1.4.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c75f9d7d260e7364362b89beba2b3186
+PKG_HASH:=		50c0ee2a12e8d09fc6a852d32bdfebb1f784939433a85f05254bc7ef28cff044
 PKG_DESCR:=		webdav filesystem
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		fuse-utils neon

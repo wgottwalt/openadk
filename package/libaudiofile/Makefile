@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		audiofile
 PKG_VERSION:=		0.3.6
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		2731d79bec0acef3d30d2fc86b0b72fd
+PKG_HASH:=		cdc60df19ab08bfe55344395739bb08f50fc15c92da3962fac334d3bff116965
 PKG_DESCR:=		audiofile library
 PKG_SECTION:=		libs/audio
 PKG_URL:=		http://audiofile.68k.org/

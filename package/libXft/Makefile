@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXft
 PKG_VERSION:=		2.3.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		946a157090eec5c3041cf17530d93f59
+PKG_HASH:=		df3765d1454bb148fc0886f0723dc9f40430243a06e94414475c6af2a72e8915
 PKG_DESCR:=		freetype library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXrender fontconfig

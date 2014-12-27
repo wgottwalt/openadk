@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xf86-video-ati
 PKG_VERSION:=		7.4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6bb71cff9ad9c5c7b258b2b6c56fdc95
+PKG_HASH:=		dc0a00d1ea367e5f3e2baa0c1a0f8330c217f1d8c9d6e380757b945fb3bf6c61
 PKG_DESCR:=		x11 driver for ati vga chip
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm mesalib libudev libstdcxx

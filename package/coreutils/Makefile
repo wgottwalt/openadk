@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		coreutils
 PKG_VERSION:=		8.22
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		8fb0ae2267aa6e728958adc38f8163a2
+PKG_HASH:=		5b3e94998152c017e6c75d56b9b994188eb71bf46d4038a642cb9141f6ff1212
 PKG_DESCR:=		basic file, shell and text manipulation utilities
 PKG_SECTION:=		base/apps
 PKG_BUILDDEP:=		gmp

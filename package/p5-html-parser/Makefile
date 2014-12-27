@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-html-parser
 PKG_VERSION:=		3.71
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9128a45893097dfa3bf03301b19c5efe
+PKG_HASH:=		be918b3749d3ff93627f72ee4b825683332ecb4c81c67a3a8d72b0435ffbd802
 PKG_DESCR:=		html parser class
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl

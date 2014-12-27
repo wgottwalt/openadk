@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		rpcbind
 PKG_VERSION:=		0.2.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		0a5f9c2142af814c55d957aaab3bcc68
+PKG_HASH:=		da169ff877a5a07581fad50a9a808ac6e96f0c277a3df49a7ef005778428496e
 PKG_DESCR:=		converts rpc program numbers into universal addresses
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libtirpc

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xconsole
 PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c617acec432901a3c1a2b23b022624cb
+PKG_HASH:=		71fabb3f41af726ef2a81d50100d8741ba0b4e7bcb40fad102d9cee943444ca2
 PKG_DESCR:=		console application
 PKG_SECTION:=		x11/utils
 PKG_BUILDDEP:=		libXaw

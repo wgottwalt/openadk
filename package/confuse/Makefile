@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		confuse
 PKG_VERSION:=		2.7
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		45932fdeeccbb9ef4228f1c1a25e9c8f
+PKG_HASH:=		e32574fd837e950778dac7ade40787dd2259ef8e28acd6ede6847ca895c88778
 PKG_DESCR:=		configuration file parser library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.nongnu.org/confuse/

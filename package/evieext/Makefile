@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		evieext
 PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		68e61ce53caa495a3ad4085f66010eb8
+PKG_HASH:=		c82f1608f50c36b55a85f85d97b8fc5841197fde3035e5005143211f2992518b
 PKG_DESCR:=		collection of xevie extension headers
 PKG_SECTION:=		dev/header
 PKG_SITES:=		ftp://ftp.x.org/pub/individual/proto/

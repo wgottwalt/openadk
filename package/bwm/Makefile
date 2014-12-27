@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		bwm
 PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		51021a036acb92d2bda0c0c0483f9552
+PKG_HASH:=		409bada2fcfd79351620de44c6aad2145313e3f3088f60c9bd9da575be3946ee
 PKG_DESCR:=		very tiny bandwidth monitor
 PKG_SECTION:=		net/perf
 PKG_SITES:=		http://ftp.debian.org/debian/pool/main/b/bwm/

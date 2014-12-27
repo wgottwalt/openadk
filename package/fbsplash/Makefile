@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		fbsplash
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		aa0a9e735e086228bc245b18e231bf6c
+PKG_HASH:=		acda1beb502c6ca6961b61c05ebd5aa27b46e4ca4b9009599578f8c25f3bb06e
 PKG_DESCR:=		framebuffer splash utility
 PKG_SECTION:=		sys/hw
 PKG_BUILDDEP:=		libjpeg-turbo libpng freetype

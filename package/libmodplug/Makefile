@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libmodplug
 PKG_VERSION:=		0.8.8.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5f30241db109d647781b784e62ddfaa1
+PKG_HASH:=		77462d12ee99476c8645cb5511363e3906b88b33a6b54362b4dbc0f39aa2daad
 PKG_DESCR:=		mod player library
 PKG_SECTION:=		libs/audio
 PKG_URL:=		http://modplug-xmms.sourceforge.net

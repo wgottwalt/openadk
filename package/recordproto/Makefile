@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		record extension headers
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		recordproto-host
-PKG_MD5SUM:=		868235e1e150e68916d5a316ebc4ccc4
+PKG_HASH:=		485f792570dd7afe49144227f325bf2827bc7d87aae6a8ab6c1de2b06b1c68c5
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

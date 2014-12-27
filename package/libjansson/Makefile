@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libjansson
 PKG_VERSION:=		2.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		46ac93bec48aacf207b67b51c8fbf7f1
+PKG_HASH:=		dd8bbfb38ad5031ce88e066b14d3b7e9c7113243daa7f4cde1994b7fc90bb1b1
 PKG_DESCR:=		json library
 PKG_SECTION:=		libs/data
 PKG_URL:=		http://www.digip.org/jansson/

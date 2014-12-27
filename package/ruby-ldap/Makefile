@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		ruby-ldap
 PKG_VERSION:=		0.9.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		83240451aa43de447d48035dc2d10dee
+PKG_HASH:=		98a77579d8a11d5fb559f1f589c27af6dc8495657a8a9ecc5bd16b71c4a7e884
 PKG_DESCR:=		ruby ldap extension
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		ruby libopenldap

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		htpdate
 PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		40f193e3d7220265f6e6f8d4d7f887da
+PKG_HASH:=		f465059495eae91437eb5eec7af92f1374eb3836f50926e8e5718818abf91e9a
 PKG_DESCR:=		hypertext time protocol implementation
 PKG_SECTION:=		net/ntp
 PKG_URL:=		http://www.vervest.org/htp/

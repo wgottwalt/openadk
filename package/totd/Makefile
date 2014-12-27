@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		totd
 PKG_VERSION:=		1.5.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7edaedae9f6aca5912dd6c123582cf08
+PKG_HASH:=		1a09ef6dcf382beea3546eec3138eadfbaeec198a6f921c96e8937e91a1e06fa
 PKG_DESCR:=		trick or treat daemon
 PKG_SECTION:=		net/dns
 PKG_URL:=		http://www.dillema.net/software/totd.html

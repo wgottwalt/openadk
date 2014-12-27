@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		cifs-utils
 PKG_VERSION:=		6.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		93697dbc043cb4d5c66e15e281f872e5
+PKG_HASH:=		fff73b2a2547628acba05d324cf096e50f13fa8712f01bf0eb0dbabfe268375b
 PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
 PKG_URL:=		https://wiki.samba.org/index.php/LinuxCIFS_utils

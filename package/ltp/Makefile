@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		ltp
 PKG_VERSION:=		20140828
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		6a98074e9121595ccb78951ebfeb698f
+PKG_HASH:=		9e6264017a9087d9f9bd0fa2f2d96708f6b32bb8770fda03942a7a8cab8c6723
 PKG_DESCR:=		linux test project
 PKG_DEPENDS:=		bash libpthread librt
 PKG_DEPENDS+=		mke2fs mkfs

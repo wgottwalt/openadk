@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		unzip
 PKG_VERSION:=		6.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		62b490407489521db863b523a7f86375
+PKG_HASH:=		036d96991646d0449ed0aa952e4fbe21b476ce994abc276e49d30e686708bd37
 PKG_DESCR:=		zip extraction utility
 PKG_SECTION:=		app/archive
 PKG_URL:=		http://www.info-zip.org/UnZip.html

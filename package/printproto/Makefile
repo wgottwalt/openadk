@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
 PKG_DESCR:=		x print extension headers
 PKG_SECTION:=		dev/header
-PKG_MD5SUM:=		5afeb3a7de8a14b417239a14ea724268
+PKG_HASH:=		e8b6f405fd865f0ea7a3a2908dfbf06622f57f2f91359ec65d13b955e49843fc
 PKG_SITES:=		http://xorg.freedesktop.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		openobex
 PKG_VERSION:=		1.5
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		0d83dc86445a46a1b9750107ba7ab65c
+PKG_HASH:=		e602047570799a47ecb028420bda8f2cef41310e5a99d084de10aa9422935e65
 PKG_DESCR:=		implementation of the obex protocol
 PKG_SECTION:=		sys/misc
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/WikiStart

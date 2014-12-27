@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		fontsproto
 PKG_VERSION:=		2.1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		642a8c5700519a84efe28944afe5cbdc
+PKG_HASH:=		aaf2375a617afdc1500069a838c0694f59f19d592fc9d9ffa05bd4f37b8504c1
 PKG_DESCR:=		fonts extension headers
 PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}

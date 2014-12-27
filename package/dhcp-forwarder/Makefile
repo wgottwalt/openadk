@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		dhcp-forwarder
 PKG_VERSION:=		0.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3b96dd27f6d05502d4048acab453808d
+PKG_HASH:=		a1d01bea1d768212f5d78e5f5aa7d433a53df7ff29cb3d1d924967581d00d7a1
 PKG_DESCR:=		dhcp relay agent
 PKG_SECTION:=		net/dns
 PKG_URL:=		http://www.nongnu.org/dhcp-fwd/

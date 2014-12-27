@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		mailutils
 PKG_VERSION:=		2.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3abca5873249f0eeb184361a75f2229e
+PKG_HASH:=		7b1508935050684a4df4f4d343a3b3acc25abdf6d072460d43f22e88e10b6269
 PKG_DESCR:=		mail program
 PKG_SECTION:=		net/mail
 PKG_BUILDDEP:=		readline

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		intltool
 PKG_VERSION:=		0.50.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		23fbd879118253cb99aeac067da5f591
+PKG_HASH:=		67f25c5c6fb71d095793a7f895b245e65e829e8bde68c6c8b4c912144ff34406
 PKG_DESCR:=		internationalization utility to create po files
 PKG_SECTION:=		dev/tools
 PKG_URL:=		http://freedesktop.org/wiki/Software/intltool/

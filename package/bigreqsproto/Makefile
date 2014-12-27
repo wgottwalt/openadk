@@ -8,7 +8,7 @@ PKG_VERSION:=		1.1.2
 PKG_RELEASE:=		2
 PKG_DESCR:=		big requests extension headers
 PKG_SECTION:=		dev/header
-PKG_MD5SUM:=		9b83369ac7a5eb2bf54c8f34db043a0e
+PKG_HASH:=		de68a1a9dd1a1219ad73531bff9f662bc62fcd777387549c43cd282399f4a6ea
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		Pyrex
 PKG_VERSION:=		0.9.9
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		515dee67d15d4393841e2d60e8341947
+PKG_HASH:=		5f87df06831d0b3412eb4bc9d3fc2ee7bfae1b913d7da8c23ab2bf5699fb6b50
 PKG_DESCR:=		mixes python and c data types
 PKG_SECTION:=		dev/python
 PKG_DEPENDS:=		python2

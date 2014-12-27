@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		cxxtools
 PKG_VERSION:=		2.2.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		aab00068ae5237435b37ac86f2ac7576
+PKG_HASH:=		8cebb6d6cda7c93cc4f7c0d552a68d50dd5530b699cf87916bb3b708fdc4e342
 PKG_DESCR:=		collection of general-purpose c++ classes
 PKG_DEPENDS:=		libstdcxx
 PKG_SECTION:=		libs/misc

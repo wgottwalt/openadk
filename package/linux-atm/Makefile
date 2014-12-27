@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		linux-atm
 PKG_VERSION:=		2.5.1
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		9560b0e1f410a05b849dfdab465dd758
+PKG_HASH:=		6bc60fe53c9e9c828a6d7f3675da11ad7fb54491863584e01c1051740fe2a286
 PKG_DESCR:=		atm library
 PKG_SECTION:=		libs/net
 PKG_BUILDDEP:=		flex-host bison-host

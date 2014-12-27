@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		util-macros
 PKG_VERSION:=		1.19.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		40e1caa49a71a26e0aa68ddd00203717
+PKG_HASH:=		0d4df51b29023daf2f63aebf3ebc638ea88efedfd560ab5866741ab3f92acaa1
 PKG_DESCR:=		xorg macros
 PKG_SECTION:=		x11/misc
 PKG_URL:=		http://cgit.freedesktop.org/xorg/util/macros

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		vilistextum
 PKG_VERSION:=		2.6.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=            5ba56ffdc56758da716bb46c3e0f517e
+PKG_HASH:=		3a16b4d70bfb144e044a8d584f091b0f9204d86a716997540190100c20aaf88d
 PKG_DESCR:=		html to ascii converter
 PKG_SECTION:=		net/mail
 PKG_SITES:=		http://bhaak.dyndns.org/${PKG_NAME}/

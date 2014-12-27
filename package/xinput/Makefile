@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xinput
 PKG_VERSION:=		1.6.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		03146d20083a8bd2e3806554b36c7c2b
+PKG_HASH:=		a3117a323cc32c80428dd1604df8d0f87ecbfb03a4975c187475a04f7201dfb7
 PKG_DESCR:=		input utility
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libxi libxinerama libxrandr

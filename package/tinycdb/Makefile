@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		tinycdb
 PKG_VERSION:=		0.77
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c00e5fb96c30356ac3b67b2ab5d5641b
+PKG_HASH:=		82bc3ccf0afed0978472a070ce4506667b8035e65d0dc24388e33858d39b6bc6
 PKG_DESCR:=		creating and reading constant data bases
 PKG_SECTION:=		libs/db
 PKG_URL:=		http://www.corpit.ru/mjt/tinycdb/

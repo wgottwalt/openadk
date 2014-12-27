@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		openjdk7
 PKG_VERSION:=		2.4.7
 PKG_RELEASE:=		8
-PKG_MD5SUM:=		f6b28633b9978fadc724247cfc264ff0
+PKG_HASH:=		b66973bef7808f8fb03be64e44d312ea2d13590a68a6a4e6690dbcdd1947459d
 PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		openjdk7-host alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
@@ -26,7 +26,7 @@ PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
 DISTFILES:=		icedtea-$(PKG_VERSION).tar.xz
 WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
-GCJ_VER:=		4.8.3
+GCJ_VER:=		4.8.4
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64

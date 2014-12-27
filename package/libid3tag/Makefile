@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libid3tag
 PKG_VERSION:=		0.15.1b
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		e5808ad997ba32c498803822078748c3
+PKG_HASH:=		63da4f6e7997278f8a3fef4c6a372d342f705051d1eeb6a46a86b03610e26151
 PKG_DESCR:=		id3 tag manipulation library
 PKG_SECTION:=		libs/audio
 PKG_DEPENDS:=		zlib

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ebtables
 PKG_VERSION:=		2.0.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		506742a3d44b9925955425a659c1a8d0
+PKG_HASH:=		dc6f7b484f207dc712bfca81645f45120cb6aee3380e77a1771e9c34a9a4455d
 PKG_DESCR:=		ethernet bridging firewall tool
 PKG_SECTION:=		net/route
 PKG_URL:=		http://ebtables.sourceforge.net

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libnetfilter_cthelper
 PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		b2efab1a3a198a5add448960ba011acd
+PKG_HASH:=		07618e71c4d9a6b6b3dc1986540486ee310a9838ba754926c7d14a17d8fccf3d
 PKG_DESCR:=		userspace library that provides the api to the user-space helper infrastructure
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libnfnetlink libmnl

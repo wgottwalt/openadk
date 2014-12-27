@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		poppler
 PKG_VERSION:=		0.24.5
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		334f2ac95cc8039f2a57fe63e4a81c69
+PKG_HASH:=		a2654910100c923c44e366242495e226db2798254f2fa2781138867348759f84
 PKG_DESCR:=		pdf rendering library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		fontconfig libstdcxx libpng cairo

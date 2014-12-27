@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		cyrus-sasl
 PKG_VERSION:=		2.1.26
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		a7f4e5e559a0e37b3ffc438c9456e425
+PKG_HASH:=		8fbc5136512b59bb793657f36fadda6359cae3b08f01fd16b3d406f1345b7bc3
 PKG_DESCR:=		general purpose authentication library
 PKG_SECTION:=		libs/crypto
 PKG_BUILDDEP:=		openssl

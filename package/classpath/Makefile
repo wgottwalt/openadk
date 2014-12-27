@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		classpath
 PKG_VERSION:=		0.99
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0ae1571249172acd82488724a3b8acb4 acfa69f928a0f1653555bda73091efca
+PKG_HASH:=		f929297f8ae9b613a1a167e231566861893260651d913ad9b6c11933895fecc8
 PKG_DESCR:=		java classpath
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		gtk+ gdk-pixbuf orbit2 gconf

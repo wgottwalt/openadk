@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		p54-firmware
 PKG_VERSION:=		1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8e8ab005a4f8f0123bcdc51bc25b47f6
+PKG_HASH:=		b59793e00a042b2bd5e883a15847778db90f49a9a4bdd1368a6b4021e6c93979
 PKG_DESCR:=		firmware for usb prism54 wireless cards
 PKG_SECTION:=		sys/firmware
 PKG_SITES:=		http://daemonizer.de/prism54/prism54-fw/fw-usb/

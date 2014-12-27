@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libfontenc
 PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		53db605124a729aec92476ee5ce78072
+PKG_HASH:=		5ef1a4fefb154fe783f667f9d3f8500c719bfe385d29bb89802b458e00396e65
 PKG_DESCR:=		helps to deal with different encodings of fonts
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		zlib

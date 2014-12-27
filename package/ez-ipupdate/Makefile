@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ez-ipupdate
 PKG_VERSION:=		3.0.11b8
 PKG_RELEASE:=		11
-PKG_MD5SUM:=		000211add4c4845ffa4211841bff4fb0
+PKG_HASH:=		bf5b8d11ffe055c5891d0ab64bbfa86e99cbda645d40f346146b939fec8d962d
 PKG_DESCR:=		client for dynamic dns services
 PKG_SECTION:=		net/dns
 PKG_URL:=		http://ez-ipupdate.com/

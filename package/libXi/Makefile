@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXi
 PKG_VERSION:=		1.6.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		d024a9de73191628f9772893f02054d8
+PKG_HASH:=		a2aab210068af017314888c64c3a7dd6b5a7933fe50ab89b6e039aadc07dac46
 PKG_DESCR:=		client interface to the xinput extension
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto xextproto libXext libXi-host

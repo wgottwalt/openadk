@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		font-xfree86-type1
 PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		89c33c5176cd580de6636ad50ce7777b
+PKG_HASH:=		02b3839ae79ba6a7750525bb3b0c281305664b95bf63b4a0baa230a277b4f928
 PKG_DESCR:=		x fonts
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		font-util

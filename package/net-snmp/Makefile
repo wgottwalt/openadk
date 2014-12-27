@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		net-snmp
 PKG_VERSION:=		5.7.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7db683faba037249837b226f64d566d4
+PKG_HASH:=		35dd20a2b17849f6d5a0a6109b4f52c1a777a3e1a00c79c4a175c520d23f3497
 PKG_DESCR:=		snmp agent
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libnetsnmp libelf libnl

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ipsec-tools
 PKG_VERSION:=		0.8.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		b79aae3055a51f8de5c0f1b8ca6cf619
+PKG_HASH:=		2359a24aa8eda9ca7043fc47950c8e6b7f58a07c5d5ad316aa7de2bc5e3a8717
 PKG_DESCR:=		ipsec management tools
 PKG_SECTION:=		net/security
 PKG_BUILDDEP:=		openssl flex

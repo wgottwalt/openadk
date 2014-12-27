@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xinetd
 PKG_VERSION:=		2.3.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		77358478fd58efa6366accae99b8b04c
+PKG_HASH:=		bf4e060411c75605e4dcbdf2ac57c6bd9e1904470a2f91e01ba31b50a80a5be3
 PKG_DESCR:=		powerful and secure superserver
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://www.xinetd.org/

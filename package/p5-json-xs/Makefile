@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-json-xs
 PKG_VERSION:=		3.01
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b7be65295baf6dd9233c6494782c1153
+PKG_HASH:=		4e8df3256a5aa9ed304ce1bbcd9140737deef31ba847bff9f4c15480c88c71ab
 PKG_DESCR:=		json serialising/deserialising, done correctly and fast
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl

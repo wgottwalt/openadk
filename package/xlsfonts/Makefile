@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		xlsfonts
 PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7a6bee1512ccdef52fc519a86684891e
+PKG_HASH:=		0d34e610bcd87fe0fc5e84982da8bd23d10b003c7d4660c83215a440efcf18c2
 PKG_DESCR:=		list x11 fonts
 PKG_SECTION:=		x11/utils
 PKG_URL:=		http://www.x.org/

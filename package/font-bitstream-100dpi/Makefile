@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		font-bitstream-100dpi
 PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c27bf37e9b8039f93bd90b8131ed37ad
+PKG_HASH:=		0a8c77c1540dc376fb2bb5a02bd33ee5f3563fbac9fc07c7947cac462c4bb48a
 PKG_DESCR:=		x fonts
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		font-util

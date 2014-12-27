@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		logrotate
 PKG_VERSION:=		3.8.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		99e08503ef24c3e2e3ff74cc5f3be213
+PKG_HASH:=		f6ba691f40e30e640efa2752c1f9499a3f9738257660994de70a45fe00d12b64
 PKG_DESCR:=		logfile rotation utility
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libpopt

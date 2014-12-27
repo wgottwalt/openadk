@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		pptp
 PKG_VERSION:=		1.8.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4efce9f263e2c3f38d79d9df222476de
+PKG_HASH:=		e39c42d933242a8a6dd8600a0fa7f0a5ec8f066d10c4149d8e81a5c68fe4bbda
 PKG_DESCR:=		point-to-point tunneling protocol client
 PKG_SECTION:=		net/ppp
 PKG_DEPENDS:=		ppp

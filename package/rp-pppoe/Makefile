@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		rp-pppoe
 PKG_VERSION:=		3.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d58a13cc4185bca6121a606ff456dec0
+PKG_HASH:=		709ca7402594acc1d80b99c20219112b5c00e6ac48ae6049fc626fbaf4ce49f6
 PKG_DESCR:=		ppp over ethernet tools
 PKG_SECTION:=		net/ppp
 PKG_DEPENDS:=		ppp

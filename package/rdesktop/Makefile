@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		rdesktop
 PKG_VERSION:=		1.8.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f5382c5c85b0d2cc88b9b1aa9bbf1356
+PKG_HASH:=		76cc834b89c34d8332f3cb3889483b2ae4d4e8118eeb45a8967c77dd18228246
 PKG_DESCR:=		client for windows terminal services
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libsamplerate libopenssl alsa-lib libao

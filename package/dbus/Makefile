@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		dbus
 PKG_VERSION:=		1.8.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6a08ba555d340e9dfe2d623b83c0eea8
+PKG_HASH:=		eded83ca007b719f32761e60fd8b9ffd0f5796a4caf455b01b5a5ef740ebd23f
 PKG_DESCR:=		desktop bus daemon
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libdbus libexpat

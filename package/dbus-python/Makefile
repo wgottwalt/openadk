@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		dbus-python
 PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		b09cd2d1a057cc432ce944de3fc06bf7
+PKG_HASH:=		e12c6c8b2bf3a9302f75166952cbe41d6b38c3441bbc6767dbd498942316c6df
 PKG_DESCR:=		python bindings for dbus
 PKG_SECTION:=		dev/python
 PKG_DEPENDS:=		dbus dbus-glib
@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		dbus dbus-glib
 PKG_URL:=		http://dbus.freedesktop.org/doc/dbus-python/
 PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus-python/
 
-PKG_CFLINE_DBUS_PYTHON:=	depends on ADK_BROKEN
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
 

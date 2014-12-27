@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xawtv
 PKG_VERSION:=		3.103
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		18822bb3660540fa9ea8b643a5b30d6b
+PKG_HASH:=		2cf3a91b5d59a094bd86e101684a65c0e3d09225c11a787e060fa01bfbc8dd52
 PKG_DESCR:=		video & webcam application
 PKG_BUILDDEP:=		libXinerama v4l-utils
 PKG_DEPENDS:=		libxinerama libv4l

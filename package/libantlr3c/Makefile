@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libantlr3c
 PKG_VERSION:=		3.2
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		674646e1d1bf5c6015435480cead725a
+PKG_HASH:=		2ccfb8a8bdd3d6c1d60742ff3a5a954af6d5a8d7f8901c87229fc6fa540ac99a
 PKG_DESCR:=		another tool for language recognition
 PKG_SECTION:=		libs/misc
 PKG_SITES:=		http://www.antlr.org/download/C/

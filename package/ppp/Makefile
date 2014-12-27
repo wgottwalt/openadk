@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ppp
 PKG_VERSION:=		2.4.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3434d2cc9327167a0723aaaa8670083b
+PKG_HASH:=		1b33181a03962c8a092c055fb9980e9722728a8d98a4bb7ec7acda17c1b1b49d
 PKG_DESCR:=		point-to-point protocol software
 PKG_SECTION:=		net/ppp
 PKG_BUILDDEP:=		libpcap

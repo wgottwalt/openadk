@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libass
 PKG_VERSION:=		0.10.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		0f54b1f3a24fa897ebbbcc5bc744b32a
+PKG_HASH:=		fbf287ac6d0dbdf015783b7354280ad8371c106326ad3f77a99471bc5aa18210
 PKG_DESCR:=		portable subtitle renderer
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		fribidi fontconfig

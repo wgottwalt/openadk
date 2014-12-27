@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libnetfilter_acct
 PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		2118d9514c079839ebd9cb3144ad2ad7
+PKG_HASH:=		0128f19c3419fbd84f7e6d46b13a33ef7bda9b9f5e493bc5ae1882d087514b71
 PKG_DESCR:=		extended accounting infrastructure library
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libnfnetlink

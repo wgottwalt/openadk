@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		bzip2
 PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		00b516f4704d4a7cb50a1d97e6e8e15b
+PKG_HASH:=		a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd
 PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
 PKG_BUILDDEP:=		bzip2-host

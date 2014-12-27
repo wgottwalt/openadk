@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		genext2fs
 PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b7b6361bcce2cedff1ae437fadafe53b
+PKG_HASH:=		404dbbfa7a86a6c3de8225c8da254d026b17fd288e05cec4df2cc7e1f4feecfc
 PKG_DESCR:=		generate ext2 filesystem utility
 PKG_SECTION:=		sys/fs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=genext2fs/}

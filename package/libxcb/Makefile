@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libxcb
 PKG_VERSION:=		1.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a484793fbfb974b09d54fa1ebf44b2e4
+PKG_HASH:=		c4cd324ac7bf810e95b1c1b56f413b13850eaa1d7eca60ddc46c61ac9d5f4441
 PKG_DESCR:=		interface to the x window system protocol
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP+=		python2 libpthread-stubs libxslt libXau xcb-proto

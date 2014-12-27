@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libwebp
 PKG_VERSION:=		0.3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		dc862bb4006d819b7587767a9e83d31f
+PKG_HASH:=		b37932c625322a69fe4e9b88884b5c7aed2b3eaf9fd5e5b480aee339a92e6ee7
 PKG_DESCR:=		new image format for the web
 PKG_SECTION:=		libs/image
 PKG_URL:=		https://developers.google.com/speed/webp/

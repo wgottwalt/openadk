@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xf86-input-evtouch
 PKG_VERSION:=		0.8.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4d8e092356d8353002f60a4907046c13
+PKG_HASH:=		eafc4a09729a4b2b6120430c71e1954c5cac299ad6adf2f9a40aee8a7b51e476
 PKG_DESCR:=		x11 driver for touchscreens
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server

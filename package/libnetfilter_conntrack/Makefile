@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libnetfilter_conntrack
 PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		18cf80c4b339a3285e78822dbd4f08d7
+PKG_HASH:=		d9ec4a3caf49417f2b0a2d8d44249133e8c3ec78c757b7eb8c273f1cb6929c7d
 PKG_DESCR:=		connection tracking state table library
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libnfnetlink libmnl

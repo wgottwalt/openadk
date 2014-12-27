@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		tptest
 PKG_VERSION:=		3.1.7
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		46f941bdab738a2a11ecc2a5f757ec77
+PKG_HASH:=		db39257b3ee6408a575e16804975df1e68f52270537cc3e7505897b777f7994d
 PKG_DESCR:=		internet bandwidth tester
 PKG_SECTION:=		net/perf
 PKG_URL:=		http://tptest.sourceforge.net/

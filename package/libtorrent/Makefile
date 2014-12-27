@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libtorrent
 PKG_VERSION:=		0.13.4
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		e82f380a9d4b55b379e0e73339c73895
+PKG_HASH:=		704e097119dc89e2ee4630396b25de1cd64b0549841347ea75b9ef9217084955
 PKG_DESCR:=		bittorrent library
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libopenssl libsigc++

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		sed
 PKG_VERSION:=		4.2.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4111de4faa3b9848a0686b2f260c5056
+PKG_HASH:=		fea0a94d4b605894f3e2d5572e3f96e4413bcad3a085aae7367c2cf07908b2ff
 PKG_DESCR:=		stream editor
 PKG_SECTION:=		app/editor
 PKG_URL:=		http://www.gnu.org/software/sed/

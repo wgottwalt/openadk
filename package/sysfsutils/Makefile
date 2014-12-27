@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		sysfsutils
 PKG_VERSION:=		2.1.0
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		14e7dcd0436d2f49aa403f67e1ef7ddc
+PKG_HASH:=		e865de2c1f559fff0d3fc936e660c0efaf7afe662064f2fb97ccad1ec28d208a
 PKG_DESCR:=		utilites built upon sysfs
 PKG_SECTION:=		sys/utils
 PKG_URL:=		http://linux-diag.sourceforge.net/Sysfsutils.html

@@ -8,7 +8,7 @@ PKG_VERSION:=		1.2.2
 PKG_RELEASE:=		1
 PKG_DESCR:=		screensaver headers
 PKG_SECTION:=		dev/header
-PKG_MD5SUM:=		21704f1bad472d94abd22fea5704bb48
+PKG_HASH:=		d8dee19c52977f65af08fad6aa237bacee11bc5a33e1b9b064e8ac1fd99d6e79
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

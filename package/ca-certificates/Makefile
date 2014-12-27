@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		ca-certificates
 PKG_VERSION:=		20090814
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		307052c985bec7f9a00eb84293eef779
+PKG_HASH:=		6924fafc35dd020da99bc86842f95f2a97a3a5ff084b0635eea815fe2777fc7c
 PKG_DESCR:=		collection of common ca certificates
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		openssl-util libopenssl

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		serdisplib
 PKG_VERSION:=		1.97.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2aa91c43d01d2dfc9fbc1116e3063ae1
+PKG_HASH:=		b64738f2fd6a28f6d659945282a4a95eeaaabb0a5867f8a87b8cceb01ce1d029
 PKG_DESCR:=		display drivers (serial, parallel, usb)
 PKG_SECTION:=		sys/serial
 PKG_DEPENDS:=		libusb-compat

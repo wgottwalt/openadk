@@ -7,7 +7,7 @@ PKG_NAME:=		tslib
 # actually git version from 28.10.2013
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9563faf5cf9f111538b4f45778e7bb24
+PKG_HASH:=		4872cb7ce8cf3174fdab261a5aa87b19f62f3b5f49fa630658c78271c1816ae0
 PKG_DESCR:=		touchscreen library
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libstdcxx

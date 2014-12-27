@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		owfs
 PKG_VERSION:=		2.9p1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		56ba145be208002e58775a7203369851
+PKG_HASH:=		9d22dbff72d235476688c02669f7171b23e21dffadf40bbdd3b8263908218424
 PKG_DESCR:=		software to access 1-wire devices
 PKG_SECTION:=		sys/hw
 PKG_BUILDDEP:=		fuse

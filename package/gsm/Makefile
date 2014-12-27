@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		gsm
 PKG_VERSION:=		1.0.10
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		4b148480f82e96d274248e13880ec873
+PKG_HASH:=		ddab700db455e13bcf9bc0592b320e61c6a7c692fb3cef7881b14b2df1a39069
 PKG_DESCR:=		gsm full-rate speech transcoding library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www-rn.informatik.uni-bremen.de/software/gsm/

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		lzma
 PKG_VERSION:=		4.32.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		79c31b18a76254c1cb078c1d40a47c44
+PKG_HASH:=		02aa57f995d15b7acb7c2496d88a39fb0124ea00bf027cc61dd24eddb5942dff
 PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
 PKG_URL:=		http://tukaani.org/lzma/

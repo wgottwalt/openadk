@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		sdl-image
 PKG_VERSION:=		1.2.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a0f9098ebe5400f0bdc9b62e60797ecb
+PKG_HASH:=		0b90722984561004de84847744d566809dbb9daf732a9e503b91a1b5a84e5699
 PKG_DESCR:=		simple directmedia layer image library
 PKG_SECTION:=		libs/image
 PKG_DEPENDS:=		libpng libtiff libjpeg-turbo libsdl libstdcxx

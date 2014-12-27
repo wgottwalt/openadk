@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libnotify
 PKG_VERSION:=		0.4.5
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		472e2c1f808848365572a9b024d9e8f5
+PKG_HASH:=		0799db8ea1500b65a477421a8c930cc8c8b0bbc0596e55ea1601e2542f3fb0d9
 PKG_DESCR:=		notify library
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libstdcxx

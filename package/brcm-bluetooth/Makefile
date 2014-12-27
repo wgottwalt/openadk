@@ -6,7 +6,6 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		brcm-bluetooth
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		85a7d1d1386143fad312a5a82c422380
 PKG_DESCR:=		firmware for broadcom bluetooth chips
 PKG_SECTION:=		sys/firmware
 

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		yajl
 PKG_VERSION:=		2.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c953a53344c0e20a892fc042bbe69744
+PKG_HASH:=		6bc3737623490e0a1b5f52bd09903c6f8c360f3338079db19895e95bb940a4da
 PKG_DESCR:=		small event-driven json parser written in ansi c
 PKG_SECTION:=		libs/data
 PKG_BUILDDEP:=		cmake-host ruby-host

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		shorewall-common
 PKG_VERSION:=		4.0.7
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		2df43356b1fdbc91920d48c5595aa101
+PKG_HASH:=		bd392afff2bd4fd0488401d41192c6205f4694faaa7231065fed62fa03fc814c
 PKG_DESCR:=		high-level netfilter configuration tool
 PKG_SECTION:=		net/firewall
 PKG_DEPENDS:=		iptables

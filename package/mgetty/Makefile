@@ -5,14 +5,14 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mgetty
 PKG_VERSION:=		1.1.36
-PKG_XVERSION:=		Jun15
+PKG_EXTRAVER:=		Jun15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0320e98c6b86bcca48fc5f355b94ead4
+PKG_HASH:=		8b8642aa318604ad057ed161cacff5c600296cbfbc9b4d562134ee5c130c80ce
 PKG_DESCR:=		mgetty + sendfax
 PKG_SECTION:=		sys/misc
 PKG_SITES:=		ftp://alpha.greenie.net/pub/mgetty/source/1.1/
 
-DISTFILES:=		${PKG_NAME}${PKG_VERSION}-${PKG_XVERSION}.tar.gz
+DISTFILES:=		${PKG_NAME}${PKG_VERSION}-${PKG_EXTRAVER}.tar.gz
 
 include ${ADK_TOPDIR}/mk/package.mk
 

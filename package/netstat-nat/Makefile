@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		netstat-nat
 PKG_VERSION:=		1.4.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		45e8d0f47623f619c22a6b894cd03cbc
+PKG_HASH:=		95da25629e68b65dda4b1f960bbcd3586d7eca38cd9864be1efaa083ecf200de
 PKG_DESCR:=		netstat variant for nat connections
 PKG_SECTION:=		net/firewall
 PKG_URL:=		http://www.tweegy.nl/projects/netstat-nat/index.html

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		lsof
 PKG_VERSION:=		4.84
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		6dae655988c810a7042c06a4e2fa3c5f
+PKG_HASH:=		3ab54cbc0e4f8ee3b1cfd1d2d1fb81765e7d28144256e5f444faedc4399a969b
 PKG_DESCR:=		list open files
 PKG_SECTION:=		sys/utils
 PKG_DEPENDS:=		libtirpc

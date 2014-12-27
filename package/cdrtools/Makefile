@@ -4,13 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		cdrtools
-PKG_VERSION:=		3.01
+PKG_VERSION:=		3.01a25
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		afd4563e335a614a11e042c7b6734d66
+PKG_HASH:=		ec3fc0d1f830c3ff5520c42b80df8f68f769f127ec6e5285b1791e40fc1c6b94
 PKG_DESCR:=		cd writing tools
 PKG_SECTION:=		sys/fs
-PKG_URL:=		http://cdrecord.berlios.de/private/cdrecord.html
-PKG_SITES:=		ftp://ftp.berlios.de/pub/cdrecord/
+PKG_URL:=		http://cdrecord.org/private/cdrecord.html
+PKG_SITES:=		http://sourceforge.net/projects/cdrtools/files/alpha/
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 PKG_CFLINE_CDRTOOLS:=	depends on ADK_HOST_ONLY
 

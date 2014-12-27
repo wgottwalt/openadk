@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libnetfilter_queue
 PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		df09befac35cb215865b39a36c96a3fa
+PKG_HASH:=		838490eb5dbe358f9669823704982f5313a8d397111562373200203f93ac1a32
 PKG_DESCR:=		api to packets that have been queued by the kernel packet filter
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libnfnetlink libmnl

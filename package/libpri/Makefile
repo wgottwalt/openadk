@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libpri
 PKG_VERSION:=		1.4.12
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		9de39b866f049cc20a4f431cc6245166
+PKG_HASH:=		c0e170a742ed5d19515c99472fe79a467522355b3c24e4f7359d667b7d756e75
 PKG_DESCR:=		c implementation of the primary rate isdn specification
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.asterisk.org/

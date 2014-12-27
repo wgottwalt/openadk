@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		mxml
 PKG_VERSION:=		2.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		68977789ae64985dddbd1a1a1652642e
+PKG_HASH:=		b0d347da1a0d5a8c9e82f66087d55cfe499728dacae563740d7e733648c69795
 PKG_DESCR:=		lightweight xml library
 PKG_SECTION:=		libs/data
 PKG_URL:=		http://www.msweet.org/projects.php?Z3

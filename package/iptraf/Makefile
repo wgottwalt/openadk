@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		iptraf
 PKG_VERSION:=		3.0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		004c2c005a1b78739e22bc49d33e244d
+PKG_HASH:=		95a069af8c4d22206985f6ce69acc27cfcfef1d58ad6ab8dbb10c698642ac08a
 PKG_DESCR:=		console-based network monitoring program.
 PKG_SECTION:=		net/perf
 PKG_DEPENDS:=		libncurses

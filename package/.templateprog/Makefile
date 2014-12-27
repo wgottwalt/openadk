@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		@PKG@
 PKG_VERSION:=		@VER@
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		add md5sum of package here
+PKG_HASH:=		add sha256 checksum of package here
 PKG_DESCR:=		add short description
 PKG_SECTION:=		add section
 PKG_DEPENDS:=		add dependendant package names

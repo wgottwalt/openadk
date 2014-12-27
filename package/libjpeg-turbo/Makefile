@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libjpeg-turbo
 PKG_VERSION:=		1.3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2c3a68129dac443a72815ff5bb374b05
+PKG_HASH:=		c132907417ddc40ed552fe53d6b91d5fecbb14a356a60ddc7ea50d6be9666fb9
 PKG_DESCR:=		jpeg image library
 PKG_SECTION:=		libs/image
 PKG_URL:=		http://libjpeg-turbo.virtualgl.org/

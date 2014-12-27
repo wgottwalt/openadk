@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		netcat
 PKG_VERSION:=		0.7.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		088def25efe04dcdd1f8369d8926ab34
+PKG_HASH:=		30719c9a4ffbcf15676b8f528233ccc54ee6cba96cb4590975f5fd60c68a066f
 PKG_DESCR:=		network swiss army knife
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://netcat.sourceforge.net/

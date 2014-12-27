@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		gperf
 PKG_VERSION:=		3.0.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c1f1db32fb6598d6a93e6e88796a8632
+PKG_HASH:=		767112a204407e62dbc3106647cf839ed544f3cf5d0f0523aaa2508623aad63e
 PKG_DESCR:=		perfect hash function generator
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		gperf-host

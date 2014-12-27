@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		pcrepp
 PKG_VERSION:=		0.9.5
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		1fe6ea8e23ece01fde2ce5fb4746acc2
+PKG_HASH:=		77ee9fc1afe142e4ba2726416239ced66c3add4295ab1e5ed37ca8a9e7bb638a
 PKG_DESCR:=		cpp wrapper classes for pcre
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpcre

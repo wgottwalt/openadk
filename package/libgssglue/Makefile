@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libgssglue
 PKG_VERSION:=		0.3
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		48aaad11b7371ba3270faa322202c038
+PKG_HASH:=		d98a022af432b61fe2a1eb811b5916743ccb781e383da680f1a00fd1005a5174
 PKG_DESCR:=		gss glue library for nfsv4
 PKG_SECTION:=		libs/net
 PKG_SITES:=		http://www.citi.umich.edu/projects/nfsv4/linux/libgssglue/

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		squid
 PKG_VERSION:=		3.4.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		78dba1ef230761577bce53633ca05c9d
+PKG_HASH:=		9ef26cd638c65afa750637b3669057c052890f10c686eb0218eb0d39b4199bc0
 PKG_DESCR:=		web and cache proxy
 PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libopenssl libpthread libstdcxx libltdl

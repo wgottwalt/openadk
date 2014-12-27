@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		mutt
 PKG_VERSION:=		1.5.23
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		11f5b6a3eeba1afa1257fe93c9f26bff
+PKG_HASH:=		3af0701e57b9e1880ed3a0dee34498a228939e854a16cdccd24e5e502626fd37
 PKG_DESCR:=		mail text client
 PKG_SECTION:=		net/mail
 PKG_DEPENDS:=		libncurses libopenssl

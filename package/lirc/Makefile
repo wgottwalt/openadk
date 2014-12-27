@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		lirc
 PKG_VERSION:=		0.9.1-pre2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		234ea7d786a83e6f4f7a507a5719d62b
+PKG_HASH:=		2ecad376ca491e71d75d0de61e9d0a6b3c1e57962b446f8ff4a43ea4f611fe20
 PKG_DESCR:=		decode and send infra-red signals
 PKG_SECTION:=		sys/hw
 PKG_URL:=		http://www.lirc.org/

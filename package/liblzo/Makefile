@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		lzo
 PKG_VERSION:=		2.08
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fcec64c26a0f4f4901468f360029678f
+PKG_HASH:=		ac1b3e4dee46febe9fd28737eb7f5692d3232ef1a01da10444394c3d47536614
 PKG_DESCR:=		real-time data compression library
 PKG_SECTION:=		libs/comp
 PKG_URL:=		http://www.oberhumer.com/opensource/lzo

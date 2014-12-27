@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		kbd
 PKG_VERSION:=		2.0.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		55453cb09d90370005e696949092b8f6
+PKG_HASH:=		55407b79e90ee65cdbaff7d3dafd2b53c4fee3a645788ffb582091074a2254af
 PKG_DESCR:=		keyboard utility
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libcheck

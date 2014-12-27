@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libavl
 PKG_VERSION:=		0.3.5
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		882c68ea7f71876ca110f3b84d7ab12d
+PKG_HASH:=		4497b9e22cdd61ae2fa893b9d5fd6213dc306726d7c4be08c29e173622dca8a0
 PKG_DESCR:=		avl library
 PKG_SECTION:=		libs/misc
 PKG_SITES:=		http://openadk.org/distfiles/

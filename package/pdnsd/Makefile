@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		pdnsd
 PKG_VERSION:=		1.2.7
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		114b3b21b09b43cbfcccdde726b84c12
+PKG_HASH:=		2777d7317509df7c75c90bcfd7f9ceaec9ea2db164bf00eb797fa54e0b476a00
 PKG_DESCR:=		proxy dns server
 PKG_SECTION:=		net/dns
 PKG_DEPENDS:=		libpthread

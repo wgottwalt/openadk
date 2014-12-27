@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		openssl-pkcs11
 PKG_VERSION:=		0.1.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		693b402eafba152666e66431ed4c1b9e
+PKG_HASH:=		de7d7e41e7c42deef40c53e10ccc3f88d2c036d6656ecee7e82e8be07b06a2e5
 PKG_DESCR:=		pkcs11 engine for openssl
 PKG_SECTION:=		app/crypto
 PKG_BUILDDEP:=		libp11

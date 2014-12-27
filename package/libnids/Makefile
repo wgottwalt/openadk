@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libnids
 PKG_VERSION:=		1.24
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		72d37c79c85615ffe158aa524d649610
+PKG_HASH:=		314b4793e0902fbf1fdb7fb659af37a3c1306ed1aad5d1c84de6c931b351d359
 PKG_DESCR:=		network intrusion detection system library
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libnet libpcap glib

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		madplay
 PKG_VERSION:=		0.15.2b
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		6814b47ceaa99880c754c5195aa1aac1
+PKG_HASH:=		5a79c7516ff7560dffc6a14399a389432bc619c905b13d3b73da22fa65acede0
 PKG_DESCR:=		mpeg audio player in fixed point
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libid3tag libmad alsa-lib

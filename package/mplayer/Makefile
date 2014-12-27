@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		mplayer
 PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		39dd55f30eb5403f219a606e79a6648a
+PKG_HASH:=		ce8fc7c3179e6a57eb3a58cb7d1604388756b8a61764cc93e095e7aff3798c76
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		alsa-lib libjpeg-turbo libfaad2 libmad libncurses

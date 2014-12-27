@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		weechat
 PKG_VERSION:=		0.4.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2206cbc7ee66d0c219f25a5499973dd5
+PKG_HASH:=		bfb5a34f78eaad0e22e1aa0783ff330907f253fcd50a1d3fd0aa19df9114dde9
 PKG_DESCR:=		lightweight irc client
 PKG_SECTION:=		app/chat
 PKG_DEPENDS:=		libncurses libgcrypt zlib libcurl

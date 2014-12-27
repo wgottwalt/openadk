@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		heyu
 PKG_VERSION:=		2.6.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9c7624b61ea39bbfa70336dc703cd5f1
+PKG_HASH:=		1284e793520d2e152d9d7032f6727e72fbaaf7c4f4eaf9abea2b85eed090b0d2
 PKG_DESCR:=		x10 home automation control utility
 PKG_SECTION:=		sys/serial
 PKG_DEPENDS:=		setserial

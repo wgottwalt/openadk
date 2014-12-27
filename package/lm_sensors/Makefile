@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		lm_sensors
 PKG_VERSION:=		3.3.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		8c0eebda8524fc87da1393b4564d279b
+PKG_HASH:=		cfcc783945f7bfd5206e73f8f9d3f353b0dbf22153c0ef2587a8d7a7be7e628f
 PKG_DESCR:=		hardware sensor toolset
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		sysfsutils

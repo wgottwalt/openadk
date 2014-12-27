@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libnetfilter_log
 PKG_VERSION:=		1.0.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		2a4bb0654ae675a52d2e8d1c06090b94
+PKG_HASH:=		74e0fe75753dba3ac114531b5e73240452c789a3f3adccf5c51217da1d933b21
 PKG_DESCR:=		api to packets that have been logged
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libnfnetlink

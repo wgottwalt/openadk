@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		librpcsecgss
 PKG_VERSION:=		0.19
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		b45ed565bdc3099023aa35830ec92997
+PKG_HASH:=		0cafb86b67e5eb4c89e8abaaad9165298946bc164d258e8925fc6dc1fa913abd
 PKG_DESCR:=		secure rpc library for nfsv4
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libgssglue libtirpc

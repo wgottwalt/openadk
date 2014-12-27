@@ -8,7 +8,7 @@ PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
 PKG_DESCR:=		xc-misc extension headers
 PKG_SECTION:=		dev/header
-PKG_MD5SUM:=		9a8da85301db41e8435099ffefb4ac74
+PKG_HASH:=		33415e374f63acc4dbd0ad59425f0c8876e567bad3d8563479ff955cb3bec300
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

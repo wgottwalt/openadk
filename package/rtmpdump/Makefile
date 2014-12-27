@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		rtmpdump
 PKG_VERSION:=		2.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		61509a2ae8987691f1fa28175461be96
+PKG_HASH:=		cc7ff55bb3b829277b90ddb4d9b8224f9327300cede6b9557dda98267019bb9e
 PKG_DESCR:=		toolkit for rtmp streams
 PKG_DEPENDS:=		librtmp zlib
 PKG_BUILDDEP:=		zlib

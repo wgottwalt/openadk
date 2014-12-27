@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		quagga
 PKG_VERSION:=		0.99.22.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		03ef24a448be47beba80efa2152f8a28
+PKG_HASH:=		5e12056692e2dbc272a929f96d0e98d9873f4e7f7ffcca62434b58f6660a6386
 PKG_DESCR:=		routing software package
 PKG_SECTION:=		net/route
 PKG_BUILDDEP:=		readline ncurses

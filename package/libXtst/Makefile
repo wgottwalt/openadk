@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXtst
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		8918809e47c29b44d25eb16b1586a15b
+PKG_HASH:=		99d7c7335439c00b8d1664d77f1ea2d857598a5ed52d32826d879cb3863cbb7a
 PKG_DESCR:=		client interface to the record extension to the x protocol
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP+=		recordproto libXi

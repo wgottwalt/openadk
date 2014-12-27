@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		wol
 PKG_VERSION:=		0.7.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c2fa9d7e771134ac8c89d56b8197d4ca
+PKG_HASH:=		e0086c9b9811df2bdf763ec9016dfb1bcb7dba9fa6d7858725b0929069a12622
 PKG_DESCR:=		program to send magic wake-on-lan packets
 PKG_SECTION:=		net/misc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ahh/}

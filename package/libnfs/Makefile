@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libnfs
 PKG_VERSION:=		1.9.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a07656eeca58ad8d4870da546745628a
+PKG_HASH:=		f408f2b226fd1824803889328e238a3cce6e1664c34f987b5f6dc5384e184e1b
 PKG_DESCR:=		nfs client library
 PKG_SECTION:=		libs/net
 PKG_URL:=		https://github.com/sahlberg/libnfs

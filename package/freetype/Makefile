@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		freetype
 PKG_VERSION:=		2.5.3
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		cafe9f210e45360279c730d27bf071e9
+PKG_HASH:=		41217f800d3f40d78ef4eb99d6a35fd85235b64f81bc56e4812d7672fca7b806
 PKG_DESCR:=		free, high-quality and portable font engine
 PKG_SECTION:=		libs/fonts
 PKG_DEPENDS:=		zlib

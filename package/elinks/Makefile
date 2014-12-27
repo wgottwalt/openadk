@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		elinks
 PKG_VERSION:=		0.11.7
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		145c510cae41c204d0f23dce4bdd23ab
+PKG_HASH:=		94dc254cdecddee51819ae17962d9e606690bee3ec43fb43c635cb40197b4bc7
 PKG_DESCR:=		advanced text web browser
 PKG_SECTION:=		app/browser
 PKG_DEPENDS:=		libopenssl

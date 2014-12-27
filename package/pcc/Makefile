@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		pcc
 PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6e5d851ee57fe58702fe4e80ecd1f852
+PKG_HASH:=		5802dbba46d6ea3f9badaa55b9044a0416bb410020c24a5c2a8a2eaaf41156cb
 PKG_DESCR:=		portable c compiler
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		pcc-libs

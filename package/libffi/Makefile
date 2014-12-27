@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libffi
 PKG_VERSION:=		3.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		f5898b29bbfd70502831a212d9249d10
+PKG_HASH:=		97feeeadca5e21870fa4433bc953d1b3af3f698d5df8a428f68b73cd60aef6eb
 PKG_DESCR:=		foreign function interface library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://sourceware.org/libffi/

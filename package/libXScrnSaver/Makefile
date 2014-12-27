@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXScrnSaver
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		8e459e544298caa27fc7c7e5a56e2a6d
+PKG_HASH:=		326fb02e20ceaf9a8959b02c190a872c7e8c940e191e364fd516a685538a5f1e
 PKG_DESCR:=		screensaver library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		scrnsaverproto libXext

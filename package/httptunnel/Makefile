@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		httptunnel
 PKG_VERSION:=		3.0.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2a710f377c82ab4eb201458f7b9f99c5
+PKG_HASH:=		0d4c3b276f47c06fc39f77e45babef1b3ede53512928c7a59ad0dd795ef0e617
 PKG_DESCR:=		http tunneling software
 PKG_SECTION:=		net/security
 PKG_URL:=		http://www.nocrew.org/software/httptunnel/

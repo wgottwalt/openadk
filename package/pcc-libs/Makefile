@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		pcc-libs
 PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a8dfcd6d3be512bc3f16f96c9abf132e
+PKG_HASH:=		f89ac94e30927a28c78fc8b8b7fef617eeaf843e2268063d43e414cf3179dd62
 PKG_DESCR:=		runtime for the portable c compiler
 PKG_SECTION:=		dev/lang
 PKG_URL:=		http://pcc.ludd.ltu.se/

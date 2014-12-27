@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		SDL_gfx
 PKG_VERSION:=		2.0.22
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		330f291f1f09a1bdf397c9b40d92ca41
+PKG_HASH:=		1575e7be73fd927ff0e3567dc06095773f5ba1b47872b9aa0d0fefebfd6d2bf0
 PKG_DESCR:=		sdl graphic library
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libsdl

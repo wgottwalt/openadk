@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		freeradius-client
 PKG_VERSION:=		1.1.6
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		edd4d904e802ff66d35532be1475cfa7
+PKG_HASH:=		478bfb7ec00789af150acf6a231bc9b0731d06353c7fe36a8fd6d4d83e42a07f
 PKG_DESCR:=		radius client
 PKG_SECTION:=		net/radius
 PKG_DEPENDS:=		libopenssl libfreeradius-client

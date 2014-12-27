@@ -8,7 +8,7 @@ PKG_NAME:=		bcm2835-bootloader
 # 53162d55fa557e60453c0652aa00fa3daf4ed618
 PKG_VERSION:=		1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		05301fa2fb701388c1b8b9205cb3de3f
+PKG_HASH:=		20f15e1e2fd4245e59b5b3223df8bdca6b8a54baeff113f74e3aed56d57f0be8
 PKG_DESCR:=		bootloader for raspberry pi
 PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/raspberrypi/firmware

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		afpfs-ng
 PKG_VERSION:=		0.8.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1bdd9f8a06e6085ea4cc38ce010ef60b
+PKG_HASH:=		688560de1cde57ab8d9e0ef7dc6436dbf0267fe8884f9014e50ff92b297b01a8
 PKG_DESCR:=		client for apple filing protocol
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		libgcrypt

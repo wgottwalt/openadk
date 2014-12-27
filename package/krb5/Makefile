@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		krb5
 PKG_VERSION:=		1.12.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		524b1067b619cb5bf780759b6884c3f5
+PKG_HASH:=		72f1b6c166cb42c0b03814ab7ea10f91926d8a665a5ba1cee430a3f31e62c580
 PKG_DESCR:=		kerberos server
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libkrb5 libncurses keyutils libpthread

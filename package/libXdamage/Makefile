@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXdamage
 PKG_VERSION:=		1.1.3
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		5e54789fd1c56392d38d29c6b8dad142
+PKG_HASH:=		fda20802ccccaac8807c3bf58e427a37be9579cc2ea6162b0b956644fa65e806
 PKG_DESCR:=		client interface to the damage extension
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXfixes damageproto

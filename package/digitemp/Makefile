@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		digitemp
 PKG_VERSION:=		3.6.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9be2e48db37920f21925ae6e88f83b84
+PKG_HASH:=		14cfc584cd3714fe8c9a2cdc8388be49e08b5e395d95e6bcd11d4410e2505ca2
 PKG_DESCR:=		program for reading values from 1-wire devices
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libusb

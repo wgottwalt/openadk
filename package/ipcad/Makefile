@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ipcad
 PKG_VERSION:=		3.7.3
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		125605249958894148ec26d3c88189f5
+PKG_HASH:=		72372d46ae35e4d7cc74d96fbaf8bb0ae189aa9ecfd89026487aca790c2f0716
 PKG_DESCR:=		ip cisco accounting daemon
 PKG_SECTION:=		net/acct
 PKG_DEPENDS:=		libpcap

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		miau
 PKG_VERSION:=		0.6.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		76f794889d47ad277c25e9c5bbddefa4
+PKG_HASH:=		f9c0fc2fefd9ef41d27309aceba9e42fc2e59808a807c9741ff9b43872c4e1b5
 PKG_DESCR:=		irc-bouncer/proxy
 PKG_SECTION:=		app/chat
 PKG_URL:=		http://miau.sourceforge.net/

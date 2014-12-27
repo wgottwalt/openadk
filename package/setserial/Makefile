@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		setserial
 PKG_VERSION:=		2.17
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		c4867d72c41564318e0107745eb7a0f2
+PKG_HASH:=		7e4487d320ac31558563424189435d396ddf77953bb23111a17a3d1487b5794a
 PKG_DESCR:=		configuration utility for serial ports
 PKG_SECTION:=		sys/serial
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=setserial/}

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		font-adobe-75dpi
 PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7a414bb661949cec938938fd678cf649
+PKG_HASH:=		61eb1fcfec89f7435cb92cd68712fbe4ba412ca562b1f5feec1f6daa1b8544f6
 PKG_DESCR:=		x fonts
 PKG_SECTION:=		x11/fonts
 PKG_DEPENDS:=		font-util

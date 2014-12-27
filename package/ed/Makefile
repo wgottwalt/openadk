@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		ed
 PKG_VERSION:=		1.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e66c03d7e4c67b025d5b6093ec678267
+PKG_HASH:=		97dd34a49ebc9c97e414b90a087d63eafc41377a340848c97e75a9cba187fba1
 PKG_DESCR:=		unix editor
 PKG_SECTION:=		app/editor
 PKG_URL:=		http://www.gnu.org/software/ed/ed.html

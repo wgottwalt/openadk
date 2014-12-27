@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXfixes
 PKG_VERSION:=		5.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		0a2139e91df4758218e0fddbd549e13c
+PKG_HASH:=		3c25f2fcf2983834b932756399cb538e69beb0d739f992f9719073fcedaa4405
 PKG_DESCR:=		x11 fixes library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		fixesproto xextproto xproto libX11

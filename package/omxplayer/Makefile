@@ -7,7 +7,7 @@ PKG_NAME:=		omxplayer
 # actually git from 25.09.2014
 PKG_VERSION:=		0.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		19efdc33063526e6996bdc44190c6d4e
+PKG_HASH:=		6b22523bbb949ef6b7905f9fe12da7757cdcae0d4970ff752a3cdb3d7340e66d
 PKG_DESCR:=		video player for raspberry pi
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		libffmpeg boost bcm2835-vc libfreetype libpcre

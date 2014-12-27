@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		b43-firmware
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		37c8d2c029a7e5b82f4433a6fa1e2ee5
+PKG_HASH:=		d327ceeb9315c45b08388b267f7820472680b88c0d02259939c09fbace740d35
 PKG_DESCR:=		firmware for b43 wireless cards
 PKG_SECTION:=		sys/firmware
 PKG_SITES:=		http://openadk.org/distfiles/

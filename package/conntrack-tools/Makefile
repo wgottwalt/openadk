@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		conntrack-tools
 PKG_VERSION:=		1.4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b1f9d006e7bf000a77395ff7cd3fac16
+PKG_HASH:=		e5c423dc077f9ca8767eaa6cf40446943905711c6a8fe27f9cc1977d4d6aa11e
 PKG_DESCR:=		connection tracking userspace tools
 PKG_SECTION:=		net/firewall
 PKG_DEPENDS:=		libtirpc libnetfilter_queue libnetfilter-conntrack libnetfilter-cttimeout libnetfilter-cthelper libmnl

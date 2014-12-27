@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libestr
 PKG_VERSION:=		0.1.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		681ca0ed7e5ae6ddff70fdec413096e4
+PKG_HASH:=		822c6e2d01eaca1e72201f403a2ca01f3e86410b880e508e5204e3c2694d751a
 PKG_DESCR:=		some essentials for string handling
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://libestr.adiscon.com/

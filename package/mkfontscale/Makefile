@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		mkfontscale
 PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c663f511a17e0052fe08139700321955
+PKG_HASH:=		53515d688c8d0ed24f74374d9c33e36a20b024d59b8127d9f23b481ab5e98150
 PKG_DESCR:=		font utility
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		freetype libfontenc

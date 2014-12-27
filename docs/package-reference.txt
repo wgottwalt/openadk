@@ -12,7 +12,7 @@ information is:
 
 * +PKG_RELEASE+, mandatory, must contain the OpenADK specific release of the package.
 
-* +PKG_MD5SUM+, mandatory, must contain the MD5 hash of the package, will be used
+* +PKG_HASH+, mandatory, must contain the SHA256 hash of the package, will be used
   to check if a download of a package is complete.
 
 * +PKG_SECTION+, mandatory, must contain the OpenADK specific section, see package/section.lst.

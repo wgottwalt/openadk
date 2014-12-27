@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXcursor
 PKG_VERSION:=		1.1.13
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		38a6c7ce393cb5bc10e67de087f9d582
+PKG_HASH:=		df4475096192ad60c1300df7b5e2509019ad1a733a0cadcad13b5d3f4b7d615b
 PKG_DESCR:=		cursor library
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}

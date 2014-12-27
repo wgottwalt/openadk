@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		jamvm
 PKG_VERSION:=		1.5.4
 PKG_RELEASE:=		5
-PKG_MD5SUM:=		7654e9657691f5f09c4f481ed4686176
+PKG_HASH:=		7865693698bc4322cabe1014a4b7ebdec1bc1daf45f1a4457b6e908a4446b124
 PKG_DESCR:=		java virtual machine implementation
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libffi zlib

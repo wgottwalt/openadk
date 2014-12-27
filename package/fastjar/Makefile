@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		fastjar
 PKG_VERSION:=		0.98
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d2d264d343d4d0e1575832cc1023c3bf
+PKG_HASH:=		f156abc5de8658f22ee8f08d7a72c88f9409ebd8c7933e9466b0842afeb2f145
 PKG_DESCR:=		fastjar utility
 PKG_SECTION:=		dev/tools
 PKG_SITES:=		http://download.savannah.gnu.org/releases/fastjar/

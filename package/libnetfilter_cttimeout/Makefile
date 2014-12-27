@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libnetfilter_cttimeout
 PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		7697437fc9ebb6f6b83df56a633db7f9
+PKG_HASH:=		aeab12754f557cba3ce2950a2029963d817490df7edb49880008b34d7ff8feba
 PKG_DESCR:=		API to the fine-grain connection tracking timeout infrastructure
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libnfnetlink libmnl

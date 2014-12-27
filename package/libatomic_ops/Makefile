@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libatomic_ops
 PKG_VERSION:=		7.4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		59f9a7cc845dcc775e7b7901eb582766
+PKG_HASH:=		2875ccc29254d3375dab9c5930c42df342f148f8cd7c646621dbf03f8c1d5b5a
 PKG_DESCR:=		atomic operations library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.hboehm.info/gc/

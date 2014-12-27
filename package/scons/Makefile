@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		scons
 PKG_VERSION:=		2.3.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		083ce5624d6adcbdaf2526623f456ca9
+PKG_HASH:=		9442069999cf4b2caa94a5886ab4c2c71de1718ed5e9176c18e2b6dbca463b4b
 PKG_DESCR:=		software construction tool
 PKG_SECTION:=		dev/tools
 HOST_BUILDDEP:=		python2-host

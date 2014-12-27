@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libshout
 PKG_VERSION:=		2.3.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		11765b2592e7ea623ccd93d3f8df172c
+PKG_HASH:=		cf3c5f6b4a5e3fcfbe09fb7024aa88ad4099a9945f7cb037ec06bcee7a23926e
 PKG_DESCR:=		library which can be used to write a source client for streaming
 PKG_SECTION:=		libs/audio
 PKG_DEPENDS:=		libvorbis libogg

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		json-glib
 PKG_VERSION:=		0.14.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2a22832c4654156a35b38ee027f6f065
+PKG_HASH:=		b816a5fa3e5664b08679a6972a6e5693d6cc1990ff4a6f94c07554db96be94a7
 PKG_DESCR:=		library providing serialization and deserialization support for the json format 
 PKG_SECTION:=		libs/data
 PKG_URL:=		https://wiki.gnome.org/JsonGlib/

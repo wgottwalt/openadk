@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		wput
 PKG_VERSION:=		0.6.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		92b41efed4db8eb4f3443c23bf7ceecf
+PKG_HASH:=		67125acab1d520e5d2a0429cd9cf7fc379987f30d5bbed0b0e97b92b554fcc13
 PKG_DESCR:=		wget-like command-line ftp client
 PKG_SECTION:=		net/http
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=wput/}

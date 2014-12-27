@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		asterisk
 PKG_VERSION:=		12.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4a5bdeb8e4ab6633a5e1a3c0efbf158c
+PKG_HASH:=		d9b7b22992cb5903893eb4521e3fd46a8f1f1fafff62166f11003cebeb2c2f55
 PKG_DESCR:=		open source pbx
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl libstdcxx

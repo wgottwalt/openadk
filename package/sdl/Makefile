@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		sdl
 PKG_VERSION:=		1.2.15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9d96df8417572a2afb781a7c4c811a85
+PKG_HASH:=		d6d316a793e5e348155f0dd93b979798933fb98aa1edebcc108829d6474aad00
 PKG_DESCR:=		simple directmedia layer
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libusb alsa-lib libpthread libx11 libxext

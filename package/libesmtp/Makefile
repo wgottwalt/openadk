@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libesmtp
 PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		bf3915e627fd8f35524a8fdfeed979c8
+PKG_HASH:=		d0a61a5c52d99fa7ce7d00ed0a07e341dbda67101dbed1ab0cdae3f37db4eb0b
 PKG_DESCR:=		implements the client side of the smtp protocol
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://www.stafford.uklinux.net/libesmtp/

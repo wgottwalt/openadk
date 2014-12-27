@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXt
 PKG_VERSION:=		1.1.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8b2639042ae28df4022b548d8154fdfb
+PKG_HASH:=		823109a0d14dfaef7ede1b3fd28318078daa2cc2f005c439a21c33bdac3d3784
 PKG_DESCR:=		x toolkit intrinsics libraries
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libsm libice libuuid libx11 libxau libxdmcp libxcb

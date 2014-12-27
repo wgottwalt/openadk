@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		llvm
 PKG_VERSION:=		3.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		46ed668a1ce38985120dbf6344cf6116
+PKG_HASH:=		25a5612d692c48481b9b397e2b55f4870e447966d66c96d655241702d44a2628
 PKG_DESCR:=		collection of modular and reusable compiler and toolchain technologies
 PKG_SECTION:=		dev/lang
 PKG_URL:=		http://llvm.org/

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		rrdcollect
 PKG_VERSION:=		0.2.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		138e21fc9f2de0b8b6c89f1506394ef8
+PKG_HASH:=		6104ecbb12adc4fb91330d9949adfff4fe98b5a01d2249c3d840174d89704ca1
 PKG_DESCR:=		round-robin database collecting daemon
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		librrd

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		stress
 PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d693ff044ac7d34f8aaea202cd96f679
+PKG_HASH:=		778126fdcc3ecb54d4a8dad6164001603bcc3b79ba64b3c2c5285275bc0cbedf
 PKG_DESCR:=		simple tool that imposes certain types of compute stress
 PKG_SECTION:=		sys/utils
 PKG_SITES:=		http://weather.ou.edu/~apw/projects/stress/

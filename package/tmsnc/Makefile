@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		tmsnc
 PKG_VERSION:=		0.3.2
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		337dae91d4775e03b6681f61db56d2a7
+PKG_HASH:=		7f54ba3974f45c0787b6d62d0d62ce352ddbf95419123b98b4969b97d3dfed23
 PKG_DESCR:=		textbased msn client
 PKG_SECTION:=		app/chat
 PKG_URL:=		http://tmsnc.sourceforge.net/

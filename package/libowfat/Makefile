@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libowfat
 PKG_VERSION:=		0.29
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1187c6acf11429e7adb9ebe180f644bb
+PKG_HASH:=		4badbdeed6bef4337f1edd6b86fb7154c5592509c272dcdc09c693161cbc6427
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.fefe.de/libowfat
 PKG_SITES:=		http://dl.fefe.de/

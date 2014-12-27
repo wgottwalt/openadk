@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libICE
 PKG_VERSION:=		1.0.8
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		4b8dae73fce37e994c3a6fa05d6db7ca
+PKG_HASH:=		8332018b07ec38a4a35a360b39f7391c58d053ce5f676aa457b1a686b0277cc0
 PKG_DESCR:=		inter-client exchange library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xtrans xproto

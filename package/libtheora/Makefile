@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libtheora
 PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		292ab65cedd5021d6b7ddd117e07cd8e
+PKG_HASH:=		b6ae1ee2fa3d42ac489287d3ec34c5885730b1296f0801ae577a35193d3affbc
 PKG_DESCR:=		open source video codec library
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libogg libvorbis

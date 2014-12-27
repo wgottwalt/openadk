@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		readline
 PKG_VERSION:=		6.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		fc2f7e714fe792db1ce6ddc4c9fb4ef3
+PKG_HASH:=		f0caf608c06ccd6d56b3bee1843458d509c53f9b53dffffe07cc11d8f03fa969
 PKG_DESCR:=		command line editing library
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libncurses

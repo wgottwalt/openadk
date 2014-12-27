@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		atk
 PKG_VERSION:=		2.11.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2b4316e69cbe0a1998ba39cdc8c89692
+PKG_HASH:=		b3c63668638dbb627a81f4333a00b744c503531d07b168405ef5f27f382a0ae4
 PKG_DESCR:=		accessibility toolkit library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		glib

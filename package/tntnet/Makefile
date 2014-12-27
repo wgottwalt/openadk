@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		tntnet
 PKG_VERSION:=		2.2.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		febe799675c1b8b2f7259bad30cf6f23
+PKG_HASH:=		c83170d08ef04c5868051e1c28c74b9562fe71e9e8263828e755ad5bd3547521
 PKG_DESCR:=		small c++ application server
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		cxxtools zlib libpthread libstdcxx

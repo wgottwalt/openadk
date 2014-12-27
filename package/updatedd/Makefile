@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		updatedd
 PKG_VERSION:=		2.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		95655596eb6e0e381d60a458f6a45fee
+PKG_HASH:=		9d240c7e9fcc3f6cb1d32410ca2dee10d359c53f1a5a30d8f3ec49b18b73f1d0
 PKG_DESCR:=		update dynamic dns services
 PKG_SECTION:=		net/dns
 PKG_SITES:=		http://savannah.nongnu.org/download/updatedd/

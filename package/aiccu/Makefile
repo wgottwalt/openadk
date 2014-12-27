@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		aiccu
 PKG_VERSION:=		20070115
 PKG_RELEASE:=		11
-PKG_MD5SUM:=		c9bcc83644ed788e22a7c3f3d4021350
+PKG_HASH:=		2260f426c13471169ccff8cb4a3908dc5f79fda18ddb6a55363e7824e6c4c760
 PKG_DESCR:=		sixxs automatic ipv6 connectivity client utility
 PKG_SECTION:=		net/ipv6
 PKG_DEPENDS:=		libpthread

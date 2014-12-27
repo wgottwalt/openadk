@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ipset
 PKG_VERSION:=		4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d104007fdf5ea64fef774c22b1c0a97b
+PKG_HASH:=		116ee704355d52919af65379ddb69545e5d4d4602adf2f3765fc649929e7a47a
 PKG_DESCR:=		ip sets administration utility
 PKG_SECTION:=		net/firewall
 PKG_URL:=		http://ipset.netfilter.org/

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libjson
 PKG_VERSION:=		7.6.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		82f3fcbf9f8cf3c4e25e1bdd77d65164
+PKG_HASH:=		07267a3951038ee2e02d26cc41bf8e275668c38f751240d3e78dc979182e7376
 PKG_DESCR:=		json library
 PKG_SECTION:=		libs/data
 PKG_URL:=		http://sourceforge.net/projects/libjson/

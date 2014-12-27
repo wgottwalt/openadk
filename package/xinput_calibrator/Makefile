@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xinput_calibrator
 PKG_VERSION:=		0.7.5
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		20da0a2055a5a75962add8c6b44f60fa
+PKG_HASH:=		baa4ddca49ec94c27ba4c715bfa26692fec1132103e927213c3169e475d3d971
 PKG_DESCR:=		input calibration utility
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libstdcxx

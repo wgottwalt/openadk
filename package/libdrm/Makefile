@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libdrm
 PKG_VERSION:=		2.4.53
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		12e30247fb3caafc835e5f3f768c426a
+PKG_HASH:=		272db7c2ccddeeef476f3ffdd6fd2c8f4ea693d048d9e84e9c40e6716e0d3abd
 PKG_DESCR:=		drm library
 PKG_SECTION:=		libs/video
 PKG_BUILDDEP:=		libpthread-stubs cairo libpciaccess

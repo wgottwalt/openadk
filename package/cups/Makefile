@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		cups
 PKG_VERSION:=		1.7.1
 PKG_RELEASE:=		4
-PKG_MD5SUM:=		55277c40fd4b7183dc3671d39c5c42b7
+PKG_HASH:=		f52bec893d9daf92b6029be79c07e6c516b4c85ffae3e6e01885cc85e9081681
 PKG_DESCR:=		common unix printing system
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		zlib libpthread libstdcxx

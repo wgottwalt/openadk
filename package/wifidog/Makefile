@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		wifidog
 PKG_VERSION:=		1.1.5
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		abe5f7123179a0f08c493ce59fb3cb31
+PKG_HASH:=		a58c5fe2e54f6b3decb27c83f3154820ed1429580a9c5f4c67bec0c40a31701a
 PKG_DESCR:=		complete and embeddable captive portal
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		iptables

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		arpd
 PKG_VERSION:=		0.2
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		e2911fa9de1b92ef50deda1489ae944d
+PKG_HASH:=		21d55de1506b3dbbfddb1b57e782a5fbf7140d299fbb08f4a8e48daaaa8489e7
 PKG_DESCR:=		generates arp responses for ip address ranges
 PKG_SECTION:=		net/route
 PKG_DEPENDS:=		libpcap libdnet libevent

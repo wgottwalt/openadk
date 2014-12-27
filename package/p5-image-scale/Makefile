@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-image-scale
 PKG_VERSION:=		0.08
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		60d6b1d78e229682c3565ee12a171cb4
+PKG_HASH:=		e2dcc90b9954a43dafc7f61bc6dc472382eb719b1046247da5a93cfdd7c3b3e0
 PKG_DESCR:=		fast, high-quality fixed-point image resizing
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl libjpeg-turbo zlib libpng giflib

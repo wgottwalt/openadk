@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		procps
 PKG_VERSION:=		3.2.8
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		9532714b6846013ca9898984ba4cd7e0
+PKG_HASH:=		11ed68d8a4433b91cd833deb714a3aa849c02aea738c42e6b4557982419c1535
 PKG_DESCR:=		/proc file system utilities
 PKG_SECTION:=		base/apps
 PKG_DEPENDS:=		libncurses

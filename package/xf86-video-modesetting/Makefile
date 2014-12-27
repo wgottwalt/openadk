@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xf86-video-modesetting
 PKG_VERSION:=		0.8.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2d491acc5e5de7f9eae9e6dd1d0ee2fc
+PKG_HASH:=		7cb67bc95e83f195bc5f50b6af0b4ff66b5b9ccd16848613d55d732bc1e5fdb6
 PKG_DESCR:=		x11 driver for kms
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libstdcxx

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libsoup
 PKG_VERSION:=		2.44.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		92aa3667357157e8f3489bcca287f2fa
+PKG_HASH:=		e7e4b5ab74a6c00fc267c9f5963852d28759ad3154dab6388e2d6e1962d598f3
 PKG_DESCR:=		http client/server library
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libsqlite glib

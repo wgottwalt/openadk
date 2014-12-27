@@ -3,10 +3,10 @@
 
 include ${ADK_TOPDIR}/rules.mk
 
-PKG_NAME:=		uClibc++
+PKG_NAME:=		uclibc++
 PKG_VERSION:=		0.2.4
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		394c119363dd8b469fb898442a6764b8
+PKG_HASH:=		be16fc6a6eb2e59df420ee41e7042f38e27ebaf5c2762d90e75803364a7b00db
 PKG_DESCR:=		standard c++ library for embedded systems
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://cxx.uclibc.org/
@@ -15,7 +15,7 @@ PKG_NOPARALLEL:=	1
 PKG_LIBNAME:=		uclibc++
 PKG_OPTS:=		dev
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+DISTFILES:=		uClibc++-${PKG_VERSION}.tar.bz2
 
 PKG_LIBC_DEPENDS:=	uclibc
 

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXmu
 PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		53fd02bc7174dd643a26bcc88147c146
+PKG_HASH:=		e7f7f227c8f430de81984d9725113ecd8994d07de372abf334b1c3dec31ceaf1
 PKG_DESCR:=		miscellaneous utility functions for x libraries
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXt libXext

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		openct
 PKG_VERSION:=		0.6.20
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		a1da3358ab798f1cb9232f1dbababc21
+PKG_HASH:=		6cd3e2933d29eb1f875c838ee58b8071fd61f0ec8ed5922a86c01c805d181a68
 PKG_DESCR:=		drivers for smart card readers
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libopenct

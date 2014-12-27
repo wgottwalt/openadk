@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		findutils
 PKG_VERSION:=		4.4.2
 PKG_RELEASE:=		7
-PKG_MD5SUM:=		351cc4adb07d54877fa15f75fb77d39f
+PKG_HASH:=		434f32d171cbc0a5e72cfc5372c6fc4cb0e681f8dce566a0de5b6fccd702b62a
 PKG_DESCR:=		utilities for finding files
 PKG_SECTION:=		base/apps
 PKG_DEPENDS:=		libpthread

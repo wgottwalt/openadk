@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		cherokee
 PKG_VERSION:=		1.2.101
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ef47003355a2e368e4d9596cd070ef23
+PKG_HASH:=		ca465ab3772479fc843b38ffc45113bf24d8bfae9185cdd5176b099d5a17feb8
 PKG_DESCR:=		small and fast webserver
 PKG_SECTION:=		net/http
 PKG_URL:=		http://www.cherokee-project.com

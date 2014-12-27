@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		rtorrent
 PKG_VERSION:=		0.9.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		fd9490a2ac67d0fa2a567c6267845876
+PKG_HASH:=		bc0a2c1ee613b68f37021beaf4e64a9252f91ed06f998c1e897897c354ce7e84
 PKG_DESCR:=		console torrent application
 PKG_SECTION:=		app/p2p
 PKG_DEPENDS:=		libncurses libtorrent libcurl libstdcxx

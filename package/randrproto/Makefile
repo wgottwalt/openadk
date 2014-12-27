@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		randrproto
 PKG_VERSION:=		1.4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		af44f250b89783eb4967f1dc5b32ef68
+PKG_HASH:=		b2c44b63a22f37eef5a2e4ec325e8e6c2ee8b235ef516357535570def6210c88
 PKG_DESCR:=		xrandr protcol headers
 PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}

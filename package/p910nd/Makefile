@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		p910nd
 PKG_VERSION:=		0.97
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		69461a6c54dca0b13ecad5b83864b43e
+PKG_HASH:=		4ac980a3ae24babae6f70f0a692625ece03a4a92c357fbb10d2e368386c3c26f
 PKG_DESCR:=		small non-spooling printer server
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://p910nd.sourceforge.net/

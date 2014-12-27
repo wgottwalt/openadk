@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		l2tpns
 PKG_VERSION:=		2.1.21
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		385c58055723ebc6c38062acd2db9c2c
+PKG_HASH:=		0f8cde15181429e580691e994941492307efca0affe26bf7b4db7ab9477106de
 PKG_DESCR:=		layer 2 tunneling protocol network server
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libcli

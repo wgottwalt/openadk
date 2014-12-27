@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-template-toolkit
 PKG_VERSION:=		2.26
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4c289856ebee446ebbe2629b24f0734b
+PKG_HASH:=		e7e1cf36026f1ef96d8233e18a3fb39e1eafe9109edc639ecf25b20651cd76be
 PKG_DESCR:=		comprehensive template processing system
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl

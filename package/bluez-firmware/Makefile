@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		bluez-firmware
 PKG_VERSION:=		1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1cc3cefad872e937e05de5a0a2b390dd
+PKG_HASH:=		b6119e118fabc6bd34584afcbe6fff00a44caeb64152b02ed57c6fba9fd99eec
 PKG_DESCR:=		firmware for bcm2033 bluetooth dongle
 PKG_SECTION:=		sys/firmware
 PKG_DEPENDS:=		bluez

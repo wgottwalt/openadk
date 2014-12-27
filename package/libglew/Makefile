@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libglew
 PKG_VERSION:=		1.10.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		2f09e5e6cb1b9f3611bcac79bc9c2d5d
+PKG_HASH:=		99c41320b63f6860869b5fb9af9a1854b15582796c64ee3dfd7096dc0c89f307
 PKG_DESCR:=		opengl extension wrangler library
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libx11 libxmu libxi libxext

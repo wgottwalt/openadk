@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		vnstat
 PKG_VERSION:=		1.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9184f79b5e60499bc059f670032291e5
+PKG_HASH:=		2f63c326b34e92254552bd69772dcd8e24e9cc216ccfa182c9fa2523c37fcf37
 PKG_DESCR:=		console-based network traffic monitor
 PKG_SECTION:=		net/perf
 PKG_SITES:=		http://humdi.net/vnstat/

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		daq
 PKG_VERSION:=		2.0.0
 PKG_RELEASE:=		4
-PKG_MD5SUM:=		a00855a153647df76d47f1ea454f74ae
+PKG_HASH:=		fbafc8e362a96fcadc69731f91203ef90845507aae0a4774d5c2825e9d2c1c38
 PKG_DESCR:=		data acquisition library
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpcap libdnet

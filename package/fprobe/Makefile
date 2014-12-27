@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		fprobe
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		65850d0470078269b33eee58cba77ac2
+PKG_HASH:=		3a1cedf5e7b0d36c648aa90914fa71a158c6743ecf74a38f4850afbac57d22a0
 PKG_DESCR:=		netflow probe
 PKG_SECTION:=		net/acct
 PKG_DEPENDS:=		libpcap libpthread

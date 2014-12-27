@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		nasm
 PKG_VERSION:=		2.11.02
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ec43582b8febae24e5b440ae816120c8
+PKG_HASH:=		233c574f2c068c0256f9b3653220ceb247c72b671085595259529156c6cfa55d
 PKG_DESCR:=		assembler application
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		nasm-host

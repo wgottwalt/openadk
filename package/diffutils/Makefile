@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		diffutils
 PKG_VERSION:=		2.8.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		71f9c5ae19b60608f6c7f162da86a428
+PKG_HASH:=		c5001748b069224dd98bf1bb9ee877321c7de8b332c8aad5af3e2a7372d23f5a
 PKG_DESCR:=		show differences between two files
 PKG_SECTION:=		sys/utils
 PKG_URL:=		http://www.gnu.org/software/diffutils/

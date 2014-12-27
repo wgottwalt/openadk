@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		freeradius-server
 PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		3532b6439270f9da0ebfc03d3623f962
+PKG_HASH:=		687f6ca9870709bd433c044947225e365f5099499abba51419bf77134223713b
 PKG_DESCR:=		flexible radius server
 PKG_SECTION:=		net/radius
 PKG_DEPENDS:=		libltdl libopenssl libpthread libpcre

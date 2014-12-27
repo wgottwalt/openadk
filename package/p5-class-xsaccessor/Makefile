@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-class-xsaccessor
 PKG_VERSION:=		1.19
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5c5dea74f00ad37c5119dd22b28a5563
+PKG_HASH:=		99c56b395f1239af19901f2feeb125d9ecb4e351a0d80daa9529211a4700a6f2
 PKG_DESCR:=		generate fast xs accessors without runtime compilation
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl

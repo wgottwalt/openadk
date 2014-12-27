@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		dansguardian
 PKG_VERSION:=		2.12.0.3
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		2a88d0392cd28eaec02b7ee727b2e253
+PKG_HASH:=		c74e9a32b97f9a9a056fced3da23fe48fca2bc6aa9af670afe9a53dc819414f5
 PKG_DESCR:=		web content filter proxy
 PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libpcre zlib

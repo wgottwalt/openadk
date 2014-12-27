@@ -8,7 +8,7 @@ PKG_VERSION:=		2.3.1
 PKG_RELEASE:=		1
 PKG_DESCR:=		xfree86-vidmodeextension extension headers
 PKG_SECTION:=		dev/header
-PKG_MD5SUM:=		99016d0fe355bae0bb23ce00fb4d4a2c
+PKG_HASH:=		c3512b11cefa7558576551f8582c6e7071c8a24d78176059d94b84b48b262979
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

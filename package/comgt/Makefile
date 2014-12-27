@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		comgt
 PKG_VERSION:=		0.32
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		db2452680c3d953631299e331daf49ef
+PKG_HASH:=		0cedb2a5aa608510da66a99aab74df3db363df495032e57e791a2ff55f1d7913
 PKG_DESCR:=		3g/gprs datacard control tool
 PKG_SECTION:=		sys/hw
 PKG_URL:=		http://sourceforge.net/projects/comgt

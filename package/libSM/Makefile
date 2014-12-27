@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libSM
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		1d507651e9fa50aab7ef11be9e0e2f20
+PKG_HASH:=		c7f3660fd5c0ea80ef311e46261eca7c3025ad02c17e545d690a73d70deec7d5
 PKG_DESCR:=		session management library
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libuuid

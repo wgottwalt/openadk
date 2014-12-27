@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		firefox
 PKG_VERSION:=		26.0
 PKG_RELEASE:=		4
-PKG_MD5SUM:=		91ce51cc6474f1269484e5327643a59c
+PKG_HASH:=		31c4fb2792df63ae450e350380a5e18cf1c51487011a9da0b6cc4bffb69d9812
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib glib libgtk libpng libtiff libxcursor libffi

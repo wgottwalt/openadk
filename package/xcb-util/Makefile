@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xcb-util
 PKG_VERSION:=		0.3.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a8f8f710a202079d1ead532abd061672
+PKG_HASH:=		ebb4064db813bfbfedfa30086483e73404f5358fab38698e584c195dc74bd609
 PKG_DESCR:=		libraries which sit on top of libxcb
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		http://xcb.freedesktop.org/dist/

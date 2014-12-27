@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		u-boot-imx6
 PKG_VERSION:=		20140819
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		41ae410a775e336c81a9a22ce836a74f
+PKG_HASH:=		a4e1202241d9a1035217fcd5c4c8bc999c606a3628b4dbf7b0f7ab5260385a29
 PKG_DESCR:=		bootloader for imx6 (cubox-i/hummingboard)
 PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/SolidRun/u-boot-imx6.git

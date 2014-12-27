@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		rrdtool
 PKG_VERSION:=		1.4.8
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		dbe59386db97fd2f2216729facd74ca8
+PKG_HASH:=		de95b9f5aa488b0683600aad5a07c316f8d98cbe8d00aa0a1c87e2b2ef89f3d6
 PKG_DESCR:=		round robin database management library
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libart libfreetype libpng zlib

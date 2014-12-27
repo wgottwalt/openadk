@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libart
 PKG_VERSION:=		2.3.17
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		f1f6b3e5490f382535dccb288f5d8b14
+PKG_HASH:=		93d3a5046638074420da88d85cbcfc8b75db1414a46d6f03f456649b42ea1589
 PKG_DESCR:=		high-performance 2d graphics library
 PKG_SECTION:=		libs/image
 PKG_SITES:=		${MASTER_SITE_GNOME:=libart_lgpl/2.3/}

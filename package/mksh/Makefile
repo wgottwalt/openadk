@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		mksh
 PKG_VERSION:=		50d
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1c3882c07a760b23df1ad94ad0b4ed2e
+PKG_HASH:=		a2268826a1463959ff7b7979fbf9176f1298400ecc24ae13d6337eee5c63f982
 PKG_DESCR:=		mirbsd korn shell
 PKG_SECTION:=		base/shells
 PKG_URL:=		http://www.mirbsd.org/mksh.htm
@@ -14,7 +14,7 @@ PKG_SITES:=		${MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/}
 
 PKG_DFLT_MKSH:=		y if (!ADK_TOOLCHAIN_ONLY && !ADK_TARGET_UCLINUX)
 
-DISTFILES=		${PKG_NAME}-R${PKG_VERSION}.tgz
+DISTFILES:=		${PKG_NAME}-R${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${ADK_TOPDIR}/mk/host.mk

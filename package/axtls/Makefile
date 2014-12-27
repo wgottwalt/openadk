@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		axtls
 PKG_VERSION:=		1.4.9
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		6d519bc3b5f20faa6ef8d423f5062241
+PKG_HASH:=		9bc08f4c7a6bda3079af8e3f5ceee6b2ee92af34e8efbc9acfeee6c27b1f7cc3
 PKG_DESCR:=		small embedded webserver with tls
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libaxtls

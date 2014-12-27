@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libcapi20
 PKG_VERSION:=		3.0.5-cm2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cf81d182fe7a4dbab61bce929824db2c
+PKG_HASH:=		6a54e49109bda85fa2c9356846bc41ab171338afc02d0a85b2fc154667ba5fb9
 PKG_DESCR:=		capi library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		ftp://ftp.melware.net/capi-utils/

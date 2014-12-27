@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xauth
 PKG_VERSION:=		1.0.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		63c5fe6f8459ac08088958febc1db122
+PKG_HASH:=		461afbfc508ff5ac2e600c41dd5da92fe05c389cefbb20425958bdee99b683d6
 PKG_DESCR:=		authority file utility
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libx11 libxext libxmu

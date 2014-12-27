@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libpciaccess
 PKG_VERSION:=		0.13.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c49bd638c78fa4124e11432c1a94b5f4
+PKG_HASH:=		b5459e347166113cefac80003dc5c431a8399ae936b3efcd2cef6437fbe88602
 PKG_DESCR:=		pci access library
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}

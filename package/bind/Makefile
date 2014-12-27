@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		bind
 PKG_VERSION:=		9.9.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e676c65cad5234617ee22f48e328c24e
+PKG_HASH:=		d4b64c1dde442145a316679acff2df4008aa117ae52dfa3a6bc69efecc7840d1
 PKG_DESCR:=		dns server
 PKG_SECTION:=		net/dns
 PKG_DEPENDS:=		libopenssl libbind libxml2 libstdcxx

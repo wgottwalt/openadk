@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		mpc
 PKG_VERSION:=		0.26
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d4f37e7e6b32c804a870192d1eb86199
+PKG_HASH:=		20735f7173cce56bec50c1d8b4633751052dc68365b29a6113206dc1cdc6e242
 PKG_DESCR:=		music player client
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libmpdclient

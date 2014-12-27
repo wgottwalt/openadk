@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		haserl
 PKG_VERSION:=		0.9.33
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a9decddb508944d56f71dd2f821e2ec5
+PKG_HASH:=		9a65b14dc721643fc5b85c79117cb6d824bd3683b246744137bb5d978df7621b
 PKG_DESCR:=		cgi wrapper to embed shell scripts in html documents
 PKG_SECTION:=		net/http
 PKG_URL:=		http://haserl.sourceforge.net/

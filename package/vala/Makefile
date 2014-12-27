@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		vala
 PKG_VERSION:=		0.24.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		beddeff9c06d3c278988b237da0e7401
+PKG_HASH:=		22a37c977512c19cd29c373eaaef96cb2c994795d491106f32387f3f9d1e899c
 PKG_DESCR:=		compiler for the gobject type system
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		glib

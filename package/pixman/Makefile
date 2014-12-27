@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		pixman
 PKG_VERSION:=		0.32.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		eba449138b972fbf4547a8c152fea162
+PKG_HASH:=		80c7ed420e8a3ae749800241e6347c3d55681296cab71384be7969cd9e657e84
 PKG_DESCR:=		pixel manipulation library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libpng

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXv
 PKG_VERSION:=		1.0.7
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		066145bab1f182476589af0ee9c18152
+PKG_HASH:=		e597d2d4443ce25048ffb808a6276f28afb1a92f10d0d645abd4079c9b813570
 PKG_DESCR:=		xvideo extensions library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libX11 videoproto libXext

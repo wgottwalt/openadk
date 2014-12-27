@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		speex
 PKG_VERSION:=		1.2rc1
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		c4438b22c08e5811ff10e2b06ee9b9ae
+PKG_HASH:=		342f30dc57bd4a6dad41398365baaa690429660b10d866b7d508e8f1179cb7a6
 PKG_DESCR:=		open source patent-free speech compression codec
 PKG_SECTION:=		libs/audio
 PKG_URL:=		http://speex.org/

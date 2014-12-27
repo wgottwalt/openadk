@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		cutter
 PKG_VERSION:=		1.03
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		50093db9b64277643969ee75b83ebbd1
+PKG_HASH:=		4df4fac7c2208afafb279abb443005bf77d3dcf01af05fe1f2898213b9109615
 PKG_DESCR:=		abort tcp/ip connections routed over a firewall
 PKG_SECTION:=		net/firewall
 PKG_URL:=		http://www.lowth.com/cutter/software/

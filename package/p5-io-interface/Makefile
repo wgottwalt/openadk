@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-io-interface
 PKG_VERSION:=		1.08
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		38c292a4d0976dd38179cfbfdca5e777
+PKG_HASH:=		67c6658e66737af09777ae06f90d11d969a31de92b2cdf705126dd79ea961df0
 PKG_DESCR:=		extension for access to network card configuration information
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl

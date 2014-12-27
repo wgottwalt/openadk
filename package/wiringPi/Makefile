@@ -8,7 +8,7 @@ PKG_NAME:=		wiringPi
 # 0a9fdeb29d31609ef834f050bdb8a7a65cd35e2b
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e1c9430b80476da2c1de5ef71a795a3d
+PKG_HASH:=		230a059d2106ba9402cb51a10167db9d7d817a4a1df3d55cd8d0ef220c0e8187
 PKG_DESCR:=		GPIO access library for the BCM2835 used in the Raspberry Pi
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://wiringpi.com/

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXau
 PKG_VERSION:=		1.0.7
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		3ab7a4d1aac1b7f8ccc6b9755a19f252
+PKG_HASH:=		cbb81b4ba0f585faac8b9914b0bdbef6e0ef886a30c70d6584e2b30efeda9ac4
 PKG_DESCR:=		x11 authorisation library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto

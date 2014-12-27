@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		liblogging
 PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		034083ef1424a566fdeefc56a719691f
+PKG_HASH:=		aceb5d2aa8bdc771ff66f407f9adf4176b654db63e34a8605795b68be537b81c
 PKG_DESCR:=		standard logging library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.liblogging.org/	

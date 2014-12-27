@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		python2
 PKG_VERSION:=		2.7.5
 PKG_RELEASE:=		12
-PKG_MD5SUM:=		b4f01a1d0ba0b46b05c73b2ac909b1df
+PKG_HASH:=		8e1b5fa87b91835afb376a9c0d319d41feca07ffebc0288d97ab08d64f48afbf
 PKG_DESCR:=		python scripting language (Version 2)
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		libffi python2-host 
@@ -18,7 +18,7 @@ PKG_OPTS:=		dev
 
 PKG_HOST_DEPENDS:=	!netbsd !openbsd
 
-DISTFILES=		Python-${PKG_VERSION}.tgz
+DISTFILES:=		Python-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}
 
 PKG_FLAVOURS_PYTHON2:=	MOD_ZLIB MOD_BZ2 MOD_EXPAT MOD_SQLITE MOD_GDBM

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		transproxy
 PKG_VERSION:=		1.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		02cc1160a9db9c49a40491f890083044
+PKG_HASH:=		7bc4ce5ab01648dcaca25555eb4d4c3a67aed6bbb42e1432aaa4e9b20b75dab3
 PKG_DESCR:=		transparent http proxy
 PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		iptables

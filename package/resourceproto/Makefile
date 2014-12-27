@@ -8,7 +8,7 @@ PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		resource extension headers
 PKG_SECTION:=		dev/header
-PKG_MD5SUM:=		33091d5358ec32dd7562a1aa225a70aa
+PKG_HASH:=		469029d14fdeeaa7eed1be585998ff4cb92cf664f872d1d69c04140815b78734
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

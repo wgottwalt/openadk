@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		netperf
 PKG_VERSION:=		2.4.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		391a0d98954c72a6ad7f08b8a115e1ce
+PKG_HASH:=		f6cbcc3d41da1737dc8ca65859a902eafb41fc43f3be59306ee17c5372e7e6ff
 PKG_DESCR:=		network performance measurement tools
 PKG_SECTION:=		net/perf
 PKG_URL:=		http://www.netperf.org/netperf/

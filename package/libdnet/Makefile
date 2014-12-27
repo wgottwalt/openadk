@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libdnet
 PKG_VERSION:=		1.11
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		04c394ed8e1e7fc455456e79e908916d
+PKG_HASH:=		0eb78415c8f2564c2f1e8ad36e98473348d9c94852f796a226360c716cc7ca53
 PKG_DESCR:=		low-level networking library
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://libdnet.sourceforge.net/

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libunistring
 PKG_VERSION:=		0.9.3
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		db8eca3b64163abadf8c40e5cecc261f
+PKG_HASH:=		610d3ec724fbdaa654afe3cff20b9f4d504be3fd296fded2e0f7f764041006a3
 PKG_DESCR:=		functions for manipulating unicode strings
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.gnu.org/software/libunistring/

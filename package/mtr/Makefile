@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		mtr
 PKG_VERSION:=		0.75
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		23baca52d0922c2ecba7eba05317868c
+PKG_HASH:=		1d1a5de6b233289bf17a21e3bf83c82db47d22bb269af986229b788689e1f0f3
 PKG_DESCR:=		traceroute/ping tool
 PKG_SECTION:=		net/debug
 PKG_DEPENDS:=		libncurses

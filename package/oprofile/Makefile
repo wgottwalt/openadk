@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		oprofile
 PKG_VERSION:=		0.9.9
 PKG_RELEASE:=		4
-PKG_MD5SUM:=		00aec1287da2dfffda17a9b1c0a01868
+PKG_HASH:=		1e523400daaba7b8d0d15269e977a08b40edfea53970774b69ae130e25117597
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libpopt libbfd libstdcxx

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		gdk-pixbuf
 PKG_VERSION:=		2.24.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		bd7c2a9d23b573db467e39833f12103d
+PKG_HASH:=		67c11d3aa40441c1cea42c365bf2d6a9a9dd52fae2d359a707ad5e8abb4d28a7
 PKG_DESCR:=		image loading and pixel buffer manipulation library
 PKG_SECTION:=		libs/image
 PKG_DEPENDS:=		libstdcxx

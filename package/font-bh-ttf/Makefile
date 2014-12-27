@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		font-bh-ttf
 PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4ce741ec4edaa11cd38988d355a7578b
+PKG_HASH:=		c583b4b968ffae6ea30d5b74041afeac83126682c490a9624b770d60d0e63d59
 PKG_DESCR:=		x fonts
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		font-util

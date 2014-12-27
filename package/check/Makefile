@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		check
 PKG_VERSION:=		0.9.12
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		46fe540d1a03714c7a1967dbc6d484e7
+PKG_HASH:=		c7d47e55e133a0ca19a52e08a99333ac55cb22618b53719b7f4117a1875b1ea3
 PKG_DESCR:=		unit testing framework for c
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://check.sourceforge.net/

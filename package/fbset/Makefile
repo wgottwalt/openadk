@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		fbset
 PKG_VERSION:=		2.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		e547cfcbb8c1a4f2a6b8ba4acb8b7164
+PKG_HASH:=		40ff4ab0247b75138a0887ed40f81c1a6184f340b77126c16d074b1075b41c20
 PKG_DESCR:=		framebuffer utility
 PKG_DEPENDS:=		bison-host flex-host
 PKG_SECTION:=		sys/hw

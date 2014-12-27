@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		exmap
 PKG_VERSION:=		0.4.1
 PKG_RELEASE:=		4
-PKG_MD5SUM:=		55aec784e214037e61400287a55b5426
+PKG_HASH:=		53082354ae893fd385051c96214640cbeba527131ccf9f5320626252a4aef8d5
 PKG_DESCR:=		memory analysing tools
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libreadline glib

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		easy-rsa
 PKG_VERSION:=		2.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cd55a94b0785a0b1e1076b4dc018d531
+PKG_HASH:=		40a1800d8cf4e858d4b3cdc3d3c612747edcd18ecaeb6b8737f452092760e50c
 PKG_DESCR:=		openssl ca scripts
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		openssl-util

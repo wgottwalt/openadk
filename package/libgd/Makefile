@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libgd
 PKG_VERSION:=		2.1.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		03588159bf4faab9079849c8d709acc6
+PKG_HASH:=		fa6665dfe3d898019671293c84d77067a3d2ede50884dbcb6df899d508370e5a
 PKG_DESCR:=		library for the dynamic creation of images
 PKG_SECTION:=		libs/image
 PKG_DEPENDS:=		libpng libjpeg-turbo

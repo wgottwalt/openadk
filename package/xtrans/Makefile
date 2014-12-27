@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		network protocol transport library
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		xtrans-host
-PKG_MD5SUM:=		c83d04cd878f1e51a44d132aa1d5b932
+PKG_HASH:=		afb636c4efc8aec006ffc829e88337327b82206c8ece1e91e1afcc2f0732083b
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

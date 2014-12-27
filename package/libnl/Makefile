@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libnl
 PKG_VERSION:=		3.2.25
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		03f74d0cd5037cadc8cdfa313bbd195c
+PKG_HASH:=		8beb7590674957b931de6b7f81c530b85dc7c1ad8fbda015398bc1e8d1ce8ec5
 PKG_DESCR:=		netlink library
 PKG_SECTION:=		libs/net
 PKG_BUILDDEP:=		m4-host flex-host

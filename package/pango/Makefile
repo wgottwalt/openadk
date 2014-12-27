@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		pango
 PKG_VERSION:=		1.36.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d9532826e95bdb374355deebc42441bb
+PKG_HASH:=		ad48e32917f94aa9d507486d44366e59355fcfd46ef86d119ddcba566ada5d22
 PKG_DESCR:=		library for laying out and rendering of text
 PKG_SECTION:=		libs/fonts
 PKG_DEPENDS:=		libstdcxx

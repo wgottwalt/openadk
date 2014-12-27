@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		6tunnel
 PKG_VERSION:=		0.11rc2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		74e02d4f0704b3083a01feda66033449
+PKG_HASH:=		58a6e274a46f04dce158be0e071bf076af0dc7b92bc3d8212dc827ab43e1db07
 PKG_DESCR:=		ipv4/ipv6 tunnel proxy
 PKG_SECTION:=		net/ipv6
 PKG_URL:=		http://toxygen.net/6tunnel/

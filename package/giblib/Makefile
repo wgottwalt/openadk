@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		giblib
 PKG_VERSION:=		1.2.4
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		c810ef5389baf24882a1caca2954385e
+PKG_HASH:=		176611c4d88d742ea4013991ad54c2f9d2feefbc97a28434c0f48922ebaa8bac
 PKG_DESCR:=		imlib2 wrapper library
 PKG_SECTION:=		libs/image
 PKG_DEPENDS:=		imlib2

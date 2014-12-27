@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		python3
 PKG_VERSION:=		3.4.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		77c22725e14af3d71022cbfdebff4903
+PKG_HASH:=		f13686c0a2d45e7146759e9d5d1cbd8097a0606483c0cf7730e1e13f58b14cbe
 PKG_DESCR:=		python scripting language (Version 3)
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libpthread libffi
@@ -45,7 +45,7 @@ PKGFD_MOD_SSL:=		OpenSSL support
 PKGFB_MOD_SSL:=		openssl
 PKGFS_MOD_SSL:=		libopenssl
 
-DISTFILES=		Python-${PKG_VERSION}.tar.xz
+DISTFILES:=		Python-${PKG_VERSION}.tar.xz
 WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}
 
 include ${ADK_TOPDIR}/mk/host.mk

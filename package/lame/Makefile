@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		lame
 PKG_VERSION:=		3.99
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7abacd1d0a65a63733335786015626db
+PKG_HASH:=		d71d804c25cac69592939865033787849cef52b6c9b783ed31ea8dcebeadbbba
 PKG_DESCR:=		mp3 encoder
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libncurses

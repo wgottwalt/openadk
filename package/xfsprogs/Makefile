@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		xfsprogs
 PKG_VERSION:=		3.1.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		de9f1f45026c2f4e0776058d429ff4b6
+PKG_HASH:=		adf4980177b5c890c1ca86b9c0e3e4d69a3f95bfc01746844280c2393cf4d6be
 PKG_DESCR:=		utilities for xfs filesystems
 PKG_SECTION:=		sys/fs
 PKG_BUILDDEP:=		e2fsprogs util-linux ncurses

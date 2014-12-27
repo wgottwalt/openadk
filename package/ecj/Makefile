@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		ecj
 PKG_VERSION:=		4.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7339f199ba11c941890031fd9981d7be
+PKG_HASH:=		9506e75b862f782213df61af67338eb7a23c35ff425d328affc65585477d34cd
 PKG_DESCR:=		ecj java compiler
 PKG_SECTION:=		dev/lang
 PKG_SITES:=		ftp://sourceware.org/pub/java/

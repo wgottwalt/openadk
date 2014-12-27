@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		lighttpd
 PKG_VERSION:=		1.4.35
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c7ae774eab4cb7ac85e41b712f4ee9ba
+PKG_HASH:=		113e9b72ccbd1da5deb0774bf93cf0ca15dc82aad2da0f04e5ab27d37d3f30a3
 PKG_DESCR:=		lightweight web server
 PKG_SECTION:=		net/http
 PKG_URL:=		http://www.lighttpd.net/

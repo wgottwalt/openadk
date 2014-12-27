@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-common-sense
 PKG_VERSION:=		3.73
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6da7455a43ab60ed21c2a5e3b3ddeda8
+PKG_HASH:=		8110c5e472641e0c218f8e023cecc1612ef66f9a1b313261fe219862efe3fd10
 PKG_DESCR:=		save a tree and a kitten
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		icu4c
 PKG_VERSION:=		52.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9e96ed4c1d99c0d14ac03c140f9f346c
+PKG_HASH:=		2f4d5e68d4698e87759dbdc1a586d053d96935787f79961d192c477b029d8092
 PKG_DESCR:=		unicode and globalization library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		icu4c-host

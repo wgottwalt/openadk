@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		lrzsz
 PKG_VERSION:=		0.12.20
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b5ce6a74abc9b9eb2af94dffdfd372a4
+PKG_HASH:=		c28b36b14bddb014d9e9c97c52459852f97bd405f89113f30bee45ed92728ff1
 PKG_DESCR:=		x-Modem, y-modem, z-modem protocol handlers
 PKG_SECTION:=		sys/serial
 PKG_URL:=		http://www.ohse.de/uwe/software/lrzsz.html

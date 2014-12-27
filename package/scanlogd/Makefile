@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		scanlogd
 PKG_VERSION:=		2.2.6
 PKG_RELEASE:=		8
-PKG_MD5SUM:=		7b8187ea718ebe47f22805b921b909ab
+PKG_HASH:=		4a2621037270f88576c8770261c53761edc875984f126872c880c2a98a8f63fa
 PKG_DESCR:=		portscan logger
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libpcap libnet libnids

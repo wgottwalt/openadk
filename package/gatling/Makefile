@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		gatling
 PKG_VERSION:=		0.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a0fb49ccb6b910bdbd7e76a9960394e3
+PKG_HASH:=		9e1cb18612905b63755b0f463e6c5268789b3ab47db364bebe1ad077583e7571
 PKG_DESCR:=		small non-forking webserver
 PKG_SECTION:=		net/http
 PKG_BUILDDEP:=		libowfat
@@ -14,7 +14,9 @@ PKG_URL:=		http://www.fefe.de/gatling/
 PKG_SITES:=		http://dl.fefe.de/
 
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
-DISTFILES=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${ADK_TOPDIR}/mk/package.mk
 

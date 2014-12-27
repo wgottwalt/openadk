@@ -8,7 +8,7 @@ PKG_VERSION:=		2.1
 PKG_RELEASE:=		1
 PKG_DESCR:=		xfree86-dga headers
 PKG_SECTION:=		dev/header
-PKG_MD5SUM:=		1fe79dc07857ad3e1fb8b8f2bdd70d1b
+PKG_HASH:=		73bc6fc830cce5a0ec9c750d4702601fc0fca12d6353ede8b4c0092c9c4ca2af
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ptunnel
 PKG_VERSION:=		0.61
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		b45f73875f2af48f101816672f83a5fe
+PKG_HASH:=		9f19f05f772cd7caba52a0f0adf9fd93d5fab8f6c50fc7fada0505294bd0aac3
 PKG_DESCR:=		tunnel tcp connections over icmp packets
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libpcap libpthread

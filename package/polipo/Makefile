@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		polipo
 PKG_VERSION:=		1.0.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		bfc5c85289519658280e093a270d6703
+PKG_HASH:=		8d6fbfdec600d42823e483b0143704c6f179c349803028a4d2cef056b79f7cfa
 PKG_DESCR:=		web proxy with socks5 support
 PKG_SECTION:=		net/proxy
 PKG_URL:=		http://www.pps.univ-paris-diderot.fr/~jch/software/polipo/

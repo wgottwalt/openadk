@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libsigc++
 PKG_VERSION:=		2.2.10
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		6d350ae0bc17b8915a06ce6b7e4240e8
+PKG_HASH:=		d3d810c2ad469edfb2d4db29643bef189b7613019eadbd4a72823af3c73c959c
 PKG_DESCR:=		callback framework for c++
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://libsigc.sourceforge.net

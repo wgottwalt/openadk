@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		wccpd
 PKG_VERSION:=		0.2
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		5f15c274de61dfb88e0dbfc1ccbe6b67
+PKG_HASH:=		397cc932a3222b33c1501168084920f0b848f7c4c6109bbc4a99c4ccc1f03a92
 PKG_DESCR:=		web cache coordination protocol server daemon
 PKG_SECTION:=		net/proxy
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=wccpd/}

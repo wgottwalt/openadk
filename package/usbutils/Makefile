@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		usbutils
 PKG_VERSION:=		008
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2780b6ae21264c888f8f30fb2aab1259
+PKG_HASH:=		44741af0bae9d402a0ef160a29b2fa700bb656ab5e0a4b3343d51249c2a44c8c
 PKG_DESCR:=		program to list usb devices
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libusb libusb-compat libpthread zlib librt

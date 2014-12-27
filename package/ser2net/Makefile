@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ser2net
 PKG_VERSION:=		2.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5f83a3e8aec18331cb61069dccdfba47
+PKG_HASH:=		2b5dfdd457f31bd2eec9afc8ed2873bd40b2d6f3cb9ff7275dd9384218b01734
 PKG_DESCR:=		allowing network connections to serial ports
 PKG_SECTION:=		net/misc
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ser2net/}

@@ -20,7 +20,7 @@ scripts.
 06: PKG_NAME:=		libfoo
 07: PKG_VERSION:=	1.0
 08: PKG_RELEASE:=	1
-09: PKG_MD5SUM:=	eade38998313c25fd7934719cdf8a2ea
+09: PKG_HASH:=		62333167b79afb0b25a843513288c67b59547acf653e8fbe62ee64e71ebd1587
 10: PKG_DESCR:=		foo library
 11: PKG_SECTION:=	libs
 12: PKG_BUILDDEP:=	openssl
@@ -53,8 +53,8 @@ The Makefile begins with line 4 with the inclusion of the top level rules.mk
 file.  After that the Makefile starts on line 6 to 15 with metadata
 information: the name of the package (+PKG_NAME+), the version of the package
 (+PKG_VERSION+), the release number of the package (+PKG_RELEASE+), which is
-used in OpenADK to mark any package updates, the md5 hash of the source archive
-(+PKG_MD5SUM+), the short one line description for the package (+PKG_DESCR+),
+used in OpenADK to mark any package updates, the sha256 hash of the source archive
+(+PKG_HASH+), the short one line description for the package (+PKG_DESCR+),
 the package section for the menu configuration system (+PKG_SECTION+), the
 package buildtime dependencies (+PKG_BUILDDEP+), the package runtime
 dependencies (+PKG_DEPENDS+), the package homepage (+PKG_URL+) and finally the

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		gettext-tiny
 PKG_VERSION:=		0.0.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		09f6a74945df5961080234f7851f352c
+PKG_HASH:=		fffb22ae01bc8f4772ba6fcfddce4a87f199589e0230cba26df65110007c7821
 PKG_DESCR:=		gettext stub and replacement
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		gettext-tiny-host

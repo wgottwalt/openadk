@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		portsentry
 PKG_VERSION:=		1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3ebd3618ba9abfea2525e236bd44cebd
+PKG_HASH:=		dd1edcfcf2d9db7b5722de4f1da36ae45703bf05917af657ab6f7491be7fa52e
 PKG_DESCR:=		software for protection against port scans
 PKG_SECTION:=		net/security
 PKG_URL:=		http://sourceforge.net/projects/sentrytools

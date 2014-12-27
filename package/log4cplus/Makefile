@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		log4cplus
 PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		977d0a390b3be1a4ad8cfab2e4dd3af3
+PKG_HASH:=		c2bb01b5f4bff5fa768700e98ead4a79dfd556096c9f3f0401849da7ab80fbef
 PKG_DESCR:=		logging framework for c++
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpthread

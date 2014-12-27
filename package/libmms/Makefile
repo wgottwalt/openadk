@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libmms
 PKG_VERSION:=		0.6.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		9f63aa363deb4874e072a45850161bff
+PKG_HASH:=		01931b62172d7d7050fc9ef9b1b64162f3b6e9f6cc4415170192a32a0b7ea432
 PKG_DESCR:=		common library for parsing mms:// type network streams
 PKG_SECTION:=		libs/audio
 PKG_BUILDDEP:=		glib

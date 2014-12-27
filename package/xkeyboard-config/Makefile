@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xkeyboard-config
 PKG_VERSION:=		2.11
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e3defd29cc464cc1a1dfa0eebaca53b1
+PKG_HASH:=		e7125460892c2b5c3a8d843cb18c24b60c46051e925c2888a61fa672a2f76d76
 PKG_DESCR:=		keyboard config
 PKG_SECTION:=		x11/misc
 PKG_BUILDDEP:=		util-macros xkbcomp

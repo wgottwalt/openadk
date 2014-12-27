@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		vrrpd
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		9
-PKG_MD5SUM:=		6d5066ea1a6ced817376ca0f54765447
+PKG_HASH:=		5d49eee9ecb3ceba3a35182930d3d740f771c8f7950b2327502a79c66bca2fd6
 PKG_DESCR:=		virtual router redundancy protocol daemon
 PKG_SECTION:=		net/route
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vrrpd/}

@@ -10,5 +10,5 @@ PKG_VERSION:=		$(ADK_LIBC_VERSION)
 PKG_SITES:=		http://www.musl-libc.org/releases/
 endif
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		94f8aa9dab80229fed68991bb9984cc5
+PKG_HASH:=		352362b1724cc9740f4c3ce0fe02aae45e4de9809ea4ac961f31aedc11b87393
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

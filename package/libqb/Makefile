@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libqb
 PKG_VERSION:=		0.16.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		51d2ca372c6b8151bf3544d93bcdc8db
+PKG_HASH:=		b8cda1efb33d0ce991aad552bbd71b59c16038c2095d139644a95b5b5ea17f48
 PKG_DESCR:=		high performance client server reusable features
 PKG_SECTION:=		libs/misc
 PKG_URL:=		https://github.com/asalkeld/libqb/wiki#wiki-Releases

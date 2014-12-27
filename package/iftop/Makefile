@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		iftop
 PKG_VERSION:=		0.17
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		062bc8fb3856580319857326e0b8752d
+PKG_HASH:=		d032547c708307159ff5fd0df23ebd3cfa7799c31536fa0aea1820318a8e0eac
 PKG_DESCR:=		display bandwith usage on an interface
 PKG_SECTION:=		net/perf
 PKG_DEPENDS:=		libncurses libpcap libpthread

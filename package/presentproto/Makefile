@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		presentproto
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		57eaf4bb58e86476ec89cfb42d675961
+PKG_HASH:=		02f8042cb351dd5c3699a0dbdb2ab25f86532efe3e1e3e97897e7f44b5c67040
 PKG_DESCR:=		present protocol headers
 PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}

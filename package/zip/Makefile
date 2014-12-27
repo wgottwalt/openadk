@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		zip
 PKG_VERSION:=		3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7b74551e63f8ee6aab6fbc86676c0d37
+PKG_HASH:=		f0e8bb1f9b7eb0b01285495a2699df3a4b766784c1765a8f1aeedf63c0806369
 PKG_DESCR:=		zip compression utility
 PKG_SECTION:=		app/archive
 PKG_URL:=		http://www.info-zip.org/Zip.html

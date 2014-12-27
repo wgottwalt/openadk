@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		fakeidentd
 PKG_VERSION:=		2.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ebf398bd1843a1fd8c71f5fcf4a6e4f7
+PKG_HASH:=		696a57b58ede48c65b9c3743d3d96be70abf5406f0173964e4cd05dd6c8f0b90
 PKG_DESCR:=		secure ident daemon
 PKG_SECTION:=		net/misc
 PKG_SITES:=		http://distfiles.gentoo.org/distfiles/

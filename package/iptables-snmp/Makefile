@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		iptables-snmp
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8370d2f0c899461a053da491400119d1
+PKG_HASH:=		3275bb3820809a311b9f92ea32f071888b9a92f60c831417490e811f46ec4d54
 PKG_DESCR:=		iptables support for net-snmp
 PKG_SECTION:=		net/misc
 PKG_BUILDDEP:=		net-snmp

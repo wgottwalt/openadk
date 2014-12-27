@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		ccid
 PKG_VERSION:=		1.4.17
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		79ef91103bcdd99a3b31cb5c5721a829
+PKG_HASH:=		ccdab8a9bc1ad288242d5f9ef399405e9cb96fb09caadb43e3649cbaba84c451
 PKG_DESCR:=		generic usb ccid and iccd driver
 PKG_SECTION:=		app/crypto
 PKG_BUILDDEP:=		pcsc-lite

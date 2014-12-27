@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		keyutils
 PKG_VERSION:=		1.5.9
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7f8ac985c45086b5fbcd12cecd23cf07
+PKG_HASH:=		4da2c5552c688b65ab14d4fd40fbdf720c8b396d8ece643e040cf6e707e083ae
 PKG_DESCR:=		utilities for managing the key retention facility
 PKG_SECTION:=		libs/misc
 PKG_SITES:=		http://people.redhat.com/dhowells/keyutils/

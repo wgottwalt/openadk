@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXrandr
 PKG_VERSION:=		1.3.2
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		edacf83655be2e48348b626c0dc454f3
+PKG_HASH:=		c117a84ceda5a0744806efd4948594d4ec28a86c245768d721dbdabff1f7e073
 PKG_DESCR:=		xrandr library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		randrproto

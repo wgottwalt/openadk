@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libxshmfence
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		323bb06c70765a2395df1d9c7ec3d14a
+PKG_HASH:=		36a6c67c71c6f262be0f2f29349d33ad157ba1fea64a55acd35b90c3816a4cdc
 PKG_DESCR:=		interface to shared-memory fences
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		${MASTER_SITE_XORG}

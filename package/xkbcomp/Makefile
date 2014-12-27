@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xkbcomp
 PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		10e6661a35aa994a9aa73ded0cf70259
+PKG_HASH:=		817e2bda2ca51ffc1fc664e3f9ab88b359cd91246f0f4736fc747d6fbc59f2e7
 PKG_DESCR:=		x11 keyboard compiler
 PKG_SECTION:=		x11/misc
 PKG_BUILDDEP:=		libxkbfile libX11

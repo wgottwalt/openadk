@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		procmail
 PKG_VERSION:=		3.22
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1678ea99b973eb77eda4ecf6acae53f1
+PKG_HASH:=		087c75b34dd33d8b9df5afe9e42801c9395f4bf373a784d9bc97153b0062e117
 PKG_DESCR:=		mail processing tools
 PKG_SECTION:=		net/mail
 PKG_URL:=		http://www.procmail.org/

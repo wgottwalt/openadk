@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xbindkeys
 PKG_VERSION:=		1.8.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		393dd74f85850a4ba0803b5a78bc598b
+PKG_HASH:=		ca8033ffdc19f382ec35796318dd6a9e17f04aac1d54d75fb972db6d964f56b4
 PKG_DESCR:=		keybindings for x11
 PKG_BUILDDEP:=		libX11
 PKG_SECTION:=		x11/utils

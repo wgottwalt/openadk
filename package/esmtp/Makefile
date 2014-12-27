@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		esmtp
 PKG_VERSION:=		1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		79a9c1f9023d53f35bb82bf446150a72
+PKG_HASH:=		a0d26931bf731f97514da266d079d8bc7d73c65b3499ed080576ab606b21c0ce
 PKG_DESCR:=		relay-only mail transfer agent
 PKG_SECTION:=		net/mail
 PKG_DEPENDS:=		libesmtp flex

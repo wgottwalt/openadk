@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		miredo
 PKG_VERSION:=		1.2.6
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		5bcdbaced54f40b6cb1e9c9a8dbac411
+PKG_HASH:=		fa26d2f4a405415833669e2e2e22677b225d8f83600844645d5683535ea43149
 PKG_DESCR:=		teredo application
 PKG_SECTION:=		net/ipv6
 PKG_URL:=		http://www.remlab.net/

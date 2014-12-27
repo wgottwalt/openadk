@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		librsvg
 PKG_VERSION:=		2.40.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		acdecdb9f08f3bf662a68bf7dafb8b82
+PKG_HASH:=		48049b643294636df7de1a4b997414d699666f5dc44776945c218a257d2a291c
 PKG_DESCR:=		svg library
 PKG_BUILDDEP:=		libcroco
 HOST_BUILDDEP:=		libcroco-host gdk-pixbuf-host pango-host

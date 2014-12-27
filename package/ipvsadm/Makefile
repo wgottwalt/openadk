@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		ipvsadm
 PKG_VERSION:=		1.26
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		eac3ba3f62cd4dea2da353aeddd353a8
+PKG_HASH:=		6d6c46fecb1c532a892616b4445c73b71730e8790d5630f60269fd9cbee0eb2d
 PKG_DESCR:=		ip virtual server admin utility
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libpopt

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ctorrent
 PKG_VERSION:=		dnh3.3.2
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		59b23dd05ff70791cd6449effa7fc3b6
+PKG_HASH:=		c87366c91475931f75b924119580abd06a7b3cb3f00fef47346552cab1e24863
 PKG_DESCR:=		console-based bittorrent client
 PKG_SECTION:=		app/p2p
 PKG_DEPENDS:=		libstdcxx

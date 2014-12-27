@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		beecrypt
 PKG_VERSION:=		4.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8441c014170823f2dff97e33df55af1e
+PKG_HASH:=		286f1f56080d1a6b1d024003a5fa2158f4ff82cae0c6829d3c476a4b5898c55d
 PKG_DESCR:=		cryptography toolkit library
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libstdcxx

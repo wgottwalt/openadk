@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xf86-input-keyboard
 PKG_VERSION:=		1.8.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4f3e135e04939916f37f91a111c6f70b
+PKG_HASH:=		a803ec6ee5c48fd6a24917902f49201459baa575459f9c585b25eeda77c32da7
 PKG_DESCR:=		x11 driver for keyboard
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libstdcxx

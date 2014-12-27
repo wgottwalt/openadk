@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		firmware-imx
 PKG_VERSION:=		3.10.31-1.1.0-beta
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4e102affc4273f424da4cec9f46adae8
+PKG_HASH:=		8fcfc713321c4ffaafee248feb392b7bc9b913b7abee5020fceaca1d1a49ac99
 PKG_DESCR:=		IMX VPU firmware (Freescale)
 PKG_SECTION:=		sys/firmware
 PKG_URL:=		http://www.freescale.com/

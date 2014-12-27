@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		pcsc-lite
 PKG_VERSION:=		1.7.4
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		1caf0b8ca2ecbf82fe3b035b3fff22dd
+PKG_HASH:=		d8e4a7eaae05089dccaeca0524ffd9b308d9e8f3da3fb043515e6c1d7b5583d1
 PKG_DESCR:=		middleware for smartcards
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libusb libusb-compat libpthread

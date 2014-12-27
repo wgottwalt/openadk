@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libssh2
 PKG_VERSION:=		1.4.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		071004c60c5d6f90354ad1b701013a0b
+PKG_HASH:=		eac6f85f9df9db2e6386906a6227eb2cd7b3245739561cad7d6dc1d5d021b96d
 PKG_DESCR:=		client-side c library implementing ssh2 protocol
 PKG_SECTION:=		libs/net
 PKG_BUILDDEP:=		openssl zlib

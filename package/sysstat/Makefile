@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		sysstat
 PKG_VERSION:=		7.0.3
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		732904b006a0224b0a9ce4d312946277
+PKG_HASH:=		ce66047a5600a741a51d347553721c05f3372896460323f25c3c19d9225e8ee7
 PKG_DESCR:=		utilities for system monitoring and performance analysis
 PKG_SECTION:=		sys/utils
 PKG_SITES:=		http://perso.orange.fr/sebastien.godard/

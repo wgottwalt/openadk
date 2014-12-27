@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		parted
 PKG_VERSION:=		3.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		0247b6a7b314f8edeb618159fa95f9cb
+PKG_HASH:=		858b589c22297cacdf437f3baff6f04b333087521ab274f7ab677cb8c6bb78e4
 PKG_DESCR:=		partition table editor
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libblkid libuuid libreadline libpthread

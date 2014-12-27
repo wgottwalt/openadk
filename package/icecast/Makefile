@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		icecast
 PKG_VERSION:=		2.3.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2b5d1b40778922e5f6431b7758c359ad
+PKG_HASH:=		1b1d06f5f83c9a983cd28cc78aa90e4038f933511b3d20d7fd2cfc116645c36d
 PKG_DESCR:=		streaming media server
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libcurl libvorbis libpthread libxml2 libxslt

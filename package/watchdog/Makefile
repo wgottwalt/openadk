@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		watchdog
 PKG_VERSION:=		5.13
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		153455f008f1cf8f65f6ad9586a21ff1
+PKG_HASH:=		141e0faf3ee4d8187a6ff4e00b18ef7b7a4ce432a2d4c8a6e6fdc62507fc6eb0
 PKG_DESCR:=		watchdog daemon
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libtirpc

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		igmpproxy
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		c56f41ec195bc1fe016369bf74efc5a1
+PKG_HASH:=		ee18ff3d8c3ae3a29dccb7e5eedf332337330020168bd95a11cece8d7d7ee6ae
 PKG_DESCR:=		simple dynamic multicast routing daemon
 PKG_SECTION:=		net/route
 PKG_URL:=		http://sourceforge.net/projects/igmpproxy/

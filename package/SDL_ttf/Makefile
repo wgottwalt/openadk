@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		SDL_ttf
 PKG_VERSION:=		2.0.10
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		814e6e17e8879254208d23b3b7e0354b
+PKG_HASH:=		7d38704bcc7c34029c2dcb73b2d4857e8ad76341c6e0faed279eb9f743c66c6a
 PKG_DESCR:=		truetype fonts for sdl applications
 PKG_SECTION:=		libs/fonts
 PKG_DEPENDS:=		libsdl libfreetype

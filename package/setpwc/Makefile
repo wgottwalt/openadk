@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		setpwc
 PKG_VERSION:=		1.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		79d5ee468c0076feb3cac473bef661d2
+PKG_HASH:=		4d32d4d54d584cd42aaf52dfa1ba874122e825ad39e4493d45f89b85de4e95cf
 PKG_DESCR:=		philips webcam control utility
 PKG_SECTION:=		sys/hw
 PKG_URL:=		http://www.vanheusden.com/setpwc/

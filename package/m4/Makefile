@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		m4
 PKG_VERSION:=		1.4.17
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		12a3c829301a4fd6586a57d3fcf196dc
+PKG_HASH:=		f0543c3beb51fa6b3337d8025331591e0e18d8ec2886ed391f1aade43477d508
 PKG_DESCR:=		macro processor
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		m4-host

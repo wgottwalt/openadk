@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		sipsak
 PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		c4eb8e282902e75f4f040f09ea9d99d5
+PKG_HASH:=		4c9af4437123ca1d65498a00b70a7a186972a21f14c8b3cc905b9f5d1705142c
 PKG_DESCR:=		sip stress and diagnostics utility
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libopenssl

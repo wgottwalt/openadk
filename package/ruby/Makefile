@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ruby
 PKG_VERSION:=		2.1.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		df4c1b23f624a50513c7a78cb51a13dc
+PKG_HASH:=		4305cc6ceb094df55210d83548dcbeb5117d74eea25196a9b14fa268d354b100
 PKG_DESCR:=		scripting language
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		librt libpthread

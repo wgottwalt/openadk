@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		setxkbmap
 PKG_VERSION:=		1.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		57380d069021c6b7d873bfab803e3105
+PKG_HASH:=		f5b87e965725c251e1251ab8e37d5189ddeefa4099b864d52e2bcad4f75304ca
 PKG_DESCR:=		set keyboard utility
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libxkbfile

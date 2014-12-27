@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		openafs
 PKG_VERSION:=		1.6.5.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e33e0b031760d4f90815d40b8ab3c540
+PKG_HASH:=		cdcf169bf972502ff4a7b79045c9686cfcffd66b2059b1806c1ffbf3bd1c9ac0
 PKG_DESCR:=		afs implementation
 PKG_SECTION:=		net/fs
 PKG_URL:=		http://openafs.org

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		yasm
 PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		4cfc0686cf5350dd1305c4d905eb55a6
+PKG_HASH:=		768ffab457b90a20a6d895c39749adb547c1b7cb5c108e84b151a838a23ccf31
 PKG_DESCR:=		modular assembler
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		yasm-host

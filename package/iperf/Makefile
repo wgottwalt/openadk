@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		iperf
 PKG_VERSION:=		2.0.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8c5bc14cc2ea55f18f22afe3c23e3dcb
+PKG_HASH:=		3b52f1c178d6a99c27114929d5469c009197d15379c967b329bafb956f397944
 PKG_DESCR:=		internet protocol bandwidth measuring tool
 PKG_SECTION:=		net/perf
 PKG_DEPENDS:=		libpthread

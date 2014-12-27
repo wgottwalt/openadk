@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		avahi
 PKG_VERSION:=		0.6.31
 PKG_RELEASE:=		4
-PKG_MD5SUM:=		2f22745b8f7368ad5a0a3fddac343f2d
+PKG_HASH:=		8372719b24e2dd75de6f59bb1315e600db4fd092805bd1201ed0cb651a2dab48
 PKG_DESCR:=		multicast dns daemon
 PKG_SECTION:=		net/dns
 PKG_DEPENDS:=		libstdcxx

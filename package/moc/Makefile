@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		moc
 PKG_VERSION:=		2.5.0-beta2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		da87b90b57934234589b63e347921458
+PKG_HASH:=		486d50584c3fb0067b8c03af54e44351633a7740b18dc3b7358322051467034c
 PKG_DESCR:=		console music player
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libmad libvorbis libcurl libflac

@@ -29,8 +29,8 @@ ${_CHECKSUM_COOKIE}: ${FULLDISTFILES}
 	-rm -rf ${WRKDIR}
 ifneq ($(ADK_DISABLE_CHECKSUM),y)
 	@OK=n; \
-	allsums="$(strip ${PKG_MD5SUM})"; \
-	(md5sum ${FULLDISTFILES}; echo exit) | while read sum name; do \
+	allsums="$(strip ${PKG_HASH})"; \
+	(shasum -a 256 ${FULLDISTFILES}; echo exit) | while read sum name; do \
 		if [[ $$sum = exit ]]; then \
 			[[ $$OK = n ]] && echo >&2 "==> No distfile found!" || :; \
 			[[ $$OK = 1 ]] || exit 1; \
@@ -42,7 +42,7 @@ ifneq ($(ADK_DISABLE_CHECKSUM),y)
 			[[ $$OK = 0 ]] || OK=1; \
 			continue; \
 		fi; \
-		echo >&2 "==> Checksum mismatch for $${name##*/} (MD5)"; \
+		echo >&2 "==> Checksum mismatch for $${name##*/} (SHA256)"; \
 		echo >&2 ":---> should be '$$cursum'"; \
 		echo >&2 ":---> really is '$$sum'"; \
 		OK=0; \

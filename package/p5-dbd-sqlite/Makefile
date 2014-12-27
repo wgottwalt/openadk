@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-dbd-sqlite
 PKG_VERSION:=		1.42
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		86cfaf477cb9ddc39508f74f4268fc79
+PKG_HASH:=		ab3b653c1ab4dd316f06be40b49ccc612e9670c40b34654353e837c4b464a993
 PKG_DESCR:=		self-contained rdbms in a dbi driver
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl p5-dbi

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		wondershaper
 PKG_VERSION:=		1.1a
 PKG_RELEASE:=		7
-PKG_MD5SUM:=		bbc5a3a4485ab286e337ce8550e7b990
+PKG_HASH:=		5695373d1bd24f10a1ba6cc2e0c5e12c59c32322b66ba9870e3005bbdfa6525b
 PKG_DESCR:=		tc based traffic shaping tool
 PKG_SECTION:=		net/firewall
 PKG_URL:=		http://lartc.org/wondershaper/

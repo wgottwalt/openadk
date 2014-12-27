@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xdpyinfo
 PKG_VERSION:=		1.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		588a84f9762c7e4e2b72508f16005b48
+PKG_HASH:=		2725676eb968a3cf3b2f2da07bd208606295a48753bed4cc14f21f95848f7b33
 PKG_DESCR:=		display info utility
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libxtst

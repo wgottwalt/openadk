@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		rng-tools
 PKG_VERSION:=		4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ae89dbfcf08bdfbea19066cfbf599127
+PKG_HASH:=		b71bdfd4222c05e8316001556be90e1606f2a1bac3efde60153bd84e873cc195
 PKG_DESCR:=		daemon to use hardware random number generators
 PKG_SECTION:=		app/crypto
 PKG_URL:=		http://gkernel.sourceforge.net/

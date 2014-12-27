@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		flac
 PKG_VERSION:=		1.3.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		13b5c214cee8373464d3d65dee362cdd
+PKG_HASH:=		fa2d64aac1f77e31dfbb270aeb08f5b32e27036a52ad15e69a77e309528010dc
 PKG_DESCR:=		free lossless audio codec library
 PKG_SECTION:=		libs/audio
 PKG_URL:=		http://flac.sourceforge.net

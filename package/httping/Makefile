@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		httping
 PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		bde1ff3c01343d2371d8f34fbf8a1d9a
+PKG_HASH:=		cbd238777f975d837bbb8a64448bc5a7d79ac671ce320d60fcc2532c9b2ca4b8
 PKG_DESCR:=		like ping but for http-requests
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libopenssl

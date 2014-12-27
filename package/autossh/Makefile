@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		autossh
 PKG_VERSION:=		1.4b
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8f9aa006f6f69e912d3c2f504622d6f7
+PKG_HASH:=		e77f518e1f3607aa55086c8969f72d1b44ef99402814a19fec213a6e0f06ef07
 PKG_DESCR:=		automatically restart ssh sessions and tunnels
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		openssh-client

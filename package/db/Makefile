@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		db
 PKG_VERSION:=		5.3.21
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		3fda0b004acdaa6fa350bfc41a3b95ca
+PKG_HASH:=		ddd92a930317df92021054c03992392db9ea5cddba43bef8920d392a82114fb8
 PKG_DESCR:=		disk file format database which stores key/data-pairs in single files
 PKG_SECTION:=		libs/db
 PKG_DEPENDS:=		libstdcxx

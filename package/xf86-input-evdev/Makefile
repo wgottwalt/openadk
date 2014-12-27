@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xf86-input-evdev
 PKG_VERSION:=		2.7.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2d3f7111b8284cec81884023c4bb4a11
+PKG_HASH:=		cf4bdbd4b40f05d4e29cd6494c64f092667202b0834c54bdaed448463622807b
 PKG_DESCR:=		x11 driver for evdev
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libudev

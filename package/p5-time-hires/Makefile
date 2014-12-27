@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-time-hires
 PKG_VERSION:=		1.9726
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		077e5d7eda1349f98c564026603f8a0a
+PKG_HASH:=		ff662ad9b1f6c75a149db7fa1bfc7a161ac8b271e5f3980345e08b734769109e
 PKG_DESCR:=		high resolution alarm, sleep, gettimeofday, interval timers
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl librt libpthread

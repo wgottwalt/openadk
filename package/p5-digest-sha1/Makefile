@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-digest-sha1
 PKG_VERSION:=		2.13
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		bd22388f268434f2b24f64e28bf1aa35
+PKG_HASH:=		68c1dac2187421f0eb7abf71452a06f190181b8fc4b28ededf5b90296fb943cc
 PKG_DESCR:=		interface to the sha-1 algorithm
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl

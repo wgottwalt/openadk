@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		font-bh-lucidatypewriter-75dpi
 PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cab8a44ae329aab7141c7adeef0daf5a
+PKG_HASH:=		38301bbdb6374494f30c0b44acc7052ed8fc2289e917e648ca566fc591f0a9e0
 PKG_DESCR:=		x fonts
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		font-util

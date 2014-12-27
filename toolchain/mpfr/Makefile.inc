@@ -4,6 +4,6 @@
 PKG_NAME:=		mpfr
 PKG_VERSION:=		3.1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		e3d203d188b8fe60bb6578dd3152e05c
+PKG_HASH:=		399d0f47ef6608cc01d29ed1b99c7faff36d9994c45f36f41ba250147100453b
 PKG_SITES:=		http://www.mpfr.org/mpfr-current/
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz

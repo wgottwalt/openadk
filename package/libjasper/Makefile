@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libjasper
 PKG_VERSION:=		1.900
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		a342b2b4495b3e1394e161eb5d85d754
+PKG_HASH:=		6b905a9c2aca2e275544212666eefc4eb44d95d0a57e4305457b407fe63f9494
 PKG_DESCR:=		implementation of the codec specified in the jpeg-2000 standard
 PKG_SECTION:=		libs/image
 PKG_URL:=		http://www.ece.uvic.ca/~frodo/jasper/

@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		samba
 PKG_VERSION:=		3.6.24
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		d98425c0c2b73e08f048d31ffc727fb0
+PKG_HASH:=		11d0bd04b734731970259efc6692b8e749ff671a9b56d8cc5fa98c192ab234a7
 PKG_DESCR:=		smb file and print server
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		gettext-tiny util-linux popt

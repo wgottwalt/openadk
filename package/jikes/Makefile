@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		jikes
 PKG_VERSION:=		1.22
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cda958c7fef6b43b803e1d1ef9afcb85
+PKG_HASH:=		0cb02c763bc441349f6d38cacd52adf762302cce3a08e269f1f75f726e6e14e3
 PKG_DESCR:=		java compiler
 PKG_BUILDDEP:=		jikes-host
 PKG_SECTION:=		dev/lang

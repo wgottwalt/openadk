@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		bdftopcf
 PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f2d5c8a7813c3f9902e163c620a83dd4
+PKG_HASH:=		b9f172527fb78f1d02859f0e24675bfc0152ea589abab733a80a1256f6e91e69
 PKG_DESCR:=		font converter utility
 PKG_BUILDDEP:=		libXfont
 PKG_SECTION:=		x11/fonts

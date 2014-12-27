@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		deco
 PKG_VERSION:=		39
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		f77f60e8be0cae1f814cba1ef61bf4d0
+PKG_HASH:=		30d4cfa1ed2eb318c6e31fd6c5bc2fe4831d7ba6e0325e08d34783d043e00c65
 PKG_DESCR:=		full featured text-based file manager
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libncurses

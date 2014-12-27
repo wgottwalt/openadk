@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		vlc
 PKG_VERSION:=		2.1.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		7ed67d22f7425011078772bfc62ac222
+PKG_HASH:=		3e566c7525478167e18cc53dc75d621e4af91eb40aabb6231e47db25d682d5d3
 PKG_DESCR:=		popular media player
 PKG_SECTION:=		mm/video
 PKG_BUILDDEP:=		ffmpeg xcb-util libtheora libgcrypt libmad

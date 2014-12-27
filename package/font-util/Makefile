@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		font-util
 PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		171ebfd3733aeae3af91ad57d126d29d
+PKG_HASH:=		dd4989de5377ce3904b78839d72c40bace1be566d753c851e735ebd20a1f81b2
 PKG_DESCR:=		font utility
 PKG_SECTION:=		x11/fonts
 PKG_URL:=		http://www.x.org/

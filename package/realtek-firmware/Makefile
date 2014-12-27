@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		realtek-firmware
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		32b82d463f8742e094ed53a4820424c6
+PKG_HASH:=		df7a02fd10fb83d11f4015bf55f58644c6ecc7528f884f2f32729b727053840a
 PKG_DESCR:=		firmware for realtek wired and wireless cards
 PKG_SECTION:=		sys/firmware
 PKG_SITES:=		http://www.openadk.org/distfiles/

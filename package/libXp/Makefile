@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXp
 PKG_VERSION:=		1.0.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		a960c831f11e6b4249fde78a5b969000
+PKG_HASH:=		8204fe105909f0312922a51773413183831d45e4c3a800f897fc8b89d2ba8dfb
 PKG_DESCR:=		x11 printing library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXext printproto

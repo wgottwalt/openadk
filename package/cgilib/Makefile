@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		cgilib
 PKG_VERSION:=		0.7
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		2c7053f58dfb06f7a80a112797ed7e86
+PKG_HASH:=		09b7d71bd1eea10bb404cd665fd5abe69282144ce01d96f2863c85fd42d5d692
 PKG_DESCR:=		simple cgi library
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://www.infodrom.org/projects/cgilib/

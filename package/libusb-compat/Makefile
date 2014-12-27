@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libusb-compat
 PKG_VERSION:=		0.1.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2780b6a758a1e2c2943bdbf7faf740e4
+PKG_HASH:=		404ef4b6b324be79ac1bfb3d839eac860fbc929e6acb1ef88793a6ea328bc55a
 PKG_DESCR:=		library for accessing usb devices
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		libusb

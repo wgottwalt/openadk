@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		reaim
 PKG_VERSION:=		0.8
 PKG_RELEASE:=		9
-PKG_MD5SUM:=		647d2ab72ec454f89294accfb3182c09
+PKG_HASH:=		8a530d8b2ee40c63dd71f20657f324252732632778928ecccaea2a237be19eb5
 PKG_DESCR:=		transparent aim / msn proxy
 PKG_SECTION:=		app/chat
 PKG_DEPENDS:=		iptables

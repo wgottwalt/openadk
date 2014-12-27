@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.22.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		337d1a15ab1cb1d4ed423168b1eb7d7e
+PKG_HASH:=		ae0b029d0a9e4dd71a077a790840e496dd838998e4571b87b60fed7462b6678b
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		base/apps
 PKG_BUILDDEP:=		bzip2-host

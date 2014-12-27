@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		nspr
 PKG_VERSION:=		4.10.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6ab81e8d508457905223eaf4ed0a973b
+PKG_HASH:=		df69ac8b0126f11907792384468adf42712b1d6db9772f4aa20c6d471594644a
 PKG_DESCR:=		netscape portable runtime library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.mozilla.org/projects/nspr/

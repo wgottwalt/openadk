@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		pkgconf
 PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f89a502825ac184ad25a9e4aa977f9b1
+PKG_HASH:=		8f5f48e52ddef0c3cbffe93f32d5148041e0030b8798b49b0b5fe72f4968d7ec
 PKG_DESCR:=		smart pkg-config replacement
 PKG_SECTION:=		dev/tools
 PKG_URL:=		https://github.com/pkgconf/pkgconf

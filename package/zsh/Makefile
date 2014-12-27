@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		zsh
 PKG_VERSION:=		5.0.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6fb0e3e52a0f8de5ca63138391b81ce0
+PKG_HASH:=		b35cf19e4a6ba39fd03c6372b8a8760a491cc2e2e4aba3d15023ff291c2894b4
 PKG_DESCR:=		z shell
 PKG_SECTION:=		base/shells
 PKG_URL:=		http://www.zsh.org/

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXrender
 PKG_VERSION:=		0.9.7
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		b6702e6f56f9d9103dc688f4336529a9
+PKG_HASH:=		89f36e896018f5b8c00768af59e052019ae79fab69a647eb1fe61b565d7dd18e
 PKG_DESCR:=		x11 rendering library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		renderproto-host xproto-host xextproto-host libXau-host 

@@ -6,17 +6,16 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		lynx
 PKG_VERSION:=		2.8.8
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		7caa6773f94e136556c1c30629fe1431
+PKG_HASH:=		234c9dc77d4c4594ad6216d7df4d49eae3019a3880e602f39721b35b97fbc408
 PKG_DESCR:=		text browser
 PKG_SECTION:=		app/browser
 PKG_DEPENDS:=		libncurses libopenssl zlib
 PKG_BUILDDEP:=		ncurses openssl zlib
 PKG_URL:=		http://lynx.isc.org/
 PKG_SITES:=		http://lynx.isc.org/${PKG_NAME}${PKG_VERSION}/
-
 PKG_NOPARALLEL:=	1
 
-DISTFILES=		${PKG_NAME}${PKG_VERSION}.tar.gz
+DISTFILES:=		${PKG_NAME}${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/lynx2-8-8
 
 include ${ADK_TOPDIR}/mk/package.mk

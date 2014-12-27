@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		gpsd
 PKG_VERSION:=		3.10
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		fc5b03aae38b9b5b6880b31924d0ace3
+PKG_HASH:=		706fc2c1cf3dfbf87c941f543381bccc9c4dc9f8240eec407dcbf2f70b854320
 PKG_DESCR:=		interface daemon for gps receivers
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libpthread

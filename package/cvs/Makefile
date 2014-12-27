@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		cvs
 PKG_VERSION:=		1.11.23
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		bf185eb51b5918330a04671c3f3cccde
+PKG_HASH:=		0ad692e3c22e4b33274a53ad22a194deb3024ec833b9e87ad7968d9b0b58cdcf
 PKG_DESCR:=		concurrent version system
 PKG_SECTION:=		dev/scm
 PKG_URL:=		http://www.nongnu.org/cvs/

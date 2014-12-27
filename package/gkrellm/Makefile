@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		gkrellm
 PKG_VERSION:=		2.3.5
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		05d00fa8d6376038b0c7e967583c0b8d
+PKG_HASH:=		4fd7893cce76703f815f140c6d34889383c2b2a6d83470bf9486625f84da375e
 PKG_DESCR:=		krell monitors server
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		glib libpthread

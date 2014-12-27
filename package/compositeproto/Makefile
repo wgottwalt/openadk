@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		compositeproto
 PKG_VERSION:=		0.4.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		2dea7c339432b3363faf2d29c208e7b5
+PKG_HASH:=		22195b7e50036440b1c6b3b2d63eb03dfa6e71c8a1263ed1f07b0f31ae7dad50
 PKG_DESCR:=		composite headers
 PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}

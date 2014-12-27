@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		perl
 PKG_VERSION:=		5.18.1
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		304cb5bd18e48c44edd6053337d3386d
+PKG_HASH:=		655e11a8ffba8853efcdce568a142c232600ed120ac24aaebb4e6efe74e85b2b
 PKG_DESCR:=		perl interpreter
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		perl-host

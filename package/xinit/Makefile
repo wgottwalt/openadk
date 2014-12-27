@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xinit
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		5
-PKG_MD5SUM:=		7ad82221ebd6600a8d33712ec3b62efb
+PKG_HASH:=		3079d3fb86af99f4c2c2907b5725e5820fdb2144d3be6002ec367bfcebc5c480
 PKG_DESCR:=		x window system initializer
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		xorg-server mcookie xauth xset xterm libstdcxx

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libXinerama
 PKG_VERSION:=		1.1.2
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		29a813b3850d499a3524a8d5d5ecb099
+PKG_HASH:=		5f21113464febeac0536e140ff36a8e0cd8ae919ce690c4768f479ea48473fed
 PKG_DESCR:=		xinerama library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xineramaproto libXinerama-host

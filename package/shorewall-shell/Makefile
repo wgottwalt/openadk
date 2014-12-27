@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		shorewall-shell
 PKG_VERSION:=		4.0.14.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ab61c2f3db82382351f432f783980fa7
+PKG_HASH:=		ff8e1eaf98f06e8fca611c83fd5bcacda464d80fb1c208e984160a839f0c23a6
 PKG_DESCR:=		shell compiler for shorewall
 PKG_SECTION:=		net/firewall
 PKG_URL:=		http://www.shorewall.net

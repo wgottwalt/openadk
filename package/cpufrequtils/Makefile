@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		cpufrequtils
 PKG_VERSION:=		008
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		52d3e09e47ffef634833f7fab168eccf
+PKG_HASH:=		0053a07183d069483bd062614bc61cb8080c577da61cdf7e131b064e1a1af188
 PKG_DESCR:=		utilities for cpufreq subsystem
 PKG_SECTION:=		sys/hw
 PKG_URL:=		http://www.kernel.org/pub/linux/utils/kernel/cpufreq/cpufrequtils.html

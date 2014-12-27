@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		faac
 PKG_VERSION:=		1.28
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		80763728d392c7d789cde25614c878f6
+PKG_HASH:=		c5141199f4cfb17d749c36ba8cfe4b25f838da67c22f0fec40228b6b9c3d19df
 PKG_DESCR:=		aac encoder library
 PKG_SECTION:=		libs/audio
 PKG_URL:=		http://www.audiocoding.com/faac.html

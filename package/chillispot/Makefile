@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		chillispot
 PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		9d2597756af3fa14d7331b4a3651fc9b
+PKG_HASH:=		b505ab963af8423ef8ae844951ef05fe1554630b448f1174074e9881cb474a01
 PKG_DESCR:=		wireless lan access point controller
 PKG_SECTION:=		net/wifi
 PKG_URL:=		http://www.chillispot.info/

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		dri3proto
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		25e84a49a076862277ee12aebd49ff5f
+PKG_HASH:=		e1a0dad3009ecde52c0bf44187df5f95cc9a7cc0e76dfc2f2bbf3e909fe03fa9
 PKG_DESCR:=		dri3 protocol headers
 PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}

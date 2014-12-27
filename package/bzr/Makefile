@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		bzr
 PKG_VERSION:=		2.6.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		28c86653d0df10d202c6b842deb0ea35
+PKG_HASH:=		0994797182eb828867eee81cccc79480bd2946c99304266bc427b902cf91dab0
 PKG_DESCR:=		source code management system
 PKG_SECTION:=		dev/scm
 PKG_BUILDDEP:=		python2

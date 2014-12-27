@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		pam
 PKG_VERSION:=		1.1.8
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		5107bbf54042400b6200e8367cc7feef
+PKG_HASH:=		4183409a450708a976eca5af561dbf4f0490141a08e86e4a1e649c7c1b094876
 PKG_DESCR:=		pluggable authentication modules
 PKG_BUILDDEP:=		flex
 PKG_SECTION:=		sys/misc

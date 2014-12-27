@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		p5-ev
 PKG_VERSION:=		4.17
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		ffc39299fab4589bb850b5a46ccd2395
+PKG_HASH:=		6993c021027d214f497bbfbd319b8e13d83acc3f860412ac06f5a160287bbaaa
 PKG_DESCR:=		interface to libev, a high performance full-featured event loop
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl libev

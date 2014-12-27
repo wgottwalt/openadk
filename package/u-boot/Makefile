@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		u-boot
 PKG_VERSION:=		2014.07
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		36d4bad687edcafa396fee607e505d4e
+PKG_HASH:=		b4f83b8db325c21671a997198ec3a373e2e00dde2fcf17be9b9afd7cfd727f56
 PKG_DESCR:=		bootloader
 PKG_SECTION:=		base/boot
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	

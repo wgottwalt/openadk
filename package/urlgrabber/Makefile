@@ -4,15 +4,17 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		urlgrabber
-PKG_VERSION:=		3.9.1
+PKG_VERSION:=		3.10
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		00c8359bf71062d0946bacea521f80b4
+PKG_HASH:=		151474dcba8ad99a98eb1f18873bd888e8bfd68fd71a280991899e932689dc89
 PKG_DESCR:=		python module for fetching of files
 PKG_SECTION:=		dev/python
 PKG_BUILDDEP:=		pycurl
 PKG_DEPENDS:=		pycurl
 PKG_URL:=		http://urlgrabber.baseurl.org/
 PKG_SITES:=		http://urlgrabber.baseurl.org/download/
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
 

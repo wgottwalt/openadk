@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		glu
 PKG_VERSION:=		9.0.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		be9249132ff49275461cf92039083030
+PKG_HASH:=		1f7ad0d379a722fcbd303aa5650c6d7d5544fde83196b42a73d1193568a4df12
 PKG_DESCR:=		opengl utility library
 PKG_SECTION:=		libs/video
 PKG_BUILDDEP:=		mesalib

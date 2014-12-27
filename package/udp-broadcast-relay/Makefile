@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		udp-broadcast-relay
 PKG_VERSION:=		0.3
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a32f983b7063d6ac670e6b22be9b9d24
+PKG_HASH:=		86acb9a359cad1961bdd4be9ae425222c19fd70fc31c730bd2b96629eaba2177
 PKG_DESCR:=		listens for packets on a specified udp broadcast port
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://www.joachim-breitner.de/udp-broadcast-relay/

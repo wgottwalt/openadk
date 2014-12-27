@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		ant
 PKG_VERSION:=		1.8.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		c474fa9d0c35a24037c23b6e476862c1
+PKG_HASH:=		5de65f7ba3f67e436ffffcdc0a73f591d1006e9fb41af8632c1f1f84d4a3e0b1
 PKG_DESCR:=		java code build utility
 PKG_SECTION:=		dev/tools
 HOST_BUILDDEP:=		gcj-host

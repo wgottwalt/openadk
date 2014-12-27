@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libsamplerate
 PKG_VERSION:=		0.1.8
 PKG_RELEASE:=		3
-PKG_MD5SUM:=		1c7fb25191b4e6e3628d198a66a84f47
+PKG_HASH:=		93b54bdf46d5e6d2354b7034395fe329c222a966790de34520702bb9642f1c06
 PKG_DESCR:=		sample rate converter for audio
 PKG_SECTION:=		libs/audio
 PKG_URL:=		http://www.mega-nerd.com/SRC/

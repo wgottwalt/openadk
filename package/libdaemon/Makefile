@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libdaemon
 PKG_VERSION:=		0.14
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		509dc27107c21bcd9fbf2f95f5669563
+PKG_HASH:=		fd23eb5f6f986dcc7e708307355ba3289abe03cc381fc47a80bca4a50aa6b834
 PKG_DESCR:=		library that eases the writing of daemons
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://0pointer.de/lennart/projects/libdaemon/

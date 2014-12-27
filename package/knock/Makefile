@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		knock
 PKG_VERSION:=		0.7
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cb6373fd4ccb42eeca3ff406b7fdb8a7
+PKG_HASH:=		9938479c321066424f74c61f6bee46dfd355a828263dc89561a1ece3f56578a4
 PKG_DESCR:=		port-knocking client
 PKG_SECTION:=		net/firewall
 PKG_BUILDDEP:=		libpcap

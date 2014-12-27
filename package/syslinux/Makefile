@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		syslinux
 PKG_VERSION:=		6.02
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		6f275813a1b08cf852e55c0a3f8fbc78
+PKG_HASH:=		afa31b7cbf72e1c0c1752a0636ba724ce01c0e374366e46e61db6862b4685478
 PKG_DESCR:=		lightweight bootloaders
 PKG_SECTION:=		base/boot
 HOST_BUILDDEP:=		nasm-host

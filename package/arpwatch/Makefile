@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		arpwatch
 PKG_VERSION:=		2.1a15
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		cebfeb99c4a7c2a6cee2564770415fe7
+PKG_HASH:=		c1df9737e208a96a61fa92ddad83f4b4d9be66f8992f3c917e9edf4b05ff5898
 PKG_DESCR:=		ethernet monitor program
 PKG_SECTION:=		net/debug
 PKG_DEPENDS:=		libpcap

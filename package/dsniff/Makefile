@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		dsniff
 PKG_VERSION:=		2.4b1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		2f761fa3475682a7512b0b43568ee7d6
+PKG_HASH:=		a9803a7a02ddfe5fb9704ce86f0ffc48453c321e88db85810db411ba0841152a
 PKG_DESCR:=		tools for network auditing and penetration testing
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libnet libpcap libnids libopenssl libgdbm

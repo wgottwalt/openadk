@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		vpnc
 PKG_VERSION:=		0.5.3
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		4378f9551d5b077e1770bbe09995afb3
+PKG_HASH:=		46cea3bd02f207c62c7c6f2f22133382602baeda1dc320747809e94881414884
 PKG_DESCR:=		client for cisco3000 vpn concentrator
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libgcrypt libgpg-error

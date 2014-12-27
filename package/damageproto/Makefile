@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		damageproto
 PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		bf8c47b7f48625230cff155180f8ddce
+PKG_HASH:=		f65ccbf1de9750a527ea6e85694085b179f2d06495cbdb742b3edb2149fef303
 PKG_DESCR:=		x damage extension headers
 PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}

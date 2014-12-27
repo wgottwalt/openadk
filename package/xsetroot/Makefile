@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xsetroot
 PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		5097ed5bbe1c621ee12950019f71de02
+PKG_HASH:=		318436be836d2b4c04d9acab4a3538744e07c8891b24f7c4a3823b6ea4c8275f
 PKG_DESCR:=		set root window
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		xbitmaps libx11 libxmu libxcursor

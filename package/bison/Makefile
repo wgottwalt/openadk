@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		bison
 PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		146be9ff9fbd27497f0bf2286a5a2082
+PKG_HASH:=		a2c3e8528bdb50567d6fa26deeb493dc5ccd7e277b865251608a9e43ac928f3c
 PKG_DESCR:=		parser generator
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		m4-host flex-host bison-host

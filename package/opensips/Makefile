@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		opensips
 PKG_VERSION:=		1.11.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		34d30e9ce870988970dff5f8a9abd239
+PKG_HASH:=		bcacc9bc273fd2002c16a5cb846fe2478dacded9ea7b52a04afb1f54bb2aa3f4
 PKG_DESCR:=		high-performance, configurable, free sip server
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libopenssl

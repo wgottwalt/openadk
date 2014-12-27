@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		openssl
 PKG_VERSION:=		1.0.1j
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		f7175c9cd3c39bb1907ac8bba9df8ed3
+PKG_HASH:=		1b60ca8789ba6f03e8ef20da2293b8dc131c39d83814e775069f02d26354edf3
 PKG_DESCR:=		secure socket layer libraries
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		zlib

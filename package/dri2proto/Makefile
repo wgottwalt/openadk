@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		dri2proto
 PKG_VERSION:=		2.8
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		19ea18f63d8ae8053c9fa84b60365b77
+PKG_HASH:=		7e65b031eaa6ebe23c75583d4abd993ded7add8009b4200a4db7aa10728b0f61
 PKG_DESCR:=		dri2 protocol headers
 PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}

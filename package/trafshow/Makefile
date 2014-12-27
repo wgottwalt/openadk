@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		trafshow
 PKG_VERSION:=		5.2.3
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		0b2f0bb23b7832138b7d841437b9e182
+PKG_HASH:=		ea7e22674a66afcc7174779d0f803c1f25b42271973b4f75fab293b8d7db11fc
 PKG_DESCR:=		traffic analyzing tool
 PKG_SECTION:=		net/perf
 PKG_BUILDDEP:=		libpcap ncurses

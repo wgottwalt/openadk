@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		rsyslog
 PKG_VERSION:=		8.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		be8c0117e29b6a0313a3b8148f562e07
+PKG_HASH:=		193901c359b8228a85dca7a6a2e715ab2b52c18a66ca9f805d4028bedff98196
 PKG_DESCR:=		syslog daemon
 PKG_SECTION:=		sys/misc
 PKG_BUILDDEP:=		libestr liblogging json-c util-linux zlib

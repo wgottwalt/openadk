@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		vgp
 PKG_VERSION:=		0.2.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		b8c25b5dfcb944f78bbc584be9c230c7
+PKG_HASH:=		38669e5dea80d2fa6e6ef577f04caef9326896908efc37cb92b8f938ce5f9c15
 PKG_DESCR:=		daemon working like cisco hsrp
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://vgpd.freaknet.org/

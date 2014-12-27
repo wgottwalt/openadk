@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		fontcacheproto
 PKG_VERSION:=		0.1.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		dc8c34a8c3559bf3b008bcdf7ba5a743
+PKG_HASH:=		7231dee067527842f3c141914ab1168c49ff602af259b115b93d2f456b5684bf
 PKG_SECTION:=		dev/header
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=              dev devonly

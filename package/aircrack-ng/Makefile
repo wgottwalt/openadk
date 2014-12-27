@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		aircrack-ng
 PKG_VERSION:=		1.1
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		f7a24ed8fad122c4187d06bfd6f998b4
+PKG_HASH:=		b136b549b7d2a2751c21793100075ea43b28de9af4c1969508bb95bcc92224ad
 PKG_DESCR:=		set of tools for auditing wireless networks
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		libpthread libopenssl libpcap

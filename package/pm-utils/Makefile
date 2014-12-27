@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		pm-utils
 PKG_VERSION:=		1.4.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		1742a556089c36c3a89eb1b957da5a60
+PKG_HASH:=		8ed899032866d88b2933a1d34cc75e8ae42dcde20e1cc21836baaae3d4370c0b
 PKG_DESCR:=		power management utilities
 PKG_SECTION:=		sys/hw
 PKG_URL:=		http://pm-utils.freedesktop.org/

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		sudo
 PKG_VERSION:=		1.8.11p2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		84012b4871b6c775c957cd310d5bad87
+PKG_HASH:=		8133849418fa18cf6b6bb6893d1855ff7afe21db8923234a00bf045c90fba1ad
 PKG_DESCR:=		su do
 PKG_SECTION:=		sys/misc
 PKG_URL:=		http://www.sudo.ws/sudo/

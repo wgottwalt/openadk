@@ -18,7 +18,7 @@ by another target package to build, with an example:
 06: PKG_NAME:=              hostfoo
 07: PKG_VERSION:=           1.0
 08: PKG_RELEASE:=           1
-09: PKG_MD5SUM:=            291ba57c0acd218da0b0916c280dcbae
+09: PKG_HASH:=              62333167b79afb0b25a843513288c67b59547acf653e8fbe62ee64e71ebd1587
 10: PKG_DESCR:=             hostfoo utility
 11: PKG_SECTION:=           misc
 12: PKG_URL:=               http://www.foo.org/
@@ -52,7 +52,7 @@ Following mix between host and target package is possible, too:
 06: PKG_NAME:=		foo
 07: PKG_VERSION:=	1.0
 08: PKG_RELEASE:=	1
-09: PKG_MD5SUM:=	032a7b7b9f1a6e278ccde73f82cec5c2
+09: PKG_HASH:=          62333167b79afb0b25a843513288c67b59547acf653e8fbe62ee64e71ebd1587
 10: PKG_DESCR:=		foo tool
 11: PKG_SECTION:=	lang
 12: PKG_BUILDDEP:=	foo-host

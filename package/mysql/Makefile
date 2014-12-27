@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		mysql
 PKG_VERSION:=		5.6.19
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		a663c5b3c710043c74f97902a1ed62c0
+PKG_HASH:=		80ef3aae048866539380e7e330d9f1034f0ee50ddfb9c662570132492678b09f
 PKG_DESCR:=		mysql client library
 PKG_SECTION:=		libs/db
 PKG_DEPENDS:=		libncurses zlib libevent

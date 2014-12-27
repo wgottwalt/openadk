@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		rxvt-unicode
 PKG_VERSION:=		9.19
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		45ad197eb9b5a840c0f65e3a8131921c
+PKG_HASH:=		d9237cf1973af461ecbeeb708e4d00893294771558e8338b4f33418ed52d3241
 PKG_DESCR:=		terminal emulator with unicode support
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libx11 fontconfig libxft libxml2 gdk-pixbuf libstdcxx

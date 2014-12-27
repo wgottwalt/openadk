@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		twm
 PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		109979bd39d48bd761e7939b30006a48
+PKG_HASH:=		a0d3f2a9689594220220d32c3cd674056b91dbf7c6c352efe1ffb72d65c66f76
 PKG_DESCR:=		simple window manager
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		xorg-server libstdcxx

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libgc
 PKG_VERSION:=		7.4.0
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		f40d9a47c90d60791eeecb484f8df5ee
+PKG_HASH:=		61f8fc6991f8cb003a0d3c7d251c5b9a76093615ef793e0c588a4661e0b5e283
 PKG_DESCR:=		garbage collector library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		libatomic_ops
@@ -15,7 +15,7 @@ PKG_URL:=		http://www.hboehm.info/gc/
 PKG_SITES:=		http://www.hboehm.info/gc/gc_source/
 PKG_OPTS:=		dev
 
-DISTFILES=		gc-${PKG_VERSION}.tar.gz
+DISTFILES:=		gc-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/gc-${PKG_VERSION}
 
 include $(ADK_TOPDIR)/mk/host.mk

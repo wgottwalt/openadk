@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		freeglut
 PKG_VERSION:=		2.8.1
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		918ffbddcffbac83c218bc52355b6d5a
+PKG_HASH:=		dde46626a62a1cd9cf48a11951cdd592e7067c345cffe193a149dfd47aef999a
 PKG_DESCR:=		opengl utility toolkit libraries
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libglu libstdcxx

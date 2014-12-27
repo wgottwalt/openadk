@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libgpg-error
 PKG_VERSION:=		1.12
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		8f0eb41a344d19ac2aa9bd101dfb9ce6
+PKG_HASH:=		cafc9ed6a87c53a35175d5a1220a96ca386696eef2fa059cc0306211f246e55f
 PKG_DESCR:=		helper library for common error codes and descriptions
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.gnupg.org/

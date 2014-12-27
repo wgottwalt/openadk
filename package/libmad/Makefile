@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		libmad
 PKG_VERSION:=		0.15.1b
 PKG_RELEASE:=		6
-PKG_MD5SUM:=		1be543bc30c56fb6bea1d7bf6a64e66c
+PKG_HASH:=		bbfac3ed6bfbc2823d3775ebb931087371e142bb0e9bb1bee51a76a6e0078690
 PKG_DESCR:=		high-quality mpeg audio decoding library
 PKG_SECTION:=		libs/audio
 PKG_URL:=		http://sourceforge.net/projects/mad

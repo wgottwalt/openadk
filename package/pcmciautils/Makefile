@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		pcmciautils
 PKG_VERSION:=		018
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		3c388cb559975b37a75cb5965e9800a9
+PKG_HASH:=		b94b71347fa11b7c0eb8dae034b5f7f649b135ffacb80cf60572a5bcb118f095
 PKG_DESCR:=		utilities for pcmcia subsystem
 PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		sysfsutils bison-host flex-host

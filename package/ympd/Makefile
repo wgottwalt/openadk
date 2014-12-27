@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		ympd
 PKG_VERSION:=		1.2.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		add md5sum of package here
+PKG_HASH:=		c4da2549fd65f6d69642348c9ff134cd4bed6a1b2a9be21daa504b6d19517806
 PKG_DESCR:=		standalone mpd web gui written in c
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libmpdclient

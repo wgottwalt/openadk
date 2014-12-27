@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		x rendering extension headers
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		renderproto-host
-PKG_MD5SUM:=		9b103359123e375bb7760f7dbae3dece
+PKG_HASH:=		a0a4be3cad9381ae28279ba5582e679491fc2bec9aab8a65993108bf8dbce5fe
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_OPTS:=		dev devonly
 

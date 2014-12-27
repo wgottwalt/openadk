@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		ntpclient
 PKG_VERSION:=		2010_365
 PKG_RELEASE:=		2
-PKG_MD5SUM:=		a64689398f2df8933ee0d8da246e9eaa
+PKG_HASH:=		9ad9b028385082fb804167f464e2db0a0b3d33780acd399327e64898b8fcfddd
 PKG_DESCR:=		client for setting system time from ntp servers
 PKG_SECTION:=		net/ntp
 PKG_DEPENDS:=		libpthread

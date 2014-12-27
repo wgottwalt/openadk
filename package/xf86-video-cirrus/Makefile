@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		xf86-video-cirrus
 PKG_VERSION:=		1.5.2
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		a00cf7eb9a9e27e9738cdbe716012b61
+PKG_HASH:=		7c882c9064f58edf6cb08ef889b6e1d9e7bf6be0eb0002c052d5b4cb6a9bf74d
 PKG_DESCR:=		x11 driver for cirrus vga chips
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libstdcxx
