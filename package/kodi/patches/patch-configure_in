@@ -1,6 +1,6 @@
 --- xbmc-14.0-Helix.orig/configure.in	2014-12-22 17:11:35.000000000 -0600
-+++ xbmc-14.0-Helix/configure.in	2014-12-25 14:08:39.073043750 -0600
-@@ -55,13 +55,7 @@ AC_DEFUN([XB_ADD_CODEC],
++++ xbmc-14.0-Helix/configure.in	2014-12-28 02:47:04.799045092 -0600
+@@ -55,13 +55,6 @@ AC_DEFUN([XB_ADD_CODEC],
  # check for library basenames
  AC_DEFUN([XB_FIND_SONAME],
  [
@@ -11,11 +11,10 @@
 -      $1_SONAME=[`basename $$1_SONAME`]
 -    fi
 -  elif [[ "$host_vendor" != "apple" ]]; then
-+    set -x
      AC_MSG_CHECKING([for lib$2 soname])
      $1_FILENAME=$($CC -nostdlib -o /dev/null $LDFLAGS $4 -l$2 -Wl,-M 2>/dev/null | grep "^LOAD.*$2" | awk '{V=2; print $V}')
      if [[ -z $$1_FILENAME ]]; then
-@@ -71,24 +65,6 @@ AC_DEFUN([XB_FIND_SONAME],
+@@ -71,24 +64,6 @@ AC_DEFUN([XB_FIND_SONAME],
      if [[ ! -z $$1_FILENAME ]]; then
        $1_SONAME=$($OBJDUMP -p $$1_FILENAME | grep "SONAME.*$2" | awk '{V=2; print $V}')
      fi
@@ -40,7 +39,7 @@
    if [[ -z "$$1_SONAME" ]]; then
      AC_MSG_RESULT([no])
      if test -z "$3" || test "x${$3}" = "xyes"; then
-@@ -1015,7 +991,7 @@ if test "$use_gles" = "yes"; then
+@@ -1015,7 +990,7 @@ if test "$use_gles" = "yes"; then
        AC_DEFINE([HAVE_LIBEGL],[1],["Define to 1 if you have the `EGL' library (-lEGL)."])
        AC_DEFINE([HAVE_LIBGLESV2],[1],["Define to 1 if you have the `GLESv2' library (-lGLESv2)."])
        AC_MSG_RESULT(== WARNING: OpenGLES support is assumed.)

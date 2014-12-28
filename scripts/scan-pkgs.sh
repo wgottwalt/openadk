@@ -23,8 +23,8 @@ out=0
 
 . $topdir/.config
 
-if [[ -n $ADK_PACKAGE_XBMC ]]; then
-	NEED_JAVA="$NEED_JAVA xbmc"
+if [[ -n $ADK_PACKAGE_KODI ]]; then
+	NEED_JAVA="$NEED_JAVA kodi"
 fi
 
 if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
