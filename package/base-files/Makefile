@@ -111,14 +111,20 @@ endif
 ifeq (${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_DHCP},y)
 	printf "\nauto wlan0\niface wlan0 inet dhcp\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 ifeq (${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2},y)
-	printf "\twireless-mode sta\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
-	printf "\twireless-ssid ${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2_SSID}\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
-	printf "\twireless-security wpa2\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
-	printf "\twireless-passphrase ${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2_PW}\n\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	printf "  wireless-mode sta\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	printf "  wireless-ssid ${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2_SSID}\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	printf "  wireless-security wpa2\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	printf "  wireless-passphrase ${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2_PW}\n\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 endif
 endif
 ifeq (${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_STATIC},y)
 	printf "\nauto wlan0\niface wlan0 inet static\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+ifeq (${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2},y)
+	printf "  wireless-mode sta\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	printf "  wireless-ssid ${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2_SSID}\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	printf "  wireless-security wpa2\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+	printf "  wireless-passphrase ${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2_PW}\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
+endif
 	printf "  address ${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_IP}\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 	printf "  netmask ${ADK_SIMPLE_NETWORK_CONFIG_WLAN0_NM}\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 	printf "  broadcast +\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
