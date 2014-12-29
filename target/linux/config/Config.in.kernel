@@ -1,128 +1,128 @@
 config ADK_KERNEL_STAGING
-	boolean
+	bool
 
 config ADK_KERNEL_EXPERIMENTAL
-	boolean
+	bool
 
 config ADK_KERNEL_RESET_CONTROLLER
-        boolean
+        bool
 
 config ADK_KERNEL_BLK_DEV_INITRD
-	boolean
+	bool
 
 config ADK_KERNEL_BLK_DEV_RAM
-	boolean
+	bool
 
 config ADK_KERNEL_INITRAMFS_COMPRESSION_NONE
-	boolean
+	bool
 
 config ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
+	bool
 	select ADK_HOST_NEED_XZ
-	boolean
 
 config ADK_KERNEL_INITRAMFS_COMPRESSION_LZ4
+	bool
 	select ADK_HOST_NEED_LZ4
-	boolean
 
 config ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
+	bool
 	select ADK_HOST_NEED_LZMA
-	boolean
 
 config ADK_KERNEL_INITRAMFS_COMPRESSION_LZO
+	bool
 	select ADK_HOST_NEED_LZOP
-	boolean
 
 config ADK_KERNEL_INITRAMFS_COMPRESSION_BZIP2
+	bool
 	select ADK_HOST_NEED_BZIP2
-	boolean
 
 config ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
-	boolean
+	bool
 
 config ADK_KERNEL_RD_GZIP
-	boolean
+	bool
 
 config ADK_KERNEL_KERNEL_GZIP
-	boolean
+	bool
 
 config ADK_KERNEL_RD_BZIP2
-	boolean
+	bool
 
 config ADK_KERNEL_KERNEL_BZIP2
-	boolean
+	bool
 
 config ADK_KERNEL_RD_LZ4
-	boolean
+	bool
 
 config ADK_KERNEL_KERNEL_LZ4
-	boolean
+	bool
 
 config ADK_KERNEL_RD_LZMA
-	boolean
+	bool
 
 config ADK_KERNEL_KERNEL_LZMA
-	boolean
+	bool
 
 config ADK_KERNEL_RD_LZO
-	boolean
+	bool
 
 config ADK_KERNEL_KERNEL_LZO
-	boolean
+	bool
 
 config ADK_KERNEL_RD_XZ
-	boolean
+	bool
 
 config ADK_KERNEL_KERNEL_XZ
-	boolean
+	bool
 
 config ADK_KERNEL_INITRAMFS_SOURCE
 	string
 	default ""
 
 config ADK_KERNEL_NETWORK_FILESYSTEMS
-	boolean
+	bool
 
 config ADK_KERNEL_IP_PNP
-	boolean
+	bool
 
 config ADK_KERNEL_IP_PNP_DHCP
-	boolean
+	bool
 
 config ADK_KERNEL_ROOT_NFS
-	boolean
+	bool
 
 config ADK_KERNEL_NFS_COMMON
-	boolean
+	bool
 
 config ADK_KERNEL_64BIT
-	boolean
+	bool
 	default y if ADK_LINUX_64
 
 config ADK_KERNEL_CPU_MIPS64
-	boolean
+	bool
 
 config ADK_KERNEL_CPU_MIPS64_R1
-	boolean
+	bool
 
 config ADK_KERNEL_CPU_MIPS64_R2
-	boolean
+	bool
 
 # ARM specific
 config ADK_KERNEL_AEABI
-	boolean
+	bool
 	default y if ADK_TARGET_ARCH_ARM
 
 config ADK_KERNEL_THUMB2_KERNEL
-	boolean
+	bool
 
 # endianess
 config ADK_KERNEL_CPU_BIG_ENDIAN
+	bool
 	default y if ADK_big
-	boolean
 
 config ADK_KERNEL_CPU_LITTLE_ENDIAN
+	bool
 	default y if ADK_little
-	boolean
 
 choice
 prompt "Kernel Compression"
@@ -180,16 +180,19 @@ endchoice
 
 menu "Kernel options"
 
+config ADK_KERNEL_MMU
+	bool
+	default n if ADK_TARGET_UCLINUX
+	default y
+
 config ADK_KERNEL_SMP
-	prompt "Enable symmetric multi processing"
-	boolean
-	default y if ADK_TARGET_WITH_SMP
+	bool "Enable symmetric multi processing"
 	depends on ADK_TARGET_WITH_SMP
+	default y if ADK_TARGET_WITH_SMP
 	default n
 
 config ADK_KERNEL_HIGHMEM
-	prompt "Enable high memory"
-	boolean
+	bool "Enable high memory"
 	default y if ADK_TARGET_CUBOX_I4PRO
 	default y if ADK_TARGET_CUBOX_I2ULTRA
 	default y if ADK_TARGET_CUBOX_I2EX
@@ -197,13 +200,11 @@ config ADK_KERNEL_HIGHMEM
 	default n
 
 config ADK_KERNEL_PREEMPT
-	prompt "Enable preemptive kernel"
-	boolean
+	bool "Enable preemptive kernel"
 	default n
 
 config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
-	prompt "Optimize for size"
-	boolean
+	bool "Optimize for size"
 	# does not boot in qemu
 	depends on !ADK_TARGET_ARCH_MICROBLAZE
 	default y
@@ -215,16 +216,13 @@ default ADK_KERNEL_PAGE_SIZE_16KB if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 default ADK_KERNEL_PAGE_SIZE_4KB
 
 config ADK_KERNEL_PAGE_SIZE_4KB
-	prompt "4kB"
-	boolean
+	bool "4kB"
 
 config ADK_KERNEL_PAGE_SIZE_16KB
-	prompt "16kB"
-	boolean
+	bool "16kB"
 
 config ADK_KERNEL_PAGE_SIZE_64KB
-	prompt "64kB"
-	boolean
+	bool "64kB"
 
 endchoice
 endmenu

@@ -11,9 +11,9 @@ pointers.
 
 Signed-off-by: Thomas Petazzoni <thomas.petazzoni at free-electrons.com>
 
-diff -Nur linux-3.17.7.orig/arch/m68k/Kconfig.cpu linux-3.17.7/arch/m68k/Kconfig.cpu
---- linux-3.17.7.orig/arch/m68k/Kconfig.cpu	2014-12-16 11:37:26.000000000 -0600
-+++ linux-3.17.7/arch/m68k/Kconfig.cpu	2014-12-27 14:12:19.291459730 -0600
+diff -Nur linux-3.14.26.orig/arch/m68k/Kconfig.cpu linux-3.14.26/arch/m68k/Kconfig.cpu
+--- linux-3.14.26.orig/arch/m68k/Kconfig.cpu	2014-12-06 17:56:06.000000000 -0600
++++ linux-3.14.26/arch/m68k/Kconfig.cpu	2014-12-28 03:00:39.279037664 -0600
 @@ -146,6 +146,7 @@
  	depends on !MMU
  	select GENERIC_CLOCKEVENTS

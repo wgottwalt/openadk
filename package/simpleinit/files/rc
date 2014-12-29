@@ -11,5 +11,4 @@ mkdir -p /var/log
 mkdir -p /var/run
 mkdir -p /var/tmp
 mdev -s
-mount
 ifconfig lo 127.0.0.1 up

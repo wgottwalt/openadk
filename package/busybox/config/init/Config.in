@@ -74,7 +74,7 @@ config BUSYBOX_TELINIT_PATH
 config BUSYBOX_INIT
 	bool "init"
 	default y
-	depends on !ADK_TARGET_UCLINUX
+	depends on !ADK_PACKAGE_SIMPLEINIT
 	select BUSYBOX_FEATURE_SYSLOG
 	help
 	  init is the first program run when the system boots.
