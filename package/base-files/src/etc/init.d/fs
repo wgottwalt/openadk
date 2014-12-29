@@ -33,7 +33,7 @@ for fs in $fstypes; do
 			}
 			logger -t 'Filesystem' "Mounting $disk to $mnt"
 			mkdir -p $mnt > /dev/null 2>&1
-			mount $disk
+			mount $disk > /dev/null 2>&1
 		else
 			logger -s -t 'Filesystem' "No $fs filesystem in kernel"
 		fi

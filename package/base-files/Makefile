@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		6
+PKG_RELEASE:=		7
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
