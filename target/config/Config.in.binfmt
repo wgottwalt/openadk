@@ -3,16 +3,26 @@
 
 choice
 prompt "Binary Format"
-depends on ADK_TARGET_ARCH_M68K || ADK_TARGET_ARCH_BFIN
+depends on ADK_TARGET_ARCH_M68K || ADK_TARGET_ARCH_BFIN || ADK_TARGET_ARCH_C6X
 
 config ADK_TARGET_BINFMT_ELF
 	bool "ELF"
+	depends on !ADK_TARGET_ARCH_C6X
+	depends on !ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_BINFMT_DSBT
+	bool "DSBT"
+	depends on ADK_TARGET_ARCH_C6X
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_M68K
 
 config ADK_TARGET_BINFMT_FDPIC
 	bool "FDPIC"
 	depends on ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_C6X
 
 config ADK_TARGET_BINFMT_FLAT
 	bool "FLAT"
+	depends on !ADK_TARGET_ARCH_C6X
 
 endchoice
