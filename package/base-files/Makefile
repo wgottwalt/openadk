@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		7
+PKG_RELEASE:=		8
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -75,8 +75,13 @@ endif
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
 	    echo $(ADK_RUNTIME_HOSTNAME) > $(IDIR_BASE_FILES)/etc/hostname; \
 	    echo "127.0.0.1	localhost" > $(IDIR_BASE_FILES)/etc/hosts
-	    echo "::1		localhost" >> $(IDIR_BASE_FILES)/etc/hosts
 	    echo "127.0.1.1	$(ADK_RUNTIME_HOSTNAME)" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "::1     ip6-localhost ip6-loopback" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "fe00::0 ip6-localnet" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "ff00::0 ip6-mcastprefix" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "ff02::1 ip6-allnodes" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "ff02::2 ip6-allrouters" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "ff02::3 ip6-allhosts" >> $(IDIR_BASE_FILES)/etc/hosts
 	test -z $(ADK_RUNTIME_PASSWORD) || \
 	    $(SED) 's,\*NP\*,'"$$($(STAGING_HOST_DIR)/usr/bin/mkcrypt \
 	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
