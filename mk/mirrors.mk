@@ -69,80 +69,10 @@ MASTER_SITE_MYSQL?=		\
 	ftp://ftp.fu-berlin.de/unix/databases/mysql/ \
 	http://sunsite.informatik.rwth-aachen.de/mysql/ \
 	http://mysql.easynet.be/ \
-	http://mysql.blic.net/ \
-	http://mysql.online.bg/ \
-	http://mysql.mirrors.cybercity.dk/ \
-	http://mirrors.dotsrc.org/mysql/ \
-	http://mysql.tonnikala.org/ \
-	ftp://ftp.inria.fr/pub/MySQL/ \
-	http://mirrors.ircam.fr/pub/mysql/ \
-	http://mirrors.ee.teiath.gr/mysql/ \
-	http://mysql.sote.hu/ \
-	http://mysql.mirrors.crysys.hit.bme.hu/ \
-	http://na.mirror.garr.it/mirrors/MySQL/ \
-	http://mysql.bst.lt/ \
-	http://mysql.proserve.nl/ \
-	http://mirror.hostfuss.com/mysql/ \
-	http://mysql.mirrors.webazilla.nl/ \
-	http://mirror.dinpris.com/mysql/ \
-	http://mysql.nfsi.pt/ \
-	http://lisa.gov.pt/ftp/mysql/ \
-	ftp://mirrors.fibernet.ro/1/MySQL/ \
-	http://mysql.ran.ro/ \
-	http://mysql.directnet.ru/ \
-	ftp://ftp.dn.ru/pub/MySQL/ \
-	http://mysql.dn.ru/ \
-	http://mysql.mix.su/ \
-	http://www.fastmirrors.org/mysql/ \
-	http://mirrors.bevc.net/mysql/ \
-	http://www.wsection.com/mysql/ \
-	http://mysql.paknet.org/ \
-	http://mysql.rediris.es/ \
-	http://mysql.dataphone.se/ \
-	http://mirror.switch.ch/ftp/mirror/mysql/ \
-	ftp://ftp.solnet.ch/mirror/mysql/ \
-	http://mysql.net.ua/ \
-	ftp://ftp.tlk-l.net/pub/mirrors/mysql.com/ \
-	http://mysql.infocom.ua/ \
-	http://www.mirrorservice.org/sites/ftp.mysql.com/ \
-	http://mirrors.dedipower.com/www.mysql.com/ \
-	http://www.mirror.ac.uk/mirror/www.mysql.org/ \
-	http://mysql.mirror.rafal.ca/ \
-	http://mysql.serenitynet.com/ \
-	ftp://mirror.mcs.anl.gov/pub/mysql/ \
-	http://mirror.services.wisc.edu/mysql/ \
-	http://mysql.orst.edu/ \
-	http://mysql.he.net/ \
-	http://mysql.mirrors.pair.com/ \
-	http://mysql.mirror.redwire.net/ \
-	http://mysql.mirrors.hoobly.com/ \
-	http://mirror.trouble-free.net/mysql_mirror/ \
-	http://mirrors.24-7-solutions.net/pub/mysql/ \
-	http://www.stathy.com/mysql/ \
-	http://mirror.x10.com/mirror/mysql/ \
-	http://mysql.localhost.net.ar/ \
-	http://mirrors.uol.com.br/pub/mysql/ \
-	http://mysql.vision.cl/ \
-	http://mysql.tecnoera.com/ \
-	http://mysql.mirrors.arminco.com/ \
-	http://mysqlmirror.netandhost.in/ \
-	http://mirror.mysql-partners-jp.biz/ \
-	http://ftp.iij.ad.jp/pub/db/mysql/ \
-	http://mysql.oss.eznetsols.org/ \
-	http://mysql.holywar.net/ \
-	http://mysql.new21.com/ \
-	http://mysql.byungsoo.net/ \
-	http://mysql.isu.edu.tw/ \
-	http://mysql.cdpa.nsysu.edu.tw/ \
-	http://mysql.cs.pu.edu.tw/ \
-	http://ftp.stu.edu.tw/pub/Unix/Database/Mysql/ \
-	http://mysql.ntu.edu.tw/ \
-	http://mysql.planetmirror.com/ \
-	http://mysql.mirrors.ilisys.com.au/ \
-	http://mysql.inspire.net.nz/ \
-	http://mysql.mirror.ac.za/ \
 
-MASTER_SITE_GNOME+=	\
+MASTER_SITE_GNOME?=	\
+	ftp://ftp.gnome.org/pub/GNOME/sources/ \
+	ftp://ftp.linux.org.uk/mirrors/ftp.gnome.org/sources/ \
 	ftp://ftp.acc.umu.se/pub/GNOME/sources/	\
 	ftp://ftp.rpmfind.net/linux/gnome.org/sources/ \
 	ftp://ftp.unina.it/pub/linux/GNOME/sources/ \
@@ -150,6 +80,4 @@ MASTER_SITE_GNOME+=	\
 	ftp://ftp.dit.upm.es/linux/gnome/sources/ \
 	ftp://ftp.dataplus.se/pub/linux/gnome/sources/ \
 	ftp://ftp.cse.buffalo.edu/pub/Gnome/sources/ \
-	ftp://ftp.linux.org.uk/mirrors/ftp.gnome.org/sources/ \
-	ftp://ftp.gnome.org/pub/GNOME/sources/ \
 
