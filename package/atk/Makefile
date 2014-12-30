@@ -1,26 +1,27 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${ADK_TOPDIR}/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		atk
-PKG_VERSION:=		2.11.3
+PKG_VERSION:=		2.14.0
+PKG_EXTRAVER:=		2.14
 PKG_RELEASE:=		1
-PKG_HASH:=		b3c63668638dbb627a81f4333a00b744c503531d07b168405ef5f27f382a0ae4
+PKG_HASH:=		2875cc0b32bfb173c066c22a337f79793e0c99d2cc5e81c4dac0d5a523b8fbad
 PKG_DESCR:=		accessibility toolkit library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		glib
 PKG_URL:=		http://www.gnome.org/
-PKG_SITES:=		${MASTER_SITE_GNOME:=/atk/2.11/}
+PKG_SITES:=		$(MASTER_SITE_GNOME:=atk/$(PKG_EXTRAVER)/)
 PKG_LIBNAME:=		libatk
 PKG_OPTS:=		dev
 
-include ${ADK_TOPDIR}/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBATK,libatk,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBATK,libatk,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
 libatk-install:
-	${INSTALL_DIR} ${IDIR_LIBATK}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libatk-*.so* ${IDIR_LIBATK}/usr/lib
+	$(INSTALL_DIR) $(IDIR_LIBATK)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libatk-*.so* $(IDIR_LIBATK)/usr/lib
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
