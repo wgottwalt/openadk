@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.19.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		16d96332ec09d58ae2b914cfa509862e5f5b854dd52fdd6bda7336d66e888278
 PKG_DESCR:=		music player daemon
 PKG_SECTION:=		mm/audio
@@ -146,6 +146,7 @@ CONFIGURE_ARGS+=	--disable-jack \
 			--disable-icu \
 			--disable-bzip2 \
 			--disable-libwrap \
+			--disable-smbclient \
 			--disable-mpc \
 			--disable-wavpack \
 			--disable-modplug \
