@@ -4,22 +4,23 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gdk-pixbuf
-PKG_VERSION:=		2.24.0
-PKG_RELEASE:=		2
-PKG_HASH:=		67c11d3aa40441c1cea42c365bf2d6a9a9dd52fae2d359a707ad5e8abb4d28a7
+PKG_VERSION:=		2.30.8
+PKG_EXTRAVER:=		2.30
+PKG_RELEASE:=		1
+PKG_HASH:=		4853830616113db4435837992c0aebd94cbb993c44dc55063cee7f72a7bef8be
 PKG_DESCR:=		image loading and pixel buffer manipulation library
 PKG_SECTION:=		libs/image
 PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libjpeg-turbo libtiff
 HOST_BUILDDEP:=		glib-host
-PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gdk-pixbuf/2.24/
+PKG_SITES:=		$(MASTER_SITE_GNOME:=gdk-pixbuf/$(PKG_EXTRAVER)/)
 PKG_OPTS:=		dev
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call HOST_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-${PKG_RELEASE}))
-$(eval $(call PKG_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call HOST_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
 HOST_CONFIGURE_ARGS+=	--disable-glibtest \
 			--without-libtiff
@@ -34,5 +35,5 @@ gdk-pixbuf-install:
 	$(CP) ./files/loaders.cache \
 		 $(IDIR_GDK_PIXBUF)/usr/lib/gdk-pixbuf-2.0/2.10.0/loaders.cache
 
-include ${ADK_TOPDIR}/mk/host-bottom.mk
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/host-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
