@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssh
 PKG_VERSION:=		6.7p1
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_HASH:=		b2f8394eae858dabbdef7dac10b99aec00c95462753e80342e530bbb6f725507
 PKG_DESCR:=		secure shell implementation
 PKG_SECTION:=		net/security
@@ -85,13 +85,11 @@ CONFIGURE_ARGS+=	--disable-strip \
 			--without-bsd-auth \
 			--without-rpath \
 			--without-pam \
-			--without-x \
 			--without-zlib-version-check \
 			--sysconfdir=/etc/ssh \
 			--with-privsep-user=sshd \
 			--with-privsep-path=/var/run/sshd \
 			--with-ssl-dir="${STAGING_TARGET_DIR}/usr"
-
 
 openssh-install:
 	${INSTALL_DIR} ${IDIR_OPENSSH}/etc/ssh

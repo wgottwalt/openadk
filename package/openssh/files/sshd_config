@@ -12,7 +12,8 @@
 
 #Port 22
 #AddressFamily any
-ListenAddress 0.0.0.0
+# uncomment next line to disable ipv6
+#ListenAddress 0.0.0.0
 #ListenAddress ::
 
 # Disable legacy (protocol version 1) support in the server for new
@@ -94,7 +95,7 @@ UsePrivilegeSeparation yes
 #Compression delayed
 #ClientAliveInterval 0
 #ClientAliveCountMax 3
-#UseDNS yes
+UseDNS no
 #PidFile /var/run/sshd.pid
 #MaxStartups 10
 #PermitTunnel no
