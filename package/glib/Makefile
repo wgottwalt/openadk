@@ -1,33 +1,33 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${ADK_TOPDIR}/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		2.40.0
-PKG_RELEASE:=		4
-PKG_EXTRAVER:=		2.40
-PKG_HASH:=		0d27f195966ecb1995dcce0754129fd66ebe820c7cd29200d264b02af1aa28b5
+PKG_VERSION:=		2.42.1
+PKG_RELEASE:=		1
+PKG_EXTRAVER:=		2.42
+PKG_HASH:=		8f3f0865280e45b8ce840e176ef83bcfd511148918cc8d39df2ee89b67dcf89a
 PKG_DESCR:=		low-level core library that forms the basis of gtk+
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		glib-host libffi gettext-tiny zlib libelf dbus
 HOST_BUILDDEP:=		libffi-host gettext-tiny-host python2-host
 PKG_URL:=		http://www.gtk.org/
-PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/${PKG_EXTRAVER}/
+PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/$(PKG_EXTRAVER)/
 PKG_NOPARALLEL:=	1
 PKG_OPTS:=		dev noscripts
 
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
 
-include ${ADK_TOPDIR}/mk/host.mk
-include ${ADK_TOPDIR}/mk/package.mk
+include $(ADK_TOPDIR)/mk/host.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call HOST_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE}))
-$(eval $(call PKG_template,GLIB,glib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call HOST_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
-TARGET_CPPFLAGS+=	-D_GNU_SOURCE
+#TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 CONFIGURE_ARGS+=	--disable-mem-pools \
 			--disable-rebuilds \
 			--disable-fam \
@@ -40,7 +40,6 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getgrgid_r=yes
 
 HOST_STYLE:=		auto
-HOST_CFLAGS+=		-fPIC
 ifneq ($(OStype),Darwin)
 HOST_CONFIGURE_ARGS+=	--with-libiconv=no
 endif
@@ -50,20 +49,20 @@ HOST_CONFIGURE_ARGS+=	--disable-fam \
 			--disable-compile-warnings
 
 glib-install:
-	${INSTALL_DIR} ${IDIR_GLIB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgio*.so* ${IDIR_GLIB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libglib*.so* ${IDIR_GLIB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgobject*.so* ${IDIR_GLIB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgmodule*.so* ${IDIR_GLIB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgthread*.so* ${IDIR_GLIB}/usr/lib
+	$(INSTALL_DIR) $(IDIR_GLIB)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libgio*.so* $(IDIR_GLIB)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libglib*.so* $(IDIR_GLIB)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libgobject*.so* $(IDIR_GLIB)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libgmodule*.so* $(IDIR_GLIB)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libgthread*.so* $(IDIR_GLIB)/usr/lib
 	# workaround for dev subpackage
-	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/include
-	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/lib/glib-2.0/include
-	${CP} ${WRKINST}/usr/lib/glib-2.0/include/glibconfig.h \
-		${IDIR_GLIB_DEV}/usr/lib/glib-2.0/include
-	${INSTALL_DIR} ${IDIR_GLIB_DEV}/usr/bin
+	$(INSTALL_DIR) $(IDIR_GLIB_DEV)/usr/include
+	$(INSTALL_DIR) $(IDIR_GLIB_DEV)/usr/lib/glib-2.0/include
+	$(CP) $(WRKINST)/usr/lib/glib-2.0/include/glibconfig.h \
+		$(IDIR_GLIB_DEV)/usr/lib/glib-2.0/include
+	$(INSTALL_DIR) $(IDIR_GLIB_DEV)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/glib-genmarshal \
-		${IDIR_GLIB_DEV}/usr/bin
+		$(IDIR_GLIB_DEV)/usr/bin
 
-include ${ADK_TOPDIR}/mk/host-bottom.mk
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/host-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
