@@ -1,19 +1,16 @@
 config ADK_PACKAGE_UCLIBC
-	prompt "uClibc.................. embedded C library"
-	bool
+	bool "uClibc.................. embedded C library"
+	depends on ADK_TARGET_LIB_UCLIBC
 	default y if ADK_TARGET_LIB_UCLIBC && !ADK_TOOLCHAIN_ONLY
 	default n
-	depends on ADK_TARGET_LIB_UCLIBC
 	help
 	  Embedded C library.
 
 config ADK_PACKAGE_UCLIBC_TEST
-	prompt "uClibc-test............. embedded C library (testsuite)"
-	bool
-	default n
-	select ADK_PACKAGE_MAKE
-	select ADK_PACKAGE_LIBRT
-	select ADK_PACKAGE_LIBPTHREAD
+	bool "uClibc-test............. embedded C library (testsuite)"
+	select ADK_PACKAGE_MAKE if !ADK_TARGET_UCLINUX
+	select ADK_PACKAGE_LIBRT if !ADK_TARGET_UCLINUX
+	select ADK_PACKAGE_LIBPTHREAD if !ADK_TARGET_UCLINUX
 	select ADK_UCLIBC_TEST
 	depends on ADK_TARGET_LIB_UCLIBC
 	help
