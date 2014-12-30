@@ -129,6 +129,7 @@ $(WRKBUILD)/.compiled:
 		RUNTIME_PREFIX=/ \
 		HOSTCC="$(HOST_CC)" \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		VERBOSE=1 \
 		all
 	touch $@
 
@@ -139,6 +140,7 @@ $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		VERBOSE=1 \
 		install_dev
 	touch $@
 
@@ -149,6 +151,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		VERBOSE=1 \
 		install_runtime
 	touch $@
 
@@ -158,6 +161,7 @@ ifeq ($(ADK_UCLIBC_TEST),y)
 		TEST_INSTALLED_UCLIBC=1 \
 		UCLIBC_ONLY=1 \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		V=1 \
 		test_compile
 endif
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
