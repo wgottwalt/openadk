@@ -12,7 +12,7 @@ PKG_DESCR:=		image loading and pixel buffer manipulation library
 PKG_SECTION:=		libs/image
 PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libjpeg-turbo libtiff
-HOST_BUILDDEP:=		glib-host
+HOST_BUILDDEP:=		glib-host libffi-host
 PKG_SITES:=		$(MASTER_SITE_GNOME:=gdk-pixbuf/$(PKG_EXTRAVER)/)
 PKG_OPTS:=		dev
 
@@ -22,6 +22,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
+HOST_LDFLAGS+=		-lffi -lz -ldl -lresolv
 HOST_CONFIGURE_ARGS+=	--disable-glibtest \
 			--without-libtiff
 CONFIGURE_ENV+=		gio_can_sniff=no
