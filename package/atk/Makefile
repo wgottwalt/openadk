@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		atk
-PKG_VERSION:=		2.14.0
-PKG_EXTRAVER:=		2.14
+PKG_VERSION:=		2.15.3
+PKG_EXTRAVER:=		2.15
 PKG_RELEASE:=		1
-PKG_HASH:=		2875cc0b32bfb173c066c22a337f79793e0c99d2cc5e81c4dac0d5a523b8fbad
+PKG_HASH:=		2e050ca0ad8e38ef395a96eef2f2f11c9043c1ce4cecfe5c05358a4f4d4fea9c
 PKG_DESCR:=		accessibility toolkit library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		glib
