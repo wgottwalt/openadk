@@ -1,6 +1,6 @@
---- qemu-2.1.0/hw/m68k/mcf_intc.c	2014-08-01 16:12:17.000000000 +0200
-+++ qemu-2.1.0.m68k/hw/m68k/mcf_intc.c	2014-08-12 11:41:52.416975339 +0200
-@@ -65,6 +65,10 @@
+--- qemu-2.2.0.orig/hw/m68k/mcf_intc.c	2014-12-09 15:45:41.000000000 +0100
++++ qemu-2.2.0/hw/m68k/mcf_intc.c	2014-12-31 21:02:29.000000000 +0100
+@@ -65,6 +65,10 @@ static uint64_t mcf_intc_read(void *opaq
          return (uint32_t)(s->ifr >> 32);
      case 0x14:
          return (uint32_t)s->ifr;
@@ -11,7 +11,7 @@
      case 0xe0: /* SWIACK.  */
          return s->active_vector;
      case 0xe1: case 0xe2: case 0xe3: case 0xe4:
-@@ -102,6 +106,20 @@
+@@ -102,6 +106,20 @@ static void mcf_intc_write(void *opaque,
      case 0x0c:
          s->imr = (s->imr & 0xffffffff00000000ull) | (uint32_t)val;
          break;
@@ -32,4 +32,3 @@
      default:
          hw_error("mcf_intc_write: Bad write offset %d\n", offset);
          break;
-
