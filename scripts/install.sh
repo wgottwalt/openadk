@@ -116,7 +116,7 @@ shift $((OPTIND - 1))
 f=0
 case $ostype {
 (Linux)
-	tools="bc mkfs.$fs tune2fs"
+	tools="bc mkfs.$fs tune2fs partprobe"
 	;;
 (Darwin)
 	tools="bc diskutil"
@@ -207,6 +207,7 @@ case $ostype {
 	}
 	function create_fs {
 		(( quiet )) || print "Creating filesystem on ${1}..."
+		partprobe $tgt
 		mkfs.$3 "$1"
 	}
 	function tune_fs {
