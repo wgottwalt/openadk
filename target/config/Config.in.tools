@@ -61,6 +61,10 @@ config ADK_HOST_BUILD_GREP
 	boolean
 	default n
 
+config ADK_HOST_BUILD_U_BOOT
+	boolean
+	default n
+
 config ADK_HOST_BUILD_PATCH
 	boolean
 	default n
