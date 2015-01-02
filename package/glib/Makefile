@@ -27,7 +27,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
-#TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 CONFIGURE_ARGS+=	--disable-mem-pools \
 			--disable-rebuilds \
 			--disable-fam \
@@ -40,6 +39,9 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getgrgid_r=yes
 
 HOST_STYLE:=		auto
+ifneq ($(OStype),CYGWIN)
+HOST_CFLAGS+=		-fPIC
+endif
 ifneq ($(OStype),Darwin)
 HOST_CONFIGURE_ARGS+=	--with-libiconv=no
 endif
@@ -47,6 +49,10 @@ HOST_CONFIGURE_ARGS+=	--disable-fam \
 			--enable-static \
 			--disable-shared \
 			--disable-compile-warnings
+
+hostpost-install:
+	$(CP) $(STAGING_HOST_DIR)/usr/lib/glib-2.0/include/glibconfig.h \
+		$(STAGING_HOST_DIR)/usr/include/glib-2.0/
 
 glib-install:
 	$(INSTALL_DIR) $(IDIR_GLIB)/usr/lib
