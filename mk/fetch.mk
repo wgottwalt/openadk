@@ -62,17 +62,7 @@ $(1):
 	mkdir -p "$$$${fullname%%/$$$$filename}"; \
 	cd "$$$${fullname%%/$$$$filename}"; \
 	for url in "${PKG_SITES}"; do case $$$$url in \
-	    http://*|https://*|ftp://*) \
-		for site in $${PKG_SITES} $${MASTER_SITE_BACKUP}; do \
-			: echo "$${FETCH_CMD} $$$$site$$$$filename"; \
-			rm -f "$$$$filename"; \
-			if $${FETCH_CMD} $$$$site$$$$filename; then \
-				: check the size here; \
-				[[ ! -e $$$$filename ]] || exit 0; \
-			fi; \
-		done; \
-		;; \
-	   git://*) \
+	   git://*|*.git) \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
 		git clone $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
 		if [ $$$$(echo $${PKG_VERSION}|wc -c) -eq 41 ]; then \
@@ -88,6 +78,16 @@ $(1):
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
 		: check the size here; \
 		[[ ! -e $$$$filename ]] || exit 0; \
+		;; \
+	    http://*|https://*|ftp://*) \
+		for site in $${PKG_SITES} $${MASTER_SITE_BACKUP}; do \
+			: echo "$${FETCH_CMD} $$$$site$$$$filename"; \
+			rm -f "$$$$filename"; \
+			if $${FETCH_CMD} $$$$site$$$$filename; then \
+				: check the size here; \
+				[[ ! -e $$$$filename ]] || exit 0; \
+			fi; \
+		done; \
 		;; \
 	   *) \
 		echo url schema not known; \
