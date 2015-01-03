@@ -53,10 +53,16 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 	@echo "sudo ./scripts/install.sh -d 256 raspberry-pi /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
-	@echo "Use following command to install it on SD card:"
-	@echo "sudo ./scripts/install.sh solidrun-imx6 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+ifeq ($(ADK_APPLIANCE_KODI),y)
 	@echo "Use following command to install with a writable data partition"
 	@echo "sudo ./scripts/install.sh -d 256 solidrun-imx6 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "If you want to update a card without loosing existing data on the writable partition use:"
+	@echo "sudo ./scripts/install.sh -k -d 256 solidrun-imx6 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "In both cases the cfgfs partition is _not_ removed!"
+else
+	@echo "Use following command to install it on SD card:"
+	@echo "sudo ./scripts/install.sh solidrun-imx6 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
