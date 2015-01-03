@@ -9,26 +9,35 @@ PKG_RELEASE:=		1
 PKG_HASH:=		858b589c22297cacdf437f3baff6f04b333087521ab274f7ab677cb8c6bb78e4
 PKG_DESCR:=		partition table editor
 PKG_SECTION:=		sys/fs
-PKG_DEPENDS:=		libblkid libuuid libreadline libpthread
-PKG_DEPENDS+=		libdevmapper
-PKG_BUILDDEP:=		util-linux readline lvm
+PKG_DEPENDS:=		libblkid libuuid libpthread
+PKG_BUILDDEP:=		util-linux
 PKG_URL:=		http://www.gnu.org/software/parted/index.shtml
-PKG_SITES:=		${MASTER_SITE_GNU:=parted/}
+PKG_SITES:=		$(MASTER_SITE_GNU:=parted/)
 
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
 
 include $(ADK_TOPDIR)/mk/package.mk
 
+$(eval $(call PKG_template,PARTED,parted,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
+
 ifeq ($(ADK_TARGET_LIB_UCLIBC)$(ADK_TARGET_LIB_UCLIBC_NG),y)
 TARGET_LDFLAGS+=	-liconv
 endif
 
-$(eval $(call PKG_template,PARTED,parted,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+CONFIGURE_ARGS+=	--disable-dynamic-loading
+endif
+
+CONFIGURE_ARGS+=	--disable-device-mapper \
+			--without-readline
 
 parted-install:
-	${INSTALL_DIR} $(IDIR_PARTED)/usr/sbin $(IDIR_PARTED)/usr/lib
-	${CP} $(WRKINST)/usr/lib/libparted*so* $(IDIR_PARTED)/usr/lib
-	${INSTALL_BIN} $(WRKINST)/usr/sbin/parted $(IDIR_PARTED)/usr/sbin
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+	$(INSTALL_DIR) $(IDIR_PARTED)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libparted*so* $(IDIR_PARTED)/usr/lib
+endif
+	$(INSTALL_DIR) $(IDIR_PARTED)/usr/sbin
+	$(INSTALL_BIN) $(WRKINST)/usr/sbin/parted $(IDIR_PARTED)/usr/sbin
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk

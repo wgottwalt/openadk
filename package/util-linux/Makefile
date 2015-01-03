@@ -9,7 +9,7 @@ PKG_RELEASE:=		3
 PKG_HASH:=		e0457f715b73f4a349e1acb08cb410bf0edc9a74a3f75c357070f31f70e33cd6
 PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
-PKG_BUILDDEP:=		ncurses pam
+PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.25/
 PKG_OPTS:=		dev
 
@@ -29,6 +29,7 @@ PKGSD_CFDISK:=		partition table manipulation utility
 PKGSC_CFDISK:=		sys/fs
 PKGSD_SU:=		switch user utility
 PKGSC_SU:=		sys/misc
+PKGSB_SU:=		pam
 PKGSD_SWAP_UTILS:=	swap space management utilities
 PKGSS_SWAP_UTILS:=	libblkid
 PKGSC_SWAP_UTILS:=	sys/fs

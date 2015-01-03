@@ -4,7 +4,7 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
-PKG_VERSION:=		2.02.111
+PKG_VERSION:=		2.02.114
 PKG_RELEASE:=		1
 PKG_HASH:=		6d8f3e72fe07f614315d8e0c2d9f93c5fc7a4360d14e4f9b805750e21593dd24
 PKG_DESCR:=		logical volume management
@@ -30,6 +30,10 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_DEVICE_MAPPER},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBDEVMAPPER,libdevmapper,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBDEVMAPPER},${PKGSC_LIBDEVMAPPER},${PKG_OPTS}))
+
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+CONFIGURE_ARGS+=	--enable-static_link
+endif
 
 CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \

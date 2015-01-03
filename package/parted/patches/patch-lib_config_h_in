@@ -1,8 +1,8 @@
---- parted-3.1.orig/lib/config.h.in	2012-03-02 17:10:29.000000000 +0100
-+++ parted-3.1/lib/config.h.in	2013-12-25 20:03:47.000000000 +0100
-@@ -1424,6 +1424,11 @@
- # define _DARWIN_USE_64_BIT_INODE 1
- #endif
+--- parted-3.2.orig/lib/config.h.in	2014-07-28 22:02:54.000000000 -0500
++++ parted-3.2/lib/config.h.in	2015-01-03 14:02:11.888853421 -0600
+@@ -1471,6 +1471,11 @@
+ /* Enable large inode numbers on Mac OS X 10.5. */
+ #undef _DARWIN_USE_64_BIT_INODE
  
 +/* Enable large inode numbers on Mac OS X 10.5.  */
 +#ifndef _DARWIN_USE_64_BIT_INODE
