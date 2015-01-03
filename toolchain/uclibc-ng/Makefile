@@ -162,7 +162,7 @@ ifeq ($(ADK_UCLIBC_TEST),y)
 		TEST_INSTALLED_UCLIBC=1 \
 		UCLIBC_ONLY=1 \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
-		V=1 \
+		VERBOSE=1 \
 		test_compile
 endif
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
