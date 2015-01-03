@@ -77,13 +77,16 @@ ifneq ($(strip ${ADK_USE_CCACHE}),)
 TARGET_COMPILER_PREFIX=$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CROSS}
 endif
 
-# use a gcc wrapper for uClinux
-ifeq ($(ADK_TARGET_UCLINUX),y)
-TARGET_CC:=		adk-uclinux-gcc
-else
 # target tools
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
+
+# use a gcc wrapper for coldfire support
+ifeq ($(ADK_TARGET_UCLINUX),y)
+ifeq ($(ADK_TARGET_ARCH_M68K),y)
+TARGET_CC:=		adk-uclinux-gcc
 endif
+endif
+
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
 TARGET_AR:=		${TARGET_COMPILER_PREFIX}ar
