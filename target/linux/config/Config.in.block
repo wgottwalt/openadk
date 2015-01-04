@@ -1,110 +1,109 @@
 menu "Block devices support"
 
 config ADK_KERNEL_MD
-	boolean
+	bool
 
 config ADK_KERNEL_RAID6_PQ
 	tristate
 
 config ADK_KERNEL_LBD
-	boolean
+	bool
 
 config ADK_KERNEL_BLK_DEV_IO_TRACE
-	boolean
+	bool
 
 config ADK_KERNEL_LSF
-	boolean
+	bool
 
 config ADK_KERNEL_IOSCHED_AS
-	boolean
+	bool
 
 config ADK_KERNEL_IOSCHED_DEADLINE
-	boolean
+	bool
 
 config ADK_KERNEL_IOSCHED_CFQ
-	boolean
+	bool
 
 config ADK_KERNEL_SCSI_LOWLEVEL
-	boolean
+	bool
 
 config ADK_KERNEL_SCSI_DMA
-	boolean
+	bool
 
 config ADK_KERNEL_SCSI_MULTI_LUN
-	boolean
+	bool
 
 config ADK_KERNEL_SCSI_CONSTANTS
-	boolean
+	bool
 
 config ADK_KERNEL_SCSI_LOGGING
-	boolean
+	bool
 	
 config ADK_KERNEL_SCSI_SCAN_ASYNC
-	boolean
+	bool
 
 config ADK_KERNEL_ISCSI_TCP
-	boolean
+	bool
 
 config ADK_KERNEL_BLK_DEV
-	boolean
+	bool
 
 config ADK_KERNEL_ATA
-	boolean
+	bool
 
 config ADK_KERNEL_ATA_SFF
-	boolean
+	bool
 
 config ADK_KERNEL_ATA_BMDMA
-	boolean
+	bool
 
 config ADK_KERNEL_SATA_AHCI_PLATFORM
-	boolean
+	bool
 
 config ADK_KERNEL_SATA_PMP
-	boolean
+	bool
 
 config ADK_KERNEL_AHCI_IMX
-	boolean
+	bool
 
 config ADK_KERNEL_CONNECTOR
-	boolean
+	bool
 
 config ADK_KERNEL_MMC
-	boolean
+	bool
 
 config ADK_KERNEL_MMC_BLOCK
-	boolean
+	bool
 
 config ADK_KERNEL_MMC_BLOCK_BOUNCE
-	boolean
+	bool
 
 config ADK_KERNEL_MMC_UNSAFE_RESUME
-	boolean
+	bool
 
 config ADK_KERNEL_MMC_SDHCI
-	boolean
+	bool
 
 config ADK_KERNEL_MMC_SDHCI_IO_ACCESSORS
-	boolean
+	bool
 
 config ADK_KERNEL_MMC_SDHCI_PLTFM
-	boolean
+	bool
 
 config ADK_KERNEL_MMC_BCM2835
-	boolean
+	bool
 
 config ADK_KERNEL_MMC_BCM2835_DMA
-	boolean
+	bool
 
 config ADK_KERNEL_MMC_SDHCI_BCM2708_DMA
-	boolean
+	bool
 
 menu "SATA/PATA devices support"
 depends on ADK_TARGET_WITH_PATA || ADK_TARGET_WITH_SATA || ADK_TARGET_QEMU || ADK_TARGET_VBOX
 
 config ADK_KERNEL_PATA_RB532
-	prompt "CF disk driver for Mikrotik RB532"
-	tristate
+	tristate "CF disk driver for Mikrotik RB532"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -116,15 +115,17 @@ config ADK_KERNEL_PATA_RB532
 	default n
 
 config ADK_KERNEL_PATA_AMD
-	prompt "AMD PATA driver"
-	tristate
+	tristate "AMD PATA driver"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
 	select ADK_KERNEL_ATA_BMDMA
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
-	depends on ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2 || ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13 || ADK_TARGET_SYSTEM_PCENGINES_ALIX1C || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	depends on ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2 || \
+		   ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13 || \
+		   ADK_TARGET_SYSTEM_PCENGINES_ALIX1C || \
+		   ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
 	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
@@ -144,8 +145,7 @@ config ADK_KERNEL_PATA_SC1200
 	default n
 
 config ADK_KERNEL_SATA_AHCI
-	prompt "AHCI SATA driver"
-	tristate
+	tristate "AHCI SATA driver"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV
@@ -159,8 +159,7 @@ config ADK_KERNEL_SATA_AHCI
 	  Enables support for AHCI Serial ATA.
 
 config ADK_KERNEL_ATA_PIIX
-	prompt "ATA PIIX support"
-	tristate
+	tristate "ATA PIIX support"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_DMA
 	select ADK_KERNEL_ATA
@@ -179,8 +178,7 @@ config ADK_KERNEL_ATA_PIIX
 	  ATA PIIX driver.
 
 config ADK_KERNEL_PATA_MACIO
-	prompt "MAC IO support"
-	tristate
+	tristate "MAC IO support"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -188,7 +186,6 @@ config ADK_KERNEL_PATA_MACIO
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on ADK_TARGET_SYSTEM_QEMU_PPC
-	default n
 	
 config ADK_KERNEL_PATA_PLATFORM
 	tristate
@@ -207,8 +204,7 @@ config ADK_KERNEL_PATA_PCMCIA
 	tristate
 
 config ADK_KERNEL_PATA_IMX
-	prompt "eSATA driver for Cubox-i"
-	tristate
+	tristate "eSATA driver for Solidrun IMX6"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -223,11 +219,10 @@ config ADK_KERNEL_PATA_IMX
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 	help
-	  eSATA driver for cubox-i
+	  eSATA driver for solidrun imx6
 
 config ADK_KERNEL_PATA_CMD64X
-	prompt "CMD64x PATA driver"
-	tristate
+	tristate "CMD64x PATA driver"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -235,13 +230,11 @@ config ADK_KERNEL_PATA_CMD64X
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on ADK_TARGET_SYSTEM_QEMU_SPARC64
-	default n
 	help
 	  Driver for CMD64x chipsets.
 
 config ADK_KERNEL_PATA_PXA
-	prompt "PATA driver for Sharp Zaurus"
-	tristate
+	tristate "PATA driver for Sharp Zaurus"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -265,37 +258,29 @@ depends on ADK_TARGET_WITH_SCSI || \
 	ADK_TARGET_SYSTEM_QEMU_SPARC
 
 config ADK_KERNEL_SCSI_SYM53C8XX_2
-	prompt "Symbios Logic 53C8XX2 support"
-	tristate
+	tristate "Symbios Logic 53C8XX2 support"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_LOWLEVEL
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
-	default n
-	help
 
 config ADK_KERNEL_SCSI_IBMVSCSI
-	prompt "IBM VSCSI support"
-	tristate
+	tristate "IBM VSCSI support"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_LOWLEVEL
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on ADK_TARGET_SYSTEM_QEMU_PPC64
-	default n
-	help
 
 config ADK_KERNEL_SCSI_SUNESP
-	prompt "SUN ESP support"
-	tristate
+	tristate "SUN ESP support"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_LOWLEVEL
 	select ADK_KERNEL_SBUS
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
 	depends on ADK_TARGET_SYSTEM_QEMU_SPARC
-	default n
 
 endmenu
 
@@ -314,8 +299,7 @@ config ADK_KERNEL_MMC_AT91
 	default n
 
 config ADK_KERNEL_MMC_SDHCI_BCM2708
-	prompt "SD card support for Raspberry PI"
-	boolean
+	bool "SD card support for Raspberry PI"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_MMC
 	select ADK_KERNEL_MMC_BLOCK
@@ -332,8 +316,7 @@ config ADK_KERNEL_MMC_SDHCI_BCM2708
 	default n
 
 config ADK_KERNEL_MMC_SDHCI_ESDHC_IMX
-	prompt "SD card support for Solidrun IMX6"
-	boolean
+	bool "SD card support for Solidrun IMX6"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_DMA
 	select ADK_KERNEL_SCSI_MULTI_LUN
@@ -358,8 +341,7 @@ endmenu
 menu "Block driver support"
 
 config ADK_KERNEL_SCSI
-	prompt "SCSI support"
-	tristate
+	tristate "SCSI support"
 	select ADK_KERNEL_LBD
 	select ADK_KERNEL_LSF
 	select ADK_KERNEL_IOSCHED_AS
@@ -376,8 +358,7 @@ config ADK_KERNEL_SCSI
 	  Channel, FireWire storage and the IDE-SCSI emulation driver.
 
 config ADK_KERNEL_BLK_DEV_SD
-	prompt "SCSI disk support"
-	tristate
+	tristate "SCSI disk support"
 	select ADK_KERNEL_SCSI
 	help
 	  If you want to use SCSI hard disks, Fibre Channel disks,
@@ -388,8 +369,7 @@ config ADK_KERNEL_BLK_DEV_SD
 	  CD-ROMs.
 
 config ADK_KERNEL_BLK_DEV_SR
-	prompt "SCSI CDROM support"
-	tristate
+	tristate "SCSI CDROM support"
 	select ADK_KERNEL_SCSI
 	help
 	  If you want to use a SCSI or FireWire CD-ROM under Linux,
@@ -398,32 +378,23 @@ config ADK_KERNEL_BLK_DEV_SR
 	  Y or M to "ISO 9660 CD-ROM file system support" later.
 
 config ADK_KERNEL_BLK_DEV_MD
-	prompt "RAID support"
-	tristate
+	tristate "RAID support"
 	select ADK_KERNEL_MD
-	help
 
 config ADK_KERNEL_MD_RAID0
-	prompt "RAID0 support"
-	tristate
+	tristate "RAID0 support"
 	depends on ADK_KERNEL_BLK_DEV_MD
-	help
 
 config ADK_KERNEL_MD_RAID1
-	prompt "RAID1 support"
-	tristate
+	tristate "RAID1 support"
 	depends on ADK_KERNEL_BLK_DEV_MD
-	help
 
 config ADK_KERNEL_MD_RAID456
-	prompt "RAID456 support"
-	tristate
+	tristate "RAID456 support"
 	depends on ADK_KERNEL_BLK_DEV_MD
-	help
 
 config ADK_KERNEL_BLK_DEV_DM
-	prompt "Device Mapper support"
-	tristate
+	tristate "Device Mapper support"
 	select ADK_KERNEL_MD
 	help
 	  Device-mapper is a low level volume manager.  It works by allowing
@@ -434,8 +405,7 @@ config ADK_KERNEL_BLK_DEV_DM
 	  Higher level volume managers such as LVM2 use this driver.
 
 config ADK_KERNEL_DM_CRYPT
-	prompt "Crypt target support"
-	tristate
+	tristate "Crypt target support"
 	select ADK_KERNEL_MD
 	select ADK_KERNEL_CRYPTO
 	select ADK_KERNEL_CRYPTO_CBC
@@ -453,23 +423,20 @@ config ADK_KERNEL_DM_CRYPT
 	  <http://www.saout.de/misc/dm-crypt/>
 
 config ADK_KERNEL_DM_SNAPSHOT
-	prompt "Devicemapper Snapshot target"
-	tristate
+	tristate "Devicemapper Snapshot target"
 	depends on ADK_KERNEL_BLK_DEV_DM
 	help
          Allow volume managers to take writable snapshots of a device.
 
 config ADK_KERNEL_DM_MIRROR
-	prompt "Devicemapper Mirror target"
-	tristate
+	tristate "Devicemapper Mirror target"
 	depends on ADK_KERNEL_BLK_DEV_DM
 	help
          Allow volume managers to mirror logical volumes, also
          needed for live data migration tools such as 'pvmove'.
 
 config ADK_KERNEL_BLK_DEV_DRBD
-	prompt "DRBD support (Network RAID 1)"
-	tristate
+	tristate "DRBD support (Network RAID 1)"
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_CONNECTOR
 	default m if ADK_PACKAGE_DRBD
@@ -478,8 +445,7 @@ config ADK_KERNEL_BLK_DEV_DRBD
           DRBD - http://www.drbd.org
 
 config ADK_KERNEL_BLK_DEV_LOOP
-	prompt "Loop mount support"
-	tristate
+	tristate "Loop mount support"
 	select ADK_KERNEL_BLK_DEV
 	default m if ADK_PACKAGE_LOSETUP
 	default m if ADK_PACKAGE_LTP
@@ -521,9 +487,7 @@ config ADK_KERNEL_BLK_DEV_LOOP
 	  device used for network connections from the machine to itself.
 
 config ADK_KERNEL_BLK_DEV_NBD
-	prompt "Network Block Device support"
-	tristate
-	default n
+	tristate "Network Block Device support"
 	help
 	  Saying Y here will allow your computer to be a client for network
 	  block devices, i.e. it will be able to use block devices exported by
@@ -544,8 +508,7 @@ config ADK_KERNEL_BLK_DEV_NBD
 	  or Coda; you can say N here even if you intend to use NFS or Coda.
           
 config ADK_KERNEL_SWAP
-	prompt "SWAP support"
-	boolean
+	bool "SWAP support"
 	help
 	  Kernel swap support
 

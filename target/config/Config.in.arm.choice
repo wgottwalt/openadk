@@ -75,5 +75,6 @@ config ADK_TARGET_HUMMINGBOARD_I2
 config ADK_TARGET_HUMMINGBOARD_I2EX
 	boolean "Solidrun Hummingboard-i2eX"
 	select ADK_TARGET_WITH_SMP
+	select ADK_TARGET_WITH_SATA
 
 endchoice
