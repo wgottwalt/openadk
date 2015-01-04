@@ -1,23 +1,23 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${ADK_TOPDIR}/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		net-snmp
-PKG_VERSION:=		5.7.2.1
+PKG_VERSION:=		5.7.3
 PKG_RELEASE:=		1
-PKG_HASH:=		35dd20a2b17849f6d5a0a6109b4f52c1a777a3e1a00c79c4a175c520d23f3497
+PKG_HASH:=		12ef89613c7707dc96d13335f153c1921efc9d61d3708ef09f3fc4a7014fb4f0
 PKG_DESCR:=		snmp agent
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libnetsnmp libelf libnl
 PKG_BUILDDEP:=		libelf libnl
 PKG_URL:=		http://www.net-snmp.org/
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=net-snmp/}
+PKG_SITES:=		$(MASTER_SITE_SOURCEFORGE:=net-snmp/)
 PKG_NOPARALLEL:=	1
 PKG_LIBNAME:=		libnetsnmp
 PKG_OPTS:=		dev
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 PKG_SUBPKGS:=		SNMPD SNMP_UTILS LIBNETSNMP
 PKGSD_SNMP_UTILS:=	snmp utilities
@@ -29,15 +29,15 @@ PKGSC_LIBNETSNMP:=	libs/net
 PKG_FLAVOURS_SNMPD:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable ipv6 support
 
-include ${ADK_TOPDIR}/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,SNMPD,snmpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,SNMP_UTILS,snmp-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_SNMP_UTILS},${PKGSD_SNMP_UTILS},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBNETSNMP,libnetsnmp,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBNETSNMP},${PKGSD_LIBNETSNMP},${PKGSC_LIBNETSNMP},${PKG_OPTS}))
+$(eval $(call PKG_template,SNMPD,snmpd,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
+$(eval $(call PKG_template,SNMP_UTILS,snmp-utils,$(PKG_VERSION)-$(PKG_RELEASE),$(PKGSS_SNMP_UTILS),$(PKGSD_SNMP_UTILS),$(PKG_SECTION)))
+$(eval $(call PKG_template,LIBNETSNMP,libnetsnmp,$(PKG_VERSION)-$(PKG_RELEASE),$(PKGSS_LIBNETSNMP),$(PKGSD_LIBNETSNMP),$(PKGSC_LIBNETSNMP),$(PKG_OPTS)))
 
 SNMP_TRANSPORTS_INCLUDED:=	UDP TCP Callback Unix
 SNMP_TRANSPORTS_EXCLUDED:=	Alias
-ifneq (${ADK_PACKAGE_SNMPD_WITH_IPV6},)
+ifneq ($(ADK_PACKAGE_SNMPD_WITH_IPV6),)
 SNMP_TRANSPORTS_INCLUDED+=	TCPIPv6 UDPIPv6
 else
 SNMP_TRANSPORTS_EXCLUDED:=	TCPIPv6 UDPIPv6
@@ -57,35 +57,35 @@ CONFIGURE_ARGS+=	--with-defaults \
 			--disable-mib-loading \
 			--disable-mibs \
 			--disable-scripts \
-			--with-transports="${SNMP_TRANSPORTS_INCLUDED}" \
-			--with-out-transports="${SNMP_TRANSPORTS_EXCLUDED}" \
+			--with-transports="$(SNMP_TRANSPORTS_INCLUDED)" \
+			--with-out-transports="$(SNMP_TRANSPORTS_EXCLUDED)" \
 			--with-opaque-special-types \
 			--without-openssl \
 			--without-libwrap \
 			--without-rpm \
 			--without-zlib
 
-ifneq (${ADK_PACKAGE_SNMPD_WITH_IPV6},)
+ifneq ($(ADK_PACKAGE_SNMPD_WITH_IPV6),)
 CONFIGURE_ARGS+=	--enable-ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-FAKE_FLAGS+=		INSTALL_PREFIX="${WRKINST}"
+FAKE_FLAGS+=		INSTALL_PREFIX="$(WRKINST)"
 
 libnetsnmp-install:
-	${INSTALL_DIR} ${IDIR_LIBNETSNMP}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libnetsnmp*.so* ${IDIR_LIBNETSNMP}/usr/lib/
+	$(INSTALL_DIR) $(IDIR_LIBNETSNMP)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libnetsnmp*.so* $(IDIR_LIBNETSNMP)/usr/lib/
 
 snmpd-install:
-	${INSTALL_DIR} ${IDIR_SNMPD}/etc/snmp
-	${INSTALL_DIR} ${IDIR_SNMPD}/usr/sbin
-	${INSTALL_DATA} ./files/snmpd.conf ${IDIR_SNMPD}/etc/snmp/snmpd.conf
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/snmpd ${IDIR_SNMPD}/usr/sbin/snmpd
+	$(INSTALL_DIR) $(IDIR_SNMPD)/etc/snmp
+	$(INSTALL_DIR) $(IDIR_SNMPD)/usr/sbin
+	$(INSTALL_DATA) ./files/snmpd.conf $(IDIR_SNMPD)/etc/snmp/snmpd.conf
+	$(INSTALL_BIN) $(WRKINST)/usr/sbin/snmpd $(IDIR_SNMPD)/usr/sbin/snmpd
 
 snmp-utils-install:
-	${INSTALL_DIR} ${IDIR_SNMP_UTILS}/usr/bin
-	${CP} ${WRKINST}/usr/bin/snmp{get,set,status,test,trap,walk} \
-		${IDIR_SNMP_UTILS}/usr/bin/
+	$(INSTALL_DIR) $(IDIR_SNMP_UTILS)/usr/bin
+	$(CP) $(WRKINST)/usr/bin/snmp{get,set,status,test,trap,walk} \
+		$(IDIR_SNMP_UTILS)/usr/bin/
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
