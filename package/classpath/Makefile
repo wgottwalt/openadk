@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		gtk+ gdk-pixbuf orbit2 gconf
 PKG_DEPENDS:=		libgtk gdk-pixbuf orbit2 gconf
 HOST_BUILDDEP:=		gcj-host ecj-host
 PKG_URL:=		http://www.gnu.org/software/classpath/home.html
-PKG_SITES:=		ftp.gnu.org/classpath/ \
+PKG_SITES:=		ftp://ftp.gnu.org/classpath/ \
 			http://www.antlr3.org/download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz antlr-3.5.2-complete.jar
