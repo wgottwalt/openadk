@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lm_sensors
-PKG_VERSION:=		3.3.1
-PKG_RELEASE:=		2
-PKG_HASH:=		cfcc783945f7bfd5206e73f8f9d3f353b0dbf22153c0ef2587a8d7a7be7e628f
+PKG_VERSION:=		3.3.5
+PKG_RELEASE:=		1
+PKG_HASH:=		5dae6a665e1150159a93743c4ff1943a7efe02cd9d3bb12c4805e7d7adcf4fcf
 PKG_DESCR:=		hardware sensor toolset
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		sysfsutils
@@ -15,7 +15,7 @@ PKG_SITES:=		http://dl.lm-sensors.org/lm-sensors/releases/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_ARCH_DEPENDS:=	x86 x86_64
+PKG_ARCH_DEPENDS:=	arm x86 x86_64
 
 PKG_SUBPKGS:=		LM_SENSORS LM_SENSORS_DETECT
 PKGSD_LM_SENSORS_DETECT:=	lm_sensors perl scripts (e.g. sensors-detect)
@@ -30,7 +30,6 @@ $(eval $(call PKG_template,LM_SENSORS_DETECT,lm-sensors-detect,${PKG_VERSION}-${
 
 CONFIG_STYLE:=		manual
 ALL_TARGET:=		user
-TARGET_LDFLAGS+=	-liconv
 
 lm-sensors-install:
 	${INSTALL_DIR} ${IDIR_LM_SENSORS}/usr/bin
