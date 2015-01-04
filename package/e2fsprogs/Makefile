@@ -71,7 +71,7 @@ libe2fs-install:
 	$(INSTALL_DIR) $(IDIR_LIBE2FS)/etc
 	$(INSTALL_DATA) $(WRKBUILD)/misc/mke2fs.conf $(IDIR_LIBE2FS)/etc
 	$(INSTALL_DIR) $(IDIR_LIBE2FS)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/lib(e2p,ext2fs).so.* \
+	$(CP) $(WRKINST)/usr/lib/lib{e2p,ext2fs}.so.* \
 		$(IDIR_LIBE2FS)/usr/lib
 
 e2fsck-install:
