@@ -95,7 +95,7 @@ losetup-install:
 swap-utils-install:
 	$(INSTALL_DIR) $(IDIR_SWAP_UTILS)/usr/sbin
 	$(CP) $(WRKINST)/usr/sbin/mkswap $(IDIR_SWAP_UTILS)/usr/sbin
-	$(CP) $(WRKINST)/usr/sbin/swap(on,off) $(IDIR_SWAP_UTILS)/usr/sbin
+	$(CP) $(WRKINST)/usr/sbin/swap{on,off} $(IDIR_SWAP_UTILS)/usr/sbin
 
 mkfs-install:
 	$(INSTALL_DIR) $(IDIR_MKFS)/usr/sbin
@@ -103,7 +103,7 @@ mkfs-install:
 
 mount-install:
 	$(INSTALL_DIR) $(IDIR_MOUNT)/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/(u,)mount $(IDIR_MOUNT)/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/{u,}mount $(IDIR_MOUNT)/bin
 
 mcookie-install:
 	$(INSTALL_DIR) $(IDIR_MCOOKIE)/usr/bin
