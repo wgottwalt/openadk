@@ -1,9 +1,11 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
 menu "MIPS devices support"
 depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 
 config ADK_KERNEL_LEMOTE_YEELOONG2F_PDEV
-	prompt "Yeelong platform drivers (f.e. battery support)"
-	boolean
+	bool "Yeelong platform drivers (f.e. battery support)"
 	depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
  	default n

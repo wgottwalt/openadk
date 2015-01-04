@@ -1,23 +1,22 @@
-config ADK_KERNEL_WATCHDOG
-	boolean
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
 
-config ADK_KERNEL_MISC_DEVICES
-	boolean
+config ADK_KERNEL_WATCHDOG
+	bool
 
 config ADK_KERNEL_SCx200
-	boolean
+	bool
 
 config ADK_KERNEL_CS5535_MFGPT
-	boolean
+	bool
 
 config ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
-	boolean
+	bool
 
 menu "Watchdog driver support"
 
 config ADK_KERNEL_BCM2708_WDT
-	prompt "BCM2708 Hardware Watchdog"
-	boolean
+	bool "BCM2708 Hardware Watchdog"
 	select ADK_KERNEL_WATCHDOG
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
@@ -26,8 +25,7 @@ config ADK_KERNEL_BCM2708_WDT
 	  Watchdog driver for Raspberry Pi.
 
 config ADK_KERNEL_IMX2_WDT
-	prompt "IMX6 Hardware Watchdog"
-	boolean
+	bool "IMX6 Hardware Watchdog"
 	select ADK_KERNEL_WATCHDOG
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
@@ -36,8 +34,7 @@ config ADK_KERNEL_IMX2_WDT
 	  Watchdog driver for Cubox-i and Hummingboard.
 
 config ADK_KERNEL_SCx200_WDT
-	prompt "Natsemi Hardware Watchdog" 
-	boolean
+	bool "Natsemi Hardware Watchdog" 
 	depends on ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	select ADK_KERNEL_WATCHDOG
 	select ADK_KERNEL_SCx200
@@ -47,8 +44,7 @@ config ADK_KERNEL_SCx200_WDT
 	  Natsemi Watchdog (scx200)
 
 config ADK_KERNEL_AT91SAM9X_WATCHDOG
-	prompt "AT91SAM9X Hardware Watchdog" 
-	boolean
+	bool "AT91SAM9X Hardware Watchdog" 
 	depends on ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	select ADK_KERNEL_WATCHDOG
 	default y if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
@@ -57,8 +53,7 @@ config ADK_KERNEL_AT91SAM9X_WATCHDOG
 	  AT91SAM9X Watchdog.
 
 config ADK_KERNEL_AR7_WDT
-	prompt "AR7 Hardware Watchdog" 
-	boolean
+	bool "AR7 Hardware Watchdog" 
 	depends on ADK_TARGET_SYSTEM_LINKSYS_AG241
 	select ADK_KERNEL_WATCHDOG
 	default y if ADK_TARGET_SYSTEM_LINKSYS_AG241
@@ -67,8 +62,7 @@ config ADK_KERNEL_AR7_WDT
 	  AR7 Watchdog.
 
 config ADK_KERNEL_GEODE_WDT
-	prompt "Geode Hardware Watchdog"
-	boolean
+	bool "Geode Hardware Watchdog"
 	depends on ADK_CPU_GEODE
 	select ADK_KERNEL_WATCHDOG
 	select ADK_KERNEL_MISC_DEVICES
@@ -82,8 +76,7 @@ config ADK_KERNEL_GEODE_WDT
 	 Geode watchdog.
 
 config ADK_KERNEL_RC32434_WDT
-	prompt "IDT RC32434 Hardware Watchdog"
-	boolean
+	bool "IDT RC32434 Hardware Watchdog"
 	depends on ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	select ADK_KERNEL_WATCHDOG
 	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB532
@@ -93,9 +86,7 @@ config ADK_KERNEL_RC32434_WDT
 	 Routerboard 532's SoC, the IDT RC32434.
 
 config ADK_KERNEL_SOFT_WATCHDOG
-	prompt "Software watchdog"
-	tristate
-	default n
+	tristate "Software watchdog"
 	select ADK_KERNEL_WATCHDOG
 	help
 	  A software monitoring watchdog. This will fail to reboot your system

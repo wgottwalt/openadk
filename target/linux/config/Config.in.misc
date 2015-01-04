@@ -1,5 +1,17 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+config ADK_KERNEL_MISC_DEVICES
+	bool
+
+config ADK_KERNEL_MFD_SYSCON
+	bool
+
+config ADK_KERNEL_OF
+	bool
+
 config ADK_KERNEL_FIRMWARE_IN_KERNEL
-	boolean 
+	bool 
 	default y if ADK_KERNEL_R8169 && ADK_KERNEL_ROOT_NFS
 	default n
 
@@ -9,17 +21,17 @@ config ADK_KERNEL_EXTRA_FIRMWARE
 	default ""
 
 config ADK_KERNEL_FW_LOADER_USER_HELPER
-	boolean
+	bool
 	default n
 
 config ADK_KERNEL_KEYS
-	boolean
+	bool
 
 config ADK_KERNEL_SBUS
-	boolean
+	bool
 
 config ADK_KERNEL_IMX_WEIM
-	boolean
+	bool
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
@@ -29,6 +41,7 @@ menu "Miscellaneous devices support"
 source "target/linux/config/Config.in.rtc"
 source "target/linux/config/Config.in.leds"
 source "target/linux/config/Config.in.watchdog"
+source "target/linux/config/Config.in.thermal"
 source "target/linux/config/Config.in.i2c"
 source "target/linux/config/Config.in.spi"
 source "target/linux/config/Config.in.regmap"
@@ -38,31 +51,24 @@ source "target/linux/config/Config.in.dma"
 source "target/linux/config/Config.in.lib"
 
 config ADK_KERNEL_KEXEC
-	prompt "Add KEXEC syscall"
-	boolean
+	bool "Add KEXEC syscall"
 	help
 	  You need also kexec-tools to benefit from it.	
 
 config ADK_KERNEL_PARPORT
-	prompt "Generic parallel port support"
-	tristate
-	default n
+	tristate "Generic parallel port support"
 	depends on ADK_TARGET_WITH_PP
 	help
 	  Kernel module for generic parallel port support.
 
 config ADK_KERNEL_PARPORT_PC
-	prompt "PC style parallel port support"
-	tristate
-	default n
+	tristate "PC style parallel port support"
 	depends on ADK_KERNEL_PARPORT
 	help
 	  Kernel module for PC style parallel port support.
 
 config ADK_KERNEL_PLIP
-	prompt "PLIP (internet over parallel port)"
-	tristate
-	default n
+	tristate "PLIP (internet over parallel port)"
 	depends on ADK_KERNEL_PARPORT
 	select ADK_KERNEL_PARPORT_PC
 	help
@@ -73,38 +79,29 @@ config ADK_KERNEL_PLIP
 	  This will enlarge your kernel by about 8 KiB.
 
 config ADK_KERNEL_PRINTER
-	prompt "Line printer support"
-	tristate
-	default n
+	tristate "Line printer support"
 	depends on ADK_KERNEL_PARPORT
 	select ADK_KERNEL_PARPORT_PC
 	help
 	  Kernel module for line printer support
 
 config ADK_KERNEL_PPDEV
-	prompt "Userland parallel port driver"
-	tristate
-	default n
+	tristate "Userland parallel port driver"
 	depends on ADK_KERNEL_PARPORT
 	select ADK_KERNEL_PARPORT_PC
 	help
 	  Kernel module for userland parallel port access
 
 config ADK_KERNEL_FW_LOADER
-	prompt "Userspace firmware loading support"
-	tristate
+	tristate "Userspace firmware loading support"
 	depends on !ADK_TARGET_SYSTEM_SHARP_ZAURUS
-	default n
 	help
 	  This may be necessary when using drivers which require
 	  loading of external firmware files.
 
 config ADK_KERNEL_EEPROM_93CX6
-	prompt "93cx6 eeprom support"
-	tristate
+	tristate "93cx6 eeprom support"
 	depends on ADK_KERNEL_MAC80211
 	select ADK_KERNEL_MISC_DEVICES
- 	default n
- 	help
  
 endmenu
