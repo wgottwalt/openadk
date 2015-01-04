@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		adktest
 PKG_VERSION:=		0.1
 PKG_RELEASE:=		7
-PKG_DESCR:=		helper tools and scripts for adk-test-framework
+PKG_DESCR:=		helper tools and scripts for qemu testing
 PKG_DEPENDS:=		rdate
 PKG_SECTION:=		base/misc
 PKG_URL:=		http://openadk.org/
@@ -15,7 +15,7 @@ NO_DISTFILES:=		1
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,ADKTEST,adktest,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ADKTEST,adktest,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
