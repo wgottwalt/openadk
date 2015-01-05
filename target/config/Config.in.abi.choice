@@ -6,15 +6,15 @@ prompt "ABI"
 depends on ADK_TARGET_ARCH_MIPS64
 
 config ADK_TARGET_ABI_N32
-	boolean "N32 ABI"
+	bool "N32 ABI"
 	select ADK_n32
 
 config ADK_TARGET_ABI_N64
-	boolean "N64 ABI"
+	bool "N64 ABI"
 	select ADK_n64
 
 config ADK_TARGET_ABI_O32
-	boolean "O32 ABI"
+	bool "O32 ABI"
 	select ADK_o32
 
 endchoice
@@ -24,11 +24,11 @@ prompt "ABI"
 depends on ADK_TARGET_ARCH_X86_64
 
 config ADK_TARGET_ABI_64
-	boolean "64 Bit ABI"
+	bool "64 Bit ABI"
 	select ADK_64
 
 config ADK_TARGET_ABI_X32
-	boolean "x32 ABI"
+	bool "x32 ABI"
 	select ADK_x32
 
 endchoice
@@ -39,11 +39,12 @@ depends on ADK_TARGET_ARCH_ARM
 depends on ADK_TARGET_CPU_WITH_FPU || ADK_TARGET_SYSTEM_QEMU_ARM || ADK_TARGET_TOOLCHAIN
 
 config ADK_TARGET_ABI_EABIHF
-	boolean "EABIhf"
+	bool "EABIhf"
 	select ADK_eabihf
+	depends on ADK_CPU_CORTEX_A9 || ADK_CPU_ARM1176JZF_S
 
 config ADK_TARGET_ABI_EABI
-	boolean "EABI"
+	bool "EABI"
 	select ADK_eabi
 
 endchoice

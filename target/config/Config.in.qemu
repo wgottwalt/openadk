@@ -6,11 +6,11 @@ prompt "Qemu PPC Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_PPC
 
 config ADK_TARGET_QEMU_PPC_BAMBOO
-	boolean "Bamboo PPC"
+	bool "Bamboo PPC"
 	select ADK_CPU_PPC_440
 
 config ADK_TARGET_QEMU_PPC_MACPPC
-	boolean "Mac99 PPC"
+	bool "Mac99 PPC"
 	select ADK_CPU_PPC
 	select ADK_TARGET_CPU_WITH_FPU
 
@@ -21,10 +21,10 @@ prompt "Qemu MICROBLAZE Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE
 
 config ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
-	boolean "Xilinx Spartan S3ADSP1800"
+	bool "Xilinx Spartan S3ADSP1800"
 
 config ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605
-	boolean "Xilinx ML605"
+	bool "Xilinx ML605"
 
 endchoice
 
@@ -33,12 +33,12 @@ prompt "Qemu XTENSA Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_XTENSA
 
 config ADK_TARGET_QEMU_XTENSA_DC233C
-	boolean "dc233c"
+	bool "dc233c"
 	select ADK_KERNEL_XTENSA_VARIANT_DC233C
 	select ADK_KERNEL_INITIALIZE_XTENSA_MMU_INSIDE_VMLINUX
 
 config ADK_TARGET_QEMU_XTENSA_DC232B
-	boolean "dc232b"
+	bool "dc232b"
 	select ADK_KERNEL_XTENSA_VARIANT_DC232B
 
 endchoice
@@ -53,38 +53,39 @@ prompt "Qemu ARM Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_ARM
 
 config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
-	boolean "ARM Ltd. Versatile Express for Cortex-A9"
+	bool "ARM Ltd. Versatile Express for Cortex-A9"
 	select ADK_CPU_CORTEX_A9
 
 config ADK_TARGET_QEMU_ARM_MODEL_STELLARIS_M3
-	boolean "Stellaris LM3S6965EVB"
+	bool "Stellaris LM3S6965EVB"
 	select ADK_soft_float
 	select ADK_eabi
 	select ADK_CPU_CORTEX_M3
-	select ADK_LINUX_ARM_WITH_THUMB
-	depends on ADK_TARGET_ARM_SOFT_FLOAT
+	select ADK_TARGET_ARM_SOFT_FLOAT
+	select ADK_TARGET_ARCH_ARM_WITH_THUMB
+	select ADK_TARGET_UCLINUX
 
 config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
-	boolean "ARM Ltd. Versatile/PB"
+	bool "ARM Ltd. Versatile/PB"
 	select ADK_soft_float
 	select ADK_eabi
 	select ADK_CPU_ARM926EJ_S
-	depends on ADK_TARGET_ARM_SOFT_FLOAT
+	select ADK_TARGET_ARM_SOFT_FLOAT
 
 config ADK_TARGET_QEMU_ARM_MODEL_TERRIER
-	boolean "Xscale PXA270 Terrier PDA"
+	bool "Xscale PXA270 Terrier PDA"
 	select ADK_soft_float
 	select ADK_eabi
 	select ADK_CPU_XSCALE
 	select ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
-	depends on ADK_TARGET_ARM_SOFT_FLOAT
+	select ADK_TARGET_ARM_SOFT_FLOAT
 
 config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
-	boolean "Xscale PXA270 Spitz PDA"
+	bool "Xscale PXA270 Spitz PDA"
 	select ADK_soft_float
 	select ADK_eabi
 	select ADK_CPU_XSCALE
 	select ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
-	depends on ADK_TARGET_ARM_SOFT_FLOAT
+	select ADK_TARGET_ARM_SOFT_FLOAT
 
 endchoice

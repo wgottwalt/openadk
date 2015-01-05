@@ -6,21 +6,21 @@ prompt "CPU architecture and family"
 depends on ADK_TARGET_TOOLCHAIN && ADK_TARGET_ARCH_ARM
 
 config ADK_CPU_ARMV7A_CORTEX_A9
-        boolean "cortex-a9 (armv7-a)"
+        bool "cortex-a9 (armv7-a)"
         select ADK_CPU_CORTEX_A9
 
 config ADK_CPU_ARMV7M_CORTEX_M3
-        boolean "cortex-m3 (armv7-m)"
+        bool "cortex-m3 (armv7-m)"
         select ADK_CPU_CORTEX_M3
-	select ADK_LINUX_ARM_WITH_THUMB
+	select ADK_TARGET_ARCH_ARM_WITH_THUMB
 	select ADK_TARGET_UCLINUX
 
 config ADK_CPU_ARMV6_ARM1176JZF_S
-        boolean "arm1176jzf-s (armv6)"
+        bool "arm1176jzf-s (armv6)"
         select ADK_CPU_ARM1176JZF_S
 
 config ADK_CPU_ARMV5TE_ARM926EJ_S
-        boolean "arm926ej-s (armv5te)"
+        bool "arm926ej-s (armv5te)"
         select ADK_CPU_ARM926EJ_S
 
 endchoice
@@ -30,7 +30,7 @@ prompt "Solidrun IMX6 model"
 depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 
 config ADK_TARGET_CUBOX_I4PRO
-	boolean "Solidrun Cubox-i4Pro"
+	bool "Solidrun Cubox-i4Pro"
 	select ADK_TARGET_WITH_SMP
 	select ADK_TARGET_WITH_WIFI
 	select ADK_TARGET_WITH_RTC
@@ -38,7 +38,7 @@ config ADK_TARGET_CUBOX_I4PRO
 	select ADK_TARGET_WITH_SATA
 
 config ADK_TARGET_CUBOX_I2ULTRA
-	boolean "Solidrun Cubox-i2Ultra"
+	bool "Solidrun Cubox-i2Ultra"
 	select ADK_TARGET_WITH_SMP
 	select ADK_TARGET_WITH_WIFI
 	select ADK_TARGET_WITH_RTC
@@ -46,7 +46,7 @@ config ADK_TARGET_CUBOX_I2ULTRA
 	select ADK_TARGET_WITH_SATA
 
 config ADK_TARGET_CUBOX_I2EX
-	boolean "Solidrun Cubox-i2eX"
+	bool "Solidrun Cubox-i2eX"
 	select ADK_TARGET_WITH_SMP
 	select ADK_TARGET_WITH_WIFI
 	select ADK_TARGET_WITH_RTC
@@ -54,26 +54,26 @@ config ADK_TARGET_CUBOX_I2EX
 	select ADK_TARGET_WITH_SATA
 
 config ADK_TARGET_CUBOX_I2
-	boolean "Solidrun Cubox-i2"
+	bool "Solidrun Cubox-i2"
 	select ADK_TARGET_WITH_SMP
 	select ADK_TARGET_WITH_WIFI
 	select ADK_TARGET_WITH_RTC
 	select ADK_TARGET_WITH_SDIO
 
 config ADK_TARGET_CUBOX_I1
-	boolean "Solidrun Cubox-i1"
+	bool "Solidrun Cubox-i1"
 	select ADK_TARGET_WITH_WIFI
 	select ADK_TARGET_WITH_SDIO
 
 config ADK_TARGET_HUMMINGBOARD_I1
-	boolean "Solidrun Hummingboard-i1"
+	bool "Solidrun Hummingboard-i1"
 
 config ADK_TARGET_HUMMINGBOARD_I2
-	boolean "Solidrun Hummingboard-i2"
+	bool "Solidrun Hummingboard-i2"
 	select ADK_TARGET_WITH_SMP
 
 config ADK_TARGET_HUMMINGBOARD_I2EX
-	boolean "Solidrun Hummingboard-i2eX"
+	bool "Solidrun Hummingboard-i2eX"
 	select ADK_TARGET_WITH_SMP
 	select ADK_TARGET_WITH_SATA
 

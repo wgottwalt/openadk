@@ -65,7 +65,7 @@ ifeq ($(ADK_TARGET_ABI_EABIHF),y)
 	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
+ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
 	$(SED) 's/.*\(COMPILE_IN_THUMB_MODE\).*/\1=y/' ${WRKBUILD}/.config
 endif
 endif

@@ -2,24 +2,24 @@
 # material, please see the LICENCE file in the top-level directory.
 
 config ADK_soft_float
-	boolean
+	bool
 
 config ADK_hard_float
-	boolean
+	bool
 
 config ADK_fpu_neon
-	boolean
+	bool
 
 config ADK_fpu_vfp
-	boolean
+	bool
 
 config ADK_TARGET_ARM_HARD_FLOAT
-	boolean
+	bool
         select ADK_hard_float
 	default y if ADK_TARGET_ABI_EABIHF
 
 config ADK_TARGET_ARM_SOFT_FLOAT
-	boolean
+	bool
         select ADK_soft_float
 	default y if ADK_TARGET_ABI_EABI
 
