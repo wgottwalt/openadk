@@ -6,11 +6,11 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		bcm2835-bootloader
 PKG_VERSION:=		393dcc0e76f18f6ac1b67ba45d36058410670034
 PKG_RELEASE:=		1
-PKG_HASH:=		44723adf99a06e6a21df7e9ee20ff29c6235323e38e1d055ea087d29a7597c81
 PKG_DESCR:=		bootloader for raspberry pi
 PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/raspberrypi/firmware
 PKG_SITES:=		https://github.com/raspberrypi/firmware.git
+NO_CHECKSUM:=		1
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 PKG_CHOICES_BCM2835_BOOTLOADER:=	DEFAULT EXTRA CUTDOWN

@@ -6,11 +6,11 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		u-boot
 PKG_VERSION:=		d8bec60c1b0de7770f9b56ad092ab9be801d99af
 PKG_RELEASE:=		1
-PKG_HASH:=		21108ec5accf0737859834f051aef02d26163e0c0b41da265ea8f64e4af17a5e
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
 PKG_SITES:=		git://git.denx.de/u-boot.git
+NO_CHECKSUM:=		1
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 

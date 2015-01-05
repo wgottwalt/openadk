@@ -68,11 +68,11 @@ $(1):
 		if [ $$$$(echo $${PKG_VERSION}|wc -c) -eq 41 ]; then \
 			(cd $${PKG_NAME}-$${PKG_VERSION}; \
 			echo "Checking out $${PKG_VERSION}"; \
-			git checkout -q $${PKG_VERSION}); \
+			git checkout $${PKG_VERSION}); \
 		else \
-			echo "Using head, disabling checksum check"; \
-			touch $$$${filename}.nohash; \
+			echo "Using head"; \
 		fi; \
+		touch $$$${filename}.nohash; \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}/.git; \
 		tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
