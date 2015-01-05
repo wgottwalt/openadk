@@ -29,16 +29,21 @@ INSTALL_STYLE:=         manual
 do-install:
 	$(INSTALL_DIR) $(IDIR_BCM2835_BOOTLOADER)/boot
 	$(CP) $(WRKBUILD)/boot/bootcode.bin $(IDIR_BCM2835_BOOTLOADER)/boot/
+	printf "kernel=kernel\n" > $(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
 ifeq ($(ADK_PACKAGE_BCM2835_BOOTLOADER_DEFAULT),y)
 	$(CP) $(WRKBUILD)/boot/{start.elf,fixup.dat} $(IDIR_BCM2835_BOOTLOADER)/boot/
+	printf "start_file=start.elf\n" >> $(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+	printf "fixup_file=fixup.dat\n" >> $(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
 endif
 ifeq ($(ADK_PACKAGE_BCM2835_BOOTLOADER_EXTRA),y)
 	$(CP) $(WRKBUILD)/boot/{start_x.elf,fixup_x.dat} $(IDIR_BCM2835_BOOTLOADER)/boot/
-	printf "start_x=1\n" >> $(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+	printf "start_file=start_x.elf\n" >> $(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+	printf "fixup_file=fixup_x.dat\n" >> $(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
 endif
 ifeq ($(ADK_PACKAGE_BCM2835_BOOTLOADER_CUTDOWN),y)
 	$(CP) $(WRKBUILD)/boot/{start_cd.elf,fixup_cd.dat} $(IDIR_BCM2835_BOOTLOADER)/boot/
-	printf "start_cd=1\n" >> $(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+	printf "start_file=start_cd.elf\n" >> $(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+	printf "fixup_file=fixup_cd.dat\n" >> $(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
 endif
 	printf "gpu_mem=$(ADK_TARGET_GPU_MEM)\n" >> \
 		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
