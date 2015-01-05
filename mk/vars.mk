@@ -192,7 +192,7 @@ TARGET_CXXFLAGS+=	-fno-unwind-tables -fno-asynchronous-unwind-tables
 endif
 
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
-ifeq ($(ADK_LINUX_ARM_WITH_THUMB),y)
+ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
 TARGET_CFLAGS+=		-mthumb
 TARGET_CXXFLAGS+=	-mthumb
 else
