@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf kbd_map "zaurus"
+add_rcconf kbd_map "de-latin1-nodeadkeys"
 add_rcconf kbd NO

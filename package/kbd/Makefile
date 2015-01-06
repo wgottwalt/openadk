@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kbd
-PKG_VERSION:=		2.0.1
-PKG_RELEASE:=		2
-PKG_HASH:=		55407b79e90ee65cdbaff7d3dafd2b53c4fee3a645788ffb582091074a2254af
+PKG_VERSION:=		2.0.2
+PKG_RELEASE:=		1
+PKG_HASH:=		9dfddabf96012e329c4bebb96a21aeef7c3872f624e96e8156ba542b82aeb912
 PKG_DESCR:=		keyboard utility
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libcheck
@@ -21,6 +21,9 @@ $(eval $(call PKG_template,KBD,kbd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},
 CONFIGURE_ARGS+=	--disable-vlock
 
 kbd-install:
+	$(INSTALL_DIR) $(IDIR_KBD)/usr/share
+	$(CP) $(WRKINST)/usr/share/keymaps \
+		$(IDIR_KBD)/usr/share
 	$(INSTALL_DIR) $(IDIR_KBD)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/loadkeys \
 		$(IDIR_KBD)/usr/bin
