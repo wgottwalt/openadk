@@ -564,7 +564,7 @@ $(ADK_TOPDIR)/adk/tools/pkgrebuild: $(ADK_TOPDIR)/adk/tools/pkgrebuild.c $(ADK_T
 $(ADK_TOPDIR)/adk/tools/depmaker: $(ADK_TOPDIR)/adk/tools/depmaker.c
 	@$(HOST_CC) -O0 -g0 -o $@ $(ADK_TOPDIR)/adk/tools/depmaker.c
 
-menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(ADK_TOPDIR)/adk/tools/pkgmaker $(ADK_TOPDIR)/adk/tools/pkgrebuild $(wildcard target/*/appliances/*)
+menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(ADK_TOPDIR)/adk/tools/pkgmaker $(ADK_TOPDIR)/adk/tools/pkgrebuild $(wildcard target/appliances/*)
 	@echo "Generating menu structure ..."
 	@$(BASH) $(ADK_TOPDIR)/scripts/create-menu
 	@$(ADK_TOPDIR)/adk/tools/pkgmaker
