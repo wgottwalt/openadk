@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mksh
 PKG_VERSION:=		50d
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		a2268826a1463959ff7b7979fbf9176f1298400ecc24ae13d6337eee5c63f982
 PKG_DESCR:=		mirbsd korn shell
 PKG_SECTION:=		base/shells
@@ -23,7 +23,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,MKSH,mksh,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,MKSH,mksh,$(PKG_VERSION)-$(PKG_RELEASE),,$(PKG_DESCR),$(PKG_SECTION)))
 
-TARGET_CPPFLAGS+=	-DMKSH_SMALL=1 -DMKSHRC_PATH=\"/etc/mkshrc\"
+TARGET_CPPFLAGS+=	-DMKSHRC_PATH=\"/etc/mkshrc\"
 
 HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
