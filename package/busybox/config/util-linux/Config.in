@@ -12,6 +12,20 @@ config BUSYBOX_BLOCKDEV
 	help
 	  Performs some ioctls with block devices.
 
+config BUSYBOX_FATATTR
+	bool "fatattr"
+	default n
+	select PLATFORM_LINUX
+	help
+	  fatattr lists or changes the file attributes on a fat file system.
+
+config BUSYBOX_FSTRIM
+	bool "fstrim"
+	default n
+	select PLATFORM_LINUX
+	help
+	  Discard unused blocks on a mounted filesystem.
+
 config BUSYBOX_MDEV
 	bool "mdev"
 	default y
@@ -153,7 +167,6 @@ config BUSYBOX_FEATURE_DMESG_PRETTY
 config BUSYBOX_FBSET
 	bool "fbset"
 	depends on !BUSYBOX_DISABLE_FBSET
-	default y if ADK_TARGET_WITH_VGA
 	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
@@ -317,6 +330,13 @@ config BUSYBOX_FSCK_MINIX
 	  check for and attempt to repair any corruption that occurs to a minix
 	  filesystem.
 
+config BUSYBOX_MKFS_EXT2
+	bool "mkfs_ext2"
+	default n
+	select PLATFORM_LINUX
+	help
+	  Utility to create EXT2 filesystems.
+
 config BUSYBOX_MKFS_MINIX
 	bool "mkfs_minix"
 	default n
@@ -345,7 +365,6 @@ config BUSYBOX_MKFS_REISER
 
 config BUSYBOX_MKFS_VFAT
 	bool "mkfs_vfat"
-	default y if ADK_TARGET_WITH_MMC
 	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
@@ -427,7 +446,7 @@ config BUSYBOX_FEATURE_HWCLOCK_ADJTIME_FHS
 
 config BUSYBOX_IPCRM
 	bool "ipcrm"
-	default y
+	default n
 	help
 	  The ipcrm utility allows the removal of System V interprocess
 	  communication (IPC) objects and the associated data structures
@@ -435,7 +454,7 @@ config BUSYBOX_IPCRM
 
 config BUSYBOX_IPCS
 	bool "ipcs"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  The ipcs utility is used to provide information on the currently
@@ -453,8 +472,6 @@ config BUSYBOX_LOSETUP
 config BUSYBOX_LSPCI
 	bool "lspci"
 	depends on !BUSYBOX_DISABLE_LSPCI
-	default y if ADK_TARGET_WITH_PCI
-	default y if ADK_TARGET_WITH_MINIPCI
 	default n
 	#select PLATFORM_LINUX
 	help
@@ -466,7 +483,6 @@ config BUSYBOX_LSPCI
 config BUSYBOX_LSUSB
 	bool "lsusb"
 	depends on !BUSYBOX_DISABLE_LSUSB
-	default y if ADK_TARGET_WITH_USB
 	default n
 	#select PLATFORM_LINUX
 	help
@@ -477,7 +493,7 @@ config BUSYBOX_LSUSB
 
 config BUSYBOX_MKSWAP
 	bool "mkswap"
-	default y
+	default n
 	help
 	  The mkswap utility is used to configure a file or disk partition as
 	  Linux swap space. This allows Linux to use the entire file or
@@ -609,6 +625,7 @@ config BUSYBOX_PIVOT_ROOT
 
 config BUSYBOX_RDATE
 	bool "rdate"
+	depends on !BUSYBOX_DISABLE_RDATE
 	default n
 	help
 	  The rdate utility allows you to synchronize the date and time of your
@@ -661,7 +678,7 @@ config BUSYBOX_SETARCH
 
 config BUSYBOX_SWAPONOFF
 	bool "swaponoff"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  This option enables both the 'swapon' and the 'swapoff' utilities.
@@ -670,6 +687,15 @@ config BUSYBOX_SWAPONOFF
 	  utility is used, typically at system shutdown, to disable any swap
 	  space. If you are not using any swap space, you can leave this
 	  option disabled.
+
+config BUSYBOX_FEATURE_SWAPON_DISCARD
+	bool "Support discard option -d"
+	default n
+	depends on BUSYBOX_SWAPONOFF
+	help
+	  Enable support for discarding swap area blocks at swapon and/or as
+	  the kernel frees them. This option enables both the -d option on
+	  'swapon' and the 'discard' option for swap entries in /etc/fstab.
 
 config BUSYBOX_FEATURE_SWAPON_PRI
 	bool "Support priority option -p"
@@ -799,6 +825,16 @@ config BUSYBOX_FEATURE_VOLUMEID_REISERFS
 	depends on BUSYBOX_VOLUMEID
 	help
 	  TODO
+
+config BUSYBOX_FEATURE_VOLUMEID_F2FS
+	bool "f2fs filesystem"
+	default y
+	depends on BUSYBOX_VOLUMEID
+	help
+	  F2FS (aka Flash-Friendly File System) is a log-structured file system,
+	  which is adapted to newer forms of storage. F2FS also remedies some
+	  known issues of the older log structured file systems, such as high
+	  cleaning overhead.
 
 config BUSYBOX_FEATURE_VOLUMEID_FAT
 	bool "fat filesystem"

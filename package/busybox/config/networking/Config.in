@@ -767,6 +767,14 @@ config BUSYBOX_FEATURE_NTPD_SERVER
 	  Make ntpd usable as a NTP server. If you disable this option
 	  ntpd will be usable only as a NTP client.
 
+config BUSYBOX_FEATURE_NTPD_CONF
+	bool "Make ntpd understand /etc/ntp.conf"
+	default n
+	depends on BUSYBOX_NTPD
+	help
+	  Make ntpd look in /etc/ntp.conf for peers. Only "server address"
+	  is supported.
+
 config BUSYBOX_PSCAN
 	bool "pscan"
 	default n

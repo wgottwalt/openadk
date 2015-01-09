@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
-PKG_VERSION:=		1.22.1
-PKG_RELEASE:=		2
-PKG_HASH:=		ae0b029d0a9e4dd71a077a790840e496dd838998e4571b87b60fed7462b6678b
+PKG_VERSION:=		1.23.0
+PKG_RELEASE:=		1
+PKG_HASH:=		483ab594dd962ddbb332fd24e36ffdd6e36ac2182fbff055c56e1ca49fda09e4
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		base/apps
 PKG_BUILDDEP:=		bzip2-host
@@ -32,20 +32,20 @@ BB_MAKE_FLAGS:=		V=1 \
 
 do-configure:
 	# get all symbols from top level config
-	grep BUSYBOX_ $(ADK_TOPDIR)/.config|sed -e 's/BUSYBOX_/CONFIG_/' > \
+	grep "^BUSYBOX_\|# BUSYBOX" $(ADK_TOPDIR)/.config|grep -v BUSYBOX_DISABLE|sed -e 's/BUSYBOX_/CONFIG_/' > \
 		${WRKBUILD}/.config
-	# remove all disabled symbols
-	for i in $$(grep "BUSYBOX_DISABLE" $(ADK_TOPDIR)/.config);do \
-		test -s "$$i" || continue; \
-		grep -v $${i#BUSYBOX_DISABLE} ${WRKBUILD}/.config > \
-		${WRKBUILD}/.config.tmp; \
-		cp ${WRKBUILD}/.config.tmp ${WRKBUILD}/.config; \
+	cp ${WRKBUILD}/.config ${WRKBUILD}/.config.step1
+	# convert all disabled symbols
+	for i in $$(grep ^BUSYBOX_DISABLE $(ADK_TOPDIR)/.config);do \
+		echo "$$i"; \
+		sym=$${i#BUSYBOX_DISABLE_}; \
+		symbol=$$(echo $$sym|sed -e "s#=y##"); \
+		printf "# CONFIG_$${symbol} is not set\n" >> ${WRKBUILD}/.config; \
 	done
 ifeq ($(ADK_TARGET_UCLINUX),y)
-	echo 'BUSYBOX_NOMMU=y' >> ${WRKBUILD}/.config
+	echo 'CONFIG_NOMMU=y' >> ${WRKBUILD}/.config
 endif
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
-	yes '' | PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} -C ${WRKBUILD} oldconfig $(MAKE_TRACE)
 
 do-build:
 	PATH='$(HOST_PATH)' $(MAKE) ${BB_MAKE_FLAGS} -C ${WRKBUILD} busybox

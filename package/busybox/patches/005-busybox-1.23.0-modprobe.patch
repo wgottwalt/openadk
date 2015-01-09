@@ -1,0 +1,114 @@
+--- busybox-1.23.0/modutils/depmod.c
++++ busybox-1.23.0-modprobe/modutils/depmod.c
+@@ -51,7 +51,11 @@ static int FAST_FUNC parse_module(const
+ 
+ 	info->dnext = info->dprev = info;
+ 	info->name = xstrdup(fname + 2); /* skip "./" */
+-	info->modname = xstrdup(filename2modname(fname, modname));
++	info->modname = xstrdup(
++		filename2modname(
++			bb_get_last_path_component_nostrip(fname),
++			modname
++	));
+ 	for (ptr = image; ptr < image + len - 10; ptr++) {
+ 		if (strncmp(ptr, "depends=", 8) == 0) {
+ 			char *u;
+@@ -242,17 +246,18 @@ int depmod_main(int argc UNUSED_PARAM, c
+ 	if (!(option_mask32 & OPT_n))
+ 		xfreopen_write("modules.alias", stdout);
+ 	for (m = modules; m != NULL; m = m->next) {
++		char modname[MODULE_NAME_LEN];
+ 		const char *fname = bb_basename(m->name);
+-		int fnlen = strchrnul(fname, '.') - fname;
++		filename2modname(fname, modname);
+ 		while (m->aliases) {
+ 			/* Last word can well be m->modname instead,
+ 			 * but depmod from module-init-tools 3.4
+ 			 * uses module basename, i.e., no s/-/_/g.
+ 			 * (pathname and .ko.* are still stripped)
+ 			 * Mimicking that... */
+-			printf("alias %s %.*s\n",
++			printf("alias %s %s\n",
+ 				(char*)llist_pop(&m->aliases),
+-				fnlen, fname);
++				modname);
+ 		}
+ 	}
+ #endif
+@@ -260,12 +265,13 @@ int depmod_main(int argc UNUSED_PARAM, c
+ 	if (!(option_mask32 & OPT_n))
+ 		xfreopen_write("modules.symbols", stdout);
+ 	for (m = modules; m != NULL; m = m->next) {
++		char modname[MODULE_NAME_LEN];
+ 		const char *fname = bb_basename(m->name);
+-		int fnlen = strchrnul(fname, '.') - fname;
++		filename2modname(fname, modname);
+ 		while (m->symbols) {
+-			printf("alias symbol:%s %.*s\n",
++			printf("alias symbol:%s %s\n",
+ 				(char*)llist_pop(&m->symbols),
+-				fnlen, fname);
++				modname);
+ 		}
+ 	}
+ #endif
+--- busybox-1.23.0/modutils/modprobe.c
++++ busybox-1.23.0-modprobe/modutils/modprobe.c
+@@ -238,17 +238,6 @@ static void add_probe(const char *name)
+ {
+ 	struct module_entry *m;
+ 
+-	/*
+-	 * get_or_add_modentry() strips path from name and works
+-	 * on remaining basename.
+-	 * This would make "rmmod dir/name" and "modprobe dir/name"
+-	 * to work like "rmmod name" and "modprobe name",
+-	 * which is wrong, and can be abused via implicit modprobing:
+-	 * "ifconfig /usbserial up" tries to modprobe netdev-/usbserial.
+-	 */
+-	if (strchr(name, '/'))
+-		bb_error_msg_and_die("malformed module name '%s'", name);
+-
+ 	m = get_or_add_modentry(name);
+ 	if (!(option_mask32 & (OPT_REMOVE | OPT_SHOW_DEPS))
+ 	 && (m->flags & MODULE_FLAG_LOADED)
+--- busybox-1.23.0/modutils/modprobe-small.c
++++ busybox-1.23.0-modprobe/modutils/modprobe-small.c
+@@ -149,9 +149,13 @@ static void replace(char *s, char what,
+ static char *filename2modname(const char *filename, char *modname)
+ {
+ 	int i;
+-	char *from;
++	const char *from;
+ 
+-	from = bb_get_last_path_component_nostrip(filename);
++	// Disabled since otherwise "modprobe dir/name" would work
++	// as if it is "modprobe name". It is unclear why
++	// 'basenamization' was here in the first place.
++	//from = bb_get_last_path_component_nostrip(filename);
++	from = filename;
+ 	for (i = 0; i < (MODULE_NAME_LEN-1) && from[i] != '\0' && from[i] != '.'; i++)
+ 		modname[i] = (from[i] == '-') ? '_' : from[i];
+ 	modname[i] = '\0';
+--- busybox-1.23.0/modutils/modutils.c
++++ busybox-1.23.0-modprobe/modutils/modutils.c
+@@ -48,13 +48,17 @@ int FAST_FUNC string_to_llist(char *stri
+ char* FAST_FUNC filename2modname(const char *filename, char *modname)
+ {
+ 	int i;
+-	char *from;
++	const char *from;
+ 
+ 	if (filename == NULL)
+ 		return NULL;
+ 	if (modname == NULL)
+ 		modname = xmalloc(MODULE_NAME_LEN);
+-	from = bb_get_last_path_component_nostrip(filename);
++	// Disabled since otherwise "modprobe dir/name" would work
++	// as if it is "modprobe name". It is unclear why
++	// 'basenamization' was here in the first place.
++	//from = bb_get_last_path_component_nostrip(filename);
++	from = filename;
+ 	for (i = 0; i < (MODULE_NAME_LEN-1) && from[i] != '\0' && from[i] != '.'; i++)
+ 		modname[i] = (from[i] == '-') ? '_' : from[i];
+ 	modname[i] = '\0';

@@ -47,6 +47,14 @@ config BUSYBOX_USE_PORTABLE_CODE
 	  compiler other than gcc.
 	  If you do use gcc, this option may needlessly increase code size.
 
+config BUSYBOX_INSTALL_NO_USR
+        bool "Don't use /usr"
+        default n
+        help
+          Disable use of /usr. busybox --install and "make install"
+          will install applets only to /bin and /sbin,
+          never to /usr/bin or /usr/sbin.
+
 config BUSYBOX_PLATFORM_LINUX
 	bool "Enable Linux-specific applets and features"
 	default y
@@ -248,6 +256,26 @@ config BUSYBOX_UNICODE_PRESERVE_BROKEN
 	  at shell prompt will list file named 0xff (single char name
 	  with char value 255), not file named '?'.
 
+config BUSYBOX_PAM
+	bool "Support for PAM (Pluggable Authentication Modules)"
+	default n
+	help
+	  Use PAM in some busybox applets (currently login and httpd) instead
+	  of direct access to password database.
+
+config BUSYBOX_FEATURE_USE_SENDFILE
+	bool "Use sendfile system call"
+	default y
+	select PLATFORM_LINUX
+	help
+	  When enabled, busybox will use the kernel sendfile() function
+	  instead of read/write loops to copy data between file descriptors
+	  (for example, cp command does this a lot).
+	  If sendfile() doesn't work, copying code falls back to read/write
+	  loop. sendfile() was originally implemented for faster I/O
+	  from files to sockets, but since Linux 2.6.33 it was extended
+	  to work for many more file types.
+
 config BUSYBOX_LONG_OPTS
 	bool "Support for --long-options"
 	default y
@@ -303,6 +331,16 @@ config BUSYBOX_FEATURE_PIDFILE
 	help
 	  This option makes some applets (e.g. crond, syslogd, inetd) write
 	  a pidfile in /var/run. Some applications rely on them.
+
+config BUSYBOX_PID_FILE_PATH
+        string "Path to directory for pidfile"
+        default "/var/run"
+        depends on BUSYBOX_FEATURE_PIDFILE
+        help
+          This is the default path where pidfiles are created.  Applets which
+          allow you to set the pidfile path on the command line will override
+          this value.  The option has no effect on applets that require you to
+          specify a pidfile path.
 
 config BUSYBOX_FEATURE_SUID
 	bool "Support for SUID/SGID handling"
@@ -652,6 +690,14 @@ config BUSYBOX_DEBUG_PESSIMIZE
 	  stepping through it with a debugger. This switches it off, resulting
 	  in a much bigger executable that more closely matches the source
 	  code.
+
+config BUSYBOX_UNIT_TEST
+	bool "Build unit tests"
+	default n
+	help
+	  Say Y here if you want to build unit tests (both the framework and
+	  test cases) as a Busybox applet. This results in bigger code, so you
+	  probably don't want this option in production builds.
 
 config BUSYBOX_WERROR
 	bool "Abort compilation on any warning"

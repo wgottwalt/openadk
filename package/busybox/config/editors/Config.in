@@ -129,6 +129,39 @@ config BUSYBOX_FEATURE_VI_ASK_TERMINAL
 
 	  This is not clean but helps a lot on serial lines and such.
 
+config BUSYBOX_FEATURE_VI_UNDO
+	bool "Support undo command 'u'"
+	default y
+	depends on BUSYBOX_VI
+	help
+	  Support the 'u' command to undo insertion, deletion, and replacement
+	  of text.
+
+config BUSYBOX_FEATURE_VI_UNDO_QUEUE
+	bool "Enable undo operation queuing"
+	default y
+	depends on BUSYBOX_FEATURE_VI_UNDO
+	help
+	  The vi undo functions can use an intermediate queue to greatly lower
+	  malloc() calls and overhead. When the maximum size of this queue is
+	  reached, the contents of the queue are committed to the undo stack.
+	  This increases the size of the undo code and allows some undo
+	  operations (especially un-typing/backspacing) to be far more useful.
+
+config BUSYBOX_FEATURE_VI_UNDO_QUEUE_MAX
+	int "Maximum undo character queue size"
+	default 256
+	range 32 65536
+	depends on BUSYBOX_FEATURE_VI_UNDO_QUEUE
+	help
+	  This option sets the number of bytes used at runtime for the queue.
+	  Smaller values will create more undo objects and reduce the amount
+	  of typed or backspaced characters that are grouped into one undo
+	  operation; larger values increase the potential size of each undo
+	  and will generally malloc() larger objects and less frequently.
+	  Unless you want more (or less) frequent "undo points" while typing,
+	  you should probably leave this unchanged.
+
 config BUSYBOX_AWK
 	bool "awk"
 	default y
@@ -143,6 +176,17 @@ config BUSYBOX_FEATURE_AWK_LIBM
 	help
 	  Enable math functions of the Awk programming language.
 	  NOTE: This will require libm to be present for linking.
+
+config BUSYBOX_FEATURE_AWK_GNU_EXTENSIONS
+	bool "Enable a few GNU extensions"
+	default y
+	depends on BUSYBOX_AWK
+	help
+	  Enable a few features from gawk:
+	  * command line option -e AWK_PROGRAM
+	  * simultaneous use of -f and -e on the command line.
+	    This enables the use of awk library files.
+	    Ex: awk -f mylib.awk -e '{print myfunction($1);}' ...
 
 config BUSYBOX_CMP
 	bool "cmp"

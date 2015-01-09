@@ -79,6 +79,13 @@ config BUSYBOX_GROUPS
 	default y
 	help
 	  Print the group names associated with current user id.
+
+config BUSYBOX_SHUF
+	bool "shuf"
+	default n
+	help
+	  Generate random permutations
+
 config BUSYBOX_TEST
 	bool "test"
 	default y
@@ -93,12 +100,21 @@ config BUSYBOX_FEATURE_TEST_64
 	depends on BUSYBOX_TEST || BUSYBOX_ASH_BUILTIN_TEST || BUSYBOX_HUSH
 	help
 	  Enable 64-bit support in test.
+
 config BUSYBOX_TOUCH
 	bool "touch"
 	default y
 	help
 	  touch is used to create or change the access and/or
 	  modification timestamp of specified files.
+
+config BUSYBOX_FEATURE_TOUCH_NODEREF
+	bool "Add support for -h"
+	default y
+	depends on BUSYBOX_TOUCH
+	help
+	  Enable touch to have the -h option.
+	  This requires libc support for lutimes() function.
 
 config BUSYBOX_FEATURE_TOUCH_SUSV3
 	bool "Add support for SUSV3 features (-d -t -r)"
@@ -131,6 +147,12 @@ config BUSYBOX_FEATURE_TR_EQUIV
 	  replace all instances of 'a' with 'xyz'. This option is mainly
 	  useful for cases when no other way of expressing a character
 	  is possible.
+
+config BUSYBOX_UNLINK
+	bool "unlink"
+	default y
+	help
+	  unlink deletes a file by calling unlink()
 
 config BUSYBOX_BASE64
 	bool "base64"
@@ -882,6 +904,16 @@ config BUSYBOX_YES
 	help
 	  yes is used to repeatedly output a specific string, or
 	  the default string `y'.
+
+comment "Common options"
+
+config BUSYBOX_FEATURE_VERBOSE
+	bool "Support verbose options (usually -v) for various applets"
+	default y
+	help
+	  Enable cp -v, rm -v and similar messages.
+	  Also enables long option (--verbose) if it exists.
+	  Without this option, -v is accepted but ignored.
 
 comment "Common options for cp and mv"
 	depends on BUSYBOX_CP || BUSYBOX_MV

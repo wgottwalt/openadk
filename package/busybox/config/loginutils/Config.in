@@ -129,6 +129,13 @@ config BUSYBOX_FEATURE_CHECK_NAMES
 	  For compatibility with Samba machine accounts "$" is also supported
 	  at the end of the user or group name.
 
+config BUSYBOX_LAST_ID
+	int "Last valid uid or gid for adduser and addgroup"
+	depends on BUSYBOX_ADDUSER || BUSYBOX_ADDGROUP
+	default 60000
+	help
+	  Last valid uid or gid for adduser and addgroup
+
 config BUSYBOX_FIRST_SYSTEM_ID
 	int "First valid system uid or gid for adduser and addgroup"
 	depends on BUSYBOX_ADDUSER || BUSYBOX_ADDGROUP
