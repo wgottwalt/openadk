@@ -24,7 +24,7 @@ refetch:
 
 _CHECKSUM_COOKIE?=	${WRKDIR}/.checksum_done
 checksum: ${_CHECKSUM_COOKIE}
-ifeq ($(strip ${NO_CHECKSUM}),)
+ifeq ($(strip ${PKG_NOCHECKSUM}),)
 ${_CHECKSUM_COOKIE}: ${FULLDISTFILES}
 	-rm -rf ${WRKDIR}
 ifneq ($(ADK_DISABLE_CHECKSUM),y)

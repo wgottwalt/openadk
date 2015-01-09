@@ -21,7 +21,7 @@ WRKBUILD?=		${WRKSRC}
 # This is where make install (fake) writes to
 WRKINST?=		${WRKDIR}/fake-${ADK_TARGET_CPU_ARCH}/root
 
-ifeq ($(strip ${NO_CHECKSUM}),)
+ifeq ($(strip ${PKG_NOCHECKSUM}),)
 _CHECKSUM_COOKIE=      ${WRKDIR}/.checksum_done
 else
 _CHECKSUM_COOKIE=
@@ -88,9 +88,9 @@ update-patches host-update-patches:
 	@test ! -d ${WRKDIR}.orig || rm -rf ${WRKDIR}.orig
 	@test ! -d ${WRKDIR}.orig
 ifeq ($(strip ${_IN_PACKAGE})$(strip ${_IN_CVTC}),1)
-	@$(MAKE) -s V=0 patch WRKDIR=${WRKDIR}.orig PREVENT_PATCH=: NO_CHECKSUM=1
+	@$(MAKE) -s V=0 patch WRKDIR=${WRKDIR}.orig PREVENT_PATCH=: PKG_NOCHECKSUM=1
 else
-	@$(MAKE) -s V=0 prepare WRKDIR=${WRKDIR}.orig PREVENT_PATCH=: NO_CHECKSUM=1
+	@$(MAKE) -s V=0 prepare WRKDIR=${WRKDIR}.orig PREVENT_PATCH=: PKG_NOCHECKSUM=1
 endif
 	@-test ! -r ${WRKDIR}/.autoreconf_done || \
 		(wrkdist=$(WRKDIST) dir=$${wrkdist#$(WRKDIR)}; \
