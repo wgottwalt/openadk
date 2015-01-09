@@ -309,7 +309,7 @@ EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 				bzip2 -dc $$file | tar -xf - ;; \
 			*.zip) \
 				cat $$file | cpio -id -H zip ;; \
-			*.arm|*.jar) \
+			*.arm|*.jar|*.ids.gz) \
 				mkdir ${WRKBUILD}; cp $$file ${WRKBUILD} ;; \
 			*.bin) \
 				sh $$file --force --auto-accept ;; \
