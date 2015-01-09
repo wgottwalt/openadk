@@ -27,7 +27,7 @@ for service in $(grep ^ADK_RUNTIME_START_ $topdir/.config |grep -v ADK_RUNTIME_S
 	if [ $rcname = "openssh_server" ];then
 		rcname=openssh
 	fi
-	if [ "$ADK_PKG_KODIBOX" = "y" -o "$ADK_PKG_MPDBOX" = "y" ];then
+	if [ "$ADK_APPLIANCE_KODI" = "y" -o "$ADK_APPLIANCE_MPD" = "y" ];then
 		sed -i -e "s#$rcname=\"NO\"#$rcname=\"DAEMON\"#" $rcconf
 	else
 		sed -i -e "s#$rcname=\"NO\"#$rcname=\"YES\"#" $rcconf
