@@ -10,9 +10,8 @@ PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
 PKG_SITES:=		git://git.denx.de/u-boot.git
-NO_CHECKSUM:=		1
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi
+PKG_SYSTEM_DEPENDS:=	raspberry-pi atmel-ngw100
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -22,6 +21,9 @@ $(eval $(call PKG_template,U_BOOT,u-boot,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEP
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIG:=		rpi_defconfig
+endif
+ifeq ($(ADK_TARGET_SYSTEM_ATMEL_NGW100),y)
+CONFIG:=		atngw100_defconfig
 endif
 
 HOST_STYLE:=		manual
@@ -47,7 +49,7 @@ do-build:
 		GCC_HONOUR_COPTS=s $(MAKE))
 
 u-boot-install:
-	$(CP) $(WRKBUILD)/u-boot $(FW_DIR)
+	$(CP) $(WRKBUILD)/u-boot.bin $(FW_DIR)
 
 include $(ADK_TOPDIR)/mk/host-bottom.mk
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

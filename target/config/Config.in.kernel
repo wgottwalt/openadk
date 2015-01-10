@@ -66,4 +66,5 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "dragino-ms14s" if ADK_TARGET_SYSTEM_DRAGINO_MS14S
 	default "generic-pc" if ADK_TARGET_SYSTEM_GENERIC_PC
 	default "pcengines-apu" if ADK_TARGET_SYSTEM_PCENGINES_APU
+	default "atmel-ngw100" if ADK_TARGET_SYSTEM_ATMEL_NGW100
 
