@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_KERNEL_VERSION_3_17
+config ADK_KERNEL_VERSION_3_18
 	bool
 
 config ADK_KERNEL_VERSION_3_14
@@ -18,7 +18,7 @@ config ADK_KERNEL_VERSION_3_4
 
 config ADK_KERNEL_VERSION
 	string
-	default "3.17.7" if ADK_KERNEL_VERSION_3_17_7
+	default "3.18.2" if ADK_KERNEL_VERSION_3_18_2
 	default "3.14.26" if ADK_KERNEL_VERSION_3_14_26
 	default "3.12.33" if ADK_KERNEL_VERSION_3_12_33
 	default "3.10.53" if ADK_KERNEL_VERSION_3_10_53
