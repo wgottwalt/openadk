@@ -1,6 +1,9 @@
 menu "Ethernet network devices support"
 
 # vendor stuff
+config ADK_KERNEL_NET_CADENCE
+	bool
+
 config ADK_KERNEL_NET_VENDOR_AMD
 	bool
 
@@ -232,6 +235,15 @@ config ADK_KERNEL_IBMVETH
 	default n
 	help
 	  IBM ethernet driver
+
+config ADK_KERNEL_MACB
+	tristate "Atmel NGW100 network driver"
+	select ADK_KERNEL_NET_CADENCE
+	depends on ADK_TARGET_SYSTEM_ATMEL_NGW100
+	default y if ADK_TARGET_SYSTEM_ATMEL_NGW100
+	default n
+	help
+	  Atmel NGW100 network driver
 
 config ADK_KERNEL_SKY2
 	tristate "Marvell Yukon SKY2 driver"
