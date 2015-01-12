@@ -1,7 +1,7 @@
-diff -Nur linux-3.17.7.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.17.7/drivers/net/ethernet/freescale/fec_main.c
---- linux-3.17.7.orig/drivers/net/ethernet/freescale/fec_main.c	2014-12-16 11:37:26.000000000 -0600
-+++ linux-3.17.7/drivers/net/ethernet/freescale/fec_main.c	2014-12-28 21:27:24.773847877 -0600
-@@ -155,7 +155,7 @@
+diff -Nur linux-3.18.2.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.18.2/drivers/net/ethernet/freescale/fec_main.c
+--- linux-3.18.2.orig/drivers/net/ethernet/freescale/fec_main.c	2015-01-08 12:30:41.000000000 -0600
++++ linux-3.18.2/drivers/net/ethernet/freescale/fec_main.c	2015-01-11 20:34:04.690309863 -0600
+@@ -136,7 +136,7 @@
  module_param_array(macaddr, byte, NULL, 0);
  MODULE_PARM_DESC(macaddr, "FEC Ethernet MAC address");
  
@@ -10,16 +10,16 @@ diff -Nur linux-3.17.7.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.17
  /*
   * Some hardware gets it MAC address out of local flash memory.
   * if this is non-zero then assume it is the address to get MAC from.
-@@ -173,7 +173,7 @@
+@@ -154,7 +154,7 @@
  #else
  #define	FEC_FLASHMAC	0
  #endif
 -#endif /* CONFIG_M5272 */
 +#endif /* CONFIG_COLDFIRE */
  
- /* Interrupt events/masks. */
- #define FEC_ENET_HBERR	((uint)0x80000000)	/* Heartbeat error */
-@@ -889,7 +889,7 @@
+ /* The FEC stores dest/src/type/vlan, data, and checksum for receive packets.
+  */
+@@ -978,7 +978,7 @@
  	/* Set MII speed */
  	writel(fep->phy_speed, fep->hwp + FEC_MII_SPEED);
  
@@ -28,7 +28,7 @@ diff -Nur linux-3.17.7.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.17
  	/* set RX checksum */
  	val = readl(fep->hwp + FEC_RACC);
  	if (fep->csum_flags & FLAG_RX_CSUM_ENABLED)
-@@ -950,7 +950,7 @@
+@@ -1039,7 +1039,7 @@
  #endif
  	}
  
@@ -37,7 +37,7 @@ diff -Nur linux-3.17.7.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.17
  	/* enable pause frame*/
  	if ((fep->pause_flag & FEC_PAUSE_FLAG_ENABLE) ||
  	    ((fep->pause_flag & FEC_PAUSE_FLAG_AUTONEG) &&
-@@ -968,13 +968,13 @@
+@@ -1057,13 +1057,13 @@
  	} else {
  		rcntl &= ~FEC_ENET_FCE;
  	}
@@ -53,7 +53,7 @@ diff -Nur linux-3.17.7.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.17
  	writel(0, fep->hwp + FEC_HASH_TABLE_HIGH);
  	writel(0, fep->hwp + FEC_HASH_TABLE_LOW);
  #endif
-@@ -989,7 +989,7 @@
+@@ -1078,7 +1078,7 @@
  	if (fep->bufdesc_ex)
  		ecntl |= (1 << 4);
  
@@ -62,7 +62,7 @@ diff -Nur linux-3.17.7.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.17
  	/* Enable the MIB statistic event counters */
  	writel(0 << 31, fep->hwp + FEC_MIB_CTRLSTAT);
  #endif
-@@ -1436,7 +1436,7 @@
+@@ -1656,7 +1656,7 @@
  	 * 3) from flash or fuse (via platform data)
  	 */
  	if (!is_valid_ether_addr(iap)) {
@@ -71,7 +71,7 @@ diff -Nur linux-3.17.7.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.17
  		if (FEC_FLASHMAC)
  			iap = (unsigned char *)FEC_FLASHMAC;
  #else
-@@ -1699,7 +1699,7 @@
+@@ -1930,7 +1930,7 @@
  	if (id_entry->driver_data & FEC_QUIRK_HAS_GBIT) {
  		phy_dev->supported &= PHY_GBIT_FEATURES;
  		phy_dev->supported &= ~SUPPORTED_1000baseT_Half;
@@ -80,7 +80,7 @@ diff -Nur linux-3.17.7.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.17
  		phy_dev->supported |= SUPPORTED_Pause;
  #endif
  	}
-@@ -1894,7 +1894,7 @@
+@@ -2125,7 +2125,7 @@
  	}
  }
  
@@ -89,7 +89,7 @@ diff -Nur linux-3.17.7.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.17
  
  static void fec_enet_get_pauseparam(struct net_device *ndev,
  				    struct ethtool_pauseparam *pause)
-@@ -2049,7 +2049,7 @@
+@@ -2280,7 +2280,7 @@
  		return -EOPNOTSUPP;
  	}
  }
@@ -98,18 +98,18 @@ diff -Nur linux-3.17.7.orig/drivers/net/ethernet/freescale/fec_main.c linux-3.17
  
  static int fec_enet_nway_reset(struct net_device *dev)
  {
-@@ -2068,7 +2068,7 @@
- 	.get_drvinfo		= fec_enet_get_drvinfo,
- 	.nway_reset		= fec_enet_nway_reset,
+@@ -2466,7 +2466,7 @@
  	.get_link		= ethtool_op_get_link,
+ 	.get_coalesce		= fec_enet_get_coalesce,
+ 	.set_coalesce		= fec_enet_set_coalesce,
 -#ifndef CONFIG_M5272
 +#ifndef CONFIG_COLDFIRE
  	.get_pauseparam		= fec_enet_get_pauseparam,
  	.set_pauseparam		= fec_enet_set_pauseparam,
  	.get_strings		= fec_enet_get_strings,
-@@ -2571,7 +2571,7 @@
- 	/* setup board info structure */
- 	fep = netdev_priv(ndev);
+@@ -3164,7 +3164,7 @@
+ 	fep->num_rx_queues = num_rx_qs;
+ 	fep->num_tx_queues = num_tx_qs;
  
 -#if !defined(CONFIG_M5272)
 +#if !defined(CONFIG_COLDFIRE)
