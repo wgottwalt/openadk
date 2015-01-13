@@ -6,14 +6,14 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		classpath
 PKG_VERSION:=		0.99
 PKG_RELEASE:=		1
-PKG_HASH:=		f929297f8ae9b613a1a167e231566861893260651d913ad9b6c11933895fecc8
+PKG_HASH:=		1a80d1c48012a7bcc929be933d90f585856e6d8bf732569ec554dc44236e962a f929297f8ae9b613a1a167e231566861893260651d913ad9b6c11933895fecc8
 PKG_DESCR:=		java classpath
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		gtk+ gdk-pixbuf orbit2 gconf
 PKG_DEPENDS:=		libgtk gdk-pixbuf orbit2 gconf
 HOST_BUILDDEP:=		gcj-host ecj-host
 PKG_URL:=		http://www.gnu.org/software/classpath/home.html
-PKG_SITES:=		ftp://ftp.gnu.org/classpath/ \
+PKG_SITES:=		ftp://ftp.gnu.org/gnu/classpath/ \
 			http://www.antlr3.org/download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz antlr-3.5.2-complete.jar
