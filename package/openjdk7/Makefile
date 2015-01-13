@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
 PKG_VERSION:=		2.4.7
-PKG_RELEASE:=		8
+PKG_RELEASE:=		9
 PKG_HASH:=		b66973bef7808f8fb03be64e44d312ea2d13590a68a6a4e6690dbcdd1947459d
 PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
@@ -14,7 +14,8 @@ PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst
 PKG_BUILDDEP+=		libpng giflib gtk+ glib fontconfig nss
 HOST_BUILDDEP:=		fastjar-host gcj-host ecj-host classpath-host jamvm-host
 HOST_BUILDDEP+=		jikes-host ant-host libXtst-host libXt-host libXinerama-host
-HOST_BUILDDEP+=		cups-host qemu-host alsa-lib-host freetype-host
+HOST_BUILDDEP+=		cups-host qemu-host alsa-lib-host freetype-host unzip-host
+HOST_BUILDDEP+=		libxslt-host
 PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi cups
 PKG_DEPENDS+=		libfreetype libxrender libx11 libxext libpthread nss libjpeg-turbo
 PKG_DEPENDS+=		libpng giflib libgtk glib fontconfig
@@ -31,9 +32,8 @@ GCJ_VER:=		4.8.4
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
 
-PKG_CHOICES_OPENJDK7:=	ZERO JAMVM
+PKG_CHOICES_OPENJDK7:=	ZERO
 PKGCD_ZERO:=		zero-assembly backend
-PKGCD_JAMVM:=		jamvm backend
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
