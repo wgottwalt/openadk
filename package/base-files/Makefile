@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		8
+PKG_RELEASE:=		9
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -55,7 +55,11 @@ endif
 	mkdir -p $(IDIR_BASE_FILES)/usr/{lib,bin}
 	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
 	chmod 600 $(IDIR_BASE_FILES)/etc/network/interfaces
+ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
+	(cd $(IDIR_BASE_FILES)/etc; ln -sf ../proc/net/pnp resolv.conf)
+else
 	(cd $(IDIR_BASE_FILES)/etc; ln -sf ../tmp/resolv.conf .)
+endif
 	chmod 1777 ${IDIR_BASE_FILES}/tmp
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
