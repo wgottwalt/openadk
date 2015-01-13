@@ -1216,7 +1216,7 @@ $(eval $(call KMOD_template,INPUT_EVDEV,input-evdev,\
 
 USBMODULES:=
 ifeq ($(KERNEL_BASE),3)
-ifeq ($(KERNEL_MAJ),17)
+ifeq ($(KERNEL_MAJ),18)
 USBMODULES+=drivers/usb/common/usb-common
 USBMODULES+=drivers/usb/core/usbcore
 USBUDC:=gadget/udc
