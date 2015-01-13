@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		655fe692ddd333c29c5a1418f50f63a42cdd9e9eb7ebdb7f621e33c4b8799e31
 PKG_DESCR:=		java compiler
 PKG_SECTION:=		dev/lang
+HOST_BUILDDEP:=		zip-host
 PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
 
 PKG_CFLINE_GCJ:=	depends on ADK_HOST_ONLY
