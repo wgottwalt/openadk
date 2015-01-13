@@ -4,12 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
-PKG_VERSION:=		d8bec60c1b0de7770f9b56ad092ab9be801d99af
+PKG_VERSION:=		2015.01
 PKG_RELEASE:=		1
+PKG_HASH:=		383051a656ebe11757b17d38a3326387e4a1b0949ca8a9e8ee506bf71dac9fde
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
+PKG_BUILDDEP:=		u-boot-host
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
-PKG_SITES:=		git://git.denx.de/u-boot.git
+PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi atmel-ngw100
 
