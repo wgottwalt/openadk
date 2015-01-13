@@ -21,8 +21,6 @@ PKG_DESCR:=		posix threading library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
 
-PKG_CFLINE_LIBPTHREAD:=	depends on ADK_TARGET_WITH_NPTL
-
 NO_DISTFILES:=		1
 
 include ${ADK_TOPDIR}/mk/package.mk
