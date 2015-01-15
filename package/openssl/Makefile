@@ -26,18 +26,21 @@ PKGSS_OPENSSL_UTIL:=	libopenssl
 PKG_FLAVOURS_LIBOPENSSL:=	WITH_CRYPTODEV
 PKGFD_WITH_CRYPTODEV:=		enable support for cryptodev-linux
 
+include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,OPENSSL,openssl,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},$(PKG_OPTS)))
 $(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSL_UTIL},${PKGSD_OPENSSL_UTIL},${PKGSC_OPENSSL_UTIL}))
 
+OPENSSL_OPTIONS:= shared threads no-err no-krb5 zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-cast
+
+HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 
 INSTALL_TARGET:=	install_sw
 FAKE_FLAGS+=		INSTALL_PREFIX=${WRKINST}
-
-OPENSSL_OPTIONS:= shared threads no-err no-krb5 zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-cast
 
 ifneq ($(ADK_PACKAGE_LIBOPENSSL_WITH_CRYPTODEV),)
 OPENSSL_OPTIONS+= -DHAVE_CRYPTODEV -DUSE_CRYPTODEV_DIGESTS
@@ -59,6 +62,15 @@ TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
 else
 CONFIG:=		linux-embedded
 endif
+
+host-configure:
+	(cd $(WRKBUILD); ./config --prefix='$(STAGING_HOST_DIR)/usr')
+
+host-build:
+	(cd $(WRKBUILD); make)
+
+openssl-hostinstall:
+	(cd $(WRKBUILD); make install)
 
 post-extract:
 	-mkdir -p $(STAGING_TARGET_DIR)/usr/include/crypto
@@ -97,4 +109,5 @@ openssl-util-install:
 	${CP} ${WRKSRC}/apps/openssl.cnf ${IDIR_OPENSSL_UTIL}/etc/ssl/
 	chmod 0700 ${IDIR_OPENSSL_UTIL}/etc/ssl/private
 
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

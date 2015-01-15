@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		383051a656ebe11757b17d38a3326387e4a1b0949ca8a9e8ee506bf71dac9fde
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
+HOST_BUILDDEP:=		openssl-host
 PKG_BUILDDEP:=		u-boot-host
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
 PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
@@ -30,6 +31,8 @@ ifeq ($(ADK_TARGET_SYSTEM_ATMEL_NGW100),y)
 CONFIG:=		atngw100_defconfig
 endif
 
+HOST_MAKE_FLAGS+=	HOSTCFLAGS="$(HOST_CPPFLAGS) $(HOST_CFLAGS)" \
+			HOSTLDFLAGS="$(HOST_LDFLAGS) -ldl"
 HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
