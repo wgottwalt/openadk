@@ -8,10 +8,9 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		usb id database
 PKG_SECTION:=		sys/hw
-PKG_SITES:=		http://www.linux-usb.org/
-PKG_NOCHECKSUM:=	1
+PKG_URL:=		http://www.linux-usb.org/
 
-DISTFILES:=		usb.ids.gz
+NO_DISTFILES:=		1
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -23,6 +22,6 @@ INSTALL_STYLE:=		manual
 
 usbids-install:
 	$(INSTALL_DIR) $(IDIR_USBIDS)/usr/share
-	$(CP) $(WRKSRC)/usb.ids.gz $(IDIR_USBIDS)/usr/share
+	$(CP) ./files/usb.ids.gz $(IDIR_USBIDS)/usr/share
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
