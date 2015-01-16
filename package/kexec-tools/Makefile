@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kexec-tools
 PKG_VERSION:=		2.0.8
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		f3abe96fa0793e63936725a4471429f070039a1e81e605deb378747194a50c47
 PKG_DESCR:=		kernel exec tools
 PKG_SECTION:=		sys/misc
@@ -25,5 +25,6 @@ kexec-tools-install:
 	$(INSTALL_DIR) $(IDIR_KEXEC_TOOLS)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/kexec \
 		$(IDIR_KEXEC_TOOLS)/usr/sbin
+	$(INSTALL_BIN) ./files/kreboot $(IDIR_KEXEC_TOOLS)/usr/sbin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
