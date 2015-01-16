@@ -1,0 +1,49 @@
+#!/bin/sh
+
+KERNEL="/mnt/boot/kernel"
+KEXEC_ARG=" -l --atags "
+PART_A=2
+PART_B=3
+
+load_kernel(){
+  # get the Bootargs and replace the current Partition with
+  # the one in $1 e.g. replace /dev/mmcblk0p2 with /dev/mmcblk0p3
+  BOOT_ARGS="$(cat /proc/cmdline | sed s#$CURRENT_PART#$1#g)"
+  # echo "kexec $KEXEC_ARG --append=\"$BOOT_ARGS\" $KERNEL"
+  # set -x
+  # Load the new kernel, unmount the partition and exec the new kernel
+  kexec -l --atags --append=\""$BOOT_ARGS"\" $KERNEL
+  umount /mnt
+  kexec -e
+}
+
+# just to be sure
+umount /mnt 2> /dev/null
+
+# get the partiton of the current kernel
+PART="/dev/$(readlink /dev/root)"
+# extract the partition number
+C_M_PART_NUM=$(readlink /dev/root | grep -o -e '[[:digit:]]*$')
+#$(readlink /dev/root | grep -o '.$')
+
+#Cut off the Partition Number
+C_M_PART=$(readlink /dev/root | sed "s/$C_M_PART_NUM\$//")
+
+CURRENT_PART="/dev/${C_M_PART}${C_M_PART_NUM}"
+
+case $C_M_PART_NUM in
+  "$PART_A")
+    DEVICE="/dev/${C_M_PART}${PART_B}"
+    mount -r $DEVICE /mnt
+    load_kernel $DEVICE
+  ;;
+  "$PART_B")
+    DEVICE="/dev/${C_M_PART}${PART_A}"
+    mount -r $DEVICE /mnt
+    load_kernel $DEVICE
+  ;;
+  *)
+    echo "FAILURE"
+  ;;
+esac
+
