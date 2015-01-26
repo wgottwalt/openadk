@@ -10,8 +10,9 @@ PKG_DESCR:=		adk disk/flash installer
 PKG_SECTION:=		base/misc
 PKG_DEPENDS:=		mke2fs parted sfdisk dosfstools mksh
 
-PKG_SYSTEM_DEPENDS:=	mikrotik-rb532 lemote-yeelong pcengines-apu
+PKG_SYSTEM_DEPENDS:=	mikrotik-rb532 lemote-yeelong pcengines-apu ibm-x40
 PKG_DEPENDS_PCENGINES_APU:=	grub grub-tools
+PKG_DEPENDS_IBM_X40:=	grub grub-tools
 NO_DISTFILES:=		1
 
 include ${ADK_TOPDIR}/mk/package.mk
