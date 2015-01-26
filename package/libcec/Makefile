@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libcec
 PKG_VERSION:=		2.2.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		da8a0c5acf2f9134e38d7993c08d960b7da2a9ea6b6b557a9d788361884b8396
 PKG_DESCR:=		control your device with your tv remote control
 PKG_SECTION:=		libs/video
