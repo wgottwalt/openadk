@@ -279,7 +279,23 @@ PKG_INSTALL:=		PATH='${HOST_PATH}' \
 			${BASH} ${SCRIPT_DIR}/ipkg \
 			-force-defaults -force-depends install
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/ipkg
-else
+endif
+
+ifeq ($(ADK_TARGET_PACKAGE_OPKG),y)
+PKG_BUILD:=		PATH='${HOST_PATH}' \
+			${BASH} ${SCRIPT_DIR}/ipkg-build
+PKG_INSTALL:=		PATH='${HOST_PATH}' \
+			IPKG_TMP=$(BUILD_DIR)/tmp \
+			IPKG_INSTROOT=$(TARGET_DIR) \
+			IPKG_CONF_DIR=$(STAGING_TARGET_DIR)/etc \
+			IPKG_OFFLINE_ROOT=$(TARGET_DIR) \
+			BIN_DIR=$(STAGING_HOST_DIR)/usr/bin \
+			${BASH} ${SCRIPT_DIR}/ipkg \
+			-force-defaults -force-depends install
+PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/opkg
+endif
+
+ifeq ($(ADK_TARGET_PACKAGE_TXZ),y)
 PKG_BUILD:=		PATH='${HOST_PATH}' ${BASH} ${SCRIPT_DIR}/tarpkg build
 PKG_INSTALL:=		PKG_INSTROOT='$(TARGET_DIR)' \
 			PATH='${HOST_PATH}' ${BASH} ${SCRIPT_DIR}/tarpkg install

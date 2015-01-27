@@ -191,6 +191,10 @@ ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	-cd ${PACKAGE_DIR} && \
 	    ${BASH} ${ADK_TOPDIR}/scripts/ipkg-make-index.sh . >Packages
 endif
+ifeq ($(ADK_TARGET_PACKAGE_OPKG),y)
+	-cd ${PACKAGE_DIR} && \
+	    ${BASH} ${ADK_TOPDIR}/scripts/ipkg-make-index.sh . >Packages
+endif
 
 ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
 	@mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
@@ -201,10 +205,8 @@ ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
 	done
 
 ${STAGING_TARGET_DIR}/etc/ipkg.conf: ${STAGING_TARGET_DIR}/etc
-ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
 	echo "dest root /" >${STAGING_TARGET_DIR}/etc/ipkg.conf
 	echo "option offline_root ${TARGET_DIR}" >>$(STAGING_TARGET_DIR)/etc/ipkg.conf
-endif
 
 package/%: ${STAGING_TARGET_DIR}/etc/ipkg.conf ${ADK_TOPDIR}/package/Depends.mk
 	$(MAKE) -C package $(patsubst package/%,%,$@)
