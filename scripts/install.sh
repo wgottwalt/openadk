@@ -496,9 +496,10 @@ else
 fi
 dd if="$T/firsttrack" of="$tgt" > /dev/null 2>&1
 
+fwdir=$(dirname "$src")
+
 case $target {
 (solidrun-imx6)
-	fwdir=$(dirname "$src")
 	dd if="$fwdir/SPL" of="$tgt" bs=1024 seek=1 > /dev/null 2>&1
 	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=42 > /dev/null 2>&1
 	;;
@@ -540,6 +541,10 @@ case $target {
 	done
 	for x in "$R"/boot/*; do
 		[[ -e "$x" ]] && mv -f "$R"/boot/* "$B/"
+		break
+	done
+	for x in "$fwdir"/*.dtb; do
+		[[ -e "$x" ]] && cp "$fwdir"/*.dtb "$B/"
 		break
 	done
 	umount_fs "$B"

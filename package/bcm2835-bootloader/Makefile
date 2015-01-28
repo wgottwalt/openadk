@@ -47,5 +47,16 @@ ifeq ($(ADK_PACKAGE_BCM2835_BOOTLOADER_CUTDOWN),y)
 endif
 	printf "gpu_mem=$(ADK_TARGET_GPU_MEM)\n" >> \
 		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+ifeq ($(ADK_KERNEL_BCM2708_DT),y)
+	printf "device_tree=bcm2708-rpi-b.dtb\n" >> \
+		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+	printf "device_tree_address=0x100\n" >> \
+		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+	printf "kernel_address=0x8000\n" >> \
+		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+	printf "disable_commandline_tags=2\n" >> \
+		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+endif
+
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

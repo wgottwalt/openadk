@@ -100,6 +100,12 @@ kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
 dtb-install:
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
+		dtbs
+	$(CP) $(LINUX_DIR)/arch/arm/boot/dts/*.dtb \
+		$(FW_DIR)
+endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
 		imx6q-cubox-i.dtb imx6dl-cubox-i.dtb imx6dl-hummingboard.dtb imx6q-hummingboard.dtb $(MAKE_TRACE)
@@ -109,11 +115,7 @@ endif
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
-ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 imageinstall: dtb-install $(FW_DIR)/$(ROOTFSTARBALL) targethelp
-else
-imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
-endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
