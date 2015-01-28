@@ -236,6 +236,7 @@ case $target {
 	create_partition /dev/sda ext2 $(($rootsize+1)) $(($maxsize-1))
 	set_boot_flag /dev/sda 1
 	change_part_type /dev/sda 2 88
+	partprobe /dev/sda
 	create_filesystem /dev/sda $fs 1
 	mdev -s
 	mount_fs /dev/sda 1 $fs /mnt
@@ -251,6 +252,7 @@ case $target {
 	create_partition /dev/sda ext2 $(($rootsize+1)) $(($maxsize-1))
 	set_boot_flag /dev/sda 1
 	change_part_type /dev/sda 2 88
+	partprobe /dev/sda
 	create_filesystem /dev/sda $fs 1
 	mdev -s
 	mount_fs /dev/sda 1 $fs /mnt
@@ -269,6 +271,7 @@ case $target {
 		set_boot_flag /dev/sda 1
 		change_part_type /dev/sda 1 27
 		change_part_type /dev/sda 3 88
+		partprobe /dev/sda
 		create_filesystem /dev/sda $fs 2
 		mdev -s
 		mount_fs /dev/sda 2 $fs /mnt

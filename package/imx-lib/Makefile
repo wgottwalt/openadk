@@ -27,6 +27,8 @@ MAKE_ENV+=		PLATFORM=IMX6Q
 CONFIG_STYLE:=		manual
 
 imx-lib-install:
+	# remove libcec from staging directory
+	-rm $(STAGING_TARGET_DIR)/usr/lib/libcec.so.1
 	$(INSTALL_DIR) $(IDIR_IMX_LIB)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/lib{ipu,pxp}.so* \
 		$(IDIR_IMX_LIB)/usr/lib

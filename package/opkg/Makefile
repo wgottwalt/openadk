@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		opkg
-PKG_VERSION:=		0.2.2
+PKG_VERSION:=		0.2.4
 PKG_RELEASE:=		1
-PKG_HASH:=		aa554ce7538544aac4f69e8274a0f9b8b433b8c3b1d00704bd393f713303a12b
+PKG_HASH:=		0f40c7e457d81edf9aedc07c778f4697111ab163a38ef95999faece015453086
 PKG_DESCR:=		embedded package manager
 PKG_DEPENDS:=		libcurl libpthread
 PKG_BUILDDEP:=		curl

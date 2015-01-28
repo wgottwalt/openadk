@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.23.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		483ab594dd962ddbb332fd24e36ffdd6e36ac2182fbff055c56e1ca49fda09e4
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		base/apps
@@ -34,10 +34,8 @@ do-configure:
 	# get all symbols from top level config
 	grep "^BUSYBOX_\|# BUSYBOX" $(ADK_TOPDIR)/.config|grep -v BUSYBOX_DISABLE|sed -e 's/BUSYBOX_/CONFIG_/' > \
 		${WRKBUILD}/.config
-	cp ${WRKBUILD}/.config ${WRKBUILD}/.config.step1
 	# convert all disabled symbols
 	for i in $$(grep ^BUSYBOX_DISABLE $(ADK_TOPDIR)/.config);do \
-		echo "$$i"; \
 		sym=$${i#BUSYBOX_DISABLE_}; \
 		symbol=$$(echo $$sym|sed -e "s#=y##"); \
 		printf "# CONFIG_$${symbol} is not set\n" >> ${WRKBUILD}/.config; \

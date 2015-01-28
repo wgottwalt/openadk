@@ -35,6 +35,15 @@ ifeq (${ADK_TARGET_PACKAGE_IPKG},y)
 	$(SED) 's,@VENDOR@,$(ADK_VENDOR),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	mkdir -p $(IDIR_BASE_FILES)/usr/lib/ipkg/lists
 endif
+ifeq (${ADK_TARGET_PACKAGE_OPKG},y)
+	$(CP) ./files/ipkg.conf $(IDIR_BASE_FILES)/etc/
+	$(SED) 's,@ARCH@,$(ADK_TARGET_CPU_ARCH),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	$(SED) 's,@SYSTEM@,$(ADK_TARGET_SYSTEM),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	$(SED) 's,@LIBC@,$(ADK_TARGET_LIBC),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	$(SED) 's,@HOST@,$(ADK_HOST),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	$(SED) 's,@VENDOR@,$(ADK_VENDOR),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
+	mkdir -p $(IDIR_BASE_FILES)/usr/lib/opkg/lists
+endif
 	echo /bin/sh >${IDIR_BASE_FILES}/etc/shells
 	echo /bin/mksh >>${IDIR_BASE_FILES}/etc/shells
 ifneq (${ADK_PACKAGE_ASH},)

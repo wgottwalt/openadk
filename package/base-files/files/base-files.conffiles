@@ -4,7 +4,6 @@
 /etc/group
 /etc/hosts
 /etc/hostname
-/etc/ipkg.conf
 /etc/modules
 /etc/passwd
 /etc/profile
