@@ -3,7 +3,7 @@
 # install OpenADK to a block/flash device
 
 if [ $(id -u) -ne 0 ];then
-	print Installation is only possible as root
+	print installation is only possible as root
 	exit 1
 fi
 
@@ -16,8 +16,7 @@ fi
 
 function mikrotik-rb532-help {
 	cat >&2 <<EOF
-Syntax: adkinstall [-c|-n] -a <archive>
-	-a: archive
+Syntax: adkinstall [-c|-n] <archive>
 	-c: compact flash install
 	-n: nand install
 	-f: filesystem for compact flash
@@ -28,8 +27,7 @@ EOF
 
 function ibm-x40-help {
 	cat >&2 <<EOF
-Syntax: adkinstall -a <archive>
-	-a: archive
+Syntax: adkinstall <archive>
 	-f: filesystem (default ext4)
 	-h: help text
 EOF
@@ -38,8 +36,7 @@ EOF
 
 function pcengines-apu-help {
 	cat >&2 <<EOF
-Syntax: adkinstall -a <archive>
-	-a: archive
+Syntax: adkinstall <archive>
 	-f: filesystem (default ext4)
 	-h: help text
 EOF
@@ -51,17 +48,10 @@ case $target {
 (ibm-x40)
 	cfgfssize=32768
 	fs=ext4
-	while getopts "ha:f:" ch; do
+	while getopts "f:" ch; do
 	case $ch in
-		a)
-			archive=$OPTARG
-			;;
 		f)
 			fs=$OPTARG
-			;;
-		h)
-			ibm-x40-help
-			exit 1
 			;;
 		*)
 			ibm-x40-help
@@ -70,25 +60,19 @@ case $target {
 	esac
 	done
 	shift $((OPTIND - 1))
-	if [ $OPTIND -eq 1 ];then
+	if [ -z $1 ];then
 		ibm-x40-help
-		exit 1
+	else
+		archive=$1
 	fi
 	;;
 (pcengines-apu)
 	cfgfssize=32768
 	fs=ext4
-	while getopts "ha:f:" ch; do
+	while getopts "f:" ch; do
 	case $ch in
-		a)
-			archive=$OPTARG
-			;;
 		f)
 			fs=$OPTARG
-			;;
-		h)
-			pcengines-apu-help
-			exit 1
 			;;
 		*)
 			pcengines-apu-help
@@ -97,9 +81,10 @@ case $target {
 	esac
 	done
 	shift $((OPTIND - 1))
-	if [ $OPTIND -eq 1 ];then
+	if [ -z $1 ];then
 		pcengines-apu-help
-		exit 1
+	else
+		archive=$1
 	fi
 	;;
 (mikrotik-rb532)
@@ -107,11 +92,8 @@ case $target {
 	nand=0
 	cf=0
 	fs=ext4
-	while getopts "a:cnhf:" ch; do
+	while getopts "cnf:" ch; do
 	case $ch in
-		a)
-			archive=$OPTARG
-			;;
 		c)
 			cf=1
 			fs=ext4
@@ -123,10 +105,6 @@ case $target {
 		f)
 			fs=$OPTARG
 			;;
-		h)
-			mikrotik-rb532-help
-			exit 1
-			;;
 		*)
 			mikrotik-rb532-help
 			exit 1
@@ -134,9 +112,10 @@ case $target {
 	esac
 	done
 	shift $((OPTIND - 1))
-	if [ $OPTIND -eq 1 ];then
+	if [ -z $1 ];then
 		mikrotik-rb532-help
-		exit 1
+	else
+		archive=$1
 	fi
 	;;
 (*)
@@ -147,17 +126,17 @@ case $target {
 
 if [ "$target" = "mikrotik-rb532" ];then
 	if [ $cf -eq 0 -a $nand -eq 0 ];then
-		print "You either install on cf (-c) or nand (-n)"
+		print "you either install on cf (-c) or nand (-n)"
 		mikrotik-rb532-help
 	fi
 fi
 
-tools="parted sfdisk mkfs.$fs"
+tools="parted partprobe sfdisk mkfs.$fs"
 
 f=0
 for tool in $tools;do
 	if ! which $tool >/dev/null; then
-		echo "Checking if $tool is installed... failed"
+		echo "checking if $tool is installed... failed"
 		f=1
 	fi
 done
@@ -165,15 +144,15 @@ if [ $f -eq 1 ];then exit 1;fi
 
 # create empty partition table
 function create_label {
-	print "Creating empty partition table"
-	parted -s $1 mklabel msdos
+	print "creating empty partition table"
+	parted -s $1 mklabel msdos > /dev/null 2>&1
 }
 
 # get max size of disk in sectors
 function get_max_size {
 	maxsize=$(env LC_ALL=C parted $1 -s unit s print |awk '/^Disk/ { print $3 }'|sed -e 's/s//')
 	rootsize=$(($maxsize-$cfgfssize))
-	print device has $maxsize sectors. Using $rootsize for root.
+	print device has $maxsize sectors. using $rootsize for root.
 }
 
 # create partition, with fstype start and end in sectors
@@ -183,8 +162,8 @@ function create_partition {
 }
 
 function set_boot_flag {
-	print setting bootflag on $1 partition $2 > /dev/null 2>&1
-	parted -s $1 set $2 boot on
+	print setting bootflag on $1 partition $2
+	parted -s $1 set $2 boot on > /dev/null 2>&1
 }
 
 function change_part_type {
@@ -208,6 +187,7 @@ function extract_archive {
 }
 
 function grub_install {
+	print installing bootloader grub
 (
         print set default=0
         print set timeout=1
@@ -217,7 +197,7 @@ function grub_install {
         consargs="console=ttyS0,$speed"
         print
         print 'menuentry "GNU/Linux (OpenADK)" {'
-        print "\tlinux /boot/kernel"
+        print "\tlinux /boot/kernel root=/dev/sda1"
         print '}'
 ) >/mnt/boot/grub/grub.cfg
 	grub-install $1 --root-directory /mnt
@@ -237,6 +217,8 @@ case $target {
 	set_boot_flag /dev/sda 1
 	change_part_type /dev/sda 2 88
 	partprobe /dev/sda
+	sync
+	sleep 2
 	create_filesystem /dev/sda $fs 1
 	mdev -s
 	mount_fs /dev/sda 1 $fs /mnt
@@ -253,6 +235,8 @@ case $target {
 	set_boot_flag /dev/sda 1
 	change_part_type /dev/sda 2 88
 	partprobe /dev/sda
+	sync
+	sleep 2
 	create_filesystem /dev/sda $fs 1
 	mdev -s
 	mount_fs /dev/sda 1 $fs /mnt
@@ -272,6 +256,8 @@ case $target {
 		change_part_type /dev/sda 1 27
 		change_part_type /dev/sda 3 88
 		partprobe /dev/sda
+		sync
+		sleep 2
 		create_filesystem /dev/sda $fs 2
 		mdev -s
 		mount_fs /dev/sda 2 $fs /mnt
@@ -294,5 +280,5 @@ case $target {
 	;;
 }
 
-echo "Successfully installed OpenADK on $target."
+echo "successfully installed OpenADK on $target."
 exit 0
