@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
-PKG_VERSION:=		1.15.1
+PKG_VERSION:=		1.16.3
 PKG_RELEASE:=		1
-PKG_HASH:=		0c144e98081887c93c066c0bd5725865b014ed1acd6def1319a1e350ced96d76
+PKG_HASH:=		293d6a73a560f9f7f5cc8a05d84445a3aabfdf43683925d0f93c8f8502536c84
 PKG_DESCR:=		xorg server
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile
@@ -26,19 +26,18 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU_WITH_GRAPHIC
-PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_FLAVOURS_XORG_SERVER:=	WITH_DRI WITH_KDRIVE
 PKGFS_WITH_DRI:=		mesalib
-PKGFD_WITH_DRI:=		enable DRI support
+PKGFD_WITH_DRI:=		enable dri support
 PKGFB_WITH_DRI:=		xf86driproto glproto mesalib
-PKGFD_WITH_KDRIVE:=		Build Kdrive Xfbdev server
+PKGFD_WITH_KDRIVE:=		build kdrive xfbdev server
 
 PKG_CHOICES_XORG_SERVER:=	WITH_GCRYPT WITH_CRYPTO
-PKGCD_WITH_GCRYPT:=		use libgcrypt for SHA1
+PKGCD_WITH_GCRYPT:=		use libgcrypt for sha1
 PKGCS_WITH_GCRYPT:=		libgcrypt
 PKGCB_WITH_GCRYPT:=		libgcrypt
-PKGCD_WITH_CRYPTO:=		use openssl libcrypto for SHA1
+PKGCD_WITH_CRYPTO:=		use openssl libcrypto for sha1
 PKGCS_WITH_CRYPTO:=		libopenssl
 PKGCB_WITH_CRYPTO:=		openssl
 

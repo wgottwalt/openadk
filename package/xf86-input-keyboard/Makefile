@@ -11,20 +11,19 @@ PKG_DESCR:=		x11 driver for keyboard
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libstdcxx
 PKG_BUILDDEP:=		xorg-server
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		$(MASTER_SITE_XORG)
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
-PKG_ARCH_DEPENDS:=      !m68k
 PKG_CFLINE_XF86_INPUT_KEYBOARD:=	depends on ADK_TARGET_WITH_INPUT || ADK_TARGET_QEMU_WITH_GRAPHIC
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,XF86_INPUT_KEYBOARD,xf86-input-keyboard,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,XF86_INPUT_KEYBOARD,xf86-input-keyboard,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 xf86-input-keyboard-install:
-	${INSTALL_DIR} ${IDIR_XF86_INPUT_KEYBOARD}/usr/lib/xorg/modules/input
-	${CP} ${WRKINST}/usr/lib/xorg/modules/input/kbd_drv.so \
-		${IDIR_XF86_INPUT_KEYBOARD}/usr/lib/xorg/modules/input/
+	$(INSTALL_DIR) $(IDIR_XF86_INPUT_KEYBOARD)/usr/lib/xorg/modules/input
+	$(CP) $(WRKINST)/usr/lib/xorg/modules/input/kbd_drv.so \
+		$(IDIR_XF86_INPUT_KEYBOARD)/usr/lib/xorg/modules/input/
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
