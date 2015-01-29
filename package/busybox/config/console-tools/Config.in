@@ -46,7 +46,6 @@ config BUSYBOX_DUMPKMAP
 config BUSYBOX_KBD_MODE
 	bool "kbd_mode"
 	default n
-	default y if ADK_TARGET_WITH_INPUT
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  This program reports and sets keyboard mode.
@@ -60,7 +59,6 @@ config BUSYBOX_LOADFONT
 
 config BUSYBOX_LOADKMAP
 	bool "loadkmap"
-	default y if ADK_TARGET_WITH_INPUT
 	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
@@ -84,7 +82,7 @@ config BUSYBOX_RESET
 
 config BUSYBOX_RESIZE
 	bool "resize"
-	default y
+	default n
 	help
 	  This program is used to (re)set the width and height of your current
 	  terminal.
@@ -138,7 +136,7 @@ config BUSYBOX_DEFAULT_SETFONT_DIR
 
 config BUSYBOX_SETKEYCODES
 	bool "setkeycodes"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  This program loads entries into the kernel's scancode-to-keycode
@@ -146,14 +144,14 @@ config BUSYBOX_SETKEYCODES
 
 config BUSYBOX_SETLOGCONS
 	bool "setlogcons"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  This program redirects the output console of kernel messages.
 
 config BUSYBOX_SHOWKEY
 	bool "showkey"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Shows keys pressed.
