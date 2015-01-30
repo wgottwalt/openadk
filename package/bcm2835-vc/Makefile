@@ -4,16 +4,14 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bcm2835-vc
-# actually git checkout from 10.10.2014
-PKG_VERSION:=		0.9
+PKG_VERSION:=		3b81b91c18ff19f97033e146a9f3262ca631f0e9
 PKG_RELEASE:=		1
-PKG_HASH:=		04199b75bfb1f4e5064a24819782962778e136422f332b6e4c3e275d2408f38b
 PKG_DESCR:=		videocore tools and libraries for raspberry pi
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		cmake-host
 PKG_URL:=		https://github.com/raspberrypi/userland
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		https://github.com/raspberrypi/userland.git
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 

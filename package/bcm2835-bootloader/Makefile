@@ -4,13 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm2835-bootloader
-PKG_VERSION:=		393dcc0e76f18f6ac1b67ba45d36058410670034
+PKG_VERSION:=		9b068fe44503f564579a25fd849df4ec784f9d4d
 PKG_RELEASE:=		1
 PKG_DESCR:=		bootloader for raspberry pi
 PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/raspberrypi/firmware
 PKG_SITES:=		https://github.com/raspberrypi/firmware.git
-NO_CHECKSUM:=		1
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi
 PKG_CHOICES_BCM2835_BOOTLOADER:=	DEFAULT EXTRA CUTDOWN
@@ -57,6 +56,5 @@ ifeq ($(ADK_KERNEL_BCM2708_DT),y)
 	printf "disable_commandline_tags=2\n" >> \
 		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
 endif
-
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
