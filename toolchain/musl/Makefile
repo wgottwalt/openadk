@@ -52,7 +52,7 @@ $(WRKBUILD)/.fixup:
 	$(MAKE) -C $(WRKBUILD) CFLAGS='$(TARGET_CFLAGS)' all
 	$(MAKE) -C $(WRKBUILD) CFLAGS='$(TARGET_CFLAGS)' DESTDIR=$(STAGING_TARGET_DIR) install
 	# cleanup toolchain
-	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -exec {} \;
+	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -exec rm {} \;
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 	# strip target libs and host tools for toolchain builds
 	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh \

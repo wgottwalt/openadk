@@ -65,7 +65,7 @@ $(WRKBUILD)/.installed:
 	touch $@
 
 $(WRKBUILD)/.fixup:
-	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -exec {} \;
+	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -exec rm {} \;
 	rm -rf $(STAGING_TARGET_DIR)/usr/share/locale $(STAGING_TARGET_DIR)/usr/share/i18n
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 	# strip target libs and host tools for toolchain builds
