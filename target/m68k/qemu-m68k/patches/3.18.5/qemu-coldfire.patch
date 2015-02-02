@@ -1,0 +1,24 @@
+m68k: enabled software emulation of separate supervisor/user stack
+
+Recent Coldfires have separate supervisor and user stack pointers, but
+since older Coldfires didn't have that, the Linux kernel has a kind of
+emulation mechanism for those pointers.
+
+Apparently, according to the Kconfig.cpu file, the 5208 is supposed to
+support such separate pointers, but Qemu doesn't implement it. So we
+cheat a bit here and force the usage of emulated separate stack
+pointers.
+
+Signed-off-by: Thomas Petazzoni <thomas.petazzoni at free-electrons.com>
+
+diff -Nur linux-3.17.7.orig/arch/m68k/Kconfig.cpu linux-3.17.7/arch/m68k/Kconfig.cpu
+--- linux-3.17.7.orig/arch/m68k/Kconfig.cpu	2014-12-16 11:37:26.000000000 -0600
++++ linux-3.17.7/arch/m68k/Kconfig.cpu	2014-12-27 14:12:19.291459730 -0600
+@@ -146,6 +146,7 @@
+ 	depends on !MMU
+ 	select GENERIC_CLOCKEVENTS
+ 	select HAVE_CACHE_SPLIT
++	select COLDFIRE_SW_A7
+ 	help
+ 	   Freescale Coldfire 5207/5208 processor support.
+ 
