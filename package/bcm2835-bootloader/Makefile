@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm2835-bootloader
 PKG_VERSION:=		9b068fe44503f564579a25fd849df4ec784f9d4d
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		bootloader for raspberry pi
 PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/raspberrypi/firmware
@@ -55,6 +55,10 @@ ifeq ($(ADK_KERNEL_BCM2708_DT),y)
 		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
 	printf "disable_commandline_tags=2\n" >> \
 		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_RPI_PROTO),)
+	printf "device_tree_overlay=rpi-proto\n" >> \
+		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
+endif
 endif
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

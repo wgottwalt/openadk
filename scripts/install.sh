@@ -547,6 +547,11 @@ case $target {
 		[[ -e "$x" ]] && cp "$fwdir"/*.dtb "$B/"
 		break
 	done
+	mkdir "$B/"overlay
+	for x in "$B/"*-overlay.dtb; do
+		[[ -e "$x" ]] && mv "$B/"*-overlay.dtb "$B/"overlay
+		break
+	done
 	umount_fs "$B"
 	;;
 (solidrun-imx6)
