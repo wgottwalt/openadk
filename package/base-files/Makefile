@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		9
+PKG_RELEASE:=		10
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -95,9 +95,10 @@ endif
 	    echo "ff02::1 ip6-allnodes" >> $(IDIR_BASE_FILES)/etc/hosts
 	    echo "ff02::2 ip6-allrouters" >> $(IDIR_BASE_FILES)/etc/hosts
 	    echo "ff02::3 ip6-allhosts" >> $(IDIR_BASE_FILES)/etc/hosts
-	test -z $(ADK_RUNTIME_PASSWORD) || \
+	test -z '$(ADK_RUNTIME_PASSWORD)' || \
 	    $(SED) 's,\*NP\*,'"$$($(STAGING_HOST_DIR)/usr/bin/mkcrypt \
-	    ${ADK_RUNTIME_PASSWORD}),g" $(IDIR_BASE_FILES)/etc/shadow
+	    $$(awk -F\= '/^ADK_RUNTIME_PASSWORD/ { print $$2 }' $(ADK_TOPDIR)/.config|sed -e 's^\"^^g')),g" \
+		 $(IDIR_BASE_FILES)/etc/shadow
 	echo $(ADK_RUNTIME_TMPFS_SIZE) > $(IDIR_BASE_FILES)/etc/tmpfs
 ifeq ($(ADK_TARGET_WITH_ROOT_RW),y)
 	echo 'export IPKGTMPDIR=/root/.ipkg' >> $(IDIR_BASE_FILES)/etc/profile
