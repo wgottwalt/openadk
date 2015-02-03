@@ -1,35 +1,34 @@
---- htpdate-1.0.4.orig/Makefile	2008-10-13 21:04:08.000000000 +0200
-+++ htpdate-1.0.4/Makefile	2010-02-05 22:49:58.954334284 +0100
-@@ -2,8 +2,8 @@ prefix = /usr
+--- htpdate-1.1.1.orig/Makefile	2014-02-07 09:55:26.000000000 +0100
++++ htpdate-1.1.1/Makefile	2015-02-03 06:09:46.000000000 +0100
+@@ -2,12 +2,10 @@ prefix = $(DESTDIR)/usr
  bindir = ${prefix}/bin
  mandir = ${prefix}/share/man
  
 -CC = gcc
 -CFLAGS += -Wall -O2
+-#CFLAGS += -Wall -pedantic -ansi -O2
 +CC ?= gcc
-+CFLAGS ?= -Wall -O2
- #CFLAGS += -Wall -pedantic -ansi -O2
++CFLAGS ?=
  
  INSTALL = /usr/bin/install -c
-@@ -15,15 +15,14 @@ htpdate: htpdate.c
- 	$(CC) $(CFLAGS) -o htpdate htpdate.c
+-STRIP = /usr/bin/strip -s
+ 
+ all: htpdate
+ 
+@@ -15,16 +13,11 @@ htpdate: htpdate.c
+ 	$(CC) $(CFLAGS) $(LDFLAGS) $(CPPFLAGS) -o htpdate htpdate.c
  
  install: all
 -	$(STRIP) htpdate
--	mkdir -p $(bindir)
--	$(INSTALL) -m 755 htpdate $(bindir)/htpdate
+ 	mkdir -p $(bindir)
+ 	$(INSTALL) -m 755 htpdate $(bindir)/htpdate
 -	mkdir -p $(mandir)/man8
--	$(INSTALL) -m 644 htpdate.8.gz $(mandir)/man8/htpdate.8.gz
-+	mkdir -p $(DESTDIR)$(bindir)
-+	$(INSTALL) -m 755 htpdate $(DESTDIR)$(bindir)/htpdate
-+	mkdir -p $(DESTDIR)$(mandir)/man8
-+	$(INSTALL) -m 644 htpdate.8.gz $(DESTDIR)$(mandir)/man8/htpdate.8.gz
+-	$(INSTALL) -m 644 htpdate.8 $(mandir)/man8/htpdate.8
+-	gzip -f -9 $(mandir)/man8/htpdate.8
  
  clean:
  	rm -rf htpdate
  
  uninstall:
--	rm -rf $(bindir)/htpdate
+ 	rm -rf $(bindir)/htpdate
 -	rm -rf $(mandir)/man8/htpdate.8.gz
-+	rm -rf $(DESTDIR)$(bindir)/htpdate
-+	rm -rf $(DESTDIR)$(mandir)/man8/htpdate.8.gz
