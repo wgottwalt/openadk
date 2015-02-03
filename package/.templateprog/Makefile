@@ -15,15 +15,15 @@ PKG_URL:=		add project url
 PKG_SITES:=		add download url without package name
 
 # if downloaded package is not ending with .tar.xz use following
-#DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
+#DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,@UPKG@,@PKG@,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,@UPKG@,@PKG@,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 @PKG@-install:
 	$(INSTALL_DIR) $(IDIR_@UPKG@)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/@PKG@ \
 		$(IDIR_@UPKG@)/usr/bin
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
