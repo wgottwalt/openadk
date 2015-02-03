@@ -38,7 +38,6 @@ ifeq ($(ADK_TARGET_UCLINUX),y)
 endif
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 	$(SED) 's/.*\(UCLIBC_HAS_THREADS_NATIVE\).*/\1=y/' ${WRKBUILD}/.config
-	$(SED) 's/.*\(UCLIBC_HAS_THREADS\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_TLS\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(LINUXTHREADS_OLD\).*/# \1 is not set/' ${WRKBUILD}/.config
