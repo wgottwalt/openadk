@@ -80,9 +80,12 @@ endif
 # target tools
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
 
-# use a gcc wrapper for coldfire support
+# use a gcc wrapper for coldfire/arm uclinux support
 ifeq ($(ADK_TARGET_UCLINUX),y)
 ifeq ($(ADK_TARGET_ARCH_M68K),y)
+TARGET_CC:=		adk-uclinux-gcc
+endif
+ifeq ($(ADK_TARGET_ARCH_ARM),y)
 TARGET_CC:=		adk-uclinux-gcc
 endif
 endif
@@ -105,8 +108,10 @@ TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
+ifeq ($(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
 TARGET_CFLAGS+=		-msep-data
 TARGET_CXXFLAGS+=	-msep-data
+endif
 TARGET_LDFLAGS+=	-elf2flt
 endif
 
@@ -193,8 +198,8 @@ endif
 
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
-TARGET_CFLAGS+=		-mthumb
-TARGET_CXXFLAGS+=	-mthumb
+TARGET_CFLAGS+=		-mthumb -Wa,-mimplicit-it=thumb
+TARGET_CXXFLAGS+=	-mthumb -Wa,-mimplicit-it=thumb
 else
 TARGET_CFLAGS+=		-marm
 TARGET_CXXFLAGS+=	-marm

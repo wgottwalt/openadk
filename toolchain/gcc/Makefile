@@ -284,10 +284,18 @@ endif
 		ln -sf libstdc++.so.6.0.$(LIBSTDCXXVER) libstdc++.so.6
 	# cleanup unneeded docs
 	rm -rf $(TOOLCHAIN_DIR)/usr/share
+ifeq ($(ADK_TARGET_ARCH_M68K),y)
 	# create gcc wrapper for uClinux/m68k
 	echo "#!/bin/sh" > $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
 	echo "exec ${GNU_TARGET_NAME}-gcc \"\$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/m68k-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
 	chmod a+x $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+endif
+ifeq ($(ADK_TARGET_ARCH_ARM),y)
+	# create gcc wrapper for uClinux/arm
+	echo "#!/bin/sh" > $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+	echo "exec ${GNU_TARGET_NAME}-gcc \"\$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/arm-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+	chmod a+x $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+endif
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk
