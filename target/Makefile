@@ -127,4 +127,4 @@ clean: $(ADK_TARGET_ARCH)-clean $(ADK_TARGET_ARCH)-imageclean
 %-imageinstall: %-imageprepare
 	$(TRACE) target/$(patsubst %-imageinstall,%,$@)-imageinstall
 	$(MAKE) -C $(patsubst %-imageinstall,%,$@) imageinstall
-	@echo 'Login as user root with password $(ADK_RUNTIME_PASSWORD) via ssh or console.'
+	@echo 'Login as user root with password "$(ADK_RUNTIME_PASSWORD)" via ssh or console.'
