@@ -6,7 +6,7 @@ include Makefile.inc
 include ../rules.mk
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 
-BINUTILS_VERSION:=	git
+BINUTILS_VERSION:=	2.24
 
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:

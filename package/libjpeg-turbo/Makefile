@@ -9,6 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		c132907417ddc40ed552fe53d6b91d5fecbb14a356a60ddc7ea50d6be9666fb9
 PKG_DESCR:=		jpeg image library
 PKG_SECTION:=		libs/image
+PKG_BUILDDEP_IBM_X40:=	yasm-host
+PKG_BUILDDEP_QEMU_X86:=	yasm-host
 PKG_URL:=		http://libjpeg-turbo.virtualgl.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libjpeg-turbo/}
 PKG_OPTS:=		dev

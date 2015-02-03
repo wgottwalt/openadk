@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
-PKG_VERSION:=		2.4.7
-PKG_RELEASE:=		9
-PKG_HASH:=		b66973bef7808f8fb03be64e44d312ea2d13590a68a6a4e6690dbcdd1947459d
+PKG_VERSION:=		2.5.3
+PKG_RELEASE:=		1
+PKG_HASH:=		f4f2922cfec262496e935f81c1d39af66a789f69aa12d1ceee51bcca8934f1f0
 PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		openjdk7-host alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups

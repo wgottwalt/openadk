@@ -15,7 +15,7 @@ PKG_BUILDDEP:=		add packages which need to be compiled
 PKG_URL:=		add project url
 PKG_SITES:=		add download url without package name
 # alternatively use a pre-defined set of mirrors, see mk/mirrors.mk:
-#PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sub/path/}
+#PKG_SITES:=		$(MASTER_SITE_SOURCEFORGE:=sub/path/)
 
 # if more than one binary package is created, add symbol names of all here
 # leave variable empty, when no binary package is created. You can set it
@@ -53,11 +53,11 @@ PKG_SITES:=		add download url without package name
 #PKGCS_WITH_GNUTLS:=	libgnutls
 
 # if downloaded package is not ending with .tar.xz use following
-#DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
+#DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,@UPKG@,@PKG@,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,@UPKG@,@PKG@,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 #CONFIG_STYLE:=		manual
 # use following to add ./configure options
@@ -74,4 +74,4 @@ $(eval $(call PKG_template,@UPKG@,@PKG@,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPE
 		$(IDIR_@UPKG@)/usr/bin
 
 # please remove ALL above comments, before commiting
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk

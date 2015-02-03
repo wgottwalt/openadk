@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
-PKG_VERSION:=		7.39.0
+PKG_VERSION:=		7.40.0
 PKG_RELEASE:=		1
-PKG_HASH:=		a3a7c2b9e7416c728469eb4cb5b61e9161335df4278329e1d9cc3c194e25d795
+PKG_HASH:=		c2e0705a13e53f8f924d1eaeb2ab94f59a9e162007c489b9ab0c96238bddf84b
 PKG_DESCR:=		client-side url transfer tool
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libcurl
@@ -26,7 +26,7 @@ PKGSS_LIBCURL:=		zlib
 PKG_FLAVOURS_CURL:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable ipv6 support
 
-PKG_CHOICES_LIBCURL:=	WITHOUT_SSL WITH_GNUTLS WITH_OPENSSL
+PKG_CHOICES_LIBCURL:=	WITHOUT_SSL WITH_GNUTLS WITH_OPENSSL WITH_CYASSL
 PKGCD_WITHOUT_SSL:=	use no ssl
 PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates libgmp
@@ -34,6 +34,9 @@ PKGCB_WITH_OPENSSL:=	openssl
 PKGCD_WITH_GNUTLS:=	use gnutls for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates libgmp
 PKGCB_WITH_GNUTLS:=	gnutls
+PKGCD_WITH_CYASSL:=	use cyassl for crypto
+PKGCS_WITH_CYASSL:=	cyassl ca-certificates
+PKGCB_WITH_CYASSL:=	cyassl
 
 include ${ADK_TOPDIR}/mk/package.mk
 
@@ -55,10 +58,15 @@ CONFIGURE_ARGS+=	--with-gnutls="${STAGING_TARGET_DIR}/usr" \
 			--without-ssl \
 			--without-axtls
 endif
+ifeq (${ADK_PACKAGE_LIBCURL_WITH_CYASSL},y)
+CONFIGURE_ARGS+=	--with-cyassl="${STAGING_TARGET_DIR}/usr" \
+			--without-ssl \
+			--without-gnutls \
+			--without-axtls
+endif
 
 CONFIGURE_ENV+=		curl_typeof_curl_socklen_t=socklen_t
-CONFIGURE_ARGS+=	--disable-thread \
-			--enable-cookies \
+CONFIGURE_ARGS+=	--enable-cookies \
 			--enable-crypto-auth \
 			--enable-nonblocking \
 			--enable-file \

@@ -1,12 +1,12 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${ADK_TOPDIR}/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		3.3.10
+PKG_VERSION:=		3.3.12
 PKG_RELEASE:=		1
-PKG_HASH:=		e27553981d48d9211a7e5e94f6e78c575205202a181c2345a1c8466ebf1d2219
+PKG_HASH:=		67ab3e92c5d48f3323b897d7c1aa0bb2af6f3a84f5bd9931cda163a7ff32299b
 PKG_DESCR:=		transport layer security library
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib libnettle libgmp
@@ -18,6 +18,7 @@ PKG_LIBNAME:=		libgnutls
 PKG_OPTS:=		dev
 
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
+PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
 
 PKG_SUBPKGS:=		LIBGNUTLS GNUTLS_UTILS LIBGNUTLS_EXTRA LIBGNUTLS_OPENSSL
 PKGSD_GNUTLS_UTILS:=	transport layer security utilities
@@ -31,12 +32,12 @@ PKG_FLAVOURS_LIBGNUTLS:=	WITH_CRYPTODEV
 PKGFD_WITH_CRYPTODEV:=		enable support for cryptodev-linux
 PKGFB_WITH_CRYPTODEV:=		cryptodev-linux
 
-include ${ADK_TOPDIR}/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBGNUTLS,libgnutls,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBGNUTLS},${PKG_OPTS}))
-$(eval $(call PKG_template,GNUTLS_UTILS,gnutls-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_GNUTLS_UTILS},${PKGSD_GNUTLS_UTILS},${PKGSC_GNUTLS_UTILS}))
-$(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBGNUTLS_EXTRA}))
-$(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKGSC_LIBGNUTLS_OPENSSL}))
+$(eval $(call PKG_template,LIBGNUTLS,libgnutls,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKGSC_LIBGNUTLS),$(PKG_OPTS)))
+$(eval $(call PKG_template,GNUTLS_UTILS,gnutls-utils,$(PKG_VERSION)-$(PKG_RELEASE),$(PKGSS_GNUTLS_UTILS),$(PKGSD_GNUTLS_UTILS),$(PKGSC_GNUTLS_UTILS)))
+$(eval $(call PKG_template,LIBGNUTLS_EXTRA,libgnutls-extra,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKGSC_LIBGNUTLS_EXTRA)))
+$(eval $(call PKG_template,LIBGNUTLS_OPENSSL,libgnutls-openssl,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKGSC_LIBGNUTLS_OPENSSL)))
 
 ifneq ($(ADK_PACKAGE_LIBGNUTLS_WITH_CRYPTODEV),)
 CONFIGURE_ARGS+= 	--enable-cryptodev
@@ -49,22 +50,22 @@ CONFIGURE_ARGS+=	--disable-rpath \
 CONFIGURE_ENV+=		ac_cv_prog_AR='$(TARGET_CROSS)ar'
 
 libgnutls-install:
-	${INSTALL_DIR} ${IDIR_LIBGNUTLS}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgnutls.so* ${IDIR_LIBGNUTLS}/usr/lib
+	$(INSTALL_DIR) $(IDIR_LIBGNUTLS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libgnutls.so* $(IDIR_LIBGNUTLS)/usr/lib
 
 libgnutls-extra-install:
-	${INSTALL_DIR} ${IDIR_LIBGNUTLS_EXTRA}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgnutlsxx.so* \
-		${IDIR_LIBGNUTLS_EXTRA}/usr/lib
+	$(INSTALL_DIR) $(IDIR_LIBGNUTLS_EXTRA)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libgnutlsxx.so* \
+		$(IDIR_LIBGNUTLS_EXTRA)/usr/lib
 
 libgnutls-openssl-install:
-	${INSTALL_DIR} ${IDIR_LIBGNUTLS_OPENSSL}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgnutls-openssl.so* \
-		${IDIR_LIBGNUTLS_OPENSSL}/usr/lib
+	$(INSTALL_DIR) $(IDIR_LIBGNUTLS_OPENSSL)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libgnutls-openssl.so* \
+		$(IDIR_LIBGNUTLS_OPENSSL)/usr/lib
 
 gnutls-utils-install:
-	${INSTALL_DIR} ${IDIR_GNUTLS_UTILS}/usr/bin
-	${CP} ${WRKINST}/usr/bin/{{cert,srp,psk}tool,gnutls-{cli,serv}} \
-	    ${IDIR_GNUTLS_UTILS}/usr/bin
+	$(INSTALL_DIR) $(IDIR_GNUTLS_UTILS)/usr/bin
+	$(CP) $(WRKINST)/usr/bin/((cert,srp,psk)tool,gnutls-{cli,serv}) \
+	    $(IDIR_GNUTLS_UTILS)/usr/bin
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk

@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
 PKG_VERSION:=		14.0
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_HASH:=		11746d95cc59361f36ce6ea9d0d36bbd9ec3376e991f5ec1720f8ff740b91192
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
@@ -119,7 +119,6 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-mid \
 			--disable-debug \
 			--enable-alsa \
-			--enable-libvorbisenc \
 			--enable-texturepacker \
 			--enable-udev \
 			--with-ffmpeg=shared
@@ -181,7 +180,6 @@ ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 CONFIGURE_ARGS+=	--disable-x11 \
 			--disable-sdl \
 			--enable-gles \
-			--enable-neon \
 			--enable-codec=imxvpu
 endif
 
