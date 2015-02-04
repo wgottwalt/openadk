@@ -78,7 +78,6 @@ config ADK_TOOLCHAIN_BINUTILS_2_24
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_CRIS
-	depends on !ADK_TARGET_ARCH_M68K
 
 config ADK_TOOLCHAIN_BINUTILS_GIT
 	bool "git"
