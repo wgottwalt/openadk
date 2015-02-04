@@ -547,9 +547,9 @@ case $target {
 		[[ -e "$x" ]] && cp "$fwdir"/*.dtb "$B/"
 		break
 	done
-	mkdir "$B/"overlay
+	mkdir "$B/"overlays
 	for x in "$B/"*-overlay.dtb; do
-		[[ -e "$x" ]] && mv "$B/"*-overlay.dtb "$B/"overlay
+		[[ -e "$x" ]] && mv "$B/"*-overlay.dtb "$B/"overlays
 		break
 	done
 	umount_fs "$B"

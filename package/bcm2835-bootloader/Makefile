@@ -66,8 +66,6 @@ ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_RPI_PROTO),)
 		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
 	printf "dtoverlay=rpi-proto\n" >> \
 		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
-	printf "dtdebug=on\n" >> \
-		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
 endif
 else
 	printf "device_tree=\n" >> \
