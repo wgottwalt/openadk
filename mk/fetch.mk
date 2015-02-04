@@ -64,7 +64,7 @@ $(1):
 	for url in "${PKG_SITES}"; do case $$$$url in \
 	   git://*|*.git) \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
-		git clone $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
+		git clone --quiet $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
 		if [ $$$$(echo $${PKG_VERSION}|wc -c) -eq 41 ]; then \
 			(cd $${PKG_NAME}-$${PKG_VERSION}; \
 			echo "Checking out $${PKG_VERSION}"; \
