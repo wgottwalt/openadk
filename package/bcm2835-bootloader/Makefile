@@ -62,8 +62,6 @@ ifeq ($(ADK_KERNEL_BCM2708_DT),y)
 	printf "disable_commandline_tags=2\n" >> \
 		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
 ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_RPI_PROTO),)
-	printf "dtparam=i2c=on,i2s=on,spi=on\n" >> \
-		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
 	printf "dtoverlay=rpi-proto\n" >> \
 		$(IDIR_BCM2835_BOOTLOADER)/boot/config.txt
 endif
