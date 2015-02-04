@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #-
-# Copyright © 2010-2014
+# Copyright © 2010-2015
 #	Waldemar Brodkorb <wbx@openadk.org>
 #	Thorsten Glaser <tg@mirbsd.org>
 #
@@ -519,9 +519,6 @@ if (( datafssz )); then
 	mkdir -m0755 "$R"/data
 	((keep)) || create_fs "$datapart" ADKDATA ext4
 	((keep)) || tune_fs "$datapart"
-	mount_fs "$datapart" "$D" ext4
-	mkdir -m0755 "$D/mpd" "$D/kodi" 2>/dev/null
-	umount_fs "$D"
 	case $target {
 	(raspberry-pi)
 		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab 
@@ -535,10 +532,6 @@ fi
 case $target {
 (raspberry-pi)
 	mount_fs "$bootpart" "$B" vfat
-	for x in "$R"/boot/.*; do
-		[[ -e "$x" ]] && mv -f "$R"/boot/.* "$B/"
-		break
-	done
 	for x in "$R"/boot/*; do
 		[[ -e "$x" ]] && mv -f "$R"/boot/* "$B/"
 		break
@@ -596,9 +589,6 @@ fi
 
 (( quiet )) || print Finishing up...
 cd "$ADK_TOPDIR"
-sync
 umount_fs "$R"
-sync
-
 rm -rf "$T"
 exit 0
