@@ -118,10 +118,6 @@ POSTCONFIG=		-@\
 			touch .rebuild.dropbear .rebuild.openssh;\
 			rebuild=1;\
 		fi; \
-		if [ "$$(grep ^ADK_RUNTIME_KBD_LAYOUT .config|md5sum)" != "$$(grep ^ADK_RUNTIME_KBD_LAYOUT .config.old|md5sum)" ];then \
-			touch .rebuild.bkeymaps;\
-			rebuild=1;\
-		fi; \
 		if [ "$$(grep ^ADK_TARGET_GPU_MEM .config|md5sum)" != "$$(grep ^ADK_TARGET_GPU_MEM .config.old|md5sum)" ];then \
 			touch .rebuild.bcm2835-bootloader;\
 			rebuild=1;\
