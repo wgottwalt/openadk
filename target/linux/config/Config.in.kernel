@@ -129,52 +129,41 @@ prompt "Kernel Compression"
 depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
 
 config ADK_KERNEL_COMP_XZ
-	prompt "use XZ compression"
-	boolean
+	bool "use XZ compression"
 	select ADK_KERNEL_RD_XZ
 	select ADK_KERNEL_KERNEL_XZ
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_XZ
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 
 config ADK_KERNEL_COMP_LZ4
-	prompt "use LZ4 compression"
-	boolean
+	bool "use LZ4 compression"
 	select ADK_KERNEL_RD_LZ4
 	select ADK_KERNEL_KERNEL_LZ4
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_LZ4
 	depends on ADK_TARGET_ARCH_X86 || ADK_TARGET_ARCH_ARM
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 
 config ADK_KERNEL_COMP_LZMA
-	prompt "use LZMA compression"
-	boolean
+	bool "use LZMA compression"
 	select ADK_KERNEL_RD_LZMA
 	select ADK_KERNEL_KERNEL_LZMA
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_LZMA
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 
 config ADK_KERNEL_COMP_LZO
-	prompt "use LZO compression"
-	boolean
+	bool "use LZO compression"
 	select ADK_KERNEL_RD_LZO
 	select ADK_KERNEL_KERNEL_LZO
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_LZO
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 
 config ADK_KERNEL_COMP_GZIP
-	prompt "use GZIP compression"
-	boolean
+	bool "use GZIP compression"
 	select ADK_KERNEL_RD_GZIP
 	select ADK_KERNEL_KERNEL_GZIP
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
 
 config ADK_KERNEL_COMP_BZIP2
-	prompt "use BZIP2 compression"
-	boolean
+	bool "use BZIP2 compression"
 	select ADK_KERNEL_RD_BZIP2
 	select ADK_KERNEL_KERNEL_BZIP2
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_BZIP2
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
 
 endchoice
 
@@ -211,7 +200,7 @@ config ADK_KERNEL_BCM2708_DT
 
 config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
 	bool "Optimize for size"
-	# does not boot in qemu
+	# does not boot in qemu-microblaze
 	depends on !ADK_TARGET_ARCH_MICROBLAZE
 	default y
 
