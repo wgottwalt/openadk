@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		php
 PKG_VERSION:=		5.6.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		fad244506cc7f10fe56aba8129b3c39a4f9316d9544a4fba932c3f81fc2244b5
 PKG_DESCR:=		php language interpreter
 PKG_SECTION:=		dev/lang
@@ -69,8 +69,6 @@ PKGFS_MOD_SIMPLEXML:=	libxml2
 PKGFD_MOD_ZLIB:=	zlib support
 PKGFB_MOD_ZLIB:=	zlib
 PKGFS_MOD_ZLIB:=	zlib
-
-PKG_HOST_DEPENDS:=	!cygwin
 
 include $(ADK_TOPDIR)/mk/package.mk
 

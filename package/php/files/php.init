@@ -13,10 +13,18 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	/usr/bin/php ${php_flags} &
+	if [ -x /usr/bin/php-cgi ];then
+		/usr/bin/php-cgi
+	else
+		/usr/bin/php-fpm -D
+	fi
 	;;
 stop)
-	for i in $(pgrep -f /usr/bin/php);do kill -9 $i;done
+	if [ -x /usr/bin/php-cgi ];then
+		pkill php-cgi
+	else
+		pkill php-fpm
+	fi
 	;;
 restart)
 	sh $0 stop
