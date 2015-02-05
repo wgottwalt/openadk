@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
 PKG_VERSION:=		1.0.1j
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		1b60ca8789ba6f03e8ef20da2293b8dc131c39d83814e775069f02d26354edf3
 PKG_DESCR:=		secure socket layer libraries
 PKG_SECTION:=		libs/crypto
@@ -64,7 +64,7 @@ CONFIG:=		linux-embedded
 endif
 
 host-configure:
-	(cd $(WRKBUILD); ./config --prefix='$(STAGING_HOST_DIR)/usr')
+	(cd $(WRKBUILD); ./config --prefix='$(STAGING_HOST_DIR)/usr' -fPIC)
 
 host-build:
 	(cd $(WRKBUILD); make)
