@@ -1,11 +1,11 @@
---- mozilla-release.orig/js/src/Makefile.in	2013-12-05 17:07:35.000000000 +0100
-+++ mozilla-release/js/src/Makefile.in	2014-01-02 14:53:44.000000000 +0100
-@@ -103,7 +103,7 @@ ifdef JS_HAS_CTYPES
- VPATH += $(srcdir)/ctypes
+--- mozilla-release.orig/js/src/Makefile.in	2015-01-09 05:38:17.000000000 +0100
++++ mozilla-release/js/src/Makefile.in	2015-01-29 17:03:28.000000000 +0100
+@@ -21,7 +21,7 @@ NO_EXPAND_LIBS = 1
  
+ ifdef JS_HAS_CTYPES
  ifdef MOZ_NATIVE_FFI
 -LOCAL_INCLUDES = $(MOZ_FFI_CFLAGS)
-+LOCAL_INCLUDES =
- else
- LOCAL_INCLUDES = -Ictypes/libffi/include
++LOCAL_INCLUDES = 
  endif
+ 
+ # Windows needs this to be linked with a static library.

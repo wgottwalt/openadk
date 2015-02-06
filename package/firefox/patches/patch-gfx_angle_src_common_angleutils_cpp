@@ -1,0 +1,10 @@
+--- mozilla-release.orig/gfx/angle/src/common/angleutils.cpp	2015-01-09 05:38:28.000000000 +0100
++++ mozilla-release/gfx/angle/src/common/angleutils.cpp	2015-02-03 04:42:10.000000000 +0100
+@@ -7,6 +7,7 @@
+ #include "common/angleutils.h"
+ 
+ #include <vector>
++#include <cstdio>
+ 
+ std::string FormatString(const char *fmt, va_list vararg)
+ {
