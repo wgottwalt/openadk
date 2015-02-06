@@ -17,9 +17,11 @@ config ADK_RUNTIME_SSH_PUBKEY
 
 config ADK_RUNTIME_PASSWORD
 	string "root password for the embedded system"
-	default "linux123"
+	default "$1$bJoW4DmS$7fUVat.9iFSAePzA4j4Jm."
 	help
 	  Predefine the root password enabled in the built image.
+	  Use ./host_x86_64-linux-gnu/usr/bin/mkcrypt to generate the hash.
+	  Default password is linux123.
 
 config ADK_RUNTIME_START_SERVICES
 	bool "start services by default"
