@@ -63,60 +63,51 @@ config ADK_MAKE_JOBS
 	default 1 if ! ADK_MAKE_PARALLEL
 
 config ADK_MAKE_PARALLEL
-	prompt "Enable parallel building of packages"
-	boolean
+	bool "Enable parallel building of packages"
 	default y
 
 config ADK_MAKE_JOBS
-	prompt "How many jobs to use"
-	int
+	int "How many jobs to use"
 	default 4
 	depends on ADK_MAKE_PARALLEL
 	help
 	  The number specified here will be passed to make as N in '-jN'
 
 config ADK_TARGET_IP
-	prompt "Set target ip address for make check"
-	string
+	string "Set target ip address for make check"
 	default "127.0.0.1"
 	help
+	  IP address of target, when running make check.
 
 config ADK_TARGET_PORT
-	prompt "Set target port for make check"
-	string
+	string "Set target port for make check"
 	default "2222" if ADK_TARGET_QEMU
 	default "22"
 	help
+	  Port to use for SSH when running make check.
 
 choice 
 prompt "Hostsystem (do not change!)"
 config ADK_HOST_LINUX
-	prompt "Linux"
-	boolean
+	bool "Linux"
 
 config ADK_HOST_FREEBSD
-	prompt "FreeBSD"
-	boolean
+	bool "FreeBSD"
 
 config ADK_HOST_MIRBSD
-	prompt "MirBSD"
-	boolean
+	bool "MirBSD"
 
 config ADK_HOST_OPENBSD
-	prompt "OpenBSD"
-	boolean
+	bool "OpenBSD"
 
 config ADK_HOST_NETBSD
-	prompt "NetBSD"
-	boolean
+	bool "NetBSD"
 
 config ADK_HOST_DARWIN
-	prompt "Darwin"
-	boolean
+	bool "Darwin"
 
 config ADK_HOST_CYGWIN
-	prompt "Cygwin"
-	boolean
+	bool "Cygwin"
 
 endchoice
 endmenu

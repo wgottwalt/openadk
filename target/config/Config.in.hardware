@@ -3,94 +3,97 @@
 
 # hardware features, do not use for qemu
 config ADK_TARGET_WITH_CPU_FREQ
-	boolean
+	bool
 
 config ADK_TARGET_WITH_USB
-	boolean
+	bool
 
 config ADK_TARGET_WITH_I2C
-	boolean
+	bool
 
 config ADK_TARGET_WITH_SPI
-	boolean
+	bool
 
 config ADK_TARGET_WITH_PCI
-	boolean
+	bool
 
 config ADK_TARGET_WITH_SSB
-	boolean
+	bool
 
 config ADK_TARGET_WITH_SDIO
-	boolean
+	bool
 
 config ADK_TARGET_WITH_AHB
-	boolean
+	bool
 
 config ADK_TARGET_WITH_MINIPCI
-	boolean
+	bool
 
 config ADK_TARGET_WITH_ACPI
-	boolean
+	bool
 
 config ADK_TARGET_WITH_VGA
-	boolean
+	bool
+
+config ADK_TARGET_WITH_SERIAL
+	bool
 
 config ADK_TARGET_WITH_NAND
-	boolean
+	bool
 
 config ADK_TARGET_WITH_SD
-	boolean
+	bool
 
 config ADK_TARGET_WITH_MTD
-	boolean
+	bool
 
 config ADK_TARGET_WITH_GEODE_CRYPTO
-	boolean
+	bool
 
 config ADK_TARGET_WITH_PATA
-	boolean
+	bool
 
 config ADK_TARGET_WITH_SATA
-	boolean
+	bool
 
 config ADK_TARGET_WITH_SCSI
-	boolean
+	bool
 
 config ADK_TARGET_WITH_INPUT
-	boolean
+	bool
 
 config ADK_TARGET_WITH_SOUND
-	boolean
+	bool
 
 config ADK_TARGET_WITH_TOUCHSCREEN
-	boolean
+	bool
 
 config ADK_TARGET_WITH_LEDS
-	boolean
+	bool
 
 config ADK_TARGET_WITH_PP
-	boolean
+	bool
 
 config ADK_TARGET_WITH_CARDBUS
-	boolean
+	bool
 
 config ADK_TARGET_WITH_PCMCIA
-	boolean
+	bool
 
 config ADK_TARGET_WITH_RTC
-	boolean
+	bool
 
 config ADK_TARGET_WITH_WATCHDOG
-	boolean
+	bool
 
 config ADK_TARGET_WITH_WIFI
-	boolean
+	bool
 
 config ADK_TARGET_WITH_DSL
-	boolean
+	bool
 
 config ADK_TARGET_WITH_USB_BOOT
-	boolean
+	bool
 
 config ADK_TARGET_WITH_SMP
-	boolean
+	bool

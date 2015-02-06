@@ -11,18 +11,19 @@ config ADK_QEMU_ARGS
 	default "-nographic"
 
 config ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
-	boolean
+	bool
+	select ADK_TARGET_WITH_VGA
 	depends on ADK_TARGET_QEMU_ARM_MODEL_SPITZ || ADK_TARGET_QEMU_ARM_MODEL_TERRIER
 
 choice 
-prompt "Use a Bootloader"
+prompt "Bootloader"
 depends on ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86
 
 config ADK_TARGET_QEMU_WITHOUT_BOOTLOADER
-	boolean "do not use bootloader"
+	bool "do not use bootloader"
 
 config ADK_TARGET_QEMU_WITH_BOOTLOADER
-	boolean "use bootloader"
+	bool "use bootloader"
 	select ADK_PACKAGE_GRUB if ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86
 
 endchoice
@@ -35,10 +36,10 @@ default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_SQUASHFS
 default ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_ROOTFS_JFFS2
 
 config ADK_TARGET_QEMU_WITHOUT_BLOCK
-	boolean "disabled"
+	bool "disabled"
 
 config ADK_TARGET_QEMU_WITH_BLOCK
-	boolean "enabled"
+	bool "enabled"
 	select ADK_KERNEL_SCSI_SYM53C8XX_2 if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
 	select ADK_KERNEL_MTD_M25P80 if ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605 || ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 	select ADK_KERNEL_ATA_PIIX if ADK_TARGET_SYSTEM_QEMU_MIPS || ADK_TARGET_SYSTEM_QEMU_MIPS64 || ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
@@ -56,10 +57,11 @@ prompt "Qemu Emulation with graphical output"
 depends on ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_SH
 
 config ADK_TARGET_QEMU_WITHOUT_GRAPHIC
-	boolean "disabled"
+	bool "disabled"
 
 config ADK_TARGET_QEMU_WITH_GRAPHIC
-	boolean "enabled"
+	bool "enabled"
+	select ADK_TARGET_WITH_VGA
 	select ADK_KERNEL_VT
 	select ADK_KERNEL_VT_CONSOLE
 	select ADK_KERNEL_FONTS
@@ -88,10 +90,10 @@ depends on ADK_TARGET_SYSTEM_QEMU_SPARC64 || \
 default ADK_TARGET_QEMU_WITH_VIRTIO if ADK_TARGET_SYSTEM_QEMU_AARCH64
 
 config ADK_TARGET_QEMU_WITHOUT_VIRTIO
-	boolean "disabled"
+	bool "disabled"
 
 config ADK_TARGET_QEMU_WITH_VIRTIO
-	boolean "enabled"
+	bool "enabled"
 	select ADK_KERNEL_VIRTIO
 	select ADK_KERNEL_VIRTIO_PCI
 	select ADK_KERNEL_VIRTIO_NET
@@ -105,10 +107,10 @@ prompt "Qemu Emulation with audio support"
 depends on ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86
 
 config ADK_TARGET_QEMU_WITHOUT_AUDIO
-	boolean "disabled"
+	bool "disabled"
 
 config ADK_TARGET_QEMU_WITH_AUDIO
-	boolean "enabled"
+	bool "enabled"
 
 endchoice
 endmenu

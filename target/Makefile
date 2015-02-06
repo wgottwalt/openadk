@@ -36,6 +36,14 @@ config-prepare: $(ADK_TOPDIR)/.config
 		echo "no miniconfig found for target system"; \
 		exit 1; \
 	fi
+ifneq ($(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE),)
+	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE),$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)"#' \
+		$(BUILD_DIR)/.kernelconfig.board
+endif
+ifneq ($(ADK_RUNTIME_CONSOLE_VGA_DEVICE),)
+	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE)"#' \
+		$(BUILD_DIR)/.kernelconfig.board
+endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_M68K),y)
 	@$(SED) 's#^\(CONFIG_.*BOOTPARAM_STRING="\)\(.*\)"#\1\2 ro $(FS_CMDLINE)"#' \
 		$(BUILD_DIR)/.kernelconfig.board
