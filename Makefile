@@ -114,9 +114,6 @@ image: .prereq_done
 targethelp: .prereq_done
 	@${GMAKE_INV} targethelp
 
-switch: .prereq_done
-	@${GMAKE_INV} switch
-
 kernelconfig: .prereq_done
 	@${GMAKE_INV} kernelconfig
 
