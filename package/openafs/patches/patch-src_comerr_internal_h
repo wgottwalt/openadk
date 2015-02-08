@@ -1,8 +1,0 @@
---- openafs-1.6.5.orig/src/comerr/internal.h	2013-07-18 00:10:42.000000000 +0200
-+++ openafs-1.6.5/src/comerr/internal.h	2013-09-09 05:30:55.256494342 +0200
-@@ -9,3 +9,5 @@
- 
- extern void yyerror(const char *s);
- extern char *xmalloc(unsigned int size);
-+extern char *lcstring(char *d, char *s, int n);
-+
