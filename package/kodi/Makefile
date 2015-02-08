@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		14.0
-PKG_RELEASE:=		4
-PKG_HASH:=		11746d95cc59361f36ce6ea9d0d36bbd9ec3376e991f5ec1720f8ff740b91192
+PKG_VERSION:=		14.1
+PKG_RELEASE:=		1
+PKG_HASH:=		a38059e292cf8523918834e49fcc2d688525ceb7951ddf7f5ee535f4147255d6
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
@@ -31,7 +31,7 @@ PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		http://mirrors.kodi.tv/releases/source/
 
 DISTFILES:=		$(PKG_VERSION)-Helix.tar.gz
-WRKDIST=		$(WRKDIR)/xbmc-14.0-Helix
+WRKDIST=		$(WRKDIR)/xbmc-14.1-Helix
 
 PKG_CHOICES_KODI:=	WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITH_LIBRESSL:=	with libressl
@@ -75,9 +75,11 @@ PKG_LIBC_DEPENDS:=	glibc
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
+PKG_DEPENDS_RASPBERRY_PI2:=	bcm2835-vc
+PKG_BUILDDEP_RASPBERRY_PI2:=	bcm2835-vc
 PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
 PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
-PKG_SYSTEM_DEPENDS:=	raspberry-pi solidrun-imx6
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 solidrun-imx6
 
 DIFF_IGNOREFILES:=	configure missing depcomp install-sh INSTALL \
 			aclocal.m4 config.h.in
@@ -93,6 +95,12 @@ TARGET_CPPFLAGS+=	-I. -I./utils \
 			-DTIXML_USE_STL=1 -DLINUX
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
+			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vcos/pthreads \
+			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vmcs_host/linux
+TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/opt/vc/lib
+endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
 			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vcos/pthreads \
 			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vmcs_host/linux
@@ -170,6 +178,13 @@ CONFIGURE_ARGS+=	--disable-webserver
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+CONFIGURE_ARGS+=	--with-platform=raspberry-pi \
+			--enable-player=omxplayer \
+			--enable-gles \
+			--disable-sdl \
+			--disable-x11
+endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
 CONFIGURE_ARGS+=	--with-platform=raspberry-pi \
 			--enable-player=omxplayer \
 			--enable-gles \

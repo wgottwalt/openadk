@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		cmake-host
 PKG_URL:=		https://github.com/raspberrypi/userland
 PKG_SITES:=		https://github.com/raspberrypi/userland.git
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2
 
 include ${ADK_TOPDIR}/mk/package.mk
 

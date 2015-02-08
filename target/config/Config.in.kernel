@@ -2,22 +2,22 @@
 # material, please see the LICENCE file in the top-level directory.
 
 config ADK_TARGET_KERNEL_VMLINUZ
-	boolean
+	bool
 
 config ADK_TARGET_KERNEL_ZIMAGE
-	boolean
+	bool
 
 config ADK_TARGET_KERNEL_LINUXBIN
-	boolean
+	bool
 
 config ADK_TARGET_KERNEL_IMAGE
-	boolean
+	bool
 
 config ADK_TARGET_KERNEL_UIMAGE
-	boolean
+	bool
 
 config ADK_TARGET_KERNEL_BZIMAGE
-	boolean
+	bool
 
 config ADK_TARGET_KERNEL
 	string
@@ -59,6 +59,7 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "ibm-x40" if ADK_TARGET_SYSTEM_IBM_X40
 	default "solidrun-imx6" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default "raspberry-pi" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default "raspberry-pi2" if ADK_TARGET_SYSTEM_RASPBERRY_PI2
 	default "sharp-zaurus" if ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	default "linksys-nslu2" if ADK_TARGET_SYSTEM_LINKSYS_NSLU2
 	default "lemote-yeelong" if ADK_TARGET_SYSTEM_LEMOTE_YEELONG

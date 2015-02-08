@@ -17,7 +17,9 @@ PKG_OPTS:=		dev
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
-PKG_SYSTEM_DEPENDS:=    raspberry-pi solidrun-imx6
+PKG_DEPENDS_RASPBERRY_PI2:=	bcm2835-vc
+PKG_BUILDDEP_RASPBERRY_PI2:=	bcm2835-vc
+PKG_SYSTEM_DEPENDS:=    raspberry-pi raspberry-pi2 solidrun-imx6
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -28,6 +30,11 @@ ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 CONFIGURE_ARGS+=	--enable-imx6
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+CONFIGURE_ARGS+=	--enable-rpi \
+			--with-rpi-include-path=$(STAGING_TARGET_DIR)/opt/vc/include \
+			--with-rpi-lib-path=$(STAGING_TARGET_DIR)/opt/vc/lib
+endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
 CONFIGURE_ARGS+=	--enable-rpi \
 			--with-rpi-include-path=$(STAGING_TARGET_DIR)/opt/vc/include \
 			--with-rpi-lib-path=$(STAGING_TARGET_DIR)/opt/vc/lib

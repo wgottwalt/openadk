@@ -34,7 +34,7 @@ $(eval $(call PKG_template,LIBXML2_PYTHON,libxml2-python,${PKG_VERSION}-${PKG_RE
 include $(ADK_TOPDIR)/mk/python.mk
 
 HOST_STYLE:=		auto
-HOST_CONFIGURE_ARGS+=	--with-python \
+HOST_CONFIGURE_ARGS+=	--with-python='$(STAGING_HOST_DIR)/usr' \
 			--without-iconv \
 			--without-lzma \
 			--without-zlib

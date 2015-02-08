@@ -127,6 +127,7 @@ config ADK_KERNEL_CPU_LITTLE_ENDIAN
 choice
 prompt "Kernel Compression"
 depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+default ADK_KERNEL_COMP_GZIP if ADK_TARGET_BOARD_BCM28XX
 
 config ADK_KERNEL_COMP_XZ
 	bool "use XZ compression"
@@ -190,13 +191,16 @@ config ADK_KERNEL_HIGHMEM
 
 config ADK_KERNEL_PREEMPT
 	bool "Enable preemptive kernel"
-	default n
 
 config ADK_KERNEL_BCM2708_DT
 	bool "Enable Devicetree support"
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
 	depends on ADK_KERNEL_VERSION_3_18
-	default n
+
+config ADK_KERNEL_BCM2709_DT
+	bool "Enable Devicetree support"
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI2
+	depends on ADK_KERNEL_VERSION_3_18
 
 config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
 	bool "Optimize for size"

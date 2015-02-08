@@ -145,7 +145,7 @@ config ADK_KERNEL_VFAT_FS
 	tristate
 	select ADK_KERNEL_NLS_CODEPAGE_850
 	select ADK_KERNEL_NLS_ISO8859_1
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 	help
 	  This option provides support for normal Windows file systems with

@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		gdb
-PKG_VERSION:=		7.8
+PKG_VERSION:=		7.8.2
 PKG_RELEASE:=		1
-PKG_HASH:=		49c4abe174f79f54e1f9e75210ffb590d9b497d5b5200b5398c0e073a4ecb875
+PKG_HASH:=		605954d5747d5f08ea4b7f48e958d1ebbf39265e18f7f36738deeabb83744485
 PKG_SITES:=		${MASTER_SITE_GNU:=gdb/}

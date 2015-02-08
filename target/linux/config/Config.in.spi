@@ -33,14 +33,14 @@ config ADK_KERNEL_SPI_PXA2XX
 	select ADK_KERNEL_SPI
 
 config ADK_KERNEL_SPI_BCM2708
-	tristate "SPI driver for Raspberry PI"
+	tristate "SPI driver for BCM2835 boards"
 	select ADK_KERNEL_SPI
 	select ADK_KERNEL_SPI_MASTER
 	select ADK_KERNEL_SPI_BITBANG
 	select ADK_KERNEL_REGMAP_SPI
 	select ADK_KERNEL_BCM2708_SPIDEV
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_BOARD_BCM28XX
+	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 
 config ADK_KERNEL_SPI_IMX

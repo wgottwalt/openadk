@@ -2,26 +2,24 @@ menu "I2C driver support"
 depends on ADK_TARGET_WITH_I2C
 
 config ADK_KERNEL_I2C
- 	boolean
+ 	bool
 
 config ADK_KERNEL_I2C_CHARDEV
  	tristate
 
 config ADK_KERNEL_I2C_BCM2708
-	prompt "I2C driver for Raspberry PI"
-	tristate
+	tristate "I2C driver for BCM2835 boards"
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_REGMAP_I2C
 	select ADK_KERNEL_I2C_CHARDEV
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_BOARD_BCM28XX
+	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 	help
-	  I2C driver for Raspberry PI.
+	  I2C driver for BCM2835 boards.
 
 config ADK_KERNEL_I2C_IMX
-	prompt "I2C driver for Solidrun IMX6"
-	tristate
+	tristate "I2C driver for IMX6 boards"
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_REGMAP_I2C
 	select ADK_KERNEL_I2C_CHARDEV
@@ -29,11 +27,10 @@ config ADK_KERNEL_I2C_IMX
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 	help
-	  I2C driver for Solidrun IMX6.
+	  I2C driver for IMX6 boards.
 	
 config ADK_KERNEL_SCX200_ACB
-	prompt "I2C driver for Geode"
-	tristate
+	tristate "I2C driver for Geode"
 	depends on ADK_CPU_GEODE
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_I2C_CHARDEV

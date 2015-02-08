@@ -12,7 +12,7 @@ PKG_HASH:=		ddc71b86f71e7e5104a89f88a68bea20122b6ea9f8c535219d180bf89502a69d
 PKG_URL:=		http://wiringpi.com/
 PKG_SITES:=		git://git.drogon.net/wiringPi
 
-PKG_SYSTEM_DEPENDS:=    raspberry-pi
+PKG_SYSTEM_DEPENDS:=    raspberry-pi raspberry-pi2
 
 include $(ADK_TOPDIR)/mk/package.mk
 

@@ -1,21 +1,21 @@
 config ADK_KERNEL_MTRR
-	boolean
+	bool
 	default y if ADK_TARGET_CPU_WITH_MTRR
 	default n
 	
 # hyper threading
 config ADK_KERNEL_PM_SLEEP_SMP
-	boolean
+	bool
 	default y if ADK_TARGET_CPU_WITH_HT
 	default n
 
 config ADK_KERNEL_X86_HT
-	boolean
+	bool
 	default y if ADK_TARGET_CPU_WITH_HT
 	default n
 
 config ADK_KERNEL_USE_GENERIC_SMP_HELPERS
-	boolean
+	bool
 	default y if ADK_TARGET_CPU_WITH_HT
 	default n
 
@@ -23,32 +23,25 @@ menu "CPU frequency support"
 depends on ADK_TARGET_WITH_CPU_FREQ
 
 config ADK_KERNEL_CPU_FREQ
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_CPU_FREQ_GOV_PERFORMANCE
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_CPU_FREQ_GOV_POWERSAVE
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_CPU_FREQ_GOV_USERSPACE
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_CPU_FREQ_GOV_ONDEMAND
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_CPU_FREQ_GOV_CONSERVATIVE
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_ARM_IMX6_CPUFREQ
-	prompt "CPU frequency support for Solidrun IMX6"
-	boolean
+	bool "CPU frequency support for IMX6 boards"
 	select ADK_KERNEL_CPU_FREQ
 	select ADK_KERNEL_REGULATOR
 	select ADK_KERNEL_REGULATOR_FIXED_VOLTAGE
@@ -59,11 +52,10 @@ config ADK_KERNEL_ARM_IMX6_CPUFREQ
 	default n
 
 config ADK_KERNEL_ARM_BCM2835_CPUFREQ
-	prompt "CPU frequency support for raspberry-pi"
-	boolean
+	bool "CPU frequency support for BCM2835 boards"
 	select ADK_KERNEL_CPU_FREQ
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_BOARD_BCM28XX
+	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 
 choice
@@ -71,23 +63,23 @@ prompt "Governor"
 depends on ADK_KERNEL_ARM_BCM2835_CPUFREQ || ADK_KERNEL_ARM_IMX6_CPUFREQ
 
 config ADK_KERNEL_CPU_FREQ_DEFAULT_GOV_ONDEMAND
-	boolean "ondemand"
+	bool "ondemand"
 	select ADK_KERNEL_CPU_FREQ_GOV_ONDEMAND
 
 config ADK_KERNEL_CPU_FREQ_DEFAULT_GOV_PERFORMANCE
-	boolean "performance"
+	bool "performance"
 	select ADK_KERNEL_CPU_FREQ_GOV_PERFORMANCE
 
 config ADK_KERNEL_CPU_FREQ_DEFAULT_GOV_POWERSAVE
-	boolean "powersave"
+	bool "powersave"
 	select ADK_KERNEL_CPU_FREQ_GOV_POWERSAVE
 
 config ADK_KERNEL_CPU_FREQ_DEFAULT_GOV_CONSERVATIVE
-	boolean "conservative"
+	bool "conservative"
 	select ADK_KERNEL_CPU_FREQ_GOV_CONSERVATIVE
 
 config ADK_KERNEL_CPU_FREQ_DEFAULT_GOV_USERSPACE
-	boolean "userspace"
+	bool "userspace"
 	select ADK_KERNEL_CPU_FREQ_GOV_USERSPACE
 	
 endchoice

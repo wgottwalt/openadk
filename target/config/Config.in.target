@@ -34,6 +34,8 @@ config ADK_TARGET_CFLAGS
 	default "-march=armv6 -mtune=arm1176jzf-s -mfloat-abi=soft" if ADK_CPU_ARM1176JZF_S && ADK_soft_float
 	default "-march=armv6 -mtune=arm1176jzf-s -mfpu=vfp -mfloat-abi=hard" if ADK_CPU_ARM1176JZF_S && ADK_hard_float
 	default "-mcpu=cortex-m3 -mfloat-abi=soft" if ADK_CPU_CORTEX_M3 && ADK_soft_float
+	default "-mcpu=cortex-a7 -mfloat-abi=soft" if ADK_CPU_CORTEX_A7 && ADK_soft_float
+	default "-mcpu=cortex-a7 -mfpu=neon -mfloat-abi=hard" if ADK_CPU_CORTEX_A7 && ADK_hard_float
 	default "-mcpu=cortex-a9 -mfloat-abi=soft" if ADK_CPU_CORTEX_A9 && ADK_soft_float
 	default "-mcpu=cortex-a9 -mfpu=neon -mfloat-abi=hard" if ADK_CPU_CORTEX_A9 && ADK_hard_float
 	default "-march=armv5te" if ADK_CPU_ARMV5TE
@@ -271,7 +273,7 @@ endchoice
 
 choice
 prompt "GPU memory size"
-depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+depends on ADK_TARGET_SYSTEM_RASPBERRY_PI || ADK_TARGET_SYSTEM_RASPBERRY_PI2
 default ADK_TARGET_GPU_MEM_128 if ADK_PACKAGE_KODI
 
 config ADK_TARGET_GPU_MEM_16
@@ -306,5 +308,5 @@ config ADK_TARGET_GPU_MEM
 	default 64 if ADK_TARGET_GPU_MEM_64
 	default 128 if ADK_TARGET_GPU_MEM_128
 	default 256 if ADK_TARGET_GPU_MEM_256
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI || ADK_TARGET_SYSTEM_RASPBERRY_PI2
 

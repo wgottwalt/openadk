@@ -1,15 +1,15 @@
 config ADK_KERNEL_DMADEVICES
-	boolean
+	bool
 
 config ADK_KERNEL_DMA_BCM2708
-        boolean
+        bool
         select ADK_KERNEL_DMADEVICES
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_BOARD_BCM28XX
+	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 
 config ADK_KERNEL_IMX_SDMA
-	boolean
+	bool
 	select ADK_KERNEL_DMADEVICES
 	select ADK_KERNEL_FW_LOADER
 	select ADK_KERNEL_FIRMWARE_IN_KERNEL
@@ -19,7 +19,7 @@ config ADK_KERNEL_IMX_SDMA
 	default n
 
 config ADK_KERNEL_CMA
-	boolean
+	bool
 
 config ADK_KERNEL_CMA_SIZE_MBYTES
 	int
@@ -27,4 +27,4 @@ config ADK_KERNEL_CMA_SIZE_MBYTES
 
 config ADK_KERNEL_DMA_CMA
 	select ADK_KERNEL_CMA
-	boolean
+	bool

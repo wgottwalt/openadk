@@ -22,7 +22,6 @@ config ADK_KERNEL_EXTRA_FIRMWARE
 
 config ADK_KERNEL_FW_LOADER_USER_HELPER
 	bool
-	default n
 
 config ADK_KERNEL_KEYS
 	bool

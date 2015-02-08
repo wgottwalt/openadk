@@ -1,0 +1,13 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+config ADK_TARGET_BOARD_BCM28XX
+	bool
+
+config ADK_TARGET_BOARD_ATH79
+	bool
+
+config ADK_TARGET_BOARD
+        string
+        default "bcm28xx" if ADK_TARGET_BOARD_BCM28XX
+        default "ath79" if ADK_TARGET_BOARD_ATH79

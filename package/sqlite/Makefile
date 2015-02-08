@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		sqlite
 PKG_VERSION:=		3.8.8.1
 PKG_RELEASE:=		1
-PKG_HASH:=		98c33abe4106e508e73fda648b2657ac9e969fe24695f543dcde68cc71f3091b
+PKG_HASH:=		2721361eb4a71d5f727dfa466bd910dadd5dbeb4d2d57b8b34205f7ce7e5b7f9
 PKG_DESCR:=		embeddable sql database cli
 PKG_SECTION:=		sys/misc
 PKG_BUILDDEP:=		ncurses readline

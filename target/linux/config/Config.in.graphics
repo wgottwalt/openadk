@@ -289,16 +289,16 @@ config ADK_KERNEL_FB_SM7XX
 	 Framebuffer support for Lemote Yeelong.
 
 config ADK_KERNEL_FB_BCM2708
-	prompt "Framebuffer support for Raspberry PI"
+	prompt "Framebuffer support for BCM2835 boards"
 	boolean
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FONT_8x16
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default y if ADK_TARGET_BOARD_BCM28XX
  	default n
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_BOARD_BCM28XX
  	help
-	 Framebuffer support for Raspberry PI.
+	 Framebuffer support for BCM2835 boards.
 
 config ADK_HARDWARE_GRAPHICS_INTEL_I915
 	prompt "Support for Intel graphic cards (AGP/DRM/KMS)"

@@ -122,6 +122,9 @@ config ADK_CPU_ARM1176JZF_S
 config ADK_CPU_CORTEX_M3
 	boolean
 
+config ADK_CPU_CORTEX_A7
+	boolean
+
 config ADK_CPU_CORTEX_A9
 	boolean
 

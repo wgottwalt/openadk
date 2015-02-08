@@ -80,8 +80,8 @@ config ADK_KERNEL_USB_NET_SMSC95XX
 	tristate "SMSC95XX USB ethernet driver"
 	select ADK_KERNEL_USB_NET_DRIVERS
 	select ADK_KERNEL_USB_USBNET
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_BOARD_BCM28XX
+	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 	help
 	  USB SMSC95XX ethernet driver

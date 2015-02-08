@@ -29,6 +29,14 @@ config ADK_TOOLCHAIN_GCC_4_8_0_ARC
 	bool "4.8.0-arc"
 	depends on ADK_TARGET_ARCH_ARC
 
+config ADK_TOOLCHAIN_GCC_4_9_2
+	bool "4.9.2"
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_CRIS
+	depends on !ADK_TARGET_ARCH_C6X
+
 config ADK_TOOLCHAIN_GCC_4_8_4
 	bool "4.8.4"
 	depends on !ADK_TARGET_ARCH_BFIN
@@ -37,14 +45,6 @@ config ADK_TOOLCHAIN_GCC_4_8_4
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_CRIS
 	depends on !ADK_TARGET_ARCH_TILE
-	depends on !ADK_TARGET_ARCH_C6X
-
-config ADK_TOOLCHAIN_GCC_4_9_2
-	bool "4.9.2"
-	depends on !ADK_TARGET_ARCH_BFIN
-	depends on !ADK_TARGET_ARCH_ARC
-	depends on !ADK_TARGET_ARCH_AVR32
-	depends on !ADK_TARGET_ARCH_CRIS
 	depends on !ADK_TARGET_ARCH_C6X
 
 config ADK_TOOLCHAIN_GCC_GIT
@@ -71,6 +71,13 @@ config ADK_TOOLCHAIN_BINUTILS_2_22
 config ADK_TOOLCHAIN_BINUTILS_2_23_ARC
 	bool "2.23-arc"
 	depends on ADK_TARGET_ARCH_ARC
+
+config ADK_TOOLCHAIN_BINUTILS_2_25
+	bool "2.25"
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_CRIS
 
 config ADK_TOOLCHAIN_BINUTILS_2_24
 	bool "2.24"

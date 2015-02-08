@@ -1,27 +1,27 @@
 config ADK_KERNEL_RESET_GPIO
-	boolean
+	bool
 
 config ADK_KERNEL_GPIOLIB
-	boolean
+	bool
 
 config ADK_KERNEL_GPIO_SYSFS
-	boolean
+	bool
 
 config ADK_KERNEL_GPIO_GENERIC
-	boolean
+	bool
 
 config ADK_KERNEL_BCM2708_GPIO
-	boolean
+	bool
 	select ADK_KERNEL_GPIOLIB
 	select ADK_KERNEL_GPIO_SYSFS
 	select ADK_KERNEL_GPIO_GENERIC
 	select ADK_KERNEL_RESET_CONTROLLER
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_BOARD_BCM28XX
+	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 
 config ADK_KERNEL_GPIO_MXC
-	boolean
+	bool
 	select ADK_KERNEL_GPIOLIB
 	select ADK_KERNEL_GPIO_SYSFS
 	select ADK_KERNEL_GPIO_GENERIC

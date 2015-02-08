@@ -16,22 +16,22 @@ config ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
 menu "Watchdog driver support"
 
 config ADK_KERNEL_BCM2708_WDT
-	bool "BCM2708 Hardware Watchdog"
+	bool "Hardware Watchdog for BCM2835 boards"
 	select ADK_KERNEL_WATCHDOG
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_BOARD_BCM28XX
+	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 	help
-	  Watchdog driver for Raspberry Pi.
+	  Watchdog driver for BCM2835 boards.
 
 config ADK_KERNEL_IMX2_WDT
-	bool "IMX6 Hardware Watchdog"
+	bool "Hardware Watchdog for IMX6 boards"
 	select ADK_KERNEL_WATCHDOG
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 	help
-	  Watchdog driver for Cubox-i and Hummingboard.
+	  Watchdog driver for IMX6 boards.
 
 config ADK_KERNEL_SCx200_WDT
 	bool "Natsemi Hardware Watchdog" 
@@ -41,7 +41,7 @@ config ADK_KERNEL_SCx200_WDT
 	default y if ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default n
 	help
-	  Natsemi Watchdog (scx200)
+	  Natsemi Watchdog (scx200).
 
 config ADK_KERNEL_AT91SAM9X_WATCHDOG
 	bool "AT91SAM9X Hardware Watchdog" 

@@ -20,6 +20,7 @@ menu "Target configuration"
 
 source "target/config/Config.in.cpu"
 source "target/config/Config.in.hardware"
+source "target/config/Config.in.boards"
 source "target/config/Config.in.kernel"
 source "target/config/Config.in.arch"
 source "target/config/Config.in.system"

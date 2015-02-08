@@ -27,6 +27,7 @@ endif
 # Strip off the annoying quoting
 ADK_TARGET_ARCH:=			$(strip $(subst ",, $(ADK_TARGET_ARCH)))
 ADK_TARGET_SYSTEM:=			$(strip $(subst ",, $(ADK_TARGET_SYSTEM)))
+ADK_TARGET_BOARD:=			$(strip $(subst ",, $(ADK_TARGET_BOARD)))
 ADK_TARGET_CPU_ARCH:=			$(strip $(subst ",, $(ADK_TARGET_CPU_ARCH)))
 ADK_TARGET_KERNEL:=			$(strip $(subst ",, $(ADK_TARGET_KERNEL)))
 ADK_TARGET_LIBC:=			$(strip $(subst ",, $(ADK_TARGET_LIBC)))

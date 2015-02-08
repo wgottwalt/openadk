@@ -78,7 +78,7 @@ config ADK_KERNEL_USB_EHCI_HCD
 	select ADK_KERNEL_USB_EHCI_TT_NEWSCHED
 	select ADK_KERNEL_USB_MXS_PHY if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on !ADK_TARGET_BOARD_BCM28XX
 	depends on ADK_KERNEL_USB
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
@@ -111,7 +111,7 @@ config ADK_KERNEL_USB_UHCI_HCD
 	tristate "Support for UHCI controllers"
 	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on !ADK_TARGET_BOARD_BCM28XX
 	default m if ADK_TARGET_SYSTEM_IBM_X40
 	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
@@ -128,7 +128,7 @@ config ADK_KERNEL_USB_UHCI_HCD
 config ADK_KERNEL_USB_OHCI_HCD
 	tristate "Support for OHCI controllers"
 	depends on ADK_KERNEL_USB
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on !ADK_TARGET_BOARD_BCM28XX
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13
@@ -148,8 +148,8 @@ config ADK_KERNEL_USB_OHCI_HCD
 config ADK_KERNEL_USB_DWCOTG
 	bool "Support for DWCOTG controller"
 	select ADK_KERNEL_USB
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_BOARD_BCM28XX
+	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 	help
 	  The Synopsis DWC controller is a dual-role
@@ -175,7 +175,7 @@ config ADK_KERNEL_USB_ISP116X_HCD
 	tristate "Support for ISP116X"
 	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on !ADK_TARGET_BOARD_BCM28XX
 	help
 	  The ISP1160 and ISP1161 chips are USB host controllers. Enable this
 	  option if your board has this chip. If unsure, say N.
@@ -186,7 +186,7 @@ config ADK_KERNEL_USB_SL811_HCD
 	tristate "Support for SL811HS"
 	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
-	depends on !ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on !ADK_TARGET_BOARD_BCM28XX
 	default n
 	help
 	  The SL811HS is a single-port USB controller that supports either

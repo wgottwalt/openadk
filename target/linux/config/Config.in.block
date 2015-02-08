@@ -199,12 +199,12 @@ config ADK_KERNEL_PATA_PLATFORM
 	default n
 
 config ADK_KERNEL_PATA_PCMCIA
+	tristate
 	select ADK_KERNEL_PCCARD
 	select ADK_KERNEL_PCMCIA
-	tristate
 
 config ADK_KERNEL_PATA_IMX
-	tristate "eSATA driver for Solidrun IMX6"
+	tristate "eSATA driver for IMX6 boards"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -219,7 +219,7 @@ config ADK_KERNEL_PATA_IMX
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 	help
-	  eSATA driver for solidrun imx6
+	  eSATA driver for IMX6 boards.
 
 config ADK_KERNEL_PATA_CMD64X
 	tristate "CMD64x PATA driver"
@@ -299,7 +299,7 @@ config ADK_KERNEL_MMC_AT91
 	default n
 
 config ADK_KERNEL_MMC_SDHCI_BCM2708
-	bool "SD card support for Raspberry PI"
+	bool "SD card support for BCM2835 boards"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_MMC
 	select ADK_KERNEL_MMC_BLOCK
@@ -311,12 +311,12 @@ config ADK_KERNEL_MMC_SDHCI_BCM2708
 	select ADK_KERNEL_MMC_SDHCI_BCM2708_DMA
 	select ADK_KERNEL_MMC_BCM2835
 	select ADK_KERNEL_MMC_BCM2835_DMA
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	depends on ADK_TARGET_BOARD_BCM28XX
+	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 
 config ADK_KERNEL_MMC_SDHCI_ESDHC_IMX
-	bool "SD card support for Solidrun IMX6"
+	bool "SD card support for IMX6 boards"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_DMA
 	select ADK_KERNEL_SCSI_MULTI_LUN

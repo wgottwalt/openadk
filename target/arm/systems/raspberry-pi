@@ -6,6 +6,7 @@ config ADK_TARGET_SYSTEM_RASPBERRY_PI
 	select ADK_fpu_vfp
 	select ADK_raspberry_pi
 	select ADK_CPU_ARM1176JZF_S
+	select ADK_TARGET_BOARD_BCM28XX
 	select ADK_TARGET_CPU_WITH_FPU
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_SERIAL

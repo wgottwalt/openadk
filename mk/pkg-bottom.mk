@@ -138,7 +138,7 @@ ${_BUILD_COOKIE}: ${_CONFIGURE_COOKIE}
 	@env ${MAKE_ENV} ${MAKE} pre-build $(MAKE_TRACE)
 	@$(CMD_TRACE) "compiling... "
 ifneq ($(filter manual,${BUILD_STYLE}),)
-	env ${MAKE_ENV} ${MAKE} do-build $(MAKE_TRACE)
+	env ${MAKE_ENV} ${MAKE} ${MAKE_FLAGS} do-build $(MAKE_TRACE)
 else ifeq ($(strip ${BUILD_STYLE}),)
 	cd ${WRKBUILD} && env ${MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    ${MAKE_FLAGS} ${ALL_TARGET} $(MAKE_TRACE)

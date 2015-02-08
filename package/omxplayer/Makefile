@@ -16,7 +16,7 @@ PKG_BUILDDEP:=		ffmpeg boost bcm2835-vc freetype pcre dbus
 PKG_URL:=		https://github.com/popcornmix/omxplayer
 PKG_SITES:=		http://openadk.org/distfiles/
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2
 PKG_LIBC_DEPENDS:=      glibc musl
 
 include $(ADK_TOPDIR)/mk/package.mk

@@ -1,0 +1,282 @@
+diff -Nur linux-rpi/arch/arm/boot/dts/Makefile linux-rpi-rpi-proto/arch/arm/boot/dts/Makefile
+--- linux-rpi/arch/arm/boot/dts/Makefile	2015-02-09 04:39:42.000000000 +0100
++++ linux-rpi-rpi-proto/arch/arm/boot/dts/Makefile	2015-02-09 04:59:22.000000000 +0100
+@@ -71,6 +71,7 @@
+ dtb-$(RPI_DT_OVERLAYS) += hifiberry-amp-overlay.dtb
+ dtb-$(RPI_DT_OVERLAYS) += iqaudio-dac-overlay.dtb
+ dtb-$(RPI_DT_OVERLAYS) += iqaudio-dacplus-overlay.dtb
++dtb-$(RPI_DT_OVERLAYS) += rpi-proto-overlay.dtb
+ dtb-$(RPI_DT_OVERLAYS) += lirc-rpi-overlay.dtb
+ dtb-$(RPI_DT_OVERLAYS) += pcf2127-rtc-overlay.dtb
+ dtb-$(RPI_DT_OVERLAYS) += pcf8523-rtc-overlay.dtb
+diff -Nur linux-rpi/arch/arm/boot/dts/rpi-proto-overlay.dts linux-rpi-rpi-proto/arch/arm/boot/dts/rpi-proto-overlay.dts
+--- linux-rpi/arch/arm/boot/dts/rpi-proto-overlay.dts	1970-01-01 01:00:00.000000000 +0100
++++ linux-rpi-rpi-proto/arch/arm/boot/dts/rpi-proto-overlay.dts	2015-02-09 04:58:32.000000000 +0100
+@@ -0,0 +1,39 @@
++// Definitions for Rpi-Proto
++/dts-v1/;
++/plugin/;
++
++/ {
++	compatible = "brcm,bcm2708";
++
++	fragment@0 {
++		target = <&sound>;
++		__overlay__ {
++			compatible = "rpi,rpi-proto";
++			i2s-controller = <&i2s>;
++			status = "okay";
++		};
++	};
++
++	fragment@1 {
++		target = <&i2s>;
++		__overlay__ {
++			status = "okay";
++		};
++	};
++
++	fragment@2 {
++		target = <&i2c1>;
++		__overlay__ {
++			#address-cells = <1>;
++			#size-cells = <0>;
++			status = "okay";
++
++			wm8731@1a {
++				#sound-dai-cells = <0>;
++				compatible = "wlf,wm8731";
++				reg = <0x1a>;
++				status = "okay";
++			};
++		};
++	};
++};
+diff -Nur linux-rpi/arch/arm/mach-bcm2708/bcm2708.c linux-rpi-rpi-proto/arch/arm/mach-bcm2708/bcm2708.c
+--- linux-rpi/arch/arm/mach-bcm2708/bcm2708.c	2015-02-09 04:39:42.000000000 +0100
++++ linux-rpi-rpi-proto/arch/arm/mach-bcm2708/bcm2708.c	2015-02-09 04:58:32.000000000 +0100
+@@ -703,6 +703,21 @@
+ };
+ #endif
+ 
++#if defined(CONFIG_SND_BCM2708_SOC_RPI_PROTO) || defined(CONFIG_SND_BCM2708_SOC_RPI_PROTO_MODULE)
++static struct platform_device snd_rpi_proto_device = {
++        .name = "snd-rpi-proto",
++        .id = 0,
++        .num_resources = 0,
++};
++
++static struct i2c_board_info __initdata snd_wm8731_i2c_devices[] = {
++        {
++                I2C_BOARD_INFO("wm8731", 0x1a)
++        },
++};
++
++#endif
++
+ #if defined(CONFIG_SND_BCM2708_SOC_RPI_DAC) || defined(CONFIG_SND_BCM2708_SOC_RPI_DAC_MODULE)
+ static struct platform_device snd_rpi_dac_device = {
+         .name = "snd-rpi-dac",
+@@ -922,6 +937,11 @@
+         i2c_register_board_info_dt(1, snd_tas5713_i2c_devices, ARRAY_SIZE(snd_tas5713_i2c_devices));
+ #endif
+ 
++#if defined(CONFIG_SND_BCM2708_SOC_RPI_PROTO) || defined(CONFIG_SND_BCM2708_SOC_RPI_PROTO_MODULE)
++        bcm_register_device_dt(&snd_rpi_proto_device);
++        i2c_register_board_info_dt(1, snd_wm8731_i2c_devices, ARRAY_SIZE(snd_wm8731_i2c_devices));
++#endif
++
+ #if defined(CONFIG_SND_BCM2708_SOC_RPI_DAC) || defined(CONFIG_SND_BCM2708_SOC_RPI_DAC_MODULE)
+         bcm_register_device_dt(&snd_rpi_dac_device);
+         bcm_register_device_dt(&snd_pcm1794a_codec_device);
+diff -Nur linux-rpi/sound/soc/bcm/Kconfig linux-rpi-rpi-proto/sound/soc/bcm/Kconfig
+--- linux-rpi/sound/soc/bcm/Kconfig	2015-02-09 04:40:48.000000000 +0100
++++ linux-rpi-rpi-proto/sound/soc/bcm/Kconfig	2015-02-09 04:58:32.000000000 +0100
+@@ -54,6 +54,14 @@
+         help
+          Say Y or M if you want to add support for RPi-DAC.
+ 
++config SND_BCM2708_SOC_RPI_PROTO
++	tristate "Support for Rpi-PROTO"
++	depends on SND_BCM2708_SOC_I2S
++	select SND_SOC_WM8731
++	help
++	  Say Y if you want to add support for Audio Codec Board -
++	  PROTO (WM8731)
++
+ config SND_BCM2708_SOC_IQAUDIO_DAC
+ 	tristate "Support for IQaudIO-DAC"
+ 	depends on SND_BCM2708_SOC_I2S
+diff -Nur linux-rpi/sound/soc/bcm/Makefile linux-rpi-rpi-proto/sound/soc/bcm/Makefile
+--- linux-rpi/sound/soc/bcm/Makefile	2015-02-09 04:40:48.000000000 +0100
++++ linux-rpi-rpi-proto/sound/soc/bcm/Makefile	2015-02-09 04:58:32.000000000 +0100
+@@ -14,6 +14,7 @@
+ snd-soc-hifiberry-digi-objs := hifiberry_digi.o
+ snd-soc-hifiberry-amp-objs := hifiberry_amp.o
+ snd-soc-rpi-dac-objs := rpi-dac.o
++snd-soc-rpi-proto-objs := rpi-proto.o
+ snd-soc-iqaudio-dac-objs := iqaudio-dac.o
+ 
+ obj-$(CONFIG_SND_BCM2708_SOC_HIFIBERRY_DAC) += snd-soc-hifiberry-dac.o
+@@ -21,4 +22,5 @@
+ obj-$(CONFIG_SND_BCM2708_SOC_HIFIBERRY_DIGI) += snd-soc-hifiberry-digi.o
+ obj-$(CONFIG_SND_BCM2708_SOC_HIFIBERRY_AMP) += snd-soc-hifiberry-amp.o
+ obj-$(CONFIG_SND_BCM2708_SOC_RPI_DAC) += snd-soc-rpi-dac.o
++obj-$(CONFIG_SND_BCM2708_SOC_RPI_PROTO) += snd-soc-rpi-proto.o
+ obj-$(CONFIG_SND_BCM2708_SOC_IQAUDIO_DAC) += snd-soc-iqaudio-dac.o
+diff -Nur linux-rpi/sound/soc/bcm/rpi-proto.c linux-rpi-rpi-proto/sound/soc/bcm/rpi-proto.c
+--- linux-rpi/sound/soc/bcm/rpi-proto.c	1970-01-01 01:00:00.000000000 +0100
++++ linux-rpi-rpi-proto/sound/soc/bcm/rpi-proto.c	2015-02-09 04:58:32.000000000 +0100
+@@ -0,0 +1,152 @@
++/*
++ * ASoC driver for PROTO AudioCODEC (with a WM8731)
++ * connected to a Raspberry Pi
++ *
++ * Author:      Florian Meier, <koalo@koalo.de>
++ *	      Copyright 2013
++ *
++ * This program is free software; you can redistribute it and/or modify
++ * it under the terms of the GNU General Public License version 2 as
++ * published by the Free Software Foundation.
++ */
++
++#include <linux/module.h>
++#include <linux/platform_device.h>
++
++#include <sound/core.h>
++#include <sound/pcm.h>
++#include <sound/soc.h>
++#include <sound/jack.h>
++
++#include "../codecs/wm8731.h"
++
++static const unsigned int wm8731_rates_12288000[] = {
++	8000, 32000, 48000, 96000,
++};
++
++static struct snd_pcm_hw_constraint_list wm8731_constraints_12288000 = {
++	.list = wm8731_rates_12288000,
++	.count = ARRAY_SIZE(wm8731_rates_12288000),
++};
++
++static int snd_rpi_proto_startup(struct snd_pcm_substream *substream)
++{
++	/* Setup constraints, because there is a 12.288 MHz XTAL on the board */
++	snd_pcm_hw_constraint_list(substream->runtime, 0,
++				SNDRV_PCM_HW_PARAM_RATE,
++				&wm8731_constraints_12288000);
++	return 0;
++}
++
++static int snd_rpi_proto_hw_params(struct snd_pcm_substream *substream,
++				       struct snd_pcm_hw_params *params)
++{
++	struct snd_soc_pcm_runtime *rtd = substream->private_data;
++	struct snd_soc_dai *codec_dai = rtd->codec_dai;
++	struct snd_soc_dai *cpu_dai = rtd->cpu_dai;
++	int sysclk = 12288000; /* This is fixed on this board */
++
++	/* Set proto bclk */
++	int ret = snd_soc_dai_set_bclk_ratio(cpu_dai,32*2);
++	if (ret < 0){
++		dev_err(substream->pcm->dev,
++				"Failed to set BCLK ratio %d\n", ret);
++		return ret;
++	}
++
++	/* Set proto sysclk */
++	ret = snd_soc_dai_set_sysclk(codec_dai, WM8731_SYSCLK_XTAL,
++			sysclk, SND_SOC_CLOCK_IN);
++	if (ret < 0) {
++		dev_err(substream->pcm->dev,
++				"Failed to set WM8731 SYSCLK: %d\n", ret);
++		return ret;
++	}
++
++	return 0;
++}
++
++/* machine stream operations */
++static struct snd_soc_ops snd_rpi_proto_ops = {
++	.startup = snd_rpi_proto_startup,
++	.hw_params = snd_rpi_proto_hw_params,
++};
++
++static struct snd_soc_dai_link snd_rpi_proto_dai[] = {
++{
++	.name		= "WM8731",
++	.stream_name	= "WM8731 HiFi",
++	.cpu_dai_name	= "bcm2708-i2s.0",
++	.codec_dai_name	= "wm8731-hifi",
++	.platform_name	= "bcm2708-i2s.0",
++	.codec_name	= "wm8731.1-001a",
++	.dai_fmt	= SND_SOC_DAIFMT_I2S
++				| SND_SOC_DAIFMT_NB_NF
++				| SND_SOC_DAIFMT_CBM_CFM,
++	.ops		= &snd_rpi_proto_ops,
++},
++};
++
++/* audio machine driver */
++static struct snd_soc_card snd_rpi_proto = {
++	.name		= "snd_rpi_proto",
++	.dai_link	= snd_rpi_proto_dai,
++	.num_links	= ARRAY_SIZE(snd_rpi_proto_dai),
++};
++
++static int snd_rpi_proto_probe(struct platform_device *pdev)
++{
++	int ret = 0;
++
++	snd_rpi_proto.dev = &pdev->dev;
++
++	if (pdev->dev.of_node) {
++		struct device_node *i2s_node;
++		struct snd_soc_dai_link *dai = &snd_rpi_proto_dai[0];
++		i2s_node = of_parse_phandle(pdev->dev.of_node,
++				            "i2s-controller", 0);
++
++		if (i2s_node) {
++			dai->cpu_dai_name = NULL;
++			dai->cpu_of_node = i2s_node;
++			dai->platform_name = NULL;
++			dai->platform_of_node = i2s_node;
++		}
++	}
++
++	ret = snd_soc_register_card(&snd_rpi_proto);
++	if (ret) {
++		dev_err(&pdev->dev,
++				"snd_soc_register_card() failed: %d\n", ret);
++	}
++
++	return ret;
++}
++
++
++static int snd_rpi_proto_remove(struct platform_device *pdev)
++{
++	return snd_soc_unregister_card(&snd_rpi_proto);
++}
++
++static const struct of_device_id snd_rpi_proto_of_match[] = {
++	{ .compatible = "rpi,rpi-proto", },
++	{},
++};
++MODULE_DEVICE_TABLE(of, snd_rpi_proto_of_match);
++
++static struct platform_driver snd_rpi_proto_driver = {
++	.driver = {
++		.name   = "snd-rpi-proto",
++		.owner  = THIS_MODULE,
++		.of_match_table = snd_rpi_proto_of_match,
++	},
++	.probe	  = snd_rpi_proto_probe,
++	.remove	 = snd_rpi_proto_remove,
++};
++
++module_platform_driver(snd_rpi_proto_driver);
++
++MODULE_AUTHOR("Florian Meier");
++MODULE_DESCRIPTION("ASoC Driver for Raspberry Pi connected to PROTO board (WM8731)");
++MODULE_LICENSE("GPL");

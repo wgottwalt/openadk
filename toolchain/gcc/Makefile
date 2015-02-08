@@ -142,6 +142,10 @@ ifeq ($(ADK_CPU_CORTEX_M3),y)
 GCC_CONFOPTS+=		--with-cpu=cortex-m3 --with-mode=thumb
 endif
 
+ifeq ($(ADK_CPU_CORTEX_A7),y)
+GCC_CONFOPTS+=		--with-cpu=cortex-a7
+endif
+
 ifeq ($(ADK_CPU_CORTEX_A9),y)
 GCC_CONFOPTS+=		--with-cpu=cortex-a9
 endif

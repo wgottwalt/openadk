@@ -16,7 +16,7 @@ PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi atmel-ngw100
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 atmel-ngw100
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -25,6 +25,9 @@ $(eval $(call HOST_template,U_BOOT,u-boot,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,U_BOOT,u-boot,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+CONFIG:=		rpi_defconfig
+endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
 CONFIG:=		rpi_defconfig
 endif
 ifeq ($(ADK_TARGET_SYSTEM_ATMEL_NGW100),y)
