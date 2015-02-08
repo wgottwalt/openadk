@@ -1,6 +1,6 @@
---- nss-3.15.2.orig/nss/coreconf/command.mk	2013-09-25 15:57:55.000000000 +0200
-+++ nss-3.15.2/nss/coreconf/command.mk	2013-09-27 19:07:39.000000000 +0200
-@@ -16,7 +16,7 @@ LINK_EXE      = $(LINK) $(OS_LFLAGS) $(L
+--- nss-3.17.4.orig/nss/coreconf/command.mk	2015-01-22 20:49:26.000000000 +0100
++++ nss-3.17.4/nss/coreconf/command.mk	2015-01-29 15:49:15.000000000 +0100
+@@ -15,7 +15,7 @@ LINK_DLL      = $(LINK) $(OS_DLLFLAGS) $
  CFLAGS        = $(OPTIMIZER) $(OS_CFLAGS) $(XP_DEFINE) $(DEFINES) $(INCLUDES) \
  		$(XCFLAGS)
  PERL          = perl

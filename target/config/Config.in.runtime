@@ -9,23 +9,25 @@ config ADK_RUNTIME_HOSTNAME
 
 config ADK_RUNTIME_SSH_PUBKEY
 	string "SSH public key (root user only)"
-	default ""
 	depends on ADK_PACKAGE_OPENSSH_SERVER || ADK_PACKAGE_DROPBEAR
+	default ""
 	help
 	  Paste your generated SSH public key here and it will be embedded into
 	  the built image, so you can use it to login instantly.
 
 config ADK_RUNTIME_PASSWORD
 	string "root password for the embedded system"
-	default "linux123"
+	default "$1$bJoW4DmS$7fUVat.9iFSAePzA4j4Jm."
 	help
 	  Predefine the root password enabled in the built image.
+	  Use ./host_x86_64-linux-gnu/usr/bin/mkcrypt to generate the hash.
+	  Default password is linux123.
 
 config ADK_RUNTIME_START_SERVICES
-	prompt "start services by default"
-	boolean
+	bool "start services by default"
 	default n
 	help
+	  Enable this option to start selected services on boot.
 
 source "target/config/Config.in.scripts"
 
@@ -49,56 +51,52 @@ config ADK_RUNTIME_TIMEZONE
 	  Predefine the timezone for the embedded system.
 
 config ADK_QUIET_KERNEL
-	prompt "make bootup quiet without messages from the kernel"
-	boolean
-	default n
+	bool "make bootup quiet without messages from the kernel"
 	help
 	  Make bootup quiet without messages from the kernel.
 
 choice
 prompt "bootup messages from initscripts"
-default ADK_RUNTIME_QUIET_INIT if ADK_PKG_KODIBOX
-default ADK_RUNTIME_VERBOSE_INIT_VGA if ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU_WITH_GRAPHIC || ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY || ADK_TARGET_VBOX
+default ADK_RUNTIME_VERBOSE_INIT_VGA if ADK_TARGET_WITH_VGA
 default ADK_RUNTIME_VERBOSE_INIT_SERIAL
 
 config ADK_RUNTIME_VERBOSE_INIT_VGA
-	depends on ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU_WITH_GRAPHIC || ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY || ADK_TARGET_VBOX
-	boolean "output via VGA"
+	bool "output via VGA"
+	depends on ADK_TARGET_WITH_VGA
 
 config ADK_RUNTIME_VERBOSE_INIT_SERIAL
-	boolean "output via serial"
+	bool "output via serial"
+	depends on ADK_TARGET_WITH_SERIAL
 
 config ADK_RUNTIME_QUIET_INIT
-	boolean "no output"
+	bool "no output"
 
 endchoice
 
 choice
 prompt "start getty or shell after bootup"
-default ADK_RUNTIME_SHELL if ADK_PKG_TEST
-default ADK_RUNTIME_NONE if ADK_PKG_KODIBOX
 default ADK_RUNTIME_GETTY
 
 config ADK_RUNTIME_GETTY
-	boolean "start a getty after bootup"
+	bool "start a getty after bootup"
 	help
 	  Start a getty after bootup.
 
 config ADK_RUNTIME_SHELL
-	boolean "start a shell after bootup"
+	bool "start a shell after bootup"
 	help
-	  Start a shell after bootup
+	  Start a shell after bootup.
 
 config ADK_RUNTIME_NONE
-	boolean "start no shell nor getty after bootup"
+	bool "start no shell nor getty after bootup"
 	help
-	  Do not start a shell or getty after bootup
+	  Do not start a shell or getty after bootup.
 
 endchoice
 
 config ADK_RUNTIME_GETTY_VGA
-	boolean "start getty on VGA console (tty1-tty6)"
-	depends on ADK_RUNTIME_GETTY
+	bool "start getty on VGA console (tty1-tty6)"
+	depends on ADK_RUNTIME_GETTY && ADK_TARGET_WITH_VGA
 	default y if ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
 	default y if ADK_TARGET_QEMU_WITH_GRAPHIC
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
@@ -112,8 +110,8 @@ config ADK_RUNTIME_GETTY_VGA
           Start getty on VGA console. (tty1-tty6)
 
 config ADK_RUNTIME_GETTY_SERIAL
-	boolean "start getty on serial console"
-	depends on ADK_RUNTIME_GETTY
+	bool "start getty on serial console"
+	depends on ADK_RUNTIME_GETTY && ADK_TARGET_WITH_SERIAL
 	default n if ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
 	default n if ADK_TARGET_QEMU_WITH_GRAPHIC
 	default n if ADK_TARGET_SYSTEM_RASPBERRY_PI
@@ -126,9 +124,15 @@ config ADK_RUNTIME_GETTY_SERIAL
 	help
 	  Start getty on serial console.
 
+config ADK_RUNTIME_CONSOLE_VGA_DEVICE
+	string "VGA console device"
+	depends on ADK_TARGET_WITH_VGA
+	default "tty1" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default "tty0"
+
 config ADK_RUNTIME_CONSOLE_SERIAL_DEVICE
-	prompt "serial console device"
-	string
+	string "serial console device"
+	depends on ADK_TARGET_WITH_SERIAL
 	default "hvc0" if ADK_TARGET_SYSTEM_QEMU_PPC64
 	default "ttyUL0" if ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800
 	default "ttyAMA0" if ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB || ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9 || ADK_TARGET_SYSTEM_ARM_FM || ADK_TARGET_SYSTEM_QEMU_AARCH64
@@ -138,16 +142,16 @@ config ADK_RUNTIME_CONSOLE_SERIAL_DEVICE
 	default "ttyS0"
 
 config ADK_RUNTIME_CONSOLE_SERIAL_SPEED
-	prompt "serial console speed"
-	string
+	string "serial console speed"
+	depends on ADK_TARGET_WITH_SERIAL
 	default "9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "38400" if ADK_TARGET_SYSTEM_PCENGINES_WRAP	
 	default "115200"
 
 config ADK_RUNTIME_KBD_LAYOUT
 	string "keyboard layout for the embedded system"
-	default ""
 	depends on ADK_TARGET_WITH_INPUT
+	default ""
 	help
 	  Predefine the keyboard layout for the embedded system.
 
@@ -157,48 +161,48 @@ default ADK_ROOTSH_SASH if ADK_TARGET_UCLINUX
 default ADK_ROOTSH_MKSH
 
 config ADK_ROOTSH_MKSH
-	select ADK_PACKAGE_MKSH if !ADK_TOOLCHAIN_ONLY
 	bool "mksh (MirBSD Korn Shell)"
+	select ADK_PACKAGE_MKSH if !ADK_TOOLCHAIN_ONLY
 	help
 	  Use mksh (a Korn Shell variant) as standard login shell
 	  for the superuser.
 
 config ADK_ROOTSH_SASH
-	select ADK_PACKAGE_SASH if !ADK_TOOLCHAIN_ONLY
 	bool "sash (Shell compatible with non-MMU systems)"
+	select ADK_PACKAGE_SASH if !ADK_TOOLCHAIN_ONLY
 	help
 	  standalone shell.
 
 config ADK_ROOTSH_HUSH
-	select ADK_PACKAGE_HUSH if !ADK_TOOLCHAIN_ONLY
 	bool "hush (Shell compatible with non-MMU systems)"
+	select ADK_PACKAGE_HUSH if !ADK_TOOLCHAIN_ONLY
 	help
 	  hush shell from busybox.
 
 config ADK_ROOTSH_ASH
-	select BUSYBOX_ASH
 	bool "ash (busybox)"
+	select BUSYBOX_ASH
 	help
 	  Use the minimalistic ash variant that is part of busybox
 	  as standard login shell for the superuser. This is the
 	  default, but discouraged due to its frugality.
 
 config ADK_ROOTSH_BASH
-	select ADK_PACKAGE_BASH
 	bool "bash (GNU Bourne-Again Shell)"
+	select ADK_PACKAGE_BASH
 	help
 	  Use GNU bash as standard login shell for the superuser.
 
 config ADK_ROOTSH_TCSH
-	select ADK_PACKAGE_TCSH
 	bool "tcsh (Tenex C Shell)"
+	select ADK_PACKAGE_TCSH
 	help
 	  Use tcsh (a C Shell variant) as standard login shell
 	  for the superuser.
 
 config ADK_ROOTSH_ZSH
-	select ADK_PACKAGE_ZSH
 	bool "zsh (The Z Shell)"
+	select ADK_PACKAGE_ZSH
 	help
 	  Use zsh as standard login shell for the superuser.
 
@@ -210,50 +214,49 @@ default ADK_BINSH_SASH if ADK_TARGET_UCLINUX
 default ADK_BINSH_MKSH
 
 config ADK_BINSH_MKSH
-	select ADK_PACKAGE_MKSH if !ADK_TOOLCHAIN_ONLY
 	bool "mksh (MirBSD Korn Shell)"
+	select ADK_PACKAGE_MKSH if !ADK_TOOLCHAIN_ONLY
 	help
 	  Use mksh (a Korn Shell variant) as system shell, which is
 	  both small and powerful, so quite suited for this task.
 
 config ADK_BINSH_SASH
-	select ADK_PACKAGE_SASH if !ADK_TOOLCHAIN_ONLY
 	bool "sash (Standalone Shell)"
+	select ADK_PACKAGE_SASH if !ADK_TOOLCHAIN_ONLY
 	help
 	  hush shell.
 
 config ADK_BINSH_HUSH
-	select ADK_PACKAGE_HUSH if !ADK_TOOLCHAIN_ONLY
 	bool "hush (busybox)"
+	select ADK_PACKAGE_HUSH if !ADK_TOOLCHAIN_ONLY
 	help
 	  hush shell.
 
 config ADK_BINSH_ASH
-	select BUSYBOX_ASH
 	bool "ash (busybox)"
+	select BUSYBOX_ASH
 	help
 	  Use the minimalistic ash variant that is part of busybox
 	  as system shell. This is the default and rather small and
 	  fast, but lacks scripting features.
 
 config ADK_BINSH_BASH
-	select ADK_PACKAGE_BASH
 	bool "bash (GNU Bourne-Again Shell)"
+	select ADK_PACKAGE_BASH
 	help
 	  Use GNU bash as system shell. This is discouraged due to
 	  its size and slowness.
 
 config ADK_BINSH_ZSH
-	select ADK_PACKAGE_ZSH
 	bool "zsh (The Z Shell)"
+	select ADK_PACKAGE_ZSH
 	help
 	  Use zsh as system shell. This is probably a bad idea.
 
 endchoice
 
 config ADK_SIMPLE_NETWORK_CONFIG
-	prompt "simple network configuration"
-	boolean
+	bool "simple network configuration"
 	help
 	  Manually change network config
 	  
@@ -272,6 +275,7 @@ config ADK_SIMPLE_NETWORK_CONFIG_ETH0_DHCP
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH0_NONE
 	bool "no configuration"
+
 endchoice
 
 choice
@@ -279,26 +283,26 @@ prompt "configure default Gateway"
 depends on ADK_SIMPLE_NETWORK_CONFIG_ETH0_STATIC
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH0_STATIC_WITH_GW
-	boolean "with Gateway"
+	bool "with Gateway"
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH0_STATIC_WITHOUT_GW
-	boolean "without Gateway"
+	bool "without Gateway"
 
 endchoice
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH0_IP
-	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH0_STATIC
 	string "IP Address"
+	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH0_STATIC
 	default "10.0.0.2"
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH0_NM
-	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH0_STATIC
 	string "Netmask"
+	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH0_STATIC
 	default "255.255.255.0"
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH0_GW
-	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH0_STATIC_WITH_GW
 	string "Gateway"
+	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH0_STATIC_WITH_GW
 	default "10.0.0.1"
 
 endmenu
@@ -327,26 +331,26 @@ prompt "configure default Gateway"
 depends on ADK_SIMPLE_NETWORK_CONFIG_WLAN0_STATIC
 
 config ADK_SIMPLE_NETWORK_CONFIG_WLAN0_STATIC_WITH_GW
-	boolean "with Gateway"
+	bool "with Gateway"
 
 config ADK_SIMPLE_NETWORK_CONFIG_WLAN0_STATIC_WITHOUT_GW
-	boolean "without Gateway"
+	bool "without Gateway"
 
 endchoice
 
 config ADK_SIMPLE_NETWORK_CONFIG_WLAN0_IP
-	depends on ADK_SIMPLE_NETWORK_CONFIG_WLAN0_STATIC
 	string "IP Address"
+	depends on ADK_SIMPLE_NETWORK_CONFIG_WLAN0_STATIC
 	default "192.168.1.2"
 
 config ADK_SIMPLE_NETWORK_CONFIG_WLAN0_NM
-	depends on ADK_SIMPLE_NETWORK_CONFIG_WLAN0_STATIC
 	string "Netmask"
+	depends on ADK_SIMPLE_NETWORK_CONFIG_WLAN0_STATIC
 	default "255.255.255.0"
 
 config ADK_SIMPLE_NETWORK_CONFIG_WLAN0_GW
-	depends on ADK_SIMPLE_NETWORK_CONFIG_WLAN0_STATIC_WITH_GW
 	string "Gateway"
+	depends on ADK_SIMPLE_NETWORK_CONFIG_WLAN0_STATIC_WITH_GW
 	default "192.168.1.1"
 
 endmenu
@@ -365,13 +369,13 @@ config ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2
 endchoice
 
 config ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2_SSID
-	depends on ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2
 	string "SSID"
+	depends on ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2
 	default ""
 
 config ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2_PW
-	depends on ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2
 	string "Password"
+	depends on ADK_SIMPLE_NETWORK_CONFIG_WLAN0_WPA2
 	default ""
 
 menu "eth1 Configuration"
@@ -390,6 +394,7 @@ config ADK_SIMPLE_NETWORK_CONFIG_ETH1_DHCP
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH1_NONE
 	bool "no configuration"
+
 endchoice
 
 choice
@@ -397,40 +402,40 @@ prompt "configure default Gateway"
 depends on ADK_SIMPLE_NETWORK_CONFIG_ETH1_STATIC
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH1_STATIC_WITH_GW
-	boolean "with Gateway"
+	bool "with Gateway"
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH1_STATIC_WITHOUT_GW
-	boolean "without Gateway"
+	bool "without Gateway"
 
 endchoice
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH1_IP
-	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH1_STATIC
 	string "IP Address"
+	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH1_STATIC
 	default "172.16.0.2"
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH1_NM
-	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH1_STATIC
 	string "Netmask"
+	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH1_STATIC
 	default "255.255.0.0"
 
 config ADK_SIMPLE_NETWORK_CONFIG_ETH1_GW
-	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH1_STATIC_WITH_GW
 	string "Gateway"
+	depends on ADK_SIMPLE_NETWORK_CONFIG_ETH1_STATIC_WITH_GW
 	default "172.16.0.1"
 
 endmenu
 
 config ADK_SIMPLE_NETWORK_CONFIG_NS
+	string "Nameserver"
 	depends on ADK_SIMPLE_NETWORK_CONFIG
 	depends on !ADK_SIMPLE_NETWORK_CONFIG_ETH0_DHCP
 	depends on !ADK_SIMPLE_NETWORK_CONFIG_ETH1_DHCP
 	depends on !ADK_SIMPLE_NETWORK_CONFIG_WLAN0_DHCP
-	string "Nameserver"
 	default "10.0.0.1"
 
 config ADK_SIMPLE_NETWORK_CONFIG_PROXY
-	depends on ADK_SIMPLE_NETWORK_CONFIG
 	string "HTTP-Proxy (f.e. http://10.0.0.2:8080)"
+	depends on ADK_SIMPLE_NETWORK_CONFIG
 	default ""
 

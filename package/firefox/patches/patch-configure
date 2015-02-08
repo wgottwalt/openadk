@@ -1,30 +1,41 @@
---- mozilla-release.orig/configure	2013-12-05 17:08:46.000000000 +0100
-+++ mozilla-release/configure	2014-01-06 18:17:43.008094174 +0100
-@@ -9787,27 +9787,6 @@ if test -z "$GNU_CC"; then
-     esac
+--- mozilla-release.orig/configure	2015-01-09 05:39:04.000000000 +0100
++++ mozilla-release/configure	2015-02-04 11:49:00.000000000 +0100
+@@ -8156,38 +8156,6 @@ EOF
+ 
  fi
  
--if test "$GNU_CC" -a -n "$DEVELOPER_OPTIONS"; then
--            if $CC -Wl,--version 2>&1 | grep -q "GNU ld"; then
--        GOLD=$($CC -print-prog-name=ld.gold)
--        case "$GOLD" in
--        /*)
--            ;;
--        *)
--            GOLD=$(which $GOLD)
--            ;;
--        esac
--        if test -n "$GOLD"; then
--            mkdir -p $_objdir/build/unix/gold
--            ln -s "$GOLD" $_objdir/build/unix/gold/ld
--            if $CC -B $_objdir/build/unix/gold -Wl,--version 2>&1 | grep -q "GNU gold"; then
--                LDFLAGS="$LDFLAGS -B $_objdir/build/unix/gold"
--            else
--                rm -rf $_objdir/build/unix/gold
--            fi
--        fi
--    fi
+-MOZ_ENABLE_PROFILER_SPS=1
+-
+-case "${OS_TARGET}" in
+-Android)
+-    case "${CPU_ARCH}" in
+-    x86 | arm) ;;
+-    *)
+-        MOZ_ENABLE_PROFILER_SPS=
+-    esac
+-    ;;
+-Linux)
+-    case "${CPU_ARCH}" in
+-    x86 | x86_64) ;;
+-    *)
+-        MOZ_ENABLE_PROFILER_SPS=
+-    esac
+-    ;;
+-WINNT|Darwin) ;;
+-*)
+-    MOZ_ENABLE_PROFILER_SPS=
+-    ;;
+-esac
+-
+-if test -n "$MOZ_ENABLE_PROFILER_SPS"; then
+-    cat >> confdefs.pytmp <<\EOF
+-    (''' MOZ_ENABLE_PROFILER_SPS ''', ' 1 ')
+-EOF
+-cat >> confdefs.h <<\EOF
+-#define MOZ_ENABLE_PROFILER_SPS 1
+-EOF
+-
 -fi
  
- if test "$GNU_CC"; then
-     if test -z "$DEVELOPER_OPTIONS"; then
+ # Check whether --enable-shark or --disable-shark was given.
+ if test "${enable_shark+set}" = set; then

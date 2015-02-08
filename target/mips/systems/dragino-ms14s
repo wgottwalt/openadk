@@ -6,6 +6,7 @@ config ADK_TARGET_SYSTEM_DRAGINO_MS14S
 	select ADK_CPU_MIPS32
 	select ADK_TARGET_WITH_WATCHDOG
 	select ADK_TARGET_WITH_NAND
+	select ADK_TARGET_WITH_SERIAL
 	help
 	  Support for Dragino2 ms14-s.
 

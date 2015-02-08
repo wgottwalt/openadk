@@ -19,7 +19,7 @@ endif
 PKG_NAME:=		libstdcxx
 PKG_DESCR:=		c++ support library
 PKG_SECTION:=		libs/misc
-PKG_OPTS:=		nostaging
+PKG_OPTS:=		noremove
 NO_DISTFILES:=		1
 
 include ${ADK_TOPDIR}/mk/package.mk
@@ -32,7 +32,8 @@ INSTALL_STYLE:=		manual
 
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
-	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so* ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
+	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so* \
+		${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
 	-@rm ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so.*-gdb.py
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

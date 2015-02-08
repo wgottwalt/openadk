@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		26.0
-PKG_RELEASE:=		4
-PKG_HASH:=		31c4fb2792df63ae450e350380a5e18cf1c51487011a9da0b6cc4bffb69d9812
+PKG_VERSION:=		35.0
+PKG_RELEASE:=		1
+PKG_HASH:=		bedeb5bbd8b49e5b286497ef7732542c6e7441088fd8cd577d7ca8af4c871e81
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib glib libgtk libpng libtiff libxcursor libffi
@@ -18,20 +18,21 @@ PKG_BUILDDEP+=		nspr nss libjpeg-turbo libXt fontconfig sqlite atk libpng hicolo
 PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2 libevent bzip2-host python2-host yasm-host
 PKG_BUILDDEP+=		zip-host
 PKG_URL:=		http://www.mozilla.org/
-PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/${PKG_VERSION}/source/
+PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/$(PKG_VERSION)/source/
 PKG_NOPARALLEL:=	1
 
 PKG_ARCH_DEPENDS:=	arm x86 x86_64 mips
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
-PKG_SYSTEM_DEPENDS:=	tarox-pc ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 qemu-mips64el raspberry-pi
+PKG_SYSTEM_DEPENDS:=	solidrun-imx6 ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 qemu-mips64el raspberry-pi
 
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.source.tar.bz2
-WRKDIST=		${WRKDIR}/mozilla-release
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).source.tar.bz2
+WRKDIST=		$(WRKDIR)/mozilla-release
+WRKBUILD=		$(WRKDIR)/$(PKG_NAME)-obj
 
 include $(ADK_TOPDIR)/mk/package.mk
 include $(ADK_TOPDIR)/mk/python.mk
 
-$(eval $(call PKG_template,FIREFOX,firefox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,FIREFOX,firefox,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 ifeq ($(ADK_DEBUG),y)
 CONFIGURE_ARGS+=	--enable-debug --enable-logging
@@ -42,14 +43,14 @@ endif
 
 CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			PYTHON="$(PYTHON)" \
-			HOST_CC="${HOST_CC}" \
-			HOST_CPPFLAGS="${HOST_CPPFLAGS}" \
-			HOST_CFLAGS="${HOST_CFLAGS}" \
-			HOST_LDFLAGS="${HOST_LDLAGS}" \
-			HOST_CXX="${HOST_CXX}" \
-			HOST_CXXFLAGS="${HOST_CXXFLAGS}" \
+			HOST_CC="$(HOST_CC)" \
+			HOST_CPPFLAGS="$(HOST_CPPFLAGS)" \
+			HOST_CFLAGS="$(HOST_CFLAGS)" \
+			HOST_LDFLAGS="$(HOST_LDLAGS)" \
+			HOST_CXX="$(HOST_CXX)" \
+			HOST_CXXFLAGS="$(HOST_CXXFLAGS)" \
 			HOST_RANLIB="ranlib" HOST_AR="ar" \
-			CPPFLAGS="-I${STAGING_TARGET_DIR}/usr/include/freetype2" \
+			CPPFLAGS="-I$(STAGING_TARGET_DIR)/usr/include/freetype2" \
 			ac_cv_sqlite_secure_delete=yes \
 			ac_cv_sqlite_threadsafe=yes \
 			ac_cv_sqlite_enable_fts3=yes \
@@ -66,19 +67,24 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-system-nspr \
 			--with-system-pango \
 			--with-system-libvpx \
-			--with-system-libevent=${STAGING_TARGET_DIR}/usr \
+			--with-system-libevent=$(STAGING_TARGET_DIR)/usr \
 			--enable-system-ffi \
 			--enable-system-sqlite \
 			--disable-libnotify \
-			--with-libIDL-prefix=${STAGING_TARGET_DIR}/usr \
-			--with-glib-prefix=${STAGING_TARGET_DIR}/usr \
+			--with-libIDL-prefix=$(STAGING_TARGET_DIR)/usr \
+			--with-glib-prefix=$(STAGING_TARGET_DIR)/usr \
 			--enable-chrome-format=jar \
 			--enable-necko-protocols=all \
 			--enable-libxul \
 			--enable-alsa \
+			--disable-profiling \
+			--disable-jprof \
+			--disable-shark \
+			--disable-systrace \
 			--disable-pulseaudio \
 			--disable-gstreamer \
 			--disable-gio \
+			--disable-gold \
 			--disable-gconf \
 			--disable-accessibility \
 			--disable-smil \
@@ -98,6 +104,8 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-mathml \
 			--disable-jemalloc \
 			--disable-crashreporter \
+			--disable-printing \
+			--disable-pie \
 			--disable-updater \
 			--disable-xpcom-fastload \
 			--disable-url-classifier \
@@ -109,17 +117,17 @@ TARGET_CFLAGS:=		$(subst Os,g3,$(TARGET_CFLAGS))
 endif
 
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(HOST_CC) HOST_LDFLAGS=$(HOST_LDFLAGS)
-XAKE_FLAGS+=            ARCHFLAG="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} ${TARGET_LDFLAGS} -lnss3 -lnssutil3 -lsmime3 -lssl3 -fPIC"
+XAKE_FLAGS+=            ARCHFLAG="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS) -lnss3 -lnssutil3 -lsmime3 -lssl3 -fPIC"
 
 pre-build:
-	-mkdir ${WRKBUILD}/js/src/.deps
+	-mkdir $(WRKBUILD)/js/src/.deps
 
 firefox-install:
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/bin
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/firefox-${PKG_VERSION} \
+	$(CP) $(WRKINST)/usr/lib/firefox-$(PKG_VERSION) \
 		$(IDIR_FIREFOX)/usr/lib
 	$(CP) ./files/firefox \
 		$(IDIR_FIREFOX)/usr/bin
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk

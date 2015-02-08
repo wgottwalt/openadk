@@ -1,11 +1,11 @@
---- mozilla-release.orig/python/mozbuild/mozbuild/backend/recursivemake.py	2013-12-05 17:07:53.000000000 +0100
-+++ mozilla-release/python/mozbuild/mozbuild/backend/recursivemake.py	2014-01-04 17:58:26.000000000 +0100
-@@ -421,7 +421,7 @@ class RecursiveMakeBackend(CommonBackend
+--- mozilla-release.orig/python/mozbuild/mozbuild/backend/recursivemake.py	2015-01-09 05:38:28.000000000 +0100
++++ mozilla-release/python/mozbuild/mozbuild/backend/recursivemake.py	2015-01-29 16:46:28.000000000 +0100
+@@ -940,7 +940,7 @@ INSTALL_TARGETS += %(prefix)s
      def _handle_idl_manager(self, manager):
-         build_files = self._purge_manifests['xpidl']
+         build_files = self._install_manifests['xpidl']
  
 -        for p in ('Makefile', 'backend.mk', '.deps/.mkdir.done',
 +        for p in ('Makefile.in', 'Makefile', 'backend.mk', '.deps/.mkdir.done',
              'xpt/.mkdir.done'):
-             build_files.add(p)
+             build_files.add_optional_exists(p)
  

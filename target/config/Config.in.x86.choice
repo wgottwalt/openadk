@@ -7,19 +7,19 @@ depends on (ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_GENERIC_PC || ADK_TA
 default ADK_CPU_I486
 
 config ADK_CPU_I486
-        boolean "i486"
+        bool "i486"
         select ADK_i486
 
 config ADK_CPU_I586
-        boolean "i586"
+        bool "i586"
         select ADK_i586
 
 config ADK_CPU_I686
-        boolean "i686"
+        bool "i686"
         select ADK_i686
 
 config ADK_CPU_ATOM
-        boolean "atom"
+        bool "atom"
         select ADK_atom
 
 endchoice

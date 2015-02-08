@@ -1,20 +1,20 @@
---- mozilla-release.orig/xpcom/ds/nsMathUtils.h	2013-09-11 01:15:27.000000000 +0200
-+++ mozilla-release/xpcom/ds/nsMathUtils.h	2013-10-23 16:28:38.000000000 +0200
-@@ -98,12 +98,16 @@ inline NS_HIDDEN_(bool) NS_finite(double
+--- mozilla-release.orig/xpcom/ds/nsMathUtils.h	2015-01-09 05:38:29.000000000 +0100
++++ mozilla-release/xpcom/ds/nsMathUtils.h	2015-01-29 21:37:27.000000000 +0100
+@@ -104,12 +104,16 @@ NS_finite(double aNum)
  #ifdef WIN32
-     // NOTE: '!!' casts an int to bool without spamming MSVC warning C4800.
-     return !!_finite(d);
+   // NOTE: '!!' casts an int to bool without spamming MSVC warning C4800.
+   return !!_finite(aNum);
 -#elif defined(XP_DARWIN)
 +#elif defined(XP_DARWIN) || defined(__UCLIBC__)
-     // Darwin has deprecated |finite| and recommends |isfinite|. The former is
-     // not present in the iOS SDK.
-     return std::isfinite(d);
+   // Darwin has deprecated |finite| and recommends |isfinite|. The former is
+   // not present in the iOS SDK.
+   return std::isfinite(aNum);
  #else
--    return finite(d);
+-  return finite(aNum);
 +#ifdef _GLIBCXX_CMATH
-+    return std::isfinite(d);
++  return std::isfinite(d);
 +#else
-+    return isfinite(d);
++  return isfinite(d);
 +#endif
  #endif
  }
