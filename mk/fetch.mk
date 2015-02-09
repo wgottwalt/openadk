@@ -68,7 +68,7 @@ $(1):
 		if [ $$$$(echo $${PKG_VERSION}|wc -c) -eq 41 ]; then \
 			(cd $${PKG_NAME}-$${PKG_VERSION}; \
 			echo "Checking out $${PKG_VERSION}"; \
-			git checkout $${PKG_VERSION}); \
+			git checkout --quiet $${PKG_VERSION}) >/dev/null; \
 		else \
 			echo "Using head"; \
 		fi; \
