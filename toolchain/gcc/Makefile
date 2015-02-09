@@ -119,6 +119,10 @@ GCC_CONFOPTS+=		--with-float=soft
 endif
 endif
 
+ifeq ($(ADK_TARGET_ARCH_MIPS),y)
+GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
+endif
+
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
 GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
 ifneq ($(ADK_TARGET_FPU),)

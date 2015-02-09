@@ -1,0 +1,30 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice ADK_TARGET_MIPS_CPU_ARCH
+prompt "MIPS ISA"
+depends on ADK_TARGET_ARCH_MIPS
+
+config ADK_CPU_MIPS_MIPS32
+        bool "MIPS32"
+        select ADK_CPU_MIPS32
+
+config ADK_CPU_MIPS_MIPS32R2
+        bool "MIPS32r2"
+        select ADK_CPU_MIPS32R2
+
+endchoice
+
+choice ADK_TARGET_MIPS_FLOAT
+prompt "Float configuration"
+depends on ADK_TARGET_ARCH_MIPS
+
+config ADK_TARGET_MIPS_HARD_FLOAT
+	bool "hard-float"
+	select ADK_hard_float
+
+config ADK_TARGET_MIPS_SOFT_FLOAT
+	bool "soft-float"
+	select ADK_soft_float
+
+endchoice
