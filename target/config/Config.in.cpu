@@ -104,6 +104,9 @@ config ADK_CPU_M68K
 config ADK_CPU_MIPS32
 	boolean
 
+config ADK_CPU_MIPS32R2
+	boolean
+
 config ADK_CPU_MIPS64
 	boolean
 
