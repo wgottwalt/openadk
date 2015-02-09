@@ -135,4 +135,8 @@ clean: $(ADK_TARGET_ARCH)-clean $(ADK_TARGET_ARCH)-imageclean
 %-imageinstall: %-imageprepare
 	$(TRACE) target/$(patsubst %-imageinstall,%,$@)-imageinstall
 	$(MAKE) -C $(patsubst %-imageinstall,%,$@) imageinstall
+	for x in $$(ls $(ADK_TOPDIR)/scripts/postimage/*.sh); do \
+		[[ -x "$$x" ]] && $$x; \
+		break; \
+	done
 	@echo "Login as user root via ssh or console."
