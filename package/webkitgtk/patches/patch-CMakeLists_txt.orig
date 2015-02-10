@@ -1,0 +1,10 @@
+--- webkitgtk-2.6.4.orig/CMakeLists.txt	2014-11-20 02:32:05.000000000 -0600
++++ webkitgtk-2.6.4/CMakeLists.txt	2014-12-30 10:43:47.709729339 -0600
+@@ -69,7 +69,6 @@ find_package(Gperf 3.0.1 REQUIRED)
+ find_package(Perl 5.10.0 REQUIRED)
+ 
+ find_package(PythonInterp 2.6.0 REQUIRED)
+-find_package(Ruby 1.8.7)
+ 
+ # -----------------------------------------------------------------------------
+ # Determine the target processor
