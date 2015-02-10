@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${ADK_TOPDIR}/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		zlib
 PKG_VERSION:=		1.2.8
@@ -10,12 +10,12 @@ PKG_HASH:=		831df043236df8e9a7667b9e3bb37e1fcb1220a0f163b6de2626774b9590d057
 PKG_DESCR:=		implementation of the deflate compression method
 PKG_SECTION:=		libs/comp
 PKG_URL:=		http://www.zlib.net/
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libpng/zlib/}
+PKG_SITES:=		http://zlib.net/
 PKG_OPTS:=		dev
 
-include ${ADK_TOPDIR}/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,ZLIB,zlib,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,ZLIB,zlib,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
 CONFIG_STYLE:=		manual
 CONFIGURE_ENV+=		uname=Linux
@@ -42,7 +42,7 @@ do-configure:
 	);
 
 zlib-install:
-	${INSTALL_DIR} ${IDIR_ZLIB}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libz.so* ${IDIR_ZLIB}/usr/lib
+	$(INSTALL_DIR) $(IDIR_ZLIB)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libz.so* $(IDIR_ZLIB)/usr/lib
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
