@@ -28,7 +28,7 @@ ifeq ($(strip ${PKG_NOCHECKSUM}),)
 ${_CHECKSUM_COOKIE}: ${FULLDISTFILES}
 	-rm -rf ${WRKDIR}
 ifneq ($(ADK_DISABLE_CHECKSUM),y)
-	@if [ ! -e ${FULLDISTFILES}.nohash ]; then \
+	@if [ ! -e "${FULLDISTFILES}.nohash" ]; then \
 	OK=n; \
 	allsums="$(strip ${PKG_HASH})"; \
 	(shasum -a 256 ${FULLDISTFILES}; echo exit) | while read sum name; do \
