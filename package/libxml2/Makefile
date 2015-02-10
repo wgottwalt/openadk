@@ -75,9 +75,9 @@ libxml2-install:
 	$(CP) $(WRKINST)/usr/lib/libxml2.so* $(IDIR_LIBXML2)/usr/lib
 
 libxml2-python-install:
-	$(INSTALL_DIR) $(IDIR_LIBXML2_PYTHON)/usr/lib/python$(PYTHON_VERSION)/site-packages
-	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/site-packages/*.{so,py} \
-		$(IDIR_LIBXML2_PYTHON)/usr/lib/python$(PYTHON_VERSION)/site-packages
+	$(INSTALL_DIR) $(IDIR_LIBXML2_PYTHON)/usr/lib/python/site-packages
+	$(CP) $(WRKINST)/usr/lib/python/site-packages/*.{so,py} \
+		$(IDIR_LIBXML2_PYTHON)/usr/lib/python/site-packages
 	
 include $(ADK_TOPDIR)/mk/host-bottom.mk
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
