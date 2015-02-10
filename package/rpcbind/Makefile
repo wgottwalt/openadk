@@ -4,17 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		rpcbind
-PKG_VERSION:=		0.2.1
-PKG_RELEASE:=		2
-PKG_HASH:=		da169ff877a5a07581fad50a9a808ac6e96f0c277a3df49a7ef005778428496e
+PKG_VERSION:=		0.2.2
+PKG_RELEASE:=		1
+PKG_HASH:=		13dbc8c796dbe0ce8df873007bea0490c8460b56202d918c9eb6fa0358a08f29
 PKG_DESCR:=		converts rpc program numbers into universal addresses
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libtirpc
 PKG_BUILDDEP:=		libtirpc
 PKG_URL:=		http://sourceforge.net/projects/rpcbind/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rpcbind/}
-
-PKG_LIBC_DEPENDS:=	uclibc-ng uclibc glibc
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
@@ -24,6 +22,7 @@ $(eval $(call PKG_template,RPCBIND,rpcbind,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/tirpc
 CONFIGURE_ARGS+=	--disable-libwrap \
+			--without-systemdsystemunitdir \
 			--with-rpcuser=root
 
 rpcbind-install:
