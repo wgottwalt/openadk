@@ -20,8 +20,12 @@ if [ -d "$topdir/target/appliances" ];then
 	printf "config ADK_CHOOSE_APPLIANCE\n" >> $topdir/target/config/Config.in.appliances
 	printf "\tprompt \"choose an appliance\"\n" >> $topdir/target/config/Config.in.appliances
 	printf "\tboolean\n\n" >> $topdir/target/config/Config.in.appliances
-	cat $topdir/target/appliances/* >> $topdir/target/config/Config.in.appliances 2>/dev/null
-	printf "\nendchoice\n" >> $topdir/target/config/Config.in.appliances
+	cat $topdir/target/appliances/*.appliance >> $topdir/target/config/Config.in.appliances 2>/dev/null
+	printf "\nendchoice\n\n" >> $topdir/target/config/Config.in.appliances
+	printf "menu \"Appliance Options\"\n" >> $topdir/target/config/Config.in.appliances
+	printf "\tvisible if !ADK_CHOOSE_APPLIANCE\n" >> $topdir/target/config/Config.in.appliances
+	cat $topdir/target/appliances/*.options >> $topdir/target/config/Config.in.appliances 2>/dev/null
+	printf "endmenu\n" >> $topdir/target/config/Config.in.appliances
 fi
 
 # create system default
