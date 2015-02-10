@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		11
+PKG_RELEASE:=		12
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -96,7 +96,7 @@ endif
 	    echo "ff02::2 ip6-allrouters" >> $(IDIR_BASE_FILES)/etc/hosts
 	    echo "ff02::3 ip6-allhosts" >> $(IDIR_BASE_FILES)/etc/hosts
 	test -z '$(ADK_RUNTIME_PASSWORD)' || \
-	    $(SED) 's,\*NP\*,'"$$(awk -F\= '/^ADK_RUNTIME_PASSWORD/ { print $$2 }' $(ADK_TOPDIR)/.config|sed -e 's^\"^^g')),g" \
+	    $(SED) 's,\*NP\*,'"$$(awk -F\= '/^ADK_RUNTIME_PASSWORD/ { print $$2 }' $(ADK_TOPDIR)/.config|sed -e 's^\"^^g'),g" \
 		 $(IDIR_BASE_FILES)/etc/shadow
 	echo $(ADK_RUNTIME_TMPFS_SIZE) > $(IDIR_BASE_FILES)/etc/tmpfs
 ifeq ($(ADK_TARGET_WITH_ROOT_RW),y)
