@@ -1,6 +1,6 @@
---- libtirpc-0.2.4.orig/configure.ac	2013-12-09 21:59:51.000000000 +0100
-+++ libtirpc-0.2.4/configure.ac	2014-05-18 08:04:03.214884953 +0200
-@@ -25,14 +25,16 @@ if test "x$enable_ipv6" != xno; then
+--- libtirpc-0.2.5.orig/configure.ac	2014-08-08 11:24:34.000000000 -0500
++++ libtirpc-0.2.5/configure.ac	2015-02-10 11:20:21.483005131 -0600
+@@ -24,14 +24,16 @@ if test "x$enable_ipv6" != xno; then
  fi
  
  AC_PROG_CC

@@ -1,5 +1,5 @@
---- libtirpc-0.2.4.orig/tirpc/rpc/svc.h	2013-12-09 21:59:51.000000000 +0100
-+++ libtirpc-0.2.4/tirpc/rpc/svc.h	2014-09-28 17:10:36.000000000 +0200
+--- libtirpc-0.2.5.orig/tirpc/rpc/svc.h	2014-08-08 11:24:34.000000000 -0500
++++ libtirpc-0.2.5/tirpc/rpc/svc.h	2015-02-10 11:20:21.939005129 -0600
 @@ -40,7 +40,6 @@
  
  #ifndef _TIRPC_SVC_H
@@ -139,7 +139,7 @@
  /*
   * Transport independent svc_create routine.
   */
-@@ -427,7 +456,9 @@ int svc_dg_enablecache(SVCXPRT *, const 
+@@ -427,7 +456,9 @@ int svc_dg_enablecache(SVCXPRT *, const
  
  int __rpc_get_local_uid(SVCXPRT *_transp, uid_t *_uid);
  
