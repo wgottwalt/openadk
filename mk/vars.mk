@@ -237,7 +237,8 @@ KERNEL_MODULE_FLAGS:=	ARCH=${ADK_TARGET_ARCH} \
 COMMON_ENV=		CONFIG_SHELL='$(strip ${SHELL})' \
 			AUTOM4TE='${STAGING_HOST_DIR}/usr/bin/autom4te' \
 			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
-			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q'
+			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q' \
+			VERBOSE=1
 			
 TARGET_ENV=		AR='$(TARGET_CROSS)ar' \
 			AS='$(TARGET_CROSS)as' \
