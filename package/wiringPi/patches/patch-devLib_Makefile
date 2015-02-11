@@ -1,6 +1,16 @@
 --- wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd.orig/devLib/Makefile	2015-02-11 09:58:24.000000000 +0100
-+++ wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd/devLib/Makefile	2015-02-11 10:20:01.648739557 +0100
-@@ -30,10 +30,10 @@ DYNAMIC=libwiringPiDev.so.$(VERSION)
++++ wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd/devLib/Makefile	2015-02-11 14:55:25.328819419 +0100
+@@ -22,18 +22,18 @@
+ #################################################################################
+ 
+ VERSION=$(shell cat ../VERSION)
+-DESTDIR=/usr
+-PREFIX=/local
++DESTDIR?=
++PREFIX=
+ 
+ STATIC=libwiringPiDev.a
+ DYNAMIC=libwiringPiDev.so.$(VERSION)
  
  #DEBUG	= -g -O0
  DEBUG	= -O2
@@ -28,3 +38,12 @@
  
  .PHONY:	clean
  clean:
+@@ -86,7 +87,7 @@ install:	$(DYNAMIC)
+ 	@install -m 0755 -d						$(DESTDIR)$(PREFIX)/lib
+ 	@install -m 0755 libwiringPiDev.so.$(VERSION)			$(DESTDIR)$(PREFIX)/lib/libwiringPiDev.so.$(VERSION)
+ 	@ln -sf $(DESTDIR)$(PREFIX)/lib/libwiringPiDev.so.$(VERSION)	$(DESTDIR)/lib/libwiringPiDev.so
+-	@ldconfig
++	@ln -sf $(DESTDIR)$(PREFIX)/lib/libwiringPiDev.so.$(VERSION)	$(DESTDIR)/lib/libwiringPiDev.so.2
+ 
+ .PHONY:	install-static
+ install-static:	$(STATIC)

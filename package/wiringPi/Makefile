@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		wiringPi
 PKG_VERSION:=		72b2af231be337d45a557ce6ca3ed1eeb6675ffd
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		gpio access library for the raspberry pi
 PKG_SECTION:=		libs/misc
 PKG_HASH:=		ddc71b86f71e7e5104a89f88a68bea20122b6ea9f8c535219d180bf89502a69d
@@ -36,11 +36,6 @@ wiringpi-install:
 	$(INSTALL_DIR) $(IDIR_WIRINGPI)/usr/lib
 	$(CP) $(WRKBUILD)/wiringPi/libwiringPi.so* $(IDIR_WIRINGPI)/usr/lib
 	$(CP) $(WRKBUILD)/devLib/libwiringPiDev.so* $(IDIR_WIRINGPI)/usr/lib
-	(cd $(IDIR_WIRINGPI)/usr/lib; ln -sf libwiringPi.so.2.25 libwiringPi.so)
-	(cd $(IDIR_WIRINGPI)/usr/lib; ln -sf libwiringPi.so.2.25 libwiringPi.so.2)
-	(cd $(IDIR_WIRINGPI)/usr/lib; ln -sf libwiringPiDev.so.2.25 libwiringPiDev.so)
-	(cd $(IDIR_WIRINGPI)/usr/lib; ln -sf libwiringPiDev.so.2.25 libwiringPiDev.so.2)
-	$(CP) $(WRKBUILD)/wiringPi/*.h $(STAGING_TARGET_DIR)/usr/include
 	$(INSTALL_DIR) $(IDIR_WIRINGPI)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/gpio/gpio $(IDIR_WIRINGPI)/usr/bin
 
