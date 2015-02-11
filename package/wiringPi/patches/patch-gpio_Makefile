@@ -1,0 +1,31 @@
+--- wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd.orig/gpio/Makefile	2015-02-11 09:58:24.000000000 +0100
++++ wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd/gpio/Makefile	2015-02-11 10:18:57.776739248 +0100
+@@ -28,11 +28,11 @@ PREFIX=/local
+ 
+ #DEBUG	= -g -O0
+ DEBUG	= -O2
+-CC	= gcc
++CC	?= gcc
+ INCLUDE	= -I$(DESTDIR)$(PREFIX)/include
+-CFLAGS	= $(DEBUG) -Wall $(INCLUDE) -Winline -pipe
++CFLAGS	?= -Wall $(INCLUDE) -Winline
+ 
+-LDFLAGS	= -L$(DESTDIR)$(PREFIX)/lib
++LDFLAGS	= -L../wiringPi -L../devLib
+ LIBS    = -lwiringPi -lwiringPiDev -lpthread -lm
+ 
+ # May not need to  alter anything below this line
+@@ -49,11 +49,11 @@ version.h:	../VERSION
+ 
+ gpio:	$(OBJ)
+ 	@echo [Link]
+-	@$(CC) -o $@ $(OBJ) $(LDFLAGS) $(LIBS)
++	$(CC) -o $@ $(OBJ) $(LDFLAGS) $(LIBS)
+ 	
+ .c.o:
+ 	@echo [Compile] $<
+-	@$(CC) -c $(CFLAGS) $< -o $@
++	$(CC) -c $(CPPFLAGS) $(CFLAGS) $< -o $@
+ 
+ .PHONY:	clean
+ clean:

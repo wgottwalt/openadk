@@ -1,25 +1,25 @@
- fix upstream Makefile
-
---- wiringPi-0.1.orig/devLib/Makefile	2014-12-05 14:48:57.000000000 +0100
-+++ wiringPi-0.1/devLib/Makefile	2014-12-05 15:35:35.470864970 +0100
-@@ -32,9 +32,9 @@ DYNAMIC=libwiringPiDev.so.$(VERSION)
+--- wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd.orig/devLib/Makefile	2015-02-11 09:58:24.000000000 +0100
++++ wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd/devLib/Makefile	2015-02-11 10:20:01.648739557 +0100
+@@ -30,10 +30,10 @@ DYNAMIC=libwiringPiDev.so.$(VERSION)
  
  #DEBUG	= -g -O0
  DEBUG	= -O2
 -CC	= gcc
 +CC	?= gcc
  INCLUDE	= -I.
--CFLAGS	= $(DEBUG) -Wformat=2 -Wall $(INCLUDE) -Winline -pipe -fPIC
-+CFLAGS	?= -Wformat=2 -Wall $(INCLUDE) -Winline -pipe -fPIC
+ DEFS	= -D_GNU_SOURCE
+-CFLAGS	= $(DEBUG) $(DEFS) -Wformat=2 -Wall -Winline $(INCLUDE) -pipe -fPIC
++CFLAGS	?= $(DEFS) -Wformat=2 -Wall -Winline $(INCLUDE) -fPIC
  
  LIBS    =
  
-@@ -59,11 +59,11 @@ $(STATIC):	$(OBJ)
+@@ -60,11 +60,12 @@ $(STATIC):	$(OBJ)
  
  $(DYNAMIC):	$(OBJ)
  	@echo "[Link (Dynamic)]"
 -	@$(CC) -shared -Wl,-soname,libwiringPiDev.so -o libwiringPiDev.so.$(VERSION) -lpthread $(OBJ)
 +	$(CC) -shared -Wl,-soname,libwiringPiDev.so -o libwiringPiDev.so.$(VERSION) -lpthread $(OBJ)
++	ln -sf libwiringPiDev.so.$(VERSION) libwiringPiDev.so
  
  .c.o:
  	@echo [Compile] $<

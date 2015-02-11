@@ -1,0 +1,10 @@
+--- wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd.orig/wiringPi/wiringPi.c	2015-02-10 17:08:20.000000000 +0100
++++ wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd/wiringPi/wiringPi.c	2015-02-11 09:29:50.028725001 +0100
+@@ -51,6 +51,7 @@
+ //		Added in the 2 UART pins
+ //		Change maxPins to numPins to more accurately reflect purpose
+ 
++#define _GNU_SOURCE
+ 
+ #include <stdio.h>
+ #include <stdarg.h>

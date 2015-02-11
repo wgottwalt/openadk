@@ -1,6 +1,6 @@
---- wiringPi-0.1.orig/wiringPi/Makefile	2014-12-05 14:48:57.000000000 +0100
-+++ wiringPi-0.1/wiringPi/Makefile	2014-12-05 15:38:39.214862303 +0100
-@@ -33,10 +33,10 @@ DYNAMIC=libwiringPi.so.$(VERSION)
+--- wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd.orig/wiringPi/Makefile	2015-02-11 09:58:24.000000000 +0100
++++ wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd/wiringPi/Makefile	2015-02-11 10:20:20.360739647 +0100
+@@ -30,10 +30,10 @@ DYNAMIC=libwiringPi.so.$(VERSION)
  
  #DEBUG	= -g -O0
  DEBUG	= -O2
@@ -9,21 +9,22 @@
  INCLUDE	= -I.
  DEFS	= -D_GNU_SOURCE
 -CFLAGS	= $(DEBUG) $(DEFS) -Wformat=2 -Wall -Winline $(INCLUDE) -pipe -fPIC
-+CFLAGS	?= $(DEFS) -Wformat=2 -Wall -Winline $(INCLUDE) -pipe -fPIC
++CFLAGS	?= $(DEFS) -Wformat=2 -Wall -Winline $(INCLUDE) -fPIC
  
  LIBS    =
  
-@@ -71,11 +71,11 @@ $(STATIC):	$(OBJ)
+@@ -83,11 +83,12 @@ $(STATIC):	$(OBJ)
  
  $(DYNAMIC):	$(OBJ)
  	@echo "[Link (Dynamic)]"
 -	@$(CC) -shared -Wl,-soname,libwiringPi.so -o libwiringPi.so.$(VERSION) -lpthread $(OBJ)
 +	$(CC) -shared -Wl,-soname,libwiringPi.so -o libwiringPi.so.$(VERSION) -lpthread $(OBJ)
++	ln -sf libwiringPi.so.$(VERSION) libwiringPi.so
  
  .c.o:
  	@echo [Compile] $<
 -	@$(CC) -c $(CFLAGS) $< -o $@
 +	$(CC) -c $(CPPFLAGS) $(CFLAGS) $< -o $@
  
+ 
  .PHONY:	clean
- clean:

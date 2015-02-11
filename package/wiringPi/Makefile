@@ -4,19 +4,21 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		wiringPi
-PKG_VERSION:=		0a9fdeb29d31609ef834f050bdb8a7a65cd35e2b
+PKG_VERSION:=		72b2af231be337d45a557ce6ca3ed1eeb6675ffd
 PKG_RELEASE:=		1
 PKG_DESCR:=		gpio access library for the raspberry pi
 PKG_SECTION:=		libs/misc
 PKG_HASH:=		ddc71b86f71e7e5104a89f88a68bea20122b6ea9f8c535219d180bf89502a69d
+PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://wiringpi.com/
 PKG_SITES:=		git://git.drogon.net/wiringPi
+PKG_LIBNAME:=		wiringpi
 
 PKG_SYSTEM_DEPENDS:=    raspberry-pi raspberry-pi2
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,WIRINGPI,wiringPi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,WIRINGPI,wiringpi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
 BUILD_STYLE:=		manual
@@ -28,13 +30,18 @@ TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 do-build:
 	(cd $(WRKBUILD); $(MAKE) -C wiringPi)
 	(cd $(WRKBUILD); $(MAKE) -C devLib)
+	(cd $(WRKBUILD); $(MAKE) -C gpio)
 
-wiringPi-install:
+wiringpi-install:
 	$(INSTALL_DIR) $(IDIR_WIRINGPI)/usr/lib
 	$(CP) $(WRKBUILD)/wiringPi/libwiringPi.so* $(IDIR_WIRINGPI)/usr/lib
 	$(CP) $(WRKBUILD)/devLib/libwiringPiDev.so* $(IDIR_WIRINGPI)/usr/lib
-	(cd $(IDIR_WIRINGPI)/usr/lib; ln -sf libwiringPi.so.2.0 libwiringPi.so)
-	(cd $(IDIR_WIRINGPI)/usr/lib; ln -sf libwiringPiDev.so.2.0 libwiringPiDev.so)
+	(cd $(IDIR_WIRINGPI)/usr/lib; ln -sf libwiringPi.so.2.25 libwiringPi.so)
+	(cd $(IDIR_WIRINGPI)/usr/lib; ln -sf libwiringPi.so.2.25 libwiringPi.so.2)
+	(cd $(IDIR_WIRINGPI)/usr/lib; ln -sf libwiringPiDev.so.2.25 libwiringPiDev.so)
+	(cd $(IDIR_WIRINGPI)/usr/lib; ln -sf libwiringPiDev.so.2.25 libwiringPiDev.so.2)
 	$(CP) $(WRKBUILD)/wiringPi/*.h $(STAGING_TARGET_DIR)/usr/include
+	$(INSTALL_DIR) $(IDIR_WIRINGPI)/usr/bin
+	$(INSTALL_BIN) $(WRKBUILD)/gpio/gpio $(IDIR_WIRINGPI)/usr/bin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

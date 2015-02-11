@@ -1,0 +1,13 @@
+--- wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd.orig/gpio/gpio.c	2015-02-11 09:58:24.000000000 +0100
++++ wiringPi-72b2af231be337d45a557ce6ca3ed1eeb6675ffd/gpio/gpio.c	2015-02-11 10:17:12.656738740 +0100
+@@ -37,8 +37,8 @@
+ #include <wiringPi.h>
+ #include <wpiExtensions.h>
+ 
+-#include <gertboard.h>
+-#include <piFace.h>
++//#include <gertboard.h>
++//#include <piFace.h>
+ 
+ #include "version.h"
+ 
