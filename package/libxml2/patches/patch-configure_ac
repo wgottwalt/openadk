@@ -1,5 +1,5 @@
 --- libxml2-2.9.2.orig/configure.ac	2014-10-15 23:06:15.000000000 -0500
-+++ libxml2-2.9.2/configure.ac	2015-02-10 14:34:59.318899232 -0600
++++ libxml2-2.9.2/configure.ac	2015-02-11 12:53:35.494162888 -0600
 @@ -837,62 +837,13 @@ if test "$with_python" != "no" ; then
                      echo Found python in environment PYTHON=$PYTHON
                      with_python=`$PYTHON -c "import sys; print(sys.exec_prefix)"`
@@ -38,7 +38,7 @@
 -	            else
 -		        echo could not find python$PYTHON_VERSION/Python.h or $with_python/include/Python.h
 -		    fi
-+                    AC_PATH_PROG(PYTHON, python python2.7 python2.6 python2.5 python2.4 python2.3 python2.2 python2.1 python2.0 python1.6 python1.5)
++                    AC_PATH_PROG(PYTHON, python2.7 python2.6 python2.5 python2.4 python2.3 python2.2 python2.1 python2.0 python1.6 python1.5)
  		fi
  	    fi
  	fi

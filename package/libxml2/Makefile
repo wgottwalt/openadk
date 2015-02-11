@@ -19,7 +19,7 @@ PKG_OPTS:=		dev
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 PKG_SUBPKGS:=		LIBXML2 LIBXML2_PYTHON
-PKGSD_LIBXML2_PYTHON:=	XML python bindings
+PKGSD_LIBXML2_PYTHON:=	xml python bindings
 PKGSC_LIBXML2_PYTHON:=	libs/misc
 PKGSB_LIBXML2_PYTHON:=	python2
 PKGSS_LIBXML2_PYTHON:=	python2
@@ -33,6 +33,7 @@ $(eval $(call PKG_template,LIBXML2_PYTHON,libxml2-python,$(PKG_VERSION)-$(PKG_RE
 
 include $(ADK_TOPDIR)/mk/python.mk
 
+TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/python$(PYTHON_VERSION)
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--with-python \
 			--with-threads \
