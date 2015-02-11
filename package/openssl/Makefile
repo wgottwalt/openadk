@@ -15,6 +15,7 @@ PKG_URL:=		http://www.openssl.org/
 PKG_SITES:=		http://www.openssl.org/source/
 PKG_LIBNAME:=		libopenssl
 PKG_OPTS:=		dev
+PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
