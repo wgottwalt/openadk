@@ -14,7 +14,7 @@ autostart)
 	;;
 start)
 	if [ -x /usr/bin/php-cgi ];then
-		su -m www -c "/usr/bin/php-cgi -b /var/run/php5.sock"
+		/usr/bin/php-cgi -b /var/run/php5.sock &
 	else
 		/usr/bin/php-fpm -D
 	fi
