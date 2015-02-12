@@ -19,6 +19,7 @@ CONFIGURE_ENV+=		PATH='${TARGET_PATH}' \
 			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig:${STAGING_TARGET_DIR}/usr/share/pkgconfig' \
 			PKG_CONFIG_SYSROOT_DIR='${STAGING_TARGET_DIR}' \
 			GCC_HONOUR_COPTS=s \
+			ac_cv_func_calloc_0_nonnull=yes \
 			ac_cv_func_realloc_0_nonnull=yes \
 			ac_cv_func_malloc_0_nonnull=yes \
 			cross_compiling=yes
