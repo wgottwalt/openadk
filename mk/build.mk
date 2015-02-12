@@ -108,16 +108,18 @@ POSTCONFIG=		-@\
 				rebuild=1;\
 			fi; \
 		done; \
+		for i in ADK_KERNEL_BCM2708_DT ADK_KERNEL_BCM2709_DT ADK_TARGET_GPU_MEM ADK_KERNEL_SND_BCM2708;do \
+			if [ "$$(grep ^$$i .config|md5sum)" != "$$(grep ^$$i .config.old|md5sum)" ];then \
+				touch .rebuild.bcm2835-bootloader;\
+				rebuild=1;\
+			fi; \
+		done; \
 		if [ "$$(grep ^ADK_RUNTIME_TIMEZONE .config|md5sum)" != "$$(grep ^ADK_RUNTIME_TIMEZONE .config.old|md5sum)" ];then \
 			touch .rebuild.musl .rebuild.uclibc .rebuild.uclibc-ng .rebuild.glibc;\
 			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config|md5sum)" != "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config.old|md5sum)" ];then \
 			touch .rebuild.dropbear .rebuild.openssh;\
-			rebuild=1;\
-		fi; \
-		if [ "$$(grep ^ADK_TARGET_GPU_MEM .config|md5sum)" != "$$(grep ^ADK_TARGET_GPU_MEM .config.old|md5sum)" ];then \
-			touch .rebuild.bcm2835-bootloader;\
 			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_KERNEL_VERSION .config|md5sum)" != "$$(grep ^ADK_KERNEL_VERSION .config.old|md5sum)" ];then \
