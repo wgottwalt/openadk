@@ -38,5 +38,8 @@ wiringpi-install:
 	$(CP) $(WRKBUILD)/devLib/libwiringPiDev.so* $(IDIR_WIRINGPI)/usr/lib
 	$(INSTALL_DIR) $(IDIR_WIRINGPI)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/gpio/gpio $(IDIR_WIRINGPI)/usr/bin
+	$(CP) $(WRKBUILD)/wiringPi/*.h $(STAGING_TARGET_DIR)/usr/include
+	$(CP) $(WRKBUILD)/wiringPi/libwiringPi.so* $(STAGING_TARGET_DIR)/usr/lib
+	$(CP) $(WRKBUILD)/devLib/libwiringPiDev.so* $(STAGING_TARGET_DIR)/usr/lib
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
