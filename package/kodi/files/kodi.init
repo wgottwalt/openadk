@@ -12,7 +12,7 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	if [ -! d /data/kodi ];then
+	if [ ! -d /data/kodi ];then
 		mkdir /data/kodi
 	fi
 	kodi &
