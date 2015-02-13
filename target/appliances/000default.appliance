@@ -1,6 +1,5 @@
 config ADK_APPLIANCE_NEW
-	prompt "create a new appliance"
-	boolean
+	bool "create a new appliance"
 	help
 	  Create a new appliance from scratch.
 

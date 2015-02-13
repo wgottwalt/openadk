@@ -4,8 +4,6 @@
 choice
 prompt "Kernel Version"
 depends on ADK_TARGET_KERNEL_CUSTOMISING
-default ADK_KERNEL_VERSION_3_14_28 if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
-default ADK_KERNEL_VERSION_3_18.6
 
 config ADK_KERNEL_VERSION_3_19_0
 	bool "3.19"
