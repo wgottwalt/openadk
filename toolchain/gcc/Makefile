@@ -44,7 +44,6 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-libstdcxx-pch \
 			--disable-ppl-version-check \
 			--disable-cloog-version-check \
-			--disable-target-optspace \
 			--with-system-zlib \
 			--without-ppl \
 			--without-cloog \
@@ -252,6 +251,7 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			${GCC_FINAL_CONFOPTS} \
+			--enable-cxx-flags='-fPIC' \
 			--enable-languages=$(LANGUAGES) \
 			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}'

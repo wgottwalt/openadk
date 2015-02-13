@@ -33,6 +33,12 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--with-tls \
 			--enable-kernel="2.6.32" \
 			--enable-add-ons
+ifeq ($(ADK_TARGET_FLOAT),soft)
+GLIBC_CONFOPTS+=	--without-fp
+endif
+ifeq ($(ADK_TARGET_FLOAT),hard)
+GLIBC_CONFOPTS+=	--with-fp
+endif
 TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
 TARGET_LDFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
