@@ -10,6 +10,7 @@ m68k
 microblaze
 mips
 mips64
+nios2
 ppc
 ppc64
 sparc

@@ -170,6 +170,7 @@ config ADK_TARGET_CPU_ARCH
 	default "mips64el" if ADK_TARGET_ARCH_MIPS64 && ADK_little
 	default "mips" if ADK_TARGET_ARCH_MIPS && ADK_big
 	default "mipsel" if ADK_TARGET_ARCH_MIPS && ADK_little
+	default "nios2" if ADK_TARGET_ARCH_NIOS2
 	default "ppc" if ADK_CPU_PPC
 	default "ppc" if ADK_CPU_PPC_440
 	default "ppc64" if ADK_CPU_PPC64
