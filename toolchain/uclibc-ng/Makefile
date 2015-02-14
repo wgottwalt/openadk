@@ -10,6 +10,24 @@ include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 TARGET_CFLAGS:=$(filter-out -flto,$(TARGET_CFLAGS))
 
+ifeq ($(ADK_TARGET_HARD_FLOAT),y)
+ifeq ($(ADK_TARGET_ARCH_ARM),y)
+TARGET_CFLAGS+=		-Wa,-mfloat-abi=hard
+endif
+ifeq ($(ADK_TARGET_ARCH_MIPS),y)
+TARGET_CFLAGS+=		-Wa,-mhard-float
+endif
+endif
+
+ifeq ($(ADK_TARGET_SOFT_FLOAT),y)
+ifeq ($(ADK_TARGET_ARCH_ARM),y)
+TARGET_CFLAGS+=		-Wa,-mfloat-abi=soft
+endif
+ifeq ($(ADK_TARGET_ARCH_MIPS),y)
+TARGET_CFLAGS+=		-Wa,-msoft-float
+endif
+endif
+
 # parallel building is broken at the moment
 #ifeq (${ADK_MAKE_PARALLEL},y)
 #UCLIBC_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
