@@ -12,9 +12,9 @@
  #else
 -  return finite(aNum);
 +#ifdef _GLIBCXX_CMATH
-+  return std::isfinite(d);
++  return std::isfinite(aNum);
 +#else
-+  return isfinite(d);
++  return isfinite(aNum);
 +#endif
  #endif
  }
