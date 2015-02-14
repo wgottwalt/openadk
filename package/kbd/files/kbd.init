@@ -11,7 +11,7 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	loadkeys /etc/${kbd_map}.map
+	loadkeys ${kbd_map}
 	;;
 stop)
 	;;

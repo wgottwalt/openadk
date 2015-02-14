@@ -186,9 +186,10 @@ config ADK_RUNTIME_CONSOLE_SERIAL_SPEED
 config ADK_RUNTIME_KBD_LAYOUT
 	string "keyboard layout for the embedded system"
 	depends on ADK_TARGET_WITH_INPUT
-	default ""
+	default "de-latin1-nodeadkeys"
 	help
 	  Predefine the keyboard layout for the embedded system.
+	  For example use de-latin1-nodeadkeys.
 
 choice
 prompt "initial login shell for the root user"

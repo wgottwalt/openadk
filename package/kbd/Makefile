@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kbd
 PKG_VERSION:=		2.0.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		9dfddabf96012e329c4bebb96a21aeef7c3872f624e96e8156ba542b82aeb912
 PKG_DESCR:=		keyboard utility
 PKG_SECTION:=		sys/hw
@@ -13,6 +13,8 @@ PKG_DEPENDS:=		libcheck
 PKG_BUILDDEP:=		flex-host bison-host check
 PKG_URL:=		http://kbd-project.org/
 PKG_SITES:=		http://kbd-project.org/download/
+
+PKG_CFLINE_KBD:=	default y if ADK_TARGET_WITH_INPUT
 
 include $(ADK_TOPDIR)/mk/package.mk
 
