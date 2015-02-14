@@ -61,7 +61,15 @@ ifeq ($(ADK_TARGET_HARD_FLOAT),y)
 	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
+ifeq ($(ADK_TARGET_BINFMT_FLAT_ONE),y)
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_ONE\).*/\1=y/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
 	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SEP_DATA\).*/\1=y/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_BINFMT_FLAT_SHARED),y)
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SHARED\).*/\1=y/' ${WRKBUILD}/.config
+endif
 endif
 ifeq ($(ADK_TARGET_UCLINUX),y)
 	$(SED) 's/.*\(ARCH_USE_MMU\).*/# \1 is not set/' ${WRKBUILD}/.config
@@ -179,6 +187,7 @@ endif
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
 		HOSTCC="$(HOST_CC)" \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		oldconfig
 	PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
@@ -186,6 +195,7 @@ endif
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
 		HOSTCC="$(HOST_CC)" \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		install_headers
 	touch $(WRKBUILD)/.configured
 	touch $@
@@ -197,6 +207,7 @@ $(WRKBUILD)/.compiled:
 		RUNTIME_PREFIX=/ \
 		HOSTCC="$(HOST_CC)" \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		all
 	touch $@
@@ -208,6 +219,7 @@ $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		install_dev
 	touch $@
@@ -219,6 +231,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		install_runtime
 	touch $@
@@ -230,6 +243,7 @@ ifeq ($(ADK_UCLIBC_TEST),y)
 		TEST_INSTALLED_UCLIBC=1 \
 		UCLIBC_ONLY=1 \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		test_compile
 endif

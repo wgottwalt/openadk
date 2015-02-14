@@ -108,11 +108,14 @@ TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
+TARGET_LDFLAGS+=	-elf2flt
+endif
+
+ifeq ($(ADK_TARGET_ARCH_M68K),y)
 ifeq ($(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
 TARGET_CFLAGS+=		-msep-data
 TARGET_CXXFLAGS+=	-msep-data
 endif
-TARGET_LDFLAGS+=	-elf2flt
 endif
 
 ifeq ($(ADK_TARGET_LIB_MUSL),y)

@@ -30,20 +30,21 @@ depends on ADK_TARGET_BINFMT_FLAT
 default ADK_TARGET_BINFMT_FLAT_ONE
 
 config ADK_TARGET_BINFMT_FLAT_ONE
-        bool "One memory region"
-        help
-          All segments are linked into one memory region.
+	bool "One memory region"
+	help
+	  All segments are linked into one memory region.
 
 config ADK_TARGET_BINFMT_FLAT_SEP_DATA
-        bool "Separate data and code region"
-        help
-          Allow for the data and text segments to be separated and placed in
-          different regions of memory.
+	bool "Separate data and code region"
+	depends on ADK_TARGET_ARCH_M68K || ADK_TARGET_ARCH_BFIN
+	help
+	  Allow for the data and text segments to be separated and placed in
+	  different regions of memory.
 
 config ADK_TARGET_BINFMT_FLAT_SHARED
-        bool "Shared binary"
-        select ADK_TARGET_BINFMT_SUPPORTS_SHARED
-        help
-          Allow to load and link indiviual FLAT binaries at run time.
+	bool "Shared binary"
+	select ADK_TARGET_BINFMT_SUPPORTS_SHARED
+	help
+	  Allow to load and link indiviual FLAT binaries at run time.
 
 endchoice
