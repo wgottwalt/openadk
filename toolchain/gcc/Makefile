@@ -69,6 +69,26 @@ GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++,libgcc'
 endif
 endif
 
+ifeq ($(ADK_TOOLCHAIN_WITH_SSP),y)
+GCC_FINAL_CONFOPTS+=	--enable-libssp
+else
+GCC_FINAL_CONFOPTS+=	--disable-libssp
+endif
+
+ifeq ($(ADK_TOOLCHAIN_WITH_LTO),y)
+GCC_CONFOPTS+=		--enable-lto
+else
+GCC_CONFOPTS+=		--disable-lto
+endif
+
+#
+# architecture specific
+#
+
+ifneq ($(ADK_TARGET_ARCH_ARM)$(ADK_TARGET_ARCH_MIPS)$(ADK_TARGET_ARCH_PPC),)
+GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
+endif
+
 ifeq ($(ADK_TARGET_ARCH_M68K)$(ADK_TARGET_ARCH_SH)$(ADK_TARGET_ARCH_X86_64)$(ADK_TARGET_ARCH_X86),)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
@@ -99,31 +119,11 @@ GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 endif
 
-ifeq ($(ADK_TOOLCHAIN_WITH_SSP),y)
-GCC_FINAL_CONFOPTS+=	--enable-libssp
-else
-GCC_FINAL_CONFOPTS+=	--disable-libssp
-endif
-
-ifeq ($(ADK_TOOLCHAIN_WITH_LTO),y)
-GCC_CONFOPTS+=		--enable-lto
-else
-GCC_CONFOPTS+=		--disable-lto
-endif
-
 ifeq ($(ADK_TARGET_ARCH_PPC),y)
 GCC_CONFOPTS+=		--with-long-double-64 --enable-secureplt
-ifneq ($(ADK_TARGET_CPU_WITH_FPU),y)
-GCC_CONFOPTS+=		--with-float=soft
-endif
-endif
-
-ifeq ($(ADK_TARGET_ARCH_MIPS),y)
-GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
 endif
 
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
-GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
 ifneq ($(ADK_TARGET_FPU),)
 GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
 endif

@@ -1,14 +1,14 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_fpu_neon
+config ADK_soft_float
 	bool
 
-config ADK_fpu_vfp
+config ADK_hard_float
 	bool
 
-config ADK_TARGET_FPU
+config ADK_TARGET_FLOAT
 	string
-	default "vfp" if ADK_fpu_vfp
-	default "neon" if ADK_fpu_neon
+	default "hard" if ADK_hard_float
+	default "soft" if ADK_soft_float
 

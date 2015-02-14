@@ -1,0 +1,18 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice ADK_TARGET_FLOAT
+prompt "Float configuration"
+depends on ADK_TARGET_ARCH_ARM || \
+	   ADK_TARGET_ARCH_MIPS || \
+	   ADK_TARGET_ARCH_PPC
+
+config ADK_TARGET_HARD_FLOAT
+	bool "hard-float"
+	select ADK_hard_float
+
+config ADK_TARGET_SOFT_FLOAT
+	bool "soft-float"
+	select ADK_soft_float
+
+endchoice
