@@ -2,7 +2,6 @@ config ADK_TARGET_SYSTEM_RASPBERRY_PI2
 	bool "Raspberry PI 2"
 	select ADK_arm
 	select ADK_little
-	select ADK_eabihf
 	select ADK_fpu_vfp
 	select ADK_raspberry_pi2
 	select ADK_CPU_CORTEX_A7

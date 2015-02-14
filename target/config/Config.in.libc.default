@@ -50,16 +50,16 @@ config ADK_TARGET_WITH_NPTL
 
 config ADK_TARGET_SUFFIX
 	string
-	default "gnueabihf" if ADK_TARGET_LIB_GLIBC && ADK_eabihf
-	default "gnueabi" if ADK_TARGET_LIB_GLIBC && ADK_eabi
+	default "gnueabihf" if ADK_TARGET_LIB_GLIBC && ADK_arm && ADK_hard_float
+	default "gnueabi" if ADK_TARGET_LIB_GLIBC && ADK_arm && ADK_soft_float
 	default "gnuabi64" if ADK_TARGET_LIB_GLIBC && ADK_n64
 	default "gnuabin32" if ADK_TARGET_LIB_GLIBC && ADK_n32
 	default "gnuabi32" if ADK_TARGET_LIB_GLIBC && ADK_o32
 	default "gnu32" if ADK_TARGET_LIB_GLIBC && ADK_32 && ADK_LINUX_64
 	default "gnux32" if ADK_TARGET_LIB_GLIBC && ADK_x32 && ADK_LINUX_64
 	default "gnu" if ADK_TARGET_LIB_GLIBC
-	default "uclibceabihf" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_eabihf
-	default "uclibceabi" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_eabi
+	default "uclibceabihf" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_arm && ADK_hard_float
+	default "uclibceabi" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_arm && ADK_soft_float
 	default "uclibcabi64" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_n64
 	default "uclibcabin32" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_n32
 	default "uclibcabi32" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_o32

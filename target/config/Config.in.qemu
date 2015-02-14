@@ -53,39 +53,28 @@ prompt "Qemu ARM Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_ARM
 
 config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
-	bool "ARM Ltd. Versatile Express for Cortex-A9"
+	bool "ARM Ltd. Versatile Express with Cortex-A9"
 	select ADK_CPU_CORTEX_A9
+	select ADK_TARGET_CPU_WITH_FPU
 
 config ADK_TARGET_QEMU_ARM_MODEL_STELLARIS_M3
-	bool "Stellaris LM3S6965EVB"
-	select ADK_soft_float
-	select ADK_eabi
+	bool "Stellaris LM3S6965EVB with Cortex-M3"
 	select ADK_CPU_CORTEX_M3
-	select ADK_TARGET_ARM_SOFT_FLOAT
 	select ADK_TARGET_ARCH_ARM_WITH_THUMB
 	select ADK_TARGET_UCLINUX
 
 config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
-	bool "ARM Ltd. Versatile/PB"
-	select ADK_soft_float
-	select ADK_eabi
+	bool "ARM Ltd. Versatile/PB with ARM926EJ-S"
 	select ADK_CPU_ARM926EJ_S
-	select ADK_TARGET_ARM_SOFT_FLOAT
 
 config ADK_TARGET_QEMU_ARM_MODEL_TERRIER
-	bool "Xscale PXA270 Terrier PDA"
-	select ADK_soft_float
-	select ADK_eabi
+	bool "Xscale PXA270 Terrier PDA with XSCALE"
 	select ADK_CPU_XSCALE
 	select ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
-	select ADK_TARGET_ARM_SOFT_FLOAT
 
 config ADK_TARGET_QEMU_ARM_MODEL_SPITZ
-	bool "Xscale PXA270 Spitz PDA"
-	select ADK_soft_float
-	select ADK_eabi
+	bool "Xscale PXA270 Spitz PDA with XSCALE"
 	select ADK_CPU_XSCALE
 	select ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
-	select ADK_TARGET_ARM_SOFT_FLOAT
 
 endchoice
