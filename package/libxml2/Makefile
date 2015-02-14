@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libxml2
 PKG_VERSION:=		2.9.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		5178c30b151d044aefb1b08bf54c3003a0ac55c59c866763997529d60770d5bc
 PKG_DESCR:=		xml parser and toolkit
 PKG_SECTION:=		libs/data
@@ -34,6 +34,7 @@ $(eval $(call PKG_template,LIBXML2_PYTHON,libxml2-python,$(PKG_VERSION)-$(PKG_RE
 include $(ADK_TOPDIR)/mk/python.mk
 
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/python$(PYTHON_VERSION)
+HOST_CPPFLAGS+=		-I$(STAGING_HOST_DIR)/usr/include/python$(PYTHON_VERSION)
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--with-python \
 			--with-threads \
