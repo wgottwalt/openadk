@@ -36,12 +36,20 @@ config-prepare: $(ADK_TOPDIR)/.config
 		echo "no miniconfig found for target system"; \
 		exit 1; \
 	fi
-ifneq ($(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE),)
+ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_VGA_ONLY),y)
+	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE) consoleblank=0"#' \
+		$(BUILD_DIR)/.kernelconfig.board
+endif
+ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_ONLY),y)
 	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE),$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
-ifneq ($(ADK_RUNTIME_CONSOLE_VGA_DEVICE),)
-	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE)" consoleblank=0#' \
+ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_VGA_SERIAL),y)
+	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE) consoleblank=0 console=$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE),$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)"#' \
+		$(BUILD_DIR)/.kernelconfig.board
+endif
+ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_VGA),y)
+	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE),$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED) console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE) consoleblank=0"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_M68K),y)
@@ -70,7 +78,7 @@ ifeq ($(ADK_RUNTIME_QUIET_INIT),y)
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 rcquiet=1"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
-ifeq ($(ADK_QUIET_KERNEL),y)
+ifeq ($(ADK_RUNTIME_QUIET_KERNEL),y)
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 quiet loglevel=2 vt.global_cursor_default=0"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif

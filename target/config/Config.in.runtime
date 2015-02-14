@@ -50,10 +50,39 @@ config ADK_RUNTIME_TIMEZONE
 	help
 	  Predefine the timezone for the embedded system.
 
-config ADK_QUIET_KERNEL
-	bool "make bootup quiet without messages from the kernel"
+choice
+prompt "bootup messages from kernel"
+
+config ADK_RUNTIME_VERBOSE_KERNEL_VGA_ONLY
+	bool "output via VGA only"
+	depends on ADK_TARGET_WITH_VGA
+
+config ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_ONLY
+	bool "output via serial console only"
+	depends on ADK_TARGET_WITH_SERIAL
+
+config ADK_RUNTIME_VERBOSE_KERNEL_VGA_SERIAL
+	bool "output via VGA and serial console"
+	depends on ADK_TARGET_WITH_SERIAL && \
+		   ADK_TARGET_WITH_VGA
+	help
+	  Output is via VGA and serial console. 
+	  Init can use only serial via /dev/console.
+
+config ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_VGA
+	bool "output via serial console and VGA"
+	depends on ADK_TARGET_WITH_SERIAL && \
+		   ADK_TARGET_WITH_VGA
+	help
+	  Output is via serial console and VGA. 
+	  Init can use only VGA via /dev/console.
+
+config ADK_RUNTIME_QUIET_KERNEL
+	bool "no output from the kernel"
 	help
 	  Make bootup quiet without messages from the kernel.
+
+endchoice
 
 choice
 prompt "bootup messages from initscripts"
@@ -63,10 +92,16 @@ default ADK_RUNTIME_VERBOSE_INIT_SERIAL
 config ADK_RUNTIME_VERBOSE_INIT_VGA
 	bool "output via VGA"
 	depends on ADK_TARGET_WITH_VGA
+	depends on ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_VGA || \
+		   ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_ONLY || \
+		   ADK_RUNTIME_QUIET_KERNEL
 
 config ADK_RUNTIME_VERBOSE_INIT_SERIAL
 	bool "output via serial"
 	depends on ADK_TARGET_WITH_SERIAL
+	depends on ADK_RUNTIME_VERBOSE_KERNEL_VGA_SERIAL || \
+		   ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_ONLY || \
+		   ADK_RUNTIME_QUIET_KERNEL
 
 config ADK_RUNTIME_QUIET_INIT
 	bool "no output"
