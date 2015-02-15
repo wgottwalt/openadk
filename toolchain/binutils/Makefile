@@ -56,7 +56,7 @@ endif
 		--disable-dependency-tracking \
 		--disable-libtool-lock \
 		--disable-nls \
-		--disable-plugins \
+		--enable-plugins \
 		--disable-werror \
 		--disable-install-libiberty \
 		${CONFOPTS} \
