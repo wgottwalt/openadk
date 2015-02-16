@@ -175,7 +175,7 @@ config ADK_KERNEL_MMU
 	default n if ADK_TARGET_UCLINUX
 	default y
 
-onfig ADK_TARGET_NO_CMDLINE
+config ADK_TARGET_NO_CMDLINE
 	bool "Do not builtin any kernel cmdline"
 	help
 	  No kernel command line modifictaion is done.
