@@ -36,6 +36,7 @@ config-prepare: $(ADK_TOPDIR)/.config
 		echo "no miniconfig found for target system"; \
 		exit 1; \
 	fi
+ifneq ($(ADK_TARGET_NO_CMDLINE),y)
 ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_VGA_ONLY),y)
 	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE) consoleblank=0"#' \
 		$(BUILD_DIR)/.kernelconfig.board
@@ -89,6 +90,7 @@ endif
 ifeq ($(ADK_KERNEL_NETCONSOLE),y)
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 netconsole=@$(ADK_PARAMETER_NETCONSOLE_SRC_IP)/,@$(ADK_PARAMETER_NETCONSOLE_DST_IP)/"#' \
 		$(BUILD_DIR)/.kernelconfig.board
+endif
 endif
 	@cd $(BUILD_DIR) && cat .kernelconfig.board .kernelconfig.kernel \
 	    >.kernelconfig.tmp

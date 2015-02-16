@@ -175,11 +175,18 @@ config ADK_KERNEL_MMU
 	default n if ADK_TARGET_UCLINUX
 	default y
 
+onfig ADK_TARGET_NO_CMDLINE
+	bool "Do not builtin any kernel cmdline"
+	help
+	  No kernel command line modifictaion is done.
+
 config ADK_KERNEL_SMP
 	bool "Enable symmetric multi processing"
 	depends on ADK_TARGET_WITH_SMP
 	default y if ADK_TARGET_WITH_SMP
 	default n
+	help
+	  Enable symmetric multi processing support.
 
 config ADK_KERNEL_HIGHMEM
 	bool "Enable high memory"
@@ -188,9 +195,13 @@ config ADK_KERNEL_HIGHMEM
 	default y if ADK_TARGET_CUBOX_I2EX
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
+	help
+	  Enable high memory support.
 
 config ADK_KERNEL_PREEMPT
 	bool "Enable preemptive kernel"
+	help
+	  Enable preemptive mode.
 
 config ADK_KERNEL_BCM2708_DT
 	bool "Enable Devicetree support"
