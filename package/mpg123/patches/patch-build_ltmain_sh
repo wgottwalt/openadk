@@ -1,6 +1,6 @@
---- mpg123-1.13.3.orig/build/ltmain.sh	2011-04-03 09:52:37.000000000 +0200
-+++ mpg123-1.13.3/build/ltmain.sh	2011-05-02 15:02:20.131176071 +0200
-@@ -5840,7 +5840,7 @@ func_mode_link ()
+--- mpg123-1.21.0.orig/build/ltmain.sh	2014-09-28 16:28:03.000000000 -0500
++++ mpg123-1.21.0/build/ltmain.sh	2015-02-16 13:27:19.862189212 -0600
+@@ -5853,7 +5853,7 @@ func_mode_link ()
        # -O*, -flto*, -fwhopr*, -fuse-linker-plugin GCC link-time optimization
        -64|-mips[0-9]|-r[0-9][0-9]*|-xarch=*|-xtarget=*|+DA*|+DD*|-q*|-m*| \
        -t[45]*|-txscale*|-p|-pg|--coverage|-fprofile-*|-F*|@*|-tp=*|--sysroot=*| \
