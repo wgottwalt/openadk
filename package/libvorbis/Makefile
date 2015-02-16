@@ -19,7 +19,7 @@ PKG_SUBPKGS:=		LIBVORBIS LIBVORBISENC
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBVORBIS,libvorbis,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-$(eval $(call PKG_template,LIBVORBISENC,libvorbisenc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,LIBVORBISENC,libvorbisenc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ENV+=		LIBS="-lm -logg"
 CONFIGURE_ARGS+=	--with-ogg="${STAGING_TARGET_DIR}/usr" \
