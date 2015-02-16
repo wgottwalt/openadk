@@ -149,6 +149,10 @@ ifeq ($(ADK_CPU_CORTEX_A9),y)
 GCC_CONFOPTS+=		--with-cpu=cortex-a9
 endif
 
+ifeq ($(ADK_CPU_SPARC_V8),y)
+GCC_CONFOPTS+=		--with-cpu=v8
+endif
+
 ifeq ($(ADK_CPU_SPARC_V9),y)
 GCC_CONFOPTS+=		--with-cpu=ultrasparc
 endif

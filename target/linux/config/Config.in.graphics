@@ -31,6 +31,9 @@ config ADK_KERNEL_FB
 	select ADK_KERNEL_VT_CONSOLE
  	boolean
 
+config ADK_KERNEL_FB_SBUS
+	bool
+
 config ADK_KERNEL_DUMMY_CONSOLE
 	boolean
  
@@ -325,5 +328,15 @@ config ADK_KERNEL_DRM_CIRRUS_QEMU
 	depends on ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
 	help
 	  DRM/KMS support for Qemu cirrus VGA emulation.
+
+config ADK_KERNEL_FB_CGSIX
+	bool "Support for CGSIX framebuffer"
+	select ADK_KERNEL_FB
+	select ADK_KERNEL_FB_SBUS
+	default y if ADK_TARGET_SYSTEM_SUN_VOYAGER
+	default n
+	depends on ADK_TARGET_SYSTEM_SUN_VOYAGER
+	help
+	  Framebuffer support for Sun Voyager.
 	
 endmenu

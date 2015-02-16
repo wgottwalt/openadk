@@ -7,6 +7,10 @@ config ADK_HOST_BUILD_ADK_HELPER
 	boolean
 	default y
 
+config ADK_HOST_BUILD_ELFTOAOUT
+	boolean
+	default y if ADK_TARGET_ARCH_SPARC
+
 config ADK_HOST_BUILD_AUTOCONF
 	boolean
 	default y

@@ -19,6 +19,9 @@ config ADK_TARGET_KERNEL_UIMAGE
 config ADK_TARGET_KERNEL_BZIMAGE
 	bool
 
+config ADK_TARGET_KERNEL_VMLINUX_AOUT
+	bool
+
 config ADK_TARGET_KERNEL
 	string
 	default "uImage" if ADK_TARGET_KERNEL_UIMAGE
@@ -27,6 +30,7 @@ config ADK_TARGET_KERNEL
 	default "linux.bin" if ADK_TARGET_KERNEL_LINUXBIN
 	default "vmlinuz" if ADK_TARGET_KERNEL_VMLINUZ
 	default "bzImage" if ADK_TARGET_KERNEL_BZIMAGE
+	default "vmlinux.aout" if ADK_TARGET_KERNEL_VMLINUX_AOUT
 	default "vmlinux"
 
 config ADK_TARGET_KERNEL_MINICONFIG
@@ -70,4 +74,5 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "pcengines-apu" if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default "atmel-ngw100" if ADK_TARGET_SYSTEM_ATMEL_NGW100
 	default "apple-macmini" if ADK_TARGET_SYSTEM_APPLE_MACMINI
+	default "sun-voyager" if ADK_TARGET_SYSTEM_SUN_VOYAGER
 

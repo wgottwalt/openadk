@@ -7,7 +7,12 @@ include $(ADK_TOPDIR)/mk/modules.mk
 include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
+ifeq ($(ADK_TARGET_KERNEL_ZIMAGE),y)
 KERNEL:=$(LINUX_DIR)/arch/sparc/boot/zImage
+endif
+ifeq ($(ADK_TARGET_KERNEL_VMLINUX_AOUT),y)
+KERNEL:=$(LINUX_DIR)/arch/sparc/boot/vmlinux.aout
+endif
 
 QEMU_ARGS:=-M SS-10
 QEMU_ARGS+=${ADK_QEMU_ARGS}
@@ -49,6 +54,11 @@ ifeq ($(ADK_TARGET_QEMU),y)
 	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif
+ifeq ($(ADK_TARGET_FS),nfsroot)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The nfs root tarball is: ${FW_DIR}/${ROOTFSUSERTARBALL}'
+endif
 
 # image creation and kernel install
 kernel-strip:
@@ -69,4 +79,7 @@ imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 imageinstall: createinitramfs targethelp
+endif
+ifeq ($(ADK_TARGET_FS),nfsroot)
+imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
