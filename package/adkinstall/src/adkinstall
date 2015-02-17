@@ -28,6 +28,7 @@ EOF
 function ibm-x40-help {
 	cat >&2 <<EOF
 Syntax: adkinstall <archive>
+	-d: create data partition
 	-f: filesystem (default ext4)
 	-h: help text
 EOF
@@ -47,9 +48,13 @@ EOF
 case $target {
 (ibm-x40)
 	cfgfssize=32768
+	data=
 	fs=ext4
-	while getopts "f:" ch; do
+	while getopts "f:d:" ch; do
 	case $ch in
+		d)
+			data=$OPTARG
+			;;
 		f)
 			fs=$OPTARG
 			;;
@@ -212,17 +217,41 @@ case $target {
 (ibm-x40)
 	get_max_size /dev/sda
 	create_label /dev/sda
-	create_partition /dev/sda ext2 16385 $rootsize
-	create_partition /dev/sda ext2 $(($rootsize+1)) $(($maxsize-1))
-	set_boot_flag /dev/sda 1
-	change_part_type /dev/sda 2 88
+	if [ -z $data ];then
+		create_partition /dev/sda ext2 16385 $rootsize
+		create_partition /dev/sda ext2 $(($rootsize+1)) $(($maxsize-1))
+		set_boot_flag /dev/sda 1
+		change_part_type /dev/sda 2 88
+	else
+		datasize=$(($data*1024*2))
+		echo datasize is: $datasize
+		echo create partition from 16385 to $(($rootsize-$datasize))
+		create_partition /dev/sda ext2 16385 $(($rootsize-$datasize))
+		echo create partition from $(($rootsize-$datasize+1)) to $(($maxsize-$cfgfssize-1))
+		create_partition /dev/sda ext2 $(($rootsize-$datasize+1)) $(($maxsize-$cfgfssize-1))
+		echo create partition from $(($maxsize-$cfgfssize)) to $(($maxsize-1))
+		create_partition /dev/sda ext2 $(($maxsize-$cfgfssize)) $(($maxsize-1))
+		set_boot_flag /dev/sda 1
+		change_part_type /dev/sda 3 88
+
+	fi
 	partprobe /dev/sda
 	sync
 	sleep 2
-	create_filesystem /dev/sda $fs 1
+	if [ -z $data ];then
+		create_filesystem /dev/sda $fs 1
+	else
+		create_filesystem /dev/sda $fs 1
+		create_filesystem /dev/sda $fs 2
+	fi
 	mdev -s
 	mount_fs /dev/sda 1 $fs /mnt
 	extract_archive $archive /mnt
+	if [ ! -z $data ];then
+		echo creating data dir and fstab entry
+		mkdir /mnt/data
+		echo "/dev/sda2	/data	ext4	rw	0	0" >> /mnt/etc/fstab 
+	fi
 	grub_install /dev/sda
 	fix_perm /mnt
 	umount /mnt
