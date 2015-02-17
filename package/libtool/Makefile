@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libtool
-PKG_VERSION:=		2.4.2
-PKG_RELEASE:=		4
-PKG_HASH:=		1d7b6862c1ed162e327f083a6f78f40eae29218f0db8c38393d61dab764c4407
+PKG_VERSION:=		2.4.6
+PKG_RELEASE:=		1
+PKG_HASH:=		7c87a8c2c8c0fc9cd5019e402bed4292462d00a718a7cd5f11218153bf28b26f
 PKG_DESCR:=		generic dynamic object loading library
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		m4-host libtool-host
