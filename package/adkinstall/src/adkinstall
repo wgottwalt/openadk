@@ -211,6 +211,8 @@ function grub_install {
 function fix_perm {
 	print fixing permissions
 	chmod 1777 ${1}/tmp
+	[[ -f ${1}/usr/bin/sudo ]] && chmod 4755 ${1}/usr/bin/sudo
+	[[ -f ${1}/usr/bin/Xorg ]] && chmod 4755 ${1}/usr/bin/Xorg
 }
 
 case $target {
