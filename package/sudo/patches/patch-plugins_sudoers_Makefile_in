@@ -1,6 +1,6 @@
---- sudo-1.8.11p2.orig/plugins/sudoers/Makefile.in	2014-10-07 22:26:20.000000000 +0200
-+++ sudo-1.8.11p2/plugins/sudoers/Makefile.in	2014-12-15 12:59:33.342176744 +0100
-@@ -301,12 +301,12 @@ install-dirs:
+--- sudo-1.8.12.orig/plugins/sudoers/Makefile.in	2015-01-30 13:53:59.000000000 -0600
++++ sudo-1.8.12/plugins/sudoers/Makefile.in	2015-02-17 14:31:25.685362973 -0600
+@@ -305,12 +305,12 @@ install-dirs:
  	    $(DESTDIR)$(sudoersdir) $(DESTDIR)$(docdir) \
  	    `echo $(DESTDIR)$(rundir)|$(SED) 's,/[^/]*$$,,'` \
  	    `echo $(DESTDIR)$(vardir)|$(SED) 's,/[^/]*$$,,'`
@@ -17,7 +17,7 @@
  
  install-includes:
  
-@@ -322,9 +322,9 @@ install-plugin: sudoers.la install-dirs
+@@ -326,9 +326,9 @@ install-plugin: sudoers.la install-dirs
  	esac
  
  install-sudoers: install-dirs

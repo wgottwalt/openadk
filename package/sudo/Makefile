@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sudo
-PKG_VERSION:=		1.8.11p2
+PKG_VERSION:=		1.8.12
 PKG_RELEASE:=		1
-PKG_HASH:=		8133849418fa18cf6b6bb6893d1855ff7afe21db8923234a00bf045c90fba1ad
+PKG_HASH:=		163b51841de8ad19276581a6782d61f5948f1f72a0a843371a1c167d3dc4f3b0
 PKG_DESCR:=		su do
 PKG_SECTION:=		sys/misc
 PKG_URL:=		http://www.sudo.ws/sudo/
@@ -18,6 +18,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SUDO,sudo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoreconf
 HOST_CPPFLAGS+=		-I../ -I../include
 TARGET_LDFLAGS+=	-ldl
 CONFIGURE_ARGS+=	--without-pam \

@@ -1,6 +1,6 @@
---- sudo-1.8.11p2.orig/lib/util/Makefile.in	2014-10-07 22:26:20.000000000 +0200
-+++ sudo-1.8.11p2/lib/util/Makefile.in	2014-12-15 11:39:13.098206188 +0100
-@@ -148,10 +148,10 @@ signame.c: mksigname
+--- sudo-1.8.12.orig/lib/util/Makefile.in	2015-02-04 16:23:38.000000000 -0600
++++ sudo-1.8.12/lib/util/Makefile.in	2015-02-17 14:31:25.681362973 -0600
+@@ -146,10 +146,10 @@ signame.c: mksigname
  	./mksigname > $@
  
  mksiglist: $(srcdir)/mksiglist.c $(srcdir)/mksiglist.h $(incdir)/sudo_compat.h $(top_builddir)/config.h
