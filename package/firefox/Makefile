@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
 PKG_VERSION:=		35.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		bedeb5bbd8b49e5b286497ef7732542c6e7441088fd8cd577d7ca8af4c871e81
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
@@ -119,15 +119,15 @@ endif
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(HOST_CC) HOST_LDFLAGS=$(HOST_LDFLAGS)
 XAKE_FLAGS+=            ARCHFLAG="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS) -lnss3 -lnssutil3 -lsmime3 -lssl3 -fPIC"
 
-pre-build:
-	-mkdir $(WRKBUILD)/js/src/.deps
-
 firefox-install:
+	$(INSTALL_DIR) $(IDIR_FIREFOX)/etc
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/bin
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/firefox-$(PKG_VERSION) \
 		$(IDIR_FIREFOX)/usr/lib
-	$(CP) ./files/firefox \
+	$(CP) ./files/xinitrc \
+		$(IDIR_FIREFOX)/etc
+	$(INSTALL_BIN) ./files/firefox \
 		$(IDIR_FIREFOX)/usr/bin
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

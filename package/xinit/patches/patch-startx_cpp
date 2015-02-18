@@ -1,6 +1,32 @@
---- xinit-1.2.1.orig/startx.cpp	2010-03-15 23:35:56.000000000 +0100
-+++ xinit-1.2.1/startx.cpp	2010-12-13 17:44:35.000000000 +0100
-@@ -242,18 +242,7 @@ if [ x"$enable_xauth" = x1 ] ; then
+--- xinit-1.2.1.orig/startx.cpp	2010-03-15 17:35:56.000000000 -0500
++++ xinit-1.2.1/startx.cpp	2015-02-14 12:26:05.423804908 -0600
+@@ -51,24 +51,8 @@ XCOMM so export the new PATH just in cas
+ export PATH
+ #endif
+ 
+-#if defined(__SCO__) || defined(__UNIXWARE__)
+-XCOMM Set up the XMERGE env var so that dos merge is happy under X
+-
+-if [ -f /usr/lib/merge/xmergeset.sh ]; then
+-	. /usr/lib/merge/xmergeset.sh
+-elif [ -f /usr/lib/merge/console.disp ]; then
+-	XMERGE=`cat /usr/lib/merge/console.disp`
+-	export XMERGE
+-fi
+-
+-userclientrc=$HOME/.startxrc
+-sysclientrc=LIBDIR/sys.startxrc
+-scouserclientrc=$HOME/.xinitrc
+-scosysclientrc=XINITDIR/xinitrc
+-#else
+ userclientrc=$HOME/.xinitrc
+-sysclientrc=XINITDIR/xinitrc
+-#endif
++sysclientrc=/etc/xinitrc
+ 
+ userserverrc=$HOME/.xserverrc
+ sysserverrc=XINITDIR/xserverrc
+@@ -242,18 +226,7 @@ if [ x"$enable_xauth" = x1 ] ; then
      removelist=
  
      XCOMM set up default Xauth info for this machine
