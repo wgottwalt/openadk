@@ -2,7 +2,6 @@ config ADK_TARGET_SYSTEM_LINKSYS_NSLU2
 	bool "Linksys NSLU2"
 	select ADK_arm
 	select ADK_big
-	select ADK_eabihf
 	select ADK_linksys_nslu2
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_SERIAL
