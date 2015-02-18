@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
 PKG_VERSION:=		2015.01
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		383051a656ebe11757b17d38a3326387e4a1b0949ca8a9e8ee506bf71dac9fde
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
@@ -13,6 +13,8 @@ HOST_BUILDDEP:=		openssl-host
 PKG_BUILDDEP:=		u-boot-host
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
 PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
+
+PKG_CFLINE_U_BOOT:=	select ADK_KERNEL_ATAGS if ADK_TARGET_ARCH_ARM
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
@@ -47,7 +49,7 @@ host-build:
 		$(HOST_MAKE_FLAGS) tools $(MAKE_TRACE) )
 
 u-boot-hostinstall:
-	$(INSTALL_BIN) $(WRKBUILD)/tools/mkimage \
+	$(INSTALL_BIN) $(WRKBUILD)/tools/mk{,env}image \
 		$(STAGING_HOST_DIR)/usr/bin
 
 do-configure:
@@ -56,9 +58,19 @@ do-configure:
 do-build:
 	(cd $(WRKBUILD) && env CROSS_COMPILE='$(TARGET_CROSS)' \
 		GCC_HONOUR_COPTS=s $(MAKE))
+	(cd $(WRKBUILD) && env CROSS_COMPILE='$(TARGET_CROSS)' \
+		GCC_HONOUR_COPTS=s $(MAKE) env)
 
 u-boot-install:
 	$(CP) $(WRKBUILD)/u-boot.bin $(FW_DIR)
+	$(INSTALL_DIR) $(IDIR_U_BOOT)/etc
+	$(CP) ./files/fw_env.config $(IDIR_U_BOOT)/etc
+	$(INSTALL_DIR) $(IDIR_U_BOOT)/usr/bin
+	$(INSTALL_BIN) $(WRKBUILD)/tools/env/fw_printenv \
+		$(IDIR_U_BOOT)/usr/bin
+	(cd $(IDIR_U_BOOT)/usr/bin && ln -sf fw_printenv fw_setenv)
+	$(INSTALL_BIN) ./files/uboot_print_env $(IDIR_U_BOOT)/usr/bin
+	$(INSTALL_BIN) ./files/uboot_set_env $(IDIR_U_BOOT)/usr/bin
 
 include $(ADK_TOPDIR)/mk/host-bottom.mk
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
