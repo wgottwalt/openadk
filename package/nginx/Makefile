@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		nginx
-PKG_VERSION:=		1.7.9
+PKG_VERSION:=		1.7.10
 PKG_RELEASE:=		1
-PKG_HASH:=		1aafc7f0f530ddaa86d4ba24c14941ce0a584cc896f8261d6218f99625318f8a
+PKG_HASH:=		df73c1b468cebaf3530a5de910bed45ff2cfccf2cf4b9215d0aa0f4e39cf4460
 PKG_DESCR:=		powerful http reverse proxy and webserver
 PKG_SECTION:=		net/http
 PKG_BUILDDEP:=		pcre zlib
@@ -14,7 +14,7 @@ PKG_DEPENDS:=		libpcre libpthread zlib
 PKG_URL:=		http://nginx.org/
 PKG_SITES:=		http://nginx.org/download/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 PKG_CHOICES_NGINX:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITHOUT_SSL:=	use no ssl
@@ -27,14 +27,12 @@ PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,NGINX,nginx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,NGINX,nginx,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 CONFIG_STYLE:=          minimal
 TARGET_CFLAGS+=         -fPIC
 CONFIGURE_ARGS:=        --prefix=/srv/www \
 			--sbin-path=/usr/sbin \
-			--user=www \
-			--group=www \
 			--crossbuild=Linux::$(ADK_TARGET_ARCH) \
 			--with-cc='$(TARGET_CC)' \
                         --with-cc-opt='$(TARGET_CPPFLAGS) $(TARGET_CFLAGS)' \
@@ -70,4 +68,4 @@ nginx-install:
 	done
 	$(INSTALL_DIR) $(IDIR_NGINX)/srv/www
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
