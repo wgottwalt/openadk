@@ -172,8 +172,6 @@ menu "Kernel options"
 
 config ADK_KERNEL_MMU
 	bool
-	default n if ADK_TARGET_UCLINUX
-	default y
 
 config ADK_TARGET_NO_CMDLINE
 	bool "Do not builtin any kernel cmdline"

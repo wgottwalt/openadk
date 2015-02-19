@@ -12,7 +12,7 @@ PKG_SECTION:=		base/shells
 PKG_URL:=		http://www.mirbsd.org/mksh.htm
 PKG_SITES:=		$(MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/)
 
-PKG_DFLT_MKSH:=		y if (!ADK_TOOLCHAIN_ONLY && !ADK_TARGET_UCLINUX)
+PKG_DFLT_MKSH:=		y if (!ADK_TOOLCHAIN_ONLY && ADK_TARGET_WITH_MMU)
 
 DISTFILES:=		$(PKG_NAME)-R$(PKG_VERSION).tgz
 WRKDIST=		$(WRKDIR)/$(PKG_NAME)

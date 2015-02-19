@@ -2,143 +2,208 @@
 # material, please see the LICENCE file in the top-level directory.
 
 config ADK_TARGET_CPU_WITH_FPU
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_VT
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_MTRR
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_MMX
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_MMXEXT
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_SSE
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_SSE2
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_SSE3
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_SSSE3
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_IWMMXT
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_HT
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_3DNOW
-	boolean
+	bool
 
 config ADK_TARGET_CPU_WITH_3DNOWEXT
-	boolean
+	bool
 
 config ADK_CPU_ATHLON
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_ARC
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_TILE
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_C6X
-	boolean
+	bool
+	select ADK_TARGET_WITH_LT
 
 config ADK_CPU_CRIS_V10
-	boolean
+	bool
+	select ADK_TARGET_WITH_LT
 
 config ADK_CPU_CRIS_V32
-	boolean
+	bool
+	select ADK_TARGET_WITH_LT
 
 config ADK_CPU_SH4
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_SPARC_V8
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_SPARC_V9
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_X86
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_X86_64
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_GEODE
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_PPC
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_PPC_440
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_PPC64
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_PENTIUM_M
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_AMDFAM10
+	bool
 	select ADK_TARGET_CPU_WITH_VT
-	boolean
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_LOONGSON2F
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_XSCALE
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_M68K
-	boolean
+	bool
+	select ADK_TARGET_WITH_LT if ADK_LINUX_UCLINUX
+	select ADK_TARGET_WITH_MMU if !ADK_TARGET_WITH_MMU
+	select ADK_TARGET_WITH_NPTL
 
 config ADK_CPU_MIPS32
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_MIPS32R2
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_MIPS64
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_MICROBLAZE
-	boolean
+	bool
+	select ADK_TARGET_WITH_LT if ADK_TARGET_LIBC_UCLIBC_NG
+	select ADK_TARGET_WITH_MMU if !ADK_TARGET_WITH_MMU
+	select ADK_TARGET_WITH_NPTL
 
 config ADK_CPU_ARM926EJ_S
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_ARM1176JZF_S
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_CORTEX_M3
-	boolean
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CORTEX_M4
+	bool
+	select ADK_TARGET_WITH_LT
 
 config ADK_CPU_CORTEX_A7
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_CORTEX_A9
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_ARMV8
-	boolean
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_CF_5208
-	boolean
+	bool
+	select ADK_TARGET_WITH_LT
 
 config ADK_CPU_BFIN
-	boolean
+	bool
+	select ADK_TARGET_WITH_LT
 
 config ADK_CPU_AVR32
-	boolean
+	bool
+	select ADK_TARGET_WITH_LT
 
 config ADK_TARGET_CPU_ARCH
 	string
