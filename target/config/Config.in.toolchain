@@ -13,22 +13,6 @@ config ADK_VENDOR
 choice
 prompt "GCC version"
 
-config ADK_TOOLCHAIN_GCC_4_4_7
-	bool "4.4.7"
-	depends on ADK_TARGET_ARCH_AVR32
-
-config ADK_TOOLCHAIN_GCC_4_5_4
-	bool "4.5.4"
-	depends on ADK_TARGET_ARCH_BFIN
-
-config ADK_TOOLCHAIN_GCC_4_7_4
-	bool "4.7.4"
-	depends on ADK_TARGET_ARCH_CRIS || ADK_TARGET_ARCH_C6X
-
-config ADK_TOOLCHAIN_GCC_4_8_0_ARC
-	bool "4.8.0-arc"
-	depends on ADK_TARGET_ARCH_ARC
-
 config ADK_TOOLCHAIN_GCC_4_9_2
 	bool "4.9.2"
 	depends on !ADK_TARGET_ARCH_BFIN
@@ -46,6 +30,24 @@ config ADK_TOOLCHAIN_GCC_4_8_4
 	depends on !ADK_TARGET_ARCH_CRIS
 	depends on !ADK_TARGET_ARCH_TILE
 	depends on !ADK_TARGET_ARCH_C6X
+
+config ADK_TOOLCHAIN_GCC_4_7_4
+	bool "4.7.4"
+	depends on ADK_TARGET_ARCH_CRIS \
+		|| ADK_TARGET_ARCH_C6X \
+		|| ADK_TARGET_ARCH_SPARC
+
+config ADK_TOOLCHAIN_GCC_4_8_0_ARC
+	bool "4.8.0-arc"
+	depends on ADK_TARGET_ARCH_ARC
+
+config ADK_TOOLCHAIN_GCC_4_5_4
+	bool "4.5.4"
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TOOLCHAIN_GCC_4_4_7
+	bool "4.4.7"
+	depends on ADK_TARGET_ARCH_AVR32
 
 config ADK_TOOLCHAIN_GCC_GIT
 	bool "git"
