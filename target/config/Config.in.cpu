@@ -244,6 +244,7 @@ config ADK_TARGET_CPU_ARCH
 	default "i686" if ADK_CPU_PENTIUM_M
 	default "i686" if ADK_CPU_ATOM
 	default "i686" if ADK_CPU_ATHLON
+	default "hppa" if ADK_TARGET_ARCH_HPPA
 	default "m68k" if ADK_TARGET_ARCH_M68K
 	default "microblaze" if ADK_TARGET_ARCH_MICROBLAZE && ADK_big
 	default "microblazeel" if ADK_TARGET_ARCH_MICROBLAZE && ADK_little

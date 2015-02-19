@@ -79,6 +79,9 @@ endif
 ifeq ($(ADK_TARGET_ARCH),mips64)
 ADK_TARGET_KARCH:=mips
 endif
+ifeq ($(ADK_TARGET_ARCH),hppa)
+ADK_TARGET_KARCH:=parisc
+endif
 
 include $(ADK_TOPDIR)/mk/vars.mk
 
