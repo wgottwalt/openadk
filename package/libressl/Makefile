@@ -21,6 +21,12 @@ $(eval $(call PKG_template,LIBRESSL,libressl,$(PKG_VERSION)-${PKG_RELEASE},${PKG
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
+ifeq ($(ADK_TARGET_USE_SSP),y)
+CONFIGURE_ARGS+=	--enable-hardening
+else
+CONFIGURE_ARGS+=	--disable-hardening
+endif
+
 libressl-install:
 	$(INSTALL_DIR) $(IDIR_LIBRESSL)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/lib{crypto,ssl}.so* \
