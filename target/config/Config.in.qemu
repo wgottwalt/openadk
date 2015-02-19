@@ -36,6 +36,7 @@ config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	bool "ARM Ltd. Versatile Express with Cortex-A9"
 	select ADK_CPU_CORTEX_A9
 	select ADK_TARGET_CPU_WITH_FPU
+	select ADK_TARGET_CPU_WITH_FPU_NEON
 
 config ADK_TARGET_QEMU_ARM_MODEL_STELLARIS_M3
 	bool "Stellaris LM3S6965EVB with Cortex-M3"

@@ -4,6 +4,22 @@
 config ADK_TARGET_CPU_WITH_FPU
 	bool
 
+config ADK_TARGET_CPU_WITH_FPU_VFP
+	bool
+	select ADK_fpu_vfp
+
+config ADK_TARGET_CPU_WITH_FPU_VFP3
+	bool
+	select ADK_fpu_vfp3
+
+config ADK_TARGET_CPU_WITH_FPU_VFP4
+	bool
+	select ADK_fpu_vfp4
+
+config ADK_TARGET_CPU_WITH_FPU_NEON
+	bool
+	select ADK_fpu_neon
+
 config ADK_TARGET_CPU_WITH_VT
 	bool
 

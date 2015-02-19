@@ -2,11 +2,11 @@ config ADK_TARGET_SYSTEM_RASPBERRY_PI2
 	bool "Raspberry PI 2"
 	select ADK_arm
 	select ADK_little
-	select ADK_fpu_vfp
 	select ADK_raspberry_pi2
 	select ADK_CPU_CORTEX_A7
 	select ADK_TARGET_BOARD_BCM28XX
 	select ADK_TARGET_CPU_WITH_FPU
+	select ADK_TARGET_CPU_WITH_FPU_NEON
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_SERIAL
 	select ADK_TARGET_WITH_CPU_FREQ

@@ -173,6 +173,22 @@ menu "Kernel options"
 config ADK_KERNEL_MMU
 	bool
 
+config ADK_KERNEL_VFP
+	bool
+	default y if ADK_TARGET_CPU_WITH_FPU_VFP
+
+config ADK_KERNEL_VFPv3
+	bool
+	default y if ADK_TARGET_CPU_WITH_FPU_VFP3
+
+config ADK_KERNEL_NEON
+	bool
+	default y if ADK_TARGET_CPU_WITH_FPU_NEON
+
+config ADK_KERNEL_MODE_NEON
+	bool
+	default y if ADK_TARGET_CPU_WITH_FPU_NEON
+
 config ADK_TARGET_NO_CMDLINE
 	bool "Do not builtin any kernel cmdline"
 	help
