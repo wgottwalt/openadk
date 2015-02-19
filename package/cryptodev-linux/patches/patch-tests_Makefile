@@ -1,5 +1,5 @@
---- cryptodev-linux-1.6.orig/tests/Makefile	2013-03-04 04:59:29.000000000 +0100
-+++ cryptodev-linux-1.6/tests/Makefile	2013-07-17 14:45:18.000000000 +0200
+--- cryptodev-linux-1.7.orig/tests/Makefile	2015-02-07 15:31:23.000000000 -0600
++++ cryptodev-linux-1.7/tests/Makefile	2015-02-19 14:40:46.523775781 -0600
 @@ -20,13 +20,6 @@ example-async-speed-objs := async_speed.
  example-hashcrypt-speed-objs := hashcrypt_speed.c
  
