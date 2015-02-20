@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
 PKG_VERSION:=		35.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		bedeb5bbd8b49e5b286497ef7732542c6e7441088fd8cd577d7ca8af4c871e81
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
@@ -70,6 +70,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--with-system-libevent=$(STAGING_TARGET_DIR)/usr \
 			--enable-system-ffi \
 			--enable-system-sqlite \
+			--enable-webrtc \
 			--disable-libnotify \
 			--with-libIDL-prefix=$(STAGING_TARGET_DIR)/usr \
 			--with-glib-prefix=$(STAGING_TARGET_DIR)/usr \
