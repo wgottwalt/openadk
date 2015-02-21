@@ -5,6 +5,7 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_ALPHA
 	select ADK_TARGET_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ
 	select ADK_LINUX_64
+	select ADK_LINUX_ALPHA
 	help
 	  ALPHA toolchain.
 

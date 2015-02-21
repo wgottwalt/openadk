@@ -4,6 +4,7 @@ config ADK_TARGET_SYSTEM_QEMU_AARCH64
 	select ADK_qemu_aarch64
 	select ADK_little
 	select ADK_LINUX_64
+	select ADK_CPU_ARMV8
 	select ADK_TARGET_QEMU
 	select ADK_TARGET_KERNEL_IMAGE
 	help

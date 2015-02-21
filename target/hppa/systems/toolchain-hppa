@@ -2,6 +2,7 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_HPPA
 	bool "Toolchain only"
 	select ADK_hppa
 	select ADK_toolchain_hppa
+	select ADK_CPU_PARISC
 	select ADK_TARGET_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ
 	help

@@ -2,6 +2,7 @@ config ADK_TARGET_SYSTEM_ARANYM_M68K
 	bool "ARAnyM Emulator"
 	select ADK_m68k
 	select ADK_aranym_m68k
+	select ADK_CPU_M68K
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_INPUT
 	select ADK_TARGET_WITH_HDD

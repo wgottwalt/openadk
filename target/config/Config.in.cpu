@@ -1,6 +1,203 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+# CPU
+config ADK_CPU_ALPHA
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_AMDFAM10
+	bool
+	select ADK_TARGET_CPU_WITH_VT
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_ARC
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_ARM1176JZF_S
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_ARM926EJ_S
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_ARMV8
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_ATHLON
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_ATOM
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_AVR32
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_BFIN
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_C6X
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_5208
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CORTEX_M3
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CORTEX_M4
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CORTEX_A7
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_CORTEX_A9
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_CRIS_V10
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CRIS_V32
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_GEODE
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_LOONGSON2F
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_M68K
+	bool
+	select ADK_TARGET_WITH_LT if ADK_LINUX_UCLINUX
+	select ADK_TARGET_WITH_MMU if !ADK_LINUX_UCLINUX
+	select ADK_TARGET_WITH_NPTL
+
+config ADK_CPU_MIPS32
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_MIPS32R2
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_MIPS64
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_MIPS64R2
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_MICROBLAZE
+	bool
+	select ADK_TARGET_WITH_LT if ADK_TARGET_LIBC_UCLIBC_NG
+	select ADK_TARGET_WITH_MMU if !ADK_LINUX_UCLINUX
+	select ADK_TARGET_WITH_NPTL
+
+config ADK_CPU_NIOS2
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_PARISC
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_PENTIUM_M
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_PPC
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_PPC_440
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_PPC64
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_SH4
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_SPARC_V8
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_SPARC_V9
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_TILE
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_X86
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_X86_64
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_XSCALE
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_XTENSA
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+# CPU features
 config ADK_TARGET_CPU_WITH_FPU
 	bool
 
@@ -55,171 +252,6 @@ config ADK_TARGET_CPU_WITH_3DNOW
 
 config ADK_TARGET_CPU_WITH_3DNOWEXT
 	bool
-
-config ADK_CPU_ATHLON
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_ARC
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_TILE
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_C6X
-	bool
-	select ADK_TARGET_WITH_LT
-
-config ADK_CPU_CRIS_V10
-	bool
-	select ADK_TARGET_WITH_LT
-
-config ADK_CPU_CRIS_V32
-	bool
-	select ADK_TARGET_WITH_LT
-
-config ADK_CPU_SH4
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_SPARC_V8
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_SPARC_V9
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_X86
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_X86_64
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_GEODE
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_PPC
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_PPC_440
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_PPC64
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_PENTIUM_M
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_AMDFAM10
-	bool
-	select ADK_TARGET_CPU_WITH_VT
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_LOONGSON2F
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_XSCALE
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_M68K
-	bool
-	select ADK_TARGET_WITH_LT if ADK_LINUX_UCLINUX
-	select ADK_TARGET_WITH_MMU if !ADK_LINUX_UCLINUX
-	select ADK_TARGET_WITH_NPTL
-
-config ADK_CPU_MIPS32
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_MIPS32R2
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_MIPS64
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_MICROBLAZE
-	bool
-	select ADK_TARGET_WITH_LT if ADK_TARGET_LIBC_UCLIBC_NG
-	select ADK_TARGET_WITH_MMU if !ADK_LINUX_UCLINUX
-	select ADK_TARGET_WITH_NPTL
-
-config ADK_CPU_ARM926EJ_S
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_ARM1176JZF_S
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_CORTEX_M3
-	bool
-	select ADK_TARGET_WITH_LT
-
-config ADK_CPU_CORTEX_M4
-	bool
-	select ADK_TARGET_WITH_LT
-
-config ADK_CPU_CORTEX_A7
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_CORTEX_A9
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_ARMV8
-	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
-
-config ADK_CPU_CF_5208
-	bool
-	select ADK_TARGET_WITH_LT
-
-config ADK_CPU_BFIN
-	bool
-	select ADK_TARGET_WITH_LT
-
-config ADK_CPU_AVR32
-	bool
-	select ADK_TARGET_WITH_LT
 
 config ADK_TARGET_CPU_ARCH
 	string

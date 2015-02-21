@@ -4,6 +4,7 @@ config ADK_TARGET_SYSTEM_QEMU_ALPHA
 	select ADK_qemu_alpha
 	select ADK_TARGET_QEMU
 	select ADK_LINUX_64
+	select ADK_LINUX_ALPHA
 	help
 	 Support for Qemu Emulator ALPHA architecture.
 
