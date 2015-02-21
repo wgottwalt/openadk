@@ -25,8 +25,8 @@ config ADK_TARGET_ABI
 	default "n64" if ADK_n64
 	default "32" if ADK_32
 	default "x32" if ADK_x32
-	default "eabi" if ADK_arm && ADK_soft_float
-	default "eabihf" if ADK_arm && ADK_hard_float
+	default "eabi" if ADK_TARGET_ARCH_ARM && ADK_TARGET_SOFT_FLOAT
+	default "eabihf" if ADK_TARGET_ARCH_ARM && ADK_TARGET_HARD_FLOAT
 
 config ADK_TARGET_MIPS_ABI
 	depends on ADK_TARGET_ARCH_MIPS64

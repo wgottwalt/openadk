@@ -40,23 +40,23 @@ config ADK_LIBC_VERSION
 
 config ADK_TARGET_SUFFIX
 	string
-	default "gnueabihf" if ADK_TARGET_LIB_GLIBC && ADK_arm && ADK_hard_float
-	default "gnueabi" if ADK_TARGET_LIB_GLIBC && ADK_arm && ADK_soft_float
+	default "gnueabihf" if ADK_TARGET_LIB_GLIBC && ADK_TARGET_ARCH_ARM && ADK_TARGET_HARD_FLOAT
+	default "gnueabi" if ADK_TARGET_LIB_GLIBC && ADK_TARGET_ARCH_ARM && ADK_TARGET_SOFT_FLOAT
 	default "gnuabi64" if ADK_TARGET_LIB_GLIBC && ADK_n64
 	default "gnuabin32" if ADK_TARGET_LIB_GLIBC && ADK_n32
 	default "gnuabi32" if ADK_TARGET_LIB_GLIBC && ADK_o32
 	default "gnu32" if ADK_TARGET_LIB_GLIBC && ADK_32 && ADK_LINUX_64
 	default "gnux32" if ADK_TARGET_LIB_GLIBC && ADK_x32 && ADK_LINUX_64
 	default "gnu" if ADK_TARGET_LIB_GLIBC
-	default "uclibceabihf" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_arm && ADK_hard_float
-	default "uclibceabi" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_arm && ADK_soft_float
+	default "uclibceabihf" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_TARGET_ARCH_ARM && ADK_TARGET_HARD_FLOAT
+	default "uclibceabi" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_TARGET_ARCH_ARM && ADK_TARGET_HARD_FLOAT
 	default "uclibcabi64" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_n64
 	default "uclibcabin32" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_n32
 	default "uclibcabi32" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_o32
 	default "uclibc32" if (ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG) && ADK_32 && ADK_LINUX_64
 	default "uclibc" if ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG
-	default "musleabihf" if ADK_TARGET_LIB_MUSL && ADK_eabihf
-	default "musleabi" if ADK_TARGET_LIB_MUSL && ADK_eabi
+	default "musleabihf" if ADK_TARGET_LIB_MUSL && ADK_TARGET_ARCH_ARM && ADK_TARGET_HARD_FLOAT
+	default "musleabi" if ADK_TARGET_LIB_MUSL && ADK_TARGET_ARCH_ARM && ADK_TARGET_SOFT_FLOAT
 	default "muslabi64" if ADK_TARGET_LIB_MUSL && ADK_n64
 	default "muslabin32" if ADK_TARGET_LIB_MUSL && ADK_n32
 	default "muslabi32" if ADK_TARGET_LIB_MUSL && ADK_o32
