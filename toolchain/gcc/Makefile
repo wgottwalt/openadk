@@ -143,12 +143,20 @@ ifeq ($(ADK_CPU_CORTEX_M3),y)
 GCC_CONFOPTS+=		--with-cpu=cortex-m3 --with-mode=thumb
 endif
 
+ifeq ($(ADK_CPU_CORTEX_M4),y)
+GCC_CONFOPTS+=		--with-cpu=cortex-m4 --with-mode=thumb
+endif
+
 ifeq ($(ADK_CPU_CORTEX_A7),y)
 GCC_CONFOPTS+=		--with-cpu=cortex-a7
 endif
 
 ifeq ($(ADK_CPU_CORTEX_A9),y)
 GCC_CONFOPTS+=		--with-cpu=cortex-a9
+endif
+
+ifeq ($(ADK_CPU_XSCALE),y)
+GCC_CONFOPTS+=		--with-cpu=xscale
 endif
 
 ifeq ($(ADK_CPU_SPARC_V8),y)

@@ -22,6 +22,7 @@ config ADK_CPU_ARM1176JZF_S
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU_VFP
 
 config ADK_CPU_ARM926EJ_S
 	bool
@@ -71,11 +72,13 @@ config ADK_CPU_CORTEX_A7
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU_VFP4
 
 config ADK_CPU_CORTEX_A9
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU_VFP3
 
 config ADK_CPU_CRIS_V10
 	bool
@@ -203,19 +206,18 @@ config ADK_TARGET_CPU_WITH_FPU
 
 config ADK_TARGET_CPU_WITH_FPU_VFP
 	bool
+	select ADK_TARGET_CPU_WITH_FPU
 	select ADK_fpu_vfp
 
 config ADK_TARGET_CPU_WITH_FPU_VFP3
 	bool
+	select ADK_TARGET_CPU_WITH_FPU
 	select ADK_fpu_vfp3
 
 config ADK_TARGET_CPU_WITH_FPU_VFP4
 	bool
+	select ADK_TARGET_CPU_WITH_FPU
 	select ADK_fpu_vfp4
-
-config ADK_TARGET_CPU_WITH_FPU_NEON
-	bool
-	select ADK_fpu_neon
 
 config ADK_TARGET_CPU_WITH_VT
 	bool
@@ -242,6 +244,9 @@ config ADK_TARGET_CPU_WITH_SSSE3
 	bool
 
 config ADK_TARGET_CPU_WITH_IWMMXT
+	bool
+
+config ADK_TARGET_CPU_WITH_NEON
 	bool
 
 config ADK_TARGET_CPU_WITH_HT

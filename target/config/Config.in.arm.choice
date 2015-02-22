@@ -6,11 +6,21 @@ prompt "CPU architecture and family"
 depends on ADK_TARGET_TOOLCHAIN && ADK_TARGET_ARCH_ARM
 
 config ADK_CPU_ARMV7A_CORTEX_A9
-        bool "cortex-a9 (armv7-a)"
+        bool "cortex-a9"
         select ADK_CPU_CORTEX_A9
 
+config ADK_CPU_ARMV7A_CORTEX_A7
+        bool "cortex-a7"
+        select ADK_CPU_CORTEX_A7
+
+config ADK_CPU_ARMV7M_CORTEX_M4
+        bool "cortex-m4"
+        select ADK_CPU_CORTEX_M4
+	select ADK_TARGET_ARCH_ARM_WITH_THUMB
+	select ADK_TARGET_UCLINUX
+
 config ADK_CPU_ARMV7M_CORTEX_M3
-        bool "cortex-m3 (armv7-m)"
+        bool "cortex-m3"
         select ADK_CPU_CORTEX_M3
 	select ADK_TARGET_ARCH_ARM_WITH_THUMB
 	select ADK_TARGET_UCLINUX
@@ -22,6 +32,10 @@ config ADK_CPU_ARMV6_ARM1176JZF_S
 config ADK_CPU_ARMV5TE_ARM926EJ_S
         bool "arm926ej-s (armv5te)"
         select ADK_CPU_ARM926EJ_S
+
+config ADK_CPU_XSCALE
+        bool "xscale"
+        select ADK_CPU_XSCALE
 
 endchoice
 

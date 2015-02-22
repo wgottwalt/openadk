@@ -10,10 +10,8 @@ depends on (ADK_TARGET_ARCH_ARM || \
 
 config ADK_TARGET_HARD_FLOAT
 	bool "hard-float"
-	select ADK_hard_float
 
 config ADK_TARGET_SOFT_FLOAT
 	bool "soft-float"
-	select ADK_soft_float
 
 endchoice
