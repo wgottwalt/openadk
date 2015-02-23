@@ -222,6 +222,7 @@ config ADK_STATIC_TOOLCHAIN
 config ADK_UCLIBC_TEST
 	bool "Build testsuite for C library"
 	depends on ADK_TARGET_LIB_UCLIBC_NG || ADK_TARGET_LIB_UCLIBC
-	default y
+	help
+	  Build uClibc/uClibc-ng test suite.
 
 endmenu
