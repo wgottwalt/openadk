@@ -127,11 +127,13 @@ config ADK_CPU_MIPS32
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU
 
 config ADK_CPU_MIPS32R2
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU
 
 config ADK_CPU_MIPS64
 	bool
@@ -277,7 +279,7 @@ config ADK_TARGET_CPU_WITH_3DNOW
 config ADK_TARGET_CPU_WITH_3DNOWEXT
 	bool
 
-config ADK_TARGET_CPU
+config ADK_TARGET_GCC_CPU
 	string
 	default "440" if ADK_CPU_PPC_440
 	default "5208" if ADK_CPU_CF_5208
@@ -299,11 +301,6 @@ config ADK_TARGET_CPU
 	default "i486" if ADK_CPU_I486
 	default "i586" if ADK_CPU_I586
 	default "i686" if ADK_CPU_I686
-	default "loongson2f" if ADK_CPU_LOONGSON2F
-	default "mips32" if ADK_CPU_MIPS32
-	default "mips32r2" if ADK_CPU_MIPS32R2
-	default "mips64" if ADK_CPU_MIPS64
-	default "mips64r2" if ADK_CPU_MIPS64R2
 	default "pentium-m" if ADK_CPU_PENTIUM_M
 	default "powerpc" if ADK_CPU_PPC
 	default "powerpc64" if ADK_CPU_PPC64
@@ -314,6 +311,14 @@ config ADK_TARGET_CPU
 	default "v8" if ADK_CPU_SPARC_V8
 	default "x86-64" if ADK_CPU_X86_64
 	default "xscale" if ADK_CPU_XSCALE
+
+config ADK_TARGET_GCC_ARCH
+	string
+	default "loongson2f" if ADK_CPU_LOONGSON2F
+	default "mips32" if ADK_CPU_MIPS32
+	default "mips32r2" if ADK_CPU_MIPS32R2
+	default "mips64" if ADK_CPU_MIPS64
+	default "mips64r2" if ADK_CPU_MIPS64R2
 
 config ADK_TARGET_CPU_ARCH
 	string

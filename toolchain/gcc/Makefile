@@ -84,8 +84,12 @@ endif
 #
 # architecture specific
 #
-ifneq ($(ADK_TARGET_CPU),)
-GCC_CONFOPTS+=		--with-cpu=$(ADK_TARGET_CPU)
+ifneq ($(ADK_TARGET_GCC_CPU),)
+GCC_CONFOPTS+=		--with-cpu=$(ADK_TARGET_GCC_CPU)
+endif
+
+ifneq ($(ADK_TARGET_GCC_ARCH),)
+GCC_CONFOPTS+=		--with-arch=$(ADK_TARGET_GCC_ARCH)
 endif
 
 ifneq ($(ADK_TARGET_FLOAT),)
