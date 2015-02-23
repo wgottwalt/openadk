@@ -84,11 +84,24 @@ endif
 #
 # architecture specific
 #
+ifneq ($(ADK_TARGET_CPU),)
+GCC_CONFOPTS+=		--with-cpu=$(ADK_TARGET_CPU)
+endif
 
-ifneq ($(ADK_TARGET_ARCH_ARM)$(ADK_TARGET_ARCH_MIPS)$(ADK_TARGET_ARCH_PPC),)
 ifneq ($(ADK_TARGET_FLOAT),)
 GCC_CONFOPTS+=		--with-float=$(ADK_TARGET_FLOAT)
 endif
+
+ifneq ($(ADK_TARGET_FPU),)
+GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
+endif
+
+ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
+GCC_CONFOPTS+=		--with-mode=thumb
+endif
+
+ifeq ($(ADK_CPU_CF),y)
+GCC_CONFOPTS+=		--enable-multilib --with-arch=cf
 endif
 
 ifeq ($(ADK_TARGET_ARCH_M68K)$(ADK_TARGET_ARCH_SH)$(ADK_TARGET_ARCH_X86_64)$(ADK_TARGET_ARCH_X86),)
@@ -123,56 +136,6 @@ endif
 
 ifeq ($(ADK_TARGET_ARCH_PPC),y)
 GCC_CONFOPTS+=		--with-long-double-64 --enable-secureplt
-endif
-
-ifeq ($(ADK_TARGET_ARCH_ARM),y)
-ifneq ($(ADK_TARGET_FPU),)
-GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
-endif
-endif
-
-ifeq ($(ADK_CPU_ARM926EJ_S),y)
-GCC_CONFOPTS+=		--with-cpu=arm926ej-s
-endif
-
-ifeq ($(ADK_CPU_ARM1176JZF_S),y)
-GCC_CONFOPTS+=		--with-cpu=arm1176jzf-s
-endif
-
-ifeq ($(ADK_CPU_CORTEX_M3),y)
-GCC_CONFOPTS+=		--with-cpu=cortex-m3 --with-mode=thumb
-endif
-
-ifeq ($(ADK_CPU_CORTEX_M4),y)
-GCC_CONFOPTS+=		--with-cpu=cortex-m4 --with-mode=thumb
-endif
-
-ifeq ($(ADK_CPU_CORTEX_A7),y)
-GCC_CONFOPTS+=		--with-cpu=cortex-a7
-endif
-
-ifeq ($(ADK_CPU_CORTEX_A9),y)
-GCC_CONFOPTS+=		--with-cpu=cortex-a9
-endif
-
-ifeq ($(ADK_CPU_XSCALE),y)
-GCC_CONFOPTS+=		--with-cpu=xscale
-endif
-
-ifeq ($(ADK_CPU_SPARC_V8),y)
-GCC_CONFOPTS+=		--with-cpu=v8
-endif
-
-ifeq ($(ADK_CPU_SPARC_V9),y)
-GCC_CONFOPTS+=		--with-cpu=ultrasparc
-endif
-
-ifeq ($(ADK_CPU_ARC),y)
-GCC_CONFOPTS+=		--with-cpu=arc700
-endif
-
-ifeq ($(ADK_CPU_CF_5208),y)
-GCC_CONFOPTS+=		--enable-multilib --with-arch=cf --with-cpu=5208
 endif
 
 ifneq ($(ADK_TARGET_MIPS_ABI),)

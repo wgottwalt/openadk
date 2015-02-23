@@ -33,7 +33,7 @@ config ADK_CPU_ARMV5TE_ARM926EJ_S
         bool "arm926ej-s (armv5te)"
         select ADK_CPU_ARM926EJ_S
 
-config ADK_CPU_XSCALE
+config ADK_CPU_ARMV5TE_XSCALE
         bool "xscale"
         select ADK_CPU_XSCALE
 

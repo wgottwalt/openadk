@@ -101,11 +101,21 @@ TARGET_CXX+=		$(ADK_TARGET_ABI_CFLAGS)
 endif
 
 TARGET_CPPFLAGS:=	
-TARGET_CFLAGS:=		$(ADK_TARGET_CFLAGS) -fwrapv -fno-ident -fhonour-copts
-TARGET_CXXFLAGS:=	$(ADK_TARGET_CFLAGS) -fwrapv -fno-ident -fhonour-copts
+TARGET_CFLAGS:=		-fwrapv -fno-ident -fhonour-copts
+TARGET_CXXFLAGS:=	-fwrapv -fno-ident -fhonour-copts
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
+
+ifneq ($(ADK_TARGET_CPU),)
+ifeq ($(ADK_CPU_ARC700),y)
+TARGET_CFLAGS+=		-mcpu=ARC700
+TARGET_CXXFLAGS+=	-mcpu=ARC700
+else
+TARGET_CFLAGS+=		-mcpu=$(ADK_TARGET_CPU)
+TARGET_CXXFLAGS+=	-mcpu=$(ADK_TARGET_CPU)
+endif
+endif
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
 TARGET_LDFLAGS+=	-elf2flt

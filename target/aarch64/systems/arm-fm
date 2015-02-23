@@ -3,8 +3,8 @@ config ADK_TARGET_SYSTEM_ARM_FM
 	select ADK_aarch64
 	select ADK_arm_fm
 	select ADK_little
-	select ADK_CPU_ARMV8
 	select ADK_LINUX_64
+	select ADK_CPU_CORTEX_A57
 	select ADK_TARGET_KERNEL_IMAGE
 	select ADK_PACKAGE_BOOT_WRAPPER_AARCH64
 	select ADK_TARGET_WITH_SERIAL

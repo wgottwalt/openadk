@@ -13,7 +13,12 @@ config ADK_CPU_AMDFAM10
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
-config ADK_CPU_ARC
+config ADK_CPU_ARC700
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_ARCv2EM
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
@@ -56,8 +61,12 @@ config ADK_CPU_C6X
 	bool
 	select ADK_TARGET_WITH_LT
 
+config ADK_CPU_CF
+	bool
+
 config ADK_CPU_CF_5208
 	bool
+	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
 
 config ADK_CPU_CORTEX_M3
@@ -79,6 +88,16 @@ config ADK_CPU_CORTEX_A9
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 	select ADK_TARGET_CPU_WITH_FPU_VFP3
+
+config ADK_CPU_CORTEX_A53
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_CORTEX_A57
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_CRIS_V10
 	bool
@@ -258,17 +277,52 @@ config ADK_TARGET_CPU_WITH_3DNOW
 config ADK_TARGET_CPU_WITH_3DNOWEXT
 	bool
 
+config ADK_TARGET_CPU
+	string
+	default "440" if ADK_CPU_PPC_440
+	default "5208" if ADK_CPU_CF_5208
+	default "amdfam10" if ADK_CPU_AMDFAM10
+	default "arc700" if ADK_CPU_ARC700
+	default "arcv2em" if ADK_CPU_ARCv2EM
+	default "arm1176jzf-s" if ADK_CPU_ARM1176JZF_S
+	default "arm926ej-s" if ADK_CPU_ARM926EJ_S
+	default "armv8-a" if ADK_CPU_ARMV8
+	default "athlon" if ADK_CPU_ATHLON
+	default "atom" if ADK_CPU_ATOM
+	default "cortex-a7" if ADK_CPU_CORTEX_A7
+	default "cortex-a9" if ADK_CPU_CORTEX_A9
+	default "cortex-a53" if ADK_CPU_CORTEX_A53
+	default "cortex-a57" if ADK_CPU_CORTEX_A57
+	default "cortex-m3" if ADK_CPU_CORTEX_M3
+	default "cortex-m4" if ADK_CPU_CORTEX_M4
+	default "geode" if ADK_CPU_GEODE
+	default "i486" if ADK_CPU_I486
+	default "i586" if ADK_CPU_I586
+	default "i686" if ADK_CPU_I686
+	default "loongson2f" if ADK_CPU_LOONGSON2F
+	default "mips32" if ADK_CPU_MIPS32
+	default "mips32r2" if ADK_CPU_MIPS32R2
+	default "mips64" if ADK_CPU_MIPS64
+	default "mips64r2" if ADK_CPU_MIPS64R2
+	default "pentium-m" if ADK_CPU_PENTIUM_M
+	default "powerpc" if ADK_CPU_PPC
+	default "powerpc64" if ADK_CPU_PPC64
+	default "ultrasparc" if ADK_CPU_SPARC_V9
+	default "v10" if ADK_CPU_CRIS_V10
+	default "v32" if ADK_CPU_CRIS_V32
+	default "v7.10.d" if ADK_CPU_MICROBLAZE
+	default "v8" if ADK_CPU_SPARC_V8
+	default "x86-64" if ADK_CPU_X86_64
+	default "xscale" if ADK_CPU_XSCALE
+
 config ADK_TARGET_CPU_ARCH
 	string
 	default "aarch64" if ADK_TARGET_ARCH_AARCH64 && ADK_little
 	default "alpha" if ADK_TARGET_ARCH_ALPHA
-	default "armv5te" if ADK_TARGET_ARCH_ARM && ADK_little && ADK_armv5te
-	default "armv6" if ADK_TARGET_ARCH_ARM && ADK_little && ADK_armv6
-	default "armv7a" if ADK_TARGET_ARCH_ARM && ADK_little && ADK_armv7a
 	default "arm" if ADK_TARGET_ARCH_ARM && ADK_little
 	default "armeb" if ADK_TARGET_ARCH_ARM && ADK_big
-	default "arc" if ADK_CPU_ARC && ADK_little
-	default "arceb" if ADK_CPU_ARC && ADK_big
+	default "arc" if ADK_TARGET_ARCH_ARC && ADK_little
+	default "arceb" if ADK_TARGET_ARCH_ARC && ADK_big
 	default "avr32" if ADK_CPU_AVR32
 	default "bfin" if ADK_CPU_BFIN
 	default "c6x" if ADK_CPU_C6X
