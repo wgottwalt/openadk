@@ -107,6 +107,7 @@ TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
+# for archiectures where gcc --with-cpu matches -mcpu=
 ifneq ($(ADK_TARGET_GCC_CPU),)
 ifeq ($(ADK_CPU_ARC700),y)
 TARGET_CFLAGS+=		-mcpu=ARC700
@@ -117,9 +118,15 @@ TARGET_CXXFLAGS+=	-mcpu=$(ADK_TARGET_GCC_CPU)
 endif
 endif
 
+# for archiectures where gcc --with-arch matches -march=
 ifneq ($(ADK_TARGET_GCC_ARCH),)
 TARGET_CFLAGS+=		-march=$(ADK_TARGET_GCC_ARCH)
 TARGET_CXXFLAGS+=	-march=$(ADK_TARGET_GCC_ARCH)
+endif
+
+ifneq ($(ADK_TARGET_CPU_FLAGS),)
+TARGET_CFLAGS+=		$(ADK_TARGET_CPU_FLAGS)
+TARGET_CXXFLAGS+=	$(ADK_TARGET_CPU_FLAGS)
 endif
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)

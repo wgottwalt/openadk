@@ -305,8 +305,6 @@ config ADK_TARGET_GCC_CPU
 	default "powerpc" if ADK_CPU_PPC
 	default "powerpc64" if ADK_CPU_PPC64
 	default "ultrasparc" if ADK_CPU_SPARC_V9
-	default "v10" if ADK_CPU_CRIS_V10
-	default "v32" if ADK_CPU_CRIS_V32
 	default "v7.10.d" if ADK_CPU_MICROBLAZE
 	default "v8" if ADK_CPU_SPARC_V8
 	default "x86-64" if ADK_CPU_X86_64
@@ -319,6 +317,11 @@ config ADK_TARGET_GCC_ARCH
 	default "mips32r2" if ADK_CPU_MIPS32R2
 	default "mips64" if ADK_CPU_MIPS64
 	default "mips64r2" if ADK_CPU_MIPS64R2
+
+config ADK_TARGET_CPU_FLAGS
+	string
+	default "-mcpu=v10" if ADK_CPU_CRIS_V10
+	default "-mcpu=v32" if ADK_CPU_CRIS_V32
 
 config ADK_TARGET_CPU_ARCH
 	string
