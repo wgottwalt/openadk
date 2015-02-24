@@ -1,0 +1,18 @@
+	do not bail on cross-compiling, simply assume useful values instead
+--- tcptrace-6.6.7.orig/configure	2002-06-21 11:56:26.000000000 +0200
++++ tcptrace-6.6.7/configure	2012-10-18 18:52:35.154444758 +0200
+@@ -5086,9 +5086,11 @@ echo "$as_me:5085: checking how to print
+ echo $ECHO_N "checking how to print unsigned long long... $ECHO_C" >&6
+ 
+ if test "$cross_compiling" = yes; then
+-  { { echo "$as_me:5089: error: can not run test program while cross compiling" >&5
+-echo "$as_me: error: can not run test program while cross compiling" >&2;}
+-   { (exit 1); exit 1; }; }
++  { echo "$as_me: cross_compiling, simply assuming '%llu'"
++    cat >>confdefs.h <<\EOF
++#define USE_LLU 1
++EOF
++}
+ else
+   cat >conftest.$ac_ext <<_ACEOF
+ #line 5094 "configure"
