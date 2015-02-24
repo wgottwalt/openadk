@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		nand
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_DESCR:=		nand flash utility
 PKG_SECTION:=		sys/fs
 
