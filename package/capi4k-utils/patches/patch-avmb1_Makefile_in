@@ -1,0 +1,14 @@
+	- do not set uid/gid while installing
+--- capi4k-utils.orig/avmb1/Makefile.in	2002-10-26 21:27:40.000000000 +0200
++++ capi4k-utils/avmb1/Makefile.in	2011-07-14 19:14:42.879001566 +0200
+@@ -15,8 +15,8 @@ SBINDIR			= @CONFIG_SBINDIR@
+ MANDIR			= @CONFIG_MANDIR@
+ MAN8DIR			= $(MANDIR)/man8
+ INSTALL			= @INSTALL@
+-INSTALL_PROGRAM	= $(INSTALL) -o 0 -g 0 -m 0750
+-INSTALL_MAN		= $(INSTALL) -o 0 -g 0 -m 0644
++INSTALL_PROGRAM	= $(INSTALL) -m 0750
++INSTALL_MAN		= $(INSTALL) -m 0644
+ prefix			= @prefix@
+ exec_prefix		= @exec_prefix@
+ CC				= @CC@
