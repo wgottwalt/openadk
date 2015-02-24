@@ -2,9 +2,26 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+# eliminate unwanted install flags:
+# -o and -g require root as caller which we don't want
+# -s is unwanted as we strip ourselfs if debugging is turned off
+declare -a opts
+while [[ "$1" ]]; do
+	case "$1" in
+	-o|--owner) shift ;;
+	-g|--group) shift ;;
+	-s|--strip) ;;
+	*) opts+=("$1") ;;
+	esac
+	shift
+done
+
+# prefer ginstall if available
 if [ -z "$(which ginstall 2>/dev/null)" ];then
-	/usr/bin/install "$@"
+	install=/usr/bin/install
 else
-	ginstall "$@"
+	install=ginstall
 fi
 
+# do the actual call
+exec $install "${opts[@]}"
