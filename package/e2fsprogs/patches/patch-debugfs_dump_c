@@ -1,5 +1,5 @@
---- e2fsprogs-1.42.4.orig/debugfs/dump.c	2012-05-29 03:29:43.000000000 +0200
-+++ e2fsprogs-1.42.4/debugfs/dump.c	2012-07-26 18:48:09.000000000 +0200
+--- e2fsprogs-1.42.12.orig/debugfs/dump.c	2014-08-05 00:58:23.000000000 +0200
++++ e2fsprogs-1.42.12/debugfs/dump.c	2015-02-24 13:49:24.673532944 +0100
 @@ -22,7 +22,6 @@
  #include <sys/types.h>
  #include <sys/stat.h>
@@ -16,10 +16,10 @@
  	int i;
  
  	if (fd != -1)
-@@ -93,11 +91,6 @@ static void fix_perms(const char *cmd, c
- 
- 	if (fd != -1)
- 		close(fd);
+@@ -90,11 +88,6 @@ static void fix_perms(const char *cmd, c
+ #endif
+ 	if (i == -1)
+ 		com_err(cmd, errno, "while changing ownership of %s", name);
 -
 -	ut.actime = inode->i_atime;
 -	ut.modtime = inode->i_mtime;

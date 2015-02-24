@@ -1,6 +1,6 @@
---- e2fsprogs-1.42.10.orig/util/subst.c	2014-05-15 19:04:08.000000000 +0200
-+++ e2fsprogs-1.42.10/util/subst.c	2014-07-08 21:18:41.000000000 +0200
-@@ -358,7 +358,7 @@ int main(int argc, char **argv)
+--- e2fsprogs-1.42.12.orig/util/subst.c	2014-08-02 22:26:22.000000000 +0200
++++ e2fsprogs-1.42.12/util/subst.c	2015-02-24 13:53:42.034808695 +0100
+@@ -363,7 +363,7 @@ int main(int argc, char **argv)
  		if (fd > 0) {
  			/* save the original atime, if possible */
  			if (fstat(fd, &stbuf) == 0) {

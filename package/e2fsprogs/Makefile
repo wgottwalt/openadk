@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.42.10
-PKG_RELEASE:=		3
-PKG_HASH:=		7b6e85c666d8fdd6062c75ba953de0e5481673bebef5f40f749a52a46476e29f
+PKG_VERSION:=		1.42.12
+PKG_RELEASE:=		1
+PKG_HASH:=		6dadcd3b759195150d20154ab9d6516e3b3cbb35d66d461f55ae94a2854e7de8
 PKG_DESCR:=		ext2/3/4 filesystem utilities
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libpthread
@@ -16,16 +16,19 @@ PKG_SITES:=		$(MASTER_SITE_SOURCEFORGE:=e2fsprogs/)
 PKG_OPTS:=		dev
 PKG_NOPARALLEL:=	1
 
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
-
 PKG_SUBPKGS:=		LIBE2FS LIBCOM_ERR LIBSS
 PKG_SUBPKGS+=		RESIZE2FS TUNE2FS E2FSCK MKE2FS
+PKG_SUBPKGS+=		E2FSCK_STATIC TUNE2FS_STATIC
 PKGSD_LIBE2FS:=		e2fsprogs library
 PKGSC_LIBE2FS:=		libs/misc
 PKGSD_LIBCOM_ERR:=	common error library
 PKGSC_LIBCOM_ERR:=	libs/misc
 PKGSD_LIBSS:=		subsystem command parsing library
 PKGSC_LIBSS:=		libs/misc
+PKGSD_E2FSCK_STATIC:=	Static build of e2fsck
+PKGSC_E2FSCK_STATIC:=	sys/fs
+PKGSD_TUNE2FS_STATIC:=	Static build of tune2fs
+PKGSC_TUNE2FS_STATIC:=	sys/fs
 PKGSD_RESIZE2FS:=	ext2/3/4 resize utility
 PKGSC_RESIZE2FS:=	sys/fs
 PKGSS_RESIZE2FS:=	libe2fs libcom-err libblkid
@@ -48,21 +51,26 @@ $(eval $(call PKG_template,TUNE2FS,tune2fs,$(PKG_VERSION)-$(PKG_RELEASE),$(PKGSS
 $(eval $(call PKG_template,RESIZE2FS,resize2fs,$(PKG_VERSION)-$(PKG_RELEASE),$(PKGSS_RESIZE2FS),$(PKGSD_RESIZE2FS),$(PKGSC_RESIZE2FS)))
 $(eval $(call PKG_template,MKE2FS,mke2fs,$(PKG_VERSION)-$(PKG_RELEASE),$(PKGSS_MKE2FS),$(PKGSD_MKE2FS),$(PKGSC_MKE2FS)))
 $(eval $(call PKG_template,E2FSCK,e2fsck,$(PKG_VERSION)-$(PKG_RELEASE),$(PKGSS_E2FSCK),$(PKGSD_E2FSCK),$(PKGSC_E2FSCK)))
+$(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
+$(eval $(call PKG_template,TUNE2FS_STATIC,tune2fs-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
+
 
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
-CONFIGURE_ARGS+=	--disable-elf-shlibs \
-			--enable-libblkid
+CONFIGURE_ARGS+=	--disable-elf-shlibs
 else
-CONFIGURE_ARGS+=	--enable-elf-shlibs \
-			--disable-libblkid 
+CONFIGURE_ARGS+=	--enable-elf-shlibs
 endif
 
 CONFIGURE_ARGS+=	--disable-rpath \
-			--disable-libuuid \
+			--enable-libuuid \
+			--disable-uuidd \
+			--enable-libblkid \
 			--disable-testio-debug \
 			--disable-debugfs \
+			--enable-verbose-makecmds \
 			--disable-defrag
 TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_TARGET_DIR)/usr/include
+#TARGET_LDFLAGS+=	-L${WRKSRC}/lib -L${WRKSRC}/lib/ext2fs
 MAKE_FLAGS+=		BUILD_CC="$(HOST_CC)" \
 			BUILD_CFLAGS="$(HOST_CFLAGS) $(HOST_CPPFLAGS) -I$(WRKSRC)/lib -I." \
 			BUILD_LDFLAGS="$(HOST_LDFLAGS)"
@@ -105,5 +113,17 @@ libss-install:
 	$(INSTALL_DIR) $(IDIR_LIBSS)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libss.so* \
 		$(IDIR_LIBSS)/usr/lib
+
+e2fsck-static-install:
+	${MAKE} -C ${WRKBUILD}/e2fsck e2fsck.static
+	${INSTALL_DIR} ${IDIR_E2FSCK_STATIC}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/e2fsck/e2fsck.static \
+			${IDIR_E2FSCK_STATIC}/usr/sbin/e2fsck
+
+tune2fs-static-install:
+	${MAKE} -C ${WRKBUILD}/misc tune2fs.static
+	${INSTALL_DIR} ${IDIR_TUNE2FS_STATIC}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/misc/tune2fs.static \
+		${IDIR_TUNE2FS_STATIC}/usr/sbin/tune2fs
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
