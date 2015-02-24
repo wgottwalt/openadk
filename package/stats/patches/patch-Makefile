@@ -1,0 +1,28 @@
+	- allow for passing custom compiler FLAGS
+	- use host CC and CFLAGS for tools/configurator build
+--- stats-82bd4977b607b8714f361467e37a9d801ff911b6.orig/Makefile	2015-02-23 22:34:48.000000000 +0100
++++ stats-82bd4977b607b8714f361467e37a9d801ff911b6/Makefile	2015-02-23 22:38:45.478017862 +0100
+@@ -5,10 +5,10 @@ PREFIX = /usr/local
+ OPTFLAGS=-O3 -flto
+ #OPTFLAGS=-g
+ WARNFLAGS=-Wall -Wstrict-prototypes -Wundef
+-CPPFLAGS=-I.
+-CFLAGS=$(OPTFLAGS) $(WARNFLAGS)
+-LDFLAGS=$(OPTFLAGS)
+-LDLIBS=-lm
++CPPFLAGS+=-I.
++CFLAGS+=$(OPTFLAGS) $(WARNFLAGS)
++LDFLAGS+=$(OPTFLAGS)
++LDLIBS+=-lm
+ 
+ # Comment this out (or use "VALGRIND=" on cmdline) if you don't have valgrind.
+ VALGRIND=valgrind --quiet --leak-check=full --error-exitcode=5
+@@ -41,6 +41,8 @@ $(OFILES): config.h
+ config.h: tools/configurator
+ 	if $< > $@.tmp; then mv $@.tmp $@; else rm -f $@.tmp; fi
+ 
++tools/configurator: CC=${CC_FOR_BUILD}
++tools/configurator: CFLAGS=${OPTFLAGS} ${WARNFLAGS}
+ stats: $(OFILES)
+ 
+ distclean: clean
