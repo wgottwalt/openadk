@@ -106,6 +106,8 @@ config-prepare: $(ADK_TOPDIR)/.config
 		echo "no miniconfig found for target system"; \
 		exit 1; \
 	fi
+	@cd $(BUILD_DIR) && cmp -s .kernelconfig.board .kernelconfig || \
+	    cp .kernelconfig.board .kernelconfig
 endif
 
 prepare: $(ADK_TARGET_ARCH)-prepare
