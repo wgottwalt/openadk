@@ -44,6 +44,9 @@ ifeq ($(ADK_TARGET_ARCH_ARC),)
 TARGETS+=gdb
 GDB:=gdb-install
 endif
+ifeq (${ADK_PRELINK},y)
+TARGETS+=prelink-cross
+endif
 
 DOWNLOAD:=kernel-headers-download $(patsubst %,%-download,$(TARGETS))
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
