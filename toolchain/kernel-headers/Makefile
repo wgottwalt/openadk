@@ -5,8 +5,13 @@ include $(ADK_TOPDIR)/rules.mk
 include ../rules.mk
 include $(ADK_TOPDIR)/mk/kernel-ver.mk
 include $(ADK_TOPDIR)/mk/linux.mk
-include $(ADK_TOPDIR)/mk/kernel-vars.mk
 include $(ADK_TOPDIR)/mk/buildhlp.mk
+
+# override linux dir here, as build_bla_bla/linux does not exist yet
+LINUX_DIR=${WRKBUILD}
+
+include $(ADK_TOPDIR)/mk/kernel-vars.mk
+
 
 $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched:
 ifeq ($(ADK_TARGET_SYSTEM_PCENGINES_APU),y)
@@ -60,8 +65,8 @@ endif
 	touch $@
 
 $(WRKBUILD)/.headers: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched
-	$(KERNEL_MAKE_ENV) $(MAKE) -C $(WRKBUILD) $(KERNEL_MAKE_OPTS) headers_check
-	$(KERNEL_MAKE_ENV) $(MAKE) -C $(WRKBUILD) $(KERNEL_MAKE_OPTS) \
+	$(KERNEL_MAKE_ENV) $(MAKE) $(KERNEL_MAKE_OPTS) headers_check
+	$(KERNEL_MAKE_ENV) $(MAKE) $(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR)/usr \
 		headers_install
 ifeq ($(ADK_TARGET_ARCH_CRIS),y)
