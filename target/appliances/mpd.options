@@ -1,0 +1,16 @@
+choice
+prompt "Choose a GUI"
+depends on ADK_APPLIANCE_MPD
+
+config ADK_APPLIANCE_MPD_MPDBOX
+	bool "use mpdbox html/javascript frontend"
+	select ADK_PACKAGE_MPDBOX
+
+config ADK_APPLIANCE_MPD_YMPD
+	bool "use ympd frontend"
+	select ADK_PACKAGE_YMPD
+
+config ADK_APPLIANCE_MPD_NOGUI
+	bool "use no gui frontend"
+
+endchoice
