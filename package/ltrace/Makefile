@@ -4,16 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ltrace
-PKG_VERSION:=		0.7.4
-# git from 24.05.2014
+PKG_VERSION:=		c18a46eff706e956c4dc755144d752dc163a1145
 PKG_RELEASE:=		1
-PKG_HASH:=		7fb662d3a918b96804a5c0a4b34c75985856e91079ddc89eca6dc87366834e3d
 PKG_DESCR:=		intercepts and records dynamic library calls 
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libelf
 PKG_BUILDDEP:=		libelf
 PKG_URL:=		http://ltrace.org/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		git://git.debian.org/git/collab-maint/ltrace.git
 
 include $(ADK_TOPDIR)/mk/package.mk
 
