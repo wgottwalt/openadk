@@ -1,6 +1,6 @@
---- cairo-1.12.16.orig/Makefile.in	2013-08-26 19:00:44.000000000 +0200
-+++ cairo-1.12.16/Makefile.in	2014-02-10 14:44:58.000000000 +0100
-@@ -80,7 +80,7 @@ EXTRA_PROGRAMS =
+--- cairo-1.14.0.orig/Makefile.in	2014-10-14 03:47:28.000000000 +0200
++++ cairo-1.14.0/Makefile.in	2015-02-26 11:39:05.000000000 +0100
+@@ -63,7 +63,7 @@ EXTRA_PROGRAMS =
  TESTS =
  check_PROGRAMS =
  # libpng is required for our test programs
@@ -9,7 +9,7 @@
  subdir = .
  ACLOCAL_M4 = $(top_srcdir)/aclocal.m4
  am__aclocal_m4_deps = $(top_srcdir)/build/aclocal.cairo.m4 \
-@@ -439,7 +439,7 @@ MAINTAINERCLEANFILES = Makefile.in $(src
+@@ -417,7 +417,7 @@ MAINTAINERCLEANFILES = Makefile.in $(src
  #	$(srcdir)/build/Makefile.win32.features-h \
  #	$(NULL)
  ACLOCAL_AMFLAGS = -I build ${ACLOCAL_FLAGS}

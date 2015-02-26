@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		cairo
-PKG_VERSION:=		1.12.16
-PKG_RELEASE:=		4
-PKG_HASH:=		2505959eb3f1de3e1841023b61585bfd35684b9733c7b6a3643f4f4cbde6d846
+PKG_VERSION:=		1.14.0
+PKG_RELEASE:=		1
+PKG_HASH:=		2cf5f81432e77ea4359af9dcd0f4faf37d015934501391c311bfd2d19a0134b7
 PKG_DESCR:=		cairo graphics library
 PKG_SECTION:=		libs/image
 PKG_DEPENDS:=		fontconfig libfreetype libx11 pixman
@@ -34,8 +34,6 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call HOST_template,CAIRO,cairo,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,CAIRO,cairo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
-
-
 
 HOST_CONFIGURE_ARGS+=	--enable-ft=yes \
 			--enable-png=yes \
@@ -87,8 +85,6 @@ CONFIGURE_ARGS+=	--enable-tee=yes
 else
 CONFIGURE_ARGS+=	--enable-tee=no
 endif
-
-
 
 CONFIGURE_ARGS+=	--enable-ft=yes \
 			--enable-fc=yes \
