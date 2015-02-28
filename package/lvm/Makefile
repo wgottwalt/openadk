@@ -39,7 +39,9 @@ CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \
 			--disable-testing \
 			--with-lvm1=none
-CONFIGURE_ENV+=		ac_cv_flag_HAVE_PIE=no
+CONFIGURE_ENV+=		ac_cv_flag_HAVE_PIE=no \
+			ac_cv_func_malloc_0_nonnull=yes \
+			ac_cv_func_realloc_0_nonnull=yes
 
 lvm-install:
 	${INSTALL_DIR} ${IDIR_LVM}/usr/sbin
