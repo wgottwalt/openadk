@@ -12,7 +12,7 @@ PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		util-linux
 PKG_URL:=		http://e2fsprogs.sourceforge.net/
-PKG_SITES:=		$(MASTER_SITE_SOURCEFORGE:=e2fsprogs/)
+PKG_SITES:=		https://www.kernel.org/pub/linux/kernel/people/tytso/e2fsprogs/v$(PKG_VERSION)/
 PKG_OPTS:=		dev
 PKG_NOPARALLEL:=	1
 
