@@ -3,22 +3,21 @@
 
 include $(ADK_TOPDIR)/rules.mk
 
-
 PKG_NAME:=		stats
 PKG_VERSION:=		82bd4977b607b8714f361467e37a9d801ff911b6
 PKG_RELEASE:=		1
-PKG_DESCR:=		Rusty Russell\'s stats utility
+PKG_DESCR:=		stats utility
 PKG_SECTION:=		sys/utils
 PKG_URL:=		https://github.com/rustyrussell/stats
 PKG_SITES:=		git://github.com/rustyrussell/stats.git
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,STATS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,STATS,$(PKG_NAME),$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
-post-install:
+stats-install:
 	$(INSTALL_DIR) $(IDIR_STATS)/usr/bin
-	$(INSTALL_BIN) $(WRKINST)/usr/local/bin/stats \
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/stats \
 		$(IDIR_STATS)/usr/bin
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk

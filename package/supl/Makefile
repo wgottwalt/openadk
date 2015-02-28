@@ -7,27 +7,28 @@ PKG_NAME:=		supl
 PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		1
 PKG_HASH:=		068dc47ce818ce5634f09a88159df85a6ce3456e2467b11b8c5f8543a99bb347
-PKG_DESCR:=		tools for accessing SUP/RRLP server
+PKG_DESCR:=		tools for accessing sup/rrlp server
 PKG_SECTION:=		net/misc
 PKG_BUILDDEP:=		openssl
 PKG_DEPENDS:=		libopenssl
 PKG_URL:=		http://www.tajuma.com/supl/
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=supl/}
-DISTFILES:=             ${PKG_NAME}_${PKG_VERSION}.tar.gz
-WRKDIST=		${WRKDIR}/trunk
+PKG_SITES:=		$(MASTER_SITE_SOURCEFORGE:=supl/)
+
+DISTFILES:=             $(PKG_NAME)_$(PKG_VERSION).tar.gz
+WRKDIST=		$(WRKDIR)/trunk
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,SUPL,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,SUPL,supl,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 CONFIG_STYLE:=		minimal
-CONFIGURE_ARGS+=	--precompiled-asn1=yes --prefix="${WRKINST}/usr"
+CONFIGURE_ARGS+=	--precompiled-asn1=yes --prefix="$(WRKINST)/usr"
 
-post-install:
+supl-install:
 	$(INSTALL_DIR) $(IDIR_SUPL)/usr/{bin,lib}
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/supl-{cert,client,proxy} \
 		$(IDIR_SUPL)/usr/bin
-	${CP} ${WRKINST}/usr/lib/lib{asnrrlp,asnsupl,supl}.so* \
-		${IDIR_SUPL}/usr/lib
+	$(CP) $(WRKINST)/usr/lib/lib{asnrrlp,asnsupl,supl}.so* \
+		$(IDIR_SUPL)/usr/lib
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk

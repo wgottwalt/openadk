@@ -4,19 +4,17 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		wireless-regdb
-PKG_VERSION:=		2011.04.28
+PKG_VERSION:=		2015.01.30
 PKG_RELEASE:=		1
-PKG_MD5SUM:=		16b7fabd4d7761ccf206702a3f18cce9
-PKG_DESCR:=		Binary regulatory database for CRDA
+PKG_HASH:=		438d7f3d62686bc997098d17fe1aff95c6f6ec061aaab90ab7c2c17e8451ce85
+PKG_DESCR:=		binary regulatory database for crda
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://wireless.kernel.org/en/developers/Regulatory
-PKG_SITES:=		http://wireless.kernel.org/download/wireless-regdb/
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
-
+PKG_SITES:=		https://www.kernel.org/pub/software/network/wireless-regdb/
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,WIRELESS_REGDB,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,WIRELESS_REGDB,$(PKG_NAME),$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -26,9 +24,5 @@ do-install:
 	$(INSTALL_DIR) $(IDIR_WIRELESS_REGDB)/usr/lib/crda
 	$(INSTALL_DATA) $(WRKDIST)/regulatory.bin \
 		$(IDIR_WIRELESS_REGDB)/usr/lib/crda
-	$(INSTALL_DIR) $(IDIR_WIRELESS_REGDB)/etc/wireless-regdb/pubkeys
-	$(INSTALL_DATA) $(WRKDIST)/linville.key.pub.pem \
-		$(IDIR_WIRELESS_REGDB)/etc/wireless-regdb/pubkeys
 
-
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk

@@ -16,9 +16,6 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_ARCH_DEPENDS:=	!m68k
-PKG_LIBC_DEPENDS:=	uclibc glibc
-
 PKG_CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 
 include $(ADK_TOPDIR)/mk/package.mk

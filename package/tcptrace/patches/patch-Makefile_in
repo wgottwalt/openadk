@@ -1,0 +1,13 @@
+--- tcptrace-6.6.7.orig/Makefile.in	2004-03-04 21:33:56.000000000 +0100
++++ tcptrace-6.6.7/Makefile.in	2015-02-27 19:17:39.000000000 +0100
+@@ -34,8 +34,8 @@ DEFINES += -DBUNZIP2="\"bunzip2\""
+ # 
+ ################################################################## 
+ PCAP_LDLIBS = @V_PCAP_LDLIBS@
+-PCAP_INCS    = -I/usr/local/include -I. -I../pcap -I/usr/include/pcap
+-PCAP_LDFLAGS = -L/usr/local/lib -Llib -Lpcap -L../pcap -L./cygwin-libs
++PCAP_INCS    = -I. -I../pcap
++PCAP_LDFLAGS = -Llib -Lpcap -L../pcap -L./cygwin-libs
+ 
+ 
+ 

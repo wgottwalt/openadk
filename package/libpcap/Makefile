@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libpcap
 PKG_VERSION:=		1.6.2
 PKG_RELEASE:=		1
-PKG_HASH:=		116cbb3ac9e96d5dd7b39638a2f894a67fa3dcf06d794e6dae2b9a942ad13476
+PKG_HASH:=		5db3e2998f1eeba2c76da55da5d474248fe19c44f49e15cac8a796a2c7e19690
 PKG_DESCR:=		low-level packet capture library
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://www.tcpdump.org/
@@ -22,9 +22,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBPCAP,libpcap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ENV+=		ac_cv_linux_vers=26
 CONFIGURE_ARGS+=	--disable-yydebug \
-			--with-build-cc=$(CC_FOR_BUILD) \
 			--disable-dbus \
 			--without-libnl \
 			--with-pcap=linux
