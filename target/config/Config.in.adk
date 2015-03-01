@@ -110,4 +110,16 @@ config ADK_HOST_CYGWIN
 	bool "Cygwin"
 
 endchoice
+
+config ADK_PRELINK
+	prompt "Prelink binaries and libraries in Image"
+	boolean
+	help
+	  Do prelinking for faster loading of binaries.
+
+config ADK_PRELINK_OPTS
+	string "additional options to pass to prelink"
+	default "-mR"
+	depends on ADK_PRELINK
+
 endmenu

@@ -223,7 +223,7 @@ kernelconfig:
 	${KERNEL_MAKE_ENV} ${MAKE} \
 		ARCH=$(ADK_TARGET_ARCH) \
 		${KERNEL_MAKE_OPTS} \
-		-C $(BUILD_DIR)/linux menuconfig
+		menuconfig
 
 # create a new package from package/.template
 newpackage:

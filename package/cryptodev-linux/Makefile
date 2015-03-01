@@ -22,25 +22,23 @@ include ${ADK_TOPDIR}/mk/kernel-vars.mk
 $(eval $(call PKG_template,CRYPTODEV_LINUX,cryptodev-linux,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-BUILD_STYLE:=		manual
+XAKE_FLAGS+=		CRYPTODEV_CFLAGS='-DENABLE_ASYNC -fhonour-copts' \
+			ARCH='${ADK_TARGET_KARCH}' \
+			KERNEL_DIR='${LINUX_DIR}' \
+			CROSS_COMPILE='${TARGET_CROSS}'
+ALL_TARGET:=		build
 INSTALL_STYLE:=		manual
 
-do-build:
-	${MAKE} -C "${WRKBUILD}"/tests check
-	${MAKE} -C "${WRKBUILD}" version.h
-	GCC_HONOUR_COPTS=0 LDFLAGS="" ${MAKE} -C ${LINUX_DIR} ${KERNEL_MAKE_OPTS} \
-			 M="${WRKBUILD}" modules
-	${INSTALL_DIR} ${WRKINST}/usr/include/crypto
-	${INSTALL_DATA} ${WRKBUILD}/crypto/cryptodev.h \
-		${WRKINST}/usr/include/crypto/
+post-build:
+	-${MAKE} -C "${WRKBUILD}"/tests check
 
 do-install:
 	${INSTALL_DIR} ${IDIR_CRYPTODEV_LINUX}/usr/bin
 	for i in cipher cipher-aead hmac speed async_cipher async_hmac \
-        	async_speed sha_speed hashcrypt_speed fullspeed cipher-gcm \
-        	cipher-aead-srtp cipher_comp hash_comp hmac_comp; do \
+		async_speed sha_speed hashcrypt_speed fullspeed cipher-gcm \
+		cipher-aead-srtp cipher_comp hash_comp hmac_comp; do \
 		$(INSTALL_BIN) ${WRKBUILD}/tests/$$i ${IDIR_CRYPTODEV_LINUX}/usr/bin; \
-	done	
+	done
 	${INSTALL_DIR} ${IDIR_CRYPTODEV_LINUX}/usr/include/crypto
 	${INSTALL_DATA} ${WRKBUILD}/crypto/cryptodev.h \
 		${IDIR_CRYPTODEV_LINUX}/usr/include/crypto/

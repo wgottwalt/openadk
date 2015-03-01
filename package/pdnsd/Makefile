@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		pdnsd
-PKG_VERSION:=		1.2.7
-PKG_RELEASE:=		3
-PKG_HASH:=		2777d7317509df7c75c90bcfd7f9ceaec9ea2db164bf00eb797fa54e0b476a00
+PKG_VERSION:=		1.2.9a
+PKG_RELEASE:=		1
+PKG_HASH:=		bb5835d0caa8c4b31679d6fd6a1a090b71bdf70950db3b1d0cea9cf9cb7e2a7b
 PKG_DESCR:=		proxy dns server
 PKG_SECTION:=		net/dns
 PKG_DEPENDS:=		libpthread
-PKG_URL:=		http://www.phys.uu.nl/~rombouts/pdnsd.html
-PKG_SITES:=		http://www.phys.uu.nl/~rombouts/pdnsd/releases/
+PKG_URL:=		http://members.home.nl/p.a.rombouts/pdnsd/index.html
+PKG_SITES:=		http://members.home.nl/p.a.rombouts/pdnsd/releases/
 
 PKG_FLAVOURS_PDNSD:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support

@@ -32,7 +32,9 @@ ifeq (${ADK_PACKAGE_WGET_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--with-ssl=no
 endif
 ifeq (${ADK_PACKAGE_WGET_WITH_OPENSSL},y)
-CONFIGURE_ARGS+=	--with-ssl=openssl
+CONFIGURE_ARGS+=	--with-ssl=openssl \
+			--with-openssl=yes \
+			--with-libssl-prefix=${STAGING_TARGET_DIR}
 endif
 ifeq (${ADK_PACKAGE_WGET_WITH_GNUTLS},y)
 CONFIGURE_ARGS+=	--with-ssl=gnutls \

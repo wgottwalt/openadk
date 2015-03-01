@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-KERNEL_MAKE_OPTS:=	V=1 \
+KERNEL_MAKE_OPTS:=	V=1 -C "${LINUX_DIR}" \
 			ARCH="$(ADK_TARGET_KARCH)" \
 			CROSS_COMPILE="$(TARGET_CROSS)" \
 			CC="$(TARGET_CC)" \

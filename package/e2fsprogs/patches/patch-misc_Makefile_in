@@ -1,50 +1,15 @@
---- e2fsprogs-1.42.10.orig/misc/Makefile.in	2014-05-15 19:04:08.000000000 +0200
-+++ e2fsprogs-1.42.10/misc/Makefile.in	2014-07-08 21:15:18.000000000 +0200
-@@ -17,9 +17,6 @@ INSTALL = @INSTALL@
- @IMAGER_CMT@E2IMAGE_PROG= e2image
- @IMAGER_CMT@E2IMAGE_MAN= e2image.8
+	when linking tune2fs.static, pass libs in the correct order
+	(libuuid.a depends on libext2fs.a and therefore needs to come before that)
+--- e2fsprogs-1.42.12.orig/misc/Makefile.in	2014-08-03 01:41:18.000000000 +0200
++++ e2fsprogs-1.42.12/misc/Makefile.in	2015-02-10 18:19:51.022952937 +0100
+@@ -165,8 +165,8 @@ tune2fs: $(TUNE2FS_OBJS) $(DEPLIBS) $(DE
+ tune2fs.static: $(TUNE2FS_OBJS) $(STATIC_DEPLIBS) $(STATIC_LIBE2P) $(DEPSTATIC_LIBBLKID)
+ 	$(E) "	LD $@"
+ 	$(Q) $(CC) $(LDFLAGS_STATIC) -o tune2fs.static $(TUNE2FS_OBJS) \
+-		$(STATIC_LIBS) $(STATIC_LIBBLKID) $(STATIC_LIBUUID) \
+-		$(STATIC_LIBQUOTA) $(STATIC_LIBE2P) $(LIBINTL) $(SYSLIBS)
++		$(STATIC_LIBBLKID) $(STATIC_LIBUUID) \
++		$(STATIC_LIBQUOTA) $(STATIC_LIBE2P) $(STATIC_LIBS) $(LIBINTL) $(SYSLIBS)
  
--@UUIDD_CMT@UUIDD_PROG= uuidd
--@UUIDD_CMT@UUIDD_MAN= uuidd.8
--
- @BLKID_CMT@BLKID_PROG= blkid
- @BLKID_CMT@BLKID_MAN= blkid.8
- 
-@@ -35,8 +32,8 @@ SMANPAGES=	tune2fs.8 mklost+found.8 mke2
- 			$(UUIDD_MAN) $(E4DEFRAG_MAN) @FSCK_MAN@
- FMANPAGES=	mke2fs.conf.5 ext4.5
- 
--UPROGS=		chattr lsattr @UUID_CMT@ uuidgen
--UMANPAGES=	chattr.1 lsattr.1 @UUID_CMT@ uuidgen.1
-+UPROGS=		chattr lsattr 
-+UMANPAGES=	chattr.1 lsattr.1
- 
- LPROGS=		@E2INITRD_PROG@
- 
-@@ -46,8 +43,6 @@ MKE2FS_OBJS=	mke2fs.o util.o profile.o p
- 			mk_hugefiles.o
- CHATTR_OBJS=	chattr.o
- LSATTR_OBJS=	lsattr.o
--UUIDGEN_OBJS=	uuidgen.o
--UUIDD_OBJS=	uuidd.o
- DUMPE2FS_OBJS=	dumpe2fs.o
- BADBLOCKS_OBJS=	badblocks.o
- E2IMAGE_OBJS=	e2image.o
-@@ -64,8 +59,6 @@ PROFILED_MKE2FS_OBJS=	profiled/mke2fs.o 
- 			profiled/prof_err.o profiled/default_profile.o
- PROFILED_CHATTR_OBJS=	profiled/chattr.o
- PROFILED_LSATTR_OBJS=	profiled/lsattr.o
--PROFILED_UUIDGEN_OBJS=	profiled/uuidgen.o
--PROFILED_UUIDD_OBJS=	profiled/uuidd.o
- PROFILED_DUMPE2FS_OBJS=	profiled/dumpe2fs.o
- PROFILED_BADBLOCKS_OBJS=	profiled/badblocks.o
- PROFILED_E2IMAGE_OBJS=	profiled/e2image.o
-@@ -80,7 +73,7 @@ PROFILED_E4DEFRAG_OBJS=	profiled/e4defra
- SRCS=	$(srcdir)/tune2fs.c $(srcdir)/mklost+found.c $(srcdir)/mke2fs.c $(srcdir)/mk_hugefiles.c \
- 		$(srcdir)/chattr.c $(srcdir)/lsattr.c $(srcdir)/dumpe2fs.c \
- 		$(srcdir)/badblocks.c $(srcdir)/fsck.c $(srcdir)/util.c \
--		$(srcdir)/uuidgen.c $(srcdir)/blkid.c $(srcdir)/logsave.c \
-+		$(srcdir)/blkid.c $(srcdir)/logsave.c \
- 		$(srcdir)/filefrag.c $(srcdir)/base_device.c \
- 		$(srcdir)/ismounted.c $(srcdir)/../e2fsck/profile.c \
- 		$(srcdir)/e2undo.c $(srcdir)/e2freefrag.c
+ tune2fs.profiled: $(TUNE2FS_OBJS) $(PROFILED_DEPLIBS) \
+ 		$(PROFILED_E2P) $(DEPPROFILED_LIBBLKID) $(DEPPROFILED_LIBUUID) \

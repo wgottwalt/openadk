@@ -71,7 +71,7 @@ kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
 
 dtb-install:
-	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
+	env $(KERNEL_MAKE_ENV) $(MAKE) $(KERNEL_MAKE_OPTS) \
 		-j${ADK_MAKE_JOBS} virtex440-ml507.dtb $(MAKE_TRACE)
 	$(CP) $(LINUX_DIR)/arch/powerpc/boot/virtex440-ml507.dtb \
 		$(FW_DIR)/ppc.dtb
