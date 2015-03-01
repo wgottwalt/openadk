@@ -4,6 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
+include $(ADK_TOPDIR)/mk/os.mk
 
 # disable SSP for libstdc++
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
@@ -182,6 +183,8 @@ endif
 	$(SED) '/k prot/agcc_cv_libc_provides_ssp=yes' $(WRKBUILD)/gcc/configure
 	cd $(GCC_BUILD_DIR_MINIMAL); \
 		PATH='$(TARGET_PATH)' \
+		CC='$(HOST_CC)' \
+		CXX='$(HOST_CXX)' \
 		CFLAGS="-O0 -g0 -fomit-frame-pointer" \
 		CXXFLAGS="-O0 -g0 -fomit-frame-pointer" \
 		$(WRKBUILD)/configure \
@@ -204,6 +207,8 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_INITIAL)
 	cd $(GCC_BUILD_DIR_INITIAL); \
 		PATH='$(TARGET_PATH)' \
+		CC='$(HOST_CC)' \
+		CXX='$(HOST_CXX)' \
 		CFLAGS="-O0 -g0 -fomit-frame-pointer" \
 		CXXFLAGS="-O0 -g0 -fomit-frame-pointer" \
 		$(WRKBUILD)/configure \
@@ -227,6 +232,8 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_FINAL)
 	cd $(GCC_BUILD_DIR_FINAL); \
 		PATH='$(TARGET_PATH)' \
+		CC='$(HOST_CC)' \
+		CXX='$(HOST_CXX)' \
 		CFLAGS_FOR_TARGET='$(TARGET_CFLAGS)' \
 		CXXFLAGS_FOR_TARGET='$(TARGET_CXXFLAGS)' \
 		$(WRKBUILD)/configure \
