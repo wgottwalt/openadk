@@ -184,11 +184,11 @@ config ADK_KERNEL_VFP
 
 config ADK_KERNEL_VFPv3
 	bool
-	default y if ADK_TARGET_CPU_WITH_FPU_VFP3
+	default y if ADK_TARGET_CPU_WITH_FPU_VFPV3
 
 config ADK_KERNEL_VFPv4
 	bool
-	default y if ADK_TARGET_CPU_WITH_FPU_VFP4
+	default y if ADK_TARGET_CPU_WITH_FPU_VFPV4
 
 config ADK_KERNEL_NEON
 	bool
