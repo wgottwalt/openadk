@@ -514,7 +514,7 @@ endif
 	@if [ ! -z "$(ADK_TARGET_SYSTEM)" ];then \
 		system=$$(echo "$(ADK_TARGET_SYSTEM)" |sed -e "s/-/_/g"); \
 		grep -h "^config" target/*/Config.in.systems \
-			|grep -i "$$system" \
+			|grep -i "$$system$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/all.config; \
 	fi
