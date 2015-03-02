@@ -25,6 +25,7 @@ SET_DASHX:=		:
 endif
 
 # Strip off the annoying quoting
+ADK_APPLIANCE_VERSION:=			$(strip $(subst ",, $(ADK_APPLIANCE_VERSION)))
 ADK_TARGET_ARCH:=			$(strip $(subst ",, $(ADK_TARGET_ARCH)))
 ADK_TARGET_SYSTEM:=			$(strip $(subst ",, $(ADK_TARGET_SYSTEM)))
 ADK_TARGET_BOARD:=			$(strip $(subst ",, $(ADK_TARGET_BOARD)))
