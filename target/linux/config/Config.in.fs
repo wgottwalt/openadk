@@ -195,10 +195,6 @@ config ADK_KERNEL_BTRFS_FS
 config ADK_KERNEL_FUSE_FS
 	prompt "Filesystem in Userspace support"
 	tristate
-	default m if ADK_PACKAGE_DAVFS2
-	default m if ADK_PACKAGE_FUSE
-	default m if ADK_PACKAGE_NTFS_3G
-	default m if ADK_PACKAGE_WDFS
 	default n
 	help
 	  With FUSE it is possible to implement a fully functional

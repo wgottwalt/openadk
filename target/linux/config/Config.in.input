@@ -145,8 +145,6 @@ config ADK_KERNEL_MOUSE_PS2
 config ADK_KERNEL_INPUT_EVDEV
 	tristate "Event device support"
 	select ADK_KERNEL_INPUT
-	default m if ADK_PACKAGE_XF86_INPUT_EVDEV
-	default m if ADK_PACKAGE_XF86_INPUT_EVTOUCH
 	default n
 
 endmenu
