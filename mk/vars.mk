@@ -148,6 +148,7 @@ endif
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
 TARGET_CFLAGS+=		-Wl,-elf2flt
+TARGET_CXXFLAGS+=	-Wl,-elf2flt
 endif
 endif
 
