@@ -188,7 +188,7 @@ config ADK_KERNEL_PATA_MACIO
 	depends on ADK_TARGET_SYSTEM_QEMU_PPC
 	
 config ADK_KERNEL_PATA_PLATFORM
-	tristate
+	tristate "PATA platform driver"
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
