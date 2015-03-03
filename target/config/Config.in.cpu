@@ -112,6 +112,21 @@ config ADK_CPU_GEODE
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
+config ADK_CPU_I486
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_I586
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_I686
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
 config ADK_CPU_LOONGSON2F
 	bool
 	select ADK_TARGET_WITH_NPTL
