@@ -1,18 +1,12 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_big
-	boolean
-
-config ADK_little
-	boolean
-
 config ADK_TARGET_ENDIAN
 	string
-	default "little" if ADK_little
-	default "big" if ADK_big
+	default "little" if ADK_TARGET_LITTLE_ENDIAN
+	default "big" if ADK_TARGET_BIG_ENDIAN
 
 config ADK_JFFS2_OPTS
 	string
-	default "-l" if ADK_little
-	default "-b" if ADK_big
+	default "-l" if ADK_TARGET_LITTLE_ENDIAN
+	default "-b" if ADK_TARGET_BIG_ENDIAN

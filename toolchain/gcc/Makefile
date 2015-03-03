@@ -114,7 +114,7 @@ GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 
 ifeq ($(ADK_TARGET_ARCH_SH),y)
-ifeq ($(ADK_little),y)
+ifeq ($(ADK_TARGET_LITTLE_ENDIAN),y)
 GCC_CONFOPTS+=		--with-endian=little
 else
 GCC_CONFOPTS+=          --with-endian=big

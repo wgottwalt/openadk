@@ -2,7 +2,7 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_AARCH64
 	bool "Toolchain only"
 	select ADK_aarch64
 	select ADK_toolchain_aarch64
-	select ADK_little
+	select ADK_TARGET_LITTLE_ENDIAN
 	select ADK_CPU_CORTEX_A57
 	select ADK_LINUX_64
 	select ADK_TARGET_TOOLCHAIN

@@ -2,7 +2,7 @@ config ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	bool "Sharp Zaurus CL3200 (Terrier)"
 	select ADK_arm
 	select ADK_sharp_zaurus
-	select ADK_little
+	select ADK_TARGET_LITTLE_ENDIAN
 	select ADK_CPU_XSCALE
 	select ADK_TARGET_CPU_WITH_IWMMXT
 	select ADK_TARGET_WITH_VGA

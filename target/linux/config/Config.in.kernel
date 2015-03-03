@@ -118,11 +118,11 @@ config ADK_KERNEL_THUMB2_KERNEL
 # endianess
 config ADK_KERNEL_CPU_BIG_ENDIAN
 	bool
-	default y if ADK_big
+	default y if ADK_TARGET_BIG_ENDIAN
 
 config ADK_KERNEL_CPU_LITTLE_ENDIAN
 	bool
-	default y if ADK_little
+	default y if ADK_TARGET_LITTLE_ENDIAN
 
 choice
 prompt "Kernel Compression"

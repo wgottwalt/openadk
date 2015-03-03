@@ -15,11 +15,9 @@ depends on !ADK_TARGET_SYSTEM_QEMU_ARM
 depends on !ADK_TARGET_SYSTEM_LINKSYS_NSLU2
 
 config ADK_TARGET_LITTLE_ENDIAN
-	boolean "Little endian"
-	select ADK_little
+	bool "Little endian"
 
 config ADK_TARGET_BIG_ENDIAN
-	boolean "Big endian"
-	select ADK_big
+	bool "Big endian"
 
 endchoice

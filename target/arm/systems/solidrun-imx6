@@ -1,8 +1,8 @@
 config ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	bool "Solidrun IMX6 Embedded Systems"
 	select ADK_arm
-	select ADK_little
 	select ADK_solidrun_imx6
+	select ADK_TARGET_LITTLE_ENDIAN
 	select ADK_CPU_CORTEX_A9
 	select ADK_TARGET_CPU_WITH_NEON
 	select ADK_TARGET_WITH_VGA

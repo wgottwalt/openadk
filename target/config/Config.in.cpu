@@ -322,12 +322,12 @@ config ADK_TARGET_CPU_FLAGS
 
 config ADK_TARGET_CPU_ARCH
 	string
-	default "aarch64" if ADK_TARGET_ARCH_AARCH64 && ADK_little
+	default "aarch64" if ADK_TARGET_ARCH_AARCH64 && ADK_TARGET_LITTLE_ENDIAN
 	default "alpha" if ADK_TARGET_ARCH_ALPHA
-	default "arm" if ADK_TARGET_ARCH_ARM && ADK_little
-	default "armeb" if ADK_TARGET_ARCH_ARM && ADK_big
-	default "arc" if ADK_TARGET_ARCH_ARC && ADK_little
-	default "arceb" if ADK_TARGET_ARCH_ARC && ADK_big
+	default "arm" if ADK_TARGET_ARCH_ARM && ADK_TARGET_LITTLE_ENDIAN
+	default "armeb" if ADK_TARGET_ARCH_ARM && ADK_TARGET_BIG_ENDIAN
+	default "arc" if ADK_TARGET_ARCH_ARC && ADK_TARGET_LITTLE_ENDIAN
+	default "arceb" if ADK_TARGET_ARCH_ARC && ADK_TARGET_BIG_ENDIAN
 	default "avr32" if ADK_CPU_AVR32
 	default "bfin" if ADK_CPU_BFIN
 	default "c6x" if ADK_CPU_C6X
@@ -342,18 +342,18 @@ config ADK_TARGET_CPU_ARCH
 	default "i686" if ADK_CPU_ATHLON
 	default "hppa" if ADK_TARGET_ARCH_HPPA
 	default "m68k" if ADK_TARGET_ARCH_M68K
-	default "microblaze" if ADK_TARGET_ARCH_MICROBLAZE && ADK_big
-	default "microblazeel" if ADK_TARGET_ARCH_MICROBLAZE && ADK_little
-	default "mips64" if ADK_TARGET_ARCH_MIPS64 && ADK_big
-	default "mips64el" if ADK_TARGET_ARCH_MIPS64 && ADK_little
-	default "mips" if ADK_TARGET_ARCH_MIPS && ADK_big
-	default "mipsel" if ADK_TARGET_ARCH_MIPS && ADK_little
+	default "microblaze" if ADK_TARGET_ARCH_MICROBLAZE && ADK_TARGET_BIG_ENDIAN
+	default "microblazeel" if ADK_TARGET_ARCH_MICROBLAZE && ADK_TARGET_LITTLE_ENDIAN
+	default "mips64" if ADK_TARGET_ARCH_MIPS64 && ADK_TARGET_BIG_ENDIAN
+	default "mips64el" if ADK_TARGET_ARCH_MIPS64 && ADK_TARGET_LITTLE_ENDIAN
+	default "mips" if ADK_TARGET_ARCH_MIPS && ADK_TARGET_BIG_ENDIAN
+	default "mipsel" if ADK_TARGET_ARCH_MIPS && ADK_TARGET_LITTLE_ENDIAN
 	default "nios2" if ADK_TARGET_ARCH_NIOS2
 	default "ppc" if ADK_CPU_PPC
 	default "ppc" if ADK_CPU_PPC_440
 	default "ppc64" if ADK_CPU_PPC64
-	default "sh4" if ADK_TARGET_ARCH_SH && ADK_little
-	default "sh4eb" if ADK_TARGET_ARCH_SH && ADK_big
+	default "sh4" if ADK_TARGET_ARCH_SH && ADK_TARGET_LITTLE_ENDIAN
+	default "sh4eb" if ADK_TARGET_ARCH_SH && ADK_TARGET_BIG_ENDIAN
 	default "sparc" if ADK_TARGET_ARCH_SPARC
 	default "sparc64" if ADK_TARGET_ARCH_SPARC64
 	default "tilegx" if ADK_CPU_TILE
