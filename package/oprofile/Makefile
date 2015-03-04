@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		oprofile
-PKG_VERSION:=		0.9.9
-PKG_RELEASE:=		4
-PKG_HASH:=		1e523400daaba7b8d0d15269e977a08b40edfea53970774b69ae130e25117597
+PKG_VERSION:=		1.0.0
+PKG_RELEASE:=		1
+PKG_HASH:=		847110b4ecdcf8c8353cd38f94c1b704aad4bfcd9453e38b88d112cfb7e3c45a
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libpopt libbfd libstdcxx
@@ -15,9 +15,6 @@ PKG_URL:=		http://oprofile.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_ARCH_DEPENDS:=	!m68k
-PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 
@@ -30,11 +27,20 @@ CONFIGURE_ARGS+=	--with-binutils-libname=binutils \
 			--with-binutils=${STAGING_TARGET_DIR}/usr/lib
 
 oprofile-install:
-	$(INSTALL_DIR) $(IDIR_OPROFILE)/usr/{bin,share}
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/opcontrol $(IDIR_OPROFILE)/usr/bin/
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/ophelp $(IDIR_OPROFILE)/usr/bin/
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/opreport $(IDIR_OPROFILE)/usr/bin/
-	$(INSTALL_BIN) $(WRKINST)/usr/bin/oprofiled $(IDIR_OPROFILE)/usr/bin/
+	$(INSTALL_DIR) $(IDIR_OPROFILE)/usr/{bin,lib/oprofile,share}
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/ocount \
+			$(WRKINST)/usr/bin/opannotate \
+			$(WRKINST)/usr/bin/oparchive \
+			$(WRKINST)/usr/bin/op-check-perfevents \
+			$(WRKINST)/usr/bin/operf \
+			$(WRKINST)/usr/bin/opgprof \
+			$(WRKINST)/usr/bin/ophelp \
+			$(WRKINST)/usr/bin/opimport \
+			$(WRKINST)/usr/bin/opjitconv \
+			$(WRKINST)/usr/bin/opreport \
+			$(IDIR_OPROFILE)/usr/bin/
 	${CP} ${WRKINST}/usr/share/oprofile ${IDIR_OPROFILE}/usr/share/
+	${CP} ${WRKINST}/usr/lib/oprofile/libopagent.so* \
+		${IDIR_OPROFILE}/usr/lib/oprofile
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

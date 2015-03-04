@@ -81,13 +81,13 @@ config ADK_CPU_CORTEX_A7
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
-	select ADK_TARGET_CPU_WITH_FPU_VFP4
+	select ADK_TARGET_CPU_WITH_FPU_VFPV4
 
 config ADK_CPU_CORTEX_A9
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
-	select ADK_TARGET_CPU_WITH_FPU_VFP3
+	select ADK_TARGET_CPU_WITH_FPU_VFPV3
 
 config ADK_CPU_CORTEX_A53
 	bool
@@ -108,6 +108,21 @@ config ADK_CPU_CRIS_V32
 	select ADK_TARGET_WITH_LT
 
 config ADK_CPU_GEODE
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_I486
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_I586
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_I686
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
@@ -228,17 +243,14 @@ config ADK_TARGET_CPU_WITH_FPU
 config ADK_TARGET_CPU_WITH_FPU_VFP
 	bool
 	select ADK_TARGET_CPU_WITH_FPU
-	select ADK_fpu_vfp
 
-config ADK_TARGET_CPU_WITH_FPU_VFP3
+config ADK_TARGET_CPU_WITH_FPU_VFPV3
 	bool
 	select ADK_TARGET_CPU_WITH_FPU
-	select ADK_fpu_vfp3
 
-config ADK_TARGET_CPU_WITH_FPU_VFP4
+config ADK_TARGET_CPU_WITH_FPU_VFPV4
 	bool
 	select ADK_TARGET_CPU_WITH_FPU
-	select ADK_fpu_vfp4
 
 config ADK_TARGET_CPU_WITH_VT
 	bool
@@ -283,42 +295,45 @@ config ADK_TARGET_GCC_CPU
 	string
 	default "440" if ADK_CPU_PPC_440
 	default "5208" if ADK_CPU_CF_5208
-	default "amdfam10" if ADK_CPU_AMDFAM10
 	default "arc700" if ADK_CPU_ARC700
 	default "arcv2em" if ADK_CPU_ARCv2EM
 	default "arm1176jzf-s" if ADK_CPU_ARM1176JZF_S
 	default "arm926ej-s" if ADK_CPU_ARM926EJ_S
 	default "armv8-a" if ADK_CPU_ARMV8
-	default "athlon" if ADK_CPU_ATHLON
-	default "atom" if ADK_CPU_ATOM
 	default "cortex-a7" if ADK_CPU_CORTEX_A7
 	default "cortex-a9" if ADK_CPU_CORTEX_A9
 	default "cortex-a53" if ADK_CPU_CORTEX_A53
 	default "cortex-a57" if ADK_CPU_CORTEX_A57
 	default "cortex-m3" if ADK_CPU_CORTEX_M3
 	default "cortex-m4" if ADK_CPU_CORTEX_M4
-	default "geode" if ADK_CPU_GEODE
-	default "i486" if ADK_CPU_I486
-	default "i586" if ADK_CPU_I586
-	default "i686" if ADK_CPU_I686
-	default "pentium-m" if ADK_CPU_PENTIUM_M
 	default "powerpc" if ADK_CPU_PPC
 	default "powerpc64" if ADK_CPU_PPC64
 	default "ultrasparc" if ADK_CPU_SPARC_V9
-	default "v10" if ADK_CPU_CRIS_V10
-	default "v32" if ADK_CPU_CRIS_V32
-	default "v7.10.d" if ADK_CPU_MICROBLAZE
 	default "v8" if ADK_CPU_SPARC_V8
-	default "x86-64" if ADK_CPU_X86_64
 	default "xscale" if ADK_CPU_XSCALE
 
 config ADK_TARGET_GCC_ARCH
 	string
+	default "amdfam10" if ADK_CPU_AMDFAM10
+	default "athlon" if ADK_CPU_ATHLON
+	default "atom" if ADK_CPU_ATOM
+	default "geode" if ADK_CPU_GEODE
+	default "i486" if ADK_CPU_I486
+	default "i586" if ADK_CPU_I586
+	default "i686" if ADK_CPU_I686
 	default "loongson2f" if ADK_CPU_LOONGSON2F
 	default "mips32" if ADK_CPU_MIPS32
 	default "mips32r2" if ADK_CPU_MIPS32R2
 	default "mips64" if ADK_CPU_MIPS64
 	default "mips64r2" if ADK_CPU_MIPS64R2
+	default "pentium-m" if ADK_CPU_PENTIUM_M
+	default "x86-64" if ADK_CPU_X86_64
+
+config ADK_TARGET_CPU_FLAGS
+	string
+	default "-mcpu=v10" if ADK_CPU_CRIS_V10
+	default "-mcpu=v32" if ADK_CPU_CRIS_V32
+	default "-mcpu=v7.10.d" if ADK_CPU_MICROBLAZE
 
 config ADK_TARGET_CPU_ARCH
 	string

@@ -39,6 +39,7 @@ BIN_FILE:=		bzip2-shared
 else
 BIN_FILE:=		bzip2
 endif
+
 CONFIG_STYLE:=		manual
 TARGET_CFLAGS+=		-fPIC 
 XAKE_FLAGS+=		PREFIX=${WRKINST}/usr CROSS_COMPILE=1
@@ -52,6 +53,11 @@ bzip2-hostinstall:
 	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/bin
 	$(INSTALL_BIN) ${WRKBUILD}/bzip2 ${STAGING_HOST_DIR}/usr/bin/bzip2
 
+do-install:
+	${INSTALL_DIR} $(STAGING_TARGET_DIR)/usr/include
+	$(CP) $(WRKBUILD)/bzlib.h $(STAGING_TARGET_DIR)/usr/include
+	$(CP) ${WRKBUILD}/libbz2.a ${STAGING_TARGET_DIR}/usr/lib
+
 libbz2-install:
 	${INSTALL_DIR} ${IDIR_LIBBZ2}/usr/lib
 	$(CP) ${WRKBUILD}/libbz2.so* \
@@ -59,7 +65,6 @@ libbz2-install:
 	$(CP) ${WRKBUILD}/libbz2.so* \
 		${STAGING_TARGET_DIR}/usr/lib
 	(cd ${STAGING_TARGET_DIR}/usr/lib; ln -sf libbz2.so.1.0.6 libbz2.so)
-	$(CP) $(WRKBUILD)/bzlib.h $(STAGING_TARGET_DIR)/usr/include
 	${INSTALL_DIR} $(IDIR_LIBBZ2_DEV)/usr/include
 	$(CP) $(WRKBUILD)/bzlib.h $(IDIR_LIBBZ2_DEV)/usr/include
 

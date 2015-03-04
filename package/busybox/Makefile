@@ -28,7 +28,8 @@ BB_MAKE_FLAGS:=		V=1 \
 			IPKG_ARCH="${ADK_TARGET_CPU_ARCH}" \
 			HOSTCC="${CC_FOR_BUILD}" \
 			HOSTCFLAGS="$(CFLAGS_FOR_BUILD)" \
-			CROSS_COMPILE="$(TARGET_CROSS)"
+			CROSS_COMPILE="$(TARGET_CROSS)" \
+			SKIP_STRIP=y
 
 do-configure:
 	# get all symbols from top level config

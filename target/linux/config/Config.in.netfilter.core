@@ -1,7 +1,6 @@
 config ADK_KERNEL_NF_CONNTRACK
 	tristate 'Netfilter connection tracking support'
 	select ADK_KERNEL_NETFILTER_XTABLES
-	default m if ADK_PACKAGE_IPTABLES
 	default n
 	help
 	  Connection tracking keeps a record of what packets have passed

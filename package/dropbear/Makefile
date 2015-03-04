@@ -15,7 +15,7 @@ PKG_SITES:=		http://matt.ucc.asn.au/dropbear/releases/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_SUBPKGS:=		DROPBEAR DBCONVERT
-PKGSD_DBCONVERT:=	Utility for converting SSH private keys
+PKGSD_DBCONVERT:=	utility for converting ssh private keys
 
 PKG_FLAVOURS_DROPBEAR:=	WITH_UTMP
 PKGFD_WITH_UTMP:=	support writing /var/run/utmp

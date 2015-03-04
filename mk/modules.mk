@@ -473,13 +473,13 @@ $(eval $(call KMOD_template,NF_CONNTRACK,nf-conntrack,\
 	$(MODULES_DIR)/kernel/net/netfilter/xt_conntrack \
 ,41))
 
-$(eval $(call KMOD_template,NETFILTER_XT_NAT,netfilter-xt-nat,\
-	$(MODULES_DIR)/kernel/net/netfilter/xt_nat \
-,40))
-
 $(eval $(call KMOD_template,NF_NAT,nf-nat,\
 	$(MODULES_DIR)/kernel/net/netfilter/nf_nat \
-,45))
+,42))
+
+$(eval $(call KMOD_template,NETFILTER_XT_NAT,netfilter-xt-nat,\
+	$(MODULES_DIR)/kernel/net/netfilter/xt_nat \
+,43))
 
 $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_defrag_ipv4 \
@@ -488,6 +488,7 @@ $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
 
 $(eval $(call KMOD_template,NF_NAT_IPV4,nf-nat-ipv4,\
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_ipv4 \
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_masquerade_ipv4 \
 ,50))
 
 $(eval $(call KMOD_template,IP_NF_NAT,ip-nf-nat,\
@@ -588,6 +589,7 @@ $(eval $(call KMOD_template,IP_NF_FILTER,ip-nf-filter,\
 ,55))
 
 $(eval $(call KMOD_template,IP_NF_TARGET_REJECT,ip-nf-target-reject,\
+	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_reject_ipv4 \
 	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_REJECT \
 ,60))
 
@@ -677,6 +679,7 @@ $(eval $(call KMOD_template,IP6_NF_FILTER,ip6-nf-filter,\
 ,55))
 
 $(eval $(call KMOD_template,IP6_NF_TARGET_REJECT,ip6-nf-target-reject,\
+	$(MODULES_DIR)/kernel/net/ipv6/netfilter/nf_reject_ipv6 \
 	$(MODULES_DIR)/kernel/net/ipv6/netfilter/ip6t_REJECT \
 ,60))
 
@@ -1099,6 +1102,7 @@ $(eval $(call KMOD_template,RPCSEC_GSS_KRB5,rpcsec-gss-krb5,\
 ,26))
 
 $(eval $(call KMOD_template,LOCKD,lockd,\
+	$(MODULES_DIR)/kernel/fs/nfs_common/grace \
 	$(MODULES_DIR)/kernel/fs/lockd/lockd \
 ,27))
 

@@ -1,0 +1,11 @@
+--- squid-3.5.2.orig/configure.ac	2015-02-18 06:18:57.000000000 -0600
++++ squid-3.5.2/configure.ac	2015-02-20 13:01:31.755039271 -0600
+@@ -1343,7 +1343,7 @@ if test "x$with_openssl" = "xyes"; then
+     AC_DEFINE(USE_OPENSSL,1,[OpenSSL support is available])
+ 
+     # check for other specific broken implementations
+-    SQUID_CHECK_OPENSSL_GETCERTIFICATE_WORKS
++    #SQUID_CHECK_OPENSSL_GETCERTIFICATE_WORKS
+     SQUID_CHECK_OPENSSL_CONST_SSL_METHOD
+     SQUID_CHECK_OPENSSL_TXTDB
+     SQUID_CHECK_OPENSSL_HELLO_OVERWRITE_HACK

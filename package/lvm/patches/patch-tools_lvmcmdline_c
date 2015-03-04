@@ -1,6 +1,6 @@
---- LVM2.2.02.106.orig/tools/lvmcmdline.c	2014-04-10 17:38:46.000000000 +0200
-+++ LVM2.2.02.106/tools/lvmcmdline.c	2014-05-29 16:57:14.221581766 +0200
-@@ -1252,9 +1252,12 @@ int lvm_split(char *str, int *argc, char
+--- LVM2.2.02.114.orig/tools/lvmcmdline.c	2014-11-29 00:07:43.000000000 +0100
++++ LVM2.2.02.114/tools/lvmcmdline.c	2015-02-28 09:27:09.000000000 +0100
+@@ -1536,9 +1536,12 @@ int lvm_split(char *str, int *argc, char
  static int _check_standard_fds(void)
  {
  	int err = is_valid_fd(STDERR_FILENO);
@@ -14,7 +14,7 @@
  		if (err)
  			perror("stdin stream open");
  		else
-@@ -1264,7 +1267,7 @@ static int _check_standard_fds(void)
+@@ -1548,7 +1551,7 @@ static int _check_standard_fds(void)
  	}
  
  	if (!is_valid_fd(STDOUT_FILENO) &&
@@ -23,7 +23,7 @@
  		if (err)
  			perror("stdout stream open");
  		/* else no stdout */
-@@ -1272,7 +1275,7 @@ static int _check_standard_fds(void)
+@@ -1556,7 +1559,7 @@ static int _check_standard_fds(void)
  	}
  
  	if (!is_valid_fd(STDERR_FILENO) &&

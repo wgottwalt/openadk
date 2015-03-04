@@ -37,7 +37,7 @@ else
 $(error No login shell configured!)
 endif
 
-imageprepare: image-prepare-post extra-install
+imageprepare: image-prepare-post extra-install prelink
 
 # if an extra directory exist in ADK_TOPDIR, copy all content over the 
 # root directory, do the same if make extra=/dir/to/extra is used
@@ -77,6 +77,19 @@ ifneq ($(ADK_TARGET_ARCH_AARCH64)$(ADK_TARGET_ARCH_X86_64)$(ADK_TARGET_ARCH_PPC6
 	-test ! -d ${TARGET_DIR}/usr/lib || mv ${TARGET_DIR}/usr/lib/* ${TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH} 2>/dev/null
 	test ! -d ${TARGET_DIR}/usr/lib || rm -rf ${TARGET_DIR}/usr/lib/
 	(cd ${TARGET_DIR}/usr ; ln -sf ${ADK_TARGET_LIBC_PATH} lib)
+endif
+
+ifeq (${ADK_PRELINK},)
+prelink:
+else
+${TARGET_DIR}/etc/prelink.conf:
+	echo '/' > $@
+
+prelink: ${TARGET_DIR}/etc/prelink.conf
+	$(TRACE) target/prelink
+	${TARGET_CROSS}prelink ${ADK_PRELINK_OPTS} \
+		--ld-library-path=${STAGING_TARGET_DIR}/usr/lib:${STAGING_TARGET_DIR}/lib \
+		--root=${TARGET_DIR} -a $(MAKE_TRACE)
 endif
 
 KERNEL_PKGDIR:=$(LINUX_BUILD_DIR)/kernel-pkg
@@ -203,7 +216,7 @@ ifeq ($(ADK_KERNEL_COMP_BZIP2),y)
 		echo "CONFIG_INITRAMFS_COMPRESSION_BZIP2=y" >> ${LINUX_DIR}/.config
 endif
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* 2>/dev/null
-	env $(KERNEL_MAKE_ENV) $(MAKE) -C $(LINUX_DIR) $(KERNEL_MAKE_OPTS) \
+	env $(KERNEL_MAKE_ENV) $(MAKE) $(KERNEL_MAKE_OPTS) \
 		-j${ADK_MAKE_JOBS} $(ADK_TARGET_KERNEL) $(MAKE_TRACE)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 

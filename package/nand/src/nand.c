@@ -94,7 +94,6 @@ int nand_info(const char *nand) {
 
 	int fd, ret;
 	mtd_info_t nandinfo;
-	//struct nand_oobinfo oobinfo;
 	loff_t offset;
 
 	if ((fd = nand_open(nand, O_RDONLY)) < 0) {
@@ -131,17 +130,6 @@ int nand_info(const char *nand) {
 			}
 		}
 	}
-	
-	/*
-	if (ioctl(fd, MEMGETOOBSEL, &oobinfo) != 0) {
-		fprintf(stderr, "Unable to get NAND oobinfo\n");
-		return 1;
-	}
-
-	if (oobinfo.useecc == MTD_NANDECC_AUTOPLACE) {
-		fprintf(stdout, "NAND device/driver supports autoplacement of OOB\n");
-	}
-	*/
 
 	return 0;
 }
@@ -214,7 +202,6 @@ int nand_write(const char *img, const char *nand, int quiet) {
 
 	static bool pad = true;
 	static const char *standard_input = "-";
-	static bool autoplace = true;
 	static bool markbad = true;
 	static int mtdoffset = 0;
 	int cnt = 0;
@@ -227,8 +214,6 @@ int nand_write(const char *img, const char *nand, int quiet) {
 	struct mtd_oob_buf oob;
 	loff_t offs;
 	int ret, readlen;
-	int oobinfochanged = 0;
-	struct nand_oobinfo old_oobinfo;
 
 	erase_buffer(oobbuf, sizeof(oobbuf));
 
@@ -253,28 +238,6 @@ int nand_write(const char *img, const char *nand, int quiet) {
 		fprintf(stderr, "Unknown flash (not normal NAND)\n");
 		close(fd);
 		exit (EXIT_FAILURE);
-	}
-
-	if (autoplace) {
-		/* Read the current oob info */
-		if (ioctl (fd, MEMGETOOBSEL, &old_oobinfo) != 0) {
-			perror ("MEMGETOOBSEL");
-			close (fd);
-			exit (EXIT_FAILURE);
-		}
-
-		// autoplace ECC ?
-		/*
-		if (autoplace && (old_oobinfo.useecc != MTD_NANDECC_AUTOPLACE)) {
-
-			if (ioctl (fd, MEMSETOOBSEL, &autoplace_oobinfo) != 0) {
-				perror ("MEMSETOOBSEL");
-				close (fd);
-				exit (EXIT_FAILURE);
-			}
-			oobinfochanged = 1;
-		}
-		*/
 	}
 
 	oob.length = meminfo.oobsize;
@@ -465,14 +428,6 @@ closeall:
 	close(ifd);
 
 restoreoob:
-	/*
-	if (oobinfochanged == 1) {
-		if (ioctl (fd, MEMSETOOBSEL, &old_oobinfo) != 0) {
-			perror ("MEMSETOOBSEL");
-			close (fd);
-			exit (EXIT_FAILURE);
-		}
-	}
 
 	close(fd);
 	/*

@@ -1,6 +1,6 @@
---- LVM2.2.02.106.orig/lib/commands/toolcontext.c	2014-04-10 17:38:44.000000000 +0200
-+++ LVM2.2.02.106/lib/commands/toolcontext.c	2014-05-29 17:55:05.101305501 +0200
-@@ -1334,6 +1334,8 @@ struct cmd_context *create_toolcontext(u
+--- LVM2.2.02.114.orig/lib/commands/toolcontext.c	2014-11-29 00:07:42.000000000 +0100
++++ LVM2.2.02.114/lib/commands/toolcontext.c	2015-02-28 09:27:09.000000000 +0100
+@@ -1433,6 +1433,8 @@ struct cmd_context *create_toolcontext(u
  {
  	struct cmd_context *cmd;
  	FILE *new_stream;
@@ -9,7 +9,7 @@
  	int flags;
  
  #ifdef M_MMAP_MAX
-@@ -1383,10 +1385,10 @@ struct cmd_context *create_toolcontext(u
+@@ -1482,10 +1484,10 @@ struct cmd_context *create_toolcontext(u
  		if (is_valid_fd(STDIN_FILENO) &&
  		    ((flags = fcntl(STDIN_FILENO, F_GETFL)) > 0) &&
  		    (flags & O_ACCMODE) != O_WRONLY) {
@@ -23,7 +23,7 @@
  				log_sys_error("setvbuf", "");
  				goto out;
  			}
-@@ -1395,10 +1397,10 @@ struct cmd_context *create_toolcontext(u
+@@ -1494,10 +1496,10 @@ struct cmd_context *create_toolcontext(u
  		if (is_valid_fd(STDOUT_FILENO) &&
  		    ((flags = fcntl(STDOUT_FILENO, F_GETFL)) > 0) &&
  		    (flags & O_ACCMODE) != O_RDONLY) {
@@ -37,7 +37,7 @@
  				     _IOLBF, linebuffer_size)) {
  				log_sys_error("setvbuf", "");
  				goto out;
-@@ -1681,6 +1683,8 @@ void destroy_toolcontext(struct cmd_cont
+@@ -1805,6 +1807,8 @@ void destroy_toolcontext(struct cmd_cont
  {
  	struct dm_config_tree *cft_cmdline;
  	FILE *new_stream;
@@ -46,7 +46,7 @@
  	int flags;
  
  	if (cmd->dump_filter && cmd->filter && cmd->filter->dump &&
-@@ -1717,9 +1721,9 @@ void destroy_toolcontext(struct cmd_cont
+@@ -1840,9 +1844,9 @@ void destroy_toolcontext(struct cmd_cont
  		if (is_valid_fd(STDIN_FILENO) &&
  		    ((flags = fcntl(STDIN_FILENO, F_GETFL)) > 0) &&
  		    (flags & O_ACCMODE) != O_WRONLY) {
@@ -59,7 +59,7 @@
  			} else
  				cmd->linebuffer = NULL;	/* Leave buffer in place (deliberate leak) */
  		}
-@@ -1727,9 +1731,9 @@ void destroy_toolcontext(struct cmd_cont
+@@ -1850,9 +1854,9 @@ void destroy_toolcontext(struct cmd_cont
  		if (is_valid_fd(STDOUT_FILENO) &&
  		    ((flags = fcntl(STDOUT_FILENO, F_GETFL)) > 0) &&
  		    (flags & O_ACCMODE) != O_RDONLY) {

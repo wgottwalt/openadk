@@ -154,9 +154,6 @@ config ADK_KERNEL_CRYPTO_CBC
 	tristate
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	select ADK_KERNEL_CRYPTO_MANAGER
-	default m if ADK_PACKAGE_CRYPTSETUP
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  CBC: Cipher Block Chaining mode
@@ -210,8 +207,6 @@ config ADK_KERNEL_CRYPTO_HMAC
 	tristate
 	select ADK_KERNEL_CRYPTO_HASH
 	select ADK_KERNEL_CRYPTO_MANAGER
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  HMAC: Keyed-Hashing for Message Authentication (RFC2104).
@@ -242,8 +237,6 @@ config ADK_KERNEL_CRYPTO_MD5
 	prompt "MD5 digest algorithm"
 	tristate
 	select ADK_KERNEL_CRYPTO_HASH
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  MD5 message digest algorithm (RFC1321).
@@ -252,8 +245,6 @@ config ADK_KERNEL_CRYPTO_SHA1
 	prompt "SHA1 digest algorithm"
 	tristate
 	select ADK_KERNEL_CRYPTO_HASH
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  SHA-1 secure hash standard (FIPS 180-1/DFIPS 180-2).
@@ -262,7 +253,6 @@ config ADK_KERNEL_CRYPTO_SHA256
 	prompt "SHA256 digest algorithm"
 	tristate
 	select ADK_KERNEL_CRYPTO_HASH
-	default m if ADK_PACKAGE_CRYPTSETUP
 	default n
 	help
 	  SHA256 secure hash standard (DFIPS 180-2).
@@ -444,8 +434,6 @@ config ADK_KERNEL_CRYPTO_DES
 	prompt "DES and Triple DES EDE cipher algorithms"
 	tristate
 	select ADK_KERNEL_CRYPTO_ALGAPI
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  DES cipher algorithm (FIPS 46-2), and Triple DES EDE (FIPS 46-3).
@@ -546,8 +534,6 @@ config ADK_KERNEL_CRYPTO_NULL
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	select ADK_KERNEL_CRYPTO_HASH
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  These are 'Null' algorithms, used by IPsec, which do nothing.

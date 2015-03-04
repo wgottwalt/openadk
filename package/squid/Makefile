@@ -4,15 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
-PKG_VERSION:=		3.4.6
+PKG_VERSION:=		3.5.2
 PKG_RELEASE:=		1
-PKG_HASH:=		9ef26cd638c65afa750637b3669057c052890f10c686eb0218eb0d39b4199bc0
+PKG_HASH:=		5af2e16f279466f9fb89c2fef6c09b6824a7e3e7996c9f1c2bc16e7daddd751f
 PKG_DESCR:=		web and cache proxy
 PKG_SECTION:=		net/proxy
-PKG_DEPENDS:=		libopenssl libpthread libstdcxx libltdl
-PKG_BUILDDEP:=		openssl libtool
+PKG_DEPENDS:=		libpthread libstdcxx libltdl
+PKG_BUILDDEP:=		libtool
 PKG_URL:=		http://www.squid-cache.org/
-PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.4/
+PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.5/
 
 PKG_SUBPKGS:=		SQUID SQUID_MOD_BASIC_AUTH_GETPWNAM SQUID_MOD_BASIC_AUTH_NCSA
 PKG_SUBPKGS+=		SQUID_MOD_BASIC_AUTH_SMB SQUID_MOD_DIGEST_AUTH_FILE
@@ -147,7 +147,6 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--disable-debug-cbdata \
 			--enable-kill-parent-hack \
 			--enable-arp-acl \
-			--enable-ssl \
 			--enable-err-languages=English \
 			--enable-default-err-language=English \
 			--enable-linux-netfilter \
@@ -159,11 +158,11 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--without-libcap \
 			--disable-snmp \
 			--disable-esi \
+			--disable-ssl \
 			--disable-htcp \
 			--disable-wccp \
 			--disable-wccpv2 \
 			--enable-useragent-log \
-			--with-openssl=${STAGING_TARGET_DIR}/usr \
 			--without-krb5-config \
 			--enable-negotiate-auth-helpers=no \
 			--enable-auth \

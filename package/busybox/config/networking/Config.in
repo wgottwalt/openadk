@@ -488,6 +488,7 @@ config BUSYBOX_FEATURE_IFUPDOWN_IP_BUILTIN
 	bool "Use busybox ip applet"
 	default y
 	depends on BUSYBOX_FEATURE_IFUPDOWN_IP
+	depends on !ADK_PACKAGE_IP
 	select BUSYBOX_PLATFORM_LINUX
 	select BUSYBOX_IP
 	select BUSYBOX_FEATURE_IP_ADDRESS

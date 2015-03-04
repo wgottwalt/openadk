@@ -23,6 +23,7 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_TARGET_NAME) \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
 			--disable-sanity-checks \
+			--disable-werror \
 			--disable-nls \
 			--without-cvs \
 			--disable-profile \

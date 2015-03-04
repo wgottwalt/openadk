@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		cmake
-PKG_VERSION:=		3.1.2
+PKG_VERSION:=		3.1.3
 PKG_RELEASE:=		1
-PKG_HASH:=		2b210f7d867a1e716c1895357ebe63c7b9ae61fdb5f2d300ab2f01795f085b35
+PKG_HASH:=		45f4d3fa8a2f61cc092ae461aac4cac1bab4ac6706f98274ea7f314dd315c6d0
 PKG_DESCR:=		build utility
 PKG_SECTION:=		dev/tools
 PKG_URL:=		http://www.cmake.org/

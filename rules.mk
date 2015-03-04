@@ -25,6 +25,7 @@ SET_DASHX:=		:
 endif
 
 # Strip off the annoying quoting
+ADK_APPLIANCE_VERSION:=			$(strip $(subst ",, $(ADK_APPLIANCE_VERSION)))
 ADK_TARGET_ARCH:=			$(strip $(subst ",, $(ADK_TARGET_ARCH)))
 ADK_TARGET_SYSTEM:=			$(strip $(subst ",, $(ADK_TARGET_SYSTEM)))
 ADK_TARGET_BOARD:=			$(strip $(subst ",, $(ADK_TARGET_BOARD)))
@@ -39,6 +40,7 @@ ADK_TARGET_FLOAT:=			$(strip $(subst ",, $(ADK_TARGET_FLOAT)))
 ADK_TARGET_FPU:=			$(strip $(subst ",, $(ADK_TARGET_FPU)))
 ADK_TARGET_ARM_MODE:=			$(strip $(subst ",, $(ADK_TARGET_ARM_MODE)))
 ADK_TARGET_CFLAGS:=			$(strip $(subst ",, $(ADK_TARGET_CFLAGS)))
+ADK_TARGET_CPU_FLAGS:=			$(strip $(subst ",, $(ADK_TARGET_CPU_FLAGS)))
 ADK_TARGET_CFLAGS_OPT:=			$(strip $(subst ",, $(ADK_TARGET_CFLAGS_OPT)))
 ADK_TARGET_ABI_CFLAGS:=			$(strip $(subst ",, $(ADK_TARGET_ABI_CFLAGS)))
 ADK_TARGET_ABI:=			$(strip $(subst ",, $(ADK_TARGET_ABI)))

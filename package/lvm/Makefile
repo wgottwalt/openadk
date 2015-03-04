@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
-PKG_VERSION:=		2.02.114
+PKG_VERSION:=		2.02.116
 PKG_RELEASE:=		1
-PKG_HASH:=		de9cb0acfb9c5a6afa6184160c9e066f19043677f91a72c741d153efcd2874a5
+PKG_HASH:=		2479d6ea61c405efcfcd8a78390d00c1d2e9c92c0262f3ed599f2c0fb6f0b767
 PKG_DESCR:=		logical volume management
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libdevmapper libncurses
@@ -39,7 +39,9 @@ CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \
 			--disable-testing \
 			--with-lvm1=none
-CONFIGURE_ENV+=		ac_cv_flag_HAVE_PIE=no
+CONFIGURE_ENV+=		ac_cv_flag_HAVE_PIE=no \
+			ac_cv_func_malloc_0_nonnull=yes \
+			ac_cv_func_realloc_0_nonnull=yes
 
 lvm-install:
 	${INSTALL_DIR} ${IDIR_LVM}/usr/sbin

@@ -1,7 +1,17 @@
---- libcap-2.22.orig/libcap/Makefile	2010-08-09 00:26:04.000000000 +0200
-+++ libcap-2.22/libcap/Makefile	2013-10-28 10:46:10.000000000 +0100
-@@ -33,7 +33,7 @@ INCLUDE_GPERF_OUTPUT = -include $(GPERF_
- endif
+--- libcap-2.24.orig/libcap/Makefile	2014-01-06 01:55:03.000000000 +0100
++++ libcap-2.24/libcap/Makefile	2015-02-26 20:34:47.000000000 +0100
+@@ -28,6 +28,9 @@ GPERF_OUTPUT = _caps_output.gperf
+ 
+ all: $(MINLIBNAME) $(STALIBNAME) libcap.pc
+ 
++static: $(STALIBNAME)
++shared: $(MINLIBNAME)
++
+ ifeq ($(shell gperf --version > /dev/null 2>&1 && echo yes),yes)
+ USE_GPERF_OUTPUT = $(GPERF_OUTPUT)
+ INCLUDE_GPERF_OUTPUT = -include $(GPERF_OUTPUT)
+@@ -43,7 +46,7 @@ libcap.pc: libcap.pc.in
+ 		$< >$@
  
  _makenames: _makenames.c cap_names.list.h
 -	$(BUILD_CC) $(BUILD_CFLAGS) $< -o $@
@@ -9,3 +19,24 @@
  
  cap_names.h: _makenames
  	./_makenames > cap_names.h
+@@ -70,6 +73,20 @@ $(MINLIBNAME): $(OBJS)
+ cap_text.o: cap_text.c $(USE_GPERF_OUTPUT) $(INCLS)
+ 	$(CC) $(CFLAGS) $(IPATH) $(INCLUDE_GPERF_OUTPUT) -c $< -o $@
+ 
++install-shared: install-headers
++	mkdir -p -m 0755 $(LIBDIR)
++	install -m 0644 $(MINLIBNAME) $(LIBDIR)/$(MINLIBNAME)
++	ln -sf $(MINLIBNAME) $(LIBDIR)/$(MAJLIBNAME)
++	ln -sf $(MAJLIBNAME) $(LIBDIR)/$(LIBNAME)
++
++install-static: install-headers
++	mkdir -p -m 0755 $(LIBDIR)
++	install -m 0644 $(STALIBNAME) $(LIBDIR)/$(STALIBNAME)
++
++install-headers:
++	mkdir -p -m 0755 $(INCDIR)/sys
++	install -m 0644 include/sys/capability.h $(INCDIR)/sys
++
+ install: all
+ 	mkdir -p -m 0755 $(INCDIR)/sys
+ 	install -m 0644 include/sys/capability.h $(INCDIR)/sys

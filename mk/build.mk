@@ -223,7 +223,7 @@ kernelconfig:
 	${KERNEL_MAKE_ENV} ${MAKE} \
 		ARCH=$(ADK_TARGET_ARCH) \
 		${KERNEL_MAKE_OPTS} \
-		-C $(BUILD_DIR)/linux menuconfig
+		menuconfig
 
 # create a new package from package/.template
 newpackage:
@@ -514,7 +514,7 @@ endif
 	@if [ ! -z "$(ADK_TARGET_SYSTEM)" ];then \
 		system=$$(echo "$(ADK_TARGET_SYSTEM)" |sed -e "s/-/_/g"); \
 		grep -h "^config" target/*/Config.in.systems \
-			|grep -i "$$system" \
+			|grep -i "$$system$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/all.config; \
 	fi

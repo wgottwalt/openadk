@@ -16,7 +16,6 @@ config ADK_KERNEL_CIFS
         select ADK_KERNEL_CRYPTO_DES
         select ADK_KERNEL_CRYPTO_SHA256
 	select ADK_KERNEL_NLS_UTF8
-	default m if ADK_PACKAGE_CIFS_UTILS
 	default n
 	help
 	  This is the client VFS module for the Common Internet File System
@@ -68,7 +67,6 @@ config ADK_KERNEL_NFS_FS
 	select ADK_KERNEL_SUNRPC
 	select ADK_KERNEL_LOCKD
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
-	default m if ADK_PACKAGE_NFS_UTILS_CLIENT
 	default n
 	help
 	  If you are connected to some other (usually local) Unix computer
@@ -124,7 +122,6 @@ config ADK_KERNEL_NFSD
 	select ADK_KERNEL_SUNRPC
 	select ADK_KERNEL_LOCKD
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
-	default m if ADK_PACKAGE_NFS_UTILS_SERVER
 	default n
 	help
 	  If you want your Linux box to act as an NFS *server*, so that other
@@ -175,7 +172,6 @@ config ADK_KERNEL_RPCSEC_GSS_KRB5
 	select ADK_KERNEL_CRYPTO_SHA1
 	select ADK_KERNEL_CRYPTO_AES
 	select ADK_KERNEL_CRYPTO_ARC4
-	default m if ADK_PACKAGE_NFS_UTILS_V4
 	default n
 	help
 

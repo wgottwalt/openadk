@@ -1,5 +1,5 @@
---- e2fsprogs-1.42.4.orig/debugfs/set_fields.c	2012-06-04 18:42:23.000000000 +0200
-+++ e2fsprogs-1.42.4/debugfs/set_fields.c	2012-07-26 18:48:09.000000000 +0200
+--- e2fsprogs-1.42.12.orig/debugfs/set_fields.c	2014-08-19 14:24:52.000000000 +0200
++++ e2fsprogs-1.42.12/debugfs/set_fields.c	2015-02-24 13:49:44.483474041 +0100
 @@ -34,7 +34,6 @@
  #include <strings.h>
  #endif

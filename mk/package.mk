@@ -308,7 +308,7 @@ clean-targets:
 clean:
 	@$(CMD_TRACE) "cleaning... "
 	@$(MAKE) clean-targets $(MAKE_TRACE)
-	rm -rf ${WRKDIR} ${ALL_IPKGS} ${STAGING_PKG_DIR}/stamps/${PKG_NAME}${PKG_VERSION}
+	rm -rf ${WRKDIR} ${ALL_IPKGS} ${_IPKGS_COOKIE}
 
 distclean: clean
 	rm -f ${FULLDISTFILES}

@@ -107,6 +107,7 @@ TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
+# for archiectures where gcc --with-cpu matches -mcpu=
 ifneq ($(ADK_TARGET_GCC_CPU),)
 ifeq ($(ADK_CPU_ARC700),y)
 TARGET_CFLAGS+=		-mcpu=ARC700
@@ -117,16 +118,44 @@ TARGET_CXXFLAGS+=	-mcpu=$(ADK_TARGET_GCC_CPU)
 endif
 endif
 
+# for archiectures where gcc --with-arch matches -march=
 ifneq ($(ADK_TARGET_GCC_ARCH),)
 TARGET_CFLAGS+=		-march=$(ADK_TARGET_GCC_ARCH)
 TARGET_CXXFLAGS+=	-march=$(ADK_TARGET_GCC_ARCH)
 endif
 
+ifneq ($(ADK_TARGET_CPU_FLAGS),)
+TARGET_CFLAGS+=		$(ADK_TARGET_CPU_FLAGS)
+TARGET_CXXFLAGS+=	$(ADK_TARGET_CPU_FLAGS)
+endif
+
+ifneq ($(ADK_TARGET_FPU),)
+TARGET_CFLAGS+=		-mfpu=$(ADK_TARGET_FPU)
+TARGET_CXXFLAGS+=	-mfpu=$(ADK_TARGET_FPU)
+endif
+
+ifneq ($(ADK_TARGET_FLOAT),)
+ifeq ($(ADK_TARGET_ARCH_ARM),y)
+TARGET_CFLAGS+=		-mfloat-abi=$(ADK_TARGET_FLOAT)
+TARGET_CXXFLAGS+=	-mfloat-abi=$(ADK_TARGET_FLOAT)
+endif
+ifeq ($(ADK_TARGET_ARCH_MIPS),y)
+TARGET_CFLAGS+=		-m$(ADK_TARGET_FLOAT)-float
+TARGET_CXXFLAGS+=	-m$(ADK_TARGET_FLOAT)-float
+endif
+endif
+
+ifeq ($(ADK_TARGET_ARCH_ARM),y)
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
-TARGET_LDFLAGS+=	-elf2flt
+TARGET_CFLAGS+=		-Wl,-elf2flt
+TARGET_CXXFLAGS+=	-Wl,-elf2flt
+endif
 endif
 
 ifeq ($(ADK_TARGET_ARCH_M68K),y)
+ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
+TARGET_LDFLAGS+=	-elf2flt
+endif
 ifeq ($(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
 TARGET_CFLAGS+=		-msep-data
 TARGET_CXXFLAGS+=	-msep-data
@@ -215,6 +244,10 @@ TARGET_CXXFLAGS+=	-fno-unwind-tables -fno-asynchronous-unwind-tables
 endif
 
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
+ifeq ($(ADK_TARGET_CPU_WITH_NEON),y)
+TARGET_CFLAGS+=		-funsafe-math-optimizations
+TARGET_CXXFLAGS+=	-funsafe-math-optimizations
+endif
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
 TARGET_CFLAGS+=		-mthumb -Wa,-mimplicit-it=thumb
 TARGET_CXXFLAGS+=	-mthumb -Wa,-mimplicit-it=thumb

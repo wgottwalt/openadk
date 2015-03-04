@@ -1,0 +1,5 @@
+config ADK_APPLIANCE_VERSION
+	prompt "version string"
+	string
+	help
+	  Configure version for appliance
