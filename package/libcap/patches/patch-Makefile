@@ -1,0 +1,25 @@
+--- libcap-2.24.orig/Makefile	2013-12-27 19:17:17.000000000 +0100
++++ libcap-2.24/Makefile	2015-02-26 20:36:58.000000000 +0100
+@@ -16,6 +16,22 @@ endif
+ 	$(MAKE) -C progs $@
+ 	$(MAKE) -C doc $@
+ 
++progs:
++	$(MAKE) -C progs all
++
++shared:
++	$(MAKE) -C libcap shared
++
++static:
++	$(MAKE) -C libcap static
++
++install-shared:
++	$(MAKE) -C libcap install-shared
++
++install-static:
++	$(MAKE) -C libcap install-static
++
++
+ all-here:
+ 
+ install-here:

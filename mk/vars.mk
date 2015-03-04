@@ -11,8 +11,15 @@ BUILD_USER=		$(shell id -un)
 BUILD_GROUP=		$(shell id -gn)
 ifeq ($(ADK_TARGET_ABI),)
 ADK_SUFFIX:=		_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}_${ADK_TARGET_CPU_ARCH}
+ifeq ($(ADK_TARGET_WITH_MMU),)
+ADK_SUFFIX:=		_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}_${ADK_TARGET_CPU_ARCH}_nommu
+endif
+else
+ifeq ($(ADK_TARGET_WITH_MMU),)
+ADK_SUFFIX:=		_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}_${ADK_TARGET_CPU_ARCH}_${ADK_TARGET_ABI}_nommu
 else
 ADK_SUFFIX:=		_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}_${ADK_TARGET_CPU_ARCH}_${ADK_TARGET_ABI}
+endif
 endif
 
 # some global dirs
@@ -148,6 +155,7 @@ endif
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
 TARGET_CFLAGS+=		-Wl,-elf2flt
+TARGET_CXXFLAGS+=	-Wl,-elf2flt
 endif
 endif
 

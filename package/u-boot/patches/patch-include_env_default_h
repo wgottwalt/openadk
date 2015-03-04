@@ -1,0 +1,11 @@
+--- u-boot-2015.01.orig/include/env_default.h	2015-01-12 15:39:08.000000000 +0100
++++ u-boot-2015.01/include/env_default.h	2015-02-16 10:23:23.123639584 +0100
+@@ -8,6 +8,8 @@
+  * SPDX-License-Identifier:	GPL-2.0+
+  */
+ 
++#include <generated/autoconf.h>
++
+ #include <env_callback.h>
+ 
+ #ifdef DEFAULT_ENV_INSTANCE_EMBEDDED

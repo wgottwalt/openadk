@@ -28,9 +28,9 @@ TARGET_CFLAGS+=		-Wa,-msoft-float
 endif
 endif
 
-ifeq (${ADK_MAKE_PARALLEL},y)
-UCLIBC_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
-endif
+#ifeq (${ADK_MAKE_PARALLEL},y)
+#UCLIBC_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
+#endif
 
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS_COMPILE=.*,CROSS_COMPILE=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak

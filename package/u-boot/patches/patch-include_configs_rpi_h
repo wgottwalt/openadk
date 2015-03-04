@@ -1,0 +1,44 @@
+--- u-boot-d8bec60c1b0de7770f9b56ad092ab9be801d99af.orig/include/configs/rpi.h	2015-01-06 09:00:23.000000000 +0100
++++ u-boot-d8bec60c1b0de7770f9b56ad092ab9be801d99af/include/configs/rpi.h	2015-01-07 18:05:13.563156954 +0100
+@@ -19,6 +19,8 @@
+ 
+ #include <linux/sizes.h>
+ 
++#undef DEBUG
++
+ /* Architecture, CPU, etc.*/
+ #define CONFIG_SYS_GENERIC_BOARD
+ #define CONFIG_BCM2835
+@@ -96,7 +98,7 @@
+ /* Console UART */
+ #define CONFIG_PL01X_SERIAL
+ #define CONFIG_CONS_INDEX		0
+-#define CONFIG_BAUDRATE			115200
++#define CONFIG_BAUDRATE			9600
+ 
+ /* Console configuration */
+ #define CONFIG_SYS_CBSIZE		1024
+@@ -117,7 +119,7 @@
+ 
+ /* Shell */
+ #define CONFIG_SYS_MAXARGS		8
+-#define CONFIG_SYS_PROMPT		"U-Boot> "
++#define CONFIG_SYS_PROMPT		"CONET-Boot> "
+ #define CONFIG_COMMAND_HISTORY
+ 
+ /* Commands */
+@@ -185,9 +187,12 @@
+ 
+ #define CONFIG_EXTRA_ENV_SETTINGS \
+ 	ENV_DEVICE_SETTINGS \
+-	ENV_MEM_LAYOUT_SETTINGS \
+-	BOOTENV
++	ENV_MEM_LAYOUT_SETTINGS
+ 
+ #define CONFIG_BOOTDELAY 2
++#define CONFIG_CMD_BOOTMENU
++#define CONFIG_MENU
++#define CONFIG_AUTOBOOT_KEYED
++#define CONFIG_MENU_SHOW
+ 
+ #endif

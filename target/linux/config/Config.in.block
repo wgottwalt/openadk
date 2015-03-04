@@ -411,7 +411,6 @@ config ADK_KERNEL_DM_CRYPT
 	select ADK_KERNEL_CRYPTO_CBC
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	depends on ADK_KERNEL_BLK_DEV_DM
-	default m if ADK_PACKAGE_CRYPTSETUP
 	default n
 	help
 	  This device-mapper target allows you to create a device that
@@ -439,7 +438,6 @@ config ADK_KERNEL_BLK_DEV_DRBD
 	tristate "DRBD support (Network RAID 1)"
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_CONNECTOR
-	default m if ADK_PACKAGE_DRBD
 	default n
 	help
           DRBD - http://www.drbd.org
@@ -447,8 +445,6 @@ config ADK_KERNEL_BLK_DEV_DRBD
 config ADK_KERNEL_BLK_DEV_LOOP
 	tristate "Loop mount support"
 	select ADK_KERNEL_BLK_DEV
-	default m if ADK_PACKAGE_LOSETUP
-	default m if ADK_PACKAGE_LTP
 	default n
 	help
 	  Saying Y here will allow you to use a regular file as a block

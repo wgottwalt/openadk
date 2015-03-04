@@ -5,7 +5,6 @@ config ADK_KERNEL_IP_VS
 	tristate
 	select ADK_KERNEL_NETFILTER
 	select ADK_KERNEL_NF_CONNTRACK
-	default m if ADK_PACKAGE_IPVSADM
 	default n
 
 config ADK_KERNEL_IP_VS_DEBUG

@@ -1,11 +1,11 @@
---- squid-3.4.4.orig/lib/rfcnb/rfcnb-io.c	2014-03-09 10:40:56.000000000 +0100
-+++ squid-3.4.4/lib/rfcnb/rfcnb-io.c	2014-03-27 09:28:30.000000000 +0100
-@@ -30,7 +30,7 @@
- #include "rfcnb/rfcnb-util.h"
- #include "rfcnb/std-includes.h"
+--- squid-3.5.2.orig/lib/rfcnb/rfcnb-io.c	2015-02-18 06:17:02.000000000 -0600
++++ squid-3.5.2/lib/rfcnb/rfcnb-io.c	2015-02-20 00:33:21.015450265 -0600
+@@ -40,7 +40,7 @@
+ #include <string.h>
+ #endif
  #include <sys/uio.h>
 -#include <sys/signal.h>
 +#include <signal.h>
  
- #if HAVE_STRING_H
- #include <string.h>
+ int RFCNB_Timeout = 0;          /* Timeout in seconds ... */
+ 

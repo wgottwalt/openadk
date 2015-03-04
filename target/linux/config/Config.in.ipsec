@@ -3,8 +3,6 @@ menu "IPSec support"
 config ADK_KERNEL_NET_KEY
 	prompt "PF_KEYv2 socket family"
 	tristate
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  PF_KEYv2 socket family, compatible to KAME ones.
@@ -12,8 +10,6 @@ config ADK_KERNEL_NET_KEY
 config ADK_KERNEL_XFRM_USER
 	prompt "IPsec usertools support"
 	tristate
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 
@@ -21,8 +17,6 @@ config ADK_KERNEL_INET_AH
 	prompt "IPsec AH support"
 	tristate
 	select ADK_KERNEL_CRYPTO_HASH
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  Support for IPsec AH.
@@ -31,8 +25,6 @@ config ADK_KERNEL_INET_ESP
 	prompt "IPsec ESP support"
 	tristate
 	select ADK_KERNEL_CRYPTO_AEAD
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  Support for IPsec ESP.
@@ -42,8 +34,6 @@ config ADK_KERNEL_INET_IPCOMP
 	tristate
 	select ADK_KERNEL_CRYPTO_DEFLATE
 	select ADK_KERNEL_INET_TUNNEL
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  Support for IP Payload Compression Protocol (IPComp) (RFC3173),
@@ -52,8 +42,6 @@ config ADK_KERNEL_INET_IPCOMP
 config ADK_KERNEL_INET_XFRM_MODE_TRANSPORT
 	prompt "IPsec transport mode"
 	tristate
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  Support for IPsec transport mode.
@@ -61,8 +49,6 @@ config ADK_KERNEL_INET_XFRM_MODE_TRANSPORT
 config ADK_KERNEL_INET_XFRM_MODE_TUNNEL
 	prompt "IPsec tunnel mode"
 	tristate
-	default m if ADK_PACKAGE_STRONGSWAN
-	default m if ADK_PACKAGE_OPENSWAN
 	default n
 	help
 	  Support for IPsec tunnel mode.

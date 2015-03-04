@@ -15,6 +15,8 @@ PKG_SITES:=		http://www.linux-pam.org/library/
 PKG_OPTS:=		dev
 PKG_BB:=		1
 
+PKG_CFLINE_PAM:=	depends on !ADK_TARGET_USE_STATIC_LIBS
+
 DISTFILES:=		Linux-PAM-$(PKG_VERSION).tar.gz
 WRKDIST=                ${WRKDIR}/Linux-PAM-${PKG_VERSION}
 

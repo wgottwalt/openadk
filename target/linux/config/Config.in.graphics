@@ -71,7 +71,6 @@ config ADK_KERNEL_MXC_GPU_VIV
 
 config ADK_KERNEL_MXC_ASRC
  	tristate
-	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 
 config ADK_KERNEL_MXC_HDMI_CEC
  	boolean
@@ -183,7 +182,6 @@ config ADK_KERNEL_DRM_DW_HDMI_AUDIO
 	tristate
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	depends on ADK_KERNEL_VERSION_3_16
-	#default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
  	default n
  	help
 
@@ -191,7 +189,6 @@ config ADK_KERNEL_DRM_DW_HDMI_CEC
 	tristate
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	depends on ADK_KERNEL_VERSION_3_16
-	#default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
  	default n
  	help
 	

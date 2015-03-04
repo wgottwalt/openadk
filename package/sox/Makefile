@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sox
-PKG_VERSION:=		14.4.1
-PKG_RELEASE:=		2
-PKG_HASH:=		9a8c2c6fe51e608da346a157e111508a957af9e3ecf3de26781d36e9a67fa89b
+PKG_VERSION:=		14.4.2
+PKG_RELEASE:=		1
+PKG_HASH:=		b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c
 PKG_DESCR:=		swiss army knife of sound processing programs
 PKG_SECTION:=		mm/audio
 PKG_BUILDDEP:=		zlib ncurses

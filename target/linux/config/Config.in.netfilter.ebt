@@ -2,7 +2,6 @@ config ADK_KERNEL_BRIDGE_NF_EBTABLES
 	prompt 'Ethernet Bridge tables support'
 	tristate
 	select ADK_KERNEL_BRIDGE_NETFILTER
-	default m if ADK_PACKAGE_EBTABLES
 	default n
 	help
 	  ebtables is a general, extensible frame/packet identification
