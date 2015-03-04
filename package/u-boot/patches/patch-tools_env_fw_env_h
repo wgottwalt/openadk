@@ -1,0 +1,11 @@
+--- u-boot-d8bec60c1b0de7770f9b56ad092ab9be801d99af.orig/tools/env/fw_env.h	2015-01-06 09:00:23.000000000 +0100
++++ u-boot-d8bec60c1b0de7770f9b56ad092ab9be801d99af/tools/env/fw_env.h	2015-01-07 13:13:44.399072426 +0100
+@@ -14,6 +14,8 @@
+ #include <config.h>
+ #endif
+ 
++#include <generated/autoconf.h>
++
+ /*
+  * To build the utility with the static configuration
+  * comment out the next line.
