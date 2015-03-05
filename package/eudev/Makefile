@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		6aef101c5496a2dc45e669307d478dbccb0ee0462a285512edcda51ff12e0e6a
 PKG_DESCR:=		device manager (udev clone)
 PKG_SECTION:=		sys/utils
-PKG_BUILDDEP:=		gperf-host glib
-PKG_DEPENDS:=		glib
+PKG_BUILDDEP:=		gperf-host glib util-linux
+PKG_DEPENDS:=		glib libblkid
 PKG_URL:=		http://www.gentoo.org/proj/en/eudev/
 PKG_SITES:=		http://dev.gentoo.org/~blueness/eudev/
 PKG_LIBNAME:=		libudev
@@ -29,6 +29,7 @@ $(eval $(call PKG_template,UDEV,udev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LIBUDEV,libudev,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIGURE_ARGS+=	--disable-manpages \
+			--enable-blkid \
 			--disable-gudev \
 			--disable-gtk-doc
 
