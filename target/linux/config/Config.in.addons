@@ -3,22 +3,26 @@
 
 config ADK_KERNEL_ADDON_YAFFS2
 	default y if ADK_TARGET_WITH_NAND
-	boolean
+	bool
 
 config ADK_KERNEL_ADDON_GRSEC
-	boolean
+	bool
 	depends on ADK_KERNEL_VERSION_3_14
 
 config ADK_KERNEL_ADDON_MPTCP
-	boolean
+	bool
 	depends on ADK_KERNEL_VERSION_3_14
 
 config ADK_KERNEL_ADDON_FBLOGO
-	boolean
+	bool
 	depends on ADK_KERNEL_VERSION_3_14
 
 config ADK_KERNEL_ADDON_DIETNET
-	boolean
+	bool
 	depends on ADK_KERNEL_VERSION_3_14
 	depends on ADK_KERNEL_VERSION_3_12
 	depends on ADK_KERNEL_VERSION_3_10
+
+config ADK_KERNEL_ADDON_LINUXRT
+	bool
+	depends on ADK_KERNEL_VERSION_3_18

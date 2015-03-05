@@ -227,11 +227,6 @@ config ADK_KERNEL_HIGHMEM
 	help
 	  Enable high memory support.
 
-config ADK_KERNEL_PREEMPT
-	bool "Enable preemptive kernel"
-	help
-	  Enable preemptive mode.
-
 config ADK_KERNEL_BCM2708_DT
 	bool "Enable Devicetree support"
 	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
@@ -247,6 +242,52 @@ config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
 	# does not boot in qemu-microblaze
 	depends on !ADK_TARGET_ARCH_MICROBLAZE
 	default y
+
+config ADK_KERNEL_PREEMPT
+	bool "Enable preemptive kernel"
+	help
+	  Enable preemptive mode.
+
+config ADK_KERNEL_PREEMPT_RT_FULL
+        bool "Enable Realtime support"
+        select ADK_KERNEL_ADDON_LINUXRT
+        help
+	  https://www.kernel.org/pub/linux/kernel/projects/rt/3.18/
+
+
+choice
+prompt "tick configuration"
+
+config ADK_KERNEL_NO_HZ_IDLE
+	bool "no HZ IDLE, dynamic tick"
+
+config ADK_KERNEL_NO_HZ_FULL
+	bool "no HZ FULL, dynamic tick"
+
+config ADK_KERNEL_HZ_PERIODIC
+	bool "periodic tick"
+
+endchoice
+
+choice
+prompt "HZ"
+depends on ADK_KERNEL_HZ_PERIODIC
+
+config ADK_KERNEL_HZ_100
+	bool "100 HZ"
+
+config ADK_KERNEL_HZ_500
+	bool "500 HZ"
+
+config ADK_KERNEL_HZ_1000
+	bool "1000 HZ"
+
+endchoice
+
+config ADK_KERNEL_HIGH_RES_TIMERS
+	bool "Enable high resolution timers"
+	help
+
 
 choice
 prompt "Page size"

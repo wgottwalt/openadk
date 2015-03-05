@@ -62,6 +62,11 @@ ifeq ($(ADK_KERNEL_ADDON_DIETNET),y)
 	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) \
 		$(ADK_TOPDIR)/target/linux/patches/$(KERNEL_VERSION) patch-dietnet $(MAKE_TRACE)
 endif
+ifeq ($(ADK_KERNEL_ADDON_LINUXRT),y)
+	$(TRACE) linux-rt-kernel-patch
+	$(PATCH) $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) \
+		$(ADK_TOPDIR)/target/linux/patches/$(KERNEL_VERSION) patch-linuxrt $(MAKE_TRACE)
+endif
 	touch $@
 
 $(WRKBUILD)/.headers: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched
