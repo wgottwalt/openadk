@@ -104,3 +104,15 @@ config ADK_TARGET_LIB_MUSL_GIT
 	depends on ADK_TARGET_LIB_MUSL
 
 endchoice
+
+choice
+prompt "Threading"
+depends on ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG
+
+config ADK_TARGET_LIB_WITH_THREADS
+	bool "enable threads"
+
+config ADK_TARGET_LIB_WITHOUT_THREADS
+	bool "disable threads"
+
+endchoice

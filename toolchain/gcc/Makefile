@@ -53,10 +53,12 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 
 GCC_FINAL_CONFOPTS:=
 
-ifneq ($(ADK_TARGET_WITH_NPTL),)
+ifeq ($(ADK_TARGET_WITH_NPTL),y)
+ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS),)
 GCC_CONFOPTS+=         --enable-tls --enable-threads --enable-libatomic
 else
 GCC_CONFOPTS+=         --disable-tls --disable-threads --disable-libatomic
+endif
 endif
 
 ifeq ($(ADK_TARGET_UCLINUX)$(ADK_TARGET_USE_STATIC_LIBS),y)
