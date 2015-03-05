@@ -56,7 +56,9 @@ bzip2-hostinstall:
 do-install:
 	${INSTALL_DIR} $(STAGING_TARGET_DIR)/usr/include
 	$(CP) $(WRKBUILD)/bzlib.h $(STAGING_TARGET_DIR)/usr/include
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 	$(CP) ${WRKBUILD}/libbz2.a ${STAGING_TARGET_DIR}/usr/lib
+endif
 
 libbz2-install:
 	${INSTALL_DIR} ${IDIR_LIBBZ2}/usr/lib
