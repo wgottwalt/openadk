@@ -4,6 +4,7 @@ config ADK_KERNEL_DMADEVICES
 config ADK_KERNEL_DMA_BCM2708
         bool
         select ADK_KERNEL_DMADEVICES
+	select ADK_KERNEL_BCM_VC_CMA
 	depends on ADK_TARGET_BOARD_BCM28XX
 	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
@@ -23,8 +24,12 @@ config ADK_KERNEL_CMA
 
 config ADK_KERNEL_CMA_SIZE_MBYTES
 	int
-	default 256
+	default 64
 
 config ADK_KERNEL_DMA_CMA
-	select ADK_KERNEL_CMA
 	bool
+	select ADK_KERNEL_CMA
+
+config ADK_KERNEL_BCM_VC_CMA
+	bool
+	select ADK_KERNEL_DMA_CMA
