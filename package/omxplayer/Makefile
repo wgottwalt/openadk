@@ -4,20 +4,18 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		omxplayer
-# actually git from 25.09.2014
-PKG_VERSION:=		0.6
+PKG_VERSION:=		c5ab80828159c64a283ff69d40748923648f8a0a
 PKG_RELEASE:=		1
-PKG_HASH:=		6b22523bbb949ef6b7905f9fe12da7757cdcae0d4970ff752a3cdb3d7340e66d
 PKG_DESCR:=		video player for raspberry pi
 PKG_SECTION:=		mm/video
-PKG_DEPENDS:=		libffmpeg boost bcm2835-vc libfreetype libpcre
+PKG_DEPENDS:=		libffmpeg bcm28xx-vc-libs bcm28xx-vc-gl-libs
 PKG_DEPENDS+=		librt zlib libpthread libstdcxx libdbus
-PKG_BUILDDEP:=		ffmpeg boost bcm2835-vc freetype pcre dbus
+PKG_DEPENDS+=		boost libfreetype libpcre
+PKG_BUILDDEP:=		ffmpeg boost bcm28xx-vc freetype pcre dbus
 PKG_URL:=		https://github.com/popcornmix/omxplayer
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		https://github.com/popcornmix/omxplayer.git
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2
-PKG_LIBC_DEPENDS:=      glibc musl
 
 include $(ADK_TOPDIR)/mk/package.mk
 

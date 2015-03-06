@@ -15,10 +15,10 @@ PKG_URL:=		http://libcec.pulse-eight.com/
 PKG_SITES:=		http://openadk.org/distfiles/
 PKG_OPTS:=		dev
 
-PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
-PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
-PKG_DEPENDS_RASPBERRY_PI2:=	bcm2835-vc
-PKG_BUILDDEP_RASPBERRY_PI2:=	bcm2835-vc
+PKG_DEPENDS_RASPBERRY_PI:=	bcm28xx-vc
+PKG_BUILDDEP_RASPBERRY_PI:=	bcm28xx-vc
+PKG_DEPENDS_RASPBERRY_PI2:=	bcm28xx-vc
+PKG_BUILDDEP_RASPBERRY_PI2:=	bcm28xx-vc
 PKG_SYSTEM_DEPENDS:=    raspberry-pi raspberry-pi2 solidrun-imx6
 
 include $(ADK_TOPDIR)/mk/package.mk

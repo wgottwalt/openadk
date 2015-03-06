@@ -73,10 +73,10 @@ PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 # libiconv missing, freescale GL libraries linked against glibc
 PKG_LIBC_DEPENDS:=	glibc
 
-PKG_DEPENDS_RASPBERRY_PI:=	bcm2835-vc
-PKG_BUILDDEP_RASPBERRY_PI:=	bcm2835-vc
-PKG_DEPENDS_RASPBERRY_PI2:=	bcm2835-vc
-PKG_BUILDDEP_RASPBERRY_PI2:=	bcm2835-vc
+PKG_DEPENDS_RASPBERRY_PI:=	bcm28xx-vc
+PKG_BUILDDEP_RASPBERRY_PI:=	bcm28xx-vc
+PKG_DEPENDS_RASPBERRY_PI2:=	bcm28xx-vc
+PKG_BUILDDEP_RASPBERRY_PI2:=	bcm28xx-vc
 PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
 PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
 PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 solidrun-imx6

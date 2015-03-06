@@ -110,7 +110,7 @@ POSTCONFIG=		-@\
 		done; \
 		for i in ADK_KERNEL_BCM2708_DT ADK_KERNEL_BCM2709_DT ADK_TARGET_GPU_MEM ADK_KERNEL_SND_BCM2708;do \
 			if [ "$$(grep ^$$i .config|md5sum)" != "$$(grep ^$$i .config.old|md5sum)" ];then \
-				touch .rebuild.bcm2835-bootloader;\
+				touch .rebuild.bcm28xx-bootloader;\
 				rebuild=1;\
 			fi; \
 		done; \
