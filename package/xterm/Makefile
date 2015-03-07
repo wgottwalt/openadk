@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		1dbf1e93796c1b71b22b84e82eb58bcf20a14a7f365158819f3b4dbb29fe93f0
 PKG_DESCR:=		terminal emulator
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libxaw libxt libncurses libxft fontconfig
-PKG_BUILDDEP:=		ncurses libXt libXmu libXaw libXft
+PKG_DEPENDS:=		libxaw libxt libncurses libxft fontconfig libuuid
+PKG_BUILDDEP:=		ncurses libXt libXmu libXaw libXft util-linux
 PKG_URL:=		http://invisible-island.net/xterm/xterm.html
 PKG_SITES:=		ftp://invisible-island.net/xterm/
 
@@ -22,6 +22,7 @@ $(eval $(call PKG_template,XTERM,xterm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 
 TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--with-app-defaults=/usr/lib/X11/app-defaults \
+			--disable-regex \
 			--disable-pty-handshake
 
 xterm-install:
