@@ -4,24 +4,23 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		vlc
-PKG_VERSION:=		2.1.4
+PKG_VERSION:=		2.2.0
 PKG_RELEASE:=		1
-PKG_HASH:=		3e566c7525478167e18cc53dc75d621e4af91eb40aabb6231e47db25d682d5d3
+PKG_HASH:=		5e0a27e248c47da723a696420aca3a4dd15cc3ed8cc81618d3f1dc8661b25517
 PKG_DESCR:=		popular media player
 PKG_SECTION:=		mm/video
-PKG_BUILDDEP:=		ffmpeg xcb-util libtheora libgcrypt libmad
-PKG_DEPENDS:=		libffmpeg xcb-util libtheora libgcrypt
+PKG_BUILDDEP:=		ffmpeg xcb-util libtheora libgcrypt libmad alsa-lib
+PKG_DEPENDS:=		libffmpeg xcb-util libtheora libgcrypt alsa-lib
 PKG_URL:=		http://www.videolan.org/vlc/
 PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/$(PKG_VERSION)/
 
-PKG_ARCH_DEPENDS:=	!m68k
 PKG_LIBC_DEPENDS:=	glibc musl
 
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,VLC,vlc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
+TARGET_CPPFLAGS+=	-D_DEFAULT_SOURCE
 TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ENV+=		ac_cv_func_sched_getaffinity=no
 CONFIGURE_ARGS+=	--disable-lua \
@@ -39,6 +38,7 @@ CONFIGURE_ARGS+=	--disable-lua \
 			--enable-libgcrypt \
 			--enable-mad \
 			--enable-theora \
+			--disable-optimizations \
 			--disable-static \
 			--disable-avcodec
 
