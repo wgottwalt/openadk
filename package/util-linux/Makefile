@@ -4,13 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		util-linux
-PKG_VERSION:=		2.25.2
-PKG_RELEASE:=		4
-PKG_HASH:=		e0457f715b73f4a349e1acb08cb410bf0edc9a74a3f75c357070f31f70e33cd6
+PKG_VERSION:=		2.26
+PKG_RELEASE:=		1
+PKG_EXTRAVER:=		v2.26
+PKG_HASH:=		a23c6f39dea0ed215ccd589509ffc7bb6f706f6e1a04760f493fb0fd7e93c489
 PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
 PKG_BUILDDEP:=		ncurses
-PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.25/
+PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/$(PKG_EXTRAVER)/
 PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
