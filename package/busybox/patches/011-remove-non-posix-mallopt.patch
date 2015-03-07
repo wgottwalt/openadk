@@ -1,0 +1,39 @@
+diff -Nur busybox-1.23.0.orig/libbb/appletlib.c busybox-1.23.0/libbb/appletlib.c
+--- busybox-1.23.0.orig/libbb/appletlib.c	2014-11-20 01:08:23.000000000 +0100
++++ busybox-1.23.0/libbb/appletlib.c	2015-03-07 09:10:56.000000000 +0100
+@@ -28,13 +28,6 @@
+  */
+ #include "busybox.h"
+ 
+-#if !(defined(__FreeBSD__) || defined(__OpenBSD__) || defined(__NetBSD__) \
+-    || defined(__APPLE__) \
+-    )
+-# include <malloc.h> /* for mallopt */
+-#endif
+-
+-
+ /* Declare <applet>_main() */
+ #define PROTOTYPES
+ #include "applets.h"
+@@ -792,21 +785,6 @@
+ int main(int argc UNUSED_PARAM, char **argv)
+ #endif
+ {
+-	/* Tweak malloc for reduced memory consumption */
+-#ifdef M_TRIM_THRESHOLD
+-	/* M_TRIM_THRESHOLD is the maximum amount of freed top-most memory
+-	 * to keep before releasing to the OS
+-	 * Default is way too big: 256k
+-	 */
+-	mallopt(M_TRIM_THRESHOLD, 8 * 1024);
+-#endif
+-#ifdef M_MMAP_THRESHOLD
+-	/* M_MMAP_THRESHOLD is the request size threshold for using mmap()
+-	 * Default is too big: 256k
+-	 */
+-	mallopt(M_MMAP_THRESHOLD, 32 * 1024 - 256);
+-#endif
+-
+ #if !BB_MMU
+ 	/* NOMMU re-exec trick sets high-order bit in first byte of name */
+ 	if (argv[0][0] & 0x80) {
