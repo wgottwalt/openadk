@@ -438,6 +438,12 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_TARGET_FLOAT)" ];then \
+		grep "^config" target/config/Config.in.float.choice \
+			|grep -i "$(ADK_TARGET_FLOAT)$$" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_TARGET_ENDIAN)" ];then \
 		grep "^config" target/config/Config.in.endian.choice \
 			|grep -i "$(ADK_TARGET_ENDIAN)" \
