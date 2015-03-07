@@ -1,119 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-menu "Toolchain settings"
-	visible if !ADK_CHOOSE_APPLIANCE
-
-config ADK_VENDOR
-	string "Vendor name"
-	default "openadk"
-	help
-	  Vendor string is used for toolchain.
-
-choice
-prompt "GCC version"
-
-config ADK_TOOLCHAIN_GCC_4_9_2
-	bool "4.9.2"
-	depends on !ADK_TARGET_ARCH_BFIN
-	depends on !ADK_TARGET_ARCH_ARC
-	depends on !ADK_TARGET_ARCH_AVR32
-	depends on !ADK_TARGET_ARCH_CRIS
-	depends on !ADK_TARGET_ARCH_C6X
-
-config ADK_TOOLCHAIN_GCC_4_8_4
-	bool "4.8.4"
-	depends on !ADK_TARGET_ARCH_BFIN
-	depends on !ADK_TARGET_ARCH_AARCH64
-	depends on !ADK_TARGET_ARCH_ARC
-	depends on !ADK_TARGET_ARCH_AVR32
-	depends on !ADK_TARGET_ARCH_CRIS
-	depends on !ADK_TARGET_ARCH_TILE
-	depends on !ADK_TARGET_ARCH_C6X
-
-config ADK_TOOLCHAIN_GCC_4_7_4
-	bool "4.7.4"
-	depends on ADK_TARGET_ARCH_CRIS \
-		|| ADK_TARGET_ARCH_C6X \
-		|| ADK_TARGET_ARCH_SPARC
-
-config ADK_TOOLCHAIN_GCC_4_8_0_ARC
-	bool "4.8.0-arc"
-	depends on ADK_TARGET_ARCH_ARC
-
-config ADK_TOOLCHAIN_GCC_4_5_4
-	bool "4.5.4"
-	depends on ADK_TARGET_ARCH_BFIN
-
-config ADK_TOOLCHAIN_GCC_4_4_7
-	bool "4.4.7"
-	depends on ADK_TARGET_ARCH_AVR32
-
-config ADK_TOOLCHAIN_GCC_GIT
-	bool "git"
-	depends on !ADK_TARGET_ARCH_BFIN
-	depends on !ADK_TARGET_ARCH_ARC
-	depends on !ADK_TARGET_ARCH_AVR32
-	depends on !ADK_TARGET_ARCH_CRIS
-
-endchoice
-
-choice
-prompt "Binutils version"
-
-config ADK_TOOLCHAIN_BINUTILS_2_20_1
-	bool "2.20.1"
-	depends on ADK_TARGET_ARCH_AVR32
-
-config ADK_TOOLCHAIN_BINUTILS_2_22
-	bool "2.22"
-	depends on ADK_TARGET_ARCH_BFIN \
-		|| ADK_TARGET_ARCH_CRIS
-
-config ADK_TOOLCHAIN_BINUTILS_2_23_ARC
-	bool "2.23-arc"
-	depends on ADK_TARGET_ARCH_ARC
-
-config ADK_TOOLCHAIN_BINUTILS_2_25
-	bool "2.25"
-	depends on !ADK_TARGET_ARCH_BFIN
-	depends on !ADK_TARGET_ARCH_ARC
-	depends on !ADK_TARGET_ARCH_AVR32
-	depends on !ADK_TARGET_ARCH_CRIS
-
-config ADK_TOOLCHAIN_BINUTILS_2_24
-	bool "2.24"
-	depends on !ADK_TARGET_ARCH_BFIN
-	depends on !ADK_TARGET_ARCH_ARC
-	depends on !ADK_TARGET_ARCH_AVR32
-	depends on !ADK_TARGET_ARCH_CRIS
-
-config ADK_TOOLCHAIN_BINUTILS_GIT
-	bool "git"
-	depends on !ADK_TARGET_ARCH_BFIN
-	depends on !ADK_TARGET_ARCH_ARC
-	depends on !ADK_TARGET_ARCH_AVR32
-	depends on !ADK_TARGET_ARCH_CRIS
-
-endchoice
-
-choice
-prompt "GNU debugger version"
-
-config ADK_TOOLCHAIN_GDB_7_8_2
-	bool "7.8.2"
-	depends on !ADK_TARGET_ARCH_AVR32
-
-config ADK_TOOLCHAIN_GDB_6_7_1
-	bool "6.7.1"
-	depends on ADK_TARGET_ARCH_AVR32
-
-config ADK_TOOLCHAIN_GDB_GIT
-	bool "git"
-	depends on !ADK_TARGET_ARCH_AVR32
-
-endchoice
-
 config ADK_TARGET_CFLAGS_OPT
 	string
 	default "-Os -pipe" if ADK_TARGET_CFLAGS_OPT_OS
@@ -139,13 +26,7 @@ config ADK_TARGET_CFLAGS_OPT_O0
 
 endchoice
 
-config ADK_TARGET_ARCH_ARM_WITH_THUMB
-	bool "Use THUMB2 only mode"
-	select ADK_KERNEL_THUMB2_KERNEL
-	depends on ADK_TARGET_ARCH_ARM
-	help
-	  Experimental option. Use with care.
-
+menu "Advanced Toolchain options"
 config ADK_TOOLCHAIN_WITH_SSP
 	bool
 
@@ -224,5 +105,4 @@ config ADK_UCLIBC_TEST
 	depends on ADK_TARGET_LIB_UCLIBC_NG || ADK_TARGET_LIB_UCLIBC
 	help
 	  Build uClibc/uClibc-ng test suite.
-
 endmenu

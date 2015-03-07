@@ -24,7 +24,6 @@ source "target/config/Config.in.boards"
 source "target/config/Config.in.kernel"
 source "target/config/Config.in.arch"
 source "target/config/Config.in.system"
-source "target/config/Config.in.endian"
 source "target/config/Config.in.arm"
 source "target/config/Config.in.cris"
 source "target/config/Config.in.mips"
@@ -32,12 +31,6 @@ source "target/config/Config.in.x86"
 source "target/config/Config.in.xtensa"
 source "target/config/Config.in.qemu"
 source "target/config/Config.in.qemuopts"
-source "target/config/Config.in.kernelversion"
-source "target/config/Config.in.libc"
-source "target/config/Config.in.abi"
-source "target/config/Config.in.fpu"
-source "target/config/Config.in.float"
-source "target/config/Config.in.binfmt"
 source "target/config/Config.in.target"
 
 endmenu
@@ -103,8 +96,30 @@ endmenu
 
 menu "Kernel configuration"
 	visible if !ADK_CHOOSE_APPLIANCE && ADK_TARGET_KERNEL_CUSTOMISING
+
+source "target/config/Config.in.kernelversion"
 source "target/linux/Config.in"
 endmenu
 
+menu "Toolchain settings"
+	visible if !ADK_CHOOSE_APPLIANCE
+
+config ADK_VENDOR
+	string "Vendor name"
+	default "openadk"
+	help
+	  Vendor string is used for toolchain.
+
+source "target/config/Config.in.endian"
+source "target/config/Config.in.abi"
+source "target/config/Config.in.fpu"
+source "target/config/Config.in.float"
+source "target/config/Config.in.binfmt"
+source "target/config/Config.in.libc"
+source "target/config/Config.in.binutils"
+source "target/config/Config.in.gcc"
+source "target/config/Config.in.gdb"
 source "target/config/Config.in.toolchain"
+endmenu
+
 source "target/config/Config.in.adk"

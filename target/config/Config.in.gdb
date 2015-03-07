@@ -1,7 +1,5 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_TARGET_ARCH_ARM_WITH_THUMB
-	bool
-	select ADK_KERNEL_THUMB2_KERNEL
-	depends on ADK_TARGET_ARCH_ARM
+source target/config/Config.in.gdb.choice
+source target/config/Config.in.gdb.default
