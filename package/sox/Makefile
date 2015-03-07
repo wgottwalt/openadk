@@ -72,6 +72,11 @@ CONFIGURE_ARGS+=	--with-oggvorbis
 else
 CONFIGURE_ARGS+=	--without-oggvorbis
 endif
+ifeq ($(ADK_TARGET_USE_SSP),y)
+CONFIGURE_ARGS+=	--enable-stack-protector
+else
+CONFIGURE_ARGS+=	--disable-stack-protector
+endif
 
 sox-install:
 	$(INSTALL_DIR) $(IDIR_SOX)/usr/lib
