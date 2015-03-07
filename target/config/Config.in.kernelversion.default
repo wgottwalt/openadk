@@ -27,13 +27,13 @@ config ADK_KERNEL_VERSION_2_6_32
 
 config ADK_KERNEL_VERSION
 	string
-	default "3.19" if ADK_KERNEL_VERSION_3_19_0
-	default "3.18.8" if ADK_KERNEL_VERSION_3_18_8
-	default "3.14.28" if ADK_KERNEL_VERSION_3_14_28
-	default "3.12.37" if ADK_KERNEL_VERSION_3_12_37
-	default "3.10.53" if ADK_KERNEL_VERSION_3_10_53
-	default "3.4.103" if ADK_KERNEL_VERSION_3_4_103
-	default "3.2.66" if ADK_KERNEL_VERSION_3_2_66
+	default "3.19.1" if ADK_KERNEL_VERSION_3_19_1
+	default "3.18.9" if ADK_KERNEL_VERSION_3_18_9
+	default "3.14.35" if ADK_KERNEL_VERSION_3_14_35
+	default "3.12.38" if ADK_KERNEL_VERSION_3_12_38
+	default "3.10.71" if ADK_KERNEL_VERSION_3_10_71
+	default "3.4.106" if ADK_KERNEL_VERSION_3_4_106
+	default "3.2.68" if ADK_KERNEL_VERSION_3_2_68
 	default "2.6.32.65" if ADK_KERNEL_VERSION_2_6_32_65
 	help
 	  Kernel Version.
