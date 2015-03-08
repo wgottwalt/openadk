@@ -12,8 +12,8 @@ endif
 ifeq ($(ADK_TOOLCHAIN_GDB_6_7_1),y)
 PKG_VERSION:=		6.7.1
 PKG_RELEASE:=		1
-PKG_HASH:=		d763a458c88d4718aa19060d003de4e884f4ac87a9e88d2d35e776b53eeca2f4
-PKG_SITES:=		http://distribute.atmel.no/tools/avr32/old/avr32gnutoolchain/v2.4.2/source/
-DISTFILES:=		avr32-gdb-6.7.1.atmel.1.0.4.tar.gz
-WRKDIST=		$(WRKDIR)/gdb-6.7.1.atmel.1.0.4
+PKG_HASH:=		a34c65163a2428e24891466b1f095249bc6301b64cfe9480f3aba341b58c3434
+PKG_SITES:=		http://www.openadk.org/distfiles/
+DISTFILES:=		gdb-6.7.1-avr32-2.1.5.tar.bz2
+WRKDIST=		$(WRKDIR)/gdb-6.7.1-avr32-2.1.5
 endif

@@ -11,7 +11,7 @@ PKG_DEPENDS:=		libthread-db libncurses libexpat zlib
 PKG_BUILDDEP:=		ncurses readline expat zlib
 PKG_NOPARALLEL:=	1
 
-PKG_ARCH_DEPENDS:=	!m68k
+PKG_ARCH_DEPENDS:=	!m68k !avr32
 
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny

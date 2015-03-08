@@ -9,8 +9,13 @@ PKG_DESCR:=		remote programm debugger utility
 PKG_SECTION:=		app/debug
 PKG_LIBC_DEPENDS:=	!musl
 
+ifeq ($(ADK_TOOLCHAIN_GDB_6_7_1),y)
+DISTFILES:=		gdb-6.7.1-avr32-2.1.5.tar.bz2
+WRKDIST=		$(WRKDIR)/gdb-6.7.1-avr32-2.1.5
+else
 DISTFILES:=		gdb-${PKG_VERSION}.tar.xz
 WRKDIST=		${WRKDIR}/gdb-${PKG_VERSION}
+endif
 WRKSRC=                 ${WRKDIST}/gdb/gdbserver
 
 include ${ADK_TOPDIR}/mk/package.mk
