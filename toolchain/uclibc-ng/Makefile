@@ -28,9 +28,9 @@ TARGET_CFLAGS+=		-Wa,-msoft-float
 endif
 endif
 
-#ifeq (${ADK_MAKE_PARALLEL},y)
-#UCLIBC_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
-#endif
+ifeq (${ADK_MAKE_PARALLEL},y)
+UCLIBC_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
+endif
 
 $(WRKBUILD)/.headers:
 	$(SED) 's,^CROSS_COMPILE=.*,CROSS_COMPILE=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
@@ -98,7 +98,7 @@ ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS),y)
 
 endif
 endif
-ifeq ($(ADK_TARGET_LIB_UCLIBC_NG_1_0_0),y)
+ifeq ($(ADK_TARGET_LIB_UCLIBC_NG_1_0),y)
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 	$(SED) 's/.*\(UCLIBC_HAS_THREADS_NATIVE\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_TLS\).*/\1=y/' ${WRKBUILD}/.config
