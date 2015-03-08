@@ -41,6 +41,10 @@ bcm28xx-vc-libs-install:
 		$(IDIR_BCM28XX_VC_LIBS)/opt/vc/lib 
 	$(CP) $(WRKINST)/opt/vc/lib/libvchiq_arm.so \
 		$(IDIR_BCM28XX_VC_LIBS)/opt/vc/lib
+	$(CP) $(WRKINST)/opt/vc/lib/libbcm_host.so \
+		$(IDIR_BCM28XX_VC_LIBS)/opt/vc/lib
+	$(CP) $(WRKINST)/opt/vc/lib/libcontainers.so \
+		$(IDIR_BCM28XX_VC_LIBS)/opt/vc/lib
 	-rm -rf $(STAGING_TARGET_DIR)/opt/vc
 	mkdir -p $(STAGING_TARGET_DIR)/opt/vc
 	$(CP) $(WRKINST)/opt/vc/lib $(STAGING_TARGET_DIR)/opt/vc
@@ -48,6 +52,10 @@ bcm28xx-vc-libs-install:
 
 bcm28xx-vc-gl-libs-install:
 	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
+	$(CP) $(WRKINST)/opt/vc/lib/libmmal*.so \
+		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
+	$(CP) $(WRKINST)/opt/vc/lib/libopenmaxil.so \
+		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
 	$(CP) $(WRKINST)/opt/vc/lib/libEGL.so \
 		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
 	$(CP) $(WRKINST)/opt/vc/lib/libGLESv2.so \

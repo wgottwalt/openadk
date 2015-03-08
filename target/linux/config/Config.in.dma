@@ -24,7 +24,7 @@ config ADK_KERNEL_CMA
 
 config ADK_KERNEL_CMA_SIZE_MBYTES
 	int
-	default 64
+	default 8
 
 config ADK_KERNEL_DMA_CMA
 	bool
