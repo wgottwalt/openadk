@@ -1,26 +1,11 @@
---- imx-lib-3.10.17-1.0.0.orig/pxp/Makefile	2014-01-16 15:27:12.000000000 +0100
-+++ imx-lib-3.10.17-1.0.0/pxp/Makefile	2014-08-27 08:37:26.291432836 +0200
-@@ -15,18 +15,18 @@ ifeq ($(PLATFORM), $(findstring $(PLATFO
- all: $(LIBNAME).so $(LIBNAME).a
- 
- install: install_headers
--	@mkdir -p $(DEST_DIR)/usr/lib
--	cp -P $(LIBNAME).* $(DEST_DIR)/usr/lib
-+	@mkdir -p $(DESTDIR)/usr/lib
-+	cp -P $(LIBNAME).* $(DESTDIR)/usr/lib
- 
- install_headers:
--	@mkdir -p $(DEST_DIR)/usr/include
--	cp pxp_lib.h $(DEST_DIR)/usr/include
-+	@mkdir -p $(DESTDIR)/usr/include
-+	cp pxp_lib.h $(DESTDIR)/usr/include
- else
- all install :
+--- imx-lib-3.10.53-1.1.0.orig/pxp/Makefile	2014-12-23 03:34:05.000000000 -0600
++++ imx-lib-3.10.53-1.1.0/pxp/Makefile	2015-03-08 13:57:06.325701267 -0500
+@@ -27,7 +27,7 @@ all install :
  endif
  
  %.o: %.c
--	$(CC) -D$(PLATFORM) $(INCLUDE) -Wall -O2 -fPIC -c $^ -o $@
-+	$(CC) -D$(PLATFORM) $(CFLAGS) -fPIC -c $^ -o $@
+-	$(CC) -D$(PLATFORM) $(INCLUDE) -Wall -fPIC $(CFLAGS) -c $^ -o $@
++	$(CC) -D$(PLATFORM) $(CPPFLAGS) $(CFLAGS) -fPIC -c $^ -o $@
  
  $(LIBNAME).so.$(SONAMEVERSION): $(OBJ)
- 	$(CC) -shared -nostartfiles -Wl,-soname,$@ $(LFLAGS) $^ -o $@
+ 	$(CC) -shared -nostartfiles -Wl,-soname,$@ $(LFLAGS) $^ -o $@ $(LDFLAGS)

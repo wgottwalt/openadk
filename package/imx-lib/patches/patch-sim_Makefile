@@ -1,11 +1,11 @@
---- imx-lib-3.10.17-1.0.0.orig/sim/Makefile	2014-01-16 15:27:12.000000000 +0100
-+++ imx-lib-3.10.17-1.0.0/sim/Makefile	2014-08-27 08:30:04.293885958 +0200
-@@ -27,7 +27,7 @@ $(LIBNAME).so: $(LIBNAME).so.$(SONAMEVER
+--- imx-lib-3.10.53-1.1.0.orig/sim/Makefile	2014-12-23 03:34:05.000000000 -0600
++++ imx-lib-3.10.53-1.1.0/sim/Makefile	2015-03-08 14:09:51.269694263 -0500
+@@ -28,7 +28,7 @@ $(LIBNAME).so: $(LIBNAME).so.$(SONAMEVER
  	ln -s $< $@
  
  %.o: %.c
--	$(CC) -D$(PLATFORM) $(INCLUDE) -Wall -O2 -fPIC -c $^ -o $@
-+	$(CC) -D$(PLATFORM) $(CFLAGS) -c $^ -o $@
+-	$(CC) -D$(PLATFORM) $(INCLUDE) -Wall -fPIC $(CFLAGS) -c $^ -o $@
++	$(CC) -D$(PLATFORM) $(CPPFLAGS) $(CFLAGS) -fPIC -c $^ -o $@
  
  else
  all install :
