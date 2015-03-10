@@ -13,11 +13,13 @@ PKG_BUILDDEP:=		cmake-host
 PKG_URL:=		https://github.com/raspberrypi/userland
 PKG_SITES:=		https://github.com/raspberrypi/userland.git
 
-PKG_SUBPKGS:=		BCM28XX_VC_TOOLS BCM28XX_VC_LIBS BCM28XX_VC_GL_LIBS
+PKG_SUBPKGS:=		BCM28XX_VC_TOOLS BCM28XX_VC_LIBS BCM28XX_VC_GL_LIBS BCM28XX_VC_DEBUG
 PKGSS_BCM28XX_VC_TOOLS:=bcm28XX-vc-libs
 PKGSC_BCM28XX_VC_TOOLS:=sys/hw
 PKGSD_BCM28XX_VC_TOOLS:=videocore tool vcgencmd
 PKGSC_BCM28XX_VC_LIBS:=	libs/misc
+PKGSC_BCM28XX_VC_DEBUG:=libs/misc
+PKGSD_BCM28XX_VC_DEBUG:=videocore debug library
 PKGSC_BCM28XX_VC_GL_LIBS:=libs/video
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2
@@ -26,6 +28,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BCM28XX_VC_TOOLS,bcm28xx-vc-tools,$(PKG_VERSION)-$(PKG_RELEASE),$(PKGSS_BCM28XX_VC_TOOLS),$(PKG_DESCR),$(PKGSC_BCM28XX_VC_TOOLS)))
 $(eval $(call PKG_template,BCM28XX_VC_LIBS,bcm28xx-vc-libs,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
+$(eval $(call PKG_template,BCM28XX_VC_DEBUG,bcm28xx-vc-debug,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 $(eval $(call PKG_template,BCM28XX_VC_GL_LIBS,bcm28xx-vc-gl-libs,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 CONFIG_STYLE:=          cmake
@@ -34,6 +37,11 @@ bcm28xx-vc-tools-install:
 	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_TOOLS)/opt/vc/bin
 	$(INSTALL_BIN) $(WRKINST)/opt/vc/bin/vcgencmd \
 		$(IDIR_BCM28XX_VC_TOOLS)/opt/vc/bin
+
+bcm28xx-vc-debug-install:
+	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_DEBUG)/opt/vc/lib
+	$(CP) $(WRKINST)/opt/vc/lib/libdebug_sym.so \
+		$(IDIR_BCM28XX_VC_DEBUG)/opt/vc/lib 
 
 bcm28xx-vc-libs-install:
 	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_LIBS)/opt/vc/lib
