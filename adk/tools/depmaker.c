@@ -231,6 +231,10 @@ int main() {
 							dpkg = strdup(key+13);
 							if (strncmp("UCLIBC", dpkg, 6) == 0) {
 								tmp = parse_line(pkgdirp->d_name, dpkg, stringtmp, 1, 0, 2, &prefix);
+							} else if (strncmp("UCLIBC_NG", dpkg, 9) == 0) {
+								tmp = parse_line(pkgdirp->d_name, dpkg, stringtmp, 1, 0, 2, &prefix);
+							} else if (strncmp("MUSL", dpkg, 4) == 0) {
+								tmp = parse_line(pkgdirp->d_name, dpkg, stringtmp, 1, 0, 2, &prefix);
 							} else {
 								tmp = parse_line(pkgdirp->d_name, dpkg, stringtmp, 1, 0, 1, &prefix);
 							}

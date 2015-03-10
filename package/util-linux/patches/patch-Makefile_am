@@ -1,6 +1,6 @@
---- util-linux-2.25.2.orig/Makefile.am	2014-10-24 04:21:20.304387835 -0500
-+++ util-linux-2.25.2/Makefile.am	2014-12-27 12:28:09.631516950 -0600
-@@ -60,7 +60,7 @@ CHECK_LOCALS =
+--- util-linux-2.26.orig/Makefile.am	2015-02-10 03:49:46.340584289 -0600
++++ util-linux-2.26/Makefile.am	2015-03-08 18:40:34.721545548 -0500
+@@ -61,7 +61,7 @@ CHECK_LOCALS =
  EXTRA_DIST =
  CLEANFILES =
  
