@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		wget
-PKG_VERSION:=		1.16
+PKG_VERSION:=		1.16.3
 PKG_RELEASE:=		1
-PKG_HASH:=		b977fc10ac7a72d987d48136251aeb332f2dced1aabd50d6d56bdf72e2b79101
+PKG_HASH:=		9f1c6d09d7148c1c2d9fd0ea655dcf4dcc407deb2db32d4126251ca0245cb670
 PKG_DESCR:=		retrieving files using http(s) and ftp
 PKG_SECTION:=		net/http
 PKG_URL:=		http://www.gnu.org/software/wget/
@@ -16,11 +16,11 @@ PKG_BB:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_CHOICES_WGET:=	WITH_GNUTLS WITH_OPENSSL WITHOUT_SSL
-PKGCD_WITHOUT_SSL:=	use no SSL
-PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
+PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates libgmp
 PKGCB_WITH_OPENSSL:=	openssl
-PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
+PKGCD_WITH_GNUTLS:=	use gnutls for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates libgmp
 PKGCB_WITH_GNUTLS:=	gnutls
 
