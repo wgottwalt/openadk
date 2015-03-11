@@ -39,7 +39,7 @@ TARGETS+=elf2flt
 ELF2FLT:=elf2flt-install
 endif
 
-# disable gdb for arc and avr32
+# disable gdb for arc
 ifeq ($(ADK_TARGET_ARCH_ARC),)
 TARGETS+=gdb
 GDB:=gdb-install
