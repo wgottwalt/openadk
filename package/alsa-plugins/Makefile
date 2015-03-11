@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		426f8af1a07ee9d8c06449524d1f0bd59a06e0331a51aa3d59d343a7c6d03120
 PKG_DESCR:=		sound library plugins
 PKG_SECTION:=		libs/audio
-PKG_BUILDDEP:=		libsamplerate
-PKG_DEPENDS:=		libsamplerate
+PKG_BUILDDEP:=		libsamplerate alsa-lib
+PKG_DEPENDS:=		libsamplerate alsa-lib
 PKG_URL:=		http://www.alsa-project.org/
 PKG_SITES:=		ftp://ftp.alsa-project.org/pub/plugins/
 
