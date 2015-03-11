@@ -1,10 +1,33 @@
 config ADK_KERNEL_DMADEVICES
 	bool
 
+config ADK_KERNEL_CMA
+	bool
+
+config ADK_KERNEL_CMA_SIZE_MBYTES
+	int
+	default 8
+
+config ADK_KERNEL_CMA_SIZE_SEL_MBYTES
+	bool
+
+config ADK_KERNEL_DMA_CMA
+	bool
+
+config ADK_KERNEL_BCM_VC_SM
+	bool
+
+config ADK_KERNEL_BCM_VC_CMA
+	bool
+
 config ADK_KERNEL_DMA_BCM2708
         bool
         select ADK_KERNEL_DMADEVICES
+	select ADK_KERNEL_BCM_VC_SM
 	select ADK_KERNEL_BCM_VC_CMA
+	select ADK_KERNEL_CMA
+	select ADK_KERNEL_CMA_SIZE_SEL_MBYTES
+	select ADK_KERNEL_DMA_CMA
 	depends on ADK_TARGET_BOARD_BCM28XX
 	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
@@ -19,17 +42,3 @@ config ADK_KERNEL_IMX_SDMA
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
-config ADK_KERNEL_CMA
-	bool
-
-config ADK_KERNEL_CMA_SIZE_MBYTES
-	int
-	default 8
-
-config ADK_KERNEL_DMA_CMA
-	bool
-	select ADK_KERNEL_CMA
-
-config ADK_KERNEL_BCM_VC_CMA
-	bool
-	select ADK_KERNEL_DMA_CMA
