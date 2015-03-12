@@ -57,8 +57,33 @@ ifeq ($(ADK_TARGET_HARD_FLOAT),y)
 	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_TARGET_UCLINUX),y)
+ifeq ($(ADK_TARGET_BINFMT_FDPIC),y)
+	$(SED) 's/.*\(UCLIBC_FORMAT_FDPIC_ELF\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SEP_DATA\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SHARED\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
+ifeq ($(ADK_TARGET_BINFMT_FLAT_ONE),y)
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SEP_DATA\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SHARED\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FDPIC_ELF\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
 	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SEP_DATA\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SHARED\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FDPIC_ELF\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_BINFMT_FLAT_SHARED),y)
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SHARED\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SEP_DATA\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_FORMAT_FDPIC_ELF\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
+endif
+ifeq ($(ADK_TARGET_UCLINUX),y)
 	$(SED) 's/.*\(ARCH_USE_MMU\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),)
