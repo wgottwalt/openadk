@@ -10,10 +10,6 @@ config ADK_KERNEL_IP_FIB_HASH
 	bool
 	default y
 
-config ADK_DISABLE_TCP_FASTOPEN
-	bool "Disable TCP Fastopen"
-	select ADK_KERNEL_ADDON_DIETNET
-
 config ADK_KERNEL_IPV6
 	tristate "Enable IPv6 support"
 	help
