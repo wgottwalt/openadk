@@ -164,7 +164,9 @@ config ADK_KERNEL_FB_CON_DECOR
 	prompt "Enable fullscreen boot logo"
 	boolean
 	select ADK_PACKAGE_FBSPLASH
-	select ADK_KERNEL_ADDON_FBLOGO
+	depends on ADK_KERNEL_VERSION_3_19 || \
+		   ADK_KERNEL_VERSION_3_18 || \
+		   ADK_KERNEL_VERSION_3_14
 	default n
 
 config ADK_KERNEL_FB_VESA
@@ -177,13 +179,6 @@ config ADK_KERNEL_FB_VESA
 	depends on ADK_TARGET_VBOX
  	help
 	 Framebuffer support for VirtualBox Emulator.
-
-config ADK_KERNEL_DRM_DW_HDMI_AUDIO
-	tristate
-	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
-	depends on ADK_KERNEL_VERSION_3_16
- 	default n
- 	help
 
 config ADK_KERNEL_DRM_DW_HDMI_CEC
 	tristate
@@ -211,7 +206,7 @@ config ADK_KERNEL_DRM_IMX
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY
 	select ADK_KERNEL_I2C_IMX
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
-	depends on ADK_KERNEL_VERSION_3_16
+	depends on ADK_KERNEL_VERSION_3_18
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
  	default n
  	help
