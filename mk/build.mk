@@ -27,10 +27,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_U_BOOT=n \
 			ADK_PACKAGE_CRYPTINIT=n \
 			ADK_PACKAGE_URLGRABBER=n \
-			ADK_KERNEL_ADDON_YAFFS2=n \
-			ADK_KERNEL_ADDON_GRSEC=n \
-			ADK_KERNEL_ADDON_MPTCP=n \
-			ADK_KERNEL_ADDON_DIETNET=n \
 			ADK_KERNEL_MPTCP=n \
 			ADK_STATIC_TOOLCHAIN=n \
 			ADK_TOOLCHAIN_WITH_SSP=n \
@@ -124,10 +120,6 @@ POSTCONFIG=		-@\
 		fi; \
 		if [ "$$(grep ^ADK_KERNEL_VERSION .config|md5sum)" != "$$(grep ^ADK_KERNEL_VERSION .config.old|md5sum)" ];then \
 			cleandir=1;\
-			rebuild=1;\
-		fi; \
-		if [ "$$(grep ^ADK_KERNEL_ADDON .config|md5sum)" != "$$(grep ^ADK_KERNEL_ADDON .config.old|md5sum)" ];then \
-			echo "You should rebuild the kernel with 'make cleankernel'";\
 			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_TARGET_USE .config|md5sum)" != "$$(grep ^ADK_TARGET_USE .config.old|md5sum)" ];then \
