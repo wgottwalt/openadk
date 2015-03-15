@@ -248,12 +248,6 @@ config ADK_KERNEL_PREEMPT
 	help
 	  Enable preemptive mode.
 
-config ADK_KERNEL_PREEMPT_RT_FULL
-        bool "Enable Realtime support"
-        select ADK_KERNEL_ADDON_LINUXRT
-        help
-	  https://www.kernel.org/pub/linux/kernel/projects/rt/3.18/
-
 
 choice
 prompt "tick configuration"
@@ -288,6 +282,12 @@ config ADK_KERNEL_HIGH_RES_TIMERS
 	bool "Enable high resolution timers"
 	help
 
+comment "uses experimental external patch"
+config ADK_KERNEL_PREEMPT_RT_FULL
+        bool "Enable Realtime support"
+	depends on ADK_KERNEL_VERSION_3_18
+        help
+	  https://www.kernel.org/pub/linux/kernel/projects/rt/3.18/
 
 choice
 prompt "Page size"
