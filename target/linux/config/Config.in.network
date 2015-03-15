@@ -226,7 +226,7 @@ config ADK_KERNEL_BONDING
 config ADK_KERNEL_MPTCP
 	bool "Multipath TCP support"
 	select ADK_KERNEL_IPV6
-	select ADK_KERNEL_ADDON_MPTCP
+	depends on ADK_KERNEL_VERSION_3_14
 	help
 	  http://www.multipath-tcp.org
 
