@@ -34,14 +34,6 @@
  AC_CHECK_HEADERS([linux/compiler.h linux/blkpg.h linux/major.h], [], [], [
  #ifdef HAVE_LINUX_COMPILER_H
  #include <linux/compiler.h>
-@@ -230,7 +210,6 @@ AC_CHECK_HEADERS([ \
- 	sys/swap.h \
- 	sys/syscall.h \
- 	sys/time.h \
--	sys/timex.h \
- 	sys/ttydefaults.h \
- 	sys/types.h \
- 	sys/un.h \
 @@ -1900,7 +1879,9 @@ libmount/src/libmount.h
  libsmartcols/docs/Makefile
  libsmartcols/docs/version.xml
