@@ -52,6 +52,12 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 	@echo "Use following command to install with a writable data partition"
 	@echo "sudo ./scripts/install.sh -d 256 raspberry-pi /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
+	@echo "Use following command to install it on SD card:"
+	@echo "sudo ./scripts/install.sh raspberry-pi2 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "Use following command to install with a writable data partition"
+	@echo "sudo ./scripts/install.sh -d 256 raspberry-pi2 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 ifeq ($(ADK_APPLIANCE_KODI),y)
 	@echo "Use following command to install with a writable data partition"
@@ -102,12 +108,22 @@ ifeq ($(ADK_KERNEL_BCM2708_DT),y)
 	$(ADK_TOPDIR)/scripts/mkknlimg --dtok $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL) $(MAKE_TRACE)
 endif
 endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
+ifeq ($(ADK_KERNEL_BCM2709_DT),y)
+	@echo adding DT trailer to kernel $(MAKE_TRACE)
+	-rm $(BUILD_DIR)/$(TARGET_KERNEL)
+	$(ADK_TOPDIR)/scripts/mkknlimg --dtok $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL) $(MAKE_TRACE)
+endif
+endif
 
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
 dtb-install:
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+	env $(KERNEL_MAKE_ENV) $(MAKE) $(KERNEL_MAKE_OPTS) dtbs $(MAKE_TRACE)
+endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) $(KERNEL_MAKE_OPTS) dtbs $(MAKE_TRACE)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
