@@ -9,8 +9,8 @@ PKG_RELEASE:=		2
 PKG_HASH:=		dca2c73ce8ab28b7d5d9b221a4a47fb5584f6b764171af075bc4385e8e2a7a64
 PKG_DESCR:=		opengl demo apps
 PKG_SECTION:=		mm/video
-PKG_DEPENDS:=		mesalib
-PKG_BUILDDEP:=		mesalib libglew glu
+PKG_DEPENDS:=		mesa
+PKG_BUILDDEP:=		mesa libglew glu
 PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/demos/${PKG_VERSION}/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

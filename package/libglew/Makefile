@@ -9,8 +9,8 @@ PKG_RELEASE:=		3
 PKG_HASH:=		99c41320b63f6860869b5fb9af9a1854b15582796c64ee3dfd7096dc0c89f307
 PKG_DESCR:=		opengl extension wrangler library
 PKG_SECTION:=		libs/video
-PKG_DEPENDS:=		libx11 libxmu libxi libxext mesalib
-PKG_BUILDDEP:=		libX11 libXmu libXi libXext mesalib
+PKG_DEPENDS:=		libx11 libxmu libxi libxext mesa
+PKG_BUILDDEP:=		libX11 libXmu libXi libXext mesa
 PKG_URL:=		http://glew.sourceforge.net/index.html
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=glew/}
 PKG_OPTS:=		dev
