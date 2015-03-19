@@ -25,6 +25,7 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--disable-sanity-checks \
 			--disable-werror \
 			--disable-nls \
+			--disable-werror \
 			--without-cvs \
 			--disable-profile \
 			--disable-debug \
