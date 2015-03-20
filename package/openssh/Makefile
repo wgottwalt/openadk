@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssh
-PKG_VERSION:=		6.7p1
-PKG_RELEASE:=		4
-PKG_HASH:=		b2f8394eae858dabbdef7dac10b99aec00c95462753e80342e530bbb6f725507
+PKG_VERSION:=		6.8p1
+PKG_RELEASE:=		1
+PKG_HASH:=		3ff64ce73ee124480b5bf767b9830d7d3c03bbcb6abe716b78f0192c37ce160e
 PKG_DESCR:=		secure shell implementation
 PKG_SECTION:=		net/security
 PKG_BUILDDEP:=		zlib
@@ -51,8 +51,6 @@ $(eval $(call PKG_template,OPENSSH_CLIENT,openssh-client,${PKG_VERSION}-${PKG_RE
 $(eval $(call PKG_template,OPENSSH_CLIENT_UTILS,openssh-client-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSH_CLIENT_UTILS},${PKGSD_OPENSSH_CLIENT_UTILS},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSSH_SFTP_CLIENT,openssh-sftp-client,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSH_SFTP_CLIENT},${PKGSD_OPENSSH_SFTP_CLIENT},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSSH_SFTP_SERVER,openssh-sftp-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSH_SFTP_SERVER},${PKGSD_OPENSSH_SFTP_SERVER},${PKG_SECTION}))
-
-AUTOTOOL_STYLE:=	autoreconf
 
 ifeq ($(ADK_PACKAGE_OPENSSH_WITH_KRB5),y)
 CONFIGURE_ARGS+=	--with-kerberos5="${STAGING_TARGET_DIR}/usr"
