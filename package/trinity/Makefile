@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		trinity
 PKG_VERSION:=		1.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		e7b641d21954873bac7b5c27e7a9986837e83ec14fa20c55901c4333cce22655
 PKG_DESCR:=		linux system call fuzz tester
 PKG_SECTION:=		sys/misc
