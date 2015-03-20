@@ -1,0 +1,13 @@
+--- netkit-bootparamd-0.17.orig/MRULES	1997-03-08 10:15:54.000000000 -0600
++++ netkit-bootparamd-0.17/MRULES	2015-03-07 14:24:01.850444545 -0600
+@@ -1,8 +1,8 @@
+ # Standard compilation rules (don't use make builtins)
+ 
+ %.o: %.c
+-	$(CC) $(CFLAGS) $< -c
++	$(CC) $(CPPFLAGS) $(CFLAGS) $< -c
+ 
+ %.o: %.cc
+-	$(CC) $(CFLAGS) $< -c
++	$(CC) $(CPPFLAGS) $(CFLAGS) $< -c
+ 

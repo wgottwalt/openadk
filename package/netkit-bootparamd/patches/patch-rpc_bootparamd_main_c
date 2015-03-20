@@ -1,0 +1,24 @@
+--- netkit-bootparamd-0.17.orig/rpc.bootparamd/main.c	2000-07-22 11:23:56.000000000 -0500
++++ netkit-bootparamd-0.17/rpc.bootparamd/main.c	2015-03-07 15:09:26.074419604 -0600
+@@ -15,12 +15,6 @@
+ #include <unistd.h>
+ #include "bootparam_prot.h"
+ 
+-
+-#ifdef __GLIBC__
+-	/* quick fix */
+-	void get_myaddress(struct sockaddr_in *);
+-#endif
+-
+ int debug = 0;
+ int dolog = 0;
+ struct in_addr route_addr;
+@@ -39,7 +33,7 @@ main(int argc, char **argv)
+     struct stat buf;
+     char c;
+     
+-    progname = rindex(argv[0],'/');
++    progname = strrchr(argv[0],'/');
+     if (progname) progname++;
+     else progname = argv[0];
+ 
