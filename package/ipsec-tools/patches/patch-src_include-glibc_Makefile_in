@@ -1,6 +1,6 @@
---- ipsec-tools-0.8.0.orig/src/include-glibc/Makefile.in	2011-03-18 14:27:40.000000000 +0100
-+++ ipsec-tools-0.8.0/src/include-glibc/Makefile.in	2013-07-17 14:35:36.000000000 +0200
-@@ -183,7 +183,7 @@ EXTRA_DIST = \
+--- ipsec-tools-0.8.2.orig/src/include-glibc/Makefile.in	2014-02-27 09:50:39.000000000 +0100
++++ ipsec-tools-0.8.2/src/include-glibc/Makefile.in	2015-03-19 17:52:53.000000000 +0100
+@@ -248,7 +248,7 @@ EXTRA_DIST = \
    netinet/ipsec.h \
    sys/queue.h
  
@@ -9,12 +9,12 @@
  all: all-am
  
  .SUFFIXES:
-@@ -370,11 +370,7 @@ uninstall-am:
- 	mostlyclean-libtool pdf pdf-am ps ps-am uninstall uninstall-am
+@@ -441,11 +441,7 @@ uninstall-am:
+ 	tags-am uninstall uninstall-am
  
  
 -.includes: ${top_builddir}/config.status
--	ln -sf $(KERNEL_INCLUDE)/linux
+-	ln -snf $(KERNEL_INCLUDE)/linux
 -	touch .includes
 -
 -all: .includes

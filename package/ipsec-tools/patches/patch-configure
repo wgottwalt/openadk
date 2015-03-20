@@ -1,6 +1,6 @@
---- ipsec-tools-0.8.0.orig/configure	2011-03-18 14:27:41.000000000 +0100
-+++ ipsec-tools-0.8.0/configure	2013-07-17 14:30:31.000000000 +0200
-@@ -11535,7 +11535,7 @@ $as_echo "$ac_cv_path_EGREP" >&6; }
+--- ipsec-tools-0.8.2.orig/configure	2014-02-27 09:50:41.000000000 +0100
++++ ipsec-tools-0.8.2/configure	2015-03-19 17:44:43.000000000 +0100
+@@ -11885,7 +11885,7 @@ $as_echo "$ac_cv_path_EGREP" >&6; }
  
  
  
@@ -9,7 +9,7 @@
  
  case $host in
  *netbsd*)
-@@ -11627,8 +11627,8 @@ else
+@@ -11977,8 +11977,8 @@ else
  fi
  
  
@@ -20,7 +20,7 @@
  if eval test \"x\$"$as_ac_Header"\" = x"yes"; then :
  
  else
-@@ -12286,7 +12286,7 @@ $as_echo "$as_me: WARNING: Using a gener
+@@ -12637,7 +12637,7 @@ $as_echo "$as_me: WARNING: Using a gener
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking if printf accepts %z" >&5
  $as_echo_n "checking if printf accepts %z... " >&6; }
  saved_CFLAGS=$CFLAGS
@@ -29,7 +29,7 @@
  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
  /* end confdefs.h.  */
  
-@@ -13739,7 +13739,7 @@ $as_echo "#define HAVE_LIBLDAP /**/" >>c
+@@ -14090,7 +14090,7 @@ $as_echo "#define HAVE_LIBLDAP /**/" >>c
  	LIBS="$LIBS -L$libldap_dir/lib -R$libldap_dir/lib -lldap"
  
  	saved_CFLAGS=$CFLAGS
@@ -38,7 +38,7 @@
  	saved_CPPFLAGS=$CPPFLAGS
          CPPFLAGS="$CPPFLAGS $CPPFLAGS_ADD"
  	cat confdefs.h - <<_ACEOF >conftest.$ac_ext
-@@ -13852,7 +13852,7 @@ $as_echo "#define HAVE_GSSAPI /**/" >>co
+@@ -14203,7 +14203,7 @@ $as_echo "#define HAVE_GSSAPI /**/" >>co
  
  	# Check if iconv 2nd argument needs const
  	saved_CFLAGS=$CFLAGS
@@ -47,7 +47,7 @@
  	saved_CPPFLAGS=$CPPFLAGS
          CPPFLAGS="$CPPFLAGS $CPPFLAGS_ADD"
  	ac_fn_c_check_header_mongrel "$LINENO" "iconv.h" "ac_cv_header_iconv_h" "$ac_includes_default"
-@@ -14253,7 +14253,7 @@ linux*)
+@@ -14604,7 +14604,7 @@ linux*)
  # Linux kernel NAT-T check
  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
  /* end confdefs.h.  */
@@ -56,7 +56,7 @@
  #ifdef SADB_X_EXT_NAT_T_TYPE
  yes
  #endif
-@@ -14440,7 +14440,7 @@ linux*)
+@@ -14791,7 +14791,7 @@ linux*)
  # Linux kernel Security Context check
  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
  /* end confdefs.h.  */
