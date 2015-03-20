@@ -1,0 +1,10 @@
+--- trinity-1.5.orig/Makefile	2015-03-02 17:08:20.000000000 +0100
++++ trinity-1.5/Makefile	2015-03-19 17:23:36.000000000 +0100
+@@ -1,6 +1,6 @@
+ VERSION="1.5"
+ 
+-INSTALL_PREFIX ?= $(DESTDIR)
++INSTALL_PREFIX ?= $(DESTDIR)/usr
+ INSTALL_PREFIX ?= $(HOME)
+ NR_CPUS := $(shell grep ^processor /proc/cpuinfo | /usr/bin/wc -l)
+ 
