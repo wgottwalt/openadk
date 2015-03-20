@@ -11,6 +11,12 @@ PKG_DESCR:=		embedded c library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
 
+ifeq ($(ADK_LIBC_VERSION),git)
+PKG_VER:=		1.0.0-git
+else
+PKG_VER:=		$(PKG_VERSION)
+endif
+
 PKG_SUBPKGS:=		UCLIBC_NG UCLIBC_NG_DEV UCLIBC_NG_TEST
 PKGSD_UCLIBC_NG_DEV:=	development files for uclibc-ng
 PKGSC_UCLIBC_NG_DEV:=	devel
@@ -36,9 +42,9 @@ do-install:
 	    cut -f 2 > $(IDIR_UCLIBC_NG)/etc/TZ
 ifneq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),y)
 	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(PKG_VERSION).so \
+	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(PKG_VER).so \
 		$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-$(PKG_VERSION).so \
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-$(PKG_VER).so \
 		$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
 	# backward compatible symlink
@@ -48,7 +54,7 @@ ifneq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),y)
 		cd $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) && ln -sf ld64-uClibc.so.1 ld64-uClibc.so.0
 	-for file in libcrypt libdl libm libresolv libutil; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VER).so \
 			$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
 	done
 endif
@@ -59,7 +65,7 @@ uclibc-ng-dev-install:
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	for file in libcrypt libdl libm libresolv libutil; do \
-		cd $(IDIR_UCLIBC_NG_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
+		cd $(IDIR_UCLIBC_NG_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VER).so $$file.so; \
 	done
 	${KERNEL_MAKE_ENV} \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)-$(KERNEL_RELEASE)/linux-$(KERNEL_VERSION) \
