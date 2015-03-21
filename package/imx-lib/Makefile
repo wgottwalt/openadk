@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		imx-lib
-PKG_VERSION:=		3.10.53-1.1.0
+PKG_VERSION:=		3.10.31-1.1.0-beta
 PKG_RELEASE:=		1
-PKG_HASH:=		4db2c1f286f2478b8236e62de4df9d2a2c26ff727c752dc4f21e2910f4a5e5d7
+PKG_HASH:=		011eb34c6fd1b1ea9894bbe07a539c1aeee1500bc8fdd29d8ce1dc1d02f79e24
 PKG_DESCR:=		IMX library (Freescale)
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.freescale.com/
@@ -24,7 +24,6 @@ TARGET_CPPFLAGS+=	-I${LINUX_DIR}/drivers/mxc/security/rng/include \
 			-I$(LINUX_DIR)/drivers/mxc/security/sahara2/include \
 			-idirafter $(LINUX_DIR)/include/uapi
 MAKE_ENV+=		PLATFORM=IMX6Q
-FAKE_FLAGS+=		DEST_DIR=$(WRKINST)
 CONFIG_STYLE:=		manual
 
 imx-lib-install:
