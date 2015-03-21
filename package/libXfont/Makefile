@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXfont
-PKG_VERSION:=		1.5.0
+PKG_VERSION:=		1.5.1
 PKG_RELEASE:=		1
-PKG_HASH:=		547c74072b9668edc4a055c798b7b91b7d3a9b90fa2a366482da01fbd4f1ba99
+PKG_HASH:=		7c65c8ac581a162ff4c8cd86c1db9e9f425132eb65b1cba0c9e905c6cb8a45f5
 PKG_DESCR:=		x11 font library
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libfreetype
