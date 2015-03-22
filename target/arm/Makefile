@@ -28,9 +28,6 @@ endif
 ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
 QEMU_ARGS+=-M vexpress-a9 -cpu cortex-a9 -net user -net nic,model=lan9118
 endif
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_STELLARIS_M3),y)
-QEMU_ARGS+=-M lm3s6965evb -cpu cortex-m3
-endif
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 QEMU_ARGS+=-drive file=qemu-${ADK_TARGET_CPU_ARCH}.img,if=virtio,index=0 -net nic,model=virtio -net user
 endif

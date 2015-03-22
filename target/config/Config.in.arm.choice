@@ -14,14 +14,14 @@ config ADK_CPU_ARMV7A_CORTEX_A7
         select ADK_CPU_CORTEX_A7
 
 config ADK_CPU_ARMV7M_CORTEX_M4
-        bool "cortex-m4"
-        select ADK_CPU_CORTEX_M4
+	bool "cortex-m4"
+	select ADK_CPU_CORTEX_M4
 	select ADK_TARGET_ARCH_ARM_WITH_THUMB
 	select ADK_TARGET_UCLINUX
 
 config ADK_CPU_ARMV7M_CORTEX_M3
-        bool "cortex-m3"
-        select ADK_CPU_CORTEX_M3
+	bool "cortex-m3"
+	select ADK_CPU_CORTEX_M3
 	select ADK_TARGET_ARCH_ARM_WITH_THUMB
 	select ADK_TARGET_UCLINUX
 
