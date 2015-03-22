@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gpu-viv-bin-mx6q
-PKG_VERSION:=		3.10.17-1.0.0
+PKG_VERSION:=		3.10.31-1.1.0-beta
 PKG_RELEASE:=		1
-PKG_HASH:=		7e5a3db22b99740756f408b881691f81c03090256754e44f69369bf039e9cbcf
-PKG_DESCR:=		IMX GPU library (Freescale)
+PKG_HASH:=		c132de60b28c73e8d6ea12219151ca9a0a0bb4f73d62ca1bdd0feac6db0d964e
+PKG_DESCR:=		imx gpu library (vivante gpu)
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.freescale.com/
 PKG_SITES:=		http://www.freescale.com/lgfiles/NMG/MAD/YOCTO/
