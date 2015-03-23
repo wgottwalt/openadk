@@ -1,0 +1,90 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice ADK_TARGET_CPU
+prompt "CPU type"
+depends on ADK_TARGET_TOOLCHAIN && \
+	( ADK_TARGET_ARCH_CRIS \
+	|| ADK_TARGET_ARCH_ARM \
+	|| ADK_TARGET_ARCH_X86 )
+
+config ADK_TARGET_CPU_ARM_CORTEX_A9
+        bool "cortex-a9"
+        select ADK_CPU_CORTEX_A9
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_ARM_CORTEX_A8
+        bool "cortex-a8"
+        select ADK_CPU_CORTEX_A8
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_ARM_CORTEX_A7
+        bool "cortex-a7"
+        select ADK_CPU_CORTEX_A7
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_ARM_CORTEX_M4
+	bool "cortex-m4"
+	select ADK_CPU_CORTEX_M4
+	select ADK_TARGET_ARCH_ARM_WITH_THUMB
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_ARM_CORTEX_M3
+	bool "cortex-m3"
+	select ADK_CPU_CORTEX_M3
+	select ADK_TARGET_ARCH_ARM_WITH_THUMB
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_ARM_ARM1176JZF_S
+        bool "arm1176jzf-s"
+        select ADK_CPU_ARM1176JZF_S
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_ARM_ARM926EJ_S
+        bool "arm926ej-s"
+        select ADK_CPU_ARM926EJ_S
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_ARM_XSCALE
+        bool "xscale"
+        select ADK_CPU_XSCALE
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_CRIS_V10
+	bool "cris v10"
+        select ADK_CPU_CRIS_V10
+	depends on ADK_TARGET_ARCH_CRIS
+
+config ADK_TARGET_CPU_CRIS_V32
+	bool "cris v32"
+        select ADK_CPU_CRIS_V32
+	depends on ADK_TARGET_ARCH_CRIS
+
+config ADK_TARGET_CPU_X86_I486
+	bool "i486"
+	select ADK_CPU_I486
+	depends on ADK_TARGET_ARCH_X86
+
+config ADK_TARGET_CPU_X86_I586
+	bool "i586"
+	select ADK_CPU_I586
+	depends on ADK_TARGET_ARCH_X86
+
+config ADK_TARGET_CPU_X86_I686
+	bool "i686"
+	select ADK_CPU_I686
+	depends on ADK_TARGET_ARCH_X86
+
+config ADK_TARGET_CPU_X86_GEODE
+	bool "geode"
+	select ADK_CPU_GEODE
+	depends on ADK_TARGET_ARCH_X86
+
+config ADK_TARGET_CPU_X86_ATOM
+	bool "atom"
+	select ADK_CPU_ATOM
+	depends on ADK_TARGET_ARCH_X86
+
+endchoice

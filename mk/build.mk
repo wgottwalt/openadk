@@ -449,6 +449,13 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_TARGET_CPU)" ];then \
+		cpu=$$(echo "$(ADK_TARGET_CPU)" |sed -e "s/-/_/g"); \
+		grep -h "^config" target/config/Config.in.tc \
+			|grep -i "$$cpu$$" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_TARGET_SYSTEM)" ];then \
 		system=$$(echo "$(ADK_TARGET_SYSTEM)" |sed -e "s/-/_/g"); \
 		grep -h "^config" target/*/Config.in.systems \
