@@ -111,7 +111,7 @@ ifeq ($(ADK_CPU_CF),y)
 GCC_CONFOPTS+=		--enable-multilib --with-arch=cf
 endif
 
-ifeq ($(ADK_TARGET_ARCH_M68K)$(ADK_TARGET_ARCH_SH)$(ADK_TARGET_ARCH_X86_64)$(ADK_TARGET_ARCH_X86),)
+ifeq ($(ADK_TARGET_ARCH_M68K)$(ADK_TARGET_ARCH_X86_64)$(ADK_TARGET_ARCH_X86),)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 
@@ -121,7 +121,7 @@ GCC_CONFOPTS+=		--with-endian=little
 else
 GCC_CONFOPTS+=          --with-endian=big
 endif
-GCC_FINAL_CONFOPTS+=	--enable-multilib --with-multilib-list=m4,m4-nofpu
+GCC_FINAL_CONFOPTS+=	--with-multilib-list=m4,m4-nofpu
 endif
 
 ifeq ($(ADK_TARGET_ARCH_X86),y)
