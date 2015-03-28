@@ -4,17 +4,17 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		icu4c
-PKG_VERSION:=		52.1
+PKG_VERSION:=		54.1
 PKG_RELEASE:=		1
-PKG_HASH:=		2f4d5e68d4698e87759dbdc1a586d053d96935787f79961d192c477b029d8092
+PKG_HASH:=		d42bc9a8ca6a91c55eb0925c279f49e5b508d51ef26ac9850d9be55de5bb8ab3
 PKG_DESCR:=		unicode and globalization library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		icu4c-host
 PKG_URL:=		http://icu-project.org
-PKG_SITES:=		http://download.icu-project.org/files/icu4c/52.1/
+PKG_SITES:=		http://download.icu-project.org/files/icu4c/$(PKG_VERSION)/
 PKG_OPTS:=		dev
 
-DISTFILES:=             ${PKG_NAME}-52_1-src.tgz
+DISTFILES:=             ${PKG_NAME}-54_1-src.tgz
 
 WRKDIST=		${WRKDIR}/icu/source
 
@@ -24,8 +24,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,ICU4C,icu4c,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,ICU4C,icu4c,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CFLAGS_FOR_BUILD+=	-fPIC
-CXXFLAGS_FOR_BUILD+=	-fPIC
+HOST_CFLAGS+=		-static-libstdc++ 
+HOST_CXXFLAGS+=		-static-libstdc++
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--enable-extras=no \
 			--enable-samples=no \
