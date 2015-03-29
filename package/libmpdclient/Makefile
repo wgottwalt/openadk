@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libmpdclient
-PKG_VERSION:=		2.9
+PKG_VERSION:=		2.10
 PKG_RELEASE:=		1
-PKG_HASH:=		7cc97ba560e91addafe5975f7e7da04b95d6710750e47b3367fa0d8c3b7699ca
-PKG_DESCR:=		library for interfacing mpd
+PKG_HASH:=		4f08cde82dae70895f8e4532a6e9b54b201efd5591c6b5d6834895807ed2ff82
+PKG_DESCR:=		library for interfacing music player daemon
 PKG_SECTION:=		libs/audio
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/libmpdclient/2/
