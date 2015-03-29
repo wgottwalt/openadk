@@ -4,15 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		nano
-PKG_VERSION:=		2.2.6
+PKG_VERSION:=		2.4.0
 PKG_RELEASE:=		1
-PKG_HASH:=		be68e133b5e81df41873d32c517b3e5950770c00fc5f4dd23810cd635abce67a
+PKG_HASH:=		5076fb502680503e648cbdcbf2077e39fba193420ae19203f0a54cb2d94a75bd
 PKG_DESCR:=		enhanced clone of the pico editor
 PKG_SECTION:=		app/editor
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.nano-editor.org/
-PKG_SITES:=		http://www.nano-editor.org/dist/v2.2/
+PKG_SITES:=		http://www.nano-editor.org/dist/v2.4/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
