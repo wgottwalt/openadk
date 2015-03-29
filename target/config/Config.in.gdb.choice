@@ -1,9 +1,13 @@
 choice
 prompt "GNU debugger version"
-default ADK_TOOLCHAIN_GDB_7_8_2
+default ADK_TOOLCHAIN_GDB_7_9
 
 config ADK_TOOLCHAIN_GDB_GIT
 	bool "git"
+	depends on !ADK_TARGET_ARCH_AVR32
+
+config ADK_TOOLCHAIN_GDB_7_9
+	bool "7.9"
 	depends on !ADK_TARGET_ARCH_AVR32
 
 config ADK_TOOLCHAIN_GDB_7_8_2
