@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		adktest
 PKG_VERSION:=		0.1
-PKG_RELEASE:=		7
+PKG_RELEASE:=		8
 PKG_DESCR:=		helper tools and scripts for qemu testing
 PKG_DEPENDS:=		rdate
 PKG_SECTION:=		base/misc

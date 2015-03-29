@@ -11,7 +11,7 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	grep shell /proc/cmdline > /dev/null 2&>1
+	grep -q shell /proc/cmdline
 	if [ $? -eq 0 ];then
 		exit 0
 	fi
