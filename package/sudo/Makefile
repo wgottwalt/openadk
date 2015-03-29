@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sudo
-PKG_VERSION:=		1.8.12
+PKG_VERSION:=		1.8.13
 PKG_RELEASE:=		1
-PKG_HASH:=		163b51841de8ad19276581a6782d61f5948f1f72a0a843371a1c167d3dc4f3b0
+PKG_HASH:=		e374e5edf2c11c00d6916a9f51cb0ad15e51c7b028370fa15169b07e61e05a25
 PKG_DESCR:=		su do
 PKG_SECTION:=		sys/misc
 PKG_URL:=		http://www.sudo.ws/sudo/
@@ -18,8 +18,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SUDO,sudo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autoreconf
 HOST_CPPFLAGS+=		-I../ -I../include
+
 TARGET_LDFLAGS+=	-ldl
 CONFIGURE_ARGS+=	--without-pam \
 			--without-sendmail \
@@ -33,6 +33,8 @@ CONFIGURE_ARGS+=	--enable-hardening
 else
 CONFIGURE_ARGS+=	--disable-hardening
 endif
+
+XAKE_FLAGS+=		INSTALL_OWNER=""
 
 sudo-install:
 	$(INSTALL_DIR) $(IDIR_SUDO)/usr/bin
