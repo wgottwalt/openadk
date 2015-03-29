@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openntpd
-PKG_VERSION:=		3.9p1
-PKG_RELEASE:=		19
-PKG_HASH:=		83dd7c1e8ec8b4567afe49af539271b5a73562fb7a3ca51df73eccba89ec8c49
+PKG_VERSION:=		5.7p4
+PKG_RELEASE:=		1
+PKG_HASH:=		a993d95976e375acc0ab1a677fd268f55024477835633c8ae404895046bccb23
 PKG_DESCR:=		ntp server daemon
 PKG_SECTION:=		net/ntp
 PKG_URL:=		http://www.openntpd.org/
@@ -19,6 +19,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,OPENNTPD,openntpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 INSTALL_STYLE:=		manual
 
 CONFIGURE_ARGS+=	--with-privsep-user=ntp \
@@ -26,8 +27,8 @@ CONFIGURE_ARGS+=	--with-privsep-user=ntp \
 
 do-install:
 	${INSTALL_DIR} ${IDIR_OPENNTPD}/etc
-	${INSTALL_DATA} ./files/ntpd.conf ${IDIR_OPENNTPD}/etc/
-	${INSTALL_DIR} ${IDIR_OPENNTPD}/usr/sbin/
-	${INSTALL_BIN} ${WRKBUILD}/ntpd ${IDIR_OPENNTPD}/usr/sbin/
+	${INSTALL_DATA} ./files/ntpd.conf ${IDIR_OPENNTPD}/etc
+	${INSTALL_DIR} ${IDIR_OPENNTPD}/usr/sbin
+	${INSTALL_BIN} ${WRKBUILD}/src/ntpd ${IDIR_OPENNTPD}/usr/sbin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
