@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		pulseaudio
-PKG_VERSION:=		5.0
+PKG_VERSION:=		6.0
 PKG_RELEASE:=		1
-PKG_HASH:=		99c13a8b1249ddbd724f195579df79484e9af6418cecf6a15f003a7f36caf939
+PKG_HASH:=		b50640e0b80b1607600accfad2e45aabb79d379bf6354c9671efa2065477f6f6
 PKG_DESCR:=		sound system
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libltdl json-c libsndfile libspeex libncurses
