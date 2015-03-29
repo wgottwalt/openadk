@@ -2,7 +2,6 @@ config ADK_APPLIANCE_MPD
 	bool "music player daemon appliance"
 	select ADK_PACKAGE_MPD
 	select ADK_PACKAGE_MPD_WITH_ALSA
-	select ADK_PACKAGE_MPD_WITH_PULSE
 	select ADK_PACKAGE_MPD_WITH_MP3
 	select ADK_PACKAGE_MPD_WITH_MP4
 	select ADK_PACKAGE_MPD_WITH_OGG
