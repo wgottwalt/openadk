@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.26.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_EXTRAVER:=		v2.26
 PKG_HASH:=		22dc1c957262e2cbdfb4d524a63d5cd4f219d3ac9b5eab570fc771076799bb6e
 PKG_DESCR:=		basic utilities

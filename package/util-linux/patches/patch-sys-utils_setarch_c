@@ -1,0 +1,11 @@
+--- util-linux-2.26.1.orig/sys-utils/setarch.c	2015-02-19 10:55:10.000000000 +0100
++++ util-linux-2.26.1/sys-utils/setarch.c	2015-03-29 11:46:25.000000000 +0200
+@@ -309,7 +309,7 @@ int main(int argc, char *argv[])
+ #if defined(__sparc64__) || defined(__sparc__)
+ 	if (archwrapper && strcmp(arch, "sparc32bash") == 0) {
+ 		if (set_arch(arch, 0L, 0))
+-			err(EXIT_FAILURE, _("Failed to set personality to %s"), p);
++			err(EXIT_FAILURE, _("Failed to set personality to %s"), arch);
+ 		execl("/bin/bash", NULL);
+ 		err(EXIT_FAILURE, _("failed to execute %s"), "/bin/bash");
+ 	}

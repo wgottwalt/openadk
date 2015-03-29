@@ -1,5 +1,5 @@
---- util-linux-2.26.orig/configure.ac	2015-02-19 06:11:13.146192401 -0600
-+++ util-linux-2.26/configure.ac	2015-03-09 17:43:49.200785697 -0500
+--- util-linux-2.26.1.orig/configure.ac	2015-03-13 14:11:19.000000000 +0100
++++ util-linux-2.26.1/configure.ac	2015-03-29 11:28:46.000000000 +0200
 @@ -60,16 +60,6 @@ LIBFDISK_LT_MINOR=1
  LIBFDISK_LT_MICRO=0
  LIBFDISK_VERSION_INFO=`expr $LIBFDISK_LT_MAJOR + $LIBFDISK_LT_MINOR`:$LIBFDISK_LT_MICRO:$LIBFDISK_LT_MINOR
@@ -34,7 +34,7 @@
  AC_CHECK_HEADERS([linux/compiler.h linux/blkpg.h linux/major.h], [], [], [
  #ifdef HAVE_LINUX_COMPILER_H
  #include <linux/compiler.h>
-@@ -1900,7 +1879,9 @@ libmount/src/libmount.h
+@@ -1911,7 +1891,9 @@ libmount/src/libmount.h
  libsmartcols/docs/Makefile
  libsmartcols/docs/version.xml
  libsmartcols/src/libsmartcols.h
