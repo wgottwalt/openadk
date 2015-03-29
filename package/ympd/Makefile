@@ -4,26 +4,22 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ympd
-PKG_VERSION:=		1.2.2
+PKG_VERSION:=		3df5b36b97b7a5b0c9adeba39b9987d9aa58a7fb
 PKG_RELEASE:=		1
-PKG_HASH:=		c4da2549fd65f6d69642348c9ff134cd4bed6a1b2a9be21daa504b6d19517806
-PKG_DESCR:=		standalone mpd web gui written in c
+PKG_DESCR:=		standalone music player daemon web gui
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libmpdclient
 PKG_BUILDDEP:=		cmake-host libmpdclient
 PKG_URL:=		http://www.ympd.org/
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		https://github.com/notandy/ympd.git
 
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,YMPD,ympd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIG_STYLE:=		cmake
 TARGET_CFLAGS+=		-std=c99
-
-pre-build:
-	$(HOST_CC) -o $(WRKBUILD)/mkdata $(WRKBUILD)/htdocs/mkdata.c
-	chmod 755 $(WRKBUILD)/mkdata
 
 ympd-install:
 	$(INSTALL_DIR) $(IDIR_YMPD)/usr/bin
