@@ -11,15 +11,11 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	for mixer in $amixer_mixer; do
-		amixer set $mixer on
-		amixer set $mixer $amixer_volume
+	for shell in $(ls /etc/amixer.d/*.sh); do
+		./$shell >/dev/null
 	done
 	;;
 stop)
-	for mixer in $amixer_mixer; do
-		amixer set $mixer off
-	done
 	;;
 restart)
 	sh $0 stop
