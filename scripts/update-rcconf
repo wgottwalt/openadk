@@ -5,11 +5,18 @@
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
 . $topdir/.config
 
-if [ -z ${ADK_TARGET_ABI} ];then
-	rcconf=$topdir/root_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}_${ADK_TARGET_CPU_ARCH}/etc/rc.conf
-else
-	rcconf=$topdir/root_${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}_${ADK_TARGET_CPU_ARCH}_${ADK_TARGET_ABI}/etc/rc.conf
+suffix=${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}_${ADK_TARGET_CPU_ARCH}
+if [ ! -z ${ADK_TARGET_FLOAT} ];then
+	suffix=${suffix}_${ADK_TARGET_FLOAT}
 fi
+if [ ! -z ${ADK_TARGET_ABI} ];then
+	suffix=${suffix}_${ADK_TARGET_ABI}
+fi
+if [ -z ${ADK_TARGET_WITH_MMU} ];then
+	suffix=${suffix}_nommu
+fi
+
+rcconf=$(ls $topdir/root_${suffix}/etc/rc.conf)
 
 if [ ! -f $rcconf ];then
 	exit 0
@@ -21,6 +28,9 @@ for service in $(grep ^ADK_RUNTIME_START_ $topdir/.config |grep -v ADK_RUNTIME_S
 	rcname=$(echo $rcname| sed -e "s#^BUSYBOX_##")
 	rcname=$(echo $rcname| tr '[:upper:]' '[:lower:]')
 	# workarounds where package name not equal to service name
+	if [ $rcname = "alsa_utils" ];then
+		rcname=amixer
+	fi
 	if [ $rcname = "iptables" ];then
 		rcname=firewall
 	fi
