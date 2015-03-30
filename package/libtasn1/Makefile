@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libtasn1
-PKG_VERSION:=		4.2
+PKG_VERSION:=		4.4
 PKG_RELEASE:=		1
-PKG_HASH:=		693b41cb36c2ac02d5990180b0712a79a591168e93d85f7fcbb75a0a0be4cdbb
+PKG_HASH:=		f8349db1b4fe634105c77e11d26b2173e587827e86e1a489b5e38ffa822e0c5d
 PKG_DESCR:=		asn.1 and der structures manipulation library
 PKG_SECTION:=		libs/crypto
 PKG_URL:=		http://www.gnupg.org/
