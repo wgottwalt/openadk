@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		vala
-PKG_VERSION:=		0.24.0
+PKG_VERSION:=		0.28.0
 PKG_RELEASE:=		1
-PKG_HASH:=		22a37c977512c19cd29c373eaaef96cb2c994795d491106f32387f3f9d1e899c
+PKG_HASH:=		0d9e3bd3f82145664875f7c29b2f544ba92d2814f75412948f774c0727fc977f
 PKG_DESCR:=		compiler for the gobject type system
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		glib
 HOST_BUILDDEP:=		glib-host
 PKG_URL:=		https://wiki.gnome.org/Vala
-PKG_SITES:=		http://download.gnome.org/sources/vala/0.24/
+PKG_SITES:=		http://download.gnome.org/sources/vala/0.28/
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
