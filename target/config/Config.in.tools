@@ -1,193 +1,197 @@
 # always required from OpenADK
 config ADK_HOST_BUILD_HEIRLOOM_CPIO
-	boolean
+	bool
 	default y
 
 config ADK_HOST_BUILD_ADK_HELPER
-	boolean
+	bool
 	default y
 
 config ADK_HOST_BUILD_ELFTOAOUT
-	boolean
+	bool
 	default y if ADK_TARGET_ARCH_SPARC
 
 config ADK_HOST_BUILD_AUTOCONF
-	boolean
+	bool
 	default y
 
 config ADK_HOST_BUILD_AUTOMAKE
-	boolean
+	bool
 	default y
 
 config ADK_HOST_BUILD_BISON
-	boolean
+	bool
 	default y
 
 config ADK_HOST_BUILD_FLEX
-	boolean
+	bool
 	default y
 
 config ADK_HOST_BUILD_M4
-	boolean
+	bool
 	default y
 
 config ADK_HOST_BUILD_LIBTOOL
-	boolean
+	bool
+	default y
+
+config ADK_HOST_BUILD_OPENSSL
+	bool
 	default y
 
 config ADK_HOST_BUILD_WGET
-	boolean
+	bool
 	default y
 
 # always required, but can be provided by host
 config ADK_HOST_BUILD_BASH
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_BC
-	boolean
+	bool
 	select ADK_HOST_BUILD_FLEX
 	default n
 
 config ADK_HOST_BUILD_BZIP2
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_FILE
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_FINDUTILS
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_GAWK
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_GREP
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_U_BOOT
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_PATCH
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_PKGCONF
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_SED
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_TAR
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_XZ
-	boolean
+	bool
 	default n
 
 # optional, but can be provided by host
 config ADK_HOST_NEED_CCACHE
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_CCACHE
-	boolean
+	bool
 	default n
 
 config ADK_HOST_NEED_CDRTOOLS
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_CDRTOOLS
-	boolean
+	bool
 	default n
 
 config ADK_HOST_NEED_GENEXT2FS
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_GENEXT2FS
-	boolean
+	bool
 	default n
 
 config ADK_HOST_NEED_LZ4
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_LZ4
-	boolean
+	bool
 	default n
 
 config ADK_HOST_NEED_LZMA
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_LZMA
-	boolean
+	bool
 	default n
 
 config ADK_HOST_NEED_LZOP
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_LZOP
-	boolean
+	bool
 	default n
 
 config ADK_HOST_NEED_MKSH
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_MKSH
-	boolean
+	bool
 	default n
 
 config ADK_HOST_NEED_QEMU
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_QEMU
-	boolean
+	bool
 	default n
 
 # optional, must be used from OpenADK
 config ADK_HOST_NEED_MTD_UTILS
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_MTD_UTILS
-	boolean
+	bool
 	default y if ADK_HOST_NEED_MTD_UTILS
 	default n
 
 config ADK_HOST_NEED_SQUASHFS
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_SQUASHFS
-	boolean
+	bool
 	default y if ADK_HOST_NEED_SQUASHFS
 	default n
 
 config ADK_HOST_NEED_SYSLINUX
-	boolean
+	bool
 	default n
 
 config ADK_HOST_BUILD_SYSLINUX
-	boolean
+	bool
 	default y if ADK_HOST_NEED_SYSLINUX
 	default n
 
 config ADK_HOST_BUILD_PCRE
-	boolean
+	bool
 	default y if ADK_HOST_DARWIN
 	default n
 
