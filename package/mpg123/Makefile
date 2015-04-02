@@ -4,12 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mpg123
-PKG_VERSION:=		1.21.0
+PKG_VERSION:=		1.22.1
 PKG_RELEASE:=		1
-PKG_HASH:=		3ad197f77c9ffdf3601e1c3183ae0709ccb3c3de68309527ce9375fcfb15dcba
+PKG_HASH:=		a0eb598e5bd72cee4c1b7603fa227b7bd54575aa84b7b94a35ca05dd3536cdba
 PKG_DESCR:=		mp3 console player
 PKG_SECTION:=		mm/audio
-PKG_DEPENDS:=		libpthread alsa-lib
+PKG_DEPENDS:=		libpthread librt alsa-lib
 PKG_BUILDDEP:=		alsa-lib
 PKG_URL:=		http://www.mpg123.de/
 PKG_SITES:=		http://www.mpg123.de/download/
@@ -28,7 +28,7 @@ endif
 ifeq ($(ADK_CPU_I586),y)
 CONFIGURE_ARGS+=	--with-cpu=i586
 endif
-ifeq ($(ADK_CPU_CORTEX_A9),y)
+ifeq ($(ADK_TARGET_CPU_WITH_NEON),y)
 CONFIGURE_ARGS+=	--with-cpu=neon
 endif
 
