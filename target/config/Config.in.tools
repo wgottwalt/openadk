@@ -35,6 +35,10 @@ config ADK_HOST_BUILD_LIBTOOL
 	boolean
 	default y
 
+config ADK_HOST_BUILD_WGET
+	boolean
+	default y
+
 # always required, but can be provided by host
 config ADK_HOST_BUILD_BASH
 	boolean

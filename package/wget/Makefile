@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		9f1c6d09d7148c1c2d9fd0ea655dcf4dcc407deb2db32d4126251ca0245cb670
 PKG_DESCR:=		retrieving files using http(s) and ftp
 PKG_SECTION:=		net/http
+HOST_BUILDDEP:=		openssl-host
 PKG_URL:=		http://www.gnu.org/software/wget/
 PKG_SITES:=		${MASTER_SITE_GNU:=wget/}
 PKG_BB:=		1
@@ -24,8 +25,10 @@ PKGCD_WITH_GNUTLS:=	use gnutls for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates libgmp
 PKGCB_WITH_GNUTLS:=	gnutls
 
+include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,WGET,wget,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,WGET,wget,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifeq (${ADK_PACKAGE_WGET_WITHOUT_SSL},y)
@@ -41,10 +44,15 @@ CONFIGURE_ARGS+=	--with-ssl=gnutls \
 			--with-libgnutls-prefix="$(STAGING_TARGET_DIR)/usr"
 endif
 
+HOST_CONFIGURE_ARGS+=	--with-ssl=openssl \
+			--with-openssl=yes \
+			--with-libssl-prefix=$(STAGING_HOST_DIR)
+
 wget-install:
 	${INSTALL_DIR} ${IDIR_WGET}/etc ${IDIR_WGET}/usr/bin
 	${INSTALL_DATA} ${WRKBUILD}/doc/sample.wgetrc \
 		${IDIR_WGET}/etc/wgetrc
 	${INSTALL_BIN} ${WRKINST}/usr/bin/wget ${IDIR_WGET}/usr/bin
 
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
