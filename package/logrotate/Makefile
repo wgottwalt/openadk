@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		logrotate
-PKG_VERSION:=		3.8.7
+PKG_VERSION:=		3.8.9
 PKG_RELEASE:=		1
-PKG_HASH:=		f6ba691f40e30e640efa2752c1f9499a3f9738257660994de70a45fe00d12b64
+PKG_HASH:=		700ed7ce9072a1cca324779a74797dfaefdae37ac50a817134b947c4ded1dfa7
 PKG_DESCR:=		logfile rotation utility
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libpopt
@@ -20,7 +20,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LOGROTATE,logrotate,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
-TARGET_CFLAGS+=		-D_GNU_SOURCE -DVERSION=\"$(PKG_VERSION)\"
+TARGET_CFLAGS+=		-DVERSION=\"$(PKG_VERSION)\"
 
 logrotate-install:
 	${INSTALL_DIR} ${IDIR_LOGROTATE}/usr/sbin
