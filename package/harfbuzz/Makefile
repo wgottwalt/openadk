@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		harfbuzz
-PKG_VERSION:=		0.9.28
+PKG_VERSION:=		0.9.40
 PKG_RELEASE:=		1
-PKG_HASH:=		a567f7c58018af0a9751e18641fd8434bfcef8307122dabe47dd652ce8bde048
+PKG_HASH:=		1771d53583be6d91ca961854b2a24fb239ef0545eed221ae3349abae0ab8321f
 PKG_DESCR:=		opentype text shaping engine
 PKG_SECTION:=		libs/fonts
 PKG_SITES:=		http://www.freedesktop.org/software/harfbuzz/release/
@@ -14,8 +14,6 @@ PKG_DEPENDS:=		libstdcxx cairo icu4c
 PKG_BUILDDEP:=		libstdcxx cairo icu4c
 HOST_BUILDDEP:=		cairo-host icu4c-host
 PKG_OPTS:=		dev
-
-PKG_ARCH_DEPENDS:=	!m68k
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
