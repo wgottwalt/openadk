@@ -198,11 +198,11 @@ config ADK_KERNEL_VFPv4
 
 config ADK_KERNEL_NEON
 	bool
-	default y if ADK_TARGET_CPU_WITH_NEON
+	default y if ADK_TARGET_ARCH_ARM_WITH_NEON
 
 config ADK_KERNEL_MODE_NEON
 	bool
-	default y if ADK_TARGET_CPU_WITH_NEON
+	default y if ADK_TARGET_ARCH_ARM_WITH_NEON
 
 config ADK_TARGET_NO_CMDLINE
 	bool "Do not builtin any kernel cmdline"
