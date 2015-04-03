@@ -4,12 +4,12 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
-PKG_VERSION:=		3.5.2
+PKG_VERSION:=		3.5.3
 PKG_RELEASE:=		1
-PKG_HASH:=		5af2e16f279466f9fb89c2fef6c09b6824a7e3e7996c9f1c2bc16e7daddd751f
+PKG_HASH:=		73ec65a08384a3ec93ccc17e89ef7a06ba221816551946f2f051cc736c2981c0
 PKG_DESCR:=		web and cache proxy
 PKG_SECTION:=		net/proxy
-PKG_DEPENDS:=		libpthread libstdcxx libltdl
+PKG_DEPENDS:=		libpthread librt libstdcxx libltdl
 PKG_BUILDDEP:=		libtool
 PKG_URL:=		http://www.squid-cache.org/
 PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.5/
@@ -134,6 +134,7 @@ CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_lib_nsl_main=no \
 			ac_cv_func_strnstr=no \
 			squid_cv_pf_inet6=yes \
+			squid_cv_gnu_atomics=yes \
 			ac_cv_have_squid=yes
 XAKE_FLAGS+=		MKDIR_P="mkdir -p"
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
