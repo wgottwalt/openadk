@@ -63,8 +63,10 @@ ifeq ($(ADK_PACKAGE_BCM28XX_BOOTLOADER_CUTDOWN),y)
 	printf "start_file=start_cd.elf\n" >> $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 	printf "fixup_file=fixup_cd.dat\n" >> $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRRY_PI),y)
 	printf "gpu_mem=$(ADK_TARGET_GPU_MEM)\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+endif
 ifeq ($(ADK_KERNEL_BCM2709_DT),y)
 	printf "device_tree=bcm2709-rpi-2-b.dtb\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
