@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lua
-PKG_VERSION:=		5.1.4
-PKG_RELEASE:=		2
-PKG_HASH:=		b038e225eaf2a5b57c9bcc35cd13aa8c6c8288ef493d52970c9545074098af3a
+PKG_VERSION:=		5.2.4
+PKG_RELEASE:=		1
+PKG_HASH:=		b9e2e4aad6789b3b63a056d442f7b39f0ecfca3ae0f1fc0ae4e9614401b69f4b
 PKG_DESCR:=		lua programming language interpreter
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libreadline
@@ -27,7 +27,7 @@ $(eval $(call PKG_template,LUAC,luac,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 
 CONFIG_STYLE:=		manual
 MAKE_FLAGS+=		CFLAGS="${TARGET_CFLAGS} ${TARGET_CPPFLAGS} -DLUA_USE_LINUX -fPIC" \
-			MYLDFLAGS="${TARGET_LDFLAGS}" \
+			MYLDFLAGS="${TARGET_LDFLAGS} -ltinfo" \
 			CC="${TARGET_CC}" LD="${TARGET_CROSS}ld" \
 			AR="${TARGET_CROSS}ar rcu" \
 			RANLIB="${TARGET_CROSS}ranlib"
