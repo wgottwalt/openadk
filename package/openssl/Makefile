@@ -65,7 +65,11 @@ CONFIG:=		linux-embedded
 endif
 
 host-configure:
+ifneq ($(OStype),Darwin)
 	(cd $(WRKBUILD); ./config --prefix='$(STAGING_HOST_DIR)/usr' -fPIC)
+else
+	(cd $(WRKBUILD); OPTIMIZATION_FLAGS="-fPIC" ./Configure darwin64-x86_64-cc --prefix='$(STAGING_HOST_DIR)/usr')
+endif
 
 host-build:
 	(cd $(WRKBUILD); make)

@@ -46,7 +46,7 @@ endif
 
 HOST_CONFIGURE_ARGS+=	--with-ssl=openssl \
 			--with-openssl=yes \
-			--with-libssl-prefix=$(STAGING_HOST_DIR)
+			--with-libssl-prefix=$(STAGING_HOST_DIR)/usr
 
 wget-install:
 	${INSTALL_DIR} ${IDIR_WGET}/etc ${IDIR_WGET}/usr/bin
