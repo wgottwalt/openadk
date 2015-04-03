@@ -77,22 +77,40 @@ config ADK_CPU_CORTEX_M4
 	bool
 	select ADK_TARGET_WITH_LT
 
+config ADK_CPU_CORTEX_A5
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU_VFPV3
+	select ADK_TARGET_CPU_WITH_NEON
+
 config ADK_CPU_CORTEX_A7
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 	select ADK_TARGET_CPU_WITH_FPU_VFPV4
+	select ADK_TARGET_CPU_WITH_NEON
 
 config ADK_CPU_CORTEX_A8
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU_VFPV3
+	select ADK_TARGET_CPU_WITH_NEON
 
 config ADK_CPU_CORTEX_A9
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 	select ADK_TARGET_CPU_WITH_FPU_VFPV3
+	select ADK_TARGET_CPU_WITH_NEON
+
+config ADK_CPU_CORTEX_A15
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU_VFPV4
+	select ADK_TARGET_CPU_WITH_NEON
 
 config ADK_CPU_CORTEX_A53
 	bool
@@ -306,9 +324,11 @@ config ADK_TARGET_GCC_CPU
 	default "arm1176jzf-s" if ADK_CPU_ARM1176JZF_S
 	default "arm926ej-s" if ADK_CPU_ARM926EJ_S
 	default "armv8-a" if ADK_CPU_ARMV8
+	default "cortex-a5" if ADK_CPU_CORTEX_A5
 	default "cortex-a7" if ADK_CPU_CORTEX_A7
 	default "cortex-a8" if ADK_CPU_CORTEX_A8
 	default "cortex-a9" if ADK_CPU_CORTEX_A9
+	default "cortex-a15" if ADK_CPU_CORTEX_A15
 	default "cortex-a53" if ADK_CPU_CORTEX_A53
 	default "cortex-a57" if ADK_CPU_CORTEX_A57
 	default "cortex-m3" if ADK_CPU_CORTEX_M3
