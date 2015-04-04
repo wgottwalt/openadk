@@ -99,18 +99,14 @@ endif
 kernel-strip:
 	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-ifeq ($(ADK_KERNEL_BCM2708_DT),y)
 	@echo adding DT trailer to kernel $(MAKE_TRACE)
 	-rm $(BUILD_DIR)/$(TARGET_KERNEL)
 	$(ADK_TOPDIR)/scripts/mkknlimg --dtok $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL) $(MAKE_TRACE)
-endif
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
-ifeq ($(ADK_KERNEL_BCM2709_DT),y)
 	@echo adding DT trailer to kernel $(MAKE_TRACE)
 	-rm $(BUILD_DIR)/$(TARGET_KERNEL)
 	$(ADK_TOPDIR)/scripts/mkknlimg --dtok $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL) $(MAKE_TRACE)
-endif
 endif
 
 kernel-install: kernel-strip
