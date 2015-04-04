@@ -1,66 +1,64 @@
 menu "Kernel debugging"
 
+config ADK_KERNEL_FTRACE
+	bool
+
+config ADK_KERNEL_GENERIC_TRACER
+	bool
+
+config ADK_KERNEL_FUNCTION_TRACER
+	bool
+
 config ADK_KERNEL_PROFILING
-	boolean
+	bool
 
 config ADK_KERNEL_DEBUG_KERNEL
-	boolean
+	bool
 
 config ADK_KERNEL_DEBUG_INFO
-	boolean
+	bool
 
 config ADK_KERNEL_KGDB
-	boolean
+	bool
 
 config ADK_KERNEL_KGDB_SERIAL_CONSOLE
-	boolean
+	bool
 
 config ADK_KERNEL_FRAME_POINTER
-	boolean
+	bool
 
 config ADK_KERNEL_EARLY_PRINTK
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_KALLSYMS_ALL
-	boolean
+	bool
 
 config ADK_KERNEL_PRINTK
-	prompt "printk support (disable to save space and quieten bootup)"
-	boolean
+	bool "printk support (disable to save space and quieten bootup)"
 	select ADK_KERNEL_EARLY_PRINTK
 	default y
 	help
 	  Disable printk to save space and quieten bootup.
 
 config ADK_KERNEL_PRINTK_TIME
-	prompt "timing information for printk"
-	boolean
+	bool "timing information for printk"
 	depends on ADK_KERNEL_PRINTK
-	default n
 	help
 	  Enable timing information for printk, to analyze kernel
 	  bootup performance.
 
 config ADK_KERNEL_BUG
-	prompt "Enable BUGS()"
-	boolean
-	default n
+	bool "Enable BUGS()"
 	help
 	  Enable if you need BUGS() in the kernel.
 
 config ADK_KERNEL_COREDUMP
-	prompt "Enable coredumps"
-	boolean
-	default y if ADK_PACKAGE_LTP
-	default n
+	bool "Enable coredumps"
 	help
 	  Enable if you need coredumps.
 
 config ADK_KERNEL_NETCONSOLE
-	prompt "Netconsole support"
-	boolean
-	default n
+	bool "Netconsole support"
 	help
 	  Activate netconsole. netconsole=@/,@192.168.1.2/
 
@@ -81,16 +79,14 @@ config ADK_PARAMETER_NETCONSOLE_DST_IP
        	  ip address logging to.
 
 config ADK_KERNEL_MAGIC_SYSRQ
-	prompt "Magic BREAK sequence"
-	boolean
+	bool "Magic BREAK sequence"
 	default y
 	help
 	  Enable this to be able to use the Magic SysRq functions,
 	  probably using a serial console break.
 
 config ADK_KERNEL_DEBUG_FS
-	prompt "Debug Filesystem"
-	boolean
+	bool "Debug Filesystem"
 	default n
 	help
 	  debugfs is a virtual file system that kernel developers use to put
@@ -98,14 +94,10 @@ config ADK_KERNEL_DEBUG_FS
 	  write to these files.
 
 config ADK_KERNEL_DEBUG_INFO
-	prompt "Debug info"
-	boolean
-	default n
-	help
+	bool "Debug info"
 
 config ADK_KERNEL_DEBUG_WITH_KGDB
-	prompt "Enable remote kernel debugging using KGDB"
-	boolean
+	bool "Enable remote kernel debugging using KGDB"
 	select ADK_KERNEL_DEBUG_KERNEL
 	select ADK_KERNEL_DEBUG_INFO
 	select ADK_KERNEL_KGDB
@@ -119,20 +111,18 @@ config ADK_KERNEL_DEBUG_WITH_KGDB
 	default n
 
 config ADK_KERNEL_OPROFILE
-	prompt "Oprofile support"
-	tristate
+	tristate "Oprofile support"
 	select ADK_KERNEL_PROFILING
 	depends on !ADK_TARGET_ARCH_M68K
 	default n
 	help
-	 use oprofile package to make use of the kernel support.
+	  use oprofile package to make use of the kernel support.
 
 config ADK_KERNEL_KALLSYMS
-	prompt "Support for symbol names in OOPS"
-	boolean
+	bool "Support for symbol names in OOPS"
 	select ADK_KERNEL_KALLSYMS_ALL
 	default n
 	help
-	 Load all symbols to the kernel.
+	  Load all symbols to the kernel.
 
 endmenu
