@@ -4,15 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		hicolor-icon-theme
-PKG_VERSION:=		0.12
+PKG_VERSION:=		0.15
 PKG_RELEASE:=		1
-PKG_HASH:=		9edca690617eaa19054951ca53501c802180262be8880ed84754ac46c93bec73
+PKG_HASH:=		9cc45ac3318c31212ea2d8cb99e64020732393ee7630fa6c1810af5f987033cc
 PKG_DESCR:=		hicolor icon theme
 PKG_SECTION:=		x11/misc
 PKG_URL:=		http://icon-theme.freedesktop.org/
 PKG_SITES:=		http://icon-theme.freedesktop.org/releases/
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
 
