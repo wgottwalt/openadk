@@ -1,13 +1,13 @@
---- openssl-1.0.1e.orig/tools/c_rehash	2013-02-11 16:26:11.000000000 +0100
-+++ openssl-1.0.1e/tools/c_rehash	2013-08-17 16:07:16.970558422 +0200
-@@ -6,8 +6,8 @@
- 
- my $openssl;
+--- openssl-1.0.2a.orig/tools/c_rehash	2015-03-19 14:31:17.000000000 +0100
++++ openssl-1.0.2a/tools/c_rehash	2015-04-06 10:52:37.395255700 +0200
+@@ -3,8 +3,8 @@
+ # Perl c_rehash script, scan all files in a directory
+ # and add symbolic links to their hash values.
  
 -my $dir = "/usr/local/ssl";
 -my $prefix = "/usr/local/ssl";
 +my $dir = "/etc/ssl";
 +my $prefix = "/usr";
  
- if(defined $ENV{OPENSSL}) {
- 	$openssl = $ENV{OPENSSL};
+ my $openssl = $ENV{OPENSSL} || "openssl";
+ my $pwd;

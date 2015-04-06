@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
-PKG_VERSION:=		1.0.1j
+PKG_VERSION:=		1.0.2a
 PKG_RELEASE:=		2
-PKG_HASH:=		1b60ca8789ba6f03e8ef20da2293b8dc131c39d83814e775069f02d26354edf3
+PKG_HASH:=		15b6393c20030aab02c8e2fe0243cb1d1d18062f6c095d67bca91871dc7f324a
 PKG_DESCR:=		secure socket layer libraries
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		zlib
@@ -64,11 +64,18 @@ else
 CONFIG:=		linux-embedded
 endif
 
+ifneq (,$(filter CYGWIN%,${OStype}))
+HOSTCONFIG:=		Cygwin-x86_64
+endif
+ifeq ($(OStype),Darwin)
+HOSTCONFIG:=		darwin64-x86_64-cc
+endif
+
 host-configure:
-ifneq ($(OStype),Darwin)
+ifeq ($(HOSTCONFIG),)
 	(cd $(WRKBUILD); ./config --prefix='$(STAGING_HOST_DIR)/usr' -fPIC)
 else
-	(cd $(WRKBUILD); OPTIMIZATION_FLAGS="-fPIC" ./Configure darwin64-x86_64-cc --prefix='$(STAGING_HOST_DIR)/usr')
+	(cd $(WRKBUILD); OPTIMIZATION_FLAGS="-fPIC" ./Configure $(HOSTCONFIG) --prefix='$(STAGING_HOST_DIR)/usr')
 endif
 
 host-build:

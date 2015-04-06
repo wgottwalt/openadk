@@ -1,6 +1,6 @@
---- openssl-1.0.1c.orig/Makefile.org	2012-04-22 15:25:19.000000000 +0200
-+++ openssl-1.0.1c/Makefile.org	2013-01-31 14:28:34.000000000 +0100
-@@ -135,7 +135,7 @@ FIPSCANLIB=
+--- openssl-1.0.2a.orig/Makefile.org	2015-03-19 14:30:36.000000000 +0100
++++ openssl-1.0.2a/Makefile.org	2015-04-06 10:52:37.192455300 +0200
+@@ -136,7 +136,7 @@ FIPSCANLIB=
  
  BASEADDR=
  
