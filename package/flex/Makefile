@@ -10,7 +10,7 @@ PKG_HASH:=		bf693433a3effe6b1f42e44abd787491e4e213984b1859545b92267a86088dd3
 PKG_DESCR:=		fast lexical analyzer
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		m4-host
-HOST_BUILDDEP:=		m4-host
+HOST_BUILDDEP:=		patch-host m4-host
 PKG_URL:=		http://flex.sourceforge.net/
 PKG_SITES:=		$(MASTER_SITE_SOURCEFORGE:=flex/)
 PKG_OPTS:=		dev
