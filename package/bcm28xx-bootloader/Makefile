@@ -67,23 +67,6 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRRY_PI),y)
 	printf "gpu_mem=$(ADK_TARGET_GPU_MEM)\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
-ifeq ($(ADK_KERNEL_BCM2709_DT),y)
-	printf "device_tree=bcm2709-rpi-2-b.dtb\n" >> \
-		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-endif
-ifeq ($(ADK_KERNEL_BCM2708_DT),y)
-	printf "device_tree=bcm2708-rpi-b.dtb\n" >> \
-		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-endif
-ifneq ($(ADK_KERNEL_BCM2708_DT)$(ADK_KERNEL_BCM2709_DT),)
-	printf "device_tree_address=0x100\n" >> \
-		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-	printf "kernel_address=0x8000\n" >> \
-		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-	printf "disable_commandline_tags=2\n" >> \
-		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-	printf "dtparam=i2s=on,spi=on,i2c_arm=on,i2c_vc=on\n" >> \
-		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_AMP),)
 	printf "dtoverlay=hifiberry-amp\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
@@ -106,10 +89,6 @@ ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_IQAUDIO_DAC),)
 endif
 ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_RPI_PROTO),)
 	printf "dtoverlay=rpi-proto\n" >> \
-		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-endif
-else
-	printf "device_tree=\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifeq ($(ADK_PACKAGE_BCM28XX_DEBUGTOOL),y)

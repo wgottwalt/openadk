@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
 PKG_VERSION:=		7.41.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		58c9f7cb1be9c26e6a2fd9326c14e054780dc4bb74b590a1d47fb3788a31535d
 PKG_DESCR:=		client-side url transfer tool
 PKG_SECTION:=		net/http
@@ -26,7 +26,7 @@ PKGSS_LIBCURL:=		zlib
 PKG_FLAVOURS_CURL:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable ipv6 support
 
-PKG_CHOICES_LIBCURL:=	WITHOUT_SSL WITH_GNUTLS WITH_OPENSSL WITH_CYASSL
+PKG_CHOICES_LIBCURL:=	WITHOUT_SSL WITH_GNUTLS WITH_OPENSSL WITH_WOLFSSL
 PKGCD_WITHOUT_SSL:=	use no ssl
 PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates libgmp
@@ -34,9 +34,9 @@ PKGCB_WITH_OPENSSL:=	openssl
 PKGCD_WITH_GNUTLS:=	use gnutls for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates libgmp
 PKGCB_WITH_GNUTLS:=	gnutls
-PKGCD_WITH_CYASSL:=	use cyassl for crypto
-PKGCS_WITH_CYASSL:=	cyassl ca-certificates
-PKGCB_WITH_CYASSL:=	cyassl
+PKGCD_WITH_WOLFSSL:=	use wolfssl for crypto
+PKGCS_WITH_WOLFSSL:=	wolfssl ca-certificates
+PKGCB_WITH_WOLFSSL:=	wolfssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 
@@ -58,7 +58,7 @@ CONFIGURE_ARGS+=	--with-gnutls="${STAGING_TARGET_DIR}/usr" \
 			--without-ssl \
 			--without-axtls
 endif
-ifeq (${ADK_PACKAGE_LIBCURL_WITH_CYASSL},y)
+ifeq (${ADK_PACKAGE_LIBCURL_WITH_WOLFSSL},y)
 CONFIGURE_ARGS+=	--with-cyassl="${STAGING_TARGET_DIR}/usr" \
 			--without-ssl \
 			--without-gnutls \

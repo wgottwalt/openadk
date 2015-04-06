@@ -227,18 +227,6 @@ config ADK_KERNEL_HIGHMEM
 	help
 	  Enable high memory support.
 
-config ADK_KERNEL_BCM2708_DT
-	bool
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI
-	depends on ADK_KERNEL_VERSION_3_18
-	default y
-
-config ADK_KERNEL_BCM2709_DT
-	bool
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI2
-	depends on ADK_KERNEL_VERSION_3_18
-	default y
-
 config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
 	bool "Optimize for size"
 	# does not boot in qemu-microblaze
