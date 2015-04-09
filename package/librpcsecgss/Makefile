@@ -16,7 +16,7 @@ PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng uclibc glibc
 
 include $(ADK_TOPDIR)/mk/package.mk
 
