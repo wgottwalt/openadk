@@ -3,7 +3,7 @@
 
 config ADK_TARGET_ARCH_ARM_WITH_NEON
 	bool "enable NEON SIMD support"
-	depends on ADK_TARGET_ARCH_ARM
+	depends on ADK_TARGET_ARCH_ARM && ADK_TARGET_CPU_WITH_NEON
 	default n
 	help
 	  Enable support for NEON SIMD CPU extensions.
