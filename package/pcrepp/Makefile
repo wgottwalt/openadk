@@ -16,8 +16,6 @@ PKG_SITES:=		http://www.daemon.de/idisk/Apps/pcre++/
 PKG_CXX:=		PCREPP
 PKG_OPTS:=		dev
 
-PKG_LIBC_DEPENDS:=	glibc musl
-
 DISTFILES:=		pcre++-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/pcre++-${PKG_VERSION}
 
