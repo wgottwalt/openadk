@@ -13,3 +13,4 @@
 /usr/bin/amixer -c 1 sset "Playback Deemphasis" on
 /usr/bin/amixer -c 1 sset "Master Playback ZC" off
 /usr/bin/amixer -c 1 sset Master 80%
+/usr/bin/amixer -c 1 sset Capture 80%
