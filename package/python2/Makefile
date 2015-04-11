@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
-PKG_VERSION:=		2.7.5
-PKG_RELEASE:=		13
-PKG_HASH:=		8e1b5fa87b91835afb376a9c0d319d41feca07ffebc0288d97ab08d64f48afbf
+PKG_VERSION:=		2.7.9
+PKG_RELEASE:=		1
+PKG_HASH:=		c8bba33e66ac3201dabdc556f0ea7cfe6ac11946ec32d357c4c6f9b018c12c5b
 PKG_DESCR:=		python scripting language (Version 2)
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		libffi python2-host 
@@ -15,8 +15,6 @@ PKG_DEPENDS:=		libpthread libffi
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
 PKG_OPTS:=		dev
-
-PKG_HOST_DEPENDS:=	!netbsd !openbsd
 
 DISTFILES:=		Python-${PKG_VERSION}.tgz
 WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}
@@ -100,6 +98,7 @@ CONFIGURE_ARGS:=	--with-threads \
 
 HOST_CONFIGURE_ENV+=	MACOSX_DEPLOYMENT_TARGET=10.9
 HOST_CONFIGURE_ARGS+=	--with-threads \
+			--with-system-ffi \
 			--enable-shared \
 			--disable-ipv6 \
 			--disable-toolbox-glue \
