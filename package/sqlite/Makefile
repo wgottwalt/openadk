@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		sqlite
-PKG_VERSION:=		3.8.8.1
+PKG_VERSION:=		3.8.9
 PKG_RELEASE:=		1
-PKG_HASH:=		2721361eb4a71d5f727dfa466bd910dadd5dbeb4d2d57b8b34205f7ce7e5b7f9
+PKG_HASH:=		76ebb6392cd2289fbff903af7ff67f3e49bd01ff30544b8028ecededd60269a2
 PKG_DESCR:=		embeddable sql database cli
 PKG_SECTION:=		sys/misc
 PKG_BUILDDEP:=		ncurses readline
@@ -16,8 +16,8 @@ PKG_SITES:=		http://www.sqlite.org/2015/
 PKG_LIBNAME:=		libsqlite
 PKG_OPTS:=		dev
 
-DISTFILES:=		sqlite-autoconf-3080801.tar.gz
-WRKDIST=		${WRKDIR}/sqlite-autoconf-3080801
+DISTFILES:=		sqlite-autoconf-3080900.tar.gz
+WRKDIST=		${WRKDIR}/sqlite-autoconf-3080900
 
 PKG_SUBPKGS:=		SQLITE_CLI LIBSQLITE
 PKGSD_LIBSQLITE:=	emeddable sql library
@@ -27,6 +27,10 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBSQLITE,libsqlite,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBSQLITE},${PKGSD_LIBSQLITE},${PKGSC_LIBSQLITE},${PKG_OPTS}))
 $(eval $(call PKG_template,SQLITE_CLI,sqlite-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+CONFIGURE_ARGS+=	--enable-dynamic-extensions=no
+endif
 
 CONFIGURE_ENV+=		config_BUILD_CC="${CC_FOR_BUILD}" \
 			config_BUILD_CFLAGS="${CFLAGS_FOR_BUILD}" \
