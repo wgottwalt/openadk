@@ -413,7 +413,7 @@ QUIET:=			--quiet
 endif
 FETCH_CMD?=		PATH='${HOST_PATH}' wget --timeout=$(ADK_WGET_TIMEOUT) -t 3 --no-check-certificate $(QUIET)
 
-ifeq ($(ADK_HOST_CYGWIN),y)
+ifneq (,$(filter CYGWIN%,${OStype}))
 EXEEXT:=		.exe
 endif
 
