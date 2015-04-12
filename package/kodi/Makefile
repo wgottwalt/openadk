@@ -4,9 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		14.1
-PKG_RELEASE:=		2
-PKG_HASH:=		a38059e292cf8523918834e49fcc2d688525ceb7951ddf7f5ee535f4147255d6
+PKG_VERSION:=		7cc53a9a3da77869d1d5d3d3d9971b4bd1641b50
+PKG_RELEASE:=		1
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
@@ -28,10 +27,10 @@ PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
 PKG_BUILDDEP+=		zip-host unzip-host
 PKG_URL:=		http://kodi.tv/
-PKG_SITES:=		http://mirrors.kodi.tv/releases/source/
+PKG_SITES:=		https://github.com/xbmc/xbmc.git
 
-DISTFILES:=		$(PKG_VERSION)-Helix.tar.gz
-WRKDIST=		$(WRKDIR)/xbmc-14.1-Helix
+#DISTFILES:=		$(PKG_VERSION)-Helix.tar.gz
+#WRKDIST=		$(WRKDIR)/xbmc-$(PKG_VERSION)-Helix
 
 PKG_CHOICES_KODI:=	WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITH_LIBRESSL:=	with libressl
