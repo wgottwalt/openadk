@@ -29,6 +29,7 @@ $(eval $(call PKG_template,LIBAFPCLIENT,libafpclient,$(PKG_VERSION)-${PKG_RELEAS
 
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--enable-gcrypt
+CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes
 
 post-build:
 	$(INSTALL_DIR) ${WRKINST}/usr/include/afpfs-ng
