@@ -11,7 +11,7 @@ PKG_DESCR:=		file and print server
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		gettext-tiny util-linux popt python2 gnutls
 PKG_BUILDDEP:=		heimdal-host python2-host
-PKG_DEPENDS:=		libuuid libpopt libgnutls
+PKG_DEPENDS:=		libpthread librt libuuid libpopt libgnutls
 PKG_URL:=		http://www.samba.org/
 PKG_SITES:=		http://samba.org/samba/ftp/stable/
 
@@ -26,6 +26,7 @@ CONFIGURE_ARGS+=	--enable-fhs \
 			--prefix=/usr \
 			--sysconfdir=/etc \
 			--localstatedir=/var \
+			--with-privatedir=/etc/samba \
 			--cross-compile \
 			--cross-answers=$(WRKSRC)/cache.txt \
 			--hostcc=gcc \
