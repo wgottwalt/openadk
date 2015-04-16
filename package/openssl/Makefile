@@ -34,7 +34,15 @@ $(eval $(call HOST_template,OPENSSL,openssl,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBOPENSSL,libopenssl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},$(PKG_OPTS)))
 $(eval $(call PKG_template,OPENSSL_UTIL,openssl-util,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENSSL_UTIL},${PKGSD_OPENSSL_UTIL},${PKGSC_OPENSSL_UTIL}))
 
-OPENSSL_OPTIONS:= shared threads no-err no-krb5 zlib-dynamic no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-cast
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+OPENSSL_OPTIONS:=	no-shared zlib no-dso
+else
+OPENSSL_OPTIONS:=	shared zlib-dynamic
+ALL_TARGET+=		build-shared
+TARGET_CFLAGS+=		-ldl
+endif
+
+OPENSSL_OPTIONS+= threads no-err no-krb5 no-engines no-camellia no-idea no-rc5 no-mdc2 no-sha0 no-smime no-aes192 no-cast
 
 HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
@@ -57,11 +65,9 @@ ifeq ($(ADK_TARGET_ARCH_PPC),y)
 TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
 endif
 
+CONFIG:=		linux-generic32
 ifeq ($(ADK_TARGET_ARCH_X86_64),y)
-CONFIG:=		linux-embedded-x86_64
-TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
-else
-CONFIG:=		linux-embedded
+CONFIG:=		linux-x86_64
 endif
 
 ifneq (,$(filter CYGWIN%,${OStype}))
@@ -73,9 +79,9 @@ endif
 
 host-configure:
 ifeq ($(HOSTCONFIG),)
-	(cd $(WRKBUILD); ./config --prefix='$(STAGING_HOST_DIR)/usr' -fPIC)
+	(cd $(WRKBUILD); ./config --prefix='$(STAGING_HOST_DIR)/usr' -fPIC -ldl)
 else
-	(cd $(WRKBUILD); OPTIMIZATION_FLAGS="-fPIC" ./Configure $(HOSTCONFIG) --prefix='$(STAGING_HOST_DIR)/usr')
+	(cd $(WRKBUILD); ./Configure $(HOSTCONFIG) --prefix='$(STAGING_HOST_DIR)/usr')
 endif
 
 host-build:
@@ -91,7 +97,6 @@ post-extract:
 do-configure:
 	(cd $(WRKBUILD); \
 		PATH='$(TARGET_PATH)' \
-		OPTIMIZATION_FLAGS="$(TARGET_CFLAGS) -fPIC" \
 		./Configure $(CONFIG) \
 		  --prefix=/usr \
 		  --openssldir=/etc/ssl \
@@ -100,14 +105,14 @@ do-configure:
 		  -DOPENSSL_SMALL_FOOTPRINT \
 		  $(OPENSSL_OPTIONS) \
 	);
+	$(SED) "s:-O[0-9]:$(TARGET_CFLAGS) -fPIC:" $(WRKBUILD)/Makefile
 
 do-build:
 	$(MAKE) -C $(WRKBUILD) \
 		CC="$(TARGET_CC)" \
 		AR="$(TARGET_CROSS)ar r" \
 		RANLIB="$(TARGET_CROSS)ranlib" \
-		OPTIMIZATION_FLAGS="$(TARGET_CFLAGS) -fPIC" \
-		all build-shared
+		$(ALL_TARGET)
 
 libopenssl-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENSSL}/usr/lib
