@@ -58,7 +58,6 @@ define PKG_mod_template
 INSTALL_MODS_$${ADK_PACKAGE_${1}}+=    ${2}-install
 
 ${2}-install:
-	echo foo $(1)
 	${INSTALL_DIR} $$(IDIR_$(1))/usr/lib/python2.7/lib-dynload
 	for m in ${2}; do \
 		${INSTALL_DATA} $(WRKINST)/usr/lib/python2.7/lib-dynload/$$$${m}*.so $$(IDIR_$(1))/usr/lib/python2.7/lib-dynload ;\
@@ -83,6 +82,10 @@ $(eval $(call PKG_mod_template,PYTHON2_MOD_NCURSES,_curses))
 $(eval $(call PKG_mod_template,PYTHON2_MOD_SSL,_ssl))
 $(eval $(call PKG_mod_template,PYTHON2_MOD_READLINE,readline))
 
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+CONFIGURE_ARGS+=	--disable-shared
+endif
+
 HOST_CFLAGS+=		-fPIC
 
 AUTOTOOL_STYLE:=	autoreconf
@@ -90,9 +93,9 @@ MAKE_ENV+=		HOSTPGEN=$(STAGING_HOST_DIR)/usr/bin/pgen
 CONFIGURE_ENV+=         ac_cv_have_long_long_format=yes \
 			ac_cv_file__dev_ptmx=yes \
 			ac_cv_file__dev_ptc=no
-CONFIGURE_ARGS:=	--with-threads \
-			--disable-ipv6 \
+CONFIGURE_ARGS+=	--with-threads \
 			--disable-toolbox-glue \
+			--disable-ipv6 \
 			--with-system-ffi \
 			--without-cxx-main
 
@@ -129,12 +132,16 @@ pre-configure:
 	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
 		$(WRKBUILD)/Misc/python-config.in
 
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+python2-install:
+else
 python2-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
+endif
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/bin ${IDIR_PYTHON2}/usr/lib
-	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/lib/python2.7
 	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/include/python2.7
 	${INSTALL_BIN} ${WRKINST}/usr/bin/python ${IDIR_PYTHON2}/usr/bin
-	${CP} ${WRKINST}/usr/lib/libpython*.so* ${IDIR_PYTHON2}/usr/lib
+	${INSTALL_DIR} ${IDIR_PYTHON2}/usr/lib/python2.7
+	${CP} ${WRKINST}/usr/lib/libpython*.* ${IDIR_PYTHON2}/usr/lib
 	${CP} ${WRKINST}/usr/lib/python2.7/* ${IDIR_PYTHON2}/usr/lib/python2.7
 	${CP} ${WRKINST}/usr/include/python2.7/pyconfig.h \
 		${IDIR_PYTHON2}/usr/include/python2.7
