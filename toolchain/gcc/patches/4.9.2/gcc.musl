@@ -653,3 +653,17 @@ diff -Nur gcc-4.9.2.orig/libstdc++-v3/configure.host gcc-4.9.2/libstdc++-v3/conf
    hpux*)
      os_include_dir="os/hpux"
      ;;
+diff -Nur gcc-4.9.2.orig/libstdc++-v3/config/os/gnu-linux/os_defines.h gcc-4.9.2/libstdc++-v3/config/os/gnu-linux/os_defines.h
+--- gcc-4.9.2.orig/libstdc++-v3/config/os/gnu-linux/os_defines.h	2014-01-02 16:30:10.000000000 -0600
++++ gcc-4.9.2/libstdc++-v3/config/os/gnu-linux/os_defines.h	2015-04-13 23:58:30.912857273 -0500
+@@ -41,8 +41,10 @@
+ // Provide a declaration for the possibly deprecated gets function, as
+ // glibc 2.15 and later does not declare gets for ISO C11 when
+ // __GNU_SOURCE is defined.
++#if defined(__GLIBC_PREREQ)
+ #if __GLIBC_PREREQ(2,15) && defined(_GNU_SOURCE)
+ # undef _GLIBCXX_HAVE_GETS
+ #endif
++#endif
+ 
+ #endif
