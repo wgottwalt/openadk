@@ -1,18 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_uclibc
-	bool
-
-config ADK_uclibc_ng
-	bool
-
-config ADK_glibc
-	bool
-
-config ADK_musl
-	bool
-
 config ADK_TARGET_WITH_LT
 	bool
 
@@ -21,10 +9,10 @@ config ADK_TARGET_WITH_NPTL
 
 config ADK_TARGET_LIBC
 	string
-	default "uclibc-ng"  if ADK_uclibc_ng
-	default "uclibc"  if ADK_uclibc
-	default "glibc"  if ADK_glibc
-	default "musl"  if ADK_musl
+	default "uclibc-ng" if ADK_TARGET_LIB_UCLIBC_NG
+	default "uclibc" if ADK_TARGET_LIB_UCLIBC
+	default "glibc" if ADK_TARGET_LIB_GLIBC
+	default "musl" if ADK_TARGET_LIB_MUSL
 
 config ADK_LIBC_VERSION
 	string
