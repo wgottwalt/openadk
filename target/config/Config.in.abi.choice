@@ -7,28 +7,24 @@ depends on ADK_TARGET_ARCH_MIPS64
 
 config ADK_TARGET_ABI_N32
 	bool "N32 ABI"
-	select ADK_n32
 
 config ADK_TARGET_ABI_N64
 	bool "N64 ABI"
-	select ADK_n64
 
 config ADK_TARGET_ABI_O32
 	bool "O32 ABI"
-	select ADK_o32
 
 endchoice
 
 choice
 prompt "ABI"
-depends on ADK_TARGET_ARCH_X86_64
+depends on ADK_TARGET_ARCH_X86_64 && \
+	(ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_MUSL)
 
 config ADK_TARGET_ABI_64
 	bool "64 Bit ABI"
-	select ADK_64
 
 config ADK_TARGET_ABI_X32
 	bool "x32 ABI"
-	select ADK_x32
 
 endchoice

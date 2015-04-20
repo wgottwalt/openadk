@@ -110,11 +110,11 @@ config ADK_VENDOR
 	  Vendor string is used for toolchain.
 
 source "target/config/Config.in.endian"
-source "target/config/Config.in.abi"
 source "target/config/Config.in.fpu"
 source "target/config/Config.in.float"
 source "target/config/Config.in.binfmt"
 source "target/config/Config.in.libc"
+source "target/config/Config.in.abi"
 source "target/config/Config.in.binutils"
 source "target/config/Config.in.gcc"
 source "target/config/Config.in.gdb"
