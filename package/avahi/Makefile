@@ -11,7 +11,7 @@ PKG_DESCR:=		multicast dns daemon
 PKG_SECTION:=		net/dns
 PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libdaemon expat gdbm glib
-PKG_BUILDDEP+=		gettext-tiny gtk+ dbus
+PKG_BUILDDEP+=		gettext-tiny libgtk2 dbus
 PKG_URL:=		http://avahi.org/
 PKG_SITES:=		http://avahi.org/download/
 PKG_LIBNAME:=		libavahi
@@ -20,7 +20,7 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		AVAHI_DAEMON AVAHI_DNSCONFD LIBAVAHI
-PKGSS_AVAHI_DAEMON:=	libavahi libdaemon libexpat libintl libgtk dbus
+PKGSS_AVAHI_DAEMON:=	libavahi libdaemon libexpat libintl libgtk2 dbus
 PKGSS_AVAHI_DNSCONFD:=	libavahi libdaemon avahi-daemon
 PKGSD_AVAHI_DNSCONFD:=	DNS server from mDNS configuration daemon
 PKGSD_LIBAVAHI:=	DNS-SD over mDNS library

@@ -11,7 +11,6 @@ config ADK_KERNEL_CMA_SIZE_MBYTES
 	default 64 if ADK_KERNEL_CMA_SIZE_64
 	default 8 if ADK_KERNEL_CMA_SIZE_8
 
-choice
 config ADK_KERNEL_CMA_SIZE_256
 	bool
 
@@ -23,8 +22,6 @@ config ADK_KERNEL_CMA_SIZE_64
 
 config ADK_KERNEL_CMA_SIZE_8
 	bool
-
-endchoice
 
 config ADK_KERNEL_CMA_SIZE_SEL_MBYTES
 	bool
