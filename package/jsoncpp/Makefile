@@ -8,6 +8,7 @@ PKG_VERSION:=		9cb88d2ca66af19c53a98843d159cc1d32ebaec6
 PKG_RELEASE:=		1
 PKG_DESCR:=		c++ library for json
 PKG_SECTION:=		libs/misc
+PKG_BUILDDEP:=		cmake-host
 PKG_URL:=		https://github.com/open-source-parsers/jsoncpp
 PKG_SITES:=		https://github.com/open-source-parsers/jsoncpp.git
 PKG_OPTS:=		dev

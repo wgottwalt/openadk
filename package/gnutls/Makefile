@@ -65,7 +65,7 @@ libgnutls-openssl-install:
 
 gnutls-utils-install:
 	$(INSTALL_DIR) $(IDIR_GNUTLS_UTILS)/usr/bin
-	$(CP) $(WRKINST)/usr/bin/((cert,srp,psk)tool,gnutls-{cli,serv}) \
+	$(CP) $(WRKINST)/usr/bin/{{cert,srp,psk}tool,gnutls-{cli,serv}} \
 	    $(IDIR_GNUTLS_UTILS)/usr/bin
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
