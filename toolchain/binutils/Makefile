@@ -13,13 +13,13 @@ CONFOPTS+=		--disable-libssp
 endif
 
 ifeq ($(ADK_TOOLCHAIN_WITH_LTO),y)
-CONFOPTS+=		--enable-lto
+CONFOPTS+=		--enable-lto --enable-plugins
 else
-CONFOPTS+=		--disable-lto
+CONFOPTS+=		--disable-lto --disable-plugins
 endif
 
 ifeq ($(ADK_TOOLCHAIN_WITH_GOLD),y)
-CONFOPTS+=		--enable-gold
+CONFOPTS+=		--enable-gold=default
 else
 CONFOPTS+=		--disable-gold
 endif
@@ -56,20 +56,21 @@ endif
 		--disable-dependency-tracking \
 		--disable-libtool-lock \
 		--disable-nls \
-		--enable-plugins \
+		--disable-sim \
+		--disable-gdb \
 		--disable-werror \
 		--disable-install-libiberty \
 		${CONFOPTS} \
 	);
 	$(MAKE) ${BINUTILS_MAKEOPTS} -C $(WRKBUILD) configure-host
-	touch $@
+	@touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	$(MAKE) ${BINUTILS_MAKEOPTS} ${BINUTILS_STATIC_MAKEOPTS} -C $(WRKBUILD) all
-	touch $@
+	@touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(WRKBUILD) install
-	touch $@
+	@touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk

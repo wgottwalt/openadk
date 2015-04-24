@@ -35,8 +35,8 @@ config ADK_TOOLCHAIN_GCC_4_8_4
 	depends on !ADK_TARGET_ARCH_TILE
 	depends on !ADK_TARGET_ARCH_C6X
 
-config ADK_TOOLCHAIN_GCC_4_8_0_ARC
-	bool "4.8.0-arc"
+config ADK_TOOLCHAIN_GCC_4_8_3_ARC
+	bool "4.8.3-arc"
 	depends on ADK_TARGET_ARCH_ARC
 
 config ADK_TOOLCHAIN_GCC_4_7_4

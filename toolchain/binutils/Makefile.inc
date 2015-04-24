@@ -17,11 +17,11 @@ PKG_SITES:=		${MASTER_SITE_GNU:=binutils/}
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_23_ARC),y)
-# git commit afcd0783a37c73e09439737a11e0b3183746a652
-# https://github.com/foss-for-synopsys-dwc-arc-processors/binutils-gdb/tree/arc-2.23-tls
-PKG_VERSION:=		2.23
+# git commit c4395290b351f76229a326fcc20a1a5da8cf67a1 arc-2.23-dev
+# https://github.com/foss-for-synopsys-dwc-arc-processors/binutils-gdb.git
+PKG_VERSION:=		2.23.2
 PKG_RELEASE:=		1
-PKG_HASH:=		12901398ada805926926e39eea84089efad6feabfe148a54a194db36a960f4f4
+PKG_HASH:=		cd0e68644d9f28e1d61f83267e4b7ce71038277a7153603fdfa403b233968184
 PKG_SITES:=		http://www.openadk.org/distfiles/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-arc.tar.xz
 endif
