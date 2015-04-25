@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		stunnel
-PKG_VERSION:=		5.08
+PKG_VERSION:=		5.16
 PKG_RELEASE:=		1
-PKG_HASH:=		830b21d24cd237e96f4d7993be43553d4eba4d3cfa2660faa78dec8d41d314fc
+PKG_HASH:=		b6b7e93fb2626eaabae1c8474e1dfa23962cfde8fa35c8602289fcaa4f53608d
 PKG_DESCR:=		encryption wrapper
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libopenssl
@@ -22,6 +22,7 @@ $(eval $(call PKG_template,STUNNEL,stunnel,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--with-ssl=${STAGING_TARGET_DIR}/usr \
+			--disable-systemd \
 			--disable-libwrap
 
 stunnel-install:

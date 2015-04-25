@@ -1,34 +1,16 @@
---- stunnel-5.01.orig/configure.ac	2014-03-09 23:14:33.000000000 +0100
-+++ stunnel-5.01/configure.ac	2014-05-28 11:55:04.000000000 +0200
-@@ -44,31 +44,6 @@ AC_LINK_IFELSE([AC_LANG_SOURCE([int main
-     ])
- CFLAGS="$valid_CFLAGS"; LDFLAGS="$valid_LDFLAGS"
+--- stunnel-5.16.orig/configure.ac	2015-04-16 16:03:28.000000000 +0200
++++ stunnel-5.16/configure.ac	2015-04-25 04:32:12.000000000 +0200
+@@ -71,13 +71,6 @@ AX_APPEND_COMPILE_FLAGS([-Wformat=2])
+ AX_APPEND_COMPILE_FLAGS([-Wconversion])
+ AX_APPEND_COMPILE_FLAGS([-Wno-long-long])
+ AX_APPEND_COMPILE_FLAGS([-Wno-deprecated-declarations])
+-AX_APPEND_COMPILE_FLAGS([-fstack-protector])
+-AX_APPEND_COMPILE_FLAGS([-fPIE])
+-AX_APPEND_COMPILE_FLAGS([-D_FORTIFY_SOURCE=2])
+-AX_APPEND_LINK_FLAGS([-fPIE -pie])
+-AX_APPEND_LINK_FLAGS([-Wl,-z,relro])
+-AX_APPEND_LINK_FLAGS([-Wl,-z,now])
+-AX_APPEND_LINK_FLAGS([-Wl,-z,noexecstack])
  
--AC_MSG_CHECKING([whether $CC accepts -fstack-protector])
--valid_CFLAGS="$CFLAGS"; CFLAGS="$CFLAGS -fstack-protector"
--valid_LDFLAGS="$LDFLAGS"; LDFLAGS="$LDFLAGS -fstack-protector"
--AC_LINK_IFELSE([AC_LANG_SOURCE([int main() {return 0;}])],
--    [
--        AC_MSG_RESULT([yes])
--        AC_SUBST([stunnel_CFLAGS], ["$stunnel_CFLAGS -fstack-protector"])
--        AC_SUBST([stunnel_LDFLAGF], ["$stunnel_LDFLAGF -fstack-protector"])
--    ], [
--        AC_MSG_RESULT([no])
--    ])
--CFLAGS="$valid_CFLAGS"; LDFLAGS="$valid_LDFLAGS"
--
--AC_MSG_CHECKING([whether $CC accepts -pie])
--valid_CFLAGS="$CFLAGS"; CFLAGS="$CFLAGS -fPIE"
--valid_LDFLAGS="$LDFLAGS"; LDFLAGS="$LDFLAGS -pie -fPIE"
--AC_LINK_IFELSE([AC_LANG_SOURCE([int main() {return 0;}])],
--    [
--        AC_MSG_RESULT([yes])
--        AC_SUBST([stunnel_CFLAGS], ["$stunnel_CFLAGS -fPIE"])
--        AC_SUBST([stunnel_LDFLAGF], ["$stunnel_LDFLAGF -pie -fPIE"])
--    ], [
--        AC_MSG_RESULT([no])
--    ])
--CFLAGS="$valid_CFLAGS"; LDFLAGS="$valid_LDFLAGS"
- 
- AC_MSG_CHECKING([whether $CC accepts -Wall])
- valid_CFLAGS="$CFLAGS"; CFLAGS="$CFLAGS -Wall"
+ AC_MSG_NOTICE([**************************************** libtool])
+ LT_INIT([disable-static])
