@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
-PKG_VERSION:=		7.41.0
-PKG_RELEASE:=		2
-PKG_HASH:=		58c9f7cb1be9c26e6a2fd9326c14e054780dc4bb74b590a1d47fb3788a31535d
+PKG_VERSION:=		7.42.0
+PKG_RELEASE:=		1
+PKG_HASH:=		088f6a63289dbdcf23d692fdfaaf6262c19e373beb5237b9b9e7bcf9815a8f49
 PKG_DESCR:=		client-side url transfer tool
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libcurl
@@ -73,6 +73,8 @@ CONFIGURE_ARGS+=	--enable-cookies \
 			--enable-ftp \
 			--enable-http \
 			--enable-proxy \
+			--disable-curldebug \
+			--disable-ntlm-wb \
 			--disable-symbol-hiding \
 			--disable-ares \
 			--disable-dict \
