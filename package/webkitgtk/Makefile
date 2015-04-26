@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		webkitgtk
-PKG_VERSION:=		2.7.3
+PKG_VERSION:=		2.8.1
 PKG_RELEASE:=		1
-PKG_HASH:=		06243dfda689e83d170a31d6ea288f51790ddc596faa8a6b44f464006528b7f8
+PKG_HASH:=		7d214459d216ca499ad75bccae7f248655d6ef5b295ffafd299773e7331860ff
 PKG_DESCR:=		web browser engine
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib icu4c zlib libwebp libgtk3 libsoup
