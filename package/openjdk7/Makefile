@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
-PKG_VERSION:=		2.5.3
+PKG_VERSION:=		2.5.5
 PKG_RELEASE:=		1
-PKG_HASH:=		f4f2922cfec262496e935f81c1d39af66a789f69aa12d1ceee51bcca8934f1f0
+PKG_HASH:=		09e7aeb739a468dec8357f4b0757624b6c7ef38065fdf50323d369deac983dc7
 PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		openjdk7-host alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
@@ -46,13 +46,14 @@ CONFIG_STYLE:=		basic
 
 # uclibc needs -liconv
 ifeq ($(ADK_TARGET_LIB_UCLIBC)$(ADK_TARGET_LIB_UCLIBC_NG),y)
-TARGET_LIBS:=		-liconv
+TARGET_LIBS:=		-liconv -lm
 endif
 # for UINTPTR_MAX in stdint.h
 TARGET_CFLAGS+=		-D__STDC_LIMIT_MACROS
 # segfaults with march=pentium-m/atom
 TARGET_CFLAGS:=		$(subst march=pentium-m,march=i686,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=		$(subst march=atom,march=i686,$(TARGET_CFLAGS))
+
 BOOTSTRAPJDK:=		${STAGING_HOST_DIR}/bootstrap-jdk
 
 JDKARCH:=		$(ADK_TARGET_CPU_ARCH)
