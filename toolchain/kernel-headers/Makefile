@@ -40,8 +40,8 @@ endif
 	touch $@
 
 $(WRKBUILD)/.headers: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched
-	$(KERNEL_MAKE_ENV) $(MAKE) $(KERNEL_MAKE_OPTS) headers_check
-	$(KERNEL_MAKE_ENV) $(MAKE) $(KERNEL_MAKE_OPTS) \
+	$(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) headers_check
+	$(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR)/usr \
 		headers_install
 ifeq ($(ADK_TARGET_ARCH_CRIS),y)

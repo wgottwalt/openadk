@@ -35,18 +35,18 @@ $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig $(ADK_TO
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-configure
 	-for f in $(TARGETS);do if [ -f $$f ];then rm $$f;fi;done
 	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/mini.config
-	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} KCONFIG_ALLCONFIG=mini.config allnoconfig $(MAKE_TRACE)
+	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} KCONFIG_ALLCONFIG=mini.config allnoconfig $(MAKE_TRACE)
 	touch -c $(LINUX_DIR)/.config
 
 $(LINUX_DIR)/$(KERNEL_FILE): $(LINUX_DIR)/.config
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-compile
-	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(KERNEL_TARGET) modules $(MAKE_TRACE)
+	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(KERNEL_TARGET) modules $(MAKE_TRACE)
 	touch -c $(LINUX_DIR)/$(KERNEL_FILE)
 
 $(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
-	${KERNEL_MAKE_ENV} $(MAKE) ${KERNEL_MAKE_OPTS} DEPMOD=true \
+	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} DEPMOD=true \
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
 		LOCALVERSION="" \
 		modules_install $(MAKE_TRACE)
