@@ -55,6 +55,12 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
 	@echo "Use following command to install with a writable data partition"
 	@echo "sudo ./scripts/install.sh -d 256 raspberry-pi2 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
+ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
+	@echo "Use following command to install it on SD card:"
+	@echo "sudo ./scripts/install.sh banana-pro /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "Use following command to install with a writable data partition"
+	@echo "sudo ./scripts/install.sh -d 256 banana-pro /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 ifeq ($(ADK_APPLIANCE_KODI),y)
 	@echo "Use following command to install with a writable data partition"

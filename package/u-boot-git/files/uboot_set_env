@@ -1,0 +1,5 @@
+#!/bin/sh
+
+mount /dev/mmcblk0p1 /mnt
+fw_setenv "$@"
+umount /mnt
