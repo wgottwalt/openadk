@@ -955,9 +955,8 @@ int main() {
 
 				/* handle debug subpackages */
 				fprintf(cfg, "\nconfig ADK_PACKAGE_%s_DBG\n", toupperstr(pkg_debug));
-				fprintf(cfg, "\tprompt \"add debug symbols package\"\n");
-				fprintf(cfg, "\tboolean\n");
-				fprintf(cfg, "\tdepends on ADK_PACKAGE_GDB\n");
+				fprintf(cfg, "\tbool \"add debug symbols package\"\n");
+				fprintf(cfg, "\tdepends on ADK_PACKAGE_GDB && ADK_BUILD_WITH_DEBUG\n");
 				fprintf(cfg, "\tdepends on !ADK_DEBUG\n");
 				fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", toupperstr(pkg_debug));
 				fprintf(cfg, "\tdefault n\n");

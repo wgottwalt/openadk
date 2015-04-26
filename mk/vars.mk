@@ -237,12 +237,15 @@ TARGET_CFLAGS+=		-mlongcalls -mtext-section-literals
 TARGET_CXXFLAGS+=	-mlongcalls -mtext-section-literals
 endif
 
-# add configured cflags for optimization
+# add configured compiler flags for optimization
 TARGET_CFLAGS+=		$(ADK_TARGET_CFLAGS_OPT)
 TARGET_CXXFLAGS+=	$(ADK_TARGET_CFLAGS_OPT)
-# always add debug information
+
+# add compiler flags for debug information
+ifeq ($(ADK_BUILD_WITH_DEBUG),y)
 TARGET_CFLAGS+=		-g3
 TARGET_CXXFLAGS+=	-g3
+endif
 
 ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=		-fno-omit-frame-pointer
