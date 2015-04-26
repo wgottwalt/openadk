@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ulogd
 PKG_VERSION:=		2.0.4
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		56b30a13a8832e97178f39b7bb173a0b1dfe173dbb60d99a1a386c0962a2effd
 PKG_DESCR:=		netfilter userspace logging daemon
 PKG_SECTION:=		net/firewall
