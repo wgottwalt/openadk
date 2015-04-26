@@ -21,7 +21,7 @@ ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_23_ARC),y)
 # https://github.com/foss-for-synopsys-dwc-arc-processors/binutils-gdb.git
 PKG_VERSION:=		2.23.2
 PKG_RELEASE:=		1
-PKG_HASH:=		cd0e68644d9f28e1d61f83267e4b7ce71038277a7153603fdfa403b233968184
+PKG_HASH:=		6ef173d7e88cf22d0cd1c2169286d1b4fdff4c1e0ac0d402cc3a30a52dda769e
 PKG_SITES:=		http://www.openadk.org/distfiles/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-arc.tar.xz
 endif
