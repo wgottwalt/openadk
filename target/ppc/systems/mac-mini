@@ -1,7 +1,5 @@
 config ADK_TARGET_SYSTEM_APPLE_MACMINI
 	bool "Apple Mac mini"
-	select ADK_ppc
-	select ADK_apple_macmini
 	select ADK_CPU_PPC
 	help
 	 Support for Apple Mac mini.

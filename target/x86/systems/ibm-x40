@@ -1,7 +1,5 @@
 config ADK_TARGET_SYSTEM_IBM_X40
 	bool "IBM X40 laptop"
-	select ADK_x86
-	select ADK_ibm_x40
 	select ADK_CPU_PENTIUM_M
 	select ADK_TARGET_CPU_WITH_MMX
 	select ADK_TARGET_CPU_WITH_SSE

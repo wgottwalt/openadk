@@ -1,7 +1,5 @@
 config ADK_TARGET_SYSTEM_SUN_VOYAGER
 	bool "Sun Voyager"
-	select ADK_sparc
-	select ADK_sun_voyager
 	select ADK_CPU_SPARC_V8
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_SERIAL

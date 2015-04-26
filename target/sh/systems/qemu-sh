@@ -1,7 +1,5 @@
 config ADK_TARGET_SYSTEM_QEMU_SH
 	bool "Qemu Emulator"
-	select ADK_sh
-	select ADK_qemu_sh
 	select ADK_CPU_SH4
 	select ADK_TARGET_QEMU
 	select ADK_TARGET_KERNEL_ZIMAGE

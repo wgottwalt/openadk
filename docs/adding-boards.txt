@@ -16,10 +16,8 @@ target/arm/systems/raspberry-pi2
 ---------------------
 config ADK_TARGET_SYSTEM_RASPBERRY_PI2
         bool "Raspberry PI 2"
-        select ADK_arm
-        select ADK_raspberry_pi2
-        select ADK_TARGET_LITTLE_ENDIAN
         select ADK_CPU_CORTEX_A7
+        select ADK_TARGET_LITTLE_ENDIAN
         select ADK_TARGET_CPU_WITH_NEON
         select ADK_TARGET_BOARD_BCM28XX
         select ADK_TARGET_WITH_VGA
@@ -38,8 +36,8 @@ config ADK_TARGET_SYSTEM_RASPBERRY_PI2
           Raspberry PI 2
 ------------------------
 
-You need to select as a minimum the architecture, target system name, CPU type
-and Kernel format.  If a bootloader is required you also need to select it.
+You need to select as a minimum a CPU type and Kernel format. 
+If a bootloader is required you also need to select it.
 (ADK_PACKAGE_BCM28XX_BOOTLOADER) If the bootloader does not exist as a package
 in OpenADK, you need to port it first.
 
@@ -137,11 +135,8 @@ $(eval $(call KMOD_template,SND_BCM2708_SOC_I2S,snd-bcm2708-soc-i2s,\
 ,60, kmod-snd-soc))
 ------------------------
 
-If the user choose the I2S driver for Raspberry PI 2, create a kmod package
+If the user choose the I2S driver for Raspberry PI 2, it creates a kmod package
 containing the file kernel/sound/soc/bcm/snd-soc-bcm2708-i2s.ko and generate
 a dependency to kmod-snd-soc when a package management (ipkg/opkg) is used.
 Furthermore a file with load instructions is created in /etc/modules.d/snd-bcm2708-soc-i2s
 on the target.
-
-
-

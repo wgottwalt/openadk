@@ -1,7 +1,5 @@
 config ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
 	bool "Mikrotik Routerboard 4xx"
-	select ADK_mips
-	select ADK_mikrotik_rb4xx
 	select ADK_TARGET_BIG_ENDIAN
 	select ADK_CPU_MIPS32
 	select ADK_TARGET_WITH_MINIPCI

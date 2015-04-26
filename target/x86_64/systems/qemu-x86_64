@@ -1,7 +1,5 @@
 config ADK_TARGET_SYSTEM_QEMU_X86_64
 	bool "Qemu Emulator"
-	select ADK_x86_64
-	select ADK_qemu_x86_64
 	select ADK_CPU_X86_64
 	select ADK_LINUX_64
 	select ADK_TARGET_QEMU

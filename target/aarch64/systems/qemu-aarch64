@@ -1,7 +1,5 @@
 config ADK_TARGET_SYSTEM_QEMU_AARCH64
 	bool "Qemu Emulator"
-	select ADK_aarch64
-	select ADK_qemu_aarch64
 	select ADK_TARGET_LITTLE_ENDIAN
 	select ADK_LINUX_64
 	select ADK_CPU_CORTEX_A57

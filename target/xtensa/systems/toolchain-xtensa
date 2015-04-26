@@ -1,7 +1,5 @@
 config ADK_TARGET_SYSTEM_TOOLCHAIN_XTENSA
 	bool "Toolchain only"
-	select ADK_xtensa
-	select ADK_toolchain_xtensa
 	select ADK_CPU_XTENSA
 	select ADK_TARGET_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ

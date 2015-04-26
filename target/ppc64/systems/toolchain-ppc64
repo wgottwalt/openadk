@@ -1,7 +1,5 @@
 config ADK_TARGET_SYSTEM_TOOLCHAIN_PPC64
 	bool "Toolchain only"
-	select ADK_ppc64
-	select ADK_toolchain_ppc64
 	select ADK_CPU_PPC64
 	select ADK_LINUX_64
 	select ADK_TAGET_TOOLCHAIN

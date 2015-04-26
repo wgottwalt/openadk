@@ -1,11 +1,9 @@
 config ADK_TARGET_SYSTEM_TOOLCHAIN_C6X
 	bool "Toolchain only"
-	select ADK_c6x
-	select ADK_toolchain_c6x
+	select ADK_TARGET_UCLINUX
 	select ADK_CPU_C6X
 	select ADK_TARGET_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ
-	select ADK_TARGET_UCLINUX
 	help
 	  C6X toolchain.
 

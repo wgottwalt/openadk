@@ -1,7 +1,5 @@
 config ADK_TARGET_SYSTEM_QEMU_MIPS64
 	bool "Qemu Emulator"
-	select ADK_mips64
-	select ADK_qemu_mips64
 	select ADK_CPU_MIPS64
 	select ADK_LINUX_64
 	select ADK_TARGET_QEMU
