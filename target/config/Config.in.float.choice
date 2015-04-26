@@ -14,4 +14,8 @@ config ADK_TARGET_HARD_FLOAT
 config ADK_TARGET_SOFT_FLOAT
 	bool "soft-float"
 
+config ADK_TARGET_SOFTFP_FLOAT
+	bool "softfp"
+	depends on ADK_TARGET_ARCH_ARM
+
 endchoice

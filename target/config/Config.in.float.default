@@ -5,3 +5,4 @@ config ADK_TARGET_FLOAT
 	string
 	default "hard" if ADK_TARGET_HARD_FLOAT
 	default "soft" if ADK_TARGET_SOFT_FLOAT
+	default "softfp" if ADK_TARGET_SOFTFP_FLOAT
