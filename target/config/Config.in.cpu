@@ -18,7 +18,7 @@ config ADK_CPU_ARC700
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
-config ADK_CPU_ARCv2EM
+config ADK_CPU_ARC_HS
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
@@ -320,7 +320,7 @@ config ADK_TARGET_GCC_CPU
 	default "440" if ADK_CPU_PPC_440
 	default "5208" if ADK_CPU_CF_5208
 	default "arc700" if ADK_CPU_ARC700
-	default "arcv2em" if ADK_CPU_ARCv2EM
+	default "archs" if ADK_CPU_ARC_HS
 	default "arm1176jzf-s" if ADK_CPU_ARM1176JZF_S
 	default "arm926ej-s" if ADK_CPU_ARM926EJ_S
 	default "armv8-a" if ADK_CPU_ARMV8

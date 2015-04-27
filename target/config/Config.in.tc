@@ -5,8 +5,19 @@ choice ADK_TARGET_CPU
 prompt "CPU type"
 depends on ADK_TARGET_TOOLCHAIN && \
 	( ADK_TARGET_ARCH_CRIS \
+	|| ADK_TARGET_ARCH_ARC \
 	|| ADK_TARGET_ARCH_ARM \
 	|| ADK_TARGET_ARCH_X86 )
+
+config ADK_TARGET_CPU_ARC_ARC700
+	bool "ARC700 (ARCv1)"
+	select ADK_CPU_ARC700
+	depends on ADK_TARGET_ARCH_ARC
+
+config ADK_TARGET_CPU_ARC_ARC_HS
+	bool "ARC HS (ARCv2)"
+	select ADK_CPU_ARC_HS
+	depends on ADK_TARGET_ARCH_ARC
 
 config ADK_TARGET_CPU_ARM_CORTEX_A9
         bool "cortex-a9"
