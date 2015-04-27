@@ -23,6 +23,7 @@ $(eval $(call HOST_template,HEIMDAL,heimdal,$(PKG_VERSION)-${PKG_RELEASE}))
 
 HOST_CONFIGURE_ARGS+=	--disable-pk-init \
 			--without-openldap \
+			--without-x \
 			--disable-kcm \
 			--disable-kx509 \
 			--disable-ndbm-db \
