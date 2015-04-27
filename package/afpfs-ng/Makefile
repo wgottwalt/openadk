@@ -10,7 +10,7 @@ PKG_HASH:=		688560de1cde57ab8d9e0ef7dc6436dbf0267fe8884f9014e50ff92b297b01a8
 PKG_DESCR:=		client for apple filing protocol
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		libgcrypt
-PKG_BUILDDEP:=		fuse libgcrypt
+PKG_BUILDDEP:=		fuse libgcrypt readline
 PKG_URL:=		https://sites.google.com/site/alexthepuffin/home
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=afpfs-ng/}
 PKG_LIBNAME:=		libafpclient

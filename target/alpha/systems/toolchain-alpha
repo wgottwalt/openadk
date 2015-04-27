@@ -1,6 +1,5 @@
 config ADK_TARGET_SYSTEM_TOOLCHAIN_ALPHA
 	bool "Toolchain only"
-	select ADK_LINUX_64
 	select ADK_CPU_ALPHA
 	select ADK_TARGET_TOOLCHAIN
 	select ADK_TARGET_PACKAGE_TXZ

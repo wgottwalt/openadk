@@ -16,6 +16,8 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBMPC,libmpc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+TARGET_LDFLAGS+=	-lm
+
 libmpc-install:
 	${INSTALL_DIR} ${IDIR_LIBMPC}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libmpc.so* ${IDIR_LIBMPC}/usr/lib

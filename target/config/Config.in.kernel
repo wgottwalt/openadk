@@ -74,4 +74,4 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "atmel-ngw100" if ADK_TARGET_SYSTEM_ATMEL_NGW100
 	default "apple-macmini" if ADK_TARGET_SYSTEM_APPLE_MACMINI
 	default "sun-voyager" if ADK_TARGET_SYSTEM_SUN_VOYAGER
-
+	default "banana-pro" if ADK_TARGET_SYSTEM_BANANA_PRO

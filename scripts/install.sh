@@ -142,7 +142,7 @@ tgt=$2
 src=$3
 
 case $target {
-(raspberry-pi|raspberry-pi2|solidrun-imx6|default) ;;
+(banana-pro|raspberry-pi|raspberry-pi2|solidrun-imx6|default) ;;
 (*)
 	print -u2 "Unknown target '$target', exiting"
 	exit 1 ;;
@@ -499,6 +499,9 @@ dd if="$T/firsttrack" of="$tgt" > /dev/null 2>&1
 fwdir=$(dirname "$src")
 
 case $target {
+(banana-pro)
+	dd if="$fwdir/u-boot-sunxi-with-spl.bin" of="$tgt" bs=1024 seek=8 > /dev/null 2>&1
+	;;
 (solidrun-imx6)
 	dd if="$fwdir/SPL" of="$tgt" bs=1024 seek=1 > /dev/null 2>&1
 	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=42 > /dev/null 2>&1
@@ -523,7 +526,7 @@ if (( datafssz )); then
 	(raspberry-pi|raspberry-pi2)
 		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab 
 	;;
-	(solidrun-imx6)
+	(banana-pro|solidrun-imx6)
 		echo "/dev/mmcblk0p2	/data	ext4	rw	0	0" >> "$R"/etc/fstab
 	;;
 	}
