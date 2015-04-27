@@ -34,7 +34,7 @@ PKG_FLAVOURS_KODI+=	WITH_AFP WITH_WEBSERVER WITH_RTMP WITH_BLURAY
 
 PKGFD_WITH_SMB:=	enable samba support
 PKGFB_WITH_SMB:=	samba
-PKGFS_WITH_SMB:=	samba-lib
+PKGFS_WITH_SMB:=	samba
 PKGFD_WITH_NFS:=	enable nfs support
 PKGFB_WITH_NFS:=	libnfs
 PKGFS_WITH_NFS:=	libnfs
