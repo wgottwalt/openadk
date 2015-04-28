@@ -1160,8 +1160,7 @@ int main() {
 							pkg_helper = NULL;
 						}
 
-						fprintf(cfg, "\tdepends on ADK_PACKAGE_GCC\n");
-						fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(pkg_libname));
+						fprintf(cfg, "\tdepends on ADK_PACKAGE_GCC && ADK_PACKAGE_%s\n", toupperstr(pkg_libname));
 						fprintf(cfg, "\tdefault n\n");
 						fclose(cfg);
 						free(pseudo_name);
