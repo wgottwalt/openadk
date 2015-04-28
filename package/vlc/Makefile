@@ -9,15 +9,22 @@ PKG_RELEASE:=		1
 PKG_HASH:=		543d9d7e378ec0fa1ee2e7f7f5acf8c456c7d0ecc32037171523197ef3cf1fcb
 PKG_DESCR:=		popular media player
 PKG_SECTION:=		mm/video
-PKG_BUILDDEP:=		ffmpeg xcb-util libtheora libgcrypt libmad alsa-lib
-PKG_DEPENDS:=		libpthread librt libffmpeg xcb-util libtheora libgcrypt alsa-lib
+PKG_BUILDDEP:=		ffmpeg xcb-util libgcrypt alsa-lib
+PKG_DEPENDS:=		libpthread librt libffmpeg xcb-util libgcrypt alsa-lib
 PKG_URL:=		http://www.videolan.org/vlc/
 PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/$(PKG_VERSION)/
 
-PKG_FLAVOURS_VLC:=	WITH_BLURAY WITH_OPUS WITH_SPEEX WITH_THEORA
+PKG_FLAVOURS_VLC:=	WITH_BLURAY WITH_MAD WITH_OGG WITH_OPUS WITH_SPEEX WITH_THEORA
+PKG_FLAVOURS_VLC+=	WITH_VPX
 PKGFD_WITH_BLURAY:=	enable bluray support
 PKGFB_WITH_BLURAY:=	libbluray
 PKGFS_WITH_BLURAY:=	libbluray
+PKGFD_WITH_MAD:=	enable mp3 support
+PKGFB_WITH_MAD:=	libmad
+PKGFS_WITH_MAD:=	libmad
+PKGFD_WITH_OGG:=	enable ogg support
+PKGFB_WITH_OGG:=	libogg
+PKGFS_WITH_OGG:=	libogg
 PKGFD_WITH_OPUS:=	enable opus support
 PKGFB_WITH_OPUS:=	opus
 PKGFS_WITH_OPUS:=	libopus
@@ -27,6 +34,9 @@ PKGFS_WITH_SPEEX:=	libspeex
 PKGFD_WITH_THEORA:=	enable theora support
 PKGFB_WITH_THEORA:=	libtheora
 PKGFS_WITH_THEORA:=	libtheora
+PKGFD_WITH_VPX:=	enable vpx support
+PKGFB_WITH_VPX:=	libvpx
+PKGFS_WITH_VPX:=	libvpx
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -44,8 +54,8 @@ CONFIGURE_ARGS+=	--disable-lua \
 			--disable-libxml2 \
 			--disable-xcb \
 			--without-kde-solid \
+			--enable-run-as-root \
 			--enable-libgcrypt \
-			--enable-mad \
 			--disable-optimizations \
 			--disable-static \
 			--disable-avcodec
@@ -58,6 +68,16 @@ ifneq ($(ADK_PACKAGE_VLC_WITH_BLURAY),)
 CONFIGURE_ARGS+=	--enable-libbluray
 else
 CONFIGURE_ARGS+=	--disable-libbluray
+endif
+ifneq ($(ADK_PACKAGE_VLC_WITH_MAD),)
+CONFIGURE_ARGS+=	--enable-mad
+else
+CONFIGURE_ARGS+=	--disable-mad
+endif
+ifneq ($(ADK_PACKAGE_VLC_WITH_OGG),)
+CONFIGURE_ARGS+=	--enable-ogg
+else
+CONFIGURE_ARGS+=	--disable-ogg
 endif
 ifneq ($(ADK_PACKAGE_VLC_WITH_OPUS),)
 CONFIGURE_ARGS+=	--enable-opus
@@ -73,6 +93,11 @@ ifneq ($(ADK_PACKAGE_VLC_WITH_THEORA),)
 CONFIGURE_ARGS+=	--enable-theora
 else
 CONFIGURE_ARGS+=	--disable-theora
+endif
+ifneq ($(ADK_PACKAGE_VLC_WITH_VPX),)
+CONFIGURE_ARGS+=	--enable-vpx
+else
+CONFIGURE_ARGS+=	--disable-vpx
 endif
 
 vlc-install:
