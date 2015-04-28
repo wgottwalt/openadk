@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		iperf
-PKG_VERSION:=		2.0.4
+PKG_VERSION:=		2.0.5
 PKG_RELEASE:=		1
-PKG_HASH:=		3b52f1c178d6a99c27114929d5469c009197d15379c967b329bafb956f397944
+PKG_HASH:=		636b4eff0431cea80667ea85a67ce4c68698760a9837e1e9d13096d20362265b
 PKG_DESCR:=		internet protocol bandwidth measuring tool
 PKG_SECTION:=		net/perf
 PKG_DEPENDS:=		libpthread
@@ -27,6 +27,7 @@ CONFIGURE_ENV+=		LIBS="-luClibc++ -lc -lm -lpthread"
 else
 CONFIGURE_ENV+=		LIBS="-lc -lm -lpthread"
 endif
+CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes
 
 iperf-install:
 	${INSTALL_DIR} ${IDIR_IPERF}/usr/bin
