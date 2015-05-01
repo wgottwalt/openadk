@@ -4,12 +4,12 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openswan
-PKG_VERSION:=		2.6.41
+PKG_VERSION:=		2.6.43
 PKG_RELEASE:=		1
-PKG_HASH:=		f9ebb395cb0f717dc43942662ab65161035a99dbf8e680c1d1511d4de130d0fb
+PKG_HASH:=		ac7ef1d78766801f23c458cc7c3b080ca6e20c5144a1979598c319bc3bc7c88b
 PKG_DESCR:=		ipsec software
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		ip libgmp libpthread
+PKG_DEPENDS:=		libgmp libpthread
 PKG_BUILDDEP:=		gmp
 PKG_URL:=		http://www.openswan.org/
 PKG_SITES:=		http://www.openswan.org/download/
@@ -18,7 +18,7 @@ PKG_NOPARALLEL:=	1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 # GLOB_BRACE usage
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng uclibc glibc
 
 include ${ADK_TOPDIR}/mk/package.mk
 
