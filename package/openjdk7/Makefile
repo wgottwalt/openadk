@@ -27,7 +27,7 @@ PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
 DISTFILES:=		icedtea-$(PKG_VERSION).tar.xz
 WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
-GCJ_VER:=		4.8.4
+GCJ_VER:=		4.9.2
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
