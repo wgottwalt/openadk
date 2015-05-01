@@ -114,9 +114,13 @@ fi
 rm test 2>/dev/null
 
 if ! which shasum >/dev/null 2>&1; then
-	echo You must install shasum to continue.
+  if ! which sha256sum >/dev/null 2>&1; then
+    if ! which cksum >/dev/null 2>&1; then
+	echo You must install shasum or sha256sum or cksum to continue.
 	echo
 	out=1
+    fi
+  fi
 fi
 
 if ! which gzip >/dev/null 2>&1; then
@@ -329,7 +333,7 @@ if ! which qemu-img >/dev/null 2>&1; then
 fi
 
 echo "config ADK_HOST_BUILD_TOOLS" > $topdir/target/config/Config.in.prereq
-printf "\t%s\n" "boolean" >> $topdir/target/config/Config.in.prereq
+printf "\t%s\n" "bool" >> $topdir/target/config/Config.in.prereq
 printf "\t%s\n" "default y" >> $topdir/target/config/Config.in.prereq
 # always required
 if [ $host_build_bc -eq 1 ];then printf "\t%s\n" "select ADK_HOST_BUILD_BC" >> $topdir/target/config/Config.in.prereq ;fi

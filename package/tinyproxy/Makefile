@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${ADK_TOPDIR}/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		tinyproxy
 PKG_VERSION:=		1.8.3
@@ -12,28 +12,26 @@ PKG_SECTION:=		net/proxy
 PKG_URL:=		https://www.banu.com/tinyproxy/
 PKG_SITES:=		https://www.banu.com/pub/tinyproxy/1.8/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
-include ${ADK_TOPDIR}/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,TINYPROXY,tinyproxy,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,TINYPROXY,tinyproxy,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-regexcheck
+CONFIGURE_ENV+=         ac_cv_func_malloc_0_nonnull=yes \
+			ac_cv_func_realloc_0_nonnull=yes
 
 tinyproxy-install:
-	${INSTALL_DIR} ${IDIR_TINYPROXY}/usr/sbin \
-		       ${IDIR_TINYPROXY}/etc/tinyproxy \
-		       ${IDIR_TINYPROXY}/usr/share/tinyproxy
-	${INSTALL_DATA} ./files/tinyproxy.conf \
-		${IDIR_TINYPROXY}/etc/tinyproxy
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/tinyproxy \
-		${IDIR_TINYPROXY}/usr/sbin/
-	${INSTALL_DATA} ${WRKINST}/usr/share/tinyproxy/debug.html \
-		${IDIR_TINYPROXY}/usr/share/tinyproxy/
-	${INSTALL_DATA} ${WRKINST}/usr/share/tinyproxy/default.html \
-		${IDIR_TINYPROXY}/usr/share/tinyproxy/
-	${INSTALL_DATA} ${WRKINST}/usr/share/tinyproxy/stats.html \
-		${IDIR_TINYPROXY}/usr/share/tinyproxy/
+	$(INSTALL_DIR) $(IDIR_TINYPROXY)/usr/sbin
+	$(INSTALL_DIR) $(IDIR_TINYPROXY)/etc/tinyproxy
+	$(INSTALL_DIR) $(IDIR_TINYPROXY)/usr/share/tinyproxy
+	$(INSTALL_DATA) ./files/tinyproxy.conf \
+		$(IDIR_TINYPROXY)/etc/tinyproxy
+	$(INSTALL_BIN) $(WRKINST)/usr/sbin/tinyproxy \
+		$(IDIR_TINYPROXY)/usr/sbin/
+	$(INSTALL_DATA) $(WRKINST)/usr/share/tinyproxy/{default,stats,debug}.html \
+		$(IDIR_TINYPROXY)/usr/share/tinyproxy/
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk

@@ -4,18 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		strongswan
-PKG_VERSION:=		5.1.3
+PKG_VERSION:=		5.3.0
 PKG_RELEASE:=		1
-PKG_HASH:=		88438e5fd07fa6dbcd69954101cb300fc9a357495580a1fd1924bd8c49c7add1
+PKG_HASH:=		66d934340cde95c4fbb399880baa8703e7b17762134f1a411a186aad97ea5148
 PKG_DESCR:=		ipsec software
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		ip libpthread
+PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://strongswan.org/index.htm
 PKG_SITES:=		http://download.strongswan.org/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_LIBC_DEPENDS:=	uclibc glibc
 
 PKG_CHOICES_STRONGSWAN:=WITH_GNUTLS WITH_OPENSSL WITH_GMP
 PKGCD_WITH_GMP:=	use gmp for crypto
@@ -68,17 +66,7 @@ strongswan-install:
 	$(CP) $(WRKINST)/usr/lib/ipsec/plugins/*.so \
 		$(IDIR_STRONGSWAN)/usr/lib/ipsec/plugins
 	$(CP) $(WRKINST)/etc/* $(IDIR_STRONGSWAN)/etc
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/charon \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/starter \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/_updown \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/_copyright \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/stroke \
-		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
-	$(INSTALL_BIN) $(WRKINST)/usr/libexec/ipsec/_updown_espmark \
+	$(CP) $(WRKINST)/usr/libexec/ipsec/* \
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/ipsec \
 		$(IDIR_STRONGSWAN)/usr/sbin

@@ -20,6 +20,8 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,RADDUMP,raddump,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes
+
 raddump-install:
 	${INSTALL_DIR} ${IDIR_RADDUMP}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/raddump ${IDIR_RADDUMP}/usr/bin
