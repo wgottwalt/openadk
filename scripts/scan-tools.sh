@@ -61,7 +61,6 @@ OpenBSD)
 	fi
 	;;
 Darwin*)
-	clang=1
 	;;
 *)
 	# unsupported
@@ -79,16 +78,12 @@ else
 	makecmd=$(which gmake 2>/dev/null )
 fi
 
-if [ $clang -ne 1 ];then
-HCFLAGS=-static-libgcc
-fi
-
 cat >Makefile <<'EOF'
 include ${ADK_TOPDIR}/prereq.mk
 all: run-test
 
 test: test.c
-	${HOST_CC} $(HCFLAGS) -o $@ $^ ${LDADD}
+	${HOST_CC} -o $@ $^ ${LDADD}
 
 run-test: test
 	./test
