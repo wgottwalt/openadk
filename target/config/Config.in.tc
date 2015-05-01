@@ -5,6 +5,7 @@ choice ADK_TARGET_CPU
 prompt "CPU type"
 depends on ADK_TARGET_TOOLCHAIN && \
 	( ADK_TARGET_ARCH_CRIS \
+	|| ADK_TARGET_ARCH_AARCH64 \
 	|| ADK_TARGET_ARCH_ARC \
 	|| ADK_TARGET_ARCH_ARM \
 	|| ADK_TARGET_ARCH_X86 )
@@ -19,6 +20,16 @@ config ADK_TARGET_CPU_ARC_ARC_HS
 	select ADK_CPU_ARC_HS
 	depends on ADK_TARGET_ARCH_ARC
 
+config ADK_TARGET_CPU_ARM_CORTEX_A53
+        bool "cortex-a53"
+        select ADK_CPU_CORTEX_A53
+	depends on ADK_TARGET_ARCH_AARCH64
+
+config ADK_TARGET_CPU_ARM_CORTEX_A57
+        bool "cortex-a57"
+        select ADK_CPU_CORTEX_A57
+	depends on ADK_TARGET_ARCH_AARCH64
+
 config ADK_TARGET_CPU_ARM_CORTEX_A9
         bool "cortex-a9"
         select ADK_CPU_CORTEX_A9
@@ -32,6 +43,21 @@ config ADK_TARGET_CPU_ARM_CORTEX_A8
 config ADK_TARGET_CPU_ARM_CORTEX_A7
         bool "cortex-a7"
         select ADK_CPU_CORTEX_A7
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_ARM_CORTEX_A5
+        bool "cortex-a5"
+        select ADK_CPU_CORTEX_A5
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_ARM_CORTEX_A15
+        bool "cortex-a15"
+        select ADK_CPU_CORTEX_A15
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_ARM_CORTEX_A17
+        bool "cortex-a17"
+        select ADK_CPU_CORTEX_A17
 	depends on ADK_TARGET_ARCH_ARM
 
 config ADK_TARGET_CPU_ARM_CORTEX_M4

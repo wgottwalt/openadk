@@ -116,6 +116,13 @@ config ADK_CPU_CORTEX_A15
 	select ADK_TARGET_CPU_WITH_FPU_VFPV4
 	select ADK_TARGET_CPU_WITH_NEON
 
+config ADK_CPU_CORTEX_A17
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU_VFPV4
+	select ADK_TARGET_CPU_WITH_NEON
+
 config ADK_CPU_CORTEX_A53
 	bool
 	select ADK_LINUX_64
@@ -341,6 +348,7 @@ config ADK_TARGET_GCC_CPU
 	default "cortex-a8" if ADK_CPU_CORTEX_A8
 	default "cortex-a9" if ADK_CPU_CORTEX_A9
 	default "cortex-a15" if ADK_CPU_CORTEX_A15
+	default "cortex-a17" if ADK_CPU_CORTEX_A17
 	default "cortex-a53" if ADK_CPU_CORTEX_A53
 	default "cortex-a57" if ADK_CPU_CORTEX_A57
 	default "cortex-m3" if ADK_CPU_CORTEX_M3
@@ -378,6 +386,18 @@ config ADK_TARGET_CPU_TYPE
 	string
 	default "arc700" if ADK_TARGET_ARCH_ARC && ADK_CPU_ARC700
 	default "archs" if ADK_TARGET_ARCH_ARC && ADK_CPU_ARC_HS
+	default "cortex_a5" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A5
+	default "cortex_a7" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A7
+	default "cortex_a8" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A8
+	default "cortex_a9" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A9
+	default "cortex_a15" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A15
+	default "cortex_a17" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A17
+	default "cortex_m3" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_M3
+	default "cortex_m4" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_M4
+	default "arm1176jzf_s" if ADK_TARGET_ARCH_ARM && ADK_CPU_ARM1176JZF_S
+	default "arm926ej_s" if ADK_TARGET_ARCH_ARM && ADK_CPU_ARM926EJ_S
+	default "cortex_a53" if ADK_TARGET_ARCH_AARCH64 && ADK_CPU_CORTEX_A53
+	default "cortex_a57" if ADK_TARGET_ARCH_AARCH64 && ADK_CPU_CORTEX_A57
 
 config ADK_TARGET_CPU_ARCH
 	string
