@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		samba
 PKG_VERSION:=		4.2.1
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		37eaa239c116dc2c22c29c5a2931eb178ed22e48b594687247446703119b4ac3
 PKG_DESCR:=		file and print server
 PKG_SECTION:=		net/fs
@@ -45,7 +45,7 @@ CONFIGURE_ARGS+=	--enable-fhs \
 			--disable-cups \
 			--disable-avahi \
 			--disable-rpath \
-			--bundled-libraries='!asn1_compile,!compile_et' \
+			--bundled-libraries='com_err,!asn1_compile,!compile_et' \
 			--disable-rpath-install
 CONFIGURE_ENV+=		PYTHON_CONFIG="$(STAGING_TARGET_DIR)/usr/bin/python-config" \
 			python_LDFLAGS="" \
