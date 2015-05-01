@@ -5,7 +5,6 @@ shopt -s extglob
 topdir=$(pwd)
 opath=$PATH
 out=0
-clang=0
 
 if [[ $NO_ERROR != @(0|1) ]]; then
 	echo Please do not invoke this script directly!
@@ -83,7 +82,7 @@ include ${ADK_TOPDIR}/prereq.mk
 all: run-test
 
 test: test.c
-	${HOST_CC} -o $@ $^ ${LDADD}
+	${HOST_CC} ${HOST_CFLAGS} -o $@ $^ ${LDADD}
 
 run-test: test
 	./test
@@ -97,7 +96,13 @@ cat >test.c <<-'EOF'
 		return (0);
 	}
 EOF
-X=$($makecmd ADK_TOPDIR=$topdir 2>&1)
+X=$($makecmd ADK_TOPDIR=$topdir LDADD=-lgcc 2>&1)
+if [[ $X != *@(Native compiler works)* ]]; then
+	echo Cannot compile with shared libgcc use static one.
+	HOST_CFLAGS=-static-libgcc
+fi
+
+X=$($makecmd ADK_TOPDIR=$topdir HOST_CFLAGS=${HOST_CFLAGS} 2>&1)
 if [[ $X != *@(Native compiler works)* ]]; then
 	echo "$X" | sed 's/^/| /'
 	echo Cannot compile a simple test programme.
@@ -149,7 +154,7 @@ cat >test.c <<-'EOF'
 	}
 EOF
 X=$(echo 'Yay! Native compiler works.' | gzip | \
-    $makecmd ADK_TOPDIR=$topdir LDADD=-lz 2>&1)
+    $makecmd ADK_TOPDIR=$topdir LDADD=-lz HOST_CFLAGS=${HOST_CFLAGS} 2>&1)
 if [[ $X != *@(Native compiler works)* ]]; then
 	echo "$X" | sed 's/^/| /'
 	echo Cannot compile a libz test programm.
