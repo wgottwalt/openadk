@@ -100,6 +100,7 @@ X=$($makecmd ADK_TOPDIR=$topdir LDADD=-lgcc 2>&1)
 if [[ $X != *@(Native compiler works)* ]]; then
 	echo Cannot compile with shared libgcc use static one.
 	HOST_CFLAGS=-static-libgcc
+	echo "HOST_CFLAGS:=-static-libgcc" >> $topdir/prereq.mk
 fi
 
 X=$($makecmd ADK_TOPDIR=$topdir HOST_CFLAGS=${HOST_CFLAGS} 2>&1)
