@@ -16,6 +16,9 @@ endif
 ifneq ($(ADK_TARGET_ABI),)
 ADK_SUFFIX:=		$(ADK_SUFFIX)_$(ADK_TARGET_ABI)
 endif
+ifneq ($(ADK_TARGET_CPU_TYPE),)
+ADK_SUFFIX:=		$(ADK_SUFFIX)_$(ADK_TARGET_CPU_TYPE)
+endif
 ifeq ($(ADK_TARGET_WITH_MMU),)
 ADK_SUFFIX:=		$(ADK_SUFFIX)_nommu
 endif

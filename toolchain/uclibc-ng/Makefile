@@ -163,12 +163,12 @@ endif
 # arc
 ifeq ($(ADK_TARGET_ARCH_ARC),y)
 ifeq ($(ADK_TARGET_CPU_ARC_ARC700),y)
-	$(SED) 's/.*\(CONFIG_ARC_CPU_700\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_ARC_CPU_HS\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_ARC_CPU_700\).*/\1=y/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_CPU_ARC_ARC_HS),y)
-	$(SED) 's/.*\(CONFIG_ARC_CPU_HS\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_ARC_CPU_700\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_ARC_CPU_HS\).*/\1=y/' ${WRKBUILD}/.config
 endif
 endif
 
