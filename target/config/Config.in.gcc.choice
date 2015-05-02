@@ -17,6 +17,14 @@ config ADK_TOOLCHAIN_GCC_GIT
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_CRIS
 
+config ADK_TOOLCHAIN_GCC_5_1_0
+	bool "5.1.0"
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_CRIS
+	depends on !ADK_TARGET_ARCH_C6X
+
 config ADK_TOOLCHAIN_GCC_4_9_2
 	bool "4.9.2"
 	depends on !ADK_TARGET_ARCH_BFIN
