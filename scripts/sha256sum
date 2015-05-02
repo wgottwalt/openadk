@@ -10,7 +10,5 @@ elif [ -x /bin/cksum ] && [ $(echo | cksum -a sha256) = 01ba4719c80b6fe911b091a7
 	[[ $x = *FAILED* ]] && exit 1
 	exit 0
 else
-	tmp=$(mktemp -t yyy)
-	cat - > $tmp
-	shasum -a 256 "$@" $tmp
+	shasum -a 256 "$@"
 fi

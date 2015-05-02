@@ -31,7 +31,7 @@ ifneq ($(ADK_DISABLE_CHECKSUM),y)
 	@if [ ! -e $(firstword ${FULLDISTFILES}).nohash ]; then \
 	OK=n; \
 	allsums="$(strip ${PKG_HASH})"; \
-	(sha256sum ${FULLDISTFILES}; echo exit) | while read sum name; do \
+	(PATH='$(HOST_PATH)' sha256sum ${FULLDISTFILES}; echo exit) | while read sum name; do \
 		if [[ $$sum = exit ]]; then \
 			[[ $$OK = n ]] && echo >&2 "==> No distfile found!" || :; \
 			[[ $$OK = 1 ]] || exit 1; \
