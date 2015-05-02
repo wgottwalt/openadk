@@ -1,0 +1,54 @@
+From d017ad0179e407a81ed2423f7620d46584470ad4 Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbrodkorb@conet.de>
+Date: Thu, 26 Mar 2015 13:00:07 +0100
+Subject: [PATCH] i2s: allow to enable ALSA MMAP
+
+For some ALSA plugins like dmix MMAP is required.
+Allow to enable it via a module parameter called use_mmap.
+
+Signed-off-by: Waldemar Brodkorb <wbrodkorb@conet.de>
+---
+ sound/soc/bcm/bcm2708-i2s.c | 13 ++++++++++++-
+ 1 file changed, 12 insertions(+), 1 deletion(-)
+
+diff --git a/sound/soc/bcm/bcm2708-i2s.c b/sound/soc/bcm/bcm2708-i2s.c
+index 7570e50..3d3692f 100644
+--- a/sound/soc/bcm/bcm2708-i2s.c
++++ b/sound/soc/bcm/bcm2708-i2s.c
+@@ -171,6 +171,11 @@ static const unsigned int bcm2708_clk_freq[BCM2708_CLK_SRC_HDMI+1] = {
+ /* I2S pin configuration */
+ static int bcm2708_i2s_gpio=BCM2708_I2S_GPIO_AUTO;
+ 
++static bool use_mmap = 0;
++module_param(use_mmap, bool, S_IRUGO);
++MODULE_PARM_DESC(use_mmap, "Use MMAP");
++
++
+ /* General device struct */
+ struct bcm2708_i2s_dev {
+ 	struct device				*dev;
+@@ -874,7 +879,7 @@ static const struct snd_soc_component_driver bcm2708_i2s_component = {
+ 	.name		= "bcm2708-i2s-comp",
+ };
+ 
+-static const struct snd_pcm_hardware bcm2708_pcm_hardware = {
++static struct snd_pcm_hardware bcm2708_pcm_hardware = {
+ 	.info			= SNDRV_PCM_INFO_INTERLEAVED |
+ 				  SNDRV_PCM_INFO_JOINT_DUPLEX,
+ 	.formats		= SNDRV_PCM_FMTBIT_S16_LE |
+@@ -966,6 +971,12 @@ static int bcm2708_i2s_probe(struct platform_device *pdev)
+ 		return ret;
+ 	}
+ 
++	if (use_mmap) {
++		printk("Enable ALSA MMAP support for I2S\n");
++		bcm2708_pcm_hardware.info |= SNDRV_PCM_INFO_MMAP;
++		bcm2708_pcm_hardware.info |= SNDRV_PCM_INFO_MMAP_VALID;
++	}
++
+ 	ret = snd_dmaengine_pcm_register(&pdev->dev,
+ 				&bcm2708_dmaengine_pcm_config,
+ 				SND_DMAENGINE_PCM_FLAG_COMPAT);
+-- 
+1.9.1
+
