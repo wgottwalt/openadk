@@ -1,9 +1,21 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-KERNEL_BASE:=$(word 1,$(subst ., ,$(ADK_KERNEL_VERSION)))
-KERNEL_MAJ:=$(word 2,$(subst ., ,$(ADK_KERNEL_VERSION)))
-KERNEL_MIN:=$(word 3,$(subst ., ,$(ADK_KERNEL_VERSION)))
+ifeq ($(ADK_KERNEL_VERSION_3_19),y)
+include $(ADK_TOPDIR)/mk/modules-3.19.mk
+endif
+
+ifeq ($(ADK_KERNEL_VERSION_3_18),y)
+include $(ADK_TOPDIR)/mk/modules-3.18.mk
+endif
+
+ifeq ($(ADK_KERNEL_VERSION_3_14),y)
+include $(ADK_TOPDIR)/mk/modules-3.14.mk
+endif
+
+ifeq ($(ADK_KERNEL_VERSION_3_12),y)
+include $(ADK_TOPDIR)/mk/modules-3.12.mk
+endif
 
 #
 # Virtualization
@@ -1217,27 +1229,6 @@ $(eval $(call KMOD_template,INPUT_EVDEV,input-evdev,\
 #
 # USB
 #
-
-USBMODULES:=
-USBMODULES+=drivers/usb/usb-common
-USBMODULES+=drivers/usb/core/usbcore
-USBUDC:=gadget
-
-ifeq ($(KERNEL_BASE),3)
-ifeq ($(KERNEL_MAJ),18)
-USBMODULES:=
-USBMODULES+=drivers/usb/common/usb-common
-USBMODULES+=drivers/usb/core/usbcore
-USBUDC:=gadget/udc
-endif
-ifeq ($(KERNEL_MAJ),19)
-USBMODULES:=
-USBMODULES+=drivers/usb/common/usb-common
-USBMODULES+=drivers/usb/core/usbcore
-USBUDC:=gadget/udc
-endif
-endif
-
 $(eval $(call KMOD_template,USB,usb,\
 	$(foreach mod, $(USBMODULES),$(MODULES_DIR)/kernel/$(mod)) \
 ,50))
