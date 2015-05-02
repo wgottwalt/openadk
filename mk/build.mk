@@ -561,13 +561,13 @@ buildall:
 	$(GMAKE) ADK_VERBOSE=1 all 2>&1 | tee firmware/buildall.log
 
 $(ADK_TOPDIR)/adk/tools/pkgmaker: $(ADK_TOPDIR)/adk/tools/pkgmaker.c $(ADK_TOPDIR)/adk/tools/sortfile.c $(ADK_TOPDIR)/adk/tools/strmap.c
-	@$(HOST_CC) -O0 -g0 -o $@ adk/tools/pkgmaker.c adk/tools/sortfile.c adk/tools/strmap.c
+	@$(HOST_CC) $(HOST_CFLAGS) -o $@ adk/tools/pkgmaker.c adk/tools/sortfile.c adk/tools/strmap.c
 
 $(ADK_TOPDIR)/adk/tools/pkgrebuild: $(ADK_TOPDIR)/adk/tools/pkgrebuild.c $(ADK_TOPDIR)/adk/tools/strmap.c
-	@$(HOST_CC) -O0 -g0 -o $@ adk/tools/pkgrebuild.c adk/tools/strmap.c
+	@$(HOST_CC) $(HOST_CFLAGS) -o $@ adk/tools/pkgrebuild.c adk/tools/strmap.c
 
 $(ADK_TOPDIR)/adk/tools/depmaker: $(ADK_TOPDIR)/adk/tools/depmaker.c
-	@$(HOST_CC) -O0 -g0 -o $@ $(ADK_TOPDIR)/adk/tools/depmaker.c
+	@$(HOST_CC) $(HOST_CFLAGS) -o $@ $(ADK_TOPDIR)/adk/tools/depmaker.c
 
 menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(ADK_TOPDIR)/adk/tools/pkgmaker $(ADK_TOPDIR)/adk/tools/pkgrebuild $(wildcard target/appliances/*)
 	@echo "Generating menu structure ..."
