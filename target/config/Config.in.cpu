@@ -384,6 +384,7 @@ config ADK_TARGET_CPU_FLAGS
 
 config ADK_TARGET_CPU_TYPE
 	string
+	depends on ADK_TARGET_TOOLCHAIN
 	default "arc700" if ADK_TARGET_ARCH_ARC && ADK_CPU_ARC700
 	default "archs" if ADK_TARGET_ARCH_ARC && ADK_CPU_ARC_HS
 	default "cortex_a5" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A5
