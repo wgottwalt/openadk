@@ -61,6 +61,34 @@ config ADK_CPU_BFIN
 	bool
 	select ADK_TARGET_WITH_LT
 
+config ADK_CPU_BF512
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_BF514
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_BF516
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_BF518
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_BF522
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_BF523
+	bool
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_BF524
+	bool
+	select ADK_TARGET_WITH_LT
+
 config ADK_CPU_C6X
 	bool
 	select ADK_TARGET_WITH_LT
@@ -378,6 +406,13 @@ config ADK_TARGET_GCC_ARCH
 
 config ADK_TARGET_CPU_FLAGS
 	string
+	default "-mcpu=bf512" if ADK_CPU_BF512
+	default "-mcpu=bf514" if ADK_CPU_BF514
+	default "-mcpu=bf516" if ADK_CPU_BF516
+	default "-mcpu=bf518" if ADK_CPU_BF518
+	default "-mcpu=bf522" if ADK_CPU_BF522
+	default "-mcpu=bf523" if ADK_CPU_BF523
+	default "-mcpu=bf524" if ADK_CPU_BF524
 	default "-mcpu=v10" if ADK_CPU_CRIS_V10
 	default "-mcpu=v32" if ADK_CPU_CRIS_V32
 	default "-mcpu=v7.10.d" if ADK_CPU_MICROBLAZE
@@ -386,6 +421,13 @@ config ADK_TARGET_CPU_TYPE
 	string
 	default "arc700" if ADK_TARGET_ARCH_ARC && ADK_CPU_ARC700
 	default "archs" if ADK_TARGET_ARCH_ARC && ADK_CPU_ARC_HS
+	default "bf512" if ADK_TARGET_ARCH_BFIN && ADK_CPU_BF512
+	default "bf514" if ADK_TARGET_ARCH_BFIN && ADK_CPU_BF514
+	default "bf516" if ADK_TARGET_ARCH_BFIN && ADK_CPU_BF516
+	default "bf518" if ADK_TARGET_ARCH_BFIN && ADK_CPU_BF518
+	default "bf522" if ADK_TARGET_ARCH_BFIN && ADK_CPU_BF522
+	default "bf523" if ADK_TARGET_ARCH_BFIN && ADK_CPU_BF523
+	default "bf524" if ADK_TARGET_ARCH_BFIN && ADK_CPU_BF524
 	default "cortex_a5" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A5
 	default "cortex_a7" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A7
 	default "cortex_a8" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A8
@@ -408,7 +450,7 @@ config ADK_TARGET_CPU_ARCH
 	default "arc" if ADK_TARGET_ARCH_ARC && ADK_TARGET_LITTLE_ENDIAN
 	default "arceb" if ADK_TARGET_ARCH_ARC && ADK_TARGET_BIG_ENDIAN
 	default "avr32" if ADK_CPU_AVR32
-	default "bfin" if ADK_CPU_BFIN
+	default "bfin" if ADK_TARGET_ARCH_BFIN
 	default "c6x" if ADK_CPU_C6X
 	default "cris" if ADK_CPU_CRIS_V10
 	default "crisv32" if ADK_CPU_CRIS_V32

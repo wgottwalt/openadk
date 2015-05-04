@@ -8,6 +8,7 @@ depends on ADK_TARGET_TOOLCHAIN && \
 	|| ADK_TARGET_ARCH_AARCH64 \
 	|| ADK_TARGET_ARCH_ARC \
 	|| ADK_TARGET_ARCH_ARM \
+	|| ADK_TARGET_ARCH_BFIN \
 	|| ADK_TARGET_ARCH_X86 )
 
 config ADK_TARGET_CPU_ARC_ARC700
@@ -89,6 +90,41 @@ config ADK_TARGET_CPU_ARM_XSCALE
         select ADK_CPU_XSCALE
 	depends on ADK_TARGET_ARCH_ARM
 
+config ADK_TARGET_CPU_BFIN_BF512
+        bool "bf512"
+        select ADK_CPU_BF512
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF514
+        bool "bf514"
+        select ADK_CPU_BF514
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF516
+        bool "bf516"
+        select ADK_CPU_BF516
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF518
+        bool "bf518"
+        select ADK_CPU_BF518
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF522
+        bool "bf522"
+        select ADK_CPU_BF522
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF523
+        bool "bf523"
+        select ADK_CPU_BF523
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF524
+        bool "bf524"
+        select ADK_CPU_BF524
+	depends on ADK_TARGET_ARCH_BFIN
+
 config ADK_TARGET_CPU_CRIS_V10
 	bool "cris v10"
         select ADK_CPU_CRIS_V10
@@ -123,5 +159,16 @@ config ADK_TARGET_CPU_X86_ATOM
 	bool "atom"
 	select ADK_CPU_ATOM
 	depends on ADK_TARGET_ARCH_X86
+
+endchoice
+
+choice
+prompt "Toolchain options"
+depends on ADK_TARGET_TOOLCHAIN
+config ADK_TOOLCHAIN_ONLY
+	bool "Only build toolchain and selected packages"
+
+config ADK_TOOLCHAIN_ARCHIVE
+	bool "Build a complete system usable f.e. via chroot"
 
 endchoice

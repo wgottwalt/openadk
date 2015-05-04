@@ -41,15 +41,4 @@ config ADK_TARGET_KERNEL_CUSTOMISING
 	depends on !ADK_TARGET_FIXED_KERNEL
 	default y
 
-choice
-prompt "Toolchain options"
-depends on ADK_TARGET_TOOLCHAIN
-config ADK_TOOLCHAIN_ONLY
-	bool "Only build toolchain and selected packages"
-
-config ADK_TOOLCHAIN_ARCHIVE
-	bool "Build a complete system usable f.e. via chroot"
-
-endchoice
-
 source "target/config/Config.in.tools"
