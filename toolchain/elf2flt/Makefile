@@ -21,7 +21,7 @@ endif
 
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
-	(cd $(WRKBUILD); ./configure --prefix=$(STAGING_HOST_DIR)/usr \
+	(cd $(WRKBUILD); CPPFLAGS="-idirafter ${ADK_TOPDIR}/adk/include" ./configure --prefix=$(STAGING_HOST_DIR)/usr \
 			--target=$(GNU_TARGET_NAME) \
 			--with-bfd-include-dir=$(TOOLCHAIN_BUILD_DIR)/w-binutils-${BINUTILS_VERSION}-1/binutils-${BINUTILS_VERSION}/bfd \
 			--with-binutils-include-dir=$(TOOLCHAIN_BUILD_DIR)/w-binutils-${BINUTILS_VERSION}-1/binutils-${BINUTILS_VERSION}/include \
