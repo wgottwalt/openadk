@@ -434,7 +434,7 @@ endif
 	fi
 	@if [ ! -z "$(ADK_TARGET_FLOAT)" ];then \
 		grep "^config" target/config/Config.in.float.choice \
-			|grep -i "$(ADK_TARGET_FLOAT)$$" \
+			|grep -i "$(ADK_TARGET_FLOAT)_" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
