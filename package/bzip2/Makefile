@@ -11,6 +11,7 @@ PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
 PKG_BUILDDEP:=		bzip2-host
 PKG_DEPENDS:=		libbz2
+HOST_BUILDDEP:=		patch-host
 PKG_URL:=		http://www.bzip.org/
 PKG_SITES:=		http://www.bzip.org/${PKG_VERSION}/
 PKG_LIBNAME:=		libbz2
