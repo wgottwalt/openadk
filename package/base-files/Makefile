@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		12
+PKG_RELEASE:=		13
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -172,6 +172,13 @@ ifneq (${ADK_SIMPLE_NETWORK_CONFIG_PROXY},)
 	printf "https_proxy=${ADK_SIMPLE_NETWORK_CONFIG_PROXY}\n" >> ${IDIR_BASE_FILES}/etc/profile
 	printf "ftp_proxy=${ADK_SIMPLE_NETWORK_CONFIG_PROXY}\n" >> ${IDIR_BASE_FILES}/etc/profile
 endif
+endif
+
+ifeq ($(ADK_RUNTIME_ADDUSER),y)
+	mkdir -p ${IDIR_BASE_FILES}/$(ADK_RUNTIME_USER_HOME)
+	printf "$(ADK_RUNTIME_USER_NAME):x:100:100:$(ADK_RUNTIME_USER_NAME):$(ADK_RUNTIME_USER_HOME):$(ADK_RUNTIME_USER_SHELL)" >> ${IDIR_BASE_FILES}/etc/passwd
+	printf "$(ADK_RUNTIME_USER_NAME):$(ADK_RUNTIME_USER_PASSWORD):16514:0:::::" >> ${IDIR_BASE_FILES}/etc/shadow
+	printf "$(ADK_RUNTIME_USER_NAME):x:100:" >> ${IDIR_BASE_FILES}/etc/group
 endif
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

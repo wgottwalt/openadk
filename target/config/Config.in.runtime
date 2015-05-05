@@ -20,8 +20,43 @@ config ADK_RUNTIME_PASSWORD
 	default "$1$bJoW4DmS$7fUVat.9iFSAePzA4j4Jm."
 	help
 	  Predefine the root password enabled in the built image.
-	  Use ./host_x86_64-linux-gnu/usr/bin/mkcrypt to generate the hash.
-	  Default password is linux123.
+	  Use ./host_*/usr/bin/mkcrypt to generate the hash.
+	  Default password is linux123
+
+config ADK_RUNTIME_ADDUSER
+	bool "add an user"
+	default n
+	help
+	  Enable this option to add an unprivileged user.
+	  Fixed UID/GID 100 is used. A group with the same name is added.
+
+config ADK_RUNTIME_USER_NAME
+	string "user name"
+	default "adk"
+	depends on ADK_RUNTIME_ADDUSER
+
+config ADK_RUNTIME_USER_PASSWORD
+	string "user password"
+	default "$1$bJoW4DmS$7fUVat.9iFSAePzA4j4Jm."
+	depends on ADK_RUNTIME_ADDUSER
+	help
+	  Predefine the user password enabled in the built image.
+	  Use ./host_*/usr/bin/mkcrypt to generate the hash.
+	  Default password is linux123
+
+config ADK_RUNTIME_USER_HOME
+	string "user home directory"
+	default "/home/adk"
+	depends on ADK_RUNTIME_ADDUSER
+	help
+	  Set the home directory to use.
+
+config ADK_RUNTIME_USER_SHELL
+	string "user shell"
+	default "/bin/sh"
+	depends on ADK_RUNTIME_ADDUSER
+	help
+	  Set the shell to use.
 
 config ADK_RUNTIME_START_SERVICES
 	bool "start services by default"
