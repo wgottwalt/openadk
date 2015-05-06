@@ -63,7 +63,8 @@ image-prepare-post:
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
 	test -z $(GIT) || \
 	     $(GIT) log -1|head -1|sed -e 's#commit ##' \
-		> $(TARGET_DIR)/etc/.adkversion
+		> $(TARGET_DIR)/etc/.adkgithash
+	echo $(ADK_APPLIANCE_VERSION) > $(TARGET_DIR)/etc/.adkversion
 	echo $(ADK_TARGET_SYSTEM) > $(TARGET_DIR)/etc/.adktarget
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${ADK_TOPDIR}/.config > $(TARGET_DIR)/etc/adkconfig.gz
