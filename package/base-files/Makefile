@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		13
+PKG_RELEASE:=		14
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -104,7 +104,7 @@ ifeq ($(ADK_TARGET_WITH_ROOT_RW),y)
 else
 	echo 'export IPKGTMPDIR=/tmp' >> $(IDIR_BASE_FILES)/etc/profile
 endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
 	echo 'export LD_LIBRARY_PATH=/opt/vc/lib' >> $(IDIR_BASE_FILES)/etc/profile
 endif
 
