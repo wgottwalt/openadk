@@ -24,15 +24,15 @@ $(eval $(call PKG_template,LIBGCRYPT,libgcrypt,$(PKG_VERSION)-$(PKG_RELEASE),$(P
 CONFIGURE_ARGS+=	--disable-asm \
 			--with-gpg-error-prefix="$(STAGING_TARGET_DIR)/usr"
 
+libgcrypt-install:
+	$(INSTALL_DIR) $(IDIR_LIBGCRYPT)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libgcrypt.so* \
+		$(IDIR_LIBGCRYPT)/usr/lib
+
 post-install:
 	# provides own automake macros
 	$(INSTALL_DIR) $(STAGING_HOST_DIR)/usr/share/aclocal
 	$(CP) $(WRKINST)/usr/share/aclocal/libgcrypt.m4 \
 		$(STAGING_HOST_DIR)/usr/share/aclocal
-
-libgcrypt-install:
-	$(INSTALL_DIR) $(IDIR_LIBGCRYPT)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libgcrypt.so* \
-		$(IDIR_LIBGCRYPT)/usr/lib
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

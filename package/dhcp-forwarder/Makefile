@@ -17,9 +17,10 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,DHCP_FORWARDER,dhcp-forwarder,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--disable-dietlibc
+CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes
 XAKE_FLAGS+=		cfg_filename="/etc/dhcp-fwd.conf"
 
-post-install:
+dhcp-forwarder-install:
 	${INSTALL_DIR} ${IDIR_DHCP_FORWARDER}/usr/sbin \
 		${IDIR_DHCP_FORWARDER}/etc
 	${INSTALL_DATA} ${WRKBUILD}/contrib/dhcp-fwd.conf \

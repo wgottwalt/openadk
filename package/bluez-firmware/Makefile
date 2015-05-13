@@ -21,7 +21,7 @@ $(eval $(call PKG_template,BLUEZ_FIRMWARE,bluez-firmware,${PKG_VERSION}-${PKG_RE
 
 CONFIGURE_ARGS+=	--libdir=/lib
 
-post-install:
+bluez-firmware-install:
 	${INSTALL_DIR} ${IDIR_BLUEZ_FIRMWARE}/lib/firmware
 	${CP} ${WRKINST}/lib/firmware/BCM* \
 		${IDIR_BLUEZ_FIRMWARE}/lib/firmware

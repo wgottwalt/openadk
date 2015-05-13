@@ -24,7 +24,7 @@ $(eval $(call PKG_template,CA_CERTIFICATES,ca-certificates,${PKG_VERSION}-${PKG_
 
 CONFIG_STYLE:=		manual
 
-post-install:
+ca-certificates-install:
 ifeq (${ADK_PACKAGE_CA_CERTIFICATES_SMALL},y)
 	${INSTALL_DIR} ${IDIR_CA_CERTIFICATES}/etc/ssl
 	${INSTALL_DATA} ./extra/cert.pem ${IDIR_CA_CERTIFICATES}/etc/ssl/

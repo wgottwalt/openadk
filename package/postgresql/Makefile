@@ -36,4 +36,9 @@ libpq-install:
 	$(INSTALL_DIR) $(IDIR_LIBPQ)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libpq.so* $(IDIR_LIBPQ)/usr/lib
 
+post-install:
+	PATH='$(HOST_PATH)' sed -e "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" \
+		./files/pg_config > $(STAGING_HOST_DIR)/usr/bin/pg_config
+	-rm $(STAGING_TARGET_DIR)/usr/bin/pg_config
+
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

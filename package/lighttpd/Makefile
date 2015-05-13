@@ -146,7 +146,7 @@ else
 CONFIGURE_ARGS+=	--without-openssl
 endif
 
-post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
+lighttpd-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} $(IDIR_LIGHTTPD)/etc/lighttpd/conf.d
 	${INSTALL_DATA} ./files/lighttpd.conf $(IDIR_LIGHTTPD)/etc/lighttpd
 	${INSTALL_DATA} ./files/modules.conf $(IDIR_LIGHTTPD)/etc/lighttpd
