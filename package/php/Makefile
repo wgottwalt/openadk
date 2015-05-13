@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.6.7
+PKG_VERSION:=		5.6.8
 PKG_RELEASE:=		1
-PKG_HASH:=		a85522dd2e6f80ee5637e537447ee54896c77a8fabe49d2310830d0e20952787
+PKG_HASH:=		4c417387b88e100ca306adeda8051eb9fad93dae8da983f962dabf91a14b2b7b
 PKG_DESCR:=		php language interpreter
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libpthread librt
@@ -133,7 +133,6 @@ PKG_CONFIGURE_OPTS+=	--with-gd=shared,"$(STAGING_TARGET_DIR)/usr" \
 			--with-png-dir="$(STAGING_TARGET_DIR)/usr" \
 			--with-jpeg-dir="$(STAGING_TARGET_DIR)/usr" \
 			--without-freetype-dir \
-			--without-ttf \
 			--without-t1lib	\
 			--enable-gd-native-ttf \
 			--disable-gd-jis-conv
