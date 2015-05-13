@@ -62,15 +62,14 @@ CONFIGURE_ARGS+=	--enable-elf-shlibs
 endif
 
 CONFIGURE_ARGS+=	--disable-rpath \
-			--enable-libuuid \
 			--disable-uuidd \
-			--enable-libblkid \
 			--disable-testio-debug \
+			--disable-defrag \
 			--disable-debugfs \
 			--enable-verbose-makecmds \
-			--disable-defrag
+			--enable-libblkid \
+			--enable-libuuid
 TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_TARGET_DIR)/usr/include
-#TARGET_LDFLAGS+=	-L${WRKSRC}/lib -L${WRKSRC}/lib/ext2fs
 MAKE_FLAGS+=		BUILD_CC="$(HOST_CC)" \
 			BUILD_CFLAGS="$(HOST_CFLAGS) $(HOST_CPPFLAGS) -I$(WRKSRC)/lib -I." \
 			BUILD_LDFLAGS="$(HOST_LDFLAGS)"
