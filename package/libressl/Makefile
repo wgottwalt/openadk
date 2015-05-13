@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libressl
-PKG_VERSION:=		2.1.3
+PKG_VERSION:=		2.1.6
 PKG_RELEASE:=		1
-PKG_HASH:=		eb2f370971408fb10af6453e556465c8eee728ac333bf1eb47ec1a5112304f7c
-PKG_DESCR:=		ssl library
+PKG_HASH:=		4f826dd97b3b8001707073bde8401493f9cd4668465b481c042d28e3973653a8
+PKG_DESCR:=		ssl/tls library
 PKG_SECTION:=		libs/crypto
 PKG_URL:=		http://www.libressl.org
 PKG_SITES:=		http://ftp.openbsd.org/pub/OpenBSD/LibreSSL/
@@ -29,7 +29,7 @@ endif
 
 libressl-install:
 	$(INSTALL_DIR) $(IDIR_LIBRESSL)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/lib{crypto,ssl}.so* \
+	$(CP) $(WRKINST)/usr/lib/lib{crypto,ssl,tls}.so* \
 		$(IDIR_LIBRESSL)/usr/lib
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
