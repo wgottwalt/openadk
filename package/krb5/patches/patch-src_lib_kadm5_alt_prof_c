@@ -1,6 +1,6 @@
---- krb5-1.12.1.orig/src/lib/kadm5/alt_prof.c	2014-01-16 01:44:15.000000000 +0100
-+++ krb5-1.12.1/src/lib/kadm5/alt_prof.c	2014-02-11 18:55:39.000000000 +0100
-@@ -155,7 +155,7 @@ krb5_aprof_get_boolean(krb5_pointer acon
+--- krb5-1.13.1.orig/src/lib/kadm5/alt_prof.c	2015-02-11 21:16:43.000000000 -0600
++++ krb5-1.13.1/src/lib/kadm5/alt_prof.c	2015-05-02 15:11:04.883427001 -0500
+@@ -154,7 +154,7 @@ krb5_aprof_get_boolean(krb5_pointer acon
      krb5_error_code ret;
      char **values, *valp;
      int idx;
