@@ -265,7 +265,7 @@ TARGET_CXXFLAGS+=	-fno-unwind-tables -fno-asynchronous-unwind-tables
 endif
 
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
-ifeq ($(ADK_TARGET_CPU_WITH_NEON),y)
+ifeq ($(ADK_TARGET_ARCH_ARM_WITH_NEON),y)
 TARGET_CFLAGS+=		-funsafe-math-optimizations
 TARGET_CXXFLAGS+=	-funsafe-math-optimizations
 endif
