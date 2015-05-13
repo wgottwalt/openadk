@@ -19,7 +19,7 @@ config ADK_LIBC_VERSION
 	default "1.0.2" if ADK_TARGET_LIB_UCLIBC_NG_1_0_2
 	default "1.0.1" if ADK_TARGET_LIB_UCLIBC_NG_1_0_1
 	default "1.0.0" if ADK_TARGET_LIB_UCLIBC_NG_1_0_0
-	default "1.1.8" if ADK_TARGET_LIB_MUSL_1_1_8
+	default "1.1.9" if ADK_TARGET_LIB_MUSL_1_1_9
 	default "0.9.33.2" if ADK_TARGET_LIB_UCLIBC_0_9_33_2
 	default "2.20" if ADK_TARGET_LIB_GLIBC_2_20
 	default "2.21" if ADK_TARGET_LIB_GLIBC_2_21
