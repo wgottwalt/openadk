@@ -65,8 +65,8 @@ PKG_DEPENDS_RASPBERRY_PI:=	bcm28xx-vc bcm28xx-vc-gl-libs bcm28xx-vc-libs
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm28xx-vc
 PKG_DEPENDS_RASPBERRY_PI2:=	bcm28xx-vc bcm28xx-vc-gl-libs bcm28xx-vc-libs
 PKG_BUILDDEP_RASPBERRY_PI2:=	bcm28xx-vc
-PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
-PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
+PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap imx-gpu-viv
+PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap imx-gpu-viv
 PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 solidrun-imx6
 
 DIFF_IGNOREFILES:=	configure missing depcomp install-sh INSTALL \
