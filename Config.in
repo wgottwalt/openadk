@@ -26,7 +26,6 @@ source "target/config/Config.in.arch"
 source "target/config/Config.in.system"
 source "target/config/Config.in.subsystem"
 source "target/config/Config.in.tc"
-source "target/config/Config.in.mips"
 source "target/config/Config.in.xtensa"
 source "target/config/Config.in.qemu"
 source "target/config/Config.in.qemuopts"
@@ -110,6 +109,7 @@ config ADK_VENDOR
 	  Vendor string is used for toolchain.
 
 source "target/config/Config.in.endian"
+source "target/config/Config.in.mips"
 source "target/config/Config.in.fpu"
 source "target/config/Config.in.float"
 source "target/config/Config.in.binfmt"
