@@ -5,13 +5,13 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
 PKG_VERSION:=		7cc53a9a3da77869d1d5d3d3d9971b4bd1641b50
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
 PKG_DEPENDS+=		libass libmpeg2 libmad libdbus libglew mesalib
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
-PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libopenssl
+PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libopenssl libnettle
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng libncurses
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate libuuid
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd libgtk2
