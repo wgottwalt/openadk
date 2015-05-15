@@ -17,13 +17,12 @@ TARGET_CFLAGS:=		$(filter-out -mtext-section-literals,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -mtext-section-literals,$(TARGET_CXXFLAGS))
 endif
 
-# for multilib m68k uClinux, we need to filter out some flags
+# for uClinux, we need to filter out some flags
 ifeq ($(ADK_TARGET_UCLINUX),y)
-TARGET_CFLAGS:=		$(filter-out -mcpu=5208,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=		$(filter-out -msep-data,$(TARGET_CFLAGS))
-TARGET_CXXFLAGS:=	$(filter-out -mcpu=5208,$(TARGET_CXXFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -msep-data,$(TARGET_CXXFLAGS))
 endif
+
 
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-bugurl="http://www.openadk.org/" \

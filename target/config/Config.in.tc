@@ -9,6 +9,7 @@ depends on ADK_TARGET_TOOLCHAIN && \
 	|| ADK_TARGET_ARCH_ARC \
 	|| ADK_TARGET_ARCH_ARM \
 	|| ADK_TARGET_ARCH_BFIN \
+	|| ADK_TARGET_ARCH_M68K \
 	|| ADK_TARGET_ARCH_X86 )
 
 config ADK_TARGET_CPU_ARC_ARC700
@@ -134,6 +135,36 @@ config ADK_TARGET_CPU_CRIS_V32
 	bool "cris v32"
         select ADK_CPU_CRIS_V32
 	depends on ADK_TARGET_ARCH_CRIS
+
+config ADK_TARGET_CPU_CF_5206
+	bool "coldfire 5206"
+	select ADK_CPU_CF_5206
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5208
+	bool "coldfire 5208"
+	select ADK_CPU_CF_5208
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5213
+	bool "coldfire 5213"
+	select ADK_CPU_CF_5213
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5216
+	bool "coldfire 5216"
+	select ADK_CPU_CF_5216
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5225
+	bool "coldfire 5225"
+	select ADK_CPU_CF_5225
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
 
 config ADK_TARGET_CPU_X86_I486
 	bool "i486"
