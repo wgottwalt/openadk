@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.6.7
+PKG_VERSION:=		5.6.8
 PKG_RELEASE:=		1
-PKG_HASH:=		a85522dd2e6f80ee5637e537447ee54896c77a8fabe49d2310830d0e20952787
+PKG_HASH:=		4c417387b88e100ca306adeda8051eb9fad93dae8da983f962dabf91a14b2b7b
 PKG_DESCR:=		php language interpreter
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libpthread librt
@@ -24,7 +24,7 @@ PKGSN_PHP_CLI:=		php
 PKG_FLAVOURS_PHP:=	MOD_BZ2 MOD_CURL MOD_FTP MOD_GD MOD_GMP MOD_MYSQL
 PKG_FLAVOURS_PHP+=	MOD_OPENSSL MOD_PGSQL MOD_SESSION MOD_SNMP MOD_SQLITE 
 PKG_FLAVOURS_PHP+=	MOD_SOCKETS MOD_XML MOD_SIMPLEXML MOD_ZLIB MOD_JSON
-PKG_FLAVOURS_PHP+=	MOD_LDAP
+PKG_FLAVOURS_PHP+=	MOD_LDAP MOD_PCNTL
 
 PKGFD_MOD_BZ2:=		bzip2 support
 PKGFB_MOD_BZ2:=		bzip2
@@ -49,6 +49,7 @@ PKGFB_MOD_MYSQL:=	mysql
 PKGFD_MOD_OPENSSL:=	openssl support
 PKGFB_MOD_OPENSSL:=	openssl
 PKGFS_MOD_OPENSSL:=	libopenssl
+PKGFD_MOD_PCNTL:=	process control support
 PKGFD_MOD_PGSQL:=	pgsql support
 PKGFB_MOD_PGSQL:=	postgresql
 PKGFS_MOD_PGSQL:=	libpq
@@ -133,7 +134,6 @@ PKG_CONFIGURE_OPTS+=	--with-gd=shared,"$(STAGING_TARGET_DIR)/usr" \
 			--with-png-dir="$(STAGING_TARGET_DIR)/usr" \
 			--with-jpeg-dir="$(STAGING_TARGET_DIR)/usr" \
 			--without-freetype-dir \
-			--without-ttf \
 			--without-t1lib	\
 			--enable-gd-native-ttf \
 			--disable-gd-jis-conv
@@ -166,6 +166,11 @@ PKG_CONFIGURE_OPTS+=	--with-openssl=shared,"$(STAGING_TARGET_DIR)/usr" \
 			--with-openssl-dir="$(STAGING_TARGET_DIR)/usr"
 else
 PKG_CONFIGURE_OPTS+=	--without-openssl
+endif
+ifneq ($(ADK_PACKAGE_PHP_MOD_PCNTL),)
+PKG_CONFIGURE_OPTS+=	--enable-pcntl
+else
+PKG_CONFIGURE_OPTS+=	--disable-pcntl
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_PGSQL),)
 PKG_CONFIGURE_OPTS+=	--with-pgsql=shared,"$(STAGING_TARGET_DIR)/usr"

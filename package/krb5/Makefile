@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		krb5
-PKG_VERSION:=		1.12.1
+PKG_VERSION:=		1.13.1
 PKG_RELEASE:=		1
-PKG_HASH:=		72f1b6c166cb42c0b03814ab7ea10f91926d8a665a5ba1cee430a3f31e62c580
+PKG_HASH:=		4df629fdf97f362cf81edbf38d613b32b492dd88c876cf3aa1c66562f296663e
 PKG_DESCR:=		kerberos server
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libkrb5 libncurses keyutils libpthread
 PKG_BUILDDEP:=		ncurses gettext-tiny bison-host
 PKG_URL:=		http://web.mit.edu/kerberos/
-PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.12/
+PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.13/
 PKG_LIBNAME:=		libkrb5
 PKG_OPTS:=		dev
 PKG_NOPARALLEL:=	1
@@ -35,8 +35,8 @@ $(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGS
 
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
-			--without-system-ss \
 			--without-system-et \
+			--without-system-ss \
 			--without-system-verto \
 			--without-tcl
 CONFIGURE_ENV+=		krb5_cv_attr_constructor_destructor=yes,yes \

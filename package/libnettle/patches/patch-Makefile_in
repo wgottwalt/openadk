@@ -1,8 +1,8 @@
---- nettle-2.4.orig/Makefile.in	2011-09-03 14:51:07.000000000 +0200
-+++ nettle-2.4/Makefile.in	2012-04-03 15:14:44.000000000 +0200
-@@ -14,7 +14,7 @@ INSTALL_SCRIPT = @INSTALL_SCRIPT@
- INSTALL_STRIP_PROGRAM = $(INSTALL_PROGRAM) -s
- MKDIR_P = @MKDIR_P@
+--- nettle-3.1.orig/Makefile.in	2015-04-07 14:00:08.000000000 -0500
++++ nettle-3.1/Makefile.in	2015-05-13 17:12:36.605171868 -0500
+@@ -17,7 +17,7 @@ OPT_HOGWEED_OBJS = @OPT_HOGWEED_OBJS@
+ 
+ OPT_NETTLE_SOURCES = @OPT_NETTLE_SOURCES@
  
 -SUBDIRS = tools testsuite examples
 +SUBDIRS = tools testsuite

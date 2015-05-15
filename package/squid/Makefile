@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
-PKG_VERSION:=		3.5.3
+PKG_VERSION:=		3.5.4
 PKG_RELEASE:=		1
-PKG_HASH:=		73ec65a08384a3ec93ccc17e89ef7a06ba221816551946f2f051cc736c2981c0
+PKG_HASH:=		dce615d08e349caf3975fc5d51ce4c3c69b9995fb83f51dc5d55ae873d8bf6a4
 PKG_DESCR:=		web and cache proxy
 PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libpthread librt libstdcxx libltdl
@@ -172,7 +172,7 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--enable-auth-digest="${DIGEST_AUTH_HELPERS}" \
 			--enable-external-acl-helpers="${EXTERNAL_ACL_HELPERS}"
 
-post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
+squid-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_SQUID}/etc/squid
 	${INSTALL_DATA} ${WRKINST}/etc/squid/mime.conf \
 		${IDIR_SQUID}/etc/squid/

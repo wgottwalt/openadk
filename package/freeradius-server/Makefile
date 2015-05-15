@@ -4,13 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		freeradius-server
-PKG_VERSION:=		3.0.2
-PKG_RELEASE:=		3
-PKG_HASH:=		687f6ca9870709bd433c044947225e365f5099499abba51419bf77134223713b
+PKG_VERSION:=		3.0.8
+PKG_RELEASE:=		1
+PKG_HASH:=		c27252d7a86ba252904612d9b1f90e846f3ef1f4afee6a748f5287b730e87e3a
 PKG_DESCR:=		flexible radius server
 PKG_SECTION:=		net/radius
-PKG_DEPENDS:=		libltdl libopenssl libpthread libpcre
-PKG_BUILDDEP:=		libtool openssl samba pcre
+PKG_DEPENDS:=		libltdl libopenssl libpthread libpcre libtalloc
+PKG_BUILDDEP:=		libtool openssl pcre talloc
 PKG_URL:=		http://www.freeradius.org/
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/
 
@@ -136,6 +136,10 @@ $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_PGSQL,rlm_sql_postgresql,))
 AUTOTOOL_STYLE:=	autoreconf
 XAKE_FLAGS+=            GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTS} \
+			--libdir=/usr/lib/freeradius \
+			--libexecdir=/usr/lib/freeradius \
+			--disable-openssl-version-check \
+			--with-execinfo-include-dir=/dev/null \
 			--with-openssl-includes=${STAGING_TARGET_DIR}/usr/include \
 			--with-openssl-libraries=${STAGING_TARGET_DIR}/usr/lib \
 			--with-system-libltld \
@@ -160,6 +164,7 @@ CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTS} \
 			--without-rlm_perl \
 			--without-rlm_python \
 			--without-rlm_radutmp \
+			--without-rlm_rest \
 			--without-rlm_ruby \
 			--without-rlm_smb \
 			--without-rlm_sqlcounter \
@@ -173,15 +178,18 @@ CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTS} \
 			--without-rlm_unix \
 			--without-rlm_eap_ikev2 \
 			--without-rlm_eap_tnc \
+			--without-rlm_cache_memcached \
 			--without-rlm_opendirectory \
 			--without-rlm_sql_firebird \
-			--without-rlm_sql_sqlite \
-			--libdir=/usr/lib/freeradius \
-			--libexecdir=/usr/lib/freeradius
+			--without-rlm_sql_sqlite
+CONFIGURE_ENV+=		ax_cv_cc_builtin_choose_expr=yes \
+			ax_cv_cc_builtin_types_compatible_p=yes \
+			ax_cv_cc_builtin_bswap64=yes \
+			ax_cv_cc_bounded_attribute=yes
 FAKE_FLAGS+=		R="${WRKINST}" \
 			INSTALLSTRIP=""
 
-post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
+freeradius-server-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_FREERADIUS_SERVER}/etc/freeradius
 	${CP} ./files/users ${IDIR_FREERADIUS_SERVER}/etc/freeradius/
 	${INSTALL_DATA} ./files/radiusd.conf \

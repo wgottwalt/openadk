@@ -4,16 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		3.3.14
+PKG_VERSION:=		3.4.0
 PKG_RELEASE:=		1
-PKG_HASH:=		0dfa0030faad8909c1e904105198232d6bc0123cae8cf4933b2bac85ee7cec52
+PKG_HASH:=		b422544431bfb5c4e24a605b6c793ee34792cc791c1060562ab46eaf77f3472e
 PKG_DESCR:=		transport layer security library
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib libnettle libgmp
 PKG_BUILDDEP:=		libgcrypt liblzo libtasn1 
 PKG_BUILDDEP+=		zlib ncurses libnettle
 PKG_URL:=		http://www.gnutls.org/
-PKG_SITES:=		ftp://ftp.gnutls.org/gcrypt/gnutls/v3.3/
+PKG_SITES:=		ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4/
 PKG_LIBNAME:=		libgnutls
 PKG_OPTS:=		dev
 
@@ -45,6 +45,7 @@ endif
 
 TARGET_LDFLAGS+=	-pthread
 CONFIGURE_ARGS+=	--disable-rpath \
+			--disable-doc \
 			--without-libz-prefix \
 			--without-p11-kit
 CONFIGURE_ENV+=		ac_cv_prog_AR='$(TARGET_CROSS)ar'

@@ -38,7 +38,7 @@ CONFIGURE_ARGS+=	--enable-orig-ip \
 			--with-proxyuser=proxy \
 			--with-proxygroup=proxy
 
-post-install:
+dansguardian-install:
 	${INSTALL_DIR} ${IDIR_DANSGUARDIAN}/usr/sbin \
 		${IDIR_DANSGUARDIAN}/etc/dansguardian \
 		${IDIR_DANSGUARDIAN}/usr/share/dansguardian/languages/ukenglish

@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libnettle
-PKG_VERSION:=		2.7.1
+PKG_VERSION:=		3.1
 PKG_RELEASE:=		2
-PKG_HASH:=		bc71ebd43435537d767799e414fce88e521b7278d48c860651216e1fc6555b40
+PKG_HASH:=		f6859d4ec88e70805590af9862b4b8c43a2d1fc7991df0a7a711b1e7ca9fc9d3
 PKG_DESCR:=		crypto library
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgmp
@@ -21,6 +21,8 @@ WRKDIST=		${WRKDIR}/nettle-${PKG_VERSION}
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBNETTLE,libnettle,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+CONFIGURE_ARGS+=	--disable-documentation
 
 libnettle-install:
 	$(INSTALL_DIR) $(IDIR_LIBNETTLE)/usr/lib

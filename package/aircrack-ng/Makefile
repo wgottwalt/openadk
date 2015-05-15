@@ -28,7 +28,7 @@ XAKE_FLAGS+=		CC="$(TARGET_CC)" TOOL_PREFIX="$(TARGET_CROSS)" \
 			CFLAGS="$(TARGET_CFLAGS) -Wall" \
 			OSNAME="Linux" prefix="/usr"
 
-post-install:
+aircrack-ng-install:
 	$(INSTALL_DIR) $(IDIR_AIRCRACK_NG)/usr/bin
 	$(INSTALL_DIR) $(IDIR_AIRCRACK_NG)/usr/sbin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/aircrack-ng \

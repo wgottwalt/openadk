@@ -3,11 +3,11 @@
 
 include $(ADK_TOPDIR)/rules.mk
 
-PKG_NAME:=		gpu-viv-bin-mx6q
-PKG_VERSION:=		3.10.17-1.0.0
+PKG_NAME:=		imx-gpu-viv
+PKG_VERSION:=		5.0.11.p4.4
 PKG_RELEASE:=		1
-PKG_HASH:=		7e5a3db22b99740756f408b881691f81c03090256754e44f69369bf039e9cbcf
-PKG_DESCR:=		imx gpu library (vivante gpu)
+PKG_HASH:=		92654c185835e139cc9485806ad184fdac21f4d640ec9d0e493669235d21de9b
+PKG_DESCR:=		imx vivante gpu library
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.freescale.com/
 PKG_SITES:=		http://www.freescale.com/lgfiles/NMG/MAD/YOCTO/
@@ -17,18 +17,18 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-hfp
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,GPU_VIV_BIN_MX6Q,gpu-viv-bin-mx6q,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,IMX_GPU_VIV,imx-gpu-viv,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-gpu-viv-bin-mx6q-install:
-	$(INSTALL_DIR) $(IDIR_GPU_VIV_BIN_MX6Q)/usr/lib
-	$(CP) $(WRKBUILD)/usr/lib/lib*.so* \
-		$(IDIR_GPU_VIV_BIN_MX6Q)/usr/lib
+imx-gpu-viv-install:
+	$(INSTALL_DIR) $(IDIR_IMX_GPU_VIV)/usr/lib
+	$(CP) $(WRKBUILD)/gpu-core/usr/lib/lib*.so* \
+		$(IDIR_IMX_GPU_VIV)/usr/lib
 	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/include
-	$(CP) $(WRKBUILD)/usr/include/* \
+	$(CP) $(WRKBUILD)/gpu-core/usr/include/* \
 		$(STAGING_TARGET_DIR)/usr/include
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

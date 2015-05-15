@@ -4,6 +4,7 @@
 config ADK_TARGET_CFLAGS_OPT
 	string
 	default "-Os -pipe" if ADK_TARGET_CFLAGS_OPT_OS
+	default "-Og -pipe" if ADK_TARGET_CFLAGS_OPT_OG
 	default "-O2 -pipe" if ADK_TARGET_CFLAGS_OPT_O2
 	default "-O3 -pipe" if ADK_TARGET_CFLAGS_OPT_O3
 	default "-O0 -pipe" if ADK_TARGET_CFLAGS_OPT_O0
@@ -15,11 +16,14 @@ bool
 config ADK_TARGET_CFLAGS_OPT_OS
 	prompt "optimize for size (-Os)"
 
+config ADK_TARGET_CFLAGS_OPT_OG
+	prompt "optimize, but allow debugging (-Og)"
+
 config ADK_TARGET_CFLAGS_OPT_O2
 	prompt "optimize for performance (-O2)"
 
 config ADK_TARGET_CFLAGS_OPT_O3
-	prompt "optimize for performance (-O3)"
+	prompt "optimize for extra performance (-O3)"
 
 config ADK_TARGET_CFLAGS_OPT_O0
 	prompt "no optimization (-O0)"

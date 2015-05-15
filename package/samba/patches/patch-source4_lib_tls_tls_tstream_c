@@ -1,0 +1,11 @@
+--- samba-4.2.1.orig/source4/lib/tls/tls_tstream.c	2014-10-01 11:16:21.000000000 +0200
++++ samba-4.2.1/source4/lib/tls/tls_tstream.c	2015-05-13 08:33:16.000000000 +0200
+@@ -1014,7 +1014,7 @@ struct tevent_req *_tstream_tls_connect_
+ 		return tevent_req_post(req, ev);
+ 	}
+ 
+-	gnutls_certificate_type_set_priority(tlss->tls_session, cert_type_priority);
++	//gnutls_certificate_type_set_priority(tlss->tls_session, cert_type_priority);
+ 
+ 	ret = gnutls_credentials_set(tlss->tls_session,
+ 				     GNUTLS_CRD_CERTIFICATE,

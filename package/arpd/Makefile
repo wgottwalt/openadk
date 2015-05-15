@@ -19,7 +19,7 @@ WRKDIST=		${WRKDIR}/${PKG_NAME}
 
 include ${ADK_TOPDIR}/mk/package.mk
 
-$(eval $(call PKG_template,ARPD,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,ARPD,arpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ARGS+=	--with-libdnet=${STAGING_TARGET_DIR}/usr \
 			--with-libevent=${STAGING_TARGET_DIR}/usr \
@@ -28,7 +28,7 @@ MAKE_FLAGS+=		CFLAGS="${TARGET_CFLAGS}" \
 			INCLS="-I. ${TARGET_CPPFLAGS}" \
 			LIBS="-lpcap -ldnet -levent"
 
-post-install:
+arpd-install:
 	${INSTALL_DIR} ${IDIR_ARPD}/usr/sbin
 	${INSTALL_BIN} ${WRKBUILD}/arpd ${IDIR_ARPD}/usr/sbin/
 

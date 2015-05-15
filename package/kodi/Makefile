@@ -5,13 +5,13 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
 PKG_VERSION:=		7cc53a9a3da77869d1d5d3d3d9971b4bd1641b50
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
 PKG_DEPENDS+=		libass libmpeg2 libmad libdbus libglew mesalib
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
-PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libopenssl
+PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libopenssl libnettle
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng libncurses
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate libuuid
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd libgtk2
@@ -65,8 +65,8 @@ PKG_DEPENDS_RASPBERRY_PI:=	bcm28xx-vc bcm28xx-vc-gl-libs bcm28xx-vc-libs
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm28xx-vc
 PKG_DEPENDS_RASPBERRY_PI2:=	bcm28xx-vc bcm28xx-vc-gl-libs bcm28xx-vc-libs
 PKG_BUILDDEP_RASPBERRY_PI2:=	bcm28xx-vc
-PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
-PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap gpu-viv-bin-mx6q
+PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap imx-gpu-viv
+PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap imx-gpu-viv
 PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 solidrun-imx6
 
 DIFF_IGNOREFILES:=	configure missing depcomp install-sh INSTALL \

@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libmicrohttpd
-PKG_VERSION:=		0.9.41
+PKG_VERSION:=		0.9.42
 PKG_RELEASE:=		1
-PKG_HASH:=		9798be637d4a1d76a377e1d805d142e6edcfd3ec99c443926448f647af1a7a7c
+PKG_HASH:=		00352073367003da40607319e4090a6a8308748b59246ae80e9871f34dad7d5b
 PKG_DESCR:=		library make it easy to run an webserver
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://www.gnu.org/software/libmicrohttpd/

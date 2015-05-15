@@ -15,8 +15,6 @@ PKG_SITES:=		http://www.linux-pam.org/library/
 PKG_OPTS:=		dev
 PKG_BB:=		1
 
-PKG_CFLINE_PAM:=	depends on !ADK_TARGET_USE_STATIC_LIBS
-
 DISTFILES:=		Linux-PAM-$(PKG_VERSION).tar.gz
 WRKDIST=                ${WRKDIR}/Linux-PAM-${PKG_VERSION}
 
@@ -28,12 +26,6 @@ AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-nis \
 			--disable-regenerate-docu \
 			--enable-db=no
-
-post-install:
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),)
-	# /lib is not automatically installed to staging area
-	$(CP) $(WRKINST)/lib/libpam*.so* $(STAGING_TARGET_DIR)/usr/lib
-endif
 
 pam-install:
 	$(INSTALL_DIR) $(IDIR_PAM)/etc/security

@@ -46,7 +46,7 @@ $(eval $(call PKG_template,UPDATEDD_MOD_TZO,updatedd-mod-tzo,${PKG_VERSION}-${PK
 
 CONFIGURE_ARGS+=	ac_cv_lib_nsl_gethostbyname=no
 
-post-install:
+updatedd-install:
 	${INSTALL_DIR} ${IDIR_UPDATEDD}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/updatedd ${IDIR_UPDATEDD}/usr/bin/
 	${INSTALL_DIR} ${IDIR_UPDATEDD}/usr/lib/updatedd

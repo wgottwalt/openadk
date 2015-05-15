@@ -51,5 +51,3 @@ config ADK_TARGET_HUMMINGBOARD_I2EX
 	select ADK_TARGET_WITH_SATA
 
 endchoice
-
-
