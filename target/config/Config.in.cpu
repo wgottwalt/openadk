@@ -101,7 +101,17 @@ config ADK_CPU_CF_5206
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
 
+config ADK_CPU_CF_5206E
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
 config ADK_CPU_CF_5208
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_5211A
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
@@ -386,7 +396,9 @@ config ADK_TARGET_GCC_CPU
 	string
 	default "440" if ADK_CPU_PPC_440
 	default "5206" if ADK_CPU_CF_5206
+	default "5206e" if ADK_CPU_CF_5206E
 	default "5208" if ADK_CPU_CF_5208
+	default "5211a" if ADK_CPU_CF_5211A
 	default "5213" if ADK_CPU_CF_5213
 	default "5216" if ADK_CPU_CF_5216
 	default "5225" if ADK_CPU_CF_5225
@@ -454,7 +466,9 @@ config ADK_TARGET_CPU_TYPE
 	default "bf523" if ADK_TARGET_ARCH_BFIN && ADK_CPU_BF523
 	default "bf524" if ADK_TARGET_ARCH_BFIN && ADK_CPU_BF524
 	default "5206" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_5206
+	default "5206e" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_5206E
 	default "5208" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_5208
+	default "5211a" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_5211A
 	default "5213" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_5213
 	default "5216" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_5216
 	default "5225" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_5225
