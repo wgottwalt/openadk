@@ -37,8 +37,12 @@ config-prepare: $(ADK_TOPDIR)/.config
 		exit 1; \
 	fi
 ifneq ($(ADK_TARGET_NO_CMDLINE),y)
+ifeq ($(ADK_APPLIANCE_KODI),y)
+	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 consoleblank=0 vt.global_cursor_default=0"#' \
+		$(BUILD_DIR)/.kernelconfig.board
+endif
 ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_VGA_ONLY),y)
-	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE) consoleblank=0"#' \
+	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE)"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
 ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_ONLY),y)
@@ -46,11 +50,11 @@ ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_ONLY),y)
 		$(BUILD_DIR)/.kernelconfig.board
 endif
 ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_VGA_SERIAL),y)
-	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE) consoleblank=0 console=$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE),$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)"#' \
+	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE) console=$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE),$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
 ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_VGA),y)
-	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE),$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED) console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE) consoleblank=0"#' \
+	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE),$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED) console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE)"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_M68K),y)
