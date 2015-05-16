@@ -15,12 +15,12 @@ PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!m68k !xtensa
+PKG_ARCH_DEPENDS:=	!m68k
 
 DISTFILES:=		boost_$(PKG_EXTRAVER)_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_$(PKG_EXTRAVER)_0
 
-PKG_FLAVOURS_BOOST:=	DATE_TIME GRAPH GRAPH_PARALLEL IOSTREAMS MATH PROGRAM_OPTIONS PYTHON REGEX SERIALIZATION SIGNALS TEST WAVE
+PKG_FLAVOURS_BOOST:=	DATE_TIME GRAPH GRAPH_PARALLEL IOSTREAMS LOG MATH PROGRAM_OPTIONS PYTHON REGEX SERIALIZATION SIGNALS TEST WAVE
 
 PKGFD_DATE_TIME:=	with date-time
 PKGFD_PYTHON:=		with python
@@ -30,6 +30,7 @@ PKGFD_IOSTREAMS:=	with iostreams
 PKGFD_GRAPH:=		with graph
 PKGFD_GRAPH_PARALLEL:=	with graph_parallel
 PKGFD_MATH:=		with math
+PKGFD_LOG:=		with log
 PKGFD_PROGRAM_OPTIONS:=	with program_options
 PKGFD_REGEX:=		with regex
 PKGFD_SERIALIZATION:=	with serialization
@@ -52,6 +53,7 @@ CONFIGURE_ARGS+=	--target=$(GNU_TARGET_NAME) \
 			--build=$(GNU_HOST_NAME) \
 			--prefix=${WRKINST}/usr \
 			--ignore-site-config \
+			--without-mpi \
 			--without-locale
 
 ifneq (${ADK_PACKAGE_BOOST_IOSTREAMS},)
@@ -67,6 +69,9 @@ CONFIGURE_ARGS+=	--without-python
 endif
 ifeq (${ADK_PACKAGE_BOOST_GRAPH},)
 CONFIGURE_ARGS+=	--without-graph
+endif
+ifeq (${ADK_PACKAGE_BOOST_LOG},)
+CONFIGURE_ARGS+=	--without-log
 endif
 ifeq (${ADK_PACKAGE_BOOST_MATH},)
 CONFIGURE_ARGS+=	--without-math
@@ -92,6 +97,8 @@ endif
 
 ifeq ($(ADK_TARGET_ARCH),x86_64)
 BOOST_ARCH:=	x86
+else ifeq ($(ADK_TARGET_ARCH),ppc)
+BOOST_ARCH:=	power
 else
 BOOST_ARCH:=	$(ADK_TARGET_ARCH)
 endif
