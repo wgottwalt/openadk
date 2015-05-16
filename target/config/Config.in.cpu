@@ -197,10 +197,12 @@ config ADK_CPU_CORTEX_A57
 config ADK_CPU_CRIS_V10
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_CRIS_V32
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_GEODE
 	bool
