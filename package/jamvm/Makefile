@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		jamvm
-PKG_VERSION:=		1.5.4
-PKG_RELEASE:=		5
-PKG_HASH:=		7865693698bc4322cabe1014a4b7ebdec1bc1daf45f1a4457b6e908a4446b124
+PKG_VERSION:=		2.0.0
+PKG_RELEASE:=		1
+PKG_HASH:=		76428e96df0ae9dd964c7a7c74c1e9a837e2f312c39e9a357fa8178f7eff80da
 PKG_DESCR:=		java virtual machine implementation
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libffi zlib
@@ -15,8 +15,6 @@ PKG_URL:=		http://jamvm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_ARCH_DEPENDS:=	!m68k
 
 include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
@@ -27,14 +25,10 @@ $(eval $(call PKG_template,JAMVM,jamvm,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 HOST_CONFIGURE_ARGS+=	--libdir=$(STAGING_HOST_DIR)/usr/lib/jamvm \
 			--includedir=$(STAGING_HOST_DIR)/usr/include/jamvm \
 			--with-classpath-install-dir=$(STAGING_HOST_DIR)/usr
+
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
-
 CONFIGURE_ARGS+=	--enable-ffi
-
-hostpost-install:
-	ln -sf ${STAGING_HOST_DIR}/usr/bin/jamvm ${STAGING_HOST_DIR}/usr/lib/jvm/bin/java
-	ln -sf ${STAGING_HOST_DIR}/usr/bin/jamvm ${STAGING_HOST_DIR}/usr/lib/jvm/jre/bin/java
 
 do-build:
 	${INSTALL_DIR} ${WRKINST}/usr/bin
