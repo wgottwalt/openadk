@@ -172,9 +172,21 @@ config ADK_TARGET_CPU_CF_5216
 	select ADK_TARGET_UCLINUX
 	depends on ADK_TARGET_ARCH_M68K
 
+config ADK_TARGET_CPU_CF_52235
+	bool "coldfire 52235"
+	select ADK_CPU_CF_52235
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
 config ADK_TARGET_CPU_CF_5225
 	bool "coldfire 5225"
 	select ADK_CPU_CF_5225
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_52259
+	bool "coldfire 52259"
+	select ADK_CPU_CF_52259
 	select ADK_TARGET_UCLINUX
 	depends on ADK_TARGET_ARCH_M68K
 

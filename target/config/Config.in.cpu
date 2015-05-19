@@ -127,7 +127,17 @@ config ADK_CPU_CF_5216
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
 
+config ADK_CPU_CF_52235
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
 config ADK_CPU_CF_5225
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_52259
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
@@ -404,7 +414,9 @@ config ADK_TARGET_GCC_CPU
 	default "5211a" if ADK_CPU_CF_5211A
 	default "5213" if ADK_CPU_CF_5213
 	default "5216" if ADK_CPU_CF_5216
+	default "52235" if ADK_CPU_CF_52235
 	default "5225" if ADK_CPU_CF_5225
+	default "52259" if ADK_CPU_CF_52259
 	default "arc700" if ADK_CPU_ARC700
 	default "archs" if ADK_CPU_ARC_HS
 	default "arm1176jzf-s" if ADK_CPU_ARM1176JZF_S
@@ -474,7 +486,9 @@ config ADK_TARGET_CPU_TYPE
 	default "5211a" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_5211A
 	default "5213" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_5213
 	default "5216" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_5216
+	default "52235" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_52235
 	default "5225" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_5225
+	default "52259" if ADK_TARGET_ARCH_M68K && ADK_CPU_CF_52259
 	default "cortex_a5" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A5
 	default "cortex_a7" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A7
 	default "cortex_a8" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_A8
