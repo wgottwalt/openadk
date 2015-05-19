@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
-PKG_VERSION:=		2.02.116
+PKG_VERSION:=		2.02.120
 PKG_RELEASE:=		1
-PKG_HASH:=		2479d6ea61c405efcfcd8a78390d00c1d2e9c92c0262f3ed599f2c0fb6f0b767
+PKG_HASH:=		8d6bd02f7d00315482538ece3e831cd81709c29d74ce71229c60192fb166081a
 PKG_DESCR:=		logical volume management
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libdevmapper libncurses
@@ -38,6 +38,7 @@ endif
 CONFIGURE_ARGS+=	--with-user="" --with-group="" \
 			--with-optimisation="" \
 			--disable-testing \
+			--disable-blkid_wiping \
 			--with-lvm1=none
 CONFIGURE_ENV+=		ac_cv_flag_HAVE_PIE=no \
 			ac_cv_func_malloc_0_nonnull=yes \
@@ -45,7 +46,8 @@ CONFIGURE_ENV+=		ac_cv_flag_HAVE_PIE=no \
 
 lvm-install:
 	${INSTALL_DIR} ${IDIR_LVM}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/lvm ${IDIR_LVM}/usr/sbin/lvm
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/lvm \
+		${IDIR_LVM}/usr/sbin
 
 libdevmapper-install:
 	${INSTALL_DIR} ${IDIR_LIBDEVMAPPER}/usr/lib

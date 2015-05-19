@@ -12,10 +12,9 @@ PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		openjdk7-host alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst
 PKG_BUILDDEP+=		libpng giflib libgtk2 glib fontconfig nss
-HOST_BUILDDEP:=		fastjar-host gcj-host ecj-host classpath-host jamvm-host
-HOST_BUILDDEP+=		jikes-host ant-host libXtst-host libXt-host libXinerama-host
-HOST_BUILDDEP+=		cups-host qemu-host alsa-lib-host freetype-host unzip-host
-HOST_BUILDDEP+=		libxslt-host
+HOST_BUILDDEP:=		fastjar-host gcj-host ecj-host unzip-host
+HOST_BUILDDEP+=		ant-host libXtst-host libXt-host libXinerama-host
+HOST_BUILDDEP+=		cups-host qemu-host alsa-lib-host freetype-host	libxslt-host
 PKG_DEPENDS:=		zlib libstdcxx libffi libpthread libxtst libxi cups
 PKG_DEPENDS+=		libfreetype libxrender libx11 libxext libpthread nss libjpeg-turbo
 PKG_DEPENDS+=		libpng giflib libgtk2 glib fontconfig
@@ -27,7 +26,7 @@ PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
 DISTFILES:=		icedtea-$(PKG_VERSION).tar.xz
 WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
-GCJ_VER:=		4.8.4
+GCJ_VER:=		4.9.2
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64

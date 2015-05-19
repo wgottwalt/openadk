@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot-git
-PKG_VERSION:=		d8c1d5d5fb6eafbc532982125f006e49f2c40e71
+PKG_VERSION:=		3bfe3ce2a6e3b04da1d04dbc0520dcc26e17f98a
 PKG_RELEASE:=		1
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot

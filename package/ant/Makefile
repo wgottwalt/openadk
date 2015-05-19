@@ -29,10 +29,12 @@ host-build:
 		cd $(WRKBUILD)/lib/optional; wget http://openadk.org/distfiles/junit-4.9b2.jar; \
 	fi
 	cp $(DL_DIR)/ecj*.jar $(WRKBUILD)/lib/optional/ecj.jar
-	cd ${WRKBUILD}; export BOOTJAVAC_OPTS="-bootclasspath $(STAGING_HOST_DIR)/usr/share/classpath/glibj.zip" \
-		LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64 \
-		JAVA_HOME=$(STAGING_HOST_DIR)/usr/lib/jvm ; \
-		$(BASH) build.sh
+	(cd ${WRKBUILD}; \
+		export JAVA_HOME=$(STAGING_HOST_DIR)/usr/lib/jvm ;\
+		export CLASSPATH=$(STAGING_HOST_DIR)/usr/lib/jvm/lib/tools.jar ;\
+		export JAVAC=$(STAGING_HOST_DIR)/usr/bin/ecj ;\
+		export JAVACMD=$(STAGING_HOST_DIR)/usr/bin/gij ;\
+		$(BASH) ./build.sh)
 
 ant-hostinstall:
 	cd $(WRKBUILD)/dist; \
