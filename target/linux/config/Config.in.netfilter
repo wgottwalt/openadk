@@ -1,114 +1,84 @@
 menu "Netfilter"
 
 config ADK_KERNEL_NETFILTER
-	boolean
-	default y if ADK_PACKAGE_IPTABLES
-	default n
+	bool
 
 config ADK_KERNEL_NETFILTER_ADVANCED
-	boolean
-	default y if ADK_PACKAGE_IPTABLES
-	default n
+	bool
 
 config ADK_KERNEL_BRIDGE_NETFILTER
-	boolean
-	default y if ADK_PACKAGE_EBTABLES
-	default n
+	bool
 
 config ADK_KERNEL_NETFILTER_XTABLES
 	tristate
 	select ADK_KERNEL_NETFILTER
 	select ADK_KERNEL_NETFILTER_ADVANCED
-	default y if ADK_PACKAGE_IPTABLES
-	default n
 
 config ADK_KERNEL_NETFILTER_DEBUG
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_IP_NF_MATCH_LAYER7_DEBUG
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_IP_NF_TARGET_MIRROR
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_NAT_SNMP_BASIC
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_TARGET_DSCP
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_TARGET_MARK
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_TARGET_CLASSIFY
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_TARGET_IMQ
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_TARGET_CONNMARK
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_ARPTABLES
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_COMPAT_IPCHAINS
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_COMPAT_IPFWADM
 	tristate
-	default n
 
 config ADK_KERNEL_IP6_NF_QUEUE
 	tristate
-	default n
 
 config ADK_KERNEL_IP6_NF_IPTABLES
 	tristate
-	default n
 
 config ADK_KERNEL_IP_ROUTE_FWMARK
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_IP_NF_QUEUE
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_MATCH_TIME
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_MATCH_CONDITION
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_MATCH_DSCP
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_MATCH_AH_ESP
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_MATCH_LENGTH
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_MATCH_HELPER
 	tristate
-	default n
 
 # cannot be ADK_KERNEL_IP_NF_MATCH_STATE because
 # netfilter is built as a module -> this'll always be
@@ -116,34 +86,27 @@ config ADK_KERNEL_IP_NF_MATCH_HELPER
 config ADK_KERNEL_IP_NF_MATCH_STATE
 	tristate
 	select ADK_KERNEL_NETFILTER_XT_MATCH_STATE
-	default n
 
 config ADK_KERNEL_NETFILTER_XT_NAT
 	tristate
-	default n
 
 config ADK_KERNEL_NETFILTER_XT_MATCH_STATE
 	tristate
-	default n
 
 # cannot be ADK_KERNEL_IP_NF_MATCH_CONNTRACK because
 # netfilter is built as a module -> this'll always be
 # a module, too
 config ADK_KERNEL_NETFILTER_XT_MATCH_CONNTRACK
 	tristate
-	default n
 
 config ADK_KERNEL_NETFILTER_XT_MATCH_CONNMARK
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_MATCH_UNCLEAN
 	tristate
-	default n
 
 config ADK_KERNEL_IP_NF_MATCH_STRING
 	tristate
-	default n
 
 menu "Core Netfilter Configuration"
 source target/linux/config/Config.in.netfilter.core

@@ -499,8 +499,7 @@ $(eval $(call KMOD_template,NF_CONNTRACK_IPV4,nf-conntrack-ipv4,\
 ,46))
 
 $(eval $(call KMOD_template,NF_NAT_IPV4,nf-nat-ipv4,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_ipv4 \
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_nat_masquerade_ipv4 \
+	$(foreach mod, $(NF_NAT_MASQ),$(MODULES_DIR)/kernel/$(mod)) \
 ,50))
 
 $(eval $(call KMOD_template,IP_NF_NAT,ip-nf-nat,\
@@ -601,8 +600,7 @@ $(eval $(call KMOD_template,IP_NF_FILTER,ip-nf-filter,\
 ,55))
 
 $(eval $(call KMOD_template,IP_NF_TARGET_REJECT,ip-nf-target-reject,\
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/nf_reject_ipv4 \
-	$(MODULES_DIR)/kernel/net/ipv4/netfilter/ipt_REJECT \
+	$(foreach mod, $(NF_REJECT),$(MODULES_DIR)/kernel/$(mod)) \
 ,60))
 
 $(eval $(call KMOD_template,IP_NF_TARGET_TCPMSS,ip-nf-target-tcpmss,\
@@ -1114,8 +1112,7 @@ $(eval $(call KMOD_template,RPCSEC_GSS_KRB5,rpcsec-gss-krb5,\
 ,26))
 
 $(eval $(call KMOD_template,LOCKD,lockd,\
-	$(MODULES_DIR)/kernel/fs/nfs_common/grace \
-	$(MODULES_DIR)/kernel/fs/lockd/lockd \
+	$(foreach mod, $(LOCKD),$(MODULES_DIR)/kernel/$(mod)) \
 ,27))
 
 ifneq ($(ADK_KERNEL_NFS_FS),y)
