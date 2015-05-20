@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
 PKG_VERSION:=		1.0.2a
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		15b6393c20030aab02c8e2fe0243cb1d1d18062f6c095d67bca91871dc7f324a
 PKG_DESCR:=		secure socket layer libraries
 PKG_SECTION:=		libs/crypto
@@ -15,7 +15,6 @@ PKG_URL:=		http://www.openssl.org/
 PKG_SITES:=		http://www.openssl.org/source/
 PKG_LIBNAME:=		libopenssl
 PKG_OPTS:=		dev
-PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
