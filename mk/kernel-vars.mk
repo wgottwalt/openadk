@@ -11,8 +11,9 @@ KERNEL_MAKE_OPTS:=	V=1 \
 			CONFIG_SHELL='${SHELL}'
 
 # regex for relocs needs pcre on Darwin
-ifeq ($(ADK_HOST_DARWIN),y)
+ifeq (${OStype},Darwin)
 KERNEL_MAKE_OPTS+=	HOSTCFLAGS='$(HOST_CPPFLAGS) ${HOST_CFLAGS}' HOSTLDFLAGS='-lpcreposix'
+KERNEL_MAKE_OPTS+=	HOST_EXTRACFLAGS='-I ${ADK_TOPDIR}/adk/include -DKBUILD_NO_NLS'
 else
 KERNEL_MAKE_OPTS+=	HOSTCFLAGS='${HOST_CFLAGS}'
 endif
