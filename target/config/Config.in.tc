@@ -190,6 +190,24 @@ config ADK_TARGET_CPU_CF_52259
 	select ADK_TARGET_UCLINUX
 	depends on ADK_TARGET_ARCH_M68K
 
+config ADK_TARGET_CPU_CF_5235
+	bool "coldfire 5235"
+	select ADK_CPU_CF_5235
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5249
+	bool "coldfire 5249"
+	select ADK_CPU_CF_5249
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5250
+	bool "coldfire 5250"
+	select ADK_CPU_CF_5250
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
 config ADK_TARGET_CPU_X86_I486
 	bool "i486"
 	select ADK_CPU_I486
