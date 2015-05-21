@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		cifs-utils
-PKG_VERSION:=		6.3
+PKG_VERSION:=		6.4
 PKG_RELEASE:=		1
-PKG_HASH:=		fff73b2a2547628acba05d324cf096e50f13fa8712f01bf0eb0dbabfe268375b
+PKG_HASH:=		38fc63926af435dae4ebcf4406275580a692d9fb9ee3e32170317cf2ba68e6e3
 PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
 PKG_URL:=		https://wiki.samba.org/index.php/LinuxCIFS_utils
-PKG_SITES:=		ftp://ftp.samba.org/pub/linux-cifs/cifs-utils/
+PKG_SITES:=		https://ftp.samba.org/pub/linux-cifs/cifs-utils/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
