@@ -1,0 +1,60 @@
+diff -Nur linux-2.6.32.65.orig/arch/cris/include/arch-v10/arch/Kbuild linux-2.6.32.65/arch/cris/include/arch-v10/arch/Kbuild
+--- linux-2.6.32.65.orig/arch/cris/include/arch-v10/arch/Kbuild	2014-12-13 15:16:21.000000000 +0100
++++ linux-2.6.32.65/arch/cris/include/arch-v10/arch/Kbuild	2015-05-20 10:00:19.000000000 +0200
+@@ -1,4 +1,5 @@
+ header-y += user.h
++header-y += ptrace.h
+ header-y += svinto.h
+ header-y += sv_addr_ag.h
+ header-y += sv_addr.agh
+diff -Nur linux-2.6.32.65.orig/arch/cris/include/arch-v32/arch/Kbuild linux-2.6.32.65/arch/cris/include/arch-v32/arch/Kbuild
+--- linux-2.6.32.65.orig/arch/cris/include/arch-v32/arch/Kbuild	2014-12-13 15:16:21.000000000 +0100
++++ linux-2.6.32.65/arch/cris/include/arch-v32/arch/Kbuild	2015-05-20 10:00:19.000000000 +0200
+@@ -1,2 +1,3 @@
+ header-y += user.h
++header-y += ptrace.h
+ header-y += cryptocop.h
+diff -Nur linux-2.6.32.65.orig/arch/cris/include/asm/Kbuild linux-2.6.32.65/arch/cris/include/asm/Kbuild
+--- linux-2.6.32.65.orig/arch/cris/include/asm/Kbuild	2014-12-13 15:16:21.000000000 +0100
++++ linux-2.6.32.65/arch/cris/include/asm/Kbuild	2015-05-20 10:39:33.000000000 +0200
+@@ -1,7 +1,7 @@
+ include include/asm-generic/Kbuild.asm
+ 
+-header-y += arch-v10/
+-header-y += arch-v32/
++header-y += ../arch-v10/arch/
++header-y += ../arch-v32/arch/
+ 
+ header-y += ethernet.h
+ header-y += rtc.h
+diff -Nur linux-2.6.32.65.orig/arch/cris/include/asm/pgtable.h linux-2.6.32.65/arch/cris/include/asm/pgtable.h
+--- linux-2.6.32.65.orig/arch/cris/include/asm/pgtable.h	2014-12-13 15:16:21.000000000 +0100
++++ linux-2.6.32.65/arch/cris/include/asm/pgtable.h	2015-05-20 11:56:24.000000000 +0200
+@@ -14,6 +14,9 @@
+ #endif
+ #include <arch/pgtable.h>
+ 
++#define io_remap_pfn_range(vma, vaddr, pfn, size, prot) \
++	remap_pfn_range(vma, vaddr, pfn, size, prot)
++
+ /*
+  * The Linux memory management assumes a three-level page table setup. On
+  * CRIS, we use that, but "fold" the mid level into the top-level page
+diff -Nur linux-2.6.32.65.orig/include/asm-generic/bug.h linux-2.6.32.65/include/asm-generic/bug.h
+--- linux-2.6.32.65.orig/include/asm-generic/bug.h	2014-12-13 15:16:21.000000000 +0100
++++ linux-2.6.32.65/include/asm-generic/bug.h	2015-05-20 13:39:24.000000000 +0200
+@@ -119,6 +119,14 @@
+ })
+ #endif
+ 
++#ifndef WARN_RATELIMIT
++#define WARN_RATELIMIT(condition, format...) ({				\
++	int __ret_warn_on = !!(condition);				\
++	unlikely(__ret_warn_on);					\
++})
++#endif
++
++
+ #ifndef WARN
+ #define WARN(condition, format...) ({					\
+ 	int __ret_warn_on = !!(condition);				\

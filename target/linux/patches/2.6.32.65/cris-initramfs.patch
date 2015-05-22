@@ -1,0 +1,22 @@
+diff -Nur linux-3.18.12.orig/arch/cris/arch-v10/mm/init.c linux-3.18.12/arch/cris/arch-v10/mm/init.c
+--- linux-3.18.12.orig/arch/cris/arch-v10/mm/init.c	2015-04-20 21:48:02.000000000 +0200
++++ linux-3.18.12/arch/cris/arch-v10/mm/init.c	2015-05-16 01:46:37.000000000 +0200
+@@ -261,3 +261,7 @@
+ {
+ 	flush_etrax_cacherange(0, 8192);
+ }
++
++void free_initrd_mem(unsigned long start, unsigned long end)
++{
++}
+diff -Nur linux-3.18.12.orig/arch/cris/arch-v32/mm/init.c linux-3.18.12/arch/cris/arch-v32/mm/init.c
+--- linux-3.18.12.orig/arch/cris/arch-v32/mm/init.c	2015-04-20 21:48:02.000000000 +0200
++++ linux-3.18.12/arch/cris/arch-v32/mm/init.c	2015-05-16 01:46:54.000000000 +0200
+@@ -171,3 +171,7 @@
+ 
+ 	mem_map = contig_page_data.node_mem_map;
+ }
++
++void free_initrd_mem(unsigned long start, unsigned long end)
++{
++}
