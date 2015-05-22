@@ -32,13 +32,13 @@ choice
 prompt "Qemu ARM Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_ARM
 
-config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
-	bool "ARM Ltd. Versatile/PB with ARM926EJ-S"
-	select ADK_CPU_ARM926EJ_S
-
 config ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9
 	bool "ARM Ltd. Versatile Express with Cortex-A9"
 	select ADK_CPU_CORTEX_A9
+
+config ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB
+	bool "ARM Ltd. Versatile/PB with ARM926EJ-S"
+	select ADK_CPU_ARM926EJ_S
 
 config ADK_TARGET_QEMU_ARM_MODEL_TERRIER
 	bool "Xscale PXA270 Terrier PDA with XSCALE"
