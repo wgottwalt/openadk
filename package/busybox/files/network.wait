@@ -1,0 +1,29 @@
+#!/bin/sh
+#PKG busybox
+#INIT 40
+. /etc/rc.conf
+case $1 in
+autostart)
+	test x"${network:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	[ -f /etc/network/interfaces ] || exit 1
+	echo "Waiting for eth0 ... "
+	while [ ! -d /sys/class/net/eth0 ]; do sleep 1; done
+	ifup -a > /dev/null
+	;;
+autostop|stop)
+	[ -f /etc/network/interfaces ] || exit 1
+	ifdown -a > /dev/null
+	;;
+restart)
+	sh $0 stop
+	exec sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

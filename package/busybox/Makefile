@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.23.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		05a6f9e21aad8c098e388ae77de7b2361941afa7157ef74216703395b14e319a
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		base/apps
@@ -54,7 +54,11 @@ do-install:
 	$(CP) $(WRKINST)/* $(IDIR_BUSYBOX)/
 ifeq ($(BUSYBOX_IFUPDOWN),y)
 	$(INSTALL_DIR) $(IDIR_BUSYBOX)/etc/init.d
-	$(INSTALL_BIN) ./files/network $(IDIR_BUSYBOX)/etc/init.d
+ifeq ($(ADK_RUNTIME_WAIT_FOR_ETHERNET),y)
+	$(INSTALL_BIN) ./files/network.wait $(IDIR_BUSYBOX)/etc/init.d/network
+else
+	$(INSTALL_BIN) ./files/network $(IDIR_BUSYBOX)/etc/init.d/network
+endif
 endif
 ifeq ($(ADK_DEBUG),y)
 	${INSTALL_BIN} $(WRKBUILD)/busybox_unstripped \
