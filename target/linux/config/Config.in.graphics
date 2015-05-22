@@ -99,6 +99,13 @@ config ADK_KERNEL_FB_ATARI
 	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default n
 
+config ADK_KERNEL_FB_ARMCLCD
+	boolean
+
+config ADK_KERNEL_PLAT_VERSATILE_CLCD
+	boolean
+	select ADK_KERNEL_FB_ARMCLCD
+
 config ADK_KERNEL_FB_CIRRUS
 	boolean
 
@@ -106,8 +113,8 @@ config ADK_KERNEL_FB_GEODE
 	boolean
 
 config ADK_KERNEL_FB_SM501
-	select ADK_KERNEL_MFD_SM501
 	boolean
+	select ADK_KERNEL_MFD_SM501
 
 config ADK_KERNEL_DRM
 	boolean
