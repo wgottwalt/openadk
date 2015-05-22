@@ -26,7 +26,7 @@ ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB),y)
 QEMU_ARGS+=-M versatilepb -net user -net nic,model=smc91c111
 endif
 ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
-QEMU_ARGS+=-M vexpress-a9 -cpu cortex-a9 -net user -net nic,model=lan9118
+QEMU_ARGS+=-M vexpress-a9 -cpu cortex-a9 -m 256 -net user -net nic,model=lan9118 -dtb $(FW_DIR)/vexpress-v2p-ca9.dtb
 endif
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 QEMU_ARGS+=-drive file=qemu-${ADK_TARGET_CPU_ARCH}.img,if=virtio,index=0 -net nic,model=virtio -net user
@@ -119,11 +119,17 @@ kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
 dtb-install:
+ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
+		dtbs $(MAKE_TRACE)
+endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) dtbs $(MAKE_TRACE)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
+		dtbs $(MAKE_TRACE)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
-	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) dtbs $(MAKE_TRACE)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
+		dtbs $(MAKE_TRACE)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
@@ -139,13 +145,13 @@ ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: dtb-install $(FW_DIR)/$(ROOTFSTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
-imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
+imageinstall: kernel-install dtb-install $(FW_DIR)/$(INITRAMFS) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfsarchive)
-imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
+imageinstall: kernel-install dtb-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
-imageinstall: createinitramfs targethelp
+imageinstall: dtb-install createinitramfs targethelp
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
