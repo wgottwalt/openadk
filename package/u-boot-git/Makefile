@@ -13,8 +13,7 @@ PKG_BUILDDEP:=		u-boot-host
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
 PKG_SITES:=		git://git.denx.de/u-boot.git
 
-PKG_CFLINE_U_BOOT_GIT:=	select ADK_KERNEL_ATAGS if ADK_TARGET_ARCH_ARM
-PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 atmel-ngw100 banana-pro
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 atmel-ngw100 banana-pro xilinx-kintex7
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
