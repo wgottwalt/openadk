@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+declare -a opts
+while [[ "$1" ]]; do
+	case "$1" in
+	-c) shift ;;
+	-f) shift ;;
+	*) opts+=("$1") ;;
+	esac
+	shift
+done
+
+if /usr/bin/stat -qs .>/dev/null 2>&1; then 
+  /usr/bin/stat -f %z "${opts[@]}"
+else 
+  /usr/bin/stat -c %s "${opts[@]}"
+fi
