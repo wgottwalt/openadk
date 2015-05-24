@@ -25,10 +25,12 @@ CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 tinyxml-install:
-	$(INSTALL_DIR) $(IDIR_TINYXML)/usr/lib
+	$(INSTALL_DIR) $(IDIR_TINYXML)/usr/lib/
 	$(CP) $(WRKBUILD)/libtinyxml*.so* \
 		$(IDIR_TINYXML)/usr/lib
 	$(INSTALL_DATA) $(WRKBUILD)/tiny{str,xml}.h \
 		$(STAGING_TARGET_DIR)/usr/include
+	$(INSTALL_DATA) ./files/tinyxml.pc \
+		$(STAGING_TARGET_DIR)/usr/lib/pkgconfig
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
