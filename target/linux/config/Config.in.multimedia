@@ -1,35 +1,50 @@
-menu "Webcam support"
+menu "Multimedia support"
 depends on ADK_TARGET_WITH_USB
-
-config ADK_KERNEL_VIDEO_DEV
-	boolean
-
-config ADK_KERNEL_VIDEO_V4L2
-	boolean
-	select ADK_KERNEL_VIDEO_DEV
-
-config ADK_KERNEL_MEDIA_USB_SUPPORT
-	boolean
-
-config ADK_KERNEL_MEDIA_CAMERA_SUPPORT
-	boolean
 
 config ADK_KERNEL_MEDIA_SUPPORT
 	tristate
-	default n
+
+config ADK_KERNEL_VIDEO_DEV
+	bool
+
+config ADK_KERNEL_VIDEO_V4L2
+	bool
+	select ADK_KERNEL_VIDEO_DEV
+
+config ADK_KERNEL_MEDIA_USB_SUPPORT
+	bool
+
+config ADK_KERNEL_MEDIA_CAMERA_SUPPORT
+	bool
+
+config ADK_KERNEL_MEDIA_ANALOG_TV_SUPPORT
+	bool
+
+config ADK_KERNEL_MEDIA_DIGITAL_TV_SUPPORT
+	bool
+
+menu "DVB card support"
+
+config ADK_KERNEL_VIDEO_PVRUSB2
+	tristate "Hauppauge PVR DVB stick"
+	select ADK_KERNEL_MEDIA_SUPPORT
+	select ADK_KERNEL_MEDIA_USB_SUPPORT
+	select ADK_KERNEL_MEDIA_DIGITAL_TV_SUPPORT
+	select ADK_KERNEL_MEDIA_ANALOG_TV_SUPPORT
 	help
+	  Driver for Hauppauge PVR f.e. WinTV-HVR 930C
+
+endmenu
+
+menu "Webcam support"
 
 config ADK_KERNEL_USB_VIDEO_CLASS
-	prompt "Kernel driver for USB video webcams"
-	tristate
+	tristate "Kernel driver for USB video webcams"
 	depends on ADK_KERNEL_USB || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	select ADK_KERNEL_MEDIA_SUPPORT
-	default n
-	help
 
 config ADK_KERNEL_USB_GSPCA
-	prompt "GSPCA webcam framework"
-	tristate
+	tristate "GSPCA webcam framework"
 	depends on ADK_TARGET_WITH_USB
 	select ADK_KERNEL_VIDEO_V4L2
 	select ADK_KERNEL_MEDIA_SUPPORT
@@ -39,28 +54,25 @@ config ADK_KERNEL_USB_GSPCA
 	 GSPCA webcam framework
 
 config ADK_KERNEL_USB_GSPCA_PAC207
-	prompt "Pixart PAC207 USB Camera Driver"
-	tristate
+	tristate "Pixart PAC207 USB Camera Driver"
 	depends on ADK_KERNEL_USB_GSPCA
 	help
 
 config ADK_KERNEL_USB_GSPCA_PAC7311
-	prompt "Pixart PAC7311 USB Camera Driver"
-	tristate
+	tristate "Pixart PAC7311 USB Camera Driver"
 	depends on ADK_KERNEL_USB_GSPCA
 	help
 
 config ADK_KERNEL_USB_GSPCA_SPCA561
-	prompt "SPCA561 USB Camera Driver"
-	tristate
+	tristate "SPCA561 USB Camera Driver"
 	depends on ADK_KERNEL_USB_GSPCA
 	help
 
 config ADK_KERNEL_USB_PWC
-	prompt "USB Philips Camera driver"
-	tristate
+	tristate "USB Philips Camera driver"
 	depends on ADK_TARGET_WITH_USB
 	default n
 	help
 
+endmenu
 endmenu

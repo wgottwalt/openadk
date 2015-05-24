@@ -15,7 +15,7 @@ source target/linux/config/Config.in.pcmcia
 source target/linux/config/Config.in.network
 source target/linux/config/Config.in.netfilter
 source target/linux/config/Config.in.audio
-source target/linux/config/Config.in.webcam
+source target/linux/config/Config.in.multimedia
 source target/linux/config/Config.in.crypto
 source target/linux/config/Config.in.bluetooth
 source target/linux/config/Config.in.misc

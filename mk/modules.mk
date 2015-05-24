@@ -1808,3 +1808,17 @@ $(eval $(call KMOD_template,SND_BCM2708_SOC_IQAUDIO_DAC,snd-bcm2708-soc-iqaudio-
 $(eval $(call KMOD_template,SND_BCM2708_SOC_RPI_PROTO,snd-bcm2708-soc-rpi-proto,\
        $(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-rpi-proto \
 ,65, kmod-snd-bcm2708-soc-i2s))
+
+#
+# Multimedia
+#
+$(eval $(call KMOD_template,VIDEO_PVRUSB2,video-pvrusb2,\
+	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/videodev \
+	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/v4l2-common \
+	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/tuner \
+	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/v4l2-dv-timings \
+	$(MODULES_DIR)/kernel/drivers/media/common/cx2341x \
+	$(MODULES_DIR)/kernel/drivers/media/common/tveeprom \
+	$(MODULES_DIR)/kernel/drivers/media/dvb-core/dvb-core \
+	$(MODULES_DIR)/kernel/drivers/media/usb/pvrusb2/pvrusb2 \
+,70))
