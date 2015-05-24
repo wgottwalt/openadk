@@ -1,9 +1,0 @@
---- libcec-2.2.0.orig/src/lib/libcec.pc.in	2014-11-11 13:49:38.000000000 -0600
-+++ libcec-2.2.0/src/lib/libcec.pc.in	2014-11-12 13:51:02.466501999 -0600
-@@ -7,6 +7,5 @@ Name: libcec
- Description: Pulse-Eight CEC adapter library
- URL: http://www.pulse-eight.com/
- Version: @VERSION@
--Requires: @REQUIRES@
- Libs: -L${libdir} -lcec
- Cflags: -I${includedir} -I${includedir}/libcec

@@ -4,15 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libcec
-PKG_VERSION:=		2.2.0
-PKG_RELEASE:=		2
-PKG_HASH:=		da8a0c5acf2f9134e38d7993c08d960b7da2a9ea6b6b557a9d788361884b8396
+PKG_VERSION:=		185559110dc88aeca0915a90b3b369d2d42c0f7c
+PKG_RELEASE:=		1
 PKG_DESCR:=		control your device with your tv remote control
 PKG_SECTION:=		libs/video
-PKG_DEPENDS:=		libudev
-PKG_BUILDDEP:=		eudev
+PKG_DEPENDS:=		libudev libplatform
+PKG_BUILDDEP:=		eudev cmake-host platform
 PKG_URL:=		http://libcec.pulse-eight.com/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		https://github.com/Pulse-Eight/libcec.git
 PKG_OPTS:=		dev
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm28xx-vc
@@ -25,19 +24,13 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBCEC,libcec,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-AUTOTOOL_STYLE:=	autoreconf
-ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
-CONFIGURE_ARGS+=	--enable-imx6
-endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-CONFIGURE_ARGS+=	--enable-rpi \
-			--with-rpi-include-path=$(STAGING_TARGET_DIR)/opt/vc/include \
-			--with-rpi-lib-path=$(STAGING_TARGET_DIR)/opt/vc/lib
-endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
-CONFIGURE_ARGS+=	--enable-rpi \
-			--with-rpi-include-path=$(STAGING_TARGET_DIR)/opt/vc/include \
-			--with-rpi-lib-path=$(STAGING_TARGET_DIR)/opt/vc/lib
+WRKBUILD=		$(WRKDIR)/$(PKG_NAME)-obj
+TARGET_LDFLAGS+=	-ltinfo
+
+CONFIG_STYLE:=          cmake
+CMAKE_FLAGS+=		-DSKIP_PYTHON_WRAPPER=1 -DBUILD_SHARED_LIBS=1
+ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
+CMAKE_FLAGS+=		-DHAVE_RPI_API=1
 endif
 
 libcec-install:
