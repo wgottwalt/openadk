@@ -1,0 +1,26 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+include $(ADK_TOPDIR)/rules.mk
+
+PKG_NAME:=		tvheadend
+PKG_VERSION:=		679b7797128b8979145dc2a0a3c54ea513a0466b
+PKG_RELEASE:=		1
+PKG_DESCR:=		tv streaming server
+PKG_SECTION:=		mm/video
+PKG_BUILDDEP:=		openssl
+PKG_URL:=		https://tvheadend.org/projects/tvheadend
+PKG_SITES:=		https://github.com/tvheadend/tvheadend.git
+
+include $(ADK_TOPDIR)/mk/package.mk
+
+$(eval $(call PKG_template,TVHEADEND,tvheadend,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
+
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
+
+tvheadend-install:
+	$(INSTALL_DIR) $(IDIR_TVHEADEND)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/tvheadend \
+		$(IDIR_TVHEADEND)/usr/bin
+
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
