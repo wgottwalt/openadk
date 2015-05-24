@@ -4,11 +4,11 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		7cc53a9a3da77869d1d5d3d3d9971b4bd1641b50
-PKG_RELEASE:=		2
+PKG_VERSION:=		ff25ea118e3580bb1ebcbb7c450ed933da1782be
+PKG_RELEASE:=		1
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
-PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv
+PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv libsquish
 PKG_DEPENDS+=		libass libmpeg2 libmad libdbus libglew mesalib
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libopenssl libnettle
@@ -25,12 +25,12 @@ PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug libgtk2
 PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis
 PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
-PKG_BUILDDEP+=		zip-host unzip-host
+PKG_BUILDDEP+=		zip-host unzip-host libsquish
 PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		https://github.com/xbmc/xbmc.git
 
 PKG_FLAVOURS_KODI:=	WITH_SMB WITH_NFS WITH_SSH WITH_AVAHI WITH_CEC 
-PKG_FLAVOURS_KODI+=	WITH_AFP WITH_WEBSERVER WITH_RTMP WITH_BLURAY
+PKG_FLAVOURS_KODI+=	WITH_WEBSERVER WITH_RTMP WITH_BLURAY WITH_LIRC
 
 PKGFD_WITH_SMB:=	enable samba support
 PKGFB_WITH_SMB:=	samba
@@ -47,15 +47,15 @@ PKGFS_WITH_AVAHI:=	libavahi
 PKGFD_WITH_CEC:=	enable cec support
 PKGFB_WITH_CEC:=	libcec
 PKGFS_WITH_CEC:=	libcec
-PKGFD_WITH_AFP:=	enable afp support
-PKGFB_WITH_AFP:=	afpfs-ng
-PKGFS_WITH_AFP:=	libafpclient
 PKGFD_WITH_RTMP:=	enable rtmp support
 PKGFB_WITH_RTMP:=	rtmpdump
 PKGFS_WITH_RTMP:=	librtmp
 PKGFD_WITH_BLURAY:=	enable bluray support
 PKGFB_WITH_BLURAY:=	libbluray
 PKGFS_WITH_BLURAY:=	libbluray
+PKGFD_WITH_LIRC:=	enable lirc support
+PKGFB_WITH_LIRC:=	lirc
+PKGFS_WITH_LIRC:=	lirc
 PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 
 # libiconv missing, freescale GL libraries linked against glibc
@@ -124,11 +124,6 @@ CONFIGURE_ARGS+=	--enable-libbluray
 else
 CONFIGURE_ARGS+=	--disable-libbluray
 endif
-ifneq ($(ADK_PACKAGE_KODI_WITH_AFP),)
-CONFIGURE_ARGS+=	--enable-afpclient
-else
-CONFIGURE_ARGS+=	--disable-afpclient
-endif
 ifneq ($(ADK_PACKAGE_KODI_WITH_SMB),)
 CONFIGURE_ARGS+=	--enable-samba
 else
@@ -154,6 +149,11 @@ CONFIGURE_ARGS+=	--enable-rtmp
 else
 CONFIGURE_ARGS+=	--disable-rtmp
 endif
+ifneq ($(ADK_PACKAGE_KODI_WITH_LIRC),)
+CONFIGURE_ARGS+=	--enable-lirc
+else
+CONFIGURE_ARGS+=	--disable-lirc
+endif
 ifneq ($(ADK_PACKAGE_KODI_WITH_AVAHI),)
 CONFIGURE_ARGS+=	--enable-avahi
 else
@@ -169,33 +169,30 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIGURE_ARGS+=	--with-platform=raspberry-pi \
 			--enable-player=omxplayer \
 			--enable-gles \
-			--disable-sdl \
 			--disable-x11
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
 CONFIGURE_ARGS+=	--with-platform=raspberry-pi \
 			--enable-player=omxplayer \
 			--enable-gles \
-			--disable-sdl \
 			--disable-x11
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 CONFIGURE_ARGS+=	--disable-x11 \
-			--disable-sdl \
 			--enable-gles \
 			--enable-codec=imxvpu
 endif
 
 pre-configure:
 	(cd $(WRKBUILD)/lib/cpluff && env PATH='$(AUTOTOOL_PATH)' ./autogen.sh)
-
-pre-build:
-	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" \
-		$(WRKBUILD)/tools/TexturePacker/Makefile.in
 	PATH='$(HOST_PATH)' \
 	make CXX="${HOST_CXX}" CC="${HOST_CC}" CFLAGS="${HOST_CFLAGS}" \
 		CXXFLAGS="${HOST_CXXFLAGS}" LDFLAGS="${HOST_LDFLAGS}" \
 		 -C $(WRKBUILD)/tools/depends/native/JsonSchemaBuilder
+	PATH='$(HOST_PATH)' \
+	make CXX="${HOST_CXX}" CC="${HOST_CC}" CFLAGS="${HOST_CFLAGS}" \
+		CXXFLAGS="${HOST_CXXFLAGS}" LDFLAGS="${HOST_LDFLAGS}" \
+		 -C $(WRKBUILD)/tools/depends/native/TexturePacker
 
 kodi-install:
 	$(INSTALL_DIR) $(IDIR_KODI)/usr/lib/kodi/addons
