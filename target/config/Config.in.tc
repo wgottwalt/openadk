@@ -126,6 +126,121 @@ config ADK_TARGET_CPU_BFIN_BF524
         select ADK_CPU_BF524
 	depends on ADK_TARGET_ARCH_BFIN
 
+config ADK_TARGET_CPU_BFIN_BF525
+        bool "bf525"
+        select ADK_CPU_BF525
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF526
+        bool "bf526"
+        select ADK_CPU_BF526
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF527
+        bool "bf527"
+        select ADK_CPU_BF527
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF531
+        bool "bf531"
+        select ADK_CPU_BF531
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF532
+        bool "bf532"
+        select ADK_CPU_BF532
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF533
+        bool "bf533"
+        select ADK_CPU_BF533
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF534
+        bool "bf534"
+        select ADK_CPU_BF534
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF536
+        bool "bf536"
+        select ADK_CPU_BF536
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF537
+        bool "bf537"
+        select ADK_CPU_BF537
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF538
+        bool "bf538"
+        select ADK_CPU_BF538
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF539
+        bool "bf539"
+        select ADK_CPU_BF539
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF542
+        bool "bf542"
+        select ADK_CPU_BF542
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF544
+        bool "bf544"
+        select ADK_CPU_BF544
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF547
+        bool "bf547"
+        select ADK_CPU_BF547
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF548
+        bool "bf548"
+        select ADK_CPU_BF548
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF549
+        bool "bf549"
+        select ADK_CPU_BF549
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF542M
+        bool "bf542m"
+        select ADK_CPU_BF542M
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF544M
+        bool "bf544m"
+        select ADK_CPU_BF544M
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF547M
+        bool "bf547m"
+        select ADK_CPU_BF547M
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF548M
+        bool "bf548m"
+        select ADK_CPU_BF548M
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF549M
+        bool "bf549m"
+        select ADK_CPU_BF549M
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF561
+        bool "bf561"
+        select ADK_CPU_BF561
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TARGET_CPU_BFIN_BF592
+        bool "bf592"
+        select ADK_CPU_BF592
+	depends on ADK_TARGET_ARCH_BFIN
+
 config ADK_TARGET_CPU_CRIS_V10
 	bool "cris v10"
         select ADK_CPU_CRIS_V10
