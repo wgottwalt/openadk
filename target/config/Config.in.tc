@@ -136,6 +136,12 @@ config ADK_TARGET_CPU_CRIS_V32
         select ADK_CPU_CRIS_V32
 	depends on ADK_TARGET_ARCH_CRIS
 
+config ADK_TARGET_CPU_CF_51
+	bool "coldfire 51"
+	select ADK_CPU_CF_51
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
 config ADK_TARGET_CPU_CF_5206
 	bool "coldfire 5206"
 	select ADK_CPU_CF_5206
@@ -206,6 +212,65 @@ config ADK_TARGET_CPU_CF_5250
 	bool "coldfire 5250"
 	select ADK_CPU_CF_5250
 	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5271
+	bool "coldfire 5271"
+	select ADK_CPU_CF_5271
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5272
+	bool "coldfire 5272"
+	select ADK_CPU_CF_5272
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5275
+	bool "coldfire 5275"
+	select ADK_CPU_CF_5275
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5282
+	bool "coldfire 5282"
+	select ADK_CPU_CF_5282
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_53017
+	bool "coldfire 53017"
+	select ADK_CPU_CF_53017
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5307
+	bool "coldfire 5307"
+	select ADK_CPU_CF_5307
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5329
+	bool "coldfire 5329"
+	select ADK_CPU_CF_5329
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5373
+	bool "coldfire 5373"
+	select ADK_CPU_CF_5373
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5407
+	bool "coldfire 5407"
+	select ADK_CPU_CF_5407
+	select ADK_TARGET_UCLINUX
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_CF_5475
+	bool "coldfire 5475"
+	select ADK_CPU_CF_5475
 	depends on ADK_TARGET_ARCH_M68K
 
 config ADK_TARGET_CPU_X86_I486

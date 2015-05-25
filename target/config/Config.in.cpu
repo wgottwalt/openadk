@@ -97,6 +97,11 @@ config ADK_CPU_C6X
 config ADK_CPU_CF
 	bool
 
+config ADK_CPU_CF_51
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
 config ADK_CPU_CF_5206
 	bool
 	select ADK_CPU_CF
@@ -156,6 +161,57 @@ config ADK_CPU_CF_5250
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_5271
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_5272
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_5275
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_5282
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_53017
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_5307
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_5329
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_5373
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_5407
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+
+config ADK_CPU_CF_5475
+	bool
+	select ADK_CPU_CF
+	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_CORTEX_M3
 	bool
@@ -423,6 +479,7 @@ config ADK_TARGET_CPU_WITH_3DNOWEXT
 config ADK_TARGET_GCC_CPU
 	string
 	default "440" if ADK_CPU_PPC_440
+	default "51" if ADK_CPU_CF_51
 	default "5206" if ADK_CPU_CF_5206
 	default "5206e" if ADK_CPU_CF_5206E
 	default "5208" if ADK_CPU_CF_5208
@@ -435,6 +492,16 @@ config ADK_TARGET_GCC_CPU
 	default "5235" if ADK_CPU_CF_5235
 	default "5249" if ADK_CPU_CF_5249
 	default "5250" if ADK_CPU_CF_5250
+	default "5271" if ADK_CPU_CF_5271
+	default "5272" if ADK_CPU_CF_5272
+	default "5275" if ADK_CPU_CF_5275
+	default "5282" if ADK_CPU_CF_5282
+	default "53017" if ADK_CPU_CF_53017
+	default "5307" if ADK_CPU_CF_5307
+	default "5329" if ADK_CPU_CF_5329
+	default "5373" if ADK_CPU_CF_5373
+	default "5407" if ADK_CPU_CF_5407
+	default "5475" if ADK_CPU_CF_5475
 	default "arc700" if ADK_CPU_ARC700
 	default "archs" if ADK_CPU_ARC_HS
 	default "arm1176jzf-s" if ADK_CPU_ARM1176JZF_S
