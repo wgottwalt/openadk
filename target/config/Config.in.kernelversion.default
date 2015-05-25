@@ -4,9 +4,6 @@
 config ADK_KERNEL_VERSION_4_0
 	bool
 
-config ADK_KERNEL_VERSION_3_19
-	bool
-
 config ADK_KERNEL_VERSION_3_18
 	bool
 
@@ -31,7 +28,6 @@ config ADK_KERNEL_VERSION_2_6_32
 config ADK_KERNEL_VERSION
 	string
 	default "4.0.3" if ADK_KERNEL_VERSION_4_0
-	default "3.19.5" if ADK_KERNEL_VERSION_3_19_5
 	default "3.18.12" if ADK_KERNEL_VERSION_3_18_12
 	default "3.14.43" if ADK_KERNEL_VERSION_3_14_43
 	default "3.12.40" if ADK_KERNEL_VERSION_3_12_40
