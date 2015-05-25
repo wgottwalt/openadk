@@ -27,8 +27,12 @@ imx-gpu-viv-install:
 	$(INSTALL_DIR) $(IDIR_IMX_GPU_VIV)/usr/lib
 	$(CP) $(WRKBUILD)/gpu-core/usr/lib/lib*.so* \
 		$(IDIR_IMX_GPU_VIV)/usr/lib
+	$(CP) $(WRKBUILD)/g2d/usr/lib/lib*.so* \
+		$(IDIR_IMX_GPU_VIV)/usr/lib
 	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/include
 	$(CP) $(WRKBUILD)/gpu-core/usr/include/* \
+		$(STAGING_TARGET_DIR)/usr/include
+	$(CP) $(WRKBUILD)/g2d/usr/include/* \
 		$(STAGING_TARGET_DIR)/usr/include
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

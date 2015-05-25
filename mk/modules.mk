@@ -1,6 +1,10 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+ifeq ($(ADK_KERNEL_VERSION_4_0),y)
+include $(ADK_TOPDIR)/mk/modules-4.0.mk
+endif
+
 ifeq ($(ADK_KERNEL_VERSION_3_19),y)
 include $(ADK_TOPDIR)/mk/modules-3.19.mk
 endif

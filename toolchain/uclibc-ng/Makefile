@@ -282,6 +282,16 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 
 $(WRKBUILD)/.fixup:
 ifeq ($(ADK_UCLIBC_TEST),y)
+ifeq ($(ADK_TARGET_LIB_UCLIBC_NG_GIT),y)
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
+		CC='$(TARGET_CC)' \
+		TEST_INSTALLED_UCLIBC=1 \
+		UCLIBC_ONLY=1 \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
+		VERBOSE=1 \
+		test_compile test_gen
+else
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		CC='$(TARGET_CC)' \
 		TEST_INSTALLED_UCLIBC=1 \
@@ -290,6 +300,7 @@ ifeq ($(ADK_UCLIBC_TEST),y)
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		test_compile
+endif
 endif
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 	# cleanup toolchain

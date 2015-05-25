@@ -8,6 +8,7 @@ source target/linux/config/Config.in.flash
 source target/linux/config/Config.in.fs
 source target/linux/config/Config.in.netdevice
 source target/linux/config/Config.in.usb
+source target/linux/config/Config.in.serial
 source target/linux/config/Config.in.graphics
 source target/linux/config/Config.in.input
 source target/linux/config/Config.in.pcmcia

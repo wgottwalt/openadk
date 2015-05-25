@@ -1,0 +1,11 @@
+menu "Serial devices support"
+depends on ADK_TARGET_WITH_SERIAL || ADK_TARGET_QEMU || ADK_TARGET_VBOX
+
+config ADK_KERNEL_ETRAXFS_SERIAL
+	bool "ETRAXFS serial driver"
+	default y if ADK_TARGET_SYSTEM_QEMU_CRIS
+	default n
+	help
+	  Serial driver for ETRAXFS CRISv32 Qemu Emulation.
+
+endmenu
