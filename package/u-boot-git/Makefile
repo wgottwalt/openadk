@@ -8,8 +8,8 @@ PKG_VERSION:=		3bfe3ce2a6e3b04da1d04dbc0520dcc26e17f98a
 PKG_RELEASE:=		1
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
-HOST_BUILDDEP:=		openssl-host
-PKG_BUILDDEP:=		u-boot-host
+HOST_BUILDDEP:=		openssl-host device-tree-compiler-host
+PKG_BUILDDEP:=		u-boot-git-host
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
 PKG_SITES:=		git://git.denx.de/u-boot.git
 
@@ -57,7 +57,9 @@ do-configure:
 	(cd $(WRKBUILD) && $(MAKE) $(CONFIG))
 
 do-build:
-	(cd $(WRKBUILD) && env CROSS_COMPILE='$(TARGET_CROSS)' \
+	(cd $(WRKBUILD) && env \
+		PATH='$(HOST_PATH)' \
+		CROSS_COMPILE='$(TARGET_CROSS)' \
 		GCC_HONOUR_COPTS=s $(MAKE))
 	#(cd $(WRKBUILD) && env CROSS_COMPILE='$(TARGET_CROSS)' \
 	#	GCC_HONOUR_COPTS=s $(MAKE) env)
