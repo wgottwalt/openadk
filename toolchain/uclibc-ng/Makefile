@@ -110,7 +110,6 @@ ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS),y)
 	$(SED) 's/.*\(UCLIBC_HAS_TLS\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(PTHREADS_DEBUG_SUPPORT\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(HAS_NO_THREADS\).*/\1=y/' ${WRKBUILD}/.config
-
 endif
 endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC_NG_1_0),y)
@@ -136,7 +135,6 @@ ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS),y)
 	$(SED) 's/.*\(UCLIBC_HAS_TLS\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(PTHREADS_DEBUG_SUPPORT\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(HAS_NO_THREADS\).*/\1=y/' ${WRKBUILD}/.config
-
 endif
 endif
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),)
@@ -176,6 +174,18 @@ endif
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
 	$(SED) 's/.*\(COMPILE_IN_THUMB_MODE\).*/\1=y/' ${WRKBUILD}/.config
+endif
+endif
+
+# cris
+ifeq ($(ADK_TARGET_ARCH_CRIS),y)
+ifeq ($(ADK_CPU_CRIS_V32),y)
+	$(SED) 's/.*\(CONFIG_CRIS=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_CRISV32\).*/\1=y/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_CPU_CRIS_V10),y)
+	$(SED) 's/.*\(CONFIG_CRIS=\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_CRISV32\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 endif
 
