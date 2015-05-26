@@ -241,12 +241,12 @@ config ADK_TARGET_CPU_BFIN_BF592
         select ADK_CPU_BF592
 	depends on ADK_TARGET_ARCH_BFIN
 
-config ADK_TARGET_CPU_CRIS_V10
+config ADK_TARGET_CPU_CRIS_CRISV10
 	bool "cris v10"
         select ADK_CPU_CRIS_V10
 	depends on ADK_TARGET_ARCH_CRIS
 
-config ADK_TARGET_CPU_CRIS_V32
+config ADK_TARGET_CPU_CRIS_CRISV32
 	bool "cris v32"
         select ADK_CPU_CRIS_V32
 	depends on ADK_TARGET_ARCH_CRIS
