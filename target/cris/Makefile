@@ -9,7 +9,7 @@ include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux
 ZKERNEL:=$(LINUX_DIR)/arch/cris/boot/Image
-QEMU_ARGS:=-M axis-dev88 -nographic
+QEMU_ARGS:=-M axis-dev88 -nographic -monitor none
 
 ifeq ($(ADK_TARGET_FS),initramfs)
 targethelp:

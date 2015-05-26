@@ -1,8 +1,12 @@
 menu "Serial devices support"
 depends on ADK_TARGET_WITH_SERIAL || ADK_TARGET_QEMU || ADK_TARGET_VBOX
 
-config ADK_KERNEL_ETRAXFS_SERIAL
+config ADK_KERNEL_SERIAL_ETRAXFS_CONSOLE
+	bool
+
+config ADK_KERNEL_SERIAL_ETRAXFS
 	bool "ETRAXFS serial driver"
+	select ADK_KERNEL_SERIAL_ETRAXFS_CONSOLE
 	default y if ADK_TARGET_SYSTEM_QEMU_CRIS
 	default n
 	help
