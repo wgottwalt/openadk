@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		imx-vpu
-PKG_VERSION:=		3.10.31-1.1.0-beta
+PKG_VERSION:=		5.4.28
 PKG_RELEASE:=		1
-PKG_HASH:=		22d0542bd4d7beb88084575c834bf9045c8e2acc43acdd2ec4e0e5534b4b9c5e
-PKG_DESCR:=		IMX VPU library (Freescale)
+PKG_HASH:=		0a05af1a5978175de852b2cf61763ec789f2845df78edb8d02a28611439b57f7
+PKG_DESCR:=		imx vpu library
 PKG_DEPENDS:=		firmware-imx
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.freescale.com/

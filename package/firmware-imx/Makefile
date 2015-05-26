@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		firmware-imx
-PKG_VERSION:=		3.10.31-1.1.0-beta
+PKG_VERSION:=		3.14.28-1.0.0
 PKG_RELEASE:=		1
-PKG_HASH:=		8fcfc713321c4ffaafee248feb392b7bc9b913b7abee5020fceaca1d1a49ac99
-PKG_DESCR:=		IMX VPU firmware (Freescale)
+PKG_HASH:=		1f09acd4d605efc78a0672068a658cb16274811d2f444cf3ae7aaa075266746f
+PKG_DESCR:=		imx vpu firmware
 PKG_SECTION:=		sys/firmware
 PKG_URL:=		http://www.freescale.com/
 PKG_SITES:=		http://www.freescale.com/lgfiles/NMG/MAD/YOCTO/

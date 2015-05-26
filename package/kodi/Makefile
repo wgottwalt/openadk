@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
 PKG_VERSION:=		ff25ea118e3580bb1ebcbb7c450ed933da1782be
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv libsquish
@@ -24,8 +24,8 @@ PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug libgtk2
 PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis
-PKG_BUILDDEP+=		swig-host sdl-host sdl-image-host liblzo-host
-PKG_BUILDDEP+=		zip-host unzip-host libsquish
+PKG_BUILDDEP+=		swig-host liblzo-host libpng-host
+PKG_BUILDDEP+=		zip-host unzip-host libsquish giflib-host
 PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		https://github.com/xbmc/xbmc.git
 
