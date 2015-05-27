@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		d93ad8546b510244f863b39b4c0da0fa4c0d53a77b61a8a3880f258c232bbbee
 PKG_DESCR:=		jpeg image library
 PKG_SECTION:=		libs/image
-PKG_BUILDDEP_IBM_X40:=	yasm-host
-PKG_BUILDDEP_QEMU_X86:=	yasm-host
+PKG_BUILDDEP:=		yasm-host
+HOST_BUILDDEP:=		yasm-host
 PKG_URL:=		http://libjpeg-turbo.virtualgl.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libjpeg-turbo/}
 PKG_OPTS:=		dev
@@ -18,8 +18,10 @@ PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
+include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,LIBJPEG_TURBO,libjpeg-turbo,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBJPEG_TURBO,libjpeg-turbo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CFLAGS+=		-fPIC
@@ -35,4 +37,5 @@ libjpeg-turbo-install:
 	$(CP) $(WRKINST)/usr/lib/lib{turbo,}jpeg*.so* \
 		$(IDIR_LIBJPEG_TURBO)/usr/lib
 
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
