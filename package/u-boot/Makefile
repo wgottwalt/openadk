@@ -16,7 +16,7 @@ PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 atmel-ngw100 xilinx-kintex7
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 atmel-ngw100
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
