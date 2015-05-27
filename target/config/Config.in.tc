@@ -388,6 +388,26 @@ config ADK_TARGET_CPU_CF_5475
 	select ADK_CPU_CF_5475
 	depends on ADK_TARGET_ARCH_M68K
 
+config ADK_TARGET_CPU_M68K_68020
+	bool "m68k 68020"
+	select ADK_CPU_68020
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_M68K_68030
+	bool "m68k 68030"
+	select ADK_CPU_68030
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_M68K_68040
+	bool "m68k 68040"
+	select ADK_CPU_68040
+	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_M68K_68060
+	bool "m68k 68060"
+	select ADK_CPU_68060
+	depends on ADK_TARGET_ARCH_M68K
+
 config ADK_TARGET_CPU_X86_I486
 	bool "i486"
 	select ADK_CPU_I486
