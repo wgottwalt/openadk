@@ -4,7 +4,7 @@
 MASTER_SITE_BACKUP?=	http://${ADK_HOST}/distfiles/
 
 MASTER_SITE_OPENADK?=	\
-	http://www.openadk.org/distfiles/ \
+	http://distfiles.openadk.org/ \
 
 MASTER_SITE_MIRBSD?=	\
 	http://www.mirbsd.org/MirOS/distfiles/ \
