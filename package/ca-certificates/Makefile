@@ -4,16 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ca-certificates
-PKG_VERSION:=		20090814
-PKG_RELEASE:=		3
-PKG_HASH:=		6924fafc35dd020da99bc86842f95f2a97a3a5ff084b0635eea815fe2777fc7c
+PKG_VERSION:=		20141019
+PKG_RELEASE:=		1
+PKG_HASH:=		684902d3f4e9ad27829f4af0d9d2d588afed03667997579b9c2be86fcd1eb73a
 PKG_DESCR:=		collection of common ca certificates
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		openssl-util libopenssl
 PKG_URL:=		http://packages.debian.org/sid/ca-certificates
-PKG_SITES:=		http://ftp.debian.org/debian/pool/main/c/ca-certificates/
+PKG_SITES:=		http://http.debian.net/debian/pool/main/c/ca-certificates/
 
-DISTFILES:=		${PKG_NAME}_${PKG_VERSION}.tar.gz
+DISTFILES:=		$(PKG_NAME)_$(PKG_VERSION).tar.xz
 
 PKG_FLAVOURS_CA_CERTS:=	SMALL
 PKGFD_SMALL:=		minimal set of CA certificates
