@@ -465,6 +465,12 @@ endif
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_TARGET_QEMU)" ];then \
+		grep "^config" target/config/Config.in.qemu \
+			|grep -i "$(ADK_TARGET_QEMU)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
 		$(CONFIG)/conf --defconfig=.defconfig $(CONFIG_CONFIG_IN); \
 	fi

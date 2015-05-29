@@ -1,15 +1,15 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-choice ADK_TARGET_FLOAT
+choice ADK_TARGET_FLOAT_MODE
 prompt "Float configuration"
-depends on (ADK_TARGET_ARCH_ARM || \
+depends on ADK_TARGET_ARCH_ARM || \
 	   ADK_TARGET_ARCH_MIPS || \
-	   ADK_TARGET_ARCH_PPC) && \
-	   ADK_TARGET_CPU_WITH_FPU
+	   ADK_TARGET_ARCH_PPC
 
 config ADK_TARGET_HARD_FLOAT
 	bool "hard-float"
+	depends on ADK_TARGET_CPU_WITH_FPU
 
 config ADK_TARGET_SOFT_FLOAT
 	bool "soft-float"

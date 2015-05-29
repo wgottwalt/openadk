@@ -8,6 +8,7 @@ depends on ADK_TARGET_SYSTEM_QEMU_PPC
 config ADK_TARGET_QEMU_PPC_BAMBOO
 	bool "Bamboo PPC"
 	select ADK_CPU_PPC_440
+	select ADK_TARGET_SOFT_FLOAT
 
 config ADK_TARGET_QEMU_PPC_MACPPC
 	bool "Mac99 PPC"
