@@ -1,5 +1,5 @@
---- xbmc-13.1.orig/Makefile.include.in	2014-06-08 08:40:24.000000000 +0200
-+++ xbmc-13.1/Makefile.include.in	2014-06-11 13:17:49.354722974 +0200
+--- kodi-ff25ea118e3580bb1ebcbb7c450ed933da1782be.orig/Makefile.include.in	2015-05-25 11:50:29.000000000 -0500
++++ kodi-ff25ea118e3580bb1ebcbb7c450ed933da1782be/Makefile.include.in	2015-05-25 11:53:49.490501827 -0500
 @@ -37,6 +37,7 @@ CFLAGS+=@CFLAGS@
  CFLAGS_FOR_BUILD+=@CFLAGS_FOR_BUILD@
  LDFLAGS+=@LDFLAGS@
@@ -7,4 +7,4 @@
 +INCLUDES+=@CPPFLAGS@
  INCLUDES+=-I@abs_top_srcdir@/lib
  INCLUDES+=-I@abs_top_srcdir@/xbmc
- INCLUDES+=-I@abs_top_srcdir@/addons/library.xbmc.gui
+ INCLUDES+=-I@abs_top_srcdir@/addons/library.kodi.guilib

@@ -1,0 +1,11 @@
+--- kodi-ff25ea118e3580bb1ebcbb7c450ed933da1782be.orig/configure.ac	2015-05-25 11:50:32.000000000 -0500
++++ kodi-ff25ea118e3580bb1ebcbb7c450ed933da1782be/configure.ac	2015-05-25 14:15:13.034424159 -0500
+@@ -1044,7 +1044,7 @@ if test "$use_gles" = "yes"; then
+       AC_DEFINE([HAVE_LIBEGL],[1],["Define to 1 if you have the `EGL' library (-lEGL)."])
+       AC_DEFINE([HAVE_LIBGLESV2],[1],["Define to 1 if you have the `GLESv2' library (-lGLESv2)."])
+       AC_MSG_RESULT(== WARNING: OpenGLES support is assumed.)
+-      LIBS="$LIBS -lEGL -lGLESv2 -lbcm_host -lvcos -lvchiq_arm -lmmal -lmmal_core -lmmal_util"
++      LIBS="$LIBS -lEGL -lGLESv2 -lbcm_host -lvcos -lvchiq_arm -lmmal -lmmal_core -lmmal_util -lvcsm -lmmal_vc_client -lmmal_components -lcontainers -lkhrn_static -lpthread -lm"
+     else
+       AC_CHECK_LIB([EGL],   [main],, AC_MSG_ERROR($missing_library))
+       AC_CHECK_LIB([GLESv2],[main],, AC_MSG_ERROR($missing_library))

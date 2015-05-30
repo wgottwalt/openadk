@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm28xx-vc
-PKG_VERSION:=		0de0b205ea94ab61c24ea515cd3935e37d41ac03
+PKG_VERSION:=		9cc14b29288f913ef0e3286f4b3232bf73ab59d2
 PKG_RELEASE:=		1
 PKG_DESCR:=		videocore tools and libraries for bcm28xx
 PKG_SECTION:=		libs/video
@@ -63,6 +63,8 @@ bcm28xx-vc-gl-libs-install:
 	$(CP) $(WRKINST)/opt/vc/lib/libmmal*.so \
 		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
 	$(CP) $(WRKINST)/opt/vc/lib/libopenmaxil.so \
+		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
+	$(CP) $(WRKINST)/opt/vc/lib/libvcsm.so \
 		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
 	$(CP) $(WRKINST)/opt/vc/lib/libEGL.so \
 		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
