@@ -36,7 +36,7 @@ config ADK_KERNEL_KALLSYMS_ALL
 config ADK_KERNEL_PRINTK
 	bool "printk support (disable to save space and quieten bootup)"
 	select ADK_KERNEL_EARLY_PRINTK
-	default y
+	default y if !ADK_APPLIANCE_TEST
 	help
 	  Disable printk to save space and quieten bootup.
 
