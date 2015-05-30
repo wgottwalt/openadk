@@ -9,8 +9,8 @@ PKG_RELEASE:=		2
 PKG_HASH:=		858b589c22297cacdf437f3baff6f04b333087521ab274f7ab677cb8c6bb78e4
 PKG_DESCR:=		partition table editor
 PKG_SECTION:=		sys/fs
-PKG_DEPENDS:=		libblkid libuuid libpthread
-PKG_BUILDDEP:=		util-linux
+PKG_DEPENDS:=		libblkid libuuid libpthread libncurses
+PKG_BUILDDEP:=		util-linux ncurses
 PKG_URL:=		http://www.gnu.org/software/parted/index.shtml
 PKG_SITES:=		$(MASTER_SITE_GNU:=parted/)
 
