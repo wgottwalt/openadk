@@ -626,7 +626,7 @@ config BUSYBOX_PIVOT_ROOT
 config BUSYBOX_RDATE
 	bool "rdate"
 	depends on !BUSYBOX_DISABLE_RDATE
-	default n
+	default y
 	help
 	  The rdate utility allows you to synchronize the date and time of your
 	  system clock with the date and time of a remote networked system using
