@@ -12,8 +12,10 @@ PKG_DEPENDS:=		mke2fs parted sfdisk dosfstools mksh
 PKG_CFLINE_ADKINSTALL:=	select ADK_KERNEL_EXT4_FS
 
 PKG_SYSTEM_DEPENDS:=	mikrotik-rb532 lemote-yeelong pcengines-apu pcengines-alix ibm-x40
+PKG_DEPENDS_PCENGINES_ALIX:=	grub grub-tools
 PKG_DEPENDS_PCENGINES_APU:=	grub grub-tools
 PKG_DEPENDS_IBM_X40:=	grub grub-tools
+
 NO_DISTFILES:=		1
 
 include ${ADK_TOPDIR}/mk/package.mk
