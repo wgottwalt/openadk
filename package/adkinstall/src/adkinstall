@@ -44,6 +44,14 @@ EOF
 	exit 1
 }
 
+function pcengines-alix-help {
+	cat >&2 <<EOF
+Syntax: adkinstall <archive>
+	-f: filesystem (default ext4)
+	-h: help text
+EOF
+	exit 1
+}
 
 case $target {
 (ibm-x40)
@@ -88,6 +96,27 @@ case $target {
 	shift $((OPTIND - 1))
 	if [ -z $1 ];then
 		pcengines-apu-help
+	else
+		archive=$1
+	fi
+	;;
+(pcengines-alix)
+	cfgfssize=32768
+	fs=ext4
+	while getopts "f:" ch; do
+	case $ch in
+		f)
+			fs=$OPTARG
+			;;
+		*)
+			pcengines-alix-help
+			exit 1
+			;;
+	esac
+	done
+	shift $((OPTIND - 1))
+	if [ -z $1 ];then
+		pcengines-alix-help
 	else
 		archive=$1
 	fi
@@ -258,7 +287,7 @@ case $target {
 	fix_perm /mnt
 	umount /mnt
 	;;
-(pcengines-apu)
+(pcengines-apu|pcengines-alix)
 	get_max_size /dev/sda
 	create_label /dev/sda
 	create_partition /dev/sda ext2 16385 $rootsize

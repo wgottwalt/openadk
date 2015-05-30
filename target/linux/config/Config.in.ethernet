@@ -110,8 +110,10 @@ config ADK_KERNEL_VIA_RHINE
 	tristate "VIA Rhine ethernet driver"
 	select ADK_KERNEL_NET_VENDOR_VIA
 	select ADK_KERNEL_VIA_RHINE_MMIO
-	depends on ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	depends on ADK_TARGET_SYSTEM_MIKROTIK_RB532 \
+		|| ADK_TARGET_SYSTEM_PCENGINES_ALIX
 	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	default y if ADK_TARGET_SYSTEM_PCENGINES_ALIX
 	default n
 	help
 	  VIA Rhine ethernet driver

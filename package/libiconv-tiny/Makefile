@@ -10,7 +10,7 @@ PKG_HASH:=		1410d40697a5eda9de5e433edfbed540b66c3e1af7374b8507ab9c468b7d9012
 PKG_DESCR:=		iconv stub and replacement
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.openwrt.org/
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

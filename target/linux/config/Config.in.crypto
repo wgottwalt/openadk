@@ -547,6 +547,7 @@ config ADK_KERNEL_CRYPTO_DEFLATE
 	tristate
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	select ADK_KERNEL_ZLIB_DEFLATE
+	select ADK_KERNEL_ZLIB_INFLATE
 	default n
 	help
 	  This is the Deflate algorithm (RFC1951), specified for use in

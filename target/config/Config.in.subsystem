@@ -1,4 +1,18 @@
 choice
+prompt "PCengines ALIX model"
+depends on ADK_TARGET_SYSTEM_PCENGINES_ALIX
+
+config ADK_TARGET_SYSTEM_PCENGINES_ALIX2D
+	bool "PCengines Alix 2D"
+
+config ADK_TARGET_SYSTEM_PCENGINES_ALIX1C
+	bool "PCengines Alix 1C"
+	select ADK_TARGET_WITH_SOUND
+	select ADK_TARGET_WITH_VGA
+
+endchoice
+
+choice
 prompt "Solidrun IMX6 model"
 depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 

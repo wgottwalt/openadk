@@ -358,6 +358,10 @@ $(eval $(call KMOD_template,NET_ACT_PEDIT,net-act-pedit,\
 # IPsec 
 #
 
+$(eval $(call KMOD_template,XFRM_ALGO,xfrm-algo,\
+	$(MODULES_DIR)/kernel/net/xfrm/xfrm_algo \
+,59))
+
 $(eval $(call KMOD_template,NET_KEY,net-key,\
 	$(MODULES_DIR)/kernel/net/key/af_key \
 ,60))
@@ -1027,7 +1031,7 @@ $(eval $(call KMOD_template,CRYPTO_FCRYPT,crypto-fcrypt,\
 
 $(eval $(call KMOD_template,CRYPTO_DEFLATE,crypto-deflate,\
     $(MODULES_DIR)/kernel/crypto/deflate \
-,10, kmod-zlib-deflate))
+,10, kmod-zlib-deflate kmod-zlib-inflate))
 
 $(eval $(call KMOD_template,CRYPTO_LZO,crypto-lzo,\
     $(MODULES_DIR)/kernel/crypto/lzo \
@@ -1734,6 +1738,10 @@ $(eval $(call KMOD_template,VIRTIO_NET,virtio-net,\
 
 $(eval $(call KMOD_template,ZLIB_DEFLATE,zlib-deflate,\
 	$(MODULES_DIR)/kernel/lib/zlib_deflate/zlib_deflate \
+,01))
+
+$(eval $(call KMOD_template,ZLIB_INFLATE,zlib-inflate,\
+	$(MODULES_DIR)/kernel/lib/zlib_inflate/zlib_inflate \
 ,01))
 
 $(eval $(call KMOD_template,LZO_COMPRESS,lzo-compress,\

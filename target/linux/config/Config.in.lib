@@ -44,6 +44,10 @@ config ADK_KERNEL_ZLIB_DEFLATE
 	tristate
 	default n
 
+config ADK_KERNEL_ZLIB_INFLATE
+	tristate
+	default n
+
 config ADK_KERNEL_LZO_COMPRESS
 	tristate
 	default n

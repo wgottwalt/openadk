@@ -1,37 +1,35 @@
 menu "IPSec support"
 
-config ADK_KERNEL_NET_KEY
-	prompt "PF_KEYv2 socket family"
+config ADK_KERNEL_XFRM_ALGO
 	tristate
+
+config ADK_KERNEL_NET_KEY
+	tristate "PF_KEYv2 socket family"
 	default n
 	help
 	  PF_KEYv2 socket family, compatible to KAME ones.
 
 config ADK_KERNEL_XFRM_USER
-	prompt "IPsec usertools support"
-	tristate
+	tristate "IPsec usertools support"
+	select ADK_KERNEL_XFRM_ALGO
 	default n
-	help
 
 config ADK_KERNEL_INET_AH
-	prompt "IPsec AH support"
-	tristate
+	tristate "IPsec AH support"
 	select ADK_KERNEL_CRYPTO_HASH
 	default n
 	help
 	  Support for IPsec AH.
 
 config ADK_KERNEL_INET_ESP
-	prompt "IPsec ESP support"
-	tristate
+	tristate "IPsec ESP support"
 	select ADK_KERNEL_CRYPTO_AEAD
 	default n
 	help
 	  Support for IPsec ESP.
 
 config ADK_KERNEL_INET_IPCOMP
-	prompt "IP Payload Compression"
-	tristate
+	tristate "IP Payload Compression"
 	select ADK_KERNEL_CRYPTO_DEFLATE
 	select ADK_KERNEL_INET_TUNNEL
 	default n
@@ -40,22 +38,19 @@ config ADK_KERNEL_INET_IPCOMP
 	  typically needed for IPsec.
 
 config ADK_KERNEL_INET_XFRM_MODE_TRANSPORT
-	prompt "IPsec transport mode"
-	tristate
+	tristate "IPsec transport mode"
 	default n
 	help
 	  Support for IPsec transport mode.
 
 config ADK_KERNEL_INET_XFRM_MODE_TUNNEL
-	prompt "IPsec tunnel mode"
-	tristate
+	tristate "IPsec tunnel mode"
 	default n
 	help
 	  Support for IPsec tunnel mode.
 
 config ADK_KERNEL_INET_XFRM_MODE_BEET
-	prompt "IPsec BEET mode"
-	tristate
+	tristate "IPsec BEET mode"
 	default n
 	help
 	  Support for IPsec BEET mode.
