@@ -62,6 +62,10 @@ GCC_CONFOPTS+=         --disable-tls --disable-threads --disable-libatomic
 endif
 endif
 
+ifeq ($(ADK_TARGET_WITH_LT),y)
+GCC_CONFOPTS+=         --disable-tls --disable-threads --disable-libatomic
+endif
+
 ifeq ($(ADK_TARGET_UCLINUX)$(ADK_TARGET_USE_STATIC_LIBS),y)
 GCC_FINAL_CONFOPTS+=	--disable-shared
 else
