@@ -4,14 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libc-test
-PKG_VERSION:=		20140801
+PKG_VERSION:=		629dbf8282882b7c512fd317d18b19044ca628ea
 PKG_RELEASE:=		1
-PKG_HASH:=		604c98457f5f55ff507b5b417f172ddc5f156c5cffb4dbebfd247ba02ade4205
 PKG_DESCR:=		libc test suite
 PKG_SECTION:=		base/libs
 PKG_DEPENDS:=		make
 PKG_URL:=		http://nsz.repo.hu/git/?p=libc-test
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		git://nsz.repo.hu:45100/repo/libc-test
 
 include $(ADK_TOPDIR)/mk/package.mk
 
