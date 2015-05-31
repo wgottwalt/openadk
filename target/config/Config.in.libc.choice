@@ -115,6 +115,7 @@ prompt "Threading"
 depends on ADK_TARGET_LIB_UCLIBC || ADK_TARGET_LIB_UCLIBC_NG
 
 config ADK_TARGET_LIB_WITH_THREADS
+	depends on ADK_TARGET_WITH_LT || ADK_TARGET_WITH_NPTL
 	bool "enable threads"
 
 config ADK_TARGET_LIB_WITHOUT_THREADS

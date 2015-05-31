@@ -23,7 +23,6 @@ TARGET_CFLAGS:=		$(filter-out -msep-data,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -msep-data,$(TARGET_CXXFLAGS))
 endif
 
-
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-bugurl="http://www.openadk.org/" \
 			--build=$(GNU_HOST_NAME) \
@@ -60,9 +59,7 @@ GCC_CONFOPTS+=         --enable-tls --enable-threads --enable-libatomic
 else
 GCC_CONFOPTS+=         --disable-tls --disable-threads --disable-libatomic
 endif
-endif
-
-ifeq ($(ADK_TARGET_WITH_LT),y)
+else
 GCC_CONFOPTS+=         --disable-tls --disable-threads --disable-libatomic
 endif
 
