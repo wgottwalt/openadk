@@ -10,6 +10,7 @@ depends on ADK_TARGET_TOOLCHAIN && \
 	|| ADK_TARGET_ARCH_ARM \
 	|| ADK_TARGET_ARCH_BFIN \
 	|| ADK_TARGET_ARCH_M68K \
+	|| ADK_TARGET_ARCH_SH \
 	|| ADK_TARGET_ARCH_X86 )
 
 config ADK_TARGET_CPU_ARC_ARC700
@@ -407,6 +408,31 @@ config ADK_TARGET_CPU_M68K_68060
 	bool "m68k 68060"
 	select ADK_CPU_68060
 	depends on ADK_TARGET_ARCH_M68K
+
+config ADK_TARGET_CPU_SH_SH2
+	bool "sh2"
+	select ADK_CPU_SH2
+	depends on ADK_TARGET_ARCH_SH
+
+config ADK_TARGET_CPU_SH_SH2A
+	bool "sh2a"
+	select ADK_CPU_SH2A
+	depends on ADK_TARGET_ARCH_SH
+
+config ADK_TARGET_CPU_SH_SH3
+	bool "sh3"
+	select ADK_CPU_SH3
+	depends on ADK_TARGET_ARCH_SH
+
+config ADK_TARGET_CPU_SH_SH4
+	bool "sh4"
+	select ADK_CPU_SH4
+	depends on ADK_TARGET_ARCH_SH
+
+config ADK_TARGET_CPU_SH_SH4A
+	bool "sh4a"
+	select ADK_CPU_SH4A
+	depends on ADK_TARGET_ARCH_SH
 
 config ADK_TARGET_CPU_X86_I486
 	bool "i486"

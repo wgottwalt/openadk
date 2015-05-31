@@ -499,7 +499,21 @@ config ADK_CPU_PPC64
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
+config ADK_CPU_SH2
+	bool
+
+config ADK_CPU_SH2A
+	bool
+
+config ADK_CPU_SH3
+	bool
+
 config ADK_CPU_SH4
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_SH4A
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
@@ -676,6 +690,11 @@ config ADK_TARGET_CPU_FLAGS
 	default "-mcpu=v10" if ADK_CPU_CRIS_V10
 	default "-mcpu=v32" if ADK_CPU_CRIS_V32
 	default "-mcpu=v7.10.d" if ADK_CPU_MICROBLAZE
+	default "-m2" if ADK_CPU_SH2
+	default "-m2a" if ADK_CPU_SH2A
+	default "-m3" if ADK_CPU_SH3
+	default "-m4" if ADK_CPU_SH4
+	default "-m4a" if ADK_CPU_SH4A
 
 config ADK_TARGET_CPU_TYPE
 	string
@@ -784,8 +803,13 @@ config ADK_TARGET_CPU_ARCH
 	default "ppc" if ADK_CPU_PPC
 	default "ppc" if ADK_CPU_PPC_440
 	default "ppc64" if ADK_CPU_PPC64
-	default "sh4" if ADK_TARGET_ARCH_SH && ADK_TARGET_LITTLE_ENDIAN
-	default "sh4eb" if ADK_TARGET_ARCH_SH && ADK_TARGET_BIG_ENDIAN
+	default "sh2" if ADK_CPU_SH2
+	default "sh2a" if ADK_CPU_SH2A
+	default "sh3" if ADK_CPU_SH3
+	default "sh4" if ADK_CPU_SH4 && ADK_TARGET_LITTLE_ENDIAN
+	default "sh4eb" if ADK_CPU_SH4 && ADK_TARGET_BIG_ENDIAN
+	default "sh4a" if ADK_CPU_SH4A && ADK_TARGET_LITTLE_ENDIAN
+	default "sh4aeb" if ADK_CPU_SH4A && ADK_TARGET_BIG_ENDIAN
 	default "sparc" if ADK_TARGET_ARCH_SPARC
 	default "sparc64" if ADK_TARGET_ARCH_SPARC64
 	default "tilegx" if ADK_CPU_TILE

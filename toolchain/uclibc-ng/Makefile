@@ -197,6 +197,35 @@ ifeq ($(ADK_CPU_MIPS32R2),y)
 endif
 endif
 
+# sh
+ifeq ($(ADK_TARGET_ARCH_SH),y)
+ifeq ($(ADK_CPU_SH4),y)
+	$(SED) 's/.*\(CONFIG_SH2A=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH2=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH3=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH4\).*/\1=y/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_CPU_SH3),y)
+	$(SED) 's/.*\(CONFIG_SH2A=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH2=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH4=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH3\).*/\1=y/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_CPU_SH2),y)
+	$(SED) 's/.*\(CONFIG_SH2A=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH3=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH4=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH2\).*/\1=y/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_CPU_SH2A),y)
+	$(SED) 's/.*\(CONFIG_SH2A=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH3=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH4=\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_SH2A\).*/\1=y/' ${WRKBUILD}/.config
+endif
+endif
+
+# x86
 ifeq ($(ADK_TARGET_ARCH_X86),y)
 ifeq ($(ADK_CPU_I486),y)
 	$(SED) 's/.*\(CONFIG_686\).*/# \1 is not set/' ${WRKBUILD}/.config

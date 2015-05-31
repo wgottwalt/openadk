@@ -123,7 +123,21 @@ GCC_CONFOPTS+=		--with-endian=little
 else
 GCC_CONFOPTS+=          --with-endian=big
 endif
+ifeq ($(ADK_CPU_SH2),y)
+GCC_FINAL_CONFOPTS+=	--with-multilib-list=m2
+endif
+ifeq ($(ADK_CPU_SH2A),y)
+GCC_FINAL_CONFOPTS+=	--with-multilib-list=m2a
+endif
+ifeq ($(ADK_CPU_SH3),y)
+GCC_FINAL_CONFOPTS+=	--with-multilib-list=m3
+endif
+ifeq ($(ADK_CPU_SH4),y)
 GCC_FINAL_CONFOPTS+=	--with-multilib-list=m4,m4-nofpu
+endif
+ifeq ($(ADK_CPU_SH4A),y)
+GCC_FINAL_CONFOPTS+=	--with-multilib-list=m4a,m4a-nofpu
+endif
 endif
 
 ifeq ($(ADK_TARGET_ARCH_X86),y)
