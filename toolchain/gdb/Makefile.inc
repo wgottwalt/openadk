@@ -20,7 +20,7 @@ ifeq ($(ADK_TOOLCHAIN_GDB_6_7_1),y)
 PKG_VERSION:=		6.7.1
 PKG_RELEASE:=		1
 PKG_HASH:=		a34c65163a2428e24891466b1f095249bc6301b64cfe9480f3aba341b58c3434
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 DISTFILES:=		gdb-6.7.1-avr32-2.1.5.tar.bz2
 WRKDIST=		$(WRKDIR)/gdb-6.7.1-avr32-2.1.5
 endif
