@@ -31,7 +31,7 @@ ifeq ($(ADK_TOOLCHAIN_GCC_4_8_3_ARC),y)
 # from https://github.com/foss-for-synopsys-dwc-arc-processors/gcc.git
 PKG_VERSION:=		4.8.3
 PKG_HASH:=		acbd97878c1eab8e6d2dcc80327f31fb68c41016a4451632c75007ce8944a8b9
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-arc.tar.xz
 endif

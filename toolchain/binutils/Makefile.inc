@@ -22,7 +22,7 @@ ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_23_ARC),y)
 PKG_VERSION:=		2.23.2
 PKG_RELEASE:=		1
 PKG_HASH:=		6ef173d7e88cf22d0cd1c2169286d1b4fdff4c1e0ac0d402cc3a30a52dda769e
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-arc.tar.xz
 endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_22),y)
