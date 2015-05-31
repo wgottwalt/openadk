@@ -15,19 +15,24 @@ PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/$(PKG_EXTRAVER)/
 PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
-PKG_SUBPKGS+=		LIBUUID LIBBLKID LIBMOUNT CFDISK MKFS
+PKG_SUBPKGS+=		LIBFDISK LIBUUID LIBBLKID LIBMOUNT CFDISK MKFS
 PKGSD_LIBUUID:=		uuid library
 PKGSC_LIBUUID:=		libs/misc
 PKGSD_LIBBLKID:=	blkid library
 PKGSC_LIBBLKID:=	libs/misc
+PKGSD_LIBFDISK:=	fdisk library
+PKGSC_LIBFDISK:=	libs/misc
 PKGSD_LIBMOUNT:=	mount library
 PKGSC_LIBMOUNT:=	libs/misc
 PKGSD_FDISK:=		partition table manipulation utility
 PKGSC_FDISK:=		sys/fs
+PKGSS_FDISK:=		libfdisk
 PKGSD_SFDISK:=		scriptable partition table manipulation utility
 PKGSC_SFDISK:=		sys/fs
+PKGSS_SFDISK:=		libfdisk
 PKGSD_CFDISK:=		partition table manipulation utility
 PKGSC_CFDISK:=		sys/fs
+PKGSS_CFDISK:=		libfdisk
 PKGSD_SWAP_UTILS:=	swap space management utilities
 PKGSS_SWAP_UTILS:=	libblkid
 PKGSC_SWAP_UTILS:=	sys/fs
@@ -53,10 +58,12 @@ $(eval $(call PKG_template,MOUNT,mount,$(PKG_VERSION)-$(PKG_RELEASE),$(PKGSS_MOU
 $(eval $(call PKG_template,MCOOKIE,mcookie,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_MCOOKIE),$(PKGSC_MCOOKIE)))
 $(eval $(call PKG_template,LIBUUID,libuuid,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_LIBUUID),$(PKGSC_LIBUUID),$(PKG_OPTS)))
 $(eval $(call PKG_template,LIBBLKID,libblkid,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_LIBBLKID),$(PKGSC_LIBBLKID),$(PKG_OPTS)))
+$(eval $(call PKG_template,LIBFDISK,libfdisk,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_LIBFDISK),$(PKGSC_LIBFDISK),$(PKG_OPTS)))
 $(eval $(call PKG_template,LIBMOUNT,libmount,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_LIBMOUNT),$(PKGSC_LIBMOUNT),$(PKG_OPTS)))
 
 TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
 TARGET_LDFLAGS+=	-ltinfo
+
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ENV+=		have_scanf_alloc_modifier=yes \
 			scanf_cv_alloc_modifier=ms
@@ -71,6 +78,7 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--without-python \
 			--without-systemd \
 			--without-user \
+			--enable-libfdisk \
 			--enable-libuuid \
 			--enable-libblkid \
 			--enable-libmount \
@@ -117,6 +125,11 @@ libuuid-install:
 libblkid-install:
 	$(INSTALL_DIR) $(IDIR_LIBBLKID)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libblkid.so* $(IDIR_LIBBLKID)/usr/lib
+
+libfdisk-install:
+	$(INSTALL_DIR) $(IDIR_LIBFDISK)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libfdisk.so* $(IDIR_LIBFDISK)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libsmartcols.so* $(IDIR_LIBFDISK)/usr/lib
 
 libmount-install:
 	$(INSTALL_DIR) $(IDIR_LIBMOUNT)/usr/lib
