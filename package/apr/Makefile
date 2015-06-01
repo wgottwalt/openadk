@@ -4,14 +4,14 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		apr
-PKG_VERSION:=		1.5.1
+PKG_VERSION:=		1.5.2
 PKG_RELEASE:=		1
-PKG_HASH:=		94b1c9d9835cc9e902838b95d62ecc9a39b698f23e3e706812ec65a78ba41af7
+PKG_HASH:=		1af06e1720a58851d90694a984af18355b65bb0d047be03ec7d659c746d6dbdb
 PKG_DESCR:=		apache portable runtime library
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpthread
 PKG_URL:=		http://apr.apache.org/
-PKG_SITES:=		http://gd.tuwien.ac.at/infosys/servers/http/apache/dist/${PKG_NAME}/
+PKG_SITES:=		http://mirrors.ibiblio.org/apache//apr/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

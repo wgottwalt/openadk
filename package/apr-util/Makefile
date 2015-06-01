@@ -4,15 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		apr-util
-PKG_VERSION:=		1.5.3
+PKG_VERSION:=		1.5.4
 PKG_RELEASE:=		1
-PKG_HASH:=		76db34cb508e346e3bf69347c29ed1500bf0b71bcc48d54271ad9d1c25703743
+PKG_HASH:=		976a12a59bc286d634a21d7be0841cc74289ea9077aa1af46be19d1a6e844c19
 PKG_DESCR:=		apache portable runtime utility library
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libexpat apr
 PKG_BUILDDEP:=		expat apr
 PKG_URL:=		http://apr.apache.org/
-PKG_SITES:=		http://apache.cs.utah.edu/apr/
+PKG_SITES:=		http://mirrors.ibiblio.org/apache//apr/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
