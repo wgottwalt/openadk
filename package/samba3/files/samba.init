@@ -1,0 +1,31 @@
+#!/bin/sh
+#PKG samba
+#INIT 80
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${samba:-NO}" = x"NO" && exit 0
+	test x"$samba" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
+	exec sh $0 start
+	;;
+start)
+	[ -d /var/run/samba ] || mkdir -p /var/run/samba
+	[ -d /var/log/samba ] || mkdir -p /var/log/samba
+	/usr/sbin/nmbd -D 
+	/usr/sbin/smbd -D
+	;;
+stop)
+	kill $(pgrep -f /usr/sbin/nmbd)
+	kill $(pgrep -f /usr/sbin/smbd)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "usage: $0 {start | stop | restart}"
+	exit 1
+esac
+exit $?

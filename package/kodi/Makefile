@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
 PKG_VERSION:=		ff25ea118e3580bb1ebcbb7c450ed933da1782be
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv libsquish
@@ -29,12 +29,15 @@ PKG_BUILDDEP+=		zip-host unzip-host libsquish giflib-host
 PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		https://github.com/xbmc/xbmc.git
 
-PKG_FLAVOURS_KODI:=	WITH_SMB WITH_NFS WITH_SSH WITH_AVAHI WITH_CEC 
+PKG_FLAVOURS_KODI:=	WITH_SMB WITH_SMB3 WITH_NFS WITH_SSH WITH_AVAHI WITH_CEC 
 PKG_FLAVOURS_KODI+=	WITH_WEBSERVER WITH_RTMP WITH_BLURAY WITH_LIRC
 
-PKGFD_WITH_SMB:=	enable samba support
+PKGFD_WITH_SMB:=	enable samba4 support
 PKGFB_WITH_SMB:=	samba
 PKGFS_WITH_SMB:=	samba
+PKGFD_WITH_SMB3:=	enable samba3 support
+PKGFB_WITH_SMB3:=	samba3
+PKGFS_WITH_SMB3:=	samba3
 PKGFD_WITH_NFS:=	enable nfs support
 PKGFB_WITH_NFS:=	libnfs
 PKGFS_WITH_NFS:=	libnfs
@@ -113,7 +116,7 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-wayland \
 			--disable-pulse \
 			--disable-mid \
-			--disable-debug \
+			--enable-debug \
 			--enable-alsa \
 			--enable-texturepacker \
 			--enable-udev \
@@ -125,6 +128,11 @@ else
 CONFIGURE_ARGS+=	--disable-libbluray
 endif
 ifneq ($(ADK_PACKAGE_KODI_WITH_SMB),)
+CONFIGURE_ARGS+=	--enable-samba
+else
+CONFIGURE_ARGS+=	--disable-samba
+endif
+ifneq ($(ADK_PACKAGE_KODI_WITH_SMB3),)
 CONFIGURE_ARGS+=	--enable-samba
 else
 CONFIGURE_ARGS+=	--disable-samba
