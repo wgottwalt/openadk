@@ -275,9 +275,10 @@ config ADK_KERNEL_HIGH_RES_TIMERS
 comment "uses experimental external patch"
 config ADK_KERNEL_PREEMPT_RT_FULL
         bool "Enable Realtime support"
-	depends on ADK_KERNEL_VERSION_3_18
+	depends on ADK_KERNEL_VERSION_3_18 \
+		|| ADK_KERNEL_VERSION_3_14
         help
-	  https://www.kernel.org/pub/linux/kernel/projects/rt/3.18/
+	  https://www.kernel.org/pub/linux/kernel/projects/rt/
 
 choice
 prompt "Page size"
