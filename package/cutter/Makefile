@@ -10,7 +10,7 @@ PKG_HASH:=		4df4fac7c2208afafb279abb443005bf77d3dcf01af05fe1f2898213b9109615
 PKG_DESCR:=		abort tcp/ip connections routed over a firewall
 PKG_SECTION:=		net/firewall
 PKG_URL:=		http://www.lowth.com/cutter/software/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 

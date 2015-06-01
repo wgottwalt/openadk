@@ -11,7 +11,7 @@ PKG_DESCR:=		disk file format database which stores key/data-pairs in single fil
 PKG_SECTION:=		libs/db
 PKG_DEPENDS:=		libstdcxx
 PKG_URL:=		http://www.oracle.com/technology/software/products/berkeley-db
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_LIBNAME:=		libdb
 PKG_OPTS:=		dev
 

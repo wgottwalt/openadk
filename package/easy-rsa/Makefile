@@ -11,7 +11,7 @@ PKG_DESCR:=		openssl ca scripts
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		openssl-util
 PKG_URL:=		https://github.com/OpenVPN/easy-rsa
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
