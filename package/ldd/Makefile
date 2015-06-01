@@ -5,10 +5,13 @@ include $(ADK_TOPDIR)/rules.mk
 include $(ADK_TOPDIR)/toolchain/glibc/Makefile.inc
 
 PKG_NAME:=		ldd
-PKG_DESCR:=		Shared library dependency display tool
+PKG_DESCR:=		shared library dependency display tool
 PKG_SECTION:=		dev/tools
 PKG_DEPENDS:=		glibc bash
 PKG_BUILDDEP:=		glibc
+
+PKG_LIBC_DEPENDS:=	glibc
+
 NO_DISTFILES:=		1
 
 include $(ADK_TOPDIR)/mk/package.mk
