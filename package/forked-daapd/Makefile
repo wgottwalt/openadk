@@ -14,7 +14,7 @@ PKG_DEPENDS+=		libavahi libmxml libevent libavl libantlr3c alsa-lib
 PKG_DEPENDS+=		libsqlite libintl dbus
 PKG_BUILDDEP:=		libunistring zlib confuse avahi sqlite ffmpeg dbus
 PKG_BUILDDEP+=		mxml libevent libavl libantlr3c alsa-lib libgcrypt
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 PKG_CFLINE_FORKED_DAAPD:=	select ADK_KERNEL_INOTIFY_USER
 PKG_ARCH_DEPENDS:=	!ppc
