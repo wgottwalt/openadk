@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		e8de5beb585d46c2aec4b30aa8ba96b21bed5749ca1bcdd0b2fdaf95dab7ab4c
 PKG_DESCR:=		boot-wrapper for aarch64
 PKG_SECTION:=		base/boot
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 PKG_SYSTEM_DEPENDS:=	arm-fm
 
