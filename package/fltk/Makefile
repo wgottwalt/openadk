@@ -12,7 +12,7 @@ PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		mesa libx11 libxi freeglut libfreetype
 PKG_BUILDDEP:=		libX11 libXi mesa freeglut freetype
 PKG_URL:=		http://www.fltk.org/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_LIBNAME:=		libfltk
 PKG_OPTS:=		dev
 
