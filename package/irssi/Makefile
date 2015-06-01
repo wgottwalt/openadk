@@ -12,7 +12,7 @@ PKG_SECTION:=		app/chat
 PKG_DEPENDS:=		glib libncurses
 PKG_BUILDDEP:=		glib ncurses
 PKG_URL:=		http://www.irssi.org/
-PKG_SITES:=		http://www.irssi.org/files/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

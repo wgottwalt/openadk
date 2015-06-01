@@ -13,7 +13,7 @@ PKG_DEPENDS:=		alsa-lib libsndfile libsamplerate
 PKG_BUILDDEP:=		python2-host alsa-lib libsndfile
 PKG_BUILDDEP+=		libsamplerate
 PKG_URL:=		http://jackaudio.org
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 include $(ADK_TOPDIR)/mk/package.mk
 
