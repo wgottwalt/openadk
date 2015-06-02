@@ -1,7 +1,8 @@
 config ADK_TARGET_SYSTEM_GENERIC_PC
 	bool "Generic PC"
+	select ADK_CPU_I686
 	select ADK_TARGET_KERNEL_BZIMAGE
 	select ADK_PACKAGE_GRUB
 	help
-	 Support for generic PC.
+	 Example config for generic i686 based PC.
 
