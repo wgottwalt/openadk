@@ -12,7 +12,7 @@ PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		libopenssl libsigc++
 PKG_BUILDDEP:=		openssl libsigc++ gettext-tiny
 PKG_URL:=		http://libtorrent.rakshasa.no/
-PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

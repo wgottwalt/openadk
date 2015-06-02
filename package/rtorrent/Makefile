@@ -12,7 +12,7 @@ PKG_SECTION:=		app/p2p
 PKG_DEPENDS:=		libncurses libtorrent libcurl libstdcxx
 PKG_BUILDDEP:=		ncurses libtorrent curl
 PKG_URL:=		http://libtorrent.rakshasa.no/
-PKG_SITES:=		http://libtorrent.rakshasa.no/downloads/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
