@@ -12,7 +12,7 @@ PKG_DESCR:=		touchscreen library
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libstdcxx
 PKG_URL:=		http://tslib.berlios.de/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
