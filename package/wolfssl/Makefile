@@ -10,7 +10,7 @@ PKG_HASH:=		267a75ff2b81ac793d8170904c97635d74bed1c353162622eb66d8e7fa6260fa
 PKG_DESCR:=		portable embedded ssl library
 PKG_SECTION:=		libs/crypto
 PKG_URL:=		http://www.wolfssl.com
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_OPTS:=		dev
 
 include $(ADK_TOPDIR)/mk/package.mk
