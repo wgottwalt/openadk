@@ -4,12 +4,12 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		stress
-PKG_VERSION:=		1.0.0
+PKG_VERSION:=		1.0.4
 PKG_RELEASE:=		1
-PKG_HASH:=		778126fdcc3ecb54d4a8dad6164001603bcc3b79ba64b3c2c5285275bc0cbedf
+PKG_HASH:=		057e4fc2a7706411e1014bf172e4f94b63a12f18412378fca8684ca92408825b
 PKG_DESCR:=		simple tool that imposes certain types of compute stress
 PKG_SECTION:=		sys/utils
-PKG_SITES:=		http://weather.ou.edu/~apw/projects/stress/
+PKG_SITES:=		http://people.seas.harvard.edu/~apw/stress/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
