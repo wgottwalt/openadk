@@ -11,7 +11,7 @@ PKG_DESCR:=		reverse arp daemon
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		libnet
 PKG_BUILDDEP:=		libnet
-PKG_SITES:=		ftp://ftp.dementia.org/pub/net-tools/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
