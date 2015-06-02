@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		481f113c505ed186049287bd8e9ad8fcb8dbbb32f3bb718f04e4dc148b63c8e4
 PKG_DESCR:=		firmware for rt61/rt2601 wireless cards
 PKG_SECTION:=		sys/firmware
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=		RT61_Firmware_V1.2.zip
 WRKDIST=		${WRKDIR}/RT61_Firmware_V1.2
