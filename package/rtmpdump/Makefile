@@ -12,7 +12,7 @@ PKG_DEPENDS:=		librtmp zlib
 PKG_BUILDDEP:=		zlib
 PKG_SECTION:=		mm/video
 PKG_URL:=		http://rtmpdump.mplayerhq.hu/
-PKG_SITES:=		http://www.openadk.org/distfiles
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_LIBNAME:=		librtmp
 PKG_OPTS:=		dev
 
