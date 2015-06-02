@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		tor
-PKG_VERSION:=		0.2.4.21
+PKG_VERSION:=		0.2.6.8
 PKG_RELEASE:=		1
-PKG_HASH:=		a19df488c0c776c9f1e4c78bf93af115f67eefcffe6152a826fed07a1596f1ce
+PKG_HASH:=		b88b363896454250c3f561b0b48479f18295c93596d2e81baa10c5a3ae609a76
 PKG_DESCR:=		anonymous internet communication system
 PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libevent libopenssl zlib libpthread
