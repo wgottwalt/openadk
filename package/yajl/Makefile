@@ -11,7 +11,7 @@ PKG_DESCR:=		small event-driven json parser written in ansi c
 PKG_SECTION:=		libs/data
 PKG_BUILDDEP:=		cmake-host ruby-host
 PKG_URL:=		http://lloyd.github.com/yajl/
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
