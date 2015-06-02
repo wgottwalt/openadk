@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		x11vnc
 PKG_VERSION:=		0.9.13
 PKG_RELEASE:=		1
-PKG_HASH:=		4c9af4437123ca1d65498a00b70a7a186972a21f14c8b3cc905b9f5d1705142c
+PKG_HASH:=		f6829f2e629667a5284de62b080b13126a0736499fe47cdb447aedb07a59f13b
 PKG_DESCR:=		vnc server for x11 displays
 PKG_SECTION:=		x11/apps
 PKG_BUILDDEP:=		libX11 libXtst libjpeg-turbo
