@@ -9,8 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		38669e5dea80d2fa6e6ef577f04caef9326896908efc37cb92b8f938ce5f9c15
 PKG_DESCR:=		daemon working like cisco hsrp
 PKG_SECTION:=		net/misc
-PKG_URL:=		http://vgpd.freaknet.org/
-PKG_SITES:=		http://vgpd.freaknet.org/files/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
