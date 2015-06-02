@@ -1,15 +1,24 @@
---- pcsc-lite-1.7.4.orig/src/Makefile.in	2011-06-23 18:15:53.000000000 +0200
-+++ pcsc-lite-1.7.4/src/Makefile.in	2011-07-27 11:50:26.000000000 +0200
-@@ -94,7 +94,7 @@ am_libpcsclite_la_OBJECTS = libpcsclite_
- libpcsclite_la_OBJECTS = $(am_libpcsclite_la_OBJECTS)
- libpcsclite_la_LINK = $(LIBTOOL) --tag=CC $(AM_LIBTOOLFLAGS) \
- 	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(libpcsclite_la_CFLAGS) \
--	$(CFLAGS) $(libpcsclite_la_LDFLAGS) $(LDFLAGS) -o $@
-+	$(libpcsclite_la_LDFLAGS) $(LDFLAGS) -o $@
+--- pcsc-lite-1.8.13.orig/src/Makefile.in	2014-11-07 13:19:32.000000000 +0100
++++ pcsc-lite-1.8.13/src/Makefile.in	2015-05-30 17:29:15.000000000 +0200
+@@ -147,7 +147,7 @@ am__v_lt_0 = --silent
+ am__v_lt_1 = 
+ libpcsclite_la_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC \
+ 	$(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) --mode=link $(CCLD) \
+-	$(libpcsclite_la_CFLAGS) $(CFLAGS) $(libpcsclite_la_LDFLAGS) \
++	$(libpcsclite_la_CFLAGS) $(libpcsclite_la_LDFLAGS) \
+ 	$(LDFLAGS) -o $@
  PROGRAMS = $(noinst_PROGRAMS) $(sbin_PROGRAMS)
  am_pcsc_wirecheck_OBJECTS = pcsc-wirecheck-dist.$(OBJEXT) \
- 	pcsc-wirecheck-main.$(OBJEXT)
-@@ -340,7 +340,7 @@ libpcsclite_la_SOURCES = \
+@@ -196,7 +196,7 @@ pcscd_DEPENDENCIES = $(am__DEPENDENCIES_
+ 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1) \
+ 	$(am__DEPENDENCIES_1) $(am__DEPENDENCIES_1)
+ pcscd_LINK = $(LIBTOOL) $(AM_V_lt) --tag=CC $(AM_LIBTOOLFLAGS) \
+-	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(pcscd_CFLAGS) $(CFLAGS) \
++	$(LIBTOOLFLAGS) --mode=link $(CCLD) $(pcscd_CFLAGS) \
+ 	$(pcscd_LDFLAGS) $(LDFLAGS) -o $@
+ am_testpcsc_OBJECTS = testpcsc.$(OBJEXT)
+ testpcsc_OBJECTS = $(am_testpcsc_OBJECTS)
+@@ -490,7 +490,7 @@ libpcsclite_la_SOURCES = \
  	winscard_msg.c
  
  libpcsclite_la_LDFLAGS = -version-info 1:0:0
@@ -17,13 +26,265 @@
 +libpcsclite_la_CFLAGS = $(PTHREAD_CFLAGS) -DLIBPCSCLITE -DSIMCLIST_NO_DUMPRESTORE
  libpcsclite_la_LIBADD = $(PTHREAD_CFLAGS) $(PTHREAD_LIBS)
  pcscd_SOURCES = \
- 	atrhandler.c \
-@@ -392,7 +392,7 @@ pcscd_SOURCES = \
- 	winscard_svc.c \
- 	winscard_svc.h
+ 	auth.c \
+@@ -868,7 +868,7 @@ pcscd-auth.o: auth.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-auth.Tpo $(DEPDIR)/pcscd-auth.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='auth.c' object='pcscd-auth.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-auth.o `test -f 'auth.c' || echo '$(srcdir)/'`auth.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-auth.o `test -f 'auth.c' || echo '$(srcdir)/'`auth.c
  
--pcscd_CFLAGS = $(CFLAGS) $(PTHREAD_CFLAGS) $(LIBUSB_CFLAGS) $(LIBUDEV_CFLAGS) \
-+pcscd_CFLAGS = $(PTHREAD_CFLAGS) $(LIBUSB_CFLAGS) $(LIBUDEV_CFLAGS) \
- 	-DPCSCD -DSIMCLIST_NO_DUMPRESTORE
+ pcscd-auth.obj: auth.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-auth.obj -MD -MP -MF $(DEPDIR)/pcscd-auth.Tpo -c -o pcscd-auth.obj `if test -f 'auth.c'; then $(CYGPATH_W) 'auth.c'; else $(CYGPATH_W) '$(srcdir)/auth.c'; fi`
+@@ -882,7 +882,7 @@ pcscd-atrhandler.o: atrhandler.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-atrhandler.Tpo $(DEPDIR)/pcscd-atrhandler.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='atrhandler.c' object='pcscd-atrhandler.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-atrhandler.o `test -f 'atrhandler.c' || echo '$(srcdir)/'`atrhandler.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-atrhandler.o `test -f 'atrhandler.c' || echo '$(srcdir)/'`atrhandler.c
  
- pcscd_LDFLAGS = $(LDFLAGS) -export-dynamic
+ pcscd-atrhandler.obj: atrhandler.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-atrhandler.obj -MD -MP -MF $(DEPDIR)/pcscd-atrhandler.Tpo -c -o pcscd-atrhandler.obj `if test -f 'atrhandler.c'; then $(CYGPATH_W) 'atrhandler.c'; else $(CYGPATH_W) '$(srcdir)/atrhandler.c'; fi`
+@@ -896,7 +896,7 @@ pcscd-configfile.o: configfile.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-configfile.Tpo $(DEPDIR)/pcscd-configfile.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='configfile.c' object='pcscd-configfile.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-configfile.o `test -f 'configfile.c' || echo '$(srcdir)/'`configfile.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-configfile.o `test -f 'configfile.c' || echo '$(srcdir)/'`configfile.c
+ 
+ pcscd-configfile.obj: configfile.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-configfile.obj -MD -MP -MF $(DEPDIR)/pcscd-configfile.Tpo -c -o pcscd-configfile.obj `if test -f 'configfile.c'; then $(CYGPATH_W) 'configfile.c'; else $(CYGPATH_W) '$(srcdir)/configfile.c'; fi`
+@@ -910,7 +910,7 @@ pcscd-debuglog.o: debuglog.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-debuglog.Tpo $(DEPDIR)/pcscd-debuglog.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='debuglog.c' object='pcscd-debuglog.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-debuglog.o `test -f 'debuglog.c' || echo '$(srcdir)/'`debuglog.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-debuglog.o `test -f 'debuglog.c' || echo '$(srcdir)/'`debuglog.c
+ 
+ pcscd-debuglog.obj: debuglog.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-debuglog.obj -MD -MP -MF $(DEPDIR)/pcscd-debuglog.Tpo -c -o pcscd-debuglog.obj `if test -f 'debuglog.c'; then $(CYGPATH_W) 'debuglog.c'; else $(CYGPATH_W) '$(srcdir)/debuglog.c'; fi`
+@@ -924,7 +924,7 @@ pcscd-dyn_hpux.o: dyn_hpux.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-dyn_hpux.Tpo $(DEPDIR)/pcscd-dyn_hpux.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dyn_hpux.c' object='pcscd-dyn_hpux.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-dyn_hpux.o `test -f 'dyn_hpux.c' || echo '$(srcdir)/'`dyn_hpux.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-dyn_hpux.o `test -f 'dyn_hpux.c' || echo '$(srcdir)/'`dyn_hpux.c
+ 
+ pcscd-dyn_hpux.obj: dyn_hpux.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-dyn_hpux.obj -MD -MP -MF $(DEPDIR)/pcscd-dyn_hpux.Tpo -c -o pcscd-dyn_hpux.obj `if test -f 'dyn_hpux.c'; then $(CYGPATH_W) 'dyn_hpux.c'; else $(CYGPATH_W) '$(srcdir)/dyn_hpux.c'; fi`
+@@ -938,7 +938,7 @@ pcscd-dyn_macosx.o: dyn_macosx.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-dyn_macosx.Tpo $(DEPDIR)/pcscd-dyn_macosx.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dyn_macosx.c' object='pcscd-dyn_macosx.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-dyn_macosx.o `test -f 'dyn_macosx.c' || echo '$(srcdir)/'`dyn_macosx.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-dyn_macosx.o `test -f 'dyn_macosx.c' || echo '$(srcdir)/'`dyn_macosx.c
+ 
+ pcscd-dyn_macosx.obj: dyn_macosx.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-dyn_macosx.obj -MD -MP -MF $(DEPDIR)/pcscd-dyn_macosx.Tpo -c -o pcscd-dyn_macosx.obj `if test -f 'dyn_macosx.c'; then $(CYGPATH_W) 'dyn_macosx.c'; else $(CYGPATH_W) '$(srcdir)/dyn_macosx.c'; fi`
+@@ -952,7 +952,7 @@ pcscd-dyn_unix.o: dyn_unix.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-dyn_unix.Tpo $(DEPDIR)/pcscd-dyn_unix.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='dyn_unix.c' object='pcscd-dyn_unix.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-dyn_unix.o `test -f 'dyn_unix.c' || echo '$(srcdir)/'`dyn_unix.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-dyn_unix.o `test -f 'dyn_unix.c' || echo '$(srcdir)/'`dyn_unix.c
+ 
+ pcscd-dyn_unix.obj: dyn_unix.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-dyn_unix.obj -MD -MP -MF $(DEPDIR)/pcscd-dyn_unix.Tpo -c -o pcscd-dyn_unix.obj `if test -f 'dyn_unix.c'; then $(CYGPATH_W) 'dyn_unix.c'; else $(CYGPATH_W) '$(srcdir)/dyn_unix.c'; fi`
+@@ -966,7 +966,7 @@ pcscd-eventhandler.o: eventhandler.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-eventhandler.Tpo $(DEPDIR)/pcscd-eventhandler.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='eventhandler.c' object='pcscd-eventhandler.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-eventhandler.o `test -f 'eventhandler.c' || echo '$(srcdir)/'`eventhandler.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-eventhandler.o `test -f 'eventhandler.c' || echo '$(srcdir)/'`eventhandler.c
+ 
+ pcscd-eventhandler.obj: eventhandler.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-eventhandler.obj -MD -MP -MF $(DEPDIR)/pcscd-eventhandler.Tpo -c -o pcscd-eventhandler.obj `if test -f 'eventhandler.c'; then $(CYGPATH_W) 'eventhandler.c'; else $(CYGPATH_W) '$(srcdir)/eventhandler.c'; fi`
+@@ -980,7 +980,7 @@ pcscd-hotplug_generic.o: hotplug_generic
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-hotplug_generic.Tpo $(DEPDIR)/pcscd-hotplug_generic.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='hotplug_generic.c' object='pcscd-hotplug_generic.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-hotplug_generic.o `test -f 'hotplug_generic.c' || echo '$(srcdir)/'`hotplug_generic.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-hotplug_generic.o `test -f 'hotplug_generic.c' || echo '$(srcdir)/'`hotplug_generic.c
+ 
+ pcscd-hotplug_generic.obj: hotplug_generic.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-hotplug_generic.obj -MD -MP -MF $(DEPDIR)/pcscd-hotplug_generic.Tpo -c -o pcscd-hotplug_generic.obj `if test -f 'hotplug_generic.c'; then $(CYGPATH_W) 'hotplug_generic.c'; else $(CYGPATH_W) '$(srcdir)/hotplug_generic.c'; fi`
+@@ -994,7 +994,7 @@ pcscd-ifdwrapper.o: ifdwrapper.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-ifdwrapper.Tpo $(DEPDIR)/pcscd-ifdwrapper.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='ifdwrapper.c' object='pcscd-ifdwrapper.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-ifdwrapper.o `test -f 'ifdwrapper.c' || echo '$(srcdir)/'`ifdwrapper.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-ifdwrapper.o `test -f 'ifdwrapper.c' || echo '$(srcdir)/'`ifdwrapper.c
+ 
+ pcscd-ifdwrapper.obj: ifdwrapper.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-ifdwrapper.obj -MD -MP -MF $(DEPDIR)/pcscd-ifdwrapper.Tpo -c -o pcscd-ifdwrapper.obj `if test -f 'ifdwrapper.c'; then $(CYGPATH_W) 'ifdwrapper.c'; else $(CYGPATH_W) '$(srcdir)/ifdwrapper.c'; fi`
+@@ -1008,7 +1008,7 @@ pcscd-pcscdaemon.o: pcscdaemon.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-pcscdaemon.Tpo $(DEPDIR)/pcscd-pcscdaemon.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='pcscdaemon.c' object='pcscd-pcscdaemon.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-pcscdaemon.o `test -f 'pcscdaemon.c' || echo '$(srcdir)/'`pcscdaemon.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-pcscdaemon.o `test -f 'pcscdaemon.c' || echo '$(srcdir)/'`pcscdaemon.c
+ 
+ pcscd-pcscdaemon.obj: pcscdaemon.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-pcscdaemon.obj -MD -MP -MF $(DEPDIR)/pcscd-pcscdaemon.Tpo -c -o pcscd-pcscdaemon.obj `if test -f 'pcscdaemon.c'; then $(CYGPATH_W) 'pcscdaemon.c'; else $(CYGPATH_W) '$(srcdir)/pcscdaemon.c'; fi`
+@@ -1022,7 +1022,7 @@ pcscd-powermgt_generic.o: powermgt_gener
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-powermgt_generic.Tpo $(DEPDIR)/pcscd-powermgt_generic.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='powermgt_generic.c' object='pcscd-powermgt_generic.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-powermgt_generic.o `test -f 'powermgt_generic.c' || echo '$(srcdir)/'`powermgt_generic.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-powermgt_generic.o `test -f 'powermgt_generic.c' || echo '$(srcdir)/'`powermgt_generic.c
+ 
+ pcscd-powermgt_generic.obj: powermgt_generic.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-powermgt_generic.obj -MD -MP -MF $(DEPDIR)/pcscd-powermgt_generic.Tpo -c -o pcscd-powermgt_generic.obj `if test -f 'powermgt_generic.c'; then $(CYGPATH_W) 'powermgt_generic.c'; else $(CYGPATH_W) '$(srcdir)/powermgt_generic.c'; fi`
+@@ -1036,7 +1036,7 @@ pcscd-prothandler.o: prothandler.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-prothandler.Tpo $(DEPDIR)/pcscd-prothandler.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='prothandler.c' object='pcscd-prothandler.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-prothandler.o `test -f 'prothandler.c' || echo '$(srcdir)/'`prothandler.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-prothandler.o `test -f 'prothandler.c' || echo '$(srcdir)/'`prothandler.c
+ 
+ pcscd-prothandler.obj: prothandler.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-prothandler.obj -MD -MP -MF $(DEPDIR)/pcscd-prothandler.Tpo -c -o pcscd-prothandler.obj `if test -f 'prothandler.c'; then $(CYGPATH_W) 'prothandler.c'; else $(CYGPATH_W) '$(srcdir)/prothandler.c'; fi`
+@@ -1050,7 +1050,7 @@ pcscd-readerfactory.o: readerfactory.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-readerfactory.Tpo $(DEPDIR)/pcscd-readerfactory.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='readerfactory.c' object='pcscd-readerfactory.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-readerfactory.o `test -f 'readerfactory.c' || echo '$(srcdir)/'`readerfactory.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-readerfactory.o `test -f 'readerfactory.c' || echo '$(srcdir)/'`readerfactory.c
+ 
+ pcscd-readerfactory.obj: readerfactory.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-readerfactory.obj -MD -MP -MF $(DEPDIR)/pcscd-readerfactory.Tpo -c -o pcscd-readerfactory.obj `if test -f 'readerfactory.c'; then $(CYGPATH_W) 'readerfactory.c'; else $(CYGPATH_W) '$(srcdir)/readerfactory.c'; fi`
+@@ -1064,7 +1064,7 @@ pcscd-sd-daemon.o: sd-daemon.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-sd-daemon.Tpo $(DEPDIR)/pcscd-sd-daemon.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='sd-daemon.c' object='pcscd-sd-daemon.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-sd-daemon.o `test -f 'sd-daemon.c' || echo '$(srcdir)/'`sd-daemon.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-sd-daemon.o `test -f 'sd-daemon.c' || echo '$(srcdir)/'`sd-daemon.c
+ 
+ pcscd-sd-daemon.obj: sd-daemon.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-sd-daemon.obj -MD -MP -MF $(DEPDIR)/pcscd-sd-daemon.Tpo -c -o pcscd-sd-daemon.obj `if test -f 'sd-daemon.c'; then $(CYGPATH_W) 'sd-daemon.c'; else $(CYGPATH_W) '$(srcdir)/sd-daemon.c'; fi`
+@@ -1078,7 +1078,7 @@ pcscd-simclist.o: simclist.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-simclist.Tpo $(DEPDIR)/pcscd-simclist.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='simclist.c' object='pcscd-simclist.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-simclist.o `test -f 'simclist.c' || echo '$(srcdir)/'`simclist.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-simclist.o `test -f 'simclist.c' || echo '$(srcdir)/'`simclist.c
+ 
+ pcscd-simclist.obj: simclist.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-simclist.obj -MD -MP -MF $(DEPDIR)/pcscd-simclist.Tpo -c -o pcscd-simclist.obj `if test -f 'simclist.c'; then $(CYGPATH_W) 'simclist.c'; else $(CYGPATH_W) '$(srcdir)/simclist.c'; fi`
+@@ -1092,7 +1092,7 @@ pcscd-strlcat.o: strlcat.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-strlcat.Tpo $(DEPDIR)/pcscd-strlcat.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='strlcat.c' object='pcscd-strlcat.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-strlcat.o `test -f 'strlcat.c' || echo '$(srcdir)/'`strlcat.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-strlcat.o `test -f 'strlcat.c' || echo '$(srcdir)/'`strlcat.c
+ 
+ pcscd-strlcat.obj: strlcat.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-strlcat.obj -MD -MP -MF $(DEPDIR)/pcscd-strlcat.Tpo -c -o pcscd-strlcat.obj `if test -f 'strlcat.c'; then $(CYGPATH_W) 'strlcat.c'; else $(CYGPATH_W) '$(srcdir)/strlcat.c'; fi`
+@@ -1106,7 +1106,7 @@ pcscd-strlcpy.o: strlcpy.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-strlcpy.Tpo $(DEPDIR)/pcscd-strlcpy.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='strlcpy.c' object='pcscd-strlcpy.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-strlcpy.o `test -f 'strlcpy.c' || echo '$(srcdir)/'`strlcpy.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-strlcpy.o `test -f 'strlcpy.c' || echo '$(srcdir)/'`strlcpy.c
+ 
+ pcscd-strlcpy.obj: strlcpy.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-strlcpy.obj -MD -MP -MF $(DEPDIR)/pcscd-strlcpy.Tpo -c -o pcscd-strlcpy.obj `if test -f 'strlcpy.c'; then $(CYGPATH_W) 'strlcpy.c'; else $(CYGPATH_W) '$(srcdir)/strlcpy.c'; fi`
+@@ -1120,7 +1120,7 @@ pcscd-sys_unix.o: sys_unix.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-sys_unix.Tpo $(DEPDIR)/pcscd-sys_unix.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='sys_unix.c' object='pcscd-sys_unix.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-sys_unix.o `test -f 'sys_unix.c' || echo '$(srcdir)/'`sys_unix.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-sys_unix.o `test -f 'sys_unix.c' || echo '$(srcdir)/'`sys_unix.c
+ 
+ pcscd-sys_unix.obj: sys_unix.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-sys_unix.obj -MD -MP -MF $(DEPDIR)/pcscd-sys_unix.Tpo -c -o pcscd-sys_unix.obj `if test -f 'sys_unix.c'; then $(CYGPATH_W) 'sys_unix.c'; else $(CYGPATH_W) '$(srcdir)/sys_unix.c'; fi`
+@@ -1134,7 +1134,7 @@ pcscd-tokenparser.o: tokenparser.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-tokenparser.Tpo $(DEPDIR)/pcscd-tokenparser.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='tokenparser.c' object='pcscd-tokenparser.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-tokenparser.o `test -f 'tokenparser.c' || echo '$(srcdir)/'`tokenparser.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-tokenparser.o `test -f 'tokenparser.c' || echo '$(srcdir)/'`tokenparser.c
+ 
+ pcscd-tokenparser.obj: tokenparser.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-tokenparser.obj -MD -MP -MF $(DEPDIR)/pcscd-tokenparser.Tpo -c -o pcscd-tokenparser.obj `if test -f 'tokenparser.c'; then $(CYGPATH_W) 'tokenparser.c'; else $(CYGPATH_W) '$(srcdir)/tokenparser.c'; fi`
+@@ -1148,7 +1148,7 @@ pcscd-hotplug_libudev.o: hotplug_libudev
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-hotplug_libudev.Tpo $(DEPDIR)/pcscd-hotplug_libudev.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='hotplug_libudev.c' object='pcscd-hotplug_libudev.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-hotplug_libudev.o `test -f 'hotplug_libudev.c' || echo '$(srcdir)/'`hotplug_libudev.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-hotplug_libudev.o `test -f 'hotplug_libudev.c' || echo '$(srcdir)/'`hotplug_libudev.c
+ 
+ pcscd-hotplug_libudev.obj: hotplug_libudev.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-hotplug_libudev.obj -MD -MP -MF $(DEPDIR)/pcscd-hotplug_libudev.Tpo -c -o pcscd-hotplug_libudev.obj `if test -f 'hotplug_libudev.c'; then $(CYGPATH_W) 'hotplug_libudev.c'; else $(CYGPATH_W) '$(srcdir)/hotplug_libudev.c'; fi`
+@@ -1162,7 +1162,7 @@ pcscd-hotplug_libusb.o: hotplug_libusb.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-hotplug_libusb.Tpo $(DEPDIR)/pcscd-hotplug_libusb.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='hotplug_libusb.c' object='pcscd-hotplug_libusb.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-hotplug_libusb.o `test -f 'hotplug_libusb.c' || echo '$(srcdir)/'`hotplug_libusb.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-hotplug_libusb.o `test -f 'hotplug_libusb.c' || echo '$(srcdir)/'`hotplug_libusb.c
+ 
+ pcscd-hotplug_libusb.obj: hotplug_libusb.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-hotplug_libusb.obj -MD -MP -MF $(DEPDIR)/pcscd-hotplug_libusb.Tpo -c -o pcscd-hotplug_libusb.obj `if test -f 'hotplug_libusb.c'; then $(CYGPATH_W) 'hotplug_libusb.c'; else $(CYGPATH_W) '$(srcdir)/hotplug_libusb.c'; fi`
+@@ -1176,7 +1176,7 @@ pcscd-hotplug_linux.o: hotplug_linux.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-hotplug_linux.Tpo $(DEPDIR)/pcscd-hotplug_linux.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='hotplug_linux.c' object='pcscd-hotplug_linux.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-hotplug_linux.o `test -f 'hotplug_linux.c' || echo '$(srcdir)/'`hotplug_linux.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-hotplug_linux.o `test -f 'hotplug_linux.c' || echo '$(srcdir)/'`hotplug_linux.c
+ 
+ pcscd-hotplug_linux.obj: hotplug_linux.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-hotplug_linux.obj -MD -MP -MF $(DEPDIR)/pcscd-hotplug_linux.Tpo -c -o pcscd-hotplug_linux.obj `if test -f 'hotplug_linux.c'; then $(CYGPATH_W) 'hotplug_linux.c'; else $(CYGPATH_W) '$(srcdir)/hotplug_linux.c'; fi`
+@@ -1190,7 +1190,7 @@ pcscd-hotplug_macosx.o: hotplug_macosx.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-hotplug_macosx.Tpo $(DEPDIR)/pcscd-hotplug_macosx.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='hotplug_macosx.c' object='pcscd-hotplug_macosx.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-hotplug_macosx.o `test -f 'hotplug_macosx.c' || echo '$(srcdir)/'`hotplug_macosx.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-hotplug_macosx.o `test -f 'hotplug_macosx.c' || echo '$(srcdir)/'`hotplug_macosx.c
+ 
+ pcscd-hotplug_macosx.obj: hotplug_macosx.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-hotplug_macosx.obj -MD -MP -MF $(DEPDIR)/pcscd-hotplug_macosx.Tpo -c -o pcscd-hotplug_macosx.obj `if test -f 'hotplug_macosx.c'; then $(CYGPATH_W) 'hotplug_macosx.c'; else $(CYGPATH_W) '$(srcdir)/hotplug_macosx.c'; fi`
+@@ -1204,7 +1204,7 @@ pcscd-utils.o: utils.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-utils.Tpo $(DEPDIR)/pcscd-utils.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='utils.c' object='pcscd-utils.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-utils.o `test -f 'utils.c' || echo '$(srcdir)/'`utils.c
+ 
+ pcscd-utils.obj: utils.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-utils.obj -MD -MP -MF $(DEPDIR)/pcscd-utils.Tpo -c -o pcscd-utils.obj `if test -f 'utils.c'; then $(CYGPATH_W) 'utils.c'; else $(CYGPATH_W) '$(srcdir)/utils.c'; fi`
+@@ -1218,7 +1218,7 @@ pcscd-winscard.o: winscard.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-winscard.Tpo $(DEPDIR)/pcscd-winscard.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='winscard.c' object='pcscd-winscard.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-winscard.o `test -f 'winscard.c' || echo '$(srcdir)/'`winscard.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-winscard.o `test -f 'winscard.c' || echo '$(srcdir)/'`winscard.c
+ 
+ pcscd-winscard.obj: winscard.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-winscard.obj -MD -MP -MF $(DEPDIR)/pcscd-winscard.Tpo -c -o pcscd-winscard.obj `if test -f 'winscard.c'; then $(CYGPATH_W) 'winscard.c'; else $(CYGPATH_W) '$(srcdir)/winscard.c'; fi`
+@@ -1232,7 +1232,7 @@ pcscd-winscard_msg.o: winscard_msg.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-winscard_msg.Tpo $(DEPDIR)/pcscd-winscard_msg.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='winscard_msg.c' object='pcscd-winscard_msg.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-winscard_msg.o `test -f 'winscard_msg.c' || echo '$(srcdir)/'`winscard_msg.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-winscard_msg.o `test -f 'winscard_msg.c' || echo '$(srcdir)/'`winscard_msg.c
+ 
+ pcscd-winscard_msg.obj: winscard_msg.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-winscard_msg.obj -MD -MP -MF $(DEPDIR)/pcscd-winscard_msg.Tpo -c -o pcscd-winscard_msg.obj `if test -f 'winscard_msg.c'; then $(CYGPATH_W) 'winscard_msg.c'; else $(CYGPATH_W) '$(srcdir)/winscard_msg.c'; fi`
+@@ -1246,7 +1246,7 @@ pcscd-winscard_msg_srv.o: winscard_msg_s
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-winscard_msg_srv.Tpo $(DEPDIR)/pcscd-winscard_msg_srv.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='winscard_msg_srv.c' object='pcscd-winscard_msg_srv.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-winscard_msg_srv.o `test -f 'winscard_msg_srv.c' || echo '$(srcdir)/'`winscard_msg_srv.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-winscard_msg_srv.o `test -f 'winscard_msg_srv.c' || echo '$(srcdir)/'`winscard_msg_srv.c
+ 
+ pcscd-winscard_msg_srv.obj: winscard_msg_srv.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-winscard_msg_srv.obj -MD -MP -MF $(DEPDIR)/pcscd-winscard_msg_srv.Tpo -c -o pcscd-winscard_msg_srv.obj `if test -f 'winscard_msg_srv.c'; then $(CYGPATH_W) 'winscard_msg_srv.c'; else $(CYGPATH_W) '$(srcdir)/winscard_msg_srv.c'; fi`
+@@ -1260,7 +1260,7 @@ pcscd-winscard_svc.o: winscard_svc.c
+ @am__fastdepCC_TRUE@	$(AM_V_at)$(am__mv) $(DEPDIR)/pcscd-winscard_svc.Tpo $(DEPDIR)/pcscd-winscard_svc.Po
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	$(AM_V_CC)source='winscard_svc.c' object='pcscd-winscard_svc.o' libtool=no @AMDEPBACKSLASH@
+ @AMDEP_TRUE@@am__fastdepCC_FALSE@	DEPDIR=$(DEPDIR) $(CCDEPMODE) $(depcomp) @AMDEPBACKSLASH@
+-@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -c -o pcscd-winscard_svc.o `test -f 'winscard_svc.c' || echo '$(srcdir)/'`winscard_svc.c
++@am__fastdepCC_FALSE@	$(AM_V_CC@am__nodep@)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) -c -o pcscd-winscard_svc.o `test -f 'winscard_svc.c' || echo '$(srcdir)/'`winscard_svc.c
+ 
+ pcscd-winscard_svc.obj: winscard_svc.c
+ @am__fastdepCC_TRUE@	$(AM_V_CC)$(CC) $(DEFS) $(DEFAULT_INCLUDES) $(INCLUDES) $(AM_CPPFLAGS) $(CPPFLAGS) $(pcscd_CFLAGS) $(CFLAGS) -MT pcscd-winscard_svc.obj -MD -MP -MF $(DEPDIR)/pcscd-winscard_svc.Tpo -c -o pcscd-winscard_svc.obj `if test -f 'winscard_svc.c'; then $(CYGPATH_W) 'winscard_svc.c'; else $(CYGPATH_W) '$(srcdir)/winscard_svc.c'; fi`
