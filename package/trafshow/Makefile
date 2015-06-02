@@ -11,7 +11,7 @@ PKG_DESCR:=		traffic analyzing tool
 PKG_SECTION:=		net/perf
 PKG_BUILDDEP:=		libpcap ncurses
 PKG_DEPENDS:=		libpcap libncurses libpthread
-PKG_SITES:=		http://openadk.org/distfiles
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
