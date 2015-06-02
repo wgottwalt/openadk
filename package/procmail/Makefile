@@ -10,7 +10,7 @@ PKG_HASH:=		087c75b34dd33d8b9df5afe9e42801c9395f4bf373a784d9bc97153b0062e117
 PKG_DESCR:=		mail processing tools
 PKG_SECTION:=		net/mail
 PKG_URL:=		http://www.procmail.org/
-PKG_SITES:=		http://www.procmail.org/
+PKG_SITES:=		ftp://ftp.informatik.rwth-aachen.de/pub/packages/procmail/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
