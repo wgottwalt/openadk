@@ -10,7 +10,7 @@ PKG_HASH:=		a4e1202241d9a1035217fcd5c4c8bc999c606a3628b4dbf7b0f7ab5260385a29
 PKG_DESCR:=		bootloader for imx6 (cubox-i/hummingboard)
 PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/SolidRun/u-boot-imx6.git
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 PKG_SYSTEM_DEPENDS:=	solidrun-imx6
 
