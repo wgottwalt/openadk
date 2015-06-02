@@ -1,15 +1,32 @@
 menu "Serial devices support"
 depends on ADK_TARGET_WITH_SERIAL || ADK_TARGET_QEMU || ADK_TARGET_VBOX
 
+config ADK_KERNEL_SERIAL_8250_CONSOLE
+	bool
+
+config ADK_KERNEL_SERIAL_OF_PLATFORM
+	bool
+
 config ADK_KERNEL_SERIAL_ETRAXFS_CONSOLE
 	bool
 
 config ADK_KERNEL_SERIAL_ETRAXFS
 	bool "ETRAXFS serial driver"
 	select ADK_KERNEL_SERIAL_ETRAXFS_CONSOLE
+	depends on ADK_TARGET_SYSTEM_QEMU_CRIS
 	default y if ADK_TARGET_SYSTEM_QEMU_CRIS
 	default n
 	help
 	  Serial driver for ETRAXFS CRISv32 Qemu Emulation.
+
+config ADK_KERNEL_SERIAL_8250
+	bool "8250 serial driver"
+	select ADK_KERNEL_SERIAL_OF_PLATFORM if ADK_TARGET_SYSTEM_XILINX_KINTEX7
+	select ADK_KERNEL_SERIAL_8250_CONSOLE
+	depends on ADK_TARGET_SYSTEM_XILINX_KINTEX7
+	default y if ADK_TARGET_SYSTEM_XILINX_KINTEX7
+	default n
+	help
+	  Serial driver for 8250 UART chip.
 
 endmenu
