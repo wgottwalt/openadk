@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		3a16b4d70bfb144e044a8d584f091b0f9204d86a716997540190100c20aaf88d
 PKG_DESCR:=		html to ascii converter
 PKG_SECTION:=		net/mail
-PKG_SITES:=		http://bhaak.dyndns.org/${PKG_NAME}/
+PKG_SITES:=		http://bhaak.net/vilistextum/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
