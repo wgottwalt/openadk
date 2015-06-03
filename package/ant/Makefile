@@ -26,7 +26,7 @@ HOST_STYLE:=		manual
 
 host-build:
 	if [ ! -f $(WRKBUILD)/lib/optional/junit-4.9b2.jar ];then \
-		cd $(WRKBUILD)/lib/optional; wget http://openadk.org/distfiles/junit-4.9b2.jar; \
+		cd $(WRKBUILD)/lib/optional; wget http://distfiles.openadk.org/junit-4.9b2.jar; \
 	fi
 	cp $(DL_DIR)/ecj*.jar $(WRKBUILD)/lib/optional/ecj.jar
 	(cd ${WRKBUILD}; \
