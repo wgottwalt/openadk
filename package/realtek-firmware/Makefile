@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		df7a02fd10fb83d11f4015bf55f58644c6ecc7528f884f2f32729b727053840a
 PKG_DESCR:=		firmware for realtek wired and wireless cards
 PKG_SECTION:=		sys/firmware
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 PKG_SUBPKGS:=		REALTEK_FIRMWARE_WIRELESS REALTEK_FIRMWARE_WIRED
 
