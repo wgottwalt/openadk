@@ -10,7 +10,7 @@ PKG_HASH:=		c8aaeb932c1e21a7fed7223ef35f85e3dc4b0a7901a986e880bd53b88ed61c11
 PKG_DESCR:=		mpd web interface
 PKG_SECTION:=		mm/audio
 PKG_URL:=		http://www.openadk.org/cgi-bin/gitweb.cgi?p=mpdbox.git;a=summary
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 include $(ADK_TOPDIR)/mk/package.mk
 
