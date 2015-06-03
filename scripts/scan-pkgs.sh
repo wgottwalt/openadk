@@ -27,6 +27,10 @@ if [[ -n $ADK_PACKAGE_KODI ]]; then
 	NEED_JAVA="$NEED_JAVA kodi"
 fi
 
+if [[ -n $ADK_PACKAGE_ICU4C ]]; then
+	NEED_STATIC_LIBSTDCXX="$NEED_STATIC_LIBSTDCXX icu4c"
+fi
+
 if [[ -n $ADK_PACKAGE_XKEYBOARD_CONFIG ]]; then
 	NEED_XKBCOMP="$NEED_XKBCOMP xkeyboard-config"
 fi
@@ -65,6 +69,22 @@ if [[ -n $NEED_JAVA ]]; then
 	if ! which java >/dev/null 2>&1; then
 		echo >&2 You need java to build $NEED_JAVA
 		out=1
+	fi
+fi
+
+if [[ -n $NEED_STATIC_LIBSTDCXX ]]; then
+cat >test.c <<-'EOF'
+	#include <stdio.h>
+	int
+	main()
+	{
+		return (0);
+	}
+EOF
+	if ! g++ -static-libstdc++ -o test test.c ; then
+		echo >&2 You need static version of libstdc++ installed to build $NEED_STATIC_LIBSTDCXX
+		out=1
+		rm test 2>/dev/null
 	fi
 fi
 
