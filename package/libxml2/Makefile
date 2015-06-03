@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libxml2
 PKG_VERSION:=		2.9.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		5178c30b151d044aefb1b08bf54c3003a0ac55c59c866763997529d60770d5bc
 PKG_DESCR:=		xml parser and toolkit
 PKG_SECTION:=		libs/data
@@ -70,7 +70,7 @@ CONFIGURE_ARGS+=	--without-c14n \
 			--with-xpath \
 			--with-xptr \
 			--with-python \
-			--with-zlib
+			--with-zlib='$(STAGING_TARGET_DIR)/usr'
 
 libxml2-install:
 	$(INSTALL_DIR) $(IDIR_LIBXML2)/usr/lib
