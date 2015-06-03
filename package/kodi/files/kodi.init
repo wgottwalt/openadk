@@ -12,10 +12,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	if [ ! -d /data/kodi ];then
+	if [ ! -d /data/kodi ]; then
 		mkdir /data/kodi
 	fi
-	kodi &
+	/usr/bin/kodi &
 	;;
 stop)
 	kill $(pgrep -f /usr/lib/kodi/kodi.bin)
