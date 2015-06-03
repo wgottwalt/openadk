@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		tvheadend
 PKG_VERSION:=		679b7797128b8979145dc2a0a3c54ea513a0466b
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		tv streaming server
 PKG_SECTION:=		mm/video
 PKG_BUILDDEP:=		openssl

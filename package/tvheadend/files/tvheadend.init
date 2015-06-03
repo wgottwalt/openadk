@@ -1,0 +1,29 @@
+#!/bin/sh
+#PKG tvheadend 
+#INIT 90
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${tvheadend:-NO}" = x"NO" && exit 0
+	test x"$tvheadend" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
+	exec sh $0 start
+	;;
+start)
+	tvheadend &
+	;;
+stop)
+	kill $(pgrep -f /usr/bin/tvheadend)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?
