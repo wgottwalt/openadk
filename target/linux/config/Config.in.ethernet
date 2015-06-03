@@ -254,6 +254,9 @@ config ADK_KERNEL_SKY2
 	select ADK_KERNEL_NETDEV_1000
 	select ADK_KERNEL_NET_VENDOR_MARVELL
 	depends on ADK_TARGET_WITH_PCI
+	default n
+	help
+	  Marvell Yukon SKY2 driver
 
 config ADK_KERNEL_R8169
 	tristate "RTL8169 driver"
