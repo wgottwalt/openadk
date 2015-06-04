@@ -10,7 +10,7 @@ PKG_HASH:=		6a54e49109bda85fa2c9356846bc41ab171338afc02d0a85b2fc154667ba5fb9
 PKG_DESCR:=		capi library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		ftp://ftp.melware.net/capi-utils/
-PKG_SITES:=		ftp://ftp.melware.net/capi-utils/
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
