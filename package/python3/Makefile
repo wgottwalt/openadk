@@ -4,10 +4,10 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		python3
-PKG_VERSION:=		3.4.0
+PKG_VERSION:=		3.4.3
 PKG_RELEASE:=		1
-PKG_HASH:=		f13686c0a2d45e7146759e9d5d1cbd8097a0606483c0cf7730e1e13f58b14cbe
-PKG_DESCR:=		python scripting language (Version 3)
+PKG_HASH:=		b5b3963533768d5fc325a4d7a6bd6f666726002d696f1d399ec06b043ea996b8
+PKG_DESCR:=		python scripting language (version 3)
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libpthread libffi
 PKG_BUILDDEP:=		python3-host libffi 
@@ -20,28 +20,28 @@ PKG_HOST_DEPENDS:=	!netbsd !openbsd !cygwin
 PKG_FLAVOURS_PYTHON3:=	MOD_ZLIB MOD_BZ2 MOD_EXPAT MOD_SQLITE MOD_GDBM
 PKG_FLAVOURS_PYTHON3+=	MOD_NCURSES MOD_SSL MOD_READLINE
 			
-PKGFD_MOD_ZLIB:=	ZLIB support
+PKGFD_MOD_ZLIB:=	zlib support
 PKGFB_MOD_ZLIB:=	zlib
 PKGFS_MOD_ZLIB:=	zlib
-PKGFD_MOD_BZ2:=		BZIP2 support
+PKGFD_MOD_BZ2:=		bzip2 support
 PKGFB_MOD_BZ2:=		bzip2
 PKGFS_MOD_BZ2:=		libbz2
-PKGFD_MOD_EXPAT:=	XML support
+PKGFD_MOD_EXPAT:=	xml support
 PKGFB_MOD_EXPAT:=	expat
 PKGFS_MOD_EXPAT:=	libexpat
-PKGFD_MOD_SQLITE:=	SQLITE support
+PKGFD_MOD_SQLITE:=	sqlite support
 PKGFB_MOD_SQLITE:=	sqlite
 PKGFS_MOD_SQLITE:=	libsqlite
-PKGFD_MOD_GDBM:=	GDBM support
+PKGFD_MOD_GDBM:=	gdbm support
 PKGFB_MOD_GDBM:=	gdbm
 PKGFS_MOD_GDBM:=	libgdbm
-PKGFD_MOD_NCURSES:=	NCURSES support
+PKGFD_MOD_NCURSES:=	ncurses support
 PKGFB_MOD_NCURSES:=	ncurses
 PKGFS_MOD_NCURSES:=	libncurses
-PKGFD_MOD_READLINE:=	READLINE support
+PKGFD_MOD_READLINE:=	readline support
 PKGFB_MOD_READLINE:=	readline
 PKGFS_MOD_READLINE:=	libreadline
-PKGFD_MOD_SSL:=		OpenSSL support
+PKGFD_MOD_SSL:=		openssl support
 PKGFB_MOD_SSL:=		openssl
 PKGFS_MOD_SSL:=		libopenssl
 
@@ -86,6 +86,7 @@ $(eval $(call PKG_mod_template,PYTHON3_MOD_READLINE,readline))
 
 MAKE_ENV+=		HOSTPGEN=$(STAGING_HOST_DIR)/usr/bin/pgen3
 FAKE_FLAGS+=		ENSUREPIP=no
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=y
 CONFIGURE_ARGS:=	--with-threads \
 			--with-system-ffi \
 			--with-system-expat \
