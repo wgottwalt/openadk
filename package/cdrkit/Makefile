@@ -25,6 +25,12 @@ $(eval $(call PKG_template,CDRKIT,cdrkit,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEP
 CONFIG_STYLE:=          cmake
 CMAKE_FLAGS+=		-DUSE_LIBC_NLS=1 -DUSE_LIBXNET=0 -DUSE_LIBNLS=0
 
+ifeq ($(ADK_TARGET_ENDIAN),little)
+CMAKE_FLAGS+=		-DBITFIELDS_HTOL=0
+else
+CMAKE_FLAGS+=		-DBITFIELDS_HTOL=1
+endif
+
 cdrkit-install:
 	$(INSTALL_DIR) $(IDIR_CDRKIT)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/* \
