@@ -9,7 +9,7 @@ PKG_RELEASE:=		2
 PKG_HASH:=		4497b9e22cdd61ae2fa893b9d5fd6213dc306726d7c4be08c29e173622dca8a0
 PKG_DESCR:=		avl library
 PKG_SECTION:=		libs/misc
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_OPTS:=		dev
 
 DISTFILES:=		$(PKG_NAME)_$(PKG_VERSION).orig.tar.gz
