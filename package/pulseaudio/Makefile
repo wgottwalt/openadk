@@ -25,8 +25,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,PULSEAUDIO,pulseaudio,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
-CONFIGURE_ARGS+=	--disable-systemd \
-			--disable-manpages \
+# use libtool from host directory
+AUTOTOOL_STYLE:=	autoreconf
+CONFIGURE_ARGS+=	--disable-manpages \
 			--disable-tests \
 			--disable-neon-opt \
 			--disable-x11 \
@@ -41,6 +42,7 @@ CONFIGURE_ARGS+=	--disable-systemd \
 			--disable-jack \
 			--disable-gconf \
 			--disable-udev \
+			--disable-rpath \
 			--disable-dbus \
 			--disable-hal-compat \
 			--without-caps \

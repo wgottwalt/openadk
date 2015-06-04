@@ -1,0 +1,28 @@
+--- pulseaudio-6.0.orig/configure.ac	2015-02-12 15:10:35.000000000 +0100
++++ pulseaudio-6.0/configure.ac	2015-06-04 12:20:45.000000000 +0200
+@@ -99,25 +99,8 @@ PKG_PROG_PKG_CONFIG
+ 
+ # gettext
+ 
+-if test "x$enable_nls" != "xno"; then
+-IT_PROG_INTLTOOL([0.35.0])
+-
+-AM_GNU_GETTEXT_VERSION([0.18.1])
+-AM_GNU_GETTEXT([external])
+-
+-GETTEXT_PACKAGE=pulseaudio
+-AC_SUBST([GETTEXT_PACKAGE])
+-AC_DEFINE_UNQUOTED([GETTEXT_PACKAGE],["$GETTEXT_PACKAGE"],[Gettext package])
+-
+-pulselocaledir='${prefix}/${DATADIRNAME}/locale'
+-AX_DEFINE_DIR(PULSE_LOCALEDIR, pulselocaledir, [Gettext locale dir])
+-else
+-# workaround till an intltool m4 bug is fixed upstream
+-# (https://bugs.launchpad.net/intltool/+bug/904647)
+ USE_NLS=no
+ AC_SUBST(USE_NLS)
+-fi
+-
+ 
+ #### Determine host OS ####
+ 
