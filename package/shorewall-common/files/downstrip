@@ -1,7 +1,0 @@
-#!/bin/sh
-
-cd $1
-for i in $( ls -1 $1 |grep -v ".template"); do
-    sed -e '/^$/d' -e '/^#$/d' -e '/^#[^!]/d' -e '/^[ *]$/d' -e 's/\t/ /g' -i $i
-done
-

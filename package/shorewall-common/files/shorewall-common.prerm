@@ -1,8 +1,0 @@
-#!/bin/sh
-
-# commented out: we never change this information ourselves
-# plus: this will destroy /etc/rc.conf entirely.
-# read some info about shell redirections if you don’t know why.
-#cat $IPKG_INSTROOT/etc/rc.conf | grep -v "shorewall" >$IPKG_INSTROOT/etc/rc.conf
-
-rm -rf /usr/share/shorewall/runtime
