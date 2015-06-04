@@ -20,6 +20,8 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,CHILLISPOT,chillispot,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 AUTOTOOL_STYLE:=	autoreconf
+CONFIGURE_ENV+=         ac_cv_func_malloc_0_nonnull=yes \
+			ac_cv_func_realloc_0_nonnull=yes
 
 chillispot-install:
 	${INSTALL_DIR} ${IDIR_CHILLISPOT}/usr/sbin ${IDIR_CHILLISPOT}/etc
