@@ -29,7 +29,7 @@ $(WRKBUILD)/.configured:
 		--disable-nls \
 		--with-curses \
 		--enable-threads \
-		--disable-sim \
+		--enable-sim \
 		--disable-tui \
 		--disable-werror \
 		--disable-install-libiberty \
@@ -44,6 +44,9 @@ $(WRKBUILD)/.compiled:
 
 $(WRKBUILD)/.installed:
 	$(INSTALL_BIN) $(WRKBUILD)/gdb/gdb $(TARGET_CROSS)gdb
+ifeq ($(ADK_TARGET_ARCH_BFIN),y)
+	$(INSTALL_BIN) $(WRKBUILD)/sim/bfin/run $(TARGET_CROSS)run
+endif
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk

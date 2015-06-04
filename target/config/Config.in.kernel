@@ -78,3 +78,4 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "banana-pro" if ADK_TARGET_SYSTEM_BANANA_PRO
 	default "xilinx-kintex7" if ADK_TARGET_SYSTEM_XILINX_KINTEX7
 	default "pcengines-alix" if ADK_TARGET_SYSTEM_PCENGINES_ALIX
+	default "sim-bfin" if ADK_TARGET_SYSTEM_SIM_BFIN
