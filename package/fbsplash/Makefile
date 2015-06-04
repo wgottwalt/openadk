@@ -12,7 +12,7 @@ PKG_SECTION:=		sys/hw
 PKG_BUILDDEP:=		libjpeg-turbo libpng freetype
 PKG_DEPENDS:=		libjpeg-turbo libpng libfreetype
 PKG_URL:=		https://github.com/alanhaggai/fbsplash
-PKG_SITES:=		http://openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
