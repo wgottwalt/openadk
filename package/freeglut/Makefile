@@ -18,7 +18,7 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_HOST_DEPENDS:=	!cygwin
-PKG_ARCH_DEPENDS:=	x86 x86_64 mips mipsel mips64 mips64el
+PKG_ARCH_DEPENDS:=	arm mips mipsel mips64 mips64el x86 x86_64
 
 include $(ADK_TOPDIR)/mk/package.mk
 
