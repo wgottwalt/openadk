@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libcec
 PKG_VERSION:=		185559110dc88aeca0915a90b3b369d2d42c0f7c
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		control your device with your tv remote control
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libudev libplatform
@@ -26,6 +26,11 @@ $(eval $(call PKG_template,LIBCEC,libcec,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 
 WRKBUILD=		$(WRKDIR)/$(PKG_NAME)-obj
 TARGET_LDFLAGS+=	-ltinfo
+TARGET_CXXFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
+			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vcos/pthreads \
+			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vmcs_host/linux \
+			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vmcs_host \
+			-L$(STAGING_TARGET_DIR)/opt/vc/lib
 
 CONFIG_STYLE:=          cmake
 CMAKE_FLAGS+=		-DSKIP_PYTHON_WRAPPER=1 -DBUILD_SHARED_LIBS=1
