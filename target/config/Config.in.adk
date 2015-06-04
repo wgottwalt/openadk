@@ -6,7 +6,7 @@ menu "Global ADK settings"
 
 config ADK_HOST
 	string "webserver for packages and distfiles"
-	default "www.openadk.org"
+	default "openadk.org"
 	help
 	  Configure host for IPKG package management.
 
