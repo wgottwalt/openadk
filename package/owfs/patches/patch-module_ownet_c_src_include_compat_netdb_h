@@ -1,0 +1,15 @@
+--- owfs-3.1p0.orig/module/ownet/c/src/include/compat_netdb.h	2015-01-11 02:31:32.000000000 +0100
++++ owfs-3.1p0/module/ownet/c/src/include/compat_netdb.h	2015-05-31 13:55:25.000000000 +0200
+@@ -63,12 +63,6 @@
+ #include <stdint.h>
+ #endif
+ 
+-#ifdef __USE_MISC
+-/* This is necessary to make this include file properly replace the
+-   Sun version.  */
+-# include <rpc/netdb.h>
+-#endif
+-
+ #ifdef HAVE_BITS_NETDB_H
+ #include <bits/netdb.h>
+ #endif

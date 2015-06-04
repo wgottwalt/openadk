@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		owfs
-PKG_VERSION:=		2.9p1
+PKG_VERSION:=		3.1p0
 PKG_RELEASE:=		1
-PKG_HASH:=		9d22dbff72d235476688c02669f7171b23e21dffadf40bbdd3b8263908218424
+PKG_HASH:=		62fca1b3e908cd4515c9eb499bf2b05020bbbea4a5b73611ddc6f205adec7a54
 PKG_DESCR:=		software to access 1-wire devices
 PKG_SECTION:=		sys/hw
 PKG_BUILDDEP:=		fuse
@@ -23,6 +23,7 @@ TARGET_CFLAGS+=		-ldl -lrt -liconv
 CONFIGURE_ARGS+=	--enable-owfs \
 			--enable-usb \
 			--disable-swig \
+			--disable-owshell \
 			--disable-owhttpd \
 			--disable-owftpd \
 			--disable-owcapi \
