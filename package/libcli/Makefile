@@ -4,16 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libcli
-PKG_VERSION:=		1.9.7
+PKG_VERSION:=		c63c9d35144939c8b4fa3c5394aed2e29ff517b0
 PKG_RELEASE:=		1
-PKG_HASH:=		1160377886d50b979f11e247d172156b16ccf0124b4ce5a212d4cec5eb25ef30
 PKG_DESCR:=		cisco-like command-line interface library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://sites.dparrish.com/libcli
-PKG_SITES:=		https://github.com/dparrish/libcli
+PKG_SITES:=		https://github.com/dparrish/libcli.git
 PKG_OPTS:=		dev
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${ADK_TOPDIR}/mk/package.mk
 
