@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		4bbdb998a735b2f7b995ddd38382eb2c3ba13559742cf7b4abd40a8dbe48ba37
 PKG_DESCR:=		ipv6 multicast routing daemon
 PKG_SECTION:=		net/ipv6
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 PKG_CXX:=		MRD6
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

@@ -13,7 +13,7 @@ PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		libjpeg-turbo libpthread libsdl
 PKG_BUILDDEP:=		libjpeg-turbo sdl
 PKG_URL:=		http://www.lavrsen.dk/twiki/bin/view/Motion/WebHome
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 include ${ADK_TOPDIR}/mk/package.mk
 
