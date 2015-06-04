@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		mbedtls
 PKG_VERSION:=		1.3.10
 PKG_RELEASE:=		1
-PKG_HASH:=		bf981c989b4fddbda4c6ab448623c2f6f928a6c3ab1b0c0295084dae0f63e854
+PKG_HASH:=		f48a0d99d88cb59eeaaf356bb870b3df6f793ac5b36cb8b45608557f74d9d31c
 PKG_DESCR:=		embedded ssl/tls library
 PKG_SECTION:=		libs/crypto
 PKG_URL:=		https://polarssl.org/
@@ -15,7 +15,7 @@ PKG_LIBNAME:=		libmbedtls
 PKG_OPTS:=		dev
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
-WRKDIST=		$(WRKDIR)/polarssl-$(PKG_NAME)-$(PKG_VERSION)
+WRKDIST=		$(WRKDIR)/mbedtls-$(PKG_NAME)-$(PKG_VERSION)
 
 include $(ADK_TOPDIR)/mk/package.mk
 
