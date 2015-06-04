@@ -4,15 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libp11
-PKG_VERSION:=		0.2.7
-PKG_RELEASE:=		2
-PKG_HASH:=		b741e2fea57d692c070111ad843e4bd025c18c0954aaca3df3a076e5142e5f4d
+PKG_VERSION:=		0.2.8
+PKG_RELEASE:=		1
+PKG_HASH:=		a4121015503ade98074b5e2a2517fc8a139f8b28aed10021db2bb77283f40691
 PKG_DESCR:=		library implementing a small layer on top of pkcs11 api
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libopenssl libltdl
 PKG_BUILDDEP:=		openssl libtool
-PKG_URL:=		http://www.opensc-project.org/libp11
-PKG_SITES:=		http://www.opensc-project.org/files/libp11/
+PKG_URL:=		https://github.com/OpenSC/libp11/wiki
+PKG_SITES:=		http://sourceforge.net/projects/opensc/files/libp11/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
