@@ -12,8 +12,7 @@ PKG_SECTION:=		net/mail
 PKG_DEPENDS:=		libncurses libopenssl
 PKG_BUILDDEP:=		ncurses openssl
 PKG_URL:=		http://www.mutt.org/
-PKG_SITES:=		ftp://ftp.mutt.org/mutt/devel/ \
-			http://ftp.hi.is/pub/mutt/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
