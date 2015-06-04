@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ltp
-PKG_VERSION:=		20140828
-PKG_RELEASE:=		2
-PKG_HASH:=		9e6264017a9087d9f9bd0fa2f2d96708f6b32bb8770fda03942a7a8cab8c6723
+PKG_VERSION:=		20150420
+PKG_RELEASE:=		1
+PKG_HASH:=		ad504e6697b964787f51caad6d8a916caa367f241ac602545548488195216a80
 PKG_DESCR:=		linux test project
 PKG_DEPENDS:=		bash libpthread librt
 PKG_DEPENDS+=		mke2fs mkfs
@@ -35,11 +35,13 @@ pre-configure:
 	$(MAKE) -C $(WRKBUILD) autotools
 
 # bessel float version not implemented in uClibc
+# mallopt in uClibc-ng not implemented
 pre-build:
 	-rm ${WRKBUILD}/testcases/misc/math/float/float_bessel.c
 	-rm -rf ${WRKBUILD}/testcases/misc/math/float/bessel
 	-rm -rf ${WRKBUILD}/testcases/network/{rpc,nfs*} 
 	-rm -rf ${WRKBUILD}/testcases/kernel/syscalls/profil
+	-rm -rf ${WRKBUILD}/testcases/kernel/syscalls/mallopt
 
 ltp-install:
 	$(INSTALL_DIR) $(IDIR_LTP)/opt/ltp/tmp
