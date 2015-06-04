@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
 PKG_VERSION:=		2.3.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		adae2ef34c9225347a844683b88caa87cde0979b7f2390fd1776db0eb51510ed
 PKG_DESCR:=		vpn solution using ssl/tls
 PKG_SECTION:=		net/security
@@ -15,13 +15,14 @@ PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
 PKG_CFLINE_OPENVPN:=	select ADK_KERNEL_TUN m
 
-PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS
+PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS WITH_SMALL
 PKGFD_WITH_LZO:=	enable lzo compression support
 PKGFS_WITH_LZO:=	liblzo
 PKGFB_WITH_LZO:=	liblzo
 PKGFD_WITH_MANAGEMENT:=	enable management server support
 PKGFD_WITH_HTTPPROXY:=	enable http proxy support
 PKGFD_WITH_SOCKS:=	enable socks proxy support
+PKGFD_WITH_SMALL:=	enable extra small binary
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -51,9 +52,17 @@ else
 CONFIGURE_ARGS+=	--disable-socks
 endif
 
+ifneq ($(ADK_PACKAGE_OPENVPN_WITH_SMALL),)
+CONFIGURE_ARGS+=	--enable-small
+endif
+
+ifeq ($(ADK_DEBUG),y)
+CONFIGURE_ARGS+=	--enable-debug
+else
+CONFIGURE_ARGS+=	--disable-debug
+endif
+
 CONFIGURE_ARGS+=	--disable-plugins \
-			--enable-small \
-			--disable-debug \
 			--with-crypto-library=openssl \
 			--enable-iproute2
 
