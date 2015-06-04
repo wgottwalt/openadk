@@ -12,6 +12,7 @@ config ADK_KERNEL_IP_FIB_HASH
 
 config ADK_KERNEL_IPV6
 	tristate "Enable IPv6 support"
+	select BUSYBOX_FEATURE_IPV6
 	help
 	  This is complemental support for the IP version 6.
 	  You will still be able to do traditional IPv4 networking as well.
