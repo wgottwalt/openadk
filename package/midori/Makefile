@@ -13,7 +13,7 @@ PKG_DEPENDS:=		libnotify webkitgtk
 PKG_BUILDDEP:=		cmake-host vala-host libnotify webkitgtk
 PKG_BUILDDEP+=		librsvg-host librsvg
 PKG_URL:=		http://www.midori-browser.org
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 PKG_CFLINE_MIDORI:=	depends on ADK_BROKEN
 
