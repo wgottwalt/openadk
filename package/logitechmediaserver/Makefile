@@ -5,6 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		logitechmediaserver
 PKG_VERSION:=		7.9.0
+PKG_EXTRAVER:=		1432805518-noCPAN
 PKG_RELEASE:=		1
 PKG_HASH:=		a7ebf01bbd95954c5f32e81fddb2315cb50f2d4388f63dec9c869dd9aef7da8a
 PKG_DESCR:=		popular media server
@@ -17,10 +18,10 @@ PKG_DEPENDS+=		p5-dbd-sqlite p5-tie-refhash p5-template-toolkit
 PKG_DEPENDS+=		p5-class-xsaccessor p5-io-interface
 PKG_BUILDDEP:=		perl
 PKG_URL:=		http://wiki.slimdevices.com/index.php/Logitech_Media_Server
-PKG_SITES:=		http://downloads.slimdevices.com/nightly/7.9/sc/a6dacd2/
+PKG_SITES:=		http://distfiles.openadk.org/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-1428327734-noCPAN.tgz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-1428327734-noCPAN
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-${PKG_EXTRAVER}.tgz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-${PKG_EXTRAVER}
 
 include $(ADK_TOPDIR)/mk/package.mk
 
