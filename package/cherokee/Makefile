@@ -10,7 +10,7 @@ PKG_HASH:=		ca465ab3772479fc843b38ffc45113bf24d8bfae9185cdd5176b099d5a17feb8
 PKG_DESCR:=		small and fast webserver
 PKG_SECTION:=		net/http
 PKG_URL:=		http://www.cherokee-project.com
-PKG_SITES:=		http://www.cherokee-project.de/mirrors/cherokee/1.2/${PKG_VERSION}/
+PKG_SITES:=		http://mirror.aarnet.edu.au/pub/cherokee/1.2/1.2.101/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -18,6 +18,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CHEROKEE,cherokee,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes \
+			ac_cv_func_realloc_0_nonnull=yes
 CONFIGURE_ARGS+=	--enable-static-module=all \
 			--without-mysql \
 			--without-ldap \
