@@ -4,21 +4,20 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
-PKG_VERSION:=		1.3.0
-PKG_RELEASE:=		3
-PKG_HASH:=		d3dcc8d84af51c6c382b214397c62402e37a799e8ebcda6f4217aef0010451a9
+PKG_VERSION:=		1.4.0
+PKG_RELEASE:=		1
+PKG_HASH:=		f582d9b2d60a592a4a3d8c32965ca2d2167e9ade38c6c30bac8801ff66a118e4
 PKG_DESCR:=		vp8/vp9 codec library
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.webmproject.org/about/
-PKG_SITES:=		https://webm.googlecode.com/files/
+PKG_SITES:=		http://storage.googleapis.com/downloads.webmproject.org/releases/webm/
 PKG_OPTS:=		dev
 
 PKG_BUILDDEP_IBM_X40:=	yasm-host
 PKG_BUILDDEP_QEMU_X86:=	yasm-host
 PKG_ARCH_DEPENDS:=	!m68k
 
-DISTFILES:=             ${PKG_NAME}-v${PKG_VERSION}.tar.bz2
-WRKDIST=		$(WRKDIR)/${PKG_NAME}-v${PKG_VERSION}
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(ADK_TOPDIR)/mk/package.mk
 
