@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-MASTER_SITE_BACKUP?=	http://${ADK_HOST}/distfiles/
+MASTER_SITE_BACKUP?=	http://distfiles.${ADK_HOST}/
 
 MASTER_SITE_OPENADK?=	\
 	http://distfiles.openadk.org/ \
