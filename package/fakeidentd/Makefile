@@ -4,15 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		fakeidentd
-PKG_VERSION:=		2.5
+PKG_VERSION:=		2.6
 PKG_RELEASE:=		1
 PKG_HASH:=		696a57b58ede48c65b9c3743d3d96be70abf5406f0173964e4cd05dd6c8f0b90
 PKG_DESCR:=		secure ident daemon
 PKG_SECTION:=		net/misc
-PKG_SITES:=		http://distfiles.gentoo.org/distfiles/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-WRKDIST=		${WRKDIR}
+NO_DISTFILES:=		1
 
 include ${ADK_TOPDIR}/mk/package.mk
 
@@ -24,7 +22,7 @@ INSTALL_STYLE:=		manual
 
 do-build:
 	${TARGET_CC} ${TARGET_CPPFLAGS} ${TARGET_CFLAGS} ${TARGET_LDFLAGS} \
-		-o ${WRKBUILD}/fakeidentd ${WRKBUILD}/identd.c
+		-o ${WRKBUILD}/fakeidentd ${WRKBUILD}/fakeidentd-2.6.c
 
 do-install:
 	${INSTALL_DIR} ${IDIR_FAKEIDENTD}/usr/sbin
