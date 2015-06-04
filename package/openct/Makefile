@@ -11,8 +11,8 @@ PKG_DESCR:=		drivers for smart card readers
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libopenct
 PKG_BUILDDEP:=		libtool
-PKG_URL:=		http://www.opensc-project.org/openct/
-PKG_SITES:=		http://www.opensc-project.org/files/openct/
+PKG_URL:=		https://github.com/OpenSC/openct/wiki
+PKG_SITES:=		http://sourceforge.net/projects/opensc/files/openct/
 PKG_LIBNAME:=		libopenct
 PKG_OPTS:=		dev
 
