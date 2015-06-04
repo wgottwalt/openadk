@@ -7,10 +7,10 @@ PKG_NAME:=		i2400m-fw
 PKG_VERSION:=		1.5.0
 PKG_RELEASE:=		1
 PKG_HASH:=		edcb7c5322c0185173a2dc79b3df4bc74964edfa741ebf9a09cd70a32d758c3d
-PKG_DESCR:=		intel (R) wimax 5150/5350/6250 firmware
+PKG_DESCR:=		intel wimax 5150/5350/6250 firmware
 PKG_SECTION:=		sys/firmware
 PKG_URL:=		http://www.linuxwimax.org
-PKG_SITES:=		"http://www.linuxwimax.org/Download?action=AttachFile&do=get&target="
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
