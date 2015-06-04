@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		font-bh-type1
-PKG_VERSION:=		1.0.1
+PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_HASH:=		ecb457560c4bb350385972a16d2239f4daa79204c52a36330221e52790664a2c
+PKG_HASH:=		d5602f1d749ccd31d3bc1bb6f0c5d77400de0e5e3ac5abebd2a867aa2a4081a4
 PKG_DESCR:=		x fonts
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		font-util
