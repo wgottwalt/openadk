@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		strongswan
-PKG_VERSION:=		5.3.0
+PKG_VERSION:=		5.3.1
 PKG_RELEASE:=		1
-PKG_HASH:=		66d934340cde95c4fbb399880baa8703e7b17762134f1a411a186aad97ea5148
+PKG_HASH:=		e7a794fcb326caa0b171bf0f43dc4f30f989e8f88e8045ff2771401a72e2dfe6
 PKG_DESCR:=		ipsec software
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libpthread
