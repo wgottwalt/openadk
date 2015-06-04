@@ -19,6 +19,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,AUTOSSH,autossh,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes \
+			ac_cv_func_realloc_0_nonnull=yes
+
 autossh-install:
 	$(INSTALL_DIR) $(IDIR_AUTOSSH)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/autossh $(IDIR_AUTOSSH)/usr/bin
