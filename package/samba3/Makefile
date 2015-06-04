@@ -14,8 +14,9 @@ PKG_DEPENDS:=		libuuid libpopt
 PKG_URL:=		http://www.samba.org/
 PKG_SITES:=		http://samba.org/samba/ftp/stable/
 
-DISTFILES:=		${PKG_NAME}3-${PKG_VERSION}.tar.gz
+DISTFILES:=		samba-${PKG_VERSION}.tar.gz
 
+WRKDIST=		${WRKDIR}/samba-${PKG_VERSION}
 WRKSRC=			${WRKDIST}/source3
 
 include ${ADK_TOPDIR}/mk/package.mk
