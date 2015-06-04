@@ -4,15 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		opensc
-PKG_VERSION:=		0.11.13
-PKG_RELEASE:=		5
-PKG_HASH:=		a9a42d6d51fb500f34248fcd0d4083c99d25bc5e74df60fe4efa19b5b4e6d890
+PKG_VERSION:=		0.15.0
+PKG_RELEASE:=		1
+PKG_HASH:=		399b2107a69e3f67e4e76dc2dbd951dbced8e534b1e0f919e176aea9b85970d7
 PKG_DESCR:=		utilities to access smart cards
 PKG_SECTION:=		app/crypto
 PKG_BUILDDEP:=		openct pcsc-lite openssl readline
 PKG_DEPENDS:=		libopensc libopenct pcsc-lite libopenssl libreadline
-PKG_URL:=		http://www.opensc-project.org/opensc/
-PKG_SITES:=		http://www.opensc-project.org/files/opensc/
+PKG_URL:=		https://github.com/OpenSC/OpenSC/wiki
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=opensc/}
 PKG_LIBNAME:=		libopensc
 PKG_OPTS:=		dev
 
@@ -32,7 +32,7 @@ $(eval $(call PKG_template,LIBOPENSC,libopensc,${PKG_VERSION}-${PKG_RELEASE},${P
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-man \
 			--disable-iconv \
-			--enable-pcsc \
+			--disable-pcsc \
 			--enable-openct
 
 opensc-install:
@@ -54,10 +54,6 @@ opensc-install:
 libopensc-install:
 	${INSTALL_DIR} ${IDIR_LIBOPENSC}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libopensc.so* \
-		${IDIR_LIBOPENSC}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libpkcs15init.so* \
-		${IDIR_LIBOPENSC}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libscconf.so* \
 		${IDIR_LIBOPENSC}/usr/lib
 	${CP} ${WRKINST}/usr/lib/opensc-pkcs11.so \
 		${IDIR_LIBOPENSC}/usr/lib
