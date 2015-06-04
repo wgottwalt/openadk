@@ -1,0 +1,29 @@
+--- rt-tests-3fed00ff8d2c0cdbc5ba078cbd60ce3cfcee615f.orig/src/cyclictest/cyclictest.c	2015-05-28 22:04:15.000000000 +0200
++++ rt-tests-3fed00ff8d2c0cdbc5ba078cbd60ce3cfcee615f/src/cyclictest/cyclictest.c	2015-05-31 09:30:23.000000000 +0200
+@@ -57,26 +57,6 @@
+ #define sigev_notify_thread_id _sigev_un._tid
+ 
+ #ifdef __UCLIBC__
+-#define MAKE_PROCESS_CPUCLOCK(pid, clock) \
+-	((~(clockid_t) (pid) << 3) | (clockid_t) (clock))
+-#define CPUCLOCK_SCHED          2
+-
+-static int clock_nanosleep(clockid_t clock_id, int flags, const struct timespec *req,
+-			   struct timespec *rem)
+-{
+-	if (clock_id == CLOCK_THREAD_CPUTIME_ID)
+-		return -EINVAL;
+-	if (clock_id == CLOCK_PROCESS_CPUTIME_ID)
+-		clock_id = MAKE_PROCESS_CPUCLOCK (0, CPUCLOCK_SCHED);
+-
+-	return syscall(__NR_clock_nanosleep, clock_id, flags, req, rem);
+-}
+-
+-int sched_setaffinity (__pid_t __pid, size_t __cpusetsize,
+-		       __const cpu_set_t *__cpuset)
+-{
+-	return -EINVAL;
+-}
+ 
+ #undef CPU_SET
+ #undef CPU_ZERO
