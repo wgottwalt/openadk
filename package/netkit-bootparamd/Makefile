@@ -10,7 +10,7 @@ PKG_HASH:=		7fd44b14f7ee5bf930bdd03b0c3a15bdb6efb60a862af47269b05361c4ed395c
 PKG_DESCR:=		net bootparam daemon
 PKG_SECTION:=		net/misc
 PKG_BUILDDEP:=		libtirpc
-PKG_SITES:=		http://www.openadk.org/distfiles/
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
