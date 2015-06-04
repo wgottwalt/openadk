@@ -12,7 +12,7 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	tvheadend &
+	/usr/bin/tvheadend --noacl &
 	;;
 stop)
 	kill $(pgrep -f /usr/bin/tvheadend)
