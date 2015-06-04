@@ -1,0 +1,11 @@
+--- apache-log4cxx-0.10.0.orig/src/main/cpp/charsetencoder.cpp	2008-04-01 00:34:09.000000000 +0200
++++ apache-log4cxx-0.10.0/src/main/cpp/charsetencoder.cpp	2015-05-30 02:42:41.000000000 +0200
+@@ -484,7 +484,7 @@ CharsetEncoderPtr CharsetEncoder::getEnc
+     } else if (StringHelper::equalsIgnoreCase(charset, LOG4CXX_STR("UTF-16LE"), LOG4CXX_STR("utf-16le"))) {
+         return new UTF16LECharsetEncoder();
+     }
+-#if APR_HAS_XLATE || !defined(_WIN32)
++#if APR_HAS_XLATE
+     return new APRCharsetEncoder(charset);
+ #else    
+     throw IllegalArgumentException(charset);

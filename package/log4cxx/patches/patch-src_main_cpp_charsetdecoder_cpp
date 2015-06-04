@@ -1,0 +1,11 @@
+--- apache-log4cxx-0.10.0.orig/src/main/cpp/charsetdecoder.cpp	2008-04-01 00:34:09.000000000 +0200
++++ apache-log4cxx-0.10.0/src/main/cpp/charsetdecoder.cpp	2015-05-30 02:51:44.000000000 +0200
+@@ -476,7 +476,7 @@ CharsetDecoderPtr CharsetDecoder::getDec
+         StringHelper::equalsIgnoreCase(charset, LOG4CXX_STR("ISO-LATIN-1"), LOG4CXX_STR("iso-latin-1"))) {
+         return new ISOLatinCharsetDecoder();
+     }
+-#if APR_HAS_XLATE || !defined(_WIN32)
++#if APR_HAS_XLATE
+     return new APRCharsetDecoder(charset);
+ #else    
+     throw IllegalArgumentException(charset);
