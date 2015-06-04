@@ -43,6 +43,9 @@ config ADK_KERNEL_PHYLIB
 config ADK_KERNEL_MII
 	bool
 
+config ADK_KERNEL_ETRAX_HAVE_PHY
+	bool
+
 config ADK_KERNEL_NET_PCI
 	bool
 
@@ -267,6 +270,13 @@ config ADK_KERNEL_R8169
 	select ADK_PACKAGE_REALTEK_FIRMWARE_WIRED
 	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI
 	default y if ADK_TARGET_SYSTEM_PCENGINES_APU
+	default n
+
+config ADK_KERNEL_ETRAX_ETHERNET
+	bool "ETRAX ethernet driver"
+	select ADK_KERNEL_ETRAX_HAVE_PHY
+	depends on ADK_TARGET_ARCH_CRIS
+	default y if ADK_TARGET_ARCH_CRIS
 	default n
 
 endmenu
