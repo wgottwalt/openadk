@@ -15,6 +15,8 @@ PKG_URL:=		http://pocoproject.org
 PKG_SITES:=		http://pocoproject.org/releases/poco-1.6.0/
 PKG_OPTS:=		dev
 
+PKG_LIBC_DEPENDS:=	glibc
+
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
