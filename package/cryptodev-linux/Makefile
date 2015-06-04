@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		cryptodev-linux
 PKG_VERSION:=		1.7
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		41880533b53de4d7b3f054e230f576988dafb8eed7bef5ebcf6422bb2e3a3b25
 PKG_DESCR:=		device that allows access to kernel cryptographic drivers
 PKG_SECTION:=		app/crypto
@@ -21,16 +21,19 @@ include ${ADK_TOPDIR}/mk/kernel-vars.mk
 
 $(eval $(call PKG_template,CRYPTODEV_LINUX,cryptodev-linux,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIG_STYLE:=		manual
 XAKE_FLAGS+=		CRYPTODEV_CFLAGS='-DENABLE_ASYNC -fhonour-copts' \
-			ARCH='${ADK_TARGET_KARCH}' \
-			KERNEL_DIR='${LINUX_DIR}' \
-			CROSS_COMPILE='${TARGET_CROSS}'
-ALL_TARGET:=		build
+
+CONFIG_STYLE:=		manual
+BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-post-build:
-	-${MAKE} -C "${WRKBUILD}"/tests check
+do-build:
+	GCC_HONOUR_COPTS=s ${MAKE} -C "${WRKBUILD}"/tests check
+	${MAKE} -C "${WRKBUILD}" version.h
+	GCC_HONOUR_COPTS=0 LDFLAGS="" ${MAKE} -C ${LINUX_DIR} ${KERNEL_MAKE_OPTS} M="${WRKBUILD}" modules
+	${INSTALL_DIR} ${WRKINST}/usr/include/crypto
+	${INSTALL_DATA} ${WRKBUILD}/crypto/cryptodev.h \
+		${WRKINST}/usr/include/crypto/
 
 do-install:
 	${INSTALL_DIR} ${IDIR_CRYPTODEV_LINUX}/usr/bin
