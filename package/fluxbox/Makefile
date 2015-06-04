@@ -4,17 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		fluxbox
-PKG_VERSION:=		1.3.2
+PKG_VERSION:=		1.3.7
 PKG_RELEASE:=		1
-PKG_HASH:=		c174030bd356f680dc5608f5553cac89b44f362c050d081ae8a8b7a3227280a0
+PKG_HASH:=		fc8c75fe94c54ed5a5dd3fd4a752109f8949d6df67a48e5b11a261403c382ec0
 PKG_DESCR:=		window manager featuring tabs and an iconbar
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libXpm libXft
 PKG_URL:=		http://www.fluxbox.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fluxbox/}
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_FLAVOURS_FLUXBOX:=	WITH_IMLIB2
 PKGFD_WITH_IMLIB2:=	enable imlib2 support
@@ -24,6 +22,9 @@ PKGFB_WITH_IMLIB2:=	imlib2
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FLUXBOX,fluxbox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ENV+=         ac_cv_func_malloc_0_nonnull=yes \
+			ac_cv_func_realloc_0_nonnull=yes
 
 ifeq (${ADK_PACKAGE_FLUXBOX_WITH_IMLIB2},y)
 CONFIGURE_ARGS+=	--enable-imlib2

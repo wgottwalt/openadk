@@ -1,0 +1,9 @@
+--- fluxbox-1.3.7.orig/src/defaults.cc	2015-02-08 11:45:20.000000000 +0100
++++ fluxbox-1.3.7/src/defaults.cc	2015-06-03 09:01:47.000000000 +0200
+@@ -6,5 +6,5 @@ std::string realProgramName(const std::s
+ }
+ 
+ const char* gitrevision() {
+-  return "88a74ff1cde22be3e894498ffd88934dc92dfef0";
++  return "unknown";
+ }
