@@ -4,22 +4,23 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ImageMagick
-PKG_VERSION:=		6.7.6
-PKG_EXTRAVER:=		1
-PKG_RELEASE:=		3
-PKG_HASH:=		a83847198c7354a8fcf68f1e9b3ac7ddc7ccd21aa525761e93ed522af31d69fa
+PKG_VERSION:=		6.9.1
+PKG_EXTRAVER:=		3
+PKG_RELEASE:=		1
+PKG_HASH:=		5fd180603e60c624c05c644a8340f4f4e92c19dc3c41d374d38f76c69cd48ba3
 PKG_DESCR:=		image processing and converting utility
 PKG_SECTION:=		mm/image
 PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libpng libjpeg-turbo libtiff fontconfig
 PKG_BUILDDEP+=		pango libtool e2fsprogs
 PKG_URL:=		http://www.imagemagick.org/
-PKG_SITES:=		http://image_magick.veidrodis.com/image_magick/
+PKG_SITES:=		http://www.imagemagick.org/download/
 PKG_LIBNAME:=		libimagemagick
 PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	!m68k
 PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
+PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
 
 PKG_SUBPKGS:=		CONVERT DISPLAY LIBIMAGEMAGICK
 PKGSD_LIBIMAGEMAGICK:=	imagemagick library
@@ -33,7 +34,7 @@ PKGSC_DISPLAY:=		mm/image
 PKGSS_DISPLAY:=		libimagemagick libX11 libXau libXdmcp libICE libSM fontconfig libXt zlib libpng libltdl
 PKGSB_DISPLAY:=		libX11
 
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-${PKG_EXTRAVER}.tar.gz
+DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}-${PKG_EXTRAVER}.tar.xz
 WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-${PKG_EXTRAVER}
 
 include $(ADK_TOPDIR)/mk/package.mk
@@ -59,16 +60,12 @@ CONFIGURE_ARGS+=	--with-magick-plus-plus=no \
 			--enable-fast-install
 
 libimagemagick-install:
-	$(INSTALL_DIR) $(IDIR_LIBIMAGEMAGICK)/usr/lib
-	$(INSTALL_DIR) $(IDIR_LIBIMAGEMAGICK)/usr/lib/${PKG_NAME}-${PKG_VERSION}/config
-	$(INSTALL_DATA) $(WRKINST)/usr/lib/${PKG_NAME}-${PKG_VERSION}/config/* \
-		$(IDIR_LIBIMAGEMAGICK)/usr/lib/${PKG_NAME}-${PKG_VERSION}/config
-	$(INSTALL_DIR) $(IDIR_LIBIMAGEMAGICK)/usr/share/${PKG_NAME}-${PKG_VERSION}
-	$(INSTALL_DATA) $(WRKINST)/usr/share/${PKG_NAME}-${PKG_VERSION}/* \
-		$(IDIR_LIBIMAGEMAGICK)/usr/share/${PKG_NAME}-${PKG_VERSION}/
-	$(CP) $(WRKINST)/usr/lib/libMagickCore.so* \
+	$(INSTALL_DIR) $(IDIR_LIBIMAGEMAGICK)/usr/lib/${PKG_NAME}-${PKG_VERSION}
+	$(CP) $(WRKINST)/usr/lib/${PKG_NAME}-${PKG_VERSION}/* \
+		$(IDIR_LIBIMAGEMAGICK)/usr/lib/${PKG_NAME}-${PKG_VERSION}/
+	$(CP) $(WRKINST)/usr/lib/libMagickCore*.so* \
 		$(IDIR_LIBIMAGEMAGICK)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libMagickWand.so* \
+	$(CP) $(WRKINST)/usr/lib/libMagickWand*.so* \
 		$(IDIR_LIBIMAGEMAGICK)/usr/lib
 
 convert-install:
