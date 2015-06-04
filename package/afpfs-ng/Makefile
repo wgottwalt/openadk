@@ -16,6 +16,9 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=afpfs-ng/}
 PKG_LIBNAME:=		libafpclient
 PKG_OPTS:=		dev
 
+PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
+PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
+
 PKG_SUBPKGS:=		AFPFS_NG LIBAFPCLIENT
 PKGSD_LIBAFPCLIENT:=	afp client library
 PKGSC_LIBAFPCLIENT:=	libs/net
@@ -26,6 +29,10 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,AFPFS_NG,afpfs-ng,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBAFPCLIENT,libafpclient,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_LIBAFPCLIENT},${PKGSD_LIBAFPCLIENT},${PKGSC_LIBAFPCLIENT}))
+
+ifeq ($(ADK_TARGET_LIB_UCLIBC)$(ADK_TARGET_LIB_UCLIBC_NG),y)
+TARGET_LDFLAGS+=	-liconv
+endif
 
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--enable-gcrypt
