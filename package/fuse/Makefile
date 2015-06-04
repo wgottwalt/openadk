@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		fuse
-PKG_VERSION:=		2.9.3
-PKG_RELEASE:=		2
-PKG_HASH:=		0beb83eaf2c5e50730fc553406ef124d77bc02c64854631bdfc86bfd6437391c
+PKG_VERSION:=		2.9.4
+PKG_RELEASE:=		1
+PKG_HASH:=		6be9c0bff6af8c677414935f31699ea5a7f8f5f791cfa5205be02ea186b97ce1
 PKG_DESCR:=		filesystem in userspace utility
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libfuse
