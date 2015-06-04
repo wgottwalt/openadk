@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		zsh
-PKG_VERSION:=		5.0.5
+PKG_VERSION:=		5.0.7
 PKG_RELEASE:=		1
-PKG_HASH:=		b35cf19e4a6ba39fd03c6372b8a8760a491cc2e2e4aba3d15023ff291c2894b4
+PKG_HASH:=		43f0a4c179ef79bb8c9153575685f7f45f28a3615c8cf96345f503d5b9e7b919
 PKG_DESCR:=		z shell
 PKG_SECTION:=		base/shells
 PKG_URL:=		http://www.zsh.org/
-PKG_SITES:=		ftp://ftp.fu-berlin.de/pub/unix/shells/zsh/
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=zsh/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
