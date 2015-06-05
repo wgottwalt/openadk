@@ -24,7 +24,6 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,KNOCK,knock,${PKG_VERSION}-${PKG_RELEASE},,${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,KNOCKD,knockd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_KNOCKD},${PKGSD_KNOCKD},${PKG_SECTION}))
 
-TARGET_CPPFLAGS+=	-D_GNU_SOURCE
 CONFIGURE_ENV+=		ac_cv_lib_pcap_pcap_open_live=yes
 
 knock-install:
