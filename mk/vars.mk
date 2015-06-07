@@ -109,13 +109,18 @@ TARGET_CXX+=		$(ADK_TARGET_ABI_CFLAGS)
 endif
 
 TARGET_CPPFLAGS:=	
-TARGET_CFLAGS:=		-fwrapv -fno-ident -fhonour-copts
-TARGET_CXXFLAGS:=	-fwrapv -fno-ident -fhonour-copts
+TARGET_CFLAGS:=		-fwrapv -fno-ident
+TARGET_CXXFLAGS:=	-fwrapv -fno-ident
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
-# for archiectures where gcc --with-cpu matches -mcpu=
+ifeq ($(ADK_DISABLE_HONOUR_CFLAGS),)
+TARGET_CFLAGS+=		-fhonour-copts
+TARGET_CXXFLAGS+=	-fhonour-copts
+endif
+
+# for architectures where gcc --with-cpu matches -mcpu=
 ifneq ($(ADK_TARGET_GCC_CPU),)
 ifeq ($(ADK_CPU_ARC700),y)
 TARGET_CFLAGS+=		-mcpu=ARC700

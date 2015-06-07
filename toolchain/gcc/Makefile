@@ -40,6 +40,7 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-libmudflap \
 			--disable-libgomp \
 			--disable-libcilkrts \
+			--disable-libquadmath \
 			--disable-libquadmath-support \
 			--disable-decimal-float \
 			--disable-libstdcxx-pch \
@@ -168,7 +169,7 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 GCC_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
 
-ifeq ($(ADK_TARGET_UCLINUX),y)
+ifeq ($(ADK_TARGET_WITHOUT_CXX),y)
 LANGUAGES:=c
 else
 LANGUAGES:=c,c++

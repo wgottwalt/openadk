@@ -20,6 +20,7 @@ config ADK_TOOLCHAIN_GCC_5_1_0
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_C6X
+	depends on !ADK_TARGET_ARCH_H8300
 
 config ADK_TOOLCHAIN_GCC_4_9_2
 	bool "4.9.2"
@@ -27,6 +28,7 @@ config ADK_TOOLCHAIN_GCC_4_9_2
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_C6X
+	depends on !ADK_TARGET_ARCH_H8300
 
 config ADK_TOOLCHAIN_GCC_4_8_4
 	bool "4.8.4"
@@ -37,6 +39,7 @@ config ADK_TOOLCHAIN_GCC_4_8_4
 	depends on !ADK_TARGET_ARCH_CRIS
 	depends on !ADK_TARGET_ARCH_TILE
 	depends on !ADK_TARGET_ARCH_C6X
+	depends on !ADK_TARGET_ARCH_H8300
 
 config ADK_TOOLCHAIN_GCC_4_8_3_ARC
 	bool "4.8.3-arc"

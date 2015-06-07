@@ -6,6 +6,9 @@ prompt "Kernel Version"
 depends on ADK_TARGET_KERNEL_CUSTOMISING
 default ADK_KERNEL_VERSION_4_0_4
 
+config ADK_KERNEL_VERSION_GIT
+	bool "linux-git"
+	
 config ADK_KERNEL_VERSION_4_1_0_RC5
 	bool "4.1.0rc5"
 	select ADK_KERNEL_VERSION_4_1
@@ -80,3 +83,10 @@ config ADK_KERNEL_VERSION_2_6_32_65
 	select ADK_KERNEL_VERSION_2_6_32
 
 endchoice
+
+config ADK_KERNEL_REPO
+	string "git repository"
+	depends on ADK_KERNEL_VERSION_GIT
+	default "git://git.kernel.org/pub/scm/linux/kernel/git/next/linux-next.git"
+	help
+	  GIT repository to use.

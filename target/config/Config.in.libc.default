@@ -7,6 +7,12 @@ config ADK_TARGET_WITH_LT
 config ADK_TARGET_WITH_NPTL
 	bool
 
+config ADK_TARGET_WITHOUT_THREADS
+	bool
+
+config ADK_TARGET_WITHOUT_CXX
+	bool
+
 config ADK_TARGET_LIBC
 	string
 	default "uclibc-ng" if ADK_TARGET_LIB_UCLIBC_NG
