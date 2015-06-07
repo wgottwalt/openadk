@@ -9,6 +9,11 @@ include ${ADK_TOPDIR}/mk/buildhlp.mk
 ifeq (${ADK_MAKE_PARALLEL},y)
 GDB_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
+ifeq ($(ADK_TARGET_SIM),y)
+CONFIGURE_ARGS:=	--enable-sim
+else
+CONFIGURE_ARGS:=	--disable-sim
+endif
 
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
@@ -29,12 +34,12 @@ $(WRKBUILD)/.configured:
 		--disable-nls \
 		--with-curses \
 		--enable-threads \
-		--enable-sim \
 		--disable-tui \
 		--disable-werror \
 		--disable-install-libiberty \
 		--without-python \
 		--without-x \
+		$(CONFIGURE_ARGS) \
 	);
 	touch $@
 
