@@ -7,19 +7,23 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	grep -v "^#" /etc/fstab| grep cifs >/dev/null 2>&1
-	if [ $? -eq 0 ];then
+	grep -v "^#" /etc/fstab | grep cifs >/dev/null 2>&1
+	if [ $? -eq 0 ]; then
 		grep cifs /proc/filesystems >/dev/null 2>&1
-		if [ $? -eq 0 ];then
+		if [ $? -eq 0 ]; then
+			mntpoints=$(grep -v "^#" /etc/fstab| grep cifs|awk '{ print $2 }')
+			for mntpoint in $mntpoints; do
+				mkdir -p $mntpoint
+			done
 			mount -a -t cifs
 		else
-			logger -t cifs "No cifs support in kernel"
+			logger -s -t cifs "No cifs support in kernel"
 		fi
 	fi
 	;;
 stop)
 	grep -v "^#" /etc/fstab| grep cifs >/dev/null 2>&1
-	if [ $? -eq 0 ];then
+	if [ $? -eq 0 ]; then
 		umount -a -t cifs
 	fi
 	;;
