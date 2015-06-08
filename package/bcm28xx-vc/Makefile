@@ -5,8 +5,8 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm28xx-vc
 PKG_VERSION:=		9cc14b29288f913ef0e3286f4b3232bf73ab59d2
-PKG_RELEASE:=		1
-PKG_DESCR:=		videocore tools and libraries for bcm28xx
+PKG_RELEASE:=		2
+PKG_DESCR:=		videocore tools and libraries
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		cmake-host
