@@ -4,12 +4,18 @@ depends on ADK_TARGET_WITH_USB
 config ADK_KERNEL_MEDIA_SUPPORT
 	tristate
 
+config ADK_KERNEL_RC_CORE
+	bool
+
 config ADK_KERNEL_VIDEO_DEV
 	bool
 
 config ADK_KERNEL_VIDEO_V4L2
 	bool
 	select ADK_KERNEL_VIDEO_DEV
+
+config ADK_KERNEL_DVB_CORE
+	bool
 
 config ADK_KERNEL_MEDIA_USB_SUPPORT
 	bool
@@ -23,8 +29,23 @@ config ADK_KERNEL_MEDIA_ANALOG_TV_SUPPORT
 config ADK_KERNEL_MEDIA_DIGITAL_TV_SUPPORT
 	bool
 
+config ADK_KERNEL_VIDEO_CX231XX_DVB
+	tristate
+
 menu "DVB card support"
 
+config ADK_KERNEL_VIDEO_CX231XX
+	tristate "Hauppauge WinTV-HVR-930C"
+	select ADK_KERNEL_MEDIA_SUPPORT
+	select ADK_KERNEL_MEDIA_USB_SUPPORT
+	select ADK_KERNEL_MEDIA_DIGITAL_TV_SUPPORT
+	select ADK_KERNEL_MEDIA_ANALOG_TV_SUPPORT
+	select ADK_KERNEL_RC_CORE
+	select ADK_KERNEL_DVB_CORE
+	select ADK_KERNEL_VIDEO_CX231XX_DVB
+	help
+	  Driver for Hauppauge WinTV-HVR-930C	
+	
 config ADK_KERNEL_VIDEO_PVRUSB2
 	tristate "Hauppauge PVR DVB stick"
 	select ADK_KERNEL_MEDIA_SUPPORT
@@ -32,7 +53,7 @@ config ADK_KERNEL_VIDEO_PVRUSB2
 	select ADK_KERNEL_MEDIA_DIGITAL_TV_SUPPORT
 	select ADK_KERNEL_MEDIA_ANALOG_TV_SUPPORT
 	help
-	  Driver for Hauppauge PVR f.e. WinTV-HVR 930C
+	  Driver for Hauppauge PVR
 
 endmenu
 
