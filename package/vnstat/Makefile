@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		vnstat
-PKG_VERSION:=		1.4
+PKG_VERSION:=		1.14
 PKG_RELEASE:=		1
-PKG_HASH:=		2f63c326b34e92254552bd69772dcd8e24e9cc216ccfa182c9fa2523c37fcf37
+PKG_HASH:=		f8462a47d85d0890493dc9eaeafbc725ae631aa5b103fb7f8af4ddb2314e8386
 PKG_DESCR:=		console-based network traffic monitor
 PKG_SECTION:=		net/perf
 PKG_SITES:=		http://humdi.net/vnstat/
@@ -19,8 +19,6 @@ $(eval $(call PKG_template,VNSTAT,vnstat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEP
 
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
-
-MAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
 ALL_TARGET:=		vnstat
 
 do-install:

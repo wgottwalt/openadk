@@ -1,9 +1,0 @@
---- vnstat-1.4.orig/src/Makefile	2004-03-26 14:25:51.000000000 +0100
-+++ vnstat-1.4/src/Makefile	2011-01-22 00:05:41.408658273 +0100
-@@ -1,5 +1,5 @@
- CC = gcc
--CFLAGS = -O2
-+CFLAGS ?= -O2
- OBJS = proc.o db.o misc.o
- OBJS64 = proc64.o db.o misc.o
- 
