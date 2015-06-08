@@ -40,8 +40,14 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SOX,sox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-# uses old api
-CONFIGURE_ARGS+=	--without-ffmpeg
+CONFIGURE_ARGS+=	--disable-gomp \
+			--without-magic \
+			--without-png \
+			--without-amrwb \
+			--without-amrnb \
+			--without-pulseaudio \
+			--without-twolame
+
 ifeq ($(ADK_PACKAGE_SOX_WITH_ALSA),y)
 CONFIGURE_ARGS+=	--with-alsa
 else
