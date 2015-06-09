@@ -64,7 +64,7 @@ else
 GCC_CONFOPTS+=         --disable-tls --disable-threads --disable-libatomic
 endif
 
-ifeq ($(ADK_TARGET_UCLINUX)$(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS),y)
 GCC_FINAL_CONFOPTS+=	--disable-shared
 else
 # uClibc/glibc uses libgcc_s.so.1 for pthread_cancel with dlopen

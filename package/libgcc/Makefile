@@ -38,7 +38,7 @@ ifeq ($(ADK_TARGET_ARCH_SH),y)
 	${CP} ${STAGING_TARGET_DIR}/lib/!m4/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 else
 ifeq ($(ADK_TARGET_ARCH_AVR32),)
-ifeq ($(ADK_TARGET_UCLINUX),)
+ifeq ($(ADK_TARGET_BINFMT_FLAT),)
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS),)
 	${CP} ${STAGING_TARGET_DIR}/lib/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 endif

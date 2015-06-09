@@ -61,130 +61,162 @@ config ADK_CPU_AVR32
 config ADK_CPU_BFIN
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF512
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF514
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF516
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF518
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF522
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF523
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF524
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF525
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF526
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF527
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF531
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF532
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF533
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF534
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF536
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF537
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF538
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF539
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF542
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF544
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF547
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF548
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF549
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF542M
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF544M
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF547M
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF548M
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF549M
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF561
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_BF592
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_C6X
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF
 	bool
@@ -193,111 +225,133 @@ config ADK_CPU_CF_51
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5206
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5206E
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5208
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5211A
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5213
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5216
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_52235
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5225
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_52259
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5235
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5249
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5250
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5271
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5272
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5275
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5282
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_53017
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5307
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5329
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5373
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5407
 	bool
 	select ADK_CPU_CF
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CF_5475
 	bool
@@ -308,10 +362,12 @@ config ADK_CPU_CF_5475
 config ADK_CPU_CORTEX_M3
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CORTEX_M4
 	bool
 	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_CORTEX_A5
 	bool
@@ -384,6 +440,7 @@ config ADK_CPU_GEODE
 
 config ADK_CPU_H8300
 	bool
+	select ADK_TARGET_WITHOUT_MMU
 	select ADK_TARGET_WITHOUT_THREADS
 	select ADK_TARGET_WITHOUT_CXX
 
@@ -508,12 +565,15 @@ config ADK_CPU_PPC64
 
 config ADK_CPU_SH2
 	bool
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_SH2A
 	bool
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_SH3
 	bool
+	select ADK_TARGET_WITHOUT_MMU
 
 config ADK_CPU_SH4
 	bool
