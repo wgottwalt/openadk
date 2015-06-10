@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
 PKG_VERSION:=		ff25ea118e3580bb1ebcbb7c450ed933da1782be
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv libsquish
@@ -62,7 +62,7 @@ PKGFS_WITH_LIRC:=	lirc
 PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 
 # libiconv missing, freescale GL libraries linked against glibc
-PKG_LIBC_DEPENDS:=	glibc
+PKG_LIBC_DEPENDS:=	glibc uclibc-ng
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm28xx-vc bcm28xx-vc-gl-libs bcm28xx-vc-libs
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm28xx-vc
