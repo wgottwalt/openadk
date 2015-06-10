@@ -55,11 +55,13 @@ $(WRKBUILD)/.compiled:
 
 $(WRKBUILD)/.installed:
 	$(INSTALL_BIN) $(WRKBUILD)/gdb/gdb $(TARGET_CROSS)gdb
+ifeq ($(ADK_TARGET_SIM),y)
 ifeq ($(ADK_TARGET_ARCH_BFIN),y)
 	$(INSTALL_BIN) $(WRKBUILD)/sim/bfin/run $(TARGET_CROSS)run
 endif
 ifeq ($(ADK_TARGET_ARCH_H8300),y)
 	$(INSTALL_BIN) $(WRKBUILD)/sim/h8300/run $(TARGET_CROSS)run
+endif
 endif
 	touch $@
 
