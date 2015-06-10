@@ -8,7 +8,7 @@ PKG_VERSION:=		ff25ea118e3580bb1ebcbb7c450ed933da1782be
 PKG_RELEASE:=		4
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
-PKG_DEPENDS:=		boost python2 libstdcxx glibc-gconv libsquish
+PKG_DEPENDS:=		boost python2 libstdcxx libsquish
 PKG_DEPENDS+=		libass libmpeg2 libmad libdbus libglew mesa
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libopenssl libnettle
@@ -63,6 +63,9 @@ PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 
 # libiconv missing, freescale GL libraries linked against glibc
 PKG_LIBC_DEPENDS:=	glibc uclibc-ng
+
+PKG_BUILDDEP_UCLIBC:=	libiconv
+PKG_BUILDDEP_UCLIBC_NG:=libiconv
 
 PKG_DEPENDS_RASPBERRY_PI:=	bcm28xx-vc bcm28xx-vc-gl-libs bcm28xx-vc-libs
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm28xx-vc
