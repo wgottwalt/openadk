@@ -2,10 +2,10 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		gdb
-ifeq ($(ADK_TOOLCHAIN_GDB_7_9),y)
-PKG_VERSION:=		7.9
+ifeq ($(ADK_TOOLCHAIN_GDB_7_9_1),y)
+PKG_VERSION:=		7.9.1
 PKG_RELEASE:=		1
-PKG_HASH:=		9b315651a16528f7af8c7d8284699fb0c965df316cc7339bb0b7bae335848392
+PKG_HASH:=		cd9c543a411a05b2b647dd38936034b68c2b5d6f10e0d51dc168c166c973ba40
 PKG_SITES:=		${MASTER_SITE_GNU:=gdb/}
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif

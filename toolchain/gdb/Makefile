@@ -15,6 +15,12 @@ else
 CONFIGURE_ARGS:=	--disable-sim
 endif
 
+ifeq ($(ADK_TARGET_SIM),y)
+CONFIGURE_ARGS:=	--enable-sim
+else
+CONFIGURE_ARGS:= 	--disable-sim
+endif
+
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 	$(SED) 's/install_to_$(INSTALL_DEST) //' ${WRKBUILD}/libiberty/Makefile.in
