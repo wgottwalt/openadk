@@ -1820,13 +1820,28 @@ $(eval $(call KMOD_template,SND_BCM2708_SOC_RPI_PROTO,snd-bcm2708-soc-rpi-proto,
 #
 # Multimedia
 #
-$(eval $(call KMOD_template,VIDEO_PVRUSB2,video-pvrusb2,\
+$(eval $(call KMOD_template,RC_CORE,rc-core,\
+	$(MODULES_DIR)/kernel/drivers/media/rc/rc-core \
+,55))
+
+$(eval $(call KMOD_template,DVB_CORE,dvb-core,\
 	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/videodev \
 	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/v4l2-common \
 	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/tuner \
 	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/v4l2-dv-timings \
+	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/videobuf-core \
 	$(MODULES_DIR)/kernel/drivers/media/common/cx2341x \
 	$(MODULES_DIR)/kernel/drivers/media/common/tveeprom \
 	$(MODULES_DIR)/kernel/drivers/media/dvb-core/dvb-core \
+	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/videobuf-dvb \
+,60))
+
+$(eval $(call KMOD_template,VIDEO_CX231XX,video-cx231xx,\
+	$(MODULES_DIR)/kernel/drivers/media/i2c/cx25840/cx25840 \
+	$(MODULES_DIR)/kernel/drivers/media/usb/cx231xx/cx231xx \
+	$(MODULES_DIR)/kernel/drivers/media/usb/cx231xx/cx231xx-dvb \
+,70, dvb-core))
+
+$(eval $(call KMOD_template,VIDEO_PVRUSB2,video-pvrusb2,\
 	$(MODULES_DIR)/kernel/drivers/media/usb/pvrusb2/pvrusb2 \
-,70))
+,70, dvb-core))
