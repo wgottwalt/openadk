@@ -13,6 +13,7 @@ config ADK_TOOLCHAIN_GCC_GIT
 	bool "git"
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
+	select ADK_DISABLE_HONOUR_CFLAGS
 
 config ADK_TOOLCHAIN_GCC_5_1_0
 	bool "5.1.0"
