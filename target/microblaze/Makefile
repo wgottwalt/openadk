@@ -18,6 +18,10 @@ QEMU_ARGS+=-M petalogix-s3adsp1800
 endif
 
 # target helper text
+ifeq ($(ADK_TARGET_FS),archive)
+targethelp:
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
@@ -70,6 +74,9 @@ ifeq ($(ADK_TARGET_FS),squashfs)
 endif
 
 # filesystem specific targets
+ifeq ($(ADK_TARGET_FS),archive)
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
+endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
 endif
