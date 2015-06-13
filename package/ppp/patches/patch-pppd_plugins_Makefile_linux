@@ -1,5 +1,5 @@
---- ppp-2.4.5.orig/pppd/plugins/Makefile.linux	2009-11-16 23:26:07.000000000 +0100
-+++ ppp-2.4.5/pppd/plugins/Makefile.linux	2011-01-21 21:29:58.118658260 +0100
+--- ppp-2.4.7.orig/pppd/plugins/Makefile.linux	2014-08-09 14:31:39.000000000 +0200
++++ ppp-2.4.7/pppd/plugins/Makefile.linux	2015-06-09 11:14:41.000000000 +0200
 @@ -1,13 +1,13 @@
 -#CC	= gcc
 -COPTS	= -O2 -g
@@ -23,7 +23,7 @@
  
  SUBDIRS := rp-pppoe pppoatm pppol2tp
  # Uncomment the next line to include the radius authentication plugin
-@@ -23,12 +23,10 @@ all:	$(PLUGINS)
+@@ -30,12 +30,10 @@ all:	$(PLUGINS)
  	for d in $(SUBDIRS); do $(MAKE) $(MFLAGS) -C $$d all; done
  
  %.so: %.c
@@ -38,7 +38,7 @@
  	$(INSTALL) $? $(LIBDIR)
  	for d in $(SUBDIRS); do $(MAKE) $(MFLAGS) -C $$d install; done
  
-@@ -37,5 +35,4 @@ clean:
+@@ -44,5 +42,4 @@ clean:
  	for d in $(SUBDIRS); do $(MAKE) $(MFLAGS) -C $$d clean; done
  
  depend:

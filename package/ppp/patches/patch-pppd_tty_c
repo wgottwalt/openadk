@@ -1,5 +1,5 @@
---- ppp-2.4.5.orig/pppd/tty.c	2009-11-16 23:26:07.000000000 +0100
-+++ ppp-2.4.5/pppd/tty.c	2014-03-17 16:13:14.000000000 +0100
+--- ppp-2.4.7.orig/pppd/tty.c	2014-08-09 14:31:39.000000000 +0200
++++ ppp-2.4.7/pppd/tty.c	2015-06-09 11:14:41.000000000 +0200
 @@ -98,28 +98,28 @@
  #include "fsm.h"
  #include "lcp.h"
@@ -50,7 +50,7 @@
  
  static int pty_master;		/* fd for master side of pty */
  static int pty_slave;		/* fd for slave side of pty */
-@@ -374,7 +374,7 @@ setescape(argv)
+@@ -378,7 +378,7 @@ setescape(argv)
  static void
  printescape(opt, printer, arg)
      option_t *opt;
