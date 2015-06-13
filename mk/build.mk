@@ -187,12 +187,13 @@ ifeq ($(ADK_TARGET_PACKAGE_OPKG),y)
 endif
 
 ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
-	echo ${STAGING_TARGET_DIR}
 	@mkdir -p ${STAGING_TARGET_DIR}/{bin,etc,lib,usr/bin,usr/include,usr/lib/pkgconfig} \
 		${STAGING_HOST_DIR}/{usr/bin,usr/lib,usr/include}
 	@for i in lib64 lib32 libx32;do \
 		cd ${STAGING_TARGET_DIR}/; ln -sf lib $$i; \
 		cd ${STAGING_TARGET_DIR}/usr; ln -sf lib $$i; \
+		cd ${STAGING_HOST_DIR}/; ln -sf lib $$i; \
+		cd ${STAGING_HOST_DIR}/usr; ln -sf lib $$i; \
 	done
 
 ${STAGING_TARGET_DIR}/etc/ipkg.conf: ${STAGING_TARGET_DIR}/etc

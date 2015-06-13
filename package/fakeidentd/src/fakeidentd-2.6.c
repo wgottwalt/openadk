@@ -1,3 +1,6 @@
+#define VERSION "2.6"
+#define TRG "fakeidentd"
+
 #if 0 /* -*-  mode: c; c-file-style: "gnu"; tab-width: 8; -*-
 
 #   This program is easy to compile. For example the following ways:

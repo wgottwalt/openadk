@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		libnl
 PKG_URL:=		http://wireless.kernel.org/en/developers/Regulatory
 PKG_SITES:=		http://linuxwireless.org/download/crda/
 
+PKG_CFLINE_CRDA:=	depends on ADK_BROKEN
+
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 PKG_FLAVOURS_CRDA:=	WITH_UDEV

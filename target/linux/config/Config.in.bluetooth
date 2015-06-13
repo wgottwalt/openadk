@@ -1,9 +1,12 @@
 menu "Bluetooth support and drivers"
 depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_SDIO
 
+config ADK_KERNEL_BT_BREDR
+	bool
+
 config ADK_KERNEL_BT
-	prompt "Bluetooth network stack"
-	tristate
+	tristate "Bluetooth network stack"
+	select ADK_KERNEL_BT_BREDR
 	default n
 	help
 	  Bluetooth is low-cost, low-power, short-range wireless technology.
@@ -23,8 +26,7 @@ config ADK_KERNEL_BT
 	     HIDP Module (Human Interface Device Protocol)
 
 config ADK_KERNEL_BT_L2CAP
-	prompt "L2CAP protocol support"
-	boolean
+	bool "L2CAP protocol support"
 	select ADK_KERNEL_BT
 	default n
 	help
@@ -32,10 +34,8 @@ config ADK_KERNEL_BT_L2CAP
 	  connection oriented and connection-less data transport.  L2CAP
 	  support is required for most Bluetooth applications.
 
-
 config ADK_KERNEL_BT_SCO
-	prompt "SCO link support"
-	boolean
+	bool "SCO link support"
 	select ADK_KERNEL_BT
 	default n
 	help
@@ -43,8 +43,7 @@ config ADK_KERNEL_BT_SCO
 	  required for voice applications like Headset and Audio.
 
 config ADK_KERNEL_BT_RFCOMM
-	prompt "RFCOMM protocol support"
-	tristate
+	tristate "RFCOMM protocol support"
 	select ADK_KERNEL_BT
 	depends on ADK_KERNEL_BT_L2CAP
 	default n
@@ -54,8 +53,7 @@ config ADK_KERNEL_BT_RFCOMM
 	  applications.
 
 config ADK_KERNEL_BT_BNEP
-	prompt "BNEP protocol support"
-	tristate
+	tristate "BNEP protocol support"
 	select ADK_KERNEL_BT
 	depends on ADK_KERNEL_BT_L2CAP
 	default n
@@ -65,8 +63,7 @@ config ADK_KERNEL_BT_BNEP
 	  Bluetooth PAN (Personal Area Network).
 
 config ADK_KERNEL_BT_HIDP
-	prompt "HIDP protocol support"
-	tristate
+	tristate "HIDP protocol support"
 	select ADK_KERNEL_INPUT
 	select ADK_KERNEL_HID
 	select ADK_KERNEL_BT
@@ -78,8 +75,7 @@ config ADK_KERNEL_BT_HIDP
 	  Interface Device Profile.
 
 config ADK_KERNEL_BT_HCIBTSDIO
-	prompt "HCI SDIO driver"
-	tristate
+	tristate "HCI SDIO driver"
 	select ADK_KERNEL_BT
 	depends on ADK_TARGET_WITH_SDIO
 	default n
@@ -89,8 +85,7 @@ config ADK_KERNEL_BT_HCIBTSDIO
 	  SDIO interface.
 
 config ADK_KERNEL_BT_HCIBTUSB
-	prompt "HCI USB driver"
-	tristate
+	tristate "HCI USB driver"
 	select ADK_KERNEL_BT
 	depends on ADK_TARGET_WITH_USB
 	default n
@@ -100,8 +95,7 @@ config ADK_KERNEL_BT_HCIBTUSB
 	  USB interface.
 
 config ADK_KERNEL_BT_HCIUART
-	prompt "HCI UART driver"
-	tristate
+	tristate "HCI UART driver"
 	select ADK_KERNEL_BT
 	default n
 	help
@@ -112,16 +106,14 @@ config ADK_KERNEL_BT_HCIUART
 	  adapter and BrainBoxes Bluetooth PC Card.
 
 config ADK_KERNEL_BT_MRVL
-	prompt "Marvell driver"
-	tristate
+	tristate "Marvell driver"
 	select ADK_KERNEL_BT
 	default n
 	help
 	  Bluetooth Marvell driver.
 
 config ADK_KERNEL_BT_MRVL_SDIO
-	prompt "Marvell SDIO driver"
-	tristate
+	tristate "Marvell SDIO driver"
 	select ADK_PACKAGE_BRCM_BLUETOOTH
 	select ADK_KERNEL_BT_MRVL
 	select ADK_KERNEL_BT_HCIBTSDIO
@@ -131,8 +123,7 @@ config ADK_KERNEL_BT_MRVL_SDIO
 	  Bluetooth Marvell driver.
 
 config ADK_KERNEL_BT_HCIBCM203X
-	prompt "HCI BCM203x USB driver"
-	tristate
+	tristate "HCI BCM203x USB driver"
 	select ADK_KERNEL_FW_LOADER
 	select ADK_KERNEL_BT_HCIBTUSB
 	select ADK_KERNEL_BT
@@ -144,8 +135,7 @@ config ADK_KERNEL_BT_HCIBCM203X
 	  Blutonium based devices.
 
 config ADK_KERNEL_BT_HCIBPA10X
-	prompt "HCI BPA10x USB driver"
-	tristate
+	tristate "HCI BPA10x USB driver"
 	select ADK_KERNEL_BT
 	select ADK_KERNEL_BT_HCIBTUSB
 	default n

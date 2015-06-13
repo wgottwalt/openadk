@@ -19,6 +19,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBESTR,libestr,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes \
+			ac_cv_func_realloc_0_nonnull=yes
+
 libestr-install:
 	$(INSTALL_DIR) $(IDIR_LIBESTR)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libestr*.so* \

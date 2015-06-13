@@ -4,9 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		forked-daapd
-PKG_VERSION:=		0.19
+PKG_VERSION:=		879c2ef35011b6fbb7bc8755c2b3c4f5c3cc506c
 PKG_RELEASE:=		1
-PKG_HASH:=		0d15628599c7a316f6db33815b877a3d9a2ceaebad66c39dfb8bf6a2d1469cb9
 PKG_DESCR:=		daapd server
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libunistring zlib libconfuse sqlite libffmpeg libgcrypt
@@ -14,18 +13,16 @@ PKG_DEPENDS+=		libavahi libmxml libevent libavl libantlr3c alsa-lib
 PKG_DEPENDS+=		libsqlite libintl dbus
 PKG_BUILDDEP:=		libunistring zlib confuse avahi sqlite ffmpeg dbus
 PKG_BUILDDEP+=		mxml libevent libavl libantlr3c alsa-lib libgcrypt
-PKG_SITES:=		http://distfiles.openadk.org/
+PKG_SITES:=		https://github.com/ejurgensen/forked-daapd.git
 
-PKG_CFLINE_FORKED_DAAPD:=	select ADK_KERNEL_INOTIFY_USER
-PKG_ARCH_DEPENDS:=	!ppc
-# gperf problem
-PKG_HOST_DEPENDS:=	!freebsd
+PKG_CFLINE_FORKED_DAAPD:=	depends on ADK_BROKEN
 
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FORKED_DAAPD,forked-daapd,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_LDFLAGS+=	-levent
+AUTOTOOL_STYLE:=	autoconf
 
 forked-daapd-install:
 	$(INSTALL_DIR) $(IDIR_FORKED_DAAPD)/etc

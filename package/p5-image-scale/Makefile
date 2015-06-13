@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		e2dcc90b9954a43dafc7f61bc6dc472382eb719b1046247da5a93cfdd7c3b3e0
 PKG_DESCR:=		fast, high-quality fixed-point image resizing
 PKG_SECTION:=		dev/perl
-PKG_DEPENDS:=		perl libjpeg-turbo zlib libpng giflib
-PKG_BUILDDEP:=		perl libjpeg-turbo zlib libpng giflib
+PKG_DEPENDS:=		perl libjpeg-turbo zlib libpng
+PKG_BUILDDEP:=		perl libjpeg-turbo zlib libpng
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/A/AG/AGRUNDMA/
 
 DISTFILES:=             Image-Scale-${PKG_VERSION}.tar.gz
@@ -27,9 +27,7 @@ XAKE_FLAGS+=		$(PERL_ENV)
 CONFIGURE_ARGS+=	--with-jpeg-includes=${STAGING_TARGET_DIR}/usr/include \
 			--with-jpeg-libs=${STAGING_TARGET_DIR}/usr/lib \
 			--with-png-includes=${STAGING_TARGET_DIR}/usr/include \
-			--with-png-libs=${STAGING_TARGET_DIR}/usr/lib \
-			--with-gif-includes=${STAGING_TARGET_DIR}/usr/include \
-			--with-gif-libs=${STAGING_TARGET_DIR}/usr/lib \
+			--with-png-libs=${STAGING_TARGET_DIR}/usr/lib
 
 p5-image-scale-install:
 	$(INSTALL_DIR) $(IDIR_P5_IMAGE_SCALE)$(PERL_SITEDIR)

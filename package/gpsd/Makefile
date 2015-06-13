@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gpsd
-PKG_VERSION:=		3.10
-PKG_RELEASE:=		3
-PKG_HASH:=		706fc2c1cf3dfbf87c941f543381bccc9c4dc9f8240eec407dcbf2f70b854320
+PKG_VERSION:=		3.15
+PKG_RELEASE:=		1
+PKG_HASH:=		81c89e271ae112313e68655ab30d227bc38fe7841ffbff0f1860b12a9d7696ea
 PKG_DESCR:=		interface daemon for gps receivers
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libpthread
@@ -36,7 +36,6 @@ do-install:
 gpsd-install:
 	${INSTALL_DIR} ${IDIR_GPSD}/usr/lib ${IDIR_GPSD}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/libgps.so* ${IDIR_GPSD}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgpsd.so* ${IDIR_GPSD}/usr/lib
 	${CP} ${WRKINST}/usr/sbin/gpsd ${IDIR_GPSD}/usr/sbin
 
 gpsd-clients-install:

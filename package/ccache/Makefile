@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ccache
-PKG_VERSION:=		3.1.9
+PKG_VERSION:=		3.2.2
 PKG_RELEASE:=		1
 PKG_HASH:=		4981fdf3ad851de400d94083a0d03f115ce9ce8062c3fd7a291630294b0006c4
 PKG_DESCR:=		compiler cache utility

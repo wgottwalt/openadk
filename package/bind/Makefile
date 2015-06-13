@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bind
-PKG_VERSION:=		9.9.5
+PKG_VERSION:=		9.9.7
 PKG_RELEASE:=		1
-PKG_HASH:=		d4b64c1dde442145a316679acff2df4008aa117ae52dfa3a6bc69efecc7840d1
+PKG_HASH:=		3f23e7fcb363a2594ed1f065868c2c1080a93636a4fcb4c47f9e164e2cd74c66
 PKG_DESCR:=		dns server
 PKG_SECTION:=		net/dns
 PKG_DEPENDS:=		libopenssl libbind libxml2 libstdcxx
@@ -54,7 +54,11 @@ $(eval $(call PKG_template,BIND_HOST,bind-host,${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,BIND_DIG,bind-dig,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_BIND_DIG},${PKGSD_BIND_DIG},${PKGSC_BIND_DIG}))
 $(eval $(call PKG_template,LIBBIND,libbind,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBBIND},${PKGSC_LIBBIND},${PKG_OPTS}))
 
+AUTOTOOL_STYLE:=	autoreconf
+CONFIGURE_ENV+=		BUILD_CC="${HOST_CC}" BUILD_CFLAGS='${HOST_CFLAGS}' BUILD_LDFLAGS='${HOST_LDFLAGS}'
 CONFIGURE_ARGS+=	--with-randomdev=/dev/urandom \
+			--with-export-libdir=/usr/lib \
+			--enable-exportlib \
 			--with-ecdsa=no \
 			--with-gost=no \
 			--with-gssapi=no \
@@ -68,8 +72,6 @@ CONFIGURE_ARGS+=	--enable-ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
-
-CONFIGURE_ENV+=		BUILD_CC="${HOST_CC}" BUILD_CFLAGS='${HOST_CFLAGS}'
 
 bind-server-install:
 	${INSTALL_DIR} ${IDIR_BIND_SERVER}/usr/sbin ${IDIR_BIND_SERVER}/etc

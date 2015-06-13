@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		fltk
-PKG_VERSION:=		1.3.2
-PKG_RELEASE:=		4
-PKG_HASH:=		176044df94f31bd53a5806cf5054ca78b180bf9ae27ce47649608833695ee4a4
+PKG_VERSION:=		1.3.3
+PKG_RELEASE:=		1
+PKG_HASH:=		f8398d98d7221d40e77bc7b19e761adaf2f1ef8bb0c30eceb7beb4f2273d0d97
 PKG_DESCR:=		fast light toolkit
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		mesa libx11 libxi freeglut libfreetype
 PKG_BUILDDEP:=		libX11 libXi mesa freeglut freetype
 PKG_URL:=		http://www.fltk.org/
-PKG_SITES:=		http://distfiles.openadk.org/
+PKG_SITES:=		http://fltk.org/pub/fltk/$(PKG_VERSION)/
 PKG_LIBNAME:=		libfltk
 PKG_OPTS:=		dev
 

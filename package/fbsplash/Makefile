@@ -20,6 +20,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,FBSPLASH,fbsplash,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-lz
+CONFIGURE_ARGS+=	--without-png
+
 fbsplash-install:
 	$(INSTALL_DIR) $(IDIR_FBSPLASH)/usr/lib
 	$(CP)  $(WRKINST)/usr/lib/libfb*.so* $(IDIR_FBSPLASH)/usr/lib

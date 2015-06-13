@@ -39,6 +39,7 @@ ifeq (${HOST_STYLE},)
 	    --bindir=${STAGING_HOST_DIR}/usr/bin \
 	    --datadir=${STAGING_HOST_DIR}/usr/share \
 	    --mandir=${STAGING_HOST_DIR}/usr/share/man \
+	    --libdir=${STAGING_HOST_DIR}/usr/lib \
 	    --libexecdir=${STAGING_HOST_DIR}/usr/libexec \
 	    --sysconfdir=${STAGING_HOST_DIR}/etc \
 	    --disable-dependency-tracking \
@@ -56,6 +57,7 @@ ifeq (${HOST_STYLE},auto)
 	    --bindir=/usr/bin \
 	    --datadir=/usr/share \
 	    --mandir=/usr/share/man \
+	    --libdir=/usr/lib \
 	    --libexecdir=/usr/libexec \
 	    --localstatedir=/var \
 	    --sysconfdir=/etc \

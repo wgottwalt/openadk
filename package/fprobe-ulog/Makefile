@@ -14,6 +14,8 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fprobe/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+PKG_CFLINE_FPROBE_ULOG:=depends on ADK_BROKEN
+
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,FPROBE_ULOG,fprobe-ulog,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

@@ -1,8 +1,7 @@
 menu "Overlay filesystems"
 
 config ADK_KERNEL_AUFS_FS
-	prompt "Aufs (Advanced multi layered unification filesystem) support"
-	tristate
+	bool "Aufs (Advanced multi layered unification filesystem) support"
 	help
 	  Aufs is a stackable unification filesystem such as Unionfs,
 	  which unifies several directories and provides a merged single

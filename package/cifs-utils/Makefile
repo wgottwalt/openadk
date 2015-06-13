@@ -22,6 +22,7 @@ AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-cifsupcall \
 			--disable-cifsidmap \
 			--disable-cifsacl \
+			--disable-pam \
 			--disable-pie \
 			--without-libcap \
 			--disable-systemd

@@ -11,6 +11,7 @@ PKG_DESCR:=		session management library
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libuuid
 PKG_BUILDDEP:=		libICE util-linux
+HOST_BUILDDEP:=		libICE-host xtrans-host
 PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_LIBNAME:=		libsm
 PKG_OPTS:=		dev
