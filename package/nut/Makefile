@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		nut
-PKG_VERSION:=		2.7.2
+PKG_VERSION:=		2.7.3
 PKG_RELEASE:=		1
-PKG_HASH:=		4d5365359b059d96dfcb77458f361a114d26c84f1297ffcd0c6c166f7200376d
+PKG_HASH:=		ff44d95d06a51559a0a018eef7f8d17911c1002b6352a7d7580ff75acb12126b
 PKG_DESCR:=		network ups tools
 PKG_SECTION:=		net/misc
 PKG_URL:=		http://www.networkupstools.org/
