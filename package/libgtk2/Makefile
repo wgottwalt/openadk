@@ -4,14 +4,14 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libgtk2
-PKG_VERSION:=		2.24.23
+PKG_VERSION:=		2.24.28
 PKG_EXTRAVER:=		2.24
-PKG_RELEASE:=		2
-PKG_HASH:=		a0a406e27e9b5e7d6b2c4334212706ed5cdcd41e713e66c9ae950655dd61517c
+PKG_RELEASE:=		1
+PKG_HASH:=		b2c6441e98bc5232e5f9bba6965075dcf580a8726398f7374d39f90b88ed4656
 PKG_DESCR:=		multi-platform toolkit for creating graphical user interfaces
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib libstdcxx cairo
-PKG_BUILDDEP:=		cairo atk pango libXext renderproto libXrender
+PKG_BUILDDEP:=		glib cairo atk pango libXext renderproto libXrender
 PKG_BUILDDEP+=		gdk-pixbuf libXcomposite libXdamage libX11
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/gtk+/$(PKG_EXTRAVER)/
