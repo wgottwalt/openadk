@@ -4,16 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gtk+
-PKG_VERSION:=		3.14.6
-PKG_EXTRAVER:=		3.14
+PKG_VERSION:=		3.16.3
+PKG_EXTRAVER:=		3.16
 PKG_RELEASE:=		1
-PKG_HASH:=		cfc424e6e10ffeb34a33762aeb77905c3ed938f0b4006ddb7e880aad234ef119
+PKG_HASH:=		2943fd4a6b02c2a9b2edd231c1d8f7a1d2f8d36996f14310d34f503dca9ebea4
 PKG_DESCR:=		multi-platform toolkit for creating graphical user interfaces
 PKG_SECTION:=		libs/misc
-PKG_DEPENDS:=		glib libstdcxx cairo libxi
+PKG_DEPENDS:=		glib libstdcxx cairo libxi libepoxy
 PKG_BUILDDEP:=		cairo atk pango libXext renderproto libXrender
 PKG_BUILDDEP+=		gdk-pixbuf libXcomposite libXdamage libX11 libXi
-PKG_BUILDDEP+=		at-spi2-core at-spi2-atk gdk-pixbuf-host
+PKG_BUILDDEP+=		at-spi2-core at-spi2-atk gdk-pixbuf-host libepoxy
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		$(MASTER_SITE_GNOME:=gtk+/$(PKG_EXTRAVER)/)
 PKG_LIBNAME:=		libgtk3
