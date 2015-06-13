@@ -1,6 +1,6 @@
---- obexftp-0.23.orig/obexftp/client.c	2009-02-17 19:27:48.000000000 +0100
-+++ obexftp-0.23/obexftp/client.c	2013-12-22 09:35:39.000000000 +0100
-@@ -51,8 +51,6 @@
+--- obexftp-0.24-Source.orig/obexftp/client.c	2013-03-05 21:43:50.000000000 +0100
++++ obexftp-0.24-Source/obexftp/client.c	2015-06-10 16:35:52.000000000 +0200
+@@ -47,8 +47,6 @@
  
  #ifdef HAVE_BLUETOOTH
  #include "bt_kit.h"

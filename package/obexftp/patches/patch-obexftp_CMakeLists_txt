@@ -1,0 +1,14 @@
+--- obexftp-0.24-Source.orig/obexftp/CMakeLists.txt	2013-03-05 21:43:50.000000000 +0100
++++ obexftp-0.24-Source/obexftp/CMakeLists.txt	2015-06-10 16:41:41.000000000 +0200
+@@ -24,11 +24,6 @@ set ( obexftp_HEADERS
+   ${obexftp_PUBLIC_HEADERS}
+ )
+ 
+-find_package ( Iconv REQUIRED )
+-add_definitions ( -DHAVE_ICONV )
+-if ( ICONV_USES_CONST )
+-  add_definitions ( -DICONV_CONST=const )
+-endif ( ICONV_USES_CONST )
+ find_file ( HAVE_LANGINFO_H NAMES langinfo.h )
+ if ( HAVE_LANGINFO_H )
+   add_definitions ( -DHAVE_LANGINFO_H )
