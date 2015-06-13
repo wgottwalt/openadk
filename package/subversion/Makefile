@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		subversion
-PKG_VERSION:=		1.7.18
+PKG_VERSION:=		1.8.13
 PKG_RELEASE:=		1
-PKG_HASH:=		fb1b0b1e89dd01b230dce0a0e9696b52b9f1b4ec0b3b6353ee518ed43a8dd310
+PKG_HASH:=		17e8900a877ac9f0d5ef437c20df437fec4eb2c5cb9882609d2277e2312da52c
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		dev/scm
 PKG_DEPENDS:=		zlib apr apr-util libexpat libsqlite neon
@@ -34,7 +34,7 @@ CONFIGURE_ARGS+=	--with-apr=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \
 			--disable-javahl \
 			--without-berkeley-db
 CONFIGURE_ENV+=		LIBS='-lsqlite3 -laprutil-1 -lapr-1 -lexpat -ltinfo'
-INSTALL_TARGET:=	external-install local-install
+#INSTALL_TARGET:=	external-install local-install
 
 subversion-install:
 	${INSTALL_DIR} ${IDIR_SUBVERSION}/usr/{bin,lib}
