@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		irssi
 PKG_VERSION:=		0.8.17
 PKG_RELEASE:=		1
-PKG_HASH:=		0ae01f76797fb6d6b8e0f2268b39c7afb90ac62658ec754c82acfc344b8203e9
+PKG_HASH:=		3c9600cad2edf58f1d012febc1a0ba844274df6e331c01a9e935467705166807
 PKG_DESCR:=		irc text client
 PKG_SECTION:=		app/chat
 PKG_DEPENDS:=		glib libncurses
@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		glib ncurses
 PKG_URL:=		http://www.irssi.org/
 PKG_SITES:=		http://distfiles.openadk.org/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_FLAVOURS_IRSSI:=	WITH_SSL WITH_IPV6
 PKGFD_WITH_SSL:=	enable ssl/tls support
