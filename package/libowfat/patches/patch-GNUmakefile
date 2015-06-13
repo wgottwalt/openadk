@@ -1,0 +1,11 @@
+--- libowfat-0.30.orig/GNUmakefile	2015-04-10 22:54:57.000000000 +0200
++++ libowfat-0.30/GNUmakefile	2015-06-05 16:06:19.000000000 +0200
+@@ -18,7 +18,7 @@ all: ent $(LIBS) libowfat.a libsocket t
+ CROSS=
+ #CROSS=i686-mingw-
+ CC=$(CROSS)gcc
+-CFLAGS=-pipe -W -Wall -Wextra -O2 -fomit-frame-pointer
++CFLAGS?=
+ #CFLAGS=-pipe -Os -march=pentiumpro -mcpu=pentiumpro -fomit-frame-pointer -fschedule-insns2 -Wall
+ 
+ ent: ent.c haveuint128.h

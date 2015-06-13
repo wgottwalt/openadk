@@ -4,14 +4,12 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libowfat
-PKG_VERSION:=		0.29
+PKG_VERSION:=		0.30
 PKG_RELEASE:=		1
-PKG_HASH:=		4badbdeed6bef4337f1edd6b86fb7154c5592509c272dcdc09c693161cbc6427
+PKG_HASH:=		db4a3a853cfbb9e83b27f565b580f6fdc519475b162edc1a656043e1c126e993
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.fefe.de/libowfat
-PKG_SITES:=		http://dl.fefe.de/
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_SITES:=		http://www.fefe.de/libowfat/
 
 include ${ADK_TOPDIR}/mk/package.mk
 
