@@ -4,10 +4,10 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lua
-PKG_VERSION:=		5.2.4
+PKG_VERSION:=		5.3.0
 PKG_RELEASE:=		1
-PKG_HASH:=		b9e2e4aad6789b3b63a056d442f7b39f0ecfca3ae0f1fc0ae4e9614401b69f4b
-PKG_DESCR:=		lua programming language interpreter
+PKG_HASH:=		ae4a5eb2d660515eb191bfe3e061f2b8ffe94dce73d32cfd0de090ddcc0ddb01
+PKG_DESCR:=		programming language interpreter
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libreadline
 PKG_BUILDDEP:=		readline
