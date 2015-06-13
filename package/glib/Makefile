@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		2.42.1
+PKG_VERSION:=		2.44.1
 PKG_RELEASE:=		1
-PKG_EXTRAVER:=		2.42
-PKG_HASH:=		8f3f0865280e45b8ce840e176ef83bcfd511148918cc8d39df2ee89b67dcf89a
+PKG_EXTRAVER:=		2.44
+PKG_HASH:=		8811deacaf8a503d0a9b701777ea079ca6a4277be10e3d730d2112735d5eca07
 PKG_DESCR:=		low-level core library that forms the basis of gtk+
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpthread
