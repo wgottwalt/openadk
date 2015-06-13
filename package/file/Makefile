@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		file
-PKG_VERSION:=		5.22
+PKG_VERSION:=		5.23
 PKG_RELEASE:=		1
-PKG_HASH:=		c4e3a8e44cb888c5e4b476e738503e37fb9de3b25a38c143e214bfc12109fc0b
+PKG_HASH:=		2c8ab3ff143e2cdfb5ecee381752f80a79e0b4cfe9ca4cc6e1c3e5ec15e6157c
 PKG_DESCR:=		file type guesser
 PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		file-host
