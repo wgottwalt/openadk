@@ -122,8 +122,7 @@ endchoice
 
 choice
 prompt "bootup messages from initscripts"
-default ADK_RUNTIME_VERBOSE_INIT_VGA if ADK_TARGET_WITH_VGA \
-	&& !ADK_APPLIANCE_KODI
+default ADK_RUNTIME_VERBOSE_INIT_VGA if ADK_TARGET_WITH_VGA
 default ADK_RUNTIME_VERBOSE_INIT_SERIAL
 
 config ADK_RUNTIME_VERBOSE_INIT_VGA
@@ -168,8 +167,7 @@ endchoice
 
 config ADK_RUNTIME_GETTY_VGA
 	bool "start getty on VGA console (tty1-tty6)"
-	depends on ADK_RUNTIME_GETTY && ADK_TARGET_WITH_VGA \
-		&& !ADK_APPLIANCE_KODI
+	depends on ADK_RUNTIME_GETTY && ADK_TARGET_WITH_VGA
 	default y if ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
 	default y if ADK_TARGET_QEMU_WITH_GRAPHIC
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
