@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		postfix
-PKG_VERSION:=		2.11.0
+PKG_VERSION:=		3.0.1
 PKG_RELEASE:=		1
-PKG_HASH:=		ca1d9d32d5662678dc4e3f700cce82f5d7bed6a614852b17b1a5166936330c38
+PKG_HASH:=		cd2bd6447fe3368bb1a39f482f8dd1eec87c63067a0eb75f9aec8e4eadd21328
 PKG_DESCR:=		popular mail transfer agent
 PKG_SECTION:=		net/mail
 PKG_BUILDDEP:=		tinycdb
@@ -37,23 +37,5 @@ postfix-install:
 	$(CP) $(WRKBUILD)/bin/* $(IDIR_POSTFIX)/usr/sbin
 	$(INSTALL_DIR) $(IDIR_POSTFIX)/usr/libexec/postfix
 	$(CP) $(WRKBUILD)/libexec/* $(IDIR_POSTFIX)/usr/libexec/postfix
-	rm $(IDIR_POSTFIX)/usr/libexec/postfix/master.cf
-	rm $(IDIR_POSTFIX)/usr/libexec/postfix/main.cf
-	rm $(IDIR_POSTFIX)/usr/libexec/postfix/postfix-script
-	mv $(IDIR_POSTFIX)/etc/postfix/postfix-script \
-		$(IDIR_POSTFIX)/usr/libexec/postfix/
-	rm $(IDIR_POSTFIX)/usr/libexec/postfix/postfix-files
-	mv $(IDIR_POSTFIX)/etc/postfix/postfix-files \
-		$(IDIR_POSTFIX)/usr/libexec/postfix/
-	rm $(IDIR_POSTFIX)/usr/libexec/postfix/post-install
-	mv $(IDIR_POSTFIX)/etc/postfix/post-install \
-		$(IDIR_POSTFIX)/usr/libexec/postfix/
-	rm $(IDIR_POSTFIX)/usr/libexec/postfix/postfix-wrapper
-	mv $(IDIR_POSTFIX)/etc/postfix/postfix-wrapper \
-		$(IDIR_POSTFIX)/usr/libexec/postfix/
-	rm $(IDIR_POSTFIX)/usr/libexec/postfix/postmulti-script
-	mv $(IDIR_POSTFIX)/etc/postfix/postmulti-script \
-		$(IDIR_POSTFIX)/usr/libexec/postfix/
-	chmod 755 $(IDIR_POSTFIX)/usr/libexec/postfix/*
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
