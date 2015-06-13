@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ethtool
-PKG_VERSION:=		3.13
-PKG_RELEASE:=		2
-PKG_HASH:=		5a5657e213f100f4aa3f33ee5f5f5907fa3440fed41aae09d0cb21f9ad92e71f
+PKG_VERSION:=		4.0
+PKG_RELEASE:=		1
+PKG_HASH:=		904887acc7d2f9c35dec04eb0e8a727a3205f346af4f4c95560ea3798de5ecff
 PKG_DESCR:=		display or change ethernet card settings
 PKG_SECTION:=		net/misc
 PKG_SITES:=		https://www.kernel.org/pub/software/network/ethtool/
