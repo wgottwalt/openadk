@@ -1,5 +1,5 @@
---- openssl-1.0.2a.orig/Makefile.org	2015-03-19 14:30:36.000000000 +0100
-+++ openssl-1.0.2a/Makefile.org	2015-05-20 08:33:17.000000000 +0200
+--- openssl-1.0.2c.orig/Makefile.org	2015-06-12 16:51:21.000000000 +0200
++++ openssl-1.0.2c/Makefile.org	2015-06-13 19:48:43.000000000 +0200
 @@ -136,7 +136,7 @@ FIPSCANLIB=
  
  BASEADDR=
@@ -9,7 +9,7 @@
  ENGDIRS= ccgost
  SHLIBDIRS= crypto ssl
  
-@@ -536,7 +536,7 @@ dist:
+@@ -526,7 +526,7 @@ dist:
  dist_pem_h:
  	(cd crypto/pem; $(MAKE) -e $(BUILDENV) pem.h; $(MAKE) clean)
  
