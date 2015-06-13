@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		sispmctl
-PKG_VERSION:=		2.7
+PKG_VERSION:=		3.0
 PKG_RELEASE:=		1
-PKG_HASH:=		d24d34fc7e14992ac822cef3c5567b04a077cfc96252b0a6fb238c8a272c16f4
+PKG_HASH:=		8e3eab344df774330f7ca9e230f9b1d29afa82de63c099c0cf0bac4aa34dab64
 PKG_DESCR:=		control application for power sockets
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libusb libusb-compat
@@ -19,6 +19,9 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SISPMCTL,sispmctl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ENV+=         ac_cv_func_malloc_0_nonnull=yes \
+			ac_cv_func_realloc_0_nonnull=yes
 
 sispmctl-install:
 	${INSTALL_DIR} ${IDIR_SISPMCTL}/usr/bin
