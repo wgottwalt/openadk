@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libiconv
 PKG_VERSION:=		1.14
 PKG_RELEASE:=		1
-PKG_HASH:=		e34509b1623cec449dfeb73d7ce9c6c6
+PKG_HASH:=		72b24ded17d687193c3366d0ebe7cde1e6b18f0df8c55438ac95be39e8a30613
 PKG_DESCR:=		character set conversion library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.gnu.org/software/libiconv/
