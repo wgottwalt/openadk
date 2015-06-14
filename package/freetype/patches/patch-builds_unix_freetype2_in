@@ -1,0 +1,19 @@
+--- freetype-2.6.orig/builds/unix/freetype2.in	2015-06-01 02:39:54.000000000 -0500
++++ freetype-2.6/builds/unix/freetype2.in	2015-06-14 05:48:22.752795001 -0500
+@@ -1,7 +1,7 @@
+ prefix=%prefix%
+-exec_prefix=%exec_prefix%
+-libdir=%libdir%
+-includedir=%includedir%/freetype2
++exec_prefix=${prefix}
++libdir=${prefix}/lib
++includedir=${prefix}/include
+ 
+ Name: FreeType 2
+ URL: http://freetype.org
+@@ -11,4 +11,4 @@ Requires:
+ Requires.private: %REQUIRES_PRIVATE%
+ Libs: -L${libdir} -lfreetype
+ Libs.private: %LIBS_PRIVATE%
+-Cflags: -I${includedir}
++Cflags: -I${includedir} -I${includedir}/freetype2
