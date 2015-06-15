@@ -8,6 +8,12 @@ config ADK_CPU_ALPHA
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
+config ADK_CPU_AMD_BOBCAT
+	bool
+	select ADK_LINUX_64
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
 config ADK_CPU_AMDFAM10
 	bool
 	select ADK_LINUX_64
@@ -730,6 +736,7 @@ config ADK_TARGET_GCC_CPU
 
 config ADK_TARGET_GCC_ARCH
 	string
+	default "btver1" if ADK_CPU_AMD_BOBCAT
 	default "amdfam10" if ADK_CPU_AMDFAM10
 	default "athlon" if ADK_CPU_ATHLON
 	default "atom" if ADK_CPU_ATOM
@@ -903,7 +910,6 @@ config ADK_TARGET_CPU_ARCH
 	default "sh4aeb" if ADK_CPU_SH4A && ADK_TARGET_BIG_ENDIAN
 	default "sparc" if ADK_TARGET_ARCH_SPARC
 	default "sparc64" if ADK_TARGET_ARCH_SPARC64
-	default "tilegx" if ADK_CPU_TILE
-	default "x86_64" if ADK_CPU_X86_64
-	default "x86_64" if ADK_CPU_AMDFAM10
+	default "tilegx" if ADK_TARGET_ARCH_TILE
+	default "x86_64" if ADK_TARGET_ARCH_X86_64
 	default "xtensa" if ADK_TARGET_ARCH_XTENSA
