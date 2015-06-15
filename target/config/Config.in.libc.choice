@@ -80,6 +80,10 @@ config ADK_TARGET_LIB_GLIBC_2_20
 	bool "2.20"
 	depends on ADK_TARGET_LIB_GLIBC
 
+config ADK_TARGET_LIB_GLIBC_2_19
+	bool "2.19"
+	depends on ADK_TARGET_LIB_GLIBC
+
 config ADK_TARGET_LIB_GLIBC_GIT
 	bool "git"
 	depends on ADK_TARGET_LIB_GLIBC
