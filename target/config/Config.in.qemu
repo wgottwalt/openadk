@@ -18,6 +18,22 @@ config ADK_TARGET_QEMU_PPC_MACPPC
 endchoice
 
 choice
+prompt "Qemu M68K Emulation"
+depends on ADK_TARGET_SYSTEM_QEMU_M68K
+
+config ADK_TARGET_QEMU_M68K_Q800
+	bool "M68K Q800"
+	select ADK_CPU_68040
+
+config ADK_TARGET_QEMU_M68K_MCF5208
+	bool "Coldfire MCF5208"
+	select ADK_CPU_CF_5208
+	select ADK_TARGET_BINFMT_FLAT
+	select ADK_TARGET_UCLINUX
+
+endchoice
+
+choice
 prompt "Qemu MICROBLAZE Emulation"
 depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE
 

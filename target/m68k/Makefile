@@ -8,8 +8,14 @@ include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux
+
 QEMU_ARGS:=${ADK_QEMU_ARGS}
+ifeq ($(ADK_TARGET_QEMU_M68K_Q800),y)
+QEMU_ARGS+=-M q800
+endif
+ifeq ($(ADK_TARGET_QEMU_M68K_MCF5208),y)
 QEMU_ARGS+=-M mcf5208evb -cpu m5208
+endif
 
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)

@@ -64,9 +64,9 @@ config ADK_KERNEL_FEC
 	select ADK_KERNEL_NET_VENDOR_FREESCALE
 	select ADK_KERNEL_AT803X_PHY
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6 || \
-		   ADK_TARGET_SYSTEM_QEMU_M68K
+		   ADK_TARGET_QEMU_M68K_MCF5208
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
-	default y if ADK_TARGET_SYSTEM_QEMU_M68K
+	default y if ADK_TARGET_QEMU_M68K_MCF5208
 	default n
 	help
 	  FEC ethernet driver
@@ -277,6 +277,13 @@ config ADK_KERNEL_ETRAX_ETHERNET
 	select ADK_KERNEL_ETRAX_HAVE_PHY
 	depends on ADK_TARGET_ARCH_CRIS
 	default y if ADK_TARGET_ARCH_CRIS
+	default n
+
+config ADK_KERNEL_MACSONIC
+	bool "MAC sonic ethernet driver"
+	select ADK_KERNEL_NET_VENDOR_NATSEMI
+	depends on ADK_TARGET_QEMU_M68K_Q800
+	default y if ADK_TARGET_QEMU_M68K_Q800
 	default n
 
 endmenu

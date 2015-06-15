@@ -57,7 +57,6 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-x86_64" if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default "qemu-xtensa" if ADK_TARGET_SYSTEM_QEMU_XTENSA
 	default "qemu-alpha" if ADK_TARGET_SYSTEM_QEMU_ALPHA
-	default "qemu-m68k" if ADK_TARGET_SYSTEM_QEMU_M68K
 	default "aranym-m68k" if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default "vbox-x86" if ADK_TARGET_SYSTEM_VBOX_X86
 	default "ibm-x40" if ADK_TARGET_SYSTEM_IBM_X40
@@ -80,3 +79,5 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "pcengines-alix" if ADK_TARGET_SYSTEM_PCENGINES_ALIX
 	default "sim-bfin" if ADK_TARGET_SYSTEM_SIM_BFIN
 	default "sim-h8300h" if ADK_TARGET_SYSTEM_SIM_H8300H
+	default "qemu-m68k-mcf5208" if ADK_TARGET_QEMU_M68K_MCF5208
+	default "qemu-m68k-q800" if ADK_TARGET_QEMU_M68K_Q800
