@@ -50,6 +50,7 @@ CONFIGURE_ENV+=		ac_cv_func_sigset=no \
 
 CONFIGURE_ARGS+=	--with-cups-user=cups \
 			--with-cups-group=cups \
+			--libdir=/usr/lib \
 			--disable-static \
 			--disable-avahi \
 			--disable-webif \
