@@ -4,8 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		ff25ea118e3580bb1ebcbb7c450ed933da1782be
-PKG_RELEASE:=		4
+PKG_VERSION:=		3020230071067265fdc274f206f72ab1fcc4605e
+PKG_RELEASE:=		1
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx libsquish
