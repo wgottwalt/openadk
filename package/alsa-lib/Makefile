@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-lib
 PKG_VERSION:=		1.0.29
-PKG_RELEASE:=		1
+PKG_RELEASE:=		3
 PKG_HASH:=		73043c35eb9636be0f4af6a240235c213f12a25feb1f04aeeac8cb7e30fcbdd0
 PKG_DESCR:=		sound library
 PKG_SECTION:=		libs/audio
@@ -38,6 +38,8 @@ alsa-lib-install:
 	${CP} ${WRKINST}/usr/lib/libasound.so* ${IDIR_ALSA_LIB}/usr/lib
 	${CP} ${WRKINST}//usr/share/alsa/* \
 		${IDIR_ALSA_LIB}/usr/share/alsa
+	$(CP) ./files/imx-{hdmi-soc,spdif}.conf \
+		${IDIR_ALSA_LIB}/usr/share/alsa/cards
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
