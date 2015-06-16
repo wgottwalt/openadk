@@ -38,8 +38,10 @@ config ADK_TARGET_LIB_GLIBC
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_BFIN
 	depends on !ADK_TARGET_ARCH_CRIS
+	depends on !ADK_TARGET_ARCH_H8300
 	depends on !ADK_TARGET_ARCH_XTENSA
 	depends on !ADK_TARGET_UCLINUX
+	depends on !ADK_TARGET_WITHOUT_MMU
 	help
 	  http://www.gnu.org/libc
 

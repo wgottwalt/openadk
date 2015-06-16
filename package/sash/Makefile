@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		sash
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_DESCR:=		standalone shell
 PKG_SECTION:=		base/shells
 

@@ -41,7 +41,7 @@ do-configure:
 		symbol=$$(echo $$sym|sed -e "s#=y##"); \
 		printf "# CONFIG_$${symbol} is not set\n" >> ${WRKBUILD}/.config; \
 	done
-ifneq ($(ADK_TARGET_WITH_MMU),y)
+ifeq ($(ADK_TARGET_WITHOUT_MMU),y)
 	echo 'CONFIG_NOMMU=y' >> ${WRKBUILD}/.config
 endif
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config

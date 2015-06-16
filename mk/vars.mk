@@ -177,7 +177,9 @@ endif
 
 ifeq ($(ADK_TARGET_ARCH_H8300),y)
 TARGET_CFLAGS+=		-mh
+TARGET_LDFLAGS+=	-mh
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
+TARGET_LDFLAGS+=	-Wl,-elf2flt
 TARGET_CFLAGS+=		-Wl,-elf2flt
 TARGET_CXXFLAGS+=	-Wl,-elf2flt
 endif
