@@ -24,3 +24,9 @@ PKG_SITES:=		http://distfiles.openadk.org/
 DISTFILES:=		gdb-6.7.1-avr32-2.1.5.tar.bz2
 WRKDIST=		$(WRKDIR)/gdb-6.7.1-avr32-2.1.5
 endif
+ifeq ($(ADK_TOOLCHAIN_GDB_GIT),y)
+PKG_VERSION:=		git
+PKG_RELEASE:=		1
+PKG_SITES:=		git://sourceware.org/git/binutils-gdb.git
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+endif
