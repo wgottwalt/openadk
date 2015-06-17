@@ -63,7 +63,7 @@ compile: $(LINUX_BUILD_DIR)/modules
 install: compile $(INSTALL_TARGETS)
 ifneq ($(strip $(INSTALL_TARGETS)),)
 	$(TRACE) target/${ADK_TARGET_ARCH}-modules-install
-ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
+ifeq ($(ADK_TARGET_PACKAGE_IPKG)$(ADK_TARGET_PACKAGE_OPKG),y)
 	$(PKG_INSTALL) $(INSTALL_TARGETS) $(MAKE_TRACE)
 else
 	$(foreach pkg,$(INSTALL_TARGETS),$(shell $(PKG_INSTALL) $(pkg)))
