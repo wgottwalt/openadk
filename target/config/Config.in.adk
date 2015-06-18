@@ -17,6 +17,13 @@ config ADK_DL_DIR
 	  Configure the download directory for all source packages.
 	  Use an absolute path.
 
+config ADK_EXPERIMENTAL
+	bool "Enable support for experimental features"
+	default n
+	help
+	  This enables combinations of toolchain components or kernel
+          and packages, which might be unsafe to use.
+
 config ADK_BUILD_WITH_DEBUG
 	bool "Build everything with debug information and allow debug packages"
 	default n
