@@ -135,6 +135,10 @@ clean: $(ADK_TARGET_ARCH)-clean $(ADK_TARGET_ARCH)-imageclean
 
 %-imageprepare:
 	$(TRACE) target/$(patsubst %-imageprepare,%,$@)-imageprepare
+	@for x in $$(ls $(ADK_TOPDIR)/scripts/preimage/*.sh 2>/dev/null); do \
+		[[ -x "$$x" ]] && $$x; \
+		break; \
+	done
 	$(MAKE) -C $(patsubst %-imageprepare,%,$@) imageprepare
 
 %-compile: %-prepare
