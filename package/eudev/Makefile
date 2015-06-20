@@ -5,13 +5,13 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		eudev
 PKG_VERSION:=		3.1.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		d3a0c7f613d4917b89afd57498860a1c35b9c59abf9fea22a09c30eec25c32e4
 PKG_DESCR:=		device manager (udev clone)
 PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		gperf-host glib util-linux
 PKG_DEPENDS:=		glib libblkid
-PKG_URL:=		http://www.gentoo.org/proj/en/eudev/
+PKG_URL:=		http://wiki.gentoo.org/wiki/Project:Eudev
 PKG_SITES:=		http://dev.gentoo.org/~blueness/eudev/
 PKG_LIBNAME:=		libudev
 PKG_OPTS:=		dev
@@ -35,11 +35,14 @@ CONFIGURE_ARGS+=	--disable-manpages \
 			--enable-hwdb
 
 udev-install:
-	$(INSTALL_DIR) $(IDIR_UDEV)/usr/bin $(IDIR_UDEV)/etc/udev
+	$(INSTALL_DIR) $(IDIR_UDEV)/usr/bin
+	$(INSTALL_DIR) $(IDIR_UDEV)/etc/udev
 	$(INSTALL_DIR) $(IDIR_UDEV)/usr/lib/udev
+	$(INSTALL_DIR) $(IDIR_UDEV)/usr/sbin
 	$(CP) $(WRKINST)/etc/udev/* $(IDIR_UDEV)/etc/udev
 	$(CP) $(WRKINST)/usr/lib/udev/* $(IDIR_UDEV)/usr/lib/udev
 	$(CP) $(WRKINST)/usr/bin/udevadm $(IDIR_UDEV)/usr/bin
+	$(CP) $(WRKINST)/usr/sbin/udevd $(IDIR_UDEV)/usr/sbin
 
 libudev-install:
 	$(INSTALL_DIR) $(IDIR_LIBUDEV)/usr/lib
