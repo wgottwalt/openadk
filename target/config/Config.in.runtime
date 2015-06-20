@@ -7,6 +7,19 @@ config ADK_RUNTIME_HOSTNAME
 	help
 	  Set your target hostname.
 
+choice
+prompt "System for /dev management"
+
+config ADK_RUNTIME_DEV_MDEV
+	bool "Use mdev"
+	select BUSYBOX_MDEV
+
+config ADK_RUNTIME_DEV_UDEV
+	bool "Use udev"
+	select ADK_PACKAGE_UDEV
+
+endchoice
+
 config ADK_RUNTIME_SSH_PUBKEY
 	string "SSH public key (root user only)"
 	depends on ADK_PACKAGE_OPENSSH_SERVER || ADK_PACKAGE_DROPBEAR
