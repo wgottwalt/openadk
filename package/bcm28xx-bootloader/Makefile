@@ -63,14 +63,10 @@ ifeq ($(ADK_PACKAGE_BCM28XX_BOOTLOADER_CUTDOWN),y)
 	printf "start_file=start_cd.elf\n" >> $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 	printf "fixup_file=fixup_cd.dat\n" >> $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+	printf "dtparam=i2s=on,spi=on,i2c_arm=on\n" >> \
+		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 	printf "gpu_mem=$(ADK_TARGET_GPU_MEM)\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
-	printf "gpu_mem=$(ADK_TARGET_GPU_MEM)\n" >> \
-		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-endif
 ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_AMP),)
 	printf "dtoverlay=hifiberry-amp\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
