@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
 PKG_VERSION:=		1.23.2
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_HASH:=		05a6f9e21aad8c098e388ae77de7b2361941afa7157ef74216703395b14e319a
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		base/apps
@@ -39,7 +39,20 @@ do-configure:
 	for i in $$(grep ^BUSYBOX_DISABLE $(ADK_TOPDIR)/.config);do \
 		sym=$${i#BUSYBOX_DISABLE_}; \
 		symbol=$$(echo $$sym|sed -e "s#=y##"); \
-		printf "# CONFIG_$${symbol} is not set\n" >> ${WRKBUILD}/.config; \
+		case $$symbol in \
+		  KMOD) \
+			printf "# CONFIG_MODINFO is not set\n" >> ${WRKBUILD}/.config; \
+			printf "# CONFIG_MODPROBE_SMALL is not set\n" >> ${WRKBUILD}/.config; \
+			printf "# CONFIG_INSMOD is not set\n" >> ${WRKBUILD}/.config; \
+			printf "# CONFIG_RMMOD is not set\n" >> ${WRKBUILD}/.config; \
+			printf "# CONFIG_LSMOD is not set\n" >> ${WRKBUILD}/.config; \
+			printf "# CONFIG_MODPROBE is not set\n" >> ${WRKBUILD}/.config; \
+			printf "# CONFIG_DEPMOD is not set\n" >> ${WRKBUILD}/.config; \
+			;; \
+		  *) \
+			printf "# CONFIG_$${symbol} is not set\n" >> ${WRKBUILD}/.config; \
+			;; \
+		esac \
 	done
 ifeq ($(ADK_TARGET_WITHOUT_MMU),y)
 	echo 'CONFIG_NOMMU=y' >> ${WRKBUILD}/.config
