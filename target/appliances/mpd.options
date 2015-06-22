@@ -9,6 +9,7 @@ config ADK_APPLIANCE_MPD_MPDBOX
 config ADK_APPLIANCE_MPD_YMPD
 	bool "use ympd frontend"
 	select ADK_PACKAGE_YMPD
+	select ADK_RUNTIME_START_YMPD
 
 config ADK_APPLIANCE_MPD_NOGUI
 	bool "use no gui frontend"
