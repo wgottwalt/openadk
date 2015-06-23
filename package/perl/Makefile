@@ -88,7 +88,7 @@ perl-install:
 	${CP} ${WRKINST}/usr/lib/perl5/${PKG_VERSION}/* \
 		${IDIR_PERL}/usr/lib/perl5/${PKG_VERSION}
 	${INSTALL_BIN} ${WRKINST}/usr/bin/perl ${IDIR_PERL}/usr/bin/
-	touch $(IDIR_PERL)/usr/lib/perl5/$(PKG_VERSION)/$(ADK_TARGET_CPU_ARCH)-linux/CORE/patchlevel-debian.h
+	touch $(IDIR_PERL)/usr/lib/perl5/$(PKG_VERSION)/$(ADK_TARGET_ARCH)-linux/CORE/patchlevel-debian.h
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
