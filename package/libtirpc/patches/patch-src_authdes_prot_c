@@ -1,7 +1,0 @@
---- libtirpc-0.2.3.orig/src/authdes_prot.c	2013-02-13 16:13:59.000000000 +0100
-+++ libtirpc-0.2.3/src/authdes_prot.c	2014-03-22 13:20:53.000000000 +0100
-@@ -1,4 +1,3 @@
--#include <sys/cdefs.h>
- /*
-  * Copyright (c) 2009, Sun Microsystems, Inc.
-  * All rights reserved.

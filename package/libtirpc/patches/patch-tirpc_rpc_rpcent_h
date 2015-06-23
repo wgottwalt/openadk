@@ -1,31 +1,14 @@
---- libtirpc-0.2.4.orig/tirpc/rpc/rpcent.h	2013-12-09 21:59:51.000000000 +0100
-+++ libtirpc-0.2.4/tirpc/rpc/rpcent.h	2014-06-30 12:14:11.114614896 +0200
-@@ -44,10 +44,12 @@
- /*	#pragma ident "@(#)rpcent.h   1.13    94/04/25 SMI"	*/
- /*      @(#)rpcent.h 1.1 88/12/06 SMI   */
+--- libtirpc-0.3.1.orig/tirpc/rpc/rpcent.h	2015-06-01 14:13:24.000000000 +0200
++++ libtirpc-0.3.1/tirpc/rpc/rpcent.h	2015-06-17 22:09:32.000000000 +0200
+@@ -48,8 +48,9 @@
+ extern "C" {
+ #endif
  
--__BEGIN_DECLS
-+#ifdef __cplusplus
-+extern "C" {
-+#endif
- 
- /* These are defined in /usr/include/rpc/netdb.h */
--#if 0
-+#if !defined(__GLIBC__) || defined(__UCLIBC__)
+-/* These are defined in /usr/include/rpc/netdb.h */
+-#if !defined(__GLIBC__)
++/* These are defined in /usr/include/rpc/netdb.h, unless we are using
++   the C library without RPC support. */
++#if defined(__UCLIBC__) && !defined(__UCLIBC_HAS_RPC__)
  struct rpcent {
  	char	*r_name;	/* name of server for this rpc program */
  	char	**r_aliases;	/* alias list */
-@@ -60,8 +62,10 @@ extern struct rpcent *getrpcbynumber(int
- extern struct rpcent *getrpcent(void);
- #endif
- 
--extern void setrpcent(int) __THROW;
--extern void endrpcent(void) __THROW;
--__END_DECLS
-+extern void setrpcent(int);
-+extern void endrpcent(void);
-+#ifdef __cplusplus
-+}
-+#endif
- 
- #endif /* !_RPC_CENT_H */

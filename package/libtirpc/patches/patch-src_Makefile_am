@@ -1,11 +1,20 @@
---- libtirpc-0.2.5.orig/src/Makefile.am	2014-08-08 11:24:34.000000000 -0500
-+++ libtirpc-0.2.5/src/Makefile.am	2015-02-10 11:38:08.670995360 -0600
+--- libtirpc-0.3.2.orig/src/Makefile.am	2015-06-16 17:35:08.000000000 +0200
++++ libtirpc-0.3.2/src/Makefile.am	2015-06-21 21:02:26.000000000 +0200
 @@ -51,7 +51,7 @@ libtirpc_la_SOURCES = auth_none.c auth_u
          rpc_callmsg.c rpc_generic.c rpc_soc.c rpcb_clnt.c rpcb_prot.c \
          rpcb_st_xdr.c svc.c svc_auth.c svc_dg.c svc_auth_unix.c svc_auth_none.c \
          svc_generic.c svc_raw.c svc_run.c svc_simple.c svc_vc.c getpeereid.c \
 -        auth_time.c auth_des.c authdes_prot.c debug.c
-+        authdes_prot.c debug.c
++        debug.c
  
  ## XDR
  libtirpc_la_SOURCES += xdr.c xdr_rec.c xdr_array.c xdr_float.c xdr_mem.c xdr_reference.c xdr_stdio.c
+@@ -68,7 +68,7 @@ if GSS
+     libtirpc_la_CFLAGS = -DHAVE_RPCSEC_GSS $(GSSAPI_CFLAGS)
+ endif
+ 
+-libtirpc_la_SOURCES += key_call.c key_prot_xdr.c getpublickey.c
++libtirpc_la_SOURCES += key_call.c key_prot_xdr.c
+ libtirpc_la_SOURCES += netname.c netnamer.c rtime.c
+ 
+ CLEANFILES	       = cscope.* *~
