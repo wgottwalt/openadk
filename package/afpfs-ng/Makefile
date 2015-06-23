@@ -23,6 +23,8 @@ PKG_SUBPKGS:=		AFPFS_NG LIBAFPCLIENT
 PKGSD_LIBAFPCLIENT:=	afp client library
 PKGSC_LIBAFPCLIENT:=	libs/net
 
+PKG_ARCH_DEPENDS:=	!mips !mipsel
+
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include $(ADK_TOPDIR)/mk/package.mk

@@ -12,10 +12,9 @@ PKG_SECTION:=		base/boot
 PKG_BUILDDEP:=		bison-host
 PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		ftp://ftp.gnu.org/gnu/grub/
-
-PKG_ARCH_DEPENDS:=	x86 x86_64 mips
-PKG_SYSTEM_DEPENDS:=	!mikrotik-rb532
 PKG_NOPARALLEL:=	1
+
+PKG_ARCH_DEPENDS:=	x86 x86_64
 
 PKG_SUBPKGS:=		GRUB GRUB_TOOLS
 PKGSD_GRUB_TOOLS:=	grub2 tools
