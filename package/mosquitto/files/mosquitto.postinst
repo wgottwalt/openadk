@@ -1,0 +1,7 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+add_rcconf mosquitto NO
+add_rcconf mosquitto_flags ''
+gid=$(get_next_gid) 
+add_group mosquitto $gid 
+add_user mosquitto $(get_next_uid) $gid /etc/mosquitto
