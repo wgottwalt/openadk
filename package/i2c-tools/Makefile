@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		i2c-tools
-PKG_VERSION:=		3.1.1
+PKG_VERSION:=		3.1.2
 PKG_RELEASE:=		1
-PKG_HASH:=		14d4d7d60d1c12e43f2befe239c682a5c44c27682f153d4b58c1e392d2db1700
+PKG_HASH:=		db5e69f2e2a6e3aa2ecdfe6a5f490b149c504468770f58921c8c5b8a7860a441
 PKG_DESCR:=		i2c tools
 PKG_SECTION:=		sys/hw
 PKG_URL:=		http://www.lm-sensors.org/wiki/I2CTools
