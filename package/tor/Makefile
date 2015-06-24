@@ -31,6 +31,8 @@ CONFIGURE_ENV+=		ac_cv_libevent_normal=yes \
 			tor_cv_null_is_zero=yes \
 			tor_cv_unaligned_ok=yes
 
+CONFIGURE_ARGS+=	--disable-tool-name-check
+
 ifeq ($(ADK_TARGET_USE_SSP),y)
 CONFIGURE_ARGS+=	--enable-gcc-hardening
 else
