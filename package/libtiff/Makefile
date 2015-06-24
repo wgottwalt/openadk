@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		tiff
-PKG_VERSION:=		3.9.4
-PKG_RELEASE:=		4
-PKG_HASH:=		67b76d075fb74f7cb32e7e4b217701674755fe6cee0f463b259a753fce691da6
+PKG_VERSION:=		4.0.4
+PKG_RELEASE:=		1
+PKG_HASH:=		8cb1d90c96f61cdfc0bcf036acc251c9dbe6320334da941c7a83cfe1576ef890
 PKG_DESCR:=		library for reading/writing tiff images
 PKG_DEPENDS:=		libstdcxx
 PKG_SECTION:=		libs/image
