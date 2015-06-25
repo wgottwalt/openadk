@@ -12,6 +12,10 @@ TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_CXXFLAGS))
 endif
 
+# disable lto for gcc
+TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
+TARGET_CXXFLAGS:=	$(filter-out -flto,$(TARGET_CXXFLAGS))
+
 ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 TARGET_CFLAGS:=		$(filter-out -mtext-section-literals,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -mtext-section-literals,$(TARGET_CXXFLAGS))
