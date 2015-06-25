@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.19.9
+PKG_VERSION:=		0.19.10
 PKG_RELEASE:=		1
-PKG_HASH:=		47851423053cd38cfad65be5985b41b7cd5bdbe8d0d13378e11748a28b19f26f
+PKG_HASH:=		c386eb3d22f98dc993b5ae3c272f969aa7763713483c6800040ebf1791b15851
 PKG_DESCR:=		music player daemon
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		glib libstdcxx libmpdclient librt boost libncurses
