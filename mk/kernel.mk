@@ -14,7 +14,8 @@ INSTALL_TARGETS:= $(KERNEL_PKG)
 NOINSTALL_TARGETS:=
 TARGETS:=
 
-# KMOD_template
+ifneq ($(ADK_RUNTIME_DEV_UDEV),y)
+# KMOD_template (not used for udev which autoloads modules)
 #
 # Adds a target for creating a package containing
 # the specified (kernel-provided) modules.
@@ -72,5 +73,6 @@ endif
 	$${RSTRIP} $${I_$(1)} $(MAKE_TRACE)
 	$(PKG_BUILD) $$(I_$(1)) $(PACKAGE_DIR) $(MAKE_TRACE)
 endef
+endif
 
 include $(BUILD_DIR)/.kernelconfig

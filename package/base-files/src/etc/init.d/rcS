@@ -13,14 +13,6 @@ fi
 # remount /dev with smaller size
 mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
 
-# start mdev dynamic device node management
-echo >/dev/mdev.seq
-if [ -f /proc/sys/kernel/hotplug ];then
-	echo "/sbin/mdev" >/proc/sys/kernel/hotplug
-fi
-# creates f.e. /dev/root
-mdev -s
-
 # seed some random
 cat /etc/.rnd >/dev/urandom 2>&1
 
@@ -41,6 +33,9 @@ mkdir -p /var/run
 mkdir -p /var/tmp
 touch /var/log/lastlog
 touch /var/log/wtmp
+
+# start dynamic device node management
+[ -f /etc/init.d/rcdev ] && . /etc/init.d/rcdev
 
 HOSTNAME=
 [[ -s /etc/hostname ]] && HOSTNAME=$(cat /etc/hostname)

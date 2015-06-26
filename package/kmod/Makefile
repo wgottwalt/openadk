@@ -20,8 +20,10 @@ PKG_SUBPKGS:=		KMOD LIBKMOD
 PKGSD_LIBKMOD:=		kernel module library
 PKGSC_LIBKMOD:=		libs/misc
 
+include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,KMOD,kmod,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,KMOD,kmod,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBKMOD,libkmod,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_LIBKMOD},${PKGSD_LIBKMOD},${PKGSC_LIBKMOD},${PKG_OPTS}))
 
@@ -44,4 +46,11 @@ libkmod-install:
 	$(CP) $(WRKINST)/usr/lib/libkmod*.so* \
 		$(IDIR_LIBKMOD)/usr/lib
 
+HOST_CONFIGURE_ARGS+=	--disable-manpages \
+			--disable-logging
+
+hostpost-install:
+	ln -sf kmod $(STAGING_HOST_DIR)/usr/bin/depmod
+
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

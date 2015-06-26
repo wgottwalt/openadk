@@ -1,0 +1,7 @@
+# start mdev dynamic device node management
+echo >/dev/mdev.seq
+if [ -f /proc/sys/kernel/hotplug ];then
+	echo "/sbin/mdev" >/proc/sys/kernel/hotplug
+fi
+# creates f.e. /dev/root
+mdev -s

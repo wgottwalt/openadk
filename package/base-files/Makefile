@@ -23,6 +23,11 @@ INSTALL_STYLE:=		manual
 
 do-install:
 	$(CP) ./src/* $(IDIR_BASE_FILES)
+ifeq ($(ADK_RUNTIME_DEV_MDEV),y)
+	$(CP) ./files/rcdev.mdev $(IDIR_BASE_FILES)/etc/init.d/rcdev
+else ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
+	$(CP) ./files/rcdev.udev $(IDIR_BASE_FILES)/etc/init.d/rcdev
+endif
 ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
 	@echo "#" > $(IDIR_BASE_FILES)/etc/network/interfaces
 endif
@@ -73,6 +78,7 @@ endif
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
+	ln -sf var/run $(IDIR_BASE_FILES)/run
 	test -z $(ADK_RUNTIME_SHELL) || \
 	    cat ./files/inittab.shell >> $(IDIR_BASE_FILES)/etc/inittab
 ifeq ($(ADK_TARGET_WITH_VGA),y)

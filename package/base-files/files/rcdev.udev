@@ -1,0 +1,4 @@
+# start udev dynamic device node management
+udevd --daemon
+udevadm trigger
+udevadm settle

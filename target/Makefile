@@ -135,6 +135,12 @@ clean: $(ADK_TARGET_ARCH)-clean $(ADK_TARGET_ARCH)-imageclean
 
 %-imageprepare:
 	$(TRACE) target/$(patsubst %-imageprepare,%,$@)-imageprepare
+ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
+	$(CP) -a $(BUILD_DIR)/linux-$(ADK_TARGET_ARCH)/modules/lib $(TARGET_DIR)
+	rm -f "$(TARGET_DIR)/lib/modules/$(ADK_KERNEL_VERSION)/build" \
+	      "$(TARGET_DIR)/lib/modules/$(ADK_KERNEL_VERSION)/source"
+	$(STAGING_HOST_DIR)/usr/bin/depmod -a -b $(TARGET_DIR) $(ADK_KERNEL_VERSION)
+endif
 	@for x in $$(ls $(ADK_TOPDIR)/scripts/preimage/*.sh 2>/dev/null); do \
 		[[ -x "$$x" ]] && $$x; \
 		break; \
