@@ -29,6 +29,7 @@ $(eval $(call PKG_template,GRUB,grub,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,GRUB_TOOLS,grub-tools,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS:=          $(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=          $(filter-out -flto,$(TARGET_CFLAGS))
 
 # core.img is generated via
 # grub-mkimage -O ${GRUB_ARCH} -o core.img -c embed.cfg ${GRUB_MODULES}
