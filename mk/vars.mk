@@ -100,8 +100,13 @@ endif
 
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
+ifneq ($(ADK_TARGET_USE_LTO),)
+TARGET_AR:=		${TARGET_COMPILER_PREFIX}gcc-ar
+TARGET_RANLIB:=		${TARGET_COMPILER_PREFIX}gcc-ranlib
+else
 TARGET_AR:=		${TARGET_COMPILER_PREFIX}ar
 TARGET_RANLIB:=		${TARGET_COMPILER_PREFIX}ranlib
+endif
 
 ifneq ($(ADK_TARGET_ABI_CFLAGS),)
 TARGET_CC+=		$(ADK_TARGET_ABI_CFLAGS)
@@ -328,12 +333,20 @@ COMMON_ENV=		CONFIG_SHELL='$(strip ${SHELL})' \
 			M4='${STAGING_HOST_DIR}/usr/bin/m4' \
 			LIBTOOLIZE='${STAGING_HOST_DIR}/usr/bin/libtoolize -q' \
 			VERBOSE=1
+
+ifneq ($(ADK_TARGET_USE_LTO),)
+TOOLS_ENV=		AR='$(TARGET_CROSS)gcc-ar' \
+			RANLIB='$(TARGET_CROSS)gcc-ranlib' \
+			NM='$(TARGET_CROSS)gcc-nm'
+else
+TOOLS_ENV=		AR='$(TARGET_CROSS)ar' \
+			RANLIB='$(TARGET_CROSS)ranlib' \
+			NM='$(TARGET_CROSS)nm'
+endif
 			
-TARGET_ENV=		AR='$(TARGET_CROSS)ar' \
+TARGET_ENV=		$(TOOLS_ENV) \
 			AS='$(TARGET_CROSS)as' \
 			LD='$(TARGET_CROSS)ld' \
-			NM='$(TARGET_CROSS)nm' \
-			RANLIB='$(TARGET_CROSS)ranlib' \
 			STRIP='$(TARGET_CROSS)strip' \
 			OBJCOPY='$(TARGET_CROSS)objcopy' \
 			CC='$(TARGET_CC)' \
