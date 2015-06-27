@@ -180,6 +180,10 @@ config ADK_HOST_BUILD_MTD_UTILS
 	default y if ADK_HOST_NEED_MTD_UTILS
 	default n
 
+config ADK_HOST_BUILD_PATCHELF
+	bool
+	default n
+
 config ADK_HOST_NEED_SQUASHFS
 	bool
 	default n
