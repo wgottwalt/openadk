@@ -1,0 +1,18 @@
+--- libtirpc-0.3.2.orig/src/rpc_soc.c	2015-06-16 17:35:08.000000000 +0200
++++ libtirpc-0.3.2/src/rpc_soc.c	2015-06-27 11:37:58.000000000 +0200
+@@ -520,6 +520,7 @@ clnt_broadcast(prog, vers, proc, xargs,
+ 	    (resultproc_t) rpc_wrap_bcast, "udp");
+ }
+ 
++#if 0
+ /*
+  * Create the client des authentication object. Obsoleted by
+  * authdes_seccreate().
+@@ -551,6 +552,7 @@ fallback:
+ 	dummy = authdes_seccreate(servername, window, NULL, ckey);
+ 	return (dummy);
+ }
++#endif
+ 
+ /*
+  * Create a client handle for a unix connection. Obsoleted by clnt_vc_create()
