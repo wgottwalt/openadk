@@ -1,0 +1,25 @@
+--- rpcbind-0.2.3.orig/src/security.c	2015-04-27 09:07:43.000000000 -0500
++++ rpcbind-0.2.3/src/security.c	2015-06-27 16:49:53.302652574 -0500
+@@ -20,14 +20,6 @@
+ /*
+  * XXX for special case checks in check_callit.
+  */
+-#ifdef HAVE_RPCSVC_MOUNT_H
+-#include <rpcsvc/mount.h>
+-#include <rpcsvc/rquota.h>
+-#include <rpcsvc/nfs_prot.h>
+-#include <rpcsvc/yp.h>
+-#include <rpcsvc/ypclnt.h>
+-#include <rpcsvc/yppasswd.h>
+-#else
+ # define MOUNTPROC_MNT	1
+ # define MOUNTPROC_UMNT	3
+ # define NFS_PROGRAM	100003
+@@ -42,7 +34,6 @@
+ # define YPPROC_FIRST	4
+ # define YPPROC_NEXT	5
+ # define YPPROC_ALL	8
+-#endif
+ 
+ #include "rpcbind.h"
+ 
