@@ -175,6 +175,11 @@ endchoice
 
 menu "Kernel options"
 
+config ADK_KERNEL_UEVENT_HELPER_PATH
+	string
+	default "/sbin/mdev"
+	depends on ADK_RUNTIME_DEV_MDEV
+
 config ADK_KERNEL_BINFMT_FLAT
 	bool
 	default y if ADK_TARGET_BINFMT_FLAT
