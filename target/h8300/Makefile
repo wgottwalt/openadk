@@ -25,7 +25,7 @@ targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_SIM),y)
 	@echo "Run the simulator via:"
-	@echo $(TARGET_CROSS)run $(FW_DIR)/$(TARGET_KERNEL)
+	@echo '$(TARGET_CROSS)run $(FW_DIR)/$(TARGET_KERNEL) "earlyprintk=h8300-sim console=ttySC0"'
 endif
 endif
 

@@ -26,6 +26,7 @@ config ADK_EXPERIMENTAL
 
 config ADK_BUILD_WITH_DEBUG
 	bool "Build everything with debug information and allow debug packages"
+	select ADK_DEBUG
 	default n
 	help
 	  If you want to create debug packages, you should enable this option.

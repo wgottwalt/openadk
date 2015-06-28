@@ -184,7 +184,6 @@ ifeq ($(ADK_TARGET_ARCH_H8300),y)
 TARGET_CFLAGS+=		-mh
 TARGET_LDFLAGS+=	-mh
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
-TARGET_LDFLAGS+=	-Wl,-elf2flt
 TARGET_CFLAGS+=		-Wl,-elf2flt
 TARGET_CXXFLAGS+=	-Wl,-elf2flt
 endif
@@ -269,7 +268,7 @@ TARGET_CFLAGS+=		$(ADK_TARGET_CFLAGS_OPT)
 TARGET_CXXFLAGS+=	$(ADK_TARGET_CFLAGS_OPT)
 
 # add compiler flags for debug information
-ifeq ($(ADK_BUILD_WITH_DEBUG),y)
+ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=		-g3
 TARGET_CXXFLAGS+=	-g3
 endif
