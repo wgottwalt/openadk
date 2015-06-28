@@ -12,7 +12,7 @@ autostart)
 	;;
 start)
 	[ -d /var/lib/mosquitto ] || mkdir -p /var/lib/mosquitto
-	/usr/sbin/mosquitto $mosquitto_flags
+	/usr/sbin/mosquitto -d $mosquitto_flags
 	;;
 stop)
 	kill $(pgrep -f /usr/sbin/mosquitto)
