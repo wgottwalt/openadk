@@ -20,7 +20,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,BUSYBOX,busybox,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 # disable lto
-TARGET_CFLAGS:=          $(filter-out -flto,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual

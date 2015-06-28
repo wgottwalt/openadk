@@ -22,6 +22,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LTP,ltp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+# disable lto
+TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
+
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--with-open-posix-testsuite \
 			--with-realtime-testsuite \
