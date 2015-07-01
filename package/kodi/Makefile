@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		3020230071067265fdc274f206f72ab1fcc4605e
+PKG_VERSION:=		a7379eb168e18197abb79de3a567257c882ffaf4
 PKG_RELEASE:=		1
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
@@ -25,7 +25,7 @@ PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug libgtk2
 PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
-PKG_BUILDDEP+=		zip-host unzip-host libsquish giflib-host
+PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish
 PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		https://github.com/xbmc/xbmc.git
 
@@ -61,18 +61,8 @@ PKGFB_WITH_LIRC:=	lirc
 PKGFS_WITH_LIRC:=	lirc
 PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 
-# libiconv missing, freescale GL libraries linked against glibc
+# freescale GL libraries linked against glibc
 PKG_LIBC_DEPENDS:=	glibc uclibc-ng
-
-PKG_BUILDDEP_UCLIBC:=	libiconv
-PKG_BUILDDEP_UCLIBC_NG:=libiconv
-
-PKG_DEPENDS_RASPBERRY_PI:=	bcm28xx-vc bcm28xx-vc-gl-libs bcm28xx-vc-libs
-PKG_BUILDDEP_RASPBERRY_PI:=	bcm28xx-vc
-PKG_DEPENDS_RASPBERRY_PI2:=	bcm28xx-vc bcm28xx-vc-gl-libs bcm28xx-vc-libs
-PKG_BUILDDEP_RASPBERRY_PI2:=	bcm28xx-vc
-PKG_DEPENDS_SOLIDRUN_IMX6:=	libfslvpuwrap imx-gpu-viv
-PKG_BUILDDEP_SOLIDRUN_IMX6:=	libfslvpuwrap imx-gpu-viv
 PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 solidrun-imx6
 
 DIFF_IGNOREFILES:=	configure missing depcomp install-sh INSTALL \
