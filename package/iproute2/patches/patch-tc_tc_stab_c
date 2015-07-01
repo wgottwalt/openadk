@@ -1,10 +1,10 @@
---- iproute2-3.10.0.orig/tc/tc_stab.c	2013-07-16 19:06:36.000000000 +0200
-+++ iproute2-3.10.0/tc/tc_stab.c	2013-08-17 15:19:18.866741086 +0200
+--- iproute2-4.1.0.orig/tc/tc_stab.c	2015-06-26 21:28:25.000000000 +0200
++++ iproute2-4.1.0/tc/tc_stab.c	2015-06-29 08:45:24.000000000 +0200
 @@ -16,6 +16,7 @@
  #include <syslog.h>
  #include <fcntl.h>
  #include <math.h>
 +#include <sys/param.h>
  #include <sys/socket.h>
+ #include <sys/param.h>
  #include <netinet/in.h>
- #include <arpa/inet.h>

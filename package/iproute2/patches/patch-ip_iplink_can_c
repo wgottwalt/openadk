@@ -1,6 +1,6 @@
---- iproute2-3.10.0.orig/ip/iplink_can.c	2013-07-16 19:06:36.000000000 +0200
-+++ iproute2-3.10.0/ip/iplink_can.c	2013-08-17 15:08:28.418918323 +0200
-@@ -107,7 +107,7 @@ static int can_parse_opt(struct link_uti
+--- iproute2-4.1.0.orig/ip/iplink_can.c	2015-06-26 21:28:25.000000000 +0200
++++ iproute2-4.1.0/ip/iplink_can.c	2015-06-29 08:45:24.000000000 +0200
+@@ -123,7 +123,7 @@ static int can_parse_opt(struct link_uti
  			if (get_u32(&bt.bitrate, *argv, 0))
  				invarg("invalid \"bitrate\" value\n", *argv);
  		} else if (matches(*argv, "sample-point") == 0) {

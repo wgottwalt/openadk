@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		iproute2
-PKG_VERSION:=		4.0.0
+PKG_VERSION:=		4.1.0
 PKG_RELEASE:=		1
-PKG_HASH:=		5cd06eb1050b858b308b65705725042bb566fd261135e35a73dafb48cd632618
+PKG_HASH:=		d1326696c6a8f81ba66aaf48d858005cf280c81d3284d8d2c99748e3d0746146
 PKG_DESCR:=		routing control utility
 PKG_SECTION:=		net/route
 PKG_BUILDDEP:=		iptables libnl linux-atm
