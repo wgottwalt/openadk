@@ -18,9 +18,6 @@ PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/$(PKG_EXTRAVER)/
 PKG_NOPARALLEL:=	1
 PKG_OPTS:=		dev noscripts
 
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
-PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
-
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 

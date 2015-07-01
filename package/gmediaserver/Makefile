@@ -17,8 +17,7 @@ PKG_CXX:=		GMEDIASERVER
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_LIBC_DEPENDS:=	uclibc glibc
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 include ${ADK_TOPDIR}/mk/package.mk
 

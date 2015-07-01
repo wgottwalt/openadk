@@ -13,9 +13,6 @@ PKG_DEPENDS:=		libmagic zlib libbz2 libcap
 PKG_BUILDDEP:=		cmake-host file zlib bzip2 libcap
 PKG_SITES:=		http://snapshot.debian.org/archive/debian/20141023T043132Z/pool/main/c/cdrkit/
 
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
-PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
-
 DISTFILES:=             $(PKG_NAME)_$(PKG_VERSION).orig.tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk

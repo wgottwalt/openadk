@@ -1,6 +1,24 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+choice
+prompt "Iconv implementation"
+bool
+
+config ADK_TARGET_LIBC_ICONV
+	prompt "Use iconv from C library"
+
+config ADK_TARGET_LIBICONV
+	prompt "Use libiconv package"
+	select ADK_PACKAGE_LIBICONV
+
+config ADK_TARGET_LIBICONV_TINY
+	prompt "Use tiny libionv package"
+	select ADK_PACKAGE_LIBICONV_TINY
+
+endchoice
+
+
 config ADK_TARGET_CFLAGS_OPT
 	string
 	default "-Os -pipe" if ADK_TARGET_CFLAGS_OPT_OS

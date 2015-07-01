@@ -17,7 +17,6 @@ PKG_SITES:=		http://www.dillo.org/download/
 
 PKG_HOST_DEPENDS:=	!cygwin
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips arm
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

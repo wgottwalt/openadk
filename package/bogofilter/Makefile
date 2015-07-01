@@ -14,7 +14,6 @@ PKG_DEPENDS:=		libdb libstdcxx
 PKG_URL:=		http://bogofilter.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bogofilter/}
 
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${ADK_TOPDIR}/mk/package.mk

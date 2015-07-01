@@ -13,9 +13,6 @@ PKG_BUILDDEP:=		libowfat
 PKG_URL:=		http://www.fefe.de/gatling/
 PKG_SITES:=		http://dl.fefe.de/
 
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
-PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
-
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${ADK_TOPDIR}/mk/package.mk

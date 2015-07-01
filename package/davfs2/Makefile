@@ -14,8 +14,7 @@ PKG_BUILDDEP:=		neon fuse
 PKG_URL:=		http://savannah.nongnu.org/projects/davfs2/
 PKG_SITES:=		http://download.savannah.gnu.org/releases/davfs2/
 
-PKG_LIBC_DEPENDS:=	uclibc glibc
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

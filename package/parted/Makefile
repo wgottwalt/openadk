@@ -14,9 +14,6 @@ PKG_BUILDDEP:=		util-linux ncurses
 PKG_URL:=		http://www.gnu.org/software/parted/index.shtml
 PKG_SITES:=		$(MASTER_SITE_GNU:=parted/)
 
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
-PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
-
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PARTED,parted,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))

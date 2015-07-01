@@ -14,7 +14,6 @@ PKG_BUILDDEP:=		glib openssl
 PKG_URL:=		http://www.bitlbee.org/
 PKG_SITES:=		http://get.bitlbee.org/src/
 
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${ADK_TOPDIR}/mk/package.mk

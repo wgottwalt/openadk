@@ -16,9 +16,6 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=afpfs-ng/}
 PKG_LIBNAME:=		libafpclient
 PKG_OPTS:=		dev
 
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
-PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
-
 PKG_SUBPKGS:=		AFPFS_NG LIBAFPCLIENT
 PKGSD_LIBAFPCLIENT:=	afp client library
 PKGSC_LIBAFPCLIENT:=	libs/net

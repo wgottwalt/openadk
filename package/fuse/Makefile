@@ -16,7 +16,6 @@ PKG_LIBNAME:=		libfuse
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 
 PKG_SUBPKGS:=		FUSE_UTILS LIBFUSE
 PKGSD_LIBFUSE:=		filesystem in userspace library

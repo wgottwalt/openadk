@@ -35,6 +35,15 @@ COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y))
 HOST_COMPILE_PACKAGES:=$(patsubst %,%-host-compile,$(hostpackage-y))
 INSTALL_PACKAGES:=$(patsubst %,%-install,$(package-y))
 
+ifeq ($(ADK_TARGET_LIBICONV),y)
+COMPILE_ICONV:=libiconv-compile
+INSTALL_ICONV:=libiconv-install
+endif
+ifeq ($(ADK_TARGET_LIBICONV_TINY),y)
+COMPILE_ICONV:=libiconv-tiny-compile
+INSTALL_ICONV:=libiconv-tiny-install
+endif
+
 all: compile
 download: $(patsubst %,%-download,$(package-y))
 clean: $(patsubst %,%-clean,$(package-) $(package-y) base-files)
@@ -43,8 +52,8 @@ ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 compile: $(COMPILE_PACKAGES)
 install: $(INSTALL_PACKAGES)
 else
-compile: base-files-compile $(COMPILE_PACKAGES)
-install: base-files-install $(INSTALL_PACKAGES)
+compile: base-files-compile $(COMPILE_ICONV) $(COMPILE_PACKAGES)
+install: base-files-install $(INSTALL_ICONV) $(INSTALL_PACKAGES)
 endif
 
 %-download:

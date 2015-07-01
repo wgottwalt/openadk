@@ -12,9 +12,6 @@ PKG_BUILDDEP:=		openssl
 PKG_URL:=		https://tvheadend.org/projects/tvheadend
 PKG_SITES:=		https://github.com/tvheadend/tvheadend.git
 
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
-PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
-
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TVHEADEND,tvheadend,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))

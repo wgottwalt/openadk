@@ -12,9 +12,6 @@ PKG_SECTION:=		sys/fs
 PKG_URL:=		http://www.daniel-baumann.ch/software/dosfstools/
 PKG_SITES:=		http://daniel-baumann.ch/files/software/dosfstools/
 
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
-PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
-
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DOSFSTOOLS,dosfstools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))

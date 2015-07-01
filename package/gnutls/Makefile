@@ -17,9 +17,6 @@ PKG_SITES:=		ftp://ftp.gnutls.org/gcrypt/gnutls/v3.4/
 PKG_LIBNAME:=		libgnutls
 PKG_OPTS:=		dev
 
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
-PKG_BUILDDEP_UCLIBC_NG:=libiconv-tiny
-
 PKG_SUBPKGS:=		LIBGNUTLS GNUTLS_UTILS LIBGNUTLS_EXTRA
 PKGSD_GNUTLS_UTILS:=	transport layer security utilities
 PKGSS_GNUTLS_UTILS:=	libgnutls libgnutls-extra

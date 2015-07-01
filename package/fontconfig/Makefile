@@ -16,7 +16,6 @@ PKG_URL:=		http://fontconfig.org/
 PKG_SITES:=		http://fontconfig.org/release/
 PKG_OPTS:=		dev
 
-PKG_BUILDDEP_UCLIBC:=	libiconv-tiny
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${ADK_TOPDIR}/mk/host.mk
