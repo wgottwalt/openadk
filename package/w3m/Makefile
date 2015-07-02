@@ -10,7 +10,7 @@ PKG_HASH:=		e994d263f2fd2c22febfbe45103526e00145a7674a0fda79c822b97c2770a9e3
 PKG_DESCR:=		console web browser
 PKG_SECTION:=		app/browser
 PKG_DEPENDS:=		libgc libncurses
-PKG_BUILDDEP:=		libgc-host libgc ncurses
+PKG_BUILDDEP:=		libgc ncurses
 PKG_URL:=		http://w3m.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=w3m/}
 
