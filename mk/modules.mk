@@ -1830,6 +1830,7 @@ $(eval $(call KMOD_template,DVB_CORE,dvb-core,\
 	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/tuner \
 	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/v4l2-dv-timings \
 	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/videobuf-core \
+	$(MODULES_DIR)/kernel/drivers/media/v4l2-core/videobuf-vmalloc \
 	$(MODULES_DIR)/kernel/drivers/media/common/cx2341x \
 	$(MODULES_DIR)/kernel/drivers/media/common/tveeprom \
 	$(MODULES_DIR)/kernel/drivers/media/dvb-core/dvb-core \
@@ -1837,6 +1838,8 @@ $(eval $(call KMOD_template,DVB_CORE,dvb-core,\
 ,60))
 
 $(eval $(call KMOD_template,VIDEO_CX231XX,video-cx231xx,\
+	$(MODULES_DIR)/kernel/drivers/media/tuners/tda18271 \
+	$(MODULES_DIR)/kernel/drivers/media/dvb-frontends/si2165 \
 	$(MODULES_DIR)/kernel/drivers/media/i2c/cx25840/cx25840 \
 	$(MODULES_DIR)/kernel/drivers/media/usb/cx231xx/cx231xx \
 	$(MODULES_DIR)/kernel/drivers/media/usb/cx231xx/cx231xx-dvb \

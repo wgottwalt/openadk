@@ -7,7 +7,7 @@ sys/fs		Filesystem / Blockdevice Utilities
 sys/misc	System Misc
 sys/serial	Serial communications & terminal emulation
 sys/utils	System Utilities
-sys/firmware	Firmware for Network Devices
+sys/firmware	Firmware for Hardware Devices
 sys/hw		Hardware related System utilities
 app/archive	Compression and Archivers
 app/browser	Browser

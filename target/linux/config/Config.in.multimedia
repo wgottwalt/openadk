@@ -35,6 +35,12 @@ config ADK_KERNEL_RC_CORE
 config ADK_KERNEL_VIDEO_CX231XX_DVB
 	tristate
 
+config ADK_KERNEL_DVB_SI2165
+	tristate
+
+config ADK_KERNEL_MEDIA_TUNER_TDA18271
+	tristate
+
 menu "DVB card support"
 
 config ADK_KERNEL_VIDEO_CX231XX
@@ -47,6 +53,8 @@ config ADK_KERNEL_VIDEO_CX231XX
 	select ADK_KERNEL_RC_CORE
 	select ADK_KERNEL_DVB_CORE
 	select ADK_KERNEL_VIDEO_CX231XX_DVB
+	select ADK_KERNEL_DVB_SI2165
+	select ADK_KERNEL_MEDIA_TUNER_TDA18271
 	help
 	  Driver for Hauppauge WinTV-HVR-930C	
 	
