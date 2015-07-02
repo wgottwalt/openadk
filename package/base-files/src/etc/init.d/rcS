@@ -13,20 +13,6 @@ fi
 # remount /dev with smaller size
 mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
 
-# seed some random
-cat /etc/.rnd >/dev/urandom 2>&1
-
-# setup cfgfs
-[ -x /sbin/cfgfs ] && {
-	cfgfs setup
-	mount -o remount,ro /
-}
-
-# remount /tmp with smaller size
-size=$(cat /etc/tmpfs 2>/dev/null)
-[ -z $size ] && size=2048
-mount -o remount,nosuid,nodev,mode=1777,size=${size}k -t tmpfs tmpfs /tmp
-
 # create some useful directories in tmpfs
 mkdir -p /var/log
 mkdir -p /var/run
@@ -36,6 +22,20 @@ touch /var/log/wtmp
 
 # start dynamic device node management
 [ -f /etc/init.d/rcdev ] && . /etc/init.d/rcdev
+
+# seed some random
+cat /etc/.rnd >/dev/urandom 2>&1
+
+# setup cfgfs
+[ -x /sbin/cfgfs ] && {
+  cfgfs setup
+  mount -o remount,ro /
+}
+
+# remount /tmp with smaller size
+size=$(cat /etc/tmpfs 2>/dev/null)
+[ -z $size ] && size=2048
+mount -o remount,nosuid,nodev,mode=1777,size=${size}k -t tmpfs tmpfs /tmp
 
 HOSTNAME=
 [[ -s /etc/hostname ]] && HOSTNAME=$(cat /etc/hostname)
