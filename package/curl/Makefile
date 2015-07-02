@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
-PKG_VERSION:=		7.42.1
+PKG_VERSION:=		7.43.0
 PKG_RELEASE:=		1
-PKG_HASH:=		4fc504f4fac56d091162707941d06c72a4222fc6fa48ca8193e44ee74baf079c
+PKG_HASH:=		1a084da1edbfc3bd632861358b26af45ba91aaadfb15d6482de55748b8dfc693
 PKG_DESCR:=		client-side url transfer tool
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libcurl
@@ -21,7 +21,7 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_SUBPKGS:=		CURL LIBCURL
 PKGSD_LIBCURL:=		client-side url transfer library
 PKGSC_LIBCURL:=		libs/net
-PKGSS_LIBCURL:=		zlib
+PKGSS_LIBCURL:=		zlib libpthread
 
 PKG_FLAVOURS_CURL:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable ipv6 support
