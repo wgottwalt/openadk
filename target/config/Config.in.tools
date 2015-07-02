@@ -207,6 +207,10 @@ config ADK_HOST_BUILD_PCRE
 	default y if ADK_HOST_DARWIN
 	default n
 
+config ADK_HOST_BUILD_KMOD
+	bool
+	default y
+
 source "target/config/Config.in.prereq"
 
 config ADK_COMPRESSION_TOOL

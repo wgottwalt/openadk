@@ -46,7 +46,8 @@ $(LINUX_DIR)/$(KERNEL_FILE): $(LINUX_DIR)/.config
 $(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
-	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} DEPMOD=true \
+	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} \
+		DEPMOD=$(STAGING_HOST_DIR)/usr/bin/depmod \
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
 		LOCALVERSION="" \
 		modules_install $(MAKE_TRACE)
