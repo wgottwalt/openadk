@@ -4,12 +4,12 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openldap
-PKG_VERSION:=		2.4.39
+PKG_VERSION:=		2.4.41
 PKG_RELEASE:=		1
-PKG_HASH:=		8267c87347103fef56b783b24877c0feda1063d3cb85d070e503d076584bf8a7
+PKG_HASH:=		27856bb4a8b44feca2b326c309000e16a9dadd52362c8ab6eec6c67a43737f6e
 PKG_DESCR:=		ldap client libraries
 PKG_SECTION:=		libs/misc
-PKG_DEPENDS:=		libopenssl libsasl2 libdb libpthread libuuid libstdcxx
+PKG_DEPENDS:=		libopenssl libsasl2 libdb libpthread libuuid libstdcxx libncurses
 PKG_BUILDDEP:=		cyrus-sasl openssl db util-linux
 PKG_URL:=		http://www.openldap.org/
 PKG_SITES:=		ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
