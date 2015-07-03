@@ -1,0 +1,10 @@
+config ADK_KERNEL_PCI
+	bool
+	select ADK_KERNEL_PCI_QUIRKS
+	depends on ADK_TARGET_WITH_PCI \
+		|| ADK_TARGET_QEMU \
+		|| ADK_TARGET_VBOX
+	default y
+
+config ADK_KERNEL_PCI_QUIRKS
+	bool
