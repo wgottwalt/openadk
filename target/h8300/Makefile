@@ -8,6 +8,7 @@ include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux
+OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
 # target helper text
 ifeq ($(ADK_TARGET_FS),initramfs)
@@ -25,15 +26,20 @@ targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_SIM),y)
 	@echo "Run the simulator via:"
-	@echo '$(TARGET_CROSS)run $(FW_DIR)/$(TARGET_KERNEL) "earlyprintk=h8300-sim console=ttySC0"'
+	@echo '$(TARGET_CROSS)gdb $(FW_DIR)/$(TARGET_KERNEL)'
+	@echo 'target sim'
+	@echo 'sim intmode 1'
+	@echo 'sim sci pty'
+	@echo 'load'
+	@echo 'run earlyprintk=h8300-sim console=ttySC0'
 endif
 endif
 
 kernel-strip:
-	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
 kernel-install: kernel-strip
-	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),initramfs)

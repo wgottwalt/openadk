@@ -20,11 +20,9 @@ config ADK_TARGET_UCLINUX
 
 config ADK_TARGET_SIM
 	bool
-	select ADK_TARGET_WITH_SERIAL
 
 config ADK_TARGET_QEMU
 	bool
-	select ADK_TARGET_WITH_SERIAL
 
 config ADK_TARGET_VBOX
 	bool
