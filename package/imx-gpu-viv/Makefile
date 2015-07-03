@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		92654c185835e139cc9485806ad184fdac21f4d640ec9d0e493669235d21de9b
 PKG_DESCR:=		imx vivante gpu library
 PKG_SECTION:=		libs/video
+PKG_BUILDDEP:=		libfslvpuwrap
 PKG_URL:=		http://www.freescale.com/
 PKG_SITES:=		http://www.freescale.com/lgfiles/NMG/MAD/YOCTO/
 
