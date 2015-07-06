@@ -9,14 +9,9 @@ include ${ADK_TOPDIR}/mk/buildhlp.mk
 ifeq (${ADK_MAKE_PARALLEL},y)
 GDB_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
-ifeq ($(ADK_TARGET_SIM),y)
-CONFIGURE_ARGS:=	--enable-sim
-else
-CONFIGURE_ARGS:=	--disable-sim
-endif
 
 ifeq ($(ADK_TARGET_SIM),y)
-CONFIGURE_ARGS:=	--enable-sim
+CONFIGURE_ARGS:=	--enable-sim --enable-sim-stdio
 else
 CONFIGURE_ARGS:= 	--disable-sim
 endif
