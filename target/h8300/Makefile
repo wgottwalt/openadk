@@ -27,11 +27,12 @@ targethelp:
 ifeq ($(ADK_TARGET_SIM),y)
 	@echo "Run the simulator via:"
 	@echo '$(TARGET_CROSS)gdb $(FW_DIR)/$(TARGET_KERNEL)'
-	@echo 'target sim'
-	@echo 'sim intmode 1'
-	@echo 'sim sci pty'
-	@echo 'load'
-	@echo 'run earlyprintk=h8300-sim console=ttySC0'
+	@echo 'gdb> target sim'
+	@echo 'gdb> sim intmode 1'
+	@echo 'gdb> sim sci net 12345'
+	@echo 'gdb> load'
+	@echo 'start telnet localhost 12345 in a second shell'
+	@echo 'gdb> run earlyprintk=h8300-sim console=ttySC0'
 endif
 endif
 
