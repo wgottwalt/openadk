@@ -67,7 +67,7 @@ kernel-strip:
 	cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
-kernel-install:
+kernel-install: kernel-strip
 ifeq ($(ADK_TARGET_SYSTEM_SUN_VOYAGER),y)
 	PATH='$(HOST_PATH)' elftoaout -o $(FW_DIR)/$(TARGET_KERNEL) $(KERNEL)
 else
