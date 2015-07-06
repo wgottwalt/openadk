@@ -1,0 +1,11 @@
+--- u-boot-xtensa-fe85520cfb23b815207fa1a0ad840ec795eecedf.orig/tools/Makefile	2015-07-06 13:09:06.000000000 +0200
++++ u-boot-xtensa-fe85520cfb23b815207fa1a0ad840ec795eecedf/tools/Makefile	2015-07-06 13:13:09.274561163 +0200
+@@ -114,7 +114,7 @@ endif
+ 
+ # MXSImage needs LibSSL
+ ifneq ($(CONFIG_MX23)$(CONFIG_MX28)$(CONFIG_FIT_SIGNATURE),)
+-HOSTLOADLIBES_mkimage += -lssl -lcrypto
++HOSTLOADLIBES_mkimage += -lssl -lcrypto -ldl
+ endif
+ 
+ HOSTLOADLIBES_dumpimage := $(HOSTLOADLIBES_mkimage)
