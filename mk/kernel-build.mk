@@ -25,6 +25,12 @@ KERNEL_FILE:=vmlinux
 KERNEL_TARGET:=$(ADK_TARGET_KERNEL)
 endif
 
+ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
+ADK_DEPMOD:=$(STAGING_HOST_DIR)/usr/bin/depmod
+else
+ADK_DEPMOD:=true
+endif
+
 $(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched
 	$(TRACE) target/kernel-prepare
 	ln -sf $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) $(LINUX_DIR)
@@ -47,7 +53,7 @@ $(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} \
-		DEPMOD=$(STAGING_HOST_DIR)/usr/bin/depmod \
+		DEPMOD=$(ADK_DEPMOD) \
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
 		LOCALVERSION="" \
 		modules_install $(MAKE_TRACE)

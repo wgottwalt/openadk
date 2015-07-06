@@ -209,7 +209,7 @@ config ADK_HOST_BUILD_PCRE
 
 config ADK_HOST_BUILD_KMOD
 	bool
-	default y
+	default y if ADK_RUNTIME_DEV_UDEV
 
 source "target/config/Config.in.prereq"
 

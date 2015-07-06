@@ -12,7 +12,6 @@ prompt "System for /dev management"
 
 config ADK_RUNTIME_DEV_MDEV
 	bool "Use mdev"
-	select BUSYBOX_MDEV
 
 config ADK_RUNTIME_DEV_UDEV
 	bool "Use udev"
