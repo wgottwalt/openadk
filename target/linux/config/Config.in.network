@@ -224,12 +224,12 @@ config ADK_KERNEL_BONDING
 	  Refer to <file:Documentation/networking/bonding.txt> for more
 	  information.
 
-config ADK_KERNEL_MPTCP
-	bool "Multipath TCP support"
-	select ADK_KERNEL_IPV6
-	depends on ADK_KERNEL_VERSION_3_14
-	help
-	  http://www.multipath-tcp.org
+#config ADK_KERNEL_MPTCP
+#	bool "Multipath TCP support"
+#	select ADK_KERNEL_IPV6
+#	depends on ADK_KERNEL_VERSION_3_14
+#	help
+#	  http://www.multipath-tcp.org
 
 source target/linux/config/Config.in.sched
 source target/linux/config/Config.in.ipsec
