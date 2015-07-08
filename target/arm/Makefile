@@ -44,16 +44,30 @@ ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB)$(ADK_TARGET_QEMU_ARM_MODEL_TERRIE
 	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${ADK_TARGET_CPU_ARCH}.img'
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-	@echo "Use following command to install it on SD card:"
-	@echo "sudo ./scripts/install.sh raspberry-pi /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+ifeq ($(ADK_APPLIANCE_KODI),y)
 	@echo "Use following command to install with a writable data partition"
 	@echo "sudo ./scripts/install.sh -d 256 raspberry-pi /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "If you want to update a card without loosing existing data on the writable partition use:"
+	@echo "sudo ./scripts/install.sh -k -d 256 raspbrry-pi /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "In both cases the cfgfs partition is _not_ removed!"
+else
+	@echo "Use following command to install it on SD card:"
+	@echo "sudo ./scripts/install.sh raspberry-pi /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
+ifeq ($(ADK_APPLIANCE_KODI),y)
+	@echo "Use following command to install with a writable data partition"
+	@echo "sudo ./scripts/install.sh -d 256 raspberry-pi2 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "If you want to update a card without loosing existing data on the writable partition use:"
+	@echo "sudo ./scripts/install.sh -k -d 256 raspberry-pi2 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "In both cases the cfgfs partition is _not_ removed!"
+else
 	@echo "Use following command to install it on SD card:"
 	@echo "sudo ./scripts/install.sh raspberry-pi2 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Use following command to install with a writable data partition"
 	@echo "sudo ./scripts/install.sh -d 256 raspberry-pi2 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	@echo "Use following command to install it on SD card:"
