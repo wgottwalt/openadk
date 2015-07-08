@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libdrm
-PKG_VERSION:=		2.4.53
+PKG_VERSION:=		2.4.62
 PKG_RELEASE:=		1
-PKG_HASH:=		272db7c2ccddeeef476f3ffdd6fd2c8f4ea693d048d9e84e9c40e6716e0d3abd
+PKG_HASH:=		f7df6b73c8d787cdde7e49eae6e761313f606b784051004b1cb2e81bf2d490fa
 PKG_DESCR:=		drm library
 PKG_SECTION:=		libs/video
 PKG_BUILDDEP:=		libpthread-stubs cairo libpciaccess
@@ -22,7 +22,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBDRM,libdrm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_ARGS+=	--disable-manpages
+CONFIGURE_ARGS+=	--disable-manpages \
+			--disable-valgrind
 
 libdrm-install:
 	$(INSTALL_DIR) $(IDIR_LIBDRM)/usr/lib
