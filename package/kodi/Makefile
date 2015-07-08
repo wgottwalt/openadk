@@ -109,7 +109,7 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-wayland \
 			--disable-pulse \
 			--disable-mid \
-			--enable-debug \
+			--disable-debug \
 			--enable-alsa \
 			--enable-texturepacker \
 			--enable-udev \
