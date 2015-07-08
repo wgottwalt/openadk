@@ -1,0 +1,15 @@
+--- empty-0.6.19b.orig/Makefile	2012-09-19 13:22:42.000000000 +0200
++++ empty-0.6.19b/Makefile	2015-07-09 00:19:44.000000000 +0200
+@@ -10,10 +10,10 @@
+ #
+ 
+ 
+-CC =	gcc
++CC ?=	gcc
+ LIBS =	-lutil
+ 
+-PREFIX = /usr/local
++PREFIX = /usr
+ 
+ all:
+ 	${CC} ${CFLAGS} -Wall ${LIBS} -o empty empty.c
