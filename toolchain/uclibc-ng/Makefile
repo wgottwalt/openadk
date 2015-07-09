@@ -86,6 +86,9 @@ ifeq ($(ADK_TARGET_BINFMT_FLAT_SHARED),y)
 	$(SED) 's/.*\(UCLIBC_FORMAT_FDPIC_ELF\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 endif
+ifeq ($(ADK_TARGET_LIBC_ICONV),y)
+	$(SED) 's/.*\(UCLIBC_HAS_LOCALE\).*/\1=y/' ${WRKBUILD}/.config
+endif
 ifeq ($(ADK_TARGET_UCLINUX),y)
 	$(SED) 's/.*\(ARCH_USE_MMU\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
