@@ -60,12 +60,12 @@ GCC_FINAL_CONFOPTS:=
 
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS),)
-GCC_CONFOPTS+=         --enable-tls --enable-threads --enable-libatomic
+GCC_FINAL_CONFOPTS+=	--enable-tls --enable-threads --enable-libatomic
 else
-GCC_CONFOPTS+=         --disable-tls --disable-threads --disable-libatomic
+GCC_FINAL_CONFOPTS+=	--disable-tls --disable-threads --disable-libatomic
 endif
 else
-GCC_CONFOPTS+=         --disable-tls --disable-threads --disable-libatomic
+GCC_FINAL_CONFOPTS+=	--disable-tls --disable-threads --disable-libatomic
 endif
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS),y)
@@ -112,6 +112,10 @@ endif
 
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
 GCC_CONFOPTS+=		--with-mode=thumb
+endif
+
+ifeq ($(ADK_TARGET_ARCH_METAG),y)
+GCC_CONFOPTS+=		--enable-meta-default
 endif
 
 ifeq ($(ADK_CPU_CF),y)
@@ -214,6 +218,8 @@ endif
 			--enable-languages=c \
 			--disable-libssp \
 			--disable-shared \
+			--disable-threads \
+			--disable-multilib \
 			--without-headers
 	touch $@
 
@@ -242,6 +248,15 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 			--with-sysroot=$(STAGING_TARGET_DIR)
 	touch $@
 
+ifeq ($(ADK_TOOLCHAIN_GCC_4_2_4),y)
+$(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
+	PATH='$(TARGET_PATH)' $(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc
+	touch $@
+
+$(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
+	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc
+	touch $@
+else
 $(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
 	PATH='$(TARGET_PATH)' $(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc all-target-libgcc
 	touch $@
@@ -249,6 +264,7 @@ $(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
 $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
 	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc install-target-libgcc
 	touch $@
+endif
 
 $(GCC_BUILD_DIR_FINAL)/.configured:
 	mkdir -p $(GCC_BUILD_DIR_FINAL)

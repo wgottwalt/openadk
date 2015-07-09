@@ -67,6 +67,14 @@ PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 LIBSTDCXXVER:=		19
 endif
+ifeq ($(ADK_TOOLCHAIN_GCC_4_2_4),y)
+PKG_VERSION:=		4.2.4
+PKG_HASH:=		7cb75c5183bd18f415860084440377016dc78feeee2852227b831f2e4fcaa5d6
+PKG_SITES:=		http://gcc.cybermirror.org/releases/gcc-${PKG_VERSION}/
+PKG_RELEASE:=		1
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+LIBSTDCXXVER:=		19
+endif
 ifeq ($(ADK_TOOLCHAIN_GCC_GIT),y)
 PKG_VERSION:=		git
 PKG_SITES:=		git://gcc.gnu.org/git/gcc.git
