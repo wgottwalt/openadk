@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		tmux
-PKG_VERSION:=		1.9a
+PKG_VERSION:=		2.0
 PKG_RELEASE:=		1
-PKG_HASH:=		c5e3b22b901cf109b20dab54a4a651f0471abd1f79f6039d79b250d21c2733f5
+PKG_HASH:=		795f4b4446b0ea968b9201c25e8c1ef8a6ade710ebca4657dd879c35916ad362
 PKG_DESCR:=		terminal multiplexer
 PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		libevent ncurses
 PKG_DEPENDS:=		libevent libncurses libpthread
-PKG_URL:=		http://tmux.sourceforge.net
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tmux/}
+PKG_URL:=		http://tmux.github.io
+PKG_SITES:=		https://github.com/tmux/tmux/releases/download/2.0/
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
