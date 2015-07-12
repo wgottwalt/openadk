@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.6.10
+PKG_VERSION:=		5.6.11
 PKG_RELEASE:=		1
-PKG_HASH:=		1af720c955b0a57aa47606e928616e84c78868aff2a5f269c70601a77d6da8c1
+PKG_HASH:=		3f97dbb1c646b90e1ef638defabe429ef036f903b5baa1c34769d3de4fe62bd4
 PKG_DESCR:=		php language interpreter
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libpthread librt
@@ -22,7 +22,7 @@ PKGSD_PHP_CLI:=		php cli
 PKGSN_PHP_CLI:=		php
 
 PKG_FLAVOURS_PHP:=	MOD_BZ2 MOD_CURL MOD_FTP MOD_GD MOD_GMP MOD_MYSQL
-PKG_FLAVOURS_PHP+=	MOD_OPENSSL MOD_PGSQL MOD_SESSION MOD_SNMP MOD_SQLITE 
+PKG_FLAVOURS_PHP+=	MOD_OPENSSL MOD_SESSION MOD_SNMP MOD_SQLITE 
 PKG_FLAVOURS_PHP+=	MOD_SOCKETS MOD_XML MOD_SIMPLEXML MOD_ZLIB MOD_JSON
 PKG_FLAVOURS_PHP+=	MOD_LDAP MOD_PCNTL
 
@@ -50,9 +50,6 @@ PKGFD_MOD_OPENSSL:=	openssl support
 PKGFB_MOD_OPENSSL:=	openssl
 PKGFS_MOD_OPENSSL:=	libopenssl
 PKGFD_MOD_PCNTL:=	process control support
-PKGFD_MOD_PGSQL:=	pgsql support
-PKGFB_MOD_PGSQL:=	postgresql
-PKGFS_MOD_PGSQL:=	libpq
 PKGFD_MOD_SESSION:=	session support
 PKGFD_MOD_SNMP:=	snmp support
 PKGFB_MOD_SNMP:=	net-snmp
@@ -110,6 +107,7 @@ PKG_CONFIGURE_OPTS:=	\
 	--disable-dom \
 	--without-pear \
 	--without-gettext \
+	--without-pgsql \
 	--without-iconv \
 	--with-pcre-regex=no \
 	--with-kerberos=no
@@ -172,11 +170,6 @@ PKG_CONFIGURE_OPTS+=	--enable-pcntl
 else
 PKG_CONFIGURE_OPTS+=	--disable-pcntl
 endif
-ifneq ($(ADK_PACKAGE_PHP_MOD_PGSQL),)
-PKG_CONFIGURE_OPTS+=	--with-pgsql=shared,"$(STAGING_TARGET_DIR)/usr"
-else
-PKG_CONFIGURE_OPTS+=	--without-pgsql
-endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_SESSION),)
 PKG_CONFIGURE_OPTS+=	--enable-session=shared
 else
@@ -226,7 +219,6 @@ $(eval $(call PKG_template,PHP_MOD_JSON,php-mod-json,$(PKG_VERSION)-${PKG_RELEAS
 $(eval $(call PKG_template,PHP_MOD_LDAP,php-mod-ldap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_MYSQL,php-mod-mysql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_OPENSSL,php-mod-openssl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,PHP_MOD_PGSQL,php-mod-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_SESSION,php-mod-session,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_SNMP,php-mod-snmp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,PHP_MOD_SOCKETS,php-mod-sockets,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -244,7 +236,6 @@ $(eval $(call PKG_mod_template,PHP_MOD_JSON,json))
 $(eval $(call PKG_mod_template,PHP_MOD_LDAP,ldap))
 $(eval $(call PKG_mod_template,PHP_MOD_MYSQL,mysql))
 $(eval $(call PKG_mod_template,PHP_MOD_OPENSSL,openssl))
-$(eval $(call PKG_mod_template,PHP_MOD_PGSQL,pgsql))
 $(eval $(call PKG_mod_template,PHP_MOD_SESSION,session))
 $(eval $(call PKG_mod_template,PHP_MOD_SOCKETS,sockets))
 $(eval $(call PKG_mod_template,PHP_MOD_SNMP,snmp))
