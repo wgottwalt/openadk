@@ -63,7 +63,7 @@ nginx-install:
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/nginx \
 		$(IDIR_NGINX)/usr/sbin
 	for f in nginx.conf mime.types fastcgi_params koi-utf koi-win win-utf; do \
-		cp $(WRKINST)/etc/nginx/$${f} \
+		cp ./files/$${f} \
 		$(IDIR_NGINX)/etc/nginx ; \
 	done
 	$(INSTALL_DIR) $(IDIR_NGINX)/srv/www
