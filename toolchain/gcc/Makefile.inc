@@ -18,6 +18,14 @@ PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 LIBSTDCXXVER:=		20
 endif
+ifeq ($(ADK_TOOLCHAIN_GCC_4_9_OR1K),y)
+PKG_VERSION:=		4.9.2-or1k
+PKG_HASH:=		70b267bf3f8d72d8dd2bec61016357984df47c8ed693d577742bdc326f65f806
+PKG_SITES:=		https://github.com/openrisc/or1k-gcc.git
+PKG_RELEASE:=		1
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+LIBSTDCXXVER:=		20
+endif
 ifeq ($(ADK_TOOLCHAIN_GCC_4_8_5),y)
 PKG_VERSION:=		4.8.5
 PKG_HASH:=		1dbc5cd94c9947fe5dffd298e569de7f44c3cedbd428fceea59490d336d8295a
@@ -26,7 +34,7 @@ PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 LIBSTDCXXVER:=		19
 endif
-ifeq ($(ADK_TOOLCHAIN_GCC_4_8_3_ARC),y)
+ifeq ($(ADK_TOOLCHAIN_GCC_4_8_ARC),y)
 # git commit 2b0dc74388f22ba98b36f7f57a9cc41aca62e223 arc-4.8-dev
 # from https://github.com/foss-for-synopsys-dwc-arc-processors/gcc.git
 PKG_VERSION:=		4.8.3
@@ -79,6 +87,5 @@ ifeq ($(ADK_TOOLCHAIN_GCC_GIT),y)
 PKG_VERSION:=		git
 PKG_SITES:=		git://gcc.gnu.org/git/gcc.git
 PKG_RELEASE:=		1
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 LIBSTDCXXVER:=		19
 endif

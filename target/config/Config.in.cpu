@@ -548,6 +548,11 @@ config ADK_CPU_NIOS2
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
+config ADK_CPU_OR1K
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
 config ADK_CPU_PARISC
 	bool
 	select ADK_TARGET_WITH_NPTL
@@ -904,6 +909,7 @@ config ADK_TARGET_CPU_ARCH
 	default "mips" if ADK_TARGET_ARCH_MIPS && ADK_TARGET_BIG_ENDIAN
 	default "mipsel" if ADK_TARGET_ARCH_MIPS && ADK_TARGET_LITTLE_ENDIAN
 	default "nios2" if ADK_TARGET_ARCH_NIOS2
+	default "or1k" if ADK_TARGET_ARCH_OR1K
 	default "ppc" if ADK_CPU_PPC
 	default "ppc" if ADK_CPU_PPC_440
 	default "ppc64" if ADK_CPU_PPC64

@@ -75,6 +75,9 @@ endif
 ifeq ($(ADK_TARGET_ARCH),bfin)
 ADK_TARGET_KARCH:=blackfin
 endif
+ifeq ($(ADK_TARGET_ARCH),or1k)
+ADK_TARGET_KARCH:=openrisc
+endif
 ifeq ($(ADK_TARGET_ARCH),ppc)
 ADK_TARGET_KARCH:=powerpc
 endif
