@@ -26,7 +26,7 @@ PKGSS_LIBCURL:=		zlib libpthread
 PKG_FLAVOURS_CURL:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable ipv6 support
 
-PKG_CHOICES_LIBCURL:=	WITHOUT_SSL WITH_GNUTLS WITH_OPENSSL WITH_WOLFSSL
+PKG_CHOICES_CURL:=	WITHOUT_SSL WITH_GNUTLS WITH_OPENSSL WITH_WOLFSSL
 PKGCD_WITHOUT_SSL:=	use no ssl
 PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates libgmp
@@ -43,22 +43,22 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBCURL},${PKGSD_LIBCURL},${PKGSC_LIBCURL},${PKG_OPTS}))
 
-ifeq (${ADK_PACKAGE_LIBCURL_WITHOUT_SSL},y)
+ifeq (${ADK_PACKAGE_CURL_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--without-ssl \
 			--without-gnutls \
 			--without-axtls
 endif
-ifeq (${ADK_PACKAGE_LIBCURL_WITH_OPENSSL},y)
+ifeq (${ADK_PACKAGE_CURL_WITH_OPENSSL},y)
 CONFIGURE_ARGS+=	--with-ssl="${STAGING_TARGET_DIR}/usr" \
 			--without-gnutls \
 			--without-axtls
 endif
-ifeq (${ADK_PACKAGE_LIBCURL_WITH_GNUTLS},y)
+ifeq (${ADK_PACKAGE_CURL_WITH_GNUTLS},y)
 CONFIGURE_ARGS+=	--with-gnutls="${STAGING_TARGET_DIR}/usr" \
 			--without-ssl \
 			--without-axtls
 endif
-ifeq (${ADK_PACKAGE_LIBCURL_WITH_WOLFSSL},y)
+ifeq (${ADK_PACKAGE_CURL_WITH_WOLFSSL},y)
 CONFIGURE_ARGS+=	--with-cyassl="${STAGING_TARGET_DIR}/usr" \
 			--without-ssl \
 			--without-gnutls \
