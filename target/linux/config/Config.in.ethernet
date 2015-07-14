@@ -29,6 +29,9 @@ config ADK_KERNEL_NET_VENDOR_REALTEK
 config ADK_KERNEL_NET_VENDOR_MARVELL
 	bool
 
+config ADK_KERNEL_NET_VENDOR_TI
+	bool
+
 config ADK_KERNEL_NET_VENDOR_VIA
 	bool
 
@@ -260,6 +263,15 @@ config ADK_KERNEL_MACB
 	default n
 	help
 	  Atmel NGW100 network driver
+
+config ADK_KERNEL_TI_DAVINCI_MDIO
+	tristate "BeagleBone Back Davinci"
+	select ADK_KERNEL_NET_VENDOR_TI
+	depends on ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+	default y if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+	default n
+	help
+	  TI Davinci driver
 
 config ADK_KERNEL_SKY2
 	tristate "Marvell Yukon SKY2 driver"
