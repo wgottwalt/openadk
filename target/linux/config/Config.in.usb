@@ -29,10 +29,18 @@ config ADK_KERNEL_USB_OHCI_HCD_PLATFORM
 config ADK_KERNEL_USB_LIBUSUAL
 	tristate
 
+config ADK_KERNEL_USB_NET_DRIVERS
+	bool
+
+config ADK_KERNEL_USB_USBNET
+	select ADK_KERNEL_USB_NET_DRIVERS
+        tristate
+
 config ADK_KERNEL_USB
 	tristate "USB support"
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_USB_SUPPORT
+	default m if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX
 	default m if ADK_TARGET_SYSTEM_IBM_X40
 	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
@@ -78,6 +86,7 @@ config ADK_KERNEL_USB_EHCI_HCD
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_BOARD_BCM28XX
 	depends on ADK_KERNEL_USB
+	default m if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX
 	default m if ADK_TARGET_SYSTEM_IBM_X40
 	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
@@ -102,12 +111,12 @@ config ADK_KERNEL_USB_EHCI_HCD
 
 	  You may want to read <file:Documentation/usb/ehci.txt>.
 
-
 config ADK_KERNEL_USB_UHCI_HCD
 	tristate "Support for UHCI controllers"
 	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_BOARD_BCM28XX
+	default m if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default m if ADK_TARGET_SYSTEM_IBM_X40
 	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
@@ -125,6 +134,7 @@ config ADK_KERNEL_USB_OHCI_HCD
 	tristate "Support for OHCI controllers"
 	depends on ADK_KERNEL_USB
 	depends on !ADK_TARGET_BOARD_BCM28XX
+	default m if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX
 	default m if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
@@ -277,6 +287,10 @@ config ADK_KERNEL_USB_SERIAL_VISOR
 	  <http://usbvisor.sourceforge.net/> for more information on using this
 	  driver.
 
+config ADK_KERNEL_USB_SERIAL_SIERRAWIRELESS
+	tristate "Support for Sierra Wireless USB-to-Serial converters"
+	depends on ADK_KERNEL_USB_SERIAL
+
 config ADK_KERNEL_USB_ATM
         tristate "Support for USB ATM devices"
 
@@ -287,8 +301,11 @@ config ADK_KERNEL_USB_ATM_SPEEDTOUCH
 config ADK_KERNEL_USB_SISUSBVGA
         tristate "USB 2.0 SVGA dongle support (Net2280/SiS315)"
 
-config ADK_KERNEL_USB_USBNET
-        tristate
+config ADK_KERNEL_USB_SIERRA_NET
+	tristate "Sierra Wireless MC8775 PCI Express"
+	select ADK_KERNEL_USB_USBNET
+	help
+	  Driver for WWAN modem Sierra Wireless MC8775 PCI Express
 	
 endmenu
 endmenu

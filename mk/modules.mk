@@ -1280,6 +1280,10 @@ $(eval $(call KMOD_template,USB_SERIAL,usb-serial,\
 	$(MODULES_DIR)/kernel/drivers/usb/serial/usbserial \
 ,70))
 
+$(eval $(call KMOD_template,USB_SERIAL_SIERRAWIRELESS,usb-serial-sierrawireless,\
+	$(MODULES_DIR)/kernel/drivers/usb/serial/sierra \
+,71))
+
 $(eval $(call KMOD_template,USB_SERIAL_BELKIN,usb-serial-belkin,\
 	$(MODULES_DIR)/kernel/drivers/usb/serial/belkin_sa \
 ,71))
@@ -1304,9 +1308,17 @@ $(eval $(call KMOD_template,USB_STORAGE,usb-storage,\
 	$(MODULES_DIR)/kernel/drivers/usb/storage/usb-storage \
 ,75))
 
+$(eval $(call KMOD_template,USB_USBNET,usb-usbnet,\
+	$(MODULES_DIR)/kernel/drivers/net/usb/usbnet \
+,74))
+
 $(eval $(call KMOD_template,USB_PEGASUS,usb-pegasus,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/pegasus \
 ,75))
+
+$(eval $(call KMOD_template,USB_SIERRA_NET,usb-sierra-net,\
+	$(MODULES_DIR)/kernel/drivers/net/usb/sierra_net \
+,75,kmod-usb-usbnet))
 
 $(eval $(call KMOD_template,USB_HSO,usb-hso,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/hso \
