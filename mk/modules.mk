@@ -1320,6 +1320,11 @@ $(eval $(call KMOD_template,USB_SIERRA_NET,usb-sierra-net,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/sierra_net \
 ,75,kmod-usb-usbnet))
 
+$(eval $(call KMOD_template,USB_NET_QMI_WWAN,usb-net-qmi-wwan,\
+	$(MODULES_DIR)/kernel/drivers/usb/class/cdc-wdm \
+	$(MODULES_DIR)/kernel/drivers/net/usb/qmi_wwan \
+,75,kmod-usb-usbnet))
+
 $(eval $(call KMOD_template,USB_HSO,usb-hso,\
 	$(MODULES_DIR)/kernel/drivers/net/usb/hso \
 ,75))

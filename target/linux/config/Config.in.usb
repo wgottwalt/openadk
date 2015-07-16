@@ -298,6 +298,11 @@ config ADK_KERNEL_USB_ATM_SPEEDTOUCH
 config ADK_KERNEL_USB_SISUSBVGA
         tristate "USB 2.0 SVGA dongle support (Net2280/SiS315)"
 
+config ADK_KERNEL_USB_NET_QMI_WWAN
+	tristate "Qualcomm LTE modems"
+	select ADK_KERNEL_USB_USBNET
+	help
+
 config ADK_KERNEL_USB_SIERRA_NET
 	tristate "Sierra Wireless MC8775 PCI Express"
 	select ADK_KERNEL_USB_USBNET
