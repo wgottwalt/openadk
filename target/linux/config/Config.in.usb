@@ -202,9 +202,6 @@ endmenu
 
 menu "USB devices support"
 
-config ADK_KERNEL_USB_NET_DRIVERS
-	tristate
-
 config ADK_KERNEL_USB_STORAGE
 	tristate "Support for USB storage devices"
 	select ADK_KERNEL_SCSI

@@ -62,10 +62,11 @@ serial=0
 speed=115200
 panicreboot=10
 keep=0
+grub=0
 
 function usage {
 cat >&2 <<EOF
-Syntax: $me [-f filesystem] [-c cfgfssize] [-d datafssize] [-k] [-n]
+Syntax: $me [-f filesystem] [-c cfgfssize] [-d datafssize] [-k] [-n] [-g]
     [-p panictime] [±q] [-s serialspeed] [±t] <target> <device> <archive>
 Partition sizes are in MiB. Filesystem type is currently ignored (ext4).
 To keep filesystem on data partition use -k.
@@ -75,7 +76,7 @@ EOF
 	exit $1
 }
 
-while getopts "c:d:f:hknp:qs:t" ch; do
+while getopts "c:d:f:ghknp:qs:t" ch; do
 	case $ch {
 	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 16 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
@@ -92,6 +93,7 @@ while getopts "c:d:f:hknp:qs:t" ch; do
 		fs=$OPTARG ;;
 	(h)	usage 0 ;;
 	(k)	keep=1 ;;
+	(g)	grub=1 ;;
 	(p)	if (( (panicreboot = OPTARG) < 0 || panicreboot > 300 )); then
 			print -u2 "$me: -p $OPTARG out of bounds"
 			exit 1
@@ -142,7 +144,7 @@ tgt=$2
 src=$3
 
 case $target {
-(banana-pro|raspberry-pi|raspberry-pi2|solidrun-imx6|default) ;;
+(banana-pro|pcengines-apu|raspberry-pi|raspberry-pi2|solidrun-imx6|default) ;;
 (*)
 	print -u2 "Unknown target '$target', exiting"
 	exit 1 ;;
@@ -284,7 +286,7 @@ else
 fi
 
 if (( grub )); then
-	tar -xOzf "$src" boot/grub/core.img >"$T/core.img"
+	tar -xOf "$src" boot/grub/core.img >"$T/core.img"
 	integer coreimgsz=$($statcmd "$T/core.img")
 else
 	coreimgsz=65024

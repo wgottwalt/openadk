@@ -80,7 +80,7 @@ ifeq ($(ADK_TARGET_FS),usb)
 targethelp:
 	@echo 'The root tarball is: ${FW_DIR}/${ROOTFSTARBALL}'
 	@echo "To install everything to USB use:"
-	@echo "sudo ./scripts/install.sh -t /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "sudo ./scripts/install.sh -g -t default /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(ADK_TARGET_FS),iso)
 targethelp:
