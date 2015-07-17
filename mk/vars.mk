@@ -289,8 +289,8 @@ endif
 
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_NEON),y)
-TARGET_CFLAGS+=		-funsafe-math-optimizations
-TARGET_CXXFLAGS+=	-funsafe-math-optimizations
+TARGET_CFLAGS+=		-funsafe-math-optimizations -ffast-math
+TARGET_CXXFLAGS+=	-funsafe-math-optimizations -ffast-math
 endif
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
 TARGET_CFLAGS+=		-mthumb -Wa,-mimplicit-it=thumb

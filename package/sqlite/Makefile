@@ -29,6 +29,8 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,LIBSQLITE,libsqlite,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBSQLITE},${PKGSD_LIBSQLITE},${PKGSC_LIBSQLITE},${PKG_OPTS}))
 $(eval $(call PKG_template,SQLITE_CLI,sqlite-cli,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CFLAGS:=		$(filter-out -ffast-math,$(TARGET_CFLAGS))
+
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 CONFIGURE_ARGS+=	--enable-dynamic-extensions=no
 endif

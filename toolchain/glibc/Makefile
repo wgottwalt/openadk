@@ -4,6 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 include ../rules.mk
 
+TARGET_CFLAGS:=		$(filter-out -ffast-math,$(TARGET_CFLAGS))
+
 # glibc does not compile with Os
 TARGET_CFLAGS:=		$(subst Os,O2,$(TARGET_CFLAGS))
 ifneq ($(ADK_DEBUG),)
