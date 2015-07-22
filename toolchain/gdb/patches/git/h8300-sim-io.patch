@@ -1,3 +1,18 @@
+diff --git a/gdb/h8300-tdep.c b/gdb/h8300-tdep.c
+index 4567d19..ea4064c 100644
+--- a/gdb/h8300-tdep.c
++++ b/gdb/h8300-tdep.c
+@@ -1249,8 +1249,8 @@ static const unsigned char *
+ h8300_breakpoint_from_pc (struct gdbarch *gdbarch, CORE_ADDR *pcptr,
+ 			  int *lenptr)
+ {
+-  /*static unsigned char breakpoint[] = { 0x7A, 0xFF }; *//* ??? */
+-  static unsigned char breakpoint[] = { 0x01, 0x80 };	/* Sleep */
++  static unsigned char breakpoint[] = { 0x7A, 0xFF };   /* ??? */
++  /*static unsigned char breakpoint[] = { 0x01, 0x80 };*/	/* Sleep */
+ 
+   *lenptr = sizeof (breakpoint);
+   return breakpoint;
 diff --git a/sim/h8300/Makefile.in b/sim/h8300/Makefile.in
 index da68255..713de00 100644
 --- a/sim/h8300/Makefile.in
@@ -17,7 +32,7 @@ index da68255..713de00 100644
 +
 +io.o: io.c sim-main.h
 diff --git a/sim/h8300/compile.c b/sim/h8300/compile.c
-index d084b5d..b2fe38a 100644
+index d084b5d..00b381e 100644
 --- a/sim/h8300/compile.c
 +++ b/sim/h8300/compile.c
 @@ -41,11 +41,14 @@
@@ -339,7 +354,7 @@ index d084b5d..b2fe38a 100644
        cidx = h8_get_cache_idx (sd, pc);
        if (cidx == (unsigned short) -1 ||
  	  cidx >= sd->sim_cache_size)
-@@ -1964,6 +2114,13 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+@@ -1964,6 +2114,15 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
  	{
  	  cycles += code->cycles;
  	  insts++;
@@ -347,13 +362,24 @@ index d084b5d..b2fe38a 100644
 +	  if ((vector = iosimulation (sd, cycles)) && 
 +	      (intlevel(sd) < (vector & 0xff00)))
 +	    {
++	      if (code->opcode == O (O_SLEEP, SN))
++		pc += 2;
 +	      exception(vector & 0xff, (vector & 0xff00) >> 8);
 +	      goto end;
 +	    }
  	}
  
        switch (code->opcode)
-@@ -3569,16 +3726,20 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+@@ -3274,7 +3433,7 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+ 	    goto end;
+ 
+ 	  if (code->src.type == X (OP_IMM, SB))
+-	    fetch (sd, &code->src, &ea);
++ 	    fetch (sd, &code->src, &ea);
+ 	  else
+ 	    ea = 1;
+ 
+@@ -3569,16 +3728,20 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
  	  /* Pops exr and ccr before pc -- otherwise identical to rts.  */
  	  tmp = h8_get_reg (sd, SP_REGNUM);
  
@@ -379,8 +405,20 @@ index d084b5d..b2fe38a 100644
  	      tmp += 4;
  	    }
  	  else
-@@ -3643,41 +3804,13 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+@@ -3635,49 +3798,25 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+ 	      sim_engine_set_run_state (sd, sim_stopped, 
+ 					SIM_WSTOPSIG (h8_get_reg (sd, 0)));
  	    }
+-#endif
+ 	  else
+ 	    {
+ 	      /* Treat it as a sigtrap.  */
+ 	      sim_engine_set_run_state (sd, sim_stopped, SIGTRAP);
+ 	    }
++#else
++	  else
++	    sleep(0);
++#endif
  	  goto end;
  
 -	case O (O_TRAPA, SB):		/* trapa */
@@ -419,13 +457,14 @@ index d084b5d..b2fe38a 100644
 -	  else
 -	    pc = GET_MEMORY_L (0x20 + res * 4);
 +	  res += 8;
++	  pc += 2;
 +	  exception(res, -1);
  	  goto end;
 +	}
  
  	case O (O_BPT, SN):
  	  sim_engine_set_run_state (sd, sim_stopped, SIGTRAP);
-@@ -5038,15 +5171,13 @@ sim_load (SIM_DESC sd, const char *prog, bfd *abfd, int from_tty)
+@@ -5038,15 +5177,13 @@ sim_load (SIM_DESC sd, const char *prog, bfd *abfd, int from_tty)
      free (h8_get_memory_buf (sd));
    if (h8_get_cache_idx_buf (sd))
      free (h8_get_cache_idx_buf (sd));
@@ -442,7 +481,7 @@ index d084b5d..b2fe38a 100644
  
    /* `msize' must be a power of two.  */
    if ((memory_size & (memory_size - 1)) != 0)
-@@ -5057,6 +5188,8 @@ sim_load (SIM_DESC sd, const char *prog, bfd *abfd, int from_tty)
+@@ -5057,6 +5194,8 @@ sim_load (SIM_DESC sd, const char *prog, bfd *abfd, int from_tty)
      }
    h8_set_mask (sd, memory_size - 1);
  
@@ -451,7 +490,7 @@ index d084b5d..b2fe38a 100644
    if (sim_load_file (sd, myname, sim_callback, prog, prog_bfd,
  		     sim_kind == SIM_OPEN_DEBUG,
  		     0, sim_write)
-@@ -5107,3 +5240,187 @@ sim_create_inferior (SIM_DESC sd, struct bfd *abfd, char **argv, char **env)
+@@ -5107,3 +5246,187 @@ sim_create_inferior (SIM_DESC sd, struct bfd *abfd, char **argv, char **env)
    
    return SIM_RC_OK;
  }
