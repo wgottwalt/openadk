@@ -17,6 +17,9 @@ ifeq (/usr/lib/libtinfo.so, $(wildcard /usr/lib/libtinfo.so))
 LIBS+=		-ltinfo
 endif
 
+ifeq (/usr/include/ncursesw/curses.h, $(wildcard /usr/include/ncursesw/curses.h))
+HOST_CFLAGS+=	-I/usr/include/ncursesw -DCURSES_LOC="<curses.h>"
+else
 ifeq (/usr/include/ncurses/ncurses.h, $(wildcard /usr/include/ncurses/ncurses.h))
 HOST_CFLAGS+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses.h>"
 else
@@ -42,6 +45,7 @@ HOST_CFLAGS+=	-DCURSES_LOC="<ncurses.h>"
 else
 HOST_CFLAGS+=	-DCURSES_LOC="<curses.h>"
 LIBS=		-lcurses
+endif
 endif
 endif
 endif
