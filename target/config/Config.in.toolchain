@@ -14,7 +14,7 @@ config ADK_TARGET_LIBICONV
 	select ADK_PACKAGE_LIBICONV
 
 config ADK_TARGET_LIBICONV_TINY
-	prompt "Use tiny libionv package"
+	prompt "Use tiny libiconv package"
 	select ADK_PACKAGE_LIBICONV_TINY
 
 endchoice
