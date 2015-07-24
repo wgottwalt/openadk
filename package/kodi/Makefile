@@ -4,8 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		22688ad83516d3c6ca0d86c1ec2288396050712f
+PKG_VERSION:=		15.0
 PKG_RELEASE:=		1
+PKG_HASH:=		27dba173cfe74b323f4dbaa72ae2bfe5961f76c27bddcd5210253be91cae0dff
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx libsquish
@@ -27,7 +28,10 @@ PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
 PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish
 PKG_URL:=		http://kodi.tv/
-PKG_SITES:=		https://github.com/xbmc/xbmc.git
+PKG_SITES:=		https://github.com/xbmc/xbmc/archive/
+
+DISTFILES:=		$(PKG_VERSION)-Isengard.tar.gz
+WRKDIST=		${WRKDIR}/xbmc-$(PKG_VERSION)-Isengard
 
 PKG_FLAVOURS_KODI:=	WITH_SMB WITH_SMB3 WITH_NFS WITH_SSH WITH_AVAHI WITH_CEC 
 PKG_FLAVOURS_KODI+=	WITH_WEBSERVER WITH_RTMP WITH_BLURAY WITH_LIRC
