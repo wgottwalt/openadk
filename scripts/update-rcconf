@@ -24,7 +24,8 @@ fi
 
 for service in $(grep ^ADK_RUNTIME_START_ $topdir/.config |grep -v ADK_RUNTIME_START_SERVICES);do
 	rcname=$(echo $service|sed -e "s#ADK_RUNTIME_START_##")
-	rcname=$(echo $rcname| sed -e "s#=y##")
+	mode=$(echo $rcname|cut -d \= -f 2)
+	rcname=$(echo $rcname| sed -e "s#=.*##")
 	rcname=$(echo $rcname| sed -e "s#^BUSYBOX_##")
 	rcname=$(echo $rcname| tr '[:upper:]' '[:lower:]')
 	# workarounds where package name not equal to service name
@@ -37,5 +38,9 @@ for service in $(grep ^ADK_RUNTIME_START_ $topdir/.config |grep -v ADK_RUNTIME_S
 	if [ $rcname = "openssh_server" ];then
 		rcname=openssh
 	fi
-	sed -i -e "s#$rcname=\"NO\"#$rcname=\"YES\"#" $rcconf
+	if [ $mode = "m" ]; then
+	  sed -i -e "s#$rcname=\"NO\"#$rcname=\"DAEMON\"#" $rcconf
+	else
+	  sed -i -e "s#$rcname=\"NO\"#$rcname=\"YES\"#" $rcconf
+	fi
 done

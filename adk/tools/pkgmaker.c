@@ -474,7 +474,7 @@ int main() {
 									else
 										fprintf(icfg, "config ADK_RUNTIME_START_%s\n", toupperstr(sname));
 									fprintf(icfg, "\tprompt \"Start %s on boot\"\n", sname2);
-									fprintf(icfg, "\tboolean\n");
+									fprintf(icfg, "\ttristate\n");
 									if (strncmp("busybox", sname, 7) == 0)
 										fprintf(icfg, "\tdepends on BUSYBOX_%s\n", toupperstr(sname2));
 									else
