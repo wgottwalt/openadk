@@ -4,13 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		netperf
-PKG_VERSION:=		2.4.3
+PKG_VERSION:=		2.7.0
 PKG_RELEASE:=		1
-PKG_HASH:=		f6cbcc3d41da1737dc8ca65859a902eafb41fc43f3be59306ee17c5372e7e6ff
+PKG_HASH:=		9170c4758463bc5342dcdbfc88a40b586fcc9d7ccca048ecbb3b2d49387a28b9
 PKG_DESCR:=		network performance measurement tools
 PKG_SECTION:=		net/perf
 PKG_URL:=		http://www.netperf.org/netperf/
-PKG_SITES:=		ftp://ftp.netperf.org/netperf/archive/
+PKG_SITES:=		ftp://ftp.netperf.org/netperf/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
