@@ -18,7 +18,7 @@ config ADK_DL_DIR
 	  Use an absolute path.
 
 config ADK_EXPERIMENTAL
-	bool "Enable support for experimental features"
+	bool "Enable support for experimental features and targets"
 	default n
 	help
 	  This enables combinations of toolchain components or kernel
