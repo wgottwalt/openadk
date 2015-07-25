@@ -13,7 +13,7 @@ autostart)
 	;;
 start)
 	[ -f /etc/mararc ] || exit
-	[ -d /etc/maradns ] || mkdir /etc/maradns
+	[ -d /etc/maradns/logger ] || mkdir -p /etc/maradns/logger
 	/usr/sbin/maradns &
 	;;
 stop)

@@ -1,9 +1,0 @@
---- maradns-1.4.05.orig/qual/Makefile.threadsafe	2006-01-22 06:22:01.000000000 +0100
-+++ maradns-1.4.05/qual/Makefile.threadsafe	2011-01-21 16:48:40.348658539 +0100
-@@ -8,5 +8,5 @@ clean:
- 	rm -f qual_timestamp.o
- 
- qual_timestamp.o: qual_timestamp.c ../libs/JsStr.h ../libs/MaraHash.h ../MaraDns.h
--	$(CC) -c $(FLAGS) -o qual_timestamp.o qual_timestamp.c 
-+	$(CC) -c $(CFLAGS) -o qual_timestamp.o qual_timestamp.c 
- 
