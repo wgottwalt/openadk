@@ -1,0 +1,25 @@
+--- brutefir-1.0m.orig/Makefile	2013-11-29 15:55:01.000000000 +0200
++++ brutefir-1.0m/Makefile	2015-07-25 21:37:39.948001421 +0200
+@@ -17,17 +17,17 @@ FFTW_LIB	= -lfftw3 -lfftw3f
+ 
+ ###################################
+ # Binaries
+-FLEX	= flex
+-LD	= ld
+-CC	= gcc
+-AS	= as
++#FLEX	= flex
++#LD	= ld
++#CC	= gcc
++#AS	= as
+ 
+ ###################################
+ # Flags
+ CC_WARN		= -Wall -Wpointer-arith -Wshadow \
+ -Wcast-align -Wwrite-strings -Wstrict-prototypes \
+ -Wmissing-prototypes -Wmissing-declarations -Wnested-externs
+-CC_FLAGS	= $(DEFINE) -O2
++CC_FLAGS	= $(DEFINE) $(CFLAGS) 
+ CC_FPIC		= -fPIC
+ LD_SHARED	= -shared
+ 
