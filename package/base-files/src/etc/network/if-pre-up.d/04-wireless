@@ -78,6 +78,8 @@ case "$IF_WIRELESS_MODE" in
 			echo "rsn_pairwise=CCMP" >> /tmp/hostapd.conf
 			echo "wpa_passphrase=$IF_WIRELESS_PASSPHRASE" >> /tmp/hostapd.conf
 		}
+		[ -f /etc/hostapd.conf.post ] && \
+			cat /etc/hostapd.conf.post >> /tmp/hostapd.conf
 		;;
 	sta)
 		ip link set up dev ${IFACE}
