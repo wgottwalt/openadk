@@ -12,6 +12,7 @@ set -e
 wpa=0
 wpa1=0
 wpa2=0
+pairwise=""
 
 case "$IF_WIRELESS_SECURITY" in
 	none)
@@ -23,10 +24,12 @@ case "$IF_WIRELESS_SECURITY" in
 	wpa)
 		sec=1
 		wpa1=1
+		pairwise=TKIP
 		;;
 	wpa2)
 		sec=1
 		wpa2=1
+		pairwise=CCMP
 		;;
 	wpa+wpa2)
 		sec=1
@@ -36,6 +39,8 @@ case "$IF_WIRELESS_SECURITY" in
 		sec=1
 		;;
 esac
+
+[ "$IF_WIRELESS_PAIRWISE" ] || IF_WIRELESS_PAIRWISE=$pairwise
 
 case "$IF_WIRELESS_MODE" in
 	ap)
@@ -55,14 +60,14 @@ case "$IF_WIRELESS_MODE" in
 			logger -t hostap "using WPA for security"
 			echo "wpa=1" >> /tmp/hostapd.conf
 			echo "wpa_key_mgmt=WPA-PSK" >> /tmp/hostapd.conf
-			echo "wpa_pairwise=TKIP" >> /tmp/hostapd.conf
+			echo "wpa_pairwise=$IF_WIRELESS_PAIRWISE" >> /tmp/hostapd.conf
 			echo "wpa_passphrase=$IF_WIRELESS_PASSPHRASE" >> /tmp/hostapd.conf
 		}
 		[ $wpa2 -eq 1 ] && {
 			logger -t hostap "using WPA2 for security"
 			echo "wpa=2" >> /tmp/hostapd.conf
 			echo "wpa_key_mgmt=WPA-PSK" >> /tmp/hostapd.conf
-			echo "rsn_pairwise=CCMP" >> /tmp/hostapd.conf
+			echo "rsn_pairwise=$IF_WIRELESS_PAIRWISE" >> /tmp/hostapd.conf
 			echo "wpa_passphrase=$IF_WIRELESS_PASSPHRASE" >> /tmp/hostapd.conf
 		}
 		[ $wpa -eq 1 ] && {
