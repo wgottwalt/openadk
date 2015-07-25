@@ -4,8 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libcec
-PKG_VERSION:=		185559110dc88aeca0915a90b3b369d2d42c0f7c
-PKG_RELEASE:=		2
+PKG_VERSION:=		d997b9aa52b9fd4b2ed14e257c63582eae90801e
+PKG_RELEASE:=		1
 PKG_DESCR:=		control your device with your tv remote control
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libudev libplatform
