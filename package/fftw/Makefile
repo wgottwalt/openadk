@@ -13,11 +13,9 @@ PKG_URL:=		http://www.fftw.org
 PKG_SITES:=		http://www.fftw.org/
 PKG_OPTS:=		dev
 
-# if downloaded package is not ending with .tar.xz use following
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
-
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
