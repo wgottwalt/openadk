@@ -558,6 +558,16 @@ case $target {
 		break
 	done
 	;;
+(banana-pro)
+	for x in "$fwdir"/*.dtb; do
+		[[ -e "$x" ]] && cp "$fwdir"/*.dtb "$R/boot/"
+		break
+	done
+	#Scrip für uboot erstellen
+	mkimage -A arm -O linux -T script -C none -a 0 -e 0 \
+	-n "BananaPro" \
+	-d $fwdir/boot.script.bpi $R/boot/boot.scr.uimg
+	;;
 }
 
 cd "$R"

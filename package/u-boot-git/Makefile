@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot-git
 PKG_VERSION:=		3bfe3ce2a6e3b04da1d04dbc0520dcc26e17f98a
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 HOST_BUILDDEP:=		openssl-host device-tree-compiler-host
@@ -67,6 +67,7 @@ do-build:
 u-boot-git-install:
 	$(CP) $(WRKBUILD)/$(UBOOT) $(FW_DIR)
 	$(INSTALL_DIR) $(IDIR_U_BOOT_GIT)/etc
+	#$(INSTALL_DIR) $(IDIR_U_BOOT_GIT)/boot
 	$(CP) ./files/fw_env.config $(IDIR_U_BOOT_GIT)/etc
 	$(INSTALL_DIR) $(IDIR_U_BOOT_GIT)/usr/bin
 	#$(INSTALL_BIN) $(WRKBUILD)/tools/env/fw_printenv \
@@ -74,6 +75,7 @@ u-boot-git-install:
 	#(cd $(IDIR_U_BOOT_GIT)/usr/bin && ln -sf fw_printenv fw_setenv)
 	#$(INSTALL_BIN) ./files/uboot_print_env $(IDIR_U_BOOT_GIT)/usr/bin
 	#$(INSTALL_BIN) ./files/uboot_set_env $(IDIR_U_BOOT_GIT)/usr/bin
+	$(INSTALL_BIN) ./files/boot.script.bpi $(FW_DIR)
 
 include $(ADK_TOPDIR)/mk/host-bottom.mk
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
