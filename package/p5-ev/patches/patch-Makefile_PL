@@ -1,65 +1,17 @@
---- EV-4.17.orig/Makefile.PL	2013-08-01 04:08:54.000000000 +0200
-+++ EV-4.17/Makefile.PL	2014-06-23 18:55:22.780438631 +0200
-@@ -112,7 +112,7 @@ the default here unless you run into com
+--- EV-4.21.orig/Makefile.PL	2015-06-20 13:09:04.000000000 +0200
++++ EV-4.21/Makefile.PL	2015-07-25 21:23:44.388977954 +0200
+@@ -1,5 +1,4 @@
+ use strict qw(vars subs);
+-use Canary::Stability EV => 1, 5.008002;
+ use Config;
+ use ExtUtils::MakeMaker;
  
- EOF
- 
--$DEFINE .= " -DEV_USE_POLL=" . (0 + (prompt ("Enable poll backend (y/n)?", (-e "/usr/include/poll.h") ? "y" : "n") =~ /[yY]/));
-+$DEFINE .= " -DEV_USE_POLL=" . (0 + (prompt ("Enable poll backend (y/n)?", "n") =~ /[yY]/));
- 
- print <<EOF;
- 
-@@ -131,7 +131,7 @@ EOF
- 
- my $can_epoll = -e "/usr/include/sys/epoll.h";
- $can_epoll = $ENV{EV_EPOLL} if exists $ENV{EV_EPOLL};
--$DEFINE .= " -DEV_USE_EPOLL=" . (0 + (prompt ("Enable epoll backend (y/n)?", $can_epoll ? "y" : "n") =~ /[yY]/));
-+$DEFINE .= " -DEV_USE_EPOLL=" . (0 + (prompt ("Enable epoll backend (y/n)?", "y") =~ /[yY]/));
- 
- print <<EOF;
- 
-@@ -159,7 +159,7 @@ EOF
- 
- my $can_kqueue = -e "/usr/include/sys/event.h";
- $can_kqueue = $ENV{EV_KQUEUE} if exists $ENV{EV_KQUEUE};
--$DEFINE .= " -DEV_USE_KQUEUE=" . (0 + (prompt ("Enable kqueue backend (y/n)?", $can_kqueue ? "y" : "n") =~ /[yY]/));
-+$DEFINE .= " -DEV_USE_KQUEUE=" . (0 + (prompt ("Enable kqueue backend (y/n)?", "n") =~ /[yY]/));
- 
- print <<EOF;
- 
-@@ -172,7 +172,7 @@ at runtime, with a safe fallback to othe
- 
- EOF
- 
--$DEFINE .= " -DEV_USE_PORT=" . (0 + (prompt ("Enable event port backend (y/n)?", (-e "/usr/include/sys/port.h") ? "y" : "n") =~ /[yY]/));
-+$DEFINE .= " -DEV_USE_PORT=" . (0 + (prompt ("Enable event port backend (y/n)?", "n") =~ /[yY]/));
- 
- print <<EOF;
- 
-@@ -210,7 +210,7 @@ EOF
- 
- my $can_inotify = -e "/usr/include/sys/inotify.h";
- $can_inotify = $ENV{EV_INOTIFY} if exists $ENV{EV_INOTIFY};
--$DEFINE .= " -DEV_USE_INOTIFY=" . (0 + (prompt ("Enable inotify support (y/n)?", $can_inotify ? "y" : "n") =~ /[yY]/));
-+$DEFINE .= " -DEV_USE_INOTIFY=" . (0 + (prompt ("Enable inotify support (y/n)?", "n") =~ /[yY]/));
- 
- print <<EOF;
- 
-@@ -227,7 +227,7 @@ EOF
- 
- my $can_eventfd = -e "/usr/include/sys/eventfd.h";
- $can_eventfd = $ENV{EV_EVENTFD} if exists $ENV{EV_EVENTFD};
--$DEFINE .= " -DEV_USE_EVENTFD=" . (0 + (prompt ("Enable linux eventfd support (y/n)?", $can_eventfd ? "y" : "n") =~ /[yY]/));
-+$DEFINE .= " -DEV_USE_EVENTFD=" . (0 + (prompt ("Enable linux eventfd support (y/n)?", "n") =~ /[yY]/));
- 
- print <<EOF;
- 
-@@ -243,7 +243,7 @@ EOF
- 
- my $can_signalfd = -e "/usr/include/sys/signalfd.h";
- $can_signalfd = $ENV{EV_SIGNALFD} if exists $ENV{EV_SIGNALFD};
--$DEFINE .= " -DEV_USE_SIGNALFD=" . (0 + (prompt ("Enable linux signalfd support (y/n)?", $can_signalfd ? "y" : "n") =~ /[yY]/));
-+$DEFINE .= " -DEV_USE_SIGNALFD=" . (0 + (prompt ("Enable linux signalfd support (y/n)?", "n") =~ /[yY]/));
- 
- print <<EOF;
- 
+@@ -299,7 +298,7 @@ WriteMakefile(
+        @anyevent,
+        "common::sense" => 0,
+     },
+-    CONFIGURE_REQUIRES => { "ExtUtils::MakeMaker" => 6.52, "Canary::Stability" => 0 },
++    CONFIGURE_REQUIRES => { "ExtUtils::MakeMaker" => 6.52 },
+     VERSION_FROM => "EV.pm",
+     PM           => {
+ 		    'EV.pm'		=> '$(INST_LIB)/EV.pm',

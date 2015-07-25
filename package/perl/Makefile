@@ -9,6 +9,7 @@ PKG_RELEASE:=		3
 PKG_HASH:=		655e11a8ffba8853efcdce568a142c232600ed120ac24aaebb4e6efe74e85b2b
 PKG_DESCR:=		perl interpreter
 PKG_SECTION:=		dev/lang
+PKG_DEPENDS:=		librt libpthread
 PKG_BUILDDEP:=		perl-host
 PKG_URL:=		http://www.perl.org/
 PKG_SITES:=		http://www.cpan.org/src/

@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		p5-dbi
-PKG_VERSION:=		1.631
+PKG_VERSION:=		1.633
 PKG_RELEASE:=		1
-PKG_HASH:=		d70a7420863055917fe204c83e6a83838c58f7483baa68499727720899cdd511
+PKG_HASH:=		e2c1badcc9f672bf31630b36ecd230f7eb04dbf055e6daf7edeed0e9ebcf5ee7
 PKG_DESCR:=		database independent interface
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
