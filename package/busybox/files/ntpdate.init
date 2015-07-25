@@ -1,0 +1,20 @@
+#!/bin/sh
+#PKG busybox
+#INIT 55
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${ntpdate:-NO}" = x"NO" && exit 0
+	exec sh $0 start
+	;;
+start)
+	/usr/sbin/ntpd -n -q $ntpd_flags
+	;;
+*)
+	echo "Usage: $0 {start}"
+	exit 1
+	;;
+esac
+exit $?

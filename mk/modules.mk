@@ -214,6 +214,10 @@ $(eval $(call KMOD_template,INET_TUNNEL,inet-tunnel,\
 	$(MODULES_DIR)/kernel/net/ipv4/tunnel4 \
 ,20))
 
+$(eval $(call KMOD_template,NET_IP_TUNNEL,net-ip-tunnel,\
+	$(MODULES_DIR)/kernel/net/ipv4/ip_tunnel \
+,30))
+
 $(eval $(call KMOD_template,NET_IPIP,net-ipip,\
 	$(MODULES_DIR)/kernel/net/ipv4/ipip \
 ,60))
@@ -224,7 +228,7 @@ $(eval $(call KMOD_template,IPV6,ipv6,\
 
 $(eval $(call KMOD_template,IPV6_SIT,ipv6-sit,\
 	$(MODULES_DIR)/kernel/net/ipv6/sit \
-,25))
+,35))
 
 $(eval $(call KMOD_template,PPP,ppp,\
 	$(MODULES_DIR)/kernel/drivers/net/slip/slhc \

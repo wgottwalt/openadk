@@ -176,16 +176,14 @@ if [[ $X != *@(Native compiler works)* ]]; then
 	out=1
 fi
 
-if [[ ! -s /usr/include/ncurses.h ]]; then
-	if [[ ! -s /usr/include/curses.h ]]; then
-		if [[ ! -s /usr/include/ncurses/ncurses.h ]]; then
-			if [[ ! -s /usr/local/opt/ncurses/include/ncursesw/ncurses.h ]]; then
-				echo Install ncurses header files, please.
-				echo
-				out=1
-			fi
-		fi
-	fi
+if [[ ! -s /usr/include/ncursesw/curses.h && \
+    ! -s /usr/include/ncurses.h && \
+    ! -s /usr/include/curses.h && \
+    ! -s /usr/include/ncurses/ncurses.h && \
+    ! -s /usr/local/opt/ncurses/include/ncursesw/ncurses.h ]]; then
+	echo Install ncurses header files, please.
+	echo
+	out=1
 fi
 
 if ! which wget >/dev/null 2>&1; then

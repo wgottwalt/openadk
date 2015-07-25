@@ -8,7 +8,7 @@ Before you can start you need to install some software:
 - gcc or clang
 - g++ or clang++
 - binutils 
-- make
+- GNU make
 - tar
 - gzip
 - wget

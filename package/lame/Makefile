@@ -28,6 +28,9 @@ $(eval $(call PKG_template,LAME,lame,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LIBMP3LAME,libmp3lame,$(PKG_VERSION)-${PKG_RELEASE},,${PKGSD_LIBMP3LAME},${PKGSC_LIBMP3LAME},${PKG_OPTS}))
 
 TARGET_LDFLAGS+=	-ltinfo
+ifeq ($(ADK_TARGET_ARCH_X86),y)
+TARGET_CFLAGS+=		-msse
+endif
 
 lame-install:
 	$(INSTALL_DIR) $(IDIR_LAME)/usr/bin

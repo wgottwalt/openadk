@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
 PKG_VERSION:=		15.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		27dba173cfe74b323f4dbaa72ae2bfe5961f76c27bddcd5210253be91cae0dff
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
