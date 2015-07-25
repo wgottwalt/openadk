@@ -5,16 +5,25 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		maradns
 PKG_VERSION:=		2.0.09
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		e1ee80836f0fbc47b9b94ec839e112ea19c40bed0b70d672d231849a4dea1083
 PKG_DESCR:=		small and secure DNS server
 PKG_SECTION:=		net/dns
-PKG_DEPENDS:=		libpthread librt
+PKG_DEPENDS:=		libpthread librt duende
 PKG_URL:=		http://www.maradns.org
 PKG_SITES:=		http://maradns.samiam.org/download/2.0/${PKG_VERSION}/
 PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+
+PKG_SUBPKGS:=		MARADNS DUENDE DEADWOOD ZONESERVER ASKMARA FETCHZONE
+PKGSD_DUENDE:=		maradns deamonising tool
+PKGSD_DEADWOOD:=	small and secure recursive DNS server
+PKGSN_DEADWOOD:=	duende
+PKGSD_ZONESERVER:=	maradns zone transfer daemon
+PKGSN_ZONESERVER:=	duende
+PKGSD_ASKMARA:=		maradns simple dns query tool
+PKGSD_FETCHZONE:=	maradns zone retrieval tool
 
 PKG_FLAVOURS_MARADNS:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
@@ -22,6 +31,11 @@ PKGFD_WITH_IPV6:=	enable IPv6 support
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,MARADNS,maradns,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DUENDE,duende,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DUENDE},${PKG_SECTION}))
+$(eval $(call PKG_template,DEADWOOD,deadwood,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DEADWOOD},${PKG_SECTION}))
+$(eval $(call PKG_template,ZONESERVER,zoneserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ZONESERVER},${PKG_SECTION}))
+$(eval $(call PKG_template,ASKMARA,askmara,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASKMARA},${PKG_SECTION}))
+$(eval $(call PKG_template,FETCHZONE,fetchzone,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FETCHZONE},${PKG_SECTION}))
 
 CONFIG_STYLE:=		manual
 FAKE_FLAGS+=		PREFIX="${WRKINST}/usr" \
@@ -40,12 +54,34 @@ do-configure:
 
 maradns-install:
 	${INSTALL_DIR} ${IDIR_MARADNS}/etc/maradns/logger
-	${INSTALL_DIR} ${IDIR_MARADNS}/usr/bin ${IDIR_MARADNS}/usr/sbin
+	${INSTALL_DIR} ${IDIR_MARADNS}/usr/sbin
 	${INSTALL_DATA} ./files/mararc ${IDIR_MARADNS}/etc/mararc
 	${INSTALL_DATA} ./files/sample.{zone,ptr} \
 		${IDIR_MARADNS}/etc/maradns/
-	${CP} ${WRKINST}/usr/bin/{askmara,getzone} ${IDIR_MARADNS}/usr/bin/
-	${CP} ${WRKINST}/usr/sbin/{maradns,zoneserver} \
-		${IDIR_MARADNS}/usr/sbin/
+	${CP} ${WRKINST}/usr/sbin/maradns ${IDIR_MARADNS}/usr/sbin/
+
+duende-install:
+	${INSTALL_DIR} ${IDIR_DUENDE}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/duende ${IDIR_DUENDE}/usr/bin/
+
+deadwood-install:
+	${INSTALL_DIR} ${IDIR_DEADWOOD}/etc/maradns/logger
+	${INSTALL_DIR} ${IDIR_DEADWOOD}/usr/sbin
+	${INSTALL_DATA} ./files/dwood3rc ${IDIR_DEADWOOD}/etc/
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/Deadwood \
+		${IDIR_DEADWOOD}/usr/sbin/
+
+zoneserver-install:
+	${INSTALL_DIR} ${IDIR_ZONESERVER}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/zoneserver \
+		${IDIR_ZONESERVER}/usr/sbin/
+
+askmara-install:
+	${INSTALL_DIR} ${IDIR_ASKMARA}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/askmara ${IDIR_ASKMARA}/usr/bin/
+
+fetchzone-install:
+	${INSTALL_DIR} ${IDIR_FETCHZONE}/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/bin/fetchzone ${IDIR_FETCHZONE}/usr/bin/
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

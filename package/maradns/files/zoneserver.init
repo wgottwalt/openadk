@@ -1,5 +1,5 @@
 #!/bin/sh
-#PKG maradns
+#PKG zoneserver
 #INIT 60
 
 . /etc/rc.conf
@@ -14,10 +14,10 @@ autostart)
 start)
 	[ -f /etc/mararc ] || exit
 	[ -d /etc/maradns/logger ] || mkdir -p /etc/maradns/logger
-	/usr/bin/duende --pid=/var/run/maradns.pid /usr/sbin/maradns
+	/usr/bin/duende --pid=/var/run/zoneserver.pid /usr/sbin/zoneserver
 	;;
 stop)
-	kill $(</var/run/maradns.pid)
+	kill $(</var/run/zoneserver.pid)
 	;;
 restart)
 	sh $0 stop
