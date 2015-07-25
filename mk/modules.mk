@@ -214,6 +214,10 @@ $(eval $(call KMOD_template,INET_TUNNEL,inet-tunnel,\
 	$(MODULES_DIR)/kernel/net/ipv4/tunnel4 \
 ,20))
 
+$(eval $(call KMOD_template,NET_IP_TUNNEL,net-ip-tunnel,\
+	$(MODULES_DIR)/kernel/net/ipv4/ip_tunnel \
+,30))
+
 $(eval $(call KMOD_template,NET_IPIP,net-ipip,\
 	$(MODULES_DIR)/kernel/net/ipv4/ipip \
 ,60))

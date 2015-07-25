@@ -26,6 +26,7 @@ config ADK_KERNEL_IPV6
 config ADK_KERNEL_IPV6_SIT
 	tristate "IPv6-in-IPv4 tunnel (SIT driver)"
 	select ADK_KERNEL_INET_TUNNEL
+	select ADK_KERNEL_NET_IP_TUNNEL
 	help
 	  Tunneling means encapsulating data of one protocol type within
 	  another protocol and sending it over a channel that understands the
@@ -124,9 +125,14 @@ config ADK_KERNEL_VLAN_8021Q
 config ADK_KERNEL_INET_TUNNEL
 	tristate
 
+config ADK_KERNEL_NET_IP_TUNNEL
+	tristate
+	default n
+
 config ADK_KERNEL_NET_IPIP
 	tristate "IP in IP encapsulation support"
 	select ADK_KERNEL_INET_TUNNEL
+	select ADK_KERNEL_NET_IP_TUNNEL
 	help
 	  Tunneling means encapsulating data of one protocol type within
 	  another protocol and sending it over a channel that understands the
@@ -141,6 +147,7 @@ config ADK_KERNEL_NET_IPGRE
 	tristate "GRE tunnels over IP"
 	select ADK_KERNEL_NET_IPGRE_BROADCAST
 	select ADK_KERNEL_NET_IPGRE_DEMUX
+	select ADK_KERNEL_NET_IP_TUNNEL
 	help
 	  Tunneling means encapsulating data of one protocol type within
 	  another protocol and sending it over a channel that understands the
