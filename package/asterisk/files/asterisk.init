@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	[ -d /var/run/asterisk ] || mkdir -p /var/run/asterisk
-	[ -d /var/log/asterisk ] || mkdir -p /var/log/asterisk
-	[ -d /var/spool/asterisk ] || mkdir -p /var/spool/asterisk
-	/usr/sbin/asterisk 
+	for dir in run log spool lib; do
+		[ -d /var/$dir/asterisk ] || mkdir -p /var/$dir/asterisk
+	done
+	/usr/sbin/asterisk
 	;;
 stop)
 	[ -f /var/run/asterisk/asterisk.pid ] && \

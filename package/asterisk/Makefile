@@ -10,7 +10,7 @@ PKG_MD5SUM:=		c16f288f97ac39042eb8e9bee6766aff
 PKG_DESCR:=		open source pbx
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl libstdcxx
-PKG_BUILDDEP:=		ncurses openssl zlib curl popt gtk+
+PKG_BUILDDEP:=		ncurses openssl zlib curl popt
 PKG_URL:=		http://www.asterisk.org/
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 PKG_NOPARALLEL:=	1
@@ -175,7 +175,8 @@ do-install:
 		rm -f gtalk.conf ; \
 		rm -f skinny.conf ; \
 		rm -f dundi.conf ; \
-		$(SED) '#^astdatadir = /var/#/usr/#' asterisk.conf ; \
+		$(SED) '/^astdatadir /s#/var/#/usr/#' asterisk.conf ; \
+		$(SED) '/^\[directories\]/s/(!)//' asterisk.conf ; \
 	)
 	${INSTALL_DATA} ./files/modules.conf $(IDIR_ASTERISK)/etc/asterisk/
 	$(SED) 's|/var/lib/asterisk|/usr/lib/asterisk|g' \
