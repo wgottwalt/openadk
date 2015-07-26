@@ -1,4 +1,4 @@
-From ebca842041d737b7441748a17ffd535aab851fce Mon Sep 17 00:00:00 2001
+From 110f32cb37fa86ce1c6459227ba3b57df7283b85 Mon Sep 17 00:00:00 2001
 From: Phil Sutter <phil@nwl.cc>
 Date: Tue, 13 May 2014 01:32:11 +0200
 Subject: [PATCH] net: allow PHY drivers to insert packet mangle hooks
@@ -14,7 +14,7 @@ Subject: [PATCH] net: allow PHY drivers to insert packet mangle hooks
  7 files changed, 70 insertions(+), 18 deletions(-)
 
 diff --git a/include/linux/netdevice.h b/include/linux/netdevice.h
-index 911718f..8e8dd46 100644
+index bf46cc8..7d31bd6 100644
 --- a/include/linux/netdevice.h
 +++ b/include/linux/netdevice.h
 @@ -1245,6 +1245,11 @@ struct net_device {
@@ -40,10 +40,10 @@ index 911718f..8e8dd46 100644
  /*
   * Cache lines mostly used on receive path (including eth_type_trans())
 diff --git a/include/linux/skbuff.h b/include/linux/skbuff.h
-index 15ede6a..5530766 100644
+index ab31337..ecc124d 100644
 --- a/include/linux/skbuff.h
 +++ b/include/linux/skbuff.h
-@@ -1858,6 +1858,10 @@ static inline int pskb_trim(struct sk_buff *skb, unsigned int len)
+@@ -1859,6 +1859,10 @@ static inline int pskb_trim(struct sk_buff *skb, unsigned int len)
  	return (len < skb->len) ? __pskb_trim(skb, len) : 0;
  }
  
@@ -54,7 +54,7 @@ index 15ede6a..5530766 100644
  /**
   *	pskb_trim_unique - remove end from a paged unique (not cloned) buffer
   *	@skb: buffer to alter
-@@ -1966,16 +1970,6 @@ static inline struct sk_buff *dev_alloc_skb(unsigned int length)
+@@ -1967,16 +1971,6 @@ static inline struct sk_buff *dev_alloc_skb(unsigned int length)
  }
  
  
@@ -101,10 +101,10 @@ index e411046..970c52a 100644
  	bool
  	help
 diff --git a/net/core/dev.c b/net/core/dev.c
-index fccc195..2e0ba23 100644
+index 1b9e700..fb08c2a 100644
 --- a/net/core/dev.c
 +++ b/net/core/dev.c
-@@ -2607,10 +2607,20 @@ int dev_hard_start_xmit(struct sk_buff *skb, struct net_device *dev,
+@@ -2618,10 +2618,20 @@ int dev_hard_start_xmit(struct sk_buff *skb, struct net_device *dev,
  		if (!list_empty(&ptype_all))
  			dev_queue_xmit_nit(skb, dev);
  
@@ -129,7 +129,7 @@ index fccc195..2e0ba23 100644
  		if (rc == NETDEV_TX_OK)
  			txq_trans_update(txq);
  		return rc;
-@@ -2626,10 +2636,20 @@ gso:
+@@ -2637,10 +2647,20 @@ gso:
  		if (!list_empty(&ptype_all))
  			dev_queue_xmit_nit(nskb, dev);
  
@@ -155,18 +155,18 @@ index fccc195..2e0ba23 100644
  			if (rc & ~NETDEV_TX_MASK)
  				goto out_kfree_gso_skb;
 diff --git a/net/core/skbuff.c b/net/core/skbuff.c
-index e5ae776e..400ff2a 100644
+index 69ec61a..0299dff 100644
 --- a/net/core/skbuff.c
 +++ b/net/core/skbuff.c
-@@ -62,6 +62,7 @@
- #include <linux/scatterlist.h>
+@@ -63,6 +63,7 @@
  #include <linux/errqueue.h>
  #include <linux/prefetch.h>
+ #include <linux/if_vlan.h>
 +#include <uapi/linux/if.h>
  
  #include <net/protocol.h>
  #include <net/dst.h>
-@@ -439,6 +440,22 @@ struct sk_buff *__netdev_alloc_skb(struct net_device *dev,
+@@ -458,6 +459,22 @@ struct sk_buff *__netdev_alloc_skb(struct net_device *dev,
  }
  EXPORT_SYMBOL(__netdev_alloc_skb);
  
@@ -207,5 +207,5 @@ index 5dc638c..f4fd124 100644
  	skb_pull_inline(skb, ETH_HLEN);
  	eth = eth_hdr(skb);
 -- 
-1.8.5.3
+2.4.5
 
