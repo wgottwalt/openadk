@@ -148,6 +148,7 @@ do-install:
 		rm -rf keys/*; \
 		rm -rf mohmp3/*.mp3; \
 		rm -rf sounds/*; \
+		ln -s /tmp sounds/priv-callerintros; \
 		cd modules; \
 		rm -rf	*adsi* *festival* *modem* *meetme* *oss* \
 			*phone* *intercom* *mp3* *nbscat* *mysql* \
