@@ -147,7 +147,7 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
-		dtbs sun7i-a20-bananapro.dtb
+		sun7i-a20-bananapro.dtb
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
