@@ -2,12 +2,13 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=	linux
-PKG_VERSION:=	$(KERNEL_VERSION)
 PKG_RELEASE:=	$(KERNEL_RELEASE)
 ifeq ($(ADK_KERNEL_VERSION_GIT),y)
-PKG_SITES:=	$(ADK_KERNEL_REPO)
 PKG_VERSION:=	$(ADK_KERNEL_HASH)
+PKG_SITES:=	$(ADK_KERNEL_REPO)
 else
+PKG_VERSION:=	$(KERNEL_VERSION)
+PKG_HASH:=	$(KERNEL_HASH)
 PKG_SITES:=  	${MASTER_SITE_KERNEL:=kernel/v4.x/} \
 		${MASTER_SITE_KERNEL:=kernel/v3.x/} \
 		${MASTER_SITE_KERNEL:=kernel/v3.0/testing/} \
