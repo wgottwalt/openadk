@@ -112,6 +112,9 @@ config ADK_KERNEL_AEABI
 	bool
 	default y if ADK_TARGET_ARCH_ARM
 
+config ADK_KERNEL_ARM_THUMB
+	bool
+
 config ADK_KERNEL_THUMB2_KERNEL
 	bool
 
@@ -126,7 +129,8 @@ config ADK_KERNEL_CPU_LITTLE_ENDIAN
 
 choice
 prompt "Kernel Compression"
-depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+default ADK_KERNEL_COMPRESS_NONE if ADK_TARGET_SYSTEM_MIKROTIK_RB532 \
+				|| ADK_TARGET_SYSTEM_KINETIS_K70
 default ADK_KERNEL_COMP_GZIP if ADK_TARGET_BOARD_BCM28XX
 
 config ADK_KERNEL_COMP_XZ
@@ -170,6 +174,10 @@ config ADK_KERNEL_COMP_GZIP
 	select ADK_KERNEL_RD_GZIP
 	select ADK_KERNEL_KERNEL_GZIP
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_GZIP
+
+config ADK_KERNEL_COMPRESS_NONE
+	bool "use no compression"
+	select ADK_KERNEL_INITRAMFS_COMPRESSION_NONE
 
 endchoice
 
@@ -242,7 +250,6 @@ config ADK_KERNEL_PREEMPT
 	bool "Enable preemptive kernel"
 	help
 	  Enable preemptive mode.
-
 
 choice
 prompt "tick configuration"

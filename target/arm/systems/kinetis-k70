@@ -1,0 +1,14 @@
+config ADK_TARGET_SYSTEM_KINETIS_K70
+	bool "Kinetis K70"
+	depends on ADK_EXPERIMENTAL
+	select ADK_CPU_CORTEX_M3
+	select ADK_TARGET_LITTLE_ENDIAN
+	select ADK_TARGET_WITH_SERIAL
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_UCLINUX
+	select ADK_TARGET_KERNEL_UIMAGE
+	select ADK_KERNEL_REPO "https://github.com/EmcraftSystems/linux-emcraft.git"
+	select ADK_KERNEL_HASH "a5125a7f66b441008f505e4ce5d45ebb24ea28a7"
+	help
+	  Kinetis K70
+

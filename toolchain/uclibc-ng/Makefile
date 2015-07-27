@@ -177,6 +177,7 @@ endif
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
 	$(SED) 's/.*\(COMPILE_IN_THUMB_MODE\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_CONTEXT_FUNCS\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 endif
 

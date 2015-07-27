@@ -88,12 +88,9 @@ endif
 # target tools
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
 
-# use a gcc wrapper for coldfire/arm uclinux support
+# use a gcc wrapper for coldfire uclinux support
 ifeq ($(ADK_TARGET_UCLINUX),y)
 ifeq ($(ADK_TARGET_ARCH_M68K),y)
-TARGET_CC:=		adk-uclinux-gcc
-endif
-ifeq ($(ADK_TARGET_ARCH_ARM),y)
 TARGET_CC:=		adk-uclinux-gcc
 endif
 endif
@@ -293,8 +290,8 @@ TARGET_CFLAGS+=		-funsafe-math-optimizations -ffast-math
 TARGET_CXXFLAGS+=	-funsafe-math-optimizations -ffast-math
 endif
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
-TARGET_CFLAGS+=		-mthumb -Wa,-mimplicit-it=thumb
-TARGET_CXXFLAGS+=	-mthumb -Wa,-mimplicit-it=thumb
+TARGET_CFLAGS+=		-mthumb -Wa,-mimplicit-it=thumb -mno-thumb-interwork
+TARGET_CXXFLAGS+=	-mthumb -Wa,-mimplicit-it=thumb -mno-thumb-interwork
 else
 TARGET_CFLAGS+=		-marm
 TARGET_CXXFLAGS+=	-marm

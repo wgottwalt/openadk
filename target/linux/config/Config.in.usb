@@ -46,6 +46,7 @@ config ADK_KERNEL_USB
 	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default m if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_KINETIS_K70
 	default n
 	help
 	  Universal Serial Bus (USB) is a specification for a serial bus
@@ -197,6 +198,16 @@ config ADK_KERNEL_USB_SL811_HCD
 	  host side or peripheral side roles.  Enable this option if your
 	  board has this chip, and you want to use it as a host controller. 
 	  If unsure, say N.
+
+config ADK_KERNEL_USB_EHCI_MXC
+	bool "Freescale EHCI MXC USB controller"
+	depends on ADK_KERNEL_USB
+	depends on ADK_TARGET_SYSTEM_KINETIS_K70
+	select ADK_KERNEL_GPIOLIB
+	default y if ADK_TARGET_SYSTEM_KINETIS_K70
+	default n
+	help
+	  Freescale USB controller.
 
 endmenu
 
