@@ -18,6 +18,9 @@ endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_25),y)
 BINUTILS_VERSION:=	2.25
 endif
+ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_25_1),y)
+BINUTILS_VERSION:=	2.25.1
+endif
 
 $(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
