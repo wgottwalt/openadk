@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
 PKG_VERSION:=		2015.07
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		0b48c9bd717f2c322ef791f8282e14c88be942dc7d1226df7e31a812a3af94d9
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot

@@ -1,6 +1,6 @@
---- u-boot-d8bec60c1b0de7770f9b56ad092ab9be801d99af.orig/arch/arm/lib/bootm.c	2015-01-06 09:00:23.000000000 +0100
-+++ u-boot-d8bec60c1b0de7770f9b56ad092ab9be801d99af/arch/arm/lib/bootm.c	2015-01-07 18:11:45.971158851 +0100
-@@ -70,8 +70,8 @@ void arch_lmb_reserve(struct lmb *lmb)
+--- u-boot-2015.07.orig/arch/arm/lib/bootm.c	2015-07-14 19:32:21.000000000 +0200
++++ u-boot-2015.07/arch/arm/lib/bootm.c	2015-07-27 13:51:04.000000000 +0200
+@@ -71,8 +71,8 @@ void arch_lmb_reserve(struct lmb *lmb)
   */
  static void announce_and_cleanup(int fake)
  {
