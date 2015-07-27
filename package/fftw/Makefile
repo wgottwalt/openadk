@@ -17,16 +17,22 @@ DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
 
+$(eval $(call PKG_template,FFTW,fftw,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
+
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-$(eval $(call PKG_template,FFTW,fftw,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
+CONFIGURE_ARGS:=	--enable-threads
+
+ifeq ($(ADK_TARGET_ARCH_ARM_WITH_NEON),y)
+CONFIGURE_ARGS+=	--enable-neon --with-slow-timer
+endif
 
 do-configure:
 	mkdir -p $(WRKBUILD)/single
 	mkdir -p $(WRKBUILD)/double
-	cd $(WRKBUILD)/single && $(WRKSRC)/configure $(CONFIGURE_TRIPLE) --prefix=/usr --enable-shared --enable-float
+	cd $(WRKBUILD)/single && $(WRKSRC)/configure $(CONFIGURE_TRIPLE) --prefix=/usr --enable-shared --enable-float $(CONFIGURE_ARGS)
 	cd $(WRKBUILD)/double && $(WRKSRC)/configure $(CONFIGURE_TRIPLE) --prefix=/usr --enable-shared
 
 do-build:
