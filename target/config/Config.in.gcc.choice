@@ -60,6 +60,7 @@ config ADK_TOOLCHAIN_GCC_4_9_OR1K
 config ADK_TOOLCHAIN_GCC_4_8_ARC
 	bool "4.8-arc"
 	depends on ADK_TARGET_ARCH_ARC
+	select ADK_DISABLE_HONOUR_CFLAGS
 
 config ADK_TOOLCHAIN_GCC_4_7_4
 	bool "4.7.4"

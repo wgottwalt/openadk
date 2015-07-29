@@ -35,13 +35,10 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 LIBSTDCXXVER:=		19
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_4_8_ARC),y)
-# git commit 2b0dc74388f22ba98b36f7f57a9cc41aca62e223 arc-4.8-dev
-# from https://github.com/foss-for-synopsys-dwc-arc-processors/gcc.git
-PKG_VERSION:=		4.8.3
-PKG_HASH:=		acbd97878c1eab8e6d2dcc80327f31fb68c41016a4451632c75007ce8944a8b9
-PKG_SITES:=		http://distfiles.openadk.org/
+PKG_VERSION:=		261be83e0f5924f72a2ecf8b6474d1033da4a0b9
+PKG_SITES:=		https://github.com/foss-for-synopsys-dwc-arc-processors/gcc.git
 PKG_RELEASE:=		1
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-arc.tar.xz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_4_7_4),y)
 PKG_VERSION:=		4.7.4
