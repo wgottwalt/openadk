@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
-PKG_VERSION:=		2.7.9
+PKG_VERSION:=		2.7.10
 PKG_RELEASE:=		1
-PKG_HASH:=		c8bba33e66ac3201dabdc556f0ea7cfe6ac11946ec32d357c4c6f9b018c12c5b
+PKG_HASH:=		eda8ce6eec03e74991abb5384170e7c65fcd7522e409b8e83d7e6372add0f12a
 PKG_DESCR:=		python scripting language (Version 2)
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		libffi python2-host 
@@ -22,28 +22,28 @@ WRKDIST=		${WRKDIR}/Python-${PKG_VERSION}
 PKG_FLAVOURS_PYTHON2:=	MOD_ZLIB MOD_BZ2 MOD_EXPAT MOD_SQLITE MOD_GDBM
 PKG_FLAVOURS_PYTHON2+=	MOD_NCURSES MOD_SSL MOD_READLINE
 			
-PKGFD_MOD_ZLIB:=	ZLIB support
+PKGFD_MOD_ZLIB:=	zlib support
 PKGFB_MOD_ZLIB:=	zlib
 PKGFS_MOD_ZLIB:=	zlib
-PKGFD_MOD_BZ2:=		BZIP2 support
+PKGFD_MOD_BZ2:=		bzip2 support
 PKGFB_MOD_BZ2:=		bzip2
 PKGFS_MOD_BZ2:=		libbz2
-PKGFD_MOD_EXPAT:=	XML support
+PKGFD_MOD_EXPAT:=	xml support
 PKGFB_MOD_EXPAT:=	expat
 PKGFS_MOD_EXPAT:=	libexpat
-PKGFD_MOD_SQLITE:=	SQLITE support
+PKGFD_MOD_SQLITE:=	sqlite support
 PKGFB_MOD_SQLITE:=	sqlite
 PKGFS_MOD_SQLITE:=	libsqlite
-PKGFD_MOD_GDBM:=	GDBM support
+PKGFD_MOD_GDBM:=	gdbm support
 PKGFB_MOD_GDBM:=	gdbm
 PKGFS_MOD_GDBM:=	libgdbm
-PKGFD_MOD_NCURSES:=	NCURSES support
+PKGFD_MOD_NCURSES:=	ncurses support
 PKGFB_MOD_NCURSES:=	ncurses
 PKGFS_MOD_NCURSES:=	libncurses
-PKGFD_MOD_READLINE:=	READLINE support
+PKGFD_MOD_READLINE:=	readline support
 PKGFB_MOD_READLINE:=	readline
 PKGFS_MOD_READLINE:=	libreadline
-PKGFD_MOD_SSL:=		OpenSSL support
+PKGFD_MOD_SSL:=		openssl support
 PKGFB_MOD_SSL:=		openssl
 PKGFS_MOD_SSL:=		libopenssl
 
