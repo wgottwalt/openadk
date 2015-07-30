@@ -18,6 +18,17 @@ config ADK_KERNEL_I2C_BCM2708
 	help
 	  I2C driver for BCM2835 boards.
 
+config ADK_KERNEL_I2C_SUNXI
+	tristate "I2C driver for SUNXI boards"
+	select ADK_KERNEL_I2C
+	select ADK_KERNEL_REGMAP_I2C
+	select ADK_KERNEL_I2C_CHARDEV
+	depends on ADK_TARGET_SYSTEM_BANANA_PRO
+	default y if ADK_TARGET_SYSTEM_BANANA_PRO
+	default n
+	help
+	  I2C driver for SUNXI boards.
+
 config ADK_KERNEL_I2C_IMX
 	tristate "I2C driver for IMX6 boards"
 	select ADK_KERNEL_I2C
