@@ -1,39 +1,34 @@
 config ADK_KERNEL_REGULATOR
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_REGULATOR_FIXED_VOLTAGE
-	boolean
+	bool
 	select ADK_KERNEL_REGULATOR
-	default n
+
+config ADK_KERNEL_REGULATOR_GPIO
+	bool
+	select ADK_KERNEL_REGULATOR
 
 config ADK_KERNEL_REGULATOR_ANATOP
-	boolean
+	bool
 	select ADK_KERNEL_REGULATOR
-	default n
 
 config ADK_KERNEL_REGULATOR_MC13XXX_CORE
-	boolean
+	bool
 	select ADK_KERNEL_REGULATOR
-	default n
 
 config ADK_KERNEL_REGULATOR_DA9052
-	boolean
+	bool
 	select ADK_KERNEL_REGULATOR
-	default n
 
 config ADK_KERNEL_REGULATOR_MC13783
-	boolean
+	bool
 	select ADK_KERNEL_REGULATOR
-	default n
 
 config ADK_KERNEL_REGULATOR_MC13892
-	boolean
+	bool
 	select ADK_KERNEL_REGULATOR
-	default n
 	
 config ADK_KERNEL_REGULATOR_PFUZE100
-	boolean
+	bool
 	select ADK_KERNEL_REGULATOR
-	default n
-
