@@ -1747,7 +1747,7 @@ addfile(const char *realfile, struct stat *st,
 			n = strlen(linkname);
 		}
 		if (n > 512-SIZEOF_bar_header-fsz-1) {
-			msg(3, 0, "%s: linked name too long\n", realfile);
+			/* msg(3, 0, "%s: linked name too long\n", realfile); */
 			goto cleanup;
 		}
 		bchksum(&bc);
@@ -5249,7 +5249,7 @@ tmklink(struct tar_header *hp, const char *fn)
 			strcpy(hp->t_linkname, sequence());
 			return 0;
 		}
-		msg(3, 0, "%s: linked name too long\n", fn);
+		/* msg(3, 0, "%s: linked name too long\n", fn); */
 		return -1;
 	}
 	memcpy(hp->t_linkname, fn, cp - fn);
