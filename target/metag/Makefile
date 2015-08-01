@@ -7,3 +7,69 @@ include $(ADK_TOPDIR)/mk/modules.mk
 include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
+KERNEL:=$(LINUX_DIR)/vmlinux
+QEMU_ARGS:=-nographic -display none -device da,exit_threads=1 -chardev stdio,id=chan1 -chardev pty,id=chan2
+
+# target helper text
+ifeq ($(ADK_TARGET_FS),archive)
+targethelp:
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "Use following command to create a QEMU Image:"
+	@echo "./scripts/create.sh qemu-${ADK_TARGET_CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "Start qemu with following options:"
+	@echo 'qemu-system-meta ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${ADK_TARGET_CPU_ARCH}.img'
+endif
+endif
+ifeq ($(ADK_TARGET_FS),initramfs)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-meta ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
+endif
+endif
+ifeq ($(ADK_TARGET_FS),initramfsarchive)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
+endif
+ifeq ($(ADK_TARGET_FS),initramfspiggyback)
+targethelp:
+	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo "Start qemu with following command line:"
+	@echo 'qemu-system-meta ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+endif
+endif
+ifeq ($(ADK_TARGET_FS),nfsroot)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The nfs root tarball is: ${FW_DIR}/${ROOTFSUSERTARBALL}'
+endif
+
+# image creation and kernel install
+kernel-strip:
+	cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+
+kernel-install: kernel-strip
+	cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+
+# filesystem specific targets
+ifeq ($(ADK_TARGET_FS),archive)
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
+endif
+ifeq ($(ADK_TARGET_FS),initramfs)
+imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
+endif
+ifeq ($(ADK_TARGET_FS),initramfsarchive)
+imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
+endif
+ifeq ($(ADK_TARGET_FS),initramfspiggyback)
+imageinstall: createinitramfs targethelp
+endif
+ifeq ($(ADK_TARGET_FS),nfsroot)
+imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
+endif

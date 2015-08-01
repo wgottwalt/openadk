@@ -83,3 +83,4 @@ config ADK_TARGET_KERNEL_MINICONFIG
 	default "qemu-m68k-mcf5208" if ADK_TARGET_QEMU_M68K_MCF5208
 	default "qemu-m68k-q800" if ADK_TARGET_QEMU_M68K_Q800
 	default "imgtec-ci20" if ADK_TARGET_SYSTEM_IMGTEC_CI20
+	default "qemu-metag" if ADK_TARGET_SYSTEM_QEMU_METAG
