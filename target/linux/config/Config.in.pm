@@ -1,34 +1,39 @@
+config ADK_KERNEL_PM
+	bool
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+
 config ADK_KERNEL_PM_RUNTIME
-	boolean
+	bool
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 
 config ADK_KERNEL_ACPI
-	boolean
+	bool
 
 config ADK_KERNEL_ACPI_SYSFS_POWER
-	boolean
+	bool
 
 config ADK_KERNEL_ACPI_AC
-	boolean
+	bool
 
 config ADK_KERNEL_ACPI_BATTERY
-	boolean
+	bool
 
 config ADK_KERNEL_ACPI_BUTTON
-	boolean
+	bool
 
 config ADK_KERNEL_ACPI_FAN
-	boolean
+	bool
 
 config ADK_KERNEL_ACPI_DOCK
-	boolean
+	bool
 
 menu "Power Management support"
 depends on ADK_TARGET_WITH_ACPI || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 
 config ADK_HARDWARE_ACPI
 	prompt "Enable ACPI support"
-	boolean
+	bool
+	select ADK_KERNEL_PM
 	select ADK_KERNEL_PM_RUNTIME
 	select ADK_KERNEL_ACPI
 	select ADK_KERNEL_ACPI_SYSFS_POWER
@@ -45,7 +50,8 @@ config ADK_HARDWARE_ACPI
 
 config ADK_KERNEL_SUSPEND
 	prompt "Enable Suspend-to-RAM support"
-	boolean
+	bool
+	select ADK_KERNEL_PM
 	select ADK_KERNEL_PM_RUNTIME
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
@@ -55,7 +61,8 @@ config ADK_KERNEL_SUSPEND
 
 config ADK_KERNEL_HIBERNATION
 	prompt "Enable Suspend-to-Disk support"
-	boolean
+	bool
+	select ADK_KERNEL_PM
 	select ADK_KERNEL_PM_RUNTIME
 	select ADK_KERNEL_SWAP
 	select BUSYBOX_SWAPONOFF
