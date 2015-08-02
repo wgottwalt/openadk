@@ -22,7 +22,7 @@ config ADK_TARGET_LIBC
 
 config ADK_LIBC_VERSION
 	string
-	default "1.0.4" if ADK_TARGET_LIB_UCLIBC_NG_1_0_4
+	default "1.0.5" if ADK_TARGET_LIB_UCLIBC_NG_1_0_5
 	default "1.1.10" if ADK_TARGET_LIB_MUSL_1_1_10
 	default "0.9.33.2" if ADK_TARGET_LIB_UCLIBC_0_9_33_2
 	default "2.19" if ADK_TARGET_LIB_GLIBC_2_19
@@ -35,7 +35,7 @@ config ADK_LIBC_VERSION
 
 config ADK_TARGET_LIB_UCLIBC_NG_1_0
 	bool
-	default y if ADK_TARGET_LIB_UCLIBC_NG_1_0_4
+	default y if ADK_TARGET_LIB_UCLIBC_NG_1_0_5
 
 config ADK_TARGET_SUFFIX
 	string
