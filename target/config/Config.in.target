@@ -14,7 +14,7 @@ depends on !ADK_TARGET_TOOLCHAIN
 default ADK_TARGET_ROOTFS_ARCHIVE
 
 config ADK_TARGET_ROOTFS_INITRAMFS
-	boolean "initramfs filesystem"
+	bool "initramfs filesystem"
 	depends on \
 		ADK_TARGET_QEMU || \
 		ADK_TARGET_ARCH_M68K || \
@@ -32,7 +32,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 	  create an read-only initramfs system.
 
 config ADK_TARGET_ROOTFS_INITRAMFSPIGGYBACK
-	boolean "initramfs filesystem included into kernel image"
+	bool "initramfs filesystem included into kernel image"
 	select ADK_TARGET_ARCH_INITRAMFS_BUILTIN
 	depends on \
 		ADK_TARGET_QEMU || \
@@ -52,7 +52,7 @@ config ADK_TARGET_ROOTFS_INITRAMFSPIGGYBACK
 	  create an read-only initramfs system.
 
 config ADK_TARGET_ROOTFS_SQUASHFS
-	boolean "Compressed read-only root filesystem (squashfs)"
+	bool "Compressed read-only root filesystem (squashfs)"
 	select ADK_KERNEL_SQUASHFS
 	select ADK_HOST_NEED_SQUASHFS
 	select ADK_HOST_NEED_QEMU if ADK_TARGET_QEMU
@@ -62,7 +62,7 @@ config ADK_TARGET_ROOTFS_SQUASHFS
 	  highly compressed read-only filesystem for MTD flash systems.
 
 config ADK_TARGET_ROOTFS_JFFS2
-	boolean "Compressed read-write root filesystem (jffs2)"
+	bool "Compressed read-write root filesystem (jffs2)"
 	select ADK_KERNEL_JFFS2_FS
 	select ADK_HOST_NEED_MTD_UTILS
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
@@ -71,7 +71,7 @@ config ADK_TARGET_ROOTFS_JFFS2
 	  compressed read-write filesystem for MTD flash systems.
 
 config ADK_TARGET_ROOTFS_YAFFS
-	boolean "YAFFS2 root filesystem (NAND)"
+	bool "YAFFS2 root filesystem (NAND)"
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_YAFFS_FS
 	select ADK_KERNEL_YAFFS_YAFFS2
@@ -81,7 +81,7 @@ config ADK_TARGET_ROOTFS_YAFFS
 	  Root filesystem on NAND flash with YAFFS2.
 
 config ADK_TARGET_ROOTFS_NFSROOT
-	boolean "NFS root"
+	bool "NFS root"
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	select ADK_KERNEL_SUNRPC
 	select ADK_KERNEL_NFS_FS
@@ -98,7 +98,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	  Root filesystem mounted via NFS. (DHCP)
 
 config ADK_TARGET_ROOTFS_USB
-	boolean "Boot from USB stick"
+	bool "Boot from USB stick"
 	select ADK_KERNEL_NLS
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_BLK_DEV_SD
@@ -113,7 +113,7 @@ config ADK_TARGET_ROOTFS_USB
 	  Boot system from USB stick. 
 
 config ADK_TARGET_ROOTFS_ISO
-	boolean "ISO image"
+	bool "ISO image"
 	select ADK_KERNEL_ISO9660_FS
 	select ADK_KERNEL_JOLIET
 	select ADK_KERNEL_SCSI
@@ -127,7 +127,7 @@ config ADK_TARGET_ROOTFS_ISO
 	  Use this option to create a bootable ISO image.
 
 config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
-	boolean "Archive usable for initramfs creation"
+	bool "Archive usable for initramfs creation"
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	select ADK_KERNEL_BLK_DEV_INITRD
 	help
@@ -135,7 +135,7 @@ config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
 	  useful for adk-test-framework.
 
 config ADK_TARGET_ROOTFS_ARCHIVE
-	boolean "Archive usable for different filesystems"
+	bool "Archive usable for different filesystems"
 	select ADK_HOST_NEED_GENEXT2FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
 	select ADK_KERNEL_EXT2_FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
@@ -144,43 +144,31 @@ config ADK_TARGET_ROOTFS_ARCHIVE
 
 endchoice
 
-config ADK_TARGET_ROOT_EXT4_RASPBERRY_PI
-        boolean
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI && ADK_TARGET_ROOTFS_ARCHIVE
-        select ADK_KERNEL_EXT4_FS
-	default y
-        help
-          Compile EXT4 filesystem into kernel and use it as root filesystem.
-
 choice
 prompt "Root filesystem type"
-depends on ADK_TARGET_ROOTFS_ARCHIVE || ADK_TARGET_ROOTFS_USB && !ADK_TARGET_SYSTEM_RASPBERRY_PI && !ADK_TARGET_QEMU
+depends on ADK_TARGET_ROOTFS_ARCHIVE || ADK_TARGET_ROOTFS_USB && !ADK_TARGET_QEMU
 default ADK_TARGET_ROOT_EXT4
 
 config ADK_TARGET_ROOT_EXT4
-	boolean
-	prompt "EXT4 filesystem"
+	bool "EXT4 filesystem"
 	select ADK_KERNEL_EXT4_FS
 	help
 	  Compile EXT4 filesystem into kernel and use it as root filesystem.
 
 config ADK_TARGET_ROOT_XFS
-	boolean
-	prompt "XFS filesystem"
+	bool "XFS filesystem"
 	select ADK_KERNEL_XFS_FS
 	help
 	  Compile XFS filesystem into kernel and use it as root filesystem.
 
 config ADK_TARGET_ROOT_EXT2
-	boolean
-	prompt "EXT2 filesystem"
+	bool "EXT2 filesystem"
 	select ADK_KERNEL_EXT2_FS
 	help
 	  Compile EXT2 filesystem into kernel and use it as root filesystem.
 
 config ADK_TARGET_ROOT_EXT3
-	boolean
-	prompt "EXT3 filesystem"
+	bool "EXT3 filesystem"
 	select ADK_KERNEL_EXT3_FS
 	help
 	  Compile EXT3 filesystem into kernel and use it as root filesystem.
@@ -207,23 +195,20 @@ prompt "Package format"
 default ADK_TARGET_PACKAGE_TXZ
 
 config ADK_TARGET_PACKAGE_TXZ
-	boolean
-	prompt "xz compressed tar archive"
+	bool "xz compressed tar archive"
 	help
 	  Create compressed tar archives of packages.
 	  Pre- and post install scripts will be executed in the target
 	  directory. There will be no package manager installed onto the target.
 
 config ADK_TARGET_PACKAGE_IPKG
-	boolean
-	prompt "ipkg"
+	bool "ipkg"
 	select BUSYBOX_IPKG
 	help
 	  Create ipkg packages and use ipkg package management on the target.
 
 config ADK_TARGET_PACKAGE_OPKG
-	boolean
-	prompt "opkg"
+	bool "opkg"
 	select ADK_PACKAGE_OPKG
 	help
 	  Create opkg packages and use opkg package management on the target.
@@ -232,30 +217,26 @@ endchoice
 
 choice
 prompt "GPU memory size"
-depends on ADK_TARGET_SYSTEM_RASPBERRY_PI || ADK_TARGET_SYSTEM_RASPBERRY_PI2
-default ADK_TARGET_GPU_MEM_128 if ADK_PACKAGE_KODI
+depends on ADK_TARGET_BOARD_BCM28XX
+default ADK_TARGET_GPU_MEM_256 if ADK_PACKAGE_KODI
 
 config ADK_TARGET_GPU_MEM_16
-	prompt "16"
-	boolean
+	bool "16"
 	help
 	  use minimal 16 MB.
 
 config ADK_TARGET_GPU_MEM_64
-	prompt "64"
-	boolean
+	bool "64"
 	help
 	  use 64 MB.
 
 config ADK_TARGET_GPU_MEM_128
-	prompt "128"
-	boolean
+	bool "128"
 	help
 	  use 128 MB.
 
 config ADK_TARGET_GPU_MEM_256
-	prompt "256"
-	boolean
+	bool "256"
 	help
 	  use 256 MB.
 
@@ -267,5 +248,5 @@ config ADK_TARGET_GPU_MEM
 	default 64 if ADK_TARGET_GPU_MEM_64
 	default 128 if ADK_TARGET_GPU_MEM_128
 	default 256 if ADK_TARGET_GPU_MEM_256
-	depends on ADK_TARGET_SYSTEM_RASPBERRY_PI || ADK_TARGET_SYSTEM_RASPBERRY_PI2
+	depends on ADK_TARGET_BOARD_BCM28XX
 
