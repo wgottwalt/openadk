@@ -1,32 +1,35 @@
 menu "Virtio driver support"
 
 config ADK_KERNEL_VIRTIO
-	boolean
+	bool
 
 config ADK_KERNEL_VIRTIO_CONSOLE
-	boolean
+	bool
+
+config ADK_KERNEL_VIRTIO_PCI_LEGACY
+	bool
 
 config ADK_KERNEL_VIRTIO_PCI
-	boolean
+	bool
 
 config ADK_KERNEL_VIRTIO_MMIO
-	boolean
+	bool
 
 config ADK_KERNEL_VIRTIO_NET
-	prompt "Virtio net driver"
-	tristate
+	tristate "Virtio net driver"
 	select ADK_KERNEL_VIRTIO
 	select ADK_KERNEL_VIRTIO_MMIO
 	select ADK_KERNEL_VIRTIO_PCI
+	select ADK_KERNEL_VIRTIO_PCI_LEGACY
 	default n
 	help
 	  Enables support for Virtio Net driver.
 
 config ADK_KERNEL_VIRTIO_BLK
-	prompt "Virtio block driver"
-	tristate
+	tristate "Virtio block driver"
 	select ADK_KERNEL_VIRTIO
 	select ADK_KERNEL_VIRTIO_PCI
+	select ADK_KERNEL_VIRTIO_PCI_LEGACY
 	select ADK_KERNEL_VIRTIO_MMIO
 	select ADK_KERNEL_BLK_DEV
 	default n
