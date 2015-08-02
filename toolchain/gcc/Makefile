@@ -115,7 +115,7 @@ GCC_CONFOPTS+=		--with-mode=thumb
 endif
 
 ifeq ($(ADK_TARGET_ARCH_METAG),y)
-GCC_CONFOPTS+=		--enable-meta-default
+GCC_CONFOPTS+=		--with-cpu=2.1 --enable-meta-default --disable-symvers
 endif
 
 ifeq ($(ADK_CPU_CF),y)

@@ -22,6 +22,18 @@ config ADK_KERNEL_SERIAL_PMACZILOG_CONSOLE
 config ADK_KERNEL_SERIAL_SH_SCI_CONSOLE
 	bool
 
+config ADK_KERNEL_DA_CONSOLE
+	bool
+
+config ADK_KERNEL_DA_TTY
+	bool "METAG serial driver"
+	select ADK_KERNEL_DA_CONSOLE
+	depends on ADK_TARGET_SYSTEM_QEMU_METAG
+	default y if ADK_TARGET_SYSTEM_QEMU_METAG
+	default n
+	help
+	  Serial driver for Qemu METAG Emulation.
+
 config ADK_KERNEL_SERIAL_ETRAXFS
 	bool "ETRAXFS serial driver"
 	select ADK_KERNEL_SERIAL_ETRAXFS_CONSOLE
