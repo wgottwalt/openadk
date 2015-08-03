@@ -31,16 +31,17 @@ else
 ADK_DEPMOD:=true
 endif
 
-$(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION)/.patched
+$(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_FILE_VER)/.patched
 	$(TRACE) target/kernel-prepare
-	ln -sf $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_VERSION) $(LINUX_DIR)
+	ln -sf $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_FILE_VER) $(LINUX_DIR)
 	mkdir -p $(LINUX_BUILD_DIR)/kmod-control
 	touch $@
 
-$(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig $(ADK_TOPDIR)/mk/modules.mk
+$(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-configure
 	-for f in $(TARGETS);do if [ -f $$f ];then rm $$f;fi;done
 	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/mini.config
+	echo "-${KERNEL_RELEASE}" >${LINUX_DIR}/localversion
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} KCONFIG_ALLCONFIG=mini.config allnoconfig $(MAKE_TRACE)
 	touch -c $(LINUX_DIR)/.config
 
@@ -59,24 +60,23 @@ $(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
 		modules_install $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-create-packages
 	@mkdir -p ${PACKAGE_DIR}
-ifneq ($(strip $(TARGETS)),)
-	$(MAKE) $(TARGETS)
-endif
-
-$(INSTALL_TARGETS): $(LINUX_BUILD_DIR)/modules
+	${BASH} ${SCRIPT_DIR}/make-module-ipkgs.sh \
+		"${ADK_TARGET_CPU_ARCH}" \
+		"${KERNEL_VERSION}" \
+		"${LINUX_BUILD_DIR}" \
+		"${PKG_BUILD}" \
+		"${PACKAGE_DIR}"
 
 prepare:
 compile: $(LINUX_BUILD_DIR)/modules
-install: compile $(INSTALL_TARGETS)
-ifneq ($(strip $(INSTALL_TARGETS)),)
+install: compile
 	$(TRACE) target/${ADK_TARGET_ARCH}-modules-install
 ifeq ($(ADK_TARGET_PACKAGE_IPKG)$(ADK_TARGET_PACKAGE_OPKG),y)
-	$(PKG_INSTALL) $(INSTALL_TARGETS) $(MAKE_TRACE)
+	$(PKG_INSTALL) $(wildcard ${PACKAGE_DIR}/kmod-*) $(MAKE_TRACE)
 else
-	$(foreach pkg,$(INSTALL_TARGETS),$(shell $(PKG_INSTALL) $(pkg)))
-endif
+	$(foreach pkg,$(wildcard ${PACKAGE_DIR}/kmod-*),$(shell $(PKG_INSTALL) $(pkg)))
 endif
 
 clean:
 	rm -rf $(LINUX_BUILD_DIR)
-	rm -f $(TARGETS)
+	rm -f $(wildcard ${PACKAGE_DIR}/kmod-*) $(wildcard ${PACKAGE_DIR}/kernel_*)

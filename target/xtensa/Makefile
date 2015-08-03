@@ -2,8 +2,6 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(ADK_TOPDIR)/rules.mk
-include $(ADK_TOPDIR)/mk/kernel.mk
-include $(ADK_TOPDIR)/mk/modules.mk
 include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 

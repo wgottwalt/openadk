@@ -122,21 +122,7 @@ config ADK_KERNEL_MMC_BCM2835
 ------------------------
 
 We use the symbol prefix ADK_KERNEL instead of CONFIG. Otherwise the symbols are
-matching the kernel symbol names. 
+matching the kernel symbol names.
 
 Get again into the menu based system, enable the driver you added and recompile.
-If your driver is available as kernel module use tristate and add an entry to
-mk/modules.mk.
-
-An entry might look like this:
-------------------------
-$(eval $(call KMOD_template,SND_BCM2708_SOC_I2S,snd-bcm2708-soc-i2s,\
-       $(MODULES_DIR)/kernel/sound/soc/bcm/snd-soc-bcm2708-i2s \
-,60, kmod-snd-soc))
-------------------------
-
-If the user choose the I2S driver for Raspberry PI 2, it creates a kmod package
-containing the file kernel/sound/soc/bcm/snd-soc-bcm2708-i2s.ko and generate
-a dependency to kmod-snd-soc when a package management (ipkg/opkg) is used.
-Furthermore a file with load instructions is created in /etc/modules.d/snd-bcm2708-soc-i2s
-on the target.
+If your driver is available as kernel module use tristate.
