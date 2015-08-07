@@ -20,7 +20,12 @@ $(eval $(call PKG_template,SUDO,sudo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 
 HOST_CPPFLAGS+=		-I../ -I../include
 
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+MAKE_FLAGS+=		LDFLAGS="$(TARGET_LDFLAGS) -all-static"
+else
 TARGET_LDFLAGS+=	-ldl
+endif
+
 CONFIGURE_ARGS+=	--without-pam \
 			--without-sendmail \
 			--disable-shared \
