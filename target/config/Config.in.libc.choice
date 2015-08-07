@@ -77,6 +77,10 @@ config ADK_TARGET_LIB_UCLIBC_NG_GIT
 	bool "git"
 	depends on ADK_TARGET_LIB_UCLIBC_NG
 
+config ADK_TARGET_LIB_GLIBC_2_22
+	bool "2.22"
+	depends on ADK_TARGET_LIB_GLIBC
+
 config ADK_TARGET_LIB_GLIBC_2_21
 	bool "2.21"
 	depends on ADK_TARGET_LIB_GLIBC && !ADK_TARGET_ARCH_X86_64

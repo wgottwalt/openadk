@@ -28,6 +28,7 @@ config ADK_LIBC_VERSION
 	default "2.19" if ADK_TARGET_LIB_GLIBC_2_19
 	default "2.20" if ADK_TARGET_LIB_GLIBC_2_20
 	default "2.21" if ADK_TARGET_LIB_GLIBC_2_21
+	default "2.22" if ADK_TARGET_LIB_GLIBC_2_22
 	default "git" if ADK_TARGET_LIB_UCLIBC_NG_GIT || \
 		         ADK_TARGET_LIB_UCLIBC_GIT || \
 		         ADK_TARGET_LIB_MUSL_GIT || \

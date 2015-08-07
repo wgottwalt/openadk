@@ -6,6 +6,12 @@ ifeq ($(ADK_LIBC_VERSION),git)
 PKG_VERSION:=		2.21.90
 PKG_SITES:=		git://sourceware.org/git/glibc.git
 endif
+ifeq ($(ADK_TARGET_LIB_GLIBC_2_22),y)
+PKG_VERSION:=		2.22
+PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
+PKG_RELEASE:=		1
+PKG_HASH:=		eb731406903befef1d8f878a46be75ef862b9056ab0cde1626d08a7a05328948
+endif
 ifeq ($(ADK_TARGET_LIB_GLIBC_2_21),y)
 PKG_VERSION:=		2.21
 PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
