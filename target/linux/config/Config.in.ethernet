@@ -34,6 +34,9 @@ config ADK_KERNEL_NET_VENDOR_VIA
 config ADK_KERNEL_NET_VENDOR_SMSC
 	bool
 
+config ADK_KERNEL_NET_VENDOR_STMICRO
+	bool
+
 config ADK_KERNEL_NET_VENDOR_XILINX
 	bool
 
@@ -286,6 +289,13 @@ config ADK_KERNEL_MACSONIC
 	select ADK_KERNEL_NET_VENDOR_NATSEMI
 	depends on ADK_TARGET_QEMU_M68K_Q800
 	default y if ADK_TARGET_QEMU_M68K_Q800
+	default n
+
+config ADK_KERNEL_STMMAC_ETH
+	bool "Stmicro MAC ethernet driver"
+	select ADK_KERNEL_NET_VENDOR_STMICRO
+	depends on ADK_TARGET_SYSTEM_BANANA_PRO
+	default y if ADK_TARGET_SYSTEM_BANANA_PRO
 	default n
 
 endmenu
