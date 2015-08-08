@@ -58,6 +58,9 @@ config ADK_KERNEL_NETDEV_1000
 config ADK_KERNEL_VIA_RHINE_MMIO
 	bool
 
+config ADK_KERNEL_STMMAC_PLATFORM
+	bool
+
 config ADK_KERNEL_AT803X_PHY
 	tristate
 	select ADK_KERNEL_PHYLIB
@@ -294,6 +297,7 @@ config ADK_KERNEL_MACSONIC
 config ADK_KERNEL_STMMAC_ETH
 	bool "Stmicro MAC ethernet driver"
 	select ADK_KERNEL_NET_VENDOR_STMICRO
+	select ADK_KERNEL_STMMAC_PLATFORM
 	depends on ADK_TARGET_SYSTEM_BANANA_PRO
 	default y if ADK_TARGET_SYSTEM_BANANA_PRO
 	default n
