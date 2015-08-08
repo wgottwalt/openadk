@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		u-boot-git-host
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
 PKG_SITES:=		git://git.denx.de/u-boot.git
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 atmel-ngw100 banana-pro
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 atmel-ngw100
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
