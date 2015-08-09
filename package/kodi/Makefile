@@ -30,6 +30,8 @@ PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish
 PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		https://github.com/xbmc/xbmc/archive/
 
+PKG_CFLINE_KODI:=	select ADK_PACKAGE_GPU_VIV_BIN_MX6Q if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+
 DISTFILES:=		$(PKG_VERSION)-Isengard.tar.gz
 WRKDIST=		${WRKDIR}/xbmc-$(PKG_VERSION)-Isengard
 
