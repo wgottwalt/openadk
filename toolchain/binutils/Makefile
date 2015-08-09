@@ -24,10 +24,6 @@ else
 CONFOPTS+=		--disable-gold
 endif
 
-ifneq ($(ADK_LINUX_64)$(ADK_TARGET_KERNEL_64),)
-CONFOPTS+=		--enable-64-bit-bfd
-endif
-
 ifeq ($(ADK_TARGET_ARCH_X86_64)$(ADK_CPU_CF),)
 CONFOPTS+=		--disable-multilib
 else
