@@ -151,17 +151,17 @@ endif
 
 ifeq ($(ADK_TARGET_ARCH_X86),y)
 ifeq ($(ADK_TARGET_KERNEL_64),y)
-GCC_FINAL_CONFOPTS+=	--enable-biarch --enable-targets=all --disable-multilib
+GCC_CONFOPTS+=		--enable-biarch --enable-targets=all --disable-multilib
 else
-GCC_FINAL_CONFOPTS+=    --disable-biarch --disable-multilib
+GCC_CONFOPTS+=		--disable-biarch --disable-multilib
 endif
 endif
 
 ifeq ($(ADK_TARGET_ARCH_X86_64),y)
 ifneq ($(ADK_TARGET_ABI_X32),)
-GCC_FINAL_CONFOPTS+=	--with-abi=x32
+GCC_CONFOPTS+=		--with-abi=x32
 else
-GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
+GCC_CONFOPTS+=		--disable-biarch --disable-multilib
 endif
 endif
 
@@ -241,7 +241,6 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 		CXXFLAGS="-O0 -g0 -fomit-frame-pointer" \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
-			${GCC_FINAL_CONFOPTS} \
 			--enable-languages=c \
 			--disable-shared \
 			--disable-threads \
