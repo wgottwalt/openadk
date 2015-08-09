@@ -21,6 +21,13 @@ config ADK_CPU_AMDFAM10
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
+config ADK_CPU_NOCONA
+	bool
+	select ADK_LINUX_64
+	select ADK_TARGET_CPU_WITH_VT
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
 config ADK_CPU_ARC700
 	bool
 	select ADK_TARGET_WITH_NPTL
@@ -760,6 +767,7 @@ config ADK_TARGET_GCC_ARCH
 	default "mips32r2" if ADK_CPU_MIPS32R2
 	default "mips64" if ADK_CPU_MIPS64
 	default "mips64r2" if ADK_CPU_MIPS64R2
+	default "nocona" if ADK_CPU_NOCONA
 	default "pentium-m" if ADK_CPU_PENTIUM_M
 	default "x86-64" if ADK_CPU_X86_64
 
