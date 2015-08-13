@@ -6,5 +6,8 @@ config ADK_TARGET_SYSTEM_ARM_FM
 	select ADK_PACKAGE_BOOT_WRAPPER_AARCH64
 	select ADK_TARGET_WITH_SERIAL
 	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_BLOCK
 	help
-	 Support for ARMv8 Foundation Model (aarch64).
+	  Support for ARMv8 Foundation Model (aarch64).
+

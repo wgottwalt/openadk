@@ -5,7 +5,9 @@ config ADK_TARGET_SYSTEM_ARANYM_M68K
 	select ADK_TARGET_WITH_INPUT
 	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_WITH_HDD
+	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_BLOCK
 	select ADK_TARGET_KERNEL_ZIMAGE
 	help
-	 Support for ARAnyM Emulator (M68K).
+	  Support for ARAnyM Emulator (M68K).
 

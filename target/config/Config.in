@@ -23,6 +23,7 @@ config ADK_TARGET_SIM
 
 config ADK_TARGET_QEMU
 	bool
+	select ADK_TARGET_WITH_NET
 
 config ADK_TARGET_VBOX
 	bool

@@ -1,7 +1,32 @@
-menu "Network support"
+config ADK_KERNEL_NETDEVICES
+	bool
 
-config ADK_KERNEL_CONFIG_INET
+config ADK_KERNEL_ETHERNET
+	bool
+
+config ADK_KERNEL_NET
+	bool
+
+config ADK_KERNEL_PACKET
+	bool
+
+config ADK_KERNEL_UNIX
+	bool
+
+config ADK_KERNEL_NET_CORE
+	bool
+
+menu "Network support"
+depends on ADK_TARGET_WITH_NET
+
+config ADK_KERNEL_INET
 	bool "Enable TCP/IP support"
+	select ADK_KERNEL_NET
+	select ADK_KERNEL_UNIX
+	select ADK_KERNEL_PACKET
+	select ADK_KERNEL_NET_CORE
+	select ADK_KERNEL_NETDEVICES
+	select ADK_KERNEL_ETHERNET
 	select ADK_KERNEL_CRYPTO
 	select ADK_KERNEL_CRYPTO_AES
 	default y

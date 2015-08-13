@@ -4,5 +4,5 @@ config ADK_TARGET_SYSTEM_QEMU_SPARC
 	select ADK_TARGET_QEMU
 	select ADK_TARGET_KERNEL_ZIMAGE
 	help
-	 Support for Qemu Emulator SPARC architecture.
+	  Support for Qemu Emulator SPARC architecture.
 

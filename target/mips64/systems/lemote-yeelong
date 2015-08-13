@@ -10,8 +10,10 @@ config ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	select ADK_TARGET_WITH_RTC
 	select ADK_TARGET_WITH_HDD
 	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_BLOCK
 	select ADK_TARGET_WITH_ROOT_RW
 	select ADK_TARGET_KERNEL_VMLINUZ
 	help
-         System profile for Lemote Yeelong laptop.
+          System profile for Lemote Yeelong laptop.
 

@@ -183,6 +183,18 @@ endchoice
 
 menu "Kernel options"
 
+config ADK_KERNEL_DEVTMPFS
+	bool
+	default y
+
+config ADK_KERNEL_DEVTMPFS_MOUNT
+	bool
+	default y
+
+config ADK_KERNEL_UEVENT_HELPER
+	bool
+	depends on ADK_RUNTIME_DEV_MDEV
+
 config ADK_KERNEL_UEVENT_HELPER_PATH
 	string
 	default "/sbin/mdev"

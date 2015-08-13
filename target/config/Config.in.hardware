@@ -5,6 +5,12 @@
 config ADK_TARGET_WITH_CPU_FREQ
 	bool
 
+config ADK_TARGET_WITH_NET
+	bool
+
+config ADK_TARGET_WITH_BLOCK
+	bool
+
 config ADK_TARGET_WITH_USB
 	bool
 
@@ -104,5 +110,3 @@ config ADK_TARGET_WITH_MMU
 
 config ADK_TARGET_WITHOUT_MMU
 	bool
-	select ADK_PACKAGE_SASH
-	select ADK_PACKAGE_SIMPLEINIT

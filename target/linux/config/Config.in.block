@@ -1,4 +1,11 @@
+config ADK_KERNEL_BLOCK
+	bool
+
+config ADK_KERNEL_LBDAF
+	bool
+
 menu "Block devices support"
+depends on ADK_TARGET_WITH_BLOCK
 
 config ADK_KERNEL_MD
 	bool
@@ -101,6 +108,8 @@ depends on ADK_TARGET_WITH_PATA || ADK_TARGET_WITH_SATA || ADK_TARGET_QEMU || AD
 
 config ADK_KERNEL_PATA_RB532
 	tristate "CF disk driver for Mikrotik RB532"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -113,6 +122,8 @@ config ADK_KERNEL_PATA_RB532
 
 config ADK_KERNEL_PATA_AMD
 	tristate "AMD PATA driver"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -127,6 +138,8 @@ config ADK_KERNEL_PATA_AMD
 
 config ADK_KERNEL_PATA_SC1200
 	tristate
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -139,6 +152,8 @@ config ADK_KERNEL_PATA_SC1200
 
 config ADK_KERNEL_SATA_AHCI
 	tristate "AHCI SATA driver"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_BLK_DEV
@@ -153,6 +168,8 @@ config ADK_KERNEL_SATA_AHCI
 
 config ADK_KERNEL_ATA_PIIX
 	tristate "ATA PIIX support"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_DMA
 	select ADK_KERNEL_ATA
@@ -172,6 +189,8 @@ config ADK_KERNEL_ATA_PIIX
 
 config ADK_KERNEL_PATA_MACIO
 	tristate "MAC IO support"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -182,6 +201,8 @@ config ADK_KERNEL_PATA_MACIO
 	
 config ADK_KERNEL_PATA_PLATFORM
 	tristate "PATA platform driver"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -198,6 +219,8 @@ config ADK_KERNEL_PATA_PCMCIA
 
 config ADK_KERNEL_PATA_IMX
 	tristate "eSATA driver for IMX6 boards"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -216,6 +239,8 @@ config ADK_KERNEL_PATA_IMX
 
 config ADK_KERNEL_PATA_CMD64X
 	tristate "CMD64x PATA driver"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -228,6 +253,8 @@ config ADK_KERNEL_PATA_CMD64X
 
 config ADK_KERNEL_PATA_PXA
 	tristate "PATA driver for Sharp Zaurus"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_ATA
 	select ADK_KERNEL_ATA_SFF
@@ -252,6 +279,8 @@ depends on ADK_TARGET_WITH_SCSI || \
 
 config ADK_KERNEL_SCSI_SYM53C8XX_2
 	tristate "Symbios Logic 53C8XX2 support"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_LOWLEVEL
 	select ADK_KERNEL_BLK_DEV
@@ -260,6 +289,8 @@ config ADK_KERNEL_SCSI_SYM53C8XX_2
 
 config ADK_KERNEL_SCSI_IBMVSCSI
 	tristate "IBM VSCSI support"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_LOWLEVEL
 	select ADK_KERNEL_BLK_DEV
@@ -268,6 +299,8 @@ config ADK_KERNEL_SCSI_IBMVSCSI
 
 config ADK_KERNEL_SCSI_SUNESP
 	tristate "SUN ESP support"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_LOWLEVEL
 	select ADK_KERNEL_SBUS
@@ -282,6 +315,8 @@ depends on ADK_TARGET_WITH_SD
 
 config ADK_KERNEL_MMC_AT91
 	tristate
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_MMC
 	select ADK_KERNEL_MMC_BLOCK
@@ -293,6 +328,8 @@ config ADK_KERNEL_MMC_AT91
 
 config ADK_KERNEL_MMC_BCM2835
 	bool "SD card support for BCM2835 boards"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_MMC
 	select ADK_KERNEL_MMC_BLOCK
@@ -307,6 +344,8 @@ config ADK_KERNEL_MMC_BCM2835
 
 config ADK_KERNEL_MMC_SDHCI_ESDHC_IMX
 	bool "SD card support for IMX6 boards"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_SCSI_DMA
 	select ADK_KERNEL_SCSI_MULTI_LUN

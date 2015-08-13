@@ -1,4 +1,5 @@
 menu "Netfilter"
+depends on ADK_TARGET_WITH_NET
 
 config ADK_KERNEL_NETFILTER
 	bool

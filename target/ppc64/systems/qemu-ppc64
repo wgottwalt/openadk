@@ -3,5 +3,5 @@ config ADK_TARGET_SYSTEM_QEMU_PPC64
 	select ADK_CPU_PPC64
 	select ADK_TARGET_QEMU
 	help
-	 Support for Qemu Emulator PPC64 architecture.
+	  Support for Qemu Emulator PPC64 architecture.
 

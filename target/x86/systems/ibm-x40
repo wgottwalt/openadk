@@ -18,11 +18,13 @@ config ADK_TARGET_SYSTEM_IBM_X40
 	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_WITH_ACPI
 	select ADK_TARGET_WITH_WIFI
+	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_BLOCK
 	# with docking station 
 	select ADK_TARGET_WITH_PP
 	select ADK_TARGET_WITH_ROOT_RW
 	select ADK_TARGET_KERNEL_BZIMAGE
 	select ADK_PACKAGE_GRUB
 	help
-         System profile for IBM X40 laptop.
+          System profile for IBM X40 laptop.
 

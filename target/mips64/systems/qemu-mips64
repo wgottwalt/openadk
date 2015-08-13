@@ -4,5 +4,5 @@ config ADK_TARGET_SYSTEM_QEMU_MIPS64
 	select ADK_TARGET_QEMU
 	select ADK_TARGET_KERNEL_VMLINUZ
 	help
-	 Qemu support for MIPS64 architecture.
+	  Qemu support for MIPS64 architecture.
 

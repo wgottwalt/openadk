@@ -6,3 +6,4 @@ config ADK_TARGET_SYSTEM_TOOLCHAIN_AARCH64
 	select ADK_TARGET_PACKAGE_TXZ
 	help
 	  AARCH64 toolchain.
+

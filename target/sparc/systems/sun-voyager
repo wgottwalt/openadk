@@ -3,7 +3,9 @@ config ADK_TARGET_SYSTEM_SUN_VOYAGER
 	depends on ADK_EXPERIMENTAL
 	select ADK_CPU_SPARC_V8
 	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_BLOCK
 	select ADK_TARGET_KERNEL_ZIMAGE
 	help
-	 Support for Sun Voyager.
+	  Support for Sun Voyager.
 
