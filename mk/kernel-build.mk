@@ -2,9 +2,11 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(ADK_TOPDIR)/rules.mk
-include ${ADK_TOPDIR}/mk/kernel-ver.mk
+include $(ADK_TOPDIR)/mk/kernel-ver.mk
 include $(ADK_TOPDIR)/mk/linux.mk
-include ${ADK_TOPDIR}/mk/kernel-vars.mk
+include $(ADK_TOPDIR)/mk/kernel-vars.mk
+
+KERNEL_MODULES_USED:=$(shell grep ^ADK_KERNEL $(ADK_TOPDIR)/.config|grep =m)
 
 KERNEL_FILE:=$(ADK_TARGET_KERNEL)
 KERNEL_TARGET:=$(ADK_TARGET_KERNEL)
@@ -47,10 +49,12 @@ $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
 
 $(LINUX_DIR)/$(KERNEL_FILE): $(LINUX_DIR)/.config
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-compile
-	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(KERNEL_TARGET) modules $(MAKE_TRACE)
+	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(KERNEL_TARGET) $(MAKE_TRACE)
 	touch -c $(LINUX_DIR)/$(KERNEL_FILE)
 
 $(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
+	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-compile
+	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" modules $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} \
@@ -68,7 +72,11 @@ $(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
 		"${PACKAGE_DIR}"
 
 prepare:
+ifneq ($(KERNEL_MODULES_USED),)
 compile: $(LINUX_BUILD_DIR)/modules
+else
+compile: $(LINUX_DIR)/$(KERNEL_FILE)
+endif
 install: compile
 	$(TRACE) target/${ADK_TARGET_ARCH}-modules-install
 ifeq ($(ADK_TARGET_PACKAGE_IPKG)$(ADK_TARGET_PACKAGE_OPKG),y)
