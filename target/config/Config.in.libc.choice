@@ -69,8 +69,8 @@ endchoice
 choice
 prompt "C library version"
 
-config ADK_TARGET_LIB_UCLIBC_NG_1_0_5
-	bool "1.0.5"
+config ADK_TARGET_LIB_UCLIBC_NG_1_0_6
+	bool "1.0.6"
 	depends on ADK_TARGET_LIB_UCLIBC_NG
 
 config ADK_TARGET_LIB_UCLIBC_NG_GIT

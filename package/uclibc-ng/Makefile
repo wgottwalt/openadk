@@ -47,11 +47,6 @@ ifneq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),y)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-$(PKG_VER).so \
 		$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	# backward compatible symlink
-	-test -f $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)/ld-uClibc.so.1 && \
-		cd $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) && ln -sf ld-uClibc.so.1 ld-uClibc.so.0
-	-test -f $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)/ld64-uClibc.so.1 && \
-		cd $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) && ln -sf ld64-uClibc.so.1 ld64-uClibc.so.0
 	-for file in libcrypt libdl libm libresolv libutil; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VER).so \
