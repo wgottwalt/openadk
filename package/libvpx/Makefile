@@ -24,9 +24,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBVPX,libvpx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		minimal
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_XTENSA),y)
-CONFIGURE_ARGS+=	--target=generic-gnu
-endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
 CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
 endif
@@ -45,50 +42,17 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20),y)
 CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
 endif
-ifeq ($(ADK_TARGET_SYSTEM_IBM_X40),y)
-CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
-endif
-ifeq ($(ADK_TARGET_SYSTEM_INTEL_ATOM),y)
-CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
-endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_X86),y)
-CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
-endif
-ifeq ($(ADK_TARGET_SYSTEM_PCENGINES_WRAP),y)
-CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
-endif
-ifeq ($(ADK_TARGET_SYSTEM_PCENGINES_ALIX2D13),y)
-CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
-endif
-ifeq ($(ADK_TARGET_SYSTEM_PCENGINES_ALIX1C),y)
-CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
-endif
-ifeq ($(ADK_TARGET_SYSTEM_PCENGINES_ALIX2D2),y)
-CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
-endif
-ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
+ifeq ($(ADK_TARGET_ARCH_MIPS),y)
 CONFIGURE_ARGS+=	--target=mips32-linux-gcc
 endif
-ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB4XX),y)
-CONFIGURE_ARGS+=	--target=mips32-linux-gcc
-endif
-ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_AG241),y)
-CONFIGURE_ARGS+=	--target=mips32-linux-gcc
-endif
-ifeq ($(ADK_TARGET_SYSTEM_FON_FON2100),y)
-CONFIGURE_ARGS+=	--target=mips32-linux-gcc
-endif
-ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+ifeq ($(ADK_TARGET_ARCH_MIPS64),y)
 CONFIGURE_ARGS+=	--target=mips64-linux-gcc
 endif
-ifeq ($(ADK_TARGET_SYSTEM_BROADCOM_BCM47XX),y)
-CONFIGURE_ARGS+=	--target=mips32-linux-gcc
+ifeq ($(ADK_TARGET_ARCH_X86),y)
+CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
 endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPSEL),y)
-CONFIGURE_ARGS+=	--target=mips32-linux-gcc
-endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPS),y)
-CONFIGURE_ARGS+=	--target=mips32-linux-gcc
+ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
+CONFIGURE_ARGS+=	--target=generic-gnu
 endif
 CONFIGURE_ARGS+=	--prefix=/usr \
 			--disable-install-docs \
