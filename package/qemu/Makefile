@@ -63,7 +63,6 @@ CONFIGURE_ARGS+=	--host-cc=$(HOST_CC) \
 HOST_STYLE:=		manual
 HOST_CONFIGURE_ARGS+=	--host-cc=$(HOST_CC) \
 			--prefix=${STAGING_HOST_DIR}/usr \
-			--audio-drv-list=alsa \
 			--disable-stack-protector \
 			--disable-pie \
 			--disable-docs \
