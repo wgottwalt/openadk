@@ -3,7 +3,7 @@
 
 PKG_NAME:=		glibc
 ifeq ($(ADK_LIBC_VERSION),git)
-PKG_VERSION:=		2.21.90
+PKG_VERSION:=		2.22.90
 PKG_SITES:=		git://sourceware.org/git/glibc.git
 endif
 ifeq ($(ADK_TARGET_LIB_GLIBC_2_22),y)
