@@ -1,36 +1,35 @@
 menu "Filesystems support"
 
 config ADK_KERNEL_MISC_FILESYSTEMS
-	boolean
+	bool
 
 config ADK_KERNEL_FSNOTIFY
-	boolean
+	bool
 	default y
 
 config ADK_KERNEL_EXPORTFS
-	boolean
-	default y
+	bool
 
 config ADK_KERNEL_JBD2
+	tristate
 	select ADK_KERNEL_CRC32
 	select ADK_KERNEL_CRYPTO
 	select ADK_KERNEL_CRYPTO_CRC32C
-	tristate
 
 config ADK_KERNEL_YAFFS_YAFFS1
-	boolean
+	bool
 
 config ADK_KERNEL_YAFFS_YAFFS2
-	boolean
+	bool
 
 config ADK_KERNEL_YAFFS_AUTO_YAFFS2
-	boolean
+	bool
 
 config ADK_KERNEL_DNOTIFY
-	boolean
+	bool
 
 config ADK_KERNEL_EXT3_FS_XATTR
-	boolean
+	bool
 
 config ADK_KERNEL_FAT_DEFAULT_CODEPAGE
 	int
@@ -41,31 +40,25 @@ config ADK_KERNEL_FAT_DEFAULT_IOCHARSET
 	default "iso8859-1"
 
 config ADK_KERNEL_SQUASHFS_XZ
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_JFFS2_ZLIB
-	boolean
-	default n
+	bool
 
 menu "Filesystems"
 
 config ADK_KERNEL_EXT2_FS
-	prompt "EXT2 filesystem support"
-	tristate
+	tristate "EXT2 filesystem support"
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
 	help
 	  Ext2 is a standard Linux file system for hard disks.
 
 config ADK_KERNEL_EXT3_FS
-	prompt "EXT3 filesystem support"
-	tristate
-	default n
+	tristate "EXT3 filesystem support"
 	help
 	  This is the journalling version of the Second extended file system
 	  (often called ext3), the de facto standard Linux file system
@@ -91,19 +84,15 @@ config ADK_KERNEL_EXT3_FS
 	  (available at <http://sourceforge.net/projects/e2fsprogs/>).
 
 config ADK_KERNEL_EXT4_FS
-	prompt "EXT4 filesystem support"
-	tristate
+	tristate "EXT4 filesystem support"
 	select ADK_KERNEL_JBD2
-	default n
 	help
 	  Ext4 filesystem.
 
 config ADK_KERNEL_HFSPLUS_FS
-	prompt "HFS+ filesystem support"
-	tristate
+	tristate "HFS+ filesystem support"
 	select ADK_KERNEL_NLS_UTF8
 	select ADK_KERNEL_MISC_FILESYSTEMS
-	default n
 	help
 	  If you say Y here, you will be able to mount extended format
 	  Macintosh-formatted hard drive partitions with full read-write access.
@@ -114,9 +103,7 @@ config ADK_KERNEL_HFSPLUS_FS
 	  style features such as file ownership and permissions.
 
 config ADK_KERNEL_NTFS_FS
-	prompt "NTFS file system support"
-	tristate
-	default n
+	tristate "NTFS file system support"
 	help
 	  NTFS is the file system of Microsoft Windows NT, 2000, XP and 2003.
 
@@ -141,8 +128,7 @@ config ADK_KERNEL_NTFS_FS
 	  Kernel modules for NTFS support
 
 config ADK_KERNEL_VFAT_FS
-	prompt "VFAT filesystem support"
-	tristate
+	tristate "VFAT filesystem support"
 	select ADK_KERNEL_NLS_CODEPAGE_850
 	select ADK_KERNEL_NLS_ISO8859_1
 	default y if ADK_TARGET_BOARD_BCM28XX
@@ -158,11 +144,9 @@ config ADK_KERNEL_VFAT_FS
 
 
 config ADK_KERNEL_XFS_FS
-	prompt "XFS filesystem support"
-	tristate
+	tristate "XFS filesystem support"
 	select ADK_KERNEL_EXPORTFS
 	select ADK_KERNEL_LIBCRC32C
-	default n
 	help
 	  XFS is a high performance journaling filesystem which originated
 	  on the SGI IRIX platform.  It is completely multi-threaded, can
@@ -176,15 +160,13 @@ config ADK_KERNEL_XFS_FS
 	  with the IRIX version of XFS.
 
 config ADK_KERNEL_BTRFS_FS
-	prompt "Btrfs filesystem support"
-	tristate
+	tristate "Btrfs filesystem support"
 	select ADK_KERNEL_CRYPTO_CRC32C
 	select ADK_KERNEL_RAID6_PQ
 	select ADK_KERNEL_XOR_BLOCKS
 	select ADK_KERNEL_ZLIB_DEFLATE
 	select ADK_KERNEL_LZO_COMPRESS
 	select ADK_KERNEL_LZO_DECOMPRESS
-	default n
 	help
 	  Btrfs is a general purpose copy-on-write filesystem with extents,
 	  writable snapshotting, support for multiple devices and many more
@@ -193,9 +175,7 @@ config ADK_KERNEL_BTRFS_FS
 	  http://btrfs.wiki.kernel.org
 
 config ADK_KERNEL_FUSE_FS
-	prompt "Filesystem in Userspace support"
-	tristate
-	default n
+	tristate "Filesystem in Userspace support"
 	help
 	  With FUSE it is possible to implement a fully functional
 	  filesystem in a userspace program.
@@ -205,14 +185,11 @@ config ADK_KERNEL_FUSE_FS
 	  fuse-utils.
 
 config ADK_KERNEL_JOLIET
-	boolean 
-	default n
+	bool 
 
 config ADK_KERNEL_ISO9660_FS
-	prompt "ISO 9660 / JOLIET CDROM file system support"
-	tristate
+	tristate "ISO 9660 / JOLIET CDROM file system support"
 	select ADK_KERNEL_JOLIET
-	default n
 	help
 	  This is the standard file system used on CD-ROMs.  It was previously
 	  known as "High Sierra File System" and is called "hsfs" on other
@@ -225,10 +202,8 @@ config ADK_KERNEL_ISO9660_FS
 	  enlarging your kernel by about 27 KB; otherwise say N.
 
 config ADK_KERNEL_UDF_FS
-	prompt "UDF file system support"
-	tristate
+	tristate "UDF file system support"
 	select ADK_KERNEL_CRC_ITU_T
-	default n
 	help
 	  This is the new file system used on some CD-ROMs and DVDs. Say Y if
 	  you intend to mount DVD discs or CDRW's written in packet mode, or
@@ -236,30 +211,25 @@ config ADK_KERNEL_UDF_FS
 	  Please read <file:Documentation/filesystems/udf.txt>.
 
 config ADK_KERNEL_JFFS2_FS
-	prompt "JFFS2 filesystem"
-	tristate
+	tristate "JFFS2 filesystem"
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_MTD
 	select ADK_KERNEL_MTD_BLOCK
 	select ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
 	select ADK_KERNEL_JFFS2_ZLIB
 	depends on ADK_TARGET_WITH_MTD
-	default n
 	help
 	  JFFS2 flash filesystem
 
 config ADK_KERNEL_SQUASHFS
-	prompt "SquashFS filesystem"
-	tristate
+	tristate "SquashFS filesystem"
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_SQUASHFS_XZ
-	default n
 	help
 	  Squashfs compressed read-only filesystem
 
 config ADK_KERNEL_YAFFS_FS
-	prompt "YAFFS2 filesystem"
-	tristate
+	tristate "YAFFS2 filesystem"
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	select ADK_KERNEL_MTD
 	select ADK_KERNEL_MTD_BLOCK
@@ -267,28 +237,15 @@ config ADK_KERNEL_YAFFS_FS
 	select ADK_KERNEL_YAFFS_YAFFS2
 	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
 	depends on ADK_TARGET_WITH_NAND
-	default n
 	help
 	  YAFFS2 filesystem for NAND devices
 
 endmenu
 
 menu "Filesystem features"
-config ADK_KERNEL_INOTIFY
-	prompt "Inotify file change notification support"
-	boolean
-	default y
-	help
-	  Say Y here to enable inotify support.  Inotify is a file change
-	  notification system and a replacement for dnotify.  Inotify fixes
-	  numerous shortcomings in dnotify and introduces several new features
-	  including multiple file events, one-shot support, and unmount
-	  notification.
 
 config ADK_KERNEL_INOTIFY_USER
-	prompt "Inotify support for userspace"
-	boolean
-	depends on ADK_KERNEL_INOTIFY
+	bool "Inotify support for userspace"
 	default y
 	help
 	  Say Y here to enable inotify support for userspace, including the

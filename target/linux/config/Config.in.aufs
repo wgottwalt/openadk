@@ -37,7 +37,6 @@ endchoice
 
 config ADK_KERNEL_AUFS_HINOTIFY
 	bool "Use inotify to detect actions on a branch"
-	select ADK_KERNEL_INOTIFY
 	help
 	 If you want to modify files on branches directly, eg. bypassing aufs,
 	 and want aufs to detect the changes of them fully, then enable this
