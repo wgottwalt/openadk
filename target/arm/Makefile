@@ -135,17 +135,18 @@ ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		dtbs $(MAKE_TRACE)
 endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		dtbs $(MAKE_TRACE)
-endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
-	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
-		dtbs $(MAKE_TRACE)
+	mkdir -p $(FW_DIR)/overlays
+	for x in $(LINUX_DIR)/arch/arm/boot/dts/overlays/*.dtb; do \
+		[[ -e "$$x" ]] && cp $(LINUX_DIR)/arch/arm/boot/dts/overlays/*.dtb $(FW_DIR)/overlays; \
+		break; \
+	done
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
-		sun7i-a20-bananapro.dtb
+		sun7i-a20-bananapro.dtb $(MAKE_TRACE)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \

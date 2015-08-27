@@ -10,10 +10,11 @@ config ADK_KERNEL_I2C_CHARDEV
 config ADK_KERNEL_I2C_BCM2708
 	tristate "I2C driver for BCM2835 boards"
 	select ADK_KERNEL_I2C
+	select ADK_KERNEL_REGMAP
 	select ADK_KERNEL_REGMAP_I2C
 	select ADK_KERNEL_I2C_CHARDEV
 	depends on ADK_TARGET_BOARD_BCM28XX
-	default y if ADK_TARGET_BOARD_BCM28XX
+	default m if ADK_TARGET_BOARD_BCM28XX
 	default n
 	help
 	  I2C driver for BCM2835 boards.
@@ -21,10 +22,11 @@ config ADK_KERNEL_I2C_BCM2708
 config ADK_KERNEL_I2C_SUNXI
 	tristate "I2C driver for SUNXI boards"
 	select ADK_KERNEL_I2C
+	select ADK_KERNEL_REGMAP
 	select ADK_KERNEL_REGMAP_I2C
 	select ADK_KERNEL_I2C_CHARDEV
 	depends on ADK_TARGET_SYSTEM_BANANA_PRO
-	default y if ADK_TARGET_SYSTEM_BANANA_PRO
+	default m if ADK_TARGET_SYSTEM_BANANA_PRO
 	default n
 	help
 	  I2C driver for SUNXI boards.
@@ -32,10 +34,11 @@ config ADK_KERNEL_I2C_SUNXI
 config ADK_KERNEL_I2C_IMX
 	tristate "I2C driver for IMX6 boards"
 	select ADK_KERNEL_I2C
+	select ADK_KERNEL_REGMAP
 	select ADK_KERNEL_REGMAP_I2C
 	select ADK_KERNEL_I2C_CHARDEV
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
-	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 	help
 	  I2C driver for IMX6 boards.
@@ -45,7 +48,7 @@ config ADK_KERNEL_SCX200_ACB
 	depends on ADK_CPU_GEODE
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_I2C_CHARDEV
-	default y if ADK_CPU_GEODE
+	default m if ADK_CPU_GEODE
 	default n
 	help
 	  I2C driver for Geode boards.
