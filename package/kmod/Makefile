@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kmod
 PKG_VERSION:=		19
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		3e7fee6eeff5435848b2dcc852bc8959066478d687d232284d67300c071e7b14
 PKG_DESCR:=		kernel module utils
 PKG_SECTION:=		sys/utils
@@ -30,6 +30,13 @@ $(eval $(call PKG_template,LIBKMOD,libkmod,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--host=${GNU_TARGET_NAME}
 
+HOST_CONFIGURE_ARGS+=	--disable-manpages \
+			--disable-logging
+
+hostpost-install:
+	ln -sf kmod $(STAGING_HOST_DIR)/usr/bin/depmod
+	ln -sf kmod $(STAGING_HOST_DIR)/usr/bin/modinfo
+
 kmod-install:
 	$(INSTALL_DIR) $(IDIR_KMOD)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/kmod \
@@ -45,12 +52,6 @@ libkmod-install:
 	$(INSTALL_DIR) $(IDIR_LIBKMOD)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libkmod*.so* \
 		$(IDIR_LIBKMOD)/usr/lib
-
-HOST_CONFIGURE_ARGS+=	--disable-manpages \
-			--disable-logging
-
-hostpost-install:
-	ln -sf kmod $(STAGING_HOST_DIR)/usr/bin/depmod
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
