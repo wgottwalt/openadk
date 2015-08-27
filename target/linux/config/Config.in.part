@@ -1,0 +1,11 @@
+menu "Partition Types"
+
+config ADK_KERNEL_PARTITION_ADVANCED
+	bool
+	default y
+
+config ADK_KERNEL_MSDOS_PARTITION
+	bool
+	default y
+
+endmenu

@@ -254,6 +254,7 @@ config ADK_KERNEL_INOTIFY_USER
 	  descriptor, which is also select()- and poll()-able.
 
 endmenu
+source target/linux/config/Config.in.part
 source target/linux/config/Config.in.fsnet
 source target/linux/config/Config.in.nls
 source target/linux/config/Config.in.aufs

@@ -1,12 +1,10 @@
 menu "Network filesystems"
 
 config ADK_KERNEL_FS_POSIX_ACL
-	boolean
-	default y
+	bool
 
 config ADK_KERNEL_CIFS
-	prompt "CIFS support"
-	tristate
+	tristate "CIFS support"
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	select ADK_KERNEL_CRYPTO_MD4
         select ADK_KERNEL_CRYPTO_MD5
@@ -16,7 +14,6 @@ config ADK_KERNEL_CIFS
         select ADK_KERNEL_CRYPTO_DES
         select ADK_KERNEL_CRYPTO_SHA256
 	select ADK_KERNEL_NLS_UTF8
-	default n
 	help
 	  This is the client VFS module for the Common Internet File System
 	  (CIFS) protocol which is the successor to the Server Message Block 
@@ -41,33 +38,27 @@ config ADK_KERNEL_CIFS
 	  to mount to Samba or Windows from this machine, say Y.
 
 config ADK_KERNEL_CODA_FS
-	prompt "Support for CODA filesystem"
-	tristate
+	tristate "Support for CODA filesystem"
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
-	default n
 	help
 	  This is the kernel part of the client for the CODA filesystem.
 
 config ADK_KERNEL_NFS_V3
-	boolean
-	default n
+	bool
+	select ADK_KERNEL_NETWORK_FILESYSTEMS
 
 config ADK_KERNEL_NFS_V4
-	boolean
+	bool
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
-	default y if ADK_PACKAGE_NFS_UTILS_V4
-	default n
 
 config ADK_KERNEL_NFS_FS
-	prompt "NFS client support"
-	tristate
+	tristate "NFS client support"
 	select ADK_KERNEL_NFS_V3
 	select ADK_KERNEL_FILE_LOCKING
 	select ADK_KERNEL_DNOTIFY
 	select ADK_KERNEL_SUNRPC
 	select ADK_KERNEL_LOCKD
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
-	default n
 	help
 	  If you are connected to some other (usually local) Unix computer
 	  (using SLIP, PLIP, PPP or Ethernet) and want to mount files residing
@@ -103,18 +94,16 @@ config ADK_KERNEL_NFS_FS
 	  Kernel modules for NFS client support
 
 config ADK_KERNEL_NFSD_V3
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_NFSD_V4
-	boolean
+	bool
 	select ADK_KERNEL_SUNRPC_GSS
 	default y if ADK_PACKAGE_NFS_UTILS_V4
 	default n
 
 config ADK_KERNEL_NFSD
-	prompt "NFS server support"
-	tristate
+	tristate "NFS server support"
 	select ADK_KERNEL_EXPORTFS
 	select ADK_KERNEL_NFSD_V3
 	select ADK_KERNEL_DNOTIFY
@@ -122,7 +111,6 @@ config ADK_KERNEL_NFSD
 	select ADK_KERNEL_SUNRPC
 	select ADK_KERNEL_LOCKD
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
-	default n
 	help
 	  If you want your Linux box to act as an NFS *server*, so that other
 	  computers on your local network which support NFS can access certain
@@ -145,20 +133,16 @@ config ADK_KERNEL_NFSD
 
 config ADK_KERNEL_LOCKD
 	tristate
-	default n
 
 config ADK_KERNEL_SUNRPC
 	tristate
-	default n
 
 config ADK_KERNEL_SUNRPC_GSS
 	tristate
 	select ADK_KERNEL_SUNRPC
-	default n
 
 config ADK_KERNEL_RPCSEC_GSS_KRB5
-	prompt "RPC security support"
-	tristate
+	tristate "RPC security support"
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
 	select ADK_KERNEL_SUNRPC_GSS
 	select ADK_KERNEL_SUNRPC
@@ -172,7 +156,5 @@ config ADK_KERNEL_RPCSEC_GSS_KRB5
 	select ADK_KERNEL_CRYPTO_SHA1
 	select ADK_KERNEL_CRYPTO_AES
 	select ADK_KERNEL_CRYPTO_ARC4
-	default n
-	help
 
 endmenu
