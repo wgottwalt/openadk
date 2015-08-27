@@ -5,7 +5,7 @@ config ADK_KERNEL_PARTITION_ADVANCED
 	default y
 
 config ADK_KERNEL_MSDOS_PARTITION
-	bool
+	bool "MSDOS partitions"
 	default y
 
 endmenu
