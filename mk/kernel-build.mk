@@ -49,22 +49,21 @@ $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
 
 $(LINUX_DIR)/$(KERNEL_FILE): $(LINUX_DIR)/.config
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-compile
-	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" $(KERNEL_TARGET) $(MAKE_TRACE)
+	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} $(KERNEL_TARGET) $(MAKE_TRACE)
 	touch -c $(LINUX_DIR)/$(KERNEL_FILE)
 
 $(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-compile
-	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} LOCALVERSION="" modules $(MAKE_TRACE)
+	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} modules $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-install
 	rm -rf $(LINUX_BUILD_DIR)/modules
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} \
 		DEPMOD=$(ADK_DEPMOD) \
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
-		LOCALVERSION="" \
 		modules_install $(MAKE_TRACE)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-create-packages
 	@mkdir -p ${PACKAGE_DIR}
-	${BASH} ${SCRIPT_DIR}/make-module-ipkgs.sh \
+	PATH='${HOST_PATH}' ${BASH} ${SCRIPT_DIR}/make-module-ipkgs.sh \
 		"${ADK_TARGET_CPU_ARCH}" \
 		"${KERNEL_VERSION}" \
 		"${LINUX_BUILD_DIR}" \
