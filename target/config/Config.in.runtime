@@ -220,8 +220,6 @@ config ADK_RUNTIME_GETTY_SERIAL
 config ADK_RUNTIME_CONSOLE_VGA_DEVICE
 	string "VGA console device"
 	depends on ADK_TARGET_WITH_VGA
-	default "tty1" if ADK_TARGET_SYSTEM_RASPBERRY_PI
-	default "tty1" if ADK_TARGET_SYSTEM_RASPBERRY_PI2
 	default "tty0"
 
 config ADK_RUNTIME_CONSOLE_SERIAL_DEVICE
