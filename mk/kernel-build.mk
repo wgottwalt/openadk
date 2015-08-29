@@ -61,6 +61,7 @@ $(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
 		DEPMOD=$(ADK_DEPMOD) \
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
 		modules_install $(MAKE_TRACE)
+ifneq ($(ADK_RUNTIME_DEV_UDEV),y)
 	$(TRACE) target/$(ADK_TARGET_ARCH)-create-packages
 	@mkdir -p ${PACKAGE_DIR}
 	PATH='${HOST_PATH}' ${BASH} ${SCRIPT_DIR}/make-module-ipkgs.sh \
@@ -69,6 +70,7 @@ $(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
 		"${LINUX_BUILD_DIR}" \
 		"${PKG_BUILD}" \
 		"${PACKAGE_DIR}"
+endif
 
 prepare:
 ifneq ($(KERNEL_MODULES_USED),)
