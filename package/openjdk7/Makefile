@@ -41,10 +41,13 @@ $(eval $(call PKG_template,OPENJDK7,openjdk7,$(PKG_VERSION)-${PKG_RELEASE},${PKG
 
 CONFIG_STYLE:=		basic
 
-# uclibc needs -liconv
-ifeq ($(ADK_TARGET_LIB_UCLIBC)$(ADK_TARGET_LIB_UCLIBC_NG),y)
+# uclibc with iconv-tiny/libiconv needs -liconv
+ifeq ($(ADK_TARGET_LIBC_ICONV),)
+ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
 TARGET_LIBS:=		-liconv -lm
 endif
+endif
+
 # for UINTPTR_MAX in stdint.h
 TARGET_CFLAGS+=		-D__STDC_LIMIT_MACROS
 # segfaults with march=pentium-m/atom
@@ -115,6 +118,7 @@ OPENJDK_NATIVE_ENV:=	JAVACFLAGS="-cp ${STAGING_HOST_DIR}/usr/share/java/libgcj-$
 			LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64 \
 			BOOTCLASSPATH="$(STAGING_HOST_DIR)/usr/share/jamvm/classes.zip:$(STAGING_HOST_DIR)/usr/share/classpath/glibj.zip" \
 			FFI_LDFLAGS='$(HOST_LDFLAGS)' \
+			OTHER_CPPFLAGS='$(HOST_CPPFLAGS)' \
 			OTHER_LDFLAGS='$(HOST_LDFLAGS)' \
 			ALSA_CPPFLAGS='$(HOST_CPPFLAGS)' \
 			ALT_OPENWIN_HOME='$(STAGING_HOST_DIR)/usr' \
