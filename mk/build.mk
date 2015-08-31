@@ -120,7 +120,7 @@ POSTCONFIG=		-@\
 			touch .rebuild.dropbear .rebuild.openssh;\
 			rebuild=1;\
 		fi; \
-		if [ "$$(grep ^ADK_KERNEL_VERSION .config|md5sum)" != "$$(grep ^ADK_KERNEL_VERSION .config.old|md5sum)" ];then \
+		if [ "$$(grep ^ADK_TARGET_KERNEL_VERSION .config|md5sum)" != "$$(grep ^ADK_TARGET_KERNEL_VERSION .config.old|md5sum)" ];then \
 			cleandir=1;\
 			rebuild=1;\
 		fi; \

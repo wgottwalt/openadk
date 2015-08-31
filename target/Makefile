@@ -27,7 +27,7 @@ ADK_PACKAGE_CMDLINE:=root=$(ADK_PACKAGE_CRYPTINIT_ROOT) swap=$(ADK_PACKAGE_CRYPT
 
 ifeq ($(ADK_TARGET_KERNEL_CUSTOMISING),y)
 config-prepare: $(ADK_TOPDIR)/.config
-	@PATH='$(HOST_PATH)' sed -n '/^ADK_KERNEL/s//CONFIG/p' $(ADK_TOPDIR)/.config | grep -v CONFIG_VERSION \
+	@PATH='$(HOST_PATH)' sed -n '/^ADK_KERNEL/s//CONFIG/p' $(ADK_TOPDIR)/.config \
 	    >$(BUILD_DIR)/.kernelconfig.kernel
 	@if [ -f $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_KERNEL_MINICONFIG) ];then \
 		cat $(ADK_TOPDIR)/target/linux/kernel.config \
