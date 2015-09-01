@@ -10,6 +10,9 @@ config ADK_KERNEL_SERIAL_8250_PNP
 config ADK_KERNEL_SERIAL_OF_PLATFORM
 	bool
 
+config ADK_KERNEL_SERIAL_OMAP_CONSOLE
+	bool
+
 config ADK_KERNEL_SERIAL_ETRAXFS_CONSOLE
 	bool
 
@@ -89,5 +92,14 @@ config ADK_KERNEL_SERIAL_PMACZILOG
 	default n
 	help
 	  Serial driver for PMAC Q800 M68K.
+
+config ADK_KERNEL_SERIAL_OMAP
+	bool "omap serial driver"
+	select ADK_KERNEL_SERIAL_OMAP_CONSOLE
+	depends on ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+	default y if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+	default n
+	help
+	  Serial driver for Beaglebone Black
 
 endmenu
