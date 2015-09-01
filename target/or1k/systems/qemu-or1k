@@ -1,0 +1,6 @@
+config ADK_TARGET_SYSTEM_QEMU_OR1K
+	bool "Qemu Emulator"
+	select ADK_TARGET_QEMU
+	help
+	  Qemu Emulator for OR1K architecture.
+
