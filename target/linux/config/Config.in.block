@@ -1,11 +1,17 @@
+menu "Block devices support"
+depends on ADK_TARGET_WITH_BLOCK
+
 config ADK_KERNEL_BLOCK
 	bool
 
 config ADK_KERNEL_LBDAF
 	bool
 
-menu "Block devices support"
-depends on ADK_TARGET_WITH_BLOCK
+config ADK_KERNEL_BLK_DEV_BSG
+	bool
+
+config ADK_KERNEL_BLK_DEV_BSGLIB
+	bool
 
 config ADK_KERNEL_MD
 	bool
@@ -13,13 +19,7 @@ config ADK_KERNEL_MD
 config ADK_KERNEL_RAID6_PQ
 	tristate
 
-config ADK_KERNEL_LBD
-	bool
-
 config ADK_KERNEL_BLK_DEV_IO_TRACE
-	bool
-
-config ADK_KERNEL_LSF
 	bool
 
 config ADK_KERNEL_IOSCHED_AS
@@ -330,14 +330,17 @@ config ADK_KERNEL_MMC_AT91
 	default n
 
 config ADK_KERNEL_MMC_BCM2835
-	bool "SD card support for BCM2835 boards"
+	bool "SD card support for BCM28XX boards"
 	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_LBDAF
 	select ADK_KERNEL_SCSI
 	select ADK_KERNEL_MMC
 	select ADK_KERNEL_MMC_BLOCK
+	select ADK_KERNEL_MMC_BLOCK_BOUNCE
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_BLK_DEV_BSG
+	select ADK_KERNEL_BLK_DEV_BSGLIB
 	select ADK_KERNEL_MMC_SDHCI
 	select ADK_KERNEL_MMC_SDHCI_PLTFM
 	select ADK_KERNEL_MMC_BCM2835_DMA
@@ -361,6 +364,8 @@ config ADK_KERNEL_MMC_SDHCI_ESDHC_IMX
 	select ADK_KERNEL_MMC_BLOCK_BOUNCE
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_BLK_DEV_BSG
+	select ADK_KERNEL_BLK_DEV_BSGLIB
 	select ADK_KERNEL_MMC_SDHCI
 	select ADK_KERNEL_MMC_SDHCI_IO_ACCESSORS
 	select ADK_KERNEL_MMC_SDHCI_PLTFM
@@ -384,6 +389,8 @@ config ADK_KERNEL_MMC_SUNXI
 	select ADK_KERNEL_MMC_BLOCK_BOUNCE
 	select ADK_KERNEL_BLK_DEV
 	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_KERNEL_BLK_DEV_BSG
+	select ADK_KERNEL_BLK_DEV_BSGLIB
 	select ADK_KERNEL_MMC_SDHCI
 	select ADK_KERNEL_MMC_SDHCI_IO_ACCESSORS
 	select ADK_KERNEL_MMC_SDHCI_PLTFM
@@ -398,8 +405,6 @@ menu "Block driver support"
 
 config ADK_KERNEL_SCSI
 	tristate "SCSI support"
-	select ADK_KERNEL_LBD
-	select ADK_KERNEL_LSF
 	select ADK_KERNEL_IOSCHED_AS
 	help
 	  If you want to use a SCSI hard disk, SCSI tape drive, SCSI CD-ROM or

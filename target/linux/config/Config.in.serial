@@ -22,6 +22,9 @@ config ADK_KERNEL_SERIAL_PMACZILOG_CONSOLE
 config ADK_KERNEL_SERIAL_SH_SCI_CONSOLE
 	bool
 
+config ADK_KERNEL_SERIAL_AMBA_PL011_CONSOLE
+	bool
+
 config ADK_KERNEL_DA_CONSOLE
 	bool
 
@@ -55,6 +58,15 @@ config ADK_KERNEL_SERIAL_8250
 	default n
 	help
 	  Serial driver for 8250 UART chip.
+
+config ADK_KERNEL_SERIAL_AMBA_PL011
+	bool "AMBA PL011 serial driver"
+	select ADK_KERNEL_SERIAL_AMBA_PL011_CONSOLE
+	depends on ADK_TARGET_BOARD_BCM28XX
+	default y if ADK_TARGET_BOARD_BCM28XX
+	default n
+	help
+	  Serial driver for AMBA PL011 chip.
 
 config ADK_KERNEL_SERIAL_SH_SCI
 	bool "sci serial driver"
