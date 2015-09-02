@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libcec
-PKG_VERSION:=		d997b9aa52b9fd4b2ed14e257c63582eae90801e
+PKG_VERSION:=		d156e7cb684f86a9d73f8dcf087d4799c62d9721
 PKG_RELEASE:=		1
 PKG_DESCR:=		control your device with your tv remote control
 PKG_SECTION:=		libs/video
@@ -14,10 +14,10 @@ PKG_URL:=		http://libcec.pulse-eight.com/
 PKG_SITES:=		https://github.com/Pulse-Eight/libcec.git
 PKG_OPTS:=		dev
 
-PKG_DEPENDS_RASPBERRY_PI:=	bcm28xx-vc
-PKG_BUILDDEP_RASPBERRY_PI:=	bcm28xx-vc
 PKG_DEPENDS_RASPBERRY_PI2:=	bcm28xx-vc
 PKG_BUILDDEP_RASPBERRY_PI2:=	bcm28xx-vc
+PKG_DEPENDS_RASPBERRY_PI:=	bcm28xx-vc
+PKG_BUILDDEP_RASPBERRY_PI:=	bcm28xx-vc
 PKG_SYSTEM_DEPENDS:=    raspberry-pi raspberry-pi2 solidrun-imx6
 
 include $(ADK_TOPDIR)/mk/package.mk
@@ -35,7 +35,7 @@ TARGET_CXXFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
 CONFIG_STYLE:=          cmake
 CMAKE_FLAGS+=		-DSKIP_PYTHON_WRAPPER=1 -DBUILD_SHARED_LIBS=1
 ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
-CMAKE_FLAGS+=		-DHAVE_RPI_API=1
+CMAKE_FLAGS+=		-DHAVE_RPI_API=1 -DRPI_LIB_DIR=$(STAGING_TARGET_DIR)/opt/vc/lib
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 CMAKE_FLAGS+=		-DHAVE_IMX_API=1
