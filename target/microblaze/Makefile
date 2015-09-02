@@ -8,10 +8,10 @@ include $(ADK_TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/arch/microblaze/boot/$(ADK_TARGET_KERNEL)
 
 QEMU_ARGS:=${ADK_QEMU_ARGS}
-ifeq ($(ADK_TARGET_QEMU_MICROBLAZE_MODEL_ML605),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_MICROBLAZE_ML605),y)
 QEMU_ARGS+=-M petalogix-ml605 -dtb target/microblaze/ml605.dtb
 endif
-ifeq ($(ADK_TARGET_QEMU_MICROBLAZE_MODEL_S3ADSP1800),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_MICROBLAZE_S3ADSP1800),y)
 QEMU_ARGS+=-M petalogix-s3adsp1800
 endif
 

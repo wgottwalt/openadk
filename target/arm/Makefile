@@ -14,16 +14,16 @@ KERNEL:=$(LINUX_DIR)/arch/arm/boot/uImage
 endif
 
 QEMU_ARGS:=${ADK_QEMU_ARGS}
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_SPITZ),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_SPITZ),y)
 QEMU_ARGS+=-M spitz
 endif
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_TERRIER),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_TERRIER),y)
 QEMU_ARGS+=-M terrier
 endif
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB),y)
 QEMU_ARGS+=-M versatilepb -net user -net nic,model=smc91c111
 endif
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
 QEMU_ARGS+=-M vexpress-a9 -cpu cortex-a9 -m 256 -net user -net nic,model=lan9118 -dtb $(FW_DIR)/vexpress-v2p-ca9.dtb
 endif
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
@@ -34,7 +34,7 @@ endif
 ifeq ($(ADK_TARGET_FS),archive)
 targethelp:
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VERSATILEPB)$(ADK_TARGET_QEMU_ARM_MODEL_TERRIER)$(ADK_TARGET_QEMU_ARM_MODEL_SPITZ),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB)$(ADK_TARGET_SYSTEM_QEMU_ARM_TERRIER)$(ADK_TARGET_SYSTEM_QEMU_ARM_SPITZ),y)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh qemu-${ADK_TARGET_CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
@@ -131,7 +131,7 @@ kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
 dtb-install:
-ifeq ($(ADK_TARGET_QEMU_ARM_MODEL_VEXPRESS_A9),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		dtbs $(MAKE_TRACE)
 endif

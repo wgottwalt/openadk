@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_QEMU_M68K_Q800
+	bool "Qemu M68K (Q800)"
+	select ADK_TARGET_QEMU
+	select ADK_CPU_68040
+	select ADK_TARGET_KERNEL_ZIMAGE
+	help
+	 Support for Qemu Emulator with M68K architecture (Q800). 
+

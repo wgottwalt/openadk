@@ -29,9 +29,9 @@ ifeq ($(ADK_TARGET_KERNEL_CUSTOMISING),y)
 config-prepare: $(ADK_TOPDIR)/.config
 	@PATH='$(HOST_PATH)' sed -n '/^ADK_KERNEL/s//CONFIG/p' $(ADK_TOPDIR)/.config \
 	    >$(BUILD_DIR)/.kernelconfig.kernel
-	@if [ -f $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_KERNEL_MINICONFIG) ];then \
+	@if [ -f $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_SYSTEM) ];then \
 		cat $(ADK_TOPDIR)/target/linux/kernel.config \
-		    $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_KERNEL_MINICONFIG) > $(BUILD_DIR)/.kernelconfig.board; \
+		    $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_SYSTEM) > $(BUILD_DIR)/.kernelconfig.board; \
 	else \
 		echo "no miniconfig found for target system"; \
 		exit 1; \
@@ -57,7 +57,7 @@ ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_VGA),y)
 	$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 console=$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE),$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED) console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE)"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_M68K),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_M68K_Q800)$(ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208),y)
 	@$(SED) 's#^\(CONFIG_.*BOOTPARAM_STRING="\)\(.*\)"#\1\2 ro $(FS_CMDLINE)"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
@@ -103,9 +103,9 @@ endif
 	@-rm -f $(BUILD_DIR)/.kernelconfig.tmp
 else
 config-prepare: $(ADK_TOPDIR)/.config
-	@if [ -f $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_KERNEL_MINICONFIG) ];then \
+	@if [ -f $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_SYSTEM) ];then \
 		cat $(ADK_TOPDIR)/target/linux/kernel.config \
-		    $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_KERNEL_MINICONFIG) > $(BUILD_DIR)/.kernelconfig.board; \
+		    $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_SYSTEM) > $(BUILD_DIR)/.kernelconfig.board; \
 	else \
 		echo "no miniconfig found for target system"; \
 		exit 1; \

@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_QEMU_PPC_MACPPC
+	bool "Qemu Emulator (MAC-PPC)"
+	select ADK_TARGET_QEMU
+	select ADK_CPU_PPC
+	select ADK_TARGET_CPU_WITH_FPU
+	help
+	 Support for Qemu Emulator PPC architecture (MAC-PPC).
+
