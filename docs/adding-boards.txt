@@ -59,25 +59,29 @@ select your embedded board.
 The second step is to create a Kernel configuration file fragment, which contains
 only the basic support for your board to get serial console access.
 
-For example the snippet for Raspberry PI 2:
+For example the snippet for Raspberry PI 2, the file name must match the embedded board
+name:
 target/arm/kernel/raspberry-pi2
 ------------------------
 CONFIG_ARM=y
-CONFIG_ARM_PATCH_PHYS_VIRT=y
-CONFIG_ARCH_MULTI_V7=y
 CONFIG_ARCH_BCM2709=y
-CONFIG_MACH_BCM2709=y
+CONFIG_BCM2709_DT=y
+CONFIG_PHYS_OFFSET=0
+CONFIG_HAVE_ARM_ARCH_TIMER=y
 CONFIG_FIQ=y
-CONFIG_SERIAL_AMBA_PL011=y
-CONFIG_SERIAL_AMBA_PL011_CONSOLE=y
-------------------------
-
-The kernel file must be registered in target/config/Config.in.kernel
-------------------------
-config ADK_TARGET_KERNEL_MINICONFIG
-        string
-	...
-	default "raspberry-pi2" if ADK_TARGET_SYSTEM_RASPBERRY_PI2
+CONFIG_ATAGS=y
+CONFIG_KUSER_HELPERS=y
+CONFIG_ARM_ERRATA_643719=y
+CONFIG_BCM2708_NOL2CACHE=y
+CONFIG_RASPBERRYPI_FIRMWARE=y
+CONFIG_BRCM_CHAR_DRIVERS=y
+CONFIG_BCM2708_VCHIQ=y
+CONFIG_BCM2708_VCMEM=y
+CONFIG_MAILBOX=y
+CONFIG_BCM2835_MBOX=y
+CONFIG_OF=y
+CONFIG_OF_OVERLAY=y
+CONFIG_CMDLINE_FROM_BOOTLOADER=y
 ------------------------
 
 If the mainstream kernel from kernel.org does not contain support for your board
