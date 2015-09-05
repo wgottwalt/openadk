@@ -4,19 +4,19 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ltp
-PKG_VERSION:=		20150420
+PKG_VERSION:=		20150903
 PKG_RELEASE:=		1
-PKG_HASH:=		ad504e6697b964787f51caad6d8a916caa367f241ac602545548488195216a80
+PKG_HASH:=		e670ae9f1e42bc8b500edd3c3a5cf09c6447c56d7738a22235c87a13739bcace
 PKG_DESCR:=		linux test project
 PKG_DEPENDS:=		bash libpthread librt
 PKG_DEPENDS+=		mke2fs mkfs
 PKG_SECTION:=		sys/misc
 PKG_URL:=		http://linux-test-project.github.io
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ltp/}
+PKG_SITES:=		https://github.com/linux-test-project/ltp/archive/
 PKG_NOPARALLEL:=	1
 
-DISTFILES:=		${PKG_NAME}-full-${PKG_VERSION}.tar.xz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-full-${PKG_VERSION}
+DISTFILES:=		${PKG_VERSION}.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 
 include $(ADK_TOPDIR)/mk/package.mk
 
