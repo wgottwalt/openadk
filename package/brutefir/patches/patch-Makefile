@@ -1,5 +1,20 @@
 --- brutefir-1.0m.orig/Makefile	2013-11-29 14:55:01.000000000 +0100
-+++ brutefir-1.0m/Makefile	2015-07-26 01:43:09.000000000 +0200
++++ brutefir-1.0m/Makefile	2015-09-05 22:19:20.275180228 +0200
+@@ -1,11 +1,11 @@
+ ###################################
+ # Where to install
+-INSTALL_PREFIX	= $(DESTDIR)/usr/local
++INSTALL_PREFIX	= $(DESTDIR)/usr
+ 
+ ###################################
+ # Where to find libraries, and their header files.
+-LIBPATHS	= -L/usr/local/lib
+-INCLUDE		= -I/usr/local/include
++# LIBPATHS	= -L/usr/local/lib
++# INCLUDE		= -I/usr/local/include
+ ifdef FFTW_PATH
+ LIBPATHS	+= -L$(FFTW_PATH)/lib
+ INCLUDE		+= -I$(FFTW_PATH)/include
 @@ -17,17 +17,17 @@ FFTW_LIB	= -lfftw3 -lfftw3f
  
  ###################################
@@ -23,12 +38,21 @@
  CC_FPIC		= -fPIC
  LD_SHARED	= -shared
  
-@@ -59,7 +59,7 @@ LIB_TARGETS	= cli.bflogic eq.bflogic fil
+@@ -59,15 +59,11 @@ LIB_TARGETS	= cli.bflogic eq.bflogic fil
  
  UNAME		= $(shell uname)
  UNAME_P         = $(shell uname -p)
 -UNAME_M         = $(shell uname -m)
-+UNAME_M         = 
++UNAME_M         ?= 
  
  # Linux
  ifeq ($(UNAME),Linux)
+-ifeq ($(UNAME_M),i586)
+-BRUTEFIR_OBJS	+= $(BRUTEFIR_SSE_OBJS)
+-CC_FLAGS	+= -msse
+-endif
+-ifeq ($(UNAME_M),i686)
++ifeq ($(UNAME_M),x86)
+ BRUTEFIR_OBJS	+= $(BRUTEFIR_SSE_OBJS)
+ CC_FLAGS	+= -msse
+ endif
