@@ -33,7 +33,7 @@ declare -A modpaths moddeps modlevels
 # recursively find a level for given module which is high enough so all
 # dependencies are in a lower level
 find_modlevel() { # (modname)
-	local level=0
+	local dep level=0
 	for dep in ${moddeps[$1]}; do
 		[[ -n "${modlevels[$dep]}" ]] || find_modlevel $dep
 		[[ ${modlevels[$dep]} -lt $level ]] || level=$((modlevels[$dep] + 1))
