@@ -78,7 +78,6 @@ for modname in ${!modpaths[@]}; do
 	EOF
 	sh $(dirname $0)/make-ipkg-dir.sh $ipkgdir $ctrlfile $VER $ARCH
 
-	moddep="$(modinfo $modpath | awk '/^depends:/{print $2}' | sed 's/,/ /g')"
 	depline="kernel ($VER)"
 	for m in ${moddeps[$modname]}; do
 		depline+=", $(pkgname ${m})"
