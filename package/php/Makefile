@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.6.11
+PKG_VERSION:=		5.6.13
 PKG_RELEASE:=		1
-PKG_HASH:=		3f97dbb1c646b90e1ef638defabe429ef036f903b5baa1c34769d3de4fe62bd4
+PKG_HASH:=		c1f0837df20cd3bed149033924770deca3e7e2d18e2e7e81395096576f153fdc
 PKG_DESCR:=		php language interpreter
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libpthread librt
