@@ -54,6 +54,8 @@ do-install:
 	$(CP) $(WRKBUILD)/boot/bootcode.bin $(IDIR_BCM28XX_BOOTLOADER)/boot/
 	printf "$(CMDLINE)\n" > $(IDIR_BCM28XX_BOOTLOADER)/boot/cmdline.txt
 	printf "kernel=kernel\n" > $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+	printf "dtparam=i2s=on,spi=on,i2c_arm=on\n" >> \
+		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 ifeq ($(ADK_PACKAGE_BCM28XX_BOOTLOADER_DEFAULT),y)
 	$(CP) $(WRKBUILD)/boot/{start.elf,fixup.dat} $(IDIR_BCM28XX_BOOTLOADER)/boot/
 	printf "start_file=start.elf\n" >> $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
