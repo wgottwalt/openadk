@@ -1,7 +1,8 @@
-config ADK_KERNEL_STAGING
-	bool
-
 config ADK_KERNEL_EXPERIMENTAL
+	bool
+	default y
+
+config ADK_KERNEL_STAGING
 	bool
 
 config ADK_KERNEL_RESET_CONTROLLER
