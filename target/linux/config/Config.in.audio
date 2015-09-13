@@ -50,7 +50,7 @@ config ADK_KERNEL_SND_SOC_HDMI_CODEC
 	tristate
 
 config ADK_KERNEL_SND_SOC_IMX_HDMI_DMA
-	tristate
+	bool
 
 config ADK_KERNEL_SND_SOC_IMX_SPDIF
 	tristate
