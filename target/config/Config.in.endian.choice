@@ -18,6 +18,7 @@ config ADK_TARGET_LITTLE_ENDIAN
 	bool "Little endian"
 	depends on !ADK_TARGET_SYSTEM_DRAGINO_MS14S
 	depends on !ADK_TARGET_SYSTEM_LINKSYS_NSLU2
+	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
 
 config ADK_TARGET_BIG_ENDIAN
 	bool "Big endian"

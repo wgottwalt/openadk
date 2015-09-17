@@ -13,17 +13,11 @@ config ADK_KERNEL_SPI_MASTER
 config ADK_KERNEL_SPI_BITBANG
 	tristate
 
-config ADK_KERNEL_SPI_AR71XX
-	tristate
-	select ADK_KERNEL_SPI
-
-config ADK_KERNEL_SPI_RB4XX
-	tristate
-	select ADK_KERNEL_SPI
-
 config ADK_KERNEL_SPI_RB4XX_CPLD
 	tristate
-	select ADK_KERNEL_SPI
+
+config ADK_KERNEL_SPI_AR71XX
+	tristate
 
 config ADK_KERNEL_SPI_PXA2XX
 	tristate
@@ -49,6 +43,17 @@ config ADK_KERNEL_SPI_IMX
 	select ADK_KERNEL_REGMAP_SPI
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default n
+
+config ADK_KERNEL_SPI_RB4XX
+	tristate "SPI driver for Routerboard 4xx"
+	select ADK_KERNEL_SPI
+	select ADK_KERNEL_SPI_MASTER
+	select ADK_KERNEL_SPI_BITBANG
+	select ADK_KERNEL_SPI_RB4XX_CPLD
+	select ADK_KERNEL_SPI_AR71XX
+	depends on ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
+	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
 	default n
 
 config ADK_KERNEL_SPI_SPIDEV

@@ -1,0 +1,26 @@
+From 4c84b317734842765cb1c52624fc569efd9222dc Mon Sep 17 00:00:00 2001
+From: Phil Sutter <phil@nwl.cc>
+Date: Tue, 13 May 2014 02:11:59 +0200
+Subject: [PATCH] MIPS: ath79: process board cmdline option
+
+This is necessary to correctly identify the running machine.
+---
+ arch/mips/ath79/setup.c | 2 ++
+ 1 file changed, 2 insertions(+)
+
+diff --git a/arch/mips/ath79/setup.c b/arch/mips/ath79/setup.c
+index 64807a4..0c95758 100644
+--- a/arch/mips/ath79/setup.c
++++ b/arch/mips/ath79/setup.c
+@@ -229,6 +229,8 @@ void __init plat_time_init(void)
+ 	mips_hpt_frequency = cpu_clk_rate / 2;
+ }
+ 
++__setup("board=", mips_machtype_setup);
++
+ static int __init ath79_setup(void)
+ {
+ 	ath79_gpio_init();
+-- 
+1.8.5.3
+

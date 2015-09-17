@@ -1,0 +1,39 @@
+From 02dc26588275d19a49d47abf2210c41b071cd796 Mon Sep 17 00:00:00 2001
+From: Phil Sutter <phil@nwl.cc>
+Date: Sat, 28 Jun 2014 17:07:52 +0200
+Subject: [PATCH] ag71xx: workaround some link state bug
+
+This happens when routing 100mbit/s traffic with masquerading, link
+supposedly drops to 10HD for a few seconds leading to the driver
+reinitialising the NIC and therefore causing a throughput drop. Ignoring
+those link changes allows for constant bandwidth, therefore this seems
+not to be a real problem of the hardware but one of an overreacting
+driver.
+---
+ drivers/net/ethernet/atheros/ag71xx/ag71xx_phy.c | 10 +++++++++-
+ 1 file changed, 9 insertions(+), 1 deletion(-)
+
+diff --git a/drivers/net/ethernet/atheros/ag71xx/ag71xx_phy.c b/drivers/net/ethernet/atheros/ag71xx/ag71xx_phy.c
+index 9de77e9..a83707e 100644
+--- a/drivers/net/ethernet/atheros/ag71xx/ag71xx_phy.c
++++ b/drivers/net/ethernet/atheros/ag71xx/ag71xx_phy.c
+@@ -25,7 +25,15 @@ static void ag71xx_phy_link_adjust(struct net_device *dev)
+ 	if (phydev->link) {
+ 		if (ag->duplex != phydev->duplex
+ 		    || ag->speed != phydev->speed) {
+-			status_change = 1;
++			/* Completely ignore speed/duplex changes as long
++			 * as the link stays up as they're probably spurious
++			 * (the internal link should not change any way).
++			 *
++			 * This is actually a workaround, as the link seems to
++			 * drop to 10HD from 1000FD under routing load when at
++			 * least masquerading is also in use.
++			 */
++			//status_change = 1;
+ 		}
+ 	}
+ 
+-- 
+1.8.5.3
+
