@@ -67,6 +67,8 @@ PKGFB_WITH_LIRC:=	lirc
 PKGFS_WITH_LIRC:=	lirc
 PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 
+PKG_BUILDDEP_SOLIDRUN_IMX6:=	gpu-viv-bin-mx6q
+
 # freescale GL libraries linked against glibc
 PKG_LIBC_DEPENDS:=	glibc uclibc-ng
 PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 solidrun-imx6
