@@ -48840,11 +48840,6 @@ diff -Nur linux-4.1.10.orig/lib/strnlen_user.c linux-4.1.10/lib/strnlen_user.c
   *
   * Get the size of a NUL-terminated string in user space.
   *
-diff -Nur linux-4.1.10.orig/localversion-rt linux-4.1.10/localversion-rt
---- linux-4.1.10.orig/localversion-rt	1970-01-01 01:00:00.000000000 +0100
-+++ linux-4.1.10/localversion-rt	2015-10-07 18:00:08.000000000 +0200
-@@ -0,0 +1 @@
-+-rt8
 diff -Nur linux-4.1.10.orig/mm/compaction.c linux-4.1.10/mm/compaction.c
 --- linux-4.1.10.orig/mm/compaction.c	2015-10-03 13:49:38.000000000 +0200
 +++ linux-4.1.10/mm/compaction.c	2015-10-07 18:00:08.000000000 +0200
