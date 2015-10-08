@@ -39,8 +39,8 @@ for service in $(grep ^ADK_RUNTIME_START_ $topdir/.config |grep -v ADK_RUNTIME_S
 		rcname=openssh
 	fi
 	if [ $mode = "m" ]; then
-	  sed -i -e "s#$rcname=\"NO\"#$rcname=\"DAEMON\"#" $rcconf
+	  sed -i -e "s#^$rcname=\"NO\"#$rcname=\"DAEMON\"#" $rcconf
 	else
-	  sed -i -e "s#$rcname=\"NO\"#$rcname=\"YES\"#" $rcconf
+	  sed -i -e "s#^$rcname=\"NO\"#$rcname=\"YES\"#" $rcconf
 	fi
 done
