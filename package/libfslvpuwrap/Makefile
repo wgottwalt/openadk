@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libfslvpuwrap
-PKG_VERSION:=		1.0.58
+PKG_VERSION:=		1.0.46
 PKG_RELEASE:=		1
-PKG_HASH:=		a278eb18ec24230166ac39e2eadf7b934798f0432654c2e24c4cb69c3ac1cf0f
+PKG_HASH:=		7fc1258de338339d19a1a35167393fdc4d773682dfd9b951b197403a075f85fd
 PKG_DESCR:=		vpu wrapper library
 PKG_SECTION:=		libs/video
 PKG_BUILDDEP:=		imx-lib imx-vpu

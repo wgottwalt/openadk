@@ -60,7 +60,13 @@ config ADK_KERNEL_FB_MXC_SYNC_PANEL
 config ADK_KERNEL_FB_MXC_HDMI
  	boolean
 
+config ADK_KERNEL_FB_MXC_EDID
+ 	boolean
+
 config ADK_KERNEL_MXC_IPU
+ 	boolean
+
+config ADK_KERNEL_MXC_IPU_V3
  	boolean
 
 config ADK_KERNEL_MXC_VPU
@@ -69,8 +75,11 @@ config ADK_KERNEL_MXC_VPU
 config ADK_KERNEL_MXC_GPU_VIV
  	boolean
 
+config ADK_KERNEL_MXC_GPU_VIV_V4
+ 	boolean
+
 config ADK_KERNEL_MXC_ASRC
- 	tristate
+ 	boolean
 
 config ADK_KERNEL_MXC_HDMI_CEC
  	boolean
@@ -78,17 +87,11 @@ config ADK_KERNEL_MXC_HDMI_CEC
 config ADK_KERNEL_MXC_MIPI_CSI2
  	boolean
 
+config ADK_KERNEL_MXC_MLB
+ 	boolean
+
 config ADK_KERNEL_MXC_MLB150
  	boolean
-
-config ADK_KERNEL_FB_MXC_EDID
- 	boolean
-
-config ADK_KERNEL_DRM_DW_HDMI_AUDIO
-	tristate
-
-config ADK_KERNEL_DRM_DW_HDMI_CEC
-	tristate
 
 config ADK_KERNEL_MFD_SM501
 	boolean
@@ -128,30 +131,6 @@ config ADK_KERNEL_DRM_I915_KMS
 config ADK_KERNEL_DRM_I915_FBDEV
 	boolean
 
-config ADK_KERNEL_DRM_VIVANTE
-	boolean
-
-config ADK_KERNEL_DRM_IMX_FB_HELPER
-	boolean
-
-config ADK_KERNEL_DRM_IMX_PARALLEL_DISPLAY
-	boolean
-
-config ADK_KERNEL_DRM_IMX_LDB
-	boolean
-
-config ADK_KERNEL_DRM_IMX_TVE
-	boolean
-
-config ADK_KERNEL_IMX_IPUV3_CORE
-	boolean
-
-config ADK_KERNEL_DRM_IMX_IPUV3
-	boolean
-
-config ADK_KERNEL_DRM_IMX_HDMI
-	boolean
-
 config ADK_KERNEL_AGP
 	boolean
 
@@ -186,60 +165,31 @@ config ADK_KERNEL_FB_VESA
  	help
 	 Framebuffer support for VirtualBox Emulator.
 
-config ADK_KERNEL_DRM_IMX
-	prompt "Framebuffer support for Cubox-i/Hummingboard"
-	boolean
-	select ADK_KERNEL_DRM
-	select ADK_KERNEL_DMA_CMA
-	select ADK_KERNEL_RESET_CONTROLLER
-	select ADK_KERNEL_DRM_IMX_FB_HELPER
-	select ADK_KERNEL_DRM_IMX_LDB
-	select ADK_KERNEL_DRM_IMX_TVE
-	select ADK_KERNEL_DRM_IMX_PARALLEL_DISPLAY
-	select ADK_KERNEL_IMX_IPUV3_CORE
-	select ADK_KERNEL_DRM_IMX_IPUV3
-	select ADK_KERNEL_DRM_IMX_HDMI
-	select ADK_KERNEL_FB
-	select ADK_KERNEL_STAGING
-	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
-	select ADK_KERNEL_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY
-	select ADK_KERNEL_I2C_IMX
-	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
-	depends on ADK_TARGET_KERNEL_VERSION_3_18
-	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
- 	default n
- 	help
-	  Framebuffer support for Cubox-i/Hummingboard
-
-config ADK_KERNEL_DRM_VIVANTE
+config ADK_KERNEL_MXC_GPU_VIV
 	prompt "Framebuffer support for Cubox-i/Hummingboard (Vivante)"
 	boolean
-	select ADK_KERNEL_DRM
-	select ADK_KERNEL_DMA_CMA
 	select ADK_KERNEL_FB
-	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
-	select ADK_KERNEL_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY
 	select ADK_KERNEL_FB_MXC
 	select ADK_KERNEL_FB_MXC_LDB
 	select ADK_KERNEL_FB_MXC_SYNC_PANEL
 	select ADK_KERNEL_FB_MXC_HDMI
-	select ADK_KERNEL_SND
-	select ADK_KERNEL_SND_PCM
-	select ADK_KERNEL_SND_DMAENGINE_PCM
-	select ADK_KERNEL_SND_SOC
-	select ADK_KERNEL_SND_SOC_GENERIC_DMAENGINE_PCM
+	select ADK_KERNEL_FB_MXC_EDID
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY
 	select ADK_KERNEL_MXC_IPU
-	select ADK_KERNEL_MXC_GPU_VIV
+	select ADK_KERNEL_MXC_IPU_V3
+	select ADK_KERNEL_MXC_GPU_VIV_V4
+	select ADK_KERNEL_MXC_ASRC
 	select ADK_KERNEL_MXC_HDMI_CEC
 	select ADK_KERNEL_MXC_MIPI_CSI2
+	select ADK_KERNEL_MXC_MLB
 	select ADK_KERNEL_MXC_MLB150
-	select ADK_KERNEL_FB_MXC_EDID
 	select ADK_KERNEL_MXC_VPU
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
  	default n
  	help
-	 Framebuffer support for Cubox-i/Hummingboard (Vivante)
+	  Framebuffer support for Cubox-i/Hummingboard (Vivante)
 	
 config ADK_KERNEL_FB_PXA
 	prompt "Framebuffer support for Sharp Zaurus (PXA)"
