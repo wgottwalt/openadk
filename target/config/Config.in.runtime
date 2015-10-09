@@ -12,10 +12,14 @@ prompt "System for /dev management"
 
 config ADK_RUNTIME_DEV_MDEV
 	bool "Use mdev"
+	select ADK_KERNEL_DEVTMPFS
+	select ADK_KERNEL_DEVTMPFS_MOUNT
 
 config ADK_RUNTIME_DEV_UDEV
 	bool "Use udev"
 	select ADK_PACKAGE_UDEV
+	select ADK_KERNEL_DEVTMPFS
+	select ADK_KERNEL_DEVTMPFS_MOUNT
 
 config ADK_RUNTIME_DEV_STATIC
 	bool "Use static /dev"

@@ -186,11 +186,9 @@ menu "Kernel options"
 
 config ADK_KERNEL_DEVTMPFS
 	bool
-	default y
 
 config ADK_KERNEL_DEVTMPFS_MOUNT
 	bool
-	default y
 
 config ADK_KERNEL_UEVENT_HELPER
 	bool
