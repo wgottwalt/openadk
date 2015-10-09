@@ -348,4 +348,12 @@ config ADK_KERNEL_STMMAC_ETH
 	default y if ADK_TARGET_SYSTEM_BANANA_PRO
 	default n
 
+config ADK_KERNEL_ETHOC
+	bool "OpenCore ethernet driver"
+	select ADK_KERNEL_PHYLIB
+	select ADK_KERNEL_MII
+	depends on ADK_TARGET_SYSTEM_QEMU_OR1K
+	default y if ADK_TARGET_SYSTEM_QEMU_OR1K
+	default n
+
 endmenu
