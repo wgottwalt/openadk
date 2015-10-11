@@ -14,7 +14,7 @@ PKG_URL:=		http://www.sixxs.net/
 PKG_SITES:=		http://www.sixxs.net/archive/sixxs/aiccu/unix/
 PKG_CFLINE_AICCU:=	select ADK_KERNEL_TUN m
 
-PKG_LIBC_DEPENDS:=	uclibc-ng uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 DISTFILES:=		$(PKG_NAME)_$(PKG_VERSION).tar.gz
 WRKDIST=		${WRKDIR}/$(PKG_NAME)

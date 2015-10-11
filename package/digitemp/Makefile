@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libusb libusb-compat
 PKG_URL:=		http://www.digitemp.com/software/linux/
 PKG_SITES:=		http://www.digitemp.com/software/linux/
 
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

@@ -12,7 +12,7 @@ PKG_SECTION:=		net/ipv6
 PKG_URL:=		http://www.remlab.net/
 PKG_SITES:=		http://www.remlab.net/files/ndisc6/
 
-PKG_LIBC_DEPENDS:=	uclibc-ng uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 PKG_SUBPKGS:=		NDISC6 RDISC6 TCPTRACEROUTE6
 PKGSD_NDISC6:=		icmpv6 neighbour discovery tool

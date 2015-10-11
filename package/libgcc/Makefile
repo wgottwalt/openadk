@@ -6,9 +6,6 @@ include ${ADK_TOPDIR}/rules.mk
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 include ${ADK_TOPDIR}/toolchain/glibc/Makefile.inc
 endif
-ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
-include ${ADK_TOPDIR}/toolchain/uclibc/Makefile.inc
-endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
 include ${ADK_TOPDIR}/toolchain/uclibc-ng/Makefile.inc
 endif
@@ -19,7 +16,7 @@ PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove
 
 PKG_DFLT_LIBGCC:=	y if !(ADK_TOOLCHAIN_ONLY)
-PKG_LIBC_DEPENDS:=	uclibc uclibc-ng glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 
 NO_DISTFILES:=		1

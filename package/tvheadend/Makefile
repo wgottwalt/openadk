@@ -18,7 +18,7 @@ $(eval $(call PKG_template,TVHEADEND,tvheadend,$(PKG_VERSION)-$(PKG_RELEASE),$(P
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
-ifeq ($(ADK_TARGET_LIB_UCLIBC)$(ADK_TARGET_LIB_UCLIBC_NG),y)
+ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
 XAKE_FLAGS+=		LDLIBS=-liconv
 endif
 

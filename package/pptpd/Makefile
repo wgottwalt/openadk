@@ -18,7 +18,7 @@ PKG_CFLINE_PPTPD+=	select ADK_KERNEL_PPP_MPPE m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_LIBC_DEPENDS:=	uclibc-ng uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 include ${ADK_TOPDIR}/mk/package.mk
 

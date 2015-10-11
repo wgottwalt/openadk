@@ -4,7 +4,7 @@
 config ADK_PACKAGE_UCLIBCXX
 	prompt "uClibc++............. C++ library for embedded systems"
 	tristate
-	depends on ADK_TARGET_LIB_UCLIBC
+	depends on ADK_TARGET_LIB_UCLIBC_NG
 	default n
 	help
 	  A standard C++ library for embedded systems

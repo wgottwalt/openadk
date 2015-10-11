@@ -113,7 +113,7 @@ POSTCONFIG=		-@\
 			fi; \
 		done; \
 		if [ "$$(grep ^ADK_RUNTIME_TIMEZONE .config|md5sum)" != "$$(grep ^ADK_RUNTIME_TIMEZONE .config.old|md5sum)" ];then \
-			touch .rebuild.musl .rebuild.uclibc .rebuild.uclibc-ng .rebuild.glibc;\
+			touch .rebuild.musl .rebuild.uclibc-ng .rebuild.glibc;\
 			rebuild=1;\
 		fi; \
 		if [ "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config|md5sum)" != "$$(grep ^ADK_RUNTIME_SSH_PUBKEY .config.old|md5sum)" ];then \
@@ -340,9 +340,6 @@ endif
 		if [ "$(ADK_TARGET_LIBC)" = "glibc" ];then \
 			echo "ADK_TARGET_LIB_GLIBC_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
 		fi; \
-		if [ "$(ADK_TARGET_LIBC)" = "uclibc" ];then \
-			echo "ADK_TARGET_LIB_UCLIBC_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
-		fi; \
 		if [ "$(ADK_TARGET_LIBC)" = "uclibc-ng" ];then \
 			echo "ADK_TARGET_LIB_UCLIBC_NG_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
 		fi; \
@@ -368,12 +365,6 @@ endif
 		echo "ADK_PACKAGE_FILE=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_UCLIBC_NG_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
-	@if [ ! -z "$(ADK_TEST_UCLIBC_TESTSUITE)" ];then \
-		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
-		echo "ADK_PACKAGE_FILE=y" >> $(ADK_TOPDIR)/.defconfig; \
-		echo "ADK_PACKAGE_UCLIBC_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
-		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
-	fi
 	@if [ ! -z "$(ADK_TEST_MUSL_TESTSUITE)" ];then \
 		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_FILE=y" >> $(ADK_TOPDIR)/.defconfig; \
@@ -393,14 +384,6 @@ endif
 		echo "ADK_PACKAGE_BINUTILS=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_UCLIBC_NG_DEV=y" >> $(ADK_TOPDIR)/.defconfig; \
-	fi
-	@if [ ! -z "$(ADK_TEST_UCLIBC_NATIVE)" ];then \
-		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
-		echo "ADK_PACKAGE_FILE=y" >> $(ADK_TOPDIR)/.defconfig; \
-		echo "ADK_PACKAGE_GCC=y" >> $(ADK_TOPDIR)/.defconfig; \
-		echo "ADK_PACKAGE_BINUTILS=y" >> $(ADK_TOPDIR)/.defconfig; \
-		echo "ADK_PACKAGE_MAKE=y" >> $(ADK_TOPDIR)/.defconfig; \
-		echo "ADK_PACKAGE_UCLIBC_DEV=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TEST_MUSL_NATIVE)" ];then \
 		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \

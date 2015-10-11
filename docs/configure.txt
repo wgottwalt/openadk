@@ -38,9 +38,8 @@ target system uses ARM, the regular compilation toolchain on your host
 runs on x86 and generates code for x86, while the cross-compilation
 toolchain runs on x86 and generates code for ARM.
 
-You can choose between four C libraries:
+You can choose between three C libraries:
 http://www.uclibc-ng.org[uClibc-ng],
-http://www.uclibc.org[uClibc],
 http://www.gnu.org/software/libc/libc.html[glibc] and
 http://www.musl-libc.org[musl].
 

@@ -43,7 +43,7 @@ are space separated and can be negated with ! as a prefix.
 
 * Target C library
 ** variable used PKG_LIBC_DEPENDS
-** allowed values are: uclibc-ng uclibc glibc musl
+** allowed values are: uclibc-ng glibc musl
 
 * Host system
 ** variable used PKG_HOST_DEPENDS

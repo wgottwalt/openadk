@@ -18,7 +18,7 @@ PKG_NOPARALLEL:=	1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 # GLOB_BRACE usage
-PKG_LIBC_DEPENDS:=	uclibc-ng uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 include ${ADK_TOPDIR}/mk/package.mk
 

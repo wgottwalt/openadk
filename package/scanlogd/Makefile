@@ -16,7 +16,7 @@ PKG_SITES:=		http://www.openwall.com/scanlogd/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_ARCH_DEPENDS:=	!arm
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 include ${ADK_TOPDIR}/mk/package.mk
 

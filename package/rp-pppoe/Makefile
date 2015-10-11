@@ -15,7 +15,8 @@ PKG_SITES:=		http://www.roaringpenguin.com/files/download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
+
 PKG_SUBPKGS:=		RP_PPPOE RP_PPPOE_CLIENT RP_PPPOE_RELAY RP_PPPOE_SERVER RP_PPPOE_SNIFF
 PKGSD_RP_PPPOE_CLIENT:=	PPPoE client
 PKGSN_RP_PPPOE_CLIENT:=	rp-pppoe

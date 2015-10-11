@@ -12,9 +12,6 @@ endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
 include ${ADK_TOPDIR}/toolchain/uclibc-ng/Makefile.inc
 endif
-ifeq ($(ADK_TARGET_LIB_UCLIBC),y)
-include ${ADK_TOPDIR}/toolchain/uclibc/Makefile.inc
-endif
 
 PKG_NAME:=		libpthread
 PKG_DESCR:=		posix threading library

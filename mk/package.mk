@@ -287,12 +287,10 @@ $$(INFO_$(1)_DBG): $$(IPKG_$(1)_DBG)
 	$(PKG_INSTALL) $$(IPKG_$(1)_DBG)
 
 ifneq ($(1),UCLIBC_NG)
-ifneq ($(1),UCLIBC)
 ifneq ($(1),GLIBC)
 ifneq ($(1),MUSL)
 $$(INFO_$(1)_DEV): $$(IPKG_$(1)_DEV)
 	$(PKG_INSTALL) $$(IPKG_$(1)_DEV)
-endif
 endif
 endif
 endif

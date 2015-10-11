@@ -16,7 +16,7 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=atftp/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_LIBC_DEPENDS:=	uclibc uclibc-ng glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 PKG_SUBPKGS:=		ATFTP ATFTPD
 PKGSD_ATFTPD:=		tftp server

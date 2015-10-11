@@ -10,7 +10,7 @@ PKG_DESCR:=		wake-on-lan client
 PKG_SECTION:=		net/misc
 PKG_BB:=		1
 
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 NO_DISTFILES:=		1
 
 include ${ADK_TOPDIR}/mk/package.mk

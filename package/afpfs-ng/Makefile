@@ -29,7 +29,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,AFPFS_NG,afpfs-ng,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBAFPCLIENT,libafpclient,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_LIBAFPCLIENT},${PKGSD_LIBAFPCLIENT},${PKGSC_LIBAFPCLIENT},$(PKG_OPTS)))
 
-ifeq ($(ADK_TARGET_LIB_UCLIBC)$(ADK_TARGET_LIB_UCLIBC_NG),y)
+ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
 TARGET_LDFLAGS+=	-liconv
 endif
 

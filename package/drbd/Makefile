@@ -14,7 +14,7 @@ PKG_SITES:=		http://oss.linbit.com/drbd/8.4/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 include $(ADK_TOPDIR)/mk/package.mk
 

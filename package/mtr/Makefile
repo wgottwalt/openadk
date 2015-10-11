@@ -16,7 +16,7 @@ PKG_SITES:=		ftp://ftp.bitwizard.nl/mtr/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 include ${ADK_TOPDIR}/mk/package.mk
 

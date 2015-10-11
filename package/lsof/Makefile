@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		libtirpc
 PKG_URL:=		http://people.freebsd.org/~abe/
 PKG_SITES:=		ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
 
-PKG_LIBC_DEPENDS:=	uclibc glibc
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 DISTFILES:=             ${PKG_NAME}_${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_${PKG_VERSION}

@@ -15,12 +15,6 @@ package-$(ADK_PACKAGE_MUSL) += musl
 gcc-compile: musl-compile
 endif
 
-ifeq (${ADK_TARGET_LIB_UCLIBC},y)
-package-$(ADK_PACKAGE_UCLIBC) += uclibc
-package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
-gcc-compile: uclibc-compile
-endif
-
 ifeq (${ADK_TARGET_LIB_UCLIBC_NG},y)
 package-$(ADK_PACKAGE_UCLIBC_NG) += uclibc-ng
 package-$(ADK_PACKAGE_UCLIBCXX) += uclibc++
