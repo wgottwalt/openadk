@@ -95,6 +95,8 @@ config ADK_KERNEL_MXC_MLB
 
 config ADK_KERNEL_MXC_MLB150
  	bool
+	select ADK_KERNEL_SND
+	select ADK_KERNEL_SND_PCM
 
 config ADK_KERNEL_MFD_SM501
 	bool
