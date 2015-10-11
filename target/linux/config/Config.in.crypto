@@ -7,7 +7,7 @@ config ADK_KERNEL_CRYPTO
 	tristate
 
 config ADK_KERNEL_CRYPTO_HW
-	boolean
+	bool
 
 config ADK_KERNEL_XOR_BLOCKS
 	tristate
@@ -18,8 +18,7 @@ menu "Hardware crypto devices"
 depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_GEODE_CRYPTO
 
 config ADK_KERNEL_CRYPTO_DEV_GEODE
-	prompt "Support for the Geode LX/GX AES engine"
-	tristate
+	tristate "Support for the Geode LX/GX AES engine"
 	select ADK_KERNEL_CRYPTO
 	select ADK_KERNEL_CRYPTO_HW
 	select ADK_KERNEL_CRYPTO_ECB
@@ -32,8 +31,7 @@ config ADK_KERNEL_CRYPTO_DEV_GEODE
 	  engine for the CryptoAPI AES algorithm.
 
 config ADK_KERNEL_CRYPTO_DEV_HIFN_795X
-	prompt "Driver for HIFN 795x crypto accelerator chips"
-	tristate
+	tristate "Driver for HIFN 795x crypto accelerator chips"
 	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI
 	select ADK_KERNEL_CRYPTO
 	select ADK_KERNEL_CRYPTO_HW
@@ -120,8 +118,7 @@ config ADK_KERNEL_CRYPTO_MANAGER2
 	select ADK_KERNEL_CRYPTO_PCOMP2
 
 config ADK_KERNEL_CRYPTO_AUTHENC
-	prompt "AuthENC (IPsec)"
-	tristate
+	tristate "AuthENC (IPsec)"
 	select ADK_KERNEL_CRYPTO_AEAD
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	select ADK_KERNEL_CRYPTO_MANAGER
@@ -129,8 +126,7 @@ config ADK_KERNEL_CRYPTO_AUTHENC
 	default n
 
 config ADK_KERNEL_CRYPTO_SEQIV
-	prompt "Sequence Number IV Generator"
-	tristate
+	tristate "Sequence Number IV Generator"
 	select ADK_KERNEL_CRYPTO_AEAD
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	select ADK_KERNEL_CRYPTO_RNG
@@ -140,8 +136,7 @@ config ADK_KERNEL_CRYPTO_SEQIV
 	  xoring it with a salt.  This algorithm is mainly useful for CTR
 
 config ADK_KERNEL_CRYPTO_CTS
-	prompt "CTS support"
-	tristate
+	tristate "CTS support"
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	default n
 	help
@@ -153,8 +148,7 @@ config ADK_KERNEL_CRYPTO_CTS
           for AES encryption.
 
 config ADK_KERNEL_CRYPTO_CBC
-	prompt "CBC support"
-	tristate
+	tristate "CBC support"
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	select ADK_KERNEL_CRYPTO_MANAGER
 	default n
@@ -163,8 +157,7 @@ config ADK_KERNEL_CRYPTO_CBC
 	  This block cipher algorithm is required for IPSec.
 
 config ADK_KERNEL_CRYPTO_CCM
-	prompt "CCM support"
-	tristate
+	tristate "CCM support"
 	select ADK_KERNEL_CRYPTO_CTR
 	select ADK_KERNEL_CRYPTO_AEAD
 	default n
@@ -172,8 +165,7 @@ config ADK_KERNEL_CRYPTO_CCM
 	  Support for Counter with CBC MAC. Required for IPsec.
 
 config ADK_KERNEL_CRYPTO_GCM
-	prompt "GCM support"
-	tristate
+	tristate "GCM support"
 	select ADK_KERNEL_CRYPTO_CTR
 	select ADK_KERNEL_CRYPTO_AEAD
 	select ADK_KERNEL_CRYPTO_GHASH
@@ -184,8 +176,7 @@ config ADK_KERNEL_CRYPTO_GCM
           Authentication Code (GMAC). Required for IPSec.
 
 config ADK_KERNEL_CRYPTO_CTR
-	prompt "CTR support"
-	tristate
+	tristate "CTR support"
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	select ADK_KERNEL_CRYPTO_SEQIV
 	select ADK_KERNEL_CRYPTO_MANAGER
@@ -195,8 +186,7 @@ config ADK_KERNEL_CRYPTO_CTR
 	  This block cipher algorithm is required for IPSec.
 
 config ADK_KERNEL_CRYPTO_ECB
-	prompt "ECB support"
-	tristate
+	tristate "ECB support"
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	select ADK_KERNEL_CRYPTO_MANAGER
 	default n
@@ -206,8 +196,7 @@ config ADK_KERNEL_CRYPTO_ECB
 	  the input block by block.
 
 config ADK_KERNEL_CRYPTO_HMAC
-	prompt "HMAC support"
-	tristate
+	tristate "HMAC support"
 	select ADK_KERNEL_CRYPTO_HASH
 	select ADK_KERNEL_CRYPTO_MANAGER
 	default n
@@ -216,8 +205,7 @@ config ADK_KERNEL_CRYPTO_HMAC
 	  This is required for IPSec.
 
 config ADK_KERNEL_CRYPTO_XCBC
-	prompt "XCBC support"
-	tristate
+	tristate "XCBC support"
 	select ADK_KERNEL_CRYPTO_HASH
 	select ADK_KERNEL_CRYPTO_MANAGER
 	default n
@@ -229,32 +217,28 @@ endmenu
 menu "Digest algorithms"
 
 config ADK_KERNEL_CRYPTO_MD4
-	prompt "MD4 digest algorithm"
-	tristate
+	tristate "MD4 digest algorithm"
 	select ADK_KERNEL_CRYPTO_HASH
 	default n
 	help
 	  MD4 message digest algorithm (RFC1320).
 
 config ADK_KERNEL_CRYPTO_MD5
-	prompt "MD5 digest algorithm"
-	tristate
+	tristate "MD5 digest algorithm"
 	select ADK_KERNEL_CRYPTO_HASH
 	default n
 	help
 	  MD5 message digest algorithm (RFC1321).
 
 config ADK_KERNEL_CRYPTO_SHA1
-	prompt "SHA1 digest algorithm"
-	tristate
+	tristate "SHA1 digest algorithm"
 	select ADK_KERNEL_CRYPTO_HASH
 	default n
 	help
 	  SHA-1 secure hash standard (FIPS 180-1/DFIPS 180-2).
 
 config ADK_KERNEL_CRYPTO_SHA256
-	prompt "SHA256 digest algorithm"
-	tristate
+	tristate "SHA256 digest algorithm"
 	select ADK_KERNEL_CRYPTO_HASH
 	default n
 	help
@@ -264,8 +248,7 @@ config ADK_KERNEL_CRYPTO_SHA256
 	  security against collision attacks.
 
 config ADK_KERNEL_CRYPTO_SHA512
-	prompt "SHA512 digest algorithm"
-	tristate
+	tristate "SHA512 digest algorithm"
 	select ADK_KERNEL_CRYPTO_HASH
 	default n
 	help
@@ -278,8 +261,7 @@ config ADK_KERNEL_CRYPTO_SHA512
 	  of security against collision attacks.
 
 config ADK_KERNEL_CRYPTO_WP512
-	prompt "Whirlpool digest algorithms"
-	tristate
+	tristate "Whirlpool digest algorithms"
 	select ADK_KERNEL_CRYPTO_HASH
 	default n
 	help
@@ -292,8 +274,7 @@ config ADK_KERNEL_CRYPTO_WP512
 	  <http://planeta.terra.com.br/informatica/paulobarreto/WhirlpoolPage.html>
 
 config ADK_KERNEL_CRYPTO_TGR192
-	prompt "Tiger digest algorithms"
-	tristate
+	tristate "Tiger digest algorithms"
 	select ADK_KERNEL_CRYPTO_HASH
 	default n
 	help
@@ -310,8 +291,7 @@ endmenu
 menu "Cipher algoritms"
 
 config ADK_KERNEL_CRYPTO_AES
-	prompt "AES cipher algorithms"
-	tristate
+	tristate "AES cipher algorithms"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
@@ -332,8 +312,7 @@ config ADK_KERNEL_CRYPTO_AES
 	  See <http://csrc.nist.gov/CryptoToolkit/aes/> for more information.
 
 config ADK_KERNEL_CRYPTO_AES_586
-	prompt "AES cipher algorithms (i586)"
-	tristate
+	tristate "AES cipher algorithms (i586)"
 	depends on ADK_x86
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	select ADK_KERNEL_CRYPTO_AES
@@ -356,8 +335,7 @@ config ADK_KERNEL_CRYPTO_AES_586
 	  See <http://csrc.nist.gov/CryptoToolkit/aes/> for more information.
 
 config ADK_KERNEL_CRYPTO_ANUBIS
-	prompt "Anubis cipher algorithm"
-	tristate
+	tristate "Anubis cipher algorithm"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
@@ -372,8 +350,7 @@ config ADK_KERNEL_CRYPTO_ANUBIS
 	  <http://planeta.terra.com.br/informatica/paulobarreto/AnubisPage.html>
 
 config ADK_KERNEL_CRYPTO_ARC4
-	prompt "ARC4 cipher algorithm"
-	tristate
+	tristate "ARC4 cipher algorithm"
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	default n
 	help
@@ -385,8 +362,7 @@ config ADK_KERNEL_CRYPTO_ARC4
 	  weakness of the algorithm.
 
 config ADK_KERNEL_CRYPTO_BLOWFISH
-	prompt "Blowfish cipher algorithm"
-	tristate
+	tristate "Blowfish cipher algorithm"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
@@ -400,8 +376,7 @@ config ADK_KERNEL_CRYPTO_BLOWFISH
 	  <http://www.schneier.com/blowfish.html>
 
 config ADK_KERNEL_CRYPTO_CAMELLIA
-	prompt "Camellia cipher algorithms"
-	tristate
+	tristate "Camellia cipher algorithms"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
@@ -416,8 +391,7 @@ config ADK_KERNEL_CRYPTO_CAMELLIA
 	  <https://info.isl.ntt.co.jp/crypt/eng/camellia/index_s.html>
 
 config ADK_KERNEL_CRYPTO_CAST5
-	prompt "CAST5 (CAST-128) cipher algorithm"
-	tristate
+	tristate "CAST5 (CAST-128) cipher algorithm"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
@@ -425,8 +399,7 @@ config ADK_KERNEL_CRYPTO_CAST5
 	  described in RFC2144.
 
 config ADK_KERNEL_CRYPTO_CAST6
-	prompt "CAST6 (CATS-256) cipher algorithm"
-	tristate
+	tristate "CAST6 (CATS-256) cipher algorithm"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
@@ -434,24 +407,21 @@ config ADK_KERNEL_CRYPTO_CAST6
 	  described in RFC2612.
 
 config ADK_KERNEL_CRYPTO_DES
-	prompt "DES and Triple DES EDE cipher algorithms"
-	tristate
+	tristate "DES and Triple DES EDE cipher algorithms"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
 	  DES cipher algorithm (FIPS 46-2), and Triple DES EDE (FIPS 46-3).
 
 config ADK_KERNEL_CRYPTO_FCRYPT
-	prompt "FCrypt cipher algorithms"
-	tristate
+	tristate "FCrypt cipher algorithms"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
 	  FCrypt algorithm used by RxRPC.
 
 config ADK_KERNEL_CRYPTO_KHAZAD
-	prompt "Khazad cipher algorithm"
-	tristate
+	tristate "Khazad cipher algorithm"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
@@ -465,8 +435,7 @@ config ADK_KERNEL_CRYPTO_KHAZAD
 	  <http://planeta.terra.com.br/informatica/paulobarreto/KhazadPage.html>
 
 config ADK_KERNEL_CRYPTO_SERPENT
-	prompt "Serpent cipher algorithm"
-	tristate
+	tristate "Serpent cipher algorithm"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
@@ -480,8 +449,7 @@ config ADK_KERNEL_CRYPTO_SERPENT
 	  <http://www.cl.cam.ac.uk/~rja14/serpent.html>
 
 config ADK_KERNEL_CRYPTO_TEA
-	prompt "TEA, XTEA and XETA cipher algorithms"
-	tristate
+	tristate "TEA, XTEA and XETA cipher algorithms"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
@@ -499,8 +467,7 @@ config ADK_KERNEL_CRYPTO_TEA
 	  of the XTEA algorithm for compatibility purposes.
 
 config ADK_KERNEL_CRYPTO_TWOFISH
-	prompt "Twofish cipher algorithm"
-	tristate
+	tristate "Twofish cipher algorithm"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
@@ -515,8 +482,7 @@ config ADK_KERNEL_CRYPTO_TWOFISH
 	  <http://www.schneier.com/twofish.html>
 
 config ADK_KERNEL_CRYPTO_TWOFISH_586
-	prompt "Twofish cipher algorithm (i586)"
-	tristate
+	tristate "Twofish cipher algorithm (i586)"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	depends on ADK_x86
 	default n
@@ -532,8 +498,7 @@ config ADK_KERNEL_CRYPTO_TWOFISH_586
 	  <http://www.schneier.com/twofish.html>
 
 config ADK_KERNEL_CRYPTO_NULL
-	prompt "Null algorithms"
-	tristate
+	tristate "Null algorithms"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	select ADK_KERNEL_CRYPTO_BLKCIPHER
 	select ADK_KERNEL_CRYPTO_HASH
@@ -546,8 +511,7 @@ endmenu
 menu "Compression"
 
 config ADK_KERNEL_CRYPTO_DEFLATE
-	prompt "Deflate compression algorithm"
-	tristate
+	tristate "Deflate compression algorithm"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	select ADK_KERNEL_ZLIB_DEFLATE
 	select ADK_KERNEL_ZLIB_INFLATE
@@ -559,15 +523,13 @@ config ADK_KERNEL_CRYPTO_DEFLATE
 	  You will most probably want this if using IPSec.
 
 config ADK_KERNEL_CRYPTO_LZO
-	prompt "LZO compression algorithm"
-	tristate
+	tristate "LZO compression algorithm"
 	select ADK_KERNEL_CRYPTO_ALGAPI
 	default n
 	help
 
 config ADK_KERNEL_CRYPTO_MICHAEL_MIC
-	prompt "Michael MIC keyed digest algorithm"
-	tristate
+	tristate "Michael MIC keyed digest algorithm"
 	select ADK_KERNEL_CRYPTO_HASH
 	default n
 	help
@@ -577,8 +539,7 @@ config ADK_KERNEL_CRYPTO_MICHAEL_MIC
 	  of the algorithm.
 
 config ADK_KERNEL_CRYPTO_CRC32C
-	prompt "CRC32c CRC algorithm"
-	tristate
+	tristate "CRC32c CRC algorithm"
 	select ADK_KERNEL_CRYPTO_HASH
 	select ADK_KERNEL_CRC32
 	default n

@@ -8,8 +8,7 @@ config ADK_KERNEL_NLS_DEFAULT
 	default "utf-8"
 
 config ADK_KERNEL_NLS_CODEPAGE_437
-	prompt "Codepage 437 (United States, Canada)"
-	tristate
+	tristate "Codepage 437 (United States, Canada)"
 	default n
 	help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -22,8 +21,7 @@ config ADK_KERNEL_NLS_CODEPAGE_437
 	  the United States and parts of Canada. This is recommended.
 
 config ADK_KERNEL_NLS_CODEPAGE_737
-	prompt "Codepage 737 (Greek)"
-	tristate
+	tristate "Codepage 737 (Greek)"
 	default n
 	help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -36,8 +34,7 @@ config ADK_KERNEL_NLS_CODEPAGE_737
 	  Greek. If unsure, say N.
 
 config ADK_KERNEL_NLS_CODEPAGE_775
-	prompt "Codepage 775 (Baltic Rim)"
-	tristate
+	tristate "Codepage 775 (Baltic Rim)"
 	default n
 	help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -51,8 +48,7 @@ config ADK_KERNEL_NLS_CODEPAGE_775
 	  say N.
 
 config ADK_KERNEL_NLS_CODEPAGE_850
-	prompt "Codepage 850 (Western European Languages)"
-	tristate
+	tristate "Codepage 850 (Western European Languages)"
 	default n
 	help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -67,8 +63,7 @@ config ADK_KERNEL_NLS_CODEPAGE_850
 	  languages that are not part of the US codepage 437.
 
 config ADK_KERNEL_NLS_CODEPAGE_852
-        prompt "Codepage 852 (Eastern European Languages)"
-        tristate
+        tristate "Codepage 852 (Eastern European Languages)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -84,8 +79,7 @@ config ADK_KERNEL_NLS_CODEPAGE_852
 	  transcription), Slovak, Slovenian, and Sorbian.
 
 config ADK_KERNEL_NLS_CODEPAGE_855
-        prompt "Codepage 855 (Cyrillic)"
-        tristate
+        tristate "Codepage 855 (Cyrillic)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -97,8 +91,7 @@ config ADK_KERNEL_NLS_CODEPAGE_855
 	  say Y here if you want to include the DOS codepage for Cyrillic.
 
 config ADK_KERNEL_NLS_CODEPAGE_857
-        prompt "Codepage 857 (Turkish)"
-        tristate
+        tristate "Codepage 857 (Turkish)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -110,8 +103,7 @@ config ADK_KERNEL_NLS_CODEPAGE_857
 	  say Y here if you want to include the DOS codepage for Turkish.
 
 config ADK_KERNEL_NLS_CODEPAGE_860
-        prompt "Codepage 860 (Portuguese)"
-        tristate
+        tristate "Codepage 860 (Portuguese)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -123,8 +115,7 @@ config ADK_KERNEL_NLS_CODEPAGE_860
 	  say Y here if you want to include the DOS codepage for Portuguese.
 
 config ADK_KERNEL_NLS_CODEPAGE_861
-        prompt "Codepage 861 (Icelandic)"
-        tristate
+        tristate "Codepage 861 (Icelandic)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -136,8 +127,7 @@ config ADK_KERNEL_NLS_CODEPAGE_861
 	  say Y here if you want to include the DOS codepage for Icelandic.
 
 config ADK_KERNEL_NLS_CODEPAGE_862
-        prompt "Codepage 862 (Hebrew)"
-        tristate
+        tristate "Codepage 862 (Hebrew)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -149,8 +139,7 @@ config ADK_KERNEL_NLS_CODEPAGE_862
 	  say Y here if you want to include the DOS codepage for Hebrew.
 
 config ADK_KERNEL_NLS_CODEPAGE_863
-        prompt "Codepage 863 (French Canadian)"
-        tristate
+        tristate "Codepage 863 (French Canadian)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -163,8 +152,7 @@ config ADK_KERNEL_NLS_CODEPAGE_863
 	  French.
 
 config ADK_KERNEL_NLS_CODEPAGE_864
-        prompt "Codepage 864 (Arabic)"
-        tristate
+        tristate "Codepage 864 (Arabic)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -176,8 +164,7 @@ config ADK_KERNEL_NLS_CODEPAGE_864
 	  say Y here if you want to include the DOS codepage for Arabic.
 
 config ADK_KERNEL_NLS_CODEPAGE_865
-        prompt "Codepage 865 (Norwegian, Danish)"
-        tristate
+        tristate "Codepage 865 (Norwegian, Danish)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -190,8 +177,7 @@ config ADK_KERNEL_NLS_CODEPAGE_865
 	  European countries.
 
 config ADK_KERNEL_NLS_CODEPAGE_866
-        prompt "Codepage 866 (Cyrillic/Russian)"
-        tristate
+        tristate "Codepage 866 (Cyrillic/Russian)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -204,8 +190,7 @@ config ADK_KERNEL_NLS_CODEPAGE_866
 	  Cyrillic/Russian.
 
 config ADK_KERNEL_NLS_CODEPAGE_869
-        prompt "Codepage 869 (Greek)"
-        tristate
+        tristate "Codepage 869 (Greek)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -217,8 +202,7 @@ config ADK_KERNEL_NLS_CODEPAGE_869
 	  say Y here if you want to include the DOS codepage for Greek.
 
 config ADK_KERNEL_NLS_CODEPAGE_874
-        prompt "Codepage 874 (Thai)"
-        tristate
+        tristate "Codepage 874 (Thai)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -230,8 +214,7 @@ config ADK_KERNEL_NLS_CODEPAGE_874
 	  say Y here if you want to include the DOS codepage for Thai.
 
 config ADK_KERNEL_NLS_CODEPAGE_932
-        prompt "Codepage 932 (Japanese)"
-        tristate
+        tristate "Codepage 932 (Japanese)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -245,8 +228,7 @@ config ADK_KERNEL_NLS_CODEPAGE_932
 	  NLS Default value during kernel configuration, instead of 'cp932'.
 
 config ADK_KERNEL_NLS_CODEPAGE_936
-        prompt "Codepage 936 (Simplified Chinese)"
-        tristate
+        tristate "Codepage 936 (Simplified Chinese)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -259,8 +241,7 @@ config ADK_KERNEL_NLS_CODEPAGE_936
 	  Chinese(GBK).
 
 config ADK_KERNEL_NLS_CODEPAGE_949
-        prompt "Codepage 949 (Korean)"
-        tristate
+        tristate "Codepage 949 (Korean)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -272,8 +253,7 @@ config ADK_KERNEL_NLS_CODEPAGE_949
 	  say Y here if you want to include the DOS codepage for UHC.
 
 config ADK_KERNEL_NLS_CODEPAGE_950
-        prompt "Codepage 950 (Traditional Chinese)"
-        tristate
+        tristate "Codepage 950 (Traditional Chinese)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -286,8 +266,7 @@ config ADK_KERNEL_NLS_CODEPAGE_950
 	  Chinese(Big5).
 
 config ADK_KERNEL_NLS_CODEPAGE_1250
-        prompt "Codepage 1250 (Slavic/Central European)"
-        tristate
+        tristate "Codepage 1250 (Slavic/Central European)"
         default n
         help
 	  If you want to display filenames with native language characters
@@ -299,8 +278,7 @@ config ADK_KERNEL_NLS_CODEPAGE_1250
 	  Slovak, Slovene.
 
 config ADK_KERNEL_NLS_CODEPAGE_1251
-        prompt "Codepage 1251 (Bulgarian, Belarusian)"
-        tristate
+        tristate "Codepage 1251 (Bulgarian, Belarusian)"
         default n
         help
 	  The Microsoft FAT file system family can deal with filenames in
@@ -313,8 +291,7 @@ config ADK_KERNEL_NLS_CODEPAGE_1251
 	  Bulgarian and Belarusian.
 
 config ADK_KERNEL_NLS_ASCII
-	prompt "ASCII (United States)"
-	tristate
+	tristate "ASCII (United States)"
 	default n
 	help
 	  An ASCII NLS module is needed if you want to override the
@@ -322,8 +299,7 @@ config ADK_KERNEL_NLS_ASCII
 	  non-ASCII characters to be translated.
 
 config ADK_KERNEL_NLS_ISO8859_1
-	prompt "NLS ISO 8859-1 (Latin-1; Western European Languages)"
-	tristate
+	tristate "NLS ISO 8859-1 (Latin-1; Western European Languages)"
 	default n
 	help
 	  If you want to display filenames with native language characters
@@ -336,8 +312,7 @@ config ADK_KERNEL_NLS_ISO8859_1
 	  and Swedish. It is also the default for the US. If unsure, say Y.
 
 config ADK_KERNEL_NLS_ISO8859_2
-        prompt "NLS ISO 8859-2 (Latin-2; Central European Languages)"
-        tristate
+        tristate "NLS ISO 8859-2 (Latin-2; Central European Languages)"
         default n
         help
 	  If you want to display filenames with native language characters
@@ -349,8 +324,7 @@ config ADK_KERNEL_NLS_ISO8859_2
 	  Slovak, Slovene.
 
 config ADK_KERNEL_NLS_ISO8859_3
-        prompt "NLS ISO 8859-3 (Latin-3; Esperanto, Galician, Maltese, Turkish)"
-        tristate
+        tristate "NLS ISO 8859-3 (Latin-3; Esperanto, Galician, Maltese, Turkish)"
         default n
         help
 	  If you want to display filenames with native language characters
@@ -361,8 +335,7 @@ config ADK_KERNEL_NLS_ISO8859_3
 	  and Turkish.
 
 config ADK_KERNEL_NLS_ISO8859_4
-        prompt "NLS ISO 8859-4 (Latin-4; old Baltic charset)"
-        tristate
+        tristate "NLS ISO 8859-4 (Latin-4; old Baltic charset)"
         default n
         help
 	  If you want to display filenames with native language characters
@@ -373,8 +346,7 @@ config ADK_KERNEL_NLS_ISO8859_4
 	  Lithuanian. It is an incomplete predecessor of Latin 7.
 
 config ADK_KERNEL_NLS_ISO8859_5
-        prompt "NLS ISO 8859-5 (Cyrillic)"
-        tristate
+        tristate "NLS ISO 8859-5 (Cyrillic)"
         default n
         help
 	  If you want to display filenames with native language characters
@@ -386,8 +358,7 @@ config ADK_KERNEL_NLS_ISO8859_5
 	  KOI8-R is preferred in Russia.
 
 config ADK_KERNEL_NLS_ISO8859_6
-        prompt "NLS ISO 8859-6 (Arabic)"
-        tristate
+        tristate "NLS ISO 8859-6 (Arabic)"
         default n
         help
 	  If you want to display filenames with native language characters
@@ -397,8 +368,7 @@ config ADK_KERNEL_NLS_ISO8859_6
 	  character set.
 
 config ADK_KERNEL_NLS_ISO8859_7
-        prompt "NLS ISO 8859-7 (Greek)"
-        tristate
+        tristate "NLS ISO 8859-7 (Greek)"
         default n
         help
 	  If you want to display filenames with native language characters
@@ -408,8 +378,7 @@ config ADK_KERNEL_NLS_ISO8859_7
 	  Greek character set.
 
 config ADK_KERNEL_NLS_ISO8859_8
-        prompt "NLS ISO 8859-8 (Hebrew)"
-        tristate
+        tristate "NLS ISO 8859-8 (Hebrew)"
         default n
         help
 	  If you want to display filenames with native language characters
@@ -419,8 +388,7 @@ config ADK_KERNEL_NLS_ISO8859_8
 	  character set.
 
 config ADK_KERNEL_NLS_ISO8859_9
-        prompt "NLS ISO 8859-9 (Latin-5; Turkish)"
-        tristate
+        tristate "NLS ISO 8859-9 (Latin-5; Turkish)"
         default n
         help
 	  If you want to display filenames with native language characters
@@ -431,8 +399,7 @@ config ADK_KERNEL_NLS_ISO8859_9
 	  with the Turkish ones. Useful in Turkey.
 
 config ADK_KERNEL_NLS_ISO8859_13
-        prompt "NLS ISO 8859-13 (Latin-7; Baltic Rim)"
-        tristate
+        tristate "NLS ISO 8859-13 (Latin-7; Baltic Rim)"
         default n
         help
 	  If you want to display filenames with native language characters
@@ -443,8 +410,7 @@ config ADK_KERNEL_NLS_ISO8859_13
 	  and Lithuanian.
 
 config ADK_KERNEL_NLS_ISO8859_14
-        prompt "NLS ISO 8859-14 (Latin-8; Celtic)"
-        tristate
+        tristate "NLS ISO 8859-14 (Latin-8; Celtic)"
         default n
         help
 	  If you want to display filenames with native language characters
@@ -456,8 +422,7 @@ config ADK_KERNEL_NLS_ISO8859_14
 	  <http://linux.speech.cymru.org/> has further information.
 
 config ADK_KERNEL_NLS_ISO8859_15
-	prompt "NLS ISO 8859-15 (Latin-9; Western European Languages with Euro)"
-	tristate
+	tristate "NLS ISO 8859-15 (Latin-9; Western European Languages with Euro)"
 	default n
 	help
 	  If you want to display filenames with native language characters
@@ -474,8 +439,7 @@ config ADK_KERNEL_NLS_ISO8859_15
 	  If unsure, say Y.
 
 config ADK_KERNEL_NLS_KOI8_R
-	prompt "NLS KOI8-R (Cryllic for Russian and Bulgarian)"
-	tristate
+	tristate "NLS KOI8-R (Cryllic for Russian and Bulgarian)"
 	default n
 	help
 	  If you want to display filenames with native language characters
@@ -485,8 +449,7 @@ config ADK_KERNEL_NLS_KOI8_R
 	  character set.
 
 config ADK_KERNEL_NLS_KOI8_U
-	prompt "NLS KOI8-U (Cyrillic for Russian, Bulgarian and Ukrainian)"
-	tristate
+	tristate "NLS KOI8-U (Cyrillic for Russian, Bulgarian and Ukrainian)"
 	default n
 	help
 	  If you want to display filenames with native language characters
@@ -496,8 +459,7 @@ config ADK_KERNEL_NLS_KOI8_U
 	  (koi8-u) and Belarusian (koi8-ru) character sets.
 
 config ADK_KERNEL_NLS_UTF8
-	prompt "NLS UTF8"
-	tristate
+	tristate "NLS UTF8"
 	default n
 	help
 	  If you want to display filenames with native language characters

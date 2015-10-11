@@ -17,7 +17,7 @@ config ADK_KERNEL_AUFS_FS
 if ADK_KERNEL_AUFS_FS
 
 choice 
-	boolean "Maximum number of branches"
+	bool "Maximum number of branches"
 	default ADK_KERNEL_AUFS_BRANCH_MAX_127
 	help
 	  Specifies the maximum number of branches (or member directories)

@@ -5,20 +5,19 @@ menu "RTC device support"
 depends on ADK_TARGET_WITH_RTC
 
 config ADK_KERNEL_RTC_CLASS
- 	boolean
+ 	bool
 
 config ADK_KERNEL_RTC_HCTOSYS
- 	boolean
+ 	bool
 
 config ADK_KERNEL_RTC_INTF_DEV
- 	boolean
+ 	bool
 
 config ADK_KERNEL_RTC_INTF_DEV_UIE_EMUL
-	boolean
+	bool
 
 config ADK_KERNEL_RTC_DRV_PCF8523
-	prompt "RTC support for Solidrun IMX6 (PCF8523)"
-	boolean
+	bool "RTC support for Solidrun IMX6 (PCF8523)"
 	select ADK_KERNEL_RTC_CLASS
 	select ADK_KERNEL_RTC_HCTOSYS
 	select ADK_KERNEL_RTC_INTF_DEV
@@ -30,8 +29,7 @@ config ADK_KERNEL_RTC_DRV_PCF8523
 	  PCF8523 RTC.
 
 config ADK_KERNEL_RTC_DRV_PXA
-	prompt "RTC support for Sharp Zaurus"
-	boolean
+	bool "RTC support for Sharp Zaurus"
 	select ADK_KERNEL_RTC_CLASS
 	select ADK_KERNEL_RTC_HCTOSYS
 	select ADK_KERNEL_RTC_INTF_DEV
@@ -42,8 +40,7 @@ config ADK_KERNEL_RTC_DRV_PXA
 	  Sharp Zaurus RTC.
 
 config ADK_KERNEL_RTC_DRV_AT91SAM9
-	prompt "RTC support for AT91SAM9 (Fox G20)"
-	boolean
+	bool "RTC support for AT91SAM9 (Fox G20)"
 	select ADK_KERNEL_RTC_CLASS
 	select ADK_KERNEL_RTC_HCTOSYS
 	select ADK_KERNEL_RTC_INTF_DEV
@@ -54,8 +51,7 @@ config ADK_KERNEL_RTC_DRV_AT91SAM9
  	  Fox G20 RTC support.
 
 config ADK_KERNEL_RTC_DRV_CMOS
-	prompt "RTC support for PC CMOS"
-	boolean
+	bool "RTC support for PC CMOS"
 	select ADK_KERNEL_RTC_CLASS
 	select ADK_KERNEL_RTC_HCTOSYS
 	select ADK_KERNEL_RTC_INTF_DEV
@@ -65,6 +61,6 @@ config ADK_KERNEL_RTC_DRV_CMOS
  	default n
 	depends on (ADK_TARGET_MODEL_PCENGINES_ALIX1C || ADK_TARGET_SYSTEM_IBM_X40 || ADK_TARGET_SYSTEM_LEMOTE_YEELONG)
  	help
-	 PC CMOS RTC support.
+	  PC CMOS RTC support.
 
 endmenu

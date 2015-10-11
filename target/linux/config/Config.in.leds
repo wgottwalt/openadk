@@ -2,70 +2,63 @@
 # material, please see the LICENCE file in the top-level directory.
 
 config ADK_KERNEL_NEW_LEDS
-	boolean
+	bool
 
 config ADK_KERNEL_LEDS_CLASS
-	boolean
+	bool
 	select ADK_KERNEL_NEW_LEDS
 
 config ADK_KERNEL_LEDS_TRIGGERS
-	boolean
+	bool
 	select ADK_KERNEL_NEW_LEDS
 
 config ADK_KERNEL_LEDS_CLASS
-	boolean
+	bool
 
 menu "LEDS driver support"
 depends on ADK_TARGET_WITH_LEDS
 
 config ADK_KERNEL_LEDS_MIKROTIK_RB532
-	prompt "LED suppport for RB532"
-	tristate
+	tristate "LED suppport for RB532"
 	select ADK_KERNEL_LEDS_CLASS
 	depends on ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	default n
 
 config ADK_KERNEL_LEDS_WRAP
-	prompt "LED suppport for WRAP"
-	tristate
+	tristate "LED suppport for WRAP"
 	select ADK_KERNEL_LEDS_CLASS
 	depends on ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default y if ADK_TARGET_SYSTEM_PCENGINES_WRAP
 	default n
 
 config ADK_KERNEL_LEDS_ALIX2
-	prompt "LED suppport for ALIX2/ALIX3"
-	tristate
+	tristate "LED suppport for ALIX2/ALIX3"
 	select ADK_KERNEL_LEDS_CLASS
 	depends on ADK_TARGET_MODEL_PCENGINES_ALIX2D
 	default y if ADK_TARGET_MODEL_PCENGINES_ALIX2D
 	default n
 
 config ADK_KERNEL_LEDS_TRIGGER_TIMER
-	prompt "LED Timer trigger"
-	tristate
+	tristate "LED Timer trigger"
 	select ADK_KERNEL_LEDS_TRIGGERS
 	select ADK_KERNEL_LEDS_CLASS
 	default n
 
 config ADK_KERNEL_LEDS_TRIGGER_HEARTBEAT
-	prompt "LED Heartbeat trigger"
-	tristate
+	tristate "LED Heartbeat trigger"
 	select ADK_KERNEL_LEDS_TRIGGERS
 	select ADK_KERNEL_LEDS_CLASS
 	default n
 
 config ADK_KERNEL_LEDS_TRIGGER_DEFAULT_ON
-	prompt "LED Default On trigger"
-	tristate
+	tristate "LED Default On trigger"
 	select ADK_KERNEL_LEDS_TRIGGERS
 	select ADK_KERNEL_LEDS_CLASS
 	default n
 
 config ADK_KERNEL_NETFILTER_XT_TARGET_LED
-	prompt "LED IPTables trigger"
-	tristate
+	tristate "LED IPTables trigger"
 	select ADK_KERNEL_LEDS_TRIGGERS
 	select ADK_KERNEL_LEDS_CLASS
 	select ADK_PACKAGE_IPTABLES

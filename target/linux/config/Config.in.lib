@@ -4,8 +4,7 @@
 menu "Kernel Library Routines"
 
 config ADK_KERNEL_CRC_ITU_T
-	prompt "CRC ITU-T V.41 functions"
-	tristate
+	tristate "CRC ITU-T V.41 functions"
 	default n
 	help
 	  This option is provided for the case where no in-kernel-tree
@@ -14,20 +13,17 @@ config ADK_KERNEL_CRC_ITU_T
 	  functions require M here.
 
 config ADK_KERNEL_CRC16
-	prompt "CRC16 library functions"
-	boolean
+	tristate "CRC16 library functions"
 	default n
 	help
 
 config ADK_KERNEL_CRC32
-	prompt "CRC32 library functions"
-	boolean
+	bool "CRC32 library functions"
 	default n
 	help
 
 config ADK_KERNEL_LIBCRC32C
-	prompt "CRC32c Cyclic Redundancy-Check"
-	tristate
+	tristate "CRC32c Cyclic Redundancy-Check"
 	default n
 	help
 	  This option is provided for the case where no in-kernel-tree
@@ -36,8 +32,7 @@ config ADK_KERNEL_LIBCRC32C
 	  require M here.  See Castagnoli93.
 
 config ADK_KERNEL_CRC_CCITT
-	prompt "CRC-CCITT library functions"
-	tristate
+	tristate "CRC-CCITT library functions"
 	default n
 	help
 	  This module provides CRC-CCITT library functions for kernel 
@@ -45,18 +40,14 @@ config ADK_KERNEL_CRC_CCITT
 
 config ADK_KERNEL_ZLIB_DEFLATE
 	tristate
-	default n
 
 config ADK_KERNEL_ZLIB_INFLATE
 	tristate
-	default n
 
 config ADK_KERNEL_LZO_COMPRESS
 	tristate
-	default n
 
 config ADK_KERNEL_LZO_DECOMPRESS
 	tristate
-	default n
 
 endmenu

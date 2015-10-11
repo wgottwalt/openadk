@@ -4,48 +4,42 @@
 menu "IPVS support"
 
 config ADK_KERNEL_IP_VS
-	prompt "IPVS support"
-	tristate
+	tristate "IPVS support"
 	select ADK_KERNEL_NETFILTER
 	select ADK_KERNEL_NF_CONNTRACK
 	default n
 
 config ADK_KERNEL_IP_VS_DEBUG
-	prompt "enable debugging support"
-	boolean
-	default n
+	bool "enable debugging support"
 	depends on ADK_KERNEL_IP_VS
+	default n
 
 menu "IPVS transport protocol load balancing support"
 	depends on ADK_KERNEL_IP_VS
 
 config ADK_KERNEL_IP_VS_PROTO_TCP
-	prompt "TCP load balancing support"
-	boolean
+	bool "TCP load balancing support"
 	default n
 	help
 	  This option enables support for load balancing TCP transport
 	  protocol. Say Y if unsure.
 
 config ADK_KERNEL_IP_VS_PROTO_UDP
-	prompt "UDP load balancing support"
-	boolean
+	bool "UDP load balancing support"
 	default n
 	help
 	  This option enables support for load balancing UDP transport
 	  protocol. Say Y if unsure.
 
 config ADK_KERNEL_IP_VS_PROTO_ESP
-	prompt "ESP load balancing support"
-	boolean
+	bool "ESP load balancing support"
 	default n
 	help
 	  This option enables support for load balancing ESP (Encapsulation
 	  Security Payload) transport protocol. Say Y if unsure.
 
 config ADK_KERNEL_IP_VS_PROTO_AH
-	prompt "AH load balancing support"
-	boolean
+	bool "AH load balancing support"
 	default n
 	help
 	  This option enables support for load balancing AH (Authentication
@@ -57,53 +51,43 @@ menu "IPVS Scheduler"
 	depends on ADK_KERNEL_IP_VS
 
 config ADK_KERNEL_IP_VS_RR
-	prompt "round-robin"
-	tristate
+	tristate "round-robin"
 	default n
 
 config ADK_KERNEL_IP_VS_WRR
-	prompt "weighted round-robin"
-	tristate
+	tristate "weighted round-robin"
 	default n
 
 config ADK_KERNEL_IP_VS_LC
-	prompt "least-connection"
-	tristate
+	tristate "least-connection"
 	default n
 
 config ADK_KERNEL_IP_VS_WLC
-	prompt "weighted least-connection"
-	tristate
+	tristate "weighted least-connection"
 	default n
 
 config ADK_KERNEL_IP_VS_LBLC
-	prompt "locality-based least-connection"
-	tristate
+	tristate "locality-based least-connection"
 	default n
 
 config ADK_KERNEL_IP_VS_LBLCR
-	prompt "locality-based least-connection with replication"
-	tristate
+	tristate "locality-based least-connection with replication"
 	default n
 
 config ADK_KERNEL_IP_VS_DH
-	prompt "destination hashing"
-	tristate
+	tristate "destination hashing"
 	default n
 
 config ADK_KERNEL_IP_VS_SH
-	prompt "source hashing"
-	tristate
+	tristate "source hashing"
 	default n
 
 config ADK_KERNEL_IP_VS_SED
-	prompt "shortest expected delay"
-	tristate
+	tristate "shortest expected delay"
 	default n
 
 config ADK_KERNEL_IP_VS_NQ
-	prompt "never queue"
-	tristate
+	tristate "never queue"
 	default n
 
 endmenu
@@ -112,10 +96,9 @@ menu "IPVS application helper"
 	depends on ADK_KERNEL_IP_VS
 
 config ADK_KERNEL_IP_VS_FTP
-	prompt "FTP protocol"
-	tristate
-	default n
+	tristate "FTP protocol"
 	select ADK_KERNEL_IP_VS_PROTO_TCP
+	default n
 
 endmenu
 endmenu

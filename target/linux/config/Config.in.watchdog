@@ -1,6 +1,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+menu "Watchdog driver support"
+
 config ADK_KERNEL_WATCHDOG
 	bool
 
@@ -12,8 +14,6 @@ config ADK_KERNEL_CS5535_MFGPT
 
 config ADK_KERNEL_CS5535_CLOCK_EVENT_SRC
 	bool
-
-menu "Watchdog driver support"
 
 config ADK_KERNEL_BCM2708_WDT
 	bool "Hardware Watchdog for BCM2835 boards"

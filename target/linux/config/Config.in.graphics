@@ -5,172 +5,168 @@ menu "Graphic devices support"
 depends on ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU || ADK_TARGET_VBOX
 
 config ADK_KERNEL_VT
-	boolean
+	bool
 	default y if ADK_TARGET_WITH_VGA
 	default y if ADK_TARGET_VBOX
 	default n
 
 config ADK_KERNEL_VT_CONSOLE
-	boolean
+	bool
 	default y if ADK_TARGET_WITH_VGA
 	default y if ADK_TARGET_VBOX
 	default n
 
 config ADK_KERNEL_VGA_CONSOLE
-	boolean
+	bool
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_TARGET_VBOX
 	default n
 
 config ADK_KERNEL_FONTS
-	boolean
+	bool
 
 config ADK_KERNEL_FONT_8x16
-	boolean
+	bool
 	select ADK_KERNEL_FONTS
 
 config ADK_KERNEL_FB
 	select ADK_KERNEL_VT
 	select ADK_KERNEL_VT_CONSOLE
- 	boolean
+ 	bool
 
 config ADK_KERNEL_FB_SBUS
 	bool
 
 config ADK_KERNEL_DUMMY_CONSOLE
-	boolean
+	bool
  
 config ADK_KERNEL_FRAMEBUFFER_CONSOLE
-	boolean
+	bool
 	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default n
 
 config ADK_KERNEL_FRAMEBUFFER_CONSOLE_DETECT_PRIMARY
-	boolean
+	bool
 
 config ADK_KERNEL_FRAMEBUFFER_CONSOLE_ROTATION
-	boolean
+	bool
 
 config ADK_KERNEL_FB_MXC
- 	boolean
+ 	bool
 
 config ADK_KERNEL_FB_MXC_LDB
- 	boolean
+ 	bool
 
 config ADK_KERNEL_FB_MXC_SYNC_PANEL
-	boolean
+	bool
 
 config ADK_KERNEL_FB_MXC_HDMI
- 	boolean
+ 	bool
 
 config ADK_KERNEL_FB_MXC_EDID
- 	boolean
+ 	bool
 
 config ADK_KERNEL_MXC_IPU
- 	boolean
+ 	bool
 
 config ADK_KERNEL_MXC_IPU_V3
- 	boolean
+ 	bool
 
 config ADK_KERNEL_MXC_VPU
- 	boolean
+ 	bool
 
 config ADK_KERNEL_MXC_GPU_VIV
- 	boolean
+ 	bool
 
 config ADK_KERNEL_MXC_GPU_VIV_V4
- 	boolean
+ 	bool
 
 config ADK_KERNEL_MXC_ASRC
- 	boolean
+ 	bool
 
 config ADK_KERNEL_MXC_HDMI_CEC
- 	boolean
+ 	bool
 
 config ADK_KERNEL_MXC_MIPI_CSI2
- 	boolean
+ 	bool
 
 config ADK_KERNEL_MXC_MLB
- 	boolean
+ 	bool
 
 config ADK_KERNEL_MXC_MLB150
- 	boolean
+ 	bool
 
 config ADK_KERNEL_MFD_SM501
-	boolean
+	bool
 
 config ADK_KERNEL_FB_ATARI
-	boolean
+	bool
 	select ADK_KERNEL_FB
 	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default n
 
 config ADK_KERNEL_FB_ARMCLCD
-	boolean
+	bool
 
 config ADK_KERNEL_PLAT_VERSATILE_CLCD
-	boolean
+	bool
 	select ADK_KERNEL_FB_ARMCLCD
 
 config ADK_KERNEL_FB_CIRRUS
-	boolean
+	bool
 
 config ADK_KERNEL_FB_GEODE
-	boolean
+	bool
 
 config ADK_KERNEL_FB_SM501
-	boolean
+	bool
 	select ADK_KERNEL_MFD_SM501
 
 config ADK_KERNEL_DRM
-	boolean
+	bool
 
 config ADK_KERNEL_DRM_I915
-	boolean
+	bool
 
 config ADK_KERNEL_DRM_I915_KMS
-	boolean
+	bool
 
 config ADK_KERNEL_DRM_I915_FBDEV
-	boolean
+	bool
 
 config ADK_KERNEL_AGP
-	boolean
+	bool
 
 config ADK_KERNEL_AGP_INTEL
-	boolean
+	bool
 
 config ADK_KERNEL_LOGO
-	boolean
+	bool
  
 config ADK_KERNEL_LOGO_LINUX_CLUT224
-	prompt "Enable Linux penguin boot logo"
-	boolean
+	bool "Enable Linux penguin boot logo"
 	select ADK_KERNEL_LOGO
 	default n
 
 config ADK_KERNEL_FB_CON_DECOR
-	prompt "Enable fullscreen boot logo"
-	boolean
+	bool "Enable fullscreen boot logo"
 	select ADK_PACKAGE_FBSPLASH
 	depends on ADK_TARGET_KERNEL_VERSION_3_18 || \
 		   ADK_TARGET_KERNEL_VERSION_3_14
 	default n
 
 config ADK_KERNEL_FB_VESA
-	prompt "Framebuffer support for VirtualBox Emulator (VESA)"
-	boolean
+	bool "Framebuffer support for VirtualBox Emulator (VESA)"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	default y if ADK_TARGET_VBOX
  	default n
 	depends on ADK_TARGET_VBOX
  	help
-	 Framebuffer support for VirtualBox Emulator.
+	  Framebuffer support for VirtualBox Emulator.
 
 config ADK_KERNEL_MXC_GPU_VIV
-	prompt "Framebuffer support for Cubox-i/Hummingboard (Vivante)"
-	boolean
+	bool "Framebuffer support for Cubox-i/Hummingboard (Vivante)"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FB_MXC
 	select ADK_KERNEL_FB_MXC_LDB
@@ -195,8 +191,7 @@ config ADK_KERNEL_MXC_GPU_VIV
 	  Framebuffer support for Cubox-i/Hummingboard (Vivante)
 	
 config ADK_KERNEL_FB_PXA
-	prompt "Framebuffer support for Sharp Zaurus (PXA)"
-	boolean
+	bool "Framebuffer support for Sharp Zaurus (PXA)"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_DUMMY_CONSOLE
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
@@ -209,11 +204,10 @@ config ADK_KERNEL_FB_PXA
 	default y if ADK_TARGET_SYSTEM_QEMU_ARM_SPITZ
  	default n
  	help
-	 Framebuffer support for Sharp Zaurus CL Series.
+	  Framebuffer support for Sharp Zaurus CL Series.
 
 config ADK_KERNEL_FB_GEODE_LX
-	prompt "Framebuffer support for ALIX boards (GEODE)"
-	boolean
+	bool "Framebuffer support for ALIX boards (GEODE)"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FB_GEODE
@@ -221,11 +215,10 @@ config ADK_KERNEL_FB_GEODE_LX
 	default y if ADK_TARGET_MODEL_PCENGINES_ALIX1C
  	default n
  	help
-	 Framebuffer support for ALIX boards with VGA.
+	  Framebuffer support for ALIX boards with VGA.
 
 config ADK_KERNEL_FB_SM7XX
-	prompt "Framebuffer support for Lemote Yeelong (SM7XX)"
-	boolean
+	bool "Framebuffer support for Lemote Yeelong (SM7XX)"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FONT_8x16
@@ -234,11 +227,10 @@ config ADK_KERNEL_FB_SM7XX
  	default n
 	depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
  	help
-	 Framebuffer support for Lemote Yeelong.
+	  Framebuffer support for Lemote Yeelong.
 
 config ADK_KERNEL_FB_BCM2708
-	prompt "Framebuffer support for BCM2835 boards"
-	boolean
+	bool "Framebuffer support for BCM2835 boards"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FONT_8x16
@@ -246,11 +238,10 @@ config ADK_KERNEL_FB_BCM2708
  	default n
 	depends on ADK_TARGET_BOARD_BCM28XX
  	help
-	 Framebuffer support for BCM2835 boards.
+	  Framebuffer support for BCM2835 boards.
 
 config ADK_HARDWARE_GRAPHICS_INTEL_I915
-	prompt "Support for Intel graphic cards (AGP/DRM/KMS)"
-	boolean
+	bool "Support for Intel graphic cards (AGP/DRM/KMS)"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_DRM
 	select ADK_KERNEL_AGP
@@ -266,8 +257,7 @@ config ADK_HARDWARE_GRAPHICS_INTEL_I915
           AGP/DRM/KMS support for Intel chipset i915.
 
 config ADK_KERNEL_DRM_CIRRUS_QEMU
-	prompt "Support for QEMU cirrus VGA emulation (DRM/KMS)"
-	boolean
+	bool "Support for QEMU cirrus VGA emulation (DRM/KMS)"
 	select ADK_KERNEL_DRM
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	depends on ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64

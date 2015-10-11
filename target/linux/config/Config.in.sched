@@ -4,24 +4,19 @@
 menu "QoS and/or fair queueing"
 
 config ADK_KERNEL_NET_SCH_CSZ
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_NET_SCH_NETEM
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_NET_QOS
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_NET_ESTIMATOR
-	boolean
-	default n
+	bool
 
 config ADK_KERNEL_NET_SCHED
-	boolean
-	default n
+	bool
 	help
 	  When the kernel has several packets to send out over a network
 	  device, it has to decide which ones to send first, which ones to
@@ -52,8 +47,7 @@ config ADK_KERNEL_NET_SCHED
 comment "Queueing/Scheduling"
 
 config ADK_KERNEL_NET_SCH_CBQ
-	prompt "Class Based Queueing (CBQ)"
-	tristate
+	tristate "Class Based Queueing (CBQ)"
 	select ADK_KERNEL_NET_SCHED
 	default n
 	help
@@ -69,8 +63,7 @@ config ADK_KERNEL_NET_SCH_CBQ
 	  want to use as leaf disciplines.
 
 config ADK_KERNEL_NET_SCH_HTB
-	prompt "Hierarchical Token Bucket (HTB)"
-	tristate
+	tristate "Hierarchical Token Bucket (HTB)"
 	select ADK_KERNEL_NET_SCHED
 	default n
 	help
@@ -83,8 +76,7 @@ config ADK_KERNEL_NET_SCH_HTB
 	  different properties and different algorithm.
 
 config ADK_KERNEL_NET_SCH_HFSC
-	prompt "Hierarchical Fair Service Curve (HFSC)"
-	tristate
+	tristate "Hierarchical Fair Service Curve (HFSC)"
 	select ADK_KERNEL_NET_SCHED
 	default n
 	help
@@ -92,8 +84,7 @@ config ADK_KERNEL_NET_SCH_HFSC
 	  (HFSC) packet scheduling algorithm.
 
 config ADK_KERNEL_NET_SCH_ATM
-	prompt "ATM Virtual Circuits (ATM)"
-	tristate
+	tristate "ATM Virtual Circuits (ATM)"
 	depends on ADK_KERNEL_ATM
 	select ADK_KERNEL_NET_SCHED
 	default n
@@ -106,8 +97,7 @@ config ADK_KERNEL_NET_SCH_ATM
 	  See the top of <file:net/sched/sch_atm.c>) for more details.
 
 config ADK_KERNEL_NET_SCH_PRIO
-	prompt "Multi Band Priority Queueing (PRIO)"
-	tristate
+	tristate "Multi Band Priority Queueing (PRIO)"
 	select ADK_KERNEL_NET_SCHED
 	default n
 	help
@@ -115,8 +105,7 @@ config ADK_KERNEL_NET_SCH_PRIO
 	  scheduler.
 
 config ADK_KERNEL_NET_SCH_RED
-	prompt "Random Early Detection (RED)"
-	tristate
+	tristate "Random Early Detection (RED)"
 	select ADK_KERNEL_NET_SCHED
 	default n
 	help
@@ -126,8 +115,7 @@ config ADK_KERNEL_NET_SCH_RED
 	  See the top of <file:net/sched/sch_red.c> for more details.
 
 config ADK_KERNEL_NET_SCH_SFQ
-	prompt "Stochastic Fairness Queueing (SFQ)"
-	tristate
+	tristate "Stochastic Fairness Queueing (SFQ)"
 	select ADK_KERNEL_NET_SCHED
 	default n
 	help
@@ -137,8 +125,7 @@ config ADK_KERNEL_NET_SCH_SFQ
 	  See the top of <file:net/sched/sch_sfq.c> for more details.
 
 config ADK_KERNEL_NET_SCH_TBF
-	prompt "Token Bucket Filter (TBF)"
-	tristate
+	tristate "Token Bucket Filter (TBF)"
 	select ADK_KERNEL_NET_SCHED
 	default n
 	help
@@ -148,8 +135,7 @@ config ADK_KERNEL_NET_SCH_TBF
 	  See the top of <file:net/sched/sch_tbf.c> for more details.
 
 config ADK_KERNEL_NET_SCH_GRED
-	prompt "Generic Random Early Detection (GRED)"
-	tristate
+	tristate "Generic Random Early Detection (GRED)"
 	select ADK_KERNEL_NET_SCHED
 	default n
 	help
@@ -159,8 +145,7 @@ config ADK_KERNEL_NET_SCH_GRED
 	  references about the algorithm).
 
 config ADK_KERNEL_NET_SCH_DSMARK
-	prompt "Differentiated Services marker (DSMARK)"
-	tristate
+	tristate "Differentiated Services marker (DSMARK)"
 	select ADK_KERNEL_NET_SCHED
 	default n
 	help
@@ -170,8 +155,7 @@ config ADK_KERNEL_NET_SCH_DSMARK
 	  RFCs, is available at <http://www.gta.ufrj.br/diffserv/>.
 
 config ADK_KERNEL_NET_SCH_INGRESS
-	prompt "Ingress Qdisc"
-	tristate
+	tristate "Ingress Qdisc"
 	select ADK_KERNEL_NET_SCHED
 	select ADK_KERNEL_NETFILTER
 	select ADK_KERNEL_NET_CLS_ACT
@@ -183,13 +167,12 @@ config ADK_KERNEL_NET_SCH_INGRESS
 comment "Classification"
 
 config ADK_KERNEL_NET_CLS
-	boolean
+	bool
 	select ADK_KERNEL_NET_SCHED
 	default n
 
 config ADK_KERNEL_NET_CLS_BASIC
-	prompt "Elementary classification (BASIC)"
-	tristate
+	tristate "Elementary classification (BASIC)"
 	select ADK_KERNEL_NET_CLS
 	default n
 	help
@@ -197,8 +180,7 @@ config ADK_KERNEL_NET_CLS_BASIC
 	  only extended matches and actions.
 
 config ADK_KERNEL_NET_CLS_TCINDEX
-	prompt "Traffic-Control Index (TCINDEX)"
-	tristate
+	tristate "Traffic-Control Index (TCINDEX)"
 	select ADK_KERNEL_NET_CLS
 	default n
 	help
@@ -207,8 +189,7 @@ config ADK_KERNEL_NET_CLS_TCINDEX
 	  to implement Differentiated Services together with DSMARK.
 
 config ADK_KERNEL_NET_CLS_ROUTE4
-	prompt "Routing decision (ROUTE)"
-	tristate
+	tristate "Routing decision (ROUTE)"
 	select ADK_KERNEL_NET_CLS
 	default n
 	help
@@ -216,8 +197,7 @@ config ADK_KERNEL_NET_CLS_ROUTE4
 	  according to the route table entry they matched.
 
 config ADK_KERNEL_NET_CLS_FW
-	prompt "Netfilter mark (FW)"
-	tristate
+	tristate "Netfilter mark (FW)"
 	select ADK_KERNEL_NET_CLS
 	default n
 	help
@@ -225,8 +205,7 @@ config ADK_KERNEL_NET_CLS_FW
 	  according to netfilter/firewall marks.
 
 config ADK_KERNEL_NET_CLS_U32
-	prompt "Universal 32bit comparisons w/ hashing (U32)"
-	tristate
+	tristate "Universal 32bit comparisons w/ hashing (U32)"
 	select ADK_KERNEL_NET_CLS
 	default n
 	help
@@ -234,8 +213,7 @@ config ADK_KERNEL_NET_CLS_U32
 	  32bit pieces based comparison scheme.
 
 config ADK_KERNEL_NET_CLS_U32_PERF
-	prompt "Performance counters support"
-	bool
+	bool "Performance counters support"
 	select ADK_KERNEL_NET_CLS
 	depends on ADK_KERNEL_NET_CLS_U32
 	default n
@@ -244,8 +222,7 @@ config ADK_KERNEL_NET_CLS_U32_PERF
 	  fine tuning u32 classifiers.
 
 config ADK_KERNEL_NET_CLS_U32_MARK
-	prompt "Netfilter marks support"
-	bool
+	bool "Netfilter marks support"
 	select ADK_KERNEL_NET_CLS
 	depends on ADK_KERNEL_NET_CLS_U32
 	depends on ADK_KERNEL_NET_CLS_FW
@@ -256,14 +233,13 @@ config ADK_KERNEL_NET_CLS_U32_MARK
 comment "Actions"
 
 config ADK_KERNEL_NET_CLS_ACT
-	boolean
+	bool
 	select ADK_KERNEL_NET_SCHED
 	select ADK_KERNEL_NET_ESTIMATOR
 	default n
 
 config ADK_KERNEL_NET_ACT_POLICE
-	prompt "Traffic Policing"
-	tristate
+	tristate "Traffic Policing"
 	select ADK_KERNEL_NET_CLS_ACT
 	default n
 	help
@@ -272,8 +248,7 @@ config ADK_KERNEL_NET_ACT_POLICE
 	  module.
 
 config ADK_KERNEL_NET_ACT_GACT
-	prompt "Generic actions"
-	tristate
+	tristate "Generic actions"
 	select ADK_KERNEL_NET_CLS_ACT
 	default n
 	help
@@ -281,8 +256,7 @@ config ADK_KERNEL_NET_ACT_GACT
 	  accepting packets.
 
 config ADK_KERNEL_NET_ACT_MIRRED
-	prompt "Redirecting and Mirroring"
-	tristate
+	tristate "Redirecting and Mirroring"
 	select ADK_KERNEL_NET_CLS_ACT
 	default n
 	help
@@ -290,8 +264,7 @@ config ADK_KERNEL_NET_ACT_MIRRED
 	  other devices.
 
 config ADK_KERNEL_NET_ACT_IPT
-	prompt "IPtables targets"
-	tristate
+	tristate "IPtables targets"
 	select ADK_KERNEL_NET_CLS_ACT
 	select ADK_KERNEL_IP_NF_IPTABLES
 	default n
@@ -300,8 +273,7 @@ config ADK_KERNEL_NET_ACT_IPT
 	  classification.
 
 config ADK_KERNEL_NET_ACT_PEDIT
-	prompt "Packet Editing"
-	tristate
+	tristate "Packet Editing"
 	select ADK_KERNEL_NET_CLS_ACT
 	default n
 	help
