@@ -1,3 +1,6 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
 menu "USB support"
 depends on ADK_TARGET_WITH_USB || ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86
 

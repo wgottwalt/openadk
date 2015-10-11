@@ -1,3 +1,6 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
 menu "Filesystems support"
 
 config ADK_KERNEL_MISC_FILESYSTEMS

@@ -1,3 +1,6 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
 menu "Virtualization"
 depends on (ADK_TARGET_ARCH_X86_64 || ADK_TARGET_ARCH_X86) && ADK_TARGET_CPU_WITH_VT
 

@@ -1,3 +1,6 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
 menu "Audio devices support"
 depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SOUND || ADK_TARGET_QEMU
 

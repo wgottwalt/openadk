@@ -1,3 +1,6 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
 menu "QoS and/or fair queueing"
 
 config ADK_KERNEL_NET_SCH_CSZ
