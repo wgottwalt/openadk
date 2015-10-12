@@ -169,6 +169,7 @@ config ADK_KERNEL_FB_VESA
 
 config ADK_KERNEL_MXC_GPU_VIV
 	bool "Framebuffer support for Cubox-i/Hummingboard (Vivante)"
+	select ADK_KERNEL_DRM
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FB_MXC
 	select ADK_KERNEL_FB_MXC_LDB
