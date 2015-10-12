@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_HASH:=		684902d3f4e9ad27829f4af0d9d2d588afed03667997579b9c2be86fcd1eb73a
 PKG_DESCR:=		collection of common ca certificates
 PKG_SECTION:=		app/crypto
-PKG_DEPENDS:=		openssl-util libopenssl
 PKG_URL:=		http://packages.debian.org/sid/ca-certificates
 PKG_SITES:=		http://http.debian.net/debian/pool/main/c/ca-certificates/
 
