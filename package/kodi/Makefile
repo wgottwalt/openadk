@@ -12,13 +12,13 @@ PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx libsquish
 PKG_DEPENDS+=		libass libmpeg2 libmad libdbus libglew mesa
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
-PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libopenssl libnettle
+PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libnettle
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng libncurses
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate libuuid
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd libgtk2
 PKG_DEPENDS+=		libgpg-error libudev python2-mod-sqlite libffmpeg
 PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib libglu librt
-PKG_BUILDDEP:=		boost python2 libass ffmpeg openssl libglew
+PKG_BUILDDEP:=		boost python2 libass ffmpeg libglew
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis
 PKG_BUILDDEP+=		curl flac bzip2 libtiff liblzo yajl mesa
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
@@ -34,6 +34,14 @@ PKG_CFLINE_KODI:=	select ADK_PACKAGE_GPU_VIV_BIN_MX6Q if ADK_TARGET_SYSTEM_SOLID
 
 DISTFILES:=		$(PKG_VERSION)-Isengard.tar.gz
 WRKDIST=		${WRKDIR}/xbmc-$(PKG_VERSION)-Isengard
+
+PKG_CHOICES_KODI:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCB_WITH_LIBRESSL:=	libressl
 
 PKG_FLAVOURS_KODI:=	WITH_SMB WITH_SMB3 WITH_NFS WITH_SSH WITH_AVAHI WITH_CEC 
 PKG_FLAVOURS_KODI+=	WITH_WEBSERVER WITH_RTMP WITH_BLURAY WITH_LIRC
