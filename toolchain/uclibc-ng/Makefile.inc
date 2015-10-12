@@ -7,6 +7,12 @@ PKG_VERSION:=		git
 PKG_RELEASE:=		1
 PKG_SITES:=		git://uclibc-ng.org/git/uclibc-ng
 endif
+ifeq ($(ADK_TARGET_LIB_UCLIBC_NG_1_0_7),y)
+PKG_VERSION:=		1.0.7
+PKG_RELEASE:=		1
+PKG_SITES:=		http://downloads.uclibc-ng.org/releases/1.0.7/
+PKG_HASH:=		39aa66fc04c936f90069ba4a46868da0bb8e1a2471f9f341777aca7e1c01fd7d
+endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC_NG_1_0_6),y)
 PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		1
@@ -18,11 +24,5 @@ PKG_VERSION:=		1.0.5
 PKG_RELEASE:=		1
 PKG_SITES:=		http://downloads.uclibc-ng.org/releases/1.0.5/
 PKG_HASH:=		7a16bc9ff03b8f74f1f0cf921412f08e48a15285d9d555560d5cca915a28df5f
-endif
-ifeq ($(ADK_TARGET_LIB_UCLIBC_NG_1_0_4),y)
-PKG_VERSION:=		1.0.4
-PKG_RELEASE:=		1
-PKG_SITES:=		http://downloads.uclibc-ng.org/releases/1.0.4/
-PKG_HASH:=		c037dbaea685380c75b112b5503778a90fa95ac524728770131aa17e29474915
 endif
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
