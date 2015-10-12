@@ -9,6 +9,9 @@ include Makefile.inc
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 TARGET_CFLAGS:=$(filter-out -flto,$(TARGET_CFLAGS))
+# handled by uClibc-ng makefiles
+TARGET_CFLAGS:=$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
+TARGET_LDFLAGS:=$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
 
 ifeq ($(ADK_TARGET_HARD_FLOAT),y)
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
