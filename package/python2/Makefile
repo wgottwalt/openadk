@@ -43,9 +43,9 @@ PKGFS_MOD_NCURSES:=	libncurses
 PKGFD_MOD_READLINE:=	readline support
 PKGFB_MOD_READLINE:=	readline
 PKGFS_MOD_READLINE:=	libreadline
-PKGFD_MOD_SSL:=		openssl support
-PKGFB_MOD_SSL:=		openssl
-PKGFS_MOD_SSL:=		libopenssl
+PKGFD_MOD_SSL:=		ssl support
+PKGFB_MOD_SSL:=		libressl
+PKGFS_MOD_SSL:=		libressl
 
 include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
