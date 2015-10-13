@@ -53,6 +53,7 @@ endif
 ifeq ($(ADK_TARGET_FLOAT),hard)
 GLIBC_CONFOPTS+=	--with-fp
 endif
+TARGET_CFLAGS:=		$(filter-out -fno-asynchronous-unwind-tables,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
 TARGET_LDFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
