@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		imx-vpu
-PKG_VERSION:=		3.10.17-1.0.0
+PKG_VERSION:=		5.4.31
 PKG_RELEASE:=		1
-PKG_HASH:=		cd8a7bd50ff3274db76a331cc6622d3ba4bb7c790ce778f303e49187df2dfd72
+PKG_HASH:=		a266ab317fbd866541eae506d68983bcd361f49d1162a66bb34cb8088ceec88c
 PKG_DESCR:=		imx vpu library
 PKG_DEPENDS:=		firmware-imx
 PKG_SECTION:=		libs/video

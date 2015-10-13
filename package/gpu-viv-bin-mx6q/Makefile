@@ -34,5 +34,6 @@ gpu-viv-bin-mx6q-install:
 	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/include
 	$(CP) $(WRKBUILD)/usr/include/* \
 		$(STAGING_TARGET_DIR)/usr/include
+	-rm -r $(IDIR_GPU_VIV_BIN_MX6Q)/usr/lib/libGL.so*
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

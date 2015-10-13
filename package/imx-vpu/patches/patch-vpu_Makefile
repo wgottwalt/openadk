@@ -1,6 +1,6 @@
---- imx-vpu-3.10.17-1.0.0.orig/vpu/Makefile	2014-01-16 15:27:33.000000000 +0100
-+++ imx-vpu-3.10.17-1.0.0/vpu/Makefile	2015-10-08 18:46:28.302097835 +0200
-@@ -21,22 +21,22 @@ endif
+--- imx-vpu-5.4.31.orig/vpu/Makefile	2015-07-08 17:42:16.000000000 +0200
++++ imx-vpu-5.4.31/vpu/Makefile	2015-10-13 14:45:14.464306484 +0200
+@@ -22,13 +22,13 @@ endif
  all: $(LIBNAME).so $(LIBNAME).a
  
  install: install_headers
@@ -19,14 +19,3 @@
  else
  all install :
  endif
- 
- %.o: %.c
--	$(CC) -D$(PLATFORM) -Wall -O2 -fPIC -c $^ -o $@
-+	$(CC) -D$(PLATFORM) $(CFLAGS) -fPIC -c $^ -o $@
- 
- $(LIBNAME).so.$(SONAMEVERSION): $(OBJ)
--	$(CC) -shared -nostartfiles -Wl,-soname,$@ $^ -o $@ -lpthread
-+	$(CC) $(CFLAGS) -shared -nostartfiles -Wl,-soname,$@ $^ -o $@ -lpthread
- 
- $(LIBNAME).so: $(LIBNAME).so.$(SONAMEVERSION)
- 	ln -s $< $@
