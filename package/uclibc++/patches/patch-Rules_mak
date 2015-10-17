@@ -1,5 +1,5 @@
 --- uClibc++-0.2.4.orig/Rules.mak	2012-05-25 23:15:31.000000000 +0200
-+++ uClibc++-0.2.4/Rules.mak	2014-05-26 16:20:39.000000000 +0200
++++ uClibc++-0.2.4/Rules.mak	2015-10-14 18:06:07.000000000 +0200
 @@ -79,9 +79,6 @@ check_gcc=$(shell if $(CC) $(1) -S -o /d
  check_gxx_visibility=$(shell if $(CXX) -fvisibility-inlines-hidden -S -o /dev/null -xc++ /dev/null > /dev/null 2>&1; \
          then echo "-DGCC_HASCLASSVISIBILITY"; fi)
@@ -10,3 +10,21 @@
  # strip quotes
  qstrip = $(strip $(subst ",,$(1)))
  #"))
+@@ -107,7 +104,7 @@ CPU_CFLAGS=$(call qstrip,$(CPU_CFLAGS-y)
+ 
+ # Some nice CFLAGS to work with
+ GEN_CFLAGS:=-fno-builtin
+-CFLAGS:=$(XWARNINGS) $(CPU_CFLAGS) -ansi
++CFLAGS:=$(XWARNINGS) $(CPU_CFLAGS)
+ 
+ LDFLAGS:=-Wl,--warn-common -Wl,--warn-once -Wl,-z,combreloc -Wl,-z,defs
+ 
+@@ -145,7 +142,7 @@ endif
+ ifneq ($(IMPORT_LIBSUP),y)
+   GEN_LIBS += -lsupc++
+ endif
+-GEN_LIBS += -lc -lgcc
++GEN_LIBS += -lc -lgcc -lgcc_s
+ 
+ LIBS := $(GEN_LIBS)
+ STATIC_LIBS := $(GEN_LIBS)
