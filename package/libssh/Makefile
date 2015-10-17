@@ -8,11 +8,19 @@ PKG_VERSION:=		7ec798d3e73f3dac94a3c240545ebaf4daa189b4
 PKG_RELEASE:=		1
 PKG_DESCR:=		secure shell library
 PKG_SECTION:=		libs/net
-PKG_DEPENDS:=		libopenssl zlib
-PKG_BUILDDEP:=		cmake-host openssl zlib
+PKG_DEPENDS:=		zlib
+PKG_BUILDDEP:=		cmake-host zlib
 PKG_URL:=		http://www.libssh.org/
 PKG_SITES:=		git://git.libssh.org/projects/libssh.git 
 PKG_OPTS:=		dev
+
+PKG_CHOICES_LIBSSH:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCB_WITH_OPENSSL:=	openssl
 
 include $(ADK_TOPDIR)/mk/package.mk
 
