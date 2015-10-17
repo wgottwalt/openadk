@@ -475,6 +475,11 @@ config ADK_CPU_I686
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
+config ADK_CPU_LM32
+	bool
+	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_MMU
+
 config ADK_CPU_LOONGSON2F
 	bool
 	select ADK_LINUX_64
@@ -916,6 +921,7 @@ config ADK_TARGET_CPU_ARCH
 	default "h8300" if ADK_TARGET_ARCH_H8300
 	default "hppa" if ADK_TARGET_ARCH_HPPA
 	default "ia64" if ADK_TARGET_ARCH_IA64
+	default "lm32" if ADK_TARGET_ARCH_LM32
 	default "m68k" if ADK_TARGET_ARCH_M68K
 	default "metag" if ADK_TARGET_ARCH_METAG
 	default "microblaze" if ADK_TARGET_ARCH_MICROBLAZE && ADK_TARGET_BIG_ENDIAN
