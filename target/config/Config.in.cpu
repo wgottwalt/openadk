@@ -477,8 +477,8 @@ config ADK_CPU_I686
 
 config ADK_CPU_LM32
 	bool
-	select ADK_TARGET_WITH_LT
 	select ADK_TARGET_WITHOUT_MMU
+	select ADK_TARGET_WITHOUT_THREADS
 
 config ADK_CPU_LOONGSON2F
 	bool
