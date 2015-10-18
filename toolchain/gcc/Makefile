@@ -165,6 +165,10 @@ GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 endif
 
+ifeq ($(ADK_TARGET_ARCH_ALPHA),y)
+GCC_CONFOPTS+=		--without-long-double-128
+endif
+
 ifeq ($(ADK_TARGET_ARCH_PPC),y)
 GCC_CONFOPTS+=		--with-long-double-64 --enable-secureplt
 endif
