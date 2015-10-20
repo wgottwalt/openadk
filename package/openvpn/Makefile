@@ -9,11 +9,17 @@ PKG_RELEASE:=		1
 PKG_HASH:=		4062ce972500f98988e9c6e9dd1040be25582f0d49aa7e69f3f4cff96e9aebee
 PKG_DESCR:=		vpn solution using ssl/tls
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		libopenssl
-PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
 PKG_CFLINE_OPENVPN:=	select ADK_KERNEL_TUN m
+
+PKG_CHOICES_OPENVPN:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
 
 PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS WITH_SMALL
 PKGFD_WITH_LZO:=	enable lzo compression support

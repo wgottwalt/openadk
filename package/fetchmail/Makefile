@@ -12,10 +12,14 @@ PKG_SECTION:=		net/mail
 PKG_URL:=		http://www.fetchmail.info
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fetchmail/}
 
-PKG_FLAVOURS_FETCHMAIL:=WITH_SSL
-PKGFD_WITH_SSL:=	enable SSL support
-PKGFS_WITH_SSL:=	libopenssl
-PKGFB_WITH_SSL:=	openssl
+PKG_CHOICES_FETCHMAIL:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 include ${ADK_TOPDIR}/mk/package.mk
 
@@ -23,9 +27,13 @@ $(eval $(call PKG_template,FETCHMAIL,fetchmail,${PKG_VERSION}-${PKG_RELEASE},${P
 
 CONFIGURE_ARGS+=	--without-hesiod
 
-ifeq (${ADK_PACKAGE_FETCHMAIL_WITH_SSL},y)
+ifeq (${ADK_PACKAGE_FETCHMAIL_WITH_OPENSSL},y)
 CONFIGURE_ARGS+=	--with-ssl='${STAGING_TARGET_DIR}/usr'
-else
+endif
+ifeq (${ADK_PACKAGE_FETCHMAIL_WITH_LIBRESSL},y)
+CONFIGURE_ARGS+=	--with-ssl='${STAGING_TARGET_DIR}/usr'
+endif
+ifeq (${ADK_PACKAGE_FETCHMAIL_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--without-ssl
 endif
 

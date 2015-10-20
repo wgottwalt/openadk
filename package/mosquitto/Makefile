@@ -9,12 +9,20 @@ PKG_RELEASE:=		1
 PKG_HASH:=		16eb3dbef183827665feee9288362c7352cd016ba04ca0402a0ccf857d1c2ab2
 PKG_DESCR:=		mqtt broker
 PKG_SECTION:=		net/misc
-PKG_DEPENDS:=		c-ares libopenssl librt libpthreads
-PKG_BUILDDEP:=		cmake-host c-ares openssl
+PKG_DEPENDS:=		c-ares librt libpthreads
+PKG_BUILDDEP:=		cmake-host c-ares
 PKG_URL:=		http://mosquitto.org
 PKG_SITES:=		http://mosquitto.org/files/source/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
+
+PKG_CHOICES_MOSQUITTO:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
 
 include $(ADK_TOPDIR)/mk/package.mk
 

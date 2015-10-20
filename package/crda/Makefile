@@ -23,12 +23,15 @@ PKGFD_WITH_UDEV:=	install shipped udev rules
 PKGFS_WITH_UDEV:=	udev
 PKGFB_WITH_UDEV:=	eudev
 
-PKG_CHOICES_CRDA:=	WITH_OPENSSL WITH_GCRYPT
+PKG_CHOICES_CRDA:=	WITH_LIBRESSL WITH_OPENSSL WITH_GCRYPT
 PKGCD_WITH_OPENSSL:=	ssl support via openssl library
-PKGCD_WITH_GCRYPT:=	ssl support via gcrypt library
 PKGCB_WITH_OPENSSL:=	openssl
-PKGCB_WITH_GCRYPT:=	libgcrypt
 PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCD_WITH_LIBRESSL:=	ssl support via libressl library
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_GCRYPT:=	ssl support via gcrypt library
+PKGCB_WITH_GCRYPT:=	libgcrypt
 PKGCS_WITH_GCRYPT:=	libgcrypt
 
 include $(ADK_TOPDIR)/mk/package.mk

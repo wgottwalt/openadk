@@ -23,7 +23,7 @@ $(eval $(call PKG_template,IPERF,iperf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 ifeq ($(ADK_COMPILE_IPERF_WITH_UCLIBCXX),y)
 TARGET_CXXFLAGS+=	-fno-builtin -fno-rtti -nostdinc++
 TARGET_LDFLAGS+=	-nodefaultlibs
-CONFIGURE_ENV+=		LIBS="-luClibc++ -lc -lm -lpthread"
+CONFIGURE_ENV+=		LIBS="-luClibc++ -lc -lm -lpthread -lgcc"
 else
 CONFIGURE_ENV+=		LIBS="-lc -lm -lpthread"
 endif

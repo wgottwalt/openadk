@@ -9,12 +9,21 @@ PKG_RELEASE:=		2
 PKG_HASH:=		b136b549b7d2a2751c21793100075ea43b28de9af4c1969508bb95bcc92224ad
 PKG_DESCR:=		set of tools for auditing wireless networks
 PKG_SECTION:=		net/wifi
-PKG_DEPENDS:=		libpthread libopenssl libpcap
-PKG_BUILDDEP:=		openssl libpcap
+PKG_DEPENDS:=		libpthread libpcap
+PKG_BUILDDEP:=		libpcap
 PKG_URL:=		http://www.aircrack-ng.org/
 PKG_SITES:=		http://download.aircrack-ng.org/
 # do not build parallel, otherwise libosdep.a may not be ready when compiling airtun-ng
 PKG_NOPARALLEL:=	1
+
+PKG_CHOICES_AIRCRACK_NG:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

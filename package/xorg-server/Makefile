@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		293d6a73a560f9f7f5cc8a05d84445a3aabfdf43683925d0f93c8f8502536c84
 PKG_DESCR:=		xorg server
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		libopenssl libxfont pixman libpciaccess libxkbfile
+PKG_DEPENDS:=		libxfont pixman libpciaccess libxkbfile
 PKG_DEPENDS+=		libfontenc xkeyboard-config xkbcomp libxau libxaw
 PKG_DEPENDS+=		libxmu libxpm libxrender libxt libxxf86dga libxext
 PKG_DEPENDS+=		libxdmcp libxv libsm libice libx11 libxcb librt
@@ -17,7 +17,7 @@ PKG_DEPENDS+=		libxshmfence libfreetype libfontenc libstdcxx libpciaccess
 PKG_BUILDDEP:=		libX11 randrproto renderproto fixesproto damageproto
 PKG_BUILDDEP+=		scrnsaverproto resourceproto fontsproto videoproto
 PKG_BUILDDEP+=		compositeproto evieext libxkbfile libXfont pixman
-PKG_BUILDDEP+=		libpciaccess openssl xf86dgaproto recordproto
+PKG_BUILDDEP+=		libpciaccess xf86dgaproto recordproto
 PKG_BUILDDEP+=		xineramaproto presentproto
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		${MASTER_SITE_XORG}
@@ -33,13 +33,16 @@ PKGFD_WITH_DRI:=		enable dri support
 PKGFB_WITH_DRI:=		xf86driproto glproto mesa
 PKGFD_WITH_KDRIVE:=		build kdrive xfbdev server
 
-PKG_CHOICES_XORG_SERVER:=	WITH_GCRYPT WITH_CRYPTO
+PKG_CHOICES_XORG_SERVER:=	WITH_GCRYPT WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITH_GCRYPT:=		use libgcrypt for sha1
 PKGCS_WITH_GCRYPT:=		libgcrypt
 PKGCB_WITH_GCRYPT:=		libgcrypt
-PKGCD_WITH_CRYPTO:=		use openssl libcrypto for sha1
-PKGCS_WITH_CRYPTO:=		libopenssl
-PKGCB_WITH_CRYPTO:=		openssl
+PKGCD_WITH_LIBRESSL:=		use libressl crypto for sha1
+PKGCS_WITH_LIBRESSL:=		libressl
+PKGCB_WITH_LIBRESSL:=		libressl
+PKGCD_WITH_OPENSSL:=		use openssl crypto for sha1
+PKGCS_WITH_OPENSSL:=		libopenssl
+PKGCB_WITH_OPENSSL:=		openssl
 
 include $(ADK_TOPDIR)/mk/package.mk
 

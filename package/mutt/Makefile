@@ -9,10 +9,19 @@ PKG_RELEASE:=		1
 PKG_HASH:=		3af0701e57b9e1880ed3a0dee34498a228939e854a16cdccd24e5e502626fd37
 PKG_DESCR:=		mail text client
 PKG_SECTION:=		net/mail
-PKG_DEPENDS:=		libncurses libopenssl
-PKG_BUILDDEP:=		ncurses openssl
+PKG_DEPENDS:=		libncurses
+PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.mutt.org/
 PKG_SITES:=		http://distfiles.openadk.org/
+
+PKG_CHOICES_MUTT:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -25,8 +34,13 @@ CONFIGURE_ARGS+=	--includedir=${WRKBUILD}/. \
 			--oldincludedir=${WRKBUILD}/. \
 			--with-homespool="~/Maildir" \
 			--enable-pop \
-			--enable-imap \
-			--with-ssl
+			--enable-imap
+
+ifeq ($(ADK_PACKAGE_MUTT_WITHOUT_SSL),y)
+CONFIGURE_ARGS+=	--without-ssl
+else
+CONFIGURE_ARGS+=	--with-ssl
+endif
 
 mutt-install:
 	${INSTALL_DIR} ${IDIR_MUTT}/usr/bin

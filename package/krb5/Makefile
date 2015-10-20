@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		ncurses gettext-tiny bison-host
 PKG_URL:=		http://web.mit.edu/kerberos/
 PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.13/
 PKG_LIBNAME:=		libkrb5
-PKG_OPTS:=		dev
+PKG_OPTS:=		dev noscripts
 PKG_NOPARALLEL:=	1
 
 PKG_SUBPKGS:=		KRB5_SERVER KRB5_CLIENT LIBKRB5

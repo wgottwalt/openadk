@@ -8,7 +8,6 @@ PKG_VERSION:=		679b7797128b8979145dc2a0a3c54ea513a0466b
 PKG_RELEASE:=		3
 PKG_DESCR:=		tv streaming server
 PKG_SECTION:=		mm/video
-PKG_BUILDDEP:=		openssl
 PKG_URL:=		https://tvheadend.org/projects/tvheadend
 PKG_SITES:=		https://github.com/tvheadend/tvheadend.git
 

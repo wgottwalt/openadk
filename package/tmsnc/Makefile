@@ -12,6 +12,14 @@ PKG_SECTION:=		app/chat
 PKG_URL:=		http://tmsnc.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tmsnc/}
 
+PKG_CHOICES_TMSNC:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${ADK_TOPDIR}/mk/package.mk

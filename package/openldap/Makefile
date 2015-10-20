@@ -9,12 +9,22 @@ PKG_RELEASE:=		1
 PKG_HASH:=		27856bb4a8b44feca2b326c309000e16a9dadd52362c8ab6eec6c67a43737f6e
 PKG_DESCR:=		ldap client libraries
 PKG_SECTION:=		libs/misc
-PKG_DEPENDS:=		libopenssl libsasl2 libdb libpthread libuuid libstdcxx libncurses
-PKG_BUILDDEP:=		cyrus-sasl openssl db util-linux
+PKG_DEPENDS:=		libsasl2 libdb libpthread libuuid libstdcxx libncurses
+PKG_BUILDDEP:=		cyrus-sasl db util-linux
 PKG_URL:=		http://www.openldap.org/
 PKG_SITES:=		ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
 PKG_LIBNAME:=		libopenldap
 PKG_OPTS:=		dev
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
+
+PKG_CHOICES_CTORRENT:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
 
 PKG_SUBPKGS:=		LIBOPENLDAP OPENLDAP_UTILS OPENLDAP_SLAPD
 PKGSD_OPENLDAP_UTILS:=	ldap utilities
@@ -23,8 +33,6 @@ PKGSC_OPENLDAP_UTILS:=	net/misc
 PKGSD_OPENLDAP_SLAPD:=	ldap server daemon
 PKGSS_OPENLDAP_SLAPD:=	libopenldap
 PKGSC_OPENLDAP_SLAPD:=	net/misc
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
 
 PKG_FLAVOURS_OPENLDAP_SLAPD:=	WITH_IPV6
 PKGFD_WITH_IPV6:=		enable IPv6 support

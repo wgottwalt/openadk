@@ -16,12 +16,15 @@ PKG_SITES:=		http://www.tntnet.org/download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_CHOICES_TNTNET:=	WITH_GNUTLS WITH_OPENSSL WITHOUT_SSL
-PKGCD_WITHOUT_SSL:=	use no SSL
-PKGCD_WITH_OPENSSL:=	use OpenSSL for crypto
+PKG_CHOICES_TNTNET:=	WITHOUT_SSL WITH_GNUTLS WITH_OPENSSL WITH_LIBRESSL
+PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl
 PKGCB_WITH_OPENSSL:=	openssl
-PKGCD_WITH_GNUTLS:=	use GnuTLS for crypto
+PKGCD_WITH_OPENSSL:=	use libressl for crypto
+PKGCS_WITH_OPENSSL:=	libressl
+PKGCB_WITH_OPENSSL:=	libressl
+PKGCD_WITH_GNUTLS:=	use gnutls for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls
 PKGCB_WITH_GNUTLS:=	gnutls
 
@@ -33,6 +36,9 @@ ifeq (${ADK_PACKAGE_TNTNET_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--with-ssl=no
 endif
 ifeq (${ADK_PACKAGE_TNTNET_WITH_OPENSSL},y)
+CONFIGURE_ARGS+=	--with-ssl=openssl
+endif
+ifeq (${ADK_PACKAGE_TNTNET_WITH_LIBRESSL},y)
 CONFIGURE_ARGS+=	--with-ssl=openssl
 endif
 ifeq (${ADK_PACKAGE_TNTNET_WITH_GNUTLS},y)

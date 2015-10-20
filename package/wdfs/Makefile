@@ -9,8 +9,8 @@ PKG_RELEASE:=		6
 PKG_HASH:=		fcf2e1584568b07c7f3683a983a9be26fae6534b8109e09167e5dff9114ba2e5
 PKG_DESCR:=		webdav filesystem
 PKG_SECTION:=		net/fs
-PKG_DEPENDS:=		libopenssl fuse-utils neon glib
-PKG_BUILDDEP:=		openssl fuse neon glib
+PKG_DEPENDS:=		fuse-utils neon glib
+PKG_BUILDDEP:=		fuse neon glib
 PKG_SITES:=		http://noedler.de/projekte/wdfs/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

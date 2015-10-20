@@ -9,12 +9,19 @@ PKG_RELEASE:=		2
 PKG_HASH:=		5064c56d482a080b6a4aea71821b78c21b59d44f6d1aa14c27429441917911a9
 PKG_DESCR:=		sip stress and diagnostics utility
 PKG_SECTION:=		net/voip
-PKG_DEPENDS:=		libopenssl
-PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://sourceforge.net/projects/sipsak.berlios/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sipsak.berlios/}
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-1.tar.gz
+
+PKG_CHOICES_SIPSAK:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 include ${ADK_TOPDIR}/mk/package.mk
 

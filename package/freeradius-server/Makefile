@@ -9,10 +9,18 @@ PKG_RELEASE:=		1
 PKG_HASH:=		c27252d7a86ba252904612d9b1f90e846f3ef1f4afee6a748f5287b730e87e3a
 PKG_DESCR:=		flexible radius server
 PKG_SECTION:=		net/radius
-PKG_DEPENDS:=		libltdl libopenssl libpthread libpcre libtalloc
-PKG_BUILDDEP:=		libtool openssl pcre talloc
+PKG_DEPENDS:=		libltdl libpthread libpcre libtalloc
+PKG_BUILDDEP:=		libtool pcre talloc
 PKG_URL:=		http://www.freeradius.org/
 PKG_SITES:=		ftp://ftp.freeradius.org/pub/radius/
+
+PKG_CHOICES_FREERADIUS_SERVER:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

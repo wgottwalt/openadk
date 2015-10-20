@@ -15,10 +15,14 @@ PKG_OPTS:=		dev
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
-PKG_FLAVOURS_LIBESMTP:=	WITH_SSL
-PKGFD_WITH_SSL:=	enable ssl support
-PKGFS_WITH_SSL:=	libopenssl
-PKGFB_WITH_SSL:=	openssl
+PKG_CHOICES_LIBESMTP:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -26,9 +30,13 @@ $(eval $(call PKG_template,LIBESMTP,libesmtp,$(PKG_VERSION)-${PKG_RELEASE},${PKG
 
 AUTOTOOL_STYLE:=	autoreconf
 
-ifneq (${ADK_PACKAGE_LIBESMTP_WITH_SSL},)
+ifeq (${ADK_PACKAGE_LIBESMTP_WITH_OPENSSL},y)
 CONFIGURE_ARGS+=	--with-openssl
-else
+endif
+ifeq (${ADK_PACKAGE_LIBESMTP_WITH_LIBRESSL},y)
+CONFIGURE_ARGS+=	--with-openssl
+endif
+ifeq (${ADK_PACKAGE_LIBESMTP_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--without-openssl
 endif
 

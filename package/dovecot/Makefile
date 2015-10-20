@@ -8,11 +8,17 @@ PKG_VERSION:=		2.2.18
 PKG_RELEASE:=		1
 PKG_HASH:=		b6d8468cea47f1227f47b80618f7fb872e2b2e9d3302adc107a005dd083865bb
 PKG_DESCR:=		minimal and secure imap server
-PKG_BUILDDEP:=		openssl
-PKG_DEPENDS:=		libopenssl
 PKG_SECTION:=		net/mail
 PKG_URL:=		http://www.dovecot.org/
 PKG_SITES:=		http://www.dovecot.org/releases/2.2/
+
+PKG_CHOICES_DOVECOT:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		postgresql
-PKG_VERSION:=		9.4.3
+PKG_VERSION:=		9.4.5
 PKG_RELEASE:=		1
-PKG_HASH:=		b6a2e21e6e3f3b600ed122bddc969133db124a4f59913e93121bbf2d509f6848
+PKG_HASH:=		aa1d7918ae782a0fc5e1886fd463fc8903e5ffc3eb6d3b51500065aec988a210
 PKG_DESCR:=		sql database library
 PKG_SECTION:=		libs/db
 PKG_URL:=		http://www.postgresql.org/

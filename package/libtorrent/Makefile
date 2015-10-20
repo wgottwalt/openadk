@@ -9,13 +9,21 @@ PKG_RELEASE:=		2
 PKG_HASH:=		704e097119dc89e2ee4630396b25de1cd64b0549841347ea75b9ef9217084955
 PKG_DESCR:=		bittorrent library
 PKG_SECTION:=		libs/net
-PKG_DEPENDS:=		libopenssl libsigc++
-PKG_BUILDDEP:=		openssl libsigc++ gettext-tiny
+PKG_DEPENDS:=		libsigc++
+PKG_BUILDDEP:=		libsigc++ gettext-tiny
 PKG_URL:=		http://libtorrent.rakshasa.no/
 PKG_SITES:=		http://distfiles.openadk.org/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
+PKG_CHOICES_LIBTORRENT:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

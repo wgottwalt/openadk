@@ -9,9 +9,17 @@ PKG_RELEASE:=		1
 PKG_HASH:=		e801ab170f364ba2997fb276d16eba1f75bffcc0fc5a1e97ff0b247bf63b0570
 PKG_DESCR:=		ppp over ssl vpn tool
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		libopenssl ppp
-PKG_BUILDDEP:=		openssl ppp
+PKG_DEPENDS:=		ppp
+PKG_BUILDDEP:=		ppp
 PKG_SITES:=		http://www.hsc.fr/ressources/outils/ssltunnel/download/
+
+PKG_CHOICES_SSLTUNNEL:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

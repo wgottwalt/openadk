@@ -9,14 +9,22 @@ PKG_RELEASE:=		2
 PKG_HASH:=		234c9dc77d4c4594ad6216d7df4d49eae3019a3880e602f39721b35b97fbc408
 PKG_DESCR:=		text browser
 PKG_SECTION:=		app/browser
-PKG_DEPENDS:=		libncurses libopenssl zlib
-PKG_BUILDDEP:=		ncurses openssl zlib
+PKG_DEPENDS:=		libncurses zlib
+PKG_BUILDDEP:=		ncurses zlib
 PKG_URL:=		http://lynx.isc.org/
 PKG_SITES:=		http://lynx.isc.org/${PKG_NAME}${PKG_VERSION}/
 PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/lynx2-8-8
+
+PKG_CHOICES_LYNX:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

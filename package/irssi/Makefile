@@ -14,13 +14,19 @@ PKG_BUILDDEP:=		glib ncurses
 PKG_URL:=		http://www.irssi.org/
 PKG_SITES:=		http://distfiles.openadk.org/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
+PKG_CHOICES_IRSSI:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
 
-PKG_FLAVOURS_IRSSI:=	WITH_SSL WITH_IPV6
-PKGFD_WITH_SSL:=	enable ssl/tls support
-PKGFS_WITH_SSL:=	libopenssl
-PKGFB_WITH_SSL:=	openssl
+PKG_FLAVOURS_IRSSI:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable ipv6 support
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${ADK_TOPDIR}/mk/package.mk
 
@@ -40,10 +46,10 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-ifneq (${ADK_PACKAGE_IRSSI_WITH_SSL},)
-CONFIGURE_ARGS+=	--enable-ssl
-else
+ifeq (${ADK_PACKAGE_IRSSI_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--disable-ssl
+else
+CONFIGURE_ARGS+=	--enable-ssl
 endif
 
 irssi-install:

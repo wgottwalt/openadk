@@ -15,11 +15,14 @@ PKG_BUILDDEP:=		ncurses expat readline zlib
 PKG_URL:=		http://lftp.yar.ru/
 PKG_SITES:=		http://lftp.yar.ru/ftp/
 
-PKG_CHOICES_LFTP:=	WITH_GNUTLS WITH_OPENSSL WITHOUT_SSL
+PKG_CHOICES_LFTP:=	WITHOUT_SSL WITH_GNUTLS WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITHOUT_SSL:=	use no ssl
 PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 PKGCB_WITH_OPENSSL:=	openssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCB_WITH_LIBRESSL:=	libressl
 PKGCD_WITH_GNUTLS:=	use gnutls for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates
 PKGCB_WITH_GNUTLS:=	gnutls
@@ -37,6 +40,10 @@ CONFIGURE_ARGS+=	--without-openssl \
 			--with-gnutls
 endif
 ifeq (${ADK_PACKAGE_LFTP_WITH_OPENSSL},y)
+CONFIGURE_ARGS+=	--with-openssl \
+			--without-gnutls
+endif
+ifeq (${ADK_PACKAGE_LFTP_WITH_LIBRESSL},y)
 CONFIGURE_ARGS+=	--with-openssl \
 			--without-gnutls
 endif

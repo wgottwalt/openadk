@@ -7,9 +7,8 @@ PKG_NAME:=		easy-rsa
 PKG_VERSION:=		2.0.2
 PKG_RELEASE:=		1
 PKG_HASH:=		40a1800d8cf4e858d4b3cdc3d3c612747edcd18ecaeb6b8737f452092760e50c
-PKG_DESCR:=		openssl ca scripts
+PKG_DESCR:=		x509 ca scripts
 PKG_SECTION:=		app/crypto
-PKG_DEPENDS:=		openssl-util
 PKG_URL:=		https://github.com/OpenVPN/easy-rsa
 PKG_SITES:=		http://distfiles.openadk.org/
 

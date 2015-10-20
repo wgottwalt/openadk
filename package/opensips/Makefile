@@ -9,10 +9,19 @@ PKG_RELEASE:=		1
 PKG_HASH:=		bcacc9bc273fd2002c16a5cb846fe2478dacded9ea7b52a04afb1f54bb2aa3f4
 PKG_DESCR:=		high-performance, configurable, free sip server
 PKG_SECTION:=		net/voip
-PKG_DEPENDS:=		libopenssl
-PKG_BUILDDEP:=		openssl
 PKG_URL:=		http://opensips.org/
 PKG_SITES:=		http://opensips.org/pub/opensips/$(PKG_VERSION)/src/
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)_src.tar.gz
+WRKDIST=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-tls
+
+PKG_CHOICES_OPENSIPS:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
 
 PKG_SUBPKGS:=		OPENSIPS OPENSIPS_MOD_ACCOUNTING OPENSIPS_MOD_AUTH
 PKG_SUBPKGS+=		OPENSIPS_MOD_AUTH_DB OPENSIPS_MOD_AVPOPS OPENSIPS_MOD_DISPATCHER
@@ -62,9 +71,6 @@ PKGSD_OPENSIPS_MOD_UAC_REDIRECT:=	uac redirect support
 PKGSN_OPENSIPS_MOD_UAC_REDIRECT:=	opensips
 PKGSD_OPENSIPS_MOD_URI:=		uri support
 PKGSN_OPENSIPS_MOD_URI:=		opensips
-
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)_src.tar.gz
-WRKDIST=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-tls
 
 include $(ADK_TOPDIR)/mk/package.mk
 

@@ -9,12 +9,21 @@ PKG_RELEASE:=		1
 PKG_HASH:=		2ff4f4bfa5ee1d11d5e2eed39311824d65aa0610da63b22bf4b14793c8f48aa5
 PKG_DESCR:=		web browser with graphic support
 PKG_SECTION:=		app/browser
-PKG_DEPENDS:=		libpng libjpeg-turbo libtiff gpm libopenssl
-PKG_BUILDDEP:=		openssl libpng libjpeg-turbo gpm
+PKG_DEPENDS:=		libpng libjpeg-turbo libtiff gpm
+PKG_BUILDDEP:=		libpng libjpeg-turbo gpm
 PKG_URL:=		http://links.twibright.com/
 PKG_SITES:=		http://links.twibright.com/download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
+PKG_CHOICES_LINKS:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
 
 PKG_FLAVOURS_LINKS:=	WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support
@@ -27,12 +36,17 @@ $(eval $(call PKG_template,LINKS,links,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 
 CONFIGURE_ARGS+=	--enable-graphics \
 			--with-fb \
-			--with-ssl \
 			--without-svgalib \
 			--without-libtiff \
 			--without-x \
 			--without-pmshell \
 			--without-atheos
+
+ifeq (${ADK_PACKAGE_LINKS_WITHOUT_SSL},y)
+CONFIGURE_ARGS+=	--without-ssl
+else
+CONFIGURE_ARGS+=	--with-ssl
+endif
 
 ifeq (${ADK_PACKAGE_LINKS_WITH_DIRECTFB},y)
 CONFIGURE_ARGS+=	--with-directfb

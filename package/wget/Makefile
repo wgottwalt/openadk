@@ -16,8 +16,11 @@ PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_CHOICES_WGET:=	WITH_GNUTLS WITH_OPENSSL WITHOUT_SSL
+PKG_CHOICES_WGET:=	WITHOUT_SSL WITH_GNUTLS WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates libgmp
+PKGCB_WITH_LIBRESSL:=	libressl
 PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates libgmp
 PKGCB_WITH_OPENSSL:=	openssl
@@ -35,6 +38,11 @@ ifeq (${ADK_PACKAGE_WGET_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--with-ssl=no
 endif
 ifeq (${ADK_PACKAGE_WGET_WITH_OPENSSL},y)
+CONFIGURE_ARGS+=	--with-ssl=openssl \
+			--with-openssl=yes \
+			--with-libssl-prefix=${STAGING_TARGET_DIR}
+endif
+ifeq (${ADK_PACKAGE_WGET_WITH_LIBRESSL},y)
 CONFIGURE_ARGS+=	--with-ssl=openssl \
 			--with-openssl=yes \
 			--with-libssl-prefix=${STAGING_TARGET_DIR}

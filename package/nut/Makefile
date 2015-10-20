@@ -14,16 +14,22 @@ PKG_SITES:=		http://www.networkupstools.org/source/2.7/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_FLAVOURS_NUT:=	WITH_SSL WITH_SNMP WITH_USB
+PKG_FLAVOURS_NUT:=	WITH_SNMP WITH_USB
 PKGFD_WITH_SNMP:=	enable snmp support
 PKGFS_WITH_SNMP:=	libnetsnmp
 PKGFB_WITH_SNMP:=	net-snmp
 PKGFD_WITH_USB:=	enable usb support
 PKGFS_WITH_USB:=	libusb libusb-compat
 PKGFB_WITH_USB:=	libusb libusb-compat
-PKGFD_WITH_SSL:=	enable ssl support
-PKGFS_WITH_SSL:=	libopenssl
-PKGFB_WITH_SSL:=	openssl
+
+PKG_CHOICES_NUT:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITHOUT_SSL:=	use no ssl
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 include ${ADK_TOPDIR}/mk/package.mk
 
@@ -81,7 +87,12 @@ CONFIGURE_ARGS+=	--with-linux-hiddev=${LINUX_DIR}/include/linux/hiddev.h \
 			--with-group=0 \
 			--with-user=0
 
-ifneq (${ADK_PACKAGE_NUT_WITH_SSL},)
+ifeq (${ADK_PACKAGE_NUT_WITH_OPENSSL},y)
+CONFIGURE_ARGS+=	--with-ssl
+CONFIGURE_ENV+=		CPPFLAGS="${TARGET_CPPFLAGS} ${TARGET_LDFLAGS}"
+MAKE_FLAGS+=		SSL_CFLAGS="${TARGET_CPPFLAGS}" SSL_LDFLAGS="${TARGET_LDFLAGS} -lssl -lcrypto"
+endif
+ifeq (${ADK_PACKAGE_NUT_WITH_LIBRESSL},y)
 CONFIGURE_ARGS+=	--with-ssl
 CONFIGURE_ENV+=		CPPFLAGS="${TARGET_CPPFLAGS} ${TARGET_LDFLAGS}"
 MAKE_FLAGS+=		SSL_CFLAGS="${TARGET_CPPFLAGS}" SSL_LDFLAGS="${TARGET_LDFLAGS} -lssl -lcrypto"
