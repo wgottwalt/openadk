@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libssh
-PKG_VERSION:=		7ec798d3e73f3dac94a3c240545ebaf4daa189b4
+PKG_VERSION:=		8ec46cbd42c2af7b7e1a06e3b3087e97526b558e
 PKG_RELEASE:=		1
 PKG_DESCR:=		secure shell library
 PKG_SECTION:=		libs/net
@@ -32,6 +32,7 @@ CMAKE_FLAGS:=		-DOPENSSL_INCLUDE_DIRS='$(STAGING_TARGET_DIR)/usr/include' \
 			-DOPENSSL_LIBRARIES='-lcrypto -lssl -lz' \
 			-DZLIB_INCLUDE_DIR='$(STAGING_TARGET_DIR)/usr/include' \
 			-DZLIB_LIBRARY='$(STAGING_TARGET_DIR)/usr/lib' \
+			-DWITH_GSSAPI=off \
 			-DWITH_EXAMPLES=off
 
 libssh-install:
