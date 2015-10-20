@@ -5,21 +5,29 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		asterisk
 PKG_VERSION:=		1.8.28.2
-PKG_RELEASE:=		1
-PKG_MD5SUM:=		c16f288f97ac39042eb8e9bee6766aff
+PKG_RELEASE:=		2
+PKG_HASH:=		7b3d84a3403fce590377808eaa4b08b6320666ca0e37eba0ad578b66211b13c8
 PKG_DESCR:=		open source pbx
 PKG_SECTION:=		net/voip
-PKG_DEPENDS:=		libncurses libpthread libopenssl libcurl libstdcxx
-PKG_BUILDDEP:=		ncurses openssl zlib curl popt
+PKG_DEPENDS:=		libncurses libpthread libcurl libstdcxx
+PKG_BUILDDEP:=		ncurses zlib curl popt
 PKG_URL:=		http://www.asterisk.org/
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 PKG_NOPARALLEL:=	1
+
+PKG_CHOICES_ASTERISK:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
-PKG_SUBPKGS:=		ASTERISK ASTERISK_PGSQL ASTERISK_VOICEMAIL ASTERISK_SOUNDS
+PKG_SUBPKGS:=		ASTERISK ASTERISK_VOICEMAIL ASTERISK_SOUNDS
 PKG_SUBPKGS+=		ASTERISK_CHAN_SKINNY ASTERISK_CHAN_IAX2 ASTERISK_CODEC_SPEEX ASTERISK_CODEC_GSM
 PKG_SUBPKGS+=		ASTERISK_PBX_DUNDI ASTERISK_RES_AGI
 PKGSD_ASTERISK_VOICEMAIL:=	voicemail support
@@ -30,9 +38,6 @@ PKGSD_ASTERISK_PBX_DUNDI:=	PBX dundi support
 PKGSN_ASTERISK_PBX_DUNDI:=	asterisk
 PKGSD_ASTERISK_RES_AGI:=	res agi support
 PKGSN_ASTERISK_RES_AGI:=	asterisk
-PKGSD_ASTERISK_PGSQL:=		postgresql support
-PKGSB_ASTERISK_PGSQL:=		postgresql
-PKGSN_ASTERISK_PGSQL:=		asterisk
 PKGSD_ASTERISK_CHAN_MGCP:=	Media Gateway Control Protocol implementation
 PKGSN_ASTERISK_CHAN_MGCP:=	asterisk
 PKGSD_ASTERISK_CHAN_SKINNY:=	skinny client control protocol implementation
@@ -49,7 +54,6 @@ PKGSS_ASTERISK_SOUNDS:=		asterisk-codec-gsm
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ASTERISK,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,ASTERISK_PGSQL,asterisk-pgsql,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_PGSQL},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_VOICEMAIL,asterisk-voicemail,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_VOICEMAIL},${PKG_SECTION}))
 $(eval $(call PKG_template,ASTERISK_SOUNDS,asterisk-sounds,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_ASTERISK_SOUNDS},${PKGSD_ASTERISK_SOUNDS},${PKG_SECTION}))
 #$(eval $(call PKG_template,ASTERISK_CHAN_MGCP,asterisk-chan-mgcp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_ASTERISK_CHAN_MGCP},${PKG_SECTION}))
@@ -87,7 +91,8 @@ CONFIGURE_ARGS=		--with-z=${STAGING_TARGET_DIR}/usr \
 			--without-vpb \
 			--without-misdn \
 			--without-isdnnet \
-			--without-suppserv
+			--without-suppserv \
+			--without-postgres
 
 ifneq (${ADK_PACKAGE_ASTERISK_CODEC_GSM},)
 CONFIGURE_ARGS+=	--with-gsm=internal
@@ -107,11 +112,6 @@ ifneq (${ADK_PACKAGE_ASTERISK_CURL},)
 CONFIGURE_ARGS+=	--with-libcurl=${STAGING_TARGET_DIR}/usr
 else
 CONFIGURE_ARGS+=	--without-libcurl
-endif
-ifneq (${ADK_PACKAGE_ASTERISK_PGSQL},)
-CONFIGURE_ARGS+=	--with-postgres=${STAGING_TARGET_DIR}/usr
-else
-CONFIGURE_ARGS+=	--without-postgres
 endif
 
 INSTALL_STYLE:=		manual
@@ -182,14 +182,6 @@ do-install:
 	${INSTALL_DATA} ./files/modules.conf $(IDIR_ASTERISK)/etc/asterisk/
 	$(SED) 's|/var/lib/asterisk|/usr/lib/asterisk|g' \
 		$(WRKINST)/etc/asterisk/musiconhold.conf
-
-asterisk-pgsql-install:
-	${INSTALL_DIR} $(IDIR_ASTERISK_PGSQL)/etc/asterisk
-	${INSTALL_DATA} $(WRKINST)/etc/asterisk/cdr_pgsql.conf \
-		$(IDIR_ASTERISK_PGSQL)/etc/asterisk/
-	${INSTALL_DIR} $(IDIR_ASTERISK_PGSQL)/usr/lib/asterisk/modules
-	${INSTALL_BIN} $(WRKINST)/usr/lib/asterisk/modules/cdr_pgsql.so \
-		$(IDIR_ASTERISK_PGSQL)/usr/lib/asterisk/modules/
 
 asterisk-sounds-install:
 	${INSTALL_DIR} $(IDIR_ASTERISK_SOUNDS)/usr/lib/asterisk/sounds
