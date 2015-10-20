@@ -4,18 +4,26 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		neon
-PKG_VERSION:=		0.29.5
-PKG_RELEASE:=		2
-PKG_HASH:=		dea3c52b9f3f915651c6279c76758acf7c427727e8b9b0130f8b138f24012290
+PKG_VERSION:=		0.30.1
+PKG_RELEASE:=		1
+PKG_HASH:=		00c626c0dc18d094ab374dbd9a354915bfe4776433289386ed489c2ec0845cdd
 PKG_DESCR:=		http and webdav library
 PKG_SECTION:=		libs/misc
-PKG_DEPENDS:=		libpthread libxml2 libopenssl zlib
-PKG_BUILDDEP:=		libpthread libxml2 openssl zlib
+PKG_DEPENDS:=		libpthread libxml2 zlib
+PKG_BUILDDEP:=		libpthread libxml2 zlib
 PKG_URL:=		http://webdav.org/neon/
 PKG_SITES:=		http://webdav.org/neon/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+
+PKG_CHOICES_NEON:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 
