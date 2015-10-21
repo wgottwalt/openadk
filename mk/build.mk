@@ -420,26 +420,26 @@ endif
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_ABI)" ];then \
-		grep "^config" target/config/Config.in.abi.choice \
+		grep "^config" target/config/Config.in.abi \
 			|grep -i "$(ADK_TARGET_ABI)$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_FLOAT)" ];then \
-		grep "^config" target/config/Config.in.float.choice \
+		grep "^config" target/config/Config.in.float \
 			|grep -i "$(ADK_TARGET_FLOAT)_" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_ENDIAN)" ];then \
-		grep "^config" target/config/Config.in.endian.choice \
+		grep "^config" target/config/Config.in.endian \
 			|grep -i "$(ADK_TARGET_ENDIAN)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_LIBC)" ];then \
 		libc=$$(echo "$(ADK_TARGET_LIBC)"|sed -e "s/-/_/"); \
-		grep "^config" target/config/Config.in.libc.choice \
+		grep "^config" target/config/Config.in.libc \
 			|grep -i "$$libc$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
@@ -506,7 +506,7 @@ endif
 			>> $(ADK_TOPDIR)/all.config; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_LIBC)" ];then \
-		grep "^config" target/config/Config.in.libc.choice \
+		grep "^config" target/config/Config.in.libc \
 			|grep -i "$(ADK_TARGET_LIBC)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/all.config; \
