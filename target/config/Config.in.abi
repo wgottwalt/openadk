@@ -1,5 +1,68 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-source target/config/Config.in.abi.choice
-source target/config/Config.in.abi.default
+choice
+prompt "ABI"
+depends on ADK_TARGET_ARCH_MIPS64
+
+config ADK_TARGET_ABI_N32
+	bool "N32 ABI"
+
+config ADK_TARGET_ABI_N64
+	bool "N64 ABI"
+
+config ADK_TARGET_ABI_O32
+	bool "O32 ABI"
+
+endchoice
+
+choice
+prompt "ABI"
+depends on ADK_TARGET_ARCH_X86_64 && \
+	(ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_MUSL)
+
+config ADK_TARGET_ABI_64
+	bool "64 Bit ABI"
+
+config ADK_TARGET_ABI_X32
+	bool "x32 ABI"
+
+endchoice
+
+config ADK_TARGET_ABI
+	string
+	default "o32" if ADK_TARGET_ABI_O32
+	default "n32" if ADK_TARGET_ABI_N32
+	default "n64" if ADK_TARGET_ABI_N64
+	default "32" if ADK_TARGET_ABI_32
+	default "x32" if ADK_TARGET_ABI_X32
+	default "eabihf" if ADK_TARGET_ARCH_ARM && ADK_TARGET_HARD_FLOAT
+	default "eabi" if ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_MIPS_ABI
+	depends on ADK_TARGET_ARCH_MIPS64
+	string
+	default "32" if ADK_TARGET_ABI_O32
+	default "n32" if ADK_TARGET_ABI_N32
+	default "64" if ADK_TARGET_ABI_N64
+
+config ADK_TARGET_LIBC_PATH
+	string
+	default "lib32" if ADK_TARGET_ABI_N32
+	default "libx32" if ADK_TARGET_ABI_X32
+	default "lib64" if ADK_TARGET_ABI_64 || ADK_TARGET_ABI_N64 \
+			|| ADK_TARGET_ARCH_AARCH64 \
+			|| ADK_TARGET_ARCH_SPARC64 \
+			|| ADK_TARGET_ARCH_PPC64 \
+			|| ADK_TARGET_ARCH_X86_64
+	default "lib"
+
+config ADK_TARGET_ABI_CFLAGS
+	string
+	default "-mabi=32" if ADK_TARGET_ABI_O32
+	default "-mabi=n32" if ADK_TARGET_ABI_N32
+	default "-mabi=64" if ADK_TARGET_ABI_N64
+	default "-m32" if ADK_TARGET_ABI_32
+	default "-mx32" if ADK_TARGET_ABI_X32
+	default "-m64" if ADK_TARGET_ABI_64
+

@@ -1,5 +1,83 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-source target/config/Config.in.gcc.choice
-source target/config/Config.in.gcc.default
+choice
+prompt "GCC version"
+default ADK_TOOLCHAIN_GCC_4_2_4 if ADK_TARGET_ARCH_METAG
+default ADK_TOOLCHAIN_GCC_4_4_7 if ADK_TARGET_ARCH_AVR32
+default ADK_TOOLCHAIN_GCC_4_5_4 if ADK_TARGET_ARCH_BFIN
+default ADK_TOOLCHAIN_GCC_4_7_4 if ADK_TARGET_ARCH_C6X
+default ADK_TOOLCHAIN_GCC_4_8_ARC if ADK_TARGET_ARCH_ARC
+default ADK_TOOLCHAIN_GCC_4_9_OR1K if ADK_TARGET_ARCH_OR1K
+default ADK_TOOLCHAIN_GCC_4_9_3
+
+config ADK_TOOLCHAIN_GCC_GIT
+	bool "git"
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_METAG
+	depends on !ADK_TARGET_ARCH_OR1K
+	select ADK_DISABLE_HONOUR_CFLAGS
+
+config ADK_TOOLCHAIN_GCC_5_2_0
+	bool "5.2.0"
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_C6X
+	depends on !ADK_TARGET_ARCH_H8300
+	depends on !ADK_TARGET_ARCH_METAG
+	depends on !ADK_TARGET_ARCH_OR1K
+
+config ADK_TOOLCHAIN_GCC_4_9_3
+	bool "4.9.3"
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_C6X
+	depends on !ADK_TARGET_ARCH_H8300
+	depends on !ADK_TARGET_ARCH_METAG
+	depends on !ADK_TARGET_ARCH_OR1K
+
+config ADK_TOOLCHAIN_GCC_4_8_5
+	bool "4.8.5"
+	depends on !ADK_TARGET_ARCH_BFIN
+	depends on !ADK_TARGET_ARCH_AARCH64
+	depends on !ADK_TARGET_ARCH_ARC
+	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_CRIS
+	depends on !ADK_TARGET_ARCH_TILE
+	depends on !ADK_TARGET_ARCH_C6X
+	depends on !ADK_TARGET_ARCH_H8300
+	depends on !ADK_TARGET_ARCH_METAG
+	depends on !ADK_TARGET_ARCH_OR1K
+
+config ADK_TOOLCHAIN_GCC_4_9_OR1K
+	bool "4.9-or1k"
+	depends on ADK_TARGET_ARCH_OR1K
+	select ADK_DISABLE_HONOUR_CFLAGS
+
+config ADK_TOOLCHAIN_GCC_4_8_ARC
+	bool "4.8-arc"
+	depends on ADK_TARGET_ARCH_ARC
+	select ADK_DISABLE_HONOUR_CFLAGS
+
+config ADK_TOOLCHAIN_GCC_4_7_4
+	bool "4.7.4"
+	depends on ADK_TARGET_ARCH_C6X \
+		|| ADK_TARGET_ARCH_SPARC
+
+config ADK_TOOLCHAIN_GCC_4_5_4
+	bool "4.5.4"
+	depends on ADK_TARGET_ARCH_BFIN
+
+config ADK_TOOLCHAIN_GCC_4_4_7
+	bool "4.4.7"
+	depends on ADK_TARGET_ARCH_AVR32
+
+config ADK_TOOLCHAIN_GCC_4_2_4
+	bool "4.2.4"
+	depends on ADK_TARGET_ARCH_METAG
+	select ADK_DISABLE_HONOUR_CFLAGS
+
+endchoice

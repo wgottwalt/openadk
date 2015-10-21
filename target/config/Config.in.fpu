@@ -1,5 +1,24 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-source target/config/Config.in.fpu.choice
-source target/config/Config.in.fpu.default
+config ADK_TARGET_ARCH_ARM_WITH_NEON
+	bool "enable NEON SIMD support"
+	depends on ADK_TARGET_ARCH_ARM && ADK_TARGET_CPU_WITH_NEON
+	default y
+	help
+	  Enable support for NEON SIMD CPU extensions.
+
+config ADK_TARGET_FPU
+	string
+	depends on ADK_TARGET_ARCH_ARM
+	default "vfp" if ADK_TARGET_CPU_WITH_FPU_VFP
+	default "vfpv3-fp16" if ADK_CPU_CORTEX_A5 && !ADK_TARGET_ARCH_ARM_WITH_NEON
+	default "vfpv4" if ADK_CPU_CORTEX_A7 && !ADK_TARGET_ARCH_ARM_WITH_NEON
+	default "vfpv3" if ADK_CPU_CORTEX_A8 && !ADK_TARGET_ARCH_ARM_WITH_NEON
+	default "vfpv3-fp16" if ADK_CPU_CORTEX_A9 && !ADK_TARGET_ARCH_ARM_WITH_NEON
+	default "vfpv4" if ADK_CPU_CORTEX_A15 && !ADK_TARGET_ARCH_ARM_WITH_NEON
+	default "neon-fp16" if ADK_CPU_CORTEX_A5 && ADK_TARGET_ARCH_ARM_WITH_NEON
+	default "neon-vfpv4" if ADK_CPU_CORTEX_A7 && ADK_TARGET_ARCH_ARM_WITH_NEON
+	default "neon" if ADK_CPU_CORTEX_A8 && ADK_TARGET_ARCH_ARM_WITH_NEON
+	default "neon-fp16" if ADK_CPU_CORTEX_A9 && ADK_TARGET_ARCH_ARM_WITH_NEON
+	default "neon-vfpv4" if ADK_CPU_CORTEX_A15 && ADK_TARGET_ARCH_ARM_WITH_NEON

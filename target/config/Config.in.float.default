@@ -1,9 +1,0 @@
-# This file is part of the OpenADK project. OpenADK is copyrighted
-# material, please see the LICENCE file in the top-level directory.
-
-config ADK_TARGET_FLOAT
-	string
-	depends on !ADK_TARGET_ARCH_M68K
-	default "hard" if ADK_TARGET_HARD_FLOAT
-	default "soft" if ADK_TARGET_SOFT_FLOAT
-	default "softfp" if ADK_TARGET_SOFTFP_FLOAT

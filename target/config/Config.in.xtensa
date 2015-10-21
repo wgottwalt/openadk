@@ -1,5 +1,24 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-source target/config/Config.in.xtensa.choice
-source target/config/Config.in.xtensa.default
+choice ADK_TARGET_XTENSA_VARIANT
+prompt "CPU variant"
+depends on ADK_TARGET_ARCH_XTENSA
+
+config ADK_TARGET_XTENSA_DC233C
+	bool "dc233c"
+	select ADK_KERNEL_XTENSA_VARIANT_DC233C
+	select ADK_KERNEL_INITIALIZE_XTENSA_MMU_INSIDE_VMLINUX
+	select ADK_TARGET_LITTLE_ENDIAN
+
+config ADK_TARGET_XTENSA_DC232B
+	bool "dc232b"
+	select ADK_KERNEL_XTENSA_VARIANT_DC232B
+	select ADK_TARGET_LITTLE_ENDIAN
+
+endchoice
+
+config ADK_TARGET_XTENSA
+	string
+	default "dc233c" if ADK_TARGET_XTENSA_DC233C
+	default "dc232b" if ADK_TARGET_XTENSA_DC232B
