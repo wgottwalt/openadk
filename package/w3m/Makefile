@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		w3m
 PKG_VERSION:=		0.5.3
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_HASH:=		e994d263f2fd2c22febfbe45103526e00145a7674a0fda79c822b97c2770a9e3
 PKG_DESCR:=		console web browser
 PKG_SECTION:=		app/browser
