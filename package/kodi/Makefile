@@ -5,26 +5,26 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
 PKG_VERSION:=		15.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		72b2610d8fbff807128d74429f25bf6716ba880c27c2c5d9fad012ec7fc70705
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
-PKG_DEPENDS:=		boost python2 libstdcxx libsquish
+PKG_DEPENDS:=		boost python2 libstdcxx libsquish libbluray
 PKG_DEPENDS+=		libass libmpeg2 libmad libdbus libglew mesa
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
-PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libnettle
+PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libnettle librtmp
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng libncurses
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate libuuid
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd libgtk2
 PKG_DEPENDS+=		libgpg-error libudev python2-mod-sqlite libffmpeg
 PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib libglu librt
-PKG_BUILDDEP:=		boost python2 libass ffmpeg libglew
+PKG_BUILDDEP:=		boost python2 libass ffmpeg libglew rtmpdump
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis
 PKG_BUILDDEP+=		curl flac bzip2 libtiff liblzo yajl mesa
 PKG_BUILDDEP+=		tinyxml sqlite pcre libpng libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug libgtk2
-PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis
+PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis libbluray
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
 PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish
 PKG_URL:=		http://kodi.tv/
@@ -44,7 +44,7 @@ PKGCS_WITH_LIBRESSL:=	libressl
 PKGCB_WITH_LIBRESSL:=	libressl
 
 PKG_FLAVOURS_KODI:=	WITH_SMB WITH_NFS WITH_SSH WITH_AVAHI WITH_CEC 
-PKG_FLAVOURS_KODI+=	WITH_WEBSERVER WITH_RTMP WITH_BLURAY WITH_LIRC
+PKG_FLAVOURS_KODI+=	WITH_WEBSERVER WITH_LIRC
 
 PKGFD_WITH_SMB:=	enable samba4 support
 PKGFB_WITH_SMB:=	samba
@@ -61,12 +61,6 @@ PKGFS_WITH_AVAHI:=	libavahi
 PKGFD_WITH_CEC:=	enable cec support
 PKGFB_WITH_CEC:=	libcec
 PKGFS_WITH_CEC:=	libcec
-PKGFD_WITH_RTMP:=	enable rtmp support
-PKGFB_WITH_RTMP:=	rtmpdump
-PKGFS_WITH_RTMP:=	librtmp
-PKGFD_WITH_BLURAY:=	enable bluray support
-PKGFB_WITH_BLURAY:=	libbluray
-PKGFS_WITH_BLURAY:=	libbluray
 PKGFD_WITH_LIRC:=	enable lirc support
 PKGFB_WITH_LIRC:=	lirc
 PKGFS_WITH_LIRC:=	lirc
@@ -124,21 +118,13 @@ CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-mid \
 			--disable-debug \
 			--enable-alsa \
+			--enable-rtmp \
+			--enable-libbluray \
 			--enable-texturepacker \
 			--enable-udev \
 			--with-ffmpeg=shared
 
-ifneq ($(ADK_PACKAGE_KODI_WITH_BLURAY),)
-CONFIGURE_ARGS+=	--enable-libbluray
-else
-CONFIGURE_ARGS+=	--disable-libbluray
-endif
 ifneq ($(ADK_PACKAGE_KODI_WITH_SMB),)
-CONFIGURE_ARGS+=	--enable-samba
-else
-CONFIGURE_ARGS+=	--disable-samba
-endif
-ifneq ($(ADK_PACKAGE_KODI_WITH_SMB3),)
 CONFIGURE_ARGS+=	--enable-samba
 else
 CONFIGURE_ARGS+=	--disable-samba
@@ -157,11 +143,6 @@ ifneq ($(ADK_PACKAGE_KODI_WITH_CEC),)
 CONFIGURE_ARGS+=	--enable-libcec
 else
 CONFIGURE_ARGS+=	--disable-libcec
-endif
-ifneq ($(ADK_PACKAGE_KODI_WITH_RTMP),)
-CONFIGURE_ARGS+=	--enable-rtmp
-else
-CONFIGURE_ARGS+=	--disable-rtmp
 endif
 ifneq ($(ADK_PACKAGE_KODI_WITH_LIRC),)
 CONFIGURE_ARGS+=	--enable-lirc
