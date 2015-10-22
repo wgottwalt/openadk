@@ -4,22 +4,14 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ssltunnel
-PKG_VERSION:=		1.16
+PKG_VERSION:=		1.18
 PKG_RELEASE:=		1
-PKG_HASH:=		e801ab170f364ba2997fb276d16eba1f75bffcc0fc5a1e97ff0b247bf63b0570
+PKG_HASH:=		1d2e4bbc935341775e7cc26dae980d6bdd5e8351f5a0cbf4d85363ac5d71081f
 PKG_DESCR:=		ppp over ssl vpn tool
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		ppp
-PKG_BUILDDEP:=		ppp
+PKG_DEPENDS:=		ppp libopenssl
+PKG_BUILDDEP:=		ppp openssl
 PKG_SITES:=		http://www.hsc.fr/ressources/outils/ssltunnel/download/
-
-PKG_CHOICES_SSLTUNNEL:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
