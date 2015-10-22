@@ -1,6 +1,6 @@
---- stunnel-5.16.orig/configure.ac	2015-04-16 16:03:28.000000000 +0200
-+++ stunnel-5.16/configure.ac	2015-04-25 04:32:12.000000000 +0200
-@@ -71,13 +71,6 @@ AX_APPEND_COMPILE_FLAGS([-Wformat=2])
+--- stunnel-5.24.orig/configure.ac	2015-09-02 23:21:07.000000000 +0200
++++ stunnel-5.24/configure.ac	2015-10-21 10:48:27.000000000 +0200
+@@ -72,13 +72,6 @@ AX_APPEND_COMPILE_FLAGS([-Wformat=2])
  AX_APPEND_COMPILE_FLAGS([-Wconversion])
  AX_APPEND_COMPILE_FLAGS([-Wno-long-long])
  AX_APPEND_COMPILE_FLAGS([-Wno-deprecated-declarations])
