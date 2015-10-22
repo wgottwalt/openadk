@@ -52,7 +52,9 @@ CONFIGURE_ARGS+=	--disable-lua \
 			--disable-skins2 \
 			--disable-dvdnav \
 			--disable-libxml2 \
+			--disable-jack \
 			--disable-xcb \
+			--disable-taglib \
 			--without-kde-solid \
 			--enable-run-as-root \
 			--enable-libgcrypt \
