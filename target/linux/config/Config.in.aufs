@@ -49,6 +49,7 @@ config ADK_KERNEL_AUFS_HINOTIFY
 
 config ADK_KERNEL_AUFS_EXPORT
 	bool "NFS-exportable aufs"
+	select ADK_KERNEL_EXPORTFS
 	help
 	  If you want to export your mounted aufs via NFS, then enable this
 	  option. There are several requirements for this configuration.
@@ -85,11 +86,11 @@ config ADK_KERNEL_AUFS_BR_FUSE
 	  It implements the internal poll(2) operation which is
 	  implemented by fuse only (curretnly).
 
-config ADK_KERNEL_AUFS_DEBUG
-	bool "Debug aufs"
-	help
-	  Enable this to compile aufs internal debug code.
-	  It will have a negative impact to the performance.
+#config ADK_KERNEL_AUFS_DEBUG
+#	bool "Debug aufs"
+#	help
+#	  Enable this to compile aufs internal debug code.
+#	  It will have a negative impact to the performance.
 
 endif
 endmenu

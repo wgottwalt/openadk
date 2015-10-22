@@ -11,7 +11,7 @@ config ADK_KERNEL_FSNOTIFY
 	default y
 
 config ADK_KERNEL_EXPORTFS
-	bool
+	tristate
 
 config ADK_KERNEL_JBD2
 	tristate
