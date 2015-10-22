@@ -23,7 +23,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GMEDIASERVER,gmediaserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CPPFLAGS+=	-D_GNU_SOURCE
+TARGET_CPPFLAGS+=	-D_GNU_SOURCE -I$(STAGING_TARGET_DIR)/usr/include/taglib
 CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -lz"
 CONFIGURE_ARGS+=	--with-id3lib="${STAGING_TARGET_DIR}/usr" \
 			--with-libupnp="${STAGING_TARGET_DIR}/usr"
