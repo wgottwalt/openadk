@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		subversion
-PKG_VERSION:=		1.8.13
+PKG_VERSION:=		1.9.2
 PKG_RELEASE:=		1
-PKG_HASH:=		17e8900a877ac9f0d5ef437c20df437fec4eb2c5cb9882609d2277e2312da52c
+PKG_HASH:=		6fe6ef49114e9ca2942063e339ce886078612c4e6cc58f268a2ff4db4cf0cf19
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		dev/scm
 PKG_DEPENDS:=		zlib apr apr-util libexpat libsqlite neon
@@ -20,10 +20,10 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SUBVERSION,subversion,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--with-apr=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \
 			--with-apr-util=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \
-			--with-neon=${STAGING_TARGET_DIR}/usr \
 			--disable-mod-activation \
 			--disable-keychain \
 			--without-apxs \
@@ -34,7 +34,6 @@ CONFIGURE_ARGS+=	--with-apr=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \
 			--disable-javahl \
 			--without-berkeley-db
 CONFIGURE_ENV+=		LIBS='-lsqlite3 -laprutil-1 -lapr-1 -lexpat -ltinfo'
-#INSTALL_TARGET:=	external-install local-install
 
 subversion-install:
 	${INSTALL_DIR} ${IDIR_SUBVERSION}/usr/{bin,lib}
