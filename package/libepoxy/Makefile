@@ -22,7 +22,7 @@ AUTOTOOL_STYLE:=	autogen
 
 libepoxy-install:
 	$(INSTALL_DIR) $(IDIR_LIBEPOXY)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/liblibepoxy*.so* \
+	$(CP) $(WRKINST)/usr/lib/libepoxy*.so* \
 		$(IDIR_LIBEPOXY)/usr/lib
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
