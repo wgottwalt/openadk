@@ -14,6 +14,8 @@ PKG_DEPENDS:=		zlib libncurses	librt libpthread
 PKG_URL:=		http://sox.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sox/}
 
+PKG_LIBC_DEPENDS:=	glibc
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_FLAVOURS_SOX:=	WITH_LAME WITH_VORBIS WITH_FLAC WITH_MAD WITH_ALSA WITH_ID3TAG
@@ -40,6 +42,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SOX,sox,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_LDFLAGS+=	-lm
 CONFIGURE_ARGS+=	--disable-gomp \
 			--without-magic \
 			--without-png \
