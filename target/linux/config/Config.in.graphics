@@ -148,24 +148,21 @@ config ADK_KERNEL_LOGO
 config ADK_KERNEL_LOGO_LINUX_CLUT224
 	bool "Enable Linux penguin boot logo"
 	select ADK_KERNEL_LOGO
-	default n
 
 config ADK_KERNEL_FB_CON_DECOR
 	bool "Enable fullscreen boot logo"
 	select ADK_PACKAGE_FBSPLASH
 	depends on ADK_TARGET_KERNEL_VERSION_3_18 || \
 		   ADK_TARGET_KERNEL_VERSION_3_14
-	default n
 
 config ADK_KERNEL_FB_VESA
-	bool "Framebuffer support for VirtualBox Emulator (VESA)"
+	bool "Framebuffer support for VESA"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	default y if ADK_TARGET_VBOX
  	default n
-	depends on ADK_TARGET_VBOX
  	help
-	  Framebuffer support for VirtualBox Emulator.
+	  Generic VESA Framebuffer support.
 
 config ADK_KERNEL_MXC_GPU_VIV
 	bool "Framebuffer support for Cubox-i/Hummingboard (Vivante)"
@@ -210,11 +207,10 @@ config ADK_KERNEL_FB_PXA
 	  Framebuffer support for Sharp Zaurus CL Series.
 
 config ADK_KERNEL_FB_GEODE_LX
-	bool "Framebuffer support for ALIX boards (GEODE)"
+	bool "Framebuffer support for GEODE LX"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FB_GEODE
-	depends on ADK_TARGET_MODEL_PCENGINES_ALIX1C
 	default y if ADK_TARGET_MODEL_PCENGINES_ALIX1C
  	default n
  	help
@@ -243,6 +239,14 @@ config ADK_KERNEL_FB_BCM2708
  	help
 	  Framebuffer support for BCM2835 boards.
 
+config ADK_KERNEL_FB_RADEON
+	bool "Framebuffer support for RADEON chips"
+	select ADK_KERNEL_FB
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	select ADK_KERNEL_FONT_8x16
+ 	help
+	  Framebuffer support for RADEON chips.
+
 config ADK_HARDWARE_GRAPHICS_INTEL_I915
 	bool "Support for Intel graphic cards (AGP/DRM/KMS)"
 	select ADK_KERNEL_FB
@@ -255,7 +259,6 @@ config ADK_HARDWARE_GRAPHICS_INTEL_I915
 	select ADK_KERNEL_DRM_I915_FBDEV
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default n
-	depends on ADK_TARGET_SYSTEM_IBM_X40
 	help
           AGP/DRM/KMS support for Intel chipset i915.
 
