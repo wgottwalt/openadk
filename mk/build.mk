@@ -320,27 +320,6 @@ $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
 
 defconfig: .menu $(CONFIG)/conf
-ifeq (${OStype},Linux)
-	@echo ADK_HOST_LINUX=y > $(ADK_TOPDIR)/.defconfig
-endif
-ifeq (${OStype},FreeBSD)
-	@echo ADK_HOST_FREEBSD=y > $(ADK_TOPDIR)/.defconfig
-endif
-ifeq (${OStype},MirBSD)
-	@echo ADK_HOST_MIRBSD=y > $(ADK_TOPDIR)/.defconfig
-endif
-ifeq (${OStype},OpenBSD)
-	@echo ADK_HOST_OPENBSD=y > $(ADK_TOPDIR)/.defconfig
-endif
-ifeq (${OStype},NetBSD)
-	@echo ADK_HOST_NETBSD=y > $(ADK_TOPDIR)/.defconfig
-endif
-ifeq (${OStype},Darwin)
-	@echo ADK_HOST_DARWIN=y > $(ADK_TOPDIR)/.defconfig
-endif
-ifneq (,$(filter CYGWIN%,${OStype}))
-	@echo ADK_HOST_CYGWIN=y > $(ADK_TOPDIR)/.defconfig
-endif
 	@if [ ! -z "$(ADK_LIBC_GIT)" ];then \
 		if [ "$(ADK_TARGET_LIBC)" = "glibc" ];then \
 			echo "ADK_TARGET_LIB_GLIBC_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
@@ -466,6 +445,27 @@ endif
 	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
 		$(CONFIG)/conf --defconfig=.defconfig $(CONFIG_CONFIG_IN); \
 	fi
+ifeq (${OStype},Linux)
+	@echo ADK_HOST_LINUX=y >> $(ADK_TOPDIR)/.config
+endif
+ifeq (${OStype},FreeBSD)
+	@echo ADK_HOST_FREEBSD=y >> $(ADK_TOPDIR)/.config
+endif
+ifeq (${OStype},MirBSD)
+	@echo ADK_HOST_MIRBSD=y >> $(ADK_TOPDIR)/.config
+endif
+ifeq (${OStype},OpenBSD)
+	@echo ADK_HOST_OPENBSD=y >> $(ADK_TOPDIR)/.config
+endif
+ifeq (${OStype},NetBSD)
+	@echo ADK_HOST_NETBSD=y >> $(ADK_TOPDIR)/.config
+endif
+ifeq (${OStype},Darwin)
+	@echo ADK_HOST_DARWIN=y >> $(ADK_TOPDIR)/.config
+endif
+ifneq (,$(filter CYGWIN%,${OStype}))
+	@echo ADK_HOST_CYGWIN=y >> $(ADK_TOPDIR)/.config
+endif
 
 allconfig:
 ifeq (${OStype},Linux)
