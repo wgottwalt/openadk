@@ -603,6 +603,11 @@ config ADK_CPU_PPC64
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
+config ADK_CPU_S390
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
 config ADK_CPU_SH2
 	bool
 	select ADK_TARGET_WITHOUT_MMU
@@ -944,6 +949,7 @@ config ADK_TARGET_CPU_ARCH
 	default "ppc" if ADK_CPU_PPC_440
 	default "ppc64le" if ADK_CPU_PPC64 && ADK_TARGET_LITTLE_ENDIAN
 	default "ppc64" if ADK_CPU_PPC64 && ADK_TARGET_BIG_ENDIAN
+	default "s390" if ADK_CPU_S390
 	default "sh2" if ADK_CPU_SH2
 	default "sh2a" if ADK_CPU_SH2A
 	default "sh3" if ADK_CPU_SH3
