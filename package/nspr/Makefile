@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		nspr
-PKG_VERSION:=		4.10.6
+PKG_VERSION:=		4.10.10
 PKG_RELEASE:=		1
-PKG_HASH:=		df69ac8b0126f11907792384468adf42712b1d6db9772f4aa20c6d471594644a
+PKG_HASH:=		343614971c30520d0fa55f4af0a72578e2d8674bb71caf7187490c3379523107
 PKG_DESCR:=		netscape portable runtime library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.mozilla.org/projects/nspr/
-PKG_SITES:=		ftp://ftp.mozilla.org/pub/mozilla.org/nspr/releases/v${PKG_VERSION}/src/
+PKG_SITES:=		https://ftp.mozilla.org/pub/nspr/releases/v$(PKG_VERSION)/src/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
