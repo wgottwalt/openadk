@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		feh
-PKG_VERSION:=		2.10
+PKG_VERSION:=		2.14
 PKG_RELEASE:=		1
-PKG_HASH:=		bc782a884eedd7a73284804d8145238f140fa59fed8d483102d1d25e8144ca83
+PKG_HASH:=		3829cd8995ec7cc08095a2b22a6c98d1e2638bd87c8b4f0e85a059c6f0edbc48
 PKG_DESCR:=		image viewer
 PKG_SECTION:=		mm/image
 PKG_BUILDDEP:=		imlib2 giblib libXt
