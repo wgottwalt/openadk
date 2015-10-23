@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		35.0
-PKG_RELEASE:=		3
-PKG_HASH:=		bedeb5bbd8b49e5b286497ef7732542c6e7441088fd8cd577d7ca8af4c871e81
+PKG_VERSION:=		41.0.2
+PKG_RELEASE:=		1
+PKG_HASH:=		ff00689f4d2ff54c5eb7b3aa367560a3645800eb0c96e73a795e461461b1970e
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libpthread alsa-lib glib libgtk2 libpng libtiff libxcursor libffi
@@ -21,11 +21,11 @@ PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/$(PKG_VERSION)/source/
 PKG_NOPARALLEL:=	1
 
-PKG_ARCH_DEPENDS:=	arm x86 x86_64 mips
+PKG_ARCH_DEPENDS:=	arm mips mips64 x86 x86_64
 PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
-PKG_SYSTEM_DEPENDS:=	solidrun-imx6 ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 qemu-mips64el raspberry-pi
+PKG_SYSTEM_DEPENDS:=	solidrun-imx6 ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 raspberry-pi raspberry-pi2
 
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).source.tar.bz2
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).source.tar.xz
 WRKDIST=		$(WRKDIR)/mozilla-release
 WRKBUILD=		$(WRKDIR)/$(PKG_NAME)-obj
 
@@ -54,7 +54,8 @@ CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			ac_cv_sqlite_secure_delete=yes \
 			ac_cv_sqlite_threadsafe=yes \
 			ac_cv_sqlite_enable_fts3=yes \
-			ac_cv_sqlite_enable_unlock_notify=yes
+			ac_cv_sqlite_enable_unlock_notify=yes \
+			ac_cv_sqlite_dbstat_vtab=yes
 CONFIGURE_ARGS+=	--enable-application=browser \
 			--enable-official-branding \
 			--with-system-zlib \

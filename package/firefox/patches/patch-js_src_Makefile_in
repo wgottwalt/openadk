@@ -1,6 +1,6 @@
---- mozilla-release.orig/js/src/Makefile.in	2015-01-09 05:38:17.000000000 +0100
-+++ mozilla-release/js/src/Makefile.in	2015-01-29 17:03:28.000000000 +0100
-@@ -21,7 +21,7 @@ NO_EXPAND_LIBS = 1
+--- mozilla-release.orig/js/src/Makefile.in	2015-10-14 23:41:38.000000000 +0200
++++ mozilla-release/js/src/Makefile.in	2015-10-22 21:35:50.515893169 +0200
+@@ -16,7 +16,7 @@ run_for_side_effects := $(shell echo 'MA
  
  ifdef JS_HAS_CTYPES
  ifdef MOZ_NATIVE_FFI

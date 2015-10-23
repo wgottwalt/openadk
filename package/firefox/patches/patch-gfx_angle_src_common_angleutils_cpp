@@ -1,10 +1,10 @@
---- mozilla-release.orig/gfx/angle/src/common/angleutils.cpp	2015-01-09 05:38:28.000000000 +0100
-+++ mozilla-release/gfx/angle/src/common/angleutils.cpp	2015-02-03 04:42:10.000000000 +0100
-@@ -7,6 +7,7 @@
- #include "common/angleutils.h"
- 
+--- mozilla-release.orig/gfx/angle/src/common/angleutils.cpp	2015-10-14 23:41:53.000000000 +0200
++++ mozilla-release/gfx/angle/src/common/angleutils.cpp	2015-10-22 21:35:50.503893962 +0200
+@@ -8,6 +8,7 @@
+ #include "debug.h"
+ #include <stdio.h>
  #include <vector>
 +#include <cstdio>
  
- std::string FormatString(const char *fmt, va_list vararg)
+ size_t FormatStringIntoVector(const char *fmt, va_list vararg, std::vector<char>& outBuffer)
  {
