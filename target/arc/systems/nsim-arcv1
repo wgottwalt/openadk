@@ -1,0 +1,7 @@
+config ADK_TARGET_SYSTEM_NSIM_ARCV1
+	bool "Synopsys NSIM Emulator (ARCv1)"
+	select ADK_CPU_ARC700
+	select ADK_TARGET_WITH_SERIAL
+	help
+	  Support for NSIM Emulator for ARCv1.
+

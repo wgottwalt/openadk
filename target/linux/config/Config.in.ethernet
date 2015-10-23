@@ -5,7 +5,11 @@ menu "Ethernet network devices support"
 depends on ADK_TARGET_WITH_NET
 
 # vendor stuff
+
 config ADK_KERNEL_NET_CADENCE
+	bool
+
+config ADK_KERNEL_NET_VENDOR_ARC
 	bool
 
 config ADK_KERNEL_NET_VENDOR_AMD
@@ -75,6 +79,9 @@ config ADK_KERNEL_VIA_RHINE_MMIO
 	bool
 
 config ADK_KERNEL_STMMAC_PLATFORM
+	bool
+
+config ADK_KERNEL_LXT_PHY
 	bool
 
 config ADK_KERNEL_AT803X_PHY
