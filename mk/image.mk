@@ -221,6 +221,14 @@ ifeq ($(ADK_KERNEL_COMP_BZIP2),y)
 		echo "CONFIG_RD_BZIP2=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_BZIP2=y" >> ${LINUX_DIR}/.config
 endif
+ifeq ($(ADK_KERNEL_COMPRESS_NONE),y)
+		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZO=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZMA=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_LZ4=n" >> ${LINUX_DIR}/.config
+		echo "CONFIG_RD_GZIP=n" >> ${LINUX_DIR}/.config
+endif
 	@-rm $(LINUX_DIR)/usr/initramfs_data.cpio* 2>/dev/null
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		-j${ADK_MAKE_JOBS} $(ADK_TARGET_KERNEL) $(MAKE_TRACE)
