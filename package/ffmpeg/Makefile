@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
-PKG_VERSION:=		2.7.2
+PKG_VERSION:=		2.8.1
 PKG_RELEASE:=		1
-PKG_HASH:=		7ceb7550ad628c526fa6c9ff23fdfb687a62f54d90c4a730998d8c2b417b9ef2
+PKG_HASH:=		e2ed5ab28dee1af94336739173eb0019afc21a54e38a96f4e3208e94a07866e2
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs/video
 PKG_FDEPENDS:=		libpthread
@@ -16,10 +16,6 @@ PKG_LIBNAME:=		libffmpeg
 PKG_OPTS:=		dev
 
 PKG_SUBPKGS:=		LIBFFMPEG FFSERVER FFPROBE FFMPEG
-#PKGSD_FFPLAY:=		video player
-#PKGSC_FFPLAY:=		mm/video
-#PKGSS_FFPLAY:=		libsdl libpthread libffmpeg
-#PKGSB_FFPLAY:=		sdl
 PKGSD_FFMPEG:=		video converter
 PKGSC_FFMPEG:=		mm/video
 PKGSS_FFMPEG:=		libffmpeg
@@ -92,7 +88,6 @@ $(eval $(call PKG_template,LIBFFMPEG,libffmpeg,${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,FFMPEG,ffmpeg,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFMPEG},${PKGSC_FFMPEG}))
 $(eval $(call PKG_template,FFSERVER,ffserver,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFSERVER},${PKGSC_FFSERVER}))
 $(eval $(call PKG_template,FFPROBE,ffprobe,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FFPROBE},${PKGSC_FFPROBE}))
-#$(eval $(call PKG_template,FFPLAY,ffplay,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_FFPLAY},${PKGSD_FFPLAY},${PKGSC_FFPLAY}))
 
 ifeq ($(ADK_DEBUG),y)
 TARGET_CFLAGS:=		$(subst O0,O2,$(TARGET_CFLAGS))
@@ -176,10 +171,6 @@ libffmpeg-install:
 	${CP} ${WRKINST}/usr/lib/libpostproc.so* ${IDIR_LIBFFMPEG}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libswscale.so* ${IDIR_LIBFFMPEG}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libswresample.so* ${IDIR_LIBFFMPEG}/usr/lib
-
-#ffplay-install:
-#	${INSTALL_DIR} ${IDIR_FFPLAY}/usr/bin
-#	${INSTALL_BIN} ${WRKINST}/usr/bin/ffplay ${IDIR_FFPLAY}/usr/bin
 
 ffmpeg-install:
 	${INSTALL_DIR} ${IDIR_FFMPEG}/usr/bin
