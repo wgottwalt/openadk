@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		dhcp
-PKG_VERSION:=		4.1.1
+PKG_VERSION:=		4.1-ESV-R12
 PKG_RELEASE:=		1
-PKG_HASH:=		37058685bffbfeb793cfb0867f0b1911f8d238ea69fbaa6cbb165455ab803618
+PKG_HASH:=		53265d1bf5e2073379df03c73a1a34d38a904307609c0f9cb77223912e753e5f
 PKG_DESCR:=		dhcp server
 PKG_SECTION:=		net/dns
 PKG_URL:=		https://www.isc.org/software/dhcp/
