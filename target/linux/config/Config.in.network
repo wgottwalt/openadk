@@ -1,6 +1,9 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+menu "Network support"
+depends on ADK_TARGET_WITH_NET
+
 config ADK_KERNEL_NETDEVICES
 	bool
 
@@ -18,9 +21,6 @@ config ADK_KERNEL_UNIX
 
 config ADK_KERNEL_NET_CORE
 	bool
-
-menu "Network support"
-depends on ADK_TARGET_WITH_NET
 
 config ADK_KERNEL_INET
 	bool "Enable TCP/IP support"

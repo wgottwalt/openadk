@@ -4,5 +4,5 @@ config ADK_TARGET_SYSTEM_QEMU_PPC_BAMBOO
 	select ADK_CPU_PPC_440
 	select ADK_TARGET_SOFT_FLOAT
 	help
-	 Support for Qemu Emulator PPC architecture (Bamboo).
+ 	  Support for Qemu Emulator PPC architecture (Bamboo).
 

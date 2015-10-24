@@ -5,6 +5,9 @@
 config ADK_TARGET_WITH_CPU_FREQ
 	bool
 
+config ADK_TARGET_WITH_NETDEVICE
+	bool
+
 config ADK_TARGET_WITH_NET
 	bool
 

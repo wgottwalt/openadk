@@ -8,6 +8,7 @@ config ADK_TARGET_SYSTEM_IMGTEC_CI20
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_SMP
 	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_NETDEVICE
 	select ADK_TARGET_WITH_BLOCK
 	help
 	  Support for Imagination Creator CI20.

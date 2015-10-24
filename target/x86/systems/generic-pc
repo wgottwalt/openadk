@@ -7,8 +7,10 @@ config ADK_TARGET_SYSTEM_GENERIC_PC
 	select ADK_TARGET_WITH_USB
 	select ADK_TARGET_WITH_VGA
 	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_NETDEVICE
 	select ADK_TARGET_WITH_BLOCK
 	select ADK_PACKAGE_GRUB
 	help
 	  Example config for generic i686 based PC.
+          You need to enable all required drivers manually.
 

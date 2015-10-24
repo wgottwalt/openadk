@@ -2,9 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 menu "Ethernet network devices support"
-depends on ADK_TARGET_WITH_NET
-
-# vendor stuff
+depends on ADK_TARGET_WITH_NETDEVICE
 
 config ADK_KERNEL_NET_CADENCE
 	bool

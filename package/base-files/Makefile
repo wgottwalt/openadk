@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		15
+PKG_RELEASE:=		16
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -68,6 +68,11 @@ endif
 	mkdir -p $(IDIR_BASE_FILES)/etc/network/{if-pre-up.d,if-up.d,if-down.d,if-post-down.d}
 	mkdir -p $(IDIR_BASE_FILES)/usr/{lib,bin}
 	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
+ifeq ($(ADK_TARGET_WITH_NETDEVICE),y)
+	cp ./files/interfaces-dhcp $(IDIR_BASE_FILES)/etc/network/interfaces
+else
+	cp ./files/interfaces-lo $(IDIR_BASE_FILES)/etc/network/interfaces
+endif
 	chmod 600 $(IDIR_BASE_FILES)/etc/network/interfaces
 ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
 	(cd $(IDIR_BASE_FILES)/etc; ln -sf ../proc/net/pnp resolv.conf)
