@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		fping
-PKG_VERSION:=		3.10
+PKG_VERSION:=		3.12
 PKG_RELEASE:=		1
-PKG_HASH:=		cd47e842f32fe6aa72369d8a0e3545f7c137bb019e66f47379dc70febad357d8
+PKG_HASH:=		d86f2281bda4653c7049e6ba8fce24ba67edbf9193b7bb1cf6219b0c8ddce4e6
 PKG_DESCR:=		program to ping hosts in parallel
 PKG_SECTION:=		net/debug
 PKG_URL:=		http://fping.org
