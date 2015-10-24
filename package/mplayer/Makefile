@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mplayer
-PKG_VERSION:=		1.1.1
-PKG_RELEASE:=		3
-PKG_HASH:=		ce8fc7c3179e6a57eb3a58cb7d1604388756b8a61764cc93e095e7aff3798c76
+PKG_VERSION:=		1.2
+PKG_RELEASE:=		1
+PKG_HASH:=		ffe7f6f10adf2920707e8d6c04f0d3ed34c307efc6cd90ac46593ee8fba2e2b6
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		alsa-lib libjpeg-turbo libfaad2 libmad libncurses
@@ -130,11 +130,8 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--disable-pvr \
 			--disable-ftp \
 			--disable-ivtv \
-			--disable-dvdread-internal \
-			--disable-libdvdcss-internal \
 			--disable-freetype \
 			--disable-mpg123 \
-			--disable-tremor-internal \
 			--disable-arts \
 			--disable-esd \
 			--disable-jack \
