@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		intltool
-PKG_VERSION:=		0.50.2
+PKG_VERSION:=		0.51.0
 PKG_RELEASE:=		1
-PKG_HASH:=		67f25c5c6fb71d095793a7f895b245e65e829e8bde68c6c8b4c912144ff34406
+PKG_HASH:=		67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd
 PKG_DESCR:=		internationalization utility to create po files
 PKG_SECTION:=		dev/tools
 PKG_URL:=		http://freedesktop.org/wiki/Software/intltool/
-PKG_SITES:=		https://launchpad.net/intltool/trunk/0.50.2/+download/
+PKG_SITES:=		https://launchpad.net/intltool/trunk/$(PKG_VERSION)/+download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
