@@ -4,18 +4,17 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mbedtls
-PKG_VERSION:=		1.3.10
+PKG_VERSION:=		2.1.2
 PKG_RELEASE:=		1
-PKG_HASH:=		f48a0d99d88cb59eeaaf356bb870b3df6f793ac5b36cb8b45608557f74d9d31c
+PKG_HASH:=		ce57cb9085f976ffde945af7e8cec058a66ad181a96fd228fbcbc485213a7c58
 PKG_DESCR:=		embedded ssl/tls library
 PKG_SECTION:=		libs/crypto
-PKG_URL:=		https://polarssl.org/
-PKG_SITES:=		https://github.com/polarssl/polarssl/archive/
+PKG_URL:=		https://tls.mbed.org
+PKG_SITES:=		https://tls.mbed.org/download/
 PKG_LIBNAME:=		libmbedtls
 PKG_OPTS:=		dev
 
-DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
-WRKDIST=		$(WRKDIR)/mbedtls-$(PKG_NAME)-$(PKG_VERSION)
+DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION)-apache.tgz
 
 include $(ADK_TOPDIR)/mk/package.mk
 
