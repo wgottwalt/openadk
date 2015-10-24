@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		imlib2
-PKG_VERSION:=		1.4.4
-PKG_RELEASE:=		4
-PKG_HASH:=		a4de52c90b8cd155b41ca70c2d34209f7b94a9e4f8e77582f2682a1795306198
+PKG_VERSION:=		1.4.7
+PKG_RELEASE:=		1
+PKG_HASH:=		48e98337a560d8904f685447f41c43914fec1f8cd3745a9fd86cba9fd24a6563
 PKG_DESCR:=		advanced replacement library for libraries like libxpm
 PKG_SECTION:=		libs/image
 PKG_DEPENDS:=		libfreetype zlib libpng libtiff libx11 libxext
