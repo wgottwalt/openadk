@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		harfbuzz
-PKG_VERSION:=		0.9.40
+PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		1
-PKG_HASH:=		1771d53583be6d91ca961854b2a24fb239ef0545eed221ae3349abae0ab8321f
+PKG_HASH:=		f616a7fbdc78a627043f9029000bf08c0c71df59cde4143fc92a014f6a993b26
 PKG_DESCR:=		opentype text shaping engine
 PKG_SECTION:=		libs/fonts
 PKG_SITES:=		http://www.freedesktop.org/software/harfbuzz/release/
