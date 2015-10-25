@@ -1,0 +1,18 @@
+--- harfbuzz-1.0.6.orig/src/harfbuzz.pc.in	2015-08-11 12:47:09.000000000 +0200
++++ harfbuzz-1.0.6/src/harfbuzz.pc.in	2015-10-25 10:54:18.000000000 +0100
+@@ -1,13 +1,10 @@
+ prefix=%prefix%
+-exec_prefix=%exec_prefix%
+-libdir=%libdir%
+-includedir=%includedir%
+ 
+ Name: harfbuzz
+ Description: HarfBuzz text shaping library
+ Version: %VERSION%
+ 
+-Libs: -L${libdir} -lharfbuzz
++Libs: -L${prefix}/lib -lharfbuzz
+ Libs.private: %libs_private%
+ Requires.private: %requires_private%
+-Cflags: -I${includedir}/harfbuzz
++Cflags: -I${prefix}/include/harfbuzz
