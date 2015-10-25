@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		4.3.0
+PKG_VERSION:=		4.3.1
 PKG_RELEASE:=		1
-PKG_HASH:=		d8dbb6b29dec1d9aa295655c4aa4eadd1e5367ef7047be22f4d6a18ba8acdb63
-PKG_DESCR:=		file and print server (version 4)
+PKG_HASH:=		9908a80d95b9e2583906ed4347a8c80b769539a2788158992fb48ea9fb4d2c82
+PKG_DESCR:=		file and print server
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		gettext-tiny util-linux popt python2 gnutls
 PKG_BUILDDEP:=		heimdal-host python2-host
