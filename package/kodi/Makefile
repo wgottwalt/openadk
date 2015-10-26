@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		15.1
-PKG_RELEASE:=		2
-PKG_HASH:=		72b2610d8fbff807128d74429f25bf6716ba880c27c2c5d9fad012ec7fc70705
+PKG_VERSION:=		15.2
+PKG_RELEASE:=		1
+PKG_HASH:=		dd8aeb942e6de5d1488e243e1346cff3f6597e21b5131a3ba72ff5cc82037110
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libstdcxx libsquish libbluray
