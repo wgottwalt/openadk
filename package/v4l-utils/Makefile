@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		v4l-utils
-PKG_VERSION:=		1.0.0
+PKG_VERSION:=		1.8.0
 PKG_RELEASE:=		1
-PKG_HASH:=		1de3882099e04e89e354675ee408b82c8ac8afd3ca6ab27ea321771901285f30
+PKG_HASH:=		50c7be033636d878e902dad0a207fc9f6d831bec27f1b410f1102acddaa5565e
 PKG_DESCR:=		video4linux utilities
 PKG_SECTION:=		mm/video
 PKG_BUILDDEP:=		libjpeg-turbo
