@@ -97,6 +97,7 @@ config ADK_TARGET_ROOTFS_NFSROOT
 	select ADK_KERNEL_IP_PNP
 	select ADK_KERNEL_IP_PNP_DHCP
 	depends on !ADK_TARGET_QEMU && \
+		   !ADK_TARGET_SIM && \
 	           !ADK_TARGET_VBOX && \
 		   !ADK_TARGET_SYSTEM_ARANYM_M68K && \
 		   !ADK_TARGET_SYSTEM_ARM_FM
@@ -134,7 +135,8 @@ config ADK_TARGET_ROOTFS_ISO
 
 config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
 	bool "Archive usable for initramfs creation"
-	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532 \
+		&& !ADK_TARGET_SIM
 	select ADK_KERNEL_BLK_DEV_INITRD
 	help
 	  Use this option if your planning to create a initramfs,
@@ -145,6 +147,7 @@ config ADK_TARGET_ROOTFS_ARCHIVE
 	select ADK_HOST_NEED_GENEXT2FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
 	select ADK_KERNEL_EXT2_FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
+	depends on !ADK_TARGET_SIM
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 
