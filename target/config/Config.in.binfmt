@@ -6,8 +6,9 @@ prompt "Binary Format"
 depends on ADK_TARGET_ARCH_ARM \
 	|| ADK_TARGET_ARCH_BFIN \
 	|| ADK_TARGET_ARCH_C6X \
-	|| ADK_TARGET_ARCH_H8300\
-	|| ADK_TARGET_ARCH_LM32\
+	|| ADK_TARGET_ARCH_FRV \
+	|| ADK_TARGET_ARCH_H8300 \
+	|| ADK_TARGET_ARCH_LM32 \
 	|| ADK_TARGET_ARCH_M68K
 
 config ADK_TARGET_BINFMT_ELF
@@ -16,13 +17,13 @@ config ADK_TARGET_BINFMT_ELF
 
 config ADK_TARGET_BINFMT_FDPIC
 	bool "FDPIC"
-	depends on ADK_TARGET_ARCH_BFIN
+	depends on ADK_TARGET_ARCH_BFIN || ADK_TARGET_ARCH_FRV
 
 config ADK_TARGET_BINFMT_FLAT
 	bool "FLAT"
 	select ADK_TARGET_UCLINUX if ADK_TARGET_ARCH_BFIN
 	depends on (ADK_TARGET_ARCH_ARM || ADK_TARGET_ARCH_M68K) && ADK_TARGET_UCLINUX \
-		|| ADK_TARGET_ARCH_H8300 || ADK_TARGET_ARCH_LM32 || ADK_TARGET_ARCH_BFIN
+		|| ADK_TARGET_ARCH_H8300 || ADK_TARGET_ARCH_LM32 || ADK_TARGET_ARCH_BFIN || ADK_TARGET_ARCH_FRV
 
 config ADK_TARGET_BINFMT_DSBT
 	bool "DSBT"
@@ -33,7 +34,7 @@ endchoice
 # Set up flat binary type
 choice
 prompt "FLAT Binary type"
-depends on ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_ARCH_H8300
+depends on ADK_TARGET_BINFMT_FLAT && ADK_TARGET_ARCH_M68K || ADK_TARGET_ARCH_BFIN
 default ADK_TARGET_BINFMT_FLAT_ONE
 
 config ADK_TARGET_BINFMT_FLAT_ONE
@@ -43,14 +44,12 @@ config ADK_TARGET_BINFMT_FLAT_ONE
 
 config ADK_TARGET_BINFMT_FLAT_SEP_DATA
 	bool "Separate data and code region"
-	depends on ADK_TARGET_ARCH_M68K || ADK_TARGET_ARCH_BFIN
 	help
 	  Allow for the data and text segments to be separated and placed in
 	  different regions of memory.
 
 config ADK_TARGET_BINFMT_FLAT_SHARED
 	bool "Shared binary"
-	select ADK_TARGET_BINFMT_SUPPORTS_SHARED
 	help
 	  Allow to load and link indiviual FLAT binaries at run time.
 

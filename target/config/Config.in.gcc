@@ -64,8 +64,6 @@ config ADK_TOOLCHAIN_GCC_4_8_ARC
 
 config ADK_TOOLCHAIN_GCC_4_7_4
 	bool "4.7.4"
-	depends on ADK_TARGET_ARCH_C6X \
-		|| ADK_TARGET_ARCH_SPARC
 
 config ADK_TOOLCHAIN_GCC_4_5_4
 	bool "4.5.4"

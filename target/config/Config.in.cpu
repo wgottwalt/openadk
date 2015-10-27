@@ -460,6 +460,12 @@ config ADK_CPU_GEODE
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
+config ADK_CPU_FRV
+	bool
+	select ADK_TARGET_WITHOUT_MMU
+	select ADK_TARGET_WITHOUT_THREADS
+	select ADK_TARGET_WITHOUT_CXX
+
 config ADK_CPU_H8300
 	bool
 	select ADK_TARGET_WITHOUT_MMU
@@ -924,6 +930,7 @@ config ADK_TARGET_CPU_ARCH
 	default "c6x" if ADK_CPU_C6X
 	default "cris" if ADK_CPU_CRIS_V10
 	default "crisv32" if ADK_CPU_CRIS_V32
+	default "frv" if ADK_TARGET_ARCH_FRV
 	default "i486" if ADK_CPU_I486
 	default "i586" if ADK_CPU_I586
 	default "i686" if ADK_CPU_I686
