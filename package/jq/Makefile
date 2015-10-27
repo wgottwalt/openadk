@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		jq
-PKG_VERSION:=		1.4
+PKG_VERSION:=		1.5
 PKG_RELEASE:=		1
-PKG_HASH:=		998c41babeb57b4304e65b4eb73094279b3ab1e63801b6b4bddd487ce009b39d
+PKG_HASH:=		c4d2bfec6436341113419debf479d833692cc5cdab7eb0326b5a4d4fbe9f493c
 PKG_DESCR:=		command-line json processor
 PKG_SECTION:=		sys/misc
 PKG_URL:=		http://stedolan.github.io/jq/
-PKG_SITES:=		http://stedolan.github.io/jq/download/source/
+PKG_SITES:=		https://github.com/stedolan/jq/releases/download/jq-$(PKG_VERSION)/
 
 # needs bessel functions not enabled on uClibc-ng
 PKG_LIBC_DEPENDS:=	glibc musl
