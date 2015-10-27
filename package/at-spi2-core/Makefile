@@ -18,10 +18,12 @@ PKG_OPTS:=		dev
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBAT_SPI2_CORE,libat-spi2-core,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
+$(eval $(call PKG_template,AT_SPI2_CORE,at-spi2-core,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
-libatk-install:
-	$(INSTALL_DIR) $(IDIR_LIBAT_SPI2_CORE)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libat*.so* $(IDIR_LIBAT_SPI2_CORE)/usr/lib
+TARGET_LDFLAGS+=	-lm
+
+at-spi2-core-install:
+	$(INSTALL_DIR) $(IDIR_AT_SPI2_CORE)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libat*.so* $(IDIR_AT_SPI2_CORE)/usr/lib
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
