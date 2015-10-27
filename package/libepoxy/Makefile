@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		42c328440f60a5795835c5ec4bdfc1329e75bba16b6e22b3a87ed17e9679e8f6
 PKG_DESCR:=		opengl function pointer management
 PKG_SECTION:=		libs/misc
+PKG_BUILDDEP:=		util-macros-host mesa
 PKG_SITES:=		http://crux.nu/files/
 PKG_OPTS:=		dev
 
