@@ -1,2 +1,0 @@
-- uclibc mips64 n32 runtime issues
-- qemu-microblaze: ml605 early printk and network card emulation fails, little endian works
