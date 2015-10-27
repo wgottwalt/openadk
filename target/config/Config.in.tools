@@ -35,7 +35,7 @@ config ADK_HOST_BUILD_LIBTOOL
 	bool
 	default y
 
-config ADK_HOST_BUILD_OPENSSL
+config ADK_HOST_BUILD_LIBRESSL
 	bool
 	default y
 

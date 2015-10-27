@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		9f1c6d09d7148c1c2d9fd0ea655dcf4dcc407deb2db32d4126251ca0245cb670
 PKG_DESCR:=		retrieving files using http(s) and ftp
 PKG_SECTION:=		net/http
-HOST_BUILDDEP:=		openssl-host
+HOST_BUILDDEP:=		libressl-host
 PKG_URL:=		http://www.gnu.org/software/wget/
 PKG_SITES:=		${MASTER_SITE_GNU:=wget/}
 PKG_BB:=		1
