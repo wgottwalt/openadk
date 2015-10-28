@@ -24,6 +24,7 @@ config ADK_KERNEL_VIRTIO_NET
 	select ADK_KERNEL_VIRTIO_MMIO
 	select ADK_KERNEL_VIRTIO_PCI
 	select ADK_KERNEL_VIRTIO_PCI_LEGACY
+	default y if ADK_TARGET_SYSTEM_QEMU_S390
 	default n
 	help
 	  Enables support for Virtio Net driver.

@@ -1,0 +1,7 @@
+config ADK_TARGET_SYSTEM_QEMU_S390
+	bool "Qemu Emulator"
+	select ADK_CPU_Z900
+	select ADK_TARGET_QEMU
+	help
+	  Support for Qemu Emulator S/390 architecture.
+
