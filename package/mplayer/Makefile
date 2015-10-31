@@ -65,6 +65,11 @@ CONFIGURE_CPU_OPTS+=	--enable-mmxext
 else
 CONFIGURE_CPU_OPTS+=	--disable-mmxext
 endif
+ifeq (${ADK_TARGET_CPU_WITH_3DNOW},y)
+CONFIGURE_CPU_OPTS:=	--enable-3dnow
+else
+CONFIGURE_CPU_OPTS:=	--disable-3dnow
+endif
 ifeq (${ADK_TARGET_CPU_WITH_SSE},y)
 CONFIGURE_CPU_OPTS+=	--enable-sse
 else
@@ -74,6 +79,11 @@ ifeq (${ADK_TARGET_CPU_WITH_SSE2},y)
 CONFIGURE_CPU_OPTS+=	--enable-sse2
 else
 CONFIGURE_CPU_OPTS+=	--disable-sse2
+endif
+ifeq (${ADK_TARGET_CPU_WITH_SSE3},y)
+CONFIGURE_CPU_OPTS+=	--enable-sse3
+else
+CONFIGURE_CPU_OPTS+=	--disable-sse3
 endif
 #ifeq (${ADK_TARGET_CPU_WITH_IWMMXT},y)
 #CONFIGURE_CPU_OPTS+=	--enable-iwmmxt
