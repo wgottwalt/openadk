@@ -288,14 +288,16 @@ config ADK_ROOTSH_SASH
 	  standalone shell.
 
 config ADK_ROOTSH_HUSH
-	bool "hush (Shell compatible with non-MMU systems)"
-	select ADK_PACKAGE_HUSH if !ADK_TOOLCHAIN_ONLY
+	bool "hush (busybox shell compatible with non-MMU systems)"
+	select BUSYBOX_HUSH if !ADK_TOOLCHAIN_ONLY
+	select BUSYBOX_FEATURE_SH_IS_HUSH
 	help
 	  hush shell from busybox.
 
 config ADK_ROOTSH_ASH
-	bool "ash (busybox)"
+	bool "ash (busybox shell)"
 	select BUSYBOX_ASH
+	select BUSYBOX_FEATURE_SH_IS_ASH
 	help
 	  Use the minimalistic ash variant that is part of busybox
 	  as standard login shell for the superuser. This is the
