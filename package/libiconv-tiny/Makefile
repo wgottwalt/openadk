@@ -11,7 +11,6 @@ PKG_DESCR:=		iconv stub and replacement
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.openwrt.org/
 PKG_SITES:=		http://distfiles.openadk.org/
-PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
