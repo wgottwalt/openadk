@@ -148,6 +148,13 @@ config BUSYBOX_FEATURE_TR_EQUIV
 	  useful for cases when no other way of expressing a character
 	  is possible.
 
+config BUSYBOX_TRUNCATE
+	bool "truncate"
+	default n
+	help
+	  truncate truncates files to a given size. If a file does
+	  not exist, it is created unless told otherwise.
+
 config BUSYBOX_UNLINK
 	bool "unlink"
 	default y
@@ -291,6 +298,13 @@ config BUSYBOX_FEATURE_DD_IBS_OBS
 	help
 	  Enables support for writing a certain number of bytes in and out,
 	  at a time, and performing conversions on the data stream.
+
+config BUSYBOX_FEATURE_DD_STATUS
+	bool "Enable status display options"
+	default n
+	depends on BUSYBOX_DD
+	help
+	  Enables support for status=noxfer/none option.
 
 config BUSYBOX_DF
 	bool "df"
@@ -782,6 +796,14 @@ config BUSYBOX_SYNC
 	help
 	  sync is used to flush filesystem buffers.
 
+config BUSYBOX_FEATURE_SYNC_FANCY
+	bool "Enable -d and -f flags (requres syncfs(2) in libc)"
+	default n
+	depends on BUSYBOX_SYNC
+	help
+	  sync -d FILE... executes fdatasync() on each FILE.
+	  sync -f FILE... executes syncfs() on each FILE.
+
 config BUSYBOX_TAC
 	bool "tac"
 	default y
@@ -839,6 +861,14 @@ config BUSYBOX_UNAME
 	default y
 	help
 	  uname is used to print system information.
+
+config BUSYBOX_UNAME_OSNAME
+	string "Operating system name"
+	default "GNU/Linux"
+	depends on BUSYBOX_UNAME
+	help
+	  Sets the operating system name reported by uname -o.  The
+	  default is "GNU/Linux".
 
 config BUSYBOX_UNEXPAND
 	bool "unexpand"

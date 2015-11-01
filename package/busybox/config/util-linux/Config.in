@@ -15,14 +15,14 @@ config BUSYBOX_BLOCKDEV
 config BUSYBOX_FATATTR
 	bool "fatattr"
 	default n
-	select PLATFORM_LINUX
+	select BUSYBOX_PLATFORM_LINUX
 	help
 	  fatattr lists or changes the file attributes on a fat file system.
 
 config BUSYBOX_FSTRIM
 	bool "fstrim"
 	default n
-	select PLATFORM_LINUX
+	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Discard unused blocks on a mounted filesystem.
 
@@ -89,6 +89,14 @@ config BUSYBOX_REV
 	default n
 	help
 	  Reverse lines of a file or files.
+
+config BUSYBOX_UEVENT
+	bool "uevent"
+	default y
+	select BUSYBOX_PLATFORM_LINUX
+	help
+	  uevent is a netlink listener for kernel uevent notifications
+	  sent via netlink. It is usually used for dynamic device creation.
 
 config BUSYBOX_ACPID
 	bool "acpid"
@@ -333,7 +341,7 @@ config BUSYBOX_FSCK_MINIX
 config BUSYBOX_MKFS_EXT2
 	bool "mkfs_ext2"
 	default n
-	select PLATFORM_LINUX
+	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Utility to create EXT2 filesystems.
 
@@ -609,6 +617,13 @@ config BUSYBOX_FEATURE_MOUNT_FSTAB
 	default y
 	help
 	  Support mount all and looking for files in /etc/fstab.
+
+config BUSYBOX_FEATURE_MOUNT_OTHERTAB
+	depends on BUSYBOX_FEATURE_MOUNT_FSTAB
+	bool "Support -T <alt_fstab>"
+	default n
+	help
+	  Support mount -T (specifying an alternate fstab)
 
 config BUSYBOX_PIVOT_ROOT
 	bool "pivot_root"

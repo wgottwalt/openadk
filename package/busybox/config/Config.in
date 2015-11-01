@@ -266,7 +266,7 @@ config BUSYBOX_PAM
 config BUSYBOX_FEATURE_USE_SENDFILE
 	bool "Use sendfile system call"
 	default y
-	select PLATFORM_LINUX
+	select BUSYBOX_PLATFORM_LINUX
 	help
 	  When enabled, busybox will use the kernel sendfile() function
 	  instead of read/write loops to copy data between file descriptors
