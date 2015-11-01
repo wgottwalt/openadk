@@ -1,0 +1,17 @@
+--- pulseaudio-7.1.orig/src/pulsecore/sample-util.h	2015-09-10 06:51:41.000000000 +0200
++++ pulseaudio-7.1/src/pulsecore/sample-util.h	2015-11-01 18:52:13.000000000 +0100
+@@ -24,6 +24,14 @@
+ #include <inttypes.h>
+ #include <limits.h>
+ 
++#ifdef HAVE_CONFIG_H
++#include <config.h>
++#endif
++
++#ifdef HAVE_SYS_USER_H
++#include <sys/user.h>	/* required by _WORDIZE with musl */
++#endif
++
+ #include <pulse/gccmacro.h>
+ #include <pulse/sample.h>
+ #include <pulse/volume.h>

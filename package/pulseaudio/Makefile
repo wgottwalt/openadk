@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		pulseaudio
-PKG_VERSION:=		6.0
+PKG_VERSION:=		7.1
 PKG_RELEASE:=		1
-PKG_HASH:=		b50640e0b80b1607600accfad2e45aabb79d379bf6354c9671efa2065477f6f6
+PKG_HASH:=		e667514a28328f92aceea754a224a0150dddfe7e9a71b4c6d31489220153b9d9
 PKG_DESCR:=		sound system
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libltdl json-c libsndfile libspeex libncurses
@@ -17,8 +17,6 @@ PKG_BUILDDEP+=		flac libvorbis libogg util-linux ncurses alsa-lib
 PKG_URL:=		http://www.freedesktop.org/wiki/Software/PulseAudio/
 PKG_SITES:=		http://freedesktop.org/software/pulseaudio/releases/
 PKG_OPTS:=		dev
-
-PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 include $(ADK_TOPDIR)/mk/package.mk
 

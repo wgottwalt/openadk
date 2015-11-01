@@ -1,5 +1,5 @@
---- pulseaudio-6.0.orig/configure.ac	2015-02-12 15:10:35.000000000 +0100
-+++ pulseaudio-6.0/configure.ac	2015-06-04 12:20:45.000000000 +0200
+--- pulseaudio-7.1.orig/configure.ac	2015-10-30 13:22:13.000000000 +0100
++++ pulseaudio-7.1/configure.ac	2015-11-01 18:51:35.000000000 +0100
 @@ -99,25 +99,8 @@ PKG_PROG_PKG_CONFIG
  
  # gettext
@@ -26,3 +26,12 @@
  
  #### Determine host OS ####
  
+@@ -407,7 +390,7 @@ AC_HEADER_STDC
+ # POSIX
+ AC_CHECK_HEADERS_ONCE([arpa/inet.h glob.h grp.h netdb.h netinet/in.h \
+     netinet/in_systm.h netinet/tcp.h poll.h pwd.h sched.h \
+-    sys/mman.h sys/select.h sys/socket.h sys/wait.h \
++    sys/mman.h sys/select.h sys/socket.h sys/wait.h sys/user.h xlocale.h \
+     sys/uio.h syslog.h sys/dl.h dlfcn.h linux/sockios.h])
+ AC_CHECK_HEADERS([netinet/ip.h], [], [],
+                  [#include <sys/types.h>
