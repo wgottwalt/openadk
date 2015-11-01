@@ -1,5 +1,4 @@
 #!/bin/sh 
-set -e 
 
 [ "${IFACE%%[0-9]*}" = "wlan" ] || exit 0
 
