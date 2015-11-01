@@ -1,3 +1,5 @@
+# remount /dev with smaller size
+mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
 # start udev dynamic device node management
 udevd --daemon
 udevadm trigger

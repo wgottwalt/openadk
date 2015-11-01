@@ -10,9 +10,6 @@ if [ $rcquiet -ne 1 ];then
 	echo "System initialization ..."
 fi
 
-# remount /dev with smaller size
-mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
-
 # create some useful directories in tmpfs
 mkdir -p /var/log
 mkdir -p /var/run
