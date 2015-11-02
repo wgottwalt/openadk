@@ -208,7 +208,12 @@ endif
 	(cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME); \
 		ln -s ../$(STAGING_HOST2TARGET)/lib lib)
 ifeq ($(ADK_TARGET_ARCH_SH),y)
+ifeq ($(ADK_CPU_SH4),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4)
+endif
+ifeq ($(ADK_CPU_SH4A),y)
+	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4a)
+endif
 endif
 	$(SED) '/k prot/agcc_cv_libc_provides_ssp=yes' $(WRKBUILD)/gcc/configure
 	cd $(GCC_BUILD_DIR_MINIMAL); \
