@@ -619,7 +619,7 @@ config ADK_CPU_SH2A
 
 config ADK_CPU_SH3
 	bool
-	select ADK_TARGET_WITHOUT_MMU
+	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_SH4
 	bool
