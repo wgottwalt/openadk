@@ -31,6 +31,8 @@ else
 CONFIGURE_ARGS+=	--enable-multilib
 endif
 CONFIGURE_ARGS+=	--disable-werror \
+			--disable-gdb \
+			--disable-sim \
 			--disable-install-libiberty \
 			--host=$(GNU_TARGET_NAME) \
 			--target=$(GNU_TARGET_NAME)
