@@ -56,16 +56,15 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--without-isl \
 			--disable-nls
 
-GCC_FINAL_CONFOPTS:=
 
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
-ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS),)
-GCC_FINAL_CONFOPTS+=	--enable-tls --enable-threads --enable-libatomic
-else
-GCC_FINAL_CONFOPTS+=	--disable-tls --disable-threads --disable-libatomic
+GCC_FINAL_CONFOPTS:=	--enable-tls --enable-threads --enable-libatomic
 endif
-else
-GCC_FINAL_CONFOPTS+=	--disable-tls --disable-threads --disable-libatomic
+ifeq ($(ADK_TARGET_WITH_LT),y)
+GCC_FINAL_CONFOPTS:=	--disable-tls --enable-threads --disable-libatomic
+endif
+ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS),y)
+GCC_FINAL_CONFOPTS:=	--disable-tls --disable-threads --disable-libatomic
 endif
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS),y)
