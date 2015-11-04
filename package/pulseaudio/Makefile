@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		pulseaudio
 PKG_VERSION:=		7.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		e667514a28328f92aceea754a224a0150dddfe7e9a71b4c6d31489220153b9d9
 PKG_DESCR:=		sound system
 PKG_SECTION:=		mm/audio
