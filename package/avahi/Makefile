@@ -10,8 +10,7 @@ PKG_HASH:=		8372719b24e2dd75de6f59bb1315e600db4fd092805bd1201ed0cb651a2dab48
 PKG_DESCR:=		multicast dns daemon
 PKG_SECTION:=		net/dns
 PKG_DEPENDS:=		libstdcxx
-PKG_BUILDDEP:=		libdaemon expat gdbm glib
-PKG_BUILDDEP+=		gettext-tiny libgtk2 dbus
+PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext-tiny
 PKG_URL:=		http://avahi.org/
 PKG_SITES:=		http://avahi.org/download/
 PKG_LIBNAME:=		libavahi
@@ -20,7 +19,8 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		AVAHI_DAEMON AVAHI_DNSCONFD LIBAVAHI
-PKGSS_AVAHI_DAEMON:=	libavahi libdaemon libexpat libintl libgtk2 dbus
+PKGSS_AVAHI_DAEMON:=	libavahi libdaemon libexpat libintl dbus
+PKGSB_AVAHI_DAEMON:=	dbus
 PKGSS_AVAHI_DNSCONFD:=	libavahi libdaemon avahi-daemon
 PKGSD_AVAHI_DNSCONFD:=	DNS server from mDNS configuration daemon
 PKGSD_LIBAVAHI:=	DNS-SD over mDNS library
@@ -34,11 +34,11 @@ $(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE},,${PK
 
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--enable-glib \
-			--enable-gtk2 \
 			--enable-libdaemon \
 			--enable-dbus \
 			--disable-qt3 \
 			--disable-qt4 \
+			--disable-gtk \
 			--disable-gtk3 \
 			--disable-python \
 			--disable-pygtk \
