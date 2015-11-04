@@ -669,8 +669,6 @@ config ADK_CPU_XSCALE
 
 config ADK_CPU_XTENSA
 	bool
-	select ADK_TARGET_WITH_NPTL
-	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_Z900
 	bool
