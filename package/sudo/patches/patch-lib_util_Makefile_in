@@ -1,14 +1,14 @@
---- sudo-1.8.12.orig/lib/util/Makefile.in	2015-02-04 16:23:38.000000000 -0600
-+++ sudo-1.8.12/lib/util/Makefile.in	2015-02-17 14:31:25.681362973 -0600
-@@ -146,10 +146,10 @@ signame.c: mksigname
+--- sudo-1.8.15.orig/lib/util/Makefile.in	2015-11-01 00:35:24.000000000 +0100
++++ sudo-1.8.15/lib/util/Makefile.in	2015-11-03 16:29:33.000000000 +0100
+@@ -160,10 +160,10 @@ signame.c: mksigname
  	./mksigname > $@
  
  mksiglist: $(srcdir)/mksiglist.c $(srcdir)/mksiglist.h $(incdir)/sudo_compat.h $(top_builddir)/config.h
--	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEFS) $(srcdir)/mksiglist.c -o $@
+-	$(CC) $(CPPFLAGS) $(CFLAGS) $(srcdir)/mksiglist.c -o $@
 +	$(CC_FOR_BUILD) -I$(top_builddir) -I$(srcdir) -I$(top_srcdir) -I$(incdir) $(CPPFLAGS_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(DEFS) $(srcdir)/mksiglist.c -o $@
  
  mksigname: $(srcdir)/mksigname.c $(srcdir)/mksigname.h $(incdir)/sudo_compat.h $(top_builddir)/config.h
--	$(CC) $(CPPFLAGS) $(CFLAGS) $(DEFS) $(srcdir)/mksigname.c -o $@
+-	$(CC) $(CPPFLAGS) $(CFLAGS) $(srcdir)/mksigname.c -o $@
 +	$(CC_FOR_BUILD) -I$(top_builddir) -I$(srcdir) -I$(top_srcdir) -I$(incdir) $(CPPFLAGS_FOR_BUILD) $(CFLAGS_FOR_BUILD) $(DEFS) $(srcdir)/mksigname.c -o $@
  
  $(srcdir)/mksiglist.h: $(srcdir)/siglist.in
