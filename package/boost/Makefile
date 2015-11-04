@@ -54,6 +54,8 @@ CONFIGURE_ARGS+=	--target=$(GNU_TARGET_NAME) \
 			--prefix=${WRKINST}/usr \
 			--ignore-site-config \
 			--without-mpi \
+			--without-context \
+			--without-coroutine \
 			--without-locale
 
 ifneq (${ADK_PACKAGE_BOOST_IOSTREAMS},)
@@ -95,15 +97,26 @@ ifeq (${ADK_PACKAGE_BOOST_WAVE},)
 CONFIGURE_ARGS+=	--without-wave
 endif
 
+BOOST_ARCH:=	$(ADK_TARGET_ARCH)
+
 ifeq ($(ADK_TARGET_ARCH),x86_64)
 BOOST_ARCH:=	x86
-else ifeq ($(ADK_TARGET_ARCH),ppc)
-BOOST_ARCH:=	power
-else
-BOOST_ARCH:=	$(ADK_TARGET_ARCH)
 endif
+ifeq ($(ADK_TARGET_ARCH),ppc)
+BOOST_ARCH:=	power
+endif
+ifeq ($(ADK_CPU_MIPS_MIPS32),y)
+BOOST_ARCH:=	mips32
+endif
+ifeq ($(ADK_CPU_MIPS_MIPS32R2),y)
+BOOST_ARCH:=	mips32r2
+endif
+
 ifeq ($(ADK_TARGET_ARCH),arm)
 BOOST_ABI:=	abi=aapcs
+endif
+ifeq ($(ADK_TARGET_ARCH),mips)
+BOOST_ABI:=	abi=o32
 endif
 
 # some variables for build
