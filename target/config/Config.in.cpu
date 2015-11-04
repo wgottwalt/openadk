@@ -612,10 +612,14 @@ config ADK_CPU_PPC64
 config ADK_CPU_SH2
 	bool
 	select ADK_TARGET_WITHOUT_MMU
+	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_CXX
 
 config ADK_CPU_SH2A
 	bool
 	select ADK_TARGET_WITHOUT_MMU
+	select ADK_TARGET_WITH_LT
+	select ADK_TARGET_WITHOUT_CXX
 
 config ADK_CPU_SH3
 	bool
