@@ -63,7 +63,7 @@ endif
 ifeq ($(ADK_TARGET_WITH_LT),y)
 GCC_FINAL_CONFOPTS:=	--disable-tls --enable-threads --disable-libatomic
 endif
-ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS),y)
+ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS)$(ADK_TARGET_WITHOUT_THREADS),y)
 GCC_FINAL_CONFOPTS:=	--disable-tls --disable-threads --disable-libatomic
 endif
 
