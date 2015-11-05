@@ -132,7 +132,7 @@ config ADK_KERNEL_CPU_LITTLE_ENDIAN
 	default y if ADK_TARGET_LITTLE_ENDIAN
 
 choice
-prompt "Kernel Compression"
+prompt "Kernel compression"
 default ADK_KERNEL_COMPRESS_NONE if ADK_TARGET_SYSTEM_MIKROTIK_RB532 \
 				|| ADK_TARGET_SYSTEM_KINETIS_K70 \
 				|| ADK_TARGET_SYSTEM_OR1K_SIM
@@ -232,40 +232,45 @@ config ADK_KERNEL_KERNEL_MODE_NEON
 	bool
 	default y if ADK_TARGET_ARCH_ARM_WITH_NEON
 
-config ADK_TARGET_NO_CMDLINE
-	bool "Do not builtin any kernel cmdline"
-	help
-	  No kernel command line modifictaion is done.
+choice
+prompt "preemptive mode"
 
-config ADK_KERNEL_SMP
-	bool "Enable symmetric multi processing"
-	depends on ADK_TARGET_WITH_SMP
-	default y if ADK_TARGET_WITH_SMP
-	default n
+config ADK_KERNEL_PREEMPT_NONE
+	bool "No Forced Preemption (Server)"
 	help
-	  Enable symmetric multi processing support.
+	  No Forced Preemption (Server)
 
-config ADK_KERNEL_HIGHMEM
-	bool "Enable high memory"
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI2
-	default y if ADK_TARGET_MODEL_CUBOX_I4PRO
-	default y if ADK_TARGET_MODEL_CUBOX_I2ULTRA
-	default y if ADK_TARGET_MODEL_CUBOX_I2EX
-	default n
+config ADK_KERNEL_PREEMPT_VOLUNTARY
+	bool "Voluntary Kernel Preemption (Desktop)"
+	select ADK_KERNEL_HIGH_RES_TIMERS
 	help
-	  Enable high memory support.
+	  Voluntary Kernel Preemption (Desktop)
 
-config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
-	bool "Optimize for size"
-	# does not boot in qemu-microblaze
-	depends on !ADK_TARGET_ARCH_MICROBLAZE
-	default y
-
-config ADK_KERNEL_PREEMPT
-	bool "Enable preemptive kernel"
+config ADK_KERNEL_PREEMPT__LL
+	bool "Preemptible Kernel (Low-Latency Desktop)"
+	select ADK_KERNEL_HIGH_RES_TIMERS
 	help
-	  Enable preemptive mode.
+	  Preemptible Kernel (Low-Latency Desktop)
+
+config ADK_KERNEL_PREEMPT_RTB
+	bool "Preemptible Kernel (Basic RealTime)"
+	select ADK_KERNEL_HIGH_RES_TIMERS
+	depends on ADK_TARGET_KERNEL_VERSION_4_1
+        help
+	  Preemptible Kernel (Basic RT)
+
+config ADK_KERNEL_PREEMPT_RT_FULL
+	bool "Fully Preemptible Kernel (RealTime)"
+	select ADK_KERNEL_HIGH_RES_TIMERS
+	depends on ADK_TARGET_KERNEL_VERSION_4_1
+        help
+	  Fully Preemptible Kernel (RealTime)
+	  https://www.kernel.org/pub/linux/kernel/projects/rt/
+
+endchoice
+
+config ADK_KERNEL_HIGH_RES_TIMERS
+	bool "Enable high resolution timers"
 
 choice
 prompt "tick configuration"
@@ -296,14 +301,36 @@ config ADK_KERNEL_HZ_1000
 
 endchoice
 
-config ADK_KERNEL_HIGH_RES_TIMERS
-	bool "Enable high resolution timers"
+config ADK_TARGET_NO_CMDLINE
+	bool "Do not builtin any kernel cmdline"
+	help
+	  No kernel command line modifictaion is done.
 
-config ADK_KERNEL_PREEMPT_RT_FULL
-	bool "Enable Full Realtime support (external kernel patch)"
-	depends on ADK_TARGET_KERNEL_VERSION_4_1
-        help
-	  https://www.kernel.org/pub/linux/kernel/projects/rt/
+config ADK_KERNEL_SMP
+	bool "Enable symmetric multi processing"
+	depends on ADK_TARGET_WITH_SMP
+	default y if ADK_TARGET_WITH_SMP
+	default n
+	help
+	  Enable symmetric multi processing support.
+
+config ADK_KERNEL_HIGHMEM
+	bool "Enable high memory"
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI2
+	default y if ADK_TARGET_MODEL_CUBOX_I4PRO
+	default y if ADK_TARGET_MODEL_CUBOX_I2ULTRA
+	default y if ADK_TARGET_MODEL_CUBOX_I2EX
+	default n
+	help
+	  Enable high memory support.
+
+config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
+	bool "Optimize for size"
+	# does not boot in qemu-microblaze
+	depends on !ADK_TARGET_ARCH_MICROBLAZE
+	default y
+
 
 choice
 prompt "Page size"
@@ -321,4 +348,5 @@ config ADK_KERNEL_PAGE_SIZE_64KB
 	bool "64kB"
 
 endchoice
+
 endmenu
