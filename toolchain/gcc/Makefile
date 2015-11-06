@@ -207,6 +207,9 @@ endif
 	(cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME); \
 		ln -s ../$(STAGING_HOST2TARGET)/lib lib)
 ifeq ($(ADK_TARGET_ARCH_SH),y)
+ifeq ($(ADK_CPU_SH3),y)
+	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m3)
+endif
 ifeq ($(ADK_CPU_SH4),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4)
 endif

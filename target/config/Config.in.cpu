@@ -623,6 +623,7 @@ config ADK_CPU_SH2A
 
 config ADK_CPU_SH3
 	bool
+	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
 config ADK_CPU_SH4
@@ -963,7 +964,8 @@ config ADK_TARGET_CPU_ARCH
 	default "s390x" if ADK_TARGET_ARCH_S390
 	default "sh2" if ADK_CPU_SH2
 	default "sh2a" if ADK_CPU_SH2A
-	default "sh3" if ADK_CPU_SH3
+	default "sh3" if ADK_CPU_SH3 && ADK_TARGET_LITTLE_ENDIAN
+	default "sh3eb" if ADK_CPU_SH3 && ADK_TARGET_BIG_ENDIAN
 	default "sh4" if ADK_CPU_SH4 && ADK_TARGET_LITTLE_ENDIAN
 	default "sh4eb" if ADK_CPU_SH4 && ADK_TARGET_BIG_ENDIAN
 	default "sh4a" if ADK_CPU_SH4A && ADK_TARGET_LITTLE_ENDIAN
