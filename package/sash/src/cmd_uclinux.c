@@ -19,6 +19,7 @@ char statec;
 
 void
 do_ps(argc, argv)
+	int 	argc;
 	char	**argv;
 {
 	int i;
@@ -100,6 +101,7 @@ do_ps(argc, argv)
 
 void
 do_cat(argc, argv)
+	int 	argc;
 	char	**argv;
 {
 	int	fd;

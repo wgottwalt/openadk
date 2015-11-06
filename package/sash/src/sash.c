@@ -239,7 +239,8 @@ char ** text3 = &text2;
 char	buf[CMDLEN];
 int exit_code = 0;
 
-main(argc, argv, env)
+int main(argc, argv, env)
+	int	argc;
 	char	**argv;
 	char	*env[];
 {
@@ -577,6 +578,7 @@ command_in_path(char *cmd)
  */
 static BOOL
 trybuiltin(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	CMDTAB	*cmdptr;
@@ -859,6 +861,7 @@ runcmd(cmd, bg, argc, argv)
 #ifdef CMD_HELP
 void
 do_help(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	CMDTAB	*cmdptr;
@@ -871,6 +874,7 @@ do_help(argc, argv)
 #ifdef CMD_ALIAS
 void
 do_alias(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char	*name;
@@ -977,6 +981,7 @@ findalias(name)
 
 void
 do_source(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	readfile(argv[1]);
@@ -984,6 +989,7 @@ do_source(argc, argv)
 
 /*void
 do_cd(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char	*name;
@@ -997,12 +1003,15 @@ do_cd(argc, argv)
 
 void
 do_pid(argc, argv)
+	int	argc;
+	char	**argv;
 {
 	printf("%d\n", getpid());
 }
 
 void
 do_exec(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	while (--sourcecount >= 0) {
@@ -1019,6 +1028,7 @@ do_exec(argc, argv)
 
 /*void
 do_exit(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	if (argc>1)
@@ -1031,6 +1041,7 @@ do_exit(argc, argv)
 #ifdef CMD_ALIAS
 void
 do_unalias(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	ALIAS	*alias;

@@ -13,8 +13,10 @@
 #include "sash.h"
 
 #include <sys/types.h>
+#include <sys/mount.h>
 #include <sys/stat.h>
 #include <sys/time.h>
+#include <time.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <signal.h>
@@ -28,6 +30,7 @@
 
 void
 do_echo(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	BOOL	first;
@@ -45,6 +48,7 @@ do_echo(argc, argv)
 
 void
 do_pwd(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char	buf[PATHLEN];
@@ -59,6 +63,7 @@ do_pwd(argc, argv)
 
 void
 do_time(argc, argv)
+	int	argc;
 	char ** argv;
 {
 	struct timeval tv;
@@ -68,6 +73,7 @@ do_time(argc, argv)
 
 void
 do_cd(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char	*path;
@@ -89,6 +95,7 @@ do_cd(argc, argv)
 
 void
 do_mkdir(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	int state = 0, mode = -1;
@@ -111,6 +118,7 @@ do_mkdir(argc, argv)
 
 void
 do_sleep(argc, argv) 
+	int	argc;
 	char	**argv;
 {
 	if (argc > 1)
@@ -119,6 +127,7 @@ do_sleep(argc, argv)
 
 void
 do_mknod(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char	*cp;
@@ -164,6 +173,7 @@ do_mknod(argc, argv)
 
 void
 do_rmdir(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	while (argc-- > 1) {
@@ -176,6 +186,7 @@ do_rmdir(argc, argv)
 
 void
 do_sync(argc, argv)
+	int	argc;
 	char	**argv;
 {
 #ifdef CONFIG_USER_FLATFSD_FLATFSD
@@ -187,6 +198,7 @@ do_sync(argc, argv)
 
 void
 do_rm(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	while (argc-- > 1) {
@@ -199,6 +211,7 @@ do_rm(argc, argv)
 
 void
 do_chmod(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char	*cp;
@@ -226,6 +239,7 @@ do_chmod(argc, argv)
 
 void
 do_chown(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char		*cp;
@@ -267,6 +281,7 @@ do_chown(argc, argv)
 
 void
 do_chgrp(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char		*cp;
@@ -308,6 +323,7 @@ do_chgrp(argc, argv)
 
 void
 do_touch(argc, argv)
+	int	argc;
         char    **argv;
 {
         char            *name;
@@ -336,6 +352,7 @@ do_touch(argc, argv)
 
 void
 do_mv(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	int	dirflag;
@@ -382,6 +399,7 @@ do_mv(argc, argv)
 
 void
 do_ln(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	int	dirflag;
@@ -441,6 +459,7 @@ do_ln(argc, argv)
 
 void
 do_cp(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	BOOL	dirflag;
@@ -470,6 +489,7 @@ do_cp(argc, argv)
 
 void
 do_mount(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char	*str;
@@ -512,6 +532,7 @@ do_mount(argc, argv)
 
 void
 do_umount(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	if (umount(argv[1]) < 0)
@@ -521,6 +542,7 @@ do_umount(argc, argv)
 
 void
 do_cmp(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	int		fd1;
@@ -632,6 +654,7 @@ closefiles:
 
 void
 do_more(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	FILE	*fp;
@@ -727,6 +750,7 @@ do_more(argc, argv)
 
 void
 do_exit(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	exit(0);
@@ -735,6 +759,7 @@ do_exit(argc, argv)
 
 void
 do_setenv(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	setenv(argv[1], argv[2], 1);
@@ -743,6 +768,7 @@ do_setenv(argc, argv)
 
 void
 do_printenv(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char		**env;
@@ -772,6 +798,7 @@ do_printenv(argc, argv)
 
 void
 do_umask(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char	*cp;
@@ -800,6 +827,7 @@ do_umask(argc, argv)
 
 void
 do_kill(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	char	*cp;

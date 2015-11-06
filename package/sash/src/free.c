@@ -21,6 +21,7 @@
 
 void
 do_free(argc, argv)
+	int	argc;
 	char	**argv;
 {
 	int i;

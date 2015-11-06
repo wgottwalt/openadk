@@ -15,6 +15,7 @@
 #include <pwd.h>
 #include <grp.h>
 #include <time.h>
+#include <unistd.h>
 
 #define	LISTSIZE	256
 
@@ -212,6 +213,7 @@ static void
 lsfile(name, statbuf, flags)
 	char	*name;
 	struct	stat	*statbuf;
+	int 	flags;
 {
 	char		*cp;
 	struct	passwd	*pwd;

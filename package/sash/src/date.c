@@ -2,6 +2,7 @@
 
 #include <time.h>
 #include <stdio.h>
+#include <string.h>
 
 static const char invalid_date[] = "Invalid date %s\n";
 int do_date(int argc, char * argv[])

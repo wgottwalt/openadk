@@ -23,10 +23,8 @@
 #include <grp.h>
 #include <time.h>
 #include <signal.h>
-
-#if __GNU_LIBRARY__ > 5
+#include <unistd.h>
 #include <sys/reboot.h>
-#endif
 
 int
 main(argc, argv)
@@ -57,17 +55,9 @@ main(argc, argv)
 	sleep(1);
 	
 	if (strcmp(argv[1], "-h")==0) {
-#if __GNU_LIBRARY__ > 5
 		reboot(0xCDEF0123);
-#else
-		reboot(0xfee1dead, 672274793, 0xCDEF0123);
-#endif
 	} else {
-#if __GNU_LIBRARY__ > 5
 		reboot(0x01234567);
-#else
-		reboot(0xfee1dead, 672274793, 0x01234567);
-#endif
 	}
 	
 	exit(0); /* Shrug */

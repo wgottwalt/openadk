@@ -18,15 +18,11 @@
 #include <pwd.h>
 #include <grp.h>
 #include <time.h>
+#include <unistd.h>
 #include <linux/major.h>
-#ifdef __UC_LIBC_
-#include <linux/types.h>
-#endif
+#include <linux/param.h>
 #include <sys/time.h>
 #include <sys/param.h>
-#ifdef __UC_LIBC__
-#include <mathf.h>
-#endif
 
 char psbuf[256];
 char name[40];
@@ -57,6 +53,7 @@ void dev_to_name(dev_t dev, char * ttyname)
 
 void
 do_ps(argc, argv)
+	int 	argc;
 	char	**argv;
 {
 	int i;

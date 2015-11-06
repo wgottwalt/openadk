@@ -27,10 +27,7 @@
 #include <unistd.h>
 
 #include <getopt.h>
-
-#if __GNU_LIBRARY__ > 5
 #include <sys/reboot.h>
-#endif
 
 int main(int argc, char *argv[])
 {
@@ -83,11 +80,7 @@ int main(int argc, char *argv[])
 	sleep(1);
 	sync();
 	sleep(1);
-#if __GNU_LIBRARY__ > 5
 	reboot(0x01234567);
-#else
-	reboot(0xfee1dead, 672274793, 0x01234567);
-#endif
 	exit(0); /* Shrug */
 }
 

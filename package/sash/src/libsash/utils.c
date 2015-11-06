@@ -31,6 +31,7 @@ int intflag;
  */
 char *
 modestring(mode)
+	int	mode;
 {
 	static	char	buf[12];
 
@@ -531,8 +532,10 @@ makeargs(cmd, argcptr, argvptr)
  */
 BOOL
 makestring(argc, argv, buf, buflen)
+	int	argc;
 	char	**argv;
 	char	*buf;
+	int 	buflen;
 {
 	int	len;
 
@@ -581,6 +584,7 @@ static	CHUNK *	chunklist;
  */
 char *
 getchunk(size)
+	int	size;
 {
 	CHUNK	*chunk;
 
