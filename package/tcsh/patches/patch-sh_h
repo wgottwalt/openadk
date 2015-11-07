@@ -1,6 +1,6 @@
---- tcsh-6.18.01.orig/sh.h	2011-04-14 20:25:25.000000000 +0200
-+++ tcsh-6.18.01/sh.h	2013-12-25 17:12:55.000000000 +0100
-@@ -361,7 +361,7 @@ typedef long tcsh_number_t;
+--- tcsh-6.19.00.orig/sh.h	2015-05-10 15:29:28.000000000 +0200
++++ tcsh-6.19.00/sh.h	2015-11-07 23:06:35.000000000 +0100
+@@ -366,7 +366,7 @@ typedef long tcsh_number_t;
  # include <sys/filio.h>
  #endif /* (!FIOCLEX && SUNOS4) || (SYSVREL == 4 && !_SEQUENT_ && !SCO && !_SX ) */
  
@@ -9,7 +9,7 @@
  # include <sys/file.h>
  #endif	/* !_MINIX && !supermax && !WINNT_NATIVE && !defined(IRIS4D) */
  
-@@ -395,9 +395,11 @@ typedef long tcsh_number_t;
+@@ -400,9 +400,11 @@ typedef long tcsh_number_t;
  #include <pwd.h>
  #include <grp.h>
  #endif /* WINNT_NATIVE */
