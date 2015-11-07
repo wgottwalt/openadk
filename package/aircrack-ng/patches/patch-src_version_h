@@ -1,9 +1,0 @@
---- aircrack-ng-1.0.orig/src/version.h	2009-09-01 11:30:48.000000000 +0200
-+++ aircrack-ng-1.0/src/version.h	2009-12-04 22:53:25.000000000 +0100
-@@ -2,5 +2,6 @@
- #define _MIN 0
- #define _SUB_MIN 0
- #define _BETA 0
-+#define _REVISION 1
- #define _RC 0
- #define WEBSITE "http://www.aircrack-ng.org"

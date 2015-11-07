@@ -4,28 +4,28 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		aircrack-ng
-PKG_VERSION:=		1.1
-PKG_RELEASE:=		2
-PKG_HASH:=		b136b549b7d2a2751c21793100075ea43b28de9af4c1969508bb95bcc92224ad
+PKG_VERSION:=		1.2
+PKG_RELEASE:=		1
+PKG_HASH:=		ba5b3eda44254efc5b7c9f776eb756f7cc323ad5d0813c101e92edb483d157e9
 PKG_DESCR:=		set of tools for auditing wireless networks
 PKG_SECTION:=		net/wifi
-PKG_DEPENDS:=		libpthread libpcap
-PKG_BUILDDEP:=		libpcap
+PKG_DEPENDS:=		libpthread libpcap libnl
+PKG_BUILDDEP:=		libpcap libnl
 PKG_URL:=		http://www.aircrack-ng.org/
 PKG_SITES:=		http://download.aircrack-ng.org/
 # do not build parallel, otherwise libosdep.a may not be ready when compiling airtun-ng
 PKG_NOPARALLEL:=	1
 
-PKG_CHOICES_AIRCRACK_NG:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITHOUT_SSL:=	use no ssl
+PKG_CHOICES_AIRCRACK_NG:=	WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
 PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCS_WITH_LIBRESSL:=	libressl
 PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
+PKGCS_WITH_OPENSSL:=	libopenssl
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-rc2.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-rc2
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -33,8 +33,8 @@ $(eval $(call PKG_template,AIRCRACK_NG,${PKG_NAME},$(PKG_VERSION)-${PKG_RELEASE}
 
 CONFIG_STYLE:=		manual
 
-XAKE_FLAGS+=		CC="$(TARGET_CC)" TOOL_PREFIX="$(TARGET_CROSS)" \
-			CFLAGS="$(TARGET_CFLAGS) -Wall" \
+XAKE_FLAGS+=		CC="$(TARGET_CC)" \
+			TOOL_PREFIX="$(TARGET_CROSS)" \
 			OSNAME="Linux" prefix="/usr"
 
 aircrack-ng-install:
