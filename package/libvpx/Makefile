@@ -5,16 +5,15 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
 PKG_VERSION:=		1.4.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		f582d9b2d60a592a4a3d8c32965ca2d2167e9ade38c6c30bac8801ff66a118e4
 PKG_DESCR:=		vp8/vp9 codec library
 PKG_SECTION:=		libs/video
+PKG_BUILDDEP:=		yasm-host
 PKG_URL:=		http://www.webmproject.org/about/
 PKG_SITES:=		http://storage.googleapis.com/downloads.webmproject.org/releases/webm/
 PKG_OPTS:=		dev
 
-PKG_BUILDDEP_IBM_X40:=	yasm-host
-PKG_BUILDDEP_QEMU_X86:=	yasm-host
 PKG_ARCH_DEPENDS:=	!m68k
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
@@ -50,6 +49,9 @@ CONFIGURE_ARGS+=	--target=mips64-linux-gcc
 endif
 ifeq ($(ADK_TARGET_ARCH_X86),y)
 CONFIGURE_ARGS+=	--target=x86-linux-gcc --as=yasm
+endif
+ifeq ($(ADK_TARGET_ARCH_X86_64),y)
+CONFIGURE_ARGS+=	--target=x86_64-linux-gcc --as=yasm
 endif
 ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 CONFIGURE_ARGS+=	--target=generic-gnu
