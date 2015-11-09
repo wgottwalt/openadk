@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libgpg-error
 PKG_VERSION:=		1.12
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		cafc9ed6a87c53a35175d5a1220a96ca386696eef2fa059cc0306211f246e55f
 PKG_DESCR:=		helper library for common error codes and descriptions
 PKG_SECTION:=		libs/misc
