@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libglew
-PKG_VERSION:=		1.10.0
-PKG_RELEASE:=		3
-PKG_HASH:=		99c41320b63f6860869b5fb9af9a1854b15582796c64ee3dfd7096dc0c89f307
+PKG_VERSION:=		1.13.0
+PKG_RELEASE:=		1
+PKG_HASH:=		aa25dc48ed84b0b64b8d41cdd42c8f40f149c37fa2ffa39cd97f42c78d128bc7
 PKG_DESCR:=		opengl extension wrangler library
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libx11 libxmu libxi libxext mesa
@@ -25,7 +25,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBGLEW,libglew,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
-XAKE_FLAGS+=		STRIP='' GLEW_DEST='${WRKINST}/usr' SYSTEMS=linux
+XAKE_FLAGS+=		STRIP='' SYSTEMS=linux
 
 libglew-install:
 	$(INSTALL_DIR) $(IDIR_LIBGLEW)/usr/lib

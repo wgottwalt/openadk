@@ -1,12 +1,10 @@
---- glew-1.10.0.orig/config/Makefile.linux	2013-07-22 16:11:22.000000000 +0200
-+++ glew-1.10.0/config/Makefile.linux	2013-07-30 13:17:09.000000000 +0200
-@@ -1,21 +1,7 @@
+--- glew-1.13.0.orig/config/Makefile.linux	2015-08-10 13:47:22.000000000 +0200
++++ glew-1.13.0/config/Makefile.linux	2015-11-09 00:29:07.515846709 +0100
+@@ -1,21 +1,6 @@
  NAME = $(GLEW_NAME)
 -CC = cc
 -LD = cc
-+CC ?= cc
-+LD = $(CC)
- M_ARCH ?= $(shell uname -m)
+-M_ARCH ?= $(shell uname -m)
 -ARCH64 = false
 -ifeq (x86_64,${M_ARCH})
 -  ARCH64 = true
@@ -21,6 +19,8 @@
 -  LDFLAGS.EXTRA = -L/usr/X11R6/lib -L/usr/lib
 -  LIBDIR = $(GLEW_DEST)/lib
 -endif
- LDFLAGS.GL = -lXmu -lXi -lGL -lXext -lX11
++CC ?= cc
++LD = $(CC)
+ LDFLAGS.GL = -lGL -lX11
  LDFLAGS.STATIC = -Wl,-Bstatic
  LDFLAGS.DYNAMIC = -Wl,-Bdynamic
