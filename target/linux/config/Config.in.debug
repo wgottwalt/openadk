@@ -39,13 +39,14 @@ config ADK_KERNEL_KALLSYMS_ALL
 config ADK_KERNEL_PRINTK
 	bool "printk support (disable to save space and quieten bootup)"
 	select ADK_KERNEL_EARLY_PRINTK
-	default y if !ADK_APPLIANCE_TEST
+	default y
 	help
 	  Disable printk to save space and quieten bootup.
 
 config ADK_KERNEL_PRINTK_TIME
 	bool "timing information for printk"
 	depends on ADK_KERNEL_PRINTK
+	default y
 	help
 	  Enable timing information for printk, to analyze kernel
 	  bootup performance.
