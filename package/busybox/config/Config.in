@@ -307,7 +307,7 @@ config BUSYBOX_FEATURE_CLEAN_UP
 
 config BUSYBOX_FEATURE_UTMP
 	bool "Support utmp file"
-	default y if !ADK_TARGET_LIB_MUSL
+	default n
 	help
 	  The file /var/run/utmp is used to track who is currently logged in.
 	  With this option on, certain applets (getty, login, telnetd etc)
@@ -316,7 +316,7 @@ config BUSYBOX_FEATURE_UTMP
 
 config BUSYBOX_FEATURE_WTMP
 	bool "Support wtmp file"
-	default y if !ADK_TARGET_LIB_MUSL
+	default n
 	depends on BUSYBOX_FEATURE_UTMP
 	help
 	  The file /var/run/wtmp is used to track when users have logged into
