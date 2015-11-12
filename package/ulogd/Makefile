@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ulogd
-PKG_VERSION:=		2.0.4
-PKG_RELEASE:=		2
-PKG_HASH:=		56b30a13a8832e97178f39b7bb173a0b1dfe173dbb60d99a1a386c0962a2effd
+PKG_VERSION:=		2.0.5
+PKG_RELEASE:=		1
+PKG_HASH:=		a221cb9f77347c0ca00d0937e27c1b90e3291a553cc62a4139b788e2e420e8c0
 PKG_DESCR:=		netfilter userspace logging daemon
 PKG_SECTION:=		net/firewall
 PKG_DEPENDS:=		iptables libnetfilter-conntrack libnetfilter-log libnetfilter-acct libmnl
