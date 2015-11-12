@@ -837,6 +837,7 @@ config ADK_TARGET_CPU_FLAGS
 	default "-mcpu=bf592" if ADK_CPU_BF592
 	default "-mcpu=v10" if ADK_CPU_CRIS_V10
 	default "-mcpu=v32" if ADK_CPU_CRIS_V32
+	default "-mmetac=2.1" if ADK_CPU_METAG
 	default "-mcpu=v7.10.d" if ADK_CPU_MICROBLAZE
 	default "-m2" if ADK_CPU_SH2
 	default "-m2a" if ADK_CPU_SH2A
