@@ -1,0 +1,11 @@
+--- check-0.10.0.orig/check_stdint.h	2015-08-02 21:32:21.000000000 +0200
++++ check-0.10.0/check_stdint.h	2015-11-12 04:28:52.652334615 +0100
+@@ -2,7 +2,7 @@
+ #define _CHECK_CHECK_STDINT_H 1
+ #ifndef _GENERATED_STDINT_H
+ #define _GENERATED_STDINT_H "check 0.10.0"
+-/* generated using gnu compiler gcc (Ubuntu/Linaro 4.6.3-1ubuntu5) 4.6.3 */
++/* generated using gnu compiler mips64el-openadk-linux-uclibcabi64-gcc (GCC) 4.9.3 */
+ #define _STDINT_HAVE_STDINT_H 1
+ #include <stdint.h>
+ #endif

@@ -1,0 +1,11 @@
+--- check-0.10.0.orig/Makefile.in	2015-08-02 21:31:55.000000000 +0200
++++ check-0.10.0/Makefile.in	2015-11-12 04:31:11.583130094 +0100
+@@ -292,7 +292,7 @@ target_alias = @target_alias@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-SUBDIRS = lib src doc . checkmk tests
++SUBDIRS = lib src doc . checkmk
+ AM_MAKEINFOFLAGS = -I$(top_srcdir)/doc/example
+ CLEANFILES = *~\
+ 	$(PACKAGE)-$(VERSION).tar.gz\
