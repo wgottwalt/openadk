@@ -20,6 +20,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,P5_DBD_SQLITE,p5-dbd-sqlite,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CFLAGS:=		$(filter-out -ffast-math,$(TARGET_CFLAGS))
+
 include $(ADK_TOPDIR)/mk/perl.mk
 
 CONFIG_STYLE:=		perl
