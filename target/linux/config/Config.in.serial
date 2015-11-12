@@ -37,6 +37,12 @@ config ADK_KERNEL_SERIAL_SH_SCI_CONSOLE
 config ADK_KERNEL_SERIAL_AMBA_PL011_CONSOLE
 	bool
 
+config ADK_KERNEL_SERIAL_SUNCORE
+	bool
+
+config ADK_KERNEL_SERIAL_SUNSU_CONSOLE
+	bool
+
 config ADK_KERNEL_DA_CONSOLE
 	bool
 
@@ -83,6 +89,16 @@ config ADK_KERNEL_DA_TTY
 	default n
 	help
 	  Serial driver for Qemu METAG Emulation.
+
+config ADK_KERNEL_SERIAL_SUNSU
+	bool "Sun Sparc64 serial driver"
+	select ADK_KERNEL_SERIAL_SUNSU_CONSOLE
+	select ADK_KERNEL_SERIAL_SUNCORE
+	depends on ADK_TARGET_SYSTEM_QEMU_SPARC64
+	default y if ADK_TARGET_SYSTEM_QEMU_SPARC64
+	default n
+	help
+	  Serial driver for Sun SPARC64.
 
 config ADK_KERNEL_SERIAL_ETRAXFS
 	bool "ETRAXFS serial driver"
