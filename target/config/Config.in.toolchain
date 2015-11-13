@@ -4,7 +4,7 @@
 choice
 prompt "Iconv implementation"
 bool
-default ADK_TARGET_LIBC_ICONV if ADK_TARGET_ARCH_H8300
+default ADK_TARGET_WITHOUT_ICONV if ADK_TARGET_WITHOUT_MMU
 default ADK_TARGET_LIBICONV_TINY if ADK_TARGET_LIB_UCLIBC_NG
 
 config ADK_TARGET_LIBC_ICONV
@@ -18,8 +18,10 @@ config ADK_TARGET_LIBICONV_TINY
 	prompt "Use tiny libiconv package"
 	select ADK_PACKAGE_LIBICONV_TINY
 
-endchoice
+config ADK_TARGET_WITHOUT_ICONV
+	prompt "Do not build any iconv code"
 
+endchoice
 
 config ADK_TARGET_CFLAGS_OPT
 	string
