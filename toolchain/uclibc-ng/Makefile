@@ -196,14 +196,6 @@ ifeq ($(ADK_CPU_CRIS_V10),y)
 endif
 endif
 
-# mips
-ifeq ($(ADK_TARGET_ARCH_MIPS),y)
-ifeq ($(ADK_CPU_MIPS32R2),y)
-	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS32 \).*/# \1 is not set/' ${WRKBUILD}/.config
-	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS32R2\).*/\1=y/' ${WRKBUILD}/.config
-endif
-endif
-
 # sh
 ifeq ($(ADK_TARGET_ARCH_SH),y)
 ifeq ($(ADK_CPU_SH4A),y)
@@ -266,8 +258,6 @@ endif
 
 # mips64
 ifeq ($(ADK_TARGET_ARCH_MIPS64),y)
-	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS64\).*/\1=y/' ${WRKBUILD}/.config
-	$(SED) 's/.*\(CONFIG_MIPS_ISA_MIPS32\).*/# \1 is not set/' ${WRKBUILD}/.config
 ifeq ($(ADK_TARGET_ABI_N64),y)
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_MIPS_O32_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
