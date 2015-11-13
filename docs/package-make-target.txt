@@ -47,6 +47,8 @@ Additionally, there are some other useful make targets:
 
 | +clean+           | Remove the whole package build directory
 
-| +host-package+    | Build and install the host binaries and libraries
+| +hostclean+       | Remove the whole hostpackage build directory
+
+| +hostpackage+    | Build and install the host binaries and libraries
 
 |===================================================
