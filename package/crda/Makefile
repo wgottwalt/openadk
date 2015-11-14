@@ -14,8 +14,6 @@ PKG_BUILDDEP:=		libnl
 PKG_URL:=		http://wireless.kernel.org/en/developers/Regulatory
 PKG_SITES:=		http://linuxwireless.org/download/crda/
 
-PKG_CFLINE_CRDA:=	depends on ADK_BROKEN
-
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 PKG_FLAVOURS_CRDA:=	WITH_UDEV
@@ -41,7 +39,7 @@ $(eval $(call PKG_template,CRDA,crda,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS
 CONFIG_STYLE:=		manual
 ALL_TARGET:=		all_noverify
 
-ifneq ($(ADK_PACKAGE_CRDA_WITH_OPENSSL),)
+ifneq ($(ADK_PACKAGE_CRDA_WITH_OPENSSL)$(ADK_PACKAGE_CRDA_WITH_LIBRESSL),)
 XAKE_FLAGS+=		USE_OPENSSL=1
 endif
 
