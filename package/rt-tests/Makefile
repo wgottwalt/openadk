@@ -7,7 +7,7 @@ PKG_NAME:=		rt-tests
 PKG_VERSION:=		3fed00ff8d2c0cdbc5ba078cbd60ce3cfcee615f
 PKG_RELEASE:=		1
 PKG_DESCR:=		realtime test apps
-PKG_DEPENDS:=		libpthread librt
+PKG_NEEDS:=		threads rt
 PKG_SECTION:=		app/debug
 PKG_SITES:=		git://git.kernel.org/pub/scm/linux/kernel/git/clrkwllms/rt-tests
 

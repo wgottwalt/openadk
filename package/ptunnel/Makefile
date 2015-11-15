@@ -9,8 +9,9 @@ PKG_RELEASE:=		2
 PKG_HASH:=		9f19f05f772cd7caba52a0f0adf9fd93d5fab8f6c50fc7fada0505294bd0aac3
 PKG_DESCR:=		tunnel tcp connections over icmp packets
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		libpcap libpthread
+PKG_DEPENDS:=		libpcap
 PKG_BUILDDEP:=		libpcap
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.cti.ecp.fr/~beauxir5/ptunnel/
 PKG_SITES:=		http://www.cti.ecp.fr/~beauxir5/ptunnel/
 

@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		6d1e2487777114ba8a73c543f355cacfa2055646724000fc195ac9e64c843744
 PKG_DESCR:=		mp3 console player
 PKG_SECTION:=		mm/audio
-PKG_DEPENDS:=		libpthread librt alsa-lib
+PKG_DEPENDS:=		alsa-lib
 PKG_BUILDDEP:=		alsa-lib
+PKG_NEEDS:=		threads rt
 PKG_URL:=		http://www.mpg123.de/
 PKG_SITES:=		http://www.mpg123.de/download/
 

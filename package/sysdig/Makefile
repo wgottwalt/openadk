@@ -8,8 +8,9 @@ PKG_VERSION:=		d7f05fc973080f5471af596cbcc8e2b2efc9e934
 PKG_RELEASE:=		1
 PKG_DESCR:=		system troubleshooting tool
 PKG_SECTION:=		app/debug
-PKG_DEPENDS:=		libstdcxx zlib jsoncpp luajit
+PKG_DEPENDS:=		zlib jsoncpp luajit
 PKG_BUILDDEP:=		cmake-host zlib jsoncpp luajit
+PKG_NEEDS:=		c++
 PKG_URL:=		http://www.sysdig.org/
 PKG_SITES:=		https://github.com/draios/sysdig.git
 

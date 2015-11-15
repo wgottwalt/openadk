@@ -9,10 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		b92df3f367108219e2fffccd463bf49d75cb8ab3ceaa52e9789f85eace066912
 PKG_DESCR:=		syslog daemon
 PKG_SECTION:=		sys/misc
-PKG_BUILDDEP:=		libestr liblogging json-c util-linux zlib
-PKG_BUILDDEP+=		ncurses
-PKG_DEPENDS:=		libestr liblogging json-c libuuid zlib
-PKG_DEPENDS+=		libpthread librt libncurses
+PKG_BUILDDEP:=		libestr liblogging json-c util-linux zlib ncurses
+PKG_DEPENDS:=		libestr liblogging json-c libuuid zlib libncurses
+PKG_NEEDS:=		threads rt
 PKG_URL:=		http://www.rsyslog.com/
 PKG_SITES:=		http://www.rsyslog.com/files/download/rsyslog/
 

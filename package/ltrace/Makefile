@@ -8,8 +8,9 @@ PKG_VERSION:=		c18a46eff706e956c4dc755144d752dc163a1145
 PKG_RELEASE:=		1
 PKG_DESCR:=		intercepts and records dynamic library calls 
 PKG_SECTION:=		app/debug
-PKG_DEPENDS:=		libelf libstdcxx
+PKG_DEPENDS:=		libelf
 PKG_BUILDDEP:=		libelf
+PKG_NEEDS:=		c++
 PKG_URL:=		http://ltrace.org/
 PKG_SITES:=		git://git.debian.org/git/collab-maint/ltrace.git
 

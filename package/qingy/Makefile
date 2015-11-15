@@ -9,8 +9,8 @@ PKG_RELEASE:=		3
 PKG_HASH:=		de4b4b398d5ba81ab2544729864676a04ddc6ae818b357ee09a8770293740cd3
 PKG_DESCR:=		directfb getty replacement
 PKG_SECTION:=		sys/misc
-PKG_DEPENDS:=		directfb libncurses librt libpthread
-PKG_DEPENDS+=		libstdcxx
+PKG_DEPENDS:=		directfb libncurses
+PKG_NEEDS:=		threads rt c++
 PKG_BUILDDEP:=		DirectFB ncurses
 PKG_URL:=		http://qingy.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=qingy/}

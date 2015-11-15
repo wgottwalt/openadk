@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		cf52e2e621e60997269663fa4bc06253191fa2a41dc9b08c8c911435b3ebcca9
 PKG_DESCR:=		php language interpreter
 PKG_SECTION:=		dev/lang
-PKG_DEPENDS:=		libpthread librt
+PKG_NEEDS:=		threads rt
 PHP_URL:=		http://www.php.net/
 PKG_SITES:=		http://de.php.net/distributions/
 

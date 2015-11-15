@@ -10,7 +10,8 @@ PKG_HASH:=		23cca1239990c818d8f6da118320c4979aadf5386deda691b1b7c2c96b9df3d5
 PKG_DESCR:=		powerful http reverse proxy and webserver
 PKG_SECTION:=		net/http
 PKG_BUILDDEP:=		pcre zlib
-PKG_DEPENDS:=		libpcre libpthread zlib
+PKG_DEPENDS:=		libpcre zlib
+PKG_NEEDS:=		threads
 PKG_URL:=		http://nginx.org/
 PKG_SITES:=		http://nginx.org/download/
 

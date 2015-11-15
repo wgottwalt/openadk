@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		a0d3f2a9689594220220d32c3cd674056b91dbf7c6c352efe1ffb72d65c66f76
 PKG_DESCR:=		simple window manager
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		xorg-server libstdcxx
+PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
+PKG_NEEDS:=		c++
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
 

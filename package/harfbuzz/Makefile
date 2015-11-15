@@ -10,9 +10,10 @@ PKG_HASH:=		f616a7fbdc78a627043f9029000bf08c0c71df59cde4143fc92a014f6a993b26
 PKG_DESCR:=		opentype text shaping engine
 PKG_SECTION:=		libs/fonts
 PKG_SITES:=		http://www.freedesktop.org/software/harfbuzz/release/
-PKG_DEPENDS:=		libstdcxx cairo icu4c
-PKG_BUILDDEP:=		libstdcxx cairo icu4c
+PKG_DEPENDS:=		cairo icu4c
+PKG_BUILDDEP:=		cairo icu4c
 HOST_BUILDDEP:=		cairo-host icu4c-host
+PKG_NEEDS:=		c++
 PKG_OPTS:=		dev
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2

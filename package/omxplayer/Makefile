@@ -9,9 +9,9 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		video player for raspberry pi
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		libffmpeg bcm28xx-vc-libs bcm28xx-vc-gl-libs
-PKG_DEPENDS+=		librt zlib libpthread libstdcxx libdbus
-PKG_DEPENDS+=		boost libfreetype libpcre
+PKG_DEPENDS+=		zlib libdbus boost libfreetype libpcre
 PKG_BUILDDEP:=		ffmpeg boost bcm28xx-vc freetype pcre dbus
+PKG_NEEDS:=		threads rt c++
 PKG_URL:=		https://github.com/popcornmix/omxplayer
 PKG_SITES:=		https://github.com/popcornmix/omxplayer.git
 

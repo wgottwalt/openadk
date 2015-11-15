@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		bc0a2c1ee613b68f37021beaf4e64a9252f91ed06f998c1e897897c354ce7e84
 PKG_DESCR:=		console torrent application
 PKG_SECTION:=		app/p2p
-PKG_DEPENDS:=		libncurses libtorrent libcurl libstdcxx
+PKG_DEPENDS:=		libncurses libtorrent libcurl
 PKG_BUILDDEP:=		ncurses libtorrent curl
+PKG_NEEDS:=		c++
 PKG_URL:=		http://libtorrent.rakshasa.no/
 PKG_SITES:=		http://distfiles.openadk.org/
 

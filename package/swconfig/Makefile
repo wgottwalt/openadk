@@ -8,8 +8,9 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		switch config tool
 PKG_SECTION:=		net/route
-PKG_DEPENDS:=		libnl libpthread
+PKG_DEPENDS:=		libnl
 PKG_BUILDDEP:=		libnl
+PKG_NEEDS:=		threads
 
 PKG_SYSTEM_DEPENDS:=	mikrotik-rb4xx
 

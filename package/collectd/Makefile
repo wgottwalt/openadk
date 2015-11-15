@@ -10,7 +10,8 @@ PKG_HASH:=		853680936893df00bfc2be58f61ab9181fecb1cf45fc5cddcb7d25da98855f65
 PKG_DESCR:=		system statistics collection daemon
 PKG_SECTION:=		sys/misc
 PKG_BUILDDEP:=		libtool
-PKG_DEPENDS:=		libpthread libltdl
+PKG_DEPENDS:=		libltdl
+PKG_NEEDS:=		threads
 PKG_URL:=		http://collectd.org/
 PKG_SITES:=		http://collectd.org/files/
 

@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		81c89e271ae112313e68655ab30d227bc38fe7841ffbff0f1860b12a9d7696ea
 PKG_DESCR:=		interface daemon for gps receivers
 PKG_SECTION:=		sys/hw
-PKG_DEPENDS:=		libpthread
 PKG_BUILDDEP:=		scons-host ncurses
+PKG_NEEDS:=		threads
 PKG_URL:=		http://catb.org/gpsd/
 PKG_SITES:=		http://download-mirror.savannah.gnu.org/releases/gpsd/
 

@@ -9,7 +9,7 @@ PKG_RELEASE:=		2
 PKG_HASH:=		d45e28deaa596b2d7457edefe916b4761adbd53d543180f4ff30f9c310a5f821
 PKG_DESCR:=		session initiation protocol implementation
 PKG_SECTION:=		libs/net
-PKG_DEPENDS:=		libpthread
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.gnu.org/software/osip
 PKG_SITES:=		${MASTER_SITE_GNU:=osip/}
 PKG_OPTS:=		dev

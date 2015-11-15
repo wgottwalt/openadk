@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		bb5835d0caa8c4b31679d6fd6a1a090b71bdf70950db3b1d0cea9cf9cb7e2a7b
 PKG_DESCR:=		proxy dns server
 PKG_SECTION:=		net/dns
-PKG_DEPENDS:=		libpthread
+PKG_NEEDS:=		threads
 PKG_URL:=		http://members.home.nl/p.a.rombouts/pdnsd/index.html
 PKG_SITES:=		http://members.home.nl/p.a.rombouts/pdnsd/releases/
 

@@ -9,7 +9,7 @@ PKG_RELEASE:=		2
 PKG_HASH:=		38e09bd8b39abc59e6b9a9bb7a78f7eac2b02a92f4de1f3a6dc24e84dfedae0d
 PKG_DESCR:=		utility for system services monitoring
 PKG_SECTION:=		sys/misc
-PKG_DEPENDS:=		libpthread
+PKG_NEEDS:=		threads
 PKG_URL:=		http://mmonit.com/monit/
 PKG_SITES:=		http://www.tildeslash.com/monit/dist/
 

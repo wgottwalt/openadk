@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		dc0a00d1ea367e5f3e2baa0c1a0f8330c217f1d8c9d6e380757b945fb3bf6c61
 PKG_DESCR:=		x11 driver for ati vga chip
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server libdrm mesa libudev libstdcxx
+PKG_DEPENDS:=		xorg-server libdrm mesa libudev
 PKG_BUILDDEP:=		xorg-server libdrm xf86driproto mesa eudev
+PKG_NEEDS:=		c++
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

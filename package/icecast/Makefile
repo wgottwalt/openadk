@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		1b1d06f5f83c9a983cd28cc78aa90e4038f933511b3d20d7fd2cfc116645c36d
 PKG_DESCR:=		streaming media server
 PKG_SECTION:=		mm/audio
-PKG_DEPENDS:=		libcurl libvorbis libpthread libxml2 libxslt
+PKG_DEPENDS:=		libcurl libvorbis libxml2 libxslt
 PKG_BUILDDEP:=		curl libvorbis libxml2 libxslt
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.icecast.org/
 PKG_SITES:=		http://downloads.us.xiph.org/releases/icecast/
 

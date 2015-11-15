@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		c643c7123708aadcd29287dda7b5ce7c910f75b02956a8fc4fe65ad2ea767a5f
 PKG_DESCR:=		mqtt broker
 PKG_SECTION:=		net/misc
-PKG_DEPENDS:=		c-ares librt libpthreads
+PKG_DEPENDS:=		c-ares
 PKG_BUILDDEP:=		cmake-host c-ares
+PKG_NEEDS:=		threads rt
 PKG_URL:=		http://mosquitto.org
 PKG_SITES:=		http://mosquitto.org/files/source/
 

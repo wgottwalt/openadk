@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		7c882c9064f58edf6cb08ef889b6e1d9e7bf6be0eb0002c052d5b4cb6a9bf74d
 PKG_DESCR:=		x11 driver for cirrus vga chips
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server libstdcxx
+PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
+PKG_NEEDS:=		c++
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SYSTEM_DEPENDS:=	qemu-x86 qemu-x86_64

@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		49e545951ea5fddc0d9b3ed3bf60e9a588a9c09401cc93ac082e064530bc0f81
 PKG_DESCR:=		x11 driver for framebuffer devices
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server libstdcxx
+PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
+PKG_NEEDS:=		c++
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

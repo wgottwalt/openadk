@@ -1,7 +1,7 @@
 /*
  * pkgmaker - create package meta-data for OpenADK buildsystem
  *
- * Copyright (C) 2010-2014 Waldemar Brodkorb <wbx@openadk.org>
+ * Copyright (C) 2010-2015 Waldemar Brodkorb <wbx@openadk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -14,7 +14,7 @@
  * GNU General Public License for more details.
  *
  * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
 #include <ctype.h>
@@ -327,7 +327,7 @@ int main() {
 	char dir[MAXPATH];
 	char variable[2*MAXVAR];
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
-	char *pkg_name, *pkg_depends, *pkg_depends_system, *pkg_depends_libc, *pkg_section, *pkg_descr, *pkg_url;
+	char *pkg_name, *pkg_depends, *pkg_needs, *pkg_depends_system, *pkg_depends_libc, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt;
 	char *pkgname, *sysname, *pkg_debug, *pkg_bb;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
@@ -342,6 +342,7 @@ int main() {
 	pkg_section = NULL;
 	pkg_url = NULL;
 	pkg_depends = NULL;
+	pkg_needs = NULL;
 	pkg_depends_system = NULL;
 	pkg_depends_libc = NULL;
 	pkg_opts = NULL;
@@ -566,6 +567,8 @@ int main() {
 						continue;
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
 						continue;
+					if ((parse_var(buf, "PKG_NEEDS", pkg_needs, &pkg_needs)) == 0)
+						continue;
 					if ((parse_var_with_system(buf, "PKG_DEPENDS_", pkg_depends_system, &pkg_depends_system, &sysname, 12)) == 0)
 						continue;
 					if ((parse_var_with_system(buf, "PKG_DEPENDS_", pkg_depends_libc, &pkg_depends_libc, &sysname, 12)) == 0)
@@ -626,6 +629,8 @@ int main() {
 				fprintf(stderr, "Package description is %s\n", pkg_descr);
 			if (pkg_depends != NULL)
 				fprintf(stderr, "Package dependencies are %s\n", pkg_depends);
+			if (pkg_needs != NULL)
+				fprintf(stderr, "Package needing %s\n", pkg_needs);
 			if (pkg_depends_system != NULL)
 				fprintf(stderr, "Package systemspecific dependencies are %s\n", pkg_depends_system);
 			if (pkg_subpkgs != NULL)
@@ -756,7 +761,7 @@ int main() {
 					fprintf(cfg, "\tprompt \"%s. %s\"\n", pseudo_name, pkg_descr);
 				}	
 				
-				fprintf(cfg, "\tboolean\n");
+				fprintf(cfg, "\tbool\n");
 				free(pseudo_name);
 
 				/* print custom cf line */
@@ -878,6 +883,22 @@ int main() {
 					fprintf(cfg, "\n");
 					free(pkg_helper);
 					pkg_helper = NULL;
+				}
+
+				/* create needs dependency information */
+				if (pkg_needs != NULL) {
+					token = strtok(pkg_needs, " ");
+					while (token != NULL) {
+						if (strncmp(token, "threads", 7) == 0)
+							fprintf(cfg, "\tselect ADK_PACKAGE_LIBPTHREAD\n");
+						if (strncmp(token, "rt", 2) == 0)
+							fprintf(cfg, "\tselect ADK_PACKAGE_LIBRT\n");
+						if (strncmp(token, "c++", 3) == 0)
+							fprintf(cfg, "\tselect ADK_PACKAGE_LIBSTDCXX\n");
+						token = strtok(NULL, " ");
+					}
+					free(pkg_needs);
+					pkg_needs = NULL;
 				}
 
 				/* create package dependency information */

@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		df2df04faf5bdb4980cbdfd5516a47898fc47ca1ebc2c628aa48305b20a09dad
 PKG_DESCR:=		session initiation protocol proxy
 PKG_SECTION:=		net/voip
-PKG_DEPENDS:=		libosip2 libpthread
+PKG_DEPENDS:=		libosip2
 PKG_BUILDDEP:=		libosip2
+PKG_NEEDS:=		threads
 PKG_URL:=		http://siproxd.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=siproxd/}
 

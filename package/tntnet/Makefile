@@ -9,8 +9,9 @@ PKG_RELEASE:=		2
 PKG_HASH:=		c83170d08ef04c5868051e1c28c74b9562fe71e9e8263828e755ad5bd3547521
 PKG_DESCR:=		small c++ application server
 PKG_SECTION:=		net/http
-PKG_DEPENDS:=		cxxtools zlib libpthread libstdcxx
+PKG_DEPENDS:=		cxxtools zlib
 PKG_BUILDDEP:=		cxxtools zlib
+PKG_NEEDS:=		threads c++
 PKG_URL:=		http://www.tntnet.org/
 PKG_SITES:=		http://www.tntnet.org/download/
 

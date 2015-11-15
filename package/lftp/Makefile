@@ -9,9 +9,10 @@ PKG_RELEASE:=		1
 PKG_HASH:=		1e61d5c94b06c333309185e86cfce0729e45e3f69f7496c58d61093b135c8bb9
 PKG_DESCR:=		ftp and http client
 PKG_SECTION:=		net/http
-PKG_DEPENDS:=		libncurses libexpat libstdcxx
+PKG_DEPENDS:=		libncurses libexpat
 PKG_DEPENDS+=		zlib libreadline
 PKG_BUILDDEP:=		ncurses expat readline zlib
+PKG_NEEDS:=		c++
 PKG_URL:=		http://lftp.yar.ru/
 PKG_SITES:=		http://lftp.yar.ru/ftp/
 

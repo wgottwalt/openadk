@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		5164aaacd8e82501d84a2187af194e8285a5a5b76e200447eb58d4dd78d1a34b
 PKG_DESCR:=		tools for setting up wifi cards via netlink
 PKG_SECTION:=		net/wifi
-PKG_DEPENDS:=		libnl libpthread
+PKG_DEPENDS:=		libnl
 PKG_BUILDDEP:=		libnl
+PKG_NEEDS:=		threads
 PKG_URL:=		http://wireless.kernel.org/en/users/Documentation/iw
 PKG_SITES:=		https://www.kernel.org/pub/software/network/iw/
 

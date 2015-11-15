@@ -9,8 +9,7 @@ PKG_RELEASE:=		2
 PKG_HASH:=		c2bb01b5f4bff5fa768700e98ead4a79dfd556096c9f3f0401849da7ab80fbef
 PKG_DESCR:=		logging framework for c++
 PKG_SECTION:=		libs/misc
-PKG_DEPENDS:=		libpthread
-PKG_BUILDDEP:=		libpthread
+PKG_NEEDS:=		threads
 PKG_URL:=		http://log4cplus.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=log4cplus/log4cplus-stable/${PKG_VERSION}/}
 PKG_OPTS:=		dev

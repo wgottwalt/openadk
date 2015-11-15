@@ -10,7 +10,8 @@ PKG_HASH:=		ea7e22674a66afcc7174779d0f803c1f25b42271973b4f75fab293b8d7db11fc
 PKG_DESCR:=		traffic analyzing tool
 PKG_SECTION:=		net/perf
 PKG_BUILDDEP:=		libpcap ncurses
-PKG_DEPENDS:=		libpcap libncurses libpthread
+PKG_DEPENDS:=		libpcap libncurses
+PKG_NEEDS:=		threads
 PKG_SITES:=		http://distfiles.openadk.org/
 PKG_NOPARALLEL:=	1
 

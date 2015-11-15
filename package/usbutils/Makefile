@@ -9,8 +9,9 @@ PKG_RELEASE:=		2
 PKG_HASH:=		44741af0bae9d402a0ef160a29b2fa700bb656ab5e0a4b3343d51249c2a44c8c
 PKG_DESCR:=		program to list usb devices
 PKG_SECTION:=		sys/hw
-PKG_DEPENDS:=		libusb libusb-compat libpthread librt libudev udev
+PKG_DEPENDS:=		libusb libusb-compat libudev udev
 PKG_BUILDDEP:=		libusb libusb-compat eudev
+PKG_NEEDS:=		threads rt
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/usb/usbutils/
 PKG_BB:=		1
 

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		d63643c95d4149a3d71112da5892f459433456bf0279bfa304625f109178defc
 PKG_DESCR:=		proxy arp daemon
 PKG_SECTION:=		net/misc
-PKG_DEPENDS:=		libpthread
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.hazard.maks.net/parprouted/
 PKG_SITES:=		http://www.hazard.maks.net/parprouted/
 

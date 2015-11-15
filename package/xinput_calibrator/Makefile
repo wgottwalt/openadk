@@ -9,7 +9,7 @@ PKG_RELEASE:=		2
 PKG_HASH:=		baa4ddca49ec94c27ba4c715bfa26692fec1132103e927213c3169e475d3d971
 PKG_DESCR:=		input calibration utility
 PKG_SECTION:=		x11/utils
-PKG_DEPENDS:=		libstdcxx
+PKG_NEEDS:=		c++
 PKG_URL:=		http://www.freedesktop.org/wiki/Software/xinput_calibrator/
 PKG_SITES:=		http://github.com/downloads/tias/xinput_calibrator/
 

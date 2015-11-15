@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		75270ed72bc5895a64a1d7392bf45a622204192371c3965bd3dd978dc088956b
 PKG_DESCR:=		terminal emulator with unicode support
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libx11 fontconfig libxft libxml2 gdk-pixbuf libstdcxx
+PKG_DEPENDS:=		libx11 fontconfig libxft libxml2 gdk-pixbuf
 PKG_BUILDDEP:=		libX11 fontconfig libXft libxml2 gdk-pixbuf
+PKG_NEEDS:=		c++
 PKG_URL:=		http://software.schmorp.de/pkg/rxvt-unicode.html
 PKG_SITES:=		http://dist.schmorp.de/rxvt-unicode/
 

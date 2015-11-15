@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		636d4d7ef8c67ae6ee8d8e1635f5115700eecb9fa4c208afaee30238db527c2c
 PKG_DESCR:=		wireless network detector, sniffer, and intrusion detection system
 PKG_SECTION:=		net/wifi
-PKG_DEPENDS:=		libpcap libncurses libpthread
+PKG_DEPENDS:=		libpcap libncurses
 PKG_BUILDDEP:=		libpcap ncurses
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.kismetwireless.net/
 PKG_SITES:=		http://www.kismetwireless.net/code/
 

@@ -11,6 +11,7 @@ PKG_DESCR:=		client-side url transfer tool
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libcurl
 PKG_BUILDDEP:=		zlib
+PKG_NEEDS:=		threads
 PKG_URL:=		http://curl.haxx.se/
 PKG_SITES:=		http://curl.haxx.se/download/
 PKG_LIBNAME:=		libcurl
@@ -21,7 +22,7 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_SUBPKGS:=		CURL LIBCURL
 PKGSD_LIBCURL:=		client-side url transfer library
 PKGSC_LIBCURL:=		libs/net
-PKGSS_LIBCURL:=		zlib libpthread
+PKGSS_LIBCURL:=		zlib
 
 PKG_FLAVOURS_CURL:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable ipv6 support

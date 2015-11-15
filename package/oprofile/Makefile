@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		847110b4ecdcf8c8353cd38f94c1b704aad4bfcd9453e38b88d112cfb7e3c45a
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		app/debug
-PKG_DEPENDS:=		libpopt libbfd libstdcxx
+PKG_DEPENDS:=		libpopt libbfd
 PKG_BUILDDEP:=		popt binutils gcc
+PKG_NEEDS:=		c++
 PKG_URL:=		http://oprofile.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
 

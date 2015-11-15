@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		1888f2733f8dccf4ab24bc56ba62eeac41c231b98365027438702d6c55216576
 PKG_DESCR:=		x11 driver for intel vga chips
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server libdrm mesa libstdcxx libudev
+PKG_DEPENDS:=		xorg-server libdrm mesa libudev
 PKG_BUILDDEP:=		xorg-server libdrm xf86driproto mesa eudev
+PKG_NEEDS:=		c++
 PKG_SITES:=		$(MASTER_SITE_XORG)
 
 PKG_SYSTEM_DEPENDS:=	ibm-x40

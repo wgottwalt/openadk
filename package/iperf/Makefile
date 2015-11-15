@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		636b4eff0431cea80667ea85a67ce4c68698760a9837e1e9d13096d20362265b
 PKG_DESCR:=		internet protocol bandwidth measuring tool
 PKG_SECTION:=		net/perf
-PKG_DEPENDS:=		libpthread
+PKG_NEEDS:=		threads c++
 PKG_URL:=		http://sourceforge.net/projects/iperf
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=iperf/}
 PKG_CXX:=		IPERF

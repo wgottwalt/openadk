@@ -44,9 +44,13 @@ information is:
   installed before the configuration of the current package starts.
 
 * +PKG_DEPENDS+ optional, lists the runtime dependencies that are required to
-  run the software package on the target. It conatins a list of package names,
+  run the software package on the target. It contains a list of package names,
   which might be different to the package directory name. See what is used
   in PKG_template, to find out the package name used here.
+
+* +PKG_NEEDS+ optional, lists the features that are required to build or
+  run the software package on the target. It contains a list of keywords.
+  Supported are +threads+ +rt+ +c+++
 
 * +PKG_NOPARALLEL+ optional, may be set to 1, to disable parallel building of the
   package via make -jn, n=4 is default, but can be changed in +Global Settings+ in the

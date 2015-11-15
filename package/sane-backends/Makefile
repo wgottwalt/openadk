@@ -9,8 +9,8 @@ PKG_RELEASE:=		3
 PKG_HASH:=		9f84a16800497f0b79a278531bb1a0f438de6ce8cf509fefc65a252e29f90c54
 PKG_DESCR:=		scanner access now easy
 PKG_SECTION:=		sys/misc
-PKG_DEPENDS:=		libpthread
-PKG_BUILDDEP:=		libpthread libusb libusb-compat
+PKG_BUILDDEP:=		libusb libusb-compat
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.sane-project.org/
 PKG_SITES:=		ftp://ftp2.sane-project.org/pub/sane/${PKG_NAME}-${PKG_VERSION}/
 

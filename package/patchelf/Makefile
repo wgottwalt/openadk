@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		14af06a2da688d577d64ff8dac065bb8903bbffbe01d30c62df7af9bf4ce72fe
 PKG_DESCR:=		elf manipulation tool
 PKG_SECTION:=		dev/tools
-PKG_DEPENDS:=		libstdcxx
+PKG_NEEDS:=		c++
 PKG_URL:=		http://nixos.org/releases/patchelf
 PKG_SITES:=		http://nixos.org/releases/patchelf/patchelf-0.8/
 

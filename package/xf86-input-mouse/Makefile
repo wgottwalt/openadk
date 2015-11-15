@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		e348aff7068affbc53620cc6ee67821064b32ace681c7c200c6ad3e74719b8da
 PKG_DESCR:=		x11 driver for mouse
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server libstdcxx
+PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
+PKG_NEEDS:=		c++
 PKG_SITES:=		$(MASTER_SITE_XORG)
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz

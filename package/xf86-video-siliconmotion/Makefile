@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		2c680f10fe4549db6d6699a537c2edd0ee4500379c23b1dfeac42864c7eae442
 PKG_DESCR:=		x11 driver for silicon motion vga chips
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server libstdcxx
+PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
+PKG_NEEDS:=		c++
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SYSTEM_DEPENDS:=	lemote-yeelong

@@ -9,8 +9,9 @@ PKG_RELEASE:=		6
 PKG_HASH:=		3079d3fb86af99f4c2c2907b5725e5820fdb2144d3be6002ec367bfcebc5c480
 PKG_DESCR:=		x window system initializer
 PKG_SECTION:=		x11/utils
-PKG_DEPENDS:=		xorg-server mcookie xauth xset xterm libstdcxx
+PKG_DEPENDS:=		xorg-server mcookie xauth xset xterm
 PKG_BUILDDEP:=		xorg-server
+PKG_NEEDS:=		c++
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		http://xorg.freedesktop.org/archive/individual/app/
 

@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		a803ec6ee5c48fd6a24917902f49201459baa575459f9c585b25eeda77c32da7
 PKG_DESCR:=		x11 driver for keyboard
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server libstdcxx
+PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
+PKG_NEEDS:=		c++
 PKG_SITES:=		$(MASTER_SITE_XORG)
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz

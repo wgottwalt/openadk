@@ -10,7 +10,8 @@ PKG_HASH:=		d2f2598d1300307209b7b1905cc0637d2d053c0a4701a8d44383867299578471
 PKG_DESCR:=		mail filter software
 PKG_SECTION:=		net/mail
 PKG_BUILDDEP:=		db
-PKG_DEPENDS:=		libdb libstdcxx
+PKG_DEPENDS:=		libdb
+PKG_NEEDS:=		c++
 PKG_URL:=		http://bogofilter.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bogofilter/}
 

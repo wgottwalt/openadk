@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		d032547c708307159ff5fd0df23ebd3cfa7799c31536fa0aea1820318a8e0eac
 PKG_DESCR:=		display bandwith usage on an interface
 PKG_SECTION:=		net/perf
-PKG_DEPENDS:=		libncurses libpcap libpthread
-PKG_BUILDDEP:=		libpcap libpthread ncurses
+PKG_DEPENDS:=		libncurses libpcap
+PKG_BUILDDEP:=		libpcap ncurses
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.ex-parrot.com/~pdw/iftop/
 PKG_SITES:=		http://www.ex-parrot.com/~pdw/iftop/download/
 

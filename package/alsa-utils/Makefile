@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		5160058f3e14483ced5de919dd473f93932059454530a9b7ef97dcabd6833e9b
 PKG_DESCR:=		mixer/player/record utilities
 PKG_SECTION:=		mm/audio
-PKG_DEPENDS:=		alsa-lib libpthread librt
+PKG_DEPENDS:=		alsa-lib
 PKG_BUILDDEP:=		alsa-lib
+PKG_NEEDS:=		threads rt
 PKG_URL:=		http://www.alsa-project.org/
 PKG_SITES:=		ftp://ftp.alsa-project.org/pub/utils/
 

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		f8de4a2aaadb406a2e475d18cf3b9f29e322d4e5803d8106716a01fd4e64b186
 PKG_DESCR:=		multipurpose relay
 PKG_SECTION:=		net/misc
-PKG_DEPENDS:=		libpthread
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.dest-unreach.org/socat/
 PKG_SITES:=		http://www.dest-unreach.org/socat/download/
 

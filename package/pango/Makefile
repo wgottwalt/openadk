@@ -10,9 +10,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		1320569f6c6d75d6b66172b2d28e59c56ee864ee9df202b76799c4506a214eb7
 PKG_DESCR:=		library for laying out and rendering of text
 PKG_SECTION:=		libs/fonts
-PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libXft glib cairo harfbuzz libstdcxx fontconfig
 HOST_BUILDDEP:=		cairo-host harfbuzz-host
+PKG_NEEDS:=		c++
 PKG_URL:=		http://www.pango.org/
 PKG_SITES:=		$(MASTER_SITE_GNOME:=pango/$(PKG_EXTRAVER)/)
 PKG_OPTS:=		dev

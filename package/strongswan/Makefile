@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		ddb8a2780766af8273ef532e19c45aaeceef60e6f7e3583f6474216a2fc63309
 PKG_DESCR:=		ipsec vpn software
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		libpthread
+PKG_NEEDS:=		threads
 PKG_URL:=		http://strongswan.org/index.htm
 PKG_SITES:=		http://download.strongswan.org/
 

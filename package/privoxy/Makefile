@@ -10,8 +10,9 @@ PKG_VARIANT:=		stable
 PKG_HASH:=		816e627b31caa3d9e71d0a8b83ac9ea7dcbeaaafef3c9a9c792696aa56255232
 PKG_DESCR:=		web proxy with advanced filtering capabilities
 PKG_SECTION:=		net/proxy
-PKG_DEPENDS:=		libpthread libpcre
+PKG_DEPENDS:=		libpcre
 PKG_BUILDDEP:=		pcre
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.privoxy.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=ijbswa/}
 

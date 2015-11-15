@@ -10,8 +10,8 @@ PKG_HASH:=		db1be16c1c5842ebe07b419aa7c6ef11a45603a75df2877f99635f4f8345148b
 PKG_DESCR:=		small graphical web browser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libfltk libxi libpng zlib libjpeg-turbo
-PKG_DEPENDS+=		libstdcxx libpthread
 PKG_BUILDDEP:=		fltk libXi libjpeg-turbo libpng zlib
+PKG_NEEDS:=		threads cxx
 PKG_URL:=		http://www.dillo.org/
 PKG_SITES:=		http://www.dillo.org/download/
 

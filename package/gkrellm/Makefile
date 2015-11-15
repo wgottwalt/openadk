@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		4fd7893cce76703f815f140c6d34889383c2b2a6d83470bf9486625f84da375e
 PKG_DESCR:=		krell monitors server
 PKG_SECTION:=		net/misc
-PKG_DEPENDS:=		glib libpthread
+PKG_DEPENDS:=		glib
 PKG_BUILDDEP:=		glib
+PKG_NEEDS:=		threads
 PKG_URL:=		http://members.dslextreme.com/users/billw/gkrellm/gkrellm.html
 PKG_SITES:=		http://members.dslextreme.com/users/billw/gkrellm/
 

@@ -10,7 +10,8 @@ PKG_HASH:=		fc0a6d2d1d063d5c66dffd952493d0cda256cad204f681de0f84ef85b2ad8428
 PKG_DESCR:=		secure shell implementation
 PKG_SECTION:=		net/security
 PKG_BUILDDEP:=		zlib
-PKG_DEPENDS:=		zlib libpthread
+PKG_DEPENDS:=		zlib
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.openssh.com/
 PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/
 

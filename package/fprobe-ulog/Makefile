@@ -9,7 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		53b9ccbca4469dfb0e9da91f9f0789dbf732f2adac9de18842e3c210b445f2ad
 PKG_DESCR:=		netflow probe
 PKG_SECTION:=		net/acct
-PKG_DEPENDS:=		libpcap libpthread
+PKG_DEPENDS:=		libpcap
+PKG_NEEDS:=		threads
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fprobe/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2

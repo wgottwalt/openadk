@@ -9,9 +9,10 @@ PKG_RELEASE:=		1
 PKG_HASH:=		7a5c66aa5af97a5b7af3dc49e3d2594071dafd62a14e2e9f7c9a5a86342836c6
 PKG_DESCR:=		music player daemon
 PKG_SECTION:=		mm/audio
-PKG_DEPENDS:=		glib libstdcxx libmpdclient librt boost libncurses
-PKG_FDEPENDS:=		glib libstdcxx libmpdclient librt
+PKG_DEPENDS:=		glib libmpdclient boost libncurses
 PKG_BUILDDEP:=		glib libmpdclient boost ncurses
+PKG_FDEPENDS:=		glib libmpdclient
+PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpd/0.19/
 

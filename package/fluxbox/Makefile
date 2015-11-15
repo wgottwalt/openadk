@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		fc8c75fe94c54ed5a5dd3fd4a752109f8949d6df67a48e5b11a261403c382ec0
 PKG_DESCR:=		window manager featuring tabs and an iconbar
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libstdcxx
 PKG_BUILDDEP:=		libXpm libXft
+PKG_NEEDS:=		c++
 PKG_URL:=		http://www.fluxbox.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=fluxbox/}
 

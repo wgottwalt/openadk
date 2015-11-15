@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		058dc832c096139a059e6df814080f50251a8d313c21b13364c54a1e70109122
 PKG_DESCR:=		wpa supplicant
 PKG_SECTION:=		net/wifi
-PKG_DEPENDS:=		libnl librt
+PKG_DEPENDS:=		libnl
 PKG_BUILDDEP:=		libnl
+PKG_NEEDS:=		threads rt
 PKG_URL:=		http://hostap.epitest.fi/wpa_supplicant/
 PKG_SITES:=		http://hostap.epitest.fi/releases/
 

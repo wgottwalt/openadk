@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		cd080e8d5eaabebf6808792751322bd05f2a9c8fe4377f54c7155682ef6c38d5
 PKG_DESCR:=		web and cache proxy
 PKG_SECTION:=		net/proxy
-PKG_DEPENDS:=		libpthread librt libstdcxx libltdl
+PKG_DEPENDS:=		libltdl
 PKG_BUILDDEP:=		libtool
+PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://www.squid-cache.org/
 PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.5/
 

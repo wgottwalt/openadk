@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		d392bb5825c4b6b672fc93a0268433c86dc964e1500c279dc6d0711ea6ec467a
 PKG_DESCR:=		low-level packet creation library
 PKG_SECTION:=		libs/net
-PKG_DEPENDS:=		libpcap libstdcxx
+PKG_DEPENDS:=		libpcap
 PKG_BUILDDEP:=		libpcap
+PKG_NEEDS:=		c++
 PKG_URL:=		http://sourceforge.net/projects/libnet-dev/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=libnet-dev/}
 PKG_OPTS:=		dev

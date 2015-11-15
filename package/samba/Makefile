@@ -10,8 +10,9 @@ PKG_HASH:=		9908a80d95b9e2583906ed4347a8c80b769539a2788158992fb48ea9fb4d2c82
 PKG_DESCR:=		file and print server
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		gettext-tiny util-linux popt python2 gnutls
-PKG_BUILDDEP:=		heimdal-host python2-host
-PKG_DEPENDS:=		libpthread librt libuuid libpopt libgnutls
+PKG_BUILDDEP+=		heimdal-host python2-host
+PKG_DEPENDS:=		libuuid libpopt libgnutls
+PKG_NEEDS:=		threads rt
 PKG_URL:=		http://www.samba.org/
 PKG_SITES:=		http://samba.org/samba/ftp/stable/
 

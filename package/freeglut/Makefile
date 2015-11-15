@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		dde46626a62a1cd9cf48a11951cdd592e7067c345cffe193a149dfd47aef999a
 PKG_DESCR:=		opengl utility toolkit libraries
 PKG_SECTION:=		libs/video
-PKG_DEPENDS:=		libglu libstdcxx
+PKG_DEPENDS:=		libglu
 PKG_BUILDDEP:=		glu
+PKG_NEEDS:=		c++
 PKG_URL:=		http://freeglut.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=freeglut/}
 PKG_OPTS:=		dev

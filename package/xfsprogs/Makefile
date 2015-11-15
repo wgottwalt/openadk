@@ -10,7 +10,8 @@ PKG_HASH:=		adf4980177b5c890c1ca86b9c0e3e4d69a3f95bfc01746844280c2393cf4d6be
 PKG_DESCR:=		utilities for xfs filesystems
 PKG_SECTION:=		sys/fs
 PKG_BUILDDEP:=		e2fsprogs util-linux ncurses
-PKG_DEPENDS:=		libuuid libpthread libblkid librt libncurses
+PKG_DEPENDS:=		libuuid libblkid libncurses
+PKG_NEEDS:=		threads rt
 PKG_URL:=		http://oss.sgi.com/projects/xfs
 PKG_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
 			ftp://oss.sgi.com/projects/xfs/previous/cmd_tars/

@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		43e17e901eb8cefa985480680f5d02a78d1fae01327b663a7b3459ef98d75cba
 PKG_DESCR:=		x11 driver for amd geode vga chip
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		xorg-server libstdcxx
+PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
+PKG_NEEDS:=		c++
 PKG_SITES:=		${MASTER_SITE_XORG}
 
 PKG_SYSTEM_DEPENDS:=	pcengines-alix1c

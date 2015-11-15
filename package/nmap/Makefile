@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		3f89d9053c69507fe9533c40188a6561d49607a37b1db6380aed9039d4883137
 PKG_DESCR:=		utility for network exploration or security auditing
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		libdnet libpcap libpcre libstdcxx
+PKG_DEPENDS:=		libdnet libpcap libpcre
 PKG_BUILDDEP:=		libdnet libpcap pcre
+PKG_NEEDS:=		c++
 PKG_URL:=		http://nmap.org/
 PKG_SITES:=		http://download.insecure.org/nmap/dist/
 

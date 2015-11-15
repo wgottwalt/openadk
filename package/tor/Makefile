@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		4a6c29ad89a98d7832c599d9480d6d8e55355fb3b8f4b506c5df557f15942f9c
 PKG_DESCR:=		anonymous internet communication system
 PKG_SECTION:=		net/proxy
-PKG_DEPENDS:=		libevent zlib libpthread
+PKG_DEPENDS:=		libevent zlib
 PKG_BUILDDEP:=		libevent zlib
+PKG_NEEDS:=		threads
 PKG_URL:=		https://www.torproject.org/
 PKG_SITES:=		https://www.torproject.org/dist/
 

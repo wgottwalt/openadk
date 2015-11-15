@@ -8,9 +8,9 @@ PKG_VERSION:=		8b8dfe6918ebe45ade5f3d9b68d453d7b8128d99
 PKG_RELEASE:=		1
 PKG_DESCR:=		headless squeezebox emulator
 PKG_SECTION:=		mm/audio
-PKG_DEPENDS:=		libflac alsa-lib libvorbis libmad
-PKG_DEPENDS+=		libpthread librt libfaad2
+PKG_DEPENDS:=		libflac alsa-lib libvorbis libmad libfaad2
 PKG_BUILDDEP:=		alsa-lib libmad flac libvorbis mpg123 faad2
+PKG_NEEDS:=		threads rt
 PKG_URL:=		http://code.google.com/p/squeezelite/
 PKG_SITES:=		https://code.google.com/p/squeezelite.git
 

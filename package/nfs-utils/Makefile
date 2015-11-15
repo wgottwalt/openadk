@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		5b9c72eef260b86a84619771e11bb013b99431e6b7ff0bbdc03fee90dba591f7
 PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
-PKG_DEPENDS:=		keyutils libtirpc rpcbind libdevmapper libpthread
+PKG_DEPENDS:=		keyutils libtirpc rpcbind libdevmapper
 PKG_BUILDDEP:=		keyutils libtirpc lvm
+PKG_NEEDS:=		threads
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}
 

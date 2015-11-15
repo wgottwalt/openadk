@@ -10,7 +10,8 @@ PKG_HASH:=		646e37abbc69d5c1b153e30c82ec3346d176e2b499b44281d08565ad8e00a670
 PKG_DESCR:=		fast version control system
 PKG_SECTION:=		dev/scm
 PKG_BUILDDEP:=		curl expat
-PKG_DEPENDS:=		libcurl libexpat libpthread librt
+PKG_DEPENDS:=		libcurl libexpat
+PKG_NEEDS:=		threads rt
 PKG_URL:=		http://git-scm.com/
 PKG_SITES:=		https://www.kernel.org/pub/software/scm/git/
 

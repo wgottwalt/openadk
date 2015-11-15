@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		282417b707740de13cd8f18d4cbca9ddd181cf96b444db2cad98913a5153e272
 PKG_DESCR:=		anti-virus software
 PKG_SECTION:=		sys/misc
-PKG_DEPENDS:=		libressl libxml2 zlib libpthread
+PKG_DEPENDS:=		libressl libxml2 zlib
 PKG_BUILDDEP:=		libressl libxml2 zlib
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.clamav.net/
 PKG_SITES:=		http://www.clamav.net/downloads/production/
 

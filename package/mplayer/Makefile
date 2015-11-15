@@ -10,12 +10,13 @@ PKG_HASH:=		ffe7f6f10adf2920707e8d6c04f0d3ed34c307efc6cd90ac46593ee8fba2e2b6
 PKG_DESCR:=		popular video player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		alsa-lib libjpeg-turbo libfaad2 libmad libncurses
-PKG_DEPENDS+=		libogg libpng libpthread libvorbis giflib
+PKG_DEPENDS+=		libogg libpng libvorbis giflib
 PKG_DEPENDS+=		libx11 libxau libxdmcp libxext libxv zlib
 PKG_DEPENDS+=		libxscrnsaver libtheora libxvid libvpx
 PKG_BUILDDEP:=		alsa-lib libmad libvorbis faad2 ncurses zlib
 PKG_BUILDDEP+=		libX11 libXv libpng libXext libjpeg-turbo libtheora
 PKG_BUILDDEP+=		xvidcore libvpx gettext-tiny
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://www.mplayerhq.hu/MPlayer/releases/
 

@@ -9,8 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		76428e96df0ae9dd964c7a7c74c1e9a837e2f312c39e9a357fa8178f7eff80da
 PKG_DESCR:=		java virtual machine implementation
 PKG_SECTION:=		dev/lang
-PKG_DEPENDS:=		libffi zlib libpthread librt
+PKG_DEPENDS:=		libffi zlib
 PKG_BUILDDEP:=		libffi zlib
+PKG_NEEDS:=		threads rt
 PKG_URL:=		http://jamvm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 

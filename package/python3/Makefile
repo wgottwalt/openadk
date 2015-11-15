@@ -9,9 +9,10 @@ PKG_RELEASE:=		1
 PKG_HASH:=		b5b3963533768d5fc325a4d7a6bd6f666726002d696f1d399ec06b043ea996b8
 PKG_DESCR:=		python scripting language (version 3)
 PKG_SECTION:=		dev/lang
-PKG_DEPENDS:=		libpthread libffi
+PKG_DEPENDS:=		libffi
 PKG_BUILDDEP:=		python3-host libffi 
 HOST_BUILDDEP:=		libffi-host
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://legacy.python.org/ftp/python/${PKG_VERSION}/
 

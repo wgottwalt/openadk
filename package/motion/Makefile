@@ -10,8 +10,9 @@ PKG_RELEASE:=		2
 PKG_HASH:=		ff2931b0af037da126fed3e496430944132528132e71473aae478ff2e7f78e0d
 PKG_DESCR:=		webcam motion sensing and logging
 PKG_SECTION:=		mm/video
-PKG_DEPENDS:=		libjpeg-turbo libpthread libsdl
+PKG_DEPENDS:=		libjpeg-turbo libsdl
 PKG_BUILDDEP:=		libjpeg-turbo sdl
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.lavrsen.dk/twiki/bin/view/Motion/WebHome
 PKG_SITES:=		http://distfiles.openadk.org/
 
