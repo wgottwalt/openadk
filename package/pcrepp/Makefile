@@ -11,9 +11,9 @@ PKG_DESCR:=		cpp wrapper classes for pcre
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpcre
 PKG_BUILDDEP:=		pcre
+PKG_NEEDS:=		c++
 PKG_URL:=		http://www.daemon.de/PCRE
 PKG_SITES:=		http://www.daemon.de/idisk/Apps/pcre++/
-PKG_CXX:=		PCREPP
 PKG_OPTS:=		dev
 
 DISTFILES:=		pcre++-${PKG_VERSION}.tar.gz

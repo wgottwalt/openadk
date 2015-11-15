@@ -328,7 +328,7 @@ int main() {
 	char variable[2*MAXVAR];
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
 	char *pkg_name, *pkg_depends, *pkg_needs, *pkg_depends_system, *pkg_depends_libc, *pkg_section, *pkg_descr, *pkg_url;
-	char *pkg_cxx, *pkg_subpkgs, *pkg_cfline, *pkg_dflt;
+	char *pkg_subpkgs, *pkg_cfline, *pkg_dflt;
 	char *pkgname, *sysname, *pkg_debug, *pkg_bb;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
 	char *packages, *pkg_name_u, *pkgs, *pkg_opts, *pkg_libname;
@@ -355,7 +355,6 @@ int main() {
 	pkg_system_depends = NULL;
 	pkg_host_depends = NULL;
 	pkg_libc_depends = NULL;
-	pkg_cxx = NULL;
 	pkg_dflt = NULL;
 	pkg_cfline = NULL;
 	pkgname = NULL;
@@ -560,8 +559,6 @@ int main() {
 					if ((parse_var(buf, "PKG_SECTION", NULL, &pkg_section)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_URL", NULL, &pkg_url)) == 0)
-						continue;
-					if ((parse_var(buf, "PKG_CXX", NULL, &pkg_cxx)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_BB", NULL, &pkg_bb)) == 0)
 						continue;
@@ -949,24 +946,6 @@ int main() {
 				if (pkg_url != NULL)
 					fprintf(cfg, "\t  WWW: %s\n", pkg_url);
 
-				/* handle special C++ packages */
-				if (pkg_cxx != NULL) {
-					fprintf(cfg, "\nchoice\n");
-					fprintf(cfg, "prompt \"C++ library to use\"\n");
-					fprintf(cfg, "depends on ADK_COMPILE_%s\n\n", toupperstr(pkgdirp->d_name));
-					fprintf(cfg, "default ADK_COMPILE_%s_WITH_STDCXX if ADK_TARGET_LIB_GLIBC\n", pkg_cxx);
-					fprintf(cfg, "default ADK_COMPILE_%s_WITH_UCLIBCXX if ADK_TARGET_LIB_UCLIBC_NG\n\n", pkg_cxx);
-					fprintf(cfg, "config ADK_COMPILE_%s_WITH_STDCXX\n", pkg_cxx);
-					fprintf(cfg, "\tbool \"GNU C++ library\"\n");
-					fprintf(cfg, "\tselect ADK_PACKAGE_LIBSTDCXX\n\n");
-					fprintf(cfg, "config ADK_COMPILE_%s_WITH_UCLIBCXX\n", pkg_cxx);
-					fprintf(cfg, "\tbool \"uClibc++ library\"\n");
-					fprintf(cfg, "\tselect ADK_PACKAGE_UCLIBCXX\n\n");
-					fprintf(cfg, "endchoice\n");
-					free(pkg_cxx);
-					pkg_cxx = NULL;
-				}
-
 				/* handle debug subpackages */
 				fprintf(cfg, "\nconfig ADK_PACKAGE_%s_DBG\n", toupperstr(pkg_debug));
 				fprintf(cfg, "\tbool \"add debug symbols package\"\n");
@@ -1206,7 +1185,6 @@ int main() {
 			free(pkg_system_depends);
 			free(pkg_host_depends);
 			free(pkg_libc_depends);
-			free(pkg_cxx);
 			free(pkg_dflt);
 			free(pkg_cfline);
 			free(pkg_bb);
@@ -1224,7 +1202,6 @@ int main() {
 			pkg_system_depends = NULL;
 			pkg_host_depends = NULL;
 			pkg_libc_depends = NULL;
-			pkg_cxx = NULL;
 			pkg_dflt = NULL;
 			pkg_cfline = NULL;
 			pkg_bb = NULL;

@@ -12,7 +12,6 @@ PKG_SECTION:=		net/perf
 PKG_NEEDS:=		threads c++
 PKG_URL:=		http://sourceforge.net/projects/iperf
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=iperf/}
-PKG_CXX:=		IPERF
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -20,13 +19,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,IPERF,iperf,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_COMPILE_IPERF_WITH_UCLIBCXX),y)
-TARGET_CXXFLAGS+=	-fno-builtin -fno-rtti -nostdinc++
-TARGET_LDFLAGS+=	-nodefaultlibs
-CONFIGURE_ENV+=		LIBS="-luClibc++ -lc -lm -lpthread -lgcc"
-else
 CONFIGURE_ENV+=		LIBS="-lc -lm -lpthread"
-endif
 CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes
 
 iperf-install:

@@ -65,10 +65,6 @@ information is:
      		+STAGING_TARGET_DIR/scripts+, required for automake/autoconf package
      +noremove+ do not automatically remove package files from +STAGING_TARGET_DIR+
 
-* +PKG_NEED_CXX+ optional, package need C++ compiler
-
-* +PKG_CXX+ optional, package can use either `uClibc++` or `libstdc++`
-
 The recommended way to define these variables is to use the following
 syntax:
 

@@ -11,28 +11,15 @@ PKG_DESCR:=		web content filter proxy
 PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libpcre zlib
 PKG_BUILDDEP:=		pcre zlib
+PKG_NEEDS:=		c++
 PKG_URL:=		http://dansguardian.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=dansguardian/}
-PKG_CXX:=		DANSGUARDIAN
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DANSGUARDIAN,dansguardian,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-ifeq ($(ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX),y)
-LIBRARIES:=		-nodefaultlibs -luClibc++ -lm -lc -lgcc
-ifeq ($(ADK_TARGET_USE_SSP),y)
-LIBRARIES+=		-lssp
-endif
-endif
-
-ifeq ($(ADK_COMPILE_DANSGUARDIAN_WITH_UCLIBCXX),y)
-CONFIGURE_ENV+=		CXXFLAGS="-fno-threadsafe-statics -fno-builtin -nostdinc++ \
-			-I${STAGING_TARGET_DIR}/usr/include/uClibc++" \
-			LIBS="$(LIBRARIES)"
-endif
 
 CONFIGURE_ARGS+=	--enable-orig-ip \
 			--with-proxyuser=proxy \

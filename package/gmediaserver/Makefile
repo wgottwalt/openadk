@@ -11,9 +11,9 @@ PKG_DESCR:=		media server
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		id3lib libupnp libmagic
 PKG_BUILDDEP:=		id3lib libupnp file
+PKG_NEEDS:=		c++
 PKG_URL:=		http://www.gnu.org/software/gmediaserver
 PKG_SITES:=		http://savannah.nongnu.org/download/gmediaserver/
-PKG_CXX:=		GMEDIASERVER
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -27,10 +27,6 @@ TARGET_CPPFLAGS+=	-D_GNU_SOURCE -I$(STAGING_TARGET_DIR)/usr/include/taglib
 CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -lz"
 CONFIGURE_ARGS+=	--with-id3lib="${STAGING_TARGET_DIR}/usr" \
 			--with-libupnp="${STAGING_TARGET_DIR}/usr"
-
-ifeq ($(ADK_TARGET_LIB_UCLIBCXX),y)
-CONFIGURE_ENV+=		LIBS=" -lixml -lthreadutil -lupnp -luClibc++ -lz -lc"
-endif
 
 gmediaserver-install:
 	${INSTALL_DIR} ${IDIR_GMEDIASERVER}/usr/sbin
