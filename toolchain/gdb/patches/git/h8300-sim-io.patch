@@ -1,8 +1,7 @@
-diff --git a/gdb/h8300-tdep.c b/gdb/h8300-tdep.c
-index 4567d19..ea4064c 100644
---- a/gdb/h8300-tdep.c
-+++ b/gdb/h8300-tdep.c
-@@ -1249,8 +1249,8 @@ static const unsigned char *
+diff -Nur binutils-gdb.orig/gdb/h8300-tdep.c binutils-gdb/gdb/h8300-tdep.c
+--- binutils-gdb.orig/gdb/h8300-tdep.c	2015-11-16 11:55:54.522178529 +0100
++++ binutils-gdb/gdb/h8300-tdep.c	2015-11-16 11:52:52.474025949 +0100
+@@ -1248,8 +1248,8 @@
  h8300_breakpoint_from_pc (struct gdbarch *gdbarch, CORE_ADDR *pcptr,
  			  int *lenptr)
  {
@@ -13,28 +12,27 @@ index 4567d19..ea4064c 100644
  
    *lenptr = sizeof (breakpoint);
    return breakpoint;
-diff --git a/sim/h8300/Makefile.in b/sim/h8300/Makefile.in
-index da68255..713de00 100644
---- a/sim/h8300/Makefile.in
-+++ b/sim/h8300/Makefile.in
-@@ -18,6 +18,7 @@
+diff -Nur binutils-gdb.orig/sim/h8300/Makefile.in binutils-gdb/sim/h8300/Makefile.in
+--- binutils-gdb.orig/sim/h8300/Makefile.in	2015-11-16 11:55:55.634179462 +0100
++++ binutils-gdb/sim/h8300/Makefile.in	2015-11-16 11:53:33.474060312 +0100
+@@ -17,7 +17,7 @@
+ 
  ## COMMON_PRE_CONFIG_FRAG
  
- SIM_OBJS = compile.o \
-+           io.o \
- 	   $(SIM_NEW_COMMON_OBJS) \
- 	   sim-load.o
+-SIM_OBJS = compile.o \
++SIM_OBJS = compile.o io.o \
+ 	$(SIM_NEW_COMMON_OBJS)
  
-@@ -28,3 +29,5 @@ compile.o: compile.c inst.h config.h \
+ ## COMMON_POST_CONFIG_FRAG
+@@ -27,3 +27,5 @@
  	   $(srcdir)/../../include/opcode/h8300.h \
  	   $(srcdir)/../../include/gdb/remote-sim.h \
  	   $(srcdir)/../../include/gdb/callback.h
 +
 +io.o: io.c sim-main.h
-diff --git a/sim/h8300/compile.c b/sim/h8300/compile.c
-index d084b5d..00b381e 100644
---- a/sim/h8300/compile.c
-+++ b/sim/h8300/compile.c
+diff -Nur binutils-gdb.orig/sim/h8300/compile.c binutils-gdb/sim/h8300/compile.c
+--- binutils-gdb.orig/sim/h8300/compile.c	2015-11-16 11:55:55.634179462 +0100
++++ binutils-gdb/sim/h8300/compile.c	2015-11-16 11:52:52.502025971 +0100
 @@ -41,11 +41,14 @@
  #endif
  
@@ -50,7 +48,7 @@ index d084b5d..00b381e 100644
  
  /* FIXME: Needs to live in header file.
     This header should also include the things in remote-sim.h.
-@@ -578,10 +581,8 @@ lvalue (SIM_DESC sd, int x, int rn, unsigned int *val)
+@@ -578,10 +581,8 @@
  static int
  cmdline_location()
  {
@@ -63,7 +61,7 @@ index d084b5d..00b381e 100644
    else
      return 0xff00L;
  }
-@@ -1037,12 +1038,15 @@ decode (SIM_DESC sd, int addr, unsigned char *data, decoded_inst *dst)
+@@ -1037,12 +1038,15 @@
  
  			    /* 8-bit ABS is displacement from SBR.
  			       16 and 32-bit ABS are displacement from ZERO.
@@ -81,7 +79,7 @@ index d084b5d..00b381e 100644
  			  }
  			else if ((x & MODE) == MEMIND ||
  				 (x & MODE) == VECIND)
-@@ -1253,6 +1257,39 @@ compile (SIM_DESC sd, int pc)
+@@ -1253,6 +1257,39 @@
    h8_set_cache_idx (sd, pc, idx);
  }
  
@@ -121,7 +119,7 @@ index d084b5d..00b381e 100644
  
  static unsigned char  *breg[32];
  static unsigned short *wreg[16];
-@@ -1265,33 +1302,46 @@ static unsigned int   *lreg[18];
+@@ -1265,33 +1302,46 @@
  #define GET_L_REG(X)     h8_get_reg (sd, X)
  #define SET_L_REG(X, Y)  h8_set_reg (sd, X, Y)
  
@@ -133,14 +131,20 @@ index d084b5d..00b381e 100644
 -    | (h8_get_eightbit (sd, ((X)+1) & 0xff) << 16) \
 -    | (h8_get_eightbit (sd, ((X)+2) & 0xff) <<  8) \
 -    | (h8_get_eightbit (sd, ((X)+3) & 0xff) <<  0)))
-+#define GET_MEMORY_L(X) _get_memory_l(sd, X)
- 
+-
 -#define GET_MEMORY_W(X) \
 -  ((X) < memory_size \
 -   ? ((h8_get_memory   (sd, (X)+0) << 8) \
 -    | (h8_get_memory   (sd, (X)+1) << 0)) \
 -   : ((h8_get_eightbit (sd, ((X)+0) & 0xff) << 8) \
 -    | (h8_get_eightbit (sd, ((X)+1) & 0xff) << 0)))
+-
+-
+-#define GET_MEMORY_B(X) \
+-  ((X) < memory_size ? (h8_get_memory   (sd, (X))) \
+-                     : (h8_get_eightbit (sd, (X) & 0xff)))
++#define GET_MEMORY_L(X) _get_memory_l(sd, X)
++
 +static inline unsigned long _get_memory_l(SIM_DESC sd, unsigned long addr)
 +{
 +  unsigned long result;
@@ -150,12 +154,9 @@ index d084b5d..00b381e 100644
 +  add_memlog(pc, addr, MEM_RL, result);
 +  return result;
 +}
- 
++
 +#define GET_MEMORY_W(X) _get_memory_w(sd, X)
- 
--#define GET_MEMORY_B(X) \
--  ((X) < memory_size ? (h8_get_memory   (sd, (X))) \
--                     : (h8_get_eightbit (sd, (X) & 0xff)))
++
 +static inline unsigned short _get_memory_w(SIM_DESC sd, unsigned long addr)
 +{
 +  unsigned short result;
@@ -185,7 +186,7 @@ index d084b5d..00b381e 100644
  }
  
  #define SET_MEMORY_W(X, Y) \
-@@ -1299,11 +1349,13 @@ static unsigned int   *lreg[18];
+@@ -1299,11 +1349,13 @@
     _p = ((X) < memory_size ? h8_get_memory_buf   (sd) +  (X) : \
                               h8_get_eightbit_buf (sd) + ((X) & 0xff)); \
     _p[0] = __y >> 8; _p[1] = __y; \
@@ -200,7 +201,7 @@ index d084b5d..00b381e 100644
  
  /* Simulate a memory fetch.
     Return 0 for success, -1 for failure.
-@@ -1792,15 +1844,13 @@ init_pointers (SIM_DESC sd)
+@@ -1779,15 +1831,13 @@
  	free (h8_get_memory_buf (sd));
        if (h8_get_cache_idx_buf (sd))
  	free (h8_get_cache_idx_buf (sd));
@@ -217,7 +218,7 @@ index d084b5d..00b381e 100644
  
        h8_set_mask (sd, memory_size - 1);
  
-@@ -1886,6 +1936,105 @@ case O (name, SB):				\
+@@ -1865,6 +1915,105 @@
    goto next;					\
  }
  
@@ -323,7 +324,7 @@ index d084b5d..00b381e 100644
  void
  sim_resume (SIM_DESC sd, int step, int siggnal)
  {
-@@ -1899,12 +2048,12 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+@@ -1878,12 +2027,12 @@
    int rd;
    int ea;
    int bit;
@@ -337,7 +338,7 @@ index d084b5d..00b381e 100644
  
    init_pointers (sd);
  
-@@ -1929,7 +2078,7 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+@@ -1908,7 +2057,7 @@
    /* Get Status Register (flags).  */
    GETSR (sd);
  
@@ -346,7 +347,7 @@ index d084b5d..00b381e 100644
      {
        trace = (h8_get_exr (sd) >> 7) & 1;
        intMask = h8_get_exr (sd) & 7;
-@@ -1944,6 +2093,7 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+@@ -1923,6 +2072,7 @@
        decoded_inst *code;
  
      top:
@@ -354,7 +355,7 @@ index d084b5d..00b381e 100644
        cidx = h8_get_cache_idx (sd, pc);
        if (cidx == (unsigned short) -1 ||
  	  cidx >= sd->sim_cache_size)
-@@ -1964,6 +2114,15 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+@@ -1943,6 +2093,15 @@
  	{
  	  cycles += code->cycles;
  	  insts++;
@@ -370,7 +371,7 @@ index d084b5d..00b381e 100644
  	}
  
        switch (code->opcode)
-@@ -3274,7 +3433,7 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+@@ -3253,7 +3412,7 @@
  	    goto end;
  
  	  if (code->src.type == X (OP_IMM, SB))
@@ -379,7 +380,7 @@ index d084b5d..00b381e 100644
  	  else
  	    ea = 1;
  
-@@ -3569,16 +3728,20 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+@@ -3548,16 +3707,20 @@
  	  /* Pops exr and ccr before pc -- otherwise identical to rts.  */
  	  tmp = h8_get_reg (sd, SP_REGNUM);
  
@@ -405,7 +406,7 @@ index d084b5d..00b381e 100644
  	      tmp += 4;
  	    }
  	  else
-@@ -3635,49 +3798,25 @@ sim_resume (SIM_DESC sd, int step, int siggnal)
+@@ -3614,49 +3777,25 @@
  	      sim_engine_set_run_state (sd, sim_stopped, 
  					SIM_WSTOPSIG (h8_get_reg (sd, 0)));
  	    }
@@ -464,7 +465,7 @@ index d084b5d..00b381e 100644
  
  	case O (O_BPT, SN):
  	  sim_engine_set_run_state (sd, sim_stopped, SIGTRAP);
-@@ -5038,15 +5177,13 @@ sim_load (SIM_DESC sd, const char *prog, bfd *abfd, int from_tty)
+@@ -5005,15 +5144,13 @@
      free (h8_get_memory_buf (sd));
    if (h8_get_cache_idx_buf (sd))
      free (h8_get_cache_idx_buf (sd));
@@ -481,7 +482,7 @@ index d084b5d..00b381e 100644
  
    /* `msize' must be a power of two.  */
    if ((memory_size & (memory_size - 1)) != 0)
-@@ -5057,6 +5194,8 @@ sim_load (SIM_DESC sd, const char *prog, bfd *abfd, int from_tty)
+@@ -5024,6 +5161,8 @@
      }
    h8_set_mask (sd, memory_size - 1);
  
@@ -490,7 +491,7 @@ index d084b5d..00b381e 100644
    if (sim_load_file (sd, myname, sim_callback, prog, prog_bfd,
  		     sim_kind == SIM_OPEN_DEBUG,
  		     0, sim_write)
-@@ -5107,3 +5246,187 @@ sim_create_inferior (SIM_DESC sd, struct bfd *abfd, char **argv, char **env)
+@@ -5074,3 +5213,187 @@
    
    return SIM_RC_OK;
  }
@@ -678,11 +679,9 @@ index d084b5d..00b381e 100644
 +    (*sim_callback->printf_filtered) (sim_callback,
 +				      "Error: Unknown \"%s\" command\n", cmd);
 +}
-diff --git a/sim/h8300/io.c b/sim/h8300/io.c
-new file mode 100644
-index 0000000..d1a12d3
---- /dev/null
-+++ b/sim/h8300/io.c
+diff -Nur binutils-gdb.orig/sim/h8300/io.c binutils-gdb/sim/h8300/io.c
+--- binutils-gdb.orig/sim/h8300/io.c	1970-01-01 01:00:00.000000000 +0100
++++ binutils-gdb/sim/h8300/io.c	2015-11-16 11:52:52.502025971 +0100
 @@ -0,0 +1,1058 @@
 +/*
 + H8 simulator Internal Peripheral Support
