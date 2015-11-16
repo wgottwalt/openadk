@@ -222,6 +222,7 @@ ifeq ($(ADK_CPU_SH3),y)
 	$(SED) 's/.*\(CONFIG_SH3\).*/\1=y/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_CPU_SH2),y)
+	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH2A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH3\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH4\).*/# \1 is not set/' ${WRKBUILD}/.config
@@ -229,6 +230,7 @@ ifeq ($(ADK_CPU_SH2),y)
 	$(SED) 's/.*\(CONFIG_SH2\).*/\1=y/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_CPU_SH2A),y)
+	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH2A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH3\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH4\).*/# \1 is not set/' ${WRKBUILD}/.config
