@@ -36,7 +36,7 @@ endchoice
 # Set up flat binary type
 choice
 prompt "FLAT Binary type"
-depends on ADK_TARGET_BINFMT_FLAT && ADK_TARGET_ARCH_M68K || ADK_TARGET_ARCH_BFIN
+depends on ADK_TARGET_BINFMT_FLAT && (ADK_TARGET_ARCH_M68K || ADK_TARGET_ARCH_BFIN)
 default ADK_TARGET_BINFMT_FLAT_ONE
 
 config ADK_TARGET_BINFMT_FLAT_ONE
