@@ -3,7 +3,6 @@ config ADK_APPLIANCE_TEST
 	select ADK_PACKAGE_ADKTEST
 	select ADK_RUNTIME_START_SERVICES
 	select ADK_RUNTIME_START_ADKTEST
-	select ADK_UCLIBC_TEST if ADK_TARGET_LIB_UCLIBC_NG
 	help
 	  Create a small appliance for automatic testing.
 

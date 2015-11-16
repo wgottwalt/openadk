@@ -126,9 +126,4 @@ config ADK_STATIC_TOOLCHAIN
 	help
 	  If you want to create more portable toolchains, build them static.
 
-config ADK_UCLIBC_TEST
-	bool "Build testsuite for C library"
-	depends on ADK_TARGET_LIB_UCLIBC_NG
-	help
-	  Build uClibc-ng test suite.
 endmenu

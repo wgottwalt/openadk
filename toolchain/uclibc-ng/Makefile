@@ -330,7 +330,6 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
 	touch $@
 
 $(WRKBUILD)/.fixup:
-ifeq ($(ADK_UCLIBC_TEST),y)
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		CC='$(TARGET_CC)' \
 		TEST_INSTALLED_UCLIBC=1 \
@@ -339,7 +338,6 @@ ifeq ($(ADK_UCLIBC_TEST),y)
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		test_compile test_gen
-endif
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 	# cleanup toolchain
 	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -exec rm {} \;
