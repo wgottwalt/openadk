@@ -8,6 +8,20 @@ config ADK_RUNTIME_HOSTNAME
 	  Set your target hostname.
 
 choice
+prompt "init"
+default ADK_RUNTIME_INIT_SIMPLEINIT if ADK_TARGET_WITHOUT_MMU
+default ADK_RUNTIME_INIT_SYSV
+
+config ADK_RUNTIME_INIT_SYSV
+	bool "Use busybox init"
+
+config ADK_RUNTIME_INIT_SIMPLEINIT
+	bool "Use a very simple init"
+	select ADK_PACKAGE_SIMPLEINIT
+
+endchoice
+
+choice
 prompt "System for /dev management"
 default ADK_RUNTIME_DEV_STATIC if ADK_TARGET_WITHOUT_MMU
 default ADK_RUNTIME_DEV_MDEV
@@ -97,6 +111,7 @@ config ADK_RUNTIME_TMPFS_SIZE
 	default "32768" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default "8192" if ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	default "2048"
+	depends on !ADK_RUNTIME_INIT_SIMPLEINIT
 	help
 	  Size of /tmp in memory in Kilobyte.
 
@@ -271,7 +286,7 @@ config ADK_RUNTIME_KBD_LAYOUT
 
 choice
 prompt "initial login shell for the root user"
-default ADK_ROOTSH_HUSH if ADK_TARGET_WITHOUT_MMU
+default ADK_ROOTSH_SASH if ADK_TARGET_WITHOUT_MMU
 default ADK_ROOTSH_MKSH
 
 config ADK_ROOTSH_MKSH
@@ -289,8 +304,8 @@ config ADK_ROOTSH_SASH
 
 config ADK_ROOTSH_HUSH
 	bool "hush (busybox shell compatible with non-MMU systems)"
-	select BUSYBOX_HUSH if !ADK_TOOLCHAIN_ONLY
-	select BUSYBOX_FEATURE_SH_IS_HUSH if !ADK_TOOLCHAIN_ONLY
+	select BUSYBOX_HUSH
+	select BUSYBOX_FEATURE_SH_IS_HUSH
 	help
 	  hush shell from busybox.
 
@@ -326,7 +341,7 @@ endchoice
 
 choice
 prompt "system /bin/sh (POSIX script shell)"
-default ADK_BINSH_HUSH if ADK_TARGET_WITHOUT_MMU
+default ADK_BINSH_SASH if ADK_TARGET_WITHOUT_MMU
 default ADK_BINSH_MKSH
 
 config ADK_BINSH_MKSH
@@ -338,13 +353,13 @@ config ADK_BINSH_MKSH
 
 config ADK_BINSH_SASH
 	bool "sash (Standalone Shell)"
-	select ADK_PACKAGE_SASH
+	select ADK_PACKAGE_SASH if !ADK_TOOLCHAIN_ONLY
 	help
 	  sash shell.
 
 config ADK_BINSH_HUSH
 	bool "hush (busybox)"
-	select ADK_PACKAGE_HUSH if !ADK_TOOLCHAIN_ONLY
+	select ADK_PACKAGE_HUSH
 	help
 	  hush shell.
 
