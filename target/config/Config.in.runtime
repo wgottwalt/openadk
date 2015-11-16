@@ -9,6 +9,7 @@ config ADK_RUNTIME_HOSTNAME
 
 choice
 prompt "init"
+depends on !ADK_TOOLCHAIN_ONLY
 default ADK_RUNTIME_INIT_SIMPLEINIT if ADK_TARGET_WITHOUT_MMU
 default ADK_RUNTIME_INIT_SYSV
 
@@ -23,6 +24,7 @@ endchoice
 
 choice
 prompt "System for /dev management"
+depends on !ADK_TOOLCHAIN_ONLY
 default ADK_RUNTIME_DEV_STATIC if ADK_TARGET_WITHOUT_MMU
 default ADK_RUNTIME_DEV_MDEV
 

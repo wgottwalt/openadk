@@ -6,9 +6,9 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		simpleinit
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
-PKG_DESCR:=		simple init for systems without mmu
+PKG_DESCR:=		very simple init
 PKG_SECTION:=		base/apps
-PKG_CFLINE_SIMPLEINIT:=	select BUSYBOX_INIT n
+PKG_DFLT_SIMPLEINIT:=	y if !ADK_TOOLCHAIN_ONLY
 
 NO_DISTFILES:=		1
 
