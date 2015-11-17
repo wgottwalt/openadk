@@ -8,7 +8,6 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		very simple init
 PKG_SECTION:=		base/apps
-PKG_DFLT_SIMPLEINIT:=	y if !ADK_TOOLCHAIN_ONLY
 
 NO_DISTFILES:=		1
 
