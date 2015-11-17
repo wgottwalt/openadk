@@ -5,9 +5,8 @@ mount -t proc proc /proc
 mount -t sysfs sys /sys
 mkdir -m 755 /dev/pts
 mount -t devpts devpts /dev/pts
-mount -t tmpfs -o size=1M tmpfs /tmp
+mount -t tmpfs tmpfs /tmp
 chmod 1777 /tmp
-mkdir -p /var/log
-mkdir -p /var/run
-mkdir -p /var/tmp
-ifconfig lo 127.0.0.1 up
+mkdir /var/log
+mkdir /var/run
+mkdir /var/tmp
