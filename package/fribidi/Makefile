@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		fribidi
-PKG_VERSION:=		0.19.6
+PKG_VERSION:=		0.19.7
 PKG_RELEASE:=		1
-PKG_HASH:=		cba8b7423c817e5adf50d28ec9079d14eafcec9127b9e8c8f1960c5ad585e17d
+PKG_HASH:=		08222a6212bbc2276a2d55c3bf370109ae4a35b689acbc66571ad2a670595a8e
 PKG_DESCR:=		unicode bidirectional algorithm
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.fribidi.org/
