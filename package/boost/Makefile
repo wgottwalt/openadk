@@ -4,13 +4,14 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
-PKG_VERSION:=		1.58.0
-PKG_EXTRAVER:=		1_58
+PKG_VERSION:=		1.59.0
+PKG_EXTRAVER:=		1_59
 PKG_RELEASE:=		1
-PKG_HASH:=		a004d9b3fa95e956383693b86fce1b68805a6f71c2e68944fa813de0fb8c8102
+PKG_HASH:=		47f11c8844e579d02691a607fbd32540104a9ac7a2534a8ddaef50daf502baac
 PKG_DESCR:=		portable c++ library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		python2-host
+PKG_NEEDS:=		c++
 PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
 PKG_OPTS:=		dev
