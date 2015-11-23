@@ -7,19 +7,16 @@ depends on ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU || ADK_TARGET_VBOX
 config ADK_KERNEL_VT
 	bool
 	default y if ADK_TARGET_WITH_VGA
-	default y if ADK_TARGET_VBOX
 	default n
 
 config ADK_KERNEL_VT_CONSOLE
 	bool
 	default y if ADK_TARGET_WITH_VGA
-	default y if ADK_TARGET_VBOX
 	default n
 
 config ADK_KERNEL_VGA_CONSOLE
 	bool
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_VBOX
+	default y if ADK_TARGET_WITH_VGA
 	default n
 
 config ADK_KERNEL_FONTS
@@ -30,9 +27,9 @@ config ADK_KERNEL_FONT_8x16
 	select ADK_KERNEL_FONTS
 
 config ADK_KERNEL_FB
+	bool
 	select ADK_KERNEL_VT
 	select ADK_KERNEL_VT_CONSOLE
- 	bool
 
 config ADK_KERNEL_FB_SBUS
 	bool
