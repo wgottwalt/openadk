@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		quagga
-PKG_VERSION:=		0.99.22.4
+PKG_VERSION:=		0.99.24.1
 PKG_RELEASE:=		1
-PKG_HASH:=		5e12056692e2dbc272a929f96d0e98d9873f4e7f7ffcca62434b58f6660a6386
+PKG_HASH:=		6fd6baadb136a801c29c1dd72d0fe69da9f19ae498e87bff7057778361e43b14
 PKG_DESCR:=		routing software package
 PKG_SECTION:=		net/route
 PKG_BUILDDEP:=		readline ncurses
@@ -28,9 +28,6 @@ PKGSN_QUAGGA_RIPD:=	quagga
 PKGSD_QUAGGA_VTYSH:=	vtysh utility
 PKGSN_QUAGGA_VTYSH:=	quagga
 
-PKG_FLAVOURS_QUAGGA:=	WITH_IPV6
-PKGFD_WITH_IPV6:=	enable IPv6 support
-
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,QUAGGA,quagga,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -50,14 +47,7 @@ CONFIGURE_ARGS+=	--localstatedir=/var/run/quagga \
 			--disable-pie \
 			--disable-babeld \
 			--disable-doc \
-			--disable-tests \
 			--enable-multipath=8
-
-ifneq (${ADK_PACKAGE_QUAGGA_WITH_IPV6},)
-CONFIGURE_ARGS+=	--enable-ipv6
-else
-CONFIGURE_ARGS+=	--disable-ipv6
-endif
 
 quagga-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA}/usr/{lib,sbin}
@@ -78,10 +68,8 @@ quagga-ospfd-install:
 	${CP} ${WRKINST}/usr/sbin/ospfd ${IDIR_QUAGGA_OSPFD}/usr/sbin/
 
 quagga-ospf6d-install:
-ifneq (${ADK_PACKAGE_QUAGGA_WITH_IPV6},)
 	${INSTALL_DIR} ${IDIR_QUAGGA_OSPF6D}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/ospf6d ${IDIR_QUAGGA_OSPF6D}/usr/sbin/
-endif
 
 quagga-ripngd-install:
 	${INSTALL_DIR} ${IDIR_QUAGGA_RIPNGD}/usr/sbin
