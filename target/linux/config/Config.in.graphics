@@ -276,5 +276,18 @@ config ADK_KERNEL_FB_CGSIX
 	depends on ADK_TARGET_SYSTEM_SUN_VOYAGER
 	help
 	  Framebuffer support for Sun Voyager.
+
+config ADK_KERNEL_DRM_RADEON
+	bool "Support for Radeon DRM/KMS"
+	select ADK_KERNEL_DRM
+	select ADK_KERNEL_FB_CFB_FILLRECT
+	select ADK_KERNEL_FB_CFB_COPYAREA
+	select ADK_KERNEL_FB_CFB_IMAGEBLIT
+	select ADK_KERNEL_FW_LOADER
+	select ADK_KERNEL_DRM_KMS_HELPER
+	select ADK_KERNEL_DRM_KMS_FB_HELPER
+	select ADK_KERNEL_DRM_TTM
+	help
+	  DRM/KMS support for Radeon
 	
 endmenu
