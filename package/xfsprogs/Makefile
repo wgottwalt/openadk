@@ -4,20 +4,20 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		xfsprogs
-PKG_VERSION:=		3.1.11
+PKG_VERSION:=		4.3.0
 PKG_RELEASE:=		1
-PKG_HASH:=		adf4980177b5c890c1ca86b9c0e3e4d69a3f95bfc01746844280c2393cf4d6be
+PKG_HASH:=		3e570ad51153e4be3792f42b2c805ddbd46b55d166eba3102ec87d5006d4cb5c
 PKG_DESCR:=		utilities for xfs filesystems
 PKG_SECTION:=		sys/fs
-PKG_BUILDDEP:=		e2fsprogs util-linux ncurses
-PKG_DEPENDS:=		libuuid libblkid libncurses
+PKG_BUILDDEP:=		e2fsprogs ncurses
+PKG_DEPENDS:=		libuuid libncurses
 PKG_NEEDS:=		threads rt
 PKG_URL:=		http://oss.sgi.com/projects/xfs
 PKG_SITES:=		ftp://oss.sgi.com/projects/xfs/cmd_tars/ \
 			ftp://oss.sgi.com/projects/xfs/previous/cmd_tars/
 
+PKG_NOPARALLEL:=	1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-PKG_LIBC_DEPENDS:=	glibc
 
 include ${ADK_TOPDIR}/mk/package.mk
 
@@ -26,8 +26,10 @@ $(eval $(call PKG_template,XFSPROGS,xfsprogs,${PKG_VERSION}-${PKG_RELEASE},${PKG
 INSTALL_STYLE:=		manual
 TARGET_LDFLAGS+=	-lrt
 CONFIGURE_ARGS+=	--enable-gettext=no \
+			--enable-blkid=no \
 			--with-gnu-ld
-CONFIGURE_ENV+=		DEBUG=" " OPTIMIZER=" " PLATFORM=linux
+CONFIGURE_ENV+=		DEBUG=" " OPTIMIZER=" " PLATFORM=linux \
+			ac_cv_header_aio_h=yes ac_cv_lib_rt_lio_listio=yes
 ALL_TARGET=
 
 do-install:

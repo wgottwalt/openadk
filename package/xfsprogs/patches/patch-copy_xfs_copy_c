@@ -1,8 +1,8 @@
---- xfsprogs-3.1.4.orig/copy/xfs_copy.c	2010-01-29 20:46:13.000000000 +0100
-+++ xfsprogs-3.1.4/copy/xfs_copy.c	2011-01-22 20:44:49.478658642 +0100
-@@ -240,6 +240,10 @@ handler(int sig)
+--- xfsprogs-4.3.0.orig/copy/xfs_copy.c	2015-10-15 23:31:26.000000000 +0200
++++ xfsprogs-4.3.0/copy/xfs_copy.c	2015-11-27 06:04:00.000000000 +0100
+@@ -236,6 +236,10 @@ handler(int sig)
  {
- 	pid_t	pid = getpid();
+ 	pid_t	pid;
  	int	status, i;
 +	struct sigaction action;
 +
@@ -11,7 +11,7 @@
  
  	pid = wait(&status);
  
-@@ -272,7 +276,7 @@ handler(int sig)
+@@ -268,7 +272,7 @@ handler(int sig)
  					pthread_exit(NULL);
  				}
  
@@ -20,7 +20,7 @@
  				return;
  			} else  {
  				/* it just croaked it bigtime, log it */
-@@ -294,7 +298,7 @@ handler(int sig)
+@@ -290,7 +294,7 @@ handler(int sig)
  	do_warn(_("%s: Unknown child died (should never happen!)\n"), progname);
  	die_perror();
  	pthread_exit(NULL);
@@ -29,7 +29,7 @@
  }
  
  void
-@@ -467,6 +471,11 @@ void
+@@ -466,6 +470,11 @@ void
  write_wbuf(void)
  {
  	int		i;
@@ -41,7 +41,7 @@
  
  	/* verify target threads */
  	for (i = 0; i < num_targets; i++)
-@@ -478,9 +487,9 @@ write_wbuf(void)
+@@ -477,9 +486,9 @@ write_wbuf(void)
  		if (target[i].state != INACTIVE)
  			pthread_mutex_unlock(&targ[i].wait);	/* wake up */
  
@@ -52,8 +52,8 @@
 +	sigprocmask(SIG_SETMASK, &initial, NULL);
  }
  
- 
-@@ -521,6 +530,12 @@ main(int argc, char **argv)
+ void
+@@ -551,6 +560,12 @@ main(int argc, char **argv)
  	libxfs_init_t	xargs;
  	thread_args	*tcarg;
  	struct stat64	statbuf;
@@ -66,7 +66,7 @@
  
  	progname = basename(argv[0]);
  
-@@ -846,8 +861,11 @@ main(int argc, char **argv)
+@@ -892,8 +907,11 @@ main(int argc, char **argv)
  
  	/* set up sigchild signal handler */
  
