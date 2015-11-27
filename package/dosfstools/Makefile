@@ -4,13 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		dosfstools
-PKG_VERSION:=		3.0.26
-PKG_RELEASE:=		5
-PKG_HASH:=		468442fe8cd93961047d5cd67f7b67793126575103a67cd131330512b4893e75
+PKG_VERSION:=		3.0.28
+PKG_RELEASE:=		1
+PKG_HASH:=		ee95913044ecf2719b63ea11212917649709a6e53209a72d622135aaa8517ee2
 PKG_DESCR:=		utilities to create and check fat filesystems
 PKG_SECTION:=		sys/fs
 PKG_URL:=		http://www.daniel-baumann.ch/software/dosfstools/
-PKG_SITES:=		http://daniel-baumann.ch/files/software/dosfstools/
+PKG_SITES:=		https://github.com/dosfstools/dosfstools/releases/download/v$(PKG_VERSION)/
 
 include ${ADK_TOPDIR}/mk/package.mk
 
