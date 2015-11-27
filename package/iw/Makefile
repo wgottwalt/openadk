@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		iw
-PKG_VERSION:=		4.1
+PKG_VERSION:=		4.3
 PKG_RELEASE:=		1
-PKG_HASH:=		5164aaacd8e82501d84a2187af194e8285a5a5b76e200447eb58d4dd78d1a34b
+PKG_HASH:=		a6add81a51667649d8d7cfba783ab6a0f82e250a663a4065b13babdff3f6b220
 PKG_DESCR:=		tools for setting up wifi cards via netlink
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		libnl
