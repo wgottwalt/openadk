@@ -4,13 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		olsrd
-PKG_VERSION:=		0.6.6.2
+PKG_VERSION:=		0.9.0.3
 PKG_RELEASE:=		1
-PKG_HASH:=		4d3666bc3de8a09ac3b0e782e1f3bc5669cd9ee86e963062894c4050b34c1fbd
-PKG_DESCR:=		optimized link state routing protocol
+PKG_HASH:=		59d37570c58ec25636a71d5a7cf4460448be693f01d768ae369a7f66e58077fb
+PKG_DESCR:=		optimized link state routing protocol daemon
 PKG_SECTION:=		net/wifi
 PKG_URL:=		http://www.olsr.org/
-PKG_SITES:=		http://www.olsr.org/releases/0.6/
+PKG_SITES:=		http://www.olsr.org/releases/0.9/
 PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
@@ -56,8 +56,8 @@ INSTALL_TARGET+=	install_libs
 MAKE_ENV+=		OS="linux" DEBUG=0 STRIP="true" OFLAGS="${TARGET_CFLAGS}" prefix="/usr"
 
 post-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
-	${INSTALL_DIR} ${IDIR_OLSRD}/usr/sbin ${IDIR_OLSRD}/etc
-	${INSTALL_DATA} ${WRKINST}/etc/olsrd.conf ${IDIR_OLSRD}/etc/
+	${INSTALL_DIR} ${IDIR_OLSRD}/usr/sbin ${IDIR_OLSRD}/etc/olsrd
+	${INSTALL_DATA} ${WRKINST}/etc/olsrd/olsrd.conf ${IDIR_OLSRD}/etc/olsrd
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/olsrd ${IDIR_OLSRD}/usr/sbin/
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
