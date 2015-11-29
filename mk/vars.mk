@@ -185,10 +185,6 @@ ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
 TARGET_CFLAGS+=		-Wl,-elf2flt
 TARGET_CXXFLAGS+=	-Wl,-elf2flt
 endif
-ifeq ($(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
-TARGET_CFLAGS+=		-msep-data
-TARGET_CXXFLAGS+=	-msep-data
-endif
 endif
 
 ifeq ($(ADK_TARGET_ARCH_M68K),y)
