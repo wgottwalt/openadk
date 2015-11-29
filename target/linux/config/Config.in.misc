@@ -41,6 +41,18 @@ config ADK_KERNEL_IMX_WEIM
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
+config ADK_KERNEL_INTEL_IOMMU
+        bool
+
+config ADK_KERNEL_IOMMU_API
+        bool
+
+config ADK_KERNEL_IOMMU_IOVA
+        bool
+
+config ADK_KERNEL_DMAR_TABLE
+        bool
+
 menu "Miscellaneous devices support"
 
 source "target/linux/config/Config.in.rtc"
@@ -108,5 +120,15 @@ config ADK_KERNEL_EEPROM_93CX6
 	tristate "93cx6 eeprom support"
 	depends on ADK_KERNEL_MAC80211
 	select ADK_KERNEL_MISC_DEVICES
+
+config ADK_KERNEL_IOMMU_SUPPORT
+	bool "IOMMU support for Intel"
+	select ADK_KERNEL_PCI_MSI
+	select ADK_KERNEL_INTEL_IOMMU
+	select ADK_KERNEL_IOMMU_API
+	select ADK_KERNEL_IOMMU_IOVA
+	select ADK_KERNEL_DMAR_TABLE
+	depends on ADK_TARGET_WITH_IOMMU
+	default y
  
 endmenu

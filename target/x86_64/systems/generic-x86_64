@@ -13,6 +13,7 @@ config ADK_TARGET_SYSTEM_GENERIC_X86_64
 	select ADK_TARGET_WITH_BLOCK
 	select ADK_TARGET_WITH_PATA
 	select ADK_TARGET_WITH_SATA
+	select ADK_TARGET_WITH_IOMMU
 	select ADK_PACKAGE_GRUB
 	help
 	  Example config for generic x86_64 based PC.
