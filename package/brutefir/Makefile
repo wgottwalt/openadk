@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		brutefir
 PKG_VERSION:=		1.0m
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_HASH:=		23b80500fc8687be338bc2654ecc509eccc06fe9372815361b65ed9b1807ccca
 PKG_DESCR:=		convulution engine
 PKG_SECTION:=		mm/audio
@@ -25,6 +25,9 @@ $(eval $(call PKG_template,BRUTEFIR,brutefir,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG
 ifeq ($(ADK_TARGET_ARCH_X86)$(ADK_TARGET_ARCH_X86_64),y)
 TARGET_CFLAGS+=		-msse
 endif
+
+GCCPATH:=		$(subst libgcc.a,,$(shell $(TARGET_CC) -print-libgcc-file-name))
+XAKE_FLAGS+=		LIBPATHS="-L$(GCCPATH)"
 
 CONFIG_STYLE=		manual
 

@@ -1,5 +1,5 @@
 --- brutefir-1.0m.orig/Makefile	2013-11-29 14:55:01.000000000 +0100
-+++ brutefir-1.0m/Makefile	2015-09-05 22:19:20.275180228 +0200
++++ brutefir-1.0m/Makefile	2015-11-29 10:28:02.031683531 +0100
 @@ -1,11 +1,11 @@
  ###################################
  # Where to install
@@ -24,8 +24,8 @@
 -CC	= gcc
 -AS	= as
 +#FLEX	= flex
-+#LD	= ld
 +#CC	= gcc
++#LD	= ld
 +#AS	= as
  
  ###################################
@@ -56,3 +56,36 @@
  BRUTEFIR_OBJS	+= $(BRUTEFIR_SSE_OBJS)
  CC_FLAGS	+= -msse
  endif
+@@ -127,25 +123,25 @@ bfconf_lexical.o: bfconf_lexical.c
+ 	$(FLEX) -o$@ $<
+ 
+ brutefir: $(BRUTEFIR_OBJS)
+-	$(CC) $(LIBPATHS) $(LDMULTIPLEDEFS) -o $@ $(BRUTEFIR_OBJS) $(BRUTEFIR_LIBS)
++	$(CC) $(LIBPATHS) $(LDMULTIPLEDEFS) -o $@ $(BRUTEFIR_OBJS) $(BRUTEFIR_LIBS) -lgcc
+ 
+ alsa.bfio: $(BFIO_ALSA_OBJS)
+-	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_ALSA_OBJS) $(BFIO_ALSA_LIBS) -lc
++	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_ALSA_OBJS) $(BFIO_ALSA_LIBS) -lc -lgcc
+ 
+ oss.bfio: $(BFIO_OSS_OBJS)
+-	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_OSS_OBJS) -lc
++	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_OSS_OBJS) -lc -lgcc
+ 
+ jack.bfio: $(BFIO_JACK_OBJS)
+-	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_JACK_OBJS) $(BFIO_JACK_LIBS) -lc
++	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_JACK_OBJS) $(BFIO_JACK_LIBS) -lc -lgcc
+ 
+ file.bfio: $(BFIO_FILE_OBJS)
+-	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_FILE_OBJS) -lc
++	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_FILE_OBJS) -lc -lgcc
+ 
+ cli.bflogic: $(BFLOGIC_CLI_OBJS)
+-	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_CLI_OBJS) -lc
++	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_CLI_OBJS) -lc -lgcc
+ 
+ eq.bflogic: $(BFLOGIC_EQ_OBJS)
+-	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_EQ_OBJS) -lc
++	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_EQ_OBJS) -lc -lgcc
+ 
+ install: $(BIN_TARGETS) $(LIB_TARGETS)
+ 	install -d $(INSTALL_PREFIX)/bin $(INSTALL_PREFIX)/lib/brutefir
