@@ -101,6 +101,9 @@ config ADK_TARGET_WITH_WIFI
 config ADK_TARGET_WITH_DSL
 	bool
 
+config ADK_TARGET_WITH_VIRTIO
+	bool
+
 config ADK_TARGET_WITH_USB_BOOT
 	bool
 

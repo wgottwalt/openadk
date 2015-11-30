@@ -2,6 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 menu "Virtio driver support"
+depends on ADK_TARGET_WITH_VIRTIO || ADK_TARGET_QEMU
 
 config ADK_KERNEL_VIRTIO
 	bool
