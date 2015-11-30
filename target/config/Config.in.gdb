@@ -9,6 +9,7 @@ default ADK_TOOLCHAIN_GDB_7_10
 config ADK_TOOLCHAIN_GDB_GIT
 	bool "git"
 	depends on !ADK_TARGET_ARCH_AVR32
+	depends on !ADK_TARGET_ARCH_BFIN
 
 config ADK_TOOLCHAIN_GDB_7_10
 	bool "7.10"
