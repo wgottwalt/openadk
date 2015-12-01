@@ -291,11 +291,9 @@ if ! which gawk >/dev/null 2>&1; then
 fi
 
 host_build_sed=0
-if ! which gsed >/dev/null 2>&1; then
-	if which sed >/dev/null 2>&1; then
-		if ! sed --version 2>/dev/null|grep GNU >/dev/null;then
-			host_build_sed=1
-		fi
+if which sed >/dev/null 2>&1; then
+	if ! sed --version 2>/dev/null|grep GNU >/dev/null;then
+		host_build_sed=1
 	fi
 fi
 
