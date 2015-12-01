@@ -1,12 +1,12 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${ADK_TOPDIR}/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		dovecot
-PKG_VERSION:=		2.2.18
+PKG_VERSION:=		2.2.19
 PKG_RELEASE:=		1
-PKG_HASH:=		b6d8468cea47f1227f47b80618f7fb872e2b2e9d3302adc107a005dd083865bb
+PKG_HASH:=		759e1e3f9d907cdaabad1f5fbacc793ca191d234c084bec3bba42966952a4e9f
 PKG_DESCR:=		minimal and secure imap server
 PKG_SECTION:=		net/mail
 PKG_URL:=		http://www.dovecot.org/
@@ -20,11 +20,11 @@ PKGCD_WITH_OPENSSL:=	use openssl for crypto
 PKGCB_WITH_OPENSSL:=	openssl
 PKGCS_WITH_OPENSSL:=	libopenssl
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
-include ${ADK_TOPDIR}/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,DOVECOT,dovecot,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,DOVECOT,dovecot,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 CONFIGURE_ENV+=		RPCGEN='' \
 			ignore_signed_size=1 \
@@ -51,16 +51,22 @@ CONFIGURE_ARGS+=	--with-notify=none \
 			--with-ssl=openssl
 
 dovecot-install:
-	${INSTALL_DIR} ${IDIR_DOVECOT}/etc
-	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/sbin
-	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/libexec/dovecot
-	${INSTALL_DIR} ${IDIR_DOVECOT}/usr/lib/dovecot/modules
-	${INSTALL_DATA} ./files/dovecot.conf ${IDIR_DOVECOT}/etc
-	$(CP) ${WRKINST}/usr/lib/dovecot/modules/*.so \
-		${IDIR_DOVECOT}/usr/lib/dovecot/modules/
-	$(CP) ${WRKINST}/usr/libexec/dovecot/* \
-		${IDIR_DOVECOT}/usr/libexec/dovecot/
-	$(INSTALL_BIN) ${WRKINST}/usr/sbin/dovecot* \
-		${IDIR_DOVECOT}/usr/sbin
+	$(INSTALL_DIR) $(IDIR_DOVECOT)/etc/dovecot
+	$(INSTALL_DIR) $(IDIR_DOVECOT)/usr/bin
+	$(INSTALL_DIR) $(IDIR_DOVECOT)/usr/sbin
+	$(INSTALL_DIR) $(IDIR_DOVECOT)/usr/libexec/dovecot
+	$(INSTALL_DIR) $(IDIR_DOVECOT)/usr/lib/dovecot/modules
+	$(CP) $(WRKINST)/usr/share/doc/dovecot/example-config/* \
+		$(IDIR_DOVECOT)/etc/dovecot
+	$(CP) $(WRKINST)/usr/lib/dovecot/*.so* \
+		$(IDIR_DOVECOT)/usr/lib/dovecot/
+	$(CP) $(WRKINST)/usr/lib/dovecot/modules/*.so \
+		$(IDIR_DOVECOT)/usr/lib/dovecot/modules/
+	$(CP) $(WRKINST)/usr/libexec/dovecot/* \
+		$(IDIR_DOVECOT)/usr/libexec/dovecot/
+	$(INSTALL_BIN) $(WRKINST)/usr/sbin/dovecot* \
+		$(IDIR_DOVECOT)/usr/sbin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/* \
+		$(IDIR_DOVECOT)/usr/bin
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
