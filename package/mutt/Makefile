@@ -4,15 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mutt
-PKG_VERSION:=		1.5.23
+PKG_VERSION:=		1.5.24
 PKG_RELEASE:=		1
-PKG_HASH:=		3af0701e57b9e1880ed3a0dee34498a228939e854a16cdccd24e5e502626fd37
+PKG_HASH:=		a292ca765ed7b19db4ac495938a3ef808a16193b7d623d65562bb8feb2b42200
 PKG_DESCR:=		mail text client
 PKG_SECTION:=		net/mail
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.mutt.org/
-PKG_SITES:=		http://distfiles.openadk.org/
+PKG_SITES:=		ftp://ftp.mutt.org/pub/mutt/
 
 PKG_CHOICES_MUTT:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITHOUT_SSL:=	use no ssl
