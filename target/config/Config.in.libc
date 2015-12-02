@@ -55,14 +55,17 @@ prompt "C library version"
 config ADK_TARGET_LIB_UCLIBC_NG_1_0_9
 	bool "1.0.9"
 	depends on ADK_TARGET_LIB_UCLIBC_NG
+	depends on !ADK_TARGET_ARCH_BFIN
 
 config ADK_TARGET_LIB_UCLIBC_NG_1_0_8
 	bool "1.0.8"
 	depends on ADK_TARGET_LIB_UCLIBC_NG
+	depends on !ADK_TARGET_ARCH_BFIN
 
 config ADK_TARGET_LIB_UCLIBC_NG_1_0_7
 	bool "1.0.7"
 	depends on ADK_TARGET_LIB_UCLIBC_NG
+	depends on !ADK_TARGET_ARCH_BFIN
 
 config ADK_TARGET_LIB_UCLIBC_NG_GIT
 	bool "git"
