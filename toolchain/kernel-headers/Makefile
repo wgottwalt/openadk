@@ -12,7 +12,6 @@ LINUX_DIR=${WRKBUILD}
 
 include $(ADK_TOPDIR)/mk/kernel-vars.mk
 
-
 $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_FILE_VER)/.patched:
 ifeq ($(ADK_TARGET_SYSTEM_PCENGINES_APU),y)
 ifeq ($(ADK_KERNEL_ROOT_NFS),y)
@@ -39,7 +38,7 @@ ifneq ($(ADK_DISABLE_TARGET_KERNEL_PATCHES),y)
 endif
 	touch $@
 
-$(WRKBUILD)/.headers: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_FILE_VER)/.patched
+$(WRKBUILD)/.configured: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_FILE_VER)/.patched
 	$(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(STAGING_TARGET_DIR)/usr \
 		headers_install

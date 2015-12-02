@@ -69,8 +69,8 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(WRKBUILD) install
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_GIT),y)
 ifeq ($(ADK_TARGET_ARCH_H8300),y)
-	$(INSTALL_DIR) $(TOOLCHAIN_DIR)/usr/lib/ldscripts
-	$(CP) $(WRKBUILD)/ld/ldscripts/* $(TOOLCHAIN_DIR)/usr/lib/ldscripts/
+	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/lib/ldscripts
+	$(CP) $(WRKBUILD)/ld/ldscripts/* $(STAGING_TARGET_DIR)/usr/lib/ldscripts/
 endif
 endif
 	@touch $@

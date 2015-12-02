@@ -56,7 +56,6 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--without-isl \
 			--disable-nls
 
-
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 GCC_FINAL_CONFOPTS:=	--enable-tls --enable-threads --enable-libatomic
 endif
@@ -188,16 +187,15 @@ endif
 
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 
-GCC_BUILD_DIR_MINIMAL:=	$(WRKBUILD)-minimal
 GCC_BUILD_DIR_INITIAL:=	$(WRKBUILD)-initial
 GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 
-$(GCC_BUILD_DIR_MINIMAL)/.configured:
+$(GCC_BUILD_DIR_INITIAL)/.configured:
 ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_$(ADK_TARGET_XTENSA).tar \
 		--strip-components=1 -C $(WRKSRC) gcc
 endif
-	mkdir -p $(GCC_BUILD_DIR_MINIMAL)
+	mkdir -p $(GCC_BUILD_DIR_INITIAL)
 	# these symlinks are very important, do not remove
 	rm -rf $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/sys-include
 	mkdir -p $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)
@@ -205,7 +203,7 @@ endif
 		ln -s ../$(STAGING_HOST2TARGET)/usr/include sys-include)
 	rm -rf ${TOOLCHAIN_DIR}/usr/$(GNU_TARGET_NAME)/lib
 	(cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME); \
-		ln -s ../$(STAGING_HOST2TARGET)/lib lib)
+		ln -s ../$(STAGING_HOST2TARGET)/usr/lib lib)
 ifeq ($(ADK_TARGET_ARCH_SH),y)
 ifeq ($(ADK_CPU_SH3),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m3)
@@ -217,33 +215,11 @@ ifeq ($(ADK_CPU_SH4A),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4a)
 endif
 endif
+ifeq ($(ADK_TARGET_ARCH_ARC),y)
+	$(SED) 's/crtbeginS.o libgmon.a crtg.o/crtbeginS.o crtg.o/' \
+                $(WRKBUILD)/libgcc/config.host
+endif
 	$(SED) '/k prot/agcc_cv_libc_provides_ssp=yes' $(WRKBUILD)/gcc/configure
-	cd $(GCC_BUILD_DIR_MINIMAL); \
-		PATH='$(TARGET_PATH)' \
-		CC='$(HOST_CC)' \
-		CXX='$(HOST_CXX)' \
-		CFLAGS="-O0 -g0 -fomit-frame-pointer" \
-		CXXFLAGS="-O0 -g0 -fomit-frame-pointer" \
-		$(WRKBUILD)/configure \
-			${GCC_CONFOPTS} \
-			--enable-languages=c \
-			--disable-libssp \
-			--disable-shared \
-			--disable-threads \
-			--disable-multilib \
-			--without-headers
-	touch $@
-
-$(GCC_BUILD_DIR_MINIMAL)/.compiled: $(GCC_BUILD_DIR_MINIMAL)/.configured
-	PATH='$(TARGET_PATH)' $(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_MINIMAL) all-gcc
-	touch $@
-
-$(WRKBUILD)/.headers: $(GCC_BUILD_DIR_MINIMAL)/.compiled
-	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_MINIMAL) install-gcc
-	touch $@
-
-$(GCC_BUILD_DIR_INITIAL)/.configured:
-	mkdir -p $(GCC_BUILD_DIR_INITIAL)
 	cd $(GCC_BUILD_DIR_INITIAL); \
 		PATH='$(TARGET_PATH)' \
 		CC='$(HOST_CC)' \
@@ -252,32 +228,48 @@ $(GCC_BUILD_DIR_INITIAL)/.configured:
 		CXXFLAGS="-O0 -g0 -fomit-frame-pointer" \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
-			${GCC_FINAL_CONFOPTS} \
 			--enable-languages=c \
+			--with-newlib \
+			--enable-tls \
 			--disable-shared \
 			--disable-threads \
-			--with-sysroot=$(STAGING_TARGET_DIR)
+			--disable-multilib \
+			--without-headers
 	touch $@
 
-ifeq ($(ADK_TOOLCHAIN_GCC_4_2_4),y)
 $(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
-	PATH='$(TARGET_PATH)' $(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc
-	touch $@
-
-$(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
-	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc
-	touch $@
+ifeq ($(ADK_TOOLCHAIN_GCC_OLD),y)
+	PATH='$(TARGET_PATH)' \
+		$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc
 else
-$(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
-	PATH='$(TARGET_PATH)' $(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc all-target-libgcc
+	PATH='$(TARGET_PATH)' \
+		$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc all-target-libgcc
+endif
 	touch $@
 
 $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
-	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc install-target-libgcc
-	touch $@
+ifeq ($(ADK_TOOLCHAIN_GCC_OLD),y)
+	PATH='$(TARGET_PATH)' \
+		$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc
+else
+	PATH='$(TARGET_PATH)' \
+		$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc install-target-libgcc
 endif
+ifeq ($(ADK_TARGET_ARCH_M68K),y)
+	# create gcc wrapper for uClinux/m68k
+	echo "#!/bin/sh" > $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+	echo "exec ${GNU_TARGET_NAME}-gcc \"\$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/m68k-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+	chmod a+x $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+endif
+ifeq ($(ADK_TARGET_ARCH_ARM),y)
+	# create gcc wrapper for uClinux/arm
+	echo "#!/bin/sh" > $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+	echo "exec ${GNU_TARGET_NAME}-gcc \"\$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/arm-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+	chmod a+x $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
+endif
+	touch $@
 
-$(GCC_BUILD_DIR_FINAL)/.configured:
+$(WRKBUILD)/.compiled:
 	mkdir -p $(GCC_BUILD_DIR_FINAL)
 	cd $(GCC_BUILD_DIR_FINAL); \
 		PATH='$(TARGET_PATH)' \
@@ -293,9 +285,6 @@ $(GCC_BUILD_DIR_FINAL)/.configured:
 			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}'
 	PATH='$(TARGET_PATH)' $(MAKE) -C $(GCC_BUILD_DIR_FINAL) configure-host
-	touch $@
-
-$(WRKBUILD)/.compiled: $(GCC_BUILD_DIR_FINAL)/.configured
 	cd $(GCC_BUILD_DIR_FINAL); \
 		PATH='$(TARGET_PATH)' \
 		$(MAKE) ${GCC_MAKEOPTS} all
@@ -327,20 +316,17 @@ endif
 	cd $(STAGING_TARGET_DIR)/lib && \
 		ln -sf libstdc++.so.6.0.$(LIBSTDCXXVER) libstdc++.so && \
 		ln -sf libstdc++.so.6.0.$(LIBSTDCXXVER) libstdc++.so.6
+	touch $@
+
+$(WRKBUILD)/.final:
 	# cleanup unneeded docs
 	rm -rf $(TOOLCHAIN_DIR)/usr/share
-ifeq ($(ADK_TARGET_ARCH_M68K),y)
-	# create gcc wrapper for uClinux/m68k
-	echo "#!/bin/sh" > $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-	echo "exec ${GNU_TARGET_NAME}-gcc \"\$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/m68k-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-	chmod a+x $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-endif
-ifeq ($(ADK_TARGET_ARCH_ARM),y)
-	# create gcc wrapper for uClinux/arm
-	echo "#!/bin/sh" > $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-	echo "exec ${GNU_TARGET_NAME}-gcc \"\$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/arm-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-	chmod a+x $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-endif
+	# cleanup unneeded libtool files
+	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -exec rm {} \;
+	# strip target libs and host tools for toolchain builds
+	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh \
+		$(STAGING_TARGET_DIR) $(TOOLCHAIN_DIR)/usr/lib/gcc/$(GNU_TARGET_NAME)
+	debug='0' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(TOOLCHAIN_DIR)/usr/bin
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk

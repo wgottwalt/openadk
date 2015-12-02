@@ -173,12 +173,12 @@ world:
 	${BASH} ${ADK_TOPDIR}/scripts/scan-pkgs.sh
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
-	$(MAKE) -f mk/build.mk package/hostcompile toolchain/fixup package/compile
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final package/compile
 else
-	$(MAKE) -f mk/build.mk package/hostcompile toolchain/fixup package/compile root_clean package/install
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final package/compile root_clean package/install
 endif
 else
-	$(MAKE) -f mk/build.mk package/hostcompile toolchain/fixup target/config-prepare target/compile package/compile root_clean package/install target/install package_index
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final target/config-prepare target/compile package/compile root_clean package/install target/install package_index
 endif
 
 package_index:

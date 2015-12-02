@@ -20,29 +20,7 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 GLIBC_MAKEOPTS+=	PARALLELMFLAGS="-j$(ADK_MAKE_JOBS)"
 endif
 
-
-GLIBC_BUILD_DIR_INITIAL:=	${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-headers
 GLIBC_BUILD_DIR_FINAL:=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
-
-$(WRKBUILD)/.headers_configure:
-	mkdir -p $(GLIBC_BUILD_DIR_INITIAL)
-	(cd $(GLIBC_BUILD_DIR_INITIAL); \
-		${GLIBC_ENV} \
-		$(WRKBUILD)/configure \
-			--prefix=$(STAGING_TARGET_DIR)/usr \
-			--with-sysroot=$(STAGING_TARGET_DIR) \
-			${GLIBC_CONFOPTS} \
-	);
-	touch $@
-
-$(WRKBUILD)/.headers: $(WRKBUILD)/.headers_configure
-	(cd $(GLIBC_BUILD_DIR_INITIAL); \
-		${GLIBC_ENV} \
-		$(MAKE) ${GLIBC_MAKEOPTS} install-headers \
-	);
-	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
-	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64,soft,hard}.h
-	touch $@
 
 $(WRKBUILD)/.configured:
 	mkdir -p $(GLIBC_BUILD_DIR_FINAL)
@@ -62,20 +40,14 @@ $(WRKBUILD)/.compiled:
 
 $(WRKBUILD)/.installed:
 	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_TARGET_DIR) install
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64,soft,hard}.h
 	mkdir -p ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/posix/gai.conf ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc
 	touch $@
 
-$(WRKBUILD)/.fixup:
-	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -exec rm {} \;
-	rm -rf $(STAGING_TARGET_DIR)/usr/share/locale $(STAGING_TARGET_DIR)/usr/share/i18n
-ifeq ($(ADK_TARGET_TOOLCHAIN),y)
-	# strip target libs and host tools for toolchain builds
-	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh \
-		$(STAGING_TARGET_DIR) $(TOOLCHAIN_DIR)/usr/lib/gcc/$(GNU_TARGET_NAME)
-	debug='0' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(TOOLCHAIN_DIR)/usr/bin
-endif
+$(WRKBUILD)/.final:
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk

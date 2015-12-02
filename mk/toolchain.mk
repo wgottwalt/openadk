@@ -1,7 +1,7 @@
-prepare: ${WRKDIST}/.prepared $(WRKBUILD)/.headers
+prepare: ${WRKDIST}/.prepared
 configure: ${WRKBUILD}/.configured
 compile: $(WRKBUILD)/.compiled
 install: $(WRKBUILD)/.installed
-fixup: $(WRKBUILD)/.fixup
+final: $(WRKBUILD)/.final
 clean:
 	rm -rf $(WRKDIR)

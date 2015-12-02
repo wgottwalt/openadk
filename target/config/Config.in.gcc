@@ -86,5 +86,9 @@ config ADK_TOOLCHAIN_GCC_4_2_4
 	bool "4.2.4"
 	depends on ADK_TARGET_ARCH_METAG
 	select ADK_DISABLE_HONOUR_CFLAGS
+	select ADK_TOOLCHAIN_GCC_OLD
 
 endchoice
+
+config ADK_TOOLCHAIN_GCC_OLD
+	bool

@@ -8,6 +8,7 @@ include ../rules.mk
 include Makefile.inc
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 
+# disable LTO
 TARGET_CFLAGS:=$(filter-out -flto,$(TARGET_CFLAGS))
 # handled by uClibc-ng makefiles
 TARGET_CFLAGS:=$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
@@ -35,7 +36,7 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 UCLIBC_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
 endif
 
-$(WRKBUILD)/.headers:
+$(WRKBUILD)/.configured: $(WRKBUILD)/.prepared
 	$(SED) 's,^CROSS_COMPILE=.*,CROSS_COMPILE=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
 ifeq ($(ADK_TARGET_LIB_UCLIBC_NG_GIT),y)
 	PATH='$(HOST_PATH)' sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${STAGING_TARGET_DIR}/usr/include\"' \
@@ -277,7 +278,7 @@ ifeq ($(ADK_TARGET_ABI_O32),y)
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 endif
-	echo N|PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
+	echo N|PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
@@ -285,19 +286,10 @@ endif
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		oldconfig
-	PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
-		PREFIX=$(STAGING_TARGET_DIR) \
-		DEVEL_PREFIX=/usr/ \
-		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \
-		HOSTCC="$(HOST_CC)" \
-		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
-		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
-		install_headers
-	touch $(WRKBUILD)/.configured
 	touch $@
 
-$(WRKBUILD)/.compiled:
-	PATH='$(HOST_PATH)' $(MAKE) ${UCLIBC_MAKEOPTS} -C $(WRKBUILD) \
+$(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
+	PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
 		PREFIX= \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=/ \
@@ -308,7 +300,7 @@ $(WRKBUILD)/.compiled:
 		all
 	touch $@
 
-$(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
+$(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
@@ -317,38 +309,19 @@ $(WRKBUILD)/.install_headers: $(WRKBUILD)/.compiled
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
-		install_dev
-	touch $@
-
-$(WRKBUILD)/.installed: $(WRKBUILD)/.install_headers
-	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
-		PREFIX=$(STAGING_TARGET_DIR) \
-		DEVEL_PREFIX=/usr/ \
-		DEVEL_PREFIX_LIB=/ \
-		RUNTIME_PREFIX=/ \
-		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
-		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
-		VERBOSE=1 \
-		install_runtime
-	touch $@
-
-$(WRKBUILD)/.fixup:
+		install_runtime install_dev
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		CC='$(TARGET_CC)' \
-		TEST_INSTALLED_UCLIBC=1 \
-		UCLIBC_ONLY=1 \
+		PREFIX= \
+		DEVEL_PREFIX=/usr/ \
+		RUNTIME_PREFIX=/ \
+		HOSTCC="$(HOST_CC)" \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
+		TEST_INSTALLED_UCLIBC=1 \
+		UCLIBC_ONLY=1 \
 		VERBOSE=1 \
 		test_compile test_gen
-ifeq ($(ADK_TARGET_TOOLCHAIN),y)
-	# cleanup toolchain
-	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -exec rm {} \;
-	# strip target libs and host tools for toolchain builds
-	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh \
-		$(STAGING_TARGET_DIR) $(TOOLCHAIN_DIR)/usr/lib/gcc/$(GNU_TARGET_NAME)
-	debug='0' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(TOOLCHAIN_DIR)/usr/bin
-endif
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk

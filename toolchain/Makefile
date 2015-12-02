@@ -4,14 +4,11 @@
 # Steps to build toolchains
 # 1) build and install binutils
 # 2) build and install mpfr, mpc, libelf and gmp
-# 3) build and install minimal gcc c compiler
+# 3) build and install initial gcc
 # 4) install kernel-headers
-# 5) install libc headers
-# 6) build and install initial static gcc
-# 7) build and install full libc
-# 8) build and install full shared gcc
-# 9) rebuild and install full libc (in case of musl/uclibc)
-# 10) build and install gdb debugger
+# 5) build and install full libc
+# 6) build and install full gcc
+# 7) build and install gdb debugger
 
 include $(ADK_TOPDIR)/rules.mk
 
@@ -46,20 +43,18 @@ endif
 
 DOWNLOAD:=kernel-headers-download $(patsubst %,%-download,$(TARGETS))
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
-FIXUP:=$(patsubst %,%-fixup,$(CLIB))
+FINAL:=$(patsubst %,%-final,gcc)
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
 
 install: $(TARGETS_INSTALL)
 clean: $(TARGETS_CLEAN)
 download: $(DOWNLOAD)
-fixup: $(FIXUP)
+final: $(FINAL)
 
-gcc-prepare: binutils-install gmp-install mpfr-install mpc-install libelf-install
-$(CLIB)-prepare: gcc-prepare kernel-headers-prepare
-gcc-configure: $(CLIB)-prepare
-$(CLIB)-compile: gcc-configure
-gcc-compile: $(CLIB)-install
-$(CLIB)-fixup: gcc-install $(GDB) $(ELF2FLT)
+gcc-configure: binutils-install gmp-install mpfr-install mpc-install libelf-install
+$(CLIB)-install: gcc-configure kernel-headers-configure
+gcc-install: $(CLIB)-install
+gcc-final: gcc-install $(GDB) $(ELF2FLT)
 
 %-download:
 	$(TRACE) toolchain/$(patsubst %-download,%,$@)/download
@@ -105,9 +100,9 @@ $(CLIB)-fixup: gcc-install $(GDB) $(ELF2FLT)
 		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' CXXFLAGS='$(HOST_STATIC_CXXFLAGS)' $(MAKE_TRACE); \
 	fi
 
-%-fixup: %-install
-	$(TRACE) toolchain/$(patsubst %-fixup,%,$@)/fixup
-	@$(MAKE) -C $(patsubst %-fixup,%,$@) fixup $(MAKE_TRACE)
+%-final: %-install
+	$(TRACE) toolchain/$(patsubst %-final,%,$@)/final
+	@$(MAKE) -C $(patsubst %-final,%,$@) final $(MAKE_TRACE)
 
 %-clean:
 	$(TRACE) toolchain/$(patsubst %-clean,%,$@)/clean
