@@ -55,6 +55,7 @@ menu "Filesystems"
 
 config ADK_KERNEL_EXT2_FS
 	tristate "EXT2 filesystem support"
+	select ADK_KERNEL_BLOCK
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
 	help
@@ -62,6 +63,7 @@ config ADK_KERNEL_EXT2_FS
 
 config ADK_KERNEL_EXT3_FS
 	tristate "EXT3 filesystem support"
+	select ADK_KERNEL_BLOCK
 	help
 	  This is the journalling version of the Second extended file system
 	  (often called ext3), the de facto standard Linux file system
@@ -88,12 +90,14 @@ config ADK_KERNEL_EXT3_FS
 
 config ADK_KERNEL_EXT4_FS
 	tristate "EXT4 filesystem support"
+	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_JBD2
 	help
 	  Ext4 filesystem.
 
 config ADK_KERNEL_HFSPLUS_FS
 	tristate "HFS+ filesystem support"
+	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_NLS_UTF8
 	select ADK_KERNEL_MISC_FILESYSTEMS
 	help
@@ -107,6 +111,7 @@ config ADK_KERNEL_HFSPLUS_FS
 
 config ADK_KERNEL_NTFS_FS
 	tristate "NTFS file system support"
+	select ADK_KERNEL_BLOCK
 	help
 	  NTFS is the file system of Microsoft Windows NT, 2000, XP and 2003.
 
@@ -132,6 +137,7 @@ config ADK_KERNEL_NTFS_FS
 
 config ADK_KERNEL_VFAT_FS
 	tristate "VFAT filesystem support"
+	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_NLS_CODEPAGE_850
 	select ADK_KERNEL_NLS_ISO8859_1
 	default y if ADK_TARGET_BOARD_BCM28XX
@@ -145,9 +151,9 @@ config ADK_KERNEL_VFAT_FS
 	  The VFAT support enlarges your kernel by about 10 KB Please read the
 	  file <file:Documentation/filesystems/vfat.txt> for details.
 
-
 config ADK_KERNEL_XFS_FS
 	tristate "XFS filesystem support"
+	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_EXPORTFS
 	select ADK_KERNEL_LIBCRC32C
 	help
@@ -164,6 +170,7 @@ config ADK_KERNEL_XFS_FS
 
 config ADK_KERNEL_BTRFS_FS
 	tristate "Btrfs filesystem support"
+	select ADK_KERNEL_BLOCK
 	select ADK_KERNEL_CRYPTO_CRC32C
 	select ADK_KERNEL_RAID6_PQ
 	select ADK_KERNEL_XOR_BLOCKS
