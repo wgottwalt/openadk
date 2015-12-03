@@ -47,6 +47,13 @@ config ADK_TARGET_LIB_GLIBC
 	help
 	  http://www.gnu.org/libc
 
+config ADK_TARGET_LIB_NEWLIB
+	bool "newlib C library"
+	select ADK_TARGET_WITHOUT_CXX
+	select ADK_TARGET_LIB_WITHOUT_THREADS
+	help
+	  https://sourceware.org/newlib/
+
 endchoice
 
 choice
@@ -103,11 +110,20 @@ config ADK_TARGET_LIB_MUSL_GIT
 	bool "git"
 	depends on ADK_TARGET_LIB_MUSL
 
+config ADK_TARGET_LIB_NEWLIB_2_2_0
+	bool "2.2.0"
+	depends on ADK_TARGET_LIB_NEWLIB
+
+config ADK_TARGET_LIB_NEWLIB_GIT
+	bool "git"
+	depends on ADK_TARGET_LIB_NEWLIB
+
 endchoice
 
 choice
 prompt "Threading"
 depends on ADK_TARGET_LIB_UCLIBC_NG && !ADK_TARGET_WITHOUT_THREADS
+depends on ADK_TARGET_LIB_NEWLIB
 
 config ADK_TARGET_LIB_WITH_THREADS
 	bool "enable threads"
@@ -134,6 +150,7 @@ config ADK_TARGET_LIBC
 	default "uclibc-ng" if ADK_TARGET_LIB_UCLIBC_NG
 	default "glibc" if ADK_TARGET_LIB_GLIBC
 	default "musl" if ADK_TARGET_LIB_MUSL
+	default "newlib" if ADK_TARGET_LIB_NEWLIB
 
 config ADK_LIBC_VERSION
 	string
@@ -146,9 +163,11 @@ config ADK_LIBC_VERSION
 	default "2.22" if ADK_TARGET_LIB_GLIBC_2_22
 	default "2.21" if ADK_TARGET_LIB_GLIBC_2_21
 	default "2.20" if ADK_TARGET_LIB_GLIBC_2_20
+	default "2.2.0" if ADK_TARGET_LIB_NEWLIB_2_2_0
 	default "git" if ADK_TARGET_LIB_UCLIBC_NG_GIT || \
 		         ADK_TARGET_LIB_MUSL_GIT || \
-		         ADK_TARGET_LIB_GLIBC_GIT
+		         ADK_TARGET_LIB_GLIBC_GIT || \
+			 ADK_TARGET_LIB_NEWLIB_GIT
 
 config ADK_TARGET_LIB_UCLIBC_NG_1_0
 	bool
@@ -181,3 +200,5 @@ config ADK_TARGET_SUFFIX
 	default "musl32" if ADK_TARGET_LIB_MUSL && ADK_TARGET_ABI_32 && ADK_LINUX_64
 	default "muslx32" if ADK_TARGET_LIB_MUSL && ADK_TARGET_ABI_X32 && ADK_LINUX_64
 	default "musl" if ADK_TARGET_LIB_MUSL
+	default "eabi" if ADK_TARGET_LIB_NEWLIB && ADK_TARGET_ARCH_ARM
+	default "elf" if ADK_TARGET_LIB_NEWLIB

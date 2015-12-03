@@ -56,6 +56,10 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--without-isl \
 			--disable-nls
 
+ifeq ($(ADK_TARGET_LIB_NEWLIB),y)
+GCC_FINAL_CONFOPTS:=	--with-newlib
+endif
+
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 GCC_FINAL_CONFOPTS:=	--enable-tls --enable-threads --enable-libatomic
 endif
@@ -255,6 +259,10 @@ else
 	PATH='$(TARGET_PATH)' \
 		$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc install-target-libgcc
 endif
+	# required for newlib
+	(cd $(TOOLCHAIN_DIR)/usr/bin && \
+		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-cc \
+	)
 ifeq ($(ADK_TARGET_ARCH_M68K),y)
 	# create gcc wrapper for uClinux/m68k
 	echo "#!/bin/sh" > $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc

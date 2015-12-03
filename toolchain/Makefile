@@ -26,6 +26,10 @@ ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGETS+=musl
 CLIB:=musl
 endif
+ifeq ($(ADK_TARGET_LIB_NEWLIB),y)
+TARGETS+=newlib
+CLIB:=newlib
+endif
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
 TARGETS+=elf2flt
