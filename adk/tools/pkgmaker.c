@@ -327,7 +327,7 @@ int main() {
 	char dir[MAXPATH];
 	char variable[2*MAXVAR];
 	char *key, *value, *token, *cftoken, *sp, *hkey, *val, *pkg_fd;
-	char *pkg_name, *pkg_depends, *pkg_needs, *pkg_depends_system, *pkg_depends_libc, *pkg_section, *pkg_descr, *pkg_url;
+	char *pkg_name, *pkg_depends, *pkg_kdepends, *pkg_needs, *pkg_depends_system, *pkg_depends_libc, *pkg_section, *pkg_descr, *pkg_url;
 	char *pkg_subpkgs, *pkg_cfline, *pkg_dflt;
 	char *pkgname, *sysname, *pkg_debug, *pkg_bb;
 	char *pkg_libc_depends, *pkg_host_depends, *pkg_system_depends, *pkg_arch_depends, *pkg_flavours, *pkg_flavours_string, *pkg_choices, *pseudo_name;
@@ -342,6 +342,7 @@ int main() {
 	pkg_section = NULL;
 	pkg_url = NULL;
 	pkg_depends = NULL;
+	pkg_kdepends = NULL;
 	pkg_needs = NULL;
 	pkg_depends_system = NULL;
 	pkg_depends_libc = NULL;
@@ -563,6 +564,8 @@ int main() {
 					if ((parse_var(buf, "PKG_BB", NULL, &pkg_bb)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_DEPENDS", pkg_depends, &pkg_depends)) == 0)
+						continue;
+					if ((parse_var(buf, "PKG_KDEPENDS", pkg_kdepends, &pkg_kdepends)) == 0)
 						continue;
 					if ((parse_var(buf, "PKG_NEEDS", pkg_needs, &pkg_needs)) == 0)
 						continue;
@@ -908,6 +911,16 @@ int main() {
 					free(pkg_depends);
 					pkg_depends = NULL;
 				}
+				/* create kernel package dependency information */
+				if (pkg_kdepends != NULL) {
+					token = strtok(pkg_kdepends, " ");
+					while (token != NULL) {
+						fprintf(cfg, "\tselect ADK_KERNEL_%s m\n", toupperstr(token));
+						token = strtok(NULL, " ");
+					}
+					free(pkg_kdepends);
+					pkg_kdepends = NULL;
+				}
 				/* create system specific package dependency information */
 				if (pkg_depends_system != NULL) {
 					token = strtok(pkg_depends_system, " ");
@@ -1177,6 +1190,7 @@ int main() {
 			free(pkg_section);
 			free(pkg_url);
 			free(pkg_depends);
+			free(pkg_kdepends);
 			free(pkg_flavours);
 			free(pkg_flavours_string);
 			free(pkg_choices);
@@ -1194,6 +1208,7 @@ int main() {
 			pkg_section = NULL;
 			pkg_url = NULL;
 			pkg_depends = NULL;
+			pkg_kdepends = NULL;
 			pkg_flavours = NULL;
 			pkg_flavours_string = NULL;
 			pkg_choices = NULL;

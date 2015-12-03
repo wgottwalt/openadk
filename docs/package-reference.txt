@@ -48,6 +48,10 @@ information is:
   which might be different to the package directory name. See what is used
   in PKG_template, to find out the package name used here.
 
+* +PKG_KDEPENDS+ optional, lists the kernel module dependencies that are required to
+  run the software package on the target. It contains a list of kernel module names
+  in lower case as used in +target/linux/config+. (use minus instead of underscores)
+
 * +PKG_NEEDS+ optional, lists the features that are required to build or
   run the software package on the target. It contains a list of keywords.
   Supported are +threads+ +rt+ +c+++
