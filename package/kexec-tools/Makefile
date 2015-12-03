@@ -11,11 +11,11 @@ PKG_DESCR:=		kernel exec tools
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		zlib
 PKG_BUILDEP:=		zlib
+PKG_KDEPENDS:=		kexec
 PKG_URL:=		http://kernel.org/pub/linux/utils/kernel/kexec/
 PKG_SITES:=		${MASTER_SITE_KERNEL:=utils/kernel/kexec/}
 
 PKG_ARCH_DEPENDS:=	!mips !m68k
-PKG_CFLINE_KEXEC_TOOLS:=	select ADK_KERNEL_KEXEC
 
 include $(ADK_TOPDIR)/mk/package.mk
 

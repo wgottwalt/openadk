@@ -10,11 +10,9 @@ PKG_HASH:=		c23a9bdd219a0a36ae7ca20e7c9749f2efdcdbf108aabeeeb5066ba442ec88b6
 PKG_DESCR:=		point-to-point tunneling protocol server
 PKG_SECTION:=		net/ppp
 PKG_DEPENDS:=		ppp
+PKG_KDEPENDS:=		ppp ppp-mppe net-ipgre
 PKG_URL:=		http://www.poptop.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=poptop/}
-PKG_CFLINE_PPTPD:=	select ADK_KERNEL_NET_IPGRE m@
-PKG_CFLINE_PPTPD+=	select ADK_KERNEL_PPP m@
-PKG_CFLINE_PPTPD+=	select ADK_KERNEL_PPP_MPPE m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

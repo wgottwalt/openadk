@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		67fabde9fb67b286a96c4f45b594b0eccd0f761b495705c18f2ae9461b831376
 PKG_DESCR:=		device that allows access to kernel cryptographic drivers
 PKG_SECTION:=		app/crypto
+PKG_KDEPENDS:=		crypto-aead crypto-algapi crypto-manager
 PKG_URL:=		http://home.gna.org/cryptodev-linux/
 PKG_SITES:=		http://download.gna.org/cryptodev-linux/
 

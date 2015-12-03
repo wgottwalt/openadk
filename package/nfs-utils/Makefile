@@ -11,6 +11,7 @@ PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		keyutils libtirpc rpcbind libdevmapper
 PKG_BUILDDEP:=		keyutils libtirpc lvm
+PKG_KDEPENDS:=		nfs-fs
 PKG_NEEDS:=		threads
 PKG_URL:=		http://sourceforge.net/projects/nfs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=nfs/}

@@ -11,9 +11,9 @@ PKG_DESCR:=		vpn tunnel daemon
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		zlib liblzo
 PKG_BUILDDEP:=		zlib liblzo
+PKG_KDEPENDS:=		tun
 PKG_URL:=		http://www.tinc-vpn.org/
 PKG_SITES:=		http://www.tinc-vpn.org/packages/
-PKG_CFLINE_TINC:=	select ADK_KERNEL_TUN m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

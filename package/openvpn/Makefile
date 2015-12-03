@@ -8,10 +8,10 @@ PKG_VERSION:=		2.3.7
 PKG_RELEASE:=		1
 PKG_HASH:=		4062ce972500f98988e9c6e9dd1040be25582f0d49aa7e69f3f4cff96e9aebee
 PKG_DESCR:=		vpn solution using ssl/tls
+PKG_KDEPENDS:=		tun
 PKG_SECTION:=		net/security
 PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
-PKG_CFLINE_OPENVPN:=	select ADK_KERNEL_TUN m
 
 PKG_CHOICES_OPENVPN:=	WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto

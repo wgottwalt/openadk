@@ -9,9 +9,9 @@ PKG_RELEASE:=		2
 PKG_HASH:=		b505ab963af8423ef8ae844951ef05fe1554630b448f1174074e9881cb474a01
 PKG_DESCR:=		wireless lan access point controller
 PKG_SECTION:=		net/wifi
+PKG_KDEPENDS:=		tun
 PKG_URL:=		http://www.chillispot.info/
 PKG_SITES:=		http://www.chillispot.info/download/
-PKG_CFLINE_CHILLISPOT:=	select ADK_KERNEL_TUN m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

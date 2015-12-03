@@ -10,9 +10,8 @@ PKG_HASH:=		e39c42d933242a8a6dd8600a0fa7f0a5ec8f066d10c4149d8e81a5c68fe4bbda
 PKG_DESCR:=		point-to-point tunneling protocol client
 PKG_SECTION:=		net/ppp
 PKG_DEPENDS:=		ppp
+PKG_KDEPENDS:=		ppp net-ipgre
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pptpclient/}
-PKG_CFLINE_PPTP:=	select ADK_KERNEL_NET_IPGRE m@
-PKG_CFLINE_PPTP+=	select ADK_KERNEL_PPP m
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

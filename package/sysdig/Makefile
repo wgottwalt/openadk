@@ -10,13 +10,10 @@ PKG_DESCR:=		system troubleshooting tool
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		zlib jsoncpp luajit
 PKG_BUILDDEP:=		cmake-host zlib jsoncpp luajit
+PKG_KDEPENDS:=		ftrace generic-tracer function-tracer
 PKG_NEEDS:=		c++
 PKG_URL:=		http://www.sysdig.org/
 PKG_SITES:=		https://github.com/draios/sysdig.git
-
-PKG_CFLINE_SYSDIG:=	select ADK_KERNEL_FTRACE@
-PKG_CFLINE_SYSDIG+=	select ADK_KERNEL_GENERIC_TRACER@
-PKG_CFLINE_SYSDIG+=	select ADK_KERNEL_FUNCTION_TRACER
 
 include $(ADK_TOPDIR)/mk/package.mk
 include ${ADK_TOPDIR}/mk/kernel-ver.mk

@@ -11,8 +11,8 @@ PKG_DESCR:=		vpn tunnel daemon
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		zlib liblzo
 PKG_BUILDDEP:=		zlib liblzo
+PKG_KDEPENDS:=		tun
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vtun/}
-PKG_CFLINE_VTUN:=	select ADK_KERNEL_TUN m
 
 PKG_CHOICES_VTUN:=	WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto

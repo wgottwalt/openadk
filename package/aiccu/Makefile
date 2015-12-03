@@ -9,10 +9,10 @@ PKG_RELEASE:=		11
 PKG_HASH:=		2260f426c13471169ccff8cb4a3908dc5f79fda18ddb6a55363e7824e6c4c760
 PKG_DESCR:=		sixxs automatic ipv6 connectivity client utility
 PKG_SECTION:=		net/ipv6
+PKG_KDEPENDS:=		tun
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.sixxs.net/
 PKG_SITES:=		http://www.sixxs.net/archive/sixxs/aiccu/unix/
-PKG_CFLINE_AICCU:=	select ADK_KERNEL_TUN m
 
 PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
