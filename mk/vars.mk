@@ -169,6 +169,7 @@ TARGET_LDFLAGS+=	-mh
 endif
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
+TARGET_LDFLAGS+=	-Wl,-elf2flt
 TARGET_CFLAGS+=		-Wl,-elf2flt
 TARGET_CXXFLAGS+=	-Wl,-elf2flt
 endif
