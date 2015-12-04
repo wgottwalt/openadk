@@ -163,41 +163,19 @@ TARGET_CXXFLAGS+=	-m$(ADK_TARGET_FLOAT)-float
 endif
 endif
 
-ifeq ($(ADK_TARGET_ARCH_ARM),y)
-ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
-TARGET_CFLAGS+=		-Wl,-elf2flt
-TARGET_CXXFLAGS+=	-Wl,-elf2flt
-endif
-endif
-
-ifeq ($(ADK_TARGET_ARCH_BFIN),y)
-ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
-TARGET_CFLAGS+=		-Wl,-elf2flt
-TARGET_CXXFLAGS+=	-Wl,-elf2flt
-endif
-ifeq ($(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
-TARGET_CFLAGS+=		-msep-data
-TARGET_CXXFLAGS+=	-msep-data
-endif
-endif
-
 ifeq ($(ADK_TARGET_ARCH_H8300),y)
 TARGET_CFLAGS+=		-mh
 TARGET_LDFLAGS+=	-mh
+endif
+
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
 TARGET_CFLAGS+=		-Wl,-elf2flt
 TARGET_CXXFLAGS+=	-Wl,-elf2flt
 endif
-endif
 
-ifeq ($(ADK_TARGET_ARCH_M68K),y)
-ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
-TARGET_LDFLAGS+=	-elf2flt
-endif
 ifeq ($(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
 TARGET_CFLAGS+=		-msep-data
 TARGET_CXXFLAGS+=	-msep-data
-endif
 endif
 
 ifeq ($(ADK_TARGET_LIB_MUSL),y)

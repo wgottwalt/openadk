@@ -36,7 +36,7 @@ TARGETS+=elf2flt
 ELF2FLT:=elf2flt-install
 endif
 
-# disable gdb for arc
+# disable gdb for some architectures
 ifeq ($(ADK_TARGET_ARCH_ARC)$(ADK_TARGET_ARCH_METAG)$(ADK_TARGET_ARCH_OR1K),)
 TARGETS+=gdb
 GDB:=gdb-install
@@ -57,8 +57,8 @@ final: $(FINAL)
 
 gcc-configure: binutils-install gmp-install mpfr-install mpc-install libelf-install
 $(CLIB)-install: gcc-configure kernel-headers-configure
-gcc-install: $(CLIB)-install
-gcc-final: gcc-install $(GDB) $(ELF2FLT)
+gcc-install: $(ELF2FLT) $(CLIB)-install
+gcc-final: gcc-install $(GDB)
 
 %-download:
 	$(TRACE) toolchain/$(patsubst %-download,%,$@)/download
