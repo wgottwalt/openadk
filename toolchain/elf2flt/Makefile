@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 include Makefile.inc
 include ../rules.mk
-include ${ADK_TOPDIR}/mk/buildhlp.mk
+include $(ADK_TOPDIR)/mk/buildhlp.mk
 
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_GIT),y)
 BINUTILS_VERSION:=	git
@@ -22,14 +22,15 @@ ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_25_1),y)
 BINUTILS_VERSION:=	2.25.1
 endif
 
-$(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
-	(cd $(WRKBUILD); CPPFLAGS="-idirafter ${ADK_TOPDIR}/adk/include" ./configure --prefix=$(STAGING_HOST_DIR)/usr \
-			--target=$(GNU_TARGET_NAME) \
-			--with-bfd-include-dir=$(TOOLCHAIN_BUILD_DIR)/w-binutils-${BINUTILS_VERSION}-1/binutils-${BINUTILS_VERSION}/bfd \
-			--with-binutils-include-dir=$(TOOLCHAIN_BUILD_DIR)/w-binutils-${BINUTILS_VERSION}-1/binutils-${BINUTILS_VERSION}/include \
-			--with-libbfd=$(TOOLCHAIN_BUILD_DIR)/w-binutils-${BINUTILS_VERSION}-1/binutils-${BINUTILS_VERSION}/bfd/libbfd.a \
-			--with-libiberty=$(TOOLCHAIN_BUILD_DIR)/w-binutils-${BINUTILS_VERSION}-1/binutils-${BINUTILS_VERSION}/libiberty/libiberty.a )
+	(cd $(WRKBUILD); \
+	CPPFLAGS="-idirafter $(ADK_TOPDIR)/adk/include" \
+	./configure --prefix=$(STAGING_HOST_DIR)/usr \
+		--target=$(GNU_TARGET_NAME) \
+		--with-bfd-include-dir=$(TOOLCHAIN_BUILD_DIR)/w-binutils-$(BINUTILS_VERSION)-1/binutils-$(BINUTILS_VERSION)/bfd \
+		--with-binutils-include-dir=$(TOOLCHAIN_BUILD_DIR)/w-binutils-$(BINUTILS_VERSION)-1/binutils-$(BINUTILS_VERSION)/include \
+		--with-libbfd=$(TOOLCHAIN_BUILD_DIR)/w-binutils-$(BINUTILS_VERSION)-1/binutils-$(BINUTILS_VERSION)/bfd/libbfd.a \
+		--with-libiberty=$(TOOLCHAIN_BUILD_DIR)/w-binutils-$(BINUTILS_VERSION)-1/binutils-$(BINUTILS_VERSION)/libiberty/libiberty.a )
 	touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
@@ -37,13 +38,15 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
-	${INSTALL_BIN} ${WRKBUILD}/elf2flt ${TOOLCHAIN_DIR}/usr/$(GNU_TARGET_NAME)/bin
-	${INSTALL_BIN} ${WRKBUILD}/flthdr ${TOOLCHAIN_DIR}/usr/$(GNU_TARGET_NAME)/bin
-	${INSTALL_BIN} ${WRKBUILD}/ld-elf2flt ${TOOLCHAIN_DIR}/usr/$(GNU_TARGET_NAME)/bin
-	${INSTALL_DATA} ${WRKBUILD}/elf2flt.ld ${TOOLCHAIN_DIR}/usr/$(GNU_TARGET_NAME)/lib
-	rm $(TOOLCHAIN_DIR)/usr/bin/$(GNU_TARGET_NAME)-ld
-	(cd ${TOOLCHAIN_DIR}/usr/$(GNU_TARGET_NAME)/bin && \
-		ln -sf ld.bfd ld.real )
+	$(INSTALL_BIN) $(WRKBUILD)/elf2flt $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin
+	$(INSTALL_BIN) $(WRKBUILD)/flthdr $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin
+	$(INSTALL_BIN) $(WRKBUILD)/ld-elf2flt $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin
+	$(INSTALL_DATA) $(WRKBUILD)/elf2flt.ld $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/lib
+	rm $(TOOLCHAIN_DIR)/usr/bin/$(GNU_TARGET_NAME)-ld $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin/ld
+	(cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin \
+		&& ln -sf ld.bfd ld.real \
+		&& ln -sf ld-elf2flt ld \
+	)
 	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf ../$(GNU_TARGET_NAME)/bin/elf2flt $(GNU_TARGET_NAME)-elf2flt && \
 		ln -sf ../$(GNU_TARGET_NAME)/bin/flthdr $(GNU_TARGET_NAME)-flthdr && \
@@ -52,4 +55,4 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	(cd $(TOOLCHAIN_DIR)/usr/bin/ && ln -sf $(GNU_TARGET_NAME)-ld.bfd $(GNU_TARGET_NAME)-ld.real )
 	touch $@
 
-include ${ADK_TOPDIR}/mk/toolchain.mk
+include $(ADK_TOPDIR)/mk/toolchain.mk

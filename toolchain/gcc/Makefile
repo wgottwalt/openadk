@@ -312,15 +312,6 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-gcc-${PKG_VERSION} && \
 		ln -sf $(GNU_TARGET_NAME)-g++ $(GNU_TARGET_NAME)-g++-${PKG_VERSION} \
 	)
-ifeq ($(ADK_TARGET_USE_GOLD),y)
-	(cd $(TOOLCHAIN_DIR)/usr/bin && \
-		ln -sf $(GNU_TARGET_NAME)-ld.gold $(GNU_TARGET_NAME)-ld)
-else
-ifeq (ADK_TOOLCHAIN_BINUTILS_2_20_1),)
-	(cd $(TOOLCHAIN_DIR)/usr/bin && \
-		ln -sf $(GNU_TARGET_NAME)-ld.bfd $(GNU_TARGET_NAME)-ld)
-endif
-endif
 	cd $(STAGING_TARGET_DIR)/lib && \
 		ln -sf libstdc++.so.6.0.$(LIBSTDCXXVER) libstdc++.so && \
 		ln -sf libstdc++.so.6.0.$(LIBSTDCXXVER) libstdc++.so.6
