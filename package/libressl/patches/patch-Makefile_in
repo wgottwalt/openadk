@@ -1,0 +1,11 @@
+--- libressl-2.2.4.orig/Makefile.in	2015-10-16 00:05:34.000000000 +0200
++++ libressl-2.2.4/Makefile.in	2015-12-06 00:03:23.848314300 +0100
+@@ -360,7 +360,7 @@ target_alias = @target_alias@
+ top_build_prefix = @top_build_prefix@
+ top_builddir = @top_builddir@
+ top_srcdir = @top_srcdir@
+-SUBDIRS = crypto ssl tls include apps tests man
++SUBDIRS = crypto ssl tls include 
+ ACLOCAL_AMFLAGS = -I m4
+ pkgconfigdir = $(libdir)/pkgconfig
+ pkgconfig_DATA = libcrypto.pc libssl.pc libtls.pc openssl.pc
