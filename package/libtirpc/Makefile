@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libtirpc
-PKG_VERSION:=		0.3.2
-PKG_RELEASE:=		2
-PKG_HASH:=		2008a379f37f2c5d5a87a568b06707422cc3e4f5da305f7fb71f3f4c6d473ffc
+PKG_VERSION:=		1.0.1
+PKG_RELEASE:=		1
+PKG_HASH:=		5156974f31be7ccbc8ab1de37c4739af6d9d42c87b1d5caf4835dda75fcbb89e
 PKG_DESCR:=		transport independent rpc library
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://sourceforge.net/projects/libtirpc/
@@ -39,6 +39,10 @@ CFG:=			.ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
+
+post-extract:
+	rm $(WRKBUILD)/tirpc/rpcsvc/crypt.h
+	rm $(WRKBUILD)/tirpc/rpc/rpcb_prot.h
 
 libtirpc-install:
 	${INSTALL_DIR} ${IDIR_LIBTIRPC}/usr/lib ${IDIR_LIBTIRPC}/etc
