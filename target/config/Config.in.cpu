@@ -963,7 +963,8 @@ config ADK_TARGET_CPU_ARCH
 	default "ppc64le" if ADK_CPU_PPC64 && ADK_TARGET_LITTLE_ENDIAN
 	default "ppc64" if ADK_CPU_PPC64 && ADK_TARGET_BIG_ENDIAN
 	default "s390x" if ADK_TARGET_ARCH_S390
-	default "sh2" if ADK_CPU_SH2
+	default "sh2" if ADK_CPU_SH2 && ADK_TARGET_LITTLE_ENDIAN
+	default "sh2eb" if ADK_CPU_SH2 && ADK_TARGET_BIG_ENDIAN
 	default "sh2a" if ADK_CPU_SH2A
 	default "sh3" if ADK_CPU_SH3 && ADK_TARGET_LITTLE_ENDIAN
 	default "sh3eb" if ADK_CPU_SH3 && ADK_TARGET_BIG_ENDIAN

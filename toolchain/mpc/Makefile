@@ -10,7 +10,6 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 MPC_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
 
-$(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \

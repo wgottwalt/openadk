@@ -81,6 +81,18 @@ ${WRKDIST}/.prepared: ${WRKDIST}/.extract_done
 	[ ! -d ./src ] || (cd src; $(PREVENT_PATCH) cp -Rp . ${WRKDIST}/) \
 		$(MAKE_TRACE)
 	@${MAKE} post-patch $(MAKE_TRACE)
+	# always use latest config.sub/config.guess from OpenADK scripts directory
+	cd ${WRKDIST}; \
+	    for i in $$(find . -name config.sub);do \
+		if [ -f $$i ]; then \
+			${CP} ${SCRIPT_DIR}/config.sub $$i; \
+		fi; \
+	    done; \
+	    for i in $$(find . -name config.guess);do \
+		if [ -f $$i ]; then \
+			${CP} ${SCRIPT_DIR}/config.guess $$i; \
+		fi; \
+	    done;
 	touch $@
 endif
 

@@ -43,17 +43,6 @@ ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
 endif
 	mkdir -p ${WRKBUILD}
 	@${MAKE} pre-configure $(MAKE_TRACE)
-	@cd ${WRKSRC}; \
-	    for i in $$(find . -name config.sub);do \
-		if [ -f $$i ]; then \
-			${CP} ${SCRIPT_DIR}/config.sub $$i; \
-		fi; \
-	    done; \
-	    for i in $$(find . -name config.guess);do \
-		if [ -f $$i ]; then \
-			${CP} ${SCRIPT_DIR}/config.guess $$i; \
-		fi; \
-	    done;
 
 ifneq ($(filter manual,${CONFIG_STYLE}),)
 	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)

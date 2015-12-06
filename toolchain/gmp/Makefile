@@ -14,7 +14,6 @@ ifeq (${ARCH_FOR_BUILD},x32)
 GMP_CONFOPTS+=		ABI=x32
 endif
 
-$(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 ifneq ($(OStype),Darwin)
 	(cd $(WRKBUILD); cp configfsf.guess config.guess)
@@ -30,7 +29,8 @@ endif
 	touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
-	env PATH="$(STAGING_HOST_DIR)/usr/bin:$$PATH" $(MAKE) ${GMP_MAKEOPTS} -C $(WRKBUILD) all
+	env PATH="$(STAGING_HOST_DIR)/usr/bin:$$PATH" \
+		$(MAKE) ${GMP_MAKEOPTS} -C $(WRKBUILD) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
