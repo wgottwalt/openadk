@@ -50,7 +50,19 @@ config ADK_TARGET_LIB_GLIBC
 config ADK_TARGET_LIB_NEWLIB
 	bool "newlib C library"
 	select ADK_TARGET_WITHOUT_CXX
-	select ADK_TARGET_LIB_WITHOUT_THREADS
+	select ADK_TARGET_WITHOUT_THREADS
+	depends on \
+		ADK_TARGET_ARCH_ARM || \
+		ADK_TARGET_ARCH_BFIN || \
+		ADK_TARGET_ARCH_CRIS || \
+		ADK_TARGET_ARCH_FRV || \
+		ADK_TARGET_ARCH_LM32 || \
+		ADK_TARGET_ARCH_MICROBLAZE || \
+		ADK_TARGET_ARCH_MIPS || \
+		ADK_TARGET_ARCH_OR1K || \
+		ADK_TARGET_ARCH_PPC || \
+		ADK_TARGET_ARCH_SPARC || \
+		ADK_TARGET_ARCH_X86
 	help
 	  https://sourceware.org/newlib/
 
@@ -123,7 +135,6 @@ endchoice
 choice
 prompt "Threading"
 depends on ADK_TARGET_LIB_UCLIBC_NG && !ADK_TARGET_WITHOUT_THREADS
-depends on ADK_TARGET_LIB_NEWLIB
 
 config ADK_TARGET_LIB_WITH_THREADS
 	bool "enable threads"
