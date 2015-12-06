@@ -7,7 +7,7 @@ PKG_NAME:=		libc-test
 PKG_VERSION:=		4a6c166000502bf741e8f878746dadfa3135a4df
 PKG_RELEASE:=		1
 PKG_DESCR:=		libc test suite
-PKG_SECTION:=		base/libs
+PKG_SECTION:=		base/tests
 PKG_DEPENDS:=		make
 PKG_URL:=		http://nsz.repo.hu/git/?p=libc-test
 PKG_SITES:=		git://nsz.repo.hu:45100/repo/libc-test

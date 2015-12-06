@@ -16,6 +16,7 @@ PKG_DFLT_MKSH:=		y if !ADK_TOOLCHAIN_ONLY && !ADK_TARGET_WITHOUT_MMU
 
 PKG_SUBPKGS:=		MKSH MKSH_TEST
 PKGSD_MKSH_TEST:=	install testsuite
+PKGSC_MKSH_TEST:=	base/tests
 
 DISTFILES:=		$(PKG_NAME)-R$(PKG_VERSION).tgz
 WRKDIST=		$(WRKDIR)/$(PKG_NAME)
@@ -25,7 +26,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,MKSH,mksh,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,MKSH,mksh,$(PKG_VERSION)-$(PKG_RELEASE),,$(PKG_DESCR),$(PKG_SECTION)))
-$(eval $(call PKG_template,MKSH_TEST,mksh-test,$(PKG_VERSION)-$(PKG_RELEASE),,$(PKGSD_MKSH_TEST),$(PKG_SECTION)))
+$(eval $(call PKG_template,MKSH_TEST,mksh-test,$(PKG_VERSION)-$(PKG_RELEASE),,$(PKGSD_MKSH_TEST),$(PKGSC_MKSH_TEST)))
 
 TARGET_CPPFLAGS+=	-DMKSHRC_PATH=\"/etc/mkshrc\"
 

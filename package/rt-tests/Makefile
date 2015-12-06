@@ -8,7 +8,7 @@ PKG_VERSION:=		3fed00ff8d2c0cdbc5ba078cbd60ce3cfcee615f
 PKG_RELEASE:=		1
 PKG_DESCR:=		realtime test apps
 PKG_NEEDS:=		threads rt
-PKG_SECTION:=		app/debug
+PKG_SECTION:=		base/tests
 PKG_SITES:=		git://git.kernel.org/pub/scm/linux/kernel/git/clrkwllms/rt-tests
 
 include $(ADK_TOPDIR)/mk/package.mk
