@@ -15,9 +15,6 @@ GMP_CONFOPTS+=		ABI=x32
 endif
 
 $(WRKBUILD)/.configured:
-ifneq ($(OStype),Darwin)
-	(cd $(WRKBUILD); cp configfsf.guess config.guess)
-endif
 	(cd $(WRKBUILD); \
 		PATH="$(STAGING_HOST_DIR)/usr/bin:$$PATH" \
 		./configure ${GMP_CONFOPTS} \
