@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		18
+PKG_RELEASE:=		19
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -27,9 +27,6 @@ ifeq ($(ADK_RUNTIME_DEV_MDEV),y)
 	$(CP) ./files/rcdev.mdev $(IDIR_BASE_FILES)/etc/init.d/rcdev
 else ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
 	$(CP) ./files/rcdev.udev $(IDIR_BASE_FILES)/etc/init.d/rcdev
-endif
-ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
-	@echo "#" > $(IDIR_BASE_FILES)/etc/network/interfaces
 endif
 ifeq (${ADK_TARGET_PACKAGE_IPKG},y)
 	$(CP) ./files/ipkg.conf $(IDIR_BASE_FILES)/etc/
@@ -75,6 +72,7 @@ else
 endif
 	chmod 600 $(IDIR_BASE_FILES)/etc/network/interfaces
 ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
+	echo '#' > $(IDIR_BASE_FILES)/etc/network/interfaces
 	(cd $(IDIR_BASE_FILES)/etc; ln -sf ../proc/net/pnp resolv.conf)
 else
 	(cd $(IDIR_BASE_FILES)/etc; ln -sf ../tmp/resolv.conf .)
