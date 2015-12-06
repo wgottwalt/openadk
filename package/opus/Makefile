@@ -20,6 +20,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBOPUS,libopus,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+TARGET_CFLAGS:=		$(filter-out -ffast-math,$(TARGET_CFLAGS))
+
 libopus-install:
 	$(INSTALL_DIR) $(IDIR_LIBOPUS)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libopus*.so* \
