@@ -1,5 +1,5 @@
---- ltp-full-20140422.orig/runtest/sched	2014-04-23 10:36:54.000000000 +0200
-+++ ltp-full-20140422/runtest/sched	2014-07-09 18:50:14.482506093 +0200
+--- ltp-5ad79b71f6df2f191f6a81c6ef71078781c0ab15.orig/runtest/sched	2015-12-06 17:03:41.000000000 +0100
++++ ltp-5ad79b71f6df2f191f6a81c6ef71078781c0ab15/runtest/sched	2015-12-06 17:12:57.000000000 +0100
 @@ -6,8 +6,8 @@ pth_str03 pth_str03
  time-schedule01		time-schedule
  trace_sched01		trace_sched -c 1
@@ -9,5 +9,5 @@
 +#hackbench01 hackbench 50 process 500
 +#hackbench02 hackbench 20 thread 500
  
- sched_cli_serv run_sched_cliserv.sh
- # Run this stress test for 2 minutes
+ sched_setattr01 sched_setattr01
+ sched_getattr01 sched_getattr01

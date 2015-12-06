@@ -1,5 +1,5 @@
---- ltp-full-20140828.orig/runltp	2014-08-28 12:11:45.000000000 +0200
-+++ ltp-full-20140828/runltp	2014-09-01 13:55:06.540554810 +0200
+--- ltp-5ad79b71f6df2f191f6a81c6ef71078781c0ab15.orig/runltp	2015-12-06 17:03:41.000000000 +0100
++++ ltp-5ad79b71f6df2f191f6a81c6ef71078781c0ab15/runltp	2015-12-06 17:12:57.000000000 +0100
 @@ -77,7 +77,7 @@ setup()
          exit 1
      }
@@ -8,8 +8,8 @@
 +    export TMPBASE="/opt/ltp/tmp"
      export PATH="${PATH}:${LTPROOT}/testcases/bin"
  
-     export LTP_DEV=""
-@@ -669,11 +669,11 @@ main()
+     export LTP_DEV_FS_TYPE="ext2"
+@@ -695,11 +695,11 @@ main()
      fi
  
      # check for required users and groups

@@ -4,19 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ltp
-PKG_VERSION:=		20150903
+PKG_VERSION:=		5ad79b71f6df2f191f6a81c6ef71078781c0ab15
 PKG_RELEASE:=		1
-PKG_HASH:=		e670ae9f1e42bc8b500edd3c3a5cf09c6447c56d7738a22235c87a13739bcace
 PKG_DESCR:=		linux test project
+PKG_HASH:=		35ba9941368090a620bac6db8c964aaeb3b7a8a6551a73b74167ef8f7a418892
 PKG_DEPENDS:=		bash mke2fs mkfs
 PKG_NEEDS:=		threads rt
-PKG_SECTION:=		sys/misc
+PKG_SECTION:=		base/tests
 PKG_URL:=		http://linux-test-project.github.io
-PKG_SITES:=		https://github.com/linux-test-project/ltp/archive/
+PKG_SITES:=		https://github.com/linux-test-project/ltp.git
 PKG_NOPARALLEL:=	1
-
-DISTFILES:=		${PKG_VERSION}.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -27,14 +24,13 @@ TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--with-open-posix-testsuite \
-			--with-realtime-testsuite \
+			--without-realtime-testsuite \
 			--without-power-management-testsuite \
 			--without-python \
 			--without-perl \
 			--without-expect
 
 pre-configure:
-	$(MAKE) -C $(WRKBUILD) distclean
 	$(MAKE) -C $(WRKBUILD) autotools
 
 # bessel float version not implemented in uClibc

@@ -1,0 +1,10 @@
+--- ltp-5ad79b71f6df2f191f6a81c6ef71078781c0ab15.orig/testcases/kernel/syscalls/fanotify/fanotify02.c	2015-12-06 17:03:41.000000000 +0100
++++ ltp-5ad79b71f6df2f191f6a81c6ef71078781c0ab15/testcases/kernel/syscalls/fanotify/fanotify02.c	2015-12-06 17:47:14.000000000 +0100
+@@ -27,6 +27,7 @@
+  */
+ #include "config.h"
+ 
++#define _GNU_SOURCE
+ #include <stdio.h>
+ #include <sys/stat.h>
+ #include <sys/types.h>
