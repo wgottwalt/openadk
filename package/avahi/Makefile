@@ -1,13 +1,13 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${ADK_TOPDIR}/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		avahi
 PKG_VERSION:=		0.6.31
 PKG_RELEASE:=		4
 PKG_HASH:=		8372719b24e2dd75de6f59bb1315e600db4fd092805bd1201ed0cb651a2dab48
-PKG_DESCR:=		multicast dns daemon
+PKG_DESCR:=		multicast dns daemon and dns-sd server
 PKG_SECTION:=		net/dns
 PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext-tiny
 PKG_NEEDS:=		c++
@@ -16,21 +16,18 @@ PKG_SITES:=		http://avahi.org/download/
 PKG_LIBNAME:=		libavahi
 PKG_OPTS:=		dev
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
-PKG_SUBPKGS:=		AVAHI_DAEMON AVAHI_DNSCONFD LIBAVAHI
-PKGSS_AVAHI_DAEMON:=	libavahi libdaemon libexpat libintl dbus
-PKGSB_AVAHI_DAEMON:=	dbus
-PKGSS_AVAHI_DNSCONFD:=	libavahi libdaemon avahi-daemon
-PKGSD_AVAHI_DNSCONFD:=	DNS server from mDNS configuration daemon
-PKGSD_LIBAVAHI:=	DNS-SD over mDNS library
+PKG_SUBPKGS:=		AVAHI LIBAVAHI
+PKGSS_AVAHI:=		libavahi libdaemon libexpat libintl dbus
+PKGSB_AVAHI:=		dbus
+PKGSD_LIBAVAHI:=	dns-sd and mdns library
 PKGSC_LIBAVAHI:=	libs/misc
 
-include ${ADK_TOPDIR}/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,AVAHI_DAEMON,avahi-daemon,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_AVAHI_DAEMON},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,AVAHI_DNSCONFD,avahi-dnsconfd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_AVAHI_DNSCONFD},${PKGSD_AVAHI_DNSCONFD},${PKG_SECTION}))
-$(eval $(call PKG_template,LIBAVAHI,libavahi,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBAVAHI},${PKGSC_LIBAVAHI},${PKG_OPTS}))
+$(eval $(call PKG_template,AVAHI,avahi,$(PKG_VERSION)-$(PKG_RELEASE),$(PKGSS_AVAHI),$(PKG_DESCR),$(PKG_SECTION)))
+$(eval $(call PKG_template,LIBAVAHI,libavahi,$(PKG_VERSION)-$(PKG_RELEASE),,$(PKGSD_LIBAVAHI),$(PKGSC_LIBAVAHI),$(PKG_OPTS)))
 
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--enable-glib \
@@ -66,39 +63,36 @@ else
 CONFIGURE_ARGS+=	--disable-stack-protector
 endif
 
-avahi-daemon-install:
-	${INSTALL_DIR} ${IDIR_AVAHI_DAEMON}/etc/dbus-1/system.d
+avahi-install:
+	$(INSTALL_DIR) $(IDIR_AVAHI)/etc/dbus-1/system.d
 	$(INSTALL_DATA) $(WRKINST)/etc/dbus-1/system.d/avahi-dbus.conf \
-		${IDIR_AVAHI_DAEMON}/etc/dbus-1/system.d
-	${INSTALL_DIR} ${IDIR_AVAHI_DAEMON}/etc/avahi
-	${INSTALL_DATA} ./files/avahi-daemon.conf \
-		${IDIR_AVAHI_DAEMON}/etc/avahi
-	${INSTALL_DIR} ${IDIR_AVAHI_DAEMON}/etc/avahi/services
-	${INSTALL_DATA} ./files/service-http \
-		${IDIR_AVAHI_DAEMON}/etc/avahi/services/http.service
-	${INSTALL_DATA} ./files/service-ssh \
-		${IDIR_AVAHI_DAEMON}/etc/avahi/services/ssh.service
-	${INSTALL_DIR} ${IDIR_AVAHI_DAEMON}/usr/sbin
-	${CP} ${WRKINST}/usr/sbin/avahi-daemon \
-		${IDIR_AVAHI_DAEMON}/usr/sbin
-
-avahi-dnsconfd-install:
-	${INSTALL_DIR} ${IDIR_AVAHI_DNSCONFD}/etc/avahi
-	${CP} ${WRKINST}/etc/avahi/avahi-dnsconfd.action \
-		${IDIR_AVAHI_DNSCONFD}/etc/avahi
-	${INSTALL_DIR} ${IDIR_AVAHI_DNSCONFD}/usr/sbin
-	${CP} ${WRKINST}/usr/sbin/avahi-dnsconfd \
-		${IDIR_AVAHI_DNSCONFD}/usr/sbin
+		$(IDIR_AVAHI)/etc/dbus-1/system.d
+	$(INSTALL_DIR) $(IDIR_AVAHI)/etc/avahi
+	$(CP) $(WRKINST)/etc/avahi/avahi-dnsconfd.action \
+		$(IDIR_AVAHI)/etc/avahi
+	$(INSTALL_DATA) ./files/avahi-daemon.conf \
+		$(IDIR_AVAHI)/etc/avahi
+	$(INSTALL_DIR) $(IDIR_AVAHI)/etc/avahi/services
+	$(INSTALL_DATA) ./files/service-http \
+		$(IDIR_AVAHI)/etc/avahi/services/http.service
+	$(INSTALL_DATA) ./files/service-ssh \
+		$(IDIR_AVAHI)/etc/avahi/services/ssh.service
+	$(INSTALL_DIR) $(IDIR_AVAHI)/usr/sbin
+	$(INSTALL_DIR) $(IDIR_AVAHI)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/sbin/* \
+		$(IDIR_AVAHI)/usr/sbin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/* \
+		$(IDIR_AVAHI)/usr/bin
 
 libavahi-install:
-	${INSTALL_DIR} ${IDIR_LIBAVAHI}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libavahi-common.so* \
-		${IDIR_LIBAVAHI}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libavahi-client.so* \
-		${IDIR_LIBAVAHI}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libavahi-core.so* \
-		${IDIR_LIBAVAHI}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libavahi-glib.so* \
-		${IDIR_LIBAVAHI}/usr/lib
+	$(INSTALL_DIR) $(IDIR_LIBAVAHI)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libavahi-common.so* \
+		$(IDIR_LIBAVAHI)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libavahi-client.so* \
+		$(IDIR_LIBAVAHI)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libavahi-core.so* \
+		$(IDIR_LIBAVAHI)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libavahi-glib.so* \
+		$(IDIR_LIBAVAHI)/usr/lib
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
