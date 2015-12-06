@@ -29,7 +29,7 @@ INSTALL_STYLE:=		manual
 
 do-install:
 	${INSTALL_DIR} ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
-	$(CP) ${STAGING_TARGET_DIR}/${ADK_TARGET_LIBC_PATH}/libstdc++.so* \
+	$(CP) ${STAGING_TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so* \
 		${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
 	-@rm ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so.*-gdb.py
 
