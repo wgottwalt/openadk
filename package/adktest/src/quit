@@ -1,7 +1,10 @@
 #!/bin/sh
 arch=$(uname -m)
-if [ "$arch" = "arc" ]; then
-  poweroff
-else
-  /usr/bin/qmp |nc 10.0.2.2 4444
-fi
+case $arch in
+  arc|metag)
+    poweroff
+    ;;
+  *)
+    /usr/bin/qmp |nc 10.0.2.2 4444
+    ;;
+esac
