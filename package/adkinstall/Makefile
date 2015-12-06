@@ -8,13 +8,9 @@ PKG_VERSION:=		2.0
 PKG_RELEASE:=		3
 PKG_DESCR:=		disk/flash installer
 PKG_SECTION:=		base/misc
+PKG_DEPENDS:=		grub grub-tools
+PKG_KDEPENDS:=		ext4-fs
 PKG_DEPENDS:=		mke2fs parted sfdisk dosfstools mksh
-PKG_CFLINE_ADKINSTALL:=	select ADK_KERNEL_EXT4_FS
-
-PKG_SYSTEM_DEPENDS:=	mikrotik-rb532 lemote-yeelong pcengines-apu pcengines-alix ibm-x40
-PKG_DEPENDS_PCENGINES_ALIX:=	grub grub-tools
-PKG_DEPENDS_PCENGINES_APU:=	grub grub-tools
-PKG_DEPENDS_IBM_X40:=	grub grub-tools
 
 NO_DISTFILES:=		1
 
