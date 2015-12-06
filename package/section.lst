@@ -2,6 +2,7 @@ base/boot	Boot Loaders
 base/libs	Base Libraries
 base/apps	Base System 
 base/misc	Base Misc
+base/tests	Testsuites
 base/shells	Shells
 sys/fs		Filesystem / Blockdevice Utilities
 sys/misc	System Misc

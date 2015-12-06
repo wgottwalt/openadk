@@ -4,6 +4,7 @@ source package/Config.in.auto.base.libs
 source package/Config.in.auto.base.apps
 source package/Config.in.auto.base.shells
 source package/Config.in.auto.base.misc
+source package/Config.in.auto.base.tests
 endmenu
 
 menu "System"
