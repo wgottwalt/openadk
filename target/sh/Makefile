@@ -10,6 +10,7 @@ KERNEL:=$(LINUX_DIR)/vmlinux
 else
 KERNEL:=$(LINUX_DIR)/arch/sh/boot/zImage
 endif
+OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
 QEMU_ARGS:=-M r2d
 QEMU_ARGS+=${ADK_QEMU_ARGS}
@@ -57,7 +58,11 @@ endif
 
 # image creation and kernel install
 kernel-strip:
+ifeq ($(ADK_TARGET_SYSTEM_NUMATO_MIMASV2),y)
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+else
 	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+endif
 
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
