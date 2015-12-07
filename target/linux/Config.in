@@ -14,6 +14,7 @@ source target/linux/config/Config.in.graphics
 source target/linux/config/Config.in.input
 source target/linux/config/Config.in.pcmcia
 source target/linux/config/Config.in.network
+source target/linux/config/Config.in.nfc
 source target/linux/config/Config.in.netfilter
 source target/linux/config/Config.in.audio
 source target/linux/config/Config.in.multimedia
