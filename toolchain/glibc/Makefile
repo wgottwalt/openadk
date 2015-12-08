@@ -3,17 +3,57 @@
 
 include $(ADK_TOPDIR)/rules.mk
 include ../rules.mk
+include Makefile.inc
+include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 TARGET_CFLAGS:=		$(filter-out -ffast-math,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=		$(filter-out -fno-asynchronous-unwind-tables,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
+TARGET_LDFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
+
+GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
+			--host=$(GNU_TARGET_NAME) \
+			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
+			--disable-sanity-checks \
+			--disable-werror \
+			--disable-nls \
+			--disable-werror \
+			--without-cvs \
+			--disable-profile \
+			--disable-debug \
+			--without-gd \
+			--disable-nscd \
+			--with-__thread \
+			--with-tls \
+			--enable-kernel="2.6.32" \
+			--enable-add-ons
+
+ifeq ($(ADK_TARGET_FLOAT),soft)
+GLIBC_CONFOPTS+=	--without-fp
+endif
+ifeq ($(ADK_TARGET_FLOAT),hard)
+GLIBC_CONFOPTS+=	--with-fp
+endif
+
+GLIBC_ENV:=             PATH='${TARGET_PATH}' \
+			CONFIG_SHELL='$(strip ${SHELL})' \
+                        BUILD_CC=${CC_FOR_BUILD} \
+                        CFLAGS="$(TARGET_CFLAGS)" \
+                        CC="${TARGET_CC}" \
+                        CXX="${TARGET_CXX}" \
+                        AR="${TARGET_AR}" \
+                        RANLIB="${TARGET_RANLIB}" \
+                        libc_cv_forced_unwind=yes \
+			libc_cv_cc_with_libunwind=yes \
+                        libc_cv_c_cleanup=yes \
+                        libc_cv_gnu99_inline=yes \
+			libc_cv_initfini_array=yes \
 
 # glibc does not compile with Os
 TARGET_CFLAGS:=		$(subst Os,O2,$(TARGET_CFLAGS))
 ifneq ($(ADK_DEBUG),)
 TARGET_CFLAGS+=		-O2
 endif
-
-include Makefile.inc
-include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 GLIBC_MAKEOPTS+=	cross-compiling=yes
 ifeq (${ADK_MAKE_PARALLEL},y)
@@ -45,9 +85,6 @@ $(WRKBUILD)/.installed:
 	mkdir -p ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/posix/gai.conf ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc
-	touch $@
-
-$(WRKBUILD)/.final:
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk
