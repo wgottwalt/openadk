@@ -4,7 +4,6 @@
 include $(ADK_TOPDIR)/rules.mk
 include ../rules.mk
 include Makefile.inc
-include $(ADK_TOPDIR)/mk/os.mk
 
 # disable SSP for libstdc++
 ifeq ($(ADK_TARGET_LIB_MUSL),y)

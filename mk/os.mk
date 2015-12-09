@@ -6,6 +6,11 @@ ifeq (${OStype},Darwin)
 HOST_CC:=clang -fbracket-depth=1024
 HOST_CXX:=clang++ -fbracket-depth=1024
 else
+ifeq (${OStype},FreeBSD)
+HOST_CC:=clang -fbracket-depth=1024
+HOST_CXX:=clang++ -fbracket-depth=1024
+else
 HOST_CC:=${CC}
 HOST_CXX:=${CXX}
+endif
 endif

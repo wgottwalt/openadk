@@ -290,6 +290,7 @@ endif
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
+		HOSTCC="$(HOST_CC)" \
 		CC='$(TARGET_CC)' \
 		PREFIX= \
 		DEVEL_PREFIX=/usr/ \
@@ -303,6 +304,7 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
+		HOSTCC="$(HOST_CC)" \
 		CC='$(TARGET_CC)' \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
@@ -313,6 +315,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		VERBOSE=1 \
 		install_runtime install_dev
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
+		HOSTCC="$(HOST_CC)" \
 		CC='$(TARGET_CC)' \
 		PREFIX= \
 		DEVEL_PREFIX=/usr/ \

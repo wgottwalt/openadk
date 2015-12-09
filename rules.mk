@@ -2,6 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(ADK_TOPDIR)/prereq.mk
+include $(ADK_TOPDIR)/mk/os.mk
 -include $(ADK_TOPDIR)/.config
 
 ifeq ($(ADK_VERBOSE),1)
