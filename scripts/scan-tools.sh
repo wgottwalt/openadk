@@ -46,6 +46,12 @@ case $os in
 Linux)
 	;;
 FreeBSD)
+	if ! which gmake >/dev/null 2>&1; then
+		echo You must install GNU make to continue.
+		echo
+		out=1
+	fi
+	clang=1
 	;;
 MirBSD)
 	;;
@@ -199,9 +205,11 @@ if ! which perl >/dev/null 2>&1; then
 fi
 
 if ! which g++ >/dev/null 2>&1; then
-	echo  "You need a C++ compiler to continue."
-	echo
-	out=1
+  if ! which clang++ >/dev/null 2>&1; then
+    echo  "You need a C++ compiler to continue."
+    echo
+    out=1
+  fi
 fi
 
 # always required, but can be provided by host
