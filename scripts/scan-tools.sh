@@ -215,11 +215,15 @@ fi
 # always required, but can be provided by host
 host_build_bc=0
 if which bc >/dev/null 2>&1; then
-	if ! echo quit|bc -q 2>/dev/null >/dev/null;then
-		host_build_bc=1
-	fi
+  if ! echo quit|bc -q 2>/dev/null >/dev/null; then
+    host_build_bc=1
+  else 
+    if bc -v 2>&1| grep -q BSD >/dev/null 2>&1; then
+      host_build_bc=1
+    fi 
+  fi
 else
-	host_build_bc=1
+  host_build_bc=1
 fi
 
 host_build_bison=0
