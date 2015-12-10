@@ -317,6 +317,8 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	touch $@
 
 $(WRKBUILD)/.final:
+	# remove any libiberty.a, breaking package/binutils later
+	-rm $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
 	# cleanup unneeded docs
 	rm -rf $(TOOLCHAIN_DIR)/usr/share
 	# cleanup unneeded libtool files
