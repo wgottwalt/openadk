@@ -101,6 +101,31 @@ config ADK_TARGET_PORT
 	help
 	  Port to use for SSH when running make check.
 
+choice 
+prompt "Hostsystem (do not change!)"
+config ADK_HOST_LINUX
+	bool "Linux"
+
+config ADK_HOST_FREEBSD
+	bool "FreeBSD"
+
+config ADK_HOST_MIRBSD
+	bool "MirBSD"
+
+config ADK_HOST_OPENBSD
+	bool "OpenBSD"
+
+config ADK_HOST_NETBSD
+	bool "NetBSD"
+
+config ADK_HOST_DARWIN
+	bool "Darwin"
+
+config ADK_HOST_CYGWIN
+	bool "Cygwin"
+
+endchoice
+
 config ADK_PRELINK
 	prompt "Prelink binaries and libraries in Image"
 	boolean

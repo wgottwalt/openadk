@@ -61,13 +61,11 @@ gcc-install: $(ELF2FLT) $(CLIB)-install
 gcc-final: gcc-install $(GDB)
 
 %-download:
-	$(START_TRACE) "toolchain/$(patsubst %-download,%,$@)/download.. "
+	$(TRACE) toolchain/$(patsubst %-download,%,$@)/download
 	$(MAKE) -C $(patsubst %-download,%,$@) fetch
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 
 %-prepare:
-	$(START_TRACE) "toolchain/$(patsubst %-prepare,%,$@)/prepare.. "
+	$(TRACE) toolchain/$(patsubst %-prepare,%,$@)/prepare
 	@if test x"$(patsubst %-prepare,%,$@)" = x"$(CLIB)"; then \
 		$(MAKE) -C $(patsubst %-prepare,%,$@) prepare \
 		    $(MAKE_TRACE); \
@@ -75,11 +73,9 @@ gcc-final: gcc-install $(GDB)
 		$(MAKE) -C $(patsubst %-prepare,%,$@) prepare \
 		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' $(MAKE_TRACE); \
 	fi
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 
 %-configure: %-prepare
-	$(START_TRACE) "toolchain/$(patsubst %-configure,%,$@)/configure.. "
+	$(TRACE) toolchain/$(patsubst %-configure,%,$@)/configure
 	@if test x"$(patsubst %-configure,%,$@)" = x"$(CLIB)"; then \
 		$(MAKE) -C $(patsubst %-configure,%,$@) configure \
 		    $(MAKE_TRACE); \
@@ -87,11 +83,9 @@ gcc-final: gcc-install $(GDB)
 		$(MAKE) -C $(patsubst %-configure,%,$@) configure \
 		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' $(MAKE_TRACE); \
 	fi
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 
 %-compile: %-configure
-	$(START_TRACE) "toolchain/$(patsubst %-compile,%,$@)/compile.. "
+	$(TRACE) toolchain/$(patsubst %-compile,%,$@)/compile
 	@if test x"$(patsubst %-compile,%,$@)" = x"$(CLIB)"; then \
 		$(MAKE) -C $(patsubst %-compile,%,$@) compile \
 		    $(MAKE_TRACE); \
@@ -99,11 +93,9 @@ gcc-final: gcc-install $(GDB)
 		$(MAKE) -C $(patsubst %-compile,%,$@) compile \
 		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' CXXFLAGS='$(HOST_STATIC_CXXFLAGS)' $(MAKE_TRACE); \
 	fi
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 
 %-install: %-compile
-	$(START_TRACE) "toolchain/$(patsubst %-install,%,$@)/install.. "
+	$(TRACE) toolchain/$(patsubst %-install,%,$@)/install
 	@if test x"$(patsubst %-install,%,$@)" = x"$(CLIB)"; then \
 		$(MAKE) -C $(patsubst %-install,%,$@) install \
 		    $(MAKE_TRACE); \
@@ -111,17 +103,11 @@ gcc-final: gcc-install $(GDB)
 		$(MAKE) -C $(patsubst %-install,%,$@) install \
 		    CC='$(HOST_CC)' CFLAGS='$(HOST_CFLAGS)' CXXFLAGS='$(HOST_STATIC_CXXFLAGS)' $(MAKE_TRACE); \
 	fi
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 
 %-final: %-install
-	$(START_TRACE) "toolchain/$(patsubst %-final,%,$@)/final.. "
+	$(TRACE) toolchain/$(patsubst %-final,%,$@)/final
 	@$(MAKE) -C $(patsubst %-final,%,$@) final $(MAKE_TRACE)
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 
 %-clean:
-	$(START_TRACE) "toolchain/$(patsubst %-clean,%,$@)/clean.. "
+	$(TRACE) toolchain/$(patsubst %-clean,%,$@)/clean
 	@$(MAKE) -C $(patsubst %-clean,%,$@) clean $(MAKE_TRACE)
-	$(CMD_TRACE) " done"
-	$(END_TRACE)

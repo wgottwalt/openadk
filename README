@@ -18,11 +18,12 @@ Before you can start you need to install some software:
 - zlib library and header
 
 There is a check for the required versions of these software in advance, though.
+(to re-issue the checks, use "make prereq").
 
 Please use "make menuconfig" to choose your target architecture and
 embedded system and configure like you want to.
 
-Simply running 'make' will build the firmware for your embedded system. The
+Simply running 'make' will build the firmware for your embedded system.  The
 buildsystem will download all sources, build the toolchain, the kernel and all
 applications.
 

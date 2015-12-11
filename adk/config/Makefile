@@ -69,19 +69,19 @@ MCONF_OBJS=$(patsubst %.c,%.o, $(MCONF_SRC))
 SHARED_OBJS=$(patsubst %.c,%.o, $(SHARED_SRC))
 
 conf: $(CONF_OBJS) $(SHARED_OBJS)
-	@$(HOST_CC) $(HOST_CFLAGS) $^ -o $@ 2>/dev/null
+	@$(HOST_CC) $(HOST_CFLAGS) $^ -o $@
 
 mconf: $(MCONF_OBJS) $(SHARED_OBJS)
-	@$(HOST_CC) $(HOST_CFLAGS) $^ -o $@ $(LIBS) 2>/dev/null
+	@$(HOST_CC) $(HOST_CFLAGS) $^ -o $@ $(LIBS)
 
 $(CONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	@$(HOST_CC) $(HOST_CFLAGS) -I. -c $< -o $@ 2>/dev/null
+	@$(HOST_CC) $(HOST_CFLAGS) -I. -c $< -o $@
 
 $(MCONF_OBJS): %.o : %.c $(SHARED_DEPS)
-	@$(HOST_CC) $(HOST_CFLAGS) -I. -c $< -o $@ 2>/dev/null
+	@$(HOST_CC) $(HOST_CFLAGS) -I. -c $< -o $@
 
 glob.o: glob.c $(SHARED_DEPS)
-	@$(HOST_CC) $(HOST_CFLAGS) -I. -c glob.c -o $@ 2>/dev/null
+	@$(HOST_CC) $(HOST_CFLAGS) -I. -c glob.c -o $@
 
 lkc_defs.h: lkc_proto.h
 	@sed < $< > $@ 's/P(\([^,]*\),.*/#define \1 (\*\1_p)/'

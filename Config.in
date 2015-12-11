@@ -10,7 +10,7 @@ config ADK_MODULES
 	default y
 
 config ADK_HAVE_DOT_CONFIG
-	bool
+	boolean
 	default y
 
 source "target/config/Config.in.appliances"
@@ -44,7 +44,7 @@ menu "Package options"
 	visible if !ADK_CHOOSE_APPLIANCE
 
 config ADK_LEAVE_ETC_ALONE
-	bool "do not install anything into /etc"
+	boolean "do not install anything into /etc"
 	default n
 	help
 	  Enabling this option will prevent the ADK from installing anything
@@ -60,7 +60,7 @@ config ADK_LEAVE_ETC_ALONE
 	  on will almost certainly render the resulting system unusable.
 
 config ADK_INSTALL_PACKAGE_INIT_SCRIPTS
-	bool "ship custom init-scripts along with packages"
+	boolean "ship custom init-scripts along with packages"
 	default y
 	depends on !ADK_LEAVE_ETC_ALONE
 	help
@@ -72,7 +72,7 @@ config ADK_INSTALL_PACKAGE_INIT_SCRIPTS
 	  off will almost certainly render the resulting system unusable.
 
 config ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS
-	bool "ship custom network-scripts along with packages"
+	boolean "ship custom network-scripts along with packages"
 	default y
 	depends on !ADK_LEAVE_ETC_ALONE
 	help

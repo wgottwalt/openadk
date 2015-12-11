@@ -6,10 +6,10 @@ host-extract: ${_HOST_PATCH_COOKIE}
 hostpre-configure:
 host-configure:
 ${_HOST_CONFIGURE_COOKIE}: ${_HOST_PATCH_COOKIE}
-	mkdir -p ${WRKBUILD}
-	@$(CMD_TRACE) "configuring.. "
+	@mkdir -p ${WRKBUILD}
+	@$(CMD_TRACE) "host configuring... "
 ifneq (,$(filter autogen,${AUTOTOOL_STYLE}))
-	@$(CMD_TRACE) "autotool configuring.. "
+	@$(CMD_TRACE) "autotool configuring... "
 	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) autogen.sh $(MAKE_TRACE)
 endif
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
@@ -17,6 +17,17 @@ ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
 	@rm -rf ${WRKSRC}/autom4te.cache
 	@touch ${WRKDIR}/.autoreconf_done
 endif
+	@cd ${WRKBUILD}; \
+	    for i in $$(find . -name config.sub);do \
+		if [ -f $$i ]; then \
+			${CP} ${SCRIPT_DIR}/config.sub $$i; \
+		fi; \
+	    done; \
+	    for i in $$(find . -name config.guess);do \
+		if [ -f $$i ]; then \
+			${CP} ${SCRIPT_DIR}/config.guess $$i; \
+	        fi; \
+	    done;
 	@${MAKE} hostpre-configure $(MAKE_TRACE)
 ifeq (${HOST_STYLE},)
 	cd ${WRKBUILD}; \
@@ -59,7 +70,7 @@ ifeq (${HOST_STYLE},manual)
 	${MAKE} host-configure $(MAKE_TRACE)
 endif
 ifeq (${HOST_STYLE},perl)
-	@$(CMD_TRACE) "configuring perl module.. "
+	@$(CMD_TRACE) "configuring perl module... "
 	cd ${WRKBUILD}; \
 		PATH='${HOST_PATH}' \
 		PERL_MM_USE_DEFAULT=1 \
@@ -72,7 +83,7 @@ endif
 host-build:
 ${_HOST_BUILD_COOKIE}: ${_HOST_CONFIGURE_COOKIE}
 ifneq (${HOST_STYLE},manual)
-	@$(CMD_TRACE) "compiling.. "
+	@$(CMD_TRACE) "host compiling... "
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    ${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
 endif
@@ -82,7 +93,7 @@ endif
 hostpost-install:
 host-install: ${ALL_HOSTINST}
 ${_HOST_FAKE_COOKIE}: ${_HOST_BUILD_COOKIE}
-	@$(CMD_TRACE) "installing.. "
+	@$(CMD_TRACE) "host installing... "
 	@mkdir -p ${HOST_WRKINST}
 ifeq (${HOST_STYLE},)
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
@@ -102,18 +113,16 @@ endif
 		$(SED) "s,^prefix=.*,prefix=$(STAGING_HOST_DIR)/usr," $$a; \
 		chmod u+x $(STAGING_HOST_DIR)/usr/bin/$$(basename $$a); \
 	done
-	touch $@
+	@touch $@
 
 ${_HOST_COOKIE}:
-	printf wbxdebug
 	exec ${MAKE} hostpackage
 
 ifeq ($(HOST_LINUX_ONLY),)
 hostpackage: ${ALL_HOSTDIRS}
-	touch ${_HOST_COOKIE}
+	@touch ${_HOST_COOKIE}
 endif
 
 hostclean:
-	@$(CMD_TRACE) "cleaning.. "
-	rm -r ${STAGING_PKG_DIR}/stamps/${PKG_NAME}*-host
-	rm -rf ${WRKDIR} 
+	@$(CMD_TRACE) "cleaning... "
+	rm -rf ${WRKDIR} ${STAGING_PKG_DIR}/stamps/${PKG_NAME}*-host

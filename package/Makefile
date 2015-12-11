@@ -50,19 +50,19 @@ install: base-files-install $(INSTALL_ICONV) $(INSTALL_PACKAGES)
 endif
 
 %-download:
-	$(START_TRACE) "package/$(patsubst %-download,%,$@)-download.. "
+	$(START_TRACE) "package/$(patsubst %-download,%,$@)-download: "
 	$(MAKE) -C $(patsubst %-download,%,$@) fetch
 	$(CMD_TRACE) " done"
 	$(END_TRACE)
 
 %-host-compile:
-	$(START_TRACE) "package/$(patsubst %-host-compile,%,$@)-host.. "
+	$(START_TRACE) "package/$(patsubst %-host-compile,%,$@)-host-compile: "
 	$(MAKE) -C $(patsubst %-host-compile,%,$@) hostpackage
 	$(CMD_TRACE) " done"
 	$(END_TRACE)
 
 %-compile:
-	$(START_TRACE) "package/$(patsubst %-compile,%,$@)-compile.. "
+	$(START_TRACE) "package/$(patsubst %-compile,%,$@)-compile: "
 	@if test -f $(ADK_TOPDIR)/.rebuild.$(patsubst %-compile,%,$@); then \
 		$(MAKE) -C $(patsubst %-compile,%,$@) clean ; \
 		rm $(ADK_TOPDIR)/.rebuild.$(patsubst %-compile,%,$@) ; \
@@ -72,13 +72,13 @@ endif
 	$(END_TRACE)
 
 %-install:
-	$(START_TRACE) "package/$(patsubst %-install,%,$@)-install.. "
+	$(START_TRACE) "package/$(patsubst %-install,%,$@)-install: "
 	$(MAKE) -C $(patsubst %-install,%,$@) install
 	$(CMD_TRACE) " done"
 	$(END_TRACE)
 
 %-clean:
-	$(START_TRACE) "package/$(patsubst %-clean,%,$@)-clean.. "
+	$(START_TRACE) "package/$(patsubst %-clean,%,$@)-clean: "
 	$(MAKE) -C $(patsubst %-clean,%,$@) clean
 	$(CMD_TRACE) " done"
 	$(END_TRACE)

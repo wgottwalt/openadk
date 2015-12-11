@@ -31,7 +31,7 @@
 #include <stdarg.h>
 #include <sys/stat.h>
 #include <sys/types.h>
-#if !defined(__APPLE__) && !defined(__FreeBSD__) && !defined(__OpenBSD__)
+#if !defined(__APPLE__) && !defined(__FreeBSD__)
 #include <sys/sysmacros.h>     /* major() and minor() */
 #endif
 #include <ftw.h>

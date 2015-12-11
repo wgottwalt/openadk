@@ -131,6 +131,7 @@ config ADK_TARGET_ROOTFS_ISO
 	select ADK_HOST_NEED_CDRTOOLS
 	select ADK_HOST_NEED_SYSLINUX
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
+	depends on ADK_HOST_LINUX
 	depends on ADK_TARGET_ARCH_X86
 	help
 	  Use this option to create a bootable ISO image.

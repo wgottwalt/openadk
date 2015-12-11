@@ -122,25 +122,19 @@ install: $(ADK_TARGET_ARCH)-imageclean $(ADK_TARGET_ARCH)-install $(ADK_TARGET_A
 clean: $(ADK_TARGET_ARCH)-clean $(ADK_TARGET_ARCH)-imageclean
 
 %-clean:
-	$(START_TRACE) "target/$(patsubst %-clean,%,$@)-clean.. "
+	$(TRACE) target/$(patsubst %-clean,%,$@)-clean
 	$(MAKE) -C $(patsubst %-clean,%,$@) clean
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 
 %-imageclean:
-	$(START_TRACE) "target/$(patsubst %-imageclean,%,$@)-imageclean.. "
+	$(TRACE) target/$(patsubst %-imageclean,%,$@)-imageclean
 	$(MAKE) -C $(patsubst %-imageclean,%,$@) imageclean
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 
 %-prepare:
-	$(START_TRACE) "target/$(patsubst %-prepare,%,$@)-prepare.. "
+	$(TRACE) target/$(patsubst %-prepare,%,$@)-prepare
 	$(MAKE) -C $(patsubst %-prepare,%,$@) prepare
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 
 %-imageprepare:
-	$(START_TRACE) "target/$(patsubst %-imageprepare,%,$@)-imageprepare.. "
+	$(TRACE) target/$(patsubst %-imageprepare,%,$@)-imageprepare
 ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
 	# This should be made a package instead
 	$(CP) -a $(BUILD_DIR)/linux-$(ADK_TARGET_ARCH)/modules/lib $(TARGET_DIR)
@@ -152,28 +146,23 @@ endif
 		break; \
 	done
 	$(MAKE) -C $(patsubst %-imageprepare,%,$@) imageprepare
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 
 %-compile: %-prepare
+	$(TRACE) target/$(patsubst %-compile,%,$@)-compile
 	$(MAKE) -C $(patsubst %-compile,%,$@) compile
 
 %-install: %-compile
-	$(START_TRACE) "target/$(patsubst %-install,%,$@)-install.. "
+	$(TRACE) target/$(patsubst %-install,%,$@)-install
 	$(MAKE) -C $(patsubst %-install,%,$@) install
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 
 %-targethelp:
 	$(MAKE) -C $(patsubst %-targethelp,%,$@) targethelp
 
 %-imageinstall: %-imageprepare
-	$(START_TRACE) "target/$(patsubst %-imageinstall,%,$@)-imageinstall.. "
+	$(TRACE) target/$(patsubst %-imageinstall,%,$@)-imageinstall
 	$(MAKE) -C $(patsubst %-imageinstall,%,$@) imageinstall
 	@for x in $$(ls $(ADK_TOPDIR)/scripts/postimage/*.sh 2>/dev/null); do \
 		[[ -x "$$x" ]] && $$x; \
 		break; \
 	done
-	$(CMD_TRACE) " done"
-	$(END_TRACE)
 	@echo "Login as user root via ssh or console."

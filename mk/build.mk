@@ -95,7 +95,9 @@ noconfig_targets:=	menuconfig \
 			defconfig
 
 POSTCONFIG=		-@\
-	if [ ! -f .firstrun ]; then \
+	if [ -f .adkinit ];then rm .adkinit;\
+	else \
+	if [ -f .config.old ];then \
 		$(ADK_TOPDIR)/adk/tools/pkgrebuild;\
 		rebuild=0; \
 		cleandir=0; \
@@ -131,14 +133,22 @@ POSTCONFIG=		-@\
 			cleandir=1;\
 			rebuild=1;\
 		fi; \
+		if [ "$$(grep ^ADK_TARGET_ARCH .config|md5sum)" != "$$(grep ^ADK_TARGET_ARCH .config.old|md5sum)" ];then \
+			cleandir=1;\
+			rebuild=1;\
+		fi; \
+		if [ "$$(grep ^ADK_TARGET_SYSTEM .config|md5sum)" != "$$(grep ^ADK_TARGET_SYSTEM .config.old|md5sum)" ];then \
+			cleandir=1;\
+			rebuild=1;\
+		fi; \
 		if [ $$cleandir -eq 1 ];then \
-			echo "You should rebuild with 'make cleansystem'";\
+			echo "You should rebuild with 'make cleandir'";\
 		fi; \
 		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old;\
 		fi; \
 	fi; \
-	if [ -f .firstrun ]; then rm .firstrun; fi
+	fi
 
 # Pull in the user's configuration file
 ifeq ($(filter $(noconfig_targets),$(MAKECMDGOALS)),)
@@ -151,9 +161,8 @@ include $(ADK_TOPDIR)/rules.mk
 all: world
 
 ${ADK_TOPDIR}/package/Depends.mk: ${ADK_TOPDIR}/.config $(wildcard ${ADK_TOPDIR}/package/*/Makefile) $(ADK_TOPDIR)/adk/tools/depmaker
-	@printf " --->  generating dependencies.. "
+	@echo "Generating dependencies ..."
 	$(ADK_TOPDIR)/adk/tools/depmaker > ${ADK_TOPDIR}/package/Depends.mk
-	@printf "done\n"
 
 .NOTPARALLEL:
 .PHONY: all world clean cleandir cleansystem distclean image_clean
@@ -161,6 +170,7 @@ ${ADK_TOPDIR}/package/Depends.mk: ${ADK_TOPDIR}/.config $(wildcard ${ADK_TOPDIR}
 world:
 	@mkdir -p $(DL_DIR) $(HOST_BUILD_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
 		$(STAGING_HOST_DIR) $(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
+	${BASH} ${ADK_TOPDIR}/scripts/scan-pkgs.sh
 ifeq ($(ADK_TARGET_TOOLCHAIN),y)
 ifeq ($(ADK_TOOLCHAIN_ONLY),y)
 	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final package/compile
@@ -251,20 +261,17 @@ clean:
 	rm -f ${ADK_TOPDIR}/package/Depends.mk
 
 cleankernel:
-	@printf " --->  cleaning kernel build directories.. "
+	@$(TRACE) cleankernel
 	@rm -rf $(TOOLCHAIN_BUILD_DIR)/w-linux* $(BUILD_DIR)/linux
-	@printf "done\n"
 
 cleandir:
-	@printf " --->  cleaning build directories and files.. "
+	@$(TRACE) cleandir
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
 	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) \
 	    ${ADK_TOPDIR}/package/pkglist.d ${ADK_TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	@rm -f .menu .tmpconfig.h .rebuild* 
-	@rm -f ${ADK_TOPDIR}/package/Depends.mk ${ADK_TOPDIR}/prereq.mk
-	@printf "done\n"
+	@rm -f .menu .tmpconfig.h .rebuild* ${ADK_TOPDIR}/package/Depends.mk ${ADK_TOPDIR}/prereq.mk
 
 cleansystem:
 	@$(TRACE) cleansystem
@@ -273,22 +280,20 @@ cleansystem:
 	    ${ADK_TOPDIR}/package/pkglist.d ${ADK_TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_DIR) $(STAGING_TARGET_DIR) $(STAGING_PKG_DIR) $(TOOLCHAIN_BUILD_DIR)
 	@rm -f .menu .tmpconfig.h .rebuild* ${ADK_TOPDIR}/package/Depends.mk ${ADK_TOPDIR}/prereq.mk
-	@printf "done\n"
 
 distclean:
-	@printf " --->  cleaning build directories, files and downloads.. "
+	@$(TRACE) distclean
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE)
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR)
 	@rm -rf package/pkglist.d package/pkgconfigs.d
-	@rm -f .config* .defconfig .tmpconfig.h all.config prereq.mk
-	@rm -f .firstrun .menu package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
+	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config prereq.mk
+	@rm -f .menu package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
 	@rm -f target/*/Config.in.arch* target/*/Config.in.system*
 	@rm -f package/Config.in.auto* package/Config.in.appliances
 	@rm -f target/config/Config.in.prereq target/config/Config.in.scripts
 	@rm -f adk/tools/pkgmaker adk/tools/depmaker adk/tools/pkgrebuild
-	@printf "done\n"
 
 else # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
@@ -296,7 +301,7 @@ ifeq ($(filter-out distclean,${MAKECMDGOALS}),)
 include ${ADK_TOPDIR}/mk/vars.mk
 else
 include $(ADK_TOPDIR)/prereq.mk
-export HOST_CC HOST_CXX BASH MAKE LANGUAGE LC_ALL PATH QEMU SHELL SHA256
+export HOST_CC HOST_CXX BASH MAKE LANGUAGE LC_ALL OStype PATH QEMU SHELL
 endif
 
 all: menuconfig
@@ -445,8 +450,50 @@ defconfig: .menu $(CONFIG)/conf
 	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
 		$(CONFIG)/conf --defconfig=.defconfig $(CONFIG_CONFIG_IN); \
 	fi
+ifeq (${OStype},Linux)
+	@echo ADK_HOST_LINUX=y >> $(ADK_TOPDIR)/.config
+endif
+ifeq (${OStype},FreeBSD)
+	@echo ADK_HOST_FREEBSD=y >> $(ADK_TOPDIR)/.config
+endif
+ifeq (${OStype},MirBSD)
+	@echo ADK_HOST_MIRBSD=y >> $(ADK_TOPDIR)/.config
+endif
+ifeq (${OStype},OpenBSD)
+	@echo ADK_HOST_OPENBSD=y >> $(ADK_TOPDIR)/.config
+endif
+ifeq (${OStype},NetBSD)
+	@echo ADK_HOST_NETBSD=y >> $(ADK_TOPDIR)/.config
+endif
+ifeq (${OStype},Darwin)
+	@echo ADK_HOST_DARWIN=y >> $(ADK_TOPDIR)/.config
+endif
+ifneq (,$(filter CYGWIN%,${OStype}))
+	@echo ADK_HOST_CYGWIN=y >> $(ADK_TOPDIR)/.config
+endif
 
 allconfig:
+ifeq (${OStype},Linux)
+	@echo ADK_HOST_LINUX=y > $(ADK_TOPDIR)/all.config
+endif
+ifeq (${OStype},FreeBSD)
+	@echo ADK_HOST_FREEBSD=y > $(ADK_TOPDIR)/all.config
+endif
+ifeq (${OStype},MirBSD)
+	@echo ADK_HOST_MIRBSD=y > $(ADK_TOPDIR)/all.config
+endif
+ifeq (${OStype},OpenBSD)
+	@echo ADK_HOST_OPENBSD=y > $(ADK_TOPDIR)/all.config
+endif
+ifeq (${OStype},NetBSD)
+	@echo ADK_HOST_NETBSD=y > $(ADK_TOPDIR)/all.config
+endif
+ifeq (${OStype},Darwin)
+	@echo ADK_HOST_DARWIN=y > $(ADK_TOPDIR)/all.config
+endif
+ifneq (,$(filter CYGWIN%,${OStype}))
+	@echo ADK_HOST_CYGWIN=y > $(ADK_TOPDIR)/all.config
+endif
 	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
 		grep "^config" target/config/Config.in.appliances \
 			|grep -i "_$(ADK_APPLIANCE)"\$$ \
@@ -495,20 +542,18 @@ _config: $(CONFIG)/conf allconfig .menu
 	${POSTCONFIG}
 
 distclean:
-	@printf " --->  cleaning build directories, files and downloads.. "
 	@$(MAKE) -C $(CONFIG) clean
 	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR)
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_TARGET_DIR_PFX)
 	@rm -rf $(STAGING_HOST_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -rf package/pkglist.d package/pkgconfigs.d
-	@rm -f .config* .defconfig .tmpconfig.h all.config
+	@rm -f .adkinit .config* .defconfig .tmpconfig.h all.config
 	@rm -f .menu .rebuild.* package/Depends.mk .ADK_HAVE_DOT_CONFIG prereq.mk
 	@rm -f target/*/Config.in.arch*
 	@rm -f target/*/Config.in.system*
 	@rm -f package/Config.in.auto* package/Config.in.appliances
 	@rm -f target/config/Config.in.prereq target/config/Config.in.scripts
 	@rm -f adk/tools/pkgmaker adk/tools/depmaker adk/tools/pkgrebuild
-	@printf "done\n"
 
 endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
 
@@ -528,16 +573,14 @@ $(ADK_TOPDIR)/adk/tools/depmaker: $(ADK_TOPDIR)/adk/tools/depmaker.c
 	@$(HOST_CC) $(HOST_CFLAGS) -o $@ $(ADK_TOPDIR)/adk/tools/depmaker.c
 
 menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(ADK_TOPDIR)/adk/tools/pkgmaker $(ADK_TOPDIR)/adk/tools/pkgrebuild $(wildcard target/appliances/*)
-	@printf " --->  generating menu structure.. "
+	@echo "Generating menu structure ..."
 	@$(BASH) $(ADK_TOPDIR)/scripts/create-menu
 	@$(ADK_TOPDIR)/adk/tools/pkgmaker
 	@:>.menu
-	@printf "done\n"
 
 dep: $(ADK_TOPDIR)/adk/tools/depmaker
-	@printf " --->  generating dependencies.. "
+	@echo "Generating dependencies ..."
 	@$(ADK_TOPDIR)/adk/tools/depmaker > ${ADK_TOPDIR}/package/Depends.mk
-	@printf "done\n"
 
 .PHONY: menu dep
 
