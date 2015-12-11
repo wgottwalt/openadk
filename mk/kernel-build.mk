@@ -34,13 +34,12 @@ ADK_DEPMOD:=true
 endif
 
 $(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_FILE_VER)/.patched
-	$(TRACE) target/kernel-prepare
 	ln -sf $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/linux-$(KERNEL_FILE_VER) $(LINUX_DIR)
 	mkdir -p $(LINUX_BUILD_DIR)/kmod-control
 	touch $@
 
 $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
-	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-configure
+	$(START_TRACE) "target/$(ADK_TARGET_ARCH)-kernel-configure.. "
 	-for f in $(TARGETS);do if [ -f $$f ];then rm $$f;fi;done
 ifeq ($(ADK_TARGET_KERNEL_USE_DEFCONFIG),y)
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} $(ADK_TARGET_KERNEL_DEFCONFIG) $(MAKE_TRACE)
@@ -50,23 +49,31 @@ else
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} KCONFIG_ALLCONFIG=mini.config allnoconfig $(MAKE_TRACE)
 endif
 	touch -c $(LINUX_DIR)/.config
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 
 $(LINUX_DIR)/$(KERNEL_FILE): $(LINUX_DIR)/.config
-	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-compile
+	$(START_TRACE) "target/$(ADK_TARGET_ARCH)-kernel-compile.. "
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} $(KERNEL_TARGET) $(MAKE_TRACE)
 	touch -c $(LINUX_DIR)/$(KERNEL_FILE)
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 
 $(LINUX_BUILD_DIR)/modules: $(LINUX_DIR)/$(KERNEL_FILE)
-	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-compile
+	$(START_TRACE) "target/$(ADK_TARGET_ARCH)-kernel-modules-compile.. "
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} -j${ADK_MAKE_JOBS} modules $(MAKE_TRACE)
-	$(TRACE) target/$(ADK_TARGET_ARCH)-kernel-modules-install
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
+	$(START_TRACE) "target/$(ADK_TARGET_ARCH)-kernel-modules-install.. "
 	rm -rf $(LINUX_BUILD_DIR)/modules
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} \
 		DEPMOD=$(ADK_DEPMOD) \
 		INSTALL_MOD_PATH=$(LINUX_BUILD_DIR)/modules \
 		modules_install $(MAKE_TRACE)
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 ifneq ($(ADK_RUNTIME_DEV_UDEV),y)
-	$(TRACE) target/$(ADK_TARGET_ARCH)-create-packages
+	$(START_TRACE) "target/$(ADK_TARGET_ARCH)-create-packages.. "
 	@mkdir -p ${PACKAGE_DIR}
 	PATH='${HOST_PATH}' ${BASH} ${SCRIPT_DIR}/make-module-ipkgs.sh \
 		"${ADK_TARGET_CPU_ARCH}" \
@@ -74,6 +81,8 @@ ifneq ($(ADK_RUNTIME_DEV_UDEV),y)
 		"${LINUX_BUILD_DIR}" \
 		"${PKG_BUILD}" \
 		"${PACKAGE_DIR}"
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 endif
 
 prepare:
@@ -83,12 +92,14 @@ else
 compile: $(LINUX_DIR)/$(KERNEL_FILE)
 endif
 install: compile
-	$(TRACE) target/${ADK_TARGET_ARCH}-modules-install
+	$(START_TRACE) "target/${ADK_TARGET_ARCH}-modules-install.. "
 ifeq ($(ADK_TARGET_PACKAGE_IPKG)$(ADK_TARGET_PACKAGE_OPKG),y)
 	$(PKG_INSTALL) $(wildcard ${PACKAGE_DIR}/kmod-*) $(MAKE_TRACE)
 else
 	$(foreach pkg,$(wildcard ${PACKAGE_DIR}/kmod-*),$(shell $(PKG_INSTALL) $(pkg)))
 endif
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 
 clean:
 	rm -rf $(LINUX_BUILD_DIR)

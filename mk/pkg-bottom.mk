@@ -24,19 +24,19 @@ do-configure:
 post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
 ifneq (,$(filter bootstrap,${AUTOTOOL_STYLE}))
-	@$(CMD_TRACE) "autotool configuring... "
+	@$(CMD_TRACE) "autotool configuring.. "
 	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) bootstrap.sh $(MAKE_TRACE)
 endif
 ifneq (,$(filter autogen,${AUTOTOOL_STYLE}))
-	@$(CMD_TRACE) "autotool configuring... "
+	@$(CMD_TRACE) "autotool configuring.. "
 	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) autogen.sh $(MAKE_TRACE)
 endif
 ifneq (,$(filter autoconf,${AUTOTOOL_STYLE}))
-	@$(CMD_TRACE) "autotool configuring... "
+	@$(CMD_TRACE) "autotool configuring.. "
 	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoconf $(MAKE_TRACE)
 endif
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
-	@$(CMD_TRACE) "autotool configuring... "
+	@$(CMD_TRACE) "autotool configuring.. "
 	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -vif $(MAKE_TRACE)
 	@rm -rf ${WRKSRC}/autom4te.cache
 	@touch ${WRKDIR}/.autoreconf_done
@@ -47,7 +47,7 @@ endif
 ifneq ($(filter manual,${CONFIG_STYLE}),)
 	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)
 else ifneq ($(filter cmake,${CONFIG_STYLE}),)
-	@$(CMD_TRACE) "configuring cmake... "
+	@$(CMD_TRACE) "configuring cmake.. "
 	sed -e "s#@@TARGET_CC@@#$(TARGET_CC)#" \
 	 	-e "s#@@TARGET_CXX@@#$(TARGET_CXX)#" \
 		-e "s#@@TARGET_CFLAGS@@#$(TARGET_CFLAGS)#" \
@@ -61,19 +61,19 @@ else ifneq ($(filter cmake,${CONFIG_STYLE}),)
 			-DCMAKE_TOOLCHAIN_FILE="$(SCRIPT_DIR)/toolchain.cmake" \
 			${CMAKE_FLAGS} ${WRKSRC}) $(MAKE_TRACE)
 else ifneq ($(filter minimal,${CONFIG_STYLE}),)
-	@$(CMD_TRACE) "configuring... "
+	@$(CMD_TRACE) "configuring.. "
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
 	    env ${CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
 	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
 else ifneq ($(filter basic,${CONFIG_STYLE}),)
-	@$(CMD_TRACE) "configuring... "
+	@$(CMD_TRACE) "configuring.. "
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
 	    env ${CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} ${CONFIGURE_TRIPLE} \
 	    ${CONFIGURE_ARGS} $(MAKE_TRACE)
 else ifneq ($(filter perl,${CONFIG_STYLE}),)
-	@$(CMD_TRACE) "configuring perl module... "
+	@$(CMD_TRACE) "configuring perl module.. "
 	if [ -f ${WRKBUILD}/Makefile.PL ]; then \
 		cd ${WRKBUILD}; \
 			PATH='${HOST_PATH}' \
@@ -88,7 +88,7 @@ else ifneq ($(filter perl,${CONFIG_STYLE}),)
 			perl-host Build.PL; \
 	fi
 else ifeq ($(strip ${CONFIG_STYLE}),)
-	@$(CMD_TRACE) "configuring... "
+	@$(CMD_TRACE) "configuring.. "
 	cd ${WRKBUILD}; rm -f config.{cache,status}; \
 	    env ${CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} ${CONFIGURE_TRIPLE} \
@@ -125,7 +125,7 @@ do-build:
 post-build:
 ${_BUILD_COOKIE}: ${_CONFIGURE_COOKIE}
 	@env ${MAKE_ENV} ${MAKE} pre-build $(MAKE_TRACE)
-	@$(CMD_TRACE) "compiling... "
+	@$(CMD_TRACE) "compiling.. "
 ifneq ($(filter manual,${BUILD_STYLE}),)
 	env ${MAKE_ENV} ${MAKE} ${MAKE_FLAGS} do-build $(MAKE_TRACE)
 else ifeq ($(strip ${BUILD_STYLE}),)
