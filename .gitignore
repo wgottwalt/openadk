@@ -30,12 +30,11 @@
 /toolchain_*/
 /.ADK_HAVE_DOT_CONFIG
 /.tmpconfig.h
-/.prereq_done
 /.config*
 /.busyboxcfg
 /.rebuild.*
 /.defconfig
-/.adkinit
+/.firstrun
 /.menu
 /all.config
 /target_*/

@@ -107,15 +107,16 @@ ROOTFSUSERTARBALL=	${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}-${ADK_TARGET_FS}.tar.
 ROOTFSISO=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}.iso
 
 kernel-package: kernel-strip
-	$(TRACE) target/$(ADK_TARGET_ARCH)-create-kernel-package
+	$(START_TRACE) "target/$(ADK_TARGET_ARCH)-create-kernel-package.. "
 	rm -rf $(KERNEL_PKGDIR)
 	@mkdir -p $(KERNEL_PKGDIR)/boot
 	cp $(BUILD_DIR)/$(TARGET_KERNEL) $(KERNEL_PKGDIR)/boot/kernel
 	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
 	    ../linux/kernel.control ${KERNEL_VERSION} ${ADK_TARGET_CPU_ARCH}
 	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
-	$(TRACE) target/$(ADK_TARGET_ARCH)-install-kernel-package
 	$(PKG_INSTALL) $(KERNEL_PKG) $(MAKE_TRACE)
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 
 ${FW_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}/.adk kernel-package
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | \

@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		glib-host libffi gettext-tiny zlib libelf dbus
 HOST_BUILDDEP:=		libffi-host gettext-tiny-host python2-host
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.gtk.org/
-PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/glib/$(PKG_EXTRAVER)/
+PKG_SITES:=		http://gensho.acc.umu.se/pub/gnome/sources/glib/$(PKG_EXTRAVER)/
 PKG_NOPARALLEL:=	1
 PKG_OPTS:=		dev noscripts
 
@@ -36,10 +36,10 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getgrgid_r=yes
 
 HOST_STYLE:=		auto
-ifneq ($(OStype),CYGWIN)
+ifneq ($(OS_FOR_BUILD),CYGWIN)
 HOST_CFLAGS+=		-fPIC
 endif
-ifneq ($(OStype),Darwin)
+ifneq ($(OS_FOR_BUILD),Darwin)
 HOST_CONFIGURE_ARGS+=	--with-libiconv=no
 endif
 HOST_CONFIGURE_ARGS+=	--disable-fam \

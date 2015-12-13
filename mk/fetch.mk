@@ -31,7 +31,7 @@ ifneq ($(ADK_DISABLE_CHECKSUM),y)
 	@if [ ! -e $(firstword ${FULLDISTFILES}).nohash ]; then \
 	OK=n; \
 	allsums="$(strip ${PKG_HASH})"; \
-	(PATH='$(HOST_PATH)' sha256sum ${FULLDISTFILES}; echo exit) | while read sum name; do \
+	($${SHA256} ${FULLDISTFILES}; echo exit) | while read sum name; do \
 		if [[ $$sum = exit ]]; then \
 			[[ $$OK = n ]] && echo >&2 "==> No distfile found!" || :; \
 			[[ $$OK = 1 ]] || exit 1; \
@@ -81,9 +81,9 @@ $(1):
 		;; \
 	    http://*|https://*|ftp://*) \
 		for site in $${PKG_SITES} $${MASTER_SITE_BACKUP}; do \
-			: echo "$${FETCH_CMD} $$$$site$$$$filename"; \
+			: echo "$${FETCHCMD} $$$$site$$$$filename"; \
 			rm -f "$$$$filename"; \
-			if $${FETCH_CMD} $$$$site$$$$filename; then \
+			if $${FETCHCMD} $$$$filename $$$$site$$$$filename; then \
 				: check the size here; \
 				[[ ! -e $$$$filename ]] || exit 0; \
 			fi; \

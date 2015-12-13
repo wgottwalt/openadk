@@ -8,7 +8,6 @@ PKG_VERSION:=		4.2
 PKG_RELEASE:=		1
 PKG_HASH:=		d9e0195aa922dbb665ed322b9aaa96e04a476ee650f39bbeadb0d00b24022e96
 PKG_DESCR:=		squashfs filesystem utilities
-HOST_BUILDDEP:=		xz-host
 PKG_SECTION:=		sys/fs
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=squashfs/}
 

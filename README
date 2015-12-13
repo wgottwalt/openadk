@@ -4,26 +4,25 @@ OpenADK - An embedded Linux construction kit
 This is a menu based buildsystem for your embedded Linux system.
 
 Before you can start you need to install some software:
-- bash
 - gcc or clang
 - g++ or clang++
 - binutils 
-- GNU make
+- make
 - tar
 - gzip
-- wget
 - perl
+- curl or wget
 - c library headers
 - ncurses library and header
-- zlib library and header
 
 There is a check for the required versions of these software in advance, though.
-(to re-issue the checks, use "make prereq").
+Most of the needed software for the build process to succeed will
+be compiled before the target build starts.
 
 Please use "make menuconfig" to choose your target architecture and
 embedded system and configure like you want to.
 
-Simply running 'make' will build the firmware for your embedded system.  The
+Simply running 'make' will build the firmware for your embedded system. The
 buildsystem will download all sources, build the toolchain, the kernel and all
 applications.
 

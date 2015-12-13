@@ -70,10 +70,10 @@ ifeq ($(ADK_TARGET_ARCH_X86_64),y)
 CONFIG:=		linux-x86_64
 endif
 
-ifneq (,$(filter CYGWIN%,${OStype}))
+ifneq (,$(filter CYGWIN%,${OS_FOR_BUILD}))
 HOSTCONFIG:=		Cygwin-x86_64
 endif
-ifeq ($(OStype),Darwin)
+ifeq ($(OS_FOR_BUILD),Darwin)
 HOSTCONFIG:=		darwin64-x86_64-cc
 endif
 

@@ -299,12 +299,12 @@ endef
 
 install-targets:
 install:
-	@$(CMD_TRACE) "installing... "
+	@$(CMD_TRACE) "installing.. "
 	@$(MAKE) install-targets $(MAKE_TRACE)
 
 clean-targets:
 clean:
-	@$(CMD_TRACE) "cleaning... "
+	@$(CMD_TRACE) "cleaning.. "
 	@$(MAKE) clean-targets $(MAKE_TRACE)
 	rm -rf ${WRKDIR} ${ALL_IPKGS} ${_IPKGS_COOKIE}
 

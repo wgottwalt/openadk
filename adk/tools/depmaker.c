@@ -1,7 +1,7 @@
 /*
  * depmaker - create package/Depends.mk for OpenADK buildsystem
  *
- * Copyright (C) 2010-2014 Waldemar Brodkorb <wbx@openadk.org>
+ * Copyright (C) 2010-2015 Waldemar Brodkorb <wbx@openadk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -67,8 +67,9 @@ static int check_symbol(char *symbol) {
 /*@null@*/
 static char *parse_line(char *package, char *pkgvar, char *string, int checksym, int pprefix, int system, int *prefixp) {
 
-	char *key, *value, *dep, *key_sym, *pkgdeps;
+	char *key, *value, *dep, *key_sym, *pkgdeps, *depvar;
 	char temp[MAXLINE];
+	int i;
 
 	string[strlen(string)-1] = '\0';
 	if ((key = strtok(string, ":=")) == NULL) {
@@ -121,6 +122,51 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 	value = strtok(NULL, "=\t");
 	dep = strtok(value, " ");
 	while (dep != NULL) {
+		/* check only for optional host tools, if they are required to build */
+		if (checksym == 2) {
+			if ((depvar = malloc(MAXLINE)) != NULL)
+				memset(depvar, 0, MAXLINE);
+			else {
+				perror("Can not allocate memory.");
+				exit(EXIT_FAILURE);
+			}
+			strncat(depvar, dep, strlen(dep)-5);
+			if ((strncmp(depvar, "bc", 2) == 0) ||
+				(strncmp(depvar, "file", 4) == 0) ||
+				(strncmp(depvar, "gawk", 4) == 0) ||
+				(strncmp(depvar, "grep", 4) == 0) ||
+				(strncmp(depvar, "patch", 5) == 0) ||
+				(strncmp(depvar, "sed", 3) == 0) ||
+				(strncmp(depvar, "xz", 2) == 0)) {
+
+				/* transform to uppercase variable name */
+				for (i=0; i<(int)strlen(depvar); i++) {
+					if (depvar[i] == '+')
+						depvar[i] = 'X';
+					if (depvar[i] == '-')
+						depvar[i] = '_';
+					depvar[i] = toupper(depvar[i]);
+				}
+
+				/* extract symbol */
+				if ((key_sym = malloc(MAXLINE)) != NULL)
+					memset(key_sym, 0, MAXLINE);
+				else {
+					perror("Can not allocate memory.");
+					exit(EXIT_FAILURE);
+				}
+				if (snprintf(key_sym, MAXLINE, "ADK_HOST_BUILD_%s", depvar) < 0)
+						perror("Can not create string variable.");
+
+				if (check_symbol(key_sym) != 0) {
+					free(key_sym);
+					free(depvar);
+					return(NULL);
+				}
+				free(key_sym);
+				free(depvar);
+			}
+		}
 		if (*prefixp == 0) {
 			*prefixp = 1;
 			if (snprintf(temp, MAXLINE, "%s-compile: %s-compile", package, dep) < 0)
@@ -295,7 +341,7 @@ int main() {
 				} else if (strncmp(buf, "HOST_BUILDDEP", 13) == 0) {
 					asprintf(&string, "%s-host", pkgdirp->d_name);
 					// check retval; string for NULL
-					tmp = parse_line(string, NULL, buf, 0, 0, 0, &hprefix);
+					tmp = parse_line(string, NULL, buf, 2, 0, 0, &hprefix);
 					if (tmp && *tmp) {
 						asprintf(&string, "%s%s",
 						    hpkgdeps ? hpkgdeps : "",

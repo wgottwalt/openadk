@@ -2,7 +2,6 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(ADK_TOPDIR)/prereq.mk
-include $(ADK_TOPDIR)/mk/os.mk
 -include $(ADK_TOPDIR)/.config
 
 ifeq ($(ADK_VERBOSE),1)
@@ -15,9 +14,9 @@ MAKE_TRACE:=
 EXTRA_MAKEFLAGS:=
 SET_DASHX:=		set -x
 else
-START_TRACE:=		echo -n "---> "
+START_TRACE:=		echo -n " ---> "
 END_TRACE:=		echo
-TRACE:=			echo "---> "
+TRACE:=			echo " ---> "
 CMD_TRACE:=		echo -n
 PKG_TRACE:=		echo "------> "
 EXTRA_MAKEFLAGS:=	-s

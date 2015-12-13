@@ -122,19 +122,25 @@ install: $(ADK_TARGET_ARCH)-imageclean $(ADK_TARGET_ARCH)-install $(ADK_TARGET_A
 clean: $(ADK_TARGET_ARCH)-clean $(ADK_TARGET_ARCH)-imageclean
 
 %-clean:
-	$(TRACE) target/$(patsubst %-clean,%,$@)-clean
+	$(START_TRACE) "target/$(patsubst %-clean,%,$@)-clean.. "
 	$(MAKE) -C $(patsubst %-clean,%,$@) clean
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 
 %-imageclean:
-	$(TRACE) target/$(patsubst %-imageclean,%,$@)-imageclean
+	$(START_TRACE) "target/$(patsubst %-imageclean,%,$@)-imageclean.. "
 	$(MAKE) -C $(patsubst %-imageclean,%,$@) imageclean
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 
 %-prepare:
-	$(TRACE) target/$(patsubst %-prepare,%,$@)-prepare
+	$(START_TRACE) "target/$(patsubst %-prepare,%,$@)-prepare.. "
 	$(MAKE) -C $(patsubst %-prepare,%,$@) prepare
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 
 %-imageprepare:
-	$(TRACE) target/$(patsubst %-imageprepare,%,$@)-imageprepare
+	$(START_TRACE) "target/$(patsubst %-imageprepare,%,$@)-imageprepare.. "
 ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
 	# This should be made a package instead
 	$(CP) -a $(BUILD_DIR)/linux-$(ADK_TARGET_ARCH)/modules/lib $(TARGET_DIR)
@@ -146,20 +152,19 @@ endif
 		break; \
 	done
 	$(MAKE) -C $(patsubst %-imageprepare,%,$@) imageprepare
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 
 %-compile: %-prepare
-	$(TRACE) target/$(patsubst %-compile,%,$@)-compile
 	$(MAKE) -C $(patsubst %-compile,%,$@) compile
 
 %-install: %-compile
-	$(TRACE) target/$(patsubst %-install,%,$@)-install
 	$(MAKE) -C $(patsubst %-install,%,$@) install
 
 %-targethelp:
 	$(MAKE) -C $(patsubst %-targethelp,%,$@) targethelp
 
 %-imageinstall: %-imageprepare
-	$(TRACE) target/$(patsubst %-imageinstall,%,$@)-imageinstall
 	$(MAKE) -C $(patsubst %-imageinstall,%,$@) imageinstall
 	@for x in $$(ls $(ADK_TOPDIR)/scripts/postimage/*.sh 2>/dev/null); do \
 		[[ -x "$$x" ]] && $$x; \

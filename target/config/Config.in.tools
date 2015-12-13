@@ -37,11 +37,11 @@ config ADK_HOST_BUILD_LIBTOOL
 
 config ADK_HOST_BUILD_LIBRESSL
 	bool
-	default y
+	default n
 
 config ADK_HOST_BUILD_WGET
 	bool
-	default y
+	default n
 
 # always required, but can be provided by host
 config ADK_HOST_BUILD_BASH

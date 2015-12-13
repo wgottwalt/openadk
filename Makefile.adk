@@ -1,0 +1,179 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+ADK_TOPDIR:=	$(shell pwd)
+GMAKE_FMK=	${MAKE} -f $(PWD)/mk/build.mk
+GMAKE_INV=	${GMAKE_FMK} --no-print-directory
+
+_UNLIMIT=	__limit=$$(ulimit -dH 2>/dev/null); \
+		test -n "$$__limit" && ulimit -Sd $$__limit; ulimit -n 1024;
+
+ifneq (${package},)
+subdir:=	package/${package}
+_subdir_dep:=	${ADK_TOPDIR}/.config
+endif
+
+ifneq (${subdir},)
+${MAKECMDGOALS}: _subdir
+
+_subdir: ${_subdir_dep}
+	cd ${subdir} && ADK_TOPDIR=${ADK_TOPDIR} DEVELOPER=1 \
+	    $(MAKE) ADK_VERBOSE=1 ${MAKECMDGOALS}
+
+endif
+
+all:
+	@${_UNLIMIT} $(GMAKE_INV) world
+
+v:
+	@(echo; echo "Build started on $$(LC_ALL=C LANGUAGE=C date)"; \
+	    set -x; ${_UNLIMIT} ${GMAKE_FMK} ADK_VERBOSE=1 all) 2>&1 | tee -a make.log
+
+help:
+	@echo 'Configuration targets:'
+	@echo '  config       - Update current config utilising a line-oriented program'
+	@echo '  menuconfig   - Update current config utilising a menu based program'
+	@echo '                 (default when .config does not exist)'
+	@echo '  oldconfig    - Update current config utilising a provided .configs base'
+	@echo '  defconfig    - New config with defaults'
+	@echo '  allmodconfig - New config selecting all symbols with m'
+	@echo '  allyesconfig - New config selecting all symbols with y'
+	@echo '  allnoconfig  - New config where all options are answered with no'
+	@echo ''
+	@echo 'Help targets:'
+	@echo '  help         - Print this help text'
+	@echo '  pkg-help     - Print help about selectively compiling single packages'
+	@echo '  dev-help     - Print help for developers / package maintainers'
+	@echo ''
+	@echo 'Common targets:'
+	@echo '  download     - fetches all needed distfiles'
+	@echo '  kernelconfig - view the target kernel configuration'
+	@echo ''
+	@echo 'Cleaning targets:'
+	@echo '  clean        - Remove firmware and build directories'
+	@echo '  cleandir     - Same as "clean", but also remove all built toolchains'
+	@echo '  cleansystem  - Same as "cleandir", but only remove active system'
+	@echo '  cleankernel  - Remove kernel dir, useful if you changed any kernel patches'
+	@echo '  distclean    - Same as "cleandir", but also remove downloaded'
+	@echo '                 distfiles and .config'
+	@echo ''
+	@echo 'Other generic targets:'
+	@echo '  all          - Build everything as specified in .config'
+	@echo '                 (default if .config exists)'
+	@echo '  v            - Same as "all" but with logging to make.log enabled'
+
+pkg-help:
+	@echo 'Package specific targets (use with "package=<pkg-name>" parameter):'
+	@echo '  fetch        - Download the necessary distfile'
+	@echo '  extract      - Same as "fetch", but also extract the distfile'
+	@echo '  patch        - Same as "extract", but also patch the source'
+	@echo '  build        - Same as "patch", but also build the binaries'
+	@echo '  fake         - Same as "build", but also install the binaries'
+	@echo '  package      - Same as "fake", but also create the package'
+	@echo '  clean        - Deinstall and remove the build area'
+	@echo '  distclean    - Same as "clean", but also remove the distfiles'
+	@echo ''
+	@echo 'Short package rebuilding guide:'
+	@echo '  run "make package=<pkgname> clean" to remove all generated binaries'
+	@echo '  run "make package=<pkgname> package" to build everything and create the package(s)'
+	@echo ''
+	@echo 'This does not automatically resolve package dependencies!'
+
+dev-help:
+	@echo 'Fast way of updating package patches:'
+	@echo '  run "make package=<pkgname> clean" to start with a good base'
+	@echo '  run "make package=<pkgname> patch" to fetch, unpack and patch the source'
+	@echo '  edit the package sources at build_dir/w-<pkgname>-*/<pkgname>-<version>'
+	@echo '  run "make package=<pkgname> update-patches" to regenerate patch files'
+	@echo ''
+	@echo 'All changed patches will be opened with your $$EDITOR,'
+	@echo 'so you can add a description and verify the modifications.'
+	@echo ''
+	@echo 'Adding a new package:'
+	@echo 'make PKG=foo VER=1.0 newpackage'
+	@echo 'Adding a new simple library package:'
+	@echo 'make PKG=foo VER=1.0 TYPE=lib newpackage'
+	@echo 'Adding a new simple program package:'
+	@echo 'make PKG=foo VER=1.0 TYPE=prog newpackage'
+
+clean:
+	@${GMAKE_INV} clean
+
+config:
+	@${GMAKE_INV} _config W=
+
+oldconfig:
+	@${GMAKE_INV} _config W=--oldconfig
+
+download:
+	@${GMAKE_INV} toolchain/download
+	@${GMAKE_INV} dep
+	@${GMAKE_INV} package/download
+
+cleankernel:
+	-@${GMAKE_INV} cleankernel
+
+cleandir:
+	-@${GMAKE_INV} cleandir
+
+cleansystem:
+	-@${GMAKE_INV} cleansystem
+
+distclean:
+	-${GMAKE_INV} distclean
+
+image:
+	@${GMAKE_INV} image
+
+targethelp:
+	@${GMAKE_INV} targethelp
+
+kernelconfig:
+	@${GMAKE_INV} kernelconfig
+
+newpackage:
+	@${GMAKE_INV} newpackage
+
+image_clean imageclean cleanimage:
+	@${GMAKE_INV} image_clean
+
+menuconfig:
+	@${GMAKE_INV} menuconfig
+
+defconfig:
+	@${GMAKE_INV} defconfig
+
+allnoconfig:
+	@${GMAKE_INV} KCONFIG_ALLCONFIG=all.config _config W=--allnoconfig
+
+allyesconfig:
+	@${GMAKE_INV} KCONFIG_ALLCONFIG=all.config _config W=--allyesconfig
+
+allmodconfig:
+	@${GMAKE_INV} KCONFIG_ALLCONFIG=all.config _config W=--allmodconfig
+
+package_index:
+	@${GMAKE_INV} package_index
+
+buildall:
+	@${GMAKE_INV} buildall
+
+check:
+	@${GMAKE_INV} check
+
+check-gcc:
+	@${GMAKE_INV} check-gcc
+
+check-g++:
+	@${GMAKE_INV} check-g++
+
+menu:
+	@${GMAKE_INV} menu
+
+dep:
+	@${GMAKE_INV} dep
+
+world:
+	@${GMAKE_INV} world
+
+# DO NOT DELETE

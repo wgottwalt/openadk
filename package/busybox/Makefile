@@ -11,7 +11,7 @@ PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		base/apps
 PKG_BUILDDEP:=		bzip2-host
 PKG_URL:=		http://www.busybox.net/
-PKG_SITES:=		http://www.busybox.net/downloads/
+PKG_SITES:=		https://www.busybox.net/downloads/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

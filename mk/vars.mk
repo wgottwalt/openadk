@@ -426,9 +426,9 @@ QUIET:=
 else
 QUIET:=			--quiet
 endif
-FETCH_CMD?=		PATH='${HOST_PATH}' wget --timeout=$(ADK_WGET_TIMEOUT) -t 3 --no-check-certificate $(QUIET)
+FETCHCMD?=		PATH='${HOST_PATH}' wget --timeout=$(ADK_WGET_TIMEOUT) -t 3 --no-check-certificate $(QUIET)
 
-ifneq (,$(filter CYGWIN%,${OStype}))
+ifneq (,$(filter CYGWIN%,${OS_FOR_BUILD}))
 EXEEXT:=		.exe
 endif
 
