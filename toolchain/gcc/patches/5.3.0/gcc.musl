@@ -1,8 +1,6 @@
-From: https://bitbucket.org/GregorR/musl-cross
-
-diff -Nur gcc-5.2.0.orig/fixincludes/mkfixinc.sh gcc-5.2.0/fixincludes/mkfixinc.sh
---- gcc-5.2.0.orig/fixincludes/mkfixinc.sh	2012-10-28 22:42:48.000000000 +0100
-+++ gcc-5.2.0/fixincludes/mkfixinc.sh	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/fixincludes/mkfixinc.sh gcc-5.3.0/fixincludes/mkfixinc.sh
+--- gcc-5.3.0.orig/fixincludes/mkfixinc.sh	2012-10-28 22:42:48.000000000 +0100
++++ gcc-5.3.0/fixincludes/mkfixinc.sh	2015-12-08 05:53:22.243521385 +0100
 @@ -19,7 +19,8 @@
      powerpc-*-eabi*    | \
      powerpc-*-rtems*   | \
@@ -13,9 +11,9 @@ diff -Nur gcc-5.2.0.orig/fixincludes/mkfixinc.sh gcc-5.2.0/fixincludes/mkfixinc.
  	#  IF there is no include fixing,
  	#  THEN create a no-op fixer and exit
  	(echo "#! /bin/sh" ; echo "exit 0" ) > ${target}
-diff -Nur gcc-5.2.0.orig/gcc/config/aarch64/aarch64-linux.h gcc-5.2.0/gcc/config/aarch64/aarch64-linux.h
---- gcc-5.2.0.orig/gcc/config/aarch64/aarch64-linux.h	2015-05-12 10:49:59.000000000 +0200
-+++ gcc-5.2.0/gcc/config/aarch64/aarch64-linux.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/aarch64/aarch64-linux.h gcc-5.3.0/gcc/config/aarch64/aarch64-linux.h
+--- gcc-5.3.0.orig/gcc/config/aarch64/aarch64-linux.h	2015-07-24 18:00:26.000000000 +0200
++++ gcc-5.3.0/gcc/config/aarch64/aarch64-linux.h	2015-12-08 05:53:22.243521385 +0100
 @@ -29,6 +29,8 @@
  #undef  CC1_SPEC
  #define CC1_SPEC GNU_USER_TARGET_CC1_SPEC ASAN_CC1_SPEC
@@ -25,9 +23,9 @@ diff -Nur gcc-5.2.0.orig/gcc/config/aarch64/aarch64-linux.h gcc-5.2.0/gcc/config
  #define CPP_SPEC "%{pthread:-D_REENTRANT}"
  
  #define LINUX_TARGET_LINK_SPEC  "%{h*}		\
-diff -Nur gcc-5.2.0.orig/gcc/config/arm/linux-eabi.h gcc-5.2.0/gcc/config/arm/linux-eabi.h
---- gcc-5.2.0.orig/gcc/config/arm/linux-eabi.h	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/gcc/config/arm/linux-eabi.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/arm/linux-eabi.h gcc-5.3.0/gcc/config/arm/linux-eabi.h
+--- gcc-5.3.0.orig/gcc/config/arm/linux-eabi.h	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/gcc/config/arm/linux-eabi.h	2015-12-08 05:53:22.243521385 +0100
 @@ -77,6 +77,23 @@
      %{mfloat-abi=soft*:" GLIBC_DYNAMIC_LINKER_SOFT_FLOAT "} \
      %{!mfloat-abi=*:" GLIBC_DYNAMIC_LINKER_DEFAULT "}"
@@ -52,9 +50,9 @@ diff -Nur gcc-5.2.0.orig/gcc/config/arm/linux-eabi.h gcc-5.2.0/gcc/config/arm/li
  /* At this point, bpabi.h will have clobbered LINK_SPEC.  We want to
     use the GNU/Linux version, not the generic BPABI version.  */
  #undef  LINK_SPEC
-diff -Nur gcc-5.2.0.orig/gcc/config/i386/linux64.h gcc-5.2.0/gcc/config/i386/linux64.h
---- gcc-5.2.0.orig/gcc/config/i386/linux64.h	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/gcc/config/i386/linux64.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/i386/linux64.h gcc-5.3.0/gcc/config/i386/linux64.h
+--- gcc-5.3.0.orig/gcc/config/i386/linux64.h	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/gcc/config/i386/linux64.h	2015-12-08 05:53:22.243521385 +0100
 @@ -30,3 +30,7 @@
  #define GLIBC_DYNAMIC_LINKER32 "/lib/ld-linux.so.2"
  #define GLIBC_DYNAMIC_LINKER64 "/lib64/ld-linux-x86-64.so.2"
@@ -63,17 +61,17 @@ diff -Nur gcc-5.2.0.orig/gcc/config/i386/linux64.h gcc-5.2.0/gcc/config/i386/lin
 +#define MUSL_DYNAMIC_LINKER32 "/lib/ld-musl-i386.so.1"
 +#define MUSL_DYNAMIC_LINKER64 "/lib/ld-musl-x86_64.so.1"
 +#define MUSL_DYNAMIC_LINKERX32 "/lib/ld-musl-x32.so.1"
-diff -Nur gcc-5.2.0.orig/gcc/config/i386/linux.h gcc-5.2.0/gcc/config/i386/linux.h
---- gcc-5.2.0.orig/gcc/config/i386/linux.h	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/gcc/config/i386/linux.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/i386/linux.h gcc-5.3.0/gcc/config/i386/linux.h
+--- gcc-5.3.0.orig/gcc/config/i386/linux.h	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/gcc/config/i386/linux.h	2015-12-08 05:53:22.243521385 +0100
 @@ -21,3 +21,4 @@
  
  #define GNU_USER_LINK_EMULATION "elf_i386"
  #define GLIBC_DYNAMIC_LINKER "/lib/ld-linux.so.2"
 +#define MUSL_DYNAMIC_LINKER "/lib/ld-musl-i386.so.1"
-diff -Nur gcc-5.2.0.orig/gcc/config/linux.h gcc-5.2.0/gcc/config/linux.h
---- gcc-5.2.0.orig/gcc/config/linux.h	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/gcc/config/linux.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/linux.h gcc-5.3.0/gcc/config/linux.h
+--- gcc-5.3.0.orig/gcc/config/linux.h	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/gcc/config/linux.h	2015-12-08 05:53:22.243521385 +0100
 @@ -32,10 +32,12 @@
  #define OPTION_GLIBC  (DEFAULT_LIBC == LIBC_GLIBC)
  #define OPTION_UCLIBC (DEFAULT_LIBC == LIBC_UCLIBC)
@@ -214,9 +212,9 @@ diff -Nur gcc-5.2.0.orig/gcc/config/linux.h gcc-5.2.0/gcc/config/linux.h
  #if (DEFAULT_LIBC == LIBC_UCLIBC) && defined (SINGLE_LIBC) /* uClinux */
  /* This is a *uclinux* target.  We don't define below macros to normal linux
     versions, because doing so would require *uclinux* targets to include
-diff -Nur gcc-5.2.0.orig/gcc/config/linux.opt gcc-5.2.0/gcc/config/linux.opt
---- gcc-5.2.0.orig/gcc/config/linux.opt	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/gcc/config/linux.opt	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/linux.opt gcc-5.3.0/gcc/config/linux.opt
+--- gcc-5.3.0.orig/gcc/config/linux.opt	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/gcc/config/linux.opt	2015-12-08 05:53:22.243521385 +0100
 @@ -30,3 +30,7 @@
  muclibc
  Target Report RejectNegative Var(linux_libc,LIBC_UCLIBC) Negative(mbionic)
@@ -225,9 +223,9 @@ diff -Nur gcc-5.2.0.orig/gcc/config/linux.opt gcc-5.2.0/gcc/config/linux.opt
 +mmusl
 +Target Report RejectNegative Var(linux_libc,LIBC_MUSL) Negative(mglibc)
 +Use musl C library
-diff -Nur gcc-5.2.0.orig/gcc/config/microblaze/linux.h gcc-5.2.0/gcc/config/microblaze/linux.h
---- gcc-5.2.0.orig/gcc/config/microblaze/linux.h	2015-05-28 16:08:19.000000000 +0200
-+++ gcc-5.2.0/gcc/config/microblaze/linux.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/microblaze/linux.h gcc-5.3.0/gcc/config/microblaze/linux.h
+--- gcc-5.3.0.orig/gcc/config/microblaze/linux.h	2015-05-28 16:08:19.000000000 +0200
++++ gcc-5.3.0/gcc/config/microblaze/linux.h	2015-12-08 05:53:22.243521385 +0100
 @@ -28,7 +28,22 @@
  #undef TLS_NEEDS_GOT
  #define TLS_NEEDS_GOT 1
@@ -252,9 +250,9 @@ diff -Nur gcc-5.2.0.orig/gcc/config/microblaze/linux.h gcc-5.2.0/gcc/config/micr
  #undef  SUBTARGET_EXTRA_SPECS
  #define SUBTARGET_EXTRA_SPECS \
    { "dynamic_linker", DYNAMIC_LINKER }
-diff -Nur gcc-5.2.0.orig/gcc/config/microblaze/microblaze.h gcc-5.2.0/gcc/config/microblaze/microblaze.h
---- gcc-5.2.0.orig/gcc/config/microblaze/microblaze.h	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/gcc/config/microblaze/microblaze.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/microblaze/microblaze.h gcc-5.3.0/gcc/config/microblaze/microblaze.h
+--- gcc-5.3.0.orig/gcc/config/microblaze/microblaze.h	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/gcc/config/microblaze/microblaze.h	2015-12-08 05:53:22.243521385 +0100
 @@ -218,6 +218,12 @@
  #undef PTRDIFF_TYPE
  #define PTRDIFF_TYPE "int"
@@ -268,9 +266,9 @@ diff -Nur gcc-5.2.0.orig/gcc/config/microblaze/microblaze.h gcc-5.2.0/gcc/config
  #define CONSTANT_ALIGNMENT(EXP, ALIGN)					\
    ((TREE_CODE (EXP) == STRING_CST  || TREE_CODE (EXP) == CONSTRUCTOR)	\
     && (ALIGN) < BITS_PER_WORD						\
-diff -Nur gcc-5.2.0.orig/gcc/config/mips/linux.h gcc-5.2.0/gcc/config/mips/linux.h
---- gcc-5.2.0.orig/gcc/config/mips/linux.h	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/gcc/config/mips/linux.h	2015-10-30 06:22:30.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/mips/linux.h gcc-5.3.0/gcc/config/mips/linux.h
+--- gcc-5.3.0.orig/gcc/config/mips/linux.h	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/gcc/config/mips/linux.h	2015-12-08 05:53:22.243521385 +0100
 @@ -31,13 +31,26 @@
  #undef UCLIBC_DYNAMIC_LINKER32
  #define UCLIBC_DYNAMIC_LINKER32 \
@@ -299,9 +297,9 @@ diff -Nur gcc-5.2.0.orig/gcc/config/mips/linux.h gcc-5.2.0/gcc/config/mips/linux
    CHOOSE_DYNAMIC_LINKER (GLIBC_DYNAMIC_LINKERN32, UCLIBC_DYNAMIC_LINKERN32, \
 -                         BIONIC_DYNAMIC_LINKERN32)
 +                         BIONIC_DYNAMIC_LINKERN32, MUSL_DYNAMIC_LINKERN32)
-diff -Nur gcc-5.2.0.orig/gcc/config/rs6000/linux64.h gcc-5.2.0/gcc/config/rs6000/linux64.h
---- gcc-5.2.0.orig/gcc/config/rs6000/linux64.h	2015-03-10 00:18:57.000000000 +0100
-+++ gcc-5.2.0/gcc/config/rs6000/linux64.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/rs6000/linux64.h gcc-5.3.0/gcc/config/rs6000/linux64.h
+--- gcc-5.3.0.orig/gcc/config/rs6000/linux64.h	2015-03-10 00:18:57.000000000 +0100
++++ gcc-5.3.0/gcc/config/rs6000/linux64.h	2015-12-08 05:53:22.243521385 +0100
 @@ -365,17 +365,21 @@
  #endif
  #define UCLIBC_DYNAMIC_LINKER32 "/lib/ld-uClibc.so.0"
@@ -328,17 +326,17 @@ diff -Nur gcc-5.2.0.orig/gcc/config/rs6000/linux64.h gcc-5.2.0/gcc/config/rs6000
  
  #undef  DEFAULT_ASM_ENDIAN
  #if (TARGET_DEFAULT & MASK_LITTLE_ENDIAN)
-diff -Nur gcc-5.2.0.orig/gcc/config/rs6000/secureplt.h gcc-5.2.0/gcc/config/rs6000/secureplt.h
---- gcc-5.2.0.orig/gcc/config/rs6000/secureplt.h	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/gcc/config/rs6000/secureplt.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/rs6000/secureplt.h gcc-5.3.0/gcc/config/rs6000/secureplt.h
+--- gcc-5.3.0.orig/gcc/config/rs6000/secureplt.h	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/gcc/config/rs6000/secureplt.h	2015-12-08 05:53:22.243521385 +0100
 @@ -18,3 +18,4 @@
  <http://www.gnu.org/licenses/>.  */
  
  #define CC1_SECURE_PLT_DEFAULT_SPEC "-msecure-plt"
 +#define LINK_SECURE_PLT_DEFAULT_SPEC "--secure-plt"
-diff -Nur gcc-5.2.0.orig/gcc/config/rs6000/sysv4.h gcc-5.2.0/gcc/config/rs6000/sysv4.h
---- gcc-5.2.0.orig/gcc/config/rs6000/sysv4.h	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/gcc/config/rs6000/sysv4.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/rs6000/sysv4.h gcc-5.3.0/gcc/config/rs6000/sysv4.h
+--- gcc-5.3.0.orig/gcc/config/rs6000/sysv4.h	2015-09-24 15:46:45.000000000 +0200
++++ gcc-5.3.0/gcc/config/rs6000/sysv4.h	2015-12-08 05:53:22.243521385 +0100
 @@ -537,6 +537,9 @@
  #ifndef CC1_SECURE_PLT_DEFAULT_SPEC
  #define CC1_SECURE_PLT_DEFAULT_SPEC ""
@@ -349,17 +347,7 @@ diff -Nur gcc-5.2.0.orig/gcc/config/rs6000/sysv4.h gcc-5.2.0/gcc/config/rs6000/s
  
  /* Pass -G xxx to the compiler.  */
  #undef CC1_SPEC
-@@ -586,7 +589,8 @@
- 
- /* Override the default target of the linker.  */
- #define	LINK_TARGET_SPEC \
--  ENDIAN_SELECT("", " --oformat elf32-powerpcle", "")
-+  ENDIAN_SELECT("", " --oformat elf32-powerpcle", "") \
-+  "%{!mbss-plt: %{!msecure-plt: %(link_secure_plt_default)}}"
- 
- /* Any specific OS flags.  */
- #define LINK_OS_SPEC "\
-@@ -764,15 +768,18 @@
+@@ -759,15 +762,18 @@
  
  #define GLIBC_DYNAMIC_LINKER "/lib/ld.so.1"
  #define UCLIBC_DYNAMIC_LINKER "/lib/ld-uClibc.so.0"
@@ -381,7 +369,7 @@ diff -Nur gcc-5.2.0.orig/gcc/config/rs6000/sysv4.h gcc-5.2.0/gcc/config/rs6000/s
  
  #define LINK_OS_LINUX_SPEC "-m elf32ppclinux %{!shared: %{!static: \
    %{rdynamic:-export-dynamic} \
-@@ -895,6 +902,7 @@
+@@ -889,6 +895,7 @@
    { "link_os_openbsd",		LINK_OS_OPENBSD_SPEC },			\
    { "link_os_default",		LINK_OS_DEFAULT_SPEC },			\
    { "cc1_secure_plt_default",	CC1_SECURE_PLT_DEFAULT_SPEC },		\
@@ -389,9 +377,9 @@ diff -Nur gcc-5.2.0.orig/gcc/config/rs6000/sysv4.h gcc-5.2.0/gcc/config/rs6000/s
    { "cpp_os_ads",		CPP_OS_ADS_SPEC },			\
    { "cpp_os_yellowknife",	CPP_OS_YELLOWKNIFE_SPEC },		\
    { "cpp_os_mvme",		CPP_OS_MVME_SPEC },			\
-diff -Nur gcc-5.2.0.orig/gcc/config/sh/linux.h gcc-5.2.0/gcc/config/sh/linux.h
---- gcc-5.2.0.orig/gcc/config/sh/linux.h	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/gcc/config/sh/linux.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config/sh/linux.h gcc-5.3.0/gcc/config/sh/linux.h
+--- gcc-5.3.0.orig/gcc/config/sh/linux.h	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/gcc/config/sh/linux.h	2015-12-08 05:53:22.243521385 +0100
 @@ -43,7 +43,14 @@
  
  #define TARGET_ASM_FILE_END file_end_indicate_exec_stack
@@ -407,9 +395,9 @@ diff -Nur gcc-5.2.0.orig/gcc/config/sh/linux.h gcc-5.2.0/gcc/config/sh/linux.h
  
  #undef SUBTARGET_LINK_EMUL_SUFFIX
  #define SUBTARGET_LINK_EMUL_SUFFIX "_linux"
-diff -Nur gcc-5.2.0.orig/gcc/config.gcc gcc-5.2.0/gcc/config.gcc
---- gcc-5.2.0.orig/gcc/config.gcc	2015-07-02 17:53:33.000000000 +0200
-+++ gcc-5.2.0/gcc/config.gcc	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/config.gcc gcc-5.3.0/gcc/config.gcc
+--- gcc-5.3.0.orig/gcc/config.gcc	2015-09-10 16:17:53.000000000 +0200
++++ gcc-5.3.0/gcc/config.gcc	2015-12-08 05:53:22.247521539 +0100
 @@ -575,7 +575,7 @@
  esac
  
@@ -429,7 +417,7 @@ diff -Nur gcc-5.2.0.orig/gcc/config.gcc gcc-5.2.0/gcc/config.gcc
      *)
        tm_defines="$tm_defines DEFAULT_LIBC=LIBC_GLIBC"
        ;;
-@@ -2407,6 +2410,10 @@
+@@ -2413,6 +2416,10 @@
  	    powerpc*-*-linux*paired*)
  		tm_file="${tm_file} rs6000/750cl.h" ;;
  	esac
@@ -440,10 +428,10 @@ diff -Nur gcc-5.2.0.orig/gcc/config.gcc gcc-5.2.0/gcc/config.gcc
  	if test x${enable_secureplt} = xyes; then
  		tm_file="rs6000/secureplt.h ${tm_file}"
  	fi
-diff -Nur gcc-5.2.0.orig/gcc/configure gcc-5.2.0/gcc/configure
---- gcc-5.2.0.orig/gcc/configure	2015-07-03 19:00:49.000000000 +0200
-+++ gcc-5.2.0/gcc/configure	2015-10-29 22:25:16.000000000 +0100
-@@ -27742,6 +27742,9 @@
+diff -Nur gcc-5.3.0.orig/gcc/configure gcc-5.3.0/gcc/configure
+--- gcc-5.3.0.orig/gcc/configure	2015-11-19 14:32:10.000000000 +0100
++++ gcc-5.3.0/gcc/configure	2015-12-08 05:53:22.251521693 +0100
+@@ -27802,6 +27802,9 @@
  else
    gcc_cv_libc_provides_ssp=no
      case "$target" in
@@ -453,7 +441,7 @@ diff -Nur gcc-5.2.0.orig/gcc/configure gcc-5.2.0/gcc/configure
         *-*-linux* | *-*-kfreebsd*-gnu | *-*-knetbsd*-gnu)
        # glibc 2.4 and later provides __stack_chk_fail and
        # either __stack_chk_guard, or TLS access to stack guard canary.
-@@ -27774,6 +27777,7 @@
+@@ -27834,6 +27837,7 @@
  	 # <http://gcc.gnu.org/ml/gcc/2008-10/msg00130.html>) and for now
  	 # simply assert that glibc does provide this, which is true for all
  	 # realistically usable GNU/Hurd configurations.
@@ -461,7 +449,7 @@ diff -Nur gcc-5.2.0.orig/gcc/configure gcc-5.2.0/gcc/configure
  	 gcc_cv_libc_provides_ssp=yes;;
         *-*-darwin* | *-*-freebsd*)
  	 ac_fn_c_check_func "$LINENO" "__stack_chk_fail" "ac_cv_func___stack_chk_fail"
-@@ -27870,6 +27874,9 @@
+@@ -27930,6 +27934,9 @@
        gcc_cv_target_dl_iterate_phdr=no
      fi
      ;;
@@ -471,10 +459,10 @@ diff -Nur gcc-5.2.0.orig/gcc/configure gcc-5.2.0/gcc/configure
  esac
  
  if test x$gcc_cv_target_dl_iterate_phdr = xyes; then
-diff -Nur gcc-5.2.0.orig/gcc/configure.ac gcc-5.2.0/gcc/configure.ac
---- gcc-5.2.0.orig/gcc/configure.ac	2015-07-03 19:00:49.000000000 +0200
-+++ gcc-5.2.0/gcc/configure.ac	2015-10-29 22:25:16.000000000 +0100
-@@ -5229,6 +5229,9 @@
+diff -Nur gcc-5.3.0.orig/gcc/configure.ac gcc-5.3.0/gcc/configure.ac
+--- gcc-5.3.0.orig/gcc/configure.ac	2015-11-19 14:32:10.000000000 +0100
++++ gcc-5.3.0/gcc/configure.ac	2015-12-08 05:53:22.255521847 +0100
+@@ -5282,6 +5282,9 @@
        gcc_cv_libc_provides_ssp,
        [gcc_cv_libc_provides_ssp=no
      case "$target" in
@@ -484,7 +472,7 @@ diff -Nur gcc-5.2.0.orig/gcc/configure.ac gcc-5.2.0/gcc/configure.ac
         *-*-linux* | *-*-kfreebsd*-gnu | *-*-knetbsd*-gnu)
        # glibc 2.4 and later provides __stack_chk_fail and
        # either __stack_chk_guard, or TLS access to stack guard canary.
-@@ -5255,6 +5258,7 @@
+@@ -5308,6 +5311,7 @@
  	 # <http://gcc.gnu.org/ml/gcc/2008-10/msg00130.html>) and for now
  	 # simply assert that glibc does provide this, which is true for all
  	 # realistically usable GNU/Hurd configurations.
@@ -492,7 +480,7 @@ diff -Nur gcc-5.2.0.orig/gcc/configure.ac gcc-5.2.0/gcc/configure.ac
  	 gcc_cv_libc_provides_ssp=yes;;
         *-*-darwin* | *-*-freebsd*)
  	 AC_CHECK_FUNC(__stack_chk_fail,[gcc_cv_libc_provides_ssp=yes],
-@@ -5328,6 +5332,9 @@
+@@ -5381,6 +5385,9 @@
        gcc_cv_target_dl_iterate_phdr=no
      fi
      ;;
@@ -502,9 +490,9 @@ diff -Nur gcc-5.2.0.orig/gcc/configure.ac gcc-5.2.0/gcc/configure.ac
  esac
  GCC_TARGET_TEMPLATE([TARGET_DL_ITERATE_PHDR])
  if test x$gcc_cv_target_dl_iterate_phdr = xyes; then
-diff -Nur gcc-5.2.0.orig/gcc/gcc.c gcc-5.2.0/gcc/gcc.c
---- gcc-5.2.0.orig/gcc/gcc.c	2015-03-10 10:37:41.000000000 +0100
-+++ gcc-5.2.0/gcc/gcc.c	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/gcc.c gcc-5.3.0/gcc/gcc.c
+--- gcc-5.3.0.orig/gcc/gcc.c	2015-03-10 10:37:41.000000000 +0100
++++ gcc-5.3.0/gcc/gcc.c	2015-12-08 05:53:22.255521847 +0100
 @@ -729,7 +729,7 @@
  #ifndef LINK_SSP_SPEC
  #ifdef TARGET_LIBC_PROVIDES_SSP
@@ -514,9 +502,9 @@ diff -Nur gcc-5.2.0.orig/gcc/gcc.c gcc-5.2.0/gcc/gcc.c
  #else
  #define LINK_SSP_SPEC "%{fstack-protector|fstack-protector-all" \
  		       "|fstack-protector-strong|fstack-protector-explicit" \
-diff -Nur gcc-5.2.0.orig/gcc/ginclude/stddef.h gcc-5.2.0/gcc/ginclude/stddef.h
---- gcc-5.2.0.orig/gcc/ginclude/stddef.h	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/gcc/ginclude/stddef.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/gcc/ginclude/stddef.h gcc-5.3.0/gcc/ginclude/stddef.h
+--- gcc-5.3.0.orig/gcc/ginclude/stddef.h	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/gcc/ginclude/stddef.h	2015-12-08 05:53:22.255521847 +0100
 @@ -184,6 +184,7 @@
  #ifndef _GCC_SIZE_T
  #ifndef _SIZET_
@@ -541,9 +529,9 @@ diff -Nur gcc-5.2.0.orig/gcc/ginclude/stddef.h gcc-5.2.0/gcc/ginclude/stddef.h
  #endif /* __size_t */
  #endif /* _SIZET_ */
  #endif /* _GCC_SIZE_T */
-diff -Nur gcc-5.2.0.orig/libgcc/unwind-dw2-fde-dip.c gcc-5.2.0/libgcc/unwind-dw2-fde-dip.c
---- gcc-5.2.0.orig/libgcc/unwind-dw2-fde-dip.c	2015-01-27 11:02:26.000000000 +0100
-+++ gcc-5.2.0/libgcc/unwind-dw2-fde-dip.c	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/libgcc/unwind-dw2-fde-dip.c gcc-5.3.0/libgcc/unwind-dw2-fde-dip.c
+--- gcc-5.3.0.orig/libgcc/unwind-dw2-fde-dip.c	2015-01-27 11:02:26.000000000 +0100
++++ gcc-5.3.0/libgcc/unwind-dw2-fde-dip.c	2015-12-08 05:53:22.255521847 +0100
 @@ -46,6 +46,10 @@
  #include "unwind-compat.h"
  #include "gthr.h"
@@ -555,9 +543,9 @@ diff -Nur gcc-5.2.0.orig/libgcc/unwind-dw2-fde-dip.c gcc-5.2.0/libgcc/unwind-dw2
  #if !defined(inhibit_libc) && defined(HAVE_LD_EH_FRAME_HDR) \
      && (__GLIBC__ > 2 || (__GLIBC__ == 2 && __GLIBC_MINOR__ > 2) \
  	|| (__GLIBC__ == 2 && __GLIBC_MINOR__ == 2 && defined(DT_CONFIG)))
-diff -Nur gcc-5.2.0.orig/libgomp/config/posix/time.c gcc-5.2.0/libgomp/config/posix/time.c
---- gcc-5.2.0.orig/libgomp/config/posix/time.c	2015-01-10 20:10:37.000000000 +0100
-+++ gcc-5.2.0/libgomp/config/posix/time.c	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/libgomp/config/posix/time.c gcc-5.3.0/libgomp/config/posix/time.c
+--- gcc-5.3.0.orig/libgomp/config/posix/time.c	2015-01-10 20:10:37.000000000 +0100
++++ gcc-5.3.0/libgomp/config/posix/time.c	2015-12-08 05:53:22.255521847 +0100
 @@ -29,6 +29,8 @@
     The following implementation uses the most simple POSIX routines.
     If present, POSIX 4 clocks should be used instead.  */
@@ -567,9 +555,9 @@ diff -Nur gcc-5.2.0.orig/libgomp/config/posix/time.c gcc-5.2.0/libgomp/config/po
  #include "libgomp.h"
  #include <unistd.h>
  #if TIME_WITH_SYS_TIME
-diff -Nur gcc-5.2.0.orig/libitm/config/arm/hwcap.cc gcc-5.2.0/libitm/config/arm/hwcap.cc
---- gcc-5.2.0.orig/libitm/config/arm/hwcap.cc	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/libitm/config/arm/hwcap.cc	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/libitm/config/arm/hwcap.cc gcc-5.3.0/libitm/config/arm/hwcap.cc
+--- gcc-5.3.0.orig/libitm/config/arm/hwcap.cc	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/libitm/config/arm/hwcap.cc	2015-12-08 05:53:22.255521847 +0100
 @@ -40,7 +40,11 @@
  
  #ifdef __linux__
@@ -582,9 +570,9 @@ diff -Nur gcc-5.2.0.orig/libitm/config/arm/hwcap.cc gcc-5.2.0/libitm/config/arm/
  #include <elf.h>
  
  static void __attribute__((constructor))
-diff -Nur gcc-5.2.0.orig/libitm/config/linux/x86/tls.h gcc-5.2.0/libitm/config/linux/x86/tls.h
---- gcc-5.2.0.orig/libitm/config/linux/x86/tls.h	2015-01-05 13:33:28.000000000 +0100
-+++ gcc-5.2.0/libitm/config/linux/x86/tls.h	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/libitm/config/linux/x86/tls.h gcc-5.3.0/libitm/config/linux/x86/tls.h
+--- gcc-5.3.0.orig/libitm/config/linux/x86/tls.h	2015-01-05 13:33:28.000000000 +0100
++++ gcc-5.3.0/libitm/config/linux/x86/tls.h	2015-12-08 05:53:22.255521847 +0100
 @@ -25,16 +25,19 @@
  #ifndef LIBITM_X86_TLS_H
  #define LIBITM_X86_TLS_H 1
@@ -614,9 +602,9 @@ diff -Nur gcc-5.2.0.orig/libitm/config/linux/x86/tls.h gcc-5.2.0/libitm/config/l
 +#endif
  
  #endif // LIBITM_X86_TLS_H
-diff -Nur gcc-5.2.0.orig/libstdc++-v3/configure.host gcc-5.2.0/libstdc++-v3/configure.host
---- gcc-5.2.0.orig/libstdc++-v3/configure.host	2015-06-24 11:59:28.000000000 +0200
-+++ gcc-5.2.0/libstdc++-v3/configure.host	2015-10-29 22:25:16.000000000 +0100
+diff -Nur gcc-5.3.0.orig/libstdc++-v3/configure.host gcc-5.3.0/libstdc++-v3/configure.host
+--- gcc-5.3.0.orig/libstdc++-v3/configure.host	2015-06-24 11:59:28.000000000 +0200
++++ gcc-5.3.0/libstdc++-v3/configure.host	2015-12-08 05:53:22.255521847 +0100
 @@ -274,6 +274,13 @@
      os_include_dir="os/bsd/freebsd"
      ;;

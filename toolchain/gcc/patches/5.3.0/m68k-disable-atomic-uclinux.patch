@@ -1,0 +1,12 @@
+diff -Nur gcc-4.8.3.orig/libgcc/config.host gcc-4.8.3/libgcc/config.host
+--- gcc-4.8.3.orig/libgcc/config.host	2014-03-20 17:12:30.000000000 +0100
++++ gcc-4.8.3/libgcc/config.host	2014-07-26 13:15:06.359463368 +0200
+@@ -689,7 +689,7 @@
+ m68k*-*-openbsd*)
+ 	;;
+ m68k-*-uclinux*)	# Motorola m68k/ColdFire running uClinux with uClibc
+-	tmake_file="$tmake_file m68k/t-floatlib m68k/t-linux"
++	tmake_file="$tmake_file m68k/t-floatlib"
+ 	md_unwind_header=m68k/linux-unwind.h
+ 	;;
+ m68k-*-linux*)			# Motorola m68k's running GNU/Linux
