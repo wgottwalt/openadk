@@ -61,7 +61,6 @@ config ADK_TARGET_ROOTFS_SQUASHFS
 	select ADK_KERNEL_SQUASHFS
 	select ADK_HOST_NEED_SQUASHFS
 	select ADK_HOST_NEED_QEMU if ADK_TARGET_QEMU
-	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
 	depends on ADK_TARGET_WITH_MTD \
 		|| ADK_TARGET_SYSTEM_QEMU_MICROBLAZE_S3ADSP1800 \
 		|| ADK_TARGET_SYSTEM_QEMU_MICROBLAZE_ML605
@@ -72,7 +71,6 @@ config ADK_TARGET_ROOTFS_JFFS2
 	bool "Compressed read-write root filesystem (jffs2)"
 	select ADK_KERNEL_JFFS2_FS
 	select ADK_HOST_NEED_MTD_UTILS
-	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
 	depends on ADK_TARGET_WITH_MTD \
 		|| ADK_TARGET_SYSTEM_QEMU_MICROBLAZE_S3ADSP1800 \
 		|| ADK_TARGET_SYSTEM_QEMU_MICROBLAZE_ML605
@@ -130,7 +128,6 @@ config ADK_TARGET_ROOTFS_ISO
 	select ADK_KERNEL_BLK_DEV_SR
 	select ADK_HOST_NEED_CDRTOOLS
 	select ADK_HOST_NEED_SYSLINUX
-	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
 	depends on ADK_TARGET_ARCH_X86
 	help
 	  Use this option to create a bootable ISO image.
@@ -141,14 +138,12 @@ config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
 		&& !ADK_TARGET_SIM
 	select ADK_KERNEL_BLK_DEV_INITRD
 	help
-	  Use this option if your planning to create a initramfs,
-	  useful for adk-test-framework.
+	  Use this option if your planning to create a initramfs.
 
 config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
 	select ADK_HOST_NEED_GENEXT2FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
 	select ADK_KERNEL_EXT2_FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
-	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
 	depends on !ADK_TARGET_SIM
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
