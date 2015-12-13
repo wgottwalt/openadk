@@ -561,10 +561,15 @@ case $os in
     ;;
 esac
 
+if [ "$target" = "defconfig" ]; then
+  $makebin ADK_TOPDIR=$topdir --no-print-directory -f Makefile.adk $flags $target
+  exit 0
+fi
+
 if [ ! -f $topdir/.config ]; then
-  # create a config if no exist
-  touch .firstrun
-  $makebin ADK_TOPDIR=$topdir --no-print-directory -f Makefile.adk menuconfig
+    # create a config if no exist
+    touch .firstrun
+    $makebin ADK_TOPDIR=$topdir --no-print-directory -f Makefile.adk menuconfig
 else
   # scan host-tool prerequisites of certain packages before building.
   . $topdir/.config
