@@ -4,15 +4,15 @@
 choice
 prompt "GNU debugger version"
 default ADK_TOOLCHAIN_GDB_7_9_1 if ADK_TARGET_ARCH_BFIN
-default ADK_TOOLCHAIN_GDB_7_10
+default ADK_TOOLCHAIN_GDB_7_10_1
 
 config ADK_TOOLCHAIN_GDB_GIT
 	bool "git"
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_BFIN
 
-config ADK_TOOLCHAIN_GDB_7_10
-	bool "7.10"
+config ADK_TOOLCHAIN_GDB_7_10_1
+	bool "7.10.1"
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_H8300
 	depends on !ADK_TARGET_ARCH_BFIN
