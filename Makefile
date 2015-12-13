@@ -4,5 +4,5 @@
 # GNU make and BSD make compatible make file wrapper
 MAKECMDGOALS+= ${.TARGETS}
 
-all v allmodconfig allnoconfig allyesconfig help targethelp kernelconfig image menuconfig defconfig oldconfig download clean cleankernel cleansystem cleandir distclean hostclean hostpackage fetch package extract patch dep menu newpackage:
+all v allmodconfig allnoconfig allyesconfig help targethelp kernelconfig image menuconfig defconfig oldconfig download clean cleankernel cleansystem cleandir distclean hostclean hostpackage fetch package extract patch dep menu newpackage host-update-patches update-patches:
 	@./scripts/prereq.sh ${MAKECMDGOALS}
