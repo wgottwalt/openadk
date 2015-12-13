@@ -49,7 +49,7 @@ for tool in $tools; do
     printf "found\n"
     case $tool in
       curl)
-        FETCHCMD="$(which $tool) -k -f -s -o "
+        FETCHCMD="$(which $tool) -L -k -f -s -o "
         ;;
       wget)
         FETCHCMD="$(which $tool) --no-check-certificate -q -O "
