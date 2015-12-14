@@ -7,7 +7,8 @@ Contributing to OpenADK
 If you want to contribute to OpenADK, you will need a git view of
 the project. Refer to xref:getting-openadk[] to get it.
 
-Currently a mail to wbx@openadk.org is the central place for contribution.
+You can either subscribe to the mailing list dev@openadk.org or
+send an email directly to wbx@openadk.org.
 
 [[submitting-patches]]
 Submitting patches
@@ -35,10 +36,10 @@ This will generate patch files automatically adding the +Signed-off-by+ line.
 Once patch files are generated, you can review/edit the commit message
 before submitting them using your favorite text editor.
 
-Lastly, send/submit your patch set to the OpenADK developer:
+Lastly, send/submit your patch set to the OpenADK developers:
 
 ---------------------
-$ git send-email --to wbx@openadk.org *.patch
+$ git send-email --to dev@openadk.org *.patch
 ---------------------
 
 Note that +git+ should be configured to use your mail account.

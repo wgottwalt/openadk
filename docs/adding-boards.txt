@@ -93,10 +93,10 @@ wget https://www.kernel.org/pub/linux/kernel/v3.x/linux-3.18.9.tar.xz
 tar xvf linux-3.18.9.tar.xz
 find linux-3.18.9 linux-rpi -type l -delete
 rm -rf linux-rpi/.git
-diff -Nur linux-3.18.9 linux-rpi > target/arm/bcm28xx/patches/3.18.9/0000-raspberry-pi.patch
+diff -Nur linux-3.18.9 linux-rpi > target/arm/bcm28xx/patches/3.18.9/0001-bcm28xx-github.patch
 ------------------------
 
-Normally you use target/<arch>/<target system>/patches/<kernelversion>/0000-<target-system>.patch.
+Normally you use target/<arch>/<target system>/patches/<kernelversion>/0001-<target-system>.patch.
 In case of Raspberry PI 2 we have a single patch for Raspberry PI and Raspberry PI 2 and use
 the extra board name bcm28xx to describe the family of devices.
 
@@ -129,4 +129,4 @@ We use the symbol prefix ADK_KERNEL instead of CONFIG. Otherwise the symbols are
 matching the kernel symbol names.
 
 Get again into the menu based system, enable the driver you added and recompile.
-If your driver is available as kernel module use tristate.
+If your driver is available as a kernel module use tristate.

@@ -21,5 +21,6 @@ Hacking OpenADK
 If OpenADK does not yet fit all your requirements, you may be
 interested in hacking it to add:
 
-* new packages: refer to the xref:adding-packages[Developer guide]
+* new embedded targets: refer to the xref:adding-boards[Adding new boards]
+* new packages: refer to the xref:adding-packages[Adding new packages]
 

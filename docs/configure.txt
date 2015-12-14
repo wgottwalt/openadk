@@ -40,8 +40,9 @@ toolchain runs on x86 and generates code for ARM.
 
 You can choose between three C libraries:
 http://www.uclibc-ng.org[uClibc-ng],
-http://www.gnu.org/software/libc/libc.html[glibc] and
-http://www.musl-libc.org[musl].
+http://www.gnu.org/software/libc/libc.html[glibc],
+http://www.musl-libc.org[musl] and
+https://sourceware.org/newlib/[newlib].
 
 There are some configuration options provided in +Toolchain settings+.
 You can enable or disable the building of following components and toolchain

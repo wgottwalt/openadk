@@ -29,7 +29,7 @@ be by default compressed with xz compression algorithm, if available for
 the target system. You can configure the compression algorithm used for the
 compression of the Linux kernel and if choosen the initramfs filesystem in
 +make menuconfig+. In +Kernel configuration+ you have the choice between
-dfferent kernel versions. The latest version will be automatically used.
+dfferent kernel versions. The latest stable OpenADK version will be automatically used.
 There you can choose any needed addon drivers or any supported runtime
 and debugging features.
 

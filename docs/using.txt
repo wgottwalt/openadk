@@ -22,12 +22,12 @@ image::openadk-appliance.png[]
 
 First of all you need to choose a new or predefined appliance. 
 This is a collection of different packages and configuration options
-for specific appliance.
+for a specific appliance.
 
 image::openadk-target.png[]
 
 After that you can choose your target architecture, your target system and
-other general stuff.  Then you can select individual packages and kernel
+other general stuff. Then you can select individual packages and kernel
 settings. When you are ready exit and save. You can always redefine the
 configuration using +make menuconfig+.
 
@@ -103,7 +103,7 @@ OpenADK output is stored in several subdirectories:
 
 The command, +make menuconfig+ and +make+, are the
 basic ones that allow to easily and quickly generate images fitting
-your needs, with all the supports and applications you enabled.
+your needs, with all the applications you enabled.
 
 More details about the "make" command usage are given in
 xref:make-tips[].

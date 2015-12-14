@@ -21,8 +21,7 @@ An entry has the following pattern:
 
 ---------------------
 config ADK_TARGET_FOO
-	prompt "foo"
-	boolean
+	bool "foo"
 	select BR2_PACKAGE_LIBBAR
 	depends on ADK_PACKAGE_LIBBAZ
 	default n
@@ -32,14 +31,14 @@ config ADK_TARGET_FOO
 	  http://foo.org/foo/
 ---------------------
 
-* The +boolean+, +depends on+, +default+, +select+ and +help+ lines are indented
+* The +bool+, +depends on+, +default+, +select+ and +help+ lines are indented
   with one tab.
 
 * The help text itself should be indented with one tab and two
   spaces.
 
 The +Config.in+ files are the input for the configuration tool
-used in OpenADK, which is the regular _Kconfig_. For further
+used in OpenADK, which is an enhanced version of _Kconfig_. For further
 details about the _Kconfig_ language, refer to
 http://kernel.org/doc/Documentation/kbuild/kconfig-language.txt[].
 

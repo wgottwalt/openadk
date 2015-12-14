@@ -19,7 +19,7 @@ many different parts.
 * The +target/+ directory contains the definitions for all the processor
   architectures that are supported by OpenADK. +target/linux+ contains
   the meta-data for the Linux kernel configuration abstraction layer and
-  the kernel patches
+  the kernel patches.
 
 * The +package/+ directory contains the Makefiles and
   associated files for all user-space tools and libraries that OpenADK can
@@ -27,37 +27,34 @@ many different parts.
   is one sub-directory per package.
 
 * The +mk/+ directory contains some globally used Makefiles with
-  the suffix +.mk+, these are used in all other Makefile via include
+  the suffix +.mk+, these are used in all other Makefiles via include.
 
 * The +adk/+ directory contains the Makefiles and
   associated files for software related to the generation of the
-  host tools needed for +make menuconfig+ system
+  host tools needed for +make menuconfig+ system.
 
 * The +scripts/+ directory contains shell scripts for the creation of
-  meta-data in OpenADK, install scripts and image creation scripts
+  meta-data in OpenADK, install scripts and image creation scripts.
 
-The main Makefile performs the following steps before the configuration
-is done:
+The configuration process is separated in following steps:
 
-* Call the +prereq+ target to check if the host system have all required
-  software installed. It creates the +prereq.mk+ Makefile. 
+* Makefile is just a wrapper which calls the prerequisite shell script.
+
+* The prerequisite shell script +scripts/prereq.sh+ checks if the host 
+  system have all required software installed and tries to build GNU make 
+  and bash if it is missing. It creates the +prereq.mk+ Makefile.
 
 * Compile and run the OpenADK tools to generate the meta-data for the menu
   based configuration and creates the +package/Depends.mk+ Makefile to handle the 
-  dependencies
+  dependencies.
 
-* Starts the menu based configuration system via +make menuconfig+
+* Starts the menu based configuration system via +make menuconfig+.
 
-The main Makefile performs the following steps, once the
-configuration is done (it is mainly a wrapper for +mk/build.mk+):
+The following steps are performed, once the configuration is done 
+(mainly implemented in +mk/build.mk+):
 
 * Create all the output directories: +host_<gnu_host_name>+, +target_<arch>_<libc>+, 
   +build_<arch>_<libc>+, +pkg_<arch>_<libc>+, etc. 
-
-* Call the +scan-pkgs.sh+ script to find any needed optional host software, needed to compile
-  software the user has configured 
-
-* Call the +create-menu+ script to generate meta-data for available systems and package collections
 
 * Generate the host tools required for different tasks (encrypting passwords,
   compressing data, extracting archives, creating images, ..)
