@@ -21,7 +21,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_RUNTIME_START_SERVICES=n \
 			ADK_PACKAGE_BASE_FILES=y \
 			ADK_PACKAGE_KEXECINIT=n \
-			ADK_PACKAGE_SAMBA3=n \
 			ADK_PACKAGE_CLASSPATH=n \
 			ADK_PACKAGE_OPENSSL=n \
 			ADK_PACKAGE_LIBOPENSSL=n \
@@ -179,10 +178,11 @@ ifeq ($(ADK_TARGET_PACKAGE_OPKG),y)
 endif
 
 ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
+	mkdir -p ${STAGING_TARGET_DIR}/lib
 	mkdir -p ${STAGING_TARGET_DIR}/bin
 	mkdir -p ${STAGING_TARGET_DIR}/etc
 	mkdir -p ${STAGING_TARGET_DIR}/usr/bin
-	mkdir -p ${STAGING_TARGET_DIR}/lib
+	mkdir -p ${STAGING_TARGET_DIR}/usr/lib/pkgconfig
 	mkdir -p ${STAGING_HOST_DIR}/usr/bin
 	mkdir -p ${STAGING_HOST_DIR}/usr/lib
 	mkdir -p ${STAGING_HOST_DIR}/usr/include
