@@ -15,9 +15,11 @@ PKG_URL:=		http://www.gnu.org/software/coreutils/
 PKG_SITES:=		http://ftp.gnu.org/gnu/coreutils/
 PKG_BB:=		1
 
+include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,COREUTILS,$(PKG_NAME),$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call HOST_template,COREUTILS,coreutils,$(PKG_VERSION)-${PKG_RELEASE}))
+$(eval $(call PKG_template,COREUTILS,coreutils,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-rpath
@@ -30,4 +32,5 @@ coreutils-install:
 	$(CP) $(WRKINST)/usr/libexec/* \
 		$(IDIR_COREUTILS)/usr/sbin
 
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

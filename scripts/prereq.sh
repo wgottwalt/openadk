@@ -450,6 +450,13 @@ if ! which qemu-img >/dev/null 2>&1; then
   host_build_qemu=1
 fi
 
+host_build_coreutils=0
+if which tr >/dev/null 2>&1; then
+  if ! tr --version 2>/dev/null|grep GNU >/dev/null;then
+    host_build_coreutils=1
+  fi
+fi
+
 echo "config ADK_HOST_BUILD_TOOLS" > $topdir/target/config/Config.in.prereq
 printf "\t%s\n" "bool" >> $topdir/target/config/Config.in.prereq
 printf "\t%s\n" "default y" >> $topdir/target/config/Config.in.prereq
@@ -520,6 +527,9 @@ if [ $host_build_lzop -eq 1 ]; then
 fi
 if [ $host_build_qemu -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_QEMU if ADK_HOST_NEED_QEMU" >> $topdir/target/config/Config.in.prereq
+fi
+if [ $host_build_coreutils -eq 1 ]; then
+  printf "\t%s\n" "select ADK_HOST_BUILD_COREUTILS if ADK_HOST_NEED_COREUTILS" >> $topdir/target/config/Config.in.prereq
 fi
 
 # create Host OS symbols
