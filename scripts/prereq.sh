@@ -115,6 +115,9 @@ for compilerbin in $compilerbins; do
     printf "found\n"
     CC=$compilerbin
     break
+  else
+    printf "not found\n"
+    continue
   fi
 done
 
@@ -126,6 +129,9 @@ for compilerbin in $compilerbins; do
     printf "found\n"
     CXX=$compilerbin
     break
+  else
+    printf "not found\n"
+    continue
   fi
 done
 
