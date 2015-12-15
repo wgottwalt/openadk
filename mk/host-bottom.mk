@@ -115,5 +115,4 @@ endif
 
 hostclean:
 	@$(CMD_TRACE) "cleaning.. "
-	rm -r ${STAGING_PKG_DIR}/stamps/${PKG_NAME}*-host
-	rm -rf ${WRKDIR} 
+	-rm -rf ${STAGING_PKG_DIR}/stamps/${PKG_NAME}*-host ${WRKDIR} 
