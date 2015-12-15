@@ -108,7 +108,7 @@ if [ ! -d $topdir/dl ]; then
 fi
 
 # check for c compiler
-compilerbins="cc gcc clang"
+compilerbins="clang cc gcc"
 for compilerbin in $compilerbins; do
   printf " --->  checking if $compilerbin is installed.. "
   if which $compilerbin >/dev/null; then
@@ -119,7 +119,7 @@ for compilerbin in $compilerbins; do
 done
 
 # check for c++ compiler
-compilerbins="c++ g++ clang++"
+compilerbins="clang++ c++ g++"
 for compilerbin in $compilerbins; do
   printf " --->  checking if $compilerbin is installed.. "
   if which $compilerbin >/dev/null; then
