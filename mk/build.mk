@@ -285,7 +285,7 @@ distclean:
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -rf $(BUILD_DIR_PFX) $(FW_DIR_PFX) $(TARGET_DIR_PFX) $(DL_DIR)
 	@rm -rf package/pkglist.d package/pkgconfigs.d
-	@rm -f .config* .defconfig .tmpconfig.h all.config prereq.mk
+	@rm -f .config* .defconfig .tmpconfig.h all.config prereq.mk make.log
 	@rm -f .firstrun .menu package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
 	@rm -f target/*/Config.in.arch* target/*/Config.in.system*
 	@rm -f package/Config.in.auto* package/Config.in.appliances
