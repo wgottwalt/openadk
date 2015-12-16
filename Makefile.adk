@@ -19,8 +19,7 @@ ${MAKECMDGOALS}: _subdir
 _subdir: ${_subdir_dep}
 	cd ${subdir} && ADK_TOPDIR=${ADK_TOPDIR} DEVELOPER=1 \
 	    $(MAKE) ADK_VERBOSE=1 ${MAKECMDGOALS}
-
-endif
+else
 
 all:
 	@${_UNLIMIT} $(GMAKE_INV) world
@@ -176,4 +175,5 @@ dep:
 world:
 	@${GMAKE_INV} world
 
+endif
 # DO NOT DELETE
