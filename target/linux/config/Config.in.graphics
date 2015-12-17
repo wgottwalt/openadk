@@ -152,6 +152,15 @@ config ADK_KERNEL_FB_CON_DECOR
 	depends on ADK_TARGET_KERNEL_VERSION_3_18 || \
 		   ADK_TARGET_KERNEL_VERSION_3_14
 
+config ADK_KERNEL_FB_SIMPLE
+	bool "Simple Framebuffer"
+	select ADK_KERNEL_FB
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	default y if ADK_TARGET_SYSTEM_BANANA_PRO
+	default n
+	help
+	  Simple Framebuffer driver.
+
 config ADK_KERNEL_FB_VESA
 	bool "Framebuffer support for VESA"
 	select ADK_KERNEL_FB
@@ -208,6 +217,7 @@ config ADK_KERNEL_FB_GEODE_LX
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FB_GEODE
+	depends on ADK_TARGET_MODEL_PCENGINES_ALIX1C
 	default y if ADK_TARGET_MODEL_PCENGINES_ALIX1C
  	default n
  	help
