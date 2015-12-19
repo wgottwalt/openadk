@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gst-plugins-base
-PKG_VERSION:=		1.4.0
+PKG_VERSION:=		1.6.2
 PKG_RELEASE:=		1
-PKG_HASH:=		5daed4b983b64e4e3fbe9cd29063e4302812cd03ba685a15b06a790911d04c1e
+PKG_HASH:=		c75dd400e451526ed71e1c4955e33d470a2581f5e71ecf84920a41c0a5c75322
 PKG_DESCR:=		gstreamer base plugins
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		gstreamer
