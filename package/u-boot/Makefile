@@ -4,12 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
-PKG_VERSION:=		2015.07
-PKG_RELEASE:=		3
-PKG_HASH:=		0b48c9bd717f2c322ef791f8282e14c88be942dc7d1226df7e31a812a3af94d9
+PKG_VERSION:=		2015.10
+PKG_RELEASE:=		1
+PKG_HASH:=		bdc68d5f9455ad933b059c735d983f2c8b6b552dafb062e5ff1444f623021955
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
-HOST_BUILDDEP:=		openssl-host device-tree-compiler-host
+HOST_BUILDDEP:=		libressl-host device-tree-compiler-host
 PKG_BUILDDEP:=		u-boot-host
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
 PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
