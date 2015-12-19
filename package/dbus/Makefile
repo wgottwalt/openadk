@@ -11,6 +11,7 @@ PKG_DESCR:=		desktop bus daemon
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libdbus libexpat
 PKG_BUILDDEP:=		expat util-linux
+PKG_NEEDS:=		threads
 PKG_URL:=		http://dbus.freedesktop.org/
 PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus/
 PKG_LIBNAME:=		libdbus
