@@ -218,7 +218,6 @@ config ADK_HOST_BUILD_PCRE
 
 config ADK_HOST_BUILD_KMOD
 	bool
-	default y if ADK_HOST_LINUX
 	default n
 
 source "target/config/Config.in.prereq"

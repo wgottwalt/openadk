@@ -206,28 +206,33 @@ done
 printf " --->  checking if bash is installed.. "
 if which bash >/dev/null; then
   printf "found\n"
-else
-  # we need to build GNU bash
-  printf "not found\n"
-  printf " --->  compiling missing GNU bash.. "
-  cd dl
-  $FETCHCMD bash-${bashver}.tar.gz $mirror/bash-${bashver}.tar.gz
-  if [ $? -ne 0 ]; then
-    printf "ERROR: failed to download make from $mirror\n"
-    exit 1
+  printf " --->  checking if it is bash 4.x.. "
+  bash --version 2>/dev/null| grep "Version 4" >/dev/null
+  if [ $? -eq 0 ]; then
+    printf "yes\n"
+  else
+    # we need to build GNU bash 4.x
+    printf "not found\n"
+    printf " --->  compiling missing GNU bash.. "
+    cd dl
+    $FETCHCMD bash-${bashver}.tar.gz $mirror/bash-${bashver}.tar.gz
+    if [ $? -ne 0 ]; then
+      printf "ERROR: failed to download make from $mirror\n"
+      exit 1
+    fi
+    cd ..
+    mkdir tmp
+    cd tmp
+    tar xzf ../dl/bash-${bashver}.tar.gz
+    cd bash-${bashver}
+    ./configure --prefix=$topdir/host_$gnu_host_name/
+    make
+    make install
+    cd ..
+    cd ..
+    rm -rf tmp
+    printf " done\n"
   fi
-  cd ..
-  mkdir tmp
-  cd tmp
-  tar xzf ../dl/bash-${bashver}.tar.gz
-  cd bash-${bashver}
-  ./configure --prefix=$topdir/host_$gnu_host_name/
-  make
-  make install
-  cd ..
-  cd ..
-  rm -rf tmp
-  printf " done\n"
 fi
 
 # skip the script if distclean / cleandir
@@ -236,6 +241,15 @@ if [ "$target" = "distclean" -o "$target" = "cleandir" ]; then
   $makebin ADK_TOPDIR=$topdir -s -f Makefile.adk $flags $target
   exit 0
 fi
+
+printf " --->  checking if strings is installed.. "
+if ! which strings >/dev/null 2>&1; then
+  echo You must install strings to continue.
+  echo
+  out=1
+  printf "not found\n"
+fi
+printf "found\n"
 
 printf " --->  checking if perl is installed.. "
 if ! which perl >/dev/null 2>&1; then

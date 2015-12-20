@@ -28,6 +28,7 @@ BUILD_DIR="$3"
 PKG_BUILD="$4"
 PACKAGE_DIR="$5"
 
+# declare associative arrays
 declare -A modpaths moddeps modlevels
 
 # recursively find a level for given module which is high enough so all
@@ -48,7 +49,7 @@ pkgname() { # (modname)
 
 for modpath in $(find ${BUILD_DIR}/modules -name \*.ko | xargs); do
 	modname="$(basename $modpath .ko)"
-	moddep="$(modinfo $modpath | awk '/^depends:/{print $2}' | sed 's/,/ /g')"
+	moddep="$(strings $modpath | awk -F= '/^depends=/{print $2}' | sed 's/,/ /g')"
 	modpaths[$modname]="$modpath"
 	moddeps[$modname]="$moddep"
 done
