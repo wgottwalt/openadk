@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gcj
-PKG_VERSION:=		4.9.3
+PKG_VERSION:=		5.3.0
 PKG_RELEASE:=		1
-PKG_HASH:=		e6c63b40877bc756cc7cfe6ca98013eb15f02ec6c8c2cf68e24533ad1203aaba
+PKG_HASH:=		b7f5f56bd7db6f4fcaa95511dbf69fc596115b976b5352c06531c2fc95ece2f4
 PKG_DESCR:=		java compiler
 PKG_SECTION:=		dev/lang
 HOST_BUILDDEP:=		zip-host
