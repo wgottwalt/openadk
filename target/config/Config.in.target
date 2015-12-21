@@ -216,6 +216,7 @@ config ADK_TARGET_PACKAGE_IPKG
 config ADK_TARGET_PACKAGE_OPKG
 	bool "opkg"
 	select ADK_PACKAGE_OPKG
+	select ADK_HOST_NEED_OPKG
 	help
 	  Create opkg packages and use opkg package management on the target.
 	  
