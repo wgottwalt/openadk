@@ -11,6 +11,14 @@ TARGET_CFLAGS:=		$(filter-out -fno-asynchronous-unwind-tables,$(TARGET_CFLAGS))
 TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
 TARGET_LDFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
 
+# glibc does not compile with Os
+TARGET_CFLAGS:=		$(subst Os,O2,$(TARGET_CFLAGS))
+TARGET_CXXFLAGS:=	$(subst Os,O2,$(TARGET_CXXFLAGS))
+ifneq ($(ADK_DEBUG),)
+TARGET_CFLAGS+=		-O2
+TARGET_CXXFLAGS+=	-O2
+endif
+
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_TARGET_NAME) \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
@@ -36,9 +44,9 @@ GLIBC_CONFOPTS+=	--with-fp
 endif
 
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
-			CONFIG_SHELL='$(strip ${SHELL})' \
                         BUILD_CC=${CC_FOR_BUILD} \
                         CFLAGS="$(TARGET_CFLAGS)" \
+                        CXXFLAGS="$(TARGET_CXXFLAGS)" \
                         CC="${TARGET_CC}" \
                         CXX="${TARGET_CXX}" \
                         AR="${TARGET_AR}" \
@@ -47,18 +55,13 @@ GLIBC_ENV:=             PATH='${TARGET_PATH}' \
 			libc_cv_cc_with_libunwind=yes \
                         libc_cv_c_cleanup=yes \
                         libc_cv_gnu99_inline=yes \
-			libc_cv_initfini_array=yes \
-
-# glibc does not compile with Os
-TARGET_CFLAGS:=		$(subst Os,O2,$(TARGET_CFLAGS))
-ifneq ($(ADK_DEBUG),)
-TARGET_CFLAGS+=		-O2
-endif
+			libc_cv_initfini_array=yes
 
 GLIBC_MAKEOPTS+=	cross-compiling=yes
 ifeq (${ADK_MAKE_PARALLEL},y)
 GLIBC_MAKEOPTS+=	PARALLELMFLAGS="-j$(ADK_MAKE_JOBS)"
 endif
+
 
 GLIBC_BUILD_DIR_FINAL:=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-final
 
