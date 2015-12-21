@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_HASH:=		37d03132cc078937360b392170b7a1d0e5b322eee9f57c0b82292a8b1f0afe3d
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		base/apps
-PKG_BUILDDEP:=		bzip2-host
 PKG_URL:=		http://www.busybox.net/
 PKG_SITES:=		https://www.busybox.net/downloads/
 

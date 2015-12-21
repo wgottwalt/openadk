@@ -132,6 +132,7 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 			}
 			strncat(depvar, dep, strlen(dep)-5);
 			if ((strncmp(depvar, "bc", 2) == 0) ||
+				(strncmp(depvar, "bzip2", 5) == 0) ||
 				(strncmp(depvar, "file", 4) == 0) ||
 				(strncmp(depvar, "gawk", 4) == 0) ||
 				(strncmp(depvar, "grep", 4) == 0) ||
