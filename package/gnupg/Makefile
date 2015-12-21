@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gnupg
-PKG_VERSION:=		1.4.18
-PKG_RELEASE:=		2
-PKG_HASH:=		10a8936b76ccadb98521535b5f41cc5b41b3c159a6c2915f062bd4dc8ac12d12
+PKG_VERSION:=		1.4.20
+PKG_RELEASE:=		1
+PKG_HASH:=		dc1f1a6028488303a4efb01aadda480b9cd0f49f65aef94c432628fdd127e586
 PKG_DESCR:=		gnu privacy guard
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libreadline libncurses
