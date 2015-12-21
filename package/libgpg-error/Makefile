@@ -4,14 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libgpg-error
-PKG_VERSION:=		1.12
-PKG_RELEASE:=		2
-PKG_HASH:=		cafc9ed6a87c53a35175d5a1220a96ca386696eef2fa059cc0306211f246e55f
+PKG_VERSION:=		1.21
+PKG_RELEASE:=		1
+PKG_HASH:=		b7dbdb3cad63a740e9f0c632a1da32d4afdb694ec86c8625c98ea0691713b84d
 PKG_DESCR:=		helper library for common error codes and descriptions
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.gnupg.org/
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/libgpg-error/
 PKG_OPTS:=		dev
+PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
