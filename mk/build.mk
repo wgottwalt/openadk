@@ -178,15 +178,15 @@ ifeq ($(ADK_TARGET_PACKAGE_OPKG),y)
 endif
 
 ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
-	mkdir -p ${STAGING_TARGET_DIR}/lib
-	mkdir -p ${STAGING_TARGET_DIR}/bin
-	mkdir -p ${STAGING_TARGET_DIR}/etc
-	mkdir -p ${STAGING_TARGET_DIR}/usr/bin
-	mkdir -p ${STAGING_TARGET_DIR}/usr/include
-	mkdir -p ${STAGING_TARGET_DIR}/usr/lib/pkgconfig
-	mkdir -p ${STAGING_HOST_DIR}/usr/bin
-	mkdir -p ${STAGING_HOST_DIR}/usr/lib
-	mkdir -p ${STAGING_HOST_DIR}/usr/include
+	@mkdir -p ${STAGING_TARGET_DIR}/lib
+	@mkdir -p ${STAGING_TARGET_DIR}/bin
+	@mkdir -p ${STAGING_TARGET_DIR}/etc
+	@mkdir -p ${STAGING_TARGET_DIR}/usr/bin
+	@mkdir -p ${STAGING_TARGET_DIR}/usr/include
+	@mkdir -p ${STAGING_TARGET_DIR}/usr/lib/pkgconfig
+	@mkdir -p ${STAGING_HOST_DIR}/usr/bin
+	@mkdir -p ${STAGING_HOST_DIR}/usr/lib
+	@mkdir -p ${STAGING_HOST_DIR}/usr/include
 	@for i in lib64 lib32 libx32; do \
 		cd ${STAGING_TARGET_DIR}; ln -sf lib $$i; \
 		cd ${STAGING_TARGET_DIR}/usr; ln -sf lib $$i; \
@@ -270,7 +270,7 @@ cleandir:
 	@printf "done\n"
 
 cleansystem:
-	@$(TRACE) cleansystem
+	@printf " --->  cleaning system build directories and files .. "
 	@$(MAKE) -C $(CONFIG) clean $(MAKE_TRACE) 
 	@rm -rf $(BUILD_DIR) $(FW_DIR) $(TARGET_DIR) \
 	    ${ADK_TOPDIR}/package/pkglist.d ${ADK_TOPDIR}/package/pkgconfigs.d
