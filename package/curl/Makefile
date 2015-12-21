@@ -42,8 +42,10 @@ PKGCD_WITH_WOLFSSL:=	use wolfssl for crypto
 PKGCS_WITH_WOLFSSL:=	wolfssl ca-certificates
 PKGCB_WITH_WOLFSSL:=	wolfssl
 
+include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBCURL},${PKGSD_LIBCURL},${PKGSC_LIBCURL},${PKG_OPTS}))
 
@@ -111,4 +113,5 @@ libcurl-install:
 	${INSTALL_DIR} ${IDIR_LIBCURL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libcurl.so* ${IDIR_LIBCURL}/usr/lib
 
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
