@@ -92,6 +92,7 @@ else
 compile: $(LINUX_DIR)/$(KERNEL_FILE)
 endif
 install: compile
+ifneq ($(KERNEL_MODULES_USED),)
 	$(START_TRACE) "target/${ADK_TARGET_ARCH}-modules-install.. "
 ifeq ($(ADK_TARGET_PACKAGE_IPKG)$(ADK_TARGET_PACKAGE_OPKG),y)
 	$(PKG_INSTALL) $(wildcard ${PACKAGE_DIR}/kmod-*) $(MAKE_TRACE)
@@ -100,6 +101,7 @@ else
 endif
 	$(CMD_TRACE) " done"
 	$(END_TRACE)
+endif
 
 clean:
 	rm -rf $(LINUX_BUILD_DIR)
