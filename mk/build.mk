@@ -345,6 +345,7 @@ defconfig: .menu $(CONFIG)/conf
 		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_FILE=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_PERL=y" >> $(ADK_TOPDIR)/.defconfig; \
+		echo "ADK_PACKAGE_MKSH_TEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TEST_UCLIBC_NG_TESTSUITE)" ];then \
 		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
