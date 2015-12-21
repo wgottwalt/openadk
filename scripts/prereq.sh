@@ -207,7 +207,7 @@ printf " --->  checking if bash is installed.. "
 if which bash >/dev/null; then
   printf "found\n"
   printf " --->  checking if it is bash 4.x.. "
-  bash --version 2>/dev/null| grep "Version 4" >/dev/null
+  bash --version 2>/dev/null| grep -i "Version 4" >/dev/null
   if [ $? -eq 0 ]; then
     printf "yes\n"
   else
