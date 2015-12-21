@@ -2,13 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include ${ADK_TOPDIR}/rules.mk
-
-ifeq ($(ADK_TARGET_LIB_GLIBC),y)
-include ${ADK_TOPDIR}/toolchain/glibc/Makefile.inc
-endif
-ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
-include ${ADK_TOPDIR}/toolchain/uclibc-ng/Makefile.inc
-endif
+include ${ADK_TOPDIR}/toolchain/gcc/Makefile.inc
 
 PKG_NAME:=		libgcc
 PKG_DESCR:=		gcc library
