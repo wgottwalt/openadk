@@ -150,7 +150,7 @@ else
 	$(SED) 's/.*\(HAVE_SHARED\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_USE_GNU_HASHSTYLE),y)
-	$(SED) 's/.*\(LDSO_GNU_HASH_SUPPORT\).*/#\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(LDSO_GNU_HASH_SUPPORT\).*/\1=y/' ${WRKBUILD}/.config
 else
 	$(SED) 's/.*\(LDSO_GNU_HASH_SUPPORT\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
@@ -159,6 +159,9 @@ ifeq ($(ADK_TARGET_USE_SSP),y)
 	echo "UCLIBC_HAS_SSP_COMPAT=n" >> ${WRKBUILD}/.config
 	echo "SSP_QUICK_CANARY=n" >> ${WRKBUILD}/.config
 	echo "UCLIBC_BUILD_SSP=y" >> ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_DEBUG),y)
+	$(SED) 's/.*\(DODEBUG\).*/\1=y/' ${WRKBUILD}/.config
 endif
 
 #
