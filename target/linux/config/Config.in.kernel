@@ -204,6 +204,10 @@ config ADK_KERNEL_UEVENT_HELPER_PATH
 	default "/sbin/mdev"
 	depends on ADK_RUNTIME_DEV_MDEV
 
+config ADK_KERNEL_BINFMT_ELF
+	bool
+	default y if ADK_TARGET_BINFMT_ELF
+
 config ADK_KERNEL_BINFMT_ELF_FDPIC
 	bool
 	default y if ADK_TARGET_BINFMT_FDPIC

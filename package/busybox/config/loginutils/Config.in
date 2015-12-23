@@ -106,13 +106,13 @@ config BUSYBOX_USE_BB_CRYPT_SHA
 
 config BUSYBOX_ADDUSER
 	bool "adduser"
-	default y
+	default n
 	help
 	  Utility for creating a new user account.
 
 config BUSYBOX_FEATURE_ADDUSER_LONG_OPTIONS
 	bool "Enable long options"
-	default y
+	default n
 	depends on BUSYBOX_ADDUSER && BUSYBOX_LONG_OPTS
 	help
 	  Support long options for the adduser applet.
@@ -154,20 +154,20 @@ config BUSYBOX_LAST_SYSTEM_ID
 
 config BUSYBOX_ADDGROUP
 	bool "addgroup"
-	default y
+	default n
 	help
 	  Utility for creating a new group account.
 
 config BUSYBOX_FEATURE_ADDGROUP_LONG_OPTIONS
 	bool "Enable long options"
-	default y
+	default n
 	depends on BUSYBOX_ADDGROUP && BUSYBOX_LONG_OPTS
 	help
 	  Support long options for the addgroup applet.
 
 config BUSYBOX_FEATURE_ADDUSER_TO_GROUP
 	bool "Support for adding users to groups"
-	default y
+	default n
 	depends on BUSYBOX_ADDGROUP
 	help
 	  If  called  with two non-option arguments,
@@ -176,19 +176,19 @@ config BUSYBOX_FEATURE_ADDUSER_TO_GROUP
 
 config BUSYBOX_DELUSER
 	bool "deluser"
-	default y
+	default n
 	help
 	  Utility for deleting a user account.
 
 config BUSYBOX_DELGROUP
 	bool "delgroup"
-	default y
+	default n
 	help
 	  Utility for deleting a group account.
 
 config BUSYBOX_FEATURE_DEL_USER_FROM_GROUP
 	bool "Support for removing users from groups"
-	default y
+	default n
 	depends on BUSYBOX_DELGROUP
 	help
 	  If called with two non-option arguments, deluser
@@ -252,7 +252,7 @@ config BUSYBOX_LOGIN_SCRIPTS
 
 config BUSYBOX_FEATURE_NOLOGIN
 	bool "Support for /etc/nologin"
-	default y
+	default n
 	depends on BUSYBOX_LOGIN
 	help
 	  The file /etc/nologin is used by (some versions of) login(1).
@@ -311,7 +311,7 @@ config BUSYBOX_FEATURE_DEFAULT_PASSWD_ALGO
 
 config BUSYBOX_SU
 	bool "su"
-	default y
+	default n
 	select BUSYBOX_FEATURE_SYSLOG
 	help
 	  su is used to become another user during a login session.

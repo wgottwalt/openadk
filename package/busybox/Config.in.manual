@@ -5,11 +5,195 @@ config ADK_COMPILE_BUSYBOX
 config ADK_PACKAGE_BUSYBOX
 	bool "busybox.............. core utilities for embedded systems"
 	select ADK_COMPILE_BUSYBOX
-	default y if !ADK_TOOLCHAIN_ONLY && !ADK_TARGET_WITHOUT_MMU
+	default y if !ADK_TOOLCHAIN_ONLY
 	help
 	  Core utilities for embedded Linux systems
 	  
 	  WWW: http://www.busybox.net
+
+choice
+prompt "Choose predefined set of applets"
+depends on ADK_PACKAGE_BUSYBOX
+default ADK_PACKAGE_BUSYBOX_MINIMAL if ADK_TARGET_WITHOUT_MMU
+
+config ADK_PACKAGE_BUSYBOX_DEFAULT
+	bool "activate standard set of applets"
+	select BUSYBOX_FEATURE_UTMP
+	select BUSYBOX_GUNZIP
+	select BUSYBOX_GZIP
+	select BUSYBOX_TAR
+	select BUSYBOX_CLEAR
+	select BUSYBOX_RESET
+	select BUSYBOX_BASENAME
+	select BUSYBOX_CAT
+	select BUSYBOX_DATE
+	select BUSYBOX_ID
+	select BUSYBOX_GROUPS
+	select BUSYBOX_TEST
+	select BUSYBOX_TOUCH
+	select BUSYBOX_TR
+	select BUSYBOX_WHO
+	select BUSYBOX_CAL
+	select BUSYBOX_CHGRP
+	select BUSYBOX_CHMOD
+	select BUSYBOX_CHOWN
+	select BUSYBOX_CHROOT
+	select BUSYBOX_CP
+	select BUSYBOX_CUT
+	select BUSYBOX_DD
+	select BUSYBOX_DF
+	select BUSYBOX_DIRNAME
+	select BUSYBOX_DU
+	select BUSYBOX_ECHO
+	select BUSYBOX_ENV
+	select BUSYBOX_EXPR
+	select BUSYBOX_HEAD
+	select BUSYBOX_LN
+	select BUSYBOX_LS
+	select BUSYBOX_MD5SUM
+	select BUSYBOX_MKDIR
+	select BUSYBOX_MKFIFO
+	select BUSYBOX_MKNOD
+	select BUSYBOX_MV
+	select BUSYBOX_PRINTF
+	select BUSYBOX_PWD
+	select BUSYBOX_RM
+	select BUSYBOX_SLEEP
+	select BUSYBOX_SORT
+	select BUSYBOX_STAT
+	select BUSYBOX_TAIL
+	select BUSYBOX_FEATURE_FANCY_TAIL
+	select BUSYBOX_TEE
+	select BUSYBOX_UNAME
+	select BUSYBOX_WC
+	select BUSYBOX_MKTEMP
+	select BUSYBOX_WHICH
+	select BUSYBOX_VI
+	select BUSYBOX_AWK
+	select BUSYBOX_SED
+	select BUSYBOX_FIND
+	select BUSYBOX_GREP
+	select BUSYBOX_XARGS
+	select BUSYBOX_HALT
+	select BUSYBOX_INIT
+	select BUSYBOX_SU
+	select BUSYBOX_STRINGS
+	select BUSYBOX_TIME
+	select BUSYBOX_RUN_PARTS
+
+config ADK_PACKAGE_BUSYBOX_MINIMAL
+	bool "activate minimal set of applets"
+	select BUSYBOX_AWK
+	select BUSYBOX_SED
+	select BUSYBOX_RUN_PARTS
+	select BUSYBOX_TEE
+	select BUSYBOX_SORT
+	select BUSYBOX_GUNZIP
+	select BUSYBOX_GZIP
+	select BUSYBOX_TAR
+	select BUSYBOX_BASENAME
+	select BUSYBOX_CAT
+	select BUSYBOX_DATE
+	select BUSYBOX_ID
+	select BUSYBOX_TEST
+	select BUSYBOX_TOUCH
+	select BUSYBOX_CHGRP
+	select BUSYBOX_CHMOD
+	select BUSYBOX_CHOWN
+	select BUSYBOX_CHROOT
+	select BUSYBOX_CP
+	select BUSYBOX_CUT
+	select BUSYBOX_DD
+	select BUSYBOX_DF
+	select BUSYBOX_DIRNAME
+	select BUSYBOX_DU
+	select BUSYBOX_ECHO
+	select BUSYBOX_ENV
+	select BUSYBOX_HEAD
+	select BUSYBOX_TAIL
+	select BUSYBOX_FEATURE_FANCY_TAIL
+	select BUSYBOX_LN
+	select BUSYBOX_LS
+	select BUSYBOX_MKDIR
+	select BUSYBOX_MV
+	select BUSYBOX_PRINTF
+	select BUSYBOX_PWD
+	select BUSYBOX_RM
+	select BUSYBOX_UNAME
+	select BUSYBOX_VI
+	select BUSYBOX_FIND
+	select BUSYBOX_GREP
+	select BUSYBOX_HALT
+	select BUSYBOX_INIT
+	select BUSYBOX_WHOAMI
+
+config ADK_PACKAGE_BUSYBOX_ALL
+	bool "activate all applets"
+	select BUSYBOX_DESKTOP
+	select BUSYBOX_FEATURE_UTMP
+	select BUSYBOX_GUNZIP
+	select BUSYBOX_GZIP
+	select BUSYBOX_TAR
+	select BUSYBOX_CLEAR
+	select BUSYBOX_RESET
+	select BUSYBOX_BASENAME
+	select BUSYBOX_CAT
+	select BUSYBOX_DATE
+	select BUSYBOX_ID
+	select BUSYBOX_GROUPS
+	select BUSYBOX_TEST
+	select BUSYBOX_TOUCH
+	select BUSYBOX_TR
+	select BUSYBOX_WHO
+	select BUSYBOX_CAL
+	select BUSYBOX_CHGRP
+	select BUSYBOX_CHMOD
+	select BUSYBOX_CHOWN
+	select BUSYBOX_CHROOT
+	select BUSYBOX_CP
+	select BUSYBOX_CUT
+	select BUSYBOX_DD
+	select BUSYBOX_DF
+	select BUSYBOX_DIRNAME
+	select BUSYBOX_DU
+	select BUSYBOX_ECHO
+	select BUSYBOX_ENV
+	select BUSYBOX_EXPR
+	select BUSYBOX_HEAD
+	select BUSYBOX_LN
+	select BUSYBOX_LS
+	select BUSYBOX_MD5SUM
+	select BUSYBOX_MKDIR
+	select BUSYBOX_MKFIFO
+	select BUSYBOX_MKNOD
+	select BUSYBOX_MV
+	select BUSYBOX_PRINTF
+	select BUSYBOX_PWD
+	select BUSYBOX_RM
+	select BUSYBOX_SLEEP
+	select BUSYBOX_SORT
+	select BUSYBOX_STAT
+	select BUSYBOX_TAIL
+	select BUSYBOX_TEE
+	select BUSYBOX_FEATURE_FANCY_TAIL
+	select BUSYBOX_UNAME
+	select BUSYBOX_WC
+	select BUSYBOX_MKTEMP
+	select BUSYBOX_WHICH
+	select BUSYBOX_VI
+	select BUSYBOX_AWK
+	select BUSYBOX_SED
+	select BUSYBOX_FIND
+	select BUSYBOX_GREP
+	select BUSYBOX_XARGS
+	select BUSYBOX_HALT
+	select BUSYBOX_INIT
+	select BUSYBOX_SU
+	select BUSYBOX_STRINGS
+	select BUSYBOX_TIME
+	select BUSYBOX_RUN_PARTS
+
+endchoice
 
 config ADK_PACKAGE_BUSYBOX_HIDE
 	bool "hide packages provided by busybox applets"

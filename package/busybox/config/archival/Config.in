@@ -6,7 +6,6 @@
 
 menu "Archival Utilities"
 
-
 config BUSYBOX_FEATURE_SEAMLESS_XZ
 	bool "Make tar, rpm, modprobe etc understand .xz data"
 	default y
@@ -292,7 +291,7 @@ config BUSYBOX_FEATURE_TAR_OLDGNU_COMPATIBILITY
 
 config BUSYBOX_FEATURE_TAR_OLDSUN_COMPATIBILITY
 	bool "Enable untarring of tarballs with checksums produced by buggy Sun tar"
-	default y
+	default n
 	depends on BUSYBOX_TAR || BUSYBOX_DPKG
 	help
 	  This option is required to unpack archives created by some old

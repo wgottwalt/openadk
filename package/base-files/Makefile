@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		19
+PKG_RELEASE:=		20
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -67,6 +67,7 @@ endif
 	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
 ifeq ($(ADK_TARGET_WITH_NETDEVICE),y)
 	cp ./files/interfaces-dhcp $(IDIR_BASE_FILES)/etc/network/interfaces
+	cp ./files/rc.netinfo $(IDIR_BASE_FILES)/etc/
 else
 	cp ./files/interfaces-lo $(IDIR_BASE_FILES)/etc/network/interfaces
 endif
@@ -108,6 +109,8 @@ endif
 	    $(SED) 's,\*NP\*,'"$$(awk -F\= '/^ADK_RUNTIME_PASSWORD/ { print $$2 }' $(ADK_TOPDIR)/.config|sed -e 's^\"^^g'),g" \
 		 $(IDIR_BASE_FILES)/etc/shadow
 	echo $(ADK_RUNTIME_TMPFS_SIZE) > $(IDIR_BASE_FILES)/etc/tmpfs
+ifeq ($(ADK_PACKAGE_MKSH),y)
+	$(CP) ./files/profile $(IDIR_BASE_FILES)/etc/profile
 ifeq ($(ADK_TARGET_WITH_ROOT_RW),y)
 	echo 'export IPKGTMPDIR=/root/.ipkg' >> $(IDIR_BASE_FILES)/etc/profile
 else
@@ -115,6 +118,7 @@ else
 endif
 ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
 	echo 'export LD_LIBRARY_PATH=/opt/vc/lib' >> $(IDIR_BASE_FILES)/etc/profile
+endif
 endif
 
 # simple network configuration

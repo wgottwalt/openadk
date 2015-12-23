@@ -18,28 +18,28 @@ config BUSYBOX_CONSPY
 
 config BUSYBOX_I2CGET
 	bool "i2cget"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Read from I2C/SMBus chip registers.
 
 config BUSYBOX_I2CSET
 	bool "i2cset"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Set I2C registers.
 
 config BUSYBOX_I2CDUMP
 	bool "i2cdump"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Examine I2C registers.
 
 config BUSYBOX_I2CDETECT
 	bool "i2cdetect"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Detect I2C chips.
@@ -47,7 +47,7 @@ config BUSYBOX_I2CDETECT
 config BUSYBOX_LESS
 	bool "less"
 	depends on !BUSYBOX_DISABLE_LESS
-	default y
+	default n
 	help
 	  'less' is a pager, meaning that it displays text files. It possesses
 	  a wide array of features, and is an improvement over 'more'.
@@ -370,7 +370,7 @@ config BUSYBOX_DC
 
 config BUSYBOX_FEATURE_DC_LIBM
 	bool "Enable power and exp functions (requires libm)"
-	default y
+	default n
 	depends on BUSYBOX_DC
 	help
 	  Enable power and exp functions.
@@ -398,7 +398,7 @@ config BUSYBOX_DEVFSD
 
 config BUSYBOX_DEVFSD_MODLOAD
 	bool "Adds support for MODLOAD keyword in devsfd.conf"
-	default y
+	default n
 	depends on BUSYBOX_DEVFSD
 	help
 	  This actually doesn't work with busybox modutils but needs
@@ -406,7 +406,7 @@ config BUSYBOX_DEVFSD_MODLOAD
 
 config BUSYBOX_DEVFSD_FG_NP
 	bool "Enables the -fg and -np options"
-	default y
+	default n
 	depends on BUSYBOX_DEVFSD
 	help
 	  -fg  Run the daemon in the foreground.
@@ -415,7 +415,7 @@ config BUSYBOX_DEVFSD_FG_NP
 
 config BUSYBOX_DEVFSD_VERBOSE
 	bool "Increases logging (and size)"
-	default y
+	default n
 	depends on BUSYBOX_DEVFSD
 	help
 	  Increases logging to stderr or syslog.
@@ -435,7 +435,7 @@ config BUSYBOX_FEATURE_DEVFS
 
 config BUSYBOX_DEVMEM
 	bool "devmem"
-	default y
+	default n
 	help
 	  devmem is a small program that reads and writes from physical
 	  memory using /dev/mem.
@@ -449,7 +449,7 @@ config BUSYBOX_EJECT
 
 config BUSYBOX_FEATURE_EJECT_SCSI
 	bool "SCSI support"
-	default y
+	default n
 	depends on BUSYBOX_EJECT
 	help
 	  Add the -s option to eject, this allows to eject SCSI-Devices and
@@ -522,7 +522,7 @@ config BUSYBOX_INOTIFYD
 
 config BUSYBOX_LAST
 	bool "last"
-	default y
+	default n
 	depends on BUSYBOX_FEATURE_WTMP
 	help
 	  'last' displays a list of the last users that logged into the system.
@@ -727,7 +727,7 @@ config BUSYBOX_SETSID
 
 config BUSYBOX_STRINGS
 	bool "strings"
-	default y
+	default n
 	help
 	  strings prints the printable character sequences for each file
 	  specified.
@@ -750,7 +750,7 @@ config BUSYBOX_FEATURE_TASKSET_FANCY
 
 config BUSYBOX_TIME
 	bool "time"
-	default y
+	default n
 	help
 	  The time command runs the specified program with the given arguments.
 	  When the command finishes, time writes a message to standard output
@@ -780,7 +780,7 @@ config BUSYBOX_VOLNAME
 
 config BUSYBOX_WALL
 	bool "wall"
-	default y
+	default n
 	depends on BUSYBOX_FEATURE_UTMP
 	help
 	  Write a message to all users that are logged in.

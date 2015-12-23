@@ -6,10 +6,9 @@
 
 menu "Linux Ext2 FS Progs"
 
-
 config BUSYBOX_CHATTR
 	bool "chattr"
-	default y
+	default n
 	help
 	  chattr changes the file attributes on a second extended file system.
 
@@ -24,7 +23,7 @@ config BUSYBOX_CHATTR
 
 config BUSYBOX_FSCK
 	bool "fsck"
-	default y
+	default n
 	help
 	  fsck is used to check and optionally repair one or more filesystems.
 	  In actuality, fsck is simply a front-end for the various file system
@@ -32,7 +31,7 @@ config BUSYBOX_FSCK
 
 config BUSYBOX_LSATTR
 	bool "lsattr"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  lsattr lists the file attributes on a second extended file system.

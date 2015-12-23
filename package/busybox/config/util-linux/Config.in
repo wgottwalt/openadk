@@ -92,7 +92,7 @@ config BUSYBOX_REV
 
 config BUSYBOX_UEVENT
 	bool "uevent"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  uevent is a netlink listener for kernel uevent notifications
@@ -224,7 +224,7 @@ config BUSYBOX_FDFORMAT
 
 config BUSYBOX_FDISK
 	bool "fdisk"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  The fdisk utility is used to divide hard disks into one or more
@@ -380,7 +380,7 @@ config BUSYBOX_MKFS_VFAT
 
 config BUSYBOX_GETOPT
 	bool "getopt"
-	default y
+	default n
 	help
 	  The getopt utility is used to break up (parse) options in command
 	  lines to make it easy to write complex shell scripts that also check
@@ -398,7 +398,7 @@ config BUSYBOX_FEATURE_GETOPT_LONG
 
 config BUSYBOX_HEXDUMP
 	bool "hexdump"
-	default y
+	default n
 	help
 	  The hexdump utility is used to display binary data in a readable
 	  way that is comparable to the output from most hex editors.
@@ -415,7 +415,7 @@ config BUSYBOX_FEATURE_HEXDUMP_REVERSE
 
 config BUSYBOX_HD
 	bool "hd"
-	default y
+	default n
 	depends on BUSYBOX_HEXDUMP
 	help
 	  hd is an alias to hexdump -C.
@@ -470,7 +470,7 @@ config BUSYBOX_IPCS
 
 config BUSYBOX_LOSETUP
 	bool "losetup"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  losetup is used to associate or detach a loop device with a regular
@@ -544,14 +544,14 @@ config BUSYBOX_MOUNT
 
 config BUSYBOX_FEATURE_MOUNT_FAKE
 	bool "Support option -f"
-	default y
+	default n
 	depends on BUSYBOX_MOUNT
 	help
 	  Enable support for faking a file system mount.
 
 config BUSYBOX_FEATURE_MOUNT_VERBOSE
 	bool "Support option -v"
-	default y
+	default n
 	depends on BUSYBOX_MOUNT
 	help
 	  Enable multi-level -v[vv...] verbose messages. Useful if you
@@ -641,7 +641,7 @@ config BUSYBOX_PIVOT_ROOT
 config BUSYBOX_RDATE
 	bool "rdate"
 	depends on !BUSYBOX_DISABLE_RDATE
-	default y
+	default n
 	help
 	  The rdate utility allows you to synchronize the date and time of your
 	  system clock with the date and time of a remote networked system using
@@ -721,7 +721,7 @@ config BUSYBOX_FEATURE_SWAPON_PRI
 
 config BUSYBOX_SWITCH_ROOT
 	bool "switch_root"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  The switch_root utility is used from initramfs to select a new

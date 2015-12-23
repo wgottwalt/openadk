@@ -8,7 +8,6 @@ config ADK_KERNEL_MISC_FILESYSTEMS
 
 config ADK_KERNEL_FSNOTIFY
 	bool
-	default y
 
 config ADK_KERNEL_EXPORTFS
 	tristate
@@ -256,7 +255,7 @@ menu "Filesystem features"
 
 config ADK_KERNEL_INOTIFY_USER
 	bool "Inotify support for userspace"
-	default y
+	default n
 	help
 	  Say Y here to enable inotify support for userspace, including the
 	  associated system calls.  Inotify allows monitoring of both files and

@@ -73,7 +73,8 @@ fi
 	    done
 } |tee /dev/stderr |logger -p 6 -t ''
 
-if [ $rcquiet -ne 1 ];then
-	ipaddr=$(ip addr show $(ip route show|awk '/default/ { print $5 }')|awk '/inet / { print $2 }'|tail -1)
-	echo "Your ip adress is $ipaddr"
+if [ $rcquiet -ne 1 ]; then
+  if [ -f /etc/rc.netinfo ]; then
+    . /etc/rc.netinfo
+  fi
 fi

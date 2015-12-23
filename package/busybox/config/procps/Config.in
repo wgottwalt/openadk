@@ -8,13 +8,13 @@ menu "Process Utilities"
 
 config BUSYBOX_IOSTAT
 	bool "iostat"
-	default y
+	default n
 	help
 	  Report CPU and I/O statistics
 
 config BUSYBOX_LSOF
 	bool "lsof"
-	default y
+	default n
 	help
 	  Show open files in the format of:
 	  PID <TAB> /path/to/executable <TAB> /path/to/opened/file
@@ -33,7 +33,7 @@ config BUSYBOX_NMETER
 
 config BUSYBOX_PMAP
        bool "pmap"
-       default y
+       default n
        help
          Display processes' memory mappings.
 
@@ -45,7 +45,7 @@ config BUSYBOX_POWERTOP
 
 config BUSYBOX_PSTREE
 	bool "pstree"
-	default y
+	default n
 	help
 	  Display a tree of processes.
 
@@ -73,14 +73,14 @@ config BUSYBOX_UPTIME
 
 config BUSYBOX_FEATURE_UPTIME_UTMP_SUPPORT
 	bool "Support for showing the number of users"
-	default y
+	default n
 	depends on BUSYBOX_UPTIME && BUSYBOX_FEATURE_UTMP
 	help
 	  Makes uptime display the number of users currently logged on.
 
 config BUSYBOX_FREE
 	bool "free"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX #sysinfo()
 	help
 	  free displays the total amount of free and used physical and swap
@@ -89,7 +89,7 @@ config BUSYBOX_FREE
 
 config BUSYBOX_FUSER
 	bool "fuser"
-	default y
+	default n
 	help
 	  fuser lists all PIDs (Process IDs) that currently have a given
 	  file open. fuser can also list all PIDs that have a given network
@@ -105,7 +105,7 @@ config BUSYBOX_KILL
 
 config BUSYBOX_KILLALL
 	bool "killall"
-	default y
+	default n
 	depends on BUSYBOX_KILL
 	help
 	  killall sends a signal to all processes running any of the
@@ -125,7 +125,7 @@ config BUSYBOX_PGREP
 
 config BUSYBOX_PIDOF
 	bool "pidof"
-	default y
+	default n
 	help
 	  Pidof finds the process id's (pids) of the named programs. It prints
 	  those id's on the standard output.
@@ -148,7 +148,7 @@ config BUSYBOX_FEATURE_PIDOF_OMIT
 
 config BUSYBOX_PKILL
 	bool "pkill"
-	default y
+	default n
 	help
 	  Send signals to processes by name.
 
@@ -169,7 +169,7 @@ config BUSYBOX_FEATURE_PS_WIDE
 
 config BUSYBOX_FEATURE_PS_LONG
 	bool "Enable long output option (-l)"
-	default y
+	default n
 	depends on BUSYBOX_PS && !BUSYBOX_DESKTOP
 	help
 	  Support argument 'l' for long output.
@@ -177,7 +177,7 @@ config BUSYBOX_FEATURE_PS_LONG
 
 config BUSYBOX_FEATURE_PS_TIME
 	bool "Enable time and elapsed time output"
-	default y
+	default n
 	depends on BUSYBOX_PS && BUSYBOX_DESKTOP
 	select BUSYBOX_PLATFORM_LINUX
 	help
@@ -185,7 +185,7 @@ config BUSYBOX_FEATURE_PS_TIME
 
 config BUSYBOX_FEATURE_PS_ADDITIONAL_COLUMNS
 	bool "Enable additional ps columns"
-	default y
+	default n
 	depends on BUSYBOX_PS && BUSYBOX_DESKTOP
 	help
 	  Support -o rgroup, -o ruser, -o nice output specifiers.
@@ -200,7 +200,7 @@ config BUSYBOX_FEATURE_PS_UNUSUAL_SYSTEMS
 
 config BUSYBOX_RENICE
 	bool "renice"
-	default y
+	default n
 	help
 	  Renice alters the scheduling priority of one or more running
 	  processes.
@@ -213,7 +213,7 @@ config BUSYBOX_BB_SYSCTL
 
 config BUSYBOX_TOP
 	bool "top"
-	default y
+	default n
 	help
 	  The top program provides a dynamic real-time view of a running
 	  system.
@@ -275,7 +275,7 @@ config BUSYBOX_FEATURE_SHOW_THREADS
 
 config BUSYBOX_WATCH
 	bool "watch"
-	default y
+	default n
 	help
 	  watch is used to execute a program periodically, showing
 	  output to the screen.

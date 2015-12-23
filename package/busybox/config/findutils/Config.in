@@ -234,7 +234,7 @@ config BUSYBOX_FEATURE_GREP_CONTEXT
 
 config BUSYBOX_XARGS
 	bool "xargs"
-	default y
+	default n
 	help
 	  xargs is used to execute a specified command for
 	  every item from standard input.

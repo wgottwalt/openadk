@@ -165,6 +165,7 @@ config BUSYBOX_INIT_TERMINAL_TYPE
 
 	  Note that on Linux, init attempts to detect serial terminal and
 	  sets TERM to "vt102" if one is found.
+
 config BUSYBOX_MESG
 	bool "mesg"
 	default n

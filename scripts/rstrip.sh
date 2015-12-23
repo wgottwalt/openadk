@@ -45,8 +45,8 @@ find $TARGETS -type f -a -exec file {} \; | \
 	case $line in
 	*ELF*executable*,\ not\ stripped*)
 		S=executable ;;
-	*/lib/modules/3.*.o:*ELF*relocatable*,\ not\ stripped* | \
-	*/lib/modules/3.*.ko:*ELF*relocatable*,\ not\ stripped*)
+	*/lib/modules/*.o:*ELF*relocatable*,\ not\ stripped* | \
+	*/lib/modules/*.ko:*ELF*relocatable*,\ not\ stripped*)
 		# kernel module parametres must not be stripped off
 		T="$T --strip-unneeded $(echo $(${prefix}nm $F | \
 		    sed -n -e '/__param_/s/^.*__param_/-K /p' \

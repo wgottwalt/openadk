@@ -8,7 +8,7 @@ menu "Networking Utilities"
 
 config BUSYBOX_NAMEIF
 	bool "nameif"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	select BUSYBOX_FEATURE_SYSLOG
 	help
@@ -44,7 +44,7 @@ config BUSYBOX_NBDCLIENT
 
 config BUSYBOX_NC
 	bool "nc"
-	default y
+	default n
 	help
 	  A simple Unix utility which reads and writes data across network
 	  connections.
@@ -77,7 +77,7 @@ config BUSYBOX_NC_110_COMPAT
 
 config BUSYBOX_PING
 	bool "ping"
-	default y
+	default y if ADK_TARGET_WITH_NET
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  ping uses the ICMP protocol's mandatory ECHO_REQUEST datagram to
@@ -85,7 +85,7 @@ config BUSYBOX_PING
 
 config BUSYBOX_PING6
 	bool "ping6"
-	default y
+	default y if ADK_TARGET_WITH_NET
 	depends on BUSYBOX_FEATURE_IPV6 && BUSYBOX_PING
 	help
 	  This will give you a ping that can talk IPv6.
@@ -100,7 +100,7 @@ config BUSYBOX_FEATURE_FANCY_PING
 
 config BUSYBOX_WHOIS
 	bool "whois"
-	default y
+	default n
 	help
 	  whois is a client for the whois directory service
 
@@ -147,14 +147,14 @@ config BUSYBOX_VERBOSE_RESOLUTION_ERRORS
 
 config BUSYBOX_ARP
 	bool "arp"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Manipulate the system ARP cache.
 
 config BUSYBOX_ARPING
 	bool "arping"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Ping hosts by ARP packets.
@@ -387,7 +387,7 @@ config BUSYBOX_FEATURE_HTTPD_GZIP
 
 config BUSYBOX_IFCONFIG
 	bool "ifconfig"
-	default y
+	default y if ADK_TARGET_WITH_NET
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Ifconfig is used to configure the kernel-resident network interfaces.
@@ -451,7 +451,7 @@ config BUSYBOX_IFPLUGD
 
 config BUSYBOX_IFUPDOWN
 	bool "ifupdown"
-	default y
+	default y if ADK_TARGET_WITH_NET
 	help
 	  Activate or deactivate the specified interfaces. This applet makes
 	  use of either "ifconfig" and "route" or the "ip" command to actually
@@ -538,7 +538,7 @@ config BUSYBOX_FEATURE_IFUPDOWN_IPV6
 
 config BUSYBOX_FEATURE_IFUPDOWN_MAPPING
 	bool "Enable mapping support"
-	default y
+	default n
 	depends on BUSYBOX_IFUPDOWN
 	help
 	  This enables support for the "mapping" stanza, unless you have
@@ -607,7 +607,7 @@ config BUSYBOX_FEATURE_INETD_RPC
 config BUSYBOX_IP
 	bool "ip"
 	depends on !BUSYBOX_DISABLE_IP
-	default y
+	default y if ADK_TARGET_WITH_NET
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  The "ip" applet is a TCP/IP interface configuration and routing
@@ -644,21 +644,21 @@ config BUSYBOX_FEATURE_IP_ROUTE_DIR
 
 config BUSYBOX_FEATURE_IP_TUNNEL
 	bool "ip tunnel"
-	default y
+	default n
 	depends on BUSYBOX_IP
 	help
 	  Add support for tunneling commands to "ip".
 
 config BUSYBOX_FEATURE_IP_RULE
 	bool "ip rule"
-	default y
+	default n
 	depends on BUSYBOX_IP
 	help
 	  Add support for rule commands to "ip".
 
 config BUSYBOX_FEATURE_IP_SHORT_FORMS
 	bool "Support short forms of ip commands"
-	default y
+	default n
 	depends on BUSYBOX_IP
 	help
 	  Also support short-form of ip <OBJECT> commands:
@@ -683,27 +683,27 @@ config BUSYBOX_FEATURE_IP_RARE_PROTOCOLS
 
 config BUSYBOX_IPADDR
 	bool
-	default y
+	default n
 	depends on BUSYBOX_FEATURE_IP_SHORT_FORMS && BUSYBOX_FEATURE_IP_ADDRESS
 
 config BUSYBOX_IPLINK
 	bool
-	default y
+	default n
 	depends on BUSYBOX_FEATURE_IP_SHORT_FORMS && BUSYBOX_FEATURE_IP_LINK
 
 config BUSYBOX_IPROUTE
 	bool
-	default y
+	default n
 	depends on BUSYBOX_FEATURE_IP_SHORT_FORMS && BUSYBOX_FEATURE_IP_ROUTE
 
 config BUSYBOX_IPTUNNEL
 	bool
-	default y
+	default n
 	depends on BUSYBOX_FEATURE_IP_SHORT_FORMS && BUSYBOX_FEATURE_IP_TUNNEL
 
 config BUSYBOX_IPRULE
 	bool
-	default y
+	default n
 	depends on BUSYBOX_FEATURE_IP_SHORT_FORMS && BUSYBOX_FEATURE_IP_RULE
 
 config BUSYBOX_IPCALC
@@ -730,14 +730,14 @@ config BUSYBOX_FEATURE_IPCALC_LONG_OPTIONS
 
 config BUSYBOX_NETSTAT
 	bool "netstat"
-	default y
+	default y if ADK_TARGET_WITH_NET
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  netstat prints information about the Linux networking subsystem.
 
 config BUSYBOX_FEATURE_NETSTAT_WIDE
 	bool "Enable wide netstat output"
-	default y
+	default n
 	depends on BUSYBOX_NETSTAT
 	help
 	  Add support for wide columns. Useful when displaying IPv6 addresses
@@ -753,7 +753,7 @@ config BUSYBOX_FEATURE_NETSTAT_PRG
 
 config BUSYBOX_NSLOOKUP
 	bool "nslookup"
-	default y
+	default y if ADK_TARGET_WITH_NET
 	help
 	  nslookup is a tool to query Internet name servers.
 
@@ -790,7 +790,7 @@ config BUSYBOX_PSCAN
 
 config BUSYBOX_ROUTE
 	bool "route"
-	default y
+	default y if ADK_TARGET_WITH_NET
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Route displays or manipulates the kernel's IP routing tables.
@@ -822,7 +822,7 @@ config BUSYBOX_TCPSVD
 
 config BUSYBOX_TELNET
 	bool "telnet"
-	default y
+	default y if ADK_TARGET_WITH_NET
 	help
 	  Telnet is an interface to the TELNET protocol, but is also commonly
 	  used to test other simple protocols.
@@ -984,14 +984,14 @@ config BUSYBOX_TFTP_DEBUG
 
 config BUSYBOX_TRACEROUTE
 	bool "traceroute"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Utility to trace the route of IP packets.
 
 config BUSYBOX_TRACEROUTE6
 	bool "traceroute6"
-	default y
+	default n
 	depends on BUSYBOX_FEATURE_IPV6 && BUSYBOX_TRACEROUTE
 	help
 	  Utility to trace the route of IPv6 packets.
@@ -1021,7 +1021,7 @@ config BUSYBOX_FEATURE_TRACEROUTE_USE_ICMP
 
 config BUSYBOX_TUNCTL
 	bool "tunctl"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  tunctl creates or deletes tun devices.
@@ -1054,7 +1054,7 @@ config BUSYBOX_UDPSVD
 
 config BUSYBOX_VCONFIG
 	bool "vconfig"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  Creates, removes, and configures VLAN interfaces
@@ -1062,7 +1062,7 @@ config BUSYBOX_VCONFIG
 config BUSYBOX_WGET
 	bool "wget"
 	depends on !BUSYBOX_DISABLE_WGET
-	default y
+	default n
 	help
 	  wget is a utility for non-interactive download of files from HTTP,
 	  HTTPS, and FTP servers.
@@ -1102,7 +1102,7 @@ config BUSYBOX_FEATURE_WGET_TIMEOUT
 
 config BUSYBOX_FEATURE_WGET_OPENSSL
 	bool "Try to connect to HTTPS using openssl"
-	default y
+	default n
 	depends on BUSYBOX_WGET
 	help
 	  Choose how wget establishes SSL connection for https:// URLs.
@@ -1125,7 +1125,7 @@ config BUSYBOX_FEATURE_WGET_OPENSSL
 
 config BUSYBOX_FEATURE_WGET_SSL_HELPER
 	bool "Try to connect to HTTPS using ssl_helper"
-	default y
+	default n
 	depends on BUSYBOX_WGET
 	help
 	  Choose how wget establishes SSL connection for https:// URLs.

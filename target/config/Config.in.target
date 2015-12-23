@@ -29,6 +29,7 @@ config ADK_TARGET_ROOTFS_INITRAMFS
 		ADK_TARGET_ARCH_X86_64
 	depends on !ADK_TARGET_VBOX
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	depends on !ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208
 	select ADK_KERNEL_BLK_DEV_INITRD
 	help
 	  create an read-only initramfs system.
@@ -135,6 +136,7 @@ config ADK_TARGET_ROOTFS_ISO
 config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
 	bool "Archive usable for initramfs creation"
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532 \
+		&& !ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208 \
 		&& !ADK_TARGET_SIM
 	select ADK_KERNEL_BLK_DEV_INITRD
 	help
@@ -144,7 +146,8 @@ config ADK_TARGET_ROOTFS_ARCHIVE
 	bool "Archive usable for different filesystems"
 	select ADK_HOST_NEED_GENEXT2FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
 	select ADK_KERNEL_EXT2_FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
-	depends on !ADK_TARGET_SIM
+	depends on !ADK_TARGET_SIM \
+		&& !ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 

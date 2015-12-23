@@ -10,7 +10,6 @@ config ADK_RUNTIME_HOSTNAME
 choice
 prompt "init"
 depends on !ADK_TOOLCHAIN_ONLY
-default ADK_RUNTIME_INIT_SIMPLEINIT if ADK_TARGET_WITHOUT_MMU
 default ADK_RUNTIME_INIT_SYSV
 
 config ADK_RUNTIME_INIT_SYSV
@@ -112,7 +111,7 @@ config ADK_RUNTIME_TMPFS_SIZE
 	default "32768" if ADK_TARGET_SYSTEM_RASPBERRY_PI2
 	default "32768" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default "8192" if ADK_TARGET_SYSTEM_MIKROTIK_RB532
-	default "2048"
+	default "1024"
 	depends on !ADK_RUNTIME_INIT_SIMPLEINIT
 	help
 	  Size of /tmp in memory in Kilobyte.
@@ -290,7 +289,7 @@ config ADK_RUNTIME_KBD_LAYOUT
 
 choice
 prompt "initial login shell for the root user"
-default ADK_ROOTSH_SASH if ADK_TARGET_WITHOUT_MMU
+default ADK_ROOTSH_HUSH if ADK_TARGET_WITHOUT_MMU
 default ADK_ROOTSH_MKSH
 
 config ADK_ROOTSH_MKSH
@@ -300,18 +299,18 @@ config ADK_ROOTSH_MKSH
 	  Use mksh (a Korn Shell variant) as standard login shell
 	  for the superuser.
 
+config ADK_ROOTSH_HUSH
+	bool "hush (busybox shell compatible with non-MMU systems)"
+	select BUSYBOX_HUSH if !ADK_TOOLCHAIN_ONLY
+	select BUSYBOX_FEATURE_SH_IS_HUSH if !ADK_TOOLCHAIN_ONLY
+	help
+	  hush shell from busybox.
+
 config ADK_ROOTSH_SASH
 	bool "sash (Shell compatible with non-MMU systems)"
 	select ADK_PACKAGE_SASH if !ADK_TOOLCHAIN_ONLY
 	help
 	  standalone shell.
-
-config ADK_ROOTSH_HUSH
-	bool "hush (busybox shell compatible with non-MMU systems)"
-	select BUSYBOX_HUSH
-	select BUSYBOX_FEATURE_SH_IS_HUSH
-	help
-	  hush shell from busybox.
 
 config ADK_ROOTSH_ASH
 	bool "ash (busybox shell)"
@@ -345,7 +344,7 @@ endchoice
 
 choice
 prompt "system /bin/sh (POSIX script shell)"
-default ADK_BINSH_SASH if ADK_TARGET_WITHOUT_MMU
+default ADK_BINSH_HUSH if ADK_TARGET_WITHOUT_MMU
 default ADK_BINSH_MKSH
 
 config ADK_BINSH_MKSH
@@ -355,17 +354,17 @@ config ADK_BINSH_MKSH
 	  Use mksh (a Korn Shell variant) as system shell, which is
 	  both small and powerful, so quite suited for this task.
 
+config ADK_BINSH_HUSH
+	bool "hush (busybox)"
+	select ADK_PACKAGE_HUSH if !ADK_TOOLCHAIN_ONLY
+	help
+	  hush shell.
+
 config ADK_BINSH_SASH
 	bool "sash (Standalone Shell)"
 	select ADK_PACKAGE_SASH if !ADK_TOOLCHAIN_ONLY
 	help
 	  sash shell.
-
-config ADK_BINSH_HUSH
-	bool "hush (busybox)"
-	select ADK_PACKAGE_HUSH
-	help
-	  hush shell.
 
 config ADK_BINSH_ASH
 	bool "ash (busybox)"

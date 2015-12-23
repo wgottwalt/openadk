@@ -8,7 +8,7 @@ menu "Linux Module Utilities"
 
 config BUSYBOX_MODINFO
 	bool "modinfo"
-	default y
+	default n
 	depends on !BUSYBOX_DISABLE_KMOD
 	select BUSYBOX_PLATFORM_LINUX
 	help
@@ -209,7 +209,7 @@ config BUSYBOX_FEATURE_INSMOD_LOAD_MAP
 
 config BUSYBOX_FEATURE_INSMOD_LOAD_MAP_FULL
 	bool "Symbols in load map"
-	default y
+	default n
 	depends on BUSYBOX_FEATURE_INSMOD_LOAD_MAP && !BUSYBOX_MODPROBE_SMALL
 	select BUSYBOX_PLATFORM_LINUX
 	help

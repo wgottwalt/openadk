@@ -6,10 +6,9 @@
 
 menu "Console Utilities"
 
-
 config BUSYBOX_CHVT
 	bool "chvt"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  This program is used to change to another terminal.
@@ -24,7 +23,7 @@ config BUSYBOX_FGCONSOLE
 
 config BUSYBOX_CLEAR
 	bool "clear"
-	default y
+	default n
 	help
 	  This program clears the terminal screen.
 
@@ -67,7 +66,7 @@ config BUSYBOX_LOADKMAP
 
 config BUSYBOX_OPENVT
 	bool "openvt"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  This program is used to start a command on an unused
@@ -75,7 +74,7 @@ config BUSYBOX_OPENVT
 
 config BUSYBOX_RESET
 	bool "reset"
-	default y
+	default n
 	help
 	  This program is used to reset the terminal screen, if it
 	  gets messed up.
@@ -99,7 +98,7 @@ config BUSYBOX_FEATURE_RESIZE_PRINT
 
 config BUSYBOX_SETCONSOLE
 	bool "setconsole"
-	default y
+	default n
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  This program redirects the system console to another device,
