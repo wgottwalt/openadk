@@ -3,7 +3,12 @@
 
 choice ADK_TARGET_MIPS_CPU_ARCH
 prompt "ISA configuration"
-depends on ADK_TARGET_ARCH_MIPS
+depends on ADK_TARGET_ARCH_MIPS && !ADK_TARGET_TOOLCHAIN
+default ADK_CPU_MIPS_MIPS32R2
+
+config ADK_CPU_MIPS_MIPS32R6
+        bool "MIPS32r6"
+        select ADK_CPU_MIPS32R6
 
 config ADK_CPU_MIPS_MIPS32R2
         bool "MIPS32r2"
@@ -12,5 +17,24 @@ config ADK_CPU_MIPS_MIPS32R2
 config ADK_CPU_MIPS_MIPS32
         bool "MIPS32"
         select ADK_CPU_MIPS32
+
+endchoice
+
+choice ADK_TARGET_MIPS64_CPU_ARCH
+prompt "ISA configuration"
+depends on ADK_TARGET_ARCH_MIPS64 && !ADK_TARGET_TOOLCHAIN
+default ADK_CPU_MIPS_MIPS64R2
+
+config ADK_CPU_MIPS_MIPS64R6
+        bool "MIPS64r6"
+        select ADK_CPU_MIPS32R6
+
+config ADK_CPU_MIPS_MIPS64R2
+        bool "MIPS64r2"
+        select ADK_CPU_MIPS64R2
+
+config ADK_CPU_MIPS_MIPS64
+        bool "MIPS64"
+        select ADK_CPU_MIPS64
 
 endchoice

@@ -102,15 +102,6 @@ config ADK_KERNEL_64BIT
 	bool
 	default y if ADK_LINUX_64
 
-config ADK_KERNEL_CPU_MIPS64
-	bool
-
-config ADK_KERNEL_CPU_MIPS64_R1
-	bool
-
-config ADK_KERNEL_CPU_MIPS64_R2
-	bool
-
 # ARM specific
 config ADK_KERNEL_AEABI
 	bool
