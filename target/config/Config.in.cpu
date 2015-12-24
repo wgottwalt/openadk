@@ -653,6 +653,11 @@ config ADK_CPU_SPARC_V8
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
+config ADK_CPU_SPARC_LEON
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
 config ADK_CPU_SPARC_V9
 	bool
 	select ADK_LINUX_64
@@ -793,6 +798,7 @@ config ADK_TARGET_GCC_CPU
 	default "powerpc" if ADK_CPU_PPC
 	default "ultrasparc" if ADK_CPU_SPARC_V9
 	default "v8" if ADK_CPU_SPARC_V8
+	default "leon" if ADK_CPU_SPARC_LEON
 	default "xscale" if ADK_CPU_XSCALE
 
 config ADK_TARGET_GCC_ARCH
