@@ -4,18 +4,18 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
-PKG_VERSION:=		2.5.5
+PKG_VERSION:=		2.6.3
 PKG_RELEASE:=		1
-PKG_HASH:=		09e7aeb739a468dec8357f4b0757624b6c7ef38065fdf50323d369deac983dc7
+PKG_HASH:=		df38aa10b4d30f3bae089dcc72f4c32fb2385cb541491791c12829960f53c612
 PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		openjdk7-host alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst
-PKG_BUILDDEP+=		libpng giflib libgtk2 glib fontconfig nss
+PKG_BUILDDEP+=		libpng giflib libgtk2 glib fontconfig nss gconf
 HOST_BUILDDEP:=		fastjar-host gcj-host ecj-host unzip-host ant-host
 HOST_BUILDDEP+=		libXtst-host libXt-host libXinerama-host libXrender-host
 HOST_BUILDDEP+=		cups-host qemu-host alsa-lib-host freetype-host	libxslt-host
-PKG_DEPENDS:=		zlib libffi libxtst libxi cups
+PKG_DEPENDS:=		zlib libffi libxtst libxi cups gconf
 PKG_DEPENDS+=		libfreetype libxrender libx11 libxext nss libjpeg-turbo
 PKG_DEPENDS+=		libpng giflib libgtk2 glib fontconfig
 PKG_NEEDS:=		threads c++
@@ -25,7 +25,7 @@ PKG_SITES:=		http://icedtea.classpath.org/download/source/
 DISTFILES:=		icedtea-$(PKG_VERSION).tar.xz
 WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
-GCJ_VER:=		4.9.3
+GCJ_VER:=		5.3.0
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
@@ -91,6 +91,9 @@ CONFIGURE_COMMON:=	--disable-docs \
 			--enable-system-gtk \
 			--enable-system-gio \
 			--enable-system-fontconfig \
+			--enable-system-gconf \
+			--disable-system-sctp \
+			--disable-system-pcsc \
 			--disable-system-lcms \
 			--disable-system-kerberos \
 			--disable-compile-against-syscalls \
@@ -118,10 +121,10 @@ ALL_TARGET:=		icedtea
 OPENJDK_NATIVE_ENV:=	JAVACFLAGS="-cp ${STAGING_HOST_DIR}/usr/share/java/libgcj-$(GCJ_VER).jar" \
 			LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64 \
 			BOOTCLASSPATH="$(STAGING_HOST_DIR)/usr/share/jamvm/classes.zip:$(STAGING_HOST_DIR)/usr/share/classpath/glibj.zip" \
-			FFI_LDFLAGS='$(HOST_LDFLAGS)' \
 			OTHER_CPPFLAGS='$(HOST_CPPFLAGS)' \
 			OTHER_LDFLAGS='$(HOST_LDFLAGS)' \
 			ALSA_CPPFLAGS='$(HOST_CPPFLAGS)' \
+			LIBFFI_CFLAGS='-I$(STAGING_HOST_DIR)/usr/include -L$(STAGING_HOST_DIR)/usr/lib' \
 			ALT_OPENWIN_HOME='$(STAGING_HOST_DIR)/usr' \
 			ALT_CUPS_HEADERS_PATH="$(STAGING_HOST_DIR)/usr/include" \
 			ALT_FREETYPE_HEADERS_PATH="$(STAGING_HOST_DIR)/usr/include" \
@@ -146,8 +149,12 @@ HOST_CONFIGURE_ARGS+=	--enable-bootstrap \
                 	--disable-system-gio \
                 	--disable-system-kerberos \
                 	--disable-system-fontconfig \
+			--disable-system-gconf \
+			--disable-system-pcsc \
+			--disable-system-sctp \
                 	--disable-compile-against-syscalls \
 			--without-rhino \
+			--enable-systemtap=no \
 			--disable-docs
 
 hostpost-install:
