@@ -1,0 +1,2 @@
+ipaddr=$(ip addr show $(ip route show|awk '/default/ { print $5 }')|awk '/inet / { print $2 }'|tail -1)
+echo "Your ip address is $ipaddr"
