@@ -110,9 +110,10 @@ ${_HOST_COOKIE}:
 
 ifeq ($(HOST_LINUX_ONLY),)
 hostpackage: ${ALL_HOSTDIRS}
-	touch ${_HOST_COOKIE}
+	@touch ${_HOST_COOKIE}
 endif
 
 hostclean:
-	@$(CMD_TRACE) "cleaning.. "
+	@printf " --->  cleaning host package build directories and files.. "
 	-rm -rf ${STAGING_PKG_DIR}/stamps/${PKG_NAME}*-host ${WRKDIR} 
+	@printf " done\n"

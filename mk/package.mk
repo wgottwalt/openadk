@@ -304,9 +304,10 @@ install:
 
 clean-targets:
 clean:
-	@$(CMD_TRACE) "cleaning.. "
+	@printf " --->  cleaning package build directories and files.. "
 	@$(MAKE) clean-targets $(MAKE_TRACE)
 	rm -rf ${WRKDIR} ${ALL_IPKGS} ${_IPKGS_COOKIE}
+	@printf " done\n"
 
 distclean: clean
 	rm -f ${FULLDISTFILES}
