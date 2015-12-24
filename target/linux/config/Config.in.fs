@@ -8,6 +8,14 @@ config ADK_KERNEL_MISC_FILESYSTEMS
 
 config ADK_KERNEL_FSNOTIFY
 	bool
+	default y
+
+config ADK_KERNEL_INOTIFY_USER
+	bool
+	default y
+
+config ADK_KERNEL_DNOTIFY
+	bool
 
 config ADK_KERNEL_EXPORTFS
 	tristate
@@ -25,9 +33,6 @@ config ADK_KERNEL_YAFFS_YAFFS2
 	bool
 
 config ADK_KERNEL_YAFFS_AUTO_YAFFS2
-	bool
-
-config ADK_KERNEL_DNOTIFY
 	bool
 
 config ADK_KERNEL_EXT3_FS_XATTR
@@ -251,18 +256,7 @@ config ADK_KERNEL_YAFFS_FS
 
 endmenu
 
-menu "Filesystem features"
 
-config ADK_KERNEL_INOTIFY_USER
-	bool "Inotify support for userspace"
-	default n
-	help
-	  Say Y here to enable inotify support for userspace, including the
-	  associated system calls.  Inotify allows monitoring of both files and
-	  directories via a single open fd.  Events are read from the file
-	  descriptor, which is also select()- and poll()-able.
-
-endmenu
 source target/linux/config/Config.in.part
 source target/linux/config/Config.in.fsnet
 source target/linux/config/Config.in.nls
