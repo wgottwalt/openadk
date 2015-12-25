@@ -1,0 +1,8 @@
+--- strace-4.11.orig/linux/arc/syscallent.h	2015-07-13 00:31:40.000000000 +0200
++++ strace-4.11/linux/arc/syscallent.h	2015-12-25 15:36:04.814035892 +0100
+@@ -1,4 +1,4 @@
+-#define ARCH_mmap mmap_pgoff
++#define sys_ARCH_mmap sys_mmap_pgoff
+ #include "32/syscallent.h"
+ [244] = { 3,	0,	SEN(printargs),	"arc_cacheflush"},
+ [245] = { 1,	0,	SEN(printargs),	"arc_settls"	},
