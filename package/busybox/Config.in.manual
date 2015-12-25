@@ -18,6 +18,8 @@ default ADK_PACKAGE_BUSYBOX_MINIMAL if ADK_TARGET_WITHOUT_MMU
 
 config ADK_PACKAGE_BUSYBOX_DEFAULT
 	bool "activate standard set of applets"
+	select BUSYBOX_NC
+	select BUSYBOX_RDATE
 	select BUSYBOX_FEATURE_UTMP
 	select BUSYBOX_GUNZIP
 	select BUSYBOX_GZIP
