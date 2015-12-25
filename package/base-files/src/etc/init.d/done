@@ -1,4 +1,4 @@
 #!/bin/sh
 #INIT 98
-[[ $1 = autostart ]] && sysctl -p >&-
+[[ $1 = autostart ]] && sysctl -p >&- 2>/dev/null
 exit 0
