@@ -6,6 +6,8 @@ include ../rules.mk
 include Makefile.inc
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 
+GDB_BUILD_DIR:=		$(WRKBUILD)-obj
+
 ifeq (${ADK_MAKE_PARALLEL},y)
 GDB_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
@@ -16,12 +18,12 @@ else
 CONFIGURE_ARGS:= 	--disable-sim
 endif
 
-$(WRKBUILD)/.headers:
 $(WRKBUILD)/.configured:
 	$(SED) 's/install_to_$(INSTALL_DEST) //' ${WRKBUILD}/libiberty/Makefile.in
-	(cd $(WRKBUILD); \
+	mkdir -p $(GDB_BUILD_DIR)
+	(cd $(GDB_BUILD_DIR); \
 		gdb_cv_func_sigsetjmp=yes \
-		./configure \
+		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_HOST_DIR) \
 		--build=$(GNU_HOST_NAME) \
 		--host=$(GNU_HOST_NAME) \
@@ -45,17 +47,17 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	$(MAKE) ${GDB_MAKEOPTS} -C $(WRKBUILD) CFLAGS="-fPIC ${CFLAGS_FOR_BUILD}"
+	$(MAKE) ${GDB_MAKEOPTS} -C $(GDB_BUILD_DIR) CFLAGS="-fPIC ${CFLAGS_FOR_BUILD}"
 	touch $@
 
 $(WRKBUILD)/.installed:
-	$(INSTALL_BIN) $(WRKBUILD)/gdb/gdb $(TARGET_CROSS)gdb
+	$(INSTALL_BIN) $(GDB_BUILD_DIR)/gdb/gdb $(TARGET_CROSS)gdb
 ifeq ($(ADK_TARGET_SIM),y)
 ifeq ($(ADK_TARGET_ARCH_BFIN),y)
-	$(INSTALL_BIN) $(WRKBUILD)/sim/bfin/run $(TARGET_CROSS)run
+	$(INSTALL_BIN) $(GDB_BUILD_DIR)/sim/bfin/run $(TARGET_CROSS)run
 endif
 ifeq ($(ADK_TARGET_ARCH_H8300),y)
-	$(INSTALL_BIN) $(WRKBUILD)/sim/h8300/run $(TARGET_CROSS)run
+	$(INSTALL_BIN) $(GDB_BUILD_DIR)/sim/h8300/run $(TARGET_CROSS)run
 endif
 endif
 	touch $@
