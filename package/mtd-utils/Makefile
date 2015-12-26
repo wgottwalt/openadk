@@ -4,8 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mtd-utils
-PKG_VERSION:=		1.5.0
-PKG_RELEASE:=		2
+PKG_VERSION:=		1.5.2
+PKG_RELEASE:=		1
 PKG_HASH:=		e76c379fdd77818686a221b9642b12540e6060285aa58d6f7d016774c24d5503
 PKG_DESCR:=		flash filesystem utilities
 PKG_SECTION:=		sys/fs
