@@ -445,6 +445,13 @@ defconfig: .menu $(CONFIG)/conf
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_TARGET_LIBC_VERSION)" ];then \
+		libcversion=$$(echo "$(ADK_TARGET_LIBC_VERSION)"|sed -e "s/\./_/g"); \
+		grep "^config" target/config/Config.in.libc \
+			|grep -i "$$libcversion$$" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
 		$(CONFIG)/conf --defconfig=.defconfig $(CONFIG_CONFIG_IN); \
 	fi
