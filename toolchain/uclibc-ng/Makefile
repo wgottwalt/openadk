@@ -96,6 +96,9 @@ endif
 ifeq ($(ADK_TARGET_UCLINUX),y)
 	$(SED) 's/.*\(ARCH_USE_MMU\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
+ifeq ($(ADK_TARGET_WITHOUT_MMU),y)
+	$(SED) 's/.*\(ARCH_USE_MMU\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
 ifeq ($(ADK_TARGET_LIB_UCLIBC_NG_GIT),y)
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 	$(SED) 's/.*\(UCLIBC_HAS_THREADS_NATIVE\).*/\1=y/' ${WRKBUILD}/.config

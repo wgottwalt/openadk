@@ -11,7 +11,11 @@
 # KERNEL_VERSION:  final kernel version how we want to identify a specific kernel
 
 ifeq ($(ADK_TARGET_KERNEL_VERSION_GIT),y)
+ifneq ($(ADK_TARGET_KERNEL_HASH),)
 KERNEL_FILE_VER:=	$(ADK_TARGET_KERNEL_HASH)
+else
+KERNEL_FILE_VER:=	git
+endif
 KERNEL_RELEASE:=	1
 KERNEL_VERSION:=	$(KERNEL_FILE_VER)-$(KERNEL_RELEASE)
 endif
