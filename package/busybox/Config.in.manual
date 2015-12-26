@@ -20,7 +20,6 @@ config ADK_PACKAGE_BUSYBOX_DEFAULT
 	bool "activate standard set of applets"
 	select BUSYBOX_NC
 	select BUSYBOX_RDATE
-	select BUSYBOX_FEATURE_UTMP
 	select BUSYBOX_GUNZIP
 	select BUSYBOX_GZIP
 	select BUSYBOX_TAR
@@ -34,7 +33,6 @@ config ADK_PACKAGE_BUSYBOX_DEFAULT
 	select BUSYBOX_TEST
 	select BUSYBOX_TOUCH
 	select BUSYBOX_TR
-	select BUSYBOX_WHO
 	select BUSYBOX_CAL
 	select BUSYBOX_CHGRP
 	select BUSYBOX_CHMOD
