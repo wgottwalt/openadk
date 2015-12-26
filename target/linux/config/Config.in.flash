@@ -23,6 +23,9 @@ config ADK_KERNEL_MTD_NAND_PLATFORM
 config ADK_KERNEL_MTD_CHAR
 	bool
 
+config ADK_KERNEL_MTD_CMDLINE_PARTS
+	bool
+
 config ADK_KERNEL_MTD_BLKDEVS
 	bool
 
@@ -103,6 +106,18 @@ config ADK_KERNEL_MTD_NAND_PLATFORM
 	help
 	  platform nand driver
 
+config ADK_KERNEL_MTD_PLATRAM
+	bool "MTD RAM driver"
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_MTD
+	select ADK_KERNEL_MTD_BLOCK
+	select ADK_KERNEL_MTD_CFI
+	select ADK_KERNEL_MTD_CFI_INTELEXT
+	select ADK_KERNEL_MTD_PHYSMAP
+	select ADK_KERNEL_MTD_PHYSMAP_OF
+	select ADK_KERNEL_MTD_CMDLINE_PARTS
+	default n
+
 config ADK_TARGET_MTD_SIZE
 	int
 	depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE_S3ADSP1800 \
@@ -112,4 +127,3 @@ config ADK_TARGET_MTD_SIZE
 	default "0"
 
 endmenu
-

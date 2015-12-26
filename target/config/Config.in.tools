@@ -208,6 +208,7 @@ config ADK_HOST_NEED_SQUASHFS
 
 config ADK_HOST_BUILD_SQUASHFS
 	bool
+	select ADK_HOST_BUILD_XZ
 	default y if ADK_HOST_NEED_SQUASHFS
 	default n
 

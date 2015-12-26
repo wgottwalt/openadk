@@ -34,7 +34,7 @@ endif
 ifeq ($(ADK_TARGET_FS),archive)
 targethelp:
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB)$(ADK_TARGET_SYSTEM_QEMU_ARM_TERRIER)$(ADK_TARGET_SYSTEM_QEMU_ARM_SPITZ),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9)$(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB)$(ADK_TARGET_SYSTEM_QEMU_ARM_TERRIER)$(ADK_TARGET_SYSTEM_QEMU_ARM_SPITZ),y)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh qemu-${ADK_TARGET_CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
@@ -113,6 +113,15 @@ targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
 endif
+ifeq ($(ADK_TARGET_FS),jffs2)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS image is: $(FW_DIR)/$(ROOTFSSQUASHFS)"
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo "Start qemu with following options:"
+	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} $(QEMU_ARGS) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -pflash $(FW_DIR)/$(ROOTFSSQUASHFS)'
+endif
+endif
 
 kernel-strip:
 	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
@@ -167,6 +176,9 @@ imageinstall: dtb-install createinitramfs targethelp
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
+endif
+ifeq ($(ADK_TARGET_FS),jffs2)
+imageinstall: kernel-install $(FW_DIR)/$(ROOTFSJFFS2) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),usb)
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp

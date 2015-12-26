@@ -17,6 +17,9 @@ else
 ROOTFS:=	root=/dev/sda1 rootwait
 endif
 endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
+ROOTFS:=	root=/dev/mtdblock0
+endif
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB532),y)
