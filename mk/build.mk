@@ -401,7 +401,7 @@ defconfig: .menu $(CONFIG)/conf
 			 >> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_FS)" ];then \
-		grep "^config" target/config/Config.in.target \
+		grep "^config" target/config/Config.in.rootfs \
 			|grep -i "$(ADK_TARGET_FS)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
@@ -466,7 +466,7 @@ allconfig:
 		echo $$symbol >> $(ADK_TOPDIR)/all.config; \
 	done
 	@if [ ! -z "$(ADK_TARGET_FS)" ];then \
-		grep "^config" target/config/Config.in.target \
+		grep "^config" target/config/Config.in.rootfs \
 			|grep -i "$(ADK_TARGET_FS)" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/all.config; \
