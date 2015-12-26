@@ -179,6 +179,10 @@ config ADK_HOST_BUILD_COREUTILS
 	bool
 	default n
 
+config ADK_HOST_BUILD_UTIL_LINUX
+	bool
+	default n
+
 # optional, must be used from OpenADK
 config ADK_HOST_NEED_MTD_UTILS
 	bool
@@ -186,6 +190,7 @@ config ADK_HOST_NEED_MTD_UTILS
 
 config ADK_HOST_BUILD_MTD_UTILS
 	bool
+	select ADK_HOST_BUILD_UTIL_LINUX
 	default y if ADK_HOST_NEED_MTD_UTILS
 	default n
 

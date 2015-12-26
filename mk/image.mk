@@ -174,10 +174,6 @@ createinitramfs: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
 		echo "CONFIG_ACPI_INITRD_TABLE_OVERRIDE=n"; \
 		echo 'CONFIG_INITRAMFS_SOURCE="${STAGING_TARGET_DIR}/${INITRAMFS}_list"'; \
 		echo '# CONFIG_INITRAMFS_COMPRESSION_NONE is not set'; \
-		echo '# CONFIG_CRC32_SELFTEST is not set'; \
-		echo '# CONFIG_CRC32_SLICEBY8 is not set'; \
-		echo '# CONFIG_CRC32_SLICEBY4 is not set'; \
-		echo '# CONFIG_CRC32_SARWATE is not set'; \
 		echo 'CONFIG_CRC32_BIT=y'; \
 		echo 'CONFIG_INITRAMFS_ROOT_UID=0'; \
 		echo 'CONFIG_INITRAMFS_ROOT_GID=0'; \
@@ -190,13 +186,6 @@ ifeq ($(ADK_KERNEL_COMP_XZ),y)
 		echo "CONFIG_RD_LZO=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_XZ=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_XZ=y" >> ${LINUX_DIR}/.config
-		echo "CONFIG_XZ_DEC_X86=n" >> ${LINUX_DIR}/.config
-		echo "CONFIG_XZ_DEC_POWERPC=n" >> ${LINUX_DIR}/.config
-		echo "CONFIG_XZ_DEC_IA64=n" >> ${LINUX_DIR}/.config
-		echo "CONFIG_XZ_DEC_ARM=n" >> ${LINUX_DIR}/.config
-		echo "CONFIG_XZ_DEC_ARMTHUMB=n" >> ${LINUX_DIR}/.config
-		echo "CONFIG_XZ_DEC_SPARC=n" >> ${LINUX_DIR}/.config
-		echo "CONFIG_XZ_DEC_TEST=n" >> ${LINUX_DIR}/.config
 endif
 ifeq ($(ADK_KERNEL_COMP_LZ4),y)
 		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config

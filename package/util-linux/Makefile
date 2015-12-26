@@ -45,8 +45,10 @@ PKGSC_MOUNT:=		sys/fs
 PKGSD_MCOOKIE:=		generate magic cookies for xauth
 PKGSC_MCOOKIE:=		x11/utils
 
+include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,UTIL_LINUX,util-linux,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,FDISK,fdisk,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_FDISK),$(PKGSC_FDISK)))
 $(eval $(call PKG_template,CFDISK,cfdisk,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_CFDISK),$(PKGSC_CFDISK)))
 $(eval $(call PKG_template,SFDISK,sfdisk,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_SFDISK),$(PKGSC_SFDISK)))
@@ -83,6 +85,11 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--enable-libmount \
 			--enable-mount
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
+HOST_CONFIGURE_ARGS+=	--enable-libuuid \
+			--disable-use-tty-group \
+			--disable-chfn-chsh \
+			--disable-su \
+			--disable-runuser
 
 fdisk-install:
 	$(INSTALL_DIR) $(IDIR_FDISK)/usr/sbin
@@ -134,4 +141,5 @@ libmount-install:
 	$(INSTALL_DIR) $(IDIR_LIBMOUNT)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libmount.so* $(IDIR_LIBMOUNT)/usr/lib
 
+include $(ADK_TOPDIR)/mk/host-bottom.mk
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
