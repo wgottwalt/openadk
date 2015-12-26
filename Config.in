@@ -28,6 +28,7 @@ source "target/config/Config.in.subsystem"
 source "target/config/Config.in.tc"
 source "target/config/Config.in.xtensa"
 source "target/config/Config.in.qemuopts"
+source "target/config/Config.in.rootfs"
 source "target/config/Config.in.target"
 
 endmenu
