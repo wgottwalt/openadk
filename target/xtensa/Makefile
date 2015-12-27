@@ -5,7 +5,11 @@ include $(ADK_TOPDIR)/rules.mk
 include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
+ifeq ($(ADK_TARGET_KERNEL_IMAGE_ELF),y)
+KERNEL:=$(LINUX_DIR)/arch/xtensa/boot/Image.elf
+else
 KERNEL:=$(LINUX_DIR)/arch/xtensa/boot/uImage
+endif
 
 QEMU_ARGS:=-M ml605 -monitor null
 QEMU_ARGS+=${ADK_QEMU_ARGS}
