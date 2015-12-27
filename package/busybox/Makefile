@@ -56,9 +56,6 @@ do-configure:
 			;; \
 		esac \
 	done
-ifeq ($(ADK_TARGET_WITHOUT_MMU),y)
-	echo 'CONFIG_NOMMU=y' >> ${WRKBUILD}/.config
-endif
 	$(SED) 's;@IDIR@;${WRKINST};' ${WRKBUILD}/.config
 
 do-build:

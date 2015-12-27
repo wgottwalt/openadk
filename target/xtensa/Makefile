@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
-ifeq ($(ADK_TARGET_KERNEL_IMAGE_ELF),y)
+ifeq ($(ADK_TARGET_XTENSA_DE212),y)
 KERNEL:=$(LINUX_DIR)/arch/xtensa/boot/Image.elf
 else
 KERNEL:=$(LINUX_DIR)/arch/xtensa/boot/uImage

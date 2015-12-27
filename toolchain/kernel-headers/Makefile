@@ -21,7 +21,7 @@ ifeq ($(ADK_KERNEL_ROOT_NFS),y)
 endif
 endif
 ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
-	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_dc232b.tar \
+	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_$(ADK_TARGET_XTENSA).tar \
 		--strip-components=1 -C $(WRKSRC) linux
 endif
 ifneq ($(ADK_DISABLE_KERNEL_PATCHES),y)

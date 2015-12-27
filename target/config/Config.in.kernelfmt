@@ -10,9 +10,6 @@ config ADK_TARGET_KERNEL_ZIMAGE
 config ADK_TARGET_KERNEL_LINUXBIN
 	bool
 
-config ADK_TARGET_KERNEL_IMAGE_ELF
-	bool
-
 config ADK_TARGET_KERNEL_IMAGE
 	bool
 
@@ -30,7 +27,6 @@ config ADK_TARGET_KERNEL
 	default "uImage" if ADK_TARGET_KERNEL_UIMAGE
 	default "zImage" if ADK_TARGET_KERNEL_ZIMAGE
 	default "Image" if ADK_TARGET_KERNEL_IMAGE
-	default "Image.elf" if ADK_TARGET_KERNEL_IMAGE_ELF
 	default "linux.bin" if ADK_TARGET_KERNEL_LINUXBIN
 	default "vmlinuz" if ADK_TARGET_KERNEL_VMLINUZ
 	default "bzImage" if ADK_TARGET_KERNEL_BZIMAGE
