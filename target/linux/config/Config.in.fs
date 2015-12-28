@@ -6,6 +6,9 @@ menu "Filesystems support"
 config ADK_KERNEL_MISC_FILESYSTEMS
 	bool
 
+config ADK_KERNEL_FILE_LOCKING
+	bool
+
 config ADK_KERNEL_FSNOTIFY
 	bool
 	default y
