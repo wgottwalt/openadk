@@ -1,8 +1,0 @@
---- qemu-2.2.0.orig/pixman/Makefile.am	2014-12-09 15:46:29.000000000 +0100
-+++ qemu-2.2.0/pixman/Makefile.am	2015-01-01 16:42:09.000000000 +0100
-@@ -1,4 +1,4 @@
--SUBDIRS = pixman demos test
-+SUBDIRS = pixman
- 
- pkgconfigdir=$(libdir)/pkgconfig
- pkgconfig_DATA=pixman-1.pc

@@ -11,7 +11,7 @@ PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		zlib glib alsa-lib
 PKG_BUILDDEP:=		gettext-tiny alsa-lib zlib glib
-HOST_BUILDDEP:=		glib-host
+HOST_BUILDDEP:=		glib-host pkgconf-host
 PKG_URL:=		http://wwww.qemu.org/
 PKG_SITES:=		http://wiki.qemu.org/download/
 
@@ -24,8 +24,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,QEMU,qemu,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,QEMU,qemu,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-HOST_CFLAGS+=		-DNATIVE
 
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CFLAGS+=		-DF_EXLCK=4 -DF_SHLCK=8 -D__SIGRTMIN=32 -D__SIGRTMAX=\(NSIG-1\)
@@ -60,29 +58,14 @@ CONFIGURE_ARGS+=	--host-cc=$(HOST_CC) \
 			--disable-strip \
 			--bindir=/usr/bin
 
-HOST_STYLE:=		manual
 HOST_CONFIGURE_ARGS+=	--host-cc=$(HOST_CC) \
-			--prefix=${STAGING_HOST_DIR}/usr \
 			--disable-stack-protector \
 			--disable-pie \
 			--disable-docs \
 			--disable-werror \
 			--disable-system \
+			--disable-gtk \
 			--disable-sdl
-
-host-configure:
-	cd ${WRKBUILD}; rm -f config.{cache,status}; \
-		env ${HOST_CONFIGURE_ENV} \
-		${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
-		${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
-
-host-build:
-	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
-       
-qemu-hostinstall:
-	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-		${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
 
 qemu-install:
 	$(INSTALL_DIR) $(IDIR_QEMU)/usr/share/qemu
