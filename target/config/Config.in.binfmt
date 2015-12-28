@@ -3,7 +3,6 @@
 
 choice
 prompt "Binary Format"
-depends on !ADK_TARGET_LIB_NEWLIB
 
 config ADK_TARGET_BINFMT_ELF
 	bool "ELF"
