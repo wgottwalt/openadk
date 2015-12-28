@@ -8,6 +8,7 @@ config ADK_KERNEL_MISC_FILESYSTEMS
 
 config ADK_KERNEL_FILE_LOCKING
 	bool
+	default y
 
 config ADK_KERNEL_FSNOTIFY
 	bool
