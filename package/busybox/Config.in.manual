@@ -18,6 +18,8 @@ default ADK_PACKAGE_BUSYBOX_MINIMAL if ADK_TARGET_WITHOUT_MMU
 
 config ADK_PACKAGE_BUSYBOX_DEFAULT
 	bool "activate standard set of applets"
+	select BUSYBOX_TRUE
+	select BUSYBOX_FDISK
 	select BUSYBOX_NC
 	select BUSYBOX_RDATE
 	select BUSYBOX_GUNZIP
@@ -63,6 +65,7 @@ config ADK_PACKAGE_BUSYBOX_DEFAULT
 	select BUSYBOX_SORT
 	select BUSYBOX_FEATURE_SORT_BIG
 	select BUSYBOX_STAT
+	select BUSYBOX_READLINK
 	select BUSYBOX_TAIL
 	select BUSYBOX_FEATURE_FANCY_TAIL
 	select BUSYBOX_TEE
@@ -85,6 +88,7 @@ config ADK_PACKAGE_BUSYBOX_DEFAULT
 
 config ADK_PACKAGE_BUSYBOX_MINIMAL
 	bool "activate minimal set of applets"
+	select BUSYBOX_TRUE
 	select BUSYBOX_AWK
 	select BUSYBOX_SED
 	select BUSYBOX_RUN_PARTS
@@ -130,10 +134,13 @@ config ADK_PACKAGE_BUSYBOX_MINIMAL
 	select BUSYBOX_INIT
 	select BUSYBOX_WHICH
 	select BUSYBOX_WHOAMI
+	select BUSYBOX_READLINK
 
 config ADK_PACKAGE_BUSYBOX_ALL
 	bool "activate all applets"
 	select BUSYBOX_DESKTOP
+	select BUSYBOX_TRUE
+	select BUSYBOX_FDISK
 	select BUSYBOX_FEATURE_UTMP
 	select BUSYBOX_GUNZIP
 	select BUSYBOX_GZIP
@@ -197,6 +204,7 @@ config ADK_PACKAGE_BUSYBOX_ALL
 	select BUSYBOX_STRINGS
 	select BUSYBOX_TIME
 	select BUSYBOX_RUN_PARTS
+	select BUSYBOX_READLINK
 
 endchoice
 
