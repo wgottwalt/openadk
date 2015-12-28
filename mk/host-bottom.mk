@@ -22,8 +22,6 @@ ifeq (${HOST_STYLE},)
 	cd ${WRKBUILD}; \
 	    env ${HOST_CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
-	    --program-prefix= \
-	    --program-suffix= \
 	    --prefix=${STAGING_HOST_DIR}/usr \
 	    --bindir=${STAGING_HOST_DIR}/usr/bin \
 	    --datadir=${STAGING_HOST_DIR}/usr/share \
@@ -31,9 +29,6 @@ ifeq (${HOST_STYLE},)
 	    --libdir=${STAGING_HOST_DIR}/usr/lib \
 	    --libexecdir=${STAGING_HOST_DIR}/usr/libexec \
 	    --sysconfdir=${STAGING_HOST_DIR}/etc \
-	    --disable-dependency-tracking \
-	    --disable-libtool-lock \
-	    --disable-nls \
 	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 endif
 ifeq (${HOST_STYLE},auto)

@@ -54,7 +54,7 @@ endif
 ifeq ($(ADK_TARGET_FS),jffs2)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
-	@echo "The RootFS image is: $(FW_DIR)/$(ROOTFSSQUASHFS)"
+	@echo "The RootFS image is: $(FW_DIR)/$(ROOTFSJFFS2)"
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following options:"
 	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} $(QEMU_ARGS) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -pflash $(FW_DIR)/$(ROOTFSJFFS2)'

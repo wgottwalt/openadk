@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		d06ebb8e1d9a22d19e38d63fdb83954253f39bedc5d46232a05645685722ca37
 PKG_DESCR:=		foreign function interface library
 PKG_SECTION:=		libs/misc
+HOST_BUILDDEP:=		libtool-host
 PKG_URL:=		http://sourceware.org/libffi/
 PKG_SITES:=		ftp://sourceware.org/pub/libffi/
 PKG_OPTS:=		dev

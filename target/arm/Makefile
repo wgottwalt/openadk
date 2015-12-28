@@ -25,6 +25,9 @@ QEMU_ARGS+=-M versatilepb -net user -net nic,model=smc91c111
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
 QEMU_ARGS+=-M vexpress-a9 -cpu cortex-a9 -m 256 -net user -net nic,model=lan9118 -dtb $(FW_DIR)/vexpress-v2p-ca9.dtb
+ifeq ($(ADK_TARGET_ROOTFS_ARCHIVE),y)
+QEMU_ARGS+=-drive file=qemu-arm.img,if=sd,format=raw
+endif
 endif
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 QEMU_ARGS+=-drive file=qemu-${ADK_TARGET_CPU_ARCH}.img,if=virtio,index=0 -net nic,model=virtio -net user
@@ -113,13 +116,22 @@ targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
 endif
-ifeq ($(ADK_TARGET_FS),jffs2)
+ifeq ($(ADK_TARGET_FS),squashfs)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS image is: $(FW_DIR)/$(ROOTFSSQUASHFS)"
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} $(QEMU_ARGS) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) -pflash $(FW_DIR)/$(ROOTFSSQUASHFS)'
+	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} $(QEMU_ARGS) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(ROOTFSSQUASHFS)'
+endif
+endif
+ifeq ($(ADK_TARGET_FS),jffs2)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS image is: $(FW_DIR)/$(ROOTFSJFFS2)"
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo "Start qemu with following options:"
+	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} $(QEMU_ARGS) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(ROOTFSJFFS2)'
 endif
 endif
 
@@ -133,6 +145,10 @@ endif
 
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+ifeq ($(ADK_TARGET_FS),squashfs)
+	env PATH=$(HOST_PATH) qemu-img create -f raw $(FW_DIR)/$(ROOTFSSQUASHFS) $(ADK_TARGET_MTD_SIZE)
+	dd conv=notrunc if=$(BUILD_DIR)/root.squashfs of=$(FW_DIR)/$(ROOTFSSQUASHFS)
+endif
 
 dtb-install:
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
@@ -177,8 +193,11 @@ endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
+ifeq ($(ADK_TARGET_FS),squashfs)
+imageinstall: $(BUILD_DIR)/root.squashfs kernel-install dtb-install targethelp
+endif
 ifeq ($(ADK_TARGET_FS),jffs2)
-imageinstall: kernel-install $(FW_DIR)/$(ROOTFSJFFS2) targethelp
+imageinstall: kernel-install dtb-install $(FW_DIR)/$(ROOTFSJFFS2) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),usb)
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp

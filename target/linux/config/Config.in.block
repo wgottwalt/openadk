@@ -323,7 +323,19 @@ config ADK_KERNEL_SCSI_SUNESP
 endmenu
 
 menu "SD/MMC driver support"
-depends on ADK_TARGET_WITH_SD
+depends on ADK_TARGET_WITH_SD || ADK_TARGET_QEMU
+
+config ADK_KERNEL_MMC_ARMMMCI
+	bool "SD card support for Qemu ARM Vexpress A9"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_LBDAF
+	select ADK_KERNEL_SCSI
+	select ADK_KERNEL_MMC
+	select ADK_KERNEL_MMC_BLOCK
+	select ADK_KERNEL_BLK_DEV
+	select ADK_KERNEL_BLK_DEV_SD
+	depends on ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9
+	default n
 
 config ADK_KERNEL_MMC_AT91
 	tristate

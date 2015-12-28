@@ -18,7 +18,7 @@ ROOTFS:=	root=/dev/sda1 rootwait
 endif
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
-ROOTFS:=	root=/dev/mtdblock0
+ROOTFS:=	root=/dev/mmcblk0p1
 endif
 endif
 
