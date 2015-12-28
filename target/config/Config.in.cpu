@@ -669,6 +669,12 @@ config ADK_CPU_TILE
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
+config ADK_CPU_V850
+	bool
+	select ADK_TARGET_WITHOUT_MMU
+	select ADK_TARGET_WITHOUT_THREADS
+	select ADK_TARGET_WITHOUT_CXX
+
 config ADK_CPU_X86
 	bool
 	select ADK_TARGET_WITH_NPTL
@@ -995,5 +1001,6 @@ config ADK_TARGET_CPU_ARCH
 	default "sparc" if ADK_TARGET_ARCH_SPARC
 	default "sparc64" if ADK_TARGET_ARCH_SPARC64
 	default "tilegx" if ADK_TARGET_ARCH_TILE
+	default "v850" if ADK_TARGET_ARCH_V850
 	default "x86_64" if ADK_TARGET_ARCH_X86_64
 	default "xtensa" if ADK_TARGET_ARCH_XTENSA

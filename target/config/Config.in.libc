@@ -13,7 +13,8 @@ config ADK_TARGET_LIB_UCLIBC_NG
 		   !ADK_TARGET_ARCH_S390 && \
 		   !ADK_TARGET_ARCH_SPARC64 && \
 		   !ADK_TARGET_ARCH_PPC64 && \
-		   !ADK_TARGET_ARCH_TILE
+		   !ADK_TARGET_ARCH_TILE && \
+		   !ADK_TARGET_ARCH_V850
 	help
 	  http://uclibc-ng.org
 
@@ -62,6 +63,7 @@ config ADK_TARGET_LIB_NEWLIB
 		ADK_TARGET_ARCH_OR1K || \
 		ADK_TARGET_ARCH_PPC || \
 		ADK_TARGET_ARCH_SPARC || \
+		ADK_TARGET_ARCH_V850 || \
 		ADK_TARGET_ARCH_X86
 	help
 	  https://sourceware.org/newlib/

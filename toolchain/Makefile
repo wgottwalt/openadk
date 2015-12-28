@@ -56,7 +56,11 @@ download: $(DOWNLOAD)
 final: $(FINAL)
 
 gcc-configure: binutils-install gmp-install mpfr-install mpc-install libelf-install
+ifeq ($(ADK_TARGET_LIB_NEWLIB),y)
+$(CLIB)-install: gcc-configure
+else
 $(CLIB)-install: gcc-configure kernel-headers-configure
+endif
 gcc-install: $(ELF2FLT) $(CLIB)-install
 gcc-final: gcc-install $(GDB)
 
