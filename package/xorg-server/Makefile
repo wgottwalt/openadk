@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
-PKG_VERSION:=		1.16.3
+PKG_VERSION:=		1.18.0
 PKG_RELEASE:=		1
-PKG_HASH:=		293d6a73a560f9f7f5cc8a05d84445a3aabfdf43683925d0f93c8f8502536c84
+PKG_HASH:=		a1bfa91ecbee765e3935dbb6a9204668ab84eb31a6978815c97ab6064585d71b
 PKG_DESCR:=		xorg server
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		libxfont pixman libpciaccess libxkbfile
@@ -21,7 +21,7 @@ PKG_BUILDDEP+=		libpciaccess xf86dgaproto recordproto
 PKG_BUILDDEP+=		xineramaproto presentproto
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://www.x.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/xserver/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
@@ -117,8 +117,6 @@ ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
 	${CP} ${WRKINST}/usr/lib/xorg/modules/extensions/*.so \
 		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/extensions
 endif
-	${CP} ${WRKINST}/usr/lib/xorg/modules/multimedia/*.so \
-		$(IDIR_XORG_SERVER)/usr/lib/xorg/modules/multimedia
 ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
 	${CP} ./files/xorg.conf.lemote-yeelong \
 		$(IDIR_XORG_SERVER)/etc/X11/xorg.conf

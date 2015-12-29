@@ -12,7 +12,7 @@ PKG_SECTION:=		x11/apps
 PKG_BUILDDEP:=		pam
 PKG_DEPENDS:=		xconsole pam xsm
 PKG_URL:=		http://xorg.freedesktop.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXtst
-PKG_VERSION:=		1.2.1
+PKG_VERSION:=		1.2.2
 PKG_RELEASE:=		2
-PKG_HASH:=		99d7c7335439c00b8d1664d77f1ea2d857598a5ed52d32826d879cb3863cbb7a
+PKG_HASH:=		221838960c7b9058cd6795c1c3ee8e25bae1c68106be314bc3036a4f26be0e6c
 PKG_DESCR:=		client interface to the record extension to the x protocol
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP+=		recordproto libXi
@@ -14,7 +14,7 @@ HOST_BUILDDEP:=		recordproto-host xproto-host xextproto-host
 HOST_BUILDDEP+=		inputproto-host kbproto-host xtrans-host
 HOST_BUILDDEP+=		xcb-proto-host libXau-host libpthread-stubs-host
 HOST_BUILDDEP+=		libX11-host libXext-host libXi-host
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxtst
 PKG_OPTS:=		dev
 

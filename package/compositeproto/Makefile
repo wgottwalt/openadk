@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		22195b7e50036440b1c6b3b2d63eb03dfa6e71c8a1263ed1f07b0f31ae7dad50
 PKG_DESCR:=		composite headers
 PKG_SECTION:=		dev/header
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

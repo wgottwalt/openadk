@@ -4,16 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXrender
-PKG_VERSION:=		0.9.7
-PKG_RELEASE:=		2
-PKG_HASH:=		89f36e896018f5b8c00768af59e052019ae79fab69a647eb1fe61b565d7dd18e
+PKG_VERSION:=		0.9.9
+PKG_RELEASE:=		1
+PKG_HASH:=		beeac64ff8d225f775019eb7c688782dee9f4cc7b412a65538f8dde7be4e90fe
 PKG_DESCR:=		x11 rendering library
 PKG_SECTION:=		x11/libs
 HOST_BUILDDEP:=		renderproto-host xproto-host xextproto-host libXau-host
 HOST_BUILDDEP+=		xcb-proto-host libpthread-stubs-host libxcb-host kbproto-host
 HOST_BUILDDEP+=		inputproto-host xtrans-host libX11-host
 PKG_BUILDDEP:=		renderproto libX11
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxrender
 PKG_OPTS:=		dev
 

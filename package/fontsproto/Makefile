@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		72c44e63044b2b66f6fa112921621ecc20c71193982de4f198d9a29cda385c5e
 PKG_DESCR:=		fonts extension headers
 PKG_SECTION:=		dev/header
-PKG_SITES:=		$(MASTER_SITE_XORG)
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz

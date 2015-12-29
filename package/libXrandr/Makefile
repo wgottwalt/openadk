@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXrandr
-PKG_VERSION:=		1.3.2
-PKG_RELEASE:=		2
-PKG_HASH:=		c117a84ceda5a0744806efd4948594d4ec28a86c245768d721dbdabff1f7e073
+PKG_VERSION:=		1.5.0
+PKG_RELEASE:=		1
+PKG_HASH:=		1b594a149e6b124aab7149446f2fd886461e2935eca8dca43fe83a70cf8ec451
 PKG_DESCR:=		xrandr library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		randrproto
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxrandr
 PKG_OPTS:=		dev
 

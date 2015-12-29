@@ -45,10 +45,6 @@ HOST_CONFIGURE_ARGS+=	--enable-ft=yes \
 			--disable-test-surfaces \
 			--disable-full-testing
 
-ifeq (,$(filter arm,$(ADK_TARGET_ARCH)))
-TARGET_CFLAGS:=         $(filter-out -Os,$(TARGET_CFLAGS))
-endif
-
 ifneq ($(ADK_PACKAGE_CAIRO_WITH_XRENDER),)
 CONFIGURE_ARGS+=	--enable-xlib-xrender=yes
 else

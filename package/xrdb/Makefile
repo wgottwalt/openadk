@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xrdb
-PKG_VERSION:=		1.0.7
+PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
-PKG_HASH:=		1e55d713ed09dbc021dcf55b45c413d2b61c990ca5f164c01b0e781ef1a6c798
+PKG_HASH:=		44b0b6b7b7eb80b83486dfea67c880f6b0059052386c7ddec4d58fd2ad9ae8e9
 PKG_DESCR:=		resource database management tools
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libx11 libxmu
 PKG_BUILDDEP:=		libX11 libXmu
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

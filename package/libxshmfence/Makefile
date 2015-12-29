@@ -4,12 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libxshmfence
-PKG_VERSION:=		1.1
+PKG_VERSION:=		1.2
 PKG_RELEASE:=		1
-PKG_HASH:=		36a6c67c71c6f262be0f2f29349d33ad157ba1fea64a55acd35b90c3816a4cdc
+PKG_HASH:=		58467a0e36fc4ec749dc55f81a4ab3b822c82b6dfb7d36bdb6b28c9fd2a5ccaf
 PKG_DESCR:=		interface to shared-memory fences
 PKG_SECTION:=		x11/libs
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libfontenc
-PKG_VERSION:=		1.1.1
+PKG_VERSION:=		1.1.3
 PKG_RELEASE:=		1
-PKG_HASH:=		5ef1a4fefb154fe783f667f9d3f8500c719bfe385d29bb89802b458e00396e65
+PKG_HASH:=		6fba26760ca8d5045f2b52ddf641c12cedc19ee30939c6478162b7db8b6220fb
 PKG_DESCR:=		helps to deal with different encodings of fonts
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		xproto zlib
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

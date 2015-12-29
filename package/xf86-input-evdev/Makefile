@@ -11,7 +11,7 @@ PKG_DESCR:=		x11 driver for evdev
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libudev
 PKG_BUILDDEP:=		xorg-server eudev
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/driver/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_LIBC_DEPENDS:=	glibc

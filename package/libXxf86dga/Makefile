@@ -10,7 +10,7 @@ PKG_HASH:=		e6361620a15ceba666901ca8423e8be0c6ed0271a7088742009160349173766b
 PKG_DESCR:=		client library for the xfree86-dga extension
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xf86dgaproto libXext libXaw
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxxf86dga
 PKG_OPTS:=		dev
 

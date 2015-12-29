@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		screensaver headers
 PKG_SECTION:=		dev/header
 PKG_HASH:=		d8dee19c52977f65af08fad6aa237bacee11bc5a33e1b9b064e8ac1fd99d6e79
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

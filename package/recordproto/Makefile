@@ -10,7 +10,7 @@ PKG_DESCR:=		record extension headers
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		recordproto-host
 PKG_HASH:=		485f792570dd7afe49144227f325bf2827bc7d87aae6a8ab6c1de2b06b1c68c5
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

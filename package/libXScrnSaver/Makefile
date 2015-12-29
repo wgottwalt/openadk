@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXScrnSaver
-PKG_VERSION:=		1.2.1
-PKG_RELEASE:=		2
-PKG_HASH:=		326fb02e20ceaf9a8959b02c190a872c7e8c940e191e364fd516a685538a5f1e
+PKG_VERSION:=		1.2.2
+PKG_RELEASE:=		1
+PKG_HASH:=		e12ba814d44f7b58534c0d8521e2d4574f7bf2787da405de4341c3b9f4cc8d96
 PKG_DESCR:=		screensaver library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		scrnsaverproto libXext
 PKG_URL:=		http://xorg.freedesktop.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxscrnsaver
 PKG_OPTS:=		dev
 

@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libX11
-PKG_VERSION:=		1.6.2
+PKG_VERSION:=		1.6.3
 PKG_RELEASE:=		1
-PKG_HASH:=		b93739bcd517723121f508bcaf0c213c1bae9c5eacffdca571ff0d86c30ead3e
+PKG_HASH:=		0b03b9d22f4c9e59b4ba498f294e297f013cae27050dfa0f3496640200db5376
 PKG_DESCR:=		x11 client-side library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libX11-host xproto xextproto xtrans libXdmcp libXau xcb-proto
@@ -14,7 +14,7 @@ PKG_BUILDDEP+=		xcmiscproto bigreqsproto kbproto inputproto libxcb
 HOST_BUILDDEP:=		xproto-host xextproto-host kbproto-host libpthread-stubs-host
 HOST_BUILDDEP+=		inputproto-host libXau-host xcb-proto-host libxcb-host xtrans-host
 PKG_DEPENDS:=		libxdmcp libxcb libxau
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libx11
 PKG_OPTS:=		dev
 

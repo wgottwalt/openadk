@@ -10,7 +10,7 @@ PKG_DESCR:=		x rendering extension headers
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		renderproto-host
 PKG_HASH:=		a0a4be3cad9381ae28279ba5582e679491fc2bec9aab8a65993108bf8dbce5fe
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

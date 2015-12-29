@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		xfree86-vidmodeextension extension headers
 PKG_SECTION:=		dev/header
 PKG_HASH:=		c3512b11cefa7558576551f8582c6e7071c8a24d78176059d94b84b48b262979
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

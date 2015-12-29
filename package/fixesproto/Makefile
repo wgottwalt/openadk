@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		xfixes extension headers
 PKG_SECTION:=		dev/header
 PKG_HASH:=		67865a0e3cdc7dec1fd676f0927f7011ad4036c18eb320a2b41dbd56282f33b8
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=              dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

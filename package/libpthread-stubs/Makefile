@@ -11,7 +11,7 @@ PKG_DESCR:=		pthread stubs
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		libpthread-stubs-host
 PKG_URL:=		http://xcb.freedesktop.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://xcb.freedesktop.org/dist/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xdpyinfo
-PKG_VERSION:=		1.3.0
+PKG_VERSION:=		1.3.2
 PKG_RELEASE:=		1
-PKG_HASH:=		2725676eb968a3cf3b2f2da07bd208606295a48753bed4cc14f21f95848f7b33
+PKG_HASH:=		ef39935e8e9b328e54a85d6218d410d6939482da6058db1ee1b39749d98cbcf2
 PKG_DESCR:=		display info utility
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libxtst
 PKG_BUILDDEP:=		libXtst
 PKG_URL:=		http://www.x.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

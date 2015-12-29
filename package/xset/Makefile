@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xset
-PKG_VERSION:=		1.2.2
+PKG_VERSION:=		1.2.3
 PKG_RELEASE:=		1
-PKG_HASH:=		ccb9ff191fdd551ab0da7b2edae6949342284fcc0c74fe9efcbff619d5858f94
+PKG_HASH:=		5ecb2bb2cbf3c9349b735080b155a08c97b314dacedfc558c7f5a611ee1297f7
 PKG_DESCR:=		set utility
 PKG_SECTION:=		x11/utils
 PKG_BUILDDEP:=		libXmu
 PKG_URL:=		http://xorg.freedesktop.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

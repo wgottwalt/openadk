@@ -10,7 +10,7 @@ PKG_HASH:=		bccc5fb7af1b614eabe4a22766758c87bfc36d66191d08c19d2fa97674b7b5b7
 PKG_DESCR:=		font utility
 PKG_SECTION:=		x11/fonts
 PKG_DEPENDS:=		mkfontscale
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 PKG_OPTS:=		noscripts
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

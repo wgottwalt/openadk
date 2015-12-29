@@ -12,7 +12,7 @@ PKG_SECTION:=		x11/fonts
 PKG_DEPENDS:=		font-util
 PKG_BUILDDEP:=		font-util
 PKG_URL:=		http://www.x.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/font/
 
 PKG_HOST_DEPENDS:=      !netbsd !openbsd !cygwin !freebsd !mirbsd
 

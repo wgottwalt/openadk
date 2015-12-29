@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXt
-PKG_VERSION:=		1.1.4
+PKG_VERSION:=		1.1.5
 PKG_RELEASE:=		1
-PKG_HASH:=		823109a0d14dfaef7ede1b3fd28318078daa2cc2f005c439a21c33bdac3d3784
+PKG_HASH:=		b59bee38a9935565fa49dc1bfe84cb30173e2e07e1dcdf801430d4b54eb0caa3
 PKG_DESCR:=		x toolkit intrinsics libraries
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libsm libice libuuid libx11 libxau libxdmcp libxcb
 PKG_BUILDDEP:=		libSM libX11 kbproto util-macros-host xproto-host
 HOST_BUILDDEP:=		util-macros-host libICE-host libSM-host
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxt
 PKG_OPTS:=		dev
 

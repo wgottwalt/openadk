@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xauth
-PKG_VERSION:=		1.0.7
+PKG_VERSION:=		1.0.9
 PKG_RELEASE:=		1
-PKG_HASH:=		461afbfc508ff5ac2e600c41dd5da92fe05c389cefbb20425958bdee99b683d6
+PKG_HASH:=		0709070caf23ba2fb99536907b75be1fe31853999c62d3e87a6a8d26ba8a8cdb
 PKG_DESCR:=		authority file utility
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libx11 libxext libxmu
 PKG_BUILDDEP:=		libX11 libXext libXmu
 PKG_URL:=		http://www.x.org
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

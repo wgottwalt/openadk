@@ -4,12 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		randrproto
-PKG_VERSION:=		1.4.0
+PKG_VERSION:=		1.5.0
 PKG_RELEASE:=		1
-PKG_HASH:=		b2c44b63a22f37eef5a2e4ec325e8e6c2ee8b235ef516357535570def6210c88
+PKG_HASH:=		8f8a716d6daa6ba05df97d513960d35a39e040600bf04b313633f11679006fab
 PKG_DESCR:=		xrandr protcol headers
 PKG_SECTION:=		dev/header
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXcursor
-PKG_VERSION:=		1.1.13
-PKG_RELEASE:=		2
-PKG_HASH:=		df4475096192ad60c1300df7b5e2509019ad1a733a0cadcad13b5d3f4b7d615b
+PKG_VERSION:=		1.1.14
+PKG_RELEASE:=		1
+PKG_HASH:=		be0954faf274969ffa6d95b9606b9c0cfee28c13b6fc014f15606a0c8b05c17b
 PKG_DESCR:=		cursor library
 PKG_SECTION:=		x11/libs
-PKG_SITES:=		${MASTER_SITE_XORG}
 PKG_BUILDDEP:=		libXfixes libXrender
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxcursor
 PKG_OPTS:=		dev
 

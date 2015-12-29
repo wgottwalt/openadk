@@ -4,12 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xcmiscproto
-PKG_VERSION:=		1.2.1
+PKG_VERSION:=		1.2.2
 PKG_RELEASE:=		1
 PKG_DESCR:=		xc-misc extension headers
 PKG_SECTION:=		dev/header
-PKG_HASH:=		33415e374f63acc4dbd0ad59425f0c8876e567bad3d8563479ff955cb3bec300
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_HASH:=		48013cfbe4bd5580925a854a43e2bccbb4c7a5a31128070644617b6dc7f8ef85
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

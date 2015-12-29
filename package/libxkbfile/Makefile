@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libxkbfile
-PKG_VERSION:=		1.0.8
-PKG_RELEASE:=		2
-PKG_HASH:=		e7a95626b9c74c8a4765302890907f35d8a7e701840a69e3fb21160cd735ac80
+PKG_VERSION:=		1.0.9
+PKG_RELEASE:=		1
+PKG_HASH:=		95df50570f38e720fb79976f603761ae6eff761613eb56f258c3cb6bab4fd5e3
 PKG_DESCR:=		keyboard configuration extension library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		kbproto libX11
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

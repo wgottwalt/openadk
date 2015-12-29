@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libSM
-PKG_VERSION:=		1.2.1
-PKG_RELEASE:=		2
-PKG_HASH:=		c7f3660fd5c0ea80ef311e46261eca7c3025ad02c17e545d690a73d70deec7d5
+PKG_VERSION:=		1.2.2
+PKG_RELEASE:=		1
+PKG_HASH:=		14bb7c669ce2b8ff712fbdbf48120e3742a77edcd5e025d6b3325ed30cf120f4
 PKG_DESCR:=		session management library
 PKG_SECTION:=		x11/libs
 PKG_DEPENDS:=		libuuid
 PKG_BUILDDEP:=		libICE util-linux
 HOST_BUILDDEP:=		libICE-host xtrans-host
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libsm
 PKG_OPTS:=		dev
 

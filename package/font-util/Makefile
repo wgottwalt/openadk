@@ -4,13 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		font-util
-PKG_VERSION:=		1.3.0
+PKG_VERSION:=		1.3.1
 PKG_RELEASE:=		1
-PKG_HASH:=		f3791f3808c418f66f6b58af20997928592aba8604aa30a2b6a149b5c7fefca5
+PKG_HASH:=		34ebb0c9c14e0a392cdd5ea055c92489ad88d55ae148b2f1cfded0f3f63f2b5b
 PKG_DESCR:=		font utility
 PKG_SECTION:=		x11/fonts
 PKG_URL:=		http://www.x.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/font/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

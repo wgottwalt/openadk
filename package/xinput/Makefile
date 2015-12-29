@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xinput
-PKG_VERSION:=		1.6.0
+PKG_VERSION:=		1.6.2
 PKG_RELEASE:=		1
-PKG_HASH:=		a3117a323cc32c80428dd1604df8d0f87ecbfb03a4975c187475a04f7201dfb7
+PKG_HASH:=		2c8ca5ff2a8703cb7d898629a4311db720dbd30d0c162bfe37f18849a727bd42
 PKG_DESCR:=		input utility
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		libxi libxinerama libxrandr
 PKG_BUILDDEP:=		libXi libXinerama libXrandr
 PKG_URL:=		http://xorg.freedesktop.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

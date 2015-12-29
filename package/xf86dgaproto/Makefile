@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		xfree86-dga headers
 PKG_SECTION:=		dev/header
 PKG_HASH:=		73bc6fc830cce5a0ec9c750d4702601fc0fca12d6353ede8b4c0092c9c4ca2af
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

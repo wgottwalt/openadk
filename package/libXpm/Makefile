@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXpm
-PKG_VERSION:=		3.5.10
-PKG_RELEASE:=		2
-PKG_HASH:=		f73f06928a140fd2090c439d1d55c6682095044495af6bf886f8e66cf21baee5
+PKG_VERSION:=		3.5.11
+PKG_RELEASE:=		1
+PKG_HASH:=		53ddf924441b7ed2de994d4934358c13d9abf4828b1b16e1255ade5032b31df7
 PKG_DESCR:=		common operation for the xpm pixmap format
 PKG_BUILDDEP:=		libX11 libXt
 PKG_SECTION:=		x11/libs
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxpm
 PKG_OPTS:=		dev
 

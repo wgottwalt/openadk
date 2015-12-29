@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXcomposite
-PKG_VERSION:=		0.4.3
-PKG_RELEASE:=		2
-PKG_HASH:=		25853e4da06ddfd3ae0384b4d3621293850b41645697f3de659bc640ea3268b7
+PKG_VERSION:=		0.4.4
+PKG_RELEASE:=		1
+PKG_HASH:=		83c04649819c6f52cda1b0ce8bcdcc48ad8618428ad803fb07f20b802f1bdad1
 PKG_DESCR:=		composite library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libX11 compositeproto libXfixes
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxcomposite
 PKG_OPTS:=		dev
 

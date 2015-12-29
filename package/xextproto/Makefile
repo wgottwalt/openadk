@@ -10,7 +10,7 @@ PKG_DESCR:=		x protocol extensions headers
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		xextproto-host
 PKG_HASH:=		1b1bcdf91221e78c6c33738667a57bd9aaa63d5953174ad8ed9929296741c9f5
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

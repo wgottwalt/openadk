@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXinerama
-PKG_VERSION:=		1.1.2
-PKG_RELEASE:=		2
-PKG_HASH:=		5f21113464febeac0536e140ff36a8e0cd8ae919ce690c4768f479ea48473fed
+PKG_VERSION:=		1.1.3
+PKG_RELEASE:=		1
+PKG_HASH:=		0ba243222ae5aba4c6a3d7a394c32c8b69220a6872dbb00b7abae8753aca9a44
 PKG_DESCR:=		xinerama library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xineramaproto libXinerama-host
 HOST_BUILDDEP:=		xineramaproto-host libXext-host
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxinerama
 PKG_OPTS:=		dev
 

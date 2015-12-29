@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXext
-PKG_VERSION:=		1.3.1
-PKG_RELEASE:=		2
-PKG_HASH:=		fa0d5ed2fa7dc7be3b2e0b95a1bb8f0cbaabfaff124904f7e5bc70d3159980d1
+PKG_VERSION:=		1.3.3
+PKG_RELEASE:=		1
+PKG_HASH:=		eb0b88050491fef4716da4b06a4d92b4fc9e76f880d6310b2157df604342cfe5
 PKG_DESCR:=		client interface to extensions of the x protocol
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libX11 xextproto libXext-host
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxext
 PKG_OPTS:=		dev
 

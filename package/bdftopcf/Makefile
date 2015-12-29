@@ -10,7 +10,7 @@ PKG_HASH:=		b9f172527fb78f1d02859f0e24675bfc0152ea589abab733a80a1256f6e91e69
 PKG_DESCR:=		font converter utility
 PKG_BUILDDEP:=		libXfont
 PKG_SECTION:=		x11/fonts
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

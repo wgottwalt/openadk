@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXp
-PKG_VERSION:=		1.0.1
-PKG_RELEASE:=		2
-PKG_HASH:=		8204fe105909f0312922a51773413183831d45e4c3a800f897fc8b89d2ba8dfb
+PKG_VERSION:=		1.0.3
+PKG_RELEASE:=		1
+PKG_HASH:=		f6b8cc4ef05d3eafc9ef5fc72819dd412024b4ed60197c0d5914758125817e9c
 PKG_DESCR:=		x11 printing library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXext printproto
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxp
 PKG_OPTS:=		dev
 

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		dce95dbb8310ad214d60ba2e1fcdb56a41a10bd4843d7f953a8108cbebd1ebf9
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		libXxf86dga
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

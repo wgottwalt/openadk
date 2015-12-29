@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXmu
-PKG_VERSION:=		1.1.1
-PKG_RELEASE:=		2
-PKG_HASH:=		e7f7f227c8f430de81984d9725113ecd8994d07de372abf334b1c3dec31ceaf1
+PKG_VERSION:=		1.1.2
+PKG_RELEASE:=		1
+PKG_HASH:=		e5fd4bacef068f9509b8226017205040e38d3fba8d2de55037200e7176c13dba
 PKG_DESCR:=		miscellaneous utility functions for x libraries
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		libXt libXext
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxmu
 PKG_OPTS:=		dev
 

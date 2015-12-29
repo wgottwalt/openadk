@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXau
-PKG_VERSION:=		1.0.7
-PKG_RELEASE:=		2
-PKG_HASH:=		cbb81b4ba0f585faac8b9914b0bdbef6e0ef886a30c70d6584e2b30efeda9ac4
+PKG_VERSION:=		1.0.8
+PKG_RELEASE:=		1
+PKG_HASH:=		c343b4ef66d66a6b3e0e27aa46b37ad5cab0f11a5c565eafb4a1c7590bc71d7b
 PKG_DESCR:=		x11 authorisation library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto
 HOST_BUILDDEP:=		xproto-host
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxau
 PKG_OPTS:=		dev
 

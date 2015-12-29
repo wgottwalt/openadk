@@ -16,21 +16,6 @@ MASTER_SITE_KERNEL?=	\
 	ftp://www.kernel.org/pub/linux/ \
 	http://www.kernel.org/pub/linux/ \
 
-MASTER_SITE_XORG?=	\
-	http://www.x.org/releases/individual/xserver/ \
-	http://www.x.org/releases/individual/proto/ \
-	http://www.x.org/releases/individual/app/ \
-	http://www.x.org/releases/individual/xcb/ \
-	http://www.x.org/releases/individual/lib/ \
-	http://www.x.org/releases/individual/driver/ \
-	http://www.x.org/releases/individual/util/ \
-	http://xorg.freedesktop.org/releases/individual/app/ \
-	http://xorg.freedesktop.org/releases/individual/lib/ \
-	http://xorg.freedesktop.org/releases/individual/driver/ \
-	http://www.x.org/releases/X11R7.7/src/everything/ \
-	http://ftp.gwdg.de/pub/x11/x.org/pub/X11R7.7/src/everything/ \
-	http://xorg.freedesktop.org/releases/X11R7.7/src/everything/ \
-	
 MASTER_SITE_GNU?=	\
 	http://ftp.gnu.org/gnu/ \
 	ftp://ftp.gnu.org/gnu/ \

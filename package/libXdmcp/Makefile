@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXdmcp
-PKG_VERSION:=		1.1.1
-PKG_RELEASE:=		2
-PKG_HASH:=		ae6e677911e2696a2976b2f565f116ba9ce99e89cc7e140c4a791270c3aff96f
+PKG_VERSION:=		1.1.2
+PKG_RELEASE:=		1
+PKG_HASH:=		6f7c7e491a23035a26284d247779174dedc67e34e93cc3548b648ffdb6fc57c0
 PKG_DESCR:=		display manager control protocol library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxdmcp
 PKG_OPTS:=		dev
 

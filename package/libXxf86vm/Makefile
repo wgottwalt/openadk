@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXxf86vm
-PKG_VERSION:=		1.1.2
-PKG_RELEASE:=		2
-PKG_HASH:=		a19c1e743a21da2c7243b47354afd911f0dbb79d6ac8fe560da1846863c181f6
+PKG_VERSION:=		1.1.4
+PKG_RELEASE:=		1
+PKG_HASH:=		5108553c378a25688dcb57dca383664c36e293d60b1505815f67980ba9318a99
 PKG_DESCR:=		interface to the xfree86-vidmode extension
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xf86vidmodeproto libXext
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxxf86vm
 PKG_OPTS:=		dev
 

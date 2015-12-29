@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		02f8042cb351dd5c3699a0dbdb2ab25f86532efe3e1e3e97897e7f44b5c67040
 PKG_DESCR:=		present protocol headers
 PKG_SECTION:=		dev/header
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=              dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

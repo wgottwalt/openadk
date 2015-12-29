@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		f65ccbf1de9750a527ea6e85694085b179f2d06495cbdb742b3edb2149fef303
 PKG_DESCR:=		x damage extension headers
 PKG_SECTION:=		dev/header
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=              dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

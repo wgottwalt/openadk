@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		opengl headers
 PKG_SECTION:=		dev/header
 PKG_HASH:=		9d8130fec2b98bd032db7730fa092dd9dec39f3de34f4bb03ceb43b9903dbc96
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

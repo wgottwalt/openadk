@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXi
-PKG_VERSION:=		1.6.1
-PKG_RELEASE:=		2
-PKG_HASH:=		a2aab210068af017314888c64c3a7dd6b5a7933fe50ab89b6e039aadc07dac46
+PKG_VERSION:=		1.7.6
+PKG_RELEASE:=		1
+PKG_HASH:=		4e88fa7decd287e58140ea72238f8d54e4791de302938c83695fc0c9ac102b7e
 PKG_DESCR:=		client interface to the xinput extension
 PKG_SECTION:=		x11/libs
-PKG_BUILDDEP:=		xproto xextproto libXext libXi-host
+PKG_BUILDDEP:=		xproto xextproto libXext libXfixes
 PKG_URL:=		http://xorg.freedesktop.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxi
 PKG_OPTS:=		dev
 

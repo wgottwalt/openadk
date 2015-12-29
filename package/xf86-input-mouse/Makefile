@@ -12,7 +12,7 @@ PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
 PKG_BUILDDEP:=		xorg-server
 PKG_NEEDS:=		c++
-PKG_SITES:=		$(MASTER_SITE_XORG)
+PKG_SITES:=		http://www.x.org/releases/individual/driver/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 

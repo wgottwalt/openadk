@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xconsole
-PKG_VERSION:=		1.0.4
+PKG_VERSION:=		1.0.6
 PKG_RELEASE:=		1
-PKG_HASH:=		71fabb3f41af726ef2a81d50100d8741ba0b4e7bcb40fad102d9cee943444ca2
+PKG_HASH:=		28151453a0a687462516de133bac0287b488a2ff56da78331fee34bc1bf3e7d5
 PKG_DESCR:=		console application
 PKG_SECTION:=		x11/utils
 PKG_BUILDDEP:=		libXaw
 PKG_URL:=		http://xorg.freedesktop.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

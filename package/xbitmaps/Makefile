@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		3bc89e05be4179ce4d3dbba1ae554da4591d41f7a489d9e2735a18cfd8378188
 PKG_DESCR:=		prerequiste for xsetroot
 PKG_SECTION:=		x11/libs
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/data/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

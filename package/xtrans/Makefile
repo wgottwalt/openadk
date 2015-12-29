@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xtrans
-PKG_VERSION:=		1.3.3
+PKG_VERSION:=		1.3.5
 PKG_RELEASE:=		1
 PKG_DESCR:=		network protocol transport library
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		xtrans-host
-PKG_HASH:=		afb636c4efc8aec006ffc829e88337327b82206c8ece1e91e1afcc2f0732083b
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_HASH:=		b7a577c1b6c75030145e53b4793db9c88f9359ac49e7d771d4385d21b3e5945d
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

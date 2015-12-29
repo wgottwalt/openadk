@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		x dri protocol headers
 PKG_SECTION:=		dev/header
 PKG_HASH:=		d23f12deffd03e582e897ed6a7df3ea7f66ee8577f0f61374dcdf2ebffdce1be
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2

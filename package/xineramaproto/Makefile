@@ -10,7 +10,7 @@ PKG_DESCR:=		xinerama extension headers
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		xineramaproto-host
 PKG_HASH:=		d99e121edf7b310008d7371ac5dbe3aa2810996d476b754dc78477cc26e5e7c1
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

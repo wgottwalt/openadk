@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kbproto
-PKG_VERSION:=		1.0.6
+PKG_VERSION:=		1.0.7
 PKG_RELEASE:=		1
 PKG_DESCR:=		keyboard protocol headers
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		kbproto-host
-PKG_HASH:=		01fd22286ca9c2a93ca7bb686dbb2f3c108ceb944cd3dfdc9ceeb50f9b7f4505
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_HASH:=		828cb275b91268b1a3ea950d5c0c5eb076c678fdf005d517411f89cc8c3bb416
+PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz

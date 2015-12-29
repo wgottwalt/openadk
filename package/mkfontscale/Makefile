@@ -10,7 +10,7 @@ PKG_HASH:=		53515d688c8d0ed24f74374d9c33e36a20b024d59b8127d9f23b481ab5e98150
 PKG_DESCR:=		font utility
 PKG_SECTION:=		x11/fonts
 PKG_BUILDDEP:=		freetype libfontenc
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

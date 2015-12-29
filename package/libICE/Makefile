@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libICE
-PKG_VERSION:=		1.0.8
-PKG_RELEASE:=		2
-PKG_HASH:=		8332018b07ec38a4a35a360b39f7391c58d053ce5f676aa457b1a686b0277cc0
+PKG_VERSION:=		1.0.9
+PKG_RELEASE:=		1
+PKG_HASH:=		7812a824a66dd654c830d21982749b3b563d9c2dfe0b88b203cefc14a891edc0
 PKG_DESCR:=		inter-client exchange library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xtrans xproto
 HOST_BUILDDEP:=		xtrans-host xproto-host
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libice
 PKG_OPTS:=		dev
 

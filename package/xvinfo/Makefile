@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xvinfo
-PKG_VERSION:=		1.1.1
+PKG_VERSION:=		1.1.3
 PKG_RELEASE:=		1
-PKG_HASH:=		0d26f9efd5274e6ce4186603457deba60d79fd95a0600bc940306783c3b8a97d
+PKG_HASH:=		1c1c2f97abfe114389e94399cc7bf3dfd802ed30ad41ba23921d005bd8a6c39f
 PKG_DESCR:=		print out x-video extension adaptor information
 PKG_SECTION:=		x11/utils
 PKG_BUILDDEP:=		libXv
 PKG_URL:=		http://xorg.freedesktop.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

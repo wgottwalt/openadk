@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xsetroot
-PKG_VERSION:=		1.1.0
+PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
-PKG_HASH:=		318436be836d2b4c04d9acab4a3538744e07c8891b24f7c4a3823b6ea4c8275f
+PKG_HASH:=		6cdd48757d18835251124138b4a8e4008c3bbc51cf92533aa39c6ed03277168b
 PKG_DESCR:=		set root window
 PKG_SECTION:=		x11/utils
 PKG_DEPENDS:=		xbitmaps libx11 libxmu libxcursor
 PKG_BUILDDEP:=		xbitmaps libXcursor libXmu
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/app/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

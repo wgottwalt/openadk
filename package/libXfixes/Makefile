@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libXfixes
-PKG_VERSION:=		5.0
-PKG_RELEASE:=		2
-PKG_HASH:=		3c25f2fcf2983834b932756399cb538e69beb0d739f992f9719073fcedaa4405
+PKG_VERSION:=		5.0.1
+PKG_RELEASE:=		1
+PKG_HASH:=		81b692856c0e7ab2778a34a32aa6b3f455b9b58cf388f009cba872ed933ae9c0
 PKG_DESCR:=		x11 fixes library
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		fixesproto xextproto xproto libX11
 PKG_URL:=		http://xorg.freedesktop.org/
-PKG_SITES:=		${MASTER_SITE_XORG}
+PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxfixes
 PKG_OPTS:=		dev
 
