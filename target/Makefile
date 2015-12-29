@@ -64,6 +64,9 @@ endif
 ifeq ($(ADK_TARGET_ROOTFS_NFSROOT),)
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ro"#' \
 		$(BUILD_DIR)/.kernelconfig.board
+else
+	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 rw"#' \
+		$(BUILD_DIR)/.kernelconfig.board
 endif
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 $(FS_CMDLINE)"#' \
 		$(BUILD_DIR)/.kernelconfig.board
