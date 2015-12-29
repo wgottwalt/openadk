@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		41.0.2
+PKG_VERSION:=		42.0
 PKG_RELEASE:=		1
-PKG_HASH:=		ff00689f4d2ff54c5eb7b3aa367560a3645800eb0c96e73a795e461461b1970e
+PKG_HASH:=		994a346699298277b64ec0cab72660b8d3e5b879a2ac79207576f7e6c33da3ae
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		alsa-lib glib libgtk2 libpng libtiff libxcursor libffi
@@ -23,11 +23,9 @@ PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/$(PKG_
 PKG_NOPARALLEL:=	1
 
 PKG_ARCH_DEPENDS:=	arm mips mips64 x86 x86_64
-PKG_HOST_DEPENDS:=	!netbsd !freebsd !openbsd !cygwin
 PKG_SYSTEM_DEPENDS:=	solidrun-imx6 ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 raspberry-pi raspberry-pi2
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).source.tar.xz
-WRKDIST=		$(WRKDIR)/mozilla-release
 WRKBUILD=		$(WRKDIR)/$(PKG_NAME)-obj
 
 include $(ADK_TOPDIR)/mk/package.mk
@@ -41,7 +39,6 @@ else
 CONFIGURE_ARGS+=	--disable-debug --disable-logging
 endif
 
-
 CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			PYTHON="$(PYTHON)" \
 			HOST_CC="$(HOST_CC)" \
@@ -50,7 +47,8 @@ CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			HOST_LDFLAGS="$(HOST_LDLAGS)" \
 			HOST_CXX="$(HOST_CXX)" \
 			HOST_CXXFLAGS="$(HOST_CXXFLAGS)" \
-			HOST_RANLIB="ranlib" HOST_AR="ar" \
+			HOST_RANLIB="ranlib" \
+			HOST_AR="ar" \
 			CPPFLAGS="-I$(STAGING_TARGET_DIR)/usr/include/freetype2" \
 			ac_cv_sqlite_secure_delete=yes \
 			ac_cv_sqlite_threadsafe=yes \
@@ -122,15 +120,20 @@ endif
 XAKE_FLAGS+=		OS_RELEASE="2.6" HOST_CC=$(HOST_CC) HOST_LDFLAGS=$(HOST_LDFLAGS)
 XAKE_FLAGS+=            ARCHFLAG="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS) -lnss3 -lnssutil3 -lsmime3 -lssl3 -fPIC"
 
+pre-configure:
+	$(SED) '/^freetype\/ftcache.h/a freetype\/ftfntfmt.h' $(WRKSRC)/config/system-headers
+
 firefox-install:
-	$(INSTALL_DIR) $(IDIR_FIREFOX)/etc
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/bin
 	$(INSTALL_DIR) $(IDIR_FIREFOX)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/firefox-$(PKG_VERSION) \
 		$(IDIR_FIREFOX)/usr/lib
-	$(CP) ./files/xinitrc \
-		$(IDIR_FIREFOX)/etc
 	$(INSTALL_BIN) ./files/firefox \
 		$(IDIR_FIREFOX)/usr/bin
+ifeq ($(ADK_APPLIANCE_FIREFOX),y)
+	$(INSTALL_DIR) $(IDIR_FIREFOX)/etc
+	$(CP) ./files/xinitrc \
+		$(IDIR_FIREFOX)/etc
+endif
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

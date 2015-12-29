@@ -1,0 +1,10 @@
+--- firefox-42.0.orig/dom/media/webm/WebMDemuxer.cpp	2015-10-29 23:17:57.000000000 +0100
++++ firefox-42.0/dom/media/webm/WebMDemuxer.cpp	2015-12-08 05:28:13.471186350 +0100
+@@ -17,6 +17,7 @@
+ #include "nsAutoRef.h"
+ #include "NesteggPacketHolder.h"
+ #include "XiphExtradata.h"
++#include "prprf.h"
+ 
+ #include <algorithm>
+ #include <stdint.h>
