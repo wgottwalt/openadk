@@ -267,12 +267,6 @@ ifeq ($(ADK_TARGET_ARCH_M68K),y)
 	echo "exec ${GNU_TARGET_NAME}-gcc \"\$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/m68k-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
 	chmod a+x $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
 endif
-ifeq ($(ADK_TARGET_ARCH_ARM),y)
-	# create gcc wrapper for uClinux/arm
-	echo "#!/bin/sh" > $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-	echo "exec ${GNU_TARGET_NAME}-gcc \"\$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/arm-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-	chmod a+x $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-endif
 	touch $@
 
 $(WRKBUILD)/.compiled:
@@ -310,9 +304,6 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-gcc-${PKG_VERSION} && \
 		ln -sf $(GNU_TARGET_NAME)-g++ $(GNU_TARGET_NAME)-g++-${PKG_VERSION} \
 	)
-	cd $(STAGING_TARGET_DIR)/lib && \
-		ln -sf libstdc++.so.6.0.$(LIBSTDCXXVER) libstdc++.so && \
-		ln -sf libstdc++.so.6.0.$(LIBSTDCXXVER) libstdc++.so.6
 	touch $@
 
 $(WRKBUILD)/.final:
