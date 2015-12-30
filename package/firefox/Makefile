@@ -12,11 +12,12 @@ PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		alsa-lib glib libgtk2 libpng libtiff libxcursor libffi
 PKG_DEPENDS+=		nspr nss libjpeg-turbo libatk pango cairo libxt libx11 hicolor-icon-theme
 PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf
-PKG_DEPENDS+=		harfbuzz mesa libvpx libbz2 ca-certificates libevent
+PKG_DEPENDS+=		harfbuzz mesa libvpx libbz2 ca-certificates libevent gstreamer
+PKG_DEPENDS+=		gst-plugins-base gst-plugins-good
 PKG_BUILDDEP:=		alsa-lib glib libgtk2 libIDL libX11 mesa libtiff gdk-pixbuf
 PKG_BUILDDEP+=		nspr nss libjpeg-turbo libXt fontconfig sqlite atk libpng hicolor-icon-theme
 PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2 libevent bzip2-host python2-host yasm-host
-PKG_BUILDDEP+=		zip-host
+PKG_BUILDDEP+=		zip-host gstreamer
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/$(PKG_VERSION)/source/
@@ -71,6 +72,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--enable-system-ffi \
 			--enable-system-sqlite \
 			--enable-webrtc \
+			--enable-gstreamer \
 			--disable-libnotify \
 			--with-libIDL-prefix=$(STAGING_TARGET_DIR)/usr \
 			--with-glib-prefix=$(STAGING_TARGET_DIR)/usr \
@@ -83,7 +85,6 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-shark \
 			--disable-systrace \
 			--disable-pulseaudio \
-			--disable-gstreamer \
 			--disable-gio \
 			--disable-gold \
 			--disable-gconf \
@@ -98,7 +99,6 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-static \
 			--disable-gnomeui \
 			--disable-gnomevfs \
-			--disable-gstreamer \
 			--disable-optimize \
 			--disable-necko-wifi \
 			--disable-svg \
