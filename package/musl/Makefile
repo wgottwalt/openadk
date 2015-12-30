@@ -45,6 +45,11 @@ endif
 ifeq ($(ADK_TARGET_CPU_ARCH),sh4eb)
 MARCH:=			sheb
 endif
+ifeq ($(ADK_TARGET_ARCH_MIPS),y)
+ifeq ($(ADK_TARGET_SOFT_FLOAT),y)
+MARCH:=			$(ADK_TARGET_CPU_ARCH)-sf
+endif
+endif
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
 ifeq ($(ADK_TARGET_ABI),eabihf)
 MARCH:=			armhf
