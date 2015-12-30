@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
-PKG_VERSION:=		1.4.0
-PKG_RELEASE:=		2
-PKG_HASH:=		f582d9b2d60a592a4a3d8c32965ca2d2167e9ade38c6c30bac8801ff66a118e4
+PKG_VERSION:=		1.5.0
+PKG_RELEASE:=		1
+PKG_HASH:=		306d67908625675f8e188d37a81fbfafdf5068b09d9aa52702b6fbe601c76797
 PKG_DESCR:=		vp8/vp9 codec library
 PKG_SECTION:=		libs/video
 PKG_BUILDDEP:=		yasm-host
@@ -43,6 +43,9 @@ CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
 endif
 ifeq ($(ADK_TARGET_ARCH_MIPS),y)
 CONFIGURE_ARGS+=	--target=mips32-linux-gcc
+endif
+ifeq ($(ADK_CPU_LOONGSON2F),y)
+CONFIGURE_ARGS+=	--target=loongson2f-linux-gcc
 endif
 ifeq ($(ADK_TARGET_ARCH_MIPS64),y)
 CONFIGURE_ARGS+=	--target=mips64-linux-gcc
