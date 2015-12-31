@@ -10,6 +10,7 @@ PKG_HASH:=		4e88fa7decd287e58140ea72238f8d54e4791de302938c83695fc0c9ac102b7e
 PKG_DESCR:=		client interface to the xinput extension
 PKG_SECTION:=		x11/libs
 PKG_BUILDDEP:=		xproto xextproto libXext libXfixes
+HOST_BUILDDEP:=		libXfixes-host
 PKG_URL:=		http://xorg.freedesktop.org/
 PKG_SITES:=		http://www.x.org/releases/individual/lib/
 PKG_LIBNAME:=		libxi

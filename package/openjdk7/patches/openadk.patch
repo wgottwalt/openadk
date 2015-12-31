@@ -1,6 +1,6 @@
 diff -Nur icedtea-2.6.3.orig/Makefile.in icedtea-2.6.3/Makefile.in
---- icedtea-2.6.3.orig/Makefile.in	2015-11-13 07:59:43.000000000 +0100
-+++ icedtea-2.6.3/Makefile.in	2015-12-24 10:20:18.000000000 +0100
+--- icedtea-2.6.3.orig/Makefile.in	2015-11-13 07:59:43.238447031 +0100
++++ icedtea-2.6.3/Makefile.in	2015-12-30 23:44:40.378409714 +0100
 @@ -635,7 +635,6 @@
  STAGE1_BOOT_DIR = $(abs_top_builddir)/bootstrap/boot
  STAGE2_BOOT_DIR = $(abs_top_builddir)/bootstrap/icedtea
@@ -27,16 +27,17 @@ diff -Nur icedtea-2.6.3.orig/Makefile.in icedtea-2.6.3/Makefile.in
   clean-jconsole-@JAVA_VER@.desktop
  	if [ -e bootstrap ]; then \
  	  rmdir bootstrap ; \
-@@ -1523,7 +1522,7 @@
+@@ -1522,8 +1521,7 @@
+ 	clean-add-systemtap-debug clean-add-systemtap-boot \
  	clean-add-nss clean-add-tzdata-support clean-add-tzdata-support-debug \
  	clean-add-tzdata-support-boot \
- 	clean-check-crypto clean-check-crypto-debug clean-check-crypto-boot \
+-	clean-check-crypto clean-check-crypto-debug clean-check-crypto-boot \
 -	clean-add-archive clean-add-archive-debug clean-add-archive-boot clean-cryptocheck \
 +	clean-add-archive clean-add-archive-debug clean-add-archive-boot \
  	clean-download-hotspot clean-download-corba clean-download-jaxp \
  	clean-download-jaxws clean-download-langtools clean-download-jdk clean-download-openjdk \
  	clean-extract-corba clean-extract-jaxp clean-extract-jaxws clean-extract-jdk \
-@@ -2499,16 +2498,6 @@
+@@ -2499,16 +2497,6 @@
  	fi
  	rm -f stamps/add-tzdata-support.stamp
  
@@ -53,7 +54,7 @@ diff -Nur icedtea-2.6.3.orig/Makefile.in icedtea-2.6.3/Makefile.in
  stamps/add-archive.stamp: stamps/icedtea.stamp
  @ENABLE_CACAO_FALSE@@ENABLE_JAMVM_FALSE@@ZERO_BUILD_FALSE@	if [ -e $(BUILD_SDK_DIR)/bin/java ] ; then \
  @ENABLE_CACAO_FALSE@@ENABLE_JAMVM_FALSE@@ZERO_BUILD_FALSE@	  if test "x$(INSTALL_ARCH_DIR)" != "xppc64" -a "x$(INSTALL_ARCH_DIR)" != "xppc64le" ; then \
-@@ -2605,16 +2594,6 @@
+@@ -2605,16 +2593,6 @@
  	fi
  	rm -f stamps/add-tzdata-support-debug.stamp
  
@@ -70,7 +71,7 @@ diff -Nur icedtea-2.6.3.orig/Makefile.in icedtea-2.6.3/Makefile.in
  stamps/add-archive-debug.stamp: stamps/icedtea-debug.stamp
  @ENABLE_CACAO_FALSE@@ENABLE_JAMVM_FALSE@@ZERO_BUILD_FALSE@	if [ -e $(BUILD_DEBUG_SDK_DIR)/bin/java ] ; then \
  @ENABLE_CACAO_FALSE@@ENABLE_JAMVM_FALSE@@ZERO_BUILD_FALSE@	  if test "x$(INSTALL_ARCH_DIR)" != "xppc64" -a "x$(INSTALL_ARCH_DIR)" != "xppc64le" ; then \
-@@ -2647,22 +2626,22 @@
+@@ -2647,22 +2625,22 @@
  
  stamps/icedtea-stage2.stamp: stamps/icedtea.stamp stamps/add-cacao.stamp \
   stamps/add-zero.stamp stamps/add-jamvm.stamp stamps/add-systemtap.stamp \
@@ -97,7 +98,7 @@ diff -Nur icedtea-2.6.3.orig/Makefile.in icedtea-2.6.3/Makefile.in
   clean-add-archive-debug clean-split-debuginfo-debug
  	rm -f stamps/icedtea-debug-stage2.stamp
  
-@@ -2727,16 +2706,6 @@
+@@ -2727,16 +2705,6 @@
  	fi
  	rm -f stamps/add-tzdata-support-boot.stamp
  
@@ -114,7 +115,23 @@ diff -Nur icedtea-2.6.3.orig/Makefile.in icedtea-2.6.3/Makefile.in
  stamps/add-archive-boot.stamp: stamps/icedtea-boot.stamp
  @ENABLE_CACAO_FALSE@@ENABLE_JAMVM_FALSE@@ZERO_BUILD_FALSE@	if [ -e $(BUILD_BOOT_SDK_DIR)/bin/java ] ; then \
  @ENABLE_CACAO_FALSE@@ENABLE_JAMVM_FALSE@@ZERO_BUILD_FALSE@	  if test "x$(INSTALL_ARCH_DIR)" != "xppc64" -a "x$(INSTALL_ARCH_DIR)" != "xppc64le" ; then \
-@@ -2855,7 +2824,7 @@
+@@ -2769,13 +2737,13 @@
+ 
+ stamps/icedtea-stage1.stamp: stamps/icedtea-boot.stamp \
+  stamps/add-systemtap-boot.stamp stamps/add-tzdata-support-boot.stamp \
+- stamps/check-crypto-boot.stamp stamps/add-archive-boot.stamp \
++ stamps/add-archive-boot.stamp \
+  stamps/split-debuginfo-boot.stamp
+ 	mkdir -p stamps
+ 	touch $@
+ 
+ clean-icedtea-stage1: clean-add-systemtap-boot clean-add-tzdata-support-boot \
+- clean-check-crypto-boot clean-add-archive-boot clean-split-debuginfo-boot
++ clean-add-archive-boot clean-split-debuginfo-boot
+ 	rm -f stamps/icedtea-stage1.stamp
+ 
+ # Rebuild targets
+@@ -2855,7 +2823,7 @@
  stamps/jamvm.stamp: $(OPENJDK_TREE) stamps/rt.stamp
  @BUILD_JAMVM_TRUE@	cd jamvm/jamvm && \
  @BUILD_JAMVM_TRUE@	./autogen.sh --with-java-runtime-library=openjdk7 \
@@ -123,7 +140,7 @@ diff -Nur icedtea-2.6.3.orig/Makefile.in icedtea-2.6.3/Makefile.in
  @BUILD_JAMVM_TRUE@	$(MAKE) ; \
  @BUILD_JAMVM_TRUE@	$(MAKE) install
  @BUILD_JAMVM_TRUE@	mkdir -p $(abs_top_builddir)/jamvm/install/hotspot/jre/lib/$(INSTALL_ARCH_DIR)/server
-@@ -3196,19 +3165,6 @@
+@@ -3196,19 +3164,6 @@
  	  chmod u+w $(STAGE1_BOOT_RUNTIME) ; \
  	fi
  
@@ -143,7 +160,7 @@ diff -Nur icedtea-2.6.3.orig/Makefile.in icedtea-2.6.3/Makefile.in
  # File substitution
  
  policytool-@JAVA_VER@.desktop: policytool.desktop
-@@ -3230,7 +3186,6 @@
+@@ -3230,7 +3185,6 @@
  	${mkinstalldirs} $(DESTDIR)${prefix}/jre/bin $(DESTDIR)${prefix}/jre/lib
  	${mkinstalldirs} $(DESTDIR)${prefix}/jre/lib/$(INSTALL_ARCH_DIR)/{.,headless,jli,xawt}
  	${mkinstalldirs} $(DESTDIR)${prefix}/jre/lib/ext
@@ -151,7 +168,7 @@ diff -Nur icedtea-2.6.3.orig/Makefile.in icedtea-2.6.3/Makefile.in
  @SPLIT_DEBUGINFO_TRUE@	${mkinstalldirs} $(DESTDIR)$(DEBUG_PREFIX)/$(bindir) $(DESTDIR)$(DEBUG_PREFIX)/${exec_prefix}/lib
  @SPLIT_DEBUGINFO_TRUE@	${mkinstalldirs} $(DESTDIR)$(DEBUG_PREFIX)/${exec_prefix}/lib/$(INSTALL_ARCH_DIR)
  @SPLIT_DEBUGINFO_TRUE@	${mkinstalldirs} $(DESTDIR)$(DEBUG_PREFIX)/${exec_prefix}/lib/$(INSTALL_ARCH_DIR)/jli
-@@ -3328,9 +3283,6 @@
+@@ -3328,9 +3282,6 @@
  	for files in $(BUILD_SDK_DIR)/jre/lib/ext/*.jar; do \
  	  $(call install_file,$${files},$(DESTDIR)${prefix}/jre/lib/ext,$(INSTALL_DATA));\
  	done
@@ -161,8 +178,16 @@ diff -Nur icedtea-2.6.3.orig/Makefile.in icedtea-2.6.3/Makefile.in
  	$(abs_top_builddir)/pax-mark-vm $(DESTDIR)${prefix}
  
  install-data-local:
-@@ -3494,8 +3446,6 @@
+@@ -3486,16 +3437,8 @@
  
+ cacao: stamps/cacao.stamp
+ 
+-check-crypto: stamps/check-crypto.stamp
+-
+-check-crypto-boot: stamps/check-crypto-boot.stamp
+-
+-check-crypto-debug: stamps/check-crypto-debug.stamp
+-
  clone-boot: stamps/clone-boot.stamp
  
 -cryptocheck: stamps/cryptocheck.stamp
@@ -172,7 +197,7 @@ diff -Nur icedtea-2.6.3.orig/Makefile.in icedtea-2.6.3/Makefile.in
  download-cacao: stamps/download-cacao.stamp
 diff -Nur icedtea-2.6.3.orig/patches/openadk.patch icedtea-2.6.3/patches/openadk.patch
 --- icedtea-2.6.3.orig/patches/openadk.patch	1970-01-01 01:00:00.000000000 +0100
-+++ icedtea-2.6.3/patches/openadk.patch	2015-12-24 00:13:40.000000000 +0100
++++ icedtea-2.6.3/patches/openadk.patch	2015-12-30 23:39:55.373247806 +0100
 @@ -0,0 +1,1424 @@
 +diff -Nur openjdk.orig/corba/make/common/shared/Defs-utils.gmk openjdk/corba/make/common/shared/Defs-utils.gmk
 +--- openjdk.orig/corba/make/common/shared/Defs-utils.gmk	2015-11-13 05:54:57.000000000 +0100
