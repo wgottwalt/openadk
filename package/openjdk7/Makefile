@@ -11,14 +11,14 @@ PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		openjdk7-host alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst
-PKG_BUILDDEP+=		libpng giflib libgtk2 glib fontconfig nss gconf
+PKG_BUILDDEP+=		libpng giflib libgtk2 glib fontconfig nss gconf ncurses
 HOST_BUILDDEP:=		fastjar-host gcj-host ecj-host unzip-host ant-host
 HOST_BUILDDEP+=		libXtst-host libXt-host libXinerama-host libXrender-host
 HOST_BUILDDEP+=		cups-host qemu-host alsa-lib-host freetype-host	libxslt-host
 PKG_DEPENDS:=		zlib libffi libxtst libxi cups gconf
 PKG_DEPENDS+=		libfreetype libxrender libx11 libxext nss libjpeg-turbo
-PKG_DEPENDS+=		libpng giflib libgtk2 glib fontconfig
-PKG_NEEDS:=		threads c++
+PKG_DEPENDS+=		libpng giflib libgtk2 glib fontconfig libncurses
+PKG_NEEDS:=		threads c++ rt
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://icedtea.classpath.org/download/source/
 
@@ -168,6 +168,7 @@ openjdk7-install:
 	$(CP) $(WRKBUILD)/openjdk.build/j2re-image/lib $(IDIR_OPENJDK7)/usr/lib/jvm/jre
 	(cd $(IDIR_OPENJDK7)/usr/bin && ln -sf ../lib/jvm/jre/bin/java .)
 	(cd $(IDIR_OPENJDK7)/usr/lib/jvm/jre/lib/$(JDKARCH) && ln -sf server/libjvm.so .)
+	$(CP) ./files/nss.cfg $(IDIR_OPENJDK7)/usr/lib/jvm/jre/lib/security
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
