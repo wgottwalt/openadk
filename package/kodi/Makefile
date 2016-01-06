@@ -29,7 +29,7 @@ PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
 PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://kodi.tv/
-PKG_SITES:=		https://github.com/xbmc/xbmc/archive/
+PKG_SITES:=		http://mirrors.kodi.tv/releases/source/
 
 PKG_CFLINE_KODI:=	select ADK_PACKAGE_GPU_VIV_BIN_MX6Q if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 
