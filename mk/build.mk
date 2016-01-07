@@ -452,6 +452,12 @@ defconfig: .menu $(CONFIG)/conf
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_TARGET_XTENSA)" ];then \
+		grep "^config" target/config/Config.in.xtensa \
+			|grep -i "$(ADK_TARGET_XTENSA)" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
 		$(CONFIG)/conf --defconfig=.defconfig $(CONFIG_CONFIG_IN); \
 	fi
