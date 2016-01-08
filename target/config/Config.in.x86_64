@@ -1,0 +1,114 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice ADK_TARGET_CPU
+prompt "CPU type"
+depends on ADK_TARGET_SYSTEM_GENERIC_X86_64
+default ADK_TARGET_CPU_X86_64
+help
+  Selection of x86_64 CPU type which gives gcc optimization.
+  For details on the different types, see:
+  https://gcc.gnu.org/onlinedocs/gcc-5.3.0/gcc/x86-Options.html#x86-Options
+
+config ADK_TARGET_CPU_X86_64
+	bool "Generic x86_64"
+	select ADK_CPU_X86_64
+
+config ADK_TARGET_CPU_ATHLON_FX
+	bool "Athlon 64 FX"
+	select ADK_CPU_ATHLON_FX
+
+config ADK_TARGET_CPU_ATHLON_64
+	bool "Athlon 64"
+	select ADK_CPU_ATHLON_64
+
+config ADK_TARGET_CPU_ATHLON_64_SSE3
+	bool "Athlon 64 with SSE3"
+	select ADK_CPU_ATHLON_64_SSE3
+
+config ADK_TARGET_CPU_BARCELONA
+	bool "Barcelona"
+	select ADK_CPU_BARCELONA
+
+config ADK_TARGET_CPU_BDVER1
+	bool "bdver1"
+	select ADK_CPU_BDVER1
+
+config ADK_TARGET_CPU_BDVER2
+	bool "bdver2"
+	select ADK_CPU_BDVER2
+
+config ADK_TARGET_CPU_BDVER3
+	bool "bdver3"
+	select ADK_CPU_BDVER3
+
+config ADK_TARGET_CPU_BDVER4
+	bool "bdver4"
+	select ADK_CPU_BDVER4
+
+config ADK_TARGET_CPU_BONNELL
+	bool "Bonnell"
+	select ADK_CPU_BONNELL
+
+config ADK_TARGET_CPU_BROADWELL
+	bool "Broadwell"
+	select ADK_CPU_BROADWELL
+
+config ADK_TARGET_CPU_BTVER1
+	bool "btver1"
+	select ADK_CPU_BTVER1
+
+config ADK_TARGET_CPU_BTVER2
+	bool "btver2"
+	select ADK_CPU_BTVER1
+
+config ADK_TARGET_CPU_CORE2
+	bool "Core 2"
+	select ADK_CPU_CORE2
+
+config ADK_TARGET_CPU_HASWELL
+	bool "Haswell"
+	select ADK_CPU_HASWELL
+
+config ADK_TARGET_CPU_IVYBRIDGE
+	bool "Ivybridge"
+	select ADK_CPU_IVYBRIDGE
+
+config ADK_TARGET_CPU_K8
+	bool "K8"
+	select ADK_CPU_K8
+
+config ADK_TARGET_CPU_K8_SSE3
+	bool "K8 with SSE3"
+	select ADK_CPU_K8_SSE3
+
+config ADK_TARGET_CPU_KNL
+	bool "knl"
+	select config ADK_CPU_KNL
+
+config ADK_TARGET_CPU_NEHALEM
+	bool "Nehalem"
+	select ADK_CPU_NEHALEM
+
+config ADK_TARGET_CPU_OPTERON
+	bool "Opteron"
+	select ADK_CPU_OPTERON
+
+config ADK_TARGET_CPU_OPTERON_SSE3
+	bool "Opteron with SSE3"
+	select ADK_CPU_OPTERON_SSE3
+
+config ADK_TARGET_CPU_SANDYBRIDGE
+	bool "Sandybridge"
+	select ADK_CPU_SANDYBRIDGE
+
+config ADK_TARGET_CPU_SILVERMONT
+	bool "Silvermont"
+	select ADK_CPU_SILVERMONT
+
+config ADK_TARGET_CPU_WESTMERE
+	bool "Westmere"
+	select ADK_CPU_WESTMERE
+
+endchoice
+
