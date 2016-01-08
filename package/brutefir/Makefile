@@ -22,8 +22,12 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BRUTEFIR,brutefir,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
-ifeq ($(ADK_TARGET_ARCH_X86)$(ADK_TARGET_ARCH_X86_64),y)
+ifeq ($(ADK_TARGET_CPU_WITH_SSE2),y)
+TARGET_CFLAGS+=		-msse2
+else
+ifeq($ADK_TARGET_CPU_WITH_SSE),y)
 TARGET_CFLAGS+=		-msse
+endif
 endif
 
 GCCPATH:=		$(subst libgcc.a,,$(shell $(TARGET_CC) -print-libgcc-file-name))
