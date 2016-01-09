@@ -32,7 +32,7 @@ DISTFILES:=		gdb-6.7.1-avr32-2.1.5.tar.bz2
 WRKDIST=		$(WRKDIR)/gdb-6.7.1-avr32-2.1.5
 endif
 ifeq ($(ADK_TOOLCHAIN_GDB_H8300_GIT),y)
-PKG_VERSION:=		c3a6afca56427ce606cdc8e8e9f0ffbc1e9fd6cd
+PKG_VERSION:=		bf777b3966985cdb27184df90d175cb5a7a8fedc
 PKG_RELEASE:=		1
 PKG_SITES:=		git://git.pf.osdn.jp/gitroot/y/ys/ysato/binutils_gdb.git
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
