@@ -26,6 +26,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBX11,libx11,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+XAKE_FLAGS+=		V=1
 CONFIGURE_ARGS+=	--enable-xlocale \
 			--disable-specs \
 			--disable-xf86bigfont \

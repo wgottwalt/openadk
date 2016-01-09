@@ -69,10 +69,12 @@ CONFIGURE_ENV:=		BUILD_CC=/usr/bin/gcc \
 			ac_cv_path_POTENTIAL_CXX=$(TARGET_CXX) \
 			LD=$(TARGET_CC) \
 			OBJCOPY='$(TARGET_CROSS)objcopy' \
+			STRIP='$(TARGET_CROSS)strip' \
 			LIBFFI_CFLAGS="$(TARGET_CPPFLAGS)" \
 			LIBFFI_LIBS="$(TARGET_LDFLAGS) -lffi"
 
 XAKE_FLAGS+=		LD=$(TARGET_CC) \
+			STRIP='$(TARGET_CROSS)strip' \
 			BUILD_CC=$(HOST_CC) \
 			BUILD_LD=$(HOST_CC) \
 			WARNINGS_ARE_ERRORS='' \
@@ -103,6 +105,8 @@ post-extract:
 		PATH=$(HOST_PATH) sed -e 's|@abs_top_srcdir@|$(WRKDIST)|g' -e '/^patch.*/d' fsg.sh.in > fsg.sh; \
 		${BASH} fsg.sh; \
 	)
+	cat $(WRKDIST)/openjdk/common/autoconf/configure.ac | PATH=$(HOST_PATH) sed -e "s|@DATE_WHEN_GENERATED@|`LC_ALL=C date +%s`|" | $(STAGING_HOST_DIR)/usr/bin/autoconf \
+		-W all -I$(WRKDIST)/openjdk/common/autoconf - > $(WRKDIST)/openjdk/common/autoconf/generated-configure.sh
 
 openjdk8-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK8)/usr/bin

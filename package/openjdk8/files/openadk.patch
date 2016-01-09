@@ -1,3 +1,126 @@
+diff -Nur openjdk.orig/common/autoconf/platform.m4 openjdk/common/autoconf/platform.m4
+--- openjdk.orig/common/autoconf/platform.m4	2015-12-23 01:50:32.000000000 +0100
++++ openjdk/common/autoconf/platform.m4	2016-01-08 17:54:55.814451099 +0100
+@@ -36,25 +36,85 @@
+       VAR_CPU_BITS=64
+       VAR_CPU_ENDIAN=little
+       ;;
+-    i?86)
++    x86|i?86)
+       VAR_CPU=x86
+       VAR_CPU_ARCH=x86
+       VAR_CPU_BITS=32
+       VAR_CPU_ENDIAN=little
+       ;;
++    alpha*)
++      VAR_CPU=alpha
++      VAR_CPU_ARCH=alpha
++      VAR_CPU_BITS=64
++      VAR_CPU_ENDIAN=little
++      ;;
++    arm*eb)
++      VAR_CPU=armeb
++      VAR_CPU_ARCH=arm
++      VAR_CPU_BITS=32
++      VAR_CPU_ENDIAN=big
++      ;;
+     arm*)
+       VAR_CPU=arm
+       VAR_CPU_ARCH=arm
+       VAR_CPU_BITS=32
+       VAR_CPU_ENDIAN=little
+       ;;
++    aarch64eb)
++      VAR_CPU=aarch64eb
++      VAR_CPU_ARCH=aarch64
++      VAR_CPU_BITS=64
++      VAR_CPU_ENDIAN=big
++      ;;
+     aarch64)
+       VAR_CPU=aarch64
+       VAR_CPU_ARCH=aarch64
+       VAR_CPU_BITS=64
+       VAR_CPU_ENDIAN=little
+       ;;
+-    powerpc)
++    m68k)
++      VAR_CPU=m68k
++      VAR_CPU_ARCH=m68k
++      VAR_CPU_BITS=32
++      VAR_CPU_ENDIAN=big
++      ;;
++    mips)
++      VAR_CPU=mips
++      VAR_CPU_ARCH=mips
++      VAR_CPU_BITS=32
++      VAR_CPU_ENDIAN=big
++      ;;
++    mipsel)
++      VAR_CPU=mipsel
++      VAR_CPU_ARCH=mipsel
++      VAR_CPU_BITS=32
++      VAR_CPU_ENDIAN=little
++      ;;
++    mipsn32)
++      VAR_CPU=mipsn32
++      VAR_CPU_ARCH=mipsn32
++      VAR_CPU_BITS=32
++      VAR_CPU_ENDIAN=big
++      ;;
++    mipsn32el)
++      VAR_CPU=mipsn32el
++      VAR_CPU_ARCH=mipsn32el
++      VAR_CPU_BITS=32
++      VAR_CPU_ENDIAN=little
++      ;;
++    mips64)
++      VAR_CPU=mips64
++      VAR_CPU_ARCH=mips64
++      VAR_CPU_BITS=64
++      VAR_CPU_ENDIAN=big
++      ;;
++    mips64el)
++      VAR_CPU=mips64el
++      VAR_CPU_ARCH=mips64el
++      VAR_CPU_BITS=64
++      VAR_CPU_ENDIAN=little
++      ;;
++    powerpc|ppc)
+       VAR_CPU=ppc
+       VAR_CPU_ARCH=ppc
+       VAR_CPU_BITS=32
+@@ -66,12 +126,18 @@
+       VAR_CPU_BITS=64
+       VAR_CPU_ENDIAN=big
+       ;;
+-    powerpc64le)
++    powerpc64le|ppc64le)
+       VAR_CPU=ppc64
+       VAR_CPU_ARCH=ppc
+       VAR_CPU_BITS=64
+       VAR_CPU_ENDIAN=little
+       ;;
++    sh*)
++      VAR_CPU=sh
++      VAR_CPU_ARCH=sh
++      VAR_CPU_BITS=32
++      VAR_CPU_ENDIAN=little
++      ;;
+     s390)
+       VAR_CPU=s390
+       VAR_CPU_ARCH=s390
+@@ -371,6 +437,11 @@
+ 
+   # ZERO_ARCHDEF is used to enable architecture-specific code
+   case "${OPENJDK_TARGET_CPU}" in
++    alpha*)  ZERO_ARCHDEF=ALPHA ;;
++    m68k)  ZERO_ARCHDEF=M68K ;;
++    mips|mipsn32|mips64)  ZERO_ARCHDEF=MIPS ;;
++    mipsel|mipsn32el|mips64el)  ZERO_ARCHDEF=MIPSEL ;;
++    sh*)   ZERO_ARCHDEF=sh  ;;
+     ppc)     ZERO_ARCHDEF=PPC32 ;;
+     ppc64)   ZERO_ARCHDEF=PPC64 ;;
+     s390*)   ZERO_ARCHDEF=S390  ;;
 diff -Nur openjdk.orig/hotspot/src/cpu/zero/vm/entry_zero.hpp openjdk/hotspot/src/cpu/zero/vm/entry_zero.hpp
 --- openjdk.orig/hotspot/src/cpu/zero/vm/entry_zero.hpp	2015-12-23 01:50:46.000000000 +0100
 +++ openjdk/hotspot/src/cpu/zero/vm/entry_zero.hpp	2016-01-06 11:43:50.108091228 +0100
