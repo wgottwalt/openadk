@@ -146,6 +146,19 @@ config ADK_KERNEL_SND_CS5535AUDIO
 	help
 	 ALSA AMD CS5535 driver
 
+config ADK_KERNEL_SND_HDSP
+	tristate "RME Hammerfall DSP Audio"
+	select ADK_KERNEL_SND
+	select ADK_KERNEL_SND_PCI
+	select ADK_KERNEL_FW_LOADER
+	select ADK_KERNEL_SND_HWDEP
+	select ADK_KERNEL_SND_RAWMIDI
+	select ADK_KERNEL_SND_PCM
+	default n
+	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_QEMU_SYSTEM_X86 || ADK_TARGET_QEMU_SYSTEM_X86_64
+	help
+	  ALSA driver for RME HDSP cards.
+
 config ADK_KERNEL_SND_PXA2XX_SOC_SPITZ
 	tristate "Sharp Zaurus SoC"
 	select ADK_KERNEL_SND
