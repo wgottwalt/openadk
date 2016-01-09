@@ -71,20 +71,50 @@ CONFIGURE_CPU_OPTS:=	--enable-3dnow
 else
 CONFIGURE_CPU_OPTS:=	--disable-3dnow
 endif
-ifeq (${ADK_TARGET_CPU_WITH_SSE},y)
-CONFIGURE_CPU_OPTS+=	--enable-sse
+ifeq (${ADK_TARGET_CPU_WITH_SSE4_2},y)
+CONFIGURE_CPU_OPTS+=    --enable-sse42 \
+			--disable-sse4 \
+			--disable-ssse3 \
+			--disable-sse3 \
+			--disable-sse2 \
+			--disable-sse
 else
-CONFIGURE_CPU_OPTS+=	--disable-sse
-endif
-ifeq (${ADK_TARGET_CPU_WITH_SSE2},y)
-CONFIGURE_CPU_OPTS+=	--enable-sse2
+CONFIGURE_CPU_OPTS+=    --disable-sse42
+ifeq (${ADK_TARGET_CPU_WITH_SSE4_1},y)
+CONFIGURE_CPU_OPTS+=    --enable-sse4 \
+			--disable-ssse3 \
+			--disable-sse3 \
+			--disable-sse2 \
+			--disable-sse
 else
-CONFIGURE_CPU_OPTS+=	--disable-sse2
-endif
+CONFIGURE_CPU_OPTS+=    --disable-sse4
+ifeq (${ADK_TARGET_CPU_WITH_SSSE3},y)
+CONFIGURE_CPU_OPTS+=    --enable-ssse3 \
+			--disable-sse3 \
+			--disable-sse2 \
+			--disable-sse
+else
+CONFIGURE_CPU_OPTS+=    --disable-ssse3
 ifeq (${ADK_TARGET_CPU_WITH_SSE3},y)
-CONFIGURE_CPU_OPTS+=	--enable-sse3
+CONFIGURE_CPU_OPTS+=    --enable-sse3 \
+			--disable-sse2 \
+			--disable-sse
 else
-CONFIGURE_CPU_OPTS+=	--disable-sse3
+CONFIGURE_CPU_OPTS+=    --disable-sse3
+ifeq (${ADK_TARGET_CPU_WITH_SSE2},y)
+CONFIGURE_CPU_OPTS+=    --enable-sse2 \
+			--disable-sse
+else
+CONFIGURE_CPU_OPTS+=    --disable-sse2
+ifeq (${ADK_TARGET_CPU_WITH_SSE},y)
+CONFIGURE_CPU_OPTS+=    --enable-sse
+else
+CONFIGURE_CPU_OPTS+=    --disable-sse
+endif
+endif
+endif
+endif
+endif
 endif
 #ifeq (${ADK_TARGET_CPU_WITH_IWMMXT},y)
 #CONFIGURE_CPU_OPTS+=	--enable-iwmmxt
@@ -159,7 +189,6 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--disable-xinerama \
 			--disable-vidix \
 			--disable-gl \
-			--disable-ssse3 \
 			--extra-cflags="${EXTRA_CFLAGS}" \
 			${CONFIGURE_CPU_OPTS} \
 			${CONFIGURE_DEBUG} \

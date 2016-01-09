@@ -106,10 +106,50 @@ CONFIGURE_CPU_OPTS:=	--enable-mmx2
 else
 CONFIGURE_CPU_OPTS:=    --disable-mmx2 
 endif
-ifeq ($(ADK_TARGET_CPU_WITH_SSE),y)
-CONFIGURE_CPU_OPTS:=	--enable-sse
+ifeq (${ADK_TARGET_CPU_WITH_SSE4_2},y)
+CONFIGURE_CPU_OPTS+=    --enable-sse42 \
+			--disable-sse4 \
+			--disable-ssse3 \
+			--disable-sse3 \
+			--disable-sse2 \
+			--disable-sse
 else
-CONFIGURE_CPU_OPTS:=    --disable-sse 
+CONFIGURE_CPU_OPTS+=    --disable-sse42
+ifeq (${ADK_TARGET_CPU_WITH_SSE4_1},y)
+CONFIGURE_CPU_OPTS+=    --enable-sse4 \
+			--disable-ssse3 \
+			--disable-sse3 \
+			--disable-sse2 \
+			--disable-sse
+else
+CONFIGURE_CPU_OPTS+=    --disable-sse4
+ifeq (${ADK_TARGET_CPU_WITH_SSSE3},y)
+CONFIGURE_CPU_OPTS+=    --enable-ssse3 \
+			--disable-sse3 \
+			--disable-sse2 \
+			--disable-sse
+else
+CONFIGURE_CPU_OPTS+=    --disable-ssse3
+ifeq (${ADK_TARGET_CPU_WITH_SSE3},y)
+CONFIGURE_CPU_OPTS+=    --enable-sse3 \
+			--disable-sse2 \
+			--disable-sse
+else
+CONFIGURE_CPU_OPTS+=    --disable-sse3
+ifeq (${ADK_TARGET_CPU_WITH_SSE2},y)
+CONFIGURE_CPU_OPTS+=    --enable-sse2 \
+			--disable-sse
+else
+CONFIGURE_CPU_OPTS+=    --disable-sse2
+ifeq (${ADK_TARGET_CPU_WITH_SSE},y)
+CONFIGURE_CPU_OPTS+=    --enable-sse
+else
+CONFIGURE_CPU_OPTS+=    --disable-sse
+endif
+endif
+endif
+endif
+endif
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIGURE_CPU_OPTS:=	--enable-armv6
