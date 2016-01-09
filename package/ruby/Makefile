@@ -4,16 +4,16 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		2.2.4
+PKG_VERSION:=		2.3.0
 PKG_RELEASE:=		1
-PKG_HASH:=		b6eff568b48e0fda76e5a36333175df049b204e91217aa32a65153cc0cdcb761
+PKG_HASH:=		ba5ba60e5f1aa21b4ef8e9bf35b9ddb57286cb546aac4b5a28c71f459467e507
 PKG_DESCR:=		scripting language
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		ruby-host
 HOST_BUILDDEP:=		readline-host
 PKG_NEEDS:=		threads rt
 PKG_URL:=		http://www.ruby-lang.org/
-PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.2/
+PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.3/
 PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
