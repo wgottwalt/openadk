@@ -25,7 +25,7 @@ $(eval $(call PKG_template,BRUTEFIR,brutefir,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG
 ifeq ($(ADK_TARGET_CPU_WITH_SSE2),y)
 TARGET_CFLAGS+=		-msse2
 else
-ifeq($ADK_TARGET_CPU_WITH_SSE),y)
+ifeq ($ADK_TARGET_CPU_WITH_SSE),y)
 TARGET_CFLAGS+=		-msse
 endif
 endif
