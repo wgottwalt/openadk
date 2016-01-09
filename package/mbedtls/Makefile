@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mbedtls
-PKG_VERSION:=		2.1.2
+PKG_VERSION:=		2.2.1
 PKG_RELEASE:=		1
-PKG_HASH:=		ce57cb9085f976ffde945af7e8cec058a66ad181a96fd228fbcbc485213a7c58
+PKG_HASH:=		6ddd5ca2e7dfb43d2fd750400856246fc1c98344dabf01b1594eb2f9880ef7ce
 PKG_DESCR:=		embedded ssl/tls library
 PKG_SECTION:=		libs/crypto
 PKG_URL:=		https://tls.mbed.org
