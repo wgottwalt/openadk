@@ -154,6 +154,10 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIGURE_CPU_OPTS:=	--enable-armv6
 endif
+ifeq ($(ADK_CPU_MIPS32),y)
+CONFIGURE_CPU_OPTS+=	--disable-mipsdspr1 --disable-mipsdspr2
+endif
+
 
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS:=	--prefix=/usr \
