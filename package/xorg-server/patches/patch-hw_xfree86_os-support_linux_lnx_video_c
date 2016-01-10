@@ -1,6 +1,6 @@
---- xorg-server-1.15.0.orig/hw/xfree86/os-support/linux/lnx_video.c	2013-12-27 18:38:52.000000000 +0100
-+++ xorg-server-1.15.0/hw/xfree86/os-support/linux/lnx_video.c	2014-03-21 13:14:06.821293270 +0100
-@@ -473,7 +473,7 @@ unmapVidMem(int ScreenNum, pointer Base,
+--- xorg-server-1.18.0.orig/hw/xfree86/os-support/linux/lnx_video.c	2015-08-03 16:44:08.000000000 +0200
++++ xorg-server-1.18.0/hw/xfree86/os-support/linux/lnx_video.c	2016-01-08 01:41:49.618324040 +0100
+@@ -79,7 +79,7 @@ xf86OSInitVidMem(VidMemInfoPtr pVidMem)
  /* I/O Permissions section                                                 */
  /***************************************************************************/
  
@@ -9,7 +9,7 @@
  volatile unsigned char *ioBase = NULL;
  
  #ifndef __NR_pciconfig_iobase
-@@ -484,7 +484,11 @@ static Bool
+@@ -90,7 +90,11 @@ static Bool
  hwEnableIO(void)
  {
      int fd;

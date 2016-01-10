@@ -21,7 +21,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBXSCRNSAVER,libxscrnsaver,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_ARGS+=	--enable-malloc0returnsnull
+CONFIGURE_ARGS+=	--disable-malloc0returnsnull
 
 libxscrnsaver-install:
 	$(INSTALL_DIR) $(IDIR_LIBXSCRNSAVER)/usr/lib
