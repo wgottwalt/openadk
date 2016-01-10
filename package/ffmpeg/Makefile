@@ -97,14 +97,14 @@ endif
 TARGET_CPPFLAGS+=	-D_POSIX_SOURCE -D_GNU_SOURCE
 
 ifeq ($(ADK_TARGET_CPU_WITH_MMX),y)
-CONFIGURE_CPU_OPTS:=	--enable-mmx
+CONFIGURE_CPU_OPTS+=	--enable-mmx
 else
-CONFIGURE_CPU_OPTS:=    --disable-mmx 
+CONFIGURE_CPU_OPTS+=    --disable-mmx 
 endif
 ifeq ($(ADK_TARGET_CPU_WITH_MMXEXT),y)
-CONFIGURE_CPU_OPTS:=	--enable-mmx2
+CONFIGURE_CPU_OPTS+=	--enable-mmxext
 else
-CONFIGURE_CPU_OPTS:=    --disable-mmx2 
+CONFIGURE_CPU_OPTS+=    --disable-mmxext
 endif
 ifeq (${ADK_TARGET_CPU_WITH_SSE4_2},y)
 CONFIGURE_CPU_OPTS+=    --enable-sse42 \
