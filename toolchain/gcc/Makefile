@@ -35,6 +35,7 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-mpfr=$(STAGING_HOST_DIR)/usr \
 			--with-libelf=$(STAGING_HOST_DIR)/usr \
 			--disable-__cxa_atexit \
+			--with-system-zlib \
 			--with-gnu-ld \
 			--with-gnu-as \
 			--disable-libsanitizer \
