@@ -317,17 +317,6 @@ $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
 
 defconfig: .menu $(CONFIG)/conf
-	@if [ ! -z "$(ADK_LIBC_GIT)" ];then \
-		if [ "$(ADK_TARGET_LIBC)" = "glibc" ];then \
-			echo "ADK_TARGET_LIB_GLIBC_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
-		fi; \
-		if [ "$(ADK_TARGET_LIBC)" = "uclibc-ng" ];then \
-			echo "ADK_TARGET_LIB_UCLIBC_NG_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
-		fi; \
-		if [ "$(ADK_TARGET_LIBC)" = "musl" ];then \
-			echo "ADK_TARGET_LIB_MUSL_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
-		fi; \
-	fi
 	@if [ ! -z "$(ADK_NO_CHECKSUM)" ];then \
 		echo "ADK_DISABLE_CHECKSUM=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
@@ -447,10 +436,22 @@ defconfig: .menu $(CONFIG)/conf
 	fi
 	@if [ ! -z "$(ADK_TARGET_LIBC_VERSION)" ];then \
 		libcversion=$$(echo "$(ADK_TARGET_LIBC_VERSION)"|sed -e "s/\./_/g"); \
+		if [ "$$libcversion" = "git" ];then \
+			if [ "$(ADK_TARGET_LIBC)" = "glibc" ];then \
+				echo "ADK_TARGET_LIB_GLIBC_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
+			fi; \
+			if [ "$(ADK_TARGET_LIBC)" = "uclibc-ng" ];then \
+				echo "ADK_TARGET_LIB_UCLIBC_NG_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
+			fi; \
+			if [ "$(ADK_TARGET_LIBC)" = "musl" ];then \
+				echo "ADK_TARGET_LIB_MUSL_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
+			fi; \
+		else \
 		grep "^config" target/config/Config.in.libc \
 			|grep -i "$$libcversion$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
+		fi; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_XTENSA)" ];then \
 		grep "^config" target/config/Config.in.xtensa \
