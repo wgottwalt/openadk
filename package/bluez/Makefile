@@ -4,15 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bluez
-PKG_VERSION:=		5.19
+PKG_VERSION:=		5.37
 PKG_RELEASE:=		1
-PKG_HASH:=		12778f3b66e71eec50eeb2e652de94a2578f33b8c8bd57c981fa00adab524c8a
+PKG_HASH:=		c14ba9ddcb0055522073477b8fd8bf1ddf5d219e75fdfd4699b7e0ce5350d6b0
 PKG_DESCR:=		bluetooth applications
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		glib dbus libreadline
 PKG_BUILDDEP:=		glib dbus readline
 PKG_URL:=		http://www.bluez.org/
-PKG_SITES:=		http://mirror.anl.gov/pub/linux/bluetooth/
+PKG_SITES:=		http://www.kernel.org/pub/linux/bluetooth/
 
 include ${ADK_TOPDIR}/mk/package.mk
 
