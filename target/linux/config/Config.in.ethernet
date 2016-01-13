@@ -70,6 +70,9 @@ config ADK_KERNEL_ETRAX_HAVE_PHY
 config ADK_KERNEL_NET_PCI
 	bool
 
+config ADK_KERNEL_NET_ETHERNET
+	bool
+
 config ADK_KERNEL_NETDEV_1000
 	bool
 
@@ -85,6 +88,9 @@ config ADK_KERNEL_LXT_PHY
 config ADK_KERNEL_AT803X_PHY
 	tristate
 	select ADK_KERNEL_PHYLIB
+
+config ADK_KERNEL_MICREL_PHY
+	bool
 
 config ADK_KERNEL_SWCONFIG
 	bool
@@ -110,6 +116,20 @@ config ADK_KERNEL_AG71XX
 	help
 	  Atheros AG71XX ethernet driver
 
+config ADK_KERNEL_KINETIS_MAC
+	bool "Kinetis ethernet driver"
+	select ADK_KERNEL_NET_ETHERNET
+	select ADK_KERNEL_NET_VENDOR_FREESCALE
+	select ADK_KERNEL_FEC
+	select ADK_KERNEL_PHYLIB
+	select ADK_KERNEL_MICREL_PHY
+	select ADK_KERNEL_MII
+	depends on ADK_TARGET_SYSTEM_KINETIS_K70
+	default y if ADK_TARGET_SYSTEM_KINETIS_K70
+	default n
+	help
+	  Ethernet driver for Kinetis K70
+
 config ADK_KERNEL_FEC
 	tristate "FEC ethernet driver"
 	select ADK_KERNEL_NET_VENDOR_FREESCALE
@@ -119,7 +139,6 @@ config ADK_KERNEL_FEC
 		   ADK_TARGET_SYSTEM_KINETIS_K70
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208
-	default y if ADK_TARGET_SYSTEM_KINETIS_K70
 	default n
 	help
 	  FEC ethernet driver

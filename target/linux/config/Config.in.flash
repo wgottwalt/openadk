@@ -5,8 +5,8 @@ menu "Flash device support"
 depends on ADK_TARGET_WITH_NAND || ADK_TARGET_WITH_MTD || ADK_TARGET_QEMU
 
 config ADK_KERNEL_MTD
-	select ADK_KERNEL_GENERIC_IO
  	bool
+	select ADK_KERNEL_GENERIC_IO
 
 config ADK_KERNEL_GENERIC_IO
 	bool
@@ -18,6 +18,12 @@ config ADK_KERNEL_MTD_NAND
 	bool
 
 config ADK_KERNEL_MTD_NAND_PLATFORM
+	bool
+
+config ADK_KERNEL_MTD_CMDLINE_PARTS
+	bool
+
+config ADK_KERNEL_MTD_CONCAT
 	bool
 
 config ADK_KERNEL_MTD_CHAR
@@ -107,6 +113,21 @@ config ADK_KERNEL_MTD_NAND_PLATFORM
 	default n
 	help
 	  platform nand driver
+
+config ADK_KERNEL_MTD_NAND_FSL_NFC
+	bool "NAND driver for Kinetis K70"
+	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_KERNEL_MTD
+	select ADK_KERNEL_MTD_PARTITIONS
+	select ADK_KERNEL_MTD_NAND
+	select ADK_KERNEL_MTD_CHAR
+	select ADK_KERNEL_MTD_CONCAT
+	select ADK_KERNEL_MTD_BLKDEVS
+	select ADK_KERNEL_MTD_BLOCK
+	select ADK_KERNEL_MTD_CMDLINE_PARTS
+	depends on ADK_TARGET_SYSTEM_KINETIS_K70
+	default y if ADK_TARGET_SYSTEM_KINETIS_K70
+	default n
 
 config ADK_TARGET_MTD_SIZE
 	int

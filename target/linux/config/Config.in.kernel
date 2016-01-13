@@ -79,6 +79,9 @@ config ADK_KERNEL_RD_XZ
 config ADK_KERNEL_KERNEL_XZ
 	bool
 
+config ADK_KERNEL_KERNEL_COMPRESS_NONE
+	bool
+
 config ADK_KERNEL_INITRAMFS_SOURCE
 	string
 	default ""
@@ -173,6 +176,7 @@ config ADK_KERNEL_COMP_GZIP
 
 config ADK_KERNEL_COMPRESS_NONE
 	bool "use no compression"
+	select ADK_KERNEL_KERNEL_COMPRESS_NONE
 	select ADK_KERNEL_INITRAMFS_COMPRESSION_NONE
 
 endchoice

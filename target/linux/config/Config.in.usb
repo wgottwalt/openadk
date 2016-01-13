@@ -7,10 +7,19 @@ depends on ADK_TARGET_WITH_USB || ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SY
 config ADK_KERNEL_USB_SUPPORT
 	bool
 
+config ADK_KERNEL_USB_DEVICE_CLASS
+	bool
+
+config ADK_KERNEL_USB_ANNOUNCE_NEW_DEVICES
+	bool
+
 config ADK_KERNEL_USB_EHCI_ROOT_HUB_TT
 	bool
 
 config ADK_KERNEL_USB_EHCI_TT_NEWSCHED
+	bool
+
+config ADK_KERNEL_USB_EHCI_MXC
 	bool
 
 config ADK_KERNEL_USB_GADGET
@@ -85,8 +94,10 @@ menu "USB controller support"
 config ADK_KERNEL_USB_EHCI_HCD
 	tristate "Support for USB EHCI 2.0 controllers"
 	select ADK_KERNEL_USB_EHCI_ROOT_HUB_TT
-	select ADK_KERNEL_USB_EHCI_TT_NEWSCHED
 	select ADK_KERNEL_USB_MXS_PHY if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	select ADK_KERNEL_USB_EHCI_MXC if ADK_TARGET_SYSTEM_KINETIS_K70
+	select ADK_KERNEL_USB_DEVICE_CLASS if ADK_TARGET_SYSTEM_KINETIS_K70
+	select ADK_KERNEL_USB_ANNOUNCE_NEW_DEVICES if ADK_TARGET_SYSTEM_KINETIS_K70
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_BOARD_BCM28XX
 	depends on ADK_KERNEL_USB
@@ -95,6 +106,7 @@ config ADK_KERNEL_USB_EHCI_HCD
 	default m if ADK_TARGET_SYSTEM_IBM_X40
 	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_KINETIS_K70
 	default n
 	help
 	  The Enhanced Host Controller Interface (EHCI) is standard for USB 2.0
@@ -201,16 +213,6 @@ config ADK_KERNEL_USB_SL811_HCD
 	  host side or peripheral side roles.  Enable this option if your
 	  board has this chip, and you want to use it as a host controller. 
 	  If unsure, say N.
-
-config ADK_KERNEL_USB_EHCI_MXC
-	bool "Freescale EHCI MXC USB controller"
-	depends on ADK_KERNEL_USB
-	depends on ADK_TARGET_SYSTEM_KINETIS_K70
-	select ADK_KERNEL_GPIOLIB
-	default y if ADK_TARGET_SYSTEM_KINETIS_K70
-	default n
-	help
-	  Freescale USB controller.
 
 endmenu
 
