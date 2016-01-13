@@ -4,10 +4,10 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
-PKG_VERSION:=		1.59.0
-PKG_EXTRAVER:=		1_59
+PKG_VERSION:=		1.60.0
+PKG_EXTRAVER:=		1_60
 PKG_RELEASE:=		1
-PKG_HASH:=		47f11c8844e579d02691a607fbd32540104a9ac7a2534a8ddaef50daf502baac
+PKG_HASH:=		21ef30e7940bc09a0b77a6e59a8eee95f01a766aa03cdfa02f8e167491716ee4
 PKG_DESCR:=		portable c++ library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		python2-host
@@ -57,6 +57,7 @@ CONFIGURE_ARGS+=	--target=$(GNU_TARGET_NAME) \
 			--without-mpi \
 			--without-context \
 			--without-coroutine \
+			--without-coroutine2 \
 			--without-locale
 
 ifneq (${ADK_PACKAGE_BOOST_IOSTREAMS},)
@@ -106,10 +107,10 @@ endif
 ifeq ($(ADK_TARGET_ARCH),ppc)
 BOOST_ARCH:=	power
 endif
-ifeq ($(ADK_CPU_MIPS_MIPS32),y)
+ifeq ($(ADK_CPU_MIPS32),y)
 BOOST_ARCH:=	mips32
 endif
-ifeq ($(ADK_CPU_MIPS_MIPS32R2),y)
+ifeq ($(ADK_CPU_MIPS32R2),y)
 BOOST_ARCH:=	mips32r2
 endif
 
