@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		sysstat
-PKG_VERSION:=		11.1.8
+PKG_VERSION:=		11.2.0
 PKG_RELEASE:=		1
-PKG_HASH:=		9c7eb478e6a3e6f3f19ef7e00438318e9f8e87a6608a242502a0828b6a41704a
+PKG_HASH:=		9806b9a662568796d3fb93ecd01ecea10d815e668337a646494953bff4bc4155
 PKG_DESCR:=		utilities for system monitoring and performance analysis
 PKG_SECTION:=		sys/utils
 PKG_SITES:=		http://pagesperso-orange.fr/sebastien.godard/
