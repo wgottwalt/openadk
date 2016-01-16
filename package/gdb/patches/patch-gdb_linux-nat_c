@@ -1,0 +1,26 @@
+--- gdb-7.10.1.orig/gdb/linux-nat.c	2015-12-05 16:16:45.000000000 +0100
++++ gdb-7.10.1/gdb/linux-nat.c	2016-01-16 20:48:29.412843026 +0100
+@@ -168,6 +168,10 @@ blocked.  */
+ /* Does the current host support PTRACE_GETREGSET?  */
+ enum tribool have_ptrace_getregset = TRIBOOL_UNKNOWN;
+ 
++#ifndef W_STOPCODE
++#define W_STOPCODE(sig) ((sig) << 8 | 0x7f)
++#endif
++
+ /* The single-threaded native GNU/Linux target_ops.  We save a pointer for
+    the use of the multi-threaded target.  */
+ static struct target_ops *linux_ops;
+@@ -5216,10 +5220,10 @@ lin_thread_get_thread_signals (sigset_t
+      fortunately they don't change!  */
+ 
+   if (restart == 0)
+-    restart = __SIGRTMIN;
++    restart = SIGRTMIN;
+ 
+   if (cancel == 0)
+-    cancel = __SIGRTMIN + 1;
++    cancel = SIGRTMIN + 1;
+ 
+   sigaddset (set, restart);
+   sigaddset (set, cancel);
