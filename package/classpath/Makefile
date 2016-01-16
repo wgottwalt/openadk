@@ -19,6 +19,7 @@ PKG_SITES:=		ftp://ftp.gnu.org/gnu/classpath/ \
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz antlr-3.5.2-complete.jar
 
 PKG_HOST_DEPENDS:=	linux
+PKG_CFLINE_CLASSPATH:=	depends on ADK_HOST_ONLY
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
