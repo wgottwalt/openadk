@@ -1,93 +1,11 @@
---- valgrind-3.9.0.orig/configure.ac	2013-11-01 00:28:16.000000000 +0100
-+++ valgrind-3.9.0/configure.ac	2014-05-19 19:33:23.000000000 +0200
-@@ -155,6 +155,7 @@ esac
- # configure-time, and distinguishes them from the VGA_*/VGO_*/VGP_*
- # variables used when compiling C files.
- 
-+VGCONF_PLATFORM_ARM_ARCH=
- AC_CANONICAL_HOST
- 
- AC_MSG_CHECKING([for a supported CPU])
-@@ -191,8 +192,18 @@ case "${host_cpu}" in
-         ;;
- 
-      armv7*)
-+	# This means we use a armv7 toolchain - at least Cortex-A8
- 	AC_MSG_RESULT([ok (${host_cpu})])
- 	ARCH_MAX="arm"
-+	VGCONF_PLATFORM_ARM_ARCH="-march=armv7 -mcpu=cortex-a8"
-+	;;
-+
-+     arm*)
-+	# Generic arm toolchain - we will target armv6
-+	AC_MSG_RESULT([(${host_cpu}) - no armv7 toolchain specified, will enforce armv6 when compiling])
-+	ARCH_MAX="arm"
-+	VGCONF_PLATFORM_ARM_ARCH="-march=armv6"
-+	AC_DEFINE(ARM_ARCH_V6,1,"Defined for v6 architectures")
+--- valgrind-3.11.0.orig/configure.ac	2015-09-22 22:26:31.000000000 +0200
++++ valgrind-3.11.0/configure.ac	2016-01-16 20:25:46.275096899 +0100
+@@ -1066,8 +1066,6 @@ case "${GLIBC_VERSION}" in
  	;;
- 
-      mips)
-@@ -225,6 +236,8 @@ case "${host_cpu}" in
- 	;;
- esac
- 
-+AC_SUBST(VGCONF_PLATFORM_ARM_ARCH)
-+
- #----------------------------------------------------------------------------
- 
- # Sometimes it's convenient to subvert the bi-arch build system and
-@@ -273,7 +286,7 @@ case "${host_os}" in
-         # Ok, this is linux. Check the kernel version
-         AC_MSG_CHECKING([for the kernel version])
- 
--        kernel=`uname -r`
-+        kernel=3.13
- 
-         case "${kernel}" in
-              2.6.*|3.*) 
-@@ -792,6 +805,15 @@ AC_EGREP_CPP([BIONIC_LIBC], [
- ],
- GLIBC_VERSION="bionic")
- 
-+# not really a version check
-+AC_EGREP_CPP([MUSL_LIBC], [
-+#if defined(__MUSL__)
-+  MUSL_LIBC
-+#endif
-+],
-+GLIBC_VERSION="musl")
-+
-+
- 
- AC_MSG_CHECKING([the GLIBC_VERSION version])
- 
-@@ -918,6 +940,13 @@ case "${GLIBC_VERSION}" in
- 	DEFAULT_SUPP="glibc-2.34567-NPTL-helgrind.supp ${DEFAULT_SUPP}"
- 	DEFAULT_SUPP="glibc-2.X-drd.supp ${DEFAULT_SUPP}"
- 	;;
-+     2.19)
-+	AC_MSG_RESULT(2.19 family)
-+	AC_DEFINE([GLIBC_2_19], 1, [Define to 1 if you're using glibc 2.19.x])
-+	DEFAULT_SUPP="glibc-2.X.supp ${DEFAULT_SUPP}"
-+	DEFAULT_SUPP="glibc-2.34567-NPTL-helgrind.supp ${DEFAULT_SUPP}"
-+	DEFAULT_SUPP="glibc-2.X-drd.supp ${DEFAULT_SUPP}"
-+	;;
-      darwin)
- 	AC_MSG_RESULT(Darwin)
- 	AC_DEFINE([DARWIN_LIBC], 1, [Define to 1 if you're using Darwin])
-@@ -928,10 +957,13 @@ case "${GLIBC_VERSION}" in
- 	AC_DEFINE([BIONIC_LIBC], 1, [Define to 1 if you're using Bionic])
- 	DEFAULT_SUPP="bionic.supp ${DEFAULT_SUPP}"
- 	;;
--
-+     musl)
-+	AC_MSG_RESULT(musl)
-+	AC_DEFINE([MUSL_LIBC], 1, [Define to 1 if you're using musl])
-+	;;
-      *)
+      2.0|2.1|*)
  	AC_MSG_RESULT([unsupported version ${GLIBC_VERSION}])
--	AC_MSG_ERROR([Valgrind requires glibc version 2.2 - 2.17])
-+	AC_MSG_ERROR([Valgrind requires glibc version 2.2 - 2.18])
- 	AC_MSG_ERROR([or Darwin libc])
+-	AC_MSG_ERROR([Valgrind requires glibc version 2.2 or later,])
+-	AC_MSG_ERROR([Darwin libc, Bionic libc or Solaris libc])
  	;;
  esac
+ 
