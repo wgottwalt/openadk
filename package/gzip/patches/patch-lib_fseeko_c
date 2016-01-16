@@ -1,0 +1,18 @@
+--- gzip-1.6.orig/lib/fseeko.c	2013-04-07 03:59:54.000000000 +0200
++++ gzip-1.6/lib/fseeko.c	2016-01-14 16:58:56.000000000 +0100
+@@ -99,8 +99,14 @@ fseeko (FILE *fp, off_t offset, int when
+ #elif defined EPLAN9                /* Plan9 */
+   if (fp->rp == fp->buf
+       && fp->wp == fp->buf)
++#elif FUNC_FFLUSH_STDIN < 0 && 200809 <= _POSIX_VERSION
++  /* Cross-compiling to some other system advertising conformance to
++     POSIX.1-2008 or later.  Assume fseeko and fflush work as advertised.
++     If this assumption is incorrect, please report the bug to
++     bug-gnulib.  */
++  if (0)
+ #else
+-  #error "Please port gnulib fseeko.c to your platform! Look at the code in fpurge.c, then report this to bug-gnulib."
++  #error "Please port gnulib fseeko.c to your platform! Look at the code in fseeko.c, then report this to bug-gnulib."
+ #endif
+     {
+       /* We get here when an fflush() call immediately preceded this one (or
