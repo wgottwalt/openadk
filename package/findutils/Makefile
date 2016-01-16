@@ -4,12 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		findutils
-PKG_VERSION:=		4.4.2
-PKG_RELEASE:=		7
-PKG_HASH:=		434f32d171cbc0a5e72cfc5372c6fc4cb0e681f8dce566a0de5b6fccd702b62a
+PKG_VERSION:=		4.6.0
+PKG_RELEASE:=		1
+PKG_HASH:=		ded4c9f73731cd48fec3b6bdaccce896473b6d8e337e9612e16cf1431bb1169d
 PKG_DESCR:=		utilities for finding files
 PKG_SECTION:=		base/apps
-HOST_BUILDDEP:=		autoconf-host bison-host
+HOST_BUILDDEP:=		bison-host
 PKG_NEEDS:=		treads
 PKG_URL:=		http://www.gnu.org/software/findutils/
 PKG_SITES:=		http://ftp.gnu.org/pub/gnu/findutils/
@@ -33,7 +33,6 @@ $(eval $(call PKG_template,FIND,find,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LOCATE,locate,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LOCATE},${PKG_SECTION}))
 $(eval $(call PKG_template,XARGS,xargs,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_XARGS},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ENV+=		gl_cv_func_wcwidth_works=yes \
 			ac_cv_func_working_mktime=yes
 
