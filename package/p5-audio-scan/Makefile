@@ -10,7 +10,7 @@ PKG_HASH:=		5a92f4fce0c5dc3f4f76b2266d484466ff6dfc64340371c392e678324465dc0e
 PKG_DESCR:=		metadata and tag reader for all common audio file formats
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl zlib
-PKG_BUILDDEP:=		perl zlib
+PKG_BUILDDEP:=		perl-host perl zlib
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/A/AG/AGRUNDMA/
 
 DISTFILES:=             Audio-Scan-${PKG_VERSION}.tar.gz

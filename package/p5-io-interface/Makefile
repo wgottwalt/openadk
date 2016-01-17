@@ -10,7 +10,7 @@ PKG_HASH:=		67c6658e66737af09777ae06f90d11d969a31de92b2cdf705126dd79ea961df0
 PKG_DESCR:=		extension for access to network card configuration information
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/L/LD/LDS/
 
 DISTFILES:=             IO-Interface-${PKG_VERSION}.tar.gz

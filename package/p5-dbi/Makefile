@@ -10,7 +10,7 @@ PKG_HASH:=		e2c1badcc9f672bf31630b36ecd230f7eb04dbf055e6daf7edeed0e9ebcf5ee7
 PKG_DESCR:=		database independent interface
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/T/TI/TIMB/
 
 DISTFILES:=             DBI-${PKG_VERSION}.tar.gz

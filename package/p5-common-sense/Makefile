@@ -10,7 +10,7 @@ PKG_HASH:=		8110c5e472641e0c218f8e023cecc1612ef66f9a1b313261fe219862efe3fd10
 PKG_DESCR:=		save a tree and a kitten
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/
 
 DISTFILES:=             common-sense-${PKG_VERSION}.tar.gz

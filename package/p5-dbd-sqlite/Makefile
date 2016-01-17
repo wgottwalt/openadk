@@ -10,7 +10,7 @@ PKG_HASH:=		ab3b653c1ab4dd316f06be40b49ccc612e9670c40b34654353e837c4b464a993
 PKG_DESCR:=		self-contained rdbms in a dbi driver
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl p5-dbi
-PKG_BUILDDEP:=		perl p5-dbi-host
+PKG_BUILDDEP:=		perl-host perl p5-dbi-host
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/I/IS/ISHIGAKI/
 
 DISTFILES:=             DBD-SQLite-${PKG_VERSION}.tar.gz

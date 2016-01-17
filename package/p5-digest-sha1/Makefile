@@ -10,7 +10,7 @@ PKG_HASH:=		68c1dac2187421f0eb7abf71452a06f190181b8fc4b28ededf5b90296fb943cc
 PKG_DESCR:=		interface to the sha-1 algorithm
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/G/GA/GAAS/
 
 DISTFILES:=             Digest-SHA1-${PKG_VERSION}.tar.gz

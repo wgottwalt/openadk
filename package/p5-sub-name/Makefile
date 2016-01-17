@@ -10,7 +10,7 @@ PKG_HASH:=		c9d1b805ea1f8e35fdde319468d6378dc1f1123cd8f2b22788238ba842713af1
 PKG_DESCR:=		rename a sub
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/F/FL/FLORA/
 
 DISTFILES:=             Sub-Name-${PKG_VERSION}.tar.gz

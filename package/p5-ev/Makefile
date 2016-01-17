@@ -10,7 +10,7 @@ PKG_HASH:=		48ddccedbd0b8b44894df04db92f0d1148e4bcf8a219847125e70263552a2185
 PKG_DESCR:=		interface to libev, a high performance full-featured event loop
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl libev
-PKG_BUILDDEP:=		perl libev
+PKG_BUILDDEP:=		perl-host perl libev
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/
 
 DISTFILES:=             EV-${PKG_VERSION}.tar.gz

@@ -10,7 +10,7 @@ PKG_HASH:=		be918b3749d3ff93627f72ee4b825683332ecb4c81c67a3a8d72b0435ffbd802
 PKG_DESCR:=		html parser class
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/G/GA/GAAS/
 
 DISTFILES:=             HTML-Parser-${PKG_VERSION}.tar.gz

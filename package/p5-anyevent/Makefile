@@ -10,7 +10,7 @@ PKG_HASH:=		8bf1b59860d04daeec4f6f56e3b86b581dfabacbc3ba0442e493e267b4b9f522
 PKG_DESCR:=		anyevent
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl 
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://search.cpan.org/CPAN/authors/id/M/ML/MLEHMANN/
 
 DISTFILES:=             AnyEvent-${PKG_VERSION}.tar.gz

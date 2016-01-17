@@ -10,7 +10,7 @@ PKG_HASH:=		9a654427a3a63de434c6d03b18bba144cc7ba0f0e61a7100c6d08d77a90145ce
 PKG_DESCR:=		yaml serialization using xs and libyaml
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/I/IN/INGY/
 
 DISTFILES:=             YAML-LibYAML-${PKG_VERSION}.tar.gz

@@ -10,7 +10,7 @@ PKG_HASH:=		99c56b395f1239af19901f2feeb125d9ecb4e351a0d80daa9529211a4700a6f2
 PKG_DESCR:=		generate fast xs accessors without runtime compilation
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/S/SM/SMUELLER/
 
 DISTFILES:=             Class-XSAccessor-${PKG_VERSION}.tar.gz

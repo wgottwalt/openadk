@@ -10,7 +10,7 @@ PKG_HASH:=		b48197cd2265a26c5f016489f11a7b450d8833cb8b3d6a46ee15975740894de9
 PKG_DESCR:=		lowlevel access to expat xml parser
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl libexpat
-PKG_BUILDDEP:=		perl expat
+PKG_BUILDDEP:=		perl-host perl expat
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/T/TO/TODDR/
 
 DISTFILES:=             XML-Parser-${PKG_VERSION}.tar.gz

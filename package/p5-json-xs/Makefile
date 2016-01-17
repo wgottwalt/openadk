@@ -10,7 +10,7 @@ PKG_HASH:=		4e8df3256a5aa9ed304ce1bbcd9140737deef31ba847bff9f4c15480c88c71ab
 PKG_DESCR:=		json serialising/deserialising, done correctly and fast
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/
 
 DISTFILES:=             JSON-XS-${PKG_VERSION}.tar.gz

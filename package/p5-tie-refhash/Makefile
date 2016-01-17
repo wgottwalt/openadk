@@ -10,7 +10,7 @@ PKG_HASH:=		b0b80ef571e7dadb726b8214f7352a932a8fa82af29072895aa1aadc89f48bec
 PKG_DESCR:=		use references as hash keys
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/F/FL/FLORA/
 
 DISTFILES:=             Tie-RefHash-${PKG_VERSION}.tar.gz

@@ -4,16 +4,18 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		perl
-PKG_VERSION:=		5.18.1
-PKG_RELEASE:=		3
-PKG_HASH:=		655e11a8ffba8853efcdce568a142c232600ed120ac24aaebb4e6efe74e85b2b
+PKG_VERSION:=		5.22.1
+PKG_RELEASE:=		1
+PKG_HASH:=		2b475d0849d54c4250e9cba4241b7b7291cffb45dfd083b677ca7b5d38118f27
 PKG_DESCR:=		perl interpreter
 PKG_SECTION:=		dev/lang
-PKG_BUILDDEP:=		perl-host
 PKG_NEEDS:=		threads rt
 PKG_URL:=		http://www.perl.org/
 PKG_SITES:=		http://www.cpan.org/src/
 PKG_NOPARALLEL:=	1
+
+PC_VERSION:=		1.0.2
+PC_SITE:=		https://github.com/arsv/perl-cross/releases/download/$(PC_VERSION)
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -24,64 +26,32 @@ $(eval $(call HOST_template,PERL,perl,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,PERL,perl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		manual
-CONFIG_STYLE:=          manual
-BUILD_STYLE:=		manual
-INSTALL_STYLE:=		manual
-
-# ld memory exhausted problem
-TARGET_CFLAGS:=		$(subst g3,g,$(TARGET_CFLAGS))
+CONFIG_STYLE:=		minimal
+CONFIGURE_ARGS:=	--target=$(GNU_TARGET_NAME) \
+			--target-tools-prefix=$(TARGET_CROSS) \
+			--prefix=/usr \
+			-Dld="$(TARGET_CC)" \
+			-Dccflags="$(TARGET_CFLAGS)" \
+			-Dldflags="$(TARGET_LDFLAGS) -lm" \
+			-Dmydomain="" \
+			-Dmyuname="OpenADK" \
+			-Dosname=linux \
+			-Dosvers=4.0 \
+			-Dperladmin=root
 
 host-configure:
-	$(SED) "s#@@STAGING_HOST_DIR@@/perl-host#./perl#" ${WRKBUILD}/Makefile.SH 
-	$(SED) "s#@@LIB@@#-Ilib#" ${WRKBUILD}/Makefile.SH 
-	# darwin workaround
-	$(CP) ${WRKBUILD}/hints/darwin.sh ${WRKBUILD}/hints/darwin.sh.bak
-	$(SED) "s#^usedl.*##" ${WRKBUILD}/hints/darwin.sh
-	(cd ${WRKBUILD}; ${BASH} ./Configure -des -Uusedl -Uusethreads -Duseperlio -Uuseshrplib -Dprefix=${STAGING_HOST_DIR}/usr)
-
-host-build:
-	cd ${WRKBUILD} && env CC_FOR_BUILD="gcc" ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
+	(cd ${WRKBUILD}; ${BASH} ./Configure -des -Duseperlio -Dprefix=${STAGING_HOST_DIR}/usr)
 
 perl-hostinstall:
-	cd ${WRKBUILD} && env CC_FOR_BUILD="gcc" ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-		${HOST_MAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
-	mv ${STAGING_HOST_DIR}/usr/bin/perl ${STAGING_HOST_DIR}/usr/bin/perl-static
-	cp ${WRKBUILD}/miniperl ${STAGING_HOST_DIR}/usr/bin
-	# now build perl a second time for perl modules (dynamic)
-	$(CP) ${WRKBUILD}/hints/darwin.sh.bak ${WRKBUILD}/hints/darwin.sh
-	(cd ${WRKBUILD}; rm config.sh; ${BASH} ./Configure -des -Uuseshrplib -Dprefix=${STAGING_HOST_DIR}/usr)
-	cd ${WRKBUILD} && env CC_FOR_BUILD="gcc" ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
-	cd ${WRKBUILD} && env CC_FOR_BUILD="gcc" ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-		${HOST_MAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
+	(cd ${WRKBUILD} && env CC_FOR_BUILD="gcc" ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${HOST_INSTALL_TARGET}) 
 	mv ${STAGING_HOST_DIR}/usr/bin/perl ${STAGING_HOST_DIR}/usr/bin/perl-host
 
-do-configure:
-	sed \
-		-e 's!%%CC%%!$(TARGET_CC)!g' \
-		-e 's!%%CFLAGS%%!$(TARGET_CFLAGS) -DUSE_CROSS_COMPILE $(TARGET_CPPFLAGS)!g' \
-		-e 's!%%CPP%%!$(TARGET_CROSS)gcc -E!g' \
-		-e 's!%%AR%%!$(TARGET_CROSS)ar!g' \
-		-e 's!%%LD%%!$(TARGET_CROSS)gcc!g' \
-		-e 's!%%LDFLAGS%%!-rdynamic $(TARGET_LDFLAGS)!g' \
-		-e 's!%%CPPFLAGS%%!$(TARGET_CPPFLAGS)!g' \
-		-e 's!%%LIBDIRS%%!$(STAGING_TARGET_DIR)/lib $(STAGING_TARGET_DIR)/usr/lib!g' \
-		-e 's!%%INCDIRS%%!$(STAGING_TARGET_DIR)/include $(STAGING_TARGET_DIR)/usr/include!g' \
-		./files/config.sh.$(ADK_TARGET_CPU_ARCH).$(ADK_TARGET_LIBC) > ${WRKBUILD}/config.sh
-	$(SED) "s#@@STAGING_HOST_DIR@@#${STAGING_HOST_DIR}/usr/bin#" ${WRKBUILD}/Makefile.SH 
-	$(SED) "s#@@LIB@@##" ${WRKBUILD}/Makefile.SH 
-	(cd ${WRKBUILD}; ./Configure -S)
-
-do-build:
-	(cd ${WRKBUILD}; $(CP) config.h xconfig.h; $(MAKE) miniperl)
-	(cd ${WRKBUILD}; $(CP) miniperl miniperl.target)
-	$(CP) $(STAGING_HOST_DIR)/usr/bin/miniperl ${WRKBUILD}/
-	touch ${WRKBUILD}/miniperl
-	(cd ${WRKBUILD}; $(MAKE))
-
-do-install:
-	(cd ${WRKBUILD}; $(STAGING_HOST_DIR)/usr/bin/perl-static installperl --destdir=${WRKINST})
+pre-configure:
+	(if [ ! -f $(DL_DIR)/perl-$(PKG_VERSION)-cross-$(PC_VERSION).tar.gz ]; then \
+		cd $(DL_DIR); wget $(PC_SITE)/perl-$(PKG_VERSION)-cross-$(PC_VERSION).tar.gz; \
+	fi)
+	(cd $(WRKSRC); tar --strip-components=1 -xf $(DL_DIR)/perl-$(PKG_VERSION)-cross-$(PC_VERSION).tar.gz)
 
 perl-install:
 	${INSTALL_DIR} ${IDIR_PERL}/usr/bin
@@ -90,6 +60,10 @@ perl-install:
 		${IDIR_PERL}/usr/lib/perl5/${PKG_VERSION}
 	${INSTALL_BIN} ${WRKINST}/usr/bin/perl ${IDIR_PERL}/usr/bin/
 	touch $(IDIR_PERL)/usr/lib/perl5/$(PKG_VERSION)/$(ADK_TARGET_ARCH)-linux/CORE/patchlevel-debian.h
+	rm -rf $(IDIR_PERL)/usr/lib/perl5/pod
+	find $(IDIR_PERL)/usr/lib/perl5/ -name 'extralibs.ld' -print0 | xargs -0 rm -f
+	find $(IDIR_PERL)/usr/lib/perl5/ -name '*.bs' -print0 | xargs -0 rm -f
+	find $(IDIR_PERL)/usr/lib/perl5/ -name '.packlist' -print0 | xargs -0 rm -f
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

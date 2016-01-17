@@ -10,7 +10,7 @@ PKG_HASH:=		e7e1cf36026f1ef96d8233e18a3fb39e1eafe9109edc639ecf25b20651cd76be
 PKG_DESCR:=		comprehensive template processing system
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/A/AB/ABW/
 
 DISTFILES:=             Template-Toolkit-${PKG_VERSION}.tar.gz

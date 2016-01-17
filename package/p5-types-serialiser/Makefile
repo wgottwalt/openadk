@@ -10,7 +10,7 @@ PKG_HASH:=		7ad3347849d8a3da6470135018d6af5fd8e58b4057cd568c3813695f2a04730d
 PKG_DESCR:=		simple data types for common serialisation formats
 PKG_SECTION:=		dev/perl
 PKG_DEPENDS:=		perl
-PKG_BUILDDEP:=		perl
+PKG_BUILDDEP:=		perl-host perl
 PKG_SITES:=		http://cpan.metacpan.org/authors/id/M/ML/MLEHMANN/
 
 DISTFILES:=             Types-Serialiser-${PKG_VERSION}.tar.gz
