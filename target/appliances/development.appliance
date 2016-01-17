@@ -1,0 +1,21 @@
+config ADK_APPLIANCE_DEVELOPMENT
+	bool "development appliance"
+	select ADK_PACKAGE_GCC
+	select ADK_PACKAGE_GXX
+	select ADK_PACKAGE_BINUTILS
+	select ADK_PACKAGE_MAKE
+	select ADK_PACKAGE_GDB
+	select ADK_PACKAGE_BISON
+	select ADK_PACKAGE_FLEX
+	select ADK_PACKAGE_PKGCONF
+	select ADK_PACKAGE_AUTOCONF
+	select ADK_PACKAGE_AUTOMAKE
+	select ADK_PACKAGE_LIBTOOL
+	select ADK_PACKAGE_GLIBC_DEV if ADK_TARGET_LIB_GLIBC
+	select ADK_PACKAGE_MUSL_DEV if ADK_TARGET_LIB_MUSL
+	select ADK_PACKAGE_UCLIBC_NG_DEV if ADK_TARGET_LIB_UCLIBC_NG
+	select ADK_PACKAGE_GIT
+	help
+	  If you want to develop software on your target, choose this
+	  appliance, so gcc, binutils and co will be selected.
+
