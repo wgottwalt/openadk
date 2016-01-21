@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mksh
-PKG_VERSION:=		52
+PKG_VERSION:=		52b
 PKG_RELEASE:=		1
-PKG_HASH:=		45c2f5cdd2c63a6a831ffae65cea0afd021eabb983537aa21ff893ee38b3768f
+PKG_HASH:=		93231332a1df0a9c8d4a0d54a519d8b485989a52f7400f0e6451366a0c74b81f
 PKG_DESCR:=		mirbsd korn shell
 PKG_SECTION:=		base/shells
 PKG_URL:=		http://www.mirbsd.org/mksh.htm
@@ -28,8 +28,6 @@ $(eval $(call HOST_template,MKSH,mksh,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,MKSH,mksh,$(PKG_VERSION)-$(PKG_RELEASE),,$(PKG_DESCR),$(PKG_SECTION)))
 $(eval $(call PKG_template,MKSH_TEST,mksh-test,$(PKG_VERSION)-$(PKG_RELEASE),,$(PKGSD_MKSH_TEST),$(PKGSC_MKSH_TEST)))
 
-TARGET_CPPFLAGS+=	-DMKSHRC_PATH=\"/etc/mkshrc\"
-
 HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
@@ -50,8 +48,8 @@ do-build:
 	    TARGET_OS=Linux $(BASH) $(WRKSRC)/Build.sh -Q -r -c lto
 
 mksh-install:
-	$(INSTALL_DIR) $(IDIR_MKSH)/etc
-	$(CP) $(WRKSRC)/dot.mkshrc $(IDIR_MKSH)/etc/mkshrc
+	$(INSTALL_DIR) $(IDIR_MKSH)/root
+	$(CP) $(WRKSRC)/dot.mkshrc $(IDIR_MKSH)/root/.mkshrc
 	$(INSTALL_DIR) $(IDIR_MKSH)/bin
 	$(INSTALL_BIN) $(WRKBUILD)/mksh $(IDIR_MKSH)/bin
 
