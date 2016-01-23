@@ -5,13 +5,13 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		jack2
 PKG_VERSION:=		1.9.10
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		9b3facf9c06dea74f388ce4e13427c3b630eedee7225b4a334c557697461d0f0
 PKG_DESCR:=		audio connection kit
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		alsa-lib libsndfile libsamplerate
-PKG_BUILDDEP:=		python2-host alsa-lib libsndfile
-PKG_BUILDDEP+=		libsamplerate
+PKG_BUILDDEP:=		python2-host alsa-lib libsndfile libsamplerate
+PKG_NEEDS:=		threads rt
 PKG_URL:=		http://jackaudio.org
 PKG_SITES:=		http://distfiles.openadk.org/
 
@@ -36,8 +36,10 @@ jack2-install:
 	$(INSTALL_DIR) $(IDIR_JACK2)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/jack* \
 		$(IDIR_JACK2)/usr/bin
-	$(INSTALL_DIR) $(IDIR_JACK2)/usr/lib
+	$(INSTALL_DIR) $(IDIR_JACK2)/usr/lib/jack
 	$(CP) $(WRKINST)/usr/lib/libjack{,server,net}.so* \
 		$(IDIR_JACK2)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/jack/*.so \
+		$(IDIR_JACK2)/usr/lib/jack
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
