@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		luajit
-PKG_VERSION:=		2.0.3
+PKG_VERSION:=		2.0.4
 PKG_RELEASE:=		1
-PKG_HASH:=		55be6cb2d101ed38acca32c5b1f99ae345904b365b642203194c585d27bebd79
+PKG_HASH:=		620fa4eb12375021bef6e4f237cbd2dd5d49e56beb414bee052c746beef1807d
 PKG_DESCR:=		just in time compiler for lua
 PKG_SECTION:=		dev/lang
 PKG_URL:=		http://luajit.org/download/
