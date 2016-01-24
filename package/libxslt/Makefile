@@ -20,7 +20,7 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		LIBXSLT XSLTPROC
-PKGSD_XSLTPROC:=	XSLT processor utility
+PKGSD_XSLTPROC:=	xslt processor utility
 PKGSC_XSLTPROC:=	sys/misc
 
 include ${ADK_TOPDIR}/mk/host.mk
