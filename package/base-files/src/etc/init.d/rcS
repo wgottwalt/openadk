@@ -4,6 +4,8 @@ export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 if [ -f /proc/sys/kernel/printk ];then
 	echo 0 > /proc/sys/kernel/printk
 fi
+ln -s /proc/self/fd/0 /dev/stdin
+ln -s /proc/self/fd/1 /dev/stdout
 ln -s /proc/self/fd/2 /dev/stderr
 : ${rcquiet=0}
 if [ $rcquiet -ne 1 ];then
