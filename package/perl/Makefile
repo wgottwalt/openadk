@@ -59,7 +59,6 @@ perl-install:
 	${CP} ${WRKINST}/usr/lib/perl5/${PKG_VERSION}/* \
 		${IDIR_PERL}/usr/lib/perl5/${PKG_VERSION}
 	${INSTALL_BIN} ${WRKINST}/usr/bin/perl ${IDIR_PERL}/usr/bin/
-	touch $(IDIR_PERL)/usr/lib/perl5/$(PKG_VERSION)/$(ADK_TARGET_ARCH)-linux/CORE/patchlevel-debian.h
 	rm -rf $(IDIR_PERL)/usr/lib/perl5/pod
 	find $(IDIR_PERL)/usr/lib/perl5/ -name 'extralibs.ld' -print0 | xargs -0 rm -f
 	find $(IDIR_PERL)/usr/lib/perl5/ -name '*.bs' -print0 | xargs -0 rm -f
