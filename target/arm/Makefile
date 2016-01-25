@@ -20,6 +20,9 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_TERRIER),y)
 QEMU_ARGS+=-M terrier
 endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_REALVIEW_EB_MPCORE),y)
+QEMU_ARGS+=-M realview-eb-mpcore -net user -net nic
+endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB),y)
 QEMU_ARGS+=-M versatilepb -net user -net nic,model=smc91c111
 endif
