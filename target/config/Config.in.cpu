@@ -293,6 +293,12 @@ config ADK_CPU_ARC_HS
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
+config ADK_CPU_ARM11MPCORE
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU_VFPV3
+
 config ADK_CPU_ARM1176JZF_S
 	bool
 	select ADK_TARGET_WITH_NPTL
@@ -1149,6 +1155,7 @@ config ADK_TARGET_GCC_CPU
 	default "cortex-a57" if ADK_CPU_CORTEX_A57
 	default "cortex-m3" if ADK_CPU_CORTEX_M3
 	default "cortex-m4" if ADK_CPU_CORTEX_M4
+	default "mpcore" if ADK_CPU_ARM11MPCORE
 	default "powerpc" if ADK_CPU_PPC
 	default "power7" if ADK_CPU_POWER7
 	default "power8" if ADK_CPU_POWER8
@@ -1320,6 +1327,7 @@ config ADK_TARGET_CPU_TYPE
 	default "cortex_m4" if ADK_TARGET_ARCH_ARM && ADK_CPU_CORTEX_M4
 	default "arm1176jzf_s" if ADK_TARGET_ARCH_ARM && ADK_CPU_ARM1176JZF_S
 	default "arm926ej_s" if ADK_TARGET_ARCH_ARM && ADK_CPU_ARM926EJ_S
+	default "mpcore" if ADK_TARGET_ARCH_ARM && ADK_CPU_ARM11MPCORE
 	default "cortex_a53" if ADK_TARGET_ARCH_AARCH64 && ADK_CPU_CORTEX_A53
 	default "cortex_a57" if ADK_TARGET_ARCH_AARCH64 && ADK_CPU_CORTEX_A57
 
