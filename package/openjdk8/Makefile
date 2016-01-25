@@ -35,10 +35,11 @@ ifeq ($(ADK_TARGET_CPU_ARCH),x86_64)
 JDKARCH:=		amd64
 endif
 
+TARGET_LDFLAGS:=	-lm
 # uclibc-ng with iconv-tiny/libiconv needs -liconv
 ifeq ($(ADK_TARGET_LIBC_ICONV),)
 ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
-TARGET_LDFLAGS:=	-liconv -lm
+TARGET_LDFLAGS+=	-liconv
 endif
 endif
 
