@@ -997,7 +997,12 @@ config ADK_CPU_SPARC_V9
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
 
-config ADK_CPU_TILE
+config ADK_CPU_TILEPRO
+	bool
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+
+config ADK_CPU_TILEGX
 	bool
 	select ADK_TARGET_WITH_NPTL
 	select ADK_TARGET_WITH_MMU
@@ -1255,6 +1260,8 @@ config ADK_TARGET_CPU_FLAGS
 	default "-m4a" if ADK_CPU_SH4A
 	default "-mcpu=powerpc64" if ADK_CPU_PPC64 && ADK_TARGET_BIG_ENDIAN
 	default "-mcpu=powerpc64le" if ADK_CPU_PPC64 && ADK_TARGET_LITTLE_ENDIAN
+	default "-mcpu=tilegx" if ADK_CPU_TILEGX
+	default "-mcpu=tilepro" if ADK_CPU_TILEPRO
 
 config ADK_TARGET_CPU_TYPE
 	string
@@ -1383,7 +1390,8 @@ config ADK_TARGET_CPU_ARCH
 	default "sh4aeb" if ADK_CPU_SH4A && ADK_TARGET_BIG_ENDIAN
 	default "sparc" if ADK_TARGET_ARCH_SPARC
 	default "sparc64" if ADK_TARGET_ARCH_SPARC64
-	default "tilegx" if ADK_TARGET_ARCH_TILE
+	default "tilegx" if ADK_CPU_TILEGX
+	default "tilepro" if ADK_CPU_TILEPRO
 	default "v850" if ADK_TARGET_ARCH_V850
 	default "x86_64" if ADK_TARGET_ARCH_X86_64
 	default "xtensa" if ADK_TARGET_ARCH_XTENSA
