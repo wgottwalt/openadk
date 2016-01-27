@@ -1,0 +1,55 @@
+diff -Nur gcc-4.2.4.orig/gcc/Makefile.in gcc-4.2.4/gcc/Makefile.in
+--- gcc-4.2.4.orig/gcc/Makefile.in	2008-04-01 23:26:19.000000000 +0200
++++ gcc-4.2.4/gcc/Makefile.in	2016-01-27 14:05:33.553925680 +0100
+@@ -3360,39 +3360,23 @@
+ #
+ # Remake the info files.
+ 
+-doc: $(BUILD_INFO) $(GENERATED_MANPAGES) gccbug
++doc: 
+ 
+-INFOFILES = doc/cpp.info doc/gcc.info doc/gccint.info \
+-            doc/gccinstall.info doc/cppinternals.info
++INFOFILES = 
+ 
+-info: $(INFOFILES) lang.info @GENINSRC@ srcinfo lang.srcinfo
++info: 
+ 
+-srcinfo: $(INFOFILES)
+-	-cp -p $^ $(srcdir)/doc
+-
+-TEXI_CPP_FILES = cpp.texi fdl.texi cppenv.texi cppopts.texi		\
+-	 gcc-common.texi gcc-vers.texi
+-
+-TEXI_GCC_FILES = gcc.texi gcc-common.texi gcc-vers.texi frontends.texi	\
+-	 standards.texi invoke.texi extend.texi md.texi objc.texi	\
+-	 gcov.texi trouble.texi bugreport.texi service.texi		\
+-	 contribute.texi compat.texi funding.texi gnu.texi gpl_v3.texi	\
+-	 fdl.texi contrib.texi cppenv.texi cppopts.texi			\
+-	 implement-c.texi
+-
+-TEXI_GCCINT_FILES = gccint.texi gcc-common.texi gcc-vers.texi		\
+-	 contribute.texi makefile.texi configterms.texi options.texi	\
+-	 portability.texi interface.texi passes.texi c-tree.texi	\
+-	 rtl.texi md.texi tm.texi hostconfig.texi fragments.texi	\
+-	 configfiles.texi collect2.texi headerdirs.texi funding.texi	\
+-	 gnu.texi gpl_v3.texi fdl.texi contrib.texi languages.texi	\
+-	 sourcebuild.texi gty.texi libgcc.texi cfg.texi tree-ssa.texi	\
+-	 loop.texi
++srcinfo: 
+ 
+-TEXI_GCCINSTALL_FILES = install.texi install-old.texi fdl.texi		\
+-	 gcc-common.texi gcc-vers.texi
++TEXI_CPP_FILES =
+ 
+-TEXI_CPPINT_FILES = cppinternals.texi gcc-common.texi gcc-vers.texi
++TEXI_GCC_FILES =
++
++TEXI_GCCINT_FILES = 
++
++TEXI_GCCINSTALL_FILES = 
++
++TEXI_CPPINT_FILES =
+ 
+ # gcc-vers.texi is generated from the version files.
+ gcc-vers.texi: $(BASEVER) $(DEVPHASE)
