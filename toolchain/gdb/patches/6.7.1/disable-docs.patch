@@ -1,0 +1,12 @@
+diff -Nur gdb-6.7.1-avr32-2.1.5.orig/bfd/Makefile.in gdb-6.7.1-avr32-2.1.5/bfd/Makefile.in
+--- gdb-6.7.1-avr32-2.1.5.orig/bfd/Makefile.in	2008-07-03 23:21:49.000000000 +0200
++++ gdb-6.7.1-avr32-2.1.5/bfd/Makefile.in	2016-01-27 09:53:43.616726680 +0100
+@@ -274,7 +274,7 @@
+ INCDIR = $(srcdir)/../include
+ CSEARCH = -I. -I$(srcdir) -I$(INCDIR)
+ MKDEP = gcc -MM
+-SUBDIRS = doc po
++SUBDIRS = po
+ bfddocdir = doc
+ bfdlib_LTLIBRARIES = libbfd.la
+ AM_CFLAGS = $(WARN_CFLAGS)

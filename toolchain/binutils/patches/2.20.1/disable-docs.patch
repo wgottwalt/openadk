@@ -1,0 +1,67 @@
+diff -Nur binutils-2.20.1.orig/Makefile.in binutils-2.20.1/Makefile.in
+--- binutils-2.20.1.orig/Makefile.in	2010-03-03 15:17:40.000000000 +0100
++++ binutils-2.20.1/Makefile.in	2016-01-26 11:42:40.890964104 +0100
+@@ -2533,15 +2533,11 @@
+ # in fact building texinfo.
+ do-info: maybe-all-texinfo
+ 
+-install-info: do-install-info dir.info
+-	s=`cd $(srcdir); ${PWD_COMMAND}`; export s; \
+-	if [ -f dir.info ] ; then \
+-	  $(INSTALL_DATA) dir.info $(DESTDIR)$(infodir)/dir.info ; \
+-	else true ; fi
++install-info:
+ 
+-install-pdf: do-install-pdf
++install-pdf:
+ 
+-install-html: do-install-html
++install-html:
+ 
+ local-clean:
+ 	-rm -f *.a TEMP errs core *.o *~ \#* TAGS *.E *.log
+diff -Nur binutils-2.20.1.orig/bfd/Makefile.in binutils-2.20.1/bfd/Makefile.in
+--- binutils-2.20.1.orig/bfd/Makefile.in	2010-03-03 14:59:15.000000000 +0100
++++ binutils-2.20.1/bfd/Makefile.in	2016-01-26 12:37:19.469828045 +0100
+@@ -320,7 +320,7 @@
+ # RELEASE=y
+ INCDIR = $(srcdir)/../include
+ CSEARCH = -I. -I$(srcdir) -I$(INCDIR)
+-SUBDIRS = doc po
++SUBDIRS = po
+ bfddocdir = doc
+ libbfd_la_LDFLAGS = $(am__append_1) -release `cat libtool-soversion` \
+ 	@SHARED_LDFLAGS@ $(am__empty)
+diff -Nur binutils-2.20.1.orig/gas/Makefile.in binutils-2.20.1/gas/Makefile.in
+--- binutils-2.20.1.orig/gas/Makefile.in	2010-03-03 15:00:19.000000000 +0100
++++ binutils-2.20.1/gas/Makefile.in	2016-01-26 13:14:22.395769839 +0100
+@@ -278,7 +278,7 @@
+ top_srcdir = @top_srcdir@
+ AUTOMAKE_OPTIONS = 1.11 dejagnu foreign no-dist
+ ACLOCAL_AMFLAGS = -I .. -I ../config -I ../bfd
+-SUBDIRS = doc po
++SUBDIRS = po
+ tooldir = $(exec_prefix)/$(target_alias)
+ 
+ # Automake 1.10+ disables lex and yacc output file regeneration if
+diff -Nur binutils-2.20.1.orig/ld/Makefile.in binutils-2.20.1/ld/Makefile.in
+--- binutils-2.20.1.orig/ld/Makefile.in	2010-03-03 15:06:21.000000000 +0100
++++ binutils-2.20.1/ld/Makefile.in	2016-01-26 12:53:13.726661618 +0100
+@@ -101,7 +101,7 @@
+ LTYACCCOMPILE = $(LIBTOOL) $(AM_LIBTOOLFLAGS) $(LIBTOOLFLAGS) \
+ 	--mode=compile $(YACC) $(YFLAGS) $(AM_YFLAGS)
+ SOURCES = $(ld_new_SOURCES) $(EXTRA_ld_new_SOURCES)
+-INFO_DEPS = ld.info
++INFO_DEPS = 
+ am__TEXINFO_TEX_DIR = $(srcdir)/$(top_srcdir)/../texinfo
+ DVIS = ld.dvi
+ PDFS = ld.pdf
+@@ -387,7 +387,7 @@
+ info_TEXINFOS = ld.texinfo
+ ld_TEXINFOS = configdoc.texi
+ noinst_TEXINFOS = ldint.texinfo
+-man_MANS = ld.1
++man_MANS = 
+ AM_MAKEINFOFLAGS = -I $(srcdir) -I $(BFDDIR)/doc -I ../bfd/doc \
+ 		   -I $(top_srcdir)/../libiberty
+ 
