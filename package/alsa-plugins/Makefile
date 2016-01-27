@@ -20,6 +20,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ALSA_PLUGINS,alsa-plugins,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
+CONFIGURE_ARGS+=	--disable-jack
+
 alsa-plugins-install:
 	$(INSTALL_DIR) $(IDIR_ALSA_PLUGINS)/usr/lib/alsa-lib
 	$(CP) $(WRKINST)/usr/lib/alsa-lib/*.so \
