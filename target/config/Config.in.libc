@@ -8,7 +8,6 @@ config ADK_TARGET_LIB_UCLIBC_NG
 	bool "uClibc-ng embedded C library"
 	depends on \
 		   !ADK_TARGET_ARCH_AARCH64 && \
-		   !ADK_TARGET_ARCH_NIOS2 && \
 		   !ADK_TARGET_ARCH_S390 && \
 		   !ADK_TARGET_ARCH_SPARC64 && \
 		   !ADK_TARGET_ARCH_PPC64 && \
