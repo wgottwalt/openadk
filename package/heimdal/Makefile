@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		heimdal
 PKG_VERSION:=		1.5.3
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		aac27bedb33c341b6aed202af07ccc816146a893148721f8123abbbf93bbfea5
 PKG_DESCR:=		kerberos server
 PKG_SECTION:=		app/crypto
@@ -29,6 +29,7 @@ HOST_CONFIGURE_ARGS+=	--disable-pk-init \
 			--disable-ndbm-db \
 			--without-berkeley-db \
 			--disable-sqlite-cache \
+			--disable-heimdal-documentation \
 			--disable-otp
 
 hostpost-install:
