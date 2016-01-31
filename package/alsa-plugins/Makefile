@@ -16,11 +16,20 @@ PKG_SITES:=		ftp://ftp.alsa-project.org/pub/plugins/
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
+PKG_FLAVOURS_ALSA_PLUGINS:=	WITH_JACK
+PKGFD_WITH_JACK:=	enable jack support
+PKGFS_WITH_JACK:=	jack2
+PKGFB_WITH_JACK:=	jack2
+
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ALSA_PLUGINS,alsa-plugins,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
+ifneq (${ADK_PACKAGE_ALSA_PLUGINS_WITH_JACK},)
+CONFIGURE_ARGS+=	--enable-jack
+else
 CONFIGURE_ARGS+=	--disable-jack
+endif
 
 alsa-plugins-install:
 	$(INSTALL_DIR) $(IDIR_ALSA_PLUGINS)/usr/lib/alsa-lib
