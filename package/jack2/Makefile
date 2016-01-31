@@ -41,5 +41,11 @@ jack2-install:
 		$(IDIR_JACK2)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/jack/*.so \
 		$(IDIR_JACK2)/usr/lib/jack
+	$(CP) ./files/jack.pc.in $(WRKINST)/usr/lib/pkgconfig/jack.pc
+	$(SED) "s#@INCLUDEDIR@#$(STAGING_TARGET_DIR)/usr/include#" \
+		-e "s#@LIBDIR@#$(STAGING_TARGET_DIR)/usr/lib#" \
+		-e "s#@PREFIX@#$(STAGING_TARGET_DIR)/usr#" \
+		$(WRKINST)/usr/lib/pkgconfig/jack.pc
+
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
