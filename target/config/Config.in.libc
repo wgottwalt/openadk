@@ -71,6 +71,10 @@ endchoice
 choice
 prompt "C library version"
 
+config ADK_TARGET_LIB_UCLIBC_NG_1_0_12
+	bool "1.0.12"
+	depends on ADK_TARGET_LIB_UCLIBC_NG
+
 config ADK_TARGET_LIB_UCLIBC_NG_1_0_11
 	bool "1.0.11"
 	depends on ADK_TARGET_LIB_UCLIBC_NG
@@ -78,11 +82,6 @@ config ADK_TARGET_LIB_UCLIBC_NG_1_0_11
 config ADK_TARGET_LIB_UCLIBC_NG_1_0_10
 	bool "1.0.10"
 	depends on ADK_TARGET_LIB_UCLIBC_NG
-
-config ADK_TARGET_LIB_UCLIBC_NG_1_0_9
-	bool "1.0.9"
-	depends on ADK_TARGET_LIB_UCLIBC_NG
-	depends on !ADK_TARGET_ARCH_BFIN
 
 config ADK_TARGET_LIB_UCLIBC_NG_GIT
 	bool "git"
@@ -163,9 +162,9 @@ config ADK_TARGET_LIBC
 
 config ADK_LIBC_VERSION
 	string
+	default "1.0.12" if ADK_TARGET_LIB_UCLIBC_NG_1_0_12
 	default "1.0.11" if ADK_TARGET_LIB_UCLIBC_NG_1_0_11
 	default "1.0.10" if ADK_TARGET_LIB_UCLIBC_NG_1_0_10
-	default "1.0.9" if ADK_TARGET_LIB_UCLIBC_NG_1_0_9
 	default "1.1.12" if ADK_TARGET_LIB_MUSL_1_1_12
 	default "1.1.11" if ADK_TARGET_LIB_MUSL_1_1_11
 	default "1.1.10" if ADK_TARGET_LIB_MUSL_1_1_10
@@ -180,9 +179,9 @@ config ADK_LIBC_VERSION
 
 config ADK_TARGET_LIB_UCLIBC_NG_1_0
 	bool
+	default y if ADK_TARGET_LIB_UCLIBC_NG_1_0_12
 	default y if ADK_TARGET_LIB_UCLIBC_NG_1_0_11
 	default y if ADK_TARGET_LIB_UCLIBC_NG_1_0_10
-	default y if ADK_TARGET_LIB_UCLIBC_NG_1_0_9
 
 config ADK_TARGET_SUFFIX
 	string
