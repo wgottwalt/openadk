@@ -15,6 +15,7 @@ $(WRKBUILD)/.configured:
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_HOST_DIR)/usr \
 		--disable-nls \
+		--disable-compat \
 		--disable-shared \
 		--enable-static \
 	);
