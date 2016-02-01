@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		wget
-PKG_VERSION:=		1.16.3
+PKG_VERSION:=		1.17
 PKG_RELEASE:=		1
-PKG_HASH:=		9f1c6d09d7148c1c2d9fd0ea655dcf4dcc407deb2db32d4126251ca0245cb670
+PKG_HASH:=		3e04ad027c5b6ebd67c616eec13e66fbedb3d4d8cbe19cc29dadde44b92bda55
 PKG_DESCR:=		retrieving files using http(s) and ftp
 PKG_SECTION:=		net/http
 HOST_BUILDDEP:=		libressl-host
