@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		4.3.3
+PKG_VERSION:=		4.3.4
 PKG_RELEASE:=		1
-PKG_HASH:=		e62d21313acbb29e24b0b80aaf2b63fdd1ccce4cfb741f333deca95a1a3a70df
+PKG_HASH:=		5d0eb52e842832af922f7d57716eacff23192906ec3bdf6727e18ca24f1419d9
 PKG_DESCR:=		file and print server
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		gettext-tiny util-linux popt python2 gnutls
-PKG_BUILDDEP+=		heimdal-host python2-host
-PKG_DEPENDS:=		libuuid libpopt libgnutls
+PKG_BUILDDEP+=		heimdal-host python2-host libtirpc
+PKG_DEPENDS:=		libuuid libpopt libgnutls libtirpc
 PKG_NEEDS:=		threads rt
 PKG_URL:=		http://www.samba.org/
 PKG_SITES:=		http://samba.org/samba/ftp/stable/
@@ -22,6 +22,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SAMBA,samba,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
+XAKE_ENV+=		V=1
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--enable-fhs \
 			--prefix=/usr \
