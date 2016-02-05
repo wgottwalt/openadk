@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		alsa-plugins
 PKG_VERSION:=		1.0.28
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		426f8af1a07ee9d8c06449524d1f0bd59a06e0331a51aa3d59d343a7c6d03120
 PKG_DESCR:=		sound library plugins
 PKG_SECTION:=		libs/audio
