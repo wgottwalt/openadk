@@ -56,6 +56,9 @@ ifeq ($(ADK_TARGET_SIM),y)
 ifeq ($(ADK_TARGET_ARCH_BFIN),y)
 	$(INSTALL_BIN) $(GDB_BUILD_DIR)/sim/bfin/run $(TARGET_CROSS)run
 endif
+ifeq ($(ADK_TARGET_ARCH_FRV),y)
+	$(INSTALL_BIN) $(WRKBUILD)/sim/frv/run $(TARGET_CROSS)run
+endif
 ifeq ($(ADK_TARGET_ARCH_H8300),y)
 	$(INSTALL_BIN) $(GDB_BUILD_DIR)/sim/h8300/run $(TARGET_CROSS)run
 endif

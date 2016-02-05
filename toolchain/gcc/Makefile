@@ -174,6 +174,10 @@ ifeq ($(ADK_TARGET_ARCH_PPC),y)
 GCC_CONFOPTS+=		--with-long-double-64 --enable-secureplt
 endif
 
+ifeq ($(ADK_TARGET_ARCH_FRV),y)
+GCC_CONFOPTS+=		--enable-sjlj-exceptions
+endif
+
 ifneq ($(ADK_TARGET_MIPS_ABI),)
 GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_MIPS_ABI}
 endif
