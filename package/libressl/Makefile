@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libressl
-PKG_VERSION:=		2.2.5
+PKG_VERSION:=		2.2.6
 PKG_RELEASE:=		1
-PKG_HASH:=		e3caded0469d8dc64f4ca2fe8e499ada4dd014e84d1c5a71818d39e54e6c914b
+PKG_HASH:=		1ee19994cffd047d40f63ba149115dba18a681b0cc923beec301bf424b58d64f
 PKG_DESCR:=		ssl/tls library
 PKG_SECTION:=		libs/crypto
 PKG_URL:=		http://www.libressl.org
