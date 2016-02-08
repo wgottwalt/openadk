@@ -61,12 +61,15 @@ endif
 
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 GCC_FINAL_CONFOPTS:=	--enable-tls --enable-threads --enable-libatomic
+GCC_TLS_CONFOPTS:=	--enable-tls
 endif
 ifeq ($(ADK_TARGET_WITH_LT),y)
 GCC_FINAL_CONFOPTS:=	--disable-tls --enable-threads --disable-libatomic
+GCC_TLS_CONFOPTS:=	--disable-tls
 endif
 ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS)$(ADK_TARGET_WITHOUT_THREADS),y)
 GCC_FINAL_CONFOPTS:=	--disable-tls --disable-threads --disable-libatomic
+GCC_TLS_CONFOPTS:=	--disable-tls
 endif
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_DSBT),y)
@@ -235,9 +238,9 @@ endif
 		CXXFLAGS="-O0 -g0 -fomit-frame-pointer" \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
+			${GCC_TLS_CONFOPTS} \
 			--enable-languages=c \
 			--with-newlib \
-			--enable-tls \
 			--disable-shared \
 			--disable-threads \
 			--disable-multilib \
