@@ -36,16 +36,12 @@ MASTER_SITE_GNU?=	\
   	ftp://ftp.sunet.se/pub/gnu/ \
 
 MASTER_SITE_SOURCEFORGE?=	\
+	http://netcologne.dl.sourceforge.net/sourceforge/ \
 	http://skylink.dl.sourceforge.net/sourceforge/ \
-	http://garr.dl.sourceforge.net/sourceforge/ \
 	http://heanet.dl.sourceforge.net/sourceforge/ \
 	http://jaist.dl.sourceforge.net/sourceforge/ \
 	http://nchc.dl.sourceforge.net/sourceforge/ \
-	http://switch.dl.sourceforge.net/sourceforge/ \
 	http://kent.dl.sourceforge.net/sourceforge/ \
-	http://internap.dl.sourceforge.net/sourceforge/ \
-	http://mesh.dl.sourceforge.net/sourceforge/ \
-	http://ovh.dl.sourceforge.net/sourceforge/ \
 	http://surfnet.dl.sourceforge.net/sourceforge/ \
 	http://ufpr.dl.sourceforge.net/sourceforge/ \
 	http://easynews.dl.sourceforge.net/sourceforge/ \
