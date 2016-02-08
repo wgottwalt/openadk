@@ -518,7 +518,7 @@ distclean cleandir:
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_TARGET_DIR_PFX)
 	@rm -rf $(STAGING_HOST_DIR_PFX) $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
 	@rm -rf package/pkglist.d package/pkgconfigs.d
-	@rm -f .config* .defconfig .tmpconfig.h all.config
+	@rm -f .config* .defconfig .tmpconfig.h all.config make.log
 	@rm -f .menu .rebuild.* package/Depends.mk .ADK_HAVE_DOT_CONFIG prereq.mk
 	@rm -f target/*/Config.in.arch*
 	@rm -f target/*/Config.in.system*
