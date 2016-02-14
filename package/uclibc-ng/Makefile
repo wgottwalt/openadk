@@ -10,12 +10,7 @@ PKG_NAME:=		uClibc-ng
 PKG_DESCR:=		embedded c library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
-
-ifeq ($(ADK_LIBC_VERSION),git)
-PKG_VER:=		1.0.0-git
-else
 PKG_VER:=		$(PKG_VERSION)
-endif
 
 PKG_SUBPKGS:=		UCLIBC_NG UCLIBC_NG_DEV UCLIBC_NG_TEST
 PKGSD_UCLIBC_NG_DEV:=	development files for uclibc-ng
