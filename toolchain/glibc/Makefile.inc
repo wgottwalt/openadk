@@ -31,4 +31,9 @@ PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
 PKG_RELEASE:=		1
 PKG_HASH:=		2d3997f588401ea095a0b27227b1d50cdfdd416236f6567b564549d3b46ea2a2
 endif
+ifeq ($(ADK_TARGET_LIB_GLIBC_OR1K),y)
+PKG_VERSION:=		2.19.90
+PKG_SITES:=		https://github.com/bluecmd/or1k-glibc.git
+PKG_RELEASE:=		1
+endif
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
