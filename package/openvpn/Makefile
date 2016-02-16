@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
 PKG_VERSION:=		2.3.10
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		c54dbf91d47b9533fac3b94d2b5719bdbe0d081fe8245184f91ef8a871d22003
 PKG_DESCR:=		vpn solution using ssl/tls
 PKG_KDEPENDS:=		tun
@@ -33,6 +33,8 @@ PKGFD_WITH_SMALL:=	enable extra small binary
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPENVPN,openvpn,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ENV+=		ac_cv_lib_nsl_inet_ntoa=no
 
 ifneq ($(ADK_PACKAGE_OPENVPN_WITH_LZO),)
 CONFIGURE_ARGS+=	--enable-lzo
