@@ -9,10 +9,12 @@ include Makefile.inc
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 
 # disable LTO
-TARGET_CFLAGS:=$(filter-out -flto,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=	$(filter-out -flto,$(TARGET_CFLAGS))
 # handled by uClibc-ng makefiles
-TARGET_CFLAGS:=$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
+TARGET_CFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
 TARGET_LDFLAGS:=$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
+# don't use fast-math for C library
+TARGET_CFLAGS:=	$(filter-out -ffast-math,$(TARGET_CFLAGS))
 
 ifeq ($(ADK_TARGET_HARD_FLOAT),y)
 ifeq ($(ADK_TARGET_ARCH_ARM),y)

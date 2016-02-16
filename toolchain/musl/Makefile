@@ -12,6 +12,8 @@ endif
 # not yet possible
 TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
 TARGET_LDFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
+# don't use fast-math for C library
+TARGET_CFLAGS:=         $(filter-out -ffast-math,$(TARGET_CFLAGS))
 
 $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \
