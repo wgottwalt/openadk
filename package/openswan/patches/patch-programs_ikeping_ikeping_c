@@ -1,6 +1,6 @@
---- openswan-2.6.38.orig/programs/ikeping/ikeping.c	2012-03-23 22:33:43.000000000 +0100
-+++ openswan-2.6.38/programs/ikeping/ikeping.c	2012-07-25 18:17:21.000000000 +0200
-@@ -318,7 +318,7 @@ main(int argc, char **argv)
+--- openswan-2.6.46.orig/programs/ikeping/ikeping.c	2016-01-22 16:50:30.000000000 +0100
++++ openswan-2.6.46/programs/ikeping/ikeping.c	2016-02-15 20:55:32.000000000 +0100
+@@ -321,7 +321,7 @@ main(int argc, char **argv)
    verbose=0;
    natt=0;
    listen_only=0;
