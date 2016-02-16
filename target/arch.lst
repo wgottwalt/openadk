@@ -16,6 +16,7 @@ metag
 microblaze
 mips
 mips64
+nds32
 nios2
 or1k
 ppc

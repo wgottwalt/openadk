@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_TOOLCHAIN_NDS32
+	bool "Toolchain only"
+	select ADK_CPU_NDS32
+	select ADK_TARGET_TOOLCHAIN
+	select ADK_TARGET_PACKAGE_TXZ
+	help
+	  NDS32 toolchain.
+
