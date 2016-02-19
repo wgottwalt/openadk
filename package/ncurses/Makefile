@@ -36,7 +36,7 @@ CONFIGURE_ENV+=		ac_cv_linux_vers=2 \
 			PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig
 CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
-			--with-build-cc=${HOST_CC} \
+			--with-build-cc="${HOST_CC}" \
 			--without-progs \
 			--disable-termcap \
 			--enable-symlinks \
@@ -64,7 +64,7 @@ INSTALL_TARGET:=	install.libs install.data
 HOST_ALL_TARGET:=	progs
 HOST_INSTALL_TARGET:=	install.includes install.progs
 HOST_CONFIGURE_ARGS+=	--without-shared \
-			--with-build-cc=${HOST_CC} \
+			--with-build-cc="${HOST_CC}" \
 			--with-progs \
 			--with-ticlib \
 			--disable-tic-depends \
