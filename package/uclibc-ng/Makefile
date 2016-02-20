@@ -10,7 +10,6 @@ PKG_NAME:=		uClibc-ng
 PKG_DESCR:=		embedded c library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
-PKG_VER:=		$(PKG_VERSION)
 
 PKG_SUBPKGS:=		UCLIBC_NG UCLIBC_NG_DEV UCLIBC_NG_TEST
 PKGSD_UCLIBC_NG_DEV:=	development files for uclibc-ng
@@ -37,14 +36,14 @@ do-install:
 	    cut -f 2 > $(IDIR_UCLIBC_NG)/etc/TZ
 ifneq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),y)
 	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-$(PKG_VER).so \
+	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-*.so \
 		$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-$(PKG_VER).so \
+	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-*.so \
 		$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
 	-for file in libcrypt libdl libm libresolv libutil libuargp; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VER).so \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-*.so \
 			$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
 	done
 endif
@@ -55,7 +54,7 @@ uclibc-ng-dev-install:
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	for file in libcrypt libdl libm libresolv libutil libuargp; do \
-		cd $(IDIR_UCLIBC_NG_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VER).so $$file.so; \
+		cd $(IDIR_UCLIBC_NG_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	${KERNEL_MAKE_ENV} \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)/linux-$(KERNEL_FILE_VER) \
