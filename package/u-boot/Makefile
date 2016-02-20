@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
-PKG_VERSION:=		2015.10
+PKG_VERSION:=		2016.01
 PKG_RELEASE:=		1
-PKG_HASH:=		bdc68d5f9455ad933b059c735d983f2c8b6b552dafb062e5ff1444f623021955
+PKG_HASH:=		e5792fba9399d9804aa2ef667f14ff771e2cdece72367d340250265bf095a5d5
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 HOST_BUILDDEP:=		libressl-host device-tree-compiler-host
@@ -16,7 +16,7 @@ PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 atmel-ngw100 banana-pro
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 atmel-ngw100 banana-pro solidrun-imx6
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -25,6 +25,9 @@ $(eval $(call HOST_template,U_BOOT,u-boot,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,U_BOOT,u-boot,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 UBOOT:=			u-boot.bin
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
+CONFIG:=		mx6cuboxi_defconfig
+endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIG:=		rpi_defconfig
 endif
