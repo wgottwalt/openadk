@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		avahi
-PKG_VERSION:=		0.6.31
-PKG_RELEASE:=		4
-PKG_HASH:=		8372719b24e2dd75de6f59bb1315e600db4fd092805bd1201ed0cb651a2dab48
+PKG_VERSION:=		0.6.32
+PKG_RELEASE:=		1
+PKG_HASH:=		d54991185d514a0aba54ebeb408d7575b60f5818a772e28fa0e18b98bc1db454
 PKG_DESCR:=		multicast dns daemon and dns-sd server
 PKG_SECTION:=		net/dns
 PKG_BUILDDEP:=		libdaemon expat gdbm glib gettext-tiny
 PKG_NEEDS:=		c++
 PKG_URL:=		http://avahi.org/
-PKG_SITES:=		http://avahi.org/download/
+PKG_SITES:=		https://github.com/lathiat/avahi/releases/download/v$(PKG_VERSION)/
 PKG_LIBNAME:=		libavahi
 PKG_OPTS:=		dev
 
