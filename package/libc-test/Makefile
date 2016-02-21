@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libc-test
-PKG_VERSION:=		4a6c166000502bf741e8f878746dadfa3135a4df
+PKG_VERSION:=		c36565301d8fd07a91234842ae09379fe99e112a
 PKG_RELEASE:=		1
 PKG_DESCR:=		libc test suite
 PKG_SECTION:=		base/tests
