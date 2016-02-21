@@ -4,10 +4,10 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		privoxy
-PKG_VERSION:=		3.0.19
+PKG_VERSION:=		3.0.24
 PKG_RELEASE:=		1
 PKG_VARIANT:=		stable
-PKG_HASH:=		816e627b31caa3d9e71d0a8b83ac9ea7dcbeaaafef3c9a9c792696aa56255232
+PKG_HASH:=		a381f6dc78f08de0d4a2342d47a5949a6608073ada34b933137184f3ca9fb012
 PKG_DESCR:=		web proxy with advanced filtering capabilities
 PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libpcre
