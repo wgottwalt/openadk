@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xterm
-PKG_VERSION:=		320
+PKG_VERSION:=		322
 PKG_RELEASE:=		1
-PKG_HASH:=		a60dbb574334c081425fa30f011cd9f571e3be7a91e2a84e252461798bce24a7
+PKG_HASH:=		9adb41b53f76a3fccaa65d47a87d336094a523985d1d6a6b8cc468375ed109d6
 PKG_DESCR:=		terminal emulator
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		libxaw libxt libncurses libxft fontconfig libuuid
