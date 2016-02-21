@@ -1,6 +1,6 @@
---- yajl-2.0.1.orig/CMakeLists.txt	2011-04-28 04:48:41.000000000 +0200
-+++ yajl-2.0.1/CMakeLists.txt	2014-01-11 13:05:10.000000000 +0100
-@@ -64,16 +64,5 @@ ENDIF (WIN32) 
+--- lloyd-yajl-66cb08c/.orig/CMakeLists.txt	2014-03-19 05:58:29.000000000 +0100
++++ lloyd-yajl-66cb08c//CMakeLists.txt	2016-02-21 11:46:05.000000000 +0100
+@@ -64,18 +64,4 @@ ENDIF (WIN32)
  
  
  ADD_SUBDIRECTORY(src)
@@ -9,11 +9,13 @@
 -ADD_SUBDIRECTORY(verify)
 -ADD_SUBDIRECTORY(example)
 -ADD_SUBDIRECTORY(perf)
- 
--INCLUDE(YAJLDoc.cmake)
 -
+-INCLUDE(YAJLDoc.cmake)
+ 
 -# a test target
 -ADD_CUSTOM_TARGET(test
--                  ./run_tests.sh ${CMAKE_CURRENT_BINARY_DIR}/test/yajl_test
--                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/test)
- 
+-                  ./run_tests.sh ${CMAKE_CURRENT_BINARY_DIR}/test/parsing/yajl_test
+-                  WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/test/parsing)
+-
+-ADD_CUSTOM_TARGET(test-api ${CMAKE_CURRENT_SOURCE_DIR}/test/api/run_tests.sh
+-                  WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/test/api)
