@@ -12,7 +12,7 @@ PKG_SECTION:=		app/debug
 PKG_URL:=		http://valgrind.org/
 PKG_SITES:=		http://valgrind.org/downloads/
 
-PKG_ARCH_DEPENDS:=	ppc ppc64 mips mipsel mips64 mips64el x86 x86_64
+PKG_ARCH_DEPENDS:=	aarch64 arm ppc ppc64 mips mipsel mips64 mips64el tile s390 x86 x86_64
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
