@@ -4,10 +4,11 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		device-tree-compiler
-PKG_VERSION:=		8b927bf3b80de4b0a49e6b6e4a56293e9baec364
+PKG_VERSION:=		b06e55c88b9b922ff7e25cd62a4709b65524f0fc
 PKG_RELEASE:=		1
 PKG_DESCR:=		compiler for dts files
 PKG_SECTION:=		sys/misc
+HOST_BUILDDEP:=		m4-host flex-host
 PKG_URL:=		http://www.devicetree.org/Device_Tree_Compiler
 PKG_SITES:=		git://git.kernel.org/pub/scm/utils/dtc/dtc.git
 
@@ -22,7 +23,7 @@ HOST_STYLE:=		manual
 
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
-		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET})
+		${HOST_MAKE_FLAGS} dtc)
 
 device-tree-compiler-hostinstall:
 	$(INSTALL_DIR) $(STAGING_HOST_DIR)/usr/bin
