@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libbluray
-PKG_VERSION:=		0.8.1
+PKG_VERSION:=		0.9.2
 PKG_RELEASE:=		1
-PKG_HASH:=		cdbec680c5bbc2251de6ccd109cf5f798ea51db6fcb938df39283be1799efb8f
+PKG_HASH:=		efc994f42d2bce6af2ce69d05ba89dbbd88bcec7aca065de094fb3a7880ce7ea
 PKG_DESCR:=		bluray library
 PKG_SECTION:=		libs/video
-PKG_DEPENDS:=		libxml2 libfreetype
-PKG_BUILDDEP:=		libxml2 freetype
+PKG_DEPENDS:=		libxml2 libfreetype fontconfig
+PKG_BUILDDEP:=		libxml2 freetype fontconfig
 PKG_URL:=		http://www.videolan.org/developers/libbluray.html
 PKG_SITES:=		ftp://ftp.videolan.org/pub/videolan/libbluray/${PKG_VERSION}/
 PKG_OPTS:=		dev
