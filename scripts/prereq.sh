@@ -114,12 +114,17 @@ for compilerbin in $compilerbins; do
   if which $compilerbin >/dev/null; then
     printf "found\n"
     CC=$compilerbin
+    CCFOUND=1
     break
   else
     printf "not found\n"
     continue
   fi
 done
+if [ -z "$CCFOUND" ]; then
+  printf "ERROR: no C compiler found. Fatal error.\n"
+  exit 1
+fi
 
 # check for c++ compiler
 compilerbins="clang++ c++ g++"
@@ -128,12 +133,17 @@ for compilerbin in $compilerbins; do
   if which $compilerbin >/dev/null; then
     printf "found\n"
     CXX=$compilerbin
+    CXXFOUND=1
     break
   else
     printf "not found\n"
     continue
   fi
 done
+if [ -z "$CXXFOUND" ]; then
+  printf "ERROR: no C++ compiler found. Fatal error.\n"
+  exit 1
+fi
 
 gnu_host_name=$(${CC} -dumpmachine)
 
