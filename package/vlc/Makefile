@@ -16,13 +16,16 @@ PKG_URL:=		http://www.videolan.org/vlc/
 PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/$(PKG_VERSION)/
 
 PKG_FLAVOURS_VLC:=	WITH_BLURAY WITH_MAD WITH_OGG WITH_OPUS WITH_SPEEX WITH_THEORA
-PKG_FLAVOURS_VLC+=	WITH_VPX
+PKG_FLAVOURS_VLC+=	WITH_VPX WITH_MATROSKA
 PKGFD_WITH_BLURAY:=	enable bluray support
 PKGFB_WITH_BLURAY:=	libbluray
 PKGFS_WITH_BLURAY:=	libbluray
 PKGFD_WITH_MAD:=	enable mp3 support
 PKGFB_WITH_MAD:=	libmad
 PKGFS_WITH_MAD:=	libmad
+PKGFD_WITH_MATROSKA:=	enable matroska support
+PKGFB_WITH_MATROSKA:=	libmatroska
+PKGFS_WITH_MATROSKA:=	libmatroska
 PKGFD_WITH_OGG:=	enable ogg support
 PKGFB_WITH_OGG:=	libogg
 PKGFS_WITH_OGG:=	libogg
@@ -76,6 +79,11 @@ ifneq ($(ADK_PACKAGE_VLC_WITH_MAD),)
 CONFIGURE_ARGS+=	--enable-mad
 else
 CONFIGURE_ARGS+=	--disable-mad
+endif
+ifneq ($(ADK_PACKAGE_VLC_WITH_MATROSKA),)
+CONFIGURE_ARGS+=	--enable-mkv
+else
+CONFIGURE_ARGS+=	--disable-mkv
 endif
 ifneq ($(ADK_PACKAGE_VLC_WITH_OGG),)
 CONFIGURE_ARGS+=	--enable-ogg
