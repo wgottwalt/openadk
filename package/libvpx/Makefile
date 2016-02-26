@@ -23,8 +23,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBVPX,libvpx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		minimal
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM),y)
-CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
+CONFIGURE_ARGS+=	--target=armv7-linux-gcc
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 CONFIGURE_ARGS+=	--target=armv7-linux-gcc
