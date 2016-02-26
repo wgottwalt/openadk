@@ -283,6 +283,15 @@ if ! which perl >/dev/null 2>&1; then
 fi
 printf "found\n"
 
+printf " --->  checking if gzip is installed.. "
+if ! which gzip >/dev/null 2>&1; then
+  echo You must install gzip to continue.
+  echo
+  out=1
+  printf "not found\n"
+fi
+printf "found\n"
+
 # creating prereq.mk
 echo "ADK_TOPDIR:=$(readlink -nf . 2>/dev/null || pwd -P)" > $topdir/prereq.mk
 echo "BASH:=$(which bash)" >> $topdir/prereq.mk
@@ -326,7 +335,7 @@ echo "PATH:=${topdir}/scripts:/usr/sbin:$PATH" >> $topdir/prereq.mk
 echo "GIT:=$(which git 2>/dev/null)" >> $topdir/prereq.mk
 echo "export ADK_TOPDIR GIT SHA256 BASH SHELL" >> $topdir/prereq.mk
 
-# check if compiler works
+# create temporary Makefile
 cat >Makefile.tmp <<'EOF'
 include ${ADK_TOPDIR}/prereq.mk
 all: test
@@ -334,6 +343,8 @@ all: test
 test: test.c
 	@${HOST_CC} ${HOST_CFLAGS} -o $@ $^ ${LDADD}
 EOF
+
+# check if compiler works
 cat >test.c <<-'EOF'
 	#include <stdio.h>
 	int
@@ -353,7 +364,47 @@ if [ $X != YES ]; then
   echo
   out=1
 fi
-rm test.c test Makefile.tmp 2>/dev/null
+rm test.c test 2>/dev/null
+
+# check for zlib
+cat >test.c <<-'EOF'
+	#include <stdio.h>
+	#include <zlib.h>
+
+	#ifndef STDIN_FILENO
+	#define STDIN_FILENO 0
+	#endif
+
+	int
+	main()
+	{
+		gzFile zstdin;
+		char buf[1024];
+		int i;
+
+		zstdin = gzdopen(STDIN_FILENO, "rb");
+		i = gzread(zstdin, buf, sizeof (buf));
+		if ((i > 0) && (i < sizeof (buf)))
+			buf[i] = '\0';
+		buf[sizeof (buf) - 1] = '\0';
+		printf("%s\n", buf);
+		return (0);
+	}
+EOF
+
+$MAKE --no-print-directory LDADD=-lz ADK_TOPDIR=$topdir -f Makefile.tmp 2>&1
+X=$(echo YES | gzip | ./test)
+if [ $X != YES ]; then
+  echo "$X" | sed 's/^/| /'
+  echo Cannot compile a libz test programm.
+  echo You must install the zlib development package,
+  echo usually called libz-dev, and the run-time library.
+  echo
+  out=1
+fi
+
+rm test.c test 2>/dev/null
+rm Makefile.tmp 2>/dev/null
 
 # error out on any required prerequisite
 if [ $out -ne 0 ]; then
