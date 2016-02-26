@@ -658,21 +658,21 @@ else
 
   if [ -n "$NEED_MKFONTDIR" ]; then
     if ! which mkfontdir >/dev/null 2>&1; then
-      printf "You need mkfontdir to build $NEED_MKFONTDIR"
+      printf "You need mkfontdir to build $NEED_MKFONTDIR \n"
       out=1
     fi
   fi
 
   if [ -n "$NEED_XKBCOMP" ]; then
     if ! which xkbcomp >/dev/null 2>&1; then
-      printf "You need xkbcomp to build $NEED_XKBCOMP"
+      printf "You need xkbcomp to build $NEED_XKBCOMP \n"
       out=1
     fi
   fi
 
   if [ -n "$NEED_JAVA" ]; then
     if ! which java >/dev/null 2>&1; then
-      printf "You need java to build $NEED_JAVA"
+      printf "You need java to build $NEED_JAVA \n"
       out=1
     fi
   fi
@@ -687,7 +687,7 @@ cat >test.c <<-'EOF'
 	}
 EOF
     if ! $CXX -static-libstdc++ -o test test.c 2>/dev/null ; then
-      printf "You need static version of libstdc++ installed to build $NEED_STATIC_LIBSTDCXX"
+      printf "You need static version of libstdc++ installed to build $NEED_STATIC_LIBSTDCXX \n"
       out=1
       rm test test.c 2>/dev/null
     fi
