@@ -209,7 +209,6 @@ case $ostype {
 	}
 	function create_fs {
 		(( quiet )) || print "Creating filesystem on ${1}..."
-		partprobe $tgt
 		mkfs.$3 "$1"
 	}
 	function tune_fs {
@@ -497,6 +496,11 @@ else
 	print Writing MBR to target device... system PARTUUID=$partuuid
 fi
 dd if="$T/firsttrack" of="$tgt" > /dev/null 2>&1
+
+if [[ $ostype = Linux ]]; then
+  partprobe $tgt
+  sync
+fi
 
 fwdir=$(dirname "$src")
 
