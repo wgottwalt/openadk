@@ -13,7 +13,7 @@ endif
 $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		$(WRKBUILD)/configure \
-		--prefix=$(STAGING_HOST_DIR)/usr \
+		--prefix=/usr \
 		--disable-nls \
 		--disable-compat \
 		--disable-shared \
@@ -26,7 +26,7 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
-	$(MAKE) -C $(WRKBUILD) install
+	$(MAKE) instroot=$(STAGING_HOST_DIR) -C $(WRKBUILD) install
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk
