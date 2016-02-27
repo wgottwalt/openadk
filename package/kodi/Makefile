@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		15.2
+PKG_VERSION:=		16.0
 PKG_RELEASE:=		1
-PKG_HASH:=		dd8aeb942e6de5d1488e243e1346cff3f6597e21b5131a3ba72ff5cc82037110
+PKG_HASH:=		0421ea1337cdee674f8a36d995f54152b5ddc4100e53410b3aeeb3b3f7d53946
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libsquish libbluray
@@ -17,7 +17,7 @@ PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng libncurses
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate libuuid
 PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd libgtk2
 PKG_DEPENDS+=		libgpg-error libudev python2-mod-sqlite libffmpeg
-PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib libglu
+PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib libglu libdcadec
 PKG_BUILDDEP:=		boost python2 libass ffmpeg libglew rtmpdump
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis
 PKG_BUILDDEP+=		curl flac bzip2 libtiff liblzo yajl mesa
@@ -26,15 +26,15 @@ PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
 PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug libgtk2
 PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis libbluray
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
-PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish
+PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish libdcadec
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		http://mirrors.kodi.tv/releases/source/
 
 PKG_CFLINE_KODI:=	select ADK_PACKAGE_GPU_VIV_BIN_MX6Q if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 
-DISTFILES:=		$(PKG_VERSION)-Isengard.tar.gz
-WRKDIST=		${WRKDIR}/xbmc-$(PKG_VERSION)-Isengard
+DISTFILES:=		$(PKG_VERSION)-Jarvis.tar.gz
+WRKDIST=		${WRKDIR}/xbmc-$(PKG_VERSION)-Jarvis
 
 PKG_CHOICES_KODI:=	WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITH_OPENSSL:=	use openssl for crypto
