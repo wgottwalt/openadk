@@ -6,6 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		py-spidev
 PKG_VERSION:=		1c713aaaad1f611d675d9188d2d5a6401fbb8843
 PKG_RELEASE:=		1
+PKG_GIT:=		hash
 PKG_DESCR:=		module for interfacing with spi devices from user space via the spidev linux kernel driver
 PKG_SECTION:=		dev/python
 PKG_DEPENDS:=		python2

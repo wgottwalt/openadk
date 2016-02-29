@@ -5,10 +5,10 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		wiringPi
 PKG_VERSION:=		72b2af231be337d45a557ce6ca3ed1eeb6675ffd
+PKG_GIT:=		hash
 PKG_RELEASE:=		2
 PKG_DESCR:=		gpio access library for the raspberry pi
 PKG_SECTION:=		libs/misc
-PKG_HASH:=		ddc71b86f71e7e5104a89f88a68bea20122b6ea9f8c535219d180bf89502a69d
 PKG_NEEDS:=		threads
 PKG_URL:=		http://wiringpi.com/
 PKG_SITES:=		git://git.drogon.net/wiringPi

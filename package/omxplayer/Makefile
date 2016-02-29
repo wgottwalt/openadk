@@ -6,6 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		omxplayer
 PKG_VERSION:=		c5ab80828159c64a283ff69d40748923648f8a0a
 PKG_RELEASE:=		1
+PKG_GIT:=		hash
 PKG_DESCR:=		video player for raspberry pi
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		libffmpeg bcm28xx-vc-libs bcm28xx-vc-gl-libs

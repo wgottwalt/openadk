@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libx264
 PKG_VERSION:=		40bb56814e56ed342040bdbf30258aab39ee9e89
 PKG_RELEASE:=		1
-PKG_HASH:=		88f63bd104b9127ebbaa6a88931c9f02d84f0dd4b5b3994ff38852735f60ead3
+PKG_GIT:=		hash
 PKG_DESCR:=		h264 encoding library
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.videolan.org/developers/x264.html

@@ -6,6 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		stats
 PKG_VERSION:=		82bd4977b607b8714f361467e37a9d801ff911b6
 PKG_RELEASE:=		1
+PKG_GIT:=		hash
 PKG_DESCR:=		stats utility
 PKG_SECTION:=		sys/utils
 PKG_URL:=		https://github.com/rustyrussell/stats

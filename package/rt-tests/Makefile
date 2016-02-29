@@ -6,6 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		rt-tests
 PKG_VERSION:=		3fed00ff8d2c0cdbc5ba078cbd60ce3cfcee615f
 PKG_RELEASE:=		1
+PKG_GIT:=		hash
 PKG_DESCR:=		realtime test apps
 PKG_NEEDS:=		threads rt
 PKG_SECTION:=		base/tests

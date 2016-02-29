@@ -6,6 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libcrossguid
 PKG_VERSION:=		8f399e8bd4252be9952f3dfa8199924cc8487ca4
 PKG_RELEASE:=		1
+PKG_GIT:=		hash
 PKG_DESCR:=		c++ guid library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		https://github.com/graeme-hill/crossguid

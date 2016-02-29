@@ -6,6 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		aufs-util
 # branch aufs4.0
 PKG_VERSION:=		5e0c348bd8b1898beb1e043b026bcb0e0c7b0d54
+PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_DESCR:=		aufs utilities (version 3 and above)
 PKG_SECTION:=		sys/fs

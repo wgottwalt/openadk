@@ -5,6 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sysdig
 PKG_VERSION:=		d7f05fc973080f5471af596cbcc8e2b2efc9e934
+PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_DESCR:=		system troubleshooting tool
 PKG_SECTION:=		app/debug

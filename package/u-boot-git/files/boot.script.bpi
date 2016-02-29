@@ -1,5 +1,0 @@
-setenv bootargs 'console=ttyS0  root=/dev/mmcblk0p1'
-ext4load mmc 0 0x43000000 boot/kernel
-ext4load mmc 0 0x48000000 boot/sun7i-a20-bananapro.dtb
-printenv
-bootz 0x43000000 - 0x48000000

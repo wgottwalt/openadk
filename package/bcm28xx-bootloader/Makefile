@@ -4,7 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm28xx-bootloader
-PKG_VERSION:=		ba7a8fb709adab287495f4e836b1cd3e5c9db409
+PKG_VERSION:=		1.20160209
+PKG_GIT:=		tag
 PKG_RELEASE:=		1
 PKG_DESCR:=		bootloader for bcm28xx
 PKG_SECTION:=		base/boot

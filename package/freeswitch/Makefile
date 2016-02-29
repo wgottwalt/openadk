@@ -6,6 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		freeswitch
 PKG_VERSION:=		6762f14140f5bf70647c037c4ef527392796af34
 PKG_RELEASE:=		1
+PKG_GIT:=		hash
 PKG_DESCR:=		cross-platform telephony platform
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libpcre libcurl zlib libjpeg-turbo libsqlite

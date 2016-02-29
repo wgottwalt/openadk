@@ -5,11 +5,20 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		tvheadend
 PKG_VERSION:=		679b7797128b8979145dc2a0a3c54ea513a0466b
+PKG_GIT:=		hash
 PKG_RELEASE:=		3
 PKG_DESCR:=		tv streaming server
 PKG_SECTION:=		mm/video
 PKG_URL:=		https://tvheadend.org/projects/tvheadend
 PKG_SITES:=		https://github.com/tvheadend/tvheadend.git
+
+PKG_CHOICES_TVHEADEND:=	WITH_LIBRESSL WITH_OPENSSL
+PKGCD_WITH_LIBRESSL:=	use libressl for crypto
+PKGCB_WITH_LIBRESSL:=	libressl
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
+PKGCD_WITH_OPENSSL:=	use openssl for crypto
+PKGCB_WITH_OPENSSL:=	openssl
+PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 include $(ADK_TOPDIR)/mk/package.mk
 

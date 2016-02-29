@@ -6,6 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		libssh
 PKG_VERSION:=		8ec46cbd42c2af7b7e1a06e3b3087e97526b558e
 PKG_RELEASE:=		1
+PKG_GIT:=		hash
 PKG_DESCR:=		secure shell library
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		zlib

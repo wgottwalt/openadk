@@ -5,6 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		device-tree-compiler
 PKG_VERSION:=		b06e55c88b9b922ff7e25cd62a4709b65524f0fc
+PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_DESCR:=		compiler for dts files
 PKG_SECTION:=		sys/misc

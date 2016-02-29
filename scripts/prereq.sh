@@ -292,6 +292,16 @@ if ! which gzip >/dev/null 2>&1; then
 fi
 printf "found\n"
 
+printf " --->  checking if git is installed.. "
+if ! which git >/dev/null 2>&1; then
+  echo You must install git to continue.
+  echo
+  out=1
+  printf "not found\n"
+fi
+printf "found\n"
+
+
 # creating prereq.mk
 echo "ADK_TOPDIR:=$(readlink -nf . 2>/dev/null || pwd -P)" > $topdir/prereq.mk
 echo "BASH:=$(which bash)" >> $topdir/prereq.mk
@@ -333,7 +343,10 @@ echo 'LC_ALL:=C' >> $topdir/prereq.mk
 echo "_PATH:=$PATH" >> $topdir/prereq.mk
 echo "PATH:=${topdir}/scripts:/usr/sbin:$PATH" >> $topdir/prereq.mk
 echo "GIT:=$(which git 2>/dev/null)" >> $topdir/prereq.mk
-echo "export ADK_TOPDIR GIT SHA256 BASH SHELL" >> $topdir/prereq.mk
+if [ $dlverbose -eq 0 ]; then
+  echo "GITOPTS:=--quiet" >> $topdir/prereq.mk
+fi
+echo "export ADK_TOPDIR GIT GITOPTS SHA256 BASH SHELL" >> $topdir/prereq.mk
 
 # create temporary Makefile
 cat >Makefile.tmp <<'EOF'

@@ -5,6 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot-xtensa
 PKG_VERSION:=		fe85520cfb23b815207fa1a0ad840ec795eecedf
+PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot

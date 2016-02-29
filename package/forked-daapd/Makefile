@@ -6,6 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		forked-daapd
 PKG_VERSION:=		879c2ef35011b6fbb7bc8755c2b3c4f5c3cc506c
 PKG_RELEASE:=		1
+PKG_GIT:=		hash
 PKG_DESCR:=		daapd server
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libunistring zlib libconfuse sqlite libffmpeg libgcrypt

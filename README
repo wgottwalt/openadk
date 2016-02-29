@@ -12,8 +12,11 @@ Before you can start you need to install some software:
 - gzip
 - perl
 - curl or wget
+- git
+- strings
 - c library headers
 - ncurses library and header
+- zlib library and header
 
 There is a check for the required versions of these software in advance, though.
 Most of the needed software for the build process to succeed will

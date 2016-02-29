@@ -6,6 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		picocom
 PKG_VERSION:=		14288582f10e662732c32eb67ab49b64fd6206c2
 PKG_RELEASE:=		1
+PKG_GIT:=		hash
 PKG_DESCR:=		minimal dumb-terminal emulation program
 PKG_SECTION:=		sys/serial
 PKG_URL:=		https://github.com/npat-efault/picocom/

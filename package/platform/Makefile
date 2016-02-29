@@ -6,6 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		platform
 PKG_VERSION:=		aafa6e9f3b86f2258f5f75809849743b1779072b
 PKG_RELEASE:=		1
+PKG_GIT:=		hash
 PKG_DESCR:=		platform library used by libcec
 PKG_SECTION:=		libs/misc
 PKG_URL:=		https://github.com/Pulse-Eight/platform
