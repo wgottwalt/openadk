@@ -10,7 +10,7 @@ PKG_HASH:=		ed9d207fde3e8d576f3af8b0d1235b3371e315175757173689104efcaebf0d44
 PKG_DESCR:=		dts coherent acoustics decoder with support for hd extensions
 PKG_SECTION:=		libs/audio
 PKG_URL:=		https://github.com/foo86/dcadec
-PKG_SITES:=		https://github.com/foo86/dcadec/archive/v0.2.0.tar.gz
+PKG_SITES:=		https://github.com/foo86/dcadec/archive/
 PKG_OPTS:=		dev
 
 DISTFILES:=             v$(PKG_VERSION).tar.gz
