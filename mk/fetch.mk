@@ -65,29 +65,26 @@ $(1):
 	   git://*|*.git) \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
 		if [ ! -z "$${PKG_GIT}" ]; then \
-		case "$${PKG_GIT}" in \
-		  tag|branch) \
+		  case "$${PKG_GIT}" in \
+		    tag|branch) \
 			echo "Using git tag/branch: $${PKG_VERSION}"; \
 			git clone --depth 1 --branch $${PKG_VERSION} $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
 			;; \
-		  hash) \
+		    hash) \
 			echo "Using git hash: $${PKG_VERSION}"; \
 			git clone $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
 			(cd $${PKG_NAME}-$${PKG_VERSION}; git checkout $(GITOPTS) $${PKG_VERSION}); \
 			;; \
-		  head) \
-			echo "Using git head"; \
-			git clone $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
-			;; \
-		esac ;\
+		  esac ;\
+		else \
+		  echo "Using git head"; \
+		  git clone $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
+		fi; \
 		tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
 		touch $$$${filename}.nohash; \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
 		: check the size here; \
 		[[ ! -e $$$$filename ]] || exit 0; \
-		else \
-		   	echo "PKG_GIT is missing" ;\
-		fi; \
 		;; \
 	    http://*|https://*|ftp://*) \
 		for site in $${PKG_SITES} $${MASTER_SITE_BACKUP}; do \
