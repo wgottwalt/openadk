@@ -4,16 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		jack2
-PKG_VERSION:=		1.9.10
-PKG_RELEASE:=		3
-PKG_HASH:=		9b3facf9c06dea74f388ce4e13427c3b630eedee7225b4a334c557697461d0f0
+PKG_VERSION:=		7bdad4966b29f721c384bdfe6921a1e5c1d84561
+PKG_RELEASE:=		1
+PKG_GIT:=		hash
 PKG_DESCR:=		audio connection kit
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		alsa-lib libsndfile libsamplerate
 PKG_BUILDDEP:=		python2-host alsa-lib libsndfile libsamplerate
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://jackaudio.org
-PKG_SITES:=		http://distfiles.openadk.org/
+PKG_SITES:=		git://github.com/jackaudio/jack2.git
 
 include $(ADK_TOPDIR)/mk/package.mk
 
