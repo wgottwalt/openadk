@@ -151,7 +151,8 @@ CONFIGURE_ARGS+=	--disable-jack \
 			--disable-sqlite \
 			--disable-mpg123 \
 			--disable-soundcloud \
-			--enable-inotify
+			--enable-inotify \
+			--enable-pipe-output
 
 ifneq (${ADK_PACKAGE_MPD_WITH_SNDFILE},)
 CONFIGURE_ARGS+=	--enable-sndfile
