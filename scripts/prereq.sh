@@ -462,6 +462,11 @@ if ! which m4 >/dev/null 2>&1; then
   host_build_m4=1
 fi
 
+host_build_mkimage=0
+if ! which mkimage >/dev/null 2>&1; then
+  host_build_mkimage=1
+fi
+
 host_build_mksh=0
 if ! which mksh >/dev/null 2>&1; then
   host_build_mksh=1
@@ -593,6 +598,9 @@ if [ $host_build_grep -eq 1 ]; then
 fi
 if [ $host_build_m4 -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_M4" >> $topdir/target/config/Config.in.prereq
+fi
+if [ $host_build_mkimage -eq 1 ]; then
+  printf "\t%s\n" "select ADK_HOST_BUILD_U_BOOT" >> $topdir/target/config/Config.in.prereq
 fi
 if [ $host_build_mksh -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_MKSH" >> $topdir/target/config/Config.in.prereq

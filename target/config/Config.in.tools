@@ -77,10 +77,6 @@ config ADK_HOST_BUILD_U_BOOT
 	bool
 	default n
 
-config ADK_HOST_BUILD_U_BOOT_GIT
-	bool
-	default n
-
 config ADK_HOST_BUILD_U_BOOT_XTENSA
 	bool
 	default y if ADK_TARGET_ARCH_XTENSA
