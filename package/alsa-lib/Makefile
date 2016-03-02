@@ -30,7 +30,8 @@ endif
 TARGET_CPPFLAGS+=	-D_POSIX_C_SOURCE=1
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-python
-CONFIGURE_ARGS+=	--disable-python
+CONFIGURE_ARGS+=	--disable-python \
+			--without-versioned
 
 alsa-lib-install:
 	${INSTALL_DIR} ${IDIR_ALSA_LIB}/usr/lib 
