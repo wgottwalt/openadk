@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
 PKG_VERSION:=		16.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		0421ea1337cdee674f8a36d995f54152b5ddc4100e53410b3aeeb3b3f7d53946
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
@@ -27,6 +27,7 @@ PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug libgtk2
 PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis libbluray
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
 PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish libdcadec
+PKG_BUILDDEP+=		libcrossguid
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		http://mirrors.kodi.tv/releases/source/
