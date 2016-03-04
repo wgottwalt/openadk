@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		collectd
-PKG_VERSION:=		5.4.1
+PKG_VERSION:=		5.5.0
 PKG_RELEASE:=		1
-PKG_HASH:=		853680936893df00bfc2be58f61ab9181fecb1cf45fc5cddcb7d25da98855f65
+PKG_HASH:=		5f7cfad5b24ed4f8b113cfb270e0f9e5a9f7c3af10443cb507fd40174a6c9028
 PKG_DESCR:=		system statistics collection daemon
 PKG_SECTION:=		sys/misc
 PKG_BUILDDEP:=		libtool
@@ -32,6 +32,8 @@ PKGFD_WITH_UPTIME:=	enable uptime statistic plugin
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,COLLECTD,collectd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+XAKE_FLAGS:=		V=1
 
 ifneq (${ADK_PACKAGE_COLLECTD_WITH_CPU},y)
 DISABLE_CPU:=--disable-cpu
