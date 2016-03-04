@@ -1,0 +1,10 @@
+--- nginx-1.9.12.orig/auto/lib/libatomic/conf	2016-02-24 15:53:23.000000000 +0100
++++ nginx-1.9.12/auto/lib/libatomic/conf	2016-03-04 19:56:52.000000000 +0100
+@@ -15,6 +15,7 @@ else
+     ngx_feature="atomic_ops library"
+     ngx_feature_name=NGX_HAVE_LIBATOMIC
+     ngx_feature_run=yes
++    ngx_feature_run_force_result="$ngx_force_have_libatomic"
+     ngx_feature_incs="#define AO_REQUIRE_CAS
+                       #include <atomic_ops.h>"
+     ngx_feature_path=

@@ -1,0 +1,112 @@
+--- nginx-1.9.12.orig/auto/feature	2016-02-24 15:53:23.000000000 +0100
++++ nginx-1.9.12/auto/feature	2016-03-04 19:56:44.000000000 +0100
+@@ -52,50 +52,88 @@ if [ -x $NGX_AUTOTEST ]; then
+     case "$ngx_feature_run" in
+ 
+         yes)
+-            # /bin/sh is used to intercept "Killed" or "Abort trap" messages
+-            if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
+-                echo " found"
++            if test -n "$ngx_feature_run_force_result" ; then
++                echo " not tested (maybe cross-compiling)"
++                if test -n "$ngx_feature_name" ; then
++                    if test "$ngx_feature_run_force_result" = "yes" ; then
++                        have=$ngx_have_feature . auto/have
++                    fi
++                fi
+                 ngx_found=yes
++            else
+ 
+-                if test -n "$ngx_feature_name"; then
+-                    have=$ngx_have_feature . auto/have
++                # /bin/sh is used to intercept "Killed" or "Abort trap" messages
++                if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
++                    echo " found"
++                    ngx_found=yes
++
++                    if test -n "$ngx_feature_name"; then
++                        have=$ngx_have_feature . auto/have
++                    fi
++
++                else
++                    echo " found but is not working"
+                 fi
+ 
+-            else
+-                echo " found but is not working"
+             fi
+         ;;
+ 
+         value)
+-            # /bin/sh is used to intercept "Killed" or "Abort trap" messages
+-            if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
+-                echo " found"
++            if test -n "$ngx_feature_run_force_result" ; then
++                echo " not tested (maybe cross-compiling)"
++                cat << END >> $NGX_AUTO_CONFIG_H
++
++#ifndef $ngx_feature_name
++#define $ngx_feature_name  $ngx_feature_run_force_result
++#endif
++
++END
+                 ngx_found=yes
++            else
+ 
+-                cat << END >> $NGX_AUTO_CONFIG_H
++                # /bin/sh is used to intercept "Killed" or "Abort trap" messages
++                if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
++                    echo " found"
++                    ngx_found=yes
++
++                    cat << END >> $NGX_AUTO_CONFIG_H
+ 
+ #ifndef $ngx_feature_name
+ #define $ngx_feature_name  `$NGX_AUTOTEST`
+ #endif
+ 
+ END
+-            else
+-                echo " found but is not working"
++                else
++                    echo " found but is not working"
++                fi
++
+             fi
+         ;;
+ 
+         bug)
+-            # /bin/sh is used to intercept "Killed" or "Abort trap" messages
+-            if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
+-                echo " not found"
+-
+-            else
+-                echo " found"
++            if test -n "$ngx_feature_run_force_result" ; then
++                echo " not tested (maybe cross-compiling)"
++                if test -n "$ngx_feature_name"; then
++                    if test "$ngx_feature_run_force_result" = "yes" ; then
++                        have=$ngx_have_feature . auto/have
++                    fi
++                fi
+                 ngx_found=yes
++            else
+ 
+-                if test -n "$ngx_feature_name"; then
+-                    have=$ngx_have_feature . auto/have
++                # /bin/sh is used to intercept "Killed" or "Abort trap" messages
++                if /bin/sh -c $NGX_AUTOTEST >> $NGX_AUTOCONF_ERR 2>&1; then
++                    echo " not found"
++
++                else
++                    echo " found"
++                    ngx_found=yes
++
++                    if test -n "$ngx_feature_name"; then
++                        have=$ngx_have_feature . auto/have
++                    fi
+                 fi
++
+             fi
+         ;;
+ 

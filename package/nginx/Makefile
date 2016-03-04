@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		nginx
-PKG_VERSION:=		1.8.0
+PKG_VERSION:=		1.9.12
 PKG_RELEASE:=		1
-PKG_HASH:=		23cca1239990c818d8f6da118320c4979aadf5386deda691b1b7c2c96b9df3d5
+PKG_HASH:=		1af2eb956910ed4b11aaf525a81bc37e135907e7127948f9179f5410337da042
 PKG_DESCR:=		powerful http reverse proxy and webserver
 PKG_SECTION:=		net/http
 PKG_BUILDDEP:=		pcre zlib
@@ -32,6 +32,8 @@ $(eval $(call PKG_template,NGINX,nginx,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPEN
 
 CONFIG_STYLE:=          minimal
 TARGET_CFLAGS+=         -fPIC
+CONFIGURE_ENV+=		ngx_force_gcc_have_atomic=yes \
+			ngx_force_have_libatomic=no
 CONFIGURE_ARGS:=        --prefix=/srv/www \
 			--sbin-path=/usr/sbin \
 			--crossbuild=Linux::$(ADK_TARGET_ARCH) \

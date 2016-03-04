@@ -1,0 +1,26 @@
+--- nginx-1.9.12.orig/auto/os/darwin	2016-02-24 15:53:23.000000000 +0100
++++ nginx-1.9.12/auto/os/darwin	2016-03-04 19:56:52.000000000 +0100
+@@ -30,6 +30,7 @@ NGX_KQUEUE_CHECKED=YES
+ ngx_feature="kqueue's EVFILT_TIMER"
+ ngx_feature_name="NGX_HAVE_TIMER_EVENT"
+ ngx_feature_run=yes
++ngx_feature_run_force_result="$ngx_force_have_timer_event"
+ ngx_feature_incs="#include <sys/event.h>
+                   #include <sys/time.h>"
+ ngx_feature_path=
+@@ -60,6 +61,7 @@ ngx_feature_test="int      kq;
+ ngx_feature="Darwin 64-bit kqueue millisecond timeout bug"
+ ngx_feature_name=NGX_DARWIN_KEVENT_BUG
+ ngx_feature_run=bug
++ngx_feature_run_force_result="$ngx_force_kevent_bug"
+ ngx_feature_incs="#include <sys/event.h>
+                   #include <sys/time.h>"
+ ngx_feature_path=
+@@ -90,6 +92,7 @@ CC_AUX_FLAGS="$CC_AUX_FLAGS"
+ ngx_feature="sendfile()"
+ ngx_feature_name="NGX_HAVE_SENDFILE"
+ ngx_feature_run=yes
++ngx_feature_run_force_result="$ngx_force_have_sendfile"
+ ngx_feature_incs="#include <sys/types.h>
+                   #include <sys/socket.h>
+                   #include <sys/uio.h>

@@ -1,7 +1,7 @@
---- nginx-1.2.2.orig/auto/install	2012-01-18 16:07:43.000000000 +0100
-+++ nginx-1.2.2/auto/install	2012-07-16 16:45:40.000000000 +0200
-@@ -100,12 +100,9 @@ install:	$NGX_OBJS${ngx_dirsep}nginx${ng
- 		$NGX_INSTALL_PERL_MODULES
+--- nginx-1.9.12.orig/auto/install	2016-02-24 15:53:23.000000000 +0100
++++ nginx-1.9.12/auto/install	2016-03-04 19:55:33.000000000 +0100
+@@ -107,12 +107,9 @@ $NGX_OBJS/nginx.8:	$NGX_MAN $NGX_AUTO_CO
+ install:	build $NGX_INSTALL_PERL_MODULES
  	test -d '\$(DESTDIR)$NGX_PREFIX' || mkdir -p '\$(DESTDIR)$NGX_PREFIX'
  
 -	test -d '\$(DESTDIR)`dirname "$NGX_SBIN_PATH"`' \

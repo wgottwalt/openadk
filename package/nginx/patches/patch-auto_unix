@@ -1,6 +1,38 @@
---- nginx-1.7.9.orig/auto/unix	2014-12-23 09:28:38.000000000 -0600
-+++ nginx-1.7.9/auto/unix	2014-12-25 00:19:14.593499364 -0600
-@@ -651,7 +651,7 @@ ngx_feature_test="void *p; p = memalign(
+--- nginx-1.9.12.orig/auto/unix	2016-02-24 15:53:23.000000000 +0100
++++ nginx-1.9.12/auto/unix	2016-03-04 19:56:52.000000000 +0100
+@@ -99,6 +99,7 @@ if test -z "$NGX_KQUEUE_CHECKED"; then
+         ngx_feature="kqueue's EVFILT_TIMER"
+         ngx_feature_name="NGX_HAVE_TIMER_EVENT"
+         ngx_feature_run=yes
++        ngx_feature_run_force_result="$ngx_force_have_timer_event"
+         ngx_feature_incs="#include <sys/event.h>
+                           #include <sys/time.h>"
+         ngx_feature_path=
+@@ -609,6 +610,7 @@ ngx_feature_test="char buf[1]; struct io
+ ngx_feature="sys_nerr"
+ ngx_feature_name="NGX_SYS_NERR"
+ ngx_feature_run=value
++ngx_feature_run_force_result="$ngx_force_sys_nerr"
+ ngx_feature_incs='#include <errno.h>
+                   #include <stdio.h>'
+ ngx_feature_path=
+@@ -623,6 +625,7 @@ if [ $ngx_found = no ]; then
+     ngx_feature="_sys_nerr"
+     ngx_feature_name="NGX_SYS_NERR"
+     ngx_feature_run=value
++    ngx_feature_run_force_result="$ngx_force_sys_nerr"
+     ngx_feature_incs='#include <errno.h>
+                       #include <stdio.h>'
+     ngx_feature_path=
+@@ -638,6 +641,7 @@ if [ $ngx_found = no ]; then
+     ngx_feature='maximum errno'
+     ngx_feature_name=NGX_SYS_NERR
+     ngx_feature_run=value
++    ngx_feature_run_force_result="$ngx_force_sys_nerr"
+     ngx_feature_incs='#include <errno.h>
+                       #include <string.h>
+                       #include <stdio.h>'
+@@ -695,7 +699,7 @@ ngx_feature_test="void *p; p = memalign(
  
  ngx_feature="mmap(MAP_ANON|MAP_SHARED)"
  ngx_feature_name="NGX_HAVE_MAP_ANON"
@@ -9,7 +41,7 @@
  ngx_feature_incs="#include <sys/mman.h>"
  ngx_feature_path=
  ngx_feature_libs=
-@@ -664,7 +664,7 @@ ngx_feature_test="void *p;
+@@ -708,7 +712,7 @@ ngx_feature_test="void *p;
  
  ngx_feature='mmap("/dev/zero", MAP_SHARED)'
  ngx_feature_name="NGX_HAVE_MAP_DEVZERO"
@@ -18,7 +50,7 @@
  ngx_feature_incs="#include <sys/mman.h>
                    #include <sys/stat.h>
                    #include <fcntl.h>"
-@@ -679,7 +679,7 @@ ngx_feature_test='void *p; int  fd;
+@@ -723,7 +727,7 @@ ngx_feature_test='void *p; int  fd;
  
  ngx_feature="System V shared memory"
  ngx_feature_name="NGX_HAVE_SYSVSHM"
@@ -27,7 +59,7 @@
  ngx_feature_incs="#include <sys/ipc.h>
                    #include <sys/shm.h>"
  ngx_feature_path=
-@@ -693,7 +693,7 @@ ngx_feature_test="int  id;
+@@ -737,7 +741,7 @@ ngx_feature_test="int  id;
  
  ngx_feature="POSIX semaphores"
  ngx_feature_name="NGX_HAVE_POSIX_SEM"
