@@ -4,12 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		oprofile
-PKG_VERSION:=		1.0.0
+PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
-PKG_HASH:=		847110b4ecdcf8c8353cd38f94c1b704aad4bfcd9453e38b88d112cfb7e3c45a
+PKG_HASH:=		cf759a6de1a6033d5dfc93bda129a9f2e128aecc4238cc657feb0801d1b0366c
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libpopt libbfd
+PKG_KDEPENDS:=		oprofile
 PKG_BUILDDEP:=		popt binutils gcc
 PKG_NEEDS:=		c++
 PKG_URL:=		http://oprofile.sourceforge.net/
