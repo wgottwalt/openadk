@@ -11,7 +11,7 @@ PKG_DESCR:=		python scripting language (Version 2)
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libffi
 PKG_BUILDDEP:=		libffi python2-host 
-HOST_BUILDDEP:=		libffi-host bzip2-host libressl-host
+HOST_BUILDDEP:=		libffi-host libressl-host
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://www.python.org/ftp/python/${PKG_VERSION}/
@@ -147,7 +147,7 @@ endif
 	${CP} ${WRKINST}/usr/include/python2.7/pyconfig.h \
 		${IDIR_PYTHON2}/usr/include/python2.7
 	@-for i in zlib bz2 _curses _ssl gdbm _sqlite pyexpat readline; do \
-		rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/$${i}*so; \
+		rm ${IDIR_PYTHON2}/usr/lib/python2.7/lib-dynload/$${i}*so 2>/dev/null; \
 	done
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
