@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		sqlite
-PKG_VERSION:=		3.10.0
+PKG_VERSION:=		3.11.1
 PKG_RELEASE:=		1
-PKG_HASH:=		43cc292d70711fa7580250c8a1cd7c64813a4a0a479dbd502cce5f10b5d91042
+PKG_HASH:=		533ff1d0271c2e666f01591271cef01a31648563affa0c95e80ef735077d4377
 PKG_DESCR:=		embeddable sql database cli
 PKG_SECTION:=		sys/misc
 PKG_BUILDDEP:=		ncurses readline
@@ -17,8 +17,8 @@ PKG_LIBNAME:=		libsqlite
 PKG_OPTS:=		dev
 PKG_NOPARALLEL:=	1
 
-DISTFILES:=		sqlite-autoconf-3100000.tar.gz
-WRKDIST=		${WRKDIR}/sqlite-autoconf-3100000
+DISTFILES:=		sqlite-autoconf-3110100.tar.gz
+WRKDIST=		${WRKDIR}/sqlite-autoconf-3110100
 
 PKG_SUBPKGS:=		SQLITE_CLI LIBSQLITE
 PKGSD_LIBSQLITE:=	emeddable sql library
