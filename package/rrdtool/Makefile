@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		rrdtool
-PKG_VERSION:=		1.4.8
-PKG_RELEASE:=		3
-PKG_HASH:=		de95b9f5aa488b0683600aad5a07c316f8d98cbe8d00aa0a1c87e2b2ef89f3d6
+PKG_VERSION:=		1.5.5
+PKG_RELEASE:=		1
+PKG_HASH:=		3a286d449c05d657e3fc3adcaa5cb4f0cfac8f465324b14f364a45d4ff8ca6f6
 PKG_DESCR:=		round robin database management library
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libart libfreetype libpng zlib
@@ -21,6 +21,8 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_ARCH_DEPENDS:=	!m68k
+
+PKG_CFLINE_RRDTOOL:=	select ADK_PACKAGE_CAIRO_WITH_PNG@
 
 PKG_SUBPKGS:=		LIBRRD RRDCGI RRDTOOL
 PKGSC_RRDCGI:=		sys/misc
