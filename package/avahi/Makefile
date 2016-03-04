@@ -21,6 +21,8 @@ DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 PKG_SUBPKGS:=		AVAHI LIBAVAHI
 PKGSS_AVAHI:=		libavahi libdaemon libexpat libintl dbus
 PKGSB_AVAHI:=		dbus
+PKGSS_LIBAVAHI:=	dbus
+PKGSB_LIBAVAHI:=	dbus
 PKGSD_LIBAVAHI:=	dns-sd and mdns library
 PKGSC_LIBAVAHI:=	libs/misc
 
