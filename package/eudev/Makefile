@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		eudev
 PKG_VERSION:=		3.1.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		f75885a430cd50fe4b31732f808ba7f9b2adf0f26b53b8ba2957b0c1d84b6f2a
 PKG_DESCR:=		device manager (udev clone)
 PKG_SECTION:=		sys/utils
@@ -28,10 +28,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,UDEV,udev,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 $(eval $(call PKG_template,LIBUDEV,libudev,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
+MAKE_FLAGS+=		V=1
 CONFIGURE_ARGS+=	--disable-manpages \
 			--disable-blkid \
-			--disable-gudev \
-			--disable-gtk-doc \
 			--enable-hwdb
 
 udev-install:
