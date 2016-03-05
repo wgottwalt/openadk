@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		dialog
-PKG_VERSION:=		1.2-20140219
+PKG_VERSION:=		1.3-20160126
 PKG_RELEASE:=		1
-PKG_HASH:=		ccf07eedf147ac901aff1d984ab63ddd6986b615ddf67435f270d5462ea4ca81
+PKG_HASH:=		308ab0bc63eb525c852c85ad4aa8645c84277ea2f7fca19ef4cafafc08415ae3
 PKG_DESCR:=		text gui interface
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libncurses
@@ -21,6 +21,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,DIALOG,dialog,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 MAKE_FILE:=		makefile
+# Should detect this automatically but while doing so it tries to add /lib64 which breaks build so specify this explicitely
+CONFIGURE_ARGS+=	--with-ncurses
 
 dialog-install:
 	$(INSTALL_DIR) $(IDIR_DIALOG)/usr/bin
