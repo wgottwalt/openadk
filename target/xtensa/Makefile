@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
-ifeq ($(ADK_TARGET_XTENSA_DE212),y)
+ifeq ($(ADK_TARGET_CPU_XTENSA_DE212),y)
 KERNEL:=$(LINUX_DIR)/arch/xtensa/boot/Image.elf
 else
 KERNEL:=$(LINUX_DIR)/arch/xtensa/boot/uImage
@@ -13,13 +13,13 @@ endif
 
 QEMU_ARGS:=-M ml605 -monitor null
 QEMU_ARGS+=${ADK_QEMU_ARGS}
-ifeq ($(ADK_TARGET_XTENSA_DC233C),y)
+ifeq ($(ADK_TARGET_CPU_XTENSA_DC233C),y)
 QEMU_ARGS+=-cpu dc233c
 endif
-ifeq ($(ADK_TARGET_XTENSA_DC232B),y)
+ifeq ($(ADK_TARGET_CPU_XTENSA_DC232B),y)
 QEMU_ARGS+=-cpu dc232b
 endif
-ifeq ($(ADK_TARGET_XTENSA_DE212),y)
+ifeq ($(ADK_TARGET_CPU_XTENSA_DE212),y)
 QEMU_ARGS+=-cpu de212
 endif
 

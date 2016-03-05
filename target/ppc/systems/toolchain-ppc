@@ -1,8 +1,0 @@
-config ADK_TARGET_SYSTEM_TOOLCHAIN_PPC
-	bool "Toolchain only"
-	select ADK_CPU_PPC
-	select ADK_TARGET_TOOLCHAIN
-	select ADK_TARGET_PACKAGE_TXZ
-	help
-	  PPC toolchain.
-

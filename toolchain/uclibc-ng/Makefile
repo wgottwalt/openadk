@@ -145,11 +145,11 @@ endif
 
 # arc
 ifeq ($(ADK_TARGET_ARCH_ARC),y)
-ifeq ($(ADK_CPU_ARC700),y)
+ifeq ($(ADK_TARGET_CPU_ARC_ARC700),y)
 	$(SED) 's/.*\(CONFIG_ARC_CPU_HS\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_ARC_CPU_700\).*/\1=y/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_CPU_ARC_HS),y)
+ifeq ($(ADK_TARGET_CPU_ARC_ARC_HS),y)
 	$(SED) 's/.*\(CONFIG_ARC_CPU_700\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_ARC_CPU_HS\).*/\1=y/' ${WRKBUILD}/.config
 endif
@@ -168,11 +168,11 @@ endif
 
 # cris
 ifeq ($(ADK_TARGET_ARCH_CRIS),y)
-ifeq ($(ADK_CPU_CRIS_V32),y)
+ifeq ($(ADK_TARGET_CPU_CRIS_CRISV32),y)
 	$(SED) 's/.*\(CONFIG_CRIS=\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_CRISV32\).*/\1=y/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_CPU_CRIS_V10),y)
+ifeq ($(ADK_TARGET_CPU_CRIS_CRISV10),y)
 	$(SED) 's/.*\(CONFIG_CRIS=\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_CRISV32\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
@@ -180,23 +180,21 @@ endif
 
 # sh
 ifeq ($(ADK_TARGET_ARCH_SH),y)
-ifeq ($(ADK_CPU_SH4A),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH4A),y)
 	$(SED) 's/.*\(CONFIG_SH2A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH2\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH3\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH4=\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH4A\).*/\1=y/' ${WRKBUILD}/.config
-	echo foo
-	cat ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_CPU_SH4),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH4),y)
 	$(SED) 's/.*\(CONFIG_SH2A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH2\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH3\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH4A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH4\).*/\1=y/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_CPU_SH3),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH3),y)
 	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH2A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH2\).*/# \1 is not set/' ${WRKBUILD}/.config
@@ -204,7 +202,7 @@ ifeq ($(ADK_CPU_SH3),y)
 	$(SED) 's/.*\(CONFIG_SH4A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH3\).*/\1=y/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_CPU_SH2),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH2),y)
 	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH2A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH3\).*/# \1 is not set/' ${WRKBUILD}/.config
@@ -212,7 +210,7 @@ ifeq ($(ADK_CPU_SH2),y)
 	$(SED) 's/.*\(CONFIG_SH4A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH2\).*/\1=y/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_CPU_SH2A),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH2A),y)
 	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH2A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH3\).*/# \1 is not set/' ${WRKBUILD}/.config
@@ -224,24 +222,24 @@ endif
 
 # x86
 ifeq ($(ADK_TARGET_ARCH_X86),y)
-ifeq ($(ADK_CPU_I486),y)
+ifeq ($(ADK_TARGET_CPU_X86_I486),y)
 	$(SED) 's/.*\(CONFIG_686\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_586\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_486\).*/\1=y/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_CPU_I586),y)
+ifeq ($(ADK_TARGET_CPU_X86_I586),y)
 	$(SED) 's/.*\(CONFIG_686\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_586\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_486\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_CPU_I686),y)
+ifeq ($(ADK_TARGET_CPU_X86_I686),y)
 	$(SED) 's/.*\(CONFIG_686\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_586\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_486\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 endif
 
-# mips64
+# mips64 abi
 ifeq ($(ADK_TARGET_ARCH_MIPS64),y)
 ifeq ($(ADK_TARGET_ABI_N64),y)
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/\1=y/' ${WRKBUILD}/.config

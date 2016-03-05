@@ -44,7 +44,7 @@ endif
 ifeq ($(ADK_TARGET_ARCH_MIPS),y)
 CONFIGURE_ARGS+=	--target=mips32-linux-gcc
 endif
-ifeq ($(ADK_CPU_LOONGSON2F),y)
+ifeq ($(ADK_TARGET_CPU_MIPS64_LOONGSON2F),y)
 CONFIGURE_ARGS+=	--target=loongson2f-linux-gcc
 endif
 ifeq ($(ADK_TARGET_ARCH_MIPS64),y)

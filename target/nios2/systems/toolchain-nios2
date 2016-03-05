@@ -1,8 +1,0 @@
-config ADK_TARGET_SYSTEM_TOOLCHAIN_NIOS2
-	bool "Toolchain only"
-	select ADK_CPU_NIOS2
-	select ADK_TARGET_TOOLCHAIN
-	select ADK_TARGET_PACKAGE_TXZ
-	help
-	  NIOS2 toolchain.
-

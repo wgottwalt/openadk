@@ -1,6 +1,6 @@
 config ADK_TARGET_SYSTEM_QEMU_METAG
 	bool "Qemu Emulator"
-	select ADK_CPU_METAG
+	select ADK_TARGET_CPU_METAG
 	select ADK_TARGET_QEMU
 	select ADK_TARGET_PACKAGE_TXZ
 	help

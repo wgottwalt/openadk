@@ -48,10 +48,10 @@ config ADK_KERNEL_I2C_IMX
 	
 config ADK_KERNEL_SCX200_ACB
 	tristate "I2C driver for Geode"
-	depends on ADK_CPU_GEODE
+	depends on ADK_TARGET_CPU_X86_GEODE
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_I2C_CHARDEV
-	default y if ADK_CPU_GEODE
+	default y if ADK_TARGET_CPU_X86_GEODE
 	default n
 	help
 	  I2C driver for Geode boards.

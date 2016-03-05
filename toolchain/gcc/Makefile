@@ -122,7 +122,7 @@ ifeq ($(ADK_TARGET_ARCH_METAG),y)
 GCC_CONFOPTS+=		--with-cpu=2.1 --enable-meta-default --disable-symvers
 endif
 
-ifeq ($(ADK_CPU_CF),y)
+ifeq ($(ADK_TARGET_CPU_CF),y)
 GCC_CONFOPTS+=		--enable-multilib --with-arch=cf
 endif
 
@@ -136,19 +136,19 @@ GCC_CONFOPTS+=		--with-endian=little
 else
 GCC_CONFOPTS+=          --with-endian=big
 endif
-ifeq ($(ADK_CPU_SH2),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH2),y)
 GCC_FINAL_CONFOPTS+=	--with-multilib-list=m2
 endif
-ifeq ($(ADK_CPU_SH2A),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH2A),y)
 GCC_FINAL_CONFOPTS+=	--with-multilib-list=m2a
 endif
-ifeq ($(ADK_CPU_SH3),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH3),y)
 GCC_FINAL_CONFOPTS+=	--with-multilib-list=m3
 endif
-ifeq ($(ADK_CPU_SH4),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH4),y)
 GCC_FINAL_CONFOPTS+=	--with-multilib-list=m4,m4-nofpu
 endif
-ifeq ($(ADK_CPU_SH4A),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH4A),y)
 GCC_FINAL_CONFOPTS+=	--with-multilib-list=m4a,m4a-nofpu
 endif
 endif
@@ -202,7 +202,7 @@ GCC_BUILD_DIR_FINAL:=	$(WRKBUILD)-final
 
 $(GCC_BUILD_DIR_INITIAL)/.configured:
 ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
-	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_$(ADK_TARGET_XTENSA).tar \
+	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_$(ADK_TARGET_CPU_TYPE).tar \
 		--strip-components=1 -C $(WRKSRC) gcc
 endif
 	mkdir -p $(GCC_BUILD_DIR_INITIAL)
@@ -215,13 +215,13 @@ endif
 	(cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME); \
 		ln -s ../$(STAGING_HOST2TARGET)/usr/lib lib)
 ifeq ($(ADK_TARGET_ARCH_SH),y)
-ifeq ($(ADK_CPU_SH3),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH3),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m3)
 endif
-ifeq ($(ADK_CPU_SH4),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH4),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4)
 endif
-ifeq ($(ADK_CPU_SH4A),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH4A),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4a)
 endif
 endif

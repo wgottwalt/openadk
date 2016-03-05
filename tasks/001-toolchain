@@ -1,0 +1,5 @@
+config ADK_APPLIANCE_TOOLCHAIN
+	bool "create a toolchain"
+	help
+	  Create a toolchain.
+

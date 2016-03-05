@@ -2,10 +2,14 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
+depends on ADK_TARGET_OS_LINUX
 prompt "Iconv implementation"
 bool
 default ADK_TARGET_WITHOUT_ICONV if ADK_TARGET_WITHOUT_MMU
-default ADK_TARGET_LIBICONV_TINY if ADK_TARGET_LIB_UCLIBC_NG
+
+config ADK_TARGET_LIBICONV_TINY
+	prompt "Use tiny libiconv package"
+	select ADK_PACKAGE_LIBICONV_TINY
 
 config ADK_TARGET_LIBC_ICONV
 	prompt "Use iconv from C library"
@@ -13,10 +17,6 @@ config ADK_TARGET_LIBC_ICONV
 config ADK_TARGET_LIBICONV
 	prompt "Use libiconv package"
 	select ADK_PACKAGE_LIBICONV
-
-config ADK_TARGET_LIBICONV_TINY
-	prompt "Use tiny libiconv package"
-	select ADK_PACKAGE_LIBICONV_TINY
 
 config ADK_TARGET_WITHOUT_ICONV
 	prompt "Do not build any iconv code"
@@ -125,5 +125,16 @@ config ADK_STATIC_TOOLCHAIN
 	bool "Build the toolchain components statically"
 	help
 	  If you want to create more portable toolchains, build them static.
+
+config ADK_PRELINK
+	bool "Prelink binaries and libraries in Image"
+	depends on ADK_TARGET_OS_LINUX
+	help
+	  Do prelinking for faster loading of binaries.
+
+config ADK_PRELINK_OPTS
+	string "additional options to pass to prelink"
+	default "-mR"
+	depends on ADK_PRELINK
 
 endmenu

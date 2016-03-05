@@ -16,8 +16,8 @@ target/arm/systems/raspberry-pi2
 ---------------------
 config ADK_TARGET_SYSTEM_RASPBERRY_PI2
         bool "Raspberry PI 2"
-        select ADK_CPU_CORTEX_A7
-        select ADK_TARGET_LITTLE_ENDIAN
+        depends on ADK_TARGET_LITTLE_ENDIAN
+        select ADK_TARGET_CPU_ARM_CORTEX_A7
         select ADK_TARGET_CPU_WITH_NEON
         select ADK_TARGET_BOARD_BCM28XX
         select ADK_TARGET_WITH_VGA
@@ -44,10 +44,10 @@ in OpenADK, you need to port it first.
 The hardware capabilities are optional. (f.e. ADK_TARGET_WITH_SD), but
 required when you configure the driver configuration later.
 
-For architectures with a choice for endianess you should select either
+For architectures with a choice for endianess you should depends on either
 ADK_TARGET_LITTLE_ENDIAN or ADK_TARGET_BIG_ENDIAN.
 
-If the CPU type like in this example ADK_CPU_CORTEX_A7 is not yet available
+If the CPU type like in this example ADK_TARGET_CPU_ARM_CORTEX_A7 is not yet available
 you need to add it to target/config/Config.in.cpu. For optimized code generation
 you should also add ADK_TARGET_GCC_CPU or ADK_TARGET_GCC_ARCH symbol for your CPU
 type. Furthermore you need to decide if your CPU has a MMU, FPU and NPTL support

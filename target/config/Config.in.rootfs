@@ -2,8 +2,8 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
-prompt "Root filesystem type"
-depends on !ADK_TARGET_TOOLCHAIN
+prompt "Firmware type"
+depends on !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_OS_BAREMETAL
 default ADK_TARGET_ROOTFS_ARCHIVE
 
 config ADK_TARGET_ROOTFS_INITRAMFS
@@ -149,30 +149,30 @@ config ADK_TARGET_ROOTFS_ARCHIVE
 endchoice
 
 choice
-prompt "Root filesystem type"
+prompt "Root filesystem"
 depends on ADK_TARGET_ROOTFS_ARCHIVE || ADK_TARGET_ROOTFS_USB && !ADK_TARGET_QEMU
 default ADK_TARGET_ROOT_EXT4
 
 config ADK_TARGET_ROOT_EXT4
-	bool "EXT4 filesystem"
+	bool "EXT4"
 	select ADK_KERNEL_EXT4_FS
 	help
 	  Compile EXT4 filesystem into kernel and use it as root filesystem.
 
 config ADK_TARGET_ROOT_XFS
-	bool "XFS filesystem"
+	bool "XFS"
 	select ADK_KERNEL_XFS_FS
 	help
 	  Compile XFS filesystem into kernel and use it as root filesystem.
 
 config ADK_TARGET_ROOT_EXT2
-	bool "EXT2 filesystem"
+	bool "EXT2"
 	select ADK_KERNEL_EXT2_FS
 	help
 	  Compile EXT2 filesystem into kernel and use it as root filesystem.
 
 config ADK_TARGET_ROOT_EXT3
-	bool "EXT3 filesystem"
+	bool "EXT3"
 	select ADK_KERNEL_EXT3_FS
 	help
 	  Compile EXT3 filesystem into kernel and use it as root filesystem.

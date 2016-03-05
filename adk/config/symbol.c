@@ -393,6 +393,7 @@ void sym_calc_value(struct symbol *sym)
 			}
 		calc_newval:
 			if (sym->dir_dep.tri == no) {
+				/*
 				if (sym->rev_dep.tri != no) {
 					fprintf(stderr, "warning: (");
 					expr_fprint(sym->rev_dep.expr, stderr);
@@ -401,6 +402,7 @@ void sym_calc_value(struct symbol *sym)
 					expr_fprint(sym->dir_dep.expr, stderr);
 					fprintf(stderr, ")\n");
 				}
+				*/
 				for (esv = sym->val_dep; esv; esv = esv->next) {
 					if ((esv->tri != no) &&
 					    (expr_calc_value(esv->value) != no)) {

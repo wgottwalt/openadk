@@ -25,7 +25,6 @@ SET_DASHX:=		:
 endif
 
 # Strip off the annoying quoting
-ADK_APPLIANCE_VERSION:=			$(strip $(subst ",, $(ADK_APPLIANCE_VERSION)))
 ADK_TARGET_ARCH:=			$(strip $(subst ",, $(ADK_TARGET_ARCH)))
 ADK_TARGET_SYSTEM:=			$(strip $(subst ",, $(ADK_TARGET_SYSTEM)))
 ADK_TARGET_BOARD:=			$(strip $(subst ",, $(ADK_TARGET_BOARD)))
@@ -35,6 +34,7 @@ ADK_TARGET_KERNEL:=			$(strip $(subst ",, $(ADK_TARGET_KERNEL)))
 ADK_TARGET_LIBC:=			$(strip $(subst ",, $(ADK_TARGET_LIBC)))
 ADK_TARGET_LIBC_PATH:=			$(strip $(subst ",, $(ADK_TARGET_LIBC_PATH)))
 ADK_TARGET_ENDIAN:=			$(strip $(subst ",, $(ADK_TARGET_ENDIAN)))
+ADK_TARGET_ENDIAN_SUFFIX:=		$(strip $(subst ",, $(ADK_TARGET_ENDIAN_SUFFIX)))
 ADK_TARGET_GCC_CPU:=			$(strip $(subst ",, $(ADK_TARGET_GCC_CPU)))
 ADK_TARGET_GCC_ARCH:=			$(strip $(subst ",, $(ADK_TARGET_GCC_ARCH)))
 ADK_TARGET_FLOAT:=			$(strip $(subst ",, $(ADK_TARGET_FLOAT)))
@@ -46,7 +46,6 @@ ADK_TARGET_CFLAGS_OPT:=			$(strip $(subst ",, $(ADK_TARGET_CFLAGS_OPT)))
 ADK_TARGET_ABI_CFLAGS:=			$(strip $(subst ",, $(ADK_TARGET_ABI_CFLAGS)))
 ADK_TARGET_ABI:=			$(strip $(subst ",, $(ADK_TARGET_ABI)))
 ADK_TARGET_MIPS_ABI:=			$(strip $(subst ",, $(ADK_TARGET_MIPS_ABI)))
-ADK_TARGET_XTENSA:=			$(strip $(subst ",, $(ADK_TARGET_XTENSA)))
 ADK_TARGET_IP:=				$(strip $(subst ",, $(ADK_TARGET_IP)))
 ADK_TARGET_SUFFIX:=			$(strip $(subst ",, $(ADK_TARGET_SUFFIX)))
 ADK_TARGET_CMDLINE:=			$(strip $(subst ",, $(ADK_TARGET_CMDLINE)))

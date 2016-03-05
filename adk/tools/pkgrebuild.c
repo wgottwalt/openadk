@@ -231,8 +231,10 @@ int main() {
 	closedir(pkgdir);
 
 	config = fopen(".config", "r");
-	if (config == NULL)
+	if (config == NULL) {
 		perror(".config is missing.");
+		exit(1);
+	}
 	
 	configmap = strmap_new(1024);
 	while (fgets(buf, 128, config) != NULL) {
@@ -245,8 +247,10 @@ int main() {
 	fclose(config);
 
 	configold = fopen(".config.old", "r");
-	if (configold == NULL)
+	if (configold == NULL) {
 		perror(".config.old is missing.");
+		exit(1);
+	}
 	
 	configoldmap = strmap_new(1024);
 	while (fgets(buf, 128, configold) != NULL) {

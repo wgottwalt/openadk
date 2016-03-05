@@ -1,17 +1,16 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-menu "Global ADK settings"
-	visible if !ADK_CHOOSE_APPLIANCE
+menu "Global settings"
 
 config ADK_HOST
 	string "webserver for packages and distfiles"
 	default "openadk.org"
 	help
-	  Configure host for IPKG package management.
+	  Configure host for package management and backup server for distfiles.
 
 config ADK_DL_DIR
-	string "download directory for packages"
+	string "download directory for source packages"
 	default ""
 	help
 	  Configure the download directory for all source packages.
@@ -30,7 +29,7 @@ config ADK_BUILD_WITH_DEBUG
 	default n
 	help
 	  If you want to create debug packages, you should enable this option.
-	  WARNING: It will use a lot of aditional disk space on you build system!
+	  WARNING: It will use a lot of additional disk space on you build system!
 
 config ADK_DISABLE_HONOUR_CFLAGS
 	bool "Disable honour CFLAGS checks globally"
@@ -46,6 +45,7 @@ config ADK_DISABLE_CHECKSUM
 
 config ADK_DISABLE_KERNEL_PATCHES
 	bool "Disable global kernel patches"
+	depends on ADK_TARGET_OS_LINUX
 	default n
 	help
 	  Disable all global kernel patches.
@@ -54,6 +54,7 @@ config ADK_DISABLE_KERNEL_PATCHES
 
 config ADK_DISABLE_TARGET_KERNEL_PATCHES
 	bool "Disable target specific kernel patches"
+	depends on ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN
 	default n
 	help
 	  Disable all target specific kernel patches.
@@ -64,7 +65,7 @@ config ADK_WGET_TIMEOUT
 	int "Set wget timeout"
 	default 10
 	help
-	  set wget timeout	
+	  Set wget timeout	
 
 config ADK_USE_CCACHE
 	bool "Use ccache to speedup recompilation"
@@ -78,7 +79,7 @@ config ADK_MAKE_JOBS
 	default 1 if ! ADK_MAKE_PARALLEL
 
 config ADK_MAKE_PARALLEL
-	bool "Enable parallel building of packages"
+	bool "Enable parallel building"
 	default y
 
 config ADK_MAKE_JOBS
@@ -100,16 +101,5 @@ config ADK_TARGET_PORT
 	default "22"
 	help
 	  Port to use for SSH when running make check.
-
-config ADK_PRELINK
-	prompt "Prelink binaries and libraries in Image"
-	boolean
-	help
-	  Do prelinking for faster loading of binaries.
-
-config ADK_PRELINK_OPTS
-	string "additional options to pass to prelink"
-	default "-mR"
-	depends on ADK_PRELINK
 
 endmenu

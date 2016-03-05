@@ -107,10 +107,10 @@ endif
 ifeq ($(ADK_TARGET_ARCH),ppc)
 BOOST_ARCH:=	power
 endif
-ifeq ($(ADK_CPU_MIPS32),y)
+ifeq ($(ADK_TARGET_CPU_MIPS_MIPS32),y)
 BOOST_ARCH:=	mips32
 endif
-ifeq ($(ADK_CPU_MIPS32R2),y)
+ifeq ($(ADK_TARGET_CPU_MIPS_MIPS32R2),y)
 BOOST_ARCH:=	mips32r2
 endif
 

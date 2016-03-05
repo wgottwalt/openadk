@@ -9,18 +9,21 @@ INSTALL_SCRIPT=		install -m0755
 MAKEFLAGS=		$(EXTRA_MAKEFLAGS)
 BUILD_USER=		$(shell id -un)
 BUILD_GROUP=		$(shell id -gn)
-ADK_SUFFIX:=		${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}_${ADK_TARGET_CPU_ARCH}
+ADK_SUFFIX:=		${ADK_TARGET_SYSTEM}
+ifneq ($(ADK_TARGET_ENDIAN_SUFFIX),)
+ADK_SUFFIX:=		$(ADK_SUFFIX)$(ADK_TARGET_ENDIAN_SUFFIX)
+endif
+ifneq ($(ADK_TARGET_LIBC),)
+ADK_SUFFIX:=		$(ADK_SUFFIX)_$(ADK_TARGET_LIBC)
+endif
+ifneq ($(ADK_TARGET_CPU_TYPE),)
+ADK_SUFFIX:=		$(ADK_SUFFIX)_$(ADK_TARGET_CPU_TYPE)
+endif
 ifneq ($(ADK_TARGET_FLOAT),)
 ADK_SUFFIX:=		$(ADK_SUFFIX)_$(ADK_TARGET_FLOAT)
 endif
 ifneq ($(ADK_TARGET_ABI),)
 ADK_SUFFIX:=		$(ADK_SUFFIX)_$(ADK_TARGET_ABI)
-endif
-ifneq ($(ADK_TARGET_CPU_TYPE),)
-ADK_SUFFIX:=		$(ADK_SUFFIX)_$(ADK_TARGET_CPU_TYPE)
-endif
-ifeq ($(ADK_TARGET_WITH_MMU),)
-ADK_SUFFIX:=		$(ADK_SUFFIX)_nommu
 endif
 
 # some global dirs
@@ -126,13 +129,8 @@ endif
 
 # for architectures where gcc --with-cpu matches -mcpu=
 ifneq ($(ADK_TARGET_GCC_CPU),)
-ifeq ($(ADK_CPU_ARC700),y)
-TARGET_CFLAGS+=		-mcpu=ARC700
-TARGET_CXXFLAGS+=	-mcpu=ARC700
-else
 TARGET_CFLAGS+=		-mcpu=$(ADK_TARGET_GCC_CPU)
 TARGET_CXXFLAGS+=	-mcpu=$(ADK_TARGET_GCC_CPU)
-endif
 endif
 
 # for archiectures where gcc --with-arch matches -march=

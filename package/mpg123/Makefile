@@ -23,10 +23,10 @@ $(eval $(call PKG_template,MPG123,mpg123,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEP
 
 AUTOTOOL_STYLE:=	autoreconf
 
-ifeq ($(ADK_CPU_I486),y)
+ifeq ($(ADK_TARGET_CPU_X86_I486),y)
 CONFIGURE_ARGS+=	--with-cpu=i486
 endif
-ifeq ($(ADK_CPU_I586),y)
+ifeq ($(ADK_TARGET_CPU_X86_I586),y)
 CONFIGURE_ARGS+=	--with-cpu=i586
 endif
 ifeq ($(ADK_TARGET_CPU_WITH_NEON),y)

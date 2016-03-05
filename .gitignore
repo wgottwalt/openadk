@@ -50,9 +50,13 @@
 /extra/
 /target/*/Config.in.arch
 /target/*/Config.in.systems
-/target/config/Config.in.appliances
-/target/config/Config.in.system*
-/target/config/Config.in.arch*
+/target/config/Config.in.tasks
+/target/config/Config.in.system
+/target/config/Config.in.system.choice
+/target/config/Config.in.system.default
+/target/config/Config.in.arch
+/target/config/Config.in.arch.choice
+/target/config/Config.in.arch.default
 /target/config/Config.in.scripts
 /target/config/Config.in.prereq
 /target/m68k/aranym.cfg

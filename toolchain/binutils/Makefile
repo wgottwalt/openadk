@@ -24,7 +24,7 @@ else
 CONFOPTS+=		--disable-gold
 endif
 
-ifeq ($(ADK_TARGET_ARCH_X86_64)$(ADK_CPU_CF),)
+ifeq ($(ADK_TARGET_ARCH_X86_64)$(ADK_TARGET_CPU_CF),)
 CONFOPTS+=		--disable-multilib
 else
 CONFOPTS+=		--enable-multilib
@@ -40,7 +40,7 @@ endif
 
 $(WRKBUILD)/.configured:
 ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
-	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_$(ADK_TARGET_XTENSA).tar \
+	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_$(ADK_TARGET_CPU_TYPE).tar \
 		--strip-components=1 -C $(WRKSRC) binutils
 endif
 	(cd $(WRKBUILD); \

@@ -1,6 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+ifeq ($(ADK_TARGET_OS_LINUX),y)
 # relative paths, like 'mksh' or '../usr/bin/foosh'
 ifeq (${ADK_BINSH_ASH},y)
 BINSH:=ash
@@ -35,6 +36,7 @@ else ifeq (${ADK_ROOTSH_ZSH},y)
 ROOTSH:=/bin/zsh
 else
 $(error No login shell configured!)
+endif
 endif
 
 imageprepare: image-prepare-post extra-install prelink

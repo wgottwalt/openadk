@@ -1,8 +1,0 @@
-config ADK_TARGET_SYSTEM_TOOLCHAIN_FRV
-	bool "Toolchain only"
-	select ADK_CPU_FRV
-	select ADK_TARGET_TOOLCHAIN
-	select ADK_TARGET_PACKAGE_TXZ
-	help
-	  FRV toolchain.
-

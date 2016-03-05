@@ -1,6 +1,9 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+menu "Qemu system configuration"
+depends on ADK_TARGET_QEMU && !ADK_TARGET_SYSTEM_QEMU_XTENSA
+
 config ADK_QEMU_ARGS
 	string
 	default "" if ADK_TARGET_QEMU_WITH_GRAPHIC
@@ -135,3 +138,4 @@ config ADK_TARGET_QEMU_WITH_AUDIO
 	bool "enabled"
 
 endchoice
+endmenu

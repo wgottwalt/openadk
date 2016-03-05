@@ -13,95 +13,47 @@ config ADK_HAVE_DOT_CONFIG
 	bool
 	default y
 
-source "target/config/Config.in.appliances"
-
-menu "Target configuration"
-	visible if !ADK_CHOOSE_APPLIANCE
-
-source "target/config/Config.in.cpu"
+source "target/config/Config.in.os"
 source "target/config/Config.in.hardware"
 source "target/config/Config.in.boards"
 source "target/config/Config.in.kernelfmt"
 source "target/config/Config.in.arch"
+source "target/config/Config.in.endian"
+source "target/config/Config.in.archopts"
 source "target/config/Config.in.system"
+source "target/config/Config.in.systemopts"
 source "target/config/Config.in.subsystem"
-source "target/config/Config.in.tc"
-source "target/config/Config.in.xtensa"
 source "target/config/Config.in.qemuopts"
+source "target/config/Config.in.cpu"
+source "target/config/Config.in.tasks"
 source "target/config/Config.in.rootfs"
 source "target/config/Config.in.target"
-
-endmenu
 
 source "target/config/Config.in"
 
 menu "Package selection"
-	visible if !ADK_CHOOSE_APPLIANCE
-
+	visible if ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN
 source "package/Config.in.auto.global"
 source "package/Config.in"
-
 menu "Package options"
-	visible if !ADK_CHOOSE_APPLIANCE
-
-config ADK_LEAVE_ETC_ALONE
-	bool "do not install anything into /etc"
-	default n
-	help
-	  Enabling this option will prevent the ADK from installing anything
-	  into /etc. This is useful for highly customised setups with custom
-	  base-files packages.
-
-	  Package Makefiles can override this setting by passing "force_etc" to
-	  the package-template.  to a non-empty value. This is useful for
-	  packages traditionally installing non-config stuff into /etc, like
-	  e.g. ca-certificates.
-
-	  Note that without further customisation, turning this option
-	  on will almost certainly render the resulting system unusable.
-
-config ADK_INSTALL_PACKAGE_INIT_SCRIPTS
-	bool "ship custom init-scripts along with packages"
-	default y
-	depends on !ADK_LEAVE_ETC_ALONE
-	help
-	  Turning this option to false will prevent the ADK from
-	  installing init-scripts (i.e. files in /etc/init.d) for
-	  certain daemons and daemon-like applications.
-
-	  Note that without further customisation, turning this option
-	  off will almost certainly render the resulting system unusable.
-
-config ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS
-	bool "ship custom network-scripts along with packages"
-	default y
-	depends on !ADK_LEAVE_ETC_ALONE
-	help
-	  Turning this option to false will prevent the ADK from
-	  installing network-scripts (i.e. files in /etc/network/) for
-	  packages providing any.
-
-	  Note that without further customisation, turning this option
-	  off will almost certainly render the resulting system unusable.
-
+source "package/Config.in.options"
 endmenu
 endmenu
 
 menu "Runtime configuration"
-	visible if !ADK_CHOOSE_APPLIANCE
+	visible if ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN
 source "target/config/Config.in.runtime"
 endmenu
 
-menu "Kernel configuration"
-	visible if !ADK_CHOOSE_APPLIANCE && ADK_TARGET_KERNEL_CUSTOMISING
-
 source "target/config/Config.in.kernelversion"
+
+menu "Kernel configuration"
+	visible if ADK_TARGET_OS_LINUX && ADK_TARGET_KERNEL_CUSTOMISING && !ADK_APPLIANCE_TOOLCHAIN
 source "target/config/Config.in.kernelcfg"
 source "target/linux/Config.in"
 endmenu
 
 menu "Toolchain settings"
-	visible if !ADK_CHOOSE_APPLIANCE
 
 config ADK_VENDOR
 	string "Vendor name"
@@ -109,8 +61,6 @@ config ADK_VENDOR
 	help
 	  Vendor string is used for toolchain.
 
-source "target/config/Config.in.endian"
-source "target/config/Config.in.mips"
 source "target/config/Config.in.fpu"
 source "target/config/Config.in.float"
 source "target/config/Config.in.binfmt"

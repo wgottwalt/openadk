@@ -157,14 +157,15 @@ ${ADK_TOPDIR}/package/Depends.mk: ${ADK_TOPDIR}/.config $(wildcard ${ADK_TOPDIR}
 world:
 	@mkdir -p $(DL_DIR) $(HOST_BUILD_DIR) $(BUILD_DIR) $(TARGET_DIR) $(FW_DIR) \
 		$(STAGING_HOST_DIR) $(TOOLCHAIN_BUILD_DIR) $(STAGING_PKG_DIR)/stamps
-ifeq ($(ADK_TARGET_TOOLCHAIN),y)
-ifeq ($(ADK_TOOLCHAIN_ONLY),y)
-	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final package/compile
+ifeq ($(ADK_APPLIANCE_TOOLCHAIN),y)
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final
 else
-	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final package/compile root_clean package/install
+ifeq ($(ADK_TARGET_OS_BAREMETAL),y)
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final
 endif
-else
+ifeq ($(ADK_TARGET_OS_LINUX),y)
 	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final target/config-prepare target/compile package/compile root_clean package/install target/install package_index
+endif
 endif
 
 package_index:
@@ -265,7 +266,7 @@ cleandir:
 	    ${ADK_TOPDIR}/package/pkglist.d ${ADK_TOPDIR}/package/pkgconfigs.d
 	@rm -rf $(TOOLCHAIN_DIR_PFX) $(STAGING_HOST_DIR_PFX)
 	@rm -rf $(STAGING_TARGET_DIR_PFX) $(STAGING_PKG_DIR_PFX)
-	@rm -f .menu .tmpconfig.h .rebuild*
+	@rm -f .menu .tmpconfig.h .rebuild* make.log
 	@rm -f ${ADK_TOPDIR}/package/Depends.mk ${ADK_TOPDIR}/prereq.mk
 	@printf "done\n"
 
@@ -287,8 +288,10 @@ distclean:
 	@rm -rf package/pkglist.d package/pkgconfigs.d
 	@rm -f .config* .defconfig .tmpconfig.h all.config prereq.mk make.log
 	@rm -f .firstrun .menu package/Depends.mk .ADK_HAVE_DOT_CONFIG .rebuild.*
-	@rm -f target/*/Config.in.arch* target/*/Config.in.system*
-	@rm -f package/Config.in.auto* package/Config.in.appliances
+	@rm -f target/*/Config.in.arch target/*/Config.in.systems target/config/Config.in.tasks
+	@rm -f target/config/Config.in.arch.choice target/config/Config.in.arch.default
+	@rm -f target/config/Config.in.system.choice target/config/Config.in.system.default
+	@rm -f package/Config.in.auto* target/config/Config.in.system
 	@rm -f target/config/Config.in.prereq target/config/Config.in.scripts
 	@rm -f adk/tools/pkgmaker adk/tools/depmaker adk/tools/pkgrebuild
 	@printf "done\n"
@@ -378,8 +381,14 @@ defconfig: .menu $(CONFIG)/conf
 		echo "ADK_PACKAGE_GLIBC_DEV=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
-		grep "^config" target/config/Config.in.appliances \
+		grep "^config" target/config/Config.in.tasks \
 			|grep -i "_$(ADK_APPLIANCE)$$" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			 >> $(ADK_TOPDIR)/.defconfig; \
+	fi
+	@if [ ! -z "$(ADK_TARGET_OS)" ];then \
+		grep "^config" target/config/Config.in.os \
+			|grep -i "_$(ADK_TARGET_OS)$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			 >> $(ADK_TOPDIR)/.defconfig; \
 	fi
@@ -422,7 +431,7 @@ defconfig: .menu $(CONFIG)/conf
 	fi
 	@if [ ! -z "$(ADK_TARGET_CPU)" ];then \
 		cpu=$$(echo "$(ADK_TARGET_CPU)" |sed -e "s/-/_/g"); \
-		grep -h "^config" target/config/Config.in.tc \
+		grep -h "^config" target/config/Config.in.cpu \
 			|grep -i "$$cpu$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
@@ -453,19 +462,13 @@ defconfig: .menu $(CONFIG)/conf
 			>> $(ADK_TOPDIR)/.defconfig; \
 		fi; \
 	fi
-	@if [ ! -z "$(ADK_TARGET_XTENSA)" ];then \
-		grep "^config" target/config/Config.in.xtensa \
-			|grep -i "$(ADK_TARGET_XTENSA)" \
-			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(ADK_TOPDIR)/.defconfig; \
-	fi
 	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
 		$(CONFIG)/conf --defconfig=.defconfig $(CONFIG_CONFIG_IN); \
 	fi
 
 allconfig:
 	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
-		grep "^config" target/config/Config.in.appliances \
+		grep "^config" target/config/Config.in.tasks \
 			|grep -i "_$(ADK_APPLIANCE)"\$$ \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/all.config; \
@@ -520,20 +523,15 @@ distclean cleandir:
 	@rm -rf package/pkglist.d package/pkgconfigs.d
 	@rm -f .config* .defconfig .tmpconfig.h all.config make.log
 	@rm -f .menu .rebuild.* package/Depends.mk .ADK_HAVE_DOT_CONFIG prereq.mk
-	@rm -f target/*/Config.in.arch*
-	@rm -f target/*/Config.in.system*
-	@rm -f package/Config.in.auto* package/Config.in.appliances
+	@rm -f target/*/Config.in.arch target/*/Config.in.systems
+	@rm -f target/config/Config.in.arch.choice target/config/Config.in.arch.default
+	@rm -f target/config/Config.in.system.choice target/config/Config.in.system.default
+	@rm -f package/Config.in.auto* target/config/Config.in.system target/config/Config.in.tasks
 	@rm -f target/config/Config.in.prereq target/config/Config.in.scripts
 	@rm -f adk/tools/pkgmaker adk/tools/depmaker adk/tools/pkgrebuild
 	@printf "done\n"
 
 endif # ! ifeq ($(strip $(ADK_HAVE_DOT_CONFIG)),y)
-
-buildall:
-	@mkdir -p firmware
-	@echo "=== building $(ADK_TARGET_SYSTEM) ($(ADK_TARGET_ARCH)) with $(ADK_TARGET_LIBC) ==="
-	$(GMAKE) ADK_APPLIANCE=new ADK_TARGET_ARCH=$(ADK_TARGET_ARCH) ADK_TARGET_SYSTEM=$(ADK_TARGET_SYSTEM) ADK_TARGET_LIBC=$(ADK_TARGET_LIBC) allmodconfig
-	$(GMAKE) ADK_VERBOSE=1 all 2>&1 | tee firmware/buildall.log
 
 $(ADK_TOPDIR)/adk/tools/pkgmaker: $(ADK_TOPDIR)/adk/tools/pkgmaker.c $(ADK_TOPDIR)/adk/tools/sortfile.c $(ADK_TOPDIR)/adk/tools/strmap.c
 	@$(HOST_CC) $(HOST_CFLAGS) -o $@ adk/tools/pkgmaker.c adk/tools/sortfile.c adk/tools/strmap.c
@@ -544,7 +542,7 @@ $(ADK_TOPDIR)/adk/tools/pkgrebuild: $(ADK_TOPDIR)/adk/tools/pkgrebuild.c $(ADK_T
 $(ADK_TOPDIR)/adk/tools/depmaker: $(ADK_TOPDIR)/adk/tools/depmaker.c
 	@$(HOST_CC) $(HOST_CFLAGS) -o $@ $(ADK_TOPDIR)/adk/tools/depmaker.c
 
-menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(ADK_TOPDIR)/adk/tools/pkgmaker $(ADK_TOPDIR)/adk/tools/pkgrebuild $(wildcard target/appliances/*)
+menu .menu: $(wildcard package/*/Makefile) $(wildcard target/*/systems) $(wildcard target/*/systems/*) $(ADK_TOPDIR)/adk/tools/pkgmaker $(ADK_TOPDIR)/adk/tools/pkgrebuild $(wildcard tasks/*)
 	@printf " --->  generating menu structure.. "
 	@$(SHELL) $(ADK_TOPDIR)/scripts/create-menu
 	@$(ADK_TOPDIR)/adk/tools/pkgmaker

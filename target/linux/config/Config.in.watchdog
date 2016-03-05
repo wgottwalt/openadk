@@ -63,7 +63,7 @@ config ADK_KERNEL_AR7_WDT
 
 config ADK_KERNEL_GEODE_WDT
 	bool "Geode Hardware Watchdog"
-	depends on ADK_CPU_GEODE
+	depends on ADK_TARGET_SYSTEM_PCENGINES_ALIX
 	select ADK_KERNEL_WATCHDOG
 	select ADK_KERNEL_MISC_DEVICES
 	select ADK_KERNEL_CS5535_MFGPT

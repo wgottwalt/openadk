@@ -26,10 +26,10 @@ INSTALL_STYLE:=		manual
 libgcc-install:
 	$(INSTALL_DIR) ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 ifeq ($(ADK_TARGET_ARCH_SH),y)
-ifeq ($(ADK_CPU_SH3),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH3),y)
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/!m3*/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 endif
-ifeq ($(ADK_CPU_SH4),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH4),y)
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/!m4*/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 endif
 else
