@@ -4,6 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 include $(ADK_TOPDIR)/mk/rootfs.mk
 
+KERNEL_MODULES_USED:=$(shell grep ^ADK_KERNEL $(ADK_TOPDIR)/.config|grep =m)
+
 all: install
 
 ### Kernel .config Creation
@@ -145,10 +147,12 @@ clean: $(ADK_TARGET_ARCH)-clean $(ADK_TARGET_ARCH)-imageclean
 %-imageprepare:
 	$(START_TRACE) "target/$(patsubst %-imageprepare,%,$@)-imageprepare.. "
 ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
+ifneq ($(KERNEL_MODULES_USED),)
 	# This should be made a package instead
-	$(CP) -a $(BUILD_DIR)/linux-$(ADK_TARGET_ARCH)/modules/lib $(TARGET_DIR)
+	$(CP) $(BUILD_DIR)/linux-$(ADK_TARGET_ARCH)/modules/lib $(TARGET_DIR)
 	rm -f "$(TARGET_DIR)"/lib/modules/*/build \
 	      "$(TARGET_DIR)"/lib/modules/*/source
+endif
 endif
 	@for x in $$(ls $(ADK_TOPDIR)/scripts/preimage/*.sh 2>/dev/null); do \
 		[[ -x "$$x" ]] && $$x; \
