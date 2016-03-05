@@ -11,7 +11,8 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 LIBSTDCXXVER:=		21
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_5_2_OR1K),y)
-PKG_VERSION:=		3455e5a172b0d178b88799b11a8897141b324b4e
+PKG_VERSION:=		musl-5.2.0
+PKG_GIT:=		branch
 PKG_SITES:=		https://github.com/openrisc/or1k-gcc.git
 PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
