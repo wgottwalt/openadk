@@ -9,7 +9,7 @@ PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_DESCR:=		compiler for dts files
 PKG_SECTION:=		sys/misc
-HOST_BUILDDEP:=		m4-host flex-host
+HOST_BUILDDEP:=		m4-host flex-host bison-host
 PKG_URL:=		http://www.devicetree.org/Device_Tree_Compiler
 PKG_SITES:=		git://git.kernel.org/pub/scm/utils/dtc/dtc.git
 
