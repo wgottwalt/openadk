@@ -32,9 +32,11 @@ libpthread-install:
 ifneq ($(ADK_TARGET_LIB_MUSL),y)
 ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 ifneq ($(ADK_TARGET_WITHOUT_THREADS),y)
+ifneq ($(ADK_TARGET_LIB_WITHOUT_THREADS),y)
 ifneq ($(ADK_TARGET_BINFMT_FLAT),y)
 	${INSTALL_DIR} ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
 	${CP} ${STAGING_TARGET_DIR}/lib/libpthread*.so* ${IDIR_LIBPTHREAD}/$(ADK_TARGET_LIBC_PATH)
+endif
 endif
 endif
 endif
