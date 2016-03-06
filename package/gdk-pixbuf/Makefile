@@ -24,6 +24,8 @@ $(eval $(call PKG_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-$(PKG_RELEASE),$
 
 HOST_LDFLAGS+=		-lffi -lz -ldl -lresolv
 HOST_CONFIGURE_ARGS+=	--disable-glibtest \
+			--without-libjpeg \
+			--without-libpng \
 			--without-libtiff
 CONFIGURE_ENV+=		gio_can_sniff=no
 
