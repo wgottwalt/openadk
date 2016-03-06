@@ -4,10 +4,10 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libgtk2
-PKG_VERSION:=		2.24.28
+PKG_VERSION:=		2.24.29
 PKG_EXTRAVER:=		2.24
 PKG_RELEASE:=		1
-PKG_HASH:=		b2c6441e98bc5232e5f9bba6965075dcf580a8726398f7374d39f90b88ed4656
+PKG_HASH:=		0741c59600d3d810a223866453dc2bbb18ce4723828681ba24aa6519c37631b8
 PKG_DESCR:=		multi-platform toolkit for creating graphical user interfaces
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib cairo
