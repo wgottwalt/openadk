@@ -2,8 +2,8 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		mpfr
-PKG_VERSION:=		3.1.3
+PKG_VERSION:=		3.1.4
 PKG_RELEASE:=		1
-PKG_HASH:=		6835a08bd992c8257641791e9a6a2b35b02336c8de26d0a8577953747e514a16
+PKG_HASH:=		761413b16d749c53e2bfd2b1dfaa3b027b0e793e404b90b5fbaeef60af6517f5
 PKG_SITES:=		http://www.mpfr.org/mpfr-current/
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
