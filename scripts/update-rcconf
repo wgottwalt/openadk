@@ -7,7 +7,7 @@ topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd 
 
 suffix=${ADK_TARGET_SYSTEM}
 if [ ! -z ${ADK_TARGET_ENDIAN_SUFFIX} ];then
-	suffix=${suffix}_${ADK_TARGET_ENDIAN_SUFFIX}
+	suffix=${suffix}${ADK_TARGET_ENDIAN_SUFFIX}
 fi
 if [ ! -z ${ADK_TARGET_LIBC} ];then
 	suffix=${suffix}_${ADK_TARGET_LIBC}
