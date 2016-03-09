@@ -5,15 +5,21 @@
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
 . $topdir/.config
 
-suffix=${ADK_TARGET_SYSTEM}_${ADK_TARGET_LIBC}_${ADK_TARGET_CPU_ARCH}
+suffix=${ADK_TARGET_SYSTEM}
+if [ ! -z ${ADK_TARGET_ENDIAN_SUFFIX} ];then
+	suffix=${suffix}_${ADK_TARGET_ENDIAN_SUFFIX}
+fi
+if [ ! -z ${ADK_TARGET_LIBC} ];then
+	suffix=${suffix}_${ADK_TARGET_LIBC}
+fi
+if [ ! -z ${ADK_TARGET_CPU_TYPE} ];then
+	suffix=${suffix}_${ADK_TARGET_CPU_TYPE}
+fi
 if [ ! -z ${ADK_TARGET_FLOAT} ];then
 	suffix=${suffix}_${ADK_TARGET_FLOAT}
 fi
 if [ ! -z ${ADK_TARGET_ABI} ];then
 	suffix=${suffix}_${ADK_TARGET_ABI}
-fi
-if [ -z ${ADK_TARGET_WITH_MMU} ];then
-	suffix=${suffix}_nommu
 fi
 
 rcconf=$(ls $topdir/root_${suffix}/etc/rc.conf)
