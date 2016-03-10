@@ -4,19 +4,22 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		wolfssl
-PKG_VERSION:=		3.4.6
+PKG_VERSION:=		3.8.0
 PKG_RELEASE:=		1
-PKG_HASH:=		267a75ff2b81ac793d8170904c97635d74bed1c353162622eb66d8e7fa6260fa
+PKG_HASH:=		36369304dd107b2ae1360c91f3d0eea491802dcacb2155562652bf5257117016
 PKG_DESCR:=		portable embedded ssl library
 PKG_SECTION:=		libs/crypto
 PKG_URL:=		http://www.wolfssl.com
 PKG_SITES:=		http://distfiles.openadk.org/
 PKG_OPTS:=		dev
 
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).zip
+
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,WOLFSSL,wolfssl,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--disable-examples
 CONFIGURE_ENV+=		C_EXTRA_FLAGS='$(TARGET_CFLAGS)'
 
