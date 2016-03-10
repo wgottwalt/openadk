@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		transmission
-PKG_VERSION:=		2.90
+PKG_VERSION:=		2.92
 PKG_RELEASE:=		1
-PKG_HASH:=		69ff8caf81684155926f437f46bf7df1b1fb304f52c7809f546257e8923f2fd2
+PKG_HASH:=		3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f
 PKG_DESCR:=		torrent client
 PKG_SECTION:=		app/p2p
 PKG_BUILDDEP:=		libressl libevent curl
