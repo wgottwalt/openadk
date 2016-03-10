@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
-prompt "Firmware type"
+prompt "Firmware type" if !ADK_TARGET_CHOOSE_ARCH
 depends on !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_OS_BAREMETAL
 default ADK_TARGET_ROOTFS_ARCHIVE
 

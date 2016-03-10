@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice ADK_TARGET_CPU
-prompt "CPU"
+prompt "CPU" if !ADK_TARGET_CHOOSE_ARCH
 
 # aarch64
 config ADK_TARGET_CPU_AARCH64_CORTEX_A53

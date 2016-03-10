@@ -20,6 +20,8 @@ source "target/config/Config.in.kernelfmt"
 source "target/config/Config.in.arch"
 source "target/config/Config.in.endian"
 source "target/config/Config.in.archopts"
+
+
 source "target/config/Config.in.system"
 source "target/config/Config.in.systemopts"
 source "target/config/Config.in.subsystem"
@@ -28,11 +30,10 @@ source "target/config/Config.in.cpu"
 source "target/config/Config.in.tasks"
 source "target/config/Config.in.rootfs"
 source "target/config/Config.in.target"
-
 source "target/config/Config.in"
 
 menu "Package selection"
-	visible if ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN
+	visible if ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
 source "package/Config.in.auto.global"
 source "package/Config.in"
 menu "Package options"
@@ -41,19 +42,20 @@ endmenu
 endmenu
 
 menu "Runtime configuration"
-	visible if ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN
+	visible if ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
 source "target/config/Config.in.runtime"
 endmenu
 
 source "target/config/Config.in.kernelversion"
 
 menu "Kernel configuration"
-	visible if ADK_TARGET_OS_LINUX && ADK_TARGET_KERNEL_CUSTOMISING && !ADK_APPLIANCE_TOOLCHAIN
+	visible if ADK_TARGET_OS_LINUX && ADK_TARGET_KERNEL_CUSTOMISING && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
 source "target/config/Config.in.kernelcfg"
 source "target/linux/Config.in"
 endmenu
 
 menu "Toolchain settings"
+	visible if !ADK_TARGET_CHOOSE_ARCH
 
 config ADK_VENDOR
 	string "Vendor name"
