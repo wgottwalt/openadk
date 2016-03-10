@@ -1,0 +1,11 @@
+--- node-v5.7.1.orig/deps/v8/src/log-utils.h	2016-03-02 23:20:49.000000000 +0100
++++ node-v5.7.1/deps/v8/src/log-utils.h	2016-03-09 09:59:14.000000000 +0100
+@@ -5,6 +5,8 @@
+ #ifndef V8_LOG_UTILS_H_
+ #define V8_LOG_UTILS_H_
+ 
++#include <cstdarg>
++
+ #include "src/allocation.h"
+ #include "src/base/platform/mutex.h"
+ #include "src/flags.h"
