@@ -4,28 +4,8 @@
 choice
 prompt "Firmware type" if !ADK_TARGET_CHOOSE_ARCH
 depends on !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_OS_BAREMETAL
+default ADK_TARGET_ROOTFS_INITRAMFSPIGGYBACK if ADK_TARGET_QEMU || ADK_TARGET_SIM
 default ADK_TARGET_ROOTFS_ARCHIVE
-
-config ADK_TARGET_ROOTFS_INITRAMFS
-	bool "initramfs filesystem"
-	depends on \
-		ADK_TARGET_QEMU || \
-		ADK_TARGET_ARCH_M68K || \
-		ADK_TARGET_ARCH_ARM || \
-		ADK_TARGET_ARCH_MICROBLAZE || \
-		ADK_TARGET_ARCH_MIPS || \
-		ADK_TARGET_ARCH_PPC || \
-		ADK_TARGET_ARCH_SH || \
-		ADK_TARGET_ARCH_SPARC || \
-		ADK_TARGET_ARCH_X86 || \
-		ADK_TARGET_ARCH_X86_64
-	depends on !ADK_TARGET_VBOX
-	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
-	depends on !ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208
-	depends on !ADK_TARGET_SYSTEM_QEMU_METAG
-	select ADK_KERNEL_BLK_DEV_INITRD
-	help
-	  create an read-only initramfs system.
 
 config ADK_TARGET_ROOTFS_INITRAMFSPIGGYBACK
 	bool "initramfs filesystem included into kernel image"
@@ -47,6 +27,27 @@ config ADK_TARGET_ROOTFS_INITRAMFSPIGGYBACK
 		ADK_TARGET_ARCH_X86_64
 	depends on !ADK_TARGET_VBOX
 	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	help
+	  create an read-only initramfs system.
+
+config ADK_TARGET_ROOTFS_INITRAMFS
+	bool "initramfs filesystem"
+	depends on \
+		ADK_TARGET_QEMU || \
+		ADK_TARGET_ARCH_M68K || \
+		ADK_TARGET_ARCH_ARM || \
+		ADK_TARGET_ARCH_MICROBLAZE || \
+		ADK_TARGET_ARCH_MIPS || \
+		ADK_TARGET_ARCH_PPC || \
+		ADK_TARGET_ARCH_SH || \
+		ADK_TARGET_ARCH_SPARC || \
+		ADK_TARGET_ARCH_X86 || \
+		ADK_TARGET_ARCH_X86_64
+	depends on !ADK_TARGET_VBOX
+	depends on !ADK_TARGET_SYSTEM_MIKROTIK_RB532
+	depends on !ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208
+	depends on !ADK_TARGET_SYSTEM_QEMU_METAG
+	select ADK_KERNEL_BLK_DEV_INITRD
 	help
 	  create an read-only initramfs system.
 
