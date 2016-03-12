@@ -24,9 +24,9 @@ PKG_SITES:=		${MASTER_SITE_GNU:=binutils/}
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_23_ARC),y)
-PKG_VERSION:=		07548f412246c68cd098b7b8fe3b7f86f43e4180
+PKG_VERSION:=		fc013006f64af9933a0b3171d5e48d8dfd53e44b
 PKG_RELEASE:=		1
-PKG_SITES:=		https://github.com/foss-for-synopsys-dwc-arc-processors/binutils-gdb.git
+PKG_SITES:=		https://github.com/foss-for-synopsys-dwc-arc-processors/binutils-gdb_refact.git
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_22),y)

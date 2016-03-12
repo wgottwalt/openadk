@@ -1369,6 +1369,7 @@ config ADK_TARGET_GCC_CPU
 	default "68030" if ADK_TARGET_CPU_M68K_68030
 	default "68040" if ADK_TARGET_CPU_M68K_68040
 	default "68060" if ADK_TARGET_CPU_M68K_68060
+	default "arc700" if ADK_TARGET_CPU_ARC_ARC700
 	default "archs" if ADK_TARGET_CPU_ARC_ARC_HS
 	default "arm1176jzf-s" if ADK_TARGET_CPU_ARM_ARM1176JZF_S
 	default "arm926ej-s" if ADK_TARGET_CPU_ARM_ARM926EJ_S
@@ -1440,7 +1441,6 @@ config ADK_TARGET_GCC_ARCH
 # for CFLAGS/CXXFLAGS if gcc does not support --with-cpu
 config ADK_TARGET_CPU_FLAGS
 	string
-	default "-mcpu=ARC700" if ADK_TARGET_CPU_ARC_ARC700
 	default "-mcpu=bf512" if ADK_TARGET_CPU_BFIN_BF512
 	default "-mcpu=bf514" if ADK_TARGET_CPU_BFIN_BF514
 	default "-mcpu=bf516" if ADK_TARGET_CPU_BFIN_BF516
