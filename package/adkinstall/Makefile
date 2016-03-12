@@ -8,9 +8,9 @@ PKG_VERSION:=		2.0
 PKG_RELEASE:=		3
 PKG_DESCR:=		disk/flash installer
 PKG_SECTION:=		base/misc
-PKG_DEPENDS:=		grub grub-tools
-PKG_KDEPENDS:=		ext4-fs
 PKG_DEPENDS:=		mke2fs parted sfdisk dosfstools mksh
+PKG_DEPENDS+=		grub grub-tools
+PKG_KDEPENDS:=		ext4-fs
 
 NO_DISTFILES:=		1
 
