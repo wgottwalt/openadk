@@ -1,5 +1,5 @@
---- stunnel-5.24.orig/src/verify.c	2015-09-23 12:00:08.000000000 +0200
-+++ stunnel-5.24/src/verify.c	2015-10-21 11:17:41.000000000 +0200
+--- stunnel-5.31.orig/src/verify.c	2016-02-19 20:18:43.000000000 +0100
++++ stunnel-5.31/src/verify.c	2016-03-13 13:30:11.000000000 +0100
 @@ -51,9 +51,6 @@ NOEXPORT int add_dir_lookup(X509_STORE *
  NOEXPORT int verify_callback(int, X509_STORE_CTX *);
  NOEXPORT int verify_checks(CLI *, int, X509_STORE_CTX *);
@@ -10,7 +10,7 @@
  NOEXPORT int cert_check_local(X509_STORE_CTX *);
  NOEXPORT int compare_pubkeys(X509 *, X509 *);
  #ifndef OPENSSL_NO_OCSP
-@@ -280,10 +277,6 @@ NOEXPORT int cert_check(CLI *c, X509_STO
+@@ -274,10 +271,6 @@ NOEXPORT int cert_check(CLI *c, X509_STO
      }
  
      if(depth==0) { /* additional peer certificate checks */
@@ -21,7 +21,7 @@
          if(c->opt->verify_level>=3 && !cert_check_local(callback_ctx))
              return 0; /* reject */
      }
-@@ -291,51 +284,6 @@ NOEXPORT int cert_check(CLI *c, X509_STO
+@@ -285,51 +278,6 @@ NOEXPORT int cert_check(CLI *c, X509_STO
      return 1; /* accept */
  }
  

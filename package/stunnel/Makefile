@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		stunnel
-PKG_VERSION:=		5.24
+PKG_VERSION:=		5.31
 PKG_RELEASE:=		1
-PKG_HASH:=		ab2e5a1034d422951ddad21b572eb7fa8efb4c4ce04bc86536c6845f3d02b07e
+PKG_HASH:=		a746b71ab3dc6c23eacb0daf7342467870e43ac933430905eb1b1d050bbae0b7
 PKG_DESCR:=		encryption wrapper
 PKG_SECTION:=		net/security
 PKG_URL:=		https://www.stunnel.org
 PKG_SITES:=		https://www.stunnel.org/downloads/
 
-PKG_CHOICES_STUNNEL:=	WITH_LIBRESSL WITH_OPENSSL
+PKG_CHOICES_STUNNEL:=	WITH_OPENSSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
 PKGCB_WITH_LIBRESSL:=	libressl
 PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
