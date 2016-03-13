@@ -4,18 +4,17 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		nss
-PKG_VERSION:=		3.20.1
+PKG_VERSION:=		3.23
 PKG_RELEASE:=		1
 PKG_MAJ_VERSION:=	3
-PKG_MIN_VERSION:=	20
-PKG_PATCH_VERSION:=	1
-PKG_HASH:=		ad3c8f11dfd9570c2d04a6140d5ef7c2bdd0fe30d6c9e5548721a4251a5e8c97
+PKG_MIN_VERSION:=	23
+PKG_HASH:=		94b383e31c9671e9dfcca81084a8a813817e8f05a57f54533509b318d26e11cf
 PKG_DESCR:=		network security services library
 PKG_SECTION:=		libs/crypto
 PKG_BUILDDEP:=		nspr zlib sqlite
 PKG_DEPENDS:=		nspr zlib libsqlite
 PKG_URL:=		http://www.mozilla.org/projects/security/pki/nss/
-PKG_SITES:=		https://ftp.mozilla.org/pub/security/nss/releases/NSS_${PKG_MAJ_VERSION}_${PKG_MIN_VERSION}_${PKG_PATCH_VERSION}_RTM/src/
+PKG_SITES:=		https://ftp.mozilla.org/pub/security/nss/releases/NSS_${PKG_MAJ_VERSION}_${PKG_MIN_VERSION}_RTM/src/
 PKG_NOPARALLEL:=	1
 
 PKG_HOST_DEPENDS:=	!cygwin

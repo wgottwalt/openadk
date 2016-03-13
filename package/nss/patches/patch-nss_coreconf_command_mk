@@ -1,8 +1,8 @@
---- nss-3.17.4.orig/nss/coreconf/command.mk	2015-01-22 20:49:26.000000000 +0100
-+++ nss-3.17.4/nss/coreconf/command.mk	2015-01-29 15:49:15.000000000 +0100
+--- nss-3.23.orig/nss/coreconf/command.mk	2016-02-26 21:51:11.000000000 +0100
++++ nss-3.23/nss/coreconf/command.mk	2016-03-12 19:34:11.232877235 +0100
 @@ -15,7 +15,7 @@ LINK_DLL      = $(LINK) $(OS_DLLFLAGS) $
- CFLAGS        = $(OPTIMIZER) $(OS_CFLAGS) $(XP_DEFINE) $(DEFINES) $(INCLUDES) \
- 		$(XCFLAGS)
+ CFLAGS        = $(OPTIMIZER) $(OS_CFLAGS) $(WARNING_CFLAGS) $(XP_DEFINE) \
+                 $(DEFINES) $(INCLUDES) $(XCFLAGS)
  PERL          = perl
 -RANLIB        = echo
 +RANLIB        = ranlib
