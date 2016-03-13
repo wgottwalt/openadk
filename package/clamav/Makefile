@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		clamav
-PKG_VERSION:=		0.98.7
+PKG_VERSION:=		0.99.1
 PKG_RELEASE:=		1
-PKG_HASH:=		282417b707740de13cd8f18d4cbca9ddd181cf96b444db2cad98913a5153e272
+PKG_HASH:=		e144689122d3f91293808c82cbb06b7d3ac9eca7ae29564c5d148ffe7b25d58a
 PKG_DESCR:=		anti-virus software
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libressl libxml2 zlib
@@ -20,6 +20,10 @@ DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,CLAMAV,clamav,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
+
+CONFIGURE_ENV+=		ac_cv_c_mmap_private=yes
+CONFIGURE_ARGS+=	--enable-mempool \
+			--disable-check
 
 clamav-install:
 	$(INSTALL_DIR) $(IDIR_CLAMAV)/etc
