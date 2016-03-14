@@ -3,6 +3,11 @@
 arch=$1
 kernel=$2
 
+if [ ! -f $kernel ]; then
+  echo "Kernel $kernel not found"
+  exit 1
+fi
+
 if [ "$arch" = "arcv1" ]; then
   nsimdrv -prop=nsim_isa_family=a700 -prop=nsim_isa_atomic_option=1 -prop=nsim_mmu=3 -prop=icache=32768,64,2,0 -prop=dcache=32768,64,4,0 -prop=nsim_isa_dpfp=none -prop=nsim_isa_shift_option=2 -prop=nsim_isa_swap_option=1 -prop=nsim_isa_bitscan_option=1 -prop=nsim_isa_sat=1 -prop=nsim_isa_mpy32=1 -prop=nsim_isa_enable_timer_0=1 -prop=nsim_isa_enable_timer_1=1 -prop=nsim_mem-dev=uart0 $kernel
 fi
