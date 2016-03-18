@@ -77,8 +77,7 @@ $(1):
 			;; \
 		  esac ;\
 		else \
-		  echo "Using git head"; \
-		  git clone $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
+		  git clone --depth 1 $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
 		fi; \
 		tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
 		touch $$$${filename}.nohash; \
