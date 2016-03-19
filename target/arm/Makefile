@@ -12,6 +12,9 @@ endif
 ifeq ($(ADK_TARGET_KERNEL_UIMAGE),y)
 KERNEL:=$(LINUX_DIR)/arch/arm/boot/uImage
 endif
+ifeq ($(ADK_TARGET_KERNEL_XIPIMAGE),y)
+KERNEL:=$(LINUX_DIR)/arch/arm/boot/xipImage
+endif
 
 QEMU_ARGS:=${ADK_QEMU_ARGS}
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_SPITZ),y)

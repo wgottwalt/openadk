@@ -22,6 +22,9 @@ config ADK_TARGET_KERNEL_BZIMAGE
 config ADK_TARGET_KERNEL_VMLINUX_AOUT
 	bool
 
+config ADK_TARGET_KERNEL_XIPIMAGE
+	bool
+
 config ADK_TARGET_KERNEL
 	string
 	default "uImage" if ADK_TARGET_KERNEL_UIMAGE
@@ -31,6 +34,7 @@ config ADK_TARGET_KERNEL
 	default "vmlinuz" if ADK_TARGET_KERNEL_VMLINUZ
 	default "bzImage" if ADK_TARGET_KERNEL_BZIMAGE
 	default "vmlinux.aout" if ADK_TARGET_KERNEL_VMLINUX_AOUT
+	default "xipImage" if ADK_TARGET_KERNEL_XIPIMAGE
 	default "vmlinux"
 
 config ADK_TARGET_KERNEL_WITH_COMPRESSION
