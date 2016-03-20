@@ -1,6 +1,6 @@
---- kodi-ff25ea118e3580bb1ebcbb7c450ed933da1782be.orig/xbmc/Application.cpp	2015-05-25 11:50:32.000000000 -0500
-+++ kodi-ff25ea118e3580bb1ebcbb7c450ed933da1782be/xbmc/Application.cpp	2015-05-25 11:53:49.534501831 -0500
-@@ -911,10 +911,7 @@ bool CApplication::InitDirectoriesLinux(
+--- xbmc-16.0-Jarvis.orig/xbmc/Application.cpp	2016-02-20 16:21:19.000000000 +0100
++++ xbmc-16.0-Jarvis/xbmc/Application.cpp	2016-03-14 04:38:00.084253990 +0100
+@@ -871,10 +871,7 @@ bool CApplication::InitDirectoriesLinux(
      userName = "root";
  
    std::string userHome;

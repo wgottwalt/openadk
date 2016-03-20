@@ -1,6 +1,6 @@
---- kodi-14.0rc2.orig/xbmc/utils/SystemInfo.cpp	2014-12-05 19:38:44.000000000 -0600
-+++ kodi-14.0rc2/xbmc/utils/SystemInfo.cpp	2014-12-07 23:48:19.332418001 -0600
-@@ -615,16 +615,11 @@ std::string CSysInfo::GetOsName(bool emp
+--- xbmc-16.0-Jarvis.orig/xbmc/utils/SystemInfo.cpp	2016-02-20 16:21:19.000000000 +0100
++++ xbmc-16.0-Jarvis/xbmc/utils/SystemInfo.cpp	2016-03-14 04:38:00.092253459 +0100
+@@ -614,16 +614,11 @@ std::string CSysInfo::GetOsName(bool emp
      osName = "iOS";
  #elif defined(TARGET_DARWIN_OSX)
      osName = "OS X";
@@ -20,7 +20,7 @@
      if (osName.empty())
        osName = "Unknown OS";
    }
-@@ -665,7 +660,7 @@ std::string CSysInfo::GetOsVersion(void)
+@@ -664,7 +659,7 @@ std::string CSysInfo::GetOsVersion(void)
  #elif defined(TARGET_LINUX)
    osVersion = getValueFromOs_release("VERSION_ID");
    if (osVersion.empty())
@@ -29,7 +29,7 @@
  #endif // defined(TARGET_LINUX)
  
    if (osVersion.empty())
-@@ -737,19 +732,7 @@ std::string CSysInfo::GetOsPrettyNameWit
+@@ -742,19 +737,7 @@ std::string CSysInfo::GetOsPrettyNameWit
  #elif defined(TARGET_ANDROID)
    osNameVer = GetOsName() + " " + GetOsVersion() + " API level " +   StringUtils::Format("%d", CJNIBuild::SDK_INT);
  #elif defined(TARGET_LINUX)
