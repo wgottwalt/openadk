@@ -25,7 +25,7 @@ post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
 ifneq (,$(filter bootstrap,${AUTOTOOL_STYLE}))
 	@$(CMD_TRACE) "autotool configuring.. "
-	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) bootstrap.sh $(MAKE_TRACE)
+	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) bootstrap* $(MAKE_TRACE)
 endif
 ifneq (,$(filter autogen,${AUTOTOOL_STYLE}))
 	@$(CMD_TRACE) "autotool configuring.. "

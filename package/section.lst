@@ -4,6 +4,7 @@ base/apps	Base System
 base/misc	Base Misc
 base/tests	Testsuites
 base/shells	Shells
+sys/drivers	Hardware drivers / externel Kernel modules
 sys/fs		Filesystem / Blockdevice Utilities
 sys/misc	System Misc
 sys/serial	Serial communications & terminal emulation

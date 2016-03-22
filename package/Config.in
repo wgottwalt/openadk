@@ -8,6 +8,7 @@ source package/Config.in.auto.base.tests
 endmenu
 
 menu "System"
+source package/Config.in.auto.sys.drivers
 source package/Config.in.auto.sys.fs
 source package/Config.in.auto.sys.serial
 source package/Config.in.auto.sys.utils
