@@ -15,6 +15,8 @@ PKG_URL:=		https://github.com/NXPNFCLinux/linux_libnfc-nci
 PKG_SITES:=		https://github.com/NXPNFCLinux/linux_libnfc-nci.git
 PKG_OPTS:=		dev
 
+PKG_LIBC_DEPENDS:=	glibc uclibc-ng
+
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBNFC_NCI,libnfc-nci,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
