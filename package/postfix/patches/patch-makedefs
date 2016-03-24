@@ -1,0 +1,29 @@
+--- postfix-3.1.0.orig/makedefs	2016-02-21 23:39:45.000000000 +0100
++++ postfix-3.1.0/makedefs	2016-03-24 08:18:54.455960613 +0100
+@@ -455,7 +455,7 @@ case "$SYSTEM.$RELEASE" in
+ 		    SYSLIBS="-ldb"
+ 		    ;;
+ 		esac
+-		for name in nsl resolv $GDBM_LIBS
++		for name in resolv $GDBM_LIBS
+ 		do
+ 		    for lib in /usr/lib64 /lib64 /usr/lib /lib
+ 		    do
+@@ -534,7 +534,7 @@ EOF
+ 		    SYSLIBS="-ldb"
+ 		    ;;
+ 		esac
+-		for name in nsl resolv
++		for name in resolv
+ 		do
+ 		    for lib in /usr/lib64 /lib64 /usr/lib /usr/lib/* /lib /lib/*
+ 		    do
+@@ -572,7 +572,7 @@ EOF
+ 		    SYSLIBS="-ldb"
+ 		    ;;
+ 		esac
+-		for name in nsl resolv
++		for name in resolv
+ 		do
+ 		    for lib in /usr/lib64 /lib64 /usr/lib /lib
+ 		    do

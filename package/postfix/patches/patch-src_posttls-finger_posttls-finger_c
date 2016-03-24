@@ -1,6 +1,6 @@
---- postfix-2.11.0.orig/src/posttls-finger/posttls-finger.c	2013-12-16 17:06:33.000000000 +0100
-+++ postfix-2.11.0/src/posttls-finger/posttls-finger.c	2014-03-25 08:58:04.000000000 +0100
-@@ -290,6 +290,7 @@
+--- postfix-3.1.0.orig/src/posttls-finger/posttls-finger.c	2016-01-04 13:26:16.000000000 +0100
++++ postfix-3.1.0/src/posttls-finger/posttls-finger.c	2016-03-24 08:14:21.995964563 +0100
+@@ -307,6 +307,7 @@
    */
  #include <sys_defs.h>
  #include <stdarg.h>

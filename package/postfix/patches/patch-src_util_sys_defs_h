@@ -1,6 +1,6 @@
---- postfix-2.11.0.orig/src/util/sys_defs.h	2013-09-29 22:51:55.000000000 +0200
-+++ postfix-2.11.0/src/util/sys_defs.h	2014-03-26 19:38:02.000000000 +0100
-@@ -46,7 +46,7 @@
+--- postfix-3.1.0.orig/src/util/sys_defs.h	2016-02-06 14:30:39.000000000 +0100
++++ postfix-3.1.0/src/util/sys_defs.h	2016-03-24 08:14:21.999964563 +0100
+@@ -47,7 +47,7 @@
  #define HAS_FSYNC
  #define HAS_DB
  #define HAS_SA_LEN
@@ -9,7 +9,7 @@
  #if (defined(__NetBSD_Version__) && __NetBSD_Version__ >= 104250000)
  #define ALIAS_DB_MAP   DEF_DB_TYPE ":/etc/mail/aliases"	/* sendmail 8.10 */
  #endif
-@@ -54,7 +54,8 @@
+@@ -55,7 +55,8 @@
  #define ALIAS_DB_MAP   DEF_DB_TYPE ":/etc/mail/aliases"	/* OpenBSD 2.7 */
  #endif
  #ifndef ALIAS_DB_MAP

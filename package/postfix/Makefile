@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		postfix
-PKG_VERSION:=		3.0.1
+PKG_VERSION:=		3.1.0
 PKG_RELEASE:=		1
-PKG_HASH:=		cd2bd6447fe3368bb1a39f482f8dd1eec87c63067a0eb75f9aec8e4eadd21328
+PKG_HASH:=		88ac3e92755629077d9363319b1fa0db406efb10c2f22cdbb941bd8ab36fd733
 PKG_DESCR:=		popular mail transfer agent
 PKG_SECTION:=		net/mail
 PKG_BUILDDEP:=		tinycdb
@@ -16,6 +16,8 @@ PKG_SITES:=		http://de.postfix.org/ftpmirror/official/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_HOST_DEPENDS:=	!darwin
+# missing res_send support in resolver
+PKG_LIBC_DEPENDS:=	glibc musl
 
 include $(ADK_TOPDIR)/mk/package.mk
 
