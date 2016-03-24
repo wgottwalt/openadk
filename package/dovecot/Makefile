@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		dovecot
-PKG_VERSION:=		2.2.19
+PKG_VERSION:=		2.2.22
 PKG_RELEASE:=		1
-PKG_HASH:=		759e1e3f9d907cdaabad1f5fbacc793ca191d234c084bec3bba42966952a4e9f
+PKG_HASH:=		c7a9db3c4ae9d9b4da920d2c82669700a0d407934501b405f37f89cc0b706ec7
 PKG_DESCR:=		minimal and secure imap server
 PKG_SECTION:=		net/mail
 PKG_URL:=		http://www.dovecot.org/
