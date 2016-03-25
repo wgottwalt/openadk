@@ -1,5 +1,9 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+menu "Network device support"
 source "target/linux/config/Config.in.ethernet"
 source "target/linux/config/Config.in.wireless"
+source "target/linux/config/Config.in.bluetooth"
+source "target/linux/config/Config.in.nfc"
+endmenu

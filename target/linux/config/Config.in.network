@@ -2,7 +2,8 @@
 # material, please see the LICENCE file in the top-level directory.
 
 menu "Network support"
-depends on ADK_TARGET_WITH_NET
+depends on ADK_TARGET_WITH_NET \
+	|| ADK_TARGET_GENERIC
 
 config ADK_KERNEL_NETDEVICES
 	bool

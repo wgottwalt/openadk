@@ -2,7 +2,10 @@
 # material, please see the LICENCE file in the top-level directory.
 
 menu "Bluetooth support and drivers"
-depends on ADK_TARGET_WITH_USB || ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_SDIO
+depends on ADK_TARGET_WITH_USB \
+	|| ADK_TARGET_WITH_MINIPCI \
+	|| ADK_TARGET_WITH_SDIO \
+	|| ADK_TARGET_GENERIC
 
 config ADK_KERNEL_BT_BREDR
 	bool

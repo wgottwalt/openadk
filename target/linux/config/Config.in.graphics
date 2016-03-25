@@ -2,7 +2,10 @@
 # material, please see the LICENCE file in the top-level directory.
 
 menu "Graphic devices support"
-depends on ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU || ADK_TARGET_VBOX
+depends on ADK_TARGET_WITH_VGA \
+	|| ADK_TARGET_QEMU \
+	|| ADK_TARGET_VBOX \
+	|| ADK_TARGET_GENERIC
 
 config ADK_KERNEL_VT
 	bool

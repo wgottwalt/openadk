@@ -2,7 +2,11 @@
 # material, please see the LICENCE file in the top-level directory.
 
 menu "Audio devices support"
-depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_USB || ADK_TARGET_WITH_SOUND || ADK_TARGET_QEMU
+depends on ADK_TARGET_WITH_PCI \
+	|| ADK_TARGET_WITH_USB \
+	|| ADK_TARGET_WITH_SOUND \
+	|| ADK_TARGET_QEMU \
+	|| ADK_TARGET_GENERIC
 
 config ADK_KERNEL_SOUND
 	tristate
