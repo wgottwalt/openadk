@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ntfs-3g
-PKG_VERSION:=		2015.3.14
+PKG_VERSION:=		2016.2.22
 PKG_RELEASE:=		1
-PKG_HASH:=		97f996015d8316d4a272bd2629978e5e97072dd3cc148ce39802f8037c6538f2
+PKG_HASH:=		d7b72c05e4b3493e6095be789a760c9f5f2b141812d5b885f3190c98802f1ea0
 PKG_DESCR:=		ntfs filesystem driver using fuse
 PKG_SECTION:=		sys/fs
 PKG_URL:=		http://tuxera.com
