@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		42.0
+PKG_VERSION:=		45.0
 PKG_RELEASE:=		1
-PKG_HASH:=		994a346699298277b64ec0cab72660b8d3e5b879a2ac79207576f7e6c33da3ae
+PKG_HASH:=		36ab0f09b1b1df071a8aafa673c6286d99c18dc06cecbb70d1bb2021fbf379f1
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		alsa-lib glib libgtk2 libpng libtiff libxcursor libffi
@@ -104,7 +104,7 @@ CONFIGURE_ARGS+=	--enable-application=browser \
 			--disable-mathml \
 			--disable-jemalloc \
 			--disable-crashreporter \
-			--disable-printing \
+			--enable-printing \
 			--disable-pie \
 			--disable-updater \
 			--disable-xpcom-fastload \

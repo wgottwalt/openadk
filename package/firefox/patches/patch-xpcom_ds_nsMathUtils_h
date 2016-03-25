@@ -1,6 +1,6 @@
---- mozilla-release.orig/xpcom/ds/nsMathUtils.h	2015-10-14 23:41:52.000000000 +0200
-+++ mozilla-release/xpcom/ds/nsMathUtils.h	2015-10-22 21:35:50.563890005 +0200
-@@ -105,12 +105,16 @@ NS_finite(double aNum)
+--- firefox-45.0.orig/xpcom/ds/nsMathUtils.h	2016-03-03 22:48:07.000000000 +0100
++++ firefox-45.0/xpcom/ds/nsMathUtils.h	2016-03-13 21:15:29.543246177 +0100
+@@ -103,12 +103,16 @@ NS_finite(double aNum)
  #ifdef WIN32
    // NOTE: '!!' casts an int to bool without spamming MSVC warning C4800.
    return !!_finite(aNum);
