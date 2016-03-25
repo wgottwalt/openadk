@@ -4,13 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		2.44.1
+PKG_VERSION:=		2.48.0
 PKG_RELEASE:=		1
-PKG_EXTRAVER:=		2.44
-PKG_HASH:=		8811deacaf8a503d0a9b701777ea079ca6a4277be10e3d730d2112735d5eca07
+PKG_EXTRAVER:=		2.48
+PKG_HASH:=		744be6931ca914c68af98dc38ff6b0cf8381d65e335060faddfbf04c17147c34
 PKG_DESCR:=		low-level core library that forms the basis of gtk+
 PKG_SECTION:=		libs/misc
-PKG_BUILDDEP:=		glib-host libffi gettext-tiny zlib libelf dbus
+PKG_DEPENDS:=		libpcre zlib
+PKG_BUILDDEP:=		glib-host libffi gettext-tiny zlib libelf dbus pcre
 HOST_BUILDDEP:=		libffi-host gettext-tiny-host python2-host
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.gtk.org/
@@ -27,6 +28,7 @@ $(eval $(call PKG_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS
 CONFIGURE_ARGS+=	--disable-mem-pools \
 			--disable-rebuilds \
 			--disable-fam \
+			--with-pcre=system \
 			--with-threads=posix
 CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			glib_cv_stack_grows=no \
@@ -44,6 +46,7 @@ HOST_CONFIGURE_ARGS+=	--with-libiconv=no
 endif
 HOST_CONFIGURE_ARGS+=	--disable-fam \
 			--enable-static \
+			--with-pcre=bundled \
 			--disable-shared \
 			--disable-compile-warnings
 
