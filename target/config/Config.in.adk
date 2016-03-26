@@ -43,6 +43,18 @@ config ADK_DISABLE_CHECKSUM
 	help
 	  Disable checksum checks of downloads.
 
+choice
+prompt "Backend for patching and update-patches"
+default ADK_UPDATE_PATCHES_CLASSIC
+
+config ADK_UPDATE_PATCHES_CLASSIC
+	bool "Classic"
+
+config ADK_UPDATE_PATCHES_GIT
+	bool "Git"
+
+endchoice
+
 config ADK_DISABLE_KERNEL_PATCHES
 	bool "Disable global kernel patches"
 	depends on ADK_TARGET_OS_LINUX

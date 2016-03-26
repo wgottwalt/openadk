@@ -1,0 +1,31 @@
+#!/usr/bin/env bash
+#
+# Update patches using git-format-patch from a source tree prepared by
+# patch_git.sh.
+#
+# (c) 2016 Phil Sutter <phil@nwl.cc>
+
+wrkdist=$1
+wd=$(pwd)
+
+cd "$wrkdist"
+top=""
+top_series=""
+git log --grep="^OpenADK patch marker:" --oneline | while read hash subject; do
+	[ -n "$top" ] || {
+		top=$hash
+		top_series="${subject#OpenADK patch marker: }"
+		continue
+	}
+	bottom=$hash
+	bottom_series="${subject#OpenADK patch marker: }"
+
+	patchdir=$(<.git/patch_tmp/${top_series}/__patchdir__)
+	while read patchfile; do
+		rm ${patchdir}/$patchfile
+	done < .git/patch_tmp/${top_series}/__patchfiles__
+	git format-patch -N -o "$patchdir" ${bottom}..${top}
+
+	top=$bottom
+	top_series=$bottom_series
+done

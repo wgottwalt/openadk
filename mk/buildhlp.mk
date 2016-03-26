@@ -97,6 +97,9 @@ ${WRKDIST}/.prepared: ${WRKDIST}/.extract_done
 endif
 
 update-patches host-update-patches:
+ifneq (${ADK_UPDATE_PATCHES_GIT},)
+	PATH='${HOST_PATH}' ${BASH} $(SCRIPT_DIR)/update-patches-git "${WRKDIST}"
+else
 	@test ! -d ${WRKDIR}.orig || rm -rf ${WRKDIR}.orig
 	@test ! -d ${WRKDIR}.orig
 ifeq ($(strip ${_IN_PACKAGE})$(strip ${_IN_CVTC}),1)
@@ -115,5 +118,6 @@ endif
 	    PATH=$(call shellescape,${HOST_PATH}) \
 	    $(call shellexport,DIFF_IGNOREFILES) \
 	    mksh ${ADK_TOPDIR}/scripts/update-patches2
+endif
 
 .PHONY: update-patches host-update-patches

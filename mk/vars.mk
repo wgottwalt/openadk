@@ -282,7 +282,11 @@ endif
 HOST_CPPFLAGS:=		-I$(STAGING_HOST_DIR)/usr/include
 HOST_LDFLAGS:=		-L$(STAGING_HOST_DIR)/usr/lib -Wl,-rpath -Wl,${STAGING_HOST_DIR}/usr/lib
 
+ifneq (${ADK_UPDATE_PATCHES_GIT},)
+PATCH=			PATH='${HOST_PATH}' ${BASH} $(SCRIPT_DIR)/patch_git.sh
+else
 PATCH=			PATH='${HOST_PATH}' ${BASH} $(SCRIPT_DIR)/patch.sh
+endif
 PATCHP0=		PATH='${HOST_PATH}' patch -p0
 
 ifeq ($(ADK_STATIC_TOOLCHAIN),y)
