@@ -12,7 +12,7 @@ autostart)
 	;;
 start)
 	if [ ! -d /data/firefox ];then
-		mkdir /data/firefox
+		mkdir -p /data/firefox
 		chown firefox /data/firefox
 	fi
 	su - firefox -c	startx
