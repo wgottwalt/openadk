@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		cairo
-PKG_VERSION:=		1.14.2
+PKG_VERSION:=		1.14.6
 PKG_RELEASE:=		1
-PKG_HASH:=		c919d999ddb1bbbecd4bbe65299ca2abd2079c7e13d224577895afa7005ecceb
+PKG_HASH:=		613cb38447b76a93ff7235e17acd55a78b52ea84a9df128c3f2257f8eaa7b252
 PKG_DESCR:=		graphics library
 PKG_SECTION:=		libs/image
 PKG_DEPENDS:=		fontconfig libfreetype libx11 pixman
