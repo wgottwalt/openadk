@@ -1,18 +1,16 @@
---- nginx-1.9.12.orig/auto/install	2016-02-24 15:53:23.000000000 +0100
-+++ nginx-1.9.12/auto/install	2016-03-04 19:55:33.000000000 +0100
-@@ -107,12 +107,9 @@ $NGX_OBJS/nginx.8:	$NGX_MAN $NGX_AUTO_CO
+--- nginx-1.9.13.orig/auto/install	2016-03-29 17:09:30.000000000 +0200
++++ nginx-1.9.13/auto/install	2016-04-01 23:45:09.250318293 +0200
+@@ -107,11 +107,8 @@ $NGX_OBJS/nginx.8:	$NGX_MAN $NGX_AUTO_CO
  install:	build $NGX_INSTALL_PERL_MODULES
  	test -d '\$(DESTDIR)$NGX_PREFIX' || mkdir -p '\$(DESTDIR)$NGX_PREFIX'
  
--	test -d '\$(DESTDIR)`dirname "$NGX_SBIN_PATH"`' \
+-	test -d '\$(DESTDIR)`dirname "$NGX_SBIN_PATH"`' \\
 -		|| mkdir -p '\$(DESTDIR)`dirname "$NGX_SBIN_PATH"`'
--	test ! -f '\$(DESTDIR)$NGX_SBIN_PATH' \
--		|| mv '\$(DESTDIR)$NGX_SBIN_PATH' \
+-	test ! -f '\$(DESTDIR)$NGX_SBIN_PATH' \\
+-		|| mv '\$(DESTDIR)$NGX_SBIN_PATH' \\
 -			'\$(DESTDIR)$NGX_SBIN_PATH.old'
--	cp $NGX_OBJS/nginx '\$(DESTDIR)$NGX_SBIN_PATH'
-+	test -d '\$(DESTDIR)$NGX_SBIN_PATH' \
++	test -d '\$(DESTDIR)$NGX_SBIN_PATH' \\
 +		|| mkdir -p '\$(DESTDIR)$NGX_SBIN_PATH'
-+	cp $NGX_OBJS/nginx '\$(DESTDIR)$NGX_SBIN_PATH/'
+ 	cp $NGX_OBJS/nginx '\$(DESTDIR)$NGX_SBIN_PATH'
  
- 	test -d '\$(DESTDIR)$NGX_CONF_PREFIX' \
- 		|| mkdir -p '\$(DESTDIR)$NGX_CONF_PREFIX'
+ 	test -d '\$(DESTDIR)$NGX_CONF_PREFIX' \\
