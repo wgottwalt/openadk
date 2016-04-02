@@ -580,6 +580,12 @@ config ADK_TARGET_CPU_CF_5475
 	select ADK_TARGET_WITH_MMU
 	depends on ADK_TARGET_ARCH_M68K
 
+# m32r
+config ADK_TARGET_CPU_M32R
+	bool "m32r"
+	select ADK_TARGET_WITH_MMU
+	depends on ADK_TARGET_ARCH_M32R
+
 # m68k
 config ADK_TARGET_CPU_M68K_68020
 	bool "68020"
@@ -1615,6 +1621,7 @@ config ADK_TARGET_CPU_ARCH
 	default "hppa" if ADK_TARGET_ARCH_HPPA
 	default "ia64" if ADK_TARGET_ARCH_IA64
 	default "lm32" if ADK_TARGET_ARCH_LM32
+	default "m32r" if ADK_TARGET_ARCH_M32R
 	default "m68k" if ADK_TARGET_ARCH_M68K
 	default "metag" if ADK_TARGET_ARCH_METAG
 	default "microblaze" if ADK_TARGET_ARCH_MICROBLAZE && ADK_TARGET_BIG_ENDIAN
