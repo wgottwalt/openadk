@@ -3,10 +3,10 @@
 
 include $(ADK_TOPDIR)/rules.mk
 
-PKG_NAME:=		CherryPy
-PKG_VERSION:=		3.3.0
+PKG_NAME:=		cherrypy
+PKG_VERSION:=		5.1.0
 PKG_RELEASE:=		1
-PKG_HASH:=		f8829bf1b4f613833b690b33b2fd00b1da4ef98df3c70240f78ee91b70f4a5a2
+PKG_HASH:=		5fccc9ad3bf9a1df83bbb934772f34f42571421bdd75f90f74c170b6c0ef13b1
 PKG_DESCR:=		python web framework
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		python2
@@ -14,7 +14,8 @@ PKG_BUILDDEP:=		python2
 PKG_URL:=		http://www.cherrypy.org/
 PKG_SITES:=		https://pypi.python.org/packages/source/C/CherryPy/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		CherryPy-${PKG_VERSION}.tar.gz
+WRKDIST=		${WRKDIR}/CherryPy-$(PKG_VERSION)
 
 include $(ADK_TOPDIR)/mk/package.mk
 
