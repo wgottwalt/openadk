@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		tor
 PKG_VERSION:=		0.2.7.6
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		493a8679f904503048114aca6467faef56861206bab8283d858f37141d95105d
 PKG_DESCR:=		anonymous internet communication system
 PKG_SECTION:=		net/proxy
@@ -29,6 +29,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TOR,tor,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoreconf
 # -DNDEBUG not supported
 TARGET_CPPFLAGS:=
 CONFIGURE_ENV+=		ac_cv_libevent_normal=yes \
