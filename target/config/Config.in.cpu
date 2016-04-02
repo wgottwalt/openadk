@@ -340,6 +340,12 @@ config ADK_TARGET_CPU_CRIS_CRISV32
 	select ADK_TARGET_WITH_MMU
 	depends on ADK_TARGET_ARCH_CRIS
 
+# epiphany
+config ADK_TARGET_CPU_EPIPHANY
+	bool "epiphany"
+	select ADK_TARGET_WITH_MMU
+	depends on ADK_TARGET_ARCH_EPIPHANY
+
 # fr-v
 config ADK_TARGET_CPU_FRV
 	bool "fr-v"
@@ -1597,6 +1603,7 @@ config ADK_TARGET_CPU_ARCH
 	default "c6x" if ADK_TARGET_ARCH_C6X
 	default "cris" if ADK_TARGET_CPU_CRIS_CRISV10
 	default "crisv32" if ADK_TARGET_CPU_CRIS_CRISV32
+	default "epiphany" if ADK_TARGET_ARCH_EPIPHANY
 	default "frv" if ADK_TARGET_ARCH_FRV
 	default "i486" if ADK_TARGET_CPU_X86_I486
 	default "i586" if ADK_TARGET_CPU_X86_I586
