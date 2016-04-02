@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openldap
-PKG_VERSION:=		2.4.42
+PKG_VERSION:=		2.4.44
 PKG_RELEASE:=		1
-PKG_HASH:=		eeb7b0e2c5852bfd2650e83909bb6152835c0b862fab10b63954dc1bcbba8e63
+PKG_HASH:=		d7de6bf3c67009c95525dde3a0212cc110d0a70b92af2af8e3ee800e81b88400
 PKG_DESCR:=		ldap client libraries
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libsasl2 libdb libuuid libncurses
