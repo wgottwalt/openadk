@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		strongswan
-PKG_VERSION:=		5.3.5
+PKG_VERSION:=		5.4.0
 PKG_RELEASE:=		1
-PKG_HASH:=		e3a3618446f2bb040881cffc598ac2aa59c4ed2ac9af74b8f58e4003a262c403
+PKG_HASH:=		b284f95125e17bb4450075dddc066f5f291068cbfc0a639bc2dd3de48c5984cf
 PKG_DESCR:=		ipsec vpn software
 PKG_SECTION:=		net/security
 PKG_NEEDS:=		threads
@@ -28,10 +28,6 @@ PKGCB_WITH_LIBRESSL:=	libressl
 PKGCD_WITH_GNUTLS:=	use gnutls for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls
 PKGCB_WITH_GNUTLS:=	gnutls
-
-ifeq (${ADK_PACKAGE_STRONGSWAN_WITH_OPENSSL},y)
-PKG_CFLINE_STRONGSWAN:=	select ADK_PACKAGE_LIBOPENSSL_WITH_EC
-endif
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -78,9 +74,9 @@ strongswan-install:
 		$(IDIR_STRONGSWAN)/usr/libexec/ipsec
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/ipsec \
 		$(IDIR_STRONGSWAN)/usr/sbin
-	$(CP) $(WRKINST)/usr/lib/ipsec/libcharon*.so* \
+	$(CP) $(WRKINST)/usr/lib/ipsec/libvici*.so* \
 		$(IDIR_STRONGSWAN)/usr/lib/ipsec/
-	$(CP) $(WRKINST)/usr/lib/ipsec/libhydra*.so* \
+	$(CP) $(WRKINST)/usr/lib/ipsec/libcharon*.so* \
 		$(IDIR_STRONGSWAN)/usr/lib/ipsec/
 	$(CP) $(WRKINST)/usr/lib/ipsec/libstrongswan*.so* \
 		$(IDIR_STRONGSWAN)/usr/lib/ipsec/
