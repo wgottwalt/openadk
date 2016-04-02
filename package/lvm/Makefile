@@ -12,7 +12,7 @@ PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libdevmapper libncurses
 PKG_BUILDDEP:=		ncurses util-linux
 PKG_URL:=		http://sourceware.org/lvm2/
-PKG_SITES:=		ftp://sources.redhat.com/pub/lvm2/
+PKG_SITES:=		ftp://sources.redhat.com/pub/lvm2/releases/
 PKG_LIBNAME:=		libdevmapper
 PKG_OPTS:=		dev
 
