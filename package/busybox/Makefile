@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		busybox
-PKG_VERSION:=		1.24.1
+PKG_VERSION:=		1.24.2
 PKG_RELEASE:=		1
-PKG_HASH:=		37d03132cc078937360b392170b7a1d0e5b322eee9f57c0b82292a8b1f0afe3d
+PKG_HASH:=		e71ef53ec656f31c42633918d301405d40dea1d97eca12f272217ae4a971c855
 PKG_DESCR:=		core utilities for embedded systems
 PKG_SECTION:=		base/apps
 PKG_URL:=		http://www.busybox.net/
