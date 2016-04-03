@@ -19,6 +19,7 @@ microblaze
 mips
 mips64
 moxie
+msp430
 nds32
 nios2
 or1k

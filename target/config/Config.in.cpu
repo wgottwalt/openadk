@@ -689,6 +689,11 @@ config ADK_TARGET_CPU_MOXIE
 	select ADK_TARGET_WITH_MMU
 	depends on ADK_TARGET_ARCH_MOXIE
 
+# msp430
+config ADK_TARGET_CPU_MSP430
+	bool "msp430"
+	depends on ADK_TARGET_ARCH_MSP430
+
 # nds32
 config ADK_TARGET_CPU_NDS32
 	bool "nds32"
@@ -1631,6 +1636,7 @@ config ADK_TARGET_CPU_ARCH
 	default "mips" if ADK_TARGET_ARCH_MIPS && ADK_TARGET_BIG_ENDIAN
 	default "mipsel" if ADK_TARGET_ARCH_MIPS && ADK_TARGET_LITTLE_ENDIAN
 	default "moxie" if ADK_TARGET_ARCH_MOXIE
+	default "msp430" if ADK_TARGET_ARCH_MSP430
 	default "nds32le" if ADK_TARGET_ARCH_NDS32 && ADK_TARGET_LITTLE_ENDIAN
 	default "nds32be" if ADK_TARGET_ARCH_NDS32 && ADK_TARGET_BIG_ENDIAN
 	default "nios2" if ADK_TARGET_ARCH_NIOS2
