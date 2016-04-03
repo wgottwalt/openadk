@@ -31,7 +31,9 @@ config ADK_KERNEL_ACPI_DOCK
 	bool
 
 menu "Power Management support"
-depends on ADK_TARGET_WITH_ACPI || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+depends on ADK_TARGET_WITH_ACPI \
+	|| ADK_TARGET_SYSTEM_LEMOTE_YEELONG \
+	|| ADK_TARGET_GENERIC
 
 config ADK_HARDWARE_ACPI
 	bool "Enable ACPI support"
@@ -46,6 +48,8 @@ config ADK_HARDWARE_ACPI
 	select ADK_KERNEL_ACPI_DOCK
 	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_TARGET_SYSTEM_PCENGINES_APU
+	default y if ADK_TARGET_SYSTEM_GENERIC_X86
+	default y if ADK_TARGET_SYSTEM_GENERIC_X86_64
 	default n
 	help
 	 Enable ACPI support.
