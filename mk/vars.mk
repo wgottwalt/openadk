@@ -25,6 +25,9 @@ endif
 ifneq ($(ADK_TARGET_ABI),)
 ADK_SUFFIX:=		$(ADK_SUFFIX)_$(ADK_TARGET_ABI)
 endif
+ifneq ($(ADK_TARGET_BINFMT),)
+ADK_SUFFIX:=		$(ADK_SUFFIX)_$(ADK_TARGET_BINFMT)
+endif
 
 # some global dirs
 BASE_DIR:=		$(ADK_TOPDIR)
