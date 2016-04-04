@@ -4,8 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm28xx-bootloader
-PKG_VERSION:=		ba7a8fb709adab287495f4e836b1cd3e5c9db409
-PKG_GIT:=		hash
+PKG_VERSION:=		046effa13ebc4cc7601df4f06f4834bd0eebb0f8
 PKG_RELEASE:=		1
 PKG_DESCR:=		bootloader for bcm28xx
 PKG_SECTION:=		base/boot
@@ -23,6 +22,8 @@ PKG_SUBPKGS:=		BCM28XX_BOOTLOADER BCM28XX_DEBUGTOOL
 PKGSD_BCM28XX_DEBUGTOOL:=	debugtool
 PKGSC_BCM28XX_DEBUGTOOL:=	sys/hw
 PKGSS_BCM28XX_DEBUGTOOL:=	bcm28xx-vc-debug
+
+NO_DISTFILES:=		1
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -55,7 +56,7 @@ do-install:
 	$(CP) $(WRKBUILD)/boot/bootcode.bin $(IDIR_BCM28XX_BOOTLOADER)/boot/
 	printf "$(CMDLINE)\n" > $(IDIR_BCM28XX_BOOTLOADER)/boot/cmdline.txt
 	printf "kernel=kernel\n" > $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-	printf "dtparam=i2s=on,spi=on,i2c_arm=on\n" >> \
+	printf "dtparam=audio,i2s,spi,i2c\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 ifeq ($(ADK_PACKAGE_BCM28XX_BOOTLOADER_DEFAULT),y)
 	$(CP) $(WRKBUILD)/boot/{start.elf,fixup.dat} $(IDIR_BCM28XX_BOOTLOADER)/boot/
