@@ -143,11 +143,6 @@ endif
 
 kernel-strip:
 	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
-ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
-	@echo adding DT trailer to kernel $(MAKE_TRACE)
-	-rm $(BUILD_DIR)/$(TARGET_KERNEL)
-	PATH='$(HOST_PATH)' $(ADK_TOPDIR)/scripts/mkknlimg --dtok $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL) $(MAKE_TRACE)
-endif
 
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
