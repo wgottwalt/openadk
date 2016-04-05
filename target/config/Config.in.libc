@@ -78,7 +78,6 @@ config ADK_TARGET_LIB_GLIBC
 
 config ADK_TARGET_LIB_NEWLIB
 	bool "newlib C library"
-	select ADK_TARGET_WITHOUT_CXX
 	select ADK_TARGET_WITHOUT_THREADS
 	depends on (\
 		ADK_TARGET_ARCH_AARCH64 || \
@@ -204,9 +203,6 @@ config ADK_TARGET_WITH_NPTL
 	bool
 
 config ADK_TARGET_WITHOUT_THREADS
-	bool
-
-config ADK_TARGET_WITHOUT_CXX
 	bool
 
 config ADK_TARGET_LIBC

@@ -13,7 +13,6 @@ config ADK_TARGET_GENERIC
 
 config ADK_TARGET_UCLINUX
 	bool
-	select ADK_TARGET_WITHOUT_CXX
 
 config ADK_TARGET_SIM
 	bool

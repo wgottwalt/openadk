@@ -189,11 +189,18 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 GCC_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
 
-ifeq ($(ADK_TARGET_WITHOUT_CXX),y)
-LANGUAGES:=c
-else
-LANGUAGES:=c,c++
+USE_LANG:=c
+ifeq ($(ADK_TOOLCHAIN_WITH_CXX),y)
+USE_LANG+=c++
 endif
+ifeq ($(ADK_TOOLCHAIN_WITH_OBJC),y)
+USE_LANG+=objc
+endif
+ifeq ($(ADK_TOOLCHAIN_WITH_FORTRAN),y)
+USE_LANG+=fortran
+endif
+
+LANGUAGES=$(shell echo ${USE_LANG} |tr ' ' ',')
 
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 

@@ -52,7 +52,25 @@ config ADK_TARGET_CFLAGS_OPT_O0
 
 endchoice
 
+menu "Compiler language support"
+config ADK_TOOLCHAIN_WITH_CXX
+	bool "enable C++"
+	default y if ADK_TARGET_OS_LINUX
+	default n
+
+config ADK_TOOLCHAIN_WITH_OBJC
+	bool "enable OBJC"
+	default n
+
+config ADK_TOOLCHAIN_WITH_FORTRAN
+	bool "enable Fortran"
+	default n
+
+endmenu
+
 menu "Advanced Toolchain options"
+
+
 config ADK_TOOLCHAIN_WITH_SSP
 	bool
 
