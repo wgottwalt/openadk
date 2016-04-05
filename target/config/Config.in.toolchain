@@ -55,7 +55,7 @@ endchoice
 menu "Compiler language support"
 config ADK_TOOLCHAIN_WITH_CXX
 	bool "enable C++"
-	default y if ADK_TARGET_OS_LINUX
+	default y if ADK_TARGET_OS_LINUX && !ADK_TARGET_ARCH_H8300
 	default n
 
 config ADK_TOOLCHAIN_WITH_OBJC
