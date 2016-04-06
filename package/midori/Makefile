@@ -6,16 +6,14 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		midori
 PKG_VERSION:=		0.5.11
 PKG_RELEASE:=		1
-PKG_HASH:=		2fe13e17c310a2277c52e4fad932614963410305d10a48df0f0c5d210ebd51c5
+PKG_HASH:=		3b8f3a0fe8283fcbb0f9c88b2165e2689d3e18f7c1b5d275fff97cf20e7be198
 PKG_DESCR:=		graphical web browser
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libnotify webkitgtk
-PKG_BUILDDEP:=		cmake-host vala-host libnotify webkitgtk
+PKG_DEPENDS:=		libnotify webkitgtk gcr
+PKG_BUILDDEP:=		cmake-host vala-host libnotify webkitgtk gcr
 PKG_BUILDDEP+=		librsvg-host librsvg
 PKG_URL:=		http://www.midori-browser.org
 PKG_SITES:=		http://distfiles.openadk.org/
-
-PKG_CFLINE_MIDORI:=	depends on ADK_BROKEN
 
 WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
 
@@ -23,15 +21,11 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MIDORI,midori,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIG_STYLE:=          manual
-
-do-configure:
-	(cd $(WRKBUILD) && PATH='${HOST_PATH}' \
-		cmake -DCMAKE_SYSTEM_NAME=Linux \
-		-DCMAKE_INSTALL_PREFIX=/usr \
-		-DENABLE_NLS=0 \
-		-DUSE_ZEITGEIST=0 \
-		$(WRKSRC)/)
+CONFIG_STYLE:=          cmake
+CMAKE_FLAGS+=		-DUSE_GTK3=ON \
+			-DHALF_BRO_INCOM_WEBKIT2=ON \
+			-DENABLE_NLS=OFF \
+			-DUSE_ZEITGEIST=OFF
 
 midori-install:
 	$(INSTALL_DIR) $(IDIR_MIDORI)/usr/bin
