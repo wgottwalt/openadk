@@ -16,7 +16,7 @@ PKG_NEEDS:=		threads rt c++
 PKG_URL:=		https://github.com/popcornmix/omxplayer
 PKG_SITES:=		https://github.com/popcornmix/omxplayer.git
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 raspberry-pi3
 
 include $(ADK_TOPDIR)/mk/package.mk
 

@@ -69,7 +69,7 @@ PKGFS_WITH_LIRC:=	lirc
 PKGFD_WITH_WEBSERVER:=	enable internal webserver support
 
 PKG_BUILDDEP_SOLIDRUN_IMX6:=	gpu-viv-bin-mx6q
-PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 solidrun-imx6
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 raspberry-pi3 solidrun-imx6
 
 DIFF_IGNOREFILES:=	configure missing depcomp install-sh INSTALL \
 			aclocal.m4 config.h.in

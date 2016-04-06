@@ -242,7 +242,7 @@ config ADK_KERNEL_FB_SM7XX
 	  Framebuffer support for Lemote Yeelong.
 
 config ADK_KERNEL_FB_BCM2708
-	bool "Framebuffer support for BCM2835 boards"
+	bool "Framebuffer support for BCM28XX boards"
 	select ADK_KERNEL_DRM if ADK_TARGET_KERNEL_VERSION_4_4
 	select ADK_KERNEL_DRM_VC4 if ADK_TARGET_KERNEL_VERSION_4_4
 	select ADK_KERNEL_FB
@@ -252,7 +252,7 @@ config ADK_KERNEL_FB_BCM2708
  	default n
 	depends on ADK_TARGET_BOARD_BCM28XX
  	help
-	  Framebuffer support for BCM2835 boards.
+	  Framebuffer support for BCM28XX boards.
 
 config ADK_KERNEL_FB_RADEON
 	bool "Framebuffer support for RADEON chips"

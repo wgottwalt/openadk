@@ -11,7 +11,7 @@ config ADK_KERNEL_I2C_CHARDEV
  	tristate
 
 config ADK_KERNEL_I2C_BCM2708
-	tristate "I2C driver for BCM2835 boards"
+	tristate "I2C driver for BCM28XX boards"
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_REGMAP
 	select ADK_KERNEL_REGMAP_I2C
@@ -20,7 +20,7 @@ config ADK_KERNEL_I2C_BCM2708
 	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 	help
-	  I2C driver for BCM2835 boards.
+	  I2C driver for BCM28XX boards.
 
 config ADK_KERNEL_I2C_SUNXI
 	tristate "I2C driver for SUNXI boards"

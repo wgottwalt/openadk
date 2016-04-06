@@ -111,6 +111,22 @@ config ADK_TARGET_CPU_ARM_CORTEX_A17
 	select ADK_TARGET_CPU_WITH_NEON
 	depends on ADK_TARGET_ARCH_ARM
 
+config ADK_TARGET_CPU_ARM_CORTEX_A53
+        bool "cortex-a53"
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU_VFPV4
+	select ADK_TARGET_CPU_WITH_NEON
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_TARGET_CPU_ARM_CORTEX_A57
+        bool "cortex-a57"
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_WITH_FPU_VFPV4
+	select ADK_TARGET_CPU_WITH_NEON
+	depends on ADK_TARGET_ARCH_ARM
+
 config ADK_TARGET_CPU_ARM_CORTEX_M4
 	bool "cortex-m4"
 	select ADK_TARGET_UCLINUX
@@ -1393,6 +1409,8 @@ config ADK_TARGET_GCC_CPU
 	default "cortex-a9" if ADK_TARGET_CPU_ARM_CORTEX_A9
 	default "cortex-a15" if ADK_TARGET_CPU_ARM_CORTEX_A15
 	default "cortex-a17" if ADK_TARGET_CPU_ARM_CORTEX_A17
+	default "cortex-a53" if ADK_TARGET_CPU_ARM_CORTEX_A53
+	default "cortex-a57" if ADK_TARGET_CPU_ARM_CORTEX_A57
 	default "cortex-a53" if ADK_TARGET_CPU_AARCH64_CORTEX_A53
 	default "cortex-a57" if ADK_TARGET_CPU_AARCH64_CORTEX_A57
 	default "cortex-m3" if ADK_TARGET_CPU_ARM_CORTEX_M3
@@ -1573,6 +1591,8 @@ config ADK_TARGET_CPU_TYPE
 	default "arm1176jzf_s" if ADK_TARGET_CPU_ARM_ARM1176JZF_S
 	default "arm926ej_s" if ADK_TARGET_CPU_ARM_ARM926EJ_S
 	default "mpcore" if ADK_TARGET_CPU_ARM_ARM11MPCORE
+	default "cortex_a53" if ADK_TARGET_CPU_ARM_CORTEX_A53
+	default "cortex_a57" if ADK_TARGET_CPU_ARM_CORTEX_A57
 	default "cortex_a53" if ADK_TARGET_CPU_AARCH64_CORTEX_A53
 	default "cortex_a57" if ADK_TARGET_CPU_AARCH64_CORTEX_A57
 	default "mips32" if ADK_TARGET_CPU_MIPS_MIPS32

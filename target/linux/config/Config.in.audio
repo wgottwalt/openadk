@@ -179,7 +179,7 @@ config ADK_KERNEL_SND_PXA2XX_SOC_SPITZ
 	default n
 
 config ADK_KERNEL_SND_BCM2835
-	tristate "BCM2835 onboard soundcard"
+	tristate "BCM28XX onboard soundcard"
 	select ADK_KERNEL_SND
 	select ADK_KERNEL_SND_ARM
 	depends on ADK_TARGET_BOARD_BCM28XX

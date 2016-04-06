@@ -27,7 +27,7 @@ config ADK_KERNEL_SPI_PXA2XX
 	select ADK_KERNEL_SPI
 
 config ADK_KERNEL_SPI_BCM2835
-	tristate "SPI driver for BCM2835 boards"
+	tristate "SPI driver for BCM28XX boards"
 	select ADK_KERNEL_SPI
 	select ADK_KERNEL_SPI_MASTER
 	select ADK_KERNEL_SPI_BITBANG

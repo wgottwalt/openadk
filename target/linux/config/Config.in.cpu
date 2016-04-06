@@ -55,7 +55,7 @@ config ADK_KERNEL_ARM_IMX6Q_CPUFREQ
 	default n
 
 config ADK_KERNEL_ARM_BCM2835_CPUFREQ
-	bool "CPU frequency support for BCM2835 boards"
+	bool "CPU frequency support for BCM28XX boards"
 	select ADK_KERNEL_CPU_FREQ
 	depends on ADK_TARGET_BOARD_BCM28XX
 	default y if ADK_TARGET_BOARD_BCM28XX

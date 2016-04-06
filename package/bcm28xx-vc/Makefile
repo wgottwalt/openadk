@@ -23,7 +23,7 @@ PKGSC_BCM28XX_VC_DEBUG:=libs/misc
 PKGSD_BCM28XX_VC_DEBUG:=videocore debug library
 PKGSC_BCM28XX_VC_GL_LIBS:=libs/video
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 raspberry-pi3
 
 include $(ADK_TOPDIR)/mk/package.mk
 
