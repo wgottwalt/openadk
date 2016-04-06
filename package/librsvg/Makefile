@@ -4,17 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		librsvg
-PKG_VERSION:=		2.40.2
+PKG_VERSION:=		2.40.15
+PKG_EXTRAVER:=		2.40
 PKG_RELEASE:=		1
-PKG_HASH:=		48049b643294636df7de1a4b997414d699666f5dc44776945c218a257d2a291c
+PKG_HASH:=		d9cac4a123eec6e553a26e120979bab7425def9ae7ce7c079eba5e4a45db05f4
 PKG_DESCR:=		svg library
 PKG_BUILDDEP:=		libcroco
-HOST_BUILDDEP:=		libcroco-host gdk-pixbuf-host pango-host
+HOST_BUILDDEP:=		glib-host libcroco-host gdk-pixbuf-host pango-host
 PKG_SECTION:=		libs/image
 PKG_URL:=		https://wiki.gnome.org/action/show/Projects/LibRsvg?action=show&redirect=LibRsvg
-PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/librsvg/2.40/
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+PKG_SITES:=		http://ftp.gnome.org/pub/gnome/sources/librsvg/$(PKG_EXTRAVER)/
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -22,6 +21,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBRSVG,librsvg,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBRSVG,librsvg,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+HOST_STYLE:=		auto
+HOST_LDFLAGS+=		-lffi -lgmodule-2.0
 HOST_CONFIGURE_ARGS+=	--enable-introspection=no
 CONFIGURE_ARGS+=	--enable-introspection=no
 
