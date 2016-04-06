@@ -35,6 +35,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,CAIRO,cairo,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,CAIRO,cairo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--enable-ft=yes \
 			--enable-png=yes \
 			--enable-fc=yes \
