@@ -19,9 +19,12 @@ PKGSS_BCM28XX_VC_TOOLS:=bcm28XX-vc-libs
 PKGSC_BCM28XX_VC_TOOLS:=sys/hw
 PKGSD_BCM28XX_VC_TOOLS:=videocore tool vcgencmd
 PKGSC_BCM28XX_VC_LIBS:=	libs/misc
+PKGSD_BCM28XX_VC_LIBS:=videocore library
 PKGSC_BCM28XX_VC_DEBUG:=libs/misc
 PKGSD_BCM28XX_VC_DEBUG:=videocore debug library
 PKGSC_BCM28XX_VC_GL_LIBS:=libs/video
+PKGSS_BCM28XX_VC_GL_LIBS:=bcm28xx-vc-libs
+PKGSD_BCM28XX_VC_GL_LIBS:=videocore gl library
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 raspberry-pi3
 
