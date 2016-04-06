@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libcroco
-PKG_VERSION:=		0.6.8
+PKG_VERSION:=		0.6.11
 PKG_RELEASE:=		1
-PKG_HASH:=		ea6e1b858c55219cefd7109756bff5bc1a774ba7a55f7d3ccd734d6b871b8570
+PKG_HASH:=		132b528a948586b0dfa05d7e9e059901bca5a3be675b6071a90a90b81ae5a056
 PKG_DESCR:=		css2 parsing and manipulation library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		https://github.com/GNOME/libcroco
@@ -20,6 +20,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,LIBCROCO,libcroco,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBCROCO,libcroco,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+HOST_LDFLAGS+=		-lrt
+HOST_STYLE:=		auto
 
 libcroco-install:
 	$(INSTALL_DIR) $(IDIR_LIBCROCO)/usr/lib
