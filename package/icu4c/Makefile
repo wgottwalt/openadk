@@ -24,8 +24,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,ICU4C,icu4c,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,ICU4C,icu4c,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-HOST_CFLAGS+=		-static-libstdc++ 
-HOST_CXXFLAGS+=		-static-libstdc++
+HOST_CFLAGS+=		-static-libstdc++ -fPIC
+HOST_CXXFLAGS+=		-static-libstdc++ -fPIC
 HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--enable-extras=no \
 			--enable-samples=no \
