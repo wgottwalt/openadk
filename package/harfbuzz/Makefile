@@ -24,6 +24,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,HARFBUZZ,harfbuzz,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,HARFBUZZ,harfbuzz,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+HOST_LDFLAGS+=		-lpthread -lrt
+HOST_STYLE:=		auto
+
 harfbuzz-install:
 	$(INSTALL_DIR) $(IDIR_HARFBUZZ)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libharfbuzz*.so* \
