@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gtk+
-PKG_VERSION:=		3.16.3
-PKG_EXTRAVER:=		3.16
+PKG_VERSION:=		3.20.2
+PKG_EXTRAVER:=		3.20
 PKG_RELEASE:=		1
-PKG_HASH:=		2943fd4a6b02c2a9b2edd231c1d8f7a1d2f8d36996f14310d34f503dca9ebea4
+PKG_HASH:=		1ab1d1068ea55e0046f437d69983f164df5e68cb2e9fdfb38787b867f33f69f7
 PKG_DESCR:=		multi-platform toolkit for creating graphical user interfaces
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib cairo libxi libepoxy
