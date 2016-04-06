@@ -1,15 +1,11 @@
---- webkitgtk-2.10.7.orig/Source/WebCore/platform/linux/MemoryPressureHandlerLinux.cpp	2016-01-29 17:29:33.000000000 +0100
-+++ webkitgtk-2.10.7/Source/WebCore/platform/linux/MemoryPressureHandlerLinux.cpp	2016-03-02 19:21:10.000000000 +0100
-@@ -201,8 +201,12 @@ void MemoryPressureHandler::respondToMem
+--- webkitgtk-2.12.0.orig/Source/WebCore/platform/linux/MemoryPressureHandlerLinux.cpp	2016-03-22 09:38:02.000000000 +0100
++++ webkitgtk-2.12.0/Source/WebCore/platform/linux/MemoryPressureHandlerLinux.cpp	2016-04-05 09:42:03.711465052 +0200
+@@ -201,7 +201,7 @@ void MemoryPressureHandler::respondToMem
  
  void MemoryPressureHandler::platformReleaseMemory(Critical)
  {
-+#ifndef __UCLIBC__
+-#ifdef __GLIBC__
++#if defined(__GLIBC__) && !defined(__UCLIBC__)
      ReliefLogger log("Run malloc_trim");
      malloc_trim(0);
-+#else
-+    ReliefLogger log("malloc_trim not available");
-+#endif
- }
- 
- void MemoryPressureHandler::ReliefLogger::platformLog()
+ #endif
