@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gdk-pixbuf
-PKG_VERSION:=		2.30.8
-PKG_EXTRAVER:=		2.30
+PKG_VERSION:=		2.34.0
+PKG_EXTRAVER:=		2.34
 PKG_RELEASE:=		1
-PKG_HASH:=		4853830616113db4435837992c0aebd94cbb993c44dc55063cee7f72a7bef8be
+PKG_HASH:=		d55e5b383ee219bd0e23bf6ed4427d56a7db5379729a6e3e0a0e0eba9a8d8879
 PKG_DESCR:=		image loading and pixel buffer manipulation library
 PKG_SECTION:=		libs/image
 PKG_BUILDDEP:=		libjpeg-turbo libtiff
@@ -22,6 +22,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,GDK_PIXBUF,gdk-pixbuf,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
+HOST_STYLE:=		auto
 HOST_LDFLAGS+=		-lffi -lz -ldl -lresolv
 HOST_CONFIGURE_ARGS+=	--disable-glibtest \
 			--without-libjpeg \
