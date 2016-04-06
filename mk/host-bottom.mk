@@ -100,7 +100,6 @@ endif
 	touch $@
 
 ${_HOST_COOKIE}:
-	printf wbxdebug
 	exec ${MAKE} hostpackage
 
 ifeq ($(HOST_LINUX_ONLY),)
