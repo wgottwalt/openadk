@@ -31,6 +31,7 @@ CONFIGURE_ARGS+=	--without-simd
 endif
 
 CONFIGURE_ARGS+=	--with-pic
+HOST_CONFIGURE_ARGS+=	--without-simd
 
 libjpeg-turbo-install:
 	$(INSTALL_DIR) $(IDIR_LIBJPEG_TURBO)/usr/lib
