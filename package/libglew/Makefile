@@ -25,7 +25,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,LIBGLEW,libglew,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=		manual
-XAKE_FLAGS+=		STRIP='' SYSTEMS=linux
+XAKE_FLAGS+=		STRIP='' SYSTEM=linux
 
 libglew-install:
 	$(INSTALL_DIR) $(IDIR_LIBGLEW)/usr/lib
