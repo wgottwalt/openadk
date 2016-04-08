@@ -1,17 +1,25 @@
---- ed-1.5.orig/configure	2010-08-30 16:34:49.000000000 +0200
-+++ ed-1.5/configure	2011-12-05 13:26:17.990045908 +0100
-@@ -26,10 +26,10 @@ infodir='$(datadir)/info'
- mandir='$(datadir)/man'
- sysconfdir='$(prefix)/etc'
+--- ed-1.13.orig/configure	2016-01-24 18:54:47.000000000 +0100
++++ ed-1.13/configure	2016-04-08 23:14:47.326189488 +0200
+@@ -14,17 +14,17 @@ srctrigger=doc/${pkgname}.texi
+ LC_ALL=C
+ export LC_ALL
+ srcdir=
+-prefix=/usr/local
++prefix=/usr
+ exec_prefix='$(prefix)'
+ bindir='$(exec_prefix)/bin'
+ datarootdir='$(prefix)/share'
+ infodir='$(datarootdir)/info'
+ mandir='$(datarootdir)/man'
  program_prefix=
--CC=
+-CC=gcc
 -CPPFLAGS=
 -CFLAGS='-Wall -W -O2'
 -LDFLAGS=
-+CC?=
++CC?=gcc
 +CPPFLAGS?=
 +CFLAGS?='-Wall -W -O2'
 +LDFLAGS?=
  
- # Loop over all args
- while [ -n "$1" ] ; do
+ # checking whether we are using GNU C.
+ ${CC} --version > /dev/null 2>&1

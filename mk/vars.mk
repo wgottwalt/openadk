@@ -409,6 +409,8 @@ EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 				bzip2 -dc $$file | cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
 				bzip2 -dc $$file | tar -xf - ;; \
+			*.tar.lz | *.tlz) \
+				lzip -dc $$file | tar -xf - ;; \
 			*.zip) \
 				cat $$file | cpio -id -H zip ;; \
 			*.arm|*.jar|*.ids.gz) \

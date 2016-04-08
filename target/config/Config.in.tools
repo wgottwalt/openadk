@@ -150,6 +150,10 @@ config ADK_HOST_NEED_LZOP
 	bool
 	default n
 
+config ADK_HOST_BUILD_LZIP
+	bool
+	default n
+
 config ADK_HOST_BUILD_LZOP
 	bool
 	default n

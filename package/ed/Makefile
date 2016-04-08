@@ -4,16 +4,17 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ed
-PKG_VERSION:=		1.5
-PKG_RELEASE:=		2
-PKG_HASH:=		97dd34a49ebc9c97e414b90a087d63eafc41377a340848c97e75a9cba187fba1
+PKG_VERSION:=		1.13
+PKG_RELEASE:=		1
+PKG_HASH:=		cd66c54a53cd6ef35a217556e7b2b2fdd973ca2708f4fc41636b0bc06388c7d3
 PKG_DESCR:=		unix editor
 PKG_SECTION:=		app/editor
+PKG_BUILDDEP+=		lzip-host
 PKG_URL:=		http://www.gnu.org/software/ed/ed.html
 PKG_SITES:=		${MASTER_SITE_GNU:=ed/}
 PKG_BB:=		1
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.lz
 
 include $(ADK_TOPDIR)/mk/package.mk
 
