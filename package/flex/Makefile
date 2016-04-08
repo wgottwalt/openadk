@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		flex
-PKG_VERSION:=		2.5.37
+PKG_VERSION:=		2.6.0
 PKG_RELEASE:=		1
-PKG_HASH:=		bf693433a3effe6b1f42e44abd787491e4e213984b1859545b92267a86088dd3
+PKG_HASH:=		d39b15a856906997ced252d76e9bfe2425d7503c6ed811669665627b248e4c73
 PKG_DESCR:=		fast lexical analyzer
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		m4-host
@@ -14,8 +14,6 @@ HOST_BUILDDEP:=		patch-host m4-host
 PKG_URL:=		http://flex.sourceforge.net/
 PKG_SITES:=		$(MASTER_SITE_SOURCEFORGE:=flex/)
 PKG_OPTS:=		dev
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
