@@ -25,9 +25,11 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-mem-pools \
 			--disable-rebuilds \
 			--disable-fam \
+			--disable-dtrace \
 			--with-pcre=system \
 			--with-threads=posix
 CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
@@ -45,6 +47,9 @@ ifneq ($(OS_FOR_BUILD),Darwin)
 HOST_CONFIGURE_ARGS+=	--with-libiconv=no
 endif
 HOST_CONFIGURE_ARGS+=	--disable-fam \
+			--disable-carbon \
+			--disable-cocoa \
+			--disable-dtrace \
 			--enable-static \
 			--with-pcre=bundled \
 			--disable-shared \
