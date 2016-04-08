@@ -84,13 +84,7 @@ TARGET_CPPFLAGS+=	-I. -I./utils \
 			-I$(STAGING_TARGET_DIR)/usr/include/afpfs-ng \
 			-DTIXML_USE_STL=1 -DLINUX
 
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
-			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vcos/pthreads \
-			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vmcs_host/linux
-TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/opt/vc/lib
-endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
+ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
 			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vcos/pthreads \
 			-I$(STAGING_TARGET_DIR)/opt/vc/include/interface/vmcs_host/linux
@@ -159,13 +153,7 @@ else
 CONFIGURE_ARGS+=	--disable-webserver
 endif
 
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
-CONFIGURE_ARGS+=	--with-platform=raspberry-pi \
-			--enable-player=omxplayer \
-			--enable-gles \
-			--disable-x11
-endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
+ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
 CONFIGURE_ARGS+=	--with-platform=raspberry-pi \
 			--enable-player=omxplayer \
 			--enable-gles \
