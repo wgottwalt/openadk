@@ -166,7 +166,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--sysroot=${STAGING_TARGET_DIR} \
 			--cross-prefix=${TARGET_CROSS} \
 			--cc='$(TARGET_CC)' \
-			--host-cc=$(HOST_CC) \
+			--host-cc='$(HOST_CC)' \
 			--disable-bzlib \
 			--disable-doc \
 			--disable-debug \
