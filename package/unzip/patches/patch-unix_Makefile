@@ -1,5 +1,5 @@
 --- unzip60.orig/unix/Makefile	2009-01-18 23:41:18.000000000 +0100
-+++ unzip60/unix/Makefile	2014-05-27 14:22:34.624111366 +0200
++++ unzip60/unix/Makefile	2016-04-07 22:58:30.000000000 +0200
 @@ -42,13 +42,13 @@
  # such as -DDOSWILD).
  
@@ -22,7 +22,7 @@
  
  generic_gcc:
 -	$(MAKE) $(MAKEF) generic CC=gcc IZ_BZIP2="$(IZ_BZIP2)"
-+	$(MAKE) $(MAKEF) generic CC=$(CC) IZ_BZIP2="$(IZ_BZIP2)"
++	$(MAKE) $(MAKEF) generic CC="$(CC)" IZ_BZIP2="$(IZ_BZIP2)"
  
  # extensions to perform SVR4 package-creation after compilation
  generic_pkg:	generic svr4package
