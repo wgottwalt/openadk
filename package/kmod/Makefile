@@ -28,7 +28,8 @@ $(eval $(call PKG_template,KMOD,kmod,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 $(eval $(call PKG_template,LIBKMOD,libkmod,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_LIBKMOD},${PKGSD_LIBKMOD},${PKGSC_LIBKMOD},${PKG_OPTS}))
 
 CONFIG_STYLE:=		minimal
-CONFIGURE_ARGS+=	--host=${GNU_TARGET_NAME}
+CONFIGURE_ARGS+=	--host=${GNU_TARGET_NAME} \
+			--disable-manpages
 
 HOST_CONFIGURE_ARGS+=	--disable-manpages \
 			--disable-logging
