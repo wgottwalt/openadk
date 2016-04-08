@@ -1,5 +1,5 @@
 --- zip30.orig/unix/Makefile	2008-05-07 08:33:56.000000000 +0200
-+++ zip30/unix/Makefile	2011-10-19 22:21:08.000000000 +0200
++++ zip30/unix/Makefile	2016-04-07 22:55:11.000000000 +0200
 @@ -22,7 +22,7 @@ SHELL = /bin/sh
  LN = ln -s
  
@@ -18,16 +18,12 @@
  LFLAGS1 =
  LFLAGS2 = -s
  
-@@ -199,10 +199,10 @@ flags:  unix/configure
- #               Generic targets:
- 
- generic: flags
--	eval $(MAKE) $(MAKEF) zips `cat flags`
-+	eval $(MAKE) $(MAKEF) zips `cat flags` CC=$(CC)
+@@ -202,7 +202,7 @@ generic: flags
+ 	eval $(MAKE) $(MAKEF) zips `cat flags`
  
  generic_gcc:
 -	$(MAKE) $(MAKEF) generic CC=gcc CPP="gcc -E"
-+	$(MAKE) $(MAKEF) generic CPP="gcc -E" CC=$(CC)
++	$(MAKE) $(MAKEF) generic CPP="gcc -E" CC="$(CC)"
  
  # AT&T 6300 PLUS (don't know yet how to allocate 64K bytes):
  att6300nodir:
