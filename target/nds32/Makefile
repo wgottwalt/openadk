@@ -6,6 +6,9 @@ include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
+ifeq ($(ADK_TARGET_KERNEL_IMAGE),y)
+KERNEL:=$(LINUX_DIR)/arch/nds32/boot/Image
+endif
 
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)

@@ -23,6 +23,9 @@ config ADK_KERNEL_NET_VENDOR_IBM
 config ADK_KERNEL_NET_VENDOR_INTEL
 	bool
 
+config ADK_KERNEL_NET_VENDOR_FARADAY
+	bool
+
 config ADK_KERNEL_NET_VENDOR_FREESCALE
 	bool
 
@@ -398,6 +401,13 @@ config ADK_KERNEL_ETHOC
 	select ADK_KERNEL_MII
 	depends on ADK_TARGET_SYSTEM_QEMU_OR1K
 	default y if ADK_TARGET_SYSTEM_QEMU_OR1K
+	default n
+
+config ADK_KERNEL_FTMAC100
+	bool "Andes ethernet driver"
+	select ADK_KERNEL_NET_VENDOR_FARADAY
+	depends on ADK_TARGET_SYSTEM_ANDES_AG101P
+	default y if ADK_TARGET_SYSTEM_ANDES_AG101P
 	default n
 
 config ADK_KERNEL_ATL1

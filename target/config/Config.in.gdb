@@ -4,12 +4,14 @@
 choice
 prompt "GNU debugger version"
 default ADK_TOOLCHAIN_GDB_H8300_GIT if ADK_TARGET_ARCH_H8300
+default ADK_TOOLCHAIN_GDB_NDS32 if ADK_TARGET_ARCH_NDS32
 default ADK_TOOLCHAIN_GDB_7_11_1
 
 config ADK_TOOLCHAIN_GDB_GIT
 	bool "git"
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_H8300
+	depends on !ADK_TARGET_ARCH_NDS32
 
 config ADK_TOOLCHAIN_GDB_H8300_GIT
 	bool "h8300-git"
@@ -19,16 +21,19 @@ config ADK_TOOLCHAIN_GDB_7_11_1
 	bool "7.11.1"
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_H8300
+	depends on !ADK_TARGET_ARCH_NDS32
 
 config ADK_TOOLCHAIN_GDB_7_10_1
 	bool "7.10.1"
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_H8300
+	depends on !ADK_TARGET_ARCH_NDS32
 
 config ADK_TOOLCHAIN_GDB_7_9_1
 	bool "7.9.1"
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_H8300
+	depends on !ADK_TARGET_ARCH_NDS32
 
 config ADK_TOOLCHAIN_GDB_7_8_2
 	bool "7.8.2"

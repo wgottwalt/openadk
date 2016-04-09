@@ -720,7 +720,7 @@ config ADK_TARGET_CPU_MSP430
 # nds32
 config ADK_TARGET_CPU_NDS32
 	bool "nds32"
-	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_LT
 	select ADK_TARGET_WITH_MMU
 	depends on ADK_TARGET_ARCH_NDS32
 
@@ -1437,6 +1437,7 @@ config ADK_TARGET_GCC_CPU
 	default "cortex-m4" if ADK_TARGET_CPU_ARM_CORTEX_M4
 	default "leon" if ADK_TARGET_CPU_SPARC_LEON
 	default "mpcore" if ADK_TARGET_CPU_ARM_ARM11MPCORE
+	default "n13" if ADK_TARGET_CPU_NDS32
 	default "powerpc" if ADK_TARGET_CPU_PPC
 	default "powerpc64" if ADK_TARGET_CPU_PPC64_POWERPC64
 	default "power6" if ADK_TARGET_CPU_PPC64_POWER6
@@ -1623,6 +1624,7 @@ config ADK_TARGET_CPU_TYPE
 	default "mips64r6" if ADK_TARGET_CPU_MIPS64_MIPS64R6
 	default "mips64" if ADK_TARGET_CPU_MIPS64_LOONGSON2F
 	default "ppc64" if ADK_TARGET_ARCH_PPC64
+	default "nds32" if ADK_TARGET_CPU_NDS32
 	default "v8" if ADK_TARGET_CPU_SPARC_V8
 	default "v9" if ADK_TARGET_CPU_SPARC64_V9
 	default "leon" if ADK_TARGET_CPU_SPARC_LEON

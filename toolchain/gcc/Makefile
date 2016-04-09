@@ -123,6 +123,10 @@ ifeq ($(ADK_TARGET_CPU_CF),y)
 GCC_CONFOPTS+=		--enable-multilib --with-arch=cf
 endif
 
+ifeq ($(ADK_TARGET_ARCH_NDS32),y)
+GCC_CONFOPTS+=		--with-arch=v3
+endif
+
 ifeq ($(ADK_TARGET_ARCH_M68K)$(ADK_TARGET_ARCH_X86_64)$(ADK_TARGET_ARCH_X86),)
 GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif

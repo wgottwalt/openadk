@@ -66,7 +66,7 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	$(MAKE) -C $(WRKBUILD) install
-ifeq ($(ADK_TARGET_ARCH_H8300),y)
+ifeq ($(ADK_TARGET_ARCH_H8300)$(ADK_TARGET_ARCH_NDS32),y)
 	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/lib/ldscripts
 	$(CP) $(WRKBUILD)/ld/ldscripts/* $(STAGING_TARGET_DIR)/usr/lib/ldscripts/
 endif

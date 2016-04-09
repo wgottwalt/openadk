@@ -58,11 +58,15 @@ config ADK_KERNEL_CPU_LITTLE_ENDIAN
 
 menu "Kernel options"
 
+config ADK_KERNEL_HOTPLUG
+	bool
+
 config ADK_KERNEL_DEVTMPFS
 	bool
 
 config ADK_KERNEL_DEVTMPFS_MOUNT
 	bool
+	select ADK_KERNEL_HOTPLUG
 
 config ADK_KERNEL_UEVENT_HELPER
 	bool

@@ -23,4 +23,5 @@ config ADK_TARGET_KERNEL_DEFCONFIG
 	default "nsim_700_defconfig" if ADK_TARGET_SYSTEM_NSIM_ARCV1
 	default "nsim_hs_defconfig" if ADK_TARGET_SYSTEM_NSIM_ARCV2
 	default "10m50_defconfig" if ADK_TARGET_SYSTEM_QEMU_NIOS2
+	default "orca_defconfig" if ADK_TARGET_SYSTEM_ANDES_AG101P
 
