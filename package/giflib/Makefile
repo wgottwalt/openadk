@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		giflib
-PKG_VERSION:=		5.1.2
+PKG_VERSION:=		5.1.4
 PKG_RELEASE:=		1
-PKG_HASH:=		e0539889f76b1e9effb1cf3a3080a456f97fd72acf0e7580f08dc847c61185ae
+PKG_HASH:=		34a7377ba834397db019e8eb122e551a49c98f49df75ec3fcc92b9a794a4f6d1
 PKG_DESCR:=		gif graphics library
 PKG_SECTION:=		libs/image
 PKG_URL:=		http://sourceforge.net/projects/giflib/
