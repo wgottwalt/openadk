@@ -26,6 +26,7 @@ $(eval $(call HOST_template,PERL,perl,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,PERL,perl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		manual
+INSTALL_TARGET:=	install.perl
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS:=	--target=$(GNU_TARGET_NAME) \
 			--target-tools-prefix=$(TARGET_CROSS) \
