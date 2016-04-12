@@ -57,6 +57,7 @@ mksh-install:
 mksh-test-install:
 	$(INSTALL_DIR) $(IDIR_MKSH_TEST)/opt/mksh
 	$(CP) $(WRKBUILD)/* $(IDIR_MKSH_TEST)/opt/mksh
+	find $(IDIR_MKSH_TEST)/opt/mksh -name \*.o -delete
 	$(INSTALL_BIN) ./files/test.sh $(IDIR_MKSH_TEST)/opt/mksh
 
 include $(ADK_TOPDIR)/mk/host-bottom.mk
