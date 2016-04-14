@@ -7,7 +7,7 @@ include ${ADK_TOPDIR}/toolchain/gdb/Makefile.inc
 PKG_NAME:=		gdb
 PKG_DESCR:=		programm debugger
 PKG_SECTION:=		app/debug
-PKG_DEPENDS:=		libncurses zlib libexpat
+PKG_DEPENDS:=		libncurses zlib libexpat libthread-db
 PKG_BUILDDEP:=		ncurses readline expat zlib
 PKG_NOPARALLEL:=	1
 
@@ -39,7 +39,8 @@ XAKE_FLAGS+=		GCC_HONOUR_COPTS:=s
 
 gdb-install:
 	${INSTALL_DIR} ${IDIR_GDB}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/gdb ${IDIR_GDB}/usr/bin/
+	${INSTALL_BIN} ${WRKINST}/usr/bin/gdb \
+		${IDIR_GDB}/usr/bin/
 	# shipped libbfd conflicts with system wide one
 	rm -f ${WRKINST}/usr/lib/libbfd*
 

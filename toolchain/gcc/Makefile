@@ -328,10 +328,12 @@ $(WRKBUILD)/.final:
 	rm -rf $(TOOLCHAIN_DIR)/usr/share
 	# cleanup unneeded libtool files
 	-find $(STAGING_TARGET_DIR) $(STAGING_HOST_DIR) -name \*.la -exec rm {} \;
-	# strip target libs and host tools for toolchain builds
+	# strip target libs and host tools for toolchain builds in non-Debug mode
+ifeq ($(ADK_DEBUG),)
 	PATH="$(TARGET_PATH)" debug='0' prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh \
 		$(STAGING_TARGET_DIR) $(TOOLCHAIN_DIR)/usr/lib/gcc/$(GNU_TARGET_NAME)
 	debug='0' prefix=' ' ${BASH} ${SCRIPT_DIR}/rstrip.sh $(TOOLCHAIN_DIR)/usr/bin
+endif
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk

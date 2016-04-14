@@ -7,6 +7,7 @@ include ${ADK_TOPDIR}/toolchain/gdb/Makefile.inc
 PKG_NAME:=		gdbserver
 PKG_DESCR:=		remote programm debugger utility
 PKG_SECTION:=		app/debug
+PKG_DEPENDS:=		libthread-db
 PKG_LIBC_DEPENDS:=	!musl
 
 ifeq ($(ADK_TOOLCHAIN_GDB_6_7_1),y)
