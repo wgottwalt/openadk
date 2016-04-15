@@ -16,12 +16,11 @@ PKG_SITES:=		http://www.ludd.luth.se/~torger/files/
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
-MAKE_ENV+= 		FLEX=$(STAGING_HOST_DIR)/usr/bin/flex UNAME_M=$(ADK_TARGET_ARCH)
-
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,BRUTEFIR,brutefir,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
+CONFIG_STYLE=		manual
 ifeq ($(ADK_TARGET_CPU_WITH_SSE2),y)
 TARGET_CFLAGS+=		-msse2
 else
@@ -30,10 +29,9 @@ TARGET_CFLAGS+=		-msse
 endif
 endif
 
-GCCPATH:=		$(subst libgcc.a,,$(shell $(TARGET_CC) -print-libgcc-file-name))
+MAKE_ENV+= 		FLEX=$(STAGING_HOST_DIR)/usr/bin/flex UNAME_M=$(ADK_TARGET_ARCH)
+GCCPATH:=		$(subst libgcc.a,,$(shell $(TARGET_CC) -print-libgcc-file-name 2>/dev/null))
 XAKE_FLAGS+=		LIBPATHS="-L$(GCCPATH)"
-
-CONFIG_STYLE=		manual
 
 brutefir-install:
 	$(INSTALL_DIR) $(IDIR_BRUTEFIR)/usr/bin
