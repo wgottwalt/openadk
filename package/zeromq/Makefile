@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		e99f44fde25c2e4cb84ce440f87ca7d3fe3271c2b8cfbc67d55e4de25e6fe378
 PKG_DESCR:=		transport layer for distributed apps
 PKG_SECTION:=		libs/misc
+PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://www.zeromq.org
 PKG_SITES:=		http://download.zeromq.org/
 PKG_OPTS:=		dev
