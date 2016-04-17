@@ -14,8 +14,6 @@ HOST_BUILDDEP:=		xz-host
 PKG_URL:=		http://www.gnu.org/software/m4/
 PKG_SITES:=		${MASTER_SITE_GNU:=m4/}
 
-PKG_LIBC_DEPENDS:=	glibc musl
-
 include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
 
