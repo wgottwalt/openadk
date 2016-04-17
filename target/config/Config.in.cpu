@@ -145,6 +145,8 @@ config ADK_TARGET_CPU_ARM_CORTEX_M3
 
 config ADK_TARGET_CPU_ARM_XSCALE
         bool "xscale"
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
 	depends on ADK_TARGET_ARCH_ARM
 
 # avr32
