@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libqmi
-PKG_VERSION:=		1.12.4
+PKG_VERSION:=		1.14.0
 PKG_RELEASE:=		1
-PKG_HASH:=		5527342bc869400d2a9c3038d66ec8ef87980aefb6c7aae593a13ebfee686a15
+PKG_HASH:=		3756a4dac7da2137d7f606e953ffa709155ce8b04d2926e4c936547d6b6f9321
 PKG_DESCR:=		qmi modem protocol helper library
 PKG_SECTION:=		libs/net
 PKG_DEPENDS:=		glib
