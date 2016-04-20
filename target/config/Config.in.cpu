@@ -1597,6 +1597,7 @@ config ADK_TARGET_CPU_TYPE
 	default "cortex_a57" if ADK_TARGET_CPU_ARM_CORTEX_A57
 	default "cortex_a53" if ADK_TARGET_CPU_AARCH64_CORTEX_A53
 	default "cortex_a57" if ADK_TARGET_CPU_AARCH64_CORTEX_A57
+	default "microblaze" if ADK_TARGET_CPU_MICROBLAZE
 	default "mips32" if ADK_TARGET_CPU_MIPS_MIPS32
 	default "mips32r2" if ADK_TARGET_CPU_MIPS_MIPS32R2
 	default "mips32r6" if ADK_TARGET_CPU_MIPS_MIPS32R6
