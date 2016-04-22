@@ -9,10 +9,11 @@ PKG_RELEASE:=		1
 PKG_HASH:=		c6341acea725103f782c14e994d6e12dabaee69e60fe1bc78603a41258d43ba6
 PKG_DESCR:=		mirbsd korn shell
 PKG_SECTION:=		base/shells
+PKG_NEEDS:=		mmu
 PKG_URL:=		http://www.mirbsd.org/mksh.htm
 PKG_SITES:=		$(MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/)
 
-PKG_DFLT_MKSH:=		y if !ADK_TOOLCHAIN_ONLY && !ADK_TARGET_WITHOUT_MMU
+PKG_DFLT_MKSH:=		y if !ADK_TOOLCHAIN_ONLY
 
 PKG_SUBPKGS:=		MKSH MKSH_TEST
 PKGSD_MKSH_TEST:=	install testsuite

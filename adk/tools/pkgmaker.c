@@ -895,6 +895,8 @@ int main() {
 							fprintf(cfg, "\tselect ADK_PACKAGE_LIBRT\n");
 						if (strncmp(token, "c++", 3) == 0)
 							fprintf(cfg, "\tselect ADK_PACKAGE_LIBSTDCXX\n");
+						if (strncmp(token, "mmu", 3) == 0)
+							fprintf(cfg, "\tdepends on ADK_TARGET_WITH_MMU\n");
 						token = strtok(NULL, " ");
 					}
 					free(pkg_needs);
