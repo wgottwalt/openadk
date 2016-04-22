@@ -238,6 +238,12 @@ ifeq ($(ADK_TARGET_CPU_X86_I686),y)
 endif
 endif
 
+ifeq ($(ADK_TARGET_ARCH_M68K),y)
+ifeq ($(ADK_TARGET_WITHOUT_MMU),y)
+	$(SED) 's/.*\(DOPIC\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
+endif
+
 # mips64 abi
 ifeq ($(ADK_TARGET_ARCH_MIPS64),y)
 ifeq ($(ADK_TARGET_ABI_N64),y)
