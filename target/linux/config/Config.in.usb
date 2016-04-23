@@ -2,7 +2,10 @@
 # material, please see the LICENCE file in the top-level directory.
 
 menu "USB support"
-depends on ADK_TARGET_WITH_USB || ADK_TARGET_SYSTEM_QEMU_X86_64 || ADK_TARGET_SYSTEM_QEMU_X86
+depends on ADK_TARGET_WITH_USB \
+	|| ADK_TARGET_SYSTEM_QEMU_X86_64 \
+	|| ADK_TARGET_SYSTEM_QEMU_X86 \
+	|| ADK_TARGET_GENERIC
 
 config ADK_KERNEL_USB_SUPPORT
 	bool
