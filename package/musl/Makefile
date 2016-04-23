@@ -47,7 +47,16 @@ MARCH:=			sheb
 endif
 ifeq ($(ADK_TARGET_ARCH_MIPS),y)
 ifeq ($(ADK_TARGET_SOFT_FLOAT),y)
-MARCH:=			$(ADK_TARGET_CPU_ARCH)-sf
+MARCH:=			mips-sf
+endif
+endif
+ifeq ($(ADK_TARGET_ARCH_MIPS64),y)
+ifeq ($(ADK_TARGET_ABI_N32),y)
+ifeq ($(ADK_TARGET_LITTLE_ENDIAN),y)
+MARCH:=			mipsn32el
+else
+MARCH:=			mipsn32
+endif
 endif
 endif
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
