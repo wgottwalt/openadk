@@ -69,18 +69,22 @@ ifeq ($(ADK_TARGET_BINFMT_FDPIC),y)
 endif
 ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
 ifeq ($(ADK_TARGET_BINFMT_FLAT_ONE),y)
+	echo '# UCLIBC_FORMAT_FLAT is not set' >> ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SEP_DATA\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_FORMAT_SHARED_FLAT\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_FORMAT_FDPIC_ELF\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
+	echo '# UCLIBC_FORMAT_FLAT_SEP_DATA is not set' >> ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SEP_DATA\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT \).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_FORMAT_SHARED_FLAT\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_FORMAT_FDPIC_ELF\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_BINFMT_FLAT_SHARED),y)
+	echo '# UCLIBC_FORMAT_SHARED_FLAT is not set' >> ${WRKBUILD}/.config
+	echo '# HAVE_NO_SHARED is not set' >> ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_FORMAT_SHARED_FLAT\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT \).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_FORMAT_FLAT_SEP_DATA\).*/# \1 is not set/' ${WRKBUILD}/.config
@@ -240,7 +244,9 @@ endif
 
 ifeq ($(ADK_TARGET_ARCH_M68K),y)
 ifeq ($(ADK_TARGET_WITHOUT_MMU),y)
+ifeq ($(ADK_TARGET_BINFMT_FLAT_ONE)$(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
 	$(SED) 's/.*\(DOPIC\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
 endif
 endif
 

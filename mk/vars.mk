@@ -96,14 +96,6 @@ endif
 
 # target tools
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
-
-# use a gcc wrapper for coldfire uclinux support
-ifeq ($(ADK_TARGET_UCLINUX),y)
-ifeq ($(ADK_TARGET_ARCH_M68K),y)
-TARGET_CC:=		adk-uclinux-gcc
-endif
-endif
-
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
 ifneq ($(ADK_TARGET_USE_LTO),)
@@ -173,6 +165,10 @@ endif
 ifeq ($(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
 TARGET_CFLAGS+=		-msep-data
 TARGET_CXXFLAGS+=	-msep-data
+endif
+
+ifeq ($(ADK_TARGET_BINFMT_FLAT_SHARED),y)
+TARGET_LDFLAGS+=	-mid-shared-library
 endif
 
 ifeq ($(ADK_TARGET_LIB_MUSL),y)

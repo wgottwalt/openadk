@@ -276,12 +276,6 @@ endif
 	(cd $(TOOLCHAIN_DIR)/usr/bin && \
 		ln -sf $(GNU_TARGET_NAME)-gcc $(GNU_TARGET_NAME)-cc \
 	)
-ifeq ($(ADK_TARGET_ARCH_M68K),y)
-	# create gcc wrapper for uClinux/m68k
-	echo "#!/bin/sh" > $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-	echo "exec ${GNU_TARGET_NAME}-gcc \"\$$@\" -specs $(ADK_TOPDIR)/toolchain/gcc/m68k-uclinux-gcc.specs" >> $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-	chmod a+x $(TOOLCHAIN_DIR)/usr/bin/adk-uclinux-gcc
-endif
 	touch $@
 
 $(WRKBUILD)/.compiled:
@@ -322,6 +316,9 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	touch $@
 
 $(WRKBUILD)/.final:
+ifeq ($(ADK_TARGET_CPU_CF),y)
+	find $(STAGING_TARGET_DIR) -name libgcc.a -print | while read t; do $(GNU_TARGET_NAME)-ar dv "$t" _ctors.o; done
+endif
 	# remove any libiberty.a, breaking package/binutils later
 	-rm $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
 	# cleanup unneeded docs
