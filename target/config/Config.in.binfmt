@@ -38,7 +38,6 @@ config ADK_TARGET_BINFMT_FLAT_ONE
 
 config ADK_TARGET_BINFMT_FLAT_SEP_DATA
 	bool "Separate data and code region"
-	depends on ADK_TARGET_ARCH_M68K
 	help
 	  Allow for the data and text segments to be separated and placed in
 	  different regions of memory.
