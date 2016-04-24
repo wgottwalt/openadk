@@ -1,0 +1,23 @@
+--- afboot-stm32-f7f109f0c6f65534ae50f9243a7356c5002a9b87.orig/Makefile	2016-04-24 20:35:00.000000000 +0200
++++ afboot-stm32-f7f109f0c6f65534ae50f9243a7356c5002a9b87/Makefile	2016-04-24 20:36:36.000000000 +0200
+@@ -1,14 +1,15 @@
+ CROSS_COMPILE ?= arm-none-eabi-
+ 
+-CC = $(CROSS_COMPILE)gcc
+-LD = $(CROSS_COMPILE)ld
+-OBJCOPY = $(CROSS_COMPILE)objcopy
+-OBJDUMP = $(CROSS_COMPILE)objdump
++CC ?= $(CROSS_COMPILE)gcc
++LD ?= $(CROSS_COMPILE)ld
++OBJCOPY ?= $(CROSS_COMPILE)objcopy
++OBJDUMP ?= $(CROSS_COMPILE)objdump
+ SIZE = $(CROSS_COMPILE)size
+ GDB = $(CROSS_COMPILE)gdb
+ OPENOCD = openocd
+ 
+-CFLAGS := -mthumb -mcpu=cortex-m4
++CFLAGS ?= 
++CFLAGS += -mthumb -mcpu=cortex-m4
+ CFLAGS += -ffunction-sections -fdata-sections
+ CFLAGS += -Os -std=gnu99 -Wall
+ LINKERFLAGS := -nostartfiles --gc-sections
