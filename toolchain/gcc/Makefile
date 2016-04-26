@@ -53,6 +53,7 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--without-ppl \
 			--without-cloog \
 			--without-isl \
+			--disable-werror \
 			--disable-nls
 
 ifeq ($(ADK_TARGET_LIB_NEWLIB),y)
@@ -199,6 +200,9 @@ endif
 ifeq ($(ADK_TOOLCHAIN_WITH_FORTRAN),y)
 USE_LANG+=fortran
 endif
+ifeq ($(ADK_TOOLCHAIN_WITH_GO),y)
+USE_LANG+=go
+endif
 
 LANGUAGES=$(shell echo ${USE_LANG} |tr ' ' ',')
 
@@ -284,8 +288,8 @@ $(WRKBUILD)/.compiled:
 		PATH='$(TARGET_PATH)' \
 		CC='$(HOST_CC)' \
 		CXX='$(HOST_CXX)' \
-		CFLAGS_FOR_TARGET='$(TARGET_CFLAGS)' \
-		CXXFLAGS_FOR_TARGET='$(TARGET_CXXFLAGS)' \
+		CFLAGS_FOR_TARGET='$(TARGET_CFLAGS) -lpthread' \
+		CXXFLAGS_FOR_TARGET='$(TARGET_CXXFLAGS) -lpthread' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			${GCC_FINAL_CONFOPTS} \

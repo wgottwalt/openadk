@@ -59,11 +59,15 @@ config ADK_TOOLCHAIN_WITH_CXX
 	default n
 
 config ADK_TOOLCHAIN_WITH_OBJC
-	bool "enable OBJC"
+	bool "enable Objective-C"
 	default n
 
 config ADK_TOOLCHAIN_WITH_FORTRAN
 	bool "enable Fortran"
+	default n
+
+config ADK_TOOLCHAIN_WITH_GO
+	bool "enable Go"
 	default n
 
 endmenu
