@@ -20,6 +20,7 @@ config ADK_PACKAGE_BUSYBOX_DEFAULT
 	bool "activate standard set of applets"
 	select BUSYBOX_CMP
 	select BUSYBOX_SYNC
+	select BUSYBOX_WHOAMI
 	select BUSYBOX_LESS if !BUSYBOX_DISABLE_LESS
 	select BUSYBOX_TRUE
 	select BUSYBOX_FDISK
