@@ -1,32 +1,30 @@
---- mongrel2-v1.9.1.orig/Makefile	2014-04-09 18:13:27.000000000 +0200
-+++ mongrel2-v1.9.1/Makefile	2015-05-05 21:57:55.000000000 +0200
+--- mongrel2-v1.11.0.orig/Makefile	2015-12-31 10:25:17.000000000 +0100
++++ mongrel2-v1.11.0/Makefile	2016-04-25 20:21:46.996240089 +0200
 @@ -1,6 +1,7 @@
--CFLAGS=-g -O2 -Wall -Wextra -Isrc -Isrc/polarssl/include -pthread -rdynamic -DNDEBUG $(OPTFLAGS) -D_FILE_OFFSET_BITS=64
+-CFLAGS=-g -O2 -Wall -Wextra -Isrc -Isrc/mbedtls/include -pthread -rdynamic -DNDEBUG $(OPTFLAGS) -D_FILE_OFFSET_BITS=64
 +CFLAGS?=
-+CFLAGS+=-Wall -Wextra -Isrc -Isrc/polarssl/include -pthread -rdynamic -DNDEBUG $(OPTFLAGS) -D_FILE_OFFSET_BITS=64
++CFLAGS+=-Wall -Wextra -Isrc -Isrc/mbedtls/include -pthread -rdynamic -DNDEBUG $(OPTFLAGS) -D_FILE_OFFSET_BITS=64
  LIBS=-lzmq -ldl -lsqlite3 $(OPTLIBS)
 -PREFIX?=/usr/local
 +PREFIX?=/usr
  
  get_objs = $(addsuffix .o,$(basename $(wildcard $(1))))
  
-@@ -18,7 +19,7 @@ MAKEOPTS=OPTFLAGS="${NOEXTCFLAGS} ${OPTF
- ifdef $($(shell sh init.sh))
+@@ -29,7 +30,7 @@ ifdef $($(shell									\
+ 	fi ))
  endif
  
--all: bin/mongrel2 tests m2sh procer
-+all: bin/mongrel2
+-all: builddirs bin/mongrel2 tests m2sh procer
++all: builddirs bin/mongrel2 m2sh procer
  
  dev: CFLAGS=-g -Wall -Isrc -Wall -Wextra $(OPTFLAGS) -D_FILE_OFFSET_BITS=64
  dev: all
-@@ -106,10 +107,6 @@ install: all
- 	install bin/mongrel2 $(DESTDIR)/$(PREFIX)/bin/ \
+@@ -160,8 +161,6 @@ install: all
  	    || ( install -d $(DESTDIR)/$(PREFIX)/bin/ \
  	        && install bin/mongrel2 $(DESTDIR)/$(PREFIX)/bin/ )
--	${MAKE} ${MAKEOPTS} -C tools/m2sh install
+ 	${MAKE} ${MAKEOPTS} -C tools/m2sh install
 -	${MAKE} ${MAKEOPTS} -C tools/config_modules install
 -	${MAKE} ${MAKEOPTS} -C tools/filters install
--	${MAKE} ${MAKEOPTS} -C tools/procer install
+ 	${MAKE} ${MAKEOPTS} -C tools/procer install
  
  examples/python/mongrel2/sql/config.sql: src/config/config.sql src/config/mimetypes.sql
- 	cat src/config/config.sql src/config/mimetypes.sql > $@
