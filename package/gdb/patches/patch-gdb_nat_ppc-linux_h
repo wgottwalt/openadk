@@ -1,0 +1,12 @@
+--- gdb-7.11.orig/gdb/nat/ppc-linux.h	2016-02-10 04:19:39.000000000 +0100
++++ gdb-7.11/gdb/nat/ppc-linux.h	2016-04-24 21:19:39.351474402 +0200
+@@ -18,7 +18,9 @@
+ #ifndef PPC_LINUX_H
+ #define PPC_LINUX_H 1
+ 
++#define pt_regs uapi_pt_regs
+ #include <asm/ptrace.h>
++#undef pt_regs
+ #include <asm/cputable.h>
+ 
+ /* This sometimes isn't defined.  */
