@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		strace
 PKG_VERSION:=		4.11
-PKG_RELEASE:=		5
+PKG_RELEASE:=		6
 PKG_HASH:=		e86a5f6cd8f941f67f3e4b28f4e60f3d9185c951cf266404533210a2e5cd8152
 PKG_DESCR:=		system call trace program
 PKG_SECTION:=		app/debug
@@ -20,9 +20,6 @@ XAKE_FLAGS+=		GCC_HONOUR_COPTS=s \
 
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CPPFLAGS+=	-DMSG_EXCEPT=020000 -D_LARGEFILE64_SOURCE=1
-ifeq ($(ADK_TARGET_ARCH_PPC),y)
-TARGET_CPPFLAGS+=	-Dsigcontext_struct=sigcontext -include ppc-regs.h
-endif
 endif
 
 INSTALL_STYLE:=		manual
