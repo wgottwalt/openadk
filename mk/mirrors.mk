@@ -11,10 +11,8 @@ MASTER_SITE_MIRBSD?=	\
 	http://pub.allbsd.org/MirOS/distfiles/ \
 
 MASTER_SITE_KERNEL?=	\
-	ftp://www.kernel.org/pub/linux/ \
 	http://www.kernel.org/pub/linux/ \
 	ftp://www.kernel.org/pub/linux/ \
-	http://www.kernel.org/pub/linux/ \
 
 MASTER_SITE_GNU?=	\
 	http://ftp.gnu.org/gnu/ \
