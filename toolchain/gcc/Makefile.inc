@@ -2,6 +2,14 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		gcc
+ifeq ($(ADK_TOOLCHAIN_GCC_6_1_0),y)
+PKG_VERSION:=		6.1.0
+PKG_HASH:=		724a61d190f27d5028791587149c6a6d6a312d6659a61636be5be86b6e809b59
+PKG_SITES:=		${MASTER_SITE_GNU:=gcc/gcc-${PKG_VERSION}/}
+PKG_RELEASE:=		1
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+LIBSTDCXXVER:=		22
+endif
 ifeq ($(ADK_TOOLCHAIN_GCC_5_3_0),y)
 PKG_VERSION:=		5.3.0
 PKG_HASH:=		b7f5f56bd7db6f4fcaa95511dbf69fc596115b976b5352c06531c2fc95ece2f4
