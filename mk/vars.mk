@@ -220,14 +220,6 @@ TARGET_CFLAGS+=		-mxl-barrel-shift
 TARGET_CXXFLAGS+=	-mxl-barrel-shift
 endif
 
-ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
-# newer gcc does not need this anymore
-ifeq ($(ADK_TOOLCHAIN_GCC_GIT),)
-TARGET_CFLAGS+=		-mlongcalls -mtext-section-literals
-TARGET_CXXFLAGS+=	-mlongcalls -mtext-section-literals
-endif
-endif
-
 # add configured compiler flags for optimization
 TARGET_CFLAGS+=		$(ADK_TARGET_CFLAGS_OPT)
 TARGET_CXXFLAGS+=	$(ADK_TARGET_CFLAGS_OPT)
