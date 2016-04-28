@@ -13,7 +13,7 @@ PKG_URL:=		http://ipset.netfilter.org/
 PKG_SITES:=		http://ipset.netfilter.org/
 
 PKG_ARCH_DEPENDS:=	!arm
-PKG_CFLINE_IPSET:=	depends on !ADK_TOOLCHAIN_ONLY
+PKG_CFLINE_IPSET:=	depends on !ADK_APPLIANCE_TOOLCHAIN
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 

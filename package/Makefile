@@ -41,7 +41,7 @@ all: compile
 download: $(patsubst %,%-download,$(package-y))
 clean: $(patsubst %,%-clean,$(package-) $(package-y) base-files)
 hostcompile: $(HOST_COMPILE_PACKAGES)
-ifeq ($(ADK_TOOLCHAIN_ONLY),y)
+ifeq ($(ADK_APPLIANCE_TOOLCHAIN),y)
 compile: $(COMPILE_PACKAGES)
 install: $(INSTALL_PACKAGES)
 else

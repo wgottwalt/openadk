@@ -1,7 +1,7 @@
 config ADK_PACKAGE_GLIBC
 	prompt "glibc.................... GNU C library"
 	bool
-	default y if ADK_TARGET_LIB_GLIBC && !ADK_TOOLCHAIN_ONLY
+	default y if ADK_TARGET_LIB_GLIBC && !ADK_APPLIANCE_TOOLCHAIN
 	default n
 	depends on ADK_TARGET_LIB_GLIBC
 	select ADK_PACKAGE_TZDATA
