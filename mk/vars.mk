@@ -171,13 +171,6 @@ ifeq ($(ADK_TARGET_BINFMT_FLAT_SHARED),y)
 TARGET_LDFLAGS+=	-mid-shared-library
 endif
 
-ifeq ($(ADK_TARGET_LIB_MUSL),y)
-# use -static-libgcc by default only for musl
-TARGET_CFLAGS+=		-static-libgcc
-TARGET_CXXFLAGS+=	-static-libgcc
-TARGET_LDFLAGS+=	-static-libgcc
-endif
-
 # security optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
 ifneq ($(ADK_TARGET_USE_LD_RELRO),)
 TARGET_LDFLAGS+=	-Wl,-z,relro

@@ -9,9 +9,7 @@ PKG_DESCR:=		gcc library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove
 
-PKG_DFLT_LIBGCC:=	y if !(ADK_TOOLCHAIN_ONLY)
-PKG_LIBC_DEPENDS:=	uclibc-ng glibc
-
+PKG_DFLT_LIBGCC:=	y if !ADK_TOOLCHAIN_ONLY
 
 NO_DISTFILES:=		1
 

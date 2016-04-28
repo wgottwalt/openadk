@@ -77,11 +77,7 @@ ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_
 GCC_FINAL_CONFOPTS+=	--disable-shared
 else
 # uClibc/glibc uses libgcc_s.so.1 for pthread_cancel with dlopen
-ifeq (ADK_TARGET_LIB_MUSL),y)
-GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++'
-else
 GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++,libgcc'
-endif
 endif
 
 ifeq ($(ADK_TOOLCHAIN_WITH_SSP),y)
