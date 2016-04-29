@@ -1,12 +1,16 @@
 --- strace-4.11.orig/ptrace.h	2015-12-17 18:56:48.000000000 +0100
-+++ strace-4.11/ptrace.h	2016-04-24 21:28:59.689052020 +0200
-@@ -52,7 +52,9 @@ extern long ptrace(int, int, char *, lon
++++ strace-4.11/ptrace.h	2016-04-29 17:47:49.000000000 +0200
+@@ -52,7 +52,13 @@ extern long ptrace(int, int, char *, lon
  # define ptrace_peeksiginfo_args XXX_ptrace_peeksiginfo_args
  #endif
  
++#if defined(POWERPC)
 +#define pt_regs uapi_pt_regs
++#endif
  #include <linux/ptrace.h>
++#if defined(POWERPC)
 +#undef pt_regs
++#endif
  
  #ifdef HAVE_STRUCT_IA64_FPREG
  # undef ia64_fpreg
