@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		zlib
 PKG_DEPENDS:=		zlib
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.openssh.com/
-PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/
+PKG_SITES:=		http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
