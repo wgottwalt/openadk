@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bluez
-PKG_VERSION:=		5.37
+PKG_VERSION:=		5.39
 PKG_RELEASE:=		1
-PKG_HASH:=		c14ba9ddcb0055522073477b8fd8bf1ddf5d219e75fdfd4699b7e0ce5350d6b0
+PKG_HASH:=		21d1bc9150d3576296595217efb98a746b592389d25d5637e8bee5da7272593b
 PKG_DESCR:=		bluetooth applications
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		glib dbus libreadline
