@@ -15,15 +15,15 @@ endif
 TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -flto,$(TARGET_CXXFLAGS))
 
-ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
-TARGET_CFLAGS:=		$(filter-out -mtext-section-literals,$(TARGET_CFLAGS))
-TARGET_CXXFLAGS:=	$(filter-out -mtext-section-literals,$(TARGET_CXXFLAGS))
-endif
-
 # for uClinux, we need to filter out some flags
 ifeq ($(ADK_TARGET_UCLINUX),y)
 TARGET_CFLAGS:=		$(filter-out -msep-data,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -msep-data,$(TARGET_CXXFLAGS))
+endif
+
+ifeq ($(ADK_TOOLCHAIN_WITH_GO),y)
+TARGET_CFLAGS+=		-lpthread
+TARGET_CXXFLAGS+=	-lpthread
 endif
 
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
@@ -284,8 +284,8 @@ $(WRKBUILD)/.compiled:
 		PATH='$(TARGET_PATH)' \
 		CC='$(HOST_CC)' \
 		CXX='$(HOST_CXX)' \
-		CFLAGS_FOR_TARGET='$(TARGET_CFLAGS) -lpthread' \
-		CXXFLAGS_FOR_TARGET='$(TARGET_CXXFLAGS) -lpthread' \
+		CFLAGS_FOR_TARGET='$(TARGET_CFLAGS)' \
+		CXXFLAGS_FOR_TARGET='$(TARGET_CXXFLAGS)' \
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			${GCC_FINAL_CONFOPTS} \
