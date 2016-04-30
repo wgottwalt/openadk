@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		2.3.0
+PKG_VERSION:=		2.3.1
 PKG_RELEASE:=		1
-PKG_HASH:=		ba5ba60e5f1aa21b4ef8e9bf35b9ddb57286cb546aac4b5a28c71f459467e507
+PKG_HASH:=		b87c738cb2032bf4920fef8e3864dc5cf8eae9d89d8d523ce0236945c5797dcd
 PKG_DESCR:=		scripting language
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		ruby-host
