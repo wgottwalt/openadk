@@ -5,12 +5,12 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		eudev
 PKG_VERSION:=		3.1.5
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		f75885a430cd50fe4b31732f808ba7f9b2adf0f26b53b8ba2957b0c1d84b6f2a
 PKG_DESCR:=		device manager (udev clone)
 PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		gperf-host glib
-PKG_DEPENDS:=		glib kmod
+PKG_DEPENDS:=		glib libkmod
 PKG_URL:=		http://wiki.gentoo.org/wiki/Project:Eudev
 PKG_SITES:=		http://dev.gentoo.org/~blueness/eudev/
 PKG_LIBNAME:=		libudev
