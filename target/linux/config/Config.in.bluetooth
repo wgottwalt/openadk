@@ -10,6 +10,9 @@ depends on ADK_TARGET_WITH_USB \
 config ADK_KERNEL_BT_BREDR
 	bool
 
+config ADK_KERNEL_BT_BCM
+	tristate
+
 config ADK_KERNEL_BT
 	tristate "Bluetooth network stack"
 	select ADK_KERNEL_BT_BREDR
@@ -110,6 +113,20 @@ config ADK_KERNEL_BT_HCIUART
 	  serial port interface. You will also need this driver if you have 
 	  UART based Bluetooth PCMCIA and CF devices like Xircom Credit Card 
 	  adapter and BrainBoxes Bluetooth PC Card.
+
+config ADK_KERNEL_BT_HCIUART_H4
+	bool
+	depends on ADK_KERNEL_BT_HCIUART
+	default n
+
+config ADK_KERNEL_BT_HCIUART_BCM
+	tristate "Broadcom protocol support"
+	select ADK_KERNEL_BT_HCIUART
+	select ADK_KERNEL_BT_HCIUART_H4
+	select ADK_KERNEL_BT_BCM
+	help
+	  The Broadcom protocol support enables Bluetooth HCI over serial
+	  port interface for Broadcom Bluetooth controllers.
 
 config ADK_KERNEL_BT_MRVL
 	tristate "Marvell driver"

@@ -56,6 +56,7 @@ do-install:
 	$(CP) $(WRKBUILD)/boot/bootcode.bin $(IDIR_BCM28XX_BOOTLOADER)/boot/
 	printf "$(CMDLINE)\n" > $(IDIR_BCM28XX_BOOTLOADER)/boot/cmdline.txt
 	printf "kernel=kernel\n" > $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+	printf "dtdebug=on\n" >> $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 	printf "dtparam=audio,i2s,spi,i2c\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 ifeq ($(ADK_PACKAGE_BCM28XX_BOOTLOADER_DEFAULT),y)
@@ -101,7 +102,7 @@ ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_RPI_PROTO),)
 endif
 ifeq ($(ADK_PACKAGE_BCM28XX_DEBUGTOOL),y)
 	$(INSTALL_DIR) $(IDIR_BCM28XX_DEBUGTOOL)/opt/vc/bin
-	$(INSTALL_BIN) $(WRKBUILD)/hardfp/opt/vc/bin/vcdbg \
+	$(INSTALL_BIN) ./files/vcdbg \
 		$(IDIR_BCM28XX_DEBUGTOOL)/opt/vc/bin
 endif
 
