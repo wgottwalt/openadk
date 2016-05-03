@@ -19,7 +19,7 @@ PKG_SITES:=		http://www.musicpd.org/download/mpd/0.19/
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG
 PKG_FLAVOURS_MPD+=	WITH_SHOUT WITH_CURL WITH_SAMPLERATE WITH_HTTPD
-PKG_FLAVOURS_MPD+=	WITH_SNDFILE WITH_OPUS WITH_PULSE WITH_AVAHI
+PKG_FLAVOURS_MPD+=	WITH_SNDFILE WITH_OPUS WITH_PULSE WITH_AVAHI WITH_JACK
 
 PKGFD_WITH_ALSA:=	enable ALSA output
 PKGFS_WITH_ALSA:=	alsa-lib
@@ -32,6 +32,12 @@ PKGFS_WITH_AO:=		libao
 PKGFB_WITH_AO:=		libao
 ifeq ($(ADK_PACKAGE_MPD_WITH_AO),y)
 PKG_FDEPENDS+=		libao
+endif
+PKGFD_WITH_JACK:=	enable JACK support
+PKGFS_WITH_AO:=		jack
+PKGFB_WITH_AO:=		jack
+ifeq ($(ADK_PACKAGE_MPD_WITH_JACK),y)
+PKG_FDEPENDS+=		jack
 endif
 PKGFD_WITH_MP3:=	enable MP3 support
 PKGFS_WITH_MP3:=	libid3tag libmad
@@ -138,8 +144,7 @@ $(eval $(call PKG_template,MPD,mpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS}
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 TARGET_CFLAGS+=		-std=gnu99
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
-CONFIGURE_ARGS+=	--disable-jack \
-			--disable-fifo \
+CONFIGURE_ARGS+=	--disable-fifo \
 			--disable-oss \
 			--disable-icu \
 			--disable-bzip2 \
@@ -153,6 +158,12 @@ CONFIGURE_ARGS+=	--disable-jack \
 			--disable-soundcloud \
 			--enable-inotify \
 			--enable-pipe-output
+
+ifneq (${ADK_PACKAGE_MPD_WITH_JACK},)
+CONFIGURE_ARGS+=	--enable-jack
+else
+CONFIGURE_ARGS+=	--disable-jack
+endif
 
 ifneq (${ADK_PACKAGE_MPD_WITH_SNDFILE},)
 CONFIGURE_ARGS+=	--enable-sndfile
