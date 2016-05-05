@@ -4,10 +4,10 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mutt
-PKG_VERSION:=		1.5.24
+PKG_VERSION:=		1.6.1
 PKG_RELEASE:=		1
-PKG_HASH:=		a292ca765ed7b19db4ac495938a3ef808a16193b7d623d65562bb8feb2b42200
-PKG_DESCR:=		mail text client
+PKG_HASH:=		98b26cecc6b1713082fc880344fa345c20bd7ded6459abe18c84429c7cf8ed20
+PKG_DESCR:=		mail client for console
 PKG_SECTION:=		net/mail
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
