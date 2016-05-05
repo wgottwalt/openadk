@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssl
-PKG_VERSION:=		1.0.2g
+PKG_VERSION:=		1.0.2h
 PKG_RELEASE:=		1
-PKG_HASH:=		b784b1b3907ce39abf4098702dade6365522a253ad1552e267a9a0e89594aa33
+PKG_HASH:=		1d4007e53aad94a5b2002fe045ee7bb0b3d98f1a47f8b2bc851dcd1c74332919
 PKG_DESCR:=		secure socket layer libraries
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		zlib
