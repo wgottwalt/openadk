@@ -122,8 +122,7 @@ config ADK_KERNEL_SND_INTEL8X0
 	default m if ADK_TARGET_QEMU_WITH_AUDIO
 	default n
 	depends on ADK_TARGET_WITH_PCI \
-		|| ADK_TARGET_QEMU_SYSTEM_X86 \
-		|| ADK_TARGET_QEMU_SYSTEM_X86_64 \
+		|| ADK_TARGET_QEMU_WITH_AUDIO \
 		|| ADK_TARGET_GENERIC
 	help
 	  Driver for intel chipsets.
