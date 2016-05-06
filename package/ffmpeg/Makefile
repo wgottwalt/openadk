@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
-PKG_VERSION:=		3.0.1
+PKG_VERSION:=		3.0.2
 PKG_RELEASE:=		1
-PKG_HASH:=		f7f7052c120f494dd501f96becff9b5a4ae10cfbde97bc2f1e9f0fd6613a4984
+PKG_HASH:=		30e3c77c2f4c358ed087869455a7496cbd7753a5e1b98d20ba49c1004009fd36
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs/video
 PKG_NEEDS:=		threads
@@ -155,7 +155,7 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIGURE_CPU_OPTS:=	--enable-armv6
 endif
 ifeq ($(ADK_TARGET_CPU_MIPS_MIPS32),y)
-CONFIGURE_CPU_OPTS+=	--disable-mipsdspr1 --disable-mipsdspr2
+CONFIGURE_CPU_OPTS+=	--disable-mipsdsp --disable-mipsdspr2
 endif
 
 CONFIG_STYLE:=		minimal
