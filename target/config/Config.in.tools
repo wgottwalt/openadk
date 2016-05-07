@@ -67,6 +67,7 @@ config ADK_HOST_BUILD_FINDUTILS
 
 config ADK_HOST_BUILD_GAWK
 	bool
+	default y if ADK_HOST_DARWIN
 	default n
 
 config ADK_HOST_BUILD_GREP
