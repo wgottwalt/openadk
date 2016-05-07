@@ -1,0 +1,13 @@
+diff -Nur gdb-7.11.orig/gdb/nat/linux-ptrace.h gdb-7.11/gdb/nat/linux-ptrace.h
+--- gdb-7.11.orig/gdb/nat/linux-ptrace.h	2016-02-10 04:19:39.000000000 +0100
++++ gdb-7.11/gdb/nat/linux-ptrace.h	2016-05-06 20:50:21.991346793 +0200
+@@ -23,7 +23,8 @@
+ #include "nat/gdb_ptrace.h"
+ 
+ #ifdef __UCLIBC__
+-#if !(defined(__UCLIBC_HAS_MMU__) || defined(__ARCH_HAS_MMU__))
++#include <sched.h>
++#if !(defined(__UCLIBC_HAS_MMU__) || defined(__ARCH_USE_MMU__))
+ /* PTRACE_TEXT_ADDR and friends.  */
+ #include <asm/ptrace.h>
+ #define HAS_NOMMU
