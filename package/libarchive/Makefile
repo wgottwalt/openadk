@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libarchive
-PKG_VERSION:=		3.1.2
+PKG_VERSION:=		3.2.0
 PKG_RELEASE:=		1
-PKG_HASH:=		eb87eacd8fe49e8d90c8fdc189813023ccc319c5e752b01fb6ad0cc7b2c53d5e
+PKG_HASH:=		7bce45fd71ff01dc20d19edd78322d4965583d81b8bed8e26cacb65d6f5baa87
 PKG_DESCR:=		multiformat archive and compression library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.libarchive.org/
@@ -20,6 +20,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,LIBARCHIVE,libarchive,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,LIBARCHIVE,libarchive,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
+
+CONFIGURE_ARGS+=	--without-xml2
 
 libarchive-install:
 	$(INSTALL_DIR) $(IDIR_LIBARCHIVE)/usr/lib
