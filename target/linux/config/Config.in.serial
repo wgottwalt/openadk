@@ -28,6 +28,9 @@ config ADK_KERNEL_SERIAL_UARTLITE_CONSOLE
 config ADK_KERNEL_SERIAL_ETRAXFS_CONSOLE
 	bool
 
+config ADK_KERNEL_SERIAL_MCF_CONSOLE
+	bool
+
 config ADK_KERNEL_SERIAL_PMACZILOG_TTYS
 	bool
 
@@ -188,6 +191,15 @@ config ADK_KERNEL_SERIAL_SH_SCI
 	help
 	  Serial driver for SCI chip.
 
+config ADK_KERNEL_SERIAL_MCF
+	bool "coldfire serial driver"
+	select ADK_KERNEL_SERIAL_MCF_CONSOLE
+	depends on ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208
+	default y if ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208
+	default n
+	help
+	  Serial driver for Qemu coldfire.
+
 config ADK_KERNEL_SERIAL_PMACZILOG
 	bool "pmac serial driver"
 	select ADK_KERNEL_SERIAL_PMACZILOG_TTYS
@@ -198,7 +210,7 @@ config ADK_KERNEL_SERIAL_PMACZILOG
 	default y if ADK_TARGET_SYSTEM_QEMU_PPC_MACPPC
 	default n
 	help
-	  Serial driver for PMAC Q800 M68K.
+	  Serial driver for PMAC Q800 M68K and MACPPC.
 
 config ADK_KERNEL_SERIAL_OMAP
 	bool "omap serial driver"
