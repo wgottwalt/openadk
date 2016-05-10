@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
-PKG_VERSION:=		3.5.16
+PKG_VERSION:=		3.5.19
 PKG_RELEASE:=		1
-PKG_HASH:=		e73d821180eed8bed230f357c680c0b19f1efa51a24725e810f2b48a2079d385
+PKG_HASH:=		c4b8a2efb85acc600e506605f175298ce3324048e60f4708926d354fe4b5c7a0
 PKG_DESCR:=		web and cache proxy
 PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libltdl
