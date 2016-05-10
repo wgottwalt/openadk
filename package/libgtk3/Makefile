@@ -3,11 +3,11 @@
 
 include $(ADK_TOPDIR)/rules.mk
 
-PKG_NAME:=		gtk+
-PKG_VERSION:=		3.20.2
+PKG_NAME:=		libgtk3
+PKG_VERSION:=		3.20.4
 PKG_EXTRAVER:=		3.20
 PKG_RELEASE:=		1
-PKG_HASH:=		1ab1d1068ea55e0046f437d69983f164df5e68cb2e9fdfb38787b867f33f69f7
+PKG_HASH:=		e7e3aaf54a54dd1c1ca0588939254abe31329e0bcd280a12290d5306b41ea03f
 PKG_DESCR:=		multi-platform toolkit for creating graphical user interfaces
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib cairo libxi libepoxy
@@ -19,6 +19,13 @@ PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		$(MASTER_SITE_GNOME:=gtk+/$(PKG_EXTRAVER)/)
 PKG_LIBNAME:=		libgtk3
 PKG_OPTS:=		dev
+
+DISTFILES:=		gtk+-$(PKG_VERSION).tar.xz
+WRKDIST=		$(WRKDIR)/gtk+-$(PKG_VERSION)
+
+PKG_CFLINE_LIBGTK3:=	select ADK_PACKAGE_CAIRO_WITH_PDF@
+PKG_CFLINE_LIBGTK3+=	select ADK_PACKAGE_CAIRO_WITH_PS@
+PKG_CFLINE_LIBGTK3+=	select ADK_PACKAGE_CAIRO_WITH_SVG@
 
 include $(ADK_TOPDIR)/mk/package.mk
 

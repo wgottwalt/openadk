@@ -12,16 +12,12 @@ PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib icu4c zlib libwebp libgtk3 libsoup
 PKG_DEPENDS+=		libsecret libxt harfbuzz cairo
 PKG_DEPENDS+=		gst-plugins-base gstreamer libnotify
-PKG_BUILDDEP:=		glib icu4c zlib libwebp gtk3 cmake-host
+PKG_BUILDDEP:=		glib icu4c zlib libwebp libgtk3 cmake-host
 PKG_BUILDDEP+=		libsoup libsecret libXt harfbuzz libnotify
 PKG_BUILDDEP+=		gst-plugins-base gstreamer cairo enchant
 PKG_URL:=		http://www.webkitgtk.org/
 PKG_SITES:=		http://webkitgtk.org/releases/
 PKG_OPTS:=		dev
-
-PKG_CFLINE_WEBKITGTK:=	select ADK_PACKAGE_CAIRO_WITH_PDF@
-PKG_CFLINE_WEBKITGTK+=	select ADK_PACKAGE_CAIRO_WITH_PS@
-PKG_CFLINE_WEBKITGTK+=	select ADK_PACKAGE_CAIRO_WITH_SVG@
 
 include $(ADK_TOPDIR)/mk/package.mk
 
