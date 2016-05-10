@@ -39,6 +39,12 @@ endif
 ifeq ($(ADK_TARGET_CPU_ARCH),ppc)
 MARCH:=			powerpc
 endif
+ifeq ($(ADK_TARGET_CPU_ARCH),ppc64)
+MARCH:=			powerpc64
+endif
+ifeq ($(ADK_TARGET_CPU_ARCH),ppc64le)
+MARCH:=			powerpc64le
+endif
 ifeq ($(ADK_TARGET_CPU_ARCH),sh4)
 MARCH:=			sh
 endif

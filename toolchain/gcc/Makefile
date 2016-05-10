@@ -174,6 +174,10 @@ ifeq ($(ADK_TARGET_ARCH_PPC),y)
 GCC_CONFOPTS+=		--with-long-double-64 --enable-secureplt
 endif
 
+ifeq ($(ADK_TARGET_ARCH_PPC64),y)
+GCC_CONFOPTS+=		--without-long-double-128 --with-abi=elfv2
+endif
+
 ifeq ($(ADK_TARGET_ARCH_FRV),y)
 GCC_CONFOPTS+=		--enable-sjlj-exceptions
 endif

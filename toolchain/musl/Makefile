@@ -9,6 +9,12 @@ include ${ADK_TOPDIR}/mk/buildhlp.mk
 ifeq ($(ADK_TARGET_CPU_ARCH),ppc)
 GNU_TARGET_NAME:= $(subst ppc,powerpc,$(GNU_TARGET_NAME))
 endif
+ifeq ($(ADK_TARGET_CPU_ARCH),ppc64)
+GNU_TARGET_NAME:= $(subst ppc64,powerpc64,$(GNU_TARGET_NAME))
+endif
+ifeq ($(ADK_TARGET_CPU_ARCH),ppc64le)
+GNU_TARGET_NAME:= $(subst ppc64le,powerpc64le,$(GNU_TARGET_NAME))
+endif
 # not yet possible
 TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
 TARGET_LDFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
