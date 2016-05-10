@@ -754,6 +754,13 @@ config ADK_TARGET_CPU_PPC_440
 	depends on ADK_TARGET_ARCH_PPC
 
 # ppc64
+config ADK_TARGET_CPU_PPC64_POWERPC64
+	bool "powerpc64"
+	select ADK_LINUX_64
+	select ADK_TARGET_WITH_NPTL
+	select ADK_TARGET_WITH_MMU
+	depends on ADK_TARGET_ARCH_PPC64
+
 config ADK_TARGET_CPU_PPC64_POWER6
 	bool "power6"
 	select ADK_LINUX_64
@@ -1420,6 +1427,7 @@ config ADK_TARGET_GCC_CPU
 	default "leon" if ADK_TARGET_CPU_SPARC_LEON
 	default "mpcore" if ADK_TARGET_CPU_ARM_ARM11MPCORE
 	default "powerpc" if ADK_TARGET_CPU_PPC
+	default "powerpc64" if ADK_TARGET_CPU_PPC64_POWERPC64
 	default "power6" if ADK_TARGET_CPU_PPC64_POWER6
 	default "power7" if ADK_TARGET_CPU_PPC64_POWER7
 	default "power8" if ADK_TARGET_CPU_PPC64_POWER8
@@ -1514,8 +1522,6 @@ config ADK_TARGET_CPU_FLAGS
 	default "-m3" if ADK_TARGET_CPU_SH_SH3
 	default "-m4" if ADK_TARGET_CPU_SH_SH4
 	default "-m4a" if ADK_TARGET_CPU_SH_SH4A
-	default "-mcpu=powerpc64" if ADK_TARGET_ARCH_PPC64 && ADK_TARGET_BIG_ENDIAN
-	default "-mcpu=powerpc64le" if ADK_TARGET_ARCH_PPC64 && ADK_TARGET_LITTLE_ENDIAN
 	default "-mcpu=tilegx" if ADK_TARGET_CPU_TILE_TILEGX
 	default "-mcpu=tilepro" if ADK_TARGET_CPU_TILE_TILEPRO
 
