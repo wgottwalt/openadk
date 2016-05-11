@@ -8,7 +8,7 @@ include $(ADK_TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/vmlinux
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
-QEMU_ARGS:=-M pseries
+QEMU_ARGS:=-M pseries -cpu POWER7
 QEMU_ARGS+=${ADK_QEMU_ARGS}
 
 # target helper text
