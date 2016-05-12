@@ -2,7 +2,19 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
+prompt "Compiler"
+
+config ADK_BUILD_COMPILER_GCC
+	bool "gcc"
+
+config ADK_BUILD_COMPILER_LLVM
+	bool "llvm"
+
+endchoice
+
+choice
 prompt "GCC version"
+depends on ADK_BUILD_COMPILER_GCC
 default ADK_TOOLCHAIN_GCC_4_2_4 if ADK_TARGET_ARCH_METAG
 default ADK_TOOLCHAIN_GCC_4_4_7 if ADK_TARGET_ARCH_AVR32
 default ADK_TOOLCHAIN_GCC_4_8_5 if ADK_TARGET_ARCH_C6X

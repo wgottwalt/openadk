@@ -12,7 +12,16 @@
 
 include $(ADK_TOPDIR)/rules.mk
 
-TARGETS:=binutils gmp mpfr mpc libelf gcc
+TARGETS:=binutils gmp mpfr mpc libelf
+
+ifeq ($(ADK_BUILD_COMPILER_GCC),y)
+TARGETS+=gcc
+COMPILER:=gcc
+endif
+ifeq ($(ADK_BUILD_COMPILER_LLVM),y)
+TARGETS+=llvm
+COMPILER:=llvm
+endif
 
 ifeq ($(ADK_TARGET_LIB_GLIBC),y)
 TARGETS+=glibc
@@ -47,7 +56,7 @@ endif
 
 DOWNLOAD:=kernel-headers-download $(patsubst %,%-download,$(TARGETS))
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
-FINAL:=$(patsubst %,%-final,gcc)
+FINAL:=$(patsubst %,%-final,$(COMPILER))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
 
 install: $(TARGETS_INSTALL)
@@ -55,14 +64,14 @@ clean: $(TARGETS_CLEAN)
 download: $(DOWNLOAD)
 final: $(FINAL)
 
-gcc-configure: binutils-install gmp-install mpfr-install mpc-install libelf-install
+$(COMPILER)-configure: binutils-install gmp-install mpfr-install mpc-install libelf-install
 ifeq ($(ADK_TARGET_LIB_NEWLIB),y)
-$(CLIB)-install: gcc-configure
+$(CLIB)-install: $(COMPILER)-configure
 else
-$(CLIB)-install: gcc-configure kernel-headers-configure
+$(CLIB)-install: $(COMPILER)-configure kernel-headers-configure
 endif
-gcc-install: $(ELF2FLT) $(CLIB)-install
-gcc-final: gcc-install $(GDB)
+$(COMPILER)-install: $(ELF2FLT) $(CLIB)-install
+$(COMPILER)-final: $(COMPILER)-install $(GDB)
 
 %-download:
 	$(START_TRACE) "toolchain/$(patsubst %-download,%,$@)/download.. "

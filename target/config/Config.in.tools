@@ -57,6 +57,11 @@ config ADK_HOST_BUILD_BZIP2
 	bool
 	default n
 
+config ADK_HOST_BUILD_CMAKE
+	bool
+	default y if ADK_BUILD_COMPILER_LLVM
+	default n
+
 config ADK_HOST_BUILD_FILE
 	bool
 	default n

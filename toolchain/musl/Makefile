@@ -22,7 +22,9 @@ TARGET_LDFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
 TARGET_CFLAGS:=         $(filter-out -ffast-math,$(TARGET_CFLAGS))
 
 $(WRKBUILD)/.configured:
-	(cd $(WRKBUILD); CC='$(TARGET_CC)' CROSS_COMPILE='$(TARGET_CROSS)' \
+	(cd $(WRKBUILD); PATH='$(HOST_PATH)' \
+		CROSS_COMPILE='$(TARGET_CROSS)' \
+		CC='$(TARGET_CC)' \
 		CFLAGS='$(TARGET_CFLAGS)' \
 		./configure --prefix=/usr \
 		--target=$(GNU_TARGET_NAME) \
@@ -31,14 +33,13 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	$(MAKE) -C $(WRKBUILD) CFLAGS='$(TARGET_CFLAGS)' all
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
+		CC='$(TARGET_CC)' CFLAGS='$(TARGET_CFLAGS)' all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
-	$(MAKE) -C $(WRKBUILD) CFLAGS='$(TARGET_CFLAGS)' DESTDIR=$(STAGING_TARGET_DIR) install
-	touch $@
-
-$(WRKBUILD)/.final:
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
+		CC='$(TARGET_CC)' CFLAGS='$(TARGET_CFLAGS)' DESTDIR=$(STAGING_TARGET_DIR) install
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk

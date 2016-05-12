@@ -16,6 +16,7 @@ TARGET_LDFLAGS:=$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
 # don't use fast-math for C library
 TARGET_CFLAGS:=	$(filter-out -ffast-math,$(TARGET_CFLAGS))
 
+ifeq ($(ADK_BUILD_COMPILER_GCC),y)
 ifeq ($(ADK_TARGET_HARD_FLOAT),y)
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
 TARGET_CFLAGS+=		-Wa,-mfloat-abi=hard
@@ -31,6 +32,7 @@ TARGET_CFLAGS+=		-Wa,-mfloat-abi=soft
 endif
 ifeq ($(ADK_TARGET_ARCH_MIPS),y)
 TARGET_CFLAGS+=		-Wa,-msoft-float
+endif
 endif
 endif
 
@@ -270,6 +272,7 @@ endif
 endif
 	echo N|PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
 		HOSTCC="$(HOST_CC)" \
+		CC='$(TARGET_CC)' \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
 		RUNTIME_PREFIX=$(STAGING_TARGET_DIR) \

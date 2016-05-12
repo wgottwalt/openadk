@@ -95,8 +95,15 @@ TARGET_COMPILER_PREFIX=$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CROSS}
 endif
 
 # target tools
+ifeq ($(ADK_BUILD_COMPILER_GCC),y)
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
+endif
+ifeq ($(ADK_BUILD_COMPILER_LLVM),y)
+TARGET_CC:=		clang --target=${GNU_TARGET_NAME} --sysroot=$(STAGING_TARGET_DIR)
+TARGET_CXX:=		clang++ --target=${GNU_TARGET_NAME} --sysroot=$(STAGING_TARGET_DIR)
+endif
+
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
 ifneq ($(ADK_TARGET_USE_LTO),)
 TARGET_AR:=		${TARGET_COMPILER_PREFIX}gcc-ar
@@ -113,9 +120,11 @@ TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
 
+ifeq ($(ADK_BUILD_COMPILER_GCC),y)
 ifeq ($(ADK_DISABLE_HONOUR_CFLAGS),)
 TARGET_CFLAGS+=		-fhonour-copts
 TARGET_CXXFLAGS+=	-fhonour-copts
+endif
 endif
 
 # for architectures where gcc --with-cpu matches -mcpu=
