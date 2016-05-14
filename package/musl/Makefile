@@ -53,7 +53,11 @@ MARCH:=			sheb
 endif
 ifeq ($(ADK_TARGET_ARCH_MIPS),y)
 ifeq ($(ADK_TARGET_SOFT_FLOAT),y)
+ifeq ($(ADK_TARGET_LITTLE_ENDIAN),y)
+MARCH:=			mipsel-sf
+else
 MARCH:=			mips-sf
+endif
 endif
 endif
 ifeq ($(ADK_TARGET_ARCH_MIPS64),y)
