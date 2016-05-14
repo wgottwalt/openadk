@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		file
-PKG_VERSION:=		5.24
+PKG_VERSION:=		5.27
 PKG_RELEASE:=		1
-PKG_HASH:=		802cb3de2e49e88ef97cdcb52cd507a0f25458112752e398445cea102bc750ce
+PKG_HASH:=		c2e7d509b1167c4915901ecd257ee924d229a348bf988df6d1934ef0fa34a1a7
 PKG_DESCR:=		file type guesser
 PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		file-host
@@ -32,6 +32,8 @@ $(eval $(call HOST_template,FILE,file,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,FILE,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBMAGIC,libmagic,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBMAGIC},${PKGSD_LIBMAGIC},${PKGSC_LIBMAGIC},${PKG_OPTS}))
 $(eval $(call PKG_template,MAGIC,magic,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MAGIC},${PKGSD_MAGIC},${PKGSC_MAGIC}))
+
+AUTOTOOL_STYLE:=	autoreconf
 
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 MAKE_FLAGS+=		LDFLAGS="$(TARGET_LDFLAGS) -all-static"
