@@ -1,0 +1,9 @@
+config ADK_TARGET_SYSTEM_QEMU_ARM_XILINX_ZYNQ
+	bool "Qemu Emulator (Xilinx Zynq)"
+	select ADK_TARGET_CPU_ARM_CORTEX_A9
+	select ADK_TARGET_QEMU
+	select ADK_TARGET_KERNEL_ZIMAGE
+	select ADK_TARGET_KERNEL_WITH_COMPRESSION
+	help
+	  Qemu Emulator for ARM architecture (Xilinx Zynq).
+

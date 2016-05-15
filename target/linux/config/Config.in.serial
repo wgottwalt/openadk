@@ -13,6 +13,9 @@ config ADK_KERNEL_SERIAL_8250_PNP
 config ADK_KERNEL_SERIAL_ARC_CONSOLE
 	bool
 
+config ADK_KERNEL_SERIAL_XILINX_PS_UART_CONSOLE
+	bool
+
 config ADK_KERNEL_SERIAL_IMX_CONSOLE
 	bool
 
@@ -156,6 +159,15 @@ config ADK_KERNEL_SERIAL_ARC
 	default n
 	help
 	  Serial driver for nSIM ARC simulator.
+
+config ADK_KERNEL_SERIAL_XILINX_PS_UART
+	bool "Cadence serial driver"
+	select ADK_KERNEL_SERIAL_XILINX_PS_UART_CONSOLE
+	depends on ADK_TARGET_SYSTEM_QEMU_ARM_XILINX_ZYNQ
+	default y if ADK_TARGET_SYSTEM_QEMU_ARM_XILINX_ZYNQ
+	default n
+	help
+	  Serial driver for Xilinx Zynq.
 
 config ADK_KERNEL_SERIAL_IMX
 	bool "IMX serial driver"

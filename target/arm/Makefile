@@ -17,6 +17,9 @@ KERNEL:=$(LINUX_DIR)/arch/arm/boot/xipImage
 endif
 
 QEMU_ARGS:=${ADK_QEMU_ARGS}
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_XILINX_ZYNQ),y)
+QEMU_ARGS+=-M xilinx-zynq-a9 -dtb $(FW_DIR)/zynq-zc702.dtb -serial null -serial mon:stdio
+endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_SPITZ),y)
 QEMU_ARGS+=-M spitz
 endif
@@ -75,7 +78,7 @@ targethelp:
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-arm ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfsarchive)
@@ -88,7 +91,7 @@ targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-arm ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
@@ -102,7 +105,7 @@ targethelp:
 	@echo "The RootFS image is: $(FW_DIR)/$(ROOTFSSQUASHFS)"
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} $(QEMU_ARGS) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(ROOTFSSQUASHFS)'
+	@echo 'qemu-system-arm $(QEMU_ARGS) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(ROOTFSSQUASHFS)'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),jffs2)
@@ -111,7 +114,7 @@ targethelp:
 	@echo "The RootFS image is: $(FW_DIR)/$(ROOTFSJFFS2)"
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} $(QEMU_ARGS) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(ROOTFSJFFS2)'
+	@echo 'qemu-system-arm $(QEMU_ARGS) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(ROOTFSJFFS2)'
 endif
 endif
 
@@ -131,6 +134,10 @@ ifeq ($(ADK_TARGET_FS),squashfs)
 endif
 
 dtb-install:
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_XILINX_ZYNQ),y)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
+		dtbs $(MAKE_TRACE)
+endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		dtbs $(MAKE_TRACE)

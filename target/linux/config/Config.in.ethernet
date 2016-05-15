@@ -330,8 +330,10 @@ config ADK_KERNEL_IBMVETH
 config ADK_KERNEL_MACB
 	tristate "Atmel NGW100 network driver"
 	select ADK_KERNEL_NET_CADENCE
-	depends on ADK_TARGET_SYSTEM_ATMEL_NGW100
+	depends on ADK_TARGET_SYSTEM_ATMEL_NGW100 \
+		|| ADK_TARGET_SYSTEM_QEMU_ARM_XILINX_ZYNQ
 	default y if ADK_TARGET_SYSTEM_ATMEL_NGW100
+	default y if ADK_TARGET_SYSTEM_QEMU_ARM_XILINX_ZYNQ
 	default n
 	help
 	  Atmel NGW100 network driver
