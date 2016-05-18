@@ -47,10 +47,10 @@ source "target/config/Config.in.runtime"
 endmenu
 
 source "target/config/Config.in.kernelversion"
+source "target/config/Config.in.kernelcfg"
 
 menu "Kernel configuration"
-	visible if ADK_TARGET_OS_LINUX && ADK_TARGET_KERNEL_CUSTOMISING && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
-source "target/config/Config.in.kernelcfg"
+	visible if ADK_TARGET_OS_LINUX && ADK_TARGET_KERNEL_CUSTOMISING && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH && !ADK_TARGET_KERNEL_USE_DEFCONFIG
 source "target/linux/Config.in"
 endmenu
 
