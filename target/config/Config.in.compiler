@@ -9,6 +9,7 @@ config ADK_BUILD_COMPILER_GCC
 
 config ADK_BUILD_COMPILER_LLVM
 	bool "llvm"
+	depends on ADK_EXPERIMENTAL
 
 endchoice
 
