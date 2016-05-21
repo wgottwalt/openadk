@@ -41,11 +41,11 @@ $(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PK
 $(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
 	$(START_TRACE) "target/$(ADK_TARGET_ARCH)-kernel-configure.. "
 	-for f in $(TARGETS);do if [ -f $$f ];then rm $$f;fi;done
+	echo "-${KERNEL_RELEASE}" >${LINUX_DIR}/localversion
 ifeq ($(ADK_TARGET_KERNEL_USE_DEFCONFIG),y)
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} $(ADK_TARGET_KERNEL_DEFCONFIG) $(MAKE_TRACE)
 else
 	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/mini.config
-	echo "-${KERNEL_RELEASE}" >${LINUX_DIR}/localversion
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} KCONFIG_ALLCONFIG=mini.config allnoconfig $(MAKE_TRACE)
 endif
 	touch -c $(LINUX_DIR)/.config

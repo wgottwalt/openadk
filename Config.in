@@ -48,6 +48,7 @@ endmenu
 
 source "target/config/Config.in.kernelversion"
 source "target/config/Config.in.kernelcfg"
+source "target/linux/config/Config.in.compression"
 
 menu "Kernel configuration"
 	visible if ADK_TARGET_OS_LINUX && ADK_TARGET_KERNEL_CUSTOMISING && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH && !ADK_TARGET_KERNEL_USE_DEFCONFIG
