@@ -295,19 +295,6 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 		UCLIBC_ONLY=1 \
 		VERBOSE=1 \
 		all
-	PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
-		HOSTCC="$(HOST_CC)" \
-		CC='$(TARGET_CC)' \
-		PREFIX=$(STAGING_TARGET_DIR) \
-		DEVEL_PREFIX=/usr/ \
-		DEVEL_PREFIX_LIB=/ \
-		RUNTIME_PREFIX=/ \
-		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
-		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
-		TEST_INSTALLED_UCLIBC=1 \
-		UCLIBC_ONLY=1 \
-		VERBOSE=1 \
-		test_compile test_gen
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
@@ -322,6 +309,19 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		install_runtime install_dev
+	PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
+		HOSTCC="$(HOST_CC)" \
+		CC='$(TARGET_CC)' \
+		PREFIX=$(STAGING_TARGET_DIR) \
+		DEVEL_PREFIX=/usr/ \
+		DEVEL_PREFIX_LIB=/ \
+		RUNTIME_PREFIX=/ \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
+		TEST_INSTALLED_UCLIBC=1 \
+		UCLIBC_ONLY=1 \
+		VERBOSE=1 \
+		test_compile test_gen
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk
