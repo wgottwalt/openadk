@@ -309,7 +309,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		install_runtime install_dev
-	PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		HOSTCC="$(HOST_CC)" \
 		CC='$(TARGET_CC)' \
 		PREFIX=$(STAGING_TARGET_DIR) \
