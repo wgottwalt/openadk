@@ -6,6 +6,8 @@ include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux
+OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
+
 QEMU_ARGS+=-M 10m50-ghrd -dtb $(FW_DIR)/10m50_devboard.dtb
 QEMU_ARGS+=${ADK_QEMU_ARGS}
 
@@ -51,7 +53,7 @@ endif
 
 # image creation and kernel install
 kernel-strip:
-	cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
