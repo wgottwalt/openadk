@@ -41,7 +41,7 @@ ifneq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),y)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-*.so \
 		$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc.so.* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	-for file in libcrypt libdl libm libresolv libutil libuargp; do \
+	-for file in libcrypt libdl libm libnsl libresolv libutil libuargp; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-*.so \
 			$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
