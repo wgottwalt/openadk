@@ -30,6 +30,10 @@ config ADK_TOOLCHAIN_GDB_7_9_1
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_H8300
 
+config ADK_TOOLCHAIN_GDB_7_8_2
+	bool "7.8.2"
+	depends on ADK_TARGET_ARCH_MICROBLAZE
+
 config ADK_TOOLCHAIN_GDB_6_7_1
 	bool "6.7.1"
 	depends on ADK_TARGET_ARCH_AVR32

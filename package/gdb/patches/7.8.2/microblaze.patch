@@ -1,7 +1,7 @@
-diff -Nur gdb-7.7.orig/bfd/bfd-in2.h gdb-7.7/bfd/bfd-in2.h
---- gdb-7.7.orig/bfd/bfd-in2.h	2014-02-06 03:21:29.000000000 +0100
-+++ gdb-7.7/bfd/bfd-in2.h	2014-03-26 19:43:36.000000000 +0100
-@@ -5378,6 +5378,11 @@
+diff -Nur gdb-7.8.2.orig/bfd/bfd-in2.h gdb-7.8.2/bfd/bfd-in2.h
+--- gdb-7.8.2.orig/bfd/bfd-in2.h	2015-01-15 11:58:11.000000000 +0100
++++ gdb-7.8.2/bfd/bfd-in2.h	2016-05-14 21:29:38.989383220 +0200
+@@ -5449,6 +5449,11 @@
  expressions of the form "Symbol Op Symbol"  */
    BFD_RELOC_MICROBLAZE_32_SYM_OP_SYM,
  
@@ -13,9 +13,9 @@ diff -Nur gdb-7.7.orig/bfd/bfd-in2.h gdb-7.7/bfd/bfd-in2.h
  /* This is a 64 bit reloc that stores the 32 bit pc relative
  value in two words (with an imm instruction).  No relocation is
  done here - only used for relaxing  */
-diff -Nur gdb-7.7.orig/bfd/elf32-microblaze.c gdb-7.7/bfd/elf32-microblaze.c
---- gdb-7.7.orig/bfd/elf32-microblaze.c	2013-12-08 05:55:47.000000000 +0100
-+++ gdb-7.7/bfd/elf32-microblaze.c	2014-03-27 08:30:48.000000000 +0100
+diff -Nur gdb-7.8.2.orig/bfd/elf32-microblaze.c gdb-7.8.2/bfd/elf32-microblaze.c
+--- gdb-7.8.2.orig/bfd/elf32-microblaze.c	2015-01-15 11:58:11.000000000 +0100
++++ gdb-7.8.2/bfd/elf32-microblaze.c	2016-05-14 21:29:38.993383375 +0200
 @@ -177,6 +177,20 @@
            FALSE), 		/* PC relative offset?  */
  
@@ -216,10 +216,10 @@ diff -Nur gdb-7.7.orig/bfd/elf32-microblaze.c gdb-7.7/bfd/elf32-microblaze.c
 +#define elf_backend_grok_psinfo                 microblaze_elf_grok_psinfo
 +
  #include "elf32-target.h"
-diff -Nur gdb-7.7.orig/bfd/libbfd.h gdb-7.7/bfd/libbfd.h
---- gdb-7.7.orig/bfd/libbfd.h	2014-02-06 03:21:29.000000000 +0100
-+++ gdb-7.7/bfd/libbfd.h	2014-03-26 20:02:00.000000000 +0100
-@@ -2615,6 +2615,7 @@
+diff -Nur gdb-7.8.2.orig/bfd/libbfd.h gdb-7.8.2/bfd/libbfd.h
+--- gdb-7.8.2.orig/bfd/libbfd.h	2015-01-15 11:58:11.000000000 +0100
++++ gdb-7.8.2/bfd/libbfd.h	2016-05-14 21:29:38.993383375 +0200
+@@ -2644,6 +2644,7 @@
    "BFD_RELOC_MICROBLAZE_32_ROSDA",
    "BFD_RELOC_MICROBLAZE_32_RWSDA",
    "BFD_RELOC_MICROBLAZE_32_SYM_OP_SYM",
@@ -227,30 +227,9 @@ diff -Nur gdb-7.7.orig/bfd/libbfd.h gdb-7.7/bfd/libbfd.h
    "BFD_RELOC_MICROBLAZE_64_NONE",
    "BFD_RELOC_MICROBLAZE_64_GOTPC",
    "BFD_RELOC_MICROBLAZE_64_GOT",
-diff -Nur gdb-7.7.orig/gdb/Makefile.in gdb-7.7/gdb/Makefile.in
---- gdb-7.7.orig/gdb/Makefile.in	2014-02-06 03:21:29.000000000 +0100
-+++ gdb-7.7/gdb/Makefile.in	2014-03-26 20:33:32.000000000 +0100
-@@ -849,7 +849,7 @@
- annotate.h sim-regno.h dictionary.h dfp.h main.h frame-unwind.h	\
- remote-fileio.h i386-linux-tdep.h vax-tdep.h objc-lang.h \
- sentinel-frame.h bcache.h symfile.h windows-tdep.h linux-tdep.h \
--gdb_usleep.h jit.h xml-syscall.h microblaze-tdep.h \
-+gdb_usleep.h jit.h xml-syscall.h microblaze-tdep.h microblaze-linux-tdep.h \
- psymtab.h psympriv.h progspace.h bfin-tdep.h ia64-hpux-tdep.h \
- amd64-darwin-tdep.h charset-list.h \
- config/djgpp/langinfo.h config/djgpp/nl_types.h darwin-nat.h \
-@@ -1547,7 +1547,7 @@
- 	m68kbsd-nat.c m68kbsd-tdep.c \
- 	m68klinux-nat.c m68klinux-tdep.c \
- 	m88k-tdep.c m88kbsd-nat.c \
--	microblaze-tdep.c microblaze-linux-tdep.c \
-+	microblaze-tdep.c microblaze-linux-nat.c microblaze-linux-tdep.c \
- 	mingw-hdep.c \
- 	mips-linux-nat.c mips-linux-tdep.c \
- 	mips-irix-tdep.c \
-diff -Nur gdb-7.7.orig/gdb/config/microblaze/linux.mh gdb-7.7/gdb/config/microblaze/linux.mh
---- gdb-7.7.orig/gdb/config/microblaze/linux.mh	1970-01-01 01:00:00.000000000 +0100
-+++ gdb-7.7/gdb/config/microblaze/linux.mh	2014-03-24 15:52:56.000000000 +0100
+diff -Nur gdb-7.8.2.orig/gdb/config/microblaze/linux.mh gdb-7.8.2/gdb/config/microblaze/linux.mh
+--- gdb-7.8.2.orig/gdb/config/microblaze/linux.mh	1970-01-01 01:00:00.000000000 +0100
++++ gdb-7.8.2/gdb/config/microblaze/linux.mh	2016-05-14 21:29:38.993383375 +0200
 @@ -0,0 +1,10 @@
 +# Host: Microblaze, running Linux
 +
@@ -262,9 +241,9 @@ diff -Nur gdb-7.7.orig/gdb/config/microblaze/linux.mh gdb-7.7/gdb/config/microbl
 +NAT_CDEPS = $(srcdir)/proc-service.list
 +
 +LOADLIBES = -ldl $(RDYNAMIC)
-diff -Nur gdb-7.7.orig/gdb/configure.host gdb-7.7/gdb/configure.host
---- gdb-7.7.orig/gdb/configure.host	2013-12-08 05:55:47.000000000 +0100
-+++ gdb-7.7/gdb/configure.host	2014-03-26 20:34:44.000000000 +0100
+diff -Nur gdb-7.8.2.orig/gdb/configure.host gdb-7.8.2/gdb/configure.host
+--- gdb-7.8.2.orig/gdb/configure.host	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/configure.host	2016-05-14 21:29:38.993383375 +0200
 @@ -59,6 +59,7 @@
  m68*)			gdb_host_cpu=m68k ;;
  m88*)			gdb_host_cpu=m88k ;;
@@ -282,9 +261,9 @@ diff -Nur gdb-7.7.orig/gdb/configure.host gdb-7.7/gdb/configure.host
  powerpc-*-aix* | rs6000-*-* | powerpc64-*-aix*)
  			gdb_host=aix ;;
  powerpc*-*-freebsd*)	gdb_host=fbsd ;;
-diff -Nur gdb-7.7.orig/gdb/configure.tgt gdb-7.7/gdb/configure.tgt
---- gdb-7.7.orig/gdb/configure.tgt	2014-02-06 03:21:29.000000000 +0100
-+++ gdb-7.7/gdb/configure.tgt	2014-03-26 20:36:23.000000000 +0100
+diff -Nur gdb-7.8.2.orig/gdb/configure.tgt gdb-7.8.2/gdb/configure.tgt
+--- gdb-7.8.2.orig/gdb/configure.tgt	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/configure.tgt	2016-05-14 21:29:38.993383375 +0200
 @@ -340,9 +340,10 @@
  
  microblaze*-linux-*|microblaze*-*-linux*)
@@ -297,37 +276,9 @@ diff -Nur gdb-7.7.orig/gdb/configure.tgt gdb-7.7/gdb/configure.tgt
  	;;
  microblaze*-*-*)
  	# Target: Xilinx MicroBlaze running standalone
-diff -Nur gdb-7.7.orig/gdb/gdbserver/Makefile.in gdb-7.7/gdb/gdbserver/Makefile.in
---- gdb-7.7.orig/gdb/gdbserver/Makefile.in	2014-02-06 03:21:29.000000000 +0100
-+++ gdb-7.7/gdb/gdbserver/Makefile.in	2014-03-26 20:39:22.000000000 +0100
-@@ -148,6 +148,7 @@
- 	$(srcdir)/linux-ia64-low.c $(srcdir)/linux-low.c \
- 	$(srcdir)/linux-m32r-low.c \
- 	$(srcdir)/linux-m68k-low.c $(srcdir)/linux-mips-low.c \
-+	$(srcdir)/linux-microblaze-low.c \
- 	$(srcdir)/linux-nios2-low.c \
- 	$(srcdir)/linux-ppc-low.c \
- 	$(srcdir)/linux-s390-low.c \
-@@ -328,6 +329,7 @@
- 	rm -f arm-with-iwmmxt.c
- 	rm -f arm-with-vfpv2.c arm-with-vfpv3.c arm-with-neon.c
- 	rm -f mips-linux.c mips64-linux.c
-+	rm -f microblaze-linux.c
- 	rm -f nios2-linux.c
- 	rm -f powerpc-32.c powerpc-32l.c powerpc-64l.c powerpc-e500l.c
- 	rm -f powerpc-altivec32l.c powerpc-cell32l.c powerpc-vsx32l.c
-@@ -600,6 +602,8 @@
- 	$(SHELL) $(regdat_sh) $(srcdir)/../regformats/mips64-linux.dat mips64-linux.c
- mips64-dsp-linux.c : $(srcdir)/../regformats/mips64-dsp-linux.dat $(regdat_sh)
- 	$(SHELL) $(regdat_sh) $(srcdir)/../regformats/mips64-dsp-linux.dat mips64-dsp-linux.c
-+microblaze-linux.c : $(srcdir)/../regformats/reg-microblaze.dat $(regdat_sh)
-+	$(SHELL) $(regdat_sh) $(srcdir)/../regformats/reg-microblaze.dat microblaze-linux.c
- nios2-linux.c :	$(srcdir)/../regformats/nios2-linux.dat $(regdat_sh)
- 	$(SHELL) $(regdat_sh) $(srcdir)/../regformats/nios2-linux.dat nios2-linux.c
- powerpc-32.c : $(srcdir)/../regformats/rs6000/powerpc-32.dat $(regdat_sh)
-diff -Nur gdb-7.7.orig/gdb/gdbserver/configure.srv gdb-7.7/gdb/gdbserver/configure.srv
---- gdb-7.7.orig/gdb/gdbserver/configure.srv	2014-01-08 10:23:36.000000000 +0100
-+++ gdb-7.7/gdb/gdbserver/configure.srv	2014-03-26 20:40:44.000000000 +0100
+diff -Nur gdb-7.8.2.orig/gdb/gdbserver/configure.srv gdb-7.8.2/gdb/gdbserver/configure.srv
+--- gdb-7.8.2.orig/gdb/gdbserver/configure.srv	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/gdbserver/configure.srv	2016-05-14 21:29:38.993383375 +0200
 @@ -198,6 +198,13 @@
  			srv_linux_usrregs=yes
  			srv_linux_thread_db=yes
@@ -342,9 +293,9 @@ diff -Nur gdb-7.7.orig/gdb/gdbserver/configure.srv gdb-7.7/gdb/gdbserver/configu
    nios2*-*-linux*)	srv_regobj="nios2-linux.o"
  			srv_tgtobj="$srv_linux_obj linux-nios2-low.o"
  			srv_xmlfiles="nios2-linux.xml"
-diff -Nur gdb-7.7.orig/gdb/gdbserver/linux-microblaze-low.c gdb-7.7/gdb/gdbserver/linux-microblaze-low.c
---- gdb-7.7.orig/gdb/gdbserver/linux-microblaze-low.c	1970-01-01 01:00:00.000000000 +0100
-+++ gdb-7.7/gdb/gdbserver/linux-microblaze-low.c	2014-03-26 20:41:13.000000000 +0100
+diff -Nur gdb-7.8.2.orig/gdb/gdbserver/linux-microblaze-low.c gdb-7.8.2/gdb/gdbserver/linux-microblaze-low.c
+--- gdb-7.8.2.orig/gdb/gdbserver/linux-microblaze-low.c	1970-01-01 01:00:00.000000000 +0100
++++ gdb-7.8.2/gdb/gdbserver/linux-microblaze-low.c	2016-05-14 21:29:38.993383375 +0200
 @@ -0,0 +1,228 @@
 +/* GNU/Linux/Microblaze specific low level interface, for the remote server for
 +   GDB.
@@ -575,9 +526,58 @@ diff -Nur gdb-7.7.orig/gdb/gdbserver/linux-microblaze-low.c gdb-7.7/gdb/gdbserve
 +  initialize_regsets_info (&microblaze_regsets_info);
 +}
 \ No newline at end of file
-diff -Nur gdb-7.7.orig/gdb/microblaze-linux-nat.c gdb-7.7/gdb/microblaze-linux-nat.c
---- gdb-7.7.orig/gdb/microblaze-linux-nat.c	1970-01-01 01:00:00.000000000 +0100
-+++ gdb-7.7/gdb/microblaze-linux-nat.c	2014-03-27 09:51:56.000000000 +0100
+diff -Nur gdb-7.8.2.orig/gdb/gdbserver/Makefile.in gdb-7.8.2/gdb/gdbserver/Makefile.in
+--- gdb-7.8.2.orig/gdb/gdbserver/Makefile.in	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/gdbserver/Makefile.in	2016-05-14 21:29:38.993383375 +0200
+@@ -148,6 +148,7 @@
+ 	$(srcdir)/linux-ia64-low.c $(srcdir)/linux-low.c \
+ 	$(srcdir)/linux-m32r-low.c \
+ 	$(srcdir)/linux-m68k-low.c $(srcdir)/linux-mips-low.c \
++	$(srcdir)/linux-microblaze-low.c \
+ 	$(srcdir)/linux-nios2-low.c \
+ 	$(srcdir)/linux-ppc-low.c \
+ 	$(srcdir)/linux-s390-low.c \
+@@ -329,6 +330,7 @@
+ 	rm -f arm-with-iwmmxt.c
+ 	rm -f arm-with-vfpv2.c arm-with-vfpv3.c arm-with-neon.c
+ 	rm -f mips-linux.c mips64-linux.c
++	rm -f microblaze-linux.c
+ 	rm -f nios2-linux.c
+ 	rm -f powerpc-32.c powerpc-32l.c powerpc-64l.c powerpc-e500l.c
+ 	rm -f powerpc-altivec32l.c powerpc-cell32l.c powerpc-vsx32l.c
+@@ -620,6 +622,8 @@
+ 	$(SHELL) $(regdat_sh) $(srcdir)/../regformats/mips64-linux.dat mips64-linux.c
+ mips64-dsp-linux.c : $(srcdir)/../regformats/mips64-dsp-linux.dat $(regdat_sh)
+ 	$(SHELL) $(regdat_sh) $(srcdir)/../regformats/mips64-dsp-linux.dat mips64-dsp-linux.c
++microblaze-linux.c : $(srcdir)/../regformats/reg-microblaze.dat $(regdat_sh)
++	$(SHELL) $(regdat_sh) $(srcdir)/../regformats/reg-microblaze.dat microblaze-linux.c
+ nios2-linux.c :	$(srcdir)/../regformats/nios2-linux.dat $(regdat_sh)
+ 	$(SHELL) $(regdat_sh) $(srcdir)/../regformats/nios2-linux.dat nios2-linux.c
+ powerpc-32.c : $(srcdir)/../regformats/rs6000/powerpc-32.dat $(regdat_sh)
+diff -Nur gdb-7.8.2.orig/gdb/Makefile.in gdb-7.8.2/gdb/Makefile.in
+--- gdb-7.8.2.orig/gdb/Makefile.in	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/Makefile.in	2016-05-14 21:29:38.993383375 +0200
+@@ -912,7 +912,7 @@
+ annotate.h sim-regno.h dictionary.h dfp.h main.h frame-unwind.h	\
+ remote-fileio.h i386-linux-tdep.h vax-tdep.h objc-lang.h \
+ sentinel-frame.h bcache.h symfile.h windows-tdep.h linux-tdep.h \
+-gdb_usleep.h jit.h xml-syscall.h microblaze-tdep.h \
++gdb_usleep.h jit.h xml-syscall.h microblaze-tdep.h microblaze-linux-tdep.h \
+ psymtab.h psympriv.h progspace.h bfin-tdep.h ia64-hpux-tdep.h \
+ amd64-darwin-tdep.h charset-list.h \
+ config/djgpp/langinfo.h config/djgpp/nl_types.h darwin-nat.h \
+@@ -1639,7 +1639,7 @@
+ 	m68kbsd-nat.c m68kbsd-tdep.c \
+ 	m68klinux-nat.c m68klinux-tdep.c \
+ 	m88k-tdep.c m88kbsd-nat.c \
+-	microblaze-tdep.c microblaze-linux-tdep.c \
++	microblaze-tdep.c microblaze-linux-nat.c microblaze-linux-tdep.c \
+ 	mingw-hdep.c \
+ 	mips-linux-nat.c mips-linux-tdep.c \
+ 	mips-irix-tdep.c \
+diff -Nur gdb-7.8.2.orig/gdb/microblaze-linux-nat.c gdb-7.8.2/gdb/microblaze-linux-nat.c
+--- gdb-7.8.2.orig/gdb/microblaze-linux-nat.c	1970-01-01 01:00:00.000000000 +0100
++++ gdb-7.8.2/gdb/microblaze-linux-nat.c	2016-05-14 21:29:38.993383375 +0200
 @@ -0,0 +1,430 @@
 +/* Microblaze GNU/Linux native support.
 +
@@ -1009,9 +1009,9 @@ diff -Nur gdb-7.7.orig/gdb/microblaze-linux-nat.c gdb-7.7/gdb/microblaze-linux-n
 +  /* Register the target.  */
 +  linux_nat_add_target (t);
 +}
-diff -Nur gdb-7.7.orig/gdb/microblaze-linux-tdep.c gdb-7.7/gdb/microblaze-linux-tdep.c
---- gdb-7.7.orig/gdb/microblaze-linux-tdep.c	2014-01-08 10:23:36.000000000 +0100
-+++ gdb-7.7/gdb/microblaze-linux-tdep.c	2014-03-26 10:11:41.000000000 +0100
+diff -Nur gdb-7.8.2.orig/gdb/microblaze-linux-tdep.c gdb-7.8.2/gdb/microblaze-linux-tdep.c
+--- gdb-7.8.2.orig/gdb/microblaze-linux-tdep.c	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/microblaze-linux-tdep.c	2016-05-15 13:56:18.171253048 +0200
 @@ -1,6 +1,6 @@
  /* Target-dependent code for Xilinx MicroBlaze.
  
@@ -1078,7 +1078,7 @@ diff -Nur gdb-7.7.orig/gdb/microblaze-linux-tdep.c gdb-7.7/gdb/microblaze-linux-
    return val;
  }
  
-@@ -116,6 +140,43 @@
+@@ -116,6 +140,50 @@
    microblaze_linux_sighandler_cache_init
  };
  
@@ -1119,21 +1119,27 @@ diff -Nur gdb-7.7.orig/gdb/microblaze-linux-tdep.c gdb-7.7/gdb/microblaze-linux-
 +  /* FIXME.  */
 +  microblaze_collect_fpregset (regcache, regnum, fpregs);
 +}
++
++static const struct regset microblaze_linux_gregset =
++{
++    NULL,
++    microblaze_linux_supply_core_gregset,
++    microblaze_linux_collect_core_gregset
++};
  
  static void
  microblaze_linux_init_abi (struct gdbarch_info info,
-@@ -123,6 +184,10 @@
+@@ -123,6 +191,9 @@
  {
    struct gdbarch_tdep *tdep = gdbarch_tdep (gdbarch);
  
-+  tdep->gregset = regset_alloc (gdbarch, microblaze_linux_supply_core_gregset,
-+                                microblaze_linux_collect_core_gregset);
++  tdep->gregset = &microblaze_linux_gregset;
 +  tdep->sizeof_gregset = 200;
 +
    linux_init_abi (info, gdbarch);
  
    set_gdbarch_memory_remove_breakpoint (gdbarch,
-@@ -135,6 +200,25 @@
+@@ -135,6 +206,25 @@
    /* Trampolines.  */
    tramp_frame_prepend_unwinder (gdbarch,
  				&microblaze_linux_sighandler_tramp_frame);
@@ -1159,9 +1165,9 @@ diff -Nur gdb-7.7.orig/gdb/microblaze-linux-tdep.c gdb-7.7/gdb/microblaze-linux-
  }
  
  /* -Wmissing-prototypes */
-diff -Nur gdb-7.7.orig/gdb/microblaze-rom.c gdb-7.7/gdb/microblaze-rom.c
---- gdb-7.7.orig/gdb/microblaze-rom.c	2014-01-08 10:23:36.000000000 +0100
-+++ gdb-7.7/gdb/microblaze-rom.c	2014-03-27 08:56:48.000000000 +0100
+diff -Nur gdb-7.8.2.orig/gdb/microblaze-rom.c gdb-7.8.2/gdb/microblaze-rom.c
+--- gdb-7.8.2.orig/gdb/microblaze-rom.c	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/microblaze-rom.c	2016-05-14 21:29:38.997383530 +0200
 @@ -1,6 +1,6 @@
  /* Remote debugging interface to Xilinx MicroBlaze.
  
@@ -1178,9 +1184,9 @@ diff -Nur gdb-7.7.orig/gdb/microblaze-rom.c gdb-7.7/gdb/microblaze-rom.c
  #include "serial.h"
  #include "regcache.h"
  
-diff -Nur gdb-7.7.orig/gdb/microblaze-tdep.c gdb-7.7/gdb/microblaze-tdep.c
---- gdb-7.7.orig/gdb/microblaze-tdep.c	2014-02-06 03:21:29.000000000 +0100
-+++ gdb-7.7/gdb/microblaze-tdep.c	2014-03-27 08:46:21.000000000 +0100
+diff -Nur gdb-7.8.2.orig/gdb/microblaze-tdep.c gdb-7.8.2/gdb/microblaze-tdep.c
+--- gdb-7.8.2.orig/gdb/microblaze-tdep.c	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/microblaze-tdep.c	2016-05-14 21:29:38.997383530 +0200
 @@ -1,6 +1,6 @@
  /* Target-dependent code for Xilinx MicroBlaze.
  
@@ -1367,11 +1373,11 @@ diff -Nur gdb-7.7.orig/gdb/microblaze-tdep.c gdb-7.7/gdb/microblaze-tdep.c
 +  if (cache->pc)
 +    microblaze_analyze_prologue (gdbarch, cache->pc, current_pc,
 +	                         cache);
- 
--  cache->pc = get_frame_address_in_block (next_frame);
++
 +  cache->base = get_frame_register_unsigned (next_frame, gdbarch_sp_regnum (gdbarch));
 +  cache->saved_sp = cache->base + cache->framesize;
-+
+ 
+-  cache->pc = get_frame_address_in_block (next_frame);
 +  cache->register_offsets[MICROBLAZE_PREV_PC_REGNUM] = cache->base;
 +  cache->register_offsets[MICROBLAZE_SP_REGNUM] = cache->saved_sp;
  
@@ -1610,7 +1616,7 @@ diff -Nur gdb-7.7.orig/gdb/microblaze-tdep.c gdb-7.7/gdb/microblaze-tdep.c
  microblaze_gdbarch_init (struct gdbarch_info info, struct gdbarch_list *arches)
  {
 @@ -679,6 +935,11 @@
-   tdep = XMALLOC (struct gdbarch_tdep);
+   tdep = XNEW (struct gdbarch_tdep);
    gdbarch = gdbarch_alloc (&info, tdep);
  
 +  tdep->gregset = NULL;
@@ -1646,9 +1652,9 @@ diff -Nur gdb-7.7.orig/gdb/microblaze-tdep.c gdb-7.7/gdb/microblaze-tdep.c
  
    return gdbarch;
  }
-diff -Nur gdb-7.7.orig/gdb/microblaze-tdep.h gdb-7.7/gdb/microblaze-tdep.h
---- gdb-7.7.orig/gdb/microblaze-tdep.h	2014-01-08 10:23:36.000000000 +0100
-+++ gdb-7.7/gdb/microblaze-tdep.h	2014-03-26 10:11:41.000000000 +0100
+diff -Nur gdb-7.8.2.orig/gdb/microblaze-tdep.h gdb-7.8.2/gdb/microblaze-tdep.h
+--- gdb-7.8.2.orig/gdb/microblaze-tdep.h	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/microblaze-tdep.h	2016-05-14 21:29:38.997383530 +0200
 @@ -1,6 +1,6 @@
  /* Target-dependent code for Xilinx MicroBlaze.
  
@@ -1738,9 +1744,9 @@ diff -Nur gdb-7.7.orig/gdb/microblaze-tdep.h gdb-7.7/gdb/microblaze-tdep.h
 +                                     const char *sect_name, size_t sect_size);
  
  #endif /* microblaze-tdep.h */
-diff -Nur gdb-7.7.orig/gdb/regformats/reg-microblaze.dat gdb-7.7/gdb/regformats/reg-microblaze.dat
---- gdb-7.7.orig/gdb/regformats/reg-microblaze.dat	1970-01-01 01:00:00.000000000 +0100
-+++ gdb-7.7/gdb/regformats/reg-microblaze.dat	2014-03-26 20:43:54.000000000 +0100
+diff -Nur gdb-7.8.2.orig/gdb/regformats/reg-microblaze.dat gdb-7.8.2/gdb/regformats/reg-microblaze.dat
+--- gdb-7.8.2.orig/gdb/regformats/reg-microblaze.dat	1970-01-01 01:00:00.000000000 +0100
++++ gdb-7.8.2/gdb/regformats/reg-microblaze.dat	2016-05-14 21:29:38.997383530 +0200
 @@ -0,0 +1,41 @@
 +name:microblaze
 +expedite:r1,pc
@@ -1783,9 +1789,9 @@ diff -Nur gdb-7.7.orig/gdb/regformats/reg-microblaze.dat gdb-7.7/gdb/regformats/
 +32:fsr
 +32:slr
 +32:shr
-diff -Nur gdb-7.7.orig/include/elf/microblaze.h gdb-7.7/include/elf/microblaze.h
---- gdb-7.7.orig/include/elf/microblaze.h	2013-12-08 05:11:51.000000000 +0100
-+++ gdb-7.7/include/elf/microblaze.h	2014-03-26 20:44:34.000000000 +0100
+diff -Nur gdb-7.8.2.orig/include/elf/microblaze.h gdb-7.8.2/include/elf/microblaze.h
+--- gdb-7.8.2.orig/include/elf/microblaze.h	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/include/elf/microblaze.h	2016-05-14 21:29:38.997383530 +0200
 @@ -58,6 +58,7 @@
    RELOC_NUMBER (R_MICROBLAZE_TLSDTPREL64, 27)   /* TLS Offset Within TLS Block */
    RELOC_NUMBER (R_MICROBLAZE_TLSGOTTPREL32, 28) /* TLS Offset From Thread Pointer */
@@ -1794,9 +1800,9 @@ diff -Nur gdb-7.7.orig/include/elf/microblaze.h gdb-7.7/include/elf/microblaze.h
     
  END_RELOC_NUMBERS (R_MICROBLAZE_max)
  
-diff -Nur gdb-7.7.orig/opcodes/microblaze-opc.h gdb-7.7/opcodes/microblaze-opc.h
---- gdb-7.7.orig/opcodes/microblaze-opc.h	2013-12-08 05:11:52.000000000 +0100
-+++ gdb-7.7/opcodes/microblaze-opc.h	2014-03-26 20:45:46.000000000 +0100
+diff -Nur gdb-7.8.2.orig/opcodes/microblaze-opc.h gdb-7.8.2/opcodes/microblaze-opc.h
+--- gdb-7.8.2.orig/opcodes/microblaze-opc.h	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/opcodes/microblaze-opc.h	2016-05-14 21:29:38.997383530 +0200
 @@ -91,6 +91,7 @@
  #define OPCODE_MASK_H3  0xFC000600  /* High 6 bits and bits 21, 22.  */  
  #define OPCODE_MASK_H32 0xFC00FC00  /* High 6 bits and bit 16-21.  */
@@ -1824,9 +1830,9 @@ diff -Nur gdb-7.7.orig/opcodes/microblaze-opc.h gdb-7.7/opcodes/microblaze-opc.h
    {"mts",   INST_TYPE_SPECIAL_R1, INST_NO_OFFSET, NO_DELAY_SLOT, IMMVAL_MASK_MTS, 0x9400C000, OPCODE_MASK_H13S, mts, special_inst },
    {"mfs",   INST_TYPE_RD_SPECIAL, INST_NO_OFFSET, NO_DELAY_SLOT, IMMVAL_MASK_MFS, 0x94008000, OPCODE_MASK_H23S, mfs, special_inst },
    {"br",    INST_TYPE_R2, INST_PC_OFFSET, NO_DELAY_SLOT, IMMVAL_MASK_NON_SPECIAL, 0x98000000, OPCODE_MASK_H124, br, branch_inst },
-diff -Nur gdb-7.7.orig/opcodes/microblaze-opcm.h gdb-7.7/opcodes/microblaze-opcm.h
---- gdb-7.7.orig/opcodes/microblaze-opcm.h	2013-12-08 05:11:52.000000000 +0100
-+++ gdb-7.7/opcodes/microblaze-opcm.h	2014-03-26 20:45:46.000000000 +0100
+diff -Nur gdb-7.8.2.orig/opcodes/microblaze-opcm.h gdb-7.8.2/opcodes/microblaze-opcm.h
+--- gdb-7.8.2.orig/opcodes/microblaze-opcm.h	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/opcodes/microblaze-opcm.h	2016-05-14 21:29:38.997383530 +0200
 @@ -31,9 +31,9 @@
    idiv, idivu, bsll, bsra, bsrl, get, put, nget, nput, cget, cput,
    ncget, ncput, muli, bslli, bsrai, bsrli, mului, or, and, xor,
