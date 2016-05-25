@@ -4,16 +4,16 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		rtorrent
-PKG_VERSION:=		0.9.4
+PKG_VERSION:=		0.9.6
 PKG_RELEASE:=		1
-PKG_HASH:=		bc0a2c1ee613b68f37021beaf4e64a9252f91ed06f998c1e897897c354ce7e84
+PKG_HASH:=		1e69c24f1f26f8f07d58d673480dc392bfc4317818c1115265b08a7813ff5b0e
 PKG_DESCR:=		console torrent application
 PKG_SECTION:=		app/p2p
 PKG_DEPENDS:=		libncurses libtorrent libcurl
 PKG_BUILDDEP:=		ncurses libtorrent curl
 PKG_NEEDS:=		c++
-PKG_URL:=		http://libtorrent.rakshasa.no/
-PKG_SITES:=		http://distfiles.openadk.org/
+PKG_URL:=		https://rakshasa.github.io/rtorrent/
+PKG_SITES:=		http://rtorrent.net/downloads/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
