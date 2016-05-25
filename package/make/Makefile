@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		make
-PKG_VERSION:=		4.1
+PKG_VERSION:=		4.2
 PKG_RELEASE:=		1
-PKG_HASH:=		9fc7a9783d3d2ea002aa1348f851875a2636116c433677453cc1d1acc3fc4d55
+PKG_HASH:=		e968ce3c57ad39a593a92339e23eb148af6296b9f40aa453a9a9202c99d34436
 PKG_DESCR:=		c/c++ code buildtool
 PKG_SECTION:=		dev/tools
 PKG_DEPENDS:=		libelf
