@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libxslt
-PKG_VERSION:=		1.1.28
-PKG_RELEASE:=		2
-PKG_HASH:=		5fc7151a57b89c03d7b825df5a0fae0a8d5f05674c0e7cf2937ecec4d54a028c
+PKG_VERSION:=		1.1.29
+PKG_RELEASE:=		1
+PKG_HASH:=		b5976e3857837e7617b29f2249ebb5eeac34e249208d31f1fbf7a6ba7a4090ce
 PKG_DESCR:=		xslt library
 PKG_SECTION:=		libs/data
 PKG_DEPENDS:=		libxml2
