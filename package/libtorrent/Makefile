@@ -4,15 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libtorrent
-PKG_VERSION:=		0.13.4
-PKG_RELEASE:=		2
-PKG_HASH:=		704e097119dc89e2ee4630396b25de1cd64b0549841347ea75b9ef9217084955
+PKG_VERSION:=		0.13.6
+PKG_RELEASE:=		1
+PKG_HASH:=		2838a08c96edfd936aff8fbf99ecbb930c2bfca3337dd1482eb5fccdb80d5a04
 PKG_DESCR:=		bittorrent library
 PKG_SECTION:=		libs/net
-PKG_DEPENDS:=		libsigc++
-PKG_BUILDDEP:=		libsigc++ gettext-tiny
-PKG_URL:=		http://libtorrent.rakshasa.no/
-PKG_SITES:=		http://distfiles.openadk.org/
+PKG_DEPENDS:=		libsigc++ zlib
+PKG_BUILDDEP:=		libsigc++ zlib gettext-tiny
+PKG_URL:=		https://rakshasa.github.io/rtorrent/
+PKG_SITES:=		http://rtorrent.net/downloads/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
@@ -32,7 +32,8 @@ $(eval $(call PKG_template,LIBTORRENT,libtorrent,${PKG_VERSION}-${PKG_RELEASE},$
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--enable-aligned \
 			--without-kqueue \
-			--disable-instrumentation
+			--disable-instrumentation \
+			--with-zlib=$(STAGING_TARGET_DIR)
 
 libtorrent-install:
 	${INSTALL_DIR} ${IDIR_LIBTORRENT}/usr/lib
