@@ -4,10 +4,10 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		pciutils
-PKG_VERSION:=		3.4.1
+PKG_VERSION:=		3.5.1
 PKG_RELEASE:=		1
-PKG_HASH:=		865554cc5604d1644bd8da38d94845405e2a319a6d5acabc6a0296417684a82a
-PKG_DESCR:=		pci utilities (lspci/setpci)
+PKG_HASH:=		2bf3a4605a562fb6b8b7673bff85a474a5cf383ed7e4bd8886b4f0939013d42f
+PKG_DESCR:=		pci utilities
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		zlib
