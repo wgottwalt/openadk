@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		lftp
-PKG_VERSION:=		4.6.2
+PKG_VERSION:=		4.7.2
 PKG_RELEASE:=		1
-PKG_HASH:=		1e61d5c94b06c333309185e86cfce0729e45e3f69f7496c58d61093b135c8bb9
+PKG_HASH:=		475d7699b1390f951efee867ba1ad600f78329e13fd2a04d92f82bfffb70d872
 PKG_DESCR:=		ftp and http client
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libncurses libexpat
@@ -32,6 +32,10 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LFTP,lftp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+CONFIGURE_ARGS+=	--with-readline="$(STAGING_TARGET_DIR)/usr" \
+			--with-zlib="$(STAGING_TARGET_DIR)/usr" \
+			--with-expat="$(STAGING_TARGET_DIR)/usr"
+
 ifeq (${ADK_PACKAGE_LFTP_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--without-openssl \
 			--without-gnutls
@@ -41,11 +45,11 @@ CONFIGURE_ARGS+=	--without-openssl \
 			--with-gnutls
 endif
 ifeq (${ADK_PACKAGE_LFTP_WITH_OPENSSL},y)
-CONFIGURE_ARGS+=	--with-openssl \
+CONFIGURE_ARGS+=	--with-openssl="$(STAGING_TARGET_DIR)/usr" \
 			--without-gnutls
 endif
 ifeq (${ADK_PACKAGE_LFTP_WITH_LIBRESSL},y)
-CONFIGURE_ARGS+=	--with-openssl \
+CONFIGURE_ARGS+=	--with-openssl="$(STAGING_TARGET_DIR)/usr" \
 			--without-gnutls
 endif
 
