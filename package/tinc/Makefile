@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		tinc
-PKG_VERSION:=		1.0.23
+PKG_VERSION:=		1.0.28
 PKG_RELEASE:=		1
-PKG_HASH:=		bcf06bdf16ff903821e33fc1ce6219d6429971aa5acd70f4e8a35b4332442812
+PKG_HASH:=		0b502699360f09ce2128a39cf02abca07bfc699fc02ce829b3a90cf5e1e8b344
 PKG_DESCR:=		vpn tunnel daemon
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		zlib liblzo
