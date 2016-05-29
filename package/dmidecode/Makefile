@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		dmidecode
-PKG_VERSION:=		2.11
+PKG_VERSION:=		3.0
 PKG_RELEASE:=		1
-PKG_HASH:=		d99ee210ecbd6caff2cf6d95dec6d88818c16cec1a08ed0963fd8702f6af8b59
+PKG_HASH:=		698d209ec81f88b2685e07943cd61e1ac125d8f4b3f3f22c777f318a56d94edf
 PKG_DESCR:=		reports information about your system's hardware
 PKG_SECTION:=		sys/hw
 PKG_URL:=		http://www.nongnu.org/dmidecode/
