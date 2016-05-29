@@ -24,7 +24,7 @@ endchoice
 choice
 prompt "System for /dev management"
 depends on !ADK_APPLIANCE_TOOLCHAIN
-default ADK_RUNTIME_DEV_STATIC if ADK_TARGET_WITHOUT_MMU
+default ADK_RUNTIME_DEV_STATIC if ADK_TARGET_WITHOUT_MMU || ADK_TARGET_ARCH_CRIS
 default ADK_RUNTIME_DEV_MDEV
 
 config ADK_RUNTIME_DEV_MDEV
