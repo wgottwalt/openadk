@@ -17,7 +17,7 @@ config ADK_KERNEL_I2C_BCM2708
 	select ADK_KERNEL_REGMAP_I2C
 	select ADK_KERNEL_I2C_CHARDEV
 	depends on ADK_TARGET_BOARD_BCM28XX
-	default y if ADK_TARGET_BOARD_BCM28XX
+	default m if ADK_TARGET_BOARD_BCM28XX
 	default n
 	help
 	  I2C driver for BCM28XX boards.
