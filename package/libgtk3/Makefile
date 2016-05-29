@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libgtk3
-PKG_VERSION:=		3.20.4
+PKG_VERSION:=		3.20.6
 PKG_EXTRAVER:=		3.20
 PKG_RELEASE:=		1
-PKG_HASH:=		e7e3aaf54a54dd1c1ca0588939254abe31329e0bcd280a12290d5306b41ea03f
+PKG_HASH:=		3f8016563a96b1cfef4ac9e795647f6316deb2978ff939b19e4e4f8f936fa4b2
 PKG_DESCR:=		multi-platform toolkit for creating graphical user interfaces
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib cairo libxi libepoxy
