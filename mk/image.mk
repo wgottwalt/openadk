@@ -68,6 +68,8 @@ image-prepare-post:
 		> $(TARGET_DIR)/etc/.adkgithash
 	echo $(ADK_APPLIANCE_VERSION) > $(TARGET_DIR)/etc/.adkversion
 	echo $(ADK_TARGET_SYSTEM) > $(TARGET_DIR)/etc/.adktarget
+	$(TARGET_CC) -v 2> $(TARGET_DIR)/etc/.adkcompiler
+	$(TARGET_LD) -v > $(TARGET_DIR)/etc/.adklinker
 ifneq (${ADK_PACKAGE_CONFIG_IN_ETC},)
 	gzip -9c ${ADK_TOPDIR}/.config > $(TARGET_DIR)/etc/adkconfig.gz
 	chmod 600 $(TARGET_DIR)/etc/adkconfig.gz
