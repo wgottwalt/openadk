@@ -12,6 +12,7 @@ PKG_SECTION:=		base/apps
 PKG_BUILDDEP:=		ncurses
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v$(PKG_VERSION)/
 PKG_OPTS:=		dev
+PKG_NEEDS:=		threads rt
 
 PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
 PKG_SUBPKGS+=		LIBFDISK LIBUUID LIBBLKID LIBMOUNT CFDISK MKFS
@@ -66,8 +67,6 @@ TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
 TARGET_LDFLAGS+=	-ltinfo
 
 AUTOTOOL_STYLE:=	autoreconf
-CONFIGURE_ENV+=		have_scanf_alloc_modifier=yes \
-			scanf_cv_alloc_modifier=ms
 CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-chfn-chsh \
 			--disable-su \

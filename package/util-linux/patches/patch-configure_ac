@@ -1,6 +1,6 @@
---- util-linux-2.26.1.orig/configure.ac	2015-03-13 14:11:19.000000000 +0100
-+++ util-linux-2.26.1/configure.ac	2015-03-29 11:28:46.000000000 +0200
-@@ -60,16 +60,6 @@ LIBFDISK_LT_MINOR=1
+--- util-linux-2.28.orig/configure.ac	2016-04-12 12:32:55.652316240 +0200
++++ util-linux-2.28/configure.ac	2016-06-03 03:59:03.583369345 +0200
+@@ -64,16 +64,6 @@ LIBFDISK_LT_MINOR=1
  LIBFDISK_LT_MICRO=0
  LIBFDISK_VERSION_INFO=`expr $LIBFDISK_LT_MAJOR + $LIBFDISK_LT_MINOR`:$LIBFDISK_LT_MICRO:$LIBFDISK_LT_MINOR
  
@@ -17,9 +17,9 @@
  AS_CASE([$prefix:$localstatedir],
    [NONE:'${prefix}/var' | /usr:'${prefix}/var'],
      [localstatedir=/run
-@@ -168,16 +158,6 @@ UL_SET_ARCH([HPPA], [hppa*])
- 
+@@ -187,16 +177,6 @@ UL_SET_ARCH([HPPA], [hppa*])
  AC_SYS_LARGEFILE
+ AC_HEADER_ASSERT
  
 -dnl Don't forget to maintain alternatively allowed versions in autogen.sh!
 -AM_GNU_GETTEXT_VERSION([0.18.3])
@@ -34,7 +34,16 @@
  AC_CHECK_HEADERS([linux/compiler.h linux/blkpg.h linux/major.h], [], [], [
  #ifdef HAVE_LINUX_COMPILER_H
  #include <linux/compiler.h>
-@@ -1911,7 +1891,9 @@ libmount/src/libmount.h
+@@ -565,7 +545,7 @@ AC_CACHE_VAL([scanf_cv_alloc_modifier],
+      #include <stdio.h>
+      #include <unistd.h>
+ 
+-     #ifdef __GLIBC__
++     #if defined(__GLIBC__) && !defined(__UCLIBC__)
+ 
+      #if !(__GLIBC_PREREQ(2, 7))
+      #error %m is not available
+@@ -2134,7 +2114,9 @@ libmount/src/libmount.h
  libsmartcols/docs/Makefile
  libsmartcols/docs/version.xml
  libsmartcols/src/libsmartcols.h
