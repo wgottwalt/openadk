@@ -11,7 +11,7 @@ PKG_DEPENDS:=		libncurses zlib libexpat libthread-db
 PKG_BUILDDEP:=		ncurses readline expat zlib
 PKG_NOPARALLEL:=	1
 
-PKG_ARCH_DEPENDS:=	!m68k !avr32
+PKG_ARCH_DEPENDS:=	!m68k !avr32 !nios2
 
 include ${ADK_TOPDIR}/mk/package.mk
 
