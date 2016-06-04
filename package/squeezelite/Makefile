@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		squeezelite
-PKG_VERSION:=		8b8dfe6918ebe45ade5f3d9b68d453d7b8128d99
+PKG_VERSION:=		e37ed17fed9e11a7346cbe9f1e1deeccc051f42e
 PKG_RELEASE:=		1
 PKG_GIT:=		hash
 PKG_DESCR:=		headless squeezebox emulator
@@ -12,8 +12,8 @@ PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libflac alsa-lib libvorbis libmad libfaad2
 PKG_BUILDDEP:=		alsa-lib libmad flac libvorbis mpg123 faad2
 PKG_NEEDS:=		threads rt
-PKG_URL:=		http://code.google.com/p/squeezelite/
-PKG_SITES:=		https://code.google.com/p/squeezelite.git
+PKG_URL:=		https://github.com/ralph-irving/squeezelite
+PKG_SITES:=		https://github.com/ralph-irving/squeezelite.git
 
 include $(ADK_TOPDIR)/mk/package.mk
 
