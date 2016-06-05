@@ -1,15 +1,6 @@
---- nginx-1.9.12.orig/auto/types/sizeof	2016-02-24 15:53:23.000000000 +0100
-+++ nginx-1.9.12/auto/types/sizeof	2016-03-04 19:55:33.000000000 +0100
-@@ -14,7 +14,7 @@ END
- 
- ngx_size=
- 
--cat << END > $NGX_AUTOTEST.c
-+cat << _EOF > $NGX_AUTOTEST.c
- 
- #include <sys/types.h>
- #include <sys/time.h>
-@@ -25,29 +25,43 @@ $NGX_INCLUDE_UNISTD_H
+--- nginx-1.11.1.orig/auto/types/sizeof	2016-05-31 15:43:50.000000000 +0200
++++ nginx-1.11.1/auto/types/sizeof	2016-06-05 23:06:21.837900876 +0200
+@@ -25,22 +25,41 @@ $NGX_INCLUDE_UNISTD_H
  $NGX_INCLUDE_INTTYPES_H
  $NGX_INCLUDE_AUTO_CONFIG_H
  
@@ -31,12 +22,14 @@
      return 0;
  }
  
--END
--
-+_EOF
+ END
+ 
  
 -ngx_test="$CC $CC_TEST_FLAGS $CC_AUX_FLAGS \
 -          -o $NGX_AUTOTEST $NGX_AUTOTEST.c $NGX_LD_OPT $ngx_feature_libs"
+-
+-eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
+-
 +_ngx_typename=`echo "$ngx_type" | sed 's/ /_/g;s/\*/p/'`
 +ngx_size="-1"
 +ngx_size=`for i in 1 2 4 8 16 ; do \
@@ -45,10 +38,9 @@
 +    $NGX_AUTOTEST.c -o $NGX_AUTOTEST \
 +    $NGX_LD_OPT $ngx_feature_libs >/dev/null 2>&1 || continue ;\
 +    echo $i ; break ; done`
- 
--eval "$ngx_test >> $NGX_AUTOCONF_ERR 2>&1"
++ 
 +rm -rf $NGX_AUTOTEST*
- 
++ 
 +if test -z $ngx_size ; then
 +    ngx_size=-1
 +fi
@@ -59,10 +51,3 @@
      echo " $ngx_size bytes"
  fi
  
--
--rm -rf $NGX_AUTOTEST*
--
--
- case $ngx_size in
-     4)
-         ngx_max_value=2147483647
