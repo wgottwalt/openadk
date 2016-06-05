@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		16.0
-PKG_RELEASE:=		2
-PKG_HASH:=		0421ea1337cdee674f8a36d995f54152b5ddc4100e53410b3aeeb3b3f7d53946
+PKG_VERSION:=		16.1
+PKG_RELEASE:=		1
+PKG_HASH:=		7d82c8aff2715c83deecdf10c566e26105bec0473af530a1356d4c747ebdfd10
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libsquish libbluray
@@ -30,7 +30,7 @@ PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish libdcadec
 PKG_BUILDDEP+=		libcrossguid
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://kodi.tv/
-PKG_SITES:=		http://mirrors.kodi.tv/releases/source/
+PKG_SITES:=		https://github.com/xbmc/xbmc/archive/
 
 PKG_CFLINE_KODI:=	select ADK_PACKAGE_GPU_VIV_BIN_MX6Q if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 
@@ -91,14 +91,16 @@ TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/opt/vc/include \
 TARGET_LDFLAGS+=	-L$(STAGING_TARGET_DIR)/opt/vc/lib
 endif
 
+ifeq ($(ADK_TARGET_LIBICONV),y)
+TARGET_LDFLAGS+=	-liconv
+endif
+
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ENV+=		DESTDIR='${WRKINST}' \
 			TEXTUREPACKER_NATIVE_ROOT='$(STAGING_HOST_DIR)/usr'
 CONFIGURE_ARGS+=	--disable-optical-drive \
 			--disable-optimizations \
 			--disable-mysql \
-			--disable-rsxs \
-			--disable-projectm \
 			--disable-mdnsembedded \
 			--disable-libusb \
 			--disable-libcap \
