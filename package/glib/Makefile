@@ -26,6 +26,9 @@ $(eval $(call HOST_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
 AUTOTOOL_STYLE:=	autoreconf
+ifeq ($(ADK_TARGET_LIBICONV),y)
+CONFIGURE_ARGS+=	--with-libiconv=yes
+endif
 CONFIGURE_ARGS+=	--disable-mem-pools \
 			--disable-rebuilds \
 			--disable-fam \
