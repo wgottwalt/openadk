@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		cryptsetup
-PKG_VERSION:=		1.7.1
+PKG_VERSION:=		1.7.2
 PKG_RELEASE:=		1
-PKG_HASH:=		73dc8a63cc984b56aa6a3c99f355262471bcfe78b3240b8b9d0caa8002911fec
+PKG_HASH:=		dbb35dbf5f0c1749168c86c913fe98e872247bfc8425314b494c2423e7e43342
 PKG_DESCR:=		utility used to conveniently setup disk encryption 
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libgcrypt device-mapper libuuid libpopt
