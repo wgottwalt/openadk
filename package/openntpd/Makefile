@@ -4,13 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openntpd
-PKG_VERSION:=		5.7p4
+PKG_VERSION:=		6.0p1
 PKG_RELEASE:=		1
-PKG_HASH:=		a993d95976e375acc0ab1a677fd268f55024477835633c8ae404895046bccb23
+PKG_HASH:=		b1ab80094788912adb12b33cb1f251cc58db39294c1b5c6376972f5f7ba577e8
 PKG_DESCR:=		ntp server daemon
 PKG_SECTION:=		net/ntp
 PKG_URL:=		http://www.openntpd.org/
-PKG_SITES:=		ftp://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/
+PKG_SITES:=		http://ftp.openbsd.org/pub/OpenBSD/OpenNTPD/
 PKG_BB:=		1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
@@ -22,8 +22,7 @@ $(eval $(call PKG_template,OPENNTPD,openntpd,${PKG_VERSION}-${PKG_RELEASE},${PKG
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 INSTALL_STYLE:=		manual
 
-CONFIGURE_ARGS+=	--with-privsep-user=ntp \
-			--with-adjtimex
+CONFIGURE_ARGS+=	--with-privsep-user=ntp
 
 do-install:
 	${INSTALL_DIR} ${IDIR_OPENNTPD}/etc
