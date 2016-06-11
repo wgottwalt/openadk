@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		boost
 PKG_VERSION:=		1.61.0
 PKG_EXTRAVER:=		1_61
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		a77c7cc660ec02704c6884fbb20c552d52d60a18f26573c9cee0788bf00ed7e6
 PKG_DESCR:=		portable c++ library
 PKG_SECTION:=		libs/misc

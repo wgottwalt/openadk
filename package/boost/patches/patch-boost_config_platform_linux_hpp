@@ -1,0 +1,16 @@
+--- boost_1_61_0.orig/boost/config/platform/linux.hpp	2016-05-05 23:11:02.000000000 +0200
++++ boost_1_61_0/boost/config/platform/linux.hpp	2016-06-09 23:47:13.099272614 +0200
+@@ -46,6 +46,13 @@
+ 
+ #endif
+ 
++// uClibc has no support for fenv.h, and also a few architectures
++// don't have fenv.h support at all (or incomplete support) even with
++// glibc.
++#if defined(__UCLIBC__) || defined(__nios2__) || defined(__microblaze__)
++#  define BOOST_NO_FENV_H
++#endif
++
+ //
+ // If glibc is past version 2 then we definitely have
+ // gettimeofday, earlier versions may or may not have it:
