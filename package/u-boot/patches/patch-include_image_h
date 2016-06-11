@@ -1,6 +1,6 @@
---- u-boot-2015.07.orig/include/image.h	2015-07-14 19:32:21.000000000 +0200
-+++ u-boot-2015.07/include/image.h	2015-07-27 13:51:04.000000000 +0200
-@@ -182,6 +182,7 @@ struct lmb;
+--- u-boot-2016.05.orig/include/image.h	2016-05-16 16:40:32.000000000 +0200
++++ u-boot-2016.05/include/image.h	2016-06-11 21:40:16.425472773 +0200
+@@ -179,6 +179,7 @@ struct lmb;
  #define IH_ARCH_ARM64		22	/* ARM64	*/
  #define IH_ARCH_ARC		23	/* Synopsys DesignWare ARC */
  #define IH_ARCH_X86_64		24	/* AMD x86_64, Intel and Via */
