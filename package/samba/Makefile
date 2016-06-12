@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		4.4.0
+PKG_VERSION:=		4.4.4
 PKG_RELEASE:=		1
-PKG_HASH:=		c5f6fefb7fd0a4e5f404a253b19b55f74f88faa1c3612cb3329e24aa03470075
+PKG_HASH:=		262f9edabbd1c0112819b5063718588c22b0ee4c1a2f648f79f233fdfba25c8b
 PKG_DESCR:=		file and print server
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		gettext-tiny util-linux popt python2 gnutls
