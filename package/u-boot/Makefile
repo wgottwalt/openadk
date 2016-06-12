@@ -27,6 +27,7 @@ $(eval $(call PKG_template,U_BOOT,u-boot,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEP
 UBOOT:=			u-boot.bin
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 CONFIG:=		mx6cuboxi_defconfig
+UBOOT:=			u-boot.img
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIG:=		rpi_defconfig
@@ -82,6 +83,9 @@ u-boot-install:
 	$(INSTALL_BIN) ./files/uboot_set_env $(IDIR_U_BOOT)/usr/bin
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	$(INSTALL_BIN) ./files/boot.script.bpi $(FW_DIR)
+endif
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
+	$(INSTALL_BIN) $(WRKBUILD)/SPL $(FW_DIR)
 endif
 
 include $(ADK_TOPDIR)/mk/host-bottom.mk
