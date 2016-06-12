@@ -510,7 +510,7 @@ case $target {
 	;;
 (solidrun-imx6)
 	dd if="$fwdir/SPL" of="$tgt" bs=1024 seek=1 > /dev/null 2>&1
-	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=42 > /dev/null 2>&1
+	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=69 > /dev/null 2>&1
 	;;
 (raspberry-pi|raspberry-pi2|raspberry-pi3)
 	(( noformat )) || create_fs "$bootpart" ADKBOOT vfat
