@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mosquitto
-PKG_VERSION:=		1.4.4
+PKG_VERSION:=		1.4.9
 PKG_RELEASE:=		1
-PKG_HASH:=		c643c7123708aadcd29287dda7b5ce7c910f75b02956a8fc4fe65ad2ea767a5f
+PKG_HASH:=		1df3ae07de40b80a74cd37a7b026895c544cdd3b42c9e0719ae91623aa98c58b
 PKG_DESCR:=		mqtt broker
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		c-ares
