@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gst-plugins-good
-PKG_VERSION:=		1.6.2
+PKG_VERSION:=		1.8.2
 PKG_RELEASE:=		1
-PKG_HASH:=		876e54dfce93274b98e024f353258d35fa4d49d1f9010069e676c530f6eb6a92
+PKG_HASH:=		8d7549118a3b7a009ece6bb38a05b66709c551d32d2adfd89eded4d1d7a23944
 PKG_DESCR:=		gstreamer good plugins
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		gstreamer
