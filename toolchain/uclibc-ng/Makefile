@@ -105,19 +105,24 @@ endif
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 	$(SED) 's/.*\(UCLIBC_HAS_THREADS_NATIVE\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_TLS\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_THREADS\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(PTHREADS_DEBUG_SUPPORT\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_LINUXTHREADS\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(HAS_NO_THREADS\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_WITH_LT),y)
+	echo '# UCLIBC_HAS_THREADS is not set' >> ${WRKBUILD}/.config
+	echo '# UCLIBC_HAS_LINUXTHREADS is not set' >> ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_THREADS_NATIVE\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_TLS\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_THREADS\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_LINUXTHREADS\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(HAS_NO_THREADS\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS)$(ADK_TARGET_WITHOUT_THREADS),y)
 	$(SED) 's/.*\(UCLIBC_HAS_LINUXTHREADS\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_THREADS_NATIVE\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_THREADS\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_TLS\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(PTHREADS_DEBUG_SUPPORT\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(HAS_NO_THREADS\).*/\1=y/' ${WRKBUILD}/.config
