@@ -130,6 +130,12 @@ PYTHON_INCLUDE:="`find ${STAGING_TARGET_DIR}/usr/include/ -maxdepth 1 -type d -n
 PYTHON_LIB:=	"`find ${STAGING_TARGET_DIR}/usr/lib/ -maxdepth 1 -type d -name "python*" | head -1`"
 USER_JAM:=	${WRKBUILD}/tools/build/user-config.jam
 
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),y)
+LINKMODE:=	static
+else
+LINKMODE:=	shared
+endif
+
 pre-build:
 	@echo "build bjam..."
 	cd $(WRKBUILD)/tools/build/src/engine; ./build.sh gcc
@@ -145,8 +151,8 @@ endif
 			-d 2 \
 			target-os=linux \
 			variant=release \
-			link=shared \
-			runtime-link=shared \
+			link=$(LINKMODE) \
+			runtime-link=$(LINKMODE) \
 			architecture=$(BOOST_ARCH) \
 			$(BOOST_ABI) \
 			binary-format=elf \
