@@ -4,16 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		freeswitch
-PKG_VERSION:=		6762f14140f5bf70647c037c4ef527392796af34
+PKG_VERSION:=		1.6.9
 PKG_RELEASE:=		1
-PKG_GIT:=		hash
+PKG_HASH:=		aa5f191113be2bd44cb4f2108da3dcc37be3234c6b733896fbff97526ac66451
 PKG_DESCR:=		cross-platform telephony platform
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libpcre libcurl zlib libjpeg-turbo libsqlite
 PKG_BUILDDEP:=		util-linux zlib libjpeg-turbo sqlite curl pcre
 PKG_BUILDDEP+=		speex
 PKG_URL:=		http://www.freeswitch.org/
-PKG_SITES:=		https://freeswitch.org/stash/scm/fs/freeswitch.git
+PKG_SITES:=		http://files.freeswitch.org/freeswitch-releases/
 
 PKG_CHOICES_FREESWITCH:=WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
@@ -29,8 +29,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,FREESWITCH,freeswitch,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
-AUTOTOOL_STYLE:=	bootstrap
-CONFIGURE_ARGS+=	--disable-core-libedit-support
+CONFIGURE_ARGS+=	--disable-core-libedit-support \
+			--disable-libvpx
 CONFIGURE_ENV+=		ac_cv_file__dev_ptmx=yes \
 			ac_cv_file__dev_zero=yes \
 			ac_cv_file__dev_urandom=yes \
