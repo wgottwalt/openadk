@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		lsof
-PKG_VERSION:=		4.84
-PKG_RELEASE:=		3
-PKG_HASH:=		3ab54cbc0e4f8ee3b1cfd1d2d1fb81765e7d28144256e5f444faedc4399a969b
+PKG_VERSION:=		4.89
+PKG_RELEASE:=		1
+PKG_HASH:=		5d08da7ebe049c9d9a6472d6afb81aa5af54c4733a3f8822cbc22b57867633c9
 PKG_DESCR:=		list open files
 PKG_SECTION:=		sys/utils
 PKG_DEPENDS:=		libtirpc
 PKG_BUILDDEP:=		libtirpc
 PKG_URL:=		http://people.freebsd.org/~abe/
-PKG_SITES:=		ftp://lsof.itap.purdue.edu/pub/tools/unix/lsof/
+PKG_SITES:=		https://www.mirrorservice.org/sites/lsof.itap.purdue.edu/pub/tools/unix/lsof/
 
 PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
