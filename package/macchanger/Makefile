@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		macchanger
-PKG_VERSION:=		1.5.0
+PKG_VERSION:=		1.6.0
 PKG_RELEASE:=		1
-PKG_HASH:=		d44bfa27cb29c5a718627cb3ef3aa42eb5130426545eb2031120826cd73fa8fe
+PKG_HASH:=		31534f138f1d21fa247be74ba6bef3fbfa47bbcd5033e99bd10c432fe58e51f7
 PKG_DESCR:=		utility for viewing/manipulating the mac address
 PKG_SECTION:=		sys/utils
 PKG_URL:=		http://www.alobbs.com/macchanger
