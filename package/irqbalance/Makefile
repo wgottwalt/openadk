@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		irqbalance
-PKG_VERSION:=		1.0.9
+PKG_VERSION:=		1.1.0
 PKG_RELEASE:=		1
-PKG_HASH:=		f1b8115948bb9f0bc36b9d7143ee8be751a294bc189d311408e753acc37169c3
+PKG_HASH:=		91506e638b03bf27cf5da7dc250d58a753ce8a0288a20265fc7ff0266040706b
 PKG_DESCR:=		irq balancing for smp systems
 PKG_SECTION:=		sys/utils
 PKG_URL:=		https://github.com/Irqbalance/irqbalance
