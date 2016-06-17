@@ -19,9 +19,11 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-install:
+ifeq ($(ADK_TARGET_BINFMT_FLAT),)
 	${INSTALL_DIR} ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
 	$(CP) ${STAGING_TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so* \
 		${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
 	-@rm ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so.*-gdb.py 2>/dev/null
+endif
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
