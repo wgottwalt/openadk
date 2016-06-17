@@ -16,8 +16,6 @@ PKG_URL:=		http://www.boost.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=boost/}
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!m68k
-
 DISTFILES:=		boost_$(PKG_EXTRAVER)_0.tar.gz
 WRKDIST=		${WRKDIR}/${PKG_NAME}_$(PKG_EXTRAVER)_0
 
@@ -151,6 +149,7 @@ endif
 			-d 2 \
 			target-os=linux \
 			variant=release \
+			threading=multi \
 			link=$(LINKMODE) \
 			runtime-link=$(LINKMODE) \
 			architecture=$(BOOST_ARCH) \
