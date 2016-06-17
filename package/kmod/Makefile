@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kmod
-PKG_VERSION:=		19
-PKG_RELEASE:=		2
-PKG_HASH:=		3e7fee6eeff5435848b2dcc852bc8959066478d687d232284d67300c071e7b14
+PKG_VERSION:=		22
+PKG_RELEASE:=		1
+PKG_HASH:=		ba3b1ddea33228b473189fcb05b809024a3b86e9a7cf37d420cae06beb749f82
 PKG_DESCR:=		kernel module utils
 PKG_SECTION:=		sys/utils
 PKG_DEPENDS:=		libkmod
