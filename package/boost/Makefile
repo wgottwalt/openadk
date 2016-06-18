@@ -97,19 +97,26 @@ ifeq (${ADK_PACKAGE_BOOST_WAVE},)
 CONFIGURE_ARGS+=	--without-wave
 endif
 
-BOOST_ARCH:=	$(ADK_TARGET_ARCH)
-
-ifeq ($(ADK_TARGET_ARCH),x86_64)
-BOOST_ARCH:=	x86
-endif
-ifeq ($(ADK_TARGET_ARCH),ppc)
-BOOST_ARCH:=	power
+ifeq ($(ADK_TARGET_ARCH),arm)
+BOOST_ARCH:=	architecture=arm
 endif
 ifeq ($(ADK_TARGET_CPU_MIPS_MIPS32),y)
-BOOST_ARCH:=	mips32
+BOOST_ARCH:=	architecture=mips32
 endif
 ifeq ($(ADK_TARGET_CPU_MIPS_MIPS32R2),y)
-BOOST_ARCH:=	mips32r2
+BOOST_ARCH:=	architecture=mips32r2
+endif
+ifeq ($(ADK_TARGET_ARCH),mips64)
+BOOST_ARCH:=	architecture=mips64
+endif
+ifeq ($(ADK_TARGET_ARCH),ppc)
+BOOST_ARCH:=	architecture=power
+endif
+ifeq ($(ADK_TARGET_ARCH),sparc)
+BOOST_ARCH:=	architecture=sparc
+endif
+ifeq ($(ADK_TARGET_ARCH),x86_64)
+BOOST_ARCH:=	architecture=x86
 endif
 
 ifeq ($(ADK_TARGET_ARCH),arm)
@@ -152,7 +159,7 @@ endif
 			threading=multi \
 			link=$(LINKMODE) \
 			runtime-link=$(LINKMODE) \
-			architecture=$(BOOST_ARCH) \
+			$(BOOST_ARCH) \
 			$(BOOST_ABI) \
 			binary-format=elf \
 			toolset=gcc-${GPP_VERSION} \
