@@ -77,7 +77,7 @@ ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_
 GCC_FINAL_CONFOPTS+=	--disable-shared
 else
 # uClibc/glibc uses libgcc_s.so.1 for pthread_cancel with dlopen
-GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++,libgcc'
+GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++,libgcc' --enable-cxx-flags='-fPIC'
 endif
 
 ifeq ($(ADK_TOOLCHAIN_WITH_SSP),y)
@@ -293,7 +293,6 @@ $(WRKBUILD)/.compiled:
 		$(WRKBUILD)/configure \
 			${GCC_CONFOPTS} \
 			${GCC_FINAL_CONFOPTS} \
-			--enable-cxx-flags='-fPIC' \
 			--enable-languages=$(LANGUAGES) \
 			--with-build-sysroot='$${prefix}/${STAGING_HOST2TARGET}' \
 			--with-sysroot='$${prefix}/${STAGING_HOST2TARGET}'
