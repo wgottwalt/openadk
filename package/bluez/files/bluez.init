@@ -11,10 +11,10 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	/usr/sbin/bluetoothd
+	/usr/libexec/bluetooth/bluetoothd
 	;;
 stop)
-	kill $(pgrep -f /usr/sbin/bluetoothd)
+	kill $(pgrep -f /usr/libexec/bluetooth/bluetoothd)
 	;;
 restart)
 	sh $0 stop

@@ -1,7 +1,7 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${ADK_TOPDIR}/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bluez
 PKG_VERSION:=		5.39
@@ -10,13 +10,14 @@ PKG_HASH:=		21d1bc9150d3576296595217efb98a746b592389d25d5637e8bee5da7272593b
 PKG_DESCR:=		bluetooth applications
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		glib dbus libreadline
+PKG_KDEPENDS:=		bt bt-l2cap bt-sco bt-rfcomm bt-hidp bt-bnep
 PKG_BUILDDEP:=		glib dbus readline
 PKG_URL:=		http://www.bluez.org/
 PKG_SITES:=		http://www.kernel.org/pub/linux/bluetooth/
 
-include ${ADK_TOPDIR}/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,BLUEZ,bluez,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,BLUEZ,bluez,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 TARGET_LDFLAGS+=	-lncurses
 
@@ -39,13 +40,16 @@ CONFIGURE_ARGS+=	--enable-tools \
 			--disable-cups
 
 bluez-install:
-	${INSTALL_DIR} $(IDIR_BLUEZ)/etc/dbus-1/system.d
-	${INSTALL_DIR} ${IDIR_BLUEZ}/usr/bin
-	${CP} ${WRKINST}/usr/bin/* ${IDIR_BLUEZ}/usr/bin
-	${INSTALL_DIR} ${IDIR_BLUEZ}/etc/bluetooth
-	$(INSTALL_DATA) ./files/main.conf \
-		${IDIR_BLUEZ}/etc/bluetooth
+	$(INSTALL_DIR) $(IDIR_BLUEZ)/etc/bluetooth
+	$(INSTALL_DIR) $(IDIR_BLUEZ)/etc/dbus-1/system.d
+	$(INSTALL_DIR) $(IDIR_BLUEZ)/usr/bin
+	$(INSTALL_DIR) $(IDIR_BLUEZ)/usr/libexec/bluetooth
+	$(INSTALL_BIN) $(WRKINST)/usr/libexec/bluetooth/bluetoothd \
+		$(IDIR_BLUEZ)/usr/libexec/bluetooth
+	$(CP) $(WRKINST)/usr/bin/* $(IDIR_BLUEZ)/usr/bin
+	$(INSTALL_DATA) $(WRKBUILD)/src/main.conf \
+		$(IDIR_BLUEZ)/etc/bluetooth
 	$(INSTALL_DATA) ./files/bluetooth.conf \
 		$(IDIR_BLUEZ)/etc/dbus-1/system.d
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
