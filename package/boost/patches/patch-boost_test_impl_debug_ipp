@@ -1,0 +1,11 @@
+--- boost_1_61_0.orig/boost/test/impl/debug.ipp	2016-05-05 23:14:46.000000000 +0200
++++ boost_1_61_0/boost/test/impl/debug.ipp	2016-06-16 23:10:01.380033812 +0200
+@@ -46,7 +46,7 @@ namespace std { using ::memset; using ::
+ 
+ #elif defined(unix) || defined(__unix) // ********************* UNIX
+ 
+-#  define BOOST_UNIX_BASED_DEBUG
++//#  define BOOST_UNIX_BASED_DEBUG
+ 
+ // Boost.Test
+ #include <boost/test/utils/class_properties.hpp>
