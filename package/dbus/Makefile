@@ -52,11 +52,12 @@ libdbus-install:
 	${CP} ${WRKINST}/usr/lib/libdbus-1.so* ${IDIR_LIBDBUS}/usr/lib
 
 dbus-install:
-	${INSTALL_DIR} ${IDIR_DBUS}/etc \
+	${INSTALL_DIR} ${IDIR_DBUS}/etc ${IDIR_DBUS}/usr/share \
 		${IDIR_DBUS}/usr/bin ${IDIR_DBUS}/usr/libexec
 	${INSTALL_BIN} ${WRKINST}/usr/libexec/dbus-daemon-launch-helper \
 		${IDIR_DBUS}/usr/libexec/
 	${CP} ${WRKINST}/etc/dbus-1 ${IDIR_DBUS}/etc
+	${CP} ${WRKINST}/usr/share/dbus-1 ${IDIR_DBUS}/usr/share
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-daemon ${IDIR_DBUS}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-launch ${IDIR_DBUS}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-uuidgen ${IDIR_DBUS}/usr/bin

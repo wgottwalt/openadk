@@ -13,7 +13,7 @@ autostart)
 start)
 	mkdir -p /var/run/dbus /var/lib
 	ln -sf /lib/dbus /var/lib/dbus
-	/usr/bin/dbus-daemon --config-file=/etc/dbus-1/system.conf
+	/usr/bin/dbus-daemon --system
 	;;
 stop)
 	kill $(pgrep -f /usr/bin/dbus-daemon)
