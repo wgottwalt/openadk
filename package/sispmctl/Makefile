@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		sispmctl
-PKG_VERSION:=		3.0
+PKG_VERSION:=		4.0
 PKG_RELEASE:=		1
-PKG_HASH:=		8e3eab344df774330f7ca9e230f9b1d29afa82de63c099c0cf0bac4aa34dab64
+PKG_HASH:=		442d9bb9774da7214c222144035ac68ad5d25171040ce2731cfdf49b3365cfd5
 PKG_DESCR:=		control application for power sockets
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libusb libusb-compat
