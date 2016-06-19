@@ -1,0 +1,32 @@
+#!/bin/sh
+#PKG brcm-bluetooth
+#INIT 10
+
+case $1 in
+autostop) ;;
+autostart)
+	exec sh $0 start
+	;;
+start)
+	target=$(cat /etc/.adktarget)
+	case $target in
+	  raspberry-pi3)
+	    hciattach /dev/ttyAMA0 bcm43xx 921600 noflow -
+	    ;;
+	  *)
+	    echo "No supported target found"
+	    ;;
+	esac
+	;;
+stop)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?
