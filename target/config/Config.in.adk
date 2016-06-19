@@ -73,12 +73,6 @@ config ADK_DISABLE_TARGET_KERNEL_PATCHES
 	  This might render a system unusable, when external
 	  kernel patches are required for bootup.
 
-config ADK_WGET_TIMEOUT
-	int "Set wget timeout"
-	default 10
-	help
-	  Set wget timeout	
-
 config ADK_USE_CCACHE
 	bool "Use ccache to speedup recompilation"
 	select ADK_HOST_NEED_CCACHE
