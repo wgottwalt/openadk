@@ -134,14 +134,16 @@ config ADK_KERNEL_PREEMPT__LL
 config ADK_KERNEL_PREEMPT_RTB
 	bool "Preemptible Kernel (Basic RealTime)"
 	select ADK_KERNEL_HIGH_RES_TIMERS
-	depends on ADK_TARGET_KERNEL_VERSION_4_1
+	depends on ADK_TARGET_KERNEL_VERSION_4_1 \
+		|| ADK_TARGET_KERNEL_VERSION_4_4
         help
 	  Preemptible Kernel (Basic RT)
 
 config ADK_KERNEL_PREEMPT_RT_FULL
 	bool "Fully Preemptible Kernel (RealTime)"
 	select ADK_KERNEL_HIGH_RES_TIMERS
-	depends on ADK_TARGET_KERNEL_VERSION_4_1
+	depends on ADK_TARGET_KERNEL_VERSION_4_1 \
+		|| ADK_TARGET_KERNEL_VERSION_4_4
         help
 	  Fully Preemptible Kernel (RealTime)
 	  https://www.kernel.org/pub/linux/kernel/projects/rt/
