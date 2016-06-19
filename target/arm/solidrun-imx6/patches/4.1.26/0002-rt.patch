@@ -1,0 +1,75 @@
+From:
+http://patches.openembedded.org/patch/65803/
+
+diff -Nur linux-4.1.10.orig/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_os.c linux-4.1.10/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_os.c
+--- linux-4.1.10.orig/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_os.c	2015-10-13 16:22:22.044878316 +0200
++++ linux-4.1.10/drivers/mxc/gpu-viv/hal/os/linux/kernel/gc_hal_kernel_os.c	2015-10-13 16:34:45.559823687 +0200
+@@ -3060,7 +3060,7 @@
+     gcmkONERROR(gckOS_Allocate(Os, gcmSIZEOF(struct mutex), Mutex));
+ 
+     /* Initialize the mutex. */
+-    mutex_init(*Mutex);
++    mutex_init((struct mutex*)*Mutex);
+ 
+     /* Return status. */
+     gcmkFOOTER_ARG("*Mutex=0x%X", *Mutex);
+@@ -3105,7 +3105,7 @@
+     gcmkVERIFY_ARGUMENT(Mutex != gcvNULL);
+ 
+     /* Destroy the mutex. */
+-    mutex_destroy(Mutex);
++    mutex_destroy((struct mutex*)Mutex);
+ 
+     /* Free the mutex structure. */
+     gcmkONERROR(gckOS_Free(Os, Mutex));
+@@ -7625,7 +7625,7 @@
+ 
+     might_sleep();
+ 
+-    spin_lock_irq(&signal->obj.wait.lock);
++    raw_spin_lock_irq(&signal->obj.wait.lock);
+ 
+     if (signal->obj.done)
+     {
+@@ -7655,9 +7655,8 @@
+             : Wait * HZ / 1000;
+ #endif
+ 
+-        DECLARE_WAITQUEUE(wait, current);
+-        wait.flags |= WQ_FLAG_EXCLUSIVE;
+-        __add_wait_queue_tail(&signal->obj.wait, &wait);
++	DEFINE_SWAITER(wait);
++	swait_prepare_locked(&signal->obj.wait, &wait);
+ 
+         while (gcvTRUE)
+         {
+@@ -7669,9 +7668,9 @@
+             }
+ 
+             __set_current_state(TASK_INTERRUPTIBLE);
+-            spin_unlock_irq(&signal->obj.wait.lock);
++            raw_spin_unlock_irq(&signal->obj.wait.lock);
+             timeout = schedule_timeout(timeout);
+-            spin_lock_irq(&signal->obj.wait.lock);
++            raw_spin_lock_irq(&signal->obj.wait.lock);
+ 
+             if (signal->obj.done)
+             {
+@@ -7735,7 +7734,7 @@
+             }
+         }
+ 
+-        __remove_wait_queue(&signal->obj.wait, &wait);
++        swait_finish_locked(&signal->obj.wait, &wait);
+ 
+ #if gcdDETECT_TIMEOUT
+         if (complained)
+@@ -7748,7 +7747,7 @@
+ #endif
+     }
+ 
+-    spin_unlock_irq(&signal->obj.wait.lock);
++    raw_spin_unlock_irq(&signal->obj.wait.lock);
+ 
+ OnError:
+     /* Return status. */
