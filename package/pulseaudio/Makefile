@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		pulseaudio
-PKG_VERSION:=		7.1
-PKG_RELEASE:=		2
-PKG_HASH:=		e667514a28328f92aceea754a224a0150dddfe7e9a71b4c6d31489220153b9d9
+PKG_VERSION:=		8.0
+PKG_RELEASE:=		1
+PKG_HASH:=		690eefe28633466cfd1ab9d85ebfa9376f6b622deec6bfee5091ac9737cd1989
 PKG_DESCR:=		sound system
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libltdl json-c libsndfile libspeex libncurses
 PKG_DEPENDS+=		libflac libvorbis libogg libuuid libsndfile
-PKG_DEPENDS+=		alsa-lib libsamplerate
-PKG_BUILDDEP:=		libtool json-c libsndfile speex libsamplerate
+PKG_DEPENDS+=		alsa-lib
+PKG_BUILDDEP:=		libtool json-c libsndfile speex
 PKG_BUILDDEP+=		flac libvorbis libogg util-linux ncurses alsa-lib
 PKG_NEEDS:=		threads rt
 PKG_URL:=		http://www.freedesktop.org/wiki/Software/PulseAudio/
@@ -24,11 +24,15 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,PULSEAUDIO,pulseaudio,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
-# use libtool from host directory
-AUTOTOOL_STYLE:=	autoreconf
+
+ifeq ($(ADK_TARGET_ARCH_ARM_WITH_NEON),y)
+CONFIGURE_ARGS+=	--enable-neon-opt
+else
+CONFIGURE_ARGS+=	--disable-neon-opt
+endif
+
 CONFIGURE_ARGS+=	--disable-manpages \
 			--disable-tests \
-			--disable-neon-opt \
 			--disable-x11 \
 			--disable-avahi \
 			--disable-lirc \
@@ -44,9 +48,9 @@ CONFIGURE_ARGS+=	--disable-manpages \
 			--disable-rpath \
 			--disable-dbus \
 			--disable-hal-compat \
+			--disable-samplerate \
 			--without-caps \
 			--with-database=simple \
-			--enable-samplerate \
 			--enable-alsa \
 			--with-speex \
 			--with-access-group=audio
