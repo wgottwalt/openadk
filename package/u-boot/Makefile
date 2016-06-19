@@ -86,6 +86,7 @@ ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	$(INSTALL_BIN) $(WRKBUILD)/SPL $(FW_DIR)
+	$(INSTALL_BIN) ./files/boot.script.imx6 $(FW_DIR)
 endif
 
 include $(ADK_TOPDIR)/mk/host-bottom.mk

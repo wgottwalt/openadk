@@ -561,6 +561,9 @@ case $target {
 		[[ -e "$x" ]] && cp "$fwdir"/*.dtb "$R/boot/"
 		break
 	done
+	mkimage -A arm -O linux -T script -C none -a 0 -e 0 \
+		-n "SolidrunImx6" \
+		-d $fwdir/boot.script.imx6 $R/boot/boot.scr.uimg
 	;;
 (banana-pro)
 	for x in "$fwdir"/*.dtb; do
