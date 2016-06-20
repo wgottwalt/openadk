@@ -1,0 +1,11 @@
+--- flex-2.6.1.orig/configure.ac	2016-02-29 14:53:04.000000000 +0100
++++ flex-2.6.1/configure.ac	2016-06-21 00:25:18.739543528 +0200
+@@ -37,8 +37,6 @@ AC_SUBST(SHARED_VERSION_INFO)
+ 
+ # checks for programs
+ 
+-AM_GNU_GETTEXT([external])
+-AM_GNU_GETTEXT_VERSION([0.19])
+ AC_PROG_YACC
+ AM_PROG_LEX
+ AC_PROG_CC

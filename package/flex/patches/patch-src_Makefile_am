@@ -1,5 +1,14 @@
 --- flex-2.6.1.orig/src/Makefile.am	2016-02-27 14:53:59.000000000 +0100
-+++ flex-2.6.1/src/Makefile.am	2016-06-20 23:42:55.000000000 +0200
++++ flex-2.6.1/src/Makefile.am	2016-06-21 00:33:09.061676013 +0200
+@@ -41,7 +41,7 @@ COMMON_SOURCES = \
+ 	tblcmp.c \
+ 	yylex.c
+ 
+-LDADD = ../lib/libcompat.la @LIBINTL@
++LDADD = ../lib/libcompat.la
+ 
+ libfl_la_SOURCES = \
+ 	libmain.c \
 @@ -90,7 +90,7 @@ stage1scan.l: scan.l
  	cp $(srcdir)/scan.l $(srcdir)/stage1scan.l
  
