@@ -1,0 +1,13 @@
+--- flex-2.6.1.orig/Makefile.am	2016-02-27 14:53:59.000000000 +0100
++++ flex-2.6.1/Makefile.am	2016-06-20 23:50:16.000000000 +0200
+@@ -45,10 +45,6 @@ EXTRA_DIST = \
+ SUBDIRS = \
+ 	lib \
+ 	src \
+-	doc \
+-	examples \
+-	po \
+-	tests \
+ 	tools
+ 
+ # Create the ChangeLog, but only if we're inside a git working directory
