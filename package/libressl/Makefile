@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libressl
-PKG_VERSION:=		2.3.4
+PKG_VERSION:=		2.3.6
 PKG_RELEASE:=		1
-PKG_HASH:=		7a1135b2620f78928e89538c211a4df1d9415994001d1e7c9178c6b6d72de6a9
+PKG_HASH:=		358a4779e6813bd06f07db0cf0f0fe531401ed0c6ed958973d404416c3d537fa
 PKG_DESCR:=		ssl/tls library
 PKG_SECTION:=		libs/crypto
 PKG_URL:=		http://www.libressl.org
@@ -15,11 +15,17 @@ PKG_OPTS:=		dev
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 
+PKG_SUBPKGS:=		LIBRESSL LIBRESSL_UTIL
+PKGSD_LIBRESSL_UTIL:=	openssl command line tool
+PKGSC_LIBRESSL_UTIL:=	app/crypto
+PKGSS_LIBRESSL_UTIL:=	libressl
+
 include ${ADK_TOPDIR}/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,LIBRESSL,libressl,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBRESSL,libressl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBRESSL_UTIL,libressl-util,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBRESSL_UTIL},${PKGSD_LIBRESSL_UTIL},${PKGSC_LIBRESSL_UTIL}))
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
@@ -33,6 +39,10 @@ libressl-install:
 	$(INSTALL_DIR) $(IDIR_LIBRESSL)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/lib{crypto,ssl,tls}.so* \
 		$(IDIR_LIBRESSL)/usr/lib
+
+libressl-util-install:
+	${INSTALL_DIR} ${IDIR_LIBRESSL_UTIL}/usr/bin
+	${CP} ${WRKINST}/usr/bin/openssl ${IDIR_LIBRESSL_UTIL}/usr/bin
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
