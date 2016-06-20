@@ -17,7 +17,7 @@ ifneq (${subdir},)
 ${MAKECMDGOALS}: _subdir
 
 _subdir: ${_subdir_dep}
-	@cd ${subdir} && ADK_TOPDIR=${ADK_TOPDIR} DEVELOPER=1 \
+	cd ${subdir} && ADK_TOPDIR=${ADK_TOPDIR} DEVELOPER=1 ADK_VERBOSE=1 \
 	    $(MAKE) ${MAKECMDGOALS}
 else
 
