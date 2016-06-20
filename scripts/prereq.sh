@@ -42,10 +42,6 @@ if [ -e foo ]; then
 fi
 rm -f FOO
 
-if [ "$target" = "v" ]; then
-  dlverbose=1
-fi
-
 # do we have a download tool?
 tools="curl wget"
 for tool in $tools; do
@@ -54,18 +50,10 @@ for tool in $tools; do
     printf "found\n"
     case $tool in
       curl)
-        if [ $dlverbose -eq 1 ]; then
           FETCHCMD="$(which $tool) -L -k -f -\# -o "
-        else
-          FETCHCMD="$(which $tool) -L -k -f -s -o "
-        fi
         ;;
       wget)
-        if [ $dlverbose -eq 1 ]; then
           FETCHCMD="$(which $tool) --no-check-certificate -O "
-        else
-          FETCHCMD="$(which $tool) --no-check-certificate -q -O "
-        fi
         ;;
     esac
     break

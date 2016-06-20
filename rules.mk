@@ -11,6 +11,7 @@ TRACE:=			:
 CMD_TRACE:=		:
 PKG_TRACE:=		:
 MAKE_TRACE:=
+DL_TRACE:=
 EXTRA_MAKEFLAGS:=
 SET_DASHX:=		set -x
 else
@@ -21,6 +22,7 @@ CMD_TRACE:=		echo -n
 PKG_TRACE:=		echo "------> "
 EXTRA_MAKEFLAGS:=	-s
 MAKE_TRACE:=		>/dev/null 2>&1 || { echo "Build failed. Please re-run make with v to see what's going on"; false; }
+DL_TRACE:=		>/dev/null 2>&1
 SET_DASHX:=		:
 endif
 

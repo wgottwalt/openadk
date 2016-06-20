@@ -89,7 +89,7 @@ $(1):
 		for site in $${PKG_SITES} $${MASTER_SITE_BACKUP}; do \
 			: echo "$${FETCHCMD} $$$$site$$$$filename"; \
 			rm -f "$$$$filename"; \
-			if $${FETCHCMD} $$$$filename $$$$site$$$$filename; then \
+			if $${FETCHCMD} $$$$filename $$$$site$$$$filename $(DL_TRACE); then \
 				: check the size here; \
 				[[ ! -e $$$$filename ]] || exit 0; \
 			fi; \
