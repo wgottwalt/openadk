@@ -5,10 +5,11 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ipsec-tools
 PKG_VERSION:=		0.8.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		8eb6b38716e2f3a8a72f1f549c9444c2bc28d52c9536792690564c74fe722f2d
 PKG_DESCR:=		ipsec management tools
 PKG_SECTION:=		net/security
+PKG_KDEPENDS:=		net-key
 PKG_BUILDDEP:=		flex
 PKG_URL:=		http://ipsec-tools.sourceforge.net/
 PKG_SITES:=		$(MASTER_SITE_SOURCEFORGE:=ipsec-tools/)
@@ -31,9 +32,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,IPSEC_TOOLS,ipsec-tools,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 CONFIGURE_ARGS+=	--with-kernel-headers="$(LINUX_DIR)/include" \
+			--with-openssl="$(STAGING_TARGET_DIR)/usr" \
 			--without-readline \
 			--disable-security-context \
-			--with-openssl="$(STAGING_TARGET_DIR)/usr" \
 			--without-libradius \
 			--without-libpam
 
