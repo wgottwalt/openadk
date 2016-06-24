@@ -407,6 +407,7 @@ config ADK_KERNEL_ATL1
 	select ADK_KERNEL_CRC32
 	depends on ADK_TARGET_WITH_PCI \
 		|| ADK_TARGET_GENERIC
+	default y if ADK_TARGET_SYSTEM_ASUS_P5BVM
 	default n
 	help
 	  This driver supports the Atheros/Attansic L1 gigabit ethernet adapter.
