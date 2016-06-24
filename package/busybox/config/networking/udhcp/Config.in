@@ -110,7 +110,7 @@ config BUSYBOX_FEATURE_UDHCP_PORT
 
 config BUSYBOX_UDHCP_DEBUG
 	int "Maximum verbosity level for udhcp applets (0..9)"
-	default 9
+	default 0
 	range 0 9
 	depends on BUSYBOX_UDHCPD || BUSYBOX_UDHCPC || BUSYBOX_DHCPRELAY
 	help

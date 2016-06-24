@@ -6,6 +6,39 @@
 
 menu "Busybox Library Tuning"
 
+config BUSYBOX_FEATURE_USE_BSS_TAIL
+	bool "Use the end of BSS page"
+	default n
+	help
+	  Attempt to reclaim a small unused part of BSS.
+
+	  Executables have the following parts:
+	  = read-only executable code and constants, also known as "text"
+	  = read-write data
+	  = non-initialized (zeroed on demand) data, also known as "bss"
+
+	  At link time, "text" is padded to a full page. At runtime, all "text"
+	  pages are mapped RO and executable.
+	  "Data" starts on the next page boundary, but is not padded
+	  to a full page at the end. "Bss" starts wherever "data" ends.
+	  At runtime, "data" pages are mapped RW and they are file-backed
+	  (this includes a small portion of "bss" which may live in the last
+	  partial page of "data").
+	  Pages which are fully in "bss" are mapped to anonymous memory.
+
+	  "Bss" end is usually not page-aligned. There is an unused space
+	  in the last page. Linker marks its start with the "_end" symbol.
+
+	  This option will attempt to use that space for bb_common_bufsiz1[]
+	  array. If it fits after _end, it will be used, and COMMON_BUFSIZE
+	  will be enlarged from its guaranteed minimum size of 1 kbyte.
+	  This may require recompilation a second time, since value of _end
+	  is known only after final link.
+
+	  If you are getting a build error like this:
+	        appletlib.c:(.text.main+0xd): undefined reference to '_end'
+	  disable this option.
+
 config BUSYBOX_FEATURE_SYSTEMD
 	bool "Enable systemd support"
 	default n

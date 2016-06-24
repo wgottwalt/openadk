@@ -656,6 +656,13 @@ config BUSYBOX_FEATURE_IP_RULE
 	help
 	  Add support for rule commands to "ip".
 
+config BUSYBOX_FEATURE_IP_NEIGH
+	bool "ip neighbor"
+	default n
+	depends on BUSYBOX_IP
+	help
+	  Add support for neighbor commands to "ip".
+
 config BUSYBOX_FEATURE_IP_SHORT_FORMS
 	bool "Support short forms of ip commands"
 	default n

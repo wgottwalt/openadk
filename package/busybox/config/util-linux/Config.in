@@ -6,6 +6,12 @@
 
 menu "Linux System Utilities"
 
+config BUSYBOX_BLKDISCARD
+	bool "blkdiscard"
+	default n
+	help
+	  blkdiscard discards sectors on a given device.
+
 config BUSYBOX_BLOCKDEV
 	bool "blockdev"
 	default n
@@ -84,6 +90,21 @@ config BUSYBOX_FEATURE_MDEV_LOAD_FIRMWARE
 	  /lib/firmware/ and if it exists, send it to the kernel for
 	  loading into the hardware.
 
+config BUSYBOX_NSENTER
+	bool "nsenter"
+	default n
+	select BUSYBOX_PLATFORM_LINUX
+	help
+	  Run program with namespaces of other processes.
+
+config BUSYBOX_FEATURE_NSENTER_LONG_OPTS
+	bool "Enable long options"
+	default n
+	depends on BUSYBOX_NSENTER && BUSYBOX_LONG_OPTS
+	help
+	  Support long options for the nsenter applet. This makes
+	  the busybox implementation more compatible with upstream.
+
 config BUSYBOX_REV
 	bool "rev"
 	default n
@@ -97,6 +118,14 @@ config BUSYBOX_UEVENT
 	help
 	  uevent is a netlink listener for kernel uevent notifications
 	  sent via netlink. It is usually used for dynamic device creation.
+
+config BUSYBOX_UNSHARE
+	bool "unshare"
+	default n
+	depends on BUSYBOX_LONG_OPTS && !BUSYBOX_NOMMU
+	select BUSYBOX_PLATFORM_LINUX
+	help
+	  Run program with some namespaces unshared from parent.
 
 config BUSYBOX_ACPID
 	bool "acpid"
@@ -819,6 +848,13 @@ config BUSYBOX_VOLUMEID
 
 menu "Filesystem/Volume identification"
 	depends on BUSYBOX_VOLUMEID
+
+config BUSYBOX_FEATURE_VOLUMEID_BCACHE
+	bool "bcache filesystem"
+	default n
+	depends on BUSYBOX_VOLUMEID
+	help
+	  TODO
 
 config BUSYBOX_FEATURE_VOLUMEID_EXT
 	bool "Ext filesystem"

@@ -295,6 +295,14 @@ config BUSYBOX_CRYPTPW
 	  using the given salt. Debian has this utility under mkpasswd
 	  name. Busybox provides mkpasswd as an alias for cryptpw.
 
+config BUSYBOX_MKPASSWD
+	bool "mkpasswd"
+	default n
+	help
+	  Encrypts the given password with the crypt(3) libc function
+	  using the given salt. Debian has this utility under mkpasswd
+	  name. Busybox provides mkpasswd as an alias for cryptpw.
+
 config BUSYBOX_CHPASSWD
 	bool "chpasswd"
 	default n

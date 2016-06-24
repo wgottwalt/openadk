@@ -192,6 +192,13 @@ config BUSYBOX_UBIUPDATEVOL
 	help
 	  Update a UBI volume.
 
+config BUSYBOX_UBIRENAME
+	bool "ubirename"
+	default n
+	select BUSYBOX_PLATFORM_LINUX
+	help
+	  Utility to rename UBI volumes
+
 config BUSYBOX_ADJTIMEX
 	bool "adjtimex"
 	default n

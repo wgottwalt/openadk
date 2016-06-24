@@ -79,6 +79,17 @@ config BUSYBOX_INIT
 	help
 	  init is the first program run when the system boots.
 
+config BUSYBOX_LINUXRC
+	bool "Support running init from within an initrd (not initramfs)"
+	default n
+	select BUSYBOX_FEATURE_SYSLOG
+	help
+	  Legacy support for running init under the old-style initrd. Allows
+	  the name linuxrc to act as init, and it doesn't assume init is PID 1.
+
+	  This does not apply to initramfs, which runs /init as PID 1 and
+	  requires no special support.
+
 config BUSYBOX_FEATURE_USE_INITTAB
 	bool "Support reading an inittab file"
 	default y
@@ -165,6 +176,21 @@ config BUSYBOX_INIT_TERMINAL_TYPE
 
 	  Note that on Linux, init attempts to detect serial terminal and
 	  sets TERM to "vt102" if one is found.
+
+config BUSYBOX_FEATURE_INIT_MODIFY_CMDLINE
+	bool "Modify the command-line to \"init\""
+	default n
+	depends on BUSYBOX_INIT || BUSYBOX_LINUXRC
+	help
+	  When launched as PID 1 and after parsing its arguments, init
+	  wipes all the arguments but argv[0] and rewrites argv[0] to
+	  contain only "init", so that its command-line appears solely as
+	  "init" in tools such as ps.
+	  If this option is set to Y, init will keep its original behavior,
+	  otherwise, all the arguments including argv[0] will be preserved,
+	  be they parsed or ignored by init.
+	  The original command-line used to launch init can then be
+	  retrieved in /proc/1/cmdline on Linux, for example.
 
 config BUSYBOX_MESG
 	bool "mesg"

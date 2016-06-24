@@ -176,6 +176,13 @@ config BUSYBOX_GUNZIP
 	  You can use the `-t' option to test the integrity of
 	  an archive, without decompressing it.
 
+config BUSYBOX_FEATURE_GUNZIP_LONG_OPTIONS
+	bool "Enable long options"
+	default y
+	depends on BUSYBOX_GUNZIP && BUSYBOX_LONG_OPTS
+	help
+	  Enable use of long options.
+
 config BUSYBOX_GZIP
 	bool "gzip"
 	default y
