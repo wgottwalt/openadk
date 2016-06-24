@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		expat
-PKG_VERSION:=		2.1.1
+PKG_VERSION:=		2.2.0
 PKG_RELEASE:=		1
-PKG_HASH:=		aff584e5a2f759dcfc6d48671e9529f6afe1e30b0cd6a4cec200cbe3f793de67
+PKG_HASH:=		d9e50ff2d19b3538bd2127902a89987474e1a4db8e43a66a4d1a712ab9a504ff
 PKG_DESCR:=		xml parsing library
 PKG_SECTION:=		libs/data
 PKG_URL:=		http://expat.sourceforge.net
