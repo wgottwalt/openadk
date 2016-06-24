@@ -26,6 +26,9 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,CFGFS,cfgfs,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+# runtime problems on x86_64 with O3
+TARGET_CFLAGS:=         $(subst O3,Os,$(TARGET_CFLAGS))
+
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
