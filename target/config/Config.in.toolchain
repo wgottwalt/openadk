@@ -139,6 +139,7 @@ config ADK_DEBUG_STRIP
 config ADK_TARGET_USE_STATIC_LIBS
 	bool "Link applications statically by default"
 	select BUSYBOX_STATIC
+	depends on !ADK_TARGET_BINFMT_FLAT
 	help
 	  Useful for debugging of dynamic linker problems. Be aware of the fact, that uClibc and glibc
 	  still requires libgcc_so.so.1 for pthread_cancel. Glibc also requires libnss_*.so libraries
