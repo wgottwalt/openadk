@@ -69,26 +69,35 @@ TARGET_LDFLAGS+=	-ltinfo
 AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-chfn-chsh \
+			--disable-more \
 			--disable-su \
 			--disable-runuser \
 			--disable-schedutils \
+			--disable-setpriv \
+			--disable-setterm \
 			--disable-cramfs \
 			--disable-login \
 			--disable-eject \
+			--disable-switch_root \
+			--disable-nsenter \
+			--disable-unshare \
+			--disable-wall \
 			--without-python \
 			--without-systemd \
 			--without-user \
 			--enable-libfdisk \
 			--enable-libuuid \
 			--enable-libblkid \
-			--enable-libmount \
-			--enable-mount
+			--enable-libmount
+
+ifeq ($(ADK_PACKAGE_FDISK)$(ADK_PACKAGE_SFDISK)$(ADK_PACKAGE_CFDISK)$(ADK_PACKAGE_MKFS)$(ADK_PACKAGE_MOUNT)$(ADK_PACKAGE_SWAP_UTILS),)
+CONFIGURE_ARGS+=	--disable-all-programs
+endif
+
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
 HOST_CONFIGURE_ARGS+=	--enable-libuuid \
-			--disable-use-tty-group \
-			--disable-chfn-chsh \
-			--disable-su \
-			--disable-runuser
+			--disable-all-programs \
+			--disable-use-tty-group
 
 fdisk-install:
 	$(INSTALL_DIR) $(IDIR_FDISK)/usr/sbin
