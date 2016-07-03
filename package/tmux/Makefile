@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		tmux
-PKG_VERSION:=		2.1
+PKG_VERSION:=		2.2
 PKG_RELEASE:=		1
-PKG_HASH:=		31564e7bf4bcef2defb3cb34b9e596bd43a3937cad9e5438701a81a5a9af6176
+PKG_HASH:=		bc28541b64f99929fe8e3ae7a02291263f3c97730781201824c0f05d7c8e19e4
 PKG_DESCR:=		terminal multiplexer
 PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		libevent ncurses
@@ -21,6 +21,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TMUX,tmux,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
+TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--disable-static
 
 tmux-install:
