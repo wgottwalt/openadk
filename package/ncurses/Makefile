@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ncurses
 PKG_VERSION:=		6.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260
 PKG_DESCR:=		terminal handling library
 PKG_SECTION:=		libs/misc
@@ -32,11 +32,11 @@ else
 CONFIGURE_ARGS+=	--with-shared
 endif
 
-CONFIGURE_ENV+=		ac_cv_linux_vers=2 \
-			PKG_CONFIG_LIBDIR=/usr/lib/pkgconfig
+CONFIGURE_ENV+=		ac_cv_linux_vers=2
 CONFIGURE_ARGS+=	--without-cxx \
 			--without-cxx-binding \
 			--with-build-cc="${HOST_CC}" \
+			--with-pkg-config-libdir=/usr/lib/pkgconfig \
 			--without-progs \
 			--disable-termcap \
 			--enable-symlinks \
