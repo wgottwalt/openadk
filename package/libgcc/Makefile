@@ -31,12 +31,13 @@ endif
 ifeq ($(ADK_TARGET_CPU_SH_SH4),y)
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/!m4*/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 endif
-endif
+else
 ifeq ($(ADK_TARGET_ARCH_AVR32),)
 ifeq ($(ADK_TARGET_BINFMT_FLAT),)
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libgcc*.so* ${IDIR_LIBGCC}/$(ADK_TARGET_LIBC_PATH)
 endif
 endif
 endif
+endif 
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
