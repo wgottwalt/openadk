@@ -1,0 +1,28 @@
+#!/bin/sh
+#PKG brutefir
+#INIT 79
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${brutefir:-NO}" = x"NO" && exit 0
+	test x"$brutefir" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
+	exec sh $0 start
+	;;
+start)
+	(/usr/bin/brutefir $brutefir_flags &) && sleep 0.2
+	;;
+stop)
+	kill $(pgrep -f /usr/bin/brutefir) && sleep 0.2
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?

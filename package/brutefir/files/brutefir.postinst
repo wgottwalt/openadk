@@ -1,0 +1,4 @@
+#!/bin/sh
+. $IPKG_INSTROOT/etc/functions.sh
+add_rcconf brutefir NO
+add_rcconf brutefir_flags '-nodefault -daemon /data/brutefir/config/brutefir.conf'
