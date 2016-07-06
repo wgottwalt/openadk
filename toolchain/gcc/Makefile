@@ -164,9 +164,9 @@ endif
 
 ifeq ($(ADK_TARGET_ARCH_X86_64),y)
 ifneq ($(ADK_TARGET_ABI_X32),)
-GCC_FINAL_CONFOPTS+=	--with-abi=x32
+GCC_CONFOPTS+=		--with-abi=x32 --enable-multilib
 else
-GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
+GCC_CONFOPTS+=		--disable-biarch --disable-multilib
 endif
 endif
 

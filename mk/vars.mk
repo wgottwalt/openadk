@@ -104,6 +104,12 @@ TARGET_CC:=		clang --target=${GNU_TARGET_NAME} --sysroot=$(STAGING_TARGET_DIR)
 TARGET_CXX:=		clang++ --target=${GNU_TARGET_NAME} --sysroot=$(STAGING_TARGET_DIR)
 endif
 
+# for x86_64 x32 ABI we need to extend TARGET_CC/TARGET_CXX
+ifeq ($(ADK_TARGET_ABI_X32),y)
+TARGET_CC+=            $(ADK_TARGET_ABI_CFLAGS)
+TARGET_CXX+=           $(ADK_TARGET_ABI_CFLAGS)
+endif
+
 TARGET_LD:=		${TARGET_COMPILER_PREFIX}ld
 ifneq ($(ADK_TARGET_USE_LTO),)
 TARGET_AR:=		${TARGET_COMPILER_PREFIX}gcc-ar
