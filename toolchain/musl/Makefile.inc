@@ -8,6 +8,13 @@ PKG_RELEASE:=		1
 PKG_SITES:=		git://git.musl-libc.org/musl
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
+ifeq ($(ADK_TARGET_LIB_MUSL_1_1_15),y)
+PKG_VERSION:=		1.1.15
+PKG_RELEASE:=		1
+PKG_HASH:=		97e447c7ee2a7f613186ec54a93054fe15469fe34d7d323080f7ef38f5ecb0fa
+PKG_SITES:=		http://www.musl-libc.org/releases/
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+endif
 ifeq ($(ADK_TARGET_LIB_MUSL_1_1_14),y)
 PKG_VERSION:=		1.1.14
 PKG_RELEASE:=		1
@@ -19,13 +26,6 @@ ifeq ($(ADK_TARGET_LIB_MUSL_1_1_13),y)
 PKG_VERSION:=		1.1.13
 PKG_RELEASE:=		1
 PKG_HASH:=		bbacdc64f557d0c4857f7d2daf592c32c29aec1babbb94fcf01a2e05bed15013
-PKG_SITES:=		http://www.musl-libc.org/releases/
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-endif
-ifeq ($(ADK_TARGET_LIB_MUSL_1_1_12),y)
-PKG_VERSION:=		1.1.12
-PKG_RELEASE:=		1
-PKG_HASH:=		720b83c7e276b4b679c0bffe9509340d5f81fd601508e607e708177df0d31c0e
 PKG_SITES:=		http://www.musl-libc.org/releases/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 endif
