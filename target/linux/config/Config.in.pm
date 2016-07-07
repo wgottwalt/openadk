@@ -50,6 +50,7 @@ config ADK_HARDWARE_ACPI
 	default y if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default y if ADK_TARGET_SYSTEM_GENERIC_X86
 	default y if ADK_TARGET_SYSTEM_GENERIC_X86_64
+	default y if ADK_TARGET_SYSTEM_ASUS_P5BVM
 	default n
 	help
 	 Enable ACPI support.
