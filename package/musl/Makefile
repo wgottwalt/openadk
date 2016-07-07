@@ -37,7 +37,11 @@ ifeq ($(ADK_TARGET_CPU_ARCH),i486)
 MARCH:=			i386
 endif
 ifeq ($(ADK_TARGET_CPU_ARCH),ppc)
+ifeq ($(ADK_TARGET_SOFT_FLOAT),y)
+MARCH:=			powerpc-sf
+else
 MARCH:=			powerpc
+endif
 endif
 ifeq ($(ADK_TARGET_CPU_ARCH),ppc64)
 MARCH:=			powerpc64
