@@ -246,8 +246,10 @@ TARGET_CXXFLAGS+=	-g3
 endif
 
 ifneq ($(ADK_DEBUG),)
+ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),)
 TARGET_CFLAGS+=		-fno-omit-frame-pointer
 TARGET_CXXFLAGS+=	-fno-omit-frame-pointer
+endif
 TARGET_CFLAGS+=		-funwind-tables -fasynchronous-unwind-tables
 TARGET_CXXFLAGS+=	-funwind-tables -fasynchronous-unwind-tables
 else
