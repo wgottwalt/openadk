@@ -9,6 +9,12 @@ KERNEL:=$(LINUX_DIR)/vmlinux
 ZKERNEL:=$(LINUX_DIR)/arch/cris/boot/Image
 QEMU_ARGS:=-M axis-dev88 -nographic -monitor none
 
+# target helper text
+ifeq ($(ADK_TARGET_FS),archive)
+targethelp:
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
+
 ifeq ($(ADK_TARGET_FS),initramfs)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
@@ -33,8 +39,11 @@ ifeq ($(ADK_TARGET_QEMU),y)
 endif
 endif
 
-kernel-install:
-	@cp $(KERNEL) $(FW_DIR)/${TARGET_KERNEL}
+kernel-strip:
+	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+
+kernel-install: kernel-strip
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
