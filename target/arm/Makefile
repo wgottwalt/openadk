@@ -98,6 +98,10 @@ ifeq ($(ADK_TARGET_FS),nfsroot)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
+ifeq ($(ADK_TARGET_SYSTEM_LINKSYS_NSLU2),y)
+	@echo "Use following in RedBoot bootloader:"
+	@echo "RedBoot> ip_address -l <localip> -h <serverip>; load -r -v -b 0x01d00000 ${TARGET_KERNEL}; exec 0x01d00000"
+endif
 endif
 ifeq ($(ADK_TARGET_FS),squashfs)
 targethelp:
