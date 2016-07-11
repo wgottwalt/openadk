@@ -123,9 +123,9 @@ endif
 endif
 
 kernel-strip:
-ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
+ifeq ($(ADK_TARGET_KERNEL_VERSION_RPI),y)
 	@echo adding DT trailer to kernel $(MAKE_TRACE)
-	PATH='$(HOST_PATH)' perl $(ADK_TOPDIR)/scripts/mkknlimg $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+	PATH='$(HOST_PATH)' perl $(LINUX_DIR)/scripts/mkknlimg $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 else
 	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif

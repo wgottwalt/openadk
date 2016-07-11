@@ -9,25 +9,31 @@ default ADK_TARGET_KERNEL_VERSION_4_6_3 if ADK_TARGET_ARCH_NIOS2
 default ADK_TARGET_KERNEL_VERSION_4_6_3 if ADK_TARGET_ARCH_XTENSA
 default ADK_TARGET_KERNEL_VERSION_4_6_3 if ADK_TARGET_CPU_MIPS_MIPS32R6
 default ADK_TARGET_KERNEL_VERSION_4_6_3 if ADK_TARGET_CPU_MIPS64_MIPS64R6
+default ADK_TARGET_KERNEL_VERSION_RPI if ADK_TARGET_BOARD_BCM28XX
+default ADK_TARGET_KERNEL_VERSION_FSLC if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 default ADK_TARGET_KERNEL_VERSION_4_4_14
 
 config ADK_TARGET_KERNEL_VERSION_GIT
 	bool "linux-git"
 	depends on !ADK_TARGET_ARCH_NDS32
 
+config ADK_TARGET_KERNEL_VERSION_FSLC
+	bool "linux-fslc"
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+
+config ADK_TARGET_KERNEL_VERSION_RPI
+	bool "linux-rpi"
+	depends on ADK_TARGET_BOARD_BCM28XX
+
 config ADK_TARGET_KERNEL_VERSION_4_6_3
 	bool "4.6.3"
 	depends on !ADK_TARGET_ARCH_NDS32
-	depends on !ADK_TARGET_BOARD_BCM28XX
-	depends on !ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	select ADK_TARGET_KERNEL_VERSION_4_6
 
 config ADK_TARGET_KERNEL_VERSION_4_5_7
 	bool "4.5.7"
 	depends on !ADK_TARGET_ARCH_NDS32
 	depends on !ADK_TARGET_ARCH_NIOS2
-	depends on !ADK_TARGET_BOARD_BCM28XX
-	depends on !ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	depends on !ADK_TARGET_CPU_MIPS_MIPS32R6
 	depends on !ADK_TARGET_CPU_MIPS64_MIPS64R6
 	select ADK_TARGET_KERNEL_VERSION_4_5
@@ -36,7 +42,6 @@ config ADK_TARGET_KERNEL_VERSION_4_4_14
 	bool "4.4.14"
 	depends on !ADK_TARGET_ARCH_NDS32
 	depends on !ADK_TARGET_ARCH_NIOS2
-	depends on !ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	depends on !ADK_TARGET_CPU_MIPS_MIPS32R6
 	depends on !ADK_TARGET_CPU_MIPS64_MIPS64R6
 	select ADK_TARGET_KERNEL_VERSION_4_4
@@ -173,10 +178,20 @@ config ADK_TARGET_KERNEL_VERSION_2_6_32_70
 
 endchoice
 
+config ADK_KERNEL_GITVER
+	string
+	default "git" if ADK_TARGET_KERNEL_VERSION_GIT
+	default "rpi" if ADK_TARGET_KERNEL_VERSION_RPI
+	default "fslc" if ADK_TARGET_KERNEL_VERSION_FSLC
+
 config ADK_TARGET_KERNEL_REPO
 	string "git repository"
-	depends on ADK_TARGET_KERNEL_VERSION_GIT
-	default "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
+	depends on ADK_TARGET_KERNEL_VERSION_GIT \
+		|| ADK_TARGET_KERNEL_VERSION_RPI \
+		|| ADK_TARGET_KERNEL_VERSION_FSLC
+	default "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git" if ADK_TARGET_KERNEL_VERSION_GIT
+	default "https://github.com/raspberrypi/linux.git" if ADK_TARGET_KERNEL_VERSION_RPI
+	default "https://github.com/SolidRun/linux-fslc.git" if ADK_TARGET_KERNEL_VERSION_FSLC
 	help
 	  GIT repository to use.
 
