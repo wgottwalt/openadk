@@ -414,3 +414,9 @@ config BUSYBOX_DISABLE_KMOD
 	depends on ADK_PACKAGE_KMOD
 	default n
 
+config BUSYBOX_DISABLE_PS
+	bool
+	default y if ADK_PACKAGE_PROCPS
+	depends on ADK_PACKAGE_PROCPS
+	default n
+

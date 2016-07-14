@@ -154,6 +154,7 @@ config BUSYBOX_PKILL
 
 config BUSYBOX_PS
 	bool "ps"
+	depends on !BUSYBOX_DISABLE_PS
 	default y
 	help
 	  ps gives a snapshot of the current processes.
