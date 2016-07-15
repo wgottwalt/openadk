@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		nodejs
-PKG_VERSION:=		6.1.0
+PKG_VERSION:=		6.3.0
 PKG_RELEASE:=		1
-PKG_HASH:=		9e67ef0b8611e16e6e311eccf0489a50fe76ceebeea3023ef4f51be647ae4bc3
+PKG_HASH:=		4ed7a99985f8afee337cc22d5fef61b495ab4238dfff3750ac9019e87fc6aae6
 PKG_DESCR:=		asynchronous event driven framework
 PKG_SECTION:=		net/http
-PKG_DEPENDS:=		zlib
-PKG_BUILDDEP:=		python2-host zlib
+PKG_DEPENDS:=		zlib libopenssl
+PKG_BUILDDEP:=		python2-host zlib openssl
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		https://nodejs.org/
 PKG_SITES:=		https://nodejs.org/dist/v$(PKG_VERSION)/
@@ -32,6 +32,8 @@ do-configure:
                 	--without-snapshot \
                 	--without-dtrace \
                 	--without-etw \
+			--without-intl \
+			--shared-openssl \
                 	--shared-zlib \
 		)
 
