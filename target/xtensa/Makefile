@@ -63,6 +63,8 @@ targethelp:
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
 endif
 
+kernel-strip:
+
 kernel-install:
 	@cp $(KERNEL) $(FW_DIR)/${TARGET_KERNEL}
 

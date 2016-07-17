@@ -6,7 +6,7 @@ config ADK_TARGET_SYSTEM_XILINX_KINTEX7
 	select ADK_TARGET_WITH_NET
 	select ADK_TARGET_WITH_NETDEVICE
 	select ADK_TARGET_WITH_BLOCK
-	select ADK_HOST_BUILD_U_BOOT_XTENSA
+	select ADK_HOST_BUILD_U_BOOT
 	help
 	  Support for Xilinx Kintex 7 with Cadence daughterboard.
 
