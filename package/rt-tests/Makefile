@@ -4,19 +4,19 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		rt-tests
-PKG_VERSION:=		3fed00ff8d2c0cdbc5ba078cbd60ce3cfcee615f
+PKG_VERSION:=		bddffd32c9483318fe72d02183981bdcf006d9dc
 PKG_RELEASE:=		1
 PKG_GIT:=		hash
 PKG_DESCR:=		realtime test apps
 PKG_NEEDS:=		threads rt
 PKG_SECTION:=		base/tests
-PKG_SITES:=		git://git.kernel.org/pub/scm/linux/kernel/git/clrkwllms/rt-tests
+PKG_SITES:=		git://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git
 
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,RT_TESTS,rt-tests,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
-XAKE_FLAGS+=		prefix=/usr
+XAKE_FLAGS+=		prefix=/usr NUMA=0
 CONFIG_STYLE:=		manual
 
 rt-tests-install:

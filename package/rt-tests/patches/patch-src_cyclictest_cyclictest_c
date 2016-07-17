@@ -1,6 +1,6 @@
---- rt-tests-3fed00ff8d2c0cdbc5ba078cbd60ce3cfcee615f.orig/src/cyclictest/cyclictest.c	2015-05-28 22:04:15.000000000 +0200
-+++ rt-tests-3fed00ff8d2c0cdbc5ba078cbd60ce3cfcee615f/src/cyclictest/cyclictest.c	2015-05-31 09:30:23.000000000 +0200
-@@ -57,26 +57,6 @@
+--- rt-tests-bddffd32c9483318fe72d02183981bdcf006d9dc.orig/src/cyclictest/cyclictest.c	2016-07-17 14:52:11.000000000 +0200
++++ rt-tests-bddffd32c9483318fe72d02183981bdcf006d9dc/src/cyclictest/cyclictest.c	2016-07-17 15:05:20.879904986 +0200
+@@ -59,27 +59,6 @@
  #define sigev_notify_thread_id _sigev_un._tid
  
  #ifdef __UCLIBC__
@@ -24,6 +24,7 @@
 -{
 -	return -EINVAL;
 -}
- 
+-
  #undef CPU_SET
  #undef CPU_ZERO
+ #define CPU_SET(cpu, cpusetp)
