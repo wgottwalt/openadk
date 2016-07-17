@@ -8,8 +8,8 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		firmware for broadcom bluetooth chips
 PKG_SECTION:=		sys/firmware
+PKG_DEPENDS:=		bluez
 
-PKG_CFLINE_BRCM_BLUETOOTH:=	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI3
 PKG_SYSTEM_DEPENDS:=    raspberry-pi3 solidrun-imx6
 
 NO_DISTFILES:=		1
