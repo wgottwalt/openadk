@@ -16,6 +16,10 @@ QEMU_ARGS:=-M malta
 QEMU_ARGS+=${ADK_QEMU_ARGS}
 QEMU_ARGS+=-device e1000,netdev=adk0 -netdev user,id=adk0
 
+ifeq ($(ADK_TARGET_CPU_MIPS_MIPS32R6),y)
+QEMU_ARGS+=-cpu mips32r6-generic
+endif
+
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)
 targethelp:
