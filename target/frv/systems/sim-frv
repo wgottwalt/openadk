@@ -2,6 +2,7 @@ config ADK_TARGET_SYSTEM_SIM_FRV
 	bool "GDB simulator"
 	select ADK_TARGET_CPU_FRV
 	select ADK_TARGET_SIM
+	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_PACKAGE_TXZ
 	help
 	  FRV Simulator.
