@@ -345,6 +345,11 @@ config ADK_TARGET_CPU_C6X
 	select ADK_TARGET_WITHOUT_MMU
 	depends on ADK_TARGET_ARCH_C6X
 
+# cr16
+config ADK_TARGET_CPU_CR16
+	bool "cr16"
+	depends on ADK_TARGET_ARCH_CR16
+
 # cris
 config ADK_TARGET_CPU_CRIS_CRISV10
 	bool "crisv10"
@@ -1654,6 +1659,7 @@ config ADK_TARGET_CPU_ARCH
 	default "avr32" if ADK_TARGET_ARCH_AVR32
 	default "bfin" if ADK_TARGET_ARCH_BFIN
 	default "c6x" if ADK_TARGET_ARCH_C6X
+	default "cr16" if ADK_TARGET_ARCH_CR16
 	default "cris" if ADK_TARGET_CPU_CRIS_CRISV10
 	default "crisv32" if ADK_TARGET_CPU_CRIS_CRISV32
 	default "epiphany" if ADK_TARGET_ARCH_EPIPHANY

@@ -5,6 +5,7 @@ arm
 avr32
 bfin
 c6x
+cr16
 cris
 epiphany
 frv
