@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		zeromq
-PKG_VERSION:=		4.1.4
+PKG_VERSION:=		4.1.5
 PKG_RELEASE:=		1
-PKG_HASH:=		e99f44fde25c2e4cb84ce440f87ca7d3fe3271c2b8cfbc67d55e4de25e6fe378
+PKG_HASH:=		04aac57f081ffa3a2ee5ed04887be9e205df3a7ddade0027460b8042432bdbcf
 PKG_DESCR:=		transport layer for distributed apps
 PKG_SECTION:=		libs/misc
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://www.zeromq.org
-PKG_SITES:=		http://download.zeromq.org/
+PKG_SITES:=		https://github.com/zeromq/zeromq4-1/releases/download/v$(PKG_VERSION)/
 PKG_OPTS:=		dev
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
@@ -20,7 +20,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ZEROMQ,zeromq,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
-CONFIGURE_ARGS+=	--without-libsodium
+CONFIGURE_ARGS+=	--without-libsodium \
+			--without-documentation
 
 zeromq-install:
 	$(INSTALL_DIR) $(IDIR_ZEROMQ)/usr/lib
