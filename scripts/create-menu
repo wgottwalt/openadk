@@ -93,7 +93,7 @@ for arch in $(cat $topdir/target/arch.lst);do
 		alpha|ia64|sh|sparc64|s390|tile|ppc64|mips64|x86_64)
 		  printf "\tdepends on ADK_TARGET_OS_LINUX\n" >> $topdir/target/config/Config.in.arch.choice
 		  ;;
-		epiphany|mn10300|moxie|msp430|v850)
+		epiphany|m32r|mn10300|moxie|msp430|v850)
 		  printf "\tdepends on ADK_TARGET_OS_BAREMETAL\n" >> $topdir/target/config/Config.in.arch.choice
 		  ;;
 	esac
