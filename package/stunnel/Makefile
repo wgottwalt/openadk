@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		stunnel
-PKG_VERSION:=		5.31
+PKG_VERSION:=		5.35
 PKG_RELEASE:=		1
-PKG_HASH:=		a746b71ab3dc6c23eacb0daf7342467870e43ac933430905eb1b1d050bbae0b7
+PKG_HASH:=		ffa386ae4c825f35f35157c285e7402a6d58779ad8c3822f74a9d355b54aba1d
 PKG_DESCR:=		encryption wrapper
 PKG_SECTION:=		net/security
 PKG_URL:=		https://www.stunnel.org
