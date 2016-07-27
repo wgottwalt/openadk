@@ -4,16 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		opkg
-PKG_VERSION:=		0.3.1
+PKG_VERSION:=		0.3.3
 PKG_RELEASE:=		1
-PKG_HASH:=		d2c6c02a8384ec21168a1f0a186cb5e9f577d1452f491d02ed3e56b2ea8b87df
+PKG_HASH:=		19db9e73121a5e4c91fa228b0a6a4c55cc3591056130cfb3c66c30aa32f8d00e
 PKG_DESCR:=		embedded package manager
 PKG_DEPENDS:=		libcurl libarchive gpgme
 PKG_BUILDDEP:=		curl libarchive gpgme
 HOST_BUILDDEP:=		libarchive-host curl-host
 PKG_NEEDS:=		threads
 PKG_SECTION:=		sys/misc
-PKG_URL:=		https://code.google.com/p/opkg/
+PKG_URL:=		http://git.yoctoproject.org/cgit/cgit.cgi/opkg/
 PKG_SITES:=		http://downloads.yoctoproject.org/releases/opkg/
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
@@ -24,7 +24,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,OPKG,opkg,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,OPKG,opkg,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autogen
 HOST_CONFIGURE_ARGS+=	--disable-openssl \
 			--disable-gpg \
 			--disable-ssl-curl
