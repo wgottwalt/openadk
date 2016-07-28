@@ -182,10 +182,6 @@ ifeq ($(ADK_TARGET_ARCH_PPC64),y)
 GCC_CONFOPTS+=		--without-long-double-128 --with-abi=elfv2
 endif
 
-ifeq ($(ADK_TARGET_ARCH_FRV),y)
-GCC_CONFOPTS+=		--enable-sjlj-exceptions
-endif
-
 ifneq ($(ADK_TARGET_MIPS_ABI),)
 GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_MIPS_ABI}
 endif
