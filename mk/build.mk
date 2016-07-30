@@ -448,6 +448,13 @@ defconfig: .menu $(CONFIG)/conf
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_TARGET_KERNEL_VERSION)" ];then \
+		kernelversion=$$(echo "$(ADK_TARGET_KERNEL_VERSION)"|sed -e "s/\./_/g"); \
+		grep "^config" target/config/Config.in.kernelversion \
+			|grep -i "$$kernelversion$$" \
+			|sed -e "s#^config \(.*\)#\1=y#" \
+			>> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_TARGET_LIBC_VERSION)" ];then \
 		libcversion=$$(echo "$(ADK_TARGET_LIBC_VERSION)"|sed -e "s/\./_/g"); \
 		if [ "$$libcversion" = "git" ];then \
