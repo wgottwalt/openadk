@@ -468,10 +468,44 @@ defconfig: .menu $(CONFIG)/conf
 				echo "ADK_TARGET_LIB_MUSL_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
 			fi; \
 		else \
-		grep "^config" target/config/Config.in.libc \
-			|grep -i "$$libcversion$$" \
-			|sed -e "s#^config \(.*\)#\1=y#" \
-			>> $(ADK_TOPDIR)/.defconfig; \
+			grep "^config" target/config/Config.in.libc \
+				|grep -i "$$libcversion$$" \
+				|sed -e "s#^config \(.*\)#\1=y#" \
+				>> $(ADK_TOPDIR)/.defconfig; \
+		fi; \
+	fi
+	@if [ ! -z "$(ADK_TOOLCHAIN_BINUTILS_VERSION)" ];then \
+		binutilsversion=$$(echo "$(ADK_TOOLCHAIN_BINUTILS_VERSION)"|sed -e "s/\./_/g"); \
+		if [ "$$binutilsversion" = "git" ];then \
+			echo "ADK_TOOLCHAIN_BINUTILS_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
+		else \
+			grep "^config" target/config/Config.in.binutils \
+				|grep -i "$$binutilsversion$$" \
+				|sed -e "s#^config \(.*\)#\1=y#" \
+				>> $(ADK_TOPDIR)/.defconfig; \
+		fi; \
+	fi
+	@if [ ! -z "$(ADK_TOOLCHAIN_GCC_VERSION)" ];then \
+		echo "ADK_BUILD_COMPILER_GCC=y" >> $(ADK_TOPDIR)/.defconfig; \
+		gccversion=$$(echo "$(ADK_TOOLCHAIN_GCC_VERSION)"|sed -e "s/\./_/g"); \
+		if [ "$$gccversion" = "git" ];then \
+			echo "ADK_TOOLCHAIN_GCC_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
+		else \
+			grep "^config" target/config/Config.in.compiler \
+				|grep -i "$$gccversion$$" \
+				|sed -e "s#^config \(.*\)#\1=y#" \
+				>> $(ADK_TOPDIR)/.defconfig; \
+		fi; \
+	fi
+	@if [ ! -z "$(ADK_TOOLCHAIN_GDB_VERSION)" ];then \
+		gdbversion=$$(echo "$(ADK_TOOLCHAIN_GDB_VERSION)"|sed -e "s/\./_/g"); \
+		if [ "$$gdbversion" = "git" ];then \
+			echo "ADK_TOOLCHAIN_GDB_GIT=y" >> $(ADK_TOPDIR)/.defconfig; \
+		else \
+			grep "^config" target/config/Config.in.gdb \
+				|grep -i "$$gdbversion$$" \
+				|sed -e "s#^config \(.*\)#\1=y#" \
+				>> $(ADK_TOPDIR)/.defconfig; \
 		fi; \
 	fi
 	@if [ ! -z "$(ADK_APPLIANCE)" ];then \
