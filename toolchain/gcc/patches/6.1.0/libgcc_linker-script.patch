@@ -1,0 +1,16 @@
+Solves following linking error:
+# bfin-openadk-linux-uclibc-g++ -o foo t.c
+bfin-openadk-linux-uclibc/bin/ld: foo: hidden symbol `___udivsi3' in libgcc.a(_udivsi3.o) is referenced by DSO
+
+diff -Nur gcc-6.1.0.orig/libgcc/config.host gcc-6.1.0/libgcc/config.host
+--- gcc-6.1.0.orig/libgcc/config.host	2016-02-26 21:02:28.000000000 +0100
++++ gcc-6.1.0/libgcc/config.host	2016-07-25 02:47:05.818797217 +0200
+@@ -444,7 +444,7 @@
+ 	md_unwind_header=bfin/linux-unwind.h
+         ;;
+ bfin*-linux-uclibc*)
+-	tmake_file="$tmake_file bfin/t-bfin bfin/t-crtstuff t-libgcc-pic t-fdpbit bfin/t-linux"
++	tmake_file="$tmake_file bfin/t-bfin bfin/t-crtstuff t-libgcc-pic t-slibgcc-libgcc t-fdpbit bfin/t-linux"
+ 	# No need to build crtbeginT.o on uClibc systems.  Should probably
+ 	# be moved to the OS specific section above.
+ 	extra_parts="crtbegin.o crtbeginS.o crtend.o crtendS.o"
