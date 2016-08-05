@@ -1,9 +1,9 @@
 	Use $(sort) here, which implicitly removes duplicates.
 	Otherwise our CFLAGS are passed in via CCOPT and CFLAGS leading
 	to duplicate -fhonour-copts passing.
---- libpcap-1.6.2.orig/Makefile.in	2014-07-03 00:12:49.000000000 +0200
-+++ libpcap-1.6.2/Makefile.in	2014-09-12 15:12:48.567519024 +0200
-@@ -61,7 +61,7 @@ DEPENDENCY_CFLAG = @DEPENDENCY_CFLAG@
+--- libpcap-1.8.0.orig/Makefile.in	2016-07-30 15:42:44.000000000 +0200
++++ libpcap-1.8.0/Makefile.in	2016-08-05 02:22:41.124794216 +0200
+@@ -62,7 +62,7 @@ DEPENDENCY_CFLAG = @DEPENDENCY_CFLAG@
  PROG=libpcap
  
  # Standard CFLAGS
