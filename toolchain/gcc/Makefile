@@ -111,8 +111,8 @@ ifneq ($(ADK_TARGET_FPU),)
 GCC_CONFOPTS+=		--with-fpu=$(ADK_TARGET_FPU)
 endif
 
-ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
-GCC_CONFOPTS+=		--with-mode=thumb
+ifneq ($(ADK_TARGET_INSTRUCTION_SET),)
+GCC_CONFOPTS+=		--with-mode=$(ADK_TARGET_INSTRUCTION_SET)
 endif
 
 ifeq ($(ADK_TARGET_ARCH_METAG),y)

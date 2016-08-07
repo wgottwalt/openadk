@@ -1,9 +1,22 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_TARGET_ARCH_ARM_WITH_THUMB
-       bool
-       select ADK_KERNEL_ARM_THUMB
-       select ADK_KERNEL_THUMB2_KERNEL
-       depends on ADK_TARGET_ARCH_ARM
+choice
+prompt "Instruction set"
 
+config ADK_TARGET_ARCH_ARM_WITH_ARM
+	bool "arm"
+	depends on ADK_TARGET_WITH_MMU
+
+config ADK_TARGET_ARCH_ARM_WITH_THUMB
+	bool "thumb"
+	select ADK_KERNEL_ARM_THUMB
+	select ADK_KERNEL_THUMB2_KERNEL
+	depends on ADK_TARGET_CPU_WITH_THUMB || ADK_TARGET_CPU_WITH_THUMB2
+
+endchoice
+
+config ADK_TARGET_INSTRUCTION_SET
+	string
+	default "arm" if ADK_TARGET_ARCH_ARM_WITH_ARM
+	default "thumb" if ADK_TARGET_ARCH_ARM_WITH_THUMB
