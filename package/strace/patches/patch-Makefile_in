@@ -1,6 +1,6 @@
---- strace-4.11.orig/Makefile.in	2015-12-22 00:24:05.000000000 +0100
-+++ strace-4.11/Makefile.in	2015-12-25 23:38:03.184768052 +0100
-@@ -925,6 +925,9 @@ EXTRA_DIST = \
+--- strace-4.13.orig/Makefile.in	2016-07-26 18:17:18.000000000 +0200
++++ strace-4.13/Makefile.in	2016-08-01 07:01:11.473850810 +0200
+@@ -1055,6 +1055,9 @@ EXTRA_DIST = \
  	linux/crisv10/get_scno.c	\
  	linux/crisv10/get_syscall_args.c	\
  	linux/crisv10/get_syscall_result.c	\
@@ -10,7 +10,7 @@
  	linux/crisv10/userent.h		\
  	linux/crisv32/arch_regs.c	\
  	linux/crisv32/arch_sigreturn.c	\
-@@ -932,6 +935,9 @@ EXTRA_DIST = \
+@@ -1062,6 +1065,9 @@ EXTRA_DIST = \
  	linux/crisv32/get_scno.c	\
  	linux/crisv32/get_syscall_args.c	\
  	linux/crisv32/get_syscall_result.c	\

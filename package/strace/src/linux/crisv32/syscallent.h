@@ -105,7 +105,6 @@
 [ 87] = { 2,	TF,		sys_swapon,			"swapon"		},
 [ 88] = { 4,	0,		sys_reboot,			"reboot"		},
 [ 89] = { 3,	TD,		sys_readdir,			"readdir"		},
-[ 90] = { 6,	TD|TM|SI,	sys_old_mmap,			"old_mmap"		},
 [ 91] = { 2,	TM|SI,		sys_munmap,			"munmap"		},
 [ 92] = { 2,	TF,		sys_truncate,			"truncate"		},
 [ 93] = { 2,	TD,		sys_ftruncate,			"ftruncate"		},
