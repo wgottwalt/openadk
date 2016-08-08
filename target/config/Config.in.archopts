@@ -3,6 +3,7 @@
 
 choice
 prompt "Instruction set"
+depends on ADK_TARGET_ARCH_ARM
 
 config ADK_TARGET_ARCH_ARM_WITH_ARM
 	bool "arm"
