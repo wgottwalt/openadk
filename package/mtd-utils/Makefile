@@ -49,6 +49,7 @@ $(eval $(call PKG_template,FLASH_LOCK,flash-lock,$(PKG_VERSION)-${PKG_RELEASE},$
 
 HOST_STYLE:=		manual
 HOST_CPPFLAGS+=		-DWITHOUT_XATTR=1 -I./include
+HOST_MAKE_FLAGS+=	WITHOUT_UBI=1 WITHOUT_LZO=1
 
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
