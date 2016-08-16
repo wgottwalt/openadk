@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libressl
-PKG_VERSION:=		2.3.6
+PKG_VERSION:=		2.4.2
 PKG_RELEASE:=		1
-PKG_HASH:=		358a4779e6813bd06f07db0cf0f0fe531401ed0c6ed958973d404416c3d537fa
+PKG_HASH:=		5f87d778e5d62822d60e38fa9621c1c5648fc559d198ba314bd9d89cbf67d9e3
 PKG_DESCR:=		ssl/tls library
 PKG_SECTION:=		libs/crypto
 PKG_URL:=		http://www.libressl.org
@@ -26,8 +26,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBRESSL,libressl,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBRESSL,libressl,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,LIBRESSL_UTIL,libressl-util,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBRESSL_UTIL},${PKGSD_LIBRESSL_UTIL},${PKGSC_LIBRESSL_UTIL}))
-
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 ifeq ($(ADK_TARGET_USE_SSP),y)
 CONFIGURE_ARGS+=	--enable-hardening
