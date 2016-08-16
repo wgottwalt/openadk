@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		nfs-utils
-PKG_VERSION:=		1.3.2
+PKG_VERSION:=		1.3.4
 PKG_RELEASE:=		1
-PKG_HASH:=		5b9c72eef260b86a84619771e11bb013b99431e6b7ff0bbdc03fee90dba591f7
+PKG_HASH:=		c529c82a82320daae811f3d3a143f83d2714d7e7a43beadd42fcd6022c17d590
 PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		keyutils libtirpc rpcbind libdevmapper
@@ -38,13 +38,13 @@ $(eval $(call PKG_template,NFS_UTILS,nfs-utils,${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,NFS_UTILS_CLIENT,nfs-utils-client,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_CLIENT},${PKGSD_NFS_UTILS_CLIENT},${PKG_SECTION}))
 $(eval $(call PKG_template,NFS_UTILS_SERVER,nfs-utils-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_SERVER},${PKGSD_NFS_UTILS_SERVER},${PKG_SECTION}))
 
+XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 AUTOTOOL_STYLE:=	autoreconf
 ifeq ($(ADK_PACKAGE_NFS_UTILS_V4),y)
 CONFIGURE_ARGS+=	--enable-nfsv4 \
 			--disable-nfsv41 \
 			--with-krb5=${STAGING_TARGET_DIR}/usr \
 			--enable-gss
-#CONFIGURE_ENV+=		LIBS="-lrpcsecgss"
 else
 CONFIGURE_ARGS+=	--disable-nfsv4 \
 			--disable-nfsv41 \
