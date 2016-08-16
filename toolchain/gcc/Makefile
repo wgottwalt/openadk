@@ -115,6 +115,11 @@ ifneq ($(ADK_TARGET_INSTRUCTION_SET),)
 GCC_CONFOPTS+=		--with-mode=$(ADK_TARGET_INSTRUCTION_SET)
 endif
 
+# .symver is broken for Blackfin, simple C++ apps fail to link
+ifeq ($(ADK_TARGET_ARCH_BFIN),y)
+GCC_CONFOPTS+=		--disable-symvers
+endif
+
 ifeq ($(ADK_TARGET_ARCH_METAG),y)
 GCC_CONFOPTS+=		--with-cpu=2.1 --enable-meta-default --disable-symvers
 endif
