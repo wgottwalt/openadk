@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libnfsidmap
 PKG_VERSION:=		0.25
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_HASH:=		656d245d84400e1030f8f40a5a27da76370690c4a932baf249110f047fe7efcf
 PKG_DESCR:=		idmap library for nfsv4
 PKG_SECTION:=		libs/net
@@ -18,6 +18,9 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBNFSIDMAP,libnfsidmap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+CONFIGURE_ENV+=		ac_cv_func_malloc_0_nonnull=yes \
+			ac_cv_func_realloc_0_nonnull=yes
 
 libnfsidmap-install:
 	$(INSTALL_DIR) $(IDIR_LIBNFSIDMAP)/usr/lib/libnfsidmap
