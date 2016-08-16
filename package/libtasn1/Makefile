@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libtasn1
-PKG_VERSION:=		4.5
+PKG_VERSION:=		4.9
 PKG_RELEASE:=		1
-PKG_HASH:=		89b3b5dce119273431544ecb305081f3530911001bb12e5d76588907edb71bda
+PKG_HASH:=		4f6f7a8fd691ac2b8307c8ca365bad711db607d4ad5966f6938a9d2ecd65c920
 PKG_DESCR:=		asn.1 and der structures manipulation library
 PKG_SECTION:=		libs/crypto
 PKG_URL:=		http://www.gnupg.org/
@@ -19,7 +19,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBTASN1,libtasn1,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
-CONFIGURE_ARGS+=	--disable-gtk-doc-html
+CONFIGURE_ARGS+=	--disable-gtk-doc-html \
+			--disable-gcc-warnings
 
 libtasn1-install:
 	$(INSTALL_DIR) $(IDIR_LIBTASN1)/usr/lib
