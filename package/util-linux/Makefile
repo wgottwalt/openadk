@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		util-linux
-PKG_VERSION:=		2.28
+PKG_VERSION:=		2.28.1
 PKG_RELEASE:=		1
-PKG_HASH:=		395847e2a18a2c317170f238892751e73a57104565344f8644090c8b091014bb
+PKG_HASH:=		3ece4ea4a34ef786b68f5c415e848390424232abd1ee00f7ee5bddc30657b60f
 PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
 PKG_BUILDDEP:=		ncurses
-PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v$(PKG_VERSION)/
+PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.28/
 PKG_OPTS:=		dev
 PKG_NEEDS:=		threads rt
 
