@@ -11,6 +11,7 @@ PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
 PKG_DEPENDS:=		liblzo
 PKG_BUILDDEP:=		liblzo
+HOST_BUILDDEP:=		liblzo-host
 PKG_URL:=		http://www.lzop.org/
 PKG_SITES:=		http://www.lzop.org/download/
 PKG_BB:=		1
