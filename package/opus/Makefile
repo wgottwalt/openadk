@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		opus
-PKG_VERSION:=		1.1.1
+PKG_VERSION:=		1.1.3
 PKG_RELEASE:=		1
-PKG_HASH:=		9b84ff56bd7720d5554103c557664efac2b8b18acc4bbcc234cb881ab9a3371e
+PKG_HASH:=		58b6fe802e7e30182e95d0cde890c0ace40b6f125cffc50635f0ad2eef69b633
 PKG_DESCR:=		open, royalty-free, highly versatile audio codec
 PKG_SECTION:=		libs/audio
 PKG_URL:=		http://opus-codec.org/
