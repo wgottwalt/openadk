@@ -215,6 +215,7 @@ config ADK_KERNEL_HIGHMEM
 	default y if ADK_TARGET_MODEL_CUBOX_I2ULTRA
 	default y if ADK_TARGET_MODEL_CUBOX_I2EX
 	default y if ADK_TARGET_SYSTEM_ASUS_P5BVM
+	default y if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default n
 	help
 	  Enable high memory support.
