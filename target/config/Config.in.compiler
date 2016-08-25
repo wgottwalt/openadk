@@ -88,9 +88,9 @@ config ADK_TOOLCHAIN_GCC_OR1K
 	depends on ADK_TARGET_ARCH_OR1K
 
 config ADK_TOOLCHAIN_GCC_ARC
-	bool "arc"
-	depends on ADK_TARGET_ARCH_ARC
+	bool "arc-2016.09-eng010"
 	select ADK_DISABLE_HONOUR_CFLAGS
+	depends on ADK_TARGET_ARCH_ARC
 
 config ADK_TOOLCHAIN_GCC_4_4
 	bool "4.4.7"
@@ -98,9 +98,9 @@ config ADK_TOOLCHAIN_GCC_4_4
 
 config ADK_TOOLCHAIN_GCC_4_2
 	bool "4.2.4"
-	depends on ADK_TARGET_ARCH_METAG
 	select ADK_DISABLE_HONOUR_CFLAGS
 	select ADK_TOOLCHAIN_GCC_OLD
+	depends on ADK_TARGET_ARCH_METAG
 
 endchoice
 
