@@ -30,6 +30,7 @@ TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 CONFIGURE_ARGS+=	--disable-xmlto
 ifeq (${ADK_PACKAGE_ALSA_UTILS_WITH_ALSAMIXER},y)
 CONFIGURE_ARGS+=	--enable-alsamixer
+TARGET_LDFLAGS+=	-ltinfo
 else
 CONFIGURE_ARGS+=	--disable-alsamixer
 endif
