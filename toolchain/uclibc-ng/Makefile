@@ -244,12 +244,23 @@ ifeq ($(ADK_TARGET_CPU_X86_I686),y)
 endif
 endif
 
+# m68k
 ifeq ($(ADK_TARGET_ARCH_M68K),y)
 ifeq ($(ADK_TARGET_WITHOUT_MMU),y)
 ifeq ($(ADK_TARGET_BINFMT_FLAT_ONE)$(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
 	$(SED) 's/.*\(DOPIC\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 endif
+endif
+
+# mips/mips64 NaN
+ifeq ($(ADK_TARGET_ARCH_MIPS_WITH_NAN_2008),y)
+	$(SED) 's/.*\(CONFIG_MIPS_NAN_LEGACY\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_MIPS_NAN_2008\).*/\1=y/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_ARCH_MIPS_WITH_NAN_LEGACY),y)
+	$(SED) 's/.*\(CONFIG_MIPS_NAN_2008\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_MIPS_NAN_LEGACY\).*/\1=y/' ${WRKBUILD}/.config
 endif
 
 # mips64 abi
