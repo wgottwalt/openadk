@@ -21,6 +21,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBARCHIVE,libarchive,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,LIBARCHIVE,libarchive,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
+XAKE_FLAGS+=		V=1
 CONFIGURE_ARGS+=	--without-xml2
 
 libarchive-install:
