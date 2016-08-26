@@ -1,6 +1,6 @@
---- libressl-2.2.4.orig/Makefile.in	2015-10-16 00:05:34.000000000 +0200
-+++ libressl-2.2.4/Makefile.in	2015-12-06 00:03:23.848314300 +0100
-@@ -360,7 +360,7 @@ target_alias = @target_alias@
+--- libressl-2.4.2.orig/Makefile.in	2016-08-01 01:08:10.000000000 +0200
++++ libressl-2.4.2/Makefile.in	2016-08-22 18:34:29.881419200 +0200
+@@ -361,7 +361,7 @@ target_alias = @target_alias@
  top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
