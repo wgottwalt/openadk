@@ -7,7 +7,6 @@ depends on ADK_TARGET_ARCH_ARM
 
 config ADK_TARGET_ARCH_ARM_WITH_ARM
 	bool "arm"
-	depends on ADK_TARGET_WITH_MMU
 
 config ADK_TARGET_ARCH_ARM_WITH_THUMB
 	bool "thumb"

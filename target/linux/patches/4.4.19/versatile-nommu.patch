@@ -1,0 +1,16 @@
+diff -Nur linux-4.4.17.orig/arch/arm/mach-versatile/include/mach/hardware.h linux-4.4.17/arch/arm/mach-versatile/include/mach/hardware.h
+--- linux-4.4.17.orig/arch/arm/mach-versatile/include/mach/hardware.h	2016-08-10 11:49:43.000000000 +0200
++++ linux-4.4.17/arch/arm/mach-versatile/include/mach/hardware.h	2016-08-25 23:19:03.691716292 +0200
+@@ -30,8 +30,12 @@
+ #define VERSATILE_PCI_VIRT_BASE		(void __iomem *)0xe8000000ul
+ #define VERSATILE_PCI_CFG_VIRT_BASE	(void __iomem *)0xe9000000ul
+ 
++#ifdef CONFIG_MMU
+ /* macro to get at MMIO space when running virtually */
+ #define IO_ADDRESS(x)		(((x) & 0x0fffffff) + (((x) >> 4) & 0x0f000000) + 0xf0000000)
++#else
++#define IO_ADDRESS(x)		(x)
++#endif
+ 
+ #define __io_address(n)		((void __iomem __force *)IO_ADDRESS(n))
+ 
