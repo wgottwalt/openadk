@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		2.48.1
+PKG_VERSION:=		2.48.2
 PKG_RELEASE:=		1
 PKG_EXTRAVER:=		2.48
-PKG_HASH:=		74411bff489cb2a3527bac743a51018841a56a4d896cc1e0d0d54f8166a14612
+PKG_HASH:=		f25e751589cb1a58826eac24fbd4186cda4518af772806b666a3f91f66e6d3f4
 PKG_DESCR:=		low-level core library that forms the basis of gtk+
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpcre zlib
@@ -33,6 +33,7 @@ CONFIGURE_ARGS+=	--disable-mem-pools \
 			--disable-rebuilds \
 			--disable-fam \
 			--disable-dtrace \
+			--disable-compile-warnings \
 			--with-pcre=system \
 			--with-threads=posix
 CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
