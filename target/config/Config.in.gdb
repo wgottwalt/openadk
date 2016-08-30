@@ -2,6 +2,22 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
+prompt "GNU debugger"
+
+config ADK_TOOLCHAIN_WITHOUT_GDB
+	bool "disabled"
+	help
+	  Disable GDB for the host.
+
+config ADK_TOOLCHAIN_WITH_GDB
+	bool "enabled"
+	help
+	  Enable GDB for the host. Version selection will be used
+	  for gdb/gdbserver for the target.
+
+endchoice
+
+choice
 prompt "GNU debugger version"
 default ADK_TOOLCHAIN_GDB_H8300_GIT if ADK_TARGET_ARCH_H8300
 default ADK_TOOLCHAIN_GDB_NDS32 if ADK_TARGET_ARCH_NDS32

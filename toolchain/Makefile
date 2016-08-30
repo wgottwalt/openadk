@@ -45,11 +45,14 @@ TARGETS+=elf2flt
 ELF2FLT:=elf2flt-install
 endif
 
+ifeq ($(ADK_TOOLCHAIN_WITH_GDB),y)
 # disable gdb for some architectures
 ifeq ($(ADK_TARGET_ARCH_ARC)$(ADK_TARGET_ARCH_CR16)$(ADK_TARGET_ARCH_EPIPHANY)$(ADK_TARGET_ARCH_METAG)$(ADK_TARGET_ARCH_NDS32)$(ADK_TARGET_ARCH_OR1K),)
 TARGETS+=gdb
 GDB:=gdb-install
 endif
+endif
+
 ifeq (${ADK_PRELINK},y)
 TARGETS+=prelink-cross
 endif
