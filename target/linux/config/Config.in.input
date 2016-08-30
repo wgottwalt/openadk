@@ -120,6 +120,15 @@ config ADK_TARGET_USB_MOUSE
 	help
 	  Activate to get USB mouse support.
 
+config ADK_KERNEL_UHID
+	tristate "User-space I/O driver support for HID subsystem"
+	select ADK_KERNEL_INPUT
+	select ADK_KERNEL_HID
+	select ADK_KERNEL_HID_SUPPORT
+	select ADK_KERNEL_USB_HID
+	help
+	  User-space I/O driver support for HID subsystem
+
 config ADK_KERNEL_LOGITECH_DINOVO
 	bool "Support for Logitech DiNovo keyboard/mouse"
 	select ADK_KERNEL_HID_LOGITECH
