@@ -22,8 +22,8 @@ TARGET_CXXFLAGS:=	$(filter-out -msep-data,$(TARGET_CXXFLAGS))
 endif
 
 ifeq ($(ADK_TOOLCHAIN_WITH_GO),y)
-TARGET_CFLAGS+=		-lpthread
-TARGET_CXXFLAGS+=	-lpthread
+TARGET_CFLAGS+=		-lpthread -lrt
+TARGET_CXXFLAGS+=	-lpthread -lrt
 endif
 
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
