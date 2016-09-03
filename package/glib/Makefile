@@ -15,8 +15,7 @@ PKG_BUILDDEP:=		glib-host libffi gettext-tiny zlib libelf dbus pcre
 HOST_BUILDDEP:=		libffi-host gettext-tiny-host python2-host
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.gtk.org/
-PKG_SITES:=		http://gensho.acc.umu.se/pub/gnome/sources/glib/$(PKG_EXTRAVER)/
-PKG_NOPARALLEL:=	1
+PKG_SITES:=		http://ftp.gnome.org/pub/GNOME/sources/glib/$(PKG_EXTRAVER)/
 PKG_OPTS:=		dev noscripts
 
 include $(ADK_TOPDIR)/mk/host.mk
