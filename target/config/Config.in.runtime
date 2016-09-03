@@ -15,6 +15,12 @@ default ADK_RUNTIME_INIT_SYSV
 config ADK_RUNTIME_INIT_SYSV
 	bool "Use busybox init"
 
+config ADK_RUNTIME_INIT_S6
+	bool "Use s6 init and supervision"
+	select ADK_PACKAGE_S6
+	select ADK_PACKAGE_S6_PORTABLE_UTILS
+	select ADK_PACKAGE_S6_LINUX_UTILS
+
 config ADK_RUNTIME_INIT_SIMPLEINIT
 	bool "Use a very simple init"
 	select ADK_PACKAGE_SIMPLEINIT
