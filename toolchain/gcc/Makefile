@@ -21,11 +21,6 @@ TARGET_CFLAGS:=		$(filter-out -msep-data,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -msep-data,$(TARGET_CXXFLAGS))
 endif
 
-ifeq ($(ADK_TOOLCHAIN_WITH_GO),y)
-TARGET_CFLAGS+=		-lpthread -lrt
-TARGET_CXXFLAGS+=	-lpthread -lrt
-endif
-
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-bugurl="http://www.openadk.org/" \
 			--build=$(GNU_HOST_NAME) \
@@ -76,8 +71,7 @@ endif
 ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_DSBT),y)
 GCC_FINAL_CONFOPTS+=	--disable-shared
 else
-# uClibc/glibc uses libgcc_s.so.1 for pthread_cancel with dlopen
-GCC_FINAL_CONFOPTS+=	--enable-shared='libstdc++,libgcc' --enable-cxx-flags='-fPIC'
+GCC_FINAL_CONFOPTS+=	--enable-shared --enable-cxx-flags='-fPIC'
 endif
 
 ifeq ($(ADK_TOOLCHAIN_WITH_SSP),y)
