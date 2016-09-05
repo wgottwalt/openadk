@@ -1,0 +1,11 @@
+--- genimage-9.orig/image-rauc.c	2016-08-15 12:35:48.000000000 +0200
++++ genimage-9/image-rauc.c	2016-09-05 19:59:47.000000000 +0200
+@@ -62,7 +62,7 @@ static int rauc_generate(struct image *i
+ 		}
+ 
+ 		/* create parent directories if target needs it */
+-		path = strdupa(target);
++		path = strdup(target);
+ 		tmp = strrchr(path, '/');
+ 		if (tmp) {
+ 			*tmp = '\0';

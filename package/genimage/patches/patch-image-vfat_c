@@ -1,0 +1,11 @@
+--- genimage-9.orig/image-vfat.c	2016-01-12 17:49:29.000000000 +0100
++++ genimage-9/image-vfat.c	2016-09-05 19:59:30.000000000 +0200
+@@ -42,7 +42,7 @@ static int vfat_generate(struct image *i
+ 		struct image *child = image_get(part->image);
+ 		const char *file = imageoutfile(child);
+ 		const char *target = part->name;
+-		char *path = strdupa(target);
++		char *path = strdup(target);
+ 		char *next = path;
+ 
+ 		while ((next = strchr(next, '/')) != NULL) {

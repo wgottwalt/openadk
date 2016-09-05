@@ -27,6 +27,10 @@ config ADK_HOST_BUILD_FLEX
 	bool
 	default y
 
+config ADK_HOST_BUILD_GENIMAGE
+	bool
+	default y
+
 config ADK_HOST_BUILD_M4
 	bool
 	default y
