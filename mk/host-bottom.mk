@@ -7,9 +7,8 @@ hostpre-configure:
 host-configure:
 ${_HOST_CONFIGURE_COOKIE}: ${_HOST_PATCH_COOKIE}
 	mkdir -p ${WRKBUILD}
-	@$(CMD_TRACE) "configuring.. "
 ifneq (,$(filter autogen,${AUTOTOOL_STYLE}))
-	@$(CMD_TRACE) "autotool configuring.. "
+	@$(CMD_TRACE) "autotooling.. "
 	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) autogen.sh $(MAKE_TRACE)
 endif
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
@@ -19,6 +18,7 @@ ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
 endif
 	@${MAKE} hostpre-configure $(MAKE_TRACE)
 ifeq (${HOST_STYLE},)
+	@$(CMD_TRACE) "configuring.. "
 	cd ${WRKBUILD}; \
 	    env ${HOST_CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
@@ -32,6 +32,7 @@ ifeq (${HOST_STYLE},)
 	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 endif
 ifeq (${HOST_STYLE},auto)
+	@$(CMD_TRACE) "configuring.. "
 	cd ${WRKBUILD}; \
 	    env ${HOST_CONFIGURE_ENV} \
 	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
@@ -51,6 +52,7 @@ ifeq (${HOST_STYLE},auto)
 	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 endif
 ifeq (${HOST_STYLE},manual)
+	@$(CMD_TRACE) "configuring.. "
 	${MAKE} host-configure $(MAKE_TRACE)
 endif
 ifeq (${HOST_STYLE},perl)
@@ -66,8 +68,8 @@ endif
 
 host-build:
 ${_HOST_BUILD_COOKIE}: ${_HOST_CONFIGURE_COOKIE}
-ifneq (${HOST_STYLE},manual)
 	@$(CMD_TRACE) "compiling.. "
+ifneq (${HOST_STYLE},manual)
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    ${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
 endif

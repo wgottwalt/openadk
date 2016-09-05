@@ -62,7 +62,7 @@ endif
 	$(END_TRACE)
 
 %-compile:
-	$(START_TRACE) "package/$(patsubst %-compile,%,$@)-compile.. "
+	$(START_TRACE) "package/$(patsubst %-compile,%,$@).. "
 	@if test -f $(ADK_TOPDIR)/.rebuild.$(patsubst %-compile,%,$@); then \
 		$(MAKE) -C $(patsubst %-compile,%,$@) clean ; \
 		rm $(ADK_TOPDIR)/.rebuild.$(patsubst %-compile,%,$@) ; \

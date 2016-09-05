@@ -67,11 +67,11 @@ $(1):
 		if [ ! -z "$${PKG_GIT}" ]; then \
 		  case "$${PKG_GIT}" in \
 		    tag|branch) \
-			echo "Using git tag/branch: $${PKG_VERSION}"; \
+			echo "Using git tag/branch: $${PKG_VERSION}" $(DL_TRACE); \
 			git clone --depth 1 --branch $${PKG_VERSION} $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
 			;; \
 		    hash) \
-			echo "Using git hash: $${PKG_VERSION}"; \
+			echo "Using git hash: $${PKG_VERSION}" $(DL_TRACE); \
 			git clone $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
 			(cd $${PKG_NAME}-$${PKG_VERSION}; git checkout $(GITOPTS) $${PKG_VERSION}); \
 			;; \
@@ -87,7 +87,7 @@ $(1):
 		;; \
 	    http://*|https://*|ftp://*) \
 		for site in $${PKG_SITES} $${MASTER_SITE_BACKUP}; do \
-			: echo "$${FETCHCMD} $$$$site$$$$filename"; \
+			echo "$${FETCHCMD} $$$$site$$$$filename" $(DL_TRACE); \
 			rm -f "$$$$filename"; \
 			if $${FETCHCMD} $$$$filename $$$$site$$$$filename $(DL_TRACE); then \
 				: check the size here; \

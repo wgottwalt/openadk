@@ -24,19 +24,19 @@ do-configure:
 post-configure:
 ${_CONFIGURE_COOKIE}: ${_PATCH_COOKIE}
 ifneq (,$(filter bootstrap,${AUTOTOOL_STYLE}))
-	@$(CMD_TRACE) "autotool configuring.. "
+	@$(CMD_TRACE) "autotooling.. "
 	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) bootstrap* $(MAKE_TRACE)
 endif
 ifneq (,$(filter autogen,${AUTOTOOL_STYLE}))
-	@$(CMD_TRACE) "autotool configuring.. "
+	@$(CMD_TRACE) "autotooling.. "
 	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) autogen.sh $(MAKE_TRACE)
 endif
 ifneq (,$(filter autoconf,${AUTOTOOL_STYLE}))
-	@$(CMD_TRACE) "autotool configuring.. "
+	@$(CMD_TRACE) "autotooling.. "
 	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoconf $(MAKE_TRACE)
 endif
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
-	@$(CMD_TRACE) "autotool configuring.. "
+	@$(CMD_TRACE) "autotooling.. "
 	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -vif $(MAKE_TRACE)
 	@rm -rf ${WRKSRC}/autom4te.cache
 	@touch ${WRKDIR}/.autoreconf_done
