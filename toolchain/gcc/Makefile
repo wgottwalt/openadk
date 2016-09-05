@@ -123,7 +123,7 @@ GCC_CONFOPTS+=		--with-cpu=2.1 --enable-meta-default --disable-symvers
 endif
 
 ifeq ($(ADK_TARGET_CPU_CF),y)
-GCC_CONFOPTS+=		--enable-multilib --with-arch=cf
+GCC_CONFOPTS+=		--with-arch=cf --disable-multilib
 endif
 
 ifeq ($(ADK_TARGET_ARCH_NDS32),y)
