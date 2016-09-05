@@ -150,6 +150,13 @@ config ADK_TARGET_ROOTFS_ARCHIVE
 	help
 	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
 
+config ADK_TARGET_ROOTFS_GENIMAGE
+	bool "Create a disk image for the target"
+	select ADK_KERNEL_EXT2_FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
+	select ADK_TARGET_QEMU_WITH_BLOCK
+	help
+	  Create a complete disk image for the target with genimage.
+
 endchoice
 
 choice

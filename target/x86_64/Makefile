@@ -108,6 +108,9 @@ endif
 ifeq (${ADK_TARGET_FS},iso)
 imageinstall: ${FW_DIR}/${ROOTFSISO} targethelp
 endif
+ifeq (${ADK_TARGET_FS},genimage)
+imageinstall: ${FW_DIR}/${GENIMAGE} targethelp
+endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif

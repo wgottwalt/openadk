@@ -64,5 +64,6 @@ $(eval $(call rootfs_template,jffs2,JFFS2,$(MTDDEV) rootfstype=jffs2))
 $(eval $(call rootfs_template,nfsroot,NFSROOT,root=/dev/nfs ip=dhcp))
 $(eval $(call rootfs_template,encrypted,ENCRYPTED))
 $(eval $(call rootfs_template,iso,ISO))
+$(eval $(call rootfs_template,genimage,GENIMAGE))
 
 export ADK_TARGET_FS
