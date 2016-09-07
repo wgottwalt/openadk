@@ -126,7 +126,11 @@ fi
 rootdisk=$(readlink /dev/root)
 # strip partitions (f.e. mmcblk0p2, sda2, ..)
 rootdisk=${rootdisk%p*}
-rootdisk=${rootdisk%[1-9]}
+# do not cut 1-9 from mmcblk device names
+echo $rootdisk|grep mmcblk >/dev/null 2>&1
+if [ $? -ne 0 ]; then
+  rootdisk=${rootdisk%[1-9]}
+fi
 part=$(fdisk -l /dev/$rootdisk 2>/dev/null|awk '$5 == 88 { print $1 }')
 if [ -f .cfgfs ];then
   . /.cfgfs
