@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mutt
-PKG_VERSION:=		1.6.2
+PKG_VERSION:=		1.7.0
 PKG_RELEASE:=		1
-PKG_HASH:=		c5d02ef06486cdf04f9eeb9e9d7994890d8dfa7f47e7bfeb53a2a67da2ac1d8e
+PKG_HASH:=		1d3e987433d8c92ef88a604f4dcefdb35a86ce73f3eff0157e2e491e5b55b345
 PKG_DESCR:=		mail client for console
 PKG_SECTION:=		net/mail
 PKG_DEPENDS:=		libncurses
@@ -30,9 +30,8 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,MUTT,mutt,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_LDFLAGS+=	-ltinfo
-CONFIGURE_ARGS+=	--includedir=${WRKBUILD}/. \
-			--oldincludedir=${WRKBUILD}/. \
-			--with-homespool="~/Maildir" \
+CONFIGURE_ARGS+=	--with-homespool="~/Maildir" \
+			--with-curses="$(STAGING_TARGET_DIR)/usr" \
 			--enable-pop \
 			--enable-imap
 
