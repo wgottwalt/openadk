@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.43.1
+PKG_VERSION:=		1.43.2
 PKG_RELEASE:=		1
-PKG_HASH:=		97e36a029224e2606baa6e9ea693b04a4d192ccd714572a1b50a2df9c687b23d
+PKG_HASH:=		ddba23e44e06cbe32c7b1026bc92f9487b9cb08c89e961d007cb2a5e87c4ef5e
 PKG_DESCR:=		ext2/3/4 filesystem utilities
 PKG_SECTION:=		sys/fs
 PKG_BUILDDEP:=		util-linux
