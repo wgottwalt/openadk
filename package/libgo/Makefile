@@ -26,7 +26,7 @@ libgo-install:
 	$(INSTALL_DIR) ${IDIR_LIBGO}/$(ADK_TARGET_LIBC_PATH)
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS),)
 ifeq ($(ADK_TARGET_BINFMT_FLAT),)
-	${CP} ${STAGING_TARGET_DIR}/usr/lib/libgo*.so* ${IDIR_LIBGO}/$(ADK_TARGET_LIBC_PATH)
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/libgo.so* ${IDIR_LIBGO}/$(ADK_TARGET_LIBC_PATH)
 endif
 endif
 
