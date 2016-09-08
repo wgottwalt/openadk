@@ -9,4 +9,4 @@ add_rcconf syslogd_flags '-C32'
 add_rcconf inetd NO
 add_rcconf ntpd NO
 add_rcconf ntpdate NO
-add_rcconf ntpd_flags '-p time.fu-berlin.de'
+add_rcconf ntpd_flags '-p ptbtime1.ptb.de'

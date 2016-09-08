@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf rdate_flags "-nv pool.ntp.org"
+add_rcconf rdate_flags "-nv ptbtime1.ptb.de"
 add_service ntp 123/tcp
 add_service ntp 123/udp

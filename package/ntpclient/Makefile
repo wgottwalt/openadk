@@ -21,7 +21,7 @@ PKGFD_STARTUP:=	Fetch time on startup
 
 PKG_FLAVOURS_STRING_NTPCLIENT:=	HOST
 PKGFD_HOST:=	Fetch time from this NTP host
-PKGFX_HOST:=	pool.ntp.org
+PKGFX_HOST:=	ptbtime1.ptb.de
 PKGFC_HOST:=	depends on ADK_PACKAGE_NTPCLIENT_STARTUP
 
 include ${ADK_TOPDIR}/mk/package.mk
