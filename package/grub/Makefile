@@ -5,11 +5,11 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		grub
 PKG_VERSION:=		2.00
-PKG_RELEASE:=		6
+PKG_RELEASE:=		7
 PKG_HASH:=		784ec38e7edc32239ad75b8e66df04dc8bfb26d88681bc9f627133a6eb85c458
 PKG_DESCR:=		multiboot boot loader
 PKG_SECTION:=		base/boot
-PKG_BUILDDEP:=		bison-host
+PKG_BUILDDEP:=		bison-host grub-host
 PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		ftp://ftp.gnu.org/gnu/grub/
 PKG_NOPARALLEL:=	1
@@ -73,12 +73,19 @@ GRUB_MODULES:=		ext2 part_msdos biosdisk
 ifeq ($(ADK_PACKAGE_GRUB_PC),y)
 GRUB_ARCH:=		i386-pc
 CONFIGURE_ARGS+=	--with-platform=pc
+HOST_CONFIGURE_ARGS+=	--with-platform=pc
 endif
 ifeq ($(ADK_PACKAGE_GRUB_EFI_X86)$(ADK_PACKAGE_GRUB_EFI_X86_64),y)
 GRUB_ARCH:=		x86_64-efi
 CONFIGURE_ARGS+=	--with-platform=efi
+HOST_CONFIGURE_ARGS+=	--with-platform=efi
 endif
 
+HOST_CONFIGURE_ARGS+=	--enable-efiemu=no \
+			--disable-grub-mkfont \
+			--enable-device-mapper=no \
+			--enable-libzfs=no \
+			--disable-werror
 CONFIGURE_ARGS+=	--disable-grub-mkfont \
 			--enable-efiemu=no \
 			--enable-device-mapper=no \
@@ -87,20 +94,25 @@ CONFIGURE_ARGS+=	--disable-grub-mkfont \
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 grub-install:
+ifeq ($(ADK_PACKAGE_GRUB_PC),y)
 	${INSTALL_DIR} $(IDIR_GRUB)/boot/grub/${GRUB_ARCH}
 	${CP} ${WRKINST}/usr/lib/grub/${GRUB_ARCH}/*{mod,lst,img} \
 		$(IDIR_GRUB)/boot/grub/${GRUB_ARCH}/
+	$(CP) ./files/core.img.${GRUB_ARCH} \
+		$(IDIR_GRUB)/boot/grub/core.img
+	$(CP) $(WRKINST)/usr/lib/grub/i386-pc/boot.img \
+		$(FW_DIR)/
+else
+	$(INSTALL_DIR) $(FW_DIR)/efi-part/EFI/BOOT
+	${CP} ${WRKINST}/usr/lib/grub/${GRUB_ARCH} \
+		$(FW_DIR)/efi-part/EFI/BOOT
 	$(STAGING_HOST_DIR)/usr/bin/grub-mkimage \
 		-d $(STAGING_HOST_DIR)/usr/lib/grub/$(GRUB2_TUPLE) \
 		-O $(GRUB2_TUPLE) \
 		-o $(GRUB2_IMAGE) \
 		-p "$(GRUB2_PREFIX)" \
 		$(GRUB2_MODULES)
-ifeq ($(ADK_PACKAGE_GRUB_PC),y)
-	$(CP) ./files/core.img.${GRUB_ARCH} \
-		$(IDIR_GRUB)/boot/grub/core.img
-	$(CP) $(WRKINST)/usr/lib/grub/i386-pc/boot.img \
-		$(FW_DIR)/
+	$(CP) ./files/grub.cfg $(GRUB2_CFG)
 endif
 
 grub-tools-install:
