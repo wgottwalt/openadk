@@ -1,0 +1,27 @@
+#!/bin/sh
+#PKG electron-bin
+#INIT 98
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${electron_bin:-NO}" = x"NO" && exit 0
+	test x"$electron_bin" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
+	exec sh $0 start
+	;;
+start)
+	startx -- -nocursor
+	;;
+stop)
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?
