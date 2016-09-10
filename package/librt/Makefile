@@ -30,7 +30,7 @@ librt-install:
 ifeq ($(ADK_TARGET_LIB_MUSL),)
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS),)
 ifeq ($(ADK_TARGET_BINFMT_FLAT),)
-	${CP} ${STAGING_TARGET_DIR}/lib/librt*.so* ${IDIR_LIBRT}/$(ADK_TARGET_LIBC_PATH)
+	-${CP} ${STAGING_TARGET_DIR}/lib/librt*.so* ${IDIR_LIBRT}/$(ADK_TARGET_LIBC_PATH)
 endif
 endif
 endif
