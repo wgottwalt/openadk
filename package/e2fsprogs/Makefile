@@ -42,8 +42,10 @@ PKGSD_MKE2FS:=		ext2/3/4 filesystem creation utility
 PKGSC_MKE2FS:=		sys/fs
 PKGSS_MKE2FS:=		libe2fs libcom-err libblkid libuuid libncurses
 
+include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,E2FSPROGS,e2fsprogs,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,LIBE2FS,libe2fs,$(PKG_VERSION)-$(PKG_RELEASE),,$(PKGSD_LIBE2FS),$(PKGSC_LIBE2FS),$(PKG_OPTS)))
 $(eval $(call PKG_template,LIBCOM_ERR,libcom-err,$(PKG_VERSION)-$(PKG_RELEASE),,$(PKGSD_LIBCOM_ERR),$(PKGSC_LIBCOM_ERR),$(PKG_OPTS)))
 $(eval $(call PKG_template,LIBSS,libss,$(PKG_VERSION)-$(PKG_RELEASE),,$(PKGSD_LIBSS),$(PKGSC_LIBSS),$(PKG_OPTS)))
@@ -54,6 +56,10 @@ $(eval $(call PKG_template,E2FSCK,e2fsck,$(PKG_VERSION)-$(PKG_RELEASE),$(PKGSS_E
 $(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
 $(eval $(call PKG_template,TUNE2FS_STATIC,tune2fs-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
 
+HOST_CONFIGURE_ARGS+=	--disable-rpath \
+			--disable-uuidd \
+			--disable-defrag \
+			--disable-debugfs
 
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 CONFIGURE_ARGS+=	--disable-elf-shlibs
@@ -125,4 +131,5 @@ tune2fs-static-install:
 	${INSTALL_BIN} ${WRKBUILD}/misc/tune2fs.static \
 		${IDIR_TUNE2FS_STATIC}/usr/sbin/tune2fs
 
+include $(ADK_TOPDIR)/mk/host-bottom.mk
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
