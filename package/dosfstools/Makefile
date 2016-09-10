@@ -12,13 +12,18 @@ PKG_SECTION:=		sys/fs
 PKG_URL:=		http://www.daniel-baumann.ch/software/dosfstools/
 PKG_SITES:=		https://github.com/dosfstools/dosfstools/releases/download/v$(PKG_VERSION)/
 
+include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,DOSFSTOOLS,dosfstools,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,DOSFSTOOLS,dosfstools,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+HOST_CONFIGURE_ARGS+=	--enable-compat-symlinks
 
 dosfstools-install:
 	${INSTALL_DIR} ${IDIR_DOSFSTOOLS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/fsck.fat ${IDIR_DOSFSTOOLS}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/mkfs.fat ${IDIR_DOSFSTOOLS}/usr/sbin
 
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
