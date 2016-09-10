@@ -272,14 +272,18 @@ ${FW_DIR}/${ROOTFSISO}: ${TARGET_DIR} kernel-package
 		-boot-load-size 4 -boot-info-table ${TARGET_DIR}
 
 ${FW_DIR}/${GENIMAGE}: ${TARGET_DIR} kernel-package
-	rm -rf ${FW_DIR}/temp
-	mkdir -p ${FW_DIR}/temp
+	@rm -rf ${FW_DIR}/temp
+	@mkdir -p ${FW_DIR}/temp
+	PATH='${HOST_PATH}' mke2img \
+		-G 4 \
+		-d "$(TARGET_DIR)" \
+		-o $(FW_DIR)/rootfs.ext $(MAKE_TRACE)
 	PATH='${HOST_PATH}' genimage \
 		--config "$(ADK_TOPDIR)/target/$(ADK_TARGET_CPU_ARCH)/$(ADK_TARGET_SYSTEM)/genimage.cfg" \
 		--tmppath "${FW_DIR}/temp" \
 		--rootpath "$(TARGET_DIR)" \
 		--inputpath "$(FW_DIR)" \
-		--outputpath "$(FW_DIR)"
+		--outputpath "$(FW_DIR)" $(MAKE_TRACE)
 
 imageclean:
 	rm -f $(FW_DIR)/$(ADK_TARGET_SYSTEM)-* ${BUILD_DIR}/$(ADK_TARGET_SYSTEM)-*

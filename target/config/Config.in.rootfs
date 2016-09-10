@@ -152,8 +152,9 @@ config ADK_TARGET_ROOTFS_ARCHIVE
 
 config ADK_TARGET_ROOTFS_GENIMAGE
 	bool "Create a disk image for the target"
-	select ADK_KERNEL_EXT2_FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
-	select ADK_TARGET_QEMU_WITH_BLOCK
+	select ADK_KERNEL_EXT4_FS
+	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
+	select ADK_HOST_BUILD_GENIMAGE
 	help
 	  Create a complete disk image for the target with genimage.
 
