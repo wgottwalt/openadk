@@ -22,6 +22,9 @@ $(eval $(call PKG_template,XTERM,xterm,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 
 TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--with-app-defaults=/usr/lib/X11/app-defaults \
+			--x-includes="$(STAGING_TARGET_DIR)/usr/include" \
+			--x-libraries="$(STAGING_TARGET_DIR)/usr/lib" \
+			--with-freetype-cflags="-I$(STAGING_TARGET_DIR)/usr/include/freetype2" \
 			--disable-regex \
 			--disable-pty-handshake
 

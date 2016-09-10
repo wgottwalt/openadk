@@ -1,6 +1,6 @@
---- xterm-297.orig/main.c	2013-05-28 00:11:11.000000000 +0200
-+++ xterm-297/main.c	2013-10-31 12:24:52.000000000 +0100
-@@ -2583,7 +2583,7 @@ main(int argc, char *argv[]ENVP_ARG)
+--- xterm-325.orig/main.c	2016-06-01 11:13:46.000000000 +0200
++++ xterm-325/main.c	2016-09-09 22:25:42.000000000 +0200
+@@ -2637,7 +2637,7 @@ main(int argc, char *argv[]ENVP_ARG)
      }
  }
  
@@ -9,7 +9,7 @@
  #define USE_OPENPTY 1
  static int opened_tty = -1;
  #endif
-@@ -3134,7 +3134,7 @@ find_utmp(struct UTMP_STR *tofind)
+@@ -3204,7 +3204,7 @@ find_utmp(struct UTMP_STR *tofind)
  
  #define close_fd(fd) close(fd), fd = -1
  
@@ -18,7 +18,7 @@
  #define USE_NO_DEV_TTY 1
  #else
  #define USE_NO_DEV_TTY 0
-@@ -3378,7 +3378,8 @@ spawnXTerm(XtermWidget xw)
+@@ -3537,7 +3537,8 @@ spawnXTerm(XtermWidget xw)
  	    }
  #endif /* __MVS__ */
  
@@ -28,7 +28,7 @@
  	}
  
  	if (get_pty(&screen->respond, XDisplayString(screen->display))) {
-@@ -3807,8 +3808,9 @@ spawnXTerm(XtermWidget xw)
+@@ -3966,8 +3967,9 @@ spawnXTerm(XtermWidget xw)
  		   eg. by lineedit in the shell, or emacs, etc. then tio
  		   will have bad values.  Let's just get termio from the
  		   new tty and tailor it.  */
