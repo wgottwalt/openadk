@@ -11,7 +11,7 @@ PKG_DESCR:=		build cross platform desktop apps
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		alsa-lib nss nspr expat pango cairo cups libxcursor
 PKG_DEPENDS+=		libdbus libatk glib libxtst libgtk2 gdk-pixbuf libxcomposite
-PKG_DEPENDS+=		libxscrnsaver gconf harfbuzz libpng
+PKG_DEPENDS+=		libxscrnsaver gconf harfbuzz libpng xinit
 PKG_URL:=		http://electron.atom.io
 PKG_SITES:=		https://github.com/electron/electron/releases/download/v$(PKG_VERSION)/
 
