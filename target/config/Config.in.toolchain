@@ -65,10 +65,12 @@ config ADK_TOOLCHAIN_WITH_OBJC
 
 config ADK_TOOLCHAIN_WITH_FORTRAN
 	bool "enable Fortran"
+	select ADK_PACKAGE_LIBGFORTRAN
 	default n
 
 config ADK_TOOLCHAIN_WITH_GO
 	bool "enable Go"
+	select ADK_PACKAGE_LIBGO
 	default n
 
 endmenu
