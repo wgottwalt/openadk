@@ -116,6 +116,10 @@ config ADK_HOST_BUILD_E2FSPROGS
 	bool
 	default n
 
+config ADK_HOST_BUILD_GPTFDISK
+	bool
+	default n
+
 config ADK_HOST_BUILD_MKE2IMG
 	bool
 	default n
@@ -129,6 +133,7 @@ config ADK_HOST_BUILD_GENIMAGE
 	select ADK_HOST_BUILD_MKE2IMG
 	select ADK_HOST_BUILD_MTOOLS
 	select ADK_HOST_BUILD_GENEXT2FS
+	select ADK_HOST_BUILD_GPTFDISK
 	select ADK_HOST_BUILD_E2FSPROGS
 	select ADK_HOST_BUILD_DOSFSTOOLS
 	default n
