@@ -25,13 +25,10 @@ PKG_SITES:=		http://icedtea.classpath.org/download/source/
 DISTFILES:=		icedtea-$(PKG_VERSION).tar.xz
 WRKDIST=		${WRKDIR}/icedtea-${PKG_VERSION}
 
-GCJ_VER:=		5.3.0
+GCJ_VER:=		5.4.0
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
-
-PKG_CHOICES_OPENJDK7:=	ZERO
-PKGCD_ZERO:=		zero-assembly backend
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -65,15 +62,8 @@ ifeq ($(ADK_TARGET_CPU_ARCH),x86_64)
 JDKARCH:=		amd64
 endif
 
-ifeq ($(ADK_PACKAGE_OPENJDK7_ZERO),y)
-CONFIGURE_BACKEND:=	--enable-zero
-endif
-
-ifeq ($(ADK_PACKAGE_OPENJDK7_JAMVM),y)
-CONFIGURE_BACKEND:=	--enable-jamvm
-endif
-
-CONFIGURE_COMMON:=	--disable-docs \
+CONFIGURE_ARGS:=	--enable-zero \
+			--disable-docs \
 			--with-jdk-home=$(BOOTSTRAPJDK) \
 			--with-java=$(BOOTSTRAPJDK)/bin/java \
 			--with-javac=$(BOOTSTRAPJDK)/bin/javac \
@@ -97,11 +87,8 @@ CONFIGURE_COMMON:=	--disable-docs \
 			--disable-system-lcms \
 			--disable-system-kerberos \
 			--disable-compile-against-syscalls \
-			--without-rhino
-
-CONFIGURE_ARGS+=	$(CONFIGURE_BACKEND)
-CONFIGURE_ARGS+=	$(CONFIGURE_COMMON)
-CONFIGURE_ARGS+=	--disable-bootstrap
+			--without-rhino \
+			--disable-bootstrap
 
 CONFIGURE_ENV+=		LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib
 MAKE_ENV+=		ALT_COMPILER_PATH=$(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin \
@@ -112,6 +99,7 @@ MAKE_ENV+=		ALT_COMPILER_PATH=$(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME)/bin \
 			OTHER_CXXFLAGS='$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS)' \
 			OTHER_LDFLAGS='$(TARGET_LDFLAGS)' \
 			OTHER_LDLIBS='$(TARGET_LIBS)' \
+			NO_DOCS=true \
 			GCC_HONOUR_COPTS=s CROSS_COMPILE_ARCH=$(JDKARCH) QEMU=$(QEMU) \
 			LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib
 
@@ -119,6 +107,7 @@ ALL_TARGET:=		icedtea
 
 # host stuff
 OPENJDK_NATIVE_ENV:=	JAVACFLAGS="-cp ${STAGING_HOST_DIR}/usr/share/java/libgcj-$(GCJ_VER).jar" \
+			NO_DOCS=true \
 			LD_LIBRARY_PATH=$(STAGING_HOST_DIR)/usr/lib:$(STAGING_HOST_DIR)/usr/lib64 \
 			BOOTCLASSPATH="$(STAGING_HOST_DIR)/usr/share/jamvm/classes.zip:$(STAGING_HOST_DIR)/usr/share/classpath/glibj.zip" \
 			OTHER_CPPFLAGS='$(HOST_CPPFLAGS)' \
