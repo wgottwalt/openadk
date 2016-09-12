@@ -9,6 +9,7 @@ KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 
 QEMU_ARCH:=x86_64
 QEMU_ARGS:=-M pc
+QEMU_ARGS+=-L . -bios bios.bin
 QEMU_ARGS+=${ADK_QEMU_ARGS}
 QEMU_ARGS+=-net user -net nic,model=e1000
 
@@ -83,6 +84,16 @@ endif
 ifeq ($(ADK_TARGET_FS),iso)
 targethelp:
 	@echo 'ISO image is at $<'
+endif
+ifeq ($(ADK_TARGET_FS),genimage)
+targethelp:
+	@echo "The disk image is: $(FW_DIR)/disk.img"
+	@echo "Use following command to install it on SD card:"
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} $(FW_DIR)/disk.img'
+else
+	@echo 'sudo dd if=$(FW_DIR)/disk.img of=/dev/sdX bs=2048k'
+endif
 endif
 
 # image creation and kernel install
