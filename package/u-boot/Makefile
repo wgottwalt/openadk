@@ -68,19 +68,26 @@ do-build:
 		PATH='$(HOST_PATH)' \
 		CROSS_COMPILE='$(TARGET_CROSS)' \
 		GCC_HONOUR_COPTS=s $(MAKE))
-	(cd $(WRKBUILD) && env CROSS_COMPILE='$(TARGET_CROSS)' \
+ifneq ($(OS_FOR_BUILD),Darwin)
+	(cd $(WRKBUILD) && env \
+		PATH='$(HOST_PATH)' \
+		CROSS_COMPILE='$(TARGET_CROSS)' \
 		GCC_HONOUR_COPTS=s $(MAKE) env)
+endif
 
 u-boot-install:
 	$(CP) $(WRKBUILD)/$(UBOOT) $(FW_DIR)
 	$(INSTALL_DIR) $(IDIR_U_BOOT)/etc
 	$(CP) ./files/fw_env.config $(IDIR_U_BOOT)/etc
+ifneq ($(OS_FOR_BUILD),Darwin)
+	(cd $(WRKBUILD) && env \
 	$(INSTALL_DIR) $(IDIR_U_BOOT)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/tools/env/fw_printenv \
 		$(IDIR_U_BOOT)/usr/bin
 	(cd $(IDIR_U_BOOT)/usr/bin && ln -sf fw_printenv fw_setenv)
 	$(INSTALL_BIN) ./files/uboot_print_env $(IDIR_U_BOOT)/usr/bin
 	$(INSTALL_BIN) ./files/uboot_set_env $(IDIR_U_BOOT)/usr/bin
+endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	$(INSTALL_BIN) ./files/boot.script.bpi $(FW_DIR)
 endif
