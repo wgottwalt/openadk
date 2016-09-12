@@ -19,6 +19,7 @@ endchoice
 
 choice
 prompt "GNU debugger version"
+depends on ADK_TOOLCHAIN_WITH_GDB
 default ADK_TOOLCHAIN_GDB_H8300_GIT if ADK_TARGET_ARCH_H8300
 default ADK_TOOLCHAIN_GDB_NDS32 if ADK_TARGET_ARCH_NDS32
 default ADK_TOOLCHAIN_GDB_7_11_1
@@ -50,10 +51,6 @@ config ADK_TOOLCHAIN_GDB_7_9_1
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_H8300
 	depends on !ADK_TARGET_ARCH_NDS32
-
-config ADK_TOOLCHAIN_GDB_7_8_2
-	bool "7.8.2"
-	depends on ADK_TARGET_ARCH_MICROBLAZE
 
 config ADK_TOOLCHAIN_GDB_6_7_1
 	bool "6.7.1"

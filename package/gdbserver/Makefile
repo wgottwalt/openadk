@@ -2,13 +2,18 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include ${ADK_TOPDIR}/rules.mk
-include ${ADK_TOPDIR}/toolchain/gdb/Makefile.inc
 
 PKG_NAME:=		gdbserver
+PKG_VERSION:=		7.11.1
+PKG_RELEASE:=		1
+PKG_HASH:=		e9216da4e3755e9f414c1aa0026b626251dfc57ffe572a266e98da4f6988fc70
 PKG_DESCR:=		remote programm debugger utility
 PKG_SECTION:=		app/debug
+PKG_SITES:=		${MASTER_SITE_GNU:=gdb/}
 PKG_DEPENDS:=		libthread-db
+
 PKG_LIBC_DEPENDS:=	!musl
+PKG_ARCH_DEPENDS:=	!microblaze
 
 ifeq ($(ADK_TOOLCHAIN_GDB_6_7_1),y)
 DISTFILES:=		gdb-6.7.1-avr32-2.1.5.tar.bz2
