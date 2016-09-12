@@ -18,7 +18,10 @@ PKG_URL:=		http://openjdk.org/
 PKG_HG:=		http://hg.openjdk.java.net/jdk8u/jdk8u
 PKG_SITES:=		${PKG_HG}/archive/
 PKG_NOPARALLEL:=	1
-ICEDTEA_VERSION:=	3.0.0pre07
+ICEDTEA_VERSION:=	3.1.0
+
+PKG_HOST_DEPENDS:=	linux
+PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
 
 DISTFILES:=		jdk$(PKG_VERSION).tar.bz2
 WRKSRC=			${WRKDIST}/openjdk
@@ -35,13 +38,7 @@ ifeq ($(ADK_TARGET_CPU_ARCH),x86_64)
 JDKARCH:=		amd64
 endif
 
-TARGET_LDFLAGS:=	-lm
-# uclibc-ng with iconv-tiny/libiconv needs -liconv
-ifeq ($(ADK_TARGET_LIBC_ICONV),)
-ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
-TARGET_LDFLAGS+=	-liconv
-endif
-endif
+TARGET_LDFLAGS:=	-lm -liconv
 
 CONFIG_STYLE:=		basic
 CONFIGURE_ARGS+=	--prefix=$(WRKINST)/usr \
@@ -79,6 +76,7 @@ XAKE_FLAGS+=		LD=$(TARGET_CC) \
 			BUILD_CC=$(HOST_CC) \
 			BUILD_LD=$(HOST_CC) \
 			WARNINGS_ARE_ERRORS='' \
+			JOBS="$(ADK_JOBS)" \
 			LOG=debug
 
 post-extract:
