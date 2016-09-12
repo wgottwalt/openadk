@@ -30,6 +30,7 @@ host-build:
 	fi
 	cp $(DL_DIR)/ecj*.jar $(WRKBUILD)/lib/optional/ecj.jar
 	(cd ${WRKBUILD}; \
+		export ANT_OPTS="-Xms256m -Xmx256m" ;\
 		export JAVA_HOME=$(STAGING_HOST_DIR)/usr/lib/jvm ;\
 		export CLASSPATH=$(STAGING_HOST_DIR)/usr/lib/jvm/lib/tools.jar ;\
 		export JAVAC=$(STAGING_HOST_DIR)/usr/bin/ecj ;\
