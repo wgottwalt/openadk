@@ -274,6 +274,7 @@ ${FW_DIR}/${ROOTFSISO}: ${TARGET_DIR} kernel-package
 ${FW_DIR}/${GENIMAGE}: ${TARGET_DIR} kernel-package
 	@rm -rf ${FW_DIR}/temp
 	@mkdir -p ${FW_DIR}/temp
+	@dd if=/dev/zero of=${FW_DIR}/cfgfs.img bs=16M count=1 $(MAKE_TRACE)
 	PATH='${HOST_PATH}' mke2img \
 		-G 4 \
 		-d "$(TARGET_DIR)" \
