@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		pango
-PKG_VERSION:=		1.40.0
+PKG_VERSION:=		1.40.3
 PKG_EXTRAVER:=		1.40
 PKG_RELEASE:=		1
-PKG_HASH:=		da17985df314cb07d066ab5424f59c21ce973ece05b7de4df04d798ec8511c8b
+PKG_HASH:=		abba8b5ce728520c3a0f1535eab19eac3c14aeef7faa5aded90017ceac2711d3
 PKG_DESCR:=		library for laying out and rendering of text
 PKG_SECTION:=		libs/fonts
 PKG_BUILDDEP:=		libXft glib cairo harfbuzz libstdcxx fontconfig
