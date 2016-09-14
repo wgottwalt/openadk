@@ -1,0 +1,12 @@
+diff -Naur linux-4.7.3/arch/avr32/boards/grasshopper/setup.c linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/setup.c
+--- linux-4.7.3/arch/avr32/boards/grasshopper/setup.c	2016-09-14 10:48:53.403638569 +0200
++++ linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/setup.c	2016-09-14 11:26:49.572343447 +0200
+@@ -169,7 +169,7 @@
+ #endif
+ 
+ #ifdef CONFIG_MMC_ATMELMCI
+-//    at32_add_device_mci(0, &mci0_data); /* MMC/SD */
++    at32_add_device_mci(0, &mci0_data); /* MMC/SD */
+ #endif
+ 
+ //    printk("registering penirq gpio-pin...\n");

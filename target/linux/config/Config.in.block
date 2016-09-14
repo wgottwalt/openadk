@@ -441,6 +441,21 @@ config ADK_KERNEL_MMC_SUNXI
 	default y if ADK_TARGET_SYSTEM_BANANA_PRO
 	default n
 
+config ADK_KERNEL_MMC_ATMELMCI
+	bool "Atmel SD/MMC Driver (Multimedia Card Interface)"
+	select ADK_KERNEL_BLK_DEV
+	select ADK_KERNEL_MMC
+	select ADK_KERNEL_MMC_BLOCK
+	select ADK_KERNEL_MMC_BLOCK_BOUNCE
+	select ADK_KERNEL_MMC_SDHCI
+	select ADK_KERNEL_MMC_SDHCI_IO_ACCESSORS
+	select ADK_KERNEL_MMC_SDHCI_PLTFM
+	depends on ADK_TARGET_CPU_AVR32
+	default n
+	help
+	  Atmel Multimedia Card Interface driver for AT32
+	  and AT91 plattforms.
+
 endmenu
 
 menu "Block driver support"
