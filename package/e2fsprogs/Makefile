@@ -57,6 +57,7 @@ $(eval $(call PKG_template,E2FSCK_STATIC,e2fsck-static,${PKG_VERSION}-${PKG_RELE
 $(eval $(call PKG_template,TUNE2FS_STATIC,tune2fs-static,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_E2FSCK_STATIC},${PKGSC_E2FSCK_STATIC}))
 
 HOST_CONFIGURE_ARGS+=	--disable-rpath \
+			--disable-nls \
 			--disable-uuidd \
 			--disable-defrag \
 			--disable-debugfs

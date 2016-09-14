@@ -1,5 +1,5 @@
 --- gptfdisk-1.0.1.orig/Makefile	2015-10-19 00:35:18.000000000 +0200
-+++ gptfdisk-1.0.1/Makefile	2016-09-12 22:33:25.606675951 +0200
++++ gptfdisk-1.0.1/Makefile	2016-09-14 08:25:55.000000000 +0200
 @@ -1,5 +1,5 @@
 -CC=gcc
 -CXX=g++
@@ -13,7 +13,7 @@
  
  cgdisk: $(LIB_OBJS) cgdisk.o gptcurses.o
 -	$(CXX) $(LIB_OBJS) cgdisk.o gptcurses.o $(LDFLAGS) -luuid -lncursesw -o cgdisk
-+	$(CXX) $(LIB_OBJS) cgdisk.o gptcurses.o $(LDFLAGS) -luuid -lncurses -ltinfo -o cgdisk
++	$(CXX) $(LIB_OBJS) cgdisk.o gptcurses.o $(LDFLAGS) -luuid -lncurses -o cgdisk
  #	$(CXX) $(LIB_OBJS) cgdisk.o gptcurses.o $(LDFLAGS) -licuio -licuuc -luuid -lncurses -o cgdisk
  
  sgdisk: $(LIB_OBJS) sgdisk.o gptcl.o
