@@ -16,7 +16,7 @@ PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 atmel-ngw100 banana-pro solidrun-imx6
+PKG_SYSTEM_DEPENDS:=	beaglebone-black raspberry-pi raspberry-pi2 atmel-ngw100 banana-pro solidrun-imx6
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -41,6 +41,10 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 CONFIG:=		Bananapro_defconfig
 UBOOT:=			u-boot-sunxi-with-spl.bin
+endif
+ifeq ($(ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK),y)
+CONFIG:=		am335x_evm_defconfig
+UBOOT:=			u-boot.img
 endif
 
 HOST_MAKE_FLAGS+=	HOSTCFLAGS="$(HOST_CPPFLAGS) $(HOST_CFLAGS)" \
@@ -94,6 +98,10 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	$(INSTALL_BIN) $(WRKBUILD)/SPL $(FW_DIR)
 	$(INSTALL_BIN) ./files/boot.script.imx6 $(FW_DIR)
+endif
+ifeq ($(ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK),y)
+	$(CP) ./files/uEnv.txt.bbb $(FW_DIR)/uEnv.txt
+	$(INSTALL_BIN) $(WRKBUILD)/MLO $(FW_DIR)
 endif
 
 include $(ADK_TOPDIR)/mk/host-bottom.mk

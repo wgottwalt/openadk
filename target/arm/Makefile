@@ -128,6 +128,12 @@ ifeq ($(ADK_TARGET_QEMU),y)
 	@echo 'qemu-system-arm $(QEMU_ARGS) -nographic -kernel $(FW_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(ROOTFSJFFS2)'
 endif
 endif
+ifeq ($(ADK_TARGET_FS),genimage)
+targethelp:
+	@echo "The disk image is: $(FW_DIR)/disk.img"
+	@echo "Use following command to install it on SD card:"
+	@echo 'sudo dd if=$(FW_DIR)/disk.img of=/dev/sdX bs=2048k'
+endif
 
 kernel-strip:
 ifeq ($(ADK_TARGET_KERNEL_VERSION_RPI),y)
@@ -156,6 +162,11 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB)$(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB_NOMMU),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		dtbs $(MAKE_TRACE)
+endif
+ifeq ($(ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK),y)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
+		am335x-boneblack.dtb
+	cp $(LINUX_DIR)/arch/arm/boot/dts/am335x-boneblack.dtb ${TARGET_DIR}/boot
 endif
 ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
@@ -191,6 +202,9 @@ imageinstall: kernel-install dtb-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethe
 endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 imageinstall: dtb-install createinitramfs targethelp
+endif
+ifeq (${ADK_TARGET_FS},genimage)
+imageinstall: dtb-install $(FW_DIR)/$(GENIMAGE) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
