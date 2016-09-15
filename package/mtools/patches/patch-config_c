@@ -1,0 +1,11 @@
+--- mtools-4.0.18.orig/config.c	2011-06-30 08:49:04.000000000 +0200
++++ mtools-4.0.18/config.c	2016-09-14 08:27:25.286075212 +0200
+@@ -54,7 +54,7 @@ static int token_nr; /* number of tokens
+ static char default_drive='\0'; /* default drive */
+ 
+ /* "environment" variables */
+-unsigned int mtools_skip_check=0;
++unsigned int mtools_skip_check=1;
+ unsigned int mtools_fat_compatibility=0;
+ unsigned int mtools_ignore_short_case=0;
+ unsigned int mtools_rate_0=0;
