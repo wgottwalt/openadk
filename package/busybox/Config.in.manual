@@ -264,6 +264,12 @@ config BUSYBOX_DISABLE_BZIP2
 	depends on ADK_PACKAGE_BZIP2
 	default n
 
+config BUSYBOX_DISABLE_BUNZIP2
+	bool
+	default y if ADK_PACKAGE_BZIP2
+	depends on ADK_PACKAGE_BZIP2
+	default n
+
 config BUSYBOX_DISABLE_IP
 	bool
 	default y if ADK_PACKAGE_IP

@@ -79,7 +79,7 @@ config BUSYBOX_FEATURE_AR_CREATE
 
 config BUSYBOX_BUNZIP2
 	bool "bunzip2"
-	depends on !BUSYBOX_DISABLE_BZIP2
+	depends on !BUSYBOX_DISABLE_BUNZIP2
 	default n
 	help
 	  bunzip2 is a compression utility using the Burrows-Wheeler block
