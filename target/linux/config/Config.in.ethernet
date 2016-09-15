@@ -357,15 +357,18 @@ config ADK_KERNEL_IBMVETH
 	  IBM ethernet driver
 
 config ADK_KERNEL_MACB
-	tristate "Atmel NGW100 network driver"
+	tristate "Atmel AT32/AT91 network driver"
 	select ADK_KERNEL_NET_CADENCE
-	depends on ADK_TARGET_SYSTEM_ATMEL_NGW100 \
+	depends on ADK_TARGET_CPU_AVR32 \
 		|| ADK_TARGET_SYSTEM_QEMU_ARM_XILINX_ZYNQ
 	default y if ADK_TARGET_SYSTEM_ATMEL_NGW100
+	default y if ADK_TARGET_SYSTEM_ATMEL_GRASSHOPPER
 	default y if ADK_TARGET_SYSTEM_QEMU_ARM_XILINX_ZYNQ
 	default n
 	help
-	  Atmel NGW100 network driver
+	  Ethernet Driver for Atmel AT32 and AT91 parts. This driver
+	  also supports the Cadence GEM (Gigabit Ethernet MAC found
+	  in some ARM SoC devices).
 
 config ADK_KERNEL_TI_DAVINCI_MDIO
 	tristate "BeagleBone Back Davinci"
