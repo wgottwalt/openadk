@@ -10,7 +10,7 @@
 # KERNEL_RELEASE:  OpenADK internal versioning
 # KERNEL_VERSION:  final kernel version how we want to identify a specific kernel
 
-ifeq ($(ADK_TARGET_KERNEL_VERSION_GIT)$(ADK_TARGET_KERNEL_VERSION_RPI)$(ADK_TARGET_KERNEL_VERSION_FSLC),y)
+ifeq ($(ADK_TARGET_KERNEL_GIT),y)
 ifneq ($(ADK_TARGET_KERNEL_HASH),)
 KERNEL_FILE_VER:=	$(ADK_TARGET_KERNEL_HASH)
 else

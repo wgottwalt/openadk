@@ -13,17 +13,25 @@ default ADK_TARGET_KERNEL_VERSION_4_7
 
 config ADK_TARGET_KERNEL_VERSION_GIT
 	bool "linux-git"
+	select ADK_TARGET_KERNEL_GIT
 	depends on !ADK_TARGET_ARCH_NDS32
 
 config ADK_TARGET_KERNEL_VERSION_FSLC
 	bool "linux-fslc"
+	select ADK_TARGET_KERNEL_GIT
 	select ADK_HOST_NEED_LZOP
 	select ADK_TARGET_KERNEL_IMAGE
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 
 config ADK_TARGET_KERNEL_VERSION_RPI
 	bool "linux-rpi"
+	select ADK_TARGET_KERNEL_GIT
 	depends on ADK_TARGET_BOARD_BCM28XX
+
+config ADK_TARGET_KERNEL_VERSION_BB
+	bool "linux-bb"
+	select ADK_TARGET_KERNEL_GIT
+	depends on ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
 
 config ADK_TARGET_KERNEL_VERSION_4_7
 	bool "4.7.3"
@@ -185,15 +193,21 @@ config ADK_KERNEL_GITVER
 	default "git" if ADK_TARGET_KERNEL_VERSION_GIT
 	default "rpi" if ADK_TARGET_KERNEL_VERSION_RPI
 	default "fslc" if ADK_TARGET_KERNEL_VERSION_FSLC
+	default "bb" if ADK_TARGET_KERNEL_VERSION_BB
+
+config ADK_TARGET_KERNEL_GIT
+	bool
 
 config ADK_TARGET_KERNEL_REPO
 	string "git repository"
 	depends on ADK_TARGET_KERNEL_VERSION_GIT \
 		|| ADK_TARGET_KERNEL_VERSION_RPI \
+		|| ADK_TARGET_KERNEL_VERSION_BB \
 		|| ADK_TARGET_KERNEL_VERSION_FSLC
 	default "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git" if ADK_TARGET_KERNEL_VERSION_GIT
 	default "https://github.com/raspberrypi/linux.git" if ADK_TARGET_KERNEL_VERSION_RPI
 	default "https://github.com/SolidRun/linux-fslc.git" if ADK_TARGET_KERNEL_VERSION_FSLC
+	default "https://github.com/beagleboard/linux.git" if ADK_TARGET_KERNEL_VERSION_BB
 	help
 	  GIT repository to use.
 

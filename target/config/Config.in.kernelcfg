@@ -8,7 +8,8 @@ depends on ADK_TARGET_OS_LINUX
 config ADK_TARGET_KERNEL_USE_MINICONFIG
 	bool "Use mini.config from OpenADK"
 	depends on !ADK_TARGET_KERNEL_VERSION_RPI \
-		&& !ADK_TARGET_KERNEL_VERSION_FSLC
+		&& !ADK_TARGET_KERNEL_VERSION_FSLC \
+		&& !ADK_TARGET_KERNEL_VERSION_BB
 
 config ADK_TARGET_KERNEL_USE_DEFCONFIG
 	bool "Use defconfig from Linux kernel"
@@ -27,4 +28,5 @@ config ADK_TARGET_KERNEL_DEFCONFIG
 	default "nsim_hs_defconfig" if ADK_TARGET_SYSTEM_NSIM_ARCV2
 	default "10m50_defconfig" if ADK_TARGET_SYSTEM_QEMU_NIOS2
 	default "orca_defconfig" if ADK_TARGET_SYSTEM_ANDES_AG101P
+	default "bb.org_defconfig" if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
 
