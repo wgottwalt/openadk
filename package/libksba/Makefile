@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		f6c2883cebec5608692d8730843d87f237c0964d923bbe7aa89c05f20558ad4f
 PKG_DESCR:=		working with X.509 certificates
 PKG_SECTION:=		libs/crypto
+PKG_DEPENDS:=		libgpg-error
 PKG_URL:=		https://www.gnupg.org/(fr)/related_software/libksba/index.html
 PKG_SITES:=		https://www.gnupg.org/ftp/gcrypt/libksba/
 PKG_OPTS:=		dev
