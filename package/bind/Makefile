@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		f8d412b38d5ac390275b943bde69f4608f67862a45487ec854b30e4448fcb056
 PKG_DESCR:=		dns server
 PKG_SECTION:=		net/dns
-PKG_DEPENDS:=		libbind libxml2
+PKG_DEPENDS:=		libxml2
 PKG_BUILDDEP:=		libxml2
 PKG_NEEDS:=		c++
 PKG_URL:=		https://www.isc.org/software/bind/
@@ -17,7 +17,7 @@ PKG_SITES:=		ftp://ftp.isc.org/isc/bind9/${PKG_VERSION}/
 PKG_LIBNAME:=		libbind
 PKG_OPTS:=		dev
 
-PKG_CHOICES_BIND:=	WITH_LIBRESSL WITH_OPENSSL
+PKG_CHOICES_LIBBIND:=	WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
 PKGCB_WITH_LIBRESSL:=	libressl
 PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
@@ -27,7 +27,12 @@ PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_SUBPKGS:=		BIND_SERVER BIND_NSUPDATE BIND_RNDC BIND_CHECK BIND_DNSSEC BIND_HOST BIND_DIG LIBBIND
+PKG_SUBPKGS:=		LIBBIND BIND_SERVER BIND_NSUPDATE BIND_RNDC BIND_CHECK BIND_DNSSEC BIND_HOST BIND_DIG
+PKGSD_LIBBIND:=		library for the bind software suite
+PKGSC_LIBBIND:=		libs/net
+PKGSD_BIND_SERVER:=	dns server
+PKGSC_BIND_SERVER:=	net/dns
+PKGSS_BIND_SERVER:=	libbind libxml2
 PKGSD_BIND_NSUPDATE:=	nsupdate utility
 PKGSC_BIND_NSUPDATE:=	net/dns
 PKGSS_BIND_NSUPDATE:=	libbind libxml2
@@ -46,11 +51,9 @@ PKGSS_BIND_HOST:=	libbind libxml2
 PKGSD_BIND_DIG:=	dig utility
 PKGSC_BIND_DIG:=	net/dns
 PKGSS_BIND_DIG:=	libbind libxml2
-PKGSD_LIBBIND:=		library for the bind software suite
-PKGSC_LIBBIND:=		libs/net
 
-PKG_FLAVOURS_BIND_SERVER:=	WITH_IPV6
-PKGFD_WITH_IPV6:=		enable IPv6 support
+PKG_FLAVOURS_LIBBIND:=	WITH_IPV6
+PKGFD_WITH_IPV6:=	enable IPv6 support
 
 include ${ADK_TOPDIR}/mk/package.mk
 
@@ -76,7 +79,7 @@ CONFIGURE_ARGS+=	--with-randomdev=/dev/urandom \
 			--enable-epoll \
 			--with-libtool
 
-ifneq (${ADK_PACKAGE_BIND_WITH_IPV6},)
+ifneq (${ADK_PACKAGE_LIBBIND_WITH_IPV6},)
 CONFIGURE_ARGS+=	--enable-ipv6
 else
 CONFIGURE_ARGS+=	--disable-ipv6
