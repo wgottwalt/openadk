@@ -24,7 +24,7 @@
 #include <linux/elf.h>
 #define ELFDATA2MSB   2
 #else
-#include <sys/elf.h>
+#include <elf.h>
 #endif
 
 #define swab16(x)  (((x)<<8&0xFF00)|((x)>>8&0x00FF))
