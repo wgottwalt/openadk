@@ -1,7 +1,7 @@
 $Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- pciutils-3.1.7.orig/lib/configure	2009-07-04 18:11:04.000000000 +0200
-+++ pciutils-3.1.7/lib/configure	2010-10-10 20:14:17.000000000 +0200
-@@ -64,7 +64,6 @@ case $sys in
+--- pciutils-3.5.1.orig/lib/configure	2015-09-14 17:47:08.000000000 +0200
++++ pciutils-3.5.1/lib/configure	2016-09-17 09:09:30.578679773 +0200
+@@ -65,7 +65,6 @@ case $sys in
  		echo_n " sysfs proc"
  		echo >>$c '#define PCI_HAVE_PM_LINUX_SYSFS'
  		echo >>$c '#define PCI_HAVE_PM_LINUX_PROC'

@@ -1,6 +1,24 @@
---- pciutils-3.1.7.orig/Makefile	2010-01-31 18:42:12.000000000 +0100
-+++ pciutils-3.1.7/Makefile	2010-10-10 20:15:01.000000000 +0200
-@@ -52,7 +52,7 @@ PCIINC_INS=lib/config.h lib/header.h lib
+--- pciutils-3.5.1.orig/Makefile	2016-05-22 09:57:08.000000000 +0200
++++ pciutils-3.5.1/Makefile	2016-09-17 09:12:16.449352397 +0200
+@@ -19,7 +19,7 @@ ZLIB=
+ DNS=
+ 
+ # Build libpci as a shared library (yes/no; or local for testing; requires GCC)
+-SHARED=no
++SHARED=yes
+ 
+ # Use libkmod to resolve kernel modules on Linux (yes/no, default: detect)
+ LIBKMOD=
+@@ -32,7 +32,7 @@ HWDB=
+ ABI_VERSION=.3
+ 
+ # Installation directories
+-PREFIX=/usr/local
++PREFIX=/usr
+ SBINDIR=$(PREFIX)/sbin
+ SHAREDIR=$(PREFIX)/share
+ IDSDIR=$(SHAREDIR)
+@@ -59,7 +59,7 @@ PCIINC_INS=lib/config.h lib/header.h lib
  
  export
  
@@ -9,3 +27,12 @@
  
  lib/$(PCILIB): $(PCIINC) force
  	$(MAKE) -C lib all
+@@ -125,7 +125,7 @@ endif
+ endif
+ 
+ ifeq ($(SHARED),yes)
+-install: install-pcilib
++install: install-lib
+ endif
+ 
+ install-pcilib: lib/$(PCILIB)
