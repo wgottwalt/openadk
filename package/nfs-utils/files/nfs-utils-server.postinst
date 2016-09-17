@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
-add_rcconf nfs_utils_server NO
+add_rcconf nfsd NO
 add_rcconf nfs_server_version 3

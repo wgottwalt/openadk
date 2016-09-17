@@ -44,6 +44,9 @@ for service in $(grep ^ADK_RUNTIME_START_ $topdir/.config |grep -v ADK_RUNTIME_S
 	if [ $rcname = "iptables" ];then
 		rcname=firewall
 	fi
+	if [ $rcname = "nfs-utils-server" ];then
+		rcname=nfsd
+	fi
 	if [ $rcname = "openssh_server" ];then
 		rcname=openssh
 	fi
