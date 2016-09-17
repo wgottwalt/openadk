@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
-PKG_VERSION:=		2016.07
+PKG_VERSION:=		2016.09
 PKG_RELEASE:=		1
-PKG_HASH:=		974fb7225c0af6a721307631f66b81e20dbda82a4d7cc32aba2a625727231253
+PKG_HASH:=		994e7b9e0e350d9f91f5892d5e5bff00d3714a4962f520f78a64a461ef950ba9
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 HOST_BUILDDEP:=		libressl-host device-tree-compiler-host
