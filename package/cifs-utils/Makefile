@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		d07152a807de6840566bbcc69a97ff6fa17fca4e09ceb4641d74882a83e67125
 PKG_DESCR:=		network filesystem utilities
 PKG_SECTION:=		net/fs
+PKG_KDEPENDS:=		cifs
 PKG_URL:=		https://wiki.samba.org/index.php/LinuxCIFS_utils
 PKG_SITES:=		https://ftp.samba.org/pub/linux-cifs/cifs-utils/
 
