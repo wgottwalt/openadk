@@ -1,6 +1,0 @@
-#!/bin/sh
-. $IPKG_INSTROOT/etc/functions.sh
-add_rcconf electron_bin NO
-gid=$(get_next_gid)
-add_group electron $gid
-add_user electron $(get_next_uid) $gid /opt/electron /bin/sh
