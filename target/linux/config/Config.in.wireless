@@ -36,6 +36,9 @@ config ADK_KERNEL_RT2X00_LIB_PCI
 config ADK_KERNEL_NET_VENDOR_ATHEROS
 	bool
 
+config ADK_KERNEL_WLAN_VENDOR_BROADCOM
+	bool
+
 config ADK_KERNEL_ATH_CARDS
 	bool
 
@@ -125,36 +128,30 @@ depends on ADK_TARGET_WITH_CARDBUS \
 	|| ADK_TARGET_GENERIC
 
 config ADK_KERNEL_BRCMFMAC
-	tristate
+	tristate "Broadcom brcmfmac wireless driver"
+	select ADK_KERNEL_WIRELESS
+	select ADK_KERNEL_WLAN_80211
+	select ADK_KERNEL_CFG80211
+	select ADK_KERNEL_BCMA_POSSIBLE
+	select ADK_KERNEL_RFKILL
+	select ADK_KERNEL_WLAN_VENDOR_BROADCOM
+	select ADK_PACKAGE_BRCMFMAC_FIRMWARE
 
 config ADK_KERNEL_BRCMDBG
 	bool
 
 config ADK_KERNEL_BRCMFMAC_SDIO
-	tristate "Broadcom brcmfmac wireless driver (SDIO)"
-	select ADK_KERNEL_WIRELESS
-	select ADK_KERNEL_WLAN_80211
-	select ADK_KERNEL_CFG80211
-	select ADK_KERNEL_BCMA_POSSIBLE
-	select ADK_KERNEL_RFKILL
-	select ADK_KERNEL_BRCMFMAC
-	select ADK_PACKAGE_BRCMFMAC_FIRMWARE
+	bool "Broadcom brcmfmac wireless driver (SDIO)"
+	select ADK_KERNEL_BRCMFMAC m
 	depends on ADK_TARGET_WITH_SDIO
-	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 	help
 	  Driver for Broadcom FullMac wireless cards (SDIO).
 
 config ADK_KERNEL_BRCMFMAC_USB
-	tristate "Broadcom brcmfmac wireless driver (USB)"
-	select ADK_KERNEL_WIRELESS
-	select ADK_KERNEL_WLAN_80211
-	select ADK_KERNEL_CFG80211
-	select ADK_KERNEL_BCMA_POSSIBLE
-	select ADK_KERNEL_RFKILL
-	select ADK_KERNEL_BRCMFMAC
-	select ADK_KERNEL_BRCMDBG
-	select ADK_PACKAGE_BRCMFMAC_FIRMWARE
+	bool "Broadcom brcmfmac wireless driver (USB)"
+	select ADK_KERNEL_BRCMFMAC m
 	depends on ADK_TARGET_WITH_USB
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI3
 	default n
