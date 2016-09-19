@@ -1,6 +1,16 @@
---- e2fsprogs-1.42.12.orig/util/subst.c	2014-08-02 22:26:22.000000000 +0200
-+++ e2fsprogs-1.42.12/util/subst.c	2015-02-24 13:53:42.034808695 +0100
-@@ -363,7 +363,7 @@ int main(int argc, char **argv)
+--- e2fsprogs-1.43.2.orig/util/subst.c	2016-06-07 07:01:19.000000000 +0200
++++ e2fsprogs-1.43.2/util/subst.c	2016-09-19 13:21:04.000000000 +0200
+@@ -22,9 +22,7 @@
+ #ifdef HAVE_SYS_TYPES_H
+ #include <sys/types.h>
+ #endif
+-#ifdef HAVE_SYS_STAT_H
+ #include <sys/stat.h>
+-#endif
+ #include <fcntl.h>
+ #include <time.h>
+ #include <utime.h>
+@@ -389,7 +387,7 @@ int main(int argc, char **argv)
  		if (fd > 0) {
  			/* save the original atime, if possible */
  			if (fstat(fd, &stbuf) == 0) {
