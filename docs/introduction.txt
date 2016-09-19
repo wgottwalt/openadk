@@ -16,12 +16,21 @@ OpenADK is useful mainly for people working with embedded systems,
 but can be used by people playing with emulators or small netbooks
 needing a fast and small Linux system.
 
+OpenADK can also be used to generate a cross-toolchain for any kind
+of architecture and C library combination. It supports uClibc-ng, musl,
+GNU libc and newlib.
+
 Embedded systems often use processors that are not the regular x86
-processors everyone is used to having in his PC. They can be PowerPC
-processors, MIPS processors, ARM processors, etc.
+processors everyone is used to having in his PC. 
+
+OpenADK supports 38 different architectures:
+AARCH64, Alpha, ARC, ARM, AVR32, Blackfin, C6X, CR16, CRIS, Epiphany, FR-V,
+H8/300, HPPA, IA64, LM32, M32R, M68K, METAG, Microblaze, MIPS, MIPS64, MN10300,
+Moxie, MSP430, NDS32, NIOS2, OR1K, PPC, PPC64, S/390, SH, SPARC, SPARC64, Tile,
+V850, X86, X86_64 and Xtensa.
 
 OpenADK supports numerous processors and their variants; it also comes
-with default configurations for some embedded systems, emulators and netbooks.
+with default configurations for many embedded systems, emulators and netbooks.
 (Raspberry PI, Cubox-i, Qemu, Aranym, PCEngines APU, Lemote Yeelong, IBM X40 and more)
 
 OpenADK is not a Linux distribution and there are no releases or binary
