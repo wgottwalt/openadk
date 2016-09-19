@@ -55,23 +55,17 @@ endchoice
 menu "Compiler language support"
 config ADK_TOOLCHAIN_WITH_CXX
 	bool "enable C++"
-	default y if ADK_TARGET_OS_LINUX \
-		&& !ADK_TARGET_ARCH_H8300
-	default n
 
 config ADK_TOOLCHAIN_WITH_OBJC
 	bool "enable Objective-C"
-	default n
 
 config ADK_TOOLCHAIN_WITH_FORTRAN
 	bool "enable Fortran"
 	select ADK_PACKAGE_LIBGFORTRAN
-	default n
 
 config ADK_TOOLCHAIN_WITH_GO
 	bool "enable Go"
 	select ADK_PACKAGE_LIBGO
-	default n
 
 endmenu
 
