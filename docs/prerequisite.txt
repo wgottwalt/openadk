@@ -27,8 +27,11 @@ package names may vary between host systems.
 ** +gzip+
 ** +perl+
 ** +tar+
+** +git+
+** +strings+
 ** +curl or wget+
 ** +ncurses development files+
+** +zlib development files+
 ** +libc development files+
 
 There is a check for the required versions of these tools in advance,
