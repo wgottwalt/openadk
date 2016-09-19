@@ -614,5 +614,3 @@ config ADK_SIMPLE_NETWORK_CONFIG_NS
 config ADK_SIMPLE_NETWORK_CONFIG_PROXY
 	string "HTTP-Proxy (f.e. http://10.0.0.2:8080)"
 	depends on ADK_SIMPLE_NETWORK_CONFIG
-	default ""
-

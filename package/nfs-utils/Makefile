@@ -23,6 +23,7 @@ PKGSD_NFS_UTILS_CLIENT:=client utilities
 PKGSN_NFS_UTILS_CLIENT:=nfs-utils
 PKGSD_NFS_UTILS_SERVER:=server daemons and utilities
 PKGSN_NFS_UTILS_SERVER:=nfs-utils
+PKGSK_NFS_UTILS_SERVER:=nfsd
 
 PKG_CHOICES_NFS_UTILS:=	V3 V4
 PKGCD_V3:=		nfs version 3

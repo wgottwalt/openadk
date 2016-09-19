@@ -178,8 +178,10 @@ endif
 endif
 	printf "\n" >> ${IDIR_BASE_FILES}/etc/network/interfaces
 
+ifneq (${ADK_SIMPLE_NETWORK_CONFIG_NS},)
 	rm ${IDIR_BASE_FILES}/etc/resolv.conf
 	printf "nameserver ${ADK_SIMPLE_NETWORK_CONFIG_NS}\n" > ${IDIR_BASE_FILES}/etc/resolv.conf
+endif
 ifneq (${ADK_SIMPLE_NETWORK_CONFIG_PROXY},)
 	printf "http_proxy=${ADK_SIMPLE_NETWORK_CONFIG_PROXY}\n" >> ${IDIR_BASE_FILES}/etc/profile
 	printf "https_proxy=${ADK_SIMPLE_NETWORK_CONFIG_PROXY}\n" >> ${IDIR_BASE_FILES}/etc/profile
