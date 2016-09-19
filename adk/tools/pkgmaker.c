@@ -1,7 +1,7 @@
 /*
  * pkgmaker - create package meta-data for OpenADK buildsystem
  *
- * Copyright (C) 2010-2015 Waldemar Brodkorb <wbx@openadk.org>
+ * Copyright (C) 2010-2016 Waldemar Brodkorb <wbx@openadk.org>
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -603,6 +603,8 @@ int main() {
 						continue;
 					if ((parse_var_hash(buf, "PKGSC_", pkgmap)) == 0)
 						continue;
+					if ((parse_var_hash(buf, "PKGSK_", pkgmap)) == 0)
+						continue;
 					if ((parse_var_hash(buf, "PKGSN_", pkgmap)) == 0)
 						continue;
 				}
@@ -798,6 +800,20 @@ int main() {
 					val = strtok_r(hvalue, " ", &saveptr);
 					while (val != NULL) { 
 						fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
+						val = strtok_r(NULL, " ", &saveptr);
+					}
+				}
+				memset(hkey, 0, MAXVAR);
+
+				/* add sub package kernel selections */
+				strncat(hkey, "PKGSK_", 6);
+				strncat(hkey, toupperstr(token), strlen(token));
+				memset(hvalue, 0, MAXVALUE);
+				result = strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
+				if (result == 1) {
+					val = strtok_r(hvalue, " ", &saveptr);
+					while (val != NULL) { 
+						fprintf(cfg, "\tselect ADK_KERNEL_%s\n", toupperstr(val));
 						val = strtok_r(NULL, " ", &saveptr);
 					}
 				}
