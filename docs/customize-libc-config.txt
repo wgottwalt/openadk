@@ -18,7 +18,7 @@ a new uClibc-ng config from the existing one:
 ----------------
  $ tar xvf dl/uClibc-ng-x.y.z.tar.xz
  $ cd uClibc-ng-x.y.z
- $ cp ../target/<arch>/uclibc.config .config
+ $ cp ../target/<arch>/uclibc-ng.config .config
  $ make menuconfig
 ----------------
 
@@ -26,7 +26,7 @@ Make all required changes. Then copy the newly created uClibc-ng configuration b
 and rebuild your targetsystem, including the toolchain components:
 
 ----------------
- $ cp .config ../target/<arch>/uclibc.config
+ $ cp .config ../target/<arch>/uclibc-ng.config
  $ cd .. && make cleandir && make
 ----------------
 
