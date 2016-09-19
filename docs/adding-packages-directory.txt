@@ -39,7 +39,7 @@ are space separated and can be negated with ! as a prefix.
 
 * Target system 
 ** variable used PKG_SYSTEM_DEPENDS
-** for allowed values see the output of: find target/*/systems -type f |grep -v toolchain
+** for allowed values see the output of: find target/*/systems -type f
 
 * Target C library
 ** variable used PKG_LIBC_DEPENDS
@@ -49,9 +49,9 @@ are space separated and can be negated with ! as a prefix.
 ** variable used PKG_HOST_DEPENDS
 ** allowed values are: linux darwin cygwin freebsd netbsd openbsd
 
-* C++ support
-** variable used PKG_NEED_CXX
-** Comment string: `C++`
+* Special support needed (Toolchain with Threads, Realtime or C++ enabled)
+** variable used PKG_NEEDS
+** allowed values are: threads rt c++
 
 Further formatting details: see xref:writing-rules-mk[the writing
 rules].
