@@ -21,6 +21,12 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,HEIMDAL,heimdal,$(PKG_VERSION)-${PKG_RELEASE}))
 
+HOST_STYLE:=		manual
+
+ifeq ($(OS_FOR_BUILD),Darwin)
+HOST_CFLAGS+=		-DHAVE_STRLCPY -DHAVE_STRLCAT
+endif
+
 HOST_CONFIGURE_ARGS+=	--disable-pk-init \
 			--without-openldap \
 			--without-x \
@@ -32,8 +38,37 @@ HOST_CONFIGURE_ARGS+=	--disable-pk-init \
 			--disable-heimdal-documentation \
 			--disable-otp
 
-hostpost-install:
-	$(CP) $(STAGING_HOST_DIR)/usr/libexec/heimdal/asn1_compile \
+host-configure:
+	cd ${WRKBUILD}; \
+	    env ${HOST_CONFIGURE_ENV} \
+	    ${BASH} ${WRKSRC}/${CONFIGURE_PROG} \
+	    --program-prefix= \
+	    --program-suffix= \
+	    --prefix=/usr \
+	    --bindir=/usr/bin \
+	    --datadir=/usr/share \
+	    --mandir=/usr/share/man \
+	    --libdir=/usr/lib \
+	    --libexecdir=/usr/libexec \
+	    --localstatedir=/var \
+	    --sysconfdir=/etc \
+	    --disable-dependency-tracking \
+	    --disable-libtool-lock \
+	    --disable-nls \
+	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
+
+host-build:
+	${MAKE} -C ${WRKBUILD}/include
+	${MAKE} -C ${WRKBUILD}/lib/roken
+	${MAKE} -C ${WRKBUILD}/lib/vers
+	${MAKE} -C ${WRKBUILD}/lib/libedit
+	#${MAKE} -C ${WRKBUILD}/lib/com_err compile_et$(EXEEXT) LDFLAGS="-all-static"
+	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT) LDFLAGS="-all-static"
+
+host-install:
+
+heimdal-hostinstall:
+	$(CP) $(WRKBUILD)/lib/asn1/asn1_compile \
 		$(STAGING_HOST_DIR)/usr/bin
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
