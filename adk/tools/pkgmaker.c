@@ -893,8 +893,10 @@ int main() {
 							fprintf(cfg, "\tselect ADK_PACKAGE_LIBPTHREAD\n");
 						if (strncmp(token, "rt", 2) == 0)
 							fprintf(cfg, "\tselect ADK_PACKAGE_LIBRT\n");
-						if (strncmp(token, "c++", 3) == 0)
+						if (strncmp(token, "c++", 3) == 0) {
+							fprintf(cfg, "\tselect ADK_TOOLCHAIN_WITH_CXX\n");
 							fprintf(cfg, "\tselect ADK_PACKAGE_LIBSTDCXX\n");
+						}
 						if (strncmp(token, "mmu", 3) == 0)
 							fprintf(cfg, "\tdepends on ADK_TARGET_WITH_MMU\n");
 						token = strtok(NULL, " ");

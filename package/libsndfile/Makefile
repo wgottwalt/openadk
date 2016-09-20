@@ -11,6 +11,7 @@ PKG_DESCR:=		reading and writing files containing sampled sound
 PKG_SECTION:=		libs/audio
 PKG_URL:=		http://www.mega-nerd.com/libsndfile/
 PKG_SITES:=		http://www.mega-nerd.com/libsndfile/files/
+PKG_NEEDS:=		c++
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
