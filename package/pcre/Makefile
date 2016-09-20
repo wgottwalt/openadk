@@ -31,6 +31,12 @@ CONFIGURE_ARGS+=	--enable-utf \
 			--enable-unicode-properties
 XAKE_FLAGS+=		${TARGET_CONFIGURE_OPTS}
 
+ifeq ($(ADK_PACKAGE_LIBPCRECPP),y)
+CONFIGURE_ARGS+=	--enable-cpp
+else
+CONFIGURE_ARGS+=	--disable-cpp
+endif
+
 libpcre-install:
 	${INSTALL_DIR} ${IDIR_LIBPCRE}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libpcre{,posix}.so* ${IDIR_LIBPCRE}/usr/lib
