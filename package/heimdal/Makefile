@@ -62,12 +62,14 @@ host-build:
 	${MAKE} -C ${WRKBUILD}/lib/roken
 	${MAKE} -C ${WRKBUILD}/lib/vers
 	${MAKE} -C ${WRKBUILD}/lib/libedit
-	#${MAKE} -C ${WRKBUILD}/lib/com_err compile_et$(EXEEXT) LDFLAGS="-all-static"
+	${MAKE} -C ${WRKBUILD}/lib/com_err compile_et$(EXEEXT) LDFLAGS="-all-static"
 	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT) LDFLAGS="-all-static"
 
 host-install:
 
 heimdal-hostinstall:
+	$(CP) $(WRKBUILD)/lib/com_err/compile_et \
+		$(STAGING_HOST_DIR)/usr/bin
 	$(CP) $(WRKBUILD)/lib/asn1/asn1_compile \
 		$(STAGING_HOST_DIR)/usr/bin
 
