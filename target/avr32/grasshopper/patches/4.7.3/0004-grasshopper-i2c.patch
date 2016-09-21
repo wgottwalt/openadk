@@ -1,12 +1,25 @@
+diff -Naur linux-4.7.3/arch/avr32/boards/grasshopper/Kconfig linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/Kconfig
+--- linux-4.7.3/arch/avr32/boards/grasshopper/Kconfig	2016-09-20 11:29:35.780351249 +0200
++++ linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/Kconfig	2016-09-20 11:39:58.981762577 +0200
+@@ -44,4 +44,9 @@
+ 	depends on BOARD_GRASSHOPPER_MMC
+ 	default n
+ 
++config BOARD_GRASSHOPPER_I2C
++	bool "Enable I2C interface"
++	depends on I2C && I2C_GPIO
++	default y
++
+ endif	# BOARD_GRASSHOPPER
 diff -Naur linux-4.7.3/arch/avr32/boards/grasshopper/setup.c linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/setup.c
---- linux-4.7.3/arch/avr32/boards/grasshopper/setup.c	2016-09-14 10:48:53.403638569 +0200
-+++ linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/setup.c	2016-09-14 11:40:15.735513299 +0200
+--- linux-4.7.3/arch/avr32/boards/grasshopper/setup.c	2016-09-20 11:29:35.781351262 +0200
++++ linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/setup.c	2016-09-20 11:32:21.270587433 +0200
 @@ -129,6 +129,28 @@
  };
  #endif
  
 +/* I2C/TWI */
-+#ifdef CONFIG_I2C
++#ifdef CONFIG_BOARD_GRASSHOPPER_I2C
 +static struct i2c_gpio_platform_data i2c_gpio_data = {
 +    .sda_pin = GPIO_PIN_PA(6),
 +    .scl_pin = GPIO_PIN_PA(7),
@@ -28,14 +41,14 @@ diff -Naur linux-4.7.3/arch/avr32/boards/grasshopper/setup.c linux-4.7.3.grassho
 +#endif
 +
  /* MCI */
- #ifdef CONFIG_MMC_ATMELMCI
+ #ifdef CONFIG_BOARD_GRASSHOPPER_MMC
  static struct mci_platform_data __initdata mci0_data = {
 @@ -168,6 +190,22 @@
          ATMEL_LCDC_PRI_CONTROL | ATMEL_LCDC_PRI_24BIT);
  #endif
  
 +    // I2C / TWI
-+#ifdef CONFIG_I2C
++#ifdef CONFIG_BOARD_GRASSHOPPER_I2C
 +    /* all these i2c/smbus pins should have external pullups for
 +     * open-drain sharing among all I2C devices.  SDA and SCL do;
 +     * PB28/EXTINT3 doesn't; it should be SMBALERT# (for PMBus),
@@ -50,6 +63,6 @@ diff -Naur linux-4.7.3/arch/avr32/boards/grasshopper/setup.c linux-4.7.3.grassho
 +    i2c_register_board_info(0, i2c_info, ARRAY_SIZE(i2c_info));
 +#endif
 +
- #ifdef CONFIG_MMC_ATMELMCI
- //    at32_add_device_mci(0, &mci0_data); /* MMC/SD */
+ #ifdef CONFIG_BOARD_GRASSHOPPER_MMC
+     at32_add_device_mci(0, &mci0_data); /* MMC/SD */
  #endif
