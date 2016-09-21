@@ -58,12 +58,12 @@ host-configure:
 	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 
 host-build:
-	${MAKE} -C ${WRKBUILD}/include
-	${MAKE} -C ${WRKBUILD}/lib/roken
-	${MAKE} -C ${WRKBUILD}/lib/vers
-	${MAKE} -C ${WRKBUILD}/lib/libedit
-	${MAKE} -C ${WRKBUILD}/lib/com_err compile_et$(EXEEXT) LDFLAGS="-all-static"
-	${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT) LDFLAGS="-all-static"
+	PATH='$(HOST_PATH)' ${MAKE} -C ${WRKBUILD}/include
+	PATH='$(HOST_PATH)' ${MAKE} -C ${WRKBUILD}/lib/roken
+	PATH='$(HOST_PATH)' ${MAKE} -C ${WRKBUILD}/lib/vers
+	PATH='$(HOST_PATH)' ${MAKE} -C ${WRKBUILD}/lib/libedit
+	PATH='$(HOST_PATH)' ${MAKE} -C ${WRKBUILD}/lib/com_err compile_et$(EXEEXT) LDFLAGS="-all-static"
+	PATH='$(HOST_PATH)' ${MAKE} -C ${WRKBUILD}/lib/asn1 asn1_compile$(EXEEXT) LDFLAGS="-all-static"
 
 host-install:
 
