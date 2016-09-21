@@ -1,0 +1,13 @@
+--- gdb-7.8.2.orig/gdb/config/microblaze/linux.mh	1970-01-01 00:00:00.000000000 +0100
++++ gdb-7.8.2/gdb/config/microblaze/linux.mh	2016-09-21 10:34:30.025222164 +0200
+@@ -0,0 +1,10 @@
++# Host: Microblaze, running Linux
++
++NAT_FILE= config/nm-linux.h
++NATDEPFILES= inf-ptrace.o fork-child.o \
++	microblaze-linux-nat.o proc-service.o linux-thread-db.o \
++	linux-nat.o linux-osdata.o linux-fork.o linux-procfs.o linux-ptrace.o \
++	linux-waitpid.o
++NAT_CDEPS = $(srcdir)/proc-service.list
++
++LOADLIBES = -ldl $(RDYNAMIC)

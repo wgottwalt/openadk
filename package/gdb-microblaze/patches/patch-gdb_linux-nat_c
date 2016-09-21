@@ -1,8 +1,8 @@
 * added from https://github.com/rofl0r/sabotage
 
---- gdb-7.6.orig/gdb/linux-nat.c	2013-02-13 15:59:49.000000000 +0100
-+++ gdb-7.6/gdb/linux-nat.c	2013-08-13 17:01:09.000000000 +0200
-@@ -79,6 +79,14 @@
+--- gdb-7.8.2.orig/gdb/linux-nat.c	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/linux-nat.c	2016-09-21 10:34:30.017221854 +0200
+@@ -81,6 +81,14 @@
  # endif
  #endif /* HAVE_PERSONALITY */
  
@@ -17,7 +17,7 @@
  /* This comment documents high-level logic of this file.
  
  Waiting for events in sync mode
-@@ -2379,7 +2387,7 @@ linux_handle_extended_wait (struct lwp_i
+@@ -2118,7 +2126,7 @@ linux_handle_extended_wait (struct lwp_i
  		status = 0;
  	    }
  

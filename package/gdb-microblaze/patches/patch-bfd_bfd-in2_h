@@ -1,0 +1,14 @@
+--- gdb-7.8.2.orig/bfd/bfd-in2.h	2015-01-15 11:58:11.000000000 +0100
++++ gdb-7.8.2/bfd/bfd-in2.h	2016-09-21 10:34:30.025222164 +0200
+@@ -5449,6 +5449,11 @@ value relative to the read-write small d
+ expressions of the form "Symbol Op Symbol"  */
+   BFD_RELOC_MICROBLAZE_32_SYM_OP_SYM,
+ 
++/* This is a 32 bit reloc that stores the 32 bit pc relative
++value in two words (with an imm instruction).  No relocation is 
++done here - only used for relaxing  */
++  BFD_RELOC_MICROBLAZE_32_NONE,
++
+ /* This is a 64 bit reloc that stores the 32 bit pc relative
+ value in two words (with an imm instruction).  No relocation is
+ done here - only used for relaxing  */

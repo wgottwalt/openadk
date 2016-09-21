@@ -1,0 +1,202 @@
+--- gdb-7.8.2.orig/bfd/elf32-microblaze.c	2015-01-15 11:58:11.000000000 +0100
++++ gdb-7.8.2/bfd/elf32-microblaze.c	2016-09-21 10:34:30.025222164 +0200
+@@ -177,6 +177,20 @@ static reloc_howto_type microblaze_elf_h
+           FALSE), 		/* PC relative offset?  */
+ 
+    /* This reloc does nothing.  Used for relaxation.  */
++   HOWTO (R_MICROBLAZE_32_NONE,	/* Type.  */
++          0,			/* Rightshift.  */
++          2,			/* Size (0 = byte, 1 = short, 2 = long).  */
++          32,			/* Bitsize.  */
++          TRUE,			/* PC_relative.  */
++          0,			/* Bitpos.  */
++          complain_overflow_bitfield,  /* Complain on overflow.  */
++          NULL,                  /* Special Function.  */
++          "R_MICROBLAZE_32_NONE",/* Name.  */
++          FALSE,		/* Partial Inplace.  */
++          0,			/* Source Mask.  */
++          0,			/* Dest Mask.  */
++          FALSE),		/* PC relative offset?  */
++
+    HOWTO (R_MICROBLAZE_64_NONE,	/* Type.  */
+           0,			/* Rightshift.  */
+           2,			/* Size (0 = byte, 1 = short, 2 = long).  */
+@@ -532,7 +546,10 @@ microblaze_elf_reloc_type_lookup (bfd *
+     case BFD_RELOC_NONE:
+       microblaze_reloc = R_MICROBLAZE_NONE;
+       break;
+-    case BFD_RELOC_MICROBLAZE_64_NONE:
++    case BFD_RELOC_MICROBLAZE_32_NONE:
++      microblaze_reloc = R_MICROBLAZE_32_NONE;
++      break;
++     case BFD_RELOC_MICROBLAZE_64_NONE:
+       microblaze_reloc = R_MICROBLAZE_64_NONE;
+       break;
+     case BFD_RELOC_32:
+@@ -668,6 +685,67 @@ microblaze_elf_is_local_label_name (bfd
+   return _bfd_elf_is_local_label_name (abfd, name);
+ }
+ 
++/* Support for core dump NOTE sections.  */
++static bfd_boolean
++microblaze_elf_grok_prstatus (bfd *abfd, Elf_Internal_Note *note)
++{
++  int offset;
++  unsigned int size;
++
++  switch (note->descsz)
++    {
++      default:
++        return FALSE;
++
++      case 228:         /* Linux/MicroBlaze */
++        /* pr_cursig */
++        elf_tdata (abfd)->core->signal = bfd_get_16 (abfd, note->descdata + 12);
++
++        /* pr_pid */
++        elf_tdata (abfd)->core->pid = bfd_get_32 (abfd, note->descdata + 24);
++
++        /* pr_reg */
++        offset = 72;
++        size = 50 * 4;
++
++        break;
++    }
++
++  /* Make a ".reg/999" section.  */
++  return _bfd_elfcore_make_pseudosection (abfd, ".reg",
++                                          size, note->descpos + offset);
++}
++
++static bfd_boolean
++microblaze_elf_grok_psinfo (bfd *abfd, Elf_Internal_Note *note)
++{
++  switch (note->descsz)
++    {
++      default:
++        return FALSE;
++
++      case 128:         /* Linux/MicroBlaze elf_prpsinfo */
++        elf_tdata (abfd)->core->program
++         = _bfd_elfcore_strndup (abfd, note->descdata + 32, 16);
++        elf_tdata (abfd)->core->command
++         = _bfd_elfcore_strndup (abfd, note->descdata + 48, 80);
++    }
++
++  /* Note that for some reason, a spurious space is tacked
++     onto the end of the args in some (at least one anyway)
++     implementations, so strip it off if it exists.  */
++
++  {
++    char *command = elf_tdata (abfd)->core->command;
++    int n = strlen (command);
++
++    if (0 < n && command[n - 1] == ' ')
++      command[n - 1] = '\0';
++  }
++
++  return TRUE;
++}
++
+ /* The microblaze linker (like many others) needs to keep track of
+    the number of relocs that it decides to copy as dynamic relocs in
+    check_relocs for each symbol. This is so that it can later discard
+@@ -1023,7 +1101,7 @@ microblaze_elf_relocate_section (bfd *ou
+ 	    {
+ 	      /* External symbol.  */
+ 	      bfd_boolean warned ATTRIBUTE_UNUSED;
+-	      bfd_boolean ignored ATTRIBUTE_UNUSED;
++	      bfd_boolean ignored;
+ 
+ 	      RELOC_FOR_GLOBAL_SYMBOL (info, input_bfd, input_section, rel,
+ 				       r_symndx, symtab_hdr, sym_hashes,
+@@ -1852,14 +1930,22 @@ microblaze_elf_relax_section (bfd *abfd,
+ 	        }
+ 	      break;
+ 	    case R_MICROBLAZE_NONE:
++	    case R_MICROBLAZE_32_NONE:
+ 	      {
+ 	        /* This was a PC-relative instruction that was
+  		   completely resolved.  */
+ 	        int sfix, efix;
++		unsigned int val;
+ 	        bfd_vma target_address;
+ 	        target_address = irel->r_addend + irel->r_offset;
+ 	        sfix = calc_fixup (irel->r_offset, 0, sec);
+ 	        efix = calc_fixup (target_address, 0, sec);
++
++                /* Validate the in-band val.  */
++                val = bfd_get_32 (abfd, contents + irel->r_offset);
++                if (val != irel->r_addend && ELF32_R_TYPE (irel->r_info) == R_MICROBLAZE_32_NONE) {
++                    fprintf(stderr, "%d: CORRUPT relax reloc %x %lx\n", __LINE__, val, irel->r_addend);
++                }
+ 	        irel->r_addend -= (efix - sfix);
+ 	        /* Should use HOWTO.  */
+ 	        microblaze_bfd_write_imm_value_32 (abfd, contents + irel->r_offset,
+@@ -1907,6 +1993,49 @@ microblaze_elf_relax_section (bfd *abfd,
+           irelscanend = irelocs + o->reloc_count;
+           for (irelscan = irelocs; irelscan < irelscanend; irelscan++)
+             {
++              if (1 && ELF32_R_TYPE (irelscan->r_info) == (int) R_MICROBLAZE_32_NONE)
++                {
++                  unsigned int val;
++
++                  isym = isymbuf + ELF32_R_SYM (irelscan->r_info);
++
++                  /* hax: We only do the following fixup for debug location lists.  */
++                  if (strcmp(".debug_loc", o->name))
++                    continue;
++
++                  /* This was a PC-relative instruction that was completely resolved.  */
++                  if (ocontents == NULL)
++                    {
++		      if (elf_section_data (o)->this_hdr.contents != NULL)
++		          ocontents = elf_section_data (o)->this_hdr.contents;
++		      else
++		        {
++		          /* We always cache the section contents.
++			     Perhaps, if info->keep_memory is FALSE, we
++			     should free them, if we are permitted to.  */
++
++		          if (o->rawsize == 0)
++			      o->rawsize = o->size;
++		          ocontents = (bfd_byte *) bfd_malloc (o->rawsize);
++		          if (ocontents == NULL)
++			      goto error_return;
++		          if (!bfd_get_section_contents (abfd, o, ocontents,
++                                                         (file_ptr) 0,
++                                                         o->rawsize))
++                              goto error_return;
++		          elf_section_data (o)->this_hdr.contents = ocontents;
++		        }
++		    }
++
++                  val = bfd_get_32 (abfd, ocontents + irelscan->r_offset);
++                  if (val != irelscan->r_addend) {
++			fprintf(stderr, "%d: CORRUPT relax reloc! %x %lx\n", __LINE__, val, irelscan->r_addend);
++                  }
++
++                  irelscan->r_addend -= calc_fixup (irelscan->r_addend, 0, sec);
++                  microblaze_bfd_write_imm_value_32 (abfd, ocontents + irelscan->r_offset,
++                                                     irelscan->r_addend);
++              }
+               if (ELF32_R_TYPE (irelscan->r_info) == (int) R_MICROBLAZE_32)
+                 {
+ 	          isym = isymbuf + ELF32_R_SYM (irelscan->r_info);
+@@ -1966,7 +2095,7 @@ microblaze_elf_relax_section (bfd *abfd,
+ 			      elf_section_data (o)->this_hdr.contents = ocontents;
+ 			    }
+ 			}
+-		      irelscan->r_addend -= calc_fixup (irel->r_addend
++		      irelscan->r_addend -= calc_fixup (irelscan->r_addend
+ 							+ isym->st_value,
+ 							0,
+ 							sec);
+@@ -3506,4 +3635,7 @@ microblaze_elf_add_symbol_hook (bfd *abf
+ #define elf_backend_size_dynamic_sections       microblaze_elf_size_dynamic_sections
+ #define elf_backend_add_symbol_hook		microblaze_elf_add_symbol_hook
+ 
++#define elf_backend_grok_prstatus               microblaze_elf_grok_prstatus
++#define elf_backend_grok_psinfo                 microblaze_elf_grok_psinfo
++
+ #include "elf32-target.h"

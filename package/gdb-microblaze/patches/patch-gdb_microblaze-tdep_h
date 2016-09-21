@@ -1,0 +1,91 @@
+--- gdb-7.8.2.orig/gdb/microblaze-tdep.h	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/microblaze-tdep.h	2016-09-21 10:34:30.029222319 +0200
+@@ -1,6 +1,6 @@
+ /* Target-dependent code for Xilinx MicroBlaze.
+ 
+-   Copyright (C) 2009-2014 Free Software Foundation, Inc.
++   Copyright (C) 2009-2013 Free Software Foundation, Inc.
+ 
+    This file is part of GDB.
+ 
+@@ -22,8 +22,22 @@
+ 
+ 
+ /* Microblaze architecture-specific information.  */
++struct microblaze_gregset
++{
++   unsigned int gregs[32];
++   unsigned int fpregs[32];
++   unsigned int pregs[16];
++};
++
+ struct gdbarch_tdep
+ {
++  int dummy;		// declare something.
++
++  /* Register sets.  */
++  struct regset *gregset;
++  size_t sizeof_gregset;
++  struct regset *fpregset;
++  size_t sizeof_fpregset;
+ };
+ 
+ struct microblaze_frame_cache
+@@ -42,7 +56,8 @@ struct microblaze_frame_cache
+   int fp_regnum;
+ 
+   /* Offsets to saved registers.  */
+-  int register_offsets[57];	/* Must match MICROBLAZE_NUM_REGS.  */
++  int register_offsets[59];	/* Must match MICROBLAZE_NUM_REGS.  */
++  CORE_ADDR saved_sp;
+ 
+   /* Table of saved registers.  */
+   struct trad_frame_saved_reg *saved_regs;
+@@ -66,11 +81,11 @@ enum microblaze_regnum
+   MICROBLAZE_R12_REGNUM,
+   MICROBLAZE_R13_REGNUM,
+   MICROBLAZE_R14_REGNUM,
+-  MICROBLAZE_R15_REGNUM,
++  MICROBLAZE_R15_REGNUM, MICROBLAZE_PREV_PC_REGNUM = MICROBLAZE_R15_REGNUM,
+   MICROBLAZE_R16_REGNUM,
+   MICROBLAZE_R17_REGNUM,
+   MICROBLAZE_R18_REGNUM,
+-  MICROBLAZE_R19_REGNUM,
++  MICROBLAZE_R19_REGNUM, MICROBLAZE_FP_REGNUM = MICROBLAZE_R19_REGNUM,
+   MICROBLAZE_R20_REGNUM,
+   MICROBLAZE_R21_REGNUM,
+   MICROBLAZE_R22_REGNUM,
+@@ -107,7 +122,9 @@ enum microblaze_regnum
+   MICROBLAZE_RTLBX_REGNUM,
+   MICROBLAZE_RTLBSX_REGNUM,
+   MICROBLAZE_RTLBLO_REGNUM,
+-  MICROBLAZE_RTLBHI_REGNUM
++  MICROBLAZE_RTLBHI_REGNUM,
++  MICROBLAZE_SLR_REGNUM,
++  MICROBLAZE_SHR_REGNUM
+ };
+ 
+ /* All registers are 32 bits.  */
+@@ -115,6 +132,21 @@ enum microblaze_regnum
+ 
+ /* MICROBLAZE_BREAKPOINT defines the breakpoint that should be used.
+    Only used for native debugging.  */
+-#define MICROBLAZE_BREAKPOINT {0xb9, 0xcc, 0x00, 0x60}
++#define MICROBLAZE_BREAKPOINT {0xba, 0x0c, 0x00, 0x18}
++#define MICROBLAZE_BREAKPOINT_LE {0x18, 0x00, 0x0c, 0xba}
++
++extern void microblaze_supply_gregset (const struct microblaze_gregset *gregset,
++                                    struct regcache *regcache,
++                                    int regnum, const void *gregs);
++extern void microblaze_collect_gregset (const struct microblaze_gregset *gregset,
++                                     const struct regcache *regcache,
++                                     int regnum, void *gregs);
++extern void microblaze_supply_fpregset (struct regcache *regcache,
++                                     int regnum, const void *fpregs);
++extern void microblaze_collect_fpregset (const struct regcache *regcache,
++                                      int regnum, void *fpregs);
++
++extern const struct regset * microblaze_regset_from_core_section (struct gdbarch *gdbarch,
++                                     const char *sect_name, size_t sect_size);
+ 
+ #endif /* microblaze-tdep.h */

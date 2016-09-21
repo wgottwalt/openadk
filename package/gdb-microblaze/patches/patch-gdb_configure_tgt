@@ -1,0 +1,14 @@
+--- gdb-7.8.2.orig/gdb/configure.tgt	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/configure.tgt	2016-09-21 10:34:30.025222164 +0200
+@@ -340,9 +340,10 @@ mep-*-*)
+ 
+ microblaze*-linux-*|microblaze*-*-linux*)
+ 	# Target: Xilinx MicroBlaze running Linux
+-	gdb_target_obs="microblaze-tdep.o microblaze-linux-tdep.o microblaze-rom.o \
++	gdb_target_obs="microblaze-tdep.o microblaze-linux-tdep.o microblaze-rom.o glibc-tdep.o \
+ 			monitor.o dsrec.o solib-svr4.o symfile-mem.o linux-tdep.o"
+ 	gdb_sim=../sim/microblaze/libsim.a
++	build_gdbserver=yes
+ 	;;
+ microblaze*-*-*)
+ 	# Target: Xilinx MicroBlaze running standalone

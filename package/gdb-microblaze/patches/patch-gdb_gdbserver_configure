@@ -1,6 +1,6 @@
---- gdb-7.6.orig/gdb/gdbserver/configure	2013-03-11 09:35:09.000000000 +0100
-+++ gdb-7.6/gdb/gdbserver/configure	2013-12-23 19:39:06.000000000 +0100
-@@ -4927,9 +4927,6 @@ if test "${GCC}" = yes -a -z "${ERROR_ON
+--- gdb-7.8.2.orig/gdb/gdbserver/configure	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/gdbserver/configure	2016-09-21 10:34:30.013221699 +0200
+@@ -5250,9 +5250,6 @@ if test "${GCC}" = yes -a -z "${ERROR_ON
  fi
  
  WERROR_CFLAGS=""
@@ -10,7 +10,7 @@
  
  build_warnings="-Wall -Wdeclaration-after-statement -Wpointer-arith \
  -Wformat-nonliteral -Wno-char-subscripts -Wempty-body"
-@@ -4943,7 +4940,6 @@ $as_echo_n "checking compiler warning fl
+@@ -5266,7 +5263,6 @@ $as_echo_n "checking compiler warning fl
      # compiled with it enabled.
      for w in ${build_warnings}; do
  	case $w in

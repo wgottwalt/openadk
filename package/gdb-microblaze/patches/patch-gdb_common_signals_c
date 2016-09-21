@@ -1,8 +1,8 @@
 * added from https://github.com/rofl0r/sabotage
 
---- gdb-7.5.orig/gdb/common/signals.c	2012-05-24 18:51:37.000000000 +0200
-+++ gdb-7.5/gdb/common/signals.c	2012-10-01 14:44:23.000000000 +0200
-@@ -346,6 +346,8 @@ gdb_signal_from_host (int hostsig)
+--- gdb-7.8.2.orig/gdb/common/signals.c	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/common/signals.c	2016-09-21 10:34:30.009221544 +0200
+@@ -350,6 +350,8 @@ gdb_signal_from_host (int hostsig)
        else if (64 <= hostsig && hostsig <= 127)
  	return (enum gdb_signal)
  	  (hostsig - 64 + (int) GDB_SIGNAL_REALTIME_64);

@@ -1,7 +1,7 @@
 * added from https://github.com/rofl0r/sabotage
 
---- gdb-7.6.orig/gdb/common/linux-ptrace.h	2013-01-01 07:32:54.000000000 +0100
-+++ gdb-7.6/gdb/common/linux-ptrace.h	2013-08-13 17:10:13.000000000 +0200
+--- gdb-7.8.2.orig/gdb/common/linux-ptrace.h	2015-01-15 11:58:12.000000000 +0100
++++ gdb-7.8.2/gdb/common/linux-ptrace.h	2016-09-21 10:34:30.005221389 +0200
 @@ -20,6 +20,7 @@
  
  struct buffer;
@@ -9,4 +9,4 @@
 +#include <unistd.h>
  #include <sys/ptrace.h>
  
- #ifndef PTRACE_GETSIGINFO
+ #ifdef __UCLIBC__
