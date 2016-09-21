@@ -12,6 +12,8 @@ PKG_SECTION:=		sys/fs
 PKG_URL:=		http://www.daniel-baumann.ch/software/dosfstools/
 PKG_SITES:=		https://github.com/dosfstools/dosfstools/releases/download/v$(PKG_VERSION)/
 
+PKG_CFLINE_DOSFSTOOLS:=	select BUSYBOX_FSCK
+
 include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
 
