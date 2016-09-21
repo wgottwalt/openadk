@@ -1,0 +1,54 @@
+diff -Naur linux-4.7.3/arch/avr32/boards/grasshopper/Kconfig linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/Kconfig
+--- linux-4.7.3/arch/avr32/boards/grasshopper/Kconfig	2016-09-20 11:43:03.645251779 +0200
++++ linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/Kconfig	2016-09-20 11:58:20.129642638 +0200
+@@ -49,4 +49,21 @@
+ 	depends on I2C && I2C_GPIO
+ 	default y
+ 
++config BOARD_GRASSHOPPER_USART0
++	bool "Enable USART0"
++	depends on SERIAL_ATMEL_PDC
++	default n
++	help
++	  USART0 is mapped to /dev/ttyS1 (or /dev/ttyAT1 resp.) and available via
++	  connector J6 and J13.
++
++config BOARD_GRASSHOPPER_USART1
++	bool "Enable USART1 (CP2102 USB-Interface)"
++	depends on SERIAL_ATMEL_PDC
++	default y
++	help
++	  USART1 is mapped to /dev/ttyS0 (or /dev/ttyAT0 resp.) and available via
++	  the CP2002 USB-USART-bridge. If you disable this option, you won't be
++	  able to access the serial console, so it is recommended to say 'y' here.
++
+ endif	# BOARD_GRASSHOPPER
+diff -Naur linux-4.7.3/arch/avr32/boards/grasshopper/setup.c linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/setup.c
+--- linux-4.7.3/arch/avr32/boards/grasshopper/setup.c	2016-09-20 11:43:03.646251793 +0200
++++ linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/setup.c	2016-09-20 12:03:04.864496603 +0200
+@@ -166,7 +166,12 @@
+ 
+ void __init setup_board(void)
+ {
++#ifdef CONFIG_BOARD_GRASSHOPPER_USART1
+     at32_map_usart(1, 0, 0); // USART 1: /dev/ttyS0, CP2102
++#endif
++#ifdef CONFIG_BOARD_GRASSHOPPER_USART0
++    at32_map_usart(0, 1, 0); // USART 0: /dev/ttyS1
++#endif
+     at32_setup_serial_console(0);
+ 
+     // grasshopper_add_spi();
+@@ -182,7 +187,12 @@
+     */
+     at32_reserve_pin(GPIO_PIOE_BASE, ATMEL_EBI_PE_DATA_ALL);
+     at32_add_device_usba(0, NULL);
++#ifdef CONFIG_BOARD_GRASSHOPPER_USART1
+     at32_add_device_usart(0);
++#endif
++#ifdef CONFIG_BOARD_GRASSHOPPER_USART0
++    at32_add_device_usart(1);
++#endif
+ 
+ #ifdef CONFIG_GRASSHOPPER_LCD
+     at32_add_device_lcdc(0, &grasshopper_lcdc_data,

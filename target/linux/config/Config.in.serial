@@ -260,4 +260,22 @@ config ADK_KERNEL_SERIAL_UARTLITE
 	help
 	  Serial driver for Microblaze S3ADSP1800
 
+config ADK_KERNEL_SERIAL_ATMEL
+	bool "AT32 serial driver"
+	select ADK_KERNEL_SERIAL_ATMEL_CONSOLE
+	select ADK_KERNEL_SERIAL_ATMEL_PDC
+	select ADK_KERNEL_BOARD_GRASSHOPPER_USART1 if ADK_TARGET_SYSTEM_GRASSHOPPER
+	depends on ADK_TARGET_CPU_AVR32
+	default y if ADK_TARGET_SYSTEM_GRASSHOPPER
+	default n
+	help
+	  Serial driver for AVR32 Grasshopper boards
+
+config ADK_KERNEL_BOARD_GRASSHOPPER_USART0
+	bool "Enable USART0 on AVR32 Grasshopper boards"
+	depends on ADK_KERNEL_SERIAL_ATMEL && ADK_TARGET_SYSTEM_GRASSHOPPER
+	default n
+	help
+	  Enable second USART on Grasshoper boards
+
 endmenu
