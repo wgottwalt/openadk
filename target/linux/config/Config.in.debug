@@ -118,7 +118,6 @@ config ADK_KERNEL_OPROFILE
 	tristate "Oprofile support"
 	select ADK_KERNEL_PROFILING
 	depends on !ADK_TARGET_ARCH_M68K
-	depends on !ADK_KERNEL_PREEMPT_RT_FULL
 	default n
 	help
 	  use oprofile package to make use of the kernel support.
