@@ -19,7 +19,11 @@ CONFOPTS+=		--disable-lto --disable-plugins
 endif
 
 ifeq ($(ADK_TOOLCHAIN_WITH_GOLD),y)
+ifeq ($(ADK_TARGET_USE_GOLD),y)
 CONFOPTS+=		--enable-gold=default
+else
+CONFOPTS+=		--enable-gold
+endif
 else
 CONFOPTS+=		--disable-gold
 endif
