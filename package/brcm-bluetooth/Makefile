@@ -5,12 +5,10 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		brcm-bluetooth
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		firmware for broadcom bluetooth chips
 PKG_SECTION:=		sys/firmware
 PKG_DEPENDS:=		bluez
-
-PKG_SYSTEM_DEPENDS:=    raspberry-pi3 solidrun-imx6
 
 NO_DISTFILES:=		1
 
@@ -33,7 +31,7 @@ do-install:
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3),y)
 	${CP} ${WRKBUILD}/BCM43430A1.hcd ${IDIR_BRCM_BLUETOOTH}/lib/firmware
 else
-	${CP} ${WRKBUILD}/bcm*.hcd ${IDIR_BRCM_BLUETOOTH}/lib/firmware
+	${CP} ${WRKBUILD}/*.hcd ${IDIR_BRCM_BLUETOOTH}/lib/firmware
 	${INSTALL_DIR} ${IDIR_BRCM_BLUETOOTH}/sbin
 	${INSTALL_BIN} ${WRKBUILD}/brcm_patchram \
 		${IDIR_BRCM_BLUETOOTH}/sbin/brcm_patchram
