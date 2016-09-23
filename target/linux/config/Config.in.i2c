@@ -79,6 +79,6 @@ config ADK_KERNEL_BOARD_GRASSHOPPER_I2C
 	default y if ADK_TARGET_SYSTEM_GRASSHOPPER
 	default n
 	help
-	  I2C driver for Geode boards.
+	  I2C driver for AVR32 Grasshopper boards.
  
 endmenu
