@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		e7125460892c2b5c3a8d843cb18c24b60c46051e925c2888a61fa672a2f76d76
 PKG_DESCR:=		keyboard config
 PKG_SECTION:=		x11/misc
-PKG_BUILDDEP:=		util-macros xkbcomp
+PKG_BUILDDEP:=		util-macros-host xkbcomp
 PKG_SITES:=		http://www.x.org/releases/individual/data/xkeyboard-config/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
