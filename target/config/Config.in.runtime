@@ -51,6 +51,13 @@ config ADK_RUNTIME_DEV_STATIC
 
 endchoice
 
+config ADK_RUNTIME_FIX_PERMISSION
+	bool "Fix permissions for target files (suid bit, ..)"
+	select ADK_HOST_BUILD_FAKEROOT
+	help
+	  Use fakeroot to fix permissions for target dir before image
+	  creation.
+
 config ADK_RUNTIME_SSH_PUBKEY
 	string "SSH public key (root user only)"
 	depends on ADK_PACKAGE_OPENSSH_SERVER || ADK_PACKAGE_DROPBEAR

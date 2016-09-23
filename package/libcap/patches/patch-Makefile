@@ -1,25 +1,14 @@
---- libcap-2.24.orig/Makefile	2013-12-27 19:17:17.000000000 +0100
-+++ libcap-2.24/Makefile	2015-02-26 20:36:58.000000000 +0100
-@@ -16,6 +16,22 @@ endif
- 	$(MAKE) -C progs $@
- 	$(MAKE) -C doc $@
+--- libcap-2.25.orig/Makefile	2014-05-31 22:11:05.000000000 +0200
++++ libcap-2.25/Makefile	2016-09-23 10:32:34.156211429 +0200
+@@ -10,11 +10,7 @@ include Make.Rules
  
-+progs:
-+	$(MAKE) -C progs all
-+
-+shared:
-+	$(MAKE) -C libcap shared
-+
-+static:
-+	$(MAKE) -C libcap static
-+
-+install-shared:
-+	$(MAKE) -C libcap install-shared
-+
-+install-static:
-+	$(MAKE) -C libcap install-static
-+
-+
+ all install clean: %: %-here
+ 	$(MAKE) -C libcap $@
+-ifneq ($(PAM_CAP),no)
+-	$(MAKE) -C pam_cap $@
+-endif
+ 	$(MAKE) -C progs $@
+-	$(MAKE) -C doc $@
+ 
  all-here:
  
- install-here:

@@ -10,6 +10,7 @@ PKG_HASH:=		7c0a164d19db3efa9e802e0fc7cdfeff70ec6d26cdbdc4338c9c2823c5ea230c
 PKG_DESCR:=		fake root permissions
 PKG_SECTION:=		sys/utils
 PKG_SITES:=		http://http.debian.net/debian/pool/main/f/fakeroot/
+HOST_BUILDDEP:=		libcap-host
 
 PKG_CFLINE_FAKEROOT:=	depends on ADK_HOST_ONLY
 

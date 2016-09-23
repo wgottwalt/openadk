@@ -1,6 +1,12 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+ifeq ($(ADK_RUNTIME_FIX_PERMISSION),y)
+FAKEROOT:=$(STAGING_HOST_DIR)/usr/bin/fakeroot --
+else
+FAKEROOT:=
+endif
+
 ifeq ($(ADK_TARGET_OS_LINUX),y)
 # relative paths, like 'mksh' or '../usr/bin/foosh'
 ifeq (${ADK_BINSH_ASH},y)
@@ -276,7 +282,16 @@ ${FW_DIR}/${GENIMAGE}: ${TARGET_DIR} kernel-package
 	@mkdir -p ${FW_DIR}/temp
 	@$(CP) $(KERNEL) $(FW_DIR)/kernel
 	@dd if=/dev/zero of=${FW_DIR}/cfgfs.img bs=16384 count=1 $(MAKE_TRACE)
-	PATH='${HOST_PATH}' mke2img \
+ifeq ($(ADK_RUNTIME_FIX_PERMISSION),y)
+	echo '#!/bin/sh' > $(ADK_TOPDIR)/scripts/fakeroot.sh
+	echo "chown -R 0:0 $(TARGET_DIR)" >> $(ADK_TOPDIR)/scripts/fakeroot.sh
+	echo 'cd $(TARGET_DIR)' >> $(ADK_TOPDIR)/scripts/fakeroot.sh
+	-@cat $(STAGING_TARGET_DIR)/scripts/permissions.sh >> $(ADK_TOPDIR)/scripts/fakeroot.sh 2>/dev/null
+	chmod 755 $(ADK_TOPDIR)/scripts/fakeroot.sh
+	PATH='$(HOST_PATH)' $(FAKEROOT) $(ADK_TOPDIR)/scripts/fakeroot.sh
+	rm $(ADK_TOPDIR)/scripts/fakeroot.sh $(STAGING_TARGET_DIR)/scripts/permissions.sh
+endif
+	PATH='${HOST_PATH}' $(FAKEROOT) mke2img \
 		-G 4 \
 		-d "$(TARGET_DIR)" \
 		-o $(FW_DIR)/rootfs.ext $(MAKE_TRACE)

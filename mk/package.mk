@@ -230,6 +230,9 @@ endif
 endif
 	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PKG_DIR}/stamps' \
 	    '$${STAGING_TARGET_DIR}/scripts'
+	@for file in $$$$(ls ./files/*.perm 2>/dev/null); do \
+		cat $$$$file >> $${STAGING_TARGET_DIR}/scripts/permissions.sh; \
+	done
 ifeq (,$(filter noremove,$(7)))
 	@if test -s '$${STAGING_PKG_DIR}/$(1)'; then \
 		cd '$${STAGING_TARGET_DIR}'; \

@@ -4,18 +4,22 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libcap
-PKG_VERSION:=		2.24
+PKG_VERSION:=		2.25
 PKG_RELEASE:=		1
-PKG_HASH:=		cee4568f78dc851d726fc93f25f4ed91cc223b1fe8259daa4a77158d174e6c65
+PKG_HASH:=		693c8ac51e983ee678205571ef272439d83afe62dd8e424ea14ad9790bc35162
 PKG_DESCR:=		capabilities library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.friedhoff.org/posixfilecaps.html
 PKG_SITES:=		https://www.kernel.org/pub/linux/libs/security/linux-privs/libcap2/
 PKG_OPTS:=		dev
 
+include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBCAP,libcap,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call HOST_template,LIBCAP,libcap,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,LIBCAP,libcap,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
+
+HOST_STYLE:=		manual
 
 # for Darwin hosts
 CPPFLAGS_FOR_BUILD+=	-I$(STAGING_TARGET_DIR)/usr/include
@@ -29,9 +33,18 @@ ALL_TARGET:=		shared progs
 INSTALL_TARGET:=	install-shared
 endif
 
+host-build:
+	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET}) $(MAKE_TRACE)
+
+libcap-hostinstall:
+	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+		${HOST_FAKE_FLAGS} DESTDIR='${STAGING_HOST_DIR}' ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
+
 libcap-install:
 	$(INSTALL_DIR) $(IDIR_LIBCAP)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libcap*.so* \
 		$(IDIR_LIBCAP)/usr/lib
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/host-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk

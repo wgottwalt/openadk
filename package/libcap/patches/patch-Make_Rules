@@ -1,20 +1,19 @@
---- libcap-2.24.orig/Make.Rules	2014-01-06 02:16:21.000000000 +0100
-+++ libcap-2.24/Make.Rules	2015-02-26 14:01:28.000000000 +0100
-@@ -12,22 +12,12 @@ FAKEROOT=$(DESTDIR)
- # These choices are motivated by the fact that getcap and setcap are
+--- libcap-2.25.orig/Make.Rules	2016-01-31 02:14:53.000000000 +0100
++++ libcap-2.25/Make.Rules	2016-09-23 10:37:16.179167139 +0200
+@@ -13,21 +13,14 @@ FAKEROOT=$(DESTDIR)
  # administrative operations that could be needed to recover a system.
  
--ifndef lib
+ ifndef lib
 -lib=$(shell ldd /usr/bin/ld|egrep "ld-linux|ld.so"|cut -d/ -f2)
--endif
--
++lib=lib
+ endif
+ 
 -ifdef prefix
 -exec_prefix=$(prefix)
 -lib_prefix=$(exec_prefix)
 -inc_prefix=$(lib_prefix)
 -man_prefix=$(prefix)/share
 -else
-+lib=lib
  prefix=/usr
 -exec_prefix=
 +exec_prefix=$(prefix)
@@ -25,41 +24,3 @@
  
  # Target directories
  
-@@ -48,28 +38,28 @@ MINOR=24
- KERNEL_HEADERS := $(topdir)/libcap/include/uapi
- IPATH += -fPIC -I$(KERNEL_HEADERS) -I$(topdir)/libcap/include
- 
--CC := gcc
--CFLAGS := -O2 -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
-+CC ?= gcc
-+CFLAGS ?= -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
- BUILD_CC := $(CC)
- BUILD_CFLAGS := $(CFLAGS) $(IPATH)
--AR := ar
--RANLIB := ranlib
--DEBUG = -g #-DDEBUG
-+AR ?= ar
-+RANLIB ?= ranlib
-+DEBUG = 
- WARNINGS=-Wall -Wwrite-strings \
-         -Wpointer-arith -Wcast-qual -Wcast-align \
-         -Wstrict-prototypes -Wmissing-prototypes \
-         -Wnested-externs -Winline -Wshadow
--LD=$(CC) -Wl,-x -shared
--LDFLAGS := #-g
-+LD=$(CC) -shared
-+LDFLAGS ?= #-g
- 
- SYSTEM_HEADERS = /usr/include
- INCS=$(topdir)/libcap/include/sys/capability.h
- LDFLAGS += -L$(topdir)/libcap
- CFLAGS += -Dlinux $(WARNINGS) $(DEBUG)
--PAM_CAP := $(shell if [ -f /usr/include/security/pam_modules.h ]; then echo yes ; else echo no ; fi)
-+PAM_CAP := no
- INDENT := $(shell if [ -n "$(which indent 2>/dev/null)" ]; then echo "| indent -kr" ; fi)
- DYNAMIC := $(shell if [ ! -d "$(topdir)/.git" ]; then echo yes; fi)
--LIBATTR := yes
-+LIBATTR := no
- 
- # When installing setcap, set its inheritable bit to be able to place
- # capabilities on files. It can be used in conjunction with pam_cap
