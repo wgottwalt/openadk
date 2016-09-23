@@ -18,7 +18,7 @@ PKG_BUILDDEP:=		libX11 randrproto renderproto fixesproto damageproto
 PKG_BUILDDEP+=		scrnsaverproto resourceproto fontsproto videoproto
 PKG_BUILDDEP+=		compositeproto evieext libxkbfile libXfont pixman
 PKG_BUILDDEP+=		libpciaccess xf86dgaproto recordproto
-PKG_BUILDDEP+=		xineramaproto presentproto
+PKG_BUILDDEP+=		xineramaproto presentproto xf86driproto glproto mesa
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://www.x.org/
 PKG_SITES:=		http://www.x.org/releases/individual/xserver/
@@ -28,10 +28,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU_WITH_GRAPHIC
 
-PKG_FLAVOURS_XORG_SERVER:=	WITH_DRI WITH_KDRIVE
-PKGFS_WITH_DRI:=		mesa
-PKGFD_WITH_DRI:=		enable dri support
-PKGFB_WITH_DRI:=		xf86driproto glproto mesa
+PKG_FLAVOURS_XORG_SERVER:=	WITH_KDRIVE
 PKGFD_WITH_KDRIVE:=		build kdrive xfbdev server
 
 PKG_CHOICES_XORG_SERVER:=	WITH_GCRYPT WITH_LIBRESSL WITH_OPENSSL
@@ -82,6 +79,10 @@ CONFIGURE_ARGS+=	--enable-dga \
 			--disable-xvmc \
 			--disable-selective-werror \
 			--disable-strict-compilation \
+			--enable-dri \
+			--enable-dri2 \
+			--enable-dri3 \
+			--enable-glx \
 			--with-xkb-output=/tmp \
 			--with-os-vendor=OpenADK \
 			--with-vendor-web="http://openadk.org"
@@ -90,12 +91,6 @@ ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_KDRIVE},y)
 CONFIGURE_ARGS+=	--enable-kdrive --enable-xfbdev --enable-kdrive-kbd --enable-kdrive-mouse --enable-kdrive-evdev
 else
 CONFIGURE_ARGS+=	--disable-kdrive --disable-xfbdev
-endif
-
-ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_DRI},y)
-CONFIGURE_ARGS+=	--enable-dri --enable-dri2 --enable-dri3 --enable-glx
-else
-CONFIGURE_ARGS+=	--disable-dri --disable-dri2 --disable-dri3 --disable-glx
 endif
 
 ifeq (${ADK_TARGET_SYSTEM_LEMOTE_YEELONG},y)
