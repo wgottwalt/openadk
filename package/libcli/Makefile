@@ -4,7 +4,7 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libcli
-PKG_VERSION:=		c63c9d35144939c8b4fa3c5394aed2e29ff517b0
+PKG_VERSION:=		958e44e7a69d3c71e89908fa8ee15232c55a821a
 PKG_RELEASE:=		1
 PKG_GIT:=		hash
 PKG_DESCR:=		cisco-like command-line interface library
