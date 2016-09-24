@@ -1,13 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_TARGET_WITH_LOCALE
-	bool "Enable Locale (i18n) support"
-	depends on ADK_TARGET_LIB_UCLIBC_NG
-	select ADK_TARGET_LIBC_ICONV
-	select BUSYBOX_LOCALE_SUPPORT
-	select BUSYBOX_UNICODE_USING_LOCALE
-
 choice
 depends on ADK_TARGET_OS_LINUX
 prompt "Iconv implementation"

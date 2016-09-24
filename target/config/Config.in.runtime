@@ -138,6 +138,20 @@ config ADK_RUNTIME_TIMEZONE
 	help
 	  Predefine the timezone for the embedded system.
 
+config ADK_RUNTIME_ENABLE_LOCALE
+	bool "enable locale (i18n) support"
+	select ADK_TARGET_LIBC_ICONV if ADK_TARGET_LIB_UCLIBC_NG
+	select BUSYBOX_LOCALE_SUPPORT
+	help
+	  Enable locale support for the target.
+
+config ADK_RUNTIME_DEFAULT_LOCALE
+	string "default locale"
+	depends on ADK_RUNTIME_ENABLE_LOCALE
+	default "de_DE"
+	help
+	  Set locale to be set in the target system as default.
+
 choice
 prompt "bootup messages from kernel"
 

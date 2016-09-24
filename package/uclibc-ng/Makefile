@@ -47,6 +47,10 @@ ifneq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),y)
 			$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
 	done
 endif
+ifeq ($(ADK_RUNTIME_ENABLE_LOCALE),y)
+	${INSTALL_DIR} $(IDIR_UCLIBC_NG)/usr/bin
+	$(INSTALL_BIN) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_UCLIBC_NG)/usr/bin
+endif
 
 uclibc-ng-dev-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_NG_DEV}/usr/lib ${IDIR_UCLIBC_NG_DEV}/$(ADK_TARGET_LIBC_PATH)

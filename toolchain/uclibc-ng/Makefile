@@ -95,6 +95,9 @@ endif
 endif
 ifeq ($(ADK_TARGET_LIBC_ICONV),y)
 	$(SED) 's/.*\(UCLIBC_HAS_LOCALE\).*/\1=y/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_RUNTIME_ENABLE_LOCALE),y)
+	$(SED) 's/.*\(UCLIBC_HAS_LOCALE\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_BUILD_MINIMAL_LOCALE\).*/\1=y/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_UCLINUX),y)
@@ -307,6 +310,19 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 		UCLIBC_ONLY=1 \
 		VERBOSE=1 \
 		all
+	PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
+		HOSTCC="$(HOST_CC)" \
+		CC='$(TARGET_CC)' \
+		PREFIX=$(STAGING_TARGET_DIR) \
+		DEVEL_PREFIX=/usr/ \
+		DEVEL_PREFIX_LIB=/ \
+		RUNTIME_PREFIX=/ \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
+		TEST_INSTALLED_UCLIBC=1 \
+		UCLIBC_ONLY=1 \
+		VERBOSE=1 \
+		utils
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
@@ -319,9 +335,11 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		RUNTIME_PREFIX=/ \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
+		TEST_INSTALLED_UCLIBC=1 \
+		UCLIBC_ONLY=1 \
 		VERBOSE=1 \
-		install_runtime install_dev
-	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
+		install_runtime install_dev install_utils
+	PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
 		HOSTCC="$(HOST_CC)" \
 		CC='$(TARGET_CC)' \
 		PREFIX=$(STAGING_TARGET_DIR) \
