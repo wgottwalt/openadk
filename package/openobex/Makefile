@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		3b264665d90901ea4ff720332ffb9b6d1d8f67187463d3a3279caddc7205ea57
 PKG_DESCR:=		implementation of the obex protocol
 PKG_SECTION:=		sys/misc
-PKG_BUILDDEP:=		eudev
+PKG_BUILDDEP:=		eudev bluez
 PKG_URL:=		http://dev.zuckschwerdt.org/openobex/wiki/WikiStart
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=openobex/}
 PKG_OPTS:=		dev
