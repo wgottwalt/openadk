@@ -152,7 +152,7 @@ config BUSYBOX_LOCALE_SUPPORT
 
 config BUSYBOX_UNICODE_SUPPORT
 	bool "Support Unicode"
-	default n
+	default y
 	help
 	  This makes various applets aware that one byte is not
 	  one character on screen.
