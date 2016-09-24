@@ -11,7 +11,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		aufs utilities (version 3 and above)
 PKG_SECTION:=		sys/fs
 PKG_URL:=		http://aufs.sf.net/
-PKG_SITES:=		git://aufs.git.sourceforge.net/gitroot/aufs/aufs-util
+PKG_SITES:=		git://git.code.sf.net/p/aufs/aufs-util
 
 PKG_SUBPKGS:=		AUFS_UTIL LIBAU
 PKGSD_LIBAU:=		aufs userspace library
