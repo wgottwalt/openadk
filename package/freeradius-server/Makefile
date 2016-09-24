@@ -200,7 +200,7 @@ FAKE_FLAGS+=		R="${WRKINST}" \
 			INSTALLSTRIP=""
 
 freeradius-server-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
-	${INSTALL_DIR} ${IDIR_FREERADIUS_SERVER}/etc/freeradius
+	-${INSTALL_DIR} ${IDIR_FREERADIUS_SERVER}/etc/freeradius
 	${CP} ./files/users ${IDIR_FREERADIUS_SERVER}/etc/freeradius/
 	${INSTALL_DATA} ./files/radiusd.conf \
 		${IDIR_FREERADIUS_SERVER}/etc/freeradius
