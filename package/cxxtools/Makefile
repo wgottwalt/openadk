@@ -23,6 +23,9 @@ $(eval $(call PKG_template,CXXTOOLS,cxxtools,${PKG_VERSION}-${PKG_RELEASE},${PKG
 ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 CONFIGURE_ARGS+=	--with-atomictype=generic
 endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3),y)
+CONFIGURE_ARGS+=	--with-atomictype=pthread
+endif
 CONFIGURE_ARGS+=	--disable-demos \
 			--disable-unittest
 
