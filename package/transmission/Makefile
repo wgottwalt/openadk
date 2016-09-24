@@ -19,6 +19,10 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TRANSMISSION,transmission,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
+TARGET_LDFLAGS+=	-liconv
+
+CONFIGURE_ARGS+=	--without-gtk
+
 transmission-install:
 	$(INSTALL_DIR) $(IDIR_TRANSMISSION)/usr/share
 	$(CP) $(WRKINST)/usr/share/transmission \
