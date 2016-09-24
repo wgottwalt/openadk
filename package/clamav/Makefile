@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		167bd6a13e05ece326b968fdb539b05c2ffcfef6018a274a10aeda85c2c0027a
 PKG_DESCR:=		anti-virus software
 PKG_SECTION:=		sys/misc
-PKG_DEPENDS:=		libressl libxml2 zlib libpcre
-PKG_BUILDDEP:=		libressl libxml2 zlib pcre
+PKG_DEPENDS:=		libressl zlib libpcre
+PKG_BUILDDEP:=		libressl zlib pcre
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.clamav.net/
 PKG_SITES:=		http://www.clamav.net/downloads/production/
@@ -24,7 +24,9 @@ $(eval $(call PKG_template,CLAMAV,clamav,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEP
 TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ENV+=		ac_cv_c_mmap_private=yes
 CONFIGURE_ARGS+=	--enable-mempool \
+			--disable-xml \
 			--disable-check \
+			--with-openssl="$(STAGING_TARGET_DIR)/usr" \
 			--with-pcre="$(STAGING_TARGET_DIR)/usr"
 
 clamav-install:
