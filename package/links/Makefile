@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		links
-PKG_VERSION:=		2.12
+PKG_VERSION:=		2.13
 PKG_RELEASE:=		1
-PKG_HASH:=		2e3da6193de9d6ee71bc4beab17169ecc58d7cbf2e20192a3f518ed9f7f22e33
+PKG_HASH:=		bcd068b5b47f604f91091c541d469df2afb6bd6604cddd6f059a17ec9ceb74ae
 PKG_DESCR:=		web browser with graphic support
 PKG_SECTION:=		app/browser
 PKG_DEPENDS:=		libpng libjpeg-turbo libtiff gpm
@@ -36,6 +36,7 @@ $(eval $(call PKG_template,LINKS,links,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPEN
 
 CONFIGURE_ARGS+=	--enable-graphics \
 			--with-fb \
+			--without-libevent \
 			--without-svgalib \
 			--without-libtiff \
 			--without-x \
