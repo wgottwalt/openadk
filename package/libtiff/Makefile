@@ -10,7 +10,8 @@ PKG_HASH:=		4d57a50907b510e3049a4bba0d7888930fdfc16ce49f1bf693e5b6247370d68c
 PKG_DESCR:=		library for reading/writing tiff images
 PKG_SECTION:=		libs/image
 PKG_NEEDS:=		c++
-PKG_URL:=		http://www.libtiff.org/
+PKG_BUILDDEP:=		cmake-host
+PKG_URL:=		http://simplesystems.org/libtiff/
 PKG_SITES:=		ftp://ftp.remotesensing.org/pub/libtiff/
 PKG_LIBNAME:=		libtiff
 PKG_OPTS:=		dev
@@ -21,8 +22,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTIFF,libtiff,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_ARGS+=	--disable-cxx \
-			--disable-rpath
+CONFIG_STYLE:=		cmake
 
 libtiff-install:
 	${INSTALL_DIR} ${IDIR_LIBTIFF}/usr/lib
