@@ -4,16 +4,17 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		opensips
-PKG_VERSION:=		1.11.1
+PKG_VERSION:=		1.11.8
 PKG_RELEASE:=		1
-PKG_HASH:=		bcacc9bc273fd2002c16a5cb846fe2478dacded9ea7b52a04afb1f54bb2aa3f4
+PKG_HASH:=		947a0c685ab36efe110d9e3043e3464264763ef2fdc7a37b628efd3127da98f4
 PKG_DESCR:=		high-performance, configurable, free sip server
 PKG_SECTION:=		net/voip
 PKG_URL:=		http://opensips.org/
-PKG_SITES:=		http://opensips.org/pub/opensips/$(PKG_VERSION)/src/
+PKG_SITES:=		http://opensips.org/pub/opensips/$(PKG_VERSION)/
 
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)_src.tar.gz
-WRKDIST=		${WRKDIR}/$(PKG_NAME)-$(PKG_VERSION)-tls
+PKG_SYSTEM_DEPENDS:=	!raspberry-pi3
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 PKG_CHOICES_OPENSIPS:=	WITH_LIBRESSL WITH_OPENSSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
