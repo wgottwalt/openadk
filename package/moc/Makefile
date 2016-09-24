@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		moc
-PKG_VERSION:=		2.5.0-beta2
+PKG_VERSION:=		2.5.1
 PKG_RELEASE:=		1
-PKG_HASH:=		486d50584c3fb0067b8c03af54e44351633a7740b18dc3b7358322051467034c
+PKG_HASH:=		1b419c75a92a85ff4ee7670c65d660c86fef32032c65e89e868b988f80fac4f2
 PKG_DESCR:=		console music player
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libmad libvorbis libcurl libflac
@@ -14,7 +14,7 @@ PKG_DEPENDS+=		libncurses libid3tag
 PKG_BUILDDEP:=		ncurses libvorbis curl libmad flac
 PKG_BUILDDEP+=		libid3tag db libtool
 PKG_URL:=		http://moc.daper.net/
-PKG_SITES:=		ftp://ftp.daper.net/pub/soft/moc/unstable/
+PKG_SITES:=		ftp://ftp.daper.net/pub/soft/moc/stable/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
@@ -29,7 +29,8 @@ CONFIGURE_ARGS+=	--without-jack \
 			--without-musepack \
 			--without-speex \
 			--without-ffmpeg \
-			--without-sndfile
+			--without-sndfile \
+			--with-bdb-dir='$(STAGING_TARGET_DIR)/usr'
 
 moc-install:
 	${INSTALL_DIR} ${IDIR_MOC}/usr/bin
