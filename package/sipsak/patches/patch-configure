@@ -1,5 +1,5 @@
 --- sipsak-0.9.6.orig/configure	2006-01-28 22:11:34.000000000 +0100
-+++ sipsak-0.9.6/configure	2009-11-23 20:57:18.000000000 +0100
++++ sipsak-0.9.6/configure	2016-09-23 18:46:18.305339828 +0200
 @@ -1,27 +1,56 @@
  #! /bin/sh
  # Guess values for system-dependent variables and create Makefiles.
@@ -1049,7 +1049,7 @@
  
    --x)
      # Obsolete; use --with-x.
-@@ -636,8 +1086,7 @@ Try \`$0 --help' for more information." 
+@@ -636,8 +1086,7 @@ Try \`$0 --help' for more information."
      expr "x$ac_envvar" : ".*[^_$as_cr_alnum]" >/dev/null &&
        { echo "$as_me: error: invalid variable name: $ac_envvar" >&2
     { (exit 1); exit 1; }; }
@@ -1794,7 +1794,7 @@
  # Just in case
  sleep 1
  echo timestamp > conftest.file
-@@ -1472,20 +1909,20 @@ echo "$as_me: error: newly created file 
+@@ -1472,20 +1909,20 @@ echo "$as_me: error: newly created file
  Check your system clock" >&2;}
     { (exit 1); exit 1; }; }
  fi
@@ -2923,7 +2923,7 @@
  int test (int i, double x);
  struct s1 {int (*f) (int a);};
  struct s2 {int (*f) (double a);};
-@@ -2515,205 +3108,57 @@ return f (e, argv, 0) != argv[0]  ||  f 
+@@ -2515,205 +3108,57 @@ return f (e, argv, 0) != argv[0]  ||  f
    return 0;
  }
  _ACEOF
@@ -3989,7 +3989,7 @@
  if test $ac_cv_header_stdc = yes; then
  
  cat >>confdefs.h <<\_ACEOF
-@@ -3572,9 +4194,9 @@ for ac_header in sys/types.h sys/stat.h 
+@@ -3572,9 +4194,9 @@ for ac_header in sys/types.h sys/stat.h
  		  inttypes.h stdint.h unistd.h
  do
  as_ac_Header=`echo "ac_cv_header_$ac_header" | $as_tr_sh`
@@ -7572,7 +7572,7 @@
      debug=: ;;
    --file | --fil | --fi | --f )
      $ac_shift
-@@ -6891,18 +7447,24 @@ Try \`$0 --help' for more information." 
+@@ -6891,18 +7447,24 @@ Try \`$0 --help' for more information."
      $ac_shift
      CONFIG_HEADERS="$CONFIG_HEADERS $ac_optarg"
      ac_need_defaults=false;;
