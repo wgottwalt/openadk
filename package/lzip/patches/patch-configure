@@ -1,0 +1,17 @@
+--- lzip-1.17.orig/configure	2015-07-09 18:58:33.000000000 +0200
++++ lzip-1.17/configure	2016-09-24 13:07:38.493476268 +0200
+@@ -20,10 +20,10 @@ bindir='$(exec_prefix)/bin'
+ datarootdir='$(prefix)/share'
+ infodir='$(datarootdir)/info'
+ mandir='$(datarootdir)/man'
+-CXX=g++
+-CPPFLAGS=
+-CXXFLAGS='-Wall -W -O2'
+-LDFLAGS=
++CXX?=g++
++CPPFLAGS?=
++CXXFLAGS?='-Wall -W -O2'
++LDFLAGS?=
+ 
+ # checking whether we are using GNU C++.
+ ${CXX} --version > /dev/null 2>&1
