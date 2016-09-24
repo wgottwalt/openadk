@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		tcl
-PKG_VERSION:=		8.6.1
+PKG_VERSION:=		8.6.6
 PKG_RELEASE:=		1
-PKG_HASH:=		16ee769248e64ba1cae6b4834fcc4e4edd7470d881410e8d58f7dd1434343514
+PKG_HASH:=		a265409781e4b3edcc4ef822533071b34c3dc6790b893963809b9fe221befe07
 PKG_DESCR:=		tcl scripting language
 PKG_SECTION:=		dev/lang
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tcl/}
@@ -19,6 +19,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,TCL,tcl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+TARGET_CFLAGS:=		$(filter-out -ffast-math,$(TARGET_CFLAGS))
 TARGET_LDFLAGS+=	-ldl
 CONFIGURE_ENV+=		tcl_cv_strstr_unbroken=ok \
 			tcl_cv_strtod_buggy=ok \
