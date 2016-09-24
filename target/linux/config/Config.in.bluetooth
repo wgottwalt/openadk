@@ -104,7 +104,7 @@ config ADK_KERNEL_BT_HCIBTUSB
 	  USB interface.
 
 config ADK_KERNEL_BT_HCIBTUSB_BCM
-	tristate "Broadcom protocol support"
+	bool "Broadcom protocol support"
 	depends on ADK_KERNEL_BT_HCIBTUSB
 	select ADK_KERNEL_BT_BCM
 	help
