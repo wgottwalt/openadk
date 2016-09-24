@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		brcm-bluetooth
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_DESCR:=		firmware for broadcom bluetooth chips
 PKG_SECTION:=		sys/firmware
 PKG_DEPENDS:=		bluez
@@ -27,11 +27,11 @@ do-build:
 do-install:
 	${INSTALL_DIR} ${IDIR_BRCM_BLUETOOTH}/etc/init.d
 	$(INSTALL_BIN) ./files/hci $(IDIR_BRCM_BLUETOOTH)/etc/init.d/
-	${INSTALL_DIR} ${IDIR_BRCM_BLUETOOTH}/lib/firmware
+	${INSTALL_DIR} ${IDIR_BRCM_BLUETOOTH}/lib/firmware/brcm
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3),y)
 	${CP} ${WRKBUILD}/BCM43430A1.hcd ${IDIR_BRCM_BLUETOOTH}/lib/firmware
 else
-	${CP} ${WRKBUILD}/*.hcd ${IDIR_BRCM_BLUETOOTH}/lib/firmware
+	${CP} ${WRKBUILD}/*.hcd ${IDIR_BRCM_BLUETOOTH}/lib/firmware/brcm
 	${INSTALL_DIR} ${IDIR_BRCM_BLUETOOTH}/sbin
 	${INSTALL_BIN} ${WRKBUILD}/brcm_patchram \
 		${IDIR_BRCM_BLUETOOTH}/sbin/brcm_patchram

@@ -103,6 +103,14 @@ config ADK_KERNEL_BT_HCIBTUSB
 	  This driver is required if you want to use Bluetooth devices with
 	  USB interface.
 
+config ADK_KERNEL_BT_HCIBTUSB_BCM
+	tristate "Broadcom protocol support"
+	depends on ADK_KERNEL_BT_HCIBTUSB
+	select ADK_KERNEL_BT_BCM
+	help
+	  The Broadcom protocol support enables firmware and patchram
+	  download support for Broadcom Bluetooth controllers.
+
 config ADK_KERNEL_BT_HCIUART
 	tristate "HCI UART driver"
 	select ADK_KERNEL_BT
