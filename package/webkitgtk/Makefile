@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		webkitgtk
-PKG_VERSION:=		2.12.3
+PKG_VERSION:=		2.14.0
 PKG_RELEASE:=		1
-PKG_HASH:=		173cbb9a2eca23eee52e99965483ab25aa9c0569ef5b57041fc0c129cc26c307
+PKG_HASH:=		0513ad836c624a3d24bdf1a99f4b4aead984ab6684150bc70f16db651590ea0a
 PKG_DESCR:=		web browser engine
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib icu4c zlib libwebp libgtk3 libsoup
@@ -15,9 +15,12 @@ PKG_DEPENDS+=		gst-plugins-base gstreamer libnotify
 PKG_BUILDDEP:=		glib icu4c zlib libwebp libgtk3 cmake-host
 PKG_BUILDDEP+=		libsoup libsecret libXt harfbuzz libnotify
 PKG_BUILDDEP+=		gst-plugins-base gstreamer cairo enchant
+PKG_BUILDDEP+=		gnutls
 PKG_URL:=		http://www.webkitgtk.org/
 PKG_SITES:=		http://webkitgtk.org/releases/
 PKG_OPTS:=		dev
+
+PKG_SYSTEM_DEPENDS:=	!raspberry-pi3
 
 include $(ADK_TOPDIR)/mk/package.mk
 
