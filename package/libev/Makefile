@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libev
-PKG_VERSION:=		4.20
+PKG_VERSION:=		4.22
 PKG_RELEASE:=		1
-PKG_HASH:=		f870334c7fa961e7f31087c7d76abf849f596e3048f8ed2a0aaa983cd73d449e
+PKG_HASH:=		736079e8ac543c74d59af73f9c52737b3bfec9601f020bf25a87a4f4d0f01bd6
 PKG_DESCR:=		full-featured and high-performance event loop
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://software.schmorp.de/pkg/libev.html
