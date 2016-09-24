@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		vlc
-PKG_VERSION:=		2.2.1
+PKG_VERSION:=		2.2.4
 PKG_RELEASE:=		1
-PKG_HASH:=		543d9d7e378ec0fa1ee2e7f7f5acf8c456c7d0ecc32037171523197ef3cf1fcb
+PKG_HASH:=		1632e91d2a0087e0ef4c3fb4c95c3c2890f7715a9d1d43ffd46329f428cf53be
 PKG_DESCR:=		popular media player
 PKG_SECTION:=		mm/video
 PKG_BUILDDEP:=		ffmpeg xcb-util libgcrypt alsa-lib
@@ -48,6 +48,8 @@ $(eval $(call PKG_template,VLC,vlc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},
 
 TARGET_CPPFLAGS+=	-D_DEFAULT_SOURCE
 TARGET_CFLAGS+=		-fPIC
+
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ENV+=		ac_cv_func_sched_getaffinity=no
 CONFIGURE_ARGS+=	--disable-lua \
 			--disable-dbus \
@@ -71,9 +73,9 @@ CONFIGURE_ARGS+=	--disable-neon
 endif
 
 ifneq ($(ADK_PACKAGE_VLC_WITH_BLURAY),)
-CONFIGURE_ARGS+=	--enable-libbluray
+CONFIGURE_ARGS+=	--enable-bluray
 else
-CONFIGURE_ARGS+=	--disable-libbluray
+CONFIGURE_ARGS+=	--disable-bluray
 endif
 ifneq ($(ADK_PACKAGE_VLC_WITH_MAD),)
 CONFIGURE_ARGS+=	--enable-mad

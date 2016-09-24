@@ -1,6 +1,14 @@
---- vlc-2.2.1.orig/src/posix/error.c	2014-08-14 02:20:04.000000000 -0500
-+++ vlc-2.2.1/src/posix/error.c	2015-04-25 21:13:22.287684003 -0500
-@@ -48,7 +48,11 @@ static const char *vlc_strerror_l(int er
+--- vlc-2.2.4.orig/src/posix/error.c	2015-02-02 20:42:32.000000000 +0100
++++ vlc-2.2.4/src/posix/error.c	2016-09-24 20:34:45.824539253 +0200
+@@ -31,6 +31,7 @@
+ 
+ static const char *vlc_strerror_l(int errnum, const char *lname)
+ {
++#ifdef HAVE_STRERROR_L
+     int saved_errno = errno;
+     locale_t loc = newlocale(LC_MESSAGES_MASK, lname, (locale_t)0);
+ 
+@@ -48,9 +49,16 @@ static const char *vlc_strerror_l(int er
          errno = saved_errno;
      }
  
@@ -11,4 +19,9 @@
 +#endif
  
      freelocale(loc);
++#else
++    const char *buf = strerror(errnum);
++#endif
      return buf;
+ }
+ 

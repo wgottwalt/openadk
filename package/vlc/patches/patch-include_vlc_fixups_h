@@ -1,0 +1,14 @@
+--- vlc-2.2.4.orig/include/vlc_fixups.h	2015-02-24 17:58:52.000000000 +0100
++++ vlc-2.2.4/include/vlc_fixups.h	2016-09-24 20:58:19.747228936 +0200
+@@ -239,11 +239,6 @@ static inline locale_t newlocale(int mas
+ }
+ #endif
+ 
+-#if !defined (HAVE_STATIC_ASSERT)
+-# define _Static_assert(x, s) ((void) sizeof (struct { unsigned:-!(x); }))
+-# define static_assert _Static_assert
+-#endif
+-
+ /* Alignment of critical static data structures */
+ #ifdef ATTRIBUTE_ALIGNED_MAX
+ #   define ATTR_ALIGN(align) __attribute__ ((__aligned__ ((ATTRIBUTE_ALIGNED_MAX < align) ? ATTRIBUTE_ALIGNED_MAX : align)))
