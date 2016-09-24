@@ -20,6 +20,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBPQ,libpq,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
+TARGET_CFLAGS:=		$(filter-out -ffast-math,$(TARGET_CFLAGS))
+
 CONFIGURE_ARGS+=	--disable-integer-datetimes \
 			--without-openssl \
 			--without-pam \
