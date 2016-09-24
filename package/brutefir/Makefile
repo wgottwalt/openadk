@@ -11,8 +11,7 @@ PKG_DESCR:=		convolution engine
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		fftw alsa-lib
 PKG_BUILDDEP:=		flex-host fftw alsa-lib
-PKG_URL:=		http://www.ludd.luth.se/~torger/brutefir.html
-PKG_SITES:=		http://www.ludd.luth.se/~torger/files/	
+PKG_SITES:=		http://distfiles.openadk.org/
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
