@@ -13,6 +13,8 @@ PKG_DEPENDS:=		make
 PKG_URL:=		http://nsz.repo.hu/git/?p=libc-test
 PKG_SITES:=		git://nsz.repo.hu:45100/repo/libc-test
 
+PKG_LIBC_DEPENDS:=	musl
+
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBC_TEST,libc-test,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
