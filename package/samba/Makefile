@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		4.4.5
+PKG_VERSION:=		4.5.0
 PKG_RELEASE:=		1
-PKG_HASH:=		b876ef2e63f66265490e80a122e66ef2d7616112b839df68f56ac2e1ce17a7bd
+PKG_HASH:=		d3a9a439b746ddd2c5f119f60c72ef8a026bcee1efb1199bf19e44f114f6b586
 PKG_DESCR:=		file and print server
 PKG_SECTION:=		net/fs
 PKG_BUILDDEP:=		gettext-tiny util-linux popt python2 gnutls
@@ -33,6 +33,7 @@ CONFIGURE_ARGS+=	--enable-fhs \
 			--cross-answers=$(WRKSRC)/cache.txt \
 			--hostcc=gcc \
 			--without-pie \
+			--without-gettext \
 			--without-relro \
 			--without-systemd \
 			--without-automount \
