@@ -109,7 +109,7 @@ if [ ! -d $topdir/dl ]; then
 fi
 
 # check for c compiler
-compilerbins="clang cc gcc"
+compilerbins="cc gcc clang"
 for compilerbin in $compilerbins; do
   printf " --->  checking if $compilerbin is installed.. "
   if which $compilerbin >/dev/null; then
@@ -128,7 +128,7 @@ if [ -z "$CCFOUND" ]; then
 fi
 
 # check for c++ compiler
-compilerbins="clang++ c++ g++"
+compilerbins="c++ g++ clang++"
 for compilerbin in $compilerbins; do
   printf " --->  checking if $compilerbin is installed.. "
   if which $compilerbin >/dev/null; then
@@ -356,17 +356,20 @@ cat >test.c <<-'EOF'
 	}
 EOF
 
-$MAKE --no-print-directory ADK_TOPDIR=$topdir -f Makefile.tmp 2>&1
-X=$(./test)
-if [ $X != YES ]; then
-  echo "$X" | sed 's/^/| /'
+printf " --->  checking if compiler is working.. "
+$MAKE --no-print-directory ADK_TOPDIR=$topdir -f Makefile.tmp >/dev/null 2>&1
+X=$(./test 2>/dev/null)
+if [ X$X != XYES ]; then
   echo Cannot compile a simple test programme.
   echo You must install a host make and C compiler.
   echo
   out=1
+else
+  printf "okay\n"
 fi
 rm test.c test 2>/dev/null
 
+printf " --->  checking if zlib is installed.. "
 # check for zlib
 cat >test.c <<-'EOF'
 	#include <stdio.h>
@@ -393,15 +396,16 @@ cat >test.c <<-'EOF'
 	}
 EOF
 
-$MAKE --no-print-directory LDADD=-lz ADK_TOPDIR=$topdir -f Makefile.tmp 2>&1
-X=$(echo YES | gzip | ./test)
-if [ $X != YES ]; then
-  echo "$X" | sed 's/^/| /'
+$MAKE --no-print-directory LDADD=-lz ADK_TOPDIR=$topdir -f Makefile.tmp >/dev/null 2>&1 
+X=$(echo YES | gzip | ./test 2>/dev/null)
+if [ X$X != XYES ]; then
   echo Cannot compile a libz test programm.
   echo You must install the zlib development package,
   echo usually called libz-dev, and the run-time library.
   echo
   out=1
+else
+  printf "found\n"
 fi
 
 rm test.c test 2>/dev/null
@@ -409,7 +413,7 @@ rm Makefile.tmp 2>/dev/null
 
 # error out on any required prerequisite
 if [ $out -ne 0 ]; then
-  exit $out
+  exit
 fi
 
 host_build_bc=0
