@@ -57,8 +57,8 @@ uclibc-ng-dev-install:
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
 ifeq ($(ADK_TARGET_LIB_WITH_THREADS),y)
-	${CP} ${STAGING_TARGET_DIR}/usr/lib/libpthread.so ${IDIR_UCLIBC_NG_DEV}/usr/lib
-	${CP} ${STAGING_TARGET_DIR}/usr/lib/libpthread_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
+	-${CP} ${STAGING_TARGET_DIR}/usr/lib/libpthread.so ${IDIR_UCLIBC_NG_DEV}/usr/lib
+	-${CP} ${STAGING_TARGET_DIR}/usr/lib/libpthread_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
 endif
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	for file in libcrypt libdl libm libresolv libutil libuargp; do \
