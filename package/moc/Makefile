@@ -12,7 +12,7 @@ PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libmad libvorbis libcurl libflac
 PKG_DEPENDS+=		libncurses libid3tag
 PKG_BUILDDEP:=		ncurses libvorbis curl libmad flac
-PKG_BUILDDEP+=		libid3tag db libtool
+PKG_BUILDDEP+=		libid3tag libtool
 PKG_URL:=		http://moc.daper.net/
 PKG_SITES:=		ftp://ftp.daper.net/pub/soft/moc/stable/
 
@@ -24,13 +24,14 @@ $(eval $(call PKG_template,MOC,moc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},
 
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 TARGET_LDFLAGS+=	-ltinfo
+
 CONFIGURE_ARGS+=	--without-jack \
 			--without-oss \
+			--disable-cache \
 			--without-musepack \
 			--without-speex \
 			--without-ffmpeg \
-			--without-sndfile \
-			--with-bdb-dir='$(STAGING_TARGET_DIR)/usr'
+			--without-sndfile
 
 moc-install:
 	${INSTALL_DIR} ${IDIR_MOC}/usr/bin
