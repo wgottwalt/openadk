@@ -17,6 +17,9 @@ PKG_SITES=		https://downloads.mariadb.org/interstitial/mariadb-$(PKG_VERSION)/so
 PKG_LIBNAME:=		libmariadbclient
 PKG_OPTS:=		dev
 
+# atomic ops not implemented
+PKG_ARCH_DEPENDS:=	!mips
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${ADK_TOPDIR}/mk/host.mk
