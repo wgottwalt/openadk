@@ -2,6 +2,13 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+os=$(uname)
+if [ "$os" = "Darwin" ]; then
+  sed="sed -i '' -e"
+else
+  sed="sed -i -e"
+fi
+
 topdir=$(readlink -nf $(dirname $0)/.. 2>/dev/null || (cd $(dirname $0)/..; pwd -P))
 . $topdir/.config
 
@@ -51,8 +58,8 @@ for service in $(grep ^ADK_RUNTIME_START_ $topdir/.config |grep -v ADK_RUNTIME_S
 		rcname=openssh
 	fi
 	if [ $mode = "m" ]; then
-	  sed -i "" -e "s#^$rcname=\"NO\"#$rcname=\"DAEMON\"#" $rcconf
+	  $sed "s#^$rcname=\"NO\"#$rcname=\"DAEMON\"#" $rcconf
 	else
-	  sed -i "" -e "s#^$rcname=\"NO\"#$rcname=\"YES\"#" $rcconf
+	  $sed "s#^$rcname=\"NO\"#$rcname=\"YES\"#" $rcconf
 	fi
 done
