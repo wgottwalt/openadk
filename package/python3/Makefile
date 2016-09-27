@@ -19,7 +19,9 @@ PKG_SITES:=		http://legacy.python.org/ftp/python/${PKG_VERSION}/
 PKG_HOST_DEPENDS:=	!netbsd !openbsd !cygwin
 
 PKG_FLAVOURS_PYTHON3:=	MOD_ZLIB MOD_BZ2 MOD_EXPAT MOD_SQLITE MOD_GDBM
-PKG_FLAVOURS_PYTHON3+=	MOD_NCURSES MOD_SSL MOD_READLINE
+PKG_FLAVOURS_PYTHON3+=	MOD_NCURSES MOD_SSL 
+# disabled
+#MOD_READLINE
 			
 PKGFD_MOD_ZLIB:=	zlib support
 PKGFB_MOD_ZLIB:=	zlib
@@ -74,7 +76,7 @@ $(eval $(call PKG_template,PYTHON3_MOD_SQLITE,python3-mod-sqlite,$(PKG_VERSION)-
 $(eval $(call PKG_template,PYTHON3_MOD_GDBM,python3-mod-gdbm,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_GDBM},${PKGFD_MOD_GDBM},${PKG_SECTION}))
 $(eval $(call PKG_template,PYTHON3_MOD_NCURSES,python3-mod-ncurses,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_NCURSES},${PKGFD_MOD_NCURSES},${PKG_SECTION}))
 $(eval $(call PKG_template,PYTHON3_MOD_SSL,python3-mod-ssl,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_SSL},${PKGFD_MOD_SSL},${PKG_SECTION}))
-$(eval $(call PKG_template,PYTHON3_MOD_READLINE,python3-mod-readline,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_READLINE},${PKGFD_MOD_READLINE},${PKG_SECTION}))
+#$(eval $(call PKG_template,PYTHON3_MOD_READLINE,python3-mod-readline,$(PKG_VERSION)-${PKG_RELEASE},${PKGFS_MOD_READLINE},${PKGFD_MOD_READLINE},${PKG_SECTION}))
 
 $(eval $(call PKG_mod_template,PYTHON3_MOD_ZLIB,zlib))
 $(eval $(call PKG_mod_template,PYTHON3_MOD_BZ2,_bz2))
@@ -83,7 +85,7 @@ $(eval $(call PKG_mod_template,PYTHON3_MOD_SQLITE,_sqlite))
 $(eval $(call PKG_mod_template,PYTHON3_MOD_GDBM,_gdbm))
 $(eval $(call PKG_mod_template,PYTHON3_MOD_NCURSES,_curses))
 $(eval $(call PKG_mod_template,PYTHON3_MOD_SSL,_ssl))
-$(eval $(call PKG_mod_template,PYTHON3_MOD_READLINE,readline))
+#$(eval $(call PKG_mod_template,PYTHON3_MOD_READLINE,readline))
 
 MAKE_ENV+=		HOSTPGEN=$(STAGING_HOST_DIR)/usr/bin/pgen3
 FAKE_FLAGS+=		ENSUREPIP=no
