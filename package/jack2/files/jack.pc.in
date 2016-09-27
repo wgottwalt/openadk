@@ -1,11 +1,11 @@
 prefix=@PREFIX@
 exec_prefix=@PREFIX@
 libdir=@LIBDIR@
-includedir=/home/wbx/openadk/target_qemu-arm-realview-eb-mpcore_uclibc-ng_arm_hard_eabihf/usr/include
+includedir=@INCLUDEDIR@
 server_libs=-L@LIBDIR@ -ljackserver
 
 Name: jack
 Description: the Jack Audio Connection Kit: a low-latency synchronous callback-based media server
 Version: 1.9.10
 Libs: -L@LIBDIR@ -ljack
-Cflags: -I/home/wbx/openadk/target_qemu-arm-realview-eb-mpcore_uclibc-ng_arm_hard_eabihf/usr/include
+Cflags: -I@INCLUDEDIR@
