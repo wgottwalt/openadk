@@ -263,6 +263,5 @@ endmenu
 source target/linux/config/Config.in.part
 source target/linux/config/Config.in.fsnet
 source target/linux/config/Config.in.nls
-source target/linux/config/Config.in.aufs
 
 endmenu
