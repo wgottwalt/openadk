@@ -15,6 +15,8 @@ PKG_NEEDS:=		threads rt c++
 PKG_URL:=		https://nodejs.org/
 PKG_SITES:=		https://nodejs.org/dist/v$(PKG_VERSION)/
 
+PKG_SYSTEM_DEPENDS:=	!mikrotik-rb532
+
 DISTFILES:=             node-v$(PKG_VERSION).tar.gz
 WRKDIST=		$(WRKDIR)/node-v$(PKG_VERSION)
 
