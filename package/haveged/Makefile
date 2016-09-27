@@ -11,7 +11,7 @@ PKG_DESCR:=		entropy gathering daemon
 PKG_SECTION:=		sys/misc
 PKG_SITES:=		http://www.issihosts.com/haveged/
 
-PKG_ARCH_DEPENDS:=	!arm
+PKG_ARCH_DEPENDS:=	!arm !mips
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
