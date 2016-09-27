@@ -72,7 +72,6 @@ CONFIGURE_ARGS=		--with-z=${STAGING_TARGET_DIR}/usr \
 			--without-tonezone \
 			--without-asound \
 			--without-curses \
-			--without-gtk \
 			--without-gtk2 \
 			--without-h323 \
 			--without-iksemel \
@@ -117,6 +116,7 @@ endif
 
 INSTALL_STYLE:=		manual
 
+TARGET_CFLAGS+=		-fgnu89-inline
 TARGET_LDFLAGS+=	-lm -ltinfo -ldl -lpthread
 MAKE_ENV=		ASTCFLAGS="${TARGET_CPPFLAGS} -DHAVE_STRTOQ" \
 			ASTLDFLAGS="${TARGET_LDFLAGS}"
