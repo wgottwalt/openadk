@@ -98,7 +98,6 @@ ifeq ($(ADK_TARGET_LIBC_ICONV),y)
 endif
 ifeq ($(ADK_RUNTIME_ENABLE_LOCALE),y)
 	$(SED) 's/.*\(UCLIBC_HAS_LOCALE\).*/\1=y/' ${WRKBUILD}/.config
-	$(SED) 's/.*\(UCLIBC_BUILD_MINIMAL_LOCALE\).*/\1=y/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_UCLINUX),y)
 	$(SED) 's/.*\(ARCH_USE_MMU\).*/# \1 is not set/' ${WRKBUILD}/.config
@@ -294,6 +293,9 @@ endif
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		oldconfig
+ifeq ($(ADK_RUNTIME_ENABLE_LOCALE),y)
+	$(SED) 's/.*\(UCLIBC_BUILD_MINIMAL_LOCALES\).*/\1="$(ADK_RUNTIME_DEFAULT_LOCALE)"/' ${WRKBUILD}/.config
+endif
 	touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
