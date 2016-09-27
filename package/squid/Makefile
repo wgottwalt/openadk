@@ -15,6 +15,8 @@ PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://www.squid-cache.org/
 PKG_SITES:=		http://www.squid-cache.org/Versions/v3/3.5/
 
+PKG_SYSTEM_DEPENDS:=	!mikrotik-rb532
+
 PKG_SUBPKGS:=		SQUID SQUID_MOD_BASIC_AUTH_GETPWNAM SQUID_MOD_BASIC_AUTH_NCSA
 PKG_SUBPKGS+=		SQUID_MOD_BASIC_AUTH_SMB SQUID_MOD_DIGEST_AUTH_FILE
 PKG_SUBPKGS+=		SQUID_MOD_EXTERNAL_ACL_FILE_USERIP SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP
@@ -111,8 +113,10 @@ $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_LDAP_GROUP,ldap_auth))
 $(eval $(call PKG_mod_template,SQUID_MOD_EXTERNAL_ACL_UNIX_GROUP,ext_unix_group_acl))
 $(eval $(call PKG_mod_template,SQUID_MOD_NTLM_AUTH_FAKE,ntlm_fake_auth))
 
-AUTOTOOL_STYLE:=	autoreconf
 TARGET_LDFLAGS+=	-lpthread
+HOST_CXXFLAGS+=		-static-libstdc++
+
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			ac_cv_sizeof_short=2 \
 			ac_cv_sizeof_int=4 \
