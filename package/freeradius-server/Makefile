@@ -106,7 +106,7 @@ ${2}-install:
 		${CP} ${WRKINST}/usr/lib/freeradius/$$$${m}.so \
 		  $${IDIR_${1}}/usr/lib/freeradius/ ; \
 	done
-	${INSTALL_DIR} $${IDIR_${1}}/etc/freeradius
+	-${INSTALL_DIR} $${IDIR_${1}}/etc/freeradius
 	for f in ${3}; do \
 		${CP} ${WRKINST}/etc/freeradius/$$$${f} \
 		  $${IDIR_${1}}/etc/freeradius/ ; \
