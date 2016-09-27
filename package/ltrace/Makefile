@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ltrace
-PKG_VERSION:=		c18a46eff706e956c4dc755144d752dc163a1145
+PKG_VERSION:=		c22d359433b333937ee3d803450dc41998115685
 PKG_RELEASE:=		1
 PKG_GIT:=		hash
 PKG_DESCR:=		intercepts and records dynamic library calls 
