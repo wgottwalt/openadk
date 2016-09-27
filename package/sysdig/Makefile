@@ -16,6 +16,8 @@ PKG_NEEDS:=		c++
 PKG_URL:=		http://www.sysdig.org/
 PKG_SITES:=		https://github.com/draios/sysdig.git
 
+PKG_SYSTEM_DEPENDS:=	!mikrotik-rb532
+
 include $(ADK_TOPDIR)/mk/package.mk
 include ${ADK_TOPDIR}/mk/kernel-ver.mk
 
