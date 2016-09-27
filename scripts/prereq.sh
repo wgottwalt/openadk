@@ -108,7 +108,11 @@ if [ ! -d $topdir/dl ]; then
 fi
 
 # check for c compiler
-compilerbins="cc gcc clang"
+if [ $os = "Darwin" ]; then
+  compilerbins="clang cc gcc"
+else
+  compilerbins="cc gcc clang"
+fi
 for compilerbin in $compilerbins; do
   printf " --->  checking if $compilerbin is installed.. "
   if which $compilerbin >/dev/null; then
@@ -127,7 +131,11 @@ if [ -z "$CCFOUND" ]; then
 fi
 
 # check for c++ compiler
-compilerbins="c++ g++ clang++"
+if [ $os = "Darwin" ]; then
+  compilerbins="clang++ c++ g++"
+else
+  compilerbins="c++ g++ clang++"
+fi
 for compilerbin in $compilerbins; do
   printf " --->  checking if $compilerbin is installed.. "
   if which $compilerbin >/dev/null; then
