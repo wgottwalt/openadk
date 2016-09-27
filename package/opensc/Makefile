@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		opensc
 PKG_VERSION:=		0.15.0
 PKG_RELEASE:=		1
-PKG_HASH:=		399b2107a69e3f67e4e76dc2dbd951dbced8e534b1e0f919e176aea9b85970d7
+PKG_HASH:=		7c8600a37d11f82410699ee5c60bfebc46f6714d0d87b4125dd99215c87d4db8
 PKG_DESCR:=		utilities to access smart cards
 PKG_SECTION:=		app/crypto
 PKG_BUILDDEP:=		openct pcsc-lite readline
