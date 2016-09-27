@@ -1,5 +1,5 @@
 --- libcap-2.25.orig/Make.Rules	2016-01-31 02:14:53.000000000 +0100
-+++ libcap-2.25/Make.Rules	2016-09-23 10:37:16.179167139 +0200
++++ libcap-2.25/Make.Rules	2016-09-26 20:46:02.214228217 +0200
 @@ -13,21 +13,14 @@ FAKEROOT=$(DESTDIR)
  # administrative operations that could be needed to recover a system.
  
@@ -24,3 +24,18 @@
  
  # Target directories
  
+@@ -48,10 +41,10 @@ MINOR=25
+ KERNEL_HEADERS := $(topdir)/libcap/include/uapi
+ IPATH += -fPIC -I$(KERNEL_HEADERS) -I$(topdir)/libcap/include
+ 
+-CC := gcc
+-CFLAGS := -O2 -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
+-BUILD_CC := $(CC)
+-BUILD_CFLAGS := $(CFLAGS) $(IPATH)
++CC ?= gcc
++CFLAGS ?= -D_LARGEFILE64_SOURCE -D_FILE_OFFSET_BITS=64
++BUILD_CC := $(CC_FOR_BUILD)
++BUILD_CFLAGS := $(CFLAGS_FOR_BUILD) $(IPATH)
+ AR := ar
+ RANLIB := ranlib
+ DEBUG = -g #-DDEBUG

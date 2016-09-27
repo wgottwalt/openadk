@@ -25,14 +25,6 @@ HOST_STYLE:=		manual
 CPPFLAGS_FOR_BUILD+=	-I$(STAGING_TARGET_DIR)/usr/include
 CONFIG_STYLE:=		manual
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
-ALL_TARGET:=		static progs
-INSTALL_TARGET:=	install-static
-else
-ALL_TARGET:=		shared progs
-INSTALL_TARGET:=	install-shared
-endif
-
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET}) $(MAKE_TRACE)
