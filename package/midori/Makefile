@@ -15,6 +15,8 @@ PKG_BUILDDEP+=		librsvg-host librsvg
 PKG_URL:=		http://www.midori-browser.org
 PKG_SITES:=		http://distfiles.openadk.org/
 
+PKG_ARCH_DEPENDS:=	!mips
+
 WRKBUILD=               ${WRKDIR}/${PKG_NAME}-obj
 
 include $(ADK_TOPDIR)/mk/package.mk

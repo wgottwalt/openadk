@@ -20,6 +20,7 @@ PKG_URL:=		http://www.webkitgtk.org/
 PKG_SITES:=		http://webkitgtk.org/releases/
 PKG_OPTS:=		dev
 
+PKG_ARCH_DEPENDS:=	!mips
 PKG_SYSTEM_DEPENDS:=	!raspberry-pi3
 
 include $(ADK_TOPDIR)/mk/package.mk
