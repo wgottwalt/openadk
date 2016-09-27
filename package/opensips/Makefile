@@ -4,15 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		opensips
-PKG_VERSION:=		1.11.8
+PKG_VERSION:=		2.2.1
 PKG_RELEASE:=		1
-PKG_HASH:=		947a0c685ab36efe110d9e3043e3464264763ef2fdc7a37b628efd3127da98f4
+PKG_HASH:=		bbf31ea3544ce0d0f0aa346e9aa023f3208119f8aee34f3188329fd53a87ddc5
 PKG_DESCR:=		high-performance, configurable, free sip server
 PKG_SECTION:=		net/voip
 PKG_URL:=		http://opensips.org/
 PKG_SITES:=		http://opensips.org/pub/opensips/$(PKG_VERSION)/
-
-PKG_SYSTEM_DEPENDS:=	!raspberry-pi3
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
@@ -28,7 +26,7 @@ PKG_SUBPKGS:=		OPENSIPS OPENSIPS_MOD_ACCOUNTING OPENSIPS_MOD_AUTH
 PKG_SUBPKGS+=		OPENSIPS_MOD_AUTH_DB OPENSIPS_MOD_AVPOPS OPENSIPS_MOD_DISPATCHER
 PKG_SUBPKGS+=		OPENSIPS_MOD_DIVERSION OPENSIPS_MOD_FLATSTORE OPENSIPS_MOD_GFLAGS
 PKG_SUBPKGS+=		OPENSIPS_MOD_GROUP OPENSIPS_MOD_MEDIAPROXY OPENSIPS_MOD_MSILO
-PKG_SUBPKGS+=		OPENSIPS_MOD_NATHELPER OPENSIPS_MOD_OPTIONS OPENSIPS_MOD_PDT
+PKG_SUBPKGS+=		OPENSIPS_MOD_NATHELPER OPENSIPS_MOD_OPTIONS
 PKG_SUBPKGS+=		OPENSIPS_MOD_PERMISSIONS OPENSIPS_MOD_PIKE OPENSIPS_MOD_SMS
 PKG_SUBPKGS+=		OPENSIPS_MOD_UAC OPENSIPS_MOD_UAC_REDIRECT OPENSIPS_MOD_URI
 
@@ -58,8 +56,6 @@ PKGSD_OPENSIPS_MOD_NATHELPER:=		nathelper support
 PKGSN_OPENSIPS_MOD_NATHELPER:=		opensips
 PKGSD_OPENSIPS_MOD_OPTIONS:=		options support
 PKGSN_OPENSIPS_MOD_OPTIONS:=		opensips
-PKGSD_OPENSIPS_MOD_PDT:=		pdt support
-PKGSN_OPENSIPS_MOD_PDT:=		opensips
 PKGSD_OPENSIPS_MOD_PERMISSIONS:=	permissions support
 PKGSN_OPENSIPS_MOD_PERMISSIONS:=	opensips
 PKGSD_OPENSIPS_MOD_PIKE:=		pike support
@@ -100,7 +96,6 @@ $(eval $(call PKG_template,OPENSIPS_MOD_MEDIAPROXY,opensips-mod-mediaproxy,$(PKG
 $(eval $(call PKG_template,OPENSIPS_MOD_MSILO,opensips-mod-msilo,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSIPS_MOD_NATHELPER,opensips-mod-nathelper,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSIPS_MOD_OPTIONS,opensips-mod-options,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-$(eval $(call PKG_template,OPENSIPS_MOD_PDT,opensips-mod-pdt,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSIPS_MOD_PERMISSIONS,opensips-mod-permissions,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSIPS_MOD_PIKE,opensips-mod-pike,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,OPENSIPS_MOD_SMS,opensips-mod-sms,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
@@ -121,7 +116,6 @@ $(eval $(call PKG_mod_template,OPENSIPS_MOD_MEDIAPROXY,mediaproxy))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_MSILO,msilo))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_NATHELPER,nathelper))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_OPTIONS,options))
-$(eval $(call PKG_mod_template,OPENSIPS_MOD_PDT,pdt))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_PERMISSIONS,permissions))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_PIKE,pike))
 $(eval $(call PKG_mod_template,OPENSIPS_MOD_SMS,sms))
@@ -145,6 +139,8 @@ do-build:
 		prefix=/ \
 		extra_defs="-DUSE_PTHREAD_MUTEX" \
 		TLS=1 \
+		FREERADIUS=0 \
+		NICER=0 \
 		NO_EPOLL=1 \
 		CC="$(TARGET_CC)" \
 		OS="linux" \
