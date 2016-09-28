@@ -341,7 +341,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		UCLIBC_ONLY=1 \
 		VERBOSE=1 \
 		install_runtime install_dev install_utils
-	PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		HOSTCC="$(HOST_CC)" \
 		CC='$(TARGET_CC)' \
 		PREFIX=$(STAGING_TARGET_DIR) \
@@ -353,7 +353,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		TEST_INSTALLED_UCLIBC=1 \
 		UCLIBC_ONLY=1 \
 		VERBOSE=1 \
-		test_compile test_gen
+		test_gen test_compile
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk
