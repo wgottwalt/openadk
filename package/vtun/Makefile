@@ -9,18 +9,10 @@ PKG_RELEASE:=		1
 PKG_HASH:=		22507499a8f650ef97157977e62fa632d5b0034070629a2d0fd0512e304eaeeb
 PKG_DESCR:=		vpn tunnel daemon
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		zlib liblzo
-PKG_BUILDDEP:=		zlib liblzo
+PKG_DEPENDS:=		zlib liblzo libressl
+PKG_BUILDDEP:=		zlib liblzo libressl
 PKG_KDEPENDS:=		tun
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=vtun/}
-
-PKG_CHOICES_VTUN:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

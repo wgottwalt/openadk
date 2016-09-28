@@ -9,26 +9,21 @@ PKG_RELEASE:=		1
 PKG_HASH:=		068dc47ce818ce5634f09a88159df85a6ce3456e2467b11b8c5f8543a99bb347
 PKG_DESCR:=		tools for accessing sup/rrlp server
 PKG_SECTION:=		net/misc
+PKG_DEPENDS:=		libressl
+PKG_BUILDDEP:=		libressl
 PKG_URL:=		http://www.tajuma.com/supl/
 PKG_SITES:=		$(MASTER_SITE_SOURCEFORGE:=supl/)
 
 DISTFILES:=             $(PKG_NAME)_$(PKG_VERSION).tar.gz
 WRKDIST=		$(WRKDIR)/trunk
 
-PKG_CHOICES_SUPL:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
-
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SUPL,supl,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 CONFIG_STYLE:=		minimal
-CONFIGURE_ARGS+=	--precompiled-asn1=yes --prefix="$(WRKINST)/usr"
+CONFIGURE_ARGS+=	--prefix="$(WRKINST)/usr" \
+			--precompiled-asn1=yes
 
 supl-install:
 	$(INSTALL_DIR) $(IDIR_SUPL)/usr/{bin,lib}

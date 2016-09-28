@@ -9,20 +9,12 @@ PKG_RELEASE:=		1
 PKG_HASH:=		f2d5c80164a5064d25e112f3ead9952d86200b022da584bddbc4afea948cb970
 PKG_DESCR:=		interprets captured radius packets
 PKG_SECTION:=		net/radius
-PKG_DEPENDS:=		libpcap
-PKG_BUILDDEP:=		libpcap
+PKG_DEPENDS:=		libpcap libressl
+PKG_BUILDDEP:=		libpcap libressl
 PKG_URL:=		http://sourceforge.net/projects/raddump
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=raddump/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_CHOICES_RADDUMP:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

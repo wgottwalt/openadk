@@ -14,14 +14,11 @@ PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sipsak.berlios/}
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION)-1.tar.gz
 
-PKG_CHOICES_SIPSAK:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITHOUT_SSL:=	use no ssl
+PKG_CHOICES_SIPSAK:=	WITH_LIBRESSL WITHOUT_SSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
 PKGCB_WITH_LIBRESSL:=	libressl
 PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
+PKGCD_WITHOUT_SSL:=	use no ssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

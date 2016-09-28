@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		d7de6bf3c67009c95525dde3a0212cc110d0a70b92af2af8e3ee800e81b88400
 PKG_DESCR:=		ldap client libraries
 PKG_SECTION:=		libs/misc
-PKG_DEPENDS:=		libsasl2 libdb libuuid libncurses
-PKG_BUILDDEP:=		cyrus-sasl db util-linux
+PKG_DEPENDS:=		libsasl2 libdb libuuid libncurses libressl
+PKG_BUILDDEP:=		cyrus-sasl db util-linux libressl
 PKG_NEEDS:=		threads c++
 PKG_URL:=		http://www.openldap.org/
 PKG_SITES:=		ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/
@@ -18,14 +18,6 @@ PKG_LIBNAME:=		libopenldap
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
-
-PKG_CHOICES_CTORRENT:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 PKG_SUBPKGS:=		LIBOPENLDAP OPENLDAP_UTILS OPENLDAP_SLAPD
 PKGSD_OPENLDAP_UTILS:=	ldap utilities
@@ -44,6 +36,7 @@ $(eval $(call PKG_template,LIBOPENLDAP,libopenldap,${PKG_VERSION}-${PKG_RELEASE}
 $(eval $(call PKG_template,OPENLDAP_UTILS,openldap-utils,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_UTILS},${PKGSD_OPENLDAP_UTILS},${PKGSC_OPENLDAP_UTILS}))
 $(eval $(call PKG_template,OPENLDAP_SLAPD,openldap-slapd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_OPENLDAP_SLAPD},${PKGSD_OPENLDAP_SLAPD},${PKGSC_OPENLDAP_SLAPD}))
 
+CONFIGURE_ENV+=		ac_cv_func_memcmp_working=yes
 CONFIGURE_ARGS+= 	--enable-slapd \
 			--libexecdir=/usr/sbin \
 			--enable-bdb \
@@ -65,7 +58,6 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-CONFIGURE_ENV+=		ac_cv_func_memcmp_working=yes
 XAKE_FLAGS+=		STRIP="" CPPFLAGS="-D_GNU_SOURCE"
 
 libopenldap-install:

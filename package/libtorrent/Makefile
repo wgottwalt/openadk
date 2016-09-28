@@ -9,21 +9,13 @@ PKG_RELEASE:=		1
 PKG_HASH:=		2838a08c96edfd936aff8fbf99ecbb930c2bfca3337dd1482eb5fccdb80d5a04
 PKG_DESCR:=		bittorrent library
 PKG_SECTION:=		libs/net
-PKG_DEPENDS:=		libsigc++ zlib
-PKG_BUILDDEP:=		libsigc++ zlib gettext-tiny
+PKG_DEPENDS:=		libsigc++ zlib libressl
+PKG_BUILDDEP:=		libsigc++ zlib libressl gettext-tiny
 PKG_URL:=		https://rakshasa.github.io/rtorrent/
 PKG_SITES:=		http://rtorrent.net/downloads/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_CHOICES_LIBTORRENT:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

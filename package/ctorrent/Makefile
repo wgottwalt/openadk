@@ -9,19 +9,13 @@ PKG_RELEASE:=		2
 PKG_HASH:=		c87366c91475931f75b924119580abd06a7b3cb3f00fef47346552cab1e24863
 PKG_DESCR:=		console-based bittorrent client
 PKG_SECTION:=		app/p2p
+PKG_DEPENDS:=		libressl
+PKG_BUILDDEP:=		libressl
 PKG_NEEDS:=		c++
 PKG_URL:=		http://www.rahul.net/dholmes/ctorrent
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=dtorrent/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_CHOICES_CTORRENT:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

@@ -31,16 +31,13 @@ PKG_CFLINE_XORG_SERVER:=depends on ADK_TARGET_WITH_VGA || ADK_TARGET_QEMU_WITH_G
 PKG_FLAVOURS_XORG_SERVER:=	WITH_KDRIVE
 PKGFD_WITH_KDRIVE:=		build kdrive xfbdev server
 
-PKG_CHOICES_XORG_SERVER:=	WITH_GCRYPT WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_GCRYPT:=		use libgcrypt for sha1
-PKGCS_WITH_GCRYPT:=		libgcrypt
-PKGCB_WITH_GCRYPT:=		libgcrypt
+PKG_CHOICES_XORG_SERVER:=	WITH_LIBRESSL WITH_GCRYPT
 PKGCD_WITH_LIBRESSL:=		use libressl crypto for sha1
 PKGCS_WITH_LIBRESSL:=		libressl
 PKGCB_WITH_LIBRESSL:=		libressl
-PKGCD_WITH_OPENSSL:=		use openssl crypto for sha1
-PKGCS_WITH_OPENSSL:=		libopenssl
-PKGCB_WITH_OPENSSL:=		openssl
+PKGCD_WITH_GCRYPT:=		use libgcrypt for sha1
+PKGCS_WITH_GCRYPT:=		libgcrypt
+PKGCB_WITH_GCRYPT:=		libgcrypt
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -52,7 +49,7 @@ ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_GCRYPT},y)
 CONFIGURE_ARGS+=	 --with-sha1=libgcrypt
 endif
 
-ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_CRYPTO},y)
+ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_LIBRESSL},y)
 CONFIGURE_ARGS+=	 --with-sha1=libcrypto
 endif
 

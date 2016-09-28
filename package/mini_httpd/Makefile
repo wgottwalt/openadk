@@ -8,20 +8,14 @@ PKG_VERSION:=		1.19
 PKG_RELEASE:=		10
 PKG_HASH:=		f7f36533b1338ea16d916ea525ea7006ab38fdd3544ac7df93a4688a8e270241
 PKG_DESCR:=		small webserver with ssl
+PKG_DEPENDS:=		libressl
+PKG_BUILDDEP:=		libressl
 PKG_SECTION:=		net/http
 PKG_URL:=		http://www.acme.com/software/mini_httpd/
 PKG_SITES:=		http://www.acme.com/software/mini_httpd/
 
 DISTFILES:=		mini_httpd-${PKG_VERSION}.tar.gz
 WRKDIST=		${WRKDIR}/mini_httpd-${PKG_VERSION}
-
-PKG_CHOICES_MINI_HTTPD:=WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

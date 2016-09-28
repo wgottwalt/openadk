@@ -9,17 +9,11 @@ PKG_RELEASE:=		1
 PKG_HASH:=		dab59f02b08bfbbc978c005bb16d2db6fe21e1fc841fde96af3d497ddfc82084
 PKG_DESCR:=		like ping but for http-requests
 PKG_SECTION:=		net/http
+PKG_DEPENDS:=		libressl
+PKG_BUILDDEP:=		libressl
 PKG_SITES:=		http://www.vanheusden.com/httping/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tgz
-
-PKG_CHOICES_HTTPING:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

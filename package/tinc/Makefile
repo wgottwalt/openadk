@@ -9,21 +9,13 @@ PKG_RELEASE:=		1
 PKG_HASH:=		0b502699360f09ce2128a39cf02abca07bfc699fc02ce829b3a90cf5e1e8b344
 PKG_DESCR:=		vpn tunnel daemon
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		zlib liblzo
-PKG_BUILDDEP:=		zlib liblzo
+PKG_DEPENDS:=		zlib liblzo libressl
+PKG_BUILDDEP:=		zlib liblzo libressl
 PKG_KDEPENDS:=		tun
 PKG_URL:=		http://www.tinc-vpn.org/
 PKG_SITES:=		http://www.tinc-vpn.org/packages/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_CHOICES_TINC:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

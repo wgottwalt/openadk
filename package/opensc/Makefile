@@ -9,22 +9,14 @@ PKG_RELEASE:=		1
 PKG_HASH:=		7c8600a37d11f82410699ee5c60bfebc46f6714d0d87b4125dd99215c87d4db8
 PKG_DESCR:=		utilities to access smart cards
 PKG_SECTION:=		app/crypto
-PKG_BUILDDEP:=		openct pcsc-lite readline
-PKG_DEPENDS:=		libopensc libopenct pcsc-lite libreadline
+PKG_BUILDDEP:=		openct pcsc-lite readline libressl
+PKG_DEPENDS:=		libopensc libopenct pcsc-lite libreadline libressl
 PKG_URL:=		https://github.com/OpenSC/OpenSC/wiki
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=opensc/}
 PKG_LIBNAME:=		libopensc
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_CHOICES_OPENSC:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 PKG_SUBPKGS:=		OPENSC LIBOPENSC
 PKGSD_LIBOPENSC:=	opensc library

@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		7d82c8aff2715c83deecdf10c566e26105bec0473af530a1356d4c747ebdfd10
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
-PKG_DEPENDS:=		boost python2 libsquish libbluray
+PKG_DEPENDS:=		boost python2 libsquish libbluray libressl
 PKG_DEPENDS+=		libass libmpeg2 libmad libdbus libglew mesa
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libnettle librtmp
@@ -27,7 +27,7 @@ PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug libgtk2
 PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis libbluray
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
 PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish libdcadec
-PKG_BUILDDEP+=		libcrossguid
+PKG_BUILDDEP+=		libcrossguid libressl
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		https://github.com/xbmc/xbmc/archive/
@@ -36,14 +36,6 @@ PKG_CFLINE_KODI:=	select ADK_PACKAGE_GPU_VIV_BIN_MX6Q if ADK_TARGET_SYSTEM_SOLID
 
 DISTFILES:=		$(PKG_VERSION)-Jarvis.tar.gz
 WRKDIST=		${WRKDIR}/xbmc-$(PKG_VERSION)-Jarvis
-
-PKG_CHOICES_KODI:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCS_WITH_OPENSSL:=	libopenssl
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCB_WITH_LIBRESSL:=	libressl
 
 PKG_FLAVOURS_KODI:=	WITH_SMB WITH_NFS WITH_SSH WITH_AVAHI WITH_CEC 
 PKG_FLAVOURS_KODI+=	WITH_WEBSERVER WITH_LIRC

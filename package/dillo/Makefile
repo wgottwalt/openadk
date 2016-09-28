@@ -9,19 +9,11 @@ PKG_RELEASE:=		1
 PKG_HASH:=		db1be16c1c5842ebe07b419aa7c6ef11a45603a75df2877f99635f4f8345148b
 PKG_DESCR:=		small graphical web browser
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libfltk libxi libpng zlib libjpeg-turbo
-PKG_BUILDDEP:=		fltk libXi libjpeg-turbo libpng zlib
+PKG_DEPENDS:=		libfltk libxi libpng zlib libjpeg-turbo libressl
+PKG_BUILDDEP:=		fltk libXi libjpeg-turbo libpng zlib libressl
 PKG_NEEDS:=		threads cxx
 PKG_URL:=		http://www.dillo.org/
 PKG_SITES:=		http://www.dillo.org/download/
-
-PKG_CHOICES_DILLO:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 PKG_HOST_DEPENDS:=	!cygwin
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips arm

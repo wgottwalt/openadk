@@ -17,21 +17,19 @@ PKG_SITES:=		http://nginx.org/download/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
-PKG_CHOICES_NGINX:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITHOUT_SSL:=	use no ssl
+PKG_CHOICES_NGINX:=	WITH_LIBRESSL WITHOUT_SSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
 PKGCB_WITH_LIBRESSL:=	libressl
 PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
+PKGCD_WITHOUT_SSL:=	use no ssl
 
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,NGINX,nginx,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
-CONFIG_STYLE:=          minimal
 TARGET_CFLAGS+=         -fPIC
+
+CONFIG_STYLE:=          minimal
 CONFIGURE_ENV+=		ngx_force_gcc_have_atomic=yes \
 			ngx_force_have_libatomic=no
 CONFIGURE_ARGS:=        --prefix=/srv/www \
@@ -51,9 +49,6 @@ CONFIGURE_ARGS:=        --prefix=/srv/www \
 			--http-scgi-temp-path=/var/lib/nginx/uwsgi \
 			--http-uwsgi-temp-path=/var/lib/nginx/uwsgi
 
-ifeq ($(ADK_PACKAGE_NGINX_WITH_OPENSSL),y)
-CONFIGURE_ARGS+=	--with-http_ssl_module
-endif
 ifeq ($(ADK_PACKAGE_NGINX_WITH_LIBRESSL),y)
 CONFIGURE_ARGS+=	--with-http_ssl_module
 endif

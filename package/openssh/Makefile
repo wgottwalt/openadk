@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		3ffb989a6dcaa69594c3b550d4855a5a2e1718ccdde7f5e36387b424220fbecc
 PKG_DESCR:=		secure shell implementation
 PKG_SECTION:=		net/security
-PKG_BUILDDEP:=		zlib
-PKG_DEPENDS:=		zlib
+PKG_BUILDDEP:=		zlib libressl
+PKG_DEPENDS:=		zlib libressl
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.openssh.com/
 PKG_SITES:=		http://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/
@@ -35,14 +35,6 @@ PKG_FLAVOURS_OPENSSH:=	WITH_KRB5
 PKGFD_WITH_KRB5:=	enable kerberos 5 support
 PKGFS_WITH_KRB5:=	libkrb5 libcom-err
 PKGFB_WITH_KRB5:=	krb5
-
-PKG_CHOICES_OPENSSH:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	with libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	with openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
-PKGCB_WITH_OPENSSL:=	openssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

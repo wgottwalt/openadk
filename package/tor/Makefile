@@ -9,19 +9,11 @@ PKG_RELEASE:=		2
 PKG_HASH:=		493a8679f904503048114aca6467faef56861206bab8283d858f37141d95105d
 PKG_DESCR:=		anonymous internet communication system
 PKG_SECTION:=		net/proxy
-PKG_DEPENDS:=		libevent zlib
-PKG_BUILDDEP:=		libevent zlib
+PKG_DEPENDS:=		libevent zlib libressl
+PKG_BUILDDEP:=		libevent zlib libressl
 PKG_NEEDS:=		threads
 PKG_URL:=		https://www.torproject.org/
 PKG_SITES:=		https://www.torproject.org/dist/
-
-PKG_CHOICES_TOR:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

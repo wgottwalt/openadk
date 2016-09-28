@@ -9,22 +9,14 @@ PKG_RELEASE:=		1
 PKG_HASH:=		00c626c0dc18d094ab374dbd9a354915bfe4776433289386ed489c2ec0845cdd
 PKG_DESCR:=		http and webdav library
 PKG_SECTION:=		libs/misc
-PKG_DEPENDS:=		libxml2 zlib
-PKG_BUILDDEP:=		libxml2 zlib
+PKG_DEPENDS:=		libxml2 zlib libressl
+PKG_BUILDDEP:=		libxml2 zlib libressl
 PKG_NEEDS:=		threads
 PKG_URL:=		http://webdav.org/neon/
 PKG_SITES:=		http://webdav.org/neon/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_CHOICES_NEON:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

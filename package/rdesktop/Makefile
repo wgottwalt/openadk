@@ -9,20 +9,12 @@ PKG_RELEASE:=		1
 PKG_HASH:=		76cc834b89c34d8332f3cb3889483b2ae4d4e8118eeb45a8967c77dd18228246
 PKG_DESCR:=		client for windows terminal services
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libsamplerate alsa-lib libao
-PKG_BUILDDEP:=		libsamplerate alsa-lib libao
+PKG_DEPENDS:=		libsamplerate alsa-lib libao libressl
+PKG_BUILDDEP:=		libsamplerate alsa-lib libao libressl
 PKG_URL:=		http://www.rdesktop.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=rdesktop/}
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_CHOICES_RDESKTOP:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 include $(ADK_TOPDIR)/mk/package.mk
 

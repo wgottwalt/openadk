@@ -9,21 +9,13 @@ PKG_RELEASE:=		1
 PKG_HASH:=		f8d412b38d5ac390275b943bde69f4608f67862a45487ec854b30e4448fcb056
 PKG_DESCR:=		dns server
 PKG_SECTION:=		net/dns
-PKG_DEPENDS:=		libxml2
-PKG_BUILDDEP:=		libxml2
+PKG_DEPENDS:=		libxml2 libressl
+PKG_BUILDDEP:=		libxml2 libressl
 PKG_NEEDS:=		c++
 PKG_URL:=		https://www.isc.org/software/bind/
 PKG_SITES:=		ftp://ftp.isc.org/isc/bind9/${PKG_VERSION}/
 PKG_LIBNAME:=		libbind
 PKG_OPTS:=		dev
-
-PKG_CHOICES_LIBBIND:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

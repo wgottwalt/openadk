@@ -9,19 +9,13 @@ PKG_RELEASE:=		1
 PKG_HASH:=		befcd54365502bce4ffd6d1b0c345d5b689c9f7cb3a35a462ba7dcffcf6f62b8
 PKG_DESCR:=		utility for system services monitoring
 PKG_SECTION:=		sys/misc
+PKG_DEPENDS:=		libressl
+PKG_BUILDDEP:=		libressl
 PKG_NEEDS:=		threads
 PKG_URL:=		http://mmonit.com/monit/
 PKG_SITES:=		https://mmonit.com/monit/dist/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_CHOICES_MONIT:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 

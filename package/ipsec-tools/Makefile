@@ -9,20 +9,13 @@ PKG_RELEASE:=		2
 PKG_HASH:=		8eb6b38716e2f3a8a72f1f549c9444c2bc28d52c9536792690564c74fe722f2d
 PKG_DESCR:=		ipsec management tools
 PKG_SECTION:=		net/security
+PKG_DEPENDS:=		libressl
+PKG_BUILDDEP:=		flex libressl
 PKG_KDEPENDS:=		net-key
-PKG_BUILDDEP:=		flex
 PKG_URL:=		http://ipsec-tools.sourceforge.net/
 PKG_SITES:=		$(MASTER_SITE_SOURCEFORGE:=ipsec-tools/)
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
-
-PKG_CHOICES_IPSEC_TOOLS:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 PKG_FLAVOURS_IPSEC_TOOLS:=	WITH_IPV6
 PKGFD_WITH_IPV6:=		enable ipv6 support

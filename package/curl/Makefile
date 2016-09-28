@@ -27,20 +27,17 @@ PKGSS_LIBCURL:=		zlib
 PKG_FLAVOURS_CURL:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable ipv6 support
 
-PKG_CHOICES_CURL:=	WITHOUT_SSL WITH_LIBRESSL WITH_GNUTLS WITH_OPENSSL WITH_WOLFSSL
-PKGCD_WITHOUT_SSL:=	use no ssl
+PKG_CHOICES_CURL:=	WITH_LIBRESSL WITH_GNUTLS WITH_WOLFSSL WITHOUT_SSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
 PKGCS_WITH_LIBRESSL:=	libressl ca-certificates libgmp
 PKGCB_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates libgmp
-PKGCB_WITH_OPENSSL:=	openssl
 PKGCD_WITH_GNUTLS:=	use gnutls for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates libgmp
 PKGCB_WITH_GNUTLS:=	gnutls
 PKGCD_WITH_WOLFSSL:=	use wolfssl for crypto
 PKGCS_WITH_WOLFSSL:=	wolfssl ca-certificates
 PKGCB_WITH_WOLFSSL:=	wolfssl
+PKGCD_WITHOUT_SSL:=	use no ssl
 
 include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
@@ -49,12 +46,7 @@ $(eval $(call HOST_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,CURL,curl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBCURL,libcurl,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBCURL},${PKGSD_LIBCURL},${PKGSC_LIBCURL},${PKG_OPTS}))
 
-ifeq (${ADK_PACKAGE_CURL_WITHOUT_SSL},y)
-CONFIGURE_ARGS+=	--without-ssl \
-			--without-gnutls \
-			--without-axtls
-endif
-ifeq (${ADK_PACKAGE_CURL_WITH_OPENSSL},y)
+ifeq (${ADK_PACKAGE_CURL_WITH_LIBRESSL},y)
 CONFIGURE_ARGS+=	--with-ssl="${STAGING_TARGET_DIR}/usr" \
 			--without-gnutls \
 			--without-axtls
@@ -67,6 +59,11 @@ endif
 ifeq (${ADK_PACKAGE_CURL_WITH_WOLFSSL},y)
 CONFIGURE_ARGS+=	--with-cyassl="${STAGING_TARGET_DIR}/usr" \
 			--without-ssl \
+			--without-gnutls \
+			--without-axtls
+endif
+ifeq (${ADK_PACKAGE_CURL_WITHOUT_SSL},y)
+CONFIGURE_ARGS+=	--without-ssl \
 			--without-gnutls \
 			--without-axtls
 endif

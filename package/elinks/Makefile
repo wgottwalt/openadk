@@ -11,6 +11,7 @@ PKG_DESCR:=		advanced text web browser
 PKG_SECTION:=		app/browser
 PKG_URL:=		http://elinks.or.cz/
 PKG_SITES:=		http://elinks.or.cz/download/
+
 PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
@@ -18,14 +19,11 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 PKG_FLAVOURS_ELINKS:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
 
-PKG_CHOICES_ELINKS:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITHOUT_SSL:=	use no ssl
+PKG_CHOICES_ELINKS:=	WITH_LIBRESSL WITHOUT_SSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
 PKGCB_WITH_LIBRESSL:=	libressl
 PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
+PKGCD_WITHOUT_SSL:=	use no ssl
 
 include ${ADK_TOPDIR}/mk/package.mk
 
@@ -63,9 +61,6 @@ else
 CONFIGURE_ARGS+=	--disable-ipv6
 endif
 
-ifeq ($(ADK_PACKAGE_ELINKS_WITH_OPENSSL),y)
-CONFIGURE_ARGS+=	--with-openssl='${STAGING_TARGET_DIR}/usr'
-endif
 ifeq ($(ADK_PACKAGE_ELINKS_WITH_LIBRESSL),y)
 CONFIGURE_ARGS+=	--with-openssl='${STAGING_TARGET_DIR}/usr'
 endif

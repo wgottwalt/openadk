@@ -9,21 +9,13 @@ PKG_RELEASE:=		1
 PKG_HASH:=		e4561fd43a50539a8c2ceb37841691baf03ecb7daf043766da1b112e4280d584
 PKG_DESCR:=		client-side c library implementing ssh2 protocol
 PKG_SECTION:=		libs/crypto
-PKG_BUILDDEP:=		zlib
-PKG_DEPENDS:=		zlib
+PKG_BUILDDEP:=		zlib libressl
+PKG_DEPENDS:=		zlib libressl
 PKG_URL:=		http://www.libssh2.org/
 PKG_SITES:=		http://www.libssh2.org/download/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_CHOICES_LIBSSH2:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 include $(ADK_TOPDIR)/mk/package.mk
 

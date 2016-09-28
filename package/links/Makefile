@@ -16,14 +16,11 @@ PKG_SITES:=		http://links.twibright.com/download/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
-PKG_CHOICES_LINKS:=	WITHOUT_SSL WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITHOUT_SSL:=	use no ssl
+PKG_CHOICES_LINKS:=	WITH_LIBRESSL WITHOUT_SSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
 PKGCB_WITH_LIBRESSL:=	libressl
 PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
+PKGCD_WITHOUT_SSL:=	use no ssl
 
 PKG_FLAVOURS_LINKS:=	WITH_DIRECTFB
 PKGFD_WITH_DIRECTFB:=	enable DirectFB video output support

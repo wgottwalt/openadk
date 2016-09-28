@@ -9,19 +9,11 @@ PKG_RELEASE:=		1
 PKG_HASH:=		26ef46be555da21112c01e4b9f5e3abba9194485c8822ab55ba3d6496222af98
 PKG_DESCR:=		secure shell library
 PKG_SECTION:=		libs/crypto
-PKG_DEPENDS:=		zlib
-PKG_BUILDDEP:=		cmake-host zlib
+PKG_DEPENDS:=		zlib libressl
+PKG_BUILDDEP:=		cmake-host zlib libressl
 PKG_URL:=		http://www.libssh.org/
 PKG_SITES:=		https://red.libssh.org/attachments/download/195/
 PKG_OPTS:=		dev
-
-PKG_CHOICES_LIBSSH:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCS_WITH_OPENSSL:=	libopenssl
-PKGCB_WITH_OPENSSL:=	openssl
 
 include $(ADK_TOPDIR)/mk/package.mk
 

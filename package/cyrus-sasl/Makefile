@@ -9,20 +9,14 @@ PKG_RELEASE:=		2
 PKG_HASH:=		8fbc5136512b59bb793657f36fadda6359cae3b08f01fd16b3d406f1345b7bc3
 PKG_DESCR:=		general purpose authentication library
 PKG_SECTION:=		libs/crypto
+PKG_DEPENDS:=		libressl
+PKG_BUILDDEP:=		libressl
 PKG_URL:=		http://cyrusimap.org/
 PKG_SITES:=		ftp://ftp.cyrusimap.org/cyrus-sasl/
-PKG_NOPARALLEL:=	1
 PKG_LIBNAME:=		libsasl2
 PKG_OPTS:=		dev
 
-PKG_CHOICES_CYRUS_SASL:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
-
+PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

@@ -9,16 +9,10 @@ PKG_RELEASE:=		2
 PKG_HASH:=		7f54ba3974f45c0787b6d62d0d62ce352ddbf95419123b98b4969b97d3dfed23
 PKG_DESCR:=		textbased msn client
 PKG_SECTION:=		app/chat
+PKG_DEPENDS:=		libressl
+PKG_BUILDDEP:=		libressl
 PKG_URL:=		http://tmsnc.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tmsnc/}
-
-PKG_CHOICES_TMSNC:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -27,6 +21,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,TMSNC,tmsnc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_LDFLAGS+=	-ltinfo
+
 CONFIGURE_ARGS+=	--with-libiconv-prefix=${STAGING_TARGET_DIR}/usr \
 			--with-openssl=${STAGING_TARGET_DIR}/usr \
 			--with-ncurses=${STAGING_TARGET_DIR}

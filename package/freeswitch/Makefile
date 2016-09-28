@@ -10,19 +10,11 @@ PKG_HASH:=		b7beaaac29dc0a58cc34cfd402bf1c7e8ca06975722fd8ddb2983cbed17dd6e4
 PKG_DESCR:=		cross-platform telephony platform
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libpcre libcurl zlib libjpeg-turbo libsqlite
+PKG_DEPENDS+=		libressl
 PKG_BUILDDEP:=		util-linux zlib libjpeg-turbo sqlite curl pcre
-PKG_BUILDDEP+=		speex
+PKG_BUILDDEP+=		speex libressl
 PKG_URL:=		http://www.freeswitch.org/
 PKG_SITES:=		http://files.freeswitch.org/freeswitch-releases/
-
-PKG_CHOICES_FREESWITCH:=WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
-
 
 include $(ADK_TOPDIR)/mk/package.mk
 

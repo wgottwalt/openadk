@@ -9,20 +9,12 @@ PKG_RELEASE:=		2
 PKG_HASH:=		7b3d84a3403fce590377808eaa4b08b6320666ca0e37eba0ad578b66211b13c8
 PKG_DESCR:=		open source pbx
 PKG_SECTION:=		net/voip
-PKG_DEPENDS:=		libncurses libcurl
-PKG_BUILDDEP:=		ncurses zlib curl popt
+PKG_DEPENDS:=		libncurses libcurl libressl
+PKG_BUILDDEP:=		ncurses zlib curl popt libressl
 PKG_NEEDS:=		threads c++
 PKG_URL:=		http://www.asterisk.org/
 PKG_SITES:=		http://downloads.asterisk.org/pub/telephony/asterisk/releases/
 PKG_NOPARALLEL:=	1
-
-PKG_CHOICES_ASTERISK:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

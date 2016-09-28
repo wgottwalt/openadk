@@ -9,17 +9,11 @@ PKG_RELEASE:=		1
 PKG_HASH:=		67fabde9fb67b286a96c4f45b594b0eccd0f761b495705c18f2ae9461b831376
 PKG_DESCR:=		device that allows access to kernel cryptographic drivers
 PKG_SECTION:=		app/crypto
+PKG_DEPENDS:=		libressl
+PKG_BUILDDEP:=		libressl
 PKG_KDEPENDS:=		crypto-aead crypto-algapi crypto-manager
 PKG_URL:=		http://home.gna.org/cryptodev-linux/
 PKG_SITES:=		http://download.gna.org/cryptodev-linux/
-
-PKG_CHOICES_CRYPTODEV_LINUX:=	WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCB_WITH_LIBRESSL:=	libressl
-PKGCS_WITH_LIBRESSL:=	libressl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCB_WITH_OPENSSL:=	openssl
-PKGCS_WITH_OPENSSL:=	libopenssl
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

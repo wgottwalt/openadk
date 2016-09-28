@@ -16,17 +16,14 @@ PKG_NEEDS:=		c++
 PKG_URL:=		http://lftp.yar.ru/
 PKG_SITES:=		http://lftp.yar.ru/ftp/
 
-PKG_CHOICES_LFTP:=	WITHOUT_SSL WITH_GNUTLS WITH_LIBRESSL WITH_OPENSSL
-PKGCD_WITHOUT_SSL:=	use no ssl
-PKGCD_WITH_OPENSSL:=	use openssl for crypto
-PKGCS_WITH_OPENSSL:=	libopenssl ca-certificates
-PKGCB_WITH_OPENSSL:=	openssl
+PKG_CHOICES_LFTP:=	WITH_LIBRESSL WITH_GNUTLS WITHOUT_SSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
 PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
 PKGCB_WITH_LIBRESSL:=	libressl
 PKGCD_WITH_GNUTLS:=	use gnutls for crypto
 PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates
 PKGCB_WITH_GNUTLS:=	gnutls
+PKGCD_WITHOUT_SSL:=	use no ssl
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -43,10 +40,6 @@ endif
 ifeq (${ADK_PACKAGE_LFTP_WITH_GNUTLS},y)
 CONFIGURE_ARGS+=	--without-openssl \
 			--with-gnutls
-endif
-ifeq (${ADK_PACKAGE_LFTP_WITH_OPENSSL},y)
-CONFIGURE_ARGS+=	--with-openssl="$(STAGING_TARGET_DIR)/usr" \
-			--without-gnutls
 endif
 ifeq (${ADK_PACKAGE_LFTP_WITH_LIBRESSL},y)
 CONFIGURE_ARGS+=	--with-openssl="$(STAGING_TARGET_DIR)/usr" \
