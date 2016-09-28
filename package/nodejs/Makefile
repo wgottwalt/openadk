@@ -9,9 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		11b957de855a392ceaa8b300ec66236d6f9c6baa184837d00bdaba2da4aefe91
 PKG_DESCR:=		asynchronous event driven framework
 PKG_SECTION:=		net/http
-PKG_DEPENDS:=		zlib libopenssl
-PKG_BUILDDEP:=		python2-host zlib openssl
-HOST_BUILDDEP:=		openssl-host
+PKG_DEPENDS:=		zlib
+PKG_BUILDDEP:=		python2-host zlib
 PKG_NEEDS:=		threads rt c++
 PKG_URL:=		https://nodejs.org/
 PKG_SITES:=		https://nodejs.org/dist/v$(PKG_VERSION)/
@@ -39,7 +38,6 @@ host-configure:
 			--without-dtrace \
 			--without-etw \
 			--without-intl \
-			--shared-openssl \
 			--shared-zlib \
 		)
 
@@ -60,7 +58,6 @@ do-configure:
                 	--without-dtrace \
                 	--without-etw \
 			--without-intl \
-			--shared-openssl \
                 	--shared-zlib \
 		)
 
