@@ -24,13 +24,13 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-configure:
-	cd $(WRKBUILD) && ./waf configure --alsa --prefix=/usr
+	cd $(WRKBUILD) && PATH='$(HOST_PATH)' ./waf configure --alsa --prefix=/usr
 
 do-build:
-	cd $(WRKBUILD) && ./waf build
+	cd $(WRKBUILD) && PATH='$(HOST_PATH)' ./waf build
 
 do-install:
-	cd $(WRKBUILD) && ./waf install --destdir=$(WRKINST)
+	cd $(WRKBUILD) && PATH='$(HOST_PATH)' ./waf install --destdir=$(WRKINST)
 
 jack2-install:
 	$(INSTALL_DIR) $(IDIR_JACK2)/usr/bin
