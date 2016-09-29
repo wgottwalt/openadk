@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		freeradius-server
-PKG_VERSION:=		3.0.8
+PKG_VERSION:=		3.0.11
 PKG_RELEASE:=		1
-PKG_HASH:=		c27252d7a86ba252904612d9b1f90e846f3ef1f4afee6a748f5287b730e87e3a
+PKG_HASH:=		b97b72915315f2dcd34001af2c1737947f91ad9104a40408b92b030356e25d59
 PKG_DESCR:=		flexible radius server
 PKG_SECTION:=		net/radius
 PKG_DEPENDS:=		libltdl libpcre libtalloc
@@ -142,7 +142,6 @@ $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL,rlm_sql,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_MYSQL,rlm_sql_mysql,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_PGSQL,rlm_sql_postgresql,))
 
-TARGET_LDFLAGS+=	-lm
 AUTOTOOL_STYLE:=	autoreconf
 XAKE_FLAGS+=            GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTS} \
@@ -185,6 +184,8 @@ CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTS} \
 			--without-rlm_sql_sybase \
 			--without-rlm_sql_unixodbc \
 			--without-rlm_sql_log \
+			--without-rlm_redis \
+			--without-rlm_rediswho \
 			--without-rlm_unix \
 			--without-rlm_eap_ikev2 \
 			--without-rlm_eap_tnc \
