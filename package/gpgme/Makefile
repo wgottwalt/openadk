@@ -21,10 +21,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GPGME,gpgme,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
-ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
-TARGET_LDFLAGS+=	-luargp
-endif
-
 gpgme-install:
 	$(INSTALL_DIR) $(IDIR_GPGME)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libgpgme*.so* \
