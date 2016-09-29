@@ -12,6 +12,7 @@ config ADK_TARGET_MODEL_PCENGINES_ALIX1C
 	bool "PCengines Alix 1C"
 	select ADK_TARGET_WITH_SOUND
 	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_INPUT
 
 endchoice
 
