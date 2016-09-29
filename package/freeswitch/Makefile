@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		freeswitch
-PKG_VERSION:=		1.6.9
+PKG_VERSION:=		1.6.10
 PKG_RELEASE:=		1
-PKG_HASH:=		aa5f191113be2bd44cb4f2108da3dcc37be3234c6b733896fbff97526ac66451
+PKG_HASH:=		b7beaaac29dc0a58cc34cfd402bf1c7e8ca06975722fd8ddb2983cbed17dd6e4
 PKG_DESCR:=		cross-platform telephony platform
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libpcre libcurl zlib libjpeg-turbo libsqlite
@@ -39,6 +39,7 @@ CONFIGURE_ENV+=		ac_cv_file__dev_ptmx=yes \
 		       	ac_cv_func_malloc_0_nonnull=yes \
 			ac_cv_gcc_supports_w_no_unused_result=no \
 			apr_cv_tcp_nodelay_with_cork=yes \
+			apr_cv_process_shared_works=no \
 			ac_cv_file_dbd_apr_dbd_mysql_c=no \
 			ac_cv_func_setpgrp_void=yes
 
