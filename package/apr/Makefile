@@ -31,6 +31,7 @@ CONFIGURE_ENV+=		ac_cv_file__dev_zero=yes
 CONFIGURE_ENV+=		apr_cv_process_shared_works=no
 CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
 CONFIGURE_ENV+=		apr_cv_tcp_nodelay_with_cork=no
+CONFIGURE_ENV+=		supports_anon_versioning=no
 CONFIGURE_ARGS+=	--with-devrandom=/dev/urandom \
 			--enable-threads
 
