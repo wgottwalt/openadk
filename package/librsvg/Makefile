@@ -9,7 +9,7 @@ PKG_EXTRAVER:=		2.40
 PKG_RELEASE:=		1
 PKG_HASH:=		d9cac4a123eec6e553a26e120979bab7425def9ae7ce7c079eba5e4a45db05f4
 PKG_DESCR:=		svg library
-PKG_BUILDDEP:=		libcroco
+PKG_BUILDDEP:=		libcroco libgtk3
 HOST_BUILDDEP:=		glib-host libcroco-host gdk-pixbuf-host pango-host
 PKG_SECTION:=		libs/image
 PKG_URL:=		https://wiki.gnome.org/action/show/Projects/LibRsvg?action=show&redirect=LibRsvg
@@ -24,6 +24,7 @@ $(eval $(call PKG_template,LIBRSVG,librsvg,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 HOST_STYLE:=		auto
 HOST_LDFLAGS+=		-lffi -lgmodule-2.0
 HOST_CONFIGURE_ARGS+=	--enable-introspection=no
+
 CONFIGURE_ARGS+=	--enable-introspection=no
 
 librsvg-install:
