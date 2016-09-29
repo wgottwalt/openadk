@@ -7,7 +7,7 @@ PKG_NAME:=		kbd
 PKG_VERSION:=		2.0.2
 PKG_RELEASE:=		2
 PKG_HASH:=		9dfddabf96012e329c4bebb96a21aeef7c3872f624e96e8156ba542b82aeb912
-PKG_DESCR:=		keyboard utility
+PKG_DESCR:=		keyboard and font utilities
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libcheck
 PKG_BUILDDEP:=		flex-host bison-host check
@@ -26,7 +26,21 @@ kbd-install:
 	$(INSTALL_DIR) $(IDIR_KBD)/usr/share
 	$(CP) $(WRKINST)/usr/share/keymaps \
 		$(IDIR_KBD)/usr/share
+	$(CP) $(WRKINST)/usr/share/consolefonts \
+		$(IDIR_KBD)/usr/share
+	$(CP) $(WRKINST)/usr/share/consoletrans \
+		$(IDIR_KBD)/usr/share
+	$(CP) $(WRKINST)/usr/share/unimaps \
+		$(IDIR_KBD)/usr/share
 	$(INSTALL_DIR) $(IDIR_KBD)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/kbd_mode \
+		$(IDIR_KBD)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/setfont \
+		$(IDIR_KBD)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/showkey \
+		$(IDIR_KBD)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/loadunimap \
+		$(IDIR_KBD)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/loadkeys \
 		$(IDIR_KBD)/usr/bin
 ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
