@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gpgme
-PKG_VERSION:=		1.6.0
+PKG_VERSION:=		1.7.0
 PKG_RELEASE:=		1
-PKG_HASH:=		b09de4197ac280b102080e09eaec6211d081efff1963bf7821cf8f4f9916099d
+PKG_HASH:=		71f55fed0f2b3eaf7a606e59772aa645ce3ffff322d361ce359951b3f755cc48
 PKG_DESCR:=		easy access to gnupg for applications
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgpg-error libassuan
@@ -20,6 +20,8 @@ DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,GPGME,gpgme,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
+
+TARGET_CPPFLAGS+=	-D_FILE_OFFSET_BITS=64 -DLARGEFILE_SOURCE=1
 
 gpgme-install:
 	$(INSTALL_DIR) $(IDIR_GPGME)/usr/lib
