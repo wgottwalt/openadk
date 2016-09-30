@@ -83,6 +83,7 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-nsenter \
 			--disable-unshare \
 			--disable-wall \
+			--disable-symvers \
 			--without-python \
 			--without-systemd \
 			--without-user \
