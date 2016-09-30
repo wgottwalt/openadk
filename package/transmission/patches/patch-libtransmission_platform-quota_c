@@ -1,0 +1,11 @@
+--- transmission-2.92.orig/libtransmission/platform-quota.c	2015-03-27 13:44:20.469243994 +0100
++++ transmission-2.92/libtransmission/platform-quota.c	2016-09-30 19:08:06.279386697 +0200
+@@ -285,8 +285,6 @@ getquota (const char * device)
+       spaceused = (int64_t) dq.dqb_curblocks >> 1;
+ #elif defined(__APPLE__)
+       spaceused = (int64_t) dq.dqb_curbytes;
+-#elif defined(__UCLIBC__)
+-      spaceused = (int64_t) btodb(dq.dqb_curblocks);
+ #elif defined(__sun) || (defined(_LINUX_QUOTA_VERSION) && _LINUX_QUOTA_VERSION < 2)
+       spaceused = (int64_t) dq.dqb_curblocks >> 1;
+ #else
