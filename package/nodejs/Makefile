@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		nodejs
-PKG_VERSION:=		6.6.0
+PKG_VERSION:=		6.7.0
 PKG_RELEASE:=		1
-PKG_HASH:=		11b957de855a392ceaa8b300ec66236d6f9c6baa184837d00bdaba2da4aefe91
+PKG_HASH:=		02b8ee1719a11b9ab22bef9279519efaaf31dd0d39cba4c3a1176ccda400b8d6
 PKG_DESCR:=		asynchronous event driven framework
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		zlib
