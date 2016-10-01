@@ -57,6 +57,7 @@ CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			ac_cv_sqlite_dbstat_vtab=yes
 CONFIGURE_ARGS+=	--enable-application=browser \
 			--enable-official-branding \
+			--with-system-icu \
 			--with-system-zlib \
 			--with-system-bz2 \
 			--with-system-png \
