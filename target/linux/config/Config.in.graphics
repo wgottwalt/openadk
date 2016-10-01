@@ -133,10 +133,13 @@ config ADK_KERNEL_DRM_VC4
 config ADK_KERNEL_DRM_I915
 	bool
 
-config ADK_KERNEL_DRM_I915_KMS
+config ADK_KERNEL_DRM_KMS_HELPER
 	bool
 
-config ADK_KERNEL_DRM_I915_FBDEV
+config ADK_KERNEL_DRM_FBDEV_EMULATION
+	bool
+
+config ADK_KERNEL_INTEL_GTT
 	bool
 
 config ADK_KERNEL_AGP
@@ -178,7 +181,7 @@ config ADK_KERNEL_FB_VESA
 	  Generic VESA Framebuffer support.
 
 config ADK_KERNEL_MXC_GPU_VIV
-	bool "Framebuffer support for Cubox-i/Hummingboard (Vivante)"
+	bool "Framebuffer support for Vivante chips (Cubox-i/Hummingboard)"
 	select ADK_KERNEL_DRM
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FB_MXC
@@ -204,7 +207,7 @@ config ADK_KERNEL_MXC_GPU_VIV
 	  Framebuffer support for Cubox-i/Hummingboard (Vivante)
 	
 config ADK_KERNEL_FB_PXA
-	bool "Framebuffer support for Sharp Zaurus (PXA)"
+	bool "Framebuffer support for PXA boards (Sharp Zaurus)"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_DUMMY_CONSOLE
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
@@ -220,7 +223,7 @@ config ADK_KERNEL_FB_PXA
 	  Framebuffer support for Sharp Zaurus CL Series.
 
 config ADK_KERNEL_FB_GEODE_LX
-	bool "Framebuffer support for GEODE LX"
+	bool "Framebuffer support for GEODE LX (PC Engines Alix1c)"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FB_GEODE
@@ -231,7 +234,7 @@ config ADK_KERNEL_FB_GEODE_LX
 	  Framebuffer support for ALIX boards with VGA.
 
 config ADK_KERNEL_FB_SM712
-	bool "Framebuffer support for Lemote Yeelong"
+	bool "Framebuffer support for Silicon Motion 7xx (Lemote Yeelong)"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FONT_8x16
@@ -242,7 +245,7 @@ config ADK_KERNEL_FB_SM712
 	  Framebuffer support for Lemote Yeelong.
 
 config ADK_KERNEL_FB_BCM2708
-	bool "Framebuffer support for BCM28XX boards"
+	bool "Framebuffer support for BCM28XX boards (Raspberry PI)"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_KERNEL_FONT_8x16
@@ -252,47 +255,8 @@ config ADK_KERNEL_FB_BCM2708
  	help
 	  Framebuffer support for BCM28XX boards.
 
-config ADK_KERNEL_FB_RADEON
-	bool "Framebuffer support for RADEON chips"
-	select ADK_KERNEL_FB
-	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
-	select ADK_KERNEL_FONT_8x16
- 	help
-	  Framebuffer support for RADEON chips.
-
-config ADK_HARDWARE_GRAPHICS_INTEL_I915
-	bool "Support for Intel graphic cards (AGP/DRM/KMS)"
-	select ADK_KERNEL_FB
-	select ADK_KERNEL_DRM
-	select ADK_KERNEL_AGP
-	select ADK_KERNEL_AGP_INTEL
-	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
-	select ADK_KERNEL_DRM_I915
-	select ADK_KERNEL_DRM_I915_KMS
-	select ADK_KERNEL_DRM_I915_FBDEV
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default n
-	help
-          AGP/DRM/KMS support for Intel chipset i915.
-
-config ADK_KERNEL_DRM_BOCHS
-	bool "Support for QEMU STD VGA emulation (DRM/KMS)"
-	select ADK_KERNEL_DRM
-	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
-	depends on ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
-	help
-	  DRM/KMS support for Qemu STD VGA emulation.
-
-config ADK_KERNEL_DRM_CIRRUS_QEMU
-	bool "Support for QEMU cirrus VGA emulation (DRM/KMS)"
-	select ADK_KERNEL_DRM
-	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
-	depends on ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
-	help
-	  DRM/KMS support for Qemu cirrus VGA emulation.
-
 config ADK_KERNEL_FB_CGSIX
-	bool "Support for CGSIX framebuffer"
+	bool "Framebuffer support for CGSIX cards (Sun Voyager)"
 	select ADK_KERNEL_FB
 	select ADK_KERNEL_FB_SBUS
 	default y if ADK_TARGET_SYSTEM_SUN_VOYAGER
@@ -301,8 +265,46 @@ config ADK_KERNEL_FB_CGSIX
 	help
 	  Framebuffer support for Sun Voyager.
 
+config ADK_KERNEL_FB_RADEON
+	bool "Framebuffer support for RADEON chips"
+	select ADK_KERNEL_FB
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	select ADK_KERNEL_FONT_8x16
+ 	help
+	  Framebuffer support for RADEON chips.
+
+config ADK_KERNEL_DRM_I915
+	bool "Support for Intel graphic cards"
+	select ADK_KERNEL_FB
+	select ADK_KERNEL_DRM
+	select ADK_KERNEL_INTEL_GTT
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	select ADK_KERNEL_DRM_I915
+	select ADK_KERNEL_DRM_KMS_HELPER
+	select ADK_KERNEL_DRM_FBDEV_EMULATION
+	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default n
+	help
+          Support for Intel chipsets.
+
+config ADK_KERNEL_DRM_BOCHS
+	bool "Support for QEMU STD VGA emulation"
+	select ADK_KERNEL_DRM
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	depends on ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	help
+	  Support for Qemu STD VGA emulation.
+
+config ADK_KERNEL_DRM_CIRRUS_QEMU
+	bool "Support for QEMU cirrus VGA emulation"
+	select ADK_KERNEL_DRM
+	select ADK_KERNEL_FRAMEBUFFER_CONSOLE
+	depends on ADK_TARGET_SYSTEM_QEMU_X86 || ADK_TARGET_SYSTEM_QEMU_X86_64
+	help
+	  Support for Qemu cirrus VGA emulation.
+
 config ADK_KERNEL_DRM_RADEON
-	bool "Support for Radeon DRM/KMS"
+	bool "Support for Radeon graphic cards"
 	select ADK_KERNEL_DRM
 	select ADK_KERNEL_FB_CFB_FILLRECT
 	select ADK_KERNEL_FB_CFB_COPYAREA
@@ -312,6 +314,6 @@ config ADK_KERNEL_DRM_RADEON
 	select ADK_KERNEL_DRM_KMS_FB_HELPER
 	select ADK_KERNEL_DRM_TTM
 	help
-	  DRM/KMS support for Radeon
+	  Support for Radeon chips.
 	
 endmenu
