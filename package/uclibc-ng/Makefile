@@ -29,41 +29,12 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
-do-build:
-ifeq ($(ADK_PACKAGE_UCLIBC_NG_TEST),y)
-	PATH='$(HOST_PATH)' $(MAKE) -j1 -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION} \
-		HOSTCC='$(HOST_CC)' \
-		CC='$(TARGET_CC)' \
-		PREFIX=$(STAGING_TARGET_DIR) \
-		DEVEL_PREFIX=/usr/ \
-		DEVEL_PREFIX_LIB=/ \
-		RUNTIME_PREFIX=/ \
-		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
-		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
-		TEST_INSTALLED_UCLIBC=1 \
-		UCLIBC_ONLY=1 \
-		VERBOSE=1 \
-		test_gen test_compile
-endif
-
-do-install:
-	${INSTALL_DIR} $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) $(IDIR_UCLIBC_NG)/etc
+uclibc-ng-install:
+	$(INSTALL_DIR) $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) $(IDIR_UCLIBC_NG)/etc
+	-$(CP) $(STAGING_TARGET_DIR)/uclibc-ng/lib*/* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC_NG)/etc/TZ
-ifneq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),y)
-	$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-*.so \
-		$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc-*.so \
-		$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc*.so.* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	-for file in libcrypt libdl libm libnsl libresolv libutil libuargp; do \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-*.so \
-			$(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH); \
-	done
-endif
 ifeq ($(ADK_RUNTIME_ENABLE_LOCALE),y)
 	${INSTALL_DIR} $(IDIR_UCLIBC_NG)/usr/bin
 	$(INSTALL_BIN) $(STAGING_TARGET_DIR)/usr/bin/locale $(IDIR_UCLIBC_NG)/usr/bin
@@ -73,14 +44,7 @@ uclibc-ng-dev-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_NG_DEV}/usr/lib ${IDIR_UCLIBC_NG_DEV}/$(ADK_TARGET_LIBC_PATH)
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
-ifeq ($(ADK_TARGET_LIB_WITH_THREADS),y)
-	-${CP} ${STAGING_TARGET_DIR}/usr/lib/libpthread.so ${IDIR_UCLIBC_NG_DEV}/usr/lib
-	-${CP} ${STAGING_TARGET_DIR}/usr/lib/libpthread_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
-endif
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_UCLIBC_NG_DEV}/usr/lib
-	for file in libcrypt libdl libm libresolv libutil libuargp; do \
-		cd $(IDIR_UCLIBC_NG_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
-	done
 	${KERNEL_MAKE_ENV} \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)/linux-$(KERNEL_FILE_VER) \
 		$(KERNEL_MAKE_OPTS) \

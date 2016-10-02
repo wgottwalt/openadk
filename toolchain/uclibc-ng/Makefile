@@ -41,9 +41,9 @@ UCLIBC_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
 endif
 
 $(WRKBUILD)/.configured: $(WRKBUILD)/.prepared
-	$(SED) 's,^CROSS_COMPILE=.*,CROSS_COMPILE=$(TARGET_CROSS),g' $(WRKBUILD)/Rules.mak
 	PATH='$(HOST_PATH)' sed -e 's^KERNEL_HEADERS.*$$KERNEL_HEADERS=\"${STAGING_TARGET_DIR}/usr/include\"' \
 	    $(ADK_TOPDIR)/target/$(ADK_TARGET_ARCH)/uclibc-ng.config >${WRKBUILD}/.config
+	$(SED) 's^.*\(CROSS_COMPILER_PREFIX\).*^\1=\"$(TARGET_CROSS)\"^' ${WRKBUILD}/.config
 ifeq ($(ADK_TARGET_ENDIAN),little)
 	$(SED) 's/.*\(ARCH_LITTLE_ENDIAN\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(ARCH_WANTS_LITTLE_ENDIAN\).*/\1=y/' ${WRKBUILD}/.config
@@ -284,7 +284,7 @@ ifeq ($(ADK_TARGET_ABI_O32),y)
 	$(SED) 's/.*\(CONFIG_MIPS_N64_ABI\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 endif
-	echo N|PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
+	echo N|PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		HOSTCC="$(HOST_CC)" \
 		CC='$(TARGET_CC)' \
 		PREFIX=$(STAGING_TARGET_DIR) \
@@ -300,30 +300,54 @@ endif
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 	PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
+		ARCH="$(ADK_TARGET_ARCH)" \
+		CROSS_COMPILE="$(TARGET_CROSS)" \
 		HOSTCC="$(HOST_CC)" \
-		CC='$(TARGET_CC)' \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
-		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
-		all utils
+		all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
+		ARCH="$(ADK_TARGET_ARCH)" \
+		CROSS_COMPILE="$(TARGET_CROSS)" \
 		HOSTCC="$(HOST_CC)" \
-		CC='$(TARGET_CC)' \
 		PREFIX=$(STAGING_TARGET_DIR) \
 		DEVEL_PREFIX=/usr/ \
-		DEVEL_PREFIX_LIB=/ \
 		RUNTIME_PREFIX=/ \
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
-		install_runtime install_dev install_utils
+		install_runtime install_dev
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
+		ARCH="$(ADK_TARGET_ARCH)" \
+		CROSS_COMPILE="$(TARGET_CROSS)" \
+		HOSTCC="$(HOST_CC)" \
+		PREFIX=$(STAGING_TARGET_DIR)/uclibc-ng \
+		DEVEL_PREFIX=/usr/ \
+		RUNTIME_PREFIX=/ \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
+		VERBOSE=1 \
+		install_runtime
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
+		ARCH="$(ADK_TARGET_ARCH)" \
+		CROSS_COMPILE="$(TARGET_CROSS)" \
+		HOSTCC="$(HOST_CC)" \
+		PREFIX=$(STAGING_TARGET_DIR)/uclibc-ng \
+		DEVEL_PREFIX=/usr/ \
+		RUNTIME_PREFIX=/ \
+		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
+		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
+		TEST_INSTALLED_UCLIBC=1 \
+		UCLIBC_ONLY=1 \
+		VERBOSE=1 \
+		test_compile test_gen
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk
