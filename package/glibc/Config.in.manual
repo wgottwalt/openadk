@@ -8,7 +8,7 @@ config ADK_PACKAGE_GLIBC
 	  GNU C library.
 
 config ADK_PACKAGE_GLIBC_GCONV
-	bool "glibc-gconv.............. gconv libraries"
+	bool "glibc-gconv............. gconv libraries"
 	default n
 	depends on ADK_TARGET_LIB_GLIBC
 	help

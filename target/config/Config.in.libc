@@ -40,6 +40,7 @@ config ADK_TARGET_LIB_UCLIBC_NG
 
 config ADK_TARGET_LIB_MUSL
 	bool "musl C library"
+	select ADK_PACKAGE_LIBGCC
 	depends on (\
 		ADK_TARGET_ARCH_AARCH64 || \
 		ADK_TARGET_ARCH_ARM || \
@@ -58,6 +59,7 @@ config ADK_TARGET_LIB_MUSL
 
 config ADK_TARGET_LIB_GLIBC
 	bool "GNU C library"
+	select ADK_PACKAGE_LIBGCC
 	depends on (\
 		ADK_TARGET_ARCH_AARCH64 || \
 		ADK_TARGET_ARCH_ALPHA || \
