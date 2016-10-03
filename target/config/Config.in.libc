@@ -9,6 +9,7 @@ config ADK_TARGET_LIB_UCLIBC_NG
 	bool "uClibc-ng embedded C library"
 	select ADK_PACKAGE_LIBGCC
 	depends on (\
+		ADK_TARGET_ARCH_AARCH64 || \
 		ADK_TARGET_ARCH_ALPHA || \
 		ADK_TARGET_ARCH_ARC || \
 		ADK_TARGET_ARCH_ARM || \
