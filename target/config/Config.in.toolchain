@@ -132,7 +132,7 @@ config ADK_DEBUG_STRIP
 	  but stripped for the target.
 
 config ADK_TARGET_USE_STATIC_LIBS
-	bool "Link applications statically by default"
+	bool "Create static libraries and link applications statically for target"
 	select BUSYBOX_STATIC
 	depends on !ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_BINFMT_DSBT
 	help
@@ -141,7 +141,7 @@ config ADK_TARGET_USE_STATIC_LIBS
 	  at runtime. Full static builds are only supported for musl libc.
 
 config ADK_STATIC_TOOLCHAIN
-	bool "Build the toolchain components statically"
+	bool "Build the toolchain components statically (portable host binaries)"
 	help
 	  If you want to create more portable toolchains, build them static.
 
