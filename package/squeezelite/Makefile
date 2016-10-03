@@ -11,7 +11,7 @@ PKG_DESCR:=		headless squeezebox emulator
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libflac alsa-lib libvorbis libmad libfaad2
 PKG_BUILDDEP:=		alsa-lib libmad flac libvorbis mpg123 faad2
-PKG_NEEDS:=		threads rt
+PKG_NEEDS:=		threads
 PKG_URL:=		https://github.com/ralph-irving/squeezelite
 PKG_SITES:=		https://github.com/ralph-irving/squeezelite.git
 

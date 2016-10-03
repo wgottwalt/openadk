@@ -48,7 +48,7 @@ do-install:
 ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
 	${INSTALL_DIR} ${IDIR_GLIBC}/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH)
-	for file in libc libcrypt libdl libm libnsl libresolv libutil libnss_dns libnss_files; do \
+	for file in libc libpthread librt libcrypt libdl libm libnsl libresolv libutil libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
@@ -100,7 +100,7 @@ endif
 endif
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
-	-for file in libcrypt libdl libm libresolv libutil; do \
+	-for file in libpthread librt libcrypt libdl libm libresolv libutil; do \
 		cd $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
 	done
 	# header package

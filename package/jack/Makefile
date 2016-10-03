@@ -10,7 +10,7 @@ PKG_DESCR:=		audio connection kit (v1)
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		alsa-lib libsndfile libsamplerate libdb
 PKG_BUILDDEP:=		db python2-host alsa-lib libsndfile libsamplerate
-PKG_NEEDS:=		threads rt c++
+PKG_NEEDS:=		threads c++
 PKG_URL:=		http://jackaudio.org
 PKG_SITES:=		git://github.com/jackaudio/jack1.git
 
@@ -20,7 +20,6 @@ $(eval $(call PKG_template,JACK,jack,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS
 
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 AUTOTOOL_STYLE:=	autogen
-TARGET_LDFLAGS+=	-lrt
 
 post-extract:
 	(cd $(WRKBUILD); git submodule init)

@@ -9,9 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		1632e91d2a0087e0ef4c3fb4c95c3c2890f7715a9d1d43ffd46329f428cf53be
 PKG_DESCR:=		popular media player
 PKG_SECTION:=		mm/video
-PKG_BUILDDEP:=		ffmpeg xcb-util libgcrypt alsa-lib
 PKG_DEPENDS:=		libffmpeg xcb-util libgcrypt alsa-lib
-PKG_NEEDS:=		threads rt
+PKG_BUILDDEP:=		ffmpeg xcb-util libgcrypt alsa-lib
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.videolan.org/vlc/
 PKG_SITES:=		http://download.videolan.org/pub/videolan/vlc/$(PKG_VERSION)/
 

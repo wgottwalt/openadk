@@ -28,7 +28,7 @@ PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis libbluray
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
 PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish libdcadec
 PKG_BUILDDEP+=		libcrossguid libressl
-PKG_NEEDS:=		threads rt c++
+PKG_NEEDS:=		threads c++
 PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		https://github.com/xbmc/xbmc/archive/
 

@@ -9,9 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		3a8d045c306ad9acb7bf81126939b9594553a388482efa0ec1bfb67b22acd35f
 PKG_DESCR:=		torrent client
 PKG_SECTION:=		app/p2p
-PKG_BUILDDEP:=		libressl libevent curl
 PKG_DEPENDS:=		libressl libevent libcurl
-PKG_NEEDS:=		threads rt
+PKG_BUILDDEP:=		libressl libevent curl
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.transmissionbt.com
 PKG_SITES:=		http://download.transmissionbt.com/files/
 

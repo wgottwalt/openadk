@@ -1,5 +1,4 @@
 config ADK_PACKAGE_GLIBC
-	prompt "glibc.................... GNU C library"
 	bool
 	default y if ADK_TARGET_LIB_GLIBC && !ADK_APPLIANCE_TOOLCHAIN
 	default n
@@ -9,8 +8,7 @@ config ADK_PACKAGE_GLIBC
 	  GNU C library.
 
 config ADK_PACKAGE_GLIBC_GCONV
-	prompt "glibc-gconv.............. gconv libraries"
-	bool
+	bool "glibc-gconv.............. gconv libraries"
 	default n
 	depends on ADK_TARGET_LIB_GLIBC
 	help

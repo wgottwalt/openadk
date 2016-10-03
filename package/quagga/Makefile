@@ -10,7 +10,7 @@ PKG_HASH:=		034e21f87164f44f1c4c89d8fafed4acede298fe3fafbf9277f079544178c66b
 PKG_DESCR:=		routing software package
 PKG_SECTION:=		net/route
 PKG_BUILDDEP:=		readline ncurses
-PKG_NEEDS:=		threads rt
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.quagga.net/
 PKG_SITES:=		http://download.savannah.gnu.org/releases/quagga/
 

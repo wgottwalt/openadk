@@ -8,8 +8,6 @@ config ADK_PACKAGE_UCLIBC_NG
 
 config ADK_PACKAGE_UCLIBC_NG_TEST
 	bool "uClibc-ng-test.......... embedded C library (testsuite)"
-	select ADK_PACKAGE_LIBRT if !ADK_TARGET_UCLINUX
-	select ADK_PACKAGE_LIBPTHREAD if !ADK_TARGET_UCLINUX
 	depends on ADK_TARGET_LIB_UCLIBC_NG
 	default n
 	help

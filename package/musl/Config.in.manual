@@ -1,5 +1,4 @@
 config ADK_PACKAGE_MUSL
-	prompt "musl................. embedded C library"
 	bool
 	default y if ADK_TARGET_LIB_MUSL && !ADK_APPLIANCE_TOOLCHAIN
 	default n

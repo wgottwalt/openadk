@@ -11,7 +11,7 @@ PKG_DESCR:=		mixer/player/record utilities
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		alsa-lib
 PKG_BUILDDEP:=		alsa-lib
-PKG_NEEDS:=		threads rt
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.alsa-project.org/
 PKG_SITES:=		ftp://ftp.alsa-project.org/pub/utils/
 

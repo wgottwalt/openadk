@@ -11,7 +11,7 @@ PKG_DESCR:=		program to list usb devices
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libusb libusb-compat libudev
 PKG_BUILDDEP:=		libusb libusb-compat eudev
-PKG_NEEDS:=		threads rt
+PKG_NEEDS:=		threads
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/usb/usbutils/
 PKG_BB:=		1
 

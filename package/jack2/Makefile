@@ -11,7 +11,7 @@ PKG_DESCR:=		audio connection kit (v2)
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		alsa-lib libsndfile libsamplerate
 PKG_BUILDDEP:=		python2-host alsa-lib libsndfile libsamplerate
-PKG_NEEDS:=		threads rt c++
+PKG_NEEDS:=		threads c++
 PKG_URL:=		http://jackaudio.org
 PKG_SITES:=		git://github.com/jackaudio/jack2.git
 

@@ -11,7 +11,7 @@ PKG_DESCR:=		fast version control system
 PKG_SECTION:=		dev/scm
 PKG_BUILDDEP:=		curl expat libressl
 PKG_DEPENDS:=		libcurl libexpat libressl
-PKG_NEEDS:=		threads rt
+PKG_NEEDS:=		threads
 PKG_URL:=		http://git-scm.com/
 PKG_SITES:=		https://www.kernel.org/pub/software/scm/git/
 

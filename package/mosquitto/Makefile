@@ -11,7 +11,7 @@ PKG_DESCR:=		mqtt broker
 PKG_SECTION:=		net/misc
 PKG_DEPENDS:=		c-ares libressl
 PKG_BUILDDEP:=		cmake-host c-ares libressl
-PKG_NEEDS:=		threads rt
+PKG_NEEDS:=		threads
 PKG_URL:=		http://mosquitto.org
 PKG_SITES:=		http://mosquitto.org/files/source/
 

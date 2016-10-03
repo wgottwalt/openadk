@@ -9,9 +9,9 @@ PKG_RELEASE:=		1
 PKG_HASH:=		b45f598643ffbd8e363ff24d61166ccec4836fea6d3888881b8df53e3bb55f6c
 PKG_DESCR:=		swiss army knife of sound processing programs
 PKG_SECTION:=		mm/audio
-PKG_BUILDDEP:=		zlib ncurses
 PKG_DEPENDS:=		zlib libncurses
-PKG_NEEDS:=		threads rt
+PKG_BUILDDEP:=		zlib ncurses
+PKG_NEEDS:=		threads
 PKG_URL:=		http://sox.sourceforge.net/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=sox/}
 

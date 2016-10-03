@@ -18,7 +18,7 @@ HOST_BUILDDEP+=		cups-host qemu-host alsa-lib-host freetype-host	libxslt-host
 PKG_DEPENDS:=		zlib libffi libxtst libxi cups gconf
 PKG_DEPENDS+=		libfreetype libxrender libx11 libxext nss libjpeg-turbo
 PKG_DEPENDS+=		libpng giflib libgtk2 glib fontconfig libncurses
-PKG_NEEDS:=		threads c++ rt
+PKG_NEEDS:=		threads c++
 PKG_URL:=		http://openjdk.org/
 PKG_SITES:=		http://icedtea.classpath.org/download/source/
 

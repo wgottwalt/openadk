@@ -11,7 +11,7 @@ PKG_DESCR:=		java virtual machine implementation
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libffi zlib
 PKG_BUILDDEP:=		libffi zlib
-PKG_NEEDS:=		threads rt
+PKG_NEEDS:=		threads
 PKG_URL:=		http://jamvm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 

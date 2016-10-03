@@ -12,7 +12,7 @@ PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		glib libmpdclient boost libncurses libexpat
 PKG_BUILDDEP:=		glib libmpdclient boost ncurses expat
 PKG_FDEPENDS:=		glib libmpdclient
-PKG_NEEDS:=		threads rt c++
+PKG_NEEDS:=		threads c++
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpd/0.19/
 

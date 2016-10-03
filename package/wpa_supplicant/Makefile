@@ -11,7 +11,7 @@ PKG_DESCR:=		wpa supplicant
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		libnl
 PKG_BUILDDEP:=		libnl
-PKG_NEEDS:=		threads rt
+PKG_NEEDS:=		threads
 PKG_URL:=		http://hostap.epitest.fi/wpa_supplicant/
 PKG_SITES:=		http://hostap.epitest.fi/releases/
 

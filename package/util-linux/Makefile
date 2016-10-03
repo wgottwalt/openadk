@@ -11,9 +11,9 @@ PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
 PKG_BUILDDEP:=		ncurses
 HOST_BUILDDEP:=		autoconf-host automake-host libtool-host pkgconf-host
+PKG_NEEDS:=		threads
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.28/
 PKG_OPTS:=		dev
-PKG_NEEDS:=		threads rt
 
 PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
 PKG_SUBPKGS+=		LIBFDISK LIBUUID LIBBLKID LIBMOUNT CFDISK MKFS

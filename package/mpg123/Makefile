@@ -11,7 +11,7 @@ PKG_DESCR:=		mp3 console player
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		alsa-lib
 PKG_BUILDDEP:=		alsa-lib
-PKG_NEEDS:=		threads rt
+PKG_NEEDS:=		threads
 PKG_URL:=		http://www.mpg123.de/
 PKG_SITES:=		http://www.mpg123.de/download/
 

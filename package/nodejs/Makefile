@@ -11,7 +11,7 @@ PKG_DESCR:=		asynchronous event driven framework
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		zlib
 PKG_BUILDDEP:=		python2-host zlib
-PKG_NEEDS:=		threads rt c++
+PKG_NEEDS:=		threads c++
 PKG_URL:=		https://nodejs.org/
 PKG_SITES:=		https://nodejs.org/dist/v$(PKG_VERSION)/
 

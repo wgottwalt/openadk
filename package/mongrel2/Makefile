@@ -11,7 +11,7 @@ PKG_DESCR:=		application, language, and network architecture agnostic web server
 PKG_SECTION:=		net/http
 PKG_BUILDDEP:=		zeromq sqlite
 PKG_DEPENDS:=		zeromq libsqlite
-PKG_NEEDS:=		threads rt c++
+PKG_NEEDS:=		threads c++
 PKG_URL:=		http://mongrel2.org
 PKG_SITES:=		https://github.com/mongrel2/mongrel2/releases/download/v$(PKG_VERSION)/
 

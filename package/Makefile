@@ -20,8 +20,6 @@ package-$(ADK_PACKAGE_UCLIBC_NG) += uclibc-ng
 gcc-compile: uclibc-ng-compile
 endif
 
-package-$(ADK_PACKAGE_LIBPTHREAD) += libpthread
-
 include $(ADK_TOPDIR)/package/Depends.mk
 
 COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y))

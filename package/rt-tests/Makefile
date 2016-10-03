@@ -8,8 +8,8 @@ PKG_VERSION:=		bddffd32c9483318fe72d02183981bdcf006d9dc
 PKG_RELEASE:=		1
 PKG_GIT:=		hash
 PKG_DESCR:=		realtime test apps
-PKG_NEEDS:=		threads rt
 PKG_SECTION:=		base/tests
+PKG_NEEDS:=		threads
 PKG_SITES:=		git://git.kernel.org/pub/scm/utils/rt-tests/rt-tests.git
 
 include $(ADK_TOPDIR)/mk/package.mk
