@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		grep
-PKG_VERSION:=		2.24
+PKG_VERSION:=		2.26
 PKG_RELEASE:=		1
-PKG_HASH:=		f248beb9098c5aab94d2fdd03b5a21d705e5ba8a3ce4d8c9f607a670498eec14
+PKG_HASH:=		246a8fb37e82aa33d495b07c22fdab994c039ab0f818538eac81b01e78636870
 PKG_DESCR:=		global search for a regex and print out matched lines
 PKG_SECTION:=		base/apps
 PKG_DEPENDS:=		libpcre
