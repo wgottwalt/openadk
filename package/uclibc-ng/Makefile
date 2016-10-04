@@ -32,7 +32,7 @@ INSTALL_STYLE:=         manual
 uclibc-ng-install:
 	$(INSTALL_DIR) $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) $(IDIR_UCLIBC_NG)/etc
 	-$(CP) $(STAGING_TARGET_DIR)/uclibc-ng/lib*/* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	rm $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)/libthread_db*
+	-@rm $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)/libthread_db* 2>/dev/null
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC_NG)/etc/TZ
