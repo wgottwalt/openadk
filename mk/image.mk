@@ -61,11 +61,14 @@ image-prepare-post:
 	rng=/dev/arandom; test -e $$rng || rng=/dev/urandom; \
 	    dd if=$$rng bs=512 count=1 >>${TARGET_DIR}/etc/.rnd 2>/dev/null; \
 	    chmod 600 ${TARGET_DIR}/etc/.rnd
-	@-if [ -d ${TARGET_DIR}/usr/share/fonts/X11 ];then \
-		for i in $$(ls ${TARGET_DIR}/usr/share/fonts/X11/);do \
-			mkfontdir ${TARGET_DIR}/usr/share/fonts/X11/$${i}; \
-		done; \
-	fi
+	-for dir in X11 truetype; do \
+		if [ -d ${TARGET_DIR}/usr/share/fonts/$${dir} ];then \
+			for i in $$(ls ${TARGET_DIR}/usr/share/fonts/$${dir}/);do \
+				mkfontdir ${TARGET_DIR}/usr/share/fonts/$${dir}/$${i}; \
+				mkfontscale ${TARGET_DIR}/usr/share/fonts/$${dir}/$${i}; \
+			done; \
+		fi; \
+	done
 	$(SED) '/^root:/s!:/bin/sh$$!:${ROOTSH}!' ${TARGET_DIR}/etc/passwd
 	-rm -f ${TARGET_DIR}/bin/sh
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh

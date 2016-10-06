@@ -704,12 +704,40 @@ else
     NEED_XKBCOMP="$NEED_XKBCOMP xkeyboard-config"
   fi
 
+  if [ -n "$ADK_PACKAGE_FONT_BH_100DPI" ]; then
+    NEED_MKFONTDIR="$NEED_MKFONTDIR font-bh-100dpi"
+  fi
+
+  if [ -n "$ADK_PACKAGE_FONT_BH_75DPI" ]; then
+    NEED_MKFONTDIR="$NEED_MKFONTDIR font-bh-75dpi"
+  fi
+
+  if [ -n "$ADK_PACKAGE_FONT_BH_TYPE1" ]; then
+    NEED_MKFONTDIR="$NEED_MKFONTDIR font-bh-type1"
+  fi
+
+  if [ -n "$ADK_PACKAGE_FONT_BH_TTF" ]; then
+    NEED_MKFONTDIR="$NEED_MKFONTDIR font-bh-ttf"
+  fi
+
+  if [ -n "$ADK_PACKAGE_FONT_BH_LUCIDATYPEWRITER_100DPI" ]; then
+    NEED_MKFONTDIR="$NEED_MKFONTDIR font-bh-lucidatypewriter-100dpi"
+  fi
+
+  if [ -n "$ADK_PACKAGE_FONT_BH_LUCIDATYPEWRITER_75DPI" ]; then
+    NEED_MKFONTDIR="$NEED_MKFONTDIR font-bh-lucidatypewriter-75dpi"
+  fi
+
   if [ -n "$ADK_PACKAGE_FONT_BITSTREAM_100DPI" ]; then
     NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-100dpi"
   fi
 
   if [ -n "$ADK_PACKAGE_FONT_BITSTREAM_75DPI" ]; then
     NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-75dpi"
+  fi
+
+  if [ -n "$ADK_PACKAGE_FONT_BITSTREAM_TYPE1" ]; then
+    NEED_MKFONTDIR="$NEED_MKFONTDIR font-bitstream-type1"
   fi
 
   if [ -n "$ADK_PACKAGE_FONT_ADOBE_100DPI" ]; then
@@ -720,9 +748,28 @@ else
     NEED_MKFONTDIR="$NEED_MKFONTDIR font-adobe-75dpi"
   fi
 
+  if [ -n "$ADK_PACKAGE_FONT_XFREE86_TYPE1" ]; then
+    NEED_MKFONTDIR="$NEED_MKFONTDIR font-xfree86-type1"
+  fi
+
+  if [ -n "$ADK_PACKAGE_FONT_MISC_MISC" ]; then
+    NEED_MKFONTDIR="$NEED_MKFONTDIR font-misc-misc"
+  fi
+
+  if [ -n "$ADK_PACKAGE_LIBERATION_FONTS_TTF" ]; then
+    NEED_MKFONTSCALE="$NEED_MKFONTSCALE liberation-fonts-ttf"
+  fi
+
   if [ -n "$NEED_MKFONTDIR" ]; then
     if ! which mkfontdir >/dev/null 2>&1; then
       printf "You need mkfontdir to build $NEED_MKFONTDIR \n"
+      out=1
+    fi
+  fi
+
+  if [ -n "$NEED_MKFONTSCALE" ]; then
+    if ! which mkfontscale >/dev/null 2>&1; then
+      printf "You need mkfontscale to build $NEED_MKFONTSCALE \n"
       out=1
     fi
   fi
