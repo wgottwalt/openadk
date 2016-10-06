@@ -13,7 +13,7 @@ PKG_DEPENDS:=		alsa-lib libsndfile libsamplerate
 PKG_BUILDDEP:=		python2-host alsa-lib libsndfile libsamplerate
 PKG_NEEDS:=		threads c++
 PKG_URL:=		http://jackaudio.org
-PKG_SITES:=		git://github.com/jackaudio/jack2.git
+PKG_SITES:=		https://github.com/jackaudio/jack2.git
 
 include $(ADK_TOPDIR)/mk/package.mk
 

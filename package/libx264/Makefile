@@ -10,7 +10,7 @@ PKG_GIT:=		hash
 PKG_DESCR:=		h264 encoding library
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://www.videolan.org/developers/x264.html
-PKG_SITES:=		git://git.videolan.org/x264.git
+PKG_SITES:=		http://git.videolan.org/git/x264.git
 PKG_OPTS:=		dev
 
 PKG_BUILDDEP_IBM_X40:=	yasm-host

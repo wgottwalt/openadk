@@ -11,7 +11,7 @@ PKG_DESCR:=		compiler for dts files
 PKG_SECTION:=		sys/misc
 HOST_BUILDDEP:=		m4-host flex-host bison-host
 PKG_URL:=		http://www.devicetree.org/Device_Tree_Compiler
-PKG_SITES:=		git://git.kernel.org/pub/scm/utils/dtc/dtc.git
+PKG_SITES:=		https://git.kernel.org/pub/scm/utils/dtc/dtc.git
 
 PKG_CFLINE_DEVICE_TREE_COMPILER:=	depends on ADK_HOST_ONLY
 

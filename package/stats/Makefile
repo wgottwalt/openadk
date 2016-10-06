@@ -10,7 +10,7 @@ PKG_GIT:=		hash
 PKG_DESCR:=		stats utility
 PKG_SECTION:=		sys/utils
 PKG_URL:=		https://github.com/rustyrussell/stats
-PKG_SITES:=		git://github.com/rustyrussell/stats.git
+PKG_SITES:=		http://github.com/rustyrussell/stats.git
 
 include $(ADK_TOPDIR)/mk/package.mk
 

@@ -13,7 +13,7 @@ PKG_DEPENDS:=		libelf
 PKG_BUILDDEP:=		libelf
 PKG_NEEDS:=		c++
 PKG_URL:=		http://ltrace.org/
-PKG_SITES:=		git://git.debian.org/git/collab-maint/ltrace.git
+PKG_SITES:=		https://alioth.debian.org/anonscm/git/collab-maint/ltrace.git
 
 include $(ADK_TOPDIR)/mk/package.mk
 

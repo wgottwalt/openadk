@@ -13,7 +13,7 @@ PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm mesa libudev
 PKG_BUILDDEP:=		xorg-server libdrm xf86driproto mesa eudev
 PKG_NEEDS:=		c++
-PKG_SITES:=		git://anongit.freedesktop.org/xorg/driver/xf86-video-intel
+PKG_SITES:=		https://anongit.freedesktop.org/git/xorg/driver/xf86-video-intel.git
 
 PKG_SYSTEM_DEPENDS:=	ibm-x40
 
