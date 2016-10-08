@@ -59,7 +59,7 @@ LIBSTDCXXVER:=		19
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_GIT),y)
 PKG_VERSION:=		git
-PKG_SITES:=		git://gcc.gnu.org/git/gcc.git
+PKG_SITES:=		https://github.com/gcc-mirror/gcc.git
 PKG_RELEASE:=		1
 LIBSTDCXXVER:=		21
 endif

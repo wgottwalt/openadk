@@ -1,0 +1,25 @@
+From 0e8273cfa622a448787e408a066c520ee18eed77 Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbx@uclibc-ng.org>
+Date: Sat, 1 Oct 2016 13:33:13 +0200
+Subject: [PATCH] fix linker name for uClibc
+
+Signed-off-by: Waldemar Brodkorb <wbx@uclibc-ng.org>
+---
+ gcc/config/microblaze/linux.h | 1 +
+ 1 file changed, 1 insertion(+)
+
+diff --git a/gcc/config/microblaze/linux.h b/gcc/config/microblaze/linux.h
+index ae8523c..b3bf43a 100644
+--- a/gcc/config/microblaze/linux.h
++++ b/gcc/config/microblaze/linux.h
+@@ -29,6 +29,7 @@
+ #define TLS_NEEDS_GOT 1
+ 
+ #define GLIBC_DYNAMIC_LINKER "/lib/ld.so.1"
++#define UCLIBC_DYNAMIC_LINKER "/lib/ld-uClibc.so.0"
+ 
+ #if TARGET_BIG_ENDIAN_DEFAULT == 0 /* LE */
+ #define MUSL_DYNAMIC_LINKER_E "%{mbig-endian:;:el}"
+-- 
+2.7.4 (Apple Git-66)
+
