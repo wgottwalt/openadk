@@ -1,0 +1,40 @@
+--- rpcbind-0.2.3.orig/src/rpcbind.c	2015-04-27 16:07:43.000000000 +0200
++++ rpcbind-0.2.3/src/rpcbind.c	2016-10-08 18:20:04.000000000 +0200
+@@ -135,13 +135,13 @@ char *tcp_uaddr;	/* Universal TCP addres
+ static char servname[] = "rpcbind";
+ static char superuser[] = "superuser";
+ 
+-int main __P((int, char *[]));
++int main (int, char *[]);
+ 
+-static int init_transport __P((struct netconfig *));
+-static void rbllist_add __P((rpcprog_t, rpcvers_t, struct netconfig *,
+-			     struct netbuf *));
+-static void terminate __P((int));
+-static void parseargs __P((int, char *[]));
++static int init_transport (struct netconfig *);
++static void rbllist_add (rpcprog_t, rpcvers_t, struct netconfig *,
++			     struct netbuf *);
++static void terminate (int);
++static void parseargs (int, char *[]);
+ 
+ int
+ main(int argc, char *argv[])
+@@ -532,7 +532,7 @@ init_transport(struct netconfig *nconf)
+ 			if ((aicode = getaddrinfo(hosts[nhostsbak],
+ 			    servname, &hints, &res)) != 0) {
+ 			  if ((aicode = getaddrinfo(hosts[nhostsbak],
+-						    "portmapper", &hints, &res)) != 0) {
++						    "sunrpc", &hints, &res)) != 0) {
+ 				syslog(LOG_ERR,
+ 				    "cannot get local address for %s: %s",
+ 				    nconf->nc_netid, gai_strerror(aicode));
+@@ -611,7 +611,7 @@ init_transport(struct netconfig *nconf)
+ 		if ((strcmp(nconf->nc_netid, "local") != 0) &&
+ 		    (strcmp(nconf->nc_netid, "unix") != 0)) {
+ 			if ((aicode = getaddrinfo(NULL, servname, &hints, &res))!= 0) {
+-			  if ((aicode = getaddrinfo(NULL, "portmapper", &hints, &res))!= 0) {
++			  if ((aicode = getaddrinfo(NULL, "sunrpc", &hints, &res))!= 0) {
+ 			  printf("cannot get local address for %s: %s",  nconf->nc_netid, gai_strerror(aicode));
+ 			  syslog(LOG_ERR,
+ 				    "cannot get local address for %s: %s",

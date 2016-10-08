@@ -1,0 +1,27 @@
+--- rpcbind-0.2.3.orig/src/util.c	2015-04-27 16:07:43.000000000 +0200
++++ rpcbind-0.2.3/src/util.c	2016-10-08 18:28:03.000000000 +0200
+@@ -41,7 +41,6 @@
+ 
+ #include <sys/types.h>
+ #include <sys/socket.h>
+-#include <sys/queue.h>
+ #include <net/if.h>
+ #include <netinet/in.h>
+ #include <ifaddrs.h>
+@@ -56,6 +55,7 @@
+ #include <stdio.h>
+ #include <arpa/inet.h>
+ 
++#include "queue.h"
+ #include "rpcbind.h"
+ 
+ #define	SA2SIN(sa)	((struct sockaddr_in *)(sa))
+@@ -70,7 +70,7 @@ static struct sockaddr_in *local_in4;
+ static struct sockaddr_in6 *local_in6;
+ #endif
+ 
+-static int bitmaskcmp __P((void *, void *, void *, int));
++static int bitmaskcmp (void *, void *, void *, int);
+ 
+ /*
+  * For all bits set in "mask", compare the corresponding bits in

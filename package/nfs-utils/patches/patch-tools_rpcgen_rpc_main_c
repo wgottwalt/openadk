@@ -1,6 +1,6 @@
---- nfs-utils-1.2.3.orig/tools/rpcgen/rpc_main.c	2010-09-28 14:24:16.000000000 +0200
-+++ nfs-utils-1.2.3/tools/rpcgen/rpc_main.c	2010-12-24 23:45:11.000000000 +0100
-@@ -155,11 +155,7 @@ int timerflag;		/* TRUE if !indefinite &
+--- nfs-utils-1.3.4.orig/tools/rpcgen/rpc_main.c	2016-08-03 20:25:15.000000000 +0200
++++ nfs-utils-1.3.4/tools/rpcgen/rpc_main.c	2016-10-08 09:58:39.000000000 +0200
+@@ -156,11 +156,7 @@ int timerflag;		/* TRUE if !indefinite &
  int newstyle;           /* newstyle of passing arguments (by value) */
  int Cflag = 0 ;         /* ANSI C syntax */
  static int allfiles;    /* generate all files */
@@ -12,7 +12,7 @@
  
  int
  main(int argc, char **argv)
-@@ -543,13 +539,8 @@ s_output(int argc, char **argv, char *in
+@@ -544,13 +540,8 @@ s_output(int argc, char **argv, char *in
  	  timerflag = 1;
  	}
  
@@ -26,7 +26,7 @@
  	if( Cflag && (inetdflag || pmflag ) ) {
  	  f_print(fout, "#ifdef __cplusplus\n");
  	  f_print(fout, "#include <sysent.h> /* getdtablesize, open */\n"); 
-@@ -562,9 +553,6 @@ s_output(int argc, char **argv, char *in
+@@ -563,9 +554,6 @@ s_output(int argc, char **argv, char *in
  	  f_print(fout, "#include <sys/types.h>\n");
  
  	f_print(fout, "#include <memory.h>\n");

@@ -1,0 +1,11 @@
+--- rpcbind-0.2.3.orig/src/check_bound.c	2015-04-27 16:07:43.000000000 +0200
++++ rpcbind-0.2.3/src/check_bound.c	2016-10-08 18:19:45.000000000 +0200
+@@ -70,7 +70,7 @@ static struct fdlist *fdhead;	/* Link li
+ static struct fdlist *fdtail;
+ static char *nullstring = "";
+ 
+-static bool_t check_bound __P((struct fdlist *, char *uaddr));
++static bool_t check_bound (struct fdlist *, char *uaddr);
+ 
+ /*
+  * Returns 1 if the given address is bound for the given addr & transport

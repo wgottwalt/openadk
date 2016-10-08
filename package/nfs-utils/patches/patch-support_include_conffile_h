@@ -1,0 +1,11 @@
+--- nfs-utils-3e2ab78a2cfbc2d11c31ced8d3f538d5aae757f1.orig/support/include/conffile.h	2016-10-01 21:41:15.000000000 +0200
++++ nfs-utils-3e2ab78a2cfbc2d11c31ced8d3f538d5aae757f1/support/include/conffile.h	2016-10-02 08:47:53.000000000 +0200
+@@ -33,7 +33,7 @@
+ #ifndef _CONFFILE_H_
+ #define _CONFFILE_H_
+ 
+-#include <sys/queue.h>
++#include "queue.h"
+ #include <ctype.h>
+ #include <stdint.h>
+ 
