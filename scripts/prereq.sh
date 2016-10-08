@@ -12,7 +12,6 @@ out=0
 mirror=http://distfiles.openadk.org
 makever=4.1
 bashver=4.3.30
-dlverbose=0
 
 # detect operating system
 os=$(env uname)
@@ -331,9 +330,7 @@ echo 'LC_ALL:=C' >> $topdir/prereq.mk
 echo "_PATH:=$PATH" >> $topdir/prereq.mk
 echo "PATH:=${topdir}/scripts:/usr/sbin:$PATH" >> $topdir/prereq.mk
 echo "GIT:=$(which git 2>/dev/null)" >> $topdir/prereq.mk
-if [ $dlverbose -eq 0 ]; then
-  echo "GITOPTS:=--quiet" >> $topdir/prereq.mk
-fi
+echo "GITOPTS:=" >> $topdir/prereq.mk
 echo "export ADK_TOPDIR GIT GITOPTS SHA256 BASH SHELL" >> $topdir/prereq.mk
 
 # create temporary Makefile
