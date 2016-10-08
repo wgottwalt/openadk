@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ltp
-PKG_VERSION:=		20160510
+PKG_VERSION:=		20160920
 PKG_RELEASE:=		1
 PKG_DESCR:=		linux test project
-PKG_HASH:=		743750de2b024d75983febe9238b7219540a16094f3afeb2de0c9572a9ada655
+PKG_HASH:=		2af853d1c54c80e49ff3d9efe67c0615cd29f1fa977dfef2759699012adaee5b
 PKG_DEPENDS:=		bash mke2fs mkfs
 PKG_NEEDS:=		threads
 PKG_SECTION:=		base/tests
