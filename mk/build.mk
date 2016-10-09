@@ -323,6 +323,7 @@ $(CONFIG)/mconf:
 	@$(MAKE) -C $(CONFIG)
 
 defconfig: .menu $(CONFIG)/conf
+	-@rm $(ADK_TOPDIR)/.defconfig
 	@if [ ! -z "$(ADK_NO_CHECKSUM)" ];then \
 		echo "ADK_DISABLE_CHECKSUM=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
