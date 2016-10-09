@@ -194,23 +194,29 @@ endchoice
 
 choice
 prompt "Threading"
-depends on ADK_TARGET_LIB_UCLIBC_NG && !ADK_TARGET_WITHOUT_THREADS
+depends on ADK_TARGET_SUPPORTS_THREADS
 
-config ADK_TARGET_LIB_WITH_THREADS
-	bool "enable threads"
+config ADK_TARGET_WITH_NPTL
+	bool "enable NPTL"
+	depends on ADK_TARGET_SUPPORTS_NPTL
 
-config ADK_TARGET_LIB_WITHOUT_THREADS
+config ADK_TARGET_WITH_LT
+	bool "enable Linuxthreads"
+	depends on ADK_TARGET_SUPPORTS_LT && ADK_TARGET_LIB_UCLIBC_NG
+
+config ADK_TARGET_WITHOUT_THREADS
 	bool "disable threads"
+	depends on ADK_TARGET_LIB_UCLIBC_NG
 
 endchoice
 
-config ADK_TARGET_WITH_LT
+config ADK_TARGET_SUPPORTS_THREADS
 	bool
 
-config ADK_TARGET_WITH_NPTL
+config ADK_TARGET_SUPPORTS_NPTL
 	bool
 
-config ADK_TARGET_WITHOUT_THREADS
+config ADK_TARGET_SUPPORTS_LT
 	bool
 
 config ADK_TARGET_LIBC
