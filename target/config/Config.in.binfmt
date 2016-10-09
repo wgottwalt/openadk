@@ -54,6 +54,6 @@ endchoice
 config ADK_TARGET_BINFMT
 	string
 	depends on ADK_TARGET_ARCH_BFIN
-	default "bflt" if ADK_TARGET_BINFMT_FLAT
+	default "flat" if ADK_TARGET_BINFMT_FLAT
 	default "fdpic" if ADK_TARGET_BINFMT_FDPIC
 

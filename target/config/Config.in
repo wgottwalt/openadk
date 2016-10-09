@@ -16,6 +16,7 @@ config ADK_TARGET_UCLINUX
 
 config ADK_TARGET_SIM
 	bool
+	select ADK_TOOLCHAIN_WITH_GDB
 
 config ADK_TARGET_QEMU
 	bool

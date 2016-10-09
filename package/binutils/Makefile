@@ -22,6 +22,11 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,BINUTILS,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBBFD,libbfd,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBBFD},${PKGSD_LIBBFD},${PKGSC_LIBBFD},${PKG_OPTS}))
 
+ifeq ($(ADK_TARGET_ARCH_BFIN),y)
+TARGET_CFLAGS:=		$(subst Os,O1,$(TARGET_CFLAGS))
+TARGET_CXXFLAGS:=	$(subst Os,O1,$(TARGET_CFLAGS))
+endif
+
 TARGET_CFLAGS+=		-fPIC
 CONFIGURE_ENV+=		ac_cv_prog_MAKEINFO=missing
 
