@@ -2,6 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		elf2flt
-PKG_VERSION:=		git
+PKG_VERSION:=		a87f68ae9e879360a9624f2a02999e67cfbe5a2f
+PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_SITES:=		https://github.com/uclinux-dev/elf2flt.git
