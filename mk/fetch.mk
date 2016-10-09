@@ -68,16 +68,16 @@ $(1):
 		  case "$${PKG_GIT}" in \
 		    tag|branch) \
 			echo "Using git tag/branch: $${PKG_VERSION}" $(DL_TRACE); \
-			git clone --depth 1 --branch $${PKG_VERSION} $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
+			git clone --depth 1 --branch $${PKG_VERSION} $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
 			;; \
 		    hash) \
 			echo "Using git hash: $${PKG_VERSION}" $(DL_TRACE); \
-			git clone $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
-			(cd $${PKG_NAME}-$${PKG_VERSION}; git checkout $(GITOPTS) $${PKG_VERSION}); \
+			git clone $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
+			(cd $${PKG_NAME}-$${PKG_VERSION}; git checkout $(GITOPTS) $${PKG_VERSION}) $(DL_TRACE); \
 			;; \
 		  esac ;\
 		else \
-		  git clone --depth 1 $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION}; \
+		  git clone --depth 1 $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
 		fi; \
 		tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
 		touch $$$${filename}.nohash; \
