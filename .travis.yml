@@ -1,9 +1,11 @@
+language: c
 git:
   depth: 3
 install:
   - sudo apt-get -qq update
 matrix:
   include:
-  - env: ARCH=arm SYSTEM=raspberry-pi
+  - env: ARCH=avr32 SYSTEM=atmel-ngw100
+  - env: ARCH=m68k SYSTEM=aranym-m68k
   - env: ARCH=mips SYSTEM=mikrotik-rb532
 script: ./scripts/travis.sh $ARCH $SYSTEM
