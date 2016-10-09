@@ -21,6 +21,11 @@ config ADK_RUNTIME_INIT_S6
 	select ADK_PACKAGE_S6_PORTABLE_UTILS
 	select ADK_PACKAGE_S6_LINUX_UTILS
 
+config ADK_RUNTIME_INIT_SYSTEMD
+	bool "Use systemd init and supervision"
+	select ADK_PACKAGE_SYSTEMD
+	depends on ADK_TARGET_LIB_GLIBC
+
 config ADK_RUNTIME_INIT_SIMPLEINIT
 	bool "Use a very simple init"
 	select ADK_PACKAGE_SIMPLEINIT

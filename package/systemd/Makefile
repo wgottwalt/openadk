@@ -67,5 +67,8 @@ systemd-install:
 	$(INSTALL_DIR) $(IDIR_SYSTEMD)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/* \
 		$(IDIR_SYSTEMD)/usr/bin
+	$(INSTALL_DIR) $(IDIR_SYSTEMD)/usr/share
+	$(CP) $(WRKINST)/usr/share/* \
+		$(IDIR_SYSTEMD)/usr/share
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
