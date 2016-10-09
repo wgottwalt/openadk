@@ -10,6 +10,8 @@ PKG_DESCR:=		helper tools and scripts for qemu testing
 PKG_SECTION:=		base/tests
 PKG_URL:=		http://openadk.org/
 
+PKG_CFLINE_ADKTEST:=	select BUSYBOX_NC
+
 NO_DISTFILES:=		1
 
 include $(ADK_TOPDIR)/mk/package.mk
