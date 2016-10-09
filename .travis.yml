@@ -2,5 +2,8 @@ git:
   depth: 3
 install:
   - sudo apt-get -qq update
-  - sudo apt-get install -y mksh
-script: ./scripts/travis.sh
+matrix:
+  include:
+  - env: ARCH=arm SYSTEM=raspberry-pi
+  - env: ARCH=mips SYSTEM=mikrotik-rb532
+script: ./scripts/travis.sh $ARCH $SYSTEM
