@@ -84,7 +84,6 @@ u-boot-install:
 	$(INSTALL_DIR) $(IDIR_U_BOOT)/etc
 	$(CP) ./files/fw_env.config $(IDIR_U_BOOT)/etc
 ifneq ($(OS_FOR_BUILD),Darwin)
-	(cd $(WRKBUILD) && env \
 	$(INSTALL_DIR) $(IDIR_U_BOOT)/usr/bin
 	$(INSTALL_BIN) $(WRKBUILD)/tools/env/fw_printenv \
 		$(IDIR_U_BOOT)/usr/bin
