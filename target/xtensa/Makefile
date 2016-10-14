@@ -64,9 +64,10 @@ targethelp:
 endif
 
 kernel-strip:
+	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
-kernel-install:
-	@cp $(KERNEL) $(FW_DIR)/${TARGET_KERNEL}
+kernel-install: kernel-strip
+	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
