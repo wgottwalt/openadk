@@ -7,9 +7,11 @@ matrix:
   include:
   - env: ARCH=arm SYSTEM=beaglebone-black
   - env: ARCH=avr32 SYSTEM=atmel-ngw100
+  - env: ARCH=cris SYSTEM=foxboard-lx832
   - env: ARCH=m68k SYSTEM=aranym-m68k
   - env: ARCH=mips SYSTEM=mikrotik-rb532
   - env: ARCH=mips64 SYSTEM=lemote-yeelong
   - env: ARCH=nds32 SYSTEM=andes-ag101p
+  - env: ARCH=x86 SYSTEM=pcengines-alix
   - env: ARCH=xtensa SYSTEM=xilinx-kintex7
 script: ./scripts/travis.sh $ARCH $SYSTEM
