@@ -4,16 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		c-ares
-PKG_VERSION:=		1.10.0
+PKG_VERSION:=		1.12.0
 PKG_RELEASE:=		1
-PKG_HASH:=		3d701674615d1158e56a59aaede7891f2dde3da0f46a6d3c684e0ae70f52d3db
-PKG_DESCR:=		c-ares asynchronous dns lib
+PKG_HASH:=		8692f9403cdcdf936130e045c84021665118ee9bfea905d1a76f04d4e6f365fb
+PKG_DESCR:=		asynchronous dns library
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://c-ares.haxx.se
 PKG_SITES:=		http://c-ares.haxx.se/download/
 PKG_OPTS:=		dev
 
-# if downloaded package is not ending with .tar.xz use following
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
