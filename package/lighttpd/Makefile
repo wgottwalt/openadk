@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		lighttpd
-PKG_VERSION:=		1.4.41
+PKG_VERSION:=		1.4.42
 PKG_RELEASE:=		1
-PKG_HASH:=		4bcc383ef6d6dc7b284f68882d71a178e2986c83c4e85eeb3c8f3b882e346b6c
+PKG_HASH:=		b2c9069ed0bade9362c27b469a9b884641786aea1c3d686f9fd9f01d15e2a15f
 PKG_DESCR:=		lightweight web server
 PKG_SECTION:=		net/http
 PKG_URL:=		http://www.lighttpd.net/
@@ -59,8 +59,8 @@ PKGSN_LIGHTTPD_MOD_STATUS:=	lighttpd
 PKGSD_LIGHTTPD_MOD_USERTRACK:=	Usertracking support
 PKGSN_LIGHTTPD_MOD_USERTRACK:=	lighttpd
 PKGSD_LIGHTTPD_MOD_WEBDAV:=	Webdav support
-PKGSB_LIGHTTPD_MOD_WEBDAV:=	libxml2 sqlite
-PKGSS_LIGHTTPD_MOD_WEBDAV:=	libxml2 libsqlite
+PKGSB_LIGHTTPD_MOD_WEBDAV:=	libxml2 sqlite util-linux
+PKGSS_LIGHTTPD_MOD_WEBDAV:=	libxml2 libsqlite libuuid
 PKGSN_LIGHTTPD_MOD_WEBDAV:=	lighttpd
 
 include $(ADK_TOPDIR)/mk/package.mk
