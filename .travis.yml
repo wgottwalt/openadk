@@ -10,7 +10,6 @@ matrix:
   - env: ARCH=avr32 SYSTEM=atmel-ngw100
   - env: ARCH=cris SYSTEM=foxboard-lx832
   - env: ARCH=m68k SYSTEM=aranym-m68k
-  - env: ARCH=mips SYSTEM=dragino-ms14s
   - env: ARCH=mips SYSTEM=imgtec-ci20
   - env: ARCH=mips SYSTEM=mikrotik-rb4xx
   - env: ARCH=mips SYSTEM=mikrotik-rb532
