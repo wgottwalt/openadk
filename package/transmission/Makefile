@@ -11,7 +11,7 @@ PKG_DESCR:=		torrent client
 PKG_SECTION:=		app/p2p
 PKG_DEPENDS:=		libressl libevent libcurl
 PKG_BUILDDEP:=		libressl libevent curl
-PKG_NEEDS:=		threads
+PKG_NEEDS:=		threads c++
 PKG_URL:=		http://www.transmissionbt.com
 PKG_SITES:=		http://download.transmissionbt.com/files/
 

@@ -1,0 +1,26 @@
+From e6f8e571c2014602d9edd68e1e58d38fed59c2b4 Mon Sep 17 00:00:00 2001
+From: Waldemar Brodkorb <wbx@uclibc-ng.org>
+Date: Sun, 16 Oct 2016 17:33:23 +0200
+Subject: [PATCH] uClibc-ng since 1.0.18 has sys/quota.h synced with GNU libc
+
+Signed-off-by: Waldemar Brodkorb <wbx@uclibc-ng.org>
+---
+ libtransmission/platform-quota.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/libtransmission/platform-quota.c b/libtransmission/platform-quota.c
+index 58c518a..e14ec1b 100644
+--- a/libtransmission/platform-quota.c
++++ b/libtransmission/platform-quota.c
+@@ -284,7 +284,7 @@ getquota (const char * device)
+       spaceused = (int64_t) dq.dqb_curblocks >> 1;
+ #elif defined(__APPLE__)
+       spaceused = (int64_t) dq.dqb_curbytes;
+-#elif defined(__UCLIBC__)
++#elif defined (__UCLIBC__) && !TR_UCLIBC_CHECK_VERSION (1, 0, 17)
+       spaceused = (int64_t) btodb(dq.dqb_curblocks);
+ #elif defined(__sun) || (defined(_LINUX_QUOTA_VERSION) && _LINUX_QUOTA_VERSION < 2)
+       spaceused = (int64_t) dq.dqb_curblocks >> 1;
+-- 
+2.7.4 (Apple Git-66)
+
