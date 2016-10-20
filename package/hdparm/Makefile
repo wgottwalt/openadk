@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		hdparm
-PKG_VERSION:=		9.48
+PKG_VERSION:=		9.50
 PKG_RELEASE:=		1
-PKG_HASH:=		ce97b4a71cb04146f54cf6f69787e7f97ddfda9836dc803b459d3b3df3a4fbee
+PKG_HASH:=		0892b44bd817c251264a24f6ecbbb010958033e0395d2030f25f1c5608ac780e
 PKG_DESCR:=		get/set ata/sata drive parameters
 PKG_SECTION:=		sys/hw
 PKG_URL:=		http://sourceforge.net/projects/hdparm
