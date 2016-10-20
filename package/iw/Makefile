@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		iw
-PKG_VERSION:=		4.7
+PKG_VERSION:=		4.9
 PKG_RELEASE:=		1
-PKG_HASH:=		d1720c04bc26661d42e71d13746d5c3aeedb6bdf743f7d6b7b056f0abd345ee8
+PKG_HASH:=		324cc805fad52cba2c16b9ab569906889fb645cc962aac4cfda1db85d2de97ce
 PKG_DESCR:=		tools for setting up wifi cards
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		libnl
