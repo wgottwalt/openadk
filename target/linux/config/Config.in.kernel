@@ -58,6 +58,9 @@ config ADK_KERNEL_CPU_LITTLE_ENDIAN
 
 menu "Kernel options"
 
+config ADK_KERNEL_MODULE_UNLOAD
+	bool "Module unloading"
+
 config ADK_KERNEL_HOTPLUG
 	bool
 
