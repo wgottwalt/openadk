@@ -1,0 +1,27 @@
+diff -Nur linux-4.7.2.orig/arch/x86/entry/vdso/vdso2c.c linux-4.7.2/arch/x86/entry/vdso/vdso2c.c
+--- linux-4.7.2.orig/arch/x86/entry/vdso/vdso2c.c	2016-08-20 18:11:18.000000000 +0200
++++ linux-4.7.2/arch/x86/entry/vdso/vdso2c.c	2016-09-04 11:11:01.000000000 +0200
+@@ -64,7 +64,15 @@
+ #include <tools/le_byteshift.h>
+ 
+ #include <linux/elf.h>
++#ifdef __linux__
+ #include <linux/types.h>
++#else
++typedef _Bool			bool;
++enum {
++        false   = 0,
++        true    = 1
++};
++#endif
+ 
+ const char *outfilename;
+ 
+@@ -84,6 +92,7 @@
+ 	sym_pvclock_page,
+ };
+ 
++
+ struct vdso_sym {
+ 	const char *name;
+ 	bool export;
