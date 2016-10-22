@@ -8,6 +8,7 @@ matrix:
   - env: ARCH=arm SYSTEM=beaglebone-black
   - env: ARCH=arm SYSTEM=linksys-nslu2
   - env: ARCH=avr32 SYSTEM=atmel-ngw100
+  - env: ARCH=avr32 SYSTEM=grasshopper
   - env: ARCH=cris SYSTEM=foxboard-lx832
   - env: ARCH=m68k SYSTEM=aranym-m68k
   - env: ARCH=mips SYSTEM=imgtec-ci20
