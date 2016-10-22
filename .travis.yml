@@ -1,8 +1,6 @@
 language: c
 git:
   depth: 3
-install:
-  - sudo apt-get -qq update
 matrix:
   include:
   - env: ARCH=arm SYSTEM=beaglebone-black
