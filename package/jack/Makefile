@@ -30,9 +30,9 @@ jack-install:
 	$(INSTALL_DIR) $(IDIR_JACK)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/jack* \
 		$(IDIR_JACK)/usr/bin
-	$(CP) $(WRKINST)/usr/lib/libjack*.so* \
+	$(CP) $(WRKINST)/usr/lib*/libjack*.so* \
 		$(IDIR_JACK)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/jack/*.so* \
+	$(CP) $(WRKINST)/usr/lib*/jack/*.so* \
 		$(IDIR_JACK)/usr/lib/jack
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
