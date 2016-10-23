@@ -121,16 +121,16 @@ endchoice
 choice
 prompt "C library version"
 
+config ADK_TARGET_LIB_UCLIBC_NG_1_0_19
+	bool "1.0.19"
+	depends on ADK_TARGET_LIB_UCLIBC_NG
+
 config ADK_TARGET_LIB_UCLIBC_NG_1_0_18
 	bool "1.0.18"
 	depends on ADK_TARGET_LIB_UCLIBC_NG
 
 config ADK_TARGET_LIB_UCLIBC_NG_1_0_17
 	bool "1.0.17"
-	depends on ADK_TARGET_LIB_UCLIBC_NG
-
-config ADK_TARGET_LIB_UCLIBC_NG_1_0_16
-	bool "1.0.16"
 	depends on ADK_TARGET_LIB_UCLIBC_NG
 
 config ADK_TARGET_LIB_UCLIBC_NG_GIT
@@ -227,9 +227,9 @@ config ADK_TARGET_LIBC
 
 config ADK_LIBC_VERSION
 	string
+	default "1.0.19" if ADK_TARGET_LIB_UCLIBC_NG_1_0_19
 	default "1.0.18" if ADK_TARGET_LIB_UCLIBC_NG_1_0_18
 	default "1.0.17" if ADK_TARGET_LIB_UCLIBC_NG_1_0_17
-	default "1.0.16" if ADK_TARGET_LIB_UCLIBC_NG_1_0_16
 	default "1.1.15" if ADK_TARGET_LIB_MUSL_1_1_15
 	default "1.1.14" if ADK_TARGET_LIB_MUSL_1_1_14
 	default "1.1.13" if ADK_TARGET_LIB_MUSL_1_1_13
