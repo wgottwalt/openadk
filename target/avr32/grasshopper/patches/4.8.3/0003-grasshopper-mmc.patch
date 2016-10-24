@@ -1,0 +1,54 @@
+diff -Naur linux-4.7.3/arch/avr32/boards/grasshopper/Kconfig linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/Kconfig
+--- linux-4.7.3/arch/avr32/boards/grasshopper/Kconfig	2016-09-20 11:22:36.665693605 +0200
++++ linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/Kconfig	2016-09-20 11:22:45.803816861 +0200
+@@ -34,4 +34,14 @@
+ 	help
+ 	  Enabling PWM channel 3 will exclude the power LED from LED API.
+ 
++config BOARD_GRASSHOPPER_MMC
++	bool "Enable MMC slot"
++	depends on MMC_ATMELMCI
++	default n
++
++config BOARD_GRASSHOPPER_MMCLED
++	bool "Show MMC acces on LED8"
++	depends on BOARD_GRASSHOPPER_MMC
++	default n
++
+ endif	# BOARD_GRASSHOPPER
+diff -Naur linux-4.7.3/arch/avr32/boards/grasshopper/led.c linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/led.c
+--- linux-4.7.3/arch/avr32/boards/grasshopper/led.c	2016-09-20 11:17:36.448644161 +0200
++++ linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/led.c	2016-09-20 11:25:30.690040822 +0200
+@@ -62,6 +62,9 @@
+     {
+         .name = "led8:green",
+         .gpio = GPIO_PIN_PA(30),
++#ifdef CONFIG_BOARD_GRASSHOPPER_MMCLED
++        .default_trigger = "mmc0",
++#endif
+     },
+ };
+ 
+diff -Naur linux-4.7.3/arch/avr32/boards/grasshopper/setup.c linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/setup.c
+--- linux-4.7.3/arch/avr32/boards/grasshopper/setup.c	2016-09-20 10:32:24.571984951 +0200
++++ linux-4.7.3.grasshopper/arch/avr32/boards/grasshopper/setup.c	2016-09-20 11:23:52.197712372 +0200
+@@ -130,7 +130,7 @@
+ #endif
+ 
+ /* MCI */
+-#ifdef CONFIG_MMC_ATMELMCI
++#ifdef CONFIG_BOARD_GRASSHOPPER_MMC
+ static struct mci_platform_data __initdata mci0_data = {
+     .slot[0] = {
+         .bus_width = 4,
+@@ -168,8 +168,8 @@
+         ATMEL_LCDC_PRI_CONTROL | ATMEL_LCDC_PRI_24BIT);
+ #endif
+ 
+-#ifdef CONFIG_MMC_ATMELMCI
+-//    at32_add_device_mci(0, &mci0_data); /* MMC/SD */
++#ifdef CONFIG_BOARD_GRASSHOPPER_MMC
++    at32_add_device_mci(0, &mci0_data); /* MMC/SD */
+ #endif
+ 
+ //    printk("registering penirq gpio-pin...\n");
