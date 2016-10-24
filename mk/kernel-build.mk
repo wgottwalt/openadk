@@ -6,7 +6,11 @@ include $(ADK_TOPDIR)/mk/kernel-ver.mk
 include $(ADK_TOPDIR)/mk/linux.mk
 include $(ADK_TOPDIR)/mk/kernel-vars.mk
 
+ifeq ($(ADK_TARGET_KERNEL_USE_CUSTOMCONFIG),y)
+KERNEL_MODULES_USED:=$(shell grep -s =m $(ADK_TOPDIR)/$(ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH))
+else
 KERNEL_MODULES_USED:=$(shell grep ^ADK_KERNEL $(ADK_TOPDIR)/.config|grep =m)
+endif
 
 KERNEL_FILE:=$(ADK_TARGET_KERNEL)
 KERNEL_TARGET:=$(ADK_TARGET_KERNEL)
@@ -38,12 +42,27 @@ $(LINUX_DIR)/.prepared: $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PK
 	mkdir -p $(LINUX_BUILD_DIR)/kmod-control
 	touch $@
 
-$(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared $(BUILD_DIR)/.kernelconfig
+ifeq ($(ADK_TARGET_KERNEL_USE_MINICONFIG),y)
+$(LINUX_DIR)/.config: $(BUILD_DIR)/.kernelconfig
+endif
+
+ifeq ($(ADK_TARGET_KERNEL_USE_CUSTOMCONFIG),y)
+$(ADK_TOPDIR)/$(ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH):
+$(LINUX_DIR)/.config: $(ADK_TOPDIR)/$(ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH)
+endif
+
+$(LINUX_DIR)/.config: $(LINUX_DIR)/.prepared
 	$(START_TRACE) "target/$(ADK_TARGET_ARCH)-kernel-configure.. "
 	-for f in $(TARGETS);do if [ -f $$f ];then rm $$f;fi;done
 	echo "-${KERNEL_RELEASE}" >${LINUX_DIR}/localversion
 ifeq ($(ADK_TARGET_KERNEL_USE_DEFCONFIG),y)
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} $(ADK_TARGET_KERNEL_DEFCONFIG) $(MAKE_TRACE)
+else ifeq ($(ADK_TARGET_KERNEL_USE_CUSTOMCONFIG),y)
+	@if [ ! -f $(ADK_TOPDIR)/$(ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH) ];then \
+		echo "no kernel configuration found in $(ADK_TOPDIR)/$(ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH)"; \
+		exit 1; \
+	fi
+	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} KCONFIG_ALLCONFIG=$(ADK_TOPDIR)/$(ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH) allnoconfig $(MAKE_TRACE)
 else
 	$(CP) $(BUILD_DIR)/.kernelconfig $(LINUX_DIR)/mini.config
 	${KERNEL_MAKE_ENV} $(MAKE) -C "${LINUX_DIR}" ${KERNEL_MAKE_OPTS} KCONFIG_ALLCONFIG=mini.config allnoconfig $(MAKE_TRACE)

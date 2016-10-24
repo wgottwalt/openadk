@@ -14,6 +14,9 @@ config ADK_TARGET_KERNEL_USE_MINICONFIG
 config ADK_TARGET_KERNEL_USE_DEFCONFIG
 	bool "Use defconfig from Linux kernel"
 
+config ADK_TARGET_KERNEL_USE_CUSTOMCONFIG
+	bool "Use custom Linux kernel configuration file"
+
 endchoice
 
 config ADK_TARGET_KERNEL_DEFCONFIG
@@ -29,4 +32,9 @@ config ADK_TARGET_KERNEL_DEFCONFIG
 	default "10m50_defconfig" if ADK_TARGET_SYSTEM_QEMU_NIOS2
 	default "orca_defconfig" if ADK_TARGET_SYSTEM_ANDES_AG101P
 	default "bb.org_defconfig" if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+
+config ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH
+	string "Kernel configuration file location"
+	depends on ADK_TARGET_KERNEL_USE_CUSTOMCONFIG
+	default ".kernelconfig"
 

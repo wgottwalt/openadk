@@ -4,7 +4,11 @@
 include $(ADK_TOPDIR)/rules.mk
 include $(ADK_TOPDIR)/mk/rootfs.mk
 
+ifeq ($(ADK_TARGET_KERNEL_USE_CUSTOMCONFIG),y)
+KERNEL_MODULES_USED:=$(shell grep -s =m $(ADK_TOPDIR)/$(ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH))
+else
 KERNEL_MODULES_USED:=$(shell grep ^ADK_KERNEL $(ADK_TOPDIR)/.config|grep =m)
+endif
 
 all: install
 
