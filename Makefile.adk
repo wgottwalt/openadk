@@ -47,6 +47,8 @@ help:
 	@echo 'Common targets:'
 	@echo '  download     - fetches all needed distfiles'
 	@echo '  kernelconfig - view the target kernel configuration'
+	@echo '  savekconfig  - save changes of "make kernelconfig" to an external'
+	@echo '                 configuration file (if configured)'
 	@echo ''
 	@echo 'Cleaning targets:'
 	@echo '  clean        - Remove firmware and build directories'
@@ -129,6 +131,9 @@ targethelp:
 
 kernelconfig:
 	@${GMAKE_INV} kernelconfig
+
+savekconfig:
+	@${GMAKE_INV} savekconfig
 
 newpackage:
 	@${GMAKE_INV} newpackage
