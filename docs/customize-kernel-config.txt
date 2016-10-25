@@ -5,15 +5,21 @@
 Customizing the Linux kernel configuration
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-The Linux kernel configuration can be customized using +make menuconfig+.
-OpenADK uses a combination of Linux miniconfig feature and user defined
-features to generate a valid Linux configuration for your target.
-Some features and drivers are not selectable via +make menuconfig+, either
-because your choosen target system does not have support for it or the
-option is not implemented, yet. OpenADK uses some kind of abstraction
-layer between the real full featured and complicated Linux kernel configuration
-and you. It is not perfect and does include a lot of manual work in
-+target/linux/config+, but it works in an acceptable way.
+The Linux kernel can be configured in the following manners by choosing the
+desired "Kernel configuration" option in the OpenADK configuration menu:
+
+* using +make menuconfig+ in conjunction with an OpenADK minimal configuration
+* choosing a Linux kernel in-tree default configuration
+* providing an extern kernel configuration file
+
+Choosing the first option, OpenADK uses a combination of Linux miniconfig
+feature and user defined features to generate a valid Linux configuration for
+your target. Some features and drivers are not selectable via
++make menuconfig+, either because your choosen target system does not have
+support for it or the option is not implemented, yet. OpenADK uses some kind of
+abstraction layer between the real full featured and complicated Linux kernel
+configuration and you. It is not perfect and does include a lot of manual work
+in +target/linux/config+, but it works in an acceptable way.
 
 If you just want to view the Linux configuration, which is actually
 used for your target, you can execute following command:
@@ -46,3 +52,21 @@ bootup the system with support for your board, serial console, network card and 
 If you need to enable some new optional drivers or features, which are not available in
 +make menuconfig+, you need to dig in +target/linux/config+. There is the abstraction layer
 for the real kernel configuration.
+
+The defconfig option will choose a kernel in-tree default configuration
+specific to your target architecture. You won't be able to do further
+customization.
+
+Choosing the external configuration option, the OpenADK menu will prompt for
+the location of a Linux +.config+ file relative to the OpenADK root directory.
+You will be able to alter the configuration by +make kernelconfig+. But the
+changes will get lost unless you save your changes by executing
+
+---------------
+ $ make savekconfig
+---------------
+
+after completing the Linux kernel configuration dialog. Despite this is the
+most flexible way to configure the kernel, keep in mind that you are fully
+responsible to enable all kernel features needed to mount your filesystems
+and required by your applications.
