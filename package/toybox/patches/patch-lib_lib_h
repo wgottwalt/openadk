@@ -1,0 +1,12 @@
+--- toybox-0.7.1.orig/lib/lib.h	2016-06-01 00:33:23.000000000 +0200
++++ toybox-0.7.1/lib/lib.h	2016-10-16 12:33:42.000000000 +0200
+@@ -201,7 +201,9 @@ int qstrcmp(const void *a, const void *b
+ void create_uuid(char *uuid);
+ char *show_uuid(char *uuid);
+ char *next_printf(char *s, char **start);
++#ifndef __APPLE__
+ char *strnstr(char *line, char *str);
++#endif
+ int dev_minor(int dev);
+ int dev_major(int dev);
+ int dev_makedev(int major, int minor);
