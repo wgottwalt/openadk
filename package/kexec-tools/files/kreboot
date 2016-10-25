@@ -1,9 +1,39 @@
 #!/bin/sh
 
+ARCH=$(uname -m)
 KERNEL="/mnt/boot/kernel"
-KEXEC_ARG=" -l --atags "
+KEXEC_ARGS="-l"
+if [ $ARCH = "arm" ]; then
+  KEXEC_ARGS="$KEXEC_ARGS --atags"
+fi
 PART_A=2
 PART_B=3
+me=$0
+
+usage() {
+cat >&2 <<EOF
+Syntax: $me [-k kernel]
+
+ -k	give the path to the kernel eg. /boot/vmlinuz-4.7.4
+        (default: $KERNEL)
+EOF
+  exit $1
+}
+
+while getopts "k:" ch; do
+  case $ch {
+  (k)
+    # if default does not fit, give the actual keren via -k otion eg "-k /boot/vmlinuz-4.7.4
+    KERNEL="$OPTARG"
+  ;;
+
+  (*)
+    usage 1
+  ;;
+  }
+done
+shift $((OPTIND - 1))
+
 
 load_kernel(){
   # get the Bootargs and replace the current Partition with
@@ -12,7 +42,7 @@ load_kernel(){
   # echo "kexec $KEXEC_ARG --append=\"$BOOT_ARGS\" $KERNEL"
   # set -x
   # Load the new kernel, unmount the partition and exec the new kernel
-  kexec -l --atags --append=\""$BOOT_ARGS"\" $KERNEL
+  kexec $KEXEC_ARGS --append=\""$BOOT_ARGS"\" $KERNEL
   umount /mnt
   kexec -e
 }
@@ -24,9 +54,8 @@ umount /mnt 2> /dev/null
 PART="/dev/$(readlink /dev/root)"
 # extract the partition number
 C_M_PART_NUM=$(readlink /dev/root | grep -o -e '[[:digit:]]*$')
-#$(readlink /dev/root | grep -o '.$')
 
-#Cut off the Partition Number
+# cut off the Partition Number
 C_M_PART=$(readlink /dev/root | sed "s/$C_M_PART_NUM\$//")
 
 CURRENT_PART="/dev/${C_M_PART}${C_M_PART_NUM}"
@@ -46,4 +75,3 @@ case $C_M_PART_NUM in
     echo "FAILURE"
   ;;
 esac
-

@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kexec-tools
 PKG_VERSION:=		2.0.11
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		b1097986ffdb928cf41a94e8a5dfddc981a8fa710cccf13298e7f8dd939a2ee3
 PKG_DESCR:=		kernel exec tools
 PKG_SECTION:=		sys/misc
