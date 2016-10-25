@@ -3,9 +3,8 @@ config ADK_COMPILE_BUSYBOX
 	depends on ADK_PACKAGE_BUSYBOX
 
 config ADK_PACKAGE_BUSYBOX
-	bool "busybox.............. core utilities for embedded systems"
+	bool "busybox................. core utilities for embedded systems"
 	select ADK_COMPILE_BUSYBOX
-	default y if !ADK_APPLIANCE_TOOLCHAIN
 	help
 	  Core utilities for embedded Linux systems
 	  

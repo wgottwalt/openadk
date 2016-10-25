@@ -126,6 +126,10 @@ POSTCONFIG=		-@\
 			cleandir=1;\
 			rebuild=1;\
 		fi; \
+		if [ "$$(grep ^ADK_RUNTIME_BASE_ .config|md5sum)" != "$$(grep ^ADK_RUNTIME_BASE_ .config.old|md5sum)" ];then \
+			cleandir=1;\
+			rebuild=1;\
+		fi; \
 		if [ "$$(grep ^ADK_TARGET_USE .config|md5sum)" != "$$(grep ^ADK_TARGET_USE .config.old|md5sum)" ];then \
 			cleandir=1;\
 			rebuild=1;\

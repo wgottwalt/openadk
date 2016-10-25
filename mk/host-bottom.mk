@@ -51,9 +51,11 @@ ifeq (${HOST_STYLE},auto)
 	    --disable-nls \
 	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 endif
-ifeq (${HOST_STYLE},manual)
-	@$(CMD_TRACE) "configuring.. "
-	${MAKE} host-configure $(MAKE_TRACE)
+ifeq (${HOST_STYLE},cmake)
+	@$(CMD_TRACE) "configuring cmake.. "
+	cd ${WRKBUILD}; PATH='${HOST_PATH}' \
+		cmake -Wno-dev -DCMAKE_INSTALL_PREFIX:PATH=/usr \
+		${HOST_CMAKE_FLAGS} ${WRKSRC} $(MAKE_TRACE)
 endif
 ifeq (${HOST_STYLE},perl)
 	@$(CMD_TRACE) "configuring perl module.. "
@@ -63,6 +65,10 @@ ifeq (${HOST_STYLE},perl)
 		PERL_AUTOINSTALL=--skipdeps \
 		$(HOST_PERL_ENV) \
 		perl-host Makefile.PL ${HOST_CONFIGURE_ARGS}
+endif
+ifeq (${HOST_STYLE},manual)
+	@$(CMD_TRACE) "configuring.. "
+	${MAKE} host-configure $(MAKE_TRACE)
 endif
 	touch $@
 

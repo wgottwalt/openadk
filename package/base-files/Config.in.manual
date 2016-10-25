@@ -4,8 +4,7 @@ config ADK_COMPILE_BASE_FILES
 	default n
 
 config ADK_PACKAGE_BASE_FILES
-	prompt "base-files........... basic filesystem structure and scripts"
-	tristate
+	tristate "base-files.............. basic filesystem structure and scripts"
 	select ADK_COMPILE_BASE_FILES
 	depends on !ADK_APPLIANCE_TOOLCHAIN
 	default y if !ADK_APPLIANCE_TOOLCHAIN
@@ -13,8 +12,7 @@ config ADK_PACKAGE_BASE_FILES
 	  basic filesystem structure and scripts
 
 config ADK_PACKAGE_CONFIG_IN_ETC
-	prompt ".config in /etc.... include buildsystem configuration in image"
-	bool
+	bool ".config in /etc....... include buildsystem configuration in image"
 	depends on ADK_PACKAGE_BASE_FILES
 	default y if !ADK_APPLIANCE_TOOLCHAIN
 	help

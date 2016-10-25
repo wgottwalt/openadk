@@ -8,7 +8,7 @@ config ADK_RUNTIME_HOSTNAME
 	  Set your target hostname.
 
 choice
-prompt "init"
+prompt "init system"
 depends on !ADK_APPLIANCE_TOOLCHAIN
 default ADK_RUNTIME_INIT_SYSV
 
@@ -33,7 +33,7 @@ config ADK_RUNTIME_INIT_SIMPLEINIT
 endchoice
 
 choice
-prompt "System for /dev management"
+prompt "system for /dev management"
 depends on !ADK_APPLIANCE_TOOLCHAIN
 default ADK_RUNTIME_DEV_STATIC if ADK_TARGET_WITHOUT_MMU || ADK_TARGET_ARCH_CRIS
 default ADK_RUNTIME_DEV_MDEV
@@ -56,9 +56,31 @@ config ADK_RUNTIME_DEV_STATIC
 
 endchoice
 
+choice
+prompt "base applications"
+depends on !ADK_APPLIANCE_TOOLCHAIN
+default ADK_RUNTIME_BASE_BUSYBOX
+
+config ADK_RUNTIME_BASE_BUSYBOX
+	bool "Use busybox"
+	select ADK_PACKAGE_BUSYBOX
+
+config ADK_RUNTIME_BASE_TOYBOX
+	bool "Use toybox"
+	select ADK_PACKAGE_TOYBOX
+
+config ADK_RUNTIME_BASE_COREUTILS
+	bool "Use coreutils"
+	select ADK_PACKAGE_COREUTILS
+	select ADK_PACKAGE_GREP
+	select ADK_PACKAGE_FIND
+
+endchoice
+
 config ADK_RUNTIME_FIX_PERMISSION
-	bool "Fix permissions for target files (suid bit, ..)"
+	bool "fix permissions for target files (suid bit, ..)"
 	select ADK_HOST_BUILD_FAKEROOT
+	depends on ADK_TARGET_ROOTFS_GENIMAGE
 	help
 	  Use fakeroot to fix permissions for target dir before image
 	  creation.
