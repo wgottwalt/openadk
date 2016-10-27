@@ -24,7 +24,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
-AUTOTOOL_STYLE:=	autoreconf
 ifeq ($(ADK_TARGET_LIBICONV),y)
 CONFIGURE_ARGS+=	--with-libiconv=yes
 endif
@@ -50,8 +49,6 @@ ifneq ($(OS_FOR_BUILD),Darwin)
 HOST_CONFIGURE_ARGS+=	--with-libiconv=no
 endif
 HOST_CONFIGURE_ARGS+=	--disable-fam \
-			--disable-carbon \
-			--disable-cocoa \
 			--disable-dtrace \
 			--enable-static \
 			--with-pcre=bundled \
