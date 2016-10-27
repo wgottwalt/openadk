@@ -25,7 +25,6 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,TCPDUMP,tcpdump,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		BUILD_CC="${TARGET_CC}" HOSTCC=${CC_FOR_BUILD} \
-			ac_cv_linux_vers=2 \
 			td_cv_buggygetaddrinfo="no"
 CONFIGURE_ARGS+=	--without-crypto
 ifneq (${ADK_PACKAGE_TCPDUMP_WITH_IPV6},)
