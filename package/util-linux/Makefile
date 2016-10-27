@@ -67,7 +67,6 @@ $(eval $(call PKG_template,LIBMOUNT,libmount,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG
 TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
 TARGET_LDFLAGS+=	-ltinfo
 
-AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--disable-chfn-chsh \
 			--disable-more \
