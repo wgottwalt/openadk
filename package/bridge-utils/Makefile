@@ -4,17 +4,16 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bridge-utils
-PKG_VERSION:=		1.5
-PKG_RELEASE:=		2
-PKG_HASH:=		42f9e5fb8f6c52e63a98a43b81bd281c227c529f194913e1c51ec48a393b6688
+PKG_VERSION:=		1.6
+PKG_RELEASE:=		1
+PKG_HASH:=		cc67efb5d5fb8928a6569b3fade2b4042ec17da04678dab127d96b46489e26c8
 PKG_DESCR:=		ethernet bridging tools
 PKG_SECTION:=		net/route
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Bridge
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=bridge/}
+PKG_SITES:=		http://www.kernel.org/pub/linux/utils/net/bridge-utils/
 PKG_BB:=		1
-PKG_CFLINE_BRIDGE_UTILS:=select ADK_KERNEL_BRIDGE
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+PKG_CFLINE_BRIDGE_UTILS:=select ADK_KERNEL_BRIDGE
 
 include ${ADK_TOPDIR}/mk/package.mk
 
