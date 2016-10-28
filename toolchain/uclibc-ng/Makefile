@@ -357,19 +357,6 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		install_utils
-	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
-		ARCH="$(ADK_TARGET_ARCH)" \
-		CROSS_COMPILE="$(TARGET_CROSS)" \
-		HOSTCC="$(HOST_CC)" \
-		PREFIX=$(STAGING_TARGET_DIR)/uclibc-ng \
-		DEVEL_PREFIX=/usr/ \
-		RUNTIME_PREFIX=/ \
-		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
-		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
-		TEST_INSTALLED_UCLIBC=1 \
-		UCLIBC_ONLY=1 \
-		VERBOSE=1 \
-		test_compile test_gen
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk

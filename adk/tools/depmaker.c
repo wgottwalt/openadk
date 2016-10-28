@@ -221,8 +221,7 @@ int main() {
 			
 			/* exclude manual maintained packages from package/Makefile */
 			if (
-				!(strncmp(pkgdirp->d_name, "libpthread", 10) == 0 && strlen(pkgdirp->d_name) == 10) &&
-				!(strncmp(pkgdirp->d_name, "uclibc-ng", 9) == 0) &&
+				!(strncmp(pkgdirp->d_name, "uclibc-ng", 9) == 0 && strlen(pkgdirp->d_name) == 9) &&
 				!(strncmp(pkgdirp->d_name, "musl", 4) == 0) &&
 				!(strncmp(pkgdirp->d_name, "glibc", 5) == 0)) {
 				/* print result to stdout */

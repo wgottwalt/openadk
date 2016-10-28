@@ -11,11 +11,9 @@ PKG_DESCR:=		embedded c library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove nostaging noscripts
 
-PKG_SUBPKGS:=		UCLIBC_NG UCLIBC_NG_DEV UCLIBC_NG_TEST
+PKG_SUBPKGS:=		UCLIBC_NG UCLIBC_NG_DEV
 PKGSD_UCLIBC_NG_DEV:=	development files for uclibc-ng
 PKGSC_UCLIBC_NG_DEV:=	devel
-PKGSD_UCLIBC_NG_TEST:=	test suite for uclibc-ng
-PKGSS_UCLIBC_NG_TEST:=	make
 
 NO_DISTFILES:=		1
 
@@ -23,7 +21,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,UCLIBC_NG,uclibc-ng,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,UCLIBC_NG_DEV,uclibc-ng-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_UCLIBC_NG_DEV},${PKGSC_UCLIBC_NG_DEV},${PKG_OPTS}))
-$(eval $(call PKG_template,UCLIBC_NG_TEST,uclibc-ng-test,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_UCLIBC_NG_TEST},${PKGSD_UCLIBC_NG_TEST},${PKG_SECTION},${PKG_OPTS}))
 
 CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
@@ -60,13 +57,5 @@ uclibc-ng-dev-install:
 		install_headers
 	@find $(IDIR_UCLIBC_NG_DEV) -name .install -exec rm {} \;
 	@find $(IDIR_UCLIBC_NG_DEV) -name ..install.cmd -exec rm {} \;
-
-uclibc-ng-test-install:
-	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/etc
-	echo '00:11:22:33:44:55 teeth' > ${IDIR_UCLIBC_NG_TEST}/etc/ethers
-	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
-	${CP} $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION}/test \
-		${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
-	@find ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng -name \*.o -exec rm {} \;
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
