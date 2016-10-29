@@ -15,7 +15,7 @@ PKG_NEEDS:=		threads
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.28/
 PKG_OPTS:=		dev
 
-PKG_SUBPKGS:=		FDISK SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
+PKG_SUBPKGS:=		FDISK AGETTY SFDISK SWAP_UTILS LOSETUP MCOOKIE MOUNT
 PKG_SUBPKGS+=		LIBFDISK LIBUUID LIBBLKID LIBMOUNT CFDISK MKFS
 PKGSD_LIBUUID:=		uuid library
 PKGSC_LIBUUID:=		libs/misc
@@ -28,6 +28,9 @@ PKGSC_LIBMOUNT:=	libs/misc
 PKGSD_FDISK:=		partition table manipulation utility
 PKGSC_FDISK:=		sys/fs
 PKGSS_FDISK:=		libfdisk
+PKGSD_AGETTY:=		getty utility
+PKGSC_AGETTY:=		base/apps
+PKGSS_AGETTY:=		libncurses
 PKGSD_SFDISK:=		scriptable partition table manipulation utility
 PKGSC_SFDISK:=		sys/fs
 PKGSS_SFDISK:=		libfdisk
@@ -51,6 +54,7 @@ include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call HOST_template,UTIL_LINUX,util-linux,$(PKG_VERSION)-$(PKG_RELEASE)))
+$(eval $(call PKG_template,AGETTY,agetty,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_AGETTY),$(PKGSC_AGETTY)))
 $(eval $(call PKG_template,FDISK,fdisk,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_FDISK),$(PKGSC_FDISK)))
 $(eval $(call PKG_template,CFDISK,cfdisk,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_CFDISK),$(PKGSC_CFDISK)))
 $(eval $(call PKG_template,SFDISK,sfdisk,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKGSD_SFDISK),$(PKGSC_SFDISK)))
@@ -91,7 +95,7 @@ CONFIGURE_ARGS+=	--disable-use-tty-group \
 			--enable-libblkid \
 			--enable-libmount
 
-ifeq ($(ADK_PACKAGE_FDISK)$(ADK_PACKAGE_SFDISK)$(ADK_PACKAGE_CFDISK)$(ADK_PACKAGE_MKFS)$(ADK_PACKAGE_MOUNT)$(ADK_PACKAGE_SWAP_UTILS)$(ADK_PACKAGE_MCOOKIE),)
+ifeq ($(ADK_PACKAGE_FDISK)$(ADK_PACKAGE_AGETTY)$(ADK_PACKAGE_SFDISK)$(ADK_PACKAGE_CFDISK)$(ADK_PACKAGE_MKFS)$(ADK_PACKAGE_MOUNT)$(ADK_PACKAGE_SWAP_UTILS)$(ADK_PACKAGE_MCOOKIE),)
 CONFIGURE_ARGS+=	--disable-all-programs
 endif
 
@@ -103,6 +107,10 @@ HOST_CONFIGURE_ARGS+=	--enable-libuuid \
 fdisk-install:
 	$(INSTALL_DIR) $(IDIR_FDISK)/usr/sbin
 	$(CP) $(WRKINST)/usr/sbin/fdisk $(IDIR_FDISK)/usr/sbin
+
+agetty-install:
+	$(INSTALL_DIR) $(IDIR_AGETTY)/sbin
+	$(CP) $(WRKINST)/sbin/agetty $(IDIR_AGETTY)/sbin
 
 cfdisk-install:
 	$(INSTALL_DIR) $(IDIR_CFDISK)/usr/sbin

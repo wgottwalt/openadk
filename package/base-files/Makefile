@@ -83,6 +83,7 @@ endif
 	rm -rf $(IDIR_BASE_FILES)/var
 	ln -sf tmp $(IDIR_BASE_FILES)/var
 	ln -sf var/run $(IDIR_BASE_FILES)/run
+ifeq ($(ADK_RUNTIME_INIT_SYSV),y)
 	test -z $(ADK_RUNTIME_SHELL) || \
 	    cat ./files/inittab.shell >> $(IDIR_BASE_FILES)/etc/inittab
 ifeq ($(ADK_TARGET_WITH_VGA),y)
@@ -95,6 +96,10 @@ endif
 	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
 	$(SED) 's#@DEVICE@#$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE)#g' $(IDIR_BASE_FILES)/etc/inittab
 	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
+endif
+ifeq ($(ADK_RUNTIME_INIT_SYSVINIT),y)
+	cp ./files/inittab.sysv $(IDIR_BASE_FILES)/etc/inittab
+endif
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
 	    echo $(ADK_RUNTIME_HOSTNAME) > $(IDIR_BASE_FILES)/etc/hostname; \
 	    echo "127.0.0.1	localhost" > $(IDIR_BASE_FILES)/etc/hosts

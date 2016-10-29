@@ -1,0 +1,4 @@
+id:2:initdefault:
+si::sysinit:/etc/init.d/rcS
+1:234:respawn:/sbin/agetty 115200 tty1
+AMA0:3:respawn:/sbin/agetty -L 9600 ttyAMA0 vt320
