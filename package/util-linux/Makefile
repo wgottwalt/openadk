@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.28.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		b89d37146f20bede93a42c847bce881a17e6dbd8066ff2db2bee733fa409f0cd
 PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
@@ -143,19 +143,24 @@ mcookie-install:
 
 libuuid-install:
 	$(INSTALL_DIR) $(IDIR_LIBUUID)/usr/lib
+	$(CP) $(WRKINST)/lib/libuuid.so* $(IDIR_LIBUUID)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libuuid.so* $(IDIR_LIBUUID)/usr/lib
 
 libblkid-install:
 	$(INSTALL_DIR) $(IDIR_LIBBLKID)/usr/lib
+	$(CP) $(WRKINST)/lib/libblkid.so* $(IDIR_LIBBLKID)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libblkid.so* $(IDIR_LIBBLKID)/usr/lib
 
 libfdisk-install:
 	$(INSTALL_DIR) $(IDIR_LIBFDISK)/usr/lib
+	$(CP) $(WRKINST)/lib/libfdisk.so* $(IDIR_LIBFDISK)/usr/lib
+	$(CP) $(WRKINST)/lib/libsmartcols.so* $(IDIR_LIBFDISK)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libfdisk.so* $(IDIR_LIBFDISK)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libsmartcols.so* $(IDIR_LIBFDISK)/usr/lib
 
 libmount-install:
 	$(INSTALL_DIR) $(IDIR_LIBMOUNT)/usr/lib
+	$(CP) $(WRKINST)/lib/libmount.so* $(IDIR_LIBMOUNT)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libmount.so* $(IDIR_LIBMOUNT)/usr/lib
 
 include $(ADK_TOPDIR)/mk/host-bottom.mk
