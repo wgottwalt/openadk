@@ -1,0 +1,11 @@
+diff -Nur binutils-git.orig/bfd/elf32-m68k.c binutils-git/bfd/elf32-m68k.c
+--- binutils-git.orig/bfd/elf32-m68k.c	2016-10-30 14:02:17.000000000 +0100
++++ binutils-git/bfd/elf32-m68k.c	2016-10-30 14:44:28.714486390 +0100
+@@ -2645,7 +2645,6 @@
+ 	  if (sgot == NULL)
+ 	    {
+ 	      sgot = bfd_get_linker_section (dynobj, ".got");
+-	      BFD_ASSERT (sgot != NULL);
+ 	    }
+ 
+ 	  if (srelgot == NULL
