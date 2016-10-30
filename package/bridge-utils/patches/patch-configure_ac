@@ -1,0 +1,10 @@
+--- bridge-utils-1.6.orig/configure.ac	2016-10-13 01:30:02.000000000 +0200
++++ bridge-utils-1.6/configure.ac	2016-10-27 20:13:17.700173082 +0200
+@@ -12,6 +12,7 @@ dnl Checks for programs.
+ AC_PROG_CC
+ AC_PROG_INSTALL
+ AC_PROG_RANLIB
++AC_CHECK_TOOL(AR, ar, ar)
+ 
+ dnl Checks for header files.
+ AC_HEADER_STDC
