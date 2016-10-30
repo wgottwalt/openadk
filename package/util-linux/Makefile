@@ -131,7 +131,7 @@ swap-utils-install:
 
 mkfs-install:
 	$(INSTALL_DIR) $(IDIR_MKFS)/usr/sbin
-	$(INSTALL_BIN) $(WRKINST)/usr/sbin/mkfs $(IDIR_MKFS)/usr/sbin
+	$(INSTALL_BIN) $(WRKBUILD)/mkfs $(IDIR_MKFS)/usr/sbin
 
 mount-install:
 	$(INSTALL_DIR) $(IDIR_MOUNT)/bin
