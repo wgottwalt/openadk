@@ -19,7 +19,7 @@
 }
 
 # mount local filesystems
-fstypes="ext2 ext3 ext4 xfs vfat ntfs"
+fstypes="ext2 ext3 ext4 xfs vfat ntfs ntfs-3g"
 for fs in $fstypes; do
 	disks=$(grep -v "^#" /etc/fstab|grep $fs|awk '{ print $1 }')
 	for disk in $disks; do
