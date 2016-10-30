@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		d7b72c05e4b3493e6095be789a760c9f5f2b141812d5b885f3190c98802f1ea0
 PKG_DESCR:=		ntfs filesystem driver using fuse
 PKG_SECTION:=		sys/fs
+PKG_KDEPENDS:=		fuse-fs
 PKG_URL:=		http://tuxera.com
 PKG_SITES:=		http://tuxera.com/opensource/
 
