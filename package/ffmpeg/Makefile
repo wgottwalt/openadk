@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
-PKG_VERSION:=		3.1.1
+PKG_VERSION:=		3.2
 PKG_RELEASE:=		1
-PKG_HASH:=		a5bca50a90a37b983eaa17c483a387189175f37ca678ae7e51d43e7610b4b3b4
+PKG_HASH:=		76d6cd9f5e64463a5b9940736da8a515c990bcbbe506a722e2040916cb366d74
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs/video
 PKG_NEEDS:=		threads
@@ -28,7 +28,7 @@ PKGSS_FFPROBE:=		libffmpeg
 PKGSD_LIBFFMPEG:=	video library
 PKGSC_LIBFFMPEG:=	libs/video
 
-PKG_FLAVOURS_LIBFFMPEG:=	WITH_AAC WITH_MP3 WITH_VP8 WITH_THEORA
+PKG_FLAVOURS_LIBFFMPEG:=	WITH_MP3 WITH_VP8 WITH_THEORA
 PKG_FLAVOURS_LIBFFMPEG+=	WITH_XVID WITH_VORBIS WITH_X264
 
 PKGFD_WITH_X264:=	with X264 decoding support
@@ -36,13 +36,6 @@ PKGFS_WITH_X264:=	libx264
 PKGFB_WITH_X264:=	libx264
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_X264),y)
 PKG_FDEPENDS+=		libx264
-endif
-
-PKGFD_WITH_AAC:=	with AAC encoding support
-PKGFS_WITH_AAC:=	libfaac
-PKGFB_WITH_AAC:=	faac
-ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_AAC),y)
-PKG_FDEPENDS+=		libfaac
 endif
 
 PKGFD_WITH_MP3:=	with MP3 encoding support
@@ -184,9 +177,6 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_X264),y)
 CONFIGURE_ARGS+=	--enable-libx264
-endif
-ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_AAC),y)
-CONFIGURE_ARGS+=	--enable-libfaac
 endif
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_MP3),y)
 CONFIGURE_ARGS+=	--enable-libmp3lame
