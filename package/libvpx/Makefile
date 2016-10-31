@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libvpx
-PKG_VERSION:=		1.5.0
+PKG_VERSION:=		1.6.0
 PKG_RELEASE:=		1
-PKG_HASH:=		306d67908625675f8e188d37a81fbfafdf5068b09d9aa52702b6fbe601c76797
+PKG_HASH:=		d0afbb5eb1ecae68f8d578abace160a97e2e8a230e3028cf4db115d59a695aad
 PKG_DESCR:=		vp8/vp9 codec library
 PKG_SECTION:=		libs/video
 PKG_BUILDDEP:=		yasm-host
@@ -21,6 +21,8 @@ DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBVPX,libvpx,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+CONFIGURE_ENV+=		LD=$(TARGET_CC)
 
 CONFIG_STYLE:=		minimal
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
