@@ -1,5 +1,5 @@
---- flex-2.6.1.orig/configure.ac	2016-02-29 14:53:04.000000000 +0100
-+++ flex-2.6.1/configure.ac	2016-06-21 00:25:18.739543528 +0200
+--- flex-2.6.2.orig/configure.ac	2016-10-25 00:13:14.000000000 +0200
++++ flex-2.6.2/configure.ac	2016-11-01 14:32:44.985688700 +0100
 @@ -37,8 +37,6 @@ AC_SUBST(SHARED_VERSION_INFO)
  
  # checks for programs

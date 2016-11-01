@@ -9,8 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		a72428c7917bdf9fa93cb8181c971b6e22834125848cf1d03ce10b1bb0716fe1
 PKG_DESCR:=		parser generator
 PKG_SECTION:=		dev/tools
-PKG_BUILDDEP:=		m4-host flex-host bison-host
-HOST_BUILDDEP:=		m4-host flex-host
+PKG_BUILDDEP:=		m4-host bison-host
+HOST_BUILDDEP:=		m4-host 
 PKG_URL:=		http://www.gnu.org/software/bison/
 PKG_SITES:=		$(MASTER_SITE_GNU:=bison/)
 

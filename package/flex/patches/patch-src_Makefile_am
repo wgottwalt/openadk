@@ -1,7 +1,7 @@
---- flex-2.6.1.orig/src/Makefile.am	2016-02-27 14:53:59.000000000 +0100
-+++ flex-2.6.1/src/Makefile.am	2016-06-21 00:33:09.061676013 +0200
-@@ -41,7 +41,7 @@ COMMON_SOURCES = \
- 	tblcmp.c \
+--- flex-2.6.2.orig/src/Makefile.am	2016-10-21 02:43:44.000000000 +0200
++++ flex-2.6.2/src/Makefile.am	2016-11-01 14:36:37.543694900 +0100
+@@ -54,7 +54,7 @@ COMMON_SOURCES = \
+ 	version.h \
  	yylex.c
  
 -LDADD = ../lib/libcompat.la @LIBINTL@
@@ -9,12 +9,3 @@
  
  libfl_la_SOURCES = \
  	libmain.c \
-@@ -90,7 +90,7 @@ stage1scan.l: scan.l
- 	cp $(srcdir)/scan.l $(srcdir)/stage1scan.l
- 
- stage1scan.c: stage1scan.l stage1flex$(EXEEXT)
--	$(top_builddir)/src/stage1flex$(EXEEXT) -o $@ $<
-+	$(STAGE1FLEX) -o $@ $<
- 
- # Explicitly describe dependencies.
- # You can recreate this with `gcc -I. -MM *.c'
