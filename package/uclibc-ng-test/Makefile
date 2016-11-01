@@ -21,7 +21,7 @@ $(eval $(call PKG_template,UCLIBC_NG_TEST,uclibc-ng-test,$(PKG_VERSION)-${PKG_RE
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
 
-ifeq ($(ADK_TARGET_SUPPORTS_LT),y)
+ifeq ($(ADK_TARGET_WITH_LT),y)
 XAKE_FLAGS+=		NO_TLS=1 NO_NPTL=1
 endif
 ifeq ($(ADK_TARGET_WITHOUT_THREADS),y)
