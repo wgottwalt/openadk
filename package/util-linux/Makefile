@@ -106,7 +106,7 @@ HOST_CONFIGURE_ARGS+=	--enable-libuuid \
 
 fdisk-install:
 	$(INSTALL_DIR) $(IDIR_FDISK)/usr/sbin
-	$(CP) $(WRKINST)/usr/sbin/fdisk $(IDIR_FDISK)/usr/sbin
+	$(CP) $(WRKINST)/sbin/fdisk $(IDIR_FDISK)/usr/sbin
 
 agetty-install:
 	$(INSTALL_DIR) $(IDIR_AGETTY)/sbin
@@ -114,20 +114,20 @@ agetty-install:
 
 cfdisk-install:
 	$(INSTALL_DIR) $(IDIR_CFDISK)/usr/sbin
-	$(CP) $(WRKINST)/usr/sbin/cfdisk $(IDIR_FDISK)/usr/sbin
+	$(CP) $(WRKINST)/sbin/cfdisk $(IDIR_FDISK)/usr/sbin
 
 sfdisk-install:
 	$(INSTALL_DIR) $(IDIR_SFDISK)/usr/sbin
-	$(CP) $(WRKINST)/usr/sbin/sfdisk $(IDIR_SFDISK)/usr/sbin
+	$(CP) $(WRKINST)/sbin/sfdisk $(IDIR_SFDISK)/usr/sbin
 
 losetup-install:
 	$(INSTALL_DIR) $(IDIR_LOSETUP)/usr/sbin
-	$(CP) $(WRKINST)/usr/sbin/losetup $(IDIR_LOSETUP)/usr/sbin
+	$(CP) $(WRKINST)/sbin/losetup $(IDIR_LOSETUP)/usr/sbin
 
 swap-utils-install:
 	$(INSTALL_DIR) $(IDIR_SWAP_UTILS)/usr/sbin
-	$(CP) $(WRKINST)/usr/sbin/mkswap $(IDIR_SWAP_UTILS)/usr/sbin
-	$(CP) $(WRKINST)/usr/sbin/swap{on,off} $(IDIR_SWAP_UTILS)/usr/sbin
+	$(CP) $(WRKINST)/sbin/mkswap $(IDIR_SWAP_UTILS)/usr/sbin
+	$(CP) $(WRKINST)/sbin/swap{on,off} $(IDIR_SWAP_UTILS)/usr/sbin
 
 mkfs-install:
 	$(INSTALL_DIR) $(IDIR_MKFS)/usr/sbin
@@ -144,24 +144,19 @@ mcookie-install:
 libuuid-install:
 	$(INSTALL_DIR) $(IDIR_LIBUUID)/usr/lib
 	$(CP) $(WRKINST)/lib/libuuid.so* $(IDIR_LIBUUID)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libuuid.so* $(IDIR_LIBUUID)/usr/lib
 
 libblkid-install:
 	$(INSTALL_DIR) $(IDIR_LIBBLKID)/usr/lib
 	$(CP) $(WRKINST)/lib/libblkid.so* $(IDIR_LIBBLKID)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libblkid.so* $(IDIR_LIBBLKID)/usr/lib
 
 libfdisk-install:
 	$(INSTALL_DIR) $(IDIR_LIBFDISK)/usr/lib
 	$(CP) $(WRKINST)/lib/libfdisk.so* $(IDIR_LIBFDISK)/usr/lib
 	$(CP) $(WRKINST)/lib/libsmartcols.so* $(IDIR_LIBFDISK)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libfdisk.so* $(IDIR_LIBFDISK)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libsmartcols.so* $(IDIR_LIBFDISK)/usr/lib
 
 libmount-install:
 	$(INSTALL_DIR) $(IDIR_LIBMOUNT)/usr/lib
 	$(CP) $(WRKINST)/lib/libmount.so* $(IDIR_LIBMOUNT)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libmount.so* $(IDIR_LIBMOUNT)/usr/lib
 
 include $(ADK_TOPDIR)/mk/host-bottom.mk
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
