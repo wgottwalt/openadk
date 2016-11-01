@@ -1,5 +1,5 @@
 #!/bin/sh
-#INIT 10
+#INIT 15
 [[ $1 = autostart ]] || exit 0
 
 . /etc/functions.sh
