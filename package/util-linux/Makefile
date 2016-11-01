@@ -10,7 +10,6 @@ PKG_HASH:=		b89d37146f20bede93a42c847bce881a17e6dbd8066ff2db2bee733fa409f0cd
 PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
 PKG_BUILDDEP:=		ncurses
-HOST_BUILDDEP:=		autoconf-host automake-host libtool-host pkgconf-host
 PKG_NEEDS:=		threads
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/util-linux/v2.28/
 PKG_OPTS:=		dev
