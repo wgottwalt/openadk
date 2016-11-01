@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		lighttpd
-PKG_VERSION:=		1.4.42
+PKG_VERSION:=		1.4.43
 PKG_RELEASE:=		1
-PKG_HASH:=		b2c9069ed0bade9362c27b469a9b884641786aea1c3d686f9fd9f01d15e2a15f
+PKG_HASH:=		fe0c4a06dd2408a83ee7a2bfedc45e09597f3313cbda82485507573ae8fa948a
 PKG_DESCR:=		lightweight web server
 PKG_SECTION:=		net/http
 PKG_URL:=		http://www.lighttpd.net/
@@ -25,7 +25,6 @@ PKG_SUBPKGS:=		LIGHTTPD LIGHTTPD_MOD_ALIAS LIGHTTPD_MOD_AUTH
 PKG_SUBPKGS+=		LIGHTTPD_MOD_CGI LIGHTTPD_MOD_DIRLIST LIGHTTPD_MOD_EVASIVE LIGHTTPD_MOD_EXPIRE LIGHTTPD_MOD_FASTCGI
 PKG_SUBPKGS+=		LIGHTTPD_MOD_PROXY LIGHTTPD_MOD_REDIRECT LIGHTTPD_MOD_REWRITE LIGHTTPD_MOD_SETENV
 PKG_SUBPKGS+=		LIGHTTPD_MOD_VHOST LIGHTTPD_MOD_SSI LIGHTTPD_MOD_STATUS LIGHTTPD_MOD_USERTRACK
-PKG_SUBPKGS+=		LIGHTTPD_MOD_WEBDAV
 PKGSD_LIGHTTPD_MOD_ALIAS:=	alias support
 PKGSN_LIGHTTPD_MOD_ALIAS:=	lighttpd
 PKGSD_LIGHTTPD_MOD_AUTH:=	authentication support
@@ -91,7 +90,6 @@ $(eval $(call PKG_template,LIGHTTPD_MOD_VHOST,lighttpd-mod-vhost,$(PKG_VERSION)-
 $(eval $(call PKG_template,LIGHTTPD_MOD_SSI,lighttpd-mod-ssi,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIGHTTPD_MOD_SSI},${PKG_SECTION}))
 $(eval $(call PKG_template,LIGHTTPD_MOD_STATUS,lighttpd-mod-status,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIGHTTPD_MOD_STATUS},${PKG_SECTION}))
 $(eval $(call PKG_template,LIGHTTPD_MOD_USERTRACK,lighttpd-mod-usertrack,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIGHTTPD_MOD_USERTRACK},${PKG_SECTION}))
-$(eval $(call PKG_template,LIGHTTPD_MOD_WEBDAV,lighttpd-mod-webdav,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_LIGHTTPD_MOD_WEBDAV},${PKG_SECTION}))
 
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_ALIAS,alias))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_AUTH,auth))
@@ -108,7 +106,6 @@ $(eval $(call PKG_mod_template,LIGHTTPD_MOD_VHOST,simple_vhost))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_SSI,ssi))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_STATUS,status))
 $(eval $(call PKG_mod_template,LIGHTTPD_MOD_USERTRACK,usertrack))
-$(eval $(call PKG_mod_template,LIGHTTPD_MOD_WEBDAV,webdav))
 
 CONFIGURE_ARGS+=	--libdir=/usr/lib/lighttpd \
 			--sysconfdir=/etc/lighttpd \
@@ -121,15 +118,9 @@ CONFIGURE_ARGS+=	--libdir=/usr/lib/lighttpd \
 			--without-lua \
 			--without-memcache \
 			--without-mysql \
+			--without-webdav-props \
+			--without-webdav-locks \
 			--without-valgrind
-
-ifneq ($(ADK_PACKAGE_LIGHTTPD_MOD_WEBDAV),)
-CONFIGURE_ARGS+=	--with-webdav-props \
-			--with-webdav-locks
-else
-CONFIGURE_ARGS+=	--without-webdav-props \
-			--without-webdav-locks
-endif
 
 ifneq ($(ADK_PACKAGE_LIGHTTPD_MOD_SSI)$(ADK_PACKAGE_LIGHTTPD_MOD_DIRLIST)$(ADK_PACKAGE_LIGHTTPD_MOD_REWRITE)$(ADK_PACKAGE_LIGHTTPD_MOD_REDIRECT),)
 CONFIGURE_ARGS+=	--with-pcre
