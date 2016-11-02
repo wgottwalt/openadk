@@ -19,17 +19,9 @@ config ADK_HOST_BUILD_AUTOMAKE
 	bool
 	default y
 
-config ADK_HOST_BUILD_BISON
-	bool
-	default y
-
 config ADK_HOST_BUILD_FAKEROOT
 	bool
 	default n
-
-config ADK_HOST_BUILD_FLEX
-	bool
-	default y
 
 config ADK_HOST_BUILD_M4
 	bool
@@ -57,6 +49,10 @@ config ADK_HOST_BUILD_BC
 	select ADK_HOST_BUILD_FLEX
 	default n
 
+config ADK_HOST_BUILD_BISON
+	bool
+	default n
+
 config ADK_HOST_BUILD_BZIP2
 	bool
 	default n
@@ -71,6 +67,10 @@ config ADK_HOST_BUILD_FILE
 	default n
 
 config ADK_HOST_BUILD_FINDUTILS
+	bool
+	default n
+
+config ADK_HOST_BUILD_FLEX
 	bool
 	default n
 
