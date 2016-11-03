@@ -12,7 +12,7 @@ PKG_URL:=		http://www.uclibc-ng.org
 PKG_SITES:=		git://uclibc-ng.org/git/uclibc-ng-test
 
 PKG_NOPARALLEL:=	1
-PKG_LIBC_DEPENDS:=	uclibc-ng
+PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 include $(ADK_TOPDIR)/mk/package.mk
 
