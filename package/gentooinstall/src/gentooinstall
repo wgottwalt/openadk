@@ -66,17 +66,10 @@ function create_label {
   fi
 }
 
-# get max size of disk in sectors
-function get_max_size {
-  maxsize=$(env LC_ALL=C parted $1 -s unit s print |awk '/^Disk/ { print $3 }'|sed -e 's/s//')
-  rootsize=$(($maxsize-$cfgfssize))
-  print device has $maxsize sectors. using $rootsize for root.
-}
-
 # create partition, with fstype start and end in sectors
 function create_partition {
-  print creating partition on $1
-  parted -s $1 unit s mkpart primary $2 $3 $4 > /dev/null 2>&1
+  print creating partition on $1 with $2
+  parted -s $1 -- unit MiB mkpart primary $2 $3 $4 > /dev/null 2>&1
   if [ $? -ne 0 ]; then
     echo "creating primary partition failed!"
     exit 1
@@ -130,55 +123,68 @@ function extract_archive {
 
 function create_chroot_installer {
 (
-  emerge-websync
-  emerge rsyslog
-  rc-update add sshd default
-  emerge grub:2
-  print grub-mkconfig > /boot/grub/grub.cfg
-  print Installing Grub into /dev/sda
-  print grub-install /dev/sda
+  print emerge-webrsync
+  print emerge dhcpcd
+  print rc-update add sshd default
+  print emerge grub:2
 ) >/mnt/install
   chmod 755 /mnt/install
 }
 
+function create_chroot_grubinstaller {
+(
+  print 'grub-mkconfig > /boot/grub/grub.cfg'
+  print grub-install /dev/sda
+) >/mnt/installgrub
+  chmod 755 /mnt/installgrub
+}
+
 function chroot_install {
   print Installing Gentoo
+  cat /etc/resolv.conf > /mnt/etc/resolv.conf
   mount -t proc proc /mnt/proc
   mount -t sysfs sys /mnt/sys
   mount -o bind /dev /mnt/dev
-  mkdir /mnt/dev/shm
   mount -t tmpfs tmpfs /mnt/dev/shm
   chroot /mnt /install
   if [ $? -ne 0 ]; then
     echo "Gentoo installation failed!"
+    umount /mnt/dev/shm
+    umount /mnt/{proc,dev,sys}
+    umount /mnt
+    exit 1
+  fi
+  printf "Now manually install a kernel"
+  chroot /mnt /bin/bash
+  printf "Now installang bootloader"
+  chroot /mnt /installgrub
+  if [ $? -ne 0 ]; then
+    echo "Gentoo installation failed!"
+    umount /mnt/dev/shm
+    umount /mnt/{proc,dev,sys}
+    umount /mnt
     exit 1
   fi
 }
 
-function fix_perm {
-  print fixing permissions
-  chmod 1777 ${1}/tmp
-}
-
 case $arch {
   (x86|x86_64)
-    get_max_size $device
     create_label $device
-    create_partition $device swap 0 $swapsize
-    create_partition $device ext2 $(($swapsize+1)) $(($maxsize-1))
-    set_boot_flag $device 1
-    change_part_type $device 1 82
+    create_partition $device sw 2 2048
+    create_partition $device ext2 2049 -1
+    set_boot_flag $device 2
     partprobe $device
     sync
-    create_filesystem $device $fs 1
+    create_filesystem $device $fs 2
     [[ -x /sbin/mdev ]] && mdev -s
-    mount_fs $device 1 $fs /mnt
+    mount_fs $device 2 $fs /mnt
     extract_archive $archive /mnt
     create_chroot_installer
     chroot_install /mnt
     print "/dev/sda2	/	ext4	defaults	0	1" > /mnt/etc/fstab
     print hostname=\"$hostname\" > /mnt/etc/conf.d/hostname
-    fix_perm /mnt
+    chmod 1777 /mnt/tmp
+    sync
     umount /mnt/dev/shm
     umount /mnt/{proc,dev,sys}
     umount /mnt

@@ -316,6 +316,7 @@ config ADK_LINUX_KERNEL_DRM_I915
 	select ADK_LINUX_KERNEL_DRM_KMS_HELPER
 	select ADK_LINUX_KERNEL_DRM_FBDEV_EMULATION
 	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_LENOVO_X200
 	default n
 	help
           Support for Intel chipsets.

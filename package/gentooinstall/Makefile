@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		gentoo disk installer
 PKG_SECTION:=		base/adk
 PKG_DEPENDS:=		mke2fs parted sfdisk dosfstools mksh
-PKG_DEPENDS+=		grub grub-tools
 PKG_KDEPENDS:=		ext4-fs
 
 NO_DISTFILES:=		1
@@ -22,8 +21,8 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-fwinstall-install:
+gentooinstall-install:
 	$(INSTALL_DIR) $(IDIR_GENTOOINSTALL)/usr/sbin
-	$(INSTALL_BIN) $(WRKBUILD)/fwinstall $(IDIR_GENTOOINSTALL)/usr/sbin
+	$(INSTALL_BIN) $(WRKBUILD)/gentooinstall $(IDIR_GENTOOINSTALL)/usr/sbin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

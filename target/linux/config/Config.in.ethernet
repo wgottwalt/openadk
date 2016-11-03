@@ -396,6 +396,19 @@ config ADK_LINUX_KERNEL_E1000
 	help
 	  Intel(R) PRO/1000 gigabit ethernet driver
 
+config ADK_LINUX_KERNEL_E1000E
+	tristate "Intel(R) PRO/1000e Gigabit Ethernet driver"
+	select ADK_LINUX_KERNEL_NET_VENDOR_INTEL
+	select ADK_LINUX_KERNEL_NETDEV_1000
+	select ADK_LINUX_KERNEL_FIRMWARE_IN_KERNEL
+	depends on ADK_TARGET_WITH_PCI || \
+		ADK_TARGET_SYSTEM_LENOVO_X200 || \
+		ADK_TARGET_GENERIC
+	default y if ADK_TARGET_SYSTEM_LENOVO_X200
+	default n
+	help
+	  Intel(R) PRO/1000e gigabit ethernet driver
+
 config ADK_LINUX_KERNEL_SUNLANCE
 	tristate "AMD Sunlance Ethernet driver"
 	select ADK_LINUX_KERNEL_NET_VENDOR_AMD
