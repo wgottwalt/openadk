@@ -70,7 +70,7 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 
 	char *key, *value, *dep, *key_sym, *pkgdeps, *depvar;
 	char temp[MAXLINE];
-	int i;
+	int i, skip;
 
 	string[strlen(string)-1] = '\0';
 	if ((key = strtok(string, ":=")) == NULL) {
@@ -120,6 +120,7 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 		exit(EXIT_FAILURE);
 	}
 
+	skip=0;
 	value = strtok(NULL, "=\t");
 	dep = strtok(value, " ");
 	while (dep != NULL) {
@@ -162,24 +163,27 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 				if (snprintf(key_sym, MAXLINE, "ADK_HOST_BUILD_%s", depvar) < 0)
 						perror("Can not create string variable.");
 
-				if (check_symbol(key_sym) != 0) {
-					free(key_sym);
-					free(depvar);
-					break;
-				}
+				if (check_symbol(key_sym) != 0)
+					skip=1;
+
 				free(key_sym);
 				free(depvar);
 			}
 		}
 		if (*prefixp == 0) {
 			*prefixp = 1;
-			if (snprintf(temp, MAXLINE, "%s-compile: %s-compile", package, dep) < 0)
-				perror("Can not create string variable.");
+			if (skip == 0) {
+				if (snprintf(temp, MAXLINE, "%s-compile: %s-compile", package, dep) < 0)
+					perror("Can not create string variable.");
+				strncat(pkgdeps, temp, strlen(temp));
+			}
 		} else {
-			if (snprintf(temp, MAXLINE, " %s-compile", dep) < 0)
-				perror("Can not create string variable.");
+			if (skip == 0) {
+				if (snprintf(temp, MAXLINE, " %s-compile", dep) < 0)
+						perror("Can not create string variable.");
+				strncat(pkgdeps, temp, strlen(temp));
+			}
 		}
-		strncat(pkgdeps, temp, strlen(temp));
 		dep = strtok(NULL, " ");
 	}
 	return(pkgdeps);
