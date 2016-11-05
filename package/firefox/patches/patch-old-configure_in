@@ -1,0 +1,10 @@
+--- firefox-49.0.1.orig/old-configure.in	2016-09-05 22:12:50.000000000 +0200
++++ firefox-49.0.1/old-configure.in	2016-10-01 23:25:33.657828298 +0200
+@@ -6,7 +6,6 @@ dnl file, You can obtain one at http://m
+ 
+ dnl Process this file with autoconf to produce a configure script.
+ dnl ========================================================
+-AC_PREREQ(2.13)
+ AC_INIT(config/config.mk)
+ AC_CONFIG_AUX_DIR(${srcdir}/build/autoconf)
+ AC_CANONICAL_SYSTEM

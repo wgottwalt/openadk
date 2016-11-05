@@ -1,5 +1,5 @@
---- firefox-45.0.orig/xpcom/base/nsMemoryReporterManager.cpp	2016-03-03 22:48:07.000000000 +0100
-+++ firefox-45.0/xpcom/base/nsMemoryReporterManager.cpp	2016-03-15 08:42:15.629014068 +0100
+--- firefox-49.0.1.orig/xpcom/base/nsMemoryReporterManager.cpp	2016-09-05 22:12:57.000000000 +0200
++++ firefox-49.0.1/xpcom/base/nsMemoryReporterManager.cpp	2016-10-01 23:24:47.432038288 +0200
 @@ -157,6 +157,7 @@ ResidentUniqueDistinguishedAmount(int64_
  nsresult
  SystemHeapSize(int64_t* aSizeOut)
@@ -15,4 +15,4 @@
 +#endif
      return NS_OK;
  }
- 
+ #endif

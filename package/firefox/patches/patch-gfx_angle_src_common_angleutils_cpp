@@ -1,10 +1,10 @@
---- firefox-45.0.orig/gfx/angle/src/common/angleutils.cpp	2016-03-03 22:48:06.000000000 +0100
-+++ firefox-45.0/gfx/angle/src/common/angleutils.cpp	2016-03-13 21:15:29.523245406 +0100
-@@ -9,6 +9,7 @@
+--- firefox-49.0.1.orig/gfx/angle/src/common/angleutils.cpp	2016-07-25 22:22:05.000000000 +0200
++++ firefox-49.0.1/gfx/angle/src/common/angleutils.cpp	2016-10-01 23:24:47.412037504 +0200
+@@ -11,6 +11,7 @@
  
- #include <stdio.h>
+ #include <limits>
  #include <vector>
 +#include <cstdio>
  
- size_t FormatStringIntoVector(const char *fmt, va_list vararg, std::vector<char>& outBuffer)
+ namespace angle
  {
