@@ -421,37 +421,58 @@ if [ $out -ne 0 ]; then
   exit
 fi
 
+printf " --->  checking if bc is installed.. "
 host_build_bc=0
 if which bc >/dev/null 2>&1; then
   if ! echo quit|bc -q 2>/dev/null >/dev/null; then
+    printf "not usable\n"
     host_build_bc=1
   else 
     if bc -v 2>&1| grep -q BSD >/dev/null 2>&1; then
       host_build_bc=1
+      printf "not usable\n"
     fi 
+    printf "found\n"
   fi
 else
+  printf "not found\n"
   host_build_bc=1
 fi
 
+printf " --->  checking if bison is installed.. "
 host_build_bison=0
 if ! which bison >/dev/null 2>&1; then
+  printf "not found\n"
   host_build_bison=1
+else
+  printf "found\n"
 fi
 
+printf " --->  checking if bzip2 is installed.. "
 host_build_bzip2=0
 if ! which bzip2 >/dev/null 2>&1; then
+  printf "not found\n"
   host_build_bzip2=1
+else
+  printf "found\n"
 fi
 
+printf " --->  checking if file is installed.. "
 host_build_file=0
 if ! which file >/dev/null 2>&1; then
+  printf "not found\n"
   host_build_file=1
+else
+  printf "found\n"
 fi
 
+printf " --->  checking if flex is installed.. "
 host_build_flex=0
 if ! which flex >/dev/null 2>&1; then
+  printf "not found\n"
   host_build_flex=1
+else
+  printf "found\n"
 fi
 
 host_build_m4=0
@@ -464,14 +485,22 @@ if ! which mkimage >/dev/null 2>&1; then
   host_build_mkimage=1
 fi
 
+printf " --->  checking if mksh is installed.. "
 host_build_mksh=0
 if ! which mksh >/dev/null 2>&1; then
+  printf "not found\n"
   host_build_mksh=1
+else
+  printf "found\n"
 fi
 
+printf " --->  checking if patch is installed.. "
 host_build_patch=0
 if ! which patch >/dev/null 2>&1; then
+  printf "not found\n"
   host_build_patch=1
+else
+  printf "found\n"
 fi
 
 host_build_pkgconf=0
@@ -488,41 +517,77 @@ else
   host_build_tar=1
 fi
 
+printf " --->  checking if xargs is installed.. "
 host_build_findutils=0
 if which xargs >/dev/null 2>&1; then
   if ! xargs --version 2>/dev/null|grep GNU >/dev/null;then
+    printf "found but not usable\n"
     host_build_findutils=1
+  else
+    printf "found\n"
   fi
+else
+  printf "not found\n"
+  host_build_findutils=1
 fi
 
+printf " --->  checking if find is installed.. "
 if which find >/dev/null 2>&1; then
   if ! find --version 2>/dev/null|grep GNU >/dev/null;then
+    printf "found but not usable\n"
     host_build_findutils=1
+  else
+    printf "found\n"
   fi
+else
+  printf "not found\n"
+  host_build_findutils=1
 fi
 
+printf " --->  checking if grep is installed.. "
 host_build_grep=0
 if which grep >/dev/null 2>&1; then
   if ! grep --version 2>/dev/null|grep GNU >/dev/null;then
+    printf "found but not usable\n"
     host_build_grep=1
+  else
+    printf "found\n"
   fi
+else
+  printf "not found\n"
+  host_build_grep=1
 fi
 
+printf " --->  checking if gawk is installed.. "
 host_build_gawk=0
 if ! which gawk >/dev/null 2>&1; then
+  printf "not found\n"
   host_build_gawk=1
+else
+  printf "found\n"
 fi
 
+printf " --->  checking if sed is installed.. "
 host_build_sed=0
 if which sed >/dev/null 2>&1; then
   if ! sed --version 2>/dev/null|grep GNU >/dev/null;then
+    printf "found but not usable\n"
     host_build_sed=1
+  else
+    printf "found\n"
   fi
+else
+  printf "not found\n"
+  host_build_sed=1
 fi
 
+printf " --->  checking if xz is installed.. "
 host_build_xz=0
 if ! which xz >/dev/null 2>&1; then
+  printf "not found\n"
   host_build_xz=1
+else
+  printf "found\n"
 fi
 
 # optional
