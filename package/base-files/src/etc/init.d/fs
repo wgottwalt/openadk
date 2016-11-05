@@ -35,15 +35,12 @@ for fs in $fstypes; do
 				logger -t 'Filesystem' "checking $fs filesystem on $disk"
 				fsck -p $disk >/dev/null 2>&1
 			}
-			logger -t 'Filesystem' "Mounting $disk to $mnt"
 			mkdir -p $mnt > /dev/null 2>&1
 			if [ -b $disk ]; then
-				mount $disk > /dev/null 2>&1
+				logger -t 'Filesystem' "Mounting $disk to $mnt"
+				mount $disk
 			else
 				logger -s -t 'Filesystem' "Skipping mounting $disk, device file missing"
-			fi
-			if [ $? -ne 0 ];then
-				logger -s -t 'Filesystem' "Mounting $disk failed with $?"
 			fi
 		else
 			logger -s -t 'Filesystem' "No $procfs filesystem in kernel"

@@ -47,9 +47,9 @@ adk_mount() {
 	grep $procfs /proc/filesystems >/dev/null 2>&1
 	if [ $? -eq 0 ];then
 		logger -t mdev "Mounting $disk to $mnt"
-		mount $mnt 2>/dev/null
-		if [ $? -ne 0 ];then
-			logger -s -t 'Filesystem' "Mounting $disk failed"
+		mount $mnt
+		if [ $? -ne 0 ]; then
+			logger -t mdev "Mounting $disk failed"
 		fi
 	else
 		logger -t mdev "Required filesystem $procfs not available"
