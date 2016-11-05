@@ -34,7 +34,7 @@ PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_OR1K),y)
-PKG_VERSION:=		musl-5.3.0
+PKG_VERSION:=		musl-5.4.0
 PKG_GIT:=		branch
 PKG_SITES:=		https://github.com/openrisc/or1k-gcc.git
 PKG_RELEASE:=		1
