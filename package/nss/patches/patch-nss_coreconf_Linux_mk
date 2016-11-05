@@ -1,5 +1,5 @@
---- nss-3.23.orig/nss/coreconf/Linux.mk	2016-02-26 21:51:11.000000000 +0100
-+++ nss-3.23/nss/coreconf/Linux.mk	2016-03-12 19:34:11.236877389 +0100
+--- nss-3.26.1.orig/nss/coreconf/Linux.mk	2016-09-26 18:31:01.000000000 +0200
++++ nss-3.26.1/nss/coreconf/Linux.mk	2016-10-02 11:09:15.042562528 +0200
 @@ -16,9 +16,9 @@ ifeq ($(USE_PTHREADS),1)
  	IMPL_STRATEGY = _PTH
  endif
@@ -13,10 +13,10 @@
  
  DEFAULT_COMPILER = gcc
  
-@@ -155,7 +155,7 @@ DSO_LDOPTS		= -shared $(ARCHFLAG) -Wl,--
- # we don't use -z defs there.
- ZDEFS_FLAG		= -Wl,-z,defs
+@@ -159,7 +159,7 @@ ZDEFS_FLAG		= -Wl,-z,defs
+ ifneq ($(USE_ASAN),1)
  DSO_LDOPTS		+= $(if $(findstring 2.11.90.0.8,$(shell ld -v)),,$(ZDEFS_FLAG))
+ endif
 -LDFLAGS			+= $(ARCHFLAG)
 +#LDFLAGS			+= $(ARCHFLAG)
  
