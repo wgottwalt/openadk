@@ -70,7 +70,7 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 
 	char *key, *value, *dep, *key_sym, *pkgdeps, *depvar;
 	char temp[MAXLINE];
-	int i, skip;
+	int i;
 
 	string[strlen(string)-1] = '\0';
 	if ((key = strtok(string, ":=")) == NULL) {
@@ -120,7 +120,6 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 		exit(EXIT_FAILURE);
 	}
 
-	skip=0;
 	value = strtok(NULL, "=\t");
 	dep = strtok(value, " ");
 	while (dep != NULL) {
@@ -163,27 +162,24 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 				if (snprintf(key_sym, MAXLINE, "ADK_HOST_BUILD_%s", depvar) < 0)
 						perror("Can not create string variable.");
 
-				if (check_symbol(key_sym) != 0)
-					skip=1;
-
+				if (check_symbol(key_sym) != 0) {
+					free(key_sym);
+					free(depvar);
+					return(NULL);
+				}
 				free(key_sym);
 				free(depvar);
 			}
 		}
 		if (*prefixp == 0) {
 			*prefixp = 1;
-			if (skip == 0) {
-				if (snprintf(temp, MAXLINE, "%s-compile: %s-compile", package, dep) < 0)
-					perror("Can not create string variable.");
-				strncat(pkgdeps, temp, strlen(temp));
-			}
+			if (snprintf(temp, MAXLINE, "%s-compile: %s-compile", package, dep) < 0)
+				perror("Can not create string variable.");
 		} else {
-			if (skip == 0) {
-				if (snprintf(temp, MAXLINE, " %s-compile", dep) < 0)
-						perror("Can not create string variable.");
-				strncat(pkgdeps, temp, strlen(temp));
-			}
+			if (snprintf(temp, MAXLINE, " %s-compile", dep) < 0)
+				perror("Can not create string variable.");
 		}
+		strncat(pkgdeps, temp, strlen(temp));
 		dep = strtok(NULL, " ");
 	}
 	return(pkgdeps);
@@ -258,7 +254,7 @@ int main() {
 
 					string = strstr(buf, "PKG_BUILDDEP:=");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 2, 0, 0, &prefix);
+						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0, 0, &prefix);
 						if (tmp != NULL) {
 							strncat(pkgdeps, tmp, strlen(tmp));
 						}
@@ -266,7 +262,7 @@ int main() {
 
 					string = strstr(buf, "PKG_BUILDDEP+=");
 					if (string != NULL) {
-						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 2, 0, 0, &prefix);
+						tmp = parse_line(pkgdirp->d_name, pkgvar, string, 0, 0, 0, &prefix);
 						if (tmp != NULL)
 							strncat(pkgdeps, tmp, strlen(tmp));
 					}
