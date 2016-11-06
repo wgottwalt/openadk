@@ -12,7 +12,6 @@ PKG_URL:=		http://www.uclibc-ng.org
 PKG_SITES:=		git://uclibc-ng.org/git/uclibc-ng-test
 
 PKG_NOPARALLEL:=	1
-PKG_LIBC_DEPENDS:=	uclibc-ng glibc
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -21,6 +20,9 @@ $(eval $(call PKG_template,UCLIBC_NG_TEST,uclibc-ng-test,$(PKG_VERSION)-${PKG_RE
 CONFIG_STYLE:=          manual
 INSTALL_STYLE:=         manual
 
+ifeq ($(ADK_TARGET_LIB_MUSL),y)
+XAKE_FLAGS+=		NO_MATH=1
+endif
 ifeq ($(ADK_TARGET_WITH_LT),y)
 XAKE_FLAGS+=		NO_TLS=1 NO_NPTL=1
 endif
