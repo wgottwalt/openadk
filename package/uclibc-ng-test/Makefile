@@ -18,7 +18,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,UCLIBC_NG_TEST,uclibc-ng-test,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIG_STYLE:=          manual
-INSTALL_STYLE:=         manual
 
 ifeq ($(ADK_APPLIANCE_TEST),y)
 XAKE_FLAGS+=		NO_MATH=1
@@ -45,9 +44,7 @@ endif
 uclibc-ng-test-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/etc
 	echo '00:11:22:33:44:55 teeth' > ${IDIR_UCLIBC_NG_TEST}/etc/ethers
-	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
-	${CP} $(WRKBUILD)/test \
-		${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng
-	@find ${IDIR_UCLIBC_NG_TEST}/opt/uclibc-ng -name \*.o -exec rm {} \;
+	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/usr/lib/uclibc-ng-test
+	${CP} $(WRKINST)/test ${IDIR_UCLIBC_NG_TEST}/usr/lib/uclibc-ng-test
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
