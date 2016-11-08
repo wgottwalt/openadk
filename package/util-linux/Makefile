@@ -70,7 +70,8 @@ $(eval $(call PKG_template,LIBMOUNT,libmount,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG
 TARGET_CFLAGS+=		-DSWAPON_HAS_TWO_ARGS -DHAVE_LLSEEK
 TARGET_LDFLAGS+=	-ltinfo
 
-CONFIGURE_ARGS+=	--disable-use-tty-group \
+CONFIGURE_ARGS+=	--with-pic \
+			--disable-use-tty-group \
 			--disable-chfn-chsh \
 			--disable-more \
 			--disable-su \
@@ -98,6 +99,7 @@ ifeq ($(ADK_PACKAGE_FDISK)$(ADK_PACKAGE_AGETTY)$(ADK_PACKAGE_SFDISK)$(ADK_PACKAG
 CONFIGURE_ARGS+=	--disable-all-programs
 endif
 
+TARGET_CFLAGS+=		-fPIC
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
 HOST_CONFIGURE_ARGS+=	--enable-libuuid \
 			--disable-all-programs \
