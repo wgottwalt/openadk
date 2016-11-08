@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #-
-# Copyright © 2010-2015
+# Copyright © 2010-2016
 #	Waldemar Brodkorb <wbx@openadk.org>
 #	Thorsten Glaser <tg@mirbsd.org>
 #
@@ -144,7 +144,7 @@ tgt=$2
 src=$3
 
 case $target {
-(banana-pro|pcengines-apu|raspberry-pi|raspberry-pi2|raspberry-pi3|solidrun-imx6|default) ;;
+(banana-pro|pcengines-apu|raspberry-pi|raspberry-pi2|raspberry-pi3|solidrun-imx6|solidrun-clearfog|default) ;;
 (*)
 	print -u2 "Unknown target '$target', exiting"
 	exit 1 ;;
@@ -508,6 +508,9 @@ case $target {
 (banana-pro)
 	dd if="$fwdir/u-boot-sunxi-with-spl.bin" of="$tgt" bs=1024 seek=8 > /dev/null 2>&1
 	;;
+(solidrun-clearfog)
+	dd if="$fwdir/u-boot-spl.kwb" of="$tgt" bs=512 seek=1 > /dev/null 2>&1
+	;;
 (solidrun-imx6)
 	dd if="$fwdir/SPL" of="$tgt" bs=1024 seek=1 > /dev/null 2>&1
 	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=69 > /dev/null 2>&1
@@ -532,7 +535,7 @@ if (( datafssz )); then
 	(raspberry-pi|raspberry-pi2|raspberry-pi3)
 		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab 
 	;;
-	(banana-pro|solidrun-imx6)
+	(banana-pro|solidrun-imx6|solidrun-clearfog)
 		echo "/dev/mmcblk0p2	/data	ext4	rw	0	0" >> "$R"/etc/fstab
 	;;
 	}
@@ -555,6 +558,15 @@ case $target {
 		break
 	done
 	umount_fs "$B"
+	;;
+(solidrun-clearfog)
+	for x in "$fwdir"/*.dtb; do
+		[[ -e "$x" ]] && cp "$fwdir"/*.dtb "$R/boot/"
+		break
+	done
+	mkimage -A arm -O linux -T script -C none -a 0 -e 0 \
+		-n "SolidrunClearfog" \
+		-d $fwdir/boot.script.clearfog $R/boot/boot.scr.uimg
 	;;
 (solidrun-imx6)
 	for x in "$fwdir"/*.dtb; do

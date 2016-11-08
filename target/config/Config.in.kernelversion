@@ -23,6 +23,11 @@ config ADK_TARGET_KERNEL_VERSION_FSLC
 	select ADK_TARGET_KERNEL_IMAGE
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 
+config ADK_TARGET_KERNEL_VERSION_CLEARFOG
+	bool "linux-clearfog"
+	select ADK_TARGET_KERNEL_GIT
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
+
 config ADK_TARGET_KERNEL_VERSION_RPI
 	bool "linux-rpi"
 	select ADK_TARGET_KERNEL_GIT
@@ -177,6 +182,7 @@ config ADK_KERNEL_GITVER
 	default "git" if ADK_TARGET_KERNEL_VERSION_GIT
 	default "rpi" if ADK_TARGET_KERNEL_VERSION_RPI
 	default "fslc" if ADK_TARGET_KERNEL_VERSION_FSLC
+	default "clearfog" if ADK_TARGET_KERNEL_VERSION_CLEARFOG
 	default "bb" if ADK_TARGET_KERNEL_VERSION_BB
 
 config ADK_TARGET_KERNEL_GIT
@@ -187,10 +193,12 @@ config ADK_TARGET_KERNEL_REPO
 	depends on ADK_TARGET_KERNEL_VERSION_GIT \
 		|| ADK_TARGET_KERNEL_VERSION_RPI \
 		|| ADK_TARGET_KERNEL_VERSION_BB \
+		|| ADK_TARGET_KERNEL_VERSION_CLEARFOG \
 		|| ADK_TARGET_KERNEL_VERSION_FSLC
 	default "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git" if ADK_TARGET_KERNEL_VERSION_GIT
 	default "https://github.com/raspberrypi/linux.git" if ADK_TARGET_KERNEL_VERSION_RPI
 	default "https://github.com/SolidRun/linux-fslc.git" if ADK_TARGET_KERNEL_VERSION_FSLC
+	default "https://github.com/SolidRun/linux-armada38x" if ADK_TARGET_KERNEL_VERSION_CLEARFOG
 	default "https://github.com/beagleboard/linux.git" if ADK_TARGET_KERNEL_VERSION_BB
 	help
 	  GIT repository to use.

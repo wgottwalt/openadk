@@ -1,0 +1,20 @@
+--- u-boot-2016.09.orig/include/configs/clearfog.h	2016-09-12 16:05:51.000000000 +0200
++++ u-boot-2016.09/include/configs/clearfog.h	2016-11-08 05:49:59.000000000 +0100
+@@ -7,6 +7,8 @@
+ #ifndef _CONFIG_CLEARFOG_H
+ #define _CONFIG_CLEARFOG_H
+ 
++#include <config_distro_defaults.h>
++
+ /*
+  * High Level Configuration Options (easy to change)
+  */
+@@ -151,6 +153,8 @@
+ #endif
+ #endif
+ 
++#include <config_distro_bootcmd.h>
++
+ /*
+  * mv-common.h should be defined after CMD configs since it used them
+  * to enable certain macros

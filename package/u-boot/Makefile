@@ -16,7 +16,7 @@ PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-PKG_SYSTEM_DEPENDS:=	beaglebone-black raspberry-pi raspberry-pi2 atmel-ngw100 banana-pro solidrun-imx6
+PKG_SYSTEM_DEPENDS:=	beaglebone-black raspberry-pi raspberry-pi2 atmel-ngw100 banana-pro solidrun-imx6 solidrun-clearfog
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -25,6 +25,10 @@ $(eval $(call HOST_template,U_BOOT,u-boot,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,U_BOOT,u-boot,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 UBOOT:=			u-boot.bin
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG),y)
+CONFIG:=		clearfog_defconfig
+UBOOT:=			u-boot-spl.kwb
+endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 CONFIG:=		mx6cuboxi_defconfig
 UBOOT:=			u-boot.img
@@ -93,6 +97,9 @@ ifneq ($(OS_FOR_BUILD),Darwin)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	$(INSTALL_BIN) ./files/boot.script.bpi $(FW_DIR)
+endif
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG),y)
+	$(INSTALL_BIN) ./files/boot.script.clearfog $(FW_DIR)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	$(INSTALL_BIN) $(WRKBUILD)/SPL $(FW_DIR)

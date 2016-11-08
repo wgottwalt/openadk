@@ -60,7 +60,7 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9)$(ADK_TARGET_SYSTEM_QEMU_ARM_VERS
 	@echo "Start qemu with following options:"
 	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${ADK_TARGET_CPU_ARCH}.img'
 endif
-ifeq ($(ADK_TARGET_BOARD_BCM28XX)$(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
+ifeq ($(ADK_TARGET_BOARD_BCM28XX)$(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6)$(ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG),y)
 ifeq ($(ADK_APPLIANCE_KODI),y)
 	@echo "Use following command to install with a writable data partition"
 	@echo "sudo ./scripts/install.sh -d 256 $(ADK_TARGET_SYSTEM) /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
@@ -184,6 +184,10 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		imx6q-cubox-i.dtb imx6dl-cubox-i.dtb imx6dl-hummingboard.dtb imx6q-hummingboard.dtb $(MAKE_TRACE)
+endif
+ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG),y)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
+		armada-388-clearfog.dtb $(MAKE_TRACE)
 endif
 	for x in $(LINUX_DIR)/arch/arm/boot/dts/*.dtb; do \
 		[[ -e "$$x" ]] && cp $(LINUX_DIR)/arch/arm/boot/dts/*.dtb $(FW_DIR); \
