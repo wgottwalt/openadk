@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		5.6.25
+PKG_VERSION:=		7.0.12
 PKG_RELEASE:=		1
-PKG_HASH:=		7535cd6e20040ccec4594cc386c6f15c3f2c88f24163294a31068cf7dfe7f644
+PKG_HASH:=		f3d6c49e1c242e5995dec15e503fde996c327eb86cd7ec45c690e93c971b83ff
 PKG_DESCR:=		php language interpreter
 PKG_SECTION:=		dev/lang
 PKG_NEEDS:=		threads
@@ -155,9 +155,9 @@ else
 PKG_CONFIGURE_OPTS+=	--without-ldap
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_MYSQL),)
-PKG_CONFIGURE_OPTS+=	--with-mysql=shared,"$(STAGING_TARGET_DIR)/usr"
+PKG_CONFIGURE_OPTS+=	--with-pdo-mysql=shared,"$(STAGING_TARGET_DIR)/usr"
 else
-PKG_CONFIGURE_OPTS+=	--without-mysql
+PKG_CONFIGURE_OPTS+=	--without-pdo-mysql
 endif
 ifneq ($(ADK_PACKAGE_PHP_MOD_OPENSSL),)
 PKG_CONFIGURE_OPTS+=	--with-openssl=shared,"$(STAGING_TARGET_DIR)/usr" \
@@ -234,7 +234,7 @@ $(eval $(call PKG_mod_template,PHP_MOD_GD,gd))
 $(eval $(call PKG_mod_template,PHP_MOD_GMP,gmp))
 $(eval $(call PKG_mod_template,PHP_MOD_JSON,json))
 $(eval $(call PKG_mod_template,PHP_MOD_LDAP,ldap))
-$(eval $(call PKG_mod_template,PHP_MOD_MYSQL,mysql))
+$(eval $(call PKG_mod_template,PHP_MOD_MYSQL,pdo_mysql))
 $(eval $(call PKG_mod_template,PHP_MOD_OPENSSL,openssl))
 $(eval $(call PKG_mod_template,PHP_MOD_SESSION,session))
 $(eval $(call PKG_mod_template,PHP_MOD_SOCKETS,sockets))
