@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		grub
-PKG_VERSION:=		git
+PKG_VERSION:=		28511b0da900876151c71b66885b89615c68cfa4
 PKG_RELEASE:=		1
 PKG_DESCR:=		multiboot boot loader
 PKG_SECTION:=		base/boot
@@ -36,53 +36,47 @@ TARGET_CFLAGS:=$(filter-out -flto,$(TARGET_CFLAGS))
 
 AUTOTOOL_STYLE:=	autogen
 
-GRUB2_BOOT_PARTITION:=	hd0,msdos1
-
 ifeq ($(ADK_PACKAGE_GRUB_ARC),y)
-GRUB2_ARCH:=		mips-arc
-CONFIGURE_ARGS+=	--with-platform=arc
-GRUB2_IMAGE = $(FW_DIR)/grub.img
-GRUB2_CFG = $(TARGET_DIR)/boot/grub/grub.cfg
-GRUB2_PREFIX = ($(GRUB2_BOOT_PARTITION))/boot/grub
-GRUB2_TARGET = mips
-GRUB2_PLATFORM = arc
-GRUB2_MODULES = boot linux ext2 fat part_msdos part_gpt normal biosdisk
+GRUB_ARCH=		mips-arc
+GRUB_IMAGE=		grub.img
+GRUB_DIR=		boot/grub
+GRUB_PREFIX=		(hd0,msdos1)/boot/grub
+GRUB_TARGET=		mips
+GRUB_PLATFORM=		arc
+GRUB_MODULES=		boot linux ext2 fat part_msdos part_gpt normal biosdisk
 endif
 
 ifeq ($(ADK_PACKAGE_GRUB_PC),y)
-GRUB2_ARCH:=		i386-pc
-CONFIGURE_ARGS+=	--with-platform=pc
 HOST_CONFIGURE_ARGS+=	--with-platform=pc
-GRUB2_IMAGE = $(FW_DIR)/grub.img
-GRUB2_CFG = $(TARGET_DIR)/boot/grub/grub.cfg
-GRUB2_PREFIX = ($(GRUB2_BOOT_PARTITION))/boot/grub
-GRUB2_TARGET = i386
-GRUB2_PLATFORM = pc
-GRUB2_MODULES = boot linux ext2 fat part_msdos part_gpt normal biosdisk
+GRUB_ARCH=		i386-pc
+GRUB_IMAGE=		grub.img
+GRUB_DIR=		boot/grub
+GRUB_PREFIX=		(hd0,msdos1)/boot/grub
+GRUB_TARGET=		i386
+GRUB_PLATFORM=		pc
+GRUB_MODULES=		boot linux ext2 fat part_msdos part_gpt normal biosdisk
 endif
 
 ifeq ($(ADK_PACKAGE_GRUB_EFI_X86),y)
-GRUB2_ARCH:=		x86_64-efi
-CONFIGURE_ARGS+=	--with-platform=efi
 HOST_CONFIGURE_ARGS+=	--with-platform=efi
-GRUB2_IMAGE = $(FW_DIR)/efi-part/EFI/BOOT/bootia32.efi
-GRUB2_CFG = $(FW_DIR)/efi-part/EFI/BOOT/grub.cfg
-GRUB2_PREFIX = /EFI/BOOT
-GRUB2_TARGET = i386
-GRUB2_PLATFORM = efi
-GRUB2_MODULES = boot linux ext2 fat part_msdos part_gpt normal efi_gop
+GRUB_ARCH=		i386-efi
+GRUB_IMAGE=		efi-part/EFI/BOOT/bootia32.efi
+GRUB_DIR=		efi-part/EFI/BOOT
+GRUB_PREFIX=		/EFI/BOOT
+GRUB_TARGET=		i386
+GRUB_PLATFORM=		efi
+GRUB_MODULES=		boot linux ext2 fat part_msdos part_gpt normal efi_gop
 endif
 
 ifeq ($(ADK_PACKAGE_GRUB_EFI_X86_64),y)
-GRUB2_ARCH:=		x86_64-efi
-CONFIGURE_ARGS+=	--with-platform=efi
 HOST_CONFIGURE_ARGS+=	--with-platform=efi
-GRUB2_IMAGE = $(FW_DIR)/efi-part/EFI/BOOT/bootx64.efi
-GRUB2_CFG = $(FW_DIR)/efi-part/EFI/BOOT/grub.cfg
-GRUB2_PREFIX = /EFI/BOOT
-GRUB2_TARGET = x86_64
-GRUB2_PLATFORM = efi
-GRUB2_MODULES = boot linux ext2 fat part_msdos part_gpt normal efi_gop
+GRUB_ARCH=		x86_64-efi
+GRUB_IMAGE=		efi-part/EFI/BOOT/bootx64.efi
+GRUB_DIR=		efi-part/EFI/BOOT
+GRUB_PREFIX=		/EFI/BOOT
+GRUB_TARGET=		x86_64
+GRUB_PLATFORM=		efi
+GRUB_MODULES=		boot linux ext2 fat part_msdos part_gpt normal efi_gop
 endif
 
 HOST_CONFIGURE_ARGS+=	--enable-efiemu=no \
@@ -94,22 +88,36 @@ CONFIGURE_ARGS+=	--disable-grub-mkfont \
 			--enable-efiemu=no \
 			--enable-device-mapper=no \
 			--enable-libzfs=no \
+			--with-platform=$(GRUB_PLATFORM) \
 			--disable-werror
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 grub-install:
+	$(INSTALL_DIR) $(FW_DIR)/$(GRUB_DIR)
+	$(INSTALL_DIR) $(IDIR_GRUB)/$(GRUB_DIR)
+ifeq ($(ADK_PACKAGE_GRUB_PC),y)
+	$(STAGING_HOST_DIR)/usr/bin/grub-mkimage \
+		-d $(WRKINST)/usr/lib/grub/$(GRUB_ARCH) \
+		-O $(GRUB_ARCH) \
+		-p "$(GRUB_PREFIX)" \
+		-o $(IDIR_GRUB)/$(GRUB_DIR)/core.img \
+		-c ./files/embed.cfg ext2 part_msdos biosdisk
+endif
 ifeq ($(ADK_PACKAGE_GRUB_EFI_X86)$(ADK_PACKAGE_GRUB_EFI_X86_64),y)
-	$(INSTALL_DIR) $(FW_DIR)/efi-part/EFI/BOOT
-	${CP} ${WRKINST}/usr/lib/grub/${GRUB2_ARCH} \
-		$(FW_DIR)/efi-part/EFI/BOOT
+	${CP} ${WRKINST}/usr/lib/grub/$(GRUB_ARCH) \
+		$(FW_DIR)/$(GRUB_DIR)
+	$(CP) ./files/grub.cfg $(FW_DIR)/$(GRUB_DIR)
+else
+	${CP} ${WRKINST}/usr/lib/grub/${GRUB_ARCH} \
+		$(IDIR_GRUB)/$(GRUB_DIR)
+	$(CP) ./files/grub.cfg $(IDIR_GRUB)/$(GRUB_DIR)
 endif
 	$(STAGING_HOST_DIR)/usr/bin/grub-mkimage \
-		-d $(WRKINST)/usr/lib/grub/$(GRUB2_ARCH) \
-		-O $(GRUB2_ARCH) \
-		-o $(GRUB2_IMAGE) \
-		-p "$(GRUB2_PREFIX)" \
-		$(GRUB2_MODULES)
-	$(CP) ./files/grub.cfg $(GRUB2_CFG)
+		-d $(WRKINST)/usr/lib/grub/$(GRUB_ARCH) \
+		-O $(GRUB_ARCH) \
+		-o $(FW_DIR)/$(GRUB_IMAGE) \
+		-p "$(GRUB_PREFIX)" \
+		$(GRUB_MODULES)
 
 grub-tools-install:
 	${INSTALL_DIR} $(IDIR_GRUB_TOOLS)/usr/{sbin,bin,share,lib}

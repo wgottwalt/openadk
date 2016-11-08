@@ -152,7 +152,7 @@ else
 fi
 
 if (( usegrub )); then
-	tar -xOzf "$src" boot/grub/core.img >"$T/core.img"
+	tar -xOJf "$src" boot/grub/core.img >"$T/core.img"
 	integer coreimgsz=$($statcmd "$T/core.img")
 	if (( coreimgsz < 1024 )); then
 		print -u2 core.img is probably too small: $coreimgsz

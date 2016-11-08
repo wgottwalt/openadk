@@ -8,11 +8,13 @@ include $(ADK_TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/arch/x86/boot/bzImage
 
 QEMU_ARCH:=x86_64
+
 QEMU_ARGS:=-M pc
-QEMU_ARGS+=-L . -bios bios.bin
+ifeq ($(ADK_PACKAGE_GRUB_EFI_X86_64),y)
+QEMU_ARGS+=-L . -bios bios-x86_64.bin
+endif
 QEMU_ARGS+=${ADK_QEMU_ARGS}
 QEMU_ARGS+=-net user -net nic,model=e1000
-
 ifeq ($(ADK_TARGET_QEMU_WITH_AUDIO),y)
 QEMU_ARGS+=-soundhw ac97
 endif
@@ -34,7 +36,7 @@ targethelp:
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
-	@echo "./scripts/create.sh qemu-${ADK_TARGET_CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "$(CREATE) qemu-${ADK_TARGET_CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
 ifeq ($(ADK_TARGET_QEMU_WITH_BOOTLOADER),y)
 	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} qemu-${ADK_TARGET_CPU_ARCH}.img'
@@ -78,7 +80,7 @@ endif
 ifeq ($(ADK_TARGET_FS),usb)
 targethelp:
 	@echo 'The root tarball is: ${FW_DIR}/${ROOTFSTARBALL}'
-	@echo "To install everything to USB use:"
+	@echo "To install everything to USB disk use:"
 	@echo "sudo ./scripts/install.sh -g -t default /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
 ifeq ($(ADK_TARGET_FS),iso)

@@ -299,11 +299,16 @@ endif
 		-d "$(TARGET_DIR)" \
 		-o $(FW_DIR)/rootfs.ext $(MAKE_TRACE)
 	PATH='${HOST_PATH}' genimage \
-		--config "$(ADK_TOPDIR)/target/$(ADK_TARGET_CPU_ARCH)/$(ADK_TARGET_SYSTEM)/genimage.cfg" \
+		--config "$(ADK_TOPDIR)/target/$(ADK_TARGET_ARCH)/$(ADK_TARGET_SYSTEM)/genimage.cfg" \
 		--tmppath "${FW_DIR}/temp" \
 		--rootpath "$(TARGET_DIR)" \
 		--inputpath "$(FW_DIR)" \
 		--outputpath "$(FW_DIR)" $(MAKE_TRACE)
+ifeq ($(ADK_PACKAGE_GRUB_EFI_X86)$(ADK_PACKAGE_GRUB_EFI_X86_64),y)
+	@if [ ! -f $(ADK_TOPDIR)/bios-$(ADK_TARGET_ARCH).bin ]; then \
+		cd $(ADK_TOPDIR); wget http://distfiles.openadk.org/bios-$(ADK_TARGET_ARCH).bin ;\
+	fi
+endif
 
 imageclean:
 	rm -f $(FW_DIR)/$(ADK_TARGET_SYSTEM)-* ${BUILD_DIR}/$(ADK_TARGET_SYSTEM)-*
