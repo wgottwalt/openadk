@@ -137,7 +137,6 @@ static char *parse_line(char *package, char *pkgvar, char *string, int checksym,
 				(strncmp(depvar, "file", 4) == 0) ||
 				(strncmp(depvar, "gawk", 4) == 0) ||
 				(strncmp(depvar, "grep", 4) == 0) ||
-				(strncmp(depvar, "patch", 5) == 0) ||
 				(strncmp(depvar, "sed", 3) == 0) ||
 				(strncmp(depvar, "xz", 2) == 0)) {
 
