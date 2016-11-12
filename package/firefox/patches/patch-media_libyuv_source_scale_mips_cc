@@ -1,0 +1,12 @@
+--- firefox-49.0.2.orig/media/libyuv/source/scale_mips.cc	2016-05-12 19:13:17.000000000 +0200
++++ firefox-49.0.2/media/libyuv/source/scale_mips.cc	2016-11-11 18:23:07.984306408 +0100
+@@ -18,7 +18,8 @@ extern "C" {
+ 
+ // This module is for GCC MIPS DSPR2
+ #if !defined(LIBYUV_DISABLE_MIPS) && \
+-    defined(__mips_dsp) && (__mips_dsp_rev >= 2)
++    defined(__mips_dsp) && (__mips_dsp_rev >= 2) && \
++    (_MIPS_SIM == _MIPS_SIM_ABI32)
+ 
+ void ScaleRowDown2_MIPS_DSPR2(const uint8* src_ptr, ptrdiff_t src_stride,
+                               uint8* dst, int dst_width) {

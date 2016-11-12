@@ -42,7 +42,11 @@ else
 CONFIGURE_ARGS+=	--disable-debug
 endif
 
-CONFIGURE_ENV+=		CROSS_COMPILE=1 OS_ARCH=Linux OS_TARGET=Linux OS_TEST=$(ADK_TARGET_ARCH) \
+CONFIGURE_ENV+=		CROSS_COMPILE=1 \
+			OS_ARCH=Linux \
+			OS_TARGET=Linux \
+			OS_TEST="$(ADK_TARGET_ARCH)" \
+			OS_CXXFLAGS="$(TARGET_CXXFLAGS)" \
 			PYTHON="$(PYTHON)" \
 			HOST_CC="$(HOST_CC)" \
 			HOST_CPPFLAGS="$(HOST_CPPFLAGS)" \
@@ -74,7 +78,6 @@ CONFIGURE_ARGS+=	--prefix=/usr \
 			--disable-tree-freetype \
 			--enable-system-ffi \
 			--enable-system-sqlite \
-			--enable-webrtc \
 			--enable-chrome-format=jar \
 			--enable-necko-protocols=all \
 			--enable-alsa \
@@ -104,7 +107,11 @@ CONFIGURE_ARGS+=	--prefix=/usr \
 			--disable-elf-hack 
 
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
+CONFIGURE_ARGS+=	--disable-ion \
+			--disable-webrtc
 TARGET_CFLAGS:=		$(subst Os,g3,$(TARGET_CFLAGS))
+else
+CONFIGURE_ARGS+=	--enable-webrtc
 endif
 
 XAKE_FLAGS+=		CROSS_COMPILE=1 OS_ARCH="Linux" OS_TEST="$(ADK_TARGET_ARCH)" OS_RELEASE="2.6" 

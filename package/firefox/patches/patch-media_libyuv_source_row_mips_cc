@@ -1,0 +1,22 @@
+--- firefox-49.0.2.orig/media/libyuv/source/row_mips.cc	2016-05-12 19:13:17.000000000 +0200
++++ firefox-49.0.2/media/libyuv/source/row_mips.cc	2016-11-11 18:22:43.471358929 +0100
+@@ -16,7 +16,8 @@ extern "C" {
+ #endif
+ 
+ // The following are available on Mips platforms:
+-#if !defined(LIBYUV_DISABLE_MIPS) && defined(__mips__)
++#if !defined(LIBYUV_DISABLE_MIPS) && defined(__mips__) && \
++    (_MIPS_SIM == _MIPS_SIM_ABI32)
+ 
+ #include <sgidefs.h>
+ 
+@@ -414,7 +415,8 @@ void CopyRow_MIPS(const uint8* src, uint
+ 
+ // MIPS DSPR2 functions
+ #if !defined(LIBYUV_DISABLE_MIPS) && defined(__mips_dsp) && \
+-    (__mips_dsp_rev >= 2)
++    (__mips_dsp_rev >= 2) && \
++    (_MIPS_SIM == _MIPS_SIM_ABI32)
+ void SplitUVRow_MIPS_DSPR2(const uint8* src_uv, uint8* dst_u, uint8* dst_v,
+                            int width) {
+   __asm__ __volatile__ (
