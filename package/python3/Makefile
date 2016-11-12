@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		python3
-PKG_VERSION:=		3.4.5
+PKG_VERSION:=		3.5.2
 PKG_RELEASE:=		1
-PKG_HASH:=		ee64b1c8a47461009abf25252332d29a4e587cb4f0c1c96aa793a3732e9d898a
+PKG_HASH:=		0010f56100b9b74259ebcd5d4b295a32324b58b517403a10d1a2aa7cb22bca40
 PKG_DESCR:=		python scripting language (version 3)
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libffi
@@ -59,9 +59,9 @@ define PKG_mod_template
 INSTALL_MODS_$${ADK_PACKAGE_${1}}+=    ${2}-install
 
 ${2}-install:
-	${INSTALL_DIR} $$(IDIR_$(1))/usr/lib/python3.4/lib-dynload
+	${INSTALL_DIR} $$(IDIR_$(1))/usr/lib/python3.5/lib-dynload
 	for m in ${2}; do \
-		${INSTALL_DATA} $(WRKINST)/usr/lib/python3.4/lib-dynload/$$$${m}*.so $$(IDIR_$(1))/usr/lib/python3.4/lib-dynload ;\
+		${INSTALL_DATA} $(WRKINST)/usr/lib/python3.5/lib-dynload/$$$${m}*.so $$(IDIR_$(1))/usr/lib/python3.5/lib-dynload ;\
 	done
 endef
 
@@ -102,21 +102,17 @@ CONFIGURE_ENV+=		ac_cv_have_long_long_format=yes \
 HOST_CONFIGURE_ARGS+=	--without-cxx-main \
 			--with-threads
 
-#hostpost-install:
-#	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
-#		$(STAGING_HOST_DIR)/usr/bin/pgen3
-			
 python3-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/bin ${IDIR_PYTHON3}/usr/lib
-	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/lib/python3.4
-	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/include/python3.4m
+	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/lib/python3.5
+	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/include/python3.5m
 	${INSTALL_BIN} ${WRKINST}/usr/bin/python3 ${IDIR_PYTHON3}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libpython*.so* ${IDIR_PYTHON3}/usr/lib
-	${CP} ${WRKINST}/usr/lib/python3.4/* ${IDIR_PYTHON3}/usr/lib/python3.4
-	${CP} ${WRKINST}/usr/include/python3.4m/pyconfig.h \
-		 ${IDIR_PYTHON3}/usr/include/python3.4m
+	${CP} ${WRKINST}/usr/lib/python3.5/* ${IDIR_PYTHON3}/usr/lib/python3.5
+	${CP} ${WRKINST}/usr/include/python3.5m/pyconfig.h \
+		 ${IDIR_PYTHON3}/usr/include/python3.5m
 	@-for i in zlib _bz2 _curses _ssl _gdbm _sqlite pyexpat readline; do \
-		rm ${IDIR_PYTHON3}/usr/lib/python3.4/lib-dynload/$${i}*so; \
+		rm ${IDIR_PYTHON3}/usr/lib/python3.5/lib-dynload/$${i}*so; \
 	done
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
