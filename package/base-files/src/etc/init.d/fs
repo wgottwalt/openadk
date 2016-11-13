@@ -6,14 +6,14 @@
 [ -x /sbin/swapon ] && {
 	grep swap /etc/fstab >/dev/null 2>&1
 	if [ $? -eq 0 ];then
-		logger -t '' "Activating swap"
+		logger -t 'SWAP' "Activating swap"
 		swapon -a
 	fi
 }
 
 # activate any logical volumes
 [ -x /usr/sbin/lvm ] && {
-	logger -t '' "Activating LVM volumes"
+	logger -t 'LVM' "Activating LVM volumes"
 	lvm vgscan
 	lvm vgchange -ay
 }
@@ -40,10 +40,10 @@ for fs in $fstypes; do
 				logger -t 'Filesystem' "Mounting $disk to $mnt"
 				mount $disk
 			else
-				logger -s -t 'Filesystem' "Skipping mounting $disk, device file missing"
+				logger -t 'Filesystem' "Skipping mounting $disk, device file missing"
 			fi
 		else
-			logger -s -t 'Filesystem' "No $procfs filesystem in kernel"
+			logger -t 'Filesystem' "No $procfs filesystem in kernel"
 		fi
 	done
 done
