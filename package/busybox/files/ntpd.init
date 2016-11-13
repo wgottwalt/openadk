@@ -11,7 +11,7 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	/usr/sbin/ntpd $ntpd_flags
+	/usr/sbin/ntpd $ntpd_flags >/dev/null 2>&1 &
 	;;
 stop)
 	kill $(pgrep -f /usr/sbin/ntpd)
