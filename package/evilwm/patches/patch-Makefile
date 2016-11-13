@@ -1,22 +1,17 @@
---- evilwm-1.1.0.orig/Makefile	2011-07-03 16:14:21.000000000 +0200
-+++ evilwm-1.1.0/Makefile	2011-12-01 06:25:59.048654953 +0100
-@@ -26,9 +26,13 @@ OPT_CPPFLAGS += -DINFOBANNER
- # Uncomment for mouse support.  Recommended.
- OPT_CPPFLAGS += -DMOUSE
+--- evilwm-1.1.1.orig/Makefile	2015-07-13 12:19:36.000000000 +0200
++++ evilwm-1.1.1/Makefile	2016-11-10 02:38:08.961425099 +0100
+@@ -17,6 +17,10 @@ desktopfilesdir = $(datarootdir)/applica
+ ############################################################################
+ # Features
  
-++XROOT    ?= /usr/X11R6 
++XROOT    ?= /usr/X11R6 
 +OPT_CPPFLAGS += -I$(XROOT)/include 
 +OPT_LDLIBS += -L$(XROOT)/lib
 +
- # Uncomment to support the Xrandr extension (thanks, Yura Semashko).
--OPT_CPPFLAGS += -DRANDR
--OPT_LDLIBS   += -lXrandr
-+#OPT_CPPFLAGS += -DRANDR
-+#OPT_LDLIBS   += -lXrandr
+ # Uncomment to enable info banner on holding Ctrl+Alt+I.
+ OPT_CPPFLAGS += -DINFOBANNER
  
- # Uncomment to support shaped windows.
- OPT_CPPFLAGS += -DSHAPE
-@@ -74,10 +78,11 @@ OPT_CPPFLAGS += -DWARP_POINTER
+@@ -71,10 +75,10 @@ OPT_CPPFLAGS += -DVWM
  # Build tools
  
  # Change this if you don't use gcc:
@@ -24,18 +19,17 @@
 +CC ?= gcc
  
  # Override if desired:
--CFLAGS = -Os -std=c99
-+CFLAGS ?=
-+CFLAGS += -std=c99
+-CFLAGS = -Os
++CFLAGS ?= -Os
  WARN = -Wall -W -Wstrict-prototypes -Wpointer-arith -Wcast-align \
  	-Wshadow -Waggregate-return -Wnested-externs -Winline -Wwrite-strings \
  	-Wundef -Wsign-compare -Wmissing-prototypes -Wredundant-decls
-@@ -95,7 +100,7 @@ INSTALL = install
- INSTALL_STRIP = -s
+@@ -89,7 +93,7 @@ WARN = -Wall -W -Wstrict-prototypes -Wpo
+ 
+ # Override INSTALL_STRIP if you don't want a stripped binary
+ INSTALL = install
+-INSTALL_STRIP = -s
++INSTALL_STRIP =
  INSTALL_DIR = $(INSTALL) -d -m 0755
  INSTALL_FILE = $(INSTALL) -m 0644
--INSTALL_PROGRAM = $(INSTALL) -m 0755 $(INSTALL_STRIP)
-+INSTALL_PROGRAM = $(INSTALL) -m 0755
- 
- ############################################################################
- # You shouldn't need to change anything beyond this point
+ INSTALL_PROGRAM = $(INSTALL) -m 0755 $(INSTALL_STRIP)

@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		evilwm
-PKG_VERSION:=		1.1.0
+PKG_VERSION:=		1.1.1
 PKG_RELEASE:=		1
-PKG_HASH:=		cdc763c875b64ee3734f3cb764249e91ec659f550177ec1bb564304260ef0c75
+PKG_HASH:=		79589c296a5915ee0bae1d231e8912601fc794d9f0a9cacb6b648ff9a5f2602a
 PKG_DESCR:=		minimalist window manager
 PKG_SECTION:=		x11/apps
-PKG_DEPENDS:=		libx11 libxext
-PKG_BUILDDEP:=		libX11 libXext
+PKG_DEPENDS:=		libx11 libxext libxrandr
+PKG_BUILDDEP:=		libX11 libXext libXrandr
 PKG_URL:=		http://www.6809.org.uk/evilwm/
 PKG_SITES:=		http://www.6809.org.uk/evilwm/
 
