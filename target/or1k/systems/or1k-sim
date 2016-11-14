@@ -5,7 +5,7 @@ config ADK_TARGET_SYSTEM_OR1K_SIM
 	select ADK_TARGET_WITH_NET
 	select ADK_TARGET_KERNEL_VERSION_GIT
 	select ADK_TARGET_KERNEL_REPO "https://github.com/openrisc/linux.git"
-	select ADK_TARGET_KERNEL_HASH "69ebcc44388021120b863c433ee68677098b9c37"
+	select ADK_TARGET_KERNEL_HASH "acba10ee627d6fd7001d3617dc735ec1caa654f6"
 	help
 	  Simulator for OR1K architecture.
 

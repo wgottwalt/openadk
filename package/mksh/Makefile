@@ -14,6 +14,7 @@ PKG_URL:=		http://www.mirbsd.org/mksh.htm
 PKG_SITES:=		$(MASTER_SITE_MIRBSD:distfiles/=dist/mir/mksh/)
 
 PKG_DFLT_MKSH:=		y if !ADK_APPLIANCE_TOOLCHAIN
+PKG_ARCH_DEPENDS:=	!or1k
 
 PKG_SUBPKGS:=		MKSH MKSH_TEST
 PKGSD_MKSH_TEST:=	install testsuite
