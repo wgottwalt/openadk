@@ -367,7 +367,6 @@ config ADK_RUNTIME_KBD_LAYOUT
 choice
 prompt "initial login shell for the root user"
 default ADK_ROOTSH_HUSH if ADK_TARGET_WITHOUT_MMU
-default ADK_ROOTSH_ASH if ADK_TARGET_ARCH_OR1K
 default ADK_ROOTSH_MKSH
 
 config ADK_ROOTSH_MKSH
@@ -423,12 +422,11 @@ endchoice
 choice
 prompt "system /bin/sh (POSIX script shell)"
 default ADK_BINSH_HUSH if ADK_TARGET_WITHOUT_MMU
-default ADK_BINSH_ASH if ADK_TARGET_ARCH_OR1K
 default ADK_BINSH_MKSH
 
 config ADK_BINSH_MKSH
 	bool "mksh (MirBSD Korn Shell)"
-	select ADK_PACKAGE_MKSH if !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_ARCH_OR1K
+	select ADK_PACKAGE_MKSH if !ADK_APPLIANCE_TOOLCHAIN
 	help
 	  Use mksh (a Korn Shell variant) as system shell, which is
 	  both small and powerful, so quite suited for this task.
