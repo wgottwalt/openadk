@@ -4,8 +4,12 @@
 choice
 prompt "Kernel version" if !ADK_TARGET_CHOOSE_ARCH
 depends on ADK_TARGET_OS_LINUX
-default ADK_TARGET_KERNEL_VERSION_RPI if ADK_TARGET_BOARD_BCM28XX
-default ADK_TARGET_KERNEL_VERSION_FSLC if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+default ADK_TARGET_KERNEL_VERSION_GIT if ADK_TARGET_BOARD_BCM28XX
+default ADK_TARGET_KERNEL_VERSION_GIT if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+default ADK_TARGET_KERNEL_VERSION_GIT if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
+default ADK_TARGET_KERNEL_VERSION_GIT if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+default ADK_TARGET_KERNEL_VERSION_GIT if ADK_TARGET_ARCH_LM32
+default ADK_TARGET_KERNEL_VERSION_GIT if ADK_TARGET_ARCH_OR1K
 default ADK_TARGET_KERNEL_VERSION_4_4 if ADK_TARGET_ARCH_CRIS
 default ADK_TARGET_KERNEL_VERSION_4_4 if ADK_TARGET_ARCH_METAG
 default ADK_TARGET_KERNEL_VERSION_4_4 if ADK_TARGET_ARCH_SPARC
@@ -13,37 +17,17 @@ default ADK_TARGET_KERNEL_VERSION_4_4 if ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB_
 default ADK_TARGET_KERNEL_VERSION_4_8
 
 config ADK_TARGET_KERNEL_VERSION_GIT
-	bool "linux-git"
-	select ADK_TARGET_KERNEL_GIT
+	bool "git"
 	depends on !ADK_TARGET_ARCH_NDS32
-
-config ADK_TARGET_KERNEL_VERSION_FSLC
-	bool "linux-fslc"
-	select ADK_TARGET_KERNEL_GIT
-	select ADK_HOST_NEED_LZOP
-	select ADK_TARGET_KERNEL_IMAGE
-	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
-
-config ADK_TARGET_KERNEL_VERSION_CLEARFOG
-	bool "linux-clearfog"
-	select ADK_TARGET_KERNEL_GIT
-	depends on ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
-
-config ADK_TARGET_KERNEL_VERSION_RPI
-	bool "linux-rpi"
-	select ADK_TARGET_KERNEL_GIT
-	depends on ADK_TARGET_BOARD_BCM28XX
-
-config ADK_TARGET_KERNEL_VERSION_BB
-	bool "linux-bb"
-	select ADK_TARGET_KERNEL_GIT
-	depends on ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+	select ADK_HOST_NEED_LZOP if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	select ADK_TARGET_KERNEL_IMAGE if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 
 config ADK_TARGET_KERNEL_VERSION_4_8
 	bool "4.8.6"
 	depends on !ADK_TARGET_ARCH_CRIS
 	depends on !ADK_TARGET_ARCH_METAG
 	depends on !ADK_TARGET_ARCH_NDS32
+	depends on !ADK_TARGET_ARCH_OR1K
 	depends on !ADK_TARGET_ARCH_SPARC
 	depends on !ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB_NOMMU
 
@@ -51,6 +35,7 @@ config ADK_TARGET_KERNEL_VERSION_4_4
 	bool "4.4.30"
 	depends on !ADK_TARGET_ARCH_NDS32
 	depends on !ADK_TARGET_ARCH_NIOS2
+	depends on !ADK_TARGET_ARCH_OR1K
 	depends on !ADK_TARGET_CPU_MIPS_MIPS32R6
 	depends on !ADK_TARGET_CPU_MIPS64_MIPS64R6
 	depends on !ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208
@@ -62,6 +47,7 @@ config ADK_TARGET_KERNEL_VERSION_4_1
 	depends on !ADK_TARGET_ARCH_H8300
 	depends on !ADK_TARGET_ARCH_NIOS2
 	depends on !ADK_TARGET_ARCH_NDS32
+	depends on !ADK_TARGET_ARCH_OR1K
 	depends on !ADK_TARGET_ARCH_SPARC
 	depends on !ADK_TARGET_SYSTEM_KINETIS_K70
 	depends on !ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208
@@ -76,6 +62,7 @@ config ADK_TARGET_KERNEL_VERSION_3_18
 	depends on !ADK_TARGET_ARCH_H8300
 	depends on !ADK_TARGET_ARCH_NDS32
 	depends on !ADK_TARGET_ARCH_NIOS2
+	depends on !ADK_TARGET_ARCH_OR1K
 	depends on !ADK_TARGET_ARCH_SPARC
 	depends on !ADK_TARGET_BOARD_ATH79
 	depends on !ADK_TARGET_BOARD_BCM28XX
@@ -94,6 +81,7 @@ config ADK_TARGET_KERNEL_VERSION_3_12
 	depends on !ADK_TARGET_ARCH_H8300
 	depends on !ADK_TARGET_ARCH_NDS32
 	depends on !ADK_TARGET_ARCH_NIOS2
+	depends on !ADK_TARGET_ARCH_OR1K
 	depends on !ADK_TARGET_ARCH_SPARC
 	depends on !ADK_TARGET_BOARD_ATH79
 	depends on !ADK_TARGET_BOARD_BCM28XX
@@ -112,6 +100,7 @@ config ADK_TARGET_KERNEL_VERSION_3_10
 	depends on !ADK_TARGET_ARCH_H8300
 	depends on !ADK_TARGET_ARCH_NDS32
 	depends on !ADK_TARGET_ARCH_NIOS2
+	depends on !ADK_TARGET_ARCH_OR1K
 	depends on !ADK_TARGET_ARCH_SPARC
 	depends on !ADK_TARGET_BOARD_ATH79
 	depends on !ADK_TARGET_BOARD_BCM28XX
@@ -130,6 +119,7 @@ config ADK_TARGET_KERNEL_VERSION_3_4
 	depends on !ADK_TARGET_ARCH_BFIN
 	depends on !ADK_TARGET_ARCH_H8300
 	depends on !ADK_TARGET_ARCH_NIOS2
+	depends on !ADK_TARGET_ARCH_OR1K
 	depends on !ADK_TARGET_ARCH_SPARC
 	depends on !ADK_TARGET_BOARD_ATH79
 	depends on !ADK_TARGET_BOARD_BCM28XX
@@ -148,6 +138,7 @@ config ADK_TARGET_KERNEL_VERSION_3_2
 	depends on !ADK_TARGET_ARCH_H8300
 	depends on !ADK_TARGET_ARCH_NDS32
 	depends on !ADK_TARGET_ARCH_NIOS2
+	depends on !ADK_TARGET_ARCH_OR1K
 	depends on !ADK_TARGET_ARCH_SPARC
 	depends on !ADK_TARGET_BOARD_ATH79
 	depends on !ADK_TARGET_BOARD_BCM28XX
@@ -166,6 +157,7 @@ config ADK_TARGET_KERNEL_VERSION_2_6_32
 	depends on !ADK_TARGET_ARCH_H8300
 	depends on !ADK_TARGET_ARCH_NDS32
 	depends on !ADK_TARGET_ARCH_NIOS2
+	depends on !ADK_TARGET_ARCH_OR1K
 	depends on !ADK_TARGET_ARCH_SPARC
 	depends on !ADK_TARGET_BOARD_ATH79
 	depends on !ADK_TARGET_BOARD_BCM28XX
@@ -179,35 +171,28 @@ config ADK_TARGET_KERNEL_VERSION_2_6_32
 
 endchoice
 
-config ADK_KERNEL_GITVER
-	string
-	default "git" if ADK_TARGET_KERNEL_VERSION_GIT
-	default "rpi" if ADK_TARGET_KERNEL_VERSION_RPI
-	default "fslc" if ADK_TARGET_KERNEL_VERSION_FSLC
-	default "clearfog" if ADK_TARGET_KERNEL_VERSION_CLEARFOG
-	default "bb" if ADK_TARGET_KERNEL_VERSION_BB
-
-config ADK_TARGET_KERNEL_GIT
-	bool
-
 config ADK_TARGET_KERNEL_REPO
 	string "git repository"
-	depends on ADK_TARGET_KERNEL_VERSION_GIT \
-		|| ADK_TARGET_KERNEL_VERSION_RPI \
-		|| ADK_TARGET_KERNEL_VERSION_BB \
-		|| ADK_TARGET_KERNEL_VERSION_CLEARFOG \
-		|| ADK_TARGET_KERNEL_VERSION_FSLC
-	default "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git" if ADK_TARGET_KERNEL_VERSION_GIT
-	default "https://github.com/raspberrypi/linux.git" if ADK_TARGET_KERNEL_VERSION_RPI
-	default "https://github.com/SolidRun/linux-fslc.git" if ADK_TARGET_KERNEL_VERSION_FSLC
-	default "https://github.com/SolidRun/linux-armada38x" if ADK_TARGET_KERNEL_VERSION_CLEARFOG
-	default "https://github.com/beagleboard/linux.git" if ADK_TARGET_KERNEL_VERSION_BB
+	depends on ADK_TARGET_KERNEL_VERSION_GIT
+	default "https://github.com/raspberrypi/linux.git" if ADK_TARGET_BOARD_BCM28XX
+	default "https://github.com/SolidRun/linux-fslc.git" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default "https://github.com/SolidRun/linux-armada38x.git" if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
+	default "https://github.com/beagleboard/linux.git" if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+	default "https://github.com/stffrdhrn/linux.git" if ADK_TARGET_ARCH_OR1K
+	default "https://github.com/m-labs/linux-milkymist.git" if ADK_TARGET_ARCH_LM32
+	default "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
 	help
 	  GIT repository to use.
 
-config ADK_TARGET_KERNEL_HASH
+config ADK_TARGET_KERNEL_GITVER
+	string "git version"
+	depends on ADK_TARGET_KERNEL_VERSION_GIT
+	default "6a2f2e4198eaff63ee75f6085ce9f966c47b4441" if ADK_TARGET_ARCH_LM32
+	default "or1k-fixes-4.9" if ADK_TARGET_ARCH_OR1K
+	default "head"
+
+config ADK_TARGET_KERNEL_GITTYPE
 	string
 	depends on ADK_TARGET_KERNEL_VERSION_GIT
-	help
-	  GIT hash to use.
-
+	default "tag" if ADK_TARGET_ARCH_OR1K
+	default "hash" if ADK_TARGET_ARCH_LM32

@@ -65,13 +65,12 @@ $(1):
 	   git://*|*.git) \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
 		if [ ! -z "$${PKG_GIT}" ]; then \
+		  echo "Using git ${PKG_GIT}: $${PKG_VERSION}" $(DL_TRACE); \
 		  case "$${PKG_GIT}" in \
 		    tag|branch) \
-			echo "Using git tag/branch: $${PKG_VERSION}" $(DL_TRACE); \
 			git clone --depth 1 --branch $${PKG_VERSION} $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
 			;; \
 		    hash) \
-			echo "Using git hash: $${PKG_VERSION}" $(DL_TRACE); \
 			git clone $(GITOPTS) $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
 			(cd $${PKG_NAME}-$${PKG_VERSION}; git checkout $(GITOPTS) $${PKG_VERSION}) $(DL_TRACE); \
 			;; \
