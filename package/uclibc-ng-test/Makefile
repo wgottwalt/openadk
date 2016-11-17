@@ -44,7 +44,7 @@ endif
 uclibc-ng-test-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/etc
 	echo '00:11:22:33:44:55 teeth' > ${IDIR_UCLIBC_NG_TEST}/etc/ethers
-	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/usr/lib/uclibc-ng-test
-	${CP} $(WRKINST)/test ${IDIR_UCLIBC_NG_TEST}/usr/lib/uclibc-ng-test
+	${INSTALL_DIR} ${IDIR_UCLIBC_NG_TEST}/usr/lib
+	${CP} $(WRKINST)/usr/lib/* ${IDIR_UCLIBC_NG_TEST}/usr/lib/
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
