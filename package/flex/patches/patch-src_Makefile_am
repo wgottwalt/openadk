@@ -1,6 +1,7 @@
---- flex-2.6.2.orig/src/Makefile.am	2016-10-21 02:43:44.000000000 +0200
-+++ flex-2.6.2/src/Makefile.am	2016-11-01 14:36:37.543694900 +0100
-@@ -54,7 +54,7 @@ COMMON_SOURCES = \
+diff -Naur flex-2.6.2.orig/src/Makefile.am flex-2.6.2/src/Makefile.am
+--- flex-2.6.2.orig/src/Makefile.am	2016-11-17 10:01:21.562334589 +0100
++++ flex-2.6.2/src/Makefile.am	2016-11-17 09:21:48.766889968 +0100
+@@ -54,7 +54,7 @@
  	version.h \
  	yylex.c
  
@@ -9,3 +10,12 @@
  
  libfl_la_SOURCES = \
  	libmain.c \
+@@ -90,7 +90,7 @@
+ 	mv $@.tmp $@
+ 
+ stage1scan.c: scan.l stage1flex$(EXEEXT)
+-	./stage1flex$(EXEEXT) -o $@ $<
++	$(STAGE1FLEX) -o $@ $<
+ 
+ # make needs to be told to make parse.h so that parallelized runs will
+ # not fail.
