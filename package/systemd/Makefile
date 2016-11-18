@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		systemd
-PKG_VERSION:=		231
+PKG_VERSION:=		232
 PKG_RELEASE:=		1
-PKG_HASH:=		899733ad6c157cedbb89aec4efe3bc824dcfd65a1d6f6bebc7b043f7924e39b4
+PKG_HASH:=		1172c7c7d5d72fbded53186e7599d5272231f04cc8b72f9a0fb2c5c20dfc4880
 PKG_DESCR:=		system and service manager
 PKG_SECTION:=		base/apps
 PKG_DEPENDS:=		libcap libmount
-PKG_BUILDDEP:=		intltool-host libcap util-linux gettext-host
+PKG_BUILDDEP:=		intltool-host gperf-host libcap util-linux gettext-host
 PKG_URL:=		https://wiki.freedesktop.org/www/Software/systemd/
 PKG_SITES:=		https://github.com/systemd/systemd/archive/
 
