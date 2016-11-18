@@ -77,7 +77,7 @@ libkrb5-install:
 	${INSTALL_DATA} ./files/krb5.conf ${IDIR_LIBKRB5}/etc
 	${CP} ${WRKINST}/usr/lib/lib{verto,gssrpc,kadm5clnt*,kadm5srv*,kdb5}.so* \
 		${IDIR_LIBKRB5}/usr/lib
-	${CP} ${WRKINST}/usr/lib/lib{gssapi_krb5,k5crypto,krb5,krb5support}.so* \
+	${CP} ${WRKINST}/usr/lib/lib{gssapi_krb5,k5crypto,krb5,krb5support,com_err}.so* \
 		${IDIR_LIBKRB5}/usr/lib
 	echo '/usr/lib/libgssapi_krb5.so		mechglue_internal_krb5_init' \
 		> ${IDIR_LIBKRB5}/etc/gssapi_mech.conf
