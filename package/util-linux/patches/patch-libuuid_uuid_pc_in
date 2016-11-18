@@ -1,0 +1,13 @@
+--- util-linux-2.29.orig/libuuid/uuid.pc.in	2016-05-31 11:45:28.620661213 +0200
++++ util-linux-2.29/libuuid/uuid.pc.in	2016-11-18 19:36:25.010659524 +0100
+@@ -1,7 +1,7 @@
+ prefix=@prefix@
+-exec_prefix=@exec_prefix@
+-libdir=@usrlib_execdir@
+-includedir=@includedir@
++exec_prefix=${prefix}
++libdir=${exec_prefix}/lib
++includedir=${prefix}/include
+ 
+ Name: uuid
+ Description: Universally unique id library

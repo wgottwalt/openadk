@@ -1,0 +1,13 @@
+--- util-linux-2.29.orig/libfdisk/fdisk.pc.in	2016-11-02 13:57:31.548167878 +0100
++++ util-linux-2.29/libfdisk/fdisk.pc.in	2016-11-18 19:36:11.374132281 +0100
+@@ -1,7 +1,7 @@
+ prefix=@prefix@
+-exec_prefix=@exec_prefix@
+-libdir=@usrlib_execdir@
+-includedir=@includedir@
++exec_prefix=${prefix}
++libdir=${exec_prefix}/lib
++includedir=${prefix}/include
+ 
+ Name: fdisk
+ Description: fdisk library
