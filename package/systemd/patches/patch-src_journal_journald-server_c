@@ -1,0 +1,11 @@
+--- systemd-231.orig/src/journal/journald-server.c	2016-07-25 21:49:47.000000000 +0200
++++ systemd-231/src/journal/journald-server.c	2016-11-25 00:47:51.392883508 +0100
+@@ -1347,7 +1347,7 @@ static int setup_signals(Server *s) {
+ 
+         assert(s);
+ 
+-        assert(sigprocmask_many(SIG_SETMASK, NULL, SIGINT, SIGTERM, SIGUSR1, SIGUSR2, SIGRTMIN+1, -1) >= 0);
++        assert_se(sigprocmask_many(SIG_SETMASK, NULL, SIGINT, SIGTERM, SIGUSR1, SIGUSR2, SIGRTMIN+1, -1) >= 0);
+ 
+         r = sd_event_add_signal(s->event, &s->sigusr1_event_source, SIGUSR1, dispatch_sigusr1, s);
+         if (r < 0)

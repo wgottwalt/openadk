@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
-PKG_VERSION:=		1.10.8
+PKG_VERSION:=		1.10.12
 PKG_RELEASE:=		1
-PKG_HASH:=		baf3d22baa26d3bdd9edc587736cd5562196ce67996d65b82103bedbe1f0c014
+PKG_HASH:=		210a79430b276eafc6406c71705e9140d25b9956d18068df98a70156dc0e475d
 PKG_DESCR:=		desktop bus daemon
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libdbus libexpat
@@ -24,23 +24,38 @@ PKGSD_LIBDBUS:=		DBUS library
 PKGSC_LIBDBUS:=		libs/misc
 PKGSS_LIBDBUS:=		libexpat libuuid
 
+PKG_FLAVOURS_DBUS:=	WITH_SYSTEMD
+PKGFD_WITH_SYSTEMD:=	enable systemd support
+PKGFB_WITH_SYSTEMD:=	systemd
+
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,DBUS,dbus,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBDBUS,libdbus,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_LIBDBUS},${PKGSD_LIBDBUS},${PKGSC_LIBDBUS},${PKG_OPTS}))
 
 TARGET_LDFLAGS+=	-luuid
+
+AUTOTOOL_STYLE:=	autoreconf
+ifeq ($(ADK_PACKAGE_DBUS_WITH_SYSTEMD),y)
+CONFIGURE_ARGS+=	--enable-systemd --with-systemdsystemunitdir=/usr/lib/systemd/system
+TARGET_LDFLAGS+=	-lsystemd
+else
+CONFIGURE_ARGS+=	--disable-systemd
+endif
+
 CONFIGURE_ARGS+=	--disable-tests \
-			--disable-abstract-sockets \
-			--enable-checks \
+			--disable-asserts \
+			--enable-abstract-sockets \
+			--with-dbus-user=dbus \
+			--with-system-socket=/run/dbus/system_bus_socket \
+			--with-system-pid-file=/run/dbus/dbus.pid \
 			--disable-verbose-mode \
-			--with-session-socket-dir=/var/tmp \
 			--disable-kqueue \
-			--disable-systemd \
+			--disable-selinux \
+			--disable-libaudit \
+			--disable-doxygen-docs \
 			--disable-xml-docs \
-			--without-x \
-			--disable-doxygen-docs
-CONFIGURE_ENV+=		ac_cv_have_abstract_sockets=no
+			--without-x
 
 pre-install:
 	${INSTALL_DIR} $(STAGING_TARGET_DIR)/usr/include/dbus-1.0/dbus
@@ -54,15 +69,17 @@ libdbus-install:
 dbus-install:
 	${INSTALL_DIR} ${IDIR_DBUS}/etc ${IDIR_DBUS}/usr/share \
 		${IDIR_DBUS}/usr/bin ${IDIR_DBUS}/usr/libexec
+	${INSTALL_DIR} ${IDIR_DBUS}/var/lib/dbus ${IDIR_DBUS}/run/dbus
+	(cd ${IDIR_DBUS}/var/lib/dbus; ln -sf ../../../etc/machine-id .)
 	${INSTALL_BIN} ${WRKINST}/usr/libexec/dbus-daemon-launch-helper \
 		${IDIR_DBUS}/usr/libexec/
 	${CP} ${WRKINST}/etc/dbus-1 ${IDIR_DBUS}/etc
 	${CP} ${WRKINST}/usr/share/dbus-1 ${IDIR_DBUS}/usr/share
-	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-daemon ${IDIR_DBUS}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-launch ${IDIR_DBUS}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-uuidgen ${IDIR_DBUS}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-send ${IDIR_DBUS}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/dbus-monitor ${IDIR_DBUS}/usr/bin
+	${CP} ${WRKINST}/usr/bin/dbus-* ${IDIR_DBUS}/usr/bin
+ifeq ($(ADK_PACKAGE_DBUS_WITH_SYSTEMD),y)
+	${INSTALL_DIR} ${IDIR_DBUS}/usr/lib/systemd
+	${CP} ${WRKINST}/usr/lib/systemd/* ${IDIR_DBUS}/usr/lib/systemd
+endif
 	# workaround for dev subpackage
 	${INSTALL_DIR} $(IDIR_DBUS_DEV)/usr/include/dbus-1.0/dbus
 	$(CP) $(WRKBUILD)/dbus/dbus-arch-deps.h \

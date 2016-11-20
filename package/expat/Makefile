@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		d9e50ff2d19b3538bd2127902a89987474e1a4db8e43a66a4d1a712ab9a504ff
 PKG_DESCR:=		xml parsing library
 PKG_SECTION:=		libs/data
+PKG_NEEDS:=		c++
 PKG_URL:=		http://expat.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=expat/}
 PKG_LIBNAME:=		libexpat

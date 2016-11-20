@@ -18,7 +18,16 @@ config ADK_KERNEL_INOTIFY_USER
 	bool
 	default y
 
+config ADK_KERNEL_AUTOFS4_FS
+	bool
+
 config ADK_KERNEL_DNOTIFY
+	bool
+
+config ADK_KERNEL_TMPFS_POSIX_ACL
+	bool
+
+config ADK_KERNEL_TMPFS_XATTR
 	bool
 
 config ADK_KERNEL_EXPORTFS

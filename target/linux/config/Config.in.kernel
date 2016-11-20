@@ -8,6 +8,27 @@ config ADK_KERNEL_EXPERIMENTAL
 config ADK_KERNEL_STAGING
 	bool
 
+config ADK_KERNEL_CGROUP_CPUACCT
+	bool
+
+config ADK_KERNEL_CGROUP_DEVICE
+	bool
+
+config ADK_KERNEL_CGROUP_SCHED
+	bool
+
+config ADK_KERNEL_CGROUPS
+	bool
+
+config ADK_KERNEL_NAMESPACES
+	bool
+
+config ADK_KERNEL_FHANDLE
+	bool
+
+config ADK_KERNEL_AUDIT
+	bool
+
 config ADK_KERNEL_RESET_CONTROLLER
         bool
 

@@ -72,6 +72,15 @@ image-prepare-post:
 	$(SED) '/^root:/s!:/bin/sh$$!:${ROOTSH}!' ${TARGET_DIR}/etc/passwd
 	-rm -f ${TARGET_DIR}/bin/sh
 	ln -sf ${BINSH} ${TARGET_DIR}/bin/sh
+
+ifeq ($(ADK_RUNTIME_INIT_SYSTEMD),y)
+	ln -fs ../usr/${ADK_TARGET_LIBC_PATH}/systemd/systemd $(TARGET_DIR)/sbin/init
+	ln -fs ../usr/bin/systemctl $(TARGET_DIR)/sbin/halt
+	ln -fs ../usr/bin/systemctl $(TARGET_DIR)/sbin/poweroff
+	ln -fs ../usr/bin/systemctl $(TARGET_DIR)/sbin/reboot
+	ln -fs ../../../lib/systemd/system/multi-user.target \
+		$(TARGET_DIR)/etc/systemd/system/default.target
+endif
 	test -z $(GIT) || \
 	     $(GIT) log -1|head -1|sed -e 's#commit ##' \
 		> $(TARGET_DIR)/etc/.adkgithash

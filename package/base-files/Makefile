@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		22
+PKG_RELEASE:=		23
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -23,10 +23,97 @@ INSTALL_STYLE:=		manual
 
 do-install:
 	$(CP) ./src/* $(IDIR_BASE_FILES)
+	mkdir -p $(IDIR_BASE_FILES)/{etc,dev,boot,root,sys,proc,tmp,run,mnt,media}
+	mkdir -p $(IDIR_BASE_FILES)/usr/{lib,bin,sbin}
+	mkdir -p $(IDIR_BASE_FILES)/var/{log,lib}
+	ln -sf ../run $(IDIR_BASE_FILES)/var/run
+	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
+	chmod 1777 ${IDIR_BASE_FILES}/tmp
+ifeq ($(ADK_RUNTIME_INIT_SYSTEMD),)
+	mkdir -p $(IDIR_BASE_FILES)/etc/init.d
+	cp ./files/init.d/* $(IDIR_BASE_FILES)/etc/init.d
+	mkdir -p $(IDIR_BASE_FILES)/etc/network/{if-pre-up.d,if-up.d,if-down.d,if-post-down.d}
+	ln -sf ../tmp $(IDIR_BASE_FILES)/var/tmp
+	echo $(ADK_RUNTIME_TMPFS_SIZE) > $(IDIR_BASE_FILES)/etc/tmpfs
+	cp ./files/fstab $(IDIR_BASE_FILES)/etc
+	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
+ifeq ($(ADK_TARGET_WITH_NETDEVICE),y)
+	cp ./files/interfaces-dhcp $(IDIR_BASE_FILES)/etc/network/interfaces
+	cp ./files/rc.netinfo $(IDIR_BASE_FILES)/etc/
+else
+	cp ./files/interfaces-lo $(IDIR_BASE_FILES)/etc/network/interfaces
+endif
+	chmod 600 $(IDIR_BASE_FILES)/etc/network/interfaces
+ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
+	echo '#' > $(IDIR_BASE_FILES)/etc/network/interfaces
+	(cd $(IDIR_BASE_FILES)/etc; ln -sf ../proc/net/pnp resolv.conf)
+else
+	(cd $(IDIR_BASE_FILES)/etc; ln -sf ../tmp/resolv.conf .)
+endif
+endif
 ifeq ($(ADK_RUNTIME_DEV_MDEV),y)
 	$(CP) ./files/rcdev.mdev $(IDIR_BASE_FILES)/etc/init.d/rcdev
-else ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
+	$(CP) ./files/mdev.conf $(IDIR_BASE_FILES)/etc
+	$(CP) ./files/mdev $(IDIR_BASE_FILES)/etc
+endif
+ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
 	$(CP) ./files/rcdev.udev $(IDIR_BASE_FILES)/etc/init.d/rcdev
+endif
+ifeq ($(ADK_RUNTIME_INIT_SYSV),y)
+	cp ./files/inittab.sysv $(IDIR_BASE_FILES)/etc/inittab
+	test -z $(ADK_RUNTIME_SHELL) || \
+	    cat ./files/inittab.shell >> $(IDIR_BASE_FILES)/etc/inittab
+ifeq ($(ADK_TARGET_WITH_VGA),y)
+	test -z $(ADK_RUNTIME_SHELL) || \
+		cat ./files/inittab.shellvga >> $(IDIR_BASE_FILES)/etc/inittab
+endif
+	test -z $(ADK_RUNTIME_GETTY_VGA) || \
+	    cat ./files/inittab.vga >> $(IDIR_BASE_FILES)/etc/inittab
+	test -z $(ADK_RUNTIME_GETTY_SERIAL) || \
+	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
+	$(SED) 's#@DEVICE@#$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE)#g' $(IDIR_BASE_FILES)/etc/inittab
+	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
+endif
+ifeq ($(ADK_RUNTIME_INIT_SYSVINIT),y)
+	cp ./files/inittab.sysvinit $(IDIR_BASE_FILES)/etc/inittab
+endif
+	test -z $(ADK_RUNTIME_HOSTNAME) || \
+	    echo $(ADK_RUNTIME_HOSTNAME) > $(IDIR_BASE_FILES)/etc/hostname; \
+	    echo "127.0.0.1	localhost" > $(IDIR_BASE_FILES)/etc/hosts
+	    echo "127.0.1.1	$(ADK_RUNTIME_HOSTNAME)" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "::1     ip6-localhost ip6-loopback" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "fe00::0 ip6-localnet" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "ff00::0 ip6-mcastprefix" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "ff02::1 ip6-allnodes" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "ff02::2 ip6-allrouters" >> $(IDIR_BASE_FILES)/etc/hosts
+	    echo "ff02::3 ip6-allhosts" >> $(IDIR_BASE_FILES)/etc/hosts
+	test -z '$(ADK_RUNTIME_PASSWORD)' || \
+	    $(SED) 's,\*NP\*,'"$$(awk -F\= '/^ADK_RUNTIME_PASSWORD/ { print $$2 }' $(ADK_TOPDIR)/.config|sed -e 's^\"^^g'),g" \
+		 $(IDIR_BASE_FILES)/etc/shadow
+	echo /bin/sh >${IDIR_BASE_FILES}/etc/shells
+	echo /bin/mksh >>${IDIR_BASE_FILES}/etc/shells
+ifneq (${ADK_PACKAGE_ASH},)
+	echo /bin/ash >>${IDIR_BASE_FILES}/etc/shells
+endif
+ifneq (${ADK_PACKAGE_HUSH},)
+	echo /bin/hush >>${IDIR_BASE_FILES}/etc/shells
+endif
+ifneq (${ADK_PACKAGE_BASH},)
+	echo /bin/bash >>${IDIR_BASE_FILES}/etc/shells
+endif
+ifneq (${ADK_PACKAGE_ZSH},)
+	echo /bin/zsh >>${IDIR_BASE_FILES}/etc/shells
+endif
+ifeq ($(ADK_PACKAGE_MKSH),y)
+	$(CP) ./files/profile $(IDIR_BASE_FILES)/etc/profile
+ifeq ($(ADK_TARGET_WITH_ROOT_RW),y)
+	echo 'export IPKGTMPDIR=/root/.ipkg' >> $(IDIR_BASE_FILES)/etc/profile
+else
+	echo 'export IPKGTMPDIR=/tmp' >> $(IDIR_BASE_FILES)/etc/profile
+endif
+ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
+	echo 'export LD_LIBRARY_PATH=/opt/vc/lib' >> $(IDIR_BASE_FILES)/etc/profile
+endif
 endif
 ifeq (${ADK_TARGET_PACKAGE_IPKG},y)
 	$(CP) ./files/ipkg.conf $(IDIR_BASE_FILES)/etc/
@@ -45,85 +132,6 @@ ifeq (${ADK_TARGET_PACKAGE_OPKG},y)
 	$(SED) 's,@HOST@,$(ADK_HOST),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	$(SED) 's,@VENDOR@,$(ADK_VENDOR),g' $(IDIR_BASE_FILES)/etc/ipkg.conf
 	mkdir -p $(IDIR_BASE_FILES)/usr/lib/opkg/lists
-endif
-	echo /bin/sh >${IDIR_BASE_FILES}/etc/shells
-	echo /bin/mksh >>${IDIR_BASE_FILES}/etc/shells
-ifneq (${ADK_PACKAGE_ASH},)
-	echo /bin/ash >>${IDIR_BASE_FILES}/etc/shells
-endif
-ifneq (${ADK_PACKAGE_HUSH},)
-	echo /bin/hush >>${IDIR_BASE_FILES}/etc/shells
-endif
-ifneq (${ADK_PACKAGE_BASH},)
-	echo /bin/bash >>${IDIR_BASE_FILES}/etc/shells
-endif
-ifneq (${ADK_PACKAGE_ZSH},)
-	echo /bin/zsh >>${IDIR_BASE_FILES}/etc/shells
-endif
-	mkdir -p $(IDIR_BASE_FILES)/etc/crontabs
-	mkdir -p $(IDIR_BASE_FILES)/{dev,boot,root,sys,proc,tmp,mnt,media}
-	mkdir -p $(IDIR_BASE_FILES)/etc/network/{if-pre-up.d,if-up.d,if-down.d,if-post-down.d}
-	mkdir -p $(IDIR_BASE_FILES)/usr/{lib,bin}
-	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
-ifeq ($(ADK_TARGET_WITH_NETDEVICE),y)
-	cp ./files/interfaces-dhcp $(IDIR_BASE_FILES)/etc/network/interfaces
-	cp ./files/rc.netinfo $(IDIR_BASE_FILES)/etc/
-else
-	cp ./files/interfaces-lo $(IDIR_BASE_FILES)/etc/network/interfaces
-endif
-	chmod 600 $(IDIR_BASE_FILES)/etc/network/interfaces
-ifeq (${ADK_TARGET_ROOTFS_NFSROOT},y)
-	echo '#' > $(IDIR_BASE_FILES)/etc/network/interfaces
-	(cd $(IDIR_BASE_FILES)/etc; ln -sf ../proc/net/pnp resolv.conf)
-else
-	(cd $(IDIR_BASE_FILES)/etc; ln -sf ../tmp/resolv.conf .)
-endif
-	chmod 1777 ${IDIR_BASE_FILES}/tmp
-	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
-	rm -rf $(IDIR_BASE_FILES)/var
-	ln -sf tmp $(IDIR_BASE_FILES)/var
-	ln -sf var/run $(IDIR_BASE_FILES)/run
-ifeq ($(ADK_RUNTIME_INIT_SYSV),y)
-	test -z $(ADK_RUNTIME_SHELL) || \
-	    cat ./files/inittab.shell >> $(IDIR_BASE_FILES)/etc/inittab
-ifeq ($(ADK_TARGET_WITH_VGA),y)
-	test -z $(ADK_RUNTIME_SHELL) || \
-		cat ./files/inittab.shellvga >> $(IDIR_BASE_FILES)/etc/inittab
-endif
-	test -z $(ADK_RUNTIME_GETTY_VGA) || \
-	    cat ./files/inittab.vga >> $(IDIR_BASE_FILES)/etc/inittab
-	test -z $(ADK_RUNTIME_GETTY_SERIAL) || \
-	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
-	$(SED) 's#@DEVICE@#$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE)#g' $(IDIR_BASE_FILES)/etc/inittab
-	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
-endif
-ifeq ($(ADK_RUNTIME_INIT_SYSVINIT),y)
-	cp ./files/inittab.sysv $(IDIR_BASE_FILES)/etc/inittab
-endif
-	test -z $(ADK_RUNTIME_HOSTNAME) || \
-	    echo $(ADK_RUNTIME_HOSTNAME) > $(IDIR_BASE_FILES)/etc/hostname; \
-	    echo "127.0.0.1	localhost" > $(IDIR_BASE_FILES)/etc/hosts
-	    echo "127.0.1.1	$(ADK_RUNTIME_HOSTNAME)" >> $(IDIR_BASE_FILES)/etc/hosts
-	    echo "::1     ip6-localhost ip6-loopback" >> $(IDIR_BASE_FILES)/etc/hosts
-	    echo "fe00::0 ip6-localnet" >> $(IDIR_BASE_FILES)/etc/hosts
-	    echo "ff00::0 ip6-mcastprefix" >> $(IDIR_BASE_FILES)/etc/hosts
-	    echo "ff02::1 ip6-allnodes" >> $(IDIR_BASE_FILES)/etc/hosts
-	    echo "ff02::2 ip6-allrouters" >> $(IDIR_BASE_FILES)/etc/hosts
-	    echo "ff02::3 ip6-allhosts" >> $(IDIR_BASE_FILES)/etc/hosts
-	test -z '$(ADK_RUNTIME_PASSWORD)' || \
-	    $(SED) 's,\*NP\*,'"$$(awk -F\= '/^ADK_RUNTIME_PASSWORD/ { print $$2 }' $(ADK_TOPDIR)/.config|sed -e 's^\"^^g'),g" \
-		 $(IDIR_BASE_FILES)/etc/shadow
-	echo $(ADK_RUNTIME_TMPFS_SIZE) > $(IDIR_BASE_FILES)/etc/tmpfs
-ifeq ($(ADK_PACKAGE_MKSH),y)
-	$(CP) ./files/profile $(IDIR_BASE_FILES)/etc/profile
-ifeq ($(ADK_TARGET_WITH_ROOT_RW),y)
-	echo 'export IPKGTMPDIR=/root/.ipkg' >> $(IDIR_BASE_FILES)/etc/profile
-else
-	echo 'export IPKGTMPDIR=/tmp' >> $(IDIR_BASE_FILES)/etc/profile
-endif
-ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
-	echo 'export LD_LIBRARY_PATH=/opt/vc/lib' >> $(IDIR_BASE_FILES)/etc/profile
-endif
 endif
 
 # simple network configuration

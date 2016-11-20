@@ -9,10 +9,13 @@ PKG_RELEASE:=		1
 PKG_HASH:=		1172c7c7d5d72fbded53186e7599d5272231f04cc8b72f9a0fb2c5c20dfc4880
 PKG_DESCR:=		system and service manager
 PKG_SECTION:=		base/apps
-PKG_DEPENDS:=		libcap libmount
-PKG_BUILDDEP:=		intltool-host gperf-host libcap util-linux gettext-host
+PKG_DEPENDS:=		libcap libmount libuuid libblkid libncurses kmod
+PKG_BUILDDEP:=		intltool-host gperf-host libcap util-linux gettext-host kmod
+PKG_KDEPENDS:=		cgroups namespaces fhandle tmpfs-posix-acl tmpfs-xattr
 PKG_URL:=		https://wiki.freedesktop.org/www/Software/systemd/
 PKG_SITES:=		https://github.com/systemd/systemd/archive/
+
+PKG_CFLINE_SYSTEMD:=	select BUSYBOX_SULOGIN
 
 PKG_LIBC_DEPENDS:=	glibc
 
@@ -22,13 +25,17 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SYSTEMD,systemd,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
+XAKE_FLAGS+=		V=1
+
 AUTOTOOL_STYLE:=	autogen
+CONFIGURE_ENV+=		ac_cv_path_SULOGIN=/sbin/sulogin \
+			ac_cv_path_MOUNT_PATH=/bin/mount
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-manpages \
 			--disable-selinux \
+			--enable-split-usr \
 			--disable-pam \
 			--disable-ima \
-			--disable-libcryptsetup \
 			--disable-efi \
 			--disable-gnuefi \
 			--disable-ldconfig \
@@ -37,12 +44,12 @@ CONFIGURE_ARGS+=	--disable-static \
 			--with-default-dnssec=no \
 			--without-python \
 			--disable-acl \
-			--disable-audit \
 			--disable-libidn \
+			--disable-libcryptsetup \
 			--disable-seccomp \
 			--disable-xkbcommon \
-			--disable-kdbus \
 			--disable-localed \
+			--disable-coredump \
 			--disable-polkit \
 			--disable-bzip2 \
 			--disable-lz4 \
@@ -53,16 +60,33 @@ CONFIGURE_ARGS+=	--disable-static \
 			--disable-microhttpd \
 			--disable-qrencode \
 			--disable-quotacheck \
+			--disable-utmp \
 			--disable-rfkill \
 			--disable-smack \
-			--disable-hibernate 
+			--disable-backlight \
+			--disable-binfmt \
+			--disable-vconsole \
+			--disable-hibernate \
+			--disable-audit \
+			--disable-hwdb \
+			--disable-machined \
+			--disable-importd \
+			--enable-randomseed \
+			--enable-timedated \
+			--enable-timesyncd \
+			--enable-sysusers \
+			--enable-tmpfiles \
+			--enable-firstboot
 
 systemd-install:
 	$(INSTALL_DIR) $(IDIR_SYSTEMD)/etc
+	touch $(IDIR_SYSTEMD)/etc/machine-id
 	$(CP) $(WRKINST)/etc/* \
 		$(IDIR_SYSTEMD)/etc
 	$(INSTALL_DIR) $(IDIR_SYSTEMD)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/* \
+	$(CP) $(WRKINST)/usr/lib/*.so* \
+		$(IDIR_SYSTEMD)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/{systemd,sysusers.d,kernel,udev,sysctl.d,tmpfiles.d} \
 		$(IDIR_SYSTEMD)/usr/lib
 	$(INSTALL_DIR) $(IDIR_SYSTEMD)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/* \
@@ -70,5 +94,7 @@ systemd-install:
 	$(INSTALL_DIR) $(IDIR_SYSTEMD)/usr/share
 	$(CP) $(WRKINST)/usr/share/* \
 		$(IDIR_SYSTEMD)/usr/share
+	$(CP) ./files/*.network \
+		$(IDIR_SYSTEMD)/etc/systemd/network
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

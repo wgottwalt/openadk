@@ -1,4 +1,10 @@
-id:2:initdefault:
-si::sysinit:/etc/init.d/rcS
-1:234:respawn:/sbin/agetty 115200 tty1
-AMA0:3:respawn:/sbin/agetty -L 9600 ttyAMA0 vt320
+null::sysinit:/bin/mount -t proc proc /proc
+null::sysinit:/bin/mount -t sysfs sys /sys
+null::sysinit:/bin/mkdir -p /dev/pts
+null::sysinit:/bin/mkdir -p /dev/shm
+null::sysinit:/bin/mount -a -t devpts
+null::sysinit:/bin/mount -a -t tmpfs
+::sysinit:/etc/init.d/rcS
+::shutdown:/etc/init.d/rcK
+null::shutdown:/bin/umount -a
+null::shutdown:/sbin/swapoff -a

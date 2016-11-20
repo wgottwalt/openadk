@@ -1,0 +1,30 @@
+--- systemd-231.orig/Makefile.am	2016-07-25 21:49:47.000000000 +0200
++++ systemd-231/Makefile.am	2016-11-24 02:37:14.165088827 +0100
+@@ -312,9 +312,9 @@ install-aliases-hook:
+ 	set -- $(SYSTEM_UNIT_ALIASES) && \
+ 		dir=$(systemunitdir) && $(install-aliases)
+ 	set -- $(USER_UNIT_ALIASES) && \
+-		dir=$(userunitdir) && $(install-relative-aliases)
++		dir=$(userunitdir) && $(install-aliases)
+ 	set -- $(GENERAL_ALIASES) && \
+-		dir= && $(install-relative-aliases)
++		dir= && $(install-aliases)
+ 
+ define install-aliases
+ 	while [ -n "$$1" ]; do \
+@@ -324,15 +324,6 @@ define install-aliases
+ 		shift 2 || exit $$?; \
+ 	done
+ endef
+-
+-define install-relative-aliases
+-	while [ -n "$$1" ]; do \
+-		$(MKDIR_P) `dirname $(DESTDIR)$$dir/$$2` && \
+-		rm -f $(DESTDIR)$$dir/$$2 && \
+-		$(LN_S) --relative $(DESTDIR)$$1 $(DESTDIR)$$dir/$$2 && \
+-		shift 2 || exit $$?; \
+-	done
+-endef
+ 
+ install-touch-usr-hook:
+ 	touch -c $(DESTDIR)/$(prefix)

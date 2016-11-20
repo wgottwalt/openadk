@@ -67,12 +67,14 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_M68K_Q800)$(ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208),
 	@$(SED) 's#^\(CONFIG_.*BOOTPARAM_STRING="\)\(.*\)"#\1\2 ro $(FS_CMDLINE)"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
+ifneq ($(ADK_RUNTIME_INIT_SYSTEMD),y)
 ifeq ($(ADK_TARGET_ROOTFS_NFSROOT),)
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 ro"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 else
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 rw"#' \
 		$(BUILD_DIR)/.kernelconfig.board
+endif
 endif
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 $(FS_CMDLINE)"#' \
 		$(BUILD_DIR)/.kernelconfig.board

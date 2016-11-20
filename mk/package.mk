@@ -244,7 +244,7 @@ endif
 	@rm -f '$${STAGING_PKG_DIR}/$(1)'
 ifeq (,$(filter nostaging,$(7)))
 	@-cd $${IDIR_$(1)}; \
-	    x=$$$$(find tmp var -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
+	    x=$$$$(find tmp run -mindepth 1 2>/dev/null); if [[ -n $$$$x ]]; then \
 		echo 'WARNING: $${IPKG_$(1)} installs files into a' \
 		    'ramdisk location:' >&2; \
 		echo "$$$$x" | sed 's/^/- /' >&2; \

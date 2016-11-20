@@ -19,10 +19,11 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,LIBCAP,libcap,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,LIBCAP,libcap,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
-HOST_STYLE:=		manual
+ifeq ($(OS_FOR_BUILD),Darwin)
+HOST_CFLAGS+=		-I$(STAGING_TARGET_DIR)/usr/include
+endif
 
-# for Darwin hosts
-CPPFLAGS_FOR_BUILD+=	-I$(STAGING_TARGET_DIR)/usr/include
+HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
 
 host-build:

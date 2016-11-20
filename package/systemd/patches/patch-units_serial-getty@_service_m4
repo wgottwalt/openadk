@@ -1,0 +1,11 @@
+--- systemd-232.orig/units/serial-getty@.service.m4	2016-11-03 18:16:42.000000000 +0100
++++ systemd-232/units/serial-getty@.service.m4	2016-11-19 08:53:35.509582664 +0100
+@@ -22,7 +22,7 @@ Before=getty.target
+ IgnoreOnIsolate=yes
+ 
+ [Service]
+-ExecStart=-/sbin/agetty --keep-baud 115200,38400,9600 %I $TERM
++ExecStart=-/sbin/getty -L %I 115200 vt100
+ Type=idle
+ Restart=always
+ UtmpIdentifier=%I

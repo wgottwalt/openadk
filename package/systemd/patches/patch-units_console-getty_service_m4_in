@@ -1,0 +1,11 @@
+--- systemd-232.orig/units/console-getty.service.m4.in	2016-11-03 18:16:42.000000000 +0100
++++ systemd-232/units/console-getty.service.m4.in	2016-11-19 08:53:54.070304206 +0100
+@@ -16,7 +16,7 @@ After=rc-local.service
+ Before=getty.target
+ 
+ [Service]
+-ExecStart=-/sbin/agetty --noclear --keep-baud console 115200,38400,9600 $TERM
++ExecStart=-/sbin/getty -L %I 115200 vt100
+ Type=idle
+ Restart=always
+ RestartSec=0

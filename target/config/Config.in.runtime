@@ -33,6 +33,8 @@ config ADK_RUNTIME_INIT_S6
 config ADK_RUNTIME_INIT_SYSTEMD
 	bool "Use systemd init and supervision"
 	select ADK_PACKAGE_SYSTEMD
+	select ADK_PACKAGE_DBUS
+	select ADK_PACKAGE_DBUS_WITH_SYSTEMD
 	depends on ADK_TARGET_LIB_GLIBC
 
 config ADK_RUNTIME_INIT_SIMPLEINIT
@@ -52,17 +54,26 @@ config ADK_RUNTIME_DEV_MDEV
 	select ADK_KERNEL_DEVTMPFS
 	select ADK_KERNEL_DEVTMPFS_MOUNT
 	depends on ADK_PACKAGE_BUSYBOX
+	depends on !ADK_RUNTIME_INIT_SYSTEMD
 
 config ADK_RUNTIME_DEV_UDEV
 	bool "Use udev"
-	select ADK_PACKAGE_UDEV if !ADK_PACKAGE_SYSTEMD
+	select ADK_PACKAGE_UDEV
 	# needs depmod for module dependency generation on host
 	select ADK_HOST_BUILD_KMOD
 	select ADK_KERNEL_DEVTMPFS
 	select ADK_KERNEL_DEVTMPFS_MOUNT
+	depends on !ADK_RUNTIME_INIT_SYSTEMD
+
+config ADK_RUNTIME_DEV_SYSTEMD_UDEV
+	bool "Use systemd udev"
+	select ADK_KERNEL_DEVTMPFS
+	select ADK_KERNEL_DEVTMPFS_MOUNT
+	depends on ADK_RUNTIME_INIT_SYSTEMD
 
 config ADK_RUNTIME_DEV_STATIC
 	bool "Use static /dev"
+	depends on !ADK_RUNTIME_INIT_SYSTEMD
 
 endchoice
 
