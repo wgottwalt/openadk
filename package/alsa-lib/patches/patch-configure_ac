@@ -1,6 +1,13 @@
---- alsa-lib-1.0.28.orig/configure.ac	2014-06-17 14:34:19.000000000 +0200
-+++ alsa-lib-1.0.28/configure.ac	2014-08-19 21:19:11.000000000 +0200
-@@ -72,16 +72,6 @@ AC_SUBST(LIBTOOL_VERSION_INFO)
+--- alsa-lib-1.0.29.orig/configure.ac	2015-02-26 13:34:52.000000000 +0100
++++ alsa-lib-1.0.29/configure.ac	2016-11-20 18:20:58.456540169 +0100
+@@ -67,21 +67,13 @@ dnl Checks for library functions.
+ AC_PROG_GCC_TRADITIONAL
+ AC_CHECK_FUNCS([uselocale])
+ 
++AC_CHECK_FUNC([fork])
++
+ SAVE_LIBRARY_VERSION
+ AC_SUBST(LIBTOOL_VERSION_INFO)
  
  test "x$prefix" = xNONE && prefix=$ac_default_prefix
  

@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		alsa-lib
 PKG_VERSION:=		1.0.29
-PKG_RELEASE:=		4
+PKG_RELEASE:=		5
 PKG_HASH:=		73043c35eb9636be0f4af6a240235c213f12a25feb1f04aeeac8cb7e30fcbdd0
 PKG_DESCR:=		sound library
 PKG_SECTION:=		libs/audio
