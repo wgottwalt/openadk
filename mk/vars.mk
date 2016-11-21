@@ -264,6 +264,10 @@ TARGET_CXXFLAGS+=	-fomit-frame-pointer
 # stop generating eh_frame stuff
 TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 TARGET_CXXFLAGS+=	-fno-unwind-tables -fno-asynchronous-unwind-tables
+ifeq ($(ADK_TARGET_CPU_CF),y)
+TARGET_CFLAGS+=		-fno-dwarf2-cfi-asm
+TARGET_CXXFLAGS+=	-fno-dwarf2-cfi-asm
+endif
 endif
 
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
