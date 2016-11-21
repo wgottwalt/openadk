@@ -21,9 +21,20 @@ INSTALL_STYLE:=		manual
 do-install:
 ifeq ($(ADK_TARGET_BINFMT_FLAT),)
 	${INSTALL_DIR} ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
+ifeq ($(ADK_TARGET_ARCH_SH),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH3),y)
+	$(CP) ${STAGING_TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}/!m3/libstdc++.so* \
+		${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
+endif
+ifeq ($(ADK_TARGET_CPU_SH_SH4),y)
+	$(CP) ${STAGING_TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}/!m4/libstdc++.so* \
+		${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
+endif
+else
 	$(CP) ${STAGING_TARGET_DIR}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so* \
 		${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}
 	-@rm ${IDIR_LIBSTDCXX}/usr/${ADK_TARGET_LIBC_PATH}/libstdc++.so.*-gdb.py 2>/dev/null
+endif
 endif
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
