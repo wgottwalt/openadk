@@ -75,7 +75,7 @@ config ADK_DISABLE_TARGET_KERNEL_PATCHES
 
 config ADK_USE_CCACHE
 	bool "Use ccache to speedup recompilation"
-	select ADK_HOST_NEED_CCACHE
+	select ADK_HOST_BUILD_CCACHE
 	default n
 	help
 	  Useful if you have enough space for the cache and need speedup compilation.

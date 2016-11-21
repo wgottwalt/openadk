@@ -596,11 +596,6 @@ if ! which mkisofs >/dev/null 2>&1; then
   host_build_cdrtools=1
 fi
 
-host_build_ccache=0
-if ! which ccache >/dev/null 2>&1; then
-  host_build_ccache=1
-fi
-
 host_build_genext2fs=0
 if ! which genext2fs >/dev/null 2>&1; then
   host_build_genext2fs=1
@@ -686,9 +681,6 @@ if [ $host_build_xz -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_XZ" >> $topdir/target/config/Config.in.prereq
 fi
 # optional
-if [ $host_build_ccache -eq 1 ]; then
-  printf "\t%s\n" "select ADK_HOST_BUILD_CCACHE if ADK_HOST_NEED_CCACHE" >> $topdir/target/config/Config.in.prereq
-fi
 if [ $host_build_cdrtools -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_CDRTOOLS if ADK_HOST_NEED_CDRTOOLS" >> $topdir/target/config/Config.in.prereq
 fi

@@ -142,10 +142,6 @@ config ADK_HOST_BUILD_GENIMAGE
 	select ADK_HOST_BUILD_DOSFSTOOLS
 	default n
 
-config ADK_HOST_NEED_CCACHE
-	bool
-	default n
-
 config ADK_HOST_BUILD_CCACHE
 	bool
 	default n
