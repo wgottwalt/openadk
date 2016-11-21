@@ -230,6 +230,11 @@ ifneq ($(ADK_TARGET_USE_GNU_HASHSTYLE),)
 TARGET_LDFLAGS+=	-Wl,--hash-style=gnu
 endif
 
+# special architecture optimization flags
+ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
+TARGET_CFLAGS+=		-mlongcalls -mauto-litpools
+TARGET_CXXFLAGS+=	-mlongcalls -mauto-litpools
+endif
 ifeq ($(ADK_TARGET_ARCH_MICROBLAZE),y)
 TARGET_CFLAGS+=		-mxl-barrel-shift
 TARGET_CXXFLAGS+=	-mxl-barrel-shift
