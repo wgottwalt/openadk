@@ -27,7 +27,7 @@ endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
-ifeq ($(ADK_TARGET_SYSTEM_OR1K_SIM),y)
+ifeq ($(ADK_TARGET_SYSTEM_SIM_OR1K),y)
 	@echo "Start or1ksim via:"
 	@echo 'sim -f target/or1k/or1ksim.cfg $(FW_DIR)/${TARGET_KERNEL}'
 endif
