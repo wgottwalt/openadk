@@ -1,4 +1,7 @@
 language: c
+notifications:                                                                                                          email:                                                                                                                   recipients:                                                                                                              - wbx@openadk.org
+       on_success: always
+       on_failure: always
 git:
   depth: 3
 matrix:
