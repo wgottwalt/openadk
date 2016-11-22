@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mesa
-PKG_VERSION:=		11.2.2
+PKG_VERSION:=		13.0.1
 PKG_RELEASE:=		1
-PKG_HASH:=		40e148812388ec7c6d7b6657d5a16e2e8dabba8b97ddfceea5197947647bdfb4
+PKG_HASH:=		71962fb2bf77d33b0ad4a565b490dbbeaf4619099c6d9722f04a73187957a731
 PKG_DESCR:=		3d graphics library
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm libexpat
@@ -27,14 +27,19 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MESA,mesa,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+DRI_DRIVERS:=		swrast
 ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
 DRI_DRIVERS:=		i915
 endif
 
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-gallium-llvm \
-			--with-gallium-drivers=swrast \
-			--with-dri-drivers=${DRI_DRIVERS},swrast
+			--without-gallium-drivers \
+			--enable-dri \
+			--enable-dri3 \
+			--enable-glx=dri \
+			--with-dri-driverdir=/usr/lib/dri \
+			--with-dri-drivers=${DRI_DRIVERS}
 CONFIGURE_ENV+=		MISSING="echo"
 XAKE_FLAGS+=		HOST_CC=${CC_FOR_BUILD}
 
@@ -44,11 +49,7 @@ mesa-install:
 		$(IDIR_MESA)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libglapi.so* \
 		$(IDIR_MESA)/usr/lib
-	${CP} $(WRKINST)/usr/lib/dri/swrast_dri.so \
+	${CP} $(WRKINST)/usr/lib/dri/*.so \
 		${IDIR_MESA}/usr/lib/dri/
-ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
-	${CP} $(WRKINST)/usr/lib/dri/i915_dri.so \
-		${IDIR_MESA}/usr/lib/dri/
-endif
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
