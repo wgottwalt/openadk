@@ -502,11 +502,6 @@ else
   printf "found\n"
 fi
 
-host_build_pkgconf=0
-if ! which pkgconf >/dev/null 2>&1; then
-  host_build_pkgconf=1
-fi
-
 host_build_tar=0
 if which tar >/dev/null 2>&1; then
   if ! tar --version 2>/dev/null|grep GNU >/dev/null;then
@@ -663,9 +658,6 @@ if [ $host_build_mksh -eq 1 ]; then
 fi
 if [ $host_build_patch -eq 1 ]; then 
   printf "\t%s\n" "select ADK_HOST_BUILD_PATCH" >> $topdir/target/config/Config.in.prereq
-fi
-if [ $host_build_pkgconf -eq 1 ]; then
-  printf "\t%s\n" "select ADK_HOST_BUILD_PKGCONF" >> $topdir/target/config/Config.in.prereq
 fi
 if [ $host_build_findutils -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_FINDUTILS" >> $topdir/target/config/Config.in.prereq

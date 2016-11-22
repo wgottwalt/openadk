@@ -43,6 +43,10 @@ config ADK_HOST_BUILD_LIBRESSL
 	bool
 	default n
 
+config ADK_HOST_BUILD_PKGCONF
+	bool
+	default y
+
 config ADK_HOST_BUILD_WGET
 	bool
 	default n
@@ -92,10 +96,6 @@ config ADK_HOST_BUILD_OPENOCD
 	default n
 
 config ADK_HOST_BUILD_PATCH
-	bool
-	default n
-
-config ADK_HOST_BUILD_PKGCONF
 	bool
 	default n
 

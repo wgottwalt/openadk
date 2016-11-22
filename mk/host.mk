@@ -6,6 +6,11 @@ ifneq (,$(findstring host,$(MAKECMDGOALS)))
 WRKDIR?=		${HOST_BUILD_DIR}/w-${PKG_NAME}-${PKG_VERSION}-${PKG_RELEASE}-host
 endif
 
+HOST_AUTOTOOL_ENV+=	PATH='${HOST_PATH}' \
+			PKG_CONFIG_LIBDIR='${STAGING_HOST_DIR}/usr/lib/pkgconfig:${STAGING_HOST_DIR}/usr/share/pkgconfig' \
+			PKG_CONFIG_SYSROOT_DIR='${STAGING_HOST_DIR}' \
+			${COMMON_ENV}
+
 # this is environment for 'configure'
 HOST_CONFIGURE_ENV?=	PATH='${HOST_PATH}' \
 			${COMMON_ENV} \

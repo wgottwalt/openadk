@@ -9,10 +9,10 @@ ${_HOST_CONFIGURE_COOKIE}: ${_HOST_PATCH_COOKIE}
 	mkdir -p ${WRKBUILD}
 ifneq (,$(filter autogen,${AUTOTOOL_STYLE}))
 	@$(CMD_TRACE) "autotooling.. "
-	@cd ${WRKSRC}; env ${AUTOTOOL_ENV} $(BASH) autogen.sh $(MAKE_TRACE)
+	@cd ${WRKSRC}; env ${HOST_AUTOTOOL_ENV} $(BASH) autogen.sh $(MAKE_TRACE)
 endif
 ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
-	cd ${WRKSRC}; env ${AUTOTOOL_ENV} autoreconf -if $(MAKE_TRACE)
+	cd ${WRKSRC}; env ${HOST_AUTOTOOL_ENV} autoreconf -vif $(MAKE_TRACE)
 	@rm -rf ${WRKSRC}/autom4te.cache
 	@touch ${WRKDIR}/.autoreconf_done
 endif
