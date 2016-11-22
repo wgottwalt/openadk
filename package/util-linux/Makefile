@@ -73,6 +73,9 @@ TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--exec-prefix=/usr \
 			--libdir=/usr/lib \
 			--with-pic \
+			--with-ncurses \
+			--without-ncursesw \
+			--disable-widechar \
 			--disable-use-tty-group \
 			--disable-chfn-chsh \
 			--disable-more \
