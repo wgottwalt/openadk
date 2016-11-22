@@ -338,8 +338,7 @@ echo 'LC_ALL:=C' >> $topdir/prereq.mk
 echo "_PATH:=$PATH" >> $topdir/prereq.mk
 echo "PATH:=${topdir}/scripts:/usr/sbin:$PATH" >> $topdir/prereq.mk
 echo "GIT:=$(which git 2>/dev/null)" >> $topdir/prereq.mk
-echo "GITOPTS:=" >> $topdir/prereq.mk
-echo "export ADK_TOPDIR GIT GITOPTS SHA256 BASH SHELL" >> $topdir/prereq.mk
+echo "export ADK_TOPDIR GIT SHA256 BASH SHELL" >> $topdir/prereq.mk
 
 # create temporary Makefile
 cat >Makefile.tmp <<'EOF'
