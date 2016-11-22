@@ -4,13 +4,12 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		2.3.1
+PKG_VERSION:=		2.3.3
 PKG_RELEASE:=		1
-PKG_HASH:=		b87c738cb2032bf4920fef8e3864dc5cf8eae9d89d8d523ce0236945c5797dcd
+PKG_HASH:=		241408c8c555b258846368830a06146e4849a1d58dcaf6b14a3b6a73058115b7
 PKG_DESCR:=		scripting language
 PKG_SECTION:=		dev/lang
-PKG_BUILDDEP:=		ruby-host
-HOST_BUILDDEP:=		readline-host
+PKG_BUILDDEP:=		ruby-host libressl zlib
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.ruby-lang.org/
 PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.3/
@@ -29,6 +28,7 @@ CONFIGURE_ENV+=         ac_cv_func_setpgrp_void=yes \
 			stack_protector=no \
 			rb_cv_binary_elf=yes
 CONFIGURE_ARGS+=	--disable-install-doc \
+			--with-out-ext=fiddle \
 			--with-baseruby=${STAGING_HOST_DIR}/usr/bin/ruby
 
 MAKE_FILE:=		GNUmakefile
