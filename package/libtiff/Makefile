@@ -4,15 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		tiff
-PKG_VERSION:=		4.0.6
+PKG_VERSION:=		4.0.7
 PKG_RELEASE:=		1
-PKG_HASH:=		4d57a50907b510e3049a4bba0d7888930fdfc16ce49f1bf693e5b6247370d68c
+PKG_HASH:=		9f43a2cfb9589e5cecaa66e16bf87f814c945f22df7ba600d63aac4632c4f019
 PKG_DESCR:=		library for reading/writing tiff images
 PKG_SECTION:=		libs/image
 PKG_NEEDS:=		c++
 PKG_BUILDDEP:=		cmake-host
 PKG_URL:=		http://simplesystems.org/libtiff/
-PKG_SITES:=		ftp://ftp.remotesensing.org/pub/libtiff/
+PKG_SITES:=		http://download.osgeo.org/libtiff/
 PKG_LIBNAME:=		libtiff
 PKG_OPTS:=		dev
 
