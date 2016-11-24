@@ -136,7 +136,7 @@ targethelp:
 endif
 
 kernel-strip:
-ifeq ($(ADK_TARGET_KERNEL_VERSION_RPI),y)
+ifeq ($(ADK_TARGET_KERNEL_REPO_NAME),rpi)
 	@echo adding DT trailer to kernel $(MAKE_TRACE)
 	PATH='$(HOST_PATH)' perl $(LINUX_DIR)/scripts/mkknlimg --dtok $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 else

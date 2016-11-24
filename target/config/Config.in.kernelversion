@@ -186,6 +186,17 @@ config ADK_TARGET_KERNEL_REPO
 	help
 	  GIT repository to use.
 
+config ADK_TARGET_KERNEL_REPO_NAME
+	string
+	depends on ADK_TARGET_KERNEL_VERSION_GIT
+	default "rpi" if ADK_TARGET_BOARD_BCM28XX
+	default "fslc" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default "clearfog" if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
+	default "bb" if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+	default "or1k" if ADK_TARGET_ARCH_OR1K
+	default "lm32" if ADK_TARGET_ARCH_LM32
+	default "linus"
+
 config ADK_TARGET_KERNEL_GITVER
 	string "git version"
 	depends on ADK_TARGET_KERNEL_VERSION_GIT
