@@ -22,7 +22,7 @@ $(eval $(call HOST_template,LIBRSVG,librsvg,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBRSVG,librsvg,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 HOST_STYLE:=		auto
-HOST_LDFLAGS+=		-lffi -lgmodule-2.0
+HOST_LDFLAGS+=		-lffi -lgmodule-2.0 -lz -ldl -lresolv
 HOST_CONFIGURE_ARGS+=	--enable-introspection=no
 
 CONFIGURE_ARGS+=	--enable-introspection=no
