@@ -1,0 +1,25 @@
+From 67d252fe0c131e3a1fa56d8bec9c25613a7f3bcd Mon Sep 17 00:00:00 2001
+From: Bobby Bingham <koorogi@koorogi.info>
+Date: Fri, 25 Nov 2016 12:58:04 -0600
+Subject: [PATCH] s390: replace absolute branch with relative branch
+
+---
+ src/signal/s390x/sigsetjmp.s | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/src/signal/s390x/sigsetjmp.s b/src/signal/s390x/sigsetjmp.s
+index 72dfc25..41b1bd9 100644
+--- a/src/signal/s390x/sigsetjmp.s
++++ b/src/signal/s390x/sigsetjmp.s
+@@ -6,7 +6,7 @@
+ sigsetjmp:
+ __sigsetjmp:
+ 	ltgr  %r3, %r3
+-	bz    ___setjmp
++	jz    ___setjmp
+ 
+ 	stg   %r14, 18*8(%r2)
+ 	stg   %r6,  20*8(%r2)
+-- 
+2.10.2
+
