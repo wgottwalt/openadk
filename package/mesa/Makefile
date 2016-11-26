@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mesa
 PKG_VERSION:=		13.0.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		71962fb2bf77d33b0ad4a565b490dbbeaf4619099c6d9722f04a73187957a731
 PKG_DESCR:=		3d graphics library
 PKG_SECTION:=		libs/video
@@ -45,6 +45,8 @@ XAKE_FLAGS+=		HOST_CC=${CC_FOR_BUILD}
 
 mesa-install:
 	$(INSTALL_DIR) $(IDIR_MESA)/usr/lib/dri
+	$(CP) $(WRKINST)/usr/lib/libEGL*.so* \
+		$(IDIR_MESA)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libGL*.so* \
 		$(IDIR_MESA)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libglapi.so* \

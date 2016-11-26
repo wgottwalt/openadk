@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		icu4c
 PKG_VERSION:=		54.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		d42bc9a8ca6a91c55eb0925c279f49e5b508d51ef26ac9850d9be55de5bb8ab3
 PKG_DESCR:=		unicode and globalization library
 PKG_SECTION:=		libs/misc
@@ -43,6 +43,10 @@ icu4c-hostinstall:
 icu4c-install:
 	$(INSTALL_DIR) $(IDIR_ICU4C)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libicuuc.so* \
+		$(IDIR_ICU4C)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libicudata.so* \
+		$(IDIR_ICU4C)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libicui18n.so* \
 		$(IDIR_ICU4C)/usr/lib
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk

@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		gcr
 PKG_VERSION:=		3.20.0
 PKG_EXTRAVER:=		3.20
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		90572c626d8a708225560c42b4421f7941315247fa1679d4ef569bde7f4bb379
 PKG_DESCR:=		gnome keyring library
 PKG_SECTION:=		libs/crypto
@@ -20,5 +20,7 @@ $(eval $(call PKG_template,GCR,gcr,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),
 
 gcr-install:
 	$(INSTALL_DIR) $(IDIR_GCR)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/lib*.so* \
+		$(IDIR_GCR)/usr/lib
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

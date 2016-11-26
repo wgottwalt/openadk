@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		webkitgtk
 PKG_VERSION:=		2.14.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		2edbcbd5105046aea55af9671c4de8deedb5b0e3567c618034d440a760675556
 PKG_DESCR:=		web browser engine
 PKG_SECTION:=		libs/misc
@@ -46,5 +46,10 @@ webkitgtk-install:
 		$(IDIR_WEBKITGTK)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libwebkit2gtk*.so* \
 		$(IDIR_WEBKITGTK)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/webkit2gtk-4.0 \
+		$(IDIR_WEBKITGTK)/usr/lib
+	$(INSTALL_DIR) $(IDIR_WEBKITGTK)/usr/libexec
+	$(CP) $(WRKINST)/usr/libexec/* \
+		$(IDIR_WEBKITGTK)/usr/libexec
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

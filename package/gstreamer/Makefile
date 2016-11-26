@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gstreamer
 PKG_VERSION:=		1.8.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		9dbebe079c2ab2004ef7f2649fa317cabea1feb4fb5605c24d40744b90918341
 PKG_DESCR:=		opensource multimedia framework
 PKG_SECTION:=		libs/video
@@ -26,7 +26,7 @@ CONFIGURE_ARGS+=	--disable-examples \
 
 gstreamer-install:
 	$(INSTALL_DIR) $(IDIR_GSTREAMER)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/libgstreamer*.so* \
+	$(CP) $(WRKINST)/usr/lib/libgst*.so* \
 		$(IDIR_GSTREAMER)/usr/lib
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
