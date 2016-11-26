@@ -10,8 +10,8 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	mkdir -p /var/state/dhcp
-	touch /var/state/dhcp/dhcpd.leases
+	mkdir -p /var/lib/dhcp
+	touch /var/lib/dhcp/dhcpd.leases
 	/usr/sbin/dhcpd $dhcpd_flags
 	;;
 autostop|stop)

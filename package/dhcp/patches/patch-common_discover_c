@@ -1,6 +1,6 @@
---- dhcp-4.1.0.orig/common/discover.c	2008-08-29 19:48:57.000000000 +0200
-+++ dhcp-4.1.0/common/discover.c	2009-06-12 21:18:42.000000000 +0200
-@@ -684,8 +684,8 @@ next_iface6(struct iface_info *info, int
+--- dhcp-4.3.5.orig/common/discover.c	2016-09-27 21:16:50.000000000 +0200
++++ dhcp-4.3.5/common/discover.c	2016-11-26 07:09:35.000000000 +0100
+@@ -692,8 +692,8 @@ next_iface6(struct iface_info *info, int
  	for (i=0; i<16; i++) {
  		unsigned char byte;
                  static const char hex[] = "0123456789abcdef";
