@@ -176,7 +176,7 @@ config ADK_RUNTIME_TMPFS_SIZE
 	default "32768" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default "8192" if ADK_TARGET_SYSTEM_MIKROTIK_RB532
 	default "1024"
-	depends on !ADK_RUNTIME_INIT_SIMPLEINIT
+	depends on !ADK_RUNTIME_INIT_SIMPLEINIT && !ADK_RUNTIME_INIT_SYSTEMD
 	help
 	  Size of /tmp in memory in Kilobyte.
 

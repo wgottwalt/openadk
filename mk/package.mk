@@ -225,7 +225,15 @@ ifeq (${ADK_INSTALL_PACKAGE_INIT_SCRIPTS},y)
 	done
 endif
 ifneq (${ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS},y)
-	-rm -rf $${IDIR_$(1)}/etc/network
+	-@rm -rf $${IDIR_$(1)}/etc/network
+endif
+ifeq (${ADK_RUNTIME_INIT_SYSTEMD},y)
+	@for file in $$$$(ls ./files/*.service 2>/dev/null); do \
+		mkdir -p $$(IDIR_$(1))/usr/lib/systemd/system && cp $$$$file $$(IDIR_$(1))/usr/lib/systemd/system; \
+		mkdir -p $$(IDIR_$(1))/etc/systemd/system/multi-user.target.wants; \
+		ln -sf ../../../../usr/lib/systemd/system/$$$$file \
+			$$(IDIR_$(1))/etc/systemd/system/multi-user.target.wants; \
+	done
 endif
 endif
 	@mkdir -p $${PACKAGE_DIR} '$${STAGING_PKG_DIR}/stamps' \

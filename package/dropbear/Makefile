@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		dropbear
 PKG_VERSION:=		2016.74
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		2720ea54ed009af812701bcc290a2a601d5c107d12993e5d92c0f5f81f718891
 PKG_DESCR:=		ssh server/client designed for embedded systems
 PKG_SECTION:=		net/security
@@ -57,7 +57,9 @@ do-build:
 
 do-install:
 	# main package
-	$(INSTALL_DIR) $(IDIR_DROPBEAR)/usr/bin $(IDIR_DROPBEAR)/bin
+	$(INSTALL_DIR) $(IDIR_DROPBEAR)/etc/dropbear
+	$(INSTALL_DIR) $(IDIR_DROPBEAR)/bin
+	$(INSTALL_DIR) $(IDIR_DROPBEAR)/usr/bin
 	$(INSTALL_DIR) $(IDIR_DROPBEAR)/usr/sbin
 	$(INSTALL_BIN) $(WRKBUILD)/dropbearmulti \
 		$(IDIR_DROPBEAR)/usr/sbin/dropbear
