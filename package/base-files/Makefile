@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		23
+PKG_RELEASE:=		24
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -23,19 +23,18 @@ INSTALL_STYLE:=		manual
 
 do-install:
 	$(CP) ./src/* $(IDIR_BASE_FILES)
-	mkdir -p $(IDIR_BASE_FILES)/{etc,dev,boot,root,sys,proc,tmp,run,mnt,media}
+	mkdir -p $(IDIR_BASE_FILES)/{etc,dev,boot,root,sys,proc,tmp,run,var,mnt,media}
 	mkdir -p $(IDIR_BASE_FILES)/usr/{lib,bin,sbin}
-	mkdir -p $(IDIR_BASE_FILES)/var/{log,lib}
 	ln -sf ../run $(IDIR_BASE_FILES)/var/run
 	chmod 600 $(IDIR_BASE_FILES)/etc/shadow
 	chmod 1777 ${IDIR_BASE_FILES}/tmp
 ifeq ($(ADK_RUNTIME_INIT_SYSTEMD),)
+	echo $(ADK_RUNTIME_TMPFS_SIZE) > $(IDIR_BASE_FILES)/etc/tmpfs
 	mkdir -p $(IDIR_BASE_FILES)/etc/init.d
 	cp ./files/init.d/* $(IDIR_BASE_FILES)/etc/init.d
 	mkdir -p $(IDIR_BASE_FILES)/etc/network/{if-pre-up.d,if-up.d,if-down.d,if-post-down.d}
-	ln -sf ../tmp $(IDIR_BASE_FILES)/var/tmp
-	echo $(ADK_RUNTIME_TMPFS_SIZE) > $(IDIR_BASE_FILES)/etc/tmpfs
 	cp ./files/fstab $(IDIR_BASE_FILES)/etc
+	cp ./files/modules $(IDIR_BASE_FILES)/etc
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
 ifeq ($(ADK_TARGET_WITH_NETDEVICE),y)
 	cp ./files/interfaces-dhcp $(IDIR_BASE_FILES)/etc/network/interfaces

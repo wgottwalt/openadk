@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		systemd
 PKG_VERSION:=		232
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		1172c7c7d5d72fbded53186e7599d5272231f04cc8b72f9a0fb2c5c20dfc4880
 PKG_DESCR:=		system and service manager
 PKG_SECTION:=		base/apps
@@ -96,5 +96,6 @@ systemd-install:
 		$(IDIR_SYSTEMD)/usr/share
 	$(CP) ./files/*.network \
 		$(IDIR_SYSTEMD)/etc/systemd/network
+	(cd $(IDIR_SYSTEMD)/usr/lib/systemd/system && ln -sf multi-user.target default.target)
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

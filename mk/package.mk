@@ -229,9 +229,10 @@ ifneq (${ADK_INSTALL_PACKAGE_NETWORK_SCRIPTS},y)
 endif
 ifeq (${ADK_RUNTIME_INIT_SYSTEMD},y)
 	@for file in $$$$(ls ./files/*.service 2>/dev/null); do \
-		mkdir -p $$(IDIR_$(1))/usr/lib/systemd/system && cp $$$$file $$(IDIR_$(1))/usr/lib/systemd/system; \
+		fname=$$$$(echo $$$$file| sed -e "s#.*/##"); \
+		mkdir -p $$(IDIR_$(1))/usr/lib/systemd/system && cp $$$$file $$(IDIR_$(1))/usr/lib/systemd/system/$$$$fname; \
 		mkdir -p $$(IDIR_$(1))/etc/systemd/system/multi-user.target.wants; \
-		ln -sf ../../../../usr/lib/systemd/system/$$$$file \
+		ln -sf ../../../../usr/lib/systemd/system/$$$$fname \
 			$$(IDIR_$(1))/etc/systemd/system/multi-user.target.wants; \
 	done
 endif
