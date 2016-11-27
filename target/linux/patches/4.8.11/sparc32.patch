@@ -1,0 +1,31 @@
+commit 07b5ab3f71d318e52c18cc3b73c1d44c908aacfa
+Author: Andreas Larsson <andreas@gaisler.com>
+Date:   Wed Nov 9 10:43:05 2016 +0100
+
+    sparc32: Fix inverted invalid_frame_pointer checks on sigreturns
+    
+    Signed-off-by: Andreas Larsson <andreas@gaisler.com>
+    Signed-off-by: David S. Miller <davem@davemloft.net>
+
+diff --git a/arch/sparc/kernel/signal_32.c b/arch/sparc/kernel/signal_32.c
+index c3c12ef..9c0c8fd 100644
+--- a/arch/sparc/kernel/signal_32.c
++++ b/arch/sparc/kernel/signal_32.c
+@@ -89,7 +89,7 @@ asmlinkage void do_sigreturn(struct pt_regs *regs)
+ 	sf = (struct signal_frame __user *) regs->u_regs[UREG_FP];
+ 
+ 	/* 1. Make sure we are not getting garbage from the user */
+-	if (!invalid_frame_pointer(sf, sizeof(*sf)))
++	if (invalid_frame_pointer(sf, sizeof(*sf)))
+ 		goto segv_and_exit;
+ 
+ 	if (get_user(ufp, &sf->info.si_regs.u_regs[UREG_FP]))
+@@ -150,7 +150,7 @@ asmlinkage void do_rt_sigreturn(struct pt_regs *regs)
+ 
+ 	synchronize_user_stack();
+ 	sf = (struct rt_signal_frame __user *) regs->u_regs[UREG_FP];
+-	if (!invalid_frame_pointer(sf, sizeof(*sf)))
++	if (invalid_frame_pointer(sf, sizeof(*sf)))
+ 		goto segv;
+ 
+ 	if (get_user(ufp, &sf->regs.u_regs[UREG_FP]))
