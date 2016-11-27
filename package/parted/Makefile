@@ -23,7 +23,7 @@ ifeq ($(ADK_TARGET_LIBICONV_TINY),y)
 TARGET_LDFLAGS+=	-liconv
 endif
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 CONFIGURE_ARGS+=	--disable-dynamic-loading
 endif
 
@@ -31,7 +31,7 @@ CONFIGURE_ARGS+=	--disable-device-mapper \
 			--without-readline
 
 parted-install:
-ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 	$(INSTALL_DIR) $(IDIR_PARTED)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libparted*so* $(IDIR_PARTED)/usr/lib
 endif

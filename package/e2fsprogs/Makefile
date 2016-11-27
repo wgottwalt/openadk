@@ -64,7 +64,7 @@ HOST_CONFIGURE_ARGS+=	--disable-rpath \
 			--disable-defrag \
 			--disable-debugfs
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 CONFIGURE_ARGS+=	--disable-elf-shlibs
 else
 CONFIGURE_ARGS+=	--enable-elf-shlibs

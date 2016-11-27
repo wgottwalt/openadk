@@ -21,7 +21,7 @@ $(eval $(call PKG_template,BLUEZ,bluez,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPEN
 
 TARGET_LDFLAGS+=	-lncurses
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 XAKE_FLAGS+=		CCLD="$(TARGET_CC) -all-static -pthread"
 endif
 

@@ -84,7 +84,7 @@ endif
 
 # do nothing, musl is already build in toolchain directory
 do-install:
-ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 	${INSTALL_DIR} $(IDIR_MUSL)/bin
 	${INSTALL_DIR} $(IDIR_MUSL)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/usr/lib/libc.so $(IDIR_MUSL)/$(ADK_TARGET_LIBC_PATH)

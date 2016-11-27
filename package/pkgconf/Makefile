@@ -23,7 +23,7 @@ $(eval $(call PKG_template,PKGCONF,pkgconf,$(PKG_VERSION)-${PKG_RELEASE},${PKG_D
 
 hostpost-install:
 	$(CP) ./files/pkg-config $(STAGING_HOST_DIR)/usr/bin
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 	PATH="$(HOST_PATH)" $(SED) "s#@@OPTS@@#--static#" $(STAGING_HOST_DIR)/usr/bin/pkg-config
 else
 	PATH="$(HOST_PATH)" $(SED) "s#@@OPTS@@##" $(STAGING_HOST_DIR)/usr/bin/pkg-config

@@ -45,7 +45,7 @@ INSTALL_STYLE:=		manual
 
 # compile nothing, glibc is already build in toolchain directory
 do-install:
-ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 	${INSTALL_DIR} ${IDIR_GLIBC}/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH)
 	for file in libc libpthread librt libcrypt libdl libm libnsl libresolv libutil libnss_dns libnss_files; do \

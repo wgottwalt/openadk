@@ -13,9 +13,13 @@
 
 PKG_LIBNAME?=	$(PKG_NAME)
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_SHARED_LIBS_ONLY),y)
+CONFIGURE_LIB:=--disable-static --enable-shared
+endif
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 CONFIGURE_LIB:=--enable-static --disable-shared
-else
+endif
+ifeq ($(ADK_TARGET_USE_SHARED_AND_STATIC_LIBS),y)
 CONFIGURE_LIB:=--enable-static --enable-shared
 endif
 

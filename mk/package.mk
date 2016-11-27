@@ -113,7 +113,7 @@ IDIR_$(1)_DEV=	$(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(2)-dev
 IDIR_$(1)_DBG=	$(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(2)-dbg
 ifneq (${ADK_PACKAGE_$(1)}${DEVELOPER},)
 ifneq (,$(filter dev,$(7)))
-ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 ifneq ($(ADK_TARGET_BINFMT_FLAT),y)
 ALL_IPKGS+=	$$(IPKG_$(1))
 ALL_IDIRS+=	$${IDIR_$(1)}

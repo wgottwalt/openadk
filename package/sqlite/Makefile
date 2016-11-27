@@ -31,7 +31,7 @@ $(eval $(call PKG_template,SQLITE_CLI,sqlite-cli,${PKG_VERSION}-${PKG_RELEASE},$
 
 TARGET_CFLAGS:=		$(filter-out -ffast-math,$(TARGET_CFLAGS))
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 CONFIGURE_ARGS+=	--enable-dynamic-extensions=no
 endif
 

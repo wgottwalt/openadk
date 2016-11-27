@@ -32,7 +32,7 @@ $(eval $(call PKG_template,LVM,${PKG_NAME},${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 $(eval $(call PKG_template,DEVICE_MAPPER,device-mapper,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_DEVICE_MAPPER},${PKG_SECTION}))
 $(eval $(call PKG_template,LIBDEVMAPPER,libdevmapper,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_LIBDEVMAPPER},${PKGSC_LIBDEVMAPPER},${PKG_OPTS}))
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 CONFIGURE_ARGS+=	--enable-static_link
 endif
 

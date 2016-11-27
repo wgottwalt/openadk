@@ -34,7 +34,7 @@ $(eval $(call PKG_template,LIBBZ2,libbz2,${PKG_VERSION}-${PKG_RELEASE},,${PKGSD_
 HOST_STYLE:=		manual
 HOST_MAKE_FILE:=	Makefile
 
-ifneq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifneq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 MAKE_FILE:=		Makefile-libbz2_so
 BIN_FILE:=		bzip2-shared
 else
@@ -57,7 +57,7 @@ bzip2-hostinstall:
 do-install:
 	${INSTALL_DIR} $(STAGING_TARGET_DIR)/usr/include
 	$(CP) $(WRKBUILD)/bzlib.h $(STAGING_TARGET_DIR)/usr/include
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 	$(CP) ${WRKBUILD}/libbz2.a ${STAGING_TARGET_DIR}/usr/lib
 endif
 

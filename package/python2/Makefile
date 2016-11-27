@@ -83,7 +83,7 @@ $(eval $(call PKG_mod_template,PYTHON2_MOD_NCURSES,_curses))
 $(eval $(call PKG_mod_template,PYTHON2_MOD_SSL,_ssl))
 $(eval $(call PKG_mod_template,PYTHON2_MOD_READLINE,readline))
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 CONFIGURE_ARGS+=	--disable-shared
 endif
 
@@ -133,7 +133,7 @@ pre-configure:
 	$(SED) "s#@EXENAME@#$(STAGING_HOST_DIR)/usr/bin/python#" \
 		$(WRKBUILD)/Misc/python-config.in
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 python2-install:
 else
 python2-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}

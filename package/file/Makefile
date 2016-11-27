@@ -35,7 +35,7 @@ $(eval $(call PKG_template,MAGIC,magic,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_MAG
 
 AUTOTOOL_STYLE:=	autoreconf
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 MAKE_FLAGS+=		LDFLAGS="$(TARGET_LDFLAGS) -all-static"
 endif
 

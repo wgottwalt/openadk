@@ -3,8 +3,28 @@
 
 choice
 depends on ADK_TARGET_OS_LINUX
+prompt "Library support"
+
+config ADK_TARGET_USE_SHARED_LIBS_ONLY
+	bool "Create shared libraries only and link dynamically"
+
+config ADK_TARGET_USE_STATIC_LIBS_ONLY
+	bool "Create static libraries only and link statically"
+	select BUSYBOX_STATIC
+	depends on !ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_BINFMT_DSBT
+	help
+	  Useful for debugging of dynamic linker problems. Be aware of the fact, that uClibc and glibc
+	  still requires libgcc_so.so.1 for pthread_cancel. Glibc also requires libnss_*.so libraries
+	  at runtime. Full static builds are only supported for musl libc.
+
+config ADK_TARGET_USE_SHARED_AND_STATIC_LIBS
+	bool "Create shared and static libraries and link dynamically"
+
+endchoice
+
+choice
+depends on ADK_TARGET_OS_LINUX
 prompt "Iconv implementation"
-bool
 default ADK_TARGET_WITHOUT_ICONV if ADK_TARGET_WITHOUT_MMU
 
 config ADK_TARGET_LIBICONV_TINY
@@ -71,7 +91,6 @@ endmenu
 
 menu "Advanced Toolchain options"
 
-
 config ADK_TOOLCHAIN_WITH_SSP
 	bool
 
@@ -130,15 +149,6 @@ config ADK_DEBUG_STRIP
 	help
 	  All packages and C library will be compiled with debug information, 
 	  but stripped for the target.
-
-config ADK_TARGET_USE_STATIC_LIBS
-	bool "Create static libraries and link applications statically for target"
-	select BUSYBOX_STATIC
-	depends on !ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_BINFMT_DSBT
-	help
-	  Useful for debugging of dynamic linker problems. Be aware of the fact, that uClibc and glibc
-	  still requires libgcc_so.so.1 for pthread_cancel. Glibc also requires libnss_*.so libraries
-	  at runtime. Full static builds are only supported for musl libc.
 
 config ADK_STATIC_TOOLCHAIN
 	bool "Build the toolchain components statically (portable host binaries)"

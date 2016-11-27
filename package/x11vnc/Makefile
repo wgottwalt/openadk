@@ -20,7 +20,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,X11VNC,x11vnc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 MAKE_FLAGS+=		CFLAGS="${TARGET_CFLAGS} -static" \
 			LIBS="-lxcb -lXau -lXdmcp -ldl -pthread -ljpeg -lz"
 endif

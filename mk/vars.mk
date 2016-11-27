@@ -201,7 +201,7 @@ TARGET_LDFLAGS+=	-Wl,--secure-plt
 endif
 endif
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 TARGET_CFLAGS+=		-static
 TARGET_CXXFLAGS+=	-static
 TARGET_LDFLAGS+=	-static

@@ -128,7 +128,7 @@ ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS)$(ADK_TARGET_WITHOUT_THREADS),y)
 	$(SED) 's/.*\(PTHREADS_DEBUG_SUPPORT\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(HAS_NO_THREADS\).*/\1=y/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS)$(ADK_TARGET_BINFMT_FLAT),)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY)$(ADK_TARGET_BINFMT_FLAT),)
 	$(SED) 's/.*\(HAVE_SHARED\).*/\1=y/' ${WRKBUILD}/.config
 else
 	$(SED) 's/.*\(HAVE_SHARED\).*/# \1 is not set/' ${WRKBUILD}/.config

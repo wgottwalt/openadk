@@ -26,7 +26,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBNCURSES,libncurses,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 CONFIGURE_ARGS+=	--with-static
 else
 CONFIGURE_ARGS+=	--with-shared
