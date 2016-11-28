@@ -3,7 +3,7 @@
 
 choice
 depends on ADK_TARGET_OS_LINUX
-prompt "Library support"
+bool "Library support"
 
 config ADK_TARGET_USE_SHARED_LIBS_ONLY
 	bool "Create shared libraries only and link dynamically"
@@ -24,22 +24,22 @@ endchoice
 
 choice
 depends on ADK_TARGET_OS_LINUX
-prompt "Iconv implementation"
+bool "Iconv implementation"
 default ADK_TARGET_WITHOUT_ICONV if ADK_TARGET_WITHOUT_MMU
 
 config ADK_TARGET_LIBICONV_TINY
-	prompt "Use tiny libiconv package"
+	bool "Use tiny libiconv package"
 	select ADK_PACKAGE_LIBICONV_TINY
 
 config ADK_TARGET_LIBC_ICONV
-	prompt "Use iconv from C library"
+	bool "Use iconv from C library"
 
 config ADK_TARGET_LIBICONV
-	prompt "Use libiconv package"
+	bool "Use libiconv package"
 	select ADK_PACKAGE_LIBICONV
 
 config ADK_TARGET_WITHOUT_ICONV
-	prompt "Do not build any iconv code"
+	bool "Do not build any iconv code"
 
 endchoice
 
@@ -52,23 +52,25 @@ config ADK_TARGET_CFLAGS_OPT
 	default "-O0 -pipe" if ADK_TARGET_CFLAGS_OPT_O0
 
 choice
-prompt "Optimization level"
-bool
+bool "Optimization level"
 
 config ADK_TARGET_CFLAGS_OPT_OS
-	prompt "optimize for size (-Os)"
+	bool "optimize for size (-Os)"
 
 config ADK_TARGET_CFLAGS_OPT_OG
-	prompt "optimize, but allow debugging (-Og)"
+	bool "optimize, but allow debugging (-Og)"
+
+config ADK_TARGET_CFLAGS_OPT_O1
+	bool "optimize for minor performance (-O1)"
 
 config ADK_TARGET_CFLAGS_OPT_O2
-	prompt "optimize for performance (-O2)"
+	bool "optimize for performance (-O2)"
 
 config ADK_TARGET_CFLAGS_OPT_O3
-	prompt "optimize for extra performance (-O3)"
+	bool "optimize for extra performance (-O3)"
 
 config ADK_TARGET_CFLAGS_OPT_O0
-	prompt "no optimization (-O0)"
+	bool "no optimization (-O0)"
 
 endchoice
 
