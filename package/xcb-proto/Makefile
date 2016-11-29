@@ -4,11 +4,11 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xcb-proto
-PKG_VERSION:=		1.10
+PKG_VERSION:=		1.12
 PKG_RELEASE:=		1
+PKG_HASH:=		cfa49e65dd390233d560ce4476575e4b76e505a0e0bacdfb5ba6f8d0af53fd59
 PKG_DESCR:=		xml-xcb protocol descriptions
 PKG_SECTION:=		dev/header
-PKG_HASH:=		d0e6a2c8aed8af430edd011bb139368480d556b0829adcf1e1ca5708d1fc04b9
 HOST_BUILDDEP:=		python2-host
 PKG_SITES:=		http://xcb.freedesktop.org/dist/
 PKG_OPTS:=		dev devonly

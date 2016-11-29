@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-geode
-PKG_VERSION:=		2.11.15
+PKG_VERSION:=		2.11.18
 PKG_RELEASE:=		1
-PKG_HASH:=		43e17e901eb8cefa985480680f5d02a78d1fae01327b663a7b3459ef98d75cba
+PKG_HASH:=		60df188a72ef2b337e6cbc73684edf04b75fe4dd20555460005e1a19814b9046
 PKG_DESCR:=		x11 driver for amd geode vga chip
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
@@ -14,7 +14,6 @@ PKG_BUILDDEP:=		xorg-server
 PKG_NEEDS:=		c++
 PKG_SITES:=		http://www.x.org/releases/individual/driver/
 
-PKG_SYSTEM_DEPENDS:=	pcengines-alix1c
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk

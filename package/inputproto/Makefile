@@ -4,12 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		inputproto
-PKG_VERSION:=		2.3.1
+PKG_VERSION:=		2.3.2
 PKG_RELEASE:=		1
+PKG_HASH:=		10eaadd531f38f7c92ab59ef0708ca195caf3164a75c4ed99f0c04f2913f6ef3
 PKG_DESCR:=		input extension headers
 PKG_SECTION:=		dev/header
 PKG_BUILDDEP:=		inputproto-host
-PKG_HASH:=		23f65ac55c36ea8c378e30b4a4fd85317c95923134e3fe46569741b94c8ed4ca
 PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 

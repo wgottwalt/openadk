@@ -4,11 +4,11 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xproto
-PKG_VERSION:=		7.0.28
+PKG_VERSION:=		7.0.31
 PKG_RELEASE:=		1
+PKG_HASH:=		6d755eaae27b45c5cc75529a12855fed5de5969b367ed05003944cf901ed43c7
 PKG_DESCR:=		x window system core protocol headers
 PKG_SECTION:=		dev/header
-PKG_HASH:=		6cabc8ce3fa2b1a2427871167b62c24d5b08a58bd3e81ed7aaf08f2bf6dbcfed
 PKG_BUILDDEP:=		xproto-host
 PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly

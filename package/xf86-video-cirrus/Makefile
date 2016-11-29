@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-cirrus
-PKG_VERSION:=		1.5.2
+PKG_VERSION:=		1.5.3
 PKG_RELEASE:=		1
-PKG_HASH:=		7c882c9064f58edf6cb08ef889b6e1d9e7bf6be0eb0002c052d5b4cb6a9bf74d
+PKG_HASH:=		4ff2024c1645f30931f0871f36484aed85ef35aa04852faa7082dbf4ee2c83a5
 PKG_DESCR:=		x11 driver for cirrus vga chips
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
@@ -14,7 +14,6 @@ PKG_BUILDDEP:=		xorg-server
 PKG_NEEDS:=		c++
 PKG_SITES:=		http://www.x.org/releases/individual/driver/
 
-PKG_SYSTEM_DEPENDS:=	qemu-x86 qemu-x86_64
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk

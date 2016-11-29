@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-input-evdev
-PKG_VERSION:=		2.7.0
+PKG_VERSION:=		2.10.4
 PKG_RELEASE:=		1
-PKG_HASH:=		cf4bdbd4b40f05d4e29cd6494c64f092667202b0834c54bdaed448463622807b
+PKG_HASH:=		1a1b69daf41eac965f1cf0be721ebc340b2860c066147cb483f0e8f0ab7dd6a2
 PKG_DESCR:=		x11 driver for evdev
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libudev
@@ -14,8 +14,6 @@ PKG_BUILDDEP:=		xorg-server eudev
 PKG_SITES:=		http://www.x.org/releases/individual/driver/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-PKG_LIBC_DEPENDS:=	glibc
-PKG_ARCH_DEPENDS:=	!m68k
 
 PKG_CFLINE_XF86_INPUT_EVDEV:= depends on ADK_TARGET_WITH_INPUT
 

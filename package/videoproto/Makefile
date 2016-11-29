@@ -4,11 +4,11 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		videoproto
-PKG_VERSION:=		2.3.2
+PKG_VERSION:=		2.3.3
 PKG_RELEASE:=		1
+PKG_HASH:=		df8dfeb158767f843054248d020e291a2c40f7f5e0ac6d8706966686fee7c5c0
 PKG_DESCR:=		x11 video protocol headers
 PKG_SECTION:=		dev/header
-PKG_HASH:=		70eaa52beb83d07b71d81b9e4a396ba53c825472c4998f9e7b9889325b2a4346
 PKG_SITES:=		http://www.x.org/releases/individual/proto/
 PKG_OPTS:=		dev devonly
 

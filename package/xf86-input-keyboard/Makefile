@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-input-keyboard
-PKG_VERSION:=		1.8.1
+PKG_VERSION:=		1.9.0
 PKG_RELEASE:=		1
-PKG_HASH:=		8f7c645f4b17ed0a0607c92dfac87deafee9f3b975df6f87e0f606bab49e7754
+PKG_HASH:=		407cf742246708843126617feee85b30a8b7b7567b3bc507a6cfda7443a8d9ac
 PKG_DESCR:=		x11 driver for keyboard
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server

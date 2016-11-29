@@ -4,19 +4,19 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
-PKG_VERSION:=		1.18.0
+PKG_VERSION:=		1.19.0
 PKG_RELEASE:=		1
-PKG_HASH:=		a1bfa91ecbee765e3935dbb6a9204668ab84eb31a6978815c97ab6064585d71b
+PKG_HASH:=		c3e8660a74e2902e6ecaa66aa774e15d1ab66c2c19a023bd9e74e651ef005a43
 PKG_DESCR:=		xorg server
 PKG_SECTION:=		x11/drivers
-PKG_DEPENDS:=		libxfont pixman libpciaccess libxkbfile
+PKG_DEPENDS:=		libxfont2 pixman libpciaccess libxkbfile
 PKG_DEPENDS+=		libfontenc xkeyboard-config xkbcomp libxau libxaw
 PKG_DEPENDS+=		libxmu libxpm libxrender libxt libxxf86dga libxext
 PKG_DEPENDS+=		libxdmcp libxv libsm libice libx11 libxcb
 PKG_DEPENDS+=		libxshmfence libfreetype libfontenc libpciaccess
 PKG_BUILDDEP:=		libX11 randrproto renderproto fixesproto damageproto
 PKG_BUILDDEP+=		scrnsaverproto resourceproto fontsproto videoproto
-PKG_BUILDDEP+=		compositeproto evieext libxkbfile libXfont pixman
+PKG_BUILDDEP+=		compositeproto evieext libxkbfile libXfont2 pixman
 PKG_BUILDDEP+=		libpciaccess xf86dgaproto recordproto
 PKG_BUILDDEP+=		xineramaproto presentproto xf86driproto glproto mesa
 PKG_NEEDS:=		threads c++
@@ -61,7 +61,7 @@ CONFIGURE_ARGS+=	--enable-dga \
 			--enable-dpms \
 			--enable-xinerama \
 			--disable-docs \
-			--disable-aiglx \
+			--disable-glamor \
 			--disable-config-hal \
 			--disable-config-udev \
 			--disable-xace \
@@ -80,6 +80,7 @@ CONFIGURE_ARGS+=	--enable-dga \
 			--enable-dri2 \
 			--enable-dri3 \
 			--enable-glx \
+			--enable-aiglx \
 			--with-xkb-output=/tmp \
 			--with-os-vendor=OpenADK \
 			--with-vendor-web="http://openadk.org"

@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-ati
-PKG_VERSION:=		7.4.0
+PKG_VERSION:=		7.8.0
 PKG_RELEASE:=		1
-PKG_HASH:=		dc0a00d1ea367e5f3e2baa0c1a0f8330c217f1d8c9d6e380757b945fb3bf6c61
+PKG_HASH:=		da8c721f04c0cdb0b05b084581d2c1457543351a98de4aa0de3e3852512389b6
 PKG_DESCR:=		x11 driver for ati vga chip
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server libdrm mesa libudev
@@ -23,7 +23,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XF86_VIDEO_ATI,xf86-video-ati,$(PKG_VERSION)-$(PKG_RELEASE),${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-CONFIGURE_ARGS+=	--enable-dri
+CONFIGURE_ARGS+=	--enable-dri \
+			--disable-glamor
 
 xf86-video-ati-install:
 	${INSTALL_DIR} ${IDIR_XF86_VIDEO_ATI}/usr/lib/xorg/modules/drivers

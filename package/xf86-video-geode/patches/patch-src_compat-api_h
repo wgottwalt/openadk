@@ -1,0 +1,30 @@
+--- xf86-video-geode-2.11.18.orig/src/compat-api.h	2016-02-03 19:46:59.000000000 +0100
++++ xf86-video-geode-2.11.18/src/compat-api.h	2016-11-28 08:39:15.624653928 +0100
+@@ -53,8 +53,13 @@
+ 
+ #define SCREEN_INIT_ARGS_DECL int index, ScreenPtr pScrn, int argc, char **argv
+ 
++#if ABI_VIDEODRV_VERSION >= SET_ABI_VERSION(23, 0)
++#define BLOCKHANDLER_ARGS_DECL ScreenPtr arg, pointer pTimeout
++#define BLOCKHANDLER_ARGS arg, pTimeout
++#else
+ #define BLOCKHANDLER_ARGS_DECL int arg, pointer blockData, pointer pTimeout, pointer pReadmask
+ #define BLOCKHANDLER_ARGS arg, blockData, pTimeout, pReadmask
++#endif
+ 
+ #define CLOSE_SCREEN_ARGS_DECL int scrnIndex, ScreenPtr pScrn
+ #define CLOSE_SCREEN_ARGS scrnIndex, pScrn
+@@ -89,8 +94,13 @@
+ 
+ #define SCREEN_INIT_ARGS_DECL ScreenPtr pScrn, int argc, char **argv
+ 
++#if ABI_VIDEODRV_VERSION >= SET_ABI_VERSION(23, 0)
++#define BLOCKHANDLER_ARGS_DECL ScreenPtr arg, pointer pTimeout
++#define BLOCKHANDLER_ARGS arg, pTimeout
++#else
+ #define BLOCKHANDLER_ARGS_DECL ScreenPtr arg, pointer pTimeout, pointer pReadmask
+ #define BLOCKHANDLER_ARGS arg, pTimeout, pReadmask
++#endif
+ 
+ #define CLOSE_SCREEN_ARGS_DECL ScreenPtr pScrn
+ #define CLOSE_SCREEN_ARGS pScrn
