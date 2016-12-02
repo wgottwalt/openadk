@@ -465,4 +465,13 @@ config ADK_KERNEL_SGI_O2MACE_ETH
 	help
 	  This driver supports the SGI O2 ethernet card.
 
+config ADK_KERNEL_ALTERA_TSE
+	tristate "Altera TSE ethernet driver"
+	select ADK_KERNEL_PHYLIB
+	depends on ADK_TARGET_SYSTEM_QEMU_NIOS2
+	default y if ADK_TARGET_SYSTEM_QEMU_NIOS2
+	default n
+	help
+	  This driver supports the NIOS2 ethernet chips.
+
 endmenu
