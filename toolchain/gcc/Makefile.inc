@@ -27,7 +27,7 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 LIBSTDCXXVER:=		20
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_ARC),y)
-PKG_VERSION:=		arc-2016.09-rc1
+PKG_VERSION:=		arc-2016.09-rc2
 PKG_GIT:=		tag
 PKG_SITES:=		https://github.com/foss-for-synopsys-dwc-arc-processors/gcc.git
 PKG_RELEASE:=		1
