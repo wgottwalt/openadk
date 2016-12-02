@@ -23,18 +23,18 @@ PKG_HASH:=		82a40a37b13a12facb36ac7e87846475a1d80f2e63467b1b8d63ec8b6a2b63fc
 PKG_SITES:=		${MASTER_SITE_GNU:=binutils/}
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 endif
-ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_24),y)
-PKG_VERSION:=		2.24
-PKG_RELEASE:=		1
-PKG_HASH:=		4930b2886309112c00a279483eaef2f0f8e1b1b62010e0239c16b22af7c346d4
-PKG_SITES:=		${MASTER_SITE_GNU:=binutils/}
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_ARC),y)
 PKG_VERSION:=		arc-2016.09-rc1
 PKG_GIT:=		tag
 PKG_RELEASE:=		1
 PKG_SITES:=		https://github.com/foss-for-synopsys-dwc-arc-processors/binutils-gdb.git
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+endif
+ifeq ($(ADK_TOOLCHAIN_BINUTILS_NDS32),y)
+PKG_VERSION:=		2.24-nds32
+PKG_RELEASE:=		1
+PKG_HASH:=		e85638296a8608c8f376bfafe61c7c6fc8a9e7c771042ff07acb697d2ea5f2cd
+PKG_SITES:=		http://distfiles.openadk.org/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_20_1),y)
