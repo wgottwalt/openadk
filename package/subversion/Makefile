@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		subversion
-PKG_VERSION:=		1.9.4
+PKG_VERSION:=		1.9.5
 PKG_RELEASE:=		1
-PKG_HASH:=		11f738063f322b06f8c81e42bc26c33e0cb1e465539647109e534274d4a8540c
+PKG_HASH:=		280ba586c5d51d7b976b65d22d5e8e42f3908ed1c968d71120dcf534ce857a83
 PKG_DESCR:=		revision control program
 PKG_SECTION:=		dev/scm
 PKG_DEPENDS:=		zlib apr apr-util libexpat libsqlite neon
