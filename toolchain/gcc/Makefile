@@ -239,10 +239,6 @@ ifeq ($(ADK_TARGET_CPU_SH_SH4A),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m4a)
 endif
 endif
-ifeq ($(ADK_TARGET_ARCH_ARC),y)
-	$(SED) 's/crtbeginS.o libgmon.a crtg.o/crtbeginS.o crtg.o/' \
-                $(WRKBUILD)/libgcc/config.host
-endif
 	$(SED) '/k prot/agcc_cv_libc_provides_ssp=yes' $(WRKBUILD)/gcc/configure
 	cd $(GCC_BUILD_DIR_INITIAL); \
 		PATH='$(TARGET_PATH)' \
