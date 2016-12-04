@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		iptables
 PKG_VERSION:=		1.6.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		4bb72a0a0b18b5a9e79e87631ddc4084528e5df236bc7624472dcaa8480f1c60
 PKG_DESCR:=		netfilter firewalling software
 PKG_SECTION:=		net/firewall
@@ -45,5 +45,6 @@ iptables-install:
 	${CP} ${WRKINST}/usr/lib/libip4tc.so* ${IDIR_IPTABLES}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libip6tc.so* ${IDIR_IPTABLES}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libxtables.so* ${IDIR_IPTABLES}/usr/lib
+	${CP} ${WRKINST}/usr/lib/xtables ${IDIR_IPTABLES}/usr/lib
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
