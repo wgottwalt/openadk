@@ -9,7 +9,6 @@ default ADK_TARGET_KERNEL_VERSION_GIT if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 default ADK_TARGET_KERNEL_VERSION_GIT if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
 default ADK_TARGET_KERNEL_VERSION_GIT if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
 default ADK_TARGET_KERNEL_VERSION_GIT if ADK_TARGET_ARCH_LM32
-default ADK_TARGET_KERNEL_VERSION_GIT if ADK_TARGET_ARCH_OR1K
 default ADK_TARGET_KERNEL_VERSION_4_4 if ADK_TARGET_ARCH_CRIS
 default ADK_TARGET_KERNEL_VERSION_4_4 if ADK_TARGET_ARCH_METAG
 default ADK_TARGET_KERNEL_VERSION_4_4 if ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB_NOMMU
@@ -28,7 +27,6 @@ config ADK_TARGET_KERNEL_VERSION_4_8
 	depends on !ADK_TARGET_ARCH_CRIS
 	depends on !ADK_TARGET_ARCH_METAG
 	depends on !ADK_TARGET_ARCH_NDS32
-	depends on !ADK_TARGET_ARCH_OR1K
 	depends on !ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB_NOMMU
 
 config ADK_TARGET_KERNEL_VERSION_4_4
@@ -178,7 +176,6 @@ config ADK_TARGET_KERNEL_REPO
 	default "https://github.com/SolidRun/linux-fslc.git" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default "https://github.com/SolidRun/linux-armada38x.git" if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
 	default "https://github.com/beagleboard/linux.git" if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
-	default "https://github.com/stffrdhrn/linux.git" if ADK_TARGET_ARCH_OR1K
 	default "https://github.com/m-labs/linux-milkymist.git" if ADK_TARGET_ARCH_LM32
 	default "git://git.kernel.org/pub/scm/linux/kernel/git/torvalds/linux.git"
 	help
@@ -191,7 +188,6 @@ config ADK_TARGET_KERNEL_REPO_NAME
 	default "fslc" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default "clearfog" if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
 	default "bb" if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
-	default "or1k" if ADK_TARGET_ARCH_OR1K
 	default "lm32" if ADK_TARGET_ARCH_LM32
 	default "linus"
 
@@ -199,11 +195,9 @@ config ADK_TARGET_KERNEL_GITVER
 	string "git version"
 	depends on ADK_TARGET_KERNEL_VERSION_GIT
 	default "6a2f2e4198eaff63ee75f6085ce9f966c47b4441" if ADK_TARGET_ARCH_LM32
-	default "or1k-fixes-4.9" if ADK_TARGET_ARCH_OR1K
 	default "head"
 
 config ADK_TARGET_KERNEL_GITTYPE
 	string
 	depends on ADK_TARGET_KERNEL_VERSION_GIT
-	default "tag" if ADK_TARGET_ARCH_OR1K
 	default "hash" if ADK_TARGET_ARCH_LM32
