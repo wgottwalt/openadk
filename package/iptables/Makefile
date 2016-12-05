@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		iptables
 PKG_VERSION:=		1.6.0
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		4bb72a0a0b18b5a9e79e87631ddc4084528e5df236bc7624472dcaa8480f1c60
 PKG_DESCR:=		netfilter firewalling software
 PKG_SECTION:=		net/firewall
@@ -21,10 +21,6 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 include ${ADK_TOPDIR}/mk/package.mk
 
-# right now default extensions are builtin
-# use --disable-static in CONFIGURE_ARGS to change and optimize package
-#include ${LINUX_DIR}/.config
-
 $(eval $(call PKG_template,IPTABLES,iptables,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 AUTOTOOL_STYLE:=	autoreconf
@@ -36,9 +32,9 @@ iptables-install:
 	${INSTALL_DIR} ${IDIR_IPTABLES}/{usr/lib,etc/xtables,usr/sbin}
 	${INSTALL_DATA} ./files/firewall.conf ${IDIR_IPTABLES}/etc
 	${INSTALL_DATA} ./files/connlabel.conf ${IDIR_IPTABLES}/etc/xtables
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/iptables ${IDIR_IPTABLES}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/ip6tables ${IDIR_IPTABLES}/usr/sbin
-	${INSTALL_BIN} ${WRKINST}/usr/sbin/iptables-{save,restore} \
+	${CP} ${WRKINST}/usr/sbin/iptables ${IDIR_IPTABLES}/usr/sbin
+	${CP} ${WRKINST}/usr/sbin/ip6tables ${IDIR_IPTABLES}/usr/sbin
+	${CP} ${WRKINST}/usr/sbin/iptables-{save,restore} \
 		 ${IDIR_IPTABLES}/usr/sbin
 	${CP} ${WRKINST}/usr/sbin/xtables-multi ${IDIR_IPTABLES}/usr/sbin
 	${CP} ${WRKINST}/usr/lib/libiptc.so* ${IDIR_IPTABLES}/usr/lib
