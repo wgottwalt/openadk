@@ -22,7 +22,8 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 TARGET_CFLAGS+=		${TARGET_CPPFLAGS} -fPIC
-CONFIGURE_ARGS+=	--without-uiout \
+CONFIGURE_ARGS+=	--enable-static \
+			--without-uiout \
 			--disable-tui \
 			--disable-gdbtk \
 			--disable-gdbserver \
