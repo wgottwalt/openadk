@@ -72130,3 +72130,15 @@ diff -Nur linux-3.4.113.orig/sound/nds32/Makefile linux-3.4.113/sound/nds32/Make
 +snd-ftssp010-objs := FTSSP010_HDA.o FTSSP010_HDA_lib.o
 +endif
 +obj-$(CONFIG_SND_FTSSP010) += snd-ftssp010.o
+diff -Nur linux-3.4.113.orig/arch/nds32/include/asm/sigcontext.h linux-3.4.113/arch/nds32/include/asm/sigcontext.h
+--- linux-3.4.113.orig/arch/nds32/include/asm/sigcontext.h	2016-12-04 19:56:12.061027027 +0100
++++ linux-3.4.113/arch/nds32/include/asm/sigcontext.h	2016-12-04 19:56:45.122305938 +0100
+@@ -59,7 +59,7 @@
+         unsigned long nds32_r25;
+         unsigned long nds32_fp;	/* $r28 */
+         unsigned long nds32_gp;	/* $r29 */
+-        unsigned long nds32_lr;	/* $r30 */
++        unsigned long nds32_lp;	/* $r30 */
+         unsigned long nds32_sp;	/* $r31 */
+         unsigned long nds32_ipc;
+         unsigned long fault_address;
