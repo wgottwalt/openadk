@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		vim
-PKG_VERSION:=		7.4
+PKG_VERSION:=		8.0
 PKG_RELEASE:=		1
-PKG_HASH:=		d0f5a6d2c439f02d97fa21bd9121f4c5abb1f6cd8b5a79d3ca82867495734ade
+PKG_HASH:=		2e179182814715c3c77010c7300a4abcb964ba8a99a470640f9f2f03884b2ccb
 PKG_DESCR:=		very popular text editor
 PKG_SECTION:=		app/editor
 PKG_DEPENDS:=		libncurses
@@ -15,7 +15,7 @@ PKG_URL:=		http://www.vim.org/
 PKG_SITES:=		ftp://ftp.vim.org/pub/vim/unix/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
-WRKDIST=		${WRKDIR}/vim74
+WRKDIST=		${WRKDIR}/vim80
 WRKSRC=			${WRKDIST}/src
 
 include ${ADK_TOPDIR}/mk/package.mk
@@ -61,7 +61,9 @@ vim-install:
 	${INSTALL_DIR} ${IDIR_VIM}/usr/bin
 	${INSTALL_DIR} ${IDIR_VIM}/usr/share/vim
 	${CP} ${WRKINST}/usr/bin/{ex,vim,view} ${IDIR_VIM}/usr/bin
-	${CP} ${WRKINST}/usr/share/vim/vim74/vimrc_example.vim \
+	${CP} ${WRKINST}/usr/share/vim/vim80/defaults.vim \
+		${IDIR_VIM}/usr/share/vim/
+	${CP} ${WRKINST}/usr/share/vim/vim80/vimrc_example.vim \
 		${IDIR_VIM}/usr/share/vim/vimrc
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
