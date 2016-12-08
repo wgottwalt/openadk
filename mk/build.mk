@@ -348,6 +348,9 @@ defconfig: .menu $(CONFIG)/conf
 	@if [ ! -z "$(ADK_TEST_BASE)" ];then \
 		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 	fi
+	@if [ ! -z "$(ADK_TEST_TOOLCHAIN)" ];then \
+		echo "ADK_PACKAGE_HELLOWORLD=y" >> $(ADK_TOPDIR)/.defconfig; \
+	fi
 	@if [ ! -z "$(ADK_TEST_LTP)" ];then \
 		echo "ADK_PACKAGE_ADKTEST=y" >> $(ADK_TOPDIR)/.defconfig; \
 		echo "ADK_PACKAGE_FILE=y" >> $(ADK_TOPDIR)/.defconfig; \
