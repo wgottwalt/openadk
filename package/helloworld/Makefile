@@ -21,11 +21,31 @@ INSTALL_STYLE:=		manual
 
 do-build:
 	$(TARGET_CC) $(TARGET_CFLAGS) -o $(WRKBUILD)/helloworld $(WRKBUILD)/helloworld.c
+ifeq ($(ADK_TARGET_ARCH_METAG),)
 	$(TARGET_CC) $(TARGET_CFLAGS) -static -o $(WRKBUILD)/helloworld.static $(WRKBUILD)/helloworld.c
+endif
+ifeq ($(ADK_TOOLCHAIN_WITH_CXX),y)
+	$(TARGET_CXX) $(TARGET_CXXFLAGS) -o $(WRKBUILD)/helloworld-cxx $(WRKBUILD)/helloworld.cc
+ifeq ($(ADK_TARGET_ARCH_METAG),)
+	$(TARGET_CXX) $(TARGET_CXXFLAGS) -static -static-libstdc++ -o $(WRKBUILD)/helloworld-cxx.static $(WRKBUILD)/helloworld.cc
+endif
+endif
 
 helloworld-install:
 	$(INSTALL_DIR) $(IDIR_HELLOWORLD)/usr/bin
-	$(INSTALL_BIN) $(WRKBUILD)/helloworld{,.static} \
+	$(INSTALL_BIN) $(WRKBUILD)/helloworld \
 		$(IDIR_HELLOWORLD)/usr/bin
+ifeq ($(ADK_TARGET_ARCH_METAG),)
+	$(INSTALL_BIN) $(WRKBUILD)/helloworld.static \
+		$(IDIR_HELLOWORLD)/usr/bin
+endif
+ifeq ($(ADK_TOOLCHAIN_WITH_CXX),y)
+	$(INSTALL_BIN) $(WRKBUILD)/helloworld-cxx \
+		$(IDIR_HELLOWORLD)/usr/bin
+ifeq ($(ADK_TARGET_ARCH_METAG),)
+	$(INSTALL_BIN) $(WRKBUILD)/helloworld-cxx.static \
+		$(IDIR_HELLOWORLD)/usr/bin
+endif
+endif
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
