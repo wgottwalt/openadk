@@ -11,6 +11,9 @@ matrix:
   include:
   - env: ARCH=arm SYSTEM=beaglebone-black
   - env: ARCH=arm SYSTEM=linksys-nslu2
+  - env: ARCH=arm SYSTEM=raspberry-pi
+  - env: ARCH=arm SYSTEM=raspberry-pi2
+  - env: ARCH=arm SYSTEM=raspberry-pi3
   - env: ARCH=avr32 SYSTEM=atmel-ngw100
   - env: ARCH=avr32 SYSTEM=grasshopper
   - env: ARCH=cris SYSTEM=foxboard-lx832
