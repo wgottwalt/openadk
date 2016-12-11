@@ -5,12 +5,12 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
 PKG_VERSION:=		16.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		7d82c8aff2715c83deecdf10c566e26105bec0473af530a1356d4c747ebdfd10
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		boost python2 libsquish libbluray libressl
-PKG_DEPENDS+=		libass libmpeg2 libmad libdbus libglew mesa
+PKG_DEPENDS+=		libass libmpeg2 libmad libdbus libglew mesa libxshmfence
 PKG_DEPENDS+=		libjpeg-turbo libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libbz2 libtiff liblzo libnettle librtmp
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libpng libncurses
@@ -27,7 +27,7 @@ PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug libgtk2
 PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis libbluray
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
 PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish libdcadec
-PKG_BUILDDEP+=		libcrossguid libressl
+PKG_BUILDDEP+=		libcrossguid libressl libxshmfence
 PKG_NEEDS:=		threads c++
 PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		https://github.com/xbmc/xbmc/archive/
