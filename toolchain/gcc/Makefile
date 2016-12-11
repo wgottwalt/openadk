@@ -140,6 +140,10 @@ GCC_CONFOPTS+=		--with-endian=little
 else
 GCC_CONFOPTS+=          --with-endian=big
 endif
+ifeq ($(ADK_TARGET_CPU_SH_J2),y)
+GCC_CONFOPTS+=          --enable-fdpic
+GCC_FINAL_CONFOPTS+=	--with-multilib-list=mj2
+endif
 ifeq ($(ADK_TARGET_CPU_SH_SH2),y)
 GCC_FINAL_CONFOPTS+=	--with-multilib-list=m2
 endif
@@ -229,6 +233,9 @@ endif
 	(cd $(TOOLCHAIN_DIR)/usr/$(GNU_TARGET_NAME); \
 		ln -s ../$(STAGING_HOST2TARGET)/usr/lib lib)
 ifeq ($(ADK_TARGET_ARCH_SH),y)
+ifeq ($(ADK_TARGET_CPU_SH_J2),y)
+	(cd ${STAGING_TARGET_DIR}/ && ln -sf . mj2)
+endif
 ifeq ($(ADK_TARGET_CPU_SH_SH3),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m3)
 endif

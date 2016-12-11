@@ -258,11 +258,13 @@ config ADK_KERNEL_SERIAL_OMAP
 config ADK_KERNEL_SERIAL_UARTLITE
 	bool "uartlite serial driver"
 	select ADK_KERNEL_SERIAL_UARTLITE_CONSOLE
-	depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE_S3ADSP1800
+	depends on ADK_TARGET_SYSTEM_QEMU_MICROBLAZE_S3ADSP1800 \
+		|| ADK_TARGET_SYSTEM_NUMATO_MIMASV2
 	default y if ADK_TARGET_SYSTEM_QEMU_MICROBLAZE_S3ADSP1800
+	default y if ADK_TARGET_SYSTEM_NUMATO_MIMASV2
 	default n
 	help
-	  Serial driver for Microblaze S3ADSP1800
+	  Serial driver for UART lite hardware.
 
 config ADK_KERNEL_SERIAL_ATMEL
 	bool "AT32 serial driver"

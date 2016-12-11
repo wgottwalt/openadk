@@ -49,6 +49,13 @@ endif
 ifeq ($(ADK_TARGET_CPU_ARCH),ppc64le)
 MARCH:=			powerpc64le
 endif
+ifeq ($(ADK_TARGET_CPU_ARCH),sh2eb)
+ifeq ($(ADK_TARGET_BINFMT_FDPIC),y)
+MARCH:=			sheb-nofpu-fdpic
+else
+MARCH:=			sheb-nofpu
+endif
+endif
 ifeq ($(ADK_TARGET_CPU_ARCH),sh4)
 MARCH:=			sh
 endif

@@ -23,6 +23,10 @@ config ADK_HOST_BUILD_BISON
 	bool
 	default y
 
+config ADK_HOST_BUILD_DTC
+	bool
+	default n
+
 config ADK_HOST_BUILD_FAKEROOT
 	bool
 	default n

@@ -67,6 +67,12 @@ endif
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
 
+dtb-install:
+ifeq ($(ADK_TARGET_SYSTEM_NUMATO_MIMASV2),y)
+	PATH='$(HOST_PATH)' dtc -O dtb -o $(FW_DIR)/dt.dtb \
+		$(LINUX_DIR)/arch/sh/boot/dts/j2_mimas_v2.dts
+endif
+
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
@@ -78,5 +84,5 @@ ifeq ($(ADK_TARGET_FS),initramfsarchive)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
-imageinstall: createinitramfs targethelp
+imageinstall: dtb-install createinitramfs targethelp
 endif
