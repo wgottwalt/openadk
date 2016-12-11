@@ -30,10 +30,6 @@ ifeq ($(ADK_TARGET_LIBICONV),y)
 COMPILE_ICONV:=libiconv-compile
 INSTALL_ICONV:=libiconv-install
 endif
-ifeq ($(ADK_TARGET_LIBICONV_TINY),y)
-COMPILE_ICONV:=libiconv-tiny-compile
-INSTALL_ICONV:=libiconv-tiny-install
-endif
 
 all: compile
 download: $(patsubst %,%-download,$(package-y))
