@@ -6,7 +6,7 @@ notifications:
     on_success: always
     on_failure: always
 git:
-  depth: 2
+  depth: 3
 matrix:
   include:
   - env: ARCH=arm SYSTEM=beaglebone-black
@@ -29,4 +29,4 @@ matrix:
   - env: ARCH=x86_64 SYSTEM=pcengines-apu
   - env: ARCH=x86_64 SYSTEM=asus-p5bvm
   - env: ARCH=xtensa SYSTEM=xilinx-kintex7
-script: travis_wait 60 ./scripts/travis.sh $ARCH $SYSTEM $ENDIAN
+script: travis_wait 120 ./scripts/travis.sh $ARCH $SYSTEM $ENDIAN
