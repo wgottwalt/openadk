@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		freeradius-server
-PKG_VERSION:=		3.0.11
+PKG_VERSION:=		3.0.12
 PKG_RELEASE:=		1
-PKG_HASH:=		b97b72915315f2dcd34001af2c1737947f91ad9104a40408b92b030356e25d59
+PKG_HASH:=		4a5af6efcf7fef08ea9bb02979200131e1332a48341c529da73bea76d3b25da0
 PKG_DESCR:=		flexible radius server
 PKG_SECTION:=		net/radius
 PKG_DEPENDS:=		libltdl libpcre libtalloc libressl
