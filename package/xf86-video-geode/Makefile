@@ -14,6 +14,8 @@ PKG_BUILDDEP:=		xorg-server
 PKG_NEEDS:=		c++
 PKG_SITES:=		http://www.x.org/releases/individual/driver/
 
+PKG_ARCH_DEPENDS:=	x86 x86_64
+
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
