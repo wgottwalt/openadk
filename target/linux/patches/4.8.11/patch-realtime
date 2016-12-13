@@ -284,25 +284,6 @@ index 000000000000..6f2aeabf7faa
 +is provided.
 +
 +These data are also reset when the wakeup histogram is reset.
-diff --git a/Makefile b/Makefile
-index b249529204cd..5d699d055995 100644
---- a/Makefile
-+++ b/Makefile
-@@ -398,12 +398,12 @@ KBUILD_CPPFLAGS := -D__KERNEL__
- KBUILD_CFLAGS   := -Wall -Wundef -Wstrict-prototypes -Wno-trigraphs \
- 		   -fno-strict-aliasing -fno-common \
- 		   -Werror-implicit-function-declaration \
--		   -Wno-format-security \
-+		   -Wno-format-security -fno-PIE \
- 		   -std=gnu89
- 
- KBUILD_AFLAGS_KERNEL :=
- KBUILD_CFLAGS_KERNEL :=
--KBUILD_AFLAGS   := -D__ASSEMBLY__
-+KBUILD_AFLAGS   := -D__ASSEMBLY__ -fno-PIE
- KBUILD_AFLAGS_MODULE  := -DMODULE
- KBUILD_CFLAGS_MODULE  := -DMODULE
- KBUILD_LDFLAGS_MODULE := -T $(srctree)/scripts/module-common.lds
 diff --git a/arch/Kconfig b/arch/Kconfig
 index fd6e9712af81..085134ee13e9 100644
 --- a/arch/Kconfig
