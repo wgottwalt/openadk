@@ -310,6 +310,7 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		all
+ifeq ($(ADK_TARGET_ARCH_LM32),)
 	PATH='$(HOST_PATH)' $(MAKE) $(UCLIBC_MAKEOPTS) -C $(WRKBUILD) \
 		ARCH="$(ADK_TARGET_ARCH)" \
 		CROSS_COMPILE="$(TARGET_CROSS)" \
@@ -321,6 +322,7 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		utils
+endif
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
@@ -346,6 +348,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		install_runtime
+ifeq ($(ADK_TARGET_ARCH_LM32),)
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		ARCH="$(ADK_TARGET_ARCH)" \
 		CROSS_COMPILE="$(TARGET_CROSS)" \
@@ -357,6 +360,7 @@ $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		VERBOSE=1 \
 		install_utils
+endif
 	touch $@
 
 include ${ADK_TOPDIR}/mk/toolchain.mk
