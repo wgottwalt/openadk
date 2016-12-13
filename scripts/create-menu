@@ -90,7 +90,7 @@ for arch in $(cat $topdir/target/arch.lst);do
 	printf "config ADK_TARGET_ARCH_$ARCH\n" >> $topdir/target/config/Config.in.arch.choice
 	printf "\tbool \"$arch\"\n" >> $topdir/target/config/Config.in.arch.choice
 	case $arch in
-		alpha|ia64|sh|s390|tile|ppc64|mips64)
+		alpha|sh|s390|tile|ppc64|mips64)
 		  printf "\tdepends on ADK_TARGET_OS_LINUX\n" >> $topdir/target/config/Config.in.arch.choice
 		  ;;
 		cr16|epiphany|m32r|mn10300|moxie|msp430|rx|v850)
