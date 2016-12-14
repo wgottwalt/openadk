@@ -15,17 +15,3 @@ PKG_HASH:=		97e447c7ee2a7f613186ec54a93054fe15469fe34d7d323080f7ef38f5ecb0fa
 PKG_SITES:=		http://www.musl-libc.org/releases/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 endif
-ifeq ($(ADK_TARGET_LIB_MUSL_1_1_14),y)
-PKG_VERSION:=		1.1.14
-PKG_RELEASE:=		1
-PKG_HASH:=		35f6c00c84a6091bd5dab29eedde7508dae755ead92dcc0239f3677d1055b9b5
-PKG_SITES:=		http://www.musl-libc.org/releases/
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-endif
-ifeq ($(ADK_TARGET_LIB_MUSL_1_1_13),y)
-PKG_VERSION:=		1.1.13
-PKG_RELEASE:=		1
-PKG_HASH:=		bbacdc64f557d0c4857f7d2daf592c32c29aec1babbb94fcf01a2e05bed15013
-PKG_SITES:=		http://www.musl-libc.org/releases/
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-endif
