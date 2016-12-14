@@ -986,6 +986,10 @@ config ADK_TARGET_CPU_S390_Z900
 	depends on ADK_TARGET_ARCH_S390
 
 # sh
+config ADK_TARGET_CPU_SH_SH
+	bool "sh"
+	depends on ADK_TARGET_ARCH_SH
+
 config ADK_TARGET_CPU_SH_J2
 	bool "j2"
 	select ADK_TARGET_SUPPORTS_THREADS
@@ -1937,6 +1941,7 @@ config ADK_TARGET_CPU_TYPE
 	default "fsf" if ADK_TARGET_CPU_XTENSA_FSF
 	default "crisv10" if ADK_TARGET_CPU_CRIS_CRISV10
 	default "crisv32" if ADK_TARGET_CPU_CRIS_CRISV32
+	default "sh" if ADK_TARGET_CPU_SH_SH
 	default "j2" if ADK_TARGET_CPU_SH_J2
 	default "sh2" if ADK_TARGET_CPU_SH_SH2
 	default "sh2a" if ADK_TARGET_CPU_SH_SH2A
@@ -1993,6 +1998,7 @@ config ADK_TARGET_CPU_ARCH
 	default "ppc64" if ADK_TARGET_ARCH_PPC64 && ADK_TARGET_BIG_ENDIAN
 	default "rx" if ADK_TARGET_ARCH_RX
 	default "s390x" if ADK_TARGET_ARCH_S390
+	default "sh" if ADK_TARGET_CPU_SH_SH && ADK_TARGET_LITTLE_ENDIAN
 	default "sh2" if ADK_TARGET_CPU_SH_SH2 && ADK_TARGET_LITTLE_ENDIAN
 	default "sh2eb" if ADK_TARGET_CPU_SH_SH2 && ADK_TARGET_BIG_ENDIAN
 	default "sh2eb" if ADK_TARGET_CPU_SH_J2 && ADK_TARGET_BIG_ENDIAN
