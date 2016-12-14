@@ -68,7 +68,7 @@ GCC_FINAL_CONFOPTS:=	--disable-tls --disable-threads --disable-libatomic
 GCC_TLS_CONFOPTS:=	--disable-tls
 endif
 
-ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS_ONLY)$(ADK_TARGET_BINFMT_DSBT),y)
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 GCC_FINAL_CONFOPTS+=	--disable-shared
 else
 GCC_FINAL_CONFOPTS+=	--enable-shared --enable-cxx-flags='-fPIC'
@@ -141,7 +141,9 @@ else
 GCC_CONFOPTS+=          --with-endian=big
 endif
 ifeq ($(ADK_TARGET_CPU_SH_J2),y)
+ifeq ($(ADK_TARGET_BINFMT_FDPIC),y)
 GCC_CONFOPTS+=          --enable-fdpic
+endif
 GCC_FINAL_CONFOPTS+=	--with-multilib-list=mj2
 endif
 ifeq ($(ADK_TARGET_CPU_SH_SH2),y)

@@ -210,7 +210,7 @@ ifeq ($(ADK_TARGET_CPU_SH_SH3),y)
 	$(SED) 's/.*\(CONFIG_SH4A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH3\).*/\1=y/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_TARGET_CPU_SH_SH2),y)
+ifeq ($(ADK_TARGET_CPU_SH_SH2)$(ADK_TARGET_CPU_SH_J2),y)
 	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH2A\).*/# \1 is not set/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(CONFIG_SH3\).*/# \1 is not set/' ${WRKBUILD}/.config
