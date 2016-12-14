@@ -19,8 +19,6 @@ source "target/config/Config.in.boards"
 source "target/config/Config.in.kernelfmt"
 source "target/config/Config.in.arch"
 source "target/config/Config.in.endian"
-
-
 source "target/config/Config.in.system"
 source "target/config/Config.in.systemopts"
 source "target/config/Config.in.subsystem"
@@ -45,6 +43,7 @@ source "target/config/Config.in.runtime"
 endmenu
 
 menu "Linux Kernel configuration"
+	visible if ADK_TARGET_OS_LINUX
 source "target/config/Config.in.kernelversion"
 source "target/config/Config.in.kernelcfg"
 source "target/config/Config.in.kernelcmd"
