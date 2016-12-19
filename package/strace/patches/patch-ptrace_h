@@ -1,6 +1,6 @@
---- strace-4.11.orig/ptrace.h	2015-12-17 18:56:48.000000000 +0100
-+++ strace-4.11/ptrace.h	2016-04-29 17:47:49.000000000 +0200
-@@ -52,7 +52,13 @@ extern long ptrace(int, int, char *, lon
+--- strace-4.15.orig/ptrace.h	2016-08-30 02:48:36.000000000 +0200
++++ strace-4.15/ptrace.h	2016-12-18 23:14:42.295800537 +0100
+@@ -55,7 +55,13 @@ extern long ptrace(int, int, char *, lon
  # define ptrace_peeksiginfo_args XXX_ptrace_peeksiginfo_args
  #endif
  

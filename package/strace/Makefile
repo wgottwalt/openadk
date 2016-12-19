@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		strace
-PKG_VERSION:=		4.13
+PKG_VERSION:=		4.15
 PKG_RELEASE:=		1
-PKG_HASH:=		d48f732576c91ece36a5843d63f9be054c40ef59f1e4773986042636861625d7
+PKG_HASH:=		c0cdc094d6141fd9dbf6aaad605142d651ae10998b660fda57fc61f7ad583ca9
 PKG_DESCR:=		system call trace program
 PKG_SECTION:=		app/debug
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}

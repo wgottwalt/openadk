@@ -1,5 +1,5 @@
---- strace-4.13.orig/configure.ac	2016-07-19 19:45:06.000000000 +0200
-+++ strace-4.13/configure.ac	2016-08-10 21:09:35.122907482 +0200
+--- strace-4.15.orig/configure.ac	2016-12-07 11:59:52.000000000 +0100
++++ strace-4.15/configure.ac	2016-12-18 23:14:42.263798471 +0100
 @@ -31,7 +31,7 @@
  
  AC_PREREQ(2.57)
@@ -9,7 +9,7 @@
  	[strace-devel@lists.sourceforge.net])
  AC_CONFIG_SRCDIR([strace.c])
  AC_CONFIG_AUX_DIR([.])
-@@ -205,20 +205,20 @@ AC_SUBST(arch_mx32)
+@@ -212,20 +212,20 @@ MIPS_ABI=
  if test "$arch" = mips; then
  	AC_CACHE_CHECK([for _MIPS_SIM], [st_cv__MIPS_SIM],
  		       [AC_COMPUTE_INT([st_cv__MIPS_SIM], [_MIPS_SIM],
