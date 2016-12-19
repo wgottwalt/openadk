@@ -203,6 +203,7 @@ createinitramfs: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
 		echo '# CONFIG_CRC32_SARWATE is not set'; \
 		echo 'CONFIG_INITRAMFS_ROOT_UID=0'; \
 		echo 'CONFIG_INITRAMFS_ROOT_GID=0'; \
+		echo 'CONFIG_INITRAMFS_IS_LARGE=n'; \
 	) >> ${LINUX_DIR}/.config
 ifeq ($(ADK_KERNEL_COMP_XZ),y)
 		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
