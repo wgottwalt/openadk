@@ -4,11 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sudo
-PKG_VERSION:=		1.8.15
+PKG_VERSION:=		1.8.19p1
 PKG_RELEASE:=		1
-PKG_HASH:=		4316381708324da8b6cb151f655c1a11855207c7c02244d8ffdea5104d7cc308
+PKG_HASH:=		b8afb1cf8736b6c61f171f2bf4b174818d9e00e92ef73da55fabcd01286ffc92
 PKG_DESCR:=		su do
 PKG_SECTION:=		sys/misc
+PKG_NEEDS:=		mmu
 PKG_URL:=		http://www.sudo.ws/sudo/
 PKG_SITES:=		http://www.sudo.ws/sudo/dist/
 
