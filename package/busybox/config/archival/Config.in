@@ -91,6 +91,12 @@ config BUSYBOX_BUNZIP2
 	  Unless you have a specific application which requires bunzip2, you
 	  should probably say N here.
 
+config BUSYBOX_BZCAT
+	bool "bzcat"
+	default y
+	help
+	  Alias to "bunzip2 -c".
+
 config BUSYBOX_BZIP2
 	bool "bzip2"
 	depends on !BUSYBOX_DISABLE_BZIP2
@@ -176,6 +182,12 @@ config BUSYBOX_GUNZIP
 	  You can use the `-t' option to test the integrity of
 	  an archive, without decompressing it.
 
+config BUSYBOX_ZCAT
+	bool "zcat"
+	default y
+	help
+	  Alias to "gunzip -c".
+
 config BUSYBOX_FEATURE_GUNZIP_LONG_OPTIONS
 	bool "Enable long options"
 	default y
@@ -214,6 +226,18 @@ config BUSYBOX_LZOP
 	default n
 	help
 	  Lzop compression/decompresion.
+
+config BUSYBOX_UNLZOP
+	bool "unlzop"
+	default n
+	help
+	  Lzop decompresion.
+
+config BUSYBOX_LZOPCAT
+	bool "lzopcat"
+	default n
+	help
+	  Alias to "unlzop -c".
 
 config BUSYBOX_LZOP_COMPR_HIGH
 	bool "lzop compression levels 7,8,9 (not very useful)"
@@ -377,15 +401,26 @@ config BUSYBOX_UNLZMA
 config BUSYBOX_FEATURE_LZMA_FAST
 	bool "Optimize unlzma for speed"
 	default n
-	depends on BUSYBOX_UNLZMA
+	depends on BUSYBOX_UNLZMA || BUSYBOX_LZCAT || BUSYBOX_LZMA
 	help
 	  This option reduces decompression time by about 25% at the cost of
 	  a 1K bigger binary.
 
+config BUSYBOX_LZCAT
+	bool "lzcat"
+	default n
+	help
+	  unlzma is a compression utility using the Lempel-Ziv-Markov chain
+	  compression algorithm, and range coding. Compression
+	  is generally considerably better than that achieved by the bzip2
+	  compressors.
+
+	  The BusyBox unlzma applet is limited to decompression only.
+	  On an x86 system, this applet adds about 4K.
+
 config BUSYBOX_LZMA
 	bool "Provide lzma alias which supports only unpacking"
 	default n
-	depends on BUSYBOX_UNLZMA
 	help
 	  Enable this option if you want commands like "lzma -d" to work.
 	  IOW: you'll get lzma applet, but it will always require -d option.
@@ -397,11 +432,16 @@ config BUSYBOX_UNXZ
 	help
 	  unxz is a unlzma successor.
 
+config BUSYBOX_XZCAT
+	bool "xzcat"
+	default n
+	help
+	  Alias to "unxz -c".
+
 config BUSYBOX_XZ
 	bool "Provide xz alias which supports only unpacking"
 	depends on !BUSYBOX_DISABLE_XZ
 	default n
-	depends on BUSYBOX_UNXZ
 	help
 	  Enable this option if you want commands like "xz -d" to work.
 	  IOW: you'll get xz applet, but it will always require -d option.

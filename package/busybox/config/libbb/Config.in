@@ -39,15 +39,6 @@ config BUSYBOX_FEATURE_USE_BSS_TAIL
 	        appletlib.c:(.text.main+0xd): undefined reference to '_end'
 	  disable this option.
 
-config BUSYBOX_FEATURE_SYSTEMD
-	bool "Enable systemd support"
-	default n
-	help
-	  If you plan to use busybox daemons on a system where daemons
-	  are controlled by systemd, enable this option.
-	  If you don't use systemd, it is still safe to enable it,
-	  but the downside is increased code size.
-
 config BUSYBOX_FEATURE_RTMINMAX
 	bool "Support RTMIN[+n] and RTMAX[-n] signal names"
 	default y

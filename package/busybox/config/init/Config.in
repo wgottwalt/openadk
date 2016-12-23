@@ -46,10 +46,22 @@ config BUSYBOX_FEATURE_BOOTCHARTD_CONFIG_FILE
 	  and /etc/bootchartd.conf files.
 
 config BUSYBOX_HALT
-	bool "poweroff, halt, and reboot"
+	bool "halt"
 	default y
 	help
 	  Stop all processes and either halt, reboot, or power off the system.
+
+config BUSYBOX_POWEROFF
+	bool "poweroff"
+	default y
+	help
+	  Stop all processes and power off the system.
+
+config BUSYBOX_REBOOT
+	bool "reboot"
+	default y
+	help
+	  Stop all processes and reboot the system.
 
 config BUSYBOX_FEATURE_CALL_TELINIT
 	bool "Call telinit on shutdown and reboot"
@@ -153,17 +165,6 @@ config BUSYBOX_FEATURE_INIT_COREDUMPS
 	  exists, then init will call setrlimit() to allow unlimited
 	  core file sizes. If this option is disabled, processes
 	  will not generate any core files.
-
-config BUSYBOX_FEATURE_INITRD
-	bool "Support running init from within an initrd (not initramfs)"
-	default n
-	depends on BUSYBOX_INIT
-	help
-	  Legacy support for running init under the old-style initrd. Allows
-	  the name linuxrc to act as init, and it doesn't assume init is PID 1.
-
-	  This does not apply to initramfs, which runs /init as PID 1 and
-	  requires no special support.
 
 config BUSYBOX_INIT_TERMINAL_TYPE
 	string "Initial terminal type"

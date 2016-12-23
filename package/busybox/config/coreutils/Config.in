@@ -94,6 +94,18 @@ config BUSYBOX_TEST
 	  returning an appropriate exit code. The bash shell
 	  has test built in, ash can build it in optionally.
 
+config BUSYBOX_TEST1
+	bool "test as ["
+	default y
+	help
+	  Provide test command in the "[ EXPR ]" form
+
+config BUSYBOX_TEST2
+	bool "test as [["
+	default y
+	help
+	  Provide test command in the "[[ EXPR ]]" form
+
 config BUSYBOX_FEATURE_TEST_64
 	bool "Extend test to 64 bit"
 	default y
@@ -333,16 +345,15 @@ config BUSYBOX_DIRNAME
 	  a file name.
 
 config BUSYBOX_DOS2UNIX
-	bool "dos2unix/unix2dos"
+	bool "dos2unix"
 	default n
 	help
 	  dos2unix is used to convert a text file from DOS format to
 	  UNIX format, and vice versa.
 
 config BUSYBOX_UNIX2DOS
-	bool
+	bool "unix2dos"
 	default n
-	depends on BUSYBOX_DOS2UNIX
 	help
 	  unix2dos is used to convert a text file from UNIX format to
 	  DOS format, and vice versa.
