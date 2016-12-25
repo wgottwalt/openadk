@@ -306,6 +306,7 @@ endif
 
 SED:=			PATH='${HOST_PATH}' sed -i -e
 XZ:=			PATH='${HOST_PATH}' xz
+CPIO:=			PATH='${HOST_PATH}' cpio
 LINUX_DIR:=		$(BUILD_DIR)/linux
 KERNEL_MODULE_FLAGS:=	ARCH=${ADK_TARGET_ARCH} \
 			PREFIX=/usr \

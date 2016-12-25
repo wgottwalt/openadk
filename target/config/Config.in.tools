@@ -1,8 +1,4 @@
 # always required from OpenADK
-config ADK_HOST_BUILD_HEIRLOOM_CPIO
-	bool
-	default y
-
 config ADK_HOST_BUILD_ADK_HELPER
 	bool
 	default y
@@ -72,6 +68,10 @@ config ADK_HOST_BUILD_BZIP2
 config ADK_HOST_BUILD_CMAKE
 	bool
 	default y if ADK_BUILD_COMPILER_LLVM
+	default n
+
+config ADK_HOST_BUILD_CPIO
+	bool
 	default n
 
 config ADK_HOST_BUILD_FILE

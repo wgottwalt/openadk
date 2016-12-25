@@ -575,6 +575,15 @@ else
   host_build_sed=1
 fi
 
+printf " --->  checking if cpio is installed.. "
+host_build_cpio=0
+if ! which cpio >/dev/null 2>&1; then
+  printf "not found\n"
+  host_build_cpio=1
+else
+  printf "found\n"
+fi
+
 printf " --->  checking if xz is installed.. "
 host_build_xz=0
 if ! which xz >/dev/null 2>&1; then
@@ -667,6 +676,9 @@ if [ $host_build_sed -eq 1 ]; then
 fi
 if [ $host_build_tar -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_TAR" >> $topdir/target/config/Config.in.prereq
+fi
+if [ $host_build_cpio -eq 1 ]; then
+  printf "\t%s\n" "select ADK_HOST_BUILD_CPIO" >> $topdir/target/config/Config.in.prereq
 fi
 if [ $host_build_xz -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_XZ" >> $topdir/target/config/Config.in.prereq
