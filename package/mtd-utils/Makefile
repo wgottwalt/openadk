@@ -4,18 +4,17 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mtd-utils
-PKG_VERSION:=		1.5.2
+PKG_VERSION:=		2.0.0
 PKG_RELEASE:=		1
-PKG_HASH:=		e76c379fdd77818686a221b9642b12540e6060285aa58d6f7d016774c24d5503
+PKG_HASH:=		20a377aa86af4c102e930b0d0bb9859e3a10aeb16445f6a1273989b206a717c8
 PKG_DESCR:=		flash filesystem utilities
 PKG_SECTION:=		sys/fs
 PKG_BUILDDEP:=		zlib
 HOST_BUILDDEP:=		liblzo-host
 PKG_URL:=		http://www.linux-mtd.infradead.org
-PKG_SITES:=		http://git.infradead.org/mtd-utils.git/snapshot/
+PKG_SITES:=		ftp://ftp.infradead.org/pub/mtd-utils/
 
-DISTFILES:=             ca39eb1d98e736109c64ff9c1aa2a6ecca222d8f.tar.gz
-WRKDIST=		${WRKDIR}/mtd-utils-ca39eb1
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 PKG_SUBPKGS:=		MTD_UTILS NANDWRITE NANDDUMP NANDTEST FLASH_ERASE FLASH_OTP_INFO FLASH_OTP_DUMP FLASH_LOCK
 PKGSD_NANDWRITE:=	mtd-utils nandwrite utility
@@ -60,7 +59,6 @@ mtd-utils-hostinstall:
 	${INSTALL_BIN} ${WRKBUILD}/mkfs.jffs2 \
 		${STAGING_HOST_DIR}/usr/bin
 
-CONFIG_STYLE:=		manual
 XAKE_FLAGS+=		WITHOUT_XATTR=1
 ifneq (${ADK_PACKAGE_MTD_UTILS_WITH_LZO},y)
 XAKE_FLAGS+=		WITHOUT_LZO=1
