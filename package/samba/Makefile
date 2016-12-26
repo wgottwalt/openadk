@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		4.5.1
+PKG_VERSION:=		4.5.3
 PKG_RELEASE:=		1
-PKG_HASH:=		b0a703e069677ff3182e5da3a91e018db344e3b54e0a43ed43dbfd8eb7d3f085
+PKG_HASH:=		f06dc454a1bb72b21a329e1ad75a14795886401671ec7439d69a6b824c492eca
 PKG_DESCR:=		file and print server
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		libuuid libpopt libgnutls libtirpc
