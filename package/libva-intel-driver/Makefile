@@ -15,6 +15,8 @@ PKG_URL:=		https://www.freedesktop.org/wiki/Software/vaapi/
 PKG_SITES:=		https://www.freedesktop.org/software/vaapi/releases/libva-intel-driver/
 PKG_OPTS:=		dev
 
+PKG_ARCH_DEPENDS:=	x86 x86_64
+
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 include $(ADK_TOPDIR)/mk/package.mk
