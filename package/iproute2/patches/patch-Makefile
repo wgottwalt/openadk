@@ -1,12 +1,12 @@
---- iproute2-4.1.0.orig/Makefile	2015-06-26 21:28:25.000000000 +0200
-+++ iproute2-4.1.0/Makefile	2015-06-29 20:01:56.000000000 +0200
-@@ -29,16 +29,16 @@ ADDLIB+=ipx_ntop.o ipx_pton.o
+--- iproute2-4.9.0.orig/Makefile	2016-12-13 00:07:42.000000000 +0100
++++ iproute2-4.9.0/Makefile	2016-12-26 01:29:53.041215929 +0100
+@@ -34,16 +34,16 @@ ADDLIB+=ipx_ntop.o ipx_pton.o
  #options for mpls
  ADDLIB+=mpls_ntop.o mpls_pton.o
  
--CC = gcc
+-CC := gcc
 +CC ?= gcc
- HOSTCC = gcc
+ HOSTCC ?= $(CC)
  DEFINES += -D_GNU_SOURCE
  # Turn on transparent support for LFS
  DEFINES += -D_FILE_OFFSET_BITS=64 -D_LARGEFILE_SOURCE -D_LARGEFILE64_SOURCE
@@ -15,8 +15,8 @@
  WFLAGS += -Wmissing-declarations -Wold-style-definition -Wformat=2
  
 -CFLAGS := $(WFLAGS) $(CCOPTS) -I../include $(DEFINES) $(CFLAGS)
-+CFLAGS ?= 
++CFLAGS ?=
 +CFLAGS += $(WFLAGS) -I../include $(DEFINES)
  YACCFLAGS = -d -t -v
  
- SUBDIRS=lib ip tc bridge misc netem genl tipc man
+ SUBDIRS=lib ip tc bridge misc netem genl tipc devlink man
