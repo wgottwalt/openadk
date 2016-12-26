@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		nmap
-PKG_VERSION:=		7.30
+PKG_VERSION:=		7.40
 PKG_RELEASE:=		1
-PKG_HASH:=		ba38a042ec67e315d903d28a4976b74999da94c646667c0c63f31e587d6d8d0f
+PKG_HASH:=		9e14665fffd054554d129d62c13ad95a7b5c7a046daa2290501909e65f4d3188
 PKG_DESCR:=		utility for network exploration or security auditing
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libdnet libpcap libpcre
@@ -29,7 +29,8 @@ CONFIGURE_ARGS+=	--without-openssl \
 			--without-ndiff \
 			--without-liblua \
 			--with-libpcap="${STAGING_TARGET_DIR}/usr" \
-			--with-libpcre="${STAGING_TARGET_DIR}/usr"
+			--with-libpcre="${STAGING_TARGET_DIR}/usr" \
+			--enable-static
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 nmap-install:
