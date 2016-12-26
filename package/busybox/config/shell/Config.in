@@ -384,7 +384,7 @@ config BUSYBOX_FEATURE_SH_EXTRA_QUIET
 config BUSYBOX_FEATURE_SH_STANDALONE
 	bool "Standalone shell"
 	default n
-	depends on (BUSYBOX_HUSH || BUSYBOX_ASH) && BUSYBOX_FEATURE_PREFER_APPLETS
+	depends on (BUSYBOX_HUSH || BUSYBOX_ASH)
 	help
 	  This option causes busybox shells to use busybox applets
 	  in preference to executables in the PATH whenever possible. For
@@ -417,7 +417,7 @@ config BUSYBOX_FEATURE_SH_STANDALONE
 config BUSYBOX_FEATURE_SH_NOFORK
 	bool "Run 'nofork' applets directly"
 	default n
-	depends on (BUSYBOX_HUSH || BUSYBOX_ASH) && BUSYBOX_FEATURE_PREFER_APPLETS
+	depends on (BUSYBOX_HUSH || BUSYBOX_ASH)
 	help
 	  This option causes busybox shells to not execute typical
 	  fork/exec/wait sequence, but call <applet>_main directly,

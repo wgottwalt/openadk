@@ -756,7 +756,7 @@ config BUSYBOX_LINUX64
 
 config BUSYBOX_SWAPON
 	bool "swapon"
-	default y
+	default n
 	select PLATFORM_LINUX
 	help
 	  This option enables the 'swapon' utility.
