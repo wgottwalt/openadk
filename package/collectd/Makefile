@@ -4,18 +4,18 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		collectd
-PKG_VERSION:=		5.5.2
+PKG_VERSION:=		5.7.0
 PKG_RELEASE:=		1
-PKG_HASH:=		8013ae74df2b90ec8a8e7ac5da7638e165199021eca5f423ff8ee19feac649ba
+PKG_HASH:=		25a05fbdc6baad571554342bbac6141928bf95a47fc60ee3b32e46d0c89ef2b2
 PKG_DESCR:=		system statistics collection daemon
 PKG_SECTION:=		sys/misc
 PKG_BUILDDEP:=		libtool
 PKG_DEPENDS:=		libltdl
 PKG_NEEDS:=		threads
 PKG_URL:=		http://collectd.org/
-PKG_SITES:=		http://collectd.org/files/
+PKG_SITES:=		https://storage.googleapis.com/collectd-tarballs/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_FLAVOURS_COLLECTD:=	WITH_CPU WITH_LOAD WITH_MEMORY WITH_PING
 PKG_FLAVOURS_COLLECTD+=	WITH_RRD WITH_NETWORK WITH_UPTIME
@@ -34,22 +34,22 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,COLLECTD,collectd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 ifneq (${ADK_PACKAGE_COLLECTD_WITH_CPU},y)
-DISABLE_CPU:=--disable-cpu
+DISABLE_CPU:=		--disable-cpu
 endif
 ifneq (${ADK_PACKAGE_COLLECTD_WITH_LOAD},y)
-DISABLE_LOAD:=--disable-load
+DISABLE_LOAD:=		--disable-load
 endif
 ifneq (${ADK_PACKAGE_COLLECTD_WITH_MEMORY},y)
-DISABLE_MEMORY:=--disable-memory
+DISABLE_MEMORY:=	--disable-memory
 endif
 ifneq (${ADK_PACKAGE_COLLECTD_WITH_PING},y)
-DISABLE_PING:=--disable-ping
+DISABLE_PING:=		--disable-ping
 endif
 ifneq (${ADK_PACKAGE_COLLECTD_WITH_NETWORK},y)
-DISABLE_NETWORK:=--disable-network
+DISABLE_NETWORK:=	--disable-network
 endif
 ifneq (${ADK_PACKAGE_COLLECTD_WITH_UPTIME},y)
-DISABLE_UPTIME:=--disable-uptime
+DISABLE_UPTIME:=	--disable-uptime
 endif
 
 CONFIGURE_ARGS+=	--disable-aggregation \
@@ -127,7 +127,8 @@ CONFIGURE_ARGS+=	--disable-aggregation \
 			--without-java \
 			--without-python \
 			--without-libiptc \
-			--with-nan-emulation
+			--with-nan-emulation \
+			--disable-werror
 
 XAKE_FLAGS+=		LIBS='-lm -lltdl'
 
