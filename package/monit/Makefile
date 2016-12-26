@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		monit
-PKG_VERSION:=		5.19.0
+PKG_VERSION:=		5.20.0
 PKG_RELEASE:=		1
-PKG_HASH:=		befcd54365502bce4ffd6d1b0c345d5b689c9f7cb3a35a462ba7dcffcf6f62b8
+PKG_HASH:=		ebac395ec50c1ae64d568db1260bc049d0e0e624c00e79d7b1b9a59c2679b98d
 PKG_DESCR:=		utility for system services monitoring
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libressl
