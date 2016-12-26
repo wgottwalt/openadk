@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		9037738953559d1efe04fc5408b6846216cc0138f7f9d32de80b6ec3c35e7daf
 PKG_DESCR:=		utilities to create and check fat filesystems
 PKG_SECTION:=		sys/fs
+PKG_NEEDS:=		iconv
 PKG_URL:=		http://www.daniel-baumann.ch/software/dosfstools/
 PKG_SITES:=		https://github.com/dosfstools/dosfstools/releases/download/v$(PKG_VERSION)/
 
