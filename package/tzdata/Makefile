@@ -41,7 +41,7 @@ tzdata-install:
 	cd ${WRKINST} && for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
 		test -s usr/share/zoneinfo/"$$f" || continue; \
 		echo usr/share/zoneinfo/"$$f" | \
-		${STAGING_HOST_DIR}/usr/bin/cpio -pdu ${IDIR_TZDATA}/; \
+		$(CPIO) --quiet -pdu ${IDIR_TZDATA}/; \
 	done
 	tz=; cd $(IDIR_TZDATA)/usr/share/zoneinfo || exit 1; \
 		for f in UTC ${ADK_RUNTIME_TIMEZONE}; do \
