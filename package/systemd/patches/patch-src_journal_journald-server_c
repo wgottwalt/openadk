@@ -1,6 +1,6 @@
---- systemd-231.orig/src/journal/journald-server.c	2016-07-25 21:49:47.000000000 +0200
-+++ systemd-231/src/journal/journald-server.c	2016-11-25 00:47:51.392883508 +0100
-@@ -1347,7 +1347,7 @@ static int setup_signals(Server *s) {
+--- systemd-232.orig/src/journal/journald-server.c	2016-11-03 18:16:42.000000000 +0100
++++ systemd-232/src/journal/journald-server.c	2016-12-27 18:24:54.072301007 +0100
+@@ -1480,7 +1480,7 @@ static int setup_signals(Server *s) {
  
          assert(s);
  

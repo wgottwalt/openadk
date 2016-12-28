@@ -1,6 +1,6 @@
---- systemd-231.orig/Makefile.am	2016-07-25 21:49:47.000000000 +0200
-+++ systemd-231/Makefile.am	2016-11-24 02:37:14.165088827 +0100
-@@ -312,9 +312,9 @@ install-aliases-hook:
+--- systemd-232.orig/Makefile.am	2016-11-03 18:16:42.000000000 +0100
++++ systemd-232/Makefile.am	2016-12-27 19:28:30.933147951 +0100
+@@ -303,9 +303,9 @@ install-aliases-hook:
  	set -- $(SYSTEM_UNIT_ALIASES) && \
  		dir=$(systemunitdir) && $(install-aliases)
  	set -- $(USER_UNIT_ALIASES) && \
@@ -12,11 +12,10 @@
  
  define install-aliases
  	while [ -n "$$1" ]; do \
-@@ -324,15 +324,6 @@ define install-aliases
- 		shift 2 || exit $$?; \
+@@ -316,15 +316,6 @@ define install-aliases
  	done
  endef
--
+ 
 -define install-relative-aliases
 -	while [ -n "$$1" ]; do \
 -		$(MKDIR_P) `dirname $(DESTDIR)$$dir/$$2` && \
@@ -25,6 +24,47 @@
 -		shift 2 || exit $$?; \
 -	done
 -endef
- 
+-
  install-touch-usr-hook:
  	touch -c $(DESTDIR)/$(prefix)
+ 
+@@ -5014,39 +5005,6 @@ EXTRA_DIST += \
+ 	src/timesync/timesyncd.conf.in
+ 
+ # ------------------------------------------------------------------------------
+-test_nss_SOURCES = \
+-	src/test/test-nss.c
+-
+-test_nss_LDADD = \
+-	libsystemd-internal.la \
+-	libbasic.la \
+-	-ldl
+-
+-manual_tests += \
+-	test-nss
+-
+-# ------------------------------------------------------------------------------
+-libnss_systemd_la_SOURCES = \
+-	src/nss-systemd/nss-systemd.sym \
+-	src/nss-systemd/nss-systemd.c
+-
+-libnss_systemd_la_LDFLAGS = \
+-	$(AM_LDFLAGS) \
+-	-module \
+-	-export-dynamic \
+-	-avoid-version \
+-	-shared \
+-	-shrext .so.2 \
+-	-Wl,--version-script=$(top_srcdir)/src/nss-systemd/nss-systemd.sym
+-
+-libnss_systemd_la_LIBADD = \
+-	libsystemd-internal.la \
+-	libbasic.la
+-
+-rootlib_LTLIBRARIES += \
+-	libnss_systemd.la
+-
+-# ------------------------------------------------------------------------------
+ if HAVE_MYHOSTNAME
+ libnss_myhostname_la_SOURCES = \
+ 	src/nss-myhostname/nss-myhostname.sym \

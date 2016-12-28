@@ -16,8 +16,7 @@ PKG_URL:=		https://wiki.freedesktop.org/www/Software/systemd/
 PKG_SITES:=		https://github.com/systemd/systemd/archive/
 
 PKG_CFLINE_SYSTEMD:=	select BUSYBOX_SULOGIN
-
-PKG_LIBC_DEPENDS:=	glibc
+PKG_LIBC_DEPENDS:=	!musl
 
 DISTFILES:=             v$(PKG_VERSION).tar.gz
 
@@ -70,11 +69,13 @@ CONFIGURE_ARGS+=	--disable-static \
 			--disable-audit \
 			--disable-hwdb \
 			--disable-machined \
+			--disable-myhostname \
+			--disable-resolved \
 			--disable-importd \
+			--disable-sysusers \
 			--enable-randomseed \
 			--enable-timedated \
 			--enable-timesyncd \
-			--enable-sysusers \
 			--enable-tmpfiles \
 			--enable-firstboot
 
@@ -86,7 +87,7 @@ systemd-install:
 	$(INSTALL_DIR) $(IDIR_SYSTEMD)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/*.so* \
 		$(IDIR_SYSTEMD)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/{systemd,sysusers.d,kernel,udev,sysctl.d,tmpfiles.d} \
+	$(CP) $(WRKINST)/usr/lib/{systemd,kernel,udev,sysctl.d,tmpfiles.d} \
 		$(IDIR_SYSTEMD)/usr/lib
 	$(INSTALL_DIR) $(IDIR_SYSTEMD)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/* \
