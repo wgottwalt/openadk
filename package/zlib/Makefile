@@ -22,6 +22,8 @@ CONFIGURE_ENV+=		uname=Linux
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS_ONLY),)
 CONFIGURE_OPTS:=	--shared
+else
+CONFIGURE_OPTS:=	--static
 endif
 
 ALL_TARGET:=		libz.a 
