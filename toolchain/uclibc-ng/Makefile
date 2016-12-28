@@ -94,7 +94,7 @@ ifeq ($(ADK_TARGET_BINFMT_FLAT_SHARED),y)
 endif
 endif
 ifeq ($(ADK_TARGET_LIBC_ICONV),y)
-	$(SED) 's/.*\(UCLIBC_HAS_LOCALE\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_LIBICONV\).*/\1=y/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_RUNTIME_ENABLE_LOCALE),y)
 	$(SED) 's/.*\(UCLIBC_HAS_LOCALE\).*/\1=y/' ${WRKBUILD}/.config
