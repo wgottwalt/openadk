@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openswan
-PKG_VERSION:=		2.6.48
+PKG_VERSION:=		2.6.49
 PKG_RELEASE:=		1
-PKG_HASH:=		b61c8537988d2f723017e96fcc326895166b96a99e7333c7444704cda3db0bc4
+PKG_HASH:=		7bf3e8b9a4125555071334dddce38f40f33308c0d0f2ec4bbd73ca453f72d0d7
 PKG_DESCR:=		ipsec software
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libgmp
