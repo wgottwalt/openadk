@@ -1,6 +1,6 @@
---- rpcbind-0.2.3.orig/src/security.c	2015-04-27 16:07:43.000000000 +0200
-+++ rpcbind-0.2.3/src/security.c	2015-11-29 16:56:17.948705887 +0100
-@@ -20,14 +20,6 @@
+--- rpcbind-0.2.4.orig/src/security.c	2016-11-28 21:47:28.000000000 +0100
++++ rpcbind-0.2.4/src/security.c	2016-12-31 16:11:48.723119783 +0100
+@@ -22,14 +22,6 @@
  /*
   * XXX for special case checks in check_callit.
   */
@@ -15,7 +15,7 @@
  # define MOUNTPROC_MNT	1
  # define MOUNTPROC_UMNT	3
  # define NFS_PROGRAM	100003
-@@ -42,7 +34,6 @@
+@@ -44,7 +36,6 @@
  # define YPPROC_FIRST	4
  # define YPPROC_NEXT	5
  # define YPPROC_ALL	8
@@ -23,7 +23,7 @@
  
  #include "rpcbind.h"
  
-@@ -325,24 +316,9 @@ check_callit(SVCXPRT *xprt, struct r_rmt
+@@ -327,24 +318,9 @@ check_callit(SVCXPRT *xprt, struct r_rmt
  		    args->rmt_proc != MOUNTPROC_UMNT)
  			break;
  		goto deny;
