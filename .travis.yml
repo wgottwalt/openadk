@@ -9,7 +9,6 @@ git:
   depth: 3
 matrix:
   include:
-  - env: ARCH=arm SYSTEM=beaglebone-black
   - env: ARCH=arm SYSTEM=linksys-nslu2
   - env: ARCH=avr32 SYSTEM=atmel-ngw100
   - env: ARCH=avr32 SYSTEM=grasshopper
@@ -20,7 +19,7 @@ matrix:
   - env: ARCH=mips SYSTEM=mikrotik-rb532
   - env: ARCH=mips64 SYSTEM=lemote-yeelong
   - env: ARCH=nds32 SYSTEM=andes-ag101p
-  - env: ARCH=sh SYSTEM=numato-mimasv2
+  - env: ARCH=sh SYSTEM=numato-mimasv2 ENDIAN=big
   - env: ARCH=x86 SYSTEM=ibm-x40
   - env: ARCH=x86 SYSTEM=pcengines-alix
   - env: ARCH=x86_64 SYSTEM=pcengines-apu
