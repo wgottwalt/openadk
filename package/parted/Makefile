@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		parted
 PKG_VERSION:=		3.2
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		858b589c22297cacdf437f3baff6f04b333087521ab274f7ab677cb8c6bb78e4
 PKG_DESCR:=		partition table editor
 PKG_SECTION:=		sys/fs
@@ -18,10 +18,6 @@ PKG_SITES:=		$(MASTER_SITE_GNU:=parted/)
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,PARTED,parted,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
-
-ifeq ($(ADK_TARGET_LIBICONV_TINY),y)
-TARGET_LDFLAGS+=	-liconv
-endif
 
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 CONFIGURE_ARGS+=	--disable-dynamic-loading
