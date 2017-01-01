@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		834ff3c5948b30718343ea57b11cbc3235d7995c6a4f3a5cecec8c8114164f94
 PKG_DESCR:=		remote programm debugger utility
 PKG_SECTION:=		app/debug
+PKG_NEEDS:=		c++
 PKG_SITES:=		${MASTER_SITE_GNU:=gdb/}
 PKG_DEPENDS:=		libthread-db
 
