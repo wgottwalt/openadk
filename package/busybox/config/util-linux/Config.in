@@ -275,6 +275,7 @@ config BUSYBOX_FDFORMAT
 config BUSYBOX_FDISK
 	bool "fdisk"
 	default n
+	depends on !BUSYBOX_DISABLE_FDISK
 	select BUSYBOX_PLATFORM_LINUX
 	help
 	  The fdisk utility is used to divide hard disks into one or more
