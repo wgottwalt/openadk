@@ -16,15 +16,19 @@ PKG_OPTS:=		dev
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
+include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,LIBUSB,libusb,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBUSB,libusb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 TARGET_CPPFLAGS=	-DTIMESPEC_TO_TIMEVAL=
+HOST_CONFIGURE_ARGS+=	--disable-udev
 CONFIGURE_ARGS+=	--disable-udev
 
 libusb-install:
 	${INSTALL_DIR} ${IDIR_LIBUSB}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libusb*.so* ${IDIR_LIBUSB}/usr/lib
 
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
