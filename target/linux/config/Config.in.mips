@@ -10,6 +10,15 @@ config ADK_KERNEL_CPU_MIPS32_R2
 config ADK_KERNEL_CPU_MIPS32_R6
 	bool
 
+config ADK_KERNEL_CPU_MIPS64_R1
+	bool
+
+config ADK_KERNEL_CPU_MIPS64_R2
+	bool
+
+config ADK_KERNEL_CPU_MIPS64_R6
+	bool
+
 menu "MIPS devices support"
 depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 
