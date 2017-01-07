@@ -13,16 +13,17 @@ PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		git://git.savannah.gnu.org/grub.git
 PKG_NOPARALLEL:=	1
 
-PKG_ARCH_DEPENDS:=	x86 x86_64 mips mips64
+PKG_ARCH_DEPENDS:=	x86 x86_64 mips mips64 ppc ppc64
 
 PKG_SUBPKGS:=		GRUB GRUB_TOOLS
 PKGSD_GRUB_TOOLS:=	grub2 tools
 
-PKG_CHOICES_GRUB:=	PC EFI_X86 EFI_X86_64 ARC
+PKG_CHOICES_GRUB:=	PC EFI_X86 EFI_X86_64 ARC IEEE1275
 PKGCD_PC:=		build for PC BIOS
 PKGCD_EFI_X86:=		build for EFI x86
 PKGCD_EFI_X86_64:=	build for EFI x86_64
 PKGCD_ARC:=		build for MIPS/MIPS64 ARC
+PKGCD_IEEE1275:=	build for OpenFirmware
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -43,6 +44,16 @@ GRUB_DIR=		boot/grub
 GRUB_PREFIX=		(hd0,msdos1)/boot/grub
 GRUB_TARGET=		mips
 GRUB_PLATFORM=		arc
+GRUB_MODULES=		boot linux ext2 fat part_msdos part_gpt normal
+endif
+
+ifeq ($(ADK_PACKAGE_GRUB_IEEE1275),y)
+GRUB_ARCH=		powerpc-ieee1275
+GRUB_IMAGE=		grub.img
+GRUB_DIR=		boot/grub
+GRUB_PREFIX=		(hd0,msdos1)/boot/grub
+GRUB_TARGET=		powerpc
+GRUB_PLATFORM=		ieee1275
 GRUB_MODULES=		boot linux ext2 fat part_msdos part_gpt normal
 endif
 
