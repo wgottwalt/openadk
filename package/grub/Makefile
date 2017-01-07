@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		grub
-PKG_VERSION:=		28511b0da900876151c71b66885b89615c68cfa4
+PKG_VERSION:=		07662af7aed55bcec448bc2a6610de1f0cb62100
 PKG_RELEASE:=		1
 PKG_DESCR:=		multiboot boot loader
 PKG_SECTION:=		base/boot
