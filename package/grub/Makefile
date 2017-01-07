@@ -44,7 +44,7 @@ GRUB_DIR=		boot/grub
 GRUB_PREFIX=		(hd0,msdos1)/boot/grub
 GRUB_TARGET=		mips
 GRUB_PLATFORM=		arc
-GRUB_MODULES=		boot linux ext2 fat part_msdos part_gpt normal
+GRUB_MODULES=		boot linux ext2 part_dvh normal
 endif
 
 ifeq ($(ADK_PACKAGE_GRUB_IEEE1275),y)
