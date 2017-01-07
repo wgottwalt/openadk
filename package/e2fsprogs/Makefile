@@ -83,6 +83,9 @@ MAKE_FLAGS+=		BUILD_CC="$(HOST_CC)" \
 			BUILD_CFLAGS="$(HOST_CFLAGS) $(HOST_CPPFLAGS) -I$(WRKSRC)/lib -I." \
 			BUILD_LDFLAGS="$(HOST_LDFLAGS)"
 
+post-install:
+	$(CP) $(WRKBUILD)/lib/lib*.a $(STAGING_TARGET_DIR)/usr/lib
+
 libe2fs-install:
 	$(INSTALL_DIR) $(IDIR_LIBE2FS)/etc
 	$(INSTALL_DATA) $(WRKBUILD)/misc/mke2fs.conf $(IDIR_LIBE2FS)/etc
