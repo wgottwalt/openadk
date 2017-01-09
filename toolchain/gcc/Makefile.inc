@@ -43,7 +43,7 @@ LIBSTDCXXVER:=		21
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_NDS32),y)
 PKG_VERSION:=		4.9.3-nds32
-PKG_HASH:=		cbc55dac427e44cc56ee01b6b4d5e91ab0a7c79da7d4a4bbd1ebd48e5ce3abd4
+PKG_HASH:=		b628ec1abf03c308b78b1c58d0e8fb90a50e48d195d4a8fc94b80fc1e290a9d5
 PKG_SITES:=		http://distfiles.openadk.org/
 PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz

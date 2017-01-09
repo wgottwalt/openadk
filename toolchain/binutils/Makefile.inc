@@ -33,7 +33,7 @@ endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_NDS32),y)
 PKG_VERSION:=		2.24-nds32
 PKG_RELEASE:=		1
-PKG_HASH:=		e85638296a8608c8f376bfafe61c7c6fc8a9e7c771042ff07acb697d2ea5f2cd
+PKG_HASH:=		ab1c72aeed2d50403bdf67914e60d936279d065943d83d1c19c20462a7b82cda
 PKG_SITES:=		http://distfiles.openadk.org/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
