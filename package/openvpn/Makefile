@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
-PKG_VERSION:=		2.3.11
+PKG_VERSION:=		2.4.0
 PKG_RELEASE:=		1
-PKG_HASH:=		0f5f1ca1dc5743fa166d93dd4ec952f014b5f33bafd88f0ea34b455cae1434a7
+PKG_HASH:=		6f23ba49a1dbeb658f49c7ae17d9ea979de6d92c7357de3d55cd4525e1b2f87e
 PKG_DESCR:=		vpn solution using ssl/tls
 PKG_DEPENDS:=		libressl
 PKG_BUILDDEP:=		libressl
