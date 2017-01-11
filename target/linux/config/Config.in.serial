@@ -55,6 +55,9 @@ config ADK_KERNEL_SERIAL_SUNSU_CONSOLE
 config ADK_KERNEL_DA_CONSOLE
 	bool
 
+config ADK_KERNEL_SERIAL_IP22_ZILOG_CONSOLE
+	bool
+
 config ADK_KERNEL_SERIAL_BFIN_CONSOLE
 	bool
 
@@ -267,6 +270,15 @@ config ADK_KERNEL_SERIAL_UARTLITE
 	default n
 	help
 	  Serial driver for UART lite hardware.
+
+config ADK_KERNEL_SERIAL_IP22_ZILOG
+	bool "SGI IP22 (Indy) serial driver"
+	select ADK_KERNEL_SERIAL_IP22_ZILOG_CONSOLE
+	depends on ADK_TARGET_SYSTEM_SGI_INDY
+	default y if ADK_TARGET_SYSTEM_SGI_INDY
+	default n
+	help
+	  Serial driver for SGI Indy.
 
 config ADK_KERNEL_SERIAL_ATMEL
 	bool "AT32 serial driver"

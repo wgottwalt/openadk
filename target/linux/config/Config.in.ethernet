@@ -41,6 +41,9 @@ config ADK_KERNEL_NET_VENDOR_REALTEK
 config ADK_KERNEL_NET_VENDOR_MARVELL
 	bool
 
+config ADK_KERNEL_NET_VENDOR_SEEQ
+	bool
+
 config ADK_KERNEL_NET_VENDOR_SGI
 	bool
 
@@ -207,6 +210,15 @@ config ADK_KERNEL_SMC91X
 	default n
 	help
  	  SMC91X ethernet driver
+
+config ADK_KERNEL_SGISEEQ
+	tristate "SGISEEQ ethernet driver"
+	select ADK_KERNEL_NET_VENDOR_SEEQ
+	depends on ADK_TARGET_SYSTEM_SGI_INDY
+	default y if ADK_TARGET_SYSTEM_SGI_INDY
+	default n
+	help
+ 	  SGI ethernet driver
 
 config ADK_KERNEL_SMSC911X
 	tristate "SMC911X ethernet driver"
