@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libnettle
-PKG_VERSION:=		3.2
+PKG_VERSION:=		3.3
 PKG_RELEASE:=		1
-PKG_HASH:=		ea4283def236413edab5a4cf9cf32adf540c8df1b9b67641cfc2302fca849d97
+PKG_HASH:=		46942627d5d0ca11720fec18d81fc38f7ef837ea4197c1f630e71ce0d470b11e
 PKG_DESCR:=		crypto library
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgmp
