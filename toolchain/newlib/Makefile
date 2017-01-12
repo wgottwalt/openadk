@@ -11,7 +11,6 @@ $(WRKBUILD)/.configured:
 		CC='' \
 		CFLAGS='' \
 		LDFLAGS='' \
-		have_doc='' \
 		./configure --prefix=/usr \
 		--target=$(GNU_TARGET_NAME) \
 		--enable-newlib-io-long-long \

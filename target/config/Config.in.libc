@@ -151,8 +151,8 @@ config ADK_TARGET_LIB_MUSL_GIT
 	bool "git"
 	depends on ADK_TARGET_LIB_MUSL
 
-config ADK_TARGET_LIB_NEWLIB_2_4_0
-	bool "2.4.0"
+config ADK_TARGET_LIB_NEWLIB_2_5_0
+	bool "2.5.0"
 	depends on ADK_TARGET_LIB_NEWLIB
 
 config ADK_TARGET_LIB_NEWLIB_GIT
