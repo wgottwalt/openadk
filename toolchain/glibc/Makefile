@@ -78,7 +78,7 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	${GLIBC_ENV} $(MAKE) ${GLIBC_MAKEOPTS} asm-CPPFLAGS='$${CFLAGS}' -C $(GLIBC_BUILD_DIR_FINAL) all
+	${GLIBC_ENV} $(MAKE) ${GLIBC_MAKEOPTS} -C $(GLIBC_BUILD_DIR_FINAL) all
 	touch $@
 
 $(WRKBUILD)/.installed:
