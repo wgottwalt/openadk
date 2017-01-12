@@ -52,7 +52,6 @@ GLIBC_ENV:=             PATH='${TARGET_PATH}' \
                         AR="${TARGET_AR}" \
                         RANLIB="${TARGET_RANLIB}" \
                         libc_cv_forced_unwind=yes \
-			libc_cv_cc_with_libunwind=yes \
                         libc_cv_c_cleanup=yes \
                         libc_cv_gnu99_inline=yes \
 			libc_cv_initfini_array=yes
