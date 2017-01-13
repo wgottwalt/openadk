@@ -1,0 +1,97 @@
+diff --git a/bfd/elf32-arc.c b/bfd/elf32-arc.c
+index fba58cb..d99da93 100644
+--- a/bfd/elf32-arc.c
++++ b/bfd/elf32-arc.c
+@@ -70,13 +70,7 @@ name_for_global_symbol (struct elf_link_hash_entry *h)
+ struct dynamic_sections
+ {
+   bfd_boolean	  initialized;
+-  asection *      sgot;
+-  asection *      srelgot;
+-  asection *      sgotplt;
+-  asection *      srelgotplt;
+   asection *      sdyn;
+-  asection *      splt;
+-  asection *      srelplt;
+ };
+ 
+ enum dyn_section_types
+@@ -1578,13 +1572,7 @@ arc_create_dynamic_sections (bfd * abfd, struct bfd_link_info *info)
+   struct dynamic_sections ds =
+     {
+       .initialized = FALSE,
+-      .sgot = NULL,
+-      .srelgot = NULL,
+-      .sgotplt = NULL,
+-      .srelgotplt = NULL,
+       .sdyn = NULL,
+-      .splt = NULL,
+-      .srelplt = NULL
+     };
+ 
+   htab = elf_hash_table (info);
+@@ -1592,7 +1580,7 @@ arc_create_dynamic_sections (bfd * abfd, struct bfd_link_info *info)
+ 
+   /* Create dynamic sections for relocatable executables so that we
+      can copy relocations.  */
+-  if (! htab->dynamic_sections_created && bfd_link_pic (info))
++  if (! htab->dynamic_sections_created)
+     {
+       if (! _bfd_elf_link_create_dynamic_sections (abfd, info))
+ 	BFD_ASSERT (0);
+@@ -1600,18 +1588,6 @@ arc_create_dynamic_sections (bfd * abfd, struct bfd_link_info *info)
+ 
+   dynobj = (elf_hash_table (info))->dynobj;
+ 
+-  if (dynobj)
+-    {
+-      ds.sgot = htab->sgot;
+-      ds.srelgot = htab->srelgot;
+-
+-      ds.sgotplt = bfd_get_section_by_name (dynobj, ".got.plt");
+-      ds.srelgotplt = ds.srelplt;
+-
+-      ds.splt = bfd_get_section_by_name (dynobj, ".plt");
+-      ds.srelplt = bfd_get_section_by_name (dynobj, ".rela.plt");
+-    }
+-
+   if (htab->dynamic_sections_created)
+     {
+       ds.sdyn = bfd_get_section_by_name (dynobj, ".dynamic");
+@@ -1634,10 +1610,20 @@ elf_arc_check_relocs (bfd *			 abfd,
+   const Elf_Internal_Rela *	rel_end;
+   bfd *				dynobj;
+   asection *			sreloc = NULL;
++  struct elf_link_hash_table *	htab = elf_hash_table (info);
+ 
+   if (bfd_link_relocatable (info))
+     return TRUE;
+ 
++  if (htab->dynobj == NULL)
++    htab->dynobj = abfd;
++
++  if (! htab->dynamic_sections_created)
++    {
++      if (! _bfd_elf_link_create_dynamic_sections (abfd, info))
++	return FALSE;
++    }
++
+   dynobj = (elf_hash_table (info))->dynobj;
+   symtab_hdr = &((elf_tdata (abfd))->symtab_hdr);
+   sym_hashes = elf_sym_hashes (abfd);
+@@ -1659,15 +1645,6 @@ elf_arc_check_relocs (bfd *			 abfd,
+ 	}
+       howto = arc_elf_howto (r_type);
+ 
+-      if (dynobj == NULL
+-	  && (is_reloc_for_GOT (howto) == TRUE
+-	      || is_reloc_for_TLS (howto) == TRUE))
+-	{
+-	  dynobj = elf_hash_table (info)->dynobj = abfd;
+-	  if (! _bfd_elf_create_got_section (abfd, info))
+-	    return FALSE;
+-	}
+-
+       /* Load symbol information.  */
+       r_symndx = ELF32_R_SYM (rel->r_info);
+       if (r_symndx < symtab_hdr->sh_info) /* Is a local symbol.  */
