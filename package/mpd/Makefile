@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
 PKG_VERSION:=		0.19.19
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		bc856cda4136403446d53d11576f86990b61d1fe4668f6008e9eae47450d4e1d
 PKG_DESCR:=		music player daemon
 PKG_SECTION:=		mm/audio
@@ -34,8 +34,8 @@ ifeq ($(ADK_PACKAGE_MPD_WITH_AO),y)
 PKG_FDEPENDS+=		libao
 endif
 PKGFD_WITH_JACK:=	enable JACK support
-PKGFS_WITH_AO:=		jack
-PKGFB_WITH_AO:=		jack
+PKGFS_WITH_JACK:=	jack
+PKGFB_WITH_JACK:=	jack
 ifeq ($(ADK_PACKAGE_MPD_WITH_JACK),y)
 PKG_FDEPENDS+=		jack
 endif
