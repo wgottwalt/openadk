@@ -808,7 +808,7 @@ Status: install ok pending" | ipkg_status_update_sd $sd $pkg
 	set -o noglob
 	rm -r $IPKG_TMP/$pkg/control
 
-	if ! $pkg_extract_stdout $filename ./data.tar.gz|gzip -dc|(cd $IPKG_TMP/$pkg/data && $BIN_DIR/cpio -iud -H ustar) ; then
+	if ! $pkg_extract_stdout $filename ./data.tar.gz|gzip -dc|(cd $IPKG_TMP/$pkg/data && cpio --quiet -iud -H ustar) ; then
 		echo "ipkg_install_file: ERROR unpacking data.tar.gz from $filename"
 		return 1
 	fi
@@ -876,7 +876,7 @@ diff -u $dest/$conffile $IPKG_TMP/$pkg/data/$conffile"
 	fi
 
 	local owd="`pwd`"
-	(cd $IPKG_TMP/$pkg/data/; find . | $BIN_DIR/cpio -o -H ustar | (cd $owd; cd $dest; $BIN_DIR/cpio -iud -H ustar))
+	(cd $IPKG_TMP/$pkg/data/; find . | cpio --quiet -o -H ustar | (cd $owd; cd $dest; cpio --quiet -iud -H ustar))
 	rm -rf $IPKG_TMP/$pkg/data
 	rmdir $IPKG_TMP/$pkg
 	rm -f $info_dir/$pkg.list
