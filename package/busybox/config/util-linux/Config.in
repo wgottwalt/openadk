@@ -700,7 +700,7 @@ config BUSYBOX_RDATE
 
 config BUSYBOX_RDEV
 	bool "rdev"
-	default n
+	default y
 	help
 	  Print the device node associated with the filesystem mounted at '/'.
 

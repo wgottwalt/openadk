@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		cfgfs
 PKG_VERSION:=		1.0.10
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_DESCR:=		compressed config filesystem
 PKG_SECTION:=		base/apps
 PKG_URL:=		http://openadk.org/

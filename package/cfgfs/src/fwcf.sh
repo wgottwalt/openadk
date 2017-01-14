@@ -1,7 +1,7 @@
 #!/bin/sh
-# Copyright (c) 2006, 2007
+# Copyright (c) 2006-2007
 #	Thorsten Glaser <tg@mirbsd.de>
-# Copyright (c) 2009, 2010, 2011
+# Copyright (c) 2009-2017
 #	Waldemar Brodkorb <wbx@openadk.org>
 #
 # Provided that these terms and disclaimer and all copyright notices
@@ -18,6 +18,7 @@
 # of dealing in the work, even if advised of the possibility of such
 # damage or existence of a defect, except proven that it results out
 # of said person's immediate fault when using the work as intended.
+
 # Possible return values:
 # 0 - everything ok
 # 1 - syntax error
@@ -42,7 +43,7 @@
 export PATH=/bin:/sbin:/usr/bin:/usr/sbin
 wd=$(pwd)
 cd /
-what='Configuration Filesystem Utility (cfgfs), Version 1.09'
+what='Configuration Filesystem Utility (cfgfs), Version 1.10'
 
 who=$(id -u)
 if [ $who -ne 0 ]; then
@@ -123,7 +124,7 @@ if [ -x /sbin/mtd ];then
 fi
 
 # find backend device, first try to find partition with ID 88
-rootdisk=$(readlink /dev/root)
+rootdisk=$(rdev|cut -f 1 -d\ )
 # strip partitions (f.e. mmcblk0p2, sda2, ..)
 rootdisk=${rootdisk%p*}
 # do not cut 1-9 from mmcblk device names
@@ -131,13 +132,13 @@ echo $rootdisk|grep mmcblk >/dev/null 2>&1
 if [ $? -ne 0 ]; then
   rootdisk=${rootdisk%[1-9]}
 fi
-part=$(fdisk -l /dev/$rootdisk 2>/dev/null|awk '$5 == 88 { print $1 }')
-if [ -f .cfgfs ];then
+part=$(fdisk -l $rootdisk 2>/dev/null|awk '$8 == 88 { print $1 }')
+if [ -f .cfgfs ]; then
   . /.cfgfs
 fi
 if [ -z $part ]; then
 	# fallback to /dev/sda in case of encrypted root
-	part=$(fdisk -l /dev/sda 2>/dev/null|awk '$5 == 88 { print $1 }')
+	part=$(fdisk -l /dev/sda 2>/dev/null|awk '$8 == 88 { print $1 }')
 	if [ -z $part ]; then
 		# otherwise search for MTD device with name cfgfs
 		part=/dev/mtd$(fgrep '"cfgfs"' /proc/mtd 2>/dev/null | sed 's/^mtd\([^:]*\):.*$/\1/')ro
