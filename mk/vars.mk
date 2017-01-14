@@ -301,7 +301,6 @@ ifeq ($(ADK_STATIC_TOOLCHAIN),y)
 HOST_STATIC_CFLAGS:=   -static -Wl,-static
 HOST_STATIC_CXXFLAGS:= -static -Wl,-static
 HOST_STATIC_LDFLAGS:=  -Wl,-static
-HOST_STATIC_LLDFLAGS:= -all-static
 endif
 
 SED:=			PATH='${HOST_PATH}' sed -i -e

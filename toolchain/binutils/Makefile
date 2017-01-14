@@ -38,10 +38,6 @@ ifeq (${ADK_MAKE_PARALLEL},y)
 BINUTILS_MAKEOPTS+=	-j${ADK_MAKE_JOBS}
 endif
 
-ifeq (${ADK_STATIC_TOOLCHAIN},y)
-BINUTILS_STATIC_MAKEOPTS+=LDFLAGS='$(HOST_STATIC_LLDFLAGS)'
-endif
-
 $(WRKBUILD)/.configured:
 ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_$(ADK_TARGET_CPU_TYPE).tar \
@@ -65,7 +61,7 @@ endif
 	touch $@
 
 $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
-	PATH='$(HOST_PATH)' $(MAKE) ${BINUTILS_MAKEOPTS} MAKEINFO=true ${BINUTILS_STATIC_MAKEOPTS} -C $(WRKBUILD) all
+	PATH='$(HOST_PATH)' $(MAKE) ${BINUTILS_MAKEOPTS} MAKEINFO=true -C $(WRKBUILD) all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
