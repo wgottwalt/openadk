@@ -4,11 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libarchive
-PKG_VERSION:=		3.2.1
+PKG_VERSION:=		3.2.2
 PKG_RELEASE:=		1
-PKG_HASH:=		72ee1a4e3fd534525f13a0ba1aa7b05b203d186e0c6072a8a4738649d0b3cfd2
+PKG_HASH:=		691c194ee132d1f0f7a42541f091db811bc2e56f7107e9121be2bc8c04f1060f
 PKG_DESCR:=		multiformat archive and compression library
 PKG_SECTION:=		libs/misc
+PKG_BUILDDEP:=		xz
 PKG_URL:=		http://www.libarchive.org/
 PKG_SITES:=		http://www.libarchive.org/downloads/
 PKG_OPTS:=		dev
