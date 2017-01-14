@@ -3,7 +3,7 @@
 
 # Steps to build toolchains
 # 1) build and install binutils
-# 2) build and install mpfr, mpc, libelf and gmp
+# 2) build and install mpfr, mpc and gmp
 # 3) build and install initial gcc
 # 4) install kernel-headers
 # 5) build and install full libc
@@ -12,7 +12,7 @@
 
 include $(ADK_TOPDIR)/rules.mk
 
-TARGETS:=binutils gmp mpfr mpc libelf
+TARGETS:=binutils gmp mpfr mpc
 
 ifeq ($(ADK_BUILD_COMPILER_GCC),y)
 TARGETS+=gcc
@@ -67,7 +67,7 @@ clean: $(TARGETS_CLEAN)
 download: $(DOWNLOAD)
 final: $(FINAL)
 
-$(COMPILER)-configure: binutils-install gmp-install mpfr-install mpc-install libelf-install
+$(COMPILER)-configure: binutils-install gmp-install mpfr-install mpc-install
 ifeq ($(ADK_TARGET_LIB_NEWLIB),y)
 $(CLIB)-install: $(COMPILER)-configure
 else
