@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.43.2
+PKG_VERSION:=		1.43.3
 PKG_RELEASE:=		1
-PKG_HASH:=		ddba23e44e06cbe32c7b1026bc92f9487b9cb08c89e961d007cb2a5e87c4ef5e
+PKG_HASH:=		744ca4e9a8e6c943601b2744d1ae658e5f37d35b5ea5b1dea86985320bd87f37
 PKG_DESCR:=		ext2/3/4 filesystem utilities
 PKG_SECTION:=		sys/fs
 PKG_BUILDDEP:=		util-linux
@@ -85,6 +85,12 @@ MAKE_FLAGS+=		BUILD_CC="$(HOST_CC)" \
 
 post-install:
 	$(CP) $(WRKBUILD)/lib/lib*.a $(STAGING_TARGET_DIR)/usr/lib
+	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/include/ext2fs
+	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/include/et
+	$(CP) $(WRKBUILD)/lib/ext2fs/*.h \
+		$(STAGING_TARGET_DIR)/usr/include/ext2fs
+	$(CP) $(WRKBUILD)/lib/et/*.h \
+		$(STAGING_TARGET_DIR)/usr/include/et
 
 libe2fs-install:
 	$(INSTALL_DIR) $(IDIR_LIBE2FS)/etc
