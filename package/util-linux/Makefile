@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.29
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		2c59ea67cc7b564104f60532f6e0a95fe17a91acb870ba8fd7e986f273abf9e7
 PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
@@ -26,7 +26,7 @@ PKGSD_LIBMOUNT:=	mount library
 PKGSC_LIBMOUNT:=	libs/misc
 PKGSD_FDISK:=		partition table manipulation utility
 PKGSC_FDISK:=		sys/fs
-PKGSS_FDISK:=		libfdisk
+PKGSS_FDISK:=		libfdisk libblkid libuuid libncurses
 PKGSD_AGETTY:=		getty utility
 PKGSC_AGETTY:=		base/apps
 PKGSS_AGETTY:=		libncurses
