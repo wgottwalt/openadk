@@ -2,13 +2,17 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include ${ADK_TOPDIR}/rules.mk
-include ${ADK_TOPDIR}/toolchain/libelf/Makefile.inc
 
 PKG_NAME:=		libelf
+PKG_VERSION:=		0.8.13
+PKG_RELEASE:=		1
+PKG_HASH:=		591a9b4ec81c1f2042a97aa60564e0cb79d041c52faa7416acb38bc95bd2c76d
 PKG_DESCR:=		elf library
 PKG_SECTION:=		libs/misc
 PKG_SITES:=		http://www.mr511.de/software/
 PKG_OPTS:=		dev
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 include ${ADK_TOPDIR}/mk/package.mk
 
