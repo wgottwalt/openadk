@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gnupg2
-PKG_VERSION:=		2.1.13
+PKG_VERSION:=		2.1.17
 PKG_RELEASE:=		1
-PKG_HASH:=		4f9d83a6221daa60130fa79f0b1d37d6c20fffdd0320b640c7a597c5b6219675
+PKG_HASH:=		c5dc54db432209fa8f9bdb071c8fb60a765ff28e363150e30bdd4543160243cb
 PKG_DESCR:=		gnu privacy guard (modern)
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libreadline libncurses libgcrypt libgpg-error libassuan
@@ -26,18 +26,13 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,GNUPG2,gnupg2,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 $(eval $(call PKG_template,GPGV2,gpgv2,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
-CONFIGURE_ARGS+=	--disable-asm \
-			--disable-dirmngr \
-			--disable-dns-srv \
-			--disable-gnupg-iconv \
+CONFIGURE_ARGS+=	--disable-dirmngr \
+			--disable-gpgsm \
+			--disable-scdaemon \
 			--disable-card-support \
-			--disable-agent-support \
 			--disable-bzip2 \
 			--disable-exec \
 			--disable-ldap \
-			--disable-hkp \
-			--disable-finger \
-			--disable-dns-srv \
 			--disable-rpath \
 			--disable-regex
 
