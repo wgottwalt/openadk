@@ -4,12 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libksba
-PKG_VERSION:=		1.3.4
+PKG_VERSION:=		1.3.5
 PKG_RELEASE:=		1
-PKG_HASH:=		f6c2883cebec5608692d8730843d87f237c0964d923bbe7aa89c05f20558ad4f
+PKG_HASH:=		41444fd7a6ff73a79ad9728f985e71c9ba8cd3e5e53358e70d5f066d35c1a340
 PKG_DESCR:=		working with X.509 certificates
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgpg-error
+PKG_BUILDDEP:=		libgpg-error
 PKG_URL:=		https://www.gnupg.org/(fr)/related_software/libksba/index.html
 PKG_SITES:=		https://www.gnupg.org/ftp/gcrypt/libksba/
 PKG_OPTS:=		dev
