@@ -1,5 +1,5 @@
---- afboot-stm32-f7f109f0c6f65534ae50f9243a7356c5002a9b87.orig/Makefile	2016-04-24 20:35:00.000000000 +0200
-+++ afboot-stm32-f7f109f0c6f65534ae50f9243a7356c5002a9b87/Makefile	2016-04-24 20:36:36.000000000 +0200
+--- afboot-stm32-8e9e03159ce47629d40dbed4c50c1879b69bb197.orig/Makefile	2017-01-19 06:54:21.000000000 +0100
++++ afboot-stm32-8e9e03159ce47629d40dbed4c50c1879b69bb197/Makefile	2017-01-19 06:55:03.370200767 +0100
 @@ -1,14 +1,15 @@
  CROSS_COMPILE ?= arm-none-eabi-
  
@@ -17,7 +17,7 @@
  
 -CFLAGS := -mthumb -mcpu=cortex-m4
 +CFLAGS ?= 
-+CFLAGS += -mthumb -mcpu=cortex-m4
++CFLAGS += -mthumb
  CFLAGS += -ffunction-sections -fdata-sections
  CFLAGS += -Os -std=gnu99 -Wall
  LINKERFLAGS := -nostartfiles --gc-sections

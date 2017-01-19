@@ -18,8 +18,12 @@ TARGET_CFLAGS:=	$(filter-out -ffast-math,$(TARGET_CFLAGS))
 
 ifeq ($(ADK_BUILD_COMPILER_GCC),y)
 ifeq ($(ADK_TARGET_HARD_FLOAT),y)
+ifeq ($(ADK_TARGET_HARD_FLOAT_SP),y)
+ifeq ($(ADK_TARGET_HARD_FLOAT_DP),y)
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
 TARGET_CFLAGS+=		-Wa,-mfloat-abi=hard
+endif
+endif
 endif
 ifeq ($(ADK_TARGET_ARCH_MIPS),y)
 TARGET_CFLAGS+=		-Wa,-mhard-float
@@ -60,6 +64,14 @@ ifeq ($(ADK_TARGET_SOFT_FLOAT),y)
 	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/#\1=y/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_HARD_FLOAT),y)
+	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_HARD_FLOAT_SP),y)
+	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_HARD_FLOAT_DP),y)
 	$(SED) 's/.*\(UCLIBC_HAS_FPU\).*/\1=y/' ${WRKBUILD}/.config
 	$(SED) 's/.*\(UCLIBC_HAS_SOFT_FLOAT\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif

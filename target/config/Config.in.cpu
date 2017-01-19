@@ -1959,6 +1959,7 @@ config ADK_TARGET_CPU_TYPE
 	default "cortex_a17" if ADK_TARGET_CPU_ARM_CORTEX_A17
 	default "cortex_m3" if ADK_TARGET_CPU_ARM_CORTEX_M3
 	default "cortex_m4" if ADK_TARGET_CPU_ARM_CORTEX_M4
+	default "cortex_m7" if ADK_TARGET_CPU_ARM_CORTEX_M7
 	default "arm1176jzf_s" if ADK_TARGET_CPU_ARM_ARM1176JZF_S
 	default "arm926ej_s" if ADK_TARGET_CPU_ARM_ARM926EJ_S
 	default "mpcore" if ADK_TARGET_CPU_ARM_ARM11MPCORE
