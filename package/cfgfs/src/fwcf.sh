@@ -132,13 +132,12 @@ echo $rootdisk|grep mmcblk >/dev/null 2>&1
 if [ $? -ne 0 ]; then
   rootdisk=${rootdisk%[1-9]}
 fi
-part=$(fdisk -l $rootdisk 2>/dev/null|awk '$8 == 88 { print $1 }')
+part=$(fdisk -l $rootdisk 2>/dev/null|grep '^/dev'|tail -1|awk '{ print $1 }')
 if [ -f .cfgfs ]; then
   . /.cfgfs
 fi
 if [ -z $part ]; then
-	# fallback to /dev/sda in case of encrypted root
-	part=$(fdisk -l /dev/sda 2>/dev/null|awk '$8 == 88 { print $1 }')
+	part=$(fdisk -l /dev/sda 2>/dev/null|grep '^/dev'|tail -1|awk '{ print $1 }')
 	if [ -z $part ]; then
 		# otherwise search for MTD device with name cfgfs
 		part=/dev/mtd$(fgrep '"cfgfs"' /proc/mtd 2>/dev/null | sed 's/^mtd\([^:]*\):.*$/\1/')ro
