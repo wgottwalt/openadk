@@ -15,3 +15,9 @@ config ADK_KERNEL_PCI_QUIRKS
 
 config ADK_KERNEL_PCI_MSI
 	bool
+
+config ADK_KERNEL_PCI_IMX6
+	bool
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default n

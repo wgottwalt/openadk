@@ -67,6 +67,16 @@ source "target/linux/config/Config.in.gpio"
 source "target/linux/config/Config.in.dma"
 source "target/linux/config/Config.in.lib"
 
+config ADK_KERNEL_PWM
+	bool
+
+config ADK_KERNEL_PWM_IMX
+	bool
+	select ADK_KERNEL_PWM
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default n
+
 config ADK_KERNEL_KEXEC
 	bool "Add KEXEC syscall"
 	help

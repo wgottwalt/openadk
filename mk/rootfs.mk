@@ -44,7 +44,7 @@ BLOCKDEV:=	root=/dev/mmcblk0p2
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
-BLOCKDEV:=	root=/dev/mmcblk0p1
+BLOCKDEV:=	root=/dev/mmcblk1p1
 endif
 
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
