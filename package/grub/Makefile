@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		multiboot boot loader
 PKG_SECTION:=		base/boot
 PKG_BUILDDEP:=		bison-host grub-host
+HOST_BUILDDEP:=		python2-host
 PKG_URL:=		http://www.gnu.org/software/grub
 PKG_SITES:=		git://git.savannah.gnu.org/grub.git
 PKG_NOPARALLEL:=	1
