@@ -9,7 +9,6 @@ PKG_RELEASE:=		1
 PKG_HASH:=		ccdf7e788769838f8285b3ee672ed573358202305ee361cfec7a4a4fb005bbc7
 PKG_DESCR:=		perl compatible regular expression library
 PKG_SECTION:=		libs/misc
-PKG_BUILDDEPS:=		gettext-tiny
 PKG_URL:=		http://www.pcre.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=pcre/}
 PKG_LIBNAME:=		libpcre

@@ -15,9 +15,9 @@ PKG_DEPENDS+=		libxdamage libxfixes libidl libsqlite libxcomposite gdk-pixbuf li
 PKG_DEPENDS+=		harfbuzz mesa libvpx libbz2 ca-certificates libevent at-spi2-atk at-spi2-core
 PKG_BUILDDEP:=		alsa-lib glib libgtk2 libgtk3 libIDL libX11 mesa libtiff gdk-pixbuf
 PKG_BUILDDEP+=		nspr nss libjpeg-turbo libXt fontconfig sqlite atk libpng hicolor-icon-theme
-PKG_BUILDDEP+=		libvpx pango gettext-tiny bzip2 libevent bzip2-host python2-host yasm-host
+PKG_BUILDDEP+=		libvpx pango bzip2 libevent bzip2-host python2-host yasm-host
 PKG_BUILDDEP+=		zip-host autoconf-old-host
-PKG_NEEDS:=		threads c++
+PKG_NEEDS:=		threads c++ intl
 PKG_URL:=		http://www.mozilla.org/
 PKG_SITES:=		http://releases.mozilla.org/pub/mozilla.org/firefox/releases/$(PKG_VERSION)/source/
 

@@ -16,8 +16,6 @@ PKG_SITES:=		$(MASTER_SITE_GNOME:=atk/$(PKG_EXTRAVER)/)
 PKG_LIBNAME:=		libatk
 PKG_OPTS:=		dev
 
-PKG_BUILDDEP_UCLIBC_NG:=gettext-tiny
-
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBATK,libatk,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))

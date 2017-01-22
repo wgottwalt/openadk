@@ -11,7 +11,8 @@ PKG_HASH:=		bae426d13d4a1ae3a35c6dd444e7fdef2159fbc9170eb39b6ae3213a27042d92
 PKG_DESCR:=		d-bus based accessibility framework
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib libxtst
-PKG_BUILDDEP:=		glib libXtst libSM intltool-host gettext-tiny
+PKG_BUILDDEP:=		glib libXtst libSM intltool-host
+PKG_NEEDS:=		intl
 PKG_URL:=		http://www.gnome.org/
 PKG_SITES:=		$(MASTER_SITE_GNOME:=at-spi2-core/$(PKG_EXTRAVER)/)
 PKG_OPTS:=		dev

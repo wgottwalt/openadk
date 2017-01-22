@@ -10,8 +10,9 @@ PKG_HASH:=		3443887401619fe33bfa5d900a4f2d6a79425ae2b7e43d5b8c36eb7a683772d4
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		zlib glib alsa-lib
-PKG_BUILDDEP:=		gettext-tiny alsa-lib zlib glib
+PKG_BUILDDEP:=		alsa-lib zlib glib
 HOST_BUILDDEP:=		glib-host pkgconf-host
+PKG_NEEDS:=		intl
 PKG_URL:=		http://wwww.qemu.org/
 PKG_SITES:=		http://wiki.qemu.org/download/
 
