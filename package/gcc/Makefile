@@ -64,6 +64,8 @@ CONFIGURE_ARGS+=	--host=$(GNU_TARGET_NAME) \
 			--disable-biarch \
 			--disable-libmudflap \
 			--disable-libgomp \
+			--disable-libquadmath \
+			--disable-libquadmath-support \
 			--disable-multilib \
 			--disable-libstdcxx-pch \
 			--disable-libsanitizer \
