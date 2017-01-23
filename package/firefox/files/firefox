@@ -1,2 +1,2 @@
 #!/bin/sh
-env LD_LIBRARY_PATH=/usr/lib/firefox-49.0.2 /usr/lib/firefox-49.0.2/firefox
+env LD_LIBRARY_PATH=/usr/lib/firefox-50.1.0 /usr/lib/firefox-50.1.0/firefox

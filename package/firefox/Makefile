@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		firefox
-PKG_VERSION:=		49.0.2
+PKG_VERSION:=		50.1.0
 PKG_RELEASE:=		1
-PKG_HASH:=		67abe9202958c36bf60454c91065953aa8f6ede83ea1c0e9cdb870c3fc3d56d0
+PKG_HASH:=		54bb9bccbf9eed0c7715ae7f45330bf41ce24b756f5fdecb380e06709a6ac5a4
 PKG_DESCR:=		graphical webbrowser
 PKG_SECTION:=		x11/apps
 PKG_DEPENDS:=		alsa-lib glib libgtk2 libgtk3 libpng libtiff libxcursor libffi
@@ -117,9 +117,6 @@ endif
 XAKE_FLAGS+=		CROSS_COMPILE=1 OS_ARCH="Linux" OS_TEST="$(ADK_TARGET_ARCH)" OS_RELEASE="2.6" 
 XAKE_FLAGS+=		HOST_CC=$(HOST_CC) HOST_LDFLAGS=$(HOST_LDFLAGS)
 XAKE_FLAGS+=            ARCHFLAG="$(TARGET_CFLAGS) $(TARGET_CPPFLAGS) $(TARGET_LDFLAGS) -lnss3 -lnssutil3 -lsmime3 -lssl3 -fPIC"
-
-post-extract:
-	rm $(WRKSRC)/image/ClippedImage.cpp.rej
 
 pre-configure:
 	$(SED) '/^freetype\/ftcache.h/a freetype\/ftfntfmt.h' $(WRKSRC)/config/system-headers
