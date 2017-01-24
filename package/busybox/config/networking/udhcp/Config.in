@@ -20,8 +20,7 @@ config BUSYBOX_UDHCPD
 
 config BUSYBOX_DHCPRELAY
 	bool "dhcprelay"
-	default y
-	depends on BUSYBOX_UDHCPD
+	default n
 	help
 	  dhcprelay listens for dhcp requests on one or more interfaces
 	  and forwards these requests to a different interface or dhcp
@@ -29,8 +28,7 @@ config BUSYBOX_DHCPRELAY
 
 config BUSYBOX_DUMPLEASES
 	bool "Lease display utility (dumpleases)"
-	default y
-	depends on BUSYBOX_UDHCPD
+	default n
 	help
 	  dumpleases displays the leases written out by the udhcpd server.
 	  Lease times are stored in the file by time remaining in lease, or

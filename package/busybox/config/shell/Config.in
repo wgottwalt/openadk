@@ -166,6 +166,7 @@ config BUSYBOX_CTTYHACK
 	  Starting getty on a controlling tty from a shell script:
 
 	  # getty 115200 $(cttyhack)
+
 config BUSYBOX_HUSH
 	bool "hush"
 	default y if ADK_TARGET_UCLINUX
@@ -302,61 +303,33 @@ config BUSYBOX_MSH
 	help
 	  msh is deprecated and will be removed, please migrate to hush.
 
-
-
 choice
-	prompt "Choose which shell is aliased to 'sh' name"
-	default FEATURE_SH_IS_NONE
-	help
-	  Choose which shell you want to be executed by 'sh' alias.
-	  The ash shell is the most bash compatible and full featured one.
+prompt "Choose which shell is aliased to 'sh' name"
 
-# note: cannot use "select ASH" here, it breaks "make allnoconfig"
-config BUSYBOX_FEATURE_SH_IS_ASH
-	depends on BUSYBOX_ASH
-	bool "ash"
-	depends on !BUSYBOX_NOMMU
-
-config BUSYBOX_FEATURE_SH_IS_HUSH
-	depends on BUSYBOX_HUSH
-	bool "hush"
-
-config BUSYBOX_FEATURE_SH_IS_NONE
+config BUSYBOX_SH_IS_NONE
 	bool "none"
+
+config BUSYBOX_SH_IS_ASH
+	bool "ash"
+
+config BUSYBOX_SH_IS_HUSH
+	bool "hush"
 
 endchoice
 
 choice
-	prompt "Choose which shell is aliased to 'bash' name"
-	default FEATURE_BASH_IS_NONE
-	help
-	  Choose which shell you want to be executed by 'bash' alias.
-	  The ash shell is the most bash compatible and full featured one.
+prompt "Choose which shell is aliased to 'bash' name"
 
-	  Note that selecting this option does not switch on any bash
-	  compatibility code. It merely makes it possible to install
-	  /bin/bash (sym)link and run scripts which start with
-	  #!/bin/bash line.
-
-	  Many systems use it in scripts which use bash-specific features,
-	  even simple ones like $RANDOM. Without this option, busybox
-	  can't be used for running them because it won't recongnize
-	  "bash" as a supported applet name.
-
-config BUSYBOX_FEATURE_BASH_IS_ASH
-	depends on BUSYBOX_ASH
-	bool "ash"
-	depends on !BUSYBOX_NOMMU
-
-config BUSYBOX_FEATURE_BASH_IS_HUSH
-	depends on BUSYBOX_HUSH
-	bool "hush"
-
-config BUSYBOX_FEATURE_BASH_IS_NONE
+config BUSYBOX_BASH_IS_NONE
 	bool "none"
 
-endchoice
+config BUSYBOX_BASH_IS_ASH
+	bool "ash"
 
+config BUSYBOX_BASH_IS_HUSH
+	bool "hush"
+
+endchoice
 
 config BUSYBOX_SH_MATH_SUPPORT
 	bool "POSIX math support"

@@ -496,21 +496,6 @@ config BUSYBOX_FEATURE_IFUPDOWN_IP
 	  Use the iproute "ip" command to implement "ifup" and "ifdown", rather
 	  than the default of using the older 'ifconfig' and 'route' utilities.
 
-config BUSYBOX_FEATURE_IFUPDOWN_IP_BUILTIN
-	bool "Use busybox ip applet"
-	default y if !BUSYBOX_DISABLE_IP
-	depends on BUSYBOX_FEATURE_IFUPDOWN_IP
-	select BUSYBOX_PLATFORM_LINUX
-	select BUSYBOX_IP
-	select BUSYBOX_FEATURE_IP_ADDRESS
-	select BUSYBOX_FEATURE_IP_LINK
-	select BUSYBOX_FEATURE_IP_ROUTE
-	help
-	  Use the busybox iproute "ip" applet to implement "ifupdown".
-
-	  If left disabled, you must install the full-blown iproute2
-	  utility or the  "ifup" and "ifdown" applets will not work.
-
 config BUSYBOX_FEATURE_IFUPDOWN_IFCONFIG_BUILTIN
 	bool "Use busybox ifconfig and route applets"
 	default n
@@ -675,21 +660,6 @@ config BUSYBOX_FEATURE_IP_NEIGH
 	help
 	  Add support for neighbor commands to "ip".
 
-config BUSYBOX_FEATURE_IP_SHORT_FORMS
-	bool "Support short forms of ip commands"
-	default n
-	depends on BUSYBOX_IP
-	help
-	  Also support short-form of ip <OBJECT> commands:
-	  ip addr   -> ipaddr
-	  ip link   -> iplink
-	  ip route  -> iproute
-	  ip tunnel -> iptunnel
-	  ip rule   -> iprule
-
-	  Say N unless you desparately need the short form of the ip
-	  object commands.
-
 config BUSYBOX_FEATURE_IP_RARE_PROTOCOLS
 	bool "Support displaying rarely used link types"
 	default n
@@ -703,27 +673,26 @@ config BUSYBOX_FEATURE_IP_RARE_PROTOCOLS
 config BUSYBOX_IPADDR
 	bool
 	default n
-	depends on BUSYBOX_FEATURE_IP_SHORT_FORMS && BUSYBOX_FEATURE_IP_ADDRESS
 
 config BUSYBOX_IPLINK
 	bool
 	default n
-	depends on BUSYBOX_FEATURE_IP_SHORT_FORMS && BUSYBOX_FEATURE_IP_LINK
 
 config BUSYBOX_IPROUTE
 	bool
 	default n
-	depends on BUSYBOX_FEATURE_IP_SHORT_FORMS && BUSYBOX_FEATURE_IP_ROUTE
 
 config BUSYBOX_IPTUNNEL
 	bool
 	default n
-	depends on BUSYBOX_FEATURE_IP_SHORT_FORMS && BUSYBOX_FEATURE_IP_TUNNEL
 
 config BUSYBOX_IPRULE
 	bool
 	default n
-	depends on BUSYBOX_FEATURE_IP_SHORT_FORMS && BUSYBOX_FEATURE_IP_RULE
+
+config BUSYBOX_IPNEIGH
+	bool
+	default n
 
 config BUSYBOX_IPCALC
 	bool "ipcalc"
