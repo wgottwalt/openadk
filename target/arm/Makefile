@@ -189,6 +189,10 @@ ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		armada-388-clearfog.dtb $(MAKE_TRACE)
 endif
+ifeq ($(ADK_TARGET_SYSTEM_ST_STM32F769),y)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
+		dtbs $(MAKE_TRACE)
+endif
 	for x in $(LINUX_DIR)/arch/arm/boot/dts/*.dtb; do \
 		[[ -e "$$x" ]] && cp $(LINUX_DIR)/arch/arm/boot/dts/*.dtb $(FW_DIR); \
 		break; \
