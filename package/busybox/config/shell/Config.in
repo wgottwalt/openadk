@@ -331,17 +331,17 @@ config BUSYBOX_BASH_IS_HUSH
 
 endchoice
 
-config BUSYBOX_SH_MATH_SUPPORT
+config BUSYBOX_FEATURE_SH_MATH
 	bool "POSIX math support"
 	default y
 	depends on BUSYBOX_ASH || BUSYBOX_HUSH
 	help
 	  Enable math support in the shell via $((...)) syntax.
 
-config BUSYBOX_SH_MATH_SUPPORT_64
+config BUSYBOX_FEATURE_SH_MATH_64
 	bool "Extend POSIX math support to 64 bit"
 	default y
-	depends on BUSYBOX_SH_MATH_SUPPORT
+	depends on BUSYBOX_FEATURE_SH_MATH
 	help
 	  Enable 64-bit math support in the shell. This will make the shell
 	  slightly larger, but will allow computation with very large numbers.
