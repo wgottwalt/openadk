@@ -4,23 +4,26 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libjasper
-PKG_VERSION:=		1.900
-PKG_RELEASE:=		2
-PKG_HASH:=		6b905a9c2aca2e275544212666eefc4eb44d95d0a57e4305457b407fe63f9494
+PKG_VERSION:=		2.0.10
+PKG_RELEASE:=		1
+PKG_HASH:=		54d85428e35263642358a11c312d61cbc054170546fae780e11271df5d1502e8
 PKG_DESCR:=		implementation of the codec specified in the jpeg-2000 standard
 PKG_SECTION:=		libs/image
+PKG_BUILDDEP:=		cmake-host
 PKG_URL:=		http://www.ece.uvic.ca/~frodo/jasper/
 PKG_SITES:=		http://www.ece.uvic.ca/~frodo/jasper/software/
+PKG_NEEDS:=		c++
 PKG_OPTS:=		dev
 
-DISTFILES:=             jasper-${PKG_VERSION}.1.zip
-WRKDIST=		${WRKDIR}/jasper-$(PKG_VERSION).1
+DISTFILES:=		jasper-$(PKG_VERSION).tar.gz
+WRKDIST=		${WRKDIR}/jasper-$(PKG_VERSION)
+WRKBUILD=		$(WRKDIR)/$(PKG_NAME)-obj
 
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBJASPER,libjasper,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
+CONFIG_STYLE:=		cmake
 
 libjasper-install:
 	$(INSTALL_DIR) $(IDIR_LIBJASPER)/usr/lib
