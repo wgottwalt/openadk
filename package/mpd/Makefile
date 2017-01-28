@@ -4,17 +4,17 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.19.19
-PKG_RELEASE:=		2
-PKG_HASH:=		bc856cda4136403446d53d11576f86990b61d1fe4668f6008e9eae47450d4e1d
+PKG_VERSION:=		0.20.3
+PKG_RELEASE:=		1
+PKG_HASH:=		2238c1233f5318800ede7c37eeaf705c04920315de572dc666aff6ca682eb0f9
 PKG_DESCR:=		music player daemon
 PKG_SECTION:=		mm/audio
-PKG_DEPENDS:=		glib libmpdclient boost libncurses libexpat
-PKG_BUILDDEP:=		glib libmpdclient boost ncurses expat
-PKG_FDEPENDS:=		glib libmpdclient
+PKG_DEPENDS:=		libmpdclient boost libncurses libexpat
+PKG_BUILDDEP:=		libmpdclient boost ncurses expat
+PKG_FDEPENDS:=		libmpdclient
 PKG_NEEDS:=		threads c++
 PKG_URL:=		http://www.musicpd.org/
-PKG_SITES:=		http://www.musicpd.org/download/mpd/0.19/
+PKG_SITES:=		http://www.musicpd.org/download/mpd/0.20/
 
 PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG
