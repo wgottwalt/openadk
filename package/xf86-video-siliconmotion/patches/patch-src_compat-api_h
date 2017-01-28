@@ -1,0 +1,30 @@
+--- xf86-video-siliconmotion-1.7.8.orig/src/compat-api.h	2015-05-08 13:08:17.000000000 +0200
++++ xf86-video-siliconmotion-1.7.8/src/compat-api.h	2017-01-26 02:35:36.147052952 +0100
+@@ -48,8 +48,13 @@
+ 
+ #define SCREEN_INIT_ARGS_DECL int i, ScreenPtr pScreen, int argc, char **argv
+ 
++#if ABI_VIDEODRV_VERSION >= SET_ABI_VERSION(23, 0)
++#define BLOCKHANDLER_ARGS_DECL ScreenPtr arg, pointer pTimeout
++#define BLOCKHANDLER_ARGS arg, pTimeout
++#else
+ #define BLOCKHANDLER_ARGS_DECL int arg, pointer blockData, pointer pTimeout, pointer pReadmask
+ #define BLOCKHANDLER_ARGS arg, blockData, pTimeout, pReadmask
++#endif
+ 
+ #define CLOSE_SCREEN_ARGS_DECL int scrnIndex, ScreenPtr pScreen
+ #define CLOSE_SCREEN_ARGS scrnIndex, pScreen
+@@ -75,8 +80,13 @@
+ 
+ #define SCREEN_INIT_ARGS_DECL ScreenPtr pScreen, int argc, char **argv
+ 
++#if ABI_VIDEODRV_VERSION >= SET_ABI_VERSION(23, 0)
++#define BLOCKHANDLER_ARGS_DECL ScreenPtr arg, pointer pTimeout
++#define BLOCKHANDLER_ARGS arg, pTimeout
++#else
+ #define BLOCKHANDLER_ARGS_DECL ScreenPtr arg, pointer pTimeout, pointer pReadmask
+ #define BLOCKHANDLER_ARGS arg, pTimeout, pReadmask
++#endif
+ 
+ #define CLOSE_SCREEN_ARGS_DECL ScreenPtr pScreen
+ #define CLOSE_SCREEN_ARGS pScreen

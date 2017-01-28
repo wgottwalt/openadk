@@ -1,6 +1,6 @@
---- xf86-video-siliconmotion-1.7.7.orig/src/Makefile.in	2012-07-17 08:28:17.000000000 +0200
-+++ xf86-video-siliconmotion-1.7.7/src/Makefile.in	2014-03-14 18:09:06.901850694 +0100
-@@ -288,7 +288,7 @@ target_alias = @target_alias@
+--- xf86-video-siliconmotion-1.7.8.orig/src/Makefile.in	2015-05-09 16:58:51.000000000 +0200
++++ xf86-video-siliconmotion-1.7.8/src/Makefile.in	2017-01-25 21:00:59.707690975 +0100
+@@ -364,7 +364,7 @@ target_alias = @target_alias@
  top_build_prefix = @top_build_prefix@
  top_builddir = @top_builddir@
  top_srcdir = @top_srcdir@
