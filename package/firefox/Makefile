@@ -63,6 +63,7 @@ CONFIGURE_ENV+=		CROSS_COMPILE=1 \
 			ac_cv_sqlite_dbstat_vtab=yes
 CONFIGURE_ARGS+=	--prefix=/usr \
 			--target=$(GNU_TARGET_NAME) \
+			--with-toolchain-prefix=$(GNU_TARGET_NAME)- \
 			--enable-application=browser \
 			--enable-official-branding \
 			--with-system-zlib \
