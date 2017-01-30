@@ -42,6 +42,11 @@ do-configure:
 		sym=$${i#BUSYBOX_DISABLE_}; \
 		symbol=$$(echo $$sym|sed -e "s#=y##"); \
 		case $$symbol in \
+		  GREP) \
+			printf "# CONFIG_GREP is not set\n" >> ${WRKBUILD}/.config; \
+			printf "# CONFIG_EGREP is not set\n" >> ${WRKBUILD}/.config; \
+			printf "# CONFIG_FGREP is not set\n" >> ${WRKBUILD}/.config; \
+			;; \
 		  KMOD) \
 			printf "# CONFIG_MODINFO is not set\n" >> ${WRKBUILD}/.config; \
 			printf "# CONFIG_MODPROBE_SMALL is not set\n" >> ${WRKBUILD}/.config; \
