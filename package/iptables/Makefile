@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		iptables
-PKG_VERSION:=		1.6.0
-PKG_RELEASE:=		3
-PKG_HASH:=		4bb72a0a0b18b5a9e79e87631ddc4084528e5df236bc7624472dcaa8480f1c60
+PKG_VERSION:=		1.6.1
+PKG_RELEASE:=		1
+PKG_HASH:=		0fc2d7bd5d7be11311726466789d4c65fb4c8e096c9182b56ce97440864f0cf5
 PKG_DESCR:=		netfilter firewalling software
 PKG_SECTION:=		net/firewall
 PKG_DEPENDS:=		libnetfilter_conntrack libmnl libnfnetlink
