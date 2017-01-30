@@ -4,16 +4,16 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		2.3.3
+PKG_VERSION:=		2.4.0
 PKG_RELEASE:=		1
-PKG_HASH:=		241408c8c555b258846368830a06146e4849a1d58dcaf6b14a3b6a73058115b7
+PKG_HASH:=		152fd0bd15a90b4a18213448f485d4b53e9f7662e1508190aa5b702446b29e3d
 PKG_DESCR:=		scripting language
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		ruby-host libressl zlib
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.ruby-lang.org/
-PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.3/
-PKG_NOPARALLEL:=	1
+PKG_SITES:=		http://ftp.ruby-lang.org/pub/ruby/2.4/
+#PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
@@ -42,7 +42,7 @@ HOST_CONFIGURE_ARGS+=	--disable-install-doc \
 			--disable-rubygems
 HOST_ALL_TARGET:=	main
 HOST_INSTALL_TARGET:=	install-nodoc
-HOST_XAKE_FLAGS:=	V=1 DESTDIR=""
+HOST_XAKE_FLAGS:=	DESTDIR=""
 
 ruby-install:
 	${INSTALL_DIR} ${IDIR_RUBY}/usr/lib/ruby
