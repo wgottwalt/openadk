@@ -45,6 +45,17 @@ EOF
 	exit 1
 }
 
+function asus-p5bvm-help {
+	cat >&2 <<EOF
+Syntax: adkinstall <archive>
+	-d: create data partition
+	-f: filesystem (default ext4)
+	-h: help text
+EOF
+	exit 1
+}
+
+
 function pcengines-apu-help {
 	cat >&2 <<EOF
 Syntax: adkinstall <archive>
@@ -103,6 +114,31 @@ case $target {
 			;;
 		*)
 			ibm-x40-help
+			exit 1
+			;;
+	esac
+	done
+	shift $((OPTIND - 1))
+	if [ -z $1 ];then
+		ibm-x40-help
+	else
+		archive=$1
+	fi
+	;;
+(asus-p5bvm)
+	cfgfssize=32768
+	data=
+	fs=ext4
+	while getopts "f:d:" ch; do
+	case $ch in
+		d)
+			data=$OPTARG
+			;;
+		f)
+			fs=$OPTARG
+			;;
+		*)
+			asus-p5bvm-help
 			exit 1
 			;;
 	esac
@@ -377,6 +413,7 @@ case $target {
 	partprobe /dev/sda
 	sync
 	sleep 2
+	umount /mnt
 	if [ -z $data ];then
 		create_filesystem /dev/sda $fs 1
 	else
@@ -392,6 +429,49 @@ case $target {
 		echo "/dev/sda2	/data	ext4	rw	0	0" >> /mnt/etc/fstab 
 	fi
 	grub_install /dev/sda
+	fix_perm /mnt
+	umount /mnt
+	;;
+(asus-p5bvm)
+	get_max_size /dev/sdc
+	create_label /dev/sdc
+	if [ -z $data ];then
+		create_partition /dev/sdc ext2 16385 $rootsize
+		create_partition /dev/sdc ext2 $(($rootsize+1)) $(($maxsize-1))
+		set_boot_flag /dev/sdc 1
+		change_part_type /dev/sdc 2 88
+	else
+		datasize=$(($data*1024*2))
+		echo datasize is: $datasize
+		echo create partition from 16385 to $(($rootsize-$datasize))
+		create_partition /dev/sdc ext2 16385 $(($rootsize-$datasize))
+		echo create partition from $(($rootsize-$datasize+1)) to $(($maxsize-$cfgfssize-1))
+		create_partition /dev/sdc ext2 $(($rootsize-$datasize+1)) $(($maxsize-$cfgfssize-1))
+		echo create partition from $(($maxsize-$cfgfssize)) to $(($maxsize-1))
+		create_partition /dev/sdc ext2 $(($maxsize-$cfgfssize)) $(($maxsize-1))
+		set_boot_flag /dev/sdc 1
+		change_part_type /dev/sdc 3 88
+
+	fi
+	partprobe /dev/sdc
+	sync
+	sleep 2
+	umount /mnt
+	if [ -z $data ];then
+		create_filesystem /dev/sdc $fs 1
+	else
+		create_filesystem /dev/sdc $fs 1
+		create_filesystem /dev/sdc $fs 2
+	fi
+	mdev -s
+	mount_fs /dev/sdc 1 $fs /mnt
+	extract_archive $archive /mnt
+	if [ ! -z $data ]; then
+		echo creating data dir and fstab entry
+		mkdir /mnt/data
+		echo "/dev/sdc2	/data	ext4	rw	0	0" >> /mnt/etc/fstab 
+	fi
+	#grub_install /dev/sdc
 	fix_perm /mnt
 	umount /mnt
 	;;

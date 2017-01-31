@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		adkinstall
 PKG_VERSION:=		2.0
-PKG_RELEASE:=		3
+PKG_RELEASE:=		4
 PKG_DESCR:=		disk/flash installer
 PKG_SECTION:=		base/misc
 PKG_DEPENDS:=		mke2fs parted sfdisk dosfstools mksh
