@@ -21,7 +21,7 @@ endif
 $(WRKBUILD)/.configured:
 	$(SED) 's/install_to_$(INSTALL_DEST) //' ${WRKBUILD}/libiberty/Makefile.in
 	mkdir -p $(GDB_BUILD_DIR)
-	(cd $(GDB_BUILD_DIR); \
+	(cd $(GDB_BUILD_DIR); PATH='$(HOST_PATH)' \
 		gdb_cv_func_sigsetjmp=yes \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_HOST_DIR) \
@@ -47,7 +47,7 @@ $(WRKBUILD)/.configured:
 	touch $@
 
 $(WRKBUILD)/.compiled:
-	$(MAKE) ${GDB_MAKEOPTS} -C $(GDB_BUILD_DIR) CFLAGS="-fPIC ${CFLAGS_FOR_BUILD}"
+	PATH='$(HOST_PATH)' $(MAKE) ${GDB_MAKEOPTS} -C $(GDB_BUILD_DIR) CFLAGS="-fPIC ${CFLAGS_FOR_BUILD}"
 	touch $@
 
 $(WRKBUILD)/.installed:
