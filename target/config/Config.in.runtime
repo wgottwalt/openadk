@@ -384,7 +384,7 @@ default ADK_ROOTSH_MKSH
 
 config ADK_ROOTSH_MKSH
 	bool "mksh (MirBSD Korn Shell)"
-	select ADK_PACKAGE_MKSH if !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_ARCH_OR1K
+	select ADK_PACKAGE_MKSH if !ADK_APPLIANCE_TOOLCHAIN
 	help
 	  Use mksh (a Korn Shell variant) as standard login shell
 	  for the superuser.
@@ -392,7 +392,7 @@ config ADK_ROOTSH_MKSH
 config ADK_ROOTSH_HUSH
 	bool "hush (busybox shell compatible with non-MMU systems)"
 	select BUSYBOX_HUSH if !ADK_APPLIANCE_TOOLCHAIN
-	select BUSYBOX_FEATURE_SH_IS_HUSH if !ADK_APPLIANCE_TOOLCHAIN
+	select BUSYBOX_SH_IS_HUSH if !ADK_APPLIANCE_TOOLCHAIN
 	help
 	  hush shell from busybox.
 
@@ -405,7 +405,7 @@ config ADK_ROOTSH_SASH
 config ADK_ROOTSH_ASH
 	bool "ash (busybox shell)"
 	select BUSYBOX_ASH
-	select BUSYBOX_FEATURE_SH_IS_ASH
+	select BUSYBOX_SH_IS_ASH
 	help
 	  Use the minimalistic ash variant that is part of busybox
 	  as standard login shell for the superuser. This is the
