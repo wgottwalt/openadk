@@ -1,0 +1,27 @@
+#!/bin/sh
+#PKG fwupdate
+#INIT 99
+
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+        test x"${fwupdate:-NO}" = x"NO" && exit 0
+        test x"$fwupdate" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
+        exec sh $0 start
+        ;;
+start)
+        /usr/sbin/fwvalidate
+        ;;
+stop)
+        ;;
+restart)
+        sh $0 stop
+        sh $0 start
+        ;;
+*)
+        echo "usage: $0 (start|stop|restart)"
+        exit 1
+esac
+exit $?

@@ -1,0 +1,132 @@
+#!/bin/sh
+# This file is part of the OpenADK project.
+# Validate update.
+
+PART0="/dev/sda2"
+PART1="/dev/sda3"
+
+APPLIANCE_NAME=OpenADK
+
+BOOT0_NAME="OpenADK1"
+BOOT1_NAME="OpenADK2"
+
+CURRENT_SYS="$(rdev /|awk '{ print $1 }' )"
+TIMEOUT=45
+STAT_FILE="/tmp/update_status"
+
+SSH_KEY_FOLDER=/etc/dropbear/
+SSH_KEYS=("dropbear_dss_host_key" "dropbear_ecdsa_host_key" "dropbear_rsa_host_key")
+
+DEBUG=1
+
+if [ "x$1" == "xtest" ];then
+  TIMEOUT=1
+fi
+
+get_interface(){
+  ip route list | grep '^default' | cut -d\  -f 5
+}
+get_nw_mask(){
+  # This function will get the NW Mask in the form /x e.g. /16
+  local BIT=$(ip a s $(get_interface)| grep inet\ | cut -d/ -f2| cut -d\  -f1)
+  echo $BIT
+}
+
+getip() {
+  DEFDEVICE=$(ip route list | grep ^default | cut -d\  -f5)
+  IPADDR=$(ip a s $(ip route list | grep ^default | cut -d\  -f5) | grep inet\ | grep 'inet' | cut -d\  -f 6 | cut -d/ -f1)
+  echo $IPADDR
+}
+
+chk_initial_save(){
+  if [ $(cfgfs status | wc -l) -gt 0 ];then
+    echo "please save configuration"
+  fi
+}
+updategrub(){
+  
+  mount -o remount,rw /boot
+
+  case "$CURRENT_SYS" in
+    "$PART1")
+      grub-set-default OpenADK2
+      ;;
+    "$PART0")
+      grub-set-default OpenADK1
+      ;;
+    *)
+      echo "Current partition $CURRENT_SYS not recognized"
+      exit 1
+      ;;
+  esac
+
+  sync
+  mount -o remount,ro /boot
+
+}
+
+base_check() {
+  NET_PROGS="$(netstat -tulpn 2>/dev/null)"
+  TESTS=0
+  TESTSUM=0
+
+  #test start: check if dropbear is running
+  T_NAME=dropbear
+  if [[ $NET_PROGS = *"/dropbear"* ]];then
+    logger -t update "check $T_NAME  OK"
+    TESTS=$(( $TESTS + 1 ))
+  else
+    logger -t update "check $T_NAME  FAILURE"
+  fi
+  ((TESTSUM = TESTSUM +1))
+  #test end
+}
+
+if [ -f /installation_date.txt ];then
+  echo "Update was applied at:" > $STAT_FILE
+  echo "$(head -n1 /installation_date.txt)" >> $STAT_FILE
+else
+  rm -f $STAT_FILE
+fi
+
+# Do some checks before setting the new partiton as default boot partition.
+if ( [ -f /firmware_check ] || [ "x$1" = "xtest" ] );then 
+  logger -t update "check now!"
+  base_check
+  i=0
+  while [ $TESTS -lt $TESTSUM ];do
+      base_check
+      [ $DEBUG -gt 0 ] && echo "$i Only $TESTS from $TESTSUM are passed wait until $TIMEOUT"
+      sleep 1
+      i=$(( $i + 1 ))
+      if [ $i -ge $TIMEOUT ];then
+	  break
+      fi
+  done
+else
+  logger -t update "$APPLIANCE_NAME validate nothing to do..."
+  if [ -f $STAT_FILE ];then
+    echo "Last update was successful" >> $STAT_FILE
+  else
+    echo "Firmware check was successful" >> $STAT_FILE
+  fi
+
+  n=0
+  chk_initial_save
+  exit 0
+fi
+
+if [ $TESTS -eq $TESTSUM ]; then
+    logger -t update "All Tests passed."
+    if [ "x$1" = "x" ]; then
+      logger -t update "Set default boot partition for bootloader."
+      rm /firmware_check
+      echo "System check was successful" >> $STAT_FILE
+      updategrub
+    fi
+else
+    logger -t update "Not all tests passed. The the default system remains on the current partition."
+    logger -t update "Please try to reboot the system and repeat the update."
+    echo "ERROR last system update failed, please reboot and try again." >> $STAT_FILE
+    exit 1
+fi

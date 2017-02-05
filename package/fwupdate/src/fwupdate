@@ -1,0 +1,137 @@
+#!/bin/sh
+# This file is part of the OpenADK project.
+# Do update.
+
+PART0="/dev/sda2"
+PART1="/dev/sda3"
+
+# Name of the archive, which is the firmware. For this file is the checksum calculated and
+# checked against the one from the tar archive.
+FW_NAME="openadk.tar.xz"
+CHECK_SUM_FILE="sha256.txt"
+TMP_MOUNT="/mnt"
+
+if [ -z $1 ]; then
+  echo "Usage: $0 <full path to update filename>"
+  exit 1
+fi
+if [ ! -f $1 ]; then
+  echo "File $1 not found"
+  exit 1
+fi
+FIRMWARE=$1
+
+echo "Validate new firmware $FIRMWARE"
+echo "Extract checksum file ..."
+cmd="tar -xf $FIRMWARE $CHECK_SUM_FILE"
+$cmd
+if [ ! -f $CHECK_SUM_FILE ];then
+  echo "No checksum file found! $CHECK_SUM_FILE"
+  exit 3
+fi
+
+if [ $(wc -m $CHECK_SUM_FILE | cut -d\  -f1) -eq 65 ];then
+  echo "Found a checksum in file $CHECK_SUM_FILE"
+else
+  echo "No checksum found in archive! $(wc -m $CHECK_SUM_FILE | cut -d\  -f1)"
+  exit 4
+fi
+
+CHECK_SUM_UPDATE_FILE="$(cat $CHECK_SUM_FILE)"
+
+echo "Calculate the checksum of the new firmware ..."
+CHECK_SUM_NEW_SYSTEM=$(tar -xf $FIRMWARE $FW_NAME -O | sha256sum - |cut -d\  -f1)
+
+echo "Compare the checksums ..."
+if [ "X$CHECK_SUM_NEW_SYSTEM" = "X$CHECK_SUM_UPDATE_FILE" ]; then
+    echo "Checksum verified (they match): "
+else
+    echo "Checksum does not match!"
+    echo "${CHECK_SUM_UPDATE_FILE} "
+    echo "${CHECK_SUM_NEW_SYSTEM}"
+fi
+
+echo "First unmount $TMP_MOUNT the spare partition just in case ..."
+umount $TMP_MOUNT 2>/dev/null
+
+# create the mkfs options depending on which is the active partition
+CURRENT_SYS="$(rdev /|awk '{ print $1 }')"
+case "$CURRENT_SYS" in
+  "$PART0")
+    MOUNTPART="$PART1"
+    OS=OpenADK2
+    ;;
+  "$PART1")
+    MOUNTPART="$PART0"
+    OS=OpenADK1
+    ;;
+  *)
+    echo "Current partition $CURRENT_SYS not recognized"
+    exit 5
+    ;;
+esac
+echo "Currently the system is running on $CURRENT_SYS"
+
+# Create filesystem on inactive partition
+echo "The partition $MOUNTPART is going to be prepared for the new system."
+echo "Creating the filesystem ..."
+
+mkfs.ext2 -j -q -F $MOUNTPART
+if [ $? -ne 0 ];then
+  echo "It was not possible to create the new filesystem on $MOUNTPART"
+  exit 6
+fi
+
+echo "Mount the new partition $MOUNTPART ..."
+mount -t ext4 $MOUNTPART $TMP_MOUNT
+if [ $? -ne 0 ];then
+  echo "It was not possible to mount the partition for the new system!"
+  echo "Please reboot the system and try to update again."
+  exit 7
+fi
+
+cd $TMP_MOUNT
+echo "The new system is going to be extracted into the partition $MOUNTPART ..."
+tar -xf $FIRMWARE $FW_NAME -O|tar -xJf -
+if [ $? -ne 0 ]; then
+  echo "The extraction of the new system failed!"
+  echo "Please reboot the system and try to update again."
+  cd /
+  umount $MOUNTPART
+  exit 8
+fi
+
+echo "Checking the new system on next boot"
+touch $TMP_MOUNT/firmware_check
+if [ $? -ne 0 ]; then
+  echo "General ERROR"
+  echo "Please reboot the system and try to update again."
+  cd /
+  umount $MOUNTPART
+  exit 9
+fi
+# echo "DD.MM.YYYY hh:mm:hh\n$(date '+%d.%m.%Y %H:%M:%S')" > install_date.txt
+date '+%d.%B.%Y %H:%M:%S' > $TMP_MOUNT/installation_date.txt
+if [ $? -ne 0 ]; then
+  echo "General ERROR"
+  echo "Please reboot the system and try to update again."
+  cd /
+  umount $MOUNTPART
+  exit 9
+fi
+echo "$CHECK_SUM_NEW_FW" >> $TMP_MOUNT/installation_date.txt
+if [ $? -ne 0 ]; then
+  echo "General ERROR"
+  echo "Please reboot the system and try to update again."
+  cd /
+  umount $MOUNTPART
+  exit 9
+fi
+
+cd /
+umount $MOUNTPART
+mount -o remount,rw /boot
+grub-reboot $OS
+mount -o remount,ro /boot
+sync
+echo "Reboot now to the updated system $OS"
