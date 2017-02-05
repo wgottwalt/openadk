@@ -7,7 +7,7 @@ PKG_NAME:=		cryptinit
 PKG_VERSION:=		2.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		init for encrypted rootfilesystem
-PKG_SECTION:=		base/misc
+PKG_SECTION:=		base/adk
 PKG_DEPENDS:=		cryptsetup
 
 PKG_CFLINE_CRYPTINIT:=	select BUSYBOX_STTY@

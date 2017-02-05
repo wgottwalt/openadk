@@ -7,7 +7,7 @@ PKG_NAME:=		adk-helper
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		2
 PKG_DESCR:=		adk helper utilities
-PKG_SECTION:=		base/misc
+PKG_SECTION:=		base/adk
 
 PKG_CFLINE_ADK_HELPER:=	depends on ADK_HOST_ONLY
 

@@ -7,7 +7,7 @@ PKG_NAME:=		fwupdate
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		update firmware
-PKG_SECTION:=		sys/misc
+PKG_SECTION:=		base/adk
 PKG_URL:=		http://www.openadk.org
 
 NO_DISTFILES:=          1

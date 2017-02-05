@@ -7,8 +7,8 @@ PKG_NAME:=		cfgfs
 PKG_VERSION:=		1.0.10
 PKG_RELEASE:=		4
 PKG_DESCR:=		compressed config filesystem
-PKG_SECTION:=		base/apps
-PKG_URL:=		http://openadk.org/
+PKG_SECTION:=		base/adk
+PKG_URL:=		http://www.openadk.org/
 
 PKG_CFLINE_CFGFS:=	select BUSYBOX_COMM@
 PKG_CFLINE_CFGFS+=	select BUSYBOX_DIFF@

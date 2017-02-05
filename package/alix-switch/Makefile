@@ -7,8 +7,8 @@ PKG_NAME:=		alix-switch
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		4
 PKG_DESCR:=		daemon listening on button events
-PKG_SECTION:=		base/misc
-PKG_URL:=		http://openadk.org/
+PKG_SECTION:=		sys/misc
+PKG_URL:=		http://www.openadk.org/
 
 PKG_SYSTEM_DEPENDS:=	pcengines-alix2d2 pcengines-alix2d13
 

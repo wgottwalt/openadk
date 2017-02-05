@@ -1,7 +1,7 @@
 base/boot	Boot Loaders
 base/libs	Base Libraries
 base/apps	Base System 
-base/misc	Base Misc
+base/adk	Base OpenADK scripts
 base/tests	Testsuites
 base/shells	Shells
 sys/drivers	Hardware drivers / externel Kernel modules
