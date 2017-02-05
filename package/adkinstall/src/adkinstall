@@ -236,7 +236,7 @@ if [ "$target" = "mikrotik-rb532" ];then
 	fi
 fi
 
-tools="parted partprobe sfdisk mkfs.$fs"
+tools="parted partprobe sfdisk mkfs.ext2"
 
 f=0
 for tool in $tools;do
@@ -294,7 +294,7 @@ function change_part_type {
 
 function create_filesystem {
 	print creating filesystem $2 on $1 partition $3
-	mkfs.$2 -F -q ${1}${3}
+	mkfs.ext2 -j -F -q ${1}${3}
 	if [ $? -ne 0 ]; then
 		echo "creating filesystem on partition failed!"
 		exit 1
