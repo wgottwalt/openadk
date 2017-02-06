@@ -114,6 +114,8 @@ ifeq ($(ADK_PACKAGE_GRUB_PC),y)
 		-p "$(GRUB_PREFIX)" \
 		-o $(IDIR_GRUB)/$(GRUB_DIR)/core.img \
 		-c ./files/embed.cfg ext2 part_msdos biosdisk
+	$(CP) $(WRKINST)/usr/lib/grub/i386-pc/boot.img \
+		$(FW_DIR)/
 endif
 ifeq ($(ADK_PACKAGE_GRUB_EFI_X86)$(ADK_PACKAGE_GRUB_EFI_X86_64),y)
 	${CP} ${WRKINST}/usr/lib/grub/$(GRUB_ARCH) \

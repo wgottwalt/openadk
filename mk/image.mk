@@ -307,7 +307,7 @@ endif
 		-d "$(TARGET_DIR)" \
 		-o $(FW_DIR)/rootfs.ext $(MAKE_TRACE)
 	PATH='${HOST_PATH}' genimage \
-		--config "$(ADK_TOPDIR)/target/$(ADK_TARGET_ARCH)/$(ADK_TARGET_SYSTEM)/genimage.cfg" \
+		--config "$(ADK_TOPDIR)/target/$(ADK_TARGET_ARCH)/$(ADK_TARGET_SYSTEM)/$(ADK_TARGET_GENIMAGE_FILENAME)" \
 		--tmppath "${FW_DIR}/temp" \
 		--rootpath "$(TARGET_DIR)" \
 		--inputpath "$(FW_DIR)" \
