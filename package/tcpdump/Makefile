@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		tcpdump
-PKG_VERSION:=		4.8.1
+PKG_VERSION:=		4.9.0
 PKG_RELEASE:=		1
-PKG_HASH:=		20e4341ec48fcf72abcae312ea913e6ba6b958617b2f3fb496d51f0ae88d831c
+PKG_HASH:=		eae98121cbb1c9adbedd9a777bf2eae9fa1c1c676424a54740311c8abcee5a5e
 PKG_DESCR:=		tool for network monitoring and data acquisition
 PKG_SECTION:=		net/debug
 PKG_DEPENDS:=		libpcap
