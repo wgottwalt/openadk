@@ -228,7 +228,7 @@ endchoice
 config ADK_PACKAGE_BUSYBOX_HIDE
 	bool "hide packages provided by busybox applets"
 	depends on ADK_PACKAGE_BUSYBOX
-	default n
+	default y
 	help
 	  Do not show packages which are provided as busybox applets
 

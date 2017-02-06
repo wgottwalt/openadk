@@ -745,7 +745,7 @@ int main() {
 					perror("Can not open Config.in file");
 
 				if (pkg_bb != NULL) {
-					fprintf(cfg, "comment \"%s... %s (disabled, provided by busybox)\"\n", token, pkg_descr);
+					fprintf(cfg, "comment \"%s... %s (provided by busybox)\"\n", token, pkg_descr);
 					fprintf(cfg, "depends on ADK_PACKAGE_BUSYBOX_HIDE\n\n");
 				}
 

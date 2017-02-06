@@ -2,6 +2,8 @@ menu "Base system"
 source package/Config.in.auto.base.boot
 source package/Config.in.auto.base.libs
 source package/Config.in.auto.base.apps
+source package/Config.in.auto.base.tools
+source package/Config.in.auto.base.init
 source package/Config.in.auto.base.adk
 source package/Config.in.auto.base.shells
 source package/Config.in.auto.base.tests

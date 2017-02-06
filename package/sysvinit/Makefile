@@ -8,7 +8,7 @@ PKG_VERSION:=		2.88dsf
 PKG_RELEASE:=		1
 PKG_HASH:=		60bbc8c1e1792056e23761d22960b30bb13eccc2cabff8c7310a01f4d5df1519
 PKG_DESCR:=		systemV init
-PKG_SECTION:=		base/apps
+PKG_SECTION:=		base/init
 PKG_URL:=		http://savannah.nongnu.org/projects/sysvinit
 PKG_SITES:=		http://download.savannah.gnu.org/releases/sysvinit/
 

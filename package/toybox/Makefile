@@ -11,6 +11,7 @@ PKG_DESCR:=		linux tools collection
 PKG_SECTION:=		base/apps
 PKG_URL:=		http://landley.net/toybox/
 PKG_SITES:=		http://landley.net/toybox/downloads/
+PKG_BB:=		1
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 

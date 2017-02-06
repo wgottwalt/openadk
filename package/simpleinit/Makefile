@@ -7,7 +7,7 @@ PKG_NAME:=		simpleinit
 PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		very simple init
-PKG_SECTION:=		base/apps
+PKG_SECTION:=		base/init
 
 NO_DISTFILES:=		1
 
