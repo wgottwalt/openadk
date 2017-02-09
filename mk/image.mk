@@ -129,8 +129,13 @@ ROOTFSISO=		${ADK_TARGET_SYSTEM}-${ADK_TARGET_LIBC}.iso
 kernel-package: kernel-strip
 	$(START_TRACE) "target/$(ADK_TARGET_ARCH)-create-kernel-package.. "
 	rm -rf $(KERNEL_PKGDIR)
+ifeq ($(ADK_TARGET_DUAL_BOOT),y)
+	@mkdir -p $(KERNEL_PKGDIR)
+	cp $(BUILD_DIR)/$(TARGET_KERNEL) $(KERNEL_PKGDIR)/kernel
+else
 	@mkdir -p $(KERNEL_PKGDIR)/boot
 	cp $(BUILD_DIR)/$(TARGET_KERNEL) $(KERNEL_PKGDIR)/boot/kernel
+endif
 	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
 	    ../linux/kernel.control ${KERNEL_VERSION} ${ADK_TARGET_CPU_ARCH}
 	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
@@ -312,6 +317,15 @@ endif
 		--rootpath "$(TARGET_DIR)" \
 		--inputpath "$(FW_DIR)" \
 		--outputpath "$(FW_DIR)" $(MAKE_TRACE)
+ifeq ($(ADK_TARGET_DUAL_BOOT),y)
+	(cd ${TARGET_DIR}; find . | grep -v ./boot/ | sed -n '/^\.\//s///p' | sort | \
+		PATH='${HOST_PATH}' $(CPIO) -o --quiet -Hustar --owner=0:0 | \
+		${XZ} -c > ${FW_DIR}/openadk.tar.xz)
+	(cd ${FW_DIR}; PATH='${HOST_PATH}' sha256sum openadk.tar.xz \
+		| cut -d\  -f1 > sha256.txt)
+	(cd ${FW_DIR}; PATH='${HOST_PATH}' tar -cf ${ADK_TARGET_SYSTEM}-update.tar openadk.tar.xz sha256.txt)
+	@rm -rf ${FW_DIR}/temp
+endif
 ifeq ($(ADK_PACKAGE_GRUB_EFI_X86)$(ADK_PACKAGE_GRUB_EFI_X86_64),y)
 	@if [ ! -f $(ADK_TOPDIR)/bios-$(ADK_TARGET_ARCH).bin ]; then \
 		cd $(ADK_TOPDIR); wget http://distfiles.openadk.org/bios-$(ADK_TARGET_ARCH).bin ;\

@@ -8,7 +8,10 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		update firmware
 PKG_SECTION:=		base/adk
+PKG_DEPENDS:=		mke2fs
 PKG_URL:=		http://www.openadk.org
+
+PKG_CFLINE_FWUPDATE:=	select BUSYBOX_SHA256SUM@
 
 NO_DISTFILES:=          1
 

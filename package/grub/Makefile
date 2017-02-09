@@ -91,6 +91,12 @@ GRUB_PLATFORM=		efi
 GRUB_MODULES=		boot linux ext2 fat part_msdos part_gpt normal efi_gop
 endif
 
+ifeq ($(ADK_TARGET_DUAL_BOOT),y)
+GRUB_CFG=		grub-dual.cfg
+else
+GRUB_CFG=		grub.cfg
+endif
+
 HOST_CONFIGURE_ARGS+=	--enable-efiemu=no \
 			--disable-grub-mkfont \
 			--enable-device-mapper=no \
@@ -102,6 +108,11 @@ CONFIGURE_ARGS+=	--disable-grub-mkfont \
 			--enable-libzfs=no \
 			--with-platform=$(GRUB_PLATFORM) \
 			--disable-werror
+
+ifeq ($(ADK_PACKAGE_GRUB_EFI_X86)$(ADK_PACKAGE_GRUB_EFI_X86_64),y)
+CONFIGURE_ARGS+=	--with-bootdir=/boot/EFI/boot \
+			--with-grubdir=/
+endif
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 grub-install:
@@ -120,11 +131,12 @@ endif
 ifeq ($(ADK_PACKAGE_GRUB_EFI_X86)$(ADK_PACKAGE_GRUB_EFI_X86_64),y)
 	${CP} ${WRKINST}/usr/lib/grub/$(GRUB_ARCH) \
 		$(FW_DIR)/$(GRUB_DIR)
-	$(CP) ./files/grub.cfg $(FW_DIR)/$(GRUB_DIR)
+	$(CP) ./files/$(GRUB_CFG) $(FW_DIR)/$(GRUB_DIR)/grub.cfg
+	$(SED) "s/@@ROOTDEV@@/$(ADK_TARGET_ROOTDEV)/g" $(FW_DIR)/$(GRUB_DIR)/grub.cfg
 else
 	${CP} ${WRKINST}/usr/lib/grub/${GRUB_ARCH} \
 		$(IDIR_GRUB)/$(GRUB_DIR)
-	$(CP) ./files/grub.cfg $(IDIR_GRUB)/$(GRUB_DIR)
+	$(CP) ./files/$(GRUB_CFG) $(IDIR_GRUB)/$(GRUB_DIR)/grub.cfg
 endif
 	$(STAGING_HOST_DIR)/usr/bin/grub-mkimage \
 		-d $(WRKINST)/usr/lib/grub/$(GRUB_ARCH) \
@@ -147,6 +159,10 @@ grub-tools-install:
 		$(IDIR_GRUB_TOOLS)/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/grub-mkimage \
 		$(IDIR_GRUB_TOOLS)/usr/bin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/grub-reboot \
+		$(IDIR_GRUB_TOOLS)/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/grub-set-default \
+		$(IDIR_GRUB_TOOLS)/usr/sbin
 	${CP} ${WRKINST}/usr/lib/grub \
 		$(IDIR_GRUB_TOOLS)/usr/lib
 	${CP} ${WRKINST}/usr/share/grub \

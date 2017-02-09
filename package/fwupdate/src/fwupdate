@@ -44,7 +44,7 @@ CHECK_SUM_NEW_SYSTEM=$(tar -xf $FIRMWARE $FW_NAME -O | sha256sum - |cut -d\  -f1
 
 echo "Compare the checksums ..."
 if [ "X$CHECK_SUM_NEW_SYSTEM" = "X$CHECK_SUM_UPDATE_FILE" ]; then
-    echo "Checksum verified (they match): "
+    echo "Checksum verified (they match) ..."
 else
     echo "Checksum does not match!"
     echo "${CHECK_SUM_UPDATE_FILE} "
@@ -130,8 +130,18 @@ fi
 
 cd /
 umount $MOUNTPART
-mount -o remount,rw /boot
+grep /boot /proc/mounts 2>/dev/null
+if [ $? -eq 0 ]; then
+  mount -o remount,rw /boot
+else
+  mount /dev/sda1 /boot
+fi
 grub-reboot $OS
-mount -o remount,ro /boot
+grep /boot /proc/mounts 2>/dev/null
+if [ $? -eq 0 ]; then
+  mount -o remount,ro /boot
+else
+  umount /boot
+fi
 sync
 echo "Reboot now to the updated system $OS"
