@@ -199,6 +199,18 @@ ifeq ($(ADK_TARGET_CPU_CRIS_CRISV10),y)
 endif
 endif
 
+# h8300
+ifeq ($(ADK_TARGET_ARCH_H8300),y)
+ifeq ($(ADK_TARGET_CPU_H8300H),y)
+	$(SED) 's/.*\(CONFIG_H8S\).*/# \1 is not set/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_H8300H\).*/\1=y/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_CPU_H8S),y)
+	$(SED) 's/.*\(CONFIG_H8S\).*/\1=y/' ${WRKBUILD}/.config
+	$(SED) 's/.*\(CONFIG_H8300H\).*/# \1 is not set/' ${WRKBUILD}/.config
+endif
+endif
+
 # sh
 ifeq ($(ADK_TARGET_ARCH_SH),y)
 ifeq ($(ADK_TARGET_CPU_SH_SH4A),y)

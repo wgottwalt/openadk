@@ -1,6 +1,6 @@
 config ADK_TARGET_SYSTEM_SIM_H8300H
 	bool "GDB simulator"
-	select ADK_TARGET_CPU_H8300
+	select ADK_TARGET_CPU_H8300H
 	select ADK_TARGET_SIM
 	select ADK_TARGET_PACKAGE_TXZ
 	help
