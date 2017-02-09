@@ -14,7 +14,6 @@ PKG_URL:=		http://profusion.mobi/index.php
 PKG_SITES:=		https://www.kernel.org/pub/linux/utils/kernel/kmod/
 PKG_LIBNAME:=		libkmod
 PKG_OPTS:=		dev
-PKG_BB:=		1
 
 PKG_SUBPKGS:=		KMOD LIBKMOD
 PKGSD_LIBKMOD:=		kernel module library

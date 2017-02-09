@@ -110,6 +110,7 @@ ifeq ($(ADK_TARGET_LIBC_ICONV),y)
 endif
 ifeq ($(ADK_RUNTIME_ENABLE_LOCALE),y)
 	$(SED) 's/.*\(UCLIBC_HAS_LOCALE\).*/\1=y/' ${WRKBUILD}/.config
+	echo 'UCLIBC_HAS_XLOCALE=y' >> ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_UCLINUX),y)
 	$(SED) 's/.*\(ARCH_USE_MMU\).*/# \1 is not set/' ${WRKBUILD}/.config
