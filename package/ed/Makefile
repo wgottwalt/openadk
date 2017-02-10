@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ed
-PKG_VERSION:=		1.13
+PKG_VERSION:=		1.14.1
 PKG_RELEASE:=		1
-PKG_HASH:=		cd66c54a53cd6ef35a217556e7b2b2fdd973ca2708f4fc41636b0bc06388c7d3
+PKG_HASH:=		ffb97eb8f2a2b5a71a9b97e3872adce953aa1b8958e04c5b7bf11d556f32552a
 PKG_DESCR:=		unix editor
 PKG_SECTION:=		app/editor
 PKG_BUILDDEP+=		lzip-host
