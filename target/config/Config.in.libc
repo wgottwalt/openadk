@@ -186,6 +186,12 @@ config ADK_TARGET_SUPPORTS_NPTL
 config ADK_TARGET_SUPPORTS_LT
 	bool
 
+config ADK_TARGET_LIBC_UTILS
+	bool
+	default n if ADK_TARGET_ARCH_LM32
+	default n if ADK_TARGET_ARCH_H8300
+	default y
+
 config ADK_TARGET_LIBC
 	string
 	default "uclibc-ng" if ADK_TARGET_LIB_UCLIBC_NG
