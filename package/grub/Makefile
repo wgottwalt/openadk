@@ -137,6 +137,7 @@ else
 	${CP} ${WRKINST}/usr/lib/grub/${GRUB_ARCH} \
 		$(IDIR_GRUB)/$(GRUB_DIR)
 	$(CP) ./files/$(GRUB_CFG) $(IDIR_GRUB)/$(GRUB_DIR)/grub.cfg
+	$(SED) "s/@@ROOTDEV@@/$(ADK_TARGET_ROOTDEV)/g" $(IDIR_GRUB)/$(GRUB_DIR)/grub.cfg
 endif
 	$(STAGING_HOST_DIR)/usr/bin/grub-mkimage \
 		-d $(WRKINST)/usr/lib/grub/$(GRUB_ARCH) \
