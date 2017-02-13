@@ -419,7 +419,7 @@ EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 			*.tar.lz | *.tlz) \
 				lzip -dc $$file | tar -xf - ;; \
 			*.zip) \
-				cat $$file | cpio -id -H zip ;; \
+				unzip -d ${WRKDIR} $$file ;; \
 			*.arm|*.jar|*.ids.gz) \
 				mkdir ${WRKBUILD}; cp $$file ${WRKBUILD} ;; \
 			*.bin) \
