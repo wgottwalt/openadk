@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		ac6bb9501c6f50cc922d22f26b02fab168db47521be5e845b83d3451a3e1d512
 PKG_DESCR:=		simple, small, minimal, c++ xml parser
 PKG_SECTION:=		libs/data
+PKG_BUILDDEP:=		unzip-host
 PKG_URL:=		http://sourceforge.net/projects/tinyxml/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=tinyxml/}
 PKG_OPTS:=		dev
