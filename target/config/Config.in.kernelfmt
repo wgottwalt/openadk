@@ -22,6 +22,9 @@ config ADK_TARGET_KERNEL_BZIMAGE
 config ADK_TARGET_KERNEL_VMLINUX_AOUT
 	bool
 
+config ADK_TARGET_KERNEL_VMLINUX_SREC
+	bool
+
 config ADK_TARGET_KERNEL_XIPIMAGE
 	bool
 
@@ -33,6 +36,7 @@ config ADK_TARGET_KERNEL
 	default "linux.bin" if ADK_TARGET_KERNEL_LINUXBIN
 	default "vmlinuz" if ADK_TARGET_KERNEL_VMLINUZ
 	default "vmlinux.aout" if ADK_TARGET_KERNEL_VMLINUX_AOUT
+	default "vmlinux.srec" if ADK_TARGET_KERNEL_VMLINUX_SREC
 	default "xipImage" if ADK_TARGET_KERNEL_XIPIMAGE
 	default "bzImage" if ADK_TARGET_KERNEL_BZIMAGE
 	default "bzImage" if ADK_TARGET_SYSTEM_GENERIC_X86_64 || ADK_TARGET_SYSTEM_GENERIC_X86
