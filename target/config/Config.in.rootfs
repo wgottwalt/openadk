@@ -175,6 +175,8 @@ config ADK_TARGET_DUAL_BOOT
 	bool "Activate dual-boot partition layout"
 	depends on ADK_TARGET_ROOTFS_GENIMAGE
 	select ADK_PACKAGE_FWUPDATE
+	select ADK_PACKAGE_GRUB if ADK_TARGET_ARCH_X86_64 || ADK_TARGET_ARCH_X86
+	select ADK_PACKAGE_GRUB_TOOLS if ADK_TARGET_ARCH_X86_64 || ADK_TARGET_ARCH_X86
 	help
 	  Activate dual-boot partition scheme for simple full updates into
 	  a second unused partition. You can use fwupdate on the target to 
