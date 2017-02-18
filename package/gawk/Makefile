@@ -8,7 +8,7 @@ PKG_VERSION:=		4.1.3
 PKG_RELEASE:=		1
 PKG_HASH:=		e3cf55e91e31ea2845f8338bedd91e40671fc30e4d82ea147d220e687abda625
 PKG_DESCR:=		awk programming language interpreter
-PKG_SECTION:=		dev/lang
+PKG_SECTION:=		base/tools
 PKG_URL:=		http://www.gnu.org/software/gawk/
 PKG_SITES:=		${MASTER_SITE_GNU:=gawk/}
 PKG_BB:=		1
