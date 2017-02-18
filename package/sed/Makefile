@@ -4,16 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sed
-PKG_VERSION:=		4.2.2
+PKG_VERSION:=		4.4
 PKG_RELEASE:=		1
-PKG_HASH:=		fea0a94d4b605894f3e2d5572e3f96e4413bcad3a085aae7367c2cf07908b2ff
+PKG_HASH:=		cbd6ebc5aaf080ed60d0162d7f6aeae58211a1ee9ba9bb25623daa6cd942683b
 PKG_DESCR:=		stream editor
-PKG_SECTION:=		app/editor
+PKG_SECTION:=		base/tools
 PKG_URL:=		http://www.gnu.org/software/sed/
 PKG_SITES:=		${MASTER_SITE_GNU:=sed/}
 PKG_BB:=		1
-
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
