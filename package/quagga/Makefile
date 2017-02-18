@@ -4,15 +4,18 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		quagga
-PKG_VERSION:=		1.0.20160309
+PKG_VERSION:=		1.2.0
 PKG_RELEASE:=		1
-PKG_HASH:=		034e21f87164f44f1c4c89d8fafed4acede298fe3fafbf9277f079544178c66b
+PKG_HASH:=		1043644d37975d9f920b76c593368cbe36ca43e27eb57cff316ee80ccb31dce3
 PKG_DESCR:=		routing software package
 PKG_SECTION:=		net/route
-PKG_BUILDDEP:=		readline ncurses
+PKG_BUILDDEP:=		readline ncurses c-ares
+PKG_DEPENDS:=		c-ares
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.quagga.net/
 PKG_SITES:=		http://download.savannah.gnu.org/releases/quagga/
+
+DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 PKG_SUBPKGS:=		QUAGGA QUAGGA_BGPD QUAGGA_OSPFD QUAGGA_OSPF6D
 PKG_SUBPKGS+=		QUAGGA_RIPNGD QUAGGA_RIPD QUAGGA_VTYSH
@@ -28,6 +31,8 @@ PKGSD_QUAGGA_RIPD:=	rip daemon
 PKGSN_QUAGGA_RIPD:=	quagga
 PKGSD_QUAGGA_VTYSH:=	vtysh utility
 PKGSN_QUAGGA_VTYSH:=	quagga
+
+PKG_CFLINE_QUAGGA:=	select BUSYBOX_PIDOF
 
 include $(ADK_TOPDIR)/mk/package.mk
 
