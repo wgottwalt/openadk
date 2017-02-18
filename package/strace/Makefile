@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		strace
-PKG_VERSION:=		4.15
+PKG_VERSION:=		4.16
 PKG_RELEASE:=		1
-PKG_HASH:=		c0cdc094d6141fd9dbf6aaad605142d651ae10998b660fda57fc61f7ad583ca9
+PKG_HASH:=		98487cb5178ec1259986cc9f6e2a844f50e5d1208c112cc22431a1e4d9adf0ef
 PKG_DESCR:=		system call trace program
 PKG_SECTION:=		app/debug
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
@@ -18,7 +18,10 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,STRACE,strace,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 # fails for x86_64
+ifeq ($(ADK_TARGET_ARCH),x86_64)
 XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
+endif
+
 ifeq ($(OS_FOR_BUILD),Darwin)
 XAKE_FLAGS+=		CPPFLAGS_FOR_BUILD="-I$(STAGING_TARGET_DIR)/usr/include -I$(LINUX_DIR)/include/uapi -I$(LINUX_DIR)/arch/$(ADK_TARGET_ARCH)/include/generated"
 else
@@ -29,7 +32,6 @@ ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CPPFLAGS+=	-DMSG_EXCEPT=020000 -D_LARGEFILE64_SOURCE=1
 endif
 
-AUTOTOOL_STYLE:=	autoreconf
 INSTALL_STYLE:=		manual
 
 do-install:

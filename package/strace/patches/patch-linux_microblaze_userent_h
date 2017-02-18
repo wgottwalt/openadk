@@ -1,8 +1,0 @@
---- strace-4.11.orig/linux/microblaze/userent.h	2014-12-11 20:25:02.000000000 +0100
-+++ strace-4.11/linux/microblaze/userent.h	2015-12-23 00:36:02.999222779 +0100
-@@ -36,5 +36,3 @@
- { PT_ESR,		"resr", },
- { PT_FSR,		"rfsr", },
- { PT_KERNEL_MODE,	"kernel_mode", },
--/* Other fields in "struct user" */
--#include "../userent0.h"
