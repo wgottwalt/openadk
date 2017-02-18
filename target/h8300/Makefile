@@ -6,10 +6,14 @@ include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux
+OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
+ifeq ($(ADK_TARGET_KERNEL_ZIMAGE),y)
+KERNEL:=$(LINUX_DIR)/arch/h8300/boot/zImage
+OSTRIP:=
+endif
 ifeq ($(ADK_TARGET_KERNEL_VMLINUX_SREC),y)
 KERNEL:=$(LINUX_DIR)/arch/h8300/boot/vmlinux.srec
 endif
-OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 
 # target helper text
 ifeq ($(ADK_TARGET_FS),initramfs)
@@ -43,7 +47,11 @@ targethelp:
 endif
 
 kernel-strip:
+ifneq ($(OSTRIP),)
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+else
+	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+endif
 
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)

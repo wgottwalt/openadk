@@ -660,7 +660,7 @@ if [ $host_build_m4 -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_M4" >> $topdir/target/config/Config.in.prereq
 fi
 if [ $host_build_mkimage -eq 1 ]; then
-  printf "\t%s\n" "select ADK_HOST_BUILD_U_BOOT" >> $topdir/target/config/Config.in.prereq
+  printf "\t%s\n" "select ADK_HOST_NEED_U_BOOT" >> $topdir/target/config/Config.in.prereq
 fi
 if [ $host_build_mksh -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_MKSH" >> $topdir/target/config/Config.in.prereq
