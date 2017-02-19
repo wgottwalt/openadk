@@ -181,6 +181,7 @@ config ADK_KERNEL_USB_OHCI_HCD
 config ADK_KERNEL_USB_DWCOTG
 	bool "Support for DWCOTG controller"
 	select ADK_KERNEL_USB
+	select ADK_KERNEL_FIQ
 	depends on ADK_TARGET_BOARD_BCM28XX
 	default y if ADK_TARGET_BOARD_BCM28XX
 	default n

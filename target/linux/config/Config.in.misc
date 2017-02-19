@@ -29,6 +29,9 @@ config ADK_KERNEL_KEYS
 config ADK_KERNEL_SBUS
 	bool
 
+config ADK_KERNEL_FIQ
+	bool
+
 config ADK_KERNEL_FSL_OTP
 	bool
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6

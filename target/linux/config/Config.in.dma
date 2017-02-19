@@ -42,15 +42,6 @@ config ADK_KERNEL_DMA_CMA
 config ADK_KERNEL_MXS_DMA
 	bool
 
-config ADK_KERNEL_BCM_VC_SM
-	bool
-
-config ADK_KERNEL_BCM_VC_CMA
-	bool
-
-config ADK_KERNEL_BCM_VCIO
-	bool
-
 config ADK_KERNEL_DMA_BCM2835
 	bool
 
@@ -63,9 +54,6 @@ config ADK_KERNEL_DMA_BCM2708
 	select ADK_KERNEL_CMA_SIZE_SEL_MBYTES
 	select ADK_KERNEL_CMA_SIZE_16
 	select ADK_KERNEL_DMA_CMA
-	select ADK_KERNEL_BCM_VC_SM
-	select ADK_KERNEL_BCM_VC_CMA
-	select ADK_KERNEL_BCM_VCIO
 	depends on ADK_TARGET_BOARD_BCM28XX
 	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
