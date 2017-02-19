@@ -25,7 +25,12 @@ source "target/config/Config.in.subsystem"
 source "target/config/Config.in.qemuopts"
 source "target/config/Config.in.cpu"
 source "target/config/Config.in.tasks"
+
+menu "Firmware configuration"
+	visible if ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
 source "target/config/Config.in.rootfs"
+endmenu
+
 source "target/config/Config.in"
 
 menu "Package selection"

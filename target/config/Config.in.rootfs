@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
-prompt "Firmware type" if !ADK_TARGET_CHOOSE_ARCH
+prompt "Filesystem / Image type" if !ADK_TARGET_CHOOSE_ARCH
 depends on !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_OS_BAREMETAL
 default ADK_TARGET_ROOTFS_INITRAMFSPIGGYBACK if ADK_TARGET_QEMU || ADK_TARGET_SIM
 default ADK_TARGET_ROOTFS_ARCHIVE
@@ -170,8 +170,12 @@ config ADK_TARGET_ROOTFS_GENIMAGE
 endchoice
 
 config ADK_TARGET_ROOTDEV
-	string
+	string "Root device name"
+	depends on ADK_TARGET_ROOTFS_GENIMAGE
 	default "sda"
+	help
+	  If you a embedded device with multiple block devices and want to
+	  set the root device name.
 
 config ADK_TARGET_DUAL_BOOT
 	bool "Activate dual-boot partition layout"
