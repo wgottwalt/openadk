@@ -293,6 +293,12 @@ ${FW_DIR}/${ROOTFSISO}: ${TARGET_DIR} kernel-package
 		-c boot/syslinux/boot.cat -no-emul-boot \
 		-boot-load-size 4 -boot-info-table ${TARGET_DIR}
 
+ifeq (,$(wildcard $(ADK_TOPDIR)/target/$(ADK_TARGET_ARCH)/$(ADK_TARGET_SYSTEM)/$(ADK_TARGET_GENIMAGE_FILENAME)))
+GENCFG:=$(ADK_TOPDIR)/adk/genimage/$(ADK_TARGET_GENIMAGE_FILENAME)
+else
+GENCFG:=$(ADK_TOPDIR)/target/$(ADK_TARGET_ARCH)/$(ADK_TARGET_SYSTEM)/$(ADK_TARGET_GENIMAGE_FILENAME)
+endif
+
 ${FW_DIR}/${GENIMAGE}: ${TARGET_DIR} kernel-package
 	@rm -rf ${FW_DIR}/temp
 	@mkdir -p ${FW_DIR}/temp
@@ -312,7 +318,7 @@ endif
 		-d "$(TARGET_DIR)" \
 		-o $(FW_DIR)/rootfs.ext $(MAKE_TRACE)
 	PATH='${HOST_PATH}' genimage \
-		--config "$(ADK_TOPDIR)/target/$(ADK_TARGET_ARCH)/$(ADK_TARGET_SYSTEM)/$(ADK_TARGET_GENIMAGE_FILENAME)" \
+		--config "$(GENCFG)" \
 		--tmppath "${FW_DIR}/temp" \
 		--rootpath "$(TARGET_DIR)" \
 		--inputpath "$(FW_DIR)" \
