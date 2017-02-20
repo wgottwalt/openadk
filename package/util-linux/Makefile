@@ -107,6 +107,8 @@ endif
 TARGET_CFLAGS+=		-fPIC
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
 HOST_CONFIGURE_ARGS+=	--enable-libuuid \
+			--enable-libmount \
+			--enable-libblkid \
 			--disable-all-programs \
 			--disable-use-tty-group
 
