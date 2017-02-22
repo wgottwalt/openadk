@@ -34,27 +34,9 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
-CMDLINE:=root=/dev/mmcblk0p2 rootfstype=ext4 rootwait
-ifeq ($(ADK_APPLIANCE_KODI),y)
-CMDLINE+=consoleblank=0 vt.global_cursor_default=0
-endif
-ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_ONLY),y)
-CMDLINE+=console=ttyAMA0,$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)
-endif
-ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_VGA_ONLY),y)
-CMDLINE+=console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE)
-endif
-ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_VGA),y)
-CMDLINE+=console=ttyAMA0,$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED) console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE)
-endif
-ifeq ($(ADK_RUNTIME_VERBOSE_KERNEL_VGA_SERIAL),y)
-CMDLINE+=console=$(ADK_RUNTIME_CONSOLE_VGA_DEVICE) console=ttyAMA0,$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)
-endif
-
 do-install:
 	$(INSTALL_DIR) $(IDIR_BCM28XX_BOOTLOADER)/boot
 	$(CP) $(WRKBUILD)/boot/bootcode.bin $(IDIR_BCM28XX_BOOTLOADER)/boot/
-	printf "$(CMDLINE)\n" > $(IDIR_BCM28XX_BOOTLOADER)/boot/cmdline.txt
 	printf "kernel=kernel\n" > $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 	printf "dtparam=audio,i2s,spi,i2c\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt

@@ -39,7 +39,7 @@ ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
 BLOCKDEV:=	root=/dev/sda1
 endif
 
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
+ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
 BLOCKDEV:=	root=/dev/mmcblk0p2
 endif
 

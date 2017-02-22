@@ -145,16 +145,18 @@ config ADK_TARGET_ROOTFS_INITRAMFSARCHIVE
 	  Use this option if your planning to create a initramfs.
 
 config ADK_TARGET_ROOTFS_ARCHIVE
-	bool "Archive usable for different filesystems"
+	bool "Archive usable for ext4 filesystems"
 	select ADK_HOST_NEED_GENEXT2FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
-	select ADK_KERNEL_EXT2_FS if ADK_TARGET_QEMU || ADK_TARGET_VBOX
-	select ADK_TARGET_QEMU_WITH_BLOCK
+	select ADK_KERNEL_EXT4_FS
+	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
 	depends on !ADK_TARGET_SIM \
 		&& !ADK_TARGET_ARCH_NDS32 \
 		&& !ADK_TARGET_SYSTEM_QEMU_M68K_MCF5208 \
 		&& !ADK_TARGET_SYSTEM_QEMU_METAG
 	help
-	  Use this option if your root filesystem is ext2/ext3/ext4/xfs.
+	  Use this option if your root filesystem is ext4 and you use 
+	  for example install.sh to install firmware on a block device
+	  connected to your development machine.
 
 config ADK_TARGET_ROOTFS_GENIMAGE
 	bool "Create a disk image for the target"

@@ -138,7 +138,7 @@ endif
 kernel-strip:
 ifeq ($(ADK_TARGET_KERNEL_GIT_REPO_NAME),rpi)
 	@echo adding DT trailer to kernel $(MAKE_TRACE)
-	PATH='$(HOST_PATH)' perl $(LINUX_DIR)/scripts/mkknlimg --dtok $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+	PATH='$(HOST_PATH)' perl $(LINUX_DIR)/scripts/mkknlimg --270x --dtok $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 else
 	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
@@ -172,8 +172,8 @@ ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		dtbs $(MAKE_TRACE)
 	mkdir -p $(FW_DIR)/overlays
-	for x in $(LINUX_DIR)/arch/arm/boot/dts/overlays/*.dtb; do \
-		[[ -e "$$x" ]] && cp $(LINUX_DIR)/arch/arm/boot/dts/overlays/*.dtb $(FW_DIR)/overlays; \
+	for x in $(LINUX_DIR)/arch/arm/boot/dts/overlays/*.dtbo; do \
+		[[ -e "$$x" ]] && cp $(LINUX_DIR)/arch/arm/boot/dts/overlays/*.dtbo $(FW_DIR)/overlays; \
 		break; \
 	done
 endif

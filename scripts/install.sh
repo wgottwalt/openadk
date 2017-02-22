@@ -553,8 +553,8 @@ case $target {
 		break
 	done
 	mkdir "$B/"overlays
-	for x in "$fwdir"/overlays/*.dtb; do
-		[[ -e "$x" ]] && cp "$fwdir"/overlays/*.dtb "$B/"overlays
+	for x in "$fwdir"/overlays/*.dtbo; do
+		[[ -e "$x" ]] && cp "$fwdir"/overlays/*.dtbo "$B/"overlays
 		break
 	done
 	umount_fs "$B"
