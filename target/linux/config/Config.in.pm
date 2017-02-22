@@ -4,6 +4,7 @@
 config ADK_KERNEL_PM
 	bool
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_BOARD_BCM28XX
 
 config ADK_KERNEL_PM_RUNTIME
 	bool
