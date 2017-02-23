@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		fwinstall
 PKG_VERSION:=		1.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		disk/flash installer
 PKG_SECTION:=		base/adk
 PKG_DEPENDS:=		mke2fs parted sfdisk dosfstools mksh
