@@ -77,6 +77,16 @@ targethelp:
 	@echo 'then install kernel and filesystem via:'
 	@echo 'adkinstall -n -a ${ROOTFSTARBALL}'
 endif
+ifeq ($(ADK_TARGET_FS),genimage)
+targethelp:
+	@echo "The disk image is: $(FW_DIR)/disk.img"
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} $(FW_DIR)/disk.img'
+else
+	@echo "Use following command to install it on SD card:"
+	@echo 'sudo dd if=$(FW_DIR)/disk.img of=/dev/sdX bs=2048k'
+endif
+endif
 
 # image creation and kernel install
 kernel-strip:
@@ -101,6 +111,9 @@ imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 imageinstall: createinitramfs targethelp
+endif
+ifeq (${ADK_TARGET_FS},genimage)
+imageinstall: ${FW_DIR}/${GENIMAGE} targethelp
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
