@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		glib
-PKG_VERSION:=		2.51.2
+PKG_VERSION:=		2.48.2
 PKG_RELEASE:=		1
-PKG_EXTRAVER:=		2.51
-PKG_HASH:=		9bc6ce33af0d5d67506fbbbf692d80c74a9cc18180376c087b6b5061e493756d
-PKG_DESCR:=		low-level core library for libraries and applications in c
+PKG_EXTRAVER:=		2.48
+PKG_HASH:=		f25e751589cb1a58826eac24fbd4186cda4518af772806b666a3f91f66e6d3f4
+PKG_DESCR:=		low-level core library that forms the basis of gtk+
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpcre zlib
 PKG_BUILDDEP:=		glib-host libffi zlib libelf dbus pcre
-HOST_BUILDDEP:=		libffi-host python2-host gettext-host util-linux-host
+HOST_BUILDDEP:=		libffi-host python2-host
 PKG_NEEDS:=		threads intl
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/GNOME/sources/glib/$(PKG_EXTRAVER)/
