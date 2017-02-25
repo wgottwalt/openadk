@@ -74,17 +74,17 @@ CONFIGURE_ARGS+=	--disable-rpath \
 			--disable-uuidd \
 			--disable-testio-debug \
 			--disable-defrag \
+			--disable-libblkid \
+			--disable-libuuid \
 			--disable-debugfs \
-			--enable-verbose-makecmds \
-			--enable-libblkid \
-			--enable-libuuid
+			--enable-verbose-makecmds
 TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_TARGET_DIR)/usr/include
 MAKE_FLAGS+=		BUILD_CC="$(HOST_CC)" \
 			BUILD_CFLAGS="$(HOST_CFLAGS) $(HOST_CPPFLAGS) -I$(WRKSRC)/lib -I." \
 			BUILD_LDFLAGS="$(HOST_LDFLAGS)"
 
 post-install:
-	$(CP) $(WRKBUILD)/lib/lib*.a $(STAGING_TARGET_DIR)/usr/lib
+	$(CP) $(WRKBUILD)/lib/libext*.a $(STAGING_TARGET_DIR)/usr/lib
 	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/include/ext2fs
 	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/include/et
 	$(CP) $(WRKBUILD)/lib/ext2fs/*.h \
