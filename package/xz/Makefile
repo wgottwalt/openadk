@@ -15,7 +15,6 @@ PKG_URL:=		http://tukaani.org/xz/
 PKG_SITES:=		http://tukaani.org/xz/
 PKG_LIBNAME:=		libxz
 PKG_OPTS:=		dev
-PKG_BB:=		1
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 

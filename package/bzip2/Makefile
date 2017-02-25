@@ -16,7 +16,6 @@ PKG_URL:=		http://www.bzip.org/
 PKG_SITES:=		http://www.bzip.org/${PKG_VERSION}/
 PKG_LIBNAME:=		libbz2
 PKG_OPTS:=		dev
-PKG_BB:=		1
 
 DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 
