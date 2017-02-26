@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libsigsegv
-PKG_VERSION:=		2.10
+PKG_VERSION:=		2.11
 PKG_RELEASE:=		1
-PKG_HASH:=		8460a4a3dd4954c3d96d7a4f5dd5bc4d9b76f5754196aa245287553b26d2199a
+PKG_HASH:=		dd7c2eb2ef6c47189406d562c1dc0f96f2fc808036834d596075d58377e37a18
 PKG_DESCR:=		handling page faults in user mode
 PKG_SECTION:=		libs/misc
 PKG_URL:=		https://www.gnu.org/software/libsigsegv/
