@@ -9,7 +9,8 @@ PKG_RELEASE:=		1
 PKG_HASH:=		20a377aa86af4c102e930b0d0bb9859e3a10aeb16445f6a1273989b206a717c8
 PKG_DESCR:=		flash filesystem utilities
 PKG_SECTION:=		sys/fs
-PKG_BUILDDEP:=		zlib
+PKG_DEPENDS:=		libuuid liblzo
+PKG_BUILDDEP:=		zlib util-linux liblzo
 HOST_BUILDDEP:=		liblzo-host
 PKG_URL:=		http://www.linux-mtd.infradead.org
 PKG_SITES:=		ftp://ftp.infradead.org/pub/mtd-utils/
@@ -27,11 +28,7 @@ PKGSD_FLASH_LOCK:=	mtd-utils flash_lock/flash_unlock utilities
 
 PKG_FLAVOURS_MTD_UTILS:=WITH_LZO WITH_UBIFS
 PKGFD_WITH_LZO:=	enable lzo support
-PKGFS_WITH_LZO:=	liblzo
-PKGFB_WITH_LZO:=	liblzo
 PKGFD_WITH_UBIFS:=	enable ubifs support
-PKGFS_WITH_UBIFS:=	libuuid
-PKGFB_WITH_UBIFS:=	util-linux
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
