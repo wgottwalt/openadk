@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm28xx-vc
-PKG_VERSION:=		7c026fa7a4ded2c525916cc853a32731c072ed1e
+PKG_VERSION:=		8d518460723779f95b49efafc04c183e83da3a18
 PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_DESCR:=		videocore tools and libraries
@@ -75,6 +75,8 @@ bcm28xx-vc-gl-libs-install:
 	$(CP) $(WRKINST)/opt/vc/lib/libGLESv2.so \
 		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
 	$(CP) $(WRKINST)/opt/vc/lib/libOpenVG.so \
+		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
+	$(CP) $(WRKINST)/opt/vc/lib/libbrcm*.so \
 		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
 	(cd $(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib && ln -sf libEGL.so libEGL.so.1)
 
