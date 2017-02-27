@@ -19,9 +19,8 @@ $(eval $(call PKG_template,UCLIBC_NG_TEST,uclibc-ng-test,$(PKG_VERSION)-${PKG_RE
 
 CONFIG_STYLE:=          manual
 
-ifeq ($(ADK_APPLIANCE_TEST),y)
+# disable math tests
 XAKE_FLAGS+=		NO_MATH=1
-endif
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 XAKE_FLAGS+=		NO_MATH=1
 endif
