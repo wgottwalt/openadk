@@ -15,3 +15,10 @@ PKG_HASH:=		5b76a9b97c9464209772ed25ce55181a7bb144a66e5669aaec945aa64da3189b
 PKG_SITES:=		ftp://sourceware.org/pub/newlib/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 endif
+ifeq ($(ADK_TARGET_LIB_NEWLIB_RISCV),y)
+PKG_VERSION:=		riscv-newlib-2.4.0
+PKG_GIT:=		branch
+PKG_RELEASE:=		1
+PKG_SITES:=		https://github.com/riscv/riscv-newlib.git
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+endif

@@ -1009,6 +1009,12 @@ config ADK_TARGET_CPU_PPC64_POWER8
 	select ADK_TARGET_WITH_MMU
 	depends on ADK_TARGET_ARCH_PPC64
 
+# riscv 
+config ADK_TARGET_CPU_RISCV
+	bool "riscv"
+	select ADK_TARGET_WITH_MMU
+	depends on ADK_TARGET_ARCH_RISCV
+
 # rx
 config ADK_TARGET_CPU_RX
 	bool "rx"
@@ -2049,6 +2055,7 @@ config ADK_TARGET_CPU_ARCH
 	default "ppc" if ADK_TARGET_ARCH_PPC
 	default "ppc64le" if ADK_TARGET_ARCH_PPC64 && ADK_TARGET_LITTLE_ENDIAN
 	default "ppc64" if ADK_TARGET_ARCH_PPC64 && ADK_TARGET_BIG_ENDIAN
+	default "riscv32" if ADK_TARGET_ARCH_RISCV
 	default "rx" if ADK_TARGET_ARCH_RX
 	default "s390x" if ADK_TARGET_ARCH_S390
 	default "sh" if ADK_TARGET_CPU_SH_SH && ADK_TARGET_LITTLE_ENDIAN
