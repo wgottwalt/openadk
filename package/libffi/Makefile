@@ -27,6 +27,10 @@ HOST_STYLE:=		auto
 HOST_CONFIGURE_ARGS+=	--disable-builddir --with-pic
 CONFIGURE_ARGS+=	--disable-builddir --with-pic
 
+ifeq ($(ADK_PACKAGE_OPENJDK7),y)
+CONFIGURE_ARGS+=	--enable-static
+endif
+
 libffi-install:
 	${INSTALL_DIR} ${IDIR_LIBFFI}/usr/lib
 	${CP} ${WRKINST}/usr/lib*/libffi.so* ${IDIR_LIBFFI}/usr/lib
