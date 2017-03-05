@@ -45,11 +45,6 @@ MAKE_ENV+=		PATH='${TARGET_PATH}' \
 			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
 			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}'
 
-# verbose builds for cmake style
-ifeq ($(filter cmake,${CONFIG_STYLE}),)
-MAKE_ENV+=		VERBOSE=1
-endif
-
 MAKE_FLAGS+=		${XAKE_FLAGS}
 FAKE_FLAGS+=		${XAKE_FLAGS}
 
