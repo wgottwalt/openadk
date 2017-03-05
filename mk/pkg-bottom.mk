@@ -185,11 +185,11 @@ ifneq (,$(filter dev,${PKG_OPTS}))
 	@mkdir -p  $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
 	@test -d ${WRKINST}/usr/include && cd ${WRKINST}/usr/include; \
 	    find . -name \*.h | \
- 	    $(CPIO) -padlmu $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
+ 	    $(CPIO) -padlmu --quiet $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
 	@mkdir -p  $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
 	@test -d ${WRKINST}/usr/lib/pkgconfig && cd ${WRKINST}/usr/lib/pkgconfig; \
 	    find . -name \*.pc | \
- 	    $(CPIO) -padlmu $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
+ 	    $(CPIO) -padlmu --quiet $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
 	@for a in ${WRKINST}/usr/bin/*-config*; do \
 		[[ -e $$a ]] || continue; \
 		mkdir -p $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \
@@ -204,7 +204,7 @@ ifeq (,$(filter nostaging,${PKG_OPTS}))
 			-e '^usr/lib/libc.so' -e '^usr/bin/[a-z0-9-]+-config*' -e '^usr/lib/.*\.la$$' \
 			-e '^/usr/lib/libpthread_nonshared.a' | \
 	    tee '${STAGING_PKG_DIR}/${PKG_NAME}' | \
-	    $(CPIO) -padlmu '${STAGING_TARGET_DIR}'
+	    $(CPIO) -padlmu --quiet '${STAGING_TARGET_DIR}'
 endif
 ifeq (,$(filter noscripts,${PKG_OPTS}))
 	@cd '${STAGING_TARGET_DIR}'; grep 'usr/s*bin/' \
