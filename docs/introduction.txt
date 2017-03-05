@@ -18,7 +18,8 @@ needing a fast and small Linux system.
 
 OpenADK can also be used to generate a cross-toolchain for any kind
 of architecture and C library combination. It supports uClibc-ng, musl,
-GNU libc and newlib.
+GNU libc and newlib. With newlib support you can build bare-metal toolchains
+without need for Linux as operating system.
 
 Embedded systems often use processors that are not the regular x86
 processors everyone is used to having in his PC. 
@@ -30,8 +31,7 @@ Moxie, MSP430, NDS32, NIOS2, OR1K, PPC, PPC64, RiscV, RX, S/390, SH, SPARC, SPAR
 V850, X86, X86_64 and Xtensa.
 
 OpenADK supports numerous processors and their variants; it also comes
-with default configurations for many embedded systems, emulators and netbooks.
-(Raspberry PI, Cubox-i, Qemu, Aranym, PCEngines APU, Lemote Yeelong, IBM X40 and more)
+with sample configurations for many embedded systems, emulators and netbooks.
 
 OpenADK is not a Linux distribution and there are no releases or binary
 packages available. If you need something like that, better switch to
