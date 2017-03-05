@@ -21,4 +21,4 @@ Or if you prefer HTTP or using Git behind a proxy:
  $ git clone http://git.openadk.org/openadk.git
 ---------------------
 
-Or you can get a http://www.openadk.org/snapshots/[snapshot].
+Or you can get a https://snapshots.openadk.org/[snapshot].
