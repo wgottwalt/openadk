@@ -28,14 +28,16 @@ The Linux kernel in OpenADK is intended to be very small in size and will
 be by default compressed with xz compression algorithm, if available for
 the target system. You can configure the compression algorithm used for the
 compression of the Linux kernel and if choosen the initramfs filesystem in
-+make menuconfig+. In +Kernel configuration+ you have the choice between
-dfferent kernel versions. The latest stable OpenADK version will be automatically used.
++make menuconfig+. In +Linux Kernel configuration+ you have the choice between
+dfferent kernel versions. Depending on your target devices, their might
+be some external git repositories available, if the support for the device
+is not upstream.
 There you can choose any needed addon drivers or any supported runtime
 and debugging features.
 
 The kernel expands itself on boot, if compressed, and then initialize the
-hardware. The additional kernel modules are loaded later by a init script.
-The kernel will autoamtically mount the virtual filesystem /dev as devtmpfs
+hardware. The additional kernel modules are loaded later by an init script.
+The kernel will automatically mount the virtual filesystem /dev as devtmpfs
 and then will execute +/sbin/init+ in userspace.
 
 init system
@@ -46,16 +48,19 @@ carries the PID number 1), and is responsible for starting the userspace
 services and programs (for example: web server, graphical applications, other
 network servers, etc.).
 
-OpenADK uses *Busybox* init. Amongst many programs, Busybox has an
-implementation of a basic +init+ program, which is sufficient for most embedded
-systems. The Busybox +init+ program will read the +/etc/inittab+ file at boot
-to know what to do. The syntax of this file can be found in
+In OpenADK you can choose between different init implementations. *Busybox*
+init is the best tested one and the default. Amongst many programs, Busybox
+has an implementation of a basic +init+ program, which is sufficient for most
+embedded systems. The Busybox +init+ program will read the +/etc/inittab+ file
+at boot to know what to do. The syntax of this file can be found in
 http://git.busybox.net/busybox/tree/examples/inittab (note that Busybox
 +inittab+ syntax is special: do not use a random +inittab+ documentation from
 the Internet to learn about Busybox +inittab+). The default +inittab+ in
 OpenADK is generated while producing the +base-files+ package.  The main job
 the default inittab does is to start the +/etc/init.d/rcS+ shell script, and
 start one or more +getty+ programs (which provides a login prompt).
+
+Support for systemd and s6 is very experimental at the moment.
 
 /dev management
 ~~~~~~~~~~~~~~~
@@ -67,19 +72,20 @@ files_, your userspace applications would not be able to use the
 hardware devices, even if they are properly recognized by the Linux
 kernel.
 
-OpenADK uses *dynamic device nodes using devtmpfs and mdev*. This method relies
-on the _devtmpfs_ virtual filesystem in the kernel, which is enabled by default
-for all OpenADK generated kernels, and adds the +mdev+ userspace utility on top
-of it. +mdev+ is a program part of Busybox that the kernel will call every time
-a device is added or removed. Thanks to the +/etc/mdev.conf+ configuration
-file, +mdev+ can be configured to for example, set specific permissions or
-ownership on a device file, call a script or application whenever a device
-appears or disappear, etc. Basically, it allows _userspace_ to react on device
-addition and removal events. +mdev+ is also important if you have devices that
-require a firmware, as it will be responsible for pushing the firmware contents
-to the kernel. +mdev+ is a lightweight implementation (with fewer features) of
-+udev+. For more details about +mdev+ and the syntax of its configuration file,
-see http://git.busybox.net/busybox/tree/docs/mdev.txt.
+In OpenADK you can choose between different types of device managements.
+OpenADK defaults to *dynamic device nodes using devtmpfs and mdev*. This method
+relies on the _devtmpfs_ virtual filesystem in the kernel, which is enabled by
+default for all OpenADK generated kernels, and adds the +mdev+ userspace
+utility on top of it. +mdev+ is a program part of Busybox that the kernel will
+call every time a device is added or removed. Thanks to the +/etc/mdev.conf+
+configuration file, +mdev+ can be configured to for example, set specific
+permissions or ownership on a device file, call a script or application
+whenever a device appears or disappear, etc. Basically, it allows _userspace_
+to react on device addition and removal events. +mdev+ is also important if you
+have devices that require a firmware, as it will be responsible for pushing the
+firmware contents to the kernel. +mdev+ is a lightweight implementation (with
+fewer features) of +udev+. For more details about +mdev+ and the syntax of its
+configuration file, see http://git.busybox.net/busybox/tree/docs/mdev.txt.
 
 initscripts
 ~~~~~~~~~~~
@@ -141,7 +147,7 @@ manager (f.e. ipkg) will be reported.
 
 ---------------------
 cfgfs
-Configuration Filesystem Utility (cfgfs), Version 1.09
+Configuration Filesystem Utility (cfgfs)
 Syntax:
         /sbin/cfgfs commit [-f]
         /sbin/cfgfs erase

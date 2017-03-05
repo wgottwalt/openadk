@@ -53,6 +53,4 @@ Why is there no web based configuration interface available?
 
 OpenADK provides a basic root filesystem for your embedded device.
 If you need a web based configuration interface for your own appliance,
-just write one. There are plenty of possibilities. You could use 
-Lighttpd with PHP or an C++ application server like Tntnet.
-
+just write one. There are plenty of possibilities.

@@ -37,7 +37,7 @@ some fixes in +build_*/w-<pkgname>-<pkgversion>/+, just do:
 --------------------
 
 If you are happy with your changes to the package sources, you can automatically
-generate a patch, which will be saved in +package/<pkgname>/patches and automatically
+generate a patch, which will be saved in +package/<pkgname>/patches+ and automatically
 applied on the next clean rebuild:
 --------------------
  $ make package=<pkgname> update-patches
