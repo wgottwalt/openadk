@@ -69,6 +69,7 @@ Environment variables
 OpenADK also honors some environment variables, when they are passed
 to +make+.
 
+* +ADK_APPLIANCE+, the appliance task you want to build 
 * +ADK_TARGET_ARCH+, the architecture of the target system
 * +ADK_TARGET_SYSTEM+, the embedded target system name
 * +ADK_TARGET_LIBC+, the C library for the target system
@@ -78,7 +79,7 @@ An example that creates a configuration file for Raspberry PI with all
 software packages enabled, but not included in the resulting firmware image:
 
 --------------------
- $ make ADK_TARGET_ARCH=arm ADK_TARGET_SYSTEM=raspberry-pi ADK_TARGET_LIBC=musl allmodconfig
+ $ make ADK_APPLIANCE=new ADK_TARGET_ARCH=arm ADK_TARGET_SYSTEM=raspberry-pi ADK_TARGET_LIBC=musl allmodconfig
 --------------------
 
 This is often used in the development process of a target system, to verify that
