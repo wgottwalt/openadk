@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk8
-PKG_VERSION:=		8u76-b02
+PKG_VERSION:=		8u121-b13
 PKG_RELEASE:=		1
-PKG_HASH:=		4447890e92da9f6855edb1475930e456fe8d396abe35f83a2259fd8c1e9537f2
+PKG_HASH:=		1e681ea5db9feec8ed65acef5b60555dddd8297143b3858e0e3f148f1772dc0d
 PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		alsa-lib freetype libx11 libxext libxrender libxtst
@@ -18,7 +18,7 @@ PKG_URL:=		http://openjdk.org/
 PKG_HG:=		http://hg.openjdk.java.net/jdk8u/jdk8u
 PKG_SITES:=		${PKG_HG}/archive/
 PKG_NOPARALLEL:=	1
-ICEDTEA_VERSION:=	3.1.0
+ICEDTEA_VERSION:=	3.3.0
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
@@ -71,13 +71,12 @@ CONFIGURE_ENV:=		BUILD_CC=/usr/bin/gcc \
 			LIBFFI_CFLAGS="$(TARGET_CPPFLAGS)" \
 			LIBFFI_LIBS="$(TARGET_LDFLAGS) -lffi"
 
-XAKE_FLAGS+=		LD=$(TARGET_CC) \
+XAKE_FLAGS+=		LD='$(TARGET_CC)' \
 			STRIP='$(TARGET_CROSS)strip' \
-			BUILD_CC=$(HOST_CC) \
-			BUILD_LD=$(HOST_CC) \
-			WARNINGS_ARE_ERRORS='' \
-			JOBS="$(ADK_JOBS)" \
-			LOG=debug
+			BUILD_CC='$(HOST_CC)' \
+			BUILD_LD='$(HOST_CC)' \
+			LOG=debug \
+			JOBS="4"
 
 post-extract:
 	(cd $(DL_DIR); \
@@ -86,8 +85,8 @@ post-extract:
 			wget -c -O openjdk8-$${file}$(PKG_VERSION).tar.bz2 $(PKG_HG)/$${file}/archive/jdk$(PKG_VERSION).tar.bz2 ; \
 		fi; \
 	done; \
-	if [ ! -f icedtea-$(ICEDTEA_VERSION).tar.bz2 ]; then \
-		wget -O icedtea-$(ICEDTEA_VERSION).tar.bz2 http://icedtea.classpath.org/hg/icedtea/archive/icedtea-$(ICEDTEA_VERSION).tar.bz2; \
+	if [ ! -f icedtea-$(ICEDTEA_VERSION).tar.xz ]; then \
+		wget -O icedtea-$(ICEDTEA_VERSION).tar.xz http://icedtea.classpath.org/download/source/icedtea-$(ICEDTEA_VERSION).tar.xz; \
 	fi; \
 	)
 	mkdir -p $(WRKDIST)/openjdk
