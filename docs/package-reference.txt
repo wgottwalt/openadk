@@ -54,7 +54,7 @@ information is:
 
 * +PKG_NEEDS+ optional, lists the features that are required to build or
   run the software package on the target. It contains a list of keywords.
-  Supported are +threads+ +rt+ +c+++
+  Supported are +threads+ +mmu+ +intl+ and +c+++
 
 * +PKG_NOPARALLEL+ optional, may be set to 1, to disable parallel building of the
   package via make -jn, n=4 is default, but can be changed in +Global Settings+ in the

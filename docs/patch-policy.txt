@@ -75,7 +75,7 @@ Backported from: <some commit id>
 or
 
 ---------------
-Fetch from: <some url>
+Fetched from: <some url>
 ---------------
 
 It is also sensible to add a few words about any changes to the patch
