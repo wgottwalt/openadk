@@ -18,17 +18,26 @@ assistant:
 For each menu entry in the configuration tool, you can find associated
 help that describes the purpose of the entry.
 
-image::openadk-appliance.png[]
+image::openadk-menu.png[]
 
-First of all you need to choose a new or predefined appliance. 
-This is a collection of different packages and configuration options
-for a specific appliance.
+First of all you need to choose if you want to build a Linux firmware
+or a bare-metal toolchain. Linux is choosen as default.
 
-image::openadk-target.png[]
+image::openadk-arch.png[]
 
-After that you can choose your target architecture, your target system and
-other general stuff. Then you can select individual packages and kernel
-settings. When you are ready exit and save. You can always redefine the
+After that you should select your target architecture.
+
+image::openadk-system.png[]
+
+Now you can select your target system, endianess, cpu and other stuff.
+
+image::openadk-task.png[]
+
+If you want to compile some predefined appliance tasks, you can select it in +Tasks+.
+You can later simply add your own tasks, which is a collection of options, packages,
+kernel modules or features, runtime configuration and more.
+
+When you are ready exit and save. You can always redefine the
 configuration using +make menuconfig+.
 
 Once everything is configured, the configuration tool generates a
