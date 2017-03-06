@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		22bc139498065a7950d966dbdb000cad04905cbd3dc8f3541f80d36c4670b9d9
 PKG_DESCR:=		video acceleration api library
 PKG_SECTION:=		libs/video
+PKG_BUILDDEP:=		libdrm
 PKG_URL:=		https://www.freedesktop.org/wiki/Software/vaapi/
 PKG_SITES:=		https://www.freedesktop.org/software/vaapi/releases/libva/
 PKG_OPTS:=		dev
