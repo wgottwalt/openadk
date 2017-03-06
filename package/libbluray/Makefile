@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libbluray
-PKG_VERSION:=		0.9.3
+PKG_VERSION:=		1.0.0
 PKG_RELEASE:=		1
-PKG_HASH:=		a6366614ec45484b51fe94fcd1975b3b8716f90f038a33b24d59978de3863ce0
+PKG_HASH:=		f7e3add335c7bbef45824fcd2249a9bf293868598c13f8479352c44ec95374cc
 PKG_DESCR:=		bluray library
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libxml2 libfreetype fontconfig
