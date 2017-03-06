@@ -62,7 +62,7 @@ $(1):
 	mkdir -p "$$$${fullname%%/$$$$filename}"; \
 	cd "$$$${fullname%%/$$$$filename}"; \
 	for url in "${PKG_SITES}"; do case $$$$url in \
-	   git://*|*.git) \
+	   file://*|git://*|*.git) \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
 		if [ ! -z "$${PKG_GIT}" ]; then \
 		  echo "Using git ${PKG_GIT}: $${PKG_VERSION}" $(DL_TRACE); \
