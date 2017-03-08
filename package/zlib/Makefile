@@ -23,19 +23,6 @@ HOST_STYLE:=		auto
 HOST_CONFIG_STYLE:=	manual
 HOST_CONFIGURE_ENV+=	uname=Linux
 HOST_ALL_TARGET:=	libz.so.$(PKG_VERSION)
-
-host-configure:
-	(cd $(WRKBUILD); \
-		uname="Linux" \
-		$(HOST_CONFIGURE_OPTS) \
-		CFLAGS="$(HOST_CFLAGS) -fPIC" \
-		CPPFLAGS="-I$(STAGING_HOST_DIR)/usr/include" \
-		LDFLAGS="-L$(STAGING_HOST_DIR)/usr/lib" \
-		./configure \
-		--prefix=/usr \
-		--shared \
-	);
-
 CONFIG_STYLE:=		manual
 CONFIGURE_ENV+=		uname=Linux
 
@@ -49,6 +36,18 @@ ALL_TARGET:=		libz.a
 ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS_ONLY),)
 ALL_TARGET+=		libz.so.$(PKG_VERSION)
 endif
+
+host-configure:
+	(cd $(WRKBUILD); \
+		uname="Linux" \
+		$(HOST_CONFIGURE_OPTS) \
+		CFLAGS="$(HOST_CFLAGS) -fPIC" \
+		CPPFLAGS="-I$(STAGING_HOST_DIR)/usr/include" \
+		LDFLAGS="-L$(STAGING_HOST_DIR)/usr/lib" \
+		./configure \
+		--prefix=/usr \
+		--shared \
+	);
 
 do-configure:
 	(cd $(WRKBUILD); \
