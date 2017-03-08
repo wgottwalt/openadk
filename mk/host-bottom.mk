@@ -3,6 +3,8 @@
 
 host-extract: ${_HOST_PATCH_COOKIE}
 
+HOST_CONFIG_STYLE?=	${HOST_STYLE}
+
 hostpre-configure:
 host-configure:
 ${_HOST_CONFIGURE_COOKIE}: ${_HOST_PATCH_COOKIE}
@@ -17,7 +19,7 @@ ifneq (,$(filter autoreconf,${AUTOTOOL_STYLE}))
 	@touch ${WRKDIR}/.autoreconf_done
 endif
 	@${MAKE} hostpre-configure $(MAKE_TRACE)
-ifeq (${HOST_STYLE},)
+ifeq (${HOST_CONFIG_STYLE},)
 	@$(CMD_TRACE) "configuring.. "
 	cd ${WRKBUILD}; \
 	    env ${HOST_CONFIGURE_ENV} \
@@ -31,7 +33,7 @@ ifeq (${HOST_STYLE},)
 	    --sysconfdir=${STAGING_HOST_DIR}/etc \
 	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 endif
-ifeq (${HOST_STYLE},auto)
+ifeq (${HOST_CONFIG_STYLE},auto)
 	@$(CMD_TRACE) "configuring.. "
 	cd ${WRKBUILD}; \
 	    env ${HOST_CONFIGURE_ENV} \
@@ -51,13 +53,13 @@ ifeq (${HOST_STYLE},auto)
 	    --disable-nls \
 	    ${HOST_CONFIGURE_ARGS} $(MAKE_TRACE)
 endif
-ifeq (${HOST_STYLE},cmake)
+ifeq (${HOST_CONFIG_STYLE},cmake)
 	@$(CMD_TRACE) "configuring cmake.. "
 	cd ${WRKBUILD}; PATH='${HOST_PATH}' \
 		cmake -Wno-dev -DCMAKE_INSTALL_PREFIX:PATH=/usr \
 		${HOST_CMAKE_FLAGS} ${WRKSRC} $(MAKE_TRACE)
 endif
-ifeq (${HOST_STYLE},perl)
+ifeq (${HOST_CONFIG_STYLE},perl)
 	@$(CMD_TRACE) "configuring perl module.. "
 	cd ${WRKBUILD}; \
 		PATH='${HOST_PATH}' \
@@ -66,7 +68,7 @@ ifeq (${HOST_STYLE},perl)
 		$(HOST_PERL_ENV) \
 		perl-host Makefile.PL ${HOST_CONFIGURE_ARGS}
 endif
-ifeq (${HOST_STYLE},manual)
+ifeq (${HOST_CONFIG_STYLE},manual)
 	@$(CMD_TRACE) "configuring.. "
 	${MAKE} host-configure $(MAKE_TRACE)
 endif
