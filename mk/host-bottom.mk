@@ -84,20 +84,22 @@ endif
 	${MAKE} host-build $(MAKE_TRACE)
 	touch $@
 
+HOST_INSTALL_STYLE?=	${HOST_STYLE}
+
 hostpost-install:
 host-install: ${ALL_HOSTINST}
 ${_HOST_FAKE_COOKIE}: ${_HOST_BUILD_COOKIE}
 	@$(CMD_TRACE) "installing.. "
 	@mkdir -p ${HOST_WRKINST}
-ifeq (${HOST_STYLE},)
+ifeq (${HOST_INSTALL_STYLE},)
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    DESTDIR='' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
 endif
-ifeq (${HOST_STYLE},auto)
+ifeq (${HOST_INSTALL_STYLE},auto)
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 	    DESTDIR='${STAGING_HOST_DIR}' ${HOST_FAKE_FLAGS} ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
 endif
-ifeq (${HOST_STYLE},manual)
+ifeq (${HOST_INSTALL_STYLE},manual)
 	env ${HOST_MAKE_ENV} ${MAKE} host-install $(MAKE_TRACE)
 endif
 	env ${HOST_MAKE_ENV} ${MAKE} hostpost-install $(MAKE_TRACE)
