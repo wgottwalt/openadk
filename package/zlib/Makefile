@@ -13,9 +13,28 @@ PKG_URL:=		http://www.zlib.net/
 PKG_SITES:=		http://zlib.net/
 PKG_OPTS:=		dev
 
+include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,ZLIB,zlib,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,ZLIB,zlib,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
+
+HOST_STYLE:=		auto
+HOST_CONFIG_STYLE:=	manual
+HOST_CONFIGURE_ENV+=	uname=Linux
+HOST_ALL_TARGET:=	libz.so.$(PKG_VERSION)
+
+host-configure:
+	(cd $(WRKBUILD); \
+		uname="Linux" \
+		$(HOST_CONFIGURE_OPTS) \
+		CFLAGS="$(HOST_CFLAGS) -fPIC" \
+		CPPFLAGS="-I$(STAGING_HOST_DIR)/usr/include" \
+		LDFLAGS="-L$(STAGING_HOST_DIR)/usr/lib" \
+		./configure \
+		--prefix=/usr \
+		--shared \
+	);
 
 CONFIG_STYLE:=		manual
 CONFIGURE_ENV+=		uname=Linux
@@ -47,4 +66,5 @@ zlib-install:
 	$(INSTALL_DIR) $(IDIR_ZLIB)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libz.so* $(IDIR_ZLIB)/usr/lib
 
+include ${ADK_TOPDIR}/mk/host-bottom.mk
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
