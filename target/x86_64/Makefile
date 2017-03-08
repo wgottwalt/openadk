@@ -91,6 +91,7 @@ ifeq ($(ADK_TARGET_FS),genimage)
 targethelp:
 	@echo "The disk image is: $(FW_DIR)/disk.img"
 ifeq ($(ADK_TARGET_QEMU),y)
+	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} $(FW_DIR)/disk.img'
 else
 	@echo "Use following command to install it on SD card:"

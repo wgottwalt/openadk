@@ -90,10 +90,11 @@ endif
 ifeq ($(ADK_TARGET_FS),genimage)
 targethelp:
 	@echo "The disk image is: $(FW_DIR)/disk.img"
-	@echo "Use following command to install it on SD card:"
 ifeq ($(ADK_TARGET_QEMU),y)
+	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-${QEMU_ARCH} ${QEMU_ARGS} $(FW_DIR)/disk.img'
 else
+	@echo "Use following command to install it on SD card:"
 	@echo 'sudo dd if=$(FW_DIR)/disk.img of=/dev/sdX bs=2048k'
 endif
 endif
