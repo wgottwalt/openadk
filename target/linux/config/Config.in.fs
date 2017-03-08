@@ -266,6 +266,20 @@ config ADK_KERNEL_YAFFS_FS
 	help
 	  YAFFS2 filesystem for NAND devices
 
+config ADK_KERNEL_MTD_UBI_GLUEBI
+	bool
+
+config ADK_KERNEL_MTD_UBI
+	tristate
+	select ADK_KERNEL_MTD
+	select ADK_KERNEL_MTD_UBI_GLUEBI
+
+config ADK_KERNEL_UBIFS_FS
+	tristate "UBIFS Filesystem"
+	select ADK_KERNEL_MTD_UBI
+	help
+	  UBIFS is a file system for flash devices which works on top of UBI.
+
 endmenu
 
 
