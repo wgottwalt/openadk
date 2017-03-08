@@ -31,6 +31,7 @@ pre-build:
 	echo '#undef GETUTENT' >> ${WRKBUILD}/config.h
 	echo '#undef UTHOST' >> ${WRKBUILD}/config.h
 	echo '#undef BUGGYGETLOGIN' >> ${WRKBUILD}/config.h
+	mv ${WRKBUILD}/sched.h ${WRKBUILD}/my_sched.h
 
 screen-install:
 	${INSTALL_DIR} ${IDIR_SCREEN}/usr/bin
