@@ -11,7 +11,7 @@ PKG_DESCR:=		flash filesystem utilities
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libuuid liblzo
 PKG_BUILDDEP:=		zlib util-linux liblzo
-HOST_BUILDDEP:=		liblzo-host
+HOST_BUILDDEP:=		liblzo-host zlib-host
 PKG_URL:=		http://www.linux-mtd.infradead.org
 PKG_SITES:=		ftp://ftp.infradead.org/pub/mtd-utils/
 
@@ -43,9 +43,9 @@ $(eval $(call PKG_template,FLASH_OTP_INFO,flash-otp-info,$(PKG_VERSION)-${PKG_RE
 $(eval $(call PKG_template,FLASH_OTP_DUMP,flash-otp-dump,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FLASH_OTP_DUMP},${PKG_SECTION}))
 $(eval $(call PKG_template,FLASH_LOCK,flash-lock,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FLASH_LOCK},${PKG_SECTION}))
 
-HOST_STYLE:=		manual
+HOST_STYLE:=		auto
 HOST_CPPFLAGS+=		-DWITHOUT_XATTR=1 -I./include
-HOST_MAKE_FLAGS+=	WITHOUT_UBI=1 WITHOUT_LZO=1
+HOST_MAKE_FLAGS+=	WITHOUT_LZO=1
 
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
@@ -53,15 +53,16 @@ host-build:
 
 mtd-utils-hostinstall:
 	${INSTALL_DIR} ${STAGING_HOST_DIR}/usr/bin
-	${INSTALL_BIN} ${WRKBUILD}/mkfs.jffs2 \
+	${INSTALL_BIN} ${WRKBUILD}/mkfs.{jffs2,ubifs} \
 		${STAGING_HOST_DIR}/usr/bin
 
 XAKE_FLAGS+=		WITHOUT_XATTR=1
+ifneq (${ADK_PACKAGE_MTD_UTILS_WITH_UBIFS},y)
+XAKE_FLAGS+=		WITHOUT_UBI=1
+else
 ifneq (${ADK_PACKAGE_MTD_UTILS_WITH_LZO},y)
 XAKE_FLAGS+=		WITHOUT_LZO=1
 endif
-ifneq (${ADK_PACKAGE_MTD_UTILS_WITH_UBIFS},y)
-XAKE_FLAGS+=		WITHOUT_UBI=1
 endif
 XAKE_FLAGS+=		BUILDDIR="${WRKDIST}"
 
