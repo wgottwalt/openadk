@@ -77,16 +77,6 @@ config ADK_TARGET_ROOTFS_JFFS2
 	help
 	  compressed read-write filesystem for MTD flash systems.
 
-config ADK_TARGET_ROOTFS_YAFFS
-	bool "YAFFS2 root filesystem (NAND)"
-	select ADK_KERNEL_MISC_FILESYSTEMS
-	select ADK_KERNEL_YAFFS_FS
-	select ADK_KERNEL_YAFFS_YAFFS2
-	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
-	depends on ADK_TARGET_WITH_NAND
-	help
-	  Root filesystem on NAND flash with YAFFS2.
-
 config ADK_TARGET_ROOTFS_UBIFS
 	bool "UBIFS root filesystem (NAND)"
 	select ADK_KERNEL_UBIFS_FS

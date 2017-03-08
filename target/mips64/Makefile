@@ -28,13 +28,6 @@ ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 	@echo 'PMON> g'
 endif
 endif
-ifeq ($(ADK_TARGET_FS),yaffs)
-targethelp:
-	@echo 'The root tarball is: ${FW_DIR}/${ROOTFSTARBALL}'
-	@echo 'Format your NAND with Routerboot, boot via NFS and'
-	@echo 'then install kernel and filesystem via:'
-	@echo 'adkinstall ${ROOTFSTARBALL}'
-endif
 ifeq ($(ADK_TARGET_FS),usb)
 targethelp:
 	@echo 'The root tarball is: ${FW_DIR}/${ROOTFSTARBALL}'

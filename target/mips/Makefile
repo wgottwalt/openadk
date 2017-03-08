@@ -70,13 +70,6 @@ ifeq ($(ADK_TARGET_FS),usb)
 targethelp:
 	@echo 'The root tarball is: ${FW_DIR}/${ROOTFSTARBALL}'
 endif
-ifeq ($(ADK_TARGET_FS),yaffs)
-targethelp:
-	@echo 'The root tarball is: ${FW_DIR}/${ROOTFSTARBALL}'
-	@echo 'Format your NAND with Routerboot, boot via NFS and'
-	@echo 'then install kernel and filesystem via:'
-	@echo 'adkinstall -n -a ${ROOTFSTARBALL}'
-endif
 ifeq ($(ADK_TARGET_FS),genimage)
 targethelp:
 	@echo "The disk image is: $(FW_DIR)/disk.img"
@@ -122,9 +115,6 @@ imageinstall: ${FW_DIR}/${GENIMAGE} targethelp
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
-endif
-ifeq ($(ADK_TARGET_FS),yaffs)
-imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),ubifs)
 imageinstall: $(FW_DIR)/$(ROOTFSUBIFS) targethelp

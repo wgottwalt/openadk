@@ -39,15 +39,6 @@ config ADK_KERNEL_JBD2
 	select ADK_KERNEL_CRYPTO
 	select ADK_KERNEL_CRYPTO_CRC32C
 
-config ADK_KERNEL_YAFFS_YAFFS1
-	bool
-
-config ADK_KERNEL_YAFFS_YAFFS2
-	bool
-
-config ADK_KERNEL_YAFFS_AUTO_YAFFS2
-	bool
-
 config ADK_KERNEL_EXT3_FS_XATTR
 	bool
 
@@ -253,18 +244,6 @@ config ADK_KERNEL_SQUASHFS
 	select ADK_KERNEL_SQUASHFS_XZ
 	help
 	  Squashfs compressed read-only filesystem
-
-config ADK_KERNEL_YAFFS_FS
-	tristate "YAFFS2 filesystem"
-	select ADK_KERNEL_MISC_FILESYSTEMS
-	select ADK_KERNEL_MTD
-	select ADK_KERNEL_MTD_BLOCK
-	select ADK_KERNEL_YAFFS_YAFFS1
-	select ADK_KERNEL_YAFFS_YAFFS2
-	select ADK_KERNEL_YAFFS_AUTO_YAFFS2
-	depends on ADK_TARGET_WITH_NAND
-	help
-	  YAFFS2 filesystem for NAND devices
 
 config ADK_KERNEL_MTD_UBI_GLUEBI
 	bool
