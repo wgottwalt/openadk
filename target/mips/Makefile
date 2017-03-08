@@ -87,6 +87,11 @@ else
 	@echo 'sudo dd if=$(FW_DIR)/disk.img of=/dev/sdX bs=2048k'
 endif
 endif
+ifeq ($(ADK_TARGET_FS),ubifs)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo 'The UBI image is: ${FW_DIR}/${ROOTFSUBIFS}'
+endif
 
 # image creation and kernel install
 kernel-strip:
@@ -120,4 +125,7 @@ imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),yaffs)
 imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
+endif
+ifeq ($(ADK_TARGET_FS),ubifs)
+imageinstall: $(FW_DIR)/$(ROOTFSUBIFS) targethelp
 endif

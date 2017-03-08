@@ -58,6 +58,7 @@ $(eval $(call rootfs_template,initramfspiggyback,INITRAMFSPIGGYBACK,rootfstype=t
 $(eval $(call rootfs_template,initramfsarchive,INITRAMFSARCHIVE,rootfstype=tmpfs))
 $(eval $(call rootfs_template,squashfs,SQUASHFS,$(MTDDEV) rootfstype=squashfs))
 $(eval $(call rootfs_template,yaffs,YAFFS,$(MTDDEV)))
+$(eval $(call rootfs_template,ubifs,UBIFS,ubi.mtd=1 root=ubi0:rootfs rootfstype=ubifs))
 $(eval $(call rootfs_template,jffs2,JFFS2,$(MTDDEV) rootfstype=jffs2))
 $(eval $(call rootfs_template,nfsroot,NFSROOT,root=/dev/nfs ip=dhcp))
 $(eval $(call rootfs_template,encrypted,ENCRYPTED))

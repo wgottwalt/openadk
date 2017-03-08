@@ -87,6 +87,15 @@ config ADK_TARGET_ROOTFS_YAFFS
 	help
 	  Root filesystem on NAND flash with YAFFS2.
 
+config ADK_TARGET_ROOTFS_UBIFS
+	bool "UBIFS root filesystem (NAND)"
+	select ADK_KERNEL_UBIFS_FS
+	select ADK_HOST_NEED_MTD_UTILS
+	select ADK_HOST_NEED_KERNEL2MINOR
+	depends on ADK_TARGET_WITH_NAND
+	help
+	  Root filesystem on NAND flash with UBI.
+
 config ADK_TARGET_ROOTFS_NFSROOT
 	bool "NFS root"
 	select ADK_KERNEL_NETWORK_FILESYSTEMS
