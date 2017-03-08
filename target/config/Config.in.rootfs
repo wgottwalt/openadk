@@ -163,6 +163,7 @@ config ADK_TARGET_ROOTFS_GENIMAGE
 	select ADK_KERNEL_EXT4_FS
 	select ADK_KERNEL_VFAT_FS
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
+	select ADK_TARGET_QEMU_WITH_BOOTLOADER if ADK_TARGET_QEMU
 	select ADK_HOST_BUILD_GENIMAGE
 	help
 	  Create a complete disk image for the target with genimage.
