@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mutt
-PKG_VERSION:=		1.7.2
+PKG_VERSION:=		1.8.0
 PKG_RELEASE:=		1
-PKG_HASH:=		1553501687cd22d5b8aaee4dc5a7d9dcf6cc61d7956f6aabaadd252d10cd5ff9
+PKG_HASH:=		45841eda12804b460260adff8f3f39cc977744e832486a3c49e182eda967adab
 PKG_DESCR:=		mail client for console
 PKG_SECTION:=		net/mail
 PKG_DEPENDS:=		libncurses
@@ -30,7 +30,8 @@ TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--with-homespool="~/Maildir" \
 			--with-curses="$(STAGING_TARGET_DIR)/usr" \
 			--enable-pop \
-			--enable-imap
+			--enable-imap \
+			--disable-doc
 
 ifeq ($(ADK_PACKAGE_MUTT_WITHOUT_SSL),y)
 CONFIGURE_ARGS+=	--without-ssl
