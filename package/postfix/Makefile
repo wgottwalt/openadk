@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		postfix
-PKG_VERSION:=		3.1.0
+PKG_VERSION:=		3.2.0
 PKG_RELEASE:=		1
-PKG_HASH:=		88ac3e92755629077d9363319b1fa0db406efb10c2f22cdbb941bd8ab36fd733
+PKG_HASH:=		420726e79622620394fd17799e49268dada7041ea067ca3aa1c8bf155b9aa487
 PKG_DESCR:=		popular mail transfer agent
 PKG_SECTION:=		net/mail
 PKG_BUILDDEP:=		tinycdb
