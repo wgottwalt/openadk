@@ -1,0 +1,19 @@
+diff -Nur gcc-git.orig/gcc/config/riscv/riscv.c gcc-git/gcc/config/riscv/riscv.c
+--- gcc-git.orig/gcc/config/riscv/riscv.c	2017-03-11 21:53:53.000000000 +0100
++++ gcc-git/gcc/config/riscv/riscv.c	2017-03-11 22:11:38.830507954 +0100
+@@ -3634,8 +3634,13 @@
+ static reg_class_t
+ riscv_preferred_reload_class (rtx x ATTRIBUTE_UNUSED, reg_class_t rclass)
+ {
+-  return reg_class_subset_p (FP_REGS, rclass) ? FP_REGS :
+-	 reg_class_subset_p (GR_REGS, rclass) ? GR_REGS :
++  machine_mode mode = GET_MODE (x);
++  if ((GET_MODE_CLASS (mode) == MODE_FLOAT
++	|| GET_MODE_CLASS (mode) == MODE_COMPLEX_FLOAT)
++	&& reg_class_subset_p (FP_REGS, rclass))
++    return FP_REGS;
++ 
++  return reg_class_subset_p (GR_REGS, rclass) ? GR_REGS :
+ 	 rclass;
+ }
+ 
