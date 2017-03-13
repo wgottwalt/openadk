@@ -31,6 +31,7 @@ ADK_PACKAGE_CRYPTINIT_ROOT:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_ROOT)))
 ADK_PACKAGE_CRYPTINIT_SWAP:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_SWAP)))
 ADK_PACKAGE_CMDLINE:=root=$(ADK_PACKAGE_CRYPTINIT_ROOT) swap=$(ADK_PACKAGE_CRYPTINIT_SWAP) resume=/dev/mapper/swapcrypt
 
+ifeq ($(ADK_TARGET_KERNEL_USE_MINICONFIG),y)
 ifeq ($(ADK_TARGET_KERNEL_CUSTOMISING),y)
 config-prepare: $(ADK_TOPDIR)/.config
 	@PATH='$(HOST_PATH)' sed -n '/^ADK_KERNEL/s//CONFIG/p' $(ADK_TOPDIR)/.config \
@@ -123,6 +124,10 @@ config-prepare: $(ADK_TOPDIR)/.config
 	fi
 	@cd $(BUILD_DIR) && cmp -s .kernelconfig.board .kernelconfig || \
 	    cp .kernelconfig.board .kernelconfig
+endif
+else
+config-prepare: $(ADK_TOPDIR)/.config
+	@true
 endif
 
 prepare: $(ADK_TARGET_ARCH)-prepare
