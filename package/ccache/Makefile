@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ccache
-PKG_VERSION:=		3.3.3
+PKG_VERSION:=		3.3.4
 PKG_RELEASE:=		1
-PKG_HASH:=		3b02a745da1cfa9eb438af7147e0fd3545e2f6163de9e5b07da86f58859f04ec
+PKG_HASH:=		24f15bf389e38c41548c9c259532187774ec0cb9686c3497bbb75504c8dc404f
 PKG_DESCR:=		compiler cache utility
 PKG_SECTION:=		dev/tools
 PKG_SITES:=		http://samba.org/ftp/ccache/
