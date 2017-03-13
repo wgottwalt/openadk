@@ -29,6 +29,10 @@ ifeq (/usr/include/ncurses/curses.h, $(wildcard /usr/include/ncurses/curses.h))
 HOST_CFLAGS+=	-I/usr/include/ncurses -DCURSES_LOC="<ncurses/curses.h>"
 LIBS+=		-lncurses
 else
+ifeq (/usr/include/ncurses.h, $(wildcard /usr/include/ncurses.h))
+HOST_CFLAGS+=	-DCURSES_LOC="<ncurses.h>"
+LIBS+=		-lncurses
+else
 ifeq (/usr/local/include/ncurses/ncurses.h, $(wildcard /usr/local/include/ncurses/ncurses.h))
 HOST_CFLAGS+=	-I/usr/local/include/ncurses -DCURSES_LOC="<ncurses.h>"
 LIBS+=		-lncurses
@@ -44,10 +48,6 @@ else
 ifeq (/usr/pkg/include/ncurses.h, $(wildcard /usr/pkg/include/ncurses.h))
 HOST_CFLAGS+=	-I/usr/pkg/include -DCURSES_LOC="<ncurses.h>"
 LIBS+=		-L/usr/pkg/lib -Wl,-rpath -Wl,/usr/pkg/lib -lncurses
-else
-ifeq (/usr/include/ncurses.h, $(wildcard /usr/include/ncurses.h))
-HOST_CFLAGS+=	-DCURSES_LOC="<ncurses.h>"
-LIBS+=		-lncurses
 else
 HOST_CFLAGS+=	-DCURSES_LOC="<curses.h>"
 LIBS=		-lcurses
