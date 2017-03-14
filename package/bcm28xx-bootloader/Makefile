@@ -57,27 +57,27 @@ ifeq ($(ADK_PACKAGE_BCM28XX_BOOTLOADER_CUTDOWN),y)
 endif
 	printf "gpu_mem=$(ADK_TARGET_GPU_MEM)\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_AMP),)
+ifneq ($(ADK_TARGET_HARDWARE_HIFIBERRY_AMP),)
 	printf "dtoverlay=hifiberry-amp\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
-ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_DAC),)
+ifneq ($(ADK_TARGET_HARDWARE_HIFIBERRY_DAC),)
 	printf "dtoverlay=hifiberry-dac\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
-ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_DIGI),)
+ifneq ($(ADK_TARGET_HARDWARE_HIFIBERRY_DIGI),)
 	printf "dtoverlay=hifiberry-digi\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
-ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_RPI_DAC),)
+ifneq ($(ADK_TARGET_HARDWARE_RPI_DAC),)
 	printf "dtoverlay=rpi-dac\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
-ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_IQAUDIO_DAC),)
+ifneq ($(ADK_TARGET_HARDWARE_IQAUDIO_DAC),)
 	printf "dtoverlay=iqaudio-dac\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
-ifneq ($(ADK_KERNEL_SND_BCM2708_SOC_RPI_PROTO),)
+ifneq ($(ADK_TARGET_HARDWARE_RPI_PROTO),)
 	printf "dtoverlay=rpi-proto\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif

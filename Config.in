@@ -24,6 +24,7 @@ source "target/config/Config.in.systemopts"
 source "target/config/Config.in.subsystem"
 source "target/config/Config.in.qemuopts"
 source "target/config/Config.in.cpu"
+source "target/config/Config.in.addons"
 
 comment "After you saved your configuration once, you shouldn't change anything above"
 	depends on ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH

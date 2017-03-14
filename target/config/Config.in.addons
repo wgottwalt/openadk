@@ -1,0 +1,35 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice
+prompt "Audio Board"
+depends on ADK_TARGET_OS_LINUX && ADK_TARGET_BOARD_BCM28XX
+
+config ADK_TARGET_HARDWARE_NONE
+	bool "No audio addon board"
+
+config ADK_TARGET_HARDWARE_HIFIBERRY_AMP
+	bool "Hifiberry AMP"
+	select ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_AMP
+
+config ADK_TARGET_HARDWARE_HIFIBERRY_DAC
+	bool "Hifiberry DAC"
+	select ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_DAC
+
+config ADK_TARGET_HARDWARE_HIFIBERRY_DIGI
+	bool "Hifiberry DIGI"
+	select ADK_KERNEL_SND_BCM2708_SOC_HIFIBERRY_DIGI
+
+config ADK_TARGET_HARDWARE_RPI_DAC
+	bool "RPI-DAC"
+	select ADK_KERNEL_SND_BCM2708_SOC_RPI_DAC
+
+config ADK_TARGET_HARDWARE_IQAUDIO_DAC
+	bool "IQAudio-DAC"
+	select ADK_KERNEL_SND_BCM2708_SOC_IQAUDIO_DAC
+
+config ADK_TARGET_HARDWARE_RPI_PROTO
+	bool "Rpi-Proto"
+	select ADK_KERNEL_SND_BCM2708_SOC_RPI_PROTO
+
+endchoice
