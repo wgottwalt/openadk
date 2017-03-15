@@ -52,8 +52,8 @@ ifneq ($(filter manual,${CONFIG_STYLE}),)
 	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)
 else ifneq ($(filter cmake,${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring cmake.. "
-	sed -e "s#@@TARGET_CC@@#$(TARGET_CC)#" \
-	 	-e "s#@@TARGET_CXX@@#$(TARGET_CXX)#" \
+	sed -e "s#@@TARGET_CC@@#$(TARGET_CC_NO_CCACHE)#" \
+	 	-e "s#@@TARGET_CXX@@#$(TARGET_CXX_NO_CCACHE)#" \
 		-e "s#@@TARGET_CFLAGS@@#$(TARGET_CFLAGS)#" \
 		-e "s#@@TARGET_CXXFLAGS@@#$(TARGET_CXXFLAGS)#" \
 		-e "s#@@TARGET_ARCH@@#$(ADK_TARGET_ARCH)#" \
@@ -185,11 +185,11 @@ ifneq (,$(filter dev,${PKG_OPTS}))
 	@mkdir -p  $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
 	@test -d ${WRKINST}/usr/include && cd ${WRKINST}/usr/include; \
 	    find . -name \*.h | \
- 	    $(CPIO) -padlmu --quiet $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
+	    $(CPIO) -padlmu --quiet $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/include
 	@mkdir -p  $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
 	@test -d ${WRKINST}/usr/lib/pkgconfig && cd ${WRKINST}/usr/lib/pkgconfig; \
 	    find . -name \*.pc | \
- 	    $(CPIO) -padlmu --quiet $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
+	    $(CPIO) -padlmu --quiet $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/lib/pkgconfig
 	@for a in ${WRKINST}/usr/bin/*-config*; do \
 		[[ -e $$a ]] || continue; \
 		mkdir -p $(WRKDIR)/fake-${ADK_TARGET_CPU_ARCH}/pkg-$(PKG_LIBNAME)-dev/usr/bin; \

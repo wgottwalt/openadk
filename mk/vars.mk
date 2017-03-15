@@ -90,14 +90,12 @@ CONFIGURE_TRIPLE:=	--build=${GNU_HOST_NAME} \
 			--host=${GNU_TARGET_NAME} \
 			--target=${GNU_TARGET_NAME}
 
-ifneq ($(strip ${ADK_USE_CCACHE}),)
-TARGET_COMPILER_PREFIX=$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CROSS}
-endif
-
 # target tools
 ifeq ($(ADK_BUILD_COMPILER_GCC),y)
 TARGET_CC:=		${TARGET_COMPILER_PREFIX}gcc
 TARGET_CXX:=		${TARGET_COMPILER_PREFIX}g++
+TARGET_CC_NO_CCACHE:=	${TARGET_CC}
+TARGET_CXX_NO_CCACHE:=	${TARGET_CXX}
 endif
 ifeq ($(ADK_BUILD_COMPILER_LLVM),y)
 TARGET_CC:=		clang --target=${GNU_TARGET_NAME} --sysroot=$(STAGING_TARGET_DIR)
@@ -107,6 +105,11 @@ endif
 
 # gcc specific
 ifeq ($(ADK_BUILD_COMPILER_GCC),y)
+ifneq ($(strip ${ADK_USE_CCACHE}),)
+TARGET_CC:=		$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CC_NO_CCACHE}
+TARGET_CXX:=		$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CXX_NO_CXXACHE}
+endif
+
 # for x86_64 x32 ABI we need to extend TARGET_CC/TARGET_CXX
 ifeq ($(ADK_TARGET_ABI_X32),y)
 TARGET_CC+=            $(ADK_TARGET_ABI_CFLAGS)
@@ -332,7 +335,7 @@ TOOLS_ENV=		AR='$(TARGET_CROSS)ar' \
 			RANLIB='$(TARGET_CROSS)ranlib' \
 			NM='$(TARGET_CROSS)nm'
 endif
-			
+
 TARGET_ENV=		$(TOOLS_ENV) \
 			AS='$(TARGET_CROSS)as' \
 			LD='$(TARGET_CROSS)ld' \
@@ -404,7 +407,7 @@ endif
 RSTRIP:=		PATH="$(TARGET_PATH)" prefix='${TARGET_CROSS}' ${BASH} ${SCRIPT_DIR}/rstrip.sh
 
 STATCMD:=$(shell if stat -qs .>/dev/null 2>&1; then echo 'stat -f %z';else echo 'stat -c %s';fi)
-	
+
 EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 			cd ${WRKDIR} && \
 			for file in ${FULLDISTFILES}; do case $$file in \
