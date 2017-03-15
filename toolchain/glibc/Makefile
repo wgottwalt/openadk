@@ -6,29 +6,20 @@ include ../rules.mk
 include Makefile.inc
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 
-TARGET_CFLAGS:=		$(filter-out -ffast-math,$(TARGET_CFLAGS))
-TARGET_CFLAGS:=		$(filter-out -fno-asynchronous-unwind-tables,$(TARGET_CFLAGS))
-TARGET_CFLAGS:=		$(filter-out -fstack-protector-all,$(TARGET_CFLAGS))
-TARGET_LDFLAGS:=	$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
-
-# glibc does not compile with Os
-TARGET_CFLAGS:=		$(subst Os,O2,$(TARGET_CFLAGS))
-TARGET_CXXFLAGS:=	$(subst Os,O2,$(TARGET_CXXFLAGS))
 ifneq ($(ADK_DEBUG),)
-TARGET_CFLAGS+=		-O2
-TARGET_CXXFLAGS+=	-O2
+GLIBC_FLAGS:=		-O2 -g3
+else
+GLIBC_FLAGS:=		-O2
 endif
 
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_TARGET_NAME) \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
 			--disable-sanity-checks \
-			--disable-werror \
 			--disable-nls \
 			--disable-werror \
 			--without-cvs \
 			--disable-profile \
-			--disable-debug \
 			--without-gd \
 			--disable-nscd \
 			--with-__thread \
@@ -45,8 +36,8 @@ endif
 
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
                         BUILD_CC=${CC_FOR_BUILD} \
-                        CFLAGS="$(TARGET_CFLAGS)" \
-                        CXXFLAGS="$(TARGET_CXXFLAGS)" \
+                        CFLAGS="$(GLIBC_FLAGS)" \
+                        CXXFLAGS="$(GLIBC_FLAGS)" \
                         CC="${TARGET_CC}" \
                         CXX="${TARGET_CXX}" \
                         AR="${TARGET_AR}" \
