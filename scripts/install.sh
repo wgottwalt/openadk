@@ -624,5 +624,8 @@ fi
 (( quiet )) || print Finishing up...
 cd "$ADK_TOPDIR"
 umount_fs "$R"
+if (( datafssz )); then
+    umount_fs $datapart
+fi
 rm -rf "$T"
 exit 0
