@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		24
+PKG_RELEASE:=		25
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -36,6 +36,9 @@ ifeq ($(ADK_RUNTIME_INIT_SYSTEMD),)
 	cp ./files/fstab $(IDIR_BASE_FILES)/etc
 	cp ./files/modules $(IDIR_BASE_FILES)/etc
 	ln -sf ../proc/mounts $(IDIR_BASE_FILES)/etc/mtab
+ifeq ($(ADK_RUNTIME_LOAD_KERNEL_MODULES),)
+	-rm $(IDIR_BASE_FILES)/etc/init.d/kmod
+endif
 ifeq ($(ADK_TARGET_WITH_NETDEVICE),y)
 	cp ./files/interfaces-dhcp $(IDIR_BASE_FILES)/etc/network/interfaces
 	cp ./files/rc.netinfo $(IDIR_BASE_FILES)/etc/

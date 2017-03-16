@@ -98,6 +98,13 @@ config ADK_RUNTIME_BASE_COREUTILS
 
 endchoice
 
+config ADK_RUNTIME_LOAD_KERNEL_MODULES
+	bool "load all installed kernel modules on bootup"
+	default y
+	help
+	  If you don't want to load all installed kernel modules
+	  by default on bootup, disable this option.
+
 config ADK_RUNTIME_FIX_PERMISSION
 	bool "fix permissions for target files (suid bit, ..)"
 	select ADK_HOST_BUILD_FAKEROOT
