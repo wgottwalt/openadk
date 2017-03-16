@@ -16,7 +16,7 @@ PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-PKG_SYSTEM_DEPENDS:=	beaglebone-black raspberry-pi raspberry-pi2 atmel-ngw100 banana-pro solidrun-imx6 solidrun-clearfog
+PKG_SYSTEM_DEPENDS:=	beaglebone-black raspberry-pi raspberry-pi2 raspberry-pi3 atmel-ngw100 banana-pro solidrun-imx6 solidrun-clearfog
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -37,6 +37,9 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIG:=		rpi_defconfig
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI2),y)
+CONFIG:=		rpi_defconfig
+endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3),y)
 CONFIG:=		rpi_defconfig
 endif
 ifeq ($(ADK_TARGET_SYSTEM_ATMEL_NGW100),y)
