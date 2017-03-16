@@ -11,7 +11,7 @@ PKG_SECTION:=		base/boot
 PKG_BUILDDEP:=		bison-host grub-host
 HOST_BUILDDEP:=		python2-host
 PKG_URL:=		http://www.gnu.org/software/grub
-PKG_SITES:=		git://git.savannah.gnu.org/grub.git
+PKG_SITES:=		https://git.savannah.gnu.org/git/grub.git
 PKG_NOPARALLEL:=	1
 
 PKG_ARCH_DEPENDS:=	x86 x86_64 mips mips64 ppc ppc64
