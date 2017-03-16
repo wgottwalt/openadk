@@ -11,6 +11,7 @@ PKG_DESCR:=		global search for a regex
 PKG_SECTION:=		base/tools
 PKG_DEPENDS:=		libpcre
 PKG_BUILDDEP:=		pcre
+HOST_BUILDDEP:=		pcre-host
 PKG_URL:=		http://www.gnu.org/software/grep/
 PKG_SITES:=		${MASTER_SITE_GNU:=grep/}
 PKG_NOPARALLEL:=	1
