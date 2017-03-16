@@ -10,7 +10,6 @@ PKG_HASH:=		73df4d5d34f0468bd57d09f2d8af363e95ed6cc3a4a86129d2f2c366259902a2
 PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
 PKG_DEPENDS:=		libxz
-HOST_BUILDDEP:=		heirloom-cpio-host
 PKG_URL:=		http://tukaani.org/xz/
 PKG_SITES:=		http://tukaani.org/xz/
 PKG_LIBNAME:=		libxz
