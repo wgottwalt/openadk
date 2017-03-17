@@ -1,0 +1,11 @@
+--- arcboot.orig/ext2load/Makefile	2011-06-19 17:09:08.000000000 +0200
++++ arcboot/ext2load/Makefile	2017-01-07 21:49:13.930609228 +0100
+@@ -28,7 +28,7 @@ CFLAGS = -O2 -I$(COMMONDIR) -I$(ARCINCLU
+ 	 -DSUBARCH=${SUBARCH} -fno-strict-aliasing \
+ 	 $(WARN_CFLAGS) $(MIPS_CFLAGS) $(DEBUG_CFLAGS)
+ 
+-LD = ld
++LD ?= ld
+ LDFLAGS = -N -T ld.script
+ 
+ all:  $(TARGETS)

@@ -1,0 +1,20 @@
+--- arcboot.orig/Makefile	2011-06-16 23:12:30.000000000 +0200
++++ arcboot/Makefile	2017-01-07 21:53:02.887705156 +0100
+@@ -5,7 +5,7 @@
+ #  
+ 
+ # default subarch
+-SUBARCH ?= IP22
++SUBARCH ?= IP32
+ 
+ ifeq ($(SUBARCH),IP22)
+ KERNELADDR=0x88002000
+@@ -19,7 +19,7 @@ KERNELADDR=0x80004000
+ MAXLOADSIZE=0x1400000
+ LOADADDR=0x81404000
+ TIP_LOADADDR=$(LOADADDR)
+-OUTPUTFORMAT=elf32-tradbigmips
++OUTPUTFORMAT=elf64btsmip
+ endif
+ 
+ # these contain subarch independent files
