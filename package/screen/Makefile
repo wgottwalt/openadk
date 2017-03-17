@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		screen
-PKG_VERSION:=		4.5.0
+PKG_VERSION:=		4.5.1
 PKG_RELEASE:=		1
-PKG_HASH:=		01c3a7c362185f35d6a95dff52d64337076496acd034d717de3c263500cfefb0
+PKG_HASH:=		97db2114dd963b016cd4ded34831955dcbe3251e5eee45ac2606e67e9f097b2d
 PKG_DESCR:=		window manager for the terminal session
 PKG_SECTION:=		sys/utils
 PKG_DEPENDS:=		libncurses libelf
