@@ -4,14 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		brutefir
-PKG_VERSION:=		1.0m
-PKG_RELEASE:=		4
-PKG_HASH:=		23b80500fc8687be338bc2654ecc509eccc06fe9372815361b65ed9b1807ccca
+PKG_VERSION:=		1.0o
+PKG_RELEASE:=		1
+PKG_HASH:=		caae4a933b53b55b29d6cb7e2803e20819f31def6d0e4e12f9a48351e6dbbe9f
 PKG_DESCR:=		convolution engine
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		fftw alsa-lib
 PKG_BUILDDEP:=		flex-host fftw alsa-lib
-PKG_SITES:=		http://distfiles.openadk.org/
+PKG_URL:=		https://www.ludd.ltu.se/~torger/brutefir.html
+PKG_SITES:=		https://www.ludd.ltu.se/~torger/files/
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 

@@ -1,6 +1,7 @@
---- brutefir-1.0m.orig/Makefile	2013-11-29 14:55:01.000000000 +0100
-+++ brutefir-1.0m/Makefile	2015-11-29 10:28:02.031683531 +0100
-@@ -1,11 +1,11 @@
+--- brutefir-1.0o.orig/Makefile	2016-11-15 13:39:48.000000000 +0100
++++ brutefir-1.0o/Makefile	2017-03-16 21:10:39.821793707 +0100
+@@ -5,12 +5,12 @@ LDFLAGS +=
+ 
  ###################################
  # Where to install
 -INSTALL_PREFIX	= $(DESTDIR)/usr/local
@@ -10,40 +11,39 @@
  # Where to find libraries, and their header files.
 -LIBPATHS	= -L/usr/local/lib
 -INCLUDE		= -I/usr/local/include
-+# LIBPATHS	= -L/usr/local/lib
-+# INCLUDE		= -I/usr/local/include
++LIBPATHS	=
++INCLUDE		=
  ifdef FFTW_PATH
  LIBPATHS	+= -L$(FFTW_PATH)/lib
  INCLUDE		+= -I$(FFTW_PATH)/include
-@@ -17,17 +17,17 @@ FFTW_LIB	= -lfftw3 -lfftw3f
+@@ -21,20 +21,16 @@ endif
+ FFTW_LIB	= -lfftw3 -lfftw3f
  
  ###################################
- # Binaries
+-# Binaries
 -FLEX	= flex
--LD	= ld
+-LD	= gcc
 -CC	= gcc
--AS	= as
-+#FLEX	= flex
-+#CC	= gcc
-+#LD	= ld
-+#AS	= as
+-CHMOD	= chmod
  
  ###################################
  # Flags
  CC_WARN		= -Wall -Wpointer-arith -Wshadow \
  -Wcast-align -Wwrite-strings -Wstrict-prototypes \
  -Wmissing-prototypes -Wmissing-declarations -Wnested-externs
--CC_FLAGS	= $(DEFINE) -O2
-+CC_FLAGS	= $(DEFINE) $(CFLAGS) 
+-CC_FLAGS	= $(DEFINE) -O2 $(CFLAGS) $(CPPFLAGS)
++CC_FLAGS	= $(DEFINE) $(CFLAGS) $(CPPFLAGS)
  CC_FPIC		= -fPIC
  LD_SHARED	= -shared
++CHMOD		= chmod
+ CHMOD_REMOVEX	= -x
  
-@@ -59,15 +59,11 @@ LIB_TARGETS	= cli.bflogic eq.bflogic fil
- 
+ ###################################
+@@ -66,14 +62,11 @@ LIB_TARGETS	= cli.bflogic eq.bflogic fil
  UNAME		= $(shell uname)
  UNAME_P         = $(shell uname -p)
--UNAME_M         = $(shell uname -m)
-+UNAME_M         ?= 
+ UNAME_M         = $(shell uname -m)
++UNAME_M         ?=
  
  # Linux
  ifeq ($(UNAME),Linux)
@@ -56,36 +56,37 @@
  BRUTEFIR_OBJS	+= $(BRUTEFIR_SSE_OBJS)
  CC_FLAGS	+= -msse
  endif
-@@ -127,25 +123,25 @@ bfconf_lexical.o: bfconf_lexical.c
- 	$(FLEX) -o$@ $<
- 
- brutefir: $(BRUTEFIR_OBJS)
--	$(CC) $(LIBPATHS) $(LDMULTIPLEDEFS) -o $@ $(BRUTEFIR_OBJS) $(BRUTEFIR_LIBS)
-+	$(CC) $(LIBPATHS) $(LDMULTIPLEDEFS) -o $@ $(BRUTEFIR_OBJS) $(BRUTEFIR_LIBS) -lgcc
+@@ -127,27 +120,27 @@ brutefir: $(BRUTEFIR_OBJS)
+ 	$(CC) $(LDFLAGS) $(LIBPATHS) $(LDMULTIPLEDEFS) -o $@ $(BRUTEFIR_OBJS) $(BRUTEFIR_LIBS)
  
  alsa.bfio: $(BFIO_ALSA_OBJS)
--	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_ALSA_OBJS) $(BFIO_ALSA_LIBS) -lc
-+	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_ALSA_OBJS) $(BFIO_ALSA_LIBS) -lc -lgcc
+-	$(LD) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_ALSA_OBJS) $(BFIO_ALSA_LIBS) -lc
++	$(CC) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_ALSA_OBJS) $(BFIO_ALSA_LIBS) -lc
+ 	$(CHMOD) $(CHMOD_REMOVEX) $@
  
  oss.bfio: $(BFIO_OSS_OBJS)
--	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_OSS_OBJS) -lc
-+	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_OSS_OBJS) -lc -lgcc
+-	$(LD) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_OSS_OBJS) -lc
++	$(CC) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_OSS_OBJS) -lc
+ 	$(CHMOD) $(CHMOD_REMOVEX) $@
  
  jack.bfio: $(BFIO_JACK_OBJS)
--	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_JACK_OBJS) $(BFIO_JACK_LIBS) -lc
-+	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_JACK_OBJS) $(BFIO_JACK_LIBS) -lc -lgcc
+-	$(LD) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_JACK_OBJS) $(BFIO_JACK_LIBS) -lc
++	$(CC) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_JACK_OBJS) $(BFIO_JACK_LIBS) -lc
+ 	$(CHMOD) $(CHMOD_REMOVEX) $@
  
  file.bfio: $(BFIO_FILE_OBJS)
--	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_FILE_OBJS) -lc
-+	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_FILE_OBJS) -lc -lgcc
+-	$(LD) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_FILE_OBJS) -lc
++	$(CC) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFIO_FILE_OBJS) -lc
+ 	$(CHMOD) $(CHMOD_REMOVEX) $@
  
  cli.bflogic: $(BFLOGIC_CLI_OBJS)
--	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_CLI_OBJS) -lc
-+	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_CLI_OBJS) -lc -lgcc
+-	$(LD) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_CLI_OBJS) -lc
++	$(CC) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_CLI_OBJS) -lc
+ 	$(CHMOD) $(CHMOD_REMOVEX) $@
  
  eq.bflogic: $(BFLOGIC_EQ_OBJS)
--	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_EQ_OBJS) -lc
-+	$(LD) $(LD_SHARED) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_EQ_OBJS) -lc -lgcc
+-	$(LD) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_EQ_OBJS) -lc
++	$(CC) $(LD_SHARED) $(LDFLAGS) $(CC_FPIC) $(LIBPATHS) -o $@ $(BFLOGIC_EQ_OBJS) -lc
+ 	$(CHMOD) $(CHMOD_REMOVEX) $@
  
  install: $(BIN_TARGETS) $(LIB_TARGETS)
- 	install -d $(INSTALL_PREFIX)/bin $(INSTALL_PREFIX)/lib/brutefir
