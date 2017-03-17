@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.20.3
+PKG_VERSION:=		0.20.6
 PKG_RELEASE:=		1
-PKG_HASH:=		2238c1233f5318800ede7c37eeaf705c04920315de572dc666aff6ca682eb0f9
+PKG_HASH:=		f4055e1189e5cc00e83706b2e0b5ead924ced0303e073d7802ee9f9a8eba4b47
 PKG_DESCR:=		music player daemon
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libmpdclient boost libncurses libexpat
@@ -16,7 +16,7 @@ PKG_NEEDS:=		threads c++
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/mpd/0.20/
 
-PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4 WITH_TREMOR
+PKG_FLAVOURS_MPD:=	WITH_ALSA WITH_AO WITH_MP3 WITH_MP4
 PKG_FLAVOURS_MPD+=	WITH_OGG WITH_FLAC WITH_WAV WITH_MMS WITH_FFMPEG
 PKG_FLAVOURS_MPD+=	WITH_SHOUT WITH_CURL WITH_SAMPLERATE WITH_HTTPD
 PKG_FLAVOURS_MPD+=	WITH_SNDFILE WITH_OPUS WITH_PULSE WITH_AVAHI WITH_JACK
@@ -56,12 +56,6 @@ PKGFS_WITH_OGG:=	libvorbis libogg
 PKGFB_WITH_OGG:=	libvorbis libogg
 ifeq ($(ADK_PACKAGE_MPD_WITH_OGG),y)
 PKG_FDEPENDS+=		libvorbis libogg
-endif
-PKGFD_WITH_TREMOR:=	enable fixpoint Vorbis/OGG support
-PKGFS_WITH_TREMOR:=	libvorbisidec
-PKGFB_WITH_TREMOR:=	libvorbisidec
-ifeq ($(ADK_PACKAGE_MPD_WITH_TREMOR),y)
-PKG_FDEPENDS+=		libvorbisidec
 endif
 PKGFD_WITH_FLAC:=	enable FLAC support
 PKGFS_WITH_FLAC:=	libflac
