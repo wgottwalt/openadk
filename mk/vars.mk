@@ -102,8 +102,11 @@ endif
 ifeq ($(ADK_BUILD_COMPILER_LLVM),y)
 TARGET_CC:=		clang --target=${GNU_TARGET_NAME} --sysroot=$(STAGING_TARGET_DIR)
 TARGET_CXX:=		clang++ --target=${GNU_TARGET_NAME} --sysroot=$(STAGING_TARGET_DIR)
+TARGET_LDFLAGS:=	-fuse-ld=lld -stdlib=libc++
 endif
 
+# gcc specific
+ifeq ($(ADK_BUILD_COMPILER_GCC),y)
 # for x86_64 x32 ABI we need to extend TARGET_CC/TARGET_CXX
 ifeq ($(ADK_TARGET_ABI_X32),y)
 TARGET_CC+=            $(ADK_TARGET_ABI_CFLAGS)
@@ -237,6 +240,9 @@ ifeq ($(ADK_TARGET_ARCH_MICROBLAZE),y)
 TARGET_CFLAGS+=		-mxl-barrel-shift
 TARGET_CXXFLAGS+=	-mxl-barrel-shift
 endif
+
+endif
+# end gcc specific
 
 # add configured compiler flags for optimization
 TARGET_CFLAGS+=		$(ADK_TARGET_CFLAGS_OPT)

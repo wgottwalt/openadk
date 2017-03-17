@@ -12,13 +12,13 @@
 
 include $(ADK_TOPDIR)/rules.mk
 
-TARGETS:=binutils gmp mpfr mpc
-
 ifeq ($(ADK_BUILD_COMPILER_GCC),y)
+TARGETS:=binutils gmp mpfr mpc
 TARGETS+=gcc
 COMPILER:=gcc
 endif
 ifeq ($(ADK_BUILD_COMPILER_LLVM),y)
+TARGETS:=binutils
 TARGETS+=llvm
 COMPILER:=llvm
 endif
@@ -67,7 +67,13 @@ clean: $(TARGETS_CLEAN)
 download: $(DOWNLOAD)
 final: $(FINAL)
 
+
+ifeq ($(ADK_BUILD_COMPILER_LLVM),y)
+$(COMPILER)-configure: binutils-install
+else
 $(COMPILER)-configure: binutils-install gmp-install mpfr-install mpc-install
+endif
+
 ifeq ($(ADK_TARGET_LIB_NEWLIB),y)
 $(CLIB)-install: $(COMPILER)-configure
 else
