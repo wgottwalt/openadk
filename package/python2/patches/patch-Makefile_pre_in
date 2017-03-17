@@ -1,14 +1,6 @@
---- Python-2.7.9.orig/Makefile.pre.in	2014-12-10 16:59:50.000000000 +0100
-+++ Python-2.7.9/Makefile.pre.in	2015-04-11 14:06:58.373384200 +0200
-@@ -234,6 +234,7 @@ LIBFFI_INCLUDEDIR=	@LIBFFI_INCLUDEDIR@
- ##########################################################################
- # Parser
- PGEN=		Parser/pgen$(EXE)
-+HOSTPGEN?=	Parser/pgen$(EXE)
- 
- PSRCS=		\
- 		Parser/acceler.c \
-@@ -474,7 +475,7 @@ sharedmods: $(BUILDPYTHON) pybuilddir.tx
+--- Python-2.7.13.orig/Makefile.pre.in	2016-12-17 21:05:06.000000000 +0100
++++ Python-2.7.13/Makefile.pre.in	2017-03-16 19:38:14.000000000 +0100
+@@ -545,7 +545,7 @@ sharedmods: $(BUILDPYTHON) pybuilddir.tx
  	esac; \
  	$(RUNSHARED) CC='$(CC)' LDSHARED='$(BLDSHARED)' OPT='$(OPT)' \
  		_TCLTK_INCLUDES='$(TCLTK_INCLUDES)' _TCLTK_LIBS='$(TCLTK_LIBS)' \
@@ -17,16 +9,7 @@
  
  # Build static library
  # avoid long command lines, same as LIBRARY_OBJS
-@@ -611,7 +612,7 @@ Modules/pwdmodule.o: $(srcdir)/Modules/p
- $(GRAMMAR_H): $(GRAMMAR_INPUT) $(PGENSRCS)
- 		@$(MKDIR_P) Include
- 		$(MAKE) $(PGEN)
--		$(PGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
-+		$(HOSTPGEN) $(GRAMMAR_INPUT) $(GRAMMAR_H) $(GRAMMAR_C)
- $(GRAMMAR_C): $(GRAMMAR_H) $(GRAMMAR_INPUT) $(PGENSRCS)
- 		$(MAKE) $(GRAMMAR_H)
- 		touch $(GRAMMAR_C)
-@@ -1042,28 +1043,6 @@ libinstall:	build_all $(srcdir)/Lib/$(PL
+@@ -1120,28 +1120,6 @@ libinstall:	build_all $(srcdir)/Lib/$(PL
  		$(INSTALL_DATA) $(srcdir)/Modules/xxmodule.c \
  			$(DESTDIR)$(LIBDEST)/distutils/tests ; \
  	fi

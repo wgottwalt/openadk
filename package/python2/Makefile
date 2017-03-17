@@ -4,10 +4,10 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
-PKG_VERSION:=		2.7.10
+PKG_VERSION:=		2.7.13
 PKG_RELEASE:=		1
-PKG_HASH:=		eda8ce6eec03e74991abb5384170e7c65fcd7522e409b8e83d7e6372add0f12a
-PKG_DESCR:=		python scripting language (Version 2)
+PKG_HASH:=		a4f05a0720ce0fd92626f0278b6b433eee9a6173ddf2bced7957dfb599a5ece1
+PKG_DESCR:=		python2 script interpreter
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libffi
 PKG_BUILDDEP:=		libffi python2-host 
@@ -90,7 +90,6 @@ endif
 HOST_CFLAGS+=		-fPIC
 
 AUTOTOOL_STYLE:=	autoreconf
-MAKE_ENV+=		HOSTPGEN=$(STAGING_HOST_DIR)/usr/bin/pgen
 CONFIGURE_ENV+=         ac_cv_have_long_long_format=yes \
 			ac_cv_file__dev_ptmx=yes \
 			ac_cv_file__dev_ptc=no
@@ -103,7 +102,6 @@ CONFIGURE_ARGS+=	--with-threads \
 HOST_CONFIGURE_ENV+=	MACOSX_DEPLOYMENT_TARGET=10.9
 HOST_CONFIGURE_ARGS+=	--with-threads \
 			--with-system-ffi \
-			--enable-shared \
 			--disable-ipv6 \
 			--disable-toolbox-glue \
 			--without-cxx-main
@@ -117,8 +115,6 @@ hostpre-configure:
 		$(WRKBUILD)/Misc/python-config.in
 
 hostpost-install:
-	$(INSTALL_BIN) ${WRKBUILD}/Parser/pgen \
-		$(STAGING_HOST_DIR)/usr/bin/pgen
 	$(CP) $(ADK_TOPDIR)/package/python2/files/python-config.patch $(WRKBUILD)/
 	$(SED) "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" $(WRKBUILD)/python-config.patch
 	$(SED) "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#" $(WRKBUILD)/python-config.patch
