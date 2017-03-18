@@ -185,7 +185,6 @@ config ADK_TARGET_FLASH_PAGE_SIZE
 config ADK_TARGET_FLASH_SUBPAGE_SIZE
 	int
 	default 512 if ADK_TARGET_SYSTEM_MIKROTIK_RB532
-	default ADK_TARGET_FLASH_PAGE_SIZE
 	help
 	  Size of NAND sub-pages (if supported).
 
