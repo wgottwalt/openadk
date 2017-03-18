@@ -1,10 +1,10 @@
---- nginx-1.11.1.orig/auto/types/sizeof	2016-05-31 15:43:50.000000000 +0200
-+++ nginx-1.11.1/auto/types/sizeof	2016-06-05 23:06:21.837900876 +0200
+--- nginx-1.11.10.orig/auto/types/sizeof	2017-02-14 16:36:04.000000000 +0100
++++ nginx-1.11.10/auto/types/sizeof	2017-03-18 08:21:47.830902623 +0100
 @@ -25,22 +25,41 @@ $NGX_INCLUDE_UNISTD_H
  $NGX_INCLUDE_INTTYPES_H
  $NGX_INCLUDE_AUTO_CONFIG_H
  
--int main() {
+-int main(void) {
 -    printf("%d", (int) sizeof($ngx_type));
 +#if !defined( PASTE)
 +#define PASTE2( x, y) x##y
