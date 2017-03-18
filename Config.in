@@ -53,7 +53,7 @@ source "target/config/Config.in.runtime"
 endmenu
 
 menu "Linux Kernel configuration"
-	visible if ADK_TARGET_OS_LINUX
+	visible if ADK_TARGET_OS_LINUX && !ADK_TARGET_CHOOSE_ARCH
 source "target/config/Config.in.kernelversion"
 source "target/config/Config.in.kernelcfg"
 source "target/config/Config.in.kernelcmd"

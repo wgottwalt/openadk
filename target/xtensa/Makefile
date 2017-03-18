@@ -11,7 +11,7 @@ else
 KERNEL:=$(LINUX_DIR)/arch/xtensa/boot/uImage
 endif
 
-QEMU_ARGS:=-M ml605 -monitor null
+QEMU_ARGS:=-M kc705
 QEMU_ARGS+=${ADK_QEMU_ARGS}
 ifeq ($(ADK_TARGET_CPU_XTENSA_DC233C),y)
 QEMU_ARGS+=-cpu dc233c
@@ -20,7 +20,7 @@ ifeq ($(ADK_TARGET_CPU_XTENSA_DC232B),y)
 QEMU_ARGS+=-cpu dc232b
 endif
 ifeq ($(ADK_TARGET_CPU_XTENSA_DE212),y)
-QEMU_ARGS+=-cpu de212
+QEMU_ARGS+=-cpu de212 -m 256
 endif
 
 # target helper text
