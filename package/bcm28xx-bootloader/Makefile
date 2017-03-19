@@ -81,6 +81,10 @@ ifneq ($(ADK_TARGET_HARDWARE_RPI_PROTO),)
 	printf "dtoverlay=rpi-proto\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
+ifneq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3),)
+	printf "enable-uart=1\n" >> \
+		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+endif
 ifeq ($(ADK_PACKAGE_BCM28XX_DEBUGTOOL),y)
 	$(INSTALL_DIR) $(IDIR_BCM28XX_DEBUGTOOL)/opt/vc/bin
 	$(INSTALL_BIN) ./files/vcdbg \

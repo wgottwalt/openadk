@@ -138,7 +138,7 @@ endif
 kernel-strip:
 ifeq ($(ADK_TARGET_KERNEL_GIT_REPO_NAME),rpi)
 	@echo adding DT trailer to kernel $(MAKE_TRACE)
-	PATH='$(HOST_PATH)' perl $(LINUX_DIR)/scripts/mkknlimg --270x --dtok $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+	PATH='$(HOST_PATH)' perl $(LINUX_DIR)/scripts/mkknlimg $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 else
 	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 endif
