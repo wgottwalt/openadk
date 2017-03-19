@@ -415,6 +415,17 @@ fi
 rm test.c test 2>/dev/null
 rm Makefile.tmp 2>/dev/null
 
+# for make kernelconfig pkg-config is required to find ncurses
+if [ $os = "Darwin" ]; then
+  printf " --->  checking if pkg-config is installed.. "
+  if ! which pkg-config >/dev/null 2>&1; then
+    printf "not found\n"
+    out=1
+  else
+    printf "found\n"
+  fi
+fi
+
 # error out on any required prerequisite
 if [ $out -ne 0 ]; then
   exit
