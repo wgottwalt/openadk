@@ -9,7 +9,7 @@ PKG_DESCR:=		gcc fortran library
 PKG_SECTION:=		base/libs
 PKG_OPTS:=		noremove
 
-PKG_DFLT_LIBGCC:=	y if !ADK_APPLIANCE_TOOLCHAIN
+PKG_CFLINE_LIBGCC:=	depends on ADK_TOOLCHAIN_WITH_FORTRAN
 
 NO_DISTFILES:=		1
 
