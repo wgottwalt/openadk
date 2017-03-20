@@ -28,7 +28,7 @@ config BUSYBOX_FEATURE_SHADOWPASSWDS
 
 config BUSYBOX_USE_BB_PWD_GRP
 	bool "Use internal password and group functions rather than system functions"
-	default y
+	default n
 	help
 	  If you leave this disabled, busybox will use the system's password
 	  and group functions. And if you are using the GNU C library
@@ -53,7 +53,7 @@ config BUSYBOX_USE_BB_PWD_GRP
 
 config BUSYBOX_USE_BB_SHADOW
 	bool "Use internal shadow password functions"
-	default y
+	default n
 	depends on BUSYBOX_USE_BB_PWD_GRP && BUSYBOX_FEATURE_SHADOWPASSWDS
 	help
 	  If you leave this disabled, busybox will use the system's shadow
@@ -72,7 +72,7 @@ config BUSYBOX_USE_BB_SHADOW
 
 config BUSYBOX_USE_BB_CRYPT
 	bool "Use internal crypt functions"
-	default y
+	default n
 	help
 	  Busybox has internal DES and MD5 crypt functions.
 	  They produce results which are identical to corresponding
@@ -94,7 +94,7 @@ config BUSYBOX_USE_BB_CRYPT
 
 config BUSYBOX_USE_BB_CRYPT_SHA
 	bool "Enable SHA256/512 crypt functions"
-	default y
+	default n
 	depends on BUSYBOX_USE_BB_CRYPT
 	help
 	  Enable this if you have passwords starting with "$5$" or "$6$"
@@ -269,7 +269,7 @@ config BUSYBOX_FEATURE_SECURETTY
 
 config BUSYBOX_PASSWD
 	bool "passwd"
-	default y
+	default n
 	select BUSYBOX_FEATURE_SYSLOG
 	help
 	  passwd changes passwords for user and group accounts. A normal user
