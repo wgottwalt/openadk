@@ -273,7 +273,7 @@ endif
 
 ifeq (,$(filter devonly,$(7)))
 	$${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
-ifneq ($(ADK_DEBUG),y)
+ifneq ($(ADK_DEBUG),)
 	$${PKG_BUILD} $${IDIR_$(1)_DBG} $${PACKAGE_DIR} $(MAKE_TRACE)
 endif
 endif

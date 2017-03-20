@@ -65,6 +65,9 @@ done
 #done
 #echo
 
+# start with empty directory, avoid leftovers after version change
+rm -rf ${BUILD_DIR}/linux-modules
+
 for modname in ${!modpaths[@]}; do
 	find_modlevel $modname
 

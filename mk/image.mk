@@ -146,14 +146,14 @@ endif
 
 ${FW_DIR}/${ROOTFSTARBALL}: ${TARGET_DIR}/.adk kernel-package
 	cd ${TARGET_DIR}; find . | sed -n '/^\.\//s///p' | sort | \
-		$(CPIO) -o -Hustar --owner=0:0 | $(XZ) -c >$@
+		$(CPIO) --quiet -o -Hustar --owner=0:0 | $(XZ) -c >$@
 ifeq ($(ADK_TARGET_QEMU),y)
 	@cp $(KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 endif
 
 ${FW_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}/.adk
 	cd ${TARGET_DIR}; find . | grep -v ./boot/ | sed -n '/^\.\//s///p' | sort | \
-		$(CPIO) -o -Hustar --owner=0:0 | $(XZ) -c >$@
+		$(CPIO) --quiet -o -Hustar --owner=0:0 | $(XZ) -c >$@
 
 ${STAGING_TARGET_DIR}/${INITRAMFS}_list: ${TARGET_DIR}/.adk
 	env PATH='${HOST_PATH}' $(BASH) ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \

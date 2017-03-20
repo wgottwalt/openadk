@@ -176,7 +176,7 @@ ifeq ($(ADK_TARGET_OS_BAREMETAL),y)
 	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final
 endif
 ifeq ($(ADK_TARGET_OS_LINUX),y)
-	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final target/config-prepare target/compile package/compile root_clean package/install target/install package_index
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final target/config-prepare target/compile package_clean package/compile root_clean package/install target/install package_index
 endif
 endif
 
@@ -251,6 +251,10 @@ newpackage:
 	$(SED) 's#@PKG@#$(PKG)#' $(ADK_TOPDIR)/package/$(PKG)/Makefile
 	$(SED) 's#@VER@#$(VER)#' $(ADK_TOPDIR)/package/$(PKG)/Makefile
 	@echo "Edit package/$(PKG)/Makefile to complete"
+
+package_clean:
+	rm -rf $(PACKAGE_DIR)
+	mkdir -p $(PACKAGE_DIR)
 
 root_clean:
 	rm -rf $(TARGET_DIR)

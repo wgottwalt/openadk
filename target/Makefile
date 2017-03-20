@@ -176,7 +176,7 @@ endif
 %-compile: %-prepare
 	$(MAKE) -C $(patsubst %-compile,%,$@) compile
 
-%-install: %-compile
+%-install:
 	$(MAKE) -C $(patsubst %-install,%,$@) install
 
 %-targethelp:
