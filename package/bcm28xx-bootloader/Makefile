@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm28xx-bootloader
 PKG_VERSION:=		509beaab0e102cf6decf209922669700c9ac5576
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		bootloader for bcm28xx
 PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/raspberrypi/firmware
@@ -58,31 +58,31 @@ endif
 	printf "gpu_mem=$(ADK_TARGET_GPU_MEM)\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 ifneq ($(ADK_TARGET_HARDWARE_HIFIBERRY_AMP),)
-	printf "dtoverlay=hifiberry-amp\n" >> \
+	printf "dtoverlay=hifiberry-amp.dtb\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifneq ($(ADK_TARGET_HARDWARE_HIFIBERRY_DAC),)
-	printf "dtoverlay=hifiberry-dac\n" >> \
+	printf "dtoverlay=hifiberry-dac.dtb\n" >> \
+		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+endif
+ifneq ($(ADK_TARGET_HARDWARE_HIFIBERRY_DACPLUS),)
+	printf "dtoverlay=hifiberry-dacplus.dtb\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifneq ($(ADK_TARGET_HARDWARE_HIFIBERRY_DIGI),)
-	printf "dtoverlay=hifiberry-digi\n" >> \
+	printf "dtoverlay=hifiberry-digi.dtb\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifneq ($(ADK_TARGET_HARDWARE_RPI_DAC),)
-	printf "dtoverlay=rpi-dac\n" >> \
+	printf "dtoverlay=rpi-dac.dtb\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifneq ($(ADK_TARGET_HARDWARE_IQAUDIO_DAC),)
-	printf "dtoverlay=iqaudio-dac\n" >> \
+	printf "dtoverlay=iqaudio-dac.dtb\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifneq ($(ADK_TARGET_HARDWARE_RPI_PROTO),)
-	printf "dtoverlay=rpi-proto\n" >> \
-		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-endif
-ifneq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3),)
-	printf "enable-uart=1\n" >> \
+	printf "dtoverlay=rpi-proto.dtb\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifeq ($(ADK_PACKAGE_BCM28XX_DEBUGTOOL),y)
