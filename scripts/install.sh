@@ -552,10 +552,11 @@ case $target {
 		[[ -e "$x" ]] && cp "$fwdir"/*.dtb "$B/"
 		break
 	done
+        # use static dtoverlay, rename to *.dtb
 	mkdir "$B/"overlays
 	for x in "$fwdir"/overlays/*.dtbo; do
-		[[ -e "$x" ]] && cp "$fwdir"/overlays/*.dtbo "$B/"overlays
-		break
+		y=$(basename ${x} .dtbo)
+		[[ -e "$x" ]] && cp "$fwdir"/overlays/${y}.dtbo "$B/"overlays/${y}.dtb
 	done
 	umount_fs "$B"
 	;;
