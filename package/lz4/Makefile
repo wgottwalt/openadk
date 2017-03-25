@@ -4,20 +4,18 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lz4
-PKG_VERSION:=		131
+PKG_VERSION:=		1.7.5
 PKG_RELEASE:=		1
-PKG_HASH:=		9d4d00614d6b9dec3114b33d1224b6262b99ace24434c53487a0c8fd0b18cfed
+PKG_HASH:=		0190cacd63022ccb86f44fa5041dc6c3804407ad61550ca21c382827319e7e7e
 PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
 PKG_DEPENDS:=		liblz4
-PKG_URL:=		https://code.google.com/p/lz4/
-PKG_SITES:=		https://github.com/Cyan4973/lz4/archive/
+PKG_URL:=		http://lz4.github.io/lz4/
+PKG_SITES:=		https://github.com/lz4/lz4/archive/
 PKG_OPTS:=		dev
 PKG_LIBNAME:=		liblz4
-PKG_OPTS:=		dev
 
-DISTFILES:=		r${PKG_VERSION}.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-r${PKG_VERSION}
+DISTFILES:=		v$(PKG_VERSION).tar.gz
 
 PKG_SUBPKGS:=		LZ4 LIBLZ4
 PKGSD_LIBLZ4:=		lz4 compression library
@@ -32,6 +30,8 @@ $(eval $(call PKG_template,LIBLZ4,liblz4,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_L
 
 HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
+XAKE_FLAGS+=		PREFIX=/usr
+HOST_XAKE_FLAGS+=	PREFIX=/usr
 
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
