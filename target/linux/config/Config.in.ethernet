@@ -5,6 +5,10 @@ menu "Ethernet network devices support"
 depends on ADK_TARGET_WITH_NETDEVICE \
 	|| ADK_TARGET_GENERIC
 
+config ADK_KERNEL_NET_ETHERNET
+	bool
+	default y
+
 config ADK_KERNEL_NET_CADENCE
 	bool
 
