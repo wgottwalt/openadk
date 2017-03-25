@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
-PKG_VERSION:=		2.4.0
+PKG_VERSION:=		2.4.1
 PKG_RELEASE:=		1
-PKG_HASH:=		6f23ba49a1dbeb658f49c7ae17d9ea979de6d92c7357de3d55cd4525e1b2f87e
+PKG_HASH:=		fde9e22c6df7a335d2d58c6a4d5967be76df173c766a5c51ece57fd044c76ee5
 PKG_DESCR:=		vpn solution using ssl/tls
 PKG_DEPENDS:=		libressl
 PKG_BUILDDEP:=		libressl
@@ -15,10 +15,13 @@ PKG_SECTION:=		net/security
 PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
 
-PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS WITH_SMALL
+PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_LZ4 WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS WITH_SMALL
 PKGFD_WITH_LZO:=	enable lzo compression support
 PKGFS_WITH_LZO:=	liblzo
 PKGFB_WITH_LZO:=	liblzo
+PKGFD_WITH_LZ4:=	enable lz4 compression support
+PKGFS_WITH_LZ4:=	liblz4
+PKGFB_WITH_LZ4:=	lz4
 PKGFD_WITH_MANAGEMENT:=	enable management server support
 PKGFD_WITH_HTTPPROXY:=	enable http proxy support
 PKGFD_WITH_SOCKS:=	enable socks proxy support
@@ -29,6 +32,12 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,OPENVPN,openvpn,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 CONFIGURE_ENV+=		ac_cv_lib_nsl_inet_ntoa=no
+
+ifneq ($(ADK_PACKAGE_OPENVPN_WITH_LZ4),)
+CONFIGURE_ARGS+=	--enable-lz4
+else
+CONFIGURE_ARGS+=	--disable-lz4
+endif
 
 ifneq ($(ADK_PACKAGE_OPENVPN_WITH_LZO),)
 CONFIGURE_ARGS+=	--enable-lzo
