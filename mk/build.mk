@@ -228,7 +228,7 @@ targethelp:
 
 kernelconfig:
 	${KERNEL_MAKE_ENV} ${MAKE} -C "${LINUX_DIR}" \
-		ARCH=$(ADK_TARGET_ARCH) \
+		ARCH=$(ADK_TARGET_KARCH) \
 		${KERNEL_MAKE_OPTS} \
 		menuconfig
 
