@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		e2fsprogs
-PKG_VERSION:=		1.43.3
+PKG_VERSION:=		1.43.4
 PKG_RELEASE:=		1
-PKG_HASH:=		744ca4e9a8e6c943601b2744d1ae658e5f37d35b5ea5b1dea86985320bd87f37
+PKG_HASH:=		54b3f21123a531a6a536b9cdcc21344b0122a72790dbe4dacc98e64db25e4a24
 PKG_DESCR:=		ext2/3/4 filesystem utilities
 PKG_SECTION:=		sys/fs
 PKG_BUILDDEP:=		util-linux
@@ -27,9 +27,9 @@ PKGSD_LIBCOM_ERR:=	common error library
 PKGSC_LIBCOM_ERR:=	libs/misc
 PKGSD_LIBSS:=		subsystem command parsing library
 PKGSC_LIBSS:=		libs/misc
-PKGSD_E2FSCK_STATIC:=	Static build of e2fsck
+PKGSD_E2FSCK_STATIC:=	static build of e2fsck
 PKGSC_E2FSCK_STATIC:=	sys/fs
-PKGSD_TUNE2FS_STATIC:=	Static build of tune2fs
+PKGSD_TUNE2FS_STATIC:=	static build of tune2fs
 PKGSC_TUNE2FS_STATIC:=	sys/fs
 PKGSD_RESIZE2FS:=	ext2/3/4 resize utility
 PKGSC_RESIZE2FS:=	sys/fs
@@ -76,8 +76,7 @@ CONFIGURE_ARGS+=	--disable-rpath \
 			--disable-defrag \
 			--disable-libblkid \
 			--disable-libuuid \
-			--disable-debugfs \
-			--enable-verbose-makecmds
+			--disable-debugfs
 TARGET_CFLAGS+=		$(TARGET_CPPFLAGS) -I$(STAGING_TARGET_DIR)/usr/include
 MAKE_FLAGS+=		BUILD_CC="$(HOST_CC)" \
 			BUILD_CFLAGS="$(HOST_CFLAGS) $(HOST_CPPFLAGS) -I$(WRKSRC)/lib -I." \
