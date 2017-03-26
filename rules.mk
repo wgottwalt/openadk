@@ -99,6 +99,12 @@ endif
 ifeq ($(ADK_TARGET_ARCH),hppa)
 ADK_TARGET_KARCH:=parisc
 endif
+ifeq ($(ADK_TARGET_ARCH),riscv32)
+ADK_TARGET_KARCH:=riscv
+endif
+ifeq ($(ADK_TARGET_ARCH),riscv64)
+ADK_TARGET_KARCH:=riscv
+endif
 
 include $(ADK_TOPDIR)/mk/vars.mk
 
