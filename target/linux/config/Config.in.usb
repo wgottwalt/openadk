@@ -67,6 +67,7 @@ config ADK_KERNEL_USB
 	default m if ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_KINETIS_K70
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
 	default n
 	help
 	  Universal Serial Bus (USB) is a specification for a serial bus
@@ -114,6 +115,7 @@ config ADK_KERNEL_USB_EHCI_HCD
 	default m if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_KINETIS_K70
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
 	default n
 	help
 	  The Enhanced Host Controller Interface (EHCI) is standard for USB 2.0
