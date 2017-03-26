@@ -151,6 +151,7 @@ ifeq ($(ADK_TARGET_FS),squashfs)
 endif
 
 dtb-install:
+ifeq ($(ADK_TARGET_WITH_DEVICETREE),y)
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_XILINX_ZYNQ),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		dtbs $(MAKE_TRACE)
@@ -197,6 +198,7 @@ endif
 		[[ -e "$$x" ]] && cp $(LINUX_DIR)/arch/arm/boot/dts/*.dtb $(FW_DIR); \
 		break; \
 	done
+endif
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
