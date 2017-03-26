@@ -68,17 +68,17 @@ $(1):
 		  echo "Using git ${PKG_GIT}: $${PKG_VERSION}" $(DL_TRACE); \
 		  case "$${PKG_GIT}" in \
 		    tag|branch) \
-			git clone --depth 1 --branch $${PKG_VERSION} $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
+			git clone --progress --depth 1 --branch $${PKG_VERSION} $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
 			if [ $$$$? -ne 0 ]; then echo "git clone error"; exit 1; fi; \
 			;; \
 		    hash) \
-			git clone $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
+			git clone --progress $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
 			if [ $$$$? -ne 0 ]; then echo "git clone error"; exit 1; fi; \
 			(cd $${PKG_NAME}-$${PKG_VERSION}; git checkout $${PKG_VERSION}) $(DL_TRACE); \
 			;; \
 		  esac ;\
 		else \
-		  git clone --depth 1 $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
+		  git clone --progress --depth 1 $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
 		  if [ $$$$? -ne 0 ]; then echo "git clone error"; exit 1; fi; \
 		fi; \
 		tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
