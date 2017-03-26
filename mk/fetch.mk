@@ -63,6 +63,12 @@ $(1):
 	cd "$$$${fullname%%/$$$$filename}"; \
 	for url in "${PKG_SITES}"; do case $$$$url in \
 	   file://*|git://*|*.git) \
+		echo "Trying to downloading from backup site first"; \
+		if $${FETCHCMD} $$$$filename $${MASTER_SITE_BACKUP}/$$$$filename $(DL_TRACE); then \
+			touch $$$$filename.nohash; \
+			: check the size here; \
+			[[ ! -e $$$$filename ]] || exit 0; \
+		fi; \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
 		if [ ! -z "$${PKG_GIT}" ]; then \
 		  echo "Using git ${PKG_GIT}: $${PKG_VERSION}" $(DL_TRACE); \
@@ -81,6 +87,7 @@ $(1):
 		  git clone --progress --depth 1 $${PKG_SITES} $${PKG_NAME}-$${PKG_VERSION} $(DL_TRACE); \
 		  if [ $$$$? -ne 0 ]; then echo "git clone error"; exit 1; fi; \
 		fi; \
+		rm -rf $${PKG_NAME}-$${PKG_VERSION}/.git; \
 		tar cJf $${PKG_NAME}-$${PKG_VERSION}.tar.xz $${PKG_NAME}-$${PKG_VERSION}; \
 		touch $$$${filename}.nohash; \
 		rm -rf $${PKG_NAME}-$${PKG_VERSION}; \
