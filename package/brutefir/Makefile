@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		brutefir
 PKG_VERSION:=		1.0o
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		caae4a933b53b55b29d6cb7e2803e20819f31def6d0e4e12f9a48351e6dbbe9f
 PKG_DESCR:=		convolution engine
 PKG_SECTION:=		mm/audio

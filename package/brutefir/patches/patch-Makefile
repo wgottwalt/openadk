@@ -1,5 +1,5 @@
 --- brutefir-1.0o.orig/Makefile	2016-11-15 13:39:48.000000000 +0100
-+++ brutefir-1.0o/Makefile	2017-03-16 21:10:39.821793707 +0100
++++ brutefir-1.0o/Makefile	2017-03-27 06:25:27.528418184 +0200
 @@ -5,12 +5,12 @@ LDFLAGS +=
  
  ###################################
@@ -39,10 +39,14 @@
  CHMOD_REMOVEX	= -x
  
  ###################################
-@@ -66,14 +62,11 @@ LIB_TARGETS	= cli.bflogic eq.bflogic fil
- UNAME		= $(shell uname)
- UNAME_P         = $(shell uname -p)
- UNAME_M         = $(shell uname -m)
+@@ -63,17 +59,12 @@ LIB_TARGETS	= cli.bflogic eq.bflogic fil
+ ###################################
+ # System-specific settings
+ 
+-UNAME		= $(shell uname)
+-UNAME_P         = $(shell uname -p)
+-UNAME_M         = $(shell uname -m)
++UNAME		= Linux
 +UNAME_M         ?=
  
  # Linux
@@ -56,7 +60,7 @@
  BRUTEFIR_OBJS	+= $(BRUTEFIR_SSE_OBJS)
  CC_FLAGS	+= -msse
  endif
-@@ -127,27 +120,27 @@ brutefir: $(BRUTEFIR_OBJS)
+@@ -127,27 +118,27 @@ brutefir: $(BRUTEFIR_OBJS)
  	$(CC) $(LDFLAGS) $(LIBPATHS) $(LDMULTIPLEDEFS) -o $@ $(BRUTEFIR_OBJS) $(BRUTEFIR_LIBS)
  
  alsa.bfio: $(BFIO_ALSA_OBJS)
