@@ -85,6 +85,10 @@ ifneq ($(ADK_TARGET_HARDWARE_RPI_PROTO),)
 	printf "dtoverlay=rpi-proto.dtb\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
+ifeq ($(ADK_TARGET_HARDWARE_RPI3_SERIAL),y)
+	printf "dtoverlay=pi3-disable-bt.dtb\n" >> \
+		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+endif
 ifeq ($(ADK_PACKAGE_BCM28XX_DEBUGTOOL),y)
 	$(INSTALL_DIR) $(IDIR_BCM28XX_DEBUGTOOL)/opt/vc/bin
 	$(INSTALL_BIN) ./files/vcdbg \
