@@ -1,6 +1,6 @@
---- cifs-utils-6.3.orig/configure.ac	2014-01-09 17:19:53.000000000 +0100
-+++ cifs-utils-6.3/configure.ac	2014-05-06 13:52:11.790306753 +0200
-@@ -87,13 +87,25 @@ AC_CHECK_TYPES([ptrdiff_t, ssize_t, uint
+--- cifs-utils-6.7.orig/configure.ac	2017-03-02 17:51:05.000000000 +0100
++++ cifs-utils-6.7/configure.ac	2017-03-27 01:54:09.082783577 +0200
+@@ -93,13 +93,25 @@ AC_CHECK_TYPES([ptrdiff_t, ssize_t, uint
  
  # Checks for library functions.
  AC_FUNC_GETMNTENT

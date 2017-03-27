@@ -1,5 +1,5 @@
---- cifs-utils-6.1.orig/mtab.c	2013-07-02 21:13:33.000000000 +0200
-+++ cifs-utils-6.1/mtab.c	2013-10-28 07:33:27.000000000 +0100
+--- cifs-utils-6.7.orig/mtab.c	2017-03-02 17:51:05.000000000 +0100
++++ cifs-utils-6.7/mtab.c	2017-03-27 01:54:09.094784041 +0200
 @@ -36,6 +36,7 @@
  #include <time.h>
  #include <fcntl.h>
@@ -7,4 +7,4 @@
 +#include <paths.h>
  #include <stdlib.h>
  #include <signal.h>
- #include "mount.h"
+ #include <paths.h>
