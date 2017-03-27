@@ -87,6 +87,11 @@ config ADK_HOST_BUILD_GAWK
 	default y if ADK_HOST_DARWIN
 	default n
 
+config ADK_HOST_BUILD_OBJCONV
+	bool
+	default y if ADK_HOST_DARWIN
+	default n
+
 config ADK_HOST_BUILD_GREP
 	bool
 	default n
