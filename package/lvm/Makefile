@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
 PKG_VERSION:=		2.02.168
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		23a3d1cddd41b3ef51812ebf83e9fa491f502fe74130d4263be327a91914660d
 PKG_DESCR:=		logical volume management
 PKG_SECTION:=		sys/fs

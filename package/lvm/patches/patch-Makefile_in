@@ -1,0 +1,20 @@
+--- LVM2.2.02.168.orig/Makefile.in	2016-12-01 00:17:28.000000000 +0100
++++ LVM2.2.02.168/Makefile.in	2017-03-27 20:43:17.000000000 +0200
+@@ -18,7 +18,7 @@ top_builddir = @top_builddir@
+ abs_top_builddir = @abs_top_builddir@
+ abs_top_srcdir = @abs_top_srcdir@
+ 
+-SUBDIRS = conf daemons include lib libdaemon libdm man scripts tools
++SUBDIRS = conf daemons include lib libdaemon libdm scripts tools
+ 
+ ifeq ("@UDEV_RULES@", "yes")
+   SUBDIRS += udev
+@@ -67,7 +67,7 @@ liblvm.device-mapper: include.device-map
+ daemons.device-mapper: libdm.device-mapper
+ tools.device-mapper: libdm.device-mapper
+ scripts.device-mapper: include.device-mapper
+-device-mapper: tools.device-mapper daemons.device-mapper man.device-mapper
++device-mapper: tools.device-mapper daemons.device-mapper
+ 
+ ifeq ("@INTL@", "yes")
+ lib.pofile: include.pofile

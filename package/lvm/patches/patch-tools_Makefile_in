@@ -1,0 +1,50 @@
+--- LVM2.2.02.168.orig/tools/Makefile.in	2016-12-01 00:17:32.000000000 +0100
++++ LVM2.2.02.168/tools/Makefile.in	2017-03-28 03:03:30.000000000 +0200
+@@ -182,18 +182,22 @@ endif
+ 	install_dmsetup_dynamic install_dmsetup_static
+ 
+ install_cmdlib_include: $(srcdir)/lvm2cmd.h
+-	$(INSTALL_DATA) -D $< $(includedir)/$(<F)
++	$(INSTALL_DIR) $(includedir)
++	$(INSTALL_DATA) $< $(includedir)/$(<F)
+ 
+ install_cmdlib_dynamic: liblvm2cmd.$(LIB_SUFFIX)
+-	$(INSTALL_PROGRAM) -D $< $(libdir)/$(<F).$(LIB_VERSION)
++	$(INSTALL_DIR) $(libdir)
++	$(INSTALL_PROGRAM) $< $(libdir)/$(<F).$(LIB_VERSION)
+ 	$(INSTALL_DIR) $(usrlibdir)
+ 	$(LN_S) -f $(USRLIB_RELPATH)$(<F).$(LIB_VERSION) $(usrlibdir)/$(<F)
+ 
+ install_cmdlib_static: liblvm2cmd-static.a
+-	$(INSTALL_DATA) -D $< $(usrlibdir)/liblvm2cmd.a
++	$(INSTALL_DIR) $(usrlibdir)
++	$(INSTALL_DATA) $< $(usrlibdir)/liblvm2cmd.a
+ 
+ install_tools_dynamic: lvm .commands
+-	$(INSTALL_PROGRAM) -D lvm $(sbindir)/lvm
++	$(INSTALL_DIR) $(sbindir)
++	$(INSTALL_PROGRAM) lvm $(sbindir)/lvm
+ 	@echo Creating symbolic links for individual commands in $(sbindir)
+ 	@for v in `cat .commands`; do \
+ 		echo "$(LN_S) -f lvm $(sbindir)/$$v"; \
+@@ -201,14 +205,17 @@ install_tools_dynamic: lvm .commands
+ 	done;
+ 
+ install_tools_static: lvm.static
+-	$(INSTALL_PROGRAM) -D $< $(staticdir)/$(<F)
++	$(INSTALL_DIR) $(staticdir)
++	$(INSTALL_PROGRAM) $< $(staticdir)/$(<F)
+ 
+ install_dmsetup_dynamic: dmsetup
+-	$(INSTALL_PROGRAM) -D $< $(sbindir)/$(<F)
++	$(INSTALL_DIR) $(sbindir)
++	$(INSTALL_PROGRAM) $< $(sbindir)/$(<F)
+ 	$(LN_S) -f $(<F) $(sbindir)/dmstats
+ 
+ install_dmsetup_static: dmsetup.static
+-	$(INSTALL_PROGRAM) -D $< $(staticdir)/$(<F)
++	$(INSTALL_DIR) $(staticdir)
++	$(INSTALL_PROGRAM) $< $(staticdir)/$(<F)
+ 	$(LN_S) -f $(<F) $(sbindir)/dmstats
+ 
+ install_device-mapper: $(INSTALL_DMSETUP_TARGETS)
