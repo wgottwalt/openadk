@@ -101,11 +101,13 @@ HOST_CONFIGURE_ARGS+=	--enable-efiemu=no \
 			--disable-grub-mkfont \
 			--enable-device-mapper=no \
 			--enable-libzfs=no \
+			--disable-rpath \
 			--disable-werror
 CONFIGURE_ARGS+=	--disable-grub-mkfont \
 			--enable-efiemu=no \
 			--enable-device-mapper=no \
 			--enable-libzfs=no \
+			--disable-rpath \
 			--with-platform=$(GRUB_PLATFORM) \
 			--disable-werror
 
