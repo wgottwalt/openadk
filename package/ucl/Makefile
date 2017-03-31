@@ -20,6 +20,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBUCL,libucl,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
+TARGET_CFLAGS+=		-std=gnu90
+
 libucl-install:
 	$(INSTALL_DIR) $(IDIR_LIBUCL)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libucl*.so* \
