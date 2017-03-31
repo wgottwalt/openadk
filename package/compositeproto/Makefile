@@ -14,8 +14,13 @@ PKG_OPTS:=		dev devonly
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
+include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
+$(eval $(call HOST_template,COMPOSITEPROTO,compositeproto,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,COMPOSITEPROTO,compositeproto,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+HOST_STYLE:=		auto
+
+include $(ADK_TOPDIR)/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
