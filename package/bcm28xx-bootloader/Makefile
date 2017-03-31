@@ -19,9 +19,9 @@ PKGCD_EXTRA:=		bootloader with extra features and codecs
 PKGCD_CUTDOWN:=		cut down bootloader
 
 PKG_SUBPKGS:=		BCM28XX_BOOTLOADER BCM28XX_DEBUGTOOL
-PKGSD_BCM28XX_DEBUGTOOL:=	debugtool
+PKGSD_BCM28XX_DEBUGTOOL:=	bcm28xx debugtool (vcdbg)
 PKGSC_BCM28XX_DEBUGTOOL:=	sys/hw
-PKGSS_BCM28XX_DEBUGTOOL:=	bcm28xx-vc-debug
+PKGSS_BCM28XX_DEBUGTOOL:=	bcm28xx-vc-debug bcm28xx-vc-libs
 
 NO_DISTFILES:=		1
 
