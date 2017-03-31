@@ -4,18 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		cryptodev-linux
-PKG_VERSION:=		1.8
+PKG_VERSION:=		6818263667ca488f9b1c86e36ea624c4ea1c309f
+PKG_GIT:=		hash
 PKG_RELEASE:=		1
-PKG_HASH:=		67fabde9fb67b286a96c4f45b594b0eccd0f761b495705c18f2ae9461b831376
 PKG_DESCR:=		device that allows access to kernel cryptographic drivers
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libressl
 PKG_BUILDDEP:=		libressl
 PKG_KDEPENDS:=		crypto-aead crypto-algapi crypto-manager
 PKG_URL:=		http://home.gna.org/cryptodev-linux/
-PKG_SITES:=		http://download.gna.org/cryptodev-linux/
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+PKG_SITES:=		https://github.com/cryptodev-linux/cryptodev-linux.git
 
 include $(ADK_TOPDIR)/mk/package.mk
 include ${ADK_TOPDIR}/mk/kernel-ver.mk
@@ -23,7 +21,7 @@ include ${ADK_TOPDIR}/mk/kernel-vars.mk
 
 $(eval $(call PKG_template,CRYPTODEV_LINUX,cryptodev-linux,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		CRYPTODEV_CFLAGS='-DENABLE_ASYNC -fhonour-copts' \
+XAKE_FLAGS+=		CRYPTODEV_CFLAGS='-DENABLE_ASYNC'
 
 CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
