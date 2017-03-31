@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		freeradius-server
-PKG_VERSION:=		3.0.12
+PKG_VERSION:=		3.0.13
 PKG_RELEASE:=		1
-PKG_HASH:=		4a5af6efcf7fef08ea9bb02979200131e1332a48341c529da73bea76d3b25da0
+PKG_HASH:=		34da25c1a0e39dc57821ed6d1af1c1cc8bb7e280169cc8b4003acbfc4184328e
 PKG_DESCR:=		flexible radius server
 PKG_SECTION:=		net/radius
 PKG_DEPENDS:=		libltdl libpcre libtalloc libressl
@@ -24,10 +24,10 @@ PKG_SUBPKGS+=		FREERADIUS_MOD_SQL_MYSQL FREERADIUS_MOD_SQL_PGSQL FREERADIUS_UTIL
 
 # sub package build dependencies
 PKGSB_FREERADIUS_MOD_LDAP:=		openldap
-PKGSB_FREERADIUS_MOD_SQL_MYSQL:=	mysql
+PKGSB_FREERADIUS_MOD_SQL_MYSQL:=	mariadb
 PKGSB_FREERADIUS_MOD_SQL_PGSQL:=	postgresql
 PKGSS_FREERADIUS_MOD_LDAP:=		libopenldap
-PKGSS_FREERADIUS_MOD_SQL_MYSQL:=	libmysqlclient
+PKGSS_FREERADIUS_MOD_SQL_MYSQL:=	libmariadbclient
 PKGSS_FREERADIUS_MOD_SQL_PGSQL:=	libpq
 
 PKGSD_FREERADIUS_DEMOCERTS:= 		Demo certificates to test the server
