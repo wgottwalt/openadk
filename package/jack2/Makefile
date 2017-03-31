@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		jack2
-PKG_VERSION:=		7bdad4966b29f721c384bdfe6921a1e5c1d84561
+PKG_VERSION:=		2d1d323505585d406a7e64fb932953baefc5945e
 PKG_RELEASE:=		1
 PKG_GIT:=		hash
 PKG_DESCR:=		audio connection kit (v2)
