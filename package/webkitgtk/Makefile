@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		webkitgtk
-PKG_VERSION:=		2.14.2
-PKG_RELEASE:=		2
-PKG_HASH:=		2edbcbd5105046aea55af9671c4de8deedb5b0e3567c618034d440a760675556
+PKG_VERSION:=		2.16.0
+PKG_RELEASE:=		1
+PKG_HASH:=		5ea371d8910ef3ce7f7d087242c5646f8f3073a5298287c9eb60e055ec107cdc
 PKG_DESCR:=		web browser engine
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib icu4c zlib libwebp libgtk3 libsoup
@@ -21,7 +21,6 @@ PKG_SITES:=		http://webkitgtk.org/releases/
 PKG_OPTS:=		dev
 
 PKG_ARCH_DEPENDS:=	!mips
-PKG_SYSTEM_DEPENDS:=	!raspberry-pi3
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -29,13 +28,15 @@ $(eval $(call PKG_template,WEBKITGTK,webkitgtk,$(PKG_VERSION)-$(PKG_RELEASE),$(P
 
 WRKBUILD=               $(WRKDIR)/$(PKG_NAME)-obj
 TARGET_CXXFLAGS+=	-D__STDC_LIMIT_MACROS -D__STDC_FORMAT_MACROS
+XAKE_FLAGS+=		VERBOSE=1
+
 CONFIG_STYLE:=		cmake
-CMAKE_FLAGS+=           -DCMAKE_BUILD_TYPE=Release \
-			-DPORT=GTK \
+CMAKE_FLAGS+= 		-DPORT=GTK \
 			-DENABLE_API_TESTS=OFF \
 			-DENABLE_GTKDOC=OFF \
 			-DENABLE_GEOLOCATION=OFF \
 			-DENABLE_MINIBROWSER=ON \
+			-DUSE_SYSTEM_MALLOC=ON \
 			-DUSE_LIBNOTIFY=OFF \
 			-DUSE_LIBHYPHEN=OFF \
 			-DENABLE_INTROSPECTION=OFF
