@@ -4,10 +4,10 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mariadb
-PKG_VERSION:=		10.1.17
+PKG_VERSION:=		10.1.22
 PKG_RELEASE:=		1
-PKG_HASH:=		4ca45ac5e34418761868115ebc8c068d511fed08e283b2cac52559d63ba4aab5
-PKG_DESCR:=		mariadb client library
+PKG_HASH:=		bcb0572e7ad32cea9740a21e9255f733bdf60a5561ffbda317c22dd12b3966ce
+PKG_DESCR:=		sql client library
 PKG_SECTION:=		libs/db
 PKG_DEPENDS:=		libncurses zlib libevent libpcre
 PKG_BUILDDEP:=		cmake-host mariadb-host ncurses zlib readline libevent pcre
@@ -28,19 +28,22 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,MARIADB,mariadb,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBMARIADBCLIENT,libmariadbclient,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+MAKE_ENV+=		VERBOSE=1
+
 HOST_STYLE:=		manual
 HOST_ALL_TARGET:=	import_executables
 
 CONFIG_STYLE:=		cmake
-CMAKE_FLAGS+=		-DCMAKE_CROSSCOMPILING=1 \
+CMAKE_FLAGS+=		-DCMAKE_CROSSCOMPILING=ON \
 			-DIMPORT_EXECUTABLES=${BASE_DIR}/host_build_${GNU_HOST_NAME}/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)-host/$(PKG_NAME)-$(PKG_VERSION)/import_executables.cmake \
-			-DWITHOUT_SERVER=ON \
+			-DWITHOUT_SERVER=OFF \
 			-DSECURITY_HARDENED=OFF \
+			-DWITHOUT_DYNAMIC_PLUGINS=ON \
 			-DWITHOUT_MROONGA=ON \
 			-DWITHOUT_TOKUDB=ON \
 			-DSTACK_DIRECTION=-1 \
-			-DWITH_JEMALLOC=no \
-			-DWITH_SYSTEMD=no \
+			-DWITH_JEMALLOC=OFF \
+			-DWITH_SYSTEMD=OFF \
 			-DWITH_UNIT_TESTS=OFF
 
 host-configure:
