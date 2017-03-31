@@ -4,13 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mxml
-PKG_VERSION:=		2.6
+PKG_VERSION:=		2.10
 PKG_RELEASE:=		1
-PKG_HASH:=		b0d347da1a0d5a8c9e82f66087d55cfe499728dacae563740d7e733648c69795
+PKG_HASH:=		267ff58b64ddc767170d71dab0c729c06f45e1df9a9b6f75180b564f09767891
 PKG_DESCR:=		lightweight xml library
 PKG_SECTION:=		libs/data
-PKG_URL:=		http://www.msweet.org/projects.php?Z3
-PKG_SITES:=		http://www.msweet.org/files/project3/
+PKG_URL:=		http://www.msweet.org/
+PKG_SITES:=		https://github.com/michaelrsweet/mxml/releases/download/release-2.10/
 PKG_LIBNAME:=		libmxml
 PKG_OPTS:=		dev
 

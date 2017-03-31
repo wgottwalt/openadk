@@ -1,7 +1,7 @@
---- mxml-2.6.orig/Makefile.in	2008-12-06 05:20:38.000000000 +0100
-+++ mxml-2.6/Makefile.in	2011-05-10 13:06:25.000000000 +0200
+--- mxml-2.10.orig/Makefile.in	2014-10-19 19:21:48.000000000 +0200
++++ mxml-2.10/Makefile.in	2017-03-30 19:52:58.195963935 +0200
 @@ -88,7 +88,7 @@ PUBLIBOBJS	=	mxml-attr.o mxml-entity.o m
- 			mxml-node.o mxml-search.o mxml-set.o
+ 			mxml-index.o mxml-node.o mxml-search.o mxml-set.o
  LIBOBJS		=	$(PUBLIBOBJS) mxml-private.o mxml-string.o
  OBJS		=	mxmldoc.o testmxml.o $(LIBOBJS)
 -TARGETS		=	$(LIBMXML) mxmldoc testmxml mxml.xml doc/mxml.man
@@ -9,95 +9,31 @@
  
  
  #
-@@ -133,21 +133,21 @@ clang:
+@@ -139,26 +139,13 @@ clang-changes:
  # Install everything...
  #
  
 -install:	$(TARGETS) install-$(LIBMXML) install-libmxml.a
-+install:	$(TARGETS) install-$(LIBMXML)
- 	$(INSTALL_DIR) $(BUILDROOT)$(bindir)
--	$(INSTALL_BIN) mxmldoc $(BUILDROOT)$(bindir) 
+-	echo Installing mxmldoc in $(BUILDROOT)$(bindir)...
+-	$(INSTALL_DIR) $(BUILDROOT)$(bindir)
+-	$(INSTALL_BIN) mxmldoc $(BUILDROOT)$(bindir)
+-	echo Installing documentation in $(BUILDROOT)$(docdir)...
 -	$(INSTALL_DIR) $(BUILDROOT)$(docdir)
 -	for file in $(DOCFILES); do \
 -		$(INSTALL_MAN) $$file $(BUILDROOT)$(docdir); \
 -	done
-+	#$(INSTALL_BIN) mxmldoc $(BUILDROOT)$(bindir) 
-+	#$(INSTALL_DIR) $(BUILDROOT)$(docdir)
-+	#for file in $(DOCFILES); do \
-+	#	$(INSTALL_MAN) $$file $(BUILDROOT)$(docdir); \
-+	#done
++install:	$(TARGETS) install-$(LIBMXML)
+ 	echo Installing header files in $(BUILDROOT)$(includedir)...
  	$(INSTALL_DIR) $(BUILDROOT)$(includedir)
  	$(INSTALL_DATA) mxml.h $(BUILDROOT)$(includedir)
+ 	echo Installing pkgconfig files in $(BUILDROOT)$(libdir)/pkgconfig...
  	$(INSTALL_DIR) $(BUILDROOT)$(libdir)/pkgconfig
  	$(INSTALL_DATA) mxml.pc $(BUILDROOT)$(libdir)/pkgconfig
+-	echo Installing man pages in $(BUILDROOT)$(mandir)...
 -	$(INSTALL_DIR) $(BUILDROOT)$(mandir)/man1
 -	$(INSTALL_MAN) doc/mxmldoc.man $(BUILDROOT)$(mandir)/man1/mxmldoc.1
 -	$(INSTALL_DIR) $(BUILDROOT)$(mandir)/man3
 -	$(INSTALL_MAN) doc/mxml.man $(BUILDROOT)$(mandir)/man3/mxml.3
-+	#$(INSTALL_DIR) $(BUILDROOT)$(mandir)/man1
-+	#$(INSTALL_MAN) doc/mxmldoc.man $(BUILDROOT)$(mandir)/man1/mxmldoc.1
-+	#$(INSTALL_DIR) $(BUILDROOT)$(mandir)/man3
-+	#$(INSTALL_MAN) doc/mxml.man $(BUILDROOT)$(mandir)/man3/mxml.3
  
  install-libmxml.a:
- 	$(INSTALL_DIR) $(BUILDROOT)$(libdir)
-@@ -294,7 +294,7 @@ mxmldoc:	$(LIBMXML) mxmldoc.o
- 	$(CC) -L. $(LDFLAGS) -o $@ mxmldoc.o -lmxml $(LIBS)
- 
- mxmldoc-static:	libmxml.a mxmldoc.o
--	$(CC) $(LDFLAGS) -o $@ mxmldoc.o libmxml.a $(LIBS)
-+	$(CC_FOR_BUILD) $(LDFLAGS_FOR_BUILD) -o $@ mxmldoc.o libmxml.a $(LIBS)
- 
- mxmldoc.o:	mxml.h
- 
-@@ -304,28 +304,7 @@ mxmldoc.o:	mxml.h
- #
- 
- testmxml:	libmxml.a testmxml.o
--	$(CC) $(LDFLAGS) -o $@ testmxml.o libmxml.a $(LIBS)
--	@echo Testing library...
--	./testmxml test.xml >temp1.xml 2>temp1s.xml
--	./testmxml temp1.xml >temp2.xml 2>temp2s.xml
--	@if cmp temp1.xml temp2.xml; then \
--		echo Stdio file test passed!; \
--		$(RM) temp2.xml temp2s.xml; \
--	else \
--		echo Stdio file test failed!; \
--	fi
--	@if cmp temp1.xml temp1s.xml; then \
--		echo String test passed!; \
--		$(RM) temp1.xml temp1s.xml; \
--	else \
--		echo String test failed!; \
--	fi
--	@if cmp test.xml test.xmlfd; then \
--		echo File descriptor test passed!; \
--		$(RM) test.xmlfd; \
--	else \
--		echo File descriptor test failed!; \
--	fi
-+	$(CC_FOR_BUILD) $(LDFLAGS_FOR_BUILD) -o $@ testmxml.o libmxml.a $(LIBS)
- 
- testmxml.o:	mxml.h
- 
-@@ -336,19 +315,7 @@ testmxml.o:	mxml.h
- 
- mxml.xml:	mxmldoc-static mxml.h $(PUBLIBOBJS:.o=.c)
- 	$(RM) mxml.xml
--	./mxmldoc-static --header doc/reference.heading mxml.xml mxml.h $(PUBLIBOBJS:.o=.c) >doc/reference.html
--	if test "x`uname`" = xDarwin; then \
--		./mxmldoc-static --docset org.minixml.docset \
--			--docversion @VERSION@ --feedname minixml.org \
--			--feedurl http://www.minixml.org/org.minixml.atom \
--			--header doc/docset.header --intro doc/docset.intro \
--			--css doc/docset.css --title "Mini-XML API Reference" \
--			mxml.xml || exit 1; \
--		/Developer/usr/bin/docsetutil package --output org.minixml.xar \
--			--atom org.minixml.atom \
--			--download-url http://www.minixml.org/org.minixml.xar \
--			org.minixml.docset || exit 1; \
--	fi
-+	#./mxmldoc-static --header doc/reference.heading mxml.xml mxml.h $(PUBLIBOBJS:.o=.c) >doc/reference.html
- 
- valgrind:	mxmldoc-static
- 	$(RM) valgrind.xml
+ 	echo Installing libmxml.a to $(BUILDROOT)$(libdir)...
