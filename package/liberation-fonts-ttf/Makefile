@@ -10,7 +10,7 @@ PKG_HASH:=		7890278a6cd17873c57d9cd785c2d230d9abdea837e96516019c5885dd271504
 PKG_DESCR:=		free fonts compatible to msttfonts
 PKG_SECTION:=		x11/fonts
 PKG_URL:=		https://fedorahosted.org/liberation-fonts/
-PKG_SITES:=		https://fedorahosted.org/releases/l/i/liberation-fonts/
+PKG_SITES:=		https://releases.pagure.org/liberation-fonts/
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
