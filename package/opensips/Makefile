@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		opensips
-PKG_VERSION:=		2.2.1
+PKG_VERSION:=		2.2.3
 PKG_RELEASE:=		1
-PKG_HASH:=		bbf31ea3544ce0d0f0aa346e9aa023f3208119f8aee34f3188329fd53a87ddc5
+PKG_HASH:=		ccf540f7aae4335a8319b83f6cb87b562e665991fe1c2adc4e8eb4d4f3042dd7
 PKG_DESCR:=		high-performance, configurable, free sip server
 PKG_SECTION:=		net/voip
 PKG_DEPENDS:=		libressl
-PKG_BUILDDEP:=		libressl
+PKG_BUILDDEP:=		libressl flex-host bison-host
 PKG_URL:=		http://opensips.org/
 PKG_SITES:=		http://opensips.org/pub/opensips/$(PKG_VERSION)/
 
@@ -129,7 +129,7 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-build:
-	$(MAKE) -C $(WRKBUILD) \
+	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		prefix=/ \
 		extra_defs="-DUSE_PTHREAD_MUTEX" \
 		TLS=1 \
