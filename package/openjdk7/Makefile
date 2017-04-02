@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk7
-PKG_VERSION:=		2.6.3
+PKG_VERSION:=		2.6.9
 PKG_RELEASE:=		1
-PKG_HASH:=		df38aa10b4d30f3bae089dcc72f4c32fb2385cb541491791c12829960f53c612
+PKG_HASH:=		8e4f3eb8d41ef66f1797825343141046973c124b18bf7d4698fae0a9a25495ea
 PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		openjdk7-host alsa-lib xproto libjpeg-turbo zlib giflib libpng freetype cups
 PKG_BUILDDEP+=		libX11 libXt libXp libXinerama libXrender libXtst
 PKG_BUILDDEP+=		libpng giflib libgtk2 glib fontconfig nss gconf ncurses
-HOST_BUILDDEP:=		fastjar-host gcj-host ecj-host unzip-host ant-host
+HOST_BUILDDEP:=		fastjar-host gcj-host ecj-host unzip-host ant-host libXcomposite-host
 HOST_BUILDDEP+=		libXtst-host libXt-host libXinerama-host libXrender-host
 HOST_BUILDDEP+=		cups-host qemu-host alsa-lib-host freetype-host	libxslt-host
 PKG_DEPENDS:=		zlib libffi libxtst libxi cups gconf
