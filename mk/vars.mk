@@ -107,7 +107,7 @@ endif
 ifeq ($(ADK_BUILD_COMPILER_GCC),y)
 ifneq ($(strip ${ADK_USE_CCACHE}),)
 TARGET_CC:=		$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CC_NO_CCACHE}
-TARGET_CXX:=		$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CXX_NO_CXXACHE}
+TARGET_CXX:=		$(STAGING_HOST_DIR)/usr/bin/ccache ${TARGET_CXX_NO_CCACHE}
 endif
 
 # for x86_64 x32 ABI we need to extend TARGET_CC/TARGET_CXX
