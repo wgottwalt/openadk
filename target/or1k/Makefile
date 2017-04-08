@@ -16,7 +16,7 @@ targethelp:
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-or32 ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-or1k ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfsarchive)
@@ -33,7 +33,7 @@ ifeq ($(ADK_TARGET_SYSTEM_SIM_OR1K),y)
 endif
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-or32 ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+	@echo 'qemu-system-or1k ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif
 
