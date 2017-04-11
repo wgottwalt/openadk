@@ -25,12 +25,16 @@ config ADK_KERNEL_I2C_GPIO
 	default y if ADK_TARGET_SYSTEM_LINKSYS_NSLU2
 	help
 
+config ADK_KERNEL_I2C_BCM2835
+	tristate "I2C driver for BCM2835 boards"
+
 config ADK_KERNEL_I2C_BCM2708
 	tristate "I2C driver for BCM28XX boards"
 	select ADK_KERNEL_I2C
 	select ADK_KERNEL_REGMAP
 	select ADK_KERNEL_REGMAP_I2C
 	select ADK_KERNEL_I2C_CHARDEV
+        select ADK_KERNEL_I2C_BCM2835
 	depends on ADK_TARGET_BOARD_BCM28XX
 	default m if ADK_TARGET_BOARD_BCM28XX
 	default n
