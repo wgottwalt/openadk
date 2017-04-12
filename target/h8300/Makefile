@@ -7,6 +7,10 @@ include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
+ifeq ($(ADK_TARGET_KERNEL_UIMAGEBIN),y)
+KERNEL:=$(LINUX_DIR)/arch/h8300/boot/uImage.bin
+OSTRIP:=
+endif
 ifeq ($(ADK_TARGET_KERNEL_ZIMAGE),y)
 KERNEL:=$(LINUX_DIR)/arch/h8300/boot/zImage
 OSTRIP:=
@@ -16,6 +20,10 @@ KERNEL:=$(LINUX_DIR)/arch/h8300/boot/vmlinux.srec
 endif
 
 # target helper text
+ifeq ($(ADK_TARGET_FS),archive)
+targethelp:
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
@@ -57,6 +65,9 @@ kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
 # filesystem specific targets
+ifeq ($(ADK_TARGET_FS),archive)
+imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
+endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
 endif
