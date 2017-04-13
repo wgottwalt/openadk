@@ -113,6 +113,17 @@ config ADK_KERNEL_SND
 	select ADK_KERNEL_SND_HWDEP
 	select ADK_KERNEL_SND_TIMER
 
+config ADK_KERNEL_SND_TIMER
+       tristate
+
+config ADK_KERNEL_SND_RAWMIDI
+       tristate
+
+config ADK_KERNEL_SND_SEQUENCER
+       tristate "Sequencer support"
+       select ADK_KERNEL_SND_TIMER
+       select ADK_KERNEL_SND_RAWMIDI
+
 config ADK_KERNEL_SND_INTEL8X0
 	tristate "Intel AC97 driver"
 	select ADK_KERNEL_SND
