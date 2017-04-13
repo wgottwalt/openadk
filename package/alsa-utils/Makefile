@@ -37,7 +37,7 @@ endif
 
 alsa-utils-install:
 	${INSTALL_DIR} ${IDIR_ALSA_UTILS}/usr/bin
-	${CP} ${WRKINST}/usr/bin/{aplay,amixer,arecord} ${IDIR_ALSA_UTILS}/usr/bin
+	${CP} ${WRKINST}/usr/bin/{aplay,amixer,arecord,amidi,aconnect} ${IDIR_ALSA_UTILS}/usr/bin
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 	$(INSTALL_DIR) $(IDIR_ALSA_UTILS)/etc/amixer.d
 	$(INSTALL_BIN) ./files/raspberry-pi.sh \
