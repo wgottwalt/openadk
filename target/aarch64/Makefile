@@ -45,10 +45,6 @@ endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
-ifeq ($(ADK_TARGET_SYSTEM_ARM_FM),y)
-	@echo 'Start emulator via:'
-	@echo 'Foundation_v8 --image=$(FW_DIR)/${TARGET_KERNEL}'
-endif
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following command line:"
 	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
@@ -59,18 +55,7 @@ kernel-strip:
 	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
 kernel-install: kernel-strip
-ifeq ($(ADK_TARGET_SYSTEM_ARM_FM),y)
-	cd $(ADK_TOPDIR) && \
-		make -f Makefile \
-		-C package/boot-wrapper-aarch64 clean
-	cd $(ADK_TOPDIR) && \
-		make -f Makefile \
-		-C package/boot-wrapper-aarch64 package
-	${CP} ${LINUX_DIR}/linux-system.axf \
-		$(FW_DIR)/$(TARGET_KERNEL)
-else
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
-endif
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
