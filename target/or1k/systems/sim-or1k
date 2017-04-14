@@ -1,8 +1,0 @@
-config ADK_TARGET_SYSTEM_SIM_OR1K
-	bool "OR1K Simulator"
-	select ADK_TARGET_CPU_OR1K
-	select ADK_TARGET_WITH_SERIAL
-	select ADK_TARGET_WITH_NET
-	help
-	  Simulator for OR1K architecture.
-
