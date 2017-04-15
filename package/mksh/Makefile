@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mksh
-PKG_VERSION:=		54
+PKG_VERSION:=		55
 PKG_RELEASE:=		1
-PKG_HASH:=		8bce3837c386684aa7780f085f1a4dbd5e3e26fb5c528ee0d41ae29af7f39013
+PKG_HASH:=		ced42cb4a181d97d52d98009eed753bd553f7c34e6991d404f9a8dcb45c35a57
 PKG_DESCR:=		mirbsd korn shell
 PKG_SECTION:=		base/shells
 PKG_NEEDS:=		mmu
@@ -59,7 +59,10 @@ mksh-test-install:
 	$(INSTALL_DIR) $(IDIR_MKSH_TEST)/opt/mksh
 	$(CP) $(WRKBUILD)/* $(IDIR_MKSH_TEST)/opt/mksh
 	find $(IDIR_MKSH_TEST)/opt/mksh -name \*.o -delete
-	$(INSTALL_BIN) ./files/test.sh $(IDIR_MKSH_TEST)/opt/mksh
+	$(SED) \
+	    's!$(WRKBUILD)!/opt/mksh!g' \
+	    -e "s!PATH='[^']*'!PATH='/usr/sbin:/bin:/sbin:/usr/bin'!" \
+	    $(IDIR_MKSH_TEST)/opt/mksh/test.sh
 
 include $(ADK_TOPDIR)/mk/host-bottom.mk
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
