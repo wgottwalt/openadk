@@ -20,6 +20,10 @@ endif
 ifeq ($(ADK_TARGET_FS),archive)
 targethelp:
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
+	@echo "Use following command to install it on SD card:"
+	@echo "sudo ./scripts/install.sh $(ADK_TARGET_SYSTEM) /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "Use following command to create a QEMU Image:"
@@ -57,9 +61,24 @@ kernel-strip:
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
+dtb-install:
+ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
+		dtbs $(MAKE_TRACE)
+	mkdir -p $(FW_DIR)/overlays
+	for x in $(LINUX_DIR)/arch/arm64/boot/dts/overlays/*.dtbo; do \
+		[[ -e "$$x" ]] && cp $(LINUX_DIR)/arch/arm64/boot/dts/overlays/*.dtbo $(FW_DIR)/overlays; \
+		break; \
+	done
+	for x in $(LINUX_DIR)/arch/arm64/boot/dts/broadcom/*.dtb; do \
+		[[ -e "$$x" ]] && cp $(LINUX_DIR)/arch/arm64/boot/dts/broadcom/*.dtb $(FW_DIR); \
+		break; \
+	done
+endif
+
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
-imageinstall: $(FW_DIR)/$(ROOTFSTARBALL) targethelp
+imageinstall: dtb-install $(FW_DIR)/$(ROOTFSTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp

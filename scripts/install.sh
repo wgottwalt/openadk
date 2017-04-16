@@ -144,7 +144,7 @@ tgt=$2
 src=$3
 
 case $target {
-(banana-pro|pcengines-apu|raspberry-pi|raspberry-pi2|raspberry-pi3|solidrun-imx6|solidrun-clearfog|default) ;;
+(banana-pro|pcengines-apu|raspberry-pi|raspberry-pi2|raspberry-pi3|raspberry-pi3-64|solidrun-imx6|solidrun-clearfog|default) ;;
 (*)
 	print -u2 "Unknown target '$target', exiting"
 	exit 1 ;;
@@ -167,7 +167,7 @@ case $ostype {
 	basedev=$tgt
 	rootpart=${basedev}s1
 	datapart=${basedev}s2
-	if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 ]]; then
+	if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 ]]; then
 		bootpart=${basedev}s1
 		rootpart=${basedev}s2
 		datapart=${basedev}s3
@@ -194,7 +194,7 @@ case $ostype {
 	basedev=$tgt
 	rootpart=${basedev}1
 	datapart=${basedev}2
-	if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 ]]; then
+	if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 ]]; then
 		bootpart=${basedev}1
 		rootpart=${basedev}2
 		datapart=${basedev}3
@@ -257,7 +257,7 @@ syspartno=0
 # data - flexible (parameter)
 # system - everything else
 
-if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 ]]; then
+if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 ]]; then
 	syspartno=1
 	bootfssz=100
 	if (( grub )); then
@@ -314,7 +314,7 @@ fi
 #(( partofs = ((coreendsec / secs) + 1) * secs ))
 # we just use 2048 all the time, since some loaders are longer
 partofs=2048
-if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 ]]; then
+if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 ]]; then
 	(( spartofs = partofs + (100 * 2048) ))
 else
 	spartofs=$partofs
@@ -425,7 +425,7 @@ if (( datafssz )); then
 	    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1CE)) 2>/dev/null
 fi
 
-if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 ]]; then
+if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 ]]; then
 	# move system and data partition from #0/#1 to #1/#2
 	dd if="$T/firsttrack" bs=1 skip=$((0x1BE)) count=32 of="$T/x" 2>/dev/null
 	dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1CE)) if="$T/x" 2>/dev/null
@@ -515,7 +515,7 @@ case $target {
 	dd if="$fwdir/SPL" of="$tgt" bs=1024 seek=1 > /dev/null 2>&1
 	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=69 > /dev/null 2>&1
 	;;
-(raspberry-pi|raspberry-pi2|raspberry-pi3)
+(raspberry-pi|raspberry-pi2|raspberry-pi3|raspberry-pi3-64)
 	(( noformat )) || create_fs "$bootpart" ADKBOOT vfat
 	;;
 }
@@ -532,7 +532,7 @@ if (( datafssz )); then
 	((keep)) || create_fs "$datapart" ADKDATA ext4
 	((keep)) || tune_fs "$datapart"
 	case $target {
-	(raspberry-pi|raspberry-pi2|raspberry-pi3)
+	(raspberry-pi|raspberry-pi2|raspberry-pi3|raspberry-pi3-64)
 		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab 
 	;;
 	(banana-pro|solidrun-imx6|solidrun-clearfog)
@@ -542,7 +542,7 @@ if (( datafssz )); then
 fi
 
 case $target {
-(raspberry-pi|raspberry-pi2|raspberry-pi3)
+(raspberry-pi|raspberry-pi2|raspberry-pi3|raspberry-pi3-64)
 	mount_fs "$bootpart" "$B" vfat
 	for x in "$R"/boot/*; do
 		[[ -e "$x" ]] && mv -f "$R"/boot/* "$B/"

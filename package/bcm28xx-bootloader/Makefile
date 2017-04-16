@@ -11,7 +11,7 @@ PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/raspberrypi/firmware
 PKG_SITES:=		https://github.com/raspberrypi/firmware.git
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 raspberry-pi3
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 raspberry-pi3 raspberry-pi3-64
 
 PKG_CHOICES_BCM28XX_BOOTLOADER:=	DEFAULT EXTRA CUTDOWN
 PKGCD_DEFAULT:=		default bootloader
@@ -87,6 +87,10 @@ ifneq ($(ADK_TARGET_HARDWARE_RPI_PROTO),)
 endif
 ifeq ($(ADK_TARGET_HARDWARE_RPI3_SERIAL),y)
 	printf "dtoverlay=pi3-disable-bt.dtb\n" >> \
+		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3_64),y)
+	printf "arm_control=0x200\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifeq ($(ADK_PACKAGE_BCM28XX_DEBUGTOOL),y)
