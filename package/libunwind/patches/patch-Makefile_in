@@ -1,5 +1,5 @@
 --- libunwind-1.2.orig/Makefile.in	2017-01-13 17:00:58.000000000 +0100
-+++ libunwind-1.2/Makefile.in	2017-04-17 16:57:53.104266427 +0200
++++ libunwind-1.2/Makefile.in	2017-04-17 19:28:43.772508581 +0200
 @@ -124,7 +124,7 @@ AM_RECURSIVE_TARGETS = $(RECURSIVE_TARGE
  	distdir dist dist-all distcheck
  ETAGS = etags
