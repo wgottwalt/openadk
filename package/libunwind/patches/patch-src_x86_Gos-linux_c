@@ -1,0 +1,24 @@
+--- libunwind-1.2.orig/src/x86/Gos-linux.c	2016-11-18 04:28:29.000000000 +0100
++++ libunwind-1.2/src/x86/Gos-linux.c	2017-04-17 16:59:08.339188080 +0200
+@@ -290,19 +290,8 @@ x86_local_resume (unw_addr_space_t as, u
+      because the frame-chain still would let us do a backtrace at
+      least.  */
+   dwarf_make_proc_info (&c->dwarf);
+-
+-  if (unlikely (c->sigcontext_format != X86_SCF_NONE))
+-    {
+-      struct sigcontext *sc = (struct sigcontext *) c->sigcontext_addr;
+-
+-      Debug (8, "resuming at ip=%x via sigreturn(%p)\n", c->dwarf.ip, sc);
+-      sigreturn (sc);
+-    }
+-  else
+-    {
+-      Debug (8, "resuming at ip=%x via setcontext()\n", c->dwarf.ip);
+-      setcontext (uc);
+-    }
++  Debug (8, "resuming at ip=%x via setcontext()\n", c->dwarf.ip);
++  setcontext (uc);
+   return -UNW_EINVAL;
+ }
+ #endif
