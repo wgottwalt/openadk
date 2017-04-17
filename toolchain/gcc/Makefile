@@ -38,6 +38,7 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-libitm \
 			--disable-libmudflap \
 			--disable-libgomp \
+			--disable-libmpx \
 			--disable-libcilkrts \
 			--disable-libquadmath \
 			--disable-libquadmath-support \
