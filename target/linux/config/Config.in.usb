@@ -340,6 +340,29 @@ config ADK_KERNEL_USB_SIERRA_NET
 	select ADK_KERNEL_USB_USBNET
 	help
 	  Driver for WWAN modem Sierra Wireless MC8775 PCI Express
+
+
+config ADK_KERNEL_SND_USB
+       bool
+       depends on ADK_KERNEL_USB
+
+config ADK_KERNEL_SND_USB_AUDIO
+       tristate
+
+config ADK_KERNEL_USB_GADGET
+       tristate
+
+config ADK_KERNEL_USB_AUDIO
+       tristate
+
+config ADK_KERNEL_USB_MIDI_GADGET
+       tristate "USB Midi Gadgets"
+       select ADK_KERNEL_USB_GADGET
+       select ADK_KERNEL_USB_AUDIO
+       select ADK_KERNEL_SND_USB_AUDIO
+       select ADK_KERNEL_SND_USB
+       help
+         Enable USB midi devices
 	
 endmenu
 endmenu
