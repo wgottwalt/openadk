@@ -1,0 +1,12 @@
+--- rt-tests-bddffd32c9483318fe72d02183981bdcf006d9dc.orig/Makefile	2016-10-22 10:20:57.000000000 +0200
++++ rt-tests-bddffd32c9483318fe72d02183981bdcf006d9dc/Makefile	2017-04-18 19:02:23.000000000 +0200
+@@ -166,7 +166,8 @@ install: all install_hwlatdetect
+ 	mkdir -p "$(DESTDIR)$(bindir)" "$(DESTDIR)$(mandir)/man4"
+ 	mkdir -p "$(DESTDIR)$(srcdir)" "$(DESTDIR)$(mandir)/man8"
+ 	cp $(TARGETS) "$(DESTDIR)$(bindir)"
+-	install -D -m 644 src/backfire/backfire.c "$(DESTDIR)$(srcdir)/backfire/backfire.c"
++	mkdir -p "$(DESTDIR)$(srcdir)/backfire"
++	install -m 644 src/backfire/backfire.c "$(DESTDIR)$(srcdir)/backfire/backfire.c"
+ 	install -m 644 src/backfire/Makefile "$(DESTDIR)$(srcdir)/backfire/Makefile"
+ 	gzip -c src/backfire/backfire.4 >"$(DESTDIR)$(mandir)/man4/backfire.4.gz"
+ 	gzip -c src/cyclictest/cyclictest.8 >"$(DESTDIR)$(mandir)/man8/cyclictest.8.gz"
