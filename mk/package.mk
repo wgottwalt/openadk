@@ -179,7 +179,7 @@ $$(IDIR_$(1))/CONTROL/control: ${_PATCH_COOKIE}
 	@for file in conffiles preinst postinst prerm postrm; do \
 		[ ! -f ./files/$(2).$$$$file ] || cp ./files/$(2).$$$$file $$(IDIR_$(1))/CONTROL/$$$$file; \
 	done
-ifneq ($(ADK_DEBUG),y)
+ifeq ($(ADK_BUILD_WITH_DEBUG),y)
 	@echo "Package: $$(shell echo $(2) | tr '_' '-')-dbg" > $(WRKDIR)/.$(2)-dbg.control
 	@echo "Section: debug" >> $(WRKDIR)/.$(2)-dbg.control
 	@echo "Description: debugging symbols for $(2)" >> $(WRKDIR)/.$(2)-dbg.control
@@ -273,7 +273,7 @@ endif
 
 ifeq (,$(filter devonly,$(7)))
 	$${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
-ifneq ($(ADK_DEBUG),)
+ifneq ($(ADK_BUILD_WITH_DEBUG),)
 	$${PKG_BUILD} $${IDIR_$(1)_DBG} $${PACKAGE_DIR} $(MAKE_TRACE)
 endif
 endif
