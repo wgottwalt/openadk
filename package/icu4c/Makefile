@@ -10,6 +10,7 @@ PKG_HASH:=		d42bc9a8ca6a91c55eb0925c279f49e5b508d51ef26ac9850d9be55de5bb8ab3
 PKG_DESCR:=		unicode and globalization library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		icu4c-host
+PKG_NEEDS:=		c++
 PKG_URL:=		http://icu-project.org
 PKG_SITES:=		http://download.icu-project.org/files/icu4c/$(PKG_VERSION)/
 PKG_OPTS:=		dev
