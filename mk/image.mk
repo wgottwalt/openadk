@@ -139,7 +139,7 @@ else
 endif
 	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
 	    ../linux/kernel.control ${KERNEL_VERSION} ${ADK_TARGET_CPU_ARCH}
-	$(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
+	PATH='$(HOST_PATH)' $(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
 	$(PKG_INSTALL) $(KERNEL_PKG) $(MAKE_TRACE)
 	$(CMD_TRACE) " done"
 	$(END_TRACE)
@@ -156,7 +156,7 @@ ${FW_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}/.adk
 		$(CPIO) --quiet -o -Hustar --owner=0:0 | $(XZ) -c >$@
 
 ${STAGING_TARGET_DIR}/${INITRAMFS}_list: ${TARGET_DIR}/.adk
-	env PATH='${HOST_PATH}' $(BASH) ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
+	PATH='${HOST_PATH}' $(BASH) ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
 		${TARGET_DIR}/ >$@
 	( \
 		echo "nod /dev/console 0644 0 0 c 5 1"; \

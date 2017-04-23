@@ -80,7 +80,7 @@ for modname in ${!modpaths[@]}; do
 		Section: sys
 		Description: kernel module $modname
 	EOF
-	sh $(dirname $0)/make-ipkg-dir.sh $ipkgdir $ctrlfile $VER $ARCH
+	bash $(dirname $0)/make-ipkg-dir.sh $ipkgdir $ctrlfile $VER $ARCH
 
 	depline="kernel ($VER)"
 	for m in ${moddeps[$modname]}; do
@@ -99,5 +99,5 @@ EOF
 	chmod 0755 ${ipkgdir}/CONTROL/postinst
 	mkdir -p ${ipkgdir}/etc/modules.d
 	echo $modname >${ipkgdir}/etc/modules.d/${modlevels[$modname]}-$modname
-	env ${PKG_BUILD} ${ipkgdir} ${PACKAGE_DIR} || exit 1
+	${PKG_BUILD} ${ipkgdir} ${PACKAGE_DIR} || exit 1
 done

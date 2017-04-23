@@ -272,13 +272,13 @@ ifeq (,$(filter noscripts,$(7)))
 endif
 
 ifeq (,$(filter devonly,$(7)))
-	$${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
+	PATH='$(HOST_PATH)' $${PKG_BUILD} $${IDIR_$(1)} $${PACKAGE_DIR} $(MAKE_TRACE)
 ifneq ($(ADK_BUILD_WITH_DEBUG),)
-	$${PKG_BUILD} $${IDIR_$(1)_DBG} $${PACKAGE_DIR} $(MAKE_TRACE)
+	PATH='$(HOST_PATH)' $${PKG_BUILD} $${IDIR_$(1)_DBG} $${PACKAGE_DIR} $(MAKE_TRACE)
 endif
 endif
 ifneq (,$(filter dev,$(7)))
-	$${PKG_BUILD} $${IDIR_$(1)_DEV} $${PACKAGE_DIR} $(MAKE_TRACE)
+	PATH='$(HOST_PATH)' $${PKG_BUILD} $${IDIR_$(1)_DEV} $${PACKAGE_DIR} $(MAKE_TRACE)
 endif
 
 clean-targets: clean-dev-$(1)

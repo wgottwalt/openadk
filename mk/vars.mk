@@ -379,8 +379,7 @@ HOST_ENV=		CC='$(HOST_CC)' \
 PKG_SUFFIX:=		$(strip $(subst ",, $(ADK_PACKAGE_SUFFIX)))
 
 ifeq ($(ADK_TARGET_PACKAGE_IPKG),y)
-PKG_BUILD:=		PATH='${HOST_PATH}' \
-			${BASH} ${SCRIPT_DIR}/ipkg-build
+PKG_BUILD:=		${BASH} ${SCRIPT_DIR}/ipkg-build
 PKG_INSTALL:=		PATH='${HOST_PATH}' \
 			IPKG_TMP=$(BUILD_DIR)/tmp \
 			IPKG_INSTROOT=$(TARGET_DIR) \
@@ -393,8 +392,7 @@ PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/ipkg
 endif
 
 ifeq ($(ADK_TARGET_PACKAGE_OPKG),y)
-PKG_BUILD:=		PATH='${HOST_PATH}' \
-			${BASH} ${SCRIPT_DIR}/ipkg-build
+PKG_BUILD:=		${BASH} ${SCRIPT_DIR}/ipkg-build
 PKG_INSTALL:=		PATH='${HOST_PATH}' \
 			IPKG_TMP=$(BUILD_DIR)/tmp \
 			IPKG_INSTROOT=$(TARGET_DIR) \
@@ -407,7 +405,7 @@ PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/opkg
 endif
 
 ifeq ($(ADK_TARGET_PACKAGE_TXZ),y)
-PKG_BUILD:=		PATH='${HOST_PATH}' ${BASH} ${SCRIPT_DIR}/tarpkg build
+PKG_BUILD:=		${BASH} ${SCRIPT_DIR}/tarpkg build
 PKG_INSTALL:=		PKG_INSTROOT='$(TARGET_DIR)' \
 			PATH='${HOST_PATH}' ${BASH} ${SCRIPT_DIR}/tarpkg install
 PKG_STATE_DIR:=		$(TARGET_DIR)/usr/lib/pkg
