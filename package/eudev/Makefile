@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		eudev
-PKG_VERSION:=		3.2
+PKG_VERSION:=		3.2.2
 PKG_RELEASE:=		1
-PKG_HASH:=		d84a5f7942393a009afc6af0bf31e98841147a0521b91ffbed161dccac303c25
-PKG_DESCR:=		device manager (udev clone)
+PKG_HASH:=		3e4c56ec2fc1854afd0a31f3affa48f922c62d40ee12a0c1a4b4f152ef5b0f63
+PKG_DESCR:=		device manager
 PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		gperf-host glib
 PKG_DEPENDS:=		glib libkmod
@@ -28,7 +28,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,UDEV,udev,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 $(eval $(call PKG_template,LIBUDEV,libudev,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
-MAKE_FLAGS+=		V=1
 CONFIGURE_ARGS+=	--disable-manpages \
 			--disable-blkid \
 			--enable-hwdb
