@@ -4,17 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		zsh
-PKG_VERSION:=		5.2
+PKG_VERSION:=		5.3.1
 PKG_RELEASE:=		1
-PKG_HASH:=		fa924c534c6633c219dcffdcd7da9399dabfb63347f88ce6ddcd5bb441215937
+PKG_HASH:=		fc886cb2ade032d006da8322c09a7e92b2309177811428b121192d44832920da
 PKG_DESCR:=		z shell
 PKG_SECTION:=		base/shells
 PKG_DEPENDS:=		libncurses
 PKG_BUILDDEP:=		ncurses
 PKG_URL:=		http://www.zsh.org/
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=zsh/}
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
 
