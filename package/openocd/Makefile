@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openocd
-PKG_VERSION:=		0.10.0-rc1
+PKG_VERSION:=		0.10.0
 PKG_RELEASE:=		1
-PKG_HASH:=		e1892003b2d992a54b882e1096fbeea80eec742071b4f6402cacd9173d7c6191
+PKG_HASH:=		7312e7d680752ac088b8b8f2b5ba3ff0d30e0a78139531847be4b75c101316ae
 PKG_DESCR:=		jtag flash and debugging utility
 PKG_SECTION:=		dev/tools
 HOST_BUILDDEP:=		libusb-host
@@ -23,7 +23,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,OPENOCD,openocd,$(PKG_VERSION)-${PKG_RELEASE}))
 
 HOST_STYLE:=		auto
-
+HOST_CFLAGS+=		-I$(STAGING_HOST_DIR)/usr/include/libusb-1.0
 HOST_CONFIGURE_ARGS+=	--with-jim-shared=no \
 			--disable-shared
 
