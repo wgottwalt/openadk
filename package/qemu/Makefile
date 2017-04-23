@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		qemu
-PKG_VERSION:=		2.8.1
+PKG_VERSION:=		2.9.0
 PKG_RELEASE:=		1
-PKG_HASH:=		018e4c7ed22c220395cf41f835d01505e49d0e579a548bd3d72b03809442bbcd
+PKG_HASH:=		00bfb217b1bb03c7a6c3261b819cfccbfb5a58e3e2ceff546327d271773c6c14
 PKG_DESCR:=		cpu and system emulator
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		zlib glib alsa-lib
