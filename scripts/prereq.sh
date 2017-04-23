@@ -22,18 +22,18 @@ printf " --->  $os $osver for build detected.\n"
 rm -f foo
 echo >FOO
 if [ -e foo ]; then
-  printf "ERROR: OpenADK cannot be built in a case-insensitive file system."
+  printf "ERROR: OpenADK cannot be built in a case-insensitive file system.\n"
   case $os in
     CYG*)
-      printf "Building OpenADK on $os needs a small registry change."
-      printf "http://cygwin.com/cygwin-ug-net/using-specialnames.html"
+      printf "Building OpenADK on $os needs a small registry change.\n"
+      printf "http://cygwin.com/cygwin-ug-net/using-specialnames.html\n"
       ;;
     Darwin*)
-      printf "Building OpenADK on $os needs a case-sensitive disk partition."
-      printf "For Snow Leopard and above you can use diskutil to resize your existing disk."
-      printf "Example: sudo diskutil resizeVolume disk0s2 90G 1 jhfsx adk 30G"
-      printf "For older versions you might consider to use a disk image:"
-      printf "hdiutil create -type SPARSE -fs 'Case-sensitive Journaled HFS+' -size 30g ~/openadk.dmg"
+      printf "Building OpenADK on $os needs a case-sensitive disk partition.\n"
+      printf "For Snow Leopard and above you can use diskutil to resize your existing disk.\n"
+      printf "Example: sudo diskutil resizeVolume disk0s2 90G 1 jhfsx adk 30G\n"
+      printf "For older versions you might consider to use a disk image:\n"
+      printf "hdiutil create -type SPARSE -fs 'Case-sensitive Journaled HFS+' -size 30g ~/openadk.dmg\n"
       ;;
   esac
   rm -f FOO
