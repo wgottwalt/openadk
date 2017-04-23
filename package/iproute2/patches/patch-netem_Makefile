@@ -1,12 +1,12 @@
---- iproute2-2.6.37.orig/netem/Makefile	2011-01-07 18:54:30.000000000 +0100
-+++ iproute2-2.6.37/netem/Makefile	2011-02-25 19:59:34.000000000 +0100
+--- iproute2-4.10.0.orig/netem/Makefile	2017-02-20 17:47:52.000000000 +0100
++++ iproute2-4.10.0/netem/Makefile	2017-04-23 20:23:07.404790192 +0200
 @@ -1,14 +1,12 @@
  DISTGEN = maketable normal pareto paretonormal
  DISTDATA = normal.dist pareto.dist paretonormal.dist experimental.dist
  
 -HOSTCC ?= $(CC)
 -CCOPTS  = $(CBUILD_CFLAGS)
- LDLIBS += -lm 
+ LDLIBS += -lm
  
  all: $(DISTGEN) $(DISTDATA)
  
