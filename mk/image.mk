@@ -196,7 +196,7 @@ ${FW_DIR}/${ROOTFSUBIFS}: ${TARGET_DIR}
 	( \
 		PATH='${HOST_PATH}'; \
 		SP_SIZE='${ADK_TARGET_FLASH_SUBPAGE_SIZE}'; \
-		PG_SZIE='${ADK_TARGET_FLASH_PAGE_SIZE}'; \
+		PG_SIZE='${ADK_TARGET_FLASH_PAGE_SIZE}'; \
 		LEB_SIZE=$$(((($$SP_SIZE + $$PG_SIZE) / $$PG_SIZE) * $$PG_SIZE)); \
 		mkfs.ubifs -r ${TARGET_DIR} \
 			-m $$PG_SIZE \
