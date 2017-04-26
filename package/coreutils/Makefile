@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		coreutils
 PKG_VERSION:=		8.24
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		a2d75286a4b9ef3a13039c2da3868a61be4ee9f17d8ae380a35a97e506972170
 PKG_DESCR:=		file, shell and text utilities
 PKG_SECTION:=		base/apps
@@ -27,9 +27,6 @@ coreutils-install:
 	$(INSTALL_DIR) $(IDIR_COREUTILS)/usr/bin
 	$(CP) $(WRKINST)/usr/bin/* \
 		$(IDIR_COREUTILS)/usr/bin
-	$(INSTALL_DIR) $(IDIR_COREUTILS)/usr/libexec
-	$(CP) $(WRKINST)/usr/libexec/* \
-		$(IDIR_COREUTILS)/usr/sbin
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
