@@ -22,8 +22,10 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBAUDIOFILE,libaudiofile,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-CONFIGURE_ENV+=		ac_cv_linux_vers=2
 TARGET_CPPFLAGS+=       -D_GNU_SOURCE -D_POSIX_SOURCE
+
+CONFIGURE_ENV+=		ac_cv_linux_vers=2
+CONFIGURE_ARGS+=	--disable-examples
 
 libaudiofile-install:
 	${INSTALL_DIR} ${IDIR_LIBAUDIOFILE}/usr/lib

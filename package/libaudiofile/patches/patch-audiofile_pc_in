@@ -1,0 +1,9 @@
+--- audiofile-0.3.6.orig/audiofile.pc.in	2013-02-11 18:23:26.000000000 +0100
++++ audiofile-0.3.6/audiofile.pc.in	2017-04-26 02:14:32.397720674 +0200
+@@ -8,5 +8,5 @@ Description: audiofile
+ Requires:
+ Version: @VERSION@
+ Libs: -L${libdir} -laudiofile
+-Libs.private: -lm
++Libs.private: @FLAC_LIBS@ @COVERAGE_LIBS@ -lm
+ Cflags: -I${includedir}

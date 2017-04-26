@@ -1,0 +1,31 @@
+--- audiofile-0.3.6.orig/libaudiofile/WAVE.cpp	2013-03-06 06:30:03.000000000 +0100
++++ audiofile-0.3.6/libaudiofile/WAVE.cpp	2017-04-26 02:15:19.828763007 +0200
+@@ -281,6 +281,12 @@ status WAVEFile::parseFormat(const Tag &
+ 
+ 			/* numCoefficients should be at least 7. */
+ 			assert(numCoefficients >= 7 && numCoefficients <= 255);
++			if (numCoefficients < 7 || numCoefficients > 255)
++			{
++				_af_error(AF_BAD_HEADER,
++						"Bad number of coefficients");
++				return AF_FAIL;
++			}
+ 
+ 			m_msadpcmNumCoefficients = numCoefficients;
+ 
+@@ -326,6 +332,7 @@ status WAVEFile::parseFormat(const Tag &
+ 			{
+ 				_af_error(AF_BAD_NOT_IMPLEMENTED,
+ 					"IMA ADPCM compression supports only 4 bits per sample");
++				return AF_FAIL;
+ 			}
+ 
+ 			int bytesPerBlock = (samplesPerBlock + 14) / 8 * 4 * channelCount;
+@@ -333,6 +340,7 @@ status WAVEFile::parseFormat(const Tag &
+ 			{
+ 				_af_error(AF_BAD_CODEC_CONFIG,
+ 					"Invalid samples per block for IMA ADPCM compression");
++				return AF_FAIL;
+ 			}
+ 
+ 			track->f.sampleWidth = 16;
