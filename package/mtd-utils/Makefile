@@ -5,13 +5,13 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mtd-utils
 PKG_VERSION:=		2.0.0
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		20a377aa86af4c102e930b0d0bb9859e3a10aeb16445f6a1273989b206a717c8
 PKG_DESCR:=		flash filesystem utilities
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libuuid liblzo
 PKG_BUILDDEP:=		zlib util-linux liblzo
-HOST_BUILDDEP:=		liblzo-host zlib-host
+HOST_BUILDDEP:=		liblzo-host zlib-host util-linux-host
 PKG_URL:=		http://www.linux-mtd.infradead.org
 PKG_SITES:=		ftp://ftp.infradead.org/pub/mtd-utils/
 
@@ -44,8 +44,12 @@ $(eval $(call PKG_template,FLASH_OTP_DUMP,flash-otp-dump,$(PKG_VERSION)-${PKG_RE
 $(eval $(call PKG_template,FLASH_LOCK,flash-lock,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_FLASH_LOCK},${PKG_SECTION}))
 
 HOST_STYLE:=		auto
+HOST_CONFIGURE_ARGS+=	--disable-tests
 HOST_CPPFLAGS+=		-DWITHOUT_XATTR=1 -I./include
 HOST_MAKE_FLAGS+=	WITHOUT_LZO=1
+ifeq ($(OS_FOR_BUILD),Darwin)
+HOST_CPPFLAGS+=		-D_DARWIN_C_SOURCE
+endif
 
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
