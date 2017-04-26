@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		zlib
 PKG_VERSION:=		1.2.11
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		4ff941449631ace0d4d203e3483be9dbc9da454084111f97ea0a2114e19bf066
 PKG_DESCR:=		implementation of the deflate compression method
 PKG_SECTION:=		libs/comp
@@ -22,7 +22,7 @@ $(eval $(call PKG_template,ZLIB,zlib,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS
 HOST_STYLE:=		auto
 HOST_CONFIG_STYLE:=	manual
 HOST_CONFIGURE_ENV+=	uname=Linux
-HOST_ALL_TARGET:=	libz.so.$(PKG_VERSION)
+
 CONFIG_STYLE:=		manual
 CONFIGURE_ENV+=		uname=Linux
 
@@ -30,11 +30,6 @@ ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS_ONLY),)
 CONFIGURE_OPTS:=	--shared
 else
 CONFIGURE_OPTS:=	--static
-endif
-
-ALL_TARGET:=		libz.a 
-ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_USE_STATIC_LIBS_ONLY),)
-ALL_TARGET+=		libz.so.$(PKG_VERSION)
 endif
 
 host-configure:
