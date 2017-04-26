@@ -1,0 +1,11 @@
+--- eudev-3.2.2.orig/rule_generator/write_net_rules	2017-04-19 23:12:08.000000000 +0200
++++ eudev-3.2.2/rule_generator/write_net_rules	2017-04-25 22:07:55.624621763 +0200
+@@ -38,7 +38,7 @@ if [ -n "$UDEV_LOG" ]; then
+ 	fi
+ fi
+ 
+-RULES_FILE='${prefix}/etc/udev/rules.d/70-persistent-net.rules'
++RULES_FILE='/etc/udev/rules.d/70-persistent-net.rules'
+ 
+ . ${exec_prefix}/lib/udev/rule_generator.functions
+ 

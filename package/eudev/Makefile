@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		eudev
 PKG_VERSION:=		3.2.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		3e4c56ec2fc1854afd0a31f3affa48f922c62d40ee12a0c1a4b4f152ef5b0f63
 PKG_DESCR:=		device manager
 PKG_SECTION:=		sys/utils

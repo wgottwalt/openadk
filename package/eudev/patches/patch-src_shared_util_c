@@ -1,0 +1,10 @@
+--- eudev-3.2.2.orig/src/shared/util.c	2016-11-17 22:14:19.000000000 +0100
++++ eudev-3.2.2/src/shared/util.c	2017-04-26 02:06:27.442614542 +0200
+@@ -41,7 +41,6 @@
+ #include <pwd.h>
+ #include <netinet/ip.h>
+ #include <linux/kd.h>
+-#include <dlfcn.h>
+ #include <sys/wait.h>
+ #include <sys/time.h>
+ #include <glob.h>
