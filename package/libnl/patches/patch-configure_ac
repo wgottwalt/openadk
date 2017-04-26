@@ -1,0 +1,11 @@
+--- libnl-libnl3_2_29.orig/configure.ac	2016-12-30 15:57:01.000000000 +0100
++++ libnl-libnl3_2_29/configure.ac	2017-04-26 20:09:18.129932699 +0200
+@@ -126,6 +126,8 @@ fi
+ 
+ AC_CONFIG_SUBDIRS([doc])
+ 
++AC_CHECK_FUNCS([strerror_l])
++
+ AC_CONFIG_FILES([
+ Makefile
+ libnl-3.0.pc

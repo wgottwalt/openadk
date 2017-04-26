@@ -4,22 +4,25 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libnl
-PKG_VERSION:=		3.2.25
+PKG_VERSION:=		3.2.29
 PKG_RELEASE:=		1
-PKG_HASH:=		8beb7590674957b931de6b7f81c530b85dc7c1ad8fbda015398bc1e8d1ce8ec5
+PKG_HASH:=		5a30dc4986158c6c2b1309f4a15a283d50cc938108a675e3d822e24debcd229d
 PKG_DESCR:=		netlink library
 PKG_SECTION:=		libs/net
 PKG_BUILDDEP:=		m4-host flex-host
-PKG_URL:=		http://www.infradead.org/~tgr/libnl/
-PKG_SITES:=		http://www.infradead.org/~tgr/libnl/files/
+PKG_SITES:=		https://github.com/thom311/libnl/archive/
 PKG_NOPARALLEL:=	1
 PKG_OPTS:=		dev
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		${PKG_NAME}3_2_29.tar.gz
+WRKDIST=		$(WRKDIR)/$(PKG_NAME)-${PKG_NAME}3_2_29
 
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBNL,libnl,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+AUTOTOOL_STYLE:=	autogen
+CONFIGURE_ARGS+=	--disable-cli
 
 libnl-install:
 	${INSTALL_DIR} ${IDIR_LIBNL}/etc/libnl

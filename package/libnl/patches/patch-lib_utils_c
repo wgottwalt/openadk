@@ -1,0 +1,34 @@
+--- libnl-libnl3_2_29.orig/lib/utils.c	2016-12-30 15:57:01.000000000 +0100
++++ libnl-libnl3_2_29/lib/utils.c	2017-04-26 20:09:18.137933191 +0200
+@@ -30,7 +30,9 @@
+ #include <netlink/utils.h>
+ #include <linux/socket.h>
+ #include <stdlib.h> /* exit() */
++#ifdef HAVE_STRERROR_L
+ #include <locale.h>
++#endif
+ 
+ /**
+  * Global variable indicating the desired level of debugging output.
+@@ -123,9 +125,10 @@ int __nl_read_num_str_file(const char *p
+ 
+ const char *nl_strerror_l(int err)
+ {
++	const char *buf;
++#ifdef HAVE_STRERROR_L
+ 	int errno_save = errno;
+ 	locale_t loc = newlocale(LC_MESSAGES_MASK, "", (locale_t)0);
+-	const char *buf;
+ 
+ 	if (loc == (locale_t)0) {
+ 		if (errno == ENOENT)
+@@ -140,6 +143,9 @@ const char *nl_strerror_l(int err)
+ 	}
+ 
+ 	errno = errno_save;
++#else
++	buf = strerror(err);
++#endif
+ 	return buf;
+ }
+ /** @endcond */
