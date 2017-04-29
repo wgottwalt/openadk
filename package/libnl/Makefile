@@ -30,14 +30,7 @@ libnl-install:
 	${INSTALL_DIR} ${IDIR_LIBNL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libnl-3.so* ${IDIR_LIBNL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libnl-genl-3.so* ${IDIR_LIBNL}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libnl-cli-3.so* ${IDIR_LIBNL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libnl-route-3.so* ${IDIR_LIBNL}/usr/lib
 	${CP} ${WRKINST}/usr/lib/libnl-nf-3.so* ${IDIR_LIBNL}/usr/lib
-	${INSTALL_DIR} ${IDIR_LIBNL}/usr/lib/libnl/cli/cls
-	$(CP) ${WRKINST}/usr/lib/libnl/cli/cls/*.so \
-		${IDIR_LIBNL}/usr/lib/libnl/cli/cls
-	${INSTALL_DIR} ${IDIR_LIBNL}/usr/lib/libnl/cli/qdisc
-	$(CP) ${WRKINST}/usr/lib/libnl/cli/qdisc/*.so \
-		${IDIR_LIBNL}/usr/lib/libnl/cli/qdisc
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
