@@ -4,7 +4,7 @@
 OBJS=cmp.o dl.o get.o mopdef.o  pf-linux2.o put.o device.o file.o loop-linux2.o nma.o print.o rc.o
 
 libcommon.a: ${OBJS}
-	ar -rs libcommon.a ${OBJS}
+	$(AR) -rs libcommon.a ${OBJS}
 
 .c.o: .o
 	$(CC) -c $(CFLAGS) $<
