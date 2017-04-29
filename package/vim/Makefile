@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		vim
 PKG_VERSION:=		8.0
 PKG_RELEASE:=		1
-PKG_HASH:=		08bd0d1dd30ece3cb9905ccd48b82b2f81c861696377508021265177dc153a61
+PKG_HASH:=		2e179182814715c3c77010c7300a4abcb964ba8a99a470640f9f2f03884b2ccb
 PKG_DESCR:=		very popular text editor
 PKG_SECTION:=		app/editor
 PKG_DEPENDS:=		libncurses
