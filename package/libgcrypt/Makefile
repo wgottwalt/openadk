@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libgcrypt
-PKG_VERSION:=		1.7.5
+PKG_VERSION:=		1.7.6
 PKG_RELEASE:=		1
-PKG_HASH:=		6b2a8234bf2d03a3cdd07936e44ab395d21a6c92279fd850764702215c9dc0a9
+PKG_HASH:=		626aafee84af9d2ce253d2c143dc1c0902dda045780cc241f39970fc60be05bc
 PKG_DESCR:=		crypto library
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgpg-error
@@ -15,7 +15,7 @@ PKG_URL:=		http://directory.fsf.org/project/libgcrypt
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/libgcrypt/
 PKG_OPTS:=		dev
 
-DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
+DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
 include $(ADK_TOPDIR)/mk/package.mk
 
