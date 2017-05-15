@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ruby
-PKG_VERSION:=		2.4.0
+PKG_VERSION:=		2.4.1
 PKG_RELEASE:=		1
-PKG_HASH:=		152fd0bd15a90b4a18213448f485d4b53e9f7662e1508190aa5b702446b29e3d
+PKG_HASH:=		a330e10d5cb5e53b3a0078326c5731888bb55e32c4abfeb27d9e7f8e5d000250
 PKG_DESCR:=		scripting language
 PKG_SECTION:=		dev/lang
 PKG_BUILDDEP:=		ruby-host libressl zlib
