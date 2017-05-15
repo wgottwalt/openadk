@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		php
-PKG_VERSION:=		7.0.17
+PKG_VERSION:=		7.0.19
 PKG_RELEASE:=		1
-PKG_HASH:=		471c16fcdd6a5e1a37199e97bcaeea6117626229785185be7532aaa7c6ee04be
+PKG_HASH:=		640e5e3377d15a6d19adce2b94a9d876eeddabdb862d154a5e347987f4225ef6
 PKG_DESCR:=		php language interpreter
 PKG_SECTION:=		dev/lang
 PKG_NEEDS:=		threads
 PHP_URL:=		http://www.php.net/
-PKG_SITES:=		http://de.php.net/distributions/
+PKG_SITES:=		http://de2.php.net/distributions/
 
 PKG_SUBPKGS:=		PHP PHP_CLI PHP_CGI PHP_FPM
 PKGSD_PHP_CGI:=		php for fastcgi usage
