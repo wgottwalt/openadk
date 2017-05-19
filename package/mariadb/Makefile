@@ -4,14 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mariadb
-PKG_VERSION:=		10.1.22
+PKG_VERSION:=		10.1.23
 PKG_RELEASE:=		1
-PKG_HASH:=		bcb0572e7ad32cea9740a21e9255f733bdf60a5561ffbda317c22dd12b3966ce
+PKG_HASH:=		54d8114e24bfa5e3ebdc7d69e071ad1471912847ea481b227d204f9d644300bf
 PKG_DESCR:=		sql client library
 PKG_SECTION:=		libs/db
 PKG_DEPENDS:=		libncurses zlib libevent libpcre
-PKG_BUILDDEP:=		cmake-host mariadb-host ncurses zlib readline libevent pcre
+PKG_BUILDDEP:=		cmake-host mariadb-host ncurses zlib readline libevent pcre libressl
 HOST_BUILDDEP:=		cmake-host
+PKG_NEEDS:=		c++
 PKG_URL:=		http://www.mariadb.org/
 PKG_SITES=		https://downloads.mariadb.org/interstitial/mariadb-$(PKG_VERSION)/source/
 PKG_LIBNAME:=		libmariadbclient
@@ -36,6 +37,7 @@ HOST_ALL_TARGET:=	import_executables
 CONFIG_STYLE:=		cmake
 CMAKE_FLAGS+=		-DCMAKE_CROSSCOMPILING=ON \
 			-DIMPORT_EXECUTABLES=${BASE_DIR}/host_build_${GNU_HOST_NAME}/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)-host/$(PKG_NAME)-$(PKG_VERSION)/import_executables.cmake \
+			-DWITH_SSL=system \
 			-DWITHOUT_SERVER=OFF \
 			-DSECURITY_HARDENED=OFF \
 			-DWITHOUT_DYNAMIC_PLUGINS=ON \
