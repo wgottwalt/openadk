@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libmatroska
-PKG_VERSION:=		1.4.4
+PKG_VERSION:=		1.4.7
 PKG_RELEASE:=		1
-PKG_HASH:=		d3efaa9f6d3964351a05bea0f848a8d5dc570e4791f179816ce9a93730296bd7
+PKG_HASH:=		46441eb3bae9f970f68affaa211dd74302a7072dcd2becfb1114da11b66525fa
 PKG_DESCR:=		multimedia container format library
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libebml
