@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libebml
-PKG_VERSION:=		1.3.3
+PKG_VERSION:=		1.3.4
 PKG_RELEASE:=		1
-PKG_HASH:=		35fb44daa41961f94a0ac1b8f06801e88cc9bf2ad6f562ced8ab7c1f1a875499
+PKG_HASH:=		c50d3ecf133742c6549c0669c3873f968e11a365a5ba17b2f4dc339bbe51f387
 PKG_DESCR:=		extensible binary meta language library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		https://www.matroska.org/
