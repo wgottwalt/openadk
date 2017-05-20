@@ -1,5 +1,5 @@
---- bitlbee-3.0.1.orig/protocols/Makefile	2010-11-24 23:44:00.000000000 +0100
-+++ bitlbee-3.0.1/protocols/Makefile	2011-03-03 22:43:33.000000000 +0100
+--- bitlbee-3.5.1.orig/protocols/Makefile	2017-01-30 21:45:59.000000000 +0100
++++ bitlbee-3.5.1/protocols/Makefile	2017-05-20 12:17:34.748567834 +0200
 @@ -24,7 +24,7 @@ subdirobjs = $(PROTOOBJS)
  
  # Expansion of variables
@@ -9,18 +9,12 @@
  
  # [SH] Phony targets
  all: protocols.o
-@@ -48,12 +48,12 @@ $(subdirs):
+@@ -48,7 +48,7 @@ $(subdirs):
  
  protocols.o: $(objects) $(subdirs)
  	@echo '*' Linking protocols.o
 -	@$(LD) $(LFLAGS) $(objects) $(subdirobjs) -o protocols.o
-+	$(CC) $(LFLAGS) $(objects) $(subdirobjs) -o protocols.o
++	@$(CC) $(LFLAGS) $(objects) $(subdirobjs) -o protocols.o
  
  $(objects): ../Makefile.settings Makefile
  
- $(objects): %.o: $(SRCDIR)%.c
- 	@echo '*' Compiling $<
--	@$(CC) -c $(CFLAGS) $< -o $@
-+	$(CC) -c $(CFLAGS) $< -o $@
- 
- -include .depend/*.d

@@ -1,24 +1,19 @@
---- bitlbee-3.0.1.orig/protocols/jabber/Makefile	2010-11-24 23:44:00.000000000 +0100
-+++ bitlbee-3.0.1/protocols/jabber/Makefile	2011-03-03 22:41:38.000000000 +0100
+--- bitlbee-3.5.1.orig/protocols/jabber/Makefile	2017-01-30 21:45:59.000000000 +0100
++++ bitlbee-3.5.1/protocols/jabber/Makefile	2017-05-20 12:15:26.360306005 +0200
 @@ -14,7 +14,7 @@ endif
  # [SH] Program variables
- objects = conference.o io.o iq.o jabber.o jabber_util.o message.o presence.o s5bytestream.o sasl.o si.o
+ objects = conference.o io.o iq.o jabber.o jabber_util.o message.o presence.o s5bytestream.o sasl.o si.o hipchat.o
  
 -LFLAGS += -r
 +LFLAGS += -Wl,-r -nostdlib
  
  # [SH] Phony targets
  all: jabber_mod.o
-@@ -37,10 +37,10 @@ $(objects): ../../Makefile.settings Make
- 
- $(objects): %.o: $(SRCDIR)%.c
- 	@echo '*' Compiling $<
--	@$(CC) -c $(CFLAGS) $< -o $@
-+	$(CC) -c $(CFLAGS) $< -o $@
+@@ -41,6 +41,6 @@ $(objects): %.o: $(_SRCDIR_)%.c
  
  jabber_mod.o: $(objects)
  	@echo '*' Linking jabber_mod.o
 -	@$(LD) $(LFLAGS) $(objects) -o jabber_mod.o
-+	$(CC) $(LFLAGS) $(objects) -o jabber_mod.o
++	@$(CC) $(LFLAGS) $(objects) -o jabber_mod.o
  
  -include .depend/*.d

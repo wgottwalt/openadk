@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bitlbee
-PKG_VERSION:=		3.0.1
+PKG_VERSION:=		3.5.1
 PKG_RELEASE:=		1
-PKG_HASH:=		408a737b35db4b9c407e3db09b2d2e7b528836a68e2d783373254b78812bf608
+PKG_HASH:=		9636d7fd89ebb3756c13a9a3387736ca6d56ccf66ec0580d512f07b21db0fa69
 PKG_DESCR:=		irc gateway to im chat networks
 PKG_SECTION:=		app/chat
 PKG_DEPENDS:=		glib libressl

@@ -1,26 +1,20 @@
---- bitlbee-3.0.1.orig/lib/Makefile	2010-11-24 23:44:00.000000000 +0100
-+++ bitlbee-3.0.1/lib/Makefile	2011-03-03 22:39:24.000000000 +0100
+--- bitlbee-3.5.1.orig/lib/Makefile	2017-01-30 21:45:59.000000000 +0100
++++ bitlbee-3.5.1/lib/Makefile	2017-05-20 12:20:09.898551807 +0200
 @@ -14,7 +14,7 @@ endif
  # [SH] Program variables
- objects = arc.o base64.o $(DES) $(EVENT_HANDLER) ftutil.o http_client.o ini.o md5.o misc.o oauth.o proxy.o sha1.o $(SSL_CLIENT) url.o xmltree.o
+ objects = arc.o base64.o $(EVENT_HANDLER) ftutil.o http_client.o ini.o json.o json_util.o md5.o misc.o oauth.o oauth2.o proxy.o sha1.o $(SSL_CLIENT) url.o xmltree.o ns_parse.o
  
 -LFLAGS += -r
 +LFLAGS += -Wl,-r -nostdlib
  
  # [SH] Phony targets
  all: lib.o
-@@ -35,12 +35,12 @@ distclean: clean $(subdirs)
+@@ -35,7 +35,7 @@ distclean: clean $(subdirs)
  
  lib.o: $(objects) $(subdirs)
  	@echo '*' Linking lib.o
 -	@$(LD) $(LFLAGS) $(objects) -o lib.o
-+	$(CC) $(LFLAGS) $(objects) -o lib.o
++	@$(CC) $(LFLAGS) $(objects) -o lib.o
  
  $(objects): ../Makefile.settings Makefile
  
- $(objects): %.o: $(SRCDIR)%.c
- 	@echo '*' Compiling $<
--	@$(CC) -c $(CFLAGS) $< -o $@
-+	$(CC) -c $(CFLAGS) $< -o $@
- 
- -include .depend/*.d

@@ -1,24 +1,19 @@
---- bitlbee-3.0.1.orig/protocols/msn/Makefile	2010-11-24 23:44:00.000000000 +0100
-+++ bitlbee-3.0.1/protocols/msn/Makefile	2011-03-03 22:41:12.000000000 +0100
+--- bitlbee-3.5.1.orig/protocols/msn/Makefile	2017-01-30 21:45:59.000000000 +0100
++++ bitlbee-3.5.1/protocols/msn/Makefile	2017-05-20 12:15:47.329655386 +0200
 @@ -14,7 +14,7 @@ endif
  # [SH] Program variables
- objects = msn.o msn_util.o ns.o sb.o soap.o tables.o
+ objects = msn.o msn_util.o ns.o soap.o tables.o gw.o
  
 -LFLAGS += -r
 +LFLAGS += -Wl,-r -nostdlib
  
  # [SH] Phony targets
  all: msn_mod.o
-@@ -37,10 +37,10 @@ $(objects): ../../Makefile.settings Make
- 
- $(objects): %.o: $(SRCDIR)%.c
- 	@echo '*' Compiling $<
--	@$(CC) -c $(CFLAGS) $< -o $@
-+	$(CC) -c $(CFLAGS) $< -o $@
+@@ -41,6 +41,6 @@ $(objects): %.o: $(_SRCDIR_)%.c
  
  msn_mod.o: $(objects)
  	@echo '*' Linking msn_mod.o
 -	@$(LD) $(LFLAGS) $(objects) -o msn_mod.o
-+	$(CC) $(LFLAGS) $(objects) -o msn_mod.o
++	@$(CC) $(LFLAGS) $(objects) -o msn_mod.o
  
  -include .depend/*.d
