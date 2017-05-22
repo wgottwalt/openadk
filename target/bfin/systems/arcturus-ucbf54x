@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_ARCTURUS_UCBF54X
+	bool "Arcturus uCBF54x"
+	select ADK_TARGET_CPU_BFIN_BF548
+	select ADK_TARGET_PACKAGE_TXZ
+	help
+	  Arcturus uCBF54x.
+	  https://www.arcturusnetworks.com/products/ucbf54x
+
