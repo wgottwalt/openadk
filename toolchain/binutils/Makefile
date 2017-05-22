@@ -43,7 +43,9 @@ ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 	tar xf $(ADK_TOPDIR)/target/xtensa/overlay/xtensa_$(ADK_TARGET_CPU_TYPE).tar \
 		--strip-components=1 -C $(WRKSRC) binutils
 endif
-	(cd $(WRKBUILD); PATH='$(HOST_PATH)' MAKEINFO=true \
+	(cd $(WRKBUILD); PATH='$(HOST_PATH)' \
+		MAKEINFO=true \
+		M4='${STAGING_HOST_DIR}/usr/bin/m4' \
 		$(WRKBUILD)/configure \
 		--prefix=$(TOOLCHAIN_DIR)/usr \
 		--target=$(GNU_TARGET_NAME) \
@@ -66,7 +68,7 @@ $(WRKBUILD)/.compiled: $(WRKBUILD)/.configured
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	PATH='$(HOST_PATH)' $(MAKE) MAKEINFO=true -C $(WRKBUILD) install
-ifeq ($(ADK_TARGET_ARCH_H8300)$(ADK_TARGET_ARCH_NDS32)$(ADK_TARGET_CPU_SH_J2),y)
+ifeq ($(ADK_TARGET_ARCH_H8300)$(ADK_TARGET_ARCH_NDS32)$(ADK_TARGET_ARCH_SH),y)
 	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/lib/ldscripts
 	$(CP) $(WRKBUILD)/ld/ldscripts/* $(STAGING_TARGET_DIR)/usr/lib/ldscripts/
 endif

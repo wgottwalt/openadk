@@ -140,7 +140,7 @@ GCC_CONFOPTS+=		--with-endian=little
 else
 GCC_CONFOPTS+=          --with-endian=big
 endif
-ifeq ($(ADK_TARGET_CPU_SH_J2),y)
+ifeq ($(ADK_TARGET_ARCH_SH),y)
 ifeq ($(ADK_TARGET_BINFMT_FDPIC),y)
 GCC_CONFOPTS+=          --enable-fdpic
 endif
