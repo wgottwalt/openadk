@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xz
-PKG_VERSION:=		5.2.2
+PKG_VERSION:=		5.2.3
 PKG_RELEASE:=		1
-PKG_HASH:=		73df4d5d34f0468bd57d09f2d8af363e95ed6cc3a4a86129d2f2c366259902a2
+PKG_HASH:=		71928b357d0a09a12a4b4c5fafca8c31c19b0e7d3b8ebb19622e96f26dbf28cb
 PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
 PKG_DEPENDS:=		libxz
