@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		nano
-PKG_VERSION:=		2.8.1
+PKG_VERSION:=		2.8.4
 PKG_RELEASE:=		1
-PKG_HASH:=		e935a8bb373345c833dff3a304c6d392775d206b94c802d9285ae80ac6b66d0b
+PKG_HASH:=		c7cf264f0f3e4af43ecdbc4ec72c3b1e831c69a1a5f6512d5b0c109e6bac7b11
 PKG_DESCR:=		enhanced clone of the pico editor
 PKG_SECTION:=		app/editor
 PKG_DEPENDS:=		libncurses
