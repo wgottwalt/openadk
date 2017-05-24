@@ -48,7 +48,7 @@ config ADK_TOOLCHAIN_BINUTILS_NDS32
 	depends on ADK_TARGET_ARCH_NDS32
 
 config ADK_TOOLCHAIN_BINUTILS_ARC
-	bool "arc-2016.09-release"
+	bool "arc-2017.03-release"
 	depends on ADK_TARGET_ARCH_ARC
 
 config ADK_TOOLCHAIN_BINUTILS_2_20_1
