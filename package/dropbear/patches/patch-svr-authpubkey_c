@@ -1,46 +1,107 @@
-$Id: update-patches 24 2008-08-31 14:56:13Z wbx $
---- dropbear-2014.63.orig/svr-authpubkey.c	2014-02-19 15:05:24.000000000 +0100
-+++ dropbear-2014.63/svr-authpubkey.c	2014-02-27 16:29:05.000000000 +0100
-@@ -208,6 +208,8 @@ static int checkpubkey(unsigned char* al
+--- dropbear-2017.75.orig/svr-authpubkey.c	2017-05-18 16:47:02.000000000 +0200
++++ dropbear-2017.75/svr-authpubkey.c	2017-05-24 00:12:02.175883130 +0200
+@@ -220,24 +220,31 @@ static int checkpubkey(char* algo, unsig
  		goto out;
  	}
  
+-	/* we don't need to check pw and pw_dir for validity, since
+-	 * its been done in checkpubkeyperms. */
+-	len = strlen(ses.authstate.pw_dir);
+-	/* allocate max required pathname storage,
+-	 * = path + "/.ssh/authorized_keys" + '\0' = pathlen + 22 */
+-	filename = m_malloc(len + 22);
+-	snprintf(filename, len + 22, "%s/.ssh/authorized_keys", 
+-				ses.authstate.pw_dir);
++	/* special case for root authorized_keys in /etc/dropbear/authorized_keys */
 +	if (ses.authstate.pw_uid != 0) {
-+
- 	/* we don't need to check pw and pw_dir for validity, since
- 	 * its been done in checkpubkeyperms. */
- 	len = strlen(ses.authstate.pw_dir);
-@@ -219,6 +221,9 @@ static int checkpubkey(unsigned char* al
  
- 	/* open the file */
- 	authfile = fopen(filename, "r");
+-	/* open the file as the authenticating user. */
+-	origuid = getuid();
+-	origgid = getgid();
+-	if ((setegid(ses.authstate.pw_gid)) < 0 ||
+-		(seteuid(ses.authstate.pw_uid)) < 0) {
+-		dropbear_exit("Failed to set euid");
+-	}
++		/* we don't need to check pw and pw_dir for validity, since
++		 * its been done in checkpubkeyperms. */
++		len = strlen(ses.authstate.pw_dir);
++		/* allocate max required pathname storage,
++		 * = path + "/.ssh/authorized_keys" + '\0' = pathlen + 22 */
++		filename = m_malloc(len + 22);
++		snprintf(filename, len + 22, "%s/.ssh/authorized_keys", 
++					ses.authstate.pw_dir);
+ 
+-	authfile = fopen(filename, "r");
++		/* open the file as the authenticating user. */
++		origuid = getuid();
++		origgid = getgid();
++		if ((setegid(ses.authstate.pw_gid)) < 0 ||
++			(seteuid(ses.authstate.pw_uid)) < 0) {
++			dropbear_exit("Failed to set euid");
++		}
++
++		authfile = fopen(filename, "r");
++
 +	} else {
 +		authfile = fopen("/etc/dropbear/authorized_keys","r");
 +	}
- 	if (authfile == NULL) {
- 		goto out;
- 	}
-@@ -371,6 +376,8 @@ static int checkpubkeyperms() {
+ 
+ 	if ((seteuid(origuid)) < 0 ||
+ 		(setegid(origgid)) < 0) {
+@@ -396,26 +403,39 @@ static int checkpubkeyperms() {
  		goto out;
  	}
  
+-	/* allocate max required pathname storage,
+-	 * = path + "/.ssh/authorized_keys" + '\0' = pathlen + 22 */
+-	filename = m_malloc(len + 22);
+-	strncpy(filename, ses.authstate.pw_dir, len+1);
 +	if (ses.authstate.pw_uid != 0) {
+ 
+-	/* check ~ */
+-	if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
+-		goto out;
+-	}
++		/* allocate max required pathname storage,
++		 * = path + "/.ssh/authorized_keys" + '\0' = pathlen + 22 */
++		filename = m_malloc(len + 22);
++		strncpy(filename, ses.authstate.pw_dir, len+1);
+ 
+-	/* check ~/.ssh */
+-	strncat(filename, "/.ssh", 5); /* strlen("/.ssh") == 5 */
+-	if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
+-		goto out;
+-	}
++		/* check ~ */
++		if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
++			goto out;
++		}
 +
- 	/* allocate max required pathname storage,
- 	 * = path + "/.ssh/authorized_keys" + '\0' = pathlen + 22 */
- 	filename = m_malloc(len + 22);
-@@ -392,6 +399,14 @@ static int checkpubkeyperms() {
- 	if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
- 		goto out;
- 	}
++		/* check ~/.ssh */
++		strncat(filename, "/.ssh", 5); /* strlen("/.ssh") == 5 */
++		if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
++			goto out;
++		}
++
++		/* now check ~/.ssh/authorized_keys */
++		strncat(filename, "/authorized_keys", 16);
++		if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
++			goto out;
++		}
++
 +	} else {
++
 +		if (checkfileperm("/etc/dropbear") != DROPBEAR_SUCCESS) {
 +			goto out;
 +		}
 +		if (checkfileperm("/etc/dropbear/authorized_keys") != DROPBEAR_SUCCESS) {
 +			goto out;
 +		}
-+	}
+ 
+-	/* now check ~/.ssh/authorized_keys */
+-	strncat(filename, "/authorized_keys", 16);
+-	if (checkfileperm(filename) != DROPBEAR_SUCCESS) {
+-		goto out;
+ 	}
  
  	/* file looks ok, return success */
- 	ret = DROPBEAR_SUCCESS;
