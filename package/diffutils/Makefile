@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		diffutils
-PKG_VERSION:=		3.3
+PKG_VERSION:=		3.6
 PKG_RELEASE:=		1
-PKG_HASH:=		a25e89a8ab65fded1731e4186be1bb25cda967834b6df973599cdcd5abdfc19c
+PKG_HASH:=		d621e8bdd4b573918c8145f7ae61817d1be9deb4c8d2328a65cea8e11d783bd6
 PKG_DESCR:=		show differences between two files
 PKG_SECTION:=		sys/utils
 PKG_URL:=		http://www.gnu.org/software/diffutils/
