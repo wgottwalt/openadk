@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		dosfstools
-PKG_VERSION:=		4.0
+PKG_VERSION:=		4.1
 PKG_RELEASE:=		1
-PKG_HASH:=		9037738953559d1efe04fc5408b6846216cc0138f7f9d32de80b6ec3c35e7daf
+PKG_HASH:=		e6b2aca70ccc3fe3687365009dd94a2e18e82b688ed4e260e04b7412471cc173
 PKG_DESCR:=		utilities to create and check fat filesystems
 PKG_SECTION:=		sys/fs
 PKG_NEEDS:=		iconv
