@@ -1,0 +1,23 @@
+revert 6dcad60c0ef48af584395a40feeb256fb82986a8 
+as it breaks any userland in qemu
+
+diff -Nur gcc-6.3.0.orig/gcc/config/microblaze/microblaze.h gcc-6.3.0/gcc/config/microblaze/microblaze.h
+--- gcc-6.3.0.orig/gcc/config/microblaze/microblaze.h	2016-01-21 18:10:54.000000000 +0100
++++ gcc-6.3.0/gcc/config/microblaze/microblaze.h	2017-05-26 18:33:31.297534916 +0200
+@@ -253,14 +253,14 @@
+ #define FIXED_REGISTERS							\
+ {									\
+   1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1,			\
+-  1, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,			\
++  1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       \
+   1, 1, 1, 1 								\
+ }
+ 
+ #define CALL_USED_REGISTERS						\
+ {									\
+   1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1,			\
+-  1, 1, 1, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,			\
++  1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,                       \
+   1, 1, 1, 1								\
+ }
+ #define GP_REG_FIRST    0
