@@ -135,32 +135,35 @@ GCC_FINAL_CONFOPTS+=	--disable-biarch --disable-multilib
 endif
 
 ifeq ($(ADK_TARGET_ARCH_SH),y)
+
 ifeq ($(ADK_TARGET_LITTLE_ENDIAN),y)
 GCC_CONFOPTS+=		--with-endian=little
 else
 GCC_CONFOPTS+=          --with-endian=big
 endif
-ifeq ($(ADK_TARGET_ARCH_SH),y)
 ifeq ($(ADK_TARGET_BINFMT_FDPIC),y)
 GCC_CONFOPTS+=          --enable-fdpic
 endif
-GCC_FINAL_CONFOPTS+=	--with-multilib-list=mj2
+
+ifeq ($(ADK_TARGET_CPU_SH_J2),y)
+GCC_CONFOPTS+=	--with-multilib-list=mj2
 endif
 ifeq ($(ADK_TARGET_CPU_SH_SH2),y)
-GCC_FINAL_CONFOPTS+=	--with-multilib-list=m2
+GCC_CONFOPTS+=	--with-multilib-list=m2
 endif
 ifeq ($(ADK_TARGET_CPU_SH_SH2A),y)
-GCC_FINAL_CONFOPTS+=	--with-multilib-list=m2a
+GCC_CONFOPTS+=	--with-multilib-list=m2a,m2a-nofpu
 endif
 ifeq ($(ADK_TARGET_CPU_SH_SH3),y)
-GCC_FINAL_CONFOPTS+=	--with-multilib-list=m3
+GCC_CONFOPTS+=	--with-multilib-list=m3
 endif
 ifeq ($(ADK_TARGET_CPU_SH_SH4),y)
-GCC_FINAL_CONFOPTS+=	--with-multilib-list=m4,m4-nofpu
+GCC_CONFOPTS+=	--with-multilib-list=m4,m4-nofpu
 endif
 ifeq ($(ADK_TARGET_CPU_SH_SH4A),y)
-GCC_FINAL_CONFOPTS+=	--with-multilib-list=m4a,m4a-nofpu
+GCC_CONFOPTS+=	--with-multilib-list=m4a,m4a-nofpu
 endif
+
 endif
 
 ifeq ($(ADK_TARGET_ARCH_X86),y)
@@ -237,6 +240,12 @@ endif
 ifeq ($(ADK_TARGET_ARCH_SH),y)
 ifeq ($(ADK_TARGET_CPU_SH_J2),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . mj2)
+endif
+ifeq ($(ADK_TARGET_CPU_SH_SH2),y)
+	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m2)
+endif
+ifeq ($(ADK_TARGET_CPU_SH_SH2A),y)
+	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m2a)
 endif
 ifeq ($(ADK_TARGET_CPU_SH_SH3),y)
 	(cd ${STAGING_TARGET_DIR}/ && ln -sf . m3)
