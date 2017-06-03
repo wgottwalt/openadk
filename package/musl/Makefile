@@ -60,7 +60,7 @@ ifeq ($(ADK_TARGET_CPU_ARCH),sh4)
 MARCH:=			sh
 endif
 ifeq ($(ADK_TARGET_CPU_ARCH),sh4eb)
-MARCH:=			sh
+MARCH:=			sheb
 endif
 ifeq ($(ADK_TARGET_ARCH_MIPS),y)
 ifeq ($(ADK_TARGET_SOFT_FLOAT),y)
