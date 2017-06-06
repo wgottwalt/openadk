@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		lsof
 PKG_VERSION:=		4.89
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		5d08da7ebe049c9d9a6472d6afb81aa5af54c4733a3f8822cbc22b57867633c9
 PKG_DESCR:=		list open files
 PKG_SECTION:=		sys/utils
