@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		systemd
-PKG_VERSION:=		232
-PKG_RELEASE:=		2
-PKG_HASH:=		1172c7c7d5d72fbded53186e7599d5272231f04cc8b72f9a0fb2c5c20dfc4880
+PKG_VERSION:=		233
+PKG_RELEASE:=		1
+PKG_HASH:=		8b3e99da3d4164b66581830a7f2436c0c8fe697b5fbdc3927bdb960646be0083
 PKG_DESCR:=		system and service manager
 PKG_SECTION:=		base/init
 PKG_DEPENDS:=		libcap libmount libuuid libblkid libncurses libkmod
