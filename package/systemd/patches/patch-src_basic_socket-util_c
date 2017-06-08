@@ -1,12 +1,17 @@
---- systemd-232.orig/src/basic/socket-util.c	2016-11-03 18:16:42.000000000 +0100
-+++ systemd-232/src/basic/socket-util.c	2017-02-07 04:55:53.976146036 +0100
-@@ -657,8 +657,7 @@ int socknameinfo_pretty(union sockaddr_u
+--- systemd-233.orig/src/basic/socket-util.c	2017-03-01 22:43:06.000000000 +0100
++++ systemd-233/src/basic/socket-util.c	2017-06-08 22:45:25.000391693 +0200
+@@ -723,8 +723,12 @@ int socknameinfo_pretty(union sockaddr_u
  
          assert(_ret);
  
 -        r = getnameinfo(&sa->sa, salen, host, sizeof(host), NULL, 0,
 -                        NI_IDN|NI_IDN_USE_STD3_ASCII_RULES);
++#ifdef HAVE_LIBIDN
++	r = getnameinfo(&sa->sa, salen, host, sizeof(host), NULL, 0,
++		NI_IDN|NI_IDN_USE_STD3_ASCII_RULES);
++#else
 +        r = getnameinfo(&sa->sa, salen, host, sizeof(host), NULL, 0, 0);
++#endif
          if (r != 0) {
                  int saved_errno = errno;
  
