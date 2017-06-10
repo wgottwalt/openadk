@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		samba
-PKG_VERSION:=		4.6.3
+PKG_VERSION:=		4.6.5
 PKG_RELEASE:=		1
-PKG_HASH:=		2a38ef3da77809cba0583fc188e2a4b5420437aecaad0dffe9a06f732e4b1561
+PKG_HASH:=		c06901e1d318b425b8c3ecea3ef23a91e7371312a9ea7adbf34fb8eb42ca3b84
 PKG_DESCR:=		file and print server
 PKG_SECTION:=		net/fs
 PKG_DEPENDS:=		libuuid libpopt libgnutls libtirpc
-PKG_BUILDDEP:=		util-linux popt python2 gnutls
+PKG_BUILDDEP:=		util-linux popt python2 gnutls talloc
 PKG_BUILDDEP+=		heimdal-host python2-host libtirpc
 PKG_NEEDS:=		threads intl
 PKG_URL:=		http://www.samba.org/
