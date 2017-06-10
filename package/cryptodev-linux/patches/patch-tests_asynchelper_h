@@ -1,0 +1,20 @@
+--- cryptodev-linux-a705360197260d28535746ae98c461ba2cfb7a9e.orig/tests/asynchelper.h	2017-06-06 23:28:39.000000000 +0200
++++ cryptodev-linux-a705360197260d28535746ae98c461ba2cfb7a9e/tests/asynchelper.h	2017-06-06 23:34:38.200115116 +0200
+@@ -2,7 +2,7 @@
+ #define __ASYNCHELPER_H
+ 
+ /* poll until POLLOUT, then call CIOCASYNCCRYPT */
+-inline int do_async_crypt(int cfd, struct crypt_op *cryp)
++static inline int do_async_crypt(int cfd, struct crypt_op *cryp)
+ {
+ 	struct pollfd pfd;
+ 
+@@ -22,7 +22,7 @@ inline int do_async_crypt(int cfd, struc
+ }
+ 
+ /* poll until POLLIN, then call CIOCASYNCFETCH */
+-inline int do_async_fetch(int cfd, struct crypt_op *cryp)
++static inline int do_async_fetch(int cfd, struct crypt_op *cryp)
+ {
+ 	struct pollfd pfd;
+ 

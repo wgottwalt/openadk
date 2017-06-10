@@ -1,7 +1,7 @@
---- cryptodev-linux-1.7.orig/tests/Makefile	2015-02-07 15:31:23.000000000 -0600
-+++ cryptodev-linux-1.7/tests/Makefile	2015-02-19 14:40:46.523775781 -0600
-@@ -20,13 +20,6 @@ example-async-speed-objs := async_speed.
- example-hashcrypt-speed-objs := hashcrypt_speed.c
+--- cryptodev-linux-a705360197260d28535746ae98c461ba2cfb7a9e.orig/tests/Makefile	2017-06-06 23:28:39.000000000 +0200
++++ cryptodev-linux-a705360197260d28535746ae98c461ba2cfb7a9e/tests/Makefile	2017-06-06 23:28:40.421154377 +0200
+@@ -24,13 +24,6 @@ bindir = $(execprefix)/bin
+ all: $(hostprogs)
  
  check: $(hostprogs)
 -	./cipher
@@ -12,5 +12,5 @@
 -	./cipher-gcm
 -	./cipher-aead
  
- clean:
- 	rm -f *.o *~ $(hostprogs)
+ install:
+ 	install -d $(DESTDIR)/$(bindir)
