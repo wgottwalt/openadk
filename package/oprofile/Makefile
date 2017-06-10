@@ -4,9 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		oprofile
-PKG_VERSION:=		1.1.0
+PKG_VERSION:=		757266704753aea10cf3df7c0902ef35fb1377c1
+PKG_GIT:=		hash
+PKG_HASH:=		ea65e56db389778f76b9ab8cf66a08fd76b626772be5a3af29e6df87469e404f
 PKG_RELEASE:=		1
-PKG_HASH:=		cf759a6de1a6033d5dfc93bda129a9f2e128aecc4238cc657feb0801d1b0366c
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libpopt libbfd
@@ -14,9 +15,7 @@ PKG_KDEPENDS:=		oprofile
 PKG_BUILDDEP:=		popt binutils gcc
 PKG_NEEDS:=		c++
 PKG_URL:=		http://oprofile.sourceforge.net/
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+PKG_SITES:=		https://git.code.sf.net/p/oprofile/oprofile.git
 
 PKG_CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 
@@ -24,9 +23,11 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPROFILE,oprofile,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_LDFLAGS+=	-lpthread
+AUTOTOOL_STYLE:=	autogen
 CONFIGURE_ARGS+=	--with-binutils-libname=binutils \
-			--with-binutils=${STAGING_TARGET_DIR}/usr/lib
+			--with-binutils=${STAGING_TARGET_DIR}/usr/lib \
+			--disable-werror \
+			--disable-optimization
 
 oprofile-install:
 	$(INSTALL_DIR) $(IDIR_OPROFILE)/usr/{bin,lib/oprofile,share}
