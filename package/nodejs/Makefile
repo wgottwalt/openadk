@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		nodejs
-PKG_VERSION:=		6.9.2
+PKG_VERSION:=		8.0.0
 PKG_RELEASE:=		1
-PKG_HASH:=		997121460f3b4757907c2d7ff68ebdbf87af92b85bf2d07db5a7cb7aa5dae7d9
+PKG_HASH:=		28f2e0bd5f80ff83b244df670d577fe36c1e0f11561deee7d8bbdcbd4ead8fb2
 PKG_DESCR:=		asynchronous event driven framework
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		zlib
@@ -54,6 +54,7 @@ do-configure:
                 PYTHON=$(STAGING_HOST_DIR)/usr/bin/python2 \
                 $(STAGING_HOST_DIR)/usr/bin/python2 ./configure \
 			--prefix=/usr \
+			--cross-compiling \
                 	--without-snapshot \
                 	--without-dtrace \
                 	--without-etw \
