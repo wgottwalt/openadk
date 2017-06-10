@@ -25,6 +25,9 @@ $(eval $(call PKG_template,PULSEAUDIO,pulseaudio,$(PKG_VERSION)-${PKG_RELEASE},$
 
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 
+# use libtool from host directory
+AUTOTOOL_STYLE:=	autoreconf
+
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_NEON),y)
 CONFIGURE_ARGS+=	--enable-neon-opt
 else
