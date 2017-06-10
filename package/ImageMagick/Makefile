@@ -4,17 +4,17 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ImageMagick
-PKG_VERSION:=		6.9.1
-PKG_EXTRAVER:=		3
+PKG_VERSION:=		7.0.5
+PKG_EXTRAVER:=		10
 PKG_RELEASE:=		1
-PKG_HASH:=		5fd180603e60c624c05c644a8340f4f4e92c19dc3c41d374d38f76c69cd48ba3
+PKG_HASH:=		0058fcde533986334458a5c99600b1b9633182dd9562cbad4ba618c5ccf2a28f
 PKG_DESCR:=		image processing and converting utility
 PKG_SECTION:=		mm/image
 PKG_BUILDDEP:=		libpng libjpeg-turbo libtiff fontconfig
 PKG_BUILDDEP+=		pango libtool e2fsprogs
 PKG_NEEDS:=		c++
 PKG_URL:=		http://www.imagemagick.org/
-PKG_SITES:=		http://www.imagemagick.org/download/
+PKG_SITES:=		http://www.imagemagick.org/download/releases/
 PKG_LIBNAME:=		libimagemagick
 PKG_OPTS:=		dev
 
