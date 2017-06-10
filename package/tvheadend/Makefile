@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		tvheadend
-PKG_VERSION:=		679b7797128b8979145dc2a0a3c54ea513a0466b
+PKG_VERSION:=		f46a6c2dc93460d7c2909ebbec42a3ac2557ccb2
 PKG_GIT:=		hash
-PKG_RELEASE:=		3
+PKG_RELEASE:=		1
 PKG_DESCR:=		tv streaming server
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		libressl
-PKG_BUILDDEP:=		libressl
+PKG_BUILDDEP:=		libressl yasm-host ffmpeg
 PKG_URL:=		https://tvheadend.org/projects/tvheadend
 PKG_SITES:=		https://github.com/tvheadend/tvheadend.git
 
@@ -23,6 +23,9 @@ XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
 XAKE_FLAGS+=		LDLIBS=-liconv
 endif
+
+CONFIGURE_ARGS+=	--disable-bundle \
+			--disable-ffmpeg_static
 
 tvheadend-install:
 	$(INSTALL_DIR) $(IDIR_TVHEADEND)/usr/bin
