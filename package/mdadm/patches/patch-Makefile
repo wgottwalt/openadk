@@ -1,63 +1,27 @@
---- mdadm-3.3.1.orig/Makefile	2014-06-05 08:45:56.000000000 +0200
-+++ mdadm-3.3.1/Makefile	2014-06-07 21:00:16.000000000 +0200
-@@ -43,9 +43,9 @@ KLIBC_GCC = gcc -nostdinc -iwithprefix i
+--- mdadm-4.0.orig/Makefile	2017-01-09 22:46:34.000000000 +0100
++++ mdadm-4.0/Makefile	2017-06-02 01:53:13.425906734 +0200
+@@ -42,8 +42,8 @@ KLIBC=/home/src/klibc/klibc-0.77
+ KLIBC_GCC = gcc -nostdinc -iwithprefix include -I$(KLIBC)/klibc/include -I$(KLIBC)/linux/include -I$(KLIBC)/klibc/arch/i386/include -I$(KLIBC)/klibc/include/bits32
  
- CC = $(CROSS_COMPILE)gcc
- CXFLAGS ?= -ggdb
+ CC ?= $(CROSS_COMPILE)gcc
+-CXFLAGS ?= -ggdb
 -CWFLAGS = -Wall -Werror -Wstrict-prototypes -Wextra -Wno-unused-parameter
++CXFLAGS ?=
 +CWFLAGS = -Wall -Wstrict-prototypes -Wextra -Wno-unused-parameter
  ifdef WARN_UNUSED
--CWFLAGS += -Wp,-D_FORTIFY_SOURCE=2 -O3
-+CWFLAGS += -Wp,-D_FORTIFY_SOURCE=2
+ CWFLAGS += -Wp,-D_FORTIFY_SOURCE=2 -O3
  endif
- 
- ifdef DEBIAN
-@@ -70,7 +70,7 @@ CONFFILEFLAGS = -DCONFFILE=\"$(CONFFILE)
- # pivotroot from early boot to late boot.
- # /run is best, but for distros that don't support that.
- # /dev can work, in which case you probably want /dev/.mdadm
--RUN_DIR=/run/mdadm
-+RUN_DIR=/var/run/mdadm
- CHECK_RUN_DIR=1
- MAP_DIR=$(RUN_DIR)
- MAP_FILE = map
-@@ -82,7 +82,8 @@ SYSTEMD_DIR=/lib/systemd/system
- DIRFLAGS = -DMAP_DIR=\"$(MAP_DIR)\" -DMAP_FILE=\"$(MAP_FILE)\"
- DIRFLAGS += -DMDMON_DIR=\"$(MDMON_DIR)\"
- DIRFLAGS += -DFAILED_SLOTS_DIR=\"$(FAILED_SLOTS_DIR)\"
--CFLAGS = $(CWFLAGS) $(CXFLAGS) -DSendmail=\""$(MAILCMD)"\" $(CONFFILEFLAGS) $(DIRFLAGS)
-+CFLAGS ?=
-+CFLAGS += $(CWFLAGS) -DSendmail=\""$(MAILCMD)"\" $(CONFFILEFLAGS) $(DIRFLAGS)
- 
- VERSION = $(shell [ -d .git ] && git describe HEAD | sed 's/mdadm-//')
- VERS_DATE = $(shell [ -d .git ] && date --date="`git log -n1 --format=format:%cd --date=short`" '+%0dth %B %Y' | sed -e 's/1th/1st/' -e 's/2th/2nd/' -e 's/11st/11th/' -e 's/12nd/12th/')
-@@ -100,9 +101,9 @@ endif
- 
- # If you want a static binary, you might uncomment these
- # LDFLAGS = -static
--# STRIP = -s
-+STRIP =
- 
--INSTALL = /usr/bin/install
-+INSTALL = install
- DESTDIR =
- BINDIR  = /sbin
- MANDIR  = /usr/share/man
-@@ -196,7 +197,7 @@ mdmon.O2 : $(MON_SRCS) $(INCL) mdmon.h
- 
- # use '-z now' to guarantee no dynamic linker interactions with the monitor thread
- mdmon : check_rundir $(MON_OBJS)
--	$(CC) $(CFLAGS) $(LDFLAGS) $(MON_LDFLAGS) -Wl,-z,now -o mdmon $(MON_OBJS) $(LDLIBS)
-+	$(CC) $(CFLAGS) $(LDFLAGS) $(MON_LDFLAGS) -o mdmon $(MON_OBJS) $(LDLIBS)
- msg.o: msg.c msg.h
- 
- test_stripe : restripe.c xmalloc.o mdadm.h
-@@ -258,7 +259,7 @@ $(MON_OBJS) : $(INCL) mdmon.h
+@@ -269,9 +269,10 @@ $(MON_OBJS) : $(INCL) mdmon.h
  sha1.o : sha1.c sha1.h md5.h
  	$(CC) $(CFLAGS) -DHAVE_STDINT_H -o sha1.o -c sha1.c
  
 -install : mdadm mdmon install-man install-udev
-+install : mdadm mdmon
- 	$(INSTALL) -D $(STRIP) -m 755 mdadm $(DESTDIR)$(BINDIR)/mdadm
- 	$(INSTALL) -D $(STRIP) -m 755 mdmon $(DESTDIR)$(BINDIR)/mdmon
+-	$(INSTALL) -D $(STRIP) -m 755 mdadm $(DESTDIR)$(BINDIR)/mdadm
+-	$(INSTALL) -D $(STRIP) -m 755 mdmon $(DESTDIR)$(BINDIR)/mdmon
++install : mdadm mdmon install-udev
++	mkdir -p $(DESTDIR)$(BINDIR)
++	$(INSTALL) -m 755 mdadm $(DESTDIR)$(BINDIR)/mdadm
++	$(INSTALL) -m 755 mdmon $(DESTDIR)$(BINDIR)/mdmon
  
+ install-static : mdadm.static install-man
+ 	$(INSTALL) -D $(STRIP) -m 755 mdadm.static $(DESTDIR)$(BINDIR)/mdadm
