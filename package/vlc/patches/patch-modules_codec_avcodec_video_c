@@ -1,5 +1,5 @@
---- vlc-2.2.4.orig/modules/codec/avcodec/video.c	2016-04-07 21:36:15.000000000 +0200
-+++ vlc-2.2.4/modules/codec/avcodec/video.c	2016-09-24 20:35:02.681191261 +0200
+--- vlc-2.2.6.orig/modules/codec/avcodec/video.c	2016-09-27 09:56:26.000000000 +0200
++++ vlc-2.2.6/modules/codec/avcodec/video.c	2017-06-06 22:52:46.745071498 +0200
 @@ -108,8 +108,8 @@ static int lavc_GetFrame(struct AVCodecC
  static int  ffmpeg_GetFrameBuf    ( struct AVCodecContext *, AVFrame * );
  static void ffmpeg_ReleaseFrameBuf( struct AVCodecContext *, AVFrame * );
@@ -29,7 +29,7 @@
          vlc_sem_destroy( &p_sys->sem_mt );
          free( p_sys );
          return VLC_EGENERIC;
-@@ -826,7 +826,7 @@ void EndVideoDec( decoder_t *p_dec )
+@@ -847,7 +847,7 @@ void EndVideoDec( decoder_t *p_dec )
      wait_mt( p_sys );
  
      if( p_sys->p_ff_pic )
@@ -38,7 +38,7 @@
  
      if( p_sys->p_va )
          vlc_va_Delete( p_sys->p_va );
-@@ -1313,8 +1313,8 @@ static void ffmpeg_ReleaseFrameBuf( stru
+@@ -1334,8 +1334,8 @@ static void ffmpeg_ReleaseFrameBuf( stru
  }
  #endif
  
