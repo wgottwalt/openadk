@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		jack2
-PKG_VERSION:=		2d1d323505585d406a7e64fb932953baefc5945e
+PKG_VERSION:=		31d4ae97f296fe1c954cbb51e50d5e60578260b8
 PKG_RELEASE:=		1
 PKG_GIT:=		hash
 PKG_DESCR:=		audio connection kit (v2)
@@ -24,7 +24,7 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-configure:
-	cd $(WRKBUILD) && PATH='$(HOST_PATH)' ./waf configure --alsa --prefix=/usr
+	cd $(WRKBUILD) && PATH='$(HOST_PATH)' ./waf configure --alsa=yes --prefix=/usr
 
 do-build:
 	cd $(WRKBUILD) && PATH='$(HOST_PATH)' ./waf build
