@@ -4,16 +4,16 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		iperf
-PKG_VERSION:=		2.0.5
+PKG_VERSION:=		2.0.9
 PKG_RELEASE:=		1
-PKG_HASH:=		636b4eff0431cea80667ea85a67ce4c68698760a9837e1e9d13096d20362265b
+PKG_HASH:=		a5350777b191e910334d3a107b5e5219b72ffa393da4186da1e0a4552aeeded6
 PKG_DESCR:=		internet protocol bandwidth measuring tool
 PKG_SECTION:=		net/perf
 PKG_NEEDS:=		threads c++
-PKG_URL:=		http://sourceforge.net/projects/iperf
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=iperf/}
+PKG_URL:=		http://iperf.fr
+PKG_SITES:=		https://iperf.fr/download/source/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-source.tar.gz
 
 include ${ADK_TOPDIR}/mk/package.mk
 
