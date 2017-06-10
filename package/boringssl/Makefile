@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		boringssl
-PKG_VERSION:=		be2ee342d3781ddb954f91f8a7e660c6f59e87e5
+PKG_VERSION:=		2b56981b6415dc3fa70432649c2f289c77707a69
 PKG_RELEASE:=		1
 PKG_GIT:=		hash
 PKG_DESCR:=		ssl library
@@ -21,8 +21,12 @@ $(eval $(call PKG_template,BORINGSSL,boringssl,$(PKG_VERSION)-$(PKG_RELEASE),$(P
 
 WRKBUILD=               $(WRKDIR)/$(PKG_NAME)-obj
 CONFIG_STYLE:=          cmake
+CMAKE_FLAGS+=		-DBUILD_SHARED_LIBS=1
 INSTALL_STYLE:=		manual
 
 boringssl-install:
+	$(INSTALL_DIR) $(IDIR_BORINGSSL)/usr/lib
+	$(CP) $(WRKBUILD)/ssl/libssl.so \
+		$(IDIR_BORINGSSL)/usr/lib
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
