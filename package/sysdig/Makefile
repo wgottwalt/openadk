@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sysdig
-PKG_VERSION:=		d7f05fc973080f5471af596cbcc8e2b2efc9e934
+PKG_VERSION:=		b058bbcc6336905d7b3b1bb6bd657b000b7690eb
 PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_DESCR:=		system troubleshooting tool
 PKG_SECTION:=		app/debug
-PKG_DEPENDS:=		zlib jsoncpp luajit
-PKG_BUILDDEP:=		cmake-host zlib jsoncpp luajit
+PKG_DEPENDS:=		zlib jsoncpp luajit jq
+PKG_BUILDDEP:=		cmake-host zlib jsoncpp luajit jq
 PKG_KDEPENDS:=		ftrace generic-tracer function-tracer
 PKG_NEEDS:=		c++
 PKG_URL:=		http://www.sysdig.org/
@@ -25,8 +25,10 @@ $(eval $(call PKG_template,SYSDIG,sysdig,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEP
 
 WRKBUILD=		$(WRKDIR)/$(PKG_NAME)-obj
 CONFIG_STYLE:=		cmake
-CMAKE_FLAGS:=		-DUSE_BUNDLED_ZLIB=OFF -DUSE_BUNDLED_JSONCPP=OFF -DUSE_BUNDLED_LUAJIT=OFF
-XAKE_FLAGS+=		KERNELDIR="$(LINUX_DIR)" ARCH=$(ADK_TARGET_ARCH) GCC_HONOUR_COPTS=s
+CMAKE_FLAGS:=		-DUSE_BUNDLED_DEPS=OFF
+XAKE_FLAGS+=		KERNELDIR="$(LINUX_DIR)" \
+			ARCH=$(ADK_TARGET_ARCH) \
+			GCC_HONOUR_COPTS=s
 
 sysdig-install:
 	$(INSTALL_DIR) $(IDIR_SYSDIG)/usr/bin
