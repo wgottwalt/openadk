@@ -1,6 +1,6 @@
---- xfsprogs-4.3.0.orig/libxfs/Makefile	2015-09-22 03:42:41.000000000 +0200
-+++ xfsprogs-4.3.0/libxfs/Makefile	2016-09-24 11:13:46.701585463 +0200
-@@ -105,13 +105,13 @@ LTLIBS = $(LIBPTHREAD) $(LIBRT)
+--- xfsprogs-4.11.0.orig/libxfs/Makefile	2017-05-05 20:47:11.000000000 +0200
++++ xfsprogs-4.11.0/libxfs/Makefile	2017-06-02 14:32:27.354798232 +0200
+@@ -118,9 +118,9 @@ LTLIBS = $(LIBPTHREAD) $(LIBRT)
  # don't try linking xfs_repair with a debug libxfs.
  DEBUG = -DNDEBUG
  
@@ -12,17 +12,3 @@
  
  crc32table.h: gen_crc32table.c
  	@echo "    [CC]     gen_crc32table"
--	$(Q) $(BUILD_CC) $(CFLAGS) -o gen_crc32table $<
-+	$(Q) $(BUILD_CC) $(GCFLAGS) -o gen_crc32table $<
- 	@echo "    [GENERATE] $@"
- 	$(Q) ./gen_crc32table > crc32table.h
- 
-@@ -122,7 +122,7 @@ crc32table.h: gen_crc32table.c
- # disk.
- crc32selftest: gen_crc32table.c crc32table.h crc32.c
- 	@echo "    [TEST]    CRC32"
--	$(Q) $(BUILD_CC) $(CFLAGS) -D CRC32_SELFTEST=1 crc32.c -o $@
-+	$(Q) $(BUILD_CC) $(GCFLAGS) -D CRC32_SELFTEST=1 crc32.c -o $@
- 	$(Q) ./$@
- 
- # set up include/xfs header directory
