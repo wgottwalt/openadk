@@ -1,7 +1,7 @@
 	When search for wireless-tools, also check $PATH
---- aircrack-ng-1.2-rc2.orig/src/osdep/linux.c	2015-04-09 06:47:28.000000000 +0200
-+++ aircrack-ng-1.2-rc2/src/osdep/linux.c	2015-11-07 21:28:22.000000000 +0100
-@@ -264,6 +264,7 @@ static char * wiToolsPath(const char * t
+--- aircrack-ng-1.2-rc4.orig/src/osdep/linux.c	2016-02-15 00:34:57.000000000 +0100
++++ aircrack-ng-1.2-rc4/src/osdep/linux.c	2017-06-06 20:36:32.460367791 +0200
+@@ -263,6 +263,7 @@ static char * wiToolsPath(const char * t
                  "/usr/local/bin",
                  "/tmp"
          };
@@ -9,7 +9,7 @@
  
  	// Also search in other known location just in case we haven't found it yet
  	nbelems = sizeof(paths) / sizeof(char *);
-@@ -274,6 +275,14 @@ static char * wiToolsPath(const char * t
+@@ -273,6 +274,14 @@ static char * wiToolsPath(const char * t
  			return path;
  	}
  

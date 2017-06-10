@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		aircrack-ng
 PKG_VERSION:=		1.2
 PKG_RELEASE:=		1
-PKG_HASH:=		ba5b3eda44254efc5b7c9f776eb756f7cc323ad5d0813c101e92edb483d157e9
+PKG_HASH:=		d93ac16aade5b4d37ab8cdf6ce4b855835096ccf83deb65ffdeff6d666eaff36
 PKG_DESCR:=		set of tools for auditing wireless networks
 PKG_SECTION:=		net/wifi
 PKG_DEPENDS:=		libpcap libnl libressl
@@ -17,8 +17,8 @@ PKG_SITES:=		http://download.aircrack-ng.org/
 # do not build parallel, otherwise libosdep.a may not be ready when compiling airtun-ng
 PKG_NOPARALLEL:=	1
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-rc2.tar.gz
-WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-rc2
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-rc4.tar.gz
+WRKDIST=		${WRKDIR}/${PKG_NAME}-${PKG_VERSION}-rc4
 
 include $(ADK_TOPDIR)/mk/package.mk
 

@@ -1,10 +1,17 @@
---- aircrack-ng-1.2-rc2.orig/common.mak	2015-04-02 07:24:02.000000000 +0200
-+++ aircrack-ng-1.2-rc2/common.mak	2015-11-07 21:30:08.000000000 +0100
-@@ -144,17 +144,6 @@ ifeq ($(GCC_OVER49), 0)
+--- aircrack-ng-1.2-rc4.orig/common.mak	2015-12-31 20:42:10.000000000 +0100
++++ aircrack-ng-1.2-rc4/common.mak	2017-06-06 21:16:36.954790985 +0200
+@@ -1,6 +1,6 @@
+ PKG_CONFIG ?= pkg-config
+ 
+-NEWSSE		= true
++NEWSSE		= false
+ # Newer version of the core can be enabled via SIMDCORE
+ # but should be automatically flipped on thru autodetection
+ SIMDCORE	= false
+@@ -231,16 +231,6 @@ ifeq ($(GCC_OVER49), 0)
  	GCC_OVER49	= $(shell expr 4.9 \<= `$(CC) -dumpversion | awk -F. '{ print $1$2 }'`)
  endif
  
--
 -ifeq ($(GCC_OVER49), 0)
 -	ifeq ($(GCC_OVER41), 1)
 -		COMMON_CFLAGS += -fstack-protector
