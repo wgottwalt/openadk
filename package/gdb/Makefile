@@ -4,16 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gdb
-PKG_VERSION:=		7.12.1
+PKG_VERSION:=		8.0
 PKG_RELEASE:=		1
-PKG_HASH:=		4607680b973d3ec92c30ad029f1b7dbde3876869e6b3a117d8a7e90081113186
+PKG_HASH:=		f6a24ffe4917e67014ef9273eb8b547cb96a13e5ca74895b06d683b391f3f4ee
 PKG_DESCR:=		programm debugger
 PKG_SECTION:=		app/debug
 PKG_SITES:=		${MASTER_SITE_GNU:=gdb/}
 PKG_DEPENDS:=		libncurses zlib libexpat libthread-db
 PKG_BUILDDEP:=		ncurses readline expat zlib
 PKG_NEEDS:=		c++
-PKG_NOPARALLEL:=	1
 
 PKG_ARCH_DEPENDS:=	!cris !m68k !avr32 !nios2 !microblaze !or1k
 
