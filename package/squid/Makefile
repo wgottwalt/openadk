@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		squid
-PKG_VERSION:=		3.5.19
+PKG_VERSION:=		3.5.26
 PKG_RELEASE:=		1
-PKG_HASH:=		c4b8a2efb85acc600e506605f175298ce3324048e60f4708926d354fe4b5c7a0
+PKG_HASH:=		baa1eecb7d6e18881f4455060d80ee7cb95ae7e2695fdccf7e21ccc8f879a982
 PKG_DESCR:=		web and cache proxy
 PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libltdl
@@ -151,6 +151,7 @@ CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--with-pthreads \
 			--with-dl \
 			--disable-debug-cbdata \
+			--disable-strict-error-checking \
 			--enable-kill-parent-hack \
 			--enable-arp-acl \
 			--enable-err-languages=English \

@@ -1,6 +1,6 @@
---- squid-3.5.2.orig/configure.ac	2015-02-18 06:18:57.000000000 -0600
-+++ squid-3.5.2/configure.ac	2015-02-20 13:01:31.755039271 -0600
-@@ -1343,7 +1343,7 @@ if test "x$with_openssl" = "xyes"; then
+--- squid-3.5.26.orig/configure.ac	2017-06-01 15:55:25.000000000 +0200
++++ squid-3.5.26/configure.ac	2017-06-13 02:16:52.536880342 +0200
+@@ -1368,7 +1368,7 @@ if test "x$with_openssl" = "xyes"; then
      AC_DEFINE(USE_OPENSSL,1,[OpenSSL support is available])
  
      # check for other specific broken implementations
