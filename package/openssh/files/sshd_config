@@ -90,7 +90,6 @@ AuthorizedKeysFile	/etc/ssh/authorized_keys
 #PrintLastLog yes
 #TCPKeepAlive yes
 #UseLogin no
-UsePrivilegeSeparation yes
 #PermitUserEnvironment no
 #Compression delayed
 #ClientAliveInterval 0
