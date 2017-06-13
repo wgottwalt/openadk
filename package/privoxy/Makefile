@@ -4,10 +4,10 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		privoxy
-PKG_VERSION:=		3.0.24
+PKG_VERSION:=		3.0.26
 PKG_RELEASE:=		1
 PKG_VARIANT:=		stable
-PKG_HASH:=		a381f6dc78f08de0d4a2342d47a5949a6608073ada34b933137184f3ca9fb012
+PKG_HASH:=		57e415b43ee5dfdca74685cc034053eaae962952fdabd086171551a86abf9cd8
 PKG_DESCR:=		web proxy with advanced filtering capabilities
 PKG_SECTION:=		net/proxy
 PKG_DEPENDS:=		libpcre
@@ -23,8 +23,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,PRIVOXY,privoxy,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CPPFLAGS+=	-DFEATURE_CONNECTION_KEEP_ALIVE
-TARGET_LDFLAGS+=	-pthread
+AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-editor \
 			--disable-jar-files \
 			--sysconfdir=/etc/privoxy
