@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		tinyproxy
-PKG_VERSION:=		1.8.3
-PKG_RELEASE:=		2
-PKG_HASH:=		682416c8f0f733a8106c87bb395c631222569751fe4617bc381d0499b0f0c017
+PKG_VERSION:=		1.8.4
+PKG_RELEASE:=		1
+PKG_HASH:=		1999c88c43e31ff4cb5e8379b76776a65fa3d326eea868cb5f88ef58a8f631de
 PKG_DESCR:=		lightweight http and https proxy
 PKG_SECTION:=		net/proxy
-PKG_URL:=		https://www.banu.com/tinyproxy/
-PKG_SITES:=		https://www.banu.com/pub/tinyproxy/1.8/
+PKG_URL:=		https://tinyproxy.github.io
+PKG_SITES:=		https://github.com/tinyproxy/tinyproxy/archive/
 
-DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
+DISTFILES:=		$(PKG_VERSION).tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -25,10 +25,10 @@ CONFIGURE_ENV+=         ac_cv_func_malloc_0_nonnull=yes \
 
 tinyproxy-install:
 	$(INSTALL_DIR) $(IDIR_TINYPROXY)/usr/sbin
-	$(INSTALL_DIR) $(IDIR_TINYPROXY)/etc/tinyproxy
+	$(INSTALL_DIR) $(IDIR_TINYPROXY)/etc
 	$(INSTALL_DIR) $(IDIR_TINYPROXY)/usr/share/tinyproxy
 	$(INSTALL_DATA) ./files/tinyproxy.conf \
-		$(IDIR_TINYPROXY)/etc/tinyproxy
+		$(IDIR_TINYPROXY)/etc
 	$(INSTALL_BIN) $(WRKINST)/usr/sbin/tinyproxy \
 		$(IDIR_TINYPROXY)/usr/sbin/
 	$(INSTALL_DATA) $(WRKINST)/usr/share/tinyproxy/{default,stats,debug}.html \

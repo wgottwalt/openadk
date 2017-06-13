@@ -11,11 +11,12 @@ autostart)
 	exec sh $0 start
 	;;
 start)
+	mkdir -p /var/run/tinyproxy
+	chown tinyproxy.tinyproxy /var/run/tinyproxy
 	/usr/sbin/tinyproxy
 	;;
 stop)
 	kill $(pgrep -f /usr/sbin/tinyproxy)
-	rm /var/run/tinyproxy.pid
 	;;
 restart)
 	sh $0 stop
