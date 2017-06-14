@@ -4,8 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm28xx-bootloader
-PKG_VERSION:=		509beaab0e102cf6decf209922669700c9ac5576
-PKG_RELEASE:=		2
+PKG_VERSION:=		ca9116ffd0cea06fdeb876ac7d19790bf2631d8c
+PKG_RELEASE:=		1
 PKG_DESCR:=		bootloader for bcm28xx
 PKG_SECTION:=		base/boot
 PKG_URL:=		https://github.com/raspberrypi/firmware
