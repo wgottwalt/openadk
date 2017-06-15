@@ -43,7 +43,9 @@ CONFIGURE_ARGS+=	--disable-static \
 			--with-default-dnssec=no \
 			--without-python \
 			--disable-acl \
+			--disable-idn \
 			--disable-libidn \
+			--disable-libidn2 \
 			--disable-libcryptsetup \
 			--disable-seccomp \
 			--disable-xkbcommon \
