@@ -103,6 +103,15 @@ config BUSYBOX_ASH_OPTIMIZE_FOR_SIZE
 	help
 	  Compile ash for reduced size at the price of speed.
 
+config BUSYBOX_ASH_INTERNAL_GLOB
+	bool "Use internal glob() implementation"
+	default y	# Y is bigger, but because of uclibc glob() bug, let Y be default for now
+	depends on BUSYBOX_ASH
+	help
+	  Do not use glob() function from libc, use internal implementation.
+	  Use this if you are getting "glob.h: No such file or directory"
+	  or similar build errors.
+
 config BUSYBOX_ASH_RANDOM_SUPPORT
 	bool "Pseudorandom generator and $RANDOM variable"
 	default y
