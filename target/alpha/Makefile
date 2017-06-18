@@ -10,6 +10,10 @@ KERNEL:=$(LINUX_DIR)/vmlinux
 QEMU_ARGS:=-monitor null
 QEMU_ARGS+=${ADK_QEMU_ARGS}
 
+ifeq ($(ADK_TARGET_QEMU_WITH_BLOCK),y)
+QEMU_ARGS+=-drive file=qemu-alpha.img,format=raw -append "root=/dev/hda1"
+endif
+
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)
 targethelp:
@@ -19,7 +23,7 @@ ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh qemu-${ADK_TARGET_CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${ADK_TARGET_CPU_ARCH}.img'
+	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)

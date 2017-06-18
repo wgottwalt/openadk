@@ -8,6 +8,15 @@ menu "Block devices support"
 depends on ADK_TARGET_WITH_BLOCK \
 	|| ADK_TARGET_GENERIC
 
+config ADK_KERNEL_IDE
+	bool
+
+config ADK_KERNEL_IDE_GD
+	bool
+
+config ADK_KERNEL_IDE_GD_ATA
+	bool
+
 config ADK_KERNEL_LBDAF
 	bool
 
@@ -300,6 +309,21 @@ config ADK_KERNEL_PATA_PXA
 	default n
 	help
 	  Driver for PATA on Sharp Zaurus
+
+endmenu
+
+menu "IDE driver support"
+depends on ADK_TARGET_SYSTEM_QEMU_ALPHA
+
+config ADK_KERNEL_BLK_DEV_CMD64X
+	tristate "CMD64x support"
+	select ADK_KERNEL_BLOCK
+	select ADK_KERNEL_IDE
+	select ADK_KERNEL_IDE_GD
+	select ADK_KERNEL_IDE_GD_ATA
+	depends on ADK_TARGET_SYSTEM_QEMU_ALPHA
+	help
+	  CMD64x IDE driver.
 
 endmenu
 

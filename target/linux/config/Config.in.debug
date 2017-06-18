@@ -56,8 +56,12 @@ config ADK_KERNEL_BUG
 	help
 	  Enable if you need BUGS() in the kernel.
 
+config ADK_KERNEL_ELF_CORE
+	bool
+
 config ADK_KERNEL_COREDUMP
 	bool "Enable coredumps"
+	select ADK_KERNEL_ELF_CORE
 	help
 	  Enable if you need coredumps.
 
