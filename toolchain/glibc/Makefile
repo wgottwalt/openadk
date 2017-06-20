@@ -24,8 +24,13 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--disable-nscd \
 			--with-__thread \
 			--with-tls \
+			--enable-shared \
 			--enable-kernel="2.6.32" \
 			--enable-add-ons
+
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
+GLIBC_CONFOPTS+=	--enable-static-nss
+endif
 
 ifeq ($(ADK_TARGET_FLOAT),soft)
 GLIBC_CONFOPTS+=	--without-fp
@@ -61,7 +66,6 @@ $(WRKBUILD)/.configured:
 		${GLIBC_ENV} \
 		$(WRKBUILD)/configure \
 			--prefix=/usr \
-			--enable-shared \
 			--enable-stackguard-randomization \
 			${GLIBC_CONFOPTS} \
 	);
