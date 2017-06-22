@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		c-ares
-PKG_VERSION:=		1.12.0
+PKG_VERSION:=		1.13.0
 PKG_RELEASE:=		1
-PKG_HASH:=		8692f9403cdcdf936130e045c84021665118ee9bfea905d1a76f04d4e6f365fb
+PKG_HASH:=		03f708f1b14a26ab26c38abd51137640cb444d3ec72380b21b20f1a8d2861da7
 PKG_DESCR:=		asynchronous dns library
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://c-ares.haxx.se
