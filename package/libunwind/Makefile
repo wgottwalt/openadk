@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libunwind
-PKG_VERSION:=		1.2
+PKG_VERSION:=		1.2.1
 PKG_RELEASE:=		1
-PKG_HASH:=		1de38ffbdc88bd694d10081865871cd2bfbb02ad8ef9e1606aee18d65532b992
+PKG_HASH:=		3f3ecb90e28cbe53fba7a4a27ccce7aad188d3210bb1964a923a731a27a75acb
 PKG_DESCR:=		determine the call-chain of a program
 PKG_SECTION:=		libs/misc
 PKG_URL:=		https://savannah.nongnu.org/projects/libunwind/
