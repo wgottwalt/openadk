@@ -13,8 +13,6 @@ subdir:=	package/${package}
 _subdir_dep:=	${ADK_TOPDIR}/.config
 endif
 
-include $(ADK_TOPDIR)/rules.mk
-
 ifneq (${subdir},)
 ${MAKECMDGOALS}: _subdir
 
@@ -181,10 +179,6 @@ dep:
 
 world:
 	@${GMAKE_INV} world
-
-
-info:
-	@${GMAKE_INV} info
 
 endif
 # DO NOT DELETE
