@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		nodejs
-PKG_VERSION:=		8.0.0
+PKG_VERSION:=		8.1.2
 PKG_RELEASE:=		1
-PKG_HASH:=		28f2e0bd5f80ff83b244df670d577fe36c1e0f11561deee7d8bbdcbd4ead8fb2
+PKG_HASH:=		d717b364868956e0b775145e57a84e63962a9cf83146e778547fc71bb27a2251
 PKG_DESCR:=		asynchronous event driven framework
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		zlib
-PKG_BUILDDEP:=		python2-host zlib
+PKG_BUILDDEP:=		python2-host nodejs-host zlib
 PKG_NEEDS:=		threads c++
 PKG_URL:=		https://nodejs.org/
 PKG_SITES:=		https://nodejs.org/dist/v$(PKG_VERSION)/
@@ -48,6 +48,7 @@ host-build:
 nodejs-hostinstall:
 	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 		${HOST_FAKE_FLAGS} DESTDIR='${STAGING_HOST_DIR}' ${HOST_INSTALL_TARGET} $(MAKE_TRACE)
+	$(INSTALL_BIN) ${WRKBUILD}/out/Release/mkpeephole ${STAGING_HOST_DIR}/usr/bin
 
 do-configure:
 		(cd $(WRKSRC); \
@@ -61,6 +62,7 @@ do-configure:
 			--without-intl \
                 	--shared-zlib \
 		)
+		$(SED) "s#<(mkpeephole_exec)#$(STAGING_HOST_DIR)/usr/bin/mkpeephole#g" $(WRKSRC)/deps/v8/src/v8.gyp
 
 nodejs-install:
 	$(INSTALL_DIR) $(IDIR_NODEJS)/usr/lib
