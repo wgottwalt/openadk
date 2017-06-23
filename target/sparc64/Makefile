@@ -9,6 +9,11 @@ KERNEL:=$(LINUX_DIR)/vmlinux
 
 QEMU_ARGS:=-M sun4u
 QEMU_ARGS+=${ADK_QEMU_ARGS}
+
+ifeq ($(ADK_TARGET_QEMU_WITH_BLOCK),y)
+QEMU_ARGS+=-drive file=qemu-${ADK_TARGET_CPU_ARCH}.img,format=raw
+endif
+
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 QEMU_ARGS+=-net nic,model=virtio -net user
 ifeq ($(ADK_TARGET_FS),archive)
@@ -27,7 +32,7 @@ ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Use following command to create a QEMU Image:"
 	@echo "./scripts/create.sh qemu-${ADK_TARGET_CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "Start qemu with following options:"
-	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${ADK_TARGET_CPU_ARCH}.img'
+	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
