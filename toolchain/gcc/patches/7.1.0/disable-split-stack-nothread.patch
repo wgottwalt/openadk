@@ -1,0 +1,10 @@
+diff -Nur gcc-7.1.0.orig/libgcc/config/t-stack gcc-7.1.0/libgcc/config/t-stack
+--- gcc-7.1.0.orig/libgcc/config/t-stack	2010-10-01 21:31:49.000000000 +0200
++++ gcc-7.1.0/libgcc/config/t-stack	2017-06-23 19:55:25.215965555 +0200
+@@ -1,4 +1,6 @@
+ # Makefile fragment to provide generic support for -fsplit-stack.
+ # This should be used in config.host for any host which supports
+ # -fsplit-stack.
++ifeq ($(enable_threads),yes)
+ LIB2ADD_ST += $(srcdir)/generic-morestack.c $(srcdir)/generic-morestack-thread.c
++endif
