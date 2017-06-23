@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		perl
-PKG_VERSION:=		5.22.1
+PKG_VERSION:=		5.24.1
 PKG_RELEASE:=		1
-PKG_HASH:=		2b475d0849d54c4250e9cba4241b7b7291cffb45dfd083b677ca7b5d38118f27
+PKG_HASH:=		ebe7c66906d4fb55449380ab1b7e004eeef52c38d3443fa301f8e17a1a4cb67f
 PKG_DESCR:=		perl interpreter
 PKG_SECTION:=		dev/lang
 PKG_NEEDS:=		threads
@@ -14,7 +14,7 @@ PKG_URL:=		http://www.perl.org/
 PKG_SITES:=		http://www.cpan.org/src/
 PKG_NOPARALLEL:=	1
 
-PC_VERSION:=		1.0.2
+PC_VERSION:=		1.1.5
 PC_SITE:=		https://github.com/arsv/perl-cross/releases/download/$(PC_VERSION)
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
@@ -40,6 +40,10 @@ CONFIGURE_ARGS:=	--target=$(GNU_TARGET_NAME) \
 			-Dosvers=4.0 \
 			-Dperladmin=root
 
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
+CONFIGURE_ARGS+=	--all-static --no-dynaloader
+endif
+
 host-configure:
 	(cd ${WRKBUILD}; ${BASH} ./Configure -des -Duseperlio -Dprefix=${STAGING_HOST_DIR}/usr)
 
@@ -49,10 +53,10 @@ perl-hostinstall:
 	mv ${STAGING_HOST_DIR}/usr/bin/perl ${STAGING_HOST_DIR}/usr/bin/perl-host
 
 pre-configure:
-	(if [ ! -f $(DL_DIR)/perl-$(PKG_VERSION)-cross-$(PC_VERSION).tar.gz ]; then \
-		cd $(DL_DIR); wget $(PC_SITE)/perl-$(PKG_VERSION)-cross-$(PC_VERSION).tar.gz; \
+	(if [ ! -f $(DL_DIR)/perl-cross-$(PC_VERSION).tar.gz ]; then \
+		cd $(DL_DIR); wget $(PC_SITE)/perl-cross-$(PC_VERSION).tar.gz; \
 	fi)
-	(cd $(WRKSRC); tar --strip-components=1 -xf $(DL_DIR)/perl-$(PKG_VERSION)-cross-$(PC_VERSION).tar.gz)
+	(cd $(WRKSRC); tar --strip-components=1 -xf $(DL_DIR)/perl-cross-$(PC_VERSION).tar.gz)
 
 perl-install:
 	${INSTALL_DIR} ${IDIR_PERL}/usr/bin
