@@ -745,6 +745,12 @@ config ADK_TARGET_CPU_CF_5475
 	select ADK_TARGET_WITH_MMU
 	depends on ADK_TARGET_ARCH_M68K
 
+# m32c
+config ADK_TARGET_CPU_M32C
+	bool "m32c"
+	select ADK_TARGET_WITH_MMU
+	depends on ADK_TARGET_ARCH_M32C
+
 # m32r
 config ADK_TARGET_CPU_M32R
 	bool "m32r"
@@ -2074,6 +2080,7 @@ config ADK_TARGET_CPU_ARCH
 	default "hppa" if ADK_TARGET_ARCH_HPPA
 	default "ia64" if ADK_TARGET_ARCH_IA64
 	default "lm32" if ADK_TARGET_ARCH_LM32
+	default "m32c" if ADK_TARGET_ARCH_M32C
 	default "m32r" if ADK_TARGET_ARCH_M32R
 	default "m68k" if ADK_TARGET_ARCH_M68K
 	default "metag" if ADK_TARGET_ARCH_METAG
