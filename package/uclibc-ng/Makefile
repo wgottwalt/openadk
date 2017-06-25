@@ -33,7 +33,7 @@ uclibc-ng-install:
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC_NG)/etc/TZ
-ifeq ($(ADK_RUNTIME_ENABLE_LOCALE),y)
+ifeq ($(ADK_TARGET_LIBC_WITH_LOCALE),y)
 	${INSTALL_DIR} $(IDIR_UCLIBC_NG)/usr/bin
 	$(INSTALL_BIN) $(STAGING_TARGET_DIR)/uclibc-ng/usr/bin/locale $(IDIR_UCLIBC_NG)/usr/bin
 endif

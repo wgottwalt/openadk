@@ -12,6 +12,7 @@ PKG_SECTION:=		base/init
 PKG_DEPENDS:=		libcap libmount libuuid libblkid libncurses libkmod
 PKG_BUILDDEP:=		intltool-host gperf-host libcap util-linux gettext-host kmod
 PKG_KDEPENDS:=		cgroups namespaces fhandle tmpfs-posix-acl tmpfs-xattr
+PKG_NEEDS:=		locale intl
 PKG_URL:=		https://wiki.freedesktop.org/www/Software/systemd/
 PKG_SITES:=		https://github.com/systemd/systemd/archive/
 

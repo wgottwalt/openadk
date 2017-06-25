@@ -105,10 +105,13 @@ ifeq ($(ADK_TARGET_BINFMT_FLAT_SHARED),y)
 	$(SED) 's/.*\(UCLIBC_FORMAT_FDPIC_ELF\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 endif
-ifeq ($(ADK_TARGET_LIBC_ICONV),y)
+ifeq ($(ADK_TARGET_LIBC_WITH_LIBICONV),y)
 	$(SED) 's/.*\(UCLIBC_HAS_LIBICONV\).*/\1=y/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_RUNTIME_ENABLE_LOCALE),y)
+ifeq ($(ADK_TARGET_LIBC_WITH_LIBINTL),y)
+	$(SED) 's/.*\(UCLIBC_HAS_LIBINTL\).*/\1=y/' ${WRKBUILD}/.config
+endif
+ifeq ($(ADK_TARGET_LIBC_WITH_LOCALE),y)
 	$(SED) 's/.*\(UCLIBC_HAS_LOCALE\).*/\1=y/' ${WRKBUILD}/.config
 	echo 'UCLIBC_HAS_XLOCALE=y' >> ${WRKBUILD}/.config
 endif
@@ -318,7 +321,7 @@ endif
 		UCLIBC_EXTRA_CFLAGS="$(TARGET_CFLAGS)" \
 		UCLIBC_EXTRA_LDFLAGS="$(TARGET_LDFLAGS)" \
 		oldconfig
-ifeq ($(ADK_RUNTIME_ENABLE_LOCALE),y)
+ifeq ($(ADK_TARGET_LIBC_WITH_LOCALE),y)
 	$(SED) 's/.*\(UCLIBC_BUILD_MINIMAL_LOCALES\).*/\1="$(ADK_RUNTIME_DEFAULT_LOCALE)"/' ${WRKBUILD}/.config
 endif
 	touch $@

@@ -24,18 +24,47 @@ config ADK_TARGET_USE_SHARED_AND_STATIC_LIBS
 endchoice
 
 choice
-depends on ADK_TARGET_OS_LINUX
-bool "Iconv implementation"
+depends on ADK_TARGET_LIB_UCLIBC_NG
+bool "Locale support"
 
-config ADK_TARGET_LIBC_ICONV
-	bool "Use iconv from C library"
+config ADK_TARGET_LIBC_WITHOUT_LOCALE
+	bool "Disable locale support"
 
-config ADK_TARGET_LIBICONV
-	bool "Use libiconv package"
-	select ADK_PACKAGE_LIBICONV
+config ADK_TARGET_LIBC_WITH_LOCALE
+	bool "Enable locale support"
+	select BUSYBOX_LOCALE_SUPPORT if ADK_PACKAGE_BUSYBOX
 
-config ADK_TARGET_WITHOUT_ICONV
-	bool "Do not build any iconv code"
+endchoice
+
+choice
+depends on ADK_TARGET_LIB_UCLIBC_NG
+bool "Intl support"
+
+config ADK_TARGET_LIBC_WITHOUT_LIBINTL
+	bool "Disable libintl support"
+	help
+	  Disables uClibc-ng internal stub support.
+
+config ADK_TARGET_LIBC_WITH_LIBINTL
+	bool "Enable libintl stub support"
+	help
+	  Enables uClibc-ng libintl stub.
+
+endchoice
+
+choice
+depends on ADK_TARGET_LIB_UCLIBC_NG
+bool "Iconv support"
+
+config ADK_TARGET_LIBC_WITHOUT_LIBICONV
+	bool "Disable libiconv support"
+	help
+	  Disables uClibc-ng internal libiconv support.
+
+config ADK_TARGET_LIBC_WITH_LIBICONV
+	bool "Enable basic libiconv"
+	help
+	  Enables uClibc-ng included basic libiconv support.
 
 endchoice
 

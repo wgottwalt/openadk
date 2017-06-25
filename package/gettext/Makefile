@@ -12,6 +12,7 @@ PKG_SECTION:=		libs/misc
 PKG_URL:=		https://www.gnu.org/software/gettext/
 PKG_SITES:=		http://ftp.gnu.org/pub/gnu/gettext/
 PKG_OPTS:=		dev
+PKG_CFLINE_GETTEXT:=	depends on !ADK_TARGET_LIBC_WITHOUT_LIBICONV
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
