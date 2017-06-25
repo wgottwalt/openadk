@@ -4,21 +4,21 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openjdk8
-PKG_VERSION:=		8u121-b13
+PKG_VERSION:=		8u131-b11
 PKG_RELEASE:=		1
-PKG_HASH:=		1e681ea5db9feec8ed65acef5b60555dddd8297143b3858e0e3f148f1772dc0d
+PKG_HASH:=		d57a81345acd26d8d2681201bcf00671ad54d5d6e4b61ad1fe621994ba1fb1ec
 PKG_DESCR:=		java virtual machine
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		alsa-lib freetype libx11 libxext libxrender libxtst
 PKG_DEPENDS+=		libxt libffi zlib
 PKG_BUILDDEP:=		openjdk7-host libX11 libXext libXrender libXtst libXt
 PKG_BUILDDEP+=		freetype alsa-lib cups libffi zlib
-PKG_NEEDS:=             threads c++
+PKG_NEEDS:=             threads c++ iconv
 PKG_URL:=		http://openjdk.org/
 PKG_HG:=		http://hg.openjdk.java.net/jdk8u/jdk8u
 PKG_SITES:=		${PKG_HG}/archive/
 PKG_NOPARALLEL:=	1
-ICEDTEA_VERSION:=	3.3.0
+ICEDTEA_VERSION:=	3.4.0
 
 PKG_HOST_DEPENDS:=	linux
 PKG_ARCH_DEPENDS:=	arm mips ppc x86 x86_64
@@ -38,7 +38,9 @@ ifeq ($(ADK_TARGET_CPU_ARCH),x86_64)
 JDKARCH:=		amd64
 endif
 
-TARGET_LDFLAGS:=	-lm -liconv
+# https://bugzilla.redhat.com/show_bug.cgi?id=1306558
+TARGET_CFLAGS+=		-fno-lifetime-dse -fno-delete-null-pointer-checks
+TARGET_CXXFLAGS+=	-fno-lifetime-dse -fno-delete-null-pointer-checks -std=gnu++98
 
 CONFIG_STYLE:=		basic
 CONFIGURE_ARGS+=	--prefix=$(WRKINST)/usr \
@@ -91,7 +93,7 @@ post-extract:
 	)
 	mkdir -p $(WRKDIST)/openjdk
 	(cd $(WRKDIST); \
-		tar --strip-components=1 -xvf $(DL_DIR)/icedtea-$(ICEDTEA_VERSION).tar.bz2; \
+		tar --strip-components=1 -xvf $(DL_DIR)/icedtea-$(ICEDTEA_VERSION).tar.xz; \
 		tar --strip-components=1 -C $(WRKDIST)/openjdk -xvf $(DL_DIR)/jdk$(PKG_VERSION).tar.bz2; \
 		for file in jdk corba hotspot jaxp jaxws langtools nashorn; do \
 			mkdir -p $(WRKDIST)/openjdk/$${file}; \
@@ -105,6 +107,7 @@ post-extract:
 	)
 	cat $(WRKDIST)/openjdk/common/autoconf/configure.ac | PATH=$(HOST_PATH) sed -e "s|@DATE_WHEN_GENERATED@|`LC_ALL=C date +%s`|" | $(STAGING_HOST_DIR)/usr/bin/autoconf \
 		-W all -I$(WRKDIST)/openjdk/common/autoconf - > $(WRKDIST)/openjdk/common/autoconf/generated-configure.sh
+	$(SED) "s#^WARNINGS_ARE_ERRORS.*#WARNINGS_ARE_ERRORS=#" $(WRKDIST)/openjdk/hotspot/make/linux/makefiles/gcc.make
 
 openjdk8-install:
 	$(INSTALL_DIR) $(IDIR_OPENJDK8)/usr/bin
