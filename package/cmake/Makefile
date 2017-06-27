@@ -4,11 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		cmake
-PKG_VERSION:=		3.8.0
+PKG_VERSION:=		3.8.2
 PKG_RELEASE:=		1
-PKG_HASH:=		cab99162e648257343a20f61bcd0b287f5e88e36fcb2f1d77959da60b7f35969
+PKG_HASH:=		da3072794eb4c09f2d782fcee043847b99bb4cf8d4573978d9b2024214d6e92d
 PKG_DESCR:=		build utility
 PKG_SECTION:=		dev/tools
+HOST_BUILDDEP:=		curl-host
 PKG_URL:=		http://www.cmake.org/
 PKG_SITES:=		http://www.cmake.org/files/v3.8/
 
@@ -24,7 +25,7 @@ $(eval $(call HOST_template,CMAKE,cmake,$(PKG_VERSION)-${PKG_RELEASE}))
 HOST_STYLE:=		manual
 
 host-configure:
-	(cd $(WRKBUILD); ./configure --prefix=${STAGING_HOST_DIR}/usr )
+	(cd $(WRKBUILD); ./configure --prefix=${STAGING_HOST_DIR}/usr --system-curl)
 
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
