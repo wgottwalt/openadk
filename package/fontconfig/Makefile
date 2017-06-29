@@ -5,12 +5,12 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		fontconfig
 PKG_VERSION:=		2.12.3
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		ffc3cbf6dd9fcd516ee42f48306a715e66698b238933d6fa7cef02ea8b3b818e
 PKG_DESCR:=		library for configuring and customizing font access
 PKG_SECTION:=		libs/fonts
 PKG_DEPENDS:=		libxml2
-PKG_BUILDDEP:=		freetype libxml2
+PKG_BUILDDEP:=		freetype libxml2 gperf-host
 HOST_BUILDDEP:=		expat-host
 PKG_URL:=		http://fontconfig.org/
 PKG_SITES:=		http://fontconfig.org/release/
