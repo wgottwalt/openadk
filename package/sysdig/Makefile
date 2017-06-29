@@ -4,13 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sysdig
-PKG_VERSION:=		b058bbcc6336905d7b3b1bb6bd657b000b7690eb
+PKG_VERSION:=		2a7fa53b035fabe85b5d83aa7de20080056fb4bc
 PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_DESCR:=		system troubleshooting tool
 PKG_SECTION:=		app/debug
-PKG_DEPENDS:=		zlib jsoncpp luajit jq
-PKG_BUILDDEP:=		cmake-host zlib jsoncpp luajit jq
+PKG_DEPENDS:=		zlib jsoncpp luajit jq libressl libcurl
+PKG_BUILDDEP:=		cmake-host zlib jsoncpp luajit jq libressl
+PKG_BUILDDEP+=		curl
 PKG_KDEPENDS:=		ftrace generic-tracer function-tracer
 PKG_NEEDS:=		c++
 PKG_URL:=		http://www.sysdig.org/
@@ -25,7 +26,7 @@ $(eval $(call PKG_template,SYSDIG,sysdig,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEP
 
 WRKBUILD=		$(WRKDIR)/$(PKG_NAME)-obj
 CONFIG_STYLE:=		cmake
-CMAKE_FLAGS:=		-DUSE_BUNDLED_DEPS=OFF
+CMAKE_FLAGS:=		-DUSE_BUNDLED_DEPS=OFF -DUSE_BUNDLED_B64=ON
 XAKE_FLAGS+=		KERNELDIR="$(LINUX_DIR)" \
 			ARCH=$(ADK_TARGET_ARCH) \
 			GCC_HONOUR_COPTS=s
