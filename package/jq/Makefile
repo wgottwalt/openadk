@@ -12,9 +12,6 @@ PKG_SECTION:=		sys/misc
 PKG_URL:=		http://stedolan.github.io/jq/
 PKG_SITES:=		https://github.com/stedolan/jq/releases/download/jq-$(PKG_VERSION)/
 
-# needs bessel functions not enabled on uClibc-ng
-PKG_LIBC_DEPENDS:=	glibc musl
-
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
