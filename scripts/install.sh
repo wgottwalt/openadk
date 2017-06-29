@@ -192,15 +192,21 @@ case $ostype {
 	;;
 (Linux)
 	basedev=$tgt
-	rootpart=${basedev}1
-	datapart=${basedev}2
-	if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 ]]; then
-		bootpart=${basedev}1
-		rootpart=${basedev}2
-		datapart=${basedev}3
+	partitionsep=""
+	if [[ $basedev = /dev/loop* ]]; then
+		(( quiet )) || print "${tgt} is a loop device"
+		partitionsep=p
 	fi
 
-	match=\'${basedev}\''+([0-9])'
+	rootpart=${basedev}${partitionsep}1
+	datapart=${basedev}${partitionsep}2
+	if [[ $target = raspberry-pi || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 ]]; then
+		bootpart=${basedev}${partitionsep}1
+		rootpart=${basedev}${partitionsep}2
+		datapart=${basedev}${partitionsep}3
+	fi
+
+	match=\'${basedev}${partitionsep}\''+([0-9])'
 	function mount_fs {
 		mount -t "$3" "$1" "$2"
 	}
