@@ -10,6 +10,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		c++ library for json
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		cmake-host
+PKG_NEEDS:=		c++
 PKG_URL:=		https://github.com/open-source-parsers/jsoncpp
 PKG_SITES:=		https://github.com/open-source-parsers/jsoncpp.git
 PKG_OPTS:=		dev
