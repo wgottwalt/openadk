@@ -652,3 +652,12 @@ check-g++: check-dejagnu
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/$(PKG_NAME)-$(PKG_VERSION)-final/gcc -k check-c++
 
 check: check-gcc check-g++
+
+info:
+	@printf -- "---OPENADK-INFO---\n"
+	@printf "ADK_TOPDIR=$(ADK_TOPDIR)\n"
+	@printf "TARGET_COMPILER_PREFIX=${TARGET_COMPILER_PREFIX}\n"
+	@printf "TOOLCHAIN_DIR=$(TOOLCHAIN_DIR)\n"
+	@printf "TARGET_PATH=$(TARGET_PATH)\n"
+	@printf "LINUX_DIR=$(LINUX_DIR)\n"
+	@printf -- "---OPENADK-INFO---\n"

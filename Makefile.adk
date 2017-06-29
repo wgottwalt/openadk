@@ -180,5 +180,9 @@ dep:
 world:
 	@${GMAKE_INV} world
 
+
+info:
+	@${GMAKE_INV} info
+
 endif
 # DO NOT DELETE
