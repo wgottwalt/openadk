@@ -1896,6 +1896,7 @@ config ADK_TARGET_GCC_ARCH
 	default "westmere" if ADK_TARGET_CPU_X86_64_WESTMERE
 	default "x86-64" if ADK_TARGET_CPU_X86_64
 	default "z900" if ADK_TARGET_CPU_S390_Z900
+	default "c674x" if ADK_TARGET_CPU_C6X
 
 # for CFLAGS/CXXFLAGS if gcc does not support --with-cpu
 config ADK_TARGET_CPU_FLAGS

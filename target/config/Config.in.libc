@@ -202,6 +202,7 @@ config ADK_TARGET_SUPPORTS_LT
 
 config ADK_TARGET_LIBC_UTILS
 	bool
+	default n if ADK_TARGET_ARCH_C6X
 	default n if ADK_TARGET_ARCH_LM32
 	default n if ADK_TARGET_ARCH_H8300
 	default y
