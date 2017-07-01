@@ -10,9 +10,16 @@ MASTER_SITE_MIRBSD?=	\
 	http://www.mirbsd.org/MirOS/distfiles/ \
 	http://pub.allbsd.org/MirOS/distfiles/ \
 
+ifeq ($(ADK_TARGET_KERNEL_NO_MIRROR),)
 MASTER_SITE_KERNEL?=	\
 	http://www.kernel.org/pub/linux/ \
 	ftp://www.kernel.org/pub/linux/ \
+
+else
+MASTER_SITE_KERNEL?=	\
+	http://distfiles.openadk.org/ \
+
+endif
 
 MASTER_SITE_GNU?=	\
 	http://ftp.gnu.org/gnu/ \
