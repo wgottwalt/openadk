@@ -9,25 +9,25 @@ PKG_RELEASE:=		1
 PKG_HASH:=		1de8653a3729cefd1baaf09ecde5ace01a1e3a58fbf29d48c1363f2503d331a1
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
-PKG_DEPENDS:=		python2 libsquish libbluray libressl libxz
-PKG_DEPENDS+=		libass libmpeg2 libmad libdbus libglew mesa libxshmfence
-PKG_DEPENDS+=		libogg libvorbis libmodplug libcurl libxrandr
-PKG_DEPENDS+=		libflac libbz2 libtiff libnettle librtmp
+PKG_DEPENDS:=		python2 libsquish libressl libxz
+PKG_DEPENDS+=		libass libmpeg2 libmad
+PKG_DEPENDS+=		libogg libvorbis libmodplug libcurl
+PKG_DEPENDS+=		libflac libbz2 libtiff libnettle librtmp liblzo
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libncurses
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate libuuid
-PKG_DEPENDS+=		taglib libjasper libmp3lame libmicrohttpd libgtk2
-PKG_DEPENDS+=		libgpg-error libudev python2-mod-sqlite libffmpeg
-PKG_DEPENDS+=		libxslt libvorbisenc alsa-lib glib libglu libdcadec
-PKG_BUILDDEP:=		python2 libass ffmpeg libglew rtmpdump xrandr
+PKG_DEPENDS+=		taglib libjasper libmp3lame
+PKG_DEPENDS+=		libgpg-error python2-mod-sqlite libffmpeg
+PKG_DEPENDS+=		libvorbisenc alsa-lib glib libdcadec
+PKG_BUILDDEP:=		python2 libass ffmpeg rtmpdump
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis
-PKG_BUILDDEP+=		curl flac bzip2 libtiff yajl mesa cmake-host
+PKG_BUILDDEP+=		curl flac bzip2 libtiff yajl cmake-host
 PKG_BUILDDEP+=		tinyxml sqlite pcre libcdio freetype 
-PKG_BUILDDEP+=		libsamplerate taglib libjasper lame libmicrohttpd
-PKG_BUILDDEP+=		eudev alsa-lib glib glu libmodplug libgtk2
-PKG_BUILDDEP+=		libgpg-error dbus libxslt libvorbis libbluray
+PKG_BUILDDEP+=		libsamplerate taglib libjasper lame
+PKG_BUILDDEP+=		alsa-lib glib libmodplug
+PKG_BUILDDEP+=		libgpg-error libvorbis
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
 PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish libdcadec
-PKG_BUILDDEP+=		libcrossguid libressl libxshmfence xz bzip2 liblzo
+PKG_BUILDDEP+=		libcrossguid libressl xz bzip2 liblzo
 PKG_NEEDS:=		threads c++
 PKG_URL:=		http://kodi.tv/
 PKG_SITES:=		https://github.com/xbmc/xbmc/archive/
@@ -36,30 +36,7 @@ DISTFILES:=		$(PKG_VERSION)-Krypton.tar.gz
 WRKDIST=		${WRKDIR}/xbmc-$(PKG_VERSION)-Krypton
 WRKSRC=			$(WRKDIR)/xbmc-$(PKG_VERSION)-Krypton/project/cmake
 
-PKG_FLAVOURS_KODI:=	WITH_SMB WITH_NFS WITH_SSH WITH_AVAHI WITH_CEC 
-PKG_FLAVOURS_KODI+=	WITH_WEBSERVER WITH_LIRC
-
-PKGFD_WITH_SMB:=	enable samba4 support
-PKGFB_WITH_SMB:=	samba
-PKGFS_WITH_SMB:=	samba
-PKGFD_WITH_NFS:=	enable nfs support
-PKGFB_WITH_NFS:=	libnfs
-PKGFS_WITH_NFS:=	libnfs
-PKGFD_WITH_SSH:=	enable ssh support
-PKGFB_WITH_SSH:=	libssh
-PKGFS_WITH_SSH:=	libssh
-PKGFD_WITH_AVAHI:=	enable avahi support
-PKGFB_WITH_AVAHI:=	avahi
-PKGFS_WITH_AVAHI:=	libavahi
-PKGFD_WITH_CEC:=	enable cec support
-PKGFB_WITH_CEC:=	libcec
-PKGFS_WITH_CEC:=	libcec
-PKGFD_WITH_LIRC:=	enable lirc support
-PKGFB_WITH_LIRC:=	lirc
-PKGFS_WITH_LIRC:=	lirc
-PKGFD_WITH_WEBSERVER:=	enable internal webserver support
-
-PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 raspberry-pi3 solidrun-imx6
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 raspberry-pi3
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -69,14 +46,48 @@ HOST_CXXFLAGS:=		-DTARGET_POSIX -DTARGET_LINUX -D_LINUX -I$(WRKBUILD)/../../xbmc
 
 CONFIG_STYLE:=		cmake
 CMAKE_FLAGS+= 		-DENABLE_CCACHE=OFF \
+			-DCMAKE_BUILD_TYPE=Debug \
 			-DENABLE_DVDCSS=ON \
 			-DENABLE_INTERNAL_CROSSGUID=OFF \
 			-DENABLE_INTERNAL_FFMPEG=OFF \
 			-DKODI_DEPENDSBUILD=OFF \
 			-DENABLE_OPENSSL=ON \
+			-DENABLE_MYSQLCLIENT=OFF \
+			-DENABLE_NONFREE=OFF \
+			-DENABLE_CAP=OFF \
+			-DENABLE_XSLT=OFF \
+			-DENABLE_BLUETOOTH=OFF \
+			-DENABLE_BLURAY=OFF \
+			-DENABLE_AIRTUNES=OFF \
+			-DENABLE_SSH=OFF \
+			-DENABLE_SMBCLIENT=OFF \
+			-DENABLE_CEC=OFF \
+			-DENABLE_AVAHI=OFF \
+			-DENABLE_LCMS2=OFF \
+			-DENABLE_LIRC=OFF \
+			-DENABLE_UPNP=OFF \
+			-DENABLE_OPTICAL=OFF \
+			-DENABLE_PULSEAUDIO=OFF \
+			-DENABLE_MICROHTTPD=OFF \
+			-DENABLE_DBUS=OFF \
+			-DENABLE_EVENTCLIENTS=OFF \
+			-DENABLE_UDEV=OFF \
+			-DENABLE_PLIST=OFF \
 			-DNATIVEPREFIX=$(STAGING_HOST_DIR)/usr \
 			-DDEPENDS_PATH=$(STAGING_HOST_DIR) \
 			-DWITH_TEXTUREPACKER=$(STAGING_HOST_DIR)/usr/bin/TexturePacker
+
+ifeq ($(ADK_TARGET_BOARD_BCM28XX),y)
+CMAKE_FLAGS+=		-DCORE_SYSTEM_NAME=rbpi \
+			-DWITH_ARCH=arm \
+			-DWITH_CPU=arm \
+			-DENABLE_OPENGL=OFF \
+			-DENABLE_X11=OFF \
+			-DENABLE_ALSA=ON \
+			-DENABLE_OPENGLES=ON
+else
+CMAKE_FLAGS+=		-DCORE_SYSTEM_NAME=linux
+endif
 
 pre-configure:
 	#(cd $(WRKBUILD)/lib/cpluff && env PATH='$(AUTOTOOL_PATH)' ./autogen.sh)
