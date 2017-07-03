@@ -96,9 +96,9 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3_64),y)
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifeq ($(ADK_PACKAGE_BCM28XX_DEBUGTOOL),y)
-	$(INSTALL_DIR) $(IDIR_BCM28XX_DEBUGTOOL)/opt/vc/bin
+	$(INSTALL_DIR) $(IDIR_BCM28XX_DEBUGTOOL)/usr/bin
 	$(INSTALL_BIN) ./files/vcdbg \
-		$(IDIR_BCM28XX_DEBUGTOOL)/opt/vc/bin
+		$(IDIR_BCM28XX_DEBUGTOOL)/usr/bin
 endif
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
