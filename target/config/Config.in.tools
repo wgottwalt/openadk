@@ -223,11 +223,6 @@ config ADK_HOST_BUILD_QEMU
 	bool
 	default n
 
-config ADK_HOST_NEED_COREUTILS
-	bool
-	default y if ADK_TARGET_BOARD_BCM28XX
-	default n
-
 config ADK_HOST_BUILD_COREUTILS
 	bool
 	default n
