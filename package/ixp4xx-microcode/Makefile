@@ -32,6 +32,7 @@ do-build:
 	);
 	
 do-install:
+	$(INSTALL_DIR) $(IDIR_IXP4XX_MICROCODE)/lib/firmware
 	$(INSTALL_BIN) $(WRKBUILD)/NPE-* \
 		$(IDIR_IXP4XX_MICROCODE)/lib/firmware
 
