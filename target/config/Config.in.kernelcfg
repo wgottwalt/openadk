@@ -22,6 +22,7 @@ config ADK_TARGET_KERNEL_DEFCONFIG
 	string "Defconfig name"
 	depends on ADK_TARGET_KERNEL_USE_DEFCONFIG
 	default "bcmrpi_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default "bcmrpi_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI0
 	default "bcm2709_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI2
 	default "bcm2709_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI3
 	default "bcmrpi3_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI3_64

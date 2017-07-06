@@ -1,5 +1,5 @@
 config ADK_TARGET_SYSTEM_RASPBERRY_PI0
-	bool "Raspberry PI0"
+	bool "Raspberry PI 0"
 	depends on ADK_TARGET_LITTLE_ENDIAN
 	select ADK_TARGET_CPU_ARM_ARM1176JZF_S
 	select ADK_TARGET_BOARD_BCM28XX
@@ -19,5 +19,5 @@ config ADK_TARGET_SYSTEM_RASPBERRY_PI0
 	select ADK_TARGET_WITH_ROOT_RW
 	select ADK_TARGET_KERNEL_IMAGE
 	help
-	  Raspberry PI0
+	  Raspberry PI 0
 
