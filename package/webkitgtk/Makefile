@@ -4,18 +4,18 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		webkitgtk
-PKG_VERSION:=		2.16.3
+PKG_VERSION:=		2.16.5
 PKG_RELEASE:=		1
-PKG_HASH:=		204e9131da0101b9bc8765716e70a897121af04b964d9827cd9f20816a77b512
+PKG_HASH:=		8e0396f3428e757898c5856e642eed4fcd5a20ae03d96d3eaa03b76634be7dd4
 PKG_DESCR:=		web browser engine
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib icu4c zlib libwebp libgtk3 libsoup
-PKG_DEPENDS+=		libsecret libxt harfbuzz cairo
+PKG_DEPENDS+=		libsecret libxt harfbuzz cairo libgcrypt
 PKG_DEPENDS+=		gst-plugins-base gstreamer libnotify
 PKG_BUILDDEP:=		glib icu4c zlib libwebp libgtk3 cmake-host
 PKG_BUILDDEP+=		libsoup libsecret libXt harfbuzz libnotify
 PKG_BUILDDEP+=		gst-plugins-base gstreamer cairo enchant
-PKG_BUILDDEP+=		gnutls
+PKG_BUILDDEP+=		gnutls libgcrypt
 PKG_URL:=		http://www.webkitgtk.org/
 PKG_SITES:=		http://webkitgtk.org/releases/
 PKG_OPTS:=		dev
@@ -32,12 +32,16 @@ XAKE_FLAGS+=		VERBOSE=1
 
 CONFIG_STYLE:=		cmake
 CMAKE_FLAGS+= 		-DPORT=GTK \
+			-DENABLE_GLES2=OFF \
+			-DENABLE_OPENGL=ON \
+			-DENABLE_X11_TARGET=ON \
 			-DENABLE_API_TESTS=OFF \
 			-DENABLE_GTKDOC=OFF \
 			-DENABLE_GEOLOCATION=OFF \
 			-DENABLE_MINIBROWSER=ON \
 			-DUSE_SYSTEM_MALLOC=ON \
 			-DUSE_LIBNOTIFY=OFF \
+			-DENABLE_JIT=OFF \
 			-DUSE_LIBHYPHEN=OFF \
 			-DENABLE_INTROSPECTION=OFF
 
