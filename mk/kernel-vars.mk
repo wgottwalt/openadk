@@ -7,7 +7,7 @@ KERNEL_MAKE_OPTS:=	V=1 \
 			CC="$(TARGET_CC)" \
 			HOSTCC="${HOST_CC}" \
 			HOSTCXX="${HOST_CXX}" \
-			DISABLE_PAX_PLUGINS=y \
+			SHELL='${SHELL}' \
 			CONFIG_SHELL='${SHELL}'
 
 # regex for relocs needs pcre
