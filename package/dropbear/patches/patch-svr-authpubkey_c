@@ -1,6 +1,6 @@
 --- dropbear-2017.75.orig/svr-authpubkey.c	2017-05-18 16:47:02.000000000 +0200
-+++ dropbear-2017.75/svr-authpubkey.c	2017-05-24 00:12:02.175883130 +0200
-@@ -220,24 +220,31 @@ static int checkpubkey(char* algo, unsig
++++ dropbear-2017.75/svr-authpubkey.c	2017-07-06 19:45:36.765143131 +0200
+@@ -220,24 +220,33 @@ static int checkpubkey(char* algo, unsig
  		goto out;
  	}
  
@@ -43,12 +43,14 @@
 +		authfile = fopen(filename, "r");
 +
 +	} else {
++		origuid = getuid();
++		origgid = getgid();
 +		authfile = fopen("/etc/dropbear/authorized_keys","r");
 +	}
  
  	if ((seteuid(origuid)) < 0 ||
  		(setegid(origgid)) < 0) {
-@@ -396,26 +403,39 @@ static int checkpubkeyperms() {
+@@ -396,26 +405,39 @@ static int checkpubkeyperms() {
  		goto out;
  	}
  
