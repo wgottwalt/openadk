@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/rules.mk
 PKG_NAME:=		ympd
 PKG_VERSION:=		3df5b36b97b7a5b0c9adeba39b9987d9aa58a7fb
 PKG_GIT:=		hash
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_DESCR:=		standalone music player daemon web gui
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libmpdclient
