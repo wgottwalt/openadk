@@ -4,16 +4,16 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		dbus
-PKG_VERSION:=		1.10.16
+PKG_VERSION:=		1.10.20
 PKG_RELEASE:=		1
-PKG_HASH:=		a7b0ba6ea3e8d0e08afec5e3030d0245614268276620c536726f8fa6e5c43388
+PKG_HASH:=		e574b9780b5425fde4d973bb596e7ea0f09e00fe2edd662da9016e976c460b48
 PKG_DESCR:=		desktop bus daemon
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		libdbus libexpat
 PKG_BUILDDEP:=		expat util-linux
 PKG_NEEDS:=		threads
 PKG_URL:=		http://dbus.freedesktop.org/
-PKG_SITES:=		http://dbus.freedesktop.org/releases/dbus/
+PKG_SITES:=		https://dbus.freedesktop.org/releases/dbus/
 PKG_LIBNAME:=		libdbus
 PKG_OPTS:=		dev
 
