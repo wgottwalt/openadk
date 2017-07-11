@@ -34,12 +34,12 @@ PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_OR1K),y)
-PKG_VERSION:=		or1k-7-2
+PKG_VERSION:=		musl-5.4.0
 PKG_GIT:=		branch
-PKG_SITES:=		https://github.com/rth7680/gcc.git
+PKG_SITES:=		https://github.com/openrisc/or1k-gcc.git
 PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-LIBSTDCXXVER:=		23
+LIBSTDCXXVER:=		21
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_NDS32),y)
 PKG_VERSION:=		4.9.3-nds32
