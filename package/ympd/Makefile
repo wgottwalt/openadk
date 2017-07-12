@@ -4,13 +4,13 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ympd
-PKG_VERSION:=		3df5b36b97b7a5b0c9adeba39b9987d9aa58a7fb
+PKG_VERSION:=		ec008a4995666d673bd4cb3926fae7f4b6aa3239
 PKG_GIT:=		hash
-PKG_RELEASE:=		2
+PKG_RELEASE:=		4
 PKG_DESCR:=		standalone music player daemon web gui
 PKG_SECTION:=		net/http
-PKG_DEPENDS:=		libmpdclient
-PKG_BUILDDEP:=		cmake-host libmpdclient
+PKG_DEPENDS:=		libmpdclient libressl
+PKG_BUILDDEP:=		cmake-host libmpdclient libressl
 PKG_URL:=		http://www.ympd.org/
 PKG_SITES:=		https://github.com/notandy/ympd.git
 
