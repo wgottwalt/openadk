@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		pcre
-PKG_VERSION:=		8.40
+PKG_VERSION:=		8.41
 PKG_RELEASE:=		1
-PKG_HASH:=		1d75ce90ea3f81ee080cdc04e68c9c25a9fb984861a0618be7bbf676b18eda3e
+PKG_HASH:=		244838e1f1d14f7e2fa7681b857b3a8566b74215f28133f14a8f5e59241b682c
 PKG_DESCR:=		perl compatible regular expression library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.pcre.org/
@@ -17,7 +17,7 @@ PKG_OPTS:=		dev
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		LIBPCRE LIBPCRECPP
-PKGSD_LIBPCRECPP:=	PCRE c++ library
+PKGSD_LIBPCRECPP:=	pcre c++ library
 
 include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
