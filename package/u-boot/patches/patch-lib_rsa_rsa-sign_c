@@ -1,0 +1,56 @@
+--- u-boot-2017.07.orig/lib/rsa/rsa-sign.c	2017-07-10 19:07:38.000000000 +0200
++++ u-boot-2017.07/lib/rsa/rsa-sign.c	2017-07-16 21:35:13.901375261 +0200
+@@ -21,7 +21,7 @@
+ #define HAVE_ERR_REMOVE_THREAD_STATE
+ #endif
+ 
+-#if OPENSSL_VERSION_NUMBER < 0x10100000L
++#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
+ static void RSA_get0_key(const RSA *r,
+                  const BIGNUM **n, const BIGNUM **e, const BIGNUM **d)
+ {
+@@ -300,7 +300,7 @@ static int rsa_init(void)
+ {
+ 	int ret;
+ 
+-#if OPENSSL_VERSION_NUMBER < 0x10100000L
++#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
+ 	ret = SSL_library_init();
+ #else
+ 	ret = OPENSSL_init_ssl(0, NULL);
+@@ -309,7 +309,7 @@ static int rsa_init(void)
+ 		fprintf(stderr, "Failure to init SSL library\n");
+ 		return -1;
+ 	}
+-#if OPENSSL_VERSION_NUMBER < 0x10100000L
++#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
+ 	SSL_load_error_strings();
+ 
+ 	OpenSSL_add_all_algorithms();
+@@ -355,7 +355,7 @@ err_set_rsa:
+ err_engine_init:
+ 	ENGINE_free(e);
+ err_engine_by_id:
+-#if OPENSSL_VERSION_NUMBER < 0x10100000L
++#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
+ 	ENGINE_cleanup();
+ #endif
+ 	return ret;
+@@ -363,7 +363,7 @@ err_engine_by_id:
+ 
+ static void rsa_remove(void)
+ {
+-#if OPENSSL_VERSION_NUMBER < 0x10100000L
++#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
+ 	CRYPTO_cleanup_all_ex_data();
+ 	ERR_free_strings();
+ #ifdef HAVE_ERR_REMOVE_THREAD_STATE
+@@ -433,7 +433,7 @@ static int rsa_sign_with_key(RSA *rsa, s
+ 		ret = rsa_err("Could not obtain signature");
+ 		goto err_sign;
+ 	}
+-	#if OPENSSL_VERSION_NUMBER < 0x10100000L
++	#if OPENSSL_VERSION_NUMBER < 0x10100000L || defined(LIBRESSL_VERSION_NUMBER)
+ 		EVP_MD_CTX_cleanup(context);
+ 	#else
+ 		EVP_MD_CTX_reset(context);
