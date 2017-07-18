@@ -4,7 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm28xx-bootloader
-PKG_VERSION:=		ca9116ffd0cea06fdeb876ac7d19790bf2631d8c
+# not cloned, local src directory used
+PKG_VERSION:=		63fd4a88e70b1ea70783dd408c2df12db74605c9
 PKG_RELEASE:=		1
 PKG_DESCR:=		bootloader for bcm28xx
 PKG_SECTION:=		base/boot
@@ -92,7 +93,7 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3_64),y)
 	printf "arm_control=0x200\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-	printf "kernel_old=1\n" >> \
+	printf "enable_uart=1\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifeq ($(ADK_PACKAGE_BCM28XX_DEBUGTOOL),y)
