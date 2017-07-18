@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 ADK_TOPDIR:=	$(shell pwd)
-GMAKE_FMK=	${MAKE} -f $(PWD)/mk/build.mk
+GMAKE_FMK=	${MAKE} -f ${ADK_TOPDIR}/mk/build.mk
 GMAKE_INV=	${GMAKE_FMK} --no-print-directory
 
 _UNLIMIT=	__limit=$$(ulimit -dH 2>/dev/null); \
