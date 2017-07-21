@@ -479,6 +479,15 @@ config ADK_TARGET_CPU_CRIS_CRISV32
 	select ADK_TARGET_WITH_MMU
 	depends on ADK_TARGET_ARCH_CRIS
 
+# c-sky
+config ADK_TARGET_CPU_CSKY_CK610
+	bool "ck610"
+	select ADK_TARGET_SUPPORTS_THREADS
+	select ADK_TARGET_SUPPORTS_LT
+	select ADK_TARGET_SUPPORTS_NPTL
+	select ADK_TARGET_WITH_MMU
+	depends on ADK_TARGET_ARCH_CSKY
+
 # epiphany
 config ADK_TARGET_CPU_EPIPHANY
 	bool "epiphany"
@@ -2069,6 +2078,7 @@ config ADK_TARGET_CPU_ARCH
 	default "cr16" if ADK_TARGET_ARCH_CR16
 	default "cris" if ADK_TARGET_CPU_CRIS_CRISV10
 	default "crisv32" if ADK_TARGET_CPU_CRIS_CRISV32
+	default "csky" if ADK_TARGET_ARCH_CSKY
 	default "epiphany" if ADK_TARGET_ARCH_EPIPHANY
 	default "frv" if ADK_TARGET_ARCH_FRV
 	default "i486" if ADK_TARGET_CPU_X86_I486

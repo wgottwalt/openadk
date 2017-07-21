@@ -118,6 +118,10 @@ ifeq ($(ADK_TARGET_ARCH_BFIN),y)
 GCC_CONFOPTS+=		--disable-symvers
 endif
 
+ifeq ($(ADK_TARGET_ARCH_CSKY),y)
+GCC_CONFOPTS+=		--with-cskyabi=abiv1
+endif
+
 ifeq ($(ADK_TARGET_ARCH_METAG),y)
 GCC_CONFOPTS+=		--with-cpu=2.1 --enable-meta-default --disable-symvers
 endif
