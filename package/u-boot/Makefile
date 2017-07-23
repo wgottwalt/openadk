@@ -16,7 +16,7 @@ PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-PKG_SYSTEM_DEPENDS:=	beaglebone-black raspberry-pi raspberry-pi2 raspberry-pi3 banana-pro solidrun-imx6 solidrun-clearfog raspberry-pi3-64
+PKG_SYSTEM_DEPENDS:=	beaglebone-black orange-pi0 raspberry-pi raspberry-pi2 raspberry-pi3 banana-pro solidrun-imx6 solidrun-clearfog raspberry-pi3-64
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -47,6 +47,10 @@ CONFIG:=		rpi_3_defconfig
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 CONFIG:=		Bananapro_defconfig
+UBOOT:=			u-boot-sunxi-with-spl.bin
+endif
+ifeq ($(ADK_TARGET_SYSTEM_ORANGE_PI0),y)
+CONFIG:=		orangepi_zero_defconfig
 UBOOT:=			u-boot-sunxi-with-spl.bin
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK),y)
@@ -100,6 +104,9 @@ ifneq ($(OS_FOR_BUILD),Darwin)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	$(INSTALL_BIN) ./files/boot.script.bpi $(FW_DIR)
+endif
+ifeq ($(ADK_TARGET_SYSTEM_ORANGE_PI0),y)
+	$(INSTALL_BIN) ./files/boot.script.opi $(FW_DIR)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG),y)
 	$(INSTALL_BIN) ./files/boot.script.clearfog $(FW_DIR)

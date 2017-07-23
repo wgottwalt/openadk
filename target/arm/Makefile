@@ -78,6 +78,12 @@ ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	@echo "Use following command to install with a writable data partition"
 	@echo "sudo ./scripts/install.sh -d 256 banana-pro /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
+ifeq ($(ADK_TARGET_SYSTEM_ORANGE_PI0),y)
+	@echo "Use following command to install it on SD card:"
+	@echo "sudo ./scripts/install.sh orange-pi0 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "Use following command to install with a writable data partition"
+	@echo "sudo ./scripts/install.sh -d 256 orange-pi0 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 targethelp:
@@ -181,6 +187,10 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		sun7i-a20-bananapro.dtb $(MAKE_TRACE)
+endif
+ifeq ($(ADK_TARGET_SYSTEM_ORANGE_PI0),y)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
+		sun8i-h2-plus-orangepi-zero.dtb $(MAKE_TRACE)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
