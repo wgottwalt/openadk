@@ -15,7 +15,7 @@ start)
 	ympd -w 80 &
 	;;
 stop)
-	kill $(pgrep -f /usr/bin/ympd)
+	kill $(pgrep -f ympd)
 	;;
 restart)
 	sh $0 stop

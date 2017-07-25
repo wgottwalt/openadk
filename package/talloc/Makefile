@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		talloc
-PKG_VERSION:=		2.1.2
+PKG_VERSION:=		2.1.9
 PKG_RELEASE:=		1
-PKG_HASH:=		230d78a3fca75a15ab0f5d76d7bbaeadd3c1e695adcbb085932d227f5c31838d
+PKG_HASH:=		f0aad4cb88a3322207c82136ddc07bed48a37c2c21f82962d6c5ccb422711062
 PKG_DESCR:=		memory allocation library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		python2-host python2

@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
-PKG_VERSION:=		2017.03
+PKG_VERSION:=		2017.07
 PKG_RELEASE:=		1
-PKG_HASH:=		f54baf3f9325bf444c7905f3a5b6f83680edb1e6e1a4d5f8a5ad80abe885113f
+PKG_HASH:=		5374bfdc8acb9a38c025371b1ff20f45e7533668e84e685d0df5d9e7c0e4feff
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 HOST_BUILDDEP:=		libressl-host dtc-host
@@ -16,7 +16,7 @@ PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-PKG_SYSTEM_DEPENDS:=	beaglebone-black raspberry-pi raspberry-pi2 raspberry-pi3 atmel-ngw100 banana-pro solidrun-imx6 solidrun-clearfog raspberry-pi3-64
+PKG_SYSTEM_DEPENDS:=	beaglebone-black orange-pi0 raspberry-pi raspberry-pi2 raspberry-pi3 banana-pro solidrun-imx6 solidrun-clearfog raspberry-pi3-64
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -45,11 +45,12 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3_64),y)
 CONFIG:=		rpi_3_defconfig
 endif
-ifeq ($(ADK_TARGET_SYSTEM_ATMEL_NGW100),y)
-CONFIG:=		atngw100_defconfig
-endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 CONFIG:=		Bananapro_defconfig
+UBOOT:=			u-boot-sunxi-with-spl.bin
+endif
+ifeq ($(ADK_TARGET_SYSTEM_ORANGE_PI0),y)
+CONFIG:=		orangepi_zero_defconfig
 UBOOT:=			u-boot-sunxi-with-spl.bin
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK),y)
@@ -103,6 +104,9 @@ ifneq ($(OS_FOR_BUILD),Darwin)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	$(INSTALL_BIN) ./files/boot.script.bpi $(FW_DIR)
+endif
+ifeq ($(ADK_TARGET_SYSTEM_ORANGE_PI0),y)
+	$(INSTALL_BIN) ./files/boot.script.opi $(FW_DIR)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG),y)
 	$(INSTALL_BIN) ./files/boot.script.clearfog $(FW_DIR)

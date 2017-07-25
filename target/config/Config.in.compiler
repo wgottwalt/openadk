@@ -65,7 +65,7 @@ config ADK_TOOLCHAIN_GCC_NDS32
 	depends on ADK_TARGET_ARCH_NDS32
 
 config ADK_TOOLCHAIN_GCC_ARC
-	bool "arc-2017.03-release"
+	bool "arc-2016.09-release"
 	select ADK_DISABLE_HONOUR_CFLAGS
 	depends on ADK_TARGET_ARCH_ARC
 

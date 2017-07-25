@@ -7,6 +7,7 @@ PKG_NAME:=		libowfat
 PKG_VERSION:=		0.30
 PKG_RELEASE:=		1
 PKG_HASH:=		db4a3a853cfbb9e83b27f565b580f6fdc519475b162edc1a656043e1c126e993
+PKG_DESCR:=		owfat library
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.fefe.de/libowfat
 PKG_SITES:=		http://www.fefe.de/libowfat/

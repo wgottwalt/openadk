@@ -36,52 +36,49 @@ $(eval $(call PKG_template,BCM28XX_VC_DEBUG,bcm28xx-vc-debug,$(PKG_VERSION)-$(PK
 $(eval $(call PKG_template,BCM28XX_VC_GL_LIBS,bcm28xx-vc-gl-libs,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 CONFIG_STYLE:=          cmake
+CMAKE_FLAGS+=		-DVMCS_INSTALL_PREFIX=/usr
 
 bcm28xx-vc-tools-install:
-	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_TOOLS)/opt/vc/bin
-	$(INSTALL_BIN) $(WRKINST)/opt/vc/bin/vcgencmd \
-		$(IDIR_BCM28XX_VC_TOOLS)/opt/vc/bin
-	$(INSTALL_BIN) $(WRKINST)/opt/vc/bin/dtoverlay \
-		$(IDIR_BCM28XX_VC_TOOLS)/opt/vc/bin
+	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_TOOLS)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/vcgencmd \
+		$(IDIR_BCM28XX_VC_TOOLS)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/dtoverlay \
+		$(IDIR_BCM28XX_VC_TOOLS)/usr/bin
 
 bcm28xx-vc-debug-install:
-	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_DEBUG)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libdebug_sym.so \
-		$(IDIR_BCM28XX_VC_DEBUG)/opt/vc/lib 
+	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_DEBUG)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libdebug_sym.so \
+		$(IDIR_BCM28XX_VC_DEBUG)/usr/lib
 
 bcm28xx-vc-libs-install:
-	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_LIBS)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libvcos.so \
-		$(IDIR_BCM28XX_VC_LIBS)/opt/vc/lib 
-	$(CP) $(WRKINST)/opt/vc/lib/libvchiq_arm.so \
-		$(IDIR_BCM28XX_VC_LIBS)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libbcm_host.so \
-		$(IDIR_BCM28XX_VC_LIBS)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libcontainers.so \
-		$(IDIR_BCM28XX_VC_LIBS)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libdtovl.so \
-		$(IDIR_BCM28XX_VC_LIBS)/opt/vc/lib
-	-rm -rf $(STAGING_TARGET_DIR)/opt/vc
-	mkdir -p $(STAGING_TARGET_DIR)/opt/vc
-	$(CP) $(WRKINST)/opt/vc/lib $(STAGING_TARGET_DIR)/opt/vc
-	$(CP) $(WRKINST)/opt/vc/include $(STAGING_TARGET_DIR)/opt/vc
+	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libvcos.so \
+		$(IDIR_BCM28XX_VC_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libvchiq_arm.so \
+		$(IDIR_BCM28XX_VC_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libbcm_host.so \
+		$(IDIR_BCM28XX_VC_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libcontainers.so \
+		$(IDIR_BCM28XX_VC_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libdtovl.so \
+		$(IDIR_BCM28XX_VC_LIBS)/usr/lib
 
 bcm28xx-vc-gl-libs-install:
-	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libmmal*.so \
-		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libopenmaxil.so \
-		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libvcsm.so \
-		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libEGL.so \
-		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libGLESv2.so \
-		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libOpenVG.so \
-		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
-	$(CP) $(WRKINST)/opt/vc/lib/libbrcm*.so \
-		$(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib
-	(cd $(IDIR_BCM28XX_VC_GL_LIBS)/opt/vc/lib && ln -sf libEGL.so libEGL.so.1)
+	$(INSTALL_DIR) $(IDIR_BCM28XX_VC_GL_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libmmal*.so \
+		$(IDIR_BCM28XX_VC_GL_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libopenmaxil.so \
+		$(IDIR_BCM28XX_VC_GL_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libvcsm.so \
+		$(IDIR_BCM28XX_VC_GL_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libEGL.so \
+		$(IDIR_BCM28XX_VC_GL_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libGLESv2.so \
+		$(IDIR_BCM28XX_VC_GL_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libOpenVG.so \
+		$(IDIR_BCM28XX_VC_GL_LIBS)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libbrcm*.so \
+		$(IDIR_BCM28XX_VC_GL_LIBS)/usr/lib
+	(cd $(IDIR_BCM28XX_VC_GL_LIBS)/usr/lib && ln -sf libEGL.so libEGL.so.1)
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

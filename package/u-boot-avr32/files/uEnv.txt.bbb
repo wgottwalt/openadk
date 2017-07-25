@@ -1,0 +1,12 @@
+loadaddr=0x82000000
+fdtaddr=0x88000000
+fdt_high=0xffffffff
+mmcroot=/dev/mmcblk0p2
+mmcfs=ext4
+kernelfile=kernel
+console=ttyO2,115200n8
+loadximage=load mmc 0:2 ${loadaddr} /boot/${kernelfile}
+loadxfdt=load mmc 0:2 ${fdtaddr} /boot/${fdtfile}
+loadall=run loadximage; run loadxfdt;
+mmcargs=setenv bootargs console=${console} root=${mmcroot} rootfstype=${mmcfs}
+uenvcmd=run loadall; run mmcargs; bootz ${loadaddr} - ${fdtaddr};

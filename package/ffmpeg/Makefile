@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ffmpeg
-PKG_VERSION:=		3.3.1
+PKG_VERSION:=		3.3.2
 PKG_RELEASE:=		1
-PKG_HASH:=		fcb2cd7b77fcb66a00abccd5a04e34342a02cab9f89626f28cf1abca715b6730
+PKG_HASH:=		216900d5c0af9017bb8f76b0ad23f0ac53cf7fc618cf04b40d989bd99b088e6a
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs/video
 PKG_NEEDS:=		threads

@@ -7,23 +7,23 @@ KERNEL_MAKE_OPTS:=	V=1 \
 			CC="$(TARGET_CC)" \
 			HOSTCC="${HOST_CC}" \
 			HOSTCXX="${HOST_CXX}" \
-			DISABLE_PAX_PLUGINS=y \
+			SHELL='${SHELL}' \
 			CONFIG_SHELL='${SHELL}'
 
 # regex for relocs needs pcre
 ifeq ($(OS_FOR_BUILD),Darwin)
-KERNEL_MAKE_OPTS+=	HOSTLDFLAGS='-lpcreposix'
+KERNEL_MAKE_OPTS+=	HOSTLDFLAGS='-lpcreposix -Wl,-no_pie'
 endif
 
 # non-Linux platforms need elf.h
 ifneq ($(OS_FOR_BUILD),Linux)
 KERNEL_MAKE_OPTS+=	HOSTCFLAGS='$(HOST_CPPFLAGS) ${HOST_CFLAGS}'
-KERNEL_MAKE_OPTS+=	HOST_EXTRACFLAGS='-I${LINUX_DIR}/tools/include -I${ADK_TOPDIR}/adk/include -DKBUILD_NO_NLS'
+KERNEL_MAKE_OPTS+=	HOST_EXTRACFLAGS='-I${LINUX_DIR}/tools/include -I${LINUX_DIR}/security/selinux/include -I${ADK_TOPDIR}/adk/include -DKBUILD_NO_NLS'
 else
 KERNEL_MAKE_OPTS+=	HOSTCFLAGS='${HOST_CFLAGS}'
 endif
 
-ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
+ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO)$(ADK_TARGET_SYSTEM_ORANGE_PI0),y)
 KERNEL_MAKE_OPTS+=	LOADADDR=0x40008000
 endif
 

@@ -320,6 +320,16 @@ config ADK_KERNEL_USB_SERIAL_SIERRAWIRELESS
 	tristate "Support for Sierra Wireless USB-to-Serial converters"
 	depends on ADK_KERNEL_USB_SERIAL
 
+config ADK_KERNEL_USB_SERIAL_OPTION
+	tristate "USB driver for GSM and CDMA modems"
+	depends on ADK_KERNEL_USB_SERIAL
+	help
+	  Say Y here if you have a GSM or CDMA modem that's connected to USB.
+
+config ADK_KERNEL_USB_SERIAL_WWAN
+	tristate
+	depends on ADK_KERNEL_USB_SERIAL
+
 config ADK_KERNEL_USB_ATM
         tristate "Support for USB ATM devices"
 

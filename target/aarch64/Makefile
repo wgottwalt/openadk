@@ -56,12 +56,7 @@ endif
 endif
 
 kernel-strip:
-ifeq ($(ADK_TARGET_KERNEL_GIT_REPO_NAME),rpi)
-	@echo adding DT trailer to kernel $(MAKE_TRACE)
-	PATH='$(HOST_PATH)' perl $(LINUX_DIR)/scripts/mkknlimg $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL) $(MAKE_TRACE)
-else
 	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
-endif
 
 kernel-install: kernel-strip
 	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)

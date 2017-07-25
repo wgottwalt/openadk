@@ -1,5 +1,5 @@
---- bcm28xx-vc-c2f27fb8e581f8e5af83bf28422553ade8f7a7c8.orig/host_applications/linux/libs/bcm_host/CMakeLists.txt	2015-10-27 10:59:48.000000000 +0100
-+++ bcm28xx-vc-c2f27fb8e581f8e5af83bf28422553ade8f7a7c8/host_applications/linux/libs/bcm_host/CMakeLists.txt	2015-11-16 20:31:44.277474548 +0100
+--- bcm28xx-vc-8d518460723779f95b49efafc04c183e83da3a18.orig/host_applications/linux/libs/bcm_host/CMakeLists.txt	2017-06-27 18:59:31.000000000 +0200
++++ bcm28xx-vc-8d518460723779f95b49efafc04c183e83da3a18/host_applications/linux/libs/bcm_host/CMakeLists.txt	2017-07-01 14:33:21.139286425 +0200
 @@ -3,7 +3,7 @@ if (WIN32)
     set(VCOS_PLATFORM win32)
  else ()
@@ -9,3 +9,11 @@
  endif ()
  
  include_directories( ../../../.. 
+@@ -20,3 +20,7 @@ target_link_libraries(bcm_host vcos vcho
+ 
+ install(TARGETS bcm_host DESTINATION lib)
+ 
++configure_file("${CMAKE_CURRENT_SOURCE_DIR}/bcm_host.pc.in"
++  "${CMAKE_CURRENT_BINARY_DIR}/bcm_host.pc" @ONLY)
++install(FILES "${CMAKE_CURRENT_BINARY_DIR}/bcm_host.pc"
++  DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig")

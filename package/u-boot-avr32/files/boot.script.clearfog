@@ -1,0 +1,4 @@
+setenv bootargs 'console=ttyS0,115200 root=/dev/mmcblk0p1 rootwait'
+ext2load mmc 0:1 0x01800000 /boot/armada-388-clearfog.dtb
+ext2load mmc 0:1 0x02000000 /boot/kernel
+bootz 0x02000000 - 0x01800000

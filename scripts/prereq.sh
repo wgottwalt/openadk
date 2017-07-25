@@ -688,6 +688,9 @@ fi
 if [ $host_build_tar -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_TAR" >> $topdir/target/config/Config.in.prereq
 fi
+if [ $host_build_coreutils -eq 1 ]; then
+  printf "\t%s\n" "select ADK_HOST_BUILD_COREUTILS" >> $topdir/target/config/Config.in.prereq
+fi
 if [ $host_build_cpio -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_CPIO" >> $topdir/target/config/Config.in.prereq
 fi
@@ -712,9 +715,6 @@ if [ $host_build_lzop -eq 1 ]; then
 fi
 if [ $host_build_qemu -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_QEMU if ADK_HOST_NEED_QEMU" >> $topdir/target/config/Config.in.prereq
-fi
-if [ $host_build_coreutils -eq 1 ]; then
-  printf "\t%s\n" "select ADK_HOST_BUILD_COREUTILS if ADK_HOST_NEED_COREUTILS" >> $topdir/target/config/Config.in.prereq
 fi
 
 # create Host OS symbols

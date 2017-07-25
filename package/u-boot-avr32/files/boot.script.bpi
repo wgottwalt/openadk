@@ -1,0 +1,4 @@
+setenv bootargs console=tty0 console=ttyS0,115200 root=/dev/mmcblk0p1 rootwait
+ext4load mmc 0:1 0x42000000 boot/${fdtfile}
+ext4load mmc 0:1 0x48000000 boot/kernel
+bootm 0x48000000 - 0x42000000

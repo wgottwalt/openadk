@@ -22,6 +22,7 @@ config ADK_TARGET_KERNEL_DEFCONFIG
 	string "Defconfig name"
 	depends on ADK_TARGET_KERNEL_USE_DEFCONFIG
 	default "bcmrpi_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default "bcmrpi_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI0
 	default "bcm2709_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI2
 	default "bcm2709_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI3
 	default "bcmrpi3_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI3_64
@@ -34,6 +35,7 @@ config ADK_TARGET_KERNEL_DEFCONFIG
 	default "orca_defconfig" if ADK_TARGET_SYSTEM_ANDES_AG101P
 	default "bb.org_defconfig" if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
 	default "j2_defconfig" if ADK_TARGET_SYSTEM_NUMATO_MIMASV2
+	default "sunxi_defconfig" if ADK_TARGET_SYSTEM_ORANGE_PI0
 	default ""
 
 config ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH
