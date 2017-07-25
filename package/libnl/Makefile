@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libnl
 PKG_VERSION:=		3.2.29
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		5a30dc4986158c6c2b1309f4a15a283d50cc938108a675e3d822e24debcd229d
 PKG_DESCR:=		netlink library
 PKG_SECTION:=		libs/net

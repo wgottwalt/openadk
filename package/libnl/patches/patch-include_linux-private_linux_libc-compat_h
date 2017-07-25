@@ -1,0 +1,11 @@
+--- libnl-libnl3_2_29.orig/include/linux-private/linux/libc-compat.h	2016-12-30 15:57:01.000000000 +0100
++++ libnl-libnl3_2_29/include/linux-private/linux/libc-compat.h	2017-07-25 22:04:13.423563709 +0200
+@@ -49,7 +49,7 @@
+ #define _LIBC_COMPAT_H
+ 
+ /* We have included glibc headers... */
+-#if defined(__GLIBC__)
++#if 1
+ 
+ /* Coordinate with glibc netinet/in.h header. */
+ #if defined(_NETINET_IN_H)
