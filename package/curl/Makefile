@@ -29,10 +29,10 @@ PKGFD_WITH_IPV6:=	enable ipv6 support
 
 PKG_CHOICES_CURL:=	WITH_LIBRESSL WITH_GNUTLS WITH_WOLFSSL WITHOUT_SSL
 PKGCD_WITH_LIBRESSL:=	use libressl for crypto
-PKGCS_WITH_LIBRESSL:=	libressl ca-certificates libgmp
+PKGCS_WITH_LIBRESSL:=	libressl ca-certificates
 PKGCB_WITH_LIBRESSL:=	libressl
 PKGCD_WITH_GNUTLS:=	use gnutls for crypto
-PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates libgmp
+PKGCS_WITH_GNUTLS:=	libgnutls ca-certificates
 PKGCB_WITH_GNUTLS:=	gnutls
 PKGCD_WITH_WOLFSSL:=	use wolfssl for crypto
 PKGCS_WITH_WOLFSSL:=	wolfssl ca-certificates
