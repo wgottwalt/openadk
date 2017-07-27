@@ -23,50 +23,22 @@ config ADK_TARGET_USE_SHARED_AND_STATIC_LIBS
 
 endchoice
 
-choice
-depends on ADK_TARGET_LIB_UCLIBC_NG
-bool "Locale support"
-
-config ADK_TARGET_LIBC_WITHOUT_LOCALE
-	bool "Disable locale support"
-
 config ADK_TARGET_LIBC_WITH_LOCALE
 	bool "Enable locale support"
+	depends on ADK_TARGET_LIB_UCLIBC_NG
 	select BUSYBOX_LOCALE_SUPPORT if ADK_PACKAGE_BUSYBOX
-
-endchoice
-
-choice
-depends on ADK_TARGET_LIB_UCLIBC_NG
-bool "Intl support"
-
-config ADK_TARGET_LIBC_WITHOUT_LIBINTL
-	bool "Disable libintl support"
-	help
-	  Disables uClibc-ng internal stub support.
 
 config ADK_TARGET_LIBC_WITH_LIBINTL
 	bool "Enable libintl stub support"
+	depends on ADK_TARGET_LIB_UCLIBC_NG
 	help
 	  Enables uClibc-ng libintl stub.
 
-endchoice
-
-choice
-depends on ADK_TARGET_LIB_UCLIBC_NG
-bool "Iconv support"
-
-config ADK_TARGET_LIBC_WITHOUT_LIBICONV
-	bool "Disable libiconv support"
-	help
-	  Disables uClibc-ng internal libiconv support.
-
 config ADK_TARGET_LIBC_WITH_LIBICONV
 	bool "Enable basic libiconv"
+	depends on ADK_TARGET_LIB_UCLIBC_NG
 	help
 	  Enables uClibc-ng included basic libiconv support.
-
-endchoice
 
 config ADK_TARGET_CFLAGS_OPT
 	string
