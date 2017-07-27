@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		joe
-PKG_VERSION:=		3.7
-PKG_RELEASE:=		2
-PKG_HASH:=		cae456e1ad5a8c1d3c94920a3416c2347277739b260e3494d3bc0f2b9b73106f
+PKG_VERSION:=		4.4
+PKG_RELEASE:=		1
+PKG_HASH:=		a5704828bbca29acb9e200414fef522c66cdf9ce28150f402d6767da43460979
 PKG_DESCR:=		small editor
 PKG_SECTION:=		app/editor
 PKG_URL:=		http://joe-editor.sourceforge.net/
