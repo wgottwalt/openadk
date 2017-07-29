@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mariadb
-PKG_VERSION:=		10.1.23
+PKG_VERSION:=		10.1.25
 PKG_RELEASE:=		1
-PKG_HASH:=		54d8114e24bfa5e3ebdc7d69e071ad1471912847ea481b227d204f9d644300bf
+PKG_HASH:=		7205ecaa6f1bc16335ad88faa5c46be52b3ac628a5e795cb942a3f4335b2a0d6
 PKG_DESCR:=		sql client library
 PKG_SECTION:=		libs/db
 PKG_DEPENDS:=		libncurses zlib libevent libpcre
