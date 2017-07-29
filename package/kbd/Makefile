@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kbd
-PKG_VERSION:=		2.0.3
+PKG_VERSION:=		2.0.4
 PKG_RELEASE:=		1
-PKG_HASH:=		7a899de1c0eb75f3aea737095a736f2375e1cbfbe693fc14a3fe0bfb4649fb5e
+PKG_HASH:=		5fd90af6beb225a9bb9b9fb414c090fba53c9a55793e172f508cd43652e59a88
 PKG_DESCR:=		keyboard and font utilities
 PKG_SECTION:=		sys/hw
 PKG_DEPENDS:=		libcheck
 PKG_BUILDDEP:=		flex-host bison-host check
 PKG_URL:=		http://kbd-project.org/
-PKG_SITES:=		ftp://ftp.kernel.org/pub/linux/utils/kbd/
+PKG_SITES:=		http://kbd-project.org/download/
 
 PKG_CFLINE_KBD:=	default y if ADK_TARGET_WITH_INPUT
 
