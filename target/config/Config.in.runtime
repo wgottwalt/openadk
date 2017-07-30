@@ -503,6 +503,7 @@ config ADK_SIMPLE_NETWORK_CONFIG
 	  
 menu "eth0 Configuration"
 depends on ADK_SIMPLE_NETWORK_CONFIG
+depends on ADK_TARGET_WITH_NETDEVICE
 
 choice
 prompt "Type"
