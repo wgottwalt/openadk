@@ -1,0 +1,12 @@
+diff -Nur linux-4.4.5.orig/arch/mips/boot/compressed/Makefile linux-4.4.5/arch/mips/boot/compressed/Makefile
+--- linux-4.4.5.orig/arch/mips/boot/compressed/Makefile	2016-03-10 00:35:58.000000000 +0100
++++ linux-4.4.5/arch/mips/boot/compressed/Makefile	2016-03-15 11:35:31.951795457 +0100
+@@ -41,7 +41,7 @@
+ endif
+ 
+ ifdef CONFIG_KERNEL_XZ
+-vmlinuzobjs-y += $(obj)/../../lib/ashldi3.o
++vmlinuzobjs-y += $(obj)/../../lib/ashldi3.o $(obj)/../../lib/bswapsi.o
+ endif
+ 
+ targets += vmlinux.bin
