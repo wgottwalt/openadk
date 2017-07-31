@@ -73,3 +73,9 @@ config ADK_KERNEL_IMX_SDMA
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
+config ADK_KERNEL_DMA_SUN6I
+	bool
+	select ADK_KERNEL_DMADEVICES
+	depends on ADK_TARGET_SYSTEM_ORANGE_PI0
+	default y if ADK_TARGET_SYSTEM_ORANGE_PI0
+	default n

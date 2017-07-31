@@ -59,6 +59,17 @@ config ADK_KERNEL_SPI_RB4XX
 	default y if ADK_TARGET_SYSTEM_MIKROTIK_RB4XX
 	default n
 
+config ADK_KERNEL_SPI_SUN6I
+	tristate "SPI driver for SunXi"
+	select ADK_KERNEL_SPI
+	select ADK_KERNEL_SPI_MASTER
+	select ADK_KERNEL_SPI_BITBANG
+	select ADK_KERNEL_REGMAP
+	select ADK_KERNEL_REGMAP_SPI
+	depends on ADK_TARGET_SYSTEM_ORANGE_PI0
+	default y if ADK_TARGET_SYSTEM_ORANGE_PI0
+	default n
+
 config ADK_KERNEL_SPI_SPIDEV
 	tristate "SPI userland driver"
 	select ADK_KERNEL_SPI

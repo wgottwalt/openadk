@@ -43,6 +43,17 @@ config ADK_KERNEL_CPU_FREQ_GOV_ONDEMAND
 config ADK_KERNEL_CPU_FREQ_GOV_CONSERVATIVE
 	bool
 
+config ADK_KERNEL_CPUFREQ_DT_PLATDEV
+	bool
+
+config ADK_KERNEL_CPUFREQ_DT
+	bool "CPU frequency support DT"
+	select ADK_KERNEL_CPU_FREQ
+	select ADK_KERNEL_CPUFREQ_DT_PLATDEV
+	depends on ADK_TARGET_SYSTEM_ORANGE_PI0
+	default y if ADK_TARGET_SYSTEM_ORANGE_PI0
+	default n
+
 config ADK_KERNEL_ARM_IMX6Q_CPUFREQ
 	bool "CPU frequency support for IMX6 boards"
 	select ADK_KERNEL_CPU_FREQ
