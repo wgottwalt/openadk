@@ -35,7 +35,9 @@ image::openadk-task.png[]
 
 If you want to compile some predefined appliance tasks, you can select it in +Tasks+.
 You can later simply add your own tasks, which is a collection of options, packages,
-kernel modules or features, runtime configuration and more.
+kernel modules or features, runtime configuration and more. They can either be placed
+inside the +tasks+ directory or in your own custom directory that you pass via
++ADK_CUSTOM_TASKS_DIR+ to make.
 
 When you are ready exit and save. You can always redefine the
 configuration using +make menuconfig+.
