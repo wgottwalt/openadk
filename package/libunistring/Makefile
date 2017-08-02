@@ -4,18 +4,14 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libunistring
-PKG_VERSION:=		0.9.3
-PKG_RELEASE:=		2
-PKG_HASH:=		610d3ec724fbdaa654afe3cff20b9f4d504be3fd296fded2e0f7f764041006a3
+PKG_VERSION:=		0.9.7
+PKG_RELEASE:=		1
+PKG_HASH:=		2e3764512aaf2ce598af5a38818c0ea23dedf1ff5460070d1b6cee5c3336e797
 PKG_DESCR:=		functions for manipulating unicode strings
 PKG_SECTION:=		libs/misc
 PKG_URL:=		http://www.gnu.org/software/libunistring/
 PKG_SITES:=		${MASTER_SITE_GNU:=libunistring/}
 PKG_OPTS:=		dev
-
-PKG_LIBC_DEPENDS:=	uclibc-ng glibc
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${ADK_TOPDIR}/mk/package.mk
 
