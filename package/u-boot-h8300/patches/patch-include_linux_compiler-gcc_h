@@ -1,0 +1,11 @@
+--- u-boot-h8300.orig/include/linux/compiler-gcc.h	2017-08-02 19:27:30.000000000 +0200
++++ u-boot-h8300/include/linux/compiler-gcc.h	2017-08-02 19:51:29.008209716 +0200
+@@ -109,7 +109,7 @@
+ #define __always_unused			__attribute__((unused))
+ 
+ #define __gcc_header(x) #x
+-#define _gcc_header(x) __gcc_header(linux/compiler-gcc##x.h)
++#define _gcc_header(x) __gcc_header(linux/compiler-gcc5.h)
+ #define gcc_header(x) _gcc_header(x)
+ #include gcc_header(__GNUC__)
+ 
