@@ -20,8 +20,8 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-TARGET_CFLAGS+=		${TARGET_CPPFLAGS} -fPIC
-CONFIGURE_ARGS+=	--without-uiout \
+CONFIGURE_ARGS+=	--enable-static \
+			--without-uiout \
 			--disable-tui \
 			--disable-gdbtk \
 			--disable-gdbserver \
@@ -36,15 +36,9 @@ CONFIGURE_ARGS+=	--without-uiout \
 			--with-curses \
 			--enable-gdbmi
 
-XAKE_FLAGS+=		LDFLAGS='${TARGET_LDFLAGS}'
-# disable honour cflags stuff
-XAKE_FLAGS+=		GCC_HONOUR_COPTS:=s
-
 gdb-install:
 	${INSTALL_DIR} ${IDIR_GDB}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/gdb \
 		${IDIR_GDB}/usr/bin/
-	# shipped libbfd conflicts with system wide one
-	rm -f ${WRKINST}/usr/lib/libbfd*
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
