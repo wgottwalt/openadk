@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		systemd
-PKG_VERSION:=		233
+PKG_VERSION:=		234
 PKG_RELEASE:=		1
-PKG_HASH:=		8b3e99da3d4164b66581830a7f2436c0c8fe697b5fbdc3927bdb960646be0083
+PKG_HASH:=		da3e69d10aa1c983d33833372ad4929037b411ac421fb085c8cee79ae1d80b6a
 PKG_DESCR:=		system and service manager
 PKG_SECTION:=		base/init
 PKG_DEPENDS:=		libcap libmount libuuid libblkid libncurses libkmod
@@ -76,6 +76,7 @@ CONFIGURE_ARGS+=	--disable-static \
 			--disable-resolved \
 			--disable-importd \
 			--disable-sysusers \
+			--disable-nss-systemd \
 			--enable-randomseed \
 			--enable-timedated \
 			--enable-timesyncd \
