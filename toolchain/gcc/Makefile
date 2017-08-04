@@ -195,7 +195,11 @@ GCC_CONFOPTS+=		--with-long-double-64 --enable-secureplt
 endif
 
 ifeq ($(ADK_TARGET_ARCH_PPC64),y)
+ifeq ($(ADK_TARGET_LIB_GLIBC),y)
+GCC_CONFOPTS+=		--with-long-double-128 --with-abi=elfv2
+else
 GCC_CONFOPTS+=		--without-long-double-128 --with-abi=elfv2
+endif
 endif
 
 ifneq ($(ADK_TARGET_MIPS_ABI),)
