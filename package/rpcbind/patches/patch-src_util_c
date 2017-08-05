@@ -1,0 +1,11 @@
+--- rpcbind-0.2.4.orig/src/util.c	2016-11-28 21:47:28.000000000 +0100
++++ rpcbind-0.2.4/src/util.c	2017-08-05 02:28:09.880017183 +0200
+@@ -41,7 +41,7 @@
+ 
+ #include <sys/types.h>
+ #include <sys/socket.h>
+-#include <sys/queue.h>
++#include "queue.h"
+ #include <net/if.h>
+ #include <netinet/in.h>
+ #include <ifaddrs.h>
