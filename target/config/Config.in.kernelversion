@@ -70,7 +70,7 @@ config ADK_TARGET_KERNEL_VERSION_4_4
 	depends on !ADK_TARGET_SYSTEM_ORANGE_PI0
 
 config ADK_TARGET_KERNEL_VERSION_4_1
-	bool "4.1.42"
+	bool "4.1.43"
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_BFIN
 	depends on !ADK_TARGET_ARCH_CSKY
