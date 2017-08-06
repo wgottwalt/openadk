@@ -9,8 +9,8 @@ include $(ADK_TOPDIR)/mk/buildhlp.mk
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_GIT),y)
 BINUTILS_VERSION:=	git
 endif
-ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_28),y)
-BINUTILS_VERSION:=	2.28
+ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_29),y)
+BINUTILS_VERSION:=	2.29
 endif
 
 $(WRKBUILD)/.configured:
