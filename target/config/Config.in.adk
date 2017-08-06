@@ -90,7 +90,7 @@ config ADK_MAKE_PARALLEL
 
 config ADK_MAKE_JOBS
 	int "How many jobs to use"
-	default 4
+	default 16
 	depends on ADK_MAKE_PARALLEL
 	help
 	  The number specified here will be passed to make as N in '-jN'
