@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libtirpc
-PKG_VERSION:=		1.0.1
+PKG_VERSION:=		1.0.2
 PKG_RELEASE:=		1
-PKG_HASH:=		5156974f31be7ccbc8ab1de37c4739af6d9d42c87b1d5caf4835dda75fcbb89e
+PKG_HASH:=		723c5ce92706cbb601a8db09110df1b4b69391643158f20ff587e20e7c5f90f5
 PKG_DESCR:=		transport independent rpc library
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://sourceforge.net/projects/libtirpc/
@@ -25,6 +25,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBTIRPC,libtirpc,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+MAKE_ENV+=		V=1
 AUTOTOOL_STYLE:=	autoreconf
 
 ifeq (${ADK_PACKAGE_LIBTIRPC_WITH_GSS},y)
