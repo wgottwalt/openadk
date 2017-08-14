@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libdrm
-PKG_VERSION:=		2.4.67
+PKG_VERSION:=		2.4.82
 PKG_RELEASE:=		1
-PKG_HASH:=		4ae392513c4df30d88f10e69bf425a1dff960a5b4ccd4da621d9fc88523f7acb
+PKG_HASH:=		473997e1fa6f73f75f99bdeb8aa140f7efc3e774988b005c470343ee3cbeb97a
 PKG_DESCR:=		direct rendering manager library
 PKG_SECTION:=		libs/video
 PKG_BUILDDEP:=		libpthread-stubs cairo libpciaccess
@@ -15,8 +15,6 @@ PKG_SITES:=		http://dri.freedesktop.org/libdrm/
 PKG_OPTS:=		dev
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
-
-PKG_ARCH_DEPENDS:=	!m68k
 
 include $(ADK_TOPDIR)/mk/package.mk
 
