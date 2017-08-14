@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mesa
-PKG_VERSION:=		13.0.1
-PKG_RELEASE:=		2
-PKG_HASH:=		71962fb2bf77d33b0ad4a565b490dbbeaf4619099c6d9722f04a73187957a731
+PKG_VERSION:=		17.1.6
+PKG_RELEASE:=		1
+PKG_HASH:=		0686deadde1f126b20aa67e47e8c50502043eee4ecdf60d5009ffda3cebfee50
 PKG_DESCR:=		3d graphics library
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm libexpat
@@ -17,7 +17,7 @@ PKG_BUILDDEP+=		eudev dri3proto presentproto xcb-proto libxcb
 PKG_BUILDDEP+=		libxshmfence
 PKG_NEEDS:=		c++
 PKG_URL:=		http://www.mesa3d.org/
-PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/${PKG_VERSION}/
+PKG_SITES:=		ftp://ftp.freedesktop.org/pub/mesa/
 PKG_LIBNAME:=		mesa
 PKG_OPTS:=		dev
 
