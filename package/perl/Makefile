@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		perl
 PKG_VERSION:=		5.24.1
 PKG_RELEASE:=		1
-PKG_HASH:=		ebe7c66906d4fb55449380ab1b7e004eeef52c38d3443fa301f8e17a1a4cb67f
+PKG_HASH:=		03a77bac4505c270f1890ece75afc7d4b555090b41aa41ea478747e23b2afb3f
 PKG_DESCR:=		perl interpreter
 PKG_SECTION:=		dev/lang
 PKG_NEEDS:=		threads
@@ -16,8 +16,6 @@ PKG_NOPARALLEL:=	1
 
 PC_VERSION:=		1.1.5
 PC_SITE:=		https://github.com/arsv/perl-cross/releases/download/$(PC_VERSION)
-
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 include ${ADK_TOPDIR}/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
