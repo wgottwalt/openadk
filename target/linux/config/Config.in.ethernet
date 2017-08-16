@@ -490,4 +490,14 @@ config ADK_KERNEL_ALTERA_TSE
 	help
 	  This driver supports the NIOS2 ethernet chips.
 
+config ADK_KERNEL_DM9000
+	tristate "Davicom 9000"
+	select ADK_KERNEL_GPIO_GENERIC_PLATFORM
+	select ADK_KERNEL_REGULATOR
+	depends on ADK_TARGET_SYSTEM_IMGTEC_CI20
+	default y if ADK_TARGET_SYSTEM_IMGTEC_CI20
+	default n
+	help
+	  Davicom 9000 ethernet driver.
+
 endmenu
