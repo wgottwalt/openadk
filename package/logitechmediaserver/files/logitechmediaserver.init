@@ -12,8 +12,9 @@ autostart)
 	exec sh $0 start
 	;;
 start)
-	chown -R squeezeboxserver /opt/lms/prefs /opt/lms/Logs /opt/lms/Cache
-	perl /opt/lms/slimserver.pl
+	mkdir -p /data/lms/Cache /data/lms/Logs /data/lms/prefs
+	chown -R squeezeboxserver /data/lms
+	su squeezeboxserver -c 'perl /opt/lms/slimserver.pl --daemon'
 	;;
 stop)
 	;;

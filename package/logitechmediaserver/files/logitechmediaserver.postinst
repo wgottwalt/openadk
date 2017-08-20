@@ -3,4 +3,4 @@
 add_rcconf logitechmediaserver NO
 gid=$(get_next_gid)
 add_group squeezeboxserver $gid
-add_user squeezeboxserver $(get_next_uid) $gid /opt/lms
+add_user squeezeboxserver $(get_next_uid) $gid /opt/lms /bin/sh

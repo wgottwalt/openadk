@@ -917,6 +917,8 @@ int main() {
 							fprintf(cfg, "\tselect ADK_TARGET_LIBC_WITH_LOCALE if ADK_TARGET_LIB_UCLIBC_NG\n");
 						if (strncmp(token, "threads", 7) == 0)
 							fprintf(cfg, "\tselect ADK_TARGET_LIB_WITH_THREADS\n");
+						if (strncmp(token, "data", 4) == 0)
+							fprintf(cfg, "\tselect ADK_RUNTIME_DATA_PARTITION\n");
 						if (strncmp(token, "mmu", 3) == 0)
 							fprintf(cfg, "\tdepends on ADK_TARGET_WITH_MMU\n");
 						token = strtok(NULL, " ");

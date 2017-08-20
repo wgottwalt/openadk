@@ -61,7 +61,7 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9)$(ADK_TARGET_SYSTEM_QEMU_ARM_VERS
 	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) qemu-${ADK_TARGET_CPU_ARCH}.img'
 endif
 ifeq ($(ADK_TARGET_BOARD_BCM28XX)$(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6)$(ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG),y)
-ifeq ($(ADK_APPLIANCE_KODI),y)
+ifeq ($(ADK_RUNTIME_DATA_PARTITION),y)
 	@echo "Use following command to install with a writable data partition"
 	@echo "sudo ./scripts/install.sh -d 256 $(ADK_TARGET_SYSTEM) /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo "If you want to update a card without loosing existing data on the writable partition use:"

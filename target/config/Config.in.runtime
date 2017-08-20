@@ -1,6 +1,9 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+config ADK_RUNTIME_DATA_PARTITION
+	bool
+
 config ADK_RUNTIME_HOSTNAME
 	string "hostname for the embedded system"
 	default "openadk"
@@ -202,8 +205,9 @@ config ADK_RUNTIME_TIMEZONE
 
 config ADK_RUNTIME_DEFAULT_LOCALE
 	string "default locale"
-	depends on ADK_TARGET_LIBC_WITH_LOCALE
-	default "de_DE"
+	depends on ADK_TARGET_LIBC_WITH_LOCALE \
+		|| ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_MUSL
+	default "C.UTF-8"
 	help
 	  Locale to be set in the target system as default.
 
