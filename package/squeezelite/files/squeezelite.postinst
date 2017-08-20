@@ -1,4 +1,4 @@
 #!/bin/sh
 . $IPKG_INSTROOT/etc/functions.sh
 add_rcconf squeezelite NO
-add_rcconf squeezelite_flags "-z -a 160:5:0:0 -s 10.0.0.1"
+add_rcconf squeezelite_flags "-z -a 160:5:0:0"

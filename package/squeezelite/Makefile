@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		squeezelite
-PKG_VERSION:=		e37ed17fed9e11a7346cbe9f1e1deeccc051f42e
+PKG_VERSION:=		527b5cb3f736f3335a55d176ce3539a171c8aebf
 PKG_RELEASE:=		1
 PKG_GIT:=		hash
 PKG_DESCR:=		headless squeezebox emulator
