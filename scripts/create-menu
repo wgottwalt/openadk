@@ -71,8 +71,15 @@ config ADK_TARGET_ARCH
 EOD
 
 for arch in $(cat $topdir/target/arch.lst);do
-	ARCH=$(echo $arch | tr '[:lower:]' '[:upper:]')
-	printf "\tdefault \"$arch\" if ADK_TARGET_ARCH_$ARCH\n" >> target/config/Config.in.arch.default
+  ARCH=$(echo $arch | tr '[:lower:]' '[:upper:]')
+  printf "\tdefault \"$arch\" if ADK_TARGET_ARCH_$ARCH\n" >> target/config/Config.in.arch.default
+done
+printf "\n\n" >> target/config/Config.in.arch.default
+
+for arch in $(cat $topdir/target/arch.lst);do
+  ARCH=$(echo $arch | tr '[:lower:]' '[:upper:]')
+  printf "config ADK_TARGET_ARCH_${ARCH}\n" >> $topdir/target/config/Config.in.arch.default
+  printf "\tbool\n\n" >> $topdir/target/config/Config.in.arch.default
 done
 
 cat > $topdir/target/config/Config.in.arch.choice << EOD
@@ -84,21 +91,18 @@ config ADK_TARGET_CHOOSE_ARCH
 	bool "choose architecture"
 
 EOD
-
-for arch in $(cat $topdir/target/arch.lst);do
-	ARCH=$(echo $arch | tr '[:lower:]' '[:upper:]')
-	printf "config ADK_TARGET_ARCH_$ARCH\n" >> $topdir/target/config/Config.in.arch.choice
-	printf "\tbool \"$arch\"\n" >> $topdir/target/config/Config.in.arch.choice
-	case $arch in
-		alpha|s390|tile|ppc64|mips64)
-		  printf "\tdepends on ADK_TARGET_OS_LINUX\n" >> $topdir/target/config/Config.in.arch.choice
-		  ;;
-		cr16|epiphany|m32c|m32r|mn10300|moxie|msp430|rx|v850)
-		  printf "\tdepends on ADK_TARGET_OS_BAREMETAL\n" >> $topdir/target/config/Config.in.arch.choice
-		  ;;
-	esac
-	printf "\thelp\n" >> $topdir/target/config/Config.in.arch.choice
-	printf "\t  Support for $ARCH systems.\n\n" >> $topdir/target/config/Config.in.arch.choice
+for os in linux frosted baremetal; do
+  for arch in $(cat $topdir/target/$os/arch.lst);do
+    OS=$(echo $os | tr '[:lower:]' '[:upper:]')
+    ARCH=$(echo $arch | tr '[:lower:]' '[:upper:]')
+    printf "config ADK_TARGET_${OS}_ARCH_${ARCH}\n" >> $topdir/target/config/Config.in.arch.choice
+    printf "\tbool \"$arch\"\n" >> $topdir/target/config/Config.in.arch.choice
+    printf "\tdepends on ADK_TARGET_OS_${OS}\n" >> $topdir/target/config/Config.in.arch.choice
+    printf "\tselect ADK_TARGET_ARCH_${ARCH}\n" >> $topdir/target/config/Config.in.arch.choice
+    printf "\thelp\n" >> $topdir/target/config/Config.in.arch.choice
+    printf "\t  Support for $ARCH systems.\n\n" >> $topdir/target/config/Config.in.arch.choice
+  done
 done
 printf "endchoice\n" >> $topdir/target/config/Config.in.arch.choice
+
 exit 0

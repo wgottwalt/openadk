@@ -31,6 +31,7 @@ ADK_PACKAGE_CRYPTINIT_ROOT:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_ROOT)))
 ADK_PACKAGE_CRYPTINIT_SWAP:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_SWAP)))
 ADK_PACKAGE_CMDLINE:=root=$(ADK_PACKAGE_CRYPTINIT_ROOT) swap=$(ADK_PACKAGE_CRYPTINIT_SWAP) resume=/dev/mapper/swapcrypt
 
+ifeq ($(ADK_TARGET_OS_LINUX),y)
 ifeq ($(ADK_TARGET_KERNEL_USE_MINICONFIG),y)
 ifeq ($(ADK_TARGET_KERNEL_CUSTOMISING),y)
 config-prepare: $(ADK_TOPDIR)/.config
@@ -129,13 +130,29 @@ else
 config-prepare: $(ADK_TOPDIR)/.config
 	@true
 endif
+endif
 
+ifeq ($(ADK_TARGET_OS_FROSTED),y)
+config-prepare: $(ADK_TOPDIR)/.config
+	@PATH='$(HOST_PATH)' sed -n '/^FROSTED_/s///p' $(ADK_TOPDIR)/.config \
+	    >$(BUILD_DIR)/.frosted
+endif
+
+ifeq ($(ADK_TARGET_OS_FROSTED),y)
+prepare: frosted-prepare
+compile: frosted-compile
+install: frosted-install
+endif
+
+
+ifeq ($(ADK_TARGET_OS_LINUX),y)
 prepare: $(ADK_TARGET_ARCH)-prepare
 compile: $(ADK_TARGET_ARCH)-compile
 image: $(ADK_TARGET_ARCH)-imageclean $(ADK_TARGET_ARCH)-imageinstall
 targethelp: $(ADK_TARGET_ARCH)-targethelp
 install: $(ADK_TARGET_ARCH)-imageclean $(ADK_TARGET_ARCH)-install $(ADK_TARGET_ARCH)-imageinstall
 clean: $(ADK_TARGET_ARCH)-clean $(ADK_TARGET_ARCH)-imageclean
+endif
 
 %-clean:
 	$(START_TRACE) "target/$(patsubst %-clean,%,$@)-clean.. "

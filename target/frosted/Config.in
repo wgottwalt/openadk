@@ -1,0 +1,988 @@
+menu "Compiler options"
+    config FROSTED_GDB_CFLAG
+    bool "Keep debugging symbols"
+    default y
+
+    choice
+    prompt "Compiler optimization"
+        config FROSTED_OPTIMIZE_NONE
+        bool "No optimization"
+
+        config FROSTED_OPTIMIZE_SIZE
+        bool "Optimize for size"
+
+        config FROSTED_OPTIMIZE_PERF
+        bool "Optimize for performance"
+    endchoice
+
+
+endmenu
+
+
+menu "Platform Selection"
+
+    choice FROSTED_ARCH
+        prompt "Architecture"
+        default FROSTED_ARCH_LM3S
+
+        config FROSTED_ARCH_LM3S
+        bool "LM3S"
+        help
+            Enable support for Stellaris LM3S systems
+
+        config FROSTED_ARCH_LPC17XX
+        bool "LPC17XX"
+        help
+            Enable support for NXP LPC17xx systems
+
+        config FROSTED_ARCH_STM32F4
+        bool "STM32F4"
+        help
+            Enable support for ST STM32F4 systems
+
+        config FROSTED_ARCH_STM32F7
+        bool "STM32F7"
+        help
+            Enable support for ST STM32F7 systems
+    endchoice
+
+if FROSTED_ARCH_STM32F7
+
+choice 
+    prompt "MCU"
+    default FROSTED_ARCH_STM32F746_NG
+
+config FROSTED_ARCH_STM32F746_NG
+    bool "STM32F746NG 1MB"
+    select FROSTED_FLASH_SIZE_1MB
+    select FROSTED_RAM_SIZE_320KB
+    select FROSTED_ARCH_STM32F746
+
+config FROSTED_ARCH_STM32F769_NI
+    bool "STM32F769NI 2MB"
+    select FROSTED_FLASH_SIZE_2MB
+    select FROSTED_RAM_SIZE_368KB
+    select FROSTED_ARCH_STM32F769
+
+endchoice
+
+endif
+
+if FROSTED_ARCH_STM32F4
+
+choice 
+    prompt "MCU"
+    default FROSTED_ARCH_STM32F407_XG
+
+config FROSTED_ARCH_STM32F401_XB
+    bool "STM32F401xB 128KB"
+    select FROSTED_FLASH_SIZE_128KB
+    select FROSTED_RAM_SIZE_64KB
+    select FROSTED_ARCH_STM32F401
+config FROSTED_ARCH_STM32F401_XC
+    bool "STM32F401xC 256KB"
+    select FROSTED_FLASH_SIZE_256KB
+    select FROSTED_RAM_SIZE_64KB
+    select FROSTED_ARCH_STM32F401
+config FROSTED_ARCH_STM32F401_XD
+    bool "STM32F401xD 384KB"
+    select FROSTED_FLASH_SIZE_384KB
+    select FROSTED_RAM_SIZE_96KB
+    select FROSTED_ARCH_STM32F401
+config FROSTED_ARCH_STM32F401_XE
+    bool "STM32F401xE 512KB"
+    select FROSTED_FLASH_SIZE_512KB
+    select FROSTED_RAM_SIZE_96KB
+    select FROSTED_ARCH_STM32F401
+
+config FROSTED_ARCH_STM32F405_XG
+    bool "STM32F405xG 1MB"
+    select FROSTED_FLASH_SIZE_1MB
+    select FROSTED_RAM_SIZE_192KB
+    select FROSTED_ARCH_STM32F405
+config FROSTED_ARCH_STM32F405_XE
+    bool "STM32F407xE 512KB"
+    select FROSTED_FLASH_SIZE_512KB
+    select FROSTED_RAM_SIZE_192KB
+    select FROSTED_ARCH_STM32F405
+
+config FROSTED_ARCH_STM32F407_XG
+    bool "STM32F407xG 1MB"
+    select FROSTED_FLASH_SIZE_1MB
+    select FROSTED_RAM_SIZE_192KB
+    select FROSTED_ARCH_STM32F407
+config FROSTED_ARCH_STM32F407_XE
+    bool "STM32F407xE 512KB"
+    select FROSTED_FLASH_SIZE_512KB
+    select FROSTED_RAM_SIZE_192KB
+    select FROSTED_ARCH_STM32F407
+    
+config FROSTED_ARCH_STM32F411_XE
+    bool "STM32F411xE 512KB"
+    select FROSTED_FLASH_SIZE_512KB
+    select FROSTED_RAM_SIZE_128KB
+    select FROSTED_ARCH_STM32F411
+config FROSTED_ARCH_STM32F411_XC
+    bool "STM32F411xC 256KB"
+    select FROSTED_FLASH_SIZE_256KB
+    select FROSTED_RAM_SIZE_128KB
+    select FROSTED_ARCH_STM32F411
+
+config FROSTED_ARCH_STM32F429_XE
+    bool "STM32F429xE 512KB"
+    select FROSTED_FLASH_SIZE_512KB
+    select FROSTED_RAM_SIZE_256KB
+    select FROSTED_ARCH_STM32F429
+config FROSTED_ARCH_STM32F429_XG
+    bool "STM32F429xG 1MB"
+    select FROSTED_FLASH_SIZE_1MB
+    select FROSTED_RAM_SIZE_256KB
+    select FROSTED_ARCH_STM32F429
+config FROSTED_ARCH_STM32F429_XI
+    bool "STM32F429xI 2MB"
+    select FROSTED_FLASH_SIZE_2MB
+    select FROSTED_RAM_SIZE_256KB
+    select FROSTED_ARCH_STM32F429
+config FROSTED_ARCH_STM32F446_ZE
+    bool "STM32F446ZE 512KB"
+    select FROSTED_FLASH_SIZE_512KB
+    select FROSTED_RAM_SIZE_128KB
+    select FROSTED_ARCH_STM32F446
+endchoice
+
+endif
+
+if FROSTED_ARCH_LPC17XX
+
+choice 
+    prompt "MCU"
+    default FROSTED_ARCH_LPC1768
+config FROSTED_ARCH_LPC1763
+    bool "LPC1763"
+    select FROSTED_FLASH_SIZE_256KB
+    select FROSTED_RAM_SIZE_32KB
+    select FROSTED_CLK_100MHZ
+config FROSTED_ARCH_LPC1764
+    bool "LPC1764"
+    select FROSTED_FLASH_SIZE_128KB
+    select FROSTED_RAM_SIZE_16KB
+    select FROSTED_CLK_100MHZ
+config FROSTED_ARCH_LPC1765
+    bool "LPC1765"
+    select FROSTED_FLASH_SIZE_256KB
+    select FROSTED_RAM_SIZE_32KB
+    select FROSTED_CLK_100MHZ
+config FROSTED_ARCH_LPC1766
+    bool "LPC1766"
+    select FROSTED_FLASH_SIZE_256KB
+    select FROSTED_RAM_SIZE_32KB
+    select FROSTED_CLK_100MHZ
+config FROSTED_ARCH_LPC1767
+    bool "LPC1767"
+    select FROSTED_FLASH_SIZE_512KB
+    select FROSTED_RAM_SIZE_32KB
+    select FROSTED_CLK_100MHZ
+config FROSTED_ARCH_LPC1768
+    bool "LPC1768"
+    select FROSTED_FLASH_SIZE_512KB
+    select FROSTED_RAM_SIZE_32KB
+    select FROSTED_CLK_100MHZ
+config FROSTED_ARCH_LPC1769
+    bool "LPC1769"
+    select FROSTED_FLASH_SIZE_512KB
+    select FROSTED_RAM_SIZE_32KB
+endchoice
+
+endif
+
+if FROSTED_ARCH_LM3S
+
+choice 
+    prompt "MCU"
+    default FROSTED_LM3S6965
+config FROSTED_ARCH_LM3S6965
+    bool "LM3S6965"
+    select FROSTED_FLASH_SIZE_256KB
+    select FROSTED_RAM_SIZE_64KB
+config FROSTED_ARCH_LM3SVIRT
+    bool "LM3S-VIRTUAL"
+    select FROSTED_FLASH_SIZE_1MB
+    select FROSTED_RAM_SIZE_256KB
+endchoice
+
+endif
+
+    config FROSTED_FLASH_SIZE_2MB
+            bool
+    config FROSTED_FLASH_SIZE_1MB
+            bool
+    config FROSTED_FLASH_SIZE_512KB
+            bool
+    config FROSTED_FLASH_SIZE_384KB
+            bool
+    config FROSTED_FLASH_SIZE_256KB
+            bool
+    config FROSTED_FLASH_SIZE_128KB
+            bool
+
+    config FROSTED_RAM_SIZE_368KB
+            bool
+    config FROSTED_RAM_SIZE_320KB
+            bool
+    config FROSTED_RAM_SIZE_256KB
+            bool
+    config FROSTED_RAM_SIZE_192KB
+            bool
+    config FROSTED_RAM_SIZE_128KB
+            bool
+    config FROSTED_RAM_SIZE_96KB
+            bool
+    config FROSTED_RAM_SIZE_64KB
+            bool
+    config FROSTED_RAM_SIZE_32KB
+            bool
+    config FROSTED_RAM_SIZE_16KB
+            bool
+
+    config FROSTED_ARCH_STM32F401
+        bool
+    config FROSTED_ARCH_STM32F405
+        bool
+    config FROSTED_ARCH_STM32F407
+        bool
+    config FROSTED_ARCH_STM32F411
+        bool
+    config FROSTED_ARCH_STM32F429
+        bool
+    config FROSTED_ARCH_STM32F446
+        bool
+    config FROSTED_ARCH_STM32F746
+        bool
+    config FROSTED_ARCH_STM32F769
+        bool
+
+    config FROSTED_DEVSTM32DMA
+        bool
+
+    #Temp hack to allow '407 & '411 clock setups to coexist
+    choice
+        prompt "Clock Speed"
+        config FROSTED_CLK_48MHZ
+            bool "48MHz"
+            depends on (FROSTED_ARCH_STM32F401  || FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F429)
+        config FROSTED_CLK_84MHZ
+            bool "84MHz"
+            depends on (FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F429)
+        config FROSTED_CLK_100MHZ
+            bool "100MHz"
+            depends on FROSTED_ARCH_LPC17XX
+        config FROSTED_CLK_120MHZ
+            bool "120MHz"
+            depends on (FROSTED_ARCH_STM32F407 || FROSTED_ARCH_STM32F405 || FROSTED_ARCH_LPC1769)
+        config FROSTED_CLK_168MHZ
+            bool "168MHz"
+            depends on (FROSTED_ARCH_STM32F407 ||  FROSTED_ARCH_STM32F405 || FROSTED_ARCH_STM32F429)
+        config FROSTED_CLK_180MHZ
+            bool "180MHz"
+            depends on (FROSTED_ARCH_STM32F446)
+        config FROSTED_CLK_216MHZ
+            bool "216MHZ"
+            depends on (FROSTED_ARCH_STM32F746 || FROSTED_ARCH_STM32F769)
+    endchoice
+
+    choice
+        prompt "Board"
+        default FROSTED_MACH_STM32F407Discovery
+    config FROSTED_MACH_STM32F746Discovery
+        bool "STM32F746 Discovery"
+        depends on (FROSTED_ARCH_STM32F746)
+        default y
+    config FROSTED_MACH_STM32F769Discovery
+        bool "STM32F769 Discovery"
+        depends on (FROSTED_ARCH_STM32F769)
+        default y
+    config FROSTED_MACH_STM32F746Nucleo144
+        bool "STM32F746 Nucleo-144"
+        depends on (FROSTED_ARCH_STM32F746)
+        default y
+    config FROSTED_MACH_STM32F407Discovery
+        bool "STM32F407Discovery"
+        depends on (FROSTED_ARCH_STM32F407)
+        default y
+    config FROSTED_MACH_STM32F405Pyboard
+        bool "STM32F405 PyBoard (micropython)"
+        depends on (FROSTED_ARCH_STM32F405)
+        default y
+    config FROSTED_MACH_STM32F4x1Discovery
+        bool "STM32F4x1Discovery"
+        depends on (   FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411)
+        default y
+    config FROSTED_MACH_STM32F429Discovery
+        bool "STM32F429Discovery"
+        depends on (FROSTED_ARCH_STM32F429)
+        default y
+    config FROSTED_MACH_STM32F446Nucleo
+        bool "STM32F446 Nucleo"
+        depends on (FROSTED_ARCH_STM32F446)
+        default y
+
+    config FROSTED_MACH_LPC1768MBED
+        bool "LPC1768MBED"
+        depends on FROSTED_ARCH_LPC1768
+    config FROSTED_MACH_SEEEDPRO
+        bool "SEEEDPRO"
+        depends on FROSTED_ARCH_LPC1768
+        default y
+    config FROSTED_MACH_LPC1679XPRESSO
+        bool "LPC1679XPRESSO"
+        depends on FROSTED_ARCH_LPC1769
+        default y
+    config FROSTED_MACH_LM3S6965EVB
+        bool "lm3s6965evb"
+        depends on FROSTED_ARCH_LM3S6965
+        default y
+    config FROSTED_MACH_LM3SVIRT
+        bool "lm3s-qemu"
+        depends on FROSTED_ARCH_LM3SVIRT
+        default y
+
+    endchoice
+
+    config FROSTED_STM32F7_SDRAM
+    depends on FROSTED_ARCH_STM32F7
+    bool "Enable external SDRAM"
+    default y
+
+    config FROSTED_STM32F4_SDRAM
+    depends on FROSTED_ARCH_STM32F4
+    bool "Enable external SDRAM"
+    default n
+
+endmenu
+
+
+menu "Kernel Configuration"
+
+config FROSTED_KFLASHMEM_SIZE
+    int "Kernel Flash size (KB)"
+    default 64
+
+config FROSTED_KRAMMEM_SIZE
+    int "Kernel RAM size (KB)"
+    default 64
+
+choice
+prompt "Tasks Stack Size"
+default FROSTED_TASK_STACK_SIZE_2K
+
+   config FROSTED_TASK_STACK_SIZE_1K
+   bool "Tiny stack (1024 Bytes)"
+
+   config FROSTED_TASK_STACK_SIZE_2K
+   bool "Small stack (2048 Bytes)"
+
+   config FROSTED_TASK_STACK_SIZE_4K
+   bool "Big stack (4096 Bytes)"
+
+   config FROSTED_TASK_STACK_SIZE_8K
+   bool "Huge stack (8192 Bytes)"
+endchoice
+
+config FROSTED_MPU
+bool "Run-time Memory Protection"
+default y
+
+config FROSTED_PTHREADS
+bool "POSIX Threads (pthreads)"
+default y
+
+config FROSTED_SIGNALS
+bool "Process Signals"
+default y
+
+config FROSTED_PIPE
+bool "Pipe"
+default y
+
+config FROSTED_SOCK_UNIX
+bool "UNIX Sockets for IPC"
+default n
+
+
+endmenu
+
+
+
+menu "Debugging options"
+
+config FROSTED_KLOG
+    bool "Enable kernel logging"
+    default y
+
+config FROSTED_KLOG_SIZE
+    depends on FROSTED_KLOG
+    int "Kernel log buffer size"
+    default 256
+
+config FROSTED_MEMFAULT_DBG
+    bool "Enable extended segfault debug"
+    default y
+
+config FROSTED_HARDFAULT_DBG
+    bool "Enable extended hardfault debug"
+    default n
+
+config FROSTED_STRACE
+    bool "Enable syscall tracer"
+    default n
+
+endmenu
+
+
+menu "Filesystems"
+       config FROSTED_SYSFS
+       bool "SysFS (/sys)"
+       default y
+
+       config FROSTED_MEMFS
+       bool "MemFS"
+       default y
+
+       config FROSTED_XIPFS
+       bool "Xip FS"
+       default y
+
+       config FROSTED_FATFS
+       bool "Fat FS"
+       default n
+
+       config FROSTED_FAT32
+       depends on FROSTED_FATFS
+       bool "Fat32 support"
+       default n
+
+       config FROSTED_FAT16
+       depends on FROSTED_FATFS
+       bool "Fat16 support"
+       default y
+
+endmenu
+
+menu "Networking"
+       config FROSTED_SOCK_INET
+       bool "TCP/IP Socket support"
+       default n
+       config FROSTED_TCPIP_MEMPOOL_YN
+       bool "Separate memory pool for TCP/IP stack"
+       default n
+       if FROSTED_TCPIP_MEMPOOL_YN
+        config FROSTED_TCPIP_MEMPOOL
+        string "TCP/IP pool base address"
+        default "0x10000000"
+       endif
+       choice FROSTED_NET_STACK
+        prompt "TCP/IP stack selection"
+        default FROSTED_PICOTCP
+        depends on FROSTED_SOCK_INET
+
+        config FROSTED_PICOTCP
+        bool "Built-in PicoTCP"
+        default y
+       endchoice
+
+if FROSTED_PICOTCP 
+
+menu "picoTCP configuration"
+
+config FROSTED_CONFIG_PICOTCP_IPV4
+    bool "Support for IP version 4"
+    default y
+
+config FROSTED_CONFIG_PICOTCP_IPV6
+    bool "Support for IP version 6"
+    default n
+
+config FROSTED_CONFIG_PICOTCP_TCP
+    bool "Support for TCP"
+    default y
+
+config FROSTED_CONFIG_PICOTCP_UDP
+    bool "Support for UDP"
+    default y
+
+config FROSTED_CONFIG_PICOTCP_DNS
+    bool "Support for DNS client"
+    default y
+
+config FROSTED_CONFIG_PICOTCP_MCAST
+    bool "Support for Multicast"
+    default n
+
+config FROSTED_CONFIG_PICOTCP_NAT
+    bool "Support for NAT"
+    default n
+
+config FROSTED_CONFIG_PICOTCP_IPFILTER
+    bool "Support for IP Filter"
+    default n
+
+config FROSTED_CONFIG_PICOTCP_LOOP
+    bool "Support for loopback device"
+    default y
+
+config FROSTED_CONFIG_PICOTCP_DEBUG
+    bool "Activate debugging symbols"
+    default n
+
+endmenu
+endif
+
+endmenu
+
+menu "Device Drivers"
+       config FROSTED_DEVNULL
+       bool "Support for /dev/null and /dev/zero"
+       default y
+
+       menuconfig FROSTED_DEVUART
+       bool "Generic UART driver"
+       default y
+
+       if FROSTED_DEVUART
+
+            config FROSTED_USART_0
+            bool "USART 0"
+            depends on (FROSTED_ARCH_LM3S6965 || FROSTED_ARCH_LM3SVIRT)
+
+            config FROSTED_USART_1
+            bool "USART 1"
+            depends on (FROSTED_ARCH_LM3S6965 || FROSTED_ARCH_LM3SVIRT || \
+                        FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F405 || FROSTED_ARCH_STM32F407  || FROSTED_ARCH_STM32F429 || FROSTED_ARCH_STM32F446 || \
+                        FROSTED_ARCH_STM32F746 || FROSTED_ARCH_STM32F769)
+
+            config FROSTED_USART_2
+            bool "USART 2"
+            depends on (FROSTED_ARCH_LM3S6965 || FROSTED_ARCH_LM3SVIRT || \
+                        FROSTED_ARCH_STM32F401 || FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F405 || FROSTED_ARCH_STM32F429  || FROSTED_ARCH_STM32F407 || FROSTED_ARCH_STM32F446 || \
+                        FROSTED_ARCH_STM32F746 || FROSTED_ARCH_STM32F769 )
+
+            config FROSTED_USART_3
+            bool "USART 3"
+            depends on (FROSTED_ARCH_STM32F407 || FROSTED_ARCH_STM32F405 || FROSTED_ARCH_STM32F746 || FROSTED_ARCH_STM32F769 )
+
+            config FROSTED_USART_6
+            bool "USART 6"
+            depends on (FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F407 || FROSTED_ARCH_STM32F405 || FROSTED_ARCH_STM32F446 || \
+                        FROSTED_ARCH_STM32F746 || FROSTED_ARCH_STM32F769 )
+
+            config FROSTED_UART_0
+            bool "UART 0"
+            depends on FROSTED_ARCH_LPC17XX
+
+            config FROSTED_UART_1
+            bool "UART 1"
+            depends on FROSTED_ARCH_LPC17XX
+
+            config FROSTED_UART_2
+            bool "UART 2"
+            depends on FROSTED_ARCH_LPC17XX
+
+            config FROSTED_UART_3
+            bool "UART 3"
+            depends on FROSTED_ARCH_LPC17XX
+
+       endif
+
+       config FROSTED_DEVF4DSP
+       bool "STM32F4 Sound driver"
+       depends on (FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F407 || FROSTED_ARCH_STM32F405  || FROSTED_ARCH_STM32F429 || FROSTED_ARCH_STM32F446)
+       select FROSTED_DEVSTM32DMA
+       default n
+    
+       config FROSTED_DEVSTM32USB
+       bool
+       
+       menuconfig FROSTED_DEVSTM32USBFS
+       bool "Support for Full Speed USB OTG"
+       depends on (!FROSTED_DEVSTM32USBHFS) && (FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F407 || FROSTED_ARCH_STM32F405  || FROSTED_ARCH_STM32F429 || FROSTED_ARCH_STM32F446 || \
+                   FROSTED_ARCH_STM32F746)
+       default n
+       select FROSTED_DEVSTM32USB
+       if FROSTED_DEVSTM32USBFS
+          choice
+            prompt "USB FS OTG mode"
+            default FROSTED_USBFS_GUEST
+            config FROSTED_USBFS_HOST
+            bool "Host mode"
+
+            config FROSTED_USBFS_GUEST
+            bool "Device mode"
+
+          endchoice
+       endif
+
+       menuconfig FROSTED_DEVSTM32USBHS
+       bool "Support for High Speed USB OTG"
+       depends on (FROSTED_ARCH_STM32F746 || FROSTED_ARCH_STM32F769)
+       select FROSTED_DEVSTM32USB
+       default n
+       if FROSTED_DEVSTM32USBHS
+          choice
+            prompt "USB HS OTG mode"
+            default FROSTED_USBHS_GUEST
+            config FROSTED_USBHS_HOST
+            bool "Host mode"
+
+            config FROSTED_USBHS_GUEST
+            bool "Device mode"
+
+          endchoice
+
+        endif
+
+      config FROSTED_DEV_USB_ETH
+      depends on FROSTED_PICOTCP && ( (FROSTED_DEVSTM32USBHS && FROSTED_USBHS_GUEST) || (FROSTED_DEVSTM32USBFS && FROSTED_USBFS_GUEST) )
+      select FROSTED_DEVSTM32USB
+      bool "Ethernet over USB (CDC-ECM)"
+      default n
+
+      if FROSTED_DEV_USB_ETH
+      config FROSTED_USB_DEFAULT_IP
+      string "Default (boot-up) address for usb0"
+      default 192.168.6.150
+
+      config FROSTED_USB_DEFAULT_NM
+      string "Default (boot-up) netmask for usb0"
+      default 255.255.255.0
+
+      config FROSTED_USB_DEFAULT_GW
+      string "Default (boot-up) gateway for usb0"
+      default 192.168.6.1
+      endif
+
+
+       config FROSTED_DEVTIM
+       bool "System CPU timer on TIM2"
+       depends on (FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F407 || FROSTED_ARCH_STM32F405  || FROSTED_ARCH_STM32F429 || FROSTED_ARCH_STM32F446 || FROSTED_ARCH_STM32F746)
+       default n
+
+       config FROSTED_DEVADC
+       bool "Generic ADC driver"
+       depends on (FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F407 || FROSTED_ARCH_STM32F405  || FROSTED_ARCH_STM32F429 || FROSTED_ARCH_STM32F446)
+       select FROSTED_DEVSTM32DMA
+       default n
+
+
+       config FROSTED_DEVF4ETH
+       bool "STM32F4 Ethernet driver"
+       depends on ((FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F407 || FROSTED_ARCH_STM32F405  || FROSTED_ARCH_STM32F429 || FROSTED_ARCH_STM32F446) && FROSTED_PICOTCP)
+       default n
+
+       config FROSTED_DEVF7ETH
+       bool "STM32F7 Ethernet driver"
+       depends on ((FROSTED_ARCH_STM32F746 || FROSTED_ARCH_STM32F769) && FROSTED_PICOTCP)
+       default n
+
+       config FROSTED_DEVLM3SETH
+       bool "LM3S Ethernet driver"
+       depends on ((FROSTED_ARCH_LM3S) && FROSTED_PICOTCP)
+       default n
+
+       if FROSTED_DEVF4ETH || FROSTED_DEVF7ETH || FROSTED_DEVLM3SETH
+               config FROSTED_ETH_DEFAULT_IP
+               string "Default (boot-up) address for eth0"
+               default 192.168.2.150
+
+               config FROSTED_ETH_DEFAULT_NM
+               string "Default (boot-up) netmask for eth0"
+               default 255.255.255.0
+
+               config FROSTED_ETH_DEFAULT_GW
+               string "Default (boot-up) gateway for eth0"
+               default 192.168.2.1
+
+       endif
+
+       config FROSTED_DEVSTM32SDIO
+       bool "STM32F4 SD I/O driver"
+       depends on (FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F407 || FROSTED_ARCH_STM32F405  || FROSTED_ARCH_STM32F429 || FROSTED_ARCH_STM32F7|| FROSTED_ARCH_STM32F446)
+       default n
+
+       menuconfig FROSTED_DEVSTM32I2C
+       bool "STM32 I2C driver"
+       depends on (FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411 || FROSTED_ARCH_STM32F407 || FROSTED_ARCH_STM32F405  || FROSTED_ARCH_STM32F429 || FROSTED_ARCH_STM32F446 || FROSTED_ARCH_STM32F746)
+       select FROSTED_DEVSTM32DMA
+       default n
+
+
+           if FROSTED_DEVSTM32I2C
+                config FROSTED_I2C1
+                bool "I2C 1"
+                default n
+                config FROSTED_I2C2
+                bool "I2C 2"
+                default n
+                config FROSTED_I2C3
+                bool "I2C 3"
+                default y
+           endif
+
+           config FROSTED_DEVCS43L22
+           tristate "CS43L22 driver (Stereo DAC)"
+           depends on (FROSTED_DEVSTM32I2C)
+           default n
+
+
+           config FROSTED_DEVLSM303DLHC
+           tristate "LSM303DLHC driver (Accelerometer & Magnetometer)"
+           depends on (FROSTED_DEVSTM32I2C)
+           default n
+           
+           config FROSTED_DEVMCCOG21
+           tristate "MCCOG21 driver (2-lines B/W display)"
+           depends on (FROSTED_DEVSTM32I2C)
+           default n
+           
+           config FROSTED_DEVFT5336
+           tristate "FT5336 driver (Touchscreen STM32F746)"
+           depends on (FROSTED_DEVSTM32I2C)
+           default n
+
+           config FROSTED_DEVSTMPE811
+           tristate "STMPE811 driver (Touchscreen)"
+           depends on (FROSTED_DEVSTM32I2C)
+           default n
+
+
+
+       menuconfig FROSTED_DEVSPI
+           bool "Generic SPI driver"
+           depends on (FROSTED_ARCH_STM32F4 || FROSTED_ARCH_STM32F7)
+           select FROSTED_DEVSTM32DMA
+           default n
+
+           if FROSTED_DEVSPI
+                config FROSTED_SPI_1
+                bool "SPI 1"
+
+                config FROSTED_SPI_5
+                bool "SPI 5"
+
+           endif
+
+           config FROSTED_DEVLIS3DSH
+           tristate "LIS3DSH driver (3-Axis Accelerometer)"
+           depends on (FROSTED_DEVSPI)
+           default n
+
+           config FROSTED_DEVILI9341
+           tristate "ILI9341 driver (LCD Controller)"
+           depends on (FROSTED_DEVSPI)
+           default n
+
+           config FROSTED_DEVL3GD20
+           tristate "L3GD20 driver (Gyro)"
+           depends on (FROSTED_DEVSPI)
+           default n
+
+       config FROSTED_DEV_RANDOM
+       depends on (FROSTED_ARCH_STM32F4 || FROSTED_ARCH_STM32F7)
+       bool "STM32F2/F4/F7 Random devices"
+       default n
+
+       if FROSTED_DEV_RANDOM
+          choice
+            prompt "Random device selection"
+            config FROSTED_DEVRNG
+            bool "Hardware TRNG driver"
+
+            config FROSTED_DEVFRAND
+            bool "Fortuna PRNG device"
+          endchoice
+       endif
+
+       menuconfig FROSTED_DEVFRAMEBUFFER
+           depends on (FROSTED_ARCH_STM32F7 || FROSTED_ARCH_STM32F4)
+           bool "STM32 Framebuffer driver"
+           default y
+
+       config FROSTED_DEVFBCON
+           depends on FROSTED_DEVFRAMEBUFFER
+           bool "Console on Framebuffer via /dev/fbcon"
+           default y
+
+       config FROSTED_DEVF7DISCOLTDC
+           depends on FROSTED_DEVFRAMEBUFFER
+           bool "F746 Discovery LTDC"
+           default y
+
+endmenu
+
+menu "Power Management"
+    if FROSTED_DEVTIM
+        config FROSTED_LOWPOWER
+        bool "Enable low-power optimizations"
+        default n
+        config FROSTED_TICKLESS
+        bool "Disable systick in between process switches (untested)"
+        default n
+    endif
+    if !FROSTED_DEVTIM
+        comment "Power Management requires CPU Timer support"
+    endif
+endmenu
+
+menu "Libraries"
+    config FROSTED_LIB_WOLFSSL
+    bool "WolfSSL TLS + Encryption"
+    default n
+
+    config FROSTED_LIB_MONGOOSE
+    bool "Cesanta's Mongoose REST API library"
+    default n
+
+endmenu
+
+menu "Applications"
+
+menu "Base binary utils"
+config FROSTED_APP_INIT
+bool "init: main task"
+default y
+
+config FROSTED_APP_IDLING
+bool "idling: flashing leds"
+default y
+
+config FROSTED_APP_FRESH
+bool "fresh: Frosted shell"
+default y
+
+config FROSTED_APP_CAT
+    bool "cat"
+
+config FROSTED_APP_ECHO
+    bool "echo"
+config FROSTED_APP_LS
+    bool "ls"
+config FROSTED_APP_TOUCH
+    bool "touch"
+config FROSTED_APP_RM
+    bool "rm"
+config FROSTED_APP_KILL
+    bool "kill"
+config FROSTED_APP_TRUE
+    bool "true"
+config FROSTED_APP_FALSE
+    bool "false"
+config FROSTED_APP_LN
+    bool "ln"
+config FROSTED_APP_DIRNAME
+    bool "dirname"
+config FROSTED_APP_MKDIR
+    bool "mkdir"
+config FROSTED_APP_MOUNT
+    bool "mount"
+config FROSTED_APP_PLAY
+    bool "play"
+config FROSTED_APP_WC
+    bool "wc"
+config FROSTED_APP_HEAD
+    bool "head"
+config FROSTED_APP_TAIL
+    bool "tail"
+config FROSTED_APP_YES
+    bool "yes"
+config FROSTED_APP_SLEEP
+    bool "sleep"
+config FROSTED_APP_UPTIME
+    bool "uptime"
+config FROSTED_APP_KLOGD
+    bool "klogd"
+config FROSTED_APP_GDBSERVER
+    bool "gdbserver"
+config FROSTED_APP_REBOOT
+    bool "reboot"
+config FROSTED_APP_RENICE
+    bool "renice"
+config FROSTED_APP_CUT
+    bool "cut"
+config FROSTED_APP_GREP
+    bool "grep"
+config FROSTED_APP_KILO
+    bool "kilo (text editor)"
+config FROSTED_APP_POWERCTL
+    bool "Remote power control (powerctl)"
+config FROSTED_APP_PTHREADS
+    bool "Pthreads test (pthreads)"
+config FROSTED_APP_SEM
+    bool "Semaphore test(sem)"
+config FROSTED_APP_DATE
+    bool "date"
+endmenu
+
+menu "Networking utils"
+config FROSTED_APP_IFCONFIG
+    bool "ifconfig"
+config FROSTED_APP_ROUTE
+    bool "route"
+config FROSTED_APP_PING
+    bool "ping"
+config FROSTED_APP_HOST
+    bool "host"
+config FROSTED_APP_TELNETD
+    bool "telnetd"
+config FROSTED_APP_NETCAT
+    bool "netcat"
+config FROSTED_APP_HTTPD
+    bool "httpd"
+    depends on LIB_MONGOOSE
+config FROSTED_APP_SSHD
+    bool "sshd"
+    depends on LIB_WOLFSSL
+config FROSTED_APP_NTPC
+    bool "ntpc"
+config FROSTED_APP_STARWARS
+    bool "starwars"
+endmenu
+
+menu "Interpreters"
+config FROSTED_APP_PYTHON
+    bool "python interpreter (micropython)"
+endmenu
+
+
+menu "Hardware utils"
+config FROSTED_APP_BUSYLOOP
+    bool "busyloop - CPU busy test"
+config FROSTED_APP_MORSE
+    bool "Morse led blinker"
+config FROSTED_APP_RANDOM
+    bool "Random number generator"
+config FROSTED_APP_SENSOR
+    bool "Test for sensors (obsolete)"
+config FROSTED_APP_FBTEST
+    bool "Test for framebuffer"
+config FROSTED_APP_FBCTL
+    bool "fbctl (screen on/off utility)"
+config FROSTED_APP_GPIOCTL
+    bool "gpioctl - Tools to set up GPIOs"
+config FROSTED_APP_LATENCY
+    bool "process latency measurement"
+config FROSTED_APP_ACC
+    bool "Accelerometer tool (acc)"
+endmenu
+
+menu "Games"
+config FROSTED_APP_DOOM
+    bool "ID Software's DOOM"
+config FROSTED_APP_DICE
+    bool "Roll the dice"
+config FROSTED_APP_BYTEBEAT
+    bool "sample bytebeat"
+config FROSTED_APP_GROOVY
+    bool "groovy - bytebeat positional generator"
+endmenu
+
+endmenu
+

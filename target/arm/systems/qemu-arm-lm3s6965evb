@@ -1,0 +1,10 @@
+config ADK_TARGET_SYSTEM_QEMU_ARM_LM3S6965EVB
+	bool "Qemu Emulator (lm3s6965evb) no MMU"
+	depends on ADK_TARGET_OS_FROSTED
+	depends on ADK_TARGET_LITTLE_ENDIAN
+	select ADK_TARGET_CPU_ARM_CORTEX_M3
+	select ADK_TARGET_ARCH_ARM_WITH_THUMB
+	select ADK_TARGET_QEMU
+	help
+	  Qemu Emulator for ARM architecture (lm3s6965evb) without MMU.
+

@@ -85,7 +85,11 @@ ifeq ($(ADK_TARGET_ARCH_CSKY),y)
 GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-unknown-$(ADK_TARGET_LINUXTYPE)
 endif
 ifeq ($(ADK_TARGET_LIB_NEWLIB),y)
+ifeq ($(ADK_TARGET_OS_FROSTED),y)
+GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-frosted-$(ADK_TARGET_SUFFIX)
+else
 GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_TARGET_SUFFIX)
+endif
 endif
 TARGET_CROSS:=		$(TOOLCHAIN_DIR)/usr/bin/$(GNU_TARGET_NAME)-
 TARGET_COMPILER_PREFIX?=${TARGET_CROSS}
@@ -233,6 +237,11 @@ endif
 # performance optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
 ifneq ($(ADK_TARGET_USE_GNU_HASHSTYLE),)
 TARGET_LDFLAGS+=	-Wl,--hash-style=gnu
+endif
+
+# special operating system flags
+ifeq ($(ADK_TARGET_OS_FROSTED),y)
+TARGET_CFLAGS+=         -mlong-calls -fno-common -msingle-pic-base -mno-pic-data-is-text-relative
 endif
 
 # special architecture optimization flags

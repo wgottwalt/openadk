@@ -9,6 +9,11 @@ config ADK_TARGET_OS_LINUX
 	help
 	  Create a Linux system or toolchain.
 
+config ADK_TARGET_OS_FROSTED
+	bool "Frosted"
+	help
+	  Create a frosted appliance or toolchain.
+
 config ADK_TARGET_OS_BAREMETAL
 	bool "Bare metal"
 	help
