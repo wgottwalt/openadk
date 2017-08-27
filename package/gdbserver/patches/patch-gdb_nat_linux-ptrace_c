@@ -1,0 +1,11 @@
+--- gdb-8.0.orig/gdb/nat/linux-ptrace.c	2017-06-04 17:51:27.000000000 +0200
++++ gdb-8.0/gdb/nat/linux-ptrace.c	2017-08-05 03:34:56.803914716 +0200
+@@ -272,7 +272,7 @@ linux_fork_to_function (gdb_byte *child_
+ #define STACK_SIZE 4096
+ 
+     if (child_stack == NULL)
+-      child_stack = xmalloc (STACK_SIZE * 4);
++      child_stack = (gdb_byte*) xmalloc (STACK_SIZE * 4);
+ 
+     /* Use CLONE_VM instead of fork, to support uClinux (no MMU).  */
+ #ifdef __ia64__
