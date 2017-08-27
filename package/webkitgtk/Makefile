@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		webkitgtk
-PKG_VERSION:=		2.16.5
+PKG_VERSION:=		2.16.6
 PKG_RELEASE:=		1
-PKG_HASH:=		8e0396f3428e757898c5856e642eed4fcd5a20ae03d96d3eaa03b76634be7dd4
+PKG_HASH:=		fc23650df953123c59b9c0edf3855e7bd55bd107820997fc72375811e1ea4b21
 PKG_DESCR:=		web browser engine
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		glib icu4c zlib libwebp libgtk3 libsoup
@@ -20,15 +20,13 @@ PKG_URL:=		http://www.webkitgtk.org/
 PKG_SITES:=		http://webkitgtk.org/releases/
 PKG_OPTS:=		dev
 
-PKG_ARCH_DEPENDS:=	!mips
-
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,WEBKITGTK,webkitgtk,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
 WRKBUILD=               $(WRKDIR)/$(PKG_NAME)-obj
-TARGET_CXXFLAGS+=	-D__STDC_LIMIT_MACROS -D__STDC_FORMAT_MACROS
 XAKE_FLAGS+=		VERBOSE=1
+TARGET_CXXFLAGS+=	-D__STDC_LIMIT_MACROS -D__STDC_FORMAT_MACROS
 
 CONFIG_STYLE:=		cmake
 CMAKE_FLAGS+= 		-DPORT=GTK \
