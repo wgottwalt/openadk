@@ -14,7 +14,7 @@ PKG_SITES:=		${MASTER_SITE_GNU:=glibc/}
 PKG_HASH:=		e54e0a934cd2bc94429be79da5e9385898d2306b9eaf3c92d5a77af96190f6bd
 endif
 ifeq ($(ADK_TARGET_LIB_GLIBC_RISCV),y)
-PKG_VERSION:=		riscv-next
+PKG_VERSION:=		riscv-glibc-2.26
 PKG_RELEASE:=		1
 PKG_GIT:=		branch
 PKG_SITES:=		https://github.com/riscv/riscv-glibc.git
