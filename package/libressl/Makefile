@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libressl
 PKG_VERSION:=		2.5.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		e57f5e3d5842a81fe9351b6e817fcaf0a749ca4ef35a91465edba9e071dce7c4
 PKG_DESCR:=		ssl/tls library
 PKG_SECTION:=		libs/crypto
@@ -39,6 +39,8 @@ libressl-install:
 		$(IDIR_LIBRESSL)/usr/lib
 
 libressl-util-install:
+	${INSTALL_DIR} ${IDIR_LIBRESSL_UTIL}/etc/ssl
+	${CP} ${WRKINST}/etc/ssl/openssl.cnf ${IDIR_LIBRESSL_UTIL}/etc/ssl
 	${INSTALL_DIR} ${IDIR_LIBRESSL_UTIL}/usr/bin
 	${CP} ${WRKINST}/usr/bin/openssl ${IDIR_LIBRESSL_UTIL}/usr/bin
 
