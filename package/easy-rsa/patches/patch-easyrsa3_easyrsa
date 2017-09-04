@@ -1,0 +1,11 @@
+--- easy-rsa-3.0.3.orig/easyrsa3/easyrsa	2017-08-22 14:51:05.000000000 +0200
++++ easy-rsa-3.0.3/easyrsa3/easyrsa	2017-08-28 20:00:34.033564692 +0200
+@@ -1043,7 +1043,7 @@ Note: using Easy-RSA configuration from:
+ 	# Set defaults, preferring existing env-vars if present
+ 	set_var EASYRSA		"${0%/*}"
+ 	set_var EASYRSA_OPENSSL	openssl
+-	set_var EASYRSA_PKI	"$PWD/pki"
++	set_var EASYRSA_PKI	"/etc/pki"
+ 	set_var EASYRSA_DN	cn_only
+ 	set_var EASYRSA_REQ_COUNTRY	"US"
+ 	set_var EASYRSA_REQ_PROVINCE	"California"

@@ -4,15 +4,18 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		easy-rsa
-PKG_VERSION:=		2.0.2
+PKG_VERSION:=		3.0.3
 PKG_RELEASE:=		1
-PKG_HASH:=		40a1800d8cf4e858d4b3cdc3d3c612747edcd18ecaeb6b8737f452092760e50c
+PKG_HASH:=		3e41c0dfebe04332cdc07f13bf48a69e25dfc31d059e94071a9cfb9f3bba6f9a
 PKG_DESCR:=		x509 ca scripts
 PKG_SECTION:=		app/crypto
+PKG_DEPENDS:=		libressl-util
 PKG_URL:=		https://github.com/OpenVPN/easy-rsa
-PKG_SITES:=		http://distfiles.openadk.org/
+PKG_SITES:=		https://github.com/OpenVPN/easy-rsa/archive/
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+PKG_CFLINE_EASY_RSA:=	depends on ADK_BROKEN
+
+DISTFILES:=		v${PKG_VERSION}.tar.gz
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -23,15 +26,10 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 easy-rsa-install:
-	${INSTALL_DIR} $(IDIR_EASY_RSA)/usr/sbin \
-		$(IDIR_EASY_RSA)/etc/easy-rsa/keys
-	touch $(IDIR_EASY_RSA)/etc/easy-rsa/keys/index.txt
-	$(CP) ./files/serial $(IDIR_EASY_RSA)/etc/easy-rsa/keys
-	$(CP) $(WRKBUILD)/easy-rsa/2.0/{build-*,clean-all,inherit-inter,list-crl,pkitool,revoke-full,sign-req,whichopensslcnf} \
+	${INSTALL_DIR} $(IDIR_EASY_RSA)/usr/sbin
+	$(CP) $(WRKBUILD)/easyrsa3/openssl-1.0.cnf \
 		$(IDIR_EASY_RSA)/usr/sbin
-	${INSTALL_DATA} $(WRKBUILD)/easy-rsa/2.0/openssl-1.0.0.cnf \
-		$(IDIR_EASY_RSA)/etc/easy-rsa/openssl.cnf
-	${INSTALL_DATA} $(WRKBUILD)/easy-rsa/2.0/vars \
-		$(IDIR_EASY_RSA)/etc/easy-rsa/vars
+	$(CP) $(WRKBUILD)/easyrsa3/easyrsa \
+		$(IDIR_EASY_RSA)/usr/sbin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
