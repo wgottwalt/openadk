@@ -180,7 +180,7 @@ TARGET_CXXFLAGS+=	-m$(ADK_TARGET_FLOAT)-float
 endif
 endif
 
-ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
+ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_OS_FROSTED),y)
 TARGET_LDFLAGS+=	-Wl,-elf2flt
 TARGET_CFLAGS+=		-Wl,-elf2flt
 TARGET_CXXFLAGS+=	-Wl,-elf2flt
@@ -241,7 +241,7 @@ endif
 
 # special operating system flags
 ifeq ($(ADK_TARGET_OS_FROSTED),y)
-TARGET_CFLAGS+=         -mlong-calls -fno-common -msingle-pic-base -mno-pic-data-is-text-relative
+TARGET_CFLAGS+=         -fPIC -mlong-calls -fno-common -msingle-pic-base -mno-pic-data-is-text-relative
 endif
 
 # special architecture optimization flags

@@ -15,6 +15,7 @@ NEWLIB_CONFIGURE_ARGS+=	--enable-newlib-fvwrite-in-streamio=no \
 			--enable-newlib-fseek-optimization=no \
 			--enable-newlib_wide_orient=no \
 			--enable-newlib-unbuf-stream-opt=yes
+TARGET_CFLAGS+="-DREENTRANT_SYSCALLS_PROVIDED"
 endif
 	
 
@@ -23,6 +24,7 @@ $(WRKBUILD)/.configured:
 		CC='' \
 		CFLAGS='' \
 		LDFLAGS='' \
+		CFLAGS_FOR_TARGET='$(TARGET_CFLAGS)' \
 		./configure --prefix=/usr \
 		--target=$(GNU_TARGET_NAME) \
 		--disable-nls \
@@ -33,14 +35,16 @@ $(WRKBUILD)/.configured:
 $(WRKBUILD)/.compiled:
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		CC='' \
-		CFLAGS='$(TARGET_CFLAGS)' \
+		CFLAGS='' \
+		CFLAGS_FOR_TARGET='$(TARGET_CFLAGS)' \
 		all
 	touch $@
 
 $(WRKBUILD)/.installed: $(WRKBUILD)/.compiled
 	PATH='$(HOST_PATH)' $(MAKE) -C $(WRKBUILD) \
 		CC='' \
-		CFLAGS='$(TARGET_CFLAGS)' \
+		CFLAGS='' \
+		CFLAGS_FOR_TARGET='$(TARGET_CFLAGS)' \
 		DESTDIR=$(STAGING_TARGET_DIR) \
 		install
 	touch $@

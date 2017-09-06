@@ -292,39 +292,30 @@ endif
 
     choice
         prompt "Board"
-        default FROSTED_MACH_STM32F407Discovery
     config FROSTED_MACH_STM32F746Discovery
         bool "STM32F746 Discovery"
         depends on (FROSTED_ARCH_STM32F746)
-        default y
     config FROSTED_MACH_STM32F769Discovery
         bool "STM32F769 Discovery"
         depends on (FROSTED_ARCH_STM32F769)
-        default y
     config FROSTED_MACH_STM32F746Nucleo144
         bool "STM32F746 Nucleo-144"
         depends on (FROSTED_ARCH_STM32F746)
-        default y
     config FROSTED_MACH_STM32F407Discovery
         bool "STM32F407Discovery"
         depends on (FROSTED_ARCH_STM32F407)
-        default y
     config FROSTED_MACH_STM32F405Pyboard
         bool "STM32F405 PyBoard (micropython)"
         depends on (FROSTED_ARCH_STM32F405)
-        default y
     config FROSTED_MACH_STM32F4x1Discovery
         bool "STM32F4x1Discovery"
         depends on (   FROSTED_ARCH_STM32F401 ||FROSTED_ARCH_STM32F411)
-        default y
     config FROSTED_MACH_STM32F429Discovery
         bool "STM32F429Discovery"
         depends on (FROSTED_ARCH_STM32F429)
-        default y
     config FROSTED_MACH_STM32F446Nucleo
         bool "STM32F446 Nucleo"
         depends on (FROSTED_ARCH_STM32F446)
-        default y
 
     config FROSTED_MACH_LPC1768MBED
         bool "LPC1768MBED"
@@ -332,19 +323,15 @@ endif
     config FROSTED_MACH_SEEEDPRO
         bool "SEEEDPRO"
         depends on FROSTED_ARCH_LPC1768
-        default y
     config FROSTED_MACH_LPC1679XPRESSO
         bool "LPC1679XPRESSO"
         depends on FROSTED_ARCH_LPC1769
-        default y
     config FROSTED_MACH_LM3S6965EVB
         bool "lm3s6965evb"
         depends on FROSTED_ARCH_LM3S6965
-        default y
     config FROSTED_MACH_LM3SVIRT
         bool "lm3s-qemu"
         depends on FROSTED_ARCH_LM3SVIRT
-        default y
 
     endchoice
 
@@ -487,7 +474,6 @@ menu "Networking"
 
         config FROSTED_PICOTCP
         bool "Built-in PicoTCP"
-        default y
        endchoice
 
 if FROSTED_PICOTCP 

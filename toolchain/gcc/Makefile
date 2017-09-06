@@ -51,10 +51,6 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-werror \
 			--disable-nls
 
-ifeq ($(ADK_TARGET_LIB_NEWLIB),y)
-GCC_FINAL_CONFOPTS:=	--with-newlib
-endif
-
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 GCC_FINAL_CONFOPTS:=	--enable-tls --enable-threads --enable-libatomic
 GCC_TLS_CONFOPTS:=	--enable-tls
@@ -68,7 +64,11 @@ GCC_FINAL_CONFOPTS:=	--disable-tls --disable-threads --disable-libatomic
 GCC_TLS_CONFOPTS:=	--disable-tls
 endif
 
-ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
+ifeq ($(ADK_TARGET_LIB_NEWLIB),y)
+GCC_FINAL_CONFOPTS+=	--with-newlib
+endif
+
+ifeq ($(ADK_TARGET_OS_FROSTED)$(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 GCC_FINAL_CONFOPTS+=	--disable-shared
 else
 GCC_FINAL_CONFOPTS+=	--enable-shared --enable-cxx-flags='-fPIC'
