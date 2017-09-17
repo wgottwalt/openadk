@@ -8,6 +8,32 @@ menu "Block devices support"
 depends on ADK_TARGET_WITH_BLOCK \
 	|| ADK_TARGET_GENERIC
 
+config ADK_KERNEL_IOSCHED_DEADLINE
+	bool
+
+config ADK_KERNEL_IOSCHED_CFQ
+	bool
+
+config ADK_KERNEL_IOSCHED_NOOP
+	bool
+
+choice
+prompt "I/O scheduler"
+
+config ADK_KERNEL_DEFAULT_DEADLINE
+	bool "deadline"
+	select ADK_KERNEL_IOSCHED_DEADLINE
+
+config ADK_KERNEL_DEFAULT_CFQ
+	bool "cfq"
+	select ADK_KERNEL_IOSCHED_CFQ
+
+config ADK_KERNEL_DEFAULT_NOOP
+	bool "noop"
+	select ADK_KERNEL_IOSCHED_NOOP
+
+endchoice
+
 config ADK_KERNEL_IDE
 	bool
 
