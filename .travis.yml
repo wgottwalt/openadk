@@ -9,6 +9,7 @@ git:
   depth: 3
 matrix:
   include:
+  - env: ARCH=arm SYSTEM=qemu-arm-vexpress-a9
   - env: ARCH=arm SYSTEM=linksys-nslu2 ENDIAN=big
   - env: ARCH=arm SYSTEM=raspberry-pi
   - env: ARCH=arm SYSTEM=raspberry-pi2
@@ -16,6 +17,7 @@ matrix:
   - env: ARCH=arm SYSTEM=beaglebone-black
   - env: ARCH=avr32 SYSTEM=atmel-ngw100
   - env: ARCH=avr32 SYSTEM=grasshopper
+  - env: ARCH=cris SYSTEM=qemu-cris
   - env: ARCH=cris SYSTEM=foxboard-lx832
   - env: ARCH=m68k SYSTEM=aranym-m68k
   - env: ARCH=mips SYSTEM=imgtec-ci20
