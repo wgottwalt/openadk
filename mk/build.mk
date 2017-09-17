@@ -420,7 +420,7 @@ defconfig: .menu $(CONFIG)/conf
 	fi
 	@if [ ! -z "$(ADK_TARGET_ARCH)" ];then \
 		grep "^config" target/config/Config.in.arch.choice \
-			|grep -i "_$(ADK_TARGET_ARCH)$$" \
+			|grep -i "$(ADK_TARGET_OS)_ARCH_$(ADK_TARGET_ARCH)$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			 >> $(ADK_TOPDIR)/.defconfig; \
 	fi
