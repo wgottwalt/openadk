@@ -23,7 +23,6 @@ $(eval $(call PKG_template,GLIBC,glibc,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPEN
 $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 $(eval $(call PKG_template,GLIBC_GCONV,glibc-gconv,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_GLIBC_GCONV},${PKGSD_GLIBC_GCONV},${PKG_SECTION},${PKG_OPTS}))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
                         BUILD_CC=${CC_FOR_BUILD} \
                         CFLAGS="$(TARGET_CFLAGS)" \
@@ -32,7 +31,6 @@ GLIBC_ENV:=             PATH='${TARGET_PATH}' \
                         CXX="${TARGET_CXX}" \
                         AR="${TARGET_AR}" \
                         RANLIB="${TARGET_RANLIB}" \
-			GCC_HONOUR_COPTS=s \
                         libc_cv_forced_unwind=yes \
 			libc_cv_cc_with_libunwind=yes \
                         libc_cv_c_cleanup=yes \
@@ -116,7 +114,7 @@ endif
 			--with-sysroot=$(IDIR_GLIBC_DEV) \
 			${GLIBC_CONFOPTS} \
 	);
-	$(GLIBC_ENV) $(MAKE) -C $(WRKBUILD) GCC_HONOUR_COPTS=s cross-compiling=yes install-headers
+	$(GLIBC_ENV) $(MAKE) -C $(WRKBUILD) cross-compiling=yes install-headers
 	touch $(IDIR_GLIBC_DEV)/usr/include/gnu/stubs.h
 	touch $(IDIR_GLIBC_DEV)/usr/include/gnu/stubs-{32,x32,64}.h
 	touch $(IDIR_GLIBC_DEV)/usr/include/bits/stdio_lim.h

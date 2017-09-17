@@ -74,9 +74,6 @@ CONFIGURE_ARGS+=	--host=$(GNU_TARGET_NAME) \
 			--enable-dependency-tracking \
 			--enable-cxx-flags="${TARGET_LDFLAGS}"
 
-# disable honour cflags stuff
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
-
 pre-configure:
 	$(SED) 's@\./fixinc\.sh@-c true@' $(WRKSRC)/gcc/Makefile.in
 	$(SED) 's/install_to_$$(INSTALL_DEST) //' ${WRKSRC}/libiberty/Makefile.in

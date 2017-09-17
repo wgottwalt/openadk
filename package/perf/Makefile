@@ -28,11 +28,11 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-build:
-	$(KERNEL_MAKE_ENV) GCC_HONOUR_COPTS=0 $(MAKE) -C "${LINUX_DIR}" \
+	$(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" \
 		$(KERNEL_MAKE_OPTS) WERROR=0 -C "$(LINUX_DIR)/tools/perf" all
 
 do-install:
-	$(KERNEL_MAKE_ENV) GCC_HONOUR_COPTS=0 $(MAKE) -C "${LINUX_DIR}" \
+	$(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" \
 		$(KERNEL_MAKE_OPTS) WERROR=0 -C "$(LINUX_DIR)/tools/perf" \
 		prefix="$(WRKINST)" install
 

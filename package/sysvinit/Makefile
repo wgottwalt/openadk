@@ -19,7 +19,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,SYSVINIT,sysvinit,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 CONFIG_STYLE:=		manual
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 FAKE_FLAGS+=		ROOT='$(WRKINST)'
 
 sysvinit-install:

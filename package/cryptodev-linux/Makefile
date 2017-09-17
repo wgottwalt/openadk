@@ -28,9 +28,9 @@ BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 do-build:
-	GCC_HONOUR_COPTS=s ${MAKE} -C "${WRKBUILD}"/tests check
+	${MAKE} -C "${WRKBUILD}"/tests check
 	${MAKE} -C "${WRKBUILD}" version.h
-	GCC_HONOUR_COPTS=0 LDFLAGS="" ${MAKE} -C ${LINUX_DIR} ${KERNEL_MAKE_OPTS} M="${WRKBUILD}" modules
+	LDFLAGS="" ${MAKE} -C ${LINUX_DIR} ${KERNEL_MAKE_OPTS} M="${WRKBUILD}" modules
 	${INSTALL_DIR} ${WRKINST}/usr/include/crypto
 	${INSTALL_DATA} ${WRKBUILD}/crypto/cryptodev.h \
 		${WRKINST}/usr/include/crypto/

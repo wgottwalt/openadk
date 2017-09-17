@@ -22,8 +22,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,ARCBOOT,arcboot,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s \
-			E2FSINCLUDEDIR='$(STAGING_TARGET_DIR)/usr/include/ext2fs' \
+XAKE_FLAGS+=		E2FSINCLUDEDIR='$(STAGING_TARGET_DIR)/usr/include/ext2fs' \
 			EXT2LIB='$(STAGING_TARGET_DIR)/usr/lib/libext2fs.a'
 
 CONFIG_STYLE:=		manual

@@ -65,12 +65,6 @@ TARGET_PATH=		${SCRIPT_DIR}:${STAGING_TARGET_DIR}/scripts:${TOOLCHAIN_DIR}/usr/b
 HOST_PATH=		${SCRIPT_DIR}:${TOOLCHAIN_DIR}/usr/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_HOST_DIR}/usr/sbin:${_PATH}
 AUTOTOOL_PATH=		${TOOLCHAIN_DIR}/usr/bin:${STAGING_HOST_DIR}/usr/bin:${STAGING_TARGET_DIR}/scripts:${_PATH}
 
-ifeq ($(ADK_DISABLE_HONOUR_CFLAGS),)
-GCC_CHECK:=		GCC_HONOUR_COPTS=2
-else
-GCC_CHECK:=
-endif
-
 ifeq ($(ADK_TARGET_UCLINUX),y)
 ADK_TARGET_LINUXTYPE:=	uclinux
 else
@@ -138,13 +132,6 @@ TARGET_CXXFLAGS:=	-fwrapv -fno-ident
 TARGET_LDFLAGS:=	-L$(STAGING_TARGET_DIR)/lib -L$(STAGING_TARGET_DIR)/usr/lib \
 			-Wl,-O1 -Wl,-rpath -Wl,/usr/lib \
 			-Wl,-rpath-link -Wl,${STAGING_TARGET_DIR}/usr/lib
-
-ifeq ($(ADK_BUILD_COMPILER_GCC),y)
-ifeq ($(ADK_DISABLE_HONOUR_CFLAGS),)
-TARGET_CFLAGS+=		-fhonour-copts
-TARGET_CXXFLAGS+=	-fhonour-copts
-endif
-endif
 
 # for architectures where gcc --with-cpu matches -mcpu=
 ifneq ($(ADK_TARGET_GCC_CPU),)
@@ -335,12 +322,6 @@ KERNEL_MODULE_FLAGS:=	ARCH=${ADK_TARGET_KARCH} \
 			KERNEL_DIR=${LINUX_DIR} \
 			CROSS_COMPILE="${TARGET_CROSS}" \
 			V=1
-
-ifeq ($(ADK_BUILD_COMPILER_GCC),y)
-ifeq ($(ADK_DISABLE_HONOUR_CFLAGS),)
-KERNEL_MODULE_FLAGS+=	CFLAGS_MODULE="-fhonour-copts"
-endif
-endif
 
 COMMON_ENV=		CONFIG_SHELL='$(strip ${SHELL})' \
 			AUTOM4TE='${STAGING_HOST_DIR}/usr/bin/autom4te' \

@@ -41,8 +41,6 @@ CONFIGURE_ARGS+=	--disable-werror \
 			--disable-install-libiberty \
 			--host=$(GNU_TARGET_NAME) \
 			--target=$(GNU_TARGET_NAME)
-# disable honour cflags stuff
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 libbfd-install:
 	${INSTALL_DIR} ${IDIR_LIBBFD}/usr/lib

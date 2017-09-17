@@ -39,7 +39,6 @@ $(eval $(call PKG_template,NFS_UTILS,nfs-utils,${PKG_VERSION}-${PKG_RELEASE},${P
 $(eval $(call PKG_template,NFS_UTILS_CLIENT,nfs-utils-client,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_CLIENT},${PKGSD_NFS_UTILS_CLIENT},${PKG_SECTION}))
 $(eval $(call PKG_template,NFS_UTILS_SERVER,nfs-utils-server,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_NFS_UTILS_SERVER},${PKGSD_NFS_UTILS_SERVER},${PKG_SECTION}))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 AUTOTOOL_STYLE:=	autoreconf
 ifeq ($(ADK_PACKAGE_NFS_UTILS_V4),y)
 CONFIGURE_ARGS+=	--enable-nfsv4 \

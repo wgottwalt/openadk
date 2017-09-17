@@ -44,7 +44,6 @@ CONFIGURE_ARGS+=	--enable-rrdcgi \
 			--disable-libwrap
 TARGET_CPPFLAGS+=	-I${STAGING_TARGET_DIR}/usr/include/freetype2
 TARGET_LDFLAGS+=	-lglib-2.0 -lm
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 rrdtool-install:
 	${INSTALL_DIR} ${IDIR_RRDTOOL}/usr/bin

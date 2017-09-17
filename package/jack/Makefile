@@ -18,7 +18,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,JACK,jack,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 AUTOTOOL_STYLE:=	autogen
 
 post-extract:

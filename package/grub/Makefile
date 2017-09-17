@@ -115,7 +115,6 @@ ifeq ($(ADK_PACKAGE_GRUB_EFI_X86)$(ADK_PACKAGE_GRUB_EFI_X86_64),y)
 CONFIGURE_ARGS+=	--with-bootdir=/boot/EFI/boot \
 			--with-grubdir=/
 endif
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 grub-install:
 	$(INSTALL_DIR) $(FW_DIR)/$(GRUB_DIR)

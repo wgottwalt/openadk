@@ -135,7 +135,6 @@ $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_MYSQL,rlm_sql_mysql,))
 $(eval $(call PKG_mod_template,FREERADIUS_MOD_SQL_PGSQL,rlm_sql_postgresql,))
 
 AUTOTOOL_STYLE:=	autoreconf
-XAKE_FLAGS+=            GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	${PKG_CONFIGURE_OPTS} \
 			--libdir=/usr/lib/freeradius \
 			--libexecdir=/usr/lib/freeradius \

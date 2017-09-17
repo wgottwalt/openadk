@@ -26,7 +26,6 @@ $(eval $(call PKG_template,LTP,ltp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},
 # disable lto
 TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--with-open-posix-testsuite \
 			--with-realtime-testsuite \
 			--without-power-management-testsuite \

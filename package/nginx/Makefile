@@ -54,7 +54,6 @@ CONFIGURE_ARGS+=	--with-http_ssl_module
 endif
 
 ALL_TARGET:=		
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 nginx-install:
 	$(INSTALL_DIR) $(IDIR_NGINX)/usr/sbin $(IDIR_NGINX)/etc/nginx

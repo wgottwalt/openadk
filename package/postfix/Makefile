@@ -23,7 +23,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,POSTFIX,postfix,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIG_STYLE:=		manual
 ALL_TARGET:=		
 INSTALL_STYLE:=		manual

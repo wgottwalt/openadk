@@ -24,7 +24,6 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 TARGET_CFLAGS+=		-fPIC
 MAKE_ENV+=		LDSHARED="$(TARGET_CC) -shared"
 CURL_CONFIG:=		$(STAGING_TARGET_DIR)/usr/bin/curl-config
@@ -32,8 +31,8 @@ CURL_CONFIG:=		$(STAGING_TARGET_DIR)/usr/bin/curl-config
 include $(ADK_TOPDIR)/mk/python.mk
 
 do-build:
-	(cd $(WRKBUILD); env GCC_HONOUR_COPTS=s PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py --curl-config=$(CURL_CONFIG) build)
-	(cd $(WRKBUILD); env GCC_HONOUR_COPTS=s PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py --curl-config=$(CURL_CONFIG) install --prefix="$(WRKINST)/usr")
+	(cd $(WRKBUILD); env PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py --curl-config=$(CURL_CONFIG) build)
+	(cd $(WRKBUILD); env PYTHONPATH=$(PYTHON_LIBDIR) $(PYTHON) ./setup.py --curl-config=$(CURL_CONFIG) install --prefix="$(WRKINST)/usr")
 
 do-install:
 	$(INSTALL_DIR) $(IDIR_PYCURL)/usr/lib/python$(PYTHON_VERSION)/site-packages

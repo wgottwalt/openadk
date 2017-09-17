@@ -27,7 +27,6 @@ CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS+=	--prefix=/usr \
 			--no-tests \
 			--no-samples
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 poco-install:
 	$(INSTALL_DIR) $(IDIR_POCO)/usr/lib

@@ -31,12 +31,6 @@ config ADK_BUILD_WITH_DEBUG
 	  If you want to create debug packages, you should enable this option.
 	  WARNING: It will use a lot of additional disk space on you build system!
 
-config ADK_DISABLE_HONOUR_CFLAGS
-	bool "Disable honour CFLAGS checks globally"
-	default n
-	help
-	  Disable honour CFLAGS checks.
-
 config ADK_DISABLE_CHECKSUM
 	bool "Disable checksum check for downloads globally"
 	default n

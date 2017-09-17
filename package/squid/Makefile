@@ -142,7 +142,6 @@ CONFIGURE_ENV+=		ac_cv_sizeof_void_p=4 \
 			squid_cv_gnu_atomics=yes \
 			ac_cv_have_squid=yes
 XAKE_FLAGS+=		MKDIR_P="mkdir -p"
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS+=	--datadir=/usr/share/squid \
 			--libexecdir=/usr/lib/squid \
 			--sysconfdir=/etc/squid \

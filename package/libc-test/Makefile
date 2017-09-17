@@ -19,7 +19,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LIBC_TEST,libc-test,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s RUN_TEST=:
+XAKE_FLAGS+=		RUN_TEST=:
 CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 

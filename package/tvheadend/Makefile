@@ -18,8 +18,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,TVHEADEND,tvheadend,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
-
 ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
 XAKE_FLAGS+=		LDLIBS=-liconv
 endif

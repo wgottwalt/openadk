@@ -20,7 +20,6 @@ CONFIGURE_ENV+=		PATH='${TARGET_PATH}' \
 			${TARGET_ENV} \
 			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig:${STAGING_TARGET_DIR}/usr/share/pkgconfig' \
 			PKG_CONFIG_SYSROOT_DIR='${STAGING_TARGET_DIR}' \
-			GCC_HONOUR_COPTS=s \
 			cross_compiling=yes
 
 CONFIGURE_PROG?=	configure
@@ -41,7 +40,6 @@ MAKE_ENV+=		PATH='${TARGET_PATH}' \
 			${TARGET_ENV} \
 			PKG_CONFIG_LIBDIR='${STAGING_TARGET_DIR}/usr/lib/pkgconfig:${STAGING_TARGET_DIR}/usr/share/pkgconfig' \
 			PKG_CONFIG_SYSROOT_DIR='${STAGING_TARGET_DIR}' \
-			$(GCC_CHECK) \
 			WRKDIR='${WRKDIR}' WRKDIST='${WRKDIST}' \
 			WRKSRC='${WRKSRC}' WRKBUILD='${WRKBUILD}'
 

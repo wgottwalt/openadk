@@ -89,7 +89,6 @@ $(eval $(call PKG_mod_template,PYTHON3_MOD_SSL,_ssl))
 
 MAKE_ENV+=		HOSTPGEN=$(STAGING_HOST_DIR)/usr/bin/pgen3
 FAKE_FLAGS+=		ENSUREPIP=no
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ARGS:=	--with-threads \
 			--with-system-ffi \
 			--with-system-expat \

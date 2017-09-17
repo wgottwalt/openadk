@@ -53,12 +53,12 @@ do-build:
 	(cd $(WRKBUILD) && env \
 		PATH='$(HOST_PATH)' \
 		CROSS_COMPILE='$(TARGET_CROSS)' \
-		GCC_HONOUR_COPTS=s $(MAKE))
+		$(MAKE))
 ifneq ($(OS_FOR_BUILD),Darwin)
 	(cd $(WRKBUILD) && env \
 		PATH='$(HOST_PATH)' \
 		CROSS_COMPILE='$(TARGET_CROSS)' \
-		GCC_HONOUR_COPTS=s $(MAKE) env)
+		$(MAKE) env)
 endif
 
 u-boot-install:

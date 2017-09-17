@@ -31,7 +31,6 @@ CONFIGURE_ARGS+=	--without-openssl \
 			--with-libpcap="${STAGING_TARGET_DIR}/usr" \
 			--with-libpcre="${STAGING_TARGET_DIR}/usr" \
 			--enable-static
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 
 nmap-install:
 	${INSTALL_DIR} ${IDIR_NMAP}/usr/share/nmap

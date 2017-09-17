@@ -26,7 +26,6 @@ CONFIG_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
 TARGET_CPPFLAGS+=	-DNO_BZIP2_SUPPORT
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_PROG:=	unix/configure
 MAKE_FILE:=		unix/Makefile
 ALL_TARGET:=		generic_gcc

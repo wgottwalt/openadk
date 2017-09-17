@@ -39,7 +39,6 @@ do-build:
 		PATH='$(HOST_PATH)' \
 		ARCH='$(ADK_TARGET_ARCH)' \
 		CROSS_COMPILE='$(TARGET_CROSS)' \
-		GCC_HONOUR_COPTS=s \
 		$(MAKE))
 
 barebox-install:

@@ -20,7 +20,6 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SUBVERSION,subversion,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 TARGET_LDFLAGS+=	-ltinfo
 CONFIGURE_ARGS+=	--with-apr=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \
 			--with-apr-util=${STAGING_TARGET_DIR}/usr/bin/apr-1-config \

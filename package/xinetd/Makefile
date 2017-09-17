@@ -18,7 +18,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,XINETD,xinetd,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		GCC_HONOUR_COPTS=s
 CONFIGURE_ENV+=		xinetd_cv_type_rlim_t=yes
 CONFIGURE_ARGS+=	--without-libwrap \
 			--with-loadavg

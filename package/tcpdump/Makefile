@@ -38,8 +38,6 @@ endif
 XAKE_FLAGS+=		CCOPT="${TARGET_CFLAGS}" \
 			INCLS="-I. -I${STAGING_TARGET_DIR}/usr/include"
 
-XAKE_FLAGS+=           GCC_HONOUR_COPTS=s
-
 tcpdump-install:
 	${INSTALL_DIR} ${IDIR_TCPDUMP}/usr/sbin
 	${INSTALL_BIN} ${WRKINST}/usr/sbin/tcpdump ${IDIR_TCPDUMP}/usr/sbin
