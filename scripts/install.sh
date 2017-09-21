@@ -118,7 +118,7 @@ shift $((OPTIND - 1))
 f=0
 case $ostype {
 (Linux)
-	tools="bc mkfs.$fs tune2fs partprobe"
+	tools="bc mkfs.ext4 mkfs.vfat tune2fs partprobe"
 	;;
 (Darwin)
 	tools="bc diskutil"
@@ -504,8 +504,11 @@ fi
 dd if="$T/firsttrack" of="$tgt" > /dev/null 2>&1
 
 if [[ $ostype = Linux ]]; then
-  partprobe $tgt
+  echo partprobe $tgt
+  partprobe -s $tgt
   sync
+  fdisk -l $tgt
+  ls -la ${tgt}*
 fi
 
 fwdir=$(dirname "$src")
