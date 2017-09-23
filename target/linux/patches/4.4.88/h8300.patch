@@ -1,0 +1,12 @@
+diff -Nur linux-4.4.88.orig/arch/h8300/Kconfig.cpu linux-4.4.88/arch/h8300/Kconfig.cpu
+--- linux-4.4.88.orig/arch/h8300/Kconfig.cpu	2017-09-13 23:10:05.000000000 +0200
++++ linux-4.4.88/arch/h8300/Kconfig.cpu	2017-09-17 21:15:32.584654434 +0200
+@@ -96,4 +96,8 @@
+         hex "Load offset"
+ 	default 0
+ 
++config RAMBASE
++	hex "RAM base address"
++	default 0x400000
++
+ endmenu
