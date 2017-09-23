@@ -172,6 +172,7 @@ ${STAGING_TARGET_DIR}/${INITRAMFS}_list: ${TARGET_DIR}/.adk
 		echo "nod /dev/ttyAMA1 0660 0 0 c 204 65"; \
 		echo "nod /dev/ttySC0 0660 0 0 c 204 8"; \
 		echo "nod /dev/ttySC1 0660 0 0 c 204 9"; \
+		echo "nod /dev/ttySC2 0660 0 0 c 204 10"; \
 		echo "nod /dev/ttyBF0 0660 0 0 c 204 64"; \
 		echo "nod /dev/ttyBF1 0660 0 0 c 204 65"; \
 		echo "nod /dev/ttyUL0 0660 0 0 c 204 187"; \

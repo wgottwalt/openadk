@@ -11,7 +11,7 @@ PKG_DESCR:=		system call trace program
 PKG_SECTION:=		app/debug
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
 
-PKG_ARCH_DEPENDS:=	!nds32
+PKG_ARCH_DEPENDS:=	!h8300 !nds32
 
 include ${ADK_TOPDIR}/mk/package.mk
 
