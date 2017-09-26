@@ -1,0 +1,30 @@
+diff -Nur linux-2.6.32.70.orig/include/linux/inotify.h linux-2.6.32.70/include/linux/inotify.h
+--- linux-2.6.32.70.orig/include/linux/inotify.h	2016-01-29 22:13:00.000000000 +0100
++++ linux-2.6.32.70/include/linux/inotify.h	2017-09-26 04:19:21.883681676 +0200
+@@ -230,12 +230,12 @@
+ {
+ }
+ 
+-extern inline int pin_inotify_watch(struct inotify_watch *watch)
++static inline int pin_inotify_watch(struct inotify_watch *watch)
+ {
+ 	return 0;
+ }
+ 
+-extern inline void unpin_inotify_watch(struct inotify_watch *watch)
++static inline void unpin_inotify_watch(struct inotify_watch *watch)
+ {
+ }
+ 
+diff -Nur linux-2.6.32.70.orig/include/linux/tty.h linux-2.6.32.70/include/linux/tty.h
+--- linux-2.6.32.70.orig/include/linux/tty.h	2016-01-29 22:13:00.000000000 +0100
++++ linux-2.6.32.70/include/linux/tty.h	2017-09-26 04:06:38.856051772 +0200
+@@ -478,7 +478,7 @@
+ extern void tty_port_close_end(struct tty_port *port, struct tty_struct *tty);
+ extern void tty_port_close(struct tty_port *port,
+ 				struct tty_struct *tty, struct file *filp);
+-extern inline int tty_port_users(struct tty_port *port)
++static inline int tty_port_users(struct tty_port *port)
+ {
+ 	return port->count + port->blocked_open;
+ }

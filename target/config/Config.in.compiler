@@ -51,8 +51,8 @@ config ADK_TOOLCHAIN_GCC_6
 
 config ADK_TOOLCHAIN_GCC_4_9
 	bool "4.9.4"
-	depends on ADK_TARGET_ARCH_LM32
-	depends on ADK_TARGET_SYSTEM_KINETIS_K70
+	depends on ADK_TARGET_ARCH_LM32 \
+		|| ADK_TARGET_ARCH_SPARC
 
 config ADK_TOOLCHAIN_GCC_CSKY
 	bool "csky"

@@ -8,10 +8,12 @@ include $(ADK_TOPDIR)/mk/image.mk
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug 
 OSTRIP+=-R .note.gnu.build-id -K sun4u_init -K _end -K _start
 
+KERNEL:=$(LINUX_DIR)/vmlinux
 ifeq ($(ADK_TARGET_KERNEL_ZIMAGE),y)
 KERNEL:=$(LINUX_DIR)/arch/sparc/boot/zImage
-else
-KERNEL:=$(LINUX_DIR)/vmlinux
+endif
+ifeq ($(ADK_TARGET_KERNEL_VMLINUX_AOUT),y)
+KERNEL:=$(LINUX_DIR)/arch/sparc/boot/image
 endif
 
 QEMU_ARGS:=-M SS-10
@@ -66,10 +68,10 @@ kernel-strip:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
 kernel-install: kernel-strip
-ifeq ($(ADK_TARGET_SYSTEM_SUN_VOYAGER),y)
-	PATH='$(HOST_PATH)' elftoaout -o $(FW_DIR)/$(TARGET_KERNEL) $(KERNEL)
+ifeq ($(ADK_TARGET_KERNEL_VMLINUX_AOUT),y)
+	PATH='$(HOST_PATH)' elftoaout -o $(FW_DIR)/$(TARGET_KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 else
-	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 endif
 
 # filesystem specific targets
