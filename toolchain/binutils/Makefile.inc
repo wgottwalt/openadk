@@ -5,8 +5,8 @@ PKG_NAME:=		binutils
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_29),y)
 PKG_VERSION:=		2.29.1
 PKG_RELEASE:=		1
-PKG_HASH:=		56507e116d070271325a216e13f125a1fad0fe2d23966aab5cfedd4a8e66b214
-PKG_SITES:=		ftp://sourceware.org/pub/binutils/snapshots/
+PKG_HASH:=		e7010a46969f9d3e53b650a518663f98a5dde3c3ae21b7d71e5e6803bc36b577
+PKG_SITES:=		${MASTER_SITE_GNU:=binutils/}
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_ARC),y)
