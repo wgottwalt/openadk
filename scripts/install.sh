@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #-
-# Copyright © 2010-2016
+# Copyright © 2010-2017
 #	Waldemar Brodkorb <wbx@openadk.org>
 #	Thorsten Glaser <tg@mirbsd.org>
 #
@@ -144,7 +144,7 @@ tgt=$2
 src=$3
 
 case $target {
-(banana-pro|orange-pi0|pcengines-apu|raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64|solidrun-imx6|solidrun-clearfog|default) ;;
+(banana-pro|orange-pi0|pcengines-apu|phytec-wega|raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64|solidrun-imx6|solidrun-clearfog|default) ;;
 (*)
 	print -u2 "Unknown target '$target', exiting"
 	exit 1 ;;
@@ -167,7 +167,7 @@ case $ostype {
 	basedev=$tgt
 	rootpart=${basedev}s1
 	datapart=${basedev}s2
-	if [[ $target = raspberry-pi || $target = raspberry-pi0 || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 ]]; then
+	if [[ $target = raspberry-pi || $target = raspberry-pi0 || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 || $target = phytec-wega ]]; then
 		bootpart=${basedev}s1
 		rootpart=${basedev}s2
 		datapart=${basedev}s3
@@ -176,9 +176,11 @@ case $ostype {
 	function mount_fs {
 	}
 	function umount_fs {
+		(( quiet )) || print "Unmounting filesystem on ${1}..."
 		diskutil unmount "$1"
 	}
 	function create_fs {
+		(( quiet )) || print "Creating filesystem on ${2}..."
 		if [[ $3 = ext4 ]]; then
 			fstype=UFSD_EXTFS4
 		fi
@@ -208,9 +210,11 @@ case $ostype {
 
 	match=\'${basedev}${partitionsep}\''+([0-9])'
 	function mount_fs {
+		(( quiet )) || print "Mounting filesystem on ${1}..."
 		mount -t "$3" "$1" "$2"
 	}
 	function umount_fs {
+		(( quiet )) || print "Unmounting filesystem on ${1}..."
 		umount "$1"
 	}
 	function create_fs {
@@ -263,7 +267,7 @@ syspartno=0
 # data - flexible (parameter)
 # system - everything else
 
-if [[ $target = raspberry-pi || $target = raspberry-pi0 || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 ]]; then
+if [[ $target = raspberry-pi || $target = raspberry-pi0 || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 || $target = phytec-wega ]]; then
 	syspartno=1
 	bootfssz=100
 	if (( grub )); then
@@ -320,7 +324,7 @@ fi
 #(( partofs = ((coreendsec / secs) + 1) * secs ))
 # we just use 2048 all the time, since some loaders are longer
 partofs=2048
-if [[ $target = raspberry-pi || $target = raspberry-pi0 || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 ]]; then
+if [[ $target = raspberry-pi || $target = raspberry-pi0 || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 || $target = phytec-wega ]]; then
 	(( spartofs = partofs + (100 * 2048) ))
 else
 	spartofs=$partofs
@@ -431,7 +435,7 @@ if (( datafssz )); then
 	    dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1CE)) 2>/dev/null
 fi
 
-if [[ $target = raspberry-pi || $target = raspberry-pi0 || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 ]]; then
+if [[ $target = raspberry-pi || $target = raspberry-pi0 || $target = raspberry-pi2 || $target = raspberry-pi3 || $target = raspberry-pi3-64 || $target = phytec-wega ]]; then
 	# move system and data partition from #0/#1 to #1/#2
 	dd if="$T/firsttrack" bs=1 skip=$((0x1BE)) count=32 of="$T/x" 2>/dev/null
 	dd of="$T/firsttrack" conv=notrunc bs=1 seek=$((0x1CE)) if="$T/x" 2>/dev/null
@@ -527,6 +531,9 @@ case $target {
 (raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64)
 	(( noformat )) || create_fs "$bootpart" ADKBOOT vfat
 	;;
+(phytec-wega)
+	(( noformat )) || create_fs "$bootpart" ADKBOOT ext4
+	;;
 }
 
 (( noformat )) || create_fs "$rootpart" ADKROOT ext4
@@ -541,7 +548,7 @@ if (( datafssz )); then
 	((keep)) || create_fs "$datapart" ADKDATA ext4
 	((keep)) || tune_fs "$datapart"
 	case $target {
-	(raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64)
+	(raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64|phytec-wega)
 		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab 
 	;;
 	(banana-pro|orange-pi0|solidrun-imx6|solidrun-clearfog)
@@ -550,6 +557,7 @@ if (( datafssz )); then
 	}
 fi
 
+(( quiet )) || print Finishing up with bootloader and kernel ...
 case $target {
 (raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64)
 	mount_fs "$bootpart" "$B" vfat
@@ -566,6 +574,18 @@ case $target {
 	for x in "$fwdir"/overlays/*.dtbo; do
 		y=$(basename ${x} .dtbo)
 		[[ -e "$x" ]] && cp "$fwdir"/overlays/${y}.dtbo "$B/"overlays/${y}.dtb
+	done
+	umount_fs "$B"
+	;;
+(phytec-wega)
+	mount_fs "$bootpart" "$B" ext4
+	for x in "$R"/boot/*; do
+		[[ -e "$x" ]] && mv -f "$R"/boot/* "$B/"
+		break
+	done
+	for x in "$fwdir"/*.dtb; do
+		[[ -e "$x" ]] && cp "$fwdir"/*.dtb "$B/"
+		break
 	done
 	umount_fs "$B"
 	;;

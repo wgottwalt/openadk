@@ -273,11 +273,13 @@ config ADK_KERNEL_SERIAL_OMAP
 	select ADK_KERNEL_SERIAL_8250
 	select ADK_KERNEL_SERIAL_8250_CONSOLE
 	select ADK_KERNEL_SERIAL_OMAP_CONSOLE
-	depends on ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+	depends on ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK \
+		|| ADK_TARGET_SYSTEM_PHYTEC_WEGA
 	default y if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+	default y if ADK_TARGET_SYSTEM_PHYTEC_WEGA
 	default n
 	help
-	  Serial driver for Beaglebone Black
+	  Serial driver for TI OMAP Boards.
 
 config ADK_KERNEL_SERIAL_UARTLITE
 	bool "uartlite serial driver"

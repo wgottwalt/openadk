@@ -31,6 +31,10 @@ ifeq ($(ADK_TARGET_SYSTEM_MIKROTIK_RB4XX),y)
 MTDDEV:=	root=/dev/mtdblock7
 endif
 
+ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_WEGA),y)
+BLOCKDEV:=	root=/dev/mmcblk0p2
+endif
+
 ifeq ($(ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20),y)
 BLOCKDEV:=	root=/dev/mmcblk0p2
 endif

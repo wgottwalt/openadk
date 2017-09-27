@@ -72,6 +72,17 @@ else
 	@echo "sudo ./scripts/install.sh $(ADK_TARGET_SYSTEM) /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 endif
 endif
+ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_WEGA),y)
+	@echo "Use following command to install it on SD card:"
+	@echo "sudo ./scripts/install.sh phytec-wega /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "Use following command to install with a writable data partition"
+	@echo "sudo ./scripts/install.sh -d 256 phytec-wega /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo
+	@echo "To boot from SD card do following in barebox bootloader:"
+	@echo "mount /dev/mmc0.0 /mnt"
+	@echo "bootm -o /mnt/am335x-wega-rdk.dtb /mnt/kernel"
+	@echo
+endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	@echo "Use following command to install it on SD card:"
 	@echo "sudo ./scripts/install.sh banana-pro /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
@@ -169,6 +180,11 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB)$(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB_NOMMU),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		dtbs $(MAKE_TRACE)
+endif
+ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_WEGA),y)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
+		am335x-wega-rdk.dtb
+	cp $(LINUX_DIR)/arch/arm/boot/dts/am335x-wega-rdk.dtb ${TARGET_DIR}/boot
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
