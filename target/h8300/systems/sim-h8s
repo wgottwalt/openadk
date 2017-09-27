@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_SIM_H8S
+	bool "GDB simulator (h8s)"
+	select ADK_TARGET_CPU_H8S
+	select ADK_TARGET_SIM
+	select ADK_TARGET_PACKAGE_TXZ
+	help
+	  H8/300 GDB simulator.
+
