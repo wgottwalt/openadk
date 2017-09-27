@@ -1,0 +1,30 @@
+diff -Nur linux-e7c8afc1dda7b7c18596d90ad6a17ae886650b72.orig/arch/arm/include/asm/ftrace.h linux-e7c8afc1dda7b7c18596d90ad6a17ae886650b72/arch/arm/include/asm/ftrace.h
+--- linux-e7c8afc1dda7b7c18596d90ad6a17ae886650b72.orig/arch/arm/include/asm/ftrace.h	2017-09-27 03:56:40.000000000 +0200
++++ linux-e7c8afc1dda7b7c18596d90ad6a17ae886650b72/arch/arm/include/asm/ftrace.h	2017-09-27 04:31:03.708572870 +0200
+@@ -27,7 +27,7 @@
+ 
+ #else
+ 
+-extern inline void *return_address(unsigned int level)
++static inline void *return_address(unsigned int level)
+ {
+ 	return NULL;
+ }
+diff -Nur linux-e7c8afc1dda7b7c18596d90ad6a17ae886650b72.orig/include/linux/inotify.h linux-e7c8afc1dda7b7c18596d90ad6a17ae886650b72/include/linux/inotify.h
+--- linux-e7c8afc1dda7b7c18596d90ad6a17ae886650b72.orig/include/linux/inotify.h	2017-09-27 03:56:44.000000000 +0200
++++ linux-e7c8afc1dda7b7c18596d90ad6a17ae886650b72/include/linux/inotify.h	2017-09-27 04:47:37.707436849 +0200
+@@ -230,12 +230,12 @@
+ {
+ }
+ 
+-extern inline int pin_inotify_watch(struct inotify_watch *watch)
++static inline int pin_inotify_watch(struct inotify_watch *watch)
+ {
+ 	return 0;
+ }
+ 
+-extern inline void unpin_inotify_watch(struct inotify_watch *watch)
++static inline void unpin_inotify_watch(struct inotify_watch *watch)
+ {
+ }
+ 
