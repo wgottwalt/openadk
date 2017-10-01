@@ -23,7 +23,8 @@ PKG_SITES:=		https://github.com/riscv/riscv-newlib.git
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
 ifeq ($(ADK_TARGET_LIB_NEWLIB_FROSTED),y)
-PKG_VERSION:=		git
+PKG_VERSION:=		frosted
+PKG_GIT:=		branch
 PKG_RELEASE:=		1
 PKG_GIT_SUBMODULE:=	1
 PKG_SITES:=		https://github.com/insane-adding-machines/newlib.git
