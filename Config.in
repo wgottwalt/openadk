@@ -65,9 +65,14 @@ source "target/linux/Config.in"
 endmenu
 endmenu
 
-menu "Frosted configuration"
+menu "Frosted kernel configuration"
 	visible if ADK_TARGET_OS_FROSTED && !ADK_TARGET_CHOOSE_ARCH
 source "target/frosted/Config.in"
+endmenu
+
+menu "Frosted application configuration"
+	visible if ADK_TARGET_OS_FROSTED && !ADK_TARGET_CHOOSE_ARCH
+source "target/frosted/Config.in.apps"
 endmenu
 
 menu "Toolchain settings"

@@ -12,7 +12,7 @@ prepare:
 		git submodule update --init --recursive ;\
 	fi
 	cp $(BUILD_DIR)/.frosted $(BUILD_DIR)/frosted/kconfig/.config
-	cp $(BUILD_DIR)/.frosted $(BUILD_DIR)/frosted/frosted-userland/kconfig/.config
+	cp $(BUILD_DIR)/.frostedapps $(BUILD_DIR)/frosted/frosted-userland/kconfig/.config
 
 compile:
 	PATH='$(HOST_PATH)' $(MAKE) V=1 -C $(BUILD_DIR)/frosted clean

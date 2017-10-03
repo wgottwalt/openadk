@@ -134,8 +134,10 @@ endif
 
 ifeq ($(ADK_TARGET_OS_FROSTED),y)
 config-prepare: $(ADK_TOPDIR)/.config
-	@PATH='$(HOST_PATH)' sed -n '/^FROSTED_/s///p' $(ADK_TOPDIR)/.config \
+	@PATH='$(HOST_PATH)' sed -n '/^ADK_FROSTED_/s///p' $(ADK_TOPDIR)/.config \
 	    >$(BUILD_DIR)/.frosted
+	@PATH='$(HOST_PATH)' sed -n '/^ADK_PACKAGE_FROSTED_/s///p' $(ADK_TOPDIR)/.config \
+	    >$(BUILD_DIR)/.frostedapps
 endif
 
 ifeq ($(ADK_TARGET_OS_FROSTED),y)

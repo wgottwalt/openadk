@@ -1,0 +1,154 @@
+menu "Libraries"
+    config ADK_PACKAGE_FROSTED_LIB_WOLFSSL
+    bool "WolfSSL TLS + Encryption"
+    default n
+
+    config ADK_PACKAGE_FROSTED_LIB_MONGOOSE
+    bool "Cesanta's Mongoose REST API library"
+    default n
+
+endmenu
+
+
+menu "Applications"
+
+menu "Base binary utils"
+config ADK_PACKAGE_FROSTED_APP_INIT
+bool "init: main task"
+default y
+
+config ADK_PACKAGE_FROSTED_APP_IDLING
+bool "idling: flashing leds"
+default y
+
+config ADK_PACKAGE_FROSTED_APP_FRESH
+bool "fresh: Frosted shell"
+default y
+
+config ADK_PACKAGE_FROSTED_APP_CAT
+    bool "cat"
+
+config ADK_PACKAGE_FROSTED_APP_ECHO
+    bool "echo"
+config ADK_PACKAGE_FROSTED_APP_LS
+    bool "ls"
+config ADK_PACKAGE_FROSTED_APP_TOUCH
+    bool "touch"
+config ADK_PACKAGE_FROSTED_APP_RM
+    bool "rm"
+config ADK_PACKAGE_FROSTED_APP_KILL
+    bool "kill"
+config ADK_PACKAGE_FROSTED_APP_TRUE
+    bool "true"
+config ADK_PACKAGE_FROSTED_APP_FALSE
+    bool "false"
+config ADK_PACKAGE_FROSTED_APP_LN
+    bool "ln"
+config ADK_PACKAGE_FROSTED_APP_DIRNAME
+    bool "dirname"
+config ADK_PACKAGE_FROSTED_APP_MKDIR
+    bool "mkdir"
+config ADK_PACKAGE_FROSTED_APP_MOUNT
+    bool "mount"
+config ADK_PACKAGE_FROSTED_APP_PLAY
+    bool "play"
+config ADK_PACKAGE_FROSTED_APP_WC
+    bool "wc"
+config ADK_PACKAGE_FROSTED_APP_HEAD
+    bool "head"
+config ADK_PACKAGE_FROSTED_APP_TAIL
+    bool "tail"
+config ADK_PACKAGE_FROSTED_APP_YES
+    bool "yes"
+config ADK_PACKAGE_FROSTED_APP_SLEEP
+    bool "sleep"
+config ADK_PACKAGE_FROSTED_APP_UPTIME
+    bool "uptime"
+config ADK_PACKAGE_FROSTED_APP_KLOGD
+    bool "klogd"
+config ADK_PACKAGE_FROSTED_APP_GDBSERVER
+    bool "gdbserver"
+config ADK_PACKAGE_FROSTED_APP_REBOOT
+    bool "reboot"
+config ADK_PACKAGE_FROSTED_APP_RENICE
+    bool "renice"
+config ADK_PACKAGE_FROSTED_APP_CUT
+    bool "cut"
+config ADK_PACKAGE_FROSTED_APP_GREP
+    bool "grep"
+config ADK_PACKAGE_FROSTED_APP_KILO
+    bool "kilo (text editor)"
+config ADK_PACKAGE_FROSTED_APP_POWERCTL
+    bool "Remote power control (powerctl)"
+config ADK_PACKAGE_FROSTED_APP_PTHREADS
+    bool "Pthreads test (pthreads)"
+config ADK_PACKAGE_FROSTED_APP_SEM
+    bool "Semaphore test(sem)"
+config ADK_PACKAGE_FROSTED_APP_DATE
+    bool "date"
+endmenu
+
+menu "Networking utils"
+config ADK_PACKAGE_FROSTED_APP_IFCONFIG
+    bool "ifconfig"
+config ADK_PACKAGE_FROSTED_APP_ROUTE
+    bool "route"
+config ADK_PACKAGE_FROSTED_APP_PING
+    bool "ping"
+config ADK_PACKAGE_FROSTED_APP_HOST
+    bool "host"
+config ADK_PACKAGE_FROSTED_APP_TELNETD
+    bool "telnetd"
+config ADK_PACKAGE_FROSTED_APP_NETCAT
+    bool "netcat"
+config ADK_PACKAGE_FROSTED_APP_HTTPD
+    bool "httpd"
+    depends on LIB_MONGOOSE
+config ADK_PACKAGE_FROSTED_APP_SSHD
+    bool "sshd"
+    depends on LIB_WOLFSSL
+config ADK_PACKAGE_FROSTED_APP_NTPC
+    bool "ntpc"
+config ADK_PACKAGE_FROSTED_APP_STARWARS
+    bool "starwars"
+endmenu
+
+menu "Interpreters"
+config ADK_PACKAGE_FROSTED_APP_PYTHON
+    bool "python interpreter (micropython)"
+endmenu
+
+
+menu "Hardware utils"
+config ADK_PACKAGE_FROSTED_APP_BUSYLOOP
+    bool "busyloop - CPU busy test"
+config ADK_PACKAGE_FROSTED_APP_MORSE
+    bool "Morse led blinker"
+config ADK_PACKAGE_FROSTED_APP_RANDOM
+    bool "Random number generator"
+config ADK_PACKAGE_FROSTED_APP_SENSOR
+    bool "Test for sensors (obsolete)"
+config ADK_PACKAGE_FROSTED_APP_FBTEST
+    bool "Test for framebuffer"
+config ADK_PACKAGE_FROSTED_APP_FBCTL
+    bool "fbctl (screen on/off utility)"
+config ADK_PACKAGE_FROSTED_APP_GPIOCTL
+    bool "gpioctl - Tools to set up GPIOs"
+config ADK_PACKAGE_FROSTED_APP_LATENCY
+    bool "process latency measurement"
+config ADK_PACKAGE_FROSTED_APP_ACC
+    bool "Accelerometer tool (acc)"
+endmenu
+
+menu "Games"
+config ADK_PACKAGE_FROSTED_APP_DOOM
+    bool "ID Software's DOOM"
+config ADK_PACKAGE_FROSTED_APP_DICE
+    bool "Roll the dice"
+config ADK_PACKAGE_FROSTED_APP_BYTEBEAT
+    bool "sample bytebeat"
+config ADK_PACKAGE_FROSTED_APP_GROOVY
+    bool "groovy - bytebeat positional generator"
+endmenu
+endmenu
+
