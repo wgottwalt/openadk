@@ -11,7 +11,9 @@ depends on ADK_TARGET_ARCH_ARM || \
 
 config ADK_TARGET_HARD_FLOAT
 	bool "hard-float"
-	depends on ADK_TARGET_CPU_WITH_FPU && !ADK_TARGET_CPU_WITH_FPU_FPV5
+	depends on ADK_TARGET_CPU_WITH_FPU \
+		&& !ADK_TARGET_CPU_WITH_FPU_FPV5 \
+		&& !ADK_TARGET_OS_FROSTED
 
 config ADK_TARGET_HARD_FLOAT_SP
 	bool "hard-float-single-precision"
@@ -26,7 +28,7 @@ config ADK_TARGET_SOFT_FLOAT
 
 config ADK_TARGET_SOFTFP_FLOAT
 	bool "softfp"
-	depends on ADK_TARGET_ARCH_ARM
+	depends on ADK_TARGET_ARCH_ARM && !ADK_TARGET_OS_FROSTED
 
 endchoice
 

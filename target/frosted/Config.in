@@ -1,24 +1,3 @@
-menu "Compiler options"
-    config FROSTED_GDB_CFLAG
-    bool "Keep debugging symbols"
-    default y
-
-    choice
-    prompt "Compiler optimization"
-        config FROSTED_OPTIMIZE_NONE
-        bool "No optimization"
-
-        config FROSTED_OPTIMIZE_SIZE
-        bool "Optimize for size"
-
-        config FROSTED_OPTIMIZE_PERF
-        bool "Optimize for performance"
-    endchoice
-
-
-endmenu
-
-
 menu "Platform Selection"
 
     choice FROSTED_ARCH
@@ -790,17 +769,17 @@ menu "Device Drivers"
        menuconfig FROSTED_DEVFRAMEBUFFER
            depends on (FROSTED_ARCH_STM32F7 || FROSTED_ARCH_STM32F4)
            bool "STM32 Framebuffer driver"
-           default y
+           default n
 
        config FROSTED_DEVFBCON
            depends on FROSTED_DEVFRAMEBUFFER
            bool "Console on Framebuffer via /dev/fbcon"
-           default y
+           default n
 
        config FROSTED_DEVF7DISCOLTDC
            depends on FROSTED_DEVFRAMEBUFFER
            bool "F746 Discovery LTDC"
-           default y
+           default n
 
 endmenu
 
