@@ -1,6 +1,6 @@
---- ltp-full-20140828.orig/testcases/kernel/Makefile	2014-08-28 12:11:45.000000000 +0200
-+++ ltp-full-20140828/testcases/kernel/Makefile	2014-09-01 13:55:06.564554944 +0200
-@@ -49,7 +49,6 @@ SUBDIRS			+= connectors \
+--- ltp-full-20170929.orig/testcases/kernel/Makefile	2017-09-29 17:11:53.000000000 +0200
++++ ltp-full-20170929/testcases/kernel/Makefile	2017-10-05 18:58:09.679412855 +0200
+@@ -50,7 +50,6 @@ SUBDIRS			+= connectors \
  			   numa \
  			   pty \
  			   sched \

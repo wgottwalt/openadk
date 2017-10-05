@@ -1,6 +1,6 @@
---- ltp-5ad79b71f6df2f191f6a81c6ef71078781c0ab15.orig/runtest/mm	2015-12-06 17:03:41.000000000 +0100
-+++ ltp-5ad79b71f6df2f191f6a81c6ef71078781c0ab15/runtest/mm	2015-12-06 17:12:57.000000000 +0100
-@@ -102,4 +102,4 @@ overcommit_memory06 overcommit_memory -R
+--- ltp-full-20170929.orig/runtest/mm	2017-09-29 17:11:53.000000000 +0200
++++ ltp-full-20170929/runtest/mm	2017-10-05 18:58:09.655415743 +0200
+@@ -100,4 +100,4 @@ overcommit_memory06 overcommit_memory -R
  
  max_map_count max_map_count -i 10
  

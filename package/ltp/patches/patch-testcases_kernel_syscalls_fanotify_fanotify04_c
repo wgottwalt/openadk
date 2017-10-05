@@ -1,7 +1,7 @@
---- ltp-5ad79b71f6df2f191f6a81c6ef71078781c0ab15.orig/testcases/kernel/syscalls/fanotify/fanotify04.c	2015-12-06 17:03:41.000000000 +0100
-+++ ltp-5ad79b71f6df2f191f6a81c6ef71078781c0ab15/testcases/kernel/syscalls/fanotify/fanotify04.c	2015-12-06 17:51:52.000000000 +0100
-@@ -27,6 +27,7 @@
-  */
+--- ltp-full-20170929.orig/testcases/kernel/syscalls/fanotify/fanotify04.c	2017-09-29 17:11:54.000000000 +0200
++++ ltp-full-20170929/testcases/kernel/syscalls/fanotify/fanotify04.c	2017-10-05 18:58:09.691411411 +0200
+@@ -29,6 +29,7 @@
+ #define _GNU_SOURCE
  #include "config.h"
  
 +#define _GNU_SOURCE
