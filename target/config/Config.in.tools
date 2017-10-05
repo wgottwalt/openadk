@@ -120,6 +120,10 @@ config ADK_HOST_BUILD_SED
 	bool
 	default n
 
+config ADK_HOST_BUILD_STLINK
+	bool
+	default n
+
 config ADK_HOST_BUILD_TAR
 	bool
 	default n
