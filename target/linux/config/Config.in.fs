@@ -16,7 +16,6 @@ config ADK_KERNEL_FSNOTIFY
 
 config ADK_KERNEL_INOTIFY_USER
 	bool
-	default y
 
 config ADK_KERNEL_AUTOFS4_FS
 	bool

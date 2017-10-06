@@ -1,0 +1,30 @@
+diff -Nur linux-3.10-nds32.orig/arch/nds32/boot/dts/ag101p.dts linux-3.10-nds32/arch/nds32/boot/dts/ag101p.dts
+--- linux-3.10-nds32.orig/arch/nds32/boot/dts/ag101p.dts	2017-07-31 07:41:18.000000000 +0200
++++ linux-3.10-nds32/arch/nds32/boot/dts/ag101p.dts	2017-10-03 09:56:16.654394267 +0200
+@@ -7,7 +7,7 @@
+ 
+ 	chosen {
+ 		/* bootargs = "console=ttyS0,38400n8 earlyprintk=uart8250-32bit,0x99600000 debug bootmem_debug memblock=debug loglevel=7"; */
+-		bootargs = "console=ttyS0,38400n8 earlyprintk=uart8250-32bit,0x99600000 debug loglevel=7";
++		bootargs = "console=ttyS0,38400n8 earlyprintk=uart8250-32bit,0x99600000 debug loglevel=7 rw root=/dev/nfs ip=dhcp";
+ 	};
+ 
+ 	memory@0 {
+diff -Nur linux-3.10-nds32.orig/include/linux/etherdevice.h linux-3.10-nds32/include/linux/etherdevice.h
+--- linux-3.10-nds32.orig/include/linux/etherdevice.h	2016-09-06 11:38:23.000000000 +0200
++++ linux-3.10-nds32/include/linux/etherdevice.h	2017-10-06 07:28:40.004142545 +0200
+@@ -154,7 +154,13 @@
+  */
+ static inline void eth_random_addr(u8 *addr)
+ {
+-	get_random_bytes(addr, ETH_ALEN);
++	//get_random_bytes(addr, ETH_ALEN);
++	addr[0] = 0xB8;
++	addr[1] = 0x27;
++	addr[2] = 0xEB;
++	addr[3] = 0x91;
++	addr[4] = 0x8F;
++	addr[5] = 0xAA;
+ 	addr[0] &= 0xfe;	/* clear multicast bit */
+ 	addr[0] |= 0x02;	/* set local assignment bit (IEEE802) */
+ }

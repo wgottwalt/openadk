@@ -56,7 +56,7 @@ config ADK_TOOLCHAIN_GCC_OR1K
 	depends on ADK_TARGET_ARCH_OR1K
 
 config ADK_TOOLCHAIN_GCC_NDS32
-	bool "4.9.3-nds32"
+	bool "4.9.4-nds32"
 	depends on ADK_TARGET_ARCH_NDS32
 
 config ADK_TOOLCHAIN_GCC_ARC
