@@ -14,13 +14,7 @@ config ADK_KERNEL_FSNOTIFY
 	bool
 	default y
 
-config ADK_KERNEL_INOTIFY_USER
-	bool
-
 config ADK_KERNEL_AUTOFS4_FS
-	bool
-
-config ADK_KERNEL_DNOTIFY
 	bool
 
 config ADK_KERNEL_TMPFS_POSIX_ACL
@@ -261,6 +255,7 @@ config ADK_KERNEL_UBIFS_FS
 endmenu
 
 
+source target/linux/config/Config.in.fsopts
 source target/linux/config/Config.in.part
 source target/linux/config/Config.in.fsnet
 source target/linux/config/Config.in.nls
