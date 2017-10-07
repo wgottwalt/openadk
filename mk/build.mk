@@ -199,6 +199,7 @@ ${STAGING_TARGET_DIR} ${STAGING_TARGET_DIR}/etc ${STAGING_HOST_DIR}:
 	@mkdir -p ${STAGING_TARGET_DIR}/usr/bin
 	@mkdir -p ${STAGING_TARGET_DIR}/usr/include
 	@mkdir -p ${STAGING_TARGET_DIR}/usr/lib/pkgconfig
+	@mkdir -p ${STAGING_HOST_DIR}/lib
 	@mkdir -p ${STAGING_HOST_DIR}/usr/bin
 	@mkdir -p ${STAGING_HOST_DIR}/usr/lib
 	@mkdir -p ${STAGING_HOST_DIR}/usr/include
