@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		curl
-PKG_VERSION:=		7.54.1
+PKG_VERSION:=		7.56.0
 PKG_RELEASE:=		1
-PKG_HASH:=		cd404b808b253512dafec4fed0fb2cc98370d818a7991826c3021984fc27f9d0
+PKG_HASH:=		32437bcca0e9434384329fdc733547879d25ba70335b3cf9e3d9cbc3e71fd172
 PKG_DESCR:=		client-side url transfer tool
 PKG_SECTION:=		net/http
 PKG_DEPENDS:=		libcurl
@@ -16,8 +16,6 @@ PKG_URL:=		http://curl.haxx.se/
 PKG_SITES:=		http://curl.haxx.se/download/
 PKG_LIBNAME:=		libcurl
 PKG_OPTS:=		dev
-
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_SUBPKGS:=		CURL LIBCURL
 PKGSD_LIBCURL:=		client-side url transfer library
