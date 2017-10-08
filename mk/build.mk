@@ -175,7 +175,7 @@ ifeq ($(ADK_TARGET_OS_BAREMETAL),y)
 	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final
 endif
 ifeq ($(ADK_TARGET_OS_FROSTED),y)
-	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final target/config-prepare target/compile target/install
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final target/config-prepare target/compile target/install target/targethelp
 endif
 ifeq ($(ADK_TARGET_OS_LINUX),y)
 	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final target/config-prepare target/compile package_clean package/compile root_clean package/install target/install package_index

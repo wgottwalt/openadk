@@ -144,8 +144,8 @@ ifeq ($(ADK_TARGET_OS_FROSTED),y)
 prepare: frosted-prepare
 compile: frosted-compile
 install: frosted-install
+targethelp: frosted-targethelp
 endif
-
 
 ifeq ($(ADK_TARGET_OS_LINUX),y)
 prepare: $(ADK_TARGET_ARCH)-prepare
@@ -193,10 +193,16 @@ endif
 	$(END_TRACE)
 
 %-compile: %-prepare
+	$(START_TRACE) "target/$(patsubst %-compile,%,$@)-compile.. "
 	$(MAKE) -C $(patsubst %-compile,%,$@) compile
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 
 %-install:
+	$(START_TRACE) "target/$(patsubst %-install,%,$@)-install.. "
 	$(MAKE) -C $(patsubst %-install,%,$@) install
+	$(CMD_TRACE) " done"
+	$(END_TRACE)
 
 %-targethelp:
 	$(MAKE) -C $(patsubst %-targethelp,%,$@) targethelp

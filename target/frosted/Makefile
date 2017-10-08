@@ -4,7 +4,6 @@
 include $(ADK_TOPDIR)/rules.mk
 
 prepare:
-	@echo preparing frosted
 	if [ ! -d $(BUILD_DIR)/frosted ]; then \
 	cd $(BUILD_DIR) ;\
 		git clone https://github.com/insane-adding-machines/frosted.git ;\
@@ -15,12 +14,15 @@ prepare:
 	cp $(BUILD_DIR)/.frostedapps $(BUILD_DIR)/frosted/frosted-userland/kconfig/.config
 
 compile:
-	PATH='$(HOST_PATH)' $(MAKE) V=1 -C $(BUILD_DIR)/frosted clean
-	@echo compiling frosted userland
-	PATH='$(HOST_PATH)' $(MAKE) V=1 -C $(BUILD_DIR)/frosted/frosted-userland
-	@echo compiling frosted kernel
-	PATH='$(HOST_PATH)' $(MAKE) V=1 -C $(BUILD_DIR)/frosted
+	PATH='$(HOST_PATH)' $(MAKE) V=1 -C $(BUILD_DIR)/frosted/frosted-userland $(MAKE_TRACE)
+	PATH='$(HOST_PATH)' $(MAKE) V=1 -C $(BUILD_DIR)/frosted $(MAKE_TRACE)
 
 install:
-	@echo installing frosted
-	cp $(BUILD_DIR)/frosted/image.bin $(FW_DIR)
+	@cp $(BUILD_DIR)/frosted/image.bin $(FW_DIR)
+
+targethelp:
+	@echo "Use following command to flash:"
+	@echo "$(STAGING_HOST_DIR)/usr/bin/st-flash write $(FW_DIR)/image.bin 0x08000000"
+
+clean:
+	@PATH='$(HOST_PATH)' $(MAKE) -C $(BUILD_DIR)/frosted clean
