@@ -4,15 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gnupg2
-PKG_VERSION:=		2.2.0
+PKG_VERSION:=		2.2.1
 PKG_RELEASE:=		1
-PKG_HASH:=		d4514a0be0f7a1ff263193330019eb4b53c82f0f5e230af3c14df371271a45e6
+PKG_HASH:=		34d70cd65b9c95f3f2f90a9f5c1e0b6a0fe039a8d685e2d66d69c33d1cbf62fb
 PKG_DESCR:=		gnu privacy guard (modern)
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libreadline libncurses libgcrypt libgpg-error libassuan
 PKG_DEPENDS+=		libksba npth
 PKG_BUILDDEP:=		readline ncurses libgcrypt libgpg-error libassuan
 PKG_BUILDDEP+=		libksba npth
+PKG_NEEDS:=		iconv
 PKG_URL:=		http://www.gnupg.org/
 PKG_SITES:=		ftp://ftp.gnupg.org/gcrypt/gnupg/
 
