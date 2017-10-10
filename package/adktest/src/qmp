@@ -1,4 +1,3 @@
 #!/bin/sh
 echo '{ "execute": "qmp_capabilities" }'
-sleep 1
 echo '{ "execute": "quit" }'
