@@ -34,7 +34,7 @@ clamav-install:
 	$(CP) $(WRKINST)/etc/* \
 		$(IDIR_CLAMAV)/etc
 	$(INSTALL_DIR) $(IDIR_CLAMAV)/usr/lib
-	$(CP) $(WRKINST)/usr/lib/lib*.so* \
+	$(CP) $(WRKINST)/usr/lib*/lib*.so* \
 		$(IDIR_CLAMAV)/usr/lib
 	$(INSTALL_DIR) $(IDIR_CLAMAV)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/* \
