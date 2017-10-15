@@ -17,7 +17,7 @@ PKG_SITES:=		http://www.x.org/releases/individual/driver/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_ARCH_DEPENDS:=      !arm !m68k
-PKG_CFLINE_XF86_VIDEO_ATI:=depends on ADK_TARGET_WITH_VGA
+PKG_CFLINE_XF86_VIDEO_ATI:=depends on ADK_TARGET_WITH_VGA || ADK_TARGET_GENERIC
 
 include $(ADK_TOPDIR)/mk/package.mk
 

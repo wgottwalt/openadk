@@ -15,7 +15,9 @@ PKG_BUILDDEP:=		xorg-server libdrm xf86driproto mesa eudev
 PKG_NEEDS:=		c++
 PKG_SITES:=		https://anongit.freedesktop.org/git/xorg/driver/xf86-video-intel.git
 
-PKG_SYSTEM_DEPENDS:=	ibm-x40
+PKG_CFLINE_XF86_VIDEO_INTEL:=	depends on ADK_TARGET_WITH_VGA || ADK_TARGET_GENERIC
+
+
 
 include $(ADK_TOPDIR)/mk/package.mk
 
