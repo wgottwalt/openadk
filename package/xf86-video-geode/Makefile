@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xf86-video-geode
-PKG_VERSION:=		2.11.18
+PKG_VERSION:=		2.11.19
 PKG_RELEASE:=		1
-PKG_HASH:=		60df188a72ef2b337e6cbc73684edf04b75fe4dd20555460005e1a19814b9046
+PKG_HASH:=		46ef4e23eaf91abc48ffad394ec6479bf60b2482eded8803d6af93f4ccf51aed
 PKG_DESCR:=		x11 driver for amd geode vga chip
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		xorg-server
@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		xorg-server
 PKG_NEEDS:=		c++
 PKG_SITES:=		http://www.x.org/releases/individual/driver/
 
-PKG_ARCH_DEPENDS:=	x86 x86_64
+PKG_ARCH_DEPENDS:=	x86
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
