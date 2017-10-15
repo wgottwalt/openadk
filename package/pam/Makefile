@@ -28,6 +28,9 @@ CONFIGURE_ARGS+=	--disable-nis \
 			--enable-db=no
 
 pam-install:
+	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/lib
+	$(CP) $(WRKINST)/lib/libpam*.so* \
+			$(STAGING_TARGET_DIR)/usr/lib
 	$(INSTALL_DIR) $(IDIR_PAM)/etc/security
 	$(CP) $(WRKINST)/etc/security/* $(IDIR_PAM)/etc/security
 	$(INSTALL_DIR) $(IDIR_PAM)/lib/security
