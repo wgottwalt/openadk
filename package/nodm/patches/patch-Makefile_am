@@ -1,0 +1,16 @@
+--- nodm-0.13.orig/Makefile.am	2017-01-23 17:29:56.000000000 +0100
++++ nodm-0.13/Makefile.am	2017-10-15 12:39:08.047309247 +0200
+@@ -39,13 +39,6 @@ nodm_SOURCES = $(libsources)		\
+ 
+ nodm_CFLAGS = -DNODM_SESSION='"$(sbindir)/nodm"'
+ 
+-nodm.8: nodm
+-	help2man --section=8 --name="X display manager for automatic logins" \
+-		 --no-info --include=nodm-man-extras ./$< > $@
+-
+-man_MANS = nodm.8 \
+-           $(NULL)
+-
+ TESTS = test-internals test-xstart test-xsession
+ check_PROGRAMS = test-internals test-xstart test-xsession
+ 
