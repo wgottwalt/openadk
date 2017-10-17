@@ -13,10 +13,11 @@ PKG_DEPENDS:=		libnotify webkitgtk gcr pango libatk cairo libsqlite
 PKG_DEPENDS+=		gdk-pixbuf libgtk3 p11-kit libxcomposite at-spi2-atk
 PKG_DEPENDS+=		libpng icu4c gstreamer gst-plugins-base dbus libgnutls
 PKG_DEPENDS+=		libxslt libjpeg-turbo libtasn1 libnettle enchant
-PKG_DEPENDS+=		libgmp at-spi2-core
+PKG_DEPENDS+=		libgmp at-spi2-core libxext
 PKG_BUILDDEP:=		cmake-host vala-host libnotify webkitgtk gcr
 PKG_BUILDDEP+=		librsvg-host librsvg pango atk cairo sqlite
 PKG_BUILDDEP+=		gdk-pixbuf libgtk3 p11-kit libpng icu4c gstreamer
+PKG_BUILDDEP+=		libXext
 PKG_URL:=		http://www.midori-browser.org
 PKG_SITES:=		http://distfiles.openadk.org/
 
