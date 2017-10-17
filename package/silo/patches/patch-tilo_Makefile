@@ -1,0 +1,11 @@
+--- silo-git.orig/tilo/Makefile	2017-10-14 10:02:18.000000000 +0200
++++ silo-git/tilo/Makefile	2017-10-15 12:38:01.431265539 +0200
+@@ -24,7 +24,7 @@ all: maketilo
+ OBJS_COMMON = ../common/printf.o ../common/jmp.o ../common/prom.o \
+ 	../common/tree.o ../common/console.o ../common/stringops1.o \
+ 	../common/urem.o ../common/stringops2.o ../common/udiv.o \
+-	../common/divdi3.o ../common/udivdi3.o
++	../common/divdi3.o ../common/udivdi3.o ../common/umul.o
+ OBJS = crt0.o tilo.o $(OBJS_COMMON) malloc.o
+ OBJS2 = crt0l.o tilol.o $(OBJS_COMMON) mallocl.o
+ OBJS3 = crt0sup.o tilosup.o $(OBJS_COMMON) mallocsup.o

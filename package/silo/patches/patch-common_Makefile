@@ -1,0 +1,11 @@
+--- silo-git.orig/common/Makefile	2017-10-14 10:02:18.000000000 +0200
++++ silo-git/common/Makefile	2017-10-15 12:33:57.564705193 +0200
+@@ -10,7 +10,7 @@ include ../Rules.make
+ .S.o:
+ 	$(CC) $(CFLAGS) -c $*.S
+ 
+-OBJS = sdiv.o rem.o udiv.o urem.o jmp.o printf.o console.o prom.o tree.o stringops2.o\
++OBJS = sdiv.o rem.o udiv.o umul.o urem.o jmp.o printf.o console.o prom.o tree.o stringops2.o\
+ 	stringops1.o ffs.o divdi3.o udivdi3.o
+ PROGRAMS = bin2h
+ 

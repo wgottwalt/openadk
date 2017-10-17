@@ -1,0 +1,31 @@
+--- silo-git.orig/Rules.make	2017-10-14 10:02:18.000000000 +0200
++++ silo-git/Rules.make	2017-10-15 11:42:54.792574664 +0200
+@@ -3,12 +3,12 @@ IMGVERSION=0.99
+ SHELL=/bin/bash
+ RM=rm -f
+ # We want to force 32-bit builds
+-CC=gcc -m32
+-HOSTCC=gcc
+-LD=ld -m elf32_sparc
+-AS=as
+-STRIP=strip
+-NM=nm
++CC?=gcc -m32
++HOSTCC?=gcc
++LD?=ld -m elf32_sparc
++AS?=as
++STRIP?=strip
++NM?=nm
+ ELFTOAOUT=elftoaout
+ BIN2H=../common/bin2h
+ 
+@@ -18,7 +18,8 @@ LARGE_RELOC=0x380000
+ cc-option-yn = $(shell if $(CC) $(CFLAGS) $(1) -S -o /dev/null -xc /dev/null \
+ 		> /dev/null 2>&1; then echo "y"; else echo "n"; fi;)
+ 
+-CFLAGS = -Os -Wall -I. -I../include -fomit-frame-pointer \
++CFLAGS ?=
++CFLAGS += -Wall -I. -I../include -fomit-frame-pointer \
+ 	-fno-strict-aliasing -DSMALL_RELOC=$(SMALL_RELOC) \
+ 	-DLARGE_RELOC=$(LARGE_RELOC)
+ HOSTCFLAGS = -O2 -Wall
