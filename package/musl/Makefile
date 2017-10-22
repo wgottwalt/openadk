@@ -26,68 +26,11 @@ CONFIG_STYLE:=          manual
 BUILD_STYLE:=           manual
 INSTALL_STYLE:=         manual
 
-MARCH:=			$(ADK_TARGET_CPU_ARCH)
-ifeq ($(ADK_TARGET_CPU_ARCH),i686)
-MARCH:=			i386
-endif
-ifeq ($(ADK_TARGET_CPU_ARCH),i586)
-MARCH:=			i386
-endif
-ifeq ($(ADK_TARGET_CPU_ARCH),i486)
-MARCH:=			i386
-endif
-ifeq ($(ADK_TARGET_CPU_ARCH),ppc)
-ifeq ($(ADK_TARGET_SOFT_FLOAT),y)
-MARCH:=			powerpc-sf
-else
-MARCH:=			powerpc
-endif
-endif
-ifeq ($(ADK_TARGET_CPU_ARCH),ppc64)
-MARCH:=			powerpc64
-endif
-ifeq ($(ADK_TARGET_CPU_ARCH),ppc64le)
-MARCH:=			powerpc64le
-endif
-ifeq ($(ADK_TARGET_CPU_ARCH),sh2eb)
-ifeq ($(ADK_TARGET_BINFMT_FDPIC),y)
-MARCH:=			sheb-nofpu-fdpic
-else
-MARCH:=			sheb-nofpu
-endif
-endif
-ifeq ($(ADK_TARGET_CPU_ARCH),sh4)
-MARCH:=			sh
-endif
-ifeq ($(ADK_TARGET_CPU_ARCH),sh4eb)
-MARCH:=			sheb
-endif
-ifeq ($(ADK_TARGET_ARCH_MIPS),y)
-ifeq ($(ADK_TARGET_SOFT_FLOAT),y)
-ifeq ($(ADK_TARGET_LITTLE_ENDIAN),y)
-MARCH:=			mipsel-sf
-else
-MARCH:=			mips-sf
-endif
-endif
-endif
-ifeq ($(ADK_TARGET_ARCH_MIPS64),y)
-ifeq ($(ADK_TARGET_ABI_N32),y)
-ifeq ($(ADK_TARGET_LITTLE_ENDIAN),y)
-MARCH:=			mipsn32el
-else
-MARCH:=			mipsn32
-endif
-endif
-endif
-ifeq ($(ADK_TARGET_ARCH_ARM),y)
-ifeq ($(ADK_TARGET_ABI),eabihf)
-MARCH:=			armhf
-endif
-endif
-ifeq ($(ADK_TARGET_ABI_X32),y)
-MARCH:=			x32
-endif
+MUSL_LD_SO:=		"`echo 'void main(void) {}' |${TARGET_CC} -x c -o \
+			$(BUILD_DIR)/.musl.tmp - >/dev/null 2>&1 ;\
+			${TARGET_COMPILER_PREFIX}readelf -l $(BUILD_DIR)/.musl.tmp 2>/dev/null \
+			| grep 'program interpreter: /lib/ld-musl' | sed -e 's|.*lib/||'|sed -e 's|]||' ;\
+			rm $(BUILD_DIR)/.musl.tmp`"
 
 # do nothing, musl is already build in toolchain directory
 do-install:
@@ -96,9 +39,9 @@ ifneq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 	${INSTALL_DIR} $(IDIR_MUSL)/$(ADK_TARGET_LIBC_PATH)
 	$(CP) $(STAGING_TARGET_DIR)/usr/lib/libc.so $(IDIR_MUSL)/$(ADK_TARGET_LIBC_PATH)
 	(cd $(IDIR_MUSL)/$(ADK_TARGET_LIBC_PATH) && \
-		ln -sf libc.so ld-musl-$(MARCH).so.1)
+		ln -sf libc.so $(MUSL_LD_SO))
 	(cd $(IDIR_MUSL)/bin && \
-		ln -sf ../lib/ld-musl-$(MARCH).so.1 ldd)
+		ln -sf ../lib/$(MUSL_LD_SO) ldd)
 endif
 	
 
