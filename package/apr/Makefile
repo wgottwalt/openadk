@@ -4,17 +4,17 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		apr
-PKG_VERSION:=		1.5.2
+PKG_VERSION:=		1.6.3
 PKG_RELEASE:=		1
-PKG_HASH:=		1af06e1720a58851d90694a984af18355b65bb0d047be03ec7d659c746d6dbdb
+PKG_HASH:=		131f06d16d7aabd097fa992a33eec2b6af3962f93e6d570a9bd4d85e95993172
 PKG_DESCR:=		apache portable runtime library
 PKG_SECTION:=		libs/misc
 PKG_NEEDS:=		threads
 PKG_URL:=		http://apr.apache.org/
-PKG_SITES:=		http://mirrors.ibiblio.org/apache//apr/
+PKG_SITES:=		http://www.apache.org/dist/apr/
 PKG_OPTS:=		dev
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.bz2
 
 PKG_FLAVOURS_APR:=	WITH_IPV6
 PKGFD_WITH_IPV6:=	enable IPv6 support
