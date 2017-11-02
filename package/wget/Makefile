@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		wget
-PKG_VERSION:=		1.19.1
+PKG_VERSION:=		1.19.2
 PKG_RELEASE:=		1
-PKG_HASH:=		9e4f12da38cc6167d0752d934abe27c7b1599a9af294e73829be7ac7b5b4da40
+PKG_HASH:=		4f4a673b6d466efa50fbfba796bd84a46ae24e370fa562ede5b21ab53c11a920
 PKG_DESCR:=		retrieving files using http(s) and ftp
 PKG_SECTION:=		net/http
 HOST_BUILDDEP:=		libressl-host
@@ -30,6 +30,8 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call HOST_template,WGET,wget,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,WGET,wget,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
+
+CONFIGURE_ARGS+=	--disable-pcre
 
 ifeq (${ADK_PACKAGE_WGET_WITHOUT_SSL},y)
 CONFIGURE_ARGS+=	--with-ssl=no
