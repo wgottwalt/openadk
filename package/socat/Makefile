@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		socat
-PKG_VERSION:=		1.7.3.0
+PKG_VERSION:=		1.7.3.2
 PKG_RELEASE:=		1
-PKG_HASH:=		f8de4a2aaadb406a2e475d18cf3b9f29e322d4e5803d8106716a01fd4e64b186
+PKG_HASH:=		ce3efc17e3e544876ebce7cd6c85b3c279fda057b2857fcaaf67b9ab8bdaf034
 PKG_DESCR:=		multipurpose relay
 PKG_SECTION:=		net/misc
 PKG_NEEDS:=		threads
