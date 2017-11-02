@@ -13,6 +13,7 @@ PKG_BUILDDEP:=		python2-host python2
 PKG_URL:=		https://talloc.samba.org/talloc/doc/html/index.html
 PKG_SITES:=		https://www.samba.org/ftp/talloc/
 PKG_LIBNAME:=		libtalloc
+PKG_OPTS:=		dev
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
