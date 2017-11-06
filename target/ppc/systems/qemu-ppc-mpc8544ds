@@ -1,0 +1,8 @@
+config ADK_TARGET_SYSTEM_QEMU_PPC_MPC8544DS
+	bool "Qemu Emulator (mpc8544ds)"
+	select ADK_TARGET_QEMU
+	select ADK_TARGET_CPU_PPC_8548
+	select ADK_TARGET_KERNEL_WITH_COMPRESSION
+	help
+ 	  Support for Qemu Emulator PPC architecture (mpc8544ds).
+
