@@ -28,8 +28,17 @@ CFLAGS_FOR_BUILD:=
 LDFLAGS_FOR_BUILD:=
 TARGET_CPPFLAGS:=
 TARGET_CFLAGS:=
-TARGET_LDFLAGS:=
 TARGET_CXXFLAGS:=
+TARGET_LDFLAGS:=
+
+ifeq ($(ADK_TARGET_LINUX_ARCH_XTENSA),y)
+GCC_EXTRA_CFLAGS:=	-mtext-section-literals
+GCC_EXTRA_CXXFLAGS:=	-mtext-section-literals
+endif
+
+# some targets need extra CFLAGS/CXXFLAGS
+CONFIGURE_ENV+=		CC="${TARGET_CC} ${GCC_EXTRA_CFLAGS}"
+CONFIGURE_ENV+=		CXX="${TARGET_CXX} ${GCC_EXTRA_CXXFLAGS}"
 
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_MIPS_ABI)
@@ -46,9 +55,8 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++
 else
 CONFIGURE_ARGS+=	--enable-languages=c
 endif
-ifeq ($(ADK_TARGET_CPU_ARCH),ppc)
+ifeq ($(ADK_TARGET_LINUX_ARCH_PPC),y)
 CONFIGURE_ARGS+=	--disable-target-optspace --with-long-double-64 --enable-secureplt
-TARGET_CFLAGS+=		'-Wl,--secure-plt'
 else
 CONFIGURE_ARGS+=	--enable-target-optspace
 endif
@@ -71,8 +79,7 @@ CONFIGURE_ARGS+=	--host=$(GNU_TARGET_NAME) \
 			--disable-libsanitizer \
 			--disable-libitm \
 			--disable-install-libiberty \
-			--enable-dependency-tracking \
-			--enable-cxx-flags="${TARGET_LDFLAGS}"
+			--enable-dependency-tracking
 
 pre-configure:
 	$(SED) 's@\./fixinc\.sh@-c true@' $(WRKSRC)/gcc/Makefile.in
