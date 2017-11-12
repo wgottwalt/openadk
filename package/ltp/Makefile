@@ -34,7 +34,7 @@ CONFIGURE_ARGS+=	--with-open-posix-testsuite \
 			--without-expect
 
 pre-configure:
-	$(MAKE) -C $(WRKBUILD) autotools
+	PATH="$(HOST_PATH)" $(MAKE) -C $(WRKBUILD) autotools
 
 # bessel float and mallopt not implemented in uClibc-ng
 pre-build:
