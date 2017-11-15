@@ -36,7 +36,7 @@ config ADK_TARGET_LIBC_WITH_LIBINTL
 
 config ADK_TARGET_LIBC_WITH_LIBICONV
 	bool "Enable basic libiconv"
-	depends on ADK_TARGET_LIB_UCLIBC_NG
+	depends on ADK_TARGET_LIB_UCLIBC_NG && !ADK_PACKAGE_LIBICONV
 	help
 	  Enables uClibc-ng included basic libiconv support.
 
