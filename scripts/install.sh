@@ -63,6 +63,7 @@ speed=115200
 panicreboot=10
 keep=0
 grub=0
+paragon_ext=0
 
 function usage {
 cat >&2 <<EOF
@@ -76,7 +77,7 @@ EOF
 	exit $1
 }
 
-while getopts "c:d:f:ghknp:qs:t" ch; do
+while getopts "c:d:ef:ghknp:qs:t" ch; do
 	case $ch {
 	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 16 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
@@ -86,6 +87,7 @@ while getopts "c:d:f:ghknp:qs:t" ch; do
 			print -u2 "$me: -d $OPTARG out of bounds"
 			exit 1
 		fi ;;
+	(e)	paragon_ext=1 ;;
 	(f)	if [[ $OPTARG != @(ext2|ext3|ext4|xfs) ]]; then
 			print -u2 "$me: filesystem $OPTARG invalid"
 			exit 1
@@ -122,6 +124,10 @@ case $ostype {
 	;;
 (Darwin)
 	tools="bc diskutil"
+	if [[ $paragon_ext == 0 ]]; then
+	    export PATH=/usr/local/opt/e2fsprogs/sbin:/usr/local/opt/e2fsprogs/bin:$PATH
+	    tools="$tools fuse-ext2 umount mkfs.ext4 tune2fs"
+	fi
 	;;
 (*)
 	print -u2 Sorry, not ported to the OS "'$ostype'" yet.
@@ -161,9 +167,9 @@ fi
 
 case $ostype {
 (Darwin)
-	R=/Volumes/ADKROOT; diskutil unmount $R
-	B=/Volumes/ADKBOOT; diskutil unmount $B
-	D=/Volumes/ADKDATA; diskutil unmount $D
+	R=/Volumes/ADKROOT; diskutil unmount $R || umount $R
+	B=/Volumes/ADKBOOT; diskutil unmount $B || umount $B
+	D=/Volumes/ADKDATA; diskutil unmount $D || umount $D
 	basedev=$tgt
 	rootpart=${basedev}s1
 	datapart=${basedev}s2
@@ -174,22 +180,38 @@ case $ostype {
 	fi
 	match=\'${basedev}\''?(s+([0-9]))'
 	function mount_fs {
+	    if [[ $paragon_ext == 0 && $3 = ext4 ]]; then
+		mkdir -p $2
+		fuse-ext2 "$1" "$2" -o rw+
+	    fi
 	}
 	function umount_fs {
 		(( quiet )) || print "Unmounting filesystem on ${1}..."
+	    if [[ $paragon_ext == 0 ]]; then
+		umount "$1" || diskutil unmount "$1" || true
+		rmdir $2 || true
+	    else
 		diskutil unmount "$1"
+	    fi
 	}
 	function create_fs {
-		(( quiet )) || print "Creating filesystem on ${2}..."
-		if [[ $3 = ext4 ]]; then
-			fstype=UFSD_EXTFS4
-		fi
-		if [[ $3 = vfat ]]; then
-			fstype=fat32
-		fi
-		diskutil eraseVolume $fstype "$2" "$1"
+		(( quiet )) || printf "Creating filesystem on ${1}"
+	    if [[ $paragon_ext == 0 && $3 = ext4 ]]; then
+			mkfs.ext4 -L "$2" "$1"
+	    else
+			if [[ $3 = ext4 ]]; then
+				fstype=UFSD_EXTFS4
+			fi
+			if [[ $3 = vfat ]]; then
+				fstype=fat32
+			fi
+			diskutil eraseVolume $fstype "$2" "$1"
+	    fi
 	}
 	function tune_fs {
+	    if [[ $paragon_ext == 0 && $3 = ext4 ]]; then
+			tune2fs -c 0 -i 0 "$1"
+	    fi
 	}
 	;;
 (Linux)
