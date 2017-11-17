@@ -656,6 +656,8 @@ trybuiltin(argc, argv)
 	return TRUE;
 }
 
+static const char enoent_msg[] = "Bad command or file name";
+static const char unkerr_msg[] = "Unknown error!";
 
 /*
  * Execute the specified command.
@@ -783,6 +785,7 @@ runcmd(cmd, bg, argc, argv)
 	 */
 	if (!(pid = vfork())) {
 		int	ci;
+		char	errbuf[50];
 
 		/*
 		 * We are the child, so run the program.
@@ -800,9 +803,18 @@ runcmd(cmd, bg, argc, argv)
 		
 		execvp(newargv[0], newargv);
 
-		printf("%s: %s\n", newargv[0], (errno == ENOENT) ? "Bad command or file name" : strerror(errno));
-		
-		_exit(0);
+		ci = errno;
+		write(2, newargv[0], strlen(newargv[0]));
+		write(2, ": ", 2);
+		if (ci == ENOENT)
+			write(2, enoent_msg, sizeof(enoent_msg) - 1);
+		else if (strerror_r(ci, errbuf, sizeof(errbuf)))
+			write(2, unkerr_msg, sizeof(unkerr_msg) - 1);
+		else
+			write(2, errbuf, strlen(errbuf));
+		write(2, "\n", 1);
+
+		_exit(ci == ENOENT ? 127 : 126);
 	}
 	
 	if (pid < 0) {
