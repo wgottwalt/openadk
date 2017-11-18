@@ -29,17 +29,16 @@ do_free(argc, argv)
 	char buf[256];
 
 	f = fopen("/proc/meminfo", "r");
-	
+
 	if (!f) {
 		perror("Unable to open /proc/meminfo: ");
 		return;
 	}
-	
+
 	for(i=0;i<3;i++) {
 		fgets(buf, 250, f);
 		fputs(buf, stdout);
 	}
-	
+
 	fclose(f);
 }
-

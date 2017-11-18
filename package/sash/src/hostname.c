@@ -10,7 +10,7 @@
 void do_hostname(int argc, char **argv)
 {
 	char hn[PATHLEN + 1];
-	
+
 	if(argc >= 2) {
 		if(strlen(argv[1]) > PATHLEN) {
 			printf("That name is too long.\n");

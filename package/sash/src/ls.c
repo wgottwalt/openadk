@@ -74,7 +74,7 @@ do_ls(argc, argv)
 		listsize = LISTSIZE;
 	}
 	listused = 0;
-	
+
 	flags = 0;
 	if ((argc > 1) && (argv[1][0] == '-'))
 	{
@@ -135,7 +135,7 @@ do_ls(argc, argv)
 			printf("\n%s:\n", name);
 
 		while ((dp = readdir(dirp)) != NULL) {
-		
+
 			if ((dp->d_name[0] == '.') && !(flags & LSF_ALL))
 				continue;
 

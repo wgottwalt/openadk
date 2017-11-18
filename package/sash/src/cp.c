@@ -1,4 +1,3 @@
-
 void
 do_cp(argc, argv)
 	char	**argv;

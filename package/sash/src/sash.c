@@ -12,12 +12,6 @@
 
 #include "sash.h"
 
-#ifndef CMD_HELP
-#define	CMD_HELP
-#endif
-#undef INTERNAL_PATH_EXPANSION
-#define FAVOUR_EXTERNAL_COMMANDS
-
 #include <stdlib.h>
 #include <signal.h>
 #include <errno.h>
@@ -26,7 +20,7 @@
 #include <sys/time.h>
 #include <sys/wait.h>
 
-static char version[] = "1.1.1";
+static char version[] = "OpenADK";
 
 extern int intflag;
 
@@ -42,14 +36,10 @@ typedef struct {
 
 
 CMDTAB	cmdtab[] = {
-/*
-	"alias",	"[name [command]]", 	do_alias,
-	1,		MAXARGS,
-*/
 	"cd",		"[dirname]",		do_cd,
 	1,		2,
-			
-	"sleep",		"seconds",		do_sleep,
+
+	"sleep",	"seconds",		do_sleep,
 	1,		2,
 
 	"chgrp",	"gid filename ...",	do_chgrp,
@@ -67,20 +57,11 @@ CMDTAB	cmdtab[] = {
 	"cp",		"srcname ... destname",	do_cp,
 	3,		MAXARGS,
 
-/*
-	"dd",		"if=name of=name [bs=n] [count=n] [skip=n] [seek=n]", do_dd,
-	3,		MAXARGS,
-*/
 	"df",		"[file-system]",	do_df,
 	1,		2,
 
-	"echo",	"[args] ...",			do_echo,
+	"echo",		"[args] ...",		do_echo,
 	1,		MAXARGS,
-
-/*
-	"ed",		"[filename]",		do_ed,
-	1,		2,
-*/
 
 	"exec",		"filename [args]",	do_exec,
 	2,		MAXARGS,
@@ -91,15 +72,8 @@ CMDTAB	cmdtab[] = {
 	"free",		"",			do_free,
 	1,		1,
 
-/*
-	"-grep",	"[-in] word filename ...",	do_grep,
-	3,		MAXARGS,
-*/
-
-#ifdef CMD_HELP
 	"help",		"",			do_help,
 	1,		MAXARGS,
-#endif
 
 	"hexdump",	"[-s pos] filename",	do_hexdump,
 	1,		4,
@@ -122,7 +96,7 @@ CMDTAB	cmdtab[] = {
 	"mknod",	"filename type major minor",	do_mknod,
 	5,		5,
 
-	"more",	"filename ...",		do_more,
+	"more",		"filename ...",		do_more,
 	2,		MAXARGS,
 
 	"mount",	"[-t type] devname dirname",	do_mount,
@@ -155,16 +129,9 @@ CMDTAB	cmdtab[] = {
 	"source",	"filename",		do_source,
 	2,		2,
 
-	"sync",	"",			do_sync,
+	"sync",		"",			do_sync,
 	1,		1,
 
-/*	"time",	"",			do_time,
-	1,		1,
-*/
-/*
-	"tar",		"[xtv]f devname filename ...",	do_tar,
-	2,		MAXARGS,
-*/
 	"touch",	"filename ...",		do_touch,
 	2,		MAXARGS,
 
@@ -174,18 +141,9 @@ CMDTAB	cmdtab[] = {
 	"umount",	"filename",		do_umount,
 	2,		2,
 
-/*
-	"unalias",	"name",			do_unalias,
-	2,		2,
-*/
-#ifdef CONFIG_USER_SASH_PS
 	"ps",		"",			do_ps,
 	1,		MAXARGS,
-#endif
 
-/*	"reboot",	"",			do_reboot,
-	1,		MAXARGS,
-*/
 	"cat",		"filename ...",		do_cat,
 	2,		MAXARGS,
 
@@ -217,11 +175,6 @@ static	void	catchquit();
 static	void	catchchild();
 static	void	readfile();
 static	void	command();
-#ifdef COMMAND_HISTORY
-#define do_command(c,h)	command(c,h)
-#else
-#define do_command(c,h)	command(c)
-#endif
 static	void	runcmd();
 static	void	showprompt();
 static	BOOL	trybuiltin();
@@ -229,12 +182,6 @@ static	BOOL	command_in_path();
 static	ALIAS	*findalias();
 
 extern char ** environ;
-
-/* 
-char text1[] = "Text";
-char * text2 = text1;
-char ** text3 = &text2;
-*/
 
 char	buf[CMDLEN];
 int exit_code = 0;
@@ -246,9 +193,8 @@ int main(argc, argv, env)
 {
 	struct sigaction act;
 	char	*cp;
-/*	char	buf[PATHLEN];*/
 	int dofile = 0;
-	
+
 	if ((argc > 1) && !strcmp(argv[1], "-c")) {
 		/* We are that fancy a shell */
 		buf[0] = '\0';
@@ -257,11 +203,10 @@ int main(argc, argv, env)
 			if (dofile + 1 < argc)
 				strncat(buf, " ", sizeof(buf));
 		}
-		do_command(buf, FALSE);
+		command(buf, FALSE);
 		exit(exit_code);
 	}
 
-	//;'pa990523 +
 	if ((argc > 1) && strcmp(argv[1], "-t"))
 		{
 		dofile++;
@@ -280,29 +225,9 @@ int main(argc, argv, env)
 	sigaction(SIGCHLD, &act, NULL);
 
 	if (getenv("PATH") == NULL)
-		putenv("PATH=/bin:/usr/bin:/etc:/sbin:/usr/sbin");
+		putenv("PATH=/bin:/usr/bin:/sbin:/usr/sbin");
 
-/*	cp = getenv("HOME");
-	if (cp) {
-		strcpy(buf, cp);
-		strcat(buf, "/");
-		strcat(buf, ".aliasrc");
-
-		if ((access(buf, 0) == 0) || (errno != ENOENT))
-			readfile(buf);
-	}
-*/	
-	//;'pa990523 -1/+
-	//readfile(NULL);
-	if (dofile)
-		{
-		//open the file for reading!
-		readfile(argv[1]);
-		}
-	   else
-		{
-		readfile(NULL); //no arguments!
-		} //end if arguments supplied
+	readfile(dofile ? argv[1] : NULL);
 	exit(exit_code);
 }
 
@@ -339,8 +264,6 @@ readfile(name)
 
 	while (TRUE) {
 		fflush(stdout);
-		//;'pa990523 -1/+1
-		//if (1)
 		if (fp == stdin) //using terminal, so show prompt
 			showprompt();
 
@@ -369,13 +292,12 @@ readfile(name)
 			ptr++;
 		}
 		if (*ptr != '#') {
-			//;'pa990523 +
 			if (fp != stdin) {
 				//taking commands from file - echo
 				printf("Command: %s\n",buf);
 			} //end if (fp != stdin)
 
-			do_command(buf, fp == stdin);
+			command(buf, fp == stdin);
 		}
 	}
 
@@ -388,11 +310,10 @@ readfile(name)
 	}
 
 	clearerr(fp);
-	if (fp != stdin)
-		{//;'pa990523 added braces and printf
+	if (fp != stdin) {
 		fclose(fp);
 		printf("Execution Finished, Exiting\n");
-		} //end if (fp != stdin)
+	}
 
 	sourcecount--;
 }
@@ -404,12 +325,8 @@ readfile(name)
  * command is an alias, and expands wildcards.
  */
 static void
-#ifdef COMMAND_HISTORY
 command(cmd, do_history)
 	int do_history;
-#else
-command(cmd)
-#endif
 	char	*cmd;
 {
 	ALIAS	*alias;
@@ -430,7 +347,6 @@ command(cmd)
 	while (isblank(*cmd))
 		cmd++;
 
-#ifdef COMMAND_HISTORY
 	if (do_history) {
 		int i;
 		static char *history[HISTORY_SIZE];
@@ -464,7 +380,6 @@ command(cmd)
 			history[0] = strdup(cmd);
 		}
 	}
-#endif
 	if (c = strchr(cmd, '&')) {
 		*c = '\0';
 		bg = 1;
@@ -473,7 +388,7 @@ command(cmd)
 
 	/* Set the last exit code */
 	setenv("?", last_exit_code, 1);
-	
+
 	if ((cmd = expandenvvar(cmd)) == NULL)
 		return;
 
@@ -510,16 +425,14 @@ command(cmd)
 			return;
 		}
 	}
-		
+
 	/*
 	 * Now look for the command in the builtin table, and execute
 	 * the command if found.
 	 */
-#ifdef FAVOUR_EXTERNAL_COMMANDS
 	if (!command_in_path(argv[0]))
-#endif
-	if (trybuiltin(argc, argv))
-		return;
+		if (trybuiltin(argc, argv))
+			return;
 
 	/*
 	 * Not found, run the program along the PATH list.
@@ -528,7 +441,6 @@ command(cmd)
 }
 
 
-#ifdef FAVOUR_EXTERNAL_COMMANDS
 /*
  * return true if we find this command in our
  * path.
@@ -541,7 +453,7 @@ command_in_path(char *cmd)
 	if (strchr(cmd, '/') == 0) {
 		char	* path;
 		static char	path_copy[PATHLEN];
-		
+
 		/* Search path for binary */
 		for (path = getenv("PATH"); path && *path; ) {
 			char * p2;
@@ -550,14 +462,14 @@ command_in_path(char *cmd)
 			if (p2 = strchr(path_copy, ':')) {
 				*p2 = '\0';
 			}
-		
+
 			if (strlen(path_copy))
 				strcat(path_copy, "/");
 			strcat(path_copy, cmd);
-			
+
 			if (!stat(path_copy, &stat_buf) && (stat_buf.st_mode & 0111))
 				return(TRUE);
-			
+
 			p2 = strchr(path, ':');
 			if (p2)
 				path = p2 + 1;
@@ -568,7 +480,6 @@ command_in_path(char *cmd)
 		return(TRUE);
 	return(FALSE);
 }
-#endif /* FAVOUR_EXTERNAL_COMMANDS */
 
 
 /*
@@ -596,7 +507,7 @@ trybuiltin(argc, argv)
 			return FALSE;
 
 	} while (strcmp(argv[0], cmdptr->name));
-	
+
 	/*
 	 * Give a usage string if the number of arguments is too large
 	 * or too small.
@@ -608,17 +519,6 @@ trybuiltin(argc, argv)
 
 		return TRUE;
 	}
-
-	/*
-	 * Check here for several special commands which do not
-	 * have wildcarding done for them.
-	 */
-
-/*        if (cmdptr->func == do_prompt) {
-		(*cmdptr->func)(argc, argv);
-		return TRUE;
-	}
-*/
 
 	/*
 	 * Now for each command argument, see if it is a wildcard, and if
@@ -670,7 +570,6 @@ runcmd(cmd, bg, argc, argv)
 	char	**argv;
 {
 	register char *	cp;
-	BOOL		magic;
 	int		pid;
 	int		status;
 	int oac;
@@ -680,40 +579,8 @@ runcmd(cmd, bg, argc, argv)
 	char	*newargv[MAXARGS];
 	char	*nametable[MAXARGS];
 	struct sigaction act;
-	
+
 	newargv[0] = argv[0];
-	
-#ifdef INTERNAL_PATH_EXPANSION
-	if (strchr(argv[0], '/') == 0) {
-		char	* path;
-		struct stat	stat_buf;
-		static char	path_copy[PATHLEN];
-		
-		/* Search path for binary */
-		for (path = getenv("PATH"); path && *path; ) {
-			char * p2;
-			strncpy(path_copy, path, sizeof(path_copy - 1));
-			if (p2 = strchr(path_copy, ':')) {
-				*p2 = '\0';
-			}
-		
-			if (strlen(path_copy))
-				strncat(path_copy, "/", sizeof(path_copy));
-			strncat(path_copy, argv[0], sizeof(path_copy));
-			
-			if (!stat(path_copy, &stat_buf) && (stat_buf.st_mode & 0111)) {
-				newargv[0] = path_copy;
-				break;
-			}
-			
-			p2 = strchr(path, ':');
-			if (p2)
-				path = p2 + 1;
-			else
-				path = 0;
-		}
-	}
-#endif
 
 	/*
 	 * Now for each command argument, see if it is a wildcard, and if
@@ -744,43 +611,15 @@ runcmd(cmd, bg, argc, argv)
 		for (i = 0; i < matches; i++)
 			newargv[newargc++] = nametable[i];
 	}
-	
+
 	newargv[newargc] = 0;
 
-	magic = FALSE;
-	
-	/*
-	for (cp = cmd; *cp; cp++) {
-		if ((*cp >= 'a') && (*cp <= 'z'))
-			continue;
-		if ((*cp >= 'A') && (*cp <= 'Z'))
-			continue;	
-		if (isdecimal(*cp))
-			continue;
-		if (isblank(*cp))
-			continue;
-
-		if ((*cp == '.') || (*cp == '/') || (*cp == '-') ||
-			(*cp == '+') || (*cp == '=') || (*cp == '_') ||
-			(*cp == ':') || (*cp == ','))
-				continue;
-
-		magic = TRUE;
-	}
-	*/
-
-	if (magic) {
-		printf("%s: no such file or directory\n", cmd);
-		system(cmd);
-		return;
-	}
-	
 	if (!bg)
 		signal(SIGCHLD, SIG_DFL);
 
 	/*
-	 * No magic characters in the expanded command, so do the fork and
-	 * exec ourself.  If this fails with ENOEXEC, then run the
+	 * Do the fork and exec ourselves.
+	 * If this fails with ENOEXEC, then run the
 	 * shell anyway since it might be a shell script.
 	 */
 	if (!(pid = vfork())) {
@@ -791,16 +630,16 @@ runcmd(cmd, bg, argc, argv)
 		 * We are the child, so run the program.
 		 * First close any extra file descriptors we have opened.
 		 * be sure not to modify any globals after the vfork !
-		 */	
-		
+		 */
+
 		for (ci = 0; ci < sourcecount; ci++)
 			if (sourcefiles[ci] != stdin)
 				close(fileno(sourcefiles[ci]));
-		
+
 		signal(SIGINT, SIG_DFL);
 		signal(SIGQUIT, SIG_DFL);
 		signal(SIGCHLD, SIG_DFL);
-		
+
 		execvp(newargv[0], newargv);
 
 		ci = errno;
@@ -816,7 +655,7 @@ runcmd(cmd, bg, argc, argv)
 
 		_exit(ci == ENOENT ? 127 : 126);
 	}
-	
+
 	if (pid < 0) {
 		memset(&act, 0, sizeof(act));
 		act.sa_handler = catchchild;
@@ -826,7 +665,7 @@ runcmd(cmd, bg, argc, argv)
 		perror("vfork failed");
 		return;
 	}
-	
+
 	if (bg) {
 		printf("[%d]\n", pid);
 		return;
@@ -853,7 +692,7 @@ runcmd(cmd, bg, argc, argv)
 		memset(&act.sa_mask, 0, sizeof(act.sa_mask));
 		act.sa_flags = SA_RESTART;
 		sigaction(SIGCHLD, &act, NULL);
-		
+
 		intcrlf = TRUE;
 
 		if (WIFEXITED(status)) {
@@ -865,12 +704,11 @@ runcmd(cmd, bg, argc, argv)
 
 		return;
 	}
-	
+
 	perror(argv[0]);
 	exit(1);
 }
 
-#ifdef CMD_HELP
 void
 do_help(argc, argv)
 	int	argc;
@@ -881,94 +719,6 @@ do_help(argc, argv)
 	for (cmdptr = cmdtab; cmdptr->name && cmdptr->name[0]; cmdptr++)
 		printf("%-10s %s\n", cmdptr->name, cmdptr->usage);
 }
-#endif /* CMD_HELP */
-
-#ifdef CMD_ALIAS
-void
-do_alias(argc, argv)
-	int	argc;
-	char	**argv;
-{
-	char	*name;
-	char	*value;
-	ALIAS	*alias;
-	int	count;
-	char	buf[CMDLEN];
-
-	if (argc < 2) {
-		count = aliascount;
-		for (alias = aliastable; count-- > 0; alias++)
-			printf("%s\t%s\n", alias->name, alias->value);
-		return;
-	}
-
-	name = argv[1];
-	if (argc == 2) {
-		alias = findalias(name);
-		if (alias)
-			printf("%s\n", alias->value);
-		else
-			fprintf(stderr, "Alias \"%s\" is not defined\n", name);
-		return;	
-	}
-
-	if (strcmp(name, "alias") == 0) {
-		fprintf(stderr, "Cannot alias \"alias\"\n");
-		return;
-	}
-
-	if (!makestring(argc - 2, argv + 2, buf, CMDLEN))
-		return;
-
-	value = malloc(strlen(buf) + 1);
-
-	if (value == NULL) {
-		fprintf(stderr, "No memory for alias value\n");
-		return;
-	}
-
-	strcpy(value, buf);
-
-	alias = findalias(name);
-	if (alias) {
-		free(alias->value);
-		alias->value = value;
-		return;
-	}
-
-	if ((aliascount % ALIASALLOC) == 0) {
-		count = aliascount + ALIASALLOC;
-
-		if (aliastable)
-			alias = (ALIAS *) realloc(aliastable,
-				sizeof(ALIAS *) * count);
-		else
-			alias = (ALIAS *) malloc(sizeof(ALIAS *) * count);
-
-		if (alias == NULL) {
-			free(value);
-			fprintf(stderr, "No memory for alias table\n");
-			return;
-		}
-
-		aliastable = alias;
-	}
-
-	alias = &aliastable[aliascount];
-
-	alias->name = malloc(strlen(name) + 1);
-
-	if (alias->name == NULL) {
-		free(value);
-		fprintf(stderr, "No memory for alias name\n");
-		return;
-	}
-
-	strcpy(alias->name, name);
-	alias->value = value;
-	aliascount++;
-}
-#endif /* CMD_ALIAS */
 
 /*
  * Look up an alias name, and return a pointer to it.
@@ -999,20 +749,6 @@ do_source(argc, argv)
 	readfile(argv[1]);
 }
 
-/*void
-do_cd(argc, argv)
-	int	argc;
-	char	**argv;
-{
-	char	*name;
-
-	name = argv[1];
-	
-	if (chdir(name))
-		perror("Unable to chdir to %s");
-	
-}*/
-
 void
 do_pid(argc, argv)
 	int	argc;
@@ -1038,40 +774,6 @@ do_exec(argc, argv)
 	exit(1);
 }
 
-/*void
-do_exit(argc, argv)
-	int	argc;
-	char	**argv;
-{
-	if (argc>1)
-		exit(atoi(argv[1]));
-	else
-		exit(0);
-}*/
-
-
-#ifdef CMD_ALIAS
-void
-do_unalias(argc, argv)
-	int	argc;
-	char	**argv;
-{
-	ALIAS	*alias;
-
-	while (--argc > 0) {
-		alias = findalias(*++argv);
-		if (alias == NULL)
-			continue;
-
-		free(alias->name);
-		free(alias->value);
-		aliascount--;
-		alias->name = aliastable[aliascount].name;
-		alias->value = aliastable[aliascount].value;	
-	}
-}
-#endif /* CMD_ALIAS */
-
 /*
  * Display the prompt string.
  */
@@ -1079,9 +781,8 @@ static void
 showprompt()
 {
 	char	*cp;
-	//;'pa990523 changed from 6...
 	char buf[60];
-	
+
 	if ((cp = getenv("PS1")) != NULL) {
 		printf("%s", cp);
 	}
@@ -1091,7 +792,7 @@ showprompt()
 		printf("%s> ", buf);
 	}
 	fflush(stdout);
-}	
+}
 
 
 static void
@@ -1123,18 +824,16 @@ catchchild()
 	char buf[40];
 	pid_t pid;
 	int status;
-	
-	/*signal(SIGCHLD, catchchild);*/ /* Unneeded */
 
 	pid = wait4(-1, &status, WUNTRACED, 0);
 	if (WIFSTOPPED(status))
 		sprintf(buf, "sh %d: Child %d stopped\n", getpid(), pid);
 	else
 		sprintf(buf, "sh %d: Child %d died\n", getpid(), pid);
-	
+
 	if (intcrlf)
 		write(STDOUT, "\n", 1);
-	
+
 	write(STDOUT, buf, strlen(buf));
 }
 

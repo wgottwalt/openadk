@@ -41,15 +41,14 @@ do_df(int argc, char * argv[])
 		name = "/";
 	else
 		name = argv[1];
-	
+
 	if (statfs(name, &stbuf) == -1) {
 		printf("Unable to get disk space of %s: %s\n", name, strerror(errno));
 		return;
 	}
-	
+
 	printf("Total Kbytes: %ld\n", (stbuf.f_bsize / 256) * (stbuf.f_blocks / 4));
 	printf("Free  Kbytes: %ld\n", (stbuf.f_bsize / 256) * (stbuf.f_bfree / 4));
 	printf("Total  nodes: %ld\n", stbuf.f_files);
 	printf("Free   nodes: %ld\n", stbuf.f_ffree);
 }
-

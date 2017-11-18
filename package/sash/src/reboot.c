@@ -34,7 +34,7 @@ int main(int argc, char *argv[])
 	int delay = 0; /* delay in seconds before rebooting */
 	int rc;
 	int force = 0;
-  
+
 	while ((rc = getopt(argc, argv, "h?d:f")) > 0) {
 		switch (rc) {
 		case 'd':
@@ -54,20 +54,6 @@ int main(int argc, char *argv[])
 
 	if(delay > 0)
 		sleep(delay);
-#ifdef CONFIG_DISKtel
-	printf("unmounting /home\n");
-	if(umount("/home") != 0){
-		printf("unmounting failed!!!\n");
-	}
-#endif
-
-#ifdef CONFIG_USER_FLATFSD_FLATFSD
-	if (!force) {
-		/* Ask flatfsd to reboot us safely */
-		execlp("flatfsd", "flatfsd", "-b", NULL);
-		/* if this returns,  then force a reboot */
-	}
-#endif
 
 	kill(1, SIGTSTP);
 	sync();
@@ -83,4 +69,3 @@ int main(int argc, char *argv[])
 	reboot(0x01234567);
 	exit(0); /* Shrug */
 }
-

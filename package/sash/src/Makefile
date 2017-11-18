@@ -1,4 +1,3 @@
-
 SH = sh
 SHOBJS = sash.o cmds.o cmd_uclinux.o ls.o hexdump.o df.o free.o \
 	hostname.o date.o
@@ -10,11 +9,8 @@ REBOOT = reboot
 REBOOTOBJS = reboot.o
 
 SHOBJS += ps.o
-CFLAGS += -DCONFIG_USER_SASH_PS
 
 LIBSASH = libsash/libsash.a
-
-CFLAGS += -DCOMMAND_HISTORY
 
 all: $(SH) $(SHUTDOWN) $(REBOOT)
 
@@ -35,4 +31,3 @@ $(LIBSASH): dummy_target
 clean:
 	-rm -f $(SH) $(SHUTDOWN) $(REBOOT) *.elf *.gdb *.o
 	$(MAKE) -C libsash clean
-

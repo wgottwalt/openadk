@@ -41,7 +41,7 @@ main(argc, argv)
 		printf("Usage: %s [-d delay] -h|-r now\n", progname);
 		exit(0);
 	}
-	
+
 	kill(1, SIGTSTP);
 	sync();
 	signal(SIGTERM,SIG_IGN);
@@ -53,13 +53,12 @@ main(argc, argv)
 	kill(-1, SIGKILL);
 	sync();
 	sleep(1);
-	
+
 	if (strcmp(argv[1], "-h")==0) {
 		reboot(0xCDEF0123);
 	} else {
 		reboot(0x01234567);
 	}
-	
+
 	exit(0); /* Shrug */
 }
-

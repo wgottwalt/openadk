@@ -24,9 +24,6 @@
 #include <grp.h>
 #include <utime.h>
 #include <errno.h>
-#ifdef EMBED
-#include <config/autoconf.h>
-#endif
 
 void
 do_echo(argc, argv)
@@ -59,16 +56,6 @@ do_pwd(argc, argv)
 	}
 
 	printf("%s\n", buf);
-}
-
-void
-do_time(argc, argv)
-	int	argc;
-	char ** argv;
-{
-	struct timeval tv;
-	gettimeofday(&tv, 0);
-	printf("Time of day = %d.%6.6d seconds\n", tv.tv_sec, tv.tv_usec);
 }
 
 void
@@ -117,7 +104,7 @@ do_mkdir(argc, argv)
 }
 
 void
-do_sleep(argc, argv) 
+do_sleep(argc, argv)
 	int	argc;
 	char	**argv;
 {
@@ -189,9 +176,6 @@ do_sync(argc, argv)
 	int	argc;
 	char	**argv;
 {
-#ifdef CONFIG_USER_FLATFSD_FLATFSD
-	system("exec flatfsd -s");
-#endif
 	sync();
 }
 
@@ -559,7 +543,7 @@ do_cmp(argc, argv)
 	char		*buf2;
 	struct	stat	statbuf1;
 	struct	stat	statbuf2;
-	
+
 	if (stat(argv[1], &statbuf1) < 0) {
 		perror(argv[1]);
 		return;
@@ -581,7 +565,7 @@ do_cmp(argc, argv)
 		printf("Files are different sizes\n");
 		return;
 	}
-	
+
 	fd1 = open(argv[1], 0);
 	if (fd1 < 0) {
 		perror(argv[1]);
@@ -594,7 +578,7 @@ do_cmp(argc, argv)
 		close(fd1);
 		return;
 	}
-	
+
 	buf1 = malloc(8192-16);
 	buf2 = malloc(8192-16);
 

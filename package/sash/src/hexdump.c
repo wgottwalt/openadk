@@ -32,13 +32,13 @@ do_hexdump(argc, argv)
 	char	*name = 0;
 	unsigned long pos = 0;
 	char	*myname = argv[0];
- 
+
 	if ( (argc > 2) && !strcmp(argv[1],"-s") ) {
 		pos = strtoul(argv[2], 0, 0);
 		argc -= 2;
 		argv += 2;
 	}
-	
+
 	if (argc <= 1) {
 		fprintf(stderr, "No filename provided\n");
 		return;
@@ -54,15 +54,15 @@ do_hexdump(argc, argv)
 
 	if (pos)
 		fseek(fp, pos, SEEK_SET);
-	
+
 	c = 0;
-	
+
 	text[16] = 0;
-	
+
 	while(!feof(fp)) {
-	
+
 	  strcmp(text, "                ");
-	
+
 	  while (c < (pos & 0xf)) {
 	    if (c == 0)
 	      printf("%4X:", pos & 0xfffffff0);
@@ -70,35 +70,35 @@ do_hexdump(argc, argv)
 	    text[c] = ' ';
 	    c++;
 	  }
-	
+
 	  {
 	    int p = 0;
             count = fread(buf, 1, 128 - (pos % 16), fp);
-          
+
             if (count <= 0)
               break;
 
             while (p < count) {
               c = (pos & 0xf);
-            
+
               if (c == 0)
                 printf("%4X:", pos & 0xfffffff0);
-              
+
               if ((buf[p] < 32) || (buf[p]>126))
                 text[c] = '.';
               else
                 text[c] = buf[p];
-            
+
 	      printf( (c==15) ? " %02.2X" : (c == 8) ? "-%02.2X" : " %02.2X", buf[p]);
-	      
+
 	      if (c == 15)
 	        printf(" %s\n", text);
-	    
+
               pos++;
               p++;
             }
 	  }
-	  
+
 	  if (c = (pos & 0x0f)) {
 
 	    while (c < 16) {
@@ -106,16 +106,16 @@ do_hexdump(argc, argv)
 	      text[c] = ' ';
 	      c++;
 	    }
-	  
+
 	    printf(" %s\n", text);
 	  }
-	    
+
 	  if (feof(fp))
 	    break;
-	  
+
 	  printf("--more--");
 	  fflush(stdout);
-	  
+
 	  fgets(buf, 80, stdin);
 	  if (toupper(buf[0]) == 'Q')
 	    break;
@@ -124,4 +124,3 @@ do_hexdump(argc, argv)
 	if (fp != stdin)
 		fclose(fp);
 }
-
