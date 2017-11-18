@@ -53,8 +53,13 @@ extra-install:
 	@-if [ -h ${TARGET_DIR}/etc/resolv.conf -a -f $(ADK_TOPDIR)/extra/etc/resolv.conf ];then \
 		rm ${TARGET_DIR}/etc/resolv.conf;\
 	fi
-	@if [ -d $(ADK_TOPDIR)/extra ];then $(CP) $(ADK_TOPDIR)/extra/* ${TARGET_DIR};fi
-	@if [ ! -z $(extra) ];then $(CP) $(extra)/* ${TARGET_DIR};fi
+	@if test -d '${ADK_TOPDIR}/extra'; then \
+		(cd '${ADK_TOPDIR}/extra' && tar -cf - .) | \
+		    (cd ${TARGET_DIR}; tar -xf -); \
+	fi
+ifneq (,$(strip ${extra}))
+	@(cd '${extra}' && tar -cf - .) | (cd ${TARGET_DIR}; tar -xf -)
+endif
 
 image-prepare-post:
 	$(BASH) $(ADK_TOPDIR)/scripts/update-rcconf
