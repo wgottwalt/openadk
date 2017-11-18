@@ -20,7 +20,6 @@
 #include <sys/time.h>
 #include <sys/wait.h>
 
-static const char version[] = "OpenADK";
 static const char enoent_msg[] = "Bad command or file name";
 static const char unkerr_msg[] = "Unknown error!";
 
@@ -215,7 +214,7 @@ int main(argc, argv, env)
 		printf("Shell invoked to run file: %s\n",argv[1]);
 		}
 	else
-		printf("\nSash command shell (version %s)\n", version);
+		printf("\nSash command shell (OpenADK edition)\n");
 	fflush(stdout);
 
 	signal(SIGINT, catchint);

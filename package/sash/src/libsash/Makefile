@@ -1,5 +1,6 @@
 
 LIB = libsash.a
+RANLIB ?= ranlib
 CHOPSRC = utils.c
 LIBOBJS = intflag.o modestring.o timestring.o isadir.o copyfile.o \
 	buildname.o expandwildcards.o namesort.o match.o makeargs.o \
