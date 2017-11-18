@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		jupp
-PKG_VERSION:=		28
+PKG_VERSION:=		31
 PKG_RELEASE:=		1
-PKG_HASH:=		be4d16cb44f002a3f6f5069471096c53d9c184b7366ef1a055422d2f0006851f
+PKG_HASH:=		1a50607b0417cf230f7b3609c091e71e8d8e91185a4a3897f7925cd3b44cceba
 PKG_DESCR:=		wordstar-inspired text editor
 PKG_SECTION:=		app/editor
 PKG_URL:=		https://www.mirbsd.org/jupp.htm
