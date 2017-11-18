@@ -37,119 +37,119 @@ typedef struct {
 
 
 CMDTAB	cmdtab[] = {
-	"cd",		"[dirname]",		do_cd,
-	1,		2,
+	"cat",		"filename ...",
+	do_cat,		2,	MAXARGS,
 
-	"sleep",	"seconds",		do_sleep,
-	1,		2,
+	"cd",		"[dirname]",
+	do_cd,		1,	2,
 
-	"chgrp",	"gid filename ...",	do_chgrp,
-	3,		MAXARGS,
+	"chgrp",	"gid filename ...",
+	do_chgrp,	3,	MAXARGS,
 
-	"chmod",	"mode filename ...",	do_chmod,
-	3,		MAXARGS,
+	"chmod",	"mode filename ...",
+	do_chmod,	3,	MAXARGS,
 
-	"chown",	"uid filename ...",	do_chown,
-	3,		MAXARGS,
+	"chown",	"uid filename ...",
+	do_chown,	3,	MAXARGS,
 
-	"cmp",		"filename1 filename2",	do_cmp,
-	3,		3,
+	"cmp",		"filename1 filename2",
+	do_cmp,		3,	3,
 
-	"cp",		"srcname ... destname",	do_cp,
-	3,		MAXARGS,
+	"cp",		"srcname ... destname",
+	do_cp,		3,	MAXARGS,
 
-	"df",		"[file-system]",	do_df,
-	1,		2,
+	"date",		"date [MMDDhhmm[YYYY]]",
+	do_date,	1,	2,
 
-	"echo",		"[args] ...",		do_echo,
-	1,		MAXARGS,
+	"df",		"[file-system]",
+	do_df,		1,	2,
 
-	"exec",		"filename [args]",	do_exec,
-	2,		MAXARGS,
+	"echo",		"[args] ...",
+	do_echo,	1,	MAXARGS,
 
-	"exit",		"",			do_exit,
-	1,		1,
+	"exec",		"filename [args]",
+	do_exec,	2,	MAXARGS,
 
-	"free",		"",			do_free,
-	1,		1,
+	"exit",		"",
+	do_exit,	1,	1,
 
-	"help",		"",			do_help,
-	1,		MAXARGS,
+	"free",		"",
+	do_free,	1,	1,
 
-	"hexdump",	"[-s pos] filename",	do_hexdump,
-	1,		4,
+	"help",		"",
+	do_help,	1,	MAXARGS,
 
-	"hostname",	"[hostname]",		do_hostname,
-	1,		2,
+	"hexdump",	"[-s pos] filename",
+	do_hexdump,	1,	4,
 
-	"kill",		"[-sig] pid ...",	do_kill,
-	2,		MAXARGS,
+	"hostname",	"[hostname]",
+	do_hostname,	1,	2,
 
-	"ln",		"[-s] srcname ... destname",	do_ln,
-	3,		MAXARGS,
+	"kill",		"[-sig] pid ...",
+	do_kill,	2,	MAXARGS,
 
-	"ls",		"[-lidC] filename ...",	do_ls,
-	1,		MAXARGS,
+	"ln",		"[-s] srcname ... destname",
+	do_ln,		3,	MAXARGS,
 
-	"mkdir",	"dirname ...",		do_mkdir,
-	2,		MAXARGS,
+	"ls",		"[-lidC] filename ...",
+	do_ls,		1,	MAXARGS,
 
-	"mknod",	"filename type major minor",	do_mknod,
-	5,		5,
+	"mkdir",	"dirname ...",
+	do_mkdir,	2,	MAXARGS,
 
-	"more",		"filename ...",		do_more,
-	2,		MAXARGS,
+	"mknod",	"filename type major minor",
+	do_mknod,	5,	5,
 
-	"mount",	"[-t type] devname dirname",	do_mount,
-	3,		MAXARGS,
+	"more",		"filename ...",
+	do_more,	2,	MAXARGS,
 
-	"mv",		"srcname ... destname",	do_mv,
-	3,		MAXARGS,
+	"mount",	"[-t type] devname dirname",
+	do_mount,	3,	MAXARGS,
 
-	"printenv",	"[name]",		do_printenv,
-	1,		2,
+	"mv",		"srcname ... destname",
+	do_mv,		3,	MAXARGS,
 
-	"pwd",		"",			do_pwd,
-	1,		1,
+	"pid",		"",
+	do_pid,		1,	1,
 
-	"pid",		"",			do_pid,
-	1,		1,
+	"printenv",	"[name]",
+	do_printenv,	1,	2,
 
-	"quit",		"",			do_exit,
-	1,		1,
+	"ps",		"",
+	do_ps,		1,	MAXARGS,
 
-	"rm",		"filename ...",		do_rm,
-	2,		MAXARGS,
+	"pwd",		"",
+	do_pwd,		1,	1,
 
-	"rmdir",	"dirname ...",		do_rmdir,
-	2,		MAXARGS,
+	"quit",		"",
+	do_exit,	1,	1,
 
-	"setenv",	"name value",		do_setenv,
-	3,		3,
+	"rm",		"filename ...",
+	do_rm,		2,	MAXARGS,
 
-	"source",	"filename",		do_source,
-	2,		2,
+	"rmdir",	"dirname ...",
+	do_rmdir,	2,	MAXARGS,
 
-	"sync",		"",			do_sync,
-	1,		1,
+	"setenv",	"name value",
+	do_setenv,	3,	3,
 
-	"touch",	"filename ...",		do_touch,
-	2,		MAXARGS,
+	"sleep",	"seconds",
+	do_sleep,	1,	2,
 
-	"umask",	"[mask]",		do_umask,
-	1,		2,
+	"source",	"filename",
+	do_source,	2,	2,
 
-	"umount",	"filename",		do_umount,
-	2,		2,
+	"sync",		"",
+	do_sync,	1,	1,
 
-	"ps",		"",			do_ps,
-	1,		MAXARGS,
+	"touch",	"filename ...",
+	do_touch,	2,	MAXARGS,
 
-	"cat",		"filename ...",		do_cat,
-	2,		MAXARGS,
+	"umask",	"[mask]",
+	do_umask,	1,	2,
 
-	"date",		"date [MMDDhhmm[YYYY]]",	do_date,
-	1,		2,
+	"umount",	"filename",
+	do_umount,	2,	2,
 
 	0,		0,			0,
 	0,		0
