@@ -20,7 +20,9 @@
 #include <sys/time.h>
 #include <sys/wait.h>
 
-static char version[] = "OpenADK";
+static const char version[] = "OpenADK";
+static const char enoent_msg[] = "Bad command or file name";
+static const char unkerr_msg[] = "Unknown error!";
 
 extern int intflag;
 
@@ -430,9 +432,14 @@ command(cmd, do_history)
 	 * Now look for the command in the builtin table, and execute
 	 * the command if found.
 	 */
-	if (!command_in_path(argv[0]))
-		if (trybuiltin(argc, argv))
-			return;
+	if (!strcmp(argv[0], "builtin")) {
+		--argc;
+		++argv;
+		if (!*argv || !trybuiltin(argc, argv))
+			fprintf(stderr, "%s: %s\n", argv[-1], enoent_msg);
+		return;
+	} else if (!command_in_path(argv[0]) && trybuiltin(argc, argv))
+		return;
 
 	/*
 	 * Not found, run the program along the PATH list.
@@ -555,9 +562,6 @@ trybuiltin(argc, argv)
 
 	return TRUE;
 }
-
-static const char enoent_msg[] = "Bad command or file name";
-static const char unkerr_msg[] = "Unknown error!";
 
 /*
  * Execute the specified command.
