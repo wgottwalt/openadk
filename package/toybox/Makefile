@@ -23,6 +23,7 @@ CONFIG_STYLE:=		manual
 XAKE_FLAGS+=		CC="gcc" V=1 PREFIX="$(WRKINST)"
 
 do-configure:
+	-rm $(WRKBUILD)/toys/other/swap*.c
 	cd $(WRKBUILD); PATH='$(HOST_PATH)' $(MAKE) defconfig
 
 toybox-install:
