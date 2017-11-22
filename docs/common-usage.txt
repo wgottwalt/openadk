@@ -69,11 +69,13 @@ Environment variables
 OpenADK also honors some environment variables, when they are passed
 to +make+.
 
-* +ADK_APPLIANCE+, the appliance task you want to build 
+* +ADK_APPLIANCE+, the appliance task you want to build
+* +ADK_CUSTOM_TASKS_DIR+, extra directory to fetch tasks from
 * +ADK_TARGET_ARCH+, the architecture of the target system
 * +ADK_TARGET_SYSTEM+, the embedded target system name
 * +ADK_TARGET_LIBC+, the C library for the target system
 * +ADK_VERBOSE+, verbose build, when set to 1
+
 
 An example that creates a configuration file for Raspberry PI with all
 software packages enabled, but not included in the resulting firmware image:
@@ -84,4 +86,3 @@ software packages enabled, but not included in the resulting firmware image:
 
 This is often used in the development process of a target system, to verify that
 all packages are compilable.
-

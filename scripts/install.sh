@@ -64,10 +64,11 @@ panicreboot=10
 keep=0
 grub=0
 paragon_ext=0
+datapartcontent=""
 
 function usage {
 cat >&2 <<EOF
-Syntax: $me [-f filesystem] [-c cfgfssize] [-d datafssize] [-k] [-n] [-g]
+Syntax: $me [-f filesystem] [-c cfgfssize] [-d datafssize] [-D datafscontent] [-k] [-n] [-g]
     [-p panictime] [±q] [-s serialspeed] [±t] <target> <device> <archive>
 Partition sizes are in MiB. Filesystem type is currently ignored (ext4).
 To keep filesystem on data partition use -k.
@@ -76,8 +77,7 @@ Defaults: -c 1 -p 10 -s 115200; -t = enable serial console
 EOF
 	exit $1
 }
-
-while getopts "c:d:ef:ghknp:qs:t" ch; do
+while getopts "c:d:D:ef:ghknp:qs:tx:" ch; do
 	case $ch {
 	(c)	if (( (cfgfs = OPTARG) < 0 || cfgfs > 16 )); then
 			print -u2 "$me: -c $OPTARG out of bounds"
@@ -110,6 +110,11 @@ while getopts "c:d:ef:ghknp:qs:t" ch; do
 	(n)	noformat=1 ;;
 	(t)	serial=1 ;;
 	(+t)	serial=0 ;;
+        (D)	if [[ ! -d $OPTARG ]]; then
+			print -u2 "$me: -D $OPTARG must be an existing directory"
+			exit 1
+		fi
+                datapartcontent=$OPTARG;;
 	(*)	usage 1 ;;
 	}
 done
@@ -577,6 +582,14 @@ if (( datafssz )); then
 		echo "/dev/mmcblk0p2	/data	ext4	rw	0	0" >> "$R"/etc/fstab
 	;;
 	}
+        if [[ -d $datapartcontent ]]; then
+            mount_fs "$datapart" "$D" ext4
+            # strip trailing slash
+            case $datapartcontent in
+                *[!/]*/) datapartcontent=${datapartcontent%"${x##*[!/]}"};;
+            esac            
+            cp -R $datapartcontent/* "$D"
+        fi
 fi
 
 (( quiet )) || print Finishing up with bootloader and kernel ...
