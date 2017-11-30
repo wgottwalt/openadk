@@ -2,6 +2,7 @@
 mount -o remount,nosuid,size=128k,mode=0755 -t tmpfs mdev /dev
 # start mdev dynamic device node management
 echo >/dev/mdev.seq
+@ADK_RUNTIME_DEV_MDEV_LOGGING@
 if [ -f /proc/sys/kernel/hotplug ];then
 	echo "/sbin/mdev" >/proc/sys/kernel/hotplug
 fi

@@ -64,6 +64,10 @@ config ADK_RUNTIME_DEV_MDEV
 	depends on ADK_PACKAGE_BUSYBOX
 	depends on !ADK_RUNTIME_INIT_SYSTEMD
 
+config ADK_RUNTIME_DEV_MDEV_LOGGING
+	bool "Log mdev events into /dev/mdev.log"
+	depends on ADK_RUNTIME_DEV_MDEV
+
 config ADK_RUNTIME_DEV_UDEV
 	bool "Use udev"
 	select ADK_PACKAGE_UDEV

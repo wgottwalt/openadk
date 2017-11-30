@@ -21,6 +21,12 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+ifeq ($(ADK_RUNTIME_DEV_MDEV_LOGGING),y)
+ADK_RUNTIME_DEV_MDEV_LOGGING_LINE:='echo >/dev/mdev.log'
+else
+ADK_RUNTIME_DEV_MDEV_LOGGING_LINE:=''
+endif
+
 do-install:
 	$(CP) ./src/* $(IDIR_BASE_FILES)
 	mkdir -p $(IDIR_BASE_FILES)/{etc,dev,boot,root,sys,proc,tmp,run,var,mnt,media}
@@ -55,9 +61,11 @@ endif
 endif
 ifeq ($(ADK_RUNTIME_DEV_MDEV),y)
 	$(CP) ./files/rcdev.mdev $(IDIR_BASE_FILES)/etc/init.d/rcdev
+	$(SED) "s#@ADK_RUNTIME_DEV_MDEV_LOGGING@#"$(ADK_RUNTIME_DEV_MDEV_LOGGING_LINE)"#g" $(IDIR_BASE_FILES)/etc/init.d/rcdev
 	$(CP) ./files/mdev.conf $(IDIR_BASE_FILES)/etc
 	$(CP) ./files/mdev $(IDIR_BASE_FILES)/etc
 endif
+
 ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
 	$(CP) ./files/rcdev.udev $(IDIR_BASE_FILES)/etc/init.d/rcdev
 endif
