@@ -1,5 +1,5 @@
---- xfsprogs-4.11.0.orig/libxfs/Makefile	2017-05-05 20:47:11.000000000 +0200
-+++ xfsprogs-4.11.0/libxfs/Makefile	2017-06-02 14:32:27.354798232 +0200
+--- xfsprogs-4.13.1.orig/libxfs/Makefile	2017-09-09 02:35:35.000000000 +0200
++++ xfsprogs-4.13.1/libxfs/Makefile	2017-11-25 17:47:45.180739534 +0100
 @@ -118,9 +118,9 @@ LTLIBS = $(LIBPTHREAD) $(LIBRT)
  # don't try linking xfs_repair with a debug libxfs.
  DEBUG = -DNDEBUG
@@ -10,5 +10,5 @@
 -default: crc32selftest ltdepend $(LTLIBRARY)
 +default: ltdepend $(LTLIBRARY)
  
- crc32table.h: gen_crc32table.c
+ crc32table.h: gen_crc32table.c crc32defs.h
  	@echo "    [CC]     gen_crc32table"

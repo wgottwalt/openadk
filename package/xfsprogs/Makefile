@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		xfsprogs
-PKG_VERSION:=		4.11.0
+PKG_VERSION:=		4.13.1
 PKG_RELEASE:=		1
-PKG_HASH:=		c3a6d87b564d7738243c507df82276bed982265e345363a95f2c764e8a5f5bb2
+PKG_HASH:=		8c64d349d191e24c84eeb1611be767e4a11b81016bd5b73f3a20a0bf39dd3536
 PKG_DESCR:=		utilities for xfs filesystems
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libuuid libblkid libncurses
