@@ -108,11 +108,13 @@ endif
 
 TARGET_CFLAGS+=		-fPIC
 FAKE_FLAGS+=		INSTALLSUID="install -m 4755"
-HOST_CONFIGURE_ARGS+=	--enable-libuuid \
-			--enable-libblkid \
+HOST_CONFIGURE_ARGS+=	--enable-libblkid \
 			--enable-libmount \
 			--disable-all-programs \
 			--disable-use-tty-group
+ifneq ($(OS_FOR_BUILD),Darwin)
+HOST_CONFIGURE_ARGS+=   --enable-libuuid
+endif
 
 fdisk-install:
 	$(INSTALL_DIR) $(IDIR_FDISK)/usr/sbin
