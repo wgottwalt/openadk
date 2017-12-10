@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		barebox
-PKG_VERSION:=		2017.02.0
+PKG_VERSION:=		2017.11.0
 PKG_RELEASE:=		1
-PKG_HASH:=		d65d864fe598d61ed9c6712e32d50742e6996aae02acaae5955c3b22166344cb
+PKG_HASH:=		7dff97dd94807fd7c0012fd9ddb8bc799a220e2b65e46dcc56724105a56feecc
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 PKG_BUILDDEP:=		lzop-host
@@ -24,6 +24,14 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+BAREBOX_ARCH:=		$(ADK_TARGET_ARCH)
+ifeq ($(ADK_TARGET_ARCH_X86),y)
+CONFIG:=		efi_defconfig
+endif
+ifeq ($(ADK_TARGET_ARCH_X86_64),y)
+CONFIG:=		efi_defconfig
+BAREBOX_ARCH:=		x86
+endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPS),y)
 CONFIG:=		qemu-malta_defconfig
 endif
@@ -32,12 +40,12 @@ CONFIG:=		vexpress_ca9_defconfig
 endif
 
 do-configure:
-	(cd $(WRKBUILD) && $(MAKE) ARCH='$(ADK_TARGET_ARCH)' $(CONFIG))
+	(cd $(WRKBUILD) && $(MAKE) ARCH=$(BAREBOX_ARCH) $(CONFIG))
 
 do-build:
 	(cd $(WRKBUILD) && env \
 		PATH='$(HOST_PATH)' \
-		ARCH='$(ADK_TARGET_ARCH)' \
+		ARCH=$(BAREBOX_ARCH) \
 		CROSS_COMPILE='$(TARGET_CROSS)' \
 		$(MAKE))
 
