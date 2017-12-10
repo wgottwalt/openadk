@@ -115,7 +115,8 @@ config ADK_TARGET_ROOTFS_USB
 	select ADK_KERNEL_USB_UHCI_HCD
 	select ADK_KERNEL_USB_STORAGE
 	select ADK_PACKAGE_ADKINSTALL
-	depends on ADK_TARGET_WITH_USB_BOOT
+	depends on ADK_TARGET_WITH_USB_BOOT \
+		|| ADK_TARGET_GENERIC
 	help
 	  Boot system from USB stick. 
 
