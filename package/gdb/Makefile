@@ -20,6 +20,8 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+XAKE_FLAGS+=		MAKEINFO=true
+
 # --enable-static is required to build libbfd.a
 CONFIGURE_ARGS+=	--enable-static \
 			--without-uiout \
