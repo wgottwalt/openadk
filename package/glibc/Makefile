@@ -48,14 +48,14 @@ ifneq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 	$(CP) $(STAGING_TARGET_DIR)/lib/ld*.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH)
 	for file in libc libpthread librt libcrypt libdl libm libanl libnsl libresolv libutil libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_GLIBCVER).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
 else
 	# libnss_* required at runtime even for static builds
 	${INSTALL_DIR} ${IDIR_GLIBC}/$(ADK_TARGET_LIBC_PATH)
 	for file in libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
-		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_VERSION).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
+		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_GLIBCVER).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
 endif
 	${INSTALL_DIR} $(IDIR_GLIBC)/usr/bin
@@ -99,7 +99,7 @@ endif
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
 	-for file in libpthread librt libcrypt libdl libm libresolv libutil; do \
-		cd $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_VERSION).so $$file.so; \
+		cd $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_GLIBCVER).so $$file.so; \
 	done
 	# header package
 	${KERNEL_MAKE_ENV} \
