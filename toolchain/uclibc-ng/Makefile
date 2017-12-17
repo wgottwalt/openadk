@@ -16,6 +16,11 @@ TARGET_LDFLAGS:=$(filter-out -fstack-protector-all,$(TARGET_LDFLAGS))
 # don't use fast-math for C library
 TARGET_CFLAGS:=	$(filter-out -ffast-math,$(TARGET_CFLAGS))
 
+ifeq ($(ADK_TARGET_USE_STATIC_AND_SHARED_LIBS),y)
+TARGET_CFLAGS:=	$(filter-out -static,$(TARGET_CFLAGS))
+TARGET_LDFLAGS:=$(filter-out -static,$(TARGET_LDFLAGS))
+endif
+
 ifeq ($(ADK_BUILD_COMPILER_GCC),y)
 ifeq ($(ADK_TARGET_HARD_FLOAT),y)
 ifeq ($(ADK_TARGET_HARD_FLOAT_SP),y)

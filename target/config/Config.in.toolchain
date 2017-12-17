@@ -21,6 +21,10 @@ config ADK_TARGET_USE_SHARED_AND_STATIC_LIBS
 	bool "Create shared and static libraries and link dynamically"
 	depends on !ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_BINFMT_DSBT
 
+config ADK_TARGET_USE_STATIC_AND_SHARED_LIBS
+	bool "Create static and shared libraries and link statically"
+	depends on !ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_BINFMT_DSBT
+
 endchoice
 
 config ADK_TARGET_LIBC_WITH_LOCALE

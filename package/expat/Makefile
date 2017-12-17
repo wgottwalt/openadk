@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		expat
-PKG_VERSION:=		2.2.3
+PKG_VERSION:=		2.2.5
 PKG_RELEASE:=		1
-PKG_HASH:=		b31890fb02f85c002a67491923f89bda5028a880fd6c374f707193ad81aace5f
+PKG_HASH:=		d9dc32efba7e74f788fcc4f212a43216fc37cf5f23f4c2339664d473353aedf6
 PKG_DESCR:=		xml parsing library
 PKG_SECTION:=		libs/data
 PKG_NEEDS:=		c++
@@ -22,6 +22,11 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call HOST_template,LIBEXPAT,libexpat,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBEXPAT,libexpat,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+
+ifeq ($(ADK_TARGET_USE_STATIC_AND_SHARED_LIBS),y)
+TARGET_CFLAGS:=	$(filter-out -static,$(TARGET_CFLAGS))
+TARGET_LDFLAGS:=$(filter-out -static,$(TARGET_LDFLAGS))
+endif
 
 libexpat-install:
 	${INSTALL_DIR} ${IDIR_LIBEXPAT}/usr/lib

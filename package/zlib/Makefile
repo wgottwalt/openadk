@@ -19,6 +19,11 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,ZLIB,zlib,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,ZLIB,zlib,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
+ifeq ($(ADK_TARGET_USE_STATIC_AND_SHARED_LIBS),y)
+TARGET_CFLAGS:=	$(filter-out -static,$(TARGET_CFLAGS))
+TARGET_LDFLAGS:=$(filter-out -static,$(TARGET_LDFLAGS))
+endif
+
 HOST_STYLE:=		auto
 HOST_CONFIG_STYLE:=	manual
 HOST_CONFIGURE_ENV+=	uname=Linux

@@ -19,7 +19,7 @@ endif
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 CONFIGURE_LIB:=--enable-static --disable-shared
 endif
-ifeq ($(ADK_TARGET_USE_SHARED_AND_STATIC_LIBS),y)
+ifeq ($(ADK_TARGET_USE_SHARED_AND_STATIC_LIBS)$(ADK_TARGET_USE_STATIC_AND_SHARED_LIBS),y)
 CONFIGURE_LIB:=--enable-static --enable-shared
 endif
 
