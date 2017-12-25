@@ -50,6 +50,13 @@ endif
 
 ifneq ($(filter manual,${CONFIG_STYLE}),)
 	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)
+else ifneq ($(filter meson,${CONFIG_STYLE}),)
+	@$(CMD_TRACE) "configuring meson.. "
+	(cd ${WRKSRC} && PATH='${HOST_PATH}' \
+		meson --prefix /usr --libdir lib \
+		 --cross-file $(STAGING_HOST_DIR)/etc/meson/cross-compilation.conf \
+		 --buildtype release \
+		$(WRKSRC) $(WRKBUILD))
 else ifneq ($(filter cmake,${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring cmake.. "
 	sed -e "s#@@TARGET_CC@@#$(TARGET_CC_NO_CCACHE)#" \
@@ -130,7 +137,9 @@ post-build:
 ${_BUILD_COOKIE}: ${_CONFIGURE_COOKIE}
 	@env ${MAKE_ENV} ${MAKE} pre-build $(MAKE_TRACE)
 	@$(CMD_TRACE) "compiling.. "
-ifneq ($(filter manual,${BUILD_STYLE}),)
+ifneq ($(filter meson,${BUILD_STYLE}),)
+	PATH='$(HOST_PATH)' ninja -v -C $(WRKBUILD)
+else ifneq ($(filter manual,${BUILD_STYLE}),)
 	env ${MAKE_ENV} ${MAKE} ${MAKE_FLAGS} do-build $(MAKE_TRACE)
 else ifeq ($(strip ${BUILD_STYLE}),)
 	cd ${WRKBUILD} && env ${MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
@@ -151,7 +160,10 @@ ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
 	@mkdir -p '${STAGING_PKG_DIR}/stamps' ${WRKINST} '${STAGING_TARGET_DIR}/scripts'
 	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)
 	@env ${MAKE_ENV} ${MAKE} pre-install $(MAKE_TRACE)
-ifneq ($(filter manual,${INSTALL_STYLE}),)
+ifneq ($(filter meson,${INSTALL_STYLE}),)
+	DESTDIR='$(WRKINST)' PATH='$(HOST_PATH)' \
+		ninja -C $(WRKBUILD) install $(MAKE_TRACE)
+else ifneq ($(filter manual,${INSTALL_STYLE}),)
 	env ${MAKE_ENV} ${MAKE} do-install $(MAKE_TRACE)
 else ifeq ($(strip ${INSTALL_STYLE}),)
 	cd ${WRKBUILD} && env ${MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
