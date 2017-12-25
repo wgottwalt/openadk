@@ -1,12 +1,12 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-include ${ADK_TOPDIR}/rules.mk
+include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mpd
-PKG_VERSION:=		0.20.9
+PKG_VERSION:=		0.20.13
 PKG_RELEASE:=		1
-PKG_HASH:=		cd77a2869e32354b004cc6b34fcb0bee56114caa2d9ed862aaa8071441e34eb7
+PKG_HASH:=		46c1c534d80a52de00263e8ef43a6011ff9d765232443749539ef26b1b48ff40
 PKG_DESCR:=		music player daemon
 PKG_SECTION:=		mm/audio
 PKG_DEPENDS:=		libmpdclient boost libncurses libexpat
@@ -131,9 +131,9 @@ endif
 
 PKGFD_WITH_HTTPD:=	enable http output
 
-include ${ADK_TOPDIR}/mk/package.mk
+include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,MPD,mpd,${PKG_VERSION}-${PKG_RELEASE},${PKG_FDEPENDS},${PKG_DESCR},${PKG_SECTION}))
+$(eval $(call PKG_template,MPD,mpd,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_FDEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 TARGET_CPPFLAGS+=	-D_GNU_SOURCE -D_POSIX_SOURCE
 TARGET_CFLAGS+=		-std=gnu99
@@ -153,87 +153,87 @@ CONFIGURE_ARGS+=	--disable-fifo \
 			--enable-inotify \
 			--enable-pipe-output
 
-ifneq (${ADK_PACKAGE_MPD_WITH_JACK},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_JACK),)
 CONFIGURE_ARGS+=	--enable-jack
 else
 CONFIGURE_ARGS+=	--disable-jack
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_SNDFILE},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_SNDFILE),)
 CONFIGURE_ARGS+=	--enable-sndfile
 else
 CONFIGURE_ARGS+=	--disable-sndfile
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_HTTPD},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_HTTPD),)
 CONFIGURE_ARGS+=	--enable-httpd-output
 else
 CONFIGURE_ARGS+=	--disable-httpd-output
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_AVAHI},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_AVAHI),)
 CONFIGURE_ARGS+=	--with-zeroconf=avahi
 else
 CONFIGURE_ARGS+=	--with-zeroconf=no
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_PULSE},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_PULSE),)
 CONFIGURE_ARGS+=	--enable-pulse
 else
 CONFIGURE_ARGS+=	--disable-pulse
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_ALSA},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_ALSA),)
 CONFIGURE_ARGS+=	--enable-alsa
 else
 CONFIGURE_ARGS+=	--disable-alsa
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_AO},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_AO),)
 CONFIGURE_ARGS+=	--enable-ao
 else
 CONFIGURE_ARGS+=	--disable-ao
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_MP3},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_MP3),)
 CONFIGURE_ARGS+=	--enable-id3 --enable-mad
 else
 CONFIGURE_ARGS+=	--disable-id3 --disable-mad
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_MP4},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_MP4),)
 CONFIGURE_ARGS+=	--enable-aac
 else
 CONFIGURE_ARGS+=	--disable-aac
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_OGG},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_OGG),)
 CONFIGURE_ARGS+=	--enable-vorbis
 else
 CONFIGURE_ARGS+=	--disable-vorbis
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_TREMOR},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_TREMOR),)
 CONFIGURE_ARGS+=	\
 			--disable-vorbis \
 			--with-tremor \
-			--with-tremor-includes=${STAGING_TARGET_DIR}/usr/include \
-			--with-tremor-libraries=${STAGING_TARGET_DIR}/usr/lib
+			--with-tremor-includes=$(STAGING_TARGET_DIR)/usr/include \
+			--with-tremor-libraries=$(STAGING_TARGET_DIR)/usr/lib
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_FLAC},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_FLAC),)
 CONFIGURE_ARGS+=	--enable-flac
 else
 CONFIGURE_ARGS+=	--disable-flac
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_WAV},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_WAV),)
 CONFIGURE_ARGS+=	--enable-audiofile
 else
 CONFIGURE_ARGS+=	--disable-audiofile
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_SHOUT},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_SHOUT),)
 CONFIGURE_ARGS+=	--enable-shout \
 			--enable-lame-encoder \
 			--enable-vorbis-encoder
@@ -243,40 +243,42 @@ CONFIGURE_ARGS+=	--disable-shout \
 			--disable-vorbis-encoder
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_CURL},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_CURL),)
 CONFIGURE_ARGS+=	--enable-curl
 else
 CONFIGURE_ARGS+=	--disable-curl
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_MMS},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_MMS),)
 CONFIGURE_ARGS+=	--enable-mms
 else
 CONFIGURE_ARGS+=	--disable-mms
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_FFMPEG},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_FFMPEG),)
 CONFIGURE_ARGS+=	--enable-ffmpeg
 else
 CONFIGURE_ARGS+=	--disable-ffmpeg
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_SAMPLERATE},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_SAMPLERATE),)
 CONFIGURE_ARGS+=	--enable-lsr
 else
 CONFIGURE_ARGS+=	--disable-lsr
 endif
 
-ifneq (${ADK_PACKAGE_MPD_WITH_OPUS},)
+ifneq ($(ADK_PACKAGE_MPD_WITH_OPUS),)
 CONFIGURE_ARGS+=	--enable-opus
 else
 CONFIGURE_ARGS+=	--disable-opus
 endif
 
 mpd-install:
-	${INSTALL_DIR} ${IDIR_MPD}/etc
-	${INSTALL_DIR} ${IDIR_MPD}/usr/bin
-	${INSTALL_BIN} ${WRKINST}/usr/bin/mpd ${IDIR_MPD}/usr/bin
-	${INSTALL_DATA} ./files/mpd.conf ${IDIR_MPD}/etc/mpd.conf
+	$(INSTALL_DIR) $(IDIR_MPD)/etc
+	$(INSTALL_DIR) $(IDIR_MPD)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/mpd \
+		$(IDIR_MPD)/usr/bin
+	$(INSTALL_DATA) ./files/mpd.conf \
+		$(IDIR_MPD)/etc
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
