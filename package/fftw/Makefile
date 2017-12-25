@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		fftw
-PKG_VERSION:=		3.3.4
+PKG_VERSION:=		3.3.7
 PKG_RELEASE:=		1
-PKG_HASH:=		8f0cde90929bc05587c3368d2f15cd0530a60b8a9912a8e2979a72dbe5af0982
+PKG_HASH:=		3b609b7feba5230e8f6dd8d245ddbefac324c5a6ae4186947670d9ac2cd25573
 PKG_DESCR:=		fftw fourier lib
 PKG_SECTION:=		libs/audio
 PKG_URL:=		http://www.fftw.org
