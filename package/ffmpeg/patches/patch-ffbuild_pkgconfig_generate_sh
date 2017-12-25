@@ -1,0 +1,13 @@
+--- ffmpeg-3.4.1.orig/ffbuild/pkgconfig_generate.sh	2017-12-10 22:35:06.000000000 +0100
++++ ffmpeg-3.4.1/ffbuild/pkgconfig_generate.sh	2017-12-24 20:55:30.186266110 +0100
+@@ -29,8 +29,8 @@ version=$(grep ${name}_VERSION= $name/${
+ cat <<EOF > $name/$fullname.pc
+ prefix=$prefix
+ exec_prefix=\${prefix}
+-libdir=$libdir
+-includedir=$incdir
++libdir=\${prefix}/lib
++includedir=\${prefix}/include
+ 
+ Name: $fullname
+ Description: $comment
