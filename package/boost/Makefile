@@ -4,10 +4,10 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		boost
-PKG_VERSION:=		1.61.0
-PKG_EXTRAVER:=		1_61
-PKG_RELEASE:=		2
-PKG_HASH:=		a77c7cc660ec02704c6884fbb20c552d52d60a18f26573c9cee0788bf00ed7e6
+PKG_VERSION:=		1.66.0
+PKG_EXTRAVER:=		1_66
+PKG_RELEASE:=		1
+PKG_HASH:=		bd0df411efd9a585e5a2212275f8762079fed8842264954675a4fddc46cfcf60
 PKG_DESCR:=		portable c++ library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		python2-host
@@ -55,7 +55,6 @@ CONFIGURE_ARGS+=	--target=$(GNU_TARGET_NAME) \
 			--without-mpi \
 			--without-context \
 			--without-coroutine \
-			--without-coroutine2 \
 			--without-locale
 
 ifneq (${ADK_PACKAGE_BOOST_IOSTREAMS},)
