@@ -32,7 +32,7 @@ CONFIG_STYLE=		manual
 ifeq ($(ADK_TARGET_CPU_WITH_SSE2),y)
 TARGET_CFLAGS+=		-msse2
 else
-ifeq ($ADK_TARGET_CPU_WITH_SSE),y)
+ifeq ($(ADK_TARGET_CPU_WITH_SSE),y)
 TARGET_CFLAGS+=		-msse
 endif
 endif
@@ -47,6 +47,6 @@ brutefir-install:
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/brutefir \
 		$(IDIR_BRUTEFIR)/usr/bin
 	$(CP) $(WRKINST)/usr/lib/* \
-		$(IDIR_BRUTEFIR)/usr/lib/
+		$(IDIR_BRUTEFIR)/usr/lib
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
