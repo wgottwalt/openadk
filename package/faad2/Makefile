@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		faad2
-PKG_VERSION:=		2.7
+PKG_VERSION:=		2.8.8
 PKG_RELEASE:=		1
-PKG_HASH:=		ee26ed1e177c0cd8fa8458a481b14a0b24ca0b51468c8b4c8b676fd3ceccd330
+PKG_HASH:=		985c3fadb9789d2815e50f4ff714511c79c2710ac27a4aaaf5c0c2662141426d
 PKG_DESCR:=		mp4 decoding library
 PKG_SECTION:=		libs/video
 PKG_URL:=		http://sourceforge.net/projects/faac/
