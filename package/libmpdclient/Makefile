@@ -4,25 +4,29 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libmpdclient
-PKG_VERSION:=		2.10
+PKG_VERSION:=		2.13
 PKG_RELEASE:=		1
-PKG_HASH:=		4f08cde82dae70895f8e4532a6e9b54b201efd5591c6b5d6834895807ed2ff82
+PKG_HASH:=		5115bd52bc20a707c1ecc7587e6389c17305348e2132a66cf767c62fc55ed45d
 PKG_DESCR:=		library for interfacing music player daemon
 PKG_SECTION:=		libs/audio
+PKG_BUILDDEP:=		meson-host
 PKG_URL:=		http://www.musicpd.org/
 PKG_SITES:=		http://www.musicpd.org/download/libmpdclient/2/
 PKG_OPTS:=		dev
 
 include $(ADK_TOPDIR)/mk/package.mk
 
-$(eval $(call PKG_template,LIBMPDCLIENT,libmpdclient,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
+$(eval $(call PKG_template,LIBMPDCLIENT,libmpdclient,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION),$(PKG_OPTS)))
 
-CONFIGURE_ENV+=		ac_cv_lib_nsl_gethostbyname=no
-CONFIGURE_ARGS+=	--disable-documentation
+WRKBUILD=               $(WRKDIR)/$(PKG_NAME)-obj
+
+CONFIG_STYLE:=		meson
+BUILD_STYLE:=		meson
+INSTALL_STYLE:=		meson
 
 libmpdclient-install:
 	$(INSTALL_DIR) $(IDIR_LIBMPDCLIENT)/usr/lib
 	$(CP) $(WRKINST)/usr/lib/libmpdclient*.so* \
 		$(IDIR_LIBMPDCLIENT)/usr/lib
 
-include ${ADK_TOPDIR}/mk/pkg-bottom.mk
+include $(ADK_TOPDIR)/mk/pkg-bottom.mk
