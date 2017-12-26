@@ -219,18 +219,21 @@ prompt "bootup messages from kernel"
 
 config ADK_RUNTIME_VERBOSE_KERNEL_VGA_ONLY
 	bool "output via VGA only"
-	depends on ADK_TARGET_WITH_VGA
+	depends on ADK_TARGET_WITH_VGA \
+		|| ADK_TARGET_GENERIC
 
 config ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_ONLY
 	bool "output via serial console only"
 	depends on ADK_TARGET_WITH_SERIAL \
 		|| ADK_TARGET_QEMU \
-		|| ADK_TARGET_SIM
+		|| ADK_TARGET_SIM \
+		|| ADK_TARGET_GENERIC
 
 config ADK_RUNTIME_VERBOSE_KERNEL_VGA_SERIAL
 	bool "output via VGA and serial console"
 	depends on ADK_TARGET_WITH_SERIAL && \
-		   ADK_TARGET_WITH_VGA
+		   ADK_TARGET_WITH_VGA || \
+		   ADK_TARGET_GENERIC
 	help
 	  Output is via VGA and serial console. 
 	  Init can use only serial via /dev/console.
@@ -238,7 +241,8 @@ config ADK_RUNTIME_VERBOSE_KERNEL_VGA_SERIAL
 config ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_VGA
 	bool "output via serial console and VGA"
 	depends on ADK_TARGET_WITH_SERIAL && \
-		   ADK_TARGET_WITH_VGA
+		   ADK_TARGET_WITH_VGA || \
+		   ADK_TARGET_GENERIC
 	help
 	  Output is via serial console and VGA. 
 	  Init can use only VGA via /dev/console.
@@ -257,7 +261,7 @@ default ADK_RUNTIME_VERBOSE_INIT_SERIAL
 
 config ADK_RUNTIME_VERBOSE_INIT_VGA
 	bool "output via VGA"
-	depends on ADK_TARGET_WITH_VGA
+	depends on ADK_TARGET_WITH_VGA || ADK_TARGET_GENERIC
 	depends on ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_VGA || \
 		   ADK_RUNTIME_VERBOSE_KERNEL_VGA_ONLY || \
 		   ADK_RUNTIME_QUIET_KERNEL
@@ -266,7 +270,8 @@ config ADK_RUNTIME_VERBOSE_INIT_SERIAL
 	bool "output via serial"
 	depends on ADK_TARGET_WITH_SERIAL \
 		|| ADK_TARGET_QEMU \
-		|| ADK_TARGET_SIM
+		|| ADK_TARGET_SIM \
+		|| ADK_TARGET_GENERIC
 	depends on ADK_RUNTIME_VERBOSE_KERNEL_VGA_SERIAL || \
 		   ADK_RUNTIME_VERBOSE_KERNEL_SERIAL_ONLY || \
 		   ADK_RUNTIME_QUIET_KERNEL
