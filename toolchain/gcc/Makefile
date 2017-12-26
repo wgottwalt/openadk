@@ -122,7 +122,11 @@ GCC_CONFOPTS+=		--disable-symvers
 endif
 
 ifeq ($(ADK_TARGET_ARCH_CSKY),y)
+ifeq ($(ADK_TARGET_CPU_CSKY_CK610),y)
 GCC_CONFOPTS+=		--with-cskyabi=abiv1
+else
+GCC_CONFOPTS+=		--with-cskyabi=abiv2
+endif
 endif
 
 ifeq ($(ADK_TARGET_ARCH_METAG),y)
