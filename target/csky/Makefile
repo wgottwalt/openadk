@@ -7,6 +7,11 @@ include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
 
+QEMU_ARGS:=${ADK_QEMU_ARGS}
+ifeq ($(ADK_TARGET_CPU_CSKY_CK610),y)
+QEMU:=qemu-system-cskyv1
+endif
+
 # target helper text
 ifeq ($(ADK_TARGET_FS),archive)
 targethelp:
@@ -25,6 +30,10 @@ endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo "Start qemu with following command line:"
+	@echo '${QEMU} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+endif
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 targethelp:
