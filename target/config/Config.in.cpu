@@ -1302,13 +1302,6 @@ config ADK_TARGET_CPU_TILE_TILEGX
 	select ADK_TARGET_WITH_MMU
 	depends on ADK_TARGET_ARCH_TILE
 
-config ADK_TARGET_CPU_TILE_TILEPRO
-	bool "tilepro"
-	select ADK_TARGET_SUPPORTS_THREADS
-	select ADK_TARGET_SUPPORTS_NPTL
-	select ADK_TARGET_WITH_MMU
-	depends on ADK_TARGET_ARCH_TILE
-
 # v850
 config ADK_TARGET_CPU_V850
 	bool "v850"
@@ -2098,7 +2091,6 @@ config ADK_TARGET_CPU_FLAGS
 	default "-m4" if ADK_TARGET_CPU_SH_SH4
 	default "-m4a" if ADK_TARGET_CPU_SH_SH4A
 	default "-mcpu=tilegx" if ADK_TARGET_CPU_TILE_TILEGX
-	default "-mcpu=tilepro" if ADK_TARGET_CPU_TILE_TILEPRO
 
 # ADK suffix
 config ADK_TARGET_CPU_TYPE
@@ -2275,7 +2267,6 @@ config ADK_TARGET_CPU_ARCH
 	default "sparc" if ADK_TARGET_ARCH_SPARC
 	default "sparc64" if ADK_TARGET_ARCH_SPARC64
 	default "tilegx" if ADK_TARGET_CPU_TILE_TILEGX
-	default "tilepro" if ADK_TARGET_CPU_TILE_TILEPRO
 	default "v850" if ADK_TARGET_ARCH_V850
 	default "x86_64" if ADK_TARGET_ARCH_X86_64
 	default "xtensa" if ADK_TARGET_ARCH_XTENSA
