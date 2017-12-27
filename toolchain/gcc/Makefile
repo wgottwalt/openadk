@@ -27,7 +27,7 @@ TARGET_CXXFLAGS:=	$(filter-out -static,$(TARGET_CXXFLAGS))
 endif
 
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
-			--with-bugurl="http://www.openadk.org/" \
+			--with-bugurl="https://openadk.org/" \
 			--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_HOST_NAME) \
 			--target=$(GNU_TARGET_NAME) \
@@ -356,8 +356,6 @@ $(WRKBUILD)/.final:
 ifeq ($(ADK_TARGET_CPU_CF),y)
 	find $(STAGING_TARGET_DIR) -name libgcc.a -print | while read t; do $(GNU_TARGET_NAME)-ar dv "$t" _ctors.o; done
 endif
-	# remove any libiberty.a, breaking package/binutils later
-	-rm $(STAGING_TARGET_DIR)/usr/lib/libiberty.a
 	# cleanup unneeded docs
 	rm -rf $(TOOLCHAIN_DIR)/usr/share
 	# cleanup unneeded libtool files
