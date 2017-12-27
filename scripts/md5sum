@@ -4,6 +4,9 @@
 
 if [ -x /usr/bin/md5sum ]; then
 	/usr/bin/md5sum "$@"
+else if [ -x /bin/md5sum ]; then
+	/bin/md5sum "$@"
 else
 	md5 "$@" | sed 's#MD5 (\([^)]*\)) = \(.*\)#\2  \1#'
+fi
 fi
