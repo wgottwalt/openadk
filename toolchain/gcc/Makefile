@@ -21,8 +21,10 @@ TARGET_CFLAGS:=		$(filter-out -msep-data,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -msep-data,$(TARGET_CXXFLAGS))
 endif
 
+ifeq ($(ADK_TARGET_USE_STATIC_AND_SHARED_LIBS),y)
 TARGET_CFLAGS:=		$(filter-out -static,$(TARGET_CFLAGS))
 TARGET_CXXFLAGS:=	$(filter-out -static,$(TARGET_CXXFLAGS))
+endif
 
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--with-bugurl="http://www.openadk.org/" \
