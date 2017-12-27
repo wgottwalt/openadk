@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		kodi
-PKG_VERSION:=		17.3
+PKG_VERSION:=		17.6
 PKG_RELEASE:=		1
-PKG_HASH:=		ca97d044dc544568f34f067688b783d29f180b5e504814d5d947143b2f7e6d7b
+PKG_HASH:=		c8312fe92e5bab1cdac1da93d60baed88fa1574146c50c44e3c86d01671c2b1d
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		python2 libsquish libressl libxz
@@ -23,8 +23,7 @@ PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis
 PKG_BUILDDEP+=		curl flac bzip2 libtiff yajl cmake-host
 PKG_BUILDDEP+=		tinyxml sqlite pcre libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame
-PKG_BUILDDEP+=		alsa-lib glib libmodplug
-PKG_BUILDDEP+=		libgpg-error libvorbis
+PKG_BUILDDEP+=		alsa-lib glib libmodplug libgpg-error libvorbis
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
 PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish libdcadec
 PKG_BUILDDEP+=		libcrossguid libressl xz bzip2 liblzo
@@ -50,6 +49,7 @@ CMAKE_FLAGS+= 		-DENABLE_CCACHE=OFF \
 			-DENABLE_DVDCSS=ON \
 			-DENABLE_INTERNAL_CROSSGUID=OFF \
 			-DENABLE_INTERNAL_FFMPEG=OFF \
+			-DWITH_FFMPEG=$(STAGING_TARGET_DIR)/usr \
 			-DKODI_DEPENDSBUILD=OFF \
 			-DENABLE_OPENSSL=ON \
 			-DENABLE_MYSQLCLIENT=OFF \
@@ -90,7 +90,6 @@ CMAKE_FLAGS+=		-DCORE_SYSTEM_NAME=linux
 endif
 
 pre-configure:
-	#(cd $(WRKBUILD)/lib/cpluff && env PATH='$(AUTOTOOL_PATH)' ./autogen.sh)
 	(cd $(WRKBUILD)/../../tools/depends/native/JsonSchemaBuilder && PATH='$(HOST_PATH)' cmake .)
 	PATH='$(HOST_PATH)' make -C $(WRKBUILD)/../../tools/depends/native/JsonSchemaBuilder
 	cp $(WRKBUILD)/../../tools/depends/native/JsonSchemaBuilder/JsonSchemaBuilder \
