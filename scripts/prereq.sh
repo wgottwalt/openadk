@@ -162,11 +162,11 @@ newdir=$(pwd)
 if [ ! -z "$olddir" ]; then
   if [ "$olddir" != "$newdir" ]; then
     printf " --->  adk directory was relocated, fixing .."
-    sed -i -e "s#$olddir#$newdir#g" $(find target_* -name \*.pc|xargs) 2>/dev/null
-    sed -i -e "s#$olddir#$newdir#g" $(find host_${gnu_host_name} -type f|xargs) 2>/dev/null
-    sed -i -e "s#$olddir#$newdir#g" $(find target_*/scripts -type f|xargs) 2>/dev/null
+    sed -i -e "s#$olddir#$newdir#g" $(find target_* -name \*.pc 2>/dev/null|xargs) 2>/dev/null
+    sed -i -e "s#$olddir#$newdir#g" $(find host_${gnu_host_name} -type f 2>/dev/null|xargs) 2>/dev/null
+    sed -i -e "s#$olddir#$newdir#g" $(find target_*/scripts -type f 2>/dev/null|xargs) 2>/dev/null
     sed -i -e "s#$olddir#$newdir#" target_*/etc/ipkg.conf 2>/dev/null
-    sleep 2
+    sleep 1
     printf "done\n"
   fi
 fi
@@ -225,7 +225,7 @@ printf " --->  checking if bash is installed.. "
 if which bash >/dev/null; then
   printf "found\n"
   printf " --->  checking if it is bash 4.x.. "
-  bash --version 2>/dev/null| grep "GNU bash" | grep -i " 4." >/dev/null
+  LANG=C bash --version 2>/dev/null| grep -i "version 4" >/dev/null
   if [ $? -eq 0 ]; then
     printf "yes\n"
   else
