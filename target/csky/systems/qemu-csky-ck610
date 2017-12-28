@@ -1,0 +1,7 @@
+config ADK_TARGET_SYSTEM_QEMU_CSKY_CK610
+	bool "Qemu Emulator (ck610)"
+	select ADK_TARGET_QEMU
+	select ADK_TARGET_CPU_CSKY_CK610
+	help
+	  Qemu Emulator for C-SKY architecture (ck610).
+

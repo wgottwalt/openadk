@@ -8,8 +8,14 @@ include $(ADK_TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
 
 QEMU_ARGS:=${ADK_QEMU_ARGS}
-ifeq ($(ADK_TARGET_CPU_CSKY_CK610),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_CSKY_CK610),y)
 QEMU:=qemu-system-cskyv1
+endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_CSKY_CK807F),y)
+QEMU:=qemu-system-cskyv2
+endif
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_CSKY_CK810F),y)
+QEMU:=qemu-system-cskyv2
 endif
 
 # target helper text
