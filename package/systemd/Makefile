@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		systemd
 PKG_VERSION:=		234
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		da3e69d10aa1c983d33833372ad4929037b411ac421fb085c8cee79ae1d80b6a
 PKG_DESCR:=		system and service manager
 PKG_SECTION:=		base/init
@@ -18,6 +18,14 @@ PKG_SITES:=		https://github.com/systemd/systemd/archive/
 
 PKG_CFLINE_SYSTEMD:=	select BUSYBOX_SULOGIN
 PKG_LIBC_DEPENDS:=	!musl
+
+PKG_FLAVOURS_SYSTEMD:=	WITH_PAM WITH_XZ
+PKGFD_WITH_PAM:=	enable pam support
+PKGFS_WITH_PAM:=	pam
+PKGFB_WITH_PAM:=	pam
+PKGFD_WITH_XZ:=		enable xz support
+PKGFS_WITH_XZ:=		xz
+PKGFB_WITH_XZ:=		xz
 
 DISTFILES:=             v$(PKG_VERSION).tar.gz
 
@@ -34,7 +42,6 @@ CONFIGURE_ARGS+=	--disable-static \
 			--disable-manpages \
 			--disable-selinux \
 			--enable-split-usr \
-			--disable-pam \
 			--disable-ima \
 			--disable-efi \
 			--disable-gnuefi \
@@ -55,7 +62,6 @@ CONFIGURE_ARGS+=	--disable-static \
 			--disable-polkit \
 			--disable-bzip2 \
 			--disable-lz4 \
-			--disable-xz \
 			--disable-zlib \
 			--disable-libcurl \
 			--disable-gcrypt \
@@ -82,6 +88,18 @@ CONFIGURE_ARGS+=	--disable-static \
 			--enable-timesyncd \
 			--enable-tmpfiles \
 			--enable-firstboot
+
+ifeq ($(ADK_PACKAGE_SYSTEMD_WITH_PAM),y)
+CONFIGURE_ARGS+=	--enable-pam
+else
+CONFIGURE_ARGS+=	--disable-pam
+endif
+
+ifeq ($(ADK_PACKAGE_SYSTEMD_WITH_XZ),y)
+CONFIGURE_ARGS+=	--enable-xz
+else
+CONFIGURE_ARGS+=	--disable-xz
+endif
 
 systemd-install:
 	$(INSTALL_DIR) $(IDIR_SYSTEMD)/etc
