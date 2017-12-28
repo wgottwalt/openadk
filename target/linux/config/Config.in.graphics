@@ -10,16 +10,22 @@ depends on ADK_TARGET_WITH_VGA \
 config ADK_KERNEL_VT
 	bool
 	default y if ADK_TARGET_WITH_VGA
+	default y if ADK_TARGET_SYSTEM_GENERIC_X86
+	default y if ADK_TARGET_SYSTEM_GENERIC_X86_64
 	default n
 
 config ADK_KERNEL_VT_CONSOLE
 	bool
 	default y if ADK_TARGET_WITH_VGA
+	default y if ADK_TARGET_SYSTEM_GENERIC_X86
+	default y if ADK_TARGET_SYSTEM_GENERIC_X86_64
 	default n
 
 config ADK_KERNEL_VGA_CONSOLE
 	bool
 	default y if ADK_TARGET_WITH_VGA
+	default y if ADK_TARGET_SYSTEM_GENERIC_X86
+	default y if ADK_TARGET_SYSTEM_GENERIC_X86_64
 	default n
 
 config ADK_KERNEL_FONTS
