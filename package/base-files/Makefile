@@ -6,7 +6,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 
 PKG_NAME:=		base-files
 PKG_VERSION:=		1.1
-PKG_RELEASE:=		25
+PKG_RELEASE:=		26
 PKG_SECTION:=		base/apps
 PKG_DESCR:=		basic files and scripts
 
@@ -65,7 +65,7 @@ ifeq ($(ADK_RUNTIME_INIT_SYSV),y)
 	cp ./files/inittab.sysv $(IDIR_BASE_FILES)/etc/inittab
 	test -z $(ADK_RUNTIME_SHELL) || \
 	    cat ./files/inittab.shell >> $(IDIR_BASE_FILES)/etc/inittab
-ifeq ($(ADK_TARGET_WITH_VGA),y)
+ifeq ($(ADK_TARGET_WITH_VGA)$(ADK_TARGET_GENERIC),y)
 	test -z $(ADK_RUNTIME_SHELL) || \
 		cat ./files/inittab.shellvga >> $(IDIR_BASE_FILES)/etc/inittab
 endif

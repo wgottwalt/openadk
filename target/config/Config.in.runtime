@@ -304,7 +304,8 @@ endchoice
 
 config ADK_RUNTIME_GETTY_VGA
 	bool "start getty on VGA console (tty1-tty6)"
-	depends on ADK_RUNTIME_GETTY && ADK_TARGET_WITH_VGA
+	depends on ADK_RUNTIME_GETTY \
+                && (ADK_TARGET_WITH_VGA || ADK_TARGET_GENERIC)
 	default y if ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
 	default y if ADK_TARGET_QEMU_WITH_GRAPHIC
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI
@@ -326,6 +327,7 @@ config ADK_RUNTIME_GETTY_SERIAL
 	bool "start getty on serial console"
 	depends on ADK_RUNTIME_GETTY && ( ADK_TARGET_WITH_SERIAL \
 		|| ADK_TARGET_QEMU \
+		|| ADK_TARGET_GENERIC \
 		|| ADK_TARGET_SIM )
 	default n if ADK_TARGET_QEMU_WITH_GRAPHIC_ONLY
 	default n if ADK_TARGET_QEMU_WITH_GRAPHIC
@@ -343,13 +345,14 @@ config ADK_RUNTIME_GETTY_SERIAL
 
 config ADK_RUNTIME_CONSOLE_VGA_DEVICE
 	string "VGA console device"
-	depends on ADK_TARGET_WITH_VGA
+	depends on ADK_TARGET_WITH_VGA || ADK_TARGET_GENERIC
 	default "tty0"
 
 config ADK_RUNTIME_CONSOLE_SERIAL_DEVICE
 	string "serial console device"
 	depends on ADK_TARGET_WITH_SERIAL \
 		|| ADK_TARGET_QEMU \
+		|| ADK_TARGET_GENERIC \
 		|| ADK_TARGET_SIM
 	default "hvc0" if ADK_TARGET_SYSTEM_QEMU_PPC64
 	default "ttyBF0" if ADK_TARGET_ARCH_BFIN
@@ -384,6 +387,7 @@ config ADK_RUNTIME_CONSOLE_SERIAL_SPEED
 	string "serial console speed"
 	depends on ADK_TARGET_WITH_SERIAL \
 		|| ADK_TARGET_QEMU \
+		|| ADK_TARGET_GENERIC \
 		|| ADK_TARGET_SIM
 	default "9600" if ADK_TARGET_SYSTEM_FON_FON2100
 	default "9600" if ADK_TARGET_SYSTEM_SGI_INDY

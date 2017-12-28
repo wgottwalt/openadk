@@ -687,7 +687,7 @@ if (( grub )); then
 		fi
 		print
 		print 'menuentry "GNU/Linux (OpenADK)" {'
-		linuxargs="root=PARTUUID=$partuuid $consargs"
+		linuxargs="root=PARTUUID=$partuuid $consargs rootwait"
 		(( panicreboot )) && linuxargs="$linuxargs panic=$panicreboot"
 		print "\tlinux /boot/kernel $linuxargs"
 		print '}'
