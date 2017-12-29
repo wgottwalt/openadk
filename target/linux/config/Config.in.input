@@ -6,6 +6,7 @@ depends on ADK_TARGET_WITH_USB \
 	|| ADK_TARGET_WITH_INPUT \
 	|| ADK_TARGET_WITH_TOUCHSCREEN \
 	|| ADK_TARGET_QEMU \
+	|| ADK_TARGET_GENERIC \
 	|| ADK_TARGET_VBOX
 
 config ADK_KERNEL_SERIO
@@ -122,6 +123,7 @@ config ADK_KERNEL_USB_HID
 	select ADK_KERNEL_HID_SUPPORT
 	select ADK_KERNEL_HID_GENERIC
 	depends on ADK_TARGET_WITH_USB \
+		|| ADK_TARGET_GENERIC \
 		|| ADK_TARGET_QEMU
 	help
 	  You need this driver for USB keyboard and mouse support.
