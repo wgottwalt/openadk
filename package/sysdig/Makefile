@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		sysdig
-PKG_VERSION:=		2a7fa53b035fabe85b5d83aa7de20080056fb4bc
+PKG_VERSION:=		ce24a1dd0925c0ed5df9c3e3e290817f536715cf
 PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_DESCR:=		system troubleshooting tool
@@ -33,6 +33,8 @@ XAKE_FLAGS+=		KERNELDIR="$(LINUX_DIR)" \
 sysdig-install:
 	$(INSTALL_DIR) $(IDIR_SYSDIG)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/sysdig \
+		$(IDIR_SYSDIG)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/bin/csysdig \
 		$(IDIR_SYSDIG)/usr/bin
 	$(INSTALL_DIR) $(IDIR_SYSDIG)/usr/share
 	$(CP) $(WRKINST)/usr/share/* \
