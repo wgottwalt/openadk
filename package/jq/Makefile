@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		jq
 PKG_VERSION:=		1.5
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		c4d2bfec6436341113419debf479d833692cc5cdab7eb0326b5a4d4fbe9f493c
 PKG_DESCR:=		command-line json processor
 PKG_SECTION:=		sys/misc
@@ -19,6 +19,9 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,JQ,jq,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
 jq-install:
+	$(INSTALL_DIR) $(IDIR_JQ)/usr/lib
+	$(CP) $(WRKINST)/usr/lib/libjq.so* \
+		$(IDIR_JQ)/usr/lib
 	$(INSTALL_DIR) $(IDIR_JQ)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/jq \
 		$(IDIR_JQ)/usr/bin
