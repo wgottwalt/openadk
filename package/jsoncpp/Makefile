@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		jsoncpp
-PKG_VERSION:=		9cb88d2ca66af19c53a98843d159cc1d32ebaec6
+PKG_VERSION:=		2f227cb122584989a61278e93f9a26b1a7e3d1bf
 PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_DESCR:=		c++ library for json
