@@ -6,12 +6,6 @@ include ../rules.mk
 include Makefile.inc
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 
-ifneq ($(ADK_DEBUG),)
-GLIBC_FLAGS:=		-O2 -g3
-else
-GLIBC_FLAGS:=		-O2
-endif
-
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_TARGET_NAME) \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
@@ -41,8 +35,8 @@ endif
 
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
                         BUILD_CC=${CC_FOR_BUILD} \
-                        CFLAGS="$(GLIBC_FLAGS)" \
-                        CXXFLAGS="$(GLIBC_FLAGS)" \
+                        CFLAGS="$(TARGET_CFLAGS)" \
+                        CXXFLAGS="$(TARGET_CXXFLAGS)" \
                         CC="${TARGET_CC}" \
                         CXX="${TARGET_CXX}" \
                         AR="${TARGET_AR}" \
