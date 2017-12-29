@@ -8,8 +8,8 @@ PKG_VERSION:=		0.3.5
 PKG_RELEASE:=		1
 PKG_HASH:=		734bc21dea11262113fa86b928d09812618b3966f352350cf916a6ae0d343f32
 PKG_DESCR:=		embedded package manager
-PKG_DEPENDS:=		libcurl libarchive gpgme
-PKG_BUILDDEP:=		curl libarchive gpgme
+PKG_DEPENDS:=		libcurl libarchive gpgme libressl xz
+PKG_BUILDDEP:=		curl libarchive gpgme xz libressl
 HOST_BUILDDEP:=		libarchive-host curl-host
 PKG_NEEDS:=		threads
 PKG_SECTION:=		sys/misc
@@ -26,10 +26,13 @@ $(eval $(call PKG_template,OPKG,opkg,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS
 
 HOST_CONFIGURE_ARGS+=	--disable-openssl \
 			--disable-gpg \
+			--disable-xz \
 			--disable-ssl-curl
-CONFIGURE_ARGS+=	--disable-openssl \
-			--enable-gpg \
-			--disable-ssl-curl
+CONFIGURE_ARGS+=	--disable-bzip2 \
+			--enable-ssl-curl \
+			--enable-openssl \
+			--enable-xz \
+			--enable-gpg
 
 opkg-install:
 	$(INSTALL_DIR) $(IDIR_OPKG)/usr/bin
