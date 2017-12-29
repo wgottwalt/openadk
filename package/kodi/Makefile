@@ -10,7 +10,7 @@ PKG_HASH:=		c8312fe92e5bab1cdac1da93d60baed88fa1574146c50c44e3c86d01671c2b1d
 PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		python2 libsquish libressl libxz
-PKG_DEPENDS+=		libass libmpeg2 libmad libiconv
+PKG_DEPENDS+=		libass libmpeg2 libmad
 PKG_DEPENDS+=		libogg libvorbis libmodplug libcurl
 PKG_DEPENDS+=		libflac libbz2 libtiff libnettle librtmp liblzo
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libncurses
@@ -103,6 +103,9 @@ pre-configure:
 		$(STAGING_HOST_DIR)/usr/bin
 
 kodi-install:
+	# we need a symlink to /data 
+	$(INSTALL_DIR) $(IDIR_KODI)/root
+	cd $(IDIR_KODI)/root && ln -sf ../data/kodi .kodi
 	$(INSTALL_DIR) $(IDIR_KODI)/usr/lib/kodi/addons
 	$(CP) $(WRKINST)/usr/lib/kodi/* \
 		$(IDIR_KODI)/usr/lib/kodi

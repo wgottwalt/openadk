@@ -15,7 +15,7 @@ start)
 	if [ ! -d /data/kodi ]; then
 		mkdir /data/kodi
 	fi
-	LD_LIBRARY_PATH=/opt/vc/lib /usr/lib/kodi/kodi.bin &
+	/usr/lib/kodi/kodi.bin &
 	;;
 stop)
 	kill $(pgrep -f /usr/lib/kodi/kodi.bin)
