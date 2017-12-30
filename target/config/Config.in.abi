@@ -18,6 +18,36 @@ endchoice
 
 choice
 prompt "ABI"
+depends on ADK_TARGET_ARCH_RISCV32
+
+config ADK_TARGET_ABI_ILP32
+	bool "ilp32 ABI"
+
+config ADK_TARGET_ABI_ILP32F
+	bool "ilp32f ABI"
+
+config ADK_TARGET_ABI_ILP32D
+	bool "ilp32d ABI"
+
+endchoice
+
+choice
+prompt "ABI"
+depends on ADK_TARGET_ARCH_RISCV64
+
+config ADK_TARGET_ABI_LP64
+	bool "lp64 ABI"
+
+config ADK_TARGET_ABI_LP64F
+	bool "lp64f ABI"
+
+config ADK_TARGET_ABI_LP64D
+	bool "lp64d ABI"
+
+endchoice
+
+choice
+prompt "ABI"
 depends on ADK_TARGET_ARCH_X86_64 && \
 	(ADK_TARGET_LIB_GLIBC || ADK_TARGET_LIB_MUSL)
 
@@ -65,4 +95,10 @@ config ADK_TARGET_ABI_CFLAGS
 	default "-m32" if ADK_TARGET_ABI_32
 	default "-mx32" if ADK_TARGET_ABI_X32
 	default "-m64" if ADK_TARGET_ABI_64
+	default "-mabi=lp64" if ADK_TARGET_ABI_LP64
+	default "-mabi=lp64f" if ADK_TARGET_ABI_LP64F
+	default "-mabi=lp64d" if ADK_TARGET_ABI_LP64D
+	default "-mabi=ilp32" if ADK_TARGET_ABI_ILP32
+	default "-mabi=ilp32f" if ADK_TARGET_ABI_ILP32F
+	default "-mabi=ilp32d" if ADK_TARGET_ABI_ILP32D
 
