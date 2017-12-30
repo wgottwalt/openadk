@@ -104,8 +104,7 @@ pre-configure:
 
 kodi-install:
 	# we need a symlink to /data 
-	$(INSTALL_DIR) $(IDIR_KODI)/root
-	cd $(IDIR_KODI)/root && ln -sf ../data/kodi .kodi
+	cd $(IDIR_KODI)/ && ln -sf ../data/kodi .kodi
 	$(INSTALL_DIR) $(IDIR_KODI)/usr/lib/kodi/addons
 	$(CP) $(WRKINST)/usr/lib/kodi/* \
 		$(IDIR_KODI)/usr/lib/kodi
