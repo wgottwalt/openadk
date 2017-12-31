@@ -6,6 +6,9 @@ include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux
+ifeq ($(ADK_TARGET_SYSTEM_DEC_MULTIA),y)
+KERNEL:=$(LINUX_DIR)/arch/alpha/boot/bootpfile
+endif
 
 QEMU_ARGS:=-monitor null
 QEMU_ARGS+=${ADK_QEMU_ARGS}
@@ -52,14 +55,22 @@ ifeq ($(ADK_TARGET_FS),nfsroot)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo 'The nfs root tarball is: ${FW_DIR}/${ROOTFSUSERTARBALL}'
+ifeq ($(ADK_TARGET_SYSTEM_DEC_MULTIA),y)
+	@echo 'To netboot the Dec multia type following in SRM console:'
+	@echo '>>>boot ewa0 -protocols bootp -fl "root=/dev/nfs ip=dhcp"'
+endif
 endif
 
 # image creation and kernel install
 kernel-strip:
+ifeq ($(ADK_TARGET_SYSTEM_DEC_MULTIA),y)
+	cp $(KERNEL) $(BUILD_DIR)/${TARGET_KERNEL}
+else
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
+endif
 
 kernel-install: kernel-strip
-	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
+	cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/${TARGET_KERNEL}
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)

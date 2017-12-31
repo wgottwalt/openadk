@@ -1,0 +1,43 @@
+diff -Nur linux-4.9.71.orig/arch/alpha/boot/tools/objstrip.c linux-4.9.71/arch/alpha/boot/tools/objstrip.c
+--- linux-4.9.71.orig/arch/alpha/boot/tools/objstrip.c	2017-12-20 10:07:34.000000000 +0100
++++ linux-4.9.71/arch/alpha/boot/tools/objstrip.c	2017-12-30 21:23:09.114510547 +0100
+@@ -191,38 +191,8 @@
+ 		    prog_name, (long) elf_phdr->p_vaddr,
+ 		    elf_phdr->p_vaddr + fil_size, offset);
+ 	}
+-    } else
+-#endif
+-    {
+-	aout = (struct exec *) buf;
+-
+-	if (!(aout->fh.f_flags & COFF_F_EXEC)) {
+-	    fprintf(stderr, "%s: %s is not in executable format\n",
+-		    prog_name, inname);
+-	    exit(1);
+-	}
+-
+-	if (aout->fh.f_opthdr != sizeof(aout->ah)) {
+-	    fprintf(stderr, "%s: %s has unexpected optional header size\n",
+-		    prog_name, inname);
+-	    exit(1);
+-	}
+-
+-	if (N_MAGIC(*aout) != OMAGIC) {
+-	    fprintf(stderr, "%s: %s is not an OMAGIC file\n",
+-		    prog_name, inname);
+-	    exit(1);
+-	}
+-	offset = N_TXTOFF(*aout);
+-	fil_size = aout->ah.tsize + aout->ah.dsize;
+-	mem_size = fil_size + aout->ah.bsize;
+-
+-	if (verbose) {
+-	    fprintf(stderr, "%s: extracting %#016lx-%#016lx (at %lx)\n",
+-		    prog_name, aout->ah.text_start,
+-		    aout->ah.text_start + fil_size, offset);
+-	}
+     }
++#endif
+ 
+     if (lseek(fd, offset, SEEK_SET) != offset) {
+ 	perror("lseek");
