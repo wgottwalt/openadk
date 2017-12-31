@@ -22,6 +22,13 @@ PKG_RELEASE:=		1
 PKG_SITES:=		https://github.com/riscv/riscv-newlib.git
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
+ifeq ($(ADK_TARGET_LIB_NEWLIB_XTENSA),y)
+PKG_VERSION:=		xtensa
+PKG_GIT:=		branch
+PKG_RELEASE:=		1
+PKG_SITES:=		https://github.com/jcmvbkbc/newlib-xtensa.git
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+endif
 ifeq ($(ADK_TARGET_LIB_NEWLIB_FROSTED),y)
 PKG_VERSION:=		frosted
 PKG_GIT:=		branch

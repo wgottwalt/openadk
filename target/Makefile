@@ -140,11 +140,23 @@ config-prepare: $(ADK_TOPDIR)/.config
 	    >$(BUILD_DIR)/.frostedapps
 endif
 
+ifeq ($(ADK_TARGET_OS_ZEPHYR),y)
+config-prepare: $(ADK_TOPDIR)/.config
+	echo foo
+endif
+
 ifeq ($(ADK_TARGET_OS_FROSTED),y)
 prepare: frosted-prepare
 compile: frosted-compile
 install: frosted-install
 targethelp: frosted-targethelp
+endif
+
+ifeq ($(ADK_TARGET_OS_ZEPHYR),y)
+prepare: zephyr-prepare
+compile: zephyr-compile
+install: zephyr-install
+targethelp: zephyr-targethelp
 endif
 
 ifeq ($(ADK_TARGET_OS_LINUX),y)

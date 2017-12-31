@@ -14,6 +14,11 @@ config ADK_TARGET_OS_FROSTED
 	help
 	  Create a frosted appliance or toolchain.
 
+config ADK_TARGET_OS_ZEPHYR
+	bool "Zephyr"
+	help
+	  Create a zephyr appliance or toolchain.
+
 config ADK_TARGET_OS_BAREMETAL
 	bool "Bare metal"
 	help
