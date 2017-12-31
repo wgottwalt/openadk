@@ -215,6 +215,10 @@ ifneq ($(ADK_TARGET_MIPS_ABI),)
 GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_MIPS_ABI}
 endif
 
+ifneq ($(ADK_TARGET_ABI_RISCV),)
+GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_ABI_RISCV}
+endif
+
 ifeq (${ADK_MAKE_PARALLEL},y)
 GCC_MAKEOPTS+=		-j${ADK_MAKE_JOBS}
 endif
