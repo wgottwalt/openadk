@@ -82,8 +82,8 @@ CONFIGURE_ARGS+=	--enable-dga \
 			--enable-glx \
 			--enable-aiglx \
 			--with-xkb-output=/tmp \
-			--with-os-vendor=OpenADK \
-			--with-vendor-web="http://openadk.org"
+			--with-os-vendor="$(ADK_VENDOR)" \
+			--with-vendor-web="$(ADK_VENDOR_URL)"
 
 ifeq (${ADK_PACKAGE_XORG_SERVER_WITH_KDRIVE},y)
 CONFIGURE_ARGS+=	--enable-kdrive --enable-xfbdev --enable-kdrive-kbd --enable-kdrive-mouse --enable-kdrive-evdev
