@@ -3,6 +3,16 @@
 
 menu "Global settings"
 
+config ADK_VENDOR
+	string "Vendor name"
+	default "openadk"
+	help
+	  Vendor string is used for toolchain and other packages.
+
+config ADK_VENDOR_URL
+	string "Vendor url"
+	default "https://openadk.org"
+
 config ADK_HOST
 	string "webserver for packages and distfiles"
 	default "openadk.org"

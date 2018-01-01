@@ -27,7 +27,7 @@ TARGET_CXXFLAGS:=	$(filter-out -static,$(TARGET_CXXFLAGS))
 endif
 
 GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
-			--with-bugurl="https://openadk.org/" \
+			--with-bugurl="$(ADK_VENDOR_URL)" \
 			--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_HOST_NAME) \
 			--target=$(GNU_TARGET_NAME) \

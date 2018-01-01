@@ -78,12 +78,6 @@ endmenu
 menu "Toolchain settings"
 	visible if !ADK_TARGET_CHOOSE_ARCH
 
-config ADK_VENDOR
-	string "Vendor name"
-	default "openadk"
-	help
-	  Vendor string is used for toolchain.
-
 source "target/config/Config.in.archopts"
 source "target/config/Config.in.fpu"
 source "target/config/Config.in.float"

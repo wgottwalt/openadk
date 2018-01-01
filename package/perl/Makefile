@@ -33,7 +33,7 @@ CONFIGURE_ARGS:=	--target=$(GNU_TARGET_NAME) \
 			-Dccflags="$(TARGET_CFLAGS)" \
 			-Dldflags="$(TARGET_LDFLAGS) -lm" \
 			-Dmydomain="" \
-			-Dmyuname="OpenADK" \
+			-Dmyuname="$(ADK_VENDOR)" \
 			-Dosname=linux \
 			-Dosvers=4.0 \
 			-Dperladmin=root
