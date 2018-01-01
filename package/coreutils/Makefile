@@ -4,15 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		coreutils
-PKG_VERSION:=		8.24
-PKG_RELEASE:=		3
-PKG_HASH:=		a2d75286a4b9ef3a13039c2da3868a61be4ee9f17d8ae380a35a97e506972170
+PKG_VERSION:=		8.25
+PKG_RELEASE:=		1
+PKG_HASH:=		31e67c057a5b32a582f26408c789e11c2e8d676593324849dcf5779296cdce87
 PKG_DESCR:=		file, shell and text utilities
 PKG_SECTION:=		base/apps
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.gnu.org/software/coreutils/
 PKG_SITES:=		http://ftp.gnu.org/gnu/coreutils/
-PKG_BB:=		1
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
