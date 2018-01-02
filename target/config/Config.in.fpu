@@ -15,6 +15,7 @@ config ADK_TARGET_ARCH_PPC_WITH_ALTIVEC
 config ADK_TARGET_ARCH_ARM_WITH_NEON
 	bool "enable NEON SIMD support"
 	depends on ADK_TARGET_ARCH_ARM && ADK_TARGET_CPU_WITH_NEON
+	depends on !ADK_TARGET_LIB_GLIBC
 	default n
 	help
 	  Enable support for NEON SIMD CPU extensions.
