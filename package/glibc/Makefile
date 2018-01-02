@@ -51,7 +51,6 @@ ifneq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file-$(PKG_GLIBCVER).so $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
 	done
 else
-	# libnss_* required at runtime even for static builds
 	${INSTALL_DIR} ${IDIR_GLIBC}/$(ADK_TARGET_LIBC_PATH)
 	for file in libnss_dns libnss_files; do \
 		$(CP) $(STAGING_TARGET_DIR)/lib/$$file.so* $(IDIR_GLIBC)/$(ADK_TARGET_LIBC_PATH); \
@@ -73,8 +72,7 @@ glibc-gconv-install:
 
 glibc-dev-install:
 	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH) $(IDIR_GLIBC_DEV)/usr/lib
-	# install linker script
-	cp ./files/libc.so.$(ADK_TARGET_CPU_ARCH) $(IDIR_GLIBC_DEV)/usr/lib/libc.so
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_GLIBC_DEV}/usr/lib
 ifeq ($(ADK_TARGET_ABI_O32),y)
 ifeq ($(ADK_TARGET_BIG_ENDIAN),y)
 	$(SED) "s#@@ELFTARGET@@#elf32-tradbigmips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
@@ -103,7 +101,7 @@ endif
 	done
 	# header package
 	${KERNEL_MAKE_ENV} \
-	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_VERSION)/linux-$(KERNEL_FILE_VER) \
+	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_FILE_VER)-1/linux-$(KERNEL_FILE_VER) \
 		$(KERNEL_MAKE_OPTS) \
 		INSTALL_HDR_PATH=$(IDIR_GLIBC_DEV)/usr \
 		headers_install
