@@ -141,6 +141,11 @@ POSTCONFIG=		-@\
 		if [ $$cleandir -eq 1 ];then \
 			echo "You should rebuild with 'make cleansystem'";\
 		fi; \
+		if [ "$$(grep ^ADK_TARGET_KERNEL_USE_DEFCONFIG .config)" ];then \
+			if [ "$$(grep ^ADK_TARGET_KERNEL_DEFCONFIG .config|awk -F= '{print $$2}')" == '""' ];then \
+			echo "custom Linux defconfig name missing";\
+			fi; \
+		fi; \
 		if [ $$rebuild -eq 1 ];then \
 			cp .config .config.old;\
 		fi; \
