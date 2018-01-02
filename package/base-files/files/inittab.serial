@@ -1,1 +1,1 @@
-@DEVICE@::respawn:/sbin/getty -i -L @DEVICE@ @SPEED@ vt100
+@DEVICE@::respawn:/sbin/getty -i -L @DEVICE@ @SPEED@ vt100 @AUTOLOGIN@

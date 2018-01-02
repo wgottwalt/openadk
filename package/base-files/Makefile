@@ -27,6 +27,12 @@ else
 ADK_RUNTIME_DEV_MDEV_LOGGING_LINE:=''
 endif
 
+ifeq ($(ADK_RUNTIME_GETTY_SERIAL_AUTOLOGIN),y)
+ADK_RUNTIME_GETTY_SERIAL_AUTOLOGIN_STANZA:= -n -l autologin
+else
+ADK_RUNTIME_GETTY_SERIAL_AUTOLOGIN_STANZA:=
+endif
+
 do-install:
 	$(CP) ./src/* $(IDIR_BASE_FILES)
 	mkdir -p $(IDIR_BASE_FILES)/{etc,dev,boot,root,sys,proc,tmp,run,var,mnt,media}
@@ -83,6 +89,7 @@ endif
 	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
 	$(SED) 's#@DEVICE@#$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE)#g' $(IDIR_BASE_FILES)/etc/inittab
 	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
+	$(SED) 's#@AUTOLOGIN@#$(ADK_RUNTIME_GETTY_SERIAL_AUTOLOGIN_STANZA)#' $(IDIR_BASE_FILES)/etc/inittab
 endif
 ifeq ($(ADK_RUNTIME_INIT_SYSVINIT),y)
 	cp ./files/inittab.sysvinit $(IDIR_BASE_FILES)/etc/inittab
