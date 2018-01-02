@@ -6,6 +6,12 @@ include ../rules.mk
 include Makefile.inc
 include ${ADK_TOPDIR}/mk/buildhlp.mk
 
+# glibc does not compile with Os and CPU specific FLAGS for m68k/x86_64
+ifeq ($(ADK_TARGET_ARCH_X86_64)$(ADK_TARGET_ARCH_M68K),y)
+TARGET_CFLAGS:=		-O2
+TARGET_CXXFLAGS:=	-O2
+endif
+
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_TARGET_NAME) \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
