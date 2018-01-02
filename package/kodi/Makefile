@@ -17,13 +17,13 @@ PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libncurses
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate libuuid
 PKG_DEPENDS+=		taglib libjasper libmp3lame
 PKG_DEPENDS+=		libgpg-error python2-mod-sqlite libffmpeg
-PKG_DEPENDS+=		libvorbisenc alsa-lib glib libdcadec
+PKG_DEPENDS+=		libvorbisenc glib libdcadec
 PKG_BUILDDEP:=		python2 libass ffmpeg rtmpdump
 PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis
 PKG_BUILDDEP+=		curl flac bzip2 libtiff yajl cmake-host
 PKG_BUILDDEP+=		tinyxml sqlite pcre libcdio freetype 
 PKG_BUILDDEP+=		libsamplerate taglib libjasper lame
-PKG_BUILDDEP+=		alsa-lib glib libmodplug libgpg-error libvorbis
+PKG_BUILDDEP+=		glib libmodplug libgpg-error libvorbis
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
 PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish libdcadec
 PKG_BUILDDEP+=		libcrossguid libressl xz bzip2 liblzo
@@ -36,6 +36,28 @@ WRKDIST=		${WRKDIR}/xbmc-$(PKG_VERSION)-Krypton
 WRKSRC=			$(WRKDIR)/xbmc-$(PKG_VERSION)-Krypton/project/cmake
 
 PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 raspberry-pi3
+
+PKG_FLAVOURS_KODI:=	WITH_ALSA WITH_CEC WITH_PULSEAUDIO WITH_SMB
+PKG_FLAVOURS_KODI+=	WITH_MICROHTTPD WITH_SSH
+PKGFD_WITH_ALSA:=	enable alsa support
+PKGFS_WITH_ALSA:=	alsa-lib
+PKGFB_WITH_ALSA:=	alsa-lib
+PKGFD_WITH_CEC:=	enable cec support
+PKGFS_WITH_CEC:=	libcec
+PKGFB_WITH_CEC:=	libcec
+PKGFD_WITH_MICROHTTPD:=	enable microhttpd support
+PKGFS_WITH_MICROHTTPD:=	libmicrohttpd
+PKGFB_WITH_MICROHTTPD:=	libmicrohttpd
+PKGFD_WITH_PULSEAUDIO:=	enable pulseaudio support
+PKGFS_WITH_PULSEAUDIO:=	pulseaudio
+PKGFB_WITH_PULSEAUDIO:=	pulseaudio
+PKGFD_WITH_SMB:=	enable smb support
+PKGFS_WITH_SMB:=	samba
+PKGFB_WITH_SMB:=	samba
+PKGFD_WITH_SSH:=	enable ssh support
+PKGFS_WITH_SSH:=	libssh
+PKGFB_WITH_SSH:=	libssh
+
 
 include $(ADK_TOPDIR)/mk/package.mk
 
@@ -60,16 +82,11 @@ CMAKE_FLAGS+= 		-DENABLE_CCACHE=OFF \
 			-DENABLE_BLUETOOTH=OFF \
 			-DENABLE_BLURAY=OFF \
 			-DENABLE_AIRTUNES=OFF \
-			-DENABLE_SSH=OFF \
-			-DENABLE_SMBCLIENT=OFF \
-			-DENABLE_CEC=OFF \
 			-DENABLE_AVAHI=OFF \
 			-DENABLE_LCMS2=OFF \
 			-DENABLE_LIRC=OFF \
 			-DENABLE_UPNP=OFF \
 			-DENABLE_OPTICAL=OFF \
-			-DENABLE_PULSEAUDIO=OFF \
-			-DENABLE_MICROHTTPD=OFF \
 			-DENABLE_DBUS=OFF \
 			-DENABLE_EVENTCLIENTS=OFF \
 			-DENABLE_UDEV=OFF \
@@ -84,10 +101,40 @@ CMAKE_FLAGS+=		-DCORE_SYSTEM_NAME=rbpi \
 			-DWITH_CPU=arm \
 			-DENABLE_OPENGL=OFF \
 			-DENABLE_X11=OFF \
-			-DENABLE_ALSA=ON \
 			-DENABLE_OPENGLES=ON
 else
 CMAKE_FLAGS+=		-DCORE_SYSTEM_NAME=linux
+endif
+
+ifeq ($(ADK_PACKAGE_KODI_WITH_ALSA),y)
+CMAKE_FLAGS+=		-DENABLE_ALSA=ON
+else
+CMAKE_FLAGS+=		-DENABLE_ALSA=OFF
+endif
+ifeq ($(ADK_PACKAGE_KODI_WITH_CEC),y)
+CMAKE_FLAGS+=		-DENABLE_CEC=ON
+else
+CMAKE_FLAGS+=		-DENABLE_CEC=OFF
+endif
+ifeq ($(ADK_PACKAGE_KODI_WITH_MICROHTTPD),y)
+CMAKE_FLAGS+=		-DENABLE_MICROHTTPD=ON
+else
+CMAKE_FLAGS+=		-DENABLE_MICROHTTPD=OFF
+endif
+ifeq ($(ADK_PACKAGE_KODI_WITH_PULSEAUDIO),y)
+CMAKE_FLAGS+=		-DENABLE_PULSEAUDIO=ON
+else
+CMAKE_FLAGS+=		-DENABLE_PULSEAUDIO=OFF
+endif
+ifeq ($(ADK_PACKAGE_KODI_WITH_SMB),y)
+CMAKE_FLAGS+=		-DENABLE_SMBCLIENT=ON
+else
+CMAKE_FLAGS+=		-DENABLE_SMBCLIENT=OFF
+endif
+ifeq ($(ADK_PACKAGE_KODI_WITH_SSH),y)
+CMAKE_FLAGS+=		-DENABLE_SSH=ON
+else
+CMAKE_FLAGS+=		-DENABLE_SSH=OFF
 endif
 
 ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
