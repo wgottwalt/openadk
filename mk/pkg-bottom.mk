@@ -52,10 +52,10 @@ ifneq ($(filter manual,${CONFIG_STYLE}),)
 	env ${CONFIGURE_ENV} ${MAKE} do-configure $(MAKE_TRACE)
 else ifneq ($(filter meson,${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring meson.. "
-	(cd ${WRKSRC} && PATH='${HOST_PATH}' \
+	(cd ${WRKSRC} && $(MESON_ENV) \
 		meson --prefix /usr --libdir lib \
 		 --cross-file $(STAGING_HOST_DIR)/etc/meson/cross-compilation.conf \
-		 --buildtype release \
+		 --buildtype release $(MESON_FLAGS) \
 		$(WRKSRC) $(WRKBUILD))
 else ifneq ($(filter cmake,${CONFIG_STYLE}),)
 	@$(CMD_TRACE) "configuring cmake.. "

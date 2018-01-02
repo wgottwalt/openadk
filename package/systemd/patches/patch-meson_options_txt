@@ -1,0 +1,11 @@
+--- systemd-236.orig/meson_options.txt	2017-12-14 23:09:57.000000000 +0100
++++ systemd-236/meson_options.txt	2018-01-01 21:03:50.574757135 +0100
+@@ -284,7 +284,7 @@ option('bashcompletiondir', type : 'stri
+ option('zshcompletiondir', type : 'string',
+        description : 'directory for zsh completion scripts ["no" disables]')
+ 
+-option('tests', type : 'combo', choices : ['true', 'unsafe'],
++option('tests', type : 'combo', choices : ['true', 'unsafe', 'false'],
+        description : 'enable extra tests with =unsafe')
+ option('slow-tests', type : 'boolean', value : 'false',
+        description : 'run the slow tests by default')

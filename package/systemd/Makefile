@@ -4,28 +4,32 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		systemd
-PKG_VERSION:=		234
-PKG_RELEASE:=		2
-PKG_HASH:=		da3e69d10aa1c983d33833372ad4929037b411ac421fb085c8cee79ae1d80b6a
+PKG_VERSION:=		236
+PKG_RELEASE:=		1
+PKG_HASH:=		0cadccfa7109232ec2a469d41ca595d5595b83b648b534ea669c15dbca904c43
 PKG_DESCR:=		system and service manager
 PKG_SECTION:=		base/init
 PKG_DEPENDS:=		libcap libmount libuuid libblkid libncurses libkmod
-PKG_BUILDDEP:=		intltool-host gperf-host libcap util-linux gettext-host kmod
-PKG_KDEPENDS:=		cgroups namespaces fhandle tmpfs-posix-acl tmpfs-xattr
+PKG_BUILDDEP:=		intltool-host gperf-host libcap util-linux 
+PKG_BUILDDEP+=		gettext-host kmod meson-host ninja-host
+PKG_KDEPENDS:=		inotify-user cgroups namespaces fhandle tmpfs-posix-acl tmpfs-xattr
 PKG_NEEDS:=		locale intl
 PKG_URL:=		https://wiki.freedesktop.org/www/Software/systemd/
 PKG_SITES:=		https://github.com/systemd/systemd/archive/
 
-PKG_CFLINE_SYSTEMD:=	select BUSYBOX_SULOGIN
+PKG_CFLINE_SYSTEMD:=	select BUSYBOX_SULOGIN if ADK_RUNTIME_BASE_BUSYBOX
 PKG_LIBC_DEPENDS:=	!musl
 
-PKG_FLAVOURS_SYSTEMD:=	WITH_PAM WITH_XZ
+PKG_FLAVOURS_SYSTEMD:=	WITH_PAM WITH_XZ WITH_ZLIB
 PKGFD_WITH_PAM:=	enable pam support
 PKGFS_WITH_PAM:=	pam
 PKGFB_WITH_PAM:=	pam
 PKGFD_WITH_XZ:=		enable xz support
 PKGFS_WITH_XZ:=		xz
 PKGFB_WITH_XZ:=		xz
+PKGFD_WITH_ZLIB:=	enable zlib support
+PKGFS_WITH_ZLIB:=	zlib
+PKGFB_WITH_ZLIB:=	zlib
 
 DISTFILES:=             v$(PKG_VERSION).tar.gz
 
@@ -33,72 +37,81 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,SYSTEMD,systemd,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 
-XAKE_FLAGS+=		V=1
+WRKBUILD=               $(WRKDIR)/$(PKG_NAME)-obj
 
-AUTOTOOL_STYLE:=	autogen
-CONFIGURE_ENV+=		ac_cv_path_SULOGIN=/sbin/sulogin \
-			ac_cv_path_MOUNT_PATH=/bin/mount
-CONFIGURE_ARGS+=	--disable-static \
-			--disable-manpages \
-			--disable-selinux \
-			--enable-split-usr \
-			--disable-ima \
-			--disable-efi \
-			--disable-gnuefi \
-			--disable-ldconfig \
-			--disable-tests \
-			--disable-coverage \
-			--with-default-dnssec=no \
-			--without-python \
-			--disable-acl \
-			--disable-idn \
-			--disable-libidn \
-			--disable-libidn2 \
-			--disable-libcryptsetup \
-			--disable-seccomp \
-			--disable-xkbcommon \
-			--disable-localed \
-			--disable-coredump \
-			--disable-polkit \
-			--disable-bzip2 \
-			--disable-lz4 \
-			--disable-zlib \
-			--disable-libcurl \
-			--disable-gcrypt \
-			--disable-microhttpd \
-			--disable-qrencode \
-			--disable-quotacheck \
-			--disable-utmp \
-			--disable-rfkill \
-			--disable-smack \
-			--disable-backlight \
-			--disable-binfmt \
-			--disable-vconsole \
-			--disable-hibernate \
-			--disable-audit \
-			--disable-hwdb \
-			--disable-machined \
-			--disable-myhostname \
-			--disable-resolved \
-			--disable-importd \
-			--disable-sysusers \
-			--disable-nss-systemd \
-			--enable-randomseed \
-			--enable-timedated \
-			--enable-timesyncd \
-			--enable-tmpfiles \
-			--enable-firstboot
+CONFIG_STYLE:=		meson
+BUILD_STYLE:=		meson
+INSTALL_STYLE:=		meson
+
+MESON_FLAGS+=		-Drootlibdir='/usr/lib' \
+			-Dman=false \
+			-Dima=false \
+			-Dlibcryptsetup=false \
+			-Defi=false \
+			-Dgnu-efi=false \
+			-Dldconfig=false \
+			-Ddefault-dnssec=no \
+			-Dtests=false \
+			-Dkill-path=/usr/bin/kill \
+			-Dkmod-path=/usr/bin/kmod \
+			-Dkexec-path=/usr/sbin/kexec \
+			-Dsulogin-path=/usr/sbin/sulogin \
+			-Dmount-path=/usr/bin/mount \
+			-Dumount-path=/usr/bin/umount \
+			-Dacl=false \
+			-Daudit=false \
+			-Dlibidn=false \
+			-Dseccomp=false \
+			-Dxkbcommon=false \
+			-Dbzip2=false \
+			-Dlz4=false \
+			-Dlibcurl=false \
+			-Dgcrypt=false \
+			-Dqrencode=false \
+			-Dmicrohttpd=false \
+			-Dselinux=false \
+			-Dhwdb=false \
+			-Dbinfmt=false \
+			-Dvconsole=false \
+			-Dquotacheck=false \
+			-Dbacklight=false \
+			-Drfkill=false \
+			-Dmachined=false \
+			-Dimportd=false \
+			-Dhostnamed=false \
+			-Dmyhostname=false \
+			-Dlocaled=false \
+			-Dcoredump=false \
+			-Dsmack=false \
+			-Dhibernate=false \
+			-Dpolkit=false \
+			-Dnetworkd=true \
+			-Dresolved=true \
+			-Dtimesyncd=true \
+			-Dtmpfiles=true \
+			-Dsysusers=true \
+			-Dfirstboot=true \
+			-Drandomseed=true \
+			-Dlogind=true \
+			-Dtimedated=true
+
 
 ifeq ($(ADK_PACKAGE_SYSTEMD_WITH_PAM),y)
-CONFIGURE_ARGS+=	--enable-pam
+MESON_FLAGS+=		-Dpam=true
 else
-CONFIGURE_ARGS+=	--disable-pam
+MESON_FLAGS+=		-Dpam=false
 endif
 
 ifeq ($(ADK_PACKAGE_SYSTEMD_WITH_XZ),y)
-CONFIGURE_ARGS+=	--enable-xz
+MESON_FLAGS+=		-Dxz=true
 else
-CONFIGURE_ARGS+=	--disable-xz
+MESON_FLAGS+=		-Dxz=false
+endif
+
+ifeq ($(ADK_PACKAGE_SYSTEMD_WITH_ZLIB),y)
+MESON_FLAGS+=		-Dzlib=true
+else
+MESON_FLAGS+=		-Dzlib=false
 endif
 
 systemd-install:
