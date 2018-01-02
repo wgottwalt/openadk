@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libcap
 PKG_VERSION:=		2.25
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		693c8ac51e983ee678205571ef272439d83afe62dd8e424ea14ad9790bc35162
 PKG_DESCR:=		capabilities library
 PKG_SECTION:=		libs/misc
