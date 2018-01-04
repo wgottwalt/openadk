@@ -5,7 +5,7 @@ include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lynx
 PKG_VERSION:=		2.8.8
-PKG_RELEASE:=		2
+PKG_RELEASE:=		3
 PKG_HASH:=		234c9dc77d4c4594ad6216d7df4d49eae3019a3880e602f39721b35b97fbc408
 PKG_DESCR:=		text browser
 PKG_SECTION:=		app/browser
@@ -76,7 +76,7 @@ CONFIGURE_ARGS+=	--disable-warnings \
 			--with-screen=ncurses \
 			--disable-widec \
 			--disable-locale-charset \
-			--with-build-cc=$(HOST_CC) \
+			--with-build-cc='$(HOST_CC)' \
 			--with-build-cflags="$(HOST_CFLAGS)" \
 			--with-build-cppflags="-I/usr/include/ncurses"
 MAKE_FILE:=		makefile
