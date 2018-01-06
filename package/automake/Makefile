@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		automake
-PKG_VERSION:=		1.15
+PKG_VERSION:=		1.15.1
 PKG_RELEASE:=		1
-PKG_HASH:=		9908c75aabd49d13661d6dcb1bc382252d22cc77bf733a2d55e87f2aa2db8636
+PKG_HASH:=		af6ba39142220687c500f79b4aa2f181d9b24e4f8d8ec497cea4ba26c64bedaf
 PKG_DESCR:=		tool for automatically generating makefiles
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		m4-host autoconf-host autoconf
