@@ -297,7 +297,7 @@ endif
 	touch $@
 
 $(GCC_BUILD_DIR_INITIAL)/.compiled: $(GCC_BUILD_DIR_INITIAL)/.configured
-ifeq ($(ADK_TOOLCHAIN_GCC_OLD),y)
+ifeq ($(ADK_TOOLCHAIN_GCC_METAG),y)
 	PATH='$(TARGET_PATH)' \
 		$(MAKE) ${GCC_MAKEOPTS} -C $(GCC_BUILD_DIR_INITIAL) all-gcc
 else
@@ -307,7 +307,7 @@ endif
 	touch $@
 
 $(WRKBUILD)/.configured: $(GCC_BUILD_DIR_INITIAL)/.compiled
-ifeq ($(ADK_TOOLCHAIN_GCC_OLD),y)
+ifeq ($(ADK_TOOLCHAIN_GCC_METAG),y)
 	PATH='$(TARGET_PATH)' \
 		$(MAKE) -C $(GCC_BUILD_DIR_INITIAL) install-gcc
 else
