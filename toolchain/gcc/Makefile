@@ -211,8 +211,8 @@ GCC_CONFOPTS+=		--without-long-double-128 --with-abi=elfv2
 endif
 endif
 
-ifneq ($(ADK_TARGET_MIPS_ABI),)
-GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_MIPS_ABI}
+ifneq ($(ADK_TARGET_ABI_MIPS64),)
+GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_ABI_MIPS64}
 endif
 
 ifneq ($(ADK_TARGET_ABI_RISCV),)

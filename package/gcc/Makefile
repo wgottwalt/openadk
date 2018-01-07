@@ -31,7 +31,7 @@ TARGET_CFLAGS:=
 TARGET_CXXFLAGS:=
 TARGET_LDFLAGS:=
 
-ifeq ($(ADK_TARGET_LINUX_ARCH_XTENSA),y)
+ifeq ($(ADK_TARGET_ARCH_XTENSA),y)
 GCC_EXTRA_CFLAGS:=	-mtext-section-literals
 GCC_EXTRA_CXXFLAGS:=	-mtext-section-literals
 endif
@@ -40,14 +40,8 @@ endif
 CONFIGURE_ENV+=		CC="${TARGET_CC} ${GCC_EXTRA_CFLAGS}"
 CONFIGURE_ENV+=		CXX="${TARGET_CXX} ${GCC_EXTRA_CXXFLAGS}"
 
-ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
-CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_MIPS_ABI)
-endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPS64),y)
-CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_MIPS_ABI)
-endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_MIPS64EL),y)
-CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_MIPS_ABI)
+ifeq ($(ADK_TARGET_ARCH_MIPS64),y)
+CONFIGURE_ARGS+=       --with-abi=$(ADK_TARGET_ABI_MIPS64)
 endif
 
 ifneq ($(ADK_PACKAGE_GXX),)
@@ -55,6 +49,7 @@ CONFIGURE_ARGS+=	--enable-languages=c,c++
 else
 CONFIGURE_ARGS+=	--enable-languages=c
 endif
+
 ifeq ($(ADK_TARGET_LINUX_ARCH_PPC),y)
 CONFIGURE_ARGS+=	--disable-target-optspace --with-long-double-64 --enable-secureplt
 else

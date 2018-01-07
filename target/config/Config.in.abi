@@ -73,7 +73,7 @@ config ADK_TARGET_ABI_RISCV
 	default "ilp32d" if ADK_TARGET_ABI_ILP64D
 	default "ilp32f" if ADK_TARGET_ABI_ILP64F
 
-config ADK_TARGET_MIPS_ABI
+config ADK_TARGET_ABI_MIPS64
 	depends on ADK_TARGET_ARCH_MIPS64
 	string
 	default "32" if ADK_TARGET_ABI_O32
