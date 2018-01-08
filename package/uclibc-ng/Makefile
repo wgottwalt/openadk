@@ -28,14 +28,16 @@ INSTALL_STYLE:=         manual
 
 uclibc-ng-install:
 	$(INSTALL_DIR) $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) $(IDIR_UCLIBC_NG)/etc
-	-$(CP) $(STAGING_TARGET_DIR)/uclibc-ng/lib*/* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
-	-@rm $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)/libthread_db* 2>/dev/null
+	-$(CP) $(STAGING_TARGET_DIR)/lib/ld-uClibc*.so* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
+	-$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
+	-$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-*.so $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC_NG)/etc/TZ
 ifeq ($(ADK_TARGET_LIBC_WITH_LOCALE),y)
 	${INSTALL_DIR} $(IDIR_UCLIBC_NG)/usr/bin
-	$(INSTALL_BIN) $(STAGING_TARGET_DIR)/uclibc-ng/usr/bin/locale $(IDIR_UCLIBC_NG)/usr/bin
+	$(INSTALL_BIN) $(STAGING_TARGET_DIR)/usr/bin/locale \
+		$(IDIR_UCLIBC_NG)/usr/bin
 endif
 
 uclibc-ng-dev-install:
@@ -50,7 +52,7 @@ uclibc-ng-dev-install:
 		headers_install
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-$(PKG_NAME)-$(PKG_VERSION)-$(PKG_RELEASE)/${PKG_NAME}-${PKG_VERSION} \
 		PREFIX=$(IDIR_UCLIBC_NG_DEV)/ \
-		DEVEL_PREFIX=/usr/ \
+		DEVEL_PREFIX=/usr \
 		RUNTIME_PREFIX=$(IDIR_UCLIBC_NG_DEV)/ \
 		HOSTCC="$(CC_FOR_BUILD)" \
 		CPU_CFLAGS="$(TARGET_CFLAGS)" \
