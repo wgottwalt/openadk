@@ -5,10 +5,11 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ninja
 PKG_VERSION:=		1.8.2
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		86b8700c3d0880c2b44c2ff67ce42774aaf8c28cbf57725cb881569288c1c6f4
 PKG_DESCR:=		build utility
 PKG_SECTION:=		dev/tools
+HOST_BUILDDEP:=		python3-host
 PKG_URL:=		http://www.ninja-build.org/
 PKG_SITES:=		https://github.com/ninja-build/ninja/archive/
 
