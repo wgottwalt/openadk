@@ -1,0 +1,14 @@
+arm
+bfin
+lm32
+m68k
+mips
+nios2
+or1k
+ppc
+riscv
+sh
+sparc
+sparc64
+x86
+x86_64

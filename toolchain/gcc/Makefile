@@ -56,6 +56,8 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-werror \
 			--disable-nls
 
+ifeq ($(ADK_TARGET_OS_LINUX),y)
+ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 GCC_FINAL_CONFOPTS:=	--enable-tls --enable-threads --enable-libatomic
 GCC_TLS_CONFOPTS:=	--enable-tls
@@ -67,6 +69,15 @@ endif
 ifeq ($(ADK_TARGET_LIB_WITHOUT_THREADS)$(ADK_TARGET_WITHOUT_THREADS),y)
 GCC_FINAL_CONFOPTS:=	--disable-tls --disable-threads --disable-libatomic
 GCC_TLS_CONFOPTS:=	--disable-tls
+endif
+else
+GCC_FINAL_CONFOPTS:=	--enable-tls --enable-threads --enable-libatomic
+GCC_TLS_CONFOPTS:=	--enable-tls
+endif
+endif
+
+ifeq ($(ADK_TARGET_OS_RTEMS),y)
+GCC_FINAL_CONFOPTS:=	--enable-libatomic
 endif
 
 ifeq ($(ADK_TARGET_LIB_NEWLIB),y)

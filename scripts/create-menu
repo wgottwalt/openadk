@@ -98,7 +98,7 @@ config ADK_TARGET_CHOOSE_ARCH
 	bool "choose architecture"
 
 EOD
-for os in linux frosted zephyr baremetal; do
+for os in linux frosted rtems zephyr baremetal; do
   for arch in $(cat $topdir/target/$os/arch.lst);do
     OS=$(echo $os | tr '[:lower:]' '[:upper:]')
     ARCH=$(echo $arch | tr '[:lower:]' '[:upper:]')
