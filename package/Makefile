@@ -26,7 +26,7 @@ COMPILE_PACKAGES:=$(patsubst %,%-compile,$(package-y))
 HOST_COMPILE_PACKAGES:=$(patsubst %,%-host-compile,$(hostpackage-y))
 INSTALL_PACKAGES:=$(patsubst %,%-install,$(package-y))
 
-ifeq ($(ADK_TARGET_LIBICONV),y)
+ifeq ($(ADK_TARGET_LIBC_WITH_LIBICONV),y)
 COMPILE_ICONV:=libiconv-compile
 INSTALL_ICONV:=libiconv-install
 endif
