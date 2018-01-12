@@ -25,7 +25,7 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call HOST_template,CUPS,cups,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,CUPS,cups,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
-ifeq ($(ADK_TARGET_LIBICONV),y)
+ifeq ($(ADK_PACKAGE_LIBICONV),y)
 TARGET_LDFLAGS+=	-liconv
 endif
 
