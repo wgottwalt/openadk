@@ -21,6 +21,9 @@ config ADK_KERNEL_NET_VENDOR_AMD
 config ADK_KERNEL_NET_VENDOR_ATHEROS
 	bool
 
+config ADK_KERNEL_NET_VENDOR_DEC
+	bool
+
 config ADK_KERNEL_NET_VENDOR_IBM
 	bool
 
@@ -68,6 +71,9 @@ config ADK_KERNEL_NET_VENDOR_XILINX
 
 config ADK_KERNEL_NET_VENDOR_XSCALE
 	select ADK_KERNEL_NET_VENDOR_INTEL
+	bool
+
+config ADK_KERNEL_NET_TULIP
 	bool
 
 config ADK_KERNEL_NET_PTP_CLASSIFY
@@ -139,6 +145,16 @@ config ADK_KERNEL_AG71XX
 	default n
 	help
 	  Atheros AG71XX ethernet driver
+
+config ADK_KERNEL_DE2104X
+	tristate "DE2104X ethernet driver"
+	select ADK_KERNEL_NET_VENDOR_DEC
+	select ADK_KERNEL_NET_TULIP
+	depends on ADK_TARGET_SYSTEM_DEC_MULTIA
+	default y if ADK_TARGET_SYSTEM_DEC_MULTIA
+	default n
+	help
+	  DEC Tulip ethernet driver.
 
 config ADK_KERNEL_FEC
 	tristate "FEC ethernet driver"
