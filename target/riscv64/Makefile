@@ -7,7 +7,7 @@ include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
-QEMU_ARGS:=-nographic
+QEMU_ARGS:=-M virt -nographic
 
 # target helper text
 ifeq ($(ADK_TARGET_FS),initramfs)
