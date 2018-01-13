@@ -7,15 +7,15 @@ include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
 
-QEMU_ARGS:=${ADK_QEMU_ARGS}
+QEMU_ARGS:=${ADK_QEMU_ARGS} -M virt
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_CSKY_CK610),y)
-QEMU:=qemu-system-cskyv1
+QEMU:=qemu-system-cskyv1 -dtb target/csky/ck610.dtb
 endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_CSKY_CK807F),y)
-QEMU:=qemu-system-cskyv2
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_CSKY_CK807),y)
+QEMU:=qemu-system-cskyv2 -dtb target/csky/qemu.dtb
 endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_CSKY_CK810F),y)
-QEMU:=qemu-system-cskyv2
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_CSKY_CK810),y)
+QEMU:=qemu-system-cskyv2 -dtb target/csky/ck810.dtb
 endif
 
 # target helper text

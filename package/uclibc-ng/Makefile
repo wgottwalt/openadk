@@ -31,6 +31,10 @@ uclibc-ng-install:
 	-$(CP) $(STAGING_TARGET_DIR)/lib/ld*-uClibc*.so* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
 	-$(CP) $(STAGING_TARGET_DIR)/lib/libc.so.* $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
 	-$(CP) $(STAGING_TARGET_DIR)/lib/libuClibc-*.so $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH)
+ifeq ($(ADK_TARGET_ARCH_CSKY),y)
+	cd $(IDIR_UCLIBC_NG)/$(ADK_TARGET_LIBC_PATH) && \
+		ln -sf ld-uClibc.so.0 ld.so.1
+endif
 	test -z $(ADK_RUNTIME_TIMEZONE) || \
 	    grep $(ADK_RUNTIME_TIMEZONE) ./files/tz.lst | \
 	    cut -f 2 > $(IDIR_UCLIBC_NG)/etc/TZ
