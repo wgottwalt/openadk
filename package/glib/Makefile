@@ -12,7 +12,7 @@ PKG_DESCR:=		low-level core library that forms the basis of gtk+
 PKG_SECTION:=		libs/misc
 PKG_DEPENDS:=		libpcre zlib
 PKG_BUILDDEP:=		glib-host libffi zlib libelf dbus pcre
-HOST_BUILDDEP:=		libffi-host python2-host gettext-host util-linux-host
+HOST_BUILDDEP:=		libiconv-host libffi-host python2-host gettext-host util-linux-host
 PKG_NEEDS:=		threads intl iconv
 PKG_URL:=		http://www.gtk.org/
 PKG_SITES:=		http://ftp.gnome.org/pub/GNOME/sources/glib/$(PKG_EXTRAVER)/
@@ -26,6 +26,8 @@ $(eval $(call PKG_template,GLIB,glib,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS
 
 ifeq ($(ADK_PACKAGE_LIBICONV),y)
 CONFIGURE_ARGS+=	--with-libiconv=yes
+else
+CONFIGURE_ARGS+=	--with-libiconv=no
 endif
 CONFIGURE_ARGS+=	--disable-mem-pools \
 			--disable-rebuilds \
@@ -45,13 +47,11 @@ HOST_STYLE:=		auto
 ifneq ($(OS_FOR_BUILD),CYGWIN)
 HOST_CFLAGS+=		-fPIC
 endif
-ifneq ($(OS_FOR_BUILD),Darwin)
-HOST_CONFIGURE_ARGS+=	--with-libiconv=no
-endif
 HOST_CONFIGURE_ARGS+=	--disable-fam \
 			--disable-dtrace \
 			--enable-static \
 			--with-pcre=bundled \
+			--with-libiconv=yes \
 			--disable-shared \
 			--disable-compile-warnings
 

@@ -15,7 +15,7 @@ PKG_URL:=		https://github.com/raspberrypi/userland
 PKG_SITES:=		https://github.com/raspberrypi/userland.git
 
 PKG_SUBPKGS:=		BCM28XX_VC_TOOLS BCM28XX_VC_LIBS BCM28XX_VC_GL_LIBS BCM28XX_VC_DEBUG
-PKGSS_BCM28XX_VC_TOOLS:=bcm28XX-vc-libs
+PKGSS_BCM28XX_VC_TOOLS:=bcm28xx-vc-libs
 PKGSC_BCM28XX_VC_TOOLS:=sys/hw
 PKGSD_BCM28XX_VC_TOOLS:=videocore tools (vcgencmd,..)
 PKGSC_BCM28XX_VC_LIBS:=	libs/misc
