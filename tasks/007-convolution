@@ -1,5 +1,5 @@
 config ADK_APPLIANCE_CONVOLUTION
-	bool "BruteFIR convolution engine appliance"
+	bool "brutefir convolution engine appliance"
 	depends on ADK_TARGET_OS_LINUX && (\
 		ADK_TARGET_ARCH_X86_64 || \
 		ADK_TARGET_ARCH_X86 || \
