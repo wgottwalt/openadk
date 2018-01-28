@@ -14,6 +14,19 @@ config ADK_BUILD_COMPILER_LLVM
 endchoice
 
 choice
+prompt "LLVM version"
+depends on ADK_BUILD_COMPILER_LLVM
+
+config ADK_TOOLCHAIN_LLVM_5
+	bool "5.0.1"
+
+endchoice
+
+config ADK_TOOLCHAIN_LLVM_VERSION
+	string
+	default "5.0.1" if ADK_TOOLCHAIN_LLVM_5
+
+choice
 prompt "GCC version"
 depends on ADK_BUILD_COMPILER_GCC
 default ADK_TOOLCHAIN_GCC_AVR32 if ADK_TARGET_ARCH_AVR32
