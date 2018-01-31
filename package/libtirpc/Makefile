@@ -27,6 +27,7 @@ $(eval $(call PKG_template,LIBTIRPC,libtirpc,${PKG_VERSION}-${PKG_RELEASE},${PKG
 
 MAKE_ENV+=		V=1
 AUTOTOOL_STYLE:=	autoreconf
+HOST_CPPFLAGS+=		-I/usr/include/tirpc
 
 ifeq (${ADK_PACKAGE_LIBTIRPC_WITH_GSS},y)
 CONFIGURE_ARGS+=	--enable-gssapi
