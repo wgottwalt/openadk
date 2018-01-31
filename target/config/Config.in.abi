@@ -91,6 +91,16 @@ config ADK_TARGET_LIBC_PATH
 			|| ADK_TARGET_ARCH_X86_64
 	default "lib"
 
+config ADK_TARGET_LIBC_ABI_PATH
+	string
+	default "lib/lp64" if ADK_TARGET_ABI_LP64
+	default "lib/lp64d" if ADK_TARGET_ABI_LP64D
+	default "lib/lp64f" if ADK_TARGET_ABI_LP64F
+	default "lib/ilp32" if ADK_TARGET_ABI_ILP64
+	default "lib/ilp32d" if ADK_TARGET_ABI_ILP64D
+	default "lib/ilp32f" if ADK_TARGET_ABI_ILP64F
+	default "lib"
+
 config ADK_TARGET_ABI_CFLAGS
 	string
 	default "-mabi=32" if ADK_TARGET_ABI_O32

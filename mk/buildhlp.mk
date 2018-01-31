@@ -74,6 +74,8 @@ endif
 ifeq ($(strip ${__use_generic_patch_target}),42)
 post-patch:
 ${WRKDIST}/.prepared: ${WRKDIST}/.extract_done
+	@# find any reject files and delete them
+	@find $(WRKDIST)/ -name \*.rej -delete
 	[ ! -d ./patches/${PKG_VERSION} ] || ${PREVENT_PATCH} ${PATCH} ${WRKDIST} ./patches/${PKG_VERSION} \
 	    '{patch-!(*.orig),*.patch,*.${ADK_TARGET_ARCH},*.${ADK_TARGET_LIBC}}' $(MAKE_TRACE)
 	[ ! -d ./patches ] || ${PREVENT_PATCH} ${PATCH} ${WRKDIST} ./patches \

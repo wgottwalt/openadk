@@ -4,7 +4,7 @@
 PKG_NAME:=		glibc
 ifeq ($(ADK_LIBC_VERSION),git)
 PKG_VERSION:=		2.26.90
-PKG_GLIBCVER:=		2.26.90
+PKG_GLIBCVER:=		2.26.9000
 PKG_SITES:=		git://sourceware.org/git/glibc.git
 PKG_RELEASE:=		1
 endif
@@ -21,13 +21,5 @@ PKG_GLIBCVER:=		2.25
 PKG_GIT:=               branch
 PKG_SITES:=             https://github.com/c-sky/glibc.git
 PKG_RELEASE:=           1
-DISTFILES:=             ${PKG_NAME}-${PKG_VERSION}.tar.xz
-endif
-ifeq ($(ADK_TARGET_LIB_GLIBC_RISCV),y)
-PKG_VERSION:=		riscv-glibc-2.26
-PKG_GLIBCVER:=		2.26
-PKG_RELEASE:=		1
-PKG_GIT:=		branch
-PKG_SITES:=		https://github.com/riscv/riscv-glibc.git
 endif
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
