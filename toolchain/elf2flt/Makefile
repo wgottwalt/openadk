@@ -9,6 +9,9 @@ include $(ADK_TOPDIR)/mk/buildhlp.mk
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_GIT),y)
 BINUTILS_VERSION:=	git
 endif
+ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_30),y)
+BINUTILS_VERSION:=	2.30
+endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_2_29),y)
 BINUTILS_VERSION:=	2.29.1
 endif
