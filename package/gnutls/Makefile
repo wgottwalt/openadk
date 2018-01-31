@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		gnutls
-PKG_VERSION:=		3.5.15
+PKG_VERSION:=		3.5.17
 PKG_RELEASE:=		1
-PKG_HASH:=		046081108b8b1fe455a13a4c5a4eaa0368e185b678f1670fe09a11a2d7ecfad5
+PKG_HASH:=		86b142afef587c118d63f72ccf307f3321dbc40357aae528202b65d913d20919
 PKG_DESCR:=		transport layer security library
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgcrypt libtasn1 zlib libnettle libgmp libunistring
@@ -39,6 +39,7 @@ endif
 TARGET_LDFLAGS+=	-pthread
 CONFIGURE_ARGS+=	--disable-rpath \
 			--disable-doc \
+			--with-libunistring-prefix='$(STAGING_TARGET_DIR)/usr' \
 			--without-libz-prefix \
 			--without-p11-kit
 CONFIGURE_ENV+=		ac_cv_prog_AR='$(TARGET_CROSS)ar'
