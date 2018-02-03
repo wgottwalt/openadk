@@ -135,6 +135,10 @@ config ADK_TARGET_USB_KEYBOARD
 	help
 	  Activate to get USB keyboard support.
 
+config ADK_KERNEL_HID_MICROSOFT
+       tristate "Microsoft keyboard"
+       depends on ADK_TARGET_USB_KEYBOARD
+
 config ADK_KERNEL_HID_CHERRY
        tristate "Cherry Cymotion keyboard"
        depends on ADK_TARGET_USB_KEYBOARD
