@@ -15,6 +15,7 @@ endif
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_TARGET_NAME) \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \
+			--enable-stackguard-randomization \
 			--disable-sanity-checks \
 			--disable-nls \
 			--disable-werror \
@@ -25,18 +26,10 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--with-__thread \
 			--with-tls \
 			--enable-shared \
-			--enable-kernel="2.6.32" \
-			--enable-add-ons
+			--enable-kernel="2.6.32"
 
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 GLIBC_CONFOPTS+=	--enable-static-nss
-endif
-
-ifeq ($(ADK_TARGET_FLOAT),soft)
-GLIBC_CONFOPTS+=	--without-fp
-endif
-ifeq ($(ADK_TARGET_FLOAT),hard)
-GLIBC_CONFOPTS+=	--with-fp
 endif
 
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
@@ -66,7 +59,6 @@ $(WRKBUILD)/.configured:
 		${GLIBC_ENV} \
 		$(WRKBUILD)/configure \
 			--prefix=/usr \
-			--enable-stackguard-randomization \
 			${GLIBC_CONFOPTS} \
 	);
 	touch $@
