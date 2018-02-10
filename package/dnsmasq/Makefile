@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		dnsmasq
-PKG_VERSION:=		2.76
+PKG_VERSION:=		2.78
 PKG_RELEASE:=		1
-PKG_HASH:=		4b92698dee19ca0cb2a8f2e48f1d2dffd01a21eb15d1fbed4cf085630c8c9f96
+PKG_HASH:=		89949f438c74b0c7543f06689c319484bd126cc4b1f8c745c742ab397681252b
 PKG_DESCR:=		lightweight dns, dhcp and tftp server
 PKG_SECTION:=		net/dns
 PKG_URL:=		http://thekelleys.org.uk/dnsmasq/
