@@ -11,6 +11,9 @@ depends on ADK_TARGET_WITH_PCI \
 config ADK_KERNEL_SOUND
 	tristate
 
+config ADK_KERNEL_SND_DRIVERS
+	bool
+
 config ADK_KERNEL_SND_PCI
 	bool
 
@@ -268,6 +271,13 @@ config ADK_KERNEL_SND_IMX_SOC
 	select ADK_KERNEL_REGMAP_I2C
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default n
+
+config ADK_KERNEL_SND_ALOOP
+	tristate "Generic loopback driver (PCM)"
+	select ADK_KERNEL_SND
+	select ADK_KERNEL_SND_DRIVERS
+	select ADK_KERNEL_SND_PCM
 	default n
 
 endmenu
