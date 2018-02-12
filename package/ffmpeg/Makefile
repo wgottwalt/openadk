@@ -5,13 +5,13 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ffmpeg
 PKG_VERSION:=		3.4.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		f3443e20154a590ab8a9eef7bc951e8731425efc75b44ff4bee31d8a7a574a2c
 PKG_DESCR:=		record, convert and stream audio & video
 PKG_SECTION:=		libs/video
 PKG_NEEDS:=		threads
-PKG_DEPENDS:=		libncurses
-PKG_BUILDDEP:=		ncurses
+PKG_DEPENDS:=		libncurses libressl
+PKG_BUILDDEP:=		ncurses libressl
 PKG_URL:=		http://www.ffmpeg.org/
 PKG_SITES:=		http://www.ffmpeg.org/releases/
 PKG_LIBNAME:=		libffmpeg
@@ -184,6 +184,7 @@ CONFIGURE_ARGS:=	--prefix=/usr \
 			--enable-nonfree \
 			--enable-swscale \
 			--enable-postproc \
+			--enable-openssl \
 			$(CONFIGURE_CPU_OPTS)
 
 ifeq ($(ADK_PACKAGE_LIBFFMPEG_WITH_BZIP2),y)
