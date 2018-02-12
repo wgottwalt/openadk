@@ -11,19 +11,19 @@ PKG_DESCR:=		software media player
 PKG_SECTION:=		mm/video
 PKG_DEPENDS:=		python2 libsquish libressl libxz
 PKG_DEPENDS+=		libass libmpeg2 libmad
-PKG_DEPENDS+=		libogg libvorbis libmodplug libcurl
+PKG_DEPENDS+=		libmodplug libcurl
 PKG_DEPENDS+=		libflac libbz2 libtiff libnettle librtmp liblzo
 PKG_DEPENDS+=		yajl tinyxml libsqlite libpcrecpp libncurses
 PKG_DEPENDS+=		libpcre libcdio libfreetype libsamplerate libuuid
 PKG_DEPENDS+=		taglib libjasper libmp3lame
 PKG_DEPENDS+=		libgpg-error python2-mod-sqlite libffmpeg
-PKG_DEPENDS+=		libvorbisenc glib libdcadec bcm28xx-vc-gl-libs
+PKG_DEPENDS+=		glib libdcadec bcm28xx-vc-gl-libs
 PKG_BUILDDEP:=		python2 libass ffmpeg rtmpdump bcm28xx-vc
-PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo libogg libvorbis
+PKG_BUILDDEP+=		libmpeg2 libmad libjpeg-turbo
 PKG_BUILDDEP+=		curl flac bzip2 libtiff yajl cmake-host
 PKG_BUILDDEP+=		tinyxml sqlite pcre libcdio freetype 
-PKG_BUILDDEP+=		libsamplerate taglib libjasper lame
-PKG_BUILDDEP+=		glib libmodplug libgpg-error libvorbis
+PKG_BUILDDEP+=		libsamplerate taglib libjasper
+PKG_BUILDDEP+=		glib libmodplug libgpg-error
 PKG_BUILDDEP+=		swig-host liblzo-host libpng-host libjpeg-turbo-host
 PKG_BUILDDEP+=		zip-host unzip-host giflib-host libsquish libdcadec
 PKG_BUILDDEP+=		libcrossguid libressl xz bzip2 liblzo
@@ -162,6 +162,9 @@ pre-configure:
 		$(STAGING_HOST_DIR)/usr/bin
 
 kodi-install:
+	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/share/kodi
+	$(CP) $(WRKINST)/usr/share/kodi/* \
+		$(STAGING_TARGET_DIR)/usr/share/kodi
 	# we need a symlink to /data 
 	cd $(IDIR_KODI)/ && ln -sf ../data/kodi .kodi
 	$(INSTALL_DIR) $(IDIR_KODI)/usr/lib/kodi/addons
