@@ -64,7 +64,7 @@ else ifneq ($(filter cmake,${CONFIG_STYLE}),)
 		-e "s#@@TARGET_CFLAGS@@#$(TARGET_CFLAGS)#" \
 		-e "s#@@TARGET_CXXFLAGS@@#$(TARGET_CXXFLAGS)#" \
 		-e "s#@@TARGET_ARCH@@#$(ADK_TARGET_ARCH)#" \
-		-e "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#" \
+		-e "s#@@STAGING_TARGET_DIR@@#$(STAGING_TARGET_DIR)#g" \
 		-e "s#@@STAGING_HOST_DIR@@#$(STAGING_HOST_DIR)#g" \
 		$(SCRIPT_DIR)/toolchain.cmake.in > $(SCRIPT_DIR)/toolchain.cmake
 	(cd ${WRKBUILD} && PATH='${HOST_PATH}' \
