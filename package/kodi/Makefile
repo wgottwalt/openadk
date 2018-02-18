@@ -161,6 +161,10 @@ pre-configure:
 	cp $(WRKBUILD)/../../tools/depends/native/TexturePacker/TexturePacker \
 		$(STAGING_HOST_DIR)/usr/bin
 
+pre-build:
+	$(TARGET_CC) -shared -fPIC -o $(WRKBUILD)/kodi-shim.so \
+		./files/kodi-shim.c
+
 kodi-install:
 	$(INSTALL_DIR) $(STAGING_TARGET_DIR)/usr/share/kodi
 	$(CP) $(WRKINST)/usr/share/kodi/* \
@@ -178,5 +182,7 @@ kodi-install:
 		$(IDIR_KODI)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/kodi \
 		$(IDIR_KODI)/usr/bin
+	$(CP) $(WRKBUILD)/kodi-shim.so \
+		$(IDIR_KODI)/usr/lib/kodi
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

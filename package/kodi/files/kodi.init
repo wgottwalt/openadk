@@ -15,7 +15,7 @@ start)
 	if [ ! -d /data/kodi ]; then
 		mkdir /data/kodi
 	fi
-	/usr/lib/kodi/kodi.bin &
+	LD_PRELOAD=/usr/lib/kodi/kodi-shim.so /usr/lib/kodi/kodi.bin &
 	;;
 stop)
 	kill $(pgrep -f /usr/lib/kodi/kodi.bin)
