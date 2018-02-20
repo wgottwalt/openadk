@@ -5,6 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		automake
 PKG_VERSION:=		1.15.1
+PKG_EXTRAVER:=		1.15
 PKG_RELEASE:=		1
 PKG_HASH:=		af6ba39142220687c500f79b4aa2f181d9b24e4f8d8ec497cea4ba26c64bedaf
 PKG_DESCR:=		tool for automatically generating makefiles
@@ -27,11 +28,11 @@ automake-install:
 	$(INSTALL_DIR) $(IDIR_AUTOMAKE)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/automake $(IDIR_AUTOMAKE)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/aclocal $(IDIR_AUTOMAKE)/usr/bin
-	$(INSTALL_DIR) $(IDIR_AUTOMAKE)/usr/share/aclocal-$(PKG_VERSION)
-	$(CP) $(WRKINST)/usr/share/aclocal-$(PKG_VERSION) \
+	$(INSTALL_DIR) $(IDIR_AUTOMAKE)/usr/share/aclocal-$(PKG_EXTRAVER)
+	$(CP) $(WRKINST)/usr/share/aclocal-$(PKG_EXTRAVER) \
 		$(IDIR_AUTOMAKE)/usr/share
-	$(INSTALL_DIR) $(IDIR_AUTOMAKE)/usr/share/automake-$(PKG_VERSION)
-	$(CP) $(WRKINST)/usr/share/automake-$(PKG_VERSION) \
+	$(INSTALL_DIR) $(IDIR_AUTOMAKE)/usr/share/automake-$(PKG_EXTRAVER)
+	$(CP) $(WRKINST)/usr/share/automake-$(PKG_EXTRAVER) \
 		$(IDIR_AUTOMAKE)/usr/share
 
 include $(ADK_TOPDIR)/mk/host-bottom.mk
