@@ -8,10 +8,10 @@ PKG_RELEASE:=		1
 PKG_SITES:=		git://git.musl-libc.org/musl
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
-ifeq ($(ADK_TARGET_LIB_MUSL_1_1_18),y)
-PKG_VERSION:=		1.1.18
+ifeq ($(ADK_TARGET_LIB_MUSL_1_1_19),y)
+PKG_VERSION:=		1.1.19
 PKG_RELEASE:=		1
-PKG_HASH:=		d017ee5d01aec0c522a1330fdff06b1e428cb409e1db819cc4935d5da4a5a118
+PKG_HASH:=		db59a8578226b98373f5b27e61f0dd29ad2456f4aa9cec587ba8c24508e4c1d9
 PKG_SITES:=		http://www.musl-libc.org/releases/
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 endif
