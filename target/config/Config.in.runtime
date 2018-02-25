@@ -85,6 +85,7 @@ endchoice
 choice
 prompt "base applications"
 depends on !ADK_APPLIANCE_TOOLCHAIN
+default ADK_RUNTIME_BASE_TOOLBOX if ADK_TARGET_ARCH_H8300
 default ADK_RUNTIME_BASE_BUSYBOX
 
 config ADK_RUNTIME_BASE_BUSYBOX
@@ -94,6 +95,10 @@ config ADK_RUNTIME_BASE_BUSYBOX
 config ADK_RUNTIME_BASE_TOYBOX
 	bool "Use toybox"
 	select ADK_PACKAGE_TOYBOX
+
+config ADK_RUNTIME_BASE_TOOLBOX
+	bool "Use toolbox"
+	select ADK_PACKAGE_TOOLBOX
 
 config ADK_RUNTIME_BASE_COREUTILS
 	bool "Use coreutils"
