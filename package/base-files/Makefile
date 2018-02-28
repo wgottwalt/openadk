@@ -94,6 +94,10 @@ endif
 ifeq ($(ADK_RUNTIME_INIT_SYSVINIT),y)
 	cp ./files/inittab.sysvinit $(IDIR_BASE_FILES)/etc/inittab
 endif
+ifeq ($(ADK_RUNTIME_MOUNT_DEBUGFS),y)
+	echo debugfs    /sys/kernel/debug      debugfs  defaults  0 0 >> $(IDIR_BASE_FILES)/etc/fstab
+	echo null::sysinit:/bin/mount -a -t debugfs >> $(IDIR_BASE_FILES)/etc/inittab
+endif
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
 	    echo $(ADK_RUNTIME_HOSTNAME) > $(IDIR_BASE_FILES)/etc/hostname; \
 	    echo "127.0.0.1	localhost" > $(IDIR_BASE_FILES)/etc/hosts
