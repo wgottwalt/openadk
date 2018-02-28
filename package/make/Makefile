@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		make
 PKG_VERSION:=		4.2.1
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		e40b8f018c1da64edd1cc9a6fce5fa63b2e707e404e20cad91fbae337c98a5b7
 PKG_DESCR:=		c/c++ code buildtool
 PKG_SECTION:=		dev/tools
