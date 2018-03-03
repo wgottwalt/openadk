@@ -1,59 +1,59 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_KERNEL_MISC_DEVICES
+config ADK_LINUX_KERNEL_MISC_DEVICES
 	bool
 
-config ADK_KERNEL_MFD_SYSCON
+config ADK_LINUX_KERNEL_MFD_SYSCON
 	bool
 
-config ADK_KERNEL_OF
+config ADK_LINUX_KERNEL_OF
 	bool
 
-config ADK_KERNEL_FIRMWARE_IN_KERNEL
+config ADK_LINUX_KERNEL_FIRMWARE_IN_KERNEL
 	bool 
-	default y if ADK_KERNEL_R8169 && ADK_KERNEL_ROOT_NFS
+	default y if ADK_LINUX_KERNEL_R8169 && ADK_LINUX_KERNEL_ROOT_NFS
 	default n
 
-config ADK_KERNEL_EXTRA_FIRMWARE
+config ADK_LINUX_KERNEL_EXTRA_FIRMWARE
 	string
-	default "rtl8168e-2.fw" if ADK_KERNEL_R8169 && ADK_KERNEL_ROOT_NFS
+	default "rtl8168e-2.fw" if ADK_LINUX_KERNEL_R8169 && ADK_LINUX_KERNEL_ROOT_NFS
 	default ""
 
-config ADK_KERNEL_FW_LOADER_USER_HELPER
+config ADK_LINUX_KERNEL_FW_LOADER_USER_HELPER
 	bool
 
-config ADK_KERNEL_KEYS
+config ADK_LINUX_KERNEL_KEYS
 	bool
 
-config ADK_KERNEL_SBUS
+config ADK_LINUX_KERNEL_SBUS
 	bool
 
-config ADK_KERNEL_FIQ
+config ADK_LINUX_KERNEL_FIQ
 	bool
 
-config ADK_KERNEL_FSL_OTP
-	bool
-	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
-	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
-	default n
-
-config ADK_KERNEL_IMX_WEIM
+config ADK_LINUX_KERNEL_FSL_OTP
 	bool
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
-config ADK_KERNEL_INTEL_IOMMU
+config ADK_LINUX_KERNEL_IMX_WEIM
+	bool
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default n
+
+config ADK_LINUX_KERNEL_INTEL_IOMMU
         bool
 
-config ADK_KERNEL_IOMMU_API
+config ADK_LINUX_KERNEL_IOMMU_API
         bool
 
-config ADK_KERNEL_IOMMU_IOVA
+config ADK_LINUX_KERNEL_IOMMU_IOVA
         bool
 
-config ADK_KERNEL_DMAR_TABLE
+config ADK_LINUX_KERNEL_DMAR_TABLE
         bool
 
 menu "Miscellaneous devices support"
@@ -70,37 +70,37 @@ source "target/linux/config/Config.in.gpio"
 source "target/linux/config/Config.in.dma"
 source "target/linux/config/Config.in.lib"
 
-config ADK_KERNEL_PWM
+config ADK_LINUX_KERNEL_PWM
 	bool
 
-config ADK_KERNEL_PWM_IMX
+config ADK_LINUX_KERNEL_PWM_IMX
 	bool
-	select ADK_KERNEL_PWM
+	select ADK_LINUX_KERNEL_PWM
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
-config ADK_KERNEL_KEXEC
+config ADK_LINUX_KERNEL_KEXEC
 	bool "Add KEXEC syscall"
 	help
 	  You need also kexec-tools to benefit from it.	
 
-config ADK_KERNEL_PARPORT
+config ADK_LINUX_KERNEL_PARPORT
 	tristate "Generic parallel port support"
 	depends on ADK_TARGET_WITH_PP
 	help
 	  Kernel module for generic parallel port support.
 
-config ADK_KERNEL_PARPORT_PC
+config ADK_LINUX_KERNEL_PARPORT_PC
 	tristate "PC style parallel port support"
-	depends on ADK_KERNEL_PARPORT
+	depends on ADK_LINUX_KERNEL_PARPORT
 	help
 	  Kernel module for PC style parallel port support.
 
-config ADK_KERNEL_PLIP
+config ADK_LINUX_KERNEL_PLIP
 	tristate "PLIP (internet over parallel port)"
-	depends on ADK_KERNEL_PARPORT
-	select ADK_KERNEL_PARPORT_PC
+	depends on ADK_LINUX_KERNEL_PARPORT
+	select ADK_LINUX_KERNEL_PARPORT_PC
 	help
 	  PLIP: IPv4 over parallel port, using a Turbo Laplink
 	  (crossed null-printer) cable. Drivers exist for DOS
@@ -108,39 +108,39 @@ config ADK_KERNEL_PLIP
 	  longer compatible with Linux 1.x), FreeBSD and MirBSD.
 	  This will enlarge your kernel by about 8 KiB.
 
-config ADK_KERNEL_PRINTER
+config ADK_LINUX_KERNEL_PRINTER
 	tristate "Line printer support"
-	depends on ADK_KERNEL_PARPORT
-	select ADK_KERNEL_PARPORT_PC
+	depends on ADK_LINUX_KERNEL_PARPORT
+	select ADK_LINUX_KERNEL_PARPORT_PC
 	help
 	  Kernel module for line printer support
 
-config ADK_KERNEL_PPDEV
+config ADK_LINUX_KERNEL_PPDEV
 	tristate "Userland parallel port driver"
-	depends on ADK_KERNEL_PARPORT
-	select ADK_KERNEL_PARPORT_PC
+	depends on ADK_LINUX_KERNEL_PARPORT
+	select ADK_LINUX_KERNEL_PARPORT_PC
 	help
 	  Kernel module for userland parallel port access
 
-config ADK_KERNEL_FW_LOADER
+config ADK_LINUX_KERNEL_FW_LOADER
 	tristate "Userspace firmware loading support"
 	depends on !ADK_TARGET_SYSTEM_SHARP_ZAURUS
 	help
 	  This may be necessary when using drivers which require
 	  loading of external firmware files.
 
-config ADK_KERNEL_EEPROM_93CX6
+config ADK_LINUX_KERNEL_EEPROM_93CX6
 	tristate "93cx6 eeprom support"
-	depends on ADK_KERNEL_MAC80211
-	select ADK_KERNEL_MISC_DEVICES
+	depends on ADK_LINUX_KERNEL_MAC80211
+	select ADK_LINUX_KERNEL_MISC_DEVICES
 
-config ADK_KERNEL_IOMMU_SUPPORT
+config ADK_LINUX_KERNEL_IOMMU_SUPPORT
 	bool "IOMMU support for Intel"
-	select ADK_KERNEL_PCI_MSI
-	select ADK_KERNEL_INTEL_IOMMU
-	select ADK_KERNEL_IOMMU_API
-	select ADK_KERNEL_IOMMU_IOVA
-	select ADK_KERNEL_DMAR_TABLE
+	select ADK_LINUX_KERNEL_PCI_MSI
+	select ADK_LINUX_KERNEL_INTEL_IOMMU
+	select ADK_LINUX_KERNEL_IOMMU_API
+	select ADK_LINUX_KERNEL_IOMMU_IOVA
+	select ADK_LINUX_KERNEL_DMAR_TABLE
 	depends on ADK_TARGET_WITH_IOMMU
 	default y
  

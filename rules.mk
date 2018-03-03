@@ -27,6 +27,7 @@ SET_DASHX:=		:
 endif
 
 # Strip off the annoying quoting
+ADK_TARGET_OS:=				$(strip $(subst ",, $(ADK_TARGET_OS)))
 ADK_TARGET_ARCH:=			$(strip $(subst ",, $(ADK_TARGET_ARCH)))
 ADK_TARGET_SYSTEM:=			$(strip $(subst ",, $(ADK_TARGET_SYSTEM)))
 ADK_TARGET_BOARD:=			$(strip $(subst ",, $(ADK_TARGET_BOARD)))
@@ -74,6 +75,9 @@ ADK_TARGET_KERNEL_GIT_REPO_NAME:=	$(strip $(subst ",, $(ADK_TARGET_KERNEL_GIT_RE
 ADK_TARGET_KERNEL_GIT:=			$(strip $(subst ",, $(ADK_TARGET_KERNEL_GIT)))
 ADK_TARGET_KERNEL_GIT_VER:=		$(strip $(subst ",, $(ADK_TARGET_KERNEL_GIT_VER)))
 ADK_TARGET_KERNEL_GIT_TYPE:=		$(strip $(subst ",, $(ADK_TARGET_KERNEL_GIT_TYPE)))
+ADK_TARGET_WALDUX_KERNEL_GIT:=		$(strip $(subst ",, $(ADK_TARGET_WALDUX_KERNEL_GIT)))
+ADK_TARGET_WALDUX_KERNEL_GIT_VER:=	$(strip $(subst ",, $(ADK_TARGET_WALDUX_KERNEL_GIT_VER)))
+ADK_TARGET_WALDUX_KERNEL_GIT_TYPE:=	$(strip $(subst ",, $(ADK_TARGET_WALDUX_KERNEL_GIT_TYPE)))
 ADK_TARGET_KERNEL_DEFCONFIG:=		$(strip $(subst ",, $(ADK_TARGET_KERNEL_DEFCONFIG)))
 ADK_TARGET_GENIMAGE_FILENAME:=		$(strip $(subst ",, $(ADK_TARGET_GENIMAGE_FILENAME)))
 ADK_TARGET_ROOTDEV:=			$(strip $(subst ",, $(ADK_TARGET_ROOTDEV)))

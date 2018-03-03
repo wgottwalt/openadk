@@ -3,42 +3,42 @@
 
 menu "IPVS support"
 
-config ADK_KERNEL_IP_VS
+config ADK_LINUX_KERNEL_IP_VS
 	tristate "IPVS support"
-	select ADK_KERNEL_NETFILTER
-	select ADK_KERNEL_NF_CONNTRACK
+	select ADK_LINUX_KERNEL_NETFILTER
+	select ADK_LINUX_KERNEL_NF_CONNTRACK
 	default n
 
-config ADK_KERNEL_IP_VS_DEBUG
+config ADK_LINUX_KERNEL_IP_VS_DEBUG
 	bool "enable debugging support"
-	depends on ADK_KERNEL_IP_VS
+	depends on ADK_LINUX_KERNEL_IP_VS
 	default n
 
 menu "IPVS transport protocol load balancing support"
-	depends on ADK_KERNEL_IP_VS
+	depends on ADK_LINUX_KERNEL_IP_VS
 
-config ADK_KERNEL_IP_VS_PROTO_TCP
+config ADK_LINUX_KERNEL_IP_VS_PROTO_TCP
 	bool "TCP load balancing support"
 	default n
 	help
 	  This option enables support for load balancing TCP transport
 	  protocol. Say Y if unsure.
 
-config ADK_KERNEL_IP_VS_PROTO_UDP
+config ADK_LINUX_KERNEL_IP_VS_PROTO_UDP
 	bool "UDP load balancing support"
 	default n
 	help
 	  This option enables support for load balancing UDP transport
 	  protocol. Say Y if unsure.
 
-config ADK_KERNEL_IP_VS_PROTO_ESP
+config ADK_LINUX_KERNEL_IP_VS_PROTO_ESP
 	bool "ESP load balancing support"
 	default n
 	help
 	  This option enables support for load balancing ESP (Encapsulation
 	  Security Payload) transport protocol. Say Y if unsure.
 
-config ADK_KERNEL_IP_VS_PROTO_AH
+config ADK_LINUX_KERNEL_IP_VS_PROTO_AH
 	bool "AH load balancing support"
 	default n
 	help
@@ -48,56 +48,56 @@ config ADK_KERNEL_IP_VS_PROTO_AH
 endmenu
 
 menu "IPVS Scheduler"
-	depends on ADK_KERNEL_IP_VS
+	depends on ADK_LINUX_KERNEL_IP_VS
 
-config ADK_KERNEL_IP_VS_RR
+config ADK_LINUX_KERNEL_IP_VS_RR
 	tristate "round-robin"
 	default n
 
-config ADK_KERNEL_IP_VS_WRR
+config ADK_LINUX_KERNEL_IP_VS_WRR
 	tristate "weighted round-robin"
 	default n
 
-config ADK_KERNEL_IP_VS_LC
+config ADK_LINUX_KERNEL_IP_VS_LC
 	tristate "least-connection"
 	default n
 
-config ADK_KERNEL_IP_VS_WLC
+config ADK_LINUX_KERNEL_IP_VS_WLC
 	tristate "weighted least-connection"
 	default n
 
-config ADK_KERNEL_IP_VS_LBLC
+config ADK_LINUX_KERNEL_IP_VS_LBLC
 	tristate "locality-based least-connection"
 	default n
 
-config ADK_KERNEL_IP_VS_LBLCR
+config ADK_LINUX_KERNEL_IP_VS_LBLCR
 	tristate "locality-based least-connection with replication"
 	default n
 
-config ADK_KERNEL_IP_VS_DH
+config ADK_LINUX_KERNEL_IP_VS_DH
 	tristate "destination hashing"
 	default n
 
-config ADK_KERNEL_IP_VS_SH
+config ADK_LINUX_KERNEL_IP_VS_SH
 	tristate "source hashing"
 	default n
 
-config ADK_KERNEL_IP_VS_SED
+config ADK_LINUX_KERNEL_IP_VS_SED
 	tristate "shortest expected delay"
 	default n
 
-config ADK_KERNEL_IP_VS_NQ
+config ADK_LINUX_KERNEL_IP_VS_NQ
 	tristate "never queue"
 	default n
 
 endmenu
 
 menu "IPVS application helper"
-	depends on ADK_KERNEL_IP_VS
+	depends on ADK_LINUX_KERNEL_IP_VS
 
-config ADK_KERNEL_IP_VS_FTP
+config ADK_LINUX_KERNEL_IP_VS_FTP
 	tristate "FTP protocol"
-	select ADK_KERNEL_IP_VS_PROTO_TCP
+	select ADK_LINUX_KERNEL_IP_VS_PROTO_TCP
 	default n
 
 endmenu

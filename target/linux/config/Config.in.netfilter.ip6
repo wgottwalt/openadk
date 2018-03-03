@@ -1,10 +1,10 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_KERNEL_NF_CONNTRACK_IPV6
+config ADK_LINUX_KERNEL_NF_CONNTRACK_IPV6
 	tristate "IPv6 connection tracking support"
-	select ADK_KERNEL_NF_CONNTRACK
-	select ADK_KERNEL_IPV6
+	select ADK_LINUX_KERNEL_NF_CONNTRACK
+	select ADK_LINUX_KERNEL_IPV6
 	default n
 	help
 	  Connection tracking keeps a record of what packets have passed
@@ -17,10 +17,10 @@ config ADK_KERNEL_NF_CONNTRACK_IPV6
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_IP6_NF_IPTABLES
+config ADK_LINUX_KERNEL_IP6_NF_IPTABLES
 	tristate "IP6 tables support (required for filtering)"
-	select ADK_KERNEL_NETFILTER_XTABLES
-	select ADK_KERNEL_IPV6
+	select ADK_LINUX_KERNEL_NETFILTER_XTABLES
+	select ADK_LINUX_KERNEL_IPV6
 	default n
 	help
 	  ip6tables is a general, extensible packet identification framework.
@@ -30,17 +30,17 @@ config ADK_KERNEL_IP6_NF_IPTABLES
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-if ADK_KERNEL_IP6_NF_IPTABLES
+if ADK_LINUX_KERNEL_IP6_NF_IPTABLES
 
 # The simple matches.
-config ADK_KERNEL_IP6_NF_MATCH_AH
+config ADK_LINUX_KERNEL_IP6_NF_MATCH_AH
 	tristate '"ah" match support'
 	help
 	  This module allows one to match AH packets.
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_IP6_NF_MATCH_EUI64
+config ADK_LINUX_KERNEL_IP6_NF_MATCH_EUI64
 	tristate '"eui64" address check'
 	help
 	  This module performs checking on the IPv6 source address
@@ -49,7 +49,7 @@ config ADK_KERNEL_IP6_NF_MATCH_EUI64
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_IP6_NF_MATCH_FRAG
+config ADK_LINUX_KERNEL_IP6_NF_MATCH_FRAG
 	tristate '"frag" Fragmentation header match support'
 	help
 	  frag matching allows you to match packets based on the fragmentation
@@ -57,7 +57,7 @@ config ADK_KERNEL_IP6_NF_MATCH_FRAG
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_IP6_NF_MATCH_OPTS
+config ADK_LINUX_KERNEL_IP6_NF_MATCH_OPTS
 	tristate '"hbh" hop-by-hop and "dst" opts header match support'
 	help
 	  This allows one to match packets based on the hop-by-hop
@@ -65,7 +65,7 @@ config ADK_KERNEL_IP6_NF_MATCH_OPTS
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_IP6_NF_MATCH_IPV6HEADER
+config ADK_LINUX_KERNEL_IP6_NF_MATCH_IPV6HEADER
 	tristate '"ipv6header" IPv6 Extension Headers Match'
 	help
 	  This module allows one to match packets based upon
@@ -73,14 +73,14 @@ config ADK_KERNEL_IP6_NF_MATCH_IPV6HEADER
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_IP6_NF_MATCH_MH
+config ADK_LINUX_KERNEL_IP6_NF_MATCH_MH
 	tristate '"mh" match support'
 	help
 	  This module allows one to match MH packets.
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_IP6_NF_MATCH_RT
+config ADK_LINUX_KERNEL_IP6_NF_MATCH_RT
 	tristate '"rt" Routing header match support'
 	help
 	  rt matching allows you to match packets based on the routing
@@ -90,7 +90,7 @@ config ADK_KERNEL_IP6_NF_MATCH_RT
 
 # The targets
 
-config ADK_KERNEL_IP6_NF_FILTER
+config ADK_LINUX_KERNEL_IP6_NF_FILTER
 	tristate "Packet filtering"
 	default n
 	help
@@ -100,9 +100,9 @@ config ADK_KERNEL_IP6_NF_FILTER
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_IP6_NF_TARGET_REJECT
+config ADK_LINUX_KERNEL_IP6_NF_TARGET_REJECT
 	tristate "REJECT target support"
-	depends on ADK_KERNEL_IP6_NF_FILTER
+	depends on ADK_LINUX_KERNEL_IP6_NF_FILTER
 	help
 	  The REJECT target allows a filtering rule to specify that an ICMPv6
 	  error should be issued in response to an incoming packet, rather
@@ -110,7 +110,7 @@ config ADK_KERNEL_IP6_NF_TARGET_REJECT
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_IP6_NF_MANGLE
+config ADK_LINUX_KERNEL_IP6_NF_MANGLE
 	tristate "Packet mangling"
 	help
 	  This option adds a `mangle' table to iptables: see the man page for
@@ -119,7 +119,7 @@ config ADK_KERNEL_IP6_NF_MANGLE
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_IP6_NF_RAW
+config ADK_LINUX_KERNEL_IP6_NF_RAW
 	tristate 'raw table support (required for TRACE)'
 	help
 	  This option adds a `raw' table to ip6tables. This table is the very
@@ -129,4 +129,4 @@ config ADK_KERNEL_IP6_NF_RAW
 	  If you want to compile it as a module, say M here and read
 	  <file:Documentation/kbuild/modules.txt>.  If unsure, say `N'.
 
-endif # ADK_KERNEL_IP6_NF_IPTABLES
+endif # ADK_LINUX_KERNEL_IP6_NF_IPTABLES

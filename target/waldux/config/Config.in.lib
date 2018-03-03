@@ -1,0 +1,53 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "Kernel Library Routines"
+
+config ADK_WALDUX_KERNEL_CRC_ITU_T
+	tristate "CRC ITU-T V.41 functions"
+	default n
+	help
+	  This option is provided for the case where no in-kernel-tree
+	  modules require CRC ITU-T V.41 functions, but a module built outside
+	  the kernel tree does. Such modules that use library CRC ITU-T V.41
+	  functions require M here.
+
+config ADK_WALDUX_KERNEL_CRC16
+	tristate "CRC16 library functions"
+	default n
+	help
+
+config ADK_WALDUX_KERNEL_CRC32
+	bool "CRC32 library functions"
+	default n
+	help
+
+config ADK_WALDUX_KERNEL_LIBCRC32C
+	tristate "CRC32c Cyclic Redundancy-Check"
+	default n
+	help
+	  This option is provided for the case where no in-kernel-tree
+	  modules require CRC32c functions, but a module built outside the
+	  kernel tree does. Such modules that use library CRC32c functions
+	  require M here.  See Castagnoli93.
+
+config ADK_WALDUX_KERNEL_CRC_CCITT
+	tristate "CRC-CCITT library functions"
+	default n
+	help
+	  This module provides CRC-CCITT library functions for kernel 
+	  modules built outside the kernel.
+
+config ADK_WALDUX_KERNEL_ZLIB_DEFLATE
+	tristate
+
+config ADK_WALDUX_KERNEL_ZLIB_INFLATE
+	tristate
+
+config ADK_WALDUX_KERNEL_LZO_COMPRESS
+	tristate
+
+config ADK_WALDUX_KERNEL_LZO_DECOMPRESS
+	tristate
+
+endmenu

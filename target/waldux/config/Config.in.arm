@@ -1,0 +1,13 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+config ADK_WALDUX_KERNEL_ARM_PATCH_PHYS_VIRT
+	bool
+	depends on ADK_TARGET_ARCH_ARM
+
+config ADK_WALDUX_KERNEL_ARCH_VERSATILE_PB
+	bool
+	select ADK_WALDUX_KERNEL_ARM_PATCH_PHYS_VIRT
+	default y if !ADK_TARGET_WITH_DEVICETREE
+	depends on ADK_TARGET_ARCH_ARM
+

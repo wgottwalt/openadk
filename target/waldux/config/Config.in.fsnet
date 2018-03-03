@@ -1,0 +1,163 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "Network filesystems"
+
+config ADK_WALDUX_KERNEL_FS_POSIX_ACL
+	bool
+
+config ADK_WALDUX_KERNEL_CIFS
+	tristate "CIFS support"
+	select ADK_WALDUX_KERNEL_NETWORK_FILESYSTEMS
+	select ADK_WALDUX_KERNEL_CRYPTO_MD4
+        select ADK_WALDUX_KERNEL_CRYPTO_MD5
+        select ADK_WALDUX_KERNEL_CRYPTO_HMAC
+        select ADK_WALDUX_KERNEL_CRYPTO_ARC4
+        select ADK_WALDUX_KERNEL_CRYPTO_ECB
+        select ADK_WALDUX_KERNEL_CRYPTO_DES
+        select ADK_WALDUX_KERNEL_CRYPTO_SHA256
+	select ADK_WALDUX_KERNEL_NLS_UTF8
+	help
+	  This is the client VFS module for the Common Internet File System
+	  (CIFS) protocol which is the successor to the Server Message Block 
+	  (SMB) protocol, the native file sharing mechanism for most early
+	  PC operating systems.  The CIFS protocol is fully supported by 
+	  file servers such as Windows 2000 (including Windows 2003, NT 4  
+	  and Windows XP) as well by Samba (which provides excellent CIFS
+	  server support for Linux and many other operating systems). Limited
+	  support for Windows ME and similar servers is provided as well. 
+	  You must use the smbfs client filesystem to access older SMB servers
+	  such as OS/2 and DOS.
+
+	  The intent of the cifs module is to provide an advanced
+	  network file system client for mounting to CIFS compliant servers, 
+	  including support for dfs (hierarchical name space), secure per-user
+	  session establishment, safe distributed caching (oplock), optional
+	  packet signing, Unicode and other internationalization improvements, 
+	  and optional Winbind (nsswitch) integration. You do not need to enable
+	  cifs if running only a (Samba) server. It is possible to enable both
+	  smbfs and cifs (e.g. if you are using CIFS for accessing Windows 2003
+	  and Samba 3 servers, and smbfs for accessing old servers). If you need 
+	  to mount to Samba or Windows from this machine, say Y.
+
+config ADK_WALDUX_KERNEL_CODA_FS
+	tristate "Support for CODA filesystem"
+	select ADK_WALDUX_KERNEL_NETWORK_FILESYSTEMS
+	help
+	  This is the kernel part of the client for the CODA filesystem.
+
+config ADK_WALDUX_KERNEL_NFS_V3
+	bool
+	select ADK_WALDUX_KERNEL_NETWORK_FILESYSTEMS
+
+config ADK_WALDUX_KERNEL_NFS_V4
+	bool
+	select ADK_WALDUX_KERNEL_NETWORK_FILESYSTEMS
+
+config ADK_WALDUX_KERNEL_NFS_FS
+	tristate "NFS client support"
+	select ADK_WALDUX_KERNEL_NFS_V3
+	select ADK_WALDUX_KERNEL_FILE_LOCKING
+	select ADK_WALDUX_KERNEL_DNOTIFY
+	select ADK_WALDUX_KERNEL_SUNRPC
+	select ADK_WALDUX_KERNEL_LOCKD
+	select ADK_WALDUX_KERNEL_NETWORK_FILESYSTEMS
+	help
+	  If you are connected to some other (usually local) Unix computer
+	  (using SLIP, PLIP, PPP or Ethernet) and want to mount files residing
+	  on that computer (the NFS server) using the Network File Sharing
+	  protocol, say Y. "Mounting files" means that the client can access
+	  the files with usual UNIX commands as if they were sitting on the
+	  client's hard disk. For this to work, the server must run the
+	  programs nfsd and mountd (but does not need to have NFS file system
+	  support enabled in its kernel). NFS is explained in the Network
+	  Administrator's Guide, available from
+	  <http://www.tldp.org/docs.html#guide>, on its man page: "man
+	  nfs", and in the NFS-HOWTO.
+
+	  A superior but less widely used alternative to NFS is provided by
+	  the Coda file system; see "Coda file system support" below.
+
+	  If you say Y here, you should have said Y to TCP/IP networking also.
+	  This option would enlarge your kernel by about 27 KB.
+
+	  To compile this file system support as a module, choose M here: the
+	  module will be called nfs.
+
+	  If you are configuring a diskless machine which will mount its root
+	  file system over NFS at boot time, say Y here and to "Kernel
+	  level IP autoconfiguration" above and to "Root file system on NFS"
+	  below. You cannot compile this driver as a module in this case.
+	  There are two packages designed for booting diskless machines over
+	  the net: netboot, available from
+	  <http://ftp1.sourceforge.net/netboot/>, and Etherboot,
+	  available from <http://ftp1.sourceforge.net/etherboot/>.
+
+	  If you don't know what all this is about, say N.
+	  Kernel modules for NFS client support
+
+config ADK_WALDUX_KERNEL_NFSD_V3
+	bool
+
+config ADK_WALDUX_KERNEL_NFSD_V4
+	bool
+	select ADK_WALDUX_KERNEL_SUNRPC_GSS
+	default y if ADK_PACKAGE_NFS_UTILS_V4
+	default n
+
+config ADK_WALDUX_KERNEL_NFSD
+	tristate "NFS server support"
+	select ADK_WALDUX_KERNEL_EXPORTFS
+	select ADK_WALDUX_KERNEL_NFSD_V3
+	select ADK_WALDUX_KERNEL_DNOTIFY
+	select ADK_WALDUX_KERNEL_FILE_LOCKING
+	select ADK_WALDUX_KERNEL_SUNRPC
+	select ADK_WALDUX_KERNEL_LOCKD
+	select ADK_WALDUX_KERNEL_NETWORK_FILESYSTEMS
+	help
+	  If you want your Linux box to act as an NFS *server*, so that other
+	  computers on your local network which support NFS can access certain
+	  directories on your box transparently, you have two options: you can
+	  use the self-contained user space program nfsd, in which case you
+	  should say N here, or you can say Y and use the kernel based NFS
+	  server. The advantage of the kernel based solution is that it is
+	  faster.
+
+	  In either case, you will need support software; the respective
+	  locations are given in the file <file:Documentation/Changes> in the
+	  NFS section.
+
+	  If you say Y here, you will get support for version 2 of the NFS
+	  protocol (NFSv2). If you also want NFSv3, say Y to the next question
+	  as well.
+
+	  Please read the NFS-HOWTO, available from
+	  <http://www.tldp.org/docs.html#howto>.
+
+config ADK_WALDUX_KERNEL_LOCKD
+	tristate
+
+config ADK_WALDUX_KERNEL_SUNRPC
+	tristate
+
+config ADK_WALDUX_KERNEL_SUNRPC_GSS
+	tristate
+	select ADK_WALDUX_KERNEL_SUNRPC
+
+config ADK_WALDUX_KERNEL_RPCSEC_GSS_KRB5
+	tristate "RPC security support"
+	select ADK_WALDUX_KERNEL_NETWORK_FILESYSTEMS
+	select ADK_WALDUX_KERNEL_SUNRPC_GSS
+	select ADK_WALDUX_KERNEL_SUNRPC
+	select ADK_WALDUX_KERNEL_CRYPTO
+	select ADK_WALDUX_KERNEL_CRYPTO_MD5
+	select ADK_WALDUX_KERNEL_CRYPTO_DES
+	select ADK_WALDUX_KERNEL_CRYPTO_CBC
+	select ADK_WALDUX_KERNEL_CRYPTO_CTS
+	select ADK_WALDUX_KERNEL_CRYPTO_ECB
+	select ADK_WALDUX_KERNEL_CRYPTO_HMAC
+	select ADK_WALDUX_KERNEL_CRYPTO_SHA1
+	select ADK_WALDUX_KERNEL_CRYPTO_AES
+	select ADK_WALDUX_KERNEL_CRYPTO_ARC4
+
+endmenu

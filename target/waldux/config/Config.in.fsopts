@@ -1,0 +1,12 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "Filesystem options"
+
+config ADK_WALDUX_KERNEL_INOTIFY_USER
+	bool "Enable INOTIFY"
+
+config ADK_WALDUX_KERNEL_DNOTIFY
+	bool "Enable DNOTIFY"
+
+endmenu

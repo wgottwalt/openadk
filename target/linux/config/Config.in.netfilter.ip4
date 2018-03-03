@@ -1,15 +1,15 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_KERNEL_NF_NAT
+config ADK_LINUX_KERNEL_NF_NAT
 	tristate
 
-config ADK_KERNEL_NF_NAT_IPV4
+config ADK_LINUX_KERNEL_NF_NAT_IPV4
 	tristate
 
-config ADK_KERNEL_IP_NF_IPTABLES
+config ADK_LINUX_KERNEL_IP_NF_IPTABLES
 	tristate 'IP tables support'
-	select ADK_KERNEL_NETFILTER_XTABLES
+	select ADK_LINUX_KERNEL_NETFILTER_XTABLES
 	default n
 	help
 	  iptables is a general, extensible packet identification framework.
@@ -17,46 +17,46 @@ config ADK_KERNEL_IP_NF_IPTABLES
 	  etc) subsystems now use this: say `Y' or `M' here if you want to use
 	  either of those.
 
-config ADK_KERNEL_IP_NF_FILTER
+config ADK_LINUX_KERNEL_IP_NF_FILTER
 	tristate 'IP Packet Filtering table support'
-	depends on ADK_KERNEL_IP_NF_IPTABLES
+	depends on ADK_LINUX_KERNEL_IP_NF_IPTABLES
 	default n
 	help
 	  Packet filtering defines a table `filter', which has a series of
 	  rules for simple packet filtering at local input, forwarding and
 	  local output.
 
-config ADK_KERNEL_IP_NF_NAT
+config ADK_LINUX_KERNEL_IP_NF_NAT
 	tristate 'IP NAT table support'
-	select ADK_KERNEL_NETFILTER_XT_NAT
-	select ADK_KERNEL_NF_NAT
-	select ADK_KERNEL_NF_NAT_IPV4
-	depends on ADK_KERNEL_IP_NF_IPTABLES
+	select ADK_LINUX_KERNEL_NETFILTER_XT_NAT
+	select ADK_LINUX_KERNEL_NF_NAT
+	select ADK_LINUX_KERNEL_NF_NAT_IPV4
+	depends on ADK_LINUX_KERNEL_IP_NF_IPTABLES
 	default n
 	help
 
-config ADK_KERNEL_IP_NF_MANGLE
+config ADK_LINUX_KERNEL_IP_NF_MANGLE
 	tristate 'IP Packet mangling table support'
-	depends on ADK_KERNEL_IP_NF_IPTABLES
+	depends on ADK_LINUX_KERNEL_IP_NF_IPTABLES
 	default n
 	help
 	  This option adds a `mangle' table to iptables: see the man page for
 	  iptables(8).  This table is used for various packet alterations
 	  which can effect how the packet is routed.
 
-config ADK_KERNEL_NF_CONNTRACK_IPV4
+config ADK_LINUX_KERNEL_NF_CONNTRACK_IPV4
 	tristate 'IP connection tracking support (required for NAT)'
-	select ADK_KERNEL_NF_CONNTRACK
-	select ADK_KERNEL_NETFILTER_XT_MATCH_CONNTRACK
+	select ADK_LINUX_KERNEL_NF_CONNTRACK
+	select ADK_LINUX_KERNEL_NETFILTER_XT_MATCH_CONNTRACK
 	default n
 	help
 	  Connection tracking keeps a record of what packets have passed
 	  through your machine, in order to figure out how they are related
 	  into connections.
 
-config ADK_KERNEL_IP_NF_CT_ACCT
+config ADK_LINUX_KERNEL_IP_NF_CT_ACCT
 	bool 'Connection tracking flow accounting'
-	depends on ADK_KERNEL_NF_CONNTRACK
+	depends on ADK_LINUX_KERNEL_NF_CONNTRACK
 	help
 	  If this option is enabled, the connection tracking code will
 	  keep per-flow packet and byte counters.
@@ -66,9 +66,9 @@ config ADK_KERNEL_IP_NF_CT_ACCT
 
 menu "IP target support"
 
-config ADK_KERNEL_IP_NF_TARGET_MASQUERADE
+config ADK_LINUX_KERNEL_IP_NF_TARGET_MASQUERADE
 	tristate 'MASQUERADE target support'
-	depends on ADK_KERNEL_NF_NAT
+	depends on ADK_LINUX_KERNEL_NF_NAT
 	default n
 	help
 	  Masquerading is a special case of NAT: all outgoing connections are
@@ -77,36 +77,36 @@ config ADK_KERNEL_IP_NF_TARGET_MASQUERADE
 	  only useful for dialup accounts with dynamic IP address (ie. your IP
 	  address will be different on next dialup).
 
-config ADK_KERNEL_IP_NF_TARGET_REJECT
+config ADK_LINUX_KERNEL_IP_NF_TARGET_REJECT
 	tristate 'REJECT target support'
-	depends on ADK_KERNEL_IP_NF_FILTER
+	depends on ADK_LINUX_KERNEL_IP_NF_FILTER
 	default n
 	help
 	  The REJECT target allows a filtering rule to specify that an ICMP
 	  error should be issued in response to an incoming packet, rather
 	  than silently being dropped.
 
-config ADK_KERNEL_IP_NF_TARGET_REDIRECT
+config ADK_LINUX_KERNEL_IP_NF_TARGET_REDIRECT
 	tristate 'REDIRECT target support'
-	depends on ADK_KERNEL_NF_NAT
+	depends on ADK_LINUX_KERNEL_NF_NAT
 	help
 	  REDIRECT is a special case of NAT: all incoming connections are
 	  mapped onto the incoming interface's address, causing the packets to
 	  come to the local machine instead of passing through.  This is
 	  useful for transparent proxies.
 
-config ADK_KERNEL_IP_NF_TARGET_NETMAP
+config ADK_LINUX_KERNEL_IP_NF_TARGET_NETMAP
 	tristate 'NETMAP target support'
-	depends on ADK_KERNEL_NF_NAT
+	depends on ADK_LINUX_KERNEL_NF_NAT
 	help
 	  NETMAP is an implementation of static 1:1 NAT mapping of network
 	  addresses. It maps the network address part, while keeping the host
 	  address part intact. It is similar to Fast NAT, except that
 	  Netfilter's connection tracking doesn't work well with Fast NAT.
 
-config ADK_KERNEL_IP_NF_TARGET_ECN
+config ADK_LINUX_KERNEL_IP_NF_TARGET_ECN
 	tristate 'ECN target support'
-	depends on ADK_KERNEL_IP_NF_MANGLE
+	depends on ADK_LINUX_KERNEL_IP_NF_MANGLE
 	help
 	  This option adds a `ECN' target, which can be used in the iptables mangle
 	  table.  

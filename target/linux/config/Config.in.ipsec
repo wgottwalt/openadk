@@ -3,56 +3,56 @@
 
 menu "IPSec support"
 
-config ADK_KERNEL_XFRM_ALGO
+config ADK_LINUX_KERNEL_XFRM_ALGO
 	tristate
 
-config ADK_KERNEL_NET_KEY
+config ADK_LINUX_KERNEL_NET_KEY
 	tristate "PF_KEYv2 socket family"
 	default n
 	help
 	  PF_KEYv2 socket family, compatible to KAME ones.
 
-config ADK_KERNEL_XFRM_USER
+config ADK_LINUX_KERNEL_XFRM_USER
 	tristate "IPsec usertools support"
-	select ADK_KERNEL_XFRM_ALGO
+	select ADK_LINUX_KERNEL_XFRM_ALGO
 	default n
 
-config ADK_KERNEL_INET_AH
+config ADK_LINUX_KERNEL_INET_AH
 	tristate "IPsec AH support"
-	select ADK_KERNEL_CRYPTO_HASH
+	select ADK_LINUX_KERNEL_CRYPTO_HASH
 	default n
 	help
 	  Support for IPsec AH.
 
-config ADK_KERNEL_INET_ESP
+config ADK_LINUX_KERNEL_INET_ESP
 	tristate "IPsec ESP support"
-	select ADK_KERNEL_CRYPTO_AEAD
+	select ADK_LINUX_KERNEL_CRYPTO_AEAD
 	default n
 	help
 	  Support for IPsec ESP.
 
-config ADK_KERNEL_INET_IPCOMP
+config ADK_LINUX_KERNEL_INET_IPCOMP
 	tristate "IP Payload Compression"
-	select ADK_KERNEL_CRYPTO_DEFLATE
-	select ADK_KERNEL_INET_TUNNEL
+	select ADK_LINUX_KERNEL_CRYPTO_DEFLATE
+	select ADK_LINUX_KERNEL_INET_TUNNEL
 	default n
 	help
 	  Support for IP Payload Compression Protocol (IPComp) (RFC3173),
 	  typically needed for IPsec.
 
-config ADK_KERNEL_INET_XFRM_MODE_TRANSPORT
+config ADK_LINUX_KERNEL_INET_XFRM_MODE_TRANSPORT
 	tristate "IPsec transport mode"
 	default n
 	help
 	  Support for IPsec transport mode.
 
-config ADK_KERNEL_INET_XFRM_MODE_TUNNEL
+config ADK_LINUX_KERNEL_INET_XFRM_MODE_TUNNEL
 	tristate "IPsec tunnel mode"
 	default n
 	help
 	  Support for IPsec tunnel mode.
 
-config ADK_KERNEL_INET_XFRM_MODE_BEET
+config ADK_LINUX_KERNEL_INET_XFRM_MODE_BEET
 	tristate "IPsec BEET mode"
 	default n
 	help

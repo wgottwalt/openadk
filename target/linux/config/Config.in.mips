@@ -1,28 +1,28 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_KERNEL_CPU_MIPS32_R1
+config ADK_LINUX_KERNEL_CPU_MIPS32_R1
 	bool
 
-config ADK_KERNEL_CPU_MIPS32_R2
+config ADK_LINUX_KERNEL_CPU_MIPS32_R2
 	bool
 
-config ADK_KERNEL_CPU_MIPS32_R6
+config ADK_LINUX_KERNEL_CPU_MIPS32_R6
 	bool
 
-config ADK_KERNEL_CPU_MIPS64_R1
+config ADK_LINUX_KERNEL_CPU_MIPS64_R1
 	bool
 
-config ADK_KERNEL_CPU_MIPS64_R2
+config ADK_LINUX_KERNEL_CPU_MIPS64_R2
 	bool
 
-config ADK_KERNEL_CPU_MIPS64_R6
+config ADK_LINUX_KERNEL_CPU_MIPS64_R6
 	bool
 
 menu "MIPS devices support"
 depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 
-config ADK_KERNEL_LEMOTE_YEELOONG2F_PDEV
+config ADK_LINUX_KERNEL_LEMOTE_YEELOONG2F_PDEV
 	bool "Yeelong platform drivers (f.e. battery support)"
 	depends on ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG

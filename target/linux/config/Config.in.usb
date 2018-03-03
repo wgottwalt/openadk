@@ -7,58 +7,58 @@ depends on ADK_TARGET_WITH_USB \
 	|| ADK_TARGET_SYSTEM_QEMU_X86 \
 	|| ADK_TARGET_GENERIC
 
-config ADK_KERNEL_USB_SUPPORT
+config ADK_LINUX_KERNEL_USB_SUPPORT
 	bool
 
-config ADK_KERNEL_USB_DEVICE_CLASS
+config ADK_LINUX_KERNEL_USB_DEVICE_CLASS
 	bool
 
-config ADK_KERNEL_USB_ANNOUNCE_NEW_DEVICES
+config ADK_LINUX_KERNEL_USB_ANNOUNCE_NEW_DEVICES
 	bool
 
-config ADK_KERNEL_USB_EHCI_ROOT_HUB_TT
+config ADK_LINUX_KERNEL_USB_EHCI_ROOT_HUB_TT
 	bool
 
-config ADK_KERNEL_USB_EHCI_TT_NEWSCHED
+config ADK_LINUX_KERNEL_USB_EHCI_TT_NEWSCHED
 	bool
 
-config ADK_KERNEL_USB_EHCI_MXC
+config ADK_LINUX_KERNEL_USB_EHCI_MXC
 	bool
 
-config ADK_KERNEL_USB_GADGET
+config ADK_LINUX_KERNEL_USB_GADGET
 	tristate
 
-config ADK_KERNEL_USB_PHY
+config ADK_LINUX_KERNEL_USB_PHY
 	bool
 
-config ADK_KERNEL_USB_MXS_PHY
+config ADK_LINUX_KERNEL_USB_MXS_PHY
 	tristate
-	select ADK_KERNEL_USB_PHY
+	select ADK_LINUX_KERNEL_USB_PHY
 	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
-config ADK_KERNEL_USB_OHCI_HCD_PLATFORM
+config ADK_LINUX_KERNEL_USB_OHCI_HCD_PLATFORM
 	bool
-	select ADK_KERNEL_USB_OHCI_HCD
+	select ADK_LINUX_KERNEL_USB_OHCI_HCD
 
-config ADK_KERNEL_USB_OHCI_HCD_PCI
+config ADK_LINUX_KERNEL_USB_OHCI_HCD_PCI
 	bool
 
-config ADK_KERNEL_USB_LIBUSUAL
+config ADK_LINUX_KERNEL_USB_LIBUSUAL
 	tristate
 
-config ADK_KERNEL_USB_NET_DRIVERS
+config ADK_LINUX_KERNEL_USB_NET_DRIVERS
 	bool
 
-config ADK_KERNEL_USB_USBNET
-	select ADK_KERNEL_USB_NET_DRIVERS
+config ADK_LINUX_KERNEL_USB_USBNET
+	select ADK_LINUX_KERNEL_USB_NET_DRIVERS
         tristate
 
-config ADK_KERNEL_USB
+config ADK_LINUX_KERNEL_USB
 	tristate "USB support"
-	select ADK_KERNEL_NLS
-	select ADK_KERNEL_USB_SUPPORT
-	select ADK_KERNEL_USB_ANNOUNCE_NEW_DEVICES
+	select ADK_LINUX_KERNEL_NLS
+	select ADK_LINUX_KERNEL_USB_SUPPORT
+	select ADK_LINUX_KERNEL_USB_ANNOUNCE_NEW_DEVICES
 	default m if ADK_TARGET_SYSTEM_ASUS_P5BVM
 	default m if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX
@@ -100,14 +100,14 @@ config ADK_KERNEL_USB
 
 menu "USB controller support"
 
-config ADK_KERNEL_USB_EHCI_HCD
+config ADK_LINUX_KERNEL_USB_EHCI_HCD
 	tristate "Support for USB EHCI 2.0 controllers"
-	select ADK_KERNEL_USB_MXS_PHY if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
-	select ADK_KERNEL_USB_EHCI_MXC if ADK_TARGET_SYSTEM_KINETIS_K70
-	select ADK_KERNEL_USB_DEVICE_CLASS if ADK_TARGET_SYSTEM_KINETIS_K70
+	select ADK_LINUX_KERNEL_USB_MXS_PHY if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	select ADK_LINUX_KERNEL_USB_EHCI_MXC if ADK_TARGET_SYSTEM_KINETIS_K70
+	select ADK_LINUX_KERNEL_USB_DEVICE_CLASS if ADK_TARGET_SYSTEM_KINETIS_K70
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_BOARD_BCM28XX
-	depends on ADK_KERNEL_USB
+	depends on ADK_LINUX_KERNEL_USB
 	default m if ADK_TARGET_SYSTEM_ASUS_P5BVM
 	default m if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX
@@ -136,9 +136,9 @@ config ADK_KERNEL_USB_EHCI_HCD
 
 	  You may want to read <file:Documentation/usb/ehci.txt>.
 
-config ADK_KERNEL_USB_UHCI_HCD
+config ADK_LINUX_KERNEL_USB_UHCI_HCD
 	tristate "Support for UHCI controllers"
-	depends on ADK_KERNEL_USB
+	depends on ADK_LINUX_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_BOARD_BCM28XX
 	default m if ADK_TARGET_SYSTEM_ASUS_P5BVM
@@ -157,13 +157,13 @@ config ADK_KERNEL_USB_UHCI_HCD
 	  (like VIA VP2, VP3, MVP3, Apollo Pro, Apollo Pro II or Apollo Pro
 	  133). If unsure, say Y.
 
-config ADK_KERNEL_USB_OHCI_HCD
+config ADK_LINUX_KERNEL_USB_OHCI_HCD
 	tristate "Support for OHCI controllers"
-	depends on ADK_KERNEL_USB
+	depends on ADK_LINUX_KERNEL_USB
 	depends on !ADK_TARGET_BOARD_BCM28XX
-	select ADK_KERNEL_USB_OHCI_HCD_PCI if ADK_TARGET_SYSTEM_PCENGINES_ALIX
-	select ADK_KERNEL_USB_OHCI_HCD_PCI if ADK_TARGET_SYSTEM_PCENGINES_APU
-	select ADK_KERNEL_USB_OHCI_HCD_PCI if ADK_TARGET_SYSTEM_ASUS_P5BVM
+	select ADK_LINUX_KERNEL_USB_OHCI_HCD_PCI if ADK_TARGET_SYSTEM_PCENGINES_ALIX
+	select ADK_LINUX_KERNEL_USB_OHCI_HCD_PCI if ADK_TARGET_SYSTEM_PCENGINES_APU
+	select ADK_LINUX_KERNEL_USB_OHCI_HCD_PCI if ADK_TARGET_SYSTEM_ASUS_P5BVM
 	default m if ADK_TARGET_SYSTEM_ASUS_P5BVM
 	default m if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default m if ADK_TARGET_SYSTEM_PCENGINES_ALIX
@@ -180,10 +180,10 @@ config ADK_KERNEL_USB_OHCI_HCD
 	  based system where you're not sure, the "lspci -v" entry will list the
 	  right "prog-if" for your USB controller(s):  EHCI, OHCI, or UHCI.
 
-config ADK_KERNEL_USB_DWCOTG
+config ADK_LINUX_KERNEL_USB_DWCOTG
 	bool "Support for DWCOTG controller"
-	select ADK_KERNEL_USB
-	select ADK_KERNEL_FIQ
+	select ADK_LINUX_KERNEL_USB
+	select ADK_LINUX_KERNEL_FIQ
 	depends on ADK_TARGET_BOARD_BCM28XX
 	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
@@ -191,25 +191,25 @@ config ADK_KERNEL_USB_DWCOTG
 	  The Synopsis DWC controller is a dual-role
           host/peripheral/OTG ("On The Go") USB controllers.
 
-config ADK_KERNEL_USB_CHIPIDEA_UDC
+config ADK_LINUX_KERNEL_USB_CHIPIDEA_UDC
 	bool
 
-config ADK_KERNEL_USB_CHIPIDEA_HOST
+config ADK_LINUX_KERNEL_USB_CHIPIDEA_HOST
 	bool
 
-config ADK_KERNEL_USB_CHIPIDEA
+config ADK_LINUX_KERNEL_USB_CHIPIDEA
 	tristate "Support for ChipIdea controller"
-	select ADK_KERNEL_USB_CHIPIDEA_UDC
-	select ADK_KERNEL_USB_CHIPIDEA_HOST
-	select ADK_KERNEL_USB_GADGET
-	depends on ADK_KERNEL_USB_EHCI_HCD
+	select ADK_LINUX_KERNEL_USB_CHIPIDEA_UDC
+	select ADK_LINUX_KERNEL_USB_CHIPIDEA_HOST
+	select ADK_LINUX_KERNEL_USB_GADGET
+	depends on ADK_LINUX_KERNEL_USB_EHCI_HCD
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default m if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default n
 
-config ADK_KERNEL_USB_ISP116X_HCD
+config ADK_LINUX_KERNEL_USB_ISP116X_HCD
 	tristate "Support for ISP116X"
-	depends on ADK_KERNEL_USB
+	depends on ADK_LINUX_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_BOARD_BCM28XX
 	help
@@ -218,9 +218,9 @@ config ADK_KERNEL_USB_ISP116X_HCD
 
 	  This driver does not support isochronous transfers.
 
-config ADK_KERNEL_USB_SL811_HCD
+config ADK_LINUX_KERNEL_USB_SL811_HCD
 	tristate "Support for SL811HS"
-	depends on ADK_KERNEL_USB
+	depends on ADK_LINUX_KERNEL_USB
 	depends on !ADK_TARGET_SYSTEM_ACMESYSTEMS_FOXG20
 	depends on !ADK_TARGET_BOARD_BCM28XX
 	default n
@@ -234,33 +234,33 @@ endmenu
 
 menu "USB devices support"
 
-config ADK_KERNEL_USB_STORAGE
+config ADK_LINUX_KERNEL_USB_STORAGE
 	tristate "Support for USB storage devices"
-	select ADK_KERNEL_SCSI
-	select ADK_KERNEL_BLK_DEV_SD
+	select ADK_LINUX_KERNEL_SCSI
+	select ADK_LINUX_KERNEL_BLK_DEV_SD
 
-config ADK_KERNEL_SND_USB_AUDIO
+config ADK_LINUX_KERNEL_SND_USB_AUDIO
 	tristate "Support for USB sound adapter"
-	select ADK_KERNEL_SND
-	select ADK_KERNEL_SND_USB
-	select ADK_KERNEL_SND_RAWMIDI
+	select ADK_LINUX_KERNEL_SND
+	select ADK_LINUX_KERNEL_SND_USB
+	select ADK_LINUX_KERNEL_SND_RAWMIDI
 
-config ADK_KERNEL_USB_HSO
+config ADK_LINUX_KERNEL_USB_HSO
 	tristate "Support for USB HSO devices"
-	select ADK_KERNEL_RFKILL
-	select ADK_KERNEL_USB_STORAGE
+	select ADK_LINUX_KERNEL_RFKILL
+	select ADK_LINUX_KERNEL_USB_STORAGE
 
-config ADK_KERNEL_USB_PRINTER
+config ADK_LINUX_KERNEL_USB_PRINTER
 	tristate "Support for USB printers"
 
-config ADK_KERNEL_USB_ACM
+config ADK_LINUX_KERNEL_USB_ACM
 	tristate "Support for USB modems/isdn controllers"
 
-config ADK_KERNEL_USB_PEGASUS
+config ADK_LINUX_KERNEL_USB_PEGASUS
 	tristate "Support for USB Pegasus network cards"
-	select ADK_KERNEL_USB_NET_DRIVERS
+	select ADK_LINUX_KERNEL_USB_NET_DRIVERS
 
-config ADK_KERNEL_USB_SERIAL
+config ADK_LINUX_KERNEL_USB_SERIAL
 	tristate "Support for USB-to-serial converters"
 	help
 	  Say Y here if you have a USB device that provides normal serial
@@ -271,17 +271,17 @@ config ADK_KERNEL_USB_SERIAL
 	  information on the specifics of the different devices that are
 	  supported, and on how to use them.
 
-config ADK_KERNEL_USB_SERIAL_BELKIN
+config ADK_LINUX_KERNEL_USB_SERIAL_BELKIN
 	tristate "Support for Belkin USB-to-serial converters"
-	depends on ADK_KERNEL_USB_SERIAL
+	depends on ADK_LINUX_KERNEL_USB_SERIAL
 	help
 	  Say Y here if you want to use a Belkin USB Serial single port
 	  adaptor (F5U103 is one of the model numbers) or the Peracom single
 	  port USB to serial adapter.
 
-config ADK_KERNEL_USB_SERIAL_FTDI_SIO
+config ADK_LINUX_KERNEL_USB_SERIAL_FTDI_SIO
 	tristate "Support for FTDI USB-to-serial converter"
-	depends on ADK_KERNEL_USB_SERIAL
+	depends on ADK_LINUX_KERNEL_USB_SERIAL
 	help
 	  Say Y here if you want to use a FTDI SIO single port USB to serial
 	  converter device. The implementation I have is called the USC-1000.
@@ -290,9 +290,9 @@ config ADK_KERNEL_USB_SERIAL_FTDI_SIO
 	  See <http://ftdi-usb-sio.sourceforge.net/> for more
 	  information on this driver and the device.
 
-config ADK_KERNEL_USB_SERIAL_MCT_U232
+config ADK_LINUX_KERNEL_USB_SERIAL_MCT_U232
 	tristate "Support for Magic Control Technology USB-to-Serial converters"
-	depends on ADK_KERNEL_USB_SERIAL
+	depends on ADK_LINUX_KERNEL_USB_SERIAL
 	help
 	  Say Y here if you want to use a USB Serial single port adapter from
 	  Magic Control Technology Corp. (U232 is one of the model numbers).
@@ -300,77 +300,77 @@ config ADK_KERNEL_USB_SERIAL_MCT_U232
 	  This driver also works with Sitecom U232-P25 and D-Link DU-H3SP USB
 	  BAY, Belkin F5U109, and Belkin F5U409 devices.
 
-config ADK_KERNEL_USB_SERIAL_PL2303
+config ADK_LINUX_KERNEL_USB_SERIAL_PL2303
 	tristate "Support for Prolific PL2303 USB-to-Serial converters"
-	depends on ADK_KERNEL_USB_SERIAL
+	depends on ADK_LINUX_KERNEL_USB_SERIAL
 	help
 	  Say Y here if you want to use the PL2303 USB Serial single port
 	  adapter from Prolific.
 
-config ADK_KERNEL_USB_SERIAL_VISOR
+config ADK_LINUX_KERNEL_USB_SERIAL_VISOR
 	tristate "Support for Handspring Visor / Palm m50x / Sony Clie Driver"
-	depends on ADK_KERNEL_USB_SERIAL
+	depends on ADK_LINUX_KERNEL_USB_SERIAL
 	help
 	  Say Y here if you want to connect to your HandSpring Visor, Palm
 	  m500 or m505 through its USB docking station. See
 	  <http://usbvisor.sourceforge.net/> for more information on using this
 	  driver.
 
-config ADK_KERNEL_USB_SERIAL_SIERRAWIRELESS
+config ADK_LINUX_KERNEL_USB_SERIAL_SIERRAWIRELESS
 	tristate "Support for Sierra Wireless USB-to-Serial converters"
-	depends on ADK_KERNEL_USB_SERIAL
+	depends on ADK_LINUX_KERNEL_USB_SERIAL
 
-config ADK_KERNEL_USB_SERIAL_OPTION
+config ADK_LINUX_KERNEL_USB_SERIAL_OPTION
 	tristate "USB driver for GSM and CDMA modems"
-	depends on ADK_KERNEL_USB_SERIAL
+	depends on ADK_LINUX_KERNEL_USB_SERIAL
 	help
 	  Say Y here if you have a GSM or CDMA modem that's connected to USB.
 
-config ADK_KERNEL_USB_SERIAL_WWAN
+config ADK_LINUX_KERNEL_USB_SERIAL_WWAN
 	tristate
-	depends on ADK_KERNEL_USB_SERIAL
+	depends on ADK_LINUX_KERNEL_USB_SERIAL
 
-config ADK_KERNEL_USB_ATM
+config ADK_LINUX_KERNEL_USB_ATM
         tristate "Support for USB ATM devices"
 
-config ADK_KERNEL_USB_ATM_SPEEDTOUCH
+config ADK_LINUX_KERNEL_USB_ATM_SPEEDTOUCH
         tristate "Support for USB Speedtouch ADSL modem"
-	depends on ADK_KERNEL_USB_ATM
+	depends on ADK_LINUX_KERNEL_USB_ATM
 
-config ADK_KERNEL_USB_SISUSBVGA
+config ADK_LINUX_KERNEL_USB_SISUSBVGA
         tristate "USB 2.0 SVGA dongle support (Net2280/SiS315)"
 
-config ADK_KERNEL_USB_NET_QMI_WWAN
+config ADK_LINUX_KERNEL_USB_NET_QMI_WWAN
 	tristate "Qualcomm LTE modems"
-	select ADK_KERNEL_USB_USBNET
+	select ADK_LINUX_KERNEL_USB_USBNET
 	help
 
-config ADK_KERNEL_USB_SIERRA_NET
+config ADK_LINUX_KERNEL_USB_SIERRA_NET
 	tristate "Sierra Wireless MC8775 PCI Express"
-	select ADK_KERNEL_USB_USBNET
+	select ADK_LINUX_KERNEL_USB_USBNET
 	help
 	  Driver for WWAN modem Sierra Wireless MC8775 PCI Express
 
 
-config ADK_KERNEL_SND_USB
+config ADK_LINUX_KERNEL_SND_USB
        bool
-       depends on ADK_KERNEL_USB
+       depends on ADK_LINUX_KERNEL_USB
 
-config ADK_KERNEL_SND_USB_AUDIO
+config ADK_LINUX_KERNEL_SND_USB_AUDIO
        tristate
 
-config ADK_KERNEL_USB_GADGET
+config ADK_LINUX_KERNEL_USB_GADGET
        tristate
 
-config ADK_KERNEL_USB_AUDIO
+config ADK_LINUX_KERNEL_USB_AUDIO
        tristate
 
-config ADK_KERNEL_USB_MIDI_GADGET
+config ADK_LINUX_KERNEL_USB_MIDI_GADGET
        tristate "USB Midi Gadgets"
-       select ADK_KERNEL_USB_GADGET
-       select ADK_KERNEL_USB_AUDIO
-       select ADK_KERNEL_SND_USB_AUDIO
-       select ADK_KERNEL_SND_USB
+       select ADK_LINUX_KERNEL_USB_GADGET
+       select ADK_LINUX_KERNEL_USB_AUDIO
+       select ADK_LINUX_KERNEL_SND_USB_AUDIO
+       select ADK_LINUX_KERNEL_SND_USB
        help
          Enable USB midi devices
 	

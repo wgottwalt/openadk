@@ -3,69 +3,69 @@
 
 menu "Kernel debugging"
 
-config ADK_KERNEL_FTRACE
+config ADK_LINUX_KERNEL_FTRACE
 	bool
 
-config ADK_KERNEL_GENERIC_TRACER
+config ADK_LINUX_KERNEL_GENERIC_TRACER
 	bool
 
-config ADK_KERNEL_FUNCTION_TRACER
+config ADK_LINUX_KERNEL_FUNCTION_TRACER
 	bool
 
-config ADK_KERNEL_PROFILING
+config ADK_LINUX_KERNEL_PROFILING
 	bool
 
-config ADK_KERNEL_DEBUG_KERNEL
+config ADK_LINUX_KERNEL_DEBUG_KERNEL
 	bool
 
-config ADK_KERNEL_DEBUG_INFO
+config ADK_LINUX_KERNEL_DEBUG_INFO
 	bool
 
-config ADK_KERNEL_KGDB
+config ADK_LINUX_KERNEL_KGDB
 	bool
 
-config ADK_KERNEL_KGDB_SERIAL_CONSOLE
+config ADK_LINUX_KERNEL_KGDB_SERIAL_CONSOLE
 	bool
 
-config ADK_KERNEL_FRAME_POINTER
+config ADK_LINUX_KERNEL_FRAME_POINTER
 	bool
 
-config ADK_KERNEL_EARLY_PRINTK
+config ADK_LINUX_KERNEL_EARLY_PRINTK
 	bool
 
-config ADK_KERNEL_KALLSYMS_ALL
+config ADK_LINUX_KERNEL_KALLSYMS_ALL
 	bool
 
-config ADK_KERNEL_PRINTK
+config ADK_LINUX_KERNEL_PRINTK
 	bool "printk support (disable to save space and quieten bootup)"
-	select ADK_KERNEL_EARLY_PRINTK
+	select ADK_LINUX_KERNEL_EARLY_PRINTK
 	default y
 	help
 	  Disable printk to save space and quieten bootup.
 
-config ADK_KERNEL_PRINTK_TIME
+config ADK_LINUX_KERNEL_PRINTK_TIME
 	bool "timing information for printk"
-	depends on ADK_KERNEL_PRINTK
+	depends on ADK_LINUX_KERNEL_PRINTK
 	default y
 	help
 	  Enable timing information for printk, to analyze kernel
 	  bootup performance.
 
-config ADK_KERNEL_BUG
+config ADK_LINUX_KERNEL_BUG
 	bool "Enable BUGS()"
 	help
 	  Enable if you need BUGS() in the kernel.
 
-config ADK_KERNEL_ELF_CORE
+config ADK_LINUX_KERNEL_ELF_CORE
 	bool
 
-config ADK_KERNEL_COREDUMP
+config ADK_LINUX_KERNEL_COREDUMP
 	bool "Enable coredumps"
-	select ADK_KERNEL_ELF_CORE
+	select ADK_LINUX_KERNEL_ELF_CORE
 	help
 	  Enable if you need coredumps.
 
-config ADK_KERNEL_NETCONSOLE
+config ADK_LINUX_KERNEL_NETCONSOLE
 	bool "Netconsole support"
 	help
 	  Activate netconsole. netconsole=@/,@192.168.1.2/
@@ -74,7 +74,7 @@ config ADK_PARAMETER_NETCONSOLE_SRC_IP
 	prompt "IP address for source"
 	string
 	default "192.168.1.100"
-	depends on ADK_KERNEL_NETCONSOLE
+	depends on ADK_LINUX_KERNEL_NETCONSOLE
 	help
        	  source ip address logging from.
 
@@ -82,18 +82,18 @@ config ADK_PARAMETER_NETCONSOLE_DST_IP
 	prompt "IP address for target"
 	string
 	default "192.168.1.2"
-	depends on ADK_KERNEL_NETCONSOLE
+	depends on ADK_LINUX_KERNEL_NETCONSOLE
 	help
        	  ip address logging to.
 
-config ADK_KERNEL_MAGIC_SYSRQ
+config ADK_LINUX_KERNEL_MAGIC_SYSRQ
 	bool "Magic BREAK sequence"
 	default y
 	help
 	  Enable this to be able to use the Magic SysRq functions,
 	  probably using a serial console break.
 
-config ADK_KERNEL_DEBUG_FS
+config ADK_LINUX_KERNEL_DEBUG_FS
 	bool "Debug Filesystem"
 	default n
 	help
@@ -101,33 +101,33 @@ config ADK_KERNEL_DEBUG_FS
 	  debugging files into.  Enable this option to be able to read and
 	  write to these files.
 
-config ADK_KERNEL_DEBUG_INFO
+config ADK_LINUX_KERNEL_DEBUG_INFO
 	bool "Debug info"
 
-config ADK_KERNEL_DEBUG_WITH_KGDB
+config ADK_LINUX_KERNEL_DEBUG_WITH_KGDB
 	bool "Enable remote kernel debugging using KGDB"
-	select ADK_KERNEL_DEBUG_KERNEL
-	select ADK_KERNEL_DEBUG_INFO
-	select ADK_KERNEL_KGDB
-	select ADK_KERNEL_KGDB_SERIAL_CONSOLE
-	select ADK_KERNEL_FRAME_POINTER
+	select ADK_LINUX_KERNEL_DEBUG_KERNEL
+	select ADK_LINUX_KERNEL_DEBUG_INFO
+	select ADK_LINUX_KERNEL_KGDB
+	select ADK_LINUX_KERNEL_KGDB_SERIAL_CONSOLE
+	select ADK_LINUX_KERNEL_FRAME_POINTER
 	depends on ADK_TARGET_ROOTFS_NFSROOT || \
 		ADK_TARGET_ROOTFS_ARCHIVE || \
 		ADK_TARGET_ROOTFS_INITRAMFS || \
 		ADK_TARGET_ROOTFS_INITRAMFS_PIGGYBACK
 	default n
 
-config ADK_KERNEL_OPROFILE
+config ADK_LINUX_KERNEL_OPROFILE
 	tristate "Oprofile support"
-	select ADK_KERNEL_PROFILING
+	select ADK_LINUX_KERNEL_PROFILING
 	depends on !ADK_TARGET_ARCH_M68K
 	default n
 	help
 	  use oprofile package to make use of the kernel support.
 
-config ADK_KERNEL_KALLSYMS
+config ADK_LINUX_KERNEL_KALLSYMS
 	bool "Support for symbol names in OOPS"
-	select ADK_KERNEL_KALLSYMS_ALL
+	select ADK_LINUX_KERNEL_KALLSYMS_ALL
 	default n
 	help
 	  Load all symbols to the kernel.

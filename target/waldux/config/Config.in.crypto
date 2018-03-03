@@ -1,0 +1,553 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "Crypto support"
+
+config ADK_WALDUX_KERNEL_CRYPTO
+	tristate
+
+config ADK_WALDUX_KERNEL_CRYPTO_HW
+	bool
+
+config ADK_WALDUX_KERNEL_XOR_BLOCKS
+	tristate
+
+comment "Hardware cryptography"
+
+menu "Hardware crypto devices"
+depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI || ADK_TARGET_WITH_GEODE_CRYPTO
+
+config ADK_WALDUX_KERNEL_CRYPTO_DEV_GEODE
+	tristate "Support for the Geode LX/GX AES engine"
+	select ADK_WALDUX_KERNEL_CRYPTO
+	select ADK_WALDUX_KERNEL_CRYPTO_HW
+	select ADK_WALDUX_KERNEL_CRYPTO_ECB
+	select ADK_WALDUX_KERNEL_CRYPTO_CBC
+	depends on ADK_TARGET_WITH_GEODE_CRYPTO
+	default y if ADK_TARGET_WITH_GEODE_CRYPTO
+	default n
+	help
+	  Say 'Y' here to use the AMD Geode LX processor on-board AES
+	  engine for the CryptoAPI AES algorithm.
+
+config ADK_WALDUX_KERNEL_CRYPTO_DEV_HIFN_795X
+	tristate "Driver for HIFN 795x crypto accelerator chips"
+	depends on ADK_TARGET_WITH_PCI || ADK_TARGET_WITH_MINIPCI
+	select ADK_WALDUX_KERNEL_CRYPTO
+	select ADK_WALDUX_KERNEL_CRYPTO_HW
+	select ADK_WALDUX_KERNEL_CRYPTO_DES
+	default n
+	help
+	  This option allows you to have support for HIFN 795x crypto adapters.
+
+endmenu
+
+comment "Software cryptography support"
+
+menu "Crypto core / Block and Hash modes"
+
+config ADK_WALDUX_KERNEL_CRYPTO_PCOMP
+	tristate
+	select ADK_WALDUX_KERNEL_CRYPTO_PCOMP2
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+
+config ADK_WALDUX_KERNEL_CRYPTO_PCOMP2
+	tristate
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI2
+
+config ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	tristate
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI2
+	
+config ADK_WALDUX_KERNEL_CRYPTO_ALGAPI2
+	tristate
+
+config ADK_WALDUX_KERNEL_CRYPTO_AEAD
+	tristate
+	select ADK_WALDUX_KERNEL_CRYPTO_AEAD2
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+
+config ADK_WALDUX_KERNEL_CRYPTO_AEAD2
+	tristate
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI2
+
+config ADK_WALDUX_KERNEL_CRYPTO_HASH
+	tristate
+	select ADK_WALDUX_KERNEL_CRYPTO
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH2
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+
+config ADK_WALDUX_KERNEL_CRYPTO_HASH2
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI2
+	tristate
+
+config ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER
+	tristate
+	select ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER2
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+
+config ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER2
+	tristate
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI2
+	select ADK_WALDUX_KERNEL_CRYPTO_RNG2
+	select ADK_WALDUX_KERNEL_CRYPTO_WORKQUEUE
+
+config ADK_WALDUX_KERNEL_CRYPTO_WORKQUEUE
+	tristate
+
+config ADK_WALDUX_KERNEL_CRYPTO_RNG
+	tristate
+	select ADK_WALDUX_KERNEL_CRYPTO_RNG2
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+
+config ADK_WALDUX_KERNEL_CRYPTO_RNG2
+	tristate
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI2
+
+
+config ADK_WALDUX_KERNEL_CRYPTO_MANAGER
+	tristate
+	select ADK_WALDUX_KERNEL_CRYPTO_MANAGER2
+
+config ADK_WALDUX_KERNEL_CRYPTO_MANAGER2
+	def_tristate ADK_WALDUX_KERNEL_CRYPTO_MANAGER || (ADK_WALDUX_KERNEL_CRYPTO_MANAGER!=n && ADK_WALDUX_KERNEL_CRYPTO_ALGAPI=y)
+	select ADK_WALDUX_KERNEL_CRYPTO_AEAD2
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH2
+	select ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER2
+	select ADK_WALDUX_KERNEL_CRYPTO_PCOMP2
+
+config ADK_WALDUX_KERNEL_CRYPTO_AUTHENC
+	tristate "AuthENC (IPsec)"
+	select ADK_WALDUX_KERNEL_CRYPTO_AEAD
+	select ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER
+	select ADK_WALDUX_KERNEL_CRYPTO_MANAGER
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	default n
+
+config ADK_WALDUX_KERNEL_CRYPTO_SEQIV
+	tristate "Sequence Number IV Generator"
+	select ADK_WALDUX_KERNEL_CRYPTO_AEAD
+	select ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER
+	select ADK_WALDUX_KERNEL_CRYPTO_RNG
+	default n
+	help
+	  This IV generator generates an IV based on a sequence number by
+	  xoring it with a salt.  This algorithm is mainly useful for CTR
+
+config ADK_WALDUX_KERNEL_CRYPTO_CTS
+	tristate "CTS support"
+	select ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER
+	default n
+	help
+          CTS: Cipher Text Stealing
+          This is the Cipher Text Stealing mode as described by
+          Section 8 of rfc2040 and referenced by rfc3962.
+          (rfc3962 includes errata information in its Appendix A)
+          This mode is required for Kerberos gss mechanism support
+          for AES encryption.
+
+config ADK_WALDUX_KERNEL_CRYPTO_CBC
+	tristate "CBC support"
+	select ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER
+	select ADK_WALDUX_KERNEL_CRYPTO_MANAGER
+	default n
+	help
+	  CBC: Cipher Block Chaining mode
+	  This block cipher algorithm is required for IPSec.
+
+config ADK_WALDUX_KERNEL_CRYPTO_CCM
+	tristate "CCM support"
+	select ADK_WALDUX_KERNEL_CRYPTO_CTR
+	select ADK_WALDUX_KERNEL_CRYPTO_AEAD
+	default n
+	help
+	  Support for Counter with CBC MAC. Required for IPsec.
+
+config ADK_WALDUX_KERNEL_CRYPTO_GCM
+	tristate "GCM support"
+	select ADK_WALDUX_KERNEL_CRYPTO_CTR
+	select ADK_WALDUX_KERNEL_CRYPTO_AEAD
+	select ADK_WALDUX_KERNEL_CRYPTO_GHASH
+	select ADK_WALDUX_KERNEL_CRYPTO_NULL
+	default n
+	help
+	  Support for Galois/Counter Mode (GCM) and Galois Message
+          Authentication Code (GMAC). Required for IPSec.
+
+config ADK_WALDUX_KERNEL_CRYPTO_CTR
+	tristate "CTR support"
+	select ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER
+	select ADK_WALDUX_KERNEL_CRYPTO_SEQIV
+	select ADK_WALDUX_KERNEL_CRYPTO_MANAGER
+	default n
+	help
+	  CTR: Counter mode
+	  This block cipher algorithm is required for IPSec.
+
+config ADK_WALDUX_KERNEL_CRYPTO_ECB
+	tristate "ECB support"
+	select ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER
+	select ADK_WALDUX_KERNEL_CRYPTO_MANAGER
+	default n
+	help
+	  ECB: Electronic CodeBook mode
+	  This is the simplest block cipher algorithm.  It simply encrypts
+	  the input block by block.
+
+config ADK_WALDUX_KERNEL_CRYPTO_HMAC
+	tristate "HMAC support"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	select ADK_WALDUX_KERNEL_CRYPTO_MANAGER
+	default n
+	help
+	  HMAC: Keyed-Hashing for Message Authentication (RFC2104).
+	  This is required for IPSec.
+
+config ADK_WALDUX_KERNEL_CRYPTO_XCBC
+	tristate "XCBC support"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	select ADK_WALDUX_KERNEL_CRYPTO_MANAGER
+	default n
+	help
+          XCBC: Keyed-Hashing with encryption algorithm
+
+endmenu
+
+menu "Digest algorithms"
+
+config ADK_WALDUX_KERNEL_CRYPTO_MD4
+	tristate "MD4 digest algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	default n
+	help
+	  MD4 message digest algorithm (RFC1320).
+
+config ADK_WALDUX_KERNEL_CRYPTO_MD5
+	tristate "MD5 digest algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	default n
+	help
+	  MD5 message digest algorithm (RFC1321).
+
+config ADK_WALDUX_KERNEL_CRYPTO_SHA1
+	tristate "SHA1 digest algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	default n
+	help
+	  SHA-1 secure hash standard (FIPS 180-1/DFIPS 180-2).
+
+config ADK_WALDUX_KERNEL_CRYPTO_SHA256
+	tristate "SHA256 digest algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	default n
+	help
+	  SHA256 secure hash standard (DFIPS 180-2).
+	  
+	  This version of SHA implements a 256 bit hash with 128 bits of
+	  security against collision attacks.
+
+config ADK_WALDUX_KERNEL_CRYPTO_SHA512
+	tristate "SHA512 digest algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	default n
+	help
+	  SHA512 secure hash standard (DFIPS 180-2).
+	  
+	  This version of SHA implements a 512 bit hash with 256 bits of
+	  security against collision attacks.
+
+	  This code also includes SHA-384, a 384 bit hash with 192 bits
+	  of security against collision attacks.
+
+config ADK_WALDUX_KERNEL_CRYPTO_WP512
+	tristate "Whirlpool digest algorithms"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	default n
+	help
+	  Whirlpool hash algorithm 512, 384 and 256-bit hashes
+
+	  Whirlpool-512 is part of the NESSIE cryptographic primitives.
+	  Whirlpool will be part of the ISO/IEC 10118-3:2003(E) standard
+
+	  See also:
+	  <http://planeta.terra.com.br/informatica/paulobarreto/WhirlpoolPage.html>
+
+config ADK_WALDUX_KERNEL_CRYPTO_TGR192
+	tristate "Tiger digest algorithms"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	default n
+	help
+	  Tiger hash algorithm 192, 160 and 128-bit hashes
+
+	  Tiger is a hash function optimized for 64-bit processors while
+	  still having decent performance on 32-bit processors.
+	  Tiger was developed by Ross Anderson and Eli Biham.
+
+	  See also:
+	  <http://www.cs.technion.ac.il/~biham/Reports/Tiger/>.
+endmenu
+
+menu "Cipher algoritms"
+
+config ADK_WALDUX_KERNEL_CRYPTO_AES
+	tristate "AES cipher algorithms"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  AES cipher algorithms (FIPS-197). AES uses the Rijndael 
+	  algorithm.
+
+	  Rijndael appears to be consistently a very good performer in
+	  both hardware and software across a wide range of computing 
+	  environments regardless of its use in feedback or non-feedback 
+	  modes. Its key setup time is excellent, and its key agility is 
+	  good. Rijndael's very low memory requirements make it very well 
+	  suited for restricted-space environments, in which it also 
+	  demonstrates excellent performance. Rijndael's operations are 
+	  among the easiest to defend against power and timing attacks.	
+
+	  The AES specifies three key sizes: 128, 192 and 256 bits	  
+
+	  See <http://csrc.nist.gov/CryptoToolkit/aes/> for more information.
+
+config ADK_WALDUX_KERNEL_CRYPTO_AES_586
+	tristate "AES cipher algorithms (i586)"
+	depends on ADK_x86
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	select ADK_WALDUX_KERNEL_CRYPTO_AES
+	default n
+	help
+	  AES cipher algorithms (FIPS-197). AES uses the Rijndael 
+	  algorithm.
+
+	  Rijndael appears to be consistently a very good performer in
+	  both hardware and software across a wide range of computing 
+	  environments regardless of its use in feedback or non-feedback 
+	  modes. Its key setup time is excellent, and its key agility is 
+	  good. Rijndael's very low memory requirements make it very well 
+	  suited for restricted-space environments, in which it also 
+	  demonstrates excellent performance. Rijndael's operations are 
+	  among the easiest to defend against power and timing attacks.	
+
+	  The AES specifies three key sizes: 128, 192 and 256 bits	  
+
+	  See <http://csrc.nist.gov/CryptoToolkit/aes/> for more information.
+
+config ADK_WALDUX_KERNEL_CRYPTO_ANUBIS
+	tristate "Anubis cipher algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  Anubis cipher algorithm.
+
+	  Anubis is a variable key length cipher which can use keys from 
+	  128 bits to 320 bits in length.  It was evaluated as a entrant
+	  in the NESSIE competition.
+	  
+	  See also:
+	  <https://www.cosic.esat.kuleuven.ac.be/nessie/reports/>
+	  <http://planeta.terra.com.br/informatica/paulobarreto/AnubisPage.html>
+
+config ADK_WALDUX_KERNEL_CRYPTO_ARC4
+	tristate "ARC4 cipher algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER
+	default n
+	help
+	  ARC4 cipher algorithm.
+
+	  ARC4 is a stream cipher using keys ranging from 8 bits to 2048
+	  bits in length.  This algorithm is required for driver-based 
+	  WEP, but it should not be for other purposes because of the
+	  weakness of the algorithm.
+
+config ADK_WALDUX_KERNEL_CRYPTO_BLOWFISH
+	tristate "Blowfish cipher algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  Blowfish cipher algorithm, by Bruce Schneier.
+	  
+	  This is a variable key length cipher which can use keys from 32
+	  bits to 448 bits in length.  It's fast, simple and specifically
+	  designed for use on "large microprocessors".
+	  
+	  See also:
+	  <http://www.schneier.com/blowfish.html>
+
+config ADK_WALDUX_KERNEL_CRYPTO_CAMELLIA
+	tristate "Camellia cipher algorithms"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  Camellia cipher algorithms module.
+
+	  Camellia is a symmetric key block cipher developed jointly
+	  at NTT and Mitsubishi Electric Corporation.
+
+	  The Camellia specifies three key sizes: 128, 192 and 256 bits.
+
+	  See also:
+	  <https://info.isl.ntt.co.jp/crypt/eng/camellia/index_s.html>
+
+config ADK_WALDUX_KERNEL_CRYPTO_CAST5
+	tristate "CAST5 (CAST-128) cipher algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  The CAST5 encryption algorithm (synonymous with CAST-128) is
+	  described in RFC2144.
+
+config ADK_WALDUX_KERNEL_CRYPTO_CAST6
+	tristate "CAST6 (CATS-256) cipher algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  The CAST6 encryption algorithm (synonymous with CAST-256) is
+	  described in RFC2612.
+
+config ADK_WALDUX_KERNEL_CRYPTO_DES
+	tristate "DES and Triple DES EDE cipher algorithms"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  DES cipher algorithm (FIPS 46-2), and Triple DES EDE (FIPS 46-3).
+
+config ADK_WALDUX_KERNEL_CRYPTO_FCRYPT
+	tristate "FCrypt cipher algorithms"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  FCrypt algorithm used by RxRPC.
+
+config ADK_WALDUX_KERNEL_CRYPTO_KHAZAD
+	tristate "Khazad cipher algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  Khazad cipher algorithm.
+
+	  Khazad was a finalist in the initial NESSIE competition.  It is
+	  an algorithm optimized for 64-bit processors with good performance
+	  on 32-bit processors.  Khazad uses an 128 bit key size.
+
+	  See also:
+	  <http://planeta.terra.com.br/informatica/paulobarreto/KhazadPage.html>
+
+config ADK_WALDUX_KERNEL_CRYPTO_SERPENT
+	tristate "Serpent cipher algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  Serpent cipher algorithm, by Anderson, Biham & Knudsen.
+
+	  Keys are allowed to be from 0 to 256 bits in length, in steps
+	  of 8 bits.  Also includes the 'Tnepres' algorithm, a reversed
+	  variant of Serpent for compatibility with old kerneli code.
+
+	  See also:
+	  <http://www.cl.cam.ac.uk/~rja14/serpent.html>
+
+config ADK_WALDUX_KERNEL_CRYPTO_TEA
+	tristate "TEA, XTEA and XETA cipher algorithms"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  TEA cipher algorithm.
+
+	  Tiny Encryption Algorithm is a simple cipher that uses
+	  many rounds for security.  It is very fast and uses
+	  little memory.
+
+	  Xtendend Tiny Encryption Algorithm is a modification to
+	  the TEA algorithm to address a potential key weakness
+	  in the TEA algorithm.
+
+	  Xtendend Encryption Tiny Algorithm is a mis-implementation 
+	  of the XTEA algorithm for compatibility purposes.
+
+config ADK_WALDUX_KERNEL_CRYPTO_TWOFISH
+	tristate "Twofish cipher algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+	  Twofish cipher algorithm.
+	  
+	  Twofish was submitted as an AES (Advanced Encryption Standard)
+	  candidate cipher by researchers at CounterPane Systems.  It is a
+	  16 round block cipher supporting key sizes of 128, 192, and 256
+	  bits.
+	  
+	  See also:
+	  <http://www.schneier.com/twofish.html>
+
+config ADK_WALDUX_KERNEL_CRYPTO_TWOFISH_586
+	tristate "Twofish cipher algorithm (i586)"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	depends on ADK_x86
+	default n
+	help
+	  Twofish cipher algorithm.
+	  
+	  Twofish was submitted as an AES (Advanced Encryption Standard)
+	  candidate cipher by researchers at CounterPane Systems.  It is a
+	  16 round block cipher supporting key sizes of 128, 192, and 256
+	  bits.
+	  
+	  See also:
+	  <http://www.schneier.com/twofish.html>
+
+config ADK_WALDUX_KERNEL_CRYPTO_NULL
+	tristate "Null algorithms"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	select ADK_WALDUX_KERNEL_CRYPTO_BLKCIPHER
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	default n
+	help
+	  These are 'Null' algorithms, used by IPsec, which do nothing.
+
+endmenu
+
+menu "Compression"
+
+config ADK_WALDUX_KERNEL_CRYPTO_DEFLATE
+	tristate "Deflate compression algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	select ADK_WALDUX_KERNEL_ZLIB_DEFLATE
+	select ADK_WALDUX_KERNEL_ZLIB_INFLATE
+	default n
+	help
+	  This is the Deflate algorithm (RFC1951), specified for use in
+	  IPSec with the IPCOMP protocol (RFC3173, RFC2394).
+	  
+	  You will most probably want this if using IPSec.
+
+config ADK_WALDUX_KERNEL_CRYPTO_LZO
+	tristate "LZO compression algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_ALGAPI
+	default n
+	help
+
+config ADK_WALDUX_KERNEL_CRYPTO_MICHAEL_MIC
+	tristate "Michael MIC keyed digest algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	default n
+	help
+	  Michael MIC is used for message integrity protection in TKIP
+	  (IEEE 802.11i). This algorithm is required for TKIP, but it
+	  should not be used for other purposes because of the weakness
+	  of the algorithm.
+
+config ADK_WALDUX_KERNEL_CRYPTO_CRC32C
+	tristate "CRC32c CRC algorithm"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	select ADK_WALDUX_KERNEL_CRC32
+	default n
+	help
+	  Castagnoli, et al Cyclic Redundancy-Check Algorithm.  Used
+	  by iSCSI for header and data digests and by others.
+	  See Castagnoli93.  This implementation uses lib/libcrc32c.
+          Module will be crc32c.
+
+endmenu
+endmenu

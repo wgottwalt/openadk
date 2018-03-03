@@ -9,6 +9,11 @@ config ADK_TARGET_OS_LINUX
 	help
 	  Create a Linux system or toolchain.
 
+config ADK_TARGET_OS_WALDUX
+	bool "Waldux"
+	help
+	  Create a Waldux system or toolchain.
+
 config ADK_TARGET_OS_BAREMETAL
 	bool "Bare metal"
 	help
@@ -34,6 +39,7 @@ endchoice
 config ADK_TARGET_OS
 	string
 	default "linux" if ADK_TARGET_OS_LINUX
+	default "waldux" if ADK_TARGET_OS_WALDUX
 	default "frosted" if ADK_TARGET_OS_FROSTED
 	default "rtems5.0.0" if ADK_TARGET_OS_RTEMS
 	default "zephyr" if ADK_TARGET_OS_ZEPHYR

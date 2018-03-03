@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 include $(ADK_TOPDIR)/rules.mk
-include $(ADK_TOPDIR)/mk/kernel-ver.mk
+include $(ADK_TOPDIR)/mk/$(ADK_TARGET_OS)-ver.mk
 include $(ADK_TOPDIR)/mk/kernel-vars.mk
 include $(ADK_TOPDIR)/toolchain/uclibc-ng/Makefile.inc
 

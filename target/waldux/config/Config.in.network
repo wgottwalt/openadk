@@ -1,0 +1,267 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "Network support"
+depends on ADK_TARGET_WITH_NET \
+	|| ADK_TARGET_GENERIC
+
+config ADK_WALDUX_KERNEL_NETDEVICES
+	bool
+
+config ADK_WALDUX_KERNEL_ETHERNET
+	bool
+
+config ADK_WALDUX_KERNEL_NET
+	bool
+
+config ADK_WALDUX_KERNEL_PACKET
+	bool
+
+config ADK_WALDUX_KERNEL_UNIX
+	bool
+
+config ADK_WALDUX_KERNEL_NET_CORE
+	bool
+
+config ADK_WALDUX_KERNEL_INET
+	bool "Enable TCP/IP support"
+	select ADK_WALDUX_KERNEL_NET
+	select ADK_WALDUX_KERNEL_UNIX
+	select ADK_WALDUX_KERNEL_PACKET
+	select ADK_WALDUX_KERNEL_NET_CORE
+	select ADK_WALDUX_KERNEL_NETDEVICES
+	select ADK_WALDUX_KERNEL_ETHERNET
+	select ADK_WALDUX_KERNEL_CRYPTO
+	select ADK_WALDUX_KERNEL_CRYPTO_AES
+	default y
+
+config ADK_WALDUX_KERNEL_IP_FIB_HASH
+	bool
+	default y
+
+config ADK_WALDUX_KERNEL_IPV6
+	tristate "Enable IPv6 support"
+	select BUSYBOX_FEATURE_IPV6
+	help
+	  This is complemental support for the IP version 6.
+	  You will still be able to do traditional IPv4 networking as well.
+
+	  For general information about IPv6, see
+	  <http://playground.sun.com/pub/ipng/html/ipng-main.html>.
+	  For Linux IPv6 development information, see <http://www.linux-ipv6.org>.
+	  For specific information about IPv6 under Linux, read the HOWTO at
+	  <http://www.bieringer.de/linux/IPv6/>.
+
+config ADK_WALDUX_KERNEL_IPV6_SIT
+	tristate "IPv6-in-IPv4 tunnel (SIT driver)"
+	select ADK_WALDUX_KERNEL_INET_TUNNEL
+	select ADK_WALDUX_KERNEL_NET_IP_TUNNEL
+	help
+	  Tunneling means encapsulating data of one protocol type within
+	  another protocol and sending it over a channel that understands the
+	  encapsulating protocol. This driver implements encapsulation of IPv6
+	  into IPv4 packets. This is useful if you want to connect two IPv6
+	  networks over an IPv4-only path.
+
+config ADK_WALDUX_KERNEL_SYN_COOKIES
+	bool "TCP syncookie support"
+
+config ADK_WALDUX_KERNEL_IP_PNP_BOOTP
+	bool
+
+config ADK_WALDUX_KERNEL_IP_PNP_RARP
+	bool
+
+config ADK_WALDUX_KERNEL_NET_IPGRE_BROADCAST
+	bool
+
+config ADK_WALDUX_KERNEL_NET_IPGRE_DEMUX
+	bool
+
+config ADK_WALDUX_KERNEL_PPP_ASYNC
+	bool
+
+config ADK_WALDUX_KERNEL_SLHC
+	bool
+
+config ADK_WALDUX_KERNEL_IMQ
+	tristate
+
+config ADK_WALDUX_KERNEL_LLC
+	tristate
+
+config ADK_WALDUX_KERNEL_IP_MULTICAST
+	bool "Enable IP Multicasting"
+
+config ADK_WALDUX_KERNEL_IP_MROUTE
+	bool "Enable IP Multicasting Routing"
+
+config ADK_WALDUX_KERNEL_ATM
+	tristate "Asynchronous Transfer Mode (ATM)"
+	help
+	 ATM is a high-speed networking technology for Local Area Networks
+	 and Wide Area Networks.  It uses a fixed packet size and is
+	 connection oriented, allowing for the negotiation of minimum
+	 bandwidth requirements.
+
+	 In order to participate in an ATM network, your Linux box needs an
+	 ATM networking card. If you have that, say Y here and to the driver
+	 of your ATM card below.
+
+	 Note that you need a set of user-space programs to actually make use
+	 of ATM.  See the file <file:Documentation/networking/atm.txt> for
+	 further details.
+
+config ADK_WALDUX_KERNEL_ATM_BR2684
+	tristate "BR2684 ATM module"
+	select ADK_WALDUX_KERNEL_ATM
+
+config ADK_WALDUX_KERNEL_BRIDGE
+	tristate "802.1d Ethernet Bridging"
+	select ADK_WALDUX_KERNEL_LLC
+	help
+	  If you say Y here, then your Linux box will be able to act as an
+	  Ethernet bridge, which means that the different Ethernet segments it
+	  is connected to will appear as one Ethernet to the participants.
+	  Several such bridges can work together to create even larger
+	  networks of Ethernets using the IEEE 802.1 spanning tree algorithm.
+	  As this is a standard, Linux bridges will cooperate properly with
+	  other third party bridge products.
+
+	  In order to use the Ethernet bridge, you'll need the bridge
+	  configuration tools; see <file:Documentation/networking/bridge.txt>
+	  for location. Please read the Bridge mini-HOWTO for more
+	  information.
+
+	  If you enable iptables support along with the bridge support then you
+	  turn your bridge into a bridging IP firewall.
+	  iptables will then see the IP packets being bridged, so you need to
+	  take this into account when setting up your firewall rules.
+	  Enabling arptables support when bridging will let arptables see
+	  bridged ARP traffic in the arptables FORWARD chain.
+
+config ADK_WALDUX_KERNEL_VLAN_8021Q
+	tristate "802.1q VLAN support"
+	help
+          Select this and you will be able to create 802.1Q VLAN interfaces
+          on your ethernet interfaces.  802.1Q VLAN supports almost
+          everything a regular ethernet interface does, including
+          firewalling, bridging, and of course IP traffic.  You will need
+          the 'vconfig' tool from the VLAN project in order to effectively
+          use VLANs.  See the VLAN web page for more information:
+          <http://www.candelatech.com/~greear/vlan.html>
+
+config ADK_WALDUX_KERNEL_INET_TUNNEL
+	tristate
+
+config ADK_WALDUX_KERNEL_NET_IP_TUNNEL
+	tristate
+	default n
+
+config ADK_WALDUX_KERNEL_NET_IPIP
+	tristate "IP in IP encapsulation support"
+	select ADK_WALDUX_KERNEL_INET_TUNNEL
+	select ADK_WALDUX_KERNEL_NET_IP_TUNNEL
+	help
+	  Tunneling means encapsulating data of one protocol type within
+	  another protocol and sending it over a channel that understands the
+	  encapsulating protocol. This particular tunneling driver implements
+	  encapsulation of IP within IP, which sounds kind of pointless, but
+	  can be useful if you want to make your (or some other) machine
+	  appear on a different network than it physically is, or to use
+	  mobile-IP facilities (allowing laptops to seamlessly move between
+	  networks without changing their IP addresses).
+
+config ADK_WALDUX_KERNEL_NET_IPGRE
+	tristate "GRE tunnels over IP"
+	select ADK_WALDUX_KERNEL_NET_IPGRE_BROADCAST
+	select ADK_WALDUX_KERNEL_NET_IPGRE_DEMUX
+	select ADK_WALDUX_KERNEL_NET_IP_TUNNEL
+	help
+	  Tunneling means encapsulating data of one protocol type within
+	  another protocol and sending it over a channel that understands the
+	  encapsulating protocol. This particular tunneling driver implements
+	  GRE (Generic Routing Encapsulation) and at this time allows
+	  encapsulating of IPv4 or IPv6 over existing IPv4 infrastructure.
+	  This driver is useful if the other endpoint is a Cisco router: Cisco
+	  likes GRE much better than the other Linux tunneling driver ("IP
+	  tunneling" above). In addition, GRE allows multicast redistribution
+	  through the tunnel.
+
+config ADK_WALDUX_KERNEL_PPP
+	tristate "PPP support"
+	select ADK_WALDUX_KERNEL_PPP_ASYNC
+	select ADK_WALDUX_KERNEL_SLHC
+	select ADK_WALDUX_KERNEL_CRC_CCITT
+	help
+	  PPP (Point to Point Protocol) is a newer and better SLIP.  It serves
+	  the same purpose: sending Internet traffic over telephone (and other
+	  serial) lines.  Ask your access provider if they support it, because
+	  otherwise you can't use it; most Internet access providers these
+	  days support PPP rather than SLIP.
+
+	  To use PPP, you need an additional program called pppd as described
+	  in the PPP-HOWTO, available at
+	  <http://www.tldp.org/docs.html#howto>.  Make sure that you have
+	  the version of pppd recommended in <file:Documentation/Changes>.
+	  The PPP option enlarges your kernel by about 16 KB.
+
+	  There are actually two versions of PPP: the traditional PPP for
+	  asynchronous lines, such as regular analog phone lines, and
+	  synchronous PPP which can be used over digital ISDN lines for
+	  example.  If you want to use PPP over phone lines or other
+	  asynchronous serial lines, you need to say Y (or M) here and also to
+	  the next option, "PPP support for async serial ports".  For PPP over
+	  synchronous lines, you should say Y (or M) here and to "Support
+	  synchronous PPP", below.
+
+config ADK_WALDUX_KERNEL_PPP_MPPE
+	tristate "PPP MPPE/MPPC module"
+	depends on ADK_WALDUX_KERNEL_PPP
+	select ADK_WALDUX_KERNEL_CRYPTO
+	select ADK_WALDUX_KERNEL_CRYPTO_ARC4
+	select ADK_WALDUX_KERNEL_CRYPTO_SHA1
+	select ADK_WALDUX_KERNEL_CRYPTO_ECB
+	help
+         Support for the MPPE Encryption protocol, as employed by the
+	 Microsoft Point-to-Point Tunneling Protocol.
+
+	 See http://pptpclient.sourceforge.net/ for information on
+	 configuring PPTP clients and servers to utilize this method.
+
+config ADK_WALDUX_KERNEL_PPPOATM
+	tristate "PPPoA (PPP over ATM) kernel support"
+	depends on ADK_WALDUX_KERNEL_PPP
+	select ADK_WALDUX_KERNEL_ATM
+	help
+	  Support for PPP over ATM
+
+config ADK_WALDUX_KERNEL_PPPOE
+	tristate "PPPoE (PPP over Ethernet) kernel support"
+	depends on ADK_WALDUX_KERNEL_PPP
+	help
+	  Support for PPP over Ethernet
+
+config ADK_WALDUX_KERNEL_TUN
+	tristate "Universal TUN/TAP driver"
+	help
+	  Kernel support for the TUN/TAP tunneling device
+
+config ADK_WALDUX_KERNEL_BONDING
+	tristate "Bonding driver support"
+	help
+  	  Say 'Y' or 'M' if you wish to be able to 'bond' multiple Ethernet
+	  Channels together. This is called 'Etherchannel' by Cisco,
+	  'Trunking' by Sun, 802.3ad by the IEEE, and 'Bonding' in Linux.
+
+	  The driver supports multiple bonding modes to allow for both high
+	  performance and high availability operation.
+
+	  Refer to <file:Documentation/networking/bonding.txt> for more
+	  information.
+
+source target/waldux//config/Config.in.sched
+source target/waldux//config/Config.in.ipsec
+source target/waldux//config/Config.in.ipvs
+
+endmenu

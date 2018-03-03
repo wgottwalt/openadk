@@ -57,7 +57,7 @@ ifeq (${ADK_PRELINK},y)
 TARGETS+=prelink-cross
 endif
 
-DOWNLOAD:=kernel-headers-download $(patsubst %,%-download,$(TARGETS))
+DOWNLOAD:=$(ADK_TARGET_OS)-headers-download $(patsubst %,%-download,$(TARGETS))
 TARGETS_INSTALL:=$(patsubst %,%-install,$(TARGETS))
 FINAL:=$(patsubst %,%-final,$(COMPILER))
 TARGETS_CLEAN:=$(patsubst %,%-clean,$(TARGETS))
@@ -77,7 +77,7 @@ endif
 ifeq ($(ADK_TARGET_LIB_NEWLIB),y)
 $(CLIB)-install: $(COMPILER)-configure
 else
-$(CLIB)-install: $(COMPILER)-configure kernel-headers-configure
+$(CLIB)-install: $(COMPILER)-configure $(ADK_TARGET_OS)-headers-configure
 endif
 $(COMPILER)-install: $(ELF2FLT) $(CLIB)-install
 $(COMPILER)-final: $(COMPILER)-install $(GDB)

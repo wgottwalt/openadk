@@ -1,18 +1,18 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_KERNEL_BRIDGE_NF_EBTABLES
+config ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	tristate 'Ethernet Bridge tables support'
-	select ADK_KERNEL_BRIDGE_NETFILTER
+	select ADK_LINUX_KERNEL_BRIDGE_NETFILTER
 	default n
 	help
 	  ebtables is a general, extensible frame/packet identification
 	  framework. Say 'Y' or 'M' here if you want to do Ethernet
 	  filtering/NAT/brouting on the Ethernet bridge.
 
-config ADK_KERNEL_BRIDGE_EBT_BROUTE
+config ADK_LINUX_KERNEL_BRIDGE_EBT_BROUTE
 	tristate "broute table support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  The ebtables broute table is used to define rules that decide between
@@ -22,9 +22,9 @@ config ADK_KERNEL_BRIDGE_EBT_BROUTE
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_BRIDGE_EBT_T_FILTER
+config ADK_LINUX_KERNEL_BRIDGE_EBT_T_FILTER
 	tristate "filter table support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  The ebtables filter table is used to define frame filtering rules at
@@ -33,9 +33,9 @@ config ADK_KERNEL_BRIDGE_EBT_T_FILTER
 
 	  To compile it as a module, choose M here.  If unsure, say N.
 
-config ADK_KERNEL_BRIDGE_EBT_T_NAT
+config ADK_LINUX_KERNEL_BRIDGE_EBT_T_NAT
 	tristate "nat table support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  The ebtables nat table is used to define rules that alter the MAC
@@ -45,58 +45,58 @@ config ADK_KERNEL_BRIDGE_EBT_T_NAT
 #
 # matches
 #
-config ADK_KERNEL_BRIDGE_EBT_802_3
+config ADK_LINUX_KERNEL_BRIDGE_EBT_802_3
 	tristate "802.3 filter support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds matching support for 802.3 Ethernet frames.
 
-config ADK_KERNEL_BRIDGE_EBT_AMONG
+config ADK_LINUX_KERNEL_BRIDGE_EBT_AMONG
 	tristate "among filter support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the among match, which allows matching the MAC source
 	  and/or destination address on a list of addresses. Optionally,
 	  MAC/IP address pairs can be matched, f.e. for anti-spoofing rules.
 
-config ADK_KERNEL_BRIDGE_EBT_ARP
+config ADK_LINUX_KERNEL_BRIDGE_EBT_ARP
 	tristate "ARP filter support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the ARP match, which allows ARP and RARP header field
 	  filtering.
 
-config ADK_KERNEL_BRIDGE_EBT_IP
+config ADK_LINUX_KERNEL_BRIDGE_EBT_IP
 	tristate "IP filter support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the IP match, which allows basic IP header field
 	  filtering.
 
-config ADK_KERNEL_BRIDGE_EBT_IP6
+config ADK_LINUX_KERNEL_BRIDGE_EBT_IP6
 	tristate "IP6 filter support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES && ADK_KERNEL_IPV6
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES && ADK_LINUX_KERNEL_IPV6
 	default n
 	help
 	  This option adds the IP6 match, which allows basic IPV6 header field
 	  filtering.
 
-config ADK_KERNEL_BRIDGE_EBT_LIMIT
+config ADK_LINUX_KERNEL_BRIDGE_EBT_LIMIT
 	tristate "limit match support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the limit match, which allows you to control
 	  the rate at which a rule can be matched. This match is the
 	  equivalent of the iptables limit match.
 
-config ADK_KERNEL_BRIDGE_EBT_MARK
+config ADK_LINUX_KERNEL_BRIDGE_EBT_MARK
 	tristate "mark filter support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the mark match, which allows matching frames based on
@@ -104,9 +104,9 @@ config ADK_KERNEL_BRIDGE_EBT_MARK
 	  This value is the same as the one used in the iptables mark match and
 	  target.
 
-config ADK_KERNEL_BRIDGE_EBT_PKTTYPE
+config ADK_LINUX_KERNEL_BRIDGE_EBT_PKTTYPE
 	tristate "packet type filter support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the packet type match, which allows matching on the
@@ -114,17 +114,17 @@ config ADK_KERNEL_BRIDGE_EBT_PKTTYPE
 	  the generic networking code): broadcast, multicast,
 	  for this host alone or for another host.
 
-config ADK_KERNEL_BRIDGE_EBT_STP
+config ADK_LINUX_KERNEL_BRIDGE_EBT_STP
 	tristate "STP filter support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the Spanning Tree Protocol match, which
 	  allows STP header field filtering.
 
-config ADK_KERNEL_BRIDGE_EBT_VLAN
+config ADK_LINUX_KERNEL_BRIDGE_EBT_VLAN
 	tristate "802.1Q VLAN filter support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the 802.1Q vlan match, which allows the filtering of
@@ -133,25 +133,25 @@ config ADK_KERNEL_BRIDGE_EBT_VLAN
 #
 # targets
 #
-config ADK_KERNEL_BRIDGE_EBT_ARPREPLY
+config ADK_LINUX_KERNEL_BRIDGE_EBT_ARPREPLY
 	tristate "arp reply target support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the arp reply target, which allows
 	  automatically sending arp replies to arp requests.
 
-config ADK_KERNEL_BRIDGE_EBT_DNAT
+config ADK_LINUX_KERNEL_BRIDGE_EBT_DNAT
 	tristate "dnat target support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the MAC DNAT target, which allows altering the MAC
 	  destination address of frames.
 
-config ADK_KERNEL_BRIDGE_EBT_MARK_T
+config ADK_LINUX_KERNEL_BRIDGE_EBT_MARK_T
 	tristate "mark target support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the mark target, which allows marking frames by
@@ -159,17 +159,17 @@ config ADK_KERNEL_BRIDGE_EBT_MARK_T
 	  This value is the same as the one used in the iptables mark match and
 	  target.
 
-config ADK_KERNEL_BRIDGE_EBT_REDIRECT
+config ADK_LINUX_KERNEL_BRIDGE_EBT_REDIRECT
 	tristate "redirect target support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the MAC redirect target, which allows altering the MAC
 	  destination address of a frame to that of the device it arrived on.
 
-config ADK_KERNEL_BRIDGE_EBT_SNAT
+config ADK_LINUX_KERNEL_BRIDGE_EBT_SNAT
 	tristate "snat target support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the MAC SNAT target, which allows altering the MAC
@@ -178,18 +178,18 @@ config ADK_KERNEL_BRIDGE_EBT_SNAT
 #
 # watchers
 #
-config ADK_KERNEL_BRIDGE_EBT_LOG
+config ADK_LINUX_KERNEL_BRIDGE_EBT_LOG
 	tristate "log support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option adds the log watcher, that you can use in any rule
 	  in any ebtables table. It records info about the frame header
 	  to the syslog.
 
-config ADK_KERNEL_BRIDGE_EBT_ULOG
+config ADK_LINUX_KERNEL_BRIDGE_EBT_ULOG
 	tristate "ulog support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option enables the old bridge-specific "ebt_ulog" implementation
@@ -203,9 +203,9 @@ config ADK_KERNEL_BRIDGE_EBT_ULOG
 	  sent to userspace instead of a descriptive text and that
 	  netlink multicast sockets are used instead of the syslog.
 
-config ADK_KERNEL_BRIDGE_EBT_NFLOG
+config ADK_LINUX_KERNEL_BRIDGE_EBT_NFLOG
 	tristate "nflog support"
-	depends on ADK_KERNEL_BRIDGE_NF_EBTABLES
+	depends on ADK_LINUX_KERNEL_BRIDGE_NF_EBTABLES
 	default n
 	help
 	  This option enables the nflog watcher, which allows to LOG

@@ -17,7 +17,6 @@ DEFCONFIG=		ADK_DEBUG=n \
 			ADK_PACKAGE_BUSYBOX_HIDE=n \
 			ADK_DISABLE_KERNEL_PATCHES=n \
 			ADK_DISABLE_TARGET_KERNEL_PATCHES=n \
-			ADK_KERNEL_FB_CON_DECOR=n \
 			ADK_MAKE_PARALLEL=y \
 			ADK_MAKE_JOBS=4 \
 			ADK_LEAVE_ETC_ALONE=n \
@@ -78,10 +77,11 @@ DEFCONFIG=		ADK_DEBUG=n \
 			BUSYBOX_FEATURE_INETD_RPC=n \
 			BUSYBOX_FEATURE_MOUNT_NFS=n \
 			BUSYBOX_FEATURE_VI_REGEX_SEARCH=n \
-			ADK_KERNEL_RT2X00_DEBUG=n \
-			ADK_KERNEL_ATH5K_DEBUG=n \
-			ADK_KERNEL_BUG=n \
-			ADK_KERNEL_DEBUG_WITH_KGDB=n
+			ADK_LINUX_KERNEL_FB_CON_DECOR=n \
+			ADK_LINUX_KERNEL_RT2X00_DEBUG=n \
+			ADK_LINUX_KERNEL_ATH5K_DEBUG=n \
+			ADK_LINUX_KERNEL_BUG=n \
+			ADK_LINUX_KERNEL_DEBUG_WITH_KGDB=n
 
 noconfig_targets:=	menuconfig \
 			_config \
@@ -104,7 +104,7 @@ POSTCONFIG=		-@\
 				rebuild=1;\
 			fi; \
 		done; \
-		for i in ADK_TARGET_GPU_MEM ADK_KERNEL_SND_BCM2708;do \
+		for i in ADK_TARGET_GPU_MEM ADK_LINUX_KERNEL_SND_BCM2708;do \
 			if [ "$$(grep ^$$i .config|md5sum)" != "$$(grep ^$$i .config.old|md5sum)" ];then \
 				touch .rebuild.bcm28xx-bootloader;\
 				rebuild=1;\
@@ -187,6 +187,9 @@ ifeq ($(ADK_TARGET_OS_FROSTED),y)
 endif
 ifeq ($(ADK_TARGET_OS_ZEPHYR),y)
 	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final target/compile target/install target/targethelp
+endif
+ifeq ($(ADK_TARGET_OS_WALDUX),y)
+	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final target/config-prepare target/compile package_clean package/compile root_clean package/install target/install package_index
 endif
 ifeq ($(ADK_TARGET_OS_LINUX),y)
 	$(MAKE) -f mk/build.mk package/hostcompile toolchain/final target/config-prepare target/compile package_clean package/compile root_clean package/install target/install package_index

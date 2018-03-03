@@ -1,182 +1,182 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_KERNEL_EXPERIMENTAL
+config ADK_LINUX_KERNEL_EXPERIMENTAL
 	bool
 	default y
 
-config ADK_KERNEL_STAGING
+config ADK_LINUX_KERNEL_STAGING
 	bool
 
-config ADK_KERNEL_CGROUP_CPUACCT
+config ADK_LINUX_KERNEL_CGROUP_CPUACCT
 	bool
 
-config ADK_KERNEL_CGROUP_DEVICE
+config ADK_LINUX_KERNEL_CGROUP_DEVICE
 	bool
 
-config ADK_KERNEL_CGROUP_SCHED
+config ADK_LINUX_KERNEL_CGROUP_SCHED
 	bool
 
-config ADK_KERNEL_CGROUPS
+config ADK_LINUX_KERNEL_CGROUPS
 	bool
 
-config ADK_KERNEL_NAMESPACES
+config ADK_LINUX_KERNEL_NAMESPACES
 	bool
 
-config ADK_KERNEL_FHANDLE
+config ADK_LINUX_KERNEL_FHANDLE
 	bool
 
-config ADK_KERNEL_AUDIT
+config ADK_LINUX_KERNEL_AUDIT
 	bool
 
-config ADK_KERNEL_RESET_CONTROLLER
+config ADK_LINUX_KERNEL_RESET_CONTROLLER
         bool
 
-config ADK_KERNEL_BLK_DEV_INITRD
+config ADK_LINUX_KERNEL_BLK_DEV_INITRD
 	bool
 
-config ADK_KERNEL_BLK_DEV_RAM
+config ADK_LINUX_KERNEL_BLK_DEV_RAM
 	bool
 
-config ADK_KERNEL_NETWORK_FILESYSTEMS
+config ADK_LINUX_KERNEL_NETWORK_FILESYSTEMS
 	bool
 
-config ADK_KERNEL_IP_PNP
+config ADK_LINUX_KERNEL_IP_PNP
 	bool
 
-config ADK_KERNEL_IP_PNP_DHCP
+config ADK_LINUX_KERNEL_IP_PNP_DHCP
 	bool
 
-config ADK_KERNEL_ROOT_NFS
+config ADK_LINUX_KERNEL_ROOT_NFS
 	bool
 
-config ADK_KERNEL_NFS_COMMON
+config ADK_LINUX_KERNEL_NFS_COMMON
 	bool
 
-config ADK_KERNEL_64BIT
+config ADK_LINUX_KERNEL_64BIT
 	bool
 	default y if ADK_LINUX_64
 
 # ARM specific
-config ADK_KERNEL_AEABI
+config ADK_LINUX_KERNEL_AEABI
 	bool
 	default y if ADK_TARGET_ARCH_ARM
 
-config ADK_KERNEL_ARM_THUMB
+config ADK_LINUX_KERNEL_ARM_THUMB
 	bool
 
-config ADK_KERNEL_THUMB2_KERNEL
+config ADK_LINUX_KERNEL_THUMB2_KERNEL
 	bool
 
 # endianess
-config ADK_KERNEL_CPU_BIG_ENDIAN
+config ADK_LINUX_KERNEL_CPU_BIG_ENDIAN
 	bool
 	default y if ADK_TARGET_BIG_ENDIAN
 
-config ADK_KERNEL_CPU_LITTLE_ENDIAN
+config ADK_LINUX_KERNEL_CPU_LITTLE_ENDIAN
 	bool
 	default y if ADK_TARGET_LITTLE_ENDIAN
 
 menu "Kernel options"
 
-config ADK_KERNEL_MODULE_UNLOAD
+config ADK_LINUX_KERNEL_MODULE_UNLOAD
 	bool "Module unloading"
 
-config ADK_KERNEL_HOTPLUG
+config ADK_LINUX_KERNEL_HOTPLUG
 	bool
 
-config ADK_KERNEL_DEVTMPFS
+config ADK_LINUX_KERNEL_DEVTMPFS
 	bool
 
-config ADK_KERNEL_DEVTMPFS_MOUNT
+config ADK_LINUX_KERNEL_DEVTMPFS_MOUNT
 	bool
-	select ADK_KERNEL_HOTPLUG
+	select ADK_LINUX_KERNEL_HOTPLUG
 
-config ADK_KERNEL_UEVENT_HELPER
+config ADK_LINUX_KERNEL_UEVENT_HELPER
 	bool
 	depends on ADK_RUNTIME_DEV_MDEV
 	default y if ADK_RUNTIME_DEV_MDEV
 
-config ADK_KERNEL_UEVENT_HELPER_PATH
+config ADK_LINUX_KERNEL_UEVENT_HELPER_PATH
 	string
 	default "/sbin/mdev"
 	depends on ADK_RUNTIME_DEV_MDEV
 
-config ADK_KERNEL_BINFMT_ELF
+config ADK_LINUX_KERNEL_BINFMT_ELF
 	bool
 	default y if ADK_TARGET_BINFMT_ELF
 
-config ADK_KERNEL_BINFMT_ELF_FDPIC
+config ADK_LINUX_KERNEL_BINFMT_ELF_FDPIC
 	bool
 	default y if ADK_TARGET_BINFMT_FDPIC
 
-config ADK_KERNEL_BINFMT_FLAT
+config ADK_LINUX_KERNEL_BINFMT_FLAT
 	bool
 	default y if ADK_TARGET_BINFMT_FLAT
 
-config ADK_KERNEL_BINFMT_SHARED_FLAT
+config ADK_LINUX_KERNEL_BINFMT_SHARED_FLAT
 	bool
 	default y if ADK_TARGET_BINFMT_FLAT_SHARED
 
-config ADK_KERNEL_MMU
+config ADK_LINUX_KERNEL_MMU
 	bool
 
-config ADK_KERNEL_VFP
+config ADK_LINUX_KERNEL_VFP
 	bool
 	default y if ADK_TARGET_CPU_WITH_FPU_VFP
 
-config ADK_KERNEL_VFPv3
+config ADK_LINUX_KERNEL_VFPv3
 	bool
-	select ADK_KERNEL_VFP
+	select ADK_LINUX_KERNEL_VFP
 	default y if ADK_TARGET_CPU_WITH_FPU_VFPV3 || ADK_TARGET_CPU_WITH_FPU_VFPV4
 
-config ADK_KERNEL_NEON
+config ADK_LINUX_KERNEL_NEON
 	bool
 	default y if ADK_TARGET_ARCH_ARM_WITH_NEON
 
-config ADK_KERNEL_KERNEL_MODE_NEON
+config ADK_LINUX_KERNEL_KERNEL_MODE_NEON
 	bool
 	default y if ADK_TARGET_ARCH_ARM_WITH_NEON
 
-config ADK_KERNEL_PATCH_REALTIME
+config ADK_LINUX_KERNEL_PATCH_REALTIME
 	bool
 	
 choice
 prompt "preemptive mode"
 
-config ADK_KERNEL_PREEMPT_NONE
+config ADK_LINUX_KERNEL_PREEMPT_NONE
 	bool "No Forced Preemption (Server)"
 	help
 	  No Forced Preemption (Server)
 
-config ADK_KERNEL_PREEMPT_VOLUNTARY
+config ADK_LINUX_KERNEL_PREEMPT_VOLUNTARY
 	bool "Voluntary Kernel Preemption (Desktop)"
-	select ADK_KERNEL_HIGH_RES_TIMERS
+	select ADK_LINUX_KERNEL_HIGH_RES_TIMERS
 	help
 	  Voluntary Kernel Preemption (Desktop)
 
-config ADK_KERNEL_PREEMPT__LL
+config ADK_LINUX_KERNEL_PREEMPT__LL
 	bool "Preemptible Kernel (Low-Latency Desktop)"
-	select ADK_KERNEL_HIGH_RES_TIMERS
+	select ADK_LINUX_KERNEL_HIGH_RES_TIMERS
 	help
 	  Preemptible Kernel (Low-Latency Desktop)
 
-config ADK_KERNEL_PREEMPT_RTB
+config ADK_LINUX_KERNEL_PREEMPT_RTB
 	bool "Preemptible Kernel (Basic RealTime)"
-	select ADK_KERNEL_HIGH_RES_TIMERS
-	select ADK_KERNEL_PATCH_REALTIME
-	depends on !ADK_KERNEL_OPROFILE
+	select ADK_LINUX_KERNEL_HIGH_RES_TIMERS
+	select ADK_LINUX_KERNEL_PATCH_REALTIME
+	depends on !ADK_LINUX_KERNEL_OPROFILE
 	depends on ADK_TARGET_KERNEL_VERSION_4_4 \
 		|| ADK_TARGET_KERNEL_VERSION_4_9 \
 		|| (ADK_TARGET_KERNEL_VERSION_GIT && ADK_TARGET_BOARD_BCM28XX)
         help
 	  Preemptible Kernel (Basic RT)
 
-config ADK_KERNEL_PREEMPT_RT_FULL
+config ADK_LINUX_KERNEL_PREEMPT_RT_FULL
 	bool "Fully Preemptible Kernel (RealTime)"
-	select ADK_KERNEL_HIGH_RES_TIMERS
-	select ADK_KERNEL_PATCH_REALTIME
-	depends on !ADK_KERNEL_OPROFILE
+	select ADK_LINUX_KERNEL_HIGH_RES_TIMERS
+	select ADK_LINUX_KERNEL_PATCH_REALTIME
+	depends on !ADK_LINUX_KERNEL_OPROFILE
 	depends on ADK_TARGET_KERNEL_VERSION_4_4 \
 		|| ADK_TARGET_KERNEL_VERSION_4_9 \
 		|| (ADK_TARGET_KERNEL_VERSION_GIT && ADK_TARGET_BOARD_BCM28XX)
@@ -186,34 +186,34 @@ config ADK_KERNEL_PREEMPT_RT_FULL
 
 endchoice
 
-config ADK_KERNEL_HIGH_RES_TIMERS
+config ADK_LINUX_KERNEL_HIGH_RES_TIMERS
 	bool "Enable high resolution timers"
 
 choice
 prompt "tick configuration"
 
-config ADK_KERNEL_NO_HZ_IDLE
+config ADK_LINUX_KERNEL_NO_HZ_IDLE
 	bool "no HZ IDLE, dynamic tick"
 
-config ADK_KERNEL_NO_HZ_FULL
+config ADK_LINUX_KERNEL_NO_HZ_FULL
 	bool "no HZ FULL, dynamic tick"
 
-config ADK_KERNEL_HZ_PERIODIC
+config ADK_LINUX_KERNEL_HZ_PERIODIC
 	bool "periodic tick"
 
 endchoice
 
 choice
 prompt "HZ"
-depends on ADK_KERNEL_HZ_PERIODIC
+depends on ADK_LINUX_KERNEL_HZ_PERIODIC
 
-config ADK_KERNEL_HZ_100
+config ADK_LINUX_KERNEL_HZ_100
 	bool "100 HZ"
 
-config ADK_KERNEL_HZ_500
+config ADK_LINUX_KERNEL_HZ_500
 	bool "500 HZ"
 
-config ADK_KERNEL_HZ_1000
+config ADK_LINUX_KERNEL_HZ_1000
 	bool "1000 HZ"
 
 endchoice
@@ -223,7 +223,7 @@ config ADK_TARGET_NO_CMDLINE
 	help
 	  No kernel command line modifictaion is done.
 
-config ADK_KERNEL_SMP
+config ADK_LINUX_KERNEL_SMP
 	bool "Enable symmetric multi processing"
 	depends on ADK_TARGET_WITH_SMP
 	default y if ADK_TARGET_WITH_SMP
@@ -231,7 +231,7 @@ config ADK_KERNEL_SMP
 	help
 	  Enable symmetric multi processing support.
 
-config ADK_KERNEL_HIGHMEM
+config ADK_LINUX_KERNEL_HIGHMEM
 	bool "Enable high memory"
 	# produces broken kernel on bcm28xx
 	depends on !ADK_TARGET_BOARD_BCM28XX
@@ -245,7 +245,7 @@ config ADK_KERNEL_HIGHMEM
 	help
 	  Enable high memory support.
 
-config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
+config ADK_LINUX_KERNEL_CC_OPTIMIZE_FOR_SIZE
 	bool "Optimize for size"
 	# does not boot in qemu-microblaze
 	depends on !ADK_TARGET_ARCH_MICROBLAZE
@@ -255,16 +255,16 @@ config ADK_KERNEL_CC_OPTIMIZE_FOR_SIZE
 choice
 prompt "Page size"
 depends on ADK_TARGET_ARCH_MIPS64
-default ADK_KERNEL_PAGE_SIZE_16KB if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
-default ADK_KERNEL_PAGE_SIZE_4KB
+default ADK_LINUX_KERNEL_PAGE_SIZE_16KB if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+default ADK_LINUX_KERNEL_PAGE_SIZE_4KB
 
-config ADK_KERNEL_PAGE_SIZE_4KB
+config ADK_LINUX_KERNEL_PAGE_SIZE_4KB
 	bool "4kB"
 
-config ADK_KERNEL_PAGE_SIZE_16KB
+config ADK_LINUX_KERNEL_PAGE_SIZE_16KB
 	bool "16kB"
 
-config ADK_KERNEL_PAGE_SIZE_64KB
+config ADK_LINUX_KERNEL_PAGE_SIZE_64KB
 	bool "64kB"
 
 endchoice

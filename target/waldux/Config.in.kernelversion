@@ -1,0 +1,33 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice
+prompt "Kernel version" if !ADK_TARGET_CHOOSE_ARCH
+depends on ADK_TARGET_OS_WALDUX
+
+config ADK_TARGET_WALDUX_KERNEL_VERSION_GIT
+	bool "git"
+
+endchoice
+
+config ADK_TARGET_WALDUX_KERNEL_GIT_REPO
+	string "git repository"
+	depends on ADK_TARGET_WALDUX_KERNEL_VERSION_GIT
+	default "git://openadk.org/git/waldux"
+	help
+	  GIT repository to use.
+
+config ADK_TARGET_WALDUX_KERNEL_GIT
+	string "git branch"
+	depends on ADK_TARGET_WALDUX_KERNEL_VERSION_GIT
+	default "master"
+
+config ADK_TARGET_WALDUX_KERNEL_GIT_VER
+	string "kernel version"
+	depends on ADK_TARGET_WALDUX_KERNEL_VERSION_GIT
+	default "4.9.86"
+
+config ADK_TARGET_WALDUX_KERNEL_GIT_TYPE
+	string
+	depends on ADK_TARGET_WALDUX_KERNEL_VERSION_GIT
+	default "branch"

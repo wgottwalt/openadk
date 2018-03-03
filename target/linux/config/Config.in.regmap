@@ -1,19 +1,19 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_KERNEL_REGMAP
+config ADK_LINUX_KERNEL_REGMAP
 	bool
-	select ADK_KERNEL_LZO_COMPRESS
-	select ADK_KERNEL_LZO_DECOMPRESS
+	select ADK_LINUX_KERNEL_LZO_COMPRESS
+	select ADK_LINUX_KERNEL_LZO_DECOMPRESS
 
-config ADK_KERNEL_REGMAP_I2C
+config ADK_LINUX_KERNEL_REGMAP_I2C
 	tristate
 
-config ADK_KERNEL_REGMAP_SPI
+config ADK_LINUX_KERNEL_REGMAP_SPI
 	tristate
 
-config ADK_KERNEL_REGMAP_MMIO
+config ADK_LINUX_KERNEL_REGMAP_MMIO
 	tristate
 
-config ADK_KERNEL_REGMAP_IRQ
+config ADK_LINUX_KERNEL_REGMAP_IRQ
 	bool

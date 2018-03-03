@@ -13,6 +13,7 @@ config ADK_HAVE_DOT_CONFIG
 	bool
 	default y
 
+source "target/config/Config.in"
 source "target/config/Config.in.os"
 source "target/config/Config.in.hardware"
 source "target/config/Config.in.boards"
@@ -27,19 +28,17 @@ source "target/config/Config.in.cpu"
 source "target/config/Config.in.addons"
 
 comment "After you saved your configuration once, you shouldn't change anything above"
-	depends on ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
+	depends on (ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX) && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
 
 source "target/config/Config.in.tasks"
 
 menu "Firmware configuration"
-	visible if ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
+	visible if (ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX) && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
 source "target/config/Config.in.rootfs"
 endmenu
 
-source "target/config/Config.in"
-
 menu "Package selection"
-	visible if ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
+	visible if (ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX) && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
 source "package/Config.in.auto.global"
 source "package/Config.in"
 menu "Package options"
@@ -48,20 +47,33 @@ endmenu
 endmenu
 
 menu "Runtime configuration"
-	visible if ADK_TARGET_OS_LINUX && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
+	visible if (ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX) && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
 source "target/config/Config.in.runtime"
 endmenu
 
 menu "Linux Kernel configuration"
 	visible if ADK_TARGET_OS_LINUX && !ADK_TARGET_CHOOSE_ARCH
-source "target/config/Config.in.kernelversion"
-source "target/config/Config.in.kernelcfg"
-source "target/config/Config.in.kernelcmd"
+source "target/linux/Config.in.kernelversion"
+source "target/linux/Config.in.kernelcfg"
 source "target/linux/config/Config.in.compression"
+source "target/config/Config.in.cmdline"
 
-menu "Advanced Kernel configuration"
-	visible if ADK_TARGET_OS_LINUX && ADK_TARGET_KERNEL_CUSTOMISING && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH && !ADK_TARGET_KERNEL_USE_DEFCONFIG && !ADK_TARGET_KERNEL_USE_CUSTOMCONFIG
+menu "Advanced Linux Kernel configuration"
+	visible if ADK_TARGET_OS_LINUX && ADK_TARGET_KERNEL_CUSTOMISING && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH && !ADK_TARGET_LINUX_KERNEL_USE_DEFCONFIG && !ADK_TARGET_LINUX_KERNEL_USE_CUSTOMCONFIG
 source "target/linux/Config.in"
+endmenu
+endmenu
+
+menu "Waldux Kernel configuration"
+	visible if ADK_TARGET_OS_WALDUX && !ADK_TARGET_CHOOSE_ARCH
+source "target/waldux/Config.in.kernelversion"
+source "target/waldux/Config.in.kernelcfg"
+source "target/waldux/config/Config.in.compression"
+source "target/config/Config.in.cmdline"
+
+menu "Advanced Waldux Kernel configuration"
+	visible if ADK_TARGET_OS_WALDUX && ADK_TARGET_KERNEL_CUSTOMISING && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH && !ADK_TARGET_WALDUX_KERNEL_USE_DEFCONFIG && !ADK_TARGET_WALDUX_KERNEL_USE_CUSTOMCONFIG
+source "target/waldux/Config.in"
 endmenu
 endmenu
 

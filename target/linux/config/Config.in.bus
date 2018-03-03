@@ -1,9 +1,9 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_KERNEL_PCI
+config ADK_LINUX_KERNEL_PCI
 	bool
-	select ADK_KERNEL_PCI_QUIRKS
+	select ADK_LINUX_KERNEL_PCI_QUIRKS
 	depends on ADK_TARGET_WITH_PCI \
 		|| ADK_TARGET_QEMU \
 		|| ADK_TARGET_VBOX \
@@ -13,13 +13,13 @@ config ADK_KERNEL_PCI
 	default n if ADK_TARGET_SYSTEM_GENERIC_NDS32
 	default y
 
-config ADK_KERNEL_PCI_QUIRKS
+config ADK_LINUX_KERNEL_PCI_QUIRKS
 	bool
 
-config ADK_KERNEL_PCI_MSI
+config ADK_LINUX_KERNEL_PCI_MSI
 	bool
 
-config ADK_KERNEL_PCI_IMX6
+config ADK_LINUX_KERNEL_PCI_IMX6
 	bool
 	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6

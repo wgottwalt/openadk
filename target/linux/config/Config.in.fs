@@ -3,68 +3,68 @@
 
 menu "Filesystems support"
 
-config ADK_KERNEL_MISC_FILESYSTEMS
+config ADK_LINUX_KERNEL_MISC_FILESYSTEMS
 	bool
 
-config ADK_KERNEL_FILE_LOCKING
-	bool
-	default y
-
-config ADK_KERNEL_FSNOTIFY
+config ADK_LINUX_KERNEL_FILE_LOCKING
 	bool
 	default y
 
-config ADK_KERNEL_AUTOFS4_FS
+config ADK_LINUX_KERNEL_FSNOTIFY
+	bool
+	default y
+
+config ADK_LINUX_KERNEL_AUTOFS4_FS
 	bool
 
-config ADK_KERNEL_TMPFS_POSIX_ACL
+config ADK_LINUX_KERNEL_TMPFS_POSIX_ACL
 	bool
 
-config ADK_KERNEL_TMPFS_XATTR
+config ADK_LINUX_KERNEL_TMPFS_XATTR
 	bool
 
-config ADK_KERNEL_EXPORTFS
+config ADK_LINUX_KERNEL_EXPORTFS
 	tristate
 
-config ADK_KERNEL_JBD2
+config ADK_LINUX_KERNEL_JBD2
 	tristate
-	select ADK_KERNEL_CRC32
-	select ADK_KERNEL_CRYPTO
-	select ADK_KERNEL_CRYPTO_CRC32C
+	select ADK_LINUX_KERNEL_CRC32
+	select ADK_LINUX_KERNEL_CRYPTO
+	select ADK_LINUX_KERNEL_CRYPTO_CRC32C
 
-config ADK_KERNEL_EXT3_FS_XATTR
+config ADK_LINUX_KERNEL_EXT3_FS_XATTR
 	bool
 
-config ADK_KERNEL_FAT_DEFAULT_CODEPAGE
+config ADK_LINUX_KERNEL_FAT_DEFAULT_CODEPAGE
 	int
 	default 850
 
-config ADK_KERNEL_FAT_DEFAULT_IOCHARSET
+config ADK_LINUX_KERNEL_FAT_DEFAULT_IOCHARSET
 	string
 	default "iso8859-1"
 
-config ADK_KERNEL_SQUASHFS_XZ
+config ADK_LINUX_KERNEL_SQUASHFS_XZ
 	bool
 
-config ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
+config ADK_LINUX_KERNEL_JFFS2_COMPRESSION_OPTIONS
 	bool
 
-config ADK_KERNEL_JFFS2_ZLIB
+config ADK_LINUX_KERNEL_JFFS2_ZLIB
 	bool
 
 menu "Filesystems"
 
-config ADK_KERNEL_EXT2_FS
+config ADK_LINUX_KERNEL_EXT2_FS
 	tristate "EXT2 filesystem support"
-	select ADK_KERNEL_BLOCK
+	select ADK_LINUX_KERNEL_BLOCK
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default n
 	help
 	  Ext2 is a standard Linux file system for hard disks.
 
-config ADK_KERNEL_EXT3_FS
+config ADK_LINUX_KERNEL_EXT3_FS
 	tristate "EXT3 filesystem support"
-	select ADK_KERNEL_BLOCK
+	select ADK_LINUX_KERNEL_BLOCK
 	help
 	  This is the journalling version of the Second extended file system
 	  (often called ext3), the de facto standard Linux file system
@@ -89,18 +89,18 @@ config ADK_KERNEL_EXT3_FS
 	  e2fsprogs version 1.20 or later in order to create ext3 journals
 	  (available at <http://sourceforge.net/projects/e2fsprogs/>).
 
-config ADK_KERNEL_EXT4_FS
+config ADK_LINUX_KERNEL_EXT4_FS
 	tristate "EXT4 filesystem support"
-	select ADK_KERNEL_BLOCK
-	select ADK_KERNEL_JBD2
+	select ADK_LINUX_KERNEL_BLOCK
+	select ADK_LINUX_KERNEL_JBD2
 	help
 	  Ext4 filesystem.
 
-config ADK_KERNEL_HFSPLUS_FS
+config ADK_LINUX_KERNEL_HFSPLUS_FS
 	tristate "HFS+ filesystem support"
-	select ADK_KERNEL_BLOCK
-	select ADK_KERNEL_NLS_UTF8
-	select ADK_KERNEL_MISC_FILESYSTEMS
+	select ADK_LINUX_KERNEL_BLOCK
+	select ADK_LINUX_KERNEL_NLS_UTF8
+	select ADK_LINUX_KERNEL_MISC_FILESYSTEMS
 	help
 	  If you say Y here, you will be able to mount extended format
 	  Macintosh-formatted hard drive partitions with full read-write access.
@@ -110,9 +110,9 @@ config ADK_KERNEL_HFSPLUS_FS
 	  data forks and creator codes, but it also has several UNIX
 	  style features such as file ownership and permissions.
 
-config ADK_KERNEL_NTFS_FS
+config ADK_LINUX_KERNEL_NTFS_FS
 	tristate "NTFS file system support"
-	select ADK_KERNEL_BLOCK
+	select ADK_LINUX_KERNEL_BLOCK
 	help
 	  NTFS is the file system of Microsoft Windows NT, 2000, XP and 2003.
 
@@ -136,11 +136,11 @@ config ADK_KERNEL_NTFS_FS
 	  Linux on your computer it is safe to say N.
 	  Kernel modules for NTFS support
 
-config ADK_KERNEL_VFAT_FS
+config ADK_LINUX_KERNEL_VFAT_FS
 	tristate "VFAT filesystem support"
-	select ADK_KERNEL_BLOCK
-	select ADK_KERNEL_NLS_CODEPAGE_850
-	select ADK_KERNEL_NLS_ISO8859_1
+	select ADK_LINUX_KERNEL_BLOCK
+	select ADK_LINUX_KERNEL_NLS_CODEPAGE_850
+	select ADK_LINUX_KERNEL_NLS_ISO8859_1
 	default y if ADK_TARGET_BOARD_BCM28XX
 	default n
 	help
@@ -152,11 +152,11 @@ config ADK_KERNEL_VFAT_FS
 	  The VFAT support enlarges your kernel by about 10 KB Please read the
 	  file <file:Documentation/filesystems/vfat.txt> for details.
 
-config ADK_KERNEL_XFS_FS
+config ADK_LINUX_KERNEL_XFS_FS
 	tristate "XFS filesystem support"
-	select ADK_KERNEL_BLOCK
-	select ADK_KERNEL_EXPORTFS
-	select ADK_KERNEL_LIBCRC32C
+	select ADK_LINUX_KERNEL_BLOCK
+	select ADK_LINUX_KERNEL_EXPORTFS
+	select ADK_LINUX_KERNEL_LIBCRC32C
 	help
 	  XFS is a high performance journaling filesystem which originated
 	  on the SGI IRIX platform.  It is completely multi-threaded, can
@@ -169,15 +169,15 @@ config ADK_KERNEL_XFS_FS
 	  for complete details.  This implementation is on-disk compatible
 	  with the IRIX version of XFS.
 
-config ADK_KERNEL_BTRFS_FS
+config ADK_LINUX_KERNEL_BTRFS_FS
 	tristate "Btrfs filesystem support"
-	select ADK_KERNEL_BLOCK
-	select ADK_KERNEL_CRYPTO_CRC32C
-	select ADK_KERNEL_RAID6_PQ
-	select ADK_KERNEL_XOR_BLOCKS
-	select ADK_KERNEL_ZLIB_DEFLATE
-	select ADK_KERNEL_LZO_COMPRESS
-	select ADK_KERNEL_LZO_DECOMPRESS
+	select ADK_LINUX_KERNEL_BLOCK
+	select ADK_LINUX_KERNEL_CRYPTO_CRC32C
+	select ADK_LINUX_KERNEL_RAID6_PQ
+	select ADK_LINUX_KERNEL_XOR_BLOCKS
+	select ADK_LINUX_KERNEL_ZLIB_DEFLATE
+	select ADK_LINUX_KERNEL_LZO_COMPRESS
+	select ADK_LINUX_KERNEL_LZO_DECOMPRESS
 	help
 	  Btrfs is a general purpose copy-on-write filesystem with extents,
 	  writable snapshotting, support for multiple devices and many more
@@ -185,7 +185,7 @@ config ADK_KERNEL_BTRFS_FS
 	  For more information, please see the web pages at
 	  http://btrfs.wiki.kernel.org
 
-config ADK_KERNEL_FUSE_FS
+config ADK_LINUX_KERNEL_FUSE_FS
 	tristate "Filesystem in Userspace support"
 	help
 	  With FUSE it is possible to implement a fully functional
@@ -195,12 +195,12 @@ config ADK_KERNEL_FUSE_FS
 	  For using it, you will most likely also want to enable
 	  fuse-utils.
 
-config ADK_KERNEL_JOLIET
+config ADK_LINUX_KERNEL_JOLIET
 	bool 
 
-config ADK_KERNEL_ISO9660_FS
+config ADK_LINUX_KERNEL_ISO9660_FS
 	tristate "ISO 9660 / JOLIET CDROM file system support"
-	select ADK_KERNEL_JOLIET
+	select ADK_LINUX_KERNEL_JOLIET
 	help
 	  This is the standard file system used on CD-ROMs.  It was previously
 	  known as "High Sierra File System" and is called "hsfs" on other
@@ -212,43 +212,43 @@ config ADK_KERNEL_ISO9660_FS
 	  available from <http://www.tldp.org/docs.html#howto>), thereby
 	  enlarging your kernel by about 27 KB; otherwise say N.
 
-config ADK_KERNEL_UDF_FS
+config ADK_LINUX_KERNEL_UDF_FS
 	tristate "UDF file system support"
-	select ADK_KERNEL_CRC_ITU_T
+	select ADK_LINUX_KERNEL_CRC_ITU_T
 	help
 	  This is the new file system used on some CD-ROMs and DVDs. Say Y if
 	  you intend to mount DVD discs or CDRW's written in packet mode, or
 	  if written to by other UDF utilities, such as DirectCD.
 	  Please read <file:Documentation/filesystems/udf.txt>.
 
-config ADK_KERNEL_JFFS2_FS
+config ADK_LINUX_KERNEL_JFFS2_FS
 	tristate "JFFS2 filesystem"
-	select ADK_KERNEL_MISC_FILESYSTEMS
-	select ADK_KERNEL_MTD
-	select ADK_KERNEL_MTD_BLOCK
-	select ADK_KERNEL_JFFS2_COMPRESSION_OPTIONS
-	select ADK_KERNEL_JFFS2_ZLIB
+	select ADK_LINUX_KERNEL_MISC_FILESYSTEMS
+	select ADK_LINUX_KERNEL_MTD
+	select ADK_LINUX_KERNEL_MTD_BLOCK
+	select ADK_LINUX_KERNEL_JFFS2_COMPRESSION_OPTIONS
+	select ADK_LINUX_KERNEL_JFFS2_ZLIB
 	help
 	  JFFS2 flash filesystem
 
-config ADK_KERNEL_SQUASHFS
+config ADK_LINUX_KERNEL_SQUASHFS
 	tristate "SquashFS filesystem"
-	select ADK_KERNEL_MISC_FILESYSTEMS
-	select ADK_KERNEL_SQUASHFS_XZ
+	select ADK_LINUX_KERNEL_MISC_FILESYSTEMS
+	select ADK_LINUX_KERNEL_SQUASHFS_XZ
 	help
 	  Squashfs compressed read-only filesystem
 
-config ADK_KERNEL_MTD_UBI_GLUEBI
+config ADK_LINUX_KERNEL_MTD_UBI_GLUEBI
 	bool
 
-config ADK_KERNEL_MTD_UBI
+config ADK_LINUX_KERNEL_MTD_UBI
 	tristate
-	select ADK_KERNEL_MTD
-	select ADK_KERNEL_MTD_UBI_GLUEBI
+	select ADK_LINUX_KERNEL_MTD
+	select ADK_LINUX_KERNEL_MTD_UBI_GLUEBI
 
-config ADK_KERNEL_UBIFS_FS
+config ADK_LINUX_KERNEL_UBIFS_FS
 	tristate "UBIFS Filesystem"
-	select ADK_KERNEL_MTD_UBI
+	select ADK_LINUX_KERNEL_MTD_UBI
 	help
 	  UBIFS is a file system for flash devices which works on top of UBI.
 

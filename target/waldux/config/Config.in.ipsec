@@ -1,0 +1,61 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "IPSec support"
+
+config ADK_WALDUX_KERNEL_XFRM_ALGO
+	tristate
+
+config ADK_WALDUX_KERNEL_NET_KEY
+	tristate "PF_KEYv2 socket family"
+	default n
+	help
+	  PF_KEYv2 socket family, compatible to KAME ones.
+
+config ADK_WALDUX_KERNEL_XFRM_USER
+	tristate "IPsec usertools support"
+	select ADK_WALDUX_KERNEL_XFRM_ALGO
+	default n
+
+config ADK_WALDUX_KERNEL_INET_AH
+	tristate "IPsec AH support"
+	select ADK_WALDUX_KERNEL_CRYPTO_HASH
+	default n
+	help
+	  Support for IPsec AH.
+
+config ADK_WALDUX_KERNEL_INET_ESP
+	tristate "IPsec ESP support"
+	select ADK_WALDUX_KERNEL_CRYPTO_AEAD
+	default n
+	help
+	  Support for IPsec ESP.
+
+config ADK_WALDUX_KERNEL_INET_IPCOMP
+	tristate "IP Payload Compression"
+	select ADK_WALDUX_KERNEL_CRYPTO_DEFLATE
+	select ADK_WALDUX_KERNEL_INET_TUNNEL
+	default n
+	help
+	  Support for IP Payload Compression Protocol (IPComp) (RFC3173),
+	  typically needed for IPsec.
+
+config ADK_WALDUX_KERNEL_INET_XFRM_MODE_TRANSPORT
+	tristate "IPsec transport mode"
+	default n
+	help
+	  Support for IPsec transport mode.
+
+config ADK_WALDUX_KERNEL_INET_XFRM_MODE_TUNNEL
+	tristate "IPsec tunnel mode"
+	default n
+	help
+	  Support for IPsec tunnel mode.
+
+config ADK_WALDUX_KERNEL_INET_XFRM_MODE_BEET
+	tristate "IPsec BEET mode"
+	default n
+	help
+	  Support for IPsec BEET mode.
+
+endmenu

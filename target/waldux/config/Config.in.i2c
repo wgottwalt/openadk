@@ -1,0 +1,91 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "I2C driver support"
+depends on ADK_TARGET_WITH_I2C
+
+config ADK_WALDUX_KERNEL_I2C
+ 	bool
+
+config ADK_WALDUX_KERNEL_I2C_CHARDEV
+	tristate
+
+config ADK_WALDUX_KERNEL_I2C_BOARDINFO
+	tristate
+
+config ADK_WALDUX_KERNEL_I2C_ALGOBIT
+	tristate
+
+config ADK_WALDUX_KERNEL_I2C_GPIO
+	bool
+	select ADK_WALDUX_KERNEL_I2C
+	select ADK_WALDUX_KERNEL_I2C_CHARDEV
+	select ADK_WALDUX_KERNEL_I2C_BOARDINFO
+	select ADK_WALDUX_KERNEL_I2C_ALGOBIT
+	default y if ADK_TARGET_SYSTEM_LINKSYS_NSLU2
+	help
+
+config ADK_WALDUX_KERNEL_I2C_BCM2835
+	tristate
+
+config ADK_WALDUX_KERNEL_I2C_BCM2708
+	tristate "I2C driver for BCM28XX boards"
+	select ADK_WALDUX_KERNEL_I2C
+	select ADK_WALDUX_KERNEL_REGMAP
+	select ADK_WALDUX_KERNEL_REGMAP_I2C
+	select ADK_WALDUX_KERNEL_I2C_CHARDEV
+	select ADK_WALDUX_KERNEL_I2C_BCM2835
+	depends on ADK_TARGET_BOARD_BCM28XX
+	default m if ADK_TARGET_BOARD_BCM28XX
+	default n
+	help
+	  I2C driver for BCM28XX boards.
+
+config ADK_WALDUX_KERNEL_I2C_SUNXI
+	tristate "I2C driver for SUNXI boards"
+	select ADK_WALDUX_KERNEL_I2C
+	select ADK_WALDUX_KERNEL_REGMAP
+	select ADK_WALDUX_KERNEL_REGMAP_I2C
+	select ADK_WALDUX_KERNEL_I2C_CHARDEV
+	depends on ADK_TARGET_SYSTEM_BANANA_PRO || \
+		   ADK_TARGET_SYSTEM_ORANGE_PI0
+	default y if ADK_TARGET_SYSTEM_BANANA_PRO
+	default y if ADK_TARGET_SYSTEM_ORANGE_PI0
+	default n
+	help
+	  I2C driver for SUNXI boards.
+
+config ADK_WALDUX_KERNEL_I2C_IMX
+	tristate "I2C driver for IMX6 boards"
+	select ADK_WALDUX_KERNEL_I2C
+	select ADK_WALDUX_KERNEL_REGMAP
+	select ADK_WALDUX_KERNEL_REGMAP_I2C
+	select ADK_WALDUX_KERNEL_I2C_CHARDEV
+	depends on ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default n
+	help
+	  I2C driver for IMX6 boards.
+	
+config ADK_WALDUX_KERNEL_SCX200_ACB
+	tristate "I2C driver for Geode"
+	depends on ADK_TARGET_CPU_X86_GEODE
+	select ADK_WALDUX_KERNEL_I2C
+	select ADK_WALDUX_KERNEL_I2C_CHARDEV
+	default y if ADK_TARGET_CPU_X86_GEODE
+	default n
+	help
+	  I2C driver for Geode boards.
+
+config ADK_WALDUX_KERNEL_BOARD_GRASSHOPPER_I2C
+	bool "I2C driver for AVR32 Grasshopper"
+	select ADK_WALDUX_KERNEL_I2C
+	select ADK_WALDUX_KERNEL_I2C_GPIO
+	select ADK_WALDUX_KERNEL_I2C_CHARDEV
+	depends on ADK_TARGET_SYSTEM_GRASSHOPPER
+	default y if ADK_TARGET_SYSTEM_GRASSHOPPER
+	default n
+	help
+	  I2C driver for AVR32 Grasshopper boards.
+ 
+endmenu

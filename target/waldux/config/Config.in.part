@@ -1,0 +1,14 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "Partition Types"
+
+config ADK_WALDUX_KERNEL_PARTITION_ADVANCED
+	bool
+	default y
+
+config ADK_WALDUX_KERNEL_MSDOS_PARTITION
+	bool "MSDOS partitions"
+	default y
+
+endmenu

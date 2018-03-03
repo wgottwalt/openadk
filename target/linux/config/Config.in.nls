@@ -3,11 +3,11 @@
 
 menu "Native Language support"
 
-config ADK_KERNEL_NLS_DEFAULT
+config ADK_LINUX_KERNEL_NLS_DEFAULT
 	string
 	default "utf-8"
 
-config ADK_KERNEL_NLS_CODEPAGE_437
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_437
 	tristate "Codepage 437 (United States, Canada)"
 	default n
 	help
@@ -20,7 +20,7 @@ config ADK_KERNEL_NLS_CODEPAGE_437
 	  say Y here if you want to include the DOS codepage that is used in
 	  the United States and parts of Canada. This is recommended.
 
-config ADK_KERNEL_NLS_CODEPAGE_737
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_737
 	tristate "Codepage 737 (Greek)"
 	default n
 	help
@@ -33,7 +33,7 @@ config ADK_KERNEL_NLS_CODEPAGE_737
 	  say Y here if you want to include the DOS codepage that is used for
 	  Greek. If unsure, say N.
 
-config ADK_KERNEL_NLS_CODEPAGE_775
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_775
 	tristate "Codepage 775 (Baltic Rim)"
 	default n
 	help
@@ -47,7 +47,7 @@ config ADK_KERNEL_NLS_CODEPAGE_775
 	  for the Baltic Rim Languages (Latvian and Lithuanian). If unsure,
 	  say N.
 
-config ADK_KERNEL_NLS_CODEPAGE_850
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_850
 	tristate "Codepage 850 (Western European Languages)"
 	default n
 	help
@@ -62,7 +62,7 @@ config ADK_KERNEL_NLS_CODEPAGE_850
 	  more countries here]. It has some characters useful to many European
 	  languages that are not part of the US codepage 437.
 
-config ADK_KERNEL_NLS_CODEPAGE_852
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_852
         tristate "Codepage 852 (Eastern European Languages)"
         default n
         help
@@ -78,7 +78,7 @@ config ADK_KERNEL_NLS_CODEPAGE_852
 	  Finnish, Hungarian, Irish, German, Polish, Romanian, Serbian (Latin
 	  transcription), Slovak, Slovenian, and Sorbian.
 
-config ADK_KERNEL_NLS_CODEPAGE_855
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_855
         tristate "Codepage 855 (Cyrillic)"
         default n
         help
@@ -90,7 +90,7 @@ config ADK_KERNEL_NLS_CODEPAGE_855
 	  only, not to the file contents. You can include several codepages;
 	  say Y here if you want to include the DOS codepage for Cyrillic.
 
-config ADK_KERNEL_NLS_CODEPAGE_857
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_857
         tristate "Codepage 857 (Turkish)"
         default n
         help
@@ -102,7 +102,7 @@ config ADK_KERNEL_NLS_CODEPAGE_857
 	  only, not to the file contents. You can include several codepages;
 	  say Y here if you want to include the DOS codepage for Turkish.
 
-config ADK_KERNEL_NLS_CODEPAGE_860
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_860
         tristate "Codepage 860 (Portuguese)"
         default n
         help
@@ -114,7 +114,7 @@ config ADK_KERNEL_NLS_CODEPAGE_860
 	  only, not to the file contents. You can include several codepages;
 	  say Y here if you want to include the DOS codepage for Portuguese.
 
-config ADK_KERNEL_NLS_CODEPAGE_861
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_861
         tristate "Codepage 861 (Icelandic)"
         default n
         help
@@ -126,7 +126,7 @@ config ADK_KERNEL_NLS_CODEPAGE_861
 	  only, not to the file contents. You can include several codepages;
 	  say Y here if you want to include the DOS codepage for Icelandic.
 
-config ADK_KERNEL_NLS_CODEPAGE_862
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_862
         tristate "Codepage 862 (Hebrew)"
         default n
         help
@@ -138,7 +138,7 @@ config ADK_KERNEL_NLS_CODEPAGE_862
 	  only, not to the file contents. You can include several codepages;
 	  say Y here if you want to include the DOS codepage for Hebrew.
 
-config ADK_KERNEL_NLS_CODEPAGE_863
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_863
         tristate "Codepage 863 (French Canadian)"
         default n
         help
@@ -151,7 +151,7 @@ config ADK_KERNEL_NLS_CODEPAGE_863
 	  say Y here if you want to include the DOS codepage for Canadian
 	  French.
 
-config ADK_KERNEL_NLS_CODEPAGE_864
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_864
         tristate "Codepage 864 (Arabic)"
         default n
         help
@@ -163,7 +163,7 @@ config ADK_KERNEL_NLS_CODEPAGE_864
 	  only, not to the file contents. You can include several codepages;
 	  say Y here if you want to include the DOS codepage for Arabic.
 
-config ADK_KERNEL_NLS_CODEPAGE_865
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_865
         tristate "Codepage 865 (Norwegian, Danish)"
         default n
         help
@@ -176,7 +176,7 @@ config ADK_KERNEL_NLS_CODEPAGE_865
 	  say Y here if you want to include the DOS codepage for the Nordic
 	  European countries.
 
-config ADK_KERNEL_NLS_CODEPAGE_866
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_866
         tristate "Codepage 866 (Cyrillic/Russian)"
         default n
         help
@@ -189,7 +189,7 @@ config ADK_KERNEL_NLS_CODEPAGE_866
 	  say Y here if you want to include the DOS codepage for
 	  Cyrillic/Russian.
 
-config ADK_KERNEL_NLS_CODEPAGE_869
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_869
         tristate "Codepage 869 (Greek)"
         default n
         help
@@ -201,7 +201,7 @@ config ADK_KERNEL_NLS_CODEPAGE_869
 	  only, not to the file contents. You can include several codepages;
 	  say Y here if you want to include the DOS codepage for Greek.
 
-config ADK_KERNEL_NLS_CODEPAGE_874
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_874
         tristate "Codepage 874 (Thai)"
         default n
         help
@@ -213,7 +213,7 @@ config ADK_KERNEL_NLS_CODEPAGE_874
 	  only, not to the file contents. You can include several codepages;
 	  say Y here if you want to include the DOS codepage for Thai.
 
-config ADK_KERNEL_NLS_CODEPAGE_932
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_932
         tristate "Codepage 932 (Japanese)"
         default n
         help
@@ -227,7 +227,7 @@ config ADK_KERNEL_NLS_CODEPAGE_932
 	  or EUC-JP. To use EUC-JP, you can use 'euc-jp' as mount option or
 	  NLS Default value during kernel configuration, instead of 'cp932'.
 
-config ADK_KERNEL_NLS_CODEPAGE_936
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_936
         tristate "Codepage 936 (Simplified Chinese)"
         default n
         help
@@ -240,7 +240,7 @@ config ADK_KERNEL_NLS_CODEPAGE_936
 	  say Y here if you want to include the DOS codepage for Simplified
 	  Chinese(GBK).
 
-config ADK_KERNEL_NLS_CODEPAGE_949
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_949
         tristate "Codepage 949 (Korean)"
         default n
         help
@@ -252,7 +252,7 @@ config ADK_KERNEL_NLS_CODEPAGE_949
 	  only, not to the file contents. You can include several codepages;
 	  say Y here if you want to include the DOS codepage for UHC.
 
-config ADK_KERNEL_NLS_CODEPAGE_950
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_950
         tristate "Codepage 950 (Traditional Chinese)"
         default n
         help
@@ -265,7 +265,7 @@ config ADK_KERNEL_NLS_CODEPAGE_950
 	  say Y here if you want to include the DOS codepage for Traditional
 	  Chinese(Big5).
 
-config ADK_KERNEL_NLS_CODEPAGE_1250
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_1250
         tristate "Codepage 1250 (Slavic/Central European)"
         default n
         help
@@ -277,7 +277,7 @@ config ADK_KERNEL_NLS_CODEPAGE_1250
 	  European languages: Czech, German, Hungarian, Polish, Rumanian, Croatian,
 	  Slovak, Slovene.
 
-config ADK_KERNEL_NLS_CODEPAGE_1251
+config ADK_LINUX_KERNEL_NLS_CODEPAGE_1251
         tristate "Codepage 1251 (Bulgarian, Belarusian)"
         default n
         help
@@ -290,7 +290,7 @@ config ADK_KERNEL_NLS_CODEPAGE_1251
 	  say Y here if you want to include the DOS codepage for Russian and
 	  Bulgarian and Belarusian.
 
-config ADK_KERNEL_NLS_ASCII
+config ADK_LINUX_KERNEL_NLS_ASCII
 	tristate "ASCII (United States)"
 	default n
 	help
@@ -298,7 +298,7 @@ config ADK_KERNEL_NLS_ASCII
 	  DEFAULT NLS with this very basic charset and don't want any
 	  non-ASCII characters to be translated.
 
-config ADK_KERNEL_NLS_ISO8859_1
+config ADK_LINUX_KERNEL_NLS_ISO8859_1
 	tristate "NLS ISO 8859-1 (Latin-1; Western European Languages)"
 	default n
 	help
@@ -311,7 +311,7 @@ config ADK_KERNEL_NLS_ISO8859_1
 	  Galician, Irish, Icelandic, Italian, Norwegian, Portuguese, Spanish,
 	  and Swedish. It is also the default for the US. If unsure, say Y.
 
-config ADK_KERNEL_NLS_ISO8859_2
+config ADK_LINUX_KERNEL_NLS_ISO8859_2
         tristate "NLS ISO 8859-2 (Latin-2; Central European Languages)"
         default n
         help
@@ -323,7 +323,7 @@ config ADK_KERNEL_NLS_ISO8859_2
 	  languages: Czech, German, Hungarian, Polish, Rumanian, Croatian,
 	  Slovak, Slovene.
 
-config ADK_KERNEL_NLS_ISO8859_3
+config ADK_LINUX_KERNEL_NLS_ISO8859_3
         tristate "NLS ISO 8859-3 (Latin-3; Esperanto, Galician, Maltese, Turkish)"
         default n
         help
@@ -334,7 +334,7 @@ config ADK_KERNEL_NLS_ISO8859_3
 	  set, which is popular with authors of Esperanto, Galician, Maltese,
 	  and Turkish.
 
-config ADK_KERNEL_NLS_ISO8859_4
+config ADK_LINUX_KERNEL_NLS_ISO8859_4
         tristate "NLS ISO 8859-4 (Latin-4; old Baltic charset)"
         default n
         help
@@ -345,7 +345,7 @@ config ADK_KERNEL_NLS_ISO8859_4
 	  set which introduces letters for Estonian, Latvian, and
 	  Lithuanian. It is an incomplete predecessor of Latin 7.
 
-config ADK_KERNEL_NLS_ISO8859_5
+config ADK_LINUX_KERNEL_NLS_ISO8859_5
         tristate "NLS ISO 8859-5 (Cyrillic)"
         default n
         help
@@ -357,7 +357,7 @@ config ADK_KERNEL_NLS_ISO8859_5
 	  Macedonian, Russian, Serbian, and Ukrainian. Note that the charset
 	  KOI8-R is preferred in Russia.
 
-config ADK_KERNEL_NLS_ISO8859_6
+config ADK_LINUX_KERNEL_NLS_ISO8859_6
         tristate "NLS ISO 8859-6 (Arabic)"
         default n
         help
@@ -367,7 +367,7 @@ config ADK_KERNEL_NLS_ISO8859_6
 	  input/output character sets. Say Y here for ISO8859-6, the Arabic
 	  character set.
 
-config ADK_KERNEL_NLS_ISO8859_7
+config ADK_LINUX_KERNEL_NLS_ISO8859_7
         tristate "NLS ISO 8859-7 (Greek)"
         default n
         help
@@ -377,7 +377,7 @@ config ADK_KERNEL_NLS_ISO8859_7
 	  input/output character sets. Say Y here for ISO8859-7, the Modern
 	  Greek character set.
 
-config ADK_KERNEL_NLS_ISO8859_8
+config ADK_LINUX_KERNEL_NLS_ISO8859_8
         tristate "NLS ISO 8859-8 (Hebrew)"
         default n
         help
@@ -387,7 +387,7 @@ config ADK_KERNEL_NLS_ISO8859_8
 	  input/output character sets. Say Y here for ISO8859-8, the Hebrew
 	  character set.
 
-config ADK_KERNEL_NLS_ISO8859_9
+config ADK_LINUX_KERNEL_NLS_ISO8859_9
         tristate "NLS ISO 8859-9 (Latin-5; Turkish)"
         default n
         help
@@ -398,7 +398,7 @@ config ADK_KERNEL_NLS_ISO8859_9
 	  set, and it replaces the rarely needed Icelandic letters in Latin 1
 	  with the Turkish ones. Useful in Turkey.
 
-config ADK_KERNEL_NLS_ISO8859_13
+config ADK_LINUX_KERNEL_NLS_ISO8859_13
         tristate "NLS ISO 8859-13 (Latin-7; Baltic Rim)"
         default n
         help
@@ -409,7 +409,7 @@ config ADK_KERNEL_NLS_ISO8859_13
 	  set, which supports modern Baltic languages including Latvian
 	  and Lithuanian.
 
-config ADK_KERNEL_NLS_ISO8859_14
+config ADK_LINUX_KERNEL_NLS_ISO8859_14
         tristate "NLS ISO 8859-14 (Latin-8; Celtic)"
         default n
         help
@@ -421,7 +421,7 @@ config ADK_KERNEL_NLS_ISO8859_14
 	  (and Manx Gaelic) that were missing in Latin 1.
 	  <http://linux.speech.cymru.org/> has further information.
 
-config ADK_KERNEL_NLS_ISO8859_15
+config ADK_LINUX_KERNEL_NLS_ISO8859_15
 	tristate "NLS ISO 8859-15 (Latin-9; Western European Languages with Euro)"
 	default n
 	help
@@ -438,7 +438,7 @@ config ADK_KERNEL_NLS_ISO8859_15
 	  support for French and Finnish, and adds the new Euro character.
 	  If unsure, say Y.
 
-config ADK_KERNEL_NLS_KOI8_R
+config ADK_LINUX_KERNEL_NLS_KOI8_R
 	tristate "NLS KOI8-R (Cryllic for Russian and Bulgarian)"
 	default n
 	help
@@ -448,7 +448,7 @@ config ADK_KERNEL_NLS_KOI8_R
 	  input/output character sets. Say Y here for the preferred Russian
 	  character set.
 
-config ADK_KERNEL_NLS_KOI8_U
+config ADK_LINUX_KERNEL_NLS_KOI8_U
 	tristate "NLS KOI8-U (Cyrillic for Russian, Bulgarian and Ukrainian)"
 	default n
 	help
@@ -458,7 +458,7 @@ config ADK_KERNEL_NLS_KOI8_U
 	  input/output character sets. Say Y here for the preferred Ukrainian
 	  (koi8-u) and Belarusian (koi8-ru) character sets.
 
-config ADK_KERNEL_NLS_UTF8
+config ADK_LINUX_KERNEL_NLS_UTF8
 	tristate "NLS UTF8"
 	default n
 	help

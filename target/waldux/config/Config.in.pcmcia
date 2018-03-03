@@ -1,0 +1,48 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "PCMCIA/CardBus support"
+depends on ADK_TARGET_WITH_CARDBUS || ADK_TARGET_WITH_PCMCIA || ADK_TARGET_QEMU
+
+config ADK_WALDUX_KERNEL_CARDBUS
+	bool 
+
+config ADK_WALDUX_KERNEL_PCMCIA_PROBE
+	bool
+
+config ADK_WALDUX_KERNEL_SERIAL_8250_EXTENDED
+	bool
+
+config ADK_WALDUX_KERNEL_SERIAL_8250_SHARE_IRQ
+	bool
+	select ADK_WALDUX_KERNEL_SERIAL_8250_EXTENDED
+
+config ADK_WALDUX_KERNEL_PCMCIA_PXA2XX
+	bool
+
+config ADK_WALDUX_KERNEL_PCCARD
+	tristate "PCCARD support"
+	default n
+
+config ADK_WALDUX_KERNEL_PCMCIA
+	tristate "16-bit PCMCIA support"
+	depends on ADK_WALDUX_KERNEL_PCCARD
+	select ADK_WALDUX_KERNEL_FW_LOADER
+	select ADK_WALDUX_KERNEL_CRC32
+	select ADK_WALDUX_KERNEL_PCMCIA_PROBE
+	default n
+
+config ADK_WALDUX_KERNEL_YENTA
+	tristate "32-bit CardBus support"
+	depends on ADK_WALDUX_KERNEL_PCCARD
+	depends on ADK_TARGET_WITH_CARDBUS
+	select ADK_WALDUX_KERNEL_CARDBUS
+	default n
+
+config ADK_WALDUX_KERNEL_SERIAL_8250_CS
+	tristate "PCMCIA/CardBus serial device support"
+	select ADK_WALDUX_KERNEL_SERIAL_8250_SHARE_IRQ
+	depends on ADK_WALDUX_KERNEL_PCMCIA && !ADK_TARGET_QEMU
+	default n
+
+endmenu

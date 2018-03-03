@@ -1,9 +1,9 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-config ADK_KERNEL_NF_CONNTRACK
+config ADK_LINUX_KERNEL_NF_CONNTRACK
 	tristate 'Netfilter connection tracking support'
-	select ADK_KERNEL_NETFILTER_XTABLES
+	select ADK_LINUX_KERNEL_NETFILTER_XTABLES
 	default n
 	help
 	  Connection tracking keeps a record of what packets have passed
@@ -14,21 +14,21 @@ config ADK_KERNEL_NF_CONNTRACK
 	  which generalize ip_conntrack to support other layer 3 protocols.
 
 menu "Netfilter connection tracking support for special protocols"
-depends on ADK_KERNEL_NF_CONNTRACK
+depends on ADK_LINUX_KERNEL_NF_CONNTRACK
 
-config ADK_KERNEL_NF_CONNTRACK_MARK
+config ADK_LINUX_KERNEL_NF_CONNTRACK_MARK
 	bool 'Connection mark tracking support'
-	depends on ADK_KERNEL_NF_CONNTRACK
-	select ADK_KERNEL_IP_NF_MATCH_CONNMARK
+	depends on ADK_LINUX_KERNEL_NF_CONNTRACK
+	select ADK_LINUX_KERNEL_IP_NF_MATCH_CONNMARK
 	help
 	  This option enables support for connection marks, used by the
 	  `CONNMARK' target and `connmark' match. Similar to the mark value
 	  of packets, but this mark value is kept in the conntrack session
 	  instead of the individual packets.
 
-config ADK_KERNEL_NF_CONNTRACK_SECMARK
+config ADK_LINUX_KERNEL_NF_CONNTRACK_SECMARK
 	bool 'Connection tracking security mark support'
-	depends on ADK_KERNEL_NF_CONNTRACK
+	depends on ADK_LINUX_KERNEL_NF_CONNTRACK
 	#FIXME select NETWORK_SECMARK
 	help
 	  This option enables security markings to be applied to
@@ -37,17 +37,17 @@ config ADK_KERNEL_NF_CONNTRACK_SECMARK
 	  connections to packets with the same target, with the packets
 	  being originally labeled via SECMARK.
 
-config ADK_KERNEL_NF_CONNTRACK_FTP
+config ADK_LINUX_KERNEL_NF_CONNTRACK_FTP
 	tristate 'FTP protocol support'
-	depends on ADK_KERNEL_NF_CONNTRACK
+	depends on ADK_LINUX_KERNEL_NF_CONNTRACK
 	help
 	  Tracking FTP connections is problematic: special helpers are
 	  required for tracking them, and doing masquerading and other forms
 	  of Network Address Translation on them.
 
-config ADK_KERNEL_NF_CONNTRACK_IRC
+config ADK_LINUX_KERNEL_NF_CONNTRACK_IRC
 	tristate 'IRC protocol support'
-	depends on ADK_KERNEL_NF_CONNTRACK
+	depends on ADK_LINUX_KERNEL_NF_CONNTRACK
 	help
 	  There is a commonly-used extension to IRC called
 	  Direct Client-to-Client Protocol (DCC).  This enables users to send
@@ -58,9 +58,9 @@ config ADK_KERNEL_NF_CONNTRACK_IRC
 	  chats.  Note that you do NOT need this extension to get files or
 	  have others initiate chats, or everything else in IRC.
 
-config ADK_KERNEL_NF_CONNTRACK_NETBIOS_NS
+config ADK_LINUX_KERNEL_NF_CONNTRACK_NETBIOS_NS
 	tristate 'NetBIOS name service protocol support'
-	depends on ADK_KERNEL_NF_CONNTRACK
+	depends on ADK_LINUX_KERNEL_NF_CONNTRACK
 	help
 	  NetBIOS name service requests are sent as broadcast messages from an
 	  unprivileged port and responded to with unicast messages to the
@@ -75,18 +75,18 @@ config ADK_KERNEL_NF_CONNTRACK_NETBIOS_NS
 	  4: eth0: <BROADCAST,MULTICAST,UP> mtu 1500 qdisc pfifo_fast qlen 1000
 	      inet 172.16.2.252/24 brd 172.16.2.255 scope global eth0
 
-config ADK_KERNEL_NF_CONNTRACK_TFTP
+config ADK_LINUX_KERNEL_NF_CONNTRACK_TFTP
 	tristate 'TFTP protocol support'
-	depends on ADK_KERNEL_NF_CONNTRACK
+	depends on ADK_LINUX_KERNEL_NF_CONNTRACK
 	help
 	  TFTP connection tracking helper, this is required depending
 	  on how restrictive your ruleset is.
 	  If you are using a tftp client behind -j SNAT or -j MASQUERADING
 	  you will need this.
 
-config ADK_KERNEL_NF_CONNTRACK_PPTP
+config ADK_LINUX_KERNEL_NF_CONNTRACK_PPTP
 	tristate 'PPTP protocol support'
-	depends on ADK_KERNEL_NF_CONNTRACK
+	depends on ADK_LINUX_KERNEL_NF_CONNTRACK
 	help
 	  This module adds support for PPTP (Point to Point Tunnelling
 	  Protocol, RFC2637) connection tracking and NAT. 
@@ -98,9 +98,9 @@ config ADK_KERNEL_NF_CONNTRACK_PPTP
 	  For more info, read top of the file
 	  net/ipv4/netfilter/ip_conntrack_pptp.c
 
-config ADK_KERNEL_NF_CONNTRACK_H323
+config ADK_LINUX_KERNEL_NF_CONNTRACK_H323
 	tristate 'H.323 protocol support'
-	depends on ADK_KERNEL_NF_CONNTRACK
+	depends on ADK_LINUX_KERNEL_NF_CONNTRACK
 	help
 	  H.323 is a VoIP signalling protocol from ITU-T. As one of the most
 	  important VoIP protocols, it is widely used by voice hardware and
@@ -115,9 +115,9 @@ config ADK_KERNEL_NF_CONNTRACK_H323
 	  whiteboard, file transfer, etc. For more information, please
 	  visit http://nath323.sourceforge.net/.
 
-config ADK_KERNEL_NF_CONNTRACK_SIP
+config ADK_LINUX_KERNEL_NF_CONNTRACK_SIP
 	tristate 'SIP protocol support'
-	depends on ADK_KERNEL_NF_CONNTRACK
+	depends on ADK_LINUX_KERNEL_NF_CONNTRACK
 	help
 	  SIP is an application-layer control protocol that can establish,
 	  modify, and terminate multimedia sessions (conferences) such as
@@ -127,7 +127,7 @@ config ADK_KERNEL_NF_CONNTRACK_SIP
 
 endmenu
 
-config ADK_KERNEL_NETFILTER_NETLINK_LOG
+config ADK_LINUX_KERNEL_NETFILTER_NETLINK_LOG
 	tristate 'Netfilter LOG over NFNETLINK interface'
 	help
 	  If this option is enabled, the kernel will include support                                                                                        
@@ -135,16 +135,16 @@ config ADK_KERNEL_NETFILTER_NETLINK_LOG
 
 menu "Netfilter target support"
 
-config ADK_KERNEL_NETFILTER_XT_TARGET_CHECKSUM
+config ADK_LINUX_KERNEL_NETFILTER_XT_TARGET_CHECKSUM
 	tristate '"CHECKSUM" target support'
-	select ADK_KERNEL_IP_NF_IPTABLES
-	select ADK_KERNEL_NETFILTER_XTABLES
-	select ADK_KERNEL_IP_NF_MANGLE
-	select ADK_KERNEL_NETFILTER_ADVANCED
+	select ADK_LINUX_KERNEL_IP_NF_IPTABLES
+	select ADK_LINUX_KERNEL_NETFILTER_XTABLES
+	select ADK_LINUX_KERNEL_IP_NF_MANGLE
+	select ADK_LINUX_KERNEL_NETFILTER_ADVANCED
 
-config ADK_KERNEL_NETFILTER_XT_TARGET_CLASSIFY
+config ADK_LINUX_KERNEL_NETFILTER_XT_TARGET_CLASSIFY
 	tristate '"CLASSIFY" target support'
-	select ADK_KERNEL_NETFILTER_XTABLES
+	select ADK_LINUX_KERNEL_NETFILTER_XTABLES
 	help
 	  This option adds a `CLASSIFY' target, which enables the user to set
 	  the priority of a packet. Some qdiscs can use this value for
@@ -152,18 +152,18 @@ config ADK_KERNEL_NETFILTER_XT_TARGET_CLASSIFY
 
   	  atm, cbq, dsmark, pfifo_fast, htb, prio
 
-config ADK_KERNEL_NETFILTER_XT_TARGET_CONNMARK
+config ADK_LINUX_KERNEL_NETFILTER_XT_TARGET_CONNMARK
 	tristate '"CONNMARK" target support'
-	select ADK_KERNEL_NETFILTER_XTABLES
-	select ADK_KERNEL_NF_CONNTRACK
+	select ADK_LINUX_KERNEL_NETFILTER_XTABLES
+	select ADK_LINUX_KERNEL_NF_CONNTRACK
 	help
 	  This option adds a `CONNMARK' target, which allows one to manipulate
 	  the connection mark value.  Similar to the MARK target, but
 	  affects the connection mark value rather than the packet mark value.
 
-config ADK_KERNEL_NETFILTER_XT_TARGET_MARK
+config ADK_LINUX_KERNEL_NETFILTER_XT_TARGET_MARK
 	tristate '"MARK" target support'
-	select ADK_KERNEL_NETFILTER_XTABLES
+	select ADK_LINUX_KERNEL_NETFILTER_XTABLES
 	help
 	  This option adds a `MARK' target, which allows you to create rules
 	  in the `mangle' table which alter the netfilter mark (nfmark) field
@@ -172,24 +172,24 @@ config ADK_KERNEL_NETFILTER_XT_TARGET_MARK
 	  key') and can also be used by other subsystems to change their
 	  behavior.
 
-config ADK_KERNEL_NETFILTER_XT_TARGET_NFQUEUE
+config ADK_LINUX_KERNEL_NETFILTER_XT_TARGET_NFQUEUE
 	tristate '"NFQUEUE" target support'
-	select ADK_KERNEL_NETFILTER_XTABLES
+	select ADK_LINUX_KERNEL_NETFILTER_XTABLES
 	help
 	  This target replaced the old obsolete QUEUE target.
 
 	  As opposed to QUEUE, it supports 65535 different queues,
 	  not just one.
 
-config ADK_KERNEL_NETFILTER_XT_TARGET_LOG
+config ADK_LINUX_KERNEL_NETFILTER_XT_TARGET_LOG
 	tristate '"LOG" target support'
-	depends on ADK_KERNEL_IP_NF_FILTER
+	depends on ADK_LINUX_KERNEL_IP_NF_FILTER
 	help
 	  This option adds a `LOG' target, which allows you to create rules in
 	  any iptables table which records the packet header to the syslog.
 
-config ADK_KERNEL_NETFILTER_XT_TARGET_TCPMSS
+config ADK_LINUX_KERNEL_NETFILTER_XT_TARGET_TCPMSS
 	tristate '"TCPMSS" target support'
-	select ADK_KERNEL_NETFILTER_XTABLES
+	select ADK_LINUX_KERNEL_NETFILTER_XTABLES
 
 endmenu

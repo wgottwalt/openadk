@@ -3,8 +3,8 @@
 
 include $(ADK_TOPDIR)/rules.mk
 include ../rules.mk
-include $(ADK_TOPDIR)/mk/kernel-ver.mk
-include $(ADK_TOPDIR)/mk/linux.mk
+include $(ADK_TOPDIR)/mk/$(ADK_TARGET_OS)-ver.mk
+include $(ADK_TOPDIR)/mk/$(ADK_TARGET_OS).mk
 include $(ADK_TOPDIR)/mk/buildhlp.mk
 
 # override linux dir here, as build_bla_bla/linux does not exist yet

@@ -7,7 +7,7 @@ include $(ADK_TOPDIR)/mk/rootfs.mk
 ifeq ($(ADK_TARGET_KERNEL_USE_CUSTOMCONFIG),y)
 KERNEL_MODULES_USED:=$(shell grep -s =m $(ADK_TOPDIR)/$(ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH))
 else
-KERNEL_MODULES_USED:=$(shell grep ^ADK_KERNEL $(ADK_TOPDIR)/.config|grep =m)
+KERNEL_MODULES_USED:=$(shell grep ^ADK_$(ADK_TARGET_OS)_KERNEL $(ADK_TOPDIR)/.config|grep =m)
 endif
 
 all: install
@@ -16,7 +16,7 @@ all: install
 # The following target combines all kernel-related variables and
 # config files into a single one to be used as the final kernel
 # configuration when building. This is how it's done:
-# 1) fetch all enabled ADK_KERNEL_* vars into
+# 1) fetch all enabled ADK_OS_KERNEL_* vars into
 #    .kernelconfig.kernel
 # 2) get the global and device-specific static kernel config and place it into
 #    .kernelconfig.board
@@ -31,14 +31,20 @@ ADK_PACKAGE_CRYPTINIT_ROOT:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_ROOT)))
 ADK_PACKAGE_CRYPTINIT_SWAP:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_SWAP)))
 ADK_PACKAGE_CMDLINE:=root=$(ADK_PACKAGE_CRYPTINIT_ROOT) swap=$(ADK_PACKAGE_CRYPTINIT_SWAP) resume=/dev/mapper/swapcrypt
 
-ifeq ($(ADK_TARGET_OS_LINUX),y)
-ifeq ($(ADK_TARGET_KERNEL_USE_MINICONFIG),y)
+ifeq ($(ADK_TARGET_OS_LINUX)$(ADK_TARGET_OS_WALDUX),y)
+ifeq ($(ADK_TARGET_LINUX_KERNEL_USE_MINICONFIG)$(ADK_TARGET_WALDUX_KERNEL_USE_MINICONFIG),y)
 ifeq ($(ADK_TARGET_KERNEL_CUSTOMISING),y)
 config-prepare: $(ADK_TOPDIR)/.config
-	@PATH='$(HOST_PATH)' sed -n '/^ADK_KERNEL/s//CONFIG/p' $(ADK_TOPDIR)/.config \
+ifeq ($(ADK_TARGET_OS_LINUX),y)
+	@PATH='$(HOST_PATH)' sed -n '/^ADK_LINUX_KERNEL/s//CONFIG/p' $(ADK_TOPDIR)/.config \
 	    >$(BUILD_DIR)/.kernelconfig.kernel
+endif
+ifeq ($(ADK_TARGET_OS_WALDUX),y)
+	@PATH='$(HOST_PATH)' sed -n '/^ADK_WALDUX_KERNEL/s//CONFIG/p' $(ADK_TOPDIR)/.config \
+	    >$(BUILD_DIR)/.kernelconfig.kernel
+endif
 	@if [ -f $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_SYSTEM) ];then \
-		cat $(ADK_TOPDIR)/target/linux/kernel.config \
+		cat $(ADK_TOPDIR)/target/$(ADK_TARGET_OS)/kernel.config \
 		    $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_SYSTEM) > $(BUILD_DIR)/.kernelconfig.board; \
 	else \
 		echo "no miniconfig found for target system"; \
@@ -100,11 +106,11 @@ ifeq ($(ADK_RUNTIME_QUIET_KERNEL),y)
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 quiet loglevel=2 vt.global_cursor_default=0"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
-ifeq ($(ADK_KERNEL_DEBUG_WITH_KGDB),y)
+ifeq ($(ADK_LINUX_KERNEL_DEBUG_WITH_KGDB)$(ADK_WALDUX_KERNEL_DEBUG_WITH_KGDB),y)
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 kgdbwait kgdboc=ttyS0,115200"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
-ifeq ($(ADK_KERNEL_NETCONSOLE),y)
+ifeq ($(ADK_LINUX_KERNEL_NETCONSOLE)$(ADK_WALDUX_KERNEL_NETCONSOLE),y)
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 netconsole=@$(ADK_PARAMETER_NETCONSOLE_SRC_IP)/,@$(ADK_PARAMETER_NETCONSOLE_DST_IP)/"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
@@ -117,7 +123,7 @@ endif
 else
 config-prepare: $(ADK_TOPDIR)/.config
 	@if [ -f $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_SYSTEM) ];then \
-		cat $(ADK_TOPDIR)/target/linux/kernel.config \
+		cat $(ADK_TOPDIR)/target/$(ADK_TARGET_OS)/kernel.config \
 		    $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_SYSTEM) > $(BUILD_DIR)/.kernelconfig.board; \
 	else \
 		echo "no miniconfig found for target system"; \
@@ -161,7 +167,7 @@ install: zephyr-install
 targethelp: zephyr-targethelp
 endif
 
-ifeq ($(ADK_TARGET_OS_LINUX),y)
+ifeq ($(ADK_TARGET_OS_LINUX)$(ADK_TARGET_OS_WALDUX),y)
 prepare: $(ADK_TARGET_ARCH)-prepare
 compile: $(ADK_TARGET_ARCH)-compile
 image: $(ADK_TARGET_ARCH)-imageclean $(ADK_TARGET_ARCH)-imageinstall
@@ -193,7 +199,7 @@ endif
 ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
 ifneq ($(KERNEL_MODULES_USED),)
 	# This should be made a package instead
-	$(CP) $(BUILD_DIR)/linux-$(ADK_TARGET_ARCH)/modules/lib $(TARGET_DIR)
+	$(CP) $(BUILD_DIR)/$(ADK_TARGET_OS)-$(ADK_TARGET_ARCH)/modules/lib $(TARGET_DIR)
 	rm -f "$(TARGET_DIR)"/lib/modules/*/build \
 	      "$(TARGET_DIR)"/lib/modules/*/source
 endif

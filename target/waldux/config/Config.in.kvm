@@ -1,0 +1,39 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "Virtualization"
+depends on (ADK_TARGET_ARCH_X86_64 || ADK_TARGET_ARCH_X86) && ADK_TARGET_CPU_WITH_VT
+
+config ADK_WALDUX_KERNEL_VIRTUALIZATION
+	bool
+	default n
+
+config ADK_WALDUX_KERNEL_KVM
+	tristate "Kernel-based Virtual Machine (KVM) support"
+	select ADK_WALDUX_KERNEL_VIRTUALIZATION
+	default n
+	help
+	  Support hosting fully virtualized guest machines using hardware
+	  virtualization extensions.  You will need a fairly recent
+	  processor equipped with virtualization extensions. You will also
+	  need to select one or more of the processor modules below.
+	  This module provides access to the hardware capabilities through
+	  a character device node named /dev/kvm.
+
+config ADK_WALDUX_KERNEL_KVM_AMD
+	tristate "KVM for AMD processors support"
+	select ADK_WALDUX_KERNEL_VIRTUALIZATION
+	default n
+	help
+	  Provides support for KVM on AMD processors equipped with the AMD-V
+	  (SVM) extensions.
+
+config ADK_WALDUX_KERNEL_KVM_INTEL
+	tristate "KVM for Intel processors support"
+	select ADK_WALDUX_KERNEL_VIRTUALIZATION
+	default n
+	help
+	  Provides support for KVM on Intel processors equipped with the VT 
+	  extensions.
+
+endmenu

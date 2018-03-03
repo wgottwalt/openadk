@@ -1,0 +1,114 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+menu "Multimedia support"
+depends on ADK_TARGET_WITH_USB
+
+config ADK_WALDUX_KERNEL_MEDIA_SUPPORT
+	tristate
+
+config ADK_WALDUX_KERNEL_MEDIA_RC_SUPPORT
+	bool
+
+config ADK_WALDUX_KERNEL_VIDEO_DEV
+	bool
+
+config ADK_WALDUX_KERNEL_VIDEO_V4L2
+	bool
+	select ADK_WALDUX_KERNEL_VIDEO_DEV
+
+config ADK_WALDUX_KERNEL_MEDIA_USB_SUPPORT
+	bool
+
+config ADK_WALDUX_KERNEL_MEDIA_CAMERA_SUPPORT
+	bool
+
+config ADK_WALDUX_KERNEL_MEDIA_ANALOG_TV_SUPPORT
+	bool
+
+config ADK_WALDUX_KERNEL_MEDIA_DIGITAL_TV_SUPPORT
+	bool
+
+config ADK_WALDUX_KERNEL_DVB_CORE
+	tristate
+
+config ADK_WALDUX_KERNEL_RC_CORE
+	tristate
+
+config ADK_WALDUX_KERNEL_VIDEO_CX231XX_DVB
+	tristate
+
+config ADK_WALDUX_KERNEL_DVB_SI2165
+	tristate
+
+config ADK_WALDUX_KERNEL_MEDIA_TUNER_TDA18271
+	tristate
+
+menu "DVB card support"
+
+config ADK_WALDUX_KERNEL_VIDEO_CX231XX
+	tristate "Hauppauge WinTV-HVR-930C"
+	select ADK_WALDUX_KERNEL_MEDIA_SUPPORT
+	select ADK_WALDUX_KERNEL_MEDIA_USB_SUPPORT
+	select ADK_WALDUX_KERNEL_MEDIA_DIGITAL_TV_SUPPORT
+	select ADK_WALDUX_KERNEL_MEDIA_ANALOG_TV_SUPPORT
+	select ADK_WALDUX_KERNEL_MEDIA_RC_SUPPORT
+	select ADK_WALDUX_KERNEL_RC_CORE
+	select ADK_WALDUX_KERNEL_DVB_CORE
+	select ADK_WALDUX_KERNEL_VIDEO_CX231XX_DVB
+	select ADK_WALDUX_KERNEL_DVB_SI2165
+	select ADK_WALDUX_KERNEL_MEDIA_TUNER_TDA18271
+	help
+	  Driver for Hauppauge WinTV-HVR-930C	
+	
+config ADK_WALDUX_KERNEL_VIDEO_PVRUSB2
+	tristate "Hauppauge PVR DVB stick"
+	select ADK_WALDUX_KERNEL_MEDIA_SUPPORT
+	select ADK_WALDUX_KERNEL_MEDIA_USB_SUPPORT
+	select ADK_WALDUX_KERNEL_MEDIA_DIGITAL_TV_SUPPORT
+	select ADK_WALDUX_KERNEL_MEDIA_ANALOG_TV_SUPPORT
+	help
+	  Driver for Hauppauge PVR
+
+endmenu
+
+menu "Webcam support"
+
+config ADK_WALDUX_KERNEL_USB_VIDEO_CLASS
+	tristate "Kernel driver for USB video webcams"
+	depends on ADK_WALDUX_KERNEL_USB || ADK_TARGET_SYSTEM_LEMOTE_YEELONG
+	select ADK_WALDUX_KERNEL_MEDIA_SUPPORT
+
+config ADK_WALDUX_KERNEL_USB_GSPCA
+	tristate "GSPCA webcam framework"
+	depends on ADK_TARGET_WITH_USB
+	select ADK_WALDUX_KERNEL_VIDEO_V4L2
+	select ADK_WALDUX_KERNEL_MEDIA_SUPPORT
+	select ADK_WALDUX_KERNEL_MEDIA_USB_SUPPORT
+	select ADK_WALDUX_KERNEL_MEDIA_CAMERA_SUPPORT
+	help
+	 GSPCA webcam framework
+
+config ADK_WALDUX_KERNEL_USB_GSPCA_PAC207
+	tristate "Pixart PAC207 USB Camera Driver"
+	depends on ADK_WALDUX_KERNEL_USB_GSPCA
+	help
+
+config ADK_WALDUX_KERNEL_USB_GSPCA_PAC7311
+	tristate "Pixart PAC7311 USB Camera Driver"
+	depends on ADK_WALDUX_KERNEL_USB_GSPCA
+	help
+
+config ADK_WALDUX_KERNEL_USB_GSPCA_SPCA561
+	tristate "SPCA561 USB Camera Driver"
+	depends on ADK_WALDUX_KERNEL_USB_GSPCA
+	help
+
+config ADK_WALDUX_KERNEL_USB_PWC
+	tristate "USB Philips Camera driver"
+	depends on ADK_TARGET_WITH_USB
+	default n
+	help
+
+endmenu
+endmenu

@@ -3,7 +3,7 @@
 
 choice
 prompt "C library"
-default ADK_TARGET_LIB_UCLIBC_NG if ADK_TARGET_OS_LINUX
+default ADK_TARGET_LIB_UCLIBC_NG if ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX
 
 config ADK_TARGET_LIB_UCLIBC_NG
 	bool "uClibc-ng embedded C library"
@@ -37,9 +37,9 @@ config ADK_TARGET_LIB_UCLIBC_NG
 		ADK_TARGET_ARCH_SPARC64 || \
 		ADK_TARGET_ARCH_X86 || \
 		ADK_TARGET_ARCH_X86_64 || \
-		ADK_TARGET_ARCH_XTENSA) && ADK_TARGET_OS_LINUX
+		ADK_TARGET_ARCH_XTENSA) && ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX
 	help
-	  http://uclibc-ng.org
+	  https://uclibc-ng.org
 
 config ADK_TARGET_LIB_MUSL
 	bool "musl C library"

@@ -7,7 +7,7 @@ else
 FAKEROOT:=
 endif
 
-ifeq ($(ADK_TARGET_OS_LINUX),y)
+ifeq ($(ADK_TARGET_OS_LINUX)$(ADK_TARGET_OS_WALDUX),y)
 # relative paths, like 'mksh' or '../usr/bin/foosh'
 ifeq (${ADK_BINSH_ASH},y)
 BINSH:=ash
@@ -143,7 +143,7 @@ else
 	cp $(BUILD_DIR)/$(TARGET_KERNEL) $(KERNEL_PKGDIR)/boot/kernel
 endif
 	@${BASH} ${SCRIPT_DIR}/make-ipkg-dir.sh ${KERNEL_PKGDIR} \
-	    ../linux/kernel.control ${KERNEL_VERSION} ${ADK_TARGET_CPU_ARCH}
+	    ../$(ADK_TARGET_OS)/kernel.control ${KERNEL_VERSION} ${ADK_TARGET_CPU_ARCH}
 	PATH='$(HOST_PATH)' $(PKG_BUILD) $(KERNEL_PKGDIR) $(PACKAGE_DIR) $(MAKE_TRACE)
 	$(PKG_INSTALL) $(KERNEL_PKG) $(MAKE_TRACE)
 	$(CMD_TRACE) " done"
@@ -235,7 +235,7 @@ createinitramfs: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
 		echo 'CONFIG_INITRAMFS_ROOT_GID=0'; \
 		echo 'CONFIG_INITRAMFS_IS_LARGE=n'; \
 	) >> ${LINUX_DIR}/.config
-ifeq ($(ADK_KERNEL_COMP_XZ),y)
+ifeq ($(ADK_LINUX_KERNEL_COMP_XZ)$(ADK_WALDUX_KERNEL_COMP_XZ),y)
 		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_GZIP=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_LZMA=n" >> ${LINUX_DIR}/.config
@@ -251,7 +251,7 @@ ifeq ($(ADK_KERNEL_COMP_XZ),y)
 		echo "CONFIG_XZ_DEC_SPARC=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_XZ_DEC_TEST=n" >> ${LINUX_DIR}/.config
 endif
-ifeq ($(ADK_KERNEL_COMP_LZ4),y)
+ifeq ($(ADK_LINUX_KERNEL_COMP_LZ4)$(ADK_WALDUX_KERNEL_COMP_LZ4),y)
 		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_GZIP=n" >> ${LINUX_DIR}/.config
@@ -260,7 +260,7 @@ ifeq ($(ADK_KERNEL_COMP_LZ4),y)
 		echo "CONFIG_RD_LZMA=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_LZ4=y" >> ${LINUX_DIR}/.config
 endif
-ifeq ($(ADK_KERNEL_COMP_LZMA),y)
+ifeq ($(ADK_LINUX_KERNEL_COMP_LZMA)$(ADK_WALDUX_KERNEL_COMP_LZMA),y)
 		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_GZIP=n" >> ${LINUX_DIR}/.config
@@ -269,7 +269,7 @@ ifeq ($(ADK_KERNEL_COMP_LZMA),y)
 		echo "CONFIG_RD_LZMA=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_LZMA=y" >> ${LINUX_DIR}/.config
 endif
-ifeq ($(ADK_KERNEL_COMP_LZO),y)
+ifeq ($(ADK_LINUX_KERNEL_COMP_LZO)$(ADK_WALDUX_KERNEL_COMP_LZO),y)
 		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_GZIP=n" >> ${LINUX_DIR}/.config
@@ -278,7 +278,7 @@ ifeq ($(ADK_KERNEL_COMP_LZO),y)
 		echo "CONFIG_RD_LZO=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_LZO=y" >> ${LINUX_DIR}/.config
 endif
-ifeq ($(ADK_KERNEL_COMP_GZIP),y)
+ifeq ($(ADK_LINUX_KERNEL_COMP_GZIP)$(ADK_WALDUX_KERNEL_COMP_GZIP),y)
 		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_LZO=n" >> ${LINUX_DIR}/.config
@@ -287,7 +287,7 @@ ifeq ($(ADK_KERNEL_COMP_GZIP),y)
 		echo "CONFIG_RD_GZIP=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_GZIP=y" >> ${LINUX_DIR}/.config
 endif
-ifeq ($(ADK_KERNEL_COMP_BZIP2),y)
+ifeq ($(ADK_LINUX_KERNEL_COMP_BZIP2)$(ADK_WALDUX_KERNEL_COMP_BZIP2),y)
 		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_GZIP=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_LZMA=n" >> ${LINUX_DIR}/.config
@@ -296,7 +296,7 @@ ifeq ($(ADK_KERNEL_COMP_BZIP2),y)
 		echo "CONFIG_RD_BZIP2=y" >> ${LINUX_DIR}/.config
 		echo "CONFIG_INITRAMFS_COMPRESSION_BZIP2=y" >> ${LINUX_DIR}/.config
 endif
-ifeq ($(ADK_KERNEL_COMPRESS_NONE),y)
+ifeq ($(ADK_LINUX_KERNEL_COMPRESS_NONE)$(ADK_WALDUX_KERNEL_COMPRESS_NONE),y)
 		echo "CONFIG_RD_XZ=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_BZIP2=n" >> ${LINUX_DIR}/.config
 		echo "CONFIG_RD_LZO=n" >> ${LINUX_DIR}/.config

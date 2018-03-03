@@ -3,19 +3,19 @@
 
 menu "QoS and/or fair queueing"
 
-config ADK_KERNEL_NET_SCH_CSZ
+config ADK_LINUX_KERNEL_NET_SCH_CSZ
 	bool
 
-config ADK_KERNEL_NET_SCH_NETEM
+config ADK_LINUX_KERNEL_NET_SCH_NETEM
 	bool
 
-config ADK_KERNEL_NET_QOS
+config ADK_LINUX_KERNEL_NET_QOS
 	bool
 
-config ADK_KERNEL_NET_ESTIMATOR
+config ADK_LINUX_KERNEL_NET_ESTIMATOR
 	bool
 
-config ADK_KERNEL_NET_SCHED
+config ADK_LINUX_KERNEL_NET_SCHED
 	bool
 	help
 	  When the kernel has several packets to send out over a network
@@ -46,9 +46,9 @@ config ADK_KERNEL_NET_SCHED
 
 comment "Queueing/Scheduling"
 
-config ADK_KERNEL_NET_SCH_CBQ
+config ADK_LINUX_KERNEL_NET_SCH_CBQ
 	tristate "Class Based Queueing (CBQ)"
-	select ADK_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NET_SCHED
 	default n
 	help
 	  Say Y here if you want to use the Class-Based Queueing (CBQ) packet
@@ -62,9 +62,9 @@ config ADK_KERNEL_NET_SCH_CBQ
 	  say Y here. Then say Y to all the queueing algorithms below that you
 	  want to use as leaf disciplines.
 
-config ADK_KERNEL_NET_SCH_HTB
+config ADK_LINUX_KERNEL_NET_SCH_HTB
 	tristate "Hierarchical Token Bucket (HTB)"
-	select ADK_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NET_SCHED
 	default n
 	help
 	  Say Y here if you want to use the Hierarchical Token Buckets (HTB)
@@ -75,18 +75,18 @@ config ADK_KERNEL_NET_SCH_HTB
 	  HTB is very similar to CBQ regarding its goals however is has
 	  different properties and different algorithm.
 
-config ADK_KERNEL_NET_SCH_HFSC
+config ADK_LINUX_KERNEL_NET_SCH_HFSC
 	tristate "Hierarchical Fair Service Curve (HFSC)"
-	select ADK_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NET_SCHED
 	default n
 	help
 	  Say Y here if you want to use the Hierarchical Fair Service Curve
 	  (HFSC) packet scheduling algorithm.
 
-config ADK_KERNEL_NET_SCH_ATM
+config ADK_LINUX_KERNEL_NET_SCH_ATM
 	tristate "ATM Virtual Circuits (ATM)"
-	depends on ADK_KERNEL_ATM
-	select ADK_KERNEL_NET_SCHED
+	depends on ADK_LINUX_KERNEL_ATM
+	select ADK_LINUX_KERNEL_NET_SCHED
 	default n
 	help
 	  Say Y here if you want to use the ATM pseudo-scheduler.  This
@@ -96,17 +96,17 @@ config ADK_KERNEL_NET_SCH_ATM
 
 	  See the top of <file:net/sched/sch_atm.c>) for more details.
 
-config ADK_KERNEL_NET_SCH_PRIO
+config ADK_LINUX_KERNEL_NET_SCH_PRIO
 	tristate "Multi Band Priority Queueing (PRIO)"
-	select ADK_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NET_SCHED
 	default n
 	help
 	  Say Y here if you want to use an n-band priority queue packet
 	  scheduler.
 
-config ADK_KERNEL_NET_SCH_RED
+config ADK_LINUX_KERNEL_NET_SCH_RED
 	tristate "Random Early Detection (RED)"
-	select ADK_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NET_SCHED
 	default n
 	help
 	  Say Y here if you want to use the Random Early Detection (RED)
@@ -114,9 +114,9 @@ config ADK_KERNEL_NET_SCH_RED
 
 	  See the top of <file:net/sched/sch_red.c> for more details.
 
-config ADK_KERNEL_NET_SCH_SFQ
+config ADK_LINUX_KERNEL_NET_SCH_SFQ
 	tristate "Stochastic Fairness Queueing (SFQ)"
-	select ADK_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NET_SCHED
 	default n
 	help
 	  Say Y here if you want to use the Stochastic Fairness Queueing (SFQ)
@@ -124,9 +124,9 @@ config ADK_KERNEL_NET_SCH_SFQ
 
 	  See the top of <file:net/sched/sch_sfq.c> for more details.
 
-config ADK_KERNEL_NET_SCH_TBF
+config ADK_LINUX_KERNEL_NET_SCH_TBF
 	tristate "Token Bucket Filter (TBF)"
-	select ADK_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NET_SCHED
 	default n
 	help
 	  Say Y here if you want to use the Token Bucket Filter (TBF) packet
@@ -134,9 +134,9 @@ config ADK_KERNEL_NET_SCH_TBF
 
 	  See the top of <file:net/sched/sch_tbf.c> for more details.
 
-config ADK_KERNEL_NET_SCH_GRED
+config ADK_LINUX_KERNEL_NET_SCH_GRED
 	tristate "Generic Random Early Detection (GRED)"
-	select ADK_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NET_SCHED
 	default n
 	help
 	  Say Y here if you want to use the Generic Random Early Detection
@@ -144,9 +144,9 @@ config ADK_KERNEL_NET_SCH_GRED
 	  (see the top of <file:net/sched/sch_red.c> for details and
 	  references about the algorithm).
 
-config ADK_KERNEL_NET_SCH_DSMARK
+config ADK_LINUX_KERNEL_NET_SCH_DSMARK
 	tristate "Differentiated Services marker (DSMARK)"
-	select ADK_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NET_SCHED
 	default n
 	help
 	  Say Y if you want to schedule packets according to the
@@ -154,11 +154,11 @@ config ADK_KERNEL_NET_SCH_DSMARK
 	  Technical information on this method, with pointers to associated
 	  RFCs, is available at <http://www.gta.ufrj.br/diffserv/>.
 
-config ADK_KERNEL_NET_SCH_INGRESS
+config ADK_LINUX_KERNEL_NET_SCH_INGRESS
 	tristate "Ingress Qdisc"
-	select ADK_KERNEL_NET_SCHED
-	select ADK_KERNEL_NETFILTER
-	select ADK_KERNEL_NET_CLS_ACT
+	select ADK_LINUX_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NETFILTER
+	select ADK_LINUX_KERNEL_NET_CLS_ACT
 	default n
 	help
 	  Say Y here if you want to use classifiers for incoming packets.
@@ -166,115 +166,115 @@ config ADK_KERNEL_NET_SCH_INGRESS
 
 comment "Classification"
 
-config ADK_KERNEL_NET_CLS
+config ADK_LINUX_KERNEL_NET_CLS
 	bool
-	select ADK_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NET_SCHED
 	default n
 
-config ADK_KERNEL_NET_CLS_BASIC
+config ADK_LINUX_KERNEL_NET_CLS_BASIC
 	tristate "Elementary classification (BASIC)"
-	select ADK_KERNEL_NET_CLS
+	select ADK_LINUX_KERNEL_NET_CLS
 	default n
 	help
 	  Say Y here if you want to be able to classify packets using
 	  only extended matches and actions.
 
-config ADK_KERNEL_NET_CLS_TCINDEX
+config ADK_LINUX_KERNEL_NET_CLS_TCINDEX
 	tristate "Traffic-Control Index (TCINDEX)"
-	select ADK_KERNEL_NET_CLS
+	select ADK_LINUX_KERNEL_NET_CLS
 	default n
 	help
 	  Say Y here if you want to be able to classify packets based on
 	  traffic control indices. You will want this feature if you want
 	  to implement Differentiated Services together with DSMARK.
 
-config ADK_KERNEL_NET_CLS_ROUTE4
+config ADK_LINUX_KERNEL_NET_CLS_ROUTE4
 	tristate "Routing decision (ROUTE)"
-	select ADK_KERNEL_NET_CLS
+	select ADK_LINUX_KERNEL_NET_CLS
 	default n
 	help
 	  If you say Y here, you will be able to classify packets
 	  according to the route table entry they matched.
 
-config ADK_KERNEL_NET_CLS_FW
+config ADK_LINUX_KERNEL_NET_CLS_FW
 	tristate "Netfilter mark (FW)"
-	select ADK_KERNEL_NET_CLS
+	select ADK_LINUX_KERNEL_NET_CLS
 	default n
 	help
 	  If you say Y here, you will be able to classify packets
 	  according to netfilter/firewall marks.
 
-config ADK_KERNEL_NET_CLS_U32
+config ADK_LINUX_KERNEL_NET_CLS_U32
 	tristate "Universal 32bit comparisons w/ hashing (U32)"
-	select ADK_KERNEL_NET_CLS
+	select ADK_LINUX_KERNEL_NET_CLS
 	default n
 	help
 	  Say Y here to be able to classify packets using a universal
 	  32bit pieces based comparison scheme.
 
-config ADK_KERNEL_NET_CLS_U32_PERF
+config ADK_LINUX_KERNEL_NET_CLS_U32_PERF
 	bool "Performance counters support"
-	select ADK_KERNEL_NET_CLS
-	depends on ADK_KERNEL_NET_CLS_U32
+	select ADK_LINUX_KERNEL_NET_CLS
+	depends on ADK_LINUX_KERNEL_NET_CLS_U32
 	default n
 	help
 	  Say Y here to make u32 gather additional statistics useful for
 	  fine tuning u32 classifiers.
 
-config ADK_KERNEL_NET_CLS_U32_MARK
+config ADK_LINUX_KERNEL_NET_CLS_U32_MARK
 	bool "Netfilter marks support"
-	select ADK_KERNEL_NET_CLS
-	depends on ADK_KERNEL_NET_CLS_U32
-	depends on ADK_KERNEL_NET_CLS_FW
+	select ADK_LINUX_KERNEL_NET_CLS
+	depends on ADK_LINUX_KERNEL_NET_CLS_U32
+	depends on ADK_LINUX_KERNEL_NET_CLS_FW
 	default n
 	help
 	  Say Y here to be able to use netfilter marks as u32 key.
 
 comment "Actions"
 
-config ADK_KERNEL_NET_CLS_ACT
+config ADK_LINUX_KERNEL_NET_CLS_ACT
 	bool
-	select ADK_KERNEL_NET_SCHED
-	select ADK_KERNEL_NET_ESTIMATOR
+	select ADK_LINUX_KERNEL_NET_SCHED
+	select ADK_LINUX_KERNEL_NET_ESTIMATOR
 	default n
 
-config ADK_KERNEL_NET_ACT_POLICE
+config ADK_LINUX_KERNEL_NET_ACT_POLICE
 	tristate "Traffic Policing"
-	select ADK_KERNEL_NET_CLS_ACT
+	select ADK_LINUX_KERNEL_NET_CLS_ACT
 	default n
 	help
 	  Say Y here if you want to do traffic policing, i.e. strict
 	  bandwidth limiting. This action replaces the existing policing
 	  module.
 
-config ADK_KERNEL_NET_ACT_GACT
+config ADK_LINUX_KERNEL_NET_ACT_GACT
 	tristate "Generic actions"
-	select ADK_KERNEL_NET_CLS_ACT
+	select ADK_LINUX_KERNEL_NET_CLS_ACT
 	default n
 	help
 	  Say Y here to take generic actions such as dropping and
 	  accepting packets.
 
-config ADK_KERNEL_NET_ACT_MIRRED
+config ADK_LINUX_KERNEL_NET_ACT_MIRRED
 	tristate "Redirecting and Mirroring"
-	select ADK_KERNEL_NET_CLS_ACT
+	select ADK_LINUX_KERNEL_NET_CLS_ACT
 	default n
 	help
 	  Say Y here to allow packets to be mirrored or redirected to
 	  other devices.
 
-config ADK_KERNEL_NET_ACT_IPT
+config ADK_LINUX_KERNEL_NET_ACT_IPT
 	tristate "IPtables targets"
-	select ADK_KERNEL_NET_CLS_ACT
-	select ADK_KERNEL_IP_NF_IPTABLES
+	select ADK_LINUX_KERNEL_NET_CLS_ACT
+	select ADK_LINUX_KERNEL_IP_NF_IPTABLES
 	default n
 	help
 	  Say Y here to be able to invoke iptables targets after successful
 	  classification.
 
-config ADK_KERNEL_NET_ACT_PEDIT
+config ADK_LINUX_KERNEL_NET_ACT_PEDIT
 	tristate "Packet Editing"
-	select ADK_KERNEL_NET_CLS_ACT
+	select ADK_LINUX_KERNEL_NET_CLS_ACT
 	default n
 	help
 	  Say Y here if you want to mangle the content of packets.

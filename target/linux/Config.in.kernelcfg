@@ -1,0 +1,51 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice 
+prompt "Kernel configuration" if !ADK_TARGET_CHOOSE_ARCH
+depends on ADK_TARGET_OS_LINUX
+default ADK_TARGET_LINUX_KERNEL_USE_DEFCONFIG if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK && ADK_TARGET_LINUX_KERNEL_VERSION_GIT
+default ADK_TARGET_LINUX_KERNEL_USE_DEFCONFIG if ADK_TARGET_SYSTEM_PHYTEC_WEGA && ADK_TARGET_LINUX_KERNEL_VERSION_GIT
+default ADK_TARGET_LINUX_KERNEL_USE_DEFCONFIG if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG && ADK_TARGET_LINUX_KERNEL_VERSION_GIT
+
+config ADK_TARGET_LINUX_KERNEL_USE_MINICONFIG
+	bool "Use mini.config from OpenADK"
+
+config ADK_TARGET_LINUX_KERNEL_USE_DEFCONFIG
+	bool "Use defconfig from Linux kernel"
+
+config ADK_TARGET_LINUX_KERNEL_USE_CUSTOMCONFIG
+	bool "Use custom Linux kernel configuration file"
+
+endchoice
+
+config ADK_TARGET_LINUX_KERNEL_DEFCONFIG
+	string "Defconfig name"
+	depends on ADK_TARGET_LINUX_KERNEL_USE_DEFCONFIG
+	default "bcmrpi_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI
+	default "bcmrpi_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI0
+	default "bcm2709_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI2
+	default "bcm2709_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI3
+	default "bcmrpi3_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI3_64
+	default "twr-k70f120m_defconfig" if ADK_TARGET_SYSTEM_KINETIS_K70
+	default "imx_v7_cbi_hb_defconfig" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6 && ADK_TARGET_LINUX_KERNEL_VERSION_GIT
+	default "imx_v6_v7_defconfig" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
+	default "mvebu_defconfig" if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
+	default "nsim_700_defconfig" if ADK_TARGET_SYSTEM_NSIM_ARCV1
+	default "nsim_hs_defconfig" if ADK_TARGET_SYSTEM_NSIM_ARCV2
+	default "10m50_defconfig" if ADK_TARGET_SYSTEM_QEMU_NIOS2
+	default "ag101p_defconfig" if ADK_TARGET_SYSTEM_ANDES_AG101P
+	default "bb.org_defconfig" if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
+	default "am335x_phytec_defconfig" if ADK_TARGET_SYSTEM_PHYTEC_WEGA
+	default "j2_defconfig" if ADK_TARGET_SYSTEM_NUMATO_MIMASV2
+	default "sunxi_defconfig" if ADK_TARGET_SYSTEM_ORANGE_PI0
+	default "edosk2674_defconfig" if ADK_TARGET_SYSTEM_HITACHI_EDOSK2674
+	default "x86_64_defconfig" if ADK_TARGET_SYSTEM_GENERIC_X86_64
+	default "i386_defconfig" if ADK_TARGET_SYSTEM_GENERIC_X86
+	default ""
+
+config ADK_TARGET_LINUX_KERNEL_CUSTOMCONFIG_PATH
+	string "Kernel configuration file location"
+	depends on ADK_TARGET_LINUX_KERNEL_USE_CUSTOMCONFIG
+	default ".kernelconfig"
+

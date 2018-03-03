@@ -3,7 +3,7 @@
 
 choice
 prompt "Binary Format"
-depends on ADK_TARGET_OS_LINUX
+depends on ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX
 
 config ADK_TARGET_BINFMT_ELF
 	bool "ELF"

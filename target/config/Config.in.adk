@@ -39,7 +39,7 @@ config ADK_BUILD_WITH_DEBUG
 	default n
 	help
 	  If you want to create debug packages, you should enable this option.
-	  WARNING: It will use a lot of additional disk space on you build system!
+	  WARNING: It will use a lot of additional disk space on your build system!
 
 config ADK_DISABLE_CHECKSUM
 	bool "Disable checksum check for downloads globally"

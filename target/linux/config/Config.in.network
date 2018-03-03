@@ -5,41 +5,41 @@ menu "Network support"
 depends on ADK_TARGET_WITH_NET \
 	|| ADK_TARGET_GENERIC
 
-config ADK_KERNEL_NETDEVICES
+config ADK_LINUX_KERNEL_NETDEVICES
 	bool
 
-config ADK_KERNEL_ETHERNET
+config ADK_LINUX_KERNEL_ETHERNET
 	bool
 
-config ADK_KERNEL_NET
+config ADK_LINUX_KERNEL_NET
 	bool
 
-config ADK_KERNEL_PACKET
+config ADK_LINUX_KERNEL_PACKET
 	bool
 
-config ADK_KERNEL_UNIX
+config ADK_LINUX_KERNEL_UNIX
 	bool
 
-config ADK_KERNEL_NET_CORE
+config ADK_LINUX_KERNEL_NET_CORE
 	bool
 
-config ADK_KERNEL_INET
+config ADK_LINUX_KERNEL_INET
 	bool "Enable TCP/IP support"
-	select ADK_KERNEL_NET
-	select ADK_KERNEL_UNIX
-	select ADK_KERNEL_PACKET
-	select ADK_KERNEL_NET_CORE
-	select ADK_KERNEL_NETDEVICES
-	select ADK_KERNEL_ETHERNET
-	select ADK_KERNEL_CRYPTO
-	select ADK_KERNEL_CRYPTO_AES
+	select ADK_LINUX_KERNEL_NET
+	select ADK_LINUX_KERNEL_UNIX
+	select ADK_LINUX_KERNEL_PACKET
+	select ADK_LINUX_KERNEL_NET_CORE
+	select ADK_LINUX_KERNEL_NETDEVICES
+	select ADK_LINUX_KERNEL_ETHERNET
+	select ADK_LINUX_KERNEL_CRYPTO
+	select ADK_LINUX_KERNEL_CRYPTO_AES
 	default y
 
-config ADK_KERNEL_IP_FIB_HASH
+config ADK_LINUX_KERNEL_IP_FIB_HASH
 	bool
 	default y
 
-config ADK_KERNEL_IPV6
+config ADK_LINUX_KERNEL_IPV6
 	tristate "Enable IPv6 support"
 	select BUSYBOX_FEATURE_IPV6
 	help
@@ -52,10 +52,10 @@ config ADK_KERNEL_IPV6
 	  For specific information about IPv6 under Linux, read the HOWTO at
 	  <http://www.bieringer.de/linux/IPv6/>.
 
-config ADK_KERNEL_IPV6_SIT
+config ADK_LINUX_KERNEL_IPV6_SIT
 	tristate "IPv6-in-IPv4 tunnel (SIT driver)"
-	select ADK_KERNEL_INET_TUNNEL
-	select ADK_KERNEL_NET_IP_TUNNEL
+	select ADK_LINUX_KERNEL_INET_TUNNEL
+	select ADK_LINUX_KERNEL_NET_IP_TUNNEL
 	help
 	  Tunneling means encapsulating data of one protocol type within
 	  another protocol and sending it over a channel that understands the
@@ -63,40 +63,40 @@ config ADK_KERNEL_IPV6_SIT
 	  into IPv4 packets. This is useful if you want to connect two IPv6
 	  networks over an IPv4-only path.
 
-config ADK_KERNEL_SYN_COOKIES
+config ADK_LINUX_KERNEL_SYN_COOKIES
 	bool "TCP syncookie support"
 
-config ADK_KERNEL_IP_PNP_BOOTP
+config ADK_LINUX_KERNEL_IP_PNP_BOOTP
 	bool
 
-config ADK_KERNEL_IP_PNP_RARP
+config ADK_LINUX_KERNEL_IP_PNP_RARP
 	bool
 
-config ADK_KERNEL_NET_IPGRE_BROADCAST
+config ADK_LINUX_KERNEL_NET_IPGRE_BROADCAST
 	bool
 
-config ADK_KERNEL_NET_IPGRE_DEMUX
+config ADK_LINUX_KERNEL_NET_IPGRE_DEMUX
 	bool
 
-config ADK_KERNEL_PPP_ASYNC
+config ADK_LINUX_KERNEL_PPP_ASYNC
 	bool
 
-config ADK_KERNEL_SLHC
+config ADK_LINUX_KERNEL_SLHC
 	bool
 
-config ADK_KERNEL_IMQ
+config ADK_LINUX_KERNEL_IMQ
 	tristate
 
-config ADK_KERNEL_LLC
+config ADK_LINUX_KERNEL_LLC
 	tristate
 
-config ADK_KERNEL_IP_MULTICAST
+config ADK_LINUX_KERNEL_IP_MULTICAST
 	bool "Enable IP Multicasting"
 
-config ADK_KERNEL_IP_MROUTE
+config ADK_LINUX_KERNEL_IP_MROUTE
 	bool "Enable IP Multicasting Routing"
 
-config ADK_KERNEL_ATM
+config ADK_LINUX_KERNEL_ATM
 	tristate "Asynchronous Transfer Mode (ATM)"
 	help
 	 ATM is a high-speed networking technology for Local Area Networks
@@ -112,13 +112,13 @@ config ADK_KERNEL_ATM
 	 of ATM.  See the file <file:Documentation/networking/atm.txt> for
 	 further details.
 
-config ADK_KERNEL_ATM_BR2684
+config ADK_LINUX_KERNEL_ATM_BR2684
 	tristate "BR2684 ATM module"
-	select ADK_KERNEL_ATM
+	select ADK_LINUX_KERNEL_ATM
 
-config ADK_KERNEL_BRIDGE
+config ADK_LINUX_KERNEL_BRIDGE
 	tristate "802.1d Ethernet Bridging"
-	select ADK_KERNEL_LLC
+	select ADK_LINUX_KERNEL_LLC
 	help
 	  If you say Y here, then your Linux box will be able to act as an
 	  Ethernet bridge, which means that the different Ethernet segments it
@@ -140,7 +140,7 @@ config ADK_KERNEL_BRIDGE
 	  Enabling arptables support when bridging will let arptables see
 	  bridged ARP traffic in the arptables FORWARD chain.
 
-config ADK_KERNEL_VLAN_8021Q
+config ADK_LINUX_KERNEL_VLAN_8021Q
 	tristate "802.1q VLAN support"
 	help
           Select this and you will be able to create 802.1Q VLAN interfaces
@@ -151,17 +151,17 @@ config ADK_KERNEL_VLAN_8021Q
           use VLANs.  See the VLAN web page for more information:
           <http://www.candelatech.com/~greear/vlan.html>
 
-config ADK_KERNEL_INET_TUNNEL
+config ADK_LINUX_KERNEL_INET_TUNNEL
 	tristate
 
-config ADK_KERNEL_NET_IP_TUNNEL
+config ADK_LINUX_KERNEL_NET_IP_TUNNEL
 	tristate
 	default n
 
-config ADK_KERNEL_NET_IPIP
+config ADK_LINUX_KERNEL_NET_IPIP
 	tristate "IP in IP encapsulation support"
-	select ADK_KERNEL_INET_TUNNEL
-	select ADK_KERNEL_NET_IP_TUNNEL
+	select ADK_LINUX_KERNEL_INET_TUNNEL
+	select ADK_LINUX_KERNEL_NET_IP_TUNNEL
 	help
 	  Tunneling means encapsulating data of one protocol type within
 	  another protocol and sending it over a channel that understands the
@@ -172,11 +172,11 @@ config ADK_KERNEL_NET_IPIP
 	  mobile-IP facilities (allowing laptops to seamlessly move between
 	  networks without changing their IP addresses).
 
-config ADK_KERNEL_NET_IPGRE
+config ADK_LINUX_KERNEL_NET_IPGRE
 	tristate "GRE tunnels over IP"
-	select ADK_KERNEL_NET_IPGRE_BROADCAST
-	select ADK_KERNEL_NET_IPGRE_DEMUX
-	select ADK_KERNEL_NET_IP_TUNNEL
+	select ADK_LINUX_KERNEL_NET_IPGRE_BROADCAST
+	select ADK_LINUX_KERNEL_NET_IPGRE_DEMUX
+	select ADK_LINUX_KERNEL_NET_IP_TUNNEL
 	help
 	  Tunneling means encapsulating data of one protocol type within
 	  another protocol and sending it over a channel that understands the
@@ -188,11 +188,11 @@ config ADK_KERNEL_NET_IPGRE
 	  tunneling" above). In addition, GRE allows multicast redistribution
 	  through the tunnel.
 
-config ADK_KERNEL_PPP
+config ADK_LINUX_KERNEL_PPP
 	tristate "PPP support"
-	select ADK_KERNEL_PPP_ASYNC
-	select ADK_KERNEL_SLHC
-	select ADK_KERNEL_CRC_CCITT
+	select ADK_LINUX_KERNEL_PPP_ASYNC
+	select ADK_LINUX_KERNEL_SLHC
+	select ADK_LINUX_KERNEL_CRC_CCITT
 	help
 	  PPP (Point to Point Protocol) is a newer and better SLIP.  It serves
 	  the same purpose: sending Internet traffic over telephone (and other
@@ -215,13 +215,13 @@ config ADK_KERNEL_PPP
 	  synchronous lines, you should say Y (or M) here and to "Support
 	  synchronous PPP", below.
 
-config ADK_KERNEL_PPP_MPPE
+config ADK_LINUX_KERNEL_PPP_MPPE
 	tristate "PPP MPPE/MPPC module"
-	depends on ADK_KERNEL_PPP
-	select ADK_KERNEL_CRYPTO
-	select ADK_KERNEL_CRYPTO_ARC4
-	select ADK_KERNEL_CRYPTO_SHA1
-	select ADK_KERNEL_CRYPTO_ECB
+	depends on ADK_LINUX_KERNEL_PPP
+	select ADK_LINUX_KERNEL_CRYPTO
+	select ADK_LINUX_KERNEL_CRYPTO_ARC4
+	select ADK_LINUX_KERNEL_CRYPTO_SHA1
+	select ADK_LINUX_KERNEL_CRYPTO_ECB
 	help
          Support for the MPPE Encryption protocol, as employed by the
 	 Microsoft Point-to-Point Tunneling Protocol.
@@ -229,25 +229,25 @@ config ADK_KERNEL_PPP_MPPE
 	 See http://pptpclient.sourceforge.net/ for information on
 	 configuring PPTP clients and servers to utilize this method.
 
-config ADK_KERNEL_PPPOATM
+config ADK_LINUX_KERNEL_PPPOATM
 	tristate "PPPoA (PPP over ATM) kernel support"
-	depends on ADK_KERNEL_PPP
-	select ADK_KERNEL_ATM
+	depends on ADK_LINUX_KERNEL_PPP
+	select ADK_LINUX_KERNEL_ATM
 	help
 	  Support for PPP over ATM
 
-config ADK_KERNEL_PPPOE
+config ADK_LINUX_KERNEL_PPPOE
 	tristate "PPPoE (PPP over Ethernet) kernel support"
-	depends on ADK_KERNEL_PPP
+	depends on ADK_LINUX_KERNEL_PPP
 	help
 	  Support for PPP over Ethernet
 
-config ADK_KERNEL_TUN
+config ADK_LINUX_KERNEL_TUN
 	tristate "Universal TUN/TAP driver"
 	help
 	  Kernel support for the TUN/TAP tunneling device
 
-config ADK_KERNEL_BONDING
+config ADK_LINUX_KERNEL_BONDING
 	tristate "Bonding driver support"
 	help
   	  Say 'Y' or 'M' if you wish to be able to 'bond' multiple Ethernet
@@ -260,9 +260,9 @@ config ADK_KERNEL_BONDING
 	  Refer to <file:Documentation/networking/bonding.txt> for more
 	  information.
 
-#config ADK_KERNEL_MPTCP
+#config ADK_LINUX_KERNEL_MPTCP
 #	bool "Multipath TCP support"
-#	select ADK_KERNEL_IPV6
+#	select ADK_LINUX_KERNEL_IPV6
 #	depends on ADK_TARGET_KERNEL_VERSION_3_14
 #	help
 #	  http://www.multipath-tcp.org

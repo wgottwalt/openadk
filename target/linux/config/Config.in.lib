@@ -3,7 +3,7 @@
 
 menu "Kernel Library Routines"
 
-config ADK_KERNEL_CRC_ITU_T
+config ADK_LINUX_KERNEL_CRC_ITU_T
 	tristate "CRC ITU-T V.41 functions"
 	default n
 	help
@@ -12,17 +12,17 @@ config ADK_KERNEL_CRC_ITU_T
 	  the kernel tree does. Such modules that use library CRC ITU-T V.41
 	  functions require M here.
 
-config ADK_KERNEL_CRC16
+config ADK_LINUX_KERNEL_CRC16
 	tristate "CRC16 library functions"
 	default n
 	help
 
-config ADK_KERNEL_CRC32
+config ADK_LINUX_KERNEL_CRC32
 	bool "CRC32 library functions"
 	default n
 	help
 
-config ADK_KERNEL_LIBCRC32C
+config ADK_LINUX_KERNEL_LIBCRC32C
 	tristate "CRC32c Cyclic Redundancy-Check"
 	default n
 	help
@@ -31,23 +31,23 @@ config ADK_KERNEL_LIBCRC32C
 	  kernel tree does. Such modules that use library CRC32c functions
 	  require M here.  See Castagnoli93.
 
-config ADK_KERNEL_CRC_CCITT
+config ADK_LINUX_KERNEL_CRC_CCITT
 	tristate "CRC-CCITT library functions"
 	default n
 	help
 	  This module provides CRC-CCITT library functions for kernel 
 	  modules built outside the kernel.
 
-config ADK_KERNEL_ZLIB_DEFLATE
+config ADK_LINUX_KERNEL_ZLIB_DEFLATE
 	tristate
 
-config ADK_KERNEL_ZLIB_INFLATE
+config ADK_LINUX_KERNEL_ZLIB_INFLATE
 	tristate
 
-config ADK_KERNEL_LZO_COMPRESS
+config ADK_LINUX_KERNEL_LZO_COMPRESS
 	tristate
 
-config ADK_KERNEL_LZO_DECOMPRESS
+config ADK_LINUX_KERNEL_LZO_DECOMPRESS
 	tristate
 
 endmenu

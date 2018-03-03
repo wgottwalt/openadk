@@ -3,11 +3,11 @@
 
 menu "Partition Types"
 
-config ADK_KERNEL_PARTITION_ADVANCED
+config ADK_LINUX_KERNEL_PARTITION_ADVANCED
 	bool
 	default y
 
-config ADK_KERNEL_MSDOS_PARTITION
+config ADK_LINUX_KERNEL_MSDOS_PARTITION
 	bool "MSDOS partitions"
 	default y
 
