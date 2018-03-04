@@ -11,7 +11,7 @@ PKG_DESCR:=		partition table editor
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libblkid libuuid libncurses
 PKG_BUILDDEP:=		util-linux ncurses
-PKG_NEEDS:=		threads
+PKG_NEEDS:=		threads iconv
 PKG_URL:=		http://www.gnu.org/software/parted/index.shtml
 PKG_SITES:=		$(MASTER_SITE_GNU:=parted/)
 
