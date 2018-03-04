@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.31
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		f9be7cdcf4fc5c5064a226599acdda6bdf3d86c640152ba01ea642d91108dc8a
 PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
@@ -75,6 +75,8 @@ CONFIGURE_ARGS+=	--exec-prefix=/usr \
 			--with-pic \
 			--with-ncurses \
 			--without-ncursesw \
+			--disable-makeinstall-chown \
+			--disable-makeinstall-setuid \
 			--disable-widechar \
 			--disable-use-tty-group \
 			--disable-chfn-chsh \
