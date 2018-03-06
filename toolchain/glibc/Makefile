@@ -19,14 +19,8 @@ GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--disable-sanity-checks \
 			--disable-nls \
 			--disable-werror \
-			--without-cvs \
-			--disable-profile \
-			--without-gd \
 			--disable-nscd \
-			--with-__thread \
-			--with-tls \
-			--enable-shared \
-			--enable-kernel="2.6.32"
+			--enable-shared
 
 ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 GLIBC_CONFOPTS+=	--enable-static-nss
@@ -40,8 +34,6 @@ GLIBC_ENV:=             PATH='${TARGET_PATH}' \
                         CXX="${TARGET_CXX}" \
                         AR="${TARGET_AR}" \
                         RANLIB="${TARGET_RANLIB}" \
-                        libc_cv_forced_unwind=yes \
-                        libc_cv_c_cleanup=yes \
                         libc_cv_gnu99_inline=yes \
 			libc_cv_initfini_array=yes
 
