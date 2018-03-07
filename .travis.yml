@@ -31,4 +31,4 @@ matrix:
   - env: ARCH=x86_64 SYSTEM=pcengines-apu
   - env: ARCH=x86_64 SYSTEM=asus-p5bvm
   - env: ARCH=xtensa SYSTEM=xilinx-kintex7
-script: travis_wait 120 ./scripts/travis.sh $ARCH $SYSTEM $ENDIAN
+script: travis_wait 120 ./scripts/travis.sh waldux $ARCH $SYSTEM $ENDIAN
