@@ -1,3 +1,16 @@
+diff -Nur linux-4.14.24.orig/init/initramfs.c linux-4.14.24/init/initramfs.c
+--- linux-4.14.24.orig/init/initramfs.c	2018-03-03 10:24:39.000000000 +0100
++++ linux-4.14.24/init/initramfs.c	2018-03-08 06:51:14.808479805 +0100
+@@ -659,6 +659,9 @@
+ 	 * us a chance to load before device_initcalls.
+ 	 */
+ 	load_default_modules();
++#ifdef CONFIG_DEVTMPFS_MOUNT
++	devtmpfs_mount("dev");
++#endif
+ 
+ 	return 0;
+ }
 diff -Nur linux-4.14.24.orig/init/main.c linux-4.14.24/init/main.c
 --- linux-4.14.24.orig/init/main.c	2018-03-03 10:24:39.000000000 +0100
 +++ linux-4.14.24/init/main.c	2018-03-08 06:15:19.961419100 +0100
