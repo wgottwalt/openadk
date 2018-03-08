@@ -57,7 +57,7 @@ GCC_CONFOPTS:=		--prefix=$(TOOLCHAIN_DIR)/usr \
 			--disable-werror \
 			--disable-nls
 
-ifeq ($(ADK_TARGET_OS_LINUX),y)
+ifeq ($(ADK_TARGET_OS_LINUX)$(ADK_TARGET_OS_WALDUX),y)
 ifeq ($(ADK_TARGET_LIB_UCLIBC_NG),y)
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
 GCC_FINAL_CONFOPTS:=	--enable-tls --enable-threads --enable-libatomic
