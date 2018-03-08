@@ -1,0 +1,21 @@
+diff -Nur linux-4.14.24.orig/init/main.c linux-4.14.24/init/main.c
+--- linux-4.14.24.orig/init/main.c	2018-03-03 10:24:39.000000000 +0100
++++ linux-4.14.24/init/main.c	2018-03-08 06:15:19.961419100 +0100
+@@ -1069,6 +1069,8 @@
+ 	if (sys_open((const char __user *) "/dev/console", O_RDWR, 0) < 0)
+ 		pr_err("Warning: unable to open an initial console.\n");
+ 
++	printk(KERN_WARNING "Starting Linux (built with OpenADK).\n");
++
+ 	(void) sys_dup(0);
+ 	(void) sys_dup(0);
+ 	/*
+@@ -1077,7 +1079,7 @@
+ 	 */
+ 
+ 	if (!ramdisk_execute_command)
+-		ramdisk_execute_command = "/init";
++		ramdisk_execute_command = "/sbin/init";
+ 
+ 	if (sys_access((const char __user *) ramdisk_execute_command, 0) != 0) {
+ 		ramdisk_execute_command = NULL;
