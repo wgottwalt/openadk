@@ -16,7 +16,7 @@ PKG_CFLINE_MISDN:=	depends on ADK_BROKEN
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
 
-include $(ADK_TOPDIR)/mk/kernel-ver.mk
+include $(ADK_TOPDIR)/mk/$(ADK_TARGET_OS)-ver.mk
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,MISDN,misdn,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))

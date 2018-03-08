@@ -20,7 +20,7 @@ PKG_SITES:=		https://github.com/draios/sysdig.git
 PKG_SYSTEM_DEPENDS:=	!mikrotik-rb532
 
 include $(ADK_TOPDIR)/mk/package.mk
-include ${ADK_TOPDIR}/mk/kernel-ver.mk
+include $(ADK_TOPDIR)/mk/$(ADK_TARGET_OS)-ver.mk
 
 $(eval $(call PKG_template,SYSDIG,sysdig,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPENDS),$(PKG_DESCR),$(PKG_SECTION)))
 

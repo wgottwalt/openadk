@@ -16,7 +16,7 @@ PKG_URL:=		http://home.gna.org/cryptodev-linux/
 PKG_SITES:=		https://github.com/cryptodev-linux/cryptodev-linux.git
 
 include $(ADK_TOPDIR)/mk/package.mk
-include ${ADK_TOPDIR}/mk/kernel-ver.mk
+include $(ADK_TOPDIR)/mk/$(ADK_TARGET_OS)-ver.mk
 include ${ADK_TOPDIR}/mk/kernel-vars.mk
 
 $(eval $(call PKG_template,CRYPTODEV_LINUX,cryptodev-linux,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
