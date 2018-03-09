@@ -16,8 +16,13 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,LIBGMP,libgmp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
+ifeq ($(ADK_TARGET_CPU_MIPS_MIPS32R6)$(ADK_TARGET_CPU_MIPS_MIPS64R6),y)
+CONFIGURE_ARGS+=	--disable-assembly
+endif
+
 libgmp-install:
 	${INSTALL_DIR} ${IDIR_LIBGMP}/usr/lib
-	${CP} ${WRKINST}/usr/lib/libgmp.so* ${IDIR_LIBGMP}/usr/lib
+	${CP} ${WRKINST}/usr/lib/libgmp.so* \
+		${IDIR_LIBGMP}/usr/lib
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
