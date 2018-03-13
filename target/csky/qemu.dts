@@ -82,6 +82,6 @@
 	};
 
 	chosen {
-		bootargs = "console=ttyS0,115200 rdinit=/sbin/init root=/dev/ram0";
+		bootargs = "console=ttyS0,115200";
 	};
 };

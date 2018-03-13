@@ -1,0 +1,12 @@
+diff -Nur gcc-gcc-6-branch-csky.orig/gcc/ubsan.c gcc-gcc-6-branch-csky/gcc/ubsan.c
+--- gcc-gcc-6-branch-csky.orig/gcc/ubsan.c	2018-03-10 14:10:55.000000000 +0100
++++ gcc-gcc-6-branch-csky/gcc/ubsan.c	2018-03-10 21:16:06.358370414 +0100
+@@ -1471,7 +1471,7 @@
+ 
+   expanded_location xloc = expand_location (loc);
+   if (xloc.file == NULL || strncmp (xloc.file, "\1", 2) == 0
+-      || xloc.file == '\0' || xloc.file[0] == '\xff'
++      || xloc.file[0] == '\0' || xloc.file[0] == '\xff'
+       || xloc.file[1] == '\xff')
+     return false;
+ 
