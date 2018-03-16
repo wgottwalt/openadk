@@ -299,7 +299,7 @@ clean:
 
 cleankernel:
 	@printf " --->  cleaning kernel build directories.. "
-	@rm -rf $(TOOLCHAIN_BUILD_DIR)/w-linux* $(BUILD_DIR)/linux
+	@rm -rf $(TOOLCHAIN_BUILD_DIR)/w-$(ADK_TARGET_OS)* $(BUILD_DIR)/$(ADK_TARGET_OS)
 	@printf "done\n"
 
 cleandir:
