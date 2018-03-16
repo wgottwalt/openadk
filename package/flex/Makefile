@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		flex
-PKG_VERSION:=		2.6.2
+PKG_VERSION:=		2.6.4
 PKG_RELEASE:=		1
-PKG_HASH:=		9a01437a1155c799b7dc2508620564ef806ba66250c36bf5f9034b1c207cb2c9
+PKG_HASH:=		e87aae032bf07c26f85ac0ed3250998c37621d95f8bd748b31f15b33c45ee995
 PKG_DESCR:=		fast lexical analyzer
 PKG_SECTION:=		dev/tools
 PKG_BUILDDEP:=		m4-host
@@ -27,7 +27,6 @@ AUTOTOOL_STYLE:=	autoreconf
 HOST_MAKE_FLAGS+=	STAGE1FLEX=$(WRKSRC)/src/stage1flex 
 MAKE_FLAGS+=		STAGE1FLEX=$(STAGING_HOST_DIR)/usr/bin/stage1flex
 CONFIGURE_ENV+=		ac_cv_path_HELP2MAN=true
-CONFIGURE_ARGS+=	--disable-shared
 
 hostpost-install:
 	(cd $(STAGING_HOST_DIR)/usr/bin; ln -sf flex lex)

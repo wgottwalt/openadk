@@ -1,11 +1,11 @@
---- flex-2.6.2.orig/configure.ac	2016-10-25 00:13:14.000000000 +0200
-+++ flex-2.6.2/configure.ac	2016-11-01 14:32:44.985688700 +0100
+--- flex-2.6.4.orig/configure.ac	2017-05-03 21:16:37.000000000 +0100
++++ flex-2.6.4/configure.ac	2018-03-14 05:11:52.278756139 +0100
 @@ -37,8 +37,6 @@ AC_SUBST(SHARED_VERSION_INFO)
  
  # checks for programs
  
 -AM_GNU_GETTEXT([external])
--AM_GNU_GETTEXT_VERSION([0.19])
+-AM_GNU_GETTEXT_VERSION([0.18])
  AC_PROG_YACC
- AM_PROG_LEX
- AC_PROG_CC
+ AS_IF([test "$YACC" != 'bison -y'], [
+ 	YACC="\${top_srcdir}/build-aux/missing bison -y"

@@ -1,21 +1,20 @@
-diff -Naur flex-2.6.2.orig/src/Makefile.am flex-2.6.2/src/Makefile.am
---- flex-2.6.2.orig/src/Makefile.am	2016-11-17 10:01:21.562334589 +0100
-+++ flex-2.6.2/src/Makefile.am	2016-11-17 09:21:48.766889968 +0100
-@@ -54,7 +54,7 @@
+--- flex-2.6.4.orig/src/Makefile.am	2017-05-03 21:16:37.000000000 +0100
++++ flex-2.6.4/src/Makefile.am	2018-03-14 05:13:19.297668253 +0100
+@@ -77,7 +77,7 @@ COMMON_SOURCES = \
  	version.h \
  	yylex.c
  
--LDADD = ../lib/libcompat.la @LIBINTL@
-+LDADD = ../lib/libcompat.la
+-LDADD = $(LIBOBJS) @LIBINTL@
++LDADD = $(LIBOBJS)
  
- libfl_la_SOURCES = \
- 	libmain.c \
-@@ -90,7 +90,7 @@
- 	mv $@.tmp $@
+ include_HEADERS = \
+ 	FlexLexer.h
+@@ -97,7 +97,7 @@ skel.c: flex.skl mkskel.sh flexint.h tab
  
+ if ENABLE_BOOTSTRAP
  stage1scan.c: scan.l stage1flex$(EXEEXT)
--	./stage1flex$(EXEEXT) -o $@ $<
-+	$(STAGE1FLEX) -o $@ $<
- 
- # make needs to be told to make parse.h so that parallelized runs will
- # not fail.
+-	./stage1flex$(EXEEXT) $(AM_LFLAGS) $(LFLAGS) -o $@ $(srcdir)/scan.l
++	$(STAGE1FLEX) $(AM_LFLAGS) $(LFLAGS) -o $@ $(srcdir)/scan.l
+ else
+ stage1scan.c: scan.c
+ 	sed 's|^\(#line .*\)"'`printf %s $< | sed 's|[][\\\\.*]|\\\\&|g'`'"|\1"$@"|g' $< > $@
