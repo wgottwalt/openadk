@@ -418,19 +418,19 @@ EXTRACT_CMD=		PATH='${HOST_PATH}'; mkdir -p ${WRKDIR}; \
 			*.cpio) \
 				cat $$file | cpio -i -d ;; \
 			*.tar) \
-				tar -xf $$file ;; \
+				PATH='$(HOST_PATH)' tar -xf $$file ;; \
 			*.cpio.Z | *.cpio.gz | *.cgz | *.mcz) \
 				gzip -dc $$file | cpio -i -d ;; \
 			*.tar.xz | *.txz) \
-				xz -dc $$file | tar -xf - ;; \
+				xz -dc $$file | PATH='$(HOST_PATH)' tar -xf - ;; \
 			*.tar.Z | *.tar.gz | *.taz | *.tgz) \
-				gzip -dc $$file | tar -xf - ;; \
+				gzip -dc $$file | PATH='$(HOST_PATH)' tar -xf - ;; \
 			*.cpio.bz2 | *.cbz) \
 				bzip2 -dc $$file | cpio -i -d ;; \
 			*.tar.bz2 | *.tbz | *.tbz2) \
-				bzip2 -dc $$file | tar -xf - ;; \
+				bzip2 -dc $$file | PATH='$(HOST_PATH)' tar -xf - ;; \
 			*.tar.lz | *.tlz) \
-				lzip -dc $$file | tar -xf - ;; \
+				lzip -dc $$file | PATH='$(HOST_PATH)' tar -xf - ;; \
 			*.zip) \
 				unzip -d ${WRKDIR} $$file ;; \
 			*.arm|*.jar|*.ids.gz) \
