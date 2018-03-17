@@ -9,9 +9,9 @@ target="$@"
 flags="$MAKEFLAGS"
 out=0
 
-mirror=http://distfiles.openadk.org
-makever=4.1
-bashver=4.3.30
+mirror=https://distfiles.openadk.org
+makever=4.2.1
+bashver=4.4.18
 
 # detect operating system
 os=$(env uname)
