@@ -10,6 +10,7 @@ PKG_HASH:=		5a30dc4986158c6c2b1309f4a15a283d50cc938108a675e3d822e24debcd229d
 PKG_DESCR:=		netlink library
 PKG_SECTION:=		libs/net
 PKG_BUILDDEP:=		m4-host flex-host
+PKG_NEEDS:=		threads
 PKG_SITES:=		https://github.com/thom311/libnl/archive/
 PKG_NOPARALLEL:=	1
 PKG_OPTS:=		dev
