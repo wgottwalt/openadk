@@ -23,6 +23,7 @@ $(WRKBUILD)/.configured:
 	mkdir -p $(GDB_BUILD_DIR)
 	(cd $(GDB_BUILD_DIR); PATH='$(HOST_PATH)' \
 		gdb_cv_func_sigsetjmp=yes \
+		M4='${STAGING_HOST_DIR}/usr/bin/m4' \
 		$(WRKBUILD)/configure \
 		--prefix=$(STAGING_HOST_DIR) \
 		--build=$(GNU_HOST_NAME) \
