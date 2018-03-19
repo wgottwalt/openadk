@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		dropbear
-PKG_VERSION:=		2017.75
-PKG_RELEASE:=		2
-PKG_HASH:=		6cbc1dcb1c9709d226dff669e5604172a18cf5dbf9a201474d5618ae4465098c
+PKG_VERSION:=		2018.76
+PKG_RELEASE:=		1
+PKG_HASH:=		f2fb9167eca8cf93456a5fc1d4faf709902a3ab70dd44e352f3acbc3ffdaea65
 PKG_DESCR:=		ssh server/client designed for embedded systems
 PKG_SECTION:=		net/security
 PKG_URL:=		http://matt.ucc.asn.au/dropbear/
@@ -24,6 +24,8 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,DROPBEAR,dropbear,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 $(eval $(call PKG_template,DBCONVERT,dropbearconvert,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKGSD_DBCONVERT},${PKG_SECTION}))
+
+TARGET_CFLAGS+=		-fPIC
 
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
