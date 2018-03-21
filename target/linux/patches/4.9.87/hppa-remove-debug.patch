@@ -1,0 +1,12 @@
+diff -Nur linux-4.9.87.orig/arch/parisc/kernel/time.c linux-4.9.87/arch/parisc/kernel/time.c
+--- linux-4.9.87.orig/arch/parisc/kernel/time.c	2018-03-11 16:21:35.000000000 +0100
++++ linux-4.9.87/arch/parisc/kernel/time.c	2018-03-19 04:39:08.621922476 +0100
+@@ -124,7 +124,7 @@
+ 	if (next_tick - now2 > cpt)
+ 		mtctl(next_tick+cpt, 16);
+ 
+-#if 1
++#if 0
+ /*
+  * GGG: DEBUG code for how many cycles programming CR16 used.
+  */
