@@ -223,6 +223,10 @@ GCC_CONFOPTS+=		--without-long-double-128 --with-abi=elfv2
 endif
 endif
 
+ifeq ($(ADK_TARGET_ARCH_S390),y)
+GCC_CONFOPTS+=		--with-long-double-128
+endif
+
 ifneq ($(ADK_TARGET_ABI_MIPS64),)
 GCC_CONFOPTS+=		--with-abi=${ADK_TARGET_ABI_MIPS64}
 endif
