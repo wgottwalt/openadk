@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		libtirpc
-PKG_VERSION:=		1.0.2
+PKG_VERSION:=		1.0.3
 PKG_RELEASE:=		1
-PKG_HASH:=		723c5ce92706cbb601a8db09110df1b4b69391643158f20ff587e20e7c5f90f5
+PKG_HASH:=		86c3a78fc1bddefa96111dd233124c703b22a78884203c55c3e06b3be6a0fd5e
 PKG_DESCR:=		transport independent rpc library
 PKG_SECTION:=		libs/net
 PKG_URL:=		http://sourceforge.net/projects/libtirpc/
