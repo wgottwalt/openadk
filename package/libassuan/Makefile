@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libassuan
-PKG_VERSION:=		2.4.3
+PKG_VERSION:=		2.5.1
 PKG_RELEASE:=		1
-PKG_HASH:=		22843a3bdb256f59be49842abf24da76700354293a066d82ade8134bb5aa2b71
+PKG_HASH:=		47f96c37b4f2aac289f0bc1bacfa8bd8b4b209a488d3d15e2229cb6cc9b26449
 PKG_DESCR:=		implementation of assuan protocol
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgpg-error
