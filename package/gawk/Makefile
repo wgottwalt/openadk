@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gawk
-PKG_VERSION:=		4.1.3
+PKG_VERSION:=		4.2.1
 PKG_RELEASE:=		1
-PKG_HASH:=		e3cf55e91e31ea2845f8338bedd91e40671fc30e4d82ea147d220e687abda625
+PKG_HASH:=		d1119785e746d46a8209d28b2de404a57f983aa48670f4e225531d3bdc175551
 PKG_DESCR:=		awk programming language interpreter
 PKG_SECTION:=		base/tools
 PKG_URL:=		http://www.gnu.org/software/gawk/
