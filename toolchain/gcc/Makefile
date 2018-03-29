@@ -77,6 +77,10 @@ GCC_TLS_CONFOPTS:=	--enable-tls
 endif
 endif
 
+ifeq ($(ADK_TARGET_OS_BAREMETAL),y)
+GCC_FINAL_CONFOPTS:=	--disable-libatomic
+endif
+
 ifeq ($(ADK_TARGET_OS_RTEMS),y)
 GCC_FINAL_CONFOPTS:=	--enable-libatomic
 endif
