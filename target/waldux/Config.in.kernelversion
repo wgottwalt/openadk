@@ -25,7 +25,7 @@ config ADK_TARGET_WALDUX_KERNEL_GIT
 config ADK_TARGET_WALDUX_KERNEL_GIT_VER
 	string "kernel version"
 	depends on ADK_TARGET_WALDUX_KERNEL_VERSION_GIT
-	default "4.9.91"
+	default "4.9.92"
 
 config ADK_TARGET_WALDUX_KERNEL_GIT_TYPE
 	string
