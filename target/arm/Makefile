@@ -33,11 +33,7 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_REALVIEW_EB_MPCORE),y)
 QEMU_ARGS+=-M realview-eb-mpcore -net user -net nic
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB)$(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB_NOMMU),y)
-ifeq ($(ADK_TARGET_WITH_DEVICETREE),y)
 QEMU_ARGS+=-M versatilepb -net user -net nic,model=smc91c111 -dtb $(FW_DIR)/versatile-pb.dtb
-else
-QEMU_ARGS+=-M versatilepb -net user -net nic,model=smc91c111
-endif
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
 QEMU_ARGS+=-M vexpress-a9 -cpu cortex-a9 -m 256 -net user -net nic,model=lan9118 -dtb $(FW_DIR)/vexpress-v2p-ca9.dtb
@@ -168,7 +164,6 @@ ifeq ($(ADK_TARGET_FS),squashfs)
 endif
 
 dtb-install:
-ifeq ($(ADK_TARGET_WITH_DEVICETREE),y)
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_XILINX_ZYNQ),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		dtbs $(MAKE_TRACE)
@@ -179,7 +174,7 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB)$(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB_NOMMU),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
-		dtbs $(MAKE_TRACE)
+		versatile-pb.dtb $(MAKE_TRACE)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_WEGA),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
@@ -224,7 +219,6 @@ endif
 		[[ -e "$$x" ]] && cp $(LINUX_DIR)/arch/arm/boot/dts/*.dtb $(FW_DIR); \
 		break; \
 	done
-endif
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
