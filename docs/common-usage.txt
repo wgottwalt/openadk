@@ -67,13 +67,20 @@ Environment variables
 ~~~~~~~~~~~~~~~~~~~~~
 
 OpenADK also honors some environment variables, when they are passed
-to +make+.
+to +make+. The most useful and common ones are:
 
 * +ADK_APPLIANCE+, the appliance task you want to build
 * +ADK_CUSTOM_TASKS_DIR+, extra directory to fetch tasks from
+* +ADK_TARGET_OS+, the operating system of the target system
 * +ADK_TARGET_ARCH+, the architecture of the target system
+* +ADK_TARGET_CPU+, the specific CPU optimization for the target system (f.e. cortex-a53)
 * +ADK_TARGET_SYSTEM+, the embedded target system name
 * +ADK_TARGET_LIBC+, the C library for the target system
+* +ADK_TARGET_ABI+, the ABI for the target system (f.e. MIPS N64)
+* +ADK_TARGET_ENDIAN+, the endianess for the target system (little/big)
+* +ADK_TARGET_BINFMT+, the binary format for the target system (f.e. ELF/FLAT/FDPIC)
+* +ADK_TARGET_FLOAT+, the float support for the target system (f.e. soft/softfp/hard)
+* +ADK_TARGET_FS+, the firmware type or root filesystem for the target system
 * +ADK_VERBOSE+, verbose build, when set to 1
 
 
