@@ -29,15 +29,25 @@ kernel-strip:
 	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
 kernel-install: kernel-strip
-	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+	 @cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
+
+bbl:
+	@mkdir -p $(BUILD_DIR)/bbl
+	@rm -rf $(BUILD_DIR)/riscv-pk
+	(cd $(BUILD_DIR)/ && git clone https://github.com/riscv/riscv-pk.git)
+	(cd $(BUILD_DIR)/bbl && PATH='$(HOST_PATH)' ../riscv-pk/configure \
+		--host=$(GNU_TARGET_NAME) --target=$(GNU_TARGET_NAME) \
+		--with-payload=$(FW_DIR)/$(TARGET_KERNEL))
+	(cd $(BUILD_DIR)/bbl && PATH='$(HOST_PATH)' make)
+	cp $(BUILD_DIR)/bbl/bbl $(FW_DIR)/$(TARGET_KERNEL).bbl
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),initramfs)
-imageinstall: kernel-install $(FW_DIR)/$(INITRAMFS) targethelp
+imageinstall: kernel-install bbl $(FW_DIR)/$(INITRAMFS) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfsarchive)
-imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
+imageinstall: kernel-install bbl $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
-imageinstall: createinitramfs targethelp
+imageinstall: createinitramfs bbl targethelp
 endif
