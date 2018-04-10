@@ -1,6 +1,6 @@
---- curl-7.42.0.orig/src/tool_operate.c	2015-04-16 23:39:50.000000000 +0200
-+++ curl-7.42.0/src/tool_operate.c	2015-04-24 13:31:09.000000000 +0200
-@@ -1828,8 +1828,10 @@ CURLcode operate(struct GlobalConfig *co
+--- curl-7.59.0.orig/src/tool_operate.c	2018-03-12 08:18:59.000000000 +0100
++++ curl-7.59.0/src/tool_operate.c	2018-04-04 21:25:59.972439422 +0100
+@@ -1947,8 +1947,10 @@ CURLcode operate(struct GlobalConfig *co
        if(res == PARAM_HELP_REQUESTED)
          tool_help();
        /* Check if we were asked for the manual */
