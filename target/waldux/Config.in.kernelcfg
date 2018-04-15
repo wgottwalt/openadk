@@ -23,7 +23,9 @@ config ADK_TARGET_WALDUX_KERNEL_DEFCONFIG
 	default "bcmrpi_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI0
 	default "bcm2709_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI2
 	default "bcm2709_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI3
+	default "bcm2709_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI3P
 	default "bcmrpi3_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI3_64
+	default "bcmrpi3_defconfig" if ADK_TARGET_SYSTEM_RASPBERRY_PI3P_64
 	default "twr-k70f120m_defconfig" if ADK_TARGET_SYSTEM_KINETIS_K70
 	default "imx_v6_v7_defconfig" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default "mvebu_defconfig" if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG

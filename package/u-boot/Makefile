@@ -16,7 +16,7 @@ PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-PKG_SYSTEM_DEPENDS:=	beaglebone-black orange-pi0 raspberry-pi raspberry-pi2 raspberry-pi3 banana-pro solidrun-imx6 solidrun-clearfog raspberry-pi3-64
+PKG_SYSTEM_DEPENDS:=	beaglebone-black orange-pi0 raspberry-pi raspberry-pi2 raspberry-pi3 banana-pro solidrun-imx6 solidrun-clearfog raspberry-pi3-64 raspberry-pi3p raspberry-pi3p-64
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -42,7 +42,13 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3),y)
 CONFIG:=		rpi_3_32b_defconfig
 endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3P),y)
+CONFIG:=		rpi_3_32b_defconfig
+endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3_64),y)
+CONFIG:=		rpi_3_defconfig
+endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3P_64),y)
 CONFIG:=		rpi_3_defconfig
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)

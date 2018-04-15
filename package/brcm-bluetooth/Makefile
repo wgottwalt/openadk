@@ -36,5 +36,13 @@ else
 	${INSTALL_BIN} ${WRKBUILD}/brcm_patchram \
 		${IDIR_BRCM_BLUETOOTH}/sbin/brcm_patchram
 endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3P),y)
+        ${CP} ${WRKBUILD}/BCM43430A1.hcd ${IDIR_BRCM_BLUETOOTH}/lib/firmware
+else
+        ${CP} ${WRKBUILD}/*.hcd ${IDIR_BRCM_BLUETOOTH}/lib/firmware/brcm
+        ${INSTALL_DIR} ${IDIR_BRCM_BLUETOOTH}/sbin
+        ${INSTALL_BIN} ${WRKBUILD}/brcm_patchram \
+                ${IDIR_BRCM_BLUETOOTH}/sbin/brcm_patchram
+endif
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk

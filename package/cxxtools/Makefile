@@ -26,6 +26,9 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3),y)
 CONFIGURE_ARGS+=	--with-atomictype=pthread
 endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3P),y)
+CONFIGURE_ARGS+=	--with-atomictype=pthread
+endif
 CONFIGURE_ARGS+=	--disable-demos \
 			--disable-unittest
 

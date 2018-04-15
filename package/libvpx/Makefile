@@ -40,6 +40,9 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3),y)
 CONFIGURE_ARGS+=	--target=armv7-linux-gcc
 endif
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3P),y)
+CONFIGURE_ARGS+=	--target=armv7-linux-gcc
+endif
 ifeq ($(ADK_TARGET_SYSTEM_SHARP_ZAURUS),y)
 CONFIGURE_ARGS+=	--target=armv5te-linux-gcc
 endif
