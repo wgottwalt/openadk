@@ -555,7 +555,7 @@ case $target {
 	dd if="$fwdir/SPL" of="$tgt" bs=1024 seek=1 > /dev/null 2>&1
 	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=69 > /dev/null 2>&1
 	;;
-(raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64)
+(raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64|raspberry-pi3p|raspberry-pi3p-64)
 	(( noformat )) || create_fs "$bootpart" ADKBOOT vfat
 	;;
 (phytec-wega)
@@ -575,7 +575,7 @@ if (( datafssz )); then
 	((keep)) || create_fs "$datapart" ADKDATA ext4
 	((keep)) || tune_fs "$datapart"
 	case $target {
-	(raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64|phytec-wega)
+	(raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64|raspberry-pi3p|raspberry-pi3p-64|phytec-wega)
 		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab 
 	;;
 	(banana-pro|orange-pi0|solidrun-imx6|solidrun-clearfog)
@@ -587,14 +587,14 @@ if (( datafssz )); then
             # strip trailing slash
             case $datapartcontent in
                 *[!/]*/) datapartcontent=${datapartcontent%"${x##*[!/]}"};;
-            esac            
+            esac
             cp -R $datapartcontent/* "$D"
         fi
 fi
 
 (( quiet )) || print Finishing up with bootloader and kernel ...
 case $target {
-(raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64)
+(raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64|raspberry-pi3p|raspberry-pi3p-64)
 	mount_fs "$bootpart" "$B" vfat
 	for x in "$R"/boot/*; do
 		[[ -e "$x" ]] && mv -f "$R"/boot/* "$B/"

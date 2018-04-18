@@ -14,7 +14,7 @@ PKG_BUILDDEP:=		glib readline
 PKG_SITES:=		http://labs.o-hand.com/sources/exmap-console/
 
 PKG_ARCH_DEPENDS:=	!m68k
-PKG_SYSTEM_DEPENDS:=	!raspberry-pi3
+PKG_SYSTEM_DEPENDS:=	!raspberry-pi3 !raspberry-pi3p
 PKG_CFLINE_EXMAP:=	depends on !ADK_APPLIANCE_TOOLCHAIN
 
 DISTFILES:=		${PKG_NAME}-console-${PKG_VERSION}.tgz

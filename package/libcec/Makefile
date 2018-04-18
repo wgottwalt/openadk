@@ -21,7 +21,7 @@ PKG_DEPENDS_RASPBERRY_PI2:=	bcm28xx-vc
 PKG_BUILDDEP_RASPBERRY_PI2:=	bcm28xx-vc
 PKG_DEPENDS_RASPBERRY_PI:=	bcm28xx-vc
 PKG_BUILDDEP_RASPBERRY_PI:=	bcm28xx-vc
-PKG_SYSTEM_DEPENDS:=    raspberry-pi raspberry-pi2 raspberry-pi3 solidrun-imx6
+PKG_SYSTEM_DEPENDS:=    raspberry-pi raspberry-pi2 raspberry-pi3 raspberry-pi3p solidrun-imx6
 
 include $(ADK_TOPDIR)/mk/package.mk
 

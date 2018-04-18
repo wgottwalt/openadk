@@ -16,7 +16,7 @@ PKG_URL:=		http://jamvm.sourceforge.net
 PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=jamvm/}
 
 # use of deprecated swp{b}
-PKG_SYSTEM_DEPENDS:=	!raspberry-pi3
+PKG_SYSTEM_DEPENDS:=	!raspberry-pi3 !raspberry-pi3p
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 

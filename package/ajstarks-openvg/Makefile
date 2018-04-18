@@ -15,7 +15,7 @@ PKG_DEPENDS:=		bcm28xx-vc bcm28xx-vc-libs libfreetype libjpeg-turbo
 PKG_URL:=		https://github.com/ajstarks/openvg
 PKG_SITES:=		https://github.com/ajstarks/openvg.git
 
-PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 raspberry-pi3 raspberry-pi3-64
+PKG_SYSTEM_DEPENDS:=	raspberry-pi raspberry-pi2 raspberry-pi3 raspberry-pi3-64 raspberry-pi3p raspberry-pi3p-64
 
 include $(ADK_TOPDIR)/mk/package.mk
 
