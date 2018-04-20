@@ -9,11 +9,10 @@ PKG_RELEASE:=		1
 PKG_HASH:=		cc67efb5d5fb8928a6569b3fade2b4042ec17da04678dab127d96b46489e26c8
 PKG_DESCR:=		ethernet bridging tools
 PKG_SECTION:=		net/route
+PKG_KDEPENDS:=		bridge
 PKG_URL:=		http://www.linuxfoundation.org/en/Net:Bridge
 PKG_SITES:=		http://www.kernel.org/pub/linux/utils/net/bridge-utils/
 PKG_BB:=		1
-
-PKG_CFLINE_BRIDGE_UTILS:=select ADK_KERNEL_BRIDGE
 
 include ${ADK_TOPDIR}/mk/package.mk
 
