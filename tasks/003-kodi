@@ -28,15 +28,15 @@ config ADK_APPLIANCE_KODI
 	select ADK_RUNTIME_START_BUSYBOX_SYSLOGD
 	select ADK_RUNTIME_START_BUSYBOX_WATCHDOG
 	select ADK_RUNTIME_START_KODI m
-	select ADK_KERNEL_INPUT_EVDEV m
-	select ADK_KERNEL_USB_HID m
+	select ADK_LINUX_KERNEL_INPUT_EVDEV m
+	select ADK_LINUX_KERNEL_USB_HID m
 	select ADK_TARGET_USB_KEYBOARD
 	select ADK_TARGET_USB_MOUSE
 	select ADK_RUNTIME_HOSTNAME kodibox
 	select ADK_PACKAGE_BCM28XX_BOOTLOADER_EXTRA if ADK_TARGET_BOARD_BCM28XX
 	select ADK_PACKAGE_BCM28XX_VC_LIBS if ADK_TARGET_BOARD_BCM28XX
 	select ADK_PACKAGE_BCM28XX_VC_GL_LIBS if ADK_TARGET_BOARD_BCM28XX
-	select ADK_KERNEL_PREEMPT__LL if !ADK_APPLIANCE_CONVOLUTION # for better performance and no sound problems
+	select ADK_LINUX_KERNEL_PREEMPT__LL if !ADK_APPLIANCE_CONVOLUTION # for better performance and no sound problems
 	help
 	  Create a small kodi multimedia appliance. Please enable additional features
 	  in Package/Multimedia
