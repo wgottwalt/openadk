@@ -110,22 +110,22 @@ If your system boots up fine to a shell, you can add the driver configuration.
 For example if you add SD card driver support to Raspberry PI 2 you
 would add following to target/linux/config/Config.in.block
 ------------------------
-config ADK_KERNEL_MMC_BCM2835
+config ADK_LINUX_KERNEL_MMC_BCM2835
         bool "SD card support for BCM2835 boards"
-        select ADK_KERNEL_SCSI
-        select ADK_KERNEL_MMC
-        select ADK_KERNEL_MMC_BLOCK
-        select ADK_KERNEL_BLK_DEV
-        select ADK_KERNEL_BLK_DEV_SD
-        select ADK_KERNEL_MMC_SDHCI
-        select ADK_KERNEL_MMC_SDHCI_PLTFM
-        select ADK_KERNEL_MMC_BCM2835_DMA
+        select ADK_LINUX_KERNEL_SCSI
+        select ADK_LINUX_KERNEL_MMC
+        select ADK_LINUX_KERNEL_MMC_BLOCK
+        select ADK_LINUX_KERNEL_BLK_DEV
+        select ADK_LINUX_KERNEL_BLK_DEV_SD
+        select ADK_LINUX_KERNEL_MMC_SDHCI
+        select ADK_LINUX_KERNEL_MMC_SDHCI_PLTFM
+        select ADK_LINUX_KERNEL_MMC_BCM2835_DMA
         depends on ADK_TARGET_BOARD_BCM28XX
         default y if ADK_TARGET_BOARD_BCM28XX
         default n
 ------------------------
 
-We use the symbol prefix ADK_KERNEL instead of CONFIG. Otherwise the symbols are
+We use the symbol prefix ADK_LINUX_KERNEL instead of CONFIG. Otherwise the symbols are
 matching the kernel symbol names.
 
 Get again into the menu based system, enable the driver you added and recompile.
