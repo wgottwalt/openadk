@@ -1,0 +1,16 @@
+diff -Nur linux-4.14.34.orig/arch/arm/include/asm/assembler.h linux-4.14.34/arch/arm/include/asm/assembler.h
+--- linux-4.14.34.orig/arch/arm/include/asm/assembler.h	2018-04-12 11:32:27.000000000 +0100
++++ linux-4.14.34/arch/arm/include/asm/assembler.h	2018-04-21 17:29:06.424606334 +0100
+@@ -194,10 +194,9 @@
+  */
+ 	.irp	c,,eq,ne,cs,cc,mi,pl,vs,vc,hi,ls,ge,lt,gt,le,hs,lo
+ 	.macro	badr\c, rd, sym
+-#ifdef CONFIG_THUMB2_KERNEL
+-	adr\c	\rd, \sym + 1
+-#else
+ 	adr\c	\rd, \sym
++#ifdef CONFIG_THUMB2_KERNEL
++	orr\c	\rd, \rd, 1
+ #endif
+ 	.endm
+ 	.endr
