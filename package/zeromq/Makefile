@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		zeromq
-PKG_VERSION:=		4.2.3
+PKG_VERSION:=		4.2.5
 PKG_RELEASE:=		1
-PKG_HASH:=		8f1e2b2aade4dbfde98d82366d61baef2f62e812530160d2e6d0a5bb24e40bc0
+PKG_HASH:=		cc9090ba35713d59bb2f7d7965f877036c49c5558ea0c290b0dcc6f2a17e489f
 PKG_DESCR:=		transport layer for distributed apps
 PKG_SECTION:=		libs/misc
 PKG_NEEDS:=		threads c++
 PKG_URL:=		http://www.zeromq.org
-PKG_SITES:=		https://github.com/zeromq/libzmq/releases/download/v4.2.3/
+PKG_SITES:=		https://github.com/zeromq/libzmq/releases/download/v4.2.5/
 PKG_OPTS:=		dev
 
 DISTFILES:=             $(PKG_NAME)-$(PKG_VERSION).tar.gz
