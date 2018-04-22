@@ -1,0 +1,11 @@
+config ADK_TARGET_SYSTEM_MIKROTIK_CCR
+	bool "Mikrotik Cloud Core Router"
+	select ADK_TARGET_CPU_TILE_TILEGX
+	select ADK_TARGET_WITH_SERIAL
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_NETDEVICE
+	select ADK_TARGET_WITH_BLOCK
+	help
+	  Support for Mikrotik CCR.
+
