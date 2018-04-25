@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		python2
-PKG_VERSION:=		2.7.13
+PKG_VERSION:=		2.7.14
 PKG_RELEASE:=		1
-PKG_HASH:=		a4f05a0720ce0fd92626f0278b6b433eee9a6173ddf2bced7957dfb599a5ece1
+PKG_HASH:=		304c9b202ea6fbd0a4a8e0ad3733715fbd4749f2204a9173a58ec53c32ea73e8
 PKG_DESCR:=		python2 script interpreter
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libffi
