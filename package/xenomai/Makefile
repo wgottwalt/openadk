@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xenomai
-PKG_VERSION:=		3.0.5
+PKG_VERSION:=		3.0.6
 PKG_RELEASE:=		1
-PKG_HASH:=		84836a43b6a996dcdcb42b0b1653a3271cc201df2a2d42c1b4b3bafb2cca7c63
+PKG_HASH:=		2c0dd3f0e36e4a10f97e0028989bb873e80f4d1ce212ac55fd3b28857c464f94
 PKG_DESCR:=		realtime extension
 PKG_SECTION:=		sys/misc
 PKG_URL:=		https://xenomai.org/
