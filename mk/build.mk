@@ -249,13 +249,13 @@ kernelconfig:
 		${KERNEL_MAKE_OPTS} \
 		menuconfig
 
-ifeq ($(ADK_TARGET_KERNEL_USE_CUSTOMCONFIG),y)
+ifeq ($(ADK_TARGET_LINUX_KERNEL_USE_CUSTOMCONFIG),y)
 savekconfig:
-	@echo "Saving kernel configuration to $(ADK_TOPDIR)/$(ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH)"
-	$(CP) $(LINUX_DIR)/.config $(ADK_TOPDIR)/$(ADK_TARGET_KERNEL_CUSTOMCONFIG_PATH)
+	@echo "Saving kernel configuration to $(ADK_TOPDIR)/$(ADK_TARGET_LINUX_KERNEL_CUSTOMCONFIG_PATH)"
+	$(CP) $(LINUX_DIR)/.config $(ADK_TOPDIR)/$(ADK_TARGET_LINUX_KERNEL_CUSTOMCONFIG_PATH)
 else
 savekconfig:
-	@echo "You have to enable ADK_TARGET_KERNEL_USE_CUSTOMCONFIG to be able to save the current kernel configuration."
+	@echo "You have to enable ADK_TARGET_LINUX_KERNEL_USE_CUSTOMCONFIG to be able to save the current kernel configuration."
 endif
 
 
