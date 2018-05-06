@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm28xx-bootloader
 # not cloned, local src directory used
-PKG_VERSION:=		ae9a493932e47e08cabb25a2728037298075fd00
+PKG_VERSION:=		865ddc1393f558198e7e7ce70928ff2e49c4f7f6
 PKG_RELEASE:=		1
 PKG_DESCR:=		bootloader for bcm28xx
 PKG_SECTION:=		base/boot
