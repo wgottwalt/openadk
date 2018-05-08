@@ -1,0 +1,12 @@
+diff -Nur linux-4.14.39.orig/arch/microblaze/kernel/syscall_table.S linux-4.14.39/arch/microblaze/kernel/syscall_table.S
+--- linux-4.14.39.orig/arch/microblaze/kernel/syscall_table.S	2018-05-01 21:58:27.000000000 +0200
++++ linux-4.14.39/arch/microblaze/kernel/syscall_table.S	2018-05-06 21:16:14.830349827 +0200
+@@ -187,7 +187,7 @@
+ 	.long sys_getcwd
+ 	.long sys_capget
+ 	.long sys_capset		/* 185 */
+-	.long sys_ni_syscall		/* sigaltstack */
++	.long sys_sigaltstack
+ 	.long sys_sendfile
+ 	.long sys_ni_syscall		/* reserved for streams1 */
+ 	.long sys_ni_syscall		/* reserved for streams2 */

@@ -231,6 +231,7 @@ createinitramfs: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
 		echo '# CONFIG_CRC32_SLICEBY8 is not set'; \
 		echo '# CONFIG_CRC32_SLICEBY4 is not set'; \
 		echo '# CONFIG_CRC32_SARWATE is not set'; \
+		echo 'CONFIG_INITRAMFS_FORCE=n'; \
 		echo 'CONFIG_INITRAMFS_ROOT_UID=0'; \
 		echo 'CONFIG_INITRAMFS_ROOT_GID=0'; \
 		echo 'CONFIG_INITRAMFS_IS_LARGE=n'; \
