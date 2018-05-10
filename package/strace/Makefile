@@ -4,12 +4,13 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		strace
-PKG_VERSION:=		4.21
+PKG_VERSION:=		4.22
 PKG_RELEASE:=		1
-PKG_HASH:=		5c7688db44073e94c59a5627744e5699454419824cc8166e8bcfd7ec58375c37
+PKG_HASH:=		068cd09264c95e4d591bbcd3ea08f99a693ed8663cd5169b0fdad72eb5bdb39d
 PKG_DESCR:=		system call trace program
 PKG_SECTION:=		app/debug
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=strace/}
+PKG_URL:=		https://strace.io
+PKG_SITES:=		https://strace.io/files/$(PKG_VERSION)/
 
 PKG_ARCH_DEPENDS:=	!h8300 !nds32
 
@@ -25,8 +26,11 @@ endif
 
 ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CPPFLAGS+=	-DMSG_EXCEPT=020000 -D_LARGEFILE64_SOURCE=1
+CONFIGURE_ENV+=		st_cv_m32_mpers=no \
+			st_cv_mx32_mpers=no
 endif
 
+CONFIGURE_ARGS+=	--enable-mpers=check
 INSTALL_STYLE:=		manual
 
 do-install:
