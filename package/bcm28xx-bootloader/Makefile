@@ -102,6 +102,12 @@ ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3P_64),y)
         printf "enable_uart=1\n" >> \
                 $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
+	printf "# License keys for video decoding\n" >> \
+                $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+	printf "decode_MPG2=$(ADK_RUNTIME_MPEG2_KEY)\n" >> \
+                $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+	printf "decode_WVC1=$(ADK_RUNTIME_VC1_KEY)\n" >> \
+                $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 ifeq ($(ADK_PACKAGE_BCM28XX_DEBUGTOOL),y)
 	$(INSTALL_DIR) $(IDIR_BCM28XX_DEBUGTOOL)/usr/bin
 	$(INSTALL_BIN) ./files/vcdbg \
