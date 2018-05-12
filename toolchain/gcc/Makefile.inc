@@ -57,9 +57,9 @@ DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 LIBSTDCXXVER:=		19
 endif
 ifeq ($(ADK_TOOLCHAIN_GCC_NDS32),y)
-PKG_VERSION:=		4.9.4-nds32
+PKG_VERSION:=		nds32-6.3.0-open
 PKG_HASH:=		b23ce96df25dfdd5526496a3c2cd7ee1da4ed4094971a2e0c47c73ad7e1ad30a
-PKG_SITES:=		http://distfiles.openadk.org/
+PKG_SITES:=		https://github.com/andestech/gcc.git
 PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif

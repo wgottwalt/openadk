@@ -88,7 +88,7 @@ config ADK_TOOLCHAIN_GCC_METAG
 	depends on ADK_TARGET_ARCH_METAG
 
 config ADK_TOOLCHAIN_GCC_NDS32
-	bool "4.9.4-nds32"
+	bool "nds32-6.3.0-open"
 	depends on ADK_TARGET_ARCH_NDS32
 
 config ADK_TOOLCHAIN_GCC_OR1K
