@@ -1,0 +1,24 @@
+--- boost_1_67_0.orig/libs/context/src/asm/jump_arm_aapcs_elf_gas.S	2018-04-11 15:49:01.000000000 +0200
++++ boost_1_67_0/libs/context/src/asm/jump_arm_aapcs_elf_gas.S	2018-05-14 06:53:04.847209932 +0200
+@@ -50,10 +50,6 @@ jump_fcontext:
+ 
+     @ prepare stack for FPU
+     sub  sp, sp, #64
+-#if (defined(__VFP_FP__) && !defined(__SOFTFP__))
+-    @ save S16-S31
+-    vstmia sp, {d8-d15}
+-#endif
+ 
+     @ store RSP (pointing to context-data) in A1
+     mov  a1, sp
+@@ -61,10 +57,6 @@ jump_fcontext:
+     @ restore RSP (pointing to context-data) from A2
+     mov  sp, a2
+ 
+-#if (defined(__VFP_FP__) && !defined(__SOFTFP__))
+-    @ restore S16-S31
+-    vldmia  sp, {d8-d15}
+-#endif
+     @ prepare stack for FPU
+     add  sp, sp, #64
+ 

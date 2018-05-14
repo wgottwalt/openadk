@@ -1,0 +1,24 @@
+--- boost_1_67_0.orig/libs/context/src/asm/ontop_arm_aapcs_elf_gas.S	2018-04-11 15:49:01.000000000 +0200
++++ boost_1_67_0/libs/context/src/asm/ontop_arm_aapcs_elf_gas.S	2018-05-14 06:30:06.658068445 +0200
+@@ -50,10 +50,6 @@ ontop_fcontext:
+ 
+     @ prepare stack for FPU
+     sub  sp, sp, #64
+-#if (defined(__VFP_FP__) && !defined(__SOFTFP__))
+-    @ save S16-S31
+-    vstmia sp, {d8-d15}
+-#endif
+ 
+     @ store RSP (pointing to context-data) in A1
+     mov  a1, sp
+@@ -64,10 +60,6 @@ ontop_fcontext:
+     @ store parent context in A2
+     mov  a2, a1
+ 
+-#if (defined(__VFP_FP__) && !defined(__SOFTFP__))
+-    @ restore S16-S31
+-    vldmia  sp, {d8-d15}
+-#endif
+     @ prepare stack for FPU
+     add  sp, sp, #64
+ 
