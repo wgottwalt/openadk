@@ -4,10 +4,10 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ltp
-PKG_VERSION:=		20170929
+PKG_VERSION:=		20180515
 PKG_RELEASE:=		1
 PKG_DESCR:=		linux test project
-PKG_HASH:=		8cc9d5a2ba206f47e757b2203a5fa7a1ef95f8bf841bec1dd7878699dc27b258
+PKG_HASH:=		8c41f10fa26cf01b50ae91374e3e9570f9a321286560626e182d159aba82d915
 PKG_DEPENDS:=		bash mke2fs mkfs
 PKG_NEEDS:=		threads
 PKG_SECTION:=		base/tests
@@ -22,9 +22,6 @@ WRKDIST=		$(WRKDIR)/$(PKG_NAME)-full-$(PKG_VERSION)
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LTP,ltp,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
-
-# disable lto
-TARGET_CFLAGS:=		$(filter-out -flto,$(TARGET_CFLAGS))
 
 CONFIGURE_ARGS+=	--with-open-posix-testsuite \
 			--with-realtime-testsuite \
