@@ -46,8 +46,8 @@ endif
 
 uclibc-ng-dev-install:
 	${INSTALL_DIR} ${IDIR_UCLIBC_NG_DEV}/usr/lib ${IDIR_UCLIBC_NG_DEV}/$(ADK_TARGET_LIBC_PATH)
-	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_UCLIBC_NG_DEV}/usr/lib
-	${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
+	-${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_UCLIBC_NG_DEV}/usr/lib
+	-${CP} ${STAGING_TARGET_DIR}/usr/lib/uclibc_nonshared.a ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt*.o ${IDIR_UCLIBC_NG_DEV}/usr/lib
 	${KERNEL_MAKE_ENV} \
 	$(MAKE) -C $(TOOLCHAIN_BUILD_DIR)/w-linux-$(KERNEL_FILE_VER)-1/linux-$(KERNEL_FILE_VER) \
