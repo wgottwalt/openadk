@@ -193,6 +193,7 @@ config ADK_TARGET_ROOTFS_GENIMAGE
 	select ADK_TARGET_QEMU_WITH_BLOCK if ADK_TARGET_QEMU
 	select ADK_TARGET_QEMU_WITH_BOOTLOADER if ADK_TARGET_QEMU
 	select ADK_HOST_BUILD_GENIMAGE
+	depends on ADK_TARGET_ARCH_X86_64
 	help
 	  Create a complete disk image for the target with genimage.
 
