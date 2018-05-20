@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		util-linux
 PKG_VERSION:=		2.32
-PKG_RELEASE:=		1
+PKG_RELEASE:=		2
 PKG_HASH:=		6c7397abc764e32e8159c2e96042874a190303e77adceb4ac5bd502a272a4734
 PKG_DESCR:=		basic utilities
 PKG_SECTION:=		base/apps
@@ -122,7 +122,7 @@ agetty-install:
 
 cfdisk-install:
 	$(INSTALL_DIR) $(IDIR_CFDISK)/usr/sbin
-	$(CP) $(WRKINST)/sbin/cfdisk $(IDIR_FDISK)/usr/sbin
+	$(CP) $(WRKINST)/sbin/cfdisk $(IDIR_CFDISK)/usr/sbin
 
 sfdisk-install:
 	$(INSTALL_DIR) $(IDIR_SFDISK)/usr/sbin
