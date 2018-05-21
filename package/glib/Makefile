@@ -44,6 +44,7 @@ CONFIGURE_ENV+=		glib_cv_long_long_format=ll \
 			ac_cv_func_posix_getgrgid_r=yes
 
 HOST_STYLE:=		auto
+HOST_CPPFLAGS+=		-I$(STAGING_HOST_DIR)/usr/include/libmount
 ifneq ($(OS_FOR_BUILD),CYGWIN)
 HOST_CFLAGS+=		-fPIC
 endif
