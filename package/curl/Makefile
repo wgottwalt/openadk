@@ -91,8 +91,9 @@ CONFIGURE_ARGS+=	--enable-cookies \
 			--without-libssh2 \
 			--without-librtmp \
 			--without-libidn \
+			--with-ca-path="/etc/ssl/certs" \
 			--with-random="/dev/urandom" \
-			--with-ca-bundle="/etc/ssl/cert.pem"
+			--without-ca-bundle
 
 ifneq (${ADK_PACKAGE_CURL_WITH_IPV6},)
 CONFIGURE_ARGS+=	--enable-ipv6
