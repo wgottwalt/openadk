@@ -56,7 +56,7 @@ targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo 'The nfs root tarball is: ${FW_DIR}/${ROOTFSUSERTARBALL}'
 ifeq ($(ADK_TARGET_SYSTEM_DEC_MULTIA),y)
-	@echo 'The SRM console uses 56700 baud'
+	@echo 'The SRM console uses 9600 baud'
 	@echo 'To netboot the Dec multia type following in SRM console:'
 	@echo '>>>boot ewa0 -protocols bootp -fl "root=/dev/nfs ip=dhcp"'
 endif
