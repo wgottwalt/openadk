@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		opkg
-PKG_VERSION:=		0.3.5
+PKG_VERSION:=		0.3.6
 PKG_RELEASE:=		1
-PKG_HASH:=		734bc21dea11262113fa86b928d09812618b3966f352350cf916a6ae0d343f32
+PKG_HASH:=		f607f0e61be8cf8a3bbd0d2dccd9ec9e9b6c21dd4307b671c600d6eeaf84d30b
 PKG_DESCR:=		embedded package manager
 PKG_DEPENDS:=		libcurl libarchive gpgme libressl xz
 PKG_BUILDDEP:=		curl libarchive gpgme xz libressl
@@ -24,6 +24,7 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call HOST_template,OPKG,opkg,$(PKG_VERSION)-${PKG_RELEASE}))
 $(eval $(call PKG_template,OPKG,opkg,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoreconf
 HOST_CONFIGURE_ARGS+=	--disable-openssl \
 			--disable-gpg \
 			--disable-xz \
