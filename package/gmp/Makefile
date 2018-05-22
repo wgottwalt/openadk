@@ -9,6 +9,7 @@ PKG_DESCR:=		multiprecision arithmetic library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		m4-host flex-host bison-host
 PKG_URL:=		http://gmplib.org/
+PKG_NEEDS:=		c++
 PKG_LIBNAME:=		libgmp
 PKG_OPTS:=		dev
 
