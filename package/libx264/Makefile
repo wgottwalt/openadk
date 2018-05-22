@@ -4,7 +4,7 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libx264
-PKG_VERSION:=		90a61ec76424778c050524f682a33f115024be96
+PKG_VERSION:=		7d0ff22e8c96de126be9d3de4952edd6d1b75a8c
 PKG_RELEASE:=		1
 PKG_GIT:=		hash
 PKG_DESCR:=		h264 encoding library
