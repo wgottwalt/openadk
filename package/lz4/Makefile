@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lz4
-PKG_VERSION:=		1.7.5
+PKG_VERSION:=		1.8.2
 PKG_RELEASE:=		1
-PKG_HASH:=		0190cacd63022ccb86f44fa5041dc6c3804407ad61550ca21c382827319e7e7e
+PKG_HASH:=		0963fbe9ee90acd1d15e9f09e826eaaf8ea0312e854803caf2db0a6dd40f4464
 PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
 PKG_DEPENDS:=		liblz4
@@ -30,8 +30,9 @@ $(eval $(call PKG_template,LIBLZ4,liblz4,${PKG_VERSION}-${PKG_RELEASE},${PKGSS_L
 
 HOST_STYLE:=		manual
 CONFIG_STYLE:=		manual
-XAKE_FLAGS+=		PREFIX=/usr
+XAKE_FLAGS+=		PREFIX=/usr OS=Linux
 HOST_XAKE_FLAGS+=	PREFIX=/usr
+ALL_TARGET:=		lib lz4
 
 host-build:
 	(cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
