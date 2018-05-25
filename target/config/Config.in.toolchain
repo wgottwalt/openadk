@@ -1,49 +1,6 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
-choice
-depends on ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX
-bool "Library support"
-
-config ADK_TARGET_USE_SHARED_LIBS_ONLY
-	bool "Create shared libraries only and link dynamically"
-	depends on !ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_BINFMT_DSBT
-
-config ADK_TARGET_USE_STATIC_LIBS_ONLY
-	bool "Create static libraries only and link statically"
-	select BUSYBOX_STATIC
-	help
-	  Useful for debugging of dynamic linker problems. Be aware of the fact, that uClibc and glibc
-	  still requires libgcc_so.so.1 for pthread_cancel. Glibc also requires libnss_*.so libraries
-	  at runtime. Full static builds are only supported for musl libc.
-
-config ADK_TARGET_USE_SHARED_AND_STATIC_LIBS
-	bool "Create shared and static libraries and link dynamically"
-	depends on !ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_BINFMT_DSBT
-
-config ADK_TARGET_USE_STATIC_AND_SHARED_LIBS
-	bool "Create static and shared libraries and link statically"
-	depends on !ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_BINFMT_DSBT
-
-endchoice
-
-config ADK_TARGET_LIBC_WITH_LOCALE
-	bool "Enable locale support"
-	depends on ADK_TARGET_LIB_UCLIBC_NG
-	select BUSYBOX_LOCALE_SUPPORT if ADK_PACKAGE_BUSYBOX
-
-config ADK_TARGET_LIBC_WITH_LIBINTL
-	bool "Enable libintl stub support"
-	depends on ADK_TARGET_LIB_UCLIBC_NG
-	help
-	  Enables uClibc-ng libintl stub.
-
-config ADK_TARGET_LIBC_WITH_LIBICONV
-	bool "Enable basic libiconv"
-	depends on ADK_TARGET_LIB_UCLIBC_NG && !ADK_PACKAGE_LIBICONV
-	help
-	  Enables uClibc-ng included basic libiconv support.
-
 config ADK_TARGET_CFLAGS_OPT
 	string
 	default "-Os -pipe" if ADK_TARGET_CFLAGS_OPT_OS

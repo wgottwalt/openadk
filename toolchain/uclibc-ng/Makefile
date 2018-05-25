@@ -123,7 +123,7 @@ endif
 ifeq ($(ADK_TARGET_UCLINUX),y)
 	$(SED) 's/.*\(ARCH_USE_MMU\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
-ifeq ($(ADK_TARGET_WITHOUT_MMU),y)
+ifeq ($(ADK_TARGET_WITH_MMU),)
 	$(SED) 's/.*\(ARCH_USE_MMU\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_WITH_NPTL),y)
@@ -187,7 +187,7 @@ endif
 
 # arm
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
-ifeq ($(ADK_TARGET_WITHOUT_MMU),y)
+ifeq ($(ADK_TARGET_WITH_MMU),)
 	$(SED) 's/.*\(DOPIC\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
@@ -282,7 +282,7 @@ endif
 
 # m68k
 ifeq ($(ADK_TARGET_ARCH_M68K),y)
-ifeq ($(ADK_TARGET_WITHOUT_MMU),y)
+ifeq ($(ADK_TARGET_WITH_MMU),)
 ifeq ($(ADK_TARGET_BINFMT_FLAT_ONE)$(ADK_TARGET_BINFMT_FLAT_SEP_DATA),y)
 	$(SED) 's/.*\(DOPIC\).*/# \1 is not set/' ${WRKBUILD}/.config
 endif

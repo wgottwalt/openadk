@@ -1,9 +1,0 @@
-config ADK_TARGET_SYSTEM_NSIM_ARCV2
-	bool "Synopsys NSIM Emulator (ARCv2)"
-	select ADK_TARGET_CPU_ARC_ARC_HS
-	select ADK_TARGET_WITH_NET
-	select ADK_TARGET_WITH_SERIAL
-	select ADK_TARGET_KERNEL_WITH_COMPRESSION
-	help
-	  Support for NSIM Emulator for ARCv2.
-

@@ -1,0 +1,28 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+choice
+prompt "Threading mode"
+depends on ADK_TARGET_LIB_UCLIBC_NG
+
+config ADK_TARGET_WITH_NPTL
+	bool "NPTL"
+	depends on ADK_TARGET_SUPPORTS_NPTL && ADK_TARGET_SUPPORTS_THREADS && ADK_TARGET_WITH_MMU
+
+config ADK_TARGET_WITH_LT
+	bool "Linuxthreads"
+	depends on ADK_TARGET_SUPPORTS_LT && ADK_TARGET_SUPPORTS_THREADS
+
+config ADK_TARGET_WITHOUT_THREADS
+	bool "none"
+
+endchoice
+
+config ADK_TARGET_SUPPORTS_THREADS
+	bool
+
+config ADK_TARGET_SUPPORTS_NPTL
+	bool
+
+config ADK_TARGET_SUPPORTS_LT
+	bool

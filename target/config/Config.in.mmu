@@ -1,0 +1,9 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+config ADK_TARGET_WITH_MMU
+	bool "MMU"
+	depends on !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
+	select ADK_LINUX_KERNEL_MMU if ADK_TARGET_OS_LINUX
+	select ADK_WALDUX_KERNEL_MMU if ADK_TARGET_OS_WALDUX
+	default y

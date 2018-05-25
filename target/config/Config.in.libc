@@ -2,11 +2,12 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
-prompt "C library"
+prompt "Target C library"
+depends on !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
 default ADK_TARGET_LIB_UCLIBC_NG if ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX
 
 config ADK_TARGET_LIB_UCLIBC_NG
-	bool "uClibc-ng embedded C library"
+	bool "uClibc-ng"
 	select ADK_PACKAGE_LIBGCC
 	depends on (\
 		ADK_TARGET_ARCH_AARCH64 || \
@@ -43,7 +44,7 @@ config ADK_TARGET_LIB_UCLIBC_NG
 	  https://uclibc-ng.org
 
 config ADK_TARGET_LIB_MUSL
-	bool "musl C library"
+	bool "musl"
 	select ADK_PACKAGE_LIBGCC
 	depends on (\
 		ADK_TARGET_ARCH_AARCH64 || \
@@ -62,7 +63,7 @@ config ADK_TARGET_LIB_MUSL
  	  http://musl-libc.org
 
 config ADK_TARGET_LIB_GLIBC
-	bool "GNU C library"
+	bool "glibc"
 	select ADK_PACKAGE_LIBGCC
 	depends on (\
 		ADK_TARGET_ARCH_AARCH64 || \
@@ -91,7 +92,7 @@ config ADK_TARGET_LIB_GLIBC
 	  http://www.gnu.org/libc
 
 config ADK_TARGET_LIB_NEWLIB
-	bool "newlib C library"
+	bool "newlib"
 	select ADK_TARGET_WITHOUT_THREADS
 	depends on (\
 		ADK_TARGET_ARCH_AARCH64 || \
@@ -139,7 +140,8 @@ config ADK_TARGET_LIB_NEWLIB
 endchoice
 
 choice
-prompt "C library version"
+prompt "Target C library version"
+depends on !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
 
 config ADK_TARGET_LIB_UCLIBC_NG_1_0_30
 	bool "1.0.30"
@@ -147,7 +149,7 @@ config ADK_TARGET_LIB_UCLIBC_NG_1_0_30
 
 config ADK_TARGET_LIB_UCLIBC_NG_GIT
 	bool "git"
-	depends on ADK_TARGET_LIB_UCLIBC_NG
+	depends on ADK_TARGET_LIB_UCLIBC_NG && ADK_EXPERIMENTAL
 
 config ADK_TARGET_LIB_GLIBC_2_27
 	bool "2.27"
@@ -159,7 +161,7 @@ config ADK_TARGET_LIB_GLIBC_CSKY
 
 config ADK_TARGET_LIB_GLIBC_GIT
 	bool "git"
-	depends on ADK_TARGET_LIB_GLIBC && !ADK_TARGET_ARCH_CSKY
+	depends on ADK_TARGET_LIB_GLIBC && !ADK_TARGET_ARCH_CSKY && ADK_EXPERIMENTAL
 
 config ADK_TARGET_LIB_MUSL_1_1_19
 	bool "1.1.19"
@@ -167,7 +169,7 @@ config ADK_TARGET_LIB_MUSL_1_1_19
 
 config ADK_TARGET_LIB_MUSL_GIT
 	bool "git"
-	depends on ADK_TARGET_LIB_MUSL
+	depends on ADK_TARGET_LIB_MUSL && ADK_EXPERIMENTAL
 
 config ADK_TARGET_LIB_NEWLIB_3_0_0
 	bool "3.0.0"
@@ -186,35 +188,9 @@ config ADK_TARGET_LIB_NEWLIB_FROSTED
 
 config ADK_TARGET_LIB_NEWLIB_GIT
 	bool "git"
-	depends on ADK_TARGET_LIB_NEWLIB && !ADK_TARGET_OS_FROSTED
+	depends on ADK_TARGET_LIB_NEWLIB && !ADK_TARGET_OS_FROSTED && ADK_EXPERIMENTAL
 
 endchoice
-
-choice
-prompt "Threading"
-depends on ADK_TARGET_LIB_UCLIBC_NG
-
-config ADK_TARGET_WITH_NPTL
-	bool "enable NPTL"
-	depends on ADK_TARGET_SUPPORTS_NPTL && ADK_TARGET_SUPPORTS_THREADS
-
-config ADK_TARGET_WITH_LT
-	bool "enable Linuxthreads"
-	depends on ADK_TARGET_SUPPORTS_LT && ADK_TARGET_SUPPORTS_THREADS
-
-config ADK_TARGET_WITHOUT_THREADS
-	bool "disable threads"
-
-endchoice
-
-config ADK_TARGET_SUPPORTS_THREADS
-	bool
-
-config ADK_TARGET_SUPPORTS_NPTL
-	bool
-
-config ADK_TARGET_SUPPORTS_LT
-	bool
 
 config ADK_TARGET_LIBC_UTILS
 	bool
@@ -254,7 +230,7 @@ config ADK_TARGET_SUFFIX
 	default "gnu" if ADK_TARGET_LIB_GLIBC
 	default "uclibceabihf" if ADK_TARGET_LIB_UCLIBC_NG && ADK_TARGET_ARCH_ARM && ADK_TARGET_HARD_FLOAT
 	default "uclibceabi" if ADK_TARGET_LIB_UCLIBC_NG && ADK_TARGET_ARCH_ARM
-	default "uclinuxeabi" if ADK_TARGET_LIB_UCLIBC_NG && ADK_TARGET_ARCH_ARM && ADK_TARGET_WITHOUT_MMU
+	default "uclinuxeabi" if ADK_TARGET_LIB_UCLIBC_NG && ADK_TARGET_ARCH_ARM && ADK_TARGET_UCLINUX
 	default "uclibcabi64" if ADK_TARGET_LIB_UCLIBC_NG && ADK_TARGET_ABI_N64
 	default "uclibcabin32" if ADK_TARGET_LIB_UCLIBC_NG && ADK_TARGET_ABI_N32
 	default "uclibcabi32" if ADK_TARGET_LIB_UCLIBC_NG && ADK_TARGET_ABI_O32

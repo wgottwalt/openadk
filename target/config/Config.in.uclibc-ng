@@ -1,0 +1,19 @@
+# This file is part of the OpenADK project. OpenADK is copyrighted
+# material, please see the LICENCE file in the top-level directory.
+
+config ADK_TARGET_LIBC_WITH_LOCALE
+	bool "Enable locale support"
+	depends on ADK_TARGET_LIB_UCLIBC_NG
+	select BUSYBOX_LOCALE_SUPPORT if ADK_PACKAGE_BUSYBOX
+
+config ADK_TARGET_LIBC_WITH_LIBINTL
+	bool "Enable libintl stub support"
+	depends on ADK_TARGET_LIB_UCLIBC_NG
+	help
+	  Enables uClibc-ng libintl stub.
+
+config ADK_TARGET_LIBC_WITH_LIBICONV
+	bool "Enable basic libiconv"
+	depends on ADK_TARGET_LIB_UCLIBC_NG && !ADK_PACKAGE_LIBICONV
+	help
+	  Enables uClibc-ng included basic libiconv support.

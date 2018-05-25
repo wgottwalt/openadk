@@ -1,6 +1,5 @@
 config ADK_TARGET_SYSTEM_APPLE_MACMINI
 	bool "Apple Mac mini"
-	depends on ADK_EXPERIMENTAL
 	select ADK_TARGET_CPU_PPC
 	select ADK_TARGET_WITH_PCI
 	select ADK_TARGET_WITH_NET

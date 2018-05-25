@@ -18,14 +18,30 @@ source "target/config/Config.in.os"
 source "target/config/Config.in.hardware"
 source "target/config/Config.in.boards"
 source "target/config/Config.in.kernelfmt"
+
+menu "Hardware configuration"
 source "target/config/Config.in.arch"
-source "target/config/Config.in.endian"
 source "target/config/Config.in.system"
-source "target/config/Config.in.systemopts"
 source "target/config/Config.in.subsystem"
 source "target/config/Config.in.qemuopts"
+source "target/config/Config.in.endian"
+source "target/config/Config.in.mmu"
 source "target/config/Config.in.cpu"
 source "target/config/Config.in.addons"
+endmenu
+
+menu "C Library configuration"
+	visible if (ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX) && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
+source "target/config/Config.in.libc"
+source "target/config/Config.in.threads"
+source "target/config/Config.in.binfmt"
+source "target/config/Config.in.instructions"
+source "target/config/Config.in.fpu"
+source "target/config/Config.in.float"
+source "target/config/Config.in.abi"
+source "target/config/Config.in.libs"
+source "target/config/Config.in.uclibc-ng"
+endmenu
 
 comment "After you saved your configuration once, you shouldn't change anything above"
 	depends on (ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX) && !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
@@ -90,12 +106,6 @@ endmenu
 menu "Toolchain settings"
 	visible if !ADK_TARGET_CHOOSE_ARCH
 
-source "target/config/Config.in.archopts"
-source "target/config/Config.in.fpu"
-source "target/config/Config.in.float"
-source "target/config/Config.in.binfmt"
-source "target/config/Config.in.libc"
-source "target/config/Config.in.abi"
 source "target/config/Config.in.binutils"
 source "target/config/Config.in.compiler"
 source "target/config/Config.in.gdb"

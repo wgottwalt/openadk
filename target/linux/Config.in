@@ -19,6 +19,7 @@ source target/linux/config/Config.in.audio
 source target/linux/config/Config.in.multimedia
 source target/linux/config/Config.in.crypto
 source target/linux/config/Config.in.misc
+source target/linux/config/Config.in.arc
 source target/linux/config/Config.in.arm
 source target/linux/config/Config.in.mips
 source target/linux/config/Config.in.xtensa

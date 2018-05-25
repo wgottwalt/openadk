@@ -529,8 +529,8 @@ config BUSYBOX_PIE
 
 config BUSYBOX_NOMMU
 	bool "Force NOMMU build"
-	default y if ADK_TARGET_WITHOUT_MMU
-	default n
+	default n if ADK_TARGET_WITH_MMU
+	default y
 	help
 	  Busybox tries to detect whether architecture it is being
 	  built against supports MMU or not. If this detection fails,

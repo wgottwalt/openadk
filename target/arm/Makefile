@@ -32,7 +32,7 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_REALVIEW_EB_MPCORE),y)
 QEMU_ARGS+=-M realview-eb-mpcore -net user -net nic -dtb $(FW_DIR)/arm-realview-eb-11mp-ctrevb.dtb
 endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB)$(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB_NOMMU),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB),y)
 QEMU_ARGS+=-M versatilepb -net user -net nic,model=smc91c111 -dtb $(FW_DIR)/versatile-pb.dtb
 endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
@@ -176,7 +176,7 @@ ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_REALVIEW_EB_MPCORE),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		arm-realview-eb-11mp-ctrevb.dtb $(MAKE_TRACE)
 endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB)$(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB_NOMMU),y)
+ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VERSATILEPB),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		versatile-pb.dtb $(MAKE_TRACE)
 endif

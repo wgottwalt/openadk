@@ -2,7 +2,43 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
-prompt "Optional hardware configuration"
+prompt "GPU memory size"
+depends on ADK_TARGET_BOARD_BCM28XX
+default ADK_TARGET_GPU_MEM_256 if ADK_PACKAGE_KODI
+
+config ADK_TARGET_GPU_MEM_16
+       bool "16"
+       help
+         use minimal 16 MB.
+
+config ADK_TARGET_GPU_MEM_64
+       bool "64"
+       help
+         use 64 MB.
+
+config ADK_TARGET_GPU_MEM_128
+       bool "128"
+       help
+         use 128 MB.
+
+config ADK_TARGET_GPU_MEM_256
+       bool "256"
+       help
+         use 256 MB.
+
+endchoice
+
+config ADK_TARGET_GPU_MEM
+       int
+       default 16 if ADK_TARGET_GPU_MEM_16
+       default 64 if ADK_TARGET_GPU_MEM_64
+       default 128 if ADK_TARGET_GPU_MEM_128
+       default 256 if ADK_TARGET_GPU_MEM_256
+       depends on ADK_TARGET_BOARD_BCM28XX
+
+
+choice
+prompt "Serial or Bluetooth"
 depends on ( ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX ) \
         && ( ADK_TARGET_SYSTEM_RASPBERRY_PI3 \
 	|| ADK_TARGET_SYSTEM_RASPBERRY_PI3P \
@@ -25,7 +61,7 @@ config ADK_TARGET_HARDWARE_RPI3_NONE
 endchoice
 
 choice
-prompt "Audio Board"
+prompt "Audio Board Addon"
 depends on (ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX) && ADK_TARGET_BOARD_BCM28XX
 
 config ADK_TARGET_HARDWARE_NONE
