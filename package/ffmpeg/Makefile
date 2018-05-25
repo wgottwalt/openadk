@@ -169,6 +169,12 @@ ifeq ($(ADK_TARGET_CPU_MIPS_MIPS32),y)
 CONFIGURE_CPU_OPTS+=	--disable-mipsdsp --disable-mipsdspr2
 endif
 
+ifeq ($(ADK_TARGET_ARCH_ARM_WITH_NEON),y)
+CONFIGURE_CPU_OPTS+=	--enable-neon
+else
+CONFIGURE_CPU_OPTS+=	--disable-neon
+endif
+
 CONFIG_STYLE:=		minimal
 CONFIGURE_ARGS:=	--prefix=/usr \
 			--target-os=linux \

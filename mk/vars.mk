@@ -286,8 +286,8 @@ endif
 
 ifeq ($(ADK_TARGET_ARCH_ARM),y)
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_NEON),y)
-TARGET_CFLAGS+=		-ffast-math
-TARGET_CXXFLAGS+=	-ffast-math
+TARGET_CFLAGS+=		-ffast-math -funsafe-math-optimizations
+TARGET_CXXFLAGS+=	-ffast-math -funsafe-math-optimizations
 endif
 ifeq ($(ADK_TARGET_ARCH_ARM_WITH_THUMB),y)
 TARGET_CFLAGS+=		-mthumb -Wa,-mimplicit-it=thumb -mno-thumb-interwork

@@ -15,7 +15,6 @@ config ADK_TARGET_ARCH_PPC_WITH_ALTIVEC
 config ADK_TARGET_ARCH_ARM_WITH_NEON
 	bool "enable NEON SIMD support"
 	depends on ADK_TARGET_ARCH_ARM && ADK_TARGET_CPU_WITH_NEON
-	depends on !ADK_TARGET_LIB_GLIBC
 	default n
 	help
 	  Enable support for NEON SIMD CPU extensions.
@@ -37,3 +36,4 @@ config ADK_TARGET_FPU
 	default "neon" if ADK_TARGET_CPU_ARM_CORTEX_A8 && ADK_TARGET_ARCH_ARM_WITH_NEON
 	default "neon-fp16" if ADK_TARGET_CPU_ARM_CORTEX_A9 && ADK_TARGET_ARCH_ARM_WITH_NEON
 	default "neon-vfpv4" if ADK_TARGET_CPU_ARM_CORTEX_A15 && ADK_TARGET_ARCH_ARM_WITH_NEON
+	default "neon-fp-armv8" if ADK_TARGET_CPU_ARM_CORTEX_A53 && ADK_TARGET_ARCH_ARM_WITH_NEON

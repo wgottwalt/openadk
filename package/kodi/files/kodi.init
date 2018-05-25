@@ -15,10 +15,10 @@ start)
 	if [ ! -d /data/kodi ]; then
 		mkdir /data/kodi
 	fi
-	cd / && LD_PRELOAD=/usr/lib/kodi/kodi-shim.so /usr/lib/kodi/kodi.bin &
+	cd / && /usr/lib/kodi/kodi-rbpi &
 	;;
 stop)
-	kill $(pgrep -f /usr/lib/kodi/kodi.bin)
+	kill $(pgrep -f /usr/lib/kodi/kodi-rbpi)
 	;;
 restart)
 	sh $0 stop

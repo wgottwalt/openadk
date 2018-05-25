@@ -12,6 +12,9 @@ TARGET_CFLAGS:=		-O2
 TARGET_CXXFLAGS:=	-O2
 endif
 
+TARGET_CFLAGS:=		$(filter-out -ffast-math,$(TARGET_CFLAGS))
+TARGET_CXXFLAGS:=	$(filter-out -ffast-math,$(TARGET_CXXFLAGS))
+
 GLIBC_CONFOPTS:=	--build=$(GNU_HOST_NAME) \
 			--host=$(GNU_TARGET_NAME) \
 			--with-headers=$(STAGING_TARGET_DIR)/usr/include \

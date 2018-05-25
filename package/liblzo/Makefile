@@ -23,6 +23,7 @@ $(eval $(call HOST_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE}))
 $(eval $(call PKG_template,LIBLZO,liblzo,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},$(PKG_OPTS)))
 
 MAKE_FLAGS+=		CFLAGS_O="${TARGET_CFLAGS}"
+HOST_CONFIGURE_ARGS+=	--enable-shared
 
 liblzo-install:
 	${INSTALL_DIR} ${IDIR_LIBLZO}/usr/lib

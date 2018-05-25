@@ -910,7 +910,7 @@ int main() {
 							fprintf(cfg, "\tselect ADK_PACKAGE_LIBSTDCXX\n");
 						}
 						if (strncmp(token, "iconv", 5) == 0)
-							fprintf(cfg, "\tselect ADK_TARGET_LIBC_WITH_LIBICONV if ADK_TARGET_LIB_UCLIBC_NG\n");
+							fprintf(cfg, "\tselect ADK_TARGET_LIBC_WITH_LIBICONV if ADK_TARGET_LIB_UCLIBC_NG && !ADK_PACKAGE_LIBICONV\n");
 						if (strncmp(token, "intl", 4) == 0)
 							fprintf(cfg, "\tselect ADK_TARGET_LIBC_WITH_LIBINTL if ADK_TARGET_LIB_UCLIBC_NG\n");
 						if (strncmp(token, "locale", 6) == 0)
