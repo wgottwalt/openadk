@@ -3,7 +3,7 @@
 
 choice
 prompt "Target C library"
-depends on !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
+depends on !ADK_TARGET_CHOOSE_ARCH
 default ADK_TARGET_LIB_UCLIBC_NG if ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX
 
 config ADK_TARGET_LIB_UCLIBC_NG
@@ -141,7 +141,7 @@ endchoice
 
 choice
 prompt "Target C library version"
-depends on !ADK_APPLIANCE_TOOLCHAIN && !ADK_TARGET_CHOOSE_ARCH
+depends on !ADK_TARGET_CHOOSE_ARCH
 
 config ADK_TARGET_LIB_UCLIBC_NG_1_0_30
 	bool "1.0.30"
