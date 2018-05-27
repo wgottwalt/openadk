@@ -30,6 +30,9 @@ fi
 if [ ! -z ${ADK_TARGET_BINFMT} ];then
 	suffix=${suffix}_${ADK_TARGET_BINFMT}
 fi
+if [ -z ${ADK_TARGET_WITH_MMU} ];then
+	suffix=${suffix}_nommu
+fi
 
 rcconf=$(ls $topdir/root_${suffix}/etc/rc.conf)
 
