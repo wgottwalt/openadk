@@ -1,6 +1,17 @@
---- flex-2.6.4.orig/configure.ac	2017-05-03 21:16:37.000000000 +0100
-+++ flex-2.6.4/configure.ac	2018-03-14 05:11:52.278756139 +0100
-@@ -37,8 +37,6 @@ AC_SUBST(SHARED_VERSION_INFO)
+--- flex-2.6.4.orig/configure.ac	2017-05-03 13:16:37.000000000 -0700
++++ flex-2.6.4/configure.ac	2018-05-26 15:05:50.426997650 -0700
+@@ -25,8 +25,10 @@
+ # autoconf requirements and initialization
+ 
+ AC_INIT([the fast lexical analyser generator],[2.6.4],[flex-help@lists.sourceforge.net],[flex])
++AC_PREREQ([2.60])
+ AC_CONFIG_SRCDIR([src/scan.l])
+ AC_CONFIG_AUX_DIR([build-aux])
++AC_USE_SYSTEM_EXTENSIONS
+ LT_INIT
+ AM_INIT_AUTOMAKE([1.11.3 -Wno-portability foreign check-news std-options dist-lzip parallel-tests subdir-objects])
+ AC_CONFIG_HEADER([src/config.h])
+@@ -37,8 +39,6 @@ AC_SUBST(SHARED_VERSION_INFO)
  
  # checks for programs
  
