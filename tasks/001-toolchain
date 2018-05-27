@@ -1,5 +1,6 @@
 config ADK_APPLIANCE_TOOLCHAIN
-	bool "create a toolchain"
+	bool "create just a toolchain"
 	help
-	  Create a toolchain.
+	  Just create a toolchain, no target kernel or userland
+	  get compiled.
 
