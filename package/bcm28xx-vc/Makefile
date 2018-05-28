@@ -10,7 +10,7 @@ PKG_RELEASE:=		1
 PKG_DESCR:=		videocore tools and libraries
 PKG_SECTION:=		libs/video
 PKG_BUILDDEP:=		cmake-host
-PKG_NEEDS:=		threads
+PKG_NEEDS:=		c++ threads
 PKG_URL:=		https://github.com/raspberrypi/userland
 PKG_SITES:=		https://github.com/raspberrypi/userland.git
 

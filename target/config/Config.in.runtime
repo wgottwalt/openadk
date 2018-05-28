@@ -723,13 +723,11 @@ depends on ADK_TARGET_BOARD_BCM28XX
 
 config ADK_RUNTIME_MPEG2_KEY
 	string "MPEG2"
-	default "0x12345678"
 	help
 	  Hardware-specific license key for MPEG2 decoding.
 
 config ADK_RUNTIME_VC1_KEY
 	string "VC-1"
-	default "0x12345678"
 	help
 	  Hardware-specific license key for VC-1 decoding.
 

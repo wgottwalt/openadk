@@ -5,7 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		bcm28xx-bootloader
 # not cloned, local src directory used
-PKG_VERSION:=		865ddc1393f558198e7e7ce70928ff2e49c4f7f6
+PKG_VERSION:=		784fe6cebd9e5726c0c7b9e449f7cdbf2cf6959d
 PKG_RELEASE:=		1
 PKG_DESCR:=		bootloader for bcm28xx
 PKG_SECTION:=		base/boot
@@ -59,55 +59,59 @@ endif
 	printf "gpu_mem=$(ADK_TARGET_GPU_MEM)\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 ifneq ($(ADK_TARGET_HARDWARE_HIFIBERRY_AMP),)
-	printf "dtoverlay=hifiberry-amp.dtb\n" >> \
+	printf "dtoverlay=hifiberry-amp\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifneq ($(ADK_TARGET_HARDWARE_HIFIBERRY_DAC),)
-	printf "dtoverlay=hifiberry-dac.dtb\n" >> \
+	printf "dtoverlay=hifiberry-dac\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifneq ($(ADK_TARGET_HARDWARE_HIFIBERRY_DACPLUS),)
-	printf "dtoverlay=hifiberry-dacplus.dtb\n" >> \
+	printf "dtoverlay=hifiberry-dacplus\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifneq ($(ADK_TARGET_HARDWARE_HIFIBERRY_DIGI),)
-	printf "dtoverlay=hifiberry-digi.dtb\n" >> \
+	printf "dtoverlay=hifiberry-digi\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifneq ($(ADK_TARGET_HARDWARE_RPI_DAC),)
-	printf "dtoverlay=rpi-dac.dtb\n" >> \
+	printf "dtoverlay=rpi-dac\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifneq ($(ADK_TARGET_HARDWARE_IQAUDIO_DAC),)
-	printf "dtoverlay=iqaudio-dac.dtb\n" >> \
+	printf "dtoverlay=iqaudio-dac\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifneq ($(ADK_TARGET_HARDWARE_RPI_PROTO),)
-	printf "dtoverlay=rpi-proto.dtb\n" >> \
+	printf "dtoverlay=rpi-proto\n" >> \
+		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+endif
+ifeq ($(ADK_TARGET_HARDWARE_RPI3_NO_WIFI),y)
+	printf "dtoverlay=pi3-disable-wifi\n" >> \
+		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+endif
+ifeq ($(ADK_TARGET_HARDWARE_RPI3_NO_BT),y)
+	printf "dtoverlay=pi3-disable-bt\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
 ifeq ($(ADK_TARGET_HARDWARE_RPI3_SERIAL),y)
-	printf "dtoverlay=pi3-disable-bt.dtb\n" >> \
+	printf "enable_uart=1\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3_64),y)
+ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3_64)$(ADK_TARGET_SYSTEM_RASPBERRY_PI3_64),y)
 	printf "arm_control=0x200\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 	printf "enable_uart=1\n" >> \
 		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
 endif
-ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI3P_64),y)
-        printf "arm_control=0x200\n" >> \
-                $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-        printf "enable_uart=1\n" >> \
-                $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
-endif
-	printf "# License keys for video decoding\n" >> \
-                $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+ifneq ($(ADK_RUNTIME_MPEG2_KEY),)
 	printf "decode_MPG2=$(ADK_RUNTIME_MPEG2_KEY)\n" >> \
-                $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+endif
+ifneq ($(ADK_RUNTIME_VC1_KEY),)
 	printf "decode_WVC1=$(ADK_RUNTIME_VC1_KEY)\n" >> \
-                $(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+		$(IDIR_BCM28XX_BOOTLOADER)/boot/config.txt
+endif
 ifeq ($(ADK_PACKAGE_BCM28XX_DEBUGTOOL),y)
 	$(INSTALL_DIR) $(IDIR_BCM28XX_DEBUGTOOL)/usr/bin
 	$(INSTALL_BIN) ./files/vcdbg \

@@ -133,6 +133,9 @@ depends on ADK_TARGET_WITH_CARDBUS \
 	|| ADK_TARGET_WITH_SDIO \
 	|| ADK_TARGET_GENERIC
 
+config ADK_LINUX_KERNEL_BRCMDBG
+	bool
+
 config ADK_LINUX_KERNEL_BRCMFMAC
 	tristate "Broadcom brcmfmac wireless driver"
 	select ADK_LINUX_KERNEL_WIRELESS
@@ -141,24 +144,25 @@ config ADK_LINUX_KERNEL_BRCMFMAC
 	select ADK_LINUX_KERNEL_BCMA_POSSIBLE
 	select ADK_LINUX_KERNEL_RFKILL
 	select ADK_LINUX_KERNEL_WLAN_VENDOR_BROADCOM
+	select ADK_LINUX_KERNEL_BRCMDBG
 	select ADK_PACKAGE_BRCMFMAC_FIRMWARE
 
 config ADK_LINUX_KERNEL_BRCMFMAC_SDIO
 	bool "Broadcom brcmfmac wireless driver (SDIO)"
-	select ADK_LINUX_KERNEL_BRCMFMAC m
+	select ADK_LINUX_KERNEL_BRCMFMAC
 	depends on ADK_TARGET_WITH_SDIO
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI0
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI3
+	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI3P
 	default n
 	help
 	  Driver for Broadcom FullMac wireless cards (SDIO).
 
 config ADK_LINUX_KERNEL_BRCMFMAC_USB
 	bool "Broadcom brcmfmac wireless driver (USB)"
-	select ADK_LINUX_KERNEL_BRCMFMAC m
+	select ADK_LINUX_KERNEL_BRCMFMAC
 	depends on ADK_TARGET_WITH_USB
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI3
-	default y if ADK_TARGET_SYSTEM_RASPBERRY_PI3P
 	default n
 	help
 	  Driver for Broadcom FullMac wireless cards (USB).
