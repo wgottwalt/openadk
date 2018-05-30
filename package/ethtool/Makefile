@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ethtool
-PKG_VERSION:=		4.5
+PKG_VERSION:=		4.16
 PKG_RELEASE:=		1
-PKG_HASH:=		bb2834332c5ac7f5bbe1c9f78f4fa851e4a3fe6397b124d58467c9ccee9fca3b
+PKG_HASH:=		fe967a6722db2099fa63d847b6628e3e31cf9f53571a37503347dcc3e4015a03
 PKG_DESCR:=		display or change ethernet card settings
 PKG_SECTION:=		net/misc
 PKG_SITES:=		https://www.kernel.org/pub/software/network/ethtool/
@@ -17,6 +17,7 @@ $(eval $(call PKG_template,ETHTOOL,ethtool,${PKG_VERSION}-${PKG_RELEASE},${PKG_D
 
 ethtool-install:
 	${INSTALL_DIR} ${IDIR_ETHTOOL}/usr/sbin
-	${CP} ${WRKINST}/usr/sbin/ethtool ${IDIR_ETHTOOL}/usr/sbin
+	${INSTALL_BIN} ${WRKINST}/usr/sbin/ethtool \
+		${IDIR_ETHTOOL}/usr/sbin
 
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
