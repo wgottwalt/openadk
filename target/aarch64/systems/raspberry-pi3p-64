@@ -1,5 +1,5 @@
 config ADK_TARGET_SYSTEM_RASPBERRY_PI3P_64
-	bool "Raspberry PI 3 Model B+ (AARCH64)"
+	bool "Raspberry PI 3 Model B+"
 	select ADK_TARGET_LITTLE_ENDIAN
 	select ADK_TARGET_CPU_AARCH64_CORTEX_A53
 	select ADK_TARGET_BOARD_BCM28XX
