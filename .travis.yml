@@ -24,7 +24,6 @@ matrix:
   - env: ARCH=mips SYSTEM=mikrotik-rb4xx ENDIAN=big
   - env: ARCH=mips SYSTEM=mikrotik-rb532
   - env: ARCH=mips64 SYSTEM=lemote-yeelong
-  - env: ARCH=nds32 SYSTEM=andes-ag101p
   - env: ARCH=sh SYSTEM=numato-mimasv2 ENDIAN=big
   - env: ARCH=x86 SYSTEM=ibm-x40
   - env: ARCH=x86 SYSTEM=pcengines-alix
