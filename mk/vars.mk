@@ -76,7 +76,7 @@ endif
 
 GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_VENDOR)-$(ADK_TARGET_LINUXTYPE)-$(ADK_TARGET_SUFFIX)
 ifeq ($(ADK_TARGET_ARCH_C6X),y)
-GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_TARGET_LINUXTYPE)
+GNU_TARGET_NAME:=	ti$(ADK_TARGET_CPU_ARCH)-$(ADK_VENDOR)-$(ADK_TARGET_LINUXTYPE)
 endif
 ifeq ($(ADK_TARGET_OS_BAREMETAL),y)
 GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_TARGET_SUFFIX)
@@ -186,6 +186,11 @@ endif
 
 ifeq ($(ADK_TARGET_BINFMT_FLAT_SHARED),y)
 TARGET_LDFLAGS+=	-mid-shared-library
+endif
+
+ifeq ($(ADK_TARGET_BINFMT_DSBT),y)
+TARGET_CFLAGS+=		-mdsbt
+TARGET_CXXFLAGS+=	-mdsbt
 endif
 
 # security optimization, see http://www.akkadia.org/drepper/dsohowto.pdf

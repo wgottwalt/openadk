@@ -7,7 +7,7 @@ bool "Library support"
 
 config ADK_TARGET_USE_SHARED_LIBS_ONLY
 	bool "Create shared libraries only and link dynamically"
-	depends on !ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_BINFMT_DSBT
+	depends on !ADK_TARGET_BINFMT_FLAT
 
 config ADK_TARGET_USE_STATIC_LIBS_ONLY
 	bool "Create static libraries only and link statically"
@@ -19,10 +19,10 @@ config ADK_TARGET_USE_STATIC_LIBS_ONLY
 
 config ADK_TARGET_USE_SHARED_AND_STATIC_LIBS
 	bool "Create shared and static libraries and link dynamically"
-	depends on !ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_BINFMT_DSBT
+	depends on !ADK_TARGET_BINFMT_FLAT
 
 config ADK_TARGET_USE_STATIC_AND_SHARED_LIBS
 	bool "Create static and shared libraries and link statically"
-	depends on !ADK_TARGET_BINFMT_FLAT && !ADK_TARGET_BINFMT_DSBT
+	depends on !ADK_TARGET_BINFMT_FLAT
 
 endchoice

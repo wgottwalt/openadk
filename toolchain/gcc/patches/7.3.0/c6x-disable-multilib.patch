@@ -1,0 +1,10 @@
+diff -Nur gcc-7.3.0.orig/gcc/config/c6x/t-c6x-uclinux gcc-7.3.0/gcc/config/c6x/t-c6x-uclinux
+--- gcc-7.3.0.orig/gcc/config/c6x/t-c6x-uclinux	2011-11-02 16:23:48.424740000 +0100
++++ gcc-7.3.0/gcc/config/c6x/t-c6x-uclinux	2018-06-01 08:14:36.679894633 +0200
+@@ -1,3 +1,3 @@
+-MULTILIB_OSDIRNAMES    = march.c674x=!c674x
+-MULTILIB_OSDIRNAMES   += mbig-endian=!be
+-MULTILIB_OSDIRNAMES   += mbig-endian/march.c674x=!be/c674x
++MULTILIB_OSDIRNAMES    =
++#MULTILIB_OSDIRNAMES   += mbig-endian=!be
++#MULTILIB_OSDIRNAMES   += mbig-endian/march.c674x=!be/c674x
