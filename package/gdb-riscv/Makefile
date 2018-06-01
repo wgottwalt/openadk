@@ -4,25 +4,22 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gdb
-PKG_VERSION:=		8.1
+PKG_VERSION:=		riscv-gdb-8.1
+PKG_GIT:=		branch
 PKG_RELEASE:=		1
-PKG_HASH:=		af61a0263858e69c5dce51eab26662ff3d2ad9aa68da9583e8143b5426be4b34
 PKG_DESCR:=		programm debugger
 PKG_SECTION:=		app/debug
-PKG_SITES:=		${MASTER_SITE_GNU:=gdb/}
+PKG_HASH:=		605954d5747d5f08ea4b7f48e958d1ebbf39265e18f7f36738deeabb83744485
 PKG_DEPENDS:=		libncurses zlib libexpat libthread-db
 PKG_BUILDDEP:=		ncurses readline expat zlib
-PKG_NEEDS:=		c++
+PKG_SITES:=		https://github.com/riscv/riscv-binutils-gdb.git
 
-PKG_ARCH_DEPENDS:=	!cris !avr32 !nios2 !microblaze !or1k !riscv32 !riscv64
+PKG_ARCH_DEPENDS:=	riscv32 riscv64
 
 include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-XAKE_FLAGS+=		MAKEINFO=true
-
-# --enable-static is required to build libbfd.a
 CONFIGURE_ARGS+=	--enable-static \
 			--without-uiout \
 			--disable-tui \
@@ -30,14 +27,12 @@ CONFIGURE_ARGS+=	--enable-static \
 			--disable-gdbserver \
 			--without-x \
 			--disable-sim \
-			--disable-plugins \
 			--disable-werror \
 			--without-python \
 			--without-included-gettext \
 			--without-auto-load-safe-path \
 			--disable-install-libiberty \
 			--disable-install-libbfd \
-			--with-system-zlib \
 			--with-curses \
 			--enable-gdbmi
 

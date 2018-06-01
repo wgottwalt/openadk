@@ -24,6 +24,13 @@ PKG_GIT:=		branch
 PKG_SITES:=		git://git.pf.osdn.jp/gitroot/y/ys/ysato/binutils_gdb.git
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
+ifeq ($(ADK_TOOLCHAIN_GDB_RISCV_GIT),y)
+PKG_VERSION:=		riscv-gdb-8.1
+PKG_RELEASE:=		1
+PKG_GIT:=		branch
+PKG_SITES:=		https://github.com/riscv/riscv-binutils-gdb.git
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
+endif
 ifeq ($(ADK_TOOLCHAIN_GDB_GIT),y)
 PKG_VERSION:=		git
 PKG_RELEASE:=		1
