@@ -1,7 +1,20 @@
-diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh.c gcc-6.2.0/gcc/config/sh/sh.c
---- gcc-6.2.0.orig/gcc/config/sh/sh.c	2016-04-22 13:09:22.000000000 +0200
-+++ gcc-6.2.0/gcc/config/sh/sh.c	2016-12-10 19:58:58.649784537 +0100
-@@ -692,6 +692,7 @@
+diff -Nur gcc-7.3.0.orig/gcc/config/sh/sh-protos.h gcc-7.3.0/gcc/config/sh/sh-protos.h
+--- gcc-7.3.0.orig/gcc/config/sh/sh-protos.h	2017-01-01 13:07:43.000000000 +0100
++++ gcc-7.3.0/gcc/config/sh/sh-protos.h	2018-06-03 02:20:50.000000000 +0200
+@@ -35,6 +35,9 @@
+   SFUNC_STATIC
+ };
+ 
++#define TARGET_ATOMIC_HARD_CAS \
++  (selected_atomic_model ().type == sh_atomic_model::hard_cas)
++
+ #ifdef RTX_CODE
+ extern rtx sh_fsca_sf2int (void);
+ extern rtx sh_fsca_int2sf (void);
+diff -Nur gcc-7.3.0.orig/gcc/config/sh/sh.c gcc-7.3.0/gcc/config/sh/sh.c
+--- gcc-7.3.0.orig/gcc/config/sh/sh.c	2017-04-04 00:30:56.000000000 +0200
++++ gcc-7.3.0/gcc/config/sh/sh.c	2018-06-03 02:20:50.000000000 +0200
+@@ -662,6 +662,7 @@
    model_names[sh_atomic_model::hard_llcs] = "hard-llcs";
    model_names[sh_atomic_model::soft_tcb] = "soft-tcb";
    model_names[sh_atomic_model::soft_imask] = "soft-imask";
@@ -9,7 +22,7 @@ diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh.c gcc-6.2.0/gcc/config/sh/sh.c
  
    const char* model_cdef_names[sh_atomic_model::num_models];
    model_cdef_names[sh_atomic_model::none] = "NONE";
-@@ -699,6 +700,7 @@
+@@ -669,6 +670,7 @@
    model_cdef_names[sh_atomic_model::hard_llcs] = "HARD_LLCS";
    model_cdef_names[sh_atomic_model::soft_tcb] = "SOFT_TCB";
    model_cdef_names[sh_atomic_model::soft_imask] = "SOFT_IMASK";
@@ -17,7 +30,7 @@ diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh.c gcc-6.2.0/gcc/config/sh/sh.c
  
    sh_atomic_model ret;
    ret.type = sh_atomic_model::none;
-@@ -780,6 +782,9 @@
+@@ -747,6 +749,9 @@
    if (ret.type == sh_atomic_model::soft_imask && TARGET_USERMODE)
      err_ret ("cannot use atomic model %s in user mode", ret.name);
  
@@ -27,7 +40,7 @@ diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh.c gcc-6.2.0/gcc/config/sh/sh.c
    return ret;
  
  #undef err_ret
-@@ -845,6 +850,8 @@
+@@ -803,6 +808,8 @@
      sh_cpu = PROCESSOR_SH2E;
    if (TARGET_SH2A)
      sh_cpu = PROCESSOR_SH2A;
@@ -36,26 +49,26 @@ diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh.c gcc-6.2.0/gcc/config/sh/sh.c
    if (TARGET_SH3)
      sh_cpu = PROCESSOR_SH3;
    if (TARGET_SH3E)
-diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh.h gcc-6.2.0/gcc/config/sh/sh.h
---- gcc-6.2.0.orig/gcc/config/sh/sh.h	2016-01-04 15:30:50.000000000 +0100
-+++ gcc-6.2.0/gcc/config/sh/sh.h	2016-12-10 19:58:58.649784537 +0100
-@@ -106,6 +106,7 @@
+diff -Nur gcc-7.3.0.orig/gcc/config/sh/sh.h gcc-7.3.0/gcc/config/sh/sh.h
+--- gcc-7.3.0.orig/gcc/config/sh/sh.h	2017-01-01 13:07:43.000000000 +0100
++++ gcc-7.3.0/gcc/config/sh/sh.h	2018-06-03 02:20:50.000000000 +0200
+@@ -83,6 +83,7 @@
  #define SUPPORT_SH4_SINGLE 1
  #define SUPPORT_SH2A 1
  #define SUPPORT_SH2A_SINGLE 1
 +#define SUPPORT_SHJ2 1
  #endif
  
- #define TARGET_DIVIDE_INV \
-@@ -157,6 +158,7 @@
- #define SELECT_SH5_32MEDIA_NOFPU (MASK_SH5 | MASK_SH_E)
- #define SELECT_SH5_COMPACT	 (MASK_SH5 | MASK_SH4 | SELECT_SH3E)
- #define SELECT_SH5_COMPACT_NOFPU (MASK_SH5 | SELECT_SH3)
+ #define TARGET_DIVIDE_CALL_DIV1 (sh_div_strategy == SH_DIV_CALL_DIV1)
+@@ -115,6 +116,7 @@
+ #define SELECT_SH4A_SINGLE_ONLY  (MASK_SH4A | SELECT_SH4_SINGLE_ONLY)
+ #define SELECT_SH4A		 (MASK_SH4A | SELECT_SH4)
+ #define SELECT_SH4A_SINGLE	 (MASK_SH4A | SELECT_SH4_SINGLE)
 +#define SELECT_SHJ2		 (MASK_SHJ2 | SELECT_SH2)
  
  #if SUPPORT_SH1
  #define SUPPORT_SH2 1
-@@ -164,6 +166,7 @@
+@@ -122,6 +124,7 @@
  #if SUPPORT_SH2
  #define SUPPORT_SH3 1
  #define SUPPORT_SH2A_NOFPU 1
@@ -63,27 +76,34 @@ diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh.h gcc-6.2.0/gcc/config/sh/sh.h
  #endif
  #if SUPPORT_SH3
  #define SUPPORT_SH4_NOFPU 1
-@@ -211,7 +214,7 @@
+@@ -154,7 +157,7 @@
  #define MASK_ARCH (MASK_SH1 | MASK_SH2 | MASK_SH3 | MASK_SH_E | MASK_SH4 \
  		   | MASK_HARD_SH2A | MASK_HARD_SH2A_DOUBLE | MASK_SH4A \
- 		   | MASK_HARD_SH4 | MASK_FPU_SINGLE | MASK_SH5 \
+ 		   | MASK_HARD_SH4 | MASK_FPU_SINGLE \
 -		   | MASK_FPU_SINGLE_ONLY)
 +		   | MASK_FPU_SINGLE_ONLY | MASK_SHJ2)
  
  /* This defaults us to big-endian.  */
  #ifndef TARGET_ENDIAN_DEFAULT
-@@ -289,8 +292,8 @@
- %{m5-compact*:--isa=SHcompact} \
- %{m5-32media*:--isa=SHmedia --abi=32} \
- %{m5-64media*:--isa=SHmedia --abi=64} \
--%{m4al:-dsp} %{mcut2-workaround:-cut2-workaround}"
--
-+%{m4al:-dsp} %{mcut2-workaround:-cut2-workaround} \
+@@ -229,7 +232,8 @@
+ %{m2a-single:--isa=sh2a} \
+ %{m2a-single-only:--isa=sh2a} \
+ %{m2a-nofpu:--isa=sh2a-nofpu} \
+-%{m4al:-dsp}"
++%{m4al:-dsp} \
 +%{mj2:-isa=j2}"
+ 
  #define ASM_SPEC SH_ASM_SPEC
  
- #ifndef SUBTARGET_ASM_ENDIAN_SPEC
-@@ -1853,7 +1856,7 @@
+@@ -345,6 +349,7 @@
+     hard_llcs,
+     soft_tcb,
+     soft_imask,
++    hard_cas,
+ 
+     num_models
+   };
+@@ -1568,7 +1573,7 @@
  
  /* Nonzero if the target supports dynamic shift instructions
     like shad and shld.  */
@@ -92,7 +112,7 @@ diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh.h gcc-6.2.0/gcc/config/sh/sh.h
  
  /* The cost of using the dynamic shift insns (shad, shld) are the same
     if they are available.  If they are not available a library function will
-@@ -2185,6 +2188,7 @@
+@@ -1833,6 +1838,7 @@
    PROCESSOR_SH2,
    PROCESSOR_SH2E,
    PROCESSOR_SH2A,
@@ -100,10 +120,10 @@ diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh.h gcc-6.2.0/gcc/config/sh/sh.h
    PROCESSOR_SH3,
    PROCESSOR_SH3E,
    PROCESSOR_SH4,
-diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh.opt gcc-6.2.0/gcc/config/sh/sh.opt
---- gcc-6.2.0.orig/gcc/config/sh/sh.opt	2016-01-04 15:30:50.000000000 +0100
-+++ gcc-6.2.0/gcc/config/sh/sh.opt	2016-12-10 19:58:58.649784537 +0100
-@@ -71,6 +71,10 @@
+diff -Nur gcc-7.3.0.orig/gcc/config/sh/sh.opt gcc-7.3.0/gcc/config/sh/sh.opt
+--- gcc-7.3.0.orig/gcc/config/sh/sh.opt	2017-01-01 13:07:43.000000000 +0100
++++ gcc-7.3.0/gcc/config/sh/sh.opt	2018-06-03 02:20:50.000000000 +0200
+@@ -65,6 +65,10 @@
  Target RejectNegative Condition(SUPPORT_SH2E)
  Generate SH2e code.
  
@@ -114,30 +134,9 @@ diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh.opt gcc-6.2.0/gcc/config/sh/sh.opt
  m3
  Target RejectNegative Mask(SH3) Condition(SUPPORT_SH3)
  Generate SH3 code.
-diff -Nur gcc-6.2.0.orig/gcc/config/sh/sh-protos.h gcc-6.2.0/gcc/config/sh/sh-protos.h
---- gcc-6.2.0.orig/gcc/config/sh/sh-protos.h	2016-01-04 15:30:50.000000000 +0100
-+++ gcc-6.2.0/gcc/config/sh/sh-protos.h	2016-12-10 19:58:58.641785064 +0100
-@@ -45,6 +45,7 @@
-     hard_llcs,
-     soft_tcb,
-     soft_imask,
-+    hard_cas,
- 
-     num_models
-   };
-@@ -88,6 +89,9 @@
- #define TARGET_ATOMIC_SOFT_IMASK \
-   (selected_atomic_model ().type == sh_atomic_model::soft_imask)
- 
-+#define TARGET_ATOMIC_HARD_CAS \
-+  (selected_atomic_model ().type == sh_atomic_model::hard_cas)
-+
- #ifdef RTX_CODE
- extern rtx sh_fsca_sf2int (void);
- extern rtx sh_fsca_int2sf (void);
-diff -Nur gcc-6.2.0.orig/gcc/config/sh/sync.md gcc-6.2.0/gcc/config/sh/sync.md
---- gcc-6.2.0.orig/gcc/config/sh/sync.md	2016-01-04 15:30:50.000000000 +0100
-+++ gcc-6.2.0/gcc/config/sh/sync.md	2016-12-10 19:58:58.649784537 +0100
+diff -Nur gcc-7.3.0.orig/gcc/config/sh/sync.md gcc-7.3.0/gcc/config/sh/sync.md
+--- gcc-7.3.0.orig/gcc/config/sh/sync.md	2017-01-01 13:07:43.000000000 +0100
++++ gcc-7.3.0/gcc/config/sh/sync.md	2018-06-03 02:20:50.000000000 +0200
 @@ -240,6 +240,9 @@
        || (TARGET_SH4A && <MODE>mode == SImode && !TARGET_ATOMIC_STRICT))
      atomic_insn = gen_atomic_compare_and_swap<mode>_hard (old_val, mem,
@@ -206,19 +205,20 @@ diff -Nur gcc-6.2.0.orig/gcc/config/sh/sync.md gcc-6.2.0/gcc/config/sh/sync.md
  ;; The QIHImode llcs patterns modify the address register of the memory
  ;; operand.  In order to express that, we have to open code the memory
  ;; operand.  Initially the insn is expanded like every other atomic insn
-diff -Nur gcc-6.2.0.orig/gcc/config/sh/t-sh gcc-6.2.0/gcc/config/sh/t-sh
---- gcc-6.2.0.orig/gcc/config/sh/t-sh	2016-01-04 15:30:50.000000000 +0100
-+++ gcc-6.2.0/gcc/config/sh/t-sh	2016-12-10 19:58:58.649784537 +0100
-@@ -52,7 +52,7 @@
+diff -Nur gcc-7.3.0.orig/gcc/config/sh/t-sh gcc-7.3.0/gcc/config/sh/t-sh
+--- gcc-7.3.0.orig/gcc/config/sh/t-sh	2017-01-01 13:07:43.000000000 +0100
++++ gcc-7.3.0/gcc/config/sh/t-sh	2018-06-03 02:20:50.000000000 +0200
+@@ -50,7 +50,8 @@
+              m2e,m3e,m4-single-only,m4-100-single-only,m4-200-single-only,m4-300-single-only,m4a-single-only \
+              m2a-single,m2a-single-only \
               m4-single,m4-100-single,m4-200-single,m4-300-single,m4a-single \
-              m4,m4-100,m4-200,m4-300,m4a \
-              m5-32media,m5-compact,m5-32media \
--             m5-32media-nofpu,m5-compact-nofpu,m5-32media-nofpu; do \
-+             m5-32media-nofpu,m5-compact-nofpu,m5-32media-nofpu,mj2; do \
+-             m4,m4-100,m4-200,m4-300,m4a; do \
++             m4,m4-100,m4-200,m4-300,m4a \
++             mj2; do \
      subst= ; \
      for lib in `echo $$abi|tr , ' '` ; do \
        if test "`echo $$multilibs|sed s/$$lib//`" != "$$multilibs"; then \
-@@ -65,9 +65,9 @@
+@@ -63,9 +64,9 @@
  
  # SH1 and SH2A support big endian only.
  ifeq ($(DEFAULT_ENDIAN),ml)
@@ -230,18 +230,20 @@ diff -Nur gcc-6.2.0.orig/gcc/config/sh/t-sh gcc-6.2.0/gcc/config/sh/t-sh
  endif
  
  MULTILIB_OSDIRNAMES = \
-@@ -96,6 +96,7 @@
- 	m5-compact-nofpu=!m5-compact-nofpu $(OTHER_ENDIAN)/m5-compact-nofpu=!$(OTHER_ENDIAN)/m5-compact-nofpu \
- 	m5-64media=!m5-64media $(OTHER_ENDIAN)/m5-64media=!$(OTHER_ENDIAN)/m5-64media \
- 	m5-64media-nofpu=!m5-64media-nofpu $(OTHER_ENDIAN)/m5-64media-nofpu=!$(OTHER_ENDIAN)/m5-64media-nofpu
+@@ -87,7 +88,8 @@
+ 	m4a-single-only=!m4a-single-only $(OTHER_ENDIAN)/m4a-single-only=!$(OTHER_ENDIAN)/m4a-single-only \
+ 	m4a-single=!m4a-single $(OTHER_ENDIAN)/m4a-single=!$(OTHER_ENDIAN)/m4a-single \
+ 	m4a=!m4a $(OTHER_ENDIAN)/m4a=!$(OTHER_ENDIAN)/m4a \
+-	m4al=!m4al $(OTHER_ENDIAN)/m4al=!$(OTHER_ENDIAN)/m4al
++	m4al=!m4al $(OTHER_ENDIAN)/m4al=!$(OTHER_ENDIAN)/m4al \
 +	mj2=!j2
  
  $(out_object_file): gt-sh.h
  gt-sh.h : s-gtype ; @true
-diff -Nur gcc-6.2.0.orig/gcc/config.gcc gcc-6.2.0/gcc/config.gcc
---- gcc-6.2.0.orig/gcc/config.gcc	2016-06-08 15:34:25.000000000 +0200
-+++ gcc-6.2.0/gcc/config.gcc	2016-12-10 19:58:58.641785064 +0100
-@@ -471,7 +471,7 @@
+diff -Nur gcc-7.3.0.orig/gcc/config.gcc gcc-7.3.0/gcc/config.gcc
+--- gcc-7.3.0.orig/gcc/config.gcc	2018-01-08 14:39:11.000000000 +0100
++++ gcc-7.3.0/gcc/config.gcc	2018-06-03 02:20:50.000000000 +0200
+@@ -474,7 +474,7 @@
  	extra_headers="s390intrin.h htmintrin.h htmxlintrin.h vecintrin.h"
  	;;
  # Note the 'l'; we need to be able to match e.g. "shle" or "shl".
@@ -250,7 +252,7 @@ diff -Nur gcc-6.2.0.orig/gcc/config.gcc gcc-6.2.0/gcc/config.gcc
  	cpu_type=sh
  	extra_options="${extra_options} fused-madd.opt"
  	extra_objs="${extra_objs} sh_treg_combine.o sh-mem.o sh_optimize_sett_clrt.o"
-@@ -2613,19 +2613,19 @@
+@@ -2664,18 +2664,18 @@
  	extra_options="${extra_options} s390/tpf.opt"
  	tmake_file="${tmake_file} s390/t-s390"
  	;;
@@ -258,23 +260,22 @@ diff -Nur gcc-6.2.0.orig/gcc/config.gcc gcc-6.2.0/gcc/config.gcc
 -  sh-*-linux* | sh[2346lbe]*-*-linux* | \
 +sh-*-elf* | sh[12346lj]*-*-elf* | \
 +  sh-*-linux* | sh[2346lbej]*-*-linux* | \
-   sh-*-netbsdelf* | shl*-*-netbsdelf* | sh5-*-netbsd* | sh5l*-*-netbsd* | \
-   sh64-*-netbsd* | sh64l*-*-netbsd*)
+   sh-*-netbsdelf* | shl*-*-netbsdelf*)
  	tmake_file="${tmake_file} sh/t-sh sh/t-elf"
  	if test x${with_endian} = x; then
  		case ${target} in
 -		sh[1234]*be-*-* | sh[1234]*eb-*-*) with_endian=big ;;
-+		sh[j1234]*be-*-* | sh[j1234]*eb-*-*) with_endian=big ;;
++		sh[j1234]*be-*-* | sh[n1234]*eb-*-*) with_endian=big ;;
  		shbe-*-* | sheb-*-*)		   with_endian=big,little ;;
  		sh[1234]l* | sh[34]*-*-linux*)	   with_endian=little ;;
- 		shl* | sh64l* | sh*-*-linux* | \
- 		  sh5l* | sh-superh-elf)	   with_endian=little,big ;;
+ 		shl* | sh*-*-linux* | \
+ 		  sh-superh-elf)		   with_endian=little,big ;;
 -		sh[1234]*-*-*)			   with_endian=big ;;
 +		sh[j1234]*-*-*)			   with_endian=big ;;
  		*)				   with_endian=big,little ;;
  		esac
  	fi
-@@ -2715,6 +2715,7 @@
+@@ -2742,6 +2742,7 @@
  	sh2a_nofpu*)		sh_cpu_target=sh2a-nofpu ;;
  	sh2a*)			sh_cpu_target=sh2a ;;
  	sh2e*)			sh_cpu_target=sh2e ;;
@@ -282,7 +283,7 @@ diff -Nur gcc-6.2.0.orig/gcc/config.gcc gcc-6.2.0/gcc/config.gcc
  	sh2*)			sh_cpu_target=sh2 ;;
  	*)			sh_cpu_target=sh1 ;;
  	esac
-@@ -2739,7 +2740,7 @@
+@@ -2763,7 +2764,7 @@
  	  sh2a-single-only | sh2a-single | sh2a-nofpu | sh2a | \
  	  sh4a-single-only | sh4a-single | sh4a-nofpu | sh4a | sh4al | \
  	  sh4-single-only | sh4-single | sh4-nofpu | sh4 | sh4-300 | \
@@ -291,9 +292,9 @@ diff -Nur gcc-6.2.0.orig/gcc/config.gcc gcc-6.2.0/gcc/config.gcc
  	"")	sh_cpu_default=${sh_cpu_target} ;;
  	*)	echo "with_cpu=$with_cpu not supported"; exit 1 ;;
  	esac
-@@ -2750,9 +2751,9 @@
+@@ -2772,9 +2773,9 @@
+ 		case ${target} in
  		sh[1234]*)	sh_multilibs=${sh_cpu_target} ;;
- 		sh64* | sh5*)	sh_multilibs=m5-32media,m5-32media-nofpu,m5-compact,m5-compact-nofpu,m5-64media,m5-64media-nofpu ;;
  		sh-superh-*)	sh_multilibs=m4,m4-single,m4-single-only,m4-nofpu ;;
 -		sh*-*-linux*)	sh_multilibs=m1,m2,m2a,m3e,m4 ;;
 +		sh*-*-linux*)	sh_multilibs=m1,m2,m2a,m3e,m4,mj2 ;;
@@ -303,26 +304,26 @@ diff -Nur gcc-6.2.0.orig/gcc/config.gcc gcc-6.2.0/gcc/config.gcc
  		esac
  		if test x$with_fp = xno; then
  			sh_multilibs="`echo $sh_multilibs|sed -e s/m4/sh4-nofpu/ -e s/,m4-[^,]*//g -e s/,m[23]e// -e s/m2a,m2a-single/m2a-nofpu/ -e s/m5-..m....,//g`"
-@@ -2770,7 +2771,8 @@
- 		m2a | m2a-single | m2a-single-only | m2a-nofpu | \
- 		m5-64media | m5-64media-nofpu | \
- 		m5-32media | m5-32media-nofpu | \
--		m5-compact | m5-compact-nofpu)
-+		m5-compact | m5-compact-nofpu | \
+@@ -2789,7 +2790,8 @@
+ 		m1 | m2 | m2e | m3 | m3e | \
+ 		m4 | m4-single | m4-single-only | m4-nofpu | m4-300 |\
+ 		m4a | m4a-single | m4a-single-only | m4a-nofpu | m4al | \
+-		m2a | m2a-single | m2a-single-only | m2a-nofpu)
++		m2a | m2a-single | m2a-single-only | m2a-nofpu | \
 +		mj2)
  			# TM_MULTILIB_CONFIG is used by t-sh for the non-endian multilib definition
  			# It is passed to MULTIILIB_OPTIONS verbatim.
  			TM_MULTILIB_CONFIG="${TM_MULTILIB_CONFIG}/${sh_multilib}"
-@@ -2787,7 +2789,7 @@
+@@ -2806,7 +2808,7 @@
  	done
  	TM_MULTILIB_CONFIG=`echo $TM_MULTILIB_CONFIG | sed 's:^/::'`
  	if test x${enable_incomplete_targets} = xyes ; then
--		tm_defines="$tm_defines SUPPORT_SH1=1 SUPPORT_SH2E=1 SUPPORT_SH4=1 SUPPORT_SH4_SINGLE=1 SUPPORT_SH2A=1 SUPPORT_SH2A_SINGLE=1 SUPPORT_SH5_32MEDIA=1 SUPPORT_SH5_32MEDIA_NOFPU=1 SUPPORT_SH5_64MEDIA=1 SUPPORT_SH5_64MEDIA_NOFPU=1"
-+		tm_defines="$tm_defines SUPPORT_SH1=1 SUPPORT_SH2E=1 SUPPORT_SH4=1 SUPPORT_SH4_SINGLE=1 SUPPORT_SH2A=1 SUPPORT_SH2A_SINGLE=1 SUPPORT_SH5_32MEDIA=1 SUPPORT_SH5_32MEDIA_NOFPU=1 SUPPORT_SH5_64MEDIA=1 SUPPORT_SH5_64MEDIA_NOFPU=1 SUPPORT_SHJ2=1"
+-		tm_defines="$tm_defines SUPPORT_SH1=1 SUPPORT_SH2E=1 SUPPORT_SH4=1 SUPPORT_SH4_SINGLE=1 SUPPORT_SH2A=1 SUPPORT_SH2A_SINGLE=1"
++		tm_defines="$tm_defines SUPPORT_SH1=1 SUPPORT_SH2E=1 SUPPORT_SH4=1 SUPPORT_SH4_SINGLE=1 SUPPORT_SH2A=1 SUPPORT_SH2A_SINGLE=1 SUPPORT_SHJ2=1"
  	fi
  	tm_file="$tm_file ./sysroot-suffix.h"
  	tmake_file="$tmake_file t-sysroot-suffix"
-@@ -4268,6 +4270,8 @@
+@@ -4380,6 +4382,8 @@
  			;;
  		m4a | m4a-single | m4a-single-only | m4a-nofpu | m4al)
  		        ;;
@@ -331,7 +332,7 @@ diff -Nur gcc-6.2.0.orig/gcc/config.gcc gcc-6.2.0/gcc/config.gcc
  		*)
  			echo "Unknown CPU used in --with-cpu=$with_cpu, known values:"  1>&2
  			echo "m1 m2 m2e m3 m3e m4 m4-single m4-single-only m4-nofpu" 1>&2
-@@ -4477,7 +4481,7 @@
+@@ -4589,7 +4593,7 @@
  		tmake_file="rs6000/t-rs6000 ${tmake_file}"
  		;;
  
