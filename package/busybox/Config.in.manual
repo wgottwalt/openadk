@@ -13,7 +13,7 @@ config ADK_PACKAGE_BUSYBOX
 choice
 prompt "Choose predefined set of applets"
 depends on ADK_PACKAGE_BUSYBOX
-default ADK_PACKAGE_BUSYBOX_MINIMAL if ADK_TARGET_UCLINUX
+default ADK_PACKAGE_BUSYBOX_MINIMAL if !ADK_TARGET_WITH_MMU
 
 config ADK_PACKAGE_BUSYBOX_DEFAULT
 	bool "activate standard set of applets"

@@ -52,7 +52,7 @@ endchoice
 choice
 prompt "system for /dev management"
 depends on !ADK_APPLIANCE_TOOLCHAIN
-default ADK_RUNTIME_DEV_STATIC if ADK_TARGET_ARCH_CRIS || ADK_TARGET_UCLINUX
+default ADK_RUNTIME_DEV_STATIC if ADK_TARGET_ARCH_CRIS || !ADK_TARGET_WITH_MMU
 default ADK_RUNTIME_DEV_MDEV
 
 config ADK_RUNTIME_DEV_MDEV
@@ -425,12 +425,13 @@ config ADK_RUNTIME_KBD_LAYOUT
 
 choice
 prompt "initial login shell for the root user"
-default ADK_ROOTSH_HUSH if ADK_TARGET_UCLINUX
+default ADK_ROOTSH_HUSH if !ADK_TARGET_WITH_MMU
 default ADK_ROOTSH_MKSH
 
 config ADK_ROOTSH_MKSH
 	bool "mksh (MirBSD Korn Shell)"
 	select ADK_PACKAGE_MKSH if !ADK_APPLIANCE_TOOLCHAIN
+	depends on ADK_TARGET_WITH_MMU
 	help
 	  Use mksh (a Korn Shell variant) as standard login shell
 	  for the superuser.
@@ -452,6 +453,7 @@ config ADK_ROOTSH_ASH
 	bool "ash (busybox shell)"
 	select BUSYBOX_ASH
 	select BUSYBOX_SH_IS_ASH
+	depends on ADK_TARGET_WITH_MMU
 	help
 	  Use the minimalistic ash variant that is part of busybox
 	  as standard login shell for the superuser. This is the
@@ -460,12 +462,14 @@ config ADK_ROOTSH_ASH
 config ADK_ROOTSH_BASH
 	bool "bash (GNU Bourne-Again Shell)"
 	select ADK_PACKAGE_BASH
+	depends on ADK_TARGET_WITH_MMU
 	help
 	  Use GNU bash as standard login shell for the superuser.
 
 config ADK_ROOTSH_TCSH
 	bool "tcsh (Tenex C Shell)"
 	select ADK_PACKAGE_TCSH
+	depends on ADK_TARGET_WITH_MMU
 	help
 	  Use tcsh (a C Shell variant) as standard login shell
 	  for the superuser.
@@ -473,6 +477,7 @@ config ADK_ROOTSH_TCSH
 config ADK_ROOTSH_ZSH
 	bool "zsh (The Z Shell)"
 	select ADK_PACKAGE_ZSH
+	depends on ADK_TARGET_WITH_MMU
 	help
 	  Use zsh as standard login shell for the superuser.
 
@@ -480,12 +485,13 @@ endchoice
 
 choice
 prompt "system /bin/sh (POSIX script shell)"
-default ADK_BINSH_HUSH if ADK_TARGET_UCLINUX
+default ADK_BINSH_HUSH if !ADK_TARGET_WITH_MMU
 default ADK_BINSH_MKSH
 
 config ADK_BINSH_MKSH
 	bool "mksh (MirBSD Korn Shell)"
 	select ADK_PACKAGE_MKSH if !ADK_APPLIANCE_TOOLCHAIN
+	depends on ADK_TARGET_WITH_MMU
 	help
 	  Use mksh (a Korn Shell variant) as system shell, which is
 	  both small and powerful, so quite suited for this task.
@@ -505,6 +511,7 @@ config ADK_BINSH_SASH
 config ADK_BINSH_ASH
 	bool "ash (busybox)"
 	select BUSYBOX_ASH
+	depends on ADK_TARGET_WITH_MMU
 	help
 	  Use the minimalistic ash variant that is part of busybox
 	  as system shell. This is the default and rather small and
@@ -513,6 +520,7 @@ config ADK_BINSH_ASH
 config ADK_BINSH_BASH
 	bool "bash (GNU Bourne-Again Shell)"
 	select ADK_PACKAGE_BASH
+	depends on ADK_TARGET_WITH_MMU
 	help
 	  Use GNU bash as system shell. This is discouraged due to
 	  its size and slowness.
@@ -520,6 +528,7 @@ config ADK_BINSH_BASH
 config ADK_BINSH_ZSH
 	bool "zsh (The Z Shell)"
 	select ADK_PACKAGE_ZSH
+	depends on ADK_TARGET_WITH_MMU
 	help
 	  Use zsh as system shell. This is probably a bad idea.
 
