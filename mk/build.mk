@@ -457,7 +457,7 @@ defconfig: .menu $(CONFIG)/conf
 			>> $(ADK_TOPDIR)/.defconfig; \
 	fi
 	@if [ ! -z "$(ADK_TARGET_INSTRUCTION_SET)" ];then \
-		grep "^config" target/config/Config.in.archopts \
+		grep "^config" target/config/Config.in.instructions \
 			|grep -i "$(ADK_TARGET_INSTRUCTION_SET)$$" \
 			|sed -e "s#^config \(.*\)#\1=y#" \
 			>> $(ADK_TOPDIR)/.defconfig; \
