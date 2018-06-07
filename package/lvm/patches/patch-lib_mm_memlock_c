@@ -1,5 +1,5 @@
---- LVM2.2.02.168.orig/lib/mm/memlock.c	2016-12-01 00:17:29.000000000 +0100
-+++ LVM2.2.02.168/lib/mm/memlock.c	2017-03-26 19:05:36.000000000 +0200
+--- LVM2.2.02.177.orig/lib/mm/memlock.c	2017-12-18 21:44:35.000000000 +0100
++++ LVM2.2.02.177/lib/mm/memlock.c	2018-06-07 03:09:58.000000000 +0200
 @@ -25,7 +25,6 @@
  #include <sys/mman.h>
  #include <sys/time.h>
@@ -8,7 +8,7 @@
  
  #ifdef HAVE_VALGRIND
  #include <valgrind.h>
-@@ -151,10 +150,8 @@ static void _touch_memory(void *mem, siz
+@@ -152,10 +151,8 @@ static void _touch_memory(void *mem, siz
  static void _allocate_memory(void)
  {
  #ifndef VALGRIND_POOL
@@ -20,7 +20,7 @@
  
  	/* Check if we could preallocate requested stack */
  	if ((getrlimit (RLIMIT_STACK, &limit) == 0) &&
-@@ -163,50 +160,13 @@ static void _allocate_memory(void)
+@@ -164,50 +161,13 @@ static void _allocate_memory(void)
  		_touch_memory(stack_mem, _size_stack);
  	/* FIXME else warn user setting got ignored */
  

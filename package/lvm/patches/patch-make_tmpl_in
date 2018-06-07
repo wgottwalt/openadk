@@ -1,6 +1,6 @@
---- LVM2.2.02.168.orig/make.tmpl.in	2016-12-01 00:17:30.000000000 +0100
-+++ LVM2.2.02.168/make.tmpl.in	2017-03-27 20:32:53.000000000 +0200
-@@ -437,7 +437,8 @@ $(LIB_SHARED): $(LIB_SHARED).$(LIB_VERSI
+--- LVM2.2.02.177.orig/make.tmpl.in	2017-12-18 21:44:35.000000000 +0100
++++ LVM2.2.02.177/make.tmpl.in	2018-06-07 03:09:58.000000000 +0200
+@@ -468,7 +468,8 @@ $(LIB_SHARED): $(LIB_SHARED).$(LIB_VERSI
  CLEAN_TARGETS += $(LDDEPS) .exported_symbols_generated
  
  install_lib_shared: $(LIB_SHARED)
@@ -10,7 +10,7 @@
  	$(INSTALL_DIR) $(usrlibdir)
  	$(LN_S) -f $(USRLIB_RELPATH)$(<F).$(LIB_VERSION) $(usrlibdir)/$(<F)
  
-@@ -445,11 +446,13 @@ install_lib_shared: $(LIB_SHARED)
+@@ -476,11 +477,13 @@ install_lib_shared: $(LIB_SHARED)
  #        and for compatibility links in libdir are created
  #        when the code is fixed links could be removed.
  install_dm_plugin: $(LIB_SHARED)

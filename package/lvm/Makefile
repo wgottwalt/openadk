@@ -4,16 +4,16 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		lvm
-PKG_VERSION:=		2.02.168
-PKG_RELEASE:=		2
-PKG_HASH:=		23a3d1cddd41b3ef51812ebf83e9fa491f502fe74130d4263be327a91914660d
+PKG_VERSION:=		2.02.177
+PKG_RELEASE:=		1
+PKG_HASH:=		4025a23ec9b15c2cb7486d151c29dc953b75efc4d452cfe9dbbc7c0fac8e80f2
 PKG_DESCR:=		logical volume management
 PKG_SECTION:=		sys/fs
 PKG_DEPENDS:=		libdevmapper libncurses
 PKG_BUILDDEP:=		ncurses util-linux
 PKG_NEEDS:=		threads
 PKG_URL:=		http://sourceware.org/lvm2/
-PKG_SITES:=		ftp://sources.redhat.com/pub/lvm2/releases/
+PKG_SITES:=		http://ftp.gwdg.de/pub/linux/sources.redhat.com/lvm2/
 PKG_LIBNAME:=		libdevmapper
 PKG_OPTS:=		dev
 
