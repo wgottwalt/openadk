@@ -4,16 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		cryptsetup
-PKG_VERSION:=		1.7.2
+PKG_VERSION:=		2.0.3
 PKG_RELEASE:=		1
-PKG_HASH:=		dbb35dbf5f0c1749168c86c913fe98e872247bfc8425314b494c2423e7e43342
+PKG_HASH:=		4d6cca04c1f5ff4a68d045d190efb2623087eda0274ded92f92a4b6911e501d4
 PKG_DESCR:=		utility used to conveniently setup disk encryption 
 PKG_SECTION:=		app/crypto
-PKG_DEPENDS:=		libgcrypt device-mapper libuuid libpopt
-PKG_DEPENDS:=		libgcrypt device-mapper libuuid libpopt
-PKG_BUILDDEP:=		libgcrypt popt e2fsprogs lvm
+PKG_DEPENDS:=		libgcrypt device-mapper libuuid libpopt json-c libncurses
+PKG_BUILDDEP:=		libgcrypt popt e2fsprogs lvm json-c ncurses
 PKG_URL:=		https://gitlab.com/cryptsetup/cryptsetup
-PKG_SITES:=		https://www.kernel.org/pub/linux/utils/cryptsetup/v1.7/
+PKG_SITES:=		https://www.kernel.org/pub/linux/utils/cryptsetup/v2.0/
 PKG_OPTS:=		dev
 
 include ${ADK_TOPDIR}/mk/package.mk
