@@ -1,0 +1,20 @@
+--- yaboot-1.3.17.orig/second/cfg.c	2011-10-18 06:11:10.000000000 +0200
++++ yaboot-1.3.17/second/cfg.c	2018-06-08 23:24:14.000000000 +0200
+@@ -132,7 +132,7 @@ void cfg_warn (char *msg,...)
+      prom_printf (" near line %d in file %s\n", line_num, file_name);
+ }
+ 
+-inline int getc ()
++static inline int __getc ()
+ {
+      if (currp == endp)
+ 	  return EOF;
+@@ -145,7 +145,7 @@ static int next (void)
+      int ch;
+ 
+      if (!back)
+-	  return getc ();
++	  return __getc ();
+      ch = back;
+      back = 0;
+      return ch;

@@ -1,0 +1,23 @@
+--- yaboot-1.3.17.orig/second/fs.c	2011-10-18 06:11:10.000000000 +0200
++++ yaboot-1.3.17/second/fs.c	2018-06-08 23:14:20.000000000 +0200
+@@ -36,20 +36,12 @@ extern const struct fs_t        swap_fil
+ extern const struct fs_t        xfs_filesystem;
+ #endif /* CONFIG_FS_XFS */
+ 
+-#ifdef CONFIG_FS_REISERFS
+-extern const struct fs_t        reiserfs_filesystem;
+-#endif /* CONFIG_FS_REISERFS */
+-
+ /* Filesystem handlers yaboot knows about */
+ static const struct fs_t *block_filesystems[] = {
+      &swap_filesystem,		/* swap signature checker */
+-     &ext2_filesystem,		/* ext2 */
+ #ifdef CONFIG_FS_XFS
+      &xfs_filesystem,                /* XFS */
+ #endif /* CONFIG_FS_XFS */
+-#ifdef CONFIG_FS_REISERFS
+-     &reiserfs_filesystem,		/* reiserfs */
+-#endif /* CONFIG_FS_REISERFS */
+      &of_filesystem,			/* HFS/HFS+, ISO9660, UDF, UFS */
+      NULL
+ };
