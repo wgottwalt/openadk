@@ -8,7 +8,7 @@ PKG_VERSION:=		1.0
 PKG_RELEASE:=		1
 PKG_DESCR:=		gentoo disk installer
 PKG_SECTION:=		base/adk
-PKG_DEPENDS:=		mke2fs parted sfdisk dosfstools mksh
+PKG_DEPENDS:=		mke2fs parted mksh
 PKG_KDEPENDS:=		ext4-fs
 
 NO_DISTFILES:=		1

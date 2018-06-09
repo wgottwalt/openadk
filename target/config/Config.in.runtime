@@ -194,6 +194,7 @@ source "target/config/Config.in.scripts"
 
 config ADK_RUNTIME_TMPFS_SIZE
 	string "size of /tmp in memory (kB)"
+	default "32768" if ADK_TARGET_SYSTEM_APPLE_MACMINI
 	default "32768" if ADK_TARGET_SYSTEM_IBM_X40
 	default "32768" if ADK_TARGET_SYSTEM_LENOVO_X200
 	default "32768" if ADK_TARGET_SYSTEM_SGI_O2
@@ -332,6 +333,7 @@ config ADK_RUNTIME_GETTY_VGA
 	default y if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default y if ADK_TARGET_SYSTEM_LEMOTE_YEELONG
 	default y if ADK_TARGET_SYSTEM_IBM_X40
+	default y if ADK_TARGET_SYSTEM_APPLE_MACMINI
 	default y if ADK_TARGET_SYSTEM_LENOVO_X200
 	default y if ADK_TARGET_SYSTEM_ARANYM_M68K
 	default y if ADK_TARGET_MODEL_PCENGINES_ALIX1C

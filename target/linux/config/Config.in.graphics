@@ -217,6 +217,15 @@ config ADK_LINUX_KERNEL_FB_VESA
  	help
 	  Generic VESA Framebuffer support.
 
+config ADK_LINUX_KERNEL_FB_OF
+	bool "Framebuffer support for OpenFirmware"
+	select ADK_LINUX_KERNEL_FB
+	select ADK_LINUX_KERNEL_FRAMEBUFFER_CONSOLE
+	default y if ADK_TARGET_SYSTEM_APPLE_MACMINI
+ 	default n
+ 	help
+	  Generic OpenFirmware Framebuffer support.
+
 config ADK_LINUX_KERNEL_DRM_ETNAVIV
 	bool "DRM support for Vivante chips (Cubox-i/Hummingboard)"
 	select ADK_LINUX_KERNEL_DRM
