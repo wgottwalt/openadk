@@ -11,6 +11,7 @@ config ADK_LINUX_KERNEL_AIO
 
 menu "Block devices support"
 depends on ADK_TARGET_WITH_BLOCK \
+	|| ADK_TARGET_QEMU \
 	|| ADK_TARGET_GENERIC
 
 config ADK_LINUX_KERNEL_IOSCHED_DEADLINE
@@ -650,6 +651,7 @@ config ADK_LINUX_KERNEL_DM_MIRROR
 
 config ADK_LINUX_KERNEL_BLK_DEV_DRBD
 	tristate "DRBD support (Network RAID 1)"
+	select ADK_LINUX_KERNEL_BLOCK
 	select ADK_LINUX_KERNEL_BLK_DEV
 	select ADK_LINUX_KERNEL_CONNECTOR
 	default n
@@ -658,6 +660,7 @@ config ADK_LINUX_KERNEL_BLK_DEV_DRBD
 
 config ADK_LINUX_KERNEL_BLK_DEV_LOOP
 	tristate "Loop mount support"
+	select ADK_LINUX_KERNEL_BLOCK
 	select ADK_LINUX_KERNEL_BLK_DEV
 	default n
 	help
