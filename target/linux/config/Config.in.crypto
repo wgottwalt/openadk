@@ -195,6 +195,13 @@ config ADK_LINUX_KERNEL_CRYPTO_ECB
 	  This is the simplest block cipher algorithm.  It simply encrypts
 	  the input block by block.
 
+config ADK_LINUX_KERNEL_CRYPTO_XTS
+	tristate "XTS support"
+	select ADK_LINUX_KERNEL_CRYPTO_BLKCIPHER
+	select ADK_LINUX_KERNEL_CRYPTO_MANAGER
+	default n
+	help
+
 config ADK_LINUX_KERNEL_CRYPTO_HMAC
 	tristate "HMAC support"
 	select ADK_LINUX_KERNEL_CRYPTO_HASH
