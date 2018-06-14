@@ -283,13 +283,18 @@ else
 TARGET_CPPFLAGS+=	-DNDEBUG
 TARGET_CFLAGS+=		-fomit-frame-pointer
 TARGET_CXXFLAGS+=	-fomit-frame-pointer
-# stop generating eh_frame stuff
+endif
+
+# stop generating eh_frame stuff, do not use it for C++
+ifeq ($(ADK_TARGET_CFLAGS_DISABLE_EH),y)
 TARGET_CFLAGS+=		-fno-unwind-tables -fno-asynchronous-unwind-tables
 TARGET_CXXFLAGS+=	-fno-unwind-tables -fno-asynchronous-unwind-tables
+endif
+
+# workaround gcc bug for m68k/coldfire
 ifeq ($(ADK_TARGET_CPU_CF),y)
 TARGET_CFLAGS+=		-fno-dwarf2-cfi-asm
 TARGET_CXXFLAGS+=	-fno-dwarf2-cfi-asm
-endif
 endif
 
 ifeq ($(ADK_TARGET_ARCH_ARM),y)

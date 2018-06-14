@@ -32,6 +32,13 @@ config ADK_TARGET_CFLAGS_OPT_O0
 
 endchoice
 
+config ADK_TARGET_CFLAGS_DISABLE_EH
+	bool "Disable exception handling and unwindung via compiler flags"
+	depends on !ADK_DEBUG
+	help
+	  Do not use this optimization flags if you are planning to use C++
+	  applications, which are often using exception handling.
+
 menu "Compiler language support"
 config ADK_TOOLCHAIN_WITH_CXX
 	bool "enable C++"
