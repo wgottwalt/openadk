@@ -74,6 +74,11 @@ config ADK_HOST_BUILD_CPIO
 	bool
 	default n
 
+config ADK_HOST_BUILD_ETRAX_TOOLS
+	bool
+	default y if ADK_TARGET_SYSTEM_FOXBOARD_LX832
+	default n
+
 config ADK_HOST_BUILD_FILE
 	bool
 	default n
