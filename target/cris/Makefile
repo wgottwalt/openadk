@@ -5,8 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
-KERNEL:=$(LINUX_DIR)/vmlinux
-ZKERNEL:=$(LINUX_DIR)/arch/cris/boot/Image
+KERNEL:=$(LINUX_DIR)/arch/cris/boot/zImage
 QEMU_ARGS:=-M axis-dev88 -nographic -monitor none
 
 # target helper text
@@ -38,6 +37,23 @@ ifeq ($(ADK_TARGET_QEMU),y)
 	@echo 'qemu-system-${ADK_TARGET_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif
+ifeq ($(ADK_TARGET_FS),nfsroot)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
+	@echo Use sudo ./boot_linux -F -i $(BIN_DIR)/${TARGET_KERNEL} to flash the kernel
+	@echo Do not forget to set network boot jumper, before you start the foxboard
+endif
+ifeq ($(ADK_TARGET_FS),squashfs)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS image is: $(FW_DIR)/$(ROOTFSSQUASHFS)"
+endif
+ifeq ($(ADK_TARGET_FS),jffs2)
+targethelp:
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "The RootFS image is: $(FW_DIR)/$(ROOTFSJFFS2)"
+endif
 
 kernel-strip:
 	@cp $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
@@ -60,4 +76,10 @@ imageinstall: createinitramfs targethelp
 endif
 ifeq ($(ADK_TARGET_FS),nfsroot)
 imageinstall: kernel-install $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
+endif
+ifeq ($(ADK_TARGET_FS),squashfs)
+imageinstall: $(BUILD_DIR)/root.squashfs kernel-install targethelp
+endif
+ifeq ($(ADK_TARGET_FS),jffs2)
+imageinstall: kernel-install $(FW_DIR)/$(ROOTFSJFFS2) targethelp
 endif

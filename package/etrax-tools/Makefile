@@ -24,7 +24,12 @@ host-build:
 	(cd ${WRKBUILD}/e100boot && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
 		${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET}) $(MAKE_TRACE)
 
-cmake-hostinstall:
+etrax-tools-hostinstall:
+	$(HOST_CC) -o $(STAGING_HOST_DIR)/usr/bin/mkfimage $(WRKBUILD)/mkfimage.c
+	$(CP) $(WRKBUILD)/boot_linux $(STAGING_HOST_DIR)/usr/bin
+	$(CP) $(WRKBUILD)/e100boot/sbl/e100boot.stripped \
+		$(STAGING_HOST_DIR)/usr/bin/e100boot
+
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
