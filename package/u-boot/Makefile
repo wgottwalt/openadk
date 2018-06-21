@@ -101,10 +101,6 @@ u-boot-install:
 	$(INSTALL_DIR) $(IDIR_U_BOOT)/etc
 	$(CP) ./files/fw_env.config $(IDIR_U_BOOT)/etc
 ifneq ($(OS_FOR_BUILD),Darwin)
-	$(INSTALL_DIR) $(IDIR_U_BOOT)/usr/bin
-	$(INSTALL_BIN) $(WRKBUILD)/tools/env/fw_printenv \
-		$(IDIR_U_BOOT)/usr/bin
-	(cd $(IDIR_U_BOOT)/usr/bin && ln -sf fw_printenv fw_setenv)
 	$(INSTALL_BIN) ./files/uboot_print_env $(IDIR_U_BOOT)/usr/bin
 	$(INSTALL_BIN) ./files/uboot_set_env $(IDIR_U_BOOT)/usr/bin
 endif
