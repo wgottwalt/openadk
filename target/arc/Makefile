@@ -30,18 +30,18 @@ ifeq ($(ADK_TARGET_FS),initramfspiggyback)
 targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_LITTLE_ENDIAN),y)
-ifeq ($(ADK_TARGET_SYSTEM_NSIM_ARCV1),y)
+ifeq ($(ADK_TARGET_CPU_ARC_ARC700),y)
 	@echo './scripts/nsim.sh arcv1 $(FW_DIR)/${TARGET_KERNEL}'
 endif
-ifeq ($(ADK_TARGET_SYSTEM_NSIM_ARCV2),y)
+ifeq ($(ADK_TARGET_CPU_ARC_ARCHS),y)
 	@echo './scripts/nsim.sh arcv2 $(FW_DIR)/${TARGET_KERNEL}'
 endif
 endif
 ifeq ($(ADK_TARGET_BIG_ENDIAN),y)
-ifeq ($(ADK_TARGET_SYSTEM_NSIM_ARCV1),y)
+ifeq ($(ADK_TARGET_CPU_ARC_ARC700),y)
 	@echo './scripts/nsim.sh arcv1-be $(FW_DIR)/${TARGET_KERNEL}'
 endif
-ifeq ($(ADK_TARGET_SYSTEM_NSIM_ARCV2),y)
+ifeq ($(ADK_TARGET_CPU_ARC_ARCHS),y)
 	@echo './scripts/nsim.sh arcv2-be $(FW_DIR)/${TARGET_KERNEL}'
 endif
 endif
