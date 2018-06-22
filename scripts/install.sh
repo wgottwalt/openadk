@@ -578,8 +578,11 @@ if (( datafssz )); then
 	(raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64|raspberry-pi3p|raspberry-pi3p-64|phytec-wega)
 		echo "/dev/mmcblk0p3	/data	ext4	rw	0	0" >> "$R"/etc/fstab 
 	;;
-	(banana-pro|orange-pi0|solidrun-imx6|solidrun-clearfog)
+	(banana-pro|orange-pi0|solidrun-clearfog)
 		echo "/dev/mmcblk0p2	/data	ext4	rw	0	0" >> "$R"/etc/fstab
+	;;
+	(solidrun-imx6)
+		echo "/dev/mmcblk1p2	/data	ext4	rw	0	0" >> "$R"/etc/fstab
 	;;
 	}
         if [[ -d $datapartcontent ]]; then
