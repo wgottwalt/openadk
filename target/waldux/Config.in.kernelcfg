@@ -29,8 +29,8 @@ config ADK_TARGET_WALDUX_KERNEL_DEFCONFIG
 	default "twr-k70f120m_defconfig" if ADK_TARGET_SYSTEM_KINETIS_K70
 	default "imx_v6_v7_defconfig" if ADK_TARGET_SYSTEM_SOLIDRUN_IMX6
 	default "mvebu_defconfig" if ADK_TARGET_SYSTEM_SOLIDRUN_CLEARFOG
-	default "nsim_700_defconfig" if ADK_TARGET_SYSTEM_NSIM_ARCV1
-	default "nsim_hs_defconfig" if ADK_TARGET_SYSTEM_NSIM_ARCV2
+	default "nsim_700_defconfig" if ADK_TARGET_CPU_ARC_ARC700 && ADK_TARGET_SYSTEM_SYNOPSYS_NSIM
+	default "nsim_hs_defconfig" if ADK_TARGET_CPU_ARC_ARCHS && ADK_TARGET_SYSTEM_SYNOPSYS_NSIM
 	default "10m50_defconfig" if ADK_TARGET_SYSTEM_QEMU_NIOS2
 	default "ag101p_defconfig" if ADK_TARGET_SYSTEM_ANDES_AG101P
 	default "bb.org_defconfig" if ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK
