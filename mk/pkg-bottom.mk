@@ -158,7 +158,7 @@ spkg-install: ${ALL_POSTINST}
 ${_FAKE_COOKIE}: ${_BUILD_COOKIE}
 	@-rm -f ${_ALL_CONTROLS}
 	@mkdir -p '${STAGING_PKG_DIR}/stamps' ${WRKINST} '${STAGING_TARGET_DIR}/scripts'
-	@${MAKE} ${_ALL_CONTROLS} $(MAKE_TRACE)
+	@${MAKE} -j${ADK_MAKE_JOBS} ${_ALL_CONTROLS} $(MAKE_TRACE)
 	@env ${MAKE_ENV} ${MAKE} pre-install $(MAKE_TRACE)
 ifneq ($(filter meson,${INSTALL_STYLE}),)
 	DESTDIR='$(WRKINST)' PATH='$(HOST_PATH)' \

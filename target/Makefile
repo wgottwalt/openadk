@@ -228,6 +228,12 @@ endif
 	$(MAKE) -C $(patsubst %-targethelp,%,$@) targethelp
 
 %-imageinstall: %-imageprepare
+ifdef ADK_POST_BUILD_ACTION
+ifneq ($(ADK_POST_BUILD_ACTION),"")
+	@printf "running post build action '$(ADK_POST_BUILD_ACTION)'\n"
+	$(ADK_TOPDIR)/$(ADK_POST_BUILD_ACTION) $(ADK_TOPDIR)
+endif
+endif
 	$(MAKE) -C $(patsubst %-imageinstall,%,$@) imageinstall
 	@for x in $$(ls $(ADK_TOPDIR)/scripts/postimage/*.sh 2>/dev/null); do \
 		[[ -x "$$x" ]] && $$x; \

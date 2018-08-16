@@ -29,6 +29,7 @@ CONFIGURE_ARGS+=	--enable-static \
 			--disable-gdbtk \
 			--disable-gdbserver \
 			--without-x \
+			--with-expat \
 			--disable-sim \
 			--disable-plugins \
 			--disable-werror \

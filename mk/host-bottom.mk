@@ -78,7 +78,7 @@ host-build:
 ${_HOST_BUILD_COOKIE}: ${_HOST_CONFIGURE_COOKIE}
 	@$(CMD_TRACE) "compiling.. "
 ifneq (${HOST_STYLE},manual)
-	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -f ${MAKE_FILE} \
+	cd ${WRKBUILD} && env ${HOST_MAKE_ENV} ${MAKE} -j${ADK_MAKE_JOBS} -f ${MAKE_FILE} \
 	    ${HOST_MAKE_FLAGS} ${HOST_ALL_TARGET} $(MAKE_TRACE)
 endif
 	${MAKE} host-build $(MAKE_TRACE)

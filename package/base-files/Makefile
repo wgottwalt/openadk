@@ -21,6 +21,18 @@ CONFIG_STYLE:=		manual
 BUILD_STYLE:=		manual
 INSTALL_STYLE:=		manual
 
+ifeq ($(ADK_RUNTIME_DEV_MDEV_LOGGING),y)
+ADK_RUNTIME_DEV_MDEV_LOGGING_LINE:='echo >/dev/mdev.log'
+else
+ADK_RUNTIME_DEV_MDEV_LOGGING_LINE:=''
+endif
+
+ifeq ($(ADK_RUNTIME_GETTY_SERIAL_AUTOLOGIN),y)
+ADK_RUNTIME_GETTY_SERIAL_AUTOLOGIN_STANZA:= -n -l autologin
+else
+ADK_RUNTIME_GETTY_SERIAL_AUTOLOGIN_STANZA:=
+endif
+
 do-install:
 	$(CP) ./src/* $(IDIR_BASE_FILES)
 	mkdir -p $(IDIR_BASE_FILES)/{etc,dev,boot,root,sys,proc,tmp,run,var,mnt,media}
@@ -55,9 +67,11 @@ endif
 endif
 ifeq ($(ADK_RUNTIME_DEV_MDEV),y)
 	$(CP) ./files/rcdev.mdev $(IDIR_BASE_FILES)/etc/init.d/rcdev
+	$(SED) "s#@ADK_RUNTIME_DEV_MDEV_LOGGING@#"$(ADK_RUNTIME_DEV_MDEV_LOGGING_LINE)"#g" $(IDIR_BASE_FILES)/etc/init.d/rcdev
 	$(CP) ./files/mdev.conf $(IDIR_BASE_FILES)/etc
 	$(CP) ./files/mdev $(IDIR_BASE_FILES)/etc
 endif
+
 ifeq ($(ADK_RUNTIME_DEV_UDEV),y)
 	$(CP) ./files/rcdev.udev $(IDIR_BASE_FILES)/etc/init.d/rcdev
 endif
@@ -75,9 +89,14 @@ endif
 	    cat ./files/inittab.serial >> $(IDIR_BASE_FILES)/etc/inittab
 	$(SED) 's#@DEVICE@#$(ADK_RUNTIME_CONSOLE_SERIAL_DEVICE)#g' $(IDIR_BASE_FILES)/etc/inittab
 	$(SED) 's#@SPEED@#$(ADK_RUNTIME_CONSOLE_SERIAL_SPEED)#' $(IDIR_BASE_FILES)/etc/inittab
+	$(SED) 's#@AUTOLOGIN@#$(ADK_RUNTIME_GETTY_SERIAL_AUTOLOGIN_STANZA)#' $(IDIR_BASE_FILES)/etc/inittab
 endif
 ifeq ($(ADK_RUNTIME_INIT_SYSVINIT),y)
 	cp ./files/inittab.sysvinit $(IDIR_BASE_FILES)/etc/inittab
+endif
+ifeq ($(ADK_RUNTIME_MOUNT_DEBUGFS),y)
+	echo debugfs    /sys/kernel/debug      debugfs  defaults  0 0 >> $(IDIR_BASE_FILES)/etc/fstab
+	echo null::sysinit:/bin/mount -a -t debugfs >> $(IDIR_BASE_FILES)/etc/inittab
 endif
 	test -z $(ADK_RUNTIME_HOSTNAME) || \
 	    echo $(ADK_RUNTIME_HOSTNAME) > $(IDIR_BASE_FILES)/etc/hostname; \

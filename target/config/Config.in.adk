@@ -112,4 +112,8 @@ config ADK_TARGET_PORT
 	help
 	  Port to use for SSH when running make check.
 
+config ADK_POST_BUILD_ACTION
+	string "Path to script run post build. Must be relative to ADK_TOPDIR."
+        default ""
+
 endmenu

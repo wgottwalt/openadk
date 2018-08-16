@@ -674,4 +674,6 @@ info:
 	@printf "TOOLCHAIN_DIR=$(TOOLCHAIN_DIR)\n"
 	@printf "TARGET_PATH=$(TARGET_PATH)\n"
 	@printf "LINUX_DIR=$(LINUX_DIR)\n"
+	@printf "TARGET_DIR=$(TARGET_DIR)\n"
 	@printf -- "---OPENADK-INFO---\n"
+

@@ -1,0 +1,11 @@
+- glib-2.48.2.orig/configure	2016-08-17 18:37:42.000000000 +0200
++++ glib-2.48.2/configure	2017-12-14 14:37:31.000000000 +0100
+@@ -6027,7 +6027,7 @@ if test "x$glib_have_cocoa" = "xyes"; th
+ 
+ $as_echo "#define HAVE_COCOA 1" >>confdefs.h
+ 
+-  COCOA_LIBS="-Wl,-framework,Foundation"
++  COCOA_LIBS="-Wl,-framework,Foundation,-framework,Cocoa"
+   LDFLAGS="$LDFLAGS $COCOA_LIBS"
+ 
+   osx_version=`sw_vers -productVersion`
