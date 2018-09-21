@@ -188,8 +188,13 @@ for makebin in $makebins; do
     if [ $? -eq 0 ]; then
       printf "yes\n"
       MAKE=$(which $makebin)
-      break
-    else
+    fi
+      printf " --->  checking if it is make 4.x.. "
+      LC_ALL=C $makebin --version 2>/dev/null| grep -i "Make 4" >/dev/null
+      if [ $? -eq 0 ]; then
+        printf "yes\n"
+        break
+      else
       # we need to build GNU make
       printf "no\n"
       printf " --->  compiling missing GNU make.. "
@@ -204,12 +209,13 @@ for makebin in $makebins; do
       cd tmp
       tar xzf ../dl/make-${makever}.tar.gz
       cd make-$makever
-      ./configure --prefix=$topdir/host_$gnu_host_name/
+      ./configure --prefix=$topdir/host_$gnu_host_name
       make
       make install
       cd ..
       cd ..
       rm -rf tmp
+      (cd $topdir/host_$gnu_host_name/bin/; ln -sf make gnumake)
       MAKE=$topdir/host_$gnu_host_name/bin/make
       makebin=$topdir/host_$gnu_host_name/bin/make
       printf " done\n"
