@@ -40,13 +40,12 @@ default ADK_TOOLCHAIN_GCC_7
 config ADK_TOOLCHAIN_GCC_GIT
 	bool "git"
 	depends on !ADK_TARGET_ARCH_AVR32
-	depends on !ADK_TARGET_ARCH_CSKY
 	depends on !ADK_TARGET_ARCH_METAG
 	depends on !ADK_TARGET_ARCH_NDS32
 	depends on !ADK_TARGET_ARCH_OR1K
 
 config ADK_TOOLCHAIN_GCC_8
-	bool "8.1.0"
+	bool "8.2.0"
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_CSKY
