@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		strace
-PKG_VERSION:=		4.22
+PKG_VERSION:=		4.24
 PKG_RELEASE:=		1
-PKG_HASH:=		068cd09264c95e4d591bbcd3ea08f99a693ed8663cd5169b0fdad72eb5bdb39d
+PKG_HASH:=		1f4e59fc1edfa2bfb4adf2a748623dc25b105ec79713dd84404199f91b0b0634
 PKG_DESCR:=		system call trace program
 PKG_SECTION:=		app/debug
 PKG_URL:=		https://strace.io
