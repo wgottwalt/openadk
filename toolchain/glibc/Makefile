@@ -29,7 +29,7 @@ ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
 GLIBC_CONFOPTS+=	--enable-static-nss
 endif
 
-GLIBC_ENV:=             PATH='${TARGET_PATH}' \
+GLIBC_ENV:=             PATH='${HOST_PATH}:${TARGET_PATH}' \
                         BUILD_CC=${CC_FOR_BUILD} \
                         CFLAGS="$(TARGET_CFLAGS)" \
                         CXXFLAGS="$(TARGET_CXXFLAGS)" \
@@ -65,7 +65,7 @@ $(WRKBUILD)/.compiled:
 $(WRKBUILD)/.installed:
 	${GLIBC_ENV} $(MAKE) -C $(GLIBC_BUILD_DIR_FINAL) install_root=$(STAGING_TARGET_DIR) install
 	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs.h
-	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64,soft,hard}.h
+	touch $(STAGING_TARGET_DIR)/usr/include/gnu/stubs-{32,x32,64,lp64,soft,hard}.h
 	mkdir -p ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/posix/gai.conf ${STAGING_TARGET_DIR}/etc
 	${INSTALL_DATA} ${WRKBUILD}/nss/nsswitch.conf ${STAGING_TARGET_DIR}/etc
