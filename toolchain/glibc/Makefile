@@ -30,7 +30,7 @@ GLIBC_CONFOPTS+=	--enable-static-nss
 endif
 
 GLIBC_ENV:=             PATH='${HOST_PATH}:${TARGET_PATH}' \
-                        BUILD_CC=${CC_FOR_BUILD} \
+                        BUILD_CC='${CC_FOR_BUILD}' \
                         CFLAGS="$(TARGET_CFLAGS)" \
                         CXXFLAGS="$(TARGET_CXXFLAGS)" \
                         CC="${TARGET_CC}" \

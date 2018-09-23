@@ -24,7 +24,7 @@ $(eval $(call PKG_template,GLIBC_DEV,glibc-dev,$(PKG_VERSION)-${PKG_RELEASE},${P
 $(eval $(call PKG_template,GLIBC_GCONV,glibc-gconv,$(PKG_VERSION)-${PKG_RELEASE},${PKGSS_GLIBC_GCONV},${PKGSD_GLIBC_GCONV},${PKG_SECTION},${PKG_OPTS}))
 
 GLIBC_ENV:=             PATH='${TARGET_PATH}' \
-                        BUILD_CC=${CC_FOR_BUILD} \
+                        BUILD_CC='${CC_FOR_BUILD}' \
                         CFLAGS="$(TARGET_CFLAGS)" \
                         CXXFLAGS="$(TARGET_CXXFLAGS)" \
                         CC="${TARGET_CC}" \
@@ -76,7 +76,11 @@ glibc-gconv-install:
 
 glibc-dev-install:
 	${INSTALL_DIR} $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH) $(IDIR_GLIBC_DEV)/usr/lib
-	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc.so ${IDIR_GLIBC_DEV}/usr/lib
+ifeq ($(ADK_TARGET_ARCH_RISCV64),y)
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/*/libc.so ${IDIR_GLIBC_DEV}/usr/lib
+else
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/*/libc.so ${IDIR_GLIBC_DEV}/usr/lib
+endif
 ifeq ($(ADK_TARGET_ABI_O32),y)
 ifeq ($(ADK_TARGET_BIG_ENDIAN),y)
 	$(SED) "s#@@ELFTARGET@@#elf32-tradbigmips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
@@ -98,8 +102,13 @@ else
 	$(SED) "s#@@ELFTARGET@@#elf64-tradlittlemips#" $(IDIR_GLIBC_DEV)/usr/lib/libc.so
 endif
 endif
-	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
+ifeq ($(ADK_TARGET_ARCH_RISCV64),y)
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/*/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/*/crt* ${IDIR_GLIBC_DEV}/usr/lib
+else
 	${CP} ${STAGING_TARGET_DIR}/usr/lib/libc_nonshared.a ${IDIR_GLIBC_DEV}/usr/lib
+	${CP} ${STAGING_TARGET_DIR}/usr/lib/crt* ${IDIR_GLIBC_DEV}/usr/lib
+endif
 	-for file in libpthread librt libcrypt libdl libm libresolv libutil; do \
 		cd $(IDIR_GLIBC_DEV)/$(ADK_TARGET_LIBC_PATH); ln -sf $$file-$(PKG_GLIBCVER).so $$file.so; \
 	done
