@@ -11,6 +11,7 @@ PKG_DESCR:=		easy access to gnupg for applications
 PKG_SECTION:=		libs/crypto
 PKG_DEPENDS:=		libgpg-error libassuan
 PKG_BUILDDEP:=		libgpg-error libassuan
+PKG_NEEDS:=		c++
 PKG_URL:=		https://gnupg.org/related_software/gpgme/index.html
 PKG_SITES:=		https://gnupg.org/ftp/gcrypt/gpgme/
 PKG_OPTS:=		dev
