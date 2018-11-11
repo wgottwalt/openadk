@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		jupp
-PKG_VERSION:=		31
+PKG_VERSION:=		38
 PKG_RELEASE:=		1
-PKG_HASH:=		1a50607b0417cf230f7b3609c091e71e8d8e91185a4a3897f7925cd3b44cceba
+PKG_HASH:=		c5cbe3f97683f6e513f611a60531feefb9b877f8cea4c6e9087b48631f69ed40
 PKG_DESCR:=		wordstar-inspired text editor
 PKG_SECTION:=		app/editor
 PKG_URL:=		https://www.mirbsd.org/jupp.htm
@@ -27,12 +27,12 @@ $(eval $(call PKG_template,JUPP,jupp,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS
 
 XAKE_FLAGS+=		sysconfjoesubdir=/jupp
 
-ifeq (${ADK_PACKAGE_JUPP_CURSES},y)
-# disable SELinux still
-CONFIGURE_ENV+=		ac_cv_search_is_selinux_enabled=no
-else
-# disable curses/termcap support, SELinux support
-CONFIGURE_ARGS+=	--disable-curses --disable-termcap --disable-search-libs
+# not available
+CONFIGURE_ARGS+=	--disable-selinux
+
+ifneq (${ADK_PACKAGE_JUPP_CURSES},y)
+# disable curses/termcap support
+CONFIGURE_ARGS+=	--disable-curses --disable-termcap --disable-terminfo
 endif
 
 # necessary workaround for GNU libc
