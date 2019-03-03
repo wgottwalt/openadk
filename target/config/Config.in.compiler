@@ -45,7 +45,7 @@ config ADK_TOOLCHAIN_GCC_GIT
 	depends on !ADK_TARGET_ARCH_OR1K
 
 config ADK_TOOLCHAIN_GCC_8
-	bool "8.2.0"
+	bool "8.3.0"
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_CSKY
