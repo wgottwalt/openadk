@@ -161,6 +161,32 @@ ${FW_DIR}/${ROOTFSUSERTARBALL}: ${TARGET_DIR}/.adk
 		$(CPIO) --quiet -o -Hustar --owner=0:0 | $(XZ) -c >$@
 
 ${STAGING_TARGET_DIR}/${INITRAMFS}_list: ${TARGET_DIR}/.adk
+ifeq ($(ADK_TARGET_LINUX_KERNEL_NEW),y)
+	PATH='${HOST_PATH}' $(BASH) ${LINUX_DIR}/usr/gen_initramfs_list.sh -u squash -g squash \
+		${TARGET_DIR}/ >$@
+	( \
+		echo "nod /dev/console 0644 0 0 c 5 1"; \
+		echo "nod /dev/tty 0644 0 0 c 5 0"; \
+		for i in 0 1 2 3 4; do \
+			echo "nod /dev/tty$$i 0644 0 0 c 4 $$$$i"; \
+		done; \
+		echo "nod /dev/null 0644 0 0 c 1 3"; \
+		echo "nod /dev/ram 0655 0 0 b 1 1"; \
+		echo "nod /dev/ttyS0 0660 0 0 c 4 64"; \
+		echo "nod /dev/ttyS1 0660 0 0 c 4 65"; \
+		echo "nod /dev/ttyB0 0660 0 0 c 11 0"; \
+		echo "nod /dev/ttyB1 0660 0 0 c 11 1"; \
+		echo "nod /dev/ttyAMA0 0660 0 0 c 204 64"; \
+		echo "nod /dev/ttyAMA1 0660 0 0 c 204 65"; \
+		echo "nod /dev/ttySC0 0660 0 0 c 204 8"; \
+		echo "nod /dev/ttySC1 0660 0 0 c 204 9"; \
+		echo "nod /dev/ttySC2 0660 0 0 c 204 10"; \
+		echo "nod /dev/ttyBF0 0660 0 0 c 204 64"; \
+		echo "nod /dev/ttyBF1 0660 0 0 c 204 65"; \
+		echo "nod /dev/ttyUL0 0660 0 0 c 204 187"; \
+		echo "nod /dev/ttyUL1 0660 0 0 c 204 188"; \
+	) >>$@
+else
 	PATH='${HOST_PATH}' $(BASH) ${LINUX_DIR}/scripts/gen_initramfs_list.sh -u squash -g squash \
 		${TARGET_DIR}/ >$@
 	( \
@@ -185,7 +211,7 @@ ${STAGING_TARGET_DIR}/${INITRAMFS}_list: ${TARGET_DIR}/.adk
 		echo "nod /dev/ttyUL0 0660 0 0 c 204 187"; \
 		echo "nod /dev/ttyUL1 0660 0 0 c 204 188"; \
 	) >>$@
-
+endif
 
 ${FW_DIR}/${INITRAMFS}: ${STAGING_TARGET_DIR}/${INITRAMFS}_list
 	${LINUX_DIR}/usr/gen_init_cpio ${STAGING_TARGET_DIR}/${INITRAMFS}_list | \
