@@ -79,6 +79,11 @@ ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_WEGA),y)
 	@echo "bootm -o /mnt/am335x-wega-rdk.dtb /mnt/kernel"
 	@echo
 endif
+ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_IMX6),y)
+	@echo "Use following command to install it on SD card:"
+	@echo "sudo ./scripts/install.sh phytec-mira /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo
+endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)
 	@echo "Use following command to install it on SD card:"
 	@echo "sudo ./scripts/install.sh banana-pro /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
@@ -184,6 +189,11 @@ ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_WEGA),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
 		am335x-wega-rdk.dtb
 	cp $(LINUX_DIR)/arch/arm/boot/dts/am335x-wega-rdk.dtb ${TARGET_DIR}/boot
+endif
+ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_IMX6),y)
+	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \
+ 		imx6q-phytec-pbab01.dtb
+	cp $(LINUX_DIR)/arch/arm/boot/dts/imx6q-phytec-pbab01.dtb ${TARGET_DIR}/boot
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK),y)
 	env $(KERNEL_MAKE_ENV) $(MAKE) -C "${LINUX_DIR}" $(KERNEL_MAKE_OPTS) \

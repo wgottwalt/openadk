@@ -1,0 +1,27 @@
+config ADK_TARGET_SYSTEM_PHYTEC_IMX6
+	bool "Phytec i.MX6"
+	depends on ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX
+	select ADK_TARGET_LITTLE_ENDIAN
+	select ADK_TARGET_CPU_ARM_CORTEX_A9
+	select ADK_TARGET_WITH_VGA
+	select ADK_TARGET_WITH_SERIAL
+	select ADK_TARGET_WITH_PCI
+	select ADK_TARGET_WITH_CPU_FREQ
+	select ADK_TARGET_WITH_USB
+	select ADK_TARGET_WITH_SD
+	select ADK_TARGET_WITH_I2C
+	select ADK_TARGET_WITH_SPI
+	select ADK_TARGET_WITH_SOUND
+	select ADK_TARGET_WITH_LEDS
+	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_NETDEVICE
+	select ADK_TARGET_WITH_BLOCK
+	select ADK_TARGET_WITH_WATCHDOG
+	select ADK_TARGET_KERNEL_WITH_COMPRESSION
+	select ADK_TARGET_KERNEL_ZIMAGE if !ADK_TARGET_KERNEL_VERSION_FSLC
+	select ADK_TARGET_WITH_ROOT_RW
+	select ADK_PACKAGE_U_BOOT
+      help
+	  Phytec i.MX6 wget http://anduin.linuxfromscratch.org/BLFS/linux-firmware/imx/sdma/sdma-imx6q.bin
+	  wget https://git.kernel.org/pub/scm/linux/kernel/git/firmware/linux-firmware.git/tree/imx/sdma/sdma-imx6q.bin
+

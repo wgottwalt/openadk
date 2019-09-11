@@ -51,6 +51,14 @@ ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 BLOCKDEV:=	root=/dev/mmcblk1p1
 endif
 
+ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_IMX6),y)
+BLOCKDEV:=	root=/dev/mmcblk1p1
+endif
+
+ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_WEGA),y)
+BLOCKDEV:=	root=/dev/mmcblk1p1
+endif
+
 ifeq ($(ADK_TARGET_SYSTEM_LEMOTE_YEELONG),y)
 USBDEV:=	root=/dev/sdb1
 endif
