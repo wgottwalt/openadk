@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		barebox
-PKG_VERSION:=		2017.11.0
+PKG_VERSION:=		2019.08.1
 PKG_RELEASE:=		1
-PKG_HASH:=		7dff97dd94807fd7c0012fd9ddb8bc799a220e2b65e46dcc56724105a56feecc
+PKG_HASH:=		4fb0ab2467d9b77036ed521d9eff0ed5439833b1778884a540876daedd03d85a
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 PKG_BUILDDEP:=		lzop-host
@@ -38,6 +38,9 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_QEMU_ARM_VEXPRESS_A9),y)
 CONFIG:=		vexpress_ca9_defconfig
 endif
+ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_IMX6),y)
+CONFIG:=		imx_v7_defconfig
+endif
 
 do-configure:
 	(cd $(WRKBUILD) && $(MAKE) ARCH=$(BAREBOX_ARCH) $(CONFIG))
@@ -50,6 +53,6 @@ do-build:
 		$(MAKE))
 
 barebox-install:
-	$(INSTALL_DIR) $(IDIR_BAREBOX)/usr/bin
+	$(CP) $(WRKBUILD)/barebox.bin $(FW_DIR)
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
