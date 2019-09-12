@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		libxshmfence
-PKG_VERSION:=		1.2
+PKG_VERSION:=		1.3
 PKG_RELEASE:=		1
-PKG_HASH:=		58467a0e36fc4ec749dc55f81a4ab3b822c82b6dfb7d36bdb6b28c9fd2a5ccaf
+PKG_HASH:=		7eb3d46ad91bab444f121d475b11b39273142d090f7e9ac43e6a87f4ff5f902c
 PKG_DESCR:=		interface to shared-memory fences
 PKG_SECTION:=		x11/libs
 PKG_SITES:=		http://www.x.org/releases/individual/lib/
