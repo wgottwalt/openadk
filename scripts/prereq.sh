@@ -2,6 +2,8 @@
 # This file is part of the OpenADK project. OpenADK is copyrighted
 # material, please see the LICENCE file in the top-level directory.
 
+#set -x
+
 # resolve prerequisites for OpenADK build
 
 topdir=$(pwd)
@@ -81,7 +83,7 @@ for tool in $tools; do
         SHA256="$(which $tool) -q"
         ;;
       cksum)
-        if cksum -q >/dev/null 2>/dev/null; then
+        if cksum -t >/dev/null 2>/dev/null; then
           SHA256="$(which $tool) -q -a sha256"
         else
           continue
