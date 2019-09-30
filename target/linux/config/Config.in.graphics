@@ -298,14 +298,12 @@ config ADK_LINUX_KERNEL_FB_BCM2708
 	  Framebuffer support for BCM28XX boards.
 
 config ADK_LINUX_KERNEL_FB_CGSIX
-	bool "Framebuffer support for CGSIX cards (Sun Voyager)"
+	bool "Framebuffer support for CGSIX cards"
 	select ADK_LINUX_KERNEL_FB
 	select ADK_LINUX_KERNEL_FB_SBUS
-	default y if ADK_TARGET_SYSTEM_SUN_VOYAGER
 	default n
-	depends on ADK_TARGET_SYSTEM_SUN_VOYAGER
 	help
-	  Framebuffer support for Sun Voyager.
+	  Framebuffer support for Sun CGSIX cards.
 
 config ADK_LINUX_KERNEL_FB_RADEON
 	bool "Framebuffer support for RADEON chips"
