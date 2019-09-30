@@ -251,15 +251,6 @@ config ADK_LINUX_KERNEL_SMC91X
 	help
  	  SMC91X ethernet driver
 
-config ADK_LINUX_KERNEL_SGISEEQ
-	tristate "SGISEEQ ethernet driver"
-	select ADK_LINUX_KERNEL_NET_VENDOR_SEEQ
-	depends on ADK_TARGET_SYSTEM_SGI_INDY
-	default y if ADK_TARGET_SYSTEM_SGI_INDY
-	default n
-	help
- 	  SGI ethernet driver
-
 config ADK_LINUX_KERNEL_SMSC911X
 	tristate "SMC911X ethernet driver"
 	select ADK_LINUX_KERNEL_NET_VENDOR_SMSC
@@ -516,8 +507,6 @@ config ADK_LINUX_KERNEL_STMMAC_ETH
 config ADK_LINUX_KERNEL_SUNGEM
 	bool "SUN GEM ethernet driver"
 	select ADK_LINUX_KERNEL_NET_VENDOR_SUN
-	depends on ADK_TARGET_SYSTEM_APPLE_MACMINI
-	default y if ADK_TARGET_SYSTEM_APPLE_MACMINI
 	default n
 
 config ADK_LINUX_KERNEL_ETHOC

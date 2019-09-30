@@ -63,12 +63,6 @@ ifeq ($(ADK_TARGET_FS),nfsroot)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
-ifeq ($(ADK_TARGET_SYSTEM_APPLE_MACMINI),y)
-	@echo 'Use <alt-gr>-<win>-o-f to get into OpenFirmware on bootup, then type:'
-	@echo ' 0 > boot enet:10.0.0.1,yaboot'
-	@echo 'In yaboot type:'
-	@echo ' boot: enet:'
-endif
 endif
 
 # image creation and kernel install
