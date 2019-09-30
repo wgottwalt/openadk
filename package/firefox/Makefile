@@ -25,7 +25,7 @@ PKG_CFLINE_FIREFOX:=	select ADK_PACKAGE_CAIRO_WITH_TEE@
 PKG_CFLINE_FIREFOX+=	select ADK_PACKAGE_CAIRO_WITH_XRENDER
 
 PKG_ARCH_DEPENDS:=	arm mips mips64 x86 x86_64
-PKG_SYSTEM_DEPENDS:=	solidrun-imx6 ibm-x40 lemote-yeelong qemu-i686 qemu-x86_64 raspberry-pi raspberry-pi2 raspberry-pi3 raspberry-pi3p
+PKG_SYSTEM_DEPENDS:=	solidrun-imx6 lemote-yeelong qemu-i686 qemu-x86_64 raspberry-pi raspberry-pi2 raspberry-pi3 raspberry-pi3p
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).source.tar.xz
 WRKBUILD=		$(WRKDIR)/$(PKG_NAME)-obj

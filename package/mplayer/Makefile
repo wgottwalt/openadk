@@ -20,8 +20,6 @@ PKG_NEEDS:=		threads intl
 PKG_URL:=		http://www.mplayerhq.hu/
 PKG_SITES:=		http://www.mplayerhq.hu/MPlayer/releases/
 
-PKG_BUILDDEP_IBM_X40:=	yasm-host
-
 DISTFILES:=		MPlayer-$(PKG_VERSION).tar.xz
 WRKDIST=		${WRKDIR}/MPlayer-${PKG_VERSION}
 
@@ -129,12 +127,6 @@ ifeq (${ADK_PACKAGE_MPLAYER_WITH_DIRECTFB},y)
 CONFIGURE_DIRECTFB=	--enable-directfb
 else
 CONFIGURE_DIRECTFB=	--disable-directfb
-endif
-
-ifeq ($(ADK_TARGET_SYSTEM_IBM_X40),y)
-			--yasm=${STAGING_HOST_DIR}/usr/bin/yasm
-else
-			--yasm=''
 endif
 
 CONFIGURE_ARGS:=	--prefix=/usr \

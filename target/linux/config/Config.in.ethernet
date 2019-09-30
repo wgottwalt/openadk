@@ -372,7 +372,6 @@ config ADK_LINUX_KERNEL_E1000
 		ADK_TARGET_SYSTEM_QEMU_SPARC64 || \
 		ADK_TARGET_VBOX || \
 		ADK_TARGET_GENERIC
-	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_TARGET_SYSTEM_QEMU_X86
 	default y if ADK_TARGET_SYSTEM_QEMU_X86_64
 	default y if ADK_TARGET_SYSTEM_QEMU_MIPS
@@ -394,9 +393,7 @@ config ADK_LINUX_KERNEL_E1000E
 	select ADK_LINUX_KERNEL_NETDEV_1000
 	select ADK_LINUX_KERNEL_FIRMWARE_IN_KERNEL
 	depends on ADK_TARGET_WITH_PCI || \
-		ADK_TARGET_SYSTEM_LENOVO_X200 || \
 		ADK_TARGET_GENERIC
-	default y if ADK_TARGET_SYSTEM_LENOVO_X200
 	default n
 	help
 	  Intel(R) PRO/1000e gigabit ethernet driver
@@ -531,7 +528,6 @@ config ADK_LINUX_KERNEL_ATL1
 	select ADK_LINUX_KERNEL_CRC32
 	depends on ADK_TARGET_WITH_PCI \
 		|| ADK_TARGET_GENERIC
-	default y if ADK_TARGET_SYSTEM_ASUS_P5BVM
 	default n
 	help
 	  This driver supports the Atheros/Attansic L1 gigabit ethernet adapter.

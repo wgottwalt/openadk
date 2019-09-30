@@ -235,11 +235,9 @@ config ADK_LINUX_KERNEL_HIGHMEM
 	bool "Enable high memory"
 	# produces broken kernel on bcm28xx
 	depends on !ADK_TARGET_BOARD_BCM28XX
-	default y if ADK_TARGET_SYSTEM_IBM_X40
 	default y if ADK_TARGET_MODEL_CUBOX_I4PRO
 	default y if ADK_TARGET_MODEL_CUBOX_I2ULTRA
 	default y if ADK_TARGET_MODEL_CUBOX_I2EX
-	default y if ADK_TARGET_SYSTEM_ASUS_P5BVM
 	default y if ADK_TARGET_SYSTEM_PCENGINES_APU
 	default n
 	help

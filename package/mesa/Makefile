@@ -28,9 +28,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 $(eval $(call PKG_template,MESA,mesa,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION},${PKG_OPTS}))
 
 DRI_DRIVERS:=		swrast
-ifeq (${ADK_TARGET_SYSTEM_IBM_X40},y)
-DRI_DRIVERS:=		i915
-endif
 
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-gallium-llvm \

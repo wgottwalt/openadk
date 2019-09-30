@@ -212,7 +212,6 @@ config ADK_LINUX_KERNEL_FB_VESA
 	select ADK_LINUX_KERNEL_FB
 	select ADK_LINUX_KERNEL_FRAMEBUFFER_CONSOLE
 	default y if ADK_TARGET_VBOX
-	default y if ADK_TARGET_SYSTEM_ASUS_P5BVM
  	default n
  	help
 	  Generic VESA Framebuffer support.
@@ -321,8 +320,6 @@ config ADK_LINUX_KERNEL_DRM_I915
 	select ADK_LINUX_KERNEL_FRAMEBUFFER_CONSOLE
 	select ADK_LINUX_KERNEL_DRM_KMS_HELPER
 	select ADK_LINUX_KERNEL_DRM_FBDEV_EMULATION
-	default y if ADK_TARGET_SYSTEM_IBM_X40
-	default y if ADK_TARGET_SYSTEM_LENOVO_X200
 	default n
 	help
           Support for Intel chipsets.
