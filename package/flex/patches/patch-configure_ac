@@ -1,5 +1,5 @@
---- flex-2.6.4.orig/configure.ac	2017-05-03 13:16:37.000000000 -0700
-+++ flex-2.6.4/configure.ac	2018-05-26 15:05:50.426997650 -0700
+--- flex-2.6.4.orig/configure.ac	2017-05-03 22:16:37.000000000 +0200
++++ flex-2.6.4/configure.ac	2019-09-30 18:05:13.288027994 +0200
 @@ -25,8 +25,10 @@
  # autoconf requirements and initialization
  
@@ -20,3 +20,11 @@
  AC_PROG_YACC
  AS_IF([test "$YACC" != 'bison -y'], [
  	YACC="\${top_srcdir}/build-aux/missing bison -y"
+@@ -166,6 +166,7 @@ strtol dnl
+ AC_CHECK_FUNCS([dnl
+ pow dnl           Used only by "examples/manual/expr"
+ setlocale dnl     Needed only if NLS is enabled
++reallocarr dnl    NetBSD function. Use reallocarray if not available.
+ reallocarray dnl  OpenBSD function. We have replacement if not available.
+ ])
+ 
