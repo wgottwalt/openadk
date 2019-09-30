@@ -84,15 +84,6 @@ endif
 ifeq ($(ADK_TARGET_OS_BAREMETAL),y)
 GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_TARGET_SUFFIX)
 endif
-ifeq ($(ADK_TARGET_OS_FROSTED),y)
-GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_TARGET_OS)-$(ADK_TARGET_SUFFIX)
-endif
-ifeq ($(ADK_TARGET_OS_RTEMS),y)
-GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_TARGET_OS)
-endif
-ifeq ($(ADK_TARGET_OS_ZEPHYR),y)
-GNU_TARGET_NAME:=	$(ADK_TARGET_CPU_ARCH)-$(ADK_TARGET_OS)
-endif
 
 TARGET_CROSS:=		$(TOOLCHAIN_DIR)/usr/bin/$(GNU_TARGET_NAME)-
 TARGET_COMPILER_PREFIX?=${TARGET_CROSS}
@@ -176,7 +167,7 @@ TARGET_CXXFLAGS+=	-m$(ADK_TARGET_FLOAT)-float
 endif
 endif
 
-ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_OS_FROSTED),y)
+ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
 TARGET_LDFLAGS+=	-Wl,-elf2flt
 TARGET_CFLAGS+=		-Wl,-elf2flt
 TARGET_CXXFLAGS+=	-Wl,-elf2flt
@@ -238,11 +229,6 @@ endif
 # performance optimization, see http://www.akkadia.org/drepper/dsohowto.pdf
 ifneq ($(ADK_TARGET_USE_GNU_HASHSTYLE),)
 TARGET_LDFLAGS+=	-Wl,--hash-style=gnu
-endif
-
-# special operating system flags
-ifeq ($(ADK_TARGET_OS_FROSTED),y)
-TARGET_CFLAGS+=         -fPIC -mlong-calls -fno-common -msingle-pic-base -mno-pic-data-is-text-relative
 endif
 
 # special architecture optimization flags

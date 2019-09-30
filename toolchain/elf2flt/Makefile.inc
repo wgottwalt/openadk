@@ -12,9 +12,3 @@ PKG_GIT:=		branch
 PKG_RELEASE:=		1
 PKG_SITES:=		git://git.osdn.net/gitroot/uclinux-h8/elf2flt.git
 endif
-ifeq ($(ADK_TARGET_OS_FROSTED),y)
-PKG_VERSION:=		master
-PKG_GIT:=		branch
-PKG_RELEASE:=		1
-PKG_SITES:=		https://github.com/insane-adding-machines/elf2flt-1.git
-endif

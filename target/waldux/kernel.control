@@ -1,5 +1,0 @@
-Package: kernel
-Priority: optional
-Section: sys
-Description: package for the Waldux Kernel
-

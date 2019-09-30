@@ -31,16 +31,12 @@ ADK_PACKAGE_CRYPTINIT_ROOT:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_ROOT)))
 ADK_PACKAGE_CRYPTINIT_SWAP:=$(strip $(subst ",, $(ADK_PACKAGE_CRYPTINIT_SWAP)))
 ADK_PACKAGE_CMDLINE:=root=$(ADK_PACKAGE_CRYPTINIT_ROOT) swap=$(ADK_PACKAGE_CRYPTINIT_SWAP) resume=/dev/mapper/swapcrypt
 
-ifeq ($(ADK_TARGET_OS_LINUX)$(ADK_TARGET_OS_WALDUX),y)
-ifeq ($(ADK_TARGET_LINUX_KERNEL_USE_MINICONFIG)$(ADK_TARGET_WALDUX_KERNEL_USE_MINICONFIG),y)
+ifeq ($(ADK_TARGET_OS_LINUX),y)
+ifeq ($(ADK_TARGET_LINUX_KERNEL_USE_MINICONFIG),y)
 ifeq ($(ADK_TARGET_KERNEL_CUSTOMISING),y)
 config-prepare: $(ADK_TOPDIR)/.config
 ifeq ($(ADK_TARGET_OS_LINUX),y)
 	@PATH='$(HOST_PATH)' sed -n '/^ADK_LINUX_KERNEL/s//CONFIG/p' $(ADK_TOPDIR)/.config \
-	    >$(BUILD_DIR)/.kernelconfig.kernel
-endif
-ifeq ($(ADK_TARGET_OS_WALDUX),y)
-	@PATH='$(HOST_PATH)' sed -n '/^ADK_WALDUX_KERNEL/s//CONFIG/p' $(ADK_TOPDIR)/.config \
 	    >$(BUILD_DIR)/.kernelconfig.kernel
 endif
 	@if [ -f $(ADK_TARGET_ARCH)/kernel/$(ADK_TARGET_SYSTEM) ];then \
@@ -106,11 +102,11 @@ ifeq ($(ADK_RUNTIME_QUIET_KERNEL),y)
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 quiet loglevel=2 vt.global_cursor_default=0"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
-ifeq ($(ADK_LINUX_KERNEL_DEBUG_WITH_KGDB)$(ADK_WALDUX_KERNEL_DEBUG_WITH_KGDB),y)
+ifeq ($(ADK_LINUX_KERNEL_DEBUG_WITH_KGDB),y)
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 kgdbwait kgdboc=ttyS0,115200"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
-ifeq ($(ADK_LINUX_KERNEL_NETCONSOLE)$(ADK_WALDUX_KERNEL_NETCONSOLE),y)
+ifeq ($(ADK_LINUX_KERNEL_NETCONSOLE),y)
 	@$(SED) 's#^\(CONFIG_.*CMDLINE="\)\(.*\)"#\1\2 netconsole=@$(ADK_PARAMETER_NETCONSOLE_SRC_IP)/,@$(ADK_PARAMETER_NETCONSOLE_DST_IP)/"#' \
 		$(BUILD_DIR)/.kernelconfig.board
 endif
@@ -138,36 +134,8 @@ config-prepare: $(ADK_TOPDIR)/.config
 endif
 endif
 
-ifeq ($(ADK_TARGET_OS_FROSTED),y)
-config-prepare: $(ADK_TOPDIR)/.config
-	@PATH='$(HOST_PATH)' sed -n '/^ADK_FROSTED_/s///p' $(ADK_TOPDIR)/.config \
-	    >$(BUILD_DIR)/.frosted
-	@PATH='$(HOST_PATH)' sed -n '/^ADK_PACKAGE_FROSTED_/s///p' $(ADK_TOPDIR)/.config \
-	    >$(BUILD_DIR)/.frostedapps
-endif
 
-ifeq ($(ADK_TARGET_OS_FROSTED),y)
-prepare: frosted-prepare
-compile: frosted-compile
-install: frosted-install
-targethelp: frosted-targethelp
-endif
-
-ifeq ($(ADK_TARGET_OS_RTEMS),y)
-prepare: rtems-prepare
-compile: rtems-compile
-install: rtems-install
-targethelp: rtems-targethelp
-endif
-
-ifeq ($(ADK_TARGET_OS_ZEPHYR),y)
-prepare: zephyr-prepare
-compile: zephyr-compile
-install: zephyr-install
-targethelp: zephyr-targethelp
-endif
-
-ifeq ($(ADK_TARGET_OS_LINUX)$(ADK_TARGET_OS_WALDUX),y)
+ifeq ($(ADK_TARGET_OS_LINUX),y)
 prepare: $(ADK_TARGET_ARCH)-prepare
 compile: $(ADK_TARGET_ARCH)-compile
 image: $(ADK_TARGET_ARCH)-imageclean $(ADK_TARGET_ARCH)-imageinstall

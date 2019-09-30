@@ -124,7 +124,7 @@ config ADK_STATIC_TOOLCHAIN
 
 config ADK_PRELINK
 	bool "Prelink binaries and libraries in Image"
-	depends on ADK_TARGET_OS_LINUX || ADK_TARGET_OS_WALDUX
+	depends on ADK_TARGET_OS_LINUX
 	help
 	  Do prelinking for faster loading of binaries.
 

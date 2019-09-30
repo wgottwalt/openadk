@@ -942,7 +942,6 @@ int main() {
 					token = strtok(pkg_kdepends, " ");
 					while (token != NULL) {
 						fprintf(cfg, "\tselect ADK_LINUX_KERNEL_%s m if ADK_TARGET_OS_LINUX\n", toupperstr(token));
-						fprintf(cfg, "\tselect ADK_WALDUX_KERNEL_%s m if ADK_TARGET_OS_WALDUX\n", toupperstr(token));
 						token = strtok(NULL, " ");
 					}
 					free(pkg_kdepends);

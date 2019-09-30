@@ -9,37 +9,13 @@ config ADK_TARGET_OS_LINUX
 	help
 	  Create a Linux system or toolchain.
 
-config ADK_TARGET_OS_WALDUX
-	bool "Waldux"
-	help
-	  Create a Waldux system or toolchain.
-
 config ADK_TARGET_OS_BAREMETAL
 	bool "Bare metal"
 	help
 	  Create a bare metal appliance or toolchain.
-
-config ADK_TARGET_OS_RTEMS
-	bool "RTEMS"
-	help
-	  Create a RTEMS appliance or toolchain.
-
-config ADK_TARGET_OS_FROSTED
-	bool "Frosted"
-	help
-	  Create a frosted appliance or toolchain.
-
-config ADK_TARGET_OS_ZEPHYR
-	bool "Zephyr"
-	help
-	  Create a zephyr appliance or toolchain.
 
 endchoice
 
 config ADK_TARGET_OS
 	string
 	default "linux" if ADK_TARGET_OS_LINUX
-	default "waldux" if ADK_TARGET_OS_WALDUX
-	default "frosted" if ADK_TARGET_OS_FROSTED
-	default "rtems5.0.0" if ADK_TARGET_OS_RTEMS
-	default "zephyr" if ADK_TARGET_OS_ZEPHYR

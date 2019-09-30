@@ -10,15 +10,6 @@ NEWLIB_CONFIGURE_ARGS:=	--enable-newlib-io-long-long \
 			--enable-newlib-register-fini \
 			--disable-newlib-supplied-syscalls
 
-ifeq ($(ADK_TARGET_OS_FROSTED),y)
-NEWLIB_CONFIGURE_ARGS+=	--enable-newlib-fvwrite-in-streamio=no \
-			--enable-newlib-fseek-optimization=no \
-			--enable-newlib_wide_orient=no \
-			--enable-newlib-unbuf-stream-opt=yes
-TARGET_CFLAGS+="-DREENTRANT_SYSCALLS_PROVIDED"
-endif
-	
-
 $(WRKBUILD)/.configured:
 	(cd $(WRKBUILD); \
 		CC='' \

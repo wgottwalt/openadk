@@ -40,7 +40,7 @@ TARGETS+=newlib
 CLIB:=newlib
 endif
 
-ifeq ($(ADK_TARGET_BINFMT_FLAT)$(ADK_TARGET_OS_FROSTED),y)
+ifeq ($(ADK_TARGET_BINFMT_FLAT),y)
 TARGETS+=elf2flt
 ELF2FLT:=elf2flt-install
 endif
