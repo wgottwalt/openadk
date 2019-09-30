@@ -547,16 +547,6 @@ config ADK_LINUX_KERNEL_ATL1
 	help
 	  This driver supports the Atheros/Attansic L1 gigabit ethernet adapter.
 
-config ADK_LINUX_KERNEL_SGI_O2MACE_ETH
-	tristate "SGI O2 ethernet driver"
-	select ADK_LINUX_KERNEL_NET_VENDOR_SGI
-	select ADK_LINUX_KERNEL_CRC32
-	depends on ADK_TARGET_SYSTEM_SGI_O2
-	default y if ADK_TARGET_SYSTEM_SGI_O2
-	default n
-	help
-	  This driver supports the SGI O2 ethernet card.
-
 config ADK_LINUX_KERNEL_ALTERA_TSE
 	tristate "Altera TSE ethernet driver"
 	select ADK_LINUX_KERNEL_PHYLIB
