@@ -30,13 +30,6 @@ PKG_RELEASE:=		1
 PKG_SITES:=		https://github.com/foss-for-synopsys-dwc-arc-processors/binutils-gdb.git
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
-ifeq ($(ADK_TOOLCHAIN_BINUTILS_CSKY),y)
-PKG_VERSION:=		binutils-2_27-branch-csky
-PKG_GIT:=		branch
-PKG_RELEASE:=		1
-PKG_SITES:=		https://github.com/c-sky/binutils-gdb.git
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-endif
 ifeq ($(ADK_TOOLCHAIN_BINUTILS_NDS32),y)
 PKG_VERSION:=		nds32-binutils-2.30-branch-open
 PKG_GIT:=		branch

@@ -41,13 +41,6 @@ PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 LIBSTDCXXVER:=		19
 endif
-ifeq ($(ADK_TOOLCHAIN_GCC_CSKY),y)
-PKG_VERSION:=		gcc-6-branch-csky
-PKG_GIT:=		branch
-PKG_SITES:=		https://github.com/c-sky/gcc.git
-PKG_RELEASE:=		1
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
-endif
 ifeq ($(ADK_TOOLCHAIN_GCC_METAG),y)
 PKG_VERSION:=		4.2.4
 PKG_HASH:=		7cb75c5183bd18f415860084440377016dc78feeee2852227b831f2e4fcaa5d6
