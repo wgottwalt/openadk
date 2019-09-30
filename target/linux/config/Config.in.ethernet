@@ -156,8 +156,6 @@ config ADK_LINUX_KERNEL_DE2104X
 	tristate "DE2104X ethernet driver"
 	select ADK_LINUX_KERNEL_NET_VENDOR_DEC
 	select ADK_LINUX_KERNEL_NET_TULIP
-	depends on ADK_TARGET_SYSTEM_DEC_MULTIA
-	default y if ADK_TARGET_SYSTEM_DEC_MULTIA
 	default n
 	help
 	  DEC Tulip ethernet driver.
