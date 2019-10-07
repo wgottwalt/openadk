@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		openvpn
-PKG_VERSION:=		2.4.3
+PKG_VERSION:=		2.4.7
 PKG_RELEASE:=		1
-PKG_HASH:=		15e15fc97f189b52aee7c90ec8355aa77469c773125110b4c2f089abecde36fb
+PKG_HASH:=		a42f53570f669eaf10af68e98d65b531015ff9e12be7a62d9269ea684652f648
 PKG_DESCR:=		vpn solution using ssl/tls
 PKG_DEPENDS:=		libressl
 PKG_BUILDDEP:=		libressl
@@ -15,7 +15,7 @@ PKG_SECTION:=		net/security
 PKG_URL:=		http://openvpn.net/
 PKG_SITES:=		http://swupdate.openvpn.org/community/releases/
 
-PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_LZ4 WITH_MANAGEMENT WITH_HTTPPROXY WITH_SOCKS WITH_SMALL
+PKG_FLAVOURS_OPENVPN:=	WITH_LZO WITH_LZ4 WITH_MANAGEMENT WITH_SMALL
 PKGFD_WITH_LZO:=	enable lzo compression support
 PKGFS_WITH_LZO:=	liblzo
 PKGFB_WITH_LZO:=	liblzo
@@ -23,8 +23,6 @@ PKGFD_WITH_LZ4:=	enable lz4 compression support
 PKGFS_WITH_LZ4:=	liblz4
 PKGFB_WITH_LZ4:=	lz4
 PKGFD_WITH_MANAGEMENT:=	enable management server support
-PKGFD_WITH_HTTPPROXY:=	enable http proxy support
-PKGFD_WITH_SOCKS:=	enable socks proxy support
 PKGFD_WITH_SMALL:=	enable extra small binary
 
 include $(ADK_TOPDIR)/mk/package.mk
@@ -49,18 +47,6 @@ ifneq ($(ADK_PACKAGE_OPENVPN_WITH_MANAGEMENT),)
 CONFIGURE_ARGS+=	--enable-management
 else
 CONFIGURE_ARGS+=	--disable-management
-endif
-
-ifneq ($(ADK_PACKAGE_OPENVPN_WITH_HTTPPROXY),)
-CONFIGURE_ARGS+=	--enable-http-proxy
-else
-CONFIGURE_ARGS+=	--disable-http-proxy
-endif
-
-ifneq ($(ADK_PACKAGE_OPENVPN_WITH_SOCKS),)
-CONFIGURE_ARGS+=	--enable-socks
-else
-CONFIGURE_ARGS+=	--disable-socks
 endif
 
 ifneq ($(ADK_PACKAGE_OPENVPN_WITH_SMALL),)
