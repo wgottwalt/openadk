@@ -1,0 +1,17 @@
+diff -Nur binutils-2.32.orig/bfd/elf32-or1k.c binutils-2.32/bfd/elf32-or1k.c
+--- binutils-2.32.orig/bfd/elf32-or1k.c	2019-01-19 17:01:33.000000000 +0100
++++ binutils-2.32/bfd/elf32-or1k.c	2019-10-06 04:55:05.439891597 +0200
+@@ -2379,8 +2379,11 @@
+       or1k_write_plt_entry (output_bfd, splt->contents + h->plt.offset,
+ 			    plt0, plt1, plt2, OR1K_JR(12));
+ 
+-      /* Fill in the entry in the global offset table.  */
+-      bfd_put_32 (output_bfd, plt_addr, sgot->contents + got_offset);
++      /* Fill in the entry in the global offset table.  We initialize it to
++	point to the top of the plt.  This is done to lazy lookup the actual
++	symbol as the first plt entry will be setup by libc to call the
++	runtime dynamic linker.  */
++      bfd_put_32 (output_bfd, plt_base_addr, sgot->contents + got_offset);
+ 
+       /* Fill in the entry in the .rela.plt section.  */
+       rela.r_offset = got_addr;

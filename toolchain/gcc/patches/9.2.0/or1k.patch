@@ -1,0 +1,61 @@
+diff -Nur gcc-9.2.0.orig/gcc/config/or1k/constraints.md gcc-9.2.0/gcc/config/or1k/constraints.md
+--- gcc-9.2.0.orig/gcc/config/or1k/constraints.md	2019-01-01 13:31:55.000000000 +0100
++++ gcc-9.2.0/gcc/config/or1k/constraints.md	2019-10-07 10:59:48.995389485 +0200
+@@ -32,6 +32,9 @@
+ (define_register_constraint "c" "SIBCALL_REGS"
+   "Registers which can hold a sibling call address")
+ 
++(define_register_constraint "t" "GOT_REGS"
++  "Registers which can be used to store the Global Offset Table (GOT) address.")
++
+ ;; Immediates
+ (define_constraint "I"
+   "A signed 16-bit immediate in the range -32768 to 32767."
+diff -Nur gcc-9.2.0.orig/gcc/config/or1k/or1k.h gcc-9.2.0/gcc/config/or1k/or1k.h
+--- gcc-9.2.0.orig/gcc/config/or1k/or1k.h	2019-01-01 13:31:55.000000000 +0100
++++ gcc-9.2.0/gcc/config/or1k/or1k.h	2019-10-07 12:14:41.334692831 +0200
+@@ -189,6 +189,7 @@
+ {
+   NO_REGS,
+   SIBCALL_REGS,
++  GOT_REGS,
+   GENERAL_REGS,
+   FLAG_REGS,
+   ALL_REGS,
+@@ -200,6 +201,7 @@
+ #define REG_CLASS_NAMES {	\
+   "NO_REGS", 			\
+   "SIBCALL_REGS",		\
++  "GOT_REGS",			\
+   "GENERAL_REGS",		\
+   "FLAG_REGS",			\
+   "ALL_REGS" }
+@@ -212,6 +214,7 @@
+ #define REG_CLASS_CONTENTS      \
+ { { 0x00000000, 0x00000000 },	\
+   { SIBCALL_REGS_MASK,   0 },	\
++  { 0xfffffdff, 0x00000000 },	\
+   { 0xffffffff, 0x00000003 },	\
+   { 0x00000000, 0x00000004 },	\
+   { 0xffffffff, 0x00000007 }	\
+diff -Nur gcc-9.2.0.orig/gcc/config/or1k/or1k.md gcc-9.2.0/gcc/config/or1k/or1k.md
+--- gcc-9.2.0.orig/gcc/config/or1k/or1k.md	2019-01-01 13:31:55.000000000 +0100
++++ gcc-9.2.0/gcc/config/or1k/or1k.md	2019-10-07 10:59:48.999389485 +0200
+@@ -595,7 +595,7 @@
+ ;; set_got pattern below.  This works because the set_got_tmp insn is the
+ ;; first insn in the stream and that it isn't moved during RA.
+ (define_insn "set_got_tmp"
+-  [(set (match_operand:SI 0 "register_operand" "=r")
++  [(set (match_operand:SI 0 "register_operand" "=t")
+ 	(unspec_volatile:SI [(const_int 0)] UNSPECV_SET_GOT))]
+   ""
+ {
+@@ -604,7 +604,7 @@
+ 
+ ;; The insn to initialize the GOT.
+ (define_insn "set_got"
+-  [(set (match_operand:SI 0 "register_operand" "=r")
++  [(set (match_operand:SI 0 "register_operand" "=t")
+ 	(unspec:SI [(const_int 0)] UNSPEC_SET_GOT))
+    (clobber (reg:SI LR_REGNUM))]
+   ""
