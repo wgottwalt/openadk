@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		vtun
-PKG_VERSION:=		3.0.1
+PKG_VERSION:=		3.0.4
 PKG_RELEASE:=		1
-PKG_HASH:=		22507499a8f650ef97157977e62fa632d5b0034070629a2d0fd0512e304eaeeb
+PKG_HASH:=		abf8df6b15e3febeaaeae2ce24ead7105eb1537ad4ec0d830c83cbb684fd98b9
 PKG_DESCR:=		vpn tunnel daemon
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		zlib liblzo libressl
