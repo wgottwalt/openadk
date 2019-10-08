@@ -10,7 +10,7 @@ PKG_EXTRAVER:=		2.56
 PKG_HASH:=		40ef3f44f2c651c7a31aedee44259809b6f03d3d20be44545cd7d177221c0b8d
 PKG_DESCR:=		low-level core library that forms the basis of gtk+
 PKG_SECTION:=		libs/misc
-PKG_DEPENDS:=		libpcre zlib
+PKG_DEPENDS:=		libpcre zlib libffi
 PKG_BUILDDEP:=		glib-host util-linux libffi zlib dbus pcre
 HOST_BUILDDEP:=		pkgconf-host libiconv-host libffi-host python2-host gettext-host util-linux-host
 PKG_NEEDS:=		threads intl iconv
@@ -49,6 +49,7 @@ ifneq ($(OS_FOR_BUILD),CYGWIN)
 HOST_CFLAGS+=		-fPIC
 endif
 HOST_CONFIGURE_ARGS+=	--disable-fam \
+			--disable-selinux \
 			--disable-dtrace \
 			--enable-static \
 			--with-pcre=internal \
