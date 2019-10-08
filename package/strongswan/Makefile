@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		strongswan
-PKG_VERSION:=		5.6.3
+PKG_VERSION:=		5.8.1
 PKG_RELEASE:=		1
-PKG_HASH:=		6691af8f15b172f466342a182d47e3f3c3c5188baf63cae104992938c3d37351
+PKG_HASH:=		d86490a09160016d1c1a20020fef832559a22531eb9a1b1659256e3ca1c8c97d
 PKG_DESCR:=		ipsec based vpn software
 PKG_SECTION:=		net/security
 PKG_KDEPENDS:=		net-key inet-esp xfrm-user inet-xfrm-mode-transport
