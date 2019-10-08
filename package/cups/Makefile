@@ -33,6 +33,7 @@ ifneq ($(ADK_HOST_LINUX),y)
 HOST_LINUX_ONLY:=	1
 endif
 
+HOST_LDFLAGS+=		-liconv
 HOST_CONFIGURE_ARGS+=	--disable-tcp-wrappers \
 			--disable-webif \
 			--disable-gssapi \
