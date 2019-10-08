@@ -81,7 +81,7 @@ ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_WEGA),y)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_IMX6),y)
 	@echo "Use following command to install it on SD card:"
-	@echo "sudo ./scripts/install.sh phytec-mira /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "sudo ./scripts/install.sh phytec-imx6 /dev/sdX $(FW_DIR)/$(ROOTFSTARBALL)"
 	@echo
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BANANA_PRO),y)

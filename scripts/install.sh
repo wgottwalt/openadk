@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #-
-# Copyright © 2010-2017
+# Copyright © 2010-2019
 #	Waldemar Brodkorb <wbx@openadk.org>
 #	Thorsten Glaser <tg@mirbsd.org>
 #
@@ -155,7 +155,7 @@ tgt=$2
 src=$3
 
 case $target {
-(banana-pro|orange-pi0|pcengines-apu|phytec-wega|raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64|raspberry-pi3p|raspberry-pi3p-64|solidrun-imx6|solidrun-clearfog|default) ;;
+(banana-pro|orange-pi0|pcengines-apu|phytec-imx6|phytec-wega|raspberry-pi|raspberry-pi0|raspberry-pi2|raspberry-pi3|raspberry-pi3-64|raspberry-pi3p|raspberry-pi3p-64|solidrun-imx6|solidrun-clearfog|default) ;;
 (*)
 	print -u2 "Unknown target '$target', exiting"
 	exit 1 ;;
@@ -551,7 +551,7 @@ case $target {
 (solidrun-clearfog)
 	dd if="$fwdir/u-boot-spl.kwb" of="$tgt" bs=512 seek=1 > /dev/null 2>&1
 	;;
-(solidrun-imx6)
+(solidrun-imx6|phytec-imx6)
 	dd if="$fwdir/SPL" of="$tgt" bs=1024 seek=1 > /dev/null 2>&1
 	dd if="$fwdir/u-boot.img" of="$tgt" bs=1024 seek=69 > /dev/null 2>&1
 	;;
@@ -581,7 +581,7 @@ if (( datafssz )); then
 	(banana-pro|orange-pi0|solidrun-clearfog)
 		echo "/dev/mmcblk0p2	/data	ext4	rw	0	0" >> "$R"/etc/fstab
 	;;
-	(solidrun-imx6)
+	(solidrun-imx6|phytec-imx6)
 		echo "/dev/mmcblk1p2	/data	ext4	rw	0	0" >> "$R"/etc/fstab
 	;;
 	}
@@ -644,6 +644,15 @@ case $target {
 	mkimage -A arm -O linux -T script -C none -a 0 -e 0 \
 		-n "SolidrunImx6" \
 		-d $fwdir/boot.script.imx6 $R/boot/boot.scr.uimg
+	;;
+(phytec-imx6)
+	for x in "$fwdir"/*.dtb; do
+		[[ -e "$x" ]] && cp "$fwdir"/*.dtb "$R/boot/"
+		break
+	done
+	mkimage -A arm -O linux -T script -C none -a 0 -e 0 \
+		-n "PhytecImx6" \
+		-d $fwdir/boot.script.phytec $R/boot/boot.scr.uimg
 	;;
 (orange-pi0)
 	for x in "$fwdir"/*.dtb; do
