@@ -4,12 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mosh
-PKG_VERSION:=		1.2.6
+PKG_VERSION:=		1.3.2
 PKG_RELEASE:=		1
-PKG_HASH:=		7e82b7fbfcc698c70f5843bb960dadb8e7bd7ac1d4d2151c9d979372ea850e85
+PKG_HASH:=		da600573dfa827d88ce114e0fed30210689381bbdcff543c931e4d6a2e851216
 PKG_DESCR:=		mobile shell
 PKG_SECTION:=		net/security
-PKG_DEPENDS:=		zlib ncurses libressl
+PKG_DEPENDS:=		zlib ncurses libressl perl
 PKG_BUILDDEP:=		protobuf-host protobuf zlib ncurses libressl
 PKG_NEEDS:=		c++
 PKG_URL:=		https://mosh.org/
