@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
-PKG_VERSION:=		2018.03
+PKG_VERSION:=		2019.10
 PKG_RELEASE:=		1
-PKG_HASH:=		7e7477534409d5368eb1371ffde6820f0f79780a1a1f676161c48442cb303dfd
+PKG_HASH:=		8d6d6070739522dd236cba7055b8736bfe92b4fac0ea18ad809829ca79667014
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 HOST_BUILDDEP:=		libressl-host dtc-host
@@ -121,6 +121,10 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 	$(INSTALL_BIN) $(WRKBUILD)/SPL $(FW_DIR)
 	$(INSTALL_BIN) ./files/boot.script.imx6 $(FW_DIR)
+endif
+ifeq ($(ADK_TARGET_SYSTEM_PHYTEC_IMX6),y)
+	$(INSTALL_BIN) $(WRKBUILD)/SPL $(FW_DIR)
+	$(INSTALL_BIN) ./files/boot.script.phytec $(FW_DIR)
 endif
 ifeq ($(ADK_TARGET_SYSTEM_BEAGLEBONE_BLACK),y)
 	$(CP) ./files/uEnv.txt.bbb $(FW_DIR)/uEnv.txt
