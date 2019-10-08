@@ -4,14 +4,14 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		mesa
-PKG_VERSION:=		17.2.2
+PKG_VERSION:=		18.3.6
 PKG_RELEASE:=		1
-PKG_HASH:=		cf522244d6a5a1ecde3fc00e7c96935253fe22f808f064cab98be6f3faa65782
+PKG_HASH:=		aaf17638dcf5a90b93b6389e152fdc9ef147768b09598f24d2c5cf482fcfc705
 PKG_DESCR:=		3d graphics library
 PKG_SECTION:=		libs/video
 PKG_DEPENDS:=		libxdamage libxfixes libdrm libxxf86vm libexpat
 PKG_DEPENDS+=		libxml2 libxml2-python
-PKG_BUILDDEP:=		python2 libxml2 libXdamage libXfixes
+PKG_BUILDDEP:=		python2 libxml2 libXdamage libXfixes libXrandr
 PKG_BUILDDEP+=		libXxf86vm libdrm dri2proto glproto expat libXext
 PKG_BUILDDEP+=		eudev dri3proto presentproto xcb-proto libxcb
 PKG_BUILDDEP+=		libxshmfence
