@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		xorg-server
-PKG_VERSION:=		1.19.0
+PKG_VERSION:=		1.19.7
 PKG_RELEASE:=		1
-PKG_HASH:=		c3e8660a74e2902e6ecaa66aa774e15d1ab66c2c19a023bd9e74e651ef005a43
+PKG_HASH:=		5f6d3da0d1e341f27a7706779a24a5fa7174d5f161b5f8530f103753f0152de7
 PKG_DESCR:=		xorg server
 PKG_SECTION:=		x11/drivers
 PKG_DEPENDS:=		libxfont2 pixman libpciaccess libxkbfile
@@ -17,7 +17,7 @@ PKG_DEPENDS+=		libxshmfence libfreetype libfontenc libpciaccess
 PKG_BUILDDEP:=		libX11 randrproto renderproto fixesproto damageproto
 PKG_BUILDDEP+=		scrnsaverproto resourceproto fontsproto videoproto
 PKG_BUILDDEP+=		compositeproto evieext libxkbfile libXfont2 pixman
-PKG_BUILDDEP+=		libpciaccess xf86dgaproto recordproto
+PKG_BUILDDEP+=		libpciaccess xf86dgaproto recordproto dri3proto
 PKG_BUILDDEP+=		xineramaproto presentproto xf86driproto glproto mesa
 PKG_NEEDS:=		threads c++
 PKG_URL:=		http://www.x.org/
@@ -78,7 +78,7 @@ CONFIGURE_ARGS+=	--enable-dga \
 			--disable-strict-compilation \
 			--enable-dri \
 			--enable-dri2 \
-			--enable-dri3 \
+			--disable-dri3 \
 			--enable-glx \
 			--enable-aiglx \
 			--with-xkb-output=/tmp \
