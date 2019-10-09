@@ -1,6 +1,6 @@
---- snort-2.9.5.orig/configure	2013-06-04 23:21:55.000000000 +0200
-+++ snort-2.9.5/configure	2013-07-17 11:07:20.000000000 +0200
-@@ -14205,50 +14205,6 @@ _ACEOF
+--- snort-2.9.14.1.orig/configure	2019-08-02 08:33:43.000000000 +0200
++++ snort-2.9.14.1/configure	2019-10-08 14:35:23.506350397 +0200
+@@ -14408,50 +14408,6 @@ _ACEOF
  fi
  
  
@@ -51,7 +51,7 @@
  
  cat confdefs.h - <<_ACEOF >conftest.$ac_ext
  /* end confdefs.h.  */
-@@ -14578,45 +14534,6 @@ if test "x$LPCAP" = "xno"; then
+@@ -14861,45 +14817,6 @@ if test "x$LPCAP" = "xno"; then
    fi
  fi
  
@@ -97,9 +97,9 @@
  
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking for pcap_lib_version" >&5
  $as_echo_n "checking for pcap_lib_version... " >&6; }
-@@ -15432,38 +15349,7 @@ fi
- done
+@@ -15830,38 +15747,7 @@ fi
  
+ fi
  
 -{ $as_echo "$as_me:${as_lineno-$LINENO}: checking for daq address space ID" >&5
 -$as_echo_n "checking for daq address space ID... " >&6; }

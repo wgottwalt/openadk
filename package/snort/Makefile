@@ -4,15 +4,15 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		snort
-PKG_VERSION:=		2.9.5
+PKG_VERSION:=		2.9.14.1
 PKG_RELEASE:=		1
-PKG_HASH:=		1f9997716e8c086c9d608294a55c323846877c8f16acd129a90ca5fadbba1890
+PKG_HASH:=		2472989da3aace000d1ea5931ece68f8e5cc0c511e272d65182113a2481e822d
 PKG_DESCR:=		flexible network intrusion detection system
 PKG_SECTION:=		net/security
 PKG_DEPENDS:=		libnet libpcap libpcre libtirpc daq
 PKG_BUILDDEP:=		libnet libpcap pcre libtirpc daq
 PKG_URL:=		http://www.snort.org/
-PKG_SITES:=		http://distfiles.openadk.org/
+PKG_SITES:=		https://www.snort.org/downloads/snort/
 PKG_NOPARALLEL:=	1
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
@@ -23,9 +23,12 @@ include ${ADK_TOPDIR}/mk/package.mk
 
 $(eval $(call PKG_template,SNORT,snort,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
+AUTOTOOL_STYLE:=	autoreconf
 TARGET_CPPFLAGS+=	-I$(STAGING_TARGET_DIR)/usr/include/tirpc
 TARGET_LDFLAGS+=	-ltirpc
+CONFIGURE_ENV+=		have_inaddr_none=yes
 CONFIGURE_ARGS+=	--disable-static-daq \
+			--disable-open-appid \
 			--with-libpcap-includes="${STAGING_TARGET_DIR}/usr/include" \
 			--with-libpcap-libraries="${STAGING_TARGET_DIR}/usr/lib" \
 			--with-libpcre-includes="${STAGING_TARGET_DIR}/usr/include" \
