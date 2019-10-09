@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		strace
-PKG_VERSION:=		5.2
+PKG_VERSION:=		5.3
 PKG_RELEASE:=		1
-PKG_HASH:=		d513bc085609a9afd64faf2ce71deb95b96faf46cd7bc86048bc655e4e4c24d2
+PKG_HASH:=		6c131198749656401fe3efd6b4b16a07ea867e8f530867ceae8930bbc937a047
 PKG_DESCR:=		system call trace program
 PKG_SECTION:=		app/debug
 PKG_URL:=		https://strace.io
@@ -28,6 +28,9 @@ ifeq ($(ADK_TARGET_LIB_MUSL),y)
 TARGET_CPPFLAGS+=	-DMSG_EXCEPT=020000 -D_LARGEFILE64_SOURCE=1
 CONFIGURE_ENV+=		st_cv_m32_mpers=no \
 			st_cv_mx32_mpers=no
+endif
+ifeq ($(ADK_TARGET_USE_STATIC_LIBS_ONLY),y)
+TARGET_LDFLAGS+=	-pthread
 endif
 
 CONFIGURE_ARGS+=	--enable-mpers=check
