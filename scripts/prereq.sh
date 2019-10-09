@@ -603,6 +603,7 @@ if which cpio >/dev/null 2>&1; then
   else
     printf "found\n"
   fi
+else
   printf "not found\n"
   host_build_cpio=1
 fi
