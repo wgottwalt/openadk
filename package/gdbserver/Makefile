@@ -4,7 +4,7 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gdbserver
-PKG_VERSION:=		8.2.1
+PKG_VERSION:=		8.3.1
 PKG_RELEASE:=		1
 PKG_HASH:=		0a6a432907a03c5c8eaad3c3cffd50c00a40c3a5e3c4039440624bae703f2202
 PKG_DESCR:=		remote programm debugger utility
