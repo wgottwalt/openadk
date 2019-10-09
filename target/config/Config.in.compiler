@@ -7,24 +7,7 @@ prompt "Compiler"
 config ADK_BUILD_COMPILER_GCC
 	bool "gcc"
 
-config ADK_BUILD_COMPILER_LLVM
-	bool "llvm"
-	depends on ADK_EXPERIMENTAL
-
 endchoice
-
-choice
-prompt "LLVM version"
-depends on ADK_BUILD_COMPILER_LLVM
-
-config ADK_TOOLCHAIN_LLVM
-	bool "6.0.0"
-
-endchoice
-
-config ADK_TOOLCHAIN_LLVM_VERSION
-	string
-	default "6.0.0" if ADK_TOOLCHAIN_LLVM
 
 choice
 prompt "GCC version"
