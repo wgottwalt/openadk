@@ -39,6 +39,10 @@ ifeq ($(ADK_TARGET_KERNEL_IMAGE),y)
 KERNEL_FILE:=vmlinux
 KERNEL_TARGET:=$(ADK_TARGET_KERNEL)
 endif
+ifeq ($(ADK_TARGET_KERNEL_SIMPLEIMAGE),y)
+KERNEL_FILE:=vmlinux.bin
+KERNEL_TARGET:=simpleImage.milkymist_one
+endif
 
 ifneq ($(KERNEL_MODULES_USED),)
 KERNEL_TARGET+=modules

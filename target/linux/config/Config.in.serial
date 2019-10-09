@@ -76,6 +76,9 @@ config ADK_LINUX_KERNEL_SERIAL_BFIN_UART1
 config ADK_LINUX_KERNEL_SERIAL_8250_INGENIC
 	bool
 
+config ADK_LINUX_KERNEL_SERIAL_MILKYMIST_CONSOLE
+	bool
+
 config ADK_LINUX_KERNEL_SERIAL_BFIN
 	bool "BFIN serial driver"
 	select ADK_LINUX_KERNEL_SERIAL_BFIN_CONSOLE
@@ -324,6 +327,15 @@ config ADK_LINUX_KERNEL_SERIAL_ATMEL
 config ADK_LINUX_KERNEL_BOARD_GRASSHOPPER_USART0
 	bool "Enable USART0 on AVR32 Grasshopper boards"
 	depends on ADK_LINUX_KERNEL_SERIAL_ATMEL && ADK_TARGET_SYSTEM_GRASSHOPPER
+	default n
+	help
+	  Enable second USART on Grasshoper boards
+
+config ADK_LINUX_KERNEL_SERIAL_MILKYMIST
+	bool "Enable UART0 on Milkymist"
+	select ADK_LINUX_KERNEL_SERIAL_MILKYMIST_CONSOLE
+	depends on ADK_TARGET_SYSTEM_QEMU_LM32
+	default y if ADK_TARGET_SYSTEM_QEMU_LM32
 	default n
 	help
 	  Enable second USART on Grasshoper boards
