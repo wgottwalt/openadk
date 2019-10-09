@@ -596,11 +596,15 @@ fi
 
 printf " --->  checking if cpio is installed.. "
 host_build_cpio=0
-if ! which cpio >/dev/null 2>&1; then
+if which cpio >/dev/null 2>&1; then
+  if ! cpio --version 2>/dev/null|grep GNU >/dev/null;then
+    printf "found but not usable\n"
+    host_build_cpio=1
+  else
+    printf "found\n"
+  fi
   printf "not found\n"
   host_build_cpio=1
-else
-  printf "found\n"
 fi
 
 printf " --->  checking if xz is installed.. "
