@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		barebox
-PKG_VERSION:=		2019.08.1
+PKG_VERSION:=		2019.09.0
 PKG_RELEASE:=		1
-PKG_HASH:=		4fb0ab2467d9b77036ed521d9eff0ed5439833b1778884a540876daedd03d85a
+PKG_HASH:=		beab6bdba2466bece57d23834daf4f0d530a594efc11ca0ddb69372981e6e159
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 PKG_BUILDDEP:=		lzop-host
