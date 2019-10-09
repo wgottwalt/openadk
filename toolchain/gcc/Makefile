@@ -142,10 +142,11 @@ GCC_CONFOPTS+=		--disable-symvers
 endif
 
 ifeq ($(ADK_TARGET_ARCH_CSKY),y)
-ifeq ($(ADK_TARGET_CPU_CSKY_CK610),y)
-GCC_CONFOPTS+=		--with-cskyabi=abiv1
+GCC_CONFOPTS+=		--with-cskyabi=abiv2 --disable-multilib
+ifeq ($(ADK_TARGET_LITTLE_ENDIAN),y)
+GCC_CONFOPTS+=		--with-endian=little
 else
-GCC_CONFOPTS+=		--with-cskyabi=abiv2
+GCC_CONFOPTS+=          --with-endian=big
 endif
 endif
 
