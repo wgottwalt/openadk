@@ -4,22 +4,23 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		ltrace
-PKG_VERSION:=		c22d359433b333937ee3d803450dc41998115685
+PKG_VERSION:=		0.7.3
 PKG_RELEASE:=		1
-PKG_GIT:=		hash
+PKG_HASH:=		0e6f8c077471b544c06def7192d983861ad2f8688dd5504beae62f0c5f5b9503
 PKG_DESCR:=		intercepts and records dynamic library calls 
 PKG_SECTION:=		app/debug
 PKG_DEPENDS:=		libelf
 PKG_BUILDDEP:=		libelf
 PKG_NEEDS:=		c++
 PKG_URL:=		http://ltrace.org/
-PKG_SITES:=		https://alioth.debian.org/anonscm/git/collab-maint/ltrace.git
+PKG_SITES:=		http://www.ltrace.org/
+
+DISTFILES:=		$(PKG_NAME)_$(PKG_VERSION).orig.tar.bz2
 
 include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,LTRACE,ltrace,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autoreconf
 CONFIGURE_ARGS+=	--disable-werror
 
 ltrace-install:
