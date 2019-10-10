@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		zsh
-PKG_VERSION:=		5.5.1
+PKG_VERSION:=		5.7.1
 PKG_RELEASE:=		1
-PKG_HASH:=		e1c38808fcbe0cc1344d55c9a758349f7ba1e317325b154621ac37eddac4aa80
+PKG_HASH:=		7260292c2c1d483b2d50febfa5055176bd512b32a8833b116177bf5f01e77ee8
 PKG_DESCR:=		z shell
 PKG_SECTION:=		base/shells
 PKG_DEPENDS:=		libncurses
