@@ -4,9 +4,8 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		oprofile
-PKG_VERSION:=		757266704753aea10cf3df7c0902ef35fb1377c1
-PKG_GIT:=		hash
-PKG_HASH:=		ea65e56db389778f76b9ab8cf66a08fd76b626772be5a3af29e6df87469e404f
+PKG_VERSION:=		1.3.0
+PKG_HASH:=		95ded8bde1ec39922f0af015981a67aec63e025a501e4dc04cd65d38f73647e6
 PKG_RELEASE:=		1
 PKG_DESCR:=		system-wide profiles
 PKG_SECTION:=		app/debug
@@ -15,7 +14,9 @@ PKG_KDEPENDS:=		oprofile
 PKG_BUILDDEP:=		popt binutils gcc
 PKG_NEEDS:=		c++
 PKG_URL:=		http://oprofile.sourceforge.net/
-PKG_SITES:=		https://git.code.sf.net/p/oprofile/oprofile.git
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=oprofile/}
+
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
 PKG_CFLINE_OPROFILE:=	select BUSYBOX_EXPR
 
@@ -23,7 +24,6 @@ include $(ADK_TOPDIR)/mk/package.mk
 
 $(eval $(call PKG_template,OPROFILE,oprofile,$(PKG_VERSION)-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
-AUTOTOOL_STYLE:=	autogen
 CONFIGURE_ARGS+=	--with-binutils-libname=binutils \
 			--with-binutils=${STAGING_TARGET_DIR}/usr/lib \
 			--disable-werror \
