@@ -1,7 +1,7 @@
-diff -Nur linux-4.1.10.orig/drivers/net/ethernet/freescale/fec_main.c linux-4.1.10/drivers/net/ethernet/freescale/fec_main.c
---- linux-4.1.10.orig/drivers/net/ethernet/freescale/fec_main.c	2015-10-03 13:49:38.000000000 +0200
-+++ linux-4.1.10/drivers/net/ethernet/freescale/fec_main.c	2015-10-31 18:05:40.000000000 +0100
-@@ -137,7 +137,7 @@
+diff -Nur linux-4.19.75.orig/drivers/net/ethernet/freescale/fec_main.c linux-4.19.75/drivers/net/ethernet/freescale/fec_main.c
+--- linux-4.19.75.orig/drivers/net/ethernet/freescale/fec_main.c	2019-09-21 07:17:15.000000000 +0200
++++ linux-4.19.75/drivers/net/ethernet/freescale/fec_main.c	2019-10-10 01:17:45.284188283 +0200
+@@ -156,7 +156,7 @@
  module_param_array(macaddr, byte, NULL, 0);
  MODULE_PARM_DESC(macaddr, "FEC Ethernet MAC address");
  
@@ -10,7 +10,7 @@ diff -Nur linux-4.1.10.orig/drivers/net/ethernet/freescale/fec_main.c linux-4.1.
  /*
   * Some hardware gets it MAC address out of local flash memory.
   * if this is non-zero then assume it is the address to get MAC from.
-@@ -155,7 +155,7 @@
+@@ -174,7 +174,7 @@
  #else
  #define	FEC_FLASHMAC	0
  #endif
@@ -18,17 +18,17 @@ diff -Nur linux-4.1.10.orig/drivers/net/ethernet/freescale/fec_main.c linux-4.1.
 +#endif /* CONFIG_COLDFIRE */
  
  /* The FEC stores dest/src/type/vlan, data, and checksum for receive packets.
-  */
-@@ -969,7 +969,7 @@
+  *
+@@ -958,7 +958,7 @@
  	/* Set MII speed */
  	writel(fep->phy_speed, fep->hwp + FEC_MII_SPEED);
  
 -#if !defined(CONFIG_M5272)
 +#if !defined(CONFIG_COLDFIRE)
- 	/* set RX checksum */
- 	val = readl(fep->hwp + FEC_RACC);
- 	if (fep->csum_flags & FLAG_RX_CSUM_ENABLED)
-@@ -1033,7 +1033,7 @@
+ 	if (fep->quirks & FEC_QUIRK_HAS_RACC) {
+ 		val = readl(fep->hwp + FEC_RACC);
+ 		/* align IP header */
+@@ -1027,7 +1027,7 @@
  #endif
  	}
  
@@ -37,7 +37,7 @@ diff -Nur linux-4.1.10.orig/drivers/net/ethernet/freescale/fec_main.c linux-4.1.
  	/* enable pause frame*/
  	if ((fep->pause_flag & FEC_PAUSE_FLAG_ENABLE) ||
  	    ((fep->pause_flag & FEC_PAUSE_FLAG_AUTONEG) &&
-@@ -1051,13 +1051,13 @@
+@@ -1045,13 +1045,13 @@
  	} else {
  		rcntl &= ~FEC_ENET_FCE;
  	}
@@ -53,7 +53,7 @@ diff -Nur linux-4.1.10.orig/drivers/net/ethernet/freescale/fec_main.c linux-4.1.
  	writel(0, fep->hwp + FEC_HASH_TABLE_HIGH);
  	writel(0, fep->hwp + FEC_HASH_TABLE_LOW);
  #endif
-@@ -1072,7 +1072,7 @@
+@@ -1066,7 +1066,7 @@
  	if (fep->bufdesc_ex)
  		ecntl |= (1 << 4);
  
@@ -62,7 +62,7 @@ diff -Nur linux-4.1.10.orig/drivers/net/ethernet/freescale/fec_main.c linux-4.1.
  	/* Enable the MIB statistic event counters */
  	writel(0 << 31, fep->hwp + FEC_MIB_CTRLSTAT);
  #endif
-@@ -1657,7 +1657,7 @@
+@@ -1664,7 +1664,7 @@
  	 * 3) from flash or fuse (via platform data)
  	 */
  	if (!is_valid_ether_addr(iap)) {
@@ -71,7 +71,7 @@ diff -Nur linux-4.1.10.orig/drivers/net/ethernet/freescale/fec_main.c linux-4.1.
  		if (FEC_FLASHMAC)
  			iap = (unsigned char *)FEC_FLASHMAC;
  #else
-@@ -1931,7 +1931,7 @@
+@@ -1943,7 +1943,7 @@
  	if (fep->quirks & FEC_QUIRK_HAS_GBIT) {
  		phy_dev->supported &= PHY_GBIT_FEATURES;
  		phy_dev->supported &= ~SUPPORTED_1000baseT_Half;
@@ -80,7 +80,7 @@ diff -Nur linux-4.1.10.orig/drivers/net/ethernet/freescale/fec_main.c linux-4.1.
  		phy_dev->supported |= SUPPORTED_Pause;
  #endif
  	}
-@@ -2148,7 +2148,7 @@
+@@ -2199,7 +2199,7 @@
  	}
  }
  
@@ -89,16 +89,16 @@ diff -Nur linux-4.1.10.orig/drivers/net/ethernet/freescale/fec_main.c linux-4.1.
  
  static void fec_enet_get_pauseparam(struct net_device *ndev,
  				    struct ethtool_pauseparam *pause)
-@@ -2303,7 +2303,7 @@
- 		return -EOPNOTSUPP;
- 	}
+@@ -2391,7 +2391,7 @@
+ static inline void fec_enet_clear_ethtool_stats(struct net_device *dev)
+ {
  }
 -#endif /* !defined(CONFIG_M5272) */
 +#endif /* !defined(CONFIG_COLDFIRE) */
  
- static int fec_enet_nway_reset(struct net_device *dev)
- {
-@@ -2520,7 +2520,7 @@
+ /* ITR clock source is enet system clock (clk_ahb).
+  * TCTT unit is cycle_ns * 64 cycle
+@@ -2596,7 +2596,7 @@
  	.get_link		= ethtool_op_get_link,
  	.get_coalesce		= fec_enet_get_coalesce,
  	.set_coalesce		= fec_enet_set_coalesce,
@@ -107,7 +107,7 @@ diff -Nur linux-4.1.10.orig/drivers/net/ethernet/freescale/fec_main.c linux-4.1.
  	.get_pauseparam		= fec_enet_get_pauseparam,
  	.set_pauseparam		= fec_enet_set_pauseparam,
  	.get_strings		= fec_enet_get_strings,
-@@ -3220,7 +3220,7 @@
+@@ -3385,7 +3385,7 @@
  	fep->num_rx_queues = num_rx_qs;
  	fep->num_tx_queues = num_tx_qs;
  
