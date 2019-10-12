@@ -59,7 +59,7 @@ config ADK_TOOLCHAIN_GCC_7
 	depends on !ADK_TARGET_ARCH_OR1K
 
 config ADK_TOOLCHAIN_GCC_ARC
-	bool "arc-2018.03-release"
+	bool "arc-2019.03-release"
 	depends on ADK_TARGET_ARCH_ARC
 
 config ADK_TOOLCHAIN_GCC_AVR32
