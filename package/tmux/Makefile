@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		tmux
-PKG_VERSION:=		2.7
+PKG_VERSION:=		2.9
 PKG_RELEASE:=		1
-PKG_HASH:=		9ded7d100313f6bc5a87404a4048b3745d61f2332f99ec1400a7c4ed9485d452
+PKG_HASH:=		34901232f486fd99f3a39e864575e658b5d49f43289ccc6ee57c365f2e2c2980
 PKG_DESCR:=		terminal multiplexer
 PKG_SECTION:=		sys/utils
 PKG_BUILDDEP:=		libevent ncurses
