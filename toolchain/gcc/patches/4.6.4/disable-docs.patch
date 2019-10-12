@@ -1,0 +1,78 @@
+diff -Nur gcc-4.6.4.orig/gcc/Makefile.in gcc-4.6.4/gcc/Makefile.in
+--- gcc-4.6.4.orig/gcc/Makefile.in	2013-04-01 10:32:34.000000000 +0200
++++ gcc-4.6.4/gcc/Makefile.in	2019-10-12 10:29:06.957489009 +0200
+@@ -1791,10 +1791,10 @@
+ quickstrap: all
+ 	cd $(toplevel_builddir) && $(MAKE) all-target-libgcc
+ 
+-all.internal: start.encap rest.encap doc
++all.internal: start.encap rest.encap
+ # This is what to compile if making a cross-compiler.
+ all.cross: native gcc-cross$(exeext) cpp$(exeext) specs \
+-	libgcc-support lang.all.cross doc @GENINSRC@ srcextra
++	libgcc-support lang.all.cross @GENINSRC@ srcextra
+ # This is what must be made before installing GCC and converting libraries.
+ start.encap: native xgcc$(exeext) cpp$(exeext) specs \
+ 	libgcc-support lang.start.encap @GENINSRC@ srcextra
+@@ -4199,43 +4199,27 @@
+ #
+ # Remake the info files.
+ 
+-doc: $(BUILD_INFO) $(GENERATED_MANPAGES)
++doc:
+ 
+-INFOFILES = doc/cpp.info doc/gcc.info doc/gccint.info \
+-            doc/gccinstall.info doc/cppinternals.info
++INFOFILES = 
+ 
+-info: $(INFOFILES) lang.info @GENINSRC@ srcinfo lang.srcinfo
++info: 
+ 
+-srcinfo: $(INFOFILES)
+-	-cp -p $^ $(srcdir)/doc
++srcinfo: 
+ 
+-TEXI_CPP_FILES = cpp.texi fdl.texi cppenv.texi cppopts.texi		\
+-	 gcc-common.texi gcc-vers.texi
++TEXI_CPP_FILES = 
+ 
+-TEXI_GCC_FILES = gcc.texi gcc-common.texi gcc-vers.texi frontends.texi	\
+-	 standards.texi invoke.texi extend.texi md.texi objc.texi	\
+-	 gcov.texi trouble.texi bugreport.texi service.texi		\
+-	 contribute.texi compat.texi funding.texi gnu.texi gpl_v3.texi	\
+-	 fdl.texi contrib.texi cppenv.texi cppopts.texi			\
+-	 implement-c.texi implement-cxx.texi arm-neon-intrinsics.texi
++TEXI_GCC_FILES = 
+ 
+ # we explicitly use $(srcdir)/doc/tm.texi here to avoid confusion with
+ # the generated tm.texi; the latter might have a more recent timestamp,
+ # but we don't want to rebuild the info files unless the contents of
+ # the *.texi files have changed.
+-TEXI_GCCINT_FILES = gccint.texi gcc-common.texi gcc-vers.texi		\
+-	 contribute.texi makefile.texi configterms.texi options.texi	\
+-	 portability.texi interface.texi passes.texi rtl.texi md.texi	\
+-	 $(srcdir)/doc/tm.texi hostconfig.texi fragments.texi	\
+-	 configfiles.texi collect2.texi headerdirs.texi funding.texi	\
+-	 gnu.texi gpl_v3.texi fdl.texi contrib.texi languages.texi	\
+-	 sourcebuild.texi gty.texi libgcc.texi cfg.texi tree-ssa.texi	\
+-	 loop.texi generic.texi gimple.texi plugins.texi
++TEXI_GCCINT_FILES = 
+ 
+-TEXI_GCCINSTALL_FILES = install.texi install-old.texi fdl.texi		\
+-	 gcc-common.texi gcc-vers.texi
++TEXI_GCCINSTALL_FILES =
+ 
+-TEXI_CPPINT_FILES = cppinternals.texi gcc-common.texi gcc-vers.texi
++TEXI_CPPINT_FILES =
+ 
+ # gcc-vers.texi is generated from the version files.
+ gcc-vers.texi: $(BASEVER) $(DEVPHASE)
+@@ -4342,7 +4326,7 @@
+ 
+ generated-manpages: man
+ 
+-man: $(MANFILES) lang.man @GENINSRC@ srcman lang.srcman
++man:
+ 
+ srcman: $(MANFILES)
+ 	-cp -p $^ $(srcdir)/doc
