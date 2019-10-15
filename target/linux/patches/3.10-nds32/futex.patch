@@ -1,0 +1,40 @@
+diff -Nur linux-3.10-nds32.orig/arch/nds32/include/asm/futex.h linux-3.10-nds32/arch/nds32/include/asm/futex.h
+--- linux-3.10-nds32.orig/arch/nds32/include/asm/futex.h	2017-07-31 07:41:18.000000000 +0200
++++ linux-3.10-nds32/arch/nds32/include/asm/futex.h	2019-10-15 22:59:44.514997184 +0200
+@@ -24,10 +24,10 @@
+ #define __futex_atomic_op(insn, ret, oldval, tmp, uaddr, oparg)	\
+ 	smp_mb();						\
+ 	asm volatile(					\
+-	"	movi	$r15, #0\n"				\
+-	"1:	llw	%1, [%2+$r15]\n"			\
++	"	movi	$ta, #0\n"				\
++	"1:	llw	%1, [%2+$ta]\n"			\
+ 	"	" insn "\n"					\
+-	"2:	scw	%0, [%2+$r15]\n"			\
++	"2:	scw	%0, [%2+$ta]\n"			\
+ 	"	beqz	%0, 1b\n"					\
+ 	"	movi	%0, #0\n"				\
+ 	"3:\n"							\
+@@ -47,18 +47,18 @@
+ 
+ 	smp_mb();
+ 	asm volatile(
+-        "       movi    $r15, #0\n"
+-        "1:     llw     %1, [%6 + $r15]\n"
++        "       movi    $ta, #0\n"
++        "1:     llw     %1, [%6 + $ta]\n"
+         "       sub     %3, %1, %4\n"
+         "       cmovz   %2, %5, %3\n"
+         "       cmovn   %2, %1, %3\n"
+-        "2:     scw     %2, [%6 + $r15]\n"
++        "2:     scw     %2, [%6 + $ta]\n"
+         "       beqz    %2, 1b\n"
+         "3:\n                   "
+ 	__futex_atomic_ex_table("%7")
+ 	: "+&r" (ret), "=&r" (val), "=&r" (tmp), "=&r" (flags)
+ 	: "r" (oldval), "r" (newval), "r" (uaddr), "i" (-EFAULT)
+-	: "$r15", "memory");
++	: "$ta", "memory");
+ 	smp_mb();
+ 
+ 	*uval = val;
