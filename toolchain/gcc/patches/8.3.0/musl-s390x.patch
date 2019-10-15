@@ -1,0 +1,13 @@
+diff -Nur gcc-7.2.0.orig/gcc/config/s390/linux.h gcc-7.2.0/gcc/config/s390/linux.h
+--- gcc-7.2.0.orig/gcc/config/s390/linux.h	2017-02-06 11:25:05.513198000 +0100
++++ gcc-7.2.0/gcc/config/s390/linux.h	2017-10-30 13:22:45.348170100 +0100
+@@ -76,6 +76,9 @@
+ #define GLIBC_DYNAMIC_LINKER32 "/lib/ld.so.1"
+ #define GLIBC_DYNAMIC_LINKER64 "/lib/ld64.so.1"
+ 
++#define MUSL_DYNAMIC_LINKER32 "/lib/ld-musl-s390.so.1"
++#define MUSL_DYNAMIC_LINKER64 "/lib/ld-musl-s390x.so.1"
++
+ #undef  LINK_SPEC
+ #define LINK_SPEC \
+   "%{m31:-m elf_s390}%{m64:-m elf64_s390} \
