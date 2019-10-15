@@ -4,11 +4,17 @@
 KERNEL_MAKE_OPTS:=	V=1 \
 			ARCH="$(ADK_TARGET_KARCH)" \
 			CROSS_COMPILE="$(TARGET_CROSS)" \
-			CC="$(TARGET_CC)" \
 			HOSTCC="${HOST_CC}" \
 			HOSTCXX="${HOST_CXX}" \
 			SHELL='${SHELL}' \
 			CONFIG_SHELL='${SHELL}'
+
+ifeq ($(ADK_TARGET_BINFMT_FDPIC),y)
+KERNEL_MAKE_OPTS+=	CC="$(TARGET_CC) -mno-fdpic"
+else
+KERNEL_MAKE_OPTS+=	CC="$(TARGET_CC)"
+endif
+
 
 # regex for relocs needs pcre
 ifeq ($(OS_FOR_BUILD),Darwin)
