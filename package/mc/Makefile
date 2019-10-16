@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		mc
-PKG_VERSION:=		4.8.16
+PKG_VERSION:=		4.8.23
 PKG_RELEASE:=		1
-PKG_HASH:=		bbbcbe3097d3160f865d24aa38ff122f1c59752b5ef153ca4ade5ac0f82b7020
+PKG_HASH:=		dd7f7ce74183307b0df25b5c3e60ad3293fd3d3d27d2f37dd7a10efce13dff1c
 PKG_DESCR:=		norton commander clone
 PKG_SECTION:=		sys/misc
 PKG_DEPENDS:=		glib libncurses libssh2
