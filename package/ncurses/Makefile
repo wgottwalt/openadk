@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		ncurses
-PKG_VERSION:=		6.0
-PKG_RELEASE:=		2
-PKG_HASH:=		f551c24b30ce8bfb6e96d9f59b42fbea30fa3a6123384172f9e7284bcf647260
+PKG_VERSION:=		6.1
+PKG_RELEASE:=		1
+PKG_HASH:=		aa057eeeb4a14d470101eff4597d5833dcef5965331be3528c08d99cebaa0d17
 PKG_DESCR:=		terminal handling library
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		ncurses-host
