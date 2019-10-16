@@ -1,8 +1,8 @@
---- gdb-7.11.orig/gdb/nat/ppc-linux.h	2016-02-10 04:19:39.000000000 +0100
-+++ gdb-7.11/gdb/nat/ppc-linux.h	2016-04-24 21:19:39.351474402 +0200
+--- gdb-8.3.1.orig/gdb/nat/ppc-linux.h	2019-09-21 00:04:41.000000000 +0200
++++ gdb-8.3.1/gdb/nat/ppc-linux.h	2019-10-16 12:08:42.156039004 +0200
 @@ -18,7 +18,9 @@
- #ifndef PPC_LINUX_H
- #define PPC_LINUX_H 1
+ #ifndef NAT_PPC_LINUX_H
+ #define NAT_PPC_LINUX_H
  
 +#define pt_regs uapi_pt_regs
  #include <asm/ptrace.h>

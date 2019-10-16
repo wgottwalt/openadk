@@ -14,7 +14,7 @@ PKG_DEPENDS:=		libncurses zlib libexpat libthread-db
 PKG_BUILDDEP:=		ncurses readline expat zlib
 PKG_NEEDS:=		c++
 
-PKG_ARCH_DEPENDS:=	!arc !cris !avr32 !nios2 !microblaze
+PKG_ARCH_DEPENDS:=	!arc !cris !avr32 !microblaze
 
 include ${ADK_TOPDIR}/mk/package.mk
 
