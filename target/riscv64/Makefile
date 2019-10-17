@@ -16,12 +16,12 @@ targethelp:
 	@echo 'The initramfs image is: ${FW_DIR}/${INITRAMFS}'
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-riscv64 ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL).bbl -initrd ${FW_DIR}/${INITRAMFS}'
+	@echo 'qemu-system-riscv64 ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL) -initrd ${FW_DIR}/${INITRAMFS}'
 endif
 endif
 ifeq ($(ADK_TARGET_FS),initramfsarchive)
 targethelp:
-	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}.bbl'
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
 	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSUSERTARBALL)"
 endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
@@ -29,7 +29,7 @@ targethelp:
 	@echo 'The kernel+initramfs file is: $(FW_DIR)/${TARGET_KERNEL}'
 ifeq ($(ADK_TARGET_QEMU),y)
 	@echo "Start qemu with following command line:"
-	@echo 'qemu-system-riscv64 ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL).bbl'
+	@echo 'qemu-system-riscv64 ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
 endif
 endif
 
@@ -47,7 +47,7 @@ bbl:
 		--host=$(GNU_TARGET_NAME) --target=$(GNU_TARGET_NAME) \
 		--with-payload=$(FW_DIR)/$(TARGET_KERNEL))
 	(cd $(BUILD_DIR)/bbl && PATH='$(HOST_PATH)' make)
-	cp $(BUILD_DIR)/bbl/bbl $(FW_DIR)/$(TARGET_KERNEL).bbl
+	cp $(BUILD_DIR)/bbl/bbl $(FW_DIR)/$(TARGET_KERNEL)
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),initramfs)
