@@ -4,15 +4,15 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		poco
-PKG_VERSION:=		1.6.0
+PKG_VERSION:=		1.9.4
 PKG_RELEASE:=		1
-PKG_HASH:=		8e745271d57db8d544d5c8e37b3b7db01d7934e0257a41af0b8da9ee8b1554ee
+PKG_HASH:=		1bcaff7b1f7dfcbe573ddf0bf7e251e93072355ecc468c075339920c97e39c8f
 PKG_DESCR:=		c++ network libraries
 PKG_SECTION:=		libs/misc
 PKG_BUILDDEP:=		zlib pcre
 PKG_DEPENDS:=		zlib libpcre
 PKG_URL:=		http://pocoproject.org
-PKG_SITES:=		http://pocoproject.org/releases/poco-1.6.0/
+PKG_SITES:=		http://pocoproject.org/releases/poco-1.9.4/
 PKG_OPTS:=		dev
 
 PKG_LIBC_DEPENDS:=	glibc
