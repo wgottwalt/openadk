@@ -33,13 +33,6 @@ PKG_SITES:=		https://github.com/foss-for-synopsys-dwc-arc-processors/gcc.git
 PKG_RELEASE:=		1
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.xz
 endif
-ifeq ($(ADK_TOOLCHAIN_GCC_CSKY),y)
-PKG_VERSION:=          gcc-6-branch-csky
-PKG_GIT:=              branch
-PKG_SITES:=            https://github.com/c-sky/gcc.git
-PKG_RELEASE:=          1
-DISTFILES:=            ${PKG_NAME}-${PKG_VERSION}.tar.xz
-endif
 ifeq ($(ADK_TOOLCHAIN_GCC_AVR32),y)
 PKG_VERSION:=		4.4.7
 PKG_HASH:=		76ad7c433af1c798a1e116c4dfa8f5f794f0d32bff65f88c54dcd5e5d146fc32

@@ -7,12 +7,10 @@ include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/$(ADK_TARGET_KERNEL)
 
+QEMU:=qemu-system-cskyv2
+ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 QEMU_ARGS:=${ADK_QEMU_ARGS} -M virt
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_CSKY_CK807),y)
-QEMU:=qemu-system-cskyv2
-endif
-ifeq ($(ADK_TARGET_SYSTEM_QEMU_CSKY_CK810),y)
-QEMU:=qemu-system-cskyv2
+QEMU_ARGS+=-netdev user,id=eth0 -device virtio-net-device,netdev=eth0
 endif
 
 # target helper text
