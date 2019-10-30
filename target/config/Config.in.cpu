@@ -510,7 +510,6 @@ config ADK_TARGET_CPU_IA64
 # lm32
 config ADK_TARGET_CPU_LM32
 	bool "lm32"
-	select ADK_TARGET_UCLINUX
 	depends on ADK_TARGET_ARCH_LM32
 
 # coldfire

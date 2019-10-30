@@ -1,0 +1,123 @@
+diff -Nur gcc-4.5.4.orig/gcc/config/linux.h gcc-4.5.4/gcc/config/linux.h
+--- gcc-4.5.4.orig/gcc/config/linux.h	2009-04-09 17:00:19.000000000 +0200
++++ gcc-4.5.4/gcc/config/linux.h	2019-10-30 05:54:06.757623089 +0100
+@@ -129,9 +129,9 @@
+ 
+ /* Determine whether the entire c99 runtime
+    is present in the runtime library.  */
+-#define TARGET_C99_FUNCTIONS (OPTION_GLIBC)
++#define TARGET_C99_FUNCTIONS 1
+ 
+ /* Whether we have sincos that follows the GNU extension.  */
+-#define TARGET_HAS_SINCOS (OPTION_GLIBC)
++#define TARGET_HAS_SINCOS 1
+ 
+ #define TARGET_POSIX_IO
+diff -Nur gcc-4.5.4.orig/gcc/config/lm32/uclinux-elf.h gcc-4.5.4/gcc/config/lm32/uclinux-elf.h
+--- gcc-4.5.4.orig/gcc/config/lm32/uclinux-elf.h	2009-11-11 17:43:06.000000000 +0100
++++ gcc-4.5.4/gcc/config/lm32/uclinux-elf.h	2019-10-30 05:19:16.775704264 +0100
+@@ -80,6 +80,3 @@
+ #define LINK_GCC_C_SEQUENCE_SPEC \
+   "%{static:--start-group} %G %L %{static:--end-group}%{!static:%G}"
+ 
+-#undef  CC1_SPEC
+-#define CC1_SPEC "%{G*} %{!fno-PIC:-fPIC}"
+-
+diff -Nur gcc-4.5.4.orig/gcc/config/t-linux gcc-4.5.4/gcc/config/t-linux
+--- gcc-4.5.4.orig/gcc/config/t-linux	2009-04-21 21:03:23.000000000 +0200
++++ gcc-4.5.4/gcc/config/t-linux	2019-10-30 05:19:24.584204609 +0100
+@@ -18,9 +18,9 @@
+ # <http://www.gnu.org/licenses/>.
+ 
+ # Compile crtbeginS.o and crtendS.o with pic.
+-CRTSTUFF_T_CFLAGS_S = $(CRTSTUFF_T_CFLAGS) -fPIC
++CRTSTUFF_T_CFLAGS_S = $(CRTSTUFF_T_CFLAGS)
+ # Compile libgcc2.a with pic.
+-TARGET_LIBGCC2_CFLAGS = -fPIC
++TARGET_LIBGCC2_CFLAGS =
+ 
+ # Override t-slibgcc-elf-ver to export some libgcc symbols with
+ # the symbol versions that glibc used.
+diff -Nur gcc-4.5.4.orig/gcc/config.gcc gcc-4.5.4/gcc/config.gcc
+--- gcc-4.5.4.orig/gcc/config.gcc	2012-06-04 11:55:35.000000000 +0200
++++ gcc-4.5.4/gcc/config.gcc	2019-10-30 05:19:24.596205378 +0100
+@@ -1528,7 +1528,7 @@
+ 	tmake_file="${tmake_file} lm32/t-lm32 lm32/t-fprules-softfp soft-fp/t-softfp"
+ 	tmake_file="${tmake_file} t-rtems"
+          ;;
+-lm32-*-uclinux*)
++lm32-*-*linux*)
+         tm_file="dbxelf.h elfos.h ${tm_file} linux.h lm32/uclinux-elf.h"
+ 	tmake_file="${tmake_file} lm32/t-lm32 lm32/t-fprules-softfp soft-fp/t-softfp"
+         ;;
+diff -Nur gcc-4.5.4.orig/libgcc/config/lm32/_ashlsi3.S gcc-4.5.4/libgcc/config/lm32/_ashlsi3.S
+--- gcc-4.5.4.orig/libgcc/config/lm32/_ashlsi3.S	2009-11-11 17:43:06.000000000 +0100
++++ gcc-4.5.4/libgcc/config/lm32/_ashlsi3.S	2019-10-30 05:18:56.782423164 +0100
+@@ -30,6 +30,10 @@
+         .global __ashlsi3
+         .type __ashlsi3,@function
+ 
++        .global __ashlsi3_0
++        .hidden __ashlsi3_0
++        .type __ashlsi3_0,@function
++
+         .align 4        
+ __ashlsi3:
+         /* Only use 5 LSBs, as that's all the h/w shifter uses.  */
+@@ -111,4 +115,4 @@
+ __ashlsi3_0:
+         ret
+                 
+-        
+\ No newline at end of file
++        
+diff -Nur gcc-4.5.4.orig/libgcc/config/lm32/_ashrsi3.S gcc-4.5.4/libgcc/config/lm32/_ashrsi3.S
+--- gcc-4.5.4.orig/libgcc/config/lm32/_ashrsi3.S	2009-11-11 17:43:06.000000000 +0100
++++ gcc-4.5.4/libgcc/config/lm32/_ashrsi3.S	2019-10-30 05:18:56.782423164 +0100
+@@ -27,6 +27,10 @@
+ 
+         .global __ashrsi3
+         .type __ashrsi3,@function
++
++        .global __ashrsi3_0
++        .hidden __ashrsi3_0
++        .type __ashrsi3_0,@function
+                                                   
+ __ashrsi3:
+         /* Only use 5 LSBs, as that's all the h/w shifter uses.  */
+@@ -107,4 +111,4 @@
+         sri     r1, r1, 1
+ __ashrsi3_0:
+         ret
+-        
+\ No newline at end of file
++        
+diff -Nur gcc-4.5.4.orig/libgcc/config/lm32/_lshrsi3.S gcc-4.5.4/libgcc/config/lm32/_lshrsi3.S
+--- gcc-4.5.4.orig/libgcc/config/lm32/_lshrsi3.S	2009-11-11 17:43:06.000000000 +0100
++++ gcc-4.5.4/libgcc/config/lm32/_lshrsi3.S	2019-10-30 05:18:56.782423164 +0100
+@@ -28,6 +28,10 @@
+         .global __lshrsi3
+         .type __lshrsi3,@function
+ 
++        .global __lshrsi3_0
++        .hidden __lshrsi3_0
++        .type __lshrsi3_0,@function
++
+ __lshrsi3:
+         /* Only use 5 LSBs, as that's all the h/w shifter uses.  */
+         andi    r2, r2, 0x1f
+diff -Nur gcc-4.5.4.orig/libgcc/config.host gcc-4.5.4/libgcc/config.host
+--- gcc-4.5.4.orig/libgcc/config.host	2011-08-24 20:03:50.000000000 +0200
++++ gcc-4.5.4/libgcc/config.host	2019-10-30 05:19:24.600205629 +0100
+@@ -363,9 +363,9 @@
+         extra_parts="crtbegin.o crtend.o crti.o crtn.o"
+         tmake_file="lm32/t-lm32 lm32/t-elf t-softfp"
+ 	;;
+-lm32-*-uclinux*)
++lm32-*-linux*)
+         extra_parts="crtbegin.o crtend.o crtbeginS.o crtendS.o crtbeginT.o"
+-        tmake_file="lm32/t-lm32 lm32/t-uclinux t-softfp"
++        tmake_file="lm32/t-lm32 t-softfp"
+ 	;;	
+ m32r-*-elf*|m32r-*-rtems*)
+  	;;

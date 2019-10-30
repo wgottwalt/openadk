@@ -71,7 +71,7 @@ config ADK_TOOLCHAIN_GCC_METAG
 	depends on ADK_TARGET_ARCH_METAG
 
 config ADK_TOOLCHAIN_GCC_LM32
-	bool "4.6.4-lm32"
+	bool "4.5.4-lm32"
 	depends on ADK_TARGET_ARCH_LM32
 
 config ADK_TOOLCHAIN_GCC_NDS32
