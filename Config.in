@@ -31,7 +31,7 @@ source "target/config/Config.in.addons"
 endmenu
 
 menu "C Library configuration"
-	visible if ADK_TARGET_OS_LINUX && !ADK_TARGET_CHOOSE_ARCH
+	visible if ADK_TARGET_OS_LINUX || ADK_TARGET_OS_BAREMETAL && !ADK_TARGET_CHOOSE_ARCH
 source "target/config/Config.in.libc"
 source "target/config/Config.in.threads"
 source "target/config/Config.in.binfmt"
