@@ -1,0 +1,12 @@
+diff -Nur linux-b6a72d383cf0d4c9c448c1f4e5e8d496ea5c1fd8.orig/init/main.c linux-b6a72d383cf0d4c9c448c1f4e5e8d496ea5c1fd8/init/main.c
+--- linux-b6a72d383cf0d4c9c448c1f4e5e8d496ea5c1fd8.orig/init/main.c	2019-10-30 11:31:31.000000000 +0100
++++ linux-b6a72d383cf0d4c9c448c1f4e5e8d496ea5c1fd8/init/main.c	2019-10-31 23:59:00.424814394 +0100
+@@ -615,7 +615,7 @@
+ 	if (late_time_init)
+ 		late_time_init();
+ 	sched_clock_init();
+-	calibrate_delay();
++	//calibrate_delay();
+ 	pidmap_init();
+ 	anon_vma_init();
+ 	acpi_early_init();
