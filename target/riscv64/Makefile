@@ -8,8 +8,25 @@ include $(ADK_TOPDIR)/mk/image.mk
 KERNEL:=$(LINUX_DIR)/vmlinux
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
 QEMU_ARGS:=-M virt -nographic
+ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
+QEMU_ARGS+=-netdev user,id=eth0 -device virtio-net-device,netdev=eth0
+endif
+ifeq ($(ADK_TARGET_FS),archive)
+QEMU_ARGS+=-device virtio-blk-device,drive=vda -drive file=qemu-${ADK_TARGET_CPU_ARCH}.img,if=none,id=vda,format=raw
+endif
 
 # target helper text
+ifeq ($(ADK_TARGET_FS),archive)
+targethelp:
+	@echo "The RootFS tarball is: $(FW_DIR)/$(ROOTFSTARBALL)"
+ifeq ($(ADK_TARGET_QEMU),y)
+	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
+	@echo "Use following command to create a QEMU Image:"
+	@echo "./scripts/create.sh qemu-${ADK_TARGET_CPU_ARCH}.img $(FW_DIR)/$(ROOTFSTARBALL)"
+	@echo "Start qemu with following options:"
+	@echo 'qemu-system-${ADK_TARGET_CPU_ARCH} ${QEMU_ARGS} -kernel $(FW_DIR)/$(TARGET_KERNEL)'
+endif
+endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 targethelp:
 	@echo 'The kernel file is: $(FW_DIR)/${TARGET_KERNEL}'
@@ -50,6 +67,9 @@ bbl:
 	cp $(BUILD_DIR)/bbl/bbl $(FW_DIR)/$(TARGET_KERNEL)
 
 # filesystem specific targets
+ifeq ($(ADK_TARGET_FS),archive)
+imageinstall: kernel-install bbl $(FW_DIR)/$(ROOTFSTARBALL) targethelp
+endif
 ifeq ($(ADK_TARGET_FS),initramfs)
 imageinstall: kernel-install bbl $(FW_DIR)/$(INITRAMFS) targethelp
 endif
