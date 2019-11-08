@@ -7,7 +7,7 @@ include $(ADK_TOPDIR)/mk/image.mk
 
 KERNEL:=$(LINUX_DIR)/vmlinux
 OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
-QEMU_ARGS:=-M virt -nographic
+QEMU_ARGS:=-M virt -m 256 -nographic
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 QEMU_ARGS+=-netdev user,id=eth0 -device virtio-net-device,netdev=eth0
 endif
