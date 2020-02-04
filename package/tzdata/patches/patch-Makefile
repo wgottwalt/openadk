@@ -1,107 +1,42 @@
---- w-tzdata-2014d-1.orig/Makefile	2014-05-28 06:35:46.000000000 +0200
-+++ w-tzdata-2014d-1/Makefile	2014-05-30 09:15:54.792171067 +0200
-@@ -45,33 +45,33 @@ POSIXRULES=	America/New_York
- 
- # Everything gets put in subdirectories of. . .
- 
--TOPDIR=		/usr/local
-+TZTOPDIR=	/usr
- 
- # "Compiled" time zone information is placed in the "TZDIR" directory
- # (and subdirectories).
- # Use an absolute path name for TZDIR unless you're just testing the software.
- 
- TZDIR_BASENAME=	zoneinfo
--TZDIR=		$(TOPDIR)/etc/$(TZDIR_BASENAME)
-+TZDIR=		$(TZTOPDIR)/etc/$(TZDIR_BASENAME)
- 
- # Types to try, as an alternative to time_t.  int64_t should be first.
- TIME_T_ALTERNATIVES= int64_t int32_t uint32_t uint64_t
- 
- # The "tzselect", "zic", and "zdump" commands get installed in. . .
- 
--ETCDIR=		$(TOPDIR)/etc
-+ETCDIR=		$(TZTOPDIR)/etc
- 
- # If you "make INSTALL", the "date" command gets installed in. . .
- 
--BINDIR=		$(TOPDIR)/bin
-+BINDIR=		$(TZTOPDIR)/bin
- 
- # Manual pages go in subdirectories of. . .
- 
--MANDIR=		$(TOPDIR)/man
-+MANDIR=		$(TZTOPDIR)/man
- 
- # Library functions are put in an archive in LIBDIR.
- 
--LIBDIR=		$(TOPDIR)/lib
-+LIBDIR=		$(TZTOPDIR)/lib
- 
- # If you always want time values interpreted as "seconds since the epoch
- # (not counting leap seconds)", use
-@@ -224,7 +224,7 @@ GCC_DEBUG_FLAGS = -Dlint -g3 -O3 -fno-co
- # before the first Monday in January when a "%V" format is used and January 1
+--- w-tzdata-2019c-1.orig/Makefile	2019-07-01 09:06:38.000000000 +0200
++++ w-tzdata-2019c-1/Makefile	2020-02-04 09:33:12.012662611 +0100
+@@ -365,7 +365,7 @@ GCC_DEBUG_FLAGS = -DGCC_LINT -g3 -O3 -fn
+ # January's first Monday when a "%V" format is used and January 1
  # falls on a Friday, Saturday, or Sunday.
  
 -CFLAGS=
 +CFLAGS?=
  
  # Linker flags.  Default to $(LFLAGS) for backwards compatibility
- # to tzcode2012h and earlier.
-@@ -232,7 +232,7 @@ CFLAGS=
- LDFLAGS=	$(LFLAGS)
+ # to release 2012h and earlier.
+@@ -380,7 +380,7 @@ LEAPSECONDS=
+ # The zic command and its arguments.
  
  zic=		./zic
 -ZIC=		$(zic) $(ZFLAGS)
 +ZIC=		./zic_for_build $(ZFLAGS)
  
- ZFLAGS=
+ # To shrink the size of installed TZif files,
+ # append "-r @N" to omit data before N-seconds-after-the-Epoch.
+@@ -579,7 +579,7 @@ SHELL=		/bin/sh
+ all:		tzselect yearistype zic zdump libtz.a $(TABDATA) \
+ 		  vanguard.zi main.zi rearguard.zi
  
-@@ -338,7 +338,7 @@ SHELL=		/bin/sh
- 
- all:		tzselect zic zdump libtz.a $(TABDATA)
- 
--ALL:		all date
-+ALL:		zic_for_build date
+-ALL:		all date $(ENCHILADA)
++ALL:		zic_for_build date $(ENCHILADA)
  
  install:	all $(DATA) $(REDO) $(MANS)
- 		mkdir -p $(DESTDIR)$(ETCDIR) $(DESTDIR)$(TZDIR) \
-@@ -371,6 +371,14 @@ zdump:		$(TZDOBJS)
- zic:		$(TZCOBJS) yearistype
+ 		mkdir -p '$(DESTDIR)$(BINDIR)' \
+@@ -646,6 +646,12 @@ zdump:		$(TZDOBJS)
+ zic:		$(TZCOBJS)
  		$(CC) -o $@ $(CFLAGS) $(LDFLAGS) $(TZCOBJS) $(LDLIBS)
  
 +zic_for_build: version.h
 +		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) zic.c -o zic_build.o
 +		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) localtime.c -o localtime_build.o
 +		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) asctime.c -o asctime_build.o
-+		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) scheck.c -o scheck_build.o
-+		$(CC_FOR_BUILD) -c $(CFLAGS_FOR_BUILD) ialloc.c -o ialloc_build.o
-+		$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -o $@ zic_build.o localtime_build.o asctime_build.o scheck_build.o ialloc_build.o 
++		$(CC_FOR_BUILD) $(CFLAGS_FOR_BUILD) -o $@ zic_build.o localtime_build.o asctime_build.o
 +
  yearistype:	yearistype.sh
  		cp yearistype.sh yearistype
  		chmod +x yearistype
-@@ -378,11 +386,11 @@ yearistype:	yearistype.sh
- leapseconds:	$(LEAP_DEPS)
- 		$(AWK) -f leapseconds.awk leap-seconds.list >$@
- 
--posix_only:	zic $(TDATA)
-+posix_only:	zic_for_build $(TDATA)
- 		$(ZIC) -y $(YEARISTYPE) -d $(DESTDIR)$(TZDIR) \
- 			-L /dev/null $(TDATA)
- 
--right_only:	zic leapseconds $(TDATA)
-+right_only:	zic_for_build leapseconds $(TDATA)
- 		$(ZIC) -y $(YEARISTYPE) -d $(DESTDIR)$(TZDIR) \
- 			-L leapseconds $(TDATA)
- 
-@@ -520,7 +528,7 @@ check_time_t_alternatives:
- 		for type in $(TIME_T_ALTERNATIVES); do \
- 		  mkdir -p tzpublic/$$type && \
- 		  make clean_misc && \
--		  make TOPDIR=`pwd`/tzpublic/$$type \
-+		  make TZTOPDIR=`pwd`/tzpublic/$$type \
- 		    CFLAGS='$(CFLAGS) -Dtime_tz='"'$$type'" \
- 		    install && \
- 		  diff -qr tzpublic/int64_t/etc/zoneinfo tzpublic/$$type/etc/zoneinfo && \
