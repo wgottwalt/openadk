@@ -50,7 +50,7 @@ config ADK_TOOLCHAIN_GCC_8
 	depends on !ADK_TARGET_CPU_ARM_CORTEX_A53
 
 config ADK_TOOLCHAIN_GCC_7
-	bool "7.4.0"
+	bool "7.5.0"
 	depends on !ADK_TARGET_ARCH_ARC
 	depends on !ADK_TARGET_ARCH_AVR32
 	depends on !ADK_TARGET_ARCH_CSKY
