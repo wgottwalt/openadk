@@ -5,8 +5,7 @@ include $(ADK_TOPDIR)/rules.mk
 include $(ADK_TOPDIR)/mk/kernel-build.mk
 include $(ADK_TOPDIR)/mk/image.mk
 
-KERNEL:=$(LINUX_DIR)/vmlinux
-OSTRIP:=-R .reginfo -R .notes -R .note -R .comment -R .mdebug -R .note.gnu.build-id
+KERNEL:=$(LINUX_DIR)/arch/riscv/boot/Image
 QEMU_ARGS:=-M virt -m 256 -nographic
 ifeq ($(ADK_TARGET_QEMU_WITH_VIRTIO),y)
 QEMU_ARGS+=-netdev user,id=eth0 -device virtio-net-device,netdev=eth0
@@ -51,31 +50,29 @@ endif
 endif
 
 kernel-strip:
-	$(TARGET_CROSS)objcopy $(OSTRIP) -S $(KERNEL) $(BUILD_DIR)/$(TARGET_KERNEL)
 
 kernel-install: kernel-strip
-	@cp $(BUILD_DIR)/$(TARGET_KERNEL) $(FW_DIR)/$(TARGET_KERNEL)
 
-bbl:
-	@mkdir -p $(BUILD_DIR)/bbl
-	@rm -rf $(BUILD_DIR)/riscv-pk
-	(cd $(BUILD_DIR)/ && git clone https://github.com/riscv/riscv-pk.git)
-	(cd $(BUILD_DIR)/bbl && PATH='$(HOST_PATH)' ../riscv-pk/configure \
-		--host=$(GNU_TARGET_NAME) --target=$(GNU_TARGET_NAME) \
-		--with-payload=$(FW_DIR)/$(TARGET_KERNEL))
-	(cd $(BUILD_DIR)/bbl && PATH='$(HOST_PATH)' make)
-	cp $(BUILD_DIR)/bbl/bbl $(FW_DIR)/$(TARGET_KERNEL)
+boot:
+	@rm -rf $(BUILD_DIR)/opensbi
+	(cd $(BUILD_DIR)/ && git clone https://github.com/riscv/opensbi.git)
+	(cd $(BUILD_DIR)/opensbi && PATH='$(HOST_PATH)' \
+		CROSS_COMPILE=$(GNU_TARGET_NAME)- \
+		FW_PAYLOAD_PATH=$(KERNEL) \
+		PLATFORM=qemu/virt make)
+	cp $(BUILD_DIR)/opensbi/build/platform/qemu/virt/firmware/fw_payload.elf \
+		$(FW_DIR)/$(TARGET_KERNEL)
 
 # filesystem specific targets
 ifeq ($(ADK_TARGET_FS),archive)
-imageinstall: kernel-install bbl $(FW_DIR)/$(ROOTFSTARBALL) targethelp
+imageinstall: kernel-install boot $(FW_DIR)/$(ROOTFSTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfs)
-imageinstall: kernel-install bbl $(FW_DIR)/$(INITRAMFS) targethelp
+imageinstall: kernel-install boot $(FW_DIR)/$(INITRAMFS) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfsarchive)
-imageinstall: kernel-install bbl $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
+imageinstall: kernel-install boot $(FW_DIR)/$(ROOTFSUSERTARBALL) targethelp
 endif
 ifeq ($(ADK_TARGET_FS),initramfspiggyback)
-imageinstall: createinitramfs bbl targethelp
+imageinstall: createinitramfs boot targethelp
 endif
