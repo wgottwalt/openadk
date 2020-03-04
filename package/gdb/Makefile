@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		gdb
-PKG_VERSION:=		8.3.1
+PKG_VERSION:=		9.1
 PKG_RELEASE:=		1
-PKG_HASH:=		1e55b4d7cdca7b34be12f4ceae651623aa73b2fd640152313f9f66a7149757c4
+PKG_HASH:=		699e0ec832fdd2f21c8266171ea5bf44024bd05164fdf064e4d10cc4cf0d1737
 PKG_DESCR:=		programm debugger
 PKG_SECTION:=		app/debug
 PKG_SITES:=		${MASTER_SITE_GNU:=gdb/}
@@ -21,6 +21,8 @@ include ${ADK_TOPDIR}/mk/package.mk
 $(eval $(call PKG_template,GDB,gdb,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 XAKE_FLAGS+=		MAKEINFO=true
+
+WRKBUILD=		$(WRKDIR)/$(PKG_NAME)-obj
 
 # --enable-static is required to build libbfd.a
 CONFIGURE_ARGS+=	--enable-static \
