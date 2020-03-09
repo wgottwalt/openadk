@@ -11,6 +11,6 @@ ifeq ($(ADK_TARGET_LIB_UCLIBC_NG_1_0_33),y)
 PKG_VERSION:=		1.0.33
 PKG_RELEASE:=		1
 PKG_SITES:=		http://downloads.uclibc-ng.org/releases/1.0.33/
-PKG_HASH:=		4dfa9d438863f741a5a2f384d467fa9da397fd82acfcb9bb26f5d5634d70153a
+PKG_HASH:=		aa7c361fddddf90b40a90e04431e607e2da21a5e8e2840a6db9ffd0c89d03e0d
 endif
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.xz
