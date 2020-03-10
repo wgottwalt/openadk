@@ -6,9 +6,3 @@ PKG_VERSION:=		7e33f28df198c46764021ed14408bd262751e148
 PKG_GIT:=		hash
 PKG_RELEASE:=		1
 PKG_SITES:=		https://github.com/uclinux-dev/elf2flt.git
-ifeq ($(ADK_TARGET_ARCH_H8300),y)
-PKG_VERSION:=		h8300
-PKG_GIT:=		branch
-PKG_RELEASE:=		1
-PKG_SITES:=		git://git.osdn.net/gitroot/uclinux-h8/elf2flt.git
-endif
