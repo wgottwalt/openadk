@@ -4,16 +4,16 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		krb5
-PKG_VERSION:=		1.13.1
+PKG_VERSION:=		1.18
 PKG_RELEASE:=		1
-PKG_HASH:=		4df629fdf97f362cf81edbf38d613b32b492dd88c876cf3aa1c66562f296663e
+PKG_HASH:=		73913934d711dcf9d5f5605803578edb44b9a11786df3c1b2711f4e1752f2c88
 PKG_DESCR:=		kerberos server
 PKG_SECTION:=		app/crypto
 PKG_DEPENDS:=		libkrb5 libncurses keyutils
 PKG_BUILDDEP:=		ncurses bison-host
 PKG_NEEDS:=		threads intl
 PKG_URL:=		http://web.mit.edu/kerberos/
-PKG_SITES:=		http://web.mit.edu/kerberos/dist/krb5/1.13/
+PKG_SITES:=		https://kerberos.org/dist/krb5/1.18/
 PKG_LIBNAME:=		libkrb5
 PKG_OPTS:=		dev noscripts
 PKG_NOPARALLEL:=	1
@@ -25,7 +25,7 @@ PKGSD_KRB5_CLIENT:=	kerberos client tools
 PKGSC_KRB5_CLIENT:=	app/crypto
 PKGSS_KRB5_CLIENT:=	libkrb5 libncurses
 
-DISTFILES:=		${PKG_NAME}-${PKG_VERSION}-signed.tar
+DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 WRKSRC=			${WRKDIST}/src
 
 include $(ADK_TOPDIR)/mk/package.mk
@@ -36,6 +36,7 @@ $(eval $(call PKG_template,LIBKRB5,libkrb5,$(PKG_VERSION)-${PKG_RELEASE},,${PKGS
 
 CONFIGURE_ARGS+=	--disable-static \
 			--disable-profiled \
+			--disable-pkinit \
 			--without-system-et \
 			--without-system-ss \
 			--without-system-verto \
@@ -46,8 +47,6 @@ CONFIGURE_ENV+=		krb5_cv_attr_constructor_destructor=yes,yes \
 			ac_cv_file__etc_environment=no \
 			ac_cv_file__etc_TIMEZONE=no
 
-post-extract:
-	(cd ${WRKDIR}; tar xzf ${PKG_NAME}-${PKG_VERSION}.tar.gz)
 
 pre-build:
 	# fix nm call in script, we need the GNU version of nm
