@@ -10,7 +10,6 @@ PKG_DESCR:=		disk/flash installer
 PKG_SECTION:=		base/adk
 PKG_DEPENDS:=		mke2fs parted sfdisk dosfstools mksh
 PKG_DEPENDS+=		grub grub-tools
-PKG_KDEPENDS:=		ext4-fs
 
 NO_DISTFILES:=		1
 
