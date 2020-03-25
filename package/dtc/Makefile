@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		dtc
-PKG_VERSION:=		1.4.4
+PKG_VERSION:=		1.6.0
 PKG_RELEASE:=		1
-PKG_HASH:=		2f2c0bf4d84763595953885bdcd2159b0b85410018c8ba48cc31b3d6e443e4d8
+PKG_HASH:=		3d15dee7126a6c4a015ab47ec908cab13e39774b0315efaaebb223cb4a4d349c
 PKG_DESCR:=		compiler for dts files
 PKG_SECTION:=		sys/misc
 HOST_BUILDDEP:=		m4-host flex-host bison-host
