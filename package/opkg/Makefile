@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		opkg
-PKG_VERSION:=		0.3.6
+PKG_VERSION:=		0.4.2
 PKG_RELEASE:=		1
-PKG_HASH:=		f607f0e61be8cf8a3bbd0d2dccd9ec9e9b6c21dd4307b671c600d6eeaf84d30b
+PKG_HASH:=		86887852c43457edfff9d8b6d9520f3f1cdd55f25eb600a6eb31e1c4e151e106
 PKG_DESCR:=		embedded package manager
 PKG_DEPENDS:=		libcurl libarchive gpgme libressl xz
 PKG_BUILDDEP:=		curl libarchive gpgme xz libressl
