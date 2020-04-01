@@ -13,7 +13,7 @@ PKG_BUILDDEP:=		bzip2-host
 PKG_DEPENDS:=		libbz2
 HOST_BUILDDEP:=		patch-host
 PKG_URL:=		http://www.bzip.org/
-PKG_SITES:=		http://www.bzip.org/${PKG_VERSION}/
+PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
 PKG_LIBNAME:=		libbz2
 PKG_OPTS:=		dev
 
