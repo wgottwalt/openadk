@@ -9,6 +9,7 @@ PKG_RELEASE:=		1
 PKG_HASH:=		02aa57f995d15b7acb7c2496d88a39fb0124ea00bf027cc61dd24eddb5942dff
 PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
+PKG_NEEDS:=		c++
 PKG_URL:=		http://tukaani.org/lzma/
 PKG_SITES:=		http://tukaani.org/lzma/
 
