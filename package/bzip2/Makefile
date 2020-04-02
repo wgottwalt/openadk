@@ -4,16 +4,16 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		bzip2
-PKG_VERSION:=		1.0.6
-PKG_RELEASE:=		3
-PKG_HASH:=		a2848f34fcd5d6cf47def00461fcb528a0484d8edef8208d6d2e2909dc61d9cd
+PKG_VERSION:=		1.0.8
+PKG_RELEASE:=		1
+PKG_HASH:=		ab5a03176ee106d3f0fa90e381da478ddae405918153cca248e682cd0c4a2269
 PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
 PKG_BUILDDEP:=		bzip2-host
 PKG_DEPENDS:=		libbz2
 HOST_BUILDDEP:=		patch-host
 PKG_URL:=		http://www.bzip.org/
-PKG_SITES:=		${MASTER_SITE_SOURCEFORGE:=${PKG_NAME}/}
+PKG_SITES:=		https://sourceware.org/pub/bzip2/
 PKG_LIBNAME:=		libbz2
 PKG_OPTS:=		dev
 
