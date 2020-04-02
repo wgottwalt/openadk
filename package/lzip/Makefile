@@ -4,11 +4,12 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		lzip
-PKG_VERSION:=		1.17
+PKG_VERSION:=		1.21
 PKG_RELEASE:=		1
-PKG_HASH:=		9443855e0a33131233b22cdb6c62c9313a483f16cc7415efe88d4a494cea0352
+PKG_HASH:=		e48b5039d3164d670791f9c5dbaa832bf2df080cb1fbb4f33aa7b3300b670d8b
 PKG_DESCR:=		compression utility
 PKG_SECTION:=		app/archive
+PKG_NEEDS:=		c++
 PKG_URL:=		http://www.nongnu.org/lzip/lzip.html
 PKG_SITES:=		http://download.savannah.gnu.org/releases/lzip/
 
