@@ -25,5 +25,5 @@ loss of customized configuration data.
 Another option is to configure a post-build action. This is available
 in +Global settings+. It must point to a script relative to the root
 of your openadk working copy. It will be invoked as part of the
-+*-imageinstall+ step with $ADK_TOPDIR as first argument. You can use
++-imageinstall+ step with $ADK_TOPDIR as first argument. You can use
 it e.g. to modify the +root_*+ filesystem before bundling it.
