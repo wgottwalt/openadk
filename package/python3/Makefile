@@ -4,14 +4,14 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		python3
-PKG_VERSION:=		3.6.4
+PKG_VERSION:=		3.8.2
 PKG_RELEASE:=		1
-PKG_HASH:=		159b932bf56aeaa76fd66e7420522d8c8853d486b8567c459b84fe2ed13bcaba
+PKG_HASH:=		2646e7dc233362f59714c6193017bb2d6f7b38d6ab4a0cb5fbac5c36c4d845df
 PKG_DESCR:=		python3 scripting language
 PKG_SECTION:=		dev/lang
 PKG_DEPENDS:=		libffi
 PKG_BUILDDEP:=		python3-host libffi 
-HOST_BUILDDEP:=		libffi-host
+HOST_BUILDDEP:=		libffi-host libressl-host
 PKG_NEEDS:=		threads
 PKG_URL:=		http://www.python.org/
 PKG_SITES:=		http://legacy.python.org/ftp/python/${PKG_VERSION}/
