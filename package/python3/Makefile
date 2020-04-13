@@ -103,15 +103,15 @@ HOST_CONFIGURE_ARGS+=	--without-cxx-main \
 
 python3-install: ${INSTALL_MODS_y} ${INSTALL_MODS_m}
 	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/bin ${IDIR_PYTHON3}/usr/lib
-	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/lib/python3.6
-	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/include/python3.6m
+	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/lib/python3.8
+	${INSTALL_DIR} ${IDIR_PYTHON3}/usr/include/python3.8
 	${INSTALL_BIN} ${WRKINST}/usr/bin/python3 ${IDIR_PYTHON3}/usr/bin
 	${CP} ${WRKINST}/usr/lib/libpython*.so* ${IDIR_PYTHON3}/usr/lib
-	${CP} ${WRKINST}/usr/lib/python3.6/* ${IDIR_PYTHON3}/usr/lib/python3.6
-	${CP} ${WRKINST}/usr/include/python3.6m/pyconfig.h \
-		 ${IDIR_PYTHON3}/usr/include/python3.6m
+	${CP} ${WRKINST}/usr/lib/python3.8/* ${IDIR_PYTHON3}/usr/lib/python3.8
+	${CP} ${WRKINST}/usr/include/python3.8/pyconfig.h \
+		 ${IDIR_PYTHON3}/usr/include/python3.8
 	@-for i in zlib _bz2 _curses _ssl _gdbm _sqlite pyexpat readline; do \
-		rm ${IDIR_PYTHON3}/usr/lib/python3.6/lib-dynload/$${i}*so; \
+		rm ${IDIR_PYTHON3}/usr/lib/python3.8/lib-dynload/$${i}*so; \
 	done
 
 include ${ADK_TOPDIR}/mk/host-bottom.mk
