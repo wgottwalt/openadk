@@ -33,6 +33,7 @@ do-build:
 
 do-install:
 	$(INSTALL_DIR) $(IDIR_FLASK)/usr/lib/python$(PYTHON_VERSION)/site-packages
-	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/site-packages/* $(IDIR_FLASK)/usr/lib/python$(PYTHON_VERSION)/site-packages/
+	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/site-packages/*egg $(IDIR_FLASK)/usr/lib/python$(PYTHON_VERSION)/site-packages/
+	$(CP) $(WRKINST)/usr/lib/python$(PYTHON_VERSION)/site-packages/easy-install.pth $(IDIR_FLASK)/usr/lib/python$(PYTHON_VERSION)/site-packages/$(PKG_NAME).pth
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk
