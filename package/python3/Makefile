@@ -59,9 +59,9 @@ define PKG_mod_template
 INSTALL_MODS_$${ADK_PACKAGE_${1}}+=    ${2}-install
 
 ${2}-install:
-	${INSTALL_DIR} $$(IDIR_$(1))/usr/lib/python3.6/lib-dynload
+	${INSTALL_DIR} $$(IDIR_$(1))/usr/lib/python3.8/lib-dynload
 	for m in ${2}; do \
-		${INSTALL_DATA} $(WRKINST)/usr/lib/python3.6/lib-dynload/$$$${m}*.so $$(IDIR_$(1))/usr/lib/python3.6/lib-dynload ;\
+		${INSTALL_DATA} $(WRKINST)/usr/lib/python3.8/lib-dynload/$$$${m}*.so $$(IDIR_$(1))/usr/lib/python3.8/lib-dynload ;\
 	done
 endef
 
@@ -94,6 +94,7 @@ CONFIGURE_ARGS:=	--with-threads \
 			--with-system-expat \
 			--disable-ipv6 \
 			--without-cxx-main
+
 CONFIGURE_ENV+=		ac_cv_have_long_long_format=yes \
 			ac_cv_file__dev_ptmx=yes \
 			ac_cv_file__dev_ptc=no
