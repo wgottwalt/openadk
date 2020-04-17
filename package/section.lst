@@ -61,6 +61,6 @@ libs/video	Video Libraries
 dev/lang	Programming Languages
 dev/perl	Perl modules
 dev/python	Python modules
-dev/scm		Souce Code Management 
+dev/scm		Source Code Management 
 dev/tools	Programming Tools
 dev/header	Header files
