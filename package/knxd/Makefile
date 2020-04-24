@@ -31,6 +31,8 @@ knxd-install:
 		$(IDIR_KNXD)/usr/bin
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/knxtool \
 		$(IDIR_KNXD)/usr/bin
+	$(INSTALL_BIN) $(WRKINST)/usr/libexec/knxd_args \
+		$(IDIR_KNXD)/usr/bin
 	$(CP) $(WRKINST)/usr/lib/libeib*.so* \
 		$(IDIR_KNXD)/usr/lib
 	$(CP) $(WRKINST)/usr/libexec/knxd/* \
