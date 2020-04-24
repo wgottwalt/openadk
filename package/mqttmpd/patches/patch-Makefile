@@ -1,0 +1,32 @@
+--- mqttmpd-r5.orig/Makefile	2020-04-22 16:34:15.000000000 +0200
++++ mqttmpd-r5/Makefile	2020-04-23 23:12:16.506689542 +0200
+@@ -1,12 +1,12 @@
+ PROGS	= mqttmpd
+ default	: $(PROGS)
+ 
+-PREFIX	= /usr/local
++PREFIX	= /usr
+ 
+-CC	= gcc
+-CFLAGS	= -Wall
+-CPPFLAGS= -D_GNU_SOURCE
+-LDLIBS	= -lmosquitto
++#CC	= gcc
++CFLAGS+= -Wall 
++CPPFLAGS+= -D_GNU_SOURCE
++LDLIBS+= -lmosquitto
+ INSTOPTS= -s
+ 
+ VERSION := $(shell git describe --tags --always)
+@@ -15,8 +15,10 @@ VERSION := $(shell git describe --tags -
+ 
+ CPPFLAGS += -DVERSION=\"$(VERSION)\"
+ 
++all:	$(PROGS)	
++
+ install: $(PROGS)
+-	$(foreach PROG, $(PROGS), install -vp -m 0777 $(INSTOPTS) $(PROG) $(DESTDIR)$(PREFIX)/bin/$(PROG);)
++	$(foreach PROG, $(PROGS), install -vp -D -m 0777 $(INSTOPTS) $(PROG) $(DESTDIR)$(PREFIX)/bin/$(PROG);)
+ 
+ clean:
+ 	rm -rf $(wildcard *.o) $(PROGS)
