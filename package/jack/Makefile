@@ -13,6 +13,7 @@ PKG_BUILDDEP:=		db python2-host alsa-lib libsndfile libsamplerate
 PKG_NEEDS:=		threads c++
 PKG_URL:=		http://jackaudio.org
 PKG_SITES:=		https://github.com/jackaudio/jack1.git
+PKG_OPT:=		dev
 
 include $(ADK_TOPDIR)/mk/package.mk
 
