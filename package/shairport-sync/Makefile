@@ -9,7 +9,7 @@ PKG_RELEASE:=		1
 PKG_GIT:=		tag
 PKG_DESCR:=		airplay daemon	
 PKG_SECTION:=		mm/audio	
-PKG_DEPENDS:=		libressl popt libdaemon libconfig jack mosquitto
+PKG_DEPENDS:=		libressl libpopt libdaemon libconfig jack mosquitto
 PKG_BUILDDEP:=		libressl popt libdaemon libconfig jack mosquitto
 PKG_URL:=		https://github.com/mikebrady/shairport-sync
 PKG_SITES:=		https://github.com/mikebrady/shairport-sync.git
@@ -32,9 +32,10 @@ CONFIGURE_ARGS+=	--with-pkg-config \
 
 shairport-sync-install:
 	$(INSTALL_DIR) $(IDIR_SHAIRPORT_SYNC)/usr/bin
+	$(INSTALL_DIR) $(IDIR_SHAIRPORT_SYNC)/etc/shairport-sync
 	$(INSTALL_BIN) $(WRKINST)/usr/bin/shairport-sync \
 		$(IDIR_SHAIRPORT_SYNC)/usr/bin
-	$(INSTALL_DATA) $(WRKINST)/etc/shairport-sync.conf \
-		$(IDIR_SHAIRPORT_SYNC)/etc/shairport-sync.conf
+	$(INSTALL_DATA) $(WRKINST)/etc/* \
+		$(IDIR_SHAIRPORT_SYNC)/etc/shairport-sync/
 
 include $(ADK_TOPDIR)/mk/pkg-bottom.mk

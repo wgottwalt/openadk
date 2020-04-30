@@ -1,0 +1,28 @@
+#!/bin/sh
+#PKG shairport-sync
+#INIT 80
+. /etc/rc.conf
+
+case $1 in
+autostop) ;;
+autostart)
+	test x"${shairport_sync:-NO}" = x"NO" && exit 0
+	test x"$shairport_sync" = x"DAEMON" && test -x /bin/mksh && exec mksh -T- $0 start
+	exec sh $0 start
+	;;
+start)
+	/usr/bin/shairport-sync -c /etc/shairport/shairport-sync.conf -d $shairport_sync_flags
+	;;
+stop)
+	/usr/bin/shairport-sync -k
+	;;
+restart)
+	sh $0 stop
+	sh $0 start
+	;;
+*)
+	echo "Usage: $0 {start | stop | restart}"
+	exit 1
+	;;
+esac
+exit $?
