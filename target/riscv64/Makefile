@@ -59,8 +59,8 @@ boot:
 	(cd $(BUILD_DIR)/opensbi && PATH='$(HOST_PATH)' \
 		CROSS_COMPILE=$(GNU_TARGET_NAME)- \
 		FW_PAYLOAD_PATH=$(KERNEL) \
-		PLATFORM=qemu/virt make)
-	cp $(BUILD_DIR)/opensbi/build/platform/qemu/virt/firmware/fw_payload.elf \
+		PLATFORM=generic make)
+	cp $(BUILD_DIR)/opensbi/build/platform/generic/firmware/fw_payload.elf \
 		$(FW_DIR)/$(TARGET_KERNEL)
 
 # filesystem specific targets
