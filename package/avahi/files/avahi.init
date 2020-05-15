@@ -1,5 +1,5 @@
 #!/bin/sh
-#PKG avahi-daemon
+#PKG avahi
 #INIT 75
 . /etc/rc.conf
 
