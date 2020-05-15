@@ -19,7 +19,7 @@ PKG_OPTS:=		dev
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.gz
 
 PKG_SUBPKGS:=		AVAHI LIBAVAHI
-PKGSS_AVAHI:=		libavahi libdaemon libexpat libintl dbus
+PKGSS_AVAHI:=		libavahi libdaemon libexpat dbus
 PKGSB_AVAHI:=		dbus
 PKGSS_LIBAVAHI:=	dbus
 PKGSB_LIBAVAHI:=	dbus
