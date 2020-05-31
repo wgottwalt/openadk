@@ -62,7 +62,7 @@ $(eval $(call PKG_template,@UPKG@,@PKG@,$(PKG_VERSION)-$(PKG_RELEASE),$(PKG_DEPE
 #CONFIG_STYLE:=		manual
 # use following to add ./configure options
 #CONFIGURE_ARGS+=	--disable-foo
-# overwrite any configure variables
+# override any configure variables
 #CONFIGURE_ENV+=	ac_cv_func_setpgrp_void=yes
 #BUILD_STYLE:=		manual
 #INSTALL_STYLE:=	manual
