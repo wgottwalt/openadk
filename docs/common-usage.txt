@@ -9,7 +9,7 @@ Understanding when a full rebuild is necessary
 
 OpenADK tries to detect what part of the system should be rebuilt when the
 system configuration is changed through +make menuconfig+.  In some cases it
-automatically rebuilt packages, but sometimes just a warning is printed to the
+automatically rebuilds packages, but sometimes just a warning is printed to the
 terminal, that a rebuild is necessary to make the changes an effect. If strange
 things are happening, the autodetection might have not worked correctly, then
 you should consider to rebuild everything. If you are following development you
