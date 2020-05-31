@@ -104,7 +104,7 @@ different steps of the configure, build and install process.
 
 * +MAKE_ENV+ add additional variables to build step
 
-* +MAKE_FLAGS+ add additinal make flags to build step
+* +MAKE_FLAGS+ add additional make flags to build step
 
 * +FAKE_FLAGS+ add additional make flags to fake install step
 
@@ -112,7 +112,7 @@ different steps of the configure, build and install process.
 
 * +INSTALL_STYLE+ either manual or auto
 
-* +CONFIGURE_PROG+ override default configure programm
+* +CONFIGURE_PROG+ override default configure program
 
 * +MAKE_FILE+ override default Makefile
 
