@@ -179,7 +179,7 @@ In both cases the default user is +root+ and the default password is
 either via +passwd+ on the system or you can preconfigure a password via +make
 menuconfig+ under +Runtime configuration+.
 
-The default shell used in OpenADK is +mksh+ from http://www.mirbsd.org/mksh/.
+The default shell used in OpenADK is +mksh+ from http://www.mirbsd.org/mksh.htm.
 You can change the shell in +make menuconfig+ under +Runtime configuration+. Be
 aware of the fact that the bootup process might use some +mksh+ features to
 speedup the system start. When you change the shell for system +/bin/sh+ the
