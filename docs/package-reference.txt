@@ -112,15 +112,15 @@ different steps of the configure, build and install process.
 
 * +INSTALL_STYLE+ either manual or auto
 
-* +CONFIGURE_PROG+ overwrite default configure programm
+* +CONFIGURE_PROG+ override default configure programm
 
-* +MAKE_FILE+ overwrite default Makefile
+* +MAKE_FILE+ override default Makefile
 
-* +ALL_TARGET+ overwrite default build target
+* +ALL_TARGET+ override default build target
 
-* +INSTALL_TARGET+ overwrite default install target
+* +INSTALL_TARGET+ override default install target
 
-The variables to add or overwrite preprocessor, compiler and linker flags:
+The variables to add or override preprocessor, compiler and linker flags:
 
 * +TARGET_CPPFLAGS+ flags for the preprocessor
 

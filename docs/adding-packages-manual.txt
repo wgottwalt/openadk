@@ -60,7 +60,7 @@ package buildtime dependencies (+PKG_BUILDDEP+), the package runtime
 dependencies (+PKG_DEPENDS+), the package homepage (+PKG_URL+) and finally the
 internet locations at which the tarball can be downloaded from (+PKG_SITES+).
 Normally ${PKG_NAME}-${PKG_VERSION}.tar.gz will be downloaded. You can
-overwrite the default via the +DISTFILES+ variable. You can add more then one
+override the default via the +DISTFILES+ variable. You can add more then one
 archive name in +DISTFILES+ via space separated. If you have no source archive
 at all, just use the boolean variable +NO_DISTFILES+ and set it to 1.
 
