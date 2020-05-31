@@ -7,7 +7,7 @@ PKG_NAME:=		gdbserver
 PKG_VERSION:=		9.1
 PKG_RELEASE:=		1
 PKG_HASH:=		699e0ec832fdd2f21c8266171ea5bf44024bd05164fdf064e4d10cc4cf0d1737
-PKG_DESCR:=		remote programm debugger utility
+PKG_DESCR:=		remote program debugger utility
 PKG_SECTION:=		app/debug
 PKG_NEEDS:=		c++
 PKG_SITES:=		${MASTER_SITE_GNU:=gdb/}

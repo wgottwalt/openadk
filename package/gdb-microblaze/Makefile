@@ -6,7 +6,7 @@ include ${ADK_TOPDIR}/rules.mk
 PKG_NAME:=		gdb
 PKG_VERSION:=		7.8.2
 PKG_RELEASE:=		1
-PKG_DESCR:=		programm debugger
+PKG_DESCR:=		program debugger
 PKG_SECTION:=		app/debug
 PKG_HASH:=		605954d5747d5f08ea4b7f48e958d1ebbf39265e18f7f36738deeabb83744485
 PKG_DEPENDS:=		libncurses zlib libexpat libthread-db

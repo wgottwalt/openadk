@@ -411,7 +411,7 @@ EOF
 $MAKE --no-print-directory LDADD=-lz ADK_TOPDIR=$topdir -f Makefile.tmp >/dev/null 2>&1 
 X=$(echo YES | gzip | ./test 2>/dev/null)
 if [ X$X != XYES ]; then
-  echo Cannot compile a libz test programm.
+  echo Cannot compile a libz test program.
   echo You must install the zlib development package,
   echo usually called libz-dev, and the run-time library.
   echo
