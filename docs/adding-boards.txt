@@ -44,7 +44,7 @@ in OpenADK, you need to port it first.
 The hardware capabilities are optional. (f.e. ADK_TARGET_WITH_SD), but
 required when you configure the driver configuration later.
 
-For architectures with a choice for endianess you should depends on either
+For architectures with a choice for endianess you should depend on either
 ADK_TARGET_LITTLE_ENDIAN or ADK_TARGET_BIG_ENDIAN.
 
 If the CPU type like in this example ADK_TARGET_CPU_ARM_CORTEX_A7 is not yet available
