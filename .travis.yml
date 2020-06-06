@@ -25,9 +25,7 @@ matrix:
   - env: ARCH=mips SYSTEM=mikrotik-rb532
   - env: ARCH=mips64 SYSTEM=lemote-yeelong
   - env: ARCH=sh SYSTEM=numato-mimasv2 ENDIAN=big
-  - env: ARCH=x86 SYSTEM=ibm-x40
   - env: ARCH=x86 SYSTEM=pcengines-alix
   - env: ARCH=x86_64 SYSTEM=pcengines-apu
-  - env: ARCH=x86_64 SYSTEM=asus-p5bvm
   - env: ARCH=xtensa SYSTEM=xilinx-kintex7
 script: travis_wait 120 ./scripts/travis.sh linux $ARCH $SYSTEM $ENDIAN
