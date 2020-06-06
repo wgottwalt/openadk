@@ -1,6 +1,6 @@
---- parted-3.2.orig/lib/config.h.in	2014-07-28 22:02:54.000000000 -0500
-+++ parted-3.2/lib/config.h.in	2015-01-03 14:02:11.888853421 -0600
-@@ -1471,6 +1471,11 @@
+--- parted-3.3.orig/lib/config.h.in	2019-10-11 01:03:37.000000000 +0200
++++ parted-3.3/lib/config.h.in	2020-06-06 20:12:43.000000000 +0200
+@@ -1249,6 +1249,11 @@
  /* Enable large inode numbers on Mac OS X 10.5. */
  #undef _DARWIN_USE_64_BIT_INODE
  

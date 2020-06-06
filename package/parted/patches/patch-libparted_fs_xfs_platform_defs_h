@@ -1,6 +1,6 @@
---- parted-3.1.orig/libparted/fs/xfs/platform_defs.h	2012-01-12 17:38:40.000000000 +0100
-+++ parted-3.1/libparted/fs/xfs/platform_defs.h	2013-12-25 20:53:13.000000000 +0100
-@@ -51,7 +51,7 @@
+--- parted-3.3.orig/libparted/fs/xfs/platform_defs.h	2019-10-11 00:58:51.000000000 +0200
++++ parted-3.3/libparted/fs/xfs/platform_defs.h	2020-06-06 20:12:43.000000000 +0200
+@@ -52,7 +52,7 @@
  # define constpp	char * const *
  #endif
  

@@ -1,0 +1,34 @@
+--- parted-3.3.orig/libparted/libparted.c	2019-10-11 00:58:51.000000000 +0200
++++ parted-3.3/libparted/libparted.c	2020-06-06 20:37:57.000000000 +0200
+@@ -75,7 +75,6 @@ extern void ped_disk_pc98_init ();
+ extern void ped_disk_sun_init ();
+ extern void ped_disk_amiga_init ();
+ extern void ped_disk_dasd_init ();
+-extern void ped_disk_atari_init ();
+ 
+ static void
+ init_disk_types ()
+@@ -86,7 +85,6 @@ init_disk_types ()
+ #if defined __s390__ || defined __s390x__
+ 	ped_disk_dasd_init();
+ #endif
+-	ped_disk_atari_init (); /* easy false positives, so probe others first */
+ 	ped_disk_sun_init ();
+ #ifdef ENABLE_PC98
+ 	ped_disk_pc98_init ();
+@@ -143,7 +141,6 @@ extern void ped_disk_pc98_done ();
+ extern void ped_disk_sun_done ();
+ extern void ped_disk_amiga_done ();
+ extern void ped_disk_dasd_done ();
+-extern void ped_disk_atari_done ();
+ 
+ static void
+ done_disk_types ()
+@@ -163,7 +160,6 @@ done_disk_types ()
+ 	ped_disk_bsd_done ();
+ 	ped_disk_amiga_done ();
+ 	ped_disk_aix_done ();
+-	ped_disk_atari_done ();
+ }
+ 
+ static void _init() __attribute__ ((constructor));
