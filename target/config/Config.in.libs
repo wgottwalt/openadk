@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 choice
-depends on ADK_TARGET_OS_LINUX
+depends on ADK_TARGET_OS_LINUX && !ADK_TARGET_CHOOSE_ARCH
 bool "Library support"
 
 config ADK_TARGET_USE_SHARED_LIBS_ONLY
