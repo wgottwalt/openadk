@@ -521,6 +521,15 @@ else
   printf "found\n"
 fi
 
+printf " --->  checking if rsync is installed.. "
+host_build_rsync=0
+if ! which rsync >/dev/null 2>&1; then
+  printf "not found\n"
+  host_build_rsync=1
+else
+  printf "found\n"
+fi
+
 host_build_tar=0
 if which tar >/dev/null 2>&1; then
   if ! tar --version 2>/dev/null|grep GNU >/dev/null;then
@@ -691,6 +700,9 @@ if [ $host_build_mksh -eq 1 ]; then
 fi
 if [ $host_build_patch -eq 1 ]; then 
   printf "\t%s\n" "select ADK_HOST_BUILD_PATCH" >> $topdir/target/config/Config.in.prereq
+fi
+if [ $host_build_rsync -eq 1 ]; then 
+  printf "\t%s\n" "select ADK_HOST_BUILD_RSYNC" >> $topdir/target/config/Config.in.prereq
 fi
 if [ $host_build_findutils -eq 1 ]; then
   printf "\t%s\n" "select ADK_HOST_BUILD_FINDUTILS" >> $topdir/target/config/Config.in.prereq

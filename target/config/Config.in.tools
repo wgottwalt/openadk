@@ -121,6 +121,10 @@ config ADK_HOST_BUILD_PATCH
 	bool
 	default n
 
+config ADK_HOST_BUILD_RSYNC
+	bool
+	default n
+
 config ADK_HOST_BUILD_SED
 	bool
 	default n

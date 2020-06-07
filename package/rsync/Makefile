@@ -16,12 +16,15 @@ PKG_SITES:=		http://rsync.samba.org/ftp/rsync/
 
 DISTFILES:=		${PKG_NAME}-${PKG_VERSION}.tar.gz
 
+include $(ADK_TOPDIR)/mk/host.mk
 include ${ADK_TOPDIR}/mk/package.mk
 
+$(eval $(call HOST_template,RSYNC,rsync,$(PKG_VERSION)-$(PKG_RELEASE)))
 $(eval $(call PKG_template,RSYNC,rsync,${PKG_VERSION}-${PKG_RELEASE},${PKG_DEPENDS},${PKG_DESCR},${PKG_SECTION}))
 
 rsync-install:
 	${INSTALL_DIR} ${IDIR_RSYNC}/usr/bin
 	${INSTALL_BIN} ${WRKINST}/usr/bin/rsync ${IDIR_RSYNC}/usr/bin
 
+include $(ADK_TOPDIR)/mk/host-bottom.mk
 include ${ADK_TOPDIR}/mk/pkg-bottom.mk
