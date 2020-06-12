@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		dhcpcd
-PKG_VERSION:=		6.11.5
+PKG_VERSION:=		9.1.1
 PKG_RELEASE:=		1
-PKG_HASH:=		6f9674dc7e27e936cc787175404a6171618675ecfb6903ab9887b1b66a87d69e
+PKG_HASH:=		bb742911be1f660db42a7323acc793b587f467c5de5b7186735c16d20204737d
 PKG_DESCR:=		dhcp client
 PKG_SECTION:=		net/dns
 PKG_URL:=		https://roy.marples.name/projects/dhcpcd
