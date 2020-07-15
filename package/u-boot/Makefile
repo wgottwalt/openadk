@@ -4,19 +4,19 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		u-boot
-PKG_VERSION:=		2019.10
+PKG_VERSION:=		2020.07
 PKG_RELEASE:=		1
-PKG_HASH:=		8d6d6070739522dd236cba7055b8736bfe92b4fac0ea18ad809829ca79667014
+PKG_HASH:=		c1f5bf9ee6bb6e648edbf19ce2ca9452f614b08a9f886f1a566aa42e8cf05f6a
 PKG_DESCR:=		portable bootloader
 PKG_SECTION:=		base/boot
 HOST_BUILDDEP:=		libressl-host dtc-host
-PKG_BUILDDEP:=		u-boot-host
+PKG_BUILDDEP:=		python3-host swig-host u-boot-host
 PKG_URL:=		http://www.denx.de/wiki/U-Boot	
 PKG_SITES:=		ftp://ftp.denx.de/pub/u-boot/
 
 DISTFILES:=		$(PKG_NAME)-$(PKG_VERSION).tar.bz2
 
-PKG_SYSTEM_DEPENDS:=	beaglebone-black orange-pi0 raspberry-pi raspberry-pi2 raspberry-pi3 banana-pro solidrun-imx6 solidrun-clearfog raspberry-pi3-64 raspberry-pi3p raspberry-pi3p-64 phytec-imx6
+PKG_SYSTEM_DEPENDS:=	beaglebone-black orange-pi0 raspberry-pi raspberry-pi2 raspberry-pi3 banana-pro solidrun-imx6 solidrun-clearfog raspberry-pi3-64 raspberry-pi3p raspberry-pi3p-64 phytec-imx6 pcduino-3b
 
 include $(ADK_TOPDIR)/mk/host.mk
 include $(ADK_TOPDIR)/mk/package.mk
@@ -36,6 +36,9 @@ endif
 ifeq ($(ADK_TARGET_SYSTEM_SOLIDRUN_IMX6),y)
 CONFIG:=		mx6cuboxi_defconfig
 UBOOT:=			u-boot.img
+endif
+ifeq ($(ADK_TARGET_SYSTEM_PCDUINO_3B),y)
+CONFIG:=		Linksprite_pcDuino3_defconfig
 endif
 ifeq ($(ADK_TARGET_SYSTEM_RASPBERRY_PI),y)
 CONFIG:=		rpi_defconfig
