@@ -2,7 +2,7 @@
 # material, please see the LICENCE file in the top-level directory.
 
 PKG_NAME:=		mpfr
-PKG_VERSION:=		4.0.1
+PKG_VERSION:=		4.1.0
 PKG_RELEASE:=		1
-PKG_HASH:=		67874a60826303ee2fb6affc6dc0ddd3e749e9bfcb4c8655e3953d0458a6e16e
+PKG_HASH:=		0c98a3f1732ff6ca4ea690552079da9c597872d30e96ec28414ee23c95558a7f
 PKG_SITES:=		http://www.mpfr.org/mpfr-current/
