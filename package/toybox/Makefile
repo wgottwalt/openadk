@@ -4,9 +4,9 @@
 include $(ADK_TOPDIR)/rules.mk
 
 PKG_NAME:=		toybox
-PKG_VERSION:=		0.7.1
+PKG_VERSION:=		0.8.3
 PKG_RELEASE:=		1
-PKG_HASH:=		5bb3069f58faf12940d5cfde3209ac7f63210bebdd9023979b0c20cede126ea7
+PKG_HASH:=		eab28fd29d19d4e61ef09704e5871940e6f35fd35a3bb1285e41f204504b5c01
 PKG_DESCR:=		linux tools collection
 PKG_SECTION:=		base/apps
 PKG_URL:=		http://landley.net/toybox/
@@ -24,7 +24,7 @@ XAKE_FLAGS+=		CC="gcc" V=1 PREFIX="$(WRKINST)"
 
 do-configure:
 	-rm $(WRKBUILD)/toys/other/swap*.c
-	cd $(WRKBUILD); PATH='$(HOST_PATH)' $(MAKE) defconfig
+	cd $(WRKBUILD); CC="gcc" PATH='$(HOST_PATH)' $(MAKE) defconfig
 
 toybox-install:
 	$(CP) $(WRKINST)/* $(IDIR_TOYBOX)/
