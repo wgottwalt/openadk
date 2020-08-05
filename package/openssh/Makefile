@@ -4,9 +4,9 @@
 include ${ADK_TOPDIR}/rules.mk
 
 PKG_NAME:=		openssh
-PKG_VERSION:=		8.2p1
+PKG_VERSION:=		8.3p1
 PKG_RELEASE:=		1
-PKG_HASH:=		43925151e6cf6cee1450190c0e9af4dc36b41c12737619edff8bcebdff64e671
+PKG_HASH:=		f2befbe0472fe7eb75d23340eb17531cb6b3aac24075e2066b41f814e12387b2
 PKG_DESCR:=		secure shell implementation
 PKG_SECTION:=		net/security
 PKG_BUILDDEP:=		zlib libressl
