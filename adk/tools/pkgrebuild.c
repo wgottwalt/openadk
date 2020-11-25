@@ -29,6 +29,9 @@
 
 #include "strmap.h"
 
+#define D_PKG_		"ADK_PACKAGE_"
+#define D_		"_"
+
 StrMap *configmap, *configoldmap, *pkgmap;
 
 /*
@@ -80,7 +83,7 @@ static char *toupperstr(char *string) {
 
 	int i;
 	char *str;
-	
+
 	/* transform to uppercase variable name */
 	str = strdup(string);
 	for (i=0; i<(int)strlen(str); i++) {
@@ -138,7 +141,7 @@ int main() {
 						while (token != NULL) {
 							keystr = malloc(256);
 							memset(keystr, 0, 256);
-							strncat(keystr, "ADK_PACKAGE_", 12);
+							strncat(keystr, D_PKG_, sizeof(D_PKG_));
 							strncat(keystr, token, strlen(token));
 							strmap_put(pkgmap, keystr, pkgdirp->d_name);
 							token = strtok(NULL, " ");
@@ -155,7 +158,7 @@ int main() {
 						while (token != NULL) {
 							keystr = malloc(256);
 							memset(keystr, 0, 256);
-							strncat(keystr, "ADK_PACKAGE_", 12);
+							strncat(keystr, D_PKG_, sizeof(D_PKG_));
 							strncat(keystr, token, strlen(token));
 							strmap_put(pkgmap, keystr, pkgdirp->d_name);
 							token = strtok(NULL, " ");
@@ -175,9 +178,9 @@ int main() {
 							while (token != NULL) {
 								keystr = malloc(256);
 								memset(keystr, 0, 256);
-								strncat(keystr, "ADK_PACKAGE_", 12);
+								strncat(keystr, D_PKG_, sizeof(D_PKG_));
 								strncat(keystr, realpkgname, strlen(realpkgname));
-								strncat(keystr, "_", 1);
+								strncat(keystr, D_, sizeof(D_));
 								strncat(keystr, token, strlen(token));
 								strmap_put(pkgmap, keystr, pkgdirp->d_name);
 								token = strtok(NULL, " ");
@@ -193,9 +196,9 @@ int main() {
 							while (token != NULL) {
 								keystr = malloc(256);
 								memset(keystr, 0, 256);
-								strncat(keystr, "ADK_PACKAGE_", 12);
+								strncat(keystr, D_PKG_, sizeof(D_PKG_));
 								strncat(keystr, realpkgname, strlen(realpkgname));
-								strncat(keystr, "_", 1);
+								strncat(keystr, D_, sizeof(D_));
 								strncat(keystr, token, strlen(token));
 								strmap_put(pkgmap, keystr, pkgdirp->d_name);
 								token = strtok(NULL, " ");
@@ -213,9 +216,9 @@ int main() {
 						while (token != NULL) {
 							keystr = malloc(256);
 							memset(keystr, 0, 256);
-							strncat(keystr, "ADK_PACKAGE_", 12);
+							strncat(keystr, D_PKG_, sizeof(D_PKG_));
 							strncat(keystr, toupperstr(pkg_name), strlen(pkg_name));
-							strncat(keystr, "_", 1);
+							strncat(keystr, D_, sizeof(D_));
 							strncat(keystr, token, strlen(token));
 							strmap_put(pkgmap, keystr, pkgdirp->d_name);
 							token = strtok(NULL, " ");
@@ -235,7 +238,7 @@ int main() {
 		perror(".config is missing.");
 		exit(1);
 	}
-	
+
 	configmap = strmap_new(1024);
 	while (fgets(buf, 128, config) != NULL) {
 		if (strncmp(buf, "ADK_PACKAGE", 11) == 0) {
@@ -251,7 +254,7 @@ int main() {
 		perror(".config.old is missing.");
 		exit(1);
 	}
-	
+
 	configoldmap = strmap_new(1024);
 	while (fgets(buf, 128, configold) != NULL) {
 		if (strncmp(buf, "ADK_PACKAGE", 11) == 0) {

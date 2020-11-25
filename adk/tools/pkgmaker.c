@@ -29,11 +29,26 @@
 #include "sortfile.h"
 #include "strmap.h"
 
-#define MAXLINE 4096
-#define MAXVALUE 168
-#define MAXVAR 	64
-#define MAXPATH 320
-#define HASHSZ	96
+#define MAXLINE		4096
+#define MAXVALUE	168
+#define MAXVAR		64
+#define MAXPATH		320
+#define HASHSZ		96
+
+#define D_P		"."
+#define D_S		" "
+#define D_DEV		"-dev"
+#define D_PKGCS_	"PKGCS_"
+#define D_PKGCD_	"PKGCD_"
+#define D_PKGFS_	"PKGFS_"
+#define D_PKGFD_	"PKGFD_"
+#define D_PKGFC_	"PKGFC_"
+#define D_PKGFX_	"PKGFX_"
+#define D_PKGSK_	"PKGSK_"
+#define D_PKGSN_	"PKGSN_"
+#define D_PKGSS_	"PKGSS_"
+#define D_PKGSD_	"PKGSD_"
+#define D_PKGSC_	"PKGSC_"
 
 static int nobinpkgs;
 
@@ -99,7 +114,7 @@ static int parse_var(char *buf, const char *varname, char *pvalue, char **result
 			value = strtok(NULL, "=\t");
 			if (pvalue != NULL)
 				strncat(pkg_var, pvalue, strlen(pvalue));
-			strncat(pkg_var, " ", 1);
+			strncat(pkg_var, D_S, sizeof(D_S));
 			if (value != NULL)
 				strncat(pkg_var, value, strlen(value));
 			*result = strdup(pkg_var);
@@ -146,7 +161,7 @@ static int parse_var_with_system(char *buf, const char *varname, char *pvalue, c
 			value = strtok(NULL, "=\t");
 			if (pvalue != NULL)
 				strncat(pkg_var, pvalue, strlen(pvalue));
-			strncat(pkg_var, " ", 1);
+			strncat(pkg_var, D_S, sizeof(D_S));
 			if (value != NULL)
 				strncat(pkg_var, value, strlen(value));
 			*result = strdup(pkg_var);
@@ -193,7 +208,7 @@ static int parse_var_with_pkg(char *buf, const char *varname, char *pvalue, char
 			value = strtok(NULL, "=\t");
 			if (pvalue != NULL)
 				strncat(pkg_var, pvalue, strlen(pvalue));
-			strncat(pkg_var, " ", 1);
+			strncat(pkg_var, D_S, sizeof(D_S));
 			if (value != NULL)
 				strncat(pkg_var, value, strlen(value));
 			*result = strdup(pkg_var);
@@ -292,7 +307,7 @@ static char *toupperstr(char *string) {
 
 	int i;
 	char *str;
-	
+
 	/* transform to uppercase variable name */
 	str = strdup(string);
 	for (i=0; i<(int)strlen(str); i++) {
@@ -386,7 +401,7 @@ int main() {
 		strmap_put(sectionmap, key, value);
 	}
 	fclose(section);
-	
+
 	if (mkdir("package/pkgconfigs.d", S_IRWXU) > 0)
 		fatal_error("creation of package/pkgconfigs.d failed.");
 	if (mkdir("package/pkgconfigs.d/gcc", S_IRWXU) > 0)
@@ -422,7 +437,7 @@ int main() {
 	fprintf(cfg, "\tdepends on ADK_TARGET_LIB_MUSL\n");
 	fprintf(cfg, "\thelp\n");
 	fprintf(cfg, "\t  C library header files.\n\n");
-	fclose(cfg);	
+	fclose(cfg);
 
 
 	/* read Makefile's for all packages */
@@ -509,13 +524,13 @@ int main() {
 				} else
 					fatal_error("Can not find section description %s for package %s.",
 							pkg_section, pkgdirp->d_name);
-				
+
 				fclose(pkg);
 				continue;
 			}
 
 			nobinpkgs = 0;
-			
+
 			/* create output directories */
 			if (snprintf(dir, MAXPATH, "package/pkgconfigs.d/%s", pkgdirp->d_name) < 0)
 				fatal_error("can not create dir variable.");
@@ -683,7 +698,7 @@ int main() {
 				} else {
 					fprintf(cfg, "ADK_PACKAGE_%s\n", toupperstr(pkg_name));
 				}
-			} 
+			}
 			fprintf(cfg, "\tdefault n\n");
 			fclose(cfg);
 			free(pkgs);
@@ -700,7 +715,7 @@ int main() {
 
 			token = strtok_r(packages, " ", &p_ptr);
 			while (token != NULL) {
-				strncat(hkey, "PKGSC_", 6);
+				strncat(hkey, D_PKGSC_, sizeof(D_PKGSC_));
 				strncat(hkey, toupperstr(token), strlen(token));
 				memset(hvalue, 0 , MAXVALUE);
 				result = strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
@@ -708,7 +723,7 @@ int main() {
 				if (result == 1)
 					pkg_section = strdup(hvalue);
 
-				strncat(hkey, "PKGSD_", 6);
+				strncat(hkey, D_PKGSD_, sizeof(D_PKGSD_));
 				strncat(hkey, toupperstr(token), strlen(token));
 				memset(hvalue, 0 , MAXVALUE);
 				result = strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
@@ -720,7 +735,7 @@ int main() {
 				memset(pseudo_name, 0, MAXLINE);
 				strncat(pseudo_name, token, strlen(token));
 				while (strlen(pseudo_name) < 23)
-					strncat(pseudo_name, ".", 1);
+					strncat(pseudo_name, D_P, sizeof(D_P));
 
 				if (snprintf(path, MAXPATH, "package/pkgconfigs.d/%s/Config.in.%s", pkgdirp->d_name, token) < 0)
 					fatal_error("failed to create path variable.");
@@ -761,8 +776,8 @@ int main() {
 					}
 				} else {
 					fprintf(cfg, "\tprompt \"%s. %s\"\n", pseudo_name, pkg_descr);
-				}	
-				
+				}
+
 				fprintf(cfg, "\tbool\n");
 				free(pseudo_name);
 
@@ -778,13 +793,13 @@ int main() {
 				}
 
 				/* add sub package dependencies */
-				strncat(hkey, "PKGSN_", 6);
+				strncat(hkey, D_PKGSN_, sizeof(D_PKGSN_));
 				strncat(hkey, toupperstr(token), strlen(token));
 				memset(hvalue, 0, MAXVALUE);
 				result = strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
 				if (result == 1) {
 					val = strtok_r(hvalue, " ", &saveptr);
-					while (val != NULL) { 
+					while (val != NULL) {
 						fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", toupperstr(val));
 						val = strtok_r(NULL, " ", &saveptr);
 					}
@@ -792,13 +807,13 @@ int main() {
 				memset(hkey, 0, MAXVAR);
 
 				/* add sub package auto selections */
-				strncat(hkey, "PKGSS_", 6);
+				strncat(hkey, D_PKGSS_, sizeof(D_PKGSS_));
 				strncat(hkey, toupperstr(token), strlen(token));
 				memset(hvalue, 0, MAXVALUE);
 				result = strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
 				if (result == 1) {
 					val = strtok_r(hvalue, " ", &saveptr);
-					while (val != NULL) { 
+					while (val != NULL) {
 						fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
 						val = strtok_r(NULL, " ", &saveptr);
 					}
@@ -806,13 +821,13 @@ int main() {
 				memset(hkey, 0, MAXVAR);
 
 				/* add sub package kernel selections */
-				strncat(hkey, "PKGSK_", 6);
+				strncat(hkey, D_PKGSK_, sizeof(D_PKGSK_));
 				strncat(hkey, toupperstr(token), strlen(token));
 				memset(hvalue, 0, MAXVALUE);
 				result = strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
 				if (result == 1) {
 					val = strtok_r(hvalue, " ", &saveptr);
-					while (val != NULL) { 
+					while (val != NULL) {
 						fprintf(cfg, "\tselect ADK_KERNEL_%s\n", toupperstr(val));
 						val = strtok_r(NULL, " ", &saveptr);
 					}
@@ -1001,7 +1016,7 @@ int main() {
 						fprintf(cfg, "\nconfig ADK_PACKAGE_%s_%s\n", pkgname, toupperstr(token));
 
 						// process default value
-						strncat(hkey, "PKGFX_", 6);
+						strncat(hkey, D_PKGFX_, sizeof(D_PKGFX_));
 						strncat(hkey, token, strlen(token));
 						memset(hvalue, 0 , MAXVALUE);
 						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
@@ -1014,7 +1029,7 @@ int main() {
 
 
 						// process flavour cfline
-						strncat(hkey, "PKGFC_", 6);
+						strncat(hkey, D_PKGFC_, sizeof(D_PKGFC_));
 						strncat(hkey, token, strlen(token));
 						memset(hvalue, 0 , MAXVALUE);
 						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
@@ -1024,7 +1039,7 @@ int main() {
 							fprintf(cfg, "\t%s\n", pkg_fd);
 
 						fprintf(cfg, "\tboolean ");
-						strncat(hkey, "PKGFD_", 6);
+						strncat(hkey, D_PKGFD_, sizeof(D_PKGFD_));
 						strncat(hkey, token, strlen(token));
 						memset(hvalue, 0 , MAXVALUE);
 						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
@@ -1033,13 +1048,13 @@ int main() {
 
 						fprintf(cfg, "\"%s\"\n", pkg_fd);
 						fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", pkgname);
-						strncat(hkey, "PKGFS_", 6);
+						strncat(hkey, D_PKGFS_, sizeof(D_PKGFS_));
 						strncat(hkey, token, strlen(token));
 
 						result = strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
 						if (result == 1) {
 							val = strtok_r(hvalue, " ", &saveptr);
-							while (val != NULL) { 
+							while (val != NULL) {
 								fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
 								val = strtok_r(NULL, " ", &saveptr);
 							}
@@ -1060,7 +1075,7 @@ int main() {
 						fprintf(cfg, "\nconfig ADK_PACKAGE_%s_%s\n", pkgname, toupperstr(token));
 
 						// process default value
-						strncat(hkey, "PKGFX_", 6);
+						strncat(hkey, D_PKGFX_, sizeof(D_PKGFX_));
 						strncat(hkey, token, strlen(token));
 						memset(hvalue, 0 , MAXVALUE);
 						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
@@ -1070,7 +1085,7 @@ int main() {
 							fprintf(cfg, "\tdefault \"%s\"\n", pkg_fd);
 
 						// process flavour cfline
-						strncat(hkey, "PKGFC_", 6);
+						strncat(hkey, D_PKGFC_, sizeof(D_PKGFC_));
 						strncat(hkey, token, strlen(token));
 						memset(hvalue, 0 , MAXVALUE);
 						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
@@ -1080,7 +1095,7 @@ int main() {
 							fprintf(cfg, "\t%s\n", pkg_fd);
 
 						fprintf(cfg, "\tstring ");
-						strncat(hkey, "PKGFD_", 6);
+						strncat(hkey, D_PKGFD_, sizeof(D_PKGFD_));
 						strncat(hkey, token, strlen(token));
 						memset(hvalue, 0 , MAXVALUE);
 						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
@@ -1089,13 +1104,13 @@ int main() {
 						fprintf(cfg, "\"%s\"\n", pkg_fd);
 
 						fprintf(cfg, "\tdepends on ADK_PACKAGE_%s\n", pkgname);
-						strncat(hkey, "PKGFS_", 6);
+						strncat(hkey, D_PKGFS_, sizeof(D_PKGFS_));
 						strncat(hkey, token, strlen(token));
 
 						result = strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
 						if (result == 1) {
 							val = strtok_r(hvalue, " ", &saveptr);
-							while (val != NULL) { 
+							while (val != NULL) {
 								fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
 								val = strtok_r(NULL, " ", &saveptr);
 							}
@@ -1119,20 +1134,20 @@ int main() {
 						fprintf(cfg, "config ADK_PACKAGE_%s_%s\n", pkgname, toupperstr(token));
 
 						fprintf(cfg, "\tbool ");
-						strncat(hkey, "PKGCD_", 6);
+						strncat(hkey, D_PKGCD_, sizeof(D_PKGCD_));
 						strncat(hkey, token, strlen(token));
 						memset(hvalue, 0 , MAXVALUE);
 						strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
 						memset(hkey, 0 , MAXVAR);
 						fprintf(cfg, "\"%s\"\n", hvalue);
 
-						strncat(hkey, "PKGCS_", 6);
+						strncat(hkey, D_PKGCS_, sizeof(D_PKGCS_));
 						strncat(hkey, token, strlen(token));
 						memset(hvalue, 0, MAXVALUE);
 						result = strmap_get(pkgmap, hkey, hvalue, sizeof(hvalue));
 						if (result == 1) {
 							val = strtok_r(hvalue, " ", &saveptr);
-							while (val != NULL) { 
+							while (val != NULL) {
 								fprintf(cfg, "\tselect ADK_PACKAGE_%s\n", toupperstr(val));
 								val = strtok_r(NULL, " ", &saveptr);
 							}
@@ -1164,9 +1179,9 @@ int main() {
 						pseudo_name = malloc(MAXLINE);
 						memset(pseudo_name, 0, MAXLINE);
 						strncat(pseudo_name, pkg_libname, strlen(pkg_libname));
-						strncat(pseudo_name, "-dev", 4);
+						strncat(pseudo_name, D_DEV, sizeof(D_DEV));
 						while (strlen(pseudo_name) < 20)
-							strncat(pseudo_name, ".", 1);
+							strncat(pseudo_name, D_P, sizeof(D_P));
 
 						fprintf(cfg, "\tprompt \"%s. development files for %s\"\n", pseudo_name, pkg_libname);
 						fprintf(cfg, "\tboolean\n");

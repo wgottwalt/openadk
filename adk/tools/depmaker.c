@@ -46,7 +46,7 @@ static int check_symbol(char *symbol) {
 	}
 
 	strncat(sym, symbol, strlen(symbol));
-	strncat(sym, "=", 1);
+	strncat(sym, "=", 2);
 	if ((config = fopen(".config", "r")) == NULL) {
 		perror("Can not open file \".config\".");
 		exit(EXIT_FAILURE);
