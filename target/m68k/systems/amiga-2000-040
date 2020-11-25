@@ -1,0 +1,14 @@
+config ADK_TARGET_SYSTEM_AMIGA_2000_040
+	bool "Amiga 2000 (68040 with full FPU and MMU)"
+	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_M68K_68040
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_HDD
+	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_BLOCK
+	select ADK_TARGET_KERNEL_ZIMAGE
+	select ADK_TARGET_KERNEL_WITH_COMPRESSION
+	help
+	  Support for an Amiga 2000 with a full 68040, preferable a Blizzard 2040 and 128 MiB of
+	  Fast-RAM. Though, a Fusion Forty would work, too, but only having 32 MiB on the slower
+	  version will be no fun.

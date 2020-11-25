@@ -1,0 +1,15 @@
+config ADK_TARGET_SYSTEM_AMIGA_1200_030
+	bool "Amiga 1200 (68030 with working FPU and MMU)"
+	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_M68K_68030
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_HDD
+	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_BLOCK
+	select ADK_TARGET_KERNEL_ZIMAGE
+	select ADK_TARGET_KERNEL_WITH_COMPRESSION
+	help
+	  Support for an Amiga 1200 with a full 68030 and 68881/68882, preferable a Blizzard 1230 IV
+	  with at least 128 MiB of Fast-RAM. Though, adding the SCSI controller and additional
+	  128 MiB will really improve the Linux experience. Though, Linux on a 68030 is no fun at
+	  all.

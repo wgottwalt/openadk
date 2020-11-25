@@ -1,0 +1,13 @@
+config ADK_TARGET_SYSTEM_AMIGA_4000_060
+	bool "Amiga 4000 (68060 with working FPU and MMU)"
+	select ADK_TARGET_WITH_MMU
+	select ADK_TARGET_CPU_M68K_68060
+	select ADK_TARGET_WITH_INPUT
+	select ADK_TARGET_WITH_HDD
+	select ADK_TARGET_WITH_NET
+	select ADK_TARGET_WITH_BLOCK
+	select ADK_TARGET_KERNEL_ZIMAGE
+	select ADK_TARGET_KERNEL_WITH_COMPRESSION
+	help
+	  Support for an Amiga 4000 with a full 68060 CPU, preferable a Cyberstorm accelerator with
+	  at least 128 MiB of Fast-RAM.
