@@ -1,0 +1,12 @@
+diff --no-dereference -urpN a/longlong.h b/longlong.h
+--- a/longlong.h	2020-11-25 16:50:23.844204586 +0100
++++ b/longlong.h	2020-11-25 16:52:42.344705610 +0100
+@@ -1299,7 +1299,7 @@ extern UWtype __MPN(udiv_qrnnd) (UWtype
+ #endif
+ #endif /* __mips */
+ 
+-#if (defined (__mips) && __mips >= 3) && W_TYPE_SIZE == 64
++#if (defined (__mips) && __mips >= 3) && W_TYPE_SIZE == 64 && defined (_LP64)
+ #if defined (_MIPS_ARCH_MIPS64R6)
+ #define umul_ppmm(w1, w0, u, v) \
+   do {									\
